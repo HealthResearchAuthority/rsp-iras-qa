@@ -33,25 +33,13 @@ export default class LoginPage {
     let username = ''
     let password = ''
     switch (user.toLowerCase()) {
-      case 'npm':
-        username = 'sim_auto_npm@test.id.nihr.ac.uk'
-        password = `VFYk4sf6nythCP64!1`
+      case 'poc':
+        username = 'secontactmanageronly@test.id.nihr.ac.ukk'
+        password = `1`
         break
       case 'sponsor contact':
         username = 'sesponsorcontact@test.id.nihr.ac.uk'
         password = `${process.env.SPONSOR_CONTACT_PASS}`
-        break
-      case 'sponsor contact manager':
-        username = 'sesponsorcontactmanager@test.id.nihr.ac.uk'
-        password = `${process.env.SPONSOR_CONTACT_MANAGER_PASS}`
-        break
-      case 'contact manager':
-        username = 'secontactmanager@test.id.nihr.ac.uk'
-        password = `${process.env.CONTACT_MANAGER_PASS}`
-        break
-      case 'no local account':
-        username = 'senolocalaccount@test.id.nihr.ac.uk'
-        password = `${process.env.SE_NO_LOCAL_ACCOUNT_PASS}`
         break
       default:
         throw new Error(`${user} is not a valid option`)
