@@ -1,5 +1,6 @@
 node_modules
 
 auth-storage-states
-test-report
+test-reports
 test-results
+generated-feature-files

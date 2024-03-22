@@ -1,7 +1,6 @@
-import { unlinkSync } from 'fs'
+import { unlinkSync } from 'fs';
 async function globalTeardown() {
   //removing files generated during setup
-//   unlinkSync('.auth/sponsorContact.json')
-  // unlinkSync('.auth/contactManager.json')
+  unlinkSync('auth-storage-states/contactManagerOnly.json');
 }
-export default globalTeardown
+export default globalTeardown;
