@@ -35,7 +35,7 @@ export default class LoginPage {
     switch (user.toLowerCase()) {
       case 'poc':
         username = 'secontactmanageronly@test.id.nihr.ac.uk';
-        password = `PROST3jerocrugaml`;
+        password = `${process.env.CONTACT_MANAGER_ONLY_PASS}`;
         break
       case 'sponsor contact':
         username = 'sesponsorcontact@test.id.nihr.ac.uk';

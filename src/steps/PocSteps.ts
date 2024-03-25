@@ -39,3 +39,8 @@ Then('I can see the Project Details Page', async ({ projectDetailsPage }) => {
 Then('the page title contains the Projects Task ID - {string}', async ({ projectDetailsPage }, taskId: string) => {
     await projectDetailsPage.assertPageTitle(taskId);
 });
+
+When('I select My Personal Tasks from the Banner Options', async ({ commonItemsPage }) => {
+    await commonItemsPage.bannerMyTasks.click();
+    await commonItemsPage.bannerMyPersonalTasks.click();
+});

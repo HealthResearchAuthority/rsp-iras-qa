@@ -14,3 +14,5 @@ Feature: This is a Testing Feature for POC Purposes
         When I click anywhere on the "Prepare" project row
         Then I can see the Project Details Page
         And the page title contains the Projects Task ID - "P-5153308"
+        When I select My Personal Tasks from the Banner Options
+        Then I can see the Tasks Page
