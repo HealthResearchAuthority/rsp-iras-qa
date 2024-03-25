@@ -11,7 +11,7 @@ const config: PlaywrightTestConfig = {
   globalTeardown: 'src\\hooks\\GlobalTeardown.ts',
   timeout: 30000,
   workers: 1, // to enforce serial execution
-  // retries: 2,
+  retries: 2,
   projects: [
     {
       //   Authorise Tests Users before Test Run
@@ -25,7 +25,7 @@ const config: PlaywrightTestConfig = {
       use: {
         trace: 'on',
         baseURL: `${process.env.BASE_URL}`,
-        headless: false,
+        headless: true,
         screenshot: 'on',
         launchOptions: {
           slowMo: 0,
@@ -45,7 +45,7 @@ const config: PlaywrightTestConfig = {
       use: {
         trace: 'on',
         baseURL: `${process.env.BASE_URL}`,
-        headless: false,
+        headless: true,
         screenshot: 'on',
         launchOptions: {
           slowMo: 0,

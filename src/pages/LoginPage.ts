@@ -36,11 +36,11 @@ export default class LoginPage {
       case 'poc':
         username = 'secontactmanageronly@test.id.nihr.ac.uk';
         password = `${process.env.CONTACT_MANAGER_ONLY_PASS}`;
-        break
+        break;
       case 'sponsor contact':
         username = 'sesponsorcontact@test.id.nihr.ac.uk';
         password = `${process.env.SPONSOR_CONTACT_PASS}`;
-        break
+        break;
       default:
         throw new Error(`${user} is not a valid option`);
     }
