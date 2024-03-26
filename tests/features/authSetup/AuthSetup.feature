@@ -1,3 +1,4 @@
+@authSetup
 Feature: Authenticate Test Users once only, before test run
 
   Background: 

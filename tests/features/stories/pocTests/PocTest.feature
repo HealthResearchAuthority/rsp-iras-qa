@@ -10,6 +10,7 @@ Feature: This is a Testing Feature for POC Purposes
             | Task            | Task ID   | IRAS ID | Short project title       | Chief investigator |
             | Prepare project | P-5153308 | 5153308 | Access QSets at same time | Atul Patel         |
 
+    @exampleTestTag
     Scenario: POC User Can Access the Project Details Page, via the Tasks Page
         When I click anywhere on the "Prepare" project row
         Then I can see the Project Details Page
