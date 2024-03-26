@@ -1,20 +1,40 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+# Introduction
+
+This is the repository that will contain the Automated E2E Tests for the HRA IRAS project
+
+The Tests are written in TypeScript, using the Node.js framework and Playwright Test Library
+
+The Tests are executed via the Playwright Runner, while written in BDD Cucumber format utilizing the [playwright-bdd](https://github.com/vitalets/playwright-bdd) package.
 
 # Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+Follow the [QA Dev Box Setup Guide](https://healthresearchauthority.sharepoint.com/:w:/r/sites/Future-IRAS/_layouts/15/Doc.aspx?sourcedoc=%7BA23C42E7-F8E9-412C-8547-929545607B82%7D&file=QA%20Dev%20Box%20Setup%20Document.docx&action=default&mobileredirect=true)
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+This guide contains steps to:
+1.	Initialise your Dev Box
+2.	Install Node.js
+3.	Install VS Code + Extensions
+4.	Clone this repository and Open in VS Code
+5.  Install Playwright and Project Dependencies
+6.  Run the Test Locally
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+# Running Tests
+TODO: Explain how to run the tests with the various commands, reports produced
+
+# Test Structure
+TODO: Explain the different elelements of the test Structure e.g. Step Def, Feature Files, Page Objects
+
+# Cucumber Overview
+TODO: Explain Feature File structure, Use Of Tags, Playwright BDD Gen files, PW report limitation
+
+# Auth Setup
+TODO: Describe how pre-authorize test users before main test run
+
+# Writing Tests Guide
+TODO: Quick guide of feature --> step def --> page --> run 
+
+# Supporting Documentation
+
+- [Playwright Documentation](https://playwright.dev/docs/api/class-playwright)
+- [playwright-bdd Documentation](https://www.npmjs.com/package/playwright-bdd/v/5.1.1)
+- [Cucumber Documentation](https://cucumber.io/docs/cucumber/)
