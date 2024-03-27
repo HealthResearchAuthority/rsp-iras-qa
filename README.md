@@ -39,6 +39,17 @@ For now Chris McNeill can provide the password.
 **To run tag specific tests:** `npx bddgen --tags "@authSetup or <@yourTestTag>" && npx playwright test`
 
 *NOTE:* the `@authSetup` tag must always be called in this situation, to authorise test users before other test tags are run  
+
+For example the screenhot below shows 2 feature files containing 3 test scenarios  
+- The `AuthSetup.feature` contains the Feature tag `@authSetup` meaning every scenario it contains inherits it.
+- The `PocTest.feature` has 2 scenarios one of which has the Scenario tag `@exampleTestTag`  
+&nbsp; 
+
+**ADD SCREEN SHOT HERE**
+
+So when I run the command `npx bddgen --tags "@authSetup or exampleTestTag" && npx playwright test` only 2 of the 3 scenarios execute
+- The **Login & Authenticate POC User** scenario
+- And the **POC User Can Access the Project Details Page, via the Tasks Page** scenario  
 &nbsp;  
    
 **To run tests in the Browser/UI mode:** Execute the above commands with `headless` property set to false in `playwright.config.ts`  
