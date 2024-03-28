@@ -47,6 +47,8 @@ For example the screenhot below shows 2 feature files containing 3 test scenario
 
 **ADD SCREEN SHOT HERE**
 
+
+
 So when I run the command `npx bddgen --tags "@authSetup or exampleTestTag" && npx playwright test` only 2 of the 3 scenarios execute
 - The **Login & Authenticate POC User** scenario
 - And the **POC User Can Access the Project Details Page, via the Tasks Page** scenario  
@@ -73,7 +75,7 @@ This configuration is set within the `reporter` array property in the `playwrigh
 **ADD SCREEN SHOT HERE**
 
 &nbsp;    
-## Running in Azure Devops Pipline
+## Running in Azure Devops Pipeline
 TODO: Will update upon completion of the [RSP-537](https://nihr.atlassian.net/browse/RSP-537) story
 
 # Test Structure
