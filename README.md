@@ -45,6 +45,7 @@ For example the screenhot below shows 2 feature files containing 3 test scenario
 - The `PocTest.feature` has 2 scenarios one of which has the Scenario tag `@exampleTestTag`  
 &nbsp; 
 
+![running with tags](resources\images\runWithTag.png =1400x700)  
 ![running with tags](src/resources\images\runWithTag.png)  
 &nbsp;
 
