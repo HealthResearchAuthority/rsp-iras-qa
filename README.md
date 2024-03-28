@@ -46,7 +46,7 @@ For example the screenhot below shows 2 feature files containing 3 test scenario
 &nbsp; 
 
 **ADD SCREEN SHOT HERE**
-
+![alt text](<Screenshot 2024-03-28 103318.png>)
 
 
 So when I run the command `npx bddgen --tags "@authSetup or exampleTestTag" && npx playwright test` only 2 of the 3 scenarios execute
