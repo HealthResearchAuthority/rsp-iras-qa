@@ -45,9 +45,8 @@ For example the screenhot below shows 2 feature files containing 3 test scenario
 - The `PocTest.feature` has 2 scenarios one of which has the Scenario tag `@exampleTestTag`  
 &nbsp; 
 
-**ADD SCREEN SHOT HERE**
-![running with tags](resources\images\runWithTag.png)
-
+![running with tags](resources\images\runWithTag.png)  
+&nbsp;
 
 So when I run the command `npx bddgen --tags "@authSetup or exampleTestTag" && npx playwright test` only 2 of the 3 scenarios execute
 - The **Login & Authenticate POC User** scenario
@@ -72,9 +71,9 @@ Both reports are stored within the top level `test-reports` folder (which is set
 Within their respective `playwright` and `cucumber` folders  
 This configuration is set within the `reporter` array property in the `playwright.config.ts` file
 
-**ADD SCREEN SHOT HERE**
-
-&nbsp;    
+![reporters](resources\images\reporters.png)  
+&nbsp; 
+   
 ## Running in Azure Devops Pipeline
 TODO: Will update upon completion of the [RSP-537](https://nihr.atlassian.net/browse/RSP-537) story
 
