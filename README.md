@@ -45,7 +45,7 @@ For example the screenhot below shows 2 feature files containing 3 test scenario
 - The `PocTest.feature` has 2 scenarios one of which has the Scenario tag `@exampleTestTag`  
 &nbsp; 
 
-![running with tags](resources\images\runWithTag.png)  
+![running with tags](src/resources\images\runWithTag.png)  
 &nbsp;
 
 So when I run the command `npx bddgen --tags "@authSetup or exampleTestTag" && npx playwright test` only 2 of the 3 scenarios execute
@@ -71,11 +71,12 @@ Both reports are stored within the top level `test-reports` folder (which is set
 Within their respective `playwright` and `cucumber` folders  
 This configuration is set within the `reporter` array property in the `playwright.config.ts` file
 
-![reporters](resources\images\reporters.png)  
+![reporters](src/resources\images\reporters.png)  
 &nbsp; 
    
 ## Running in Azure Devops Pipeline
-TODO: Will update upon completion of the [RSP-537](https://nihr.atlassian.net/browse/RSP-537) story
+TODO: Will update upon completion of the [RSP-537](https://nihr.atlassian.net/browse/RSP-537) story  
+&nbsp;
 
 # Test Structure
 TODO: Explain the different elelements of the test Structure e.g. Step Def, Feature Files, Page Objects
