@@ -1,0 +1,44 @@
+# Standalone Pipeline to run Automated E2E tests on demand
+# Using rsp-iras-qa repo
+
+name: Run Playwright Tests
+
+variables:
+  CI: true
+
+trigger:
+  - main
+
+jobs: 
+  - job: Run_Automated_E2E_Tests
+    timeoutInMinutes: 10
+    pool:
+      vmImage: ubuntu-latest
+     
+    steps:
+      - task: NodeTool@0
+        inputs:
+          versionSpec: '20.x'
+        displayName: 'Install Node.js'
+
+      - script: |
+          npm ci
+        displayName: 'Install Dependencies'
+    
+      - script: |
+          npx playwright install --with-deps
+        displayName: 'Install Playwright with Browsers'
+  
+      - script: |
+          npx bddgen && npx playwright test
+        env:
+          CONTACT_MANAGER_ONLY_PASS: $(CONTACT_MANAGER_ONLY_PASS)
+        displayName: 'Run Tests'
+  
+      - publish: $(System.DefaultWorkingDirectory)/test-reports/playwright
+        artifact: playwright-report
+        condition: always()
+  
+      - publish: $(System.DefaultWorkingDirectory)/test-reports/cucumber
+        artifact: cucumber-report
+        condition: always()
