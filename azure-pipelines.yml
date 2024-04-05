@@ -43,4 +43,4 @@ jobs:
       - publish: $(System.DefaultWorkingDirectory)/test-reports/cucumber
         artifact: cucumber-report
         condition: always()
-        displayName: Publish Playwright Report
+        displayName: Publish Cucumber Report
