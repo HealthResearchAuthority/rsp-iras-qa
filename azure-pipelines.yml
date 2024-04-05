@@ -38,7 +38,9 @@ jobs:
       - publish: $(System.DefaultWorkingDirectory)/test-reports/playwright
         artifact: playwright-report
         condition: always()
+        displayName: Publish Playwright Report
   
       - publish: $(System.DefaultWorkingDirectory)/test-reports/cucumber
         artifact: cucumber-report
         condition: always()
+        displayName: Publish Playwright Report
