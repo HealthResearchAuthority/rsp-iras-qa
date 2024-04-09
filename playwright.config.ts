@@ -7,8 +7,8 @@ const config: PlaywrightTestConfig = {
     ['html', { outputFolder: './test-reports/playwright' }],
     cucumberReporter('html', { outputFile: './test-reports/cucumber/report.html' })
   ],
-  globalSetup: 'src\\hooks\\GlobalSetup.ts',
-  globalTeardown: 'src\\hooks\\GlobalTeardown.ts',
+  globalSetup: 'src/hooks/GlobalSetup.ts',
+  globalTeardown: 'src/hooks/GlobalTeardown.ts',
   timeout: 30000,
   workers: 1, // to enforce serial execution
   retries: 2,
