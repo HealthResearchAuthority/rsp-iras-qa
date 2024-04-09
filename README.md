@@ -107,20 +107,26 @@ It shows:
 ![jobSummary](src/resources\images\jobSummary.png)  
 &nbsp; 
 
-To see a detailed view of the run,  
-Click the **Run_Automated_E2E_Tests** listed in the Jobs list.  
-This will display the job details, showing a breakdown of each step executed.  
-You can click each step to display the step logs.  
+To see a detailed view of the run,
+
+Click the **Run_Automated_E2E_Tests** listed in the Jobs list.
+
+This will display the job details, showing a breakdown of each step executed.
+
+You can click each step to display the step logs.
+
 Any artifacts published will be available at the top level of the job (click link to view).
 
-![azureJobDetails](src/resources\images\azureJobDetails.png)  
+![azureJobDetails](src/resources\images\azureJobDetails.png =500x500)  
 &nbsp; 
 
 If you click the link to view the published Artifacts,  
+
 You will see a page displaying the `cucumber-report` folder & `playwright-report` folder.  
+
 Click the html document in either to download and view the relevant report.
 
-![artifacts](src/resources\images\artifactsPage.png)  
+![artifacts](src/resources\images\artifactsPage.png =200x300)  
 &nbsp; 
 
 # Test Structure
