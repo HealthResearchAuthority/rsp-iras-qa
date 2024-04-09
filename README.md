@@ -75,8 +75,53 @@ This configuration is set within the `reporter` array property in the `playwrigh
 &nbsp; 
    
 ## Running in Azure Devops Pipeline
-TODO: Will update upon completion of the [RSP-537](https://nihr.atlassian.net/browse/RSP-537) story  
-&nbsp;
+
+This repo has an associated Azure DevOps Pipeline job, which can run our tests remotely in a CI/CD environment
+
+The Pipeline job is configured in the `azure-pipelines.yml`
+
+The Pipeline job can be found [here](https://dev.azure.com/FutureIRAS/Research%20Systems%20Programme/_build?definitionId=9)
+
+The job will trigger when we push code to our `main` branch
+
+We can also trigger the job manually by:
+- Navigating to the Pipeline page (linked above)
+- Clicking the **Run pipeline** button
+- Select the source branch, set to `main` by default
+- Click Run
+
+![runJob](src/resources\images\runPipeline.png)  
+&nbsp; 
+
+This will kick off a new Run, which will appear on the **Runs** loginWithUserCreds
+
+To view the summary details of a Run, click the relevant run  
+This will display the Run summary page.  
+It shows:
+- the time and length of the Run
+- the branch it ran against
+- the result (success or fail)
+- any artifacts published (click link to view)
+- the list of jobs that were executed
+
+![jobSummary](src/resources\images\jobSummary.png)  
+&nbsp; 
+
+To see a detailed view of the run,  
+Click the **Run_Automated_E2E_Tests** listed in the Jobs list.  
+This will display the job details, showing a breakdown of each step executed.  
+You can click each step to display the step logs.  
+Any artifacts published will be available at the top level of the job (click link to view).
+
+![azureJobDetails](src/resources\images\azureJobDetails.png)  
+&nbsp; 
+
+If you click the link to view the published Artifacts,  
+You will see a page displaying the `cucumber-report` folder & `playwright-report` folder.  
+Click the html document in either to download and view the relevant report.
+
+![artifacts](src/resources\images\artifactsPage.png)  
+&nbsp; 
 
 # Test Structure
 TODO: Explain the different elelements of the test Structure e.g. Step Def, Feature Files, Page Objects
