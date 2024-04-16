@@ -138,10 +138,10 @@ Config files such as `package.json` & `playwright.config.ts` also sit at the top
 
 The `src` folder contains all source code files and resources such as test data,  
 Sub folders include:
-- pages
-- steps
-- hooks
-- utils
+- **pages** - contains our page object
+- **steps** - contains our step definitions
+- **hooks** - contains our fixtures, setup and teardown files
+- **utils** - contains useful, commonly used methods and scripts which our tests can call upon
 
 The `tests` folder will contain our feature files, which contain our BDD test scenarios  
 &nbsp; 
@@ -150,9 +150,26 @@ The `tests` folder will contain our feature files, which contain our BDD test sc
 
 The tests are written using the Page Object Model (POM) design pattern
 
+**Features**: 
+- Contain Test scenarios written in the Gherkin Syntax
+- Scenarios contain BDD test steps (Given, When, Then)
 
+**Step Definitions**: 
+- Step Definitions are the link between our Features, and the Page Objects that implement the test actions
+- A Step Definition is a function with an expression that links it to one or more steps.
+- When a step is being executed, Cucumber scans the `steps` folder (as defined in defineBddConfig in `playwright.config.ts`),  
+and looks for a matching step definition to execute.
+- Step definitions call upon elements and methods from the Page object.
+- Step definitions will contain the majority of our assertions.
 
-TODO: Explain the different elelements of the test Structure e.g. Step Def, Feature Files, Page Objects
+**Page Objects**: 
+- The page object will contain a digital representation of the relevant page, using locators to represent the pages web elements
+- The page object will contain methods which allow the test to interact with the pages elements and services.
+- No code related to test outcomes should be within the page object (assertions).
+- One assertion that should be within the page object, is to verify that the page (and key elements) has loaded correctly
+- This verification should be done upon navigating to the page during the test.  
+&nbsp; 
+
 
 # Cucumber Overview
 TODO: Explain Feature File structure, Use Of Tags, Playwright BDD Gen files, PW report limitation
