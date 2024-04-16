@@ -148,6 +148,9 @@ The `tests` folder will contain our feature files, which contain our BDD test sc
 
 **Page Object Model**
 
+The tests are written using the Page Object Model (POM) design pattern
+
+
 
 TODO: Explain the different elelements of the test Structure e.g. Step Def, Feature Files, Page Objects
 
