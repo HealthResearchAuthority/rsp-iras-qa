@@ -19,7 +19,6 @@ This guide contains steps to:
 6.  Runs Tests Locally
 
 # Running Tests
-TODO: Explain how to run the tests with the various commands, reports produced
 
 ## Running Locally via CLI  
 
@@ -131,8 +130,6 @@ Click the html document in either to download and view the relevant report.
 
 # Test Structure
 
-**Folder structure is still WIP**
-
 At present we have top level `src` and `tests` folders  
 Config files such as `package.json` & `playwright.config.ts` also sit at the top level  
 
@@ -146,7 +143,7 @@ Sub folders include:
 The `tests` folder will contain our feature files, which contain our BDD test scenarios  
 &nbsp; 
 
-**Page Object Model**
+## Page Object Model
 
 The tests are written using the Page Object Model (POM) design pattern
 
@@ -207,7 +204,7 @@ An overview of some of the more advanced feature file elements are outlined belo
 **Cucumber Tags**:
 - Can be used to specify a particular subset of scenarios for traceability to user stories and accpetance criteria
 - Can be used to run a specific test or subset of tests
-- Can be used to add unique contexts or conditions to specific tests or subset of tests
+- Can be used to add unique contexts, conditions or inputs for specific tests or subset of tests
 - Tags can be placed above Features or Scenario's
 - A Feature or Scenario can have as many tags as you like. Separate them with spaces
 - Tags are inherited by child elements. E.g. tags that are placed above a Feature will be inherited by each Scenario within the Feature
@@ -217,6 +214,21 @@ For more information consult the Cucumber Documentation provided in the Supporti
 
 
 # Playwright-BDD Overview
+
+Our framework uses the `playwright-bdd` package to allow us to run tests in Playwright, while using Cucumber Features for our test scenarios
+
+This means we can retain the advantages of the Playwright runner for test execution, while also writing tests in re-usable BDD Gherkin steps
+
+The `playwright-bdd` package enables this by converting feature files, into test files that Playwright understands how to execute.
+
+It does this at runtime when the tests are executed thanks to the `npx bddgen` portion of the run tests command.
+
+Once the conversion has completed, the `npx playwright test` portion of the command is executed.
+
+The Playwright compatible files are output and stored to the `generated-feature-files`, this folder is set to be git ignored.
+
+
+
 TODO: Playwright BDD Gen files, PW report limitation
 
 # Auth Setup
