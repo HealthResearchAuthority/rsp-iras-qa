@@ -249,7 +249,7 @@ This is not an issue for the cucumber html report that the test run also produce
 that this is the one shared with non-technical stakeholders.  
 &nbsp; 
 
-![playwright background report limitation](src/resources\images\pwReportBackgroundLimitation.png =1000x500)  
+![playwright background report limitation](src/resources\images\pwReportBackgroundLimitation.png =600x600)  
 &nbsp; 
 
 
