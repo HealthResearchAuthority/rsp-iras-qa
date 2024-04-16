@@ -256,6 +256,13 @@ that this is the one shared with non-technical stakeholders.
 # Auth Setup
 TODO: Describe how pre-authorize test users before main test run
 
+- project in config file (oldIras depends on it)
+- step def/page method which stores storage state
+- custom fixture
+- feature file with tag
+- maintain this structure as new users are added
+- do not add tag if no state is required
+
 # Writing Tests Guide
 TODO: Quick guide of feature --> step def --> page --> run 
 
