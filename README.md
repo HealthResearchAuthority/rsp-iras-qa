@@ -130,6 +130,25 @@ Click the html document in either to download and view the relevant report.
 &nbsp; 
 
 # Test Structure
+
+**Folder structure is still WIP**
+
+At present we have top level `src` and `tests` folders  
+Config files such as `package.json` & `playwright.config.ts` also sit at the top level  
+
+The `src` folder contains all source code files and resources such as test data,  
+Sub folders include:
+- pages
+- steps
+- hooks
+- utils
+
+The `tests` folder will contain our feature files, which contain our BDD test scenarios  
+&nbsp; 
+
+**Page Object Model**
+
+
 TODO: Explain the different elelements of the test Structure e.g. Step Def, Feature Files, Page Objects
 
 # Cucumber Overview
