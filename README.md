@@ -174,6 +174,40 @@ and looks for a matching step definition to execute.
 # Cucumber Overview
 TODO: Explain Feature File structure, Use Of Tags, Playwright BDD Gen files, PW report limitation
 
+The Automated E2E tests utilizes Cucumber to provide test scenarios written in a BDD structure
+
+These scenarios are stored in our `features` file.
+
+The Cucumber configuration can be found in the `playwright.config.ts` file
+
+An overview of the basic feature file structure is outlined below.
+
+**Feature** − Name of the feature under test, should include the ticket number, e.g. RSP-001.
+
+**Description** (optional) − Describe the feature under test at a high level.
+
+**Scenario** − What is the specific scenario or behaviour, within the feature, being tested.
+
+**Given** − Setup steps that need to occur to replicate the scenario
+
+**When** − Action steps where the specific user inputs under test are performed
+
+**Then** − Results steps where we check the outputs and outcomes from the actions performed in the When steps  
+&nbsp; 
+
+An overview of some of the more advanced feature file elements are outlined below.
+
+**Background** - Used to group a common set of Given steps together in one place, if all Scenario's within a Feature contain them. They will then be executed before each scenario
+
+**Scenario Outline** - Used to run the same Scenario multiple times using a template, with different combinations of values at runtime provided by Examples.
+
+**Examples** - The Scenario Outline is run once for each row in the Examples section beneath it (not counting the first header row), and uses the values provided in that row
+
+**Passing Values** - You can parametrise test steps, allowing you to pass values to the Step Definition. Data types that can be passed include: Integers, Strings & Data Tables
+
+For more information consult the Cucumber Documentation provided in the Supporting Documentation  
+&nbsp; 
+
 # Auth Setup
 TODO: Describe how pre-authorize test users before main test run
 
@@ -185,3 +219,4 @@ TODO: Quick guide of feature --> step def --> page --> run
 - [Playwright Documentation](https://playwright.dev/docs/api/class-playwright)
 - [playwright-bdd Documentation](https://www.npmjs.com/package/playwright-bdd/v/5.1.1)
 - [Cucumber Documentation](https://cucumber.io/docs/cucumber/)
+- ADD LINK TO STANDARDS DOC ONCE RSP-730 IS COMPLETE
