@@ -172,7 +172,6 @@ and looks for a matching step definition to execute.
 
 
 # Cucumber Overview
-TODO: Explain Feature File structure, Use Of Tags, Playwright BDD Gen files, PW report limitation
 
 The Automated E2E tests utilizes Cucumber to provide test scenarios written in a BDD structure
 
@@ -205,8 +204,20 @@ An overview of some of the more advanced feature file elements are outlined belo
 
 **Passing Values** - You can parametrise test steps, allowing you to pass values to the Step Definition. Data types that can be passed include: Integers, Strings & Data Tables
 
+**Cucumber Tags**:
+- Can be used to specify a particular subset of scenarios for traceability to user stories and accpetance criteria
+- Can be used to run a specific test or subset of tests
+- Can be used to add unique contexts or conditions to specific tests or subset of tests
+- Tags can be placed above Features or Scenario's
+- A Feature or Scenario can have as many tags as you like. Separate them with spaces
+- Tags are inherited by child elements. E.g. tags that are placed above a Feature will be inherited by each Scenario within the Feature
+
 For more information consult the Cucumber Documentation provided in the Supporting Documentation  
 &nbsp; 
+
+
+# Playwright-BDD Overview
+TODO: Playwright BDD Gen files, PW report limitation
 
 # Auth Setup
 TODO: Describe how pre-authorize test users before main test run
