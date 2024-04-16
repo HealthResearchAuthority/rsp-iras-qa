@@ -225,11 +225,33 @@ It does this at runtime when the tests are executed thanks to the `npx bddgen` p
 
 Once the conversion has completed, the `npx playwright test` portion of the command is executed.
 
-The Playwright compatible files are output and stored to the `generated-feature-files`, this folder is set to be git ignored.
+The Playwright compatible files are output and stored to the `generated-feature-files`, this folder is set to be git ignored.  
+&nbsp; 
+
+![feature to playwright test file](src/resources\images\featureToPwTestFile.png =1000x500)  
+&nbsp; 
 
 
+**Known Limitations**
 
-TODO: Playwright BDD Gen files, PW report limitation
+- Background steps not displayed on the top level of the Playwright report
+
+One of the benefits of writing our test Scenarios in the BDD Cucumber format,  
+is that our test reports can be easily read and understood by non-technical members of the team.
+
+However when using Background steps in our Feature files, the default `playwright.html` report produced at the end of the test run,
+places these steps within Before Hooks, so they are not visible at the top level of the report.
+
+The background steps can be viewed by digging down into the lower levels of the Before hook, as shown below.  
+However we wouldn't expect non-technical members to do this.
+
+This is not an issue for the cucumber html report that the test run also produces, so it is advised at this time,  
+that this is the one shared with non-technical stakeholders.  
+&nbsp; 
+
+![playwright background report limitation](src/resources\images\pwReportBackgroundLimitation.png =1000x500)  
+&nbsp; 
+
 
 # Auth Setup
 TODO: Describe how pre-authorize test users before main test run
