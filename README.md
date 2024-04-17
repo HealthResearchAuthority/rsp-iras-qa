@@ -254,9 +254,43 @@ that this is the one shared with non-technical stakeholders.
 
 
 # Auth Setup
-TODO: Describe how pre-authorize test users before main test run
 
-- project in config file (oldIras depends on it)
+## Configuration
+
+In our automation tests we will be storing and re-using authentication states for our test accounts.
+
+This is to avoid repetition and optimise our tests, as it avoids unnecesary out of scope test steps and saves time.
+
+We have a projects array setup in our `playwright.config.ts` file
+
+One of those projects is named `AuthSetup` and it is set to run only the Features stored in the `tests/features/authSetup` folder
+
+In subsequent projects, we name the `AuthSetup` as a dependency, which ensure that the Features in the `AuthSetup` project are ran first  
+&nbsp; 
+
+![feature to playwright test file](src/resources\images\authConfig.png =500x500)  
+&nbsp; 
+
+## Setting the Authentication State
+
+Within the `tests/features/authSetup` folder which is used by the `AuthSetup` project, 
+
+We will write our Login Success Features for each user, an example of which is shown below for the `POC` user
+
+Once we have established that the login was sucessful, we add a final step which stores the Authentication State for that user.
+
+In the matching Step Definition we call a page method, passing in the user as an argument.
+
+The page method then gets the `storageState` (cookies) of the current browser context, 
+
+And saves them to a file path associated with the releavant user.  
+&nbsp; 
+
+![feature to playwright test file](src/resources\images\authSteps.png =500x500)  
+&nbsp; 
+
+All the storage state are stored in the `auth-storage-states` folder which is set to be git ignored.
+
 - step def/page method which stores storage state
 - custom fixture
 - feature file with tag
