@@ -279,26 +279,58 @@ We will write our Login Success Features for each user, an example of which is s
 
 Once we have established that the login was sucessful, we add a final step which stores the Authentication State for that user.
 
-In the matching Step Definition we call a page method, passing in the user as an argument.
+In the matching Step Definition we call a page method `storeAuthState`, passing in the user as an argument.
 
 The page method then gets the `storageState` (cookies) of the current browser context, 
 
 And saves them to a file path associated with the releavant user.  
 &nbsp; 
 
-![feature to playwright test file](src/resources\images\authSteps.png =500x500)  
+![feature to playwright test file](src/resources\images\authSteps.png =600x600)  
 &nbsp; 
 
 All the storage state are stored in the `auth-storage-states` folder which is set to be git ignored.
 
-- step def/page method which stores storage state
-- custom fixture
-- feature file with tag
-- maintain this structure as new users are added
-- do not add tag if no state is required
+## Re-using the Authentication State
 
-# Writing Tests Guide
-TODO: Quick guide of feature --> step def --> page --> run 
+With the Authentication States set by the `AuthSetup` project,
+
+We can re-use them when needed in our other project's Features, by combining Playwright Fixtures and Cucumber tags.
+
+Following on from the POC user example, shown below is a Feature file with the Cucumber tag `@pocUser` set at the Feature level.
+
+We create custom Playwright Fixtures, such as Page objects, in our `CustomFixtures.ts` file,
+
+Within this file we have: 
+- declared the `storageState` custom fixture
+- passed in all Cucumber tags associated with the current test
+- passed in the `storageState` property from the current Browser Context (context is a built-in Playwright fixture)
+- passed in the Test Config method `use`, which can set test configuration options and override settings from the `playwright.congig.ts` file
+
+Within the custom `storageState` fixture:
+- we check if any of the Cucumber tags match our `@pocUser` tag
+- if true, we set the current Browser Context's storageState to that of the POC user, via the `getAuthState` utility method
+- if false, the storage state will remain the default state, therefore unauthenticated
+
+In this example the outcome will be true, so the test will load the Tasks Page as the POC user, without having to go through the Login process again.  
+&nbsp; 
+
+![feature to playwright test file](src/resources\images\authUse.png =600x600)  
+&nbsp; 
+
+
+## Additional Notes
+
+1. As we add new test acccounts to the automation tests, we will need to update:
+- the `storeAuthState` page method
+- the `storageState` custom fixture
+- the `getAuthState` utility method
+
+To include the accounts and maintain this process.
+
+2. Only apply one tag per test relating to user authentication.
+
+3. Do not a add tag relating to user authentication, where an unauthenticated state is required for that test.
 
 # Supporting Documentation
 
