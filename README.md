@@ -37,7 +37,7 @@ For now Chris McNeill can provide the password.
  
 **To run tag specific tests:** `npx bddgen --tags "@authSetup or <@yourTestTag>" && npx playwright test`
 
-*NOTE:* the `@authSetup` tag must always be called in this situation, to authorise test users before other test tags are run  
+*NOTE:* the `@authSetup` tag must always be called in this situation, to authorise test users before other tests are run  
 
 For example the screenhot below shows 2 feature files containing 3 test scenarios  
 - The `AuthSetup.feature` contains the Feature tag `@authSetup` meaning every scenario it contains inherits it.
@@ -331,6 +331,13 @@ To include the accounts and maintain this process.
 2. Only apply one tag per test relating to user authentication.
 
 3. Do not a add tag relating to user authentication, where an unauthenticated state is required for that test.
+
+4. When running tests using a test tag in your run command, you must also include the `@authSetup` tag.  
+This is to ensure that test users are authenticated before any of your desired tests are run  
+E.g. `npx bddgen --tags "@authSetup or <@yourTestTag>" && npx playwright test`
+
+5. All files created and stored in the `auth-storage-states` folder are deleted after the test run,  
+as part the `GlobalTeardown.ts` file
 
 # Supporting Documentation
 
