@@ -30,21 +30,11 @@ export default class TasksPage {
     await expect(this.pageTitle).toHaveText('My outstanding tasks');
   }
 
-  async assertTasksTablePresent() {
-    await expect(this.taskTable).toBeVisible();
-  }
-
-  async assertUserTasksPresent(expectedValues: string[][]) {
+  async getUserTaskValues(): Promise<string[]> {
     let actualRowValues: string[] = [];
-    let expectedRowValues: string[] = [];
     for (const cell of await this.taskTableTopBodyCell.all()) {
       actualRowValues.push(confirmStringNotNull(await cell.textContent()));
     }
-    for (const values of expectedValues) {
-      for (const value of values) {
-        expectedRowValues.push(value);
-      }
-    }
-    expect(actualRowValues).toMatchObject(expectedRowValues);
+    return actualRowValues
   }
 }

@@ -17,8 +17,4 @@ export default class ProjectDetailsPage {
   async assertOnProjectDetailsPage() {
     await expect(this.contentHeader).toBeVisible();
   }
-
-  async assertPageTitle(taskId: string) {
-    expect((await this.page.title()).endsWith(taskId)).toBeTruthy();
-  }
 }

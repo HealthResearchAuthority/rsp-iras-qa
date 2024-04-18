@@ -1,6 +1,7 @@
 import { createBdd } from 'playwright-bdd';
-import { test } from '../hooks/CustomFixtures';
+import { expect, test } from '../hooks/CustomFixtures';
 import { DataTable } from '@cucumber/cucumber';
+import { getValuesFromDataTable } from '../utils/UtilFunctions';
 
 const { Given, When, Then } = createBdd(test);
 
@@ -14,12 +15,13 @@ Given('I can see the Tasks Page', async ({ tasksPage }) => {
 });
 
 When('I View the Tasks Table', async ({ tasksPage }) => {
-    await tasksPage.assertTasksTablePresent();
+    await expect(tasksPage.taskTable).toBeVisible()
 });
 
 Then('I see all projects that are assigned to the POC user', async ({ tasksPage }, data: DataTable) => {
-    const expectedRowValues = data.rows();
-    await tasksPage.assertUserTasksPresent(expectedRowValues);
+    const expectedValues = getValuesFromDataTable(data);
+    const actualValues = await tasksPage.getUserTaskValues()
+    expect(actualValues).toMatchObject(expectedValues);
 });
 
 Then('I click anywhere on the {string} project row', async ({ tasksPage }, project: string) => {
@@ -37,7 +39,7 @@ Then('I can see the Project Details Page', async ({ projectDetailsPage }) => {
 });
 
 Then('the page title contains the Projects Task ID - {string}', async ({ projectDetailsPage }, taskId: string) => {
-    await projectDetailsPage.assertPageTitle(taskId);
+    expect((await projectDetailsPage.page.title()).endsWith(taskId)).toBeTruthy();
 });
 
 When('I select My Personal Tasks from the Banner Options', async ({ commonItemsPage }) => {
