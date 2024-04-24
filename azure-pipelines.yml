@@ -3,13 +3,32 @@
 
 name: Run Playwright Tests
 
-variables:
-  CI: true
-
 trigger:
   - main
 
-jobs: 
+parameters:
+  - name: sharepoint_drive_id
+    displayName: SharePoint Online drive ID or URL
+    type: string
+    default: $(sharepoint_drive_id)
+  - name: sharepoint_target_folder
+    displayName: SharePoint Target Folder
+    type: string
+    default: $(sharepoint_target_folder)
+  - name: tenant_id
+    displayName: Entra Tenant Id
+    default: $(tenant_id)
+  - name: client_id
+    displayName: Client Id
+    default: $(client_id)
+  - name: client_secret
+    displayName: Client Secret
+    default: $(client_secret)
+
+variables:
+  CI: true
+
+jobs:
   - job: Run_Automated_E2E_Tests
     timeoutInMinutes: 10
     pool:
@@ -44,3 +63,15 @@ jobs:
         artifact: cucumber-report
         condition: always()
         displayName: Publish Cucumber Report
+
+      - task: halliba.az-pipelines-2-sharepoint.az-pipelines-2-sharepoint.az-pipelines-2-sharepoint@0
+        displayName: 'Upload Reports to SharePoint'
+        inputs:
+          tenantId: ${{ parameters.tenant_id }}
+          clientId: ${{ parameters.client_id }}
+          clientSecret: ${{ parameters.client_secret }}
+          driveId: ${{ parameters.sharepoint_drive_id }}
+          conflictBehaviour: 'replace'
+          targetFolder: ${{ parameters.sharepoint_target_folder }}
+          sourceFolder: $(System.DefaultWorkingDirectory)/test-reports
+          contents: '**/*.html'
