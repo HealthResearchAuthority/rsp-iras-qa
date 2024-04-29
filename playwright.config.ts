@@ -2,17 +2,14 @@ import { PlaywrightTestConfig, chromium, firefox, webkit } from '@playwright/tes
 import { defineBddConfig, cucumberReporter } from 'playwright-bdd';
 import 'dotenv/config';
 
-//Select Browser to use in Pipeline, Set in .env File Locally
+// Select Browser to use in Pipeline, Set in .env File Locally
 let browser;
 if (`${process.env.BROWSER}` == 'safari') {
   browser = webkit.name();
-  console.log('BROWSER IS:' + browser);
 } else if (`${process.env.BROWSER}` == 'firefox') {
   browser = firefox.name();
-  console.log('BROWSER IS:' + browser);
 } else {
   browser = chromium.name();
-  console.log('BROWSER IS:' + browser);
 }
 
 const config: PlaywrightTestConfig = {
@@ -30,11 +27,11 @@ const config: PlaywrightTestConfig = {
     browserName: browser,
     trace: 'on',
     baseURL: `${process.env.BASE_URL}`,
-    screenshot: 'on',
+    screenshot: 'only-on-failure',
   },
   projects: [
     {
-      //Authorise Tests Users before Test Run
+      // Authorise Tests Users before Test Run
       name: 'AuthSetup',
       testDir: defineBddConfig({
         paths: ['tests/features/authSetup/*.feature'],
