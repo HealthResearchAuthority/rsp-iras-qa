@@ -1,5 +1,16 @@
-import { PlaywrightTestConfig } from '@playwright/test';
+import { PlaywrightTestConfig, chromium, firefox, webkit } from '@playwright/test';
 import { defineBddConfig, cucumberReporter } from 'playwright-bdd';
+import 'dotenv/config';
+
+//Select Browser to use in Pipeline, Set in .env File Locally
+let browser;
+if (`${process.env.BROWSER}` == 'safari') {
+  browser = webkit.name();
+} else if (`${process.env.BROWSER}` == 'firefox') {
+  browser = firefox.name();
+} else {
+  browser = chromium.name();
+}
 
 const config: PlaywrightTestConfig = {
   reporter: [
@@ -12,21 +23,24 @@ const config: PlaywrightTestConfig = {
   timeout: 30000,
   workers: 1, // to enforce serial execution
   retries: 2,
+  use: {
+    browserName: browser,
+    trace: 'on',
+    baseURL: `${process.env.BASE_URL}`,
+    screenshot: 'only-on-failure',
+  },
   projects: [
     {
-      //   Authorise Tests Users before Test Run
+      //Authorise Tests Users before Test Run
       name: 'AuthSetup',
       testDir: defineBddConfig({
         paths: ['tests/features/authSetup/*.feature'],
         require: ['src/steps/*.ts'],
         importTestFrom: 'src/hooks/CustomFixtures.ts',
-        outputDir: 'generated-feature-files/login-setup',
+        outputDir: 'generated-feature-files/auth-setup',
       }),
       use: {
-        trace: 'on',
-        baseURL: `${process.env.BASE_URL}`,
         headless: true,
-        screenshot: 'on',
         launchOptions: {
           slowMo: 0,
         },
@@ -43,10 +57,7 @@ const config: PlaywrightTestConfig = {
         outputDir: 'generated-feature-files/old-iras',
       }),
       use: {
-        trace: 'on',
-        baseURL: `${process.env.BASE_URL}`,
         headless: true,
-        screenshot: 'on',
         launchOptions: {
           slowMo: 0,
         },
