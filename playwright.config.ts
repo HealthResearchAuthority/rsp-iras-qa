@@ -30,7 +30,7 @@ const config: PlaywrightTestConfig = {
     browserName: browser,
     trace: 'on',
     baseURL: `${process.env.BASE_URL}`,
-    screenshot: 'only-on-failure',
+    screenshot: 'on',
   },
   projects: [
     {
