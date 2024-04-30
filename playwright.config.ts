@@ -6,13 +6,10 @@ import 'dotenv/config';
 let browser;
 if (`${process.env.BROWSER}` == 'safari') {
   browser = webkit.name();
-  console.log('BROWSER BEING USED IS:' + browser);
 } else if (`${process.env.BROWSER}` == 'firefox') {
   browser = firefox.name();
-  console.log('BROWSER BEING USED IS:' + browser);
 } else {
   browser = chromium.name();
-  console.log('BROWSER BEING USED IS:' + browser);
 }
 
 const config: PlaywrightTestConfig = {
