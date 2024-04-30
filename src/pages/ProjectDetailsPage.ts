@@ -1,4 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
+import * as projectDetailsPageTestData from "../test_data/iras/project_details_page.json";
+
+let projectDetailsPageTestDataMap = new Map(Object.entries(projectDetailsPageTestData));
 
 //Declare Page Objects
 export default class ProjectDetailsPage {
@@ -16,5 +19,10 @@ export default class ProjectDetailsPage {
   //Page Methods
   async assertOnProjectDetailsPage() {
     await expect(this.contentHeader).toBeVisible();
+  }
+
+  async validatePageTitle(dataset) {
+    let pageTitle = (<any>projectDetailsPageTestDataMap).get(dataset)?.task_id;
+    expect((await this.page.title()).endsWith(pageTitle)).toBeTruthy();
   }
 }

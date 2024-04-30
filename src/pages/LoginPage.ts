@@ -1,4 +1,8 @@
 import { expect, Locator, Page } from '@playwright/test';
+import * as loginPageTestData from "../test_data/common/login_page.json";
+import { DataTable } from '@cucumber/cucumber';
+
+let loginPageTestDataMap = new Map(Object.entries(loginPageTestData));
 
 //Declare Page Objects
 export default class LoginPage {
@@ -22,28 +26,18 @@ export default class LoginPage {
   }
 
   //Page Methods
-  async assertOnLoginPage() {
+  async assertOnLoginPage(pageMapValue) {
+    let headerToValidate = (<any>loginPageTestDataMap).get(pageMapValue)?.header;
+    let partialLinkToValidate = (<any>loginPageTestDataMap).get(pageMapValue)?.partial_link;
     await expect(this.idgBanner).toBeVisible();
-    await expect(this.idgBanner).toHaveText('This is the TEST Identity Gateway');
-    expect(this.page.url()).toContain('test.id.nihr.ac.uk/authenticationendpoint/login');
+    await expect(this.idgBanner).toHaveText(headerToValidate);
+    expect(this.page.url()).toContain(partialLinkToValidate);
   }
 
   //passwords to be set in AzureDevops Pipeline, hardcode when running locally
-  async loginWithUserCreds(user: string) {
-    let username = '';
-    let password = '';
-    switch (user.toLowerCase()) {
-      case 'poc':
-        username = 'secontactmanageronly@test.id.nihr.ac.uk';
-        password = `${process.env.CONTACT_MANAGER_ONLY_PASS}`;
-        break;
-      case 'sponsor contact':
-        username = 'sesponsorcontact@test.id.nihr.ac.uk';
-        password = `${process.env.SPONSOR_CONTACT_PASS}`;
-        break;
-      default:
-        throw new Error(`${user} is not a valid option`);
-    }
+  async loginWithUserCreds(dataset) {
+    let username = (<any>loginPageTestDataMap).get(dataset)?.username;
+    let password = (<any>loginPageTestDataMap).get(dataset)?.password;
     await this.usernameInput.fill(username);
     await this.btnNext.click();
     await this.passwordInput.fill(password);

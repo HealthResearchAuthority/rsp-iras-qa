@@ -1,0 +1,14 @@
+{
+    "POC_User": {
+      "username": "secontactmanageronly@test.id.nihr.ac.uk",
+      "password": "${process.env.CONTACT_MANAGER_ONLY_PASS}"
+    },
+    "Sponsor_User": {
+        "username": "sesponsorcontact@test.id.nihr.ac.uk",
+        "password": "${process.env.SPONSOR_CONTACT_PASS}"
+    },
+    "IDG_SSO_Page": {
+      "header": "This is the TEST Identity Gateway",
+      "partial_link": "test.id.nihr.ac.uk/authenticationendpoint/login"
+    }
+}

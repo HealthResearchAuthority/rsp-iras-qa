@@ -1,5 +1,8 @@
 import { expect, Locator, Page } from '@playwright/test';
 import { confirmStringNotNull } from '../utils/UtilFunctions';
+import * as tasksPageTestData from "../test_data/iras/tasks_page.json";
+
+let tasksPageTestDataMap = new Map(Object.entries(tasksPageTestData));
 
 //Declare Page Objects
 export default class TasksPage {
@@ -25,9 +28,10 @@ export default class TasksPage {
     await this.page.goto('');
   }
 
-  async assertOnTasksPage() {
+  async assertOnTasksPage(dataset) {
+    let headerToValidate = (<any>tasksPageTestDataMap).get(dataset)?.header;
     await expect(this.pageTitle).toBeVisible();
-    await expect(this.pageTitle).toHaveText('My outstanding tasks');
+    await expect(this.pageTitle).toHaveText(headerToValidate);
   }
 
   async getUserTaskValues(): Promise<string[]> {
@@ -35,6 +39,16 @@ export default class TasksPage {
     for (const cell of await this.taskTableTopBodyCell.all()) {
       actualRowValues.push(confirmStringNotNull(await cell.textContent()));
     }
+    return actualRowValues
+  }
+
+  async getProjectRowValuesFromDataset(dataset): Promise<string[]> {
+    let actualRowValues: string[] = [];
+    actualRowValues.push(confirmStringNotNull((<any>tasksPageTestDataMap).get(dataset)?.task))
+    actualRowValues.push(confirmStringNotNull((<any>tasksPageTestDataMap).get(dataset)?.task_id))
+    actualRowValues.push(confirmStringNotNull((<any>tasksPageTestDataMap).get(dataset)?.iras_id))
+    actualRowValues.push(confirmStringNotNull((<any>tasksPageTestDataMap).get(dataset)?.short_project_title))
+    actualRowValues.push(confirmStringNotNull((<any>tasksPageTestDataMap).get(dataset)?.chief_investigator))
     return actualRowValues
   }
 }

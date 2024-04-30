@@ -19,7 +19,7 @@ export default class CommonItemsPage {
   async storeAuthState(user: string) {
     const authContactManagerOnlyFile = 'auth-storage-states/contactManagerOnly.json';
     switch (user.toLowerCase()) {
-      case 'poc':
+      case 'poc_user':
         await this.page.context().storageState({ path: authContactManagerOnlyFile });
         break;
       default:
