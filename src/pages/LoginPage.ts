@@ -37,7 +37,7 @@ export default class LoginPage {
   //passwords to be set in AzureDevops Pipeline, hardcode when running locally
   async loginWithUserCreds(dataset) {
     let username = (<any>loginPageTestDataMap).get(dataset)?.username;
-    let password = (<any>loginPageTestDataMap).get(dataset)?.password;
+    let password = eval((<any>loginPageTestDataMap).get(dataset)?.password);
     await this.usernameInput.fill(username);
     await this.btnNext.click();
     await this.passwordInput.fill(password);
