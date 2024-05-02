@@ -1,7 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../hooks/CustomFixtures';
 import { DataTable } from '@cucumber/cucumber';
-import { getValuesFromDataTable } from '../utils/UtilFunctions';
 
 const { Given, When, Then } = createBdd(test);
 
