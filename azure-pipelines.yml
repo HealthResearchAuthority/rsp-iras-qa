@@ -7,6 +7,14 @@ trigger:
   - main
 
 parameters:
+  - name: browser
+    displayName: Select a Browser
+    type: string
+    default: chromium
+    values:
+      - chromium
+      - safari
+      - firefox
   - name: sharepoint_drive_id
     displayName: SharePoint Online drive ID or URL
     type: string
@@ -51,6 +59,7 @@ jobs:
       - script: |
           npx bddgen && npx playwright test
         env:
+          BROWSER: ${{ parameters.browser }}
           CONTACT_MANAGER_ONLY_PASS: $(CONTACT_MANAGER_ONLY_PASS)
         displayName: 'Run Tests'
   
