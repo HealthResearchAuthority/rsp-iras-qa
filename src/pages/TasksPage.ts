@@ -2,7 +2,7 @@ import { expect, Locator, Page } from '@playwright/test';
 import { confirmStringNotNull } from '../utils/UtilFunctions';
 import * as tasksPageTestData from "../test_data/iras/tasks_page.json";
 
-let tasksPageTestDataMap = new Map(Object.entries(tasksPageTestData));
+// const tasksPageTestDataMap = new Map(Object.entries(tasksPageTestData));
 
 //Declare Page Objects
 export default class TasksPage {
@@ -11,6 +11,8 @@ export default class TasksPage {
   readonly taskTable: Locator;
   readonly taskTableTopBodyRow: Locator;
   readonly taskTableTopBodyCell: Locator;
+
+  testJSON: typeof tasksPageTestData
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -21,6 +23,8 @@ export default class TasksPage {
     this.taskTable = page.locator('div[id="PEGA_GRID0"]');
     this.taskTableTopBodyRow = page.locator('tr[pl_index="1"]');
     this.taskTableTopBodyCell = this.taskTableTopBodyRow.locator('td')
+
+    this.testJSON = tasksPageTestData
   }
 
   //Page Methods
@@ -29,7 +33,8 @@ export default class TasksPage {
   }
 
   async assertOnTasksPage(dataset) {
-    let headerToValidate = (<any>tasksPageTestDataMap).get(dataset)?.header;
+    const headerToValidate = this.testJSON[dataset].header;
+    // let headerToValidate = (<any>tasksPageTestDataMap).get(dataset)?.header;
     await expect(this.pageTitle).toBeVisible();
     await expect(this.pageTitle).toHaveText(headerToValidate);
   }
@@ -42,13 +47,13 @@ export default class TasksPage {
     return actualRowValues
   }
 
-  async getProjectRowValuesFromDataset(dataset): Promise<string[]> {
-    let actualRowValues: string[] = [];
-    actualRowValues.push(confirmStringNotNull((<any>tasksPageTestDataMap).get(dataset)?.task))
-    actualRowValues.push(confirmStringNotNull((<any>tasksPageTestDataMap).get(dataset)?.task_id))
-    actualRowValues.push(confirmStringNotNull((<any>tasksPageTestDataMap).get(dataset)?.iras_id))
-    actualRowValues.push(confirmStringNotNull((<any>tasksPageTestDataMap).get(dataset)?.short_project_title))
-    actualRowValues.push(confirmStringNotNull((<any>tasksPageTestDataMap).get(dataset)?.chief_investigator))
-    return actualRowValues
-  }
+  // async getProjectRowValuesFromDataset(dataset: string): Promise<string[]> {
+  //   let actualRowValues: string[] = [];
+  //   // actualRowValues.push(confirmStringNotNull((<any>tasksPageTestDataMap).get(dataset)?.task))
+  //   // actualRowValues.push(confirmStringNotNull((<any>tasksPageTestDataMap).get(dataset)?.task_id))
+  //   // actualRowValues.push(confirmStringNotNull((<any>tasksPageTestDataMap).get(dataset)?.iras_id))
+  //   // actualRowValues.push(confirmStringNotNull((<any>tasksPageTestDataMap).get(dataset)?.short_project_title))
+  //   // actualRowValues.push(confirmStringNotNull((<any>tasksPageTestDataMap).get(dataset)?.chief_investigator))
+  //   return actualRowValues
+  // }
 }

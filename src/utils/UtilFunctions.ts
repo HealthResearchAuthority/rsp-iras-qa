@@ -30,3 +30,15 @@ export function getValuesFromDataTable(data: DataTable): string[] {
   }
   return dataValues
 }
+
+export function getValuesFromDataset(testData: any, dataset: string): string[] {
+  let values: string[] = [];
+  
+  for (const key in testData[dataset]) {
+    values.push(testData[dataset][key])
+  }
+  for (const value of values) {
+    console.log(value)
+  }
+  return values;
+}

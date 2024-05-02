@@ -2,7 +2,7 @@
 Feature: Authenticate Test Users once only, before test run
 
   Background:
-    Given I am on the login page
+    Given I am on the 'Login' page
       | Page         |
       | IDG_SSO_Page |
 
