@@ -1,0 +1,29 @@
+import { createBdd } from 'playwright-bdd';
+import { test } from '../../hooks/CustomFixtures';
+
+const { Given, When } = createBdd(test);
+
+Given('I have navigated to the {string}', async ({ tasksPage, loginPage }, page: string) => {
+    switch (page) {
+        case 'Login_Page':
+            await tasksPage.goto();
+            await loginPage.assertOnLoginPage(page);
+            break;
+        case 'Tasks_Page':
+            await tasksPage.goto();
+            await tasksPage.assertOnTasksPage(page);
+            break;
+        default:
+            throw new Error(`${page} is not a valid option`);
+    }
+});
+
+When('I can see the {string}', async ({ tasksPage }, page: string) => {
+    switch (page) {
+        case 'Tasks_Page':
+            await tasksPage.assertOnTasksPage(page);
+            break;
+        default:
+            throw new Error(`${page} is not a valid option`);
+    }
+});

@@ -10,7 +10,7 @@ type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
   loginPage: LoginPage;
   tasksPage: TasksPage;
-  projectDetailsPage: ProjectDetailsPage
+  projectDetailsPage: ProjectDetailsPage;
 }
 
 export const test = base.extend<CustomFixtures>({

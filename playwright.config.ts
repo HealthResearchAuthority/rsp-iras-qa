@@ -3,7 +3,7 @@ import { defineBddConfig, cucumberReporter } from 'playwright-bdd';
 import 'dotenv/config';
 
 // Select Browser to use in Pipeline, Set in .env File Locally
-let browser;
+let browser: any;
 if (`${process.env.BROWSER}` == 'safari') {
   browser = webkit.name();
 } else if (`${process.env.BROWSER}` == 'firefox') {
@@ -35,7 +35,7 @@ const config: PlaywrightTestConfig = {
       name: 'AuthSetup',
       testDir: defineBddConfig({
         paths: ['tests/features/authSetup/*.feature'],
-        require: ['src/steps/*.ts'],
+        require: ['src/steps/**/*.ts'],
         importTestFrom: 'src/hooks/CustomFixtures.ts',
         outputDir: 'generated-feature-files/auth-setup',
       }),
@@ -52,7 +52,7 @@ const config: PlaywrightTestConfig = {
       testIgnore: 'tests/features/authSetup/*.feature',
       testDir: defineBddConfig({
         paths: ['tests/features/stories/**/*.feature'],
-        require: ['src/steps/*.ts'],
+        require: ['src/steps/**/*.ts'],
         importTestFrom: 'src/hooks/CustomFixtures.ts',
         outputDir: 'generated-feature-files/old-iras',
       }),

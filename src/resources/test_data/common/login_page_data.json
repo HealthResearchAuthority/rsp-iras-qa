@@ -7,7 +7,7 @@
         "username": "sesponsorcontact@test.id.nihr.ac.uk",
         "password": "`${process.env.CONTACT_MANAGER_ONLY_PASS}`"
     },
-    "IDG_SSO_Page": {
+    "Login_Page": {
       "header": "This is the TEST Identity Gateway",
       "partial_link": "test.id.nihr.ac.uk/authenticationendpoint/login"
     }
