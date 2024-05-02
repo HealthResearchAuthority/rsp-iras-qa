@@ -1,5 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
-import * as projectDetailsPageTestData from "../test_data/iras/project_details_page.json";
+import * as projectDetailsPageTestData from "../resources/test_data/iras/project_details_page_data.json";
 
 let projectDetailsPageTestDataMap = new Map(Object.entries(projectDetailsPageTestData));
 

@@ -12,7 +12,7 @@ Feature: This is a Testing Feature for POC Purposes
 
     Examples:
       | Project_Details            |
-      | Project_Details_POC-User_1 |
+      | Project_Details_POC_User_1 |
 
   @exampleTestTag
   Scenario Outline: POC User Can Access the Project Details Page, via the Tasks Page
@@ -24,4 +24,4 @@ Feature: This is a Testing Feature for POC Purposes
 
     Examples:
       | Project_Details            | TaskPage   |
-      | Project_Details_POC-User_1 | Tasks_Page |
+      | Project_Details_POC_User_1 | Tasks_Page |

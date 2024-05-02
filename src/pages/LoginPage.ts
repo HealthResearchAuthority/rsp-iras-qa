@@ -1,6 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
-import * as loginPageTestData from "../test_data/common/login_page.json";
-import { DataTable } from '@cucumber/cucumber';
+import * as loginPageTestData from "../resources/test_data/common/login_page_data.json";
 
 let loginPageTestDataMap = new Map(Object.entries(loginPageTestData));
 
