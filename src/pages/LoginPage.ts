@@ -1,11 +1,10 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as loginPageTestData from "../resources/test_data/common/login_page_data.json";
 
-let loginPageTestDataMap = new Map(Object.entries(loginPageTestData));
-
 //Declare Page Objects
 export default class LoginPage {
   readonly page: Page;
+  readonly loginPageTestData: typeof loginPageTestData;
   readonly idgBanner: Locator;
   readonly usernameInput: Locator;
   readonly passwordInput: Locator;
@@ -15,6 +14,7 @@ export default class LoginPage {
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page;
+    this.loginPageTestData = loginPageTestData;
 
     //Locators
     this.idgBanner = page.locator('div[class="container-fluid"] h1');
@@ -25,18 +25,18 @@ export default class LoginPage {
   }
 
   //Page Methods
-  async assertOnLoginPage(pageMapValue) {
-    let headerToValidate = (<any>loginPageTestDataMap).get(pageMapValue)?.header;
-    let partialLinkToValidate = (<any>loginPageTestDataMap).get(pageMapValue)?.partial_link;
+  async assertOnLoginPage(pageMapValue: string) {
+    const headerToValidate = this.loginPageTestData[pageMapValue].header;
+    const partialLinkToValidate = this.loginPageTestData[pageMapValue].partial_link;
     await expect(this.idgBanner).toBeVisible();
     await expect(this.idgBanner).toHaveText(headerToValidate);
     expect(this.page.url()).toContain(partialLinkToValidate);
   }
 
   //passwords to be set in AzureDevops Pipeline, hardcode when running locally
-  async loginWithUserCreds(dataset) {
-    let username = (<any>loginPageTestDataMap).get(dataset)?.username;
-    let password = eval((<any>loginPageTestDataMap).get(dataset)?.password);
+  async loginWithUserCreds(dataset: string) {
+    const username = this.loginPageTestData[dataset].username;
+    const password = eval(this.loginPageTestData[dataset].password);
     await this.usernameInput.fill(username);
     await this.btnNext.click();
     await this.passwordInput.fill(password);
