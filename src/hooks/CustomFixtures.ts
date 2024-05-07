@@ -1,5 +1,5 @@
 import { test as base } from 'playwright-bdd';
-import { getAuthState } from '../utils/UtilFunctions';
+import { getAuthState, getTicketReferenceTags } from '../utils/UtilFunctions';
 
 import CommonItemsPage from '../pages/CommonItemsPage';
 import LoginPage from '../pages/LoginPage';
@@ -36,7 +36,13 @@ export const test = base.extend<CustomFixtures>({
       storageState = getAuthState('POC');
     }
     await use(storageState);
+  },
+
+  //Attach relevant ticket links to each scenario in test report
+  $before: async ({ $tags, $bddWorld }, use) => {
+    const tickets = getTicketReferenceTags($tags);
+    $bddWorld.testInfo.attach('Ticket Reference:', { body: tickets.toString().replace(',', '') });
+    await use();
   }
 });
-
 export { expect } from '@playwright/test';

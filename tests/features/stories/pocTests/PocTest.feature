@@ -1,4 +1,4 @@
-@pocUser
+@pocUser @pocFeature
 Feature: This is a Testing Feature for POC Purposes
 
   Background:

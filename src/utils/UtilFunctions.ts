@@ -33,9 +33,23 @@ export function getValuesFromDataTable(data: DataTable): string[] {
 
 export function getValuesFromTestDataset(testData: any, dataset: string): string[] {
   let values: string[] = [];
-  
+
   for (const key in testData[dataset]) {
     values.push(testData[dataset][key]);
   }
   return values;
+}
+
+function filterTagsForTicketRef(tag: string) {
+  return tag.startsWith('@RSP-');
+}
+
+export function getTicketReferenceTags(tags: string[]): string[] {
+  const ticketTag = tags.filter(filterTagsForTicketRef);
+  let tickets: string[] = [];
+  for (const tag of ticketTag) {
+    const ticketNo = tag.replace('@', '');
+    tickets.push('https://nihr.atlassian.net/browse/' + ticketNo + '\n');
+  }
+  return tickets;
 }
