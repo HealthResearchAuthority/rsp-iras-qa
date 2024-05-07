@@ -208,6 +208,7 @@ An overview of some of the more advanced feature file elements are outlined belo
 - Tags can be placed above Features or Scenario's
 - A Feature or Scenario can have as many tags as you like. Separate them with spaces
 - Tags are inherited by child elements. E.g. tags that are placed above a Feature will be inherited by each Scenario within the Feature
+- See the **Test Traceability** section of this ReadMe for more information on using Tags appropriately within the project
 
 For more information consult the Cucumber Documentation provided in the Supporting Documentation  
 &nbsp; 
@@ -250,6 +251,39 @@ that this is the one shared with non-technical stakeholders.
 &nbsp; 
 
 ![playwright background report limitation](src/resources\images\pwReportBackgroundLimitation.png =600x600)  
+&nbsp; 
+
+
+# Test Traceability
+
+In this project we will be utilizing Cucumber tags to:
+- Uniquely identify Features - allowing us to run the Feature in isolation & easily locate it in the test report
+- Uniquely identify Scenarios - allowing us to run a Scenario in isolation & easily locate it in the test report
+- Link Scenarios to User Stories in JIRA - allowing us to trace test outputs to the specific functionalities under test
+
+When writing Features and Scenarios we should follow these guidelines to provide appropriate tags.
+
+## Feature Level Tags
+
+There can be multiple Feature level tags, used for a variety of purposes, but:
+- All Features must have 1 tag that uniquely identifies it.
+- The unique tag should have the naming convention `<name of feature>Feature` 
+- The unique tag name should relate to the name of the Feature under test,  
+e.g. a `Login.feature` file could have the tag `@loginFeature`
+
+## Scenario Level Tags
+
+There can be multiple Scenario level tags, used for a variety of purposes, but:
+- All Scenarios must have 1 tag that uniquely identifies it.
+- All Scenarios must have 1 or more tags that link it to one or more User Stories in JIRA
+- The unique tag should have the naming convention `<name of scenario>Scenario` 
+- The unique tag name should relate to the name of the Scenario under test,  
+e.g. a `User can Login Successfully with Correct Credentials` Scenario could have the tag `@loginSuccessScenario`
+- The JIRA tag(s) must have the naming convention `@RSP-<JIRA ticket number>`, e.g. `<@RSP-101`  
+
+## Best Practice Example
+
+TODO  
 &nbsp; 
 
 
