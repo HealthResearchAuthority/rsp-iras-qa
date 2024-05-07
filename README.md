@@ -259,7 +259,8 @@ that this is the one shared with non-technical stakeholders.
 In this project we will be utilizing Cucumber tags to:
 - Uniquely identify Features - allowing us to run the Feature in isolation & easily locate it in the test report
 - Uniquely identify Scenarios - allowing us to run a Scenario in isolation & easily locate it in the test report
-- Link Scenarios to User Stories in JIRA - allowing us to trace test outputs to the specific functionalities under test
+- Link Scenarios to User Stories in JIRA - allowing us to trace test outputs to the specific functionalities under test,  
+See the `$before` hook provided in `src/hooks/CustomFixtures.ts` for implementation
 
 When writing Features and Scenarios we should follow these guidelines to provide appropriate tags.
 
@@ -283,7 +284,22 @@ e.g. a `User can Login Successfully with Correct Credentials` Scenario could hav
 
 ## Best Practice Example
 
-TODO  
+Consider the following as an example of how a Feature file containing multiple test Scenarios, should be written.
+
+The `Traceability.feature` Feature file below shows:
+- A unique Feature level tag - `<@traceabilityFeature`  
+- Unique Scenario level tags for each Scenario - `<@uniqueScenario` & `<@anotherUniqueScenario`  
+- Scenario level tags which link each Scenario to a ticket in JIRA - `<@RSP-744` for both & `<@RSP-745` for the second Scenario  
+
+![best practice feature tagging](src/resources\images\scenarioTagsVsCode.png =500x400)  
+&nbsp; 
+
+This will output the following Cucumber report which:
+- Allows us to find all Scenarios relating to a User Story - searching with `@RSP-<JIRA ticket number>`
+- Allows us to find any specific Feature or Scenario - searching with a unique Feature or Scenario level tag
+- Generates a list of Ticket References for each Scenario, which provide a link to the relevant User Stories in JIRA
+
+![best practice tagging report](src/resources\images\scenarioTagsReport.png =500x600)  
 &nbsp; 
 
 
