@@ -41,7 +41,7 @@ export function getValuesFromTestDataset(testData: any, dataset: string): string
 }
 
 function filterTagsForTicketRef(tag: string) {
-  return tag.startsWith('@RSP-');
+  return tag.toUpperCase().startsWith('@RSP-');
 }
 
 export function getTicketReferenceTags(tags: string[]): string[] {
@@ -49,7 +49,7 @@ export function getTicketReferenceTags(tags: string[]): string[] {
   let tickets: string[] = [];
   for (const tag of ticketTag) {
     const ticketNo = tag.replace('@', '');
-    tickets.push('https://nihr.atlassian.net/browse/' + ticketNo + '\n');
+    tickets.push('https://nihr.atlassian.net/browse/' + ticketNo.toUpperCase() + '\n');
   }
   return tickets;
 }
