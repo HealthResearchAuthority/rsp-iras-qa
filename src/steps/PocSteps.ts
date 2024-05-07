@@ -37,3 +37,17 @@ When('I select my personal tasks from the banner options', async ({ commonItemsP
     await commonItemsPage.bannerMyTasks.click();
     await commonItemsPage.bannerMyPersonalTasks.click();
 });
+
+When('I do something', async ({ }) => {
+    //PLACEHOLDER
+});
+
+Then('The JIRA Tag will be on the report', async ({ }) => {
+    //PLACEHOLDER
+
+});
+
+Then('The JIRA Tags will also be on the report', async ({ }) => {
+    //PLACEHOLDER
+
+});

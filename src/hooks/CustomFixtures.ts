@@ -41,7 +41,7 @@ export const test = base.extend<CustomFixtures>({
   //Attach relevant ticket links to each scenario in test report
   $before: async ({ $tags, $bddWorld }, use) => {
     const tickets = getTicketReferenceTags($tags);
-    $bddWorld.testInfo.attach('Ticket Reference:', { body: tickets.toString().replace(',', '') });
+    $bddWorld.testInfo.attach('Ticket Reference:', { body: tickets.toString().replace(/,/g, '') });
     await use();
   }
 });
