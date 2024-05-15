@@ -32,7 +32,9 @@ For now Chris McNeill can provide the password.
 
 **To run all tests:** `npm test` OR `npx bddgen && npx playwright test`
 
-**To rerun all failed tests:** `npm test-failed` OR `npx bddgen && npx playwright test --last-failed`
+**To rerun all failed tests:** `npm run test-failed` OR `npx bddgen && npx playwright test --last-failed`
+
+*NOTE:* `npm test` and `npm run test-failed` are defined as scripts in the package.json file
 
 *NOTE:* `npm test` is set as a script in the `package.json` file to trigger the longer command  
 &nbsp;  
