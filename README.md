@@ -34,9 +34,7 @@ For now Chris McNeill can provide the password.
 
 **To rerun all failed tests:** `npm run test-failed` OR `npx bddgen && npx playwright test --last-failed`
 
-*NOTE:* `npm test` and `npm run test-failed` are defined as scripts in the package.json file
-
-*NOTE:* `npm test` is set as a script in the `package.json` file to trigger the longer command  
+*NOTE:* `npm test` and `npm run test-failed` is set as a script in the `package.json` file to trigger the longer command  
 &nbsp;  
  
 **To run tag specific tests:** `npx bddgen --tags "@authSetup or <@yourTestTag>" && npx playwright test`
