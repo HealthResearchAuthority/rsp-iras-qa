@@ -6,6 +6,16 @@ name: Run Playwright Tests
 trigger:
   - main
 
+schedules:
+  - cron: '0 0 * * Mon-Fri'
+    displayName: 'Nightly run - full suite'
+    branches:
+      include: 
+      - main
+
+pool:
+  vmImage: "Ubuntu-latest"
+
 parameters:
   - name: browser
     displayName: Select a Browser
@@ -15,72 +25,31 @@ parameters:
       - chromium
       - safari
       - firefox
-  - name: sharepoint_drive_id
-    displayName: SharePoint Online drive ID or URL
+  - name: devops_library_branch
+    displayName: DevOps Library Branch
     type: string
-    default: $(sharepoint_drive_id)
-  - name: sharepoint_target_folder
-    displayName: SharePoint Target Folder
-    type: string
-    default: $(sharepoint_target_folder)
-  - name: tenant_id
-    displayName: Entra Tenant Id
-    default: $(tenant_id)
-  - name: client_id
-    displayName: Client Id
-    default: $(client_id)
-  - name: client_secret
-    displayName: Client Secret
-    default: $(client_secret)
-
-variables:
-  CI: true
-
-jobs:
-  - job: Run_Automated_E2E_Tests
-    timeoutInMinutes: 10
-    pool:
-      vmImage: ubuntu-latest
-     
-    steps:
-      - task: NodeTool@0
-        inputs:
-          versionSpec: '20.x'
-        displayName: 'Install Node.js'
-
-      - script: |
-          npm ci
-        displayName: 'Install Dependencies'
+    default: main
+  - name: tests_run_timeout
+    type: number
+    displayName: Playwright Tests Run Timeout
+    default: 10
     
-      - script: |
-          npx playwright install --with-deps
-        displayName: 'Install Playwright with Browsers'
-  
-      - script: |
-          npx bddgen && npx playwright test
-        env:
-          BROWSER: ${{ parameters.browser }}
-          CONTACT_MANAGER_ONLY_PASS: $(CONTACT_MANAGER_ONLY_PASS)
-        displayName: 'Run Tests'
-  
-      - publish: $(System.DefaultWorkingDirectory)/test-reports/playwright
-        artifact: playwright-report
-        condition: always()
-        displayName: Publish Playwright Report
-  
-      - publish: $(System.DefaultWorkingDirectory)/test-reports/cucumber
-        artifact: cucumber-report
-        condition: always()
-        displayName: Publish Cucumber Report
+variables:
+  - group: 'Test Automation'
 
-      - task: halliba.az-pipelines-2-sharepoint.az-pipelines-2-sharepoint.az-pipelines-2-sharepoint@0
-        displayName: 'Upload Reports to SharePoint'
-        inputs:
-          tenantId: ${{ parameters.tenant_id }}
-          clientId: ${{ parameters.client_id }}
-          clientSecret: ${{ parameters.client_secret }}
-          driveId: ${{ parameters.sharepoint_drive_id }}
-          conflictBehaviour: 'replace'
-          targetFolder: ${{ parameters.sharepoint_target_folder }}
-          sourceFolder: $(System.DefaultWorkingDirectory)/test-reports
-          contents: '**/*.html'
+resources:
+  repositories:
+    - repository: library
+      type: git
+      name: DevOps/rsp-azure-devops-library
+      ref: ${{ parameters.devops_library_branch }}
+
+stages:
+  - stage: E2EPlaywrightTests
+    displayName: E2E Playwright Tests
+    jobs:
+      - template: jobs/e2e_tests.yaml@library
+        parameters:
+          browser: ${{ parameters.browser }}
+          upload_to_sharepoint: true
+          tests_run_timeout: ${{ parameters.tests_run_timeout }}
