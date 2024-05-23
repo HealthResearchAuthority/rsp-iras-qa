@@ -1,15 +1,25 @@
-import { PlaywrightTestConfig, chromium, firefox, webkit } from '@playwright/test';
+import { PlaywrightTestConfig, devices } from '@playwright/test';
 import { defineBddConfig, cucumberReporter } from 'playwright-bdd';
 import 'dotenv/config';
 
 // Select Browser to use in Pipeline, Set in .env File Locally
 let browser: any;
+let platform: string;
 if (`${process.env.BROWSER}` == 'safari') {
-  browser = webkit.name();
+  browser = devices['Desktop Safari'];
+  platform = 'desktop';
 } else if (`${process.env.BROWSER}` == 'firefox') {
-  browser = firefox.name();
+  browser = devices['Desktop Firefox'];
+  platform = 'desktop';
+} else if (`${process.env.BROWSER}` == 'ios') {
+  browser = devices['iPhone 14'];
+  platform = 'mobile';
+} else if (`${process.env.BROWSER}` == 'android') {
+  browser = devices['Galaxy S8'];
+  platform = 'mobile';
 } else {
-  browser = chromium.name();
+  browser = devices['Desktop Chrome'];
+  platform = 'desktop';
 }
 
 const config: PlaywrightTestConfig = {
@@ -24,17 +34,17 @@ const config: PlaywrightTestConfig = {
   workers: 1, // to enforce serial execution
   retries: 2,
   use: {
-    browserName: browser,
+    ...browser,
     trace: 'on',
     baseURL: `${process.env.BASE_URL}`,
-    screenshot: 'only-on-failure',
+    screenshot: 'only-on-failure'
   },
   projects: [
     {
       // Authorise Tests Users before Test Run
       name: 'AuthSetup',
       testDir: defineBddConfig({
-        paths: ['tests/features/authSetup/*.feature'],
+        paths: ['tests/features/cross-compatible/authSetup/*.feature'],
         require: ['src/steps/**/*.ts'],
         importTestFrom: 'src/hooks/CustomFixtures.ts',
         outputDir: 'generated-feature-files/auth-setup',
@@ -49,9 +59,8 @@ const config: PlaywrightTestConfig = {
     {
       name: 'OldIras',
       dependencies: ['AuthSetup'],
-      testIgnore: 'tests/features/authSetup/*.feature',
       testDir: defineBddConfig({
-        paths: ['tests/features/stories/**/*.feature'],
+        paths: ['tests/features/cross-compatible/stories/**/*.feature', `tests/features/${platform}/**/*.feature`],
         require: ['src/steps/**/*.ts'],
         importTestFrom: 'src/hooks/CustomFixtures.ts',
         outputDir: 'generated-feature-files/old-iras',
