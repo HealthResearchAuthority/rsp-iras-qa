@@ -12,7 +12,7 @@ if (`${process.env.BROWSER}` == 'safari') {
   browser = devices['Desktop Firefox'];
   platform = 'desktop';
 } else if (`${process.env.BROWSER}` == 'ios') {
-  browser = devices['iPhone 14'];
+  browser = devices['iPhone 11'];
   platform = 'mobile';
 } else if (`${process.env.BROWSER}` == 'android') {
   browser = devices['Galaxy S8'];
