@@ -32,6 +32,7 @@ When('I do something {string}', async ({ }, testType: string) => {
     console.log(testType + ' test action');
 });
 
-Then('I see something {string}', async ({ }, testType: string) => {
+Then('I see something {string}', async ({ tasksPage }, testType: string) => {
     console.log(testType + ' test assertion');
+    await tasksPage.page.pause()
 });
