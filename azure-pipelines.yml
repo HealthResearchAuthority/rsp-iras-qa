@@ -25,6 +25,8 @@ parameters:
       - chromium
       - safari
       - firefox
+      - ios
+      - android
   - name: devops_library_branch
     displayName: DevOps Library Branch
     type: string
