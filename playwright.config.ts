@@ -32,7 +32,7 @@ const config: PlaywrightTestConfig = {
   globalTeardown: 'src/hooks/GlobalTeardown.ts',
   timeout: 30000,
   workers: 1, // to enforce serial execution
-  // retries: 2,
+  retries: 2,
   use: {
     ...browser,
     trace: 'on',
@@ -50,9 +50,9 @@ const config: PlaywrightTestConfig = {
         outputDir: 'generated-feature-files/auth-setup',
       }),
       use: {
-        headless: false,
+        headless: true,
         launchOptions: {
-          slowMo: 1000,
+          slowMo: 0,
         },
       },
     },
@@ -66,9 +66,9 @@ const config: PlaywrightTestConfig = {
         outputDir: 'generated-feature-files/old-iras',
       }),
       use: {
-        headless: false,
+        headless: true,
         launchOptions: {
-          slowMo: 1000,
+          slowMo: 0,
         },
       },
     },
