@@ -66,7 +66,6 @@ const config: PlaywrightTestConfig = {
         outputDir: 'generated-feature-files/old-iras',
       }),
       use: {
-        // ...browser,
         headless: true,
         launchOptions: {
           slowMo: 0,

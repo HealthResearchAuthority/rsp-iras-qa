@@ -39,9 +39,8 @@ export default class LoginPage {
     const password = eval(this.loginPageTestData[dataset].password);
     await this.usernameInput.fill(username);
     await this.btnNext.focus();
-    // await this.page.pause()
-    // await this.btnNext.click();
     await this.passwordInput.fill(password);
-    await this.btnContinue.click();
+    await this.btnContinue.focus();
+    await this.btnContinue.press('Space');
   }
 }
