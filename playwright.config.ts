@@ -67,7 +67,7 @@ const config: PlaywrightTestConfig = {
       }),
       use: {
         ...browser,
-        headless: false,
+        headless: true,
         launchOptions: {
           slowMo: 0,
         },
