@@ -34,7 +34,7 @@ const config: PlaywrightTestConfig = {
   workers: 1, // to enforce serial execution
   retries: 2,
   use: {
-    ...browser,
+    // ...browser,
     trace: 'on',
     baseURL: `${process.env.BASE_URL}`,
     screenshot: 'on'
@@ -50,6 +50,7 @@ const config: PlaywrightTestConfig = {
         outputDir: 'generated-feature-files/auth-setup',
       }),
       use: {
+        // ...browser,
         headless: true,
         launchOptions: {
           slowMo: 0,
@@ -66,6 +67,7 @@ const config: PlaywrightTestConfig = {
         outputDir: 'generated-feature-files/old-iras',
       }),
       use: {
+        ...browser,
         headless: true,
         launchOptions: {
           slowMo: 0,
