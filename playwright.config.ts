@@ -34,7 +34,7 @@ const config: PlaywrightTestConfig = {
   workers: 1, // to enforce serial execution
   retries: 2,
   use: {
-    ...browser,
+    // ...browser,
     trace: 'on',
     baseURL: `${process.env.BASE_URL}`,
     screenshot: 'on'
@@ -66,7 +66,8 @@ const config: PlaywrightTestConfig = {
         outputDir: 'generated-feature-files/old-iras',
       }),
       use: {
-        headless: true,
+        ...browser,
+        headless: false,
         launchOptions: {
           slowMo: 0,
         },
