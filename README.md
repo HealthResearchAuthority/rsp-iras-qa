@@ -398,4 +398,4 @@ as part the `GlobalTeardown.ts` file
 - [Playwright Documentation](https://playwright.dev/docs/api/class-playwright)
 - [playwright-bdd Documentation](https://www.npmjs.com/package/playwright-bdd/v/5.1.1)
 - [Cucumber Documentation](https://cucumber.io/docs/cucumber/)
-- ADD LINK TO STANDARDS DOC ONCE RSP-730 IS COMPLETE
+- [Tooling Standards Documentation](https://healthresearchauthority.sharepoint.com/:w:/r/sites/Future-IRAS/Testing/RSP%20Test%20Approach/Draft/Automation%20Test%20Tool%20Standards%20Draft%20Content.docx?d=wc9b5951cd936470984f391877ed0bd20&csf=1&web=1&e=elADFz)
