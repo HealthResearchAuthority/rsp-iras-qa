@@ -89,6 +89,8 @@ We can also trigger the job manually by:
 - Navigating to the Pipeline page (linked above)
 - Clicking the **Run pipeline** button
 - Select the source branch, set to `main` by default
+- Select the browser to use, set to ‘chrome’ by default 
+- Select the Timeout value in minutes
 - Click Run
 
 ![runJob](src/resources\images\runPipeline.png)  
