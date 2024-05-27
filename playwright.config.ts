@@ -53,7 +53,7 @@ const config: PlaywrightTestConfig = {
         // ...browser,
         headless: true,
         launchOptions: {
-          slowMo: 0,
+          slowMo: 1000,
         },
       },
     },
@@ -70,7 +70,7 @@ const config: PlaywrightTestConfig = {
         // ...browser,
         headless: true,
         launchOptions: {
-          slowMo: 0,
+          slowMo: 1000,
         },
       },
     },
