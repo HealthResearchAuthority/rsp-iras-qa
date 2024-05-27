@@ -40,8 +40,8 @@ const config: PlaywrightTestConfig = {
     userAgent: "Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.30 (KHTML, like Gecko) Version/16.0 Mobile/14E304 Safari/602.1",
     // ...browser,
     viewport: {
-      width: 350,
-      height: 600
+      width: 320,
+      height: 568
     },
     trace: 'on',
     baseURL: `${process.env.BASE_URL}`,
@@ -61,7 +61,7 @@ const config: PlaywrightTestConfig = {
         // ...browser,
         headless: true,
         launchOptions: {
-          slowMo: 1000,
+          slowMo: 0,
         },
       },
     },
@@ -78,7 +78,7 @@ const config: PlaywrightTestConfig = {
         // ...browser,
         headless: true,
         launchOptions: {
-          slowMo: 1000,
+          slowMo: 0,
         },
       },
     },
