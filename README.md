@@ -128,7 +128,9 @@ You will see a page displaying the `cucumber-report` folder & `playwright-report
 Click the html document in either to download and view the relevant report.
 
 ![artifacts](src/resources\images\artifactsPage.png =200x300)  
-&nbsp; 
+
+This artifact will also be published to the teams SharePoint space [here](https://healthresearchauthority.sharepoint.com/:f:/r/sites/Future-IRAS/Testing/Test%20Reports?csf=1&web=1&e=8jF7Ic)  
+&nbsp;  
 
 # Test Structure
 
