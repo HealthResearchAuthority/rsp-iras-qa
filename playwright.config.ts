@@ -12,8 +12,8 @@ if (`${process.env.BROWSER}` == 'safari') {
   browser = devices['Desktop Firefox'];
   platform = 'desktop';
 } else if (`${process.env.BROWSER}` == 'ios') {
-  // browser = webkit.name();
-  browser = devices['iPhone 14'];
+  browser = webkit.name();
+  // browser = devices['iPhone 14'];
   platform = 'mobile';
 } else if (`${process.env.BROWSER}` == 'android') {
   browser = devices['Galaxy S8'];
@@ -35,8 +35,8 @@ const config: PlaywrightTestConfig = {
   workers: 1, // to enforce serial execution
   // retries: 2,
   use: {
-    ...browser,
-    // browserName: browser,
+    // ...browser,
+    browserName: browser,
     userAgent: "Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.30 (KHTML, like Gecko) Version/16.0 Mobile/14E304 Safari/602.1",
     // ...browser,
     viewport: {
@@ -61,7 +61,7 @@ const config: PlaywrightTestConfig = {
         // ...browser,
         headless: true,
         launchOptions: {
-          slowMo: 0,
+          slowMo: 1000,
         },
       },
     },
@@ -78,7 +78,7 @@ const config: PlaywrightTestConfig = {
         // ...browser,
         headless: true,
         launchOptions: {
-          slowMo: 0,
+          slowMo: 1000,
         },
       },
     },
