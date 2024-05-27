@@ -37,6 +37,7 @@ export default class LoginPage {
   async loginWithUserCreds(dataset: string) {
     const username = this.loginPageTestData[dataset].username;
     const password = eval(this.loginPageTestData[dataset].password);
+    await this.page.screenshot({ path: 'screenshot.png', fullPage: true });
     await this.usernameInput.fill(username);
     await this.btnNext.click();
     await this.passwordInput.fill(password);
