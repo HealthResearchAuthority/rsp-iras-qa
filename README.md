@@ -94,7 +94,7 @@ We can also trigger the job manually by:
 ![runJob](src/resources\images\runPipeline.png)  
 &nbsp; 
 
-This will kick off a new Run, which will appear on the **Runs** loginWithUserCreds
+This will kick off a new Run, which will appear on the **Runs** tab
 
 To view the summary details of a Run, click the relevant run  
 This will display the Run summary page.  
