@@ -29,7 +29,8 @@ export default class TasksPage {
   }
 
   async assertOnTasksPage() {
-    await expect(this.pageTitle).toBeVisible();  }
+    await expect(this.pageTitle).toBeVisible();
+  }
 
   async getUserTaskValues(): Promise<string[]> {
     let actualRowValues: string[] = [];
