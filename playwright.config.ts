@@ -12,8 +12,9 @@ if (`${process.env.BROWSER}` == 'safari') {
   browser = devices['Desktop Firefox'];
   platform = 'desktop';
 } else if (`${process.env.BROWSER}` == 'ios') {
-  browser = webkit.name();
-  // browser = devices['iPhone 14'];
+  // browser = webkit.name(); //this works for ios, check other device configs, ie set isMobile to true. 
+  // if no joy use for others and set relative user agents above
+  browser = devices['iPhone 14'];
   platform = 'mobile';
 } else if (`${process.env.BROWSER}` == 'android') {
   browser = devices['Galaxy S8'];
@@ -35,14 +36,15 @@ const config: PlaywrightTestConfig = {
   workers: 1, // to enforce serial execution
   // retries: 2,
   use: {
+    ...browser,
+    // browserName: 'webkit',
+    // userAgent: "Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.30 (KHTML, like Gecko) Version/16.0 Mobile/14E304 Safari/602.1",
     // ...browser,
-    browserName: browser,
-    userAgent: "Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.30 (KHTML, like Gecko) Version/16.0 Mobile/14E304 Safari/602.1",
-    // ...browser,
-    viewport: {
-      width: 320,
-      height: 568
-    },
+    // viewport: {
+    //   width: 320,
+    //   height: 568
+    // },
+    deviceScaleFactor: 1,
     trace: 'on',
     baseURL: `${process.env.BASE_URL}`,
     screenshot: 'on'
