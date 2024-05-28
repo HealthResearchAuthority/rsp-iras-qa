@@ -36,10 +36,16 @@ const config: PlaywrightTestConfig = {
   workers: 1, // to enforce serial execution
   // retries: 2,
   use: {
-    ...browser,
+    viewport: devices['iPhone 14'].viewport,
+    userAgent: devices['iPhone 14'].userAgent,
+    isMobile: devices['iPhone 14'].isMobile,
+    hasTouch: devices['iPhone 14'].hasTouch,
+    defaultBrowserType: devices['iPhone 14'].defaultBrowserType,
+    deviceScaleFactor: devices['iPhone 14'].deviceScaleFactor,
+    // ...browser,
     // browserName: 'webkit',
     // userAgent: "Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 Mobile/15E148 Safari/604.1",
-    userAgent: "Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.30 (KHTML, like Gecko) Version/16.0 Mobile/14E304 Safari/602.1",
+    // userAgent: "Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.30 (KHTML, like Gecko) Version/16.0 Mobile/14E304 Safari/602.1",
     // ...browser,
     // viewport: {
     //   width: 320,
