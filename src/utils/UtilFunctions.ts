@@ -1,4 +1,5 @@
 import { DataTable } from '@cucumber/cucumber';
+import CryptoJS from "crypto-js";
 
 export function getAuthState(user: string): string {
   let authState: string
@@ -52,4 +53,9 @@ export function getTicketReferenceTags(tags: string[]): string[] {
     tickets.push('https://nihr.atlassian.net/browse/' + ticketNo.toUpperCase() + '\n');
   }
   return tickets;
+}
+
+export function getDecryptedValue(data: string) {
+  var decrypted = CryptoJS.AES.decrypt(data, `${process.env.SECRET_KEY}`);
+  return decrypted.toString(CryptoJS.enc.Utf8);
 }
