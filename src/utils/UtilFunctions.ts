@@ -56,6 +56,12 @@ export function getTicketReferenceTags(tags: string[]): string[] {
 }
 
 export function getDecryptedValue(data: string) {
-  var decrypted = CryptoJS.AES.decrypt(data, `${process.env.SECRET_KEY}`);
-  return decrypted.toString(CryptoJS.enc.Utf8);
+  let value:string = ''; 
+  if(process.env.SECRET_KEY) { 
+    var decrypted = CryptoJS.AES.decrypt(data, `${process.env.SECRET_KEY}`);
+    value = decrypted.toString(CryptoJS.enc.Utf8);
+  } else {
+    value = data;
+  }
+  return value;
 }
