@@ -12,7 +12,7 @@ schedules:
     branches:
       include: 
       - feature/rsp-830-playwright-pipeline-schedule-trigger
-    always: false
+    always: true
 
 pool:
   vmImage: "Ubuntu-latest"
