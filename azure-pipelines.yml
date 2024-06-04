@@ -7,7 +7,7 @@ trigger:
   - feature/rsp-830-playwright-pipeline-schedule-trigger
 
 schedules:
-  - cron: '20 13 * * Mon-Fri'
+  - cron: '46 13 * * Mon-Fri'
     displayName: 'Nightly run - full suite'
     branches:
       include: 
@@ -29,7 +29,7 @@ parameters:
   - name: devops_library_branch
     displayName: DevOps Library Branch
     type: string
-    default: main
+    default: feature/rsp-830-playwright-pipeline-test
   - name: tests_run_timeout
     type: number
     displayName: Playwright Tests Run Timeout
