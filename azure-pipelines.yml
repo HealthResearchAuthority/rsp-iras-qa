@@ -7,11 +7,12 @@ trigger:
   - main
 
 schedules:
-  - cron: '0 0 * * Mon-Fri'
+  - cron: '47 12 * * Mon-Fri'
     displayName: 'Nightly run - full suite'
     branches:
       include: 
       - main
+    always: true
 
 pool:
   vmImage: "Ubuntu-latest"
