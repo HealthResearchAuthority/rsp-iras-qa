@@ -7,7 +7,7 @@ trigger:
   - feature/rsp-830-playwright-pipeline-schedule-trigger
 
 schedules:
-  - cron: '06 13 * * Mon-Fri'
+  - cron: '20 13 * * Mon-Fri'
     displayName: 'Nightly run - full suite'
     branches:
       include: 
