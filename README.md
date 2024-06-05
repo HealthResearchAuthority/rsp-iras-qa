@@ -59,6 +59,14 @@ So when I run the command `npx bddgen --tags "@authSetup or exampleTestTag" && n
   
 **To run test in debug mode:** `npx bddgen && npx playwright test --debug`
 
+**To run test in local DevBox:**
+All the test executions performed in DevBox should make sure that the sensitive test data are encrypted and not committed to the code repository. Below steps to encrypt and use the sensitive data:
+- An executable encrypt utility is created under src/utils/Encrypt.js
+- Run this utility to generate an encrypted value. Replace '<add secret key here>' with any key of your choice (Should follow the security standards of a password).
+- To run the utility, right click on the Encrypt.js file and click on 'Open in Integrated Terminal' option. Run this file using the script: 'node .\Encrypt.js'.
+- The result of the execution will create an encrypted value, which should be stored in .env file (this file is never pushed to the code repository) and test execution can use the encrypted value fron the .env file wherever needed.
+- When running test case in local DevBox use following code in Git Bash Terminal: `SECRET_KEY='<add secret key here>' npm run test`
+
 *NOTE:* Runs test in the browser with Playwright Inpector, allowing you to step through the test visually, `--debug` can also be appended to the tag specific command  
 &nbsp;  
 
