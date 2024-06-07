@@ -1,8 +1,9 @@
 const CryptoJS = require("crypto-js");
 
 // Run this utility to generate an encrypted value. Replace '<Add secret key here>' with the secret key.
+// Replace "sensitive-data" with user password
 
-var encrypted = CryptoJS.AES.encrypt("password", "<Add secret key here>");
+var encrypted = CryptoJS.AES.encrypt("sensitive-data", "<Add secret key here>");
 var decrypted = CryptoJS.AES.decrypt(encrypted, "<Add secret key here>");
 
 console.log("Encrypted Text: " + encrypted.toString());
