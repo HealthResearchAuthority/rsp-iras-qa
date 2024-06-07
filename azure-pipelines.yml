@@ -4,14 +4,14 @@
 name: Run Playwright Tests
 
 trigger:
-  - feature/rsp-830-playwright-pipeline-schedule-trigger
+  - main
 
 schedules:
-  - cron: '35 09 * * Mon-Fri'
+  - cron: '0 0 * * Mon-Fri'
     displayName: 'Nightly run - full suite'
     branches:
       include: 
-      - feature/rsp-830-playwright-pipeline-schedule-trigger
+      - main
     always: true
 
 pool:
