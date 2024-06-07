@@ -69,7 +69,7 @@ All the test executions performed in DevBox should make sure that the sensitive 
 - To run the utility, right click on the Encrypt.js file and click on 'Open in Integrated Terminal' option. Run this file using the script: 'node .\Encrypt.js'.
 - The result of the execution will create an encrypted value, which should be stored in .env file (this file is never pushed to the code repository) and test execution can use the encrypted value from the .env file wherever needed.
 - Copy and paste the generated encrypted value into the relevant user password variable in the .env file.
-- Once encrypted value is generated revert the code in the Encrypt.js file immediately to ensure nor secret values are stored within the local code.
+- Once encrypted value is generated revert the code in the Encrypt.js file immediately to ensure no secret values are stored within the local code.
 - When running test case in local DevBox use following code in Git Bash Terminal: `SECRET_KEY='<add secret key here>' npm run test`
 
 ## Test reports
