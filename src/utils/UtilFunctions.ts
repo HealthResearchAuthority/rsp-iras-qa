@@ -1,5 +1,5 @@
 import { DataTable } from '@cucumber/cucumber';
-import CryptoJS from "crypto-js";
+import {AES, enc} from "crypto-js";
 
 export function getAuthState(user: string): string {
   let authState: string
@@ -58,8 +58,8 @@ export function getTicketReferenceTags(tags: string[]): string[] {
 export function getDecryptedValue(data: string) {
   let value:string = ''; 
   if(process.env.SECRET_KEY) { 
-    var decrypted = CryptoJS.AES.decrypt(data, `${process.env.SECRET_KEY}`);
-    value = decrypted.toString(CryptoJS.enc.Utf8);
+    var decrypted = AES.decrypt(data, `${process.env.SECRET_KEY}`);
+    value = decrypted.toString(enc.Utf8);
   } else {
     value = data;
   }
