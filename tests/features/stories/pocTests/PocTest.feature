@@ -4,7 +4,7 @@ Feature: This is a Testing Feature for POC Purposes
     Background:
         Given I have navigated to the 'Tasks_Page'
 
-    @RSP-544 @SystemTest
+    @RSP-544 @pocTaskscenario
     Scenario Outline: Expected Tasks Appear for the POC User With Correct Data
         When I view the tasks table
         Then I see all projects that are assigned to the '<Project_Details>'
