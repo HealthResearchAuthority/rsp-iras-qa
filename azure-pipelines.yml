@@ -7,7 +7,7 @@ trigger:
   - RSP-1020-AutomationTagsConfig
 
 schedules:
-  - cron: '32 14 * * Mon-Fri'
+  - cron: '38 14 * * Mon-Fri'
     displayName: 'Nightly run - full suite'
     branches:
       include: 
