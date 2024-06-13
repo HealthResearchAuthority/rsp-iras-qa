@@ -4,10 +4,10 @@
 name: Run Playwright Tests
 
 trigger:
-  - main
+  - RSP-1020-AutomationTagsConfig
 
 schedules:
-  - cron: '15 13 * * Mon-Fri'
+  - cron: '20 13 * * Mon-Fri'
     displayName: 'Nightly run - full suite'
     branches:
       include: 
