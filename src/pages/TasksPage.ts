@@ -35,7 +35,7 @@ export default class TasksPage {
   }
 
   async getUserTaskValues(): Promise<string[]> {
-    let actualRowValues: string[] = [];
+    const actualRowValues: string[] = [];
     for (const cell of await this.taskTableTopBodyCell.all()) {
       actualRowValues.push(confirmStringNotNull(await cell.textContent()));
     }

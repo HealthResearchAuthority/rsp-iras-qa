@@ -7,17 +7,17 @@ const encryption_key = "<Add secret key here which is 32 character long>";
 const textToEncrypt = "<sensitive-data>";
 
 function encrypt(text){
-  const cipher = crypto.createCipheriv('aes-256-cbc',Buffer.from(encryption_key), Buffer.alloc(16))
-  var crypted = cipher.update(text, 'utf8', 'hex')
-  crypted += cipher.final('hex')
-  return crypted
+  const cipher = crypto.createCipheriv('aes-256-cbc',Buffer.from(encryption_key), Buffer.alloc(16));
+  var crypted = cipher.update(text, 'utf8', 'hex');
+  crypted += cipher.final('hex');
+  return crypted;
 }
 
 function decrypt(text){
-  const decipher = crypto.createDecipheriv('aes-256-cbc',Buffer.from(encryption_key), Buffer.alloc(16))
-  let dec = decipher.update(text, 'hex', 'utf8')
-  dec += decipher.final('utf8')
-  return dec
+  const decipher = crypto.createDecipheriv('aes-256-cbc',Buffer.from(encryption_key), Buffer.alloc(16));
+  let dec = decipher.update(text, 'hex', 'utf8');
+  dec += decipher.final('utf8');
+  return dec;
 }
  
 var encrypted = encrypt(textToEncrypt);
