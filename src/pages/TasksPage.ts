@@ -1,6 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
 import { confirmStringNotNull } from '../utils/UtilFunctions';
-import * as tasksPageTestData from "../resources/test_data/iras/tasks_page_data.json";
+import * as tasksPageTestData from '../resources/test_data/iras/tasks_page_data.json';
 
 //Declare Page Objects
 export default class TasksPage {
