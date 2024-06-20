@@ -4,14 +4,14 @@
 name: Run Playwright Tests
 
 trigger:
-  - RSP-1020-AutomationTagsConfig
+  - main
 
 schedules:
-  - cron: '20 12 * * Mon-Fri'
+  - cron: '0 0 * * Mon-Fri'
     displayName: 'Nightly run - full suite'
     branches:
       include: 
-      - RSP-1020-AutomationTagsConfig
+      - main
     always: true
 
 pool:
@@ -29,7 +29,7 @@ parameters:
   - name: devops_library_branch
     displayName: DevOps Library Branch
     type: string
-    default: feature/RSP-1020-AutomationTagsConfig
+    default: main
   - name: tests_run_timeout
     type: number
     displayName: Playwright Tests Run Timeout
