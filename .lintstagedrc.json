@@ -1,6 +1,6 @@
 {
     "*.{ts,js,mjs}": [
         "prettier --write src/utils/Encrypt.mjs",
-        "eslint --fix"
+        "eslint --cache --fix"
     ]
 }
