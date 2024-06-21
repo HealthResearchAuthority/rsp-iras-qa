@@ -10,7 +10,7 @@
     "lint-fix": "npx eslint . --fix",
     "format": "npx prettier --write src/utils/Encrypt.mjs",
     "validate": "npm-run-all --parallel format lint",
-    "precommit": "npm run validate"
+    "precommit": "npm run lint"
   },
   "keywords": [],
   "author": "",
