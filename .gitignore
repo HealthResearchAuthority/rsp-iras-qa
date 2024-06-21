@@ -5,3 +5,4 @@ test-reports
 test-results
 generated-feature-files
 .env
+.eslintcache
