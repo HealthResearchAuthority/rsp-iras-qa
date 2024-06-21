@@ -54,3 +54,5 @@ stages:
           browser: ${{ parameters.browser }}
           upload_to_sharepoint: true
           tests_run_timeout: ${{ parameters.tests_run_timeout }}
+          sonar_project_key: FutureIRAS_rsp-iras-qa
+          sonar_project_name: rsp-iras-qa
