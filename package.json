@@ -8,9 +8,8 @@
     "test-failed": "npx bddgen && npx playwright test --last-failed",
     "lint": "npx eslint .",
     "lint-fix": "npx eslint . --fix",
-    "format": "npx prettier --write src/utils/Encrypt.mjs",
+    "format": "npx prettier --write",
     "validate": "npm-run-all --parallel format lint",
-    "precommit": "npm run lint",
     "prepare": "husky"
   },
   "keywords": [],
