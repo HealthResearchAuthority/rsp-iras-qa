@@ -1,6 +1,6 @@
 {
     "*.{ts,js,mjs}": [
-        "eslint",
-        "prettier --write src/utils/Encrypt.mjs"
+        "prettier --write src/utils/Encrypt.mjs",
+        "eslint"
     ]
 }
