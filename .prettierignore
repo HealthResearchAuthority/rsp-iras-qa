@@ -1,0 +1,8 @@
+node_modules
+
+auth-storage-states
+test-reports
+test-results
+generated-feature-files
+.env
+ReadMe.md
