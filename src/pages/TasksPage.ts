@@ -17,7 +17,9 @@ export default class TasksPage {
     this.tasksPageTestData = tasksPageTestData;
 
     //Locators
-    this.pageTitle = page.locator('div[class="content-item content-label item-1 flex flex-row dataLabelWrite heading_1_dataLabelWrite"]');
+    this.pageTitle = page.locator(
+      'div[class="content-item content-label item-1 flex flex-row dataLabelWrite heading_1_dataLabelWrite"]'
+    );
     this.taskTable = page.locator('div[id="PEGA_GRID0"]');
     this.taskTableTopBodyRow = page.locator('tr[pl_index="1"]');
     this.taskTableTopBodyCell = this.taskTableTopBodyRow.locator('td');

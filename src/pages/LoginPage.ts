@@ -1,5 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
-import * as loginPageTestData from "../resources/test_data/common/login_page_data.json";
+import * as loginPageTestData from '../resources/test_data/common/login_page_data.json';
 import { getDecryptedValue } from '../utils/UtilFunctions';
 
 //Declare Page Objects

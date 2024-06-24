@@ -11,8 +11,10 @@ export default class CommonItemsPage {
     this.page = page;
 
     //Locators
-    this.bannerMyTasks = this.page.locator('span[class="menu-item-title"]').getByText('My tasks', {exact: true});
-    this.bannerMyPersonalTasks = this.page.locator('span[class="menu-item-title"]').getByText('My personal tasks', {exact: true});
+    this.bannerMyTasks = this.page.locator('span[class="menu-item-title"]').getByText('My tasks', { exact: true });
+    this.bannerMyPersonalTasks = this.page
+      .locator('span[class="menu-item-title"]')
+      .getByText('My personal tasks', { exact: true });
   }
 
   //Page Methods

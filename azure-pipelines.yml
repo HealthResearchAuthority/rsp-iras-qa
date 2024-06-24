@@ -10,12 +10,12 @@ schedules:
   - cron: '0 0 * * Mon-Fri'
     displayName: 'Nightly run - full suite'
     branches:
-      include: 
-      - main
+      include:
+        - main
     always: true
 
 pool:
-  vmImage: "Ubuntu-latest"
+  vmImage: 'Ubuntu-latest'
 
 parameters:
   - name: browser
@@ -34,7 +34,7 @@ parameters:
     type: number
     displayName: Playwright Tests Run Timeout
     default: 10
-    
+
 variables:
   - group: 'Test Automation'
 

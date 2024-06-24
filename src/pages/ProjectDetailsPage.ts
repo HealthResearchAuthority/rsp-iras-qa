@@ -1,5 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
-import * as projectDetailsPageTestData from "../resources/test_data/iras/project_details_page_data.json";
+import * as projectDetailsPageTestData from '../resources/test_data/iras/project_details_page_data.json';
 
 //Declare Page Objects
 export default class ProjectDetailsPage {
@@ -13,7 +13,7 @@ export default class ProjectDetailsPage {
     this.projectDetailsPageTestData = projectDetailsPageTestData;
 
     //Locators
-    this.contentHeader = page.locator('h2[class="header-title"]', {hasText: 'Project Contents'});
+    this.contentHeader = page.locator('h2[class="header-title"]', { hasText: 'Project Contents' });
   }
 
   //Page Methods

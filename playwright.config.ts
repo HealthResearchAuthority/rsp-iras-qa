@@ -16,7 +16,7 @@ const config: PlaywrightTestConfig = {
   reporter: [
     ['list', { printSteps: true }],
     ['html', { outputFolder: './test-reports/playwright' }],
-    cucumberReporter('html', { outputFile: './test-reports/cucumber/report.html' })
+    cucumberReporter('html', { outputFile: './test-reports/cucumber/report.html' }),
   ],
   globalSetup: 'src/hooks/GlobalSetup.ts',
   globalTeardown: 'src/hooks/GlobalTeardown.ts',
