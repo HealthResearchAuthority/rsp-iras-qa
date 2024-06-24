@@ -1,5 +1,5 @@
 import { DataTable } from '@cucumber/cucumber';
-import crypto from "crypto";
+import crypto from 'crypto';
 
 export function getAuthState(user: string): string {
   let authState: string;
@@ -55,10 +55,10 @@ export function getTicketReferenceTags(tags: string[]): string[] {
   return tickets;
 }
 
-export function getDecryptedValue(data: string){
-  let value:string = ''; 
-  if(process.env.SECRET_KEY) { 
-    const decipher = crypto.createDecipheriv('aes-256-cbc',Buffer.from(`${process.env.SECRET_KEY}`), Buffer.alloc(16));
+export function getDecryptedValue(data: string) {
+  let value: string = '';
+  if (process.env.SECRET_KEY) {
+    const decipher = crypto.createDecipheriv('aes-256-cbc', Buffer.from(`${process.env.SECRET_KEY}`), Buffer.alloc(16));
     let decrypted = decipher.update(data, 'hex', 'utf8');
     decrypted = decrypted + decipher.final('utf8');
     value = decrypted;
