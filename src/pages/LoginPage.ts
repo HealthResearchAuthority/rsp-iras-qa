@@ -34,7 +34,7 @@ export default class LoginPage {
     expect(this.page.url()).toContain(partialLinkToValidate);
   }
 
-  //passwords to be set in AzureDevops Pipeline, hardcode when running locally
+  //passwords to be set in AzureDevops Pipeline, add encrypted values to .env when running locally
   async loginWithUserCreds(dataset: string) {
     const username = this.loginPageTestData[dataset].username;
     const password = getDecryptedValue(eval(loginPageTestData[dataset].password));
