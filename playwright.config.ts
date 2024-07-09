@@ -26,7 +26,7 @@ const config: PlaywrightTestConfig = {
   reporter: [
     ['list', { printSteps: true }],
     ['html', { outputFolder: './test-reports/playwright' }],
-    cucumberReporter('html', { outputFile: './test-reports/cucumber/report.html' })
+    cucumberReporter('html', { outputFile: './test-reports/cucumber/report.html' }),
   ],
   globalSetup: 'src/hooks/GlobalSetup.ts',
   globalTeardown: 'src/hooks/GlobalTeardown.ts',
@@ -37,7 +37,7 @@ const config: PlaywrightTestConfig = {
     ...browser,
     trace: 'on',
     baseURL: `${process.env.BASE_URL}`,
-    screenshot: 'only-on-failure'
+    screenshot: 'only-on-failure',
   },
   projects: [
     {
@@ -73,6 +73,6 @@ const config: PlaywrightTestConfig = {
       },
     },
   ],
-}
+};
 
 export default config;

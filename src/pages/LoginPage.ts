@@ -1,5 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
-import * as loginPageTestData from "../resources/test_data/common/login_page_data.json";
+import * as loginPageTestData from '../resources/test_data/common/login_page_data.json';
+import { getDecryptedValue } from '../utils/UtilFunctions';
 
 //Declare Page Objects
 export default class LoginPage {
@@ -36,7 +37,7 @@ export default class LoginPage {
   //passwords to be set in AzureDevops Pipeline, hardcode when running locally
   async loginWithUserCreds(dataset: string) {
     const username = this.loginPageTestData[dataset].username;
-    const password = eval(this.loginPageTestData[dataset].password);
+    const password = getDecryptedValue(eval(loginPageTestData[dataset].password));
     await this.usernameInput.fill(username);
     await this.btnNext.click();
     await this.passwordInput.fill(password);

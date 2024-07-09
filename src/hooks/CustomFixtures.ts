@@ -11,7 +11,7 @@ type CustomFixtures = {
   loginPage: LoginPage;
   tasksPage: TasksPage;
   projectDetailsPage: ProjectDetailsPage;
-}
+};
 
 export const test = base.extend<CustomFixtures>({
   commonItemsPage: async ({ page }, use) => {
@@ -45,6 +45,6 @@ export const test = base.extend<CustomFixtures>({
       $bddWorld.testInfo.attach('Ticket Reference:', { body: tickets.toString().replace(/,/g, '') });
     }
     await use();
-  }
+  },
 });
 export { expect } from '@playwright/test';

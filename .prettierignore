@@ -5,4 +5,5 @@ test-reports
 test-results
 generated-feature-files
 .env
-.eslintcache
+ReadMe.md
+docs
