@@ -25,8 +25,8 @@ if (`${process.env.BROWSER}` == 'safari') {
 const config: PlaywrightTestConfig = {
   reporter: [
     ['list', { printSteps: true }],
-    ['html', { outputFolder: './test-reports/playwright' }],
-    cucumberReporter('html', { outputFile: './test-reports/cucumber/report.html' }),
+    ['html', { outputFolder: './test-reports/playwright', open: 'never' }],
+    cucumberReporter('json', { outputFile: './test-reports/cucumber/json/test_report.json' }),
   ],
   globalSetup: 'src/hooks/GlobalSetup.ts',
   globalTeardown: 'src/hooks/GlobalTeardown.ts',
