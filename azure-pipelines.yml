@@ -4,14 +4,14 @@
 name: Run Playwright Tests
 
 trigger:
-  - main
+  - feature/rsp-1215_playwrigh_test_report_to_display_device_browser_name
 
 schedules:
-  - cron: '20 10 * * Mon-Fri'
+  - cron: '21 10 * * Mon-Fri'
     displayName: 'Nightly run - full suite'
     branches:
       include:
-        - main
+        - feature/rsp-1215_playwrigh_test_report_to_display_device_browser_name
     always: true
 
 pool:
@@ -31,7 +31,7 @@ parameters:
   - name: devops_library_branch
     displayName: DevOps Library Branch
     type: string
-    default: main
+    default: feature/rsp-1215_playwrigh_test_report_to_display_device_browser_name
   - name: tests_run_timeout
     type: number
     displayName: Playwright Tests Run Timeout
