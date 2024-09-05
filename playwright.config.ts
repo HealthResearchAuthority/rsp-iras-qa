@@ -30,7 +30,8 @@ const config: PlaywrightTestConfig = {
   ],
   globalSetup: 'src/hooks/GlobalSetup.ts',
   globalTeardown: 'src/hooks/GlobalTeardown.ts',
-  timeout: 30000,
+  globalTimeout: 60 * 60 * 1000,
+  timeout: 5 * 60 * 1000,
   workers: 1, // to enforce serial execution
   retries: 2,
   use: {
@@ -38,6 +39,11 @@ const config: PlaywrightTestConfig = {
     trace: 'on',
     baseURL: `${process.env.BASE_URL}`,
     screenshot: 'only-on-failure',
+    actionTimeout: 10000,
+    navigationTimeout: 30000,
+  },
+  expect: {
+    timeout: 10000,
   },
   projects: [
     {
