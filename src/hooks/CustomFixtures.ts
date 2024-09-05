@@ -1,4 +1,5 @@
 import { test as base } from 'playwright-bdd';
+import AxeBuilder from '@axe-core/playwright';
 import { getAuthState, getTicketReferenceTags } from '../utils/UtilFunctions';
 
 import CommonItemsPage from '../pages/CommonItemsPage';
@@ -11,6 +12,7 @@ type CustomFixtures = {
   loginPage: LoginPage;
   tasksPage: TasksPage;
   projectDetailsPage: ProjectDetailsPage;
+  makeAxeBuilder: () => AxeBuilder;
 };
 
 export const test = base.extend<CustomFixtures>({
@@ -28,6 +30,11 @@ export const test = base.extend<CustomFixtures>({
 
   projectDetailsPage: async ({ page }, use) => {
     await use(new ProjectDetailsPage(page));
+  },
+
+  makeAxeBuilder: async ({ page }, use) => {
+    const makeAxeBuilder = () => new AxeBuilder({ page });
+    await use(makeAxeBuilder);
   },
 
   //Set the Storage State based on User Tag from Feature File

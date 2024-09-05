@@ -1,5 +1,6 @@
 import { DataTable } from '@cucumber/cucumber';
 import crypto from 'crypto';
+import { readFile } from 'fs/promises';
 
 export function getAuthState(user: string): string {
   let authState: string;
@@ -66,4 +67,14 @@ export function getDecryptedValue(data: string) {
     value = data;
   }
   return value;
+}
+
+export async function readAxeResultsContents(path: string): Promise<string> {
+  let contents: string;
+  try {
+    contents = await readFile(`${path}`, { encoding: 'utf8' });
+  } catch (error) {
+    throw new Error('Note that running the Axe Tool is a prerequisite for this step\n' + error.message);
+  }
+  return contents;
 }
