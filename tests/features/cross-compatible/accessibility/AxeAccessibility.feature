@@ -1,4 +1,4 @@
-@axeAccessibility
+@axeAccessibility @Smoke
 Feature: Run Axe Accessibilty Test Tool Against App Pages
 
     @axeAccessibilityTasks @pocUser
