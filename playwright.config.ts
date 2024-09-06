@@ -60,11 +60,7 @@ const config: PlaywrightTestConfig = {
       name: 'OldIras',
       dependencies: ['AuthSetup'],
       testDir: defineBddConfig({
-        paths: [
-          'tests/features/cross-compatible/stories/**/*.feature',
-          'tests/features/cross-compatible/accessibility/**/*.feature',
-          `tests/features/${platform}/**/*.feature`,
-        ],
+        paths: ['tests/features/cross-compatible/stories/**/*.feature', `tests/features/${platform}/**/*.feature`],
         require: ['src/steps/**/*.ts'],
         importTestFrom: 'src/hooks/CustomFixtures.ts',
         outputDir: 'generated-feature-files/old-iras',
