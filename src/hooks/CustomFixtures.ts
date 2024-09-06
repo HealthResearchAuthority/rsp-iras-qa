@@ -1,7 +1,6 @@
 import { test as base } from 'playwright-bdd';
 import AxeBuilder from '@axe-core/playwright';
 import { getAuthState, getTicketReferenceTags } from '../utils/UtilFunctions';
-
 import CommonItemsPage from '../pages/CommonItemsPage';
 import LoginPage from '../pages/LoginPage';
 import TasksPage from '../pages/TasksPage';

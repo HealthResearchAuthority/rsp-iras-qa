@@ -9,7 +9,7 @@ When('I Scan the page with the Axe Accessibilty Tool', async ({ makeAxeBuilder, 
   const axeScanner = makeAxeBuilder();
   const axeScanResults = await axeScanner
     .options({ reporter: 'v2' })
-    .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'])
+    .withTags(['wcag2a', 'wcag2aa', 'wcag2aaa', 'wcag21a', 'wcag21aa', 'wcag22aa'])
     .analyze();
 
   await $bddWorld.testInfo.attach('accessibility-scan-results', {
