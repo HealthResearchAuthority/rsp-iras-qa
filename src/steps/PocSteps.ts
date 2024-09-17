@@ -11,7 +11,7 @@ Given('I view the tasks table', async ({ tasksPage }) => {
 Then('I see all projects that are assigned to the {string}', async ({ tasksPage }, dataset: string) => {
   const expectedValues = getValuesFromTestDataset(tasksPage.tasksPageTestData, dataset);
   const actualValues = await tasksPage.getUserTaskValues();
-  expect(actualValues).not.toMatchObject(expectedValues);
+  expect(actualValues).toMatchObject(expectedValues);
 });
 
 Then('I click anywhere on the {string} project row', async ({ tasksPage }, project: string) => {
