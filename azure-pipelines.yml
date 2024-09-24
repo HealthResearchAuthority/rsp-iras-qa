@@ -36,6 +36,9 @@ parameters:
     type: number
     displayName: Playwright Tests Run Timeout
     default: 10
+  - name: run_sonarcloud_analysis
+    displayName: Run SonarCloud Analysis
+    default: true
 
 variables:
   - group: 'Test Automation'
@@ -58,3 +61,4 @@ stages:
           tests_run_timeout: ${{ parameters.tests_run_timeout }}
           sonar_project_key: FutureIRAS_rsp-iras-qa
           sonar_project_name: rsp-iras-qa
+          run_sonarcloud_analysis: ${{ parameters.run_sonarcloud_analysis }}
