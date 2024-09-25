@@ -1,5 +1,5 @@
 import { createBdd } from 'playwright-bdd';
-import { test } from '../../hooks/CustomFixtures';
+import { expect, test } from '../../hooks/CustomFixtures';
 
 const { Given, When, Then } = createBdd(test);
 
@@ -34,4 +34,20 @@ When('I do something {string}', async ({ tasksPage }, testType: string) => {
 
 Then('I see something {string}', async ({ tasksPage }, testType: string) => {
   tasksPage.samplePageAction(testType);
+});
+
+Then('the show all section accordion is {string}', async ({ commonItemsPage }, isExpanded: string) => {
+  const accordionExpanded = await commonItemsPage.isAccordionExpanded(
+    commonItemsPage.showAllSectionsAccordion,
+    commonItemsPage.showAllSectionsIFrame
+  );
+  if (isExpanded === 'open') {
+    expect(accordionExpanded).toBe('true');
+  } else if (isExpanded === 'closed') {
+    expect(accordionExpanded).toBe('false');
+  }
+});
+
+Then('I click the show all section accordion', async ({ commonItemsPage }) => {
+  commonItemsPage.toggleAccordion(commonItemsPage.showAllSectionsAccordion, commonItemsPage.showAllSectionsIFrame);
 });
