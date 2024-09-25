@@ -101,6 +101,7 @@ We can also trigger the job manually by:
 - Select the source branch, set to `main` by default
 - Select the browser to use, set to ‘chrome’ by default 
 - Select the Timeout value in minutes
+- Set the Sonar Cloud Analysis value to true or false, set to true by default
 - Click Run
 
 ![runJob](src/resources\images\runPipeline.png)  
@@ -143,6 +144,37 @@ Click the html document in either to download and view the relevant report.
 
 This artifact will also be published to the teams SharePoint space [here](https://healthresearchauthority.sharepoint.com/:f:/r/sites/Future-IRAS/Testing/Test%20Reports?csf=1&web=1&e=8jF7Ic)  
 &nbsp;  
+
+# Pull Request Process and Quality Checks
+
+## Raising a Pull Request (PR)
+To merge any new test code into the main branch of the repository,  
+you must first raise a Pull Request against your source branch that contains your changes.  
+
+To do this click the **Create a pull request** button within your branch page on Azure Devops
+
+![pr button](src/resources\images\prButton.png)  
+
+This will present you with a Pull Request Template form which must be completed before the PR can be raised.  
+The form provides information regarding the PR to the reviewer such as:
+- A summary of the intended outcomes of your work
+- The relevant JIRA ticket
+- A summary of the work that was completed
+
+It also provides a checklist of items that will help you to assess the readiness of your branch for PR review.
+
+![pr form](src/resources\images\prForm.png)  
+
+## Quality Checks 
+
+Once the form has been completed and you have submitted the PR the Pipeline will trigger a Pipeline run (continue)
+and a series of checks will occur.  
+The checks include:
+- An Automated Pipeline 
+
+Validate pull requests that target the main branch to ensure they meet quality standards before merging.
+
+This repo has an associated Azure DevOps Pipeline job, which can run our tests remotely in a CI/CD environment
 
 # Test Structure
 
