@@ -30,7 +30,7 @@ export default class CommonItemsPage {
     }
   }
 
-  async enterDate(dataset: string, date: string, dateLocator: string, iframe?: FrameLocator) {
+  async enterDate(date: string, dateLocator: string, iframe?: FrameLocator) {
     const dateSplit = date.split('/');
     const day = dateSplit[0];
     const month = dateSplit[1];
@@ -46,31 +46,21 @@ export default class CommonItemsPage {
     }
   }
 
-  async expandAccordion(accordion: Locator, iframe?: FrameLocator) {
+  async isAccordionExpanded(accordion: Locator, iframe?: FrameLocator): Promise<string | null> {
+    let isExpanded: string | null;
     if (iframe) {
-      const isExpanded = await iframe.locator(accordion).getAttribute('aria-expanded');
-      if (isExpanded == 'false') {
-        await iframe.locator(accordion).click();
-      }
+      isExpanded = await iframe.locator(accordion).getAttribute('aria-expanded');
     } else {
-      const isExpanded = await accordion.getAttribute('aria-expanded');
-      if (isExpanded == 'false') {
-        await accordion.click();
-      }
+      isExpanded = await accordion.getAttribute('aria-expanded');
     }
+    return isExpanded;
   }
 
-  async collapseAccordion(accordion: Locator, iframe?: FrameLocator) {
+  async toggleAccordion(accordion: Locator, iframe?: FrameLocator) {
     if (iframe) {
-      const isExpanded = await iframe.locator(accordion).getAttribute('aria-expanded');
-      if (isExpanded == 'true') {
-        await iframe.locator(accordion).click();
-      }
+      await iframe.locator(accordion).click();
     } else {
-      const isExpanded = await accordion.getAttribute('aria-expanded');
-      if (isExpanded == 'true') {
-        await accordion.click();
-      }
+      await accordion.click();
     }
   }
 }
