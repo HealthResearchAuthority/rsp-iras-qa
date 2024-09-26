@@ -188,7 +188,7 @@ then Complete button will become available and you may complete the merge
 ![pr complete](src/resources\images\prComplete.png)  
 &nbsp; 
 
-## Sonar Cloud
+## SonarCloud
 
 A Quality Gate called Automation Testing has been setup within our SonarCloud account, 
 and it has been assigned to cover the rsp-iras-qa repository.
