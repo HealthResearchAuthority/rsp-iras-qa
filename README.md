@@ -167,14 +167,26 @@ It also provides a checklist of items that will help you to assess the readiness
 
 ## Quality Checks 
 
-Once the form has been completed and you have submitted the PR the Pipeline will trigger a Pipeline run (continue)
-and a series of checks will occur.  
+Once the form has been completed and you have submitted the PR a series of checks will occur.  
+This is to validate all pull requests that target the main branch to ensure they meet quality standards before merging.  
 The checks include:
-- An Automated Pipeline 
+- An Automated Pipeline run in which all steps must execute Successfully
+- The Automated Regression Tests will run, these must all pass Successfully
+- A Sonar Cloud Analysis will run, passing it is Optional.
+- The PR must be approved by at least 1 other team member, upon their review
+- Any comments that have been left by either a team member or the Sonar Cloud analysis, must be marked as resolved.
+- There must be no merge conflicts
 
-Validate pull requests that target the main branch to ensure they meet quality standards before merging.
+![pr form](src/resources\images\prChecks.png)  
 
-This repo has an associated Azure DevOps Pipeline job, which can run our tests remotely in a CI/CD environment
+Once all the above checks have passed, or have been satisfied,  
+then Complete button will become available and you may complete the merge
+
+![pr form](src/resources\images\prComplete.png)  
+
+## Sonar Cloud
+
+Add here
 
 # Test Structure
 
