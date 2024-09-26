@@ -198,16 +198,16 @@ To access the Quality Gate, open [SonarCloud](https://sonarcloud.io/) and login
 **Speak to DevOps lead if necessary**  
 Select your profile options by clicking the icon in the top right of the screen
 
-![sonar project](src/resources\images\sonarProject.png) 
+![sonar project](src/resources\images\sonarProject.png =1000x200) 
 &nbsp; 
 
 On the subsequent screen select the **Quality Gates tab**  
 And then select the **Automation Testing** option from the list
 
-Here you can adjust the conditions that the code must meet in order to pass the quality gate.
+Here you can adjust the conditions that the code must meet in order to pass the quality gate.  
 You can also add or remove it from a repository within your project.
 
-![sonar quality gate](src/resources\images\sonarQualityGate.png) 
+![sonar quality gate](src/resources\images\sonarQualityGate.png =1200x700) 
 &nbsp; 
 
 When the Azure DevOps Pipeline job runs  
@@ -223,26 +223,26 @@ The results of the SonarCloud analysis can be viewed within the Extensions tab o
 
 By clicking the **See analysis details on SonarCloud** link you will be taken to the results page on SonarCloud for more detailed results.
 
-![quality gate results](src/resources\images\qualityGateResults.png) 
+![quality gate results](src/resources\images\qualityGateResults.png =1000x500) 
 &nbsp; 
 
 By clicking on the numbers within the various sections you can get a detailed view of the issues raised.  
 For example clicking the **7** within **New Issues** in the above screenshot would take you to the page below.
 
-![issues analysis](src/resources\images\issuesAnalysis.png) 
+![issues analysis](src/resources\images\issuesAnalysis.png =1000x500) 
 &nbsp; 
 
 Any issues raised are also automatically added as comments on the PR (set under the name Shahzad Hassan),  
 meaning that they will require some form of resolution before the PR can be merged into main branch.
 
-![pull request issue comments](src/resources\images\pullRequest_IssueComments.png) 
+![pull request issue comments](src/resources\images\pullRequest_IssueComments.png =700x600) 
 &nbsp; 
 
 It should be noted that the SonarCloud Analysis is an optional quality check.  
 Other than having to resolve the comments, passing the SonarCloud analysis is optional,  
 so it will not prevent merging if failures occur. 
 
-This is useful for productivity especially as a Test framework does not have the same requirements as application code.
+This is useful for productivity especially as a Test framework does not have the same requirements as application code.  
 However it is advised that the issues are addressed where possible.
 
 # Test Structure
