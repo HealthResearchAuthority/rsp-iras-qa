@@ -188,6 +188,9 @@ then Complete button will become available and you may complete the merge
 ![pr complete](src/resources\images\prComplete.png)  
 &nbsp; 
 
+**When completing a PR please select the option to delete your source branch**  
+**This is to avoid stale branches lingering in the repository and cluttering up the branch list**
+
 ## SonarCloud
 
 A Quality Gate called Automation Testing has been setup within our SonarCloud account, 
