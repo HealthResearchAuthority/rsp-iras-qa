@@ -6,6 +6,8 @@ export default class CommonItemsPage {
   readonly page: Page;
   readonly bannerMyTasks: Locator;
   readonly bannerMyPersonalTasks: Locator;
+  readonly showAllSectionsIFrame: FrameLocator;
+  readonly showAllSectionsAccordion: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -16,6 +18,8 @@ export default class CommonItemsPage {
     this.bannerMyPersonalTasks = this.page
       .locator('span[class="menu-item-title"]')
       .getByText('My personal tasks', { exact: true });
+    this.showAllSectionsAccordion = page.locator('//button[@class="govuk-accordion__show-all"]');
+    this.showAllSectionsIFrame = this.page.frameLocator('[title="Accordion example"]');
   }
 
   //Page Methods
@@ -61,6 +65,27 @@ export default class CommonItemsPage {
       await iframe.locator(accordion).click();
     } else {
       await accordion.click();
+    }
+  }
+
+  async selectCheckboxes(checkboxes: string, checkBoxLocator: string, iframe?: FrameLocator) {
+    const checkBoxSplit = checkboxes.split('|');
+    if (iframe) {
+      for (let i = 0; i < checkBoxSplit.length; i++) {
+        await iframe.locator(generateDynamicLocator(checkBoxLocator, checkBoxSplit[i])).check();
+      }
+    } else {
+      for (let i = 0; i < checkBoxSplit.length; i++) {
+        await this.page.locator(generateDynamicLocator(checkBoxLocator, checkBoxSplit[i])).check();
+      }
+    }
+  }
+
+  async selectRadio(radio: string, radioLocator: string, iframe?: FrameLocator) {
+    if (iframe) {
+      await iframe.locator(generateDynamicLocator(radioLocator, radio)).check();
+    } else {
+      await this.page.locator(generateDynamicLocator(radioLocator, radio)).check();
     }
   }
 }
