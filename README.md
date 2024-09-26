@@ -154,6 +154,7 @@ you must first raise a Pull Request against your source branch that contains you
 To do this click the **Create a pull request** button within your branch page on Azure Devops
 
 ![pr button](src/resources\images\prButton.png)  
+&nbsp; 
 
 This will present you with a Pull Request Template form which must be completed before the PR can be raised.  
 The form provides information regarding the PR to the reviewer such as:
@@ -163,7 +164,8 @@ The form provides information regarding the PR to the reviewer such as:
 
 It also provides a checklist of items that will help you to assess the readiness of your branch for PR review.
 
-![pr form](src/resources\images\prForm.png)  
+![pr form](src/resources\images\prForm.png =600x600) 
+&nbsp;  
 
 ## Quality Checks 
 
@@ -177,16 +179,71 @@ The checks include:
 - Any comments that have been left by either a team member or the Sonar Cloud analysis, must be marked as resolved.
 - There must be no merge conflicts
 
-![pr form](src/resources\images\prChecks.png)  
+![pr checks](src/resources\images\prChecks.png =800x500)  
+&nbsp; 
 
 Once all the above checks have passed, or have been satisfied,  
 then Complete button will become available and you may complete the merge
 
-![pr form](src/resources\images\prComplete.png)  
+![pr complete](src/resources\images\prComplete.png)  
+&nbsp; 
 
 ## Sonar Cloud
 
-Add here
+A Quality Gate called Automation Testing has been setup within our SonarCloud account, 
+and it has been assigned to cover the rsp-iras-qa repository.
+
+To access the Quality Gate, open [SonarCloud](https://sonarcloud.io/) and login  
+**Note that your HRA account will need to be added to the SonarCloud project and given correct permissions.**  
+**Speak to DevOps lead if necessary**  
+Select your profile options by clicking the icon in the top right of the screen
+
+![sonar project](src/resources\images\sonarProject.png) 
+&nbsp; 
+
+On the subsequent screen select the **Quality Gates tab**  
+And then select the **Automation Testing** option from the list
+
+Here you can adjust the conditions that the code must meet in order to pass the quality gate.
+You can also add or remove it from a repository within your project.
+
+![sonar quality gate](src/resources\images\sonarQualityGate.png) 
+&nbsp; 
+
+When the Azure DevOps Pipeline job runs  
+and the Sonar Cloud Analysis parameter is set to true (Automatic for PR's and Schedules).  
+
+Then SonarCloud will analyze the source code in our `rsp-iras-qa` repository,  
+against the conditons that have been set in the Automation Testing quality gate.
+
+The results of the SonarCloud analysis can be viewed within the Extensions tab of the pipeline summary page
+
+![sonar summary](src/resources\images\sonarSummary.png) 
+&nbsp; 
+
+By clicking the **See analysis details on SonarCloud** link you will be taken to the results page on SonarCloud for more detailed results.
+
+![quality gate results](src/resources\images\qualityGateResults.png) 
+&nbsp; 
+
+By clicking on the numbers within the various sections you can get a detailed view of the issues raised.  
+For example clicking the **7** within **New Issues** in the above screenshot would take you to the page below.
+
+![issues analysis](src/resources\images\issuesAnalysis.png) 
+&nbsp; 
+
+Any issues raised are also automatically added as comments on the PR (set under the name Shahzad Hassan),  
+meaning that they will require some form of resolution before the PR can be merged into main branch.
+
+![pull request issue comments](src/resources\images\pullRequest_IssueComments.png) 
+&nbsp; 
+
+It should be noted that the SonarCloud Analysis is an optional quality check.  
+Other than having to resolve the comments, passing the SonarCloud analysis is optional,  
+so it will not prevent merging if failures occur. 
+
+This is useful for productivity especially as a Test framework does not have the same requirements as application code.
+However it is advised that the issues are addressed where possible.
 
 # Test Structure
 
