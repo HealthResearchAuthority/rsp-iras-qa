@@ -69,14 +69,14 @@ export default class CommonItemsPage {
   }
 
   async selectCheckboxes(checkboxes: string, checkBoxLocator: string, iframe?: FrameLocator) {
-    const checkBoxSplit = checkboxes.split('|');
+    const checkBoxSplitArray = checkboxes.split('|');
     if (iframe) {
-      for (let i = 0; i < checkBoxSplit.length; i++) {
-        await iframe.locator(generateDynamicLocator(checkBoxLocator, checkBoxSplit[i])).check();
+      for (const checkbox of checkBoxSplitArray) {
+        await iframe.locator(generateDynamicLocator(checkBoxLocator, checkbox)).check();
       }
     } else {
-      for (let i = 0; i < checkBoxSplit.length; i++) {
-        await this.page.locator(generateDynamicLocator(checkBoxLocator, checkBoxSplit[i])).check();
+      for (const checkbox of checkBoxSplitArray) {
+        await this.page.locator(generateDynamicLocator(checkBoxLocator, checkbox)).check();
       }
     }
   }
