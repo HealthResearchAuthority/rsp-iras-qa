@@ -3,11 +3,15 @@ import { expect, test } from '../../hooks/CustomFixtures';
 
 const { Given, When, Then } = createBdd(test);
 
-Given('I have navigated to the {string}', async ({ tasksPage, loginPage }, page: string) => {
+Given('I have navigated to the {string}', async ({ tasksPage, loginPage, homePage }, page: string) => {
   switch (page) {
     case 'Login_Page':
       await tasksPage.goto();
       await loginPage.assertOnLoginPage(page);
+      break;
+    case 'Home_Page':
+      await homePage.goto();
+      await homePage.assertOnHomePage();
       break;
     case 'Tasks_Page':
       await tasksPage.goto();
@@ -18,10 +22,13 @@ Given('I have navigated to the {string}', async ({ tasksPage, loginPage }, page:
   }
 });
 
-When('I can see the {string}', async ({ tasksPage }, page: string) => {
+When('I can see the {string}', async ({ tasksPage, loginPage }, page: string) => {
   switch (page) {
     case 'Tasks_Page':
       await tasksPage.assertOnTasksPage();
+      break;
+    case 'Login_Page':
+      await loginPage.assertOnLoginPage(page);
       break;
     default:
       throw new Error(`${page} is not a valid option`);
@@ -50,4 +57,8 @@ Then('the show all section accordion is {string}', async ({ commonItemsPage }, i
 
 Then('I click the show all section accordion', async ({ commonItemsPage }) => {
   commonItemsPage.toggleAccordion(commonItemsPage.showAllSectionsAccordion, commonItemsPage.showAllSectionsIFrame);
+});
+
+Then('I click the {string} button', async ({ commonItemsPage }, buttonText: string) => {
+  await commonItemsPage.govUkButton.getByText(buttonText).click();
 });

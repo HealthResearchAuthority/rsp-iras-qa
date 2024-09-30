@@ -8,6 +8,7 @@ export default class CommonItemsPage {
   readonly bannerMyPersonalTasks: Locator;
   readonly showAllSectionsIFrame: FrameLocator;
   readonly showAllSectionsAccordion: Locator;
+  readonly govUkButton: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -20,6 +21,7 @@ export default class CommonItemsPage {
       .getByText('My personal tasks', { exact: true });
     this.showAllSectionsAccordion = page.locator('//button[@class="govuk-accordion__show-all"]');
     this.showAllSectionsIFrame = this.page.frameLocator('[title="Accordion example"]');
+    this.govUkButton = this.page.locator('class="govuk-button"');
   }
 
   //Page Methods
