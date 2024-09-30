@@ -68,7 +68,7 @@ const config: PlaywrightTestConfig = {
       testDir: defineBddConfig({
         paths: [
           'tests/features/cross-compatible/stories/**/*.feature',
-          // 'tests/features/cross-compatible/accessibility/**/*.feature', uncomment when running accessibility tests <remove this text>
+          // 'tests/features/cross-compatible/accessibility/**/*.feature', uncomment when running accessibility tests
           `tests/features/${platform}/**/*.feature`,
         ],
         require: ['src/steps/**/*.ts'],
