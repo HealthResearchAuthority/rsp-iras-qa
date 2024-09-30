@@ -96,7 +96,7 @@ export default class CommonItemsPage {
       } else {
         await expect(details).toHaveAttribute('open');
       }
-    } else {
+    } else if (isExpanded === 'closed') {
       if (iframe) {
         await expect(iframe.locator(details)).not.toHaveAttribute('open');
       } else {
