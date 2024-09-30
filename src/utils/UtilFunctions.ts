@@ -78,3 +78,9 @@ export async function readAxeResultsContents(path: string): Promise<string> {
   }
   return contents;
 }
+
+export function generateDynamicLocator(dynamicLocator: string, value: string) {
+  let newLocator: string = '';
+  newLocator = dynamicLocator.replace('%s', value);
+  return newLocator;
+}
