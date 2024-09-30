@@ -1,7 +1,7 @@
 @authSetup
 Feature: Authenticate Test Users once only, before test run
 
-  Scenario Outline: Login & Authenticate POC User
+  Scenario: Login & Authenticate POC User
     Given I have navigated to the 'Home_Page'
     And I click the 'SignIn' button
     Then I can see the 'Login_Page'
