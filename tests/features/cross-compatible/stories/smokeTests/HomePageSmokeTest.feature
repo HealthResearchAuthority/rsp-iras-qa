@@ -2,7 +2,6 @@
 Feature: As an Authenticated Admin User I have Access to Authorised Application Features
 
   Background:
-    As an Authenticated Admin User
     Given I have navigated to the 'Home_Page'
 
   @logoutSmoke
