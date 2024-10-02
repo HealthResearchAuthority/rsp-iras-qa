@@ -63,7 +63,7 @@ const config: PlaywrightTestConfig = {
       },
     },
     {
-      name: 'NewIras',
+      name: 'FutureIras',
       dependencies: ['AuthSetup'],
       testDir: defineBddConfig({
         paths: [
@@ -73,7 +73,7 @@ const config: PlaywrightTestConfig = {
         ],
         require: ['src/steps/**/*.ts'],
         importTestFrom: 'src/hooks/CustomFixtures.ts',
-        outputDir: 'generated-feature-files/new-iras',
+        outputDir: 'generated-feature-files/future-iras',
       }),
       use: {
         headless: true,
