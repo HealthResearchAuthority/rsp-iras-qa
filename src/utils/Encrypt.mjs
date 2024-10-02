@@ -3,8 +3,8 @@ import { createCipheriv, createDecipheriv } from 'crypto';
 // Run this utility to generate an encrypted value. Replace '<Add secret key here which is 32 character long>' with the secret key. This should be 32 characters long.
 // Replace "sensitive-data" with user password
 
-const encryption_key = 'PostmanHenry1989PostmanHenry1989';
-const textToEncrypt = 'quC4OdR8bri6IH6Do';
+const encryption_key = '<Add secret key here which is 32 character long>';
+const textToEncrypt = '<sensitive-data>';
 
 function encrypt(text) {
   const cipher = createCipheriv('aes-256-cbc', Buffer.from(encryption_key), Buffer.alloc(16));
