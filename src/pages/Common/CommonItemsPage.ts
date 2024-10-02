@@ -1,4 +1,4 @@
-import { FrameLocator, Locator, Page } from '@playwright/test';
+import { expect, FrameLocator, Locator, Page } from '@playwright/test';
 import { generateDynamicLocator } from '../../utils/UtilFunctions';
 import * as buttonTextData from '../../resources/test_data/common/button_text_data.json';
 
@@ -92,6 +92,28 @@ export default class CommonItemsPage {
     } else {
       await this.page.locator(generateDynamicLocator(radioLocator, radio)).check();
     }
+  }
+
+  async verifyDetailsExpanded(isExpanded: string, details: Locator, iframe?: FrameLocator) {
+    if (isExpanded === 'open') {
+      if (iframe) {
+        await expect(iframe.locator(details)).toHaveAttribute('open');
+      } else {
+        await expect(details).toHaveAttribute('open');
+      }
+    } else if (isExpanded === 'closed') {
+      if (iframe) {
+        await expect(iframe.locator(details)).not.toHaveAttribute('open');
+      } else {
+        await expect(details).not.toHaveAttribute('open');
+      }
+    }
+  }
+
+  async uploadFiles(filePaths: string, chooseFilesElement: Locator, uploadButtonElement: Locator) {
+    const filePathsSplitArray = filePaths.split('|');
+    await chooseFilesElement.setInputFiles(filePathsSplitArray);
+    await uploadButtonElement.click();
   }
 
   // To be Removed but Keeping as Placeholder for Mobile and Desktop Test Folders
