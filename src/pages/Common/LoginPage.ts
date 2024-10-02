@@ -1,6 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
-import * as loginPageTestData from '../resources/test_data/common/login_page_data.json';
-import { getDecryptedValue } from '../utils/UtilFunctions';
+import * as loginPageTestData from '../../resources/test_data/common/login_page_data.json';
+import { getDecryptedValue } from '../../utils/UtilFunctions';
 
 //Declare Page Objects
 export default class LoginPage {
@@ -26,9 +26,9 @@ export default class LoginPage {
   }
 
   //Page Methods
-  async assertOnLoginPage(pageMapValue: string) {
-    const headerToValidate = this.loginPageTestData[pageMapValue].header;
-    const partialLinkToValidate = this.loginPageTestData[pageMapValue].partial_link;
+  async assertOnLoginPage() {
+    const headerToValidate = this.loginPageTestData.Login_Page.header;
+    const partialLinkToValidate = this.loginPageTestData.Login_Page.partial_link;
     await expect(this.idgBanner).toBeVisible();
     await expect(this.idgBanner).toHaveText(headerToValidate);
     expect(this.page.url()).toContain(partialLinkToValidate);

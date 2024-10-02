@@ -24,8 +24,9 @@ export default class TasksPage {
   }
 
   async assertOnHomePage() {
-    expect(await this.page.title()).toBe(this.homePageTestData.Home_Page.title);
+    // expect(await this.page.title()).toBe(this.homePageTestData.Home_Page.title);
     await expect(this.pageHeadingCaption).toBeVisible();
     await expect(this.pageHeading).toBeVisible();
+    expect(await this.page.title()).toBe(this.homePageTestData.Home_Page.title);
   }
 }

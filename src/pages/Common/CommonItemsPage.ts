@@ -1,9 +1,11 @@
 import { FrameLocator, Locator, Page } from '@playwright/test';
-import { generateDynamicLocator } from '../utils/UtilFunctions';
+import { generateDynamicLocator } from '../../utils/UtilFunctions';
+import * as buttonTextData from '../../resources/test_data/common/button_text_data.json';
 
 //Declare Page Objects
 export default class CommonItemsPage {
   readonly page: Page;
+  readonly buttonTextData: typeof buttonTextData;
   readonly bannerMyTasks: Locator;
   readonly bannerMyPersonalTasks: Locator;
   readonly showAllSectionsIFrame: FrameLocator;
@@ -13,6 +15,7 @@ export default class CommonItemsPage {
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page;
+    this.buttonTextData = buttonTextData;
 
     //Locators
     this.bannerMyTasks = this.page.locator('span[class="menu-item-title"]').getByText('My tasks', { exact: true });
@@ -21,15 +24,15 @@ export default class CommonItemsPage {
       .getByText('My personal tasks', { exact: true });
     this.showAllSectionsAccordion = page.locator('//button[@class="govuk-accordion__show-all"]');
     this.showAllSectionsIFrame = this.page.frameLocator('[title="Accordion example"]');
-    this.govUkButton = this.page.locator('class="govuk-button"');
+    this.govUkButton = this.page.locator('.govuk-button');
   }
 
   //Page Methods
   async storeAuthState(user: string) {
-    const authContactManagerOnlyFile = 'auth-storage-states/contactManagerOnly.json';
+    const authAdminUserFile = 'auth-storage-states/adminUser.json';
     switch (user.toLowerCase()) {
-      case 'poc_user':
-        await this.page.context().storageState({ path: authContactManagerOnlyFile });
+      case 'admin_user':
+        await this.page.context().storageState({ path: authAdminUserFile });
         break;
       default:
         throw new Error(`${user} is not a valid option`);
@@ -89,5 +92,10 @@ export default class CommonItemsPage {
     } else {
       await this.page.locator(generateDynamicLocator(radioLocator, radio)).check();
     }
+  }
+
+  // To be Removed but Keeping as Placeholder for Mobile and Desktop Test Folders
+  async samplePageAction(testType: string) {
+    console.log(testType + ' test action');
   }
 }

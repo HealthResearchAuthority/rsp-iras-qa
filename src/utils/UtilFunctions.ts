@@ -5,8 +5,8 @@ import { readFile } from 'fs/promises';
 export function getAuthState(user: string): string {
   let authState: string;
   switch (user.toLowerCase()) {
-    case 'poc':
-      authState = 'auth-storage-states/contactManagerOnly.json';
+    case 'adminuser':
+      authState = 'auth-storage-states/adminUser.json';
       break;
     default:
       throw new Error(`${user} is not a valid option`);

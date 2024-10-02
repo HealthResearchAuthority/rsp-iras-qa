@@ -1,6 +1,6 @@
 import { createBdd } from 'playwright-bdd';
-import { test, expect } from '../hooks/CustomFixtures';
-import { readAxeResultsContents } from '../utils/UtilFunctions';
+import { test, expect } from '../../hooks/CustomFixtures';
+import { readAxeResultsContents } from '../../utils/UtilFunctions';
 import { writeFile } from 'fs/promises';
 
 const { When, Then } = createBdd(test);

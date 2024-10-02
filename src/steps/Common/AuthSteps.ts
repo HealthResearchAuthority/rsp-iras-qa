@@ -1,5 +1,5 @@
 import { createBdd } from 'playwright-bdd';
-import { test } from '../hooks/CustomFixtures';
+import { test } from '../../hooks/CustomFixtures';
 
 const { When, Then } = createBdd(test);
 

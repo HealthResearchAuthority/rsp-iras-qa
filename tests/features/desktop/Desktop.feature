@@ -1,8 +1,8 @@
-@pocUser @desktopFeature
+@adminUser @desktopFeature
 Feature: This is a Feature that Contains Desktop Specific Tests 
 
     Background:
-        Given I have navigated to the 'Tasks_Page'
+        Given I have navigated to the 'Home_Page'
 
     @desktopScenario
     Scenario: This is a Desktop Test

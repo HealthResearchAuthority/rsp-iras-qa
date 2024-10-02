@@ -1,17 +1,13 @@
 import { test as base } from 'playwright-bdd';
 import AxeBuilder from '@axe-core/playwright';
 import { getAuthState, getTicketReferenceTags } from '../utils/UtilFunctions';
-import CommonItemsPage from '../pages/CommonItemsPage';
-import LoginPage from '../pages/LoginPage';
-import TasksPage from '../pages/TasksPage';
-import ProjectDetailsPage from '../pages/ProjectDetailsPage';
+import CommonItemsPage from '../pages/Common/CommonItemsPage';
+import LoginPage from '../pages/Common/LoginPage';
 import HomePage from '../pages/IRAS/HomePage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
   loginPage: LoginPage;
-  tasksPage: TasksPage;
-  projectDetailsPage: ProjectDetailsPage;
   homePage: HomePage;
   makeAxeBuilder: () => AxeBuilder;
 };
@@ -25,14 +21,6 @@ export const test = base.extend<CustomFixtures>({
     await use(new LoginPage(page));
   },
 
-  tasksPage: async ({ page }, use) => {
-    await use(new TasksPage(page));
-  },
-
-  projectDetailsPage: async ({ page }, use) => {
-    await use(new ProjectDetailsPage(page));
-  },
-
   homePage: async ({ page }, use) => {
     await use(new HomePage(page));
   },
@@ -44,8 +32,8 @@ export const test = base.extend<CustomFixtures>({
 
   //Set the Storage State based on User Tag from Feature File
   storageState: async ({ $tags, storageState }, use) => {
-    if ($tags.includes('@pocUser')) {
-      storageState = getAuthState('POC');
+    if ($tags.includes('@adminUser')) {
+      storageState = getAuthState('adminUser');
     }
     await use(storageState);
   },

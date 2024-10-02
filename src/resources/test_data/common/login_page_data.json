@@ -1,14 +1,10 @@
 {
-  "POC_User": {
-    "username": "secontactmanageronly@test.id.nihr.ac.uk",
-    "password": "`${process.env.CONTACT_MANAGER_ONLY_PASS}`"
-  },
-  "Sponsor_User": {
-    "username": "sesponsorcontact@test.id.nihr.ac.uk",
-    "password": "`${process.env.CONTACT_MANAGER_ONLY_PASS}`"
+  "Admin_User": {
+    "username": "future_iras_auto_admin_user@dev.id.nihr.ac.uk",
+    "password": "`${process.env.ADMIN_USER_PASS}`"
   },
   "Login_Page": {
-    "header": "This is the TEST Identity Gateway",
-    "partial_link": "test.id.nihr.ac.uk/authenticationendpoint/login"
+    "header": "Please note this is the Development Identity Gateway",
+    "partial_link": "id.nihr.ac.uk/authenticationendpoint/login"
   }
 }
