@@ -1,6 +1,10 @@
 {
-  "Login": "SignIn",
-  "Logout": "Logout",
-  "New_Application": "Proceed with new application",
-  "Edit_Application": "Edit existing application"
+  "Banner": {
+    "Login": "SignIn",
+    "Logout": "Logout"
+  },
+  "Home_Page": {
+    "New_Application": "Proceed with new application",
+    "Edit_Application": "Edit existing application"
+  }
 }

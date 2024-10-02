@@ -55,12 +55,12 @@ Then('I click the show all section accordion', async ({ commonItemsPage }) => {
   commonItemsPage.toggleAccordion(commonItemsPage.showAllSectionsAccordion, commonItemsPage.showAllSectionsIFrame);
 });
 
-Then('I click the {string} button', async ({ commonItemsPage }, buttonKey: string) => {
-  const buttonValue = commonItemsPage.buttonTextData[buttonKey];
+Then('I click the {string} button on the {string}', async ({ commonItemsPage }, buttonKey: string, pageKey: string) => {
+  const buttonValue = commonItemsPage.buttonTextData[pageKey][buttonKey];
   await commonItemsPage.govUkButton.getByText(buttonValue, { exact: true }).click();
 });
 
-Then('I can see a {string} button', async ({ commonItemsPage }, buttonKey: string) => {
-  const buttonValue = commonItemsPage.buttonTextData[buttonKey];
+Then('I can see a {string} button on the {string}', async ({ commonItemsPage }, buttonKey: string, pageKey: string) => {
+  const buttonValue = commonItemsPage.buttonTextData[pageKey][buttonKey];
   expect(commonItemsPage.govUkButton.getByText(buttonValue, { exact: true })).toBeVisible();
 });
