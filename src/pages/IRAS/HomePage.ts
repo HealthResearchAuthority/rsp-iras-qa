@@ -2,7 +2,7 @@ import { expect, Locator, Page } from '@playwright/test';
 import * as homePageTestData from '../../resources/test_data/iras/home_page_data.json';
 
 //Declare Page Objects
-export default class TasksPage {
+export default class HomePage {
   readonly page: Page;
   readonly homePageTestData: typeof homePageTestData;
   readonly pageHeadingCaption: Locator;

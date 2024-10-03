@@ -6,5 +6,8 @@
   "Home_Page": {
     "New_Application": "Proceed with new application",
     "Edit_Application": "Edit existing application"
+  },
+  "Question_Set": {
+    "Continue": "Continue"
   }
 }

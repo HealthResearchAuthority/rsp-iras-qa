@@ -4,11 +4,13 @@ import { getAuthState, getTicketReferenceTags } from '../utils/UtilFunctions';
 import CommonItemsPage from '../pages/Common/CommonItemsPage';
 import LoginPage from '../pages/Common/LoginPage';
 import HomePage from '../pages/IRAS/HomePage';
+import ProjectFilterPage from '../pages/IRAS/ProjectFilterPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
   loginPage: LoginPage;
   homePage: HomePage;
+  projectFilterPage: ProjectFilterPage;
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -23,6 +25,10 @@ export const test = base.extend<CustomFixtures>({
 
   homePage: async ({ page }, use) => {
     await use(new HomePage(page));
+  },
+
+  projectFilterPage: async ({ page }, use) => {
+    await use(new ProjectFilterPage(page));
   },
 
   makeAxeBuilder: async ({ page }, use) => {
