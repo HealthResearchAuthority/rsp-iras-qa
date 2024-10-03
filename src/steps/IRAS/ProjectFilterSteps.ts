@@ -260,6 +260,6 @@ Then(
       const usePICs = projectFilterPage.projectFilterPageTestData[dataset].use_pic;
       await commonItemsPage.selectRadio(usePICs, projectFilterPage.usePICsRadio);
     }
-    await new Promise(() => {});
+    // await new Promise(() => {});
   }
 );
