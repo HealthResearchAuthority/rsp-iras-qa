@@ -37,10 +37,20 @@ export default class ProjectFilterPage {
   readonly detailsOfOtherOrganisationTextBox: Locator;
   readonly usePICsRadio: string;
 
+  // Preferred Locators (Chris)
+  readonly projectDetailsSection: Locator;
+  readonly projectDetailsTextInputField: Locator;
+  readonly projectDetailsFormGroupLabel: Locator;
+
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page;
     this.projectFilterPageTestData = projectFilterPageTestData;
+
+    //Preferred Locators Chris
+    this.projectDetailsSection = page.locator('legend').getByText('Project Details').locator('..');
+    this.projectDetailsTextInputField = this.projectDetailsSection.locator('div').locator('.govuk-input');
+    this.projectDetailsFormGroupLabel = this.projectDetailsSection.locator('.govuk-form-group').locator('legend');
 
     //Locators
     this.pageHeadingCaption = page.locator('legend', {

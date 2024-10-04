@@ -41,6 +41,7 @@ const config: PlaywrightTestConfig = {
     screenshot: 'only-on-failure',
     actionTimeout: 10000,
     navigationTimeout: 30000,
+    testIdAttribute: 'id',
   },
   expect: {
     timeout: 10000,

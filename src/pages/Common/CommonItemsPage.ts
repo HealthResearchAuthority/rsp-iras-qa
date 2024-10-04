@@ -86,11 +86,13 @@ export default class CommonItemsPage {
     }
   }
 
-  async selectRadio(radio: string, radioLocator: string, iframe?: FrameLocator) {
+  async selectRadio(formGroupLabel: Locator, radioLabelFilter: string, radioButtonId: string, iframe?: FrameLocator) {
     if (iframe) {
-      await iframe.locator(generateDynamicLocator(radioLocator, radio)).check();
+      // await iframe.locator(generateDynamicLocator(radioLocator, radio)).check();
     } else {
-      await this.page.locator(generateDynamicLocator(radioLocator, radio)).check();
+      const radioLabelLocator = formGroupLabel.filter({ hasText: radioLabelFilter });
+      const radioButtonLocator = radioLabelLocator.locator('..').getByTestId(radioButtonId);
+      await radioButtonLocator.check();
     }
   }
 

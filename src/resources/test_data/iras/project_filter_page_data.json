@@ -1,49 +1,79 @@
 {
-    "Project_Filter": {
-      "title": "Questionnaire",
-      "heading_caption": "Project Details",
-      "heading": "Project Filter"
+  "Project_Filter": {
+    "title": "Questionnaire",
+    "heading_caption": "Project Details",
+    "heading": "Project Filter"
+  },
+  "Project_Details_Common": {
+    "short_project_title_input": {
+      "type": "text",
+      "id": "IQA0002_Text",
+      "label": "1. Short project title",
+      "value": "Test Research - Short Title"
     },
-    "Project_Details_Common": {
-      "short_project_title": "Test Research - Short Title",
-      "full_project_title": "Test Research - Full Title",
-      "is_project_managed_commercial_research": "Yes",
-      "is_nihr_funding": "Yes",
-      "access_cpms_Services": "Yes",
-      "email_initial_contact_cpms": "test_cpms_contact@test.com"
+    "full_project_title_input": {
+      "type": "text",
+      "id": "IQA0003_Text",
+      "label": "3. Full project title",
+      "value": "Test Research - Full Title"
     },
-    "Project_Scope_Common": {
-      "is_educational_project": "Yes",
-      "activities_involved": "Use of previously collected data about people|Research involving staff only|Non-clinical activities with people (other than staff), such as interviews or surveys|Treatment, such as medicines, devices, surgery, vaccines or therapies",
-      "is_research_bioresource": "Yes",
-      "bioresource_established_nhs_hsc": "Yes",
-      "is_ctimp": "Yes",
-      "options_applied_for_project": "combined trial of an investigational medicinal product and an investigational medical device",
-      "product_contain_genetically_modified_organism": "Yes",
-      "is_clinical_or_medical_devices": "Yes",
-      "exposing_ionising_radiation": "Yes",
-      "using_human_biological_samples": "Yes",
-      "patient_data_accessed_outside": "Yes",
-      "research_with_adults_lacking_capacity_to_consent": "Yes",
-      "include_children": "Yes",
-      "include_prisoners_offenders": "Yes",
-      "involve_ministry_of_defence": "Yes",
-      "involve_hfea": "Yes"
+    "project_managed_commercial_research_yes_input": {
+      "type": "radio",
+      "id": "IQA0004_OPT0004",
+      "label": "4.Is this project likely to be managed as commercial research?",
+      "value": "Yes"
     },
-    "Research_Location_Common": {
-      "is_outside_uk": "UK only",
-      "places_in_uk_for_project": "England|Northern Ireland|Wales",
-      "where_human_sample_held": "England|Northern Ireland",
-      "where_human_sample_obtained": "Northern Ireland|Scotland|Wales",
-      "where_project_take_place": "Independent research units|Phase 1 trial units (non-NHS or HSC organisation)|Prison or probation setting|Social care settings|Voluntary sector or private organisations|Community settings",
-      "details_other_organisation": "test organisation",
-      "use_pic": "Yes"
+    "nihr_funding_yes_input": {
+      "type": "radio",
+      "id": "IQA03271_OPT0004",
+      "label": "5.Are you seeking NIHR funding for this project?",
+      "value": "Yes"
     },
-    "Project_Details_NoNIHRFunding": {
-        "short_project_title": "Sample Research - Short Title",
-        "full_project_title": "Sample Research - Full Title",
-        "is_project_managed_commercial_research": "Yes",
-        "is_nihr_funding": "No",
-        "access_cpms_Services": "Yes"
-      }
+    "access_cpms_services_yes_input": {
+      "type": "radio",
+      "id": "IQA0005_OPT0004",
+      "label": "6.Do you wish to access one or more of the CPMS services?",
+      "value": "Yes"
+    },
+    "email_initial_contact_cpms_input": {
+      "type": "text",
+      "id": "IQA0006_Text",
+      "label": "6a. Provide the email of the person who will be the initial contact for CPMS.",
+      "value": "test_cpms_contact@test.com"
+    }
+  },
+  "Project_Scope_Common": {
+    "is_educational_project": "Yes",
+    "activities_involved": "Use of previously collected data about people|Research involving staff only|Non-clinical activities with people (other than staff), such as interviews or surveys|Treatment, such as medicines, devices, surgery, vaccines or therapies",
+    "is_research_bioresource": "Yes",
+    "bioresource_established_nhs_hsc": "Yes",
+    "is_ctimp": "Yes",
+    "options_applied_for_project": "combined trial of an investigational medicinal product and an investigational medical device",
+    "product_contain_genetically_modified_organism": "Yes",
+    "is_clinical_or_medical_devices": "Yes",
+    "exposing_ionising_radiation": "Yes",
+    "using_human_biological_samples": "Yes",
+    "patient_data_accessed_outside": "Yes",
+    "research_with_adults_lacking_capacity_to_consent": "Yes",
+    "include_children": "Yes",
+    "include_prisoners_offenders": "Yes",
+    "involve_ministry_of_defence": "Yes",
+    "involve_hfea": "Yes"
+  },
+  "Research_Location_Common": {
+    "is_outside_uk": "UK only",
+    "places_in_uk_for_project": "England|Northern Ireland|Wales",
+    "where_human_sample_held": "England|Northern Ireland",
+    "where_human_sample_obtained": "Northern Ireland|Scotland|Wales",
+    "where_project_take_place": "Independent research units|Phase 1 trial units (non-NHS or HSC organisation)|Prison or probation setting|Social care settings|Voluntary sector or private organisations|Community settings",
+    "details_other_organisation": "test organisation",
+    "use_pic": "Yes"
+  },
+  "Project_Details_NoNIHRFunding": {
+    "short_project_title": "Sample Research - Short Title",
+    "full_project_title": "Sample Research - Full Title",
+    "is_project_managed_commercial_research": "Yes",
+    "is_nihr_funding": "No",
+    "access_cpms_Services": "Yes"
   }
+}
