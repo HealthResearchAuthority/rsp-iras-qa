@@ -73,7 +73,7 @@ export default class CommonItemsPage {
     }
   }
 
-  async selectCheckboxes(checkboxes: string, checkBoxLocator: string, iframe?: FrameLocator) {
+  async selectCheckboxesOld(checkboxes: string, checkBoxLocator: string, iframe?: FrameLocator) {
     const checkBoxSplitArray = checkboxes.split('|');
     if (iframe) {
       for (const checkbox of checkBoxSplitArray) {
@@ -86,13 +86,11 @@ export default class CommonItemsPage {
     }
   }
 
-  async selectRadio(formGroupLabel: Locator, radioLabelFilter: string, radioButtonId: string, iframe?: FrameLocator) {
+  async selectRadioOld(radio: string, radioLocator: string, iframe?: FrameLocator) {
     if (iframe) {
-      // await iframe.locator(generateDynamicLocator(radioLocator, radio)).check();
+      await iframe.locator(generateDynamicLocator(radioLocator, radio)).check();
     } else {
-      const radioLabelLocator = formGroupLabel.filter({ hasText: radioLabelFilter });
-      const radioButtonLocator = radioLabelLocator.locator('..').getByTestId(radioButtonId);
-      await radioButtonLocator.check();
+      await this.page.locator(generateDynamicLocator(radioLocator, radio)).check();
     }
   }
 
