@@ -92,6 +92,19 @@ export default class CommonItemsPage {
     }
   }
 
+  async selectCheckboxesOld(checkboxes: string, checkBoxLocator: string, iframe?: FrameLocator) {
+    const checkBoxSplitArray = checkboxes.split('|');
+    if (iframe) {
+      for (const checkbox of checkBoxSplitArray) {
+        await iframe.locator(generateDynamicLocator(checkBoxLocator, checkbox)).check();
+      }
+    } else {
+      for (const checkbox of checkBoxSplitArray) {
+        await this.page.locator(generateDynamicLocator(checkBoxLocator, checkbox)).check();
+      }
+    }
+  }
+
   async selectCheckboxes(formGroupLabel: Locator, checkboxGroupLabelFilter: string, checkboxValues: string[]) {
     for (const checkboxValue of checkboxValues) {
       const checkboxGroupLabelLocator = formGroupLabel.filter({ hasText: checkboxGroupLabelFilter });
@@ -101,6 +114,14 @@ export default class CommonItemsPage {
         .filter({ hasText: checkboxValue });
       const checkboxLocator = checkboxItem.getByRole('checkbox');
       await checkboxLocator.check();
+    }
+  }
+
+  async selectRadioOld(radio: string, radioLocator: string, iframe?: FrameLocator) {
+    if (iframe) {
+      await iframe.locator(generateDynamicLocator(radioLocator, radio)).check();
+    } else {
+      await this.page.locator(generateDynamicLocator(radioLocator, radio)).check();
     }
   }
 

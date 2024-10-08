@@ -37,42 +37,22 @@ export default class ProjectFilterPage {
   readonly detailsOfOtherOrganisationTextBox: Locator;
   readonly usePICsRadio: string;
 
-  // Preferred Locators (Chris)
-  readonly projectDetailsSection: Locator;
-  readonly projectDetailsTextInputField: Locator;
-  readonly projectDetailsFormGroupLabel: Locator;
-
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page;
     this.projectFilterPageTestData = projectFilterPageTestData;
-
-    //Preferred Locators Chris
-    this.projectDetailsSection = page.locator('legend').getByText('Project Details').locator('..');
-    this.projectDetailsTextInputField = this.projectDetailsSection.locator('div').locator('.govuk-input');
-    this.projectDetailsFormGroupLabel = this.projectDetailsSection.locator('.govuk-form-group').locator('legend');
 
     //Locators
     this.pageHeadingCaption = page.locator('legend', {
       hasText: this.projectFilterPageTestData['Project_Filter'].heading_caption,
     });
     this.pageHeading = page.getByText(this.projectFilterPageTestData['Project_Filter'].heading);
-    this.shortProjectTitleTextBox = page.locator(
-      '//label[contains(text(),"Short project title")]/ancestor::h1/following-sibling::input'
-    );
-    this.fullProjectTitleTextBox = page.locator(
-      '//label[contains(text(),"Full project title")]/ancestor::h1/following-sibling::input'
-    );
-    this.isProjectManagedCommercialResearchRadio =
-      '//legend[contains(text(),"Is this project likely to be managed as commercial research")]/following-sibling::div/descendant::label[text()="%s"]';
-    this.seekingNIHRFundingRadio =
-      '//legend[contains(text(),"Are you seeking NIHR funding for this project")]/following-sibling::div/descendant::label[text()="%s"]';
-    this.accessCPMSServiceRadio =
-      '//legend[contains(text(),"wish to access one or more of the CPMS services")]/following-sibling::div/descendant::label[text()="%s"]';
-    this.emailInitialContactCPMSTextBox = page.locator(
-      '//label[contains(text(),"email of the person who will be the initial contact for CPMS")]/ancestor::h1/following-sibling::input'
-    );
-
+    this.shortProjectTitleTextBox = page.locator('input[id="IQA0002_Text"]');
+    this.fullProjectTitleTextBox = page.locator('input[id="IQA0003_Text"]');
+    this.isProjectManagedCommercialResearchRadio = '//label[contains(@for,"IQA0004") and text()="%s"]';
+    this.seekingNIHRFundingRadio = '//label[contains(@for,"IQA03271") and text()="%s"]';
+    this.accessCPMSServiceRadio = '//label[contains(@for,"IQA0005") and text()="%s"]';
+    this.emailInitialContactCPMSTextBox = page.locator('input[id="IQA0006_Text"]');
     this.isEducationalProjectRadio = '//label[contains(@for,"IQA0012") and text()="%s"]';
     this.activitiesInvolvedCheckBox = '//label[contains(@for,"IQA0061") and text()="%s"]';
     this.isResearchBioresourceRadio = '//label[contains(@for,"IQA0014") and text()="%s"]';
@@ -89,7 +69,6 @@ export default class ProjectFilterPage {
     this.includePrisonersOffendersRadio = '//label[contains(@for,"IQA0027") and text()="%s"]';
     this.involveMinistryOfDefenceRadio = '//label[contains(@for,"IQA0028") and text()="%s"]';
     this.involveHFEARadio = '//label[contains(@for,"IQA0029") and text()="%s"]';
-
     this.isOutsideUKRadio = '//label[contains(@for,"IQA0142") and text()="%s"]';
     this.placeInUKForProjectCheckBox = '//label[contains(@for,"IQA0032") and text()="%s"]';
     this.whereHumanSamplesHeldCheckBox = '//label[contains(@for,"IQA0033") and text()="%s"]';
