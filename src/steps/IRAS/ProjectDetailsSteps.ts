@@ -34,7 +34,7 @@ Then(
             dataset[key].value
           );
         } else {
-          await commonItemsPage.selectNewCheckboxes(
+          await commonItemsPage.selectCheckboxes(
             projectDetailsPage.publicInvolvementFormGroupLabel,
             dataset[key].label,
             dataset[key].values
@@ -58,13 +58,13 @@ Then(
             dataset[key].value
           );
         } else if (dataset[key].type === 'checkbox') {
-          await commonItemsPage.selectNewCheckboxes(
+          await commonItemsPage.selectCheckboxes(
             projectDetailsPage.researchDesignSectionFormGroupLabel,
             dataset[key].label,
             dataset[key].values
           );
         } else {
-          await commonItemsPage.selectNewRadio(
+          await commonItemsPage.selectRadio(
             projectDetailsPage.researchDesignSectionFormGroupLabel,
             dataset[key].label,
             dataset[key].id
@@ -94,13 +94,13 @@ Then(
             dataset[key].value
           );
         } else if (dataset[key].type === 'checkbox') {
-          await commonItemsPage.selectNewCheckboxes(
+          await commonItemsPage.selectCheckboxes(
             projectDetailsPage.researchActivitiesSectionFormGroupLabel,
             dataset[key].label,
             dataset[key].values
           );
         } else {
-          await commonItemsPage.selectNewRadio(
+          await commonItemsPage.selectRadio(
             projectDetailsPage.researchActivitiesSectionFormGroupLabel,
             dataset[key].label,
             dataset[key].id
@@ -130,13 +130,13 @@ Then(
             dataset[key].value
           );
         } else if (dataset[key].type === 'checkbox') {
-          await commonItemsPage.selectNewCheckboxes(
+          await commonItemsPage.selectCheckboxes(
             projectDetailsPage.participantsSectionFormGroupLabel,
             dataset[key].label,
             dataset[key].values
           );
         } else {
-          await commonItemsPage.selectNewRadio(
+          await commonItemsPage.selectRadio(
             projectDetailsPage.participantsSectionFormGroupLabel,
             dataset[key].label,
             dataset[key].id
