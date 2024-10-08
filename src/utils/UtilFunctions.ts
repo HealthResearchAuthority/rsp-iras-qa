@@ -1,4 +1,5 @@
 import { DataTable } from '@cucumber/cucumber';
+import { Locator } from '@playwright/test';
 import crypto from 'crypto';
 import { readFile } from 'fs/promises';
 
@@ -83,4 +84,13 @@ export function generateDynamicLocator(dynamicLocator: string, value: string) {
   let newLocator: string = '';
   newLocator = dynamicLocator.replace('%s', value);
   return newLocator;
+}
+
+export async function getTextFromElementArray(inputArray: Locator[]): Promise<string[]> {
+  const arrInputText: Array<string> = [];
+  for (const input of inputArray) {
+    const inputText = confirmStringNotNull(await input.textContent());
+    arrInputText.push(inputText.trim());
+  }
+  return arrInputText;
 }
