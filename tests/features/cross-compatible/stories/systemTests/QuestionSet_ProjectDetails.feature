@@ -1,4 +1,4 @@
-@adminUser @questionSetProjectDetails @Smoke @only
+@adminUser @questionSetProjectDetails @SystemTest
 Feature: Question Set - Research Application - Project Details
 
   Background:
