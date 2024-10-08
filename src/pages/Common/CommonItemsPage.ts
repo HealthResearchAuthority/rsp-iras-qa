@@ -1,30 +1,49 @@
 import { expect, FrameLocator, Locator, Page } from '@playwright/test';
 import { generateDynamicLocator } from '../../utils/UtilFunctions';
 import * as buttonTextData from '../../resources/test_data/common/button_text_data.json';
+import * as linkTextData from '../../resources/test_data/common/link_text_data.json';
 
 //Declare Page Objects
 export default class CommonItemsPage {
   readonly page: Page;
   readonly buttonTextData: typeof buttonTextData;
+  readonly linkTextData: typeof linkTextData;
   readonly bannerMyTasks: Locator;
   readonly bannerMyPersonalTasks: Locator;
   readonly showAllSectionsIFrame: FrameLocator;
   readonly showAllSectionsAccordion: Locator;
   readonly govUkButton: Locator;
+  readonly govUkCheckboxes: Locator;
+  readonly govUkCheckboxItem: Locator;
+  readonly govUkLink: Locator;
+  readonly qSetProgressBar: Locator;
+  readonly qSetProgressBarStage: Locator;
+  readonly qSetProgressBarActiveStage: Locator;
+  readonly qSetProgressBarStageLink: Locator;
+  readonly qSetProgressBarActiveStageLink: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page;
     this.buttonTextData = buttonTextData;
+    this.linkTextData = linkTextData;
 
     //Locators
-    this.bannerMyTasks = this.page.locator('span[class="menu-item-title"]').getByText('My tasks', { exact: true });
-    this.bannerMyPersonalTasks = this.page
+    this.bannerMyTasks = page.locator('span[class="menu-item-title"]').getByText('My tasks', { exact: true });
+    this.bannerMyPersonalTasks = page
       .locator('span[class="menu-item-title"]')
       .getByText('My personal tasks', { exact: true });
     this.showAllSectionsAccordion = page.locator('//button[@class="govuk-accordion__show-all"]');
-    this.showAllSectionsIFrame = this.page.frameLocator('[title="Accordion example"]');
-    this.govUkButton = this.page.locator('.govuk-button');
+    this.showAllSectionsIFrame = page.frameLocator('[title="Accordion example"]');
+    this.govUkButton = page.locator('.govuk-button');
+    this.govUkCheckboxes = page.locator('.govuk-checkboxes');
+    this.govUkCheckboxItem = this.govUkCheckboxes.locator('.govuk-checkboxes__item');
+    this.govUkLink = this.page.getByRole('link');
+    this.qSetProgressBar = page.locator('.progress-container');
+    this.qSetProgressBarStage = this.qSetProgressBar.locator('.stage');
+    this.qSetProgressBarActiveStage = this.qSetProgressBar.locator('.stage.active');
+    this.qSetProgressBarStageLink = this.qSetProgressBarStage.locator('.stage-label').getByRole('link');
+    this.qSetProgressBarActiveStageLink = this.qSetProgressBarActiveStage.locator('.stage-label').getByRole('link');
   }
 
   //Page Methods
@@ -73,27 +92,22 @@ export default class CommonItemsPage {
     }
   }
 
-  async selectCheckboxes(checkboxes: string, checkBoxLocator: string, iframe?: FrameLocator) {
-    const checkBoxSplitArray = checkboxes.split('|');
-    if (iframe) {
-      for (const checkbox of checkBoxSplitArray) {
-        await iframe.locator(generateDynamicLocator(checkBoxLocator, checkbox)).check();
-      }
-    } else {
-      for (const checkbox of checkBoxSplitArray) {
-        await this.page.locator(generateDynamicLocator(checkBoxLocator, checkbox)).check();
-      }
+  async selectCheckboxes(formGroupLabel: Locator, checkboxGroupLabelFilter: string, checkboxValues: string[]) {
+    for (const checkboxValue of checkboxValues) {
+      const checkboxGroupLabelLocator = formGroupLabel.filter({ hasText: checkboxGroupLabelFilter });
+      const checkboxItem = checkboxGroupLabelLocator
+        .locator('..')
+        .locator(this.govUkCheckboxItem)
+        .filter({ hasText: checkboxValue });
+      const checkboxLocator = checkboxItem.getByRole('checkbox');
+      await checkboxLocator.check();
     }
   }
 
-  async selectRadio(formGroupLabel: Locator, radioLabelFilter: string, radioButtonId: string, iframe?: FrameLocator) {
-    if (iframe) {
-      // await iframe.locator(generateDynamicLocator(radioLocator, radio)).check();
-    } else {
-      const radioLabelLocator = formGroupLabel.filter({ hasText: radioLabelFilter });
-      const radioButtonLocator = radioLabelLocator.locator('..').getByTestId(radioButtonId);
-      await radioButtonLocator.check();
-    }
+  async selectRadio(formGroupLabel: Locator, radioLabelFilter: string, radioButtonId: string) {
+    const radioLabelLocator = formGroupLabel.filter({ hasText: radioLabelFilter });
+    const radioButtonLocator = radioLabelLocator.locator('..').getByTestId(radioButtonId);
+    await radioButtonLocator.check();
   }
 
   async verifyDetailsExpanded(isExpanded: string, details: Locator, iframe?: FrameLocator) {
@@ -116,6 +130,16 @@ export default class CommonItemsPage {
     const filePathsSplitArray = filePaths.split('|');
     await chooseFilesElement.setInputFiles(filePathsSplitArray);
     await uploadButtonElement.click();
+  }
+
+  async fillElementById(baseLocator: Locator, idSelector: string, value: string) {
+    const inputLocator = baseLocator.getByTestId(idSelector);
+    await inputLocator.fill(value);
+  }
+
+  async fillElementByAndId(baseLocator: Locator, idSelector: string, value: string) {
+    const inputLocator = baseLocator.and(this.page.getByTestId(idSelector));
+    await inputLocator.fill(value);
   }
 
   // To be Removed but Keeping as Placeholder for Mobile and Desktop Test Folders
