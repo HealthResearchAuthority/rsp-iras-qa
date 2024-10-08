@@ -1,4 +1,4 @@
-@adminUser @questionSetProjectFilter @SystemTest @only
+@adminUser @questionSetProjectFilter @SystemTest @Smoke
 Feature: Question Set - Research Application - Project Filter
 
   Background:
