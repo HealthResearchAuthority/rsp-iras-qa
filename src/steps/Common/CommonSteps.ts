@@ -64,3 +64,12 @@ Then('I can see a {string} button on the {string}', async ({ commonItemsPage }, 
   const buttonValue = commonItemsPage.buttonTextData[pageKey][buttonKey];
   expect(commonItemsPage.govUkButton.getByText(buttonValue, { exact: true })).toBeVisible();
 });
+
+Given('I click the {string} link on the {string}', async ({ commonItemsPage }, linkKey: string, pageKey: string) => {
+  const linkValue = commonItemsPage.linkTextData[pageKey][linkKey];
+  if (pageKey === 'Progress_Bar') {
+    await commonItemsPage.qSetProgressBarStageLink.getByText(linkValue, { exact: true }).click();
+  } else {
+    await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
+  }
+});

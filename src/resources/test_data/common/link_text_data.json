@@ -1,0 +1,16 @@
+{
+  "Progress_Bar": {
+    "Initiate": "Initiate",
+    "Project_Filter": "Project Filter",
+    "Project_Details": "Project Details",
+    "Student": "Student",
+    "Research_Bioresources": "Research Bioresources",
+    "CTIMP": "CTIMP",
+    "Devices": "Devices",
+    "Ionizing_Radiation": "Ionizing Radiation",
+    "Tissue": "Tissue",
+    "Adults_Lacking_Capacity": "Adults Lacking Capacity",
+    "Children": "Children",
+    "Booking": "Booking"
+  }
+}
