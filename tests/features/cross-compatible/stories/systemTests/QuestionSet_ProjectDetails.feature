@@ -1,4 +1,4 @@
-@adminUser @questionSetProjectDetails @SystemTest @only
+@adminUser @questionSetProjectDetails @SystemTest
 Feature: Question Set - Research Application - Project Details
 
   Background:
@@ -17,6 +17,6 @@ Feature: Question Set - Research Application - Project Details
     Then I click the '<Navigation_Button>' button on the 'Question_Set'
 
     Examples:
-      | Application_Button | Project_Information      | Public_Involvement       | Research_Design          | Research_Activities      | Participants             | Navigation_Button |
-      | New_Application    | Valid_Data_In_All_Fields | Valid_Data_In_All_Fields | Valid_Data_In_All_Fields | Valid_Data_In_All_Fields | Valid_Data_In_All_Fields | Continue          |
-# | New_Application    | Project_Details_NoNIHRFunding | Project_Scope_Common | Research_Location_Common | Continue          |
+      | Application_Button | Project_Information          | Public_Involvement       | Research_Design          | Research_Activities      | Participants             | Navigation_Button |
+      | New_Application    | Valid_Data_In_All_Fields     | Valid_Data_In_All_Fields | Valid_Data_In_All_Fields | Valid_Data_In_All_Fields | Valid_Data_In_All_Fields | Continue          |
+      | New_Application    | Protocol_Ref_Number_ABC_Data | No_Involvement           | Valid_Data_In_All_Fields | No_Standard_Of_Care      | Valid_Data_In_All_Fields | Continue          |

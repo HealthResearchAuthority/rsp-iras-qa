@@ -25,7 +25,7 @@
         "label": "1a. Provide protocol reference number",
         "value": "Proto_Ref_1234567890"
       },
-      "full_project_title_input": {
+      "eu_trial_number": {
         "type": "text",
         "id": "IQA0037_Text",
         "label": "1b. Provide the EU Clinical Trial (EUCT) number",
@@ -36,6 +36,26 @@
         "id": "IQA0040_Text",
         "label": "2. Research project public summary: * explain why the research is being carried out, the questions it seeks to answer, its design and methodology * do not reproduce or refer to the protocol * complete this section in language understandable to a member of the public (maximum 300 words) This summary will be published on the Health Research Authority (HRA) website following approval.",
         "value": "Public Research Summary Text Example"
+      }
+    },
+    "Protocol_Ref_Number_ABC_Data": {
+      "protocol_ref_number": {
+        "type": "text",
+        "id": "IQA0036_Text",
+        "label": "1a. Provide protocol reference number",
+        "value": "Proto_Ref_ABC123"
+      },
+      "eu_trial_number": {
+        "type": "text",
+        "id": "IQA0037_Text",
+        "label": "1b. Provide the EU Clinical Trial (EUCT) number",
+        "value": "EU_ABC123"
+      },
+      "research_project_public_summary": {
+        "type": "text",
+        "id": "IQA0040_Text",
+        "label": "2. Research project public summary: * explain why the research is being carried out, the questions it seeks to answer, its design and methodology * do not reproduce or refer to the protocol * complete this section in language understandable to a member of the public (maximum 300 words) This summary will be published on the Health Research Authority (HRA) website following approval.",
+        "value": "Research Project to Investigate ABC's"
       }
     }
   },
@@ -109,6 +129,71 @@
         "id": "IQA03275_Text",
         "label": "4b. Justify your approach and describe the benefits and challenges of involving public contributors",
         "value": "I can justify my approach due to X, Y and Z. The benefits included X, Y and Z"
+      },
+      "justify_your_approach_and_absence_of_public_involvement": {
+        "type": "text",
+        "id": "IQA03276_Text",
+        "label": "4c. Justify the approach and absence of public involvement",
+        "value": "I can justify my approach, and the absence of public involvement due to X, Y and Z"
+      }
+    },
+    "No_Involvement": {
+      "select_aspects_already_actively_involved": {
+        "type": "checkbox",
+        "label": "1. In which aspects of the project have you already actively involved patients or their carers, service users or members of the public? Include patient and public involvement from wider programmes that has informed this project. Select all that apply:",
+        "values": ["patients, service users or their carers, or members of the public have not been involved"]
+      },
+      "details_involved_contributors": {
+        "type": "text",
+        "id": "IQA0046_Text",
+        "label": "1a. Give details of how you involved public contributors",
+        "value": "I have not involved them"
+      },
+      "reasons_for_not_involving": {
+        "type": "text",
+        "id": "IQA0048_Text",
+        "label": "1b. Insights from patients, carers, services users or members of the public could have helped to ensure that this research reflects the priorities, needs and concerns of both the intended participant population, and of the people the research is intended to benefit. What are your reasons for not involving these people?",
+        "value": "I am not involving them because of X, Y and Z"
+      },
+      "select_how_identified_involved_contributors": {
+        "type": "checkbox",
+        "label": "2. How did you identify the public contributors that you involved? Select all that apply",
+        "values": ["Other"]
+      },
+      "detail_how_identified_involved_contributors": {
+        "type": "text",
+        "id": "IQA0043_Text",
+        "label": "2a. Give details how you identified the public contributors to that you involved.",
+        "value": "I didn't bother"
+      },
+      "tell_us_about_contributors": {
+        "type": "text",
+        "id": "IQA0044_Text",
+        "label": "2b. Tell us about the public contributors you worked with: • how many of them were there? • were the perspectives those of patients, of carers, of service users, of people with experience of being involved in research, or of members of the public? • what was relevant about their skills and experience (this might include their demographic information)?",
+        "value": "N/A"
+      },
+      "what_did_contributors_say": {
+        "type": "text",
+        "id": "IQA03274_Text",
+        "label": "3. What did your public contributors say was important to them about how this research is done?",
+        "value": "They said nothing"
+      },
+      "select_how_plan_involve_contributors_remaining_stages": {
+        "type": "checkbox",
+        "label": "4. How do you plan to involve public contributors in the remaining stages of the research process? Select all that apply:",
+        "values": ["there is no plan to involve public contributors in the remaining stages of the research process"]
+      },
+      "give_details_other_aspects": {
+        "type": "text",
+        "id": "IQA0163_Text",
+        "label": "4a. Give details of other aspects public contributors will advise on or contribute to",
+        "value": "N/A"
+      },
+      "justify_your_approach_decribe_benefits_of_contributors": {
+        "type": "text",
+        "id": "IQA03275_Text",
+        "label": "4b. Justify your approach and describe the benefits and challenges of involving public contributors",
+        "value": "I could not be bothered due to A, B and C"
       },
       "justify_your_approach_and_absence_of_public_involvement": {
         "type": "text",
@@ -316,6 +401,115 @@
         "id": "IQA0082_Text",
         "label": "13. When do you plan to finish collecting data for this project in the UK?",
         "value": "2025-03-11"
+      }
+    },
+    "No_Standard_Of_Care": {
+      "what_intervention_treatment_being_studied": {
+        "type": "text",
+        "id": "IQA0062_Text",
+        "label": "1. What is the intervention or treatment being studied? * provide the trade name, and brand name where relevant, of any device or medicine. * for surgical, psychological or non-clinical interventions briefly describe the nature of the intervention * if relevant, include details of any control arm",
+        "value": "Treatment being studied is Y"
+      },
+      "is_treatment_first_human_no": {
+        "type": "radio",
+        "id": "IQA0063_OPT0005",
+        "label": "2.Is this treatment first-in-human?",
+        "value": "No"
+      },
+      "does_involve_change_delay_care_no": {
+        "type": "radio",
+        "id": "IQA0064_OPT0005",
+        "label": "3.Does your project involve a change or a delay to patients’ standard treatment or care?",
+        "value": "No"
+      },
+      "are_treatments_compared_standard_care_no": {
+        "type": "radio",
+        "id": "IQA0065_OPT0005",
+        "label": "4.Are any of the treatments in this project being compared to standard care?",
+        "value": "No"
+      },
+      "describe_arrangements_to_address_changes": {
+        "type": "text",
+        "id": "IQA0066_Text",
+        "label": "4a. Describe what arrangements you will put in place to address any changes in standard care during the project, for example resulting from new guidance from the National Institute for Health and Care Excellence (NICE).",
+        "value": "I have put no arrangements in place"
+      },
+      "select_type_questions_used": {
+        "type": "checkbox",
+        "label": "5. What type of questionnaires are you using in this project? Select all that apply:",
+        "values": ["no questionnaires included in project"]
+      },
+      "is_possible_sensitive_topics_no": {
+        "type": "radio",
+        "id": "IQA0068_OPT0005",
+        "label": "6.Is it possible that any interviews, questionnaires or group discussions include topics that might be sensitive, embarrassing or upsetting?",
+        "value": "No"
+      },
+      "is_possible_criminal_disclosures_yes": {
+        "type": "radio",
+        "id": "IQA0070_OPT0005",
+        "label": "7.Is it possible that interviews, questionnaires or group discussions include topics that might result in criminal or other disclosures?",
+        "value": "No"
+      },
+      "explain_how_criminal_disclosures_dealt_with": {
+        "type": "text",
+        "id": "IQA0071_Text",
+        "label": "7a. Explain how any requirement for criminal or other disclosures will be dealt with in line with legal obligations, safeguarding arrangements and professional procedures and guidance.",
+        "value": "They will not be dealt with"
+      },
+      "potential_benefits_participants_society": {
+        "type": "text",
+        "id": "IQA0072_Text",
+        "label": "8. What are the potential benefits for participants and society (including future patients)?",
+        "value": "The potential benefits are none"
+      },
+      "any_risks_of_activity_or_monitoring": {
+        "type": "text",
+        "id": "IQA0074_Text",
+        "label": "9a. Any risks, side-effects or burdens of any research activities or monitoring of participants:",
+        "value": "The risks could include A and B for activity C"
+      },
+      "any_risks_change_or_delay": {
+        "type": "text",
+        "id": "IQA0075_Text",
+        "label": "9b. Any risks due to a change or delay to standard treatment or care:",
+        "value": "The risks could include A, B if change C is made"
+      },
+      "will_inform_participant_gp_no": {
+        "type": "radio",
+        "id": "IQA0077_OPT0005",
+        "label": "10.Will you inform the participants' General Practitioners (or any other health or care professional responsible for their care) that they are taking part in the study?",
+        "value": "No"
+      },
+      "explain_circumstance_gp_contact": {
+        "type": "text",
+        "id": "IQA0078_Text",
+        "label": "10a. Explain the circumstances when you will contact General Practitioners or other responsible health or care professionals about a participant. What will you tell participants about this?",
+        "value": "I will not explain"
+      },
+      "what_will_happen_treatment_when_finished_will_not_continue": {
+        "type": "radio",
+        "id": "IQA0079_OPT0133",
+        "label": "12.What will happen with treatment after the project has finished?",
+        "value": "Treatment will not continue to be provided once the project has finished"
+      },
+      "describe_all_arrangements_for_continued_treatment": {
+        "type": "text",
+        "id": "IQA0080_Text",
+        "label": "12a. Describe all the arrangements for continuued provision of treatment after the project has finished, including funding. Give details of the parties that have agreed these arrangements.",
+        "value": "There will be no arrangements"
+      },
+      "describe_care_arrangements_after_finished": {
+        "type": "text",
+        "id": "IQA0081_Text",
+        "label": "12b. Describe the care arrangements after the project has finished. Justify these arrangements",
+        "value": "N/A"
+      },
+      "date_when_plan_finish_collecting_data": {
+        "type": "date",
+        "id": "IQA0082_Text",
+        "label": "13. When do you plan to finish collecting data for this project in the UK?",
+        "value": "2029-09-03"
       }
     }
   },
