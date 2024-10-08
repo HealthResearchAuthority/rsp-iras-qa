@@ -5,12 +5,14 @@ import CommonItemsPage from '../pages/Common/CommonItemsPage';
 import LoginPage from '../pages/Common/LoginPage';
 import HomePage from '../pages/IRAS/HomePage';
 import ProjectFilterPage from '../pages/IRAS/ProjectFilterPage';
+import ProjectDetailsPage from '../pages/IRAS/ProjectDetailsPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
   loginPage: LoginPage;
   homePage: HomePage;
   projectFilterPage: ProjectFilterPage;
+  projectDetailsPage: ProjectDetailsPage;
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -29,6 +31,10 @@ export const test = base.extend<CustomFixtures>({
 
   projectFilterPage: async ({ page }, use) => {
     await use(new ProjectFilterPage(page));
+  },
+
+  projectDetailsPage: async ({ page }, use) => {
+    await use(new ProjectDetailsPage(page));
   },
 
   makeAxeBuilder: async ({ page }, use) => {
