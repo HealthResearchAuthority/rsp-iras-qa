@@ -73,27 +73,6 @@ export default class CommonItemsPage {
     }
   }
 
-  async selectCheckboxesOld(checkboxes: string, checkBoxLocator: string, iframe?: FrameLocator) {
-    const checkBoxSplitArray = checkboxes.split('|');
-    if (iframe) {
-      for (const checkbox of checkBoxSplitArray) {
-        await iframe.locator(generateDynamicLocator(checkBoxLocator, checkbox)).check();
-      }
-    } else {
-      for (const checkbox of checkBoxSplitArray) {
-        await this.page.locator(generateDynamicLocator(checkBoxLocator, checkbox)).check();
-      }
-    }
-  }
-
-  async selectRadioOld(radio: string, radioLocator: string, iframe?: FrameLocator) {
-    if (iframe) {
-      await iframe.locator(generateDynamicLocator(radioLocator, radio)).check();
-    } else {
-      await this.page.locator(generateDynamicLocator(radioLocator, radio)).check();
-    }
-  }
-
   async verifyDetailsExpanded(isExpanded: string, details: Locator, iframe?: FrameLocator) {
     if (isExpanded === 'open') {
       if (iframe) {
@@ -119,5 +98,35 @@ export default class CommonItemsPage {
   // To be Removed but Keeping as Placeholder for Mobile and Desktop Test Folders
   async samplePageAction(testType: string) {
     console.log(testType + ' test action');
+  }
+
+  async fillUIComponent(dataset: any, key: any, page: any) {
+    let attributeValue: string = '';
+    let locator = page[key];
+    const checkLocator = page[key];
+    let checkBoxSplitArray: Array<string> = [];
+    if (typeof page[key] == 'string') {
+      if (dataset[key].includes('|')) {
+        checkBoxSplitArray = dataset[key].split('|');
+        locator = this.page.locator(generateDynamicLocator(page[key], checkBoxSplitArray[0]));
+        attributeValue = await locator.getAttribute('class');
+      } else {
+        locator = this.page.locator(generateDynamicLocator(page[key], dataset[key]));
+        attributeValue = await locator.getAttribute('class');
+      }
+    }
+    if ((await locator.getAttribute('type')) === 'text') {
+      await locator.fill(dataset[key]);
+    } else if (attributeValue.includes('radio')) {
+      await locator.check();
+    } else if (attributeValue.includes('checkbox')) {
+      if (!Array.isArray(checkBoxSplitArray) || !checkBoxSplitArray.length) {
+        await locator.check();
+      } else {
+        for (const checkbox of checkBoxSplitArray) {
+          await this.page.locator(generateDynamicLocator(checkLocator, checkbox)).check();
+        }
+      }
+    }
   }
 }
