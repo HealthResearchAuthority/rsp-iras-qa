@@ -12,7 +12,7 @@ Feature: Question Set - Research Application - Project Filter
     And I click the 'Create' button on the 'Create_Application_Page'
     And I can see the proceed application page for '<Project>'
     And I click the 'Proceed_Application' button on the 'Proceed_Application_Page'
-    And I can see the 'Project_Filter' Question Set
+    And I can see the 'Project_Filter' question set
     When I fill the project details section in the project filter page with '<Project_Details>'
     And I fill the project scope section in the project filter page with '<Project_Scope>'
     And I fill the research location section in the project filter page with '<Research_Location>'

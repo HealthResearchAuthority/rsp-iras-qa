@@ -12,9 +12,9 @@ Feature: Question Set - Research Application - Project Details
     And I click the 'Create' button on the 'Create_Application_Page'
     And I can see the proceed application page for '<Project>'
     And I click the 'Proceed_Application' button on the 'Proceed_Application_Page'
-    And I can see the 'Project_Filter' Question Set
+    And I can see the 'Project_Filter' question set
     And I click the 'Project_Details' link on the 'Progress_Bar'
-    And I can see the 'Project_Details' Question Set
+    And I can see the 'Project_Details' question set
     When I fill the project information section on the project details page with '<Project_Information>'
     And I fill the public involvement section on the project details page with '<Public_Involvement>'
     And I fill the research design and methodology section on the project details page with '<Research_Design>'
