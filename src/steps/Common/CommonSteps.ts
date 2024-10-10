@@ -46,7 +46,7 @@ When(
 );
 
 When(
-  'I can see the {string} Question Set',
+  'I can see the {string} question set',
   async ({ commonItemsPage, projectFilterPage, projectDetailsPage }, questionSet: string) => {
     switch (questionSet) {
       case 'Project_Filter':
