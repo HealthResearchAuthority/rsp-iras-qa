@@ -3,7 +3,7 @@ import * as projectDetailsPageTestData from '../../resources/test_data/iras/proj
 import { getTextFromElementArray } from '../../utils/UtilFunctions';
 
 //Declare Page Objects
-export default class projectDetailsPage {
+export default class ProjectDetailsPage {
   readonly page: Page;
   readonly projectDetailsPageTestData: typeof projectDetailsPageTestData;
 
