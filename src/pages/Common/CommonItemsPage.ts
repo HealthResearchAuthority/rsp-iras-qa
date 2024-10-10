@@ -104,11 +104,9 @@ export default class CommonItemsPage {
     let attributeValue: string = '';
     let locator = page[key];
     const checkLocator = page[key];
-    let checkBoxSplitArray: Array<string> = [];
     if (typeof page[key] == 'string') {
-      if (dataset[key].includes('|')) {
-        checkBoxSplitArray = dataset[key].split('|');
-        locator = this.page.locator(generateDynamicLocator(page[key], checkBoxSplitArray[0]));
+      if (typeof dataset[key] == 'object') {
+        locator = this.page.locator(generateDynamicLocator(page[key], dataset[key][0]));
         attributeValue = await locator.getAttribute('class');
       } else {
         locator = this.page.locator(generateDynamicLocator(page[key], dataset[key]));
@@ -120,10 +118,10 @@ export default class CommonItemsPage {
     } else if (attributeValue.includes('radio')) {
       await locator.check();
     } else if (attributeValue.includes('checkbox')) {
-      if (!Array.isArray(checkBoxSplitArray) || !checkBoxSplitArray.length) {
+      if (!Array.isArray(dataset[key]) || !dataset[key].length) {
         await locator.check();
       } else {
-        for (const checkbox of checkBoxSplitArray) {
+        for (const checkbox of dataset[key]) {
           await this.page.locator(generateDynamicLocator(checkLocator, checkbox)).check();
         }
       }

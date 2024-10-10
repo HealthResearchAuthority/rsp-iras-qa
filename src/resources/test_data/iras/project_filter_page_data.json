@@ -24,7 +24,7 @@
   "Project_Scope": {
     "Valid_Data_All_Fields": {
       "is_educational_project_radio": "Yes",
-      "activities_involved_checkbox": "Use of previously collected data about people|Research involving staff only|Non-clinical activities with people (other than staff), such as interviews or surveys|Treatment, such as medicines, devices, surgery, vaccines or therapies",
+      "activities_involved_checkbox": ["Use of previously collected data about people","Research involving staff only","Non-clinical activities with people (other than staff), such as interviews or surveys","Treatment, such as medicines, devices, surgery, vaccines or therapies"],
       "is_research_bioresource_radio": "Yes",
       "bioresource_established_nhs_hsc_radio": "Yes",
       "is_ctimp_radio": "Yes",
@@ -44,10 +44,10 @@
   "Research_Location": {
     "Valid_Data_All_Fields": {
       "is_outside_uk_radio": "UK only",
-      "places_in_uk_for_project_checkbox": "England|Northern Ireland|Wales",
-      "where_human_sample_held_checkbox": "England|Northern Ireland",
-      "where_human_sample_obtained_checkbox": "Northern Ireland|Scotland|Wales",
-      "where_project_take_place_checkbox": "Independent research units|Phase 1 trial units (non-NHS or HSC organisation)|Prison or probation setting|Social care settings|Voluntary sector or private organisations|Community settings",
+      "places_in_uk_for_project_checkbox": ["England","Northern Ireland","Wales"],
+      "where_human_sample_held_checkbox": ["England","Northern Ireland"],
+      "where_human_sample_obtained_checkbox": ["Northern Ireland","Scotland","Wales"],
+      "where_project_take_place_checkbox": ["Independent research units","Phase 1 trial units (non-NHS or HSC organisation)","Prison or probation setting","Social care settings","Voluntary sector or private organisations","Community settings"],
       "details_other_organisation_text": "test organisation",
       "use_pic_radio": "Yes"
     }
