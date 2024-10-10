@@ -4,7 +4,7 @@ import { test } from '../../hooks/CustomFixtures';
 const { Given } = createBdd(test);
 
 Given(
-  'I enter the Application Name and Description for {string}',
+  'I enter the application name and description for {string}',
   async ({ createApplicationPage }, datasetName: string) => {
     const dataset = createApplicationPage.createApplicationPageData[datasetName];
     await createApplicationPage.applicationNameInput.fill(dataset.name);

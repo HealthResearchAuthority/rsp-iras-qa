@@ -7,7 +7,7 @@ Feature: Authenticate Test Users once only, before test run
     # And I can see the 'Login_Page'
     When I login to the application as the '<User>'
     Then I can see the 'Home_Page'
-    And I will store the '<User>' Authentication State
+    And I will store the '<User>' authentication state
     Examples:
       | User       |
       | Admin_User |

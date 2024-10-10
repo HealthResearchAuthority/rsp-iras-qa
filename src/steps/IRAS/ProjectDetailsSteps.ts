@@ -4,7 +4,7 @@ import { test } from '../../hooks/CustomFixtures';
 const { Then } = createBdd(test);
 
 Then(
-  'I fill the Project Information section on the Project Details page with {string}',
+  'I fill the project information section on the project details page with {string}',
   async ({ projectDetailsPage, commonItemsPage }, datasetName: string) => {
     const dataset = projectDetailsPage.projectDetailsPageTestData.Project_Information[datasetName];
     for (const key in dataset) {
@@ -18,7 +18,7 @@ Then(
 );
 
 Then(
-  'I fill the Public Involvement section on the Project Details page with {string}',
+  'I fill the public involvement section on the project details page with {string}',
   async ({ projectDetailsPage, commonItemsPage }, datasetName: string) => {
     const dataset = projectDetailsPage.projectDetailsPageTestData.Public_Involvement[datasetName];
     for (const key in dataset) {
@@ -42,7 +42,7 @@ Then(
 );
 
 Then(
-  'I fill the Research Design and Methodology section on the Project Details page with {string}',
+  'I fill the research design and methodology section on the project details page with {string}',
   async ({ projectDetailsPage, commonItemsPage }, datasetName: string) => {
     const dataset = projectDetailsPage.projectDetailsPageTestData.Research_Design[datasetName];
     for (const key in dataset) {
@@ -72,7 +72,7 @@ Then(
 );
 
 Then(
-  'I fill the Research Activities section on the Project Details page with {string}',
+  'I fill the research activities section on the project details page with {string}',
   async ({ projectDetailsPage, commonItemsPage }, datasetName: string) => {
     const dataset = projectDetailsPage.projectDetailsPageTestData.Research_Activities[datasetName];
     for (const key in dataset) {
@@ -108,7 +108,7 @@ Then(
 );
 
 Then(
-  'I fill the Participants section on the Project Details page with {string}',
+  'I fill the participants section on the project details page with {string}',
   async ({ projectDetailsPage, commonItemsPage }, datasetName: string) => {
     const dataset = projectDetailsPage.projectDetailsPageTestData.Participants[datasetName];
     for (const key in dataset) {

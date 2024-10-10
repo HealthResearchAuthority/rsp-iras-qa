@@ -4,7 +4,7 @@ import { expect, test } from '../../hooks/CustomFixtures';
 const { Given } = createBdd(test);
 
 Given(
-  'I can see the Proceed Application Page for {string}',
+  'I can see the proceed application page for {string}',
   async ({ proceedApplicationPage, createApplicationPage }, datasetName: string) => {
     const dataset = createApplicationPage.createApplicationPageData[datasetName];
     await proceedApplicationPage.assertOnProceedApplicationPage();

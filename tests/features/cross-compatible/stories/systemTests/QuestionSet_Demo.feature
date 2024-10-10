@@ -6,21 +6,21 @@ Feature: Question Set - Research Application - Combined Question Set Demo
 
     @rsp-1500 @rsp-1504
     Scenario Outline: Validate the entire flow of a new research application
-        And I enter the Application Name and Description for '<Project>'
+        And I enter the application name and description for '<Project>'
         And I click the 'Create' button on the 'Create_Application_Page'
-        And I can see the Proceed Application Page for '<Project>'
+        And I can see the proceed application page for '<Project>'
         And I click the 'Proceed_Application' button on the 'Proceed_Application_Page'
-        And I can see the 'Project_Filter' Question Set
-        When I fill the Project Details section in the Project Filter page with '<Project_Details>'
-        And I fill the Project Scope section in the Project Filter page with '<Project_Scope>'
-        And I fill the Research Location section in the Project Filter page with '<Research_Location>'
+        And I can see the 'Project_Filter' question set
+        When I fill the project details section in the project filter page with '<Project_Details>'
+        And I fill the project scope section in the project filter page with '<Project_Scope>'
+        And I fill the research location section in the project filter page with '<Research_Location>'
         Then I click the 'Continue' button on the 'Question_Set'
-        And I can see the 'Project_Details' Question Set
-        When I fill the Project Information section on the Project Details page with '<Project_Information>'
-        And I fill the Public Involvement section on the Project Details page with '<Public_Involvement>'
-        And I fill the Research Design and Methodology section on the Project Details page with '<Research_Design>'
-        And I fill the Research Activities section on the Project Details page with '<Research_Activities>'
-        And I fill the Participants section on the Project Details page with '<Participants>'
+        And I can see the 'Project_Details' question set
+        When I fill the project information section on the project details page with '<Project_Information>'
+        And I fill the public involvement section on the project details page with '<Public_Involvement>'
+        And I fill the research design and methodology section on the project details page with '<Research_Design>'
+        And I fill the research activities section on the project details page with '<Research_Activities>'
+        And I fill the participants section on the project details page with '<Participants>'
         Then I click the 'Continue' button on the 'Question_Set'
 
         Examples:

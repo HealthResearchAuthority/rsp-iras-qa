@@ -4,7 +4,7 @@ import { test } from '../../hooks/CustomFixtures';
 const { Then } = createBdd(test);
 
 Then(
-  'I fill the Project Details section in the Project Filter page with {string}',
+  'I fill the project details section in the project filter page with {string}',
   async ({ projectFilterPage, commonItemsPage }, dataset: string) => {
     if (
       Object.prototype.hasOwnProperty.call(
@@ -71,7 +71,7 @@ Then(
 );
 
 Then(
-  'I fill the Project Scope section in the Project Filter page with {string}',
+  'I fill the project scope section in the project filter page with {string}',
   async ({ projectFilterPage, commonItemsPage }, dataset: string) => {
     if (
       Object.prototype.hasOwnProperty.call(
@@ -244,7 +244,7 @@ Then(
 );
 
 Then(
-  'I fill the Research Location section in the Project Filter page with {string}',
+  'I fill the research location section in the project filter page with {string}',
   async ({ projectFilterPage, commonItemsPage }, dataset: string) => {
     if (
       Object.prototype.hasOwnProperty.call(

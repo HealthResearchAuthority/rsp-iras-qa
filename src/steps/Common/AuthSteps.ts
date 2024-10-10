@@ -7,6 +7,6 @@ When('I login to the application as the {string}', async ({ loginPage }, user: s
   await loginPage.loginWithUserCreds(user);
 });
 
-Then('I will store the {string} Authentication State', async ({ commonItemsPage }, user: string) => {
+Then('I will store the {string} authentication state', async ({ commonItemsPage }, user: string) => {
   await commonItemsPage.storeAuthState(user);
 });

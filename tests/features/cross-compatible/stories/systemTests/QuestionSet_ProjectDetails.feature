@@ -8,18 +8,18 @@ Feature: Question Set - Research Application - Project Details
 
   @rsp-1500
   Scenario Outline: Validate user is able to fill all sections in project details page for a new research application
-    And I enter the Application Name and Description for '<Project>'
+    And I enter the application name and description for '<Project>'
     And I click the 'Create' button on the 'Create_Application_Page'
-    And I can see the Proceed Application Page for '<Project>'
+    And I can see the proceed application page for '<Project>'
     And I click the 'Proceed_Application' button on the 'Proceed_Application_Page'
     And I can see the 'Project_Filter' Question Set
     And I click the 'Project_Details' link on the 'Progress_Bar'
     And I can see the 'Project_Details' Question Set
-    When I fill the Project Information section on the Project Details page with '<Project_Information>'
-    And I fill the Public Involvement section on the Project Details page with '<Public_Involvement>'
-    And I fill the Research Design and Methodology section on the Project Details page with '<Research_Design>'
-    And I fill the Research Activities section on the Project Details page with '<Research_Activities>'
-    And I fill the Participants section on the Project Details page with '<Participants>'
+    When I fill the project information section on the project details page with '<Project_Information>'
+    And I fill the public involvement section on the project details page with '<Public_Involvement>'
+    And I fill the research design and methodology section on the project details page with '<Research_Design>'
+    And I fill the research activities section on the project details page with '<Research_Activities>'
+    And I fill the participants section on the project details page with '<Participants>'
     Then I click the '<Navigation_Button>' button on the 'Question_Set'
 
     Examples:
