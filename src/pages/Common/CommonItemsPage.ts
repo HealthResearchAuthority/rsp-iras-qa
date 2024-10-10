@@ -101,28 +101,26 @@ export default class CommonItemsPage {
   }
 
   async fillUIComponent(dataset: any, key: any, page: any) {
-    let attributeValue: string = '';
-    let locator = page[key];
-    const checkLocator = page[key];
-    if (typeof page[key] == 'string') {
-      if (typeof dataset[key] == 'object') {
-        locator = this.page.locator(generateDynamicLocator(page[key], dataset[key][0]));
-        attributeValue = await locator.getAttribute('class');
-      } else {
-        locator = this.page.locator(generateDynamicLocator(page[key], dataset[key]));
-        attributeValue = await locator.getAttribute('class');
-      }
-    }
-    if ((await locator.getAttribute('type')) === 'text') {
+    const locator = page[key];
+    if ((await locator.first().getAttribute('type')) === 'text') {
       await locator.fill(dataset[key]);
-    } else if (attributeValue.includes('radio')) {
-      await locator.check();
-    } else if (attributeValue.includes('checkbox')) {
+    } else if ((await locator.first().getAttribute('type')) === 'radio') {
+      await locator
+        .locator('..')
+        .locator('text=' + dataset[key])
+        .check();
+    } else if ((await locator.first().getAttribute('type')) === 'checkbox') {
       if (!Array.isArray(dataset[key]) || !dataset[key].length) {
-        await locator.check();
+        await locator
+          .locator('..')
+          .locator('text=' + dataset[key])
+          .check();
       } else {
         for (const checkbox of dataset[key]) {
-          await this.page.locator(generateDynamicLocator(checkLocator, checkbox)).check();
+          await locator
+            .locator('..')
+            .locator('text=' + checkbox)
+            .check();
         }
       }
     }
