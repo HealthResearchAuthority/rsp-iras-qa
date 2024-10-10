@@ -3,10 +3,6 @@ import { test } from '../../hooks/CustomFixtures';
 
 const { Then } = createBdd(test);
 
-Then('I can see the Project Details page', async ({ projectDetailsPage, commonItemsPage }) => {
-  await projectDetailsPage.assertOnProjectDetailsPage(commonItemsPage.qSetProgressBarActiveStageLink);
-});
-
 Then(
   'I fill the Project Information section on the Project Details page with {string}',
   async ({ projectDetailsPage, commonItemsPage }, datasetName: string) => {

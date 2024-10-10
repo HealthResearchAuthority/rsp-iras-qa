@@ -1,0 +1,16 @@
+{
+  "Create_Application_Page": {
+    "title": "",
+    "heading": "Enter application details",
+    "enter_app_name_label": "Enter an application name",
+    "enter_app_desc_label": "Enter application description"
+  },
+  "Project_X": {
+    "name": "Project X",
+    "description": "This application is for Project X"
+  },
+  "Project_Y": {
+    "name": "Project Y",
+    "description": "This application is for Project Y"
+  }
+}

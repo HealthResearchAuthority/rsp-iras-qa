@@ -12,5 +12,11 @@
     "Adults_Lacking_Capacity": "Adults Lacking Capacity",
     "Children": "Children",
     "Booking": "Booking"
+  },
+  "Banner": {
+    "My_Applications": "My Applications"
+  },
+  "Home_Page": {
+    "My_Applications": "My Applications"
   }
 }

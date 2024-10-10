@@ -1,12 +1,12 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as projectFilterPageTestData from '../../resources/test_data/iras/project_filter_page_data.json';
+import { getTextFromElementArray } from '../../utils/UtilFunctions';
 
 //Declare Page Objects
 export default class ProjectFilterPage {
   readonly page: Page;
   readonly projectFilterPageTestData: typeof projectFilterPageTestData;
-  readonly pageHeadingCaption: Locator;
-  readonly pageHeading: Locator;
+  readonly projectFilterSectionHeadings: Locator;
   readonly shortProjectTitleTextBox: Locator;
   readonly fullProjectTitleTextBox: Locator;
   readonly isProjectManagedCommercialResearchRadio: string;
@@ -43,10 +43,7 @@ export default class ProjectFilterPage {
     this.projectFilterPageTestData = projectFilterPageTestData;
 
     //Locators
-    this.pageHeadingCaption = page.locator('legend', {
-      hasText: this.projectFilterPageTestData['Project_Filter'].heading_caption,
-    });
-    this.pageHeading = page.getByText(this.projectFilterPageTestData['Project_Filter'].heading);
+    this.projectFilterSectionHeadings = page.locator('.govuk-fieldset__legend--l');
     this.shortProjectTitleTextBox = page.locator('input[id="IQA0002_Text"]');
     this.fullProjectTitleTextBox = page.locator('input[id="IQA0003_Text"]');
     this.isProjectManagedCommercialResearchRadio = '//label[contains(@for,"IQA0004") and text()="%s"]';
@@ -83,9 +80,13 @@ export default class ProjectFilterPage {
     await this.page.goto('');
   }
 
-  async assertOnProjectFilterPage() {
-    await expect(this.pageHeadingCaption).toBeVisible();
-    await expect(this.pageHeading).toBeVisible();
-    expect(await this.page.title()).toBe(this.projectFilterPageTestData['Project_Filter'].title);
+  async assertOnProjectFilterPage(activeStage: Locator) {
+    const expectedSectionHeadingsText = projectFilterPageTestData.Project_Filter.section_headings;
+    expect(await activeStage.textContent()).toBe(this.projectFilterPageTestData.Project_Filter.page_name);
+    const actualSectionHeadings = await getTextFromElementArray(await this.projectFilterSectionHeadings.all());
+    expectedSectionHeadingsText.forEach((expectedHeadingText) => {
+      expect(actualSectionHeadings).toContainEqual(expectedHeadingText);
+    });
+    expect(await this.page.title()).toBe(this.projectFilterPageTestData.Project_Filter.title);
   }
 }

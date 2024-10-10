@@ -1,13 +1,22 @@
 {
   "Banner": {
-    "Login": "SignIn",
+    "Login": "Sign In",
     "Logout": "Logout"
   },
   "Home_Page": {
-    "New_Application": "Proceed with new application",
-    "Edit_Application": "Edit existing application"
+    "New_Application": "Create New Application",
+    "Login": "Sign In"
+  },
+  "Create_Application_Page": {
+    "Create": "Create"
+  },
+  "Proceed_Application_Page": {
+    "Proceed_Application": "Proceed with your application"
   },
   "Question_Set": {
-    "Continue": "Continue"
+    "Save": "Save",
+    "Continue": "Save and Continue",
+    "Validate": "Validate",
+    "Proceed_Submit": "Proceed to Submit"
   }
 }
