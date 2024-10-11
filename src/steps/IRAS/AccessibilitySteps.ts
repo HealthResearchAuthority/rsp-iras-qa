@@ -12,7 +12,7 @@ When('I Scan the page with the Axe Accessibilty Tool', async ({ makeAxeBuilder, 
     .withTags(['wcag2a', 'wcag2aa', 'wcag2aaa', 'wcag21a', 'wcag21aa', 'wcag22aa'])
     .analyze();
 
-  await $bddContext.testInfo.attach('accessibility-scan-results', {
+  await $bddWorld.testInfo.attach('accessibility-scan-results', {
     body: JSON.stringify(axeScanResults, null, 2),
     contentType: 'application/json',
   });
