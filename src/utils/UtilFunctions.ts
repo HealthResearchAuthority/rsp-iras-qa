@@ -2,6 +2,9 @@ import { DataTable } from '@cucumber/cucumber';
 import { Locator } from '@playwright/test';
 import crypto from 'crypto';
 import { readFile } from 'fs/promises';
+import { devices } from '@playwright/test';
+import 'dotenv/config';
+import { deviceDSafari, deviceDFirefox, deviceDChrome, deviceMIOS, deviceMAndroid } from '../hooks/GlobalSetup';
 
 export function getAuthState(user: string): string {
   let authState: string;
@@ -93,4 +96,85 @@ export async function getTextFromElementArray(inputArray: Locator[]): Promise<st
     arrInputText.push(inputText.trim());
   }
   return arrInputText;
+}
+let browser: any;
+let browserName: string;
+export function getDeviceType(): string | undefined {
+  switch (`${process.env.BROWSER}`.toUpperCase()) {
+    case 'CHROMIUM':
+      return `${deviceDChrome}`;
+    case 'FIREFOX':
+      return `${deviceDFirefox}`;
+    case 'SAFARI':
+      return `${deviceDSafari}`;
+    case 'IOS':
+      return `${deviceMIOS}`;
+    case 'ANDROID':
+      return `${deviceMAndroid}`;
+    default:
+      return `${deviceDChrome}`;
+  }
+}
+export const deviceType = getDeviceType();
+
+export function getBrowserType(): string {
+  browser = devices[`${deviceType}`];
+  browserName = JSON.parse(JSON.stringify(browser)).defaultBrowserType;
+  return browserName;
+}
+export const defaultBrowserType = getBrowserType();
+export function getBrowserVersionDevices(): string | undefined {
+  browser = devices[`${deviceType}`];
+  let version: string | undefined;
+  const browserType = `${JSON.parse(JSON.stringify(browser)).defaultBrowserType}`;
+  const userAgent = `${JSON.parse(JSON.stringify(browser)).userAgent}`;
+  if (browserType == 'chromium') {
+    const result: string[] = userAgent.split('Chrome/');
+    const subresult: string = result[1];
+    version = subresult.split(' ')[0];
+  } else if (browserType == 'webkit') {
+    const result: string[] = userAgent.split('Version/');
+    const subresult: string = result[1];
+    version = subresult.split(' ')[0];
+  } else if (browserType == 'firefox') {
+    const result: string[] = userAgent.split('Firefox/');
+    const subresult: string = result[1];
+    version = subresult;
+  }
+  return version;
+}
+export const browserVersion = getBrowserVersionDevices();
+
+let browserdata: any;
+let platform: string;
+export function getBrowserDetails() {
+  if (`${process.env.BROWSER}` == 'safari') {
+    browserdata = devices[`${deviceDSafari}`];
+    platform = 'desktop';
+  } else if (`${process.env.BROWSER}` == 'firefox') {
+    browserdata = devices[`${deviceDFirefox}`];
+    platform = 'desktop';
+  } else if (`${process.env.BROWSER}` == 'ios') {
+    browserdata = devices[`${deviceMIOS}`];
+    platform = 'mobile';
+  } else if (`${process.env.BROWSER}` == 'android') {
+    browserdata = devices[`${deviceMAndroid}`];
+    platform = 'mobile';
+  } else if (`${process.env.BROWSER}` == 'chromium') {
+    browserdata = devices[`${deviceDChrome}`];
+    platform = 'desktop';
+  } else {
+    browserdata = devices[`${deviceDChrome}`];
+    platform = 'desktop';
+    console.log('Invalid browser name, hence executing tests with default browser Chromium');
+  }
+  return [browserdata, platform];
+}
+export const [browserVal, platformVal] = getBrowserDetails();
+
+export function displayStartTime(startTime: Date) {
+  return new Date(startTime).toLocaleString(undefined, { timeZoneName: 'short' });
+}
+export function displayEndTime(endTime: string) {
+  return new Date(endTime).toLocaleString(undefined, { timeZoneName: 'short' });
 }

@@ -1,39 +1,26 @@
-import { PlaywrightTestConfig, devices } from '@playwright/test';
-import { defineBddConfig, cucumberReporter } from 'playwright-bdd';
+import { PlaywrightTestConfig } from '@playwright/test';
+import { cucumberReporter, defineBddConfig } from 'playwright-bdd';
 import 'dotenv/config';
+import { browserVal, platformVal } from './src/utils/UtilFunctions';
 
 // Select Browser to use in Pipeline, Set in .env File Locally
-let browser: any;
-let platform: string;
-if (`${process.env.BROWSER}` == 'safari') {
-  browser = devices['Desktop Safari'];
-  platform = 'desktop';
-} else if (`${process.env.BROWSER}` == 'firefox') {
-  browser = devices['Desktop Firefox'];
-  platform = 'desktop';
-} else if (`${process.env.BROWSER}` == 'ios') {
-  browser = devices['iPhone 14'];
-  platform = 'mobile';
-} else if (`${process.env.BROWSER}` == 'android') {
-  browser = devices['Galaxy S8'];
-  platform = 'mobile';
-} else {
-  browser = devices['Desktop Chrome'];
-  platform = 'desktop';
-}
+
+const browser: any = `${browserVal}`;
+const platform: string = `${platformVal}`;
 
 const config: PlaywrightTestConfig = {
   reporter: [
     ['list', { printSteps: true }],
     ['html', { outputFolder: './test-reports/playwright', open: 'never' }],
     cucumberReporter('json', { outputFile: './test-reports/cucumber/json/test_report.json' }),
+    ['./src/utils/Report.ts', { customOption: 'Cucumber HTML Report Generation' }],
   ],
   globalSetup: 'src/hooks/GlobalSetup.ts',
   globalTeardown: 'src/hooks/GlobalTeardown.ts',
   globalTimeout: 10 * 60 * 1000,
   timeout: 5 * 60 * 1000,
   workers: 1, // to enforce serial execution
-  retries: 2,
+  retries: 0,
   use: {
     ...browser,
     trace: 'on',
@@ -57,7 +44,7 @@ const config: PlaywrightTestConfig = {
         outputDir: 'generated-feature-files/auth-setup',
       }),
       use: {
-        headless: true,
+        headless: false,
         launchOptions: {
           slowMo: 0,
         },
@@ -77,7 +64,7 @@ const config: PlaywrightTestConfig = {
         outputDir: 'generated-feature-files/future-iras',
       }),
       use: {
-        headless: true,
+        headless: false,
         launchOptions: {
           slowMo: 0,
         },
