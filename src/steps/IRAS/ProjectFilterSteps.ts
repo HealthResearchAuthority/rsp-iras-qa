@@ -3,10 +3,6 @@ import { test } from '../../hooks/CustomFixtures';
 
 const { Then } = createBdd(test);
 
-Then('I can see the project filter page', async ({ projectFilterPage }) => {
-  await projectFilterPage.assertOnProjectFilterPage();
-});
-
 Then(
   'I fill the project details section in the project filter page with {string}',
   async ({ projectFilterPage, commonItemsPage }, datasetName: string) => {
