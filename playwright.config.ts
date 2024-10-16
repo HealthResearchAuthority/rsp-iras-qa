@@ -44,7 +44,7 @@ const config: PlaywrightTestConfig = {
         outputDir: 'generated-feature-files/auth-setup',
       }),
       use: {
-        headless: false,
+        headless: true,
         launchOptions: {
           slowMo: 0,
         },
@@ -56,7 +56,7 @@ const config: PlaywrightTestConfig = {
       testDir: defineBddConfig({
         paths: [
           'tests/features/cross-compatible/stories/**/*.feature',
-          // 'tests/features/cross-compatible/accessibility/**/*.feature', uncomment when running accessibility tests
+          'tests/features/cross-compatible/accessibility/**/*.feature', //uncomment when running accessibility tests
           `tests/features/${platform}/**/*.feature`,
         ],
         require: ['src/steps/**/*.ts'],
@@ -64,7 +64,7 @@ const config: PlaywrightTestConfig = {
         outputDir: 'generated-feature-files/future-iras',
       }),
       use: {
-        headless: false,
+        headless: true,
         launchOptions: {
           slowMo: 0,
         },

@@ -43,4 +43,8 @@ export default class LoginPage {
     await this.passwordInput.fill(password);
     await this.btnContinue.click();
   }
+  async clickOnNextButton() {
+    await this.usernameInput.fill('username');
+    await this.btnNext.click();
+  }
 }

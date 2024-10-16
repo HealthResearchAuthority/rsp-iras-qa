@@ -7,8 +7,8 @@ import {
   deviceType,
   defaultBrowserType,
   browserVersion,
-  displayStartTime,
-  displayEndTime,
+  displayTimeZone,
+  formatedDuration,
 } from '../utils/UtilFunctions';
 
 class MyReporter implements Reporter {
@@ -36,13 +36,14 @@ class MyReporter implements Reporter {
           { label: 'Operating System', value: `${os.version}` },
           {
             label: 'Execution Start Time',
-            value: displayStartTime(result.startTime),
+            value: displayTimeZone(result.startTime),
           },
           {
             label: 'Execution End Time',
-            value: displayEndTime(endTime),
+            value: displayTimeZone(endTime),
           },
-          { label: 'Total Duration in seconds', value: `${result.duration / 1000}` },
+          // { label: 'Total Duration in milliseconds', value: `${result.duration}` },
+          { label: 'Total Duration', value: formatedDuration(result.duration) },
         ],
       },
     });

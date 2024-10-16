@@ -1,10 +1,12 @@
 import { DataTable } from '@cucumber/cucumber';
 import { Locator } from '@playwright/test';
 import crypto from 'crypto';
-import { readFile } from 'fs/promises';
+import { readFile, writeFile } from 'fs/promises';
 import { devices } from '@playwright/test';
 import 'dotenv/config';
 import { deviceDSafari, deviceDFirefox, deviceDChrome, deviceMIOS, deviceMAndroid } from '../hooks/GlobalSetup';
+import fs from 'fs';
+import { createHtmlReport } from 'axe-html-reporter';
 
 export function getAuthState(user: string): string {
   let authState: string;
@@ -172,9 +174,47 @@ export function getBrowserDetails() {
 }
 export const [browserVal, platformVal] = getBrowserDetails();
 
-export function displayStartTime(startTime: Date) {
-  return new Date(startTime).toLocaleString(undefined, { timeZoneName: 'short' });
+export function displayTimeZone(time: Date | string) {
+  return new Date(time).toLocaleString(undefined, { timeZoneName: 'short' });
 }
-export function displayEndTime(endTime: string) {
-  return new Date(endTime).toLocaleString(undefined, { timeZoneName: 'short' });
+export function formatedDuration(duration: number) {
+  const seconds = Math.floor((duration / 1000) % 60);
+
+  const minutes = Math.floor((duration / 1000 / 60) % 60);
+
+  const hours = Math.floor((duration / 1000 / 60 / 60) % 24);
+
+  const formattedTime = [
+    hours.toString().padStart(2, '0'),
+    minutes.toString().padStart(2, '0'),
+    seconds.toString().padStart(2, '0'),
+  ].join(':');
+  return formattedTime;
+}
+export function generatehtmlReport(path: string, htmlReport: string) {
+  if (!fs.existsSync(path)) {
+    fs.mkdirSync('test-results/reports', {
+      recursive: true,
+    });
+  }
+  fs.writeFileSync(`test-results/reports/${path}.html`, htmlReport);
+}
+export async function generateJSON($bddWorld, axeScanResults, jsonfile) {
+  await $bddWorld.testInfo.attach('accessibility-scan-results', {
+    body: JSON.stringify(axeScanResults, null, 2),
+    contentType: 'application/json',
+  });
+  const file = $bddWorld.testInfo.outputPath(`${jsonfile}`);
+  await writeFile(file, JSON.stringify(axeScanResults, null, 2), 'utf8');
+}
+export async function generateAxeHTMLReport($bddWorld, axeScanResults) {
+  const htmlReport = createHtmlReport({
+    results: axeScanResults,
+    options: {
+      projectKey: $bddWorld.testInfo.title,
+      doNotCreateReportFile: false,
+    },
+  });
+  //write the html report for each page
+  generatehtmlReport(`${$bddWorld.testInfo.title.replace(' ', '_')}.html`, htmlReport);
 }
