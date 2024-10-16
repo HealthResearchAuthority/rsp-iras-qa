@@ -6,7 +6,7 @@ import { getTextFromElementArray } from '../../utils/UtilFunctions';
 export default class ProjectFilterPage {
   readonly page: Page;
   readonly projectFilterPageTestData: typeof projectFilterPageTestData;
-  readonly projectFilterSectionHeadings: Locator;
+  readonly project_filter_section_headings: Locator;
   readonly short_project_title_text: Locator;
   readonly full_project_title_text: Locator;
   readonly is_project_managed_commercial_research_radio: Locator;
@@ -43,47 +43,47 @@ export default class ProjectFilterPage {
     this.projectFilterPageTestData = projectFilterPageTestData;
 
     //Locators
-    this.projectFilterSectionHeadings = page.locator('.govuk-fieldset__legend--l');
-    this.short_project_title_text = page.locator('input[id="IQA0002_Text"]');
-    this.full_project_title_text = page.locator('input[id="IQA0003_Text"]');
-    this.is_project_managed_commercial_research_radio = page.locator('input[id^="IQA0004"]');
-    this.is_nihr_funding_radio = page.locator('input[id^="IQA03271"]');
-    this.access_cpms_services_radio = page.locator('input[id^="IQA0005"]');
-    this.email_initial_contact_cpms_text = page.locator('input[id="IQA0006_Text"]');
-    this.is_educational_project_radio = page.locator('input[id^="IQA0012"]');
-    this.activities_involved_checkbox = page.locator('input[id^="IQA0061"]');
-    this.is_research_bioresource_radio = page.locator('input[id^="IQA0014"]');
-    this.bioresource_established_nhs_hsc_radio = page.locator('input[id^="IQA0015"]');
-    this.is_ctimp_radio = page.locator('input[id^="IQA0017"]');
-    this.options_applied_for_project_radio = page.locator('input[id^="IQA0018"]');
-    this.product_contain_genetically_modified_organism_radio = page.locator('input[id^="IQA03282"]');
-    this.is_clinical_or_medical_devices_radio = page.locator('input[id^="IQA0020"]');
-    this.exposing_ionising_radiation_radio = page.locator('input[id^="IQA0021"]');
-    this.using_human_biological_samples_radio = page.locator('input[id^="IQA0022"]');
-    this.patient_data_accessed_outside_radio = page.locator('input[id^="IQA0024"]');
-    this.research_with_adults_lacking_capacity_to_consent_radio = page.locator('input[id^="IQA0025"]');
-    this.include_children_radio = page.locator('input[id^="IQA0026"]');
-    this.include_prisoners_offenders_radio = page.locator('input[id^="IQA0027"]');
-    this.involve_ministry_of_defence_radio = page.locator('input[id^="IQA0028"]');
-    this.involve_hfea_radio = page.locator('input[id^="IQA0029"]');
-    this.is_outside_uk_radio = page.locator('input[id^="IQA0142"]');
-    this.places_in_uk_for_project_checkbox = page.locator('input[id^="IQA0032"]');
-    this.where_human_sample_held_checkbox = page.locator('input[id^="IQA0033"]');
-    this.where_human_sample_obtained_checkbox = page.locator('input[id^="IQA0034"]');
-    this.where_project_take_place_checkbox = page.locator('input[id^="IQA0144"]');
-    this.details_other_organisation_text = page.locator('input[id="IQA0145_Text"]');
-    this.use_pic_radio = page.locator('input[id^="IQA0146"]');
+    this.project_filter_section_headings = page.locator('.govuk-fieldset__legend--l');
+    this.short_project_title_text = page.getByTestId('IQA0002_Text');
+    this.full_project_title_text = page.getByTestId('IQA0003_Text');
+    this.is_project_managed_commercial_research_radio = page.getByTestId(new RegExp('^IQA0004'));
+    this.is_nihr_funding_radio = page.getByTestId(new RegExp('^IQA03271'));
+    this.access_cpms_services_radio = page.getByTestId(new RegExp('^IQA0005'));
+    this.email_initial_contact_cpms_text = page.getByTestId('IQA0006_Text');
+    this.is_educational_project_radio = page.getByTestId(new RegExp('^IQA0012'));
+    this.activities_involved_checkbox = page.getByTestId(new RegExp('^IQA0061'));
+    this.is_research_bioresource_radio = page.getByTestId(new RegExp('^IQA0014'));
+    this.bioresource_established_nhs_hsc_radio = page.getByTestId(new RegExp('^IQA0015'));
+    this.is_ctimp_radio = page.getByTestId(new RegExp('^IQA0017'));
+    this.options_applied_for_project_radio = page.getByTestId(new RegExp('^IQA0018'));
+    this.product_contain_genetically_modified_organism_radio = page.getByTestId(new RegExp('^IQA03282'));
+    this.is_clinical_or_medical_devices_radio = page.getByTestId(new RegExp('^IQA0020'));
+    this.exposing_ionising_radiation_radio = page.getByTestId(new RegExp('^IQA0021'));
+    this.using_human_biological_samples_radio = page.getByTestId(new RegExp('^IQA0022'));
+    this.patient_data_accessed_outside_radio = page.getByTestId(new RegExp('^IQA0024'));
+    this.research_with_adults_lacking_capacity_to_consent_radio = page.getByTestId(new RegExp('^IQA0025'));
+    this.include_children_radio = page.getByTestId(new RegExp('^IQA0026'));
+    this.include_prisoners_offenders_radio = page.getByTestId(new RegExp('^IQA0027'));
+    this.involve_ministry_of_defence_radio = page.getByTestId(new RegExp('^IQA0028'));
+    this.involve_hfea_radio = page.getByTestId(new RegExp('^IQA0029'));
+    this.is_outside_uk_radio = page.getByTestId(new RegExp('^IQA0142'));
+    this.places_in_uk_for_project_checkbox = page.getByTestId(new RegExp('^IQA0032'));
+    this.where_human_sample_held_checkbox = page.getByTestId(new RegExp('^IQA0033'));
+    this.where_human_sample_obtained_checkbox = page.getByTestId(new RegExp('^IQA0034'));
+    this.where_project_take_place_checkbox = page.getByTestId(new RegExp('^IQA0144'));
+    this.details_other_organisation_text = page.getByTestId('IQA0145_Text');
+    this.use_pic_radio = page.getByTestId(new RegExp('^IQA0146'));
   }
 
   //Page Methods
   async goto() {
-    await this.page.goto('');
+    await this.page.goto('questionnaire/displayquestionnaire?categoryId=A');
   }
 
   async assertOnProjectFilterPage(activeStage: Locator) {
     const expectedSectionHeadingsText = projectFilterPageTestData.Project_Filter.section_headings;
     expect(await activeStage.textContent()).toBe(this.projectFilterPageTestData.Project_Filter.page_name);
-    const actualSectionHeadings = await getTextFromElementArray(await this.projectFilterSectionHeadings.all());
+    const actualSectionHeadings = await getTextFromElementArray(await this.project_filter_section_headings.all());
     expectedSectionHeadingsText.forEach((expectedHeadingText) => {
       expect(actualSectionHeadings).toContainEqual(expectedHeadingText);
     });
