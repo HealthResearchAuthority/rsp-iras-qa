@@ -122,28 +122,15 @@ export default class CommonItemsPage {
     console.log(testType + ' test action');
   }
 
-  async fillUIComponent(dataset: any, key: any, page: any) {
-    const locator = page[key];
+  async fillUIComponent<PageObject>(dataset: JSON, key: string, page: PageObject) {
+    const locator: Locator = page[key];
     if ((await locator.first().getAttribute('type')) === 'text') {
       await locator.fill(dataset[key]);
     } else if ((await locator.first().getAttribute('type')) === 'radio') {
-      await locator
-        .locator('..')
-        .locator('text=' + dataset[key])
-        .check();
+      await locator.locator('..').getByLabel(dataset[key]).check();
     } else if ((await locator.first().getAttribute('type')) === 'checkbox') {
-      if (!Array.isArray(dataset[key]) || !dataset[key].length) {
-        await locator
-          .locator('..')
-          .locator('text=' + dataset[key])
-          .check();
-      } else {
-        for (const checkbox of dataset[key]) {
-          await locator
-            .locator('..')
-            .locator('text=' + checkbox)
-            .check();
-        }
+      for (const checkbox of dataset[key]) {
+        await locator.locator('..').getByLabel(checkbox).check();
       }
     }
   }
