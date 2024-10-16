@@ -64,7 +64,7 @@ export default class ProjectDetailsPage {
 
   //Page Methods
   async goto() {
-    await this.page.goto('');
+    await this.page.goto('questionnaire/displayquestionnaire?categoryId=B');
   }
 
   async assertOnProjectDetailsPage(activeStage: Locator) {

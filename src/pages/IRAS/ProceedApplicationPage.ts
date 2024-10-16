@@ -37,7 +37,7 @@ export default class ProceedApplicationPage {
 
   //Page Methods
   async goto() {
-    await this.page.goto('');
+    await this.page.goto('application/createapplication');
   }
 
   async assertOnProceedApplicationPage() {
