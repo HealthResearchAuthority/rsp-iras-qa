@@ -223,7 +223,8 @@ export function getOSNameVersion() {
   let osVersion;
   // new RegExp('*Ubuntu')
   if (`${os.version}`.includes('Ubuntu')) {
-    osVersion = `${os.type}` + ' ' + `${os.release}`;
+    osVersion =
+      `${os.type}` + ' ' + `${os.release}` + ' ' + `${os.hostname}` + ' ' + `${os.machine}` + ' ' + `${os.platform}`;
   } else {
     osVersion = `${os.version}`;
   }
