@@ -31,7 +31,8 @@ parameters:
   - name: devops_library_branch
     displayName: DevOps Library Branch
     type: string
-    default: main
+    #default: main
+    default: rsp-1507-update-playwright-report-yaml
   - name: tests_run_timeout
     type: number
     displayName: Playwright Tests Run Timeout
