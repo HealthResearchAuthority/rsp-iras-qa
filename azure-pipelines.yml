@@ -4,14 +4,14 @@
 name: Run Playwright Tests
 
 trigger:
-  - main
+  - feature/rsp-1507-update-playwright-report
 
 schedules:
   - cron: '20 16 17 10 Mon-Fri'
     displayName: 'Nightly run - full suite'
     branches:
       include:
-        - main
+        - feature/rsp-1507-update-playwright-report
     always: true
 
 pool:
