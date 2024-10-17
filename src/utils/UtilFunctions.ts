@@ -221,10 +221,8 @@ export async function generateAxeHTMLReport($bddWorld, axeScanResults) {
 }
 export function getOSNameVersion() {
   let osVersion;
-  // new RegExp('*Ubuntu')
   if (`${os.version}`.includes('Ubuntu')) {
-    osVersion =
-      `${os.type}` + ' ' + `${os.release}` + ' ' + `${os.hostname}` + ' ' + `${os.machine}` + ' ' + `${os.platform}`;
+    osVersion = `${os.type}` + ' ' + `${os.release}`;
   } else {
     osVersion = `${os.version}`;
   }
