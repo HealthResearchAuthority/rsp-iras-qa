@@ -7,6 +7,7 @@ import 'dotenv/config';
 import { deviceDSafari, deviceDFirefox, deviceDChrome, deviceMIOS, deviceMAndroid } from '../hooks/GlobalSetup';
 import fs from 'fs';
 import { createHtmlReport } from 'axe-html-reporter';
+import os from 'os';
 
 export function getAuthState(user: string): string {
   let authState: string;
@@ -217,4 +218,14 @@ export async function generateAxeHTMLReport($bddWorld, axeScanResults) {
   });
   //write the html report for each page
   generatehtmlReport(`${$bddWorld.testInfo.title.replace(' ', '_')}.html`, htmlReport);
+}
+export function getOSNameVersion() {
+  let osVersion;
+  // new RegExp('*Ubuntu')
+  if (`${os.version}`.includes('Ubuntu')) {
+    osVersion = `${os.type}` + ' ' + `${os.release}`;
+  } else {
+    osVersion = `${os.version}`;
+  }
+  return osVersion;
 }

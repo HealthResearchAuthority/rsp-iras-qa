@@ -1,5 +1,4 @@
 import report from 'multiple-cucumber-html-reporter';
-import os from 'os';
 import 'dotenv/config';
 import { Reporter } from 'playwright/types/testReporter';
 import type { FullResult } from '@playwright/test/reporter';
@@ -9,6 +8,7 @@ import {
   browserVersion,
   displayTimeZone,
   formatedDuration,
+  getOSNameVersion,
 } from '../utils/UtilFunctions';
 
 class MyReporter implements Reporter {
@@ -33,7 +33,7 @@ class MyReporter implements Reporter {
         title: 'Run Info',
         data: [
           { label: 'Environment', value: 'QA' },
-          { label: 'Operating System', value: `${os.version}` },
+          { label: 'Operating System', value: getOSNameVersion() },
           {
             label: 'Execution Start Time',
             value: displayTimeZone(result.startTime),
