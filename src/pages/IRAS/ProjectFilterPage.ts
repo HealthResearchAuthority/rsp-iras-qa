@@ -43,36 +43,36 @@ export default class ProjectFilterPage {
     this.projectFilterPageTestData = projectFilterPageTestData;
 
     //Locators
-    this.project_filter_section_headings = page.locator('.govuk-fieldset__legend--l');
-    this.short_project_title_text = page.getByTestId('IQA0002_Text');
-    this.full_project_title_text = page.getByTestId('IQA0003_Text');
-    this.is_project_managed_commercial_research_radio = page.getByTestId(new RegExp('^IQA0004'));
-    this.is_nihr_funding_radio = page.getByTestId(new RegExp('^IQA03271'));
-    this.access_cpms_services_radio = page.getByTestId(new RegExp('^IQA0005'));
-    this.email_initial_contact_cpms_text = page.getByTestId('IQA0006_Text');
-    this.is_educational_project_radio = page.getByTestId(new RegExp('^IQA0012'));
-    this.activities_involved_checkbox = page.getByTestId(new RegExp('^IQA0061'));
-    this.is_research_bioresource_radio = page.getByTestId(new RegExp('^IQA0014'));
-    this.bioresource_established_nhs_hsc_radio = page.getByTestId(new RegExp('^IQA0015'));
-    this.is_ctimp_radio = page.getByTestId(new RegExp('^IQA0017'));
-    this.options_applied_for_project_radio = page.getByTestId(new RegExp('^IQA0018'));
-    this.product_contain_genetically_modified_organism_radio = page.getByTestId(new RegExp('^IQA03282'));
-    this.is_clinical_or_medical_devices_radio = page.getByTestId(new RegExp('^IQA0020'));
-    this.exposing_ionising_radiation_radio = page.getByTestId(new RegExp('^IQA0021'));
-    this.using_human_biological_samples_radio = page.getByTestId(new RegExp('^IQA0022'));
-    this.patient_data_accessed_outside_radio = page.getByTestId(new RegExp('^IQA0024'));
-    this.research_with_adults_lacking_capacity_to_consent_radio = page.getByTestId(new RegExp('^IQA0025'));
-    this.include_children_radio = page.getByTestId(new RegExp('^IQA0026'));
-    this.include_prisoners_offenders_radio = page.getByTestId(new RegExp('^IQA0027'));
-    this.involve_ministry_of_defence_radio = page.getByTestId(new RegExp('^IQA0028'));
-    this.involve_hfea_radio = page.getByTestId(new RegExp('^IQA0029'));
-    this.is_outside_uk_radio = page.getByTestId(new RegExp('^IQA0142'));
-    this.places_in_uk_for_project_checkbox = page.getByTestId(new RegExp('^IQA0032'));
-    this.where_human_sample_held_checkbox = page.getByTestId(new RegExp('^IQA0033'));
-    this.where_human_sample_obtained_checkbox = page.getByTestId(new RegExp('^IQA0034'));
-    this.where_project_take_place_checkbox = page.getByTestId(new RegExp('^IQA0144'));
-    this.details_other_organisation_text = page.getByTestId('IQA0145_Text');
-    this.use_pic_radio = page.getByTestId(new RegExp('^IQA0146'));
+    this.project_filter_section_headings = this.page.locator('.govuk-fieldset__legend--l');
+    this.short_project_title_text = this.page.getByTestId('IQA0002_Text');
+    this.full_project_title_text = this.page.getByTestId('IQA0003_Text');
+    this.is_project_managed_commercial_research_radio = this.page.getByTestId(new RegExp('^IQA0004'));
+    this.is_nihr_funding_radio = this.page.getByTestId(new RegExp('^IQA03271'));
+    this.access_cpms_services_radio = this.page.getByTestId(new RegExp('^IQA0005'));
+    this.email_initial_contact_cpms_text = this.page.getByTestId('IQA0006_Text');
+    this.is_educational_project_radio = this.page.getByTestId(new RegExp('^IQA0012'));
+    this.activities_involved_checkbox = this.page.getByTestId(new RegExp('^IQA0061'));
+    this.is_research_bioresource_radio = this.page.getByTestId(new RegExp('^IQA0014'));
+    this.bioresource_established_nhs_hsc_radio = this.page.getByTestId(new RegExp('^IQA0015'));
+    this.is_ctimp_radio = this.page.getByTestId(new RegExp('^IQA0017'));
+    this.options_applied_for_project_radio = this.page.getByTestId(new RegExp('^IQA0018'));
+    this.product_contain_genetically_modified_organism_radio = this.page.getByTestId(new RegExp('^IQA03282'));
+    this.is_clinical_or_medical_devices_radio = this.page.getByTestId(new RegExp('^IQA0020'));
+    this.exposing_ionising_radiation_radio = this.page.getByTestId(new RegExp('^IQA0021'));
+    this.using_human_biological_samples_radio = this.page.getByTestId(new RegExp('^IQA0022'));
+    this.patient_data_accessed_outside_radio = this.page.getByTestId(new RegExp('^IQA0024'));
+    this.research_with_adults_lacking_capacity_to_consent_radio = this.page.getByTestId(new RegExp('^IQA0025'));
+    this.include_children_radio = this.page.getByTestId(new RegExp('^IQA0026'));
+    this.include_prisoners_offenders_radio = this.page.getByTestId(new RegExp('^IQA0027'));
+    this.involve_ministry_of_defence_radio = this.page.getByTestId(new RegExp('^IQA0028'));
+    this.involve_hfea_radio = this.page.getByTestId(new RegExp('^IQA0029'));
+    this.is_outside_uk_radio = this.page.getByTestId(new RegExp('^IQA0142'));
+    this.places_in_uk_for_project_checkbox = this.page.getByTestId(new RegExp('^IQA0032'));
+    this.where_human_sample_held_checkbox = this.page.getByTestId(new RegExp('^IQA0033'));
+    this.where_human_sample_obtained_checkbox = this.page.getByTestId(new RegExp('^IQA0034'));
+    this.where_project_take_place_checkbox = this.page.getByTestId(new RegExp('^IQA0144'));
+    this.details_other_organisation_text = this.page.getByTestId('IQA0145_Text');
+    this.use_pic_radio = this.page.getByTestId(new RegExp('^IQA0146'));
   }
 
   //Page Methods
