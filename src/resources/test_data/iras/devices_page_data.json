@@ -1,0 +1,47 @@
+{
+  "Devices": {
+    "title": "",
+    "section_headings": ["Devices Filter Questions","Device investigations not requiring review by MHRA"],
+    "page_name": "Devices"
+  },
+  "Devices_Filter_Questions": {
+    "Valid_Data_All_Fields": {
+      "is_sponsored_by_device_company_radio": "Yes",
+      "type_of_project_1_radio": "Clinical investigation for UKCA/CE UKNI/CE marking purposes (includes investigation of a UKCA/CE UKNI/CE marked device outside its current intended purposes or in modified form)",
+      "type_of_project_2_radio": "Clinical study of a non-UKCA/CE UKNI/CE marked device",
+      "will_research_conducted_northern_ireland_radio": "Yes",
+      "what_review_needed_1_radio": "MHRA and REC",
+      "what_review_needed_2_radio": "MHRA and REC"
+    },
+    "Research_Conducted_Northern_Ireland": {
+      "is_sponsored_by_device_company_radio": "Yes",
+      "type_of_project_1_radio": "Clinical investigation for UKCA/CE UKNI/CE marking purposes (includes investigation of a UKCA/CE UKNI/CE marked device outside its current intended purposes or in modified form)",
+      "type_of_project_2_radio": "Clinical study of a non-UKCA/CE UKNI/CE marked device",
+      "will_research_conducted_northern_ireland_radio": "No",
+      "what_review_needed_1_radio": "MHRA and REC",
+      "what_review_needed_2_radio": "MHRA and REC"
+    }
+  },
+  "Device_Investigation_No_MHRA": {
+    "Valid_Data_All_Fields": {
+      "is_manufacturer_lead_sponsor_radio": "Yes",
+      "name_of_manufacturer_text": "Manufacturer name - Example",
+      "trade_name_for_device_text": "Manufacturer trade name for device - Example",
+      "name_for_device_text": "Name for device - Example",
+      "number_for_device_text": "Number for device - Example",
+      "generic_name_of_device_text": "Generic name and indented use of device - Example",
+      "length_of_time_device_used_text": "Length of time device been in use - Example",
+      "type_of_research_project_radio": "Investigation of a new medical device",
+      "will_device_used_within_intended_population_radio": "Yes",
+      "description_of_any_new_device_text": "Description of new device - Example",
+      "composition_of_any_new_implantable_materials_text": "Composition of any new implantable materials - Example",
+      "summary_of_modifications_to_marked_devices_text": "Summary of any modifications to UKCA/CE UKNI/CE marked devices - Example",
+      "summary_of_proposed_changes_to_intended_purpose_text": "Summary of any proposed changes to the UKCA/CE UKNI/CE marked intended purpose - Example",
+      "procedures_involved_non_invasive_radio": "Yes",
+      "arrangements_for_manufacture_of_device_text": "Arrangements for manufacture of the investigational device - Example",
+      "what_safety_testing_undertaken_text": "Safety and performance testing has been undertaken on the investigational device and its constituents - Example",
+      "sponsors_plan_further_development_text": "Sponsor’s plans for further development and use of the device - Example",
+      "details_device_manufactures_standards_expected_text": "Details of the arrangements for ensuring that the device has been manufactured to the standards expected - Example"
+    }
+  }
+}
