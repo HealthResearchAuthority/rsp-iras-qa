@@ -6,3 +6,4 @@ test-results
 generated-feature-files
 .env
 .eslintcache
+artifacts
