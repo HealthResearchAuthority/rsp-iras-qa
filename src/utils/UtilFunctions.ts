@@ -1,8 +1,7 @@
 import { DataTable } from '@cucumber/cucumber';
-import { Locator } from '@playwright/test';
+import { Locator, devices } from '@playwright/test';
 import crypto from 'crypto';
 import { readFile, writeFile } from 'fs/promises';
-import { devices } from '@playwright/test';
 import 'dotenv/config';
 import { deviceDSafari, deviceDFirefox, deviceDChrome, deviceMIOS, deviceMAndroid } from '../hooks/GlobalSetup';
 import fs from 'fs';
