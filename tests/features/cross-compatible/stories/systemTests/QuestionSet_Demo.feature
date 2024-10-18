@@ -4,7 +4,7 @@ Feature: Question Set - Research Application - Combined Question Set Demo
     Background:
         Given I have navigated to the 'Create_Application_Page'
 
-    @rsp-1500 @rsp-1504
+    @rsp-1500 @rsp-1501 @rsp-1504
     Scenario Outline: Validate the entire flow of a new research application
         And I enter the application name and description for '<Project>'
         And I click the 'Create' button on the 'Create_Application_Page'
