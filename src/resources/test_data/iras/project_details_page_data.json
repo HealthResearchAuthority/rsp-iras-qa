@@ -157,5 +157,98 @@
       "what_arrangements_apply_to_participants_involved_text": "The arrangements X, Y and Z will apply",
       "could_any_participants_be_vulnerable_radio": "Yes"
     }
+  },
+  "Consent": {
+    "Valid_Data_In_All_Fields": {
+      "only_include_adults_lacking_capacity_checkbox": [
+        "both adults with capacity and lacking capacity to consent for themselves"
+      ],
+      "only_include_children_radio": "Yes",
+      "seek_consent_prior_to_participation_radio": "Consent will be obtained from all participants",
+      "reasons_why_consent_not_obtained_checkbox": [
+        "Consent will not be obtained for the use of non-identifiable data or samples"
+      ],
+      "justify_not_seek_consent_text": "I will not seek consent due to X, Y and Z",
+      "describe_arrangments_for_consent_text": "The arrangments will be X, Y and Z",
+      "how_long_allow_participants_to_decide_text": "We will allow them X amount of time",
+      "explain_payments_benefits_incentives_text": "The incentives will be X, Y and Z",
+      "what_arrangments_comply_welsh_language_text": "We will arrange for X, Y and Z",
+      "what_arrangements_for_communication_needs_text": "The arrangements X, Y and Z will be made",
+      "what_arrangements_unable_written_consent_text": "We have arrangements for X, Y and Z in place",
+      "what_arrangements_participants_recieve_info_text": "We have arranged for X, Y and Z to occur",
+      "what_steps_if_paticipant_loses_capacity_radio": "The participant would be withdrawn from the project. Identifiable data or tissue already collected with consent would be retained and used. No further data or tissue would be collected or any other research procedures carried out on or in relation to the participant."
+    }
+  },
+  "Risks_Conflicts": {
+    "Valid_Data_In_All_Fields": {
+      "describe_risks_to_team_and_how_managed_text": "The risks X and Y will be managed by Z",
+      "does_investigator_have_personal_involvement_radio": "Yes",
+      "give_details_of_relevant_conflict_text": "The details are X, Y and Z",
+      "is_chief_member_of_nhs_ethics_rec_radio": "Yes",
+      "rec_chief_investigators_are_members_of_checkbox": [
+        "East Midlands - Leicester Central",
+        "Health and Social Care Research Ethics Committee A (HSC REC A)",
+        "London - Fulham",
+        "North East - Tyne & Wear South",
+        "North West - Liverpool Central",
+        "West of Scotland REC 4"
+      ],
+      "will_chief_investigators_recieve_payment_incentives_radio": "Yes",
+      "give_details_of_payment_incentives_text": "They will receive payments X and Y, along with incentive Z"
+    },
+    "No_Risks_Or_Conflicts": {
+      "describe_risks_to_team_and_how_managed_text": "We do not anticipate any risks for this project, and see no conflict of interest",
+      "does_investigator_have_personal_involvement_radio": "No",
+      "is_chief_member_of_nhs_ethics_rec_radio": "Yes",
+      "rec_chief_investigators_are_members_of_checkbox": [
+        "East of England - Cambridgeshire and Hertfordshire",
+        "London - Central",
+        "North of Scotland Research Ethics Committee 1",
+        "South West - Frenchay",
+        "Wales REC 6"
+      ],
+      "will_chief_investigators_recieve_payment_incentives_radio": "No"
+    }
+  },
+  "Summary_Ethical_Issues": {
+    "Valid_Data_In_All_Fields": {
+      "summarise_main_ethical_issues_text": "The ethical issues X and Y will arise along with Z",
+      "is_application_any_of_following_checkbox": [
+        "has previously received an unfavourable opinion by a REC in the UK",
+        "linked to another project"
+      ],
+      "provide_iras_id_of_unfavorable_opinion_text": "The IRAS Id of the project that received unfavourable feedback was XYZ123",
+      "explain_how_reasons_for_opinion_have_been_addressed_text": "The concerns have been addressed by X, Y and Z",
+      "provide_info_about_project_background_text": "The project has the background X and Y, hence why decision Z was made"
+    },
+    "No_Ethical_Concerns": {
+      "summarise_main_ethical_issues_text": "We anticipate no ethical issues at this time",
+      "is_application_any_of_following_checkbox": ["none of the above"],
+      "provide_info_about_project_background_text": "The project has the background A and B, hence why decision C was made"
+    }
+  },
+  "Research_Analysis": {
+    "Valid_Data_In_All_Fields": {
+      "how_quality_research_been_assessed_checkbox": [
+        "Independent external review",
+        "Review within the research team",
+        "Review by educational supervisor"
+      ],
+      "detail_how_quality_research_assessed_text": "The quality of the research has been assessed by X, Y and Z",
+      "explain_why_review_process_appropriate_text": "This review process is appropriate for this application due to X, Y and Z",
+      "what_primary_form_of_analysis_radio": "Qualititative",
+      "detail_methods_for_analysing_data_text": "The methods for analysing data will be X, Y and Z",
+      "how_statistical_aspects_been_reviewed_checkbox": [
+        "Review by independent statistician commissioned by funder or sponsor",
+        "Review by company statistician",
+        "Other review by individual with relevant statistical expertise"
+      ],
+      "detail_who_undertook_statistical_review_text": "The people who undertook this review are X, Y and Z",
+      "primary_outcome_measure_for_project_text": "The primary outcome measure for this project will be X, Y and Z",
+      "secondary_outcome_measures_text": "The secondary outcome measures for this project will be A, B and C",
+      "how_many_participants_samples_records_studied_text": "We plan on studying 125 samples",
+      "how_was_sample_size_decided_text": "It was decided by X, Y and Z",
+      "what_criteria_electively_stopping_early_text": "The criteria for electively stopping early will be X, Y and Z"
+    }
   }
 }

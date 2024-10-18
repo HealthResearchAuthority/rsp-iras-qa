@@ -71,6 +71,47 @@ export default class ProjectDetailsPage {
   readonly how_long_participant_in_project_text: Locator;
   readonly what_arrangements_apply_to_participants_involved_text: Locator;
   readonly could_any_participants_be_vulnerable_radio: Locator;
+  readonly consent_section: Locator;
+  readonly only_include_adults_lacking_capacity_checkbox: Locator;
+  readonly only_include_children_radio: Locator;
+  readonly seek_consent_prior_to_participation_radio: Locator;
+  readonly reasons_why_consent_not_obtained_checkbox: Locator;
+  readonly justify_not_seek_consent_text: Locator;
+  readonly describe_arrangments_for_consent_text: Locator;
+  readonly how_long_allow_participants_to_decide_text: Locator;
+  readonly explain_payments_benefits_incentives_text: Locator;
+  readonly what_arrangments_comply_welsh_language_text: Locator;
+  readonly what_arrangements_for_communication_needs_text: Locator;
+  readonly what_arrangements_unable_written_consent_text: Locator;
+  readonly what_arrangements_participants_recieve_info_text: Locator;
+  readonly what_steps_if_paticipant_loses_capacity_radio: Locator;
+  readonly risks_conflict_section: Locator;
+  readonly describe_risks_to_team_and_how_managed_text: Locator;
+  readonly does_investigator_have_personal_involvement_radio: Locator;
+  readonly give_details_of_relevant_conflict_text: Locator;
+  readonly is_chief_member_of_nhs_ethics_rec_radio: Locator;
+  readonly rec_chief_investigators_are_members_of_checkbox: Locator;
+  readonly will_chief_investigators_recieve_payment_incentives_radio: Locator;
+  readonly give_details_of_payment_incentives_text: Locator;
+  readonly summary_ethical_issues_section: Locator;
+  readonly summarise_main_ethical_issues_text: Locator;
+  readonly is_application_any_of_following_checkbox: Locator;
+  readonly provide_iras_id_of_unfavorable_opinion_text: Locator;
+  readonly explain_how_reasons_for_opinion_have_been_addressed_text: Locator;
+  readonly provide_info_about_project_background_text: Locator;
+  readonly research_analysis_section: Locator;
+  readonly how_quality_research_been_assessed_checkbox: Locator;
+  readonly detail_how_quality_research_assessed_text: Locator;
+  readonly explain_why_review_process_appropriate_text: Locator;
+  readonly what_primary_form_of_analysis_radio: Locator;
+  readonly detail_methods_for_analysing_data_text: Locator;
+  readonly how_statistical_aspects_been_reviewed_checkbox: Locator;
+  readonly detail_who_undertook_statistical_review_text: Locator;
+  readonly primary_outcome_measure_for_project_text: Locator;
+  readonly secondary_outcome_measures_text: Locator;
+  readonly how_many_participants_samples_records_studied_text: Locator;
+  readonly how_was_sample_size_decided_text: Locator;
+  readonly what_criteria_electively_stopping_early_text: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -158,6 +199,59 @@ export default class ProjectDetailsPage {
     this.how_long_participant_in_project_text = this.participants_section.getByTestId('IQA0091_Text');
     this.what_arrangements_apply_to_participants_involved_text = this.participants_section.getByTestId('IQA0092_Text');
     this.could_any_participants_be_vulnerable_radio = this.participants_section.getByTestId(RegExp('^IQA0093'));
+    //Consent Section
+    this.consent_section = page.locator('legend').getByText('Consent').locator('..');
+    this.only_include_adults_lacking_capacity_checkbox = this.consent_section.getByTestId(RegExp('^IQA0096'));
+    this.only_include_children_radio = this.consent_section.getByTestId(RegExp('^IQA0095'));
+    this.seek_consent_prior_to_participation_radio = this.consent_section.getByTestId(RegExp('^IQA0097'));
+    this.reasons_why_consent_not_obtained_checkbox = this.consent_section.getByTestId(RegExp('^IQA0098'));
+    this.justify_not_seek_consent_text = this.consent_section.getByTestId('IQA0099_Text');
+    this.describe_arrangments_for_consent_text = this.consent_section.getByTestId('IQA0100_Text');
+    this.how_long_allow_participants_to_decide_text = this.consent_section.getByTestId('IQA0102_Text');
+    this.explain_payments_benefits_incentives_text = this.consent_section.getByTestId('IQA0103_Text');
+    this.what_arrangments_comply_welsh_language_text = this.consent_section.getByTestId('IQA0104_Text');
+    this.what_arrangements_for_communication_needs_text = this.consent_section.getByTestId('IQA0105_Text');
+    this.what_arrangements_unable_written_consent_text = this.consent_section.getByTestId('IQA0106_Text');
+    this.what_arrangements_participants_recieve_info_text = this.consent_section.getByTestId('IQA0107_Text');
+    this.what_steps_if_paticipant_loses_capacity_radio = this.consent_section.getByTestId(RegExp('^IQA0108'));
+    //Risks and Conflicts of Interest Section
+    this.risks_conflict_section = page.locator('legend').getByText('Risk and Conflicts of Interest').locator('..');
+    this.describe_risks_to_team_and_how_managed_text = this.risks_conflict_section.getByTestId('IQA0110_Text');
+    this.does_investigator_have_personal_involvement_radio = this.risks_conflict_section.getByTestId(
+      RegExp('^IQA0111')
+    );
+    this.give_details_of_relevant_conflict_text = this.risks_conflict_section.getByTestId('IQA0112_Text');
+    this.is_chief_member_of_nhs_ethics_rec_radio = this.risks_conflict_section.getByTestId(RegExp('^IQA0113'));
+    this.rec_chief_investigators_are_members_of_checkbox = this.risks_conflict_section.getByTestId(RegExp('^IQA0114'));
+    this.will_chief_investigators_recieve_payment_incentives_radio = this.risks_conflict_section.getByTestId(
+      RegExp('^IQA0115')
+    );
+    this.give_details_of_payment_incentives_text = this.risks_conflict_section.getByTestId('IQA0116_Text');
+    //Summary Ethical Issues
+    this.summary_ethical_issues_section = page.locator('legend').getByText('Summary Ethical Issues').locator('..');
+    this.summarise_main_ethical_issues_text = this.summary_ethical_issues_section.getByTestId('IQA0117_Text');
+    this.is_application_any_of_following_checkbox = this.summary_ethical_issues_section.getByTestId(RegExp('^IQA0118'));
+    this.provide_iras_id_of_unfavorable_opinion_text = this.summary_ethical_issues_section.getByTestId('IQA0119_Text');
+    this.explain_how_reasons_for_opinion_have_been_addressed_text =
+      this.summary_ethical_issues_section.getByTestId('IQA0120_Text');
+    this.provide_info_about_project_background_text = this.summary_ethical_issues_section.getByTestId('IQA0039_Text');
+    //Resarch Analysis
+    this.research_analysis_section = page.locator('legend').getByText('Research Analysis').locator('..');
+    this.how_quality_research_been_assessed_checkbox = this.research_analysis_section.getByTestId(RegExp('^IQA0121'));
+    this.detail_how_quality_research_assessed_text = this.research_analysis_section.getByTestId('IQA0122_Text');
+    this.explain_why_review_process_appropriate_text = this.research_analysis_section.getByTestId('IQA0123_Text');
+    this.what_primary_form_of_analysis_radio = this.research_analysis_section.getByTestId(RegExp('^IQA0124'));
+    this.detail_methods_for_analysing_data_text = this.research_analysis_section.getByTestId('IQA0125_Text');
+    this.how_statistical_aspects_been_reviewed_checkbox = this.research_analysis_section.getByTestId(
+      RegExp('^IQA0126')
+    );
+    this.detail_who_undertook_statistical_review_text = this.research_analysis_section.getByTestId('IQA0127_Text');
+    this.primary_outcome_measure_for_project_text = this.research_analysis_section.getByTestId('IQA0128_Text');
+    this.secondary_outcome_measures_text = this.research_analysis_section.getByTestId('IQA0129_Text');
+    this.how_many_participants_samples_records_studied_text =
+      this.research_analysis_section.getByTestId('IQA0130_Text');
+    this.how_was_sample_size_decided_text = this.research_analysis_section.getByTestId('IQA0131_Text');
+    this.what_criteria_electively_stopping_early_text = this.research_analysis_section.getByTestId('IQA0132_Text');
   }
 
   //Page Methods

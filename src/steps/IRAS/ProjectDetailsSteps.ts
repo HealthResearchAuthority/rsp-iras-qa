@@ -62,3 +62,52 @@ Then(
     }
   }
 );
+
+Then(
+  'I fill the consent section on the project details page with {string}',
+  async ({ projectDetailsPage, commonItemsPage }, datasetName: string) => {
+    const dataset = projectDetailsPage.projectDetailsPageTestData.Consent[datasetName];
+    for (const key in dataset) {
+      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+        await commonItemsPage.fillUIComponent(dataset, key, projectDetailsPage);
+      }
+    }
+  }
+);
+
+Then(
+  'I fill the risks and conflicts of interest section on the project details page with {string}',
+  async ({ projectDetailsPage, commonItemsPage }, datasetName: string) => {
+    const dataset = projectDetailsPage.projectDetailsPageTestData.Risks_Conflicts[datasetName];
+    for (const key in dataset) {
+      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+        await commonItemsPage.fillUIComponent(dataset, key, projectDetailsPage);
+      }
+    }
+  }
+);
+
+Then(
+  'I fill the summary ethical issues section on the project details page with {string}',
+  async ({ projectDetailsPage, commonItemsPage }, datasetName: string) => {
+    const dataset = projectDetailsPage.projectDetailsPageTestData.Summary_Ethical_Issues[datasetName];
+    for (const key in dataset) {
+      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+        await commonItemsPage.fillUIComponent(dataset, key, projectDetailsPage);
+      }
+    }
+  }
+);
+
+Then(
+  'I fill the research analysis section on the project details page with {string}',
+  async ({ projectDetailsPage, commonItemsPage }, datasetName: string) => {
+    const dataset = projectDetailsPage.projectDetailsPageTestData.Research_Analysis[datasetName];
+    for (const key in dataset) {
+      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+        await commonItemsPage.fillUIComponent(dataset, key, projectDetailsPage);
+      }
+    }
+    await commonItemsPage.page.pause();
+  }
+);
