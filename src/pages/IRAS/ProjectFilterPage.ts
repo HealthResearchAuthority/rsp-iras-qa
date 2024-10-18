@@ -31,7 +31,7 @@ export default class ProjectFilterPage {
   readonly include_prisoners_offenders_radio: Locator;
   readonly involve_ministry_of_defence_radio: Locator;
   readonly involve_hfea_radio: Locator;
-  readonly reserch_location_section: Locator;
+  readonly research_location_section: Locator;
   readonly is_outside_uk_radio: Locator;
   readonly places_in_uk_for_project_checkbox: Locator;
   readonly where_human_sample_held_checkbox: Locator;
@@ -74,14 +74,14 @@ export default class ProjectFilterPage {
     this.involve_ministry_of_defence_radio = this.project_scope_section.getByTestId(/^IQA0028/);
     this.involve_hfea_radio = this.project_scope_section.getByTestId(/^IQA0029/);
     //Research Location Section
-    this.reserch_location_section = this.page.locator('legend').getByText('Research Location').locator('..');
-    this.is_outside_uk_radio = this.reserch_location_section.getByTestId(/^IQA0142/);
-    this.places_in_uk_for_project_checkbox = this.reserch_location_section.getByTestId(/^IQA0032/);
-    this.where_human_sample_held_checkbox = this.reserch_location_section.getByTestId(/^IQA0033/);
-    this.where_human_sample_obtained_checkbox = this.reserch_location_section.getByTestId(/^IQA0034/);
-    this.where_project_take_place_checkbox = this.reserch_location_section.getByTestId(/^IQA0144/);
-    this.details_other_organisation_text = this.reserch_location_section.getByTestId('IQA0145_Text');
-    this.use_pic_radio = this.reserch_location_section.getByTestId(/^IQA0146/);
+    this.research_location_section = this.page.locator('legend').getByText('Research Location').locator('..');
+    this.is_outside_uk_radio = this.research_location_section.getByTestId(/^IQA0142/);
+    this.places_in_uk_for_project_checkbox = this.research_location_section.getByTestId(/^IQA0032/);
+    this.where_human_sample_held_checkbox = this.research_location_section.getByTestId(/^IQA0033/);
+    this.where_human_sample_obtained_checkbox = this.research_location_section.getByTestId(/^IQA0034/);
+    this.where_project_take_place_checkbox = this.research_location_section.getByTestId(/^IQA0144/);
+    this.details_other_organisation_text = this.research_location_section.getByTestId('IQA0145_Text');
+    this.use_pic_radio = this.research_location_section.getByTestId(/^IQA0146/);
   }
 
   //Page Methods
