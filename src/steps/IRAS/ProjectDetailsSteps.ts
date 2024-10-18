@@ -108,6 +108,5 @@ Then(
         await commonItemsPage.fillUIComponent(dataset, key, projectDetailsPage);
       }
     }
-    await commonItemsPage.page.pause();
   }
 );
