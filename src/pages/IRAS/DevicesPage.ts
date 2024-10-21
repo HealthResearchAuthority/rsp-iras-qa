@@ -10,11 +10,11 @@ export default class DevicesPage {
   readonly devices_filter_questions_section: Locator;
   readonly device_investigation_no_mhra_section: Locator;
   readonly is_sponsored_by_device_company_radio: Locator;
-  readonly type_of_project_1_radio: Locator;
-  readonly type_of_project_2_radio: Locator;
+  readonly type_of_project_first_radio: Locator;
+  readonly type_of_project_second_radio: Locator;
   readonly will_research_conducted_northern_ireland_radio: Locator;
-  readonly what_review_needed_1_radio: Locator;
-  readonly what_review_needed_2_radio: Locator;
+  readonly what_review_needed_first_radio: Locator;
+  readonly what_review_needed_second_radio: Locator;
   readonly is_manufacturer_lead_sponsor_radio: Locator;
   readonly name_of_manufacturer_text: Locator;
   readonly trade_name_for_device_text: Locator;
@@ -47,12 +47,12 @@ export default class DevicesPage {
       .getByText('Devices Filter Questions')
       .locator('..');
     this.is_sponsored_by_device_company_radio = this.devices_filter_questions_section.getByTestId(/^IQA0309/);
-    this.type_of_project_1_radio = this.devices_filter_questions_section.getByTestId(/^IQA03010/);
-    this.type_of_project_2_radio = this.devices_filter_questions_section.getByTestId(/^IQA03011/).first();
+    this.type_of_project_first_radio = this.devices_filter_questions_section.getByTestId(/^IQA03010/);
+    this.type_of_project_second_radio = this.devices_filter_questions_section.getByTestId(/^IQA03011/);
     this.will_research_conducted_northern_ireland_radio =
       this.devices_filter_questions_section.getByTestId(/^IQA03012/);
-    this.what_review_needed_1_radio = this.devices_filter_questions_section.getByTestId(/^IQA03014/);
-    this.what_review_needed_2_radio = this.devices_filter_questions_section.getByTestId(/^IQA03015/);
+    this.what_review_needed_first_radio = this.devices_filter_questions_section.getByTestId(/^IQA03014/);
+    this.what_review_needed_second_radio = this.devices_filter_questions_section.getByTestId(/^IQA03015/);
     //Device investigations not requiring review by MHRA Section
     this.device_investigation_no_mhra_section = this.page
       .locator('legend')

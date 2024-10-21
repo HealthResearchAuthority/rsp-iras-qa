@@ -7,19 +7,19 @@
   "Devices_Filter_Questions": {
     "Valid_Data_All_Fields": {
       "is_sponsored_by_device_company_radio": "Yes",
-      "type_of_project_1_radio": "Clinical investigation for UKCA/CE UKNI/CE marking purposes (includes investigation of a UKCA/CE UKNI/CE marked device outside its current intended purposes or in modified form)",
-      "type_of_project_2_radio": "Clinical study of a non-UKCA/CE UKNI/CE marked device",
+      "type_of_project_first_radio": "Clinical investigation for UKCA/CE UKNI/CE marking purposes (includes investigation of a UKCA/CE UKNI/CE marked device outside its current intended purposes or in modified form)",
+      "type_of_project_second_radio": "Clinical study of a non-UKCA/CE UKNI/CE marked device",
       "will_research_conducted_northern_ireland_radio": "Yes",
-      "what_review_needed_1_radio": "MHRA and REC",
-      "what_review_needed_2_radio": "MHRA and REC"
+      "what_review_needed_first_radio": "MHRA and REC",
+      "what_review_needed_second_radio": "MHRA and REC"
     },
     "Research_Conducted_Northern_Ireland": {
       "is_sponsored_by_device_company_radio": "Yes",
-      "type_of_project_1_radio": "Clinical investigation for UKCA/CE UKNI/CE marking purposes (includes investigation of a UKCA/CE UKNI/CE marked device outside its current intended purposes or in modified form)",
-      "type_of_project_2_radio": "Clinical study of a non-UKCA/CE UKNI/CE marked device",
+      "type_of_project_first_radio": "Clinical investigation for UKCA/CE UKNI/CE marking purposes (includes investigation of a UKCA/CE UKNI/CE marked device outside its current intended purposes or in modified form)",
+      "type_of_project_second_radio": "Clinical study of a non-UKCA/CE UKNI/CE marked device",
       "will_research_conducted_northern_ireland_radio": "No",
-      "what_review_needed_1_radio": "MHRA and REC",
-      "what_review_needed_2_radio": "MHRA and REC"
+      "what_review_needed_first_radio": "MHRA and REC",
+      "what_review_needed_second_radio": "MHRA and REC"
     }
   },
   "Device_Investigation_No_MHRA": {
