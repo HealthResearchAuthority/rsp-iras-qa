@@ -36,19 +36,17 @@ export default class StudentPage {
     //Educational Project Section
     this.educational_project_section = this.page.locator('legend').getByText('Educational Project').locator('..');
     this.role_of_student_text = this.educational_project_section.getByTestId('IQA0218_Text');
-    this.is_group_project_radio = this.educational_project_section.getByTestId(new RegExp('^IQA0219'));
-    this.level_of_course_radio = this.educational_project_section.getByTestId(new RegExp('^IQA0222'));
-    this.which_declaration_included_for_submission_radio = this.educational_project_section.getByTestId(
-      new RegExp('^IQA0223')
-    );
+    this.is_group_project_radio = this.educational_project_section.getByTestId(/^IQA0219/);
+    this.level_of_course_radio = this.educational_project_section.getByTestId(/^IQA0222/);
+    this.which_declaration_included_for_submission_radio = this.educational_project_section.getByTestId(/^IQA0223/);
     this.university_text = this.educational_project_section.getByTestId('IQA0220_Text');
     this.course_text = this.educational_project_section.getByTestId('IQA0221_Text');
-    this.is_university_sponsor_radio = this.educational_project_section.getByTestId(new RegExp('^IQA0224'));
+    this.is_university_sponsor_radio = this.educational_project_section.getByTestId(/^IQA0224/);
     this.why_university_not_sponsor_text = this.educational_project_section.getByTestId('IQA0225_Text');
     this.first_name_text = this.educational_project_section.getByTestId('IQA0227_Text');
     this.last_name_text = this.educational_project_section.getByTestId('IQA0228_Text');
     this.email_text = this.educational_project_section.getByTestId('IQA0229_Text');
-    this.who_is_chief_investigator_radio = this.educational_project_section.getByTestId(new RegExp('^IQA0237'));
+    this.who_is_chief_investigator_radio = this.educational_project_section.getByTestId(/^IQA0237/);
     this.ci_first_name_text = this.educational_project_section.getByTestId('IQA0232_Text');
     this.ci_last_name_text = this.educational_project_section.getByTestId('IQA0233_Text');
     this.ci_job_title_text = this.educational_project_section.getByTestId('IQA0234_Text');

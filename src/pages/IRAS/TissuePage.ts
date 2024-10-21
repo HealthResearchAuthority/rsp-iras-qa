@@ -44,38 +44,24 @@ export default class TissuePage {
       .getByText('Human Biological Samples')
       .locator('..');
     this.describe_type_of_material_text = this.human_biological_samples_section.getByTestId('IQA0253_Text');
-    this.is_sample_collected_from_new_participants_radio = this.human_biological_samples_section.getByTestId(
-      new RegExp('^IQA0254')
-    );
-    this.will_samples_provided_extra_with_consent_radio = this.human_biological_samples_section.getByTestId(
-      new RegExp('^IQA0255')
-    );
+    this.is_sample_collected_from_new_participants_radio =
+      this.human_biological_samples_section.getByTestId(/^IQA0254/);
+    this.will_samples_provided_extra_with_consent_radio = this.human_biological_samples_section.getByTestId(/^IQA0255/);
     this.how_samples_collected_text = this.human_biological_samples_section.getByTestId('IQA0256_Text');
-    this.participants_living_deceased_radio = this.human_biological_samples_section.getByTestId(new RegExp('^IQA0257'));
-    this.samples_removed_deceased_regions_checkbox = this.human_biological_samples_section.getByTestId(
-      new RegExp('^IQA0258')
-    );
+    this.participants_living_deceased_radio = this.human_biological_samples_section.getByTestId(/^IQA0257/);
+    this.samples_removed_deceased_regions_checkbox = this.human_biological_samples_section.getByTestId(/^IQA0258/);
     this.details_relevant_human_tissue_authority_license_text =
       this.human_biological_samples_section.getByTestId('IQA0259_Text');
-    this.material_identifiable_radio = this.human_biological_samples_section.getByTestId(new RegExp('^IQA0260'));
-    this.scope_of_consent_for_use_of_material_radio = this.human_biological_samples_section.getByTestId(
-      new RegExp('^IQA0261')
-    );
-    this.will_materials_imported_exported_outside_radio = this.human_biological_samples_section.getByTestId(
-      new RegExp('^IQA0262')
-    );
-    this.will_materials_imported_exported_outside_of_scotland_radio = this.human_biological_samples_section.getByTestId(
-      new RegExp('^IQA0263')
-    );
+    this.material_identifiable_radio = this.human_biological_samples_section.getByTestId(/^IQA0260/);
+    this.scope_of_consent_for_use_of_material_radio = this.human_biological_samples_section.getByTestId(/^IQA0261/);
+    this.will_materials_imported_exported_outside_radio = this.human_biological_samples_section.getByTestId(/^IQA0262/);
+    this.will_materials_imported_exported_outside_of_scotland_radio =
+      this.human_biological_samples_section.getByTestId(/^IQA0263/);
     this.reason_import_export_text = this.human_biological_samples_section.getByTestId('IQA0264_Text');
-    this.consent_arrangement_for_use_of_sample_radio = this.human_biological_samples_section.getByTestId(
-      new RegExp('^IQA0265')
-    );
+    this.consent_arrangement_for_use_of_sample_radio = this.human_biological_samples_section.getByTestId(/^IQA0265/);
     this.details_where_samples_stored_text = this.human_biological_samples_section.getByTestId('IQA0266_Text');
-    this.how_sample_processed_stored_radio = this.human_biological_samples_section.getByTestId(new RegExp('^IQA0267'));
-    this.what_happen_material_end_of_project_checkbox = this.human_biological_samples_section.getByTestId(
-      new RegExp('^IQA0268')
-    );
+    this.how_sample_processed_stored_radio = this.human_biological_samples_section.getByTestId(/^IQA0267/);
+    this.what_happen_material_end_of_project_checkbox = this.human_biological_samples_section.getByTestId(/^IQA0268/);
     this.how_destruction_material_undertaken_text = this.human_biological_samples_section.getByTestId('IQA0269_Text');
     this.further_details_proposed_post_study_text = this.human_biological_samples_section.getByTestId('IQA0270_Text');
     //Health-related findings Section
@@ -83,12 +69,9 @@ export default class TissuePage {
       .locator('legend')
       .getByText('Health-related findings')
       .locator('..');
-    this.will_project_produce_health_related_findings_radio = this.health_related_findings_section.getByTestId(
-      new RegExp('^IQA0271')
-    );
-    this.will_arrangements_made_notify_individuals_radio = this.health_related_findings_section.getByTestId(
-      new RegExp('^IQA0272')
-    );
+    this.will_project_produce_health_related_findings_radio =
+      this.health_related_findings_section.getByTestId(/^IQA0271/);
+    this.will_arrangements_made_notify_individuals_radio = this.health_related_findings_section.getByTestId(/^IQA0272/);
     this.explain_why_not_notified_text = this.health_related_findings_section.getByTestId('IQA0273_Text');
   }
 

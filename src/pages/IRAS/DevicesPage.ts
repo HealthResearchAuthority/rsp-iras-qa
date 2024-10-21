@@ -46,36 +46,28 @@ export default class DevicesPage {
       .locator('legend')
       .getByText('Devices Filter Questions')
       .locator('..');
-    this.is_sponsored_by_device_company_radio = this.devices_filter_questions_section.getByTestId(
-      new RegExp('^IQA0309')
-    );
-    this.type_of_project_1_radio = this.devices_filter_questions_section.getByTestId(new RegExp('^IQA03010'));
-    this.type_of_project_2_radio = this.devices_filter_questions_section.getByTestId(new RegExp('^IQA03011')).first();
-    this.will_research_conducted_northern_ireland_radio = this.devices_filter_questions_section.getByTestId(
-      new RegExp('^IQA03012')
-    );
-    this.what_review_needed_1_radio = this.devices_filter_questions_section.getByTestId(new RegExp('^IQA03014'));
-    this.what_review_needed_2_radio = this.devices_filter_questions_section.getByTestId(new RegExp('^IQA03015'));
+    this.is_sponsored_by_device_company_radio = this.devices_filter_questions_section.getByTestId(/^IQA0309/);
+    this.type_of_project_1_radio = this.devices_filter_questions_section.getByTestId(/^IQA03010/);
+    this.type_of_project_2_radio = this.devices_filter_questions_section.getByTestId(/^IQA03011/).first();
+    this.will_research_conducted_northern_ireland_radio =
+      this.devices_filter_questions_section.getByTestId(/^IQA03012/);
+    this.what_review_needed_1_radio = this.devices_filter_questions_section.getByTestId(/^IQA03014/);
+    this.what_review_needed_2_radio = this.devices_filter_questions_section.getByTestId(/^IQA03015/);
     //Device investigations not requiring review by MHRA Section
     this.device_investigation_no_mhra_section = this.page
       .locator('legend')
       .getByText('Device investigations not requiring review by MHRA')
       .locator('..');
-    this.is_manufacturer_lead_sponsor_radio = this.device_investigation_no_mhra_section.getByTestId(
-      new RegExp('^IQA03247')
-    );
+    this.is_manufacturer_lead_sponsor_radio = this.device_investigation_no_mhra_section.getByTestId(/^IQA03247/);
     this.name_of_manufacturer_text = this.device_investigation_no_mhra_section.getByTestId('IQA03249_Text');
     this.trade_name_for_device_text = this.device_investigation_no_mhra_section.getByTestId('IQA03250_Text');
     this.name_for_device_text = this.device_investigation_no_mhra_section.getByTestId('IQA03252_Text');
     this.number_for_device_text = this.device_investigation_no_mhra_section.getByTestId('IQA03253_Text');
     this.generic_name_of_device_text = this.device_investigation_no_mhra_section.getByTestId('IQA03254_Text');
     this.length_of_time_device_used_text = this.device_investigation_no_mhra_section.getByTestId('IQA03255_Text');
-    this.type_of_research_project_radio = this.device_investigation_no_mhra_section.getByTestId(
-      new RegExp('^IQA03256')
-    );
-    this.will_device_used_within_intended_population_radio = this.device_investigation_no_mhra_section.getByTestId(
-      new RegExp('^IQA03257')
-    );
+    this.type_of_research_project_radio = this.device_investigation_no_mhra_section.getByTestId(/^IQA03256/);
+    this.will_device_used_within_intended_population_radio =
+      this.device_investigation_no_mhra_section.getByTestId(/^IQA03257/);
     this.description_of_any_new_device_text = this.device_investigation_no_mhra_section.getByTestId('IQA03258_Text');
     this.composition_of_any_new_implantable_materials_text =
       this.device_investigation_no_mhra_section.getByTestId('IQA03259_Text');
@@ -83,9 +75,7 @@ export default class DevicesPage {
       this.device_investigation_no_mhra_section.getByTestId('IQA03260_Text');
     this.summary_of_proposed_changes_to_intended_purpose_text =
       this.device_investigation_no_mhra_section.getByTestId('IQA03261_Text');
-    this.procedures_involved_non_invasive_radio = this.device_investigation_no_mhra_section.getByTestId(
-      new RegExp('^IQA03262')
-    );
+    this.procedures_involved_non_invasive_radio = this.device_investigation_no_mhra_section.getByTestId(/^IQA03262/);
     this.arrangements_for_manufacture_of_device_text =
       this.device_investigation_no_mhra_section.getByTestId('IQA03263_Text');
     this.what_safety_testing_undertaken_text = this.device_investigation_no_mhra_section.getByTestId('IQA03264_Text');
