@@ -47,13 +47,25 @@ When(
 
 When(
   'I can see the {string} question set',
-  async ({ commonItemsPage, projectFilterPage, projectDetailsPage }, questionSet: string) => {
+  async (
+    { commonItemsPage, projectFilterPage, projectDetailsPage, studentPage, devicesPage, tissuePage },
+    questionSet: string
+  ) => {
     switch (questionSet) {
       case 'Project_Filter':
         await projectFilterPage.assertOnProjectFilterPage(commonItemsPage.qSetProgressBarActiveStageLink);
         break;
       case 'Project_Details':
         await projectDetailsPage.assertOnProjectDetailsPage(commonItemsPage.qSetProgressBarActiveStageLink);
+        break;
+      case 'Student':
+        await studentPage.assertOnStudentPage(commonItemsPage.qSetProgressBarActiveStageLink);
+        break;
+      case 'Devices':
+        await devicesPage.assertOnDevicesPage(commonItemsPage.qSetProgressBarActiveStageLink);
+        break;
+      case 'Tissue':
+        await tissuePage.assertOnTissuePage(commonItemsPage.qSetProgressBarActiveStageLink);
         break;
       default:
         throw new Error(`${questionSet} is not a valid option`);
