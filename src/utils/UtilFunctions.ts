@@ -168,7 +168,7 @@ export function getBrowserDetails() {
   } else {
     browserdata = devices[`${deviceDChrome}`];
     platform = 'desktop';
-    console.log('Invalid browser name, hence executing tests with default browser Chromium');
+    console.info('Invalid browser name, hence executing tests with default browser Chromium');
   }
   return [browserdata, platform];
 }

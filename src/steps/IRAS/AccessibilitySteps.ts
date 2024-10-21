@@ -14,15 +14,14 @@ When('I Scan the page with the Axe Accessibilty Tool', async ({ makeAxeBuilder }
     .withTags(['wcag2a', 'wcag2aa', 'wcag2aaa', 'wcag21a', 'wcag21aa', 'wcag22aa'])
     .analyze();
 });
-Then('I generate JSON {string} from the scanned results', async ({ $bddWorld }, jsonfile: string) => {
+
+Then('I analyse the results from the Axe scan', async ({ $bddWorld }) => {
   await $bddWorld.testInfo.attach('accessibility-scan-results', {
     body: JSON.stringify(axeScanResults, null, 2),
     contentType: 'application/json',
   });
-  const file = $bddWorld.testInfo.outputPath(`${jsonfile}`);
+  const file = $bddWorld.testInfo.outputPath(`temp-axe-results.json`);
   await writeFile(file, JSON.stringify(axeScanResults, null, 2), 'utf8');
-});
-Then('I create the axe-core html report from the scanned results', async ({ $bddWorld }) => {
   const htmlReport = createHtmlReport({
     results: axeScanResults,
     options: {

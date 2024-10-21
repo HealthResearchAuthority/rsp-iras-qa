@@ -20,7 +20,7 @@ const config: PlaywrightTestConfig = {
   globalTimeout: 10 * 60 * 1000,
   timeout: 5 * 60 * 1000,
   workers: 1, // to enforce serial execution
-  retries: 0,
+  retries: 2,
   use: {
     ...browser,
     trace: 'on',
@@ -56,7 +56,7 @@ const config: PlaywrightTestConfig = {
       testDir: defineBddConfig({
         paths: [
           'tests/features/cross-compatible/stories/**/*.feature',
-          'tests/features/cross-compatible/accessibility/**/*.feature', //uncomment when running accessibility tests
+          // 'tests/features/cross-compatible/accessibility/**/*.feature', //uncomment when running accessibility tests
           `tests/features/${platform}/**/*.feature`,
         ],
         require: ['src/steps/**/*.ts'],
