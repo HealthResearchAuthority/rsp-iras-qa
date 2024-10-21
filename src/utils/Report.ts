@@ -1,27 +1,52 @@
-const report = require('multiple-cucumber-html-reporter');
-const os = require('os');
+import report from 'multiple-cucumber-html-reporter';
 import 'dotenv/config';
+import { Reporter } from 'playwright/types/testReporter';
+import type { FullResult } from '@playwright/test/reporter';
+import {
+  deviceType,
+  defaultBrowserType,
+  browserVersion,
+  displayTimeZone,
+  formatedDuration,
+  getOSNameVersion,
+} from '../utils/UtilFunctions';
 
-report.generate({
-  jsonDir: './test-reports/cucumber/json/',
-  reportPath: './test-reports/cucumber/html/',
-  pageFooter: '<div><p></p></div>',
-  customMetadata: true,
-  metadata: [
-    { name: 'Device Name', value: `${process.env.BROWSER}` },
-    { name: 'Browser Name', value: 'To be defined' },
-    { name: 'Browser Version', value: 'To be defined' },
-    { name: 'OS Name', value: `${os.type}` },
-    { name: 'OS Version', value: `${os.release}` },
-  ],
-  customData: {
-    title: 'Automation Test Report - Playwright',
-    data: [
-      { label: 'Project', value: 'To be defined' },
-      { label: 'Release', value: 'To be defined' },
-      { label: 'Cycle', value: 'To be defined' },
-      { label: 'Execution Start Time', value: 'To be defined - Test - Nov 19th 2017, 02:31 PM EST' },
-      { label: 'Execution End Time', value: 'To be defined - Test - Nov 19th 2017, 02:56 PM EST' },
-    ],
-  },
-});
+class MyReporter implements Reporter {
+  async onEnd(result: FullResult) {
+    const endTime = new Date().toLocaleString();
+    report.generate({
+      jsonDir: './test-reports/cucumber/json/',
+      reportPath: './test-reports/cucumber/html/',
+      pageTitle: 'Multiple Cucumber HTML reporter',
+      reportName: 'Future IRAS Automation Test Report-Playwright',
+      displayDuration: true,
+      durationInMS: true,
+      pageFooter: '<div><p></p></div>',
+      customMetadata: true,
+      metadata: [
+        { name: 'Device Type', value: `${deviceType}` },
+        { name: 'Browser Name', value: `${defaultBrowserType}` },
+        { name: 'Browser Version', value: `${browserVersion}` },
+      ],
+
+      customData: {
+        title: 'Run Info',
+        data: [
+          { label: 'Environment', value: 'QA' },
+          { label: 'Operating System', value: getOSNameVersion() },
+          {
+            label: 'Execution Start Time',
+            value: displayTimeZone(result.startTime),
+          },
+          {
+            label: 'Execution End Time',
+            value: displayTimeZone(endTime),
+          },
+          // { label: 'Total Duration in milliseconds', value: `${result.duration}` },
+          { label: 'Total Duration', value: formatedDuration(result.duration) },
+        ],
+      },
+    });
+  }
+}
+export default MyReporter;
