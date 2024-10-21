@@ -7,7 +7,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     @axeAccessibilityTasks @adminUser
     Scenario: Run AXE Accessibilty Checks on Tasks Page                     
         When I Scan the page with the Axe Accessibilty Tool
-        Then I analyse the results from the Axe scan       
+        And I analyse the results from the Axe scan       
         Then I expect to receive no WCAG Violations
 
     @axeAccessibilityIdg
@@ -16,5 +16,5 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
         When I click the 'Login' button on the 'Banner'
         Then I can see the 'Login_Page'                 
         When I Scan the page with the Axe Accessibilty Tool
-        Then I analyse the results from the Axe scan 
+        And I analyse the results from the Axe scan 
         Then I expect to receive no WCAG Violations
