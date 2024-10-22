@@ -99,6 +99,7 @@ export async function getTextFromElementArray(inputArray: Locator[]): Promise<st
   }
   return arrInputText;
 }
+
 let browser: any;
 let browserName: string;
 export function getDeviceType(): string | undefined {
@@ -117,6 +118,7 @@ export function getDeviceType(): string | undefined {
       return `${deviceDChrome}`;
   }
 }
+
 export const deviceType = getDeviceType();
 
 export function getBrowserType(): string {
@@ -124,6 +126,7 @@ export function getBrowserType(): string {
   browserName = JSON.parse(JSON.stringify(browser)).defaultBrowserType;
   return browserName;
 }
+
 export const defaultBrowserType = getBrowserType();
 export function getBrowserVersionDevices(): string | undefined {
   browser = devices[`${deviceType}`];
@@ -145,6 +148,7 @@ export function getBrowserVersionDevices(): string | undefined {
   }
   return version;
 }
+
 export const browserVersion = getBrowserVersionDevices();
 
 let browserdata: any;
@@ -172,11 +176,13 @@ export function getBrowserDetails() {
   }
   return [browserdata, platform];
 }
+
 export const [browserVal, platformVal] = getBrowserDetails();
 
 export function displayTimeZone(time: Date | string) {
   return new Date(time).toLocaleString(undefined, { timeZoneName: 'short' });
 }
+
 export function formatedDuration(duration: number) {
   const seconds = Math.floor((duration / 1000) % 60);
 
@@ -191,6 +197,7 @@ export function formatedDuration(duration: number) {
   ].join(':');
   return formattedTime;
 }
+
 export function generatehtmlReport(path: string, htmlReport: string) {
   if (!fs.existsSync(path)) {
     fs.mkdirSync('test-results/reports', {
@@ -199,6 +206,7 @@ export function generatehtmlReport(path: string, htmlReport: string) {
   }
   fs.writeFileSync(`test-results/reports/${path}.html`, htmlReport);
 }
+
 export async function generateJSON($bddWorld, axeScanResults, jsonfile) {
   await $bddWorld.testInfo.attach('accessibility-scan-results', {
     body: JSON.stringify(axeScanResults, null, 2),
@@ -207,6 +215,7 @@ export async function generateJSON($bddWorld, axeScanResults, jsonfile) {
   const file = $bddWorld.testInfo.outputPath(`${jsonfile}`);
   await writeFile(file, JSON.stringify(axeScanResults, null, 2), 'utf8');
 }
+
 export async function generateAxeHTMLReport($bddWorld, axeScanResults) {
   const htmlReport = createHtmlReport({
     results: axeScanResults,
@@ -218,6 +227,7 @@ export async function generateAxeHTMLReport($bddWorld, axeScanResults) {
   //write the html report for each page
   generatehtmlReport(`${$bddWorld.testInfo.title.replace(' ', '_')}.html`, htmlReport);
 }
+
 export function getOSNameVersion() {
   let osVersion;
   if (`${os.version}`.includes('Ubuntu')) {
