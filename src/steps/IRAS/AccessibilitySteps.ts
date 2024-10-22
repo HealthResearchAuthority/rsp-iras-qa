@@ -15,26 +15,26 @@ When('I Scan the page with the Axe Accessibilty Tool', async ({ makeAxeBuilder }
     .analyze();
 });
 
-Then('I analyse the results from the Axe scan', async ({ $bddWorld }) => {
-  await $bddWorld.testInfo.attach('accessibility-scan-results', {
+Then('I analyse the results from the Axe scan', async ({ $testInfo }) => {
+  await $testInfo.attach('accessibility-scan-results', {
     body: JSON.stringify(axeScanResults, null, 2),
     contentType: 'application/json',
   });
-  const file = $bddWorld.testInfo.outputPath(`temp-axe-results.json`);
+  const file = $testInfo.outputPath(`temp-axe-results.json`);
   await writeFile(file, JSON.stringify(axeScanResults, null, 2), 'utf8');
   const htmlReport = createHtmlReport({
     results: axeScanResults,
     options: {
-      projectKey: $bddWorld.testInfo.title,
+      projectKey: $testInfo.title,
       doNotCreateReportFile: false,
     },
   });
   //write the html report for each page
-  generatehtmlReport(`${$bddWorld.testInfo.title.replace(' ', '_')}.html`, htmlReport);
+  generatehtmlReport(`${$testInfo.title.replace(' ', '_')}.html`, htmlReport);
 });
 
-Then('I expect to receive no WCAG Violations', async ({ $bddWorld }) => {
-  const path = $bddWorld.testInfo.outputDir + '/temp-axe-results.json';
+Then('I expect to receive no WCAG Violations', async ({ $testInfo }) => {
+  const path = $testInfo.outputDir + '/temp-axe-results.json';
   const axeScanResults = await readAxeResultsContents(path);
   expect(JSON.parse(axeScanResults).violations).toEqual([]);
 });

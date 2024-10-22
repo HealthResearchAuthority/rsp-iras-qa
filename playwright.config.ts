@@ -38,9 +38,8 @@ const config: PlaywrightTestConfig = {
       // Authorise Tests Users before Test Run
       name: 'AuthSetup',
       testDir: defineBddConfig({
-        paths: ['tests/features/cross-compatible/authSetup/*.feature'],
-        require: ['src/steps/**/*.ts'],
-        importTestFrom: 'src/hooks/CustomFixtures.ts',
+        features: ['tests/features/cross-compatible/authSetup/*.feature'],
+        steps: ['src/steps/**/*.ts', 'src/hooks/CustomFixtures.ts'],
         outputDir: 'generated-feature-files/auth-setup',
       }),
       use: {
@@ -54,13 +53,12 @@ const config: PlaywrightTestConfig = {
       name: 'FutureIras',
       dependencies: ['AuthSetup'],
       testDir: defineBddConfig({
-        paths: [
+        features: [
           'tests/features/cross-compatible/stories/**/*.feature',
           // 'tests/features/cross-compatible/accessibility/**/*.feature', //uncomment when running accessibility tests
           `tests/features/${platform}/**/*.feature`,
         ],
-        require: ['src/steps/**/*.ts'],
-        importTestFrom: 'src/hooks/CustomFixtures.ts',
+        steps: ['src/steps/**/*.ts', 'src/hooks/CustomFixtures.ts'],
         outputDir: 'generated-feature-files/future-iras',
       }),
       use: {

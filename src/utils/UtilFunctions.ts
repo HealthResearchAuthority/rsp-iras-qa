@@ -1,4 +1,4 @@
-import { DataTable } from '@cucumber/cucumber';
+import { DataTable } from 'playwright-bdd';
 import { Locator, devices } from '@playwright/test';
 import crypto from 'crypto';
 import { readFile, writeFile } from 'fs/promises';
