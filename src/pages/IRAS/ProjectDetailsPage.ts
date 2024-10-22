@@ -254,9 +254,12 @@ export default class ProjectDetailsPage {
     const expectedSectionHeadingsText = this.projectDetailsPageTestData.Project_Details.section_headings;
     expect(await activeStage.textContent()).toBe(this.projectDetailsPageTestData.Project_Details.page_name);
     const actualSectionHeadings = await getTextFromElementArray(await this.project_details_section_headings.all());
-    expectedSectionHeadingsText.forEach((expectedHeadingText) => {
+    // expectedSectionHeadingsText.forEach((expectedHeadingText) => {
+    //   expect(actualSectionHeadings).toContainEqual(expectedHeadingText);
+    // });
+    for (const expectedHeadingText of expectedSectionHeadingsText) {
       expect(actualSectionHeadings).toContainEqual(expectedHeadingText);
-    });
+    }
     expect(await this.page.title()).toBe(this.projectDetailsPageTestData.Project_Details.title);
   }
 }
