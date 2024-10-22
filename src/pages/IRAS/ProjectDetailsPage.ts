@@ -253,11 +253,9 @@ export default class ProjectDetailsPage {
   async assertOnProjectDetailsPage(activeStage: Locator) {
     const expectedSectionHeadingsText = this.projectDetailsPageTestData.Project_Details.section_headings;
     expect(await activeStage.textContent()).toBe(this.projectDetailsPageTestData.Project_Details.page_name);
+    await expect(this.project_details_section_headings).toHaveCount(expectedSectionHeadingsText.length);
     const actualSectionHeadings = await getTextFromElementArray(await this.project_details_section_headings.all());
-    // expectedSectionHeadingsText.forEach((expectedHeadingText) => {
-    //   expect(actualSectionHeadings).toContainEqual(expectedHeadingText);
-    // });
-    for (const expectedHeadingText of expectedSectionHeadingsText) {
+    for await (const expectedHeadingText of expectedSectionHeadingsText) {
       expect(actualSectionHeadings).toContainEqual(expectedHeadingText);
     }
     expect(await this.page.title()).toBe(this.projectDetailsPageTestData.Project_Details.title);
