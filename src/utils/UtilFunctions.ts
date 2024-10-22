@@ -92,9 +92,11 @@ export function generateDynamicLocator(dynamicLocator: string, value: string) {
 }
 
 export async function getTextFromElementArray(inputArray: Locator[]): Promise<string[]> {
+  console.log('ACTUAL HEADINGS FROM UI:');
   const arrInputText: Array<string> = [];
-  for (const input of inputArray) {
+  for await (const input of inputArray) {
     const inputText = confirmStringNotNull(await input.textContent());
+    console.log(inputText.trim());
     arrInputText.push(inputText.trim());
   }
   return arrInputText;
