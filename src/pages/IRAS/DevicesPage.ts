@@ -91,7 +91,7 @@ export default class DevicesPage {
   }
 
   async assertOnDevicesPage(activeStage: Locator) {
-    const expectedSectionHeadingsText = devicesPageTestData.Devices.section_headings;
+    const expectedSectionHeadingsText = this.devicesPageTestData.Devices.section_headings;
     expect(await activeStage.textContent()).toBe(this.devicesPageTestData.Devices.page_name);
     const actualSectionHeadings = await getTextFromElementArray(await this.devices_section_headings.all());
     expectedSectionHeadingsText.forEach((expectedHeadingText) => {

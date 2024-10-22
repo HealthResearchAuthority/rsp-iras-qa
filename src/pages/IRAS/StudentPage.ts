@@ -60,7 +60,7 @@ export default class StudentPage {
   }
 
   async assertOnStudentPage(activeStage: Locator) {
-    const expectedSectionHeadingsText = studentPageTestData.Student.section_headings;
+    const expectedSectionHeadingsText = this.studentPageTestData.Student.section_headings;
     expect(await activeStage.textContent()).toBe(this.studentPageTestData.Student.page_name);
     const actualSectionHeadings = await getTextFromElementArray(await this.student_section_headings.all());
     expectedSectionHeadingsText.forEach((expectedHeadingText) => {

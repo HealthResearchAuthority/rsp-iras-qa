@@ -23,14 +23,14 @@ export default class ProceedApplicationPage {
     this.pageHeading = this.page.getByTestId('title');
     this.summaryListKeys = this.page.locator('.govuk-summary-list__key');
     this.irasIdListKey = this.summaryListKeys.getByText(
-      proceedApplicationPageData.Proceed_Application_Page.iras_id_key
+      this.proceedApplicationPageData.Proceed_Application_Page.iras_id_key
     );
     this.irasIdProjectTitleListValue = this.page.getByTestId('review_title');
     this.projectTitleListKey = this.summaryListKeys.getByText(
-      proceedApplicationPageData.Proceed_Application_Page.project_title_key
+      this.proceedApplicationPageData.Proceed_Application_Page.project_title_key
     );
     this.projectDescriptionListKey = this.summaryListKeys.getByText(
-      proceedApplicationPageData.Proceed_Application_Page.project_desc_key
+      this.proceedApplicationPageData.Proceed_Application_Page.project_desc_key
     );
     this.projectDescriptionListValue = this.page.getByTestId('review_description');
   }

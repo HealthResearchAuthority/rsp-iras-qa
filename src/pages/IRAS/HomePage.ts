@@ -26,8 +26,10 @@ export default class HomePage {
     this.pageHeading = this.page.getByTestId('title');
     this.loginBtn = this.page
       .locator('.gem-c-button')
-      .and(this.page.getByText(buttonTextData.Home_Page.Login, { exact: true }));
-    this.myApplicationsLink = this.mainPageContent.getByText(linkTextData.Home_Page.My_Applications, { exact: true });
+      .and(this.page.getByText(this.buttonTextData.Home_Page.Login, { exact: true }));
+    this.myApplicationsLink = this.mainPageContent.getByText(this.linkTextData.Home_Page.My_Applications, {
+      exact: true,
+    });
   }
 
   //Page Methods

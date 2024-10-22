@@ -37,7 +37,7 @@ export default class LoginPage {
   //passwords to be set in AzureDevops Pipeline, add encrypted values to .env when running locally
   async loginWithUserCreds(dataset: string) {
     const username = this.loginPageTestData[dataset].username;
-    const password = getDecryptedValue(eval(loginPageTestData[dataset].password));
+    const password = getDecryptedValue(eval(this.loginPageTestData[dataset].password));
     await this.usernameInput.fill(username);
     await this.btnNext.click();
     await this.passwordInput.fill(password);

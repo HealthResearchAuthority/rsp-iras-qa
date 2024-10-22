@@ -251,7 +251,7 @@ export default class ProjectDetailsPage {
   }
 
   async assertOnProjectDetailsPage(activeStage: Locator) {
-    const expectedSectionHeadingsText = projectDetailsPageTestData.Project_Details.section_headings;
+    const expectedSectionHeadingsText = this.projectDetailsPageTestData.Project_Details.section_headings;
     expect(await activeStage.textContent()).toBe(this.projectDetailsPageTestData.Project_Details.page_name);
     const actualSectionHeadings = await getTextFromElementArray(await this.project_details_section_headings.all());
     expectedSectionHeadingsText.forEach((expectedHeadingText) => {

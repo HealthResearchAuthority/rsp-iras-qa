@@ -41,7 +41,7 @@ export default class CommonItemsPage {
     this.qSetProgressBarActiveStageLink = this.qSetProgressBarActiveStage.locator('.stage-label').getByRole('button');
     this.bannerNavBar = this.page.getByTestId('app-navigation');
     this.bannerLoginBtn = this.bannerNavBar.getByText(this.buttonTextData.Banner.Login, { exact: true });
-    this.bannerMyApplications = this.bannerNavBar.getByText(linkTextData.Banner.My_Applications, { exact: true });
+    this.bannerMyApplications = this.bannerNavBar.getByText(this.linkTextData.Banner.My_Applications, { exact: true });
   }
 
   //Page Methods
