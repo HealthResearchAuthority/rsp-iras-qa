@@ -92,10 +92,11 @@ export default class ProjectFilterPage {
   async assertOnProjectFilterPage(activeStage: Locator) {
     const expectedSectionHeadingsText = this.projectFilterPageTestData.Project_Filter.section_headings;
     expect(await activeStage.textContent()).toBe(this.projectFilterPageTestData.Project_Filter.page_name);
+    await expect(this.project_filter_section_headings).toHaveCount(expectedSectionHeadingsText.length);
     const actualSectionHeadings = await getTextFromElementArray(await this.project_filter_section_headings.all());
-    expectedSectionHeadingsText.forEach((expectedHeadingText) => {
+    for await (const expectedHeadingText of expectedSectionHeadingsText) {
       expect(actualSectionHeadings).toContainEqual(expectedHeadingText);
-    });
+    }
     expect(await this.page.title()).toBe(this.projectFilterPageTestData.Project_Filter.title);
   }
 }

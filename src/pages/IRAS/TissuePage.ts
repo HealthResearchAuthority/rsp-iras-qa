@@ -83,10 +83,11 @@ export default class TissuePage {
   async assertOnTissuePage(activeStage: Locator) {
     const expectedSectionHeadingsText = this.tissuePageTestData.Tissue.section_headings;
     expect(await activeStage.textContent()).toBe(this.tissuePageTestData.Tissue.page_name);
+    await expect(this.tissue_section_headings).toHaveCount(expectedSectionHeadingsText.length);
     const actualSectionHeadings = await getTextFromElementArray(await this.tissue_section_headings.all());
-    expectedSectionHeadingsText.forEach((expectedHeadingText) => {
+    for await (const expectedHeadingText of expectedSectionHeadingsText) {
       expect(actualSectionHeadings).toContainEqual(expectedHeadingText);
-    });
+    }
     expect(await this.page.title()).toBe(this.tissuePageTestData.Tissue.title);
   }
 }
