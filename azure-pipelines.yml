@@ -25,6 +25,8 @@ parameters:
     values:
       - desktop
       - mobile
+variables:
+  ${{ if eq(parameters['platform'], 'mobile') }}:
   - name: os_type
     displayName: Select mobile OS type
     type: string
@@ -32,25 +34,28 @@ parameters:
     values:
       - iOS
       - Android
-  - name: ANDROID_Device
-    displayName: Select any Android Device
-    type: string
-    default: Pixel 7
-    values:
-      - Pixel 7
-      - Galaxy S9+
-      - Galaxy S8
-      - Pixel 5
-  - name: IOS_Device
-    displayName: Select any iOS Device
-    type: string
-    default: iPhone 15 Pro
-    values:
-      - iPhone 15 Pro
-      - iPhone 15
-      - iPhone 15 Plus
-      - iPhone 15 Pro Max
-      - iPhone 14 Pro Max
+    ${{ if eq(parameters['os_type'], 'Android') }}:  
+    - name: ANDROID_Device
+      displayName: Select any Android Device
+      type: string
+      default: Pixel 7
+      values:
+        - Pixel 7
+        - Galaxy S9+
+        - Galaxy S8
+        - Pixel 5
+    ${{ if eq(parameters['os_type'], 'iOS') }}:    
+    - name: IOS_Device
+      displayName: Select any iOS Device
+      type: string
+      default: iPhone 15 Pro
+      values:
+        - iPhone 15 Pro
+        - iPhone 15
+        - iPhone 15 Plus
+        - iPhone 15 Pro Max
+        - iPhone 14 Pro Max
+  ${{ if eq(parameters['platform'], 'desktop') }}:      
   - name: browser
     displayName: Select a Browser
     type: string
