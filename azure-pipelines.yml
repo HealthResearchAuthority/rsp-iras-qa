@@ -27,57 +27,56 @@ parameters:
       - mobile
 variables:
   ${{ if eq(parameters['platform'], 'mobile') }}:
-  - name: os_type
-    displayName: Select mobile OS type
-    type: string
-    default: iOS
-    values:
-      - iOS
-      - Android
-    ${{ if eq(parameters['os_type'], 'Android') }}:  
-    - name: ANDROID_Device
-      displayName: Select any Android Device
+    - name: os_type
+      displayName: Select mobile OS type
       type: string
-      default: Pixel 7
+      default: iOS
       values:
-        - Pixel 7
-        - Galaxy S9+
-        - Galaxy S8
-        - Pixel 5
-    ${{ if eq(parameters['os_type'], 'iOS') }}:    
-    - name: IOS_Device
-      displayName: Select any iOS Device
+        - iOS
+        - Android
+      ${{ if eq(parameters['os_type'], 'Android') }}:
+        - name: ANDROID_Device
+          displayName: Select any Android Device
+          type: string
+          default: Pixel 7
+          values:
+            - Pixel 7
+            - Galaxy S9+
+            - Galaxy S8
+            - Pixel 5
+      ${{ if eq(parameters['os_type'], 'iOS') }}:
+        - name: IOS_Device
+          displayName: Select any iOS Device
+          type: string
+          default: iPhone 15 Pro
+          values:
+            - iPhone 15 Pro
+            - iPhone 15
+            - iPhone 15 Plus
+            - iPhone 15 Pro Max
+            - iPhone 14 Pro Max
+  ${{ if eq(parameters['platform'], 'desktop') }}:
+    - name: browser
+      displayName: Select a Browser
       type: string
-      default: iPhone 15 Pro
+      default: chromium
       values:
-        - iPhone 15 Pro
-        - iPhone 15
-        - iPhone 15 Plus
-        - iPhone 15 Pro Max
-        - iPhone 14 Pro Max
-  ${{ if eq(parameters['platform'], 'desktop') }}:      
-  - name: browser
-    displayName: Select a Browser
-    type: string
-    default: chromium
-    values:
-      - chromium
-      - safari
-      - firefox
-  - name: devops_library_branch
-    displayName: DevOps Library Branch
-    type: string
-    default: main
-  - name: tests_run_timeout
-    type: number
-    displayName: Playwright Tests Run Timeout
-    default: 10
-  - name: run_sonarcloud_analysis
-    displayName: Run SonarCloud Analysis
-    default: true
+        - chromium
+        - safari
+        - firefox
+    - name: devops_library_branch
+      displayName: DevOps Library Branch
+      type: string
+      default: main
+    - name: tests_run_timeout
+      type: number
+      displayName: Playwright Tests Run Timeout
+      default: 10
+    - name: run_sonarcloud_analysis
+      displayName: Run SonarCloud Analysis
+      default: true
 
-variables:
-  - group: 'Test Automation'
+    - group: 'Test Automation'
 
 resources:
   repositories:
