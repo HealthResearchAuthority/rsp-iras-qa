@@ -1,8 +1,8 @@
 import { createBdd } from 'playwright-bdd';
 import { test, expect } from '../../hooks/CustomFixtures';
-import { readAxeResultsContents, generatehtmlReport } from '../../utils/UtilFunctions';
+import { readAxeResultsContents } from '../../utils/UtilFunctions';
 import { writeFile } from 'fs/promises';
-import { createHtmlReport } from 'axe-html-reporter';
+// import { createHtmlReport } from 'axe-html-reporter';
 
 const { When, Then } = createBdd(test);
 let axeScanResults: any;
@@ -22,15 +22,15 @@ Then('I analyse the results from the Axe scan', async ({ $testInfo }) => {
   });
   const file = $testInfo.outputPath(`temp-axe-results.json`);
   await writeFile(file, JSON.stringify(axeScanResults, null, 2), 'utf8');
-  const htmlReport = createHtmlReport({
-    results: axeScanResults,
-    options: {
-      projectKey: $testInfo.title,
-      doNotCreateReportFile: false,
-    },
-  });
-  //write the html report for each page
-  generatehtmlReport(`${$testInfo.title.replace(' ', '_')}.html`, htmlReport);
+  // const htmlReport = createHtmlReport({
+  //   results: axeScanResults,
+  //   options: {
+  //     projectKey: $testInfo.title,
+  //     doNotCreateReportFile: false,
+  //   },
+  // });
+  // //write the html report for each page
+  // generatehtmlReport(`${$testInfo.title.replace(' ', '_')}.html`, htmlReport);
 });
 
 Then('I expect to receive no WCAG Violations', async ({ $testInfo }) => {

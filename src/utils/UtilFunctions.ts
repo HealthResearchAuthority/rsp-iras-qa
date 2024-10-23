@@ -5,7 +5,7 @@ import { readFile, writeFile } from 'fs/promises';
 import 'dotenv/config';
 import { deviceDSafari, deviceDFirefox, deviceDChrome, deviceMIOS, deviceMAndroid } from '../hooks/GlobalSetup';
 import fs from 'fs';
-import { createHtmlReport } from 'axe-html-reporter';
+// import { createHtmlReport } from 'axe-html-reporter';
 import os from 'os';
 
 export function getAuthState(user: string): string {
@@ -216,17 +216,17 @@ export async function generateJSON($bddWorld, axeScanResults, jsonfile) {
   await writeFile(file, JSON.stringify(axeScanResults, null, 2), 'utf8');
 }
 
-export async function generateAxeHTMLReport($bddWorld, axeScanResults) {
-  const htmlReport = createHtmlReport({
-    results: axeScanResults,
-    options: {
-      projectKey: $bddWorld.testInfo.title,
-      doNotCreateReportFile: false,
-    },
-  });
-  //write the html report for each page
-  generatehtmlReport(`${$bddWorld.testInfo.title.replace(' ', '_')}.html`, htmlReport);
-}
+// export async function generateAxeHTMLReport($bddWorld, axeScanResults) {
+//   const htmlReport = createHtmlReport({
+//     results: axeScanResults,
+//     options: {
+//       projectKey: $bddWorld.testInfo.title,
+//       doNotCreateReportFile: false,
+//     },
+//   });
+//   //write the html report for each page
+//   generatehtmlReport(`${$bddWorld.testInfo.title.replace(' ', '_')}.html`, htmlReport);
+// }
 
 export function getOSNameVersion() {
   let osVersion;
