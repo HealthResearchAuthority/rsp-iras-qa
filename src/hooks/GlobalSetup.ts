@@ -5,5 +5,3 @@ export default globalSetup;
 export const deviceDSafari = 'Desktop Safari';
 export const deviceDFirefox = 'Desktop Firefox';
 export const deviceDChrome = 'Desktop Chrome';
-export const deviceMIOS = 'iPhone 15 Pro';
-export const deviceMAndroid = 'Pixel 7';

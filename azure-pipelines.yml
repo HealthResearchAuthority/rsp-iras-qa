@@ -18,6 +18,39 @@ pool:
   vmImage: 'Ubuntu-latest'
 
 parameters:
+  - name: platform
+    displayName: Select a Platform
+    type: string
+    default: desktop
+    values:
+      - desktop
+      - mobile
+  - name: os_type
+    displayName: Select mobile OS type
+    type: string
+    default: iOS
+    values:
+      - iOS
+      - Android
+  - name: ANDROID_Device
+    displayName: Select any Android Device
+    type: string
+    default: Pixel 7
+    values:
+      - Pixel 7
+      - Galaxy S9+
+      - Galaxy S8
+      - Pixel 5
+  - name: IOS_Device
+    displayName: Select any iOS Device
+    type: string
+    default: iPhone 15 Pro
+    values:
+      - iPhone 15 Pro
+      - iPhone 15
+      - iPhone 15 Plus
+      - iPhone 15 Pro Max
+      - iPhone 14 Pro Max
   - name: browser
     displayName: Select a Browser
     type: string
@@ -26,8 +59,6 @@ parameters:
       - chromium
       - safari
       - firefox
-      - ios
-      - android
   - name: devops_library_branch
     displayName: DevOps Library Branch
     type: string

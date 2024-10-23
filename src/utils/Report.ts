@@ -3,9 +3,9 @@ import 'dotenv/config';
 import { Reporter } from 'playwright/types/testReporter';
 import type { FullResult } from '@playwright/test/reporter';
 import {
-  deviceType,
-  defaultBrowserType,
-  browserVersion,
+  deviceTypeVal,
+  getBrowserType,
+  getBrowserVersionDevices,
   displayTimeZone,
   formatedDuration,
   getOSNameVersion,
@@ -19,14 +19,15 @@ class MyReporter implements Reporter {
       reportPath: './test-reports/cucumber/html/',
       pageTitle: 'Multiple Cucumber HTML reporter',
       reportName: 'Future IRAS Automation Test Report-Playwright',
+      saveCollectedJSON: true,
       displayDuration: true,
       durationInMS: true,
       pageFooter: '<div><p></p></div>',
       customMetadata: true,
       metadata: [
-        { name: 'Device Type', value: `${deviceType}` },
-        { name: 'Browser Name', value: `${defaultBrowserType}` },
-        { name: 'Browser Version', value: `${browserVersion}` },
+        { name: 'Device Type', value: `${deviceTypeVal}` },
+        { name: 'Browser Name', value: getBrowserType(deviceTypeVal) },
+        { name: 'Browser Version', value: getBrowserVersionDevices(deviceTypeVal) },
       ],
 
       customData: {

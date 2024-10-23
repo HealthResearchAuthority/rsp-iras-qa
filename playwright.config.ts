@@ -55,7 +55,7 @@ const config: PlaywrightTestConfig = {
       testDir: defineBddConfig({
         features: [
           'tests/features/cross-compatible/stories/**/*.feature',
-          // 'tests/features/cross-compatible/accessibility/**/*.feature', //uncomment when running accessibility tests
+          'tests/features/cross-compatible/accessibility/**/*.feature', //uncomment when running accessibility tests
           `tests/features/${platform}/**/*.feature`,
         ],
         steps: ['src/steps/**/*.ts', 'src/hooks/CustomFixtures.ts'],

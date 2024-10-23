@@ -3,9 +3,9 @@ import { Locator, devices } from '@playwright/test';
 import crypto from 'crypto';
 import { readFile, writeFile } from 'fs/promises';
 import 'dotenv/config';
-import { deviceDSafari, deviceDFirefox, deviceDChrome, deviceMIOS, deviceMAndroid } from '../hooks/GlobalSetup';
+import { deviceDSafari, deviceDFirefox, deviceDChrome } from '../hooks/GlobalSetup';
 import fs from 'fs';
-// import { createHtmlReport } from 'axe-html-reporter';
+import { createHtmlReport } from 'axe-html-reporter';
 import os from 'os';
 
 export function getAuthState(user: string): string {
@@ -102,33 +102,33 @@ export async function getTextFromElementArray(inputArray: Locator[]): Promise<st
 
 let browser: any;
 let browserName: string;
-export function getDeviceType(): string | undefined {
-  switch (`${process.env.BROWSER}`.toUpperCase()) {
-    case 'CHROMIUM':
-      return `${deviceDChrome}`;
-    case 'FIREFOX':
-      return `${deviceDFirefox}`;
-    case 'SAFARI':
-      return `${deviceDSafari}`;
-    case 'IOS':
-      return `${deviceMIOS}`;
-    case 'ANDROID':
-      return `${deviceMAndroid}`;
-    default:
-      return `${deviceDChrome}`;
-  }
-}
+// export function getDeviceType(): string | undefined {
+//   switch (`${process.env.BROWSER}`.toUpperCase()) {
+//     case 'CHROMIUM':
+//       return `${deviceDChrome}`;
+//     case 'FIREFOX':
+//       return `${deviceDFirefox}`;
+//     case 'SAFARI':
+//       return `${deviceDSafari}`;
+//     case 'IOS':
+//       return `${deviceMIOS}`;
+//     case 'ANDROID':
+//       return `${deviceMAndroid}`;
+//     default:
+//       return `${deviceDChrome}`;
+//   }
+// }
 
-export const deviceType = getDeviceType();
+// export const deviceType = getDeviceType();
 
-export function getBrowserType(): string {
+export function getBrowserType(deviceType: string): string {
   browser = devices[`${deviceType}`];
   browserName = JSON.parse(JSON.stringify(browser)).defaultBrowserType;
   return browserName;
 }
 
-export const defaultBrowserType = getBrowserType();
-export function getBrowserVersionDevices(): string | undefined {
+// export const defaultBrowserType = getBrowserType();
+export function getBrowserVersionDevices(deviceType: string): string | undefined {
   browser = devices[`${deviceType}`];
   let version: string | undefined;
   const browserType = `${JSON.parse(JSON.stringify(browser)).defaultBrowserType}`;
@@ -149,35 +149,66 @@ export function getBrowserVersionDevices(): string | undefined {
   return version;
 }
 
-export const browserVersion = getBrowserVersionDevices();
+// export const browserVersion = getBrowserVersionDevices();
 
 let browserdata: any;
 let platform: string;
-export function getBrowserDetails() {
-  if (`${process.env.BROWSER}` == 'safari') {
-    browserdata = devices[`${deviceDSafari}`];
-    platform = 'desktop';
-  } else if (`${process.env.BROWSER}` == 'firefox') {
-    browserdata = devices[`${deviceDFirefox}`];
-    platform = 'desktop';
-  } else if (`${process.env.BROWSER}` == 'ios') {
-    browserdata = devices[`${deviceMIOS}`];
-    platform = 'mobile';
-  } else if (`${process.env.BROWSER}` == 'android') {
-    browserdata = devices[`${deviceMAndroid}`];
-    platform = 'mobile';
-  } else if (`${process.env.BROWSER}` == 'chromium') {
-    browserdata = devices[`${deviceDChrome}`];
-    platform = 'desktop';
-  } else {
-    browserdata = devices[`${deviceDChrome}`];
-    platform = 'desktop';
-    console.info('Invalid browser name, hence executing tests with default browser Chromium');
-  }
-  return [browserdata, platform];
-}
+// export function getBrowserDetails() {
+//   if (`${process.env.BROWSER}` == 'safari') {
+//     browserdata = devices[`${deviceDSafari}`];
+//     platform = 'desktop';
+//   } else if (`${process.env.BROWSER}` == 'firefox') {
+//     browserdata = devices[`${deviceDFirefox}`];
+//     platform = 'desktop';
+//   } else if (`${process.env.BROWSER}` == 'ios') {
+//     browserdata = devices[`${deviceMIOS}`];
+//     platform = 'mobile';
+//   } else if (`${process.env.BROWSER}` == 'android') {
+//     browserdata = devices[`${deviceMAndroid}`];
+//     platform = 'mobile';
+//   } else if (`${process.env.BROWSER}` == 'chromium') {
+//     browserdata = devices[`${deviceDChrome}`];
+//     platform = 'desktop';
+//   } else {
+//     browserdata = devices[`${deviceDChrome}`];
+//     platform = 'desktop';
+//     console.info('Invalid browser name, hence executing tests with default browser Chromium');
+//   }
+//   return [browserdata, platform];
+// }
 
-export const [browserVal, platformVal] = getBrowserDetails();
+// export const [browserVal, platformVal] = getBrowserDetails();
+let deviceType: string;
+export function getBrowserDetails() {
+  if (`${process.env.PLATFORM?.toLowerCase()}` == 'mobile') {
+    if (`${process.env.OS_TYPE?.toLowerCase()}` == 'ios') {
+      browserdata = devices[`${process.env.IOS_Device}`];
+      deviceType = `${process.env.IOS_Device}`;
+    } else if (`${process.env.OS_TYPE?.toLowerCase()}` == 'android') {
+      browserdata = devices[`${process.env.ANDROID_Device}`];
+      deviceType = `${process.env.ANDROID_Device}`;
+    }
+  } else if (`${process.env.PLATFORM?.toLowerCase()}` == 'desktop') {
+    if (`${process.env.BROWSER?.toLowerCase()}` == 'safari') {
+      browserdata = devices[`${deviceDSafari}`];
+      deviceType = `${deviceDSafari}`;
+    } else if (`${process.env.BROWSER?.toLowerCase()}` == 'firefox') {
+      browserdata = devices[`${deviceDFirefox}`];
+      deviceType = `${deviceDFirefox}`;
+    } else if (`${process.env.BROWSER?.toLowerCase()}` == 'chromium') {
+      browserdata = devices[`${deviceDChrome}`];
+      deviceType = `${deviceDChrome}`;
+    } else {
+      browserdata = devices[`${deviceDChrome}`];
+      deviceType = `${deviceDChrome}`;
+
+      console.info('Invalid browser name, hence executing tests with default browser Chromium');
+    }
+  }
+  platform = `${process.env.PLATFORM?.toLowerCase()}`;
+  return [browserdata, platform, deviceType];
+}
+export const [browserVal, platformVal, deviceTypeVal] = getBrowserDetails();
 
 export function displayTimeZone(time: Date | string) {
   return new Date(time).toLocaleString(undefined, { timeZoneName: 'short' });
@@ -200,11 +231,11 @@ export function formatedDuration(duration: number) {
 
 export function generatehtmlReport(path: string, htmlReport: string) {
   if (!fs.existsSync(path)) {
-    fs.mkdirSync('test-results/reports', {
+    fs.mkdirSync('./test-reports/axe-core', {
       recursive: true,
     });
   }
-  fs.writeFileSync(`test-results/reports/${path}.html`, htmlReport);
+  fs.writeFileSync(`./test-reports/axe-core/${path}.html`, htmlReport);
 }
 
 export async function generateJSON($bddWorld, axeScanResults, jsonfile) {
@@ -216,17 +247,17 @@ export async function generateJSON($bddWorld, axeScanResults, jsonfile) {
   await writeFile(file, JSON.stringify(axeScanResults, null, 2), 'utf8');
 }
 
-// export async function generateAxeHTMLReport($bddWorld, axeScanResults) {
-//   const htmlReport = createHtmlReport({
-//     results: axeScanResults,
-//     options: {
-//       projectKey: $bddWorld.testInfo.title,
-//       doNotCreateReportFile: false,
-//     },
-//   });
-//   //write the html report for each page
-//   generatehtmlReport(`${$bddWorld.testInfo.title.replace(' ', '_')}.html`, htmlReport);
-// }
+export async function generateAxeHTMLReport($bddWorld, axeScanResults) {
+  const htmlReport = createHtmlReport({
+    results: axeScanResults,
+    options: {
+      projectKey: $bddWorld.testInfo.title,
+      doNotCreateReportFile: false,
+    },
+  });
+  //write the html report for each page
+  generatehtmlReport(`${$bddWorld.testInfo.title.replace(' ', '_')}.html`, htmlReport);
+}
 
 export function getOSNameVersion() {
   let osVersion;
