@@ -35,7 +35,7 @@ parameters:
       - safari
       - firefox
   - name: mobile_os
-    displayName: Select mobile OS type
+    displayName: Select mobile OS type (only for mobile)
     type: string
     default: N/A
     values:
@@ -43,7 +43,7 @@ parameters:
       - iOS
       - Android
   - name: android_device
-    displayName: Select any Android Device
+    displayName: Select any Android Device (only for Android device)
     type: string
     default: N/A
     values:
@@ -53,7 +53,7 @@ parameters:
       - Galaxy S8
       - Pixel 5
   - name: ios_device
-    displayName: Select any iOS Device
+    displayName: Select any iOS Device (only for iOS device)
     type: string
     default: N/A
     values:
