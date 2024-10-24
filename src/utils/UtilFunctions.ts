@@ -231,11 +231,11 @@ export function formatedDuration(duration: number) {
 
 export function generatehtmlReport(path: string, htmlReport: string) {
   if (!fs.existsSync(path)) {
-    fs.mkdirSync('./test-reports/axe-core', {
+    fs.mkdirSync('./test-reports/axeAccessibility', {
       recursive: true,
     });
   }
-  fs.writeFileSync(`./test-reports/axe-core/${path}.html`, htmlReport);
+  fs.writeFileSync(`./test-reports/axeAccessibility/${path}.html`, htmlReport);
 }
 
 export async function generateJSON($bddWorld, axeScanResults, jsonfile) {

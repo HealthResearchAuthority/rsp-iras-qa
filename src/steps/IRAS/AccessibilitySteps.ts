@@ -26,11 +26,11 @@ Then('I analyse the results from the Axe scan', async ({ $testInfo }) => {
     results: axeScanResults,
     options: {
       projectKey: $testInfo.title,
-      doNotCreateReportFile: false,
+      doNotCreateReportFile: true,
     },
   });
   //write the html report for each page
-  generatehtmlReport(`${$testInfo.title.replace(' ', '_')}.html`, htmlReport);
+  generatehtmlReport(`${$testInfo.title.replace(' ', '_')}`, htmlReport);
 });
 
 Then('I expect to receive no WCAG Violations', async ({ $testInfo }) => {

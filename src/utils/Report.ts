@@ -19,9 +19,9 @@ class MyReporter implements Reporter {
       reportPath: './test-reports/cucumber/html/',
       pageTitle: 'Multiple Cucumber HTML reporter',
       reportName: 'Future IRAS Automation Test Report-Playwright',
-      saveCollectedJSON: true,
+      // saveCollectedJSON: true,
       displayDuration: true,
-      durationInMS: true,
+      // durationInMS: true,
       pageFooter: '<div><p></p></div>',
       customMetadata: true,
       metadata: [
