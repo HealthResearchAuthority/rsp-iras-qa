@@ -4,7 +4,8 @@
 name: Run Playwright Tests
 
 trigger:
-  - main
+  # - main
+  - feature/rsp-1509-accessibilty-test-report
 
 schedules:
   - cron: '0 0 * * Mon-Fri'
@@ -66,7 +67,8 @@ parameters:
   - name: devops_library_branch
     displayName: DevOps Library Branch
     type: string
-    default: main
+    # default: main
+    default: rsp-1507-update-playwright-report-yaml
   - name: tests_run_timeout
     type: number
     displayName: Playwright Tests Run Timeout
