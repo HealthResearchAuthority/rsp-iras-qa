@@ -8,7 +8,7 @@ trigger:
   - feature/rsp-1509-accessibilty-test-report
 
 schedules:
-  - cron: '56 12 * * Mon-Fri'
+  - cron: '45 15 * * Mon-Fri'
     displayName: 'Nightly run - full suite'
     branches:
       include:
@@ -52,6 +52,7 @@ parameters:
       - N/A
       - Pixel 7
       - Galaxy S9+
+      - Galaxy S9+ landscape
       - Galaxy S8
       - Pixel 5
   - name: ios_device
@@ -64,6 +65,7 @@ parameters:
       - iPhone 15
       - iPhone 15 Plus
       - iPhone 15 Pro Max
+      - iPhone 15 landscape
       - iPhone 14 Pro Max
   - name: devops_library_branch
     displayName: DevOps Library Branch
