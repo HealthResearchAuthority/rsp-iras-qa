@@ -19,9 +19,7 @@ class MyReporter implements Reporter {
       reportPath: './test-reports/cucumber/html/',
       pageTitle: 'Multiple Cucumber HTML reporter',
       reportName: 'Future IRAS Automation Test Report-Playwright',
-      // saveCollectedJSON: true,
       displayDuration: true,
-      // durationInMS: true,
       pageFooter: '<div><p></p></div>',
       customMetadata: true,
       metadata: [
@@ -43,7 +41,6 @@ class MyReporter implements Reporter {
             label: 'Execution End Time',
             value: displayTimeZone(endTime),
           },
-          // { label: 'Total Duration in milliseconds', value: `${result.duration}` },
           { label: 'Total Duration', value: formatedDuration(result.duration) },
         ],
       },

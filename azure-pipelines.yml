@@ -30,9 +30,8 @@ parameters:
   - name: browser
     displayName: Select browser (only for desktop)
     type: string
-    default: N/A
+    default: chromium
     values:
-      - N/A
       - chromium
       - safari
       - firefox
