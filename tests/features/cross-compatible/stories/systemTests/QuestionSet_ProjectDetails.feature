@@ -6,7 +6,7 @@ Feature: Question Set - Research Application - Project Details
     And I click the 'New_Application' button on the 'Home_Page'
     And I can see the 'Create_Application_Page'
 
-  @rsp-1500 @rsp-1501
+  @rsp-1500 @rsp-1501 @rsp-1502
   Scenario Outline: Validate user is able to fill all sections in project details page for a new research application
     And I enter the application name and description for '<Project>'
     And I click the 'Create' button on the 'Create_Application_Page'
