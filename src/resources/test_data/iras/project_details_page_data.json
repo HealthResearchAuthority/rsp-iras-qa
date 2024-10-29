@@ -250,5 +250,100 @@
       "how_was_sample_size_decided_text": "It was decided by X, Y and Z",
       "what_criteria_electively_stopping_early_text": "The criteria for electively stopping early will be X, Y and Z"
     }
+  },
+  "Governance_Management": {
+    "Valid_Data_In_All_Fields": {
+      "detail_source_funding_materials_text": "The source of funding is X, Y and Z",
+      "describe_logistical_legal_risks_text": "The logistical risks are X, the legal risk are Y and managements risks are Z",
+      "arrangements_for_monitoring_conduct_checkbox": [
+        "Remote monitoring by sponsor or delegate",
+        "On-site monitoring by sponsor or delegate"
+      ],
+      "arrangements_to_review_safety_data_text": "The arrangements for the review of safety data is X, Y and Z",
+      "arrangements_for_insurance_sponsors_management_text": "The arrangements to meet the legal liability for sponsors arising from management of the project is X, Y and Z",
+      "arrangements_for_insurance_sponsors_design_text": "The arrangements to meet the legal liability for sponsors arising from design of the project is X, Y and Z",
+      "arrangements_for_insurance_investigators_text": "The arrangements to meet the legal liability for investigators conducting the project is X, Y and Z",
+      "describe_participants_excluded_insurance_text": "The participants excluded will be X and Y, with the justification being Z",
+      "have_sponsors_arranged_payment_compensation_radio": "Yes",
+      "detail_arrangements_for_compensation_text": "The arrangements for compensation are X, Y and Z",
+      "have_sponsors_delegated_responsibilities_radio": "Yes",
+      "detail_cro_ctu_management_responsibilities_text": "The management responsibilities X, Y and Z have been delegated to the CRO",
+      "has_responsibility_research_activity_delegated_radio": "Yes",
+      "detail_proposed_oversight_arrangements_text": "The subcontractors are X and the proposed oversight arrangements are Y and Z"
+    }
+  },
+  "Transparency": {
+    "Valid_Data_In_All_Fields": {
+      "publication_deferral_request_radio": "I request a deferral of registration and research summary publication - for protection of commercially confidential information",
+      "first_provide_justification_for_deferral_text": "The justification for the deferral request is X, Y and Z",
+      "first_confirm_arrangements_registration_of_project_checkbox": ["The project will be registered in a registry"],
+      "detail_other_arrangements_project_registration_text": "The arrangements for registration are X, Y and Z",
+      "second_confirm_arrangements_registration_of_project_checkbox": ["Yes", "ISRCTN", "Clinicaltrials.gov"],
+      "isrctn_text": "This is ISRCTN Text",
+      "clinical_trials_gov_text": "This is Clinicaltrials.gov Text",
+      "provide_name_registries_ref_no_text": "The name of the registries are X and Y, the reference number is 123Z",
+      "project_summary_deferral_request_checkbox": [
+        "I request a deferral of registration and research summary publication - other reason"
+      ],
+      "second_provide_justification_for_deferral_text": "The justification for the deferral request is A, B and C",
+      "planned_end_date": "2028-03-03",
+      "how_intend_report_results_of_project_checkbox": [
+        "Peer reviewed scientific journals",
+        "Conference presentation",
+        "Submission to regulatory authorities",
+        "No plans to report or disseminate the results"
+      ],
+      "detail_other_reporting_plans_text": "The reporting and dissemination plans are X, Y and Z",
+      "how_you_will_inform_participants_of_results_text": "We will inform participants of the results via X, Y and Z",
+      "do_plan_to_share_participant_level_data_radio": "Yes",
+      "detail_plans_sharing_participant_level_data_text": "We plan to share the participant level data by doing X, Y and Z",
+      "will_have_remaining_human_bio_material_radio": "Yes",
+      "will_be_registering_remaining_samples_radio": "Yes",
+      "justify_post_study_arrangements_for_material_text": "We beleive we have justified these arrangements due to X, Y and Z",
+      "first_email_text": "test@test.com",
+      "first_telephone_text": "01234567890",
+      "first_postal_address_text": "1 Test Street, Test Road, TST 123",
+      "second_email_text": "testing@testing.com",
+      "second_telephone_text": "00011222333",
+      "second_postal_address_text": "2 Testing Lane, Testing Road, TST 456"
+    },
+    "Negative_Responses": {
+      "publication_deferral_request_radio": "No deferral requested",
+      "first_provide_justification_for_deferral_text": "There is no justification for the deferral request",
+      "first_confirm_arrangements_registration_of_project_checkbox": ["Other arrangements are in place"],
+      "detail_other_arrangements_project_registration_text": "There are no other arrangements for registration",
+      "second_confirm_arrangements_registration_of_project_checkbox": ["No", "Other"],
+      "isrctn_text": "N/A",
+      "clinical_trials_gov_text": "N/A",
+      "provide_name_registries_ref_no_text": "We cannot provide the name of the any registries or a reference number",
+      "project_summary_deferral_request_checkbox": ["No deferral requested"],
+      "planned_end_date": "2029-06-07",
+      "how_intend_report_results_of_project_checkbox": [
+        "Internal report",
+        "Publication on website",
+        "Other publication",
+        "Submission to regulatory authorities",
+        "Access to raw data and right to publish freely by all investigators in study or by Independent Steering Committee on behalf of all investigators",
+        "Other"
+      ],
+      "detail_other_reporting_plans_text": "There are no reporting and dissemination plans",
+      "how_you_will_inform_participants_of_results_text": "There are no arrangements to do this because of X, Y and Z",
+      "do_plan_to_share_participant_level_data_radio": "No",
+      "detail_plans_sharing_participant_level_data_text": "We have the alternatives X, Y and Z planned",
+      "will_have_remaining_human_bio_material_radio": "No",
+      "will_be_registering_remaining_samples_radio": "No",
+      "justify_post_study_arrangements_for_material_text": "We cannot justify this",
+      "first_email_text": "tester@tester.com",
+      "first_telephone_text": "59301578335",
+      "first_postal_address_text": "3 Tester Street, Tester Road, TST 003"
+    }
+  },
+  "Confidentiality_Info_Management": {
+    "Valid_Data_In_All_Fields": {
+      "is_study_limited_to_data_only_radio": "Yes"
+    },
+    "The_Answer_No": {
+      "is_study_limited_to_data_only_radio": "No"
+    }
   }
 }

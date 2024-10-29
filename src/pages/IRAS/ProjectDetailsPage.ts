@@ -112,6 +112,49 @@ export default class ProjectDetailsPage {
   readonly how_many_participants_samples_records_studied_text: Locator;
   readonly how_was_sample_size_decided_text: Locator;
   readonly what_criteria_electively_stopping_early_text: Locator;
+  readonly governance_management_section: Locator;
+  readonly detail_source_funding_materials_text: Locator;
+  readonly describe_logistical_legal_risks_text: Locator;
+  readonly arrangements_for_monitoring_conduct_checkbox: Locator;
+  readonly arrangements_to_review_safety_data_text: Locator;
+  readonly arrangements_for_insurance_sponsors_management_text: Locator;
+  readonly arrangements_for_insurance_sponsors_design_text: Locator;
+  readonly arrangements_for_insurance_investigators_text: Locator;
+  readonly describe_participants_excluded_insurance_text: Locator;
+  readonly have_sponsors_arranged_payment_compensation_radio: Locator;
+  readonly detail_arrangements_for_compensation_text: Locator;
+  readonly have_sponsors_delegated_responsibilities_radio: Locator;
+  readonly detail_cro_ctu_management_responsibilities_text: Locator;
+  readonly has_responsibility_research_activity_delegated_radio: Locator;
+  readonly detail_proposed_oversight_arrangements_text: Locator;
+  readonly transparency_section: Locator;
+  readonly publication_deferral_request_radio: Locator;
+  readonly first_provide_justification_for_deferral_text: Locator;
+  readonly first_confirm_arrangements_registration_of_project_checkbox: Locator;
+  readonly detail_other_arrangements_project_registration_text: Locator;
+  readonly second_confirm_arrangements_registration_of_project_checkbox: Locator;
+  readonly isrctn_text: Locator;
+  readonly clinical_trials_gov_text: Locator;
+  readonly provide_name_registries_ref_no_text: Locator;
+  readonly project_summary_deferral_request_checkbox: Locator;
+  readonly second_provide_justification_for_deferral_text: Locator;
+  readonly planned_end_date: Locator;
+  readonly how_intend_report_results_of_project_checkbox: Locator;
+  readonly detail_other_reporting_plans_text: Locator;
+  readonly how_you_will_inform_participants_of_results_text: Locator;
+  readonly do_plan_to_share_participant_level_data_radio: Locator;
+  readonly detail_plans_sharing_participant_level_data_text: Locator;
+  readonly will_have_remaining_human_bio_material_radio: Locator;
+  readonly will_be_registering_remaining_samples_radio: Locator;
+  readonly justify_post_study_arrangements_for_material_text: Locator;
+  readonly first_email_text: Locator;
+  readonly first_telephone_text: Locator;
+  readonly first_postal_address_text: Locator;
+  readonly second_email_text: Locator;
+  readonly second_telephone_text: Locator;
+  readonly second_postal_address_text: Locator;
+  readonly confidentiality_info_governance_section: Locator;
+  readonly is_study_limited_to_data_only_radio: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -158,7 +201,7 @@ export default class ProjectDetailsPage {
     this.existing_best_describe_ai_type_checkbox = this.research_design_section.getByTestId(/^IQA03280/);
     this.describe_ai_type_again_text = this.research_design_section.getByTestId('IQA03281_Text');
     this.what_will_happen_participants_text = this.research_design_section.getByTestId('IQA0060_Text');
-    //Research Activities
+    //Research Activities Section
     this.research_activities_section = page.locator('legend').getByText('Research Activities').locator('..');
     this.what_intervention_treatment_being_studied_text = this.research_activities_section.getByTestId('IQA0062_Text');
     this.is_treatment_first_human_radio = this.research_activities_section.getByTestId(/^IQA0063/);
@@ -220,7 +263,7 @@ export default class ProjectDetailsPage {
     this.will_chief_investigators_recieve_payment_incentives_radio =
       this.risks_conflict_section.getByTestId(/^IQA0115/);
     this.give_details_of_payment_incentives_text = this.risks_conflict_section.getByTestId('IQA0116_Text');
-    //Summary Ethical Issues
+    //Summary Ethical Issues Section
     this.summary_ethical_issues_section = page.locator('legend').getByText('Summary Ethical Issues').locator('..');
     this.summarise_main_ethical_issues_text = this.summary_ethical_issues_section.getByTestId('IQA0117_Text');
     this.is_application_any_of_following_checkbox = this.summary_ethical_issues_section.getByTestId(/^IQA0118/);
@@ -228,7 +271,7 @@ export default class ProjectDetailsPage {
     this.explain_how_reasons_for_opinion_have_been_addressed_text =
       this.summary_ethical_issues_section.getByTestId('IQA0120_Text');
     this.provide_info_about_project_background_text = this.summary_ethical_issues_section.getByTestId('IQA0039_Text');
-    //Resarch Analysis
+    //Resarch Analysis Section
     this.research_analysis_section = page.locator('legend').getByText('Research Analysis').locator('..');
     this.how_quality_research_been_assessed_checkbox = this.research_analysis_section.getByTestId(/^IQA0121/);
     this.detail_how_quality_research_assessed_text = this.research_analysis_section.getByTestId('IQA0122_Text');
@@ -243,6 +286,64 @@ export default class ProjectDetailsPage {
       this.research_analysis_section.getByTestId('IQA0130_Text');
     this.how_was_sample_size_decided_text = this.research_analysis_section.getByTestId('IQA0131_Text');
     this.what_criteria_electively_stopping_early_text = this.research_analysis_section.getByTestId('IQA0132_Text');
+    //Governance and Management Section
+    this.governance_management_section = this.page
+      .locator('legend')
+      .getByText('Governance and Management')
+      .locator('..');
+    this.detail_source_funding_materials_text = this.governance_management_section.getByTestId('IQA0139_Text');
+    this.describe_logistical_legal_risks_text = this.governance_management_section.getByTestId('IQA0140_Text');
+    this.arrangements_for_monitoring_conduct_checkbox = this.governance_management_section.getByTestId(/^IQA0147/);
+    this.arrangements_to_review_safety_data_text = this.governance_management_section.getByTestId('IQA0148_Text');
+    this.arrangements_for_insurance_sponsors_management_text =
+      this.governance_management_section.getByTestId('IQA0149_Text');
+    this.arrangements_for_insurance_sponsors_design_text =
+      this.governance_management_section.getByTestId('IQA0150_Text');
+    this.arrangements_for_insurance_investigators_text = this.governance_management_section.getByTestId('IQA0151_Text');
+    this.describe_participants_excluded_insurance_text = this.governance_management_section.getByTestId('IQA0152_Text');
+    this.have_sponsors_arranged_payment_compensation_radio = this.governance_management_section.getByTestId(/^IQA0153/);
+    this.detail_arrangements_for_compensation_text = this.governance_management_section.getByTestId('IQA0154_Text');
+    this.have_sponsors_delegated_responsibilities_radio = this.governance_management_section.getByTestId(/^IQA0155/);
+    this.detail_cro_ctu_management_responsibilities_text =
+      this.governance_management_section.getByTestId('IQA0156_Text');
+    this.has_responsibility_research_activity_delegated_radio =
+      this.governance_management_section.getByTestId(/^IQA0157/);
+    this.detail_proposed_oversight_arrangements_text = this.governance_management_section.getByTestId('IQA0158_Text');
+    //Transparency Section
+    this.transparency_section = this.page.locator('legend').getByText('Transparency').locator('..');
+    this.publication_deferral_request_radio = this.transparency_section.getByTestId(/^IQA0165/);
+    this.first_provide_justification_for_deferral_text = this.transparency_section.getByTestId('IQA0166_Text');
+    this.first_confirm_arrangements_registration_of_project_checkbox =
+      this.transparency_section.getByTestId(/^IQA0167/);
+    this.detail_other_arrangements_project_registration_text = this.transparency_section.getByTestId('IQA0168_Text');
+    this.second_confirm_arrangements_registration_of_project_checkbox =
+      this.transparency_section.getByTestId(/^IQA0169/);
+    this.isrctn_text = this.transparency_section.getByTestId('IQA0170_Text');
+    this.clinical_trials_gov_text = this.transparency_section.getByTestId('IQA0171_Text');
+    this.provide_name_registries_ref_no_text = this.transparency_section.getByTestId('IQA0172_Text');
+    this.project_summary_deferral_request_checkbox = this.transparency_section.getByTestId(/^IQA0173/);
+    this.second_provide_justification_for_deferral_text = this.transparency_section.getByTestId('IQA0174_Text');
+    this.planned_end_date = this.transparency_section.getByTestId('IQA0175_Text');
+    this.how_intend_report_results_of_project_checkbox = this.transparency_section.getByTestId(/^IQA0176/);
+    this.detail_other_reporting_plans_text = this.transparency_section.getByTestId('IQA0177_Text');
+    this.how_you_will_inform_participants_of_results_text = this.transparency_section.getByTestId('IQA0178_Text');
+    this.do_plan_to_share_participant_level_data_radio = this.transparency_section.getByTestId(/^IQA0179/);
+    this.detail_plans_sharing_participant_level_data_text = this.transparency_section.getByTestId('IQA0180_Text');
+    this.will_have_remaining_human_bio_material_radio = this.transparency_section.getByTestId(/^IQA0181/);
+    this.will_be_registering_remaining_samples_radio = this.transparency_section.getByTestId(/^IQA0182/);
+    this.justify_post_study_arrangements_for_material_text = this.transparency_section.getByTestId('IQA0183_Text');
+    this.first_email_text = this.transparency_section.getByTestId('IQA0185_Text');
+    this.first_telephone_text = this.transparency_section.getByTestId('IQA0186_Text');
+    this.first_postal_address_text = this.transparency_section.getByTestId('IQA0187_Text');
+    this.second_email_text = this.transparency_section.getByTestId('IQA0189_Text');
+    this.second_telephone_text = this.transparency_section.getByTestId('IQA0190_Text');
+    this.second_postal_address_text = this.transparency_section.getByTestId('IQA0191_Text');
+    //Confidentiality and Information Governance Section
+    this.confidentiality_info_governance_section = this.page
+      .locator('legend')
+      .getByText('Confidentiality and Information Governance')
+      .locator('..');
+    this.is_study_limited_to_data_only_radio = this.confidentiality_info_governance_section.getByTestId(/^IQA0251/);
   }
 
   //Page Methods
