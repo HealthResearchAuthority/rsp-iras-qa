@@ -1,5 +1,4 @@
 import { expect, Locator, Page } from '@playwright/test';
-import { generateDynamicLocator } from '../../utils/UtilFunctions';
 import * as buttonTextData from '../../resources/test_data/common/button_text_data.json';
 import * as linkTextData from '../../resources/test_data/common/link_text_data.json';
 
@@ -56,16 +55,6 @@ export default class CommonItemsPage {
     }
   }
 
-  async enterDate(date: string, dateLocator: string) {
-    const dateSplit = date.split('/');
-    const day = dateSplit[0];
-    const month = dateSplit[1];
-    const year = dateSplit[2];
-    await this.page.locator(generateDynamicLocator(dateLocator, 'day')).fill(day);
-    await this.page.locator(generateDynamicLocator(dateLocator, 'month')).fill(month);
-    await this.page.locator(generateDynamicLocator(dateLocator, 'year')).fill(year);
-  }
-
   async isAccordionExpanded(accordion: Locator): Promise<string | null> {
     const isExpanded = await accordion.getAttribute('aria-expanded');
     return isExpanded;
@@ -73,24 +62,6 @@ export default class CommonItemsPage {
 
   async toggleAccordion(accordion: Locator) {
     await accordion.click();
-  }
-
-  async selectCheckboxes(formGroupLabel: Locator, checkboxGroupLabelFilter: string, checkboxValues: string[]) {
-    for (const checkboxValue of checkboxValues) {
-      const checkboxGroupLabelLocator = formGroupLabel.filter({ hasText: checkboxGroupLabelFilter });
-      const checkboxItem = checkboxGroupLabelLocator
-        .locator('..')
-        .locator(this.govUkCheckboxItem)
-        .filter({ hasText: checkboxValue });
-      const checkboxLocator = checkboxItem.getByRole('checkbox');
-      await checkboxLocator.check();
-    }
-  }
-
-  async selectRadio(formGroupLabel: Locator, radioLabelFilter: string, radioButtonId: string) {
-    const radioLabelLocator = formGroupLabel.filter({ hasText: radioLabelFilter });
-    const radioButtonLocator = radioLabelLocator.locator('..').getByTestId(radioButtonId);
-    await radioButtonLocator.check();
   }
 
   async verifyDetailsExpanded(isExpanded: string, details: Locator) {
@@ -105,16 +76,6 @@ export default class CommonItemsPage {
     const filePathsSplitArray = filePaths.split('|');
     await chooseFilesElement.setInputFiles(filePathsSplitArray);
     await uploadButtonElement.click();
-  }
-
-  async fillElementById(baseLocator: Locator, idSelector: string, value: string) {
-    const inputLocator = baseLocator.getByTestId(idSelector);
-    await inputLocator.fill(value);
-  }
-
-  async fillElementByAndId(baseLocator: Locator, idSelector: string, value: string) {
-    const inputLocator = baseLocator.and(this.page.getByTestId(idSelector));
-    await inputLocator.fill(value);
   }
 
   // To be Removed but Keeping as Placeholder for Mobile and Desktop Test Folders
