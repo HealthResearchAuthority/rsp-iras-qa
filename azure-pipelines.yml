@@ -8,7 +8,7 @@ trigger:
   - feature/rsp-1509-accessibilty-test-report
 
 schedules:
-  - cron: '23 16 * * Mon-Fri'
+  - cron: '0 0 * * Mon-Fri'
     displayName: 'Nightly run - full suite'
     branches:
       include:
@@ -67,6 +67,10 @@ parameters:
       - iPhone 15 Pro Max
       - iPhone 15 landscape
       - iPhone 14 Pro Max
+  - name: run_accessibility_tests
+    displayName: Run Accessibilty Tests
+    type: boolean
+    default: false
   - name: devops_library_branch
     displayName: DevOps Library Branch
     type: string
@@ -102,6 +106,7 @@ stages:
           ios_device: ${{ parameters.ios_device }}
           upload_to_sharepoint: true
           tests_run_timeout: ${{ parameters.tests_run_timeout }}
+          run_accessibility_tests: ${{ parameters.run_accessibility_tests }}
           sonar_project_key: FutureIRAS_rsp-iras-qa
           sonar_project_name: rsp-iras-qa
           run_sonarcloud_analysis: ${{ parameters.run_sonarcloud_analysis }}
