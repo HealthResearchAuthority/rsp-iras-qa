@@ -110,3 +110,39 @@ Then(
     }
   }
 );
+
+Then(
+  'I fill the governance and management section on the project details page with {string}',
+  async ({ projectDetailsPage, commonItemsPage }, datasetName: string) => {
+    const dataset = projectDetailsPage.projectDetailsPageTestData.Governance_Management[datasetName];
+    for (const key in dataset) {
+      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+        await commonItemsPage.fillUIComponent(dataset, key, projectDetailsPage);
+      }
+    }
+  }
+);
+
+Then(
+  'I fill the transparency section on the project details page with {string}',
+  async ({ projectDetailsPage, commonItemsPage }, datasetName: string) => {
+    const dataset = projectDetailsPage.projectDetailsPageTestData.Transparency[datasetName];
+    for (const key in dataset) {
+      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+        await commonItemsPage.fillUIComponent(dataset, key, projectDetailsPage);
+      }
+    }
+  }
+);
+
+Then(
+  'I fill the confidentiality and information governance section on the project details page with {string}',
+  async ({ projectDetailsPage, commonItemsPage }, datasetName: string) => {
+    const dataset = projectDetailsPage.projectDetailsPageTestData.Confidentiality_Info_Management[datasetName];
+    for (const key in dataset) {
+      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+        await commonItemsPage.fillUIComponent(dataset, key, projectDetailsPage);
+      }
+    }
+  }
+);

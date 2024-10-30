@@ -81,19 +81,6 @@ Then('I see something {string}', async ({ commonItemsPage }, testType: string) =
   commonItemsPage.samplePageAction(testType);
 });
 
-Then('the show all section accordion is {string}', async ({ commonItemsPage }, isExpanded: string) => {
-  const accordionExpanded = await commonItemsPage.isAccordionExpanded(commonItemsPage.showAllSectionsAccordion);
-  if (isExpanded === 'open') {
-    expect(accordionExpanded).toBe('true');
-  } else if (isExpanded === 'closed') {
-    expect(accordionExpanded).toBe('false');
-  }
-});
-
-Then('I click the show all section accordion', async ({ commonItemsPage }) => {
-  commonItemsPage.toggleAccordion(commonItemsPage.showAllSectionsAccordion);
-});
-
 Then(
   'I click the {string} button on the {string}',
   async ({ commonItemsPage, homePage }, buttonKey: string, pageKey: string) => {

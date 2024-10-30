@@ -39,15 +39,6 @@ export function getValuesFromDataTable(data: DataTable): string[] {
   return dataValues;
 }
 
-export function getValuesFromTestDataset(testData: any, dataset: string): string[] {
-  const values: string[] = [];
-
-  for (const key in testData[dataset]) {
-    values.push(testData[dataset][key]);
-  }
-  return values;
-}
-
 function filterTagsForTicketRef(tag: string) {
   return tag.toUpperCase().startsWith('@RSP-');
 }
@@ -83,12 +74,6 @@ export async function readAxeResultsContents(path: string): Promise<string> {
     throw new Error('Note that running the Axe Tool is a prerequisite for this step\n' + error.message);
   }
   return contents;
-}
-
-export function generateDynamicLocator(dynamicLocator: string, value: string) {
-  let newLocator: string = '';
-  newLocator = dynamicLocator.replace('%s', value);
-  return newLocator;
 }
 
 export async function getTextFromElementArray(inputArray: Locator[]): Promise<string[]> {
