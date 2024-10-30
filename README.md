@@ -143,7 +143,34 @@ Click the html document in either to download and view the relevant report.
 ![artifacts](src/resources\images\artifactsPage.png =200x300)  
 
 This artifact will also be published to the teams SharePoint space [here](https://healthresearchauthority.sharepoint.com/:f:/r/sites/Future-IRAS/Testing/Test%20Reports?csf=1&web=1&e=8jF7Ic)  
-&nbsp;  
+&nbsp; 
+ 
+**Known Warnings in the Azure DevOps pipeline**
+
+##[warning]SharePoint Online does not support 0-Byte files: '/home/vsts/work/1/s/test-reports/playwright/trace/recorder.B_SY1GJM.css'.
+
+Playwright v1.48 made small changes to the Trace Viewer, which introduced the recorder.B_SY1GM.css file. It did not exist in previous versions.
+
+The Azure SharePoint task, has a long standing known issue https://github.com/halliba/az-pipelines-2-sharepoint.
+
+Due to a limitation (or bug?) of the Microsoft Graph File endpoint we can not upload files with 0-byte size. Those files will be skipped and a warning message is shown.
+
+So root cause has been identified, but ultimately nothing we can do on our end, apart from never upgrading Playwright past v1.47 which would be a worse path to take.
+
+The issue has no impact, other than the warning message, as the Playwright Report still publishes to SharePoint and can be downloaded and opened.
+
+##[warning]Task 'Upload files to SharePoint Online' version 0 (az-pipelines-2-sharepoint@0) is dependent on a Node version (10) that is end-of-life. Contact the extension owner for an updated version of the task. Task maintainers should review Node upgrade guidance: https://aka.ms/node-runner-guidance
+
+Node.js 10 reached end-of-life on 2021-04-30 and is no longer supported. "No longer supported" means you won't get updates, even important security updates. 
+
+But, it doesn't mean that it won't run any more. 
+
+Not sure why it has appeared now, since Node 10 has been end of life for 4.5 years.
+
+But as there is no new version of the SharePoint task, again nothing we can do. 
+
+Obviously hasn't prevented it from working so far.
+
 
 # Pull Request Process and Quality Checks
 
