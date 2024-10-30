@@ -39,7 +39,7 @@ export default class CommonItemsPage {
     this.qSetProgressBarActiveStage = this.qSetProgressBar.locator('.stage.active');
     this.qSetProgressBarStageLink = this.qSetProgressBarStage.locator('.stage-label').getByRole('button');
     this.qSetProgressBarActiveStageLink = this.qSetProgressBarActiveStage.locator('.stage-label').getByRole('button');
-    this.bannerNavBar = this.page.getByTestId('app-navigation');
+    this.bannerNavBar = this.page.getByLabel('Service information');
     this.bannerLoginBtn = this.bannerNavBar.getByText(this.buttonTextData.Banner.Login, { exact: true });
     this.bannerMyApplications = this.bannerNavBar.getByText(this.linkTextData.Banner.My_Applications, { exact: true });
   }
