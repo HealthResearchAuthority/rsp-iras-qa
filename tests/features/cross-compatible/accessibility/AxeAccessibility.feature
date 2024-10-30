@@ -14,5 +14,3 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
         When I Scan the page with the Axe Accessibilty Tool
         And I analyse the results from the Axe scan
         Then I expect to receive no WCAG Violations
-
-#
