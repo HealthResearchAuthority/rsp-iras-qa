@@ -9,6 +9,9 @@ import ProjectDetailsPage from '../pages/IRAS/ProjectDetailsPage';
 import StudentPage from '../pages/IRAS/StudentPage';
 import DevicesPage from '../pages/IRAS/DevicesPage';
 import TissuePage from '../pages/IRAS/TissuePage';
+import AdultsLackingCapacityPage from '../pages/IRAS/AdultsLackingCapacityPage';
+import ChildrenPage from '../pages/IRAS/ChildrenPage';
+import BookingPage from '../pages/IRAS/BookingPage';
 import CreateApplicationPage from '../pages/IRAS/CreateApplicationPage';
 import ProceedApplicationPage from '../pages/IRAS/ProceedApplicationPage';
 
@@ -21,6 +24,9 @@ type CustomFixtures = {
   studentPage: StudentPage;
   devicesPage: DevicesPage;
   tissuePage: TissuePage;
+  adultsLackingCapacityPage: AdultsLackingCapacityPage;
+  childrenPage: ChildrenPage;
+  bookingPage: BookingPage;
   createApplicationPage: CreateApplicationPage;
   proceedApplicationPage: ProceedApplicationPage;
   makeAxeBuilder: () => AxeBuilder;
@@ -57,6 +63,18 @@ export const test = base.extend<CustomFixtures>({
 
   tissuePage: async ({ page }, use) => {
     await use(new TissuePage(page));
+  },
+
+  adultsLackingCapacityPage: async ({ page }, use) => {
+    await use(new AdultsLackingCapacityPage(page));
+  },
+
+  childrenPage: async ({ page }, use) => {
+    await use(new ChildrenPage(page));
+  },
+
+  bookingPage: async ({ page }, use) => {
+    await use(new BookingPage(page));
   },
 
   createApplicationPage: async ({ page }, use) => {
