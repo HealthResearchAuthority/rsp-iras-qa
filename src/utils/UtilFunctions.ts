@@ -118,14 +118,14 @@ export function getBrowserVersionDevices(deviceType: string): string | undefined
 export function getBrowserDetails() {
   if (`${process.env.PLATFORM?.toLowerCase()}` == 'mobile') {
     if (`${process.env.OS_TYPE?.toLowerCase()}` == 'ios') {
-      if (`${process.env.IOS_Device}` != 'NA') {
+      if (`${process.env.IOS_Device}` != 'N/A') {
         browserdata = devices[`${process.env.IOS_Device}`];
         deviceType = `${process.env.IOS_Device}`;
       } else {
         throw new Error('Invalid iOS device type selected, Please choose any valid option');
       }
     } else if (`${process.env.OS_TYPE?.toLowerCase()}` == 'android') {
-      if (`${process.env.ANDROID_Device}` != 'NA') {
+      if (`${process.env.ANDROID_Device}` != 'N/A') {
         browserdata = devices[`${process.env.ANDROID_Device}`];
         deviceType = `${process.env.ANDROID_Device}`;
       } else {
