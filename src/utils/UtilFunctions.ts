@@ -8,6 +8,9 @@ import fs from 'fs';
 import { createHtmlReport } from 'axe-html-reporter';
 import os from 'os';
 
+let browserdata: any;
+let deviceType: string;
+
 export function getAuthState(user: string): string {
   let authState: string;
   switch (user.toLowerCase()) {
@@ -85,17 +88,14 @@ export async function getTextFromElementArray(inputArray: Locator[]): Promise<st
   return arrInputText;
 }
 
-let browser: any;
-let browserName: string;
-
 export function getBrowserType(deviceType: string): string {
-  browser = devices[`${deviceType}`];
-  browserName = JSON.parse(JSON.stringify(browser)).defaultBrowserType;
+  const browser = devices[`${deviceType}`];
+  const browserName = JSON.parse(JSON.stringify(browser)).defaultBrowserType;
   return browserName;
 }
 
 export function getBrowserVersionDevices(deviceType: string): string | undefined {
-  browser = devices[`${deviceType}`];
+  const browser = devices[`${deviceType}`];
   let version: string | undefined;
   const browserType = `${JSON.parse(JSON.stringify(browser)).defaultBrowserType}`;
   const userAgent = `${JSON.parse(JSON.stringify(browser)).userAgent}`;
@@ -115,18 +115,24 @@ export function getBrowserVersionDevices(deviceType: string): string | undefined
   return version;
 }
 
-let browserdata: any;
-let platform: string;
-let deviceType: string;
-
 export function getBrowserDetails() {
   if (`${process.env.PLATFORM?.toLowerCase()}` == 'mobile') {
     if (`${process.env.OS_TYPE?.toLowerCase()}` == 'ios') {
-      browserdata = devices[`${process.env.IOS_Device}`];
-      deviceType = `${process.env.IOS_Device}`;
+      if (`${process.env.IOS_Device}` != 'NA') {
+        browserdata = devices[`${process.env.IOS_Device}`];
+        deviceType = `${process.env.IOS_Device}`;
+      } else {
+        throw new Error('Invalid iOS device type selected, Please choose any valid option');
+      }
     } else if (`${process.env.OS_TYPE?.toLowerCase()}` == 'android') {
-      browserdata = devices[`${process.env.ANDROID_Device}`];
-      deviceType = `${process.env.ANDROID_Device}`;
+      if (`${process.env.ANDROID_Device}` != 'NA') {
+        browserdata = devices[`${process.env.ANDROID_Device}`];
+        deviceType = `${process.env.ANDROID_Device}`;
+      } else {
+        throw new Error('Invalid Android device type selected, Please choose any valid option');
+      }
+    } else {
+      throw new Error('Invalid Mobile OS type selected, Please choose any valid option');
     }
   } else if (`${process.env.PLATFORM?.toLowerCase()}` == 'desktop') {
     if (`${process.env.BROWSER?.toLowerCase()}` == 'safari') {
@@ -145,8 +151,8 @@ export function getBrowserDetails() {
       console.info('Invalid browser name, hence executing tests with default browser Chromium');
     }
   }
-  platform = `${process.env.PLATFORM?.toLowerCase()}`;
-  return [browserdata, platform, deviceType];
+  const platformVal = `${process.env.PLATFORM?.toLowerCase()}`;
+  return [browserdata, platformVal, deviceType];
 }
 
 export const [browserVal, platformVal, deviceTypeVal] = getBrowserDetails();
