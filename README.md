@@ -155,7 +155,7 @@ The Azure SharePoint task, has a long standing known issue https://github.com/ha
 
 Due to a limitation (or bug?) of the Microsoft Graph File endpoint we can not upload files with 0-byte size. Those files will be skipped and a warning message is shown.
 
-So root cause has been identified, but ultimately nothing we can do on our end, apart from never upgrading Playwright past v1.47 which would be a worse path to take.
+It has been decided that it is best to maintain the latest version of Playwright, rather than to revert and maintain an older version. Perhaps a future update will remove the file that is the root cause of the issue.
 
 The issue has no impact, other than the warning message, as the Playwright Report still publishes to SharePoint and can be downloaded and opened.
 
@@ -165,11 +165,15 @@ Node.js 10 reached end-of-life on 2021-04-30 and is no longer supported. "No lon
 
 But, it doesn't mean that it won't run any more. 
 
-Not sure why it has appeared now, since Node 10 has been end of life for 4.5 years.
+The warning first appeared after Node 10 had already been in the end of life state for 4.5 years.
 
-But as there is no new version of the SharePoint task, again nothing we can do. 
+As we are currently using the latest version of the SharePoint task, there is no further action we can take at this time.
 
-Obviously hasn't prevented it from working so far.
+Should the author of the SharePoint task release a new version, then we must upgrade immediately.
+
+Or should we reach the point where the task no longer functions, then we must look for alternatives.
+
+But otherwise we can continue to use the SharePoint task, having flagged it as a known issue
 
 
 # Pull Request Process and Quality Checks
