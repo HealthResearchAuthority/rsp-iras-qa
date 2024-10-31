@@ -114,42 +114,48 @@ export function getBrowserVersionDevices(deviceType: string): string | undefined
   }
   return version;
 }
+function getMobileBrowserData() {
+  if (`${process.env.OS_TYPE?.toLowerCase()}` == 'ios') {
+    if (`${process.env.IOS_Device}` != 'N/A') {
+      browserdata = devices[`${process.env.IOS_Device}`];
+      deviceType = `${process.env.IOS_Device}`;
+    } else {
+      throw new Error('Invalid iOS device type selected, Please choose any valid option');
+    }
+  } else if (`${process.env.OS_TYPE?.toLowerCase()}` == 'android') {
+    if (`${process.env.ANDROID_Device}` != 'N/A') {
+      browserdata = devices[`${process.env.ANDROID_Device}`];
+      deviceType = `${process.env.ANDROID_Device}`;
+    } else {
+      throw new Error('Invalid Android device type selected, Please choose any valid option');
+    }
+  } else {
+    throw new Error('Invalid Mobile OS type selected, Please choose any valid option');
+  }
+}
+function getDesktopBrowserData() {
+  if (`${process.env.BROWSER?.toLowerCase()}` == 'safari') {
+    browserdata = devices[`${deviceDSafari}`];
+    deviceType = `${deviceDSafari}`;
+  } else if (`${process.env.BROWSER?.toLowerCase()}` == 'firefox') {
+    browserdata = devices[`${deviceDFirefox}`];
+    deviceType = `${deviceDFirefox}`;
+  } else if (`${process.env.BROWSER?.toLowerCase()}` == 'chromium') {
+    browserdata = devices[`${deviceDChrome}`];
+    deviceType = `${deviceDChrome}`;
+  } else {
+    browserdata = devices[`${deviceDChrome}`];
+    deviceType = `${deviceDChrome}`;
+
+    console.info('Invalid browser name, hence executing tests with default browser Chromium');
+  }
+}
 
 export function getBrowserDetails() {
   if (`${process.env.PLATFORM?.toLowerCase()}` == 'mobile') {
-    if (`${process.env.OS_TYPE?.toLowerCase()}` == 'ios') {
-      if (`${process.env.IOS_Device}` != 'N/A') {
-        browserdata = devices[`${process.env.IOS_Device}`];
-        deviceType = `${process.env.IOS_Device}`;
-      } else {
-        throw new Error('Invalid iOS device type selected, Please choose any valid option');
-      }
-    } else if (`${process.env.OS_TYPE?.toLowerCase()}` == 'android') {
-      if (`${process.env.ANDROID_Device}` != 'N/A') {
-        browserdata = devices[`${process.env.ANDROID_Device}`];
-        deviceType = `${process.env.ANDROID_Device}`;
-      } else {
-        throw new Error('Invalid Android device type selected, Please choose any valid option');
-      }
-    } else {
-      throw new Error('Invalid Mobile OS type selected, Please choose any valid option');
-    }
+    getMobileBrowserData();
   } else if (`${process.env.PLATFORM?.toLowerCase()}` == 'desktop') {
-    if (`${process.env.BROWSER?.toLowerCase()}` == 'safari') {
-      browserdata = devices[`${deviceDSafari}`];
-      deviceType = `${deviceDSafari}`;
-    } else if (`${process.env.BROWSER?.toLowerCase()}` == 'firefox') {
-      browserdata = devices[`${deviceDFirefox}`];
-      deviceType = `${deviceDFirefox}`;
-    } else if (`${process.env.BROWSER?.toLowerCase()}` == 'chromium') {
-      browserdata = devices[`${deviceDChrome}`];
-      deviceType = `${deviceDChrome}`;
-    } else {
-      browserdata = devices[`${deviceDChrome}`];
-      deviceType = `${deviceDChrome}`;
-
-      console.info('Invalid browser name, hence executing tests with default browser Chromium');
-    }
+    getDesktopBrowserData();
   }
   const platformVal = `${process.env.PLATFORM?.toLowerCase()}`;
   return [browserdata, platformVal, deviceType];
