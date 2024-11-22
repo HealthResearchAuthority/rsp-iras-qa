@@ -1,7 +1,7 @@
 {
   "Adults_Lacking_Capacity": {
     "title": "",
-    "section_headings": ["Adults Lacking Capacity (CTIMP)","Adults Lacking Capacity (Non CTIMP)"],
+    "section_headings": ["Adults Lacking Capacity (CTIMP)", "Adults Lacking Capacity (Non CTIMP)"],
     "page_name": "Adults Lacking Capacity"
   },
   "Adults_Lacking_Capacity_CTIMP": {
@@ -33,6 +33,36 @@
       "what_provisions_apply_if_no_consent_text": "Where a participant is recruited prior to consent being obtained, and consent is later withheld or the participant dies before consent can be given, what provisions will apply to the study data collected up to this point? - Example",
       "steps_to_ensure_when_patricipants_object_text": "Describe what steps will be taken to ensure that nothing is done to which participants appear to object (unless it is to protect them from harm or minimise pain or discomfort). - Example",
       "steps_to_ensure_nothing_done_contrary_to_statement_text": "Describe what steps will be taken to ensure that nothing is done which is contrary to any advance decision or statement by the participant - Example"
+    },
+    "All_Empty_Fields": {
+      "how_project_meet_requirement_life_threatening_text": "",
+      "why_project_essential_to_validate_data_text": "",
+      "benefits_administration_investigational_products_expected_text": "",
+      "how_ensure_suitably_qualified_text": "",
+      "arrangements_to_identify_consent_text": "",
+      "arrangements_to_continue_consult_personal_text": "",
+      "provide_information_on_trial_to_participants_text": "",
+      "is_participant_urgent_treatment_recruited_radio": "No",
+      "outline_decisions_on_recruited_participants_text": "Conditional question - Dev Not Implemented for Validation",
+      "describe_arrangements_informing_relatives_text": "Conditional question - Dev Not Implemented for Validation",
+      "what_provisions_apply_if_no_consent_text": "Conditional question - Dev Not Implemented for Validation",
+      "steps_to_ensure_when_patricipants_object_text": "",
+      "steps_to_ensure_nothing_done_contrary_to_statement_text": ""
+    },
+    "Some_Empty_Fields": {
+      "how_project_meet_requirement_life_threatening_text": "",
+      "why_project_essential_to_validate_data_text": "",
+      "benefits_administration_investigational_products_expected_text": "Benefits that the administration of the investigational medicinal products is expected to produce for these participants and the grounds for expecting these benefits. Detail why the inclusion of adults unable to give informed consent produces no risk at all to these participants, including risks to freedom of action or privacy. - Example",
+      "how_ensure_suitably_qualified_text": "",
+      "arrangements_to_identify_consent_text": "",
+      "arrangements_to_continue_consult_personal_text": "",
+      "provide_information_on_trial_to_participants_text": "",
+      "is_participant_urgent_treatment_recruited_radio": "No",
+      "outline_decisions_on_recruited_participants_text": "Conditional question - Dev Not Implemented for Validation",
+      "describe_arrangements_informing_relatives_text": "Conditional question - Dev Not Implemented for Validation",
+      "what_provisions_apply_if_no_consent_text": "Conditional question - Dev Not Implemented for Validation",
+      "steps_to_ensure_when_patricipants_object_text": "",
+      "steps_to_ensure_nothing_done_contrary_to_statement_text": "Describe what steps will be taken to ensure that nothing is done which is contrary to any advance decision or statement by the participant - Example"
     }
   },
   "Adults_Lacking_Capacity_Non_CTIMP": {
@@ -55,6 +85,81 @@
       "participant_recruited_prior_consent_text": "Where a participant is recruited prior to consent being obtained, and consent is later withheld or the participant dies before consent can be given, what provisions will apply to the study data collected up to this point? - Example",
       "steps_ensure_nothing_done_participant_object_text": "Describe what steps will be taken to ensure that nothing is done to which participants appear to object (unless it is to protect them from harm or minimise pain or discomfort). - Example",
       "steps_ensure_nothing_done_contrary_statement_text": "Describe what steps will be taken to ensure that nothing is done which is contrary to any advance decision or statement by the participant? - Example"
+    },
+    "All_Empty_Fields": {
+      "project_connected_impairing_condition_text": "",
+      "why_project_not_carried_out_text": "",
+      "project_has_potential_for_checkbox": [],
+      "describe_project_potential_to_benefit_participant_text": "Conditional question - Dev Not Implemented for Validation",
+      "describe_project_contribute_knowledge_text": "Conditional question - Dev Not Implemented for Validation",
+      "project_not_interfere_participants_freedom_text": "Conditional question - Dev Not Implemented for Validation",
+      "how_ensure_suitably_qualified_experienced_text": "",
+      "arrangements_made_to_identify_consult_induviduals_text": "Conditional question - Dev Not Implemented for Validation",
+      "scotland_arrangements_made_welfare_guardian_text": "Conditional question - Dev Not Implemented for Validation",
+      "arrangements_continue_consult_during_course_text": "",
+      "information_about_trial_to_participants_text": "",
+      "arrangements_for_consent_fluctuate_text": "",
+      "is_participant_urgent_recruited_before_wishes_feelings_radio": "",
+      "seek_agreement_registered_practitioner_text": "Conditional question - Dev Not Implemented for Validation",
+      "arrangements_informing_relatives_text": "Conditional question - Dev Not Implemented for Validation",
+      "participant_recruited_prior_consent_text": "Conditional question - Dev Not Implemented for Validation",
+      "steps_ensure_nothing_done_participant_object_text": "",
+      "steps_ensure_nothing_done_contrary_statement_text": ""
+    },
+    "Some_Empty_Fields": {
+      "project_connected_impairing_condition_text": "",
+      "why_project_not_carried_out_text": "Justify why this project could not be carried out as effectively if confined to adults capable of giving consent. - Example",
+      "project_has_potential_for_checkbox": [],
+      "describe_project_potential_to_benefit_participant_text": "Conditional question - Dev Not Implemented for Validation",
+      "describe_project_contribute_knowledge_text": "Conditional question - Dev Not Implemented for Validation",
+      "project_not_interfere_participants_freedom_text": "Conditional question - Dev Not Implemented for Validation",
+      "how_ensure_suitably_qualified_experienced_text": "",
+      "arrangements_made_to_identify_consult_induviduals_text": "Conditional question - Dev Not Implemented for Validation",
+      "scotland_arrangements_made_welfare_guardian_text": "Conditional question - Dev Not Implemented for Validation",
+      "arrangements_continue_consult_during_course_text": "",
+      "information_about_trial_to_participants_text": "",
+      "arrangements_for_consent_fluctuate_text": "What arrangements will be put in place where capacity to consent will fluctuate or will be borderline? - Example",
+      "is_participant_urgent_recruited_before_wishes_feelings_radio": "",
+      "seek_agreement_registered_practitioner_text": "Conditional question - Dev Not Implemented for Validation",
+      "arrangements_informing_relatives_text": "Conditional question - Dev Not Implemented for Validation",
+      "participant_recruited_prior_consent_text": "Conditional question - Dev Not Implemented for Validation",
+      "steps_ensure_nothing_done_participant_object_text": "",
+      "steps_ensure_nothing_done_contrary_statement_text": "Describe what steps will be taken to ensure that nothing is done which is contrary to any advance decision or statement by the participant? - Example"
+    }
+  },
+  "ValidationObject": {
+    "Empty_Fields_Error_Message": {
+      "how_project_meet_requirement_life_threatening_text": "Question 1 under Adults Lacking Capacity (CTIMP) section",
+      "why_project_essential_to_validate_data_text": "Question 2 under Adults Lacking Capacity (CTIMP) section",
+      "benefits_administration_investigational_products_expected_text": "Question 3 under Adults Lacking Capacity (CTIMP) section",
+      "how_ensure_suitably_qualified_text": "Question 4 under Adults Lacking Capacity (CTIMP) section",
+      "arrangements_to_identify_consent_text": "Question 5 under Adults Lacking Capacity (CTIMP) section",
+      "arrangements_to_continue_consult_personal_text": "Question 6 under Adults Lacking Capacity (CTIMP) section",
+      "provide_information_on_trial_to_participants_text": "Question 7 under Adults Lacking Capacity (CTIMP) section",
+      "is_participant_urgent_treatment_recruited_radio": "Question 8 under Adults Lacking Capacity (CTIMP) section",
+      "outline_decisions_on_recruited_participants_text": "Question 8a under Adults Lacking Capacity (CTIMP) section",
+      "describe_arrangements_informing_relatives_text": "Question 8b under Adults Lacking Capacity (CTIMP) section",
+      "what_provisions_apply_if_no_consent_text": "Question 8c under Adults Lacking Capacity (CTIMP) section",
+      "steps_to_ensure_when_patricipants_object_text": "Question 9 under Adults Lacking Capacity (CTIMP) section",
+      "steps_to_ensure_nothing_done_contrary_to_statement_text": "Question 10 under Adults Lacking Capacity (CTIMP) section",
+      "project_connected_impairing_condition_text": "Question 1 under Adults Lacking Capacity (Non CTIMP) section",
+      "why_project_not_carried_out_text": "Question 2 under Adults Lacking Capacity (Non CTIMP) section",
+      "project_has_potential_for_checkbox": "Question 3 under Adults Lacking Capacity (Non CTIMP) section",
+      "describe_project_potential_to_benefit_participant_text": "Question 3a under Adults Lacking Capacity (Non CTIMP) section",
+      "describe_project_contribute_knowledge_text": "Question 3b under Adults Lacking Capacity (Non CTIMP) section",
+      "project_not_interfere_participants_freedom_text": "Question 3c under Adults Lacking Capacity (Non CTIMP) section",
+      "how_ensure_suitably_qualified_experienced_text": "Question 4 under Adults Lacking Capacity (Non CTIMP) section",
+      "arrangements_made_to_identify_consult_induviduals_text": "Question 5a under Adults Lacking Capacity (Non CTIMP) section",
+      "scotland_arrangements_made_welfare_guardian_text": "Question 5b under Adults Lacking Capacity (Non CTIMP) section",
+      "arrangements_continue_consult_during_course_text": "Question 6 under Adults Lacking Capacity (Non CTIMP) section",
+      "information_about_trial_to_participants_text": "Question 7 under Adults Lacking Capacity (Non CTIMP) section",
+      "arrangements_for_consent_fluctuate_text": "Question 8 under Adults Lacking Capacity (Non CTIMP) section",
+      "is_participant_urgent_recruited_before_wishes_feelings_radio": "Question 9 under Adults Lacking Capacity (Non CTIMP) section",
+      "seek_agreement_registered_practitioner_text": "Question 9a under Adults Lacking Capacity (Non CTIMP) section",
+      "arrangements_informing_relatives_text": "Question 9b under Adults Lacking Capacity (Non CTIMP) section",
+      "participant_recruited_prior_consent_text": "Question 9c under Adults Lacking Capacity (Non CTIMP) section",
+      "steps_ensure_nothing_done_participant_object_text": "Question 10 under Adults Lacking Capacity (Non CTIMP) section",
+      "steps_ensure_nothing_done_contrary_statement_text": "Question 11 under Adults Lacking Capacity (Non CTIMP) section"
     }
   }
 }

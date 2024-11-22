@@ -1,0 +1,10 @@
+{
+  "ValidationObject": {
+    "Empty_Fields_Error_Message": {
+      "error_message_each_question_text": "Provide an answer for this question",
+      "error_message_each_question_checkbox": "Select at least one option",
+      "error_message_each_question_radio": "Select one option",
+      "error_message_summary_header": "You need to complete these questions before you can continue"
+    }
+  }
+}
