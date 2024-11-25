@@ -23,8 +23,8 @@ Feature: Question Set - Research Application - Booking
       | Project_X | Valid_Data_All_Fields | Continue          |
       | Project_Y | Dont_Agree_Data       | Continue          |
 
-  @rsp-1730
-  Scenario Outline: Validate user is able to see the error messages in the booking page when user submit without entering data
+  @rsp-17301
+  Scenario Outline: Validate error message displayed when user submit page with empty data and error message not displayed when user submit with valid data for mandatory fields in the booking page
     And I enter the application name and description for '<Project>'
     And I click the 'Create' button on the 'Create_Application_Page'
     And I can see the proceed application page for '<Project>'
@@ -34,8 +34,9 @@ Feature: Question Set - Research Application - Booking
     And I can see the 'Booking' question set
     And I fill the application 'application booking' section in the booking page with '<Booking>'
     Then I click the '<Navigation_Button>' button on the 'Question_Set'
-    Then I validate error displayed using '<Validation_Message>' when no data entered on mandatory fields for 'application booking' section in the booking page with '<Children>'
+    Then I validate error message using '<Validation_Message>' on mandatory fields for 'application booking' section in the booking page with '<Children>'
 
     Examples:
-      | Project   | Booking          | Validation_Message         | Navigation_Button |
-      | Project_X | All_Empty_Fields | Empty_Fields_Error_Message | Validate          |
+      | Project   | Booking               | Validation_Message         | Navigation_Button |
+      | Project_X | All_Empty_Fields      | Empty_Fields_Error_Message | Validate          |
+      | Project_X | Valid_Data_All_Fields | Empty_Fields_Error_Message | Validate          |

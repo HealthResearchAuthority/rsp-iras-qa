@@ -135,4 +135,14 @@ export default class AdultsLackingCapacityPage {
     }
     expect(await this.page.title()).toBe(this.adultsLackingCapacityPageTestData.Adults_Lacking_Capacity.title);
   }
+
+  async getTestDataForALC(sectionName: string, datasetName: string): Promise<JSON | null> {
+    let dataset: any;
+    if (sectionName === 'adults lacking capacity ctimp') {
+      dataset = this.adultsLackingCapacityPageTestData.Adults_Lacking_Capacity_CTIMP[datasetName];
+    } else if (sectionName === 'adults lacking capacity non ctimp') {
+      dataset = this.adultsLackingCapacityPageTestData.Adults_Lacking_Capacity_Non_CTIMP[datasetName];
+    }
+    return dataset;
+  }
 }

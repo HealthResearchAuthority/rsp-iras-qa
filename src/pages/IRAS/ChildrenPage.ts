@@ -59,4 +59,12 @@ export default class ChildrenPage {
     }
     expect(await this.page.title()).toBe(this.childrenPageTestData.Children.title);
   }
+
+  async getTestDataForChildren(sectionName: string, datasetName: string): Promise<JSON | null> {
+    let dataset: any;
+    if (sectionName === 'children') {
+      dataset = this.childrenPageTestData.Children_Section[datasetName];
+    }
+    return dataset;
+  }
 }

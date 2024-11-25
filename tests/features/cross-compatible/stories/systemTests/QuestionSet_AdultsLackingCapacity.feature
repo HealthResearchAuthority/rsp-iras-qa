@@ -25,7 +25,7 @@ Feature: Question Set - Research Application - Adults Lacking Capacity
       | Project_Y | Participant_With_No_Urgent_Treatment_Recruited | Valid_Data_All_Fields             | Continue          |
 
   @rsp-1730
-  Scenario Outline: Validate user is able to see the error messages in the adults lacking capacity page when user submit without entering data
+  Scenario Outline: Validate error message displayed when user submit page with empty data and error message not displayed when user submit with valid data for mandatory fields in the adults lacking capacity page
     And I enter the application name and description for '<Project>'
     And I click the 'Create' button on the 'Create_Application_Page'
     And I can see the proceed application page for '<Project>'
@@ -36,8 +36,8 @@ Feature: Question Set - Research Application - Adults Lacking Capacity
     And I fill the 'adults lacking capacity ctimp' section in the adults lacking capacity page with '<Adults_Lacking_Capacity_CTIMP>'
     And I fill the 'adults lacking capacity non ctimp' section in the adults lacking capacity page with '<Adults_Lacking_Capacity_Non_CTIMP>'
     And I click the '<Navigation_Button>' button on the 'Question_Set'
-    Then I validate error displayed using '<Validation_Message>' when no data entered on mandatory fields for 'adults lacking capacity ctimp' section in the adults lacking capacity page with '<Adults_Lacking_Capacity_CTIMP>'
-    Then I validate error displayed using '<Validation_Message>' when no data entered on mandatory fields for 'adults lacking capacity non ctimp' section in the adults lacking capacity page with '<Adults_Lacking_Capacity_Non_CTIMP>'
+    Then I validate error message using '<Validation_Message>' on mandatory fields for 'adults lacking capacity ctimp' section in the adults lacking capacity page with '<Adults_Lacking_Capacity_CTIMP>'
+    Then I validate error message using '<Validation_Message>' on mandatory fields for 'adults lacking capacity non ctimp' section in the adults lacking capacity page with '<Adults_Lacking_Capacity_Non_CTIMP>'
 
     Examples:
       | Project   | Adults_Lacking_Capacity_CTIMP | Adults_Lacking_Capacity_Non_CTIMP | Validation_Message         | Navigation_Button |

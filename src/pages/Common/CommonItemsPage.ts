@@ -104,25 +104,50 @@ export default class CommonItemsPage {
     }
   }
 
-  async validateQsetErrorMessage<PageObject>(errorMessageSummaryEachQuestion: string, key: string, page: PageObject) {
+  async validateQsetErrorMessage<PageObject>(
+    errorMessageSummaryEachQuestion: string,
+    dataset: JSON,
+    key: string,
+    page: PageObject
+  ) {
     const errorMessageCommon = this.questionSetData.ValidationObject['Empty_Fields_Error_Message'];
     const typeAttribute = await page[key].first().getAttribute('type');
-    await expect(
-      this.errorMessageSummaryQSetLabel.getByText(errorMessageCommon['error_message_summary_header'])
-    ).toBeVisible();
-    await expect(this.errorMessageSummaryQSetLabel.getByText(errorMessageSummaryEachQuestion[key])).toBeVisible();
+    if (dataset[key].length === 0) {
+      await expect(
+        this.errorMessageSummaryQSetLabel.getByText(errorMessageCommon['error_message_summary_header'])
+      ).toBeVisible();
+      await expect(this.errorMessageSummaryQSetLabel.getByText(errorMessageSummaryEachQuestion[key])).toBeVisible();
+    } else if (dataset[key].length !== 0) {
+      await expect(this.errorMessageSummaryQSetLabel.getByText(errorMessageSummaryEachQuestion[key])).toHaveCount(0);
+    }
     if (typeAttribute === 'checkbox') {
-      await expect(
-        page[key].locator('..').locator('..').locator('..').locator('..').locator(this.errorMessageQSetFieldLabel)
-      ).toHaveText(errorMessageCommon['error_message_each_question_checkbox']);
+      const checkboxLocator = page[key].locator('../../../..').locator(this.errorMessageQSetFieldLabel);
+      if (dataset[key].length === 0) {
+        await expect(checkboxLocator).toHaveText(errorMessageCommon['error_message_each_question_checkbox']);
+      } else if (dataset[key].length !== 0) {
+        await expect(checkboxLocator).toHaveCount(0);
+      }
     } else if (typeAttribute === 'radio') {
-      await expect(
-        page[key].locator('..').locator('..').locator('..').locator('..').locator(this.errorMessageQSetFieldLabel)
-      ).toHaveText(errorMessageCommon['error_message_each_question_radio']);
+      const radioLocator = page[key].locator('../../../..').locator(this.errorMessageQSetFieldLabel);
+      if (dataset[key].length === 0) {
+        await expect(radioLocator).toHaveText(errorMessageCommon['error_message_each_question_radio']);
+      } else if (dataset[key].length !== 0) {
+        await expect(radioLocator).toHaveCount(0);
+      }
+    } else if (typeAttribute === 'date') {
+      const dateLocator = page[key].locator('../../../../..').locator(this.errorMessageQSetFieldLabel);
+      if (dataset[key].length === 0) {
+        await expect(dateLocator).toHaveText(errorMessageCommon['error_message_each_question_text']);
+      } else if (dataset[key].length !== 0) {
+        await expect(dateLocator).toHaveCount(0);
+      }
     } else {
-      await expect(page[key].locator('..').locator(this.errorMessageQSetFieldLabel)).toHaveText(
-        errorMessageCommon['error_message_each_question_text']
-      );
+      const otherLocator = page[key].locator('..').locator(this.errorMessageQSetFieldLabel);
+      if (dataset[key].length === 0) {
+        await expect(otherLocator).toHaveText(errorMessageCommon['error_message_each_question_text']);
+      } else if (dataset[key].length !== 0) {
+        await expect(otherLocator).toHaveCount(0);
+      }
     }
   }
 }
