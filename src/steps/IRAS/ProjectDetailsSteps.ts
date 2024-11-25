@@ -1,5 +1,5 @@
 import { createBdd } from 'playwright-bdd';
-import { test } from '../../hooks/CustomFixtures';
+import { test, expect } from '../../hooks/CustomFixtures';
 
 const { Then } = createBdd(test);
 
@@ -142,6 +142,31 @@ Then(
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
         await commonItemsPage.fillUIComponent(dataset, key, projectDetailsPage);
+      }
+    }
+  }
+);
+
+Then(
+  'I see the expected validation errors appearing for {string} on the project details page',
+  async ({ commonItemsPage, projectDetailsPage }, datasetName: string) => {
+    const expectedAlertBoxErrors =
+      projectDetailsPage.projectDetailsPageTestData.Validation.Alert_Box_Errors[datasetName];
+    const expectedFieldErrors = projectDetailsPage.projectDetailsPageTestData.Validation.Field_Errors[datasetName];
+    const expectedNumberFieldErrors = Object.keys(expectedFieldErrors).length;
+    await expect(commonItemsPage.alert_box).toBeVisible();
+    await expect(commonItemsPage.alert_box_heading).toHaveText(
+      commonItemsPage.questionSetData.Validation.alert_box_heading
+    );
+
+    const actualAlertBoxErrors = commonItemsPage.alert_box_list_items;
+    const actualFieldErrorsArray = await commonItemsPage.govUkFieldValidationError.all();
+    await expect(actualAlertBoxErrors).toHaveText(expectedAlertBoxErrors, { useInnerText: true });
+    expect(actualFieldErrorsArray).toHaveLength(expectedNumberFieldErrors);
+    for (const key in expectedFieldErrors) {
+      if (Object.prototype.hasOwnProperty.call(expectedFieldErrors, key)) {
+        const actualFieldError = await commonItemsPage.getFieldErrors(key, projectDetailsPage);
+        await expect(actualFieldError).toHaveText(expectedFieldErrors[key]);
       }
     }
   }

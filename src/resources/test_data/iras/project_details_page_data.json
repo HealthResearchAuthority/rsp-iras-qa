@@ -27,7 +27,8 @@
       "protocol_ref_no_text": "Proto_Ref_ABC123",
       "eu_trial_no_text": "EU_ABC123",
       "research_project_public_summary_text": "Research Project to Investigate ABC's"
-    }
+    },
+    "No_Fields_Completed": {}
   },
   "Public_Involvement": {
     "Valid_Data_In_All_Fields": {
@@ -71,7 +72,8 @@
       "give_details_other_aspects_text": "N/A",
       "justify_approach_decribe_benefits_of_contributors_text": "I could not be bothered due to A, B and C",
       "justify_approach_and_absence_of_public_involvement_text": "I can justify my approach, and the absence of public involvement due to A, B and C"
-    }
+    },
+    "No_Fields_Completed": {}
   },
   "Research_Design": {
     "Valid_Data_In_All_Fields": {
@@ -93,7 +95,27 @@
       ],
       "describe_ai_type_again_text": "The type of AI is Y",
       "what_will_happen_participants_text": "X, Y and Z will happen to each participant"
-    }
+    },
+    "Methods_Using_Omitted": {
+      "detail_methods_using_text": "Methodologies will be X, Y and Z",
+      "specify_methods_text": "Methodologies will be X.a, Y.b and Z.c",
+      "more_detail_method_text": "Methodology X.a is big, Methodology Y.b is medium, Methodology Z.c is small",
+      "is_novel_intervention_trial_radio": "Yes",
+      "is_compare_interventions_trial_radio": "Yes",
+      "is_intervention_gold_standard_radio": "Yes",
+      "principle_research_question_objective_text": "The principle research question is X",
+      "secondary_research_question_objective_text": "The secondary research question is Y",
+      "does_project_use_ai_checkbox": ["designing, developing or testing an AI product or tool"],
+      "developing_best_describe_ai_type_checkbox": ["image analysis", "robotics"],
+      "describe_ai_type_text": "The type of AI is X",
+      "existing_best_describe_ai_type_checkbox": [
+        "other machine learning applications",
+        "generative AI or large language models"
+      ],
+      "describe_ai_type_again_text": "The type of AI is Y",
+      "what_will_happen_participants_text": "X, Y and Z will happen to each participant"
+    },
+    "No_Fields_Completed": {}
   },
   "Research_Activities": {
     "Valid_Data_In_All_Fields": {
@@ -137,7 +159,8 @@
       "describe_all_arrangements_for_continued_treatment_text": "There will be no arrangements",
       "describe_care_arrangements_after_finished_text": "N/A",
       "when_plan_finish_collecting_data_date": "2029-09-03"
-    }
+    },
+    "No_Fields_Completed": {}
   },
   "Participants": {
     "Valid_Data_In_All_Fields": {
@@ -156,7 +179,8 @@
       "how_long_participant_in_project_text": "I would expect each participant to remain in the project for X-Y weeks",
       "what_arrangements_apply_to_participants_involved_text": "The arrangements X, Y and Z will apply",
       "could_any_participants_be_vulnerable_radio": "Yes"
-    }
+    },
+    "No_Fields_Completed": {}
   },
   "Consent": {
     "Valid_Data_In_All_Fields": {
@@ -177,7 +201,8 @@
       "what_arrangements_unable_written_consent_text": "We have arrangements for X, Y and Z in place",
       "what_arrangements_participants_recieve_info_text": "We have arranged for X, Y and Z to occur",
       "what_steps_if_paticipant_loses_capacity_radio": "The participant would be withdrawn from the project. Identifiable data or tissue already collected with consent would be retained and used. No further data or tissue would be collected or any other research procedures carried out on or in relation to the participant."
-    }
+    },
+    "No_Fields_Completed": {}
   },
   "Risks_Conflicts": {
     "Valid_Data_In_All_Fields": {
@@ -208,7 +233,8 @@
         "Wales REC 6"
       ],
       "will_chief_investigators_recieve_payment_incentives_radio": "No"
-    }
+    },
+    "No_Fields_Completed": {}
   },
   "Summary_Ethical_Issues": {
     "Valid_Data_In_All_Fields": {
@@ -225,7 +251,8 @@
       "summarise_main_ethical_issues_text": "We anticipate no ethical issues at this time",
       "is_application_any_of_following_checkbox": ["none of the above"],
       "provide_info_about_project_background_text": "The project has the background A and B, hence why decision C was made"
-    }
+    },
+    "No_Fields_Completed": {}
   },
   "Research_Analysis": {
     "Valid_Data_In_All_Fields": {
@@ -249,7 +276,8 @@
       "how_many_participants_samples_records_studied_text": "We plan on studying 125 samples",
       "how_was_sample_size_decided_text": "It was decided by X, Y and Z",
       "what_criteria_electively_stopping_early_text": "The criteria for electively stopping early will be X, Y and Z"
-    }
+    },
+    "No_Fields_Completed": {}
   },
   "Governance_Management": {
     "Valid_Data_In_All_Fields": {
@@ -270,7 +298,8 @@
       "detail_cro_ctu_management_responsibilities_text": "The management responsibilities X, Y and Z have been delegated to the CRO",
       "has_responsibility_research_activity_delegated_radio": "Yes",
       "detail_proposed_oversight_arrangements_text": "The subcontractors are X and the proposed oversight arrangements are Y and Z"
-    }
+    },
+    "No_Fields_Completed": {}
   },
   "Transparency": {
     "Valid_Data_In_All_Fields": {
@@ -336,7 +365,8 @@
       "first_email_text": "tester@tester.com",
       "first_telephone_text": "59301578335",
       "first_postal_address_text": "3 Tester Street, Tester Road, TST 003"
-    }
+    },
+    "No_Fields_Completed": {}
   },
   "Confidentiality_Info_Management": {
     "Valid_Data_In_All_Fields": {
@@ -344,6 +374,133 @@
     },
     "The_Answer_No": {
       "is_study_limited_to_data_only_radio": "No"
+    },
+    "No_Fields_Completed": {}
+  },
+  "Validation": {
+    "Alert_Box_Errors": {
+      "All_Mandatory_Fields": [
+        "Question 2 under Project Information section",
+        "Question 1 under Public Involvement section",
+        "Question 2b under Public Involvement section",
+        "Question 4 under Public Involvement section",
+        "Question 1 under Research Design and Methodology section",
+        "Question 2c under Research Design and Methodology section",
+        "Question 4 under Research Design and Methodology section",
+        "Question 5 under Research Design and Methodology section",
+        "Question 6 under Research Design and Methodology section",
+        "Question 7 under Research Design and Methodology section",
+        "Question 5 under Research Activities section",
+        "Question 8 under Research Activities section",
+        "Question 13 under Research Activities section",
+        "Question 1 under Participants section",
+        "Question 2 under Participants section",
+        "Question 3 under Participants section",
+        "Question 4 under Participants section",
+        "Question 5 under Participants section",
+        "Question 6 under Participants section",
+        "Question 7 under Participants section",
+        "Question 2 under Consent section",
+        "Question 3 under Consent section",
+        "Question 1 under Risk and Conflicts of Interest section",
+        "Question 2 under Risk and Conflicts of Interest section",
+        "Question 3 under Risk and Conflicts of Interest section",
+        "Question 4 under Risk and Conflicts of Interest section",
+        "Question 1 under Summary Ethical Issues section",
+        "Question 2 under Summary Ethical Issues section",
+        "Question 1 under Research Analysis section",
+        "Question 2 under Research Analysis section",
+        "Question 3 under Research Analysis section",
+        "Question 3a under Research Analysis section",
+        "Question 5 under Research Analysis section",
+        "Question 1 under Governance and Management section",
+        "Question 2 under Governance and Management section",
+        "Question 5 under Governance and Management section",
+        "Question 6 under Governance and Management section",
+        "Question 7 under Governance and Management section",
+        "Question 8 under Governance and Management section",
+        "Question 9 under Governance and Management section",
+        "Question 1a under Transparency section",
+        "Question 1f under Transparency section",
+        "Question 3 under Transparency section",
+        "Question 4 under Transparency section",
+        "Question 5 under Transparency section",
+        "Question 6 under Transparency section",
+        "Question 7 under Transparency section",
+        "Question 9a under Transparency section",
+        "Question 9b under Transparency section",
+        "Question 9c under Transparency section",
+        "Question 10a under Transparency section",
+        "Question 10b under Transparency section",
+        "Question 10c under Transparency section",
+        "Question 1 under Confidentiality and Information Governance section"
+      ],
+      "Methods_Using_And_Registered_Elsewhere": [
+        "Question 1 under Research Design and Methodology section",
+        "Question 1a under Transparency section"
+      ]
+    },
+    "Field_Errors": {
+      "All_Mandatory_Fields": {
+        "research_project_public_summary_text": "Provide an answer for this question",
+        "aspects_already_actively_involved_checkbox": "Select at least one option",
+        "tell_us_about_contributors_text": "Provide an answer for this question",
+        "how_plan_involve_contributors_remaining_stages_checkbox": "Select at least one option",
+        "methods_using_checkbox": "Select at least one option",
+        "more_detail_method_text": "Provide an answer for this question",
+        "principle_research_question_objective_text": "Provide an answer for this question",
+        "secondary_research_question_objective_text": "Provide an answer for this question",
+        "does_project_use_ai_checkbox": "Select at least one option",
+        "what_will_happen_participants_text": "Provide an answer for this question",
+        "select_type_questions_used_checkbox": "Select at least one option",
+        "potential_benefits_participants_society_text": "Provide an answer for this question",
+        "when_plan_finish_collecting_data_date": "Provide an answer for this question",
+        "primary_conditions_problems_checkbox": "Select at least one option",
+        "list_principal_inclusion_criteria_text": "Provide an answer for this question",
+        "list_principal_exclusion_criteria_text": "Provide an answer for this question",
+        "how_making_sure_reflects_real_world_population_text": "Provide an answer for this question",
+        "how_ensure_people_able_fully_participate_text": "Provide an answer for this question",
+        "groups_participate_provide_samples_checkbox": "Select at least one option",
+        "when_plan_start_recruiting_collecting_date": "Provide an answer for this question",
+        "only_include_children_radio": "Select one option",
+        "seek_consent_prior_to_participation_radio": "Select one option",
+        "describe_risks_to_team_and_how_managed_text": "Provide an answer for this question",
+        "does_investigator_have_personal_involvement_radio": "Select one option",
+        "is_chief_member_of_nhs_ethics_rec_radio": "Select one option",
+        "will_chief_investigators_recieve_payment_incentives_radio": "Select one option",
+        "summarise_main_ethical_issues_text": "Provide an answer for this question",
+        "is_application_any_of_following_checkbox": "Select at least one option",
+        "how_quality_research_been_assessed_checkbox": "Select at least one option",
+        "explain_why_review_process_appropriate_text": "Provide an answer for this question",
+        "what_primary_form_of_analysis_radio": "Select one option",
+        "detail_methods_for_analysing_data_text": "Provide an answer for this question",
+        "what_criteria_electively_stopping_early_text": "Provide an answer for this question",
+        "detail_source_funding_materials_text": "Provide an answer for this question",
+        "describe_logistical_legal_risks_text": "Provide an answer for this question",
+        "arrangements_for_insurance_sponsors_management_text": "Provide an answer for this question",
+        "arrangements_for_insurance_sponsors_design_text": "Provide an answer for this question",
+        "arrangements_for_insurance_investigators_text": "Provide an answer for this question",
+        "describe_participants_excluded_insurance_text": "Provide an answer for this question",
+        "have_sponsors_arranged_payment_compensation_radio": "Select one option",
+        "project_registered_elsewhere_label": "Select one option",
+        "second_confirm_arrangements_registration_of_project_checkbox": "Select at least one option",
+        "planned_end_date": "Provide an answer for this question",
+        "how_intend_report_results_of_project_checkbox": "Select at least one option",
+        "how_you_will_inform_participants_of_results_text": "Provide an answer for this question",
+        "do_plan_to_share_participant_level_data_radio": "Select one option",
+        "detail_plans_sharing_participant_level_data_text": "Provide an answer for this question",
+        "first_email_text": "Provide an answer for this question",
+        "first_telephone_text": "Provide an answer for this question",
+        "first_postal_address_text": "Provide an answer for this question",
+        "second_email_text": "Provide an answer for this question",
+        "second_telephone_text": "Provide an answer for this question",
+        "second_postal_address_text": "Provide an answer for this question",
+        "is_study_limited_to_data_only_radio": "Select one option"
+      },
+      "Methods_Using_And_Registered_Elsewhere": {
+        "methods_using_checkbox": "Select at least one option",
+        "project_registered_elsewhere_label": "Select one option"
+      }
     }
   }
 }

@@ -13,6 +13,7 @@ export default class HomePage {
   readonly pageHeading: Locator;
   readonly loginBtn: Locator;
   readonly myApplicationsLink: Locator;
+  readonly boldGuidanceText: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -30,6 +31,11 @@ export default class HomePage {
     this.myApplicationsLink = this.mainPageContent.getByText(this.linkTextData.Home_Page.My_Applications, {
       exact: true,
     });
+    this.boldGuidanceText = this.mainPageContent
+      .getByRole('strong')
+      .getByText(this.homePageTestData.Home_Page.bold_guidance_text, {
+        exact: true,
+      });
   }
 
   //Page Methods
@@ -38,8 +44,10 @@ export default class HomePage {
   }
 
   async assertOnHomePage() {
-    await expect(this.pageHeading).toBeVisible();
-    await expect(this.pageHeading).toHaveText(this.homePageTestData.Home_Page.heading);
+    // await expect(this.pageHeading).toBeVisible();
+    // await expect(this.pageHeading).toHaveText(this.homePageTestData.Home_Page.heading);
+    // await expect(this.myApplicationsLink).toBeVisible();
+    await expect(this.boldGuidanceText).toBeVisible();
     expect(await this.page.title()).toBe(this.homePageTestData.Home_Page.title);
   }
 }
