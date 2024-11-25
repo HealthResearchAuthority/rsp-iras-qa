@@ -104,6 +104,14 @@ export default class CommonItemsPage {
     }
   }
 
+  async validateErrorMessageForMandatoryField(dataset: JSON, key: string, locator: Locator, testData: any) {
+    if (dataset[key].length === 0) {
+      await expect(locator).toHaveText(testData['error_message_each_question_checkbox']);
+    } else if (dataset[key].length !== 0) {
+      await expect(locator).toHaveCount(0);
+    }
+  }
+
   async validateQsetErrorMessage<PageObject>(
     errorMessageSummaryEachQuestion: string,
     dataset: JSON,
@@ -122,32 +130,16 @@ export default class CommonItemsPage {
     }
     if (typeAttribute === 'checkbox') {
       const checkboxLocator = page[key].locator('../../../..').locator(this.errorMessageQSetFieldLabel);
-      if (dataset[key].length === 0) {
-        await expect(checkboxLocator).toHaveText(errorMessageCommon['error_message_each_question_checkbox']);
-      } else if (dataset[key].length !== 0) {
-        await expect(checkboxLocator).toHaveCount(0);
-      }
+      this.validateErrorMessageForMandatoryField(dataset, key, checkboxLocator, errorMessageCommon);
     } else if (typeAttribute === 'radio') {
       const radioLocator = page[key].locator('../../../..').locator(this.errorMessageQSetFieldLabel);
-      if (dataset[key].length === 0) {
-        await expect(radioLocator).toHaveText(errorMessageCommon['error_message_each_question_radio']);
-      } else if (dataset[key].length !== 0) {
-        await expect(radioLocator).toHaveCount(0);
-      }
+      this.validateErrorMessageForMandatoryField(dataset, key, radioLocator, errorMessageCommon);
     } else if (typeAttribute === 'date') {
       const dateLocator = page[key].locator('../../../../..').locator(this.errorMessageQSetFieldLabel);
-      if (dataset[key].length === 0) {
-        await expect(dateLocator).toHaveText(errorMessageCommon['error_message_each_question_text']);
-      } else if (dataset[key].length !== 0) {
-        await expect(dateLocator).toHaveCount(0);
-      }
+      this.validateErrorMessageForMandatoryField(dataset, key, dateLocator, errorMessageCommon);
     } else {
       const otherLocator = page[key].locator('..').locator(this.errorMessageQSetFieldLabel);
-      if (dataset[key].length === 0) {
-        await expect(otherLocator).toHaveText(errorMessageCommon['error_message_each_question_text']);
-      } else if (dataset[key].length !== 0) {
-        await expect(otherLocator).toHaveCount(0);
-      }
+      this.validateErrorMessageForMandatoryField(dataset, key, otherLocator, errorMessageCommon);
     }
   }
 }
