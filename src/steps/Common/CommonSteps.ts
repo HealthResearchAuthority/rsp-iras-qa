@@ -165,6 +165,7 @@ Given(
 Then(
   'I see the expected validation errors appearing for {string} on the {string} page',
   async ({ commonItemsPage }, datasetName: string, pageName: string) => {
+    await commonItemsPage.page.pause();
     const pageObject = await commonItemsPage.getQsetPageObject(pageName);
     const expectedAlertBoxErrors = await commonItemsPage.getQsetPageValidationData(
       pageName,

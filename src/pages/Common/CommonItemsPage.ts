@@ -4,6 +4,9 @@ import * as linkTextData from '../../resources/test_data/common/link_text_data.j
 import * as questionSetData from '../../resources/test_data/common/question_set_data.json';
 import ProjectFilterPage from '../IRAS/ProjectFilterPage';
 import ProjectDetailsPage from '../IRAS/ProjectDetailsPage';
+import DevicesPage from '../IRAS/DevicesPage';
+import TissuePage from '../IRAS/TissuePage';
+import StudentPage from '../IRAS/StudentPage';
 
 //Declare Page Objects
 export default class CommonItemsPage {
@@ -142,14 +145,25 @@ export default class CommonItemsPage {
     }
   }
 
-  async getQsetPageObject(page: string): Promise<ProjectDetailsPage | ProjectFilterPage> {
-    let pageObject: ProjectFilterPage | ProjectDetailsPage;
+  async getQsetPageObject(
+    page: string
+  ): Promise<ProjectDetailsPage | ProjectFilterPage | DevicesPage | TissuePage | StudentPage> {
+    let pageObject: ProjectFilterPage | ProjectDetailsPage | DevicesPage | TissuePage | StudentPage;
     switch (page.toLowerCase()) {
       case 'project filter':
         pageObject = new ProjectFilterPage(this.page);
         break;
       case 'project details':
         pageObject = new ProjectDetailsPage(this.page);
+        break;
+      case 'devices':
+        pageObject = new DevicesPage(this.page);
+        break;
+      case 'tissue':
+        pageObject = new TissuePage(this.page);
+        break;
+      case 'student':
+        pageObject = new StudentPage(this.page);
         break;
       default:
         throw new Error(`${page} is not a valid option`);
@@ -165,6 +179,15 @@ export default class CommonItemsPage {
         break;
       case 'project details':
         validationData = new ProjectDetailsPage(this.page).projectDetailsPageTestData.Validation[dataType][datasetName];
+        break;
+      case 'devices':
+        validationData = new DevicesPage(this.page).devicesPageTestData.Validation[dataType][datasetName];
+        break;
+      case 'tissue':
+        validationData = new TissuePage(this.page).tissuePageTestData.Validation[dataType][datasetName];
+        break;
+      case 'student':
+        validationData = new StudentPage(this.page).studentPageTestData.Validation[dataType][datasetName];
         break;
       default:
         throw new Error(`${page} is not a valid option`);
