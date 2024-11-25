@@ -42,6 +42,17 @@
       "ci_job_title_text": "CI Job Title - Example",
       "ci_university_text": "CI University - Example",
       "ci_email_text": "thisisatestemail@test.com"
+    },
+    "No_Fields_Completed": {}
+  },
+  "Validation": {
+    "Alert_Box_Errors": {
+      "All_Mandatory_Fields": ["Question 1 under Project Details section"],
+      "Full_Project_Title": ["Question 3 under Project Details section"]
+    },
+    "Field_Errors": {
+      "All_Mandatory_Fields": ["short_project_title_text"],
+      "Full_Project_Title": ["full_project_title_text"]
     }
   }
 }

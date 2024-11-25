@@ -23,3 +23,22 @@ Feature: Question Set - Research Application - Tissue
       | Project   | Human_Biological_Samples      | Health_Related_Findings | Navigation_Button |
       | Project_X | Valid_Data_All_Fields         | Valid_Data_All_Fields   | Continue          |
       | Project_Y | New_Samples_From_Participants | Valid_Data_All_Fields   | Continue          |
+
+  @rsp-1761 @only
+  Scenario Outline: Verify that correct validation has been applied to the tissue page
+    And I enter the application name and description for '<Project>'
+    And I click the 'Create' button on the 'Create_Application_Page'
+    And I can see the proceed application page for '<Project>'
+    And I click the 'Proceed_Application' button on the 'Proceed_Application_Page'
+    And I can see the 'Project_Filter' question set
+    And I click the 'Tissue' link on the 'Progress_Bar'
+    And I can see the 'Tissue' question set
+    And I fill the human biological samples section in the tissue page with '<Human_Biological_Samples>'
+    And I fill the health related findings section in the tissue page with '<Health_Related_Findings>'
+    And I click the 'Validate' button on the 'Question_Set'
+    Then I see the expected validation errors appearing for '<Validation>' on the 'tissue' page
+
+    Examples:
+      | Project   | Human_Biological_Samples | Health_Related_Findings | Validation           |
+      | Project_X | Valid_Data_All_Fields    | Valid_Data_All_Fields   | All_Mandatory_Fields |
+# | Project_Y | New_Samples_From_Participants | Valid_Data_All_Fields   | Mandatory_Device_Filter_Questions          |
