@@ -7,6 +7,7 @@ Given('I have navigated to the {string}', async ({ loginPage, homePage, createAp
   switch (page) {
     case 'Login_Page':
       await homePage.goto();
+      await homePage.assertOnHomePage(false);
       await homePage.loginBtn.click();
       await loginPage.assertOnLoginPage();
       break;
@@ -29,6 +30,9 @@ When(
     switch (page) {
       case 'Login_Page':
         await loginPage.assertOnLoginPage();
+        break;
+      case 'Unauthenticated_Home_Page':
+        await homePage.assertOnHomePage(false);
         break;
       case 'Home_Page':
         await homePage.assertOnHomePage();
@@ -106,9 +110,7 @@ Then(
   'I click the {string} button on the {string}',
   async ({ commonItemsPage, homePage }, buttonKey: string, pageKey: string) => {
     const buttonValue = commonItemsPage.buttonTextData[pageKey][buttonKey];
-    if (pageKey === 'Banner' && buttonKey === 'Login') {
-      await commonItemsPage.bannerLoginBtn.click();
-    } else if (pageKey === 'Home_Page' && buttonKey === 'Login') {
+    if (pageKey === 'Home_Page' && buttonKey === 'Login') {
       await homePage.loginBtn.click();
     } else {
       await commonItemsPage.govUkButton.getByText(buttonValue, { exact: true }).click();
@@ -120,9 +122,7 @@ Then(
   'I can see a {string} button on the {string}',
   async ({ commonItemsPage, homePage }, buttonKey: string, pageKey: string) => {
     const buttonValue = commonItemsPage.buttonTextData[pageKey][buttonKey];
-    if (pageKey === 'Banner' && buttonKey === 'Login') {
-      await expect(commonItemsPage.bannerLoginBtn).toBeVisible();
-    } else if (pageKey === 'Home_Page' && buttonKey === 'Login') {
+    if (pageKey === 'Home_Page' && buttonKey === 'Login') {
       await expect(homePage.loginBtn).toBeVisible();
     } else {
       await expect(commonItemsPage.govUkButton.getByText(buttonValue, { exact: true })).toBeVisible();

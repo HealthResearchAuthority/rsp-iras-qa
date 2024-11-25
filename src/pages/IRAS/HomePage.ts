@@ -14,6 +14,8 @@ export default class HomePage {
   readonly loginBtn: Locator;
   readonly myApplicationsLink: Locator;
   readonly boldGuidanceText: Locator;
+  readonly newApplicationBtn: Locator;
+  readonly signInText: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -25,7 +27,7 @@ export default class HomePage {
     //Locators
     this.mainPageContent = this.page.getByTestId('main-content');
     this.pageHeading = this.page.getByTestId('title');
-    this.loginBtn = this.page
+    this.loginBtn = this.mainPageContent
       .locator('.gem-c-button')
       .and(this.page.getByText(this.buttonTextData.Home_Page.Login, { exact: true }));
     this.myApplicationsLink = this.mainPageContent.getByText(this.linkTextData.Home_Page.My_Applications, {
@@ -36,6 +38,14 @@ export default class HomePage {
       .getByText(this.homePageTestData.Home_Page.bold_guidance_text, {
         exact: true,
       });
+    this.newApplicationBtn = this.mainPageContent
+      .locator('.govuk-button')
+      .getByText(this.buttonTextData.Home_Page.New_Application, {
+        exact: true,
+      });
+    this.signInText = this.mainPageContent.getByText(this.homePageTestData.Home_Page.sign_in_text, {
+      exact: true,
+    });
   }
 
   //Page Methods
@@ -43,11 +53,17 @@ export default class HomePage {
     await this.page.goto('');
   }
 
-  async assertOnHomePage() {
-    // await expect(this.pageHeading).toBeVisible();
-    // await expect(this.pageHeading).toHaveText(this.homePageTestData.Home_Page.heading);
-    // await expect(this.myApplicationsLink).toBeVisible();
-    await expect(this.boldGuidanceText).toBeVisible();
+  async assertOnHomePage(authorised?: boolean) {
+    if (authorised == false) {
+      // await expect(this.myApplicationsLink).not.toBeVisible();
+      await expect(this.boldGuidanceText).not.toBeVisible();
+      await expect(this.signInText).toBeVisible();
+      await expect(this.loginBtn).toBeVisible();
+    } else {
+      // await expect(this.myApplicationsLink).toBeVisible();
+      await expect(this.boldGuidanceText).toBeVisible();
+      await expect(this.newApplicationBtn).toBeVisible();
+    }
     expect(await this.page.title()).toBe(this.homePageTestData.Home_Page.title);
   }
 }

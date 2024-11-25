@@ -2,6 +2,7 @@
   "Home_Page": {
     "title": "",
     "heading": "Integrated Research Application System",
-    "bold_guidance_text": "Make changes to an approved project"
+    "bold_guidance_text": "Make changes to an approved project",
+    "sign_in_text": "To make changes to an approved project, Sign In using the following link"
   }
 }
