@@ -161,3 +161,30 @@ Given(
     }
   }
 );
+
+Then(
+  'I see the expected validation errors appearing for {string} on the {string} page',
+  async ({ commonItemsPage }, datasetName: string, pageName: string) => {
+    const pageObject = await commonItemsPage.getQsetPageObject(pageName);
+    const expectedAlertBoxErrors = await commonItemsPage.getQsetPageValidationData(
+      pageName,
+      'Alert_Box_Errors',
+      datasetName
+    );
+    const expectedFieldErrors = await commonItemsPage.getQsetPageValidationData(pageName, 'Field_Errors', datasetName);
+    await expect(commonItemsPage.alert_box).toBeVisible();
+    await expect(commonItemsPage.alert_box_heading).toHaveText(
+      commonItemsPage.questionSetData.Validation.alert_box_heading
+    );
+
+    const actualAlertBoxErrors = commonItemsPage.alert_box_list_items;
+    const actualFieldErrorsArray = await commonItemsPage.govUkFieldValidationError.all();
+    await expect(actualAlertBoxErrors).toHaveText(expectedAlertBoxErrors, { useInnerText: true });
+    expect(actualFieldErrorsArray).toHaveLength(expectedFieldErrors.length);
+    for (const key of expectedFieldErrors) {
+      const expectedFieldErrorMessage = await commonItemsPage.getFieldTypeErrorMessage(key, pageObject);
+      const actualFieldError = await commonItemsPage.getFieldErrors(key, pageObject);
+      await expect(actualFieldError).toHaveText(expectedFieldErrorMessage);
+    }
+  }
+);

@@ -34,7 +34,7 @@ Feature: Question Set - Research Application - Project Filter
     And I fill the project scope section in the project filter page with '<Project_Scope>'
     And I fill the research location section in the project filter page with '<Research_Location>'
     And I click the 'Validate' button on the 'Question_Set'
-    Then I see the expected validation errors appearing for '<Validation>' on the project filter page
+    Then I see the expected validation errors appearing for '<Validation>' on the 'project filter' page
 
     Examples:
       | Project   | Project_Details            | Project_Scope         | Research_Location     | Validate_Button | Validation           |

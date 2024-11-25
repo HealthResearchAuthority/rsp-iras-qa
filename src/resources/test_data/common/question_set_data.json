@@ -1,5 +1,8 @@
 {
   "Validation": {
-    "alert_box_heading": "You need to complete these questions before you can continue::"
+    "alert_box_heading": "You need to complete these questions before you can continue::",
+    "text_error_message": "Provide an answer for this question",
+    "radio_error_message": "Select one option",
+    "checkbox_error_message": "Select at least one option"
   }
 }

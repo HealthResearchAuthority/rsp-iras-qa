@@ -42,8 +42,6 @@
       "bioresource_established_nhs_hsc_radio": "Yes",
       "is_ctimp_radio": "Yes",
       "options_applied_for_project_radio": "combined trial of an investigational medicinal product and an investigational medical device",
-      "product_contain_genetically_modified_organism_radio": "Yes",
-      "is_clinical_or_medical_devices_radio": "Yes",
       "exposing_ionising_radiation_radio": "Yes",
       "using_human_biological_samples_radio": "Yes",
       "patient_data_accessed_outside_radio": "Yes",
@@ -61,14 +59,7 @@
       "places_in_uk_for_project_checkbox": ["England", "Northern Ireland", "Wales"],
       "where_human_sample_held_checkbox": ["England", "Northern Ireland"],
       "where_human_sample_obtained_checkbox": ["Northern Ireland", "Scotland", "Wales"],
-      "where_project_take_place_checkbox": [
-        "Independent research units",
-        "Phase 1 trial units (non-NHS or HSC organisation)",
-        "Prison or probation setting",
-        "Social care settings",
-        "Voluntary sector or private organisations",
-        "Community settings"
-      ],
+      "where_project_take_place_checkbox": ["Other"],
       "details_other_organisation_text": "test organisation",
       "use_pic_radio": "Yes"
     },
@@ -94,22 +85,22 @@
       "Full_Project_Title": ["Question 3 under Project Details section"]
     },
     "Field_Errors": {
-      "All_Mandatory_Fields": {
-        "short_project_title_text": "Provide an answer for this question",
-        "full_project_title_text": "Provide an answer for this question",
-        "is_project_managed_commercial_research_radio": "Select one option",
-        "is_nihr_funding_radio": "Select one option",
-        "access_cpms_services_radio": "Select one option",
-        "is_educational_project_radio": "Select one option",
-        "activities_involved_checkbox": "Select at least one option",
-        "include_prisoners_offenders_radio": "Select one option",
-        "involve_ministry_of_defence_radio": "Select one option",
-        "involve_hfea_radio": "Select one option",
-        "is_outside_uk_radio": "Select one option",
-        "places_in_uk_for_project_checkbox": "Select at least one option",
-        "where_project_take_place_checkbox": "Select at least one option"
-      },
-      "Full_Project_Title": { "full_project_title_text": "Provide an answer for this question" }
+      "All_Mandatory_Fields": [
+        "short_project_title_text",
+        "full_project_title_text",
+        "is_project_managed_commercial_research_radio",
+        "is_nihr_funding_radio",
+        "access_cpms_services_radio",
+        "is_educational_project_radio",
+        "activities_involved_checkbox",
+        "include_prisoners_offenders_radio",
+        "involve_ministry_of_defence_radio",
+        "involve_hfea_radio",
+        "is_outside_uk_radio",
+        "places_in_uk_for_project_checkbox",
+        "where_project_take_place_checkbox"
+      ],
+      "Full_Project_Title": ["full_project_title_text"]
     }
   }
 }

@@ -2,6 +2,8 @@ import { expect, Locator, Page } from '@playwright/test';
 import * as buttonTextData from '../../resources/test_data/common/button_text_data.json';
 import * as linkTextData from '../../resources/test_data/common/link_text_data.json';
 import * as questionSetData from '../../resources/test_data/common/question_set_data.json';
+import ProjectFilterPage from '../IRAS/ProjectFilterPage';
+import ProjectDetailsPage from '../IRAS/ProjectDetailsPage';
 
 //Declare Page Objects
 export default class CommonItemsPage {
@@ -125,5 +127,48 @@ export default class CommonItemsPage {
       const fieldError = locator.locator('../../..').locator(this.govUkFieldValidationError);
       return fieldError;
     }
+  }
+
+  async getFieldTypeErrorMessage<PageObject>(key: string, page: PageObject): Promise<string> {
+    const locator: Locator = page[key];
+    const typeAttribute = await locator.first().getAttribute('type');
+    //Check if Textbox, Date or Radio Field else must be Checkbox
+    if (typeAttribute === 'text' || typeAttribute === 'date') {
+      return this.questionSetData.Validation.text_error_message;
+    } else if (typeAttribute === 'radio' || typeAttribute == null) {
+      return this.questionSetData.Validation.radio_error_message;
+    } else {
+      return this.questionSetData.Validation.checkbox_error_message;
+    }
+  }
+
+  async getQsetPageObject(page: string): Promise<ProjectDetailsPage | ProjectFilterPage> {
+    let pageObject: ProjectFilterPage | ProjectDetailsPage;
+    switch (page.toLowerCase()) {
+      case 'project filter':
+        pageObject = new ProjectFilterPage(this.page);
+        break;
+      case 'project details':
+        pageObject = new ProjectDetailsPage(this.page);
+        break;
+      default:
+        throw new Error(`${page} is not a valid option`);
+    }
+    return pageObject;
+  }
+
+  async getQsetPageValidationData(page: string, dataType: string, datasetName: string): Promise<string[]> {
+    let validationData: string[];
+    switch (page.toLowerCase()) {
+      case 'project filter':
+        validationData = new ProjectFilterPage(this.page).projectFilterPageTestData.Validation[dataType][datasetName];
+        break;
+      case 'project details':
+        validationData = new ProjectDetailsPage(this.page).projectDetailsPageTestData.Validation[dataType][datasetName];
+        break;
+      default:
+        throw new Error(`${page} is not a valid option`);
+    }
+    return validationData;
   }
 }

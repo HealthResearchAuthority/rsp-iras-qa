@@ -56,7 +56,7 @@ Feature: Question Set - Research Application - Project Details
     And I fill the transparency section on the project details page with '<Transparency>'
     And I fill the confidentiality and information governance section on the project details page with '<Confidentiality_Info_Management>'
     And I click the 'Validate' button on the 'Question_Set'
-    Then I see the expected validation errors appearing for '<Validation>' on the project details page
+    Then I see the expected validation errors appearing for '<Validation>' on the 'project details' page
 
     Examples:
       | Project   | Project_Information      | Public_Involvement       | Research_Design       | Research_Activities      | Participants             | Consent                  | Risks_Conflicts          | Summary_Ethical_Issues   | Research_Analysis        | Governance_Management    | Transparency             | Confidentiality_Info_Management | Validation                             |
