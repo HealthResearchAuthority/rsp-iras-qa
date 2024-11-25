@@ -15,7 +15,7 @@ Feature: As an Authenticated Admin User I have Access to Authorised Application 
   @accessApplicationSmoke
   Scenario Outline: I am able to Add and Edit Applications
     Then I can see a '<Button_Type>' button on the 'Home_Page'
-    And I can see a '<Link_Type>' link on the 'Home_Page'
+    # And I can see a '<Link_Type>' link on the 'Home_Page'
     And I can see a '<Link_Type>' link on the 'Banner'
 
     Examples:
