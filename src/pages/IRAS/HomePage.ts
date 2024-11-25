@@ -53,8 +53,8 @@ export default class HomePage {
     await this.page.goto('');
   }
 
-  async assertOnHomePage(authorised?: boolean) {
-    if (authorised == false) {
+  async assertOnHomePage(authorised?: string) {
+    if (authorised === 'false') {
       // await expect(this.myApplicationsLink).not.toBeVisible();
       await expect(this.boldGuidanceText).not.toBeVisible();
       await expect(this.signInText).toBeVisible();

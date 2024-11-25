@@ -7,7 +7,7 @@ Given('I have navigated to the {string}', async ({ loginPage, homePage, createAp
   switch (page) {
     case 'Login_Page':
       await homePage.goto();
-      await homePage.assertOnHomePage(false);
+      await homePage.assertOnHomePage('false');
       await homePage.loginBtn.click();
       await loginPage.assertOnLoginPage();
       break;
@@ -32,7 +32,7 @@ When(
         await loginPage.assertOnLoginPage();
         break;
       case 'Unauthenticated_Home_Page':
-        await homePage.assertOnHomePage(false);
+        await homePage.assertOnHomePage('false');
         break;
       case 'Home_Page':
         await homePage.assertOnHomePage();
