@@ -104,10 +104,16 @@ export default class CommonItemsPage {
     }
   }
 
-  async validateErrorMessageForMandatoryField(dataset: JSON, key: string, locator: Locator, testData: any) {
-    if (dataset[key].length === 0) {
-      await expect(locator).toHaveText(testData['error_message_each_question_checkbox']);
-    } else if (dataset[key].length !== 0) {
+  async validateErrorMessageForMandatoryField(
+    fieldDataset: JSON,
+    fieldDatasetKey: string,
+    locator: Locator,
+    errorDataSet: any,
+    errorDataSetKey: string
+  ) {
+    if (fieldDataset[fieldDatasetKey].length === 0) {
+      await expect(locator).toHaveText(errorDataSet[errorDataSetKey]);
+    } else if (fieldDataset[fieldDatasetKey].length !== 0) {
       await expect(locator).toHaveCount(0);
     }
   }
@@ -130,16 +136,40 @@ export default class CommonItemsPage {
     }
     if (typeAttribute === 'checkbox') {
       const checkboxLocator = page[key].locator('../../../..').locator(this.errorMessageQSetFieldLabel);
-      this.validateErrorMessageForMandatoryField(dataset, key, checkboxLocator, errorMessageCommon);
+      this.validateErrorMessageForMandatoryField(
+        dataset,
+        key,
+        checkboxLocator,
+        errorMessageCommon,
+        'error_message_each_question_checkbox'
+      );
     } else if (typeAttribute === 'radio') {
       const radioLocator = page[key].locator('../../../..').locator(this.errorMessageQSetFieldLabel);
-      this.validateErrorMessageForMandatoryField(dataset, key, radioLocator, errorMessageCommon);
+      this.validateErrorMessageForMandatoryField(
+        dataset,
+        key,
+        radioLocator,
+        errorMessageCommon,
+        'error_message_each_question_radio'
+      );
     } else if (typeAttribute === 'date') {
       const dateLocator = page[key].locator('../../../../..').locator(this.errorMessageQSetFieldLabel);
-      this.validateErrorMessageForMandatoryField(dataset, key, dateLocator, errorMessageCommon);
+      this.validateErrorMessageForMandatoryField(
+        dataset,
+        key,
+        dateLocator,
+        errorMessageCommon,
+        'error_message_each_question_text'
+      );
     } else {
       const otherLocator = page[key].locator('..').locator(this.errorMessageQSetFieldLabel);
-      this.validateErrorMessageForMandatoryField(dataset, key, otherLocator, errorMessageCommon);
+      this.validateErrorMessageForMandatoryField(
+        dataset,
+        key,
+        otherLocator,
+        errorMessageCommon,
+        'error_message_each_question_text'
+      );
     }
   }
 }
