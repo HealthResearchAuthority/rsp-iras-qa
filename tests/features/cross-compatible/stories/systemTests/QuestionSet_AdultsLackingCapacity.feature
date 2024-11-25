@@ -25,7 +25,9 @@ Feature: Question Set - Research Application - Adults Lacking Capacity
       | Project_Y | Participant_With_No_Urgent_Treatment_Recruited | Valid_Data_All_Fields             | Continue          |
 
   @rsp-1730
-  Scenario Outline: Validate error message displayed when user submit page with empty data and error message not displayed when user submit with valid data for mandatory fields in the adults lacking capacity page
+  Scenario Outline: Verify that correct validation has been applied on mandatory fields in the adults lacking page
+  Validate error message displayed when user submit page with empty data in the adults lacking capacity page
+  Validate error message not displayed when user submit page with valid data for mandatory fields in the adults lacking capacity page
     And I enter the application name and description for '<Project>'
     And I click the 'Create' button on the 'Create_Application_Page'
     And I can see the proceed application page for '<Project>'
@@ -43,3 +45,4 @@ Feature: Question Set - Research Application - Adults Lacking Capacity
       | Project   | Adults_Lacking_Capacity_CTIMP | Adults_Lacking_Capacity_Non_CTIMP | Validation_Message         | Navigation_Button |
       | Project_X | All_Empty_Fields              | All_Empty_Fields                  | Empty_Fields_Error_Message | Validate          |
       | Project_Y | Some_Empty_Fields             | Some_Empty_Fields                 | Empty_Fields_Error_Message | Validate          |
+      | Project_X | Valid_Data_All_Fields         | Valid_Data_All_Fields             | Empty_Fields_Error_Message | Validate          |

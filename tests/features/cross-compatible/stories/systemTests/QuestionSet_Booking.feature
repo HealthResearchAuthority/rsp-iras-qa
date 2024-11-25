@@ -24,7 +24,9 @@ Feature: Question Set - Research Application - Booking
       | Project_Y | Dont_Agree_Data       | Continue          |
 
   @rsp-1730
-  Scenario Outline: Validate error message displayed when user submit page with empty data and error message not displayed when user submit with valid data for mandatory fields in the booking page
+  Scenario Outline: Verify that correct validation has been applied on mandatory fields in the booking page
+  Validate error message displayed when user submit page with empty data in the booking page
+  Validate error message not displayed when user submit page with valid data for mandatory fields in the booking page
     And I enter the application name and description for '<Project>'
     And I click the 'Create' button on the 'Create_Application_Page'
     And I can see the proceed application page for '<Project>'

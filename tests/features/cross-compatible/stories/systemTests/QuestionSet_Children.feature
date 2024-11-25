@@ -24,7 +24,9 @@ Feature: Question Set - Research Application - Children
       | Project_Y | Child_Not_Treated_Urgently | Continue          |
 
   @rsp-1730
-  Scenario Outline: Validate error message displayed when user submit page with empty data and error message not displayed when user submit with valid data for mandatory fields in the children page
+  Scenario Outline: Verify that correct validation has been applied on mandatory fields in the children page
+  Validate error message displayed when user submit page with empty data in the children page
+  Validate error message not displayed when user submit page with valid data for mandatory fields in the children page
     And I enter the application name and description for '<Project>'
     And I click the 'Create' button on the 'Create_Application_Page'
     And I can see the proceed application page for '<Project>'
@@ -37,6 +39,7 @@ Feature: Question Set - Research Application - Children
     Then I validate error message using '<Validation_Message>' on mandatory fields for 'children' section in the children page with '<Children>'
 
     Examples:
-      | Project   | Children          | Validation_Message         | Navigation_Button |
-      | Project_X | All_Empty_Fields  | Empty_Fields_Error_Message | Validate          |
-      | Project_Y | Some_Empty_Fields | Empty_Fields_Error_Message | Validate          |
+      | Project   | Children              | Validation_Message         | Navigation_Button |
+      | Project_X | All_Empty_Fields      | Empty_Fields_Error_Message | Validate          |
+      | Project_Y | Some_Empty_Fields     | Empty_Fields_Error_Message | Validate          |
+      | Project_X | Valid_Data_All_Fields | Empty_Fields_Error_Message | Validate          |
