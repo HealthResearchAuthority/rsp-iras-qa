@@ -24,7 +24,7 @@ Feature: Question Set - Research Application - Tissue
       | Project_X | Valid_Data_All_Fields         | Valid_Data_All_Fields   | Continue          |
       | Project_Y | New_Samples_From_Participants | Valid_Data_All_Fields   | Continue          |
 
-  @rsp-1761 @Smoke
+  @rsp-1761
   Scenario Outline: Verify that correct validation has been applied to the tissue page
     And I enter the application name and description for '<Project>'
     And I click the 'Create' button on the 'Create_Application_Page'
