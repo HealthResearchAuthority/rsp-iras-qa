@@ -24,7 +24,7 @@ Feature: Question Set - Research Application - Tissue
       | Project_X | Valid_Data_All_Fields         | Valid_Data_All_Fields   | Continue          |
       | Project_Y | New_Samples_From_Participants | Valid_Data_All_Fields   | Continue          |
 
-  @rsp-1761 @only
+  @rsp-1761
   Scenario Outline: Verify that correct validation has been applied to the tissue page
     And I enter the application name and description for '<Project>'
     And I click the 'Create' button on the 'Create_Application_Page'
@@ -39,6 +39,6 @@ Feature: Question Set - Research Application - Tissue
     Then I see the expected validation errors appearing for '<Validation>' on the 'tissue' page
 
     Examples:
-      | Project   | Human_Biological_Samples | Health_Related_Findings | Validation           |
-      | Project_X | Valid_Data_All_Fields    | Valid_Data_All_Fields   | All_Mandatory_Fields |
-# | Project_Y | New_Samples_From_Participants | Valid_Data_All_Fields   | Mandatory_Device_Filter_Questions          |
+      | Project   | Human_Biological_Samples | Health_Related_Findings | Validation                        |
+      | Project_X | No_Fields_Completed      | No_Fields_Completed     | All_Mandatory_Fields              |
+      | Project_Y | Valid_Data_All_Fields    | No_Fields_Completed     | Mandatory_Health_Related_Findings |

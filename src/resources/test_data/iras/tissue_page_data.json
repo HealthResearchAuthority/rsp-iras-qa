@@ -65,12 +65,32 @@
   },
   "Validation": {
     "Alert_Box_Errors": {
-      "All_Mandatory_Fields": ["Question 1 under Project Details section"],
-      "Full_Project_Title": ["Question 3 under Project Details section"]
+      "All_Mandatory_Fields": [
+        "Question 1 under Human Biological Samples section",
+        "Question 2 under Human Biological Samples section",
+        "Question 3a under Human Biological Samples section",
+        "Question 3b under Human Biological Samples section",
+        "Question 4 under Human Biological Samples section",
+        "Question 5 under Human Biological Samples section",
+        "Question 6 under Human Biological Samples section",
+        "Question 7 under Human Biological Samples section",
+        "Question 1 under Health-related findings section"
+      ],
+      "Mandatory_Health_Related_Findings": ["Question 1 under Health-related findings section"]
     },
     "Field_Errors": {
-      "All_Mandatory_Fields": ["short_project_title_text"],
-      "Full_Project_Title": ["full_project_title_text"]
+      "All_Mandatory_Fields": [
+        "describe_type_of_material_text",
+        "is_sample_collected_from_new_participants_radio",
+        "will_materials_imported_exported_outside_radio",
+        "will_materials_imported_exported_outside_of_scotland_radio",
+        "consent_arrangement_for_use_of_sample_radio",
+        "details_where_samples_stored_text",
+        "how_sample_processed_stored_radio",
+        "what_happen_material_end_of_project_checkbox",
+        "will_project_produce_health_related_findings_radio"
+      ],
+      "Mandatory_Health_Related_Findings": ["will_project_produce_health_related_findings_radio"]
     }
   }
 }
