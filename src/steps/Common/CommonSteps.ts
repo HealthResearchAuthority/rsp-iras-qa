@@ -7,6 +7,7 @@ Given('I have navigated to the {string}', async ({ loginPage, homePage, createAp
   switch (page) {
     case 'Login_Page':
       await homePage.goto();
+      await homePage.assertOnHomePage('false');
       await homePage.loginBtn.click();
       await loginPage.assertOnLoginPage();
       break;
@@ -29,6 +30,9 @@ When(
     switch (page) {
       case 'Login_Page':
         await loginPage.assertOnLoginPage();
+        break;
+      case 'Unauthenticated_Home_Page':
+        await homePage.assertOnHomePage('false');
         break;
       case 'Home_Page':
         await homePage.assertOnHomePage();
@@ -106,9 +110,7 @@ Then(
   'I click the {string} button on the {string}',
   async ({ commonItemsPage, homePage }, buttonKey: string, pageKey: string) => {
     const buttonValue = commonItemsPage.buttonTextData[pageKey][buttonKey];
-    if (pageKey === 'Banner' && buttonKey === 'Login') {
-      await commonItemsPage.bannerLoginBtn.click();
-    } else if (pageKey === 'Home_Page' && buttonKey === 'Login') {
+    if (pageKey === 'Home_Page' && buttonKey === 'Login') {
       await homePage.loginBtn.click();
     } else {
       await commonItemsPage.govUkButton.getByText(buttonValue, { exact: true }).click();
@@ -120,9 +122,7 @@ Then(
   'I can see a {string} button on the {string}',
   async ({ commonItemsPage, homePage }, buttonKey: string, pageKey: string) => {
     const buttonValue = commonItemsPage.buttonTextData[pageKey][buttonKey];
-    if (pageKey === 'Banner' && buttonKey === 'Login') {
-      await expect(commonItemsPage.bannerLoginBtn).toBeVisible();
-    } else if (pageKey === 'Home_Page' && buttonKey === 'Login') {
+    if (pageKey === 'Home_Page' && buttonKey === 'Login') {
       await expect(homePage.loginBtn).toBeVisible();
     } else {
       await expect(commonItemsPage.govUkButton.getByText(buttonValue, { exact: true })).toBeVisible();
@@ -158,6 +158,33 @@ Given(
       await expect(homePage.myApplicationsLink).toBeVisible();
     } else {
       await expect(commonItemsPage.govUkLink.getByText(linkValue, { exact: true })).toBeVisible();
+    }
+  }
+);
+
+Then(
+  'I see the expected validation errors appearing for {string} on the {string} page',
+  async ({ commonItemsPage }, datasetName: string, pageName: string) => {
+    const pageObject = await commonItemsPage.getQsetPageObject(pageName);
+    const expectedAlertBoxErrors = await commonItemsPage.getQsetPageValidationData(
+      pageName,
+      'Alert_Box_Errors',
+      datasetName
+    );
+    const expectedFieldErrors = await commonItemsPage.getQsetPageValidationData(pageName, 'Field_Errors', datasetName);
+    await expect(commonItemsPage.alert_box).toBeVisible();
+    await expect(commonItemsPage.alert_box_heading).toHaveText(
+      commonItemsPage.questionSetData.Validation.alert_box_heading
+    );
+
+    const actualAlertBoxErrors = commonItemsPage.alert_box_list_items;
+    const actualFieldErrorsArray = await commonItemsPage.govUkFieldValidationError.all();
+    await expect(actualAlertBoxErrors).toHaveText(expectedAlertBoxErrors, { useInnerText: true });
+    expect(actualFieldErrorsArray).toHaveLength(expectedFieldErrors.length);
+    for (const key of expectedFieldErrors) {
+      const expectedFieldErrorMessage = await commonItemsPage.getFieldTypeErrorMessage(key, pageObject);
+      const actualFieldError = await commonItemsPage.getFieldErrors(key, pageObject);
+      await expect(actualFieldError).toHaveText(expectedFieldErrorMessage);
     }
   }
 );

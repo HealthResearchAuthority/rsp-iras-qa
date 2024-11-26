@@ -128,6 +128,7 @@ export default class ProjectDetailsPage {
   readonly has_responsibility_research_activity_delegated_radio: Locator;
   readonly detail_proposed_oversight_arrangements_text: Locator;
   readonly transparency_section: Locator;
+  readonly project_registered_elsewhere_label: Locator;
   readonly publication_deferral_request_radio: Locator;
   readonly first_provide_justification_for_deferral_text: Locator;
   readonly first_confirm_arrangements_registration_of_project_checkbox: Locator;
@@ -314,6 +315,9 @@ export default class ProjectDetailsPage {
     this.detail_proposed_oversight_arrangements_text = this.governance_management_section.getByTestId('IQA0158_Text');
     //Transparency Section
     this.transparency_section = this.page.locator('legend').getByText('Transparency').locator('..');
+    this.project_registered_elsewhere_label = this.transparency_section.getByText(
+      '1a.Is the project already registered elsewhere?'
+    ); //This is a label for a 'mandatory field with no input, should be replaced with input when fixed'
     this.publication_deferral_request_radio = this.transparency_section.getByTestId(/^IQA0165/);
     this.first_provide_justification_for_deferral_text = this.transparency_section.getByTestId('IQA0166_Text');
     this.first_confirm_arrangements_registration_of_project_checkbox =

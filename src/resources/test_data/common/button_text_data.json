@@ -4,14 +4,14 @@
     "Logout": "Logout"
   },
   "Home_Page": {
-    "New_Application": "Create New Application",
+    "New_Application": "Make changes to an approved project",
     "Login": "Sign In"
   },
   "Create_Application_Page": {
     "Create": "Create"
   },
   "Proceed_Application_Page": {
-    "Proceed_Application": "Proceed with your application"
+    "Proceed_Application": "Continue to make changes"
   },
   "Question_Set": {
     "Save": "Save",
