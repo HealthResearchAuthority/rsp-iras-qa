@@ -22,3 +22,22 @@ Feature: Question Set - Research Application - Student
       | Project   | Educational_Project       | Navigation_Button |
       | Project_X | Valid_Data_All_Fields     | Continue          |
       | Project_Y | University_Not_Sponsoring | Continue          |
+
+
+  @rsp-1761
+  Scenario Outline: Verify that correct validation has been applied to the student page
+    And I enter the application name and description for '<Project>'
+    And I click the 'Create' button on the 'Create_Application_Page'
+    And I can see the proceed application page for '<Project>'
+    And I click the 'Proceed_Application' button on the 'Proceed_Application_Page'
+    And I can see the 'Project_Filter' question set
+    And I click the 'Student' link on the 'Progress_Bar'
+    And I can see the 'Student' question set
+    And I fill the educational project section in the student page with '<Educational_Project>'
+    When I click the 'Validate' button on the 'Question_Set'
+    Then I see the expected validation errors appearing for '<Validation>' on the 'student' page
+
+    Examples:
+      | Project   | Educational_Project          | Validation                 |
+      | Project_X | No_Fields_Completed          | All_Mandatory_Fields       |
+      | Project_Y | No_University_Or_Course_Name | University_And_Course_Name |
