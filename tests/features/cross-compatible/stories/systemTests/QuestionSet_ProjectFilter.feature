@@ -23,7 +23,7 @@ Feature: Question Set - Research Application - Project Filter
       | Project_X | Valid_Data_All_Fields     | Valid_Data_All_Fields | Valid_Data_All_Fields | Continue          |
       | Project_Y | Data_With_No_NIHR_Funding | Valid_Data_All_Fields | Valid_Data_All_Fields | Continue          |
 
-  @rsp-1503
+  @rsp-1503 @Smoke
   Scenario Outline: Verify that correct validation has been applied to the project filter page
     And I enter the application name and description for '<Project>'
     And I click the 'Create' button on the 'Create_Application_Page'
