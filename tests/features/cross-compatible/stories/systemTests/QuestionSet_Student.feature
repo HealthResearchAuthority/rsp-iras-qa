@@ -24,7 +24,7 @@ Feature: Question Set - Research Application - Student
       | Project_Y | University_Not_Sponsoring | Continue          |
 
 
-  @rsp-1761
+  @rsp-1761 @Smoke
   Scenario Outline: Verify that correct validation has been applied to the student page
     And I enter the application name and description for '<Project>'
     And I click the 'Create' button on the 'Create_Application_Page'
