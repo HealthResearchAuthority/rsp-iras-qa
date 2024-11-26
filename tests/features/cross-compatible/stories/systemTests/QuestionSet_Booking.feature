@@ -36,7 +36,7 @@ Feature: Question Set - Research Application - Booking
     And I can see the 'Booking' question set
     And I fill the application 'application booking' section in the booking page with '<Booking>'
     Then I click the '<Navigation_Button>' button on the 'Question_Set'
-    Then I validate error message using '<Validation_Message>' on mandatory fields for 'application booking' section in the booking page with '<Children>'
+    Then I validate error message using '<Validation_Message>' on mandatory fields for 'application booking' section in the booking page with '<Booking>'
 
     Examples:
       | Project   | Booking               | Validation_Message         | Navigation_Button |
