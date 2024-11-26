@@ -32,6 +32,50 @@
       "arrangements_to_seek_consent_text": "What arrangements will you make to seek consent to continue in the project when participating children are able to give consent for themselves? - Example",
       "arrangements_to_seek_consent_reached_age_text": "What arrangements will you make to seek consent to continue in the trial when participating children reach the age of 16? - Example",
       "explain_materials_resources_for_explaining_text": "Explain how you have tested the materials and resources for explaining this project with children and adults with parental rights and responsibility. - Example"
+    },
+    "All_Empty_Fields": {
+      "specify_ages_checkbox": [],
+      "children_unable_understand_details_checkbox": [],
+      "arrangements_obtaining_consent_parental_text": "Conditional question - Dev Not Implemented for Validation",
+      "provide_children_information_of_project_text": "Conditional question - Dev Not Implemented for Validation",
+      "seek_informed_consent_from_children_text": "Conditional question - Dev Not Implemented for Validation",
+      "seek_informed_consent_parental_under_age_text": "Conditional question - Dev Not Implemented for Validation",
+      "provide_children_information_about_trial_text": "Conditional question - Dev Not Implemented for Validation",
+      "is_child_treated_urgently_radio": "",
+      "justify_need_for_urgent_treatment_text": "Conditional question - Dev Not Implemented for Validation",
+      "arrangements_to_seek_consent_text": "Conditional question - Dev Not Implemented for Validation",
+      "arrangements_to_seek_consent_reached_age_text": "Conditional question - Dev Not Implemented for Validation",
+      "explain_materials_resources_for_explaining_text": ""
+    },
+    "Some_Empty_Fields": {
+      "specify_ages_checkbox": [],
+      "children_unable_understand_details_checkbox": ["Children who will be unable to fully understand", "Children who will be able to understand"],
+      "arrangements_obtaining_consent_parental_text": "Conditional question - Dev Not Implemented for Validation",
+      "provide_children_information_of_project_text": "Conditional question - Dev Not Implemented for Validation",
+      "seek_informed_consent_from_children_text": "Conditional question - Dev Not Implemented for Validation",
+      "seek_informed_consent_parental_under_age_text": "Conditional question - Dev Not Implemented for Validation",
+      "provide_children_information_about_trial_text": "Conditional question - Dev Not Implemented for Validation",
+      "is_child_treated_urgently_radio": "",
+      "justify_need_for_urgent_treatment_text": "Conditional question - Dev Not Implemented for Validation",
+      "arrangements_to_seek_consent_text": "Conditional question - Dev Not Implemented for Validation",
+      "arrangements_to_seek_consent_reached_age_text": "Conditional question - Dev Not Implemented for Validation",
+      "explain_materials_resources_for_explaining_text": "Explain how you have tested the materials and resources for explaining this project with children and adults with parental rights and responsibility. - Example"
+    }
+  },
+  "ValidationObject": {
+    "Empty_Fields_Error_Message": {
+      "specify_ages_checkbox": "Question 1 under Children section",
+      "children_unable_understand_details_checkbox": "Question 2 under Children section",
+      "arrangements_obtaining_consent_parental_text": "Question 2a under Children section",
+      "provide_children_information_of_project_text": "Question 2b under Children section",
+      "seek_informed_consent_from_children_text": "Question 2c under Children section",
+      "seek_informed_consent_parental_under_age_text": "Question 2d under Children section",
+      "provide_children_information_about_trial_text": "Question 2e under Children section",
+      "is_child_treated_urgently_radio": "Question 3 under Children section",
+      "justify_need_for_urgent_treatment_text": "Question 3a under Children section",
+      "arrangements_to_seek_consent_text": "Question 4a under Children section",
+      "arrangements_to_seek_consent_reached_age_text": "Question 4b under Children section",
+      "explain_materials_resources_for_explaining_text": "Question 5 under Children section"
     }
   }
 }

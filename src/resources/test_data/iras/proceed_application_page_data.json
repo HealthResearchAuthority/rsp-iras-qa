@@ -2,7 +2,7 @@
   "Proceed_Application_Page": {
     "title": "",
     "heading": "Welcome to the Integrated Research Application System",
-    "iras_id_key": "IRAS Id",
+    "iras_id_key": "Project Id",
     "project_title_key": "Project title",
     "project_desc_key": "Project description"
   }

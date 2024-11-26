@@ -4,10 +4,9 @@ import { test } from '../../hooks/CustomFixtures';
 const { Then } = createBdd(test);
 
 Then(
-  'I fill the adults lacking capacity ctimp section in the adults lacking capacity page with {string}',
-  async ({ adultsLackingCapacityPage, commonItemsPage }, datasetName: string) => {
-    const dataset =
-      adultsLackingCapacityPage.adultsLackingCapacityPageTestData.Adults_Lacking_Capacity_CTIMP[datasetName];
+  'I fill the {string} section in the adults lacking capacity page with {string}',
+  async ({ adultsLackingCapacityPage, commonItemsPage }, sectionName: string, datasetName: string) => {
+    const dataset = await adultsLackingCapacityPage.getTestDataForALC(sectionName, datasetName);
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
         await commonItemsPage.fillUIComponent(dataset, key, adultsLackingCapacityPage);
@@ -17,13 +16,24 @@ Then(
 );
 
 Then(
-  'I fill the adults lacking capacity non ctimp section in the adults lacking capacity page with {string}',
-  async ({ adultsLackingCapacityPage, commonItemsPage }, datasetName: string) => {
-    const dataset =
-      adultsLackingCapacityPage.adultsLackingCapacityPageTestData.Adults_Lacking_Capacity_Non_CTIMP[datasetName];
+  'I validate error message using {string} on mandatory fields for {string} section in the adults lacking capacity page with {string}',
+  async (
+    { adultsLackingCapacityPage, commonItemsPage },
+    datasetErrorMessage: string,
+    sectionName: string,
+    datasetFieldNames: string
+  ) => {
+    const dataset = await adultsLackingCapacityPage.getTestDataForALC(sectionName, datasetFieldNames);
+    const errorMessageSummaryEachQuestion =
+      adultsLackingCapacityPage.adultsLackingCapacityPageTestData.ValidationObject[datasetErrorMessage];
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        await commonItemsPage.fillUIComponent(dataset, key, adultsLackingCapacityPage);
+        await commonItemsPage.validateQsetErrorMessage(
+          errorMessageSummaryEachQuestion,
+          dataset,
+          key,
+          adultsLackingCapacityPage
+        );
       }
     }
   }

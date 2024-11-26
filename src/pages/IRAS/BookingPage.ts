@@ -37,4 +37,12 @@ export default class BookingPage {
     }
     expect(await this.page.title()).toBe(this.bookingPageTestData.Booking.title);
   }
+
+  async getTestDataForBooking(sectionName: string, datasetName: string): Promise<JSON | null> {
+    let dataset: any;
+    if (sectionName === 'application booking') {
+      dataset = this.bookingPageTestData.Application_Booking[datasetName];
+    }
+    return dataset;
+  }
 }
