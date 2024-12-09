@@ -1,13 +1,13 @@
 {
   "audit_log_user": {
-    "user": "",
-    "action": "",
-    "time": ""
+    "user": "John",
+    "action": "edited user profile",
+    "time": "20/11/2024 11:22:33"
   },
   "audit_log_reviewbody": {
-    "name": "",
-    "action": "",
-    "time": ""
+    "name": "NHS_trust",
+    "action": "Edited address",
+    "time": "20/11/2024 11:22:33"
   }
  
 }
