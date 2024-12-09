@@ -34,9 +34,8 @@ When('I make a request to the Internal API', async ({ request }) => {
         headers,
       })
     ).json();
-    console.log('Response Received:');
-    console.log(authResponse);
     const isGetTokenSuccessful = authResponse.token_type === expectedAuthResponse.token_type;
+
     if (!isGetTokenSuccessful) {
       console.error('ERROR: Get Auth Token Request Failed To Return a Bearer Token');
       console.error(authResponse);
@@ -68,6 +67,6 @@ When('I make a request to the Internal API', async ({ request }) => {
   });
   await expect(requestResponse).toBeOK();
   const receivedJson = await requestResponse.json();
-  console.log('Response Received:');
+  console.log('Internal Response Received:');
   console.log(receivedJson);
 });

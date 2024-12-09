@@ -1,4 +1,4 @@
-@rtsApi @Smoke
+@rtsApi @Smoke @only
 Feature: Make successful requests to RTS API
 
   @rtsApi_External
