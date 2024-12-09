@@ -1,0 +1,361 @@
+{
+  "Adults_Lacking_Capacity": {
+    "Field_Labels": {
+      "Adults_Lacking_Capacity_CTIMP": {
+        "IQA0278": "NEW The clinical trial must relate directly to a life-threatening or debilitating clinical condition from which the individual suffers.  \nDescribe how your project meets this requirement.",
+        "IQA0279": "Justify why this project is essential to validate data obtained in other clinical trials involving persons able to consent or obtained by other research methods",
+        "IQA0280": "Set out the benefits that the administration of the investigational medicinal products is expected to produce for these participants and the grounds for expecting these benefits.  Detail why the inclusion of adults unable to give informed consent produces no risk at all to these participants, including risks to freedom of action or privacy.",
+        "IQA0281": "Describe how you will ensure that members of the research team who will make decisions on participants' capacity to consent are suitably qualified and experienced to make that decision.",
+        "IQA0282": "What arrangements will be made to identify and seek informed consent from a personal or professional legal representative?",
+        "IQA0283": "What arrangements will be made to continue to consult personal or professional legal representatives during the course of the project where necessary?",
+        "IQA0284": "Where appropriate you should provide information about the trial to participants according to their capacity to understand.  Include in your response:\n* what steps will you take to provide information\n* how will you consider the wishes of participants capable of forming an opinion\n* what arrangements will be put in place where capacity to consent will fluctuate or will be borderline",
+        "IQA0285": "Is it possible that a participant requiring urgent treatment might need to be recruited into the trial before it is possible to identify and seek consent from a personal or professional legal representative?",
+        "IQA0286": "Outline how decisions will be made on the inclusion of such participants and what arrangements will be made to seek consent from the participant (if capacity has been recovered) or from a legal representative as soon as possible.",
+        "IQA0287": "Describe the arrangements for informing relatives in circumstances where a professional legal representative has to be consulted. If you will not be informing relatives in this circumstance, explain your reasoning.",
+        "IQA0288": "Where a participant is recruited prior to consent being obtained, and consent is later withheld or the participant dies before consent can be given, what provisions will apply to the study data collected up to this point?",
+        "IQA0289": "Describe what steps will be taken to ensure that nothing is done to which participants appear to object (unless it is to protect them from harm or minimise pain or discomfort).",
+        "IQA0290": "Describe what steps will be taken to ensure that nothing is done which is contrary to any advance decision or statement by the participant"
+      },
+      "Adults_Lacking_Capacity_Non_CTIMP": {
+        "IQA0291": "The project must be connected with an impairing condition affecting the participant or their treatment.\nWhat impairing conditions will the participants have and how does the project relate to the impairing condition?",
+        "IQA0292": "Justify why this project could not be carried out as effectively if confined to adults capable of giving consent.",
+        "IQA0293": "Does the project have the potential to either:\na) benefit the participant without imposing a disproportionate burden, or \nb) provide knowledge of the causes of, or treatment or care of others with, the same or a similar condition?\n\nIf the project does not meet either requirement you cannot undertake the research with adults lacking capacity.",
+        "IQA0294": "Describe how the project has the potential to benefit the participant without imposing a disproportionate burden.",
+        "IQA0295": "Describe how the project will contribute to knowledge of the causes of, or treatment or care of others with, the same or a similar condition.\nDescribe how the project will contribute to the knowledge of:\n* causes of the same or simlar condition\n* treatment or care of others with the same or simliar condition",
+        "IQA0296": "The project must not interfere significantly with participants' freedom of action or privacy, or be unduly invasive or restrictive. Describe how the project meets this requirement.\nThe project must not interfere significantly with participants' freedom of action or privacy.  It also must not be unduly invasive or restrictive.  Describe how the project meets these requirements.",
+        "IQA0297": "Describe how you will ensure that members of the research team who will make decisions on participant's capacity to consent are suitably qualified and experienced to make that decision.",
+        "IQA0298": "For participants in England, Wales or Northern Ireland: what arrangements will be made to identify and consult persons an individual able to advise on the presumed wishes and feelings of participants unable to consent for themselves and on their inclusion in the project?\nWhat arrangements will be made to identify and consult an individual who is able to advise on the inclusion of the participant in the project who are unable to consent for themselves?  Describe how the individual will advise on the participant's presumed wishes and feelings.",
+        "IQA0299": "For participants in Scotland: what arrangements will be made to consult a Welfare Guardian or Welfare Attorney, or if not appointed the nearest relative able to give consent on behalf of the incapacitated adult?",
+        "IQA0300": "What arrangements will be made to continue to consult such persons these individuals during the course of the project where necessary?",
+        "IQA0301": "What will steps you take, if appropriate, to provide information about the trial to participants, according to their capacity of understanding, and to consider the wishes of participants capable of forming an opinion?",
+        "IQA0302": "What arrangements will be put in place where capacity to consent will fluctuate or will be borderline?",
+        "IQA0303": "Is it possible that a participant requiring urgent treatment might need to be recruited into this project before it is possible to identify and consult a person able to advise on the presumed wishes and feelings of participants unable to consent for themselves?",
+        "IQA0304": "Where possible you should seek agreement from a registered practioner before including the participant.  Outline these arrangments.\n* if this is not feasible to seek agreement from a registered practioner, how will decisions be made on inclusion of participants? \n* what arrangements will be made to seek consent from the participant (if capacity has been recovered) or advice from a consultee as soon as possible",
+        "IQA0305": "Describe the arrangements for informing relatives in circumstances where a nominated consultee has to be approached. If you will not be informing relatives in this circumstance, explain your reasoning.",
+        "IQA0306": "Where a participant is recruited prior to consent being obtained, and consent is later withheld or the participant dies before consent can be given, what provisions will apply to the study data collected up to this point?",
+        "IQA0307": "Describe what steps will be taken to ensure that nothing is done to which participants appear to object (unless it is to protect them from harm or minimise pain or discomfort).",
+        "IQA0308": "Describe what steps will be taken to ensure that nothing is done which is contrary to any advance decision or statement by the participant?"
+      }
+    }
+  },
+  "Booking": {
+    "Field_Labels": {
+      "Application_Booking": {
+        "IQA01111": "I agree for this project application information to be used for:"
+      }
+    }
+  },
+  "Children": {
+    "Field_Labels": {
+      "Children_Section": {
+        "IQA0238": "NEW Specify the ages of children who will be participating in this research project. Select all groups that apply:",
+        "IQA0239": "Will you include children who will be unable to fully understand the details of the project and consequences of their participation? Select all that apply:",
+        "IQA0240": "Describe the arrangements for obtaining consent from a person who has parental rights and responsibility for children who will not be able to fully understand the details of the project and consequences of their participation.",
+        "IQA0241": "Describe how you intend to provide children who will not be able to fully understand the details of the project and consequences of their participation, with information about the project. How will you seek their assent, if they are able? Describe how this process will be adapted to their age and level of understanding.",
+        "IQA0242": "Describe how you intend to seek informed consent from children who will be able to understand the details of the project and the consequences of participation, and willing to give consent on their own behalf, alongside parental agreement.  \nFor sites in Scotland, this may include children over the age of 12 years who are willing and able to give consent as the Children (Scotland) Act specifies that a child of 12 years or more should be presumed to be of sufficient age and maturity to form a view.",
+        "IQA0243": "Describe the arrangements for seeking informed consent from a person with parental responsibility or another legal representative for children under 16 years.",
+        "IQA0245": "Describe how you intend to provide children under 16 with information about the trial and seek their assent, where they are able. Describe how this process will be adapted to their age and level of understanding.",
+        "IQA0246": "Is it possible that a child might need to be treated urgently as part of the project before it is possible to identify and seek consent from a person with parental rights and responsibility or another legal representative? ",
+        "IQA0247": "Justify the need for urgent treatment in this project. What arrangements will be put in place to identify and seek consent from a person with parental rights and responsibility or another legal representative, once urgent actions have been completed?",
+        "IQA0248": "What arrangements will you make to seek consent to continue in the project when participating children are able to give consent for themselves?",
+        "IQA0249": "What arrangements will you make to seek consent to continue in the trial when participating children reach the age of 16?",
+        "IQA0250": "Explain how you have tested the materials and resources for explaining this project with children and adults with parental rights and responsibility. "
+      }
+    }
+  },
+  "Devices": {
+    "Field_Labels": {
+      "Devices_Filter_Questions": {
+        "IQA0309": "NEW Is the study sponsored, funded or supported by a device manufacturer or other commercial company? ",
+        "IQA03010": "Select the type of research project",
+        "IQA03011": "Select the type of research project",
+        "IQA03012": "Will you be conducting this research project in Northern Ireland?",
+        "IQA03014": "Based on the information you have provided you are likely to need to apply to the Medicines and Healthcare products Regulatory Agency (MHRA) and Research Ethics Committee (REC). Please rReview the guidance and confirm what review is required.",
+        "IQA03015": "Based on the information you have provided you are likely to need to apply to a Research Ethics Committee (REC) but not to the Medicines and Healthcare products Regulatory Agency (MHRA). Please rReview the guidance and confirm what review is required."
+      },
+      "Device_Investigation_No_MHRA": {
+        "IQA03247": "Is the manufacturer (or other organisation responsible for developing the device) the same organisation named as lead sponsor for this study?",
+        "IQA03249": "Name of the manufacturer:",
+        "IQA03250": "Manufacturer's trade name for the device:",
+        "IQA03252": "Name:",
+        "IQA03253": "Number:",
+        "IQA03254": "Generic name of device and principal intended uses(s):",
+        "IQA03255": "Length of time since device came into use:",
+        "IQA03256": "Select the type of research project. For all products with UKCA/CE UKNI/CE mark please , attach instructions for use.",
+        "IQA03257": "Will the device be used within its intended population?",
+        "IQA03258": "Description of any new device, materials, method of use or operation with a summary of the intended purpose.",
+        "IQA03259": "Composition of any new implantable materials, including summary of biocompatibility findings from studies to date.",
+        "IQA03260": "A summary of any modifications to UKCA/CE UKNI/CE marked devices.",
+        "IQA03261": "A summary of any proposed changes to the UKCA/CE UKNI/CE marked intended purpose.",
+        "IQA03262": "Are the procedures involved non-invasive or minimally invasive? ",
+        "IQA03263": "Describe the arrangements for manufacture of the investigational device.",
+        "IQA03264": "What safety and performance testing has been undertaken on the investigational device and its constituents?",
+        "IQA03265": "Describe the sponsor’s plans for further development and use of the device. Indicate whether the plans include making it available (whether for a fee or not) to other legal entities or working with a device manufacturer or other company to commercialise the product.",
+        "IQA03266": "Give details of the arrangements for ensuring that the device has been manufactured to the standards expected of an equivalent UKCA/CE UKNI/CE marked device, and that all relevant testing to demonstrate compliance with these standards has been undertaken."
+      }
+    }
+  },
+  "Project_Details": {
+    "Field_Labels": {
+      "Project_Information": {
+        "IQA0036": "NEW Provide protocol reference number",
+        "IQA0037": "Provide the EU Clinical Trial (EUCT) number",
+        "IQA0040": "Research project public summary:\n* explain why the research is being carried out, the questions it seeks to answer, its design and methodology\n* do not reproduce or refer to the protocol \n* complete this section in language understandable to a member of the public (maximum 300 words)\n\nThis summary will be published on the Health Research Authority (HRA) website following approval."
+      },
+      "Public_Involvement": {
+        "IQA0045": "In which aspects of the project have you already actively involved patients or their carers, service users or members of the public?\nInclude patient and public involvement from wider programmes that has informed this project. Select all that apply:",
+        "IQA0046": "Give details of how you involved public contributors",
+        "IQA0048": "Insights from patients, carers, services users or members of the public could have helped to ensure that this research reflects the priorities, needs and concerns of both the intended participant population, and of the people the research is intended to benefit. What are your reasons for not involving these people?",
+        "IQA0042": "How did you identify the public contributors that you involved?  Select all that apply",
+        "IQA0043": "Give details how you identified the public contributors to that you involved.",
+        "IQA0044": "Tell us about the public contributors you worked with: \n• how many of them were there?\n• were the perspectives those of patients, of carers, of service users, of people with experience of being involved in research, or of members of the public?\n• what was relevant about their skills and experience (this might include their demographic information)?",
+        "IQA03274": "What did your public contributors say was important to them about how this research is done?",
+        "IQA0162": "How do you plan to involve public contributors in the remaining stages of the research process?  Select all that apply:",
+        "IQA0163": "Give details of other aspects public contributors will advise on or contribute to",
+        "IQA03275": "Justify your approach and describe the benefits and challenges of involving public contributors",
+        "IQA03276": "Justify the approach and absence of public involvement"
+      },
+      "Research_Design": {
+        "IQA0049": "Select the methodology or methodologies you will be using for this project:",
+        "IQA0050": "Give details of the methodologies you will be using",
+        "IQA0052": "Specify the methodology",
+        "IQA0053": "Give more details of the methodology",
+        "IQA0054": "Is your project a clinical trial to study a novel intervention?",
+        "IQA0055": "Is your project a randomised clinical trial to compare any interventions in clinical practice?",
+        "IQA0056": "Are all the interventions that you are comparing routine 'gold standard' care options in clinical practice?",
+        "IQA0057": "What is the principal research question or objective? Describe this in language understandable to a member of the public.",
+        "IQA0058": "What are the secondary research question or objectives if applicable? Describe this in language understandable to a member of the public.",
+        "IQA03277": "Does your project use AI (artificial intelligence)?",
+        "IQA03278": "In relation to designing, developing or testing an AI product or tool, what best describes the type of AI? Select all that apply:",
+        "IQA03279": "Describe the type of AI being used in your project.",
+        "IQA03280": "In relation to using an existing AI product or tool for its intended purpose, what best describes the type of AI? Select all that apply:",
+        "IQA03281": "Describe the type of AI being used in your project.",
+        "IQA0060": "State exactly what will happen to participants, their tissue or data, how many times and in what order:\n* complete this in language understandable to a member of the public"
+      },
+      "Research_Activities": {
+        "IQA0062": "What is the intervention or treatment being studied? \n* provide the trade name, and brand name where relevant, of any device or medicine. \n* for surgical, psychological or non-clinical interventions briefly describe the nature of the intervention\n* if relevant, include details of any control arm",
+        "IQA0063": "Is this treatment first-in-human?",
+        "IQA0064": "Does your project involve a change or a delay to patients’ standard treatment or care?",
+        "IQA0065": "Are any of the treatments in this project being compared to standard care?",
+        "IQA0066": "Describe what arrangements you will put in place to address any changes in standard care during the project, for example resulting from new guidance from the National Institute for Health and Care Excellence (NICE).",
+        "IQA03273": "What type of questionnaires are you using in this project? Select all that apply:",
+        "IQA0068": "Could Is it possible there a possibility that any the project involve interviews, questionnaires or group discussions include with topics that might be sensitive, embarrassing or upsetting?",
+        "IQA0070": "Could Is it possible there a possibility that the interviews, questionnaires or group discussions include topics that might result in criminal or other disclosures?",
+        "IQA0071": "Explain how any requirement for criminal or other disclosures will be dealt with in line with legal obligations, safeguarding arrangements and professional procedures and guidance.",
+        "IQA0072": "What are the potential benefits for participants and society (including future patients)?",
+        "IQA0074": "Any risks, side-effects or burdens of any research activities or monitoring of participants:",
+        "IQA0075": "Any risks due to a change or delay to standard treatment or care:",
+        "IQA0076": "Any risk or burden due to interviews, questionnaires or group discussions that include topics that might be sensitive, embarrassing or upsetting:",
+        "IQA0077": "Will you inform the participants’ General Practitioners (or any other health or care professional responsible for their care) that they are taking part in the study?",
+        "IQA0078": "Explain the circumstances when you will contact General Practitioners or other responsible health or care professionals about a participant. What will you tell participants about this?",
+        "IQA0079": "What will happen with treatment after the project has finished?",
+        "IQA0080": "Describe all the arrangements for continuued provision of treatment after the project has finished, including funding. Give details of the parties that have agreed these arrangements.",
+        "IQA0081": "Describe the care arrangements after the project has finished.  Justify these arrangements",
+        "IQA0082": "When do you plan to finish collecting data for this project in the UK?"
+      },
+      "Participants": {
+        "IQA0083": "What are the primary conditions or problems being studied? Select all that apply",
+        "IQA0084": "List the principal inclusion criteria for selection of participants, data or samples",
+        "IQA0085": "List the principal exclusion criteria or selection of participants, data or samples",
+        "IQA0086": "How are you making sure that your study sample reflects the real-world population that the research is for and about? Consider people and communities who are often excluded from research in the field you are studying.\nYou may attach evidence or assessments already agreed with funders or sponsors.",
+        "IQA0087": "How will you ensure that the people you have chosen to include in your project are able to participate fully?  Consider factors such as health, identity, cultural, socioeconomic factors, literacy, accessibility, or other circumstances to facilitate participation in your research.\nYou may attach evidence or assessments already agreed with funders or sponsors.",
+        "IQA0088": "Select which groups will participate or provide data or samples in this project. Select all that apply:",
+        "IQA0089": "Give details of the groups participating or providing data or samples in this project",
+        "IQA0090": "When do you plan to start recruiting participants or collecting samples or data?",
+        "IQA0091": "How long do you expect each participant to be in the project in total?",
+        "IQA0092": "What arrangements will apply to potential participants who are involved in current research or have recently been involved in any research prior to recruitment?",
+        "IQA0093": "Could any of the potential participants for the project be considered to be vulnerable at the time of approach?"
+      },
+      "Consent": {
+        "IQA0096": "Will you only include adults lacking capacity to consent for themselves as participants?",
+        "IQA0095": "Will you only include children as participants?",
+        "IQA0097": "Will you seek consent from participants prior to participation in the project?",
+        "IQA0098": "Select the reasons why consent will not be obtained.  Select all that apply:",
+        "IQA0099": "Justify why you will not seek consent:",
+        "IQA0100": "Describe any arrangements for seeking consent using simplified methods:",
+        "IQA0102": "How long will you allow potential participants to decide whether or not to take part?",
+        "IQA0103": "Explain any payments, reimbursement of expenses or any other benefits or incentives to participants:",
+        "IQA0104": "What arrangements will you make to comply with the principles of the Welsh Language Act in the provision of information to participants in Wales?",
+        "IQA0105": "What consent arrangements will you make for persons who:\na) might not hear verbal explanations sufficiently, or \nb) might not be able to read written information in English sufficiently, or \nc) have special communication needs?",
+        "IQA0106": "What arrangements will you make for participants who are unable to confirm their consent in writing?",
+        "IQA0107": "What arrangements will you make to ensure participants receive any information that becomes available during the course of the project that may be relevant to their continued participation?",
+        "IQA0108": "What steps would you take if a participant, who has given informed consent, loses capacity to consent during the research project? Select one option only.",
+        "IQG0109": "Proceed to complete Adults Lacking Capacity"
+      },
+      "Risks_Conflicts": {
+        "IQA0110": "Describe potential risks to the research team in conducting the project and state how these will be managed",
+        "IQA0111": "Does the Chief Investigator or any other investigator or collaborator have any direct personal involvement (for example, financial, share-holding, personal relationship) in the organisations sponsoring or funding the project that may give rise to a possible conflict of interest?",
+        "IQA0112": "Give details of any potential relevant conflict of interest.",
+        "IQA0113": "Is the Chief Investigator a member of any NHS Research Ethics Committee?",
+        "IQA0114": "Select all Research Ethics Committees (REC) the Chief Investigator or any other investigators are a member of.  Select all that apply.",
+        "IQA0115": "Will the Chief Investigator or any other investigator receive any personal payment over and above normal salary, or any other benefits or incentives, for taking part in this project?",
+        "IQA0116": "Give details of payments, benefits or any other incentives."
+      },
+      "Summary_Ethical_Issues": {
+        "IQA0117": "Summarise the main ethical issues arising from the project. \n* consider risks, burdens and benefits involved\n* include justifications for balancing risks and benefits (such as the involvement of potential participants being vulnerable at time of approach) \n* complete this in language understandable to a member of the public. ",
+        "IQA0118": "Is this application any of the following:\n\n",
+        "IQA0119": "Provide the IRAS ID of the project that received an unfavourable opinion",
+        "IQA0120": "Explain how the reasons for the unfavourable opinion have been addressed in this application.",
+        "IQA0039": "Provide any information about the linked project that will help reviewers to understand the background to this application or the decisions you have made in this application."
+      },
+      "Research_Analysis": {
+        "IQA0121": "How has the quality of the research been assessed?  Select all that apply.",
+        "IQA0122": "Give details of how the quality of the research has been assessed",
+        "IQA0123": "Explain why this review process is appropriate to the nature of the project and if any issues raised by the review have not been addressed.  Give details if the review only relates to part of the project.",
+        "IQA0124": "What will the primary form of analysis be?",
+        "IQA0125": "Give details of the methods for analysing the data.",
+        "IQA0126": "How have the statistical aspects of the project been reviewed?  Select all that apply.",
+        "IQA0127": "Give details of the person or organisation who undertook the statistical review, and how you have addressed their recommendations.",
+        "IQA0128": "What is the primary outcome measure for the project?",
+        "IQA0129": "What are the secondary outcome measures (if any)?",
+        "IQA0130": "How many participants, samples, or data records do you plan to study in total? Describe why you chose this number. If there is more than one group, give further details.",
+        "IQA0131": "How was the sample size decided upon? If a formal sample size calculation was used, indicate how this was done, giving sufficient information to justify and reproduce the calculation.",
+        "IQA0132": "What are the criteria for electively stopping the project early?"
+      },
+      "Governance_Management": {
+        "IQA0139": "Give details of the source of all funding or materials supplied. ",
+        "IQA0140": "Describe any logistical, legal, or management risks relating to your project and say .  State how you are addressing them. Studies that present a minimal risk to participants may still raise complex organisational or legal issues.",
+        "IQA0147": "What arrangements will be put in place for the monitoring and auditing of the conduct of the project?",
+        "IQA0148": "What arrangements will be made to review interim safety and efficacy data from the project? Will a formal Data Monitoring Committee or equivalent body be convened?",
+        "IQA0149": "What arrangements will be made for insurance or indemnity to meet the potential legal liability of the sponsors for harm to participants arising from the management of the project?  Provide any insurance certificates.",
+        "IQA0150": "What arrangements will be made for insurance or indemnity to meet the potential legal liability of the sponsors or employers for harm to participants arising from the design of the project?  Provide any insurance certificates.",
+        "IQA0151": "What arrangements will be made for insurance or indemnity to meet the potential legal liability of investigators or collaborators arising from harm to participants in the conduct of the project? \n* Provide details of any time limits to the cover.  \n* Explain the arrangements that would apply if the insurance ceases.\n* Provide any insurance certificates.",
+        "IQA0152": "Describe and justify which participant groups are excluded from cover under the insurance.",
+        "IQA0153": "Have sponsors made arrangements for payment of compensation in the event of harm to the participants where no legal liability arises?",
+        "IQA0154": "Give details of the arrangements for compensation.",
+        "IQA0155": "Have sponsors delegated any site management responsibilities to a Contract Research Organisation or a Clinical Trials Unit?",
+        "IQA0156": "Give details of the Contract Research Organisation or Clinical Trials Unit with site management responsibilities.",
+        "IQA0157": "Has responsibility for any specific research activities or procedures been delegated to a subcontractor?",
+        "IQA0158": "Give details of subcontractors and the proposed oversight arrangements."
+      },
+      "Transparency": {
+        "IQG0003": "Most research should be registered in a publicly accessible registry and it is expected that all researchers, research sponsors and others meet this fundamental best practice standard.  ",
+        "IQA1169": "Is the project already registered elsewhere?",
+        "IQA0165": "Registration and research project",
+        "IQA0166": "Provide clear justification for the deferral request.",
+        "IQA0167": "Confirm the arrangements for registration of this project. Select all that apply:",
+        "IQA0168": "Provide details of other arrangements for project registration.",
+        "IQA0169": "Confirm the arrangements for registration of this project. Select all that apply.",
+        "IQA0170": "ISRCTN",
+        "IQA0171": "Clinicaltrials.gov",
+        "IQA0172": "Provide the name of any other registries and the reference number",
+        "IQG0004": "The Health Research Authority will publish a summary of the project, once approved unless a deferral is requested and agreed. \nDeferral will only be agreed where a strong justification is provided. ",
+        "IQA0173": "Project public summary publication deferral request ",
+        "IQA0174": "Provide clear justification for the deferral request.",
+        "IQA0175": "You should define the end of your project and notify relevant bodies at the end of the project.  What is the planned end date?\n",
+        "IQA0176": "A final report should be submitted to the Research Ethics Committee (REC) within 12 months of the end of the project, including a public summary of results. How else do you intend to report and disseminate the results of the project? Select all that apply:",
+        "IQA0177": "Give details of other reporting and dissemination plans",
+        "IQA0178": "Results of the research provide feedback to participants on the outcome and how they have contributed.  This information should be accessible and easy to understand.  \n* explain how and when you will inform participants of the results, or give reasons if there are no arrangements to do this",
+        "IQA0179": "You should enable the sharing of study data, with appropriate safeguards in place, to other interested groups and communities. Sharing data maximises and respects the contribution of participants and enables and supports further re-use. Do you plan to share de-identified individual participant-level data?",
+        "IQA0180": "Give details of your plans for sharing de-identified individual participant-level data, or describe your alternative plans for making data available for scrutiny or re-use.",
+        "IQA0181": "Will you have any remaining human biological material at the end of the project?",
+        "IQA0182": "The UK Clinical Research Collaboration (UKCRC) Tissue Directory and Coordination Centre advises researchers to register sample collections with them, to maximise the use of the samples. Will you be registering any remaining samples with them?",
+        "IQA0183": "The Human Tissue Authority and Medical Research Council advise researchers to consider options for maximising use before disposal. You should enable the sharing of tissue samples, with appropriate safeguards in place, to other interested groups and communities. Sharing tissue maximises and respects the contribution of participants and enables and supports further research. Justify the post-study arrangements or destruction of the material.",
+        "IQA0185": "Email",
+        "IQA0186": "Telephone",
+        "IQA0187": "Postal address",
+        "IQA0189": "Email",
+        "IQA0190": "Telephone",
+        "IQA0191": "Postal address"
+      },
+      "Confidentiality_Info_Management": {
+        "IQA0251": "Is this study limited to working with data only?"
+      }
+    }
+  },
+  "Project_Filter": {
+    "Field_Labels": {
+      "Project_Details": {
+        "IQA0002": "Short project title",
+        "IQA0001": "Identify your role",
+        "IQA0003": "Full project title",
+        "IQA0004": "Is this project likely to be managed as commercial research?",
+        "IQA03271": "Are you seeking NIHR funding for this project?",
+        "IQG0001": "The following services to support researchers are available via the Central Portfolio Management System (CPMS)\n• creation of a Schedule of Events Cost Attribution Template (SoECAT) to support non-commercial funding applications and the set-up of studies in the NHS or HSC\n• creation of an interactive costing tool (for commercial sponsors) for set up of studies in the NHS or HSC \n• access to feasibility services\n• access to clinical research network support",
+        "IQA0005": "Do you wish to access one or more of the CPMS services? If you select 'Yes', IRAS will share information with the CPMS once the 'continue' button at the bottom of the page has been pressed. ",
+        "IQA0006": "Provide the email of the person who will be the initial contact for CPMS. ",
+        "IQG0002": "The person identified will be able to access CPMS [link to CPMS SIM Homepage Link]."
+      },
+      "Project_Scope": {
+        "IQA0012": "Is the research project or any part of it being undertaken as an educational project?",
+        "IQA0061": "Select all the activities that will be involved in this project:",
+        "IQA0014": "Is this application to establish a research bioresource?",
+        "IQA0015": "Will the bioresource be established within a NHS or HSC diagnostic archive?",
+        "IQA0017": "Is this project a clinical trial of an investigational medicinal product (CTIMP)?",
+        "IQA0018": "Select the option that applies to your project:",
+        "IQA03282": "Does any investigational medicinal product contain genetically modified organisms?",
+        "IQA0020": "Is this project a clinical investigation or other study of a medical device (including digital technology)?",
+        "IQA0021": "Does the project involve exposing participants to any ionising radiation?",
+        "IQA0022": "Will you be taking or using any human biological samples?",
+        "IQA0024": "Will identifiable patient data be accessed outside the care team without prior consent at any stage of the project (including identification of potential participants)?",
+        "IQA0025": "Do you plan at any stage of the project to undertake research with adults lacking capacity to consent for themselves that would otherwise require consent? ",
+        "IQA0026": "Will you include any participants who are children?",
+        "IQA0027": "Will you include any participants who are prisoners or young offenders in the custody of His Majesty's Prison and Probation Service (HMPPS) or who are offenders supervised by the probation service in England or Wales?",
+        "IQA0028": "Will this project involve any activity under the responsibility of the Ministry of Defence (MOD)?",
+        "IQA0029": "Will this project involve activities regulated by the Human Fertilisation and Embryology Authority (HFEA)?"
+      },
+      "Research_Location": {
+        "IQA0142": "Is this project taking place in any countries other than the UK?",
+        "IQA0143": "List the countries outside the UK participating in this project.",
+        "IQA0032": "In which countries of the UK will the project take place? Select all that apply:",
+        "IQA0033": "Where in the UK will the human biologicial samples or data be held? Select all that apply:",
+        "IQA0034": "From where in the UK will human biologicial samples or data be obtained? Select all that apply:",
+        "IQA0144": "Where will the project be taking place? Select all that apply:",
+        "IQA0145": "Give details of other organisations responsible for conducting the project.",
+        "IQA0146": "Will you allow your research sites to use Participant Identification Centres (PICs)?"
+      }
+    }
+  },
+  "Student": {
+    "Field_Labels": {
+      "Educational_Project": {
+        "IQA0218": "NEW Describe the role of the students in the project",
+        "IQA0219": "Is the project being undertaken as a group project? ",
+        "IQA0222": "Level of course",
+        "IQG0005": "You cannot proceed with your project if it is at undergraduate level or below and not a group project led by a supervisor.",
+        "IQA0223": "You should complete the student research toolkit and confirm whether you are eligible to proceed with your project. You should include the relevant suplementary declaration form from your supervisor or course leader with your IRAS application. If you are not eligible you cannot proceed with your project.  \n\nIndicate which declaration is included as part of your project submission:",
+        "IQA0220": "University name",
+        "IQA0221": "Course name",
+        "IQA0225": "Justify why the university is not taking on the role of sponsor. If the project will be in the NHS this is not sufficient reason for the sponsor to be an NHS organisation.",
+        "IQA0227": "First name",
+        "IQA0228": "Last name",
+        "IQA0229": "Email",
+        "IQA0237": "Who will act as Chief Investigator for this project?",
+        "IQA0232": "First name",
+        "IQA0233": "Last name",
+        "IQA0234": "Job title",
+        "IQA0235": "University",
+        "IQA0236": "Email"
+      }
+    }
+  },
+  "Tissue": {
+    "Field_Labels": {
+      "Human_Biological_Samples": {
+        "IQA0253": "NEW Describe this type of materials. Give details of the samples.",
+        "IQA0254": "Will you be collecting new samples from participants? This could be new samples collected from participants for the project, or collecting samples for research at the same time as routine clinical samples.",
+        "IQA0255": "Will the samples be provided as extra or surplus taken during a clinically directed procedure with consent? ",
+        "IQA0256": "How will the samples be collected? Describe what will happen to participants and how much sample will be collected.  ",
+        "IQA0257": "Will these participants be living or deceased?",
+        "IQA0258": "Will the samples be removed from the deceased in England, Northern Ireland, Scotland or Wales?",
+        "IQA0259": "Give details of any relevant Human Tissue Authority licences covering the premises where samples will be removed from the deceased. If a licence is not yet in place, confirm the arrangements for obtaining a relevant licence.",
+        "IQA0260": "Will the material be identifiable to the research team?",
+        "IQA0261": "Does this project come within the scope of the consent for the use of the material in research?",
+        "IQA0262": "The geographical scope of the Human Tissue Act is largely limited to England, Wales and Northern Ireland. Will this material be exported from, or imported into, these nations from another nation outside of the geographical remit of the Human Tissue Act (including to, or from, Scotland)?",
+        "IQA0263": "The Human Tissue Act (Scotland) applies to Scotland. Will this material be exported from, or imported into, Scotland from another nation outside of the geographical remit of the Human Tissue Act (Scotland)?",
+        "IQA0264": "Give reasons for the import or export activity that will take place and clarify whether a Material Transfer Agreement will be in place to manage this activity.",
+        "IQA0265": "What consent arrangements will apply to collection and use of this sample? Where relevant, give details of any prior consent for use of samples from existing collections. If the use of this sample involves the analysis of DNA, or the analysis of RNA with the intention of providing information about DNA, confirm that explicit consent will be in place.",
+        "IQA0266": "Give details of where the sample will be stored, who will have access and the custodial arrangements.",
+        "IQA0267": "Will the sample be processed or stored under study-specific arrangements or in line with normal clinical arrangements for the organisation?",
+        "IQA0268": "What will happen to this material following the end of the project?",
+        "IQA0269": "Explain how destruction of the material will be undertaken. If this relates to relevant material describe how it will comply with the Human Tissue Authority Code of Practice.",
+        "IQA0270": "Give further details of the proposed post-study arrangements including whether any relevant material will be rendered acellular."
+      },
+      "Health_Related_Findings": {
+        "IQA0271": "Is it possible that the project could produce health related findings of clinical significance for donors or their relatives?",
+        "IQA0272": "Will arrangements be made to notify the individuals concerned?",
+        "IQA0273": "Explain why individuals concerned will not be notified."
+      }
+    }
+  }
+}

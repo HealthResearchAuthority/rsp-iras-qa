@@ -1,0 +1,55 @@
+{
+  "Project_Filter": {
+    "title": "",
+    "section_headings": ["Project details", "Project scope", "Research location"],
+    "page_name": "Project Filter"
+  },
+  "Project_Details": {
+    "Valid_Data_All_Fields": {
+      "short_project_title_text": "Test Research - Short Title",
+      "full_project_title_text": "Test Research - Full Title",
+      "is_project_managed_commercial_research_radio": "Yes",
+      "is_nihr_funding_radio": "Yes",
+      "access_cpms_services_radio": "Yes",
+      "email_initial_contact_cpms_text": "test_cpms_contact@test.com"
+    },
+    "Data_With_No_NIHR_Funding": {
+      "short_project_title_text": "Sample Research - Short Title",
+      "full_project_title_text": "Sample Research - Full Title",
+      "is_project_managed_commercial_research_radio": "Yes",
+      "is_nihr_funding_radio": "No",
+      "access_cpms_services_radio": "Yes"
+    }
+  },
+  "Project_Scope": {
+    "Valid_Data_All_Fields": {
+      "is_educational_project_radio": "Yes",
+      "activities_involved_checkbox": ["Use of previously collected data about people","Research involving staff only","Non-clinical activities with people (other than staff), such as interviews or surveys","Treatment, such as medicines, devices, surgery, vaccines or therapies"],
+      "is_research_bioresource_radio": "Yes",
+      "bioresource_established_nhs_hsc_radio": "Yes",
+      "is_ctimp_radio": "Yes",
+      "options_applied_for_project_radio": "combined trial of an investigational medicinal product and an investigational medical device",
+      "product_contain_genetically_modified_organism_radio": "Yes",
+      "is_clinical_or_medical_devices_radio": "Yes",
+      "exposing_ionising_radiation_radio": "Yes",
+      "using_human_biological_samples_radio": "Yes",
+      "patient_data_accessed_outside_radio": "Yes",
+      "research_with_adults_lacking_capacity_to_consent_radio": "Yes",
+      "include_children_radio": "Yes",
+      "include_prisoners_offenders_radio": "Yes",
+      "involve_ministry_of_defence_radio": "Yes",
+      "involve_hfea_radio": "Yes"
+    }
+  },
+  "Research_Location": {
+    "Valid_Data_All_Fields": {
+      "is_outside_uk_radio": "UK only",
+      "places_in_uk_for_project_checkbox": ["England","Northern Ireland","Wales"],
+      "where_human_sample_held_checkbox": ["England","Northern Ireland"],
+      "where_human_sample_obtained_checkbox": ["Northern Ireland","Scotland","Wales"],
+      "where_project_take_place_checkbox": ["Independent research units","Phase 1 trial units (non-NHS or HSC organisation)","Prison or probation setting","Social care settings","Voluntary sector or private organisations","Community settings"],
+      "details_other_organisation_text": "test organisation",
+      "use_pic_radio": "Yes"
+    }
+  }
+}

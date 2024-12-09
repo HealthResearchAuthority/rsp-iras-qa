@@ -1,0 +1,15 @@
+{
+  "Booking": {
+    "title": "",
+    "section_headings": ["Application booking"],
+    "page_name": "Booking"
+  },
+  "Application_Booking": {
+    "Valid_Data_All_Fields": {
+      "agree_project_information_be_used_text": "I Agree - Example"
+    },
+    "Dont_Agree_Data": {
+      "agree_project_information_be_used_text": "I Don't Agree - Example"
+    }
+  }
+}
