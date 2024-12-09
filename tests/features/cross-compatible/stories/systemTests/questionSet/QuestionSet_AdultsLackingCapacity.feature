@@ -22,7 +22,7 @@ Feature: Question Set - Research Application - Adults Lacking Capacity
     Examples:
       | Project   | Adults_Lacking_Capacity_CTIMP                  | Adults_Lacking_Capacity_Non_CTIMP | Navigation_Button |
       | Project_X | Valid_Data_All_Fields                          | Valid_Data_All_Fields             | Continue          |
-      # | Project_Y | Participant_With_No_Urgent_Treatment_Recruited | Valid_Data_All_Fields             | Continue          |
+      | Project_Y | Participant_With_No_Urgent_Treatment_Recruited | Valid_Data_All_Fields             | Continue          |
 
 @rsp-2048
   Scenario Outline: Validate the question set labels in adults lacking capacity page

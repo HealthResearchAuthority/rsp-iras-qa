@@ -22,7 +22,7 @@ Feature: Question Set - Research Application - Tissue
     Examples:
       | Project   | Human_Biological_Samples      | Health_Related_Findings | Navigation_Button |
       | Project_X | Valid_Data_All_Fields         | Valid_Data_All_Fields   | Continue          |
-      # | Project_Y | New_Samples_From_Participants | Valid_Data_All_Fields   | Continue          |
+      | Project_Y | New_Samples_From_Participants | Valid_Data_All_Fields   | Continue          |
 
 @rsp-2048
   Scenario Outline: Validate the question set labels in tissue page

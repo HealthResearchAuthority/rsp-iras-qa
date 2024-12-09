@@ -21,7 +21,7 @@ Feature: Question Set - Research Application - Children
     Examples:
       | Project   | Children                   | Navigation_Button |
       | Project_X | Valid_Data_All_Fields      | Continue          |
-      # | Project_Y | Child_Not_Treated_Urgently | Continue          |
+      | Project_Y | Child_Not_Treated_Urgently | Continue          |
 
 @rsp-2048
   Scenario Outline: Validate the question set labels in children page

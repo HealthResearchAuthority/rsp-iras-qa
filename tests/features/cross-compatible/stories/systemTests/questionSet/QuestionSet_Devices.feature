@@ -22,7 +22,7 @@ Feature: Question Set - Research Application - Devices
     Examples:
       | Project   | Devices_Filter_Questions            | Device_Investigation_No_MHRA | Navigation_Button |
       | Project_X | Valid_Data_All_Fields               | Valid_Data_All_Fields        | Continue          |
-      # | Project_Y | Research_Conducted_Northern_Ireland | Valid_Data_All_Fields        | Continue          |
+      | Project_Y | Research_Conducted_Northern_Ireland | Valid_Data_All_Fields        | Continue          |
 
 @rsp-2048
   Scenario Outline: Validate the question set labels in devices page

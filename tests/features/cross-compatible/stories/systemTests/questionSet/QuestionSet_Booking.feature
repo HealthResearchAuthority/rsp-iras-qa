@@ -21,7 +21,7 @@ Feature: Question Set - Research Application - Booking
     Examples:
       | Project   | Booking               | Navigation_Button |
       | Project_X | Valid_Data_All_Fields | Continue          |
-      # | Project_Y | Dont_Agree_Data       | Continue          |
+      | Project_Y | Dont_Agree_Data       | Continue          |
 
 @rsp-2048
   Scenario Outline: Validate the question set labels in booking page
