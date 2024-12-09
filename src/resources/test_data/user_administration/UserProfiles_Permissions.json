@@ -1,0 +1,44 @@
+{
+  "Standard_public_user_profile_permissions": {
+    "Create": "Y",
+    "Read": "Y",
+    "Update": "Y"
+  },
+  "Standard_public_user_profile_roles": {
+    "System_Level": "Y",
+    "Project_Level": "Y"
+  },
+  "Standard_public_user_profile_applicable_services": {
+    "Make_changes": "Y",
+    "Review_research": "Y",
+    "Plan_and_prepare": "Y"
+  },
+  "Approvals_user_profile_permissions": {
+    "Create": "Y",
+    "Read": "Y",
+    "Update": "Y"
+  },
+  "Approvals_user_profile_roles": {
+    "System_Level": "Y",
+    "Project_Level": "Y"
+  },
+  "Approvals_user_profile_applicable_services": {
+    "Make_changes": "N",
+    "Review_research": "Y",
+    "Plan_and_prepare": "N"
+  },
+  "Pharmacy_Reviewer_user_profile_permissions": {
+    "Create": "Y",
+    "Read": "Y",
+    "Update": "Y"
+  },
+  "Pharmacy_Reviewer_user_profile_roles": {
+    "System_Level": "Y",
+    "Project_Level": "Y"
+  },
+  "Pharmacy_Reviewer_user_profile_applicable_services": {
+    "Make_changes": "N",
+    "Review_research": "Y",
+    "Plan_and_prepare": "N"
+  }
+}

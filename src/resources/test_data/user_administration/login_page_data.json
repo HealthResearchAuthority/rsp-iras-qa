@@ -1,0 +1,15 @@
+{
+  "Admin_User": {
+    "Email_address": "future_iras_auto_admin_user@dev.id.nihr.ac.uk",
+    "Password": "`${process.env.ADMIN_USER_PASS}`"
+  },
+  "UserAdministration_Login_Page": {
+    "register_link": "Link to register",
+    "help_link": "Link to help",
+    "forgot_password": "Forgotten password?"
+  },
+  "UserAdministration_Page": {
+    "ManageReviewbodies_link": "Manage Review bodies",
+    "ManageUsers_link": "Manage Users"
+  }
+}

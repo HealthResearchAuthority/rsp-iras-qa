@@ -1,0 +1,32 @@
+{
+  "Standard_public_user_profile_persona": {
+    "Researchers": "Y",
+    "Sponsors": "Y",
+    "Bioresource_managers_experts": "Y",
+    "Delivery_organisation": "Y",
+    "Reviewers": "Y",
+    "Operational_Staff": "Y",
+    "Support_Staff": "Y",
+    "Professionals_participants_public": "Y"
+  },
+  "Approvals_user_profile_persona": {
+    "Researchers": "N",
+    "Sponsors": "N",
+    "Bioresource_managers_experts": "N",
+    "Delivery_organisation": "N",
+    "Reviewers": "Y",
+    "Operational_Staff": "Y",
+    "Support_Staff": "N",
+    "Professionals_participants_public": "N"
+  },
+  "Pharmacy_Reviewer_user_profile_persona": {
+    "Researchers": "N",
+    "Sponsors": "N",
+    "Bioresource_managers_experts": "N",
+    "Delivery_organisation": "N",
+    "Reviewers": "Y",
+    "Operational_Staff": "Y",
+    "Support_Staff": "N",
+    "Professionals_participants_public": "N"
+  }
+}
