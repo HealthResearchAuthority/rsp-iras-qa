@@ -35,9 +35,9 @@ Feature: Question Set - Research Application - Student
     And I can see the 'Student' question set
     And I fill the educational project section in the student page with '<Educational_Project>'
     When I click the 'Validate' button on the 'Question_Set'
-    Then I see the expected validation errors appearing for '<Validation>' on the 'student' page
+    Then I see the expected validation errors appearing on the 'student' page based on those inputs
 
     Examples:
-      | Project   | Educational_Project          | Validation                 |
-      | Project_X | No_Fields_Completed          | All_Mandatory_Fields       |
-      | Project_Y | No_University_Or_Course_Name | University_And_Course_Name |
+      | Project   | Educational_Project          |
+      | Project_X | No_Fields_Completed          |
+      | Project_Y | No_University_Or_Course_Name |

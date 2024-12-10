@@ -1,4 +1,4 @@
-import { createBdd } from 'playwright-bdd';
+import { createBdd, DataTable } from 'playwright-bdd';
 import { expect, test } from '../../hooks/CustomFixtures';
 
 const { Given, When, Then } = createBdd(test);
@@ -163,17 +163,65 @@ Given(
 );
 
 Then(
-  'I see the expected validation errors appearing for {string} on the {string} page',
-  async ({ commonItemsPage }, datasetName: string, pageName: string) => {
+  'I see the expected validation errors appearing on the {string} page based on those inputs',
+  async ({ commonItemsPage }, pageName: string, data: DataTable) => {
+    const combinedInputsUsed = new Map<string, any>();
+    const expectedAlertBoxErrors: string[] = [];
+    const expectedFieldErrors: string[] = [];
+
     const pageObject = await commonItemsPage.getQsetPageObject(pageName);
-    const expectedAlertBoxErrors = await commonItemsPage.getQsetPageValidationData(
-      pageName,
-      'Alert_Box_Errors',
-      datasetName
-    );
-    const expectedFieldErrors = await commonItemsPage.getQsetPageValidationData(pageName, 'Field_Errors', datasetName);
+    for (const row of data.hashes()) {
+      const sectionInputsUsed = await commonItemsPage.getQsetPageValidationData(pageName, row.Section, row.Dataset);
+      sectionInputsUsed.forEach((value: any, key: string) => {
+        combinedInputsUsed.set(key, value);
+      });
+    }
+    await commonItemsPage.page.pause();
+
+    for (const key in pageObject['projectFilterPageTestData'].All_Mandatory_Validations) {
+      if (!combinedInputsUsed.has(key)) {
+        console.log(
+          'INPUT DOES NOT CONTAIN MANDATORY FIELD: ' +
+            key +
+            ': ' +
+            pageObject['projectFilterPageTestData'].All_Mandatory_Validations[key]
+        );
+        expectedAlertBoxErrors.push(pageObject['projectFilterPageTestData'].All_Mandatory_Validations[key]);
+        expectedFieldErrors.push(key);
+      } else if (!combinedInputsUsed.get(key)) {
+        //possiby add as an OR statement above
+        console.log(
+          'INPUT CONTAINS EMPTY MANDATORY FIELD: ' +
+            key +
+            ': ' +
+            pageObject['projectFilterPageTestData'].All_Mandatory_Validations[key]
+        );
+        expectedAlertBoxErrors.push(pageObject['projectFilterPageTestData'].All_Mandatory_Validations[key]);
+        expectedFieldErrors.push(key);
+      }
+    }
+    //Perhaps can combine above and below in single doesn't have it OR has it but is empty statement
+    for (const key in pageObject['projectFilterPageTestData'].All_Conditional_Validations) {
+      if (combinedInputsUsed.has(key) && !combinedInputsUsed.get(key)) {
+        console.log(
+          'INPUT CONTAINS EMPTY CONDITIONAL FIELD: ' +
+            key +
+            ': ' +
+            pageObject['projectFilterPageTestData'].All_Conditional_Validations[key]
+        );
+        expectedAlertBoxErrors.push(pageObject['projectFilterPageTestData'].All_Conditional_Validations[key]);
+        expectedFieldErrors.push(key);
+      }
+    }
+    await commonItemsPage.page.pause();
+    console.log('ALERTS EXPECTED:');
+    console.log(expectedAlertBoxErrors);
+    console.log('FIELDS EXPECTED:');
+    console.log(expectedFieldErrors);
+    await commonItemsPage.page.pause();
+
     await expect(commonItemsPage.alert_box).toBeVisible();
-    await expect(commonItemsPage.alert_box_heading).toHaveText(
+    await expect(commonItemsPage.alert_box_headings).toHaveText(
       commonItemsPage.questionSetData.Validation.alert_box_heading
     );
 
@@ -184,7 +232,15 @@ Then(
     for (const key of expectedFieldErrors) {
       const expectedFieldErrorMessage = await commonItemsPage.getFieldTypeErrorMessage(key, pageObject);
       const actualFieldError = await commonItemsPage.getFieldErrors(key, pageObject);
+      console.log('EXPECT ' + (await actualFieldError.textContent()) + ' TO EQUAL ' + expectedFieldErrorMessage);
       await expect(actualFieldError).toHaveText(expectedFieldErrorMessage);
     }
   }
 );
+
+// Use Alfred fillUIComponent update with section param - done
+// Use Alfred Validation Object with everything - created for Project Filter, do for others
+// Dataset entered to fetch relevant keys and values from validation object - done
+// Use keys array to assert field errors like I'm doing now - done
+// Use values array to assert alert box errors like I'm doing now - done
+// Make ValidationObject with generic Question ${} under ${} section - Low priority (edited)

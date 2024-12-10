@@ -36,9 +36,9 @@ Feature: Question Set - Research Application - Tissue
     And I fill the human biological samples section in the tissue page with '<Human_Biological_Samples>'
     And I fill the health related findings section in the tissue page with '<Health_Related_Findings>'
     And I click the 'Validate' button on the 'Question_Set'
-    Then I see the expected validation errors appearing for '<Validation>' on the 'tissue' page
+    Then I see the expected validation errors appearing on the 'tissue' page based on those inputs
 
     Examples:
-      | Project   | Human_Biological_Samples | Health_Related_Findings | Validation                        |
-      | Project_X | No_Fields_Completed      | No_Fields_Completed     | All_Mandatory_Fields              |
-      | Project_Y | Valid_Data_All_Fields    | No_Fields_Completed     | Mandatory_Health_Related_Findings |
+      | Project   | Human_Biological_Samples | Health_Related_Findings |
+      | Project_X | No_Fields_Completed      | No_Fields_Completed     |
+      | Project_Y | Valid_Data_All_Fields    | No_Fields_Completed     |

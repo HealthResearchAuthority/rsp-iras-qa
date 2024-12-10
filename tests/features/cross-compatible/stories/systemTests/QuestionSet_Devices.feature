@@ -36,9 +36,9 @@ Feature: Question Set - Research Application - Devices
     And I fill the devices filter questions section in the devices page with '<Devices_Filter_Questions>'
     And I fill the device investigation no mhra section in the devices page with '<Device_Investigation_No_MHRA>'
     And I click the 'Validate' button on the 'Question_Set'
-    Then I see the expected validation errors appearing for '<Validation>' on the 'devices' page
+    Then I see the expected validation errors appearing on the 'devices' page based on those inputs
 
     Examples:
-      | Project   | Devices_Filter_Questions | Device_Investigation_No_MHRA | Validation                        |
-      | Project_X | No_Fields_Completed      | No_Fields_Completed          | All_Mandatory_Fields              |
-      | Project_Y | No_Fields_Completed      | Valid_Data_All_Fields        | Mandatory_Device_Filter_Questions |
+      | Project   | Devices_Filter_Questions | Device_Investigation_No_MHRA |
+      | Project_X | No_Fields_Completed      | No_Fields_Completed          |
+      | Project_Y | No_Fields_Completed      | Valid_Data_All_Fields        |

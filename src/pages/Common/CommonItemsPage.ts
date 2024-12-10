@@ -29,7 +29,7 @@ export default class CommonItemsPage {
   readonly bannerLoginBtn: Locator;
   readonly bannerMyApplications: Locator;
   readonly alert_box: Locator;
-  readonly alert_box_heading: Locator;
+  readonly alert_box_headings: Locator;
   readonly alert_box_list: Locator;
   readonly alert_box_list_items: Locator;
 
@@ -57,7 +57,7 @@ export default class CommonItemsPage {
     this.bannerMyApplications = this.bannerNavBar.getByText(this.linkTextData.Banner.My_Applications, { exact: true });
     //Validation Alert Box
     this.alert_box = this.page.getByRole('alert');
-    this.alert_box_heading = this.alert_box.getByRole('heading');
+    this.alert_box_headings = this.alert_box.getByRole('heading');
     this.alert_box_list = this.alert_box.getByRole('list');
     this.alert_box_list_items = this.alert_box.getByRole('listitem');
   }
@@ -171,27 +171,45 @@ export default class CommonItemsPage {
     return pageObject;
   }
 
-  async getQsetPageValidationData(page: string, dataType: string, datasetName: string): Promise<string[]> {
-    let validationData: string[];
+  async getQsetPageValidationData(page: string, dataType: string, datasetName: string): Promise<Map<string, any>> {
+    let inputDataset: JSON = {} as JSON;
     switch (page.toLowerCase()) {
       case 'project filter':
-        validationData = new ProjectFilterPage(this.page).projectFilterPageTestData.Validation[dataType][datasetName];
+        inputDataset = new ProjectFilterPage(this.page).projectFilterPageTestData[dataType][datasetName];
         break;
       case 'project details':
-        validationData = new ProjectDetailsPage(this.page).projectDetailsPageTestData.Validation[dataType][datasetName];
+        inputDataset = new ProjectDetailsPage(this.page).projectDetailsPageTestData[dataType][datasetName];
         break;
-      case 'devices':
-        validationData = new DevicesPage(this.page).devicesPageTestData.Validation[dataType][datasetName];
-        break;
-      case 'tissue':
-        validationData = new TissuePage(this.page).tissuePageTestData.Validation[dataType][datasetName];
-        break;
-      case 'student':
-        validationData = new StudentPage(this.page).studentPageTestData.Validation[dataType][datasetName];
-        break;
+      // case 'devices':
+      //   validationData = new DevicesPage(this.page).devicesPageTestData.Validation[dataType][datasetName];
+      //   break;
+      // case 'tissue':
+      //   validationData = new TissuePage(this.page).tissuePageTestData.Validation[dataType][datasetName];
+      //   break;
+      // case 'student':
+      //   validationData = new StudentPage(this.page).studentPageTestData.Validation[dataType][datasetName];
+      //   break;
       default:
         throw new Error(`${page} is not a valid option`);
     }
-    return validationData;
+    // console.log('ENTRIES');
+    // console.log(Object.entries(inputDataset));
+    const test = Object.entries(inputDataset);
+    // console.log('MAP');
+    const myMap = new Map(test);
+    // console.log(myMap);
+    // console.log('KEYS');
+    // const keys = myMap.keys();
+    // for (const key of keys) {
+    //   console.log(key);
+    // }
+    // console.log('VALUES');
+    // const values = myMap.values();
+    // for (const value of values) {
+    //   console.log(value);
+    // }
+    // await this.page.pause();
+    return myMap;
+    // return validationData;
   }
 }

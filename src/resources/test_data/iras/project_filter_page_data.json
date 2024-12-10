@@ -1,32 +1,36 @@
 {
   "Project_Filter": {
     "title": "",
-    "section_headings": ["Project Details", "Project Scope", "Research Location"],
+    "section_headings": ["Project details", "Project scope", "Research location"],
     "page_name": "Project Filter"
   },
   "Project_Details": {
     "Valid_Data_All_Fields": {
       "short_project_title_text": "Test Research - Short Title",
+      "identify_role_radio": "Chief investigator",
       "full_project_title_text": "Test Research - Full Title",
       "is_project_managed_commercial_research_radio": "Yes",
       "is_nihr_funding_radio": "Yes",
-      "access_cpms_services_radio": "Yes",
-      "email_initial_contact_cpms_text": "test_cpms_contact@test.com"
+      "access_cpms_services_radio": "No"
     },
     "Data_With_No_NIHR_Funding": {
       "short_project_title_text": "Sample Research - Short Title",
+      "identify_role_radio": "Chief investigator",
       "full_project_title_text": "Sample Research - Full Title",
       "is_project_managed_commercial_research_radio": "Yes",
       "is_nihr_funding_radio": "No",
-      "access_cpms_services_radio": "Yes"
+      "access_cpms_services_radio": "Yes",
+      "email_initial_contact_cpms_text": "test_cpms_contact@test.com"
     },
-    "No_Fields_Completed": {},
-    "Full_Project_Title_Omitted": {
+    "No_Fields_Completed": { "short_project_title_text": "", "full_project_title_text": "" },
+    "Initial_Contact_Omitted": {
       "short_project_title_text": "Test Research - Short Title",
+      "identify_role_radio": "Chief investigator",
+      "full_project_title_text": "Sample Research - Full Title",
       "is_project_managed_commercial_research_radio": "Yes",
       "is_nihr_funding_radio": "Yes",
       "access_cpms_services_radio": "Yes",
-      "email_initial_contact_cpms_text": "test_cpms_contact@test.com"
+      "email_initial_contact_cpms_text": ""
     }
   },
   "Project_Scope": {
@@ -63,44 +67,44 @@
       "details_other_organisation_text": "test organisation",
       "use_pic_radio": "Yes"
     },
+    "Valid_Data_Default_Fields": {
+      "is_outside_uk_radio": "UK only",
+      "places_in_uk_for_project_checkbox": ["England", "Northern Ireland", "Wales"],
+      "where_project_take_place_checkbox": ["Local councils", "University"]
+    },
     "No_Fields_Completed": {}
   },
-  "Validation": {
-    "Alert_Box_Errors": {
-      "All_Mandatory_Fields": [
-        "Question 1 under Project Details section",
-        "Question 3 under Project Details section",
-        "Question 4 under Project Details section",
-        "Question 5 under Project Details section",
-        "Question 6 under Project Details section",
-        "Question 1 under Project Scope section",
-        "Question 2 under Project Scope section",
-        "Question 11 under Project Scope section",
-        "Question 12 under Project Scope section",
-        "Question 13 under Project Scope section",
-        "Question 1 under Research Location section",
-        "Question 2 under Research Location section",
-        "Question 4 under Research Location section"
-      ],
-      "Full_Project_Title": ["Question 3 under Project Details section"]
-    },
-    "Field_Errors": {
-      "All_Mandatory_Fields": [
-        "short_project_title_text",
-        "full_project_title_text",
-        "is_project_managed_commercial_research_radio",
-        "is_nihr_funding_radio",
-        "access_cpms_services_radio",
-        "is_educational_project_radio",
-        "activities_involved_checkbox",
-        "include_prisoners_offenders_radio",
-        "involve_ministry_of_defence_radio",
-        "involve_hfea_radio",
-        "is_outside_uk_radio",
-        "places_in_uk_for_project_checkbox",
-        "where_project_take_place_checkbox"
-      ],
-      "Full_Project_Title": ["full_project_title_text"]
-    }
+  "All_Mandatory_Validations": {
+    "short_project_title_text": "Question 1 under Project details section",
+    "identify_role_radio": "Question 2 under Project details section",
+    "full_project_title_text": "Question 3 under Project details section",
+    "is_project_managed_commercial_research_radio": "Question 4 under Project details section",
+    "is_nihr_funding_radio": "Question 5 under Project details section",
+    "access_cpms_services_radio": "Question 6 under Project details section",
+    "is_educational_project_radio": "Question 1 under Project scope section",
+    "activities_involved_checkbox": "Question 2 under Project scope section",
+    "include_prisoners_offenders_radio": "Question 11 under Project scope section",
+    "involve_ministry_of_defence_radio": "Question 12 under Project scope section",
+    "involve_hfea_radio": "Question 13 under Project scope section",
+    "is_outside_uk_radio": "Question 1 under Research location section",
+    "places_in_uk_for_project_checkbox": "Question 2 under Research location section",
+    "where_project_take_place_checkbox": "Question 4 under Research location section"
+  },
+  "All_Conditional_Validations": {
+    "email_initial_contact_cpms_text": "Question 6a under Project details section",
+    "is_research_bioresource_radio": "Question 3 under Project scope section",
+    "bioresource_established_nhs_hsc_radio": "Question 3a under Project scope section",
+    "is_ctimp_radio": "Question 4 under Project scope section",
+    "options_applied_for_project_radio": "Question 4a under Project scope section",
+    "is_clinical_or_medical_devices_radio": "Question 5 under Project scope section",
+    "exposing_ionising_radiation_radio": "Question 6 under Project scope section",
+    "using_human_biological_samples_radio": "Question 7 under Project scope section",
+    "patient_data_accessed_outside_radio": "Question 8 under Project scope section",
+    "research_with_adults_lacking_capacity_to_consent_radio": "Question 9 under Project scope section",
+    "include_children_radio": "Question 10 under Project scope section",
+    "where_human_sample_held_checkbox": "Question 3a under Research location section",
+    "where_human_sample_obtained_checkbox": "Question 3b under Research location section",
+    "details_other_organisation_text": "Question 4a under Research location section",
+    "use_pic_radio": "Question 5 under Research location section"
   }
 }

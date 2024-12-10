@@ -9,6 +9,7 @@ export default class ProjectFilterPage {
   readonly project_filter_section_headings: Locator;
   readonly project_details_section: Locator;
   readonly short_project_title_text: Locator;
+  readonly identify_role_radio: Locator;
   readonly full_project_title_text: Locator;
   readonly is_project_managed_commercial_research_radio: Locator;
   readonly is_nihr_funding_radio: Locator;
@@ -50,6 +51,7 @@ export default class ProjectFilterPage {
     //Project Details Section
     this.project_details_section = this.page.locator('legend').getByText('Project Details').locator('..');
     this.short_project_title_text = this.project_details_section.getByTestId('IQA0002_Text');
+    this.identify_role_radio = this.project_details_section.getByTestId(/^IQA0001/);
     this.full_project_title_text = this.project_details_section.getByTestId('IQA0003_Text');
     this.is_project_managed_commercial_research_radio = this.project_details_section.getByTestId(/^IQA0004/);
     this.is_nihr_funding_radio = this.project_details_section.getByTestId(/^IQA03271/);
