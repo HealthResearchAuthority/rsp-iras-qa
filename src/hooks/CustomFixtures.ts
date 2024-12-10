@@ -4,16 +4,17 @@ import { getAuthState, getTicketReferenceTags } from '../utils/UtilFunctions';
 import CommonItemsPage from '../pages/Common/CommonItemsPage';
 import LoginPage from '../pages/Common/LoginPage';
 import HomePage from '../pages/IRAS/HomePage';
-import ProjectFilterPage from '../pages/IRAS/ProjectFilterPage';
-import ProjectDetailsPage from '../pages/IRAS/ProjectDetailsPage';
-import StudentPage from '../pages/IRAS/StudentPage';
-import DevicesPage from '../pages/IRAS/DevicesPage';
-import TissuePage from '../pages/IRAS/TissuePage';
-import AdultsLackingCapacityPage from '../pages/IRAS/AdultsLackingCapacityPage';
-import ChildrenPage from '../pages/IRAS/ChildrenPage';
-import BookingPage from '../pages/IRAS/BookingPage';
+import ProjectFilterPage from '../pages/IRAS/questionSet/ProjectFilterPage';
+import ProjectDetailsPage from '../pages/IRAS/questionSet/ProjectDetailsPage';
+import StudentPage from '../pages/IRAS/questionSet/StudentPage';
+import DevicesPage from '../pages/IRAS/questionSet/DevicesPage';
+import TissuePage from '../pages/IRAS/questionSet/TissuePage';
+import AdultsLackingCapacityPage from '../pages/IRAS/questionSet/AdultsLackingCapacityPage';
+import ChildrenPage from '../pages/IRAS/questionSet/ChildrenPage';
+import BookingPage from '../pages/IRAS/questionSet/BookingPage';
 import CreateApplicationPage from '../pages/IRAS/CreateApplicationPage';
 import ProceedApplicationPage from '../pages/IRAS/ProceedApplicationPage';
+import QuestionSetPage from '../pages/Common/QuestionSetPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -29,12 +30,17 @@ type CustomFixtures = {
   bookingPage: BookingPage;
   createApplicationPage: CreateApplicationPage;
   proceedApplicationPage: ProceedApplicationPage;
+  questionSetPage: QuestionSetPage;
   makeAxeBuilder: () => AxeBuilder;
 };
 
 export const test = base.extend<CustomFixtures>({
   commonItemsPage: async ({ page }, use) => {
     await use(new CommonItemsPage(page));
+  },
+
+  questionSetPage: async ({ page }, use) => {
+    await use(new QuestionSetPage(page));
   },
 
   loginPage: async ({ page }, use) => {

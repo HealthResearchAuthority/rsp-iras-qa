@@ -1,0 +1,60 @@
+{
+  "Adults_Lacking_Capacity": {
+    "title": "",
+    "section_headings": ["CTIMP Adults lacking capacity", "Non-CTIMP Adults Lacking Capacity"],
+    "page_name": "Adults Lacking Capacity"
+  },
+  "Adults_Lacking_Capacity_CTIMP": {
+    "Valid_Data_All_Fields": {
+      "how_project_meet_requirement_life_threatening_text": "The clinical trial must relate directly to a life-threatening or debilitating clinical condition from which the individual suffers. Describe how your project meets this requirement. - Example",
+      "why_project_essential_to_validate_data_text": "Why this project is essential to validate data obtained in other clinical trials involving persons able to consent or obtained by other research methods - Example",
+      "benefits_administration_investigational_products_expected_text": "Benefits that the administration of the investigational medicinal products is expected to produce for these participants and the grounds for expecting these benefits. Detail why the inclusion of adults unable to give informed consent produces no risk at all to these participants, including risks to freedom of action or privacy. - Example",
+      "how_ensure_suitably_qualified_text": "How you will ensure that members of the research team who will make decisions on participants' capacity to consent are suitably qualified and experienced to make that decision. - Example",
+      "arrangements_to_identify_consent_text": "What arrangements will be made to identify and seek informed consent from a personal or professional legal representative. - Example",
+      "arrangements_to_continue_consult_personal_text": "What arrangements will be made to continue to consult personal or professional legal representatives during the course of the project where necessary - Example",
+      "provide_information_on_trial_to_participants_text": "what steps will you take to provide information * how will you consider the wishes of participants capable of forming an opinion * what arrangements will be put in place where capacity to consent will fluctuate or will be borderline - Example",
+      "is_participant_urgent_treatment_recruited_radio": "Yes",
+      "outline_decisions_on_recruited_participants_text": "Outline how decisions will be made on the inclusion of such participants and what arrangements will be made to seek consent from the participant (if capacity has been recovered) or from a legal representative as soon as possible. - Example",
+      "describe_arrangements_informing_relatives_text": "Describe the arrangements for informing relatives in circumstances where a professional legal representative has to be consulted. If you will not be informing relatives in this circumstance, explain your reasoning. - Example",
+      "what_provisions_apply_if_no_consent_text": "Where a participant is recruited prior to consent being obtained, and consent is later withheld or the participant dies before consent can be given, what provisions will apply to the study data collected up to this point? - Example",
+      "steps_to_ensure_when_patricipants_object_text": "Describe what steps will be taken to ensure that nothing is done to which participants appear to object (unless it is to protect them from harm or minimise pain or discomfort). - Example",
+      "steps_to_ensure_nothing_done_contrary_to_statement_text": "Describe what steps will be taken to ensure that nothing is done which is contrary to any advance decision or statement by the participant - Example"
+    },
+    "Participant_With_No_Urgent_Treatment_Recruited": {
+      "how_project_meet_requirement_life_threatening_text": "The clinical trial must relate directly to a life-threatening or debilitating clinical condition from which the individual suffers. Describe how your project meets this requirement. - Example",
+      "why_project_essential_to_validate_data_text": "Why this project is essential to validate data obtained in other clinical trials involving persons able to consent or obtained by other research methods - Example",
+      "benefits_administration_investigational_products_expected_text": "Benefits that the administration of the investigational medicinal products is expected to produce for these participants and the grounds for expecting these benefits. Detail why the inclusion of adults unable to give informed consent produces no risk at all to these participants, including risks to freedom of action or privacy. - Example",
+      "how_ensure_suitably_qualified_text": "How you will ensure that members of the research team who will make decisions on participants' capacity to consent are suitably qualified and experienced to make that decision. - Example",
+      "arrangements_to_identify_consent_text": "What arrangements will be made to identify and seek informed consent from a personal or professional legal representative. - Example",
+      "arrangements_to_continue_consult_personal_text": "What arrangements will be made to continue to consult personal or professional legal representatives during the course of the project where necessary - Example",
+      "provide_information_on_trial_to_participants_text": "what steps will you take to provide information * how will you consider the wishes of participants capable of forming an opinion * what arrangements will be put in place where capacity to consent will fluctuate or will be borderline - Example",
+      "is_participant_urgent_treatment_recruited_radio": "No",
+      "describe_arrangements_informing_relatives_text": "Describe the arrangements for informing relatives in circumstances where a professional legal representative has to be consulted. If you will not be informing relatives in this circumstance, explain your reasoning. - Example",
+      "what_provisions_apply_if_no_consent_text": "Where a participant is recruited prior to consent being obtained, and consent is later withheld or the participant dies before consent can be given, what provisions will apply to the study data collected up to this point? - Example",
+      "steps_to_ensure_when_patricipants_object_text": "Describe what steps will be taken to ensure that nothing is done to which participants appear to object (unless it is to protect them from harm or minimise pain or discomfort). - Example",
+      "steps_to_ensure_nothing_done_contrary_to_statement_text": "Describe what steps will be taken to ensure that nothing is done which is contrary to any advance decision or statement by the participant - Example"
+    }
+  },
+  "Adults_Lacking_Capacity_Non_CTIMP": {
+    "Valid_Data_All_Fields": {
+      "project_connected_impairing_condition_text": "The project must be connected with an impairing condition affecting the participant or their treatment. What impairing conditions will the participants have and how does the project relate to the impairing condition? - Example",
+      "why_project_not_carried_out_text": "Justify why this project could not be carried out as effectively if confined to adults capable of giving consent. - Example",
+      "project_has_potential_for_checkbox": ["Potential to benefit the participant without imposing a disproportionate burden","Provide knowledge of the causes of, or treatment or care of others with, the same or a similar condition"],
+      "describe_project_potential_to_benefit_participant_text": "Describe how the project has the potential to benefit the participant without imposing a disproportionate burden. - Example",
+      "describe_project_contribute_knowledge_text": "Describe how the project will contribute to the knowledge of: * causes of the same or simlar condition * treatment or care of others with the same or simliar condition - Example",
+      "project_not_interfere_participants_freedom_text": "The project must not interfere significantly with participants' freedom of action or privacy. It also must not be unduly invasive or restrictive. Describe how the project meets these requirements. - Example",
+      "how_ensure_suitably_qualified_experienced_text": "Describe how you will ensure that members of the research team who will make decisions on participant's capacity to consent are suitably qualified and experienced to make that decision. - Example",
+      "arrangements_made_to_identify_consult_induviduals_text": "For participants in England, Wales or Northern Ireland: What arrangements will be made to identify and consult an individual who is able to advise on the inclusion of the participant in the project who are unable to consent for themselves? Describe how the individual will advise on the participant's presumed wishes and feelings. - Example",
+      "scotland_arrangements_made_welfare_guardian_text": "For participants in Scotland: what arrangements will be made to consult a Welfare Guardian or Welfare Attorney, or if not appointed the nearest relative able to give consent on behalf of the incapacitated adult? - Example",
+      "arrangements_continue_consult_during_course_text": "What arrangements will be made to continue to consult these individuals during the course of the project where necessary? - Example",
+      "information_about_trial_to_participants_text": "What will steps you take, if appropriate, to provide information about the trial to participants, according to their capacity of understanding, and to consider the wishes of participants capable of forming an opinion? - Example",
+      "arrangements_for_consent_fluctuate_text": "What arrangements will be put in place where capacity to consent will fluctuate or will be borderline? - Example",
+      "is_participant_urgent_recruited_before_wishes_feelings_radio": "Yes",
+      "seek_agreement_registered_practitioner_text": "Where possible you should seek agreement from a registered practioner before including the participant. Outline these arrangments. * if this is not feasible to seek agreement from a registered practioner, how will decisions be made on inclusion of participants? * what arrangements will be made to seek consent from the participant (if capacity has been recovered) or advice from a consultee as soon as possible - Example",
+      "arrangements_informing_relatives_text": "Describe the arrangements for informing relatives in circumstances where a nominated consultee has to be approached. If you will not be informing relatives in this circumstance, explain your reasoning. - Example",
+      "participant_recruited_prior_consent_text": "Where a participant is recruited prior to consent being obtained, and consent is later withheld or the participant dies before consent can be given, what provisions will apply to the study data collected up to this point? - Example",
+      "steps_ensure_nothing_done_participant_object_text": "Describe what steps will be taken to ensure that nothing is done to which participants appear to object (unless it is to protect them from harm or minimise pain or discomfort). - Example",
+      "steps_ensure_nothing_done_contrary_statement_text": "Describe what steps will be taken to ensure that nothing is done which is contrary to any advance decision or statement by the participant? - Example"
+    }
+  }
+}

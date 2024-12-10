@@ -1,0 +1,56 @@
+{
+  "Tissue": {
+    "title": "",
+    "section_headings": ["Human biological samples","Health-related findings"],
+    "page_name": "Tissue"
+  },
+  "Human_Biological_Samples": {
+    "Valid_Data_All_Fields": {
+      "describe_type_of_material_text": "Type of material - Example",
+      "is_sample_collected_from_new_participants_radio": "Yes",
+      "will_samples_provided_extra_with_consent_radio": "Yes",
+      "how_samples_collected_text": "Describe how samples will be collected - Example",
+      "participants_living_deceased_radio": "Living",
+      "samples_removed_deceased_regions_checkbox": ["England","Northern Ireland","Scotland","Wales"],
+      "details_relevant_human_tissue_authority_license_text": "Details of any relevant Human Tissue Authority licences covering the premises where samples will be removed from the deceased - Example",
+      "material_identifiable_radio": "Yes",
+      "scope_of_consent_for_use_of_material_radio": "Yes",
+      "will_materials_imported_exported_outside_radio": "Yes",
+      "will_materials_imported_exported_outside_of_scotland_radio": "Yes",
+      "reason_import_export_text": "Reasons for the import or export activity that will take place and clarify whether a Material Transfer Agreement will be in place to manage this activity - Example",
+      "consent_arrangement_for_use_of_sample_radio": "Yes",
+      "details_where_samples_stored_text": "Details of where the sample will be stored, who will have access and the custodial arrangements - Example",
+      "how_sample_processed_stored_radio": "Study-specific arrangements",
+      "what_happen_material_end_of_project_checkbox": ["Transfer to research tissue bank","Storage by research team pending ethical approval for use in another project","Storage by research team as part of a new research tissue bank"],
+      "how_destruction_material_undertaken_text": "Destruction of the material will be undertaken - Example",
+      "further_details_proposed_post_study_text": "Further details of the proposed post-study arrangements including whether any relevant material will be rendered acellular - Example"
+    },
+    "New_Samples_From_Participants": {
+      "describe_type_of_material_text": "Type of material - Example",
+      "is_sample_collected_from_new_participants_radio": "No",
+      "will_samples_provided_extra_with_consent_radio": "Yes",
+      "how_samples_collected_text": "Describe how samples will be collected - Example",
+      "participants_living_deceased_radio": "Living",
+      "samples_removed_deceased_regions_checkbox": ["England","Northern Ireland","Scotland","Wales"],
+      "details_relevant_human_tissue_authority_license_text": "Details of any relevant Human Tissue Authority licences covering the premises where samples will be removed from the deceased - Example",
+      "material_identifiable_radio": "Yes",
+      "scope_of_consent_for_use_of_material_radio": "Yes",
+      "will_materials_imported_exported_outside_radio": "Yes",
+      "will_materials_imported_exported_outside_of_scotland_radio": "Yes",
+      "reason_import_export_text": "Reasons for the import or export activity that will take place and clarify whether a Material Transfer Agreement will be in place to manage this activity - Example",
+      "consent_arrangement_for_use_of_sample_radio": "Yes",
+      "details_where_samples_stored_text": "Details of where the sample will be stored, who will have access and the custodial arrangements - Example",
+      "how_sample_processed_stored_radio": "Study-specific arrangements",
+      "what_happen_material_end_of_project_checkbox": ["Transfer to research tissue bank","Storage by research team pending ethical approval for use in another project","Storage by research team as part of a new research tissue bank"],
+      "how_destruction_material_undertaken_text": "Destruction of the material will be undertaken - Example",
+      "further_details_proposed_post_study_text": "Further details of the proposed post-study arrangements including whether any relevant material will be rendered acellular - Example"
+    }
+  },
+  "Health_Related_Findings": {
+    "Valid_Data_All_Fields": {
+      "will_project_produce_health_related_findings_radio": "Yes",
+      "will_arrangements_made_notify_individuals_radio": "Yes",
+      "explain_why_not_notified_text": "Explain why individuals concerned will not be notified - Example"
+    }
+  }
+}

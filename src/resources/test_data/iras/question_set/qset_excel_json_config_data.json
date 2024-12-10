@@ -1,0 +1,85 @@
+{
+  "Excel_Properties": {
+    "file_path": "./src/resources/test_data/iras/question_set/excel_upload/Question Set Document.xlsx",
+    "qset_column_header_index": 1,
+    "qset_unique_id_column_name": "Unique ID",
+    "qset_section_column_name": "Section",
+    "qset_field_label_column_name": "Field label"
+  },
+  "JSON_Properties":{
+    "parent_node_field_label": "Field_Labels",
+    "json_path": "./src/resources/test_data/iras/question_set/question_set_validation_data.json"
+  },
+  "Project_Filter_Page": {
+    "sheet_name": "A",
+    "root_parent_node": "Project_Filter",
+    "sections": {
+      "IQT0001": "Project_Details",
+      "IQT0003": "Project_Scope",
+      "IQT0004": "Research_Location"
+    }
+  },
+  "Project_Details_Page": {
+    "sheet_name": "B",
+    "root_parent_node": "Project_Details",
+    "sections": {
+      "IQT0005": "Project_Information",
+      "IQT0006": "Public_Involvement",
+      "IQT0007": "Research_Design",
+      "IQT0008": "Research_Activities",
+      "IQT0009": "Participants",
+      "IQT0010": "Consent",
+      "IQT0011": "Risks_Conflicts",
+      "IQT0012": "Summary_Ethical_Issues",
+      "IQT0013": "Research_Analysis",
+      "IQT0014": "Governance_Management",
+      "IQT0015": "Transparency",
+      "IQT0021": "Confidentiality_Info_Management"
+    }
+  },
+  "Student": {
+    "sheet_name": "C1",
+    "root_parent_node": "Student",
+    "sections": {
+      "IQT0019": "Educational_Project"
+    }
+  },
+  "Devices": {
+    "sheet_name": "C4",
+    "root_parent_node": "Devices",
+    "sections": {
+      "IQT0025": "Devices_Filter_Questions",
+      "IQT0053": "Device_Investigation_No_MHRA"
+    }
+  },
+  "Tissue": {
+    "sheet_name": "C6",
+    "root_parent_node": "Tissue",
+    "sections": {
+      "IQT0022": "Human_Biological_Samples",
+      "IQT0022.3": "Health_Related_Findings"
+    }
+  },
+  "Adults_Lacking_Page": {
+    "sheet_name": "C7",
+    "root_parent_node": "Adults_Lacking_Capacity",
+    "sections": {
+      "IQT0023": "Adults_Lacking_Capacity_CTIMP",
+      "IQT0024": "Adults_Lacking_Capacity_Non_CTIMP"
+    }
+  },
+  "Children": {
+    "sheet_name": "C8",
+    "root_parent_node": "Children",
+    "sections": {
+      "IQT0020": "Children_Section"
+    }
+  },
+  "Booking": {
+    "sheet_name": "D",
+    "root_parent_node": "Booking",
+    "sections": {
+      "IQT0057": "Application_Booking"
+    }
+  }
+}
