@@ -42,6 +42,7 @@ export default class DevicesPage {
     //Locators
     this.devices_section_headings = this.page.locator('.govuk-fieldset__legend--l');
     //Devices Filter Questions Section
+    //Check on the below xpath. - Convert this to CSS if possible. Need to investigate further
     this.devices_filter_questions_section = this.page.locator(
       '//legend[contains(text(),"Devices filter questions")]/parent::fieldset'
     );
@@ -53,6 +54,7 @@ export default class DevicesPage {
     this.what_review_needed_first_radio = this.devices_filter_questions_section.getByTestId(/^IQA03014/);
     this.what_review_needed_second_radio = this.devices_filter_questions_section.getByTestId(/^IQA03015/);
     //Device investigations not requiring review by MHRA Section
+    //Check on the below xpath. - Convert this to CSS if possible. Need to investigate further
     this.device_investigation_no_mhra_section = this.page.locator(
       '//legend[contains(text(),"Device investigations not requiring review by MHRA")]/parent::fieldset'
     );
