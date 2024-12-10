@@ -1,7 +1,7 @@
-@adminUser @UserAdministration @UserProfiles
+ @UserAdministration @UserProfiles
 Feature: As an Authenticated User I have to validate permissions,system or project level roles,applicable services and applicable personna group for various user roles
 
-    # More Info: Drafted sceanrios based on https://lucid.app/lucidspark/ceb048e1-d00a-4f46-9356-54c0933e999d/edit?invitationId=inv_774c8339-0191-48d5-800f-5dafda9765ff&page=0_0#
+    # More Info: Drafted scenarios based on https://lucid.app/lucidspark/ceb048e1-d00a-4f46-9356-54c0933e999d/edit?invitationId=inv_774c8339-0191-48d5-800f-5dafda9765ff&page=0_0#
     # Also,referred https://healthresearchauthority.sharepoint.com/:x:/r/sites/Future-IRAS/_layouts/15/doc2.aspx?sourcedoc=%7B67502FEC-814A-44FA-9744-75BC7CD616C7%7D&file=User%20roles%20and%20permissions%20DRAFT%20v0.3.xlsx&action=default&mobileredirect=true
 
 

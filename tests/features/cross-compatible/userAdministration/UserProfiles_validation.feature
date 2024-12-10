@@ -1,7 +1,7 @@
-@adminUser @UserAdministration @UserProfiles
+@UserAdministration @UserProfiles
 Feature: As an Authenticated Admin User I have to validate different user profiles and their attributes
 
-    # More Info: Drafted sceanrios based on https://lucid.app/lucidspark/ceb048e1-d00a-4f46-9356-54c0933e999d/edit?invitationId=inv_774c8339-0191-48d5-800f-5dafda9765ff&page=0_0#
+    # More Info: Drafted scenarios based on https://lucid.app/lucidspark/ceb048e1-d00a-4f46-9356-54c0933e999d/edit?invitationId=inv_774c8339-0191-48d5-800f-5dafda9765ff&page=0_0#
     # Also,referred https://healthresearchauthority.sharepoint.com/:x:/r/sites/Future-IRAS/_layouts/15/doc2.aspx?sourcedoc=%7B67502FEC-814A-44FA-9744-75BC7CD616C7%7D&file=User%20roles%20and%20permissions%20DRAFT%20v0.3.xlsx&action=default&mobileredirect=true
 
     Background:
@@ -32,7 +32,6 @@ Feature: As an Authenticated Admin User I have to validate different user profil
             | Standard public user profile | Standard_Public_User_Profile_Attributes | Standard_Public_User_Profile_info | Phamacy_reviewer   | Phamacy_reviewer_user_profile_Attributes     | Phamacy_reviewer_User_Profile_info   |
             | Standard public user profile | Standard_Public_User_Profile_Attributes | Standard_Public_User_Profile_info | Radiation_reviewer | Radiation_reviewer_user_profile_Attributes   | Radiation_reviewer_User_Profile_info |
     # add valid and invalid data scenarios here>>>
-
     Scenario Outline: I am able to assign MODREC reviewer user role to the user account with Member user profile
         Assign Member reviewer user role to the user account with Standard public user profile
         Assign MODREC reviewer user role to the user account with Member user profile
