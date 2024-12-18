@@ -41,6 +41,5 @@ export default class HomePage {
     await expect(this.pageHeading).toBeVisible();
     await expect(this.pageHeading).toHaveText(this.homePageTestData.Home_Page.heading);
     expect(await this.page.title()).toBe(this.homePageTestData.Home_Page.title);
-    console.log('Home Page URL is: ' + this.page.url());
   }
 }
