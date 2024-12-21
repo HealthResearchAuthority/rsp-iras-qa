@@ -36,12 +36,63 @@
         "IQA0307": "Describe what steps will be taken to ensure that nothing is done to which participants appear to object (unless it is to protect them from harm or minimise pain or discomfort).",
         "IQA0308": "Describe what steps will be taken to ensure that nothing is done which is contrary to any advance decision or statement by the participant?"
       }
+    },
+    "Radio_Checkbox_Labels": {
+      "Adults_Lacking_Capacity_CTIMP": {
+        "IQA0278": "Text",
+        "IQA0279": "Text",
+        "IQA0280": "Text",
+        "IQA0281": "Text",
+        "IQA0282": "Text",
+        "IQA0283": "Text",
+        "IQA0284": "Text",
+        "IQA0285": [
+          "Yes",
+          "No"
+        ],
+        "IQA0286": "Text",
+        "IQA0287": "Text",
+        "IQA0288": "Text",
+        "IQA0289": "Text",
+        "IQA0290": "Text"
+      },
+      "Adults_Lacking_Capacity_Non_CTIMP": {
+        "IQA0291": "Text",
+        "IQA0292": "Text",
+        "IQA0293": [
+          "Potential to benefit the participant without imposing a disproportionate burden",
+          "Provide knowledge of the causes of, or treatment or care of others with, the same or a similar condition"
+        ],
+        "IQA0294": "Text",
+        "IQA0295": "Text",
+        "IQA0296": "Text",
+        "IQA0297": "Text",
+        "IQA0298": "Text",
+        "IQA0299": "Text",
+        "IQA0300": "Text",
+        "IQA0301": "Text",
+        "IQA0302": "Text",
+        "IQA0303": [
+          "Yes",
+          "No"
+        ],
+        "IQA0304": "Text",
+        "IQA0305": "Text",
+        "IQA0306": "Text",
+        "IQA0307": "Text",
+        "IQA0308": "Text"
+      }
     }
   },
   "Booking": {
     "Field_Labels": {
       "Application_Booking": {
         "IQA01111": "I agree for this project application information to be used for:"
+      }
+    },
+    "Radio_Checkbox_Labels": {
+      "Application_Booking": {
+        "IQA01111": []
       }
     }
   },
@@ -60,6 +111,37 @@
         "IQA0248": "What arrangements will you make to seek consent to continue in the project when participating children are able to give consent for themselves?",
         "IQA0249": "What arrangements will you make to seek consent to continue in the trial when participating children reach the age of 16?",
         "IQA0250": "Explain how you have tested the materials and resources for explaining this project with children and adults with parental rights and responsibility. "
+      }
+    },
+    "Radio_Checkbox_Labels": {
+      "Children_Section": {
+        "IQA0238": [
+          "In utero",
+          "Preterm newborn infants (up to gestational age less than 37 weeks)",
+          "Newborn (0 to 27 days)",
+          "28 days to 23 months",
+          "2 to 11 years",
+          "12 to 17 years",
+          "12 to 15 years",
+          "16 years"
+        ],
+        "IQA0239": [
+          "Children who will be unable to fully understand",
+          "Children who will be able to understand"
+        ],
+        "IQA0240": "Text",
+        "IQA0241": "Text",
+        "IQA0242": "Text",
+        "IQA0243": "Text",
+        "IQA0245": "Text",
+        "IQA0246": [
+          "Yes",
+          "No"
+        ],
+        "IQA0247": "Text",
+        "IQA0248": "Text",
+        "IQA0249": "Text",
+        "IQA0250": "Text"
       }
     }
   },
@@ -92,6 +174,76 @@
         "IQA03264": "What safety and performance testing has been undertaken on the investigational device and its constituents?",
         "IQA03265": "Describe the sponsor’s plans for further development and use of the device. Indicate whether the plans include making it available (whether for a fee or not) to other legal entities or working with a device manufacturer or other company to commercialise the product.",
         "IQA03266": "Give details of the arrangements for ensuring that the device has been manufactured to the standards expected of an equivalent UKCA/CE UKNI/CE marked device, and that all relevant testing to demonstrate compliance with these standards has been undertaken."
+      }
+    },
+    "Radio_Checkbox_Labels": {
+      "Devices_Filter_Questions": {
+        "IQA0309": [
+          "Yes",
+          "No"
+        ],
+        "IQA03010": [
+          "Clinical investigation for UKCA/CE UKNI/CE marking purposes (includes investigation of a UKCA/CE UKNI/CE marked device outside its current intended purposes or in modified form)",
+          "Combined clinical investigation for UKCA/CE UKNI/CE marking purposes and clinical trial of an investigational medicinal product",
+          "Post-market clinical study of one or more UKCA/CE UKNI/CE marked devices within intended purposes, involving a change to standard care or randomisation between groups",
+          "Registry of a UKCA/CE UKNI/CE marked device in clinical use, involving no change to standard care or randomisation",
+          "Performance evaluation of an in vitro diagnostic device (PEIVDD)"
+        ],
+        "IQA03011": [
+          "Clinical study of a non-UKCA/CE UKNI/CE marked device",
+          "Clinical study of a non-UKCA/CE UKNI/CE marked device for use within the institution, where commercialisation is not intended",
+          "Clinical study of one or more UKCA/CE UKNI/CE marked devices for an off-label indication",
+          "Clinical study of one or more UKCA/CE UKNI/CE marked devices for a labelled indication, involving a change to standard care or randomisation between groups",
+          "Clinical study of one or more UKCA/CE UKNI/CE marked devices for a labelled indication, involving no change to standard care or randomisation between groups",
+          "Pre-clinical device development or performance testing"
+        ],
+        "IQA03012": [
+          "Yes",
+          "No"
+        ],
+        "IQA03014": [
+          "MHRA and REC",
+          "REC only"
+        ],
+        "IQA03015": [
+          "MHRA and REC",
+          "REC only"
+        ]
+      },
+      "Device_Investigation_No_MHRA": {
+        "IQA03247": [
+          "Yes",
+          "No"
+        ],
+        "IQA03249": "Text",
+        "IQA03250": "Text",
+        "IQA03252": "Text",
+        "IQA03253": "Text",
+        "IQA03254": "Text",
+        "IQA03255": "Text",
+        "IQA03256": [
+          "Investigation of a new medical device",
+          "Investigation of a new implantable material",
+          "Use of an existing product outside the terms of its UKCA/CE marked intended purpose",
+          "Use of a modified product",
+          "Use of an existing product within its UKCA/CE UKNI/CE intended purpose."
+        ],
+        "IQA03257": [
+          "Yes",
+          "No"
+        ],
+        "IQA03258": "Text",
+        "IQA03259": "Text",
+        "IQA03260": "Text",
+        "IQA03261": "Text",
+        "IQA03262": [
+          "Yes",
+          "No"
+        ],
+        "IQA03263": "Text",
+        "IQA03264": "Text",
+        "IQA03265": "Text",
+        "IQA03266": "Text"
       }
     }
   },
@@ -261,6 +413,416 @@
       "Confidentiality_Info_Management": {
         "IQA0251": "Is this study limited to working with data only?"
       }
+    },
+    "Radio_Checkbox_Labels": {
+      "Project_Information": {
+        "IQA0036": "Text",
+        "IQA0037": "Text",
+        "IQA0040": "Text"
+      },
+      "Public_Involvement": {
+        "IQA0045": [
+          "identifying, developing, or prioritising the research question",
+          "being a member of a research advisory or reference group",
+          "being a member of the Trial Management Group or Data Monitoring Committee",
+          "developing the research methods (for example, designing questionnaires, or defining endpoints or outcome measures)",
+          "ensuring that the design of the research is feasible from the perspective of the participants (for example, identifying potential emotional or practical obstacles for research participants)",
+          "designing the inclusion and exclusion criteria including consideration of the demographic diversity of the study population",
+          "developing the risk or benefit analysis (for example, identifying and evaluating the probable risks and burden involved for research participants)",
+          "developing the recruitment and consent process (for example, how and when to approach potential participants)",
+          "developing participant information sheets, the consent forms, and other documents which are used to communicate with potential research participants",
+          "developing plain language research summaries",
+          "developing or delivering training to staff",
+          "developing the dissemination plan for the research",
+          "preparing regulatory submissions",
+          "planning to attend the Research Ethics Committee meetings to help explain how and why the research design is likely to be acceptable to research participants",
+          "Other",
+          "patients, service users or their carers, or members of the public have not been involved"
+        ],
+        "IQA0046": "Text",
+        "IQA0048": "Text",
+        "IQA0042": [
+          "we have existing arrangements in our organisation or team for involving patients, carers, service users or members of the public",
+          "we asked an existing patient and public involvement group external to our organisation or team (for example, run by an NHS Trust, university, charity, local councils)",
+          "we set up a new arrangement to involve patients, carers, service users or members of the public in our project (for example, posted the opportunity on the People in Research website, local noticeboards, or through a community organisation)",
+          "we were approached by some patients, carers, service users, a patient group, or a charity with a suggestion for this research and we have worked with them to develop it",
+          "Other"
+        ],
+        "IQA0043": "Text",
+        "IQA0044": "Text",
+        "IQA03274": "Text",
+        "IQA0162": [
+          "being a member of research advisory or reference group",
+          "being a member of the Trial Management Group or Data Monitoring Committee",
+          "developing or delivering training to staff",
+          "helping to promote this research",
+          "carrying out research activities (for example, facilitating focus groups, interviewing or administering questionnaires)",
+          "analysing the research findings",
+          "contributing to further regulatory submissions (such as amendments)",
+          "sharing research results (for example, by presenting at conferences or disseminating the research findings via social media)",
+          "developing plain language summaries of the results",
+          "there is no plan to involve public contributors in the remaining stages of the research process",
+          "Other"
+        ],
+        "IQA0163": "Text",
+        "IQA03275": "Text",
+        "IQA03276": "Text"
+      },
+      "Research_Design": {
+        "IQA0049": [
+          "case series or case note review",
+          "case control",
+          "cohort observation",
+          "controlled trial without randomisation",
+          "cross-sectional study",
+          "database analysis",
+          "epidemiology",
+          "feasibility or pilot study",
+          "laboratory study",
+          "metanalysis",
+          "qualitative research",
+          "questionnaire, interview or observation study",
+          "randomised controlled trial",
+          "Other"
+        ],
+        "IQA0050": "Text",
+        "IQA0052": "Text",
+        "IQA0053": "Text",
+        "IQA0054": [
+          "Yes",
+          "No"
+        ],
+        "IQA0055": [
+          "Yes",
+          "No"
+        ],
+        "IQA0056": [
+          "Yes",
+          "No"
+        ],
+        "IQA0057": "Text",
+        "IQA0058": "Text",
+        "IQA03277": [
+          "designing, developing or testing an AI product or tool",
+          "using an existing AI product or tool for its intended purpose",
+          "the project does not involve the use of AI"
+        ],
+        "IQA03278": [
+          "image analysis",
+          "other machine learning applications",
+          "natural language processing",
+          "generative AI or large language models",
+          "robotics",
+          "Other"
+        ],
+        "IQA03279": "Text",
+        "IQA03280": [
+          "image analysis",
+          "other machine learning applications",
+          "natural language processing",
+          "generative AI or large language models",
+          "robotics",
+          "Other"
+        ],
+        "IQA03281": "Text",
+        "IQA0060": "Text"
+      },
+      "Research_Activities": {
+        "IQA0062": "Text",
+        "IQA0063": [
+          "Yes",
+          "No"
+        ],
+        "IQA0064": [
+          "Yes",
+          "No"
+        ],
+        "IQA0065": [
+          "Yes",
+          "No"
+        ],
+        "IQA0066": "Text",
+        "IQA03273": [
+          "use of validated questionnaires within their intended purpose and intended population",
+          "use of validated questionnaires outside of their intended purpose and population",
+          "use of non-validated questionnaires",
+          "no questionnaires included in project"
+        ],
+        "IQA0068": [
+          "Yes",
+          "No"
+        ],
+        "IQA0070": [
+          "Yes",
+          "No"
+        ],
+        "IQA0071": "Text",
+        "IQA0072": "Text",
+        "IQA0074": "Text",
+        "IQA0075": "Text",
+        "IQA0076": "Text",
+        "IQA0077": [
+          "Yes",
+          "No"
+        ],
+        "IQA0078": "Text",
+        "IQA0079": [
+          "Treatment will continue to be provided once the project has finished",
+          "Treatment will not continue to be provided once the project has finished"
+        ],
+        "IQA0080": "Text",
+        "IQA0081": "Text",
+        "IQA0082": "Date"
+      },
+      "Participants": {
+        "IQA0083": [
+          "blood",
+          "cancer and neoplasms",
+          "cardiovascular",
+          "congenital disorders",
+          "ear",
+          "eye",
+          "infection",
+          "inflammatory and immune system",
+          "injuries and accidents",
+          "mental health",
+          "metabolic and endocrine",
+          "musculoskeletal",
+          "neurological",
+          "oral and gastrointestinal",
+          "renal and urogenital",
+          "reproductive health and childbirth",
+          "respiratory",
+          "skin",
+          "stroke",
+          "generic health relevance",
+          "disputed aetiology and other"
+        ],
+        "IQA0084": "Text",
+        "IQA0085": "Text",
+        "IQA0086": "Text",
+        "IQA0087": "Text",
+        "IQA0088": [
+          "Carers, parents or legal guardians of patients or participants",
+          "Healthy volunteers or controls",
+          "Members of the public",
+          "Patients or service users of NHS or HSC provided or commissioned services",
+          "Patients in nursing homes or independent health care clinics in Northern Ireland",
+          "People who are known to be deceased prior to the project starting",
+          "Residents in residential care homes in Northern Ireland",
+          "Residents in nursing homes, care homes or residential care in England, Scotland or Wales",
+          "Service users in other social care settings",
+          "Staff working in NHS or HSC provided or commissioned services",
+          "Other"
+        ],
+        "IQA0089": "Text",
+        "IQA0090": "Date",
+        "IQA0091": "Text",
+        "IQA0092": "Text",
+        "IQA0093": [
+          "Yes",
+          "No"
+        ]
+      },
+      "Consent": {
+        "IQA0096": [
+          "only adults with capacity to consent for themselves as participants",
+          "only adults lacking capacity to consent for themselves",
+          "both adults with capacity and lacking capacity to consent for themselves"
+        ],
+        "IQA0095": [
+          "Yes",
+          "No"
+        ],
+        "IQA0097": [
+          "Consent will be obtained from all participants",
+          "Consent will not be obtained from any participants",
+          "Consent will not be obtained in some situations"
+        ],
+        "IQA0098": [
+          "Consent will not be obtained for the use of non-identifiable data or samples",
+          "Consent will not be obtained for access to data by the usual care team",
+          "Other"
+        ],
+        "IQA0099": "Text",
+        "IQA0100": "Text",
+        "IQA0102": "Text",
+        "IQA0103": "Text",
+        "IQA0104": "Text",
+        "IQA0105": "Text",
+        "IQA0106": "Text",
+        "IQA0107": "Text",
+        "IQA0108": [
+          "The participant would be withdrawn from the project. Identifiable data or tissue already collected with consent would be retained and used. No further data or tissue would be collected or any other research procedures carried out on or in relation to the participant.",
+          "The participant would continue to be included in the project.",
+          "Not applicable - informed consent will not be sought from any participants in this project."
+        ],
+        "IQG0109": "n/a"
+      },
+      "Risks_Conflicts": {
+        "IQA0110": "Text",
+        "IQA0111": [
+          "Yes",
+          "No"
+        ],
+        "IQA0112": "Text",
+        "IQA0113": [
+          "Yes",
+          "No"
+        ],
+        "IQA0114": [],
+        "IQA0115": [
+          "Yes",
+          "No"
+        ],
+        "IQA0116": "Text"
+      },
+      "Summary_Ethical_Issues": {
+        "IQA0117": "Text",
+        "IQA0118": [
+          "has previously received an unfavourable opinion by a REC in the UK",
+          "has previously received an unfavourable opinion by a REC in another country",
+          "linked to another project",
+          "none of the above"
+        ],
+        "IQA0119": "Text",
+        "IQA0120": "Text",
+        "IQA0039": "Text"
+      },
+      "Research_Analysis": {
+        "IQA0121": [
+          "Independent external review",
+          "Review within a company",
+          "Review within a multi−centre research group",
+          "Review within the Chief Investigator's institution or host organisation",
+          "Review within the research team",
+          "Review by educational supervisor",
+          "Other"
+        ],
+        "IQA0122": "Text",
+        "IQA0123": "Text",
+        "IQA0124": [
+          "Qualititative",
+          "Quantitative"
+        ],
+        "IQA0125": "Text",
+        "IQA0126": [
+          "Review by independent statistician commissioned by funder or sponsor",
+          "Other review by independent statistician",
+          "Review by company statistician",
+          "Review by a statistician within the Chief Investigator’s institution",
+          "Review by a statistician within the research team or multi−centre group",
+          "Review by educational supervisor",
+          "Other review by individual with relevant statistical expertise",
+          "No review necessary as only frequencies and associations will be assessed"
+        ],
+        "IQA0127": "Text",
+        "IQA0128": "Text",
+        "IQA0129": "Text",
+        "IQA0130": "Text",
+        "IQA0131": "Text",
+        "IQA0132": "Text"
+      },
+      "Governance_Management": {
+        "IQA0139": "Text",
+        "IQA0140": "Text",
+        "IQA0147": [
+          "Remote monitoring by sponsor or delegate",
+          "Self-monitoring by site",
+          "On-site monitoring by sponsor or delegate"
+        ],
+        "IQA0148": "Text",
+        "IQA0149": "Text",
+        "IQA0150": "Text",
+        "IQA0151": "Text",
+        "IQA0152": "Text",
+        "IQA0153": [
+          "Yes",
+          "No"
+        ],
+        "IQA0154": "Text",
+        "IQA0155": [
+          "Yes",
+          "No"
+        ],
+        "IQA0156": "Text",
+        "IQA0157": [
+          "Yes",
+          "No"
+        ],
+        "IQA0158": "Text"
+      },
+      "Transparency": {
+        "IQG0003": "n/a",
+        "IQA0165": [
+          "No deferral requested",
+          "I request a deferral of registration and research summary publication - for protection of commercially confidential information",
+          "I request a deferral of registration and research summary publication - other reason"
+        ],
+        "IQA0166": "Text",
+        "IQA0167": [
+          "The project will be registered in a registry",
+          "Other arrangements are in place"
+        ],
+        "IQA0168": "Text",
+        "IQA0169": [
+          "Yes",
+          "No",
+          "ISRCTN",
+          "Clinicaltrials.gov",
+          "Other"
+        ],
+        "IQA0170": "Text",
+        "IQA0171": "Text",
+        "IQA0172": "Text",
+        "IQG0004": "n/a",
+        "IQA0173": [
+          "No deferral requested",
+          "I request a deferral of registration and research summary publication - for protection of commercially confidential information",
+          "I request a deferral of registration and research summary publication - other reason"
+        ],
+        "IQA0174": "Text",
+        "IQA0175": "Date",
+        "IQA0176": [
+          "Peer reviewed scientific journals",
+          "Internal report",
+          "Conference presentation",
+          "Publication on website",
+          "Other publication",
+          "Submission to regulatory authorities",
+          "Access to raw data and right to publish freely by all investigators in study or by Independent Steering Committee on behalf of all investigators",
+          "No plans to report or disseminate the results",
+          "Other"
+        ],
+        "IQA0177": "Text",
+        "IQA0178": "Text",
+        "IQA0179": [
+          "Yes",
+          "No"
+        ],
+        "IQA0180": "Text",
+        "IQA0181": [
+          "Yes",
+          "No"
+        ],
+        "IQA0182": [
+          "Yes",
+          "No"
+        ],
+        "IQA0183": "Text",
+        "IQA0185": "Email",
+        "IQA0186": "Text",
+        "IQA0187": "Text",
+        "IQA0189": "Email",
+        "IQA0190": "Text",
+        "IQA0191": "Text"
+      },
+      "Confidentiality_Info_Management": {
+        "IQA0251": [
+          "Yes",
+          "No"
+        ]
+      }
     }
   },
   "Project_Filter": {
@@ -304,6 +866,144 @@
         "IQA0145": "Give details of other organisations responsible for conducting the project.",
         "IQA0146": "Will you allow your research sites to use Participant Identification Centres (PICs)?"
       }
+    },
+    "Radio_Checkbox_Labels": {
+      "Project_Details": {
+        "IQA0002": null,
+        "IQA0003": null,
+        "IQA0004": [
+          "Yes",
+          "No"
+        ],
+        "IQA03271": [
+          "Yes",
+          "No"
+        ],
+        "IQG0001": null,
+        "IQA0005": [
+          "Yes",
+          "No"
+        ],
+        "IQA0006": null,
+        "IQG0002": null
+      },
+      "Project_Scope": {
+        "IQA0012": [
+          "Yes",
+          "No"
+        ],
+        "IQA0061": [
+          "Use of previously collected data about people",
+          "Use of previously collected human biological samples",
+          "Research involving staff only",
+          "Non-clinical activities with staff, such as interviews, questionnaires or observation",
+          "Non-clinical activities with people (other than staff), such as interviews or surveys",
+          "Non-clinical activities with people, such as non-clinical assessments, observations or care procedures",
+          "Clinical activities with people, such as collecting human biological samples, imaging investigations or diagnostics",
+          "Treatment, such as medicines, devices, surgery, vaccines or therapies"
+        ],
+        "IQA0014": [
+          "Yes",
+          "No"
+        ],
+        "IQA0015": [
+          "Yes",
+          "No"
+        ],
+        "IQA0017": [
+          "Yes",
+          "No"
+        ],
+        "IQA0018": [
+          "clinical trial of an investigational medicinal product",
+          "combined trial of an investigational medicinal product and an investigational medical device"
+        ],
+        "IQA03282": [
+          "Yes",
+          "No"
+        ],
+        "IQA0020": [
+          "Yes",
+          "No"
+        ],
+        "IQA0021": [
+          "Yes",
+          "No"
+        ],
+        "IQA0022": [
+          "Yes",
+          "No"
+        ],
+        "IQA0024": [
+          "Yes",
+          "No"
+        ],
+        "IQA0025": [
+          "Yes",
+          "No"
+        ],
+        "IQA0026": [
+          "Yes",
+          "No"
+        ],
+        "IQA0027": [
+          "Yes",
+          "No"
+        ],
+        "IQA0028": [
+          "Yes",
+          "No"
+        ],
+        "IQA0029": [
+          "Yes",
+          "No"
+        ]
+      },
+      "Research_Location": {
+        "IQA0142": [
+          "UK only",
+          "Multi-national"
+        ],
+        "IQA0143": null,
+        "IQA0032": [
+          "England",
+          "Northern Ireland",
+          "Scotland",
+          "Wales"
+        ],
+        "IQA0033": [
+          "England",
+          "Northern Ireland",
+          "Scotland",
+          "Wales"
+        ],
+        "IQA0034": [
+          "England",
+          "Northern Ireland",
+          "Scotland",
+          "Wales"
+        ],
+        "IQA0144": [
+          "Independent primary care contractors",
+          "Independent research units",
+          "Local councils",
+          "NHS or HSC organisations",
+          "Phase 1 trial units (non-NHS or HSC organisation)",
+          "Prison or probation setting",
+          "Schools or other educational establishments",
+          "Social care settings",
+          "University",
+          "Voluntary sector or private organisations",
+          "Community settings",
+          "Other"
+        ],
+        "IQA0145": null,
+        "IQA0146": [
+          "Yes",
+          "No",
+          "Not applicable"
+        ]
+      }
     }
   },
   "Student": {
@@ -325,6 +1025,41 @@
         "IQA0233": "Last name",
         "IQA0234": "Job title",
         "IQA0235": "University",
+        "IQA0236": "Email"
+      }
+    },
+    "Radio_Checkbox_Labels": {
+      "Educational_Project": {
+        "IQA0218": "Text",
+        "IQA0219": [
+          "Yes",
+          "No"
+        ],
+        "IQA0222": [
+          "Undergraduate or below",
+          "Masters or equivalent",
+          "Doctoral or equivalent"
+        ],
+        "IQG0005": "n/a",
+        "IQA0223": [
+          "Eligible and Supplementary Declaration A included",
+          "Eligible and Supplementary Declaration B included",
+          "Eligible and Supplementary Declaration C included"
+        ],
+        "IQA0220": [],
+        "IQA0221": "Text",
+        "IQA0225": "Text",
+        "IQA0227": "Text",
+        "IQA0228": "Text",
+        "IQA0229": "Email",
+        "IQA0237": [
+          "Academic supervisor",
+          "Student"
+        ],
+        "IQA0232": "Text",
+        "IQA0233": "Text",
+        "IQA0234": "Text",
+        "IQA0235": "Text",
         "IQA0236": "Email"
       }
     }
@@ -355,6 +1090,79 @@
         "IQA0271": "Is it possible that the project could produce health related findings of clinical significance for donors or their relatives?",
         "IQA0272": "Will arrangements be made to notify the individuals concerned?",
         "IQA0273": "Explain why individuals concerned will not be notified."
+      }
+    },
+    "Radio_Checkbox_Labels": {
+      "Human_Biological_Samples": {
+        "IQA0253": "Text",
+        "IQA0254": [
+          "Yes",
+          "No"
+        ],
+        "IQA0255": [
+          "Yes",
+          "No"
+        ],
+        "IQA0256": "Text",
+        "IQA0257": [
+          "Living",
+          "Deceased"
+        ],
+        "IQA0258": [
+          "England",
+          "Northern Ireland",
+          "Scotland",
+          "Wales"
+        ],
+        "IQA0259": "Text",
+        "IQA0260": [
+          "Yes",
+          "No"
+        ],
+        "IQA0261": [
+          "Yes",
+          "No"
+        ],
+        "IQA0262": [
+          "Yes",
+          "No"
+        ],
+        "IQA0263": [
+          "Yes",
+          "No"
+        ],
+        "IQA0264": "Text",
+        "IQA0265": [
+          "Yes",
+          "No"
+        ],
+        "IQA0266": "Text",
+        "IQA0267": [
+          "Study-specific arrangements",
+          "In line with normal clinical arrangements for the organisation"
+        ],
+        "IQA0268": [
+          "Transfer to research tissue bank",
+          "Storage by research team pending ethical approval for use in another project",
+          "Storage by research team as part of a new research tissue bank",
+          "Storage by research team of biological material which is not “relevant material” for the purposes of the Human Tissue Act",
+          "Disposal in accordance with the Human Tissue Authority’s Code of Practice",
+          "Other",
+          "Not yet known"
+        ],
+        "IQA0269": "Text",
+        "IQA0270": "Text"
+      },
+      "Health_Related_Findings": {
+        "IQA0271": [
+          "Yes",
+          "No"
+        ],
+        "IQA0272": [
+          "Yes",
+          "No"
+        ],
+        "IQA0273": "Text"
       }
     }
   }

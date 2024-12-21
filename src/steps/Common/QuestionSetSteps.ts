@@ -19,9 +19,15 @@ Then(
     });
     if (columnToExtract === 'question set field labels') {
       columnName = questionSetPage.qsetExcelJSONConfigTestData.Excel_Properties['qset_field_label_column_name'];
+    } else if (columnToExtract === 'radio and checkbox labels') {
+      columnName =
+        questionSetPage.qsetExcelJSONConfigTestData.Excel_Properties['qset_radio_checkbox_label_column_name'];
     }
     excelValuesJSON = await questionSetPage.storeQSetExcelDataToMemory(sheetName, columnName);
     excelValuesJSON = await questionSetPage.seperateQSetDataBySections(excelValuesJSON, sectionsMap);
+    if (columnToExtract === 'radio and checkbox labels') {
+      excelValuesJSON = await questionSetPage.getRadioCheckboxLabelsToMemory(excelValuesJSON);
+    }
     await questionSetPage.writeExtractedDataFromMemoryToJSON(excelValuesJSON, jsonPath, parentNodesJSONMap);
   }
 );
@@ -33,6 +39,10 @@ Then(
     const rootParentNode = await questionSetPage.getRootParentNodeNameJSON(pageName);
     const parentNodesMap = await questionSetPage.getParentNodesQSetJSON(criteria);
     parentNodesMap.set('jsonRootParentNode', rootParentNode);
-    await questionSetPage.validateFieldLabelForQSet(pageName, jsonPath, parentNodesMap);
+    if (criteria === 'question set field labels') {
+      await questionSetPage.validateFieldLabelForQSet(pageName, jsonPath, parentNodesMap);
+    } else if (criteria === 'radio and checkbox labels') {
+      await questionSetPage.validateRadioCheckboxLabelForQSet(pageName, jsonPath, parentNodesMap);
+    }
   }
 );
