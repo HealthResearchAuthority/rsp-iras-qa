@@ -15,6 +15,7 @@ import BookingPage from '../pages/IRAS/questionSet/BookingPage';
 import CreateApplicationPage from '../pages/IRAS/CreateApplicationPage';
 import ProceedApplicationPage from '../pages/IRAS/ProceedApplicationPage';
 import QuestionSetPage from '../pages/Common/QuestionSetPage';
+import GenerateUserAttributesPage from '../pages/userAdministration/testdataGenerator/GenerateUserAttributesPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -32,11 +33,15 @@ type CustomFixtures = {
   proceedApplicationPage: ProceedApplicationPage;
   questionSetPage: QuestionSetPage;
   makeAxeBuilder: () => AxeBuilder;
+  generateUserAttributesPage: GenerateUserAttributesPage;
 };
 
 export const test = base.extend<CustomFixtures>({
   commonItemsPage: async ({ page }, use) => {
     await use(new CommonItemsPage(page));
+  },
+  generateUserAttributesPage: async ({ page }, use) => {
+    await use(new GenerateUserAttributesPage(page));
   },
 
   questionSetPage: async ({ page }, use) => {
