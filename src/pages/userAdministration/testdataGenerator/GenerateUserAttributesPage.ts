@@ -16,6 +16,8 @@ let testdata_output_invalid: string[];
 const results_invalid_phone: string[] = [];
 const results_invalid_email: string[] = [];
 const results_invalid: string[] = [];
+let results: string[] = [];
+let testdata: string;
 
 //Declare Page Objects
 export default class GenerateUserAttributesPage {
@@ -264,9 +266,7 @@ export default class GenerateUserAttributesPage {
     for (let i = 0; i < count; i++) {
       const testdata = generator.gen();
       if (!regex_valid.test(testdata)) {
-        {
-          results.push(testdata);
-        }
+        results.push(testdata);
       }
     }
     return results;
@@ -299,9 +299,6 @@ export default class GenerateUserAttributesPage {
   }
 
   generatefakerDataInvalid(regex: RegExp, fieldName: string, count: number) {
-    let results: string[] = [];
-    let testdata;
-
     for (let i = 0; i < count; i++) {
       if (fieldName === 'Title') {
         testdata = faker.person.prefix();
@@ -310,43 +307,27 @@ export default class GenerateUserAttributesPage {
       } else if (fieldName === 'Surname') {
         testdata = faker.person.lastName();
       }
-      results = this.generateInvalidDataCondition1(regex, testdata);
-      // const testdata1 = ' +' + testdata;
-      // if (!regex.test(testdata1)) {
-      //   results.push(testdata1);
-      // }
-      results = this.generateInvalidDataCondition2(regex, testdata);
-      // const testdata2 = '123' + testdata;
-      // if (!regex.test(testdata2)) {
-      //   results.push(testdata2);
-      // }
-      results = this.generateInvalidDataCondition3(regex, testdata);
-      // const testdata3 = '%^&*' + testdata;
-      // if (!regex.test(testdata3)) {
-      //   results.push(testdata3);
-      // }
-      results = this.generateInvalidDataCondition4(regex, testdata);
-      // const testdata4 = testdata + '12sd3';
-      // if (!regex.test(testdata4)) {
-      //   results.push(testdata4);
-      // }
-      results = this.generateInvalidDataCondition5(regex, testdata);
-      // const testdata5 = testdata + '  ';
-      // if (!regex.test(testdata5)) {
-      //   results.push(testdata5);
-      // }
-      results = this.generateInvalidDataCondition6(regex);
-      // const testdata6 = '  ';
-      // if (!regex.test(testdata6)) {
-      //   results.push(testdata6);
-      // }
-      results = this.generateInvalidDataCondition7(regex, testdata);
-      // const testdata7 = '  ' + testdata;
-      // if (!regex.test(testdata7)) {
-      //   results.push(testdata7);
-      // }
+      [results] = this.generateInvalidDataConditions(regex, testdata);
     }
     return results;
+  }
+  generateInvalidDataConditions(regex: RegExp, testdata: string) {
+    const results_condition1 = this.generateInvalidDataCondition1(regex, testdata);
+    const results_condition2 = this.generateInvalidDataCondition2(regex, testdata);
+    const results_condition3 = this.generateInvalidDataCondition3(regex, testdata);
+    const results_condition4 = this.generateInvalidDataCondition4(regex, testdata);
+    const results_condition5 = this.generateInvalidDataCondition5(regex, testdata);
+    const results_condition6 = this.generateInvalidDataCondition6(regex);
+    const results_condition7 = this.generateInvalidDataCondition7(regex, testdata);
+    return [
+      results_condition1,
+      results_condition2,
+      results_condition3,
+      results_condition4,
+      results_condition5,
+      results_condition6,
+      results_condition7,
+    ];
   }
   generateInvalidDataCondition1(regex: RegExp, testdata: string) {
     const testdata1 = ' +' + testdata;
