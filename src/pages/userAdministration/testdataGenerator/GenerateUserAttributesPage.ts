@@ -399,25 +399,31 @@ export default class GenerateUserAttributesPage {
     let results: string[] = [];
     const testdata_faker_email = faker.internet.email();
     for (let i = 0; i < count; i++) {
-      results = this.generateInvalidEmailCondition1(regex, testdata_faker_email);
-
-      results = this.generateInvalidEmailCondition2(regex, testdata_faker_email);
-
-      results = this.generateInvalidEmailCondition3(regex, testdata_faker_email);
-
-      results = this.generateInvalidEmailCondition4(regex, testdata_faker_email);
-
-      results = this.generateInvalidEmailCondition5(regex);
-
-      results = this.generateInvalidEmailCondition6(regex);
-
-      results = this.generateInvalidEmailCondition7(regex);
-
-      results = this.generateInvalidEmailCondition8(regex);
-
-      results = this.generateInvalidEmailCondition9(regex);
+      [results] = this.generateInvalidEmailDataConditions(regex, testdata_faker_email);
     }
     return results;
+  }
+  generateInvalidEmailDataConditions(regex: RegExp, testdata_faker_email: string) {
+    const results_condition1 = this.generateInvalidEmailCondition1(regex, testdata_faker_email);
+    const results_condition2 = this.generateInvalidEmailCondition2(regex, testdata_faker_email);
+    const results_condition3 = this.generateInvalidEmailCondition3(regex, testdata_faker_email);
+    const results_condition4 = this.generateInvalidEmailCondition4(regex, testdata_faker_email);
+    const results_condition5 = this.generateInvalidEmailCondition5(regex);
+    const results_condition6 = this.generateInvalidEmailCondition6(regex);
+    const results_condition7 = this.generateInvalidEmailCondition7(regex);
+    const results_condition8 = this.generateInvalidEmailCondition8(regex);
+    const results_condition9 = this.generateInvalidEmailCondition9(regex);
+    return [
+      results_condition1,
+      results_condition2,
+      results_condition3,
+      results_condition4,
+      results_condition5,
+      results_condition6,
+      results_condition7,
+      results_condition8,
+      results_condition9,
+    ];
   }
   generateInvalidEmailCondition1(regex: RegExp, testdata: string) {
     if (this.userProfileGeneratedataConfig.invalid_data.Email.condition1 === 'removeAtSymbol') {
@@ -504,21 +510,27 @@ export default class GenerateUserAttributesPage {
   generatefakerDataInvalidPhone(regex: RegExp, count: number) {
     let results: string[] = [];
     for (let i = 0; i < count; i++) {
-      results = this.generateInvalidPhoneCondition1(regex);
-
-      results = this.generateInvalidPhoneCondition2(regex);
-
-      results = this.generateInvalidPhoneCondition3(regex);
-
-      results = this.generateInvalidPhoneCondition4(regex);
-
-      results = this.generateInvalidPhoneCondition5(regex);
-
-      results = this.generateInvalidPhoneCondition6(regex);
-
-      results = this.generateInvalidPhoneCondition7(regex);
+      [results] = this.generateInvalidPhoneDataConditions(regex);
     }
     return results;
+  }
+  generateInvalidPhoneDataConditions(regex: RegExp) {
+    const results_condition1 = this.generateInvalidPhoneCondition1(regex);
+    const results_condition2 = this.generateInvalidPhoneCondition2(regex);
+    const results_condition3 = this.generateInvalidPhoneCondition3(regex);
+    const results_condition4 = this.generateInvalidPhoneCondition4(regex);
+    const results_condition5 = this.generateInvalidPhoneCondition5(regex);
+    const results_condition6 = this.generateInvalidPhoneCondition6(regex);
+    const results_condition7 = this.generateInvalidPhoneCondition7(regex);
+    return [
+      results_condition1,
+      results_condition2,
+      results_condition3,
+      results_condition4,
+      results_condition5,
+      results_condition6,
+      results_condition7,
+    ];
   }
 
   generateInvalidPhoneCondition1(regex: RegExp) {
