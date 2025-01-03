@@ -4,12 +4,12 @@ import { chromium, expect } from '@playwright/test';
 const { Then } = createBdd(test);
 import { getDecryptedValue } from '../../utils/UtilFunctions';
 
-Then('I login to the {string} email application', async ({ emailNotificationPage, browser }, datasetName: string) => {
+Then('I login to the {string} email application', async ({ emailNotificationPage }, datasetName: string) => {
   emailNotificationPage.emailDomainName = datasetName.replace(/_.*/, '');
   const emailDataSetName = datasetName.replace(/[^_]*_/, '');
   const datasetParent = emailNotificationPage.emailNotificationTestData[emailNotificationPage.emailDomainName];
   const dataset = datasetParent[emailDataSetName];
-  browser = await chromium.launch();
+  const browser = await chromium.launch();
   emailNotificationPage.emailPage = await browser.newPage();
   await emailNotificationPage.emailPage.goto(dataset.url);
   if (emailNotificationPage.emailDomainName.toLowerCase() === 'microsoft') {
