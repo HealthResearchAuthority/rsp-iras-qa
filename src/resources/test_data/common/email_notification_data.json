@@ -1,0 +1,34 @@
+{
+  "Microsoft": {
+    "HRA": {
+      "url": "https://outlook.office365.com/mail/",
+      "username": "harp.test001@hra.nhs.uk",
+      "password": "`${process.env.OUTLOOK_HRA_USER_PASS}`"
+    },
+    "HRA_Researcher": {
+      "url": "https://outlook.office365.com/mail/",
+      "username": "this.is.a.test.email@hra.nhs.uk",
+      "password": "`${process.env.OUTLOOK_HRA_USER_PASS}`"
+    }
+  },
+  "Gmail": {
+    "User_Researcher": {
+      "url": "https://gmail.com/",
+      "username": "this.is.a.test.email@gmail.com",
+      "password": "`${process.env.GMAIL_USER_RESEARCHER_USER_PASS}`"
+    }
+  },
+  "Yahoo": {
+    "User_Researcher": {
+      "url": "https://mail.yahoo.com/",
+      "username": "this.is.a.test.email@yahoo.com",
+      "password": "`${process.env.YAHOO_USER_RESEARCHER_USER_PASS}`"
+    }
+  },
+  "Mail_Content": {
+      "from": "harp test001",
+      "subject": "This is a test subject",
+      "body": "This is a test email body",
+      "mail_timeout": 120000
+  }
+}

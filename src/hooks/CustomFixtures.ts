@@ -15,6 +15,7 @@ import BookingPage from '../pages/IRAS/questionSet/BookingPage';
 import CreateApplicationPage from '../pages/IRAS/CreateApplicationPage';
 import ProceedApplicationPage from '../pages/IRAS/ProceedApplicationPage';
 import QuestionSetPage from '../pages/Common/QuestionSetPage';
+import EmailNotificationPage from '../pages/Common/emailNotificationPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -31,6 +32,7 @@ type CustomFixtures = {
   createApplicationPage: CreateApplicationPage;
   proceedApplicationPage: ProceedApplicationPage;
   questionSetPage: QuestionSetPage;
+  emailNotificationPage: EmailNotificationPage;
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -89,6 +91,10 @@ export const test = base.extend<CustomFixtures>({
 
   proceedApplicationPage: async ({ page }, use) => {
     await use(new ProceedApplicationPage(page));
+  },
+
+  emailNotificationPage: async ({ page }, use) => {
+    await use(new EmailNotificationPage(page));
   },
 
   makeAxeBuilder: async ({ page }, use) => {
