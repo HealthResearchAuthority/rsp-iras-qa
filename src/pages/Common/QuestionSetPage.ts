@@ -296,7 +296,7 @@ export default class QuestionSetPage {
             const worksheet = workbook.getWorksheet(optionSheetName);
             let optionIDColumnIndex: number;
             let optionTextColumnIndex: number;
-            worksheet?.getRow(columnHeaderIndex).eachCell((cell, colNumber) => {
+            worksheet?.getRow(columnHeaderIndex).eachCell((cell: excel.Cell, colNumber: number) => {
               if (cell.value === optionIDColumnName) {
                 optionIDColumnIndex = colNumber;
               } else if (cell.value === optionTextColumnName) {
@@ -305,7 +305,7 @@ export default class QuestionSetPage {
             });
             const radioCheckboxValueArray: any[] = [];
             for (const radioCheckboxKey in radioValuesKeyArray) {
-              worksheet?.eachRow({ includeEmpty: false }, function (row) {
+              worksheet?.eachRow({ includeEmpty: false }, function (row: excel.Row) {
                 if (row.getCell(optionIDColumnIndex).value === radioValuesKeyArray[radioCheckboxKey]) {
                   radioCheckboxValueArray.push(row.getCell(optionTextColumnIndex).value);
                 }
@@ -345,7 +345,7 @@ export default class QuestionSetPage {
             actualValuesFromUIArray.push(value);
           }
           const expectedValuesArray = expectedValueInnerJSON[expectedValueKey];
-          expectedValuesArray.forEach((expectedValue: string, index) => {
+          expectedValuesArray.forEach((expectedValue: string, index: number) => {
             const actualValue: string = actualValuesFromUIArray[index];
             expect(actualValue).toContain(expectedValue);
           });
