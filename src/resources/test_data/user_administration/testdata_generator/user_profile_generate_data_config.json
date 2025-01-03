@@ -1,7 +1,7 @@
 {
   "JSON_Properties": {
-    "json_path": "./src/resources/test_data/user_administration/testdata_generator/user_profile_generate_test_data.json",
-    "json_path_faker": "./src/resources/test_data/user_administration/testdata_generator/user_profile_generate_faker_test_data.json"
+    "json_path": "./src/resources/test_data/user_administration/testdata_generator/results/user_profile_generate_test_data.json",
+    "json_path_faker": "./src/resources/test_data/user_administration/testdata_generator/results/user_profile_generate_faker_test_data.json"
   },
   "valid_data": {
     "Forename": {
