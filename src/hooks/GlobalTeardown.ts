@@ -9,5 +9,13 @@ async function globalTeardown() {
   } catch (err) {
     console.error(err);
   }
+  try {
+    const files = readdirSync('src/resources/test_data/user_administration/testdata_generator/results/');
+    for (const file of files) {
+      unlinkSync(`src/resources/test_data/user_administration/testdata_generator/results/${file}`);
+    }
+  } catch (err) {
+    console.error(err);
+  }
 }
 export default globalTeardown;

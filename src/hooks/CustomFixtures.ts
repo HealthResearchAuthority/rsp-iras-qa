@@ -119,11 +119,11 @@ export const test = base.extend<CustomFixtures>({
       if (files.length > 0) {
         $testInfo.attach('User Atrributes test data generated using Faker library:', {
           path: jsonPath_faker,
-          contentType: 'JSON',
+          contentType: 'application/json',
         });
         $testInfo.attach('User Atrributes test data generated using regular expression:', {
           path: jsonPath,
-          contentType: 'JSON',
+          contentType: 'application/json',
         });
       }
     }
