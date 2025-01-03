@@ -1,13 +1,18 @@
 {
   "Excel_Properties": {
     "file_path": "./src/resources/test_data/iras/question_set/excel_upload/Question Set Document.xlsx",
+    "option_label_sheet_name": "App2 AnswerOptions",
+    "option_id_column_name": "OptionId",
+    "option_text_column_name": "OptionText",
     "qset_column_header_index": 1,
     "qset_unique_id_column_name": "Unique ID",
     "qset_section_column_name": "Section",
-    "qset_field_label_column_name": "Field label"
+    "qset_field_label_column_name": "Field label",
+    "qset_radio_checkbox_label_column_name": "Values"
   },
   "JSON_Properties":{
     "parent_node_field_label": "Field_Labels",
+    "parent_node_radio_checkbox_label": "Radio_Checkbox_Labels",
     "json_path": "./src/resources/test_data/iras/question_set/question_set_validation_data.json"
   },
   "Project_Filter_Page": {

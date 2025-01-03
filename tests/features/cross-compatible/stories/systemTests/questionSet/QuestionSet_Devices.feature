@@ -39,3 +39,19 @@ Feature: Question Set - Research Application - Devices
     Examples:
       | Project   |
       | Project_X |
+
+@rsp-2049
+  Scenario Outline: Validate the radio and checkbox labels for the question set in the devices page
+    And I generate the list of expected values to validate 'radio and checkbox labels' for 'devices'
+    And I enter the application name and description for '<Project>'
+    And I click the 'Create' button on the 'Create_Application_Page'
+    And I can see the proceed application page for '<Project>'
+    And I click the 'Proceed_Application' button on the 'Proceed_Application_Page'
+    And I can see the 'Project_Filter' question set
+    And I click the 'Devices' link on the 'Progress_Bar'
+    And I can see the 'Devices' question set
+    Then I validate the 'radio and checkbox labels' in application are as expected from the values received from excel for 'devices'
+
+    Examples:
+      | Project   |
+      | Project_X |

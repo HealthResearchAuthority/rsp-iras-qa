@@ -16,6 +16,7 @@ export default class QuestionSetPage {
   readonly page: Page;
   readonly qsetExcelJSONConfigTestData: typeof qsetExcelJSONConfigTestData;
   readonly qSetFieldNameLabel: Locator;
+  readonly radioCheckboxLabel: string;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -26,6 +27,7 @@ export default class QuestionSetPage {
     this.qSetFieldNameLabel = page.locator(
       'label[class="govuk-label govuk-label--s" ], legend[class="govuk-fieldset__legend govuk-fieldset__legend--s" ]'
     );
+    this.radioCheckboxLabel = "//label[contains(@for,'%s')]";
   }
 
   //Page Methods
@@ -64,6 +66,11 @@ export default class QuestionSetPage {
     const rootNodeMap = new Map<string, string>();
     if (rootNodeCriteria === 'question set field labels') {
       rootNodeMap.set('jsonParentNode', this.qsetExcelJSONConfigTestData.JSON_Properties['parent_node_field_label']);
+    } else if (rootNodeCriteria === 'radio and checkbox labels') {
+      rootNodeMap.set(
+        'jsonParentNode',
+        this.qsetExcelJSONConfigTestData.JSON_Properties['parent_node_radio_checkbox_label']
+      );
     }
     return rootNodeMap;
   }
@@ -264,5 +271,86 @@ export default class QuestionSetPage {
       rootParentNode = this.qsetExcelJSONConfigTestData.Booking['root_parent_node'];
     }
     return rootParentNode;
+  }
+
+  async getRadioCheckboxLabelsToMemory(extractedValuesInMemory: JSON): Promise<JSON> {
+    const excelFilePath = qsetExcelJSONConfigTestData.Excel_Properties['file_path'];
+    const optionSheetName = qsetExcelJSONConfigTestData.Excel_Properties['option_label_sheet_name'];
+    const optionIDColumnName = qsetExcelJSONConfigTestData.Excel_Properties['option_id_column_name'];
+    const optionTextColumnName = qsetExcelJSONConfigTestData.Excel_Properties['option_text_column_name'];
+    const columnHeaderIndex = this.qsetExcelJSONConfigTestData.Excel_Properties['qset_column_header_index'];
+    const workbook = new excel.Workbook();
+    for (const sectionKey in extractedValuesInMemory) {
+      const radioCheckboxValueMap = extractedValuesInMemory[sectionKey];
+      for (const radioCheckboxKey in radioCheckboxValueMap) {
+        const radioCheckboxValue = radioCheckboxValueMap[radioCheckboxKey];
+        if (
+          radioCheckboxValue !== null &&
+          radioCheckboxValue !== 'Text' &&
+          radioCheckboxValue !== 'Date' &&
+          radioCheckboxValue !== 'n/a' &&
+          radioCheckboxValue !== 'Email'
+        ) {
+          const radioValuesKeyArray = radioCheckboxValue.split(',');
+          await workbook.xlsx.readFile(excelFilePath).then(function () {
+            const worksheet = workbook.getWorksheet(optionSheetName);
+            let optionIDColumnIndex: number;
+            let optionTextColumnIndex: number;
+            worksheet?.getRow(columnHeaderIndex).eachCell((cell: excel.Cell, colNumber: number) => {
+              if (cell.value === optionIDColumnName) {
+                optionIDColumnIndex = colNumber;
+              } else if (cell.value === optionTextColumnName) {
+                optionTextColumnIndex = colNumber;
+              }
+            });
+            const radioCheckboxValueArray: any[] = [];
+            for (const radioCheckboxKey in radioValuesKeyArray) {
+              worksheet?.eachRow({ includeEmpty: false }, function (row: excel.Row) {
+                if (row.getCell(optionIDColumnIndex).value === radioValuesKeyArray[radioCheckboxKey]) {
+                  radioCheckboxValueArray.push(row.getCell(optionTextColumnIndex).value);
+                }
+              });
+            }
+            radioCheckboxValueMap[radioCheckboxKey] = radioCheckboxValueArray;
+          });
+        }
+      }
+    }
+    return extractedValuesInMemory;
+  }
+
+  async validateRadioCheckboxLabelForQSet(pageName: string, jsonPath: string, parentNodesMap: Map<string, string>) {
+    const jsonTestData = await JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
+    const jsonRootParentNode: any = parentNodesMap.get('jsonRootParentNode');
+    const jsonParentNode: any = parentNodesMap.get('jsonParentNode');
+    const firstNodeJSONData = jsonTestData[jsonRootParentNode];
+    const expectedJSONData = firstNodeJSONData[jsonParentNode];
+    for (const jsonSectionKey in expectedJSONData) {
+      const expectedValueInnerJSON = expectedJSONData[jsonSectionKey];
+      for (const expectedValueKey in expectedValueInnerJSON) {
+        if (
+          expectedValueInnerJSON[expectedValueKey] !== null &&
+          expectedValueInnerJSON[expectedValueKey] !== 'Text' &&
+          expectedValueInnerJSON[expectedValueKey] !== 'Date' &&
+          expectedValueInnerJSON[expectedValueKey] !== 'n/a' &&
+          expectedValueInnerJSON[expectedValueKey] !== 'Email'
+        ) {
+          const radioCheckboxLocator: Locator = this.page.locator(
+            this.radioCheckboxLabel.replace('%s', expectedValueKey)
+          );
+          const actualValuesLocatorList = await radioCheckboxLocator.all();
+          const actualValuesFromUIArray: string[] = [];
+          for (const locator of actualValuesLocatorList) {
+            const value: any = await locator.textContent();
+            actualValuesFromUIArray.push(value);
+          }
+          const expectedValuesArray = expectedValueInnerJSON[expectedValueKey];
+          expectedValuesArray.forEach((expectedValue: string, index: number) => {
+            const actualValue: string = actualValuesFromUIArray[index];
+            expect(actualValue).toContain(expectedValue);
+          });
+        }
+      }
+    }
   }
 }
