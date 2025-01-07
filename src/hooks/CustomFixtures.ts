@@ -103,6 +103,7 @@ export const test = base.extend<CustomFixtures>({
     }
     await use(storageState);
   },
+
   //Attach relevant ticket links to each scenario in test report
   $before: async ({ $tags, $testInfo }, use) => {
     const tickets = getTicketReferenceTags($tags);
@@ -112,5 +113,4 @@ export const test = base.extend<CustomFixtures>({
     await use();
   },
 });
-
 export { expect } from '@playwright/test';
