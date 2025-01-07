@@ -15,8 +15,6 @@ import BookingPage from '../pages/IRAS/questionSet/BookingPage';
 import CreateApplicationPage from '../pages/IRAS/CreateApplicationPage';
 import ProceedApplicationPage from '../pages/IRAS/ProceedApplicationPage';
 import QuestionSetPage from '../pages/Common/QuestionSetPage';
-import { readdirSync } from 'fs';
-import * as userProfileGeneratedataConfig from '../resources/test_data/user_administration/testdata_generator/user_profile_generate_data_config.json';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -105,28 +103,11 @@ export const test = base.extend<CustomFixtures>({
     }
     await use(storageState);
   },
-
   //Attach relevant ticket links to each scenario in test report
   $before: async ({ $tags, $testInfo }, use) => {
     const tickets = getTicketReferenceTags($tags);
     if (tickets.length > 0) {
       $testInfo.attach('Ticket Reference:', { body: tickets.toString().replace(/,/g, '') });
-    }
-    if ($tags.includes('@testdata')) {
-      const files = readdirSync('src/resources/test_data/user_administration/testdata_generator/results/');
-      const jsonPath = userProfileGeneratedataConfig.JSON_Properties['json_path'];
-      const jsonPath_faker = userProfileGeneratedataConfig.JSON_Properties['json_path_faker'];
-      if (files.length > 0) {
-        $testInfo.attach('User Attributes test data generated using Faker library:', {
-          path: jsonPath_faker,
-          contentType: 'text/plain',
-        });
-
-        $testInfo.attach('User Attributes test data generated using regular expression:', {
-          path: jsonPath,
-          contentType: 'text/plain',
-        });
-      }
     }
     await use();
   },

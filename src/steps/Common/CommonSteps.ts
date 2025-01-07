@@ -12,6 +12,7 @@ import {
 const { Given, When, Then } = createBdd(test);
 let testdata_output: any;
 let testdata_output_faker: any;
+import * as userProfileGeneratedataConfig from '../../resources/test_data/user_administration/testdata_generator/user_profile_generate_data_config.json';
 
 Given('I have navigated to the {string}', async ({ loginPage, homePage, createApplicationPage }, page: string) => {
   switch (page) {
@@ -216,3 +217,15 @@ Then(
     await questionSetPage.writeExtractedDataFromMemoryToJSON(testdata_output_faker, jsonPath_faker, parentNodesJSONMap);
   }
 );
+Then('I attach the generated test data json files to the report', async ({ $testInfo }) => {
+  const jsonPath = userProfileGeneratedataConfig.JSON_Properties['json_path'];
+  const jsonPath_faker = userProfileGeneratedataConfig.JSON_Properties['json_path_faker'];
+  $testInfo.attach('User Attributes test data generated using Faker library', {
+    path: jsonPath_faker,
+    contentType: 'text/plain',
+  });
+  $testInfo.attach('User Attributes test data generated using regular expression', {
+    path: jsonPath,
+    contentType: 'text/plain',
+  });
+});
