@@ -117,17 +117,19 @@ export const test = base.extend<CustomFixtures>({
       const jsonPath = userProfileGeneratedataConfig.JSON_Properties['json_path'];
       const jsonPath_faker = userProfileGeneratedataConfig.JSON_Properties['json_path_faker'];
       if (files.length > 0) {
-        $testInfo.attach('User Atrributes test data generated using Faker library:', {
+        $testInfo.attach('User Attributes test data generated using Faker library:', {
           path: jsonPath_faker,
-          contentType: 'application/json',
+          contentType: 'text/plain',
         });
-        $testInfo.attach('User Atrributes test data generated using regular expression:', {
+
+        $testInfo.attach('User Attributes test data generated using regular expression:', {
           path: jsonPath,
-          contentType: 'application/json',
+          contentType: 'text/plain',
         });
       }
     }
     await use();
   },
 });
+
 export { expect } from '@playwright/test';

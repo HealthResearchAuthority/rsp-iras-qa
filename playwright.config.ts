@@ -4,9 +4,8 @@ import 'dotenv/config';
 import { browserVal, platformVal } from './src/utils/UtilFunctions';
 
 // Select Browser to use in Pipeline, Set in .env File Locally
-
-const browser: any = `${browserVal}`;
-const platform: string = `${platformVal}`;
+const browser: any = browserVal;
+const platform: string = platformVal;
 
 const config: PlaywrightTestConfig = {
   reporter: [
@@ -67,6 +66,7 @@ const config: PlaywrightTestConfig = {
         launchOptions: {
           slowMo: 0,
         },
+        javaScriptEnabled: false,
       },
     },
   ],
