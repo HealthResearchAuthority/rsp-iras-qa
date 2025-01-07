@@ -170,12 +170,11 @@ Given(
     }
   }
 );
-
+let testdata_output: any;
+let testdata_output_faker: any;
 Then(
   'I generate {string} test data for {string}',
   async ({ questionSetPage }, typeofdata: string, fieldName: string) => {
-    let testdata_output: any;
-    let testdata_output_faker: any;
     const [jsonPath, jsonPath_faker] = getJSONpath();
     const [forename_valid, surname_valid, telephone_valid, title_valid, email_valid, pattern_invalid] =
       getRegexforFieldsfromJSONconfig(typeofdata, fieldName);
