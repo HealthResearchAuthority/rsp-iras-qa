@@ -10,8 +10,6 @@ import {
   generateTestDataTelephone,
 } from '../../utils/GenerateTestData';
 const { Given, When, Then } = createBdd(test);
-let testdata_output: any;
-let testdata_output_faker: any;
 import * as userProfileGeneratedataConfig from '../../resources/test_data/user_administration/testdata_generator/user_profile_generate_data_config.json';
 
 Given('I have navigated to the {string}', async ({ loginPage, homePage, createApplicationPage }, page: string) => {
@@ -176,6 +174,8 @@ Given(
 Then(
   'I generate {string} test data for {string}',
   async ({ questionSetPage }, typeofdata: string, fieldName: string) => {
+    let testdata_output: any;
+    let testdata_output_faker: any;
     const [jsonPath, jsonPath_faker] = getJSONpath();
     const [forename_valid, surname_valid, telephone_valid, title_valid, email_valid, pattern_invalid] =
       getRegexforFieldsfromJSONconfig(typeofdata, fieldName);
