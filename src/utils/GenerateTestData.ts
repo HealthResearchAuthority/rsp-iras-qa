@@ -662,3 +662,17 @@ export function generatefakerDataValidTelephone(regex: RegExp, fieldName: string
   }
   return results;
 }
+export async function writeGeneratedTestDataToJSON(
+  { questionSetPage },
+  fieldName: string,
+  typeofdata: string,
+  testdata_output: any,
+  testdata_output_faker: any
+) {
+  const parentNodesJSONMap = new Map<string, string>();
+  parentNodesJSONMap.set('jsonRootParentNode', fieldName);
+  parentNodesJSONMap.set('jsonParentNode', typeofdata);
+  const [jsonPath, jsonPath_faker] = getJSONpath();
+  await questionSetPage.writeExtractedDataFromMemoryToJSON(testdata_output, jsonPath, parentNodesJSONMap);
+  await questionSetPage.writeExtractedDataFromMemoryToJSON(testdata_output_faker, jsonPath_faker, parentNodesJSONMap);
+}
