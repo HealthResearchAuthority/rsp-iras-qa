@@ -27,8 +27,8 @@ export default class EmailNotificationPage {
     this.submitMicrosoftButton = 'input[type="submit"]';
     this.filterMailButton = 'button[id="mailListFilterMenu"]';
     this.unreadMenuFromfilterButton = 'span[class="UagSo"]';
-    this.emailSubjectMicrosoftListLabel = 'span';
-    this.emailMarkAsReadMicrosoftButton = 'span';
+    this.emailSubjectMicrosoftListLabel = 'span[class="TtcXM"]';
+    this.emailMarkAsReadMicrosoftButton = 'button[aria-label="Read / Unread"]';
     this.emailFromHeaderMicrosoftLabel = 'span[class="OZZZK"]';
     this.emailSubjectHeaderMicrosoftLabel = 'span[class="JdFsz"]';
     this.emailBodyMicrosoftLabel = 'div[aria-label="Message body"]';

@@ -57,10 +57,7 @@ Then(
           .first()
           .textContent()
       ).toContain(emailBodyExpected);
-      await emailNotificationPage.emailPage
-        .locator(emailNotificationPage.emailMarkAsReadMicrosoftButton)
-        .getByText('Read / Unread')
-        .click();
+      await emailNotificationPage.emailPage.locator(emailNotificationPage.emailMarkAsReadMicrosoftButton).click();
     }
   }
 );
