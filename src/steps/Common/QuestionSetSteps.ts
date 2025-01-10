@@ -4,7 +4,7 @@ const { Then } = createBdd(test);
 
 Then(
   'I generate the list of expected values to validate {string} for {string}',
-  async ({ questionSetPage }, columnToExtract: string, pageName: string) => {
+  async ({ questionSetPage, commonItemsPage }, columnToExtract: string, pageName: string) => {
     let columnName: string = '';
     let excelValuesJSON: JSON;
     const sheetName = await questionSetPage.getExcelSheetName(pageName);
@@ -28,7 +28,7 @@ Then(
     if (columnToExtract === 'radio and checkbox labels') {
       excelValuesJSON = await questionSetPage.getRadioCheckboxLabelsToMemory(excelValuesJSON);
     }
-    await questionSetPage.writeExtractedDataFromMemoryToJSON(excelValuesJSON, jsonPath, parentNodesJSONMap);
+    await commonItemsPage.writeExtractedDataFromMemoryToJSON(excelValuesJSON, jsonPath, parentNodesJSONMap);
   }
 );
 

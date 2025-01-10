@@ -1,6 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as buttonTextData from '../../resources/test_data/common/button_text_data.json';
 import * as linkTextData from '../../resources/test_data/common/link_text_data.json';
+import fs from 'fs';
 
 //Declare Page Objects
 export default class CommonItemsPage {
@@ -93,6 +94,44 @@ export default class CommonItemsPage {
     } else if (typeAttribute === 'checkbox') {
       for (const checkbox of dataset[key]) {
         await locator.locator('..').getByLabel(checkbox, { exact: true }).check();
+      }
+    }
+  }
+
+  async writeExtractedDataFromMemoryToJSON(
+    extractedValuesInMemory: JSON,
+    testDataJSONPath: string,
+    jsonParentNodesMap: Map<string, string>
+  ) {
+    const jsonRootParentNode: any = jsonParentNodesMap.get('jsonRootParentNode');
+    const jsonParentNode: any = jsonParentNodesMap.get('jsonParentNode');
+    const createNewJSONObject = () => {
+      const newJSONObjectData = {
+        [jsonRootParentNode]: {
+          [jsonParentNode]: {},
+        },
+      };
+      const firstNode = newJSONObjectData[jsonRootParentNode];
+      firstNode[jsonParentNode] = extractedValuesInMemory;
+      return newJSONObjectData;
+    };
+    const writeToJSONFile = (readJSONFile: JSON) => {
+      fs.writeFileSync(testDataJSONPath, JSON.stringify(readJSONFile, null, 2));
+    };
+    if (!fs.existsSync(testDataJSONPath) || fs.statSync(testDataJSONPath).size == 0) {
+      fs.writeFileSync(testDataJSONPath, JSON.stringify(createNewJSONObject(), null, 2));
+    } else {
+      const readJSONFile = await JSON.parse(fs.readFileSync(testDataJSONPath, 'utf8'));
+      if (Object.prototype.hasOwnProperty.call(readJSONFile, jsonRootParentNode)) {
+        const rootParentNodeValues = readJSONFile[jsonRootParentNode];
+        rootParentNodeValues[jsonParentNode] = extractedValuesInMemory;
+        writeToJSONFile(readJSONFile);
+      } else {
+        const newJSONObjectChildData = {
+          [jsonParentNode]: extractedValuesInMemory,
+        };
+        readJSONFile[jsonRootParentNode] = newJSONObjectChildData;
+        writeToJSONFile(readJSONFile);
       }
     }
   }

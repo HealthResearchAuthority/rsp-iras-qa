@@ -75,44 +75,6 @@ export default class QuestionSetPage {
     return rootNodeMap;
   }
 
-  async writeExtractedDataFromMemoryToJSON(
-    extractedValuesInMemory: JSON,
-    testDataJSONPath: string,
-    jsonParentNodesMap: Map<string, string>
-  ) {
-    const jsonRootParentNode: any = jsonParentNodesMap.get('jsonRootParentNode');
-    const jsonParentNode: any = jsonParentNodesMap.get('jsonParentNode');
-    const createNewJSONObject = () => {
-      const newJSONObjectData = {
-        [jsonRootParentNode]: {
-          [jsonParentNode]: {},
-        },
-      };
-      const firstNode = newJSONObjectData[jsonRootParentNode];
-      firstNode[jsonParentNode] = extractedValuesInMemory;
-      return newJSONObjectData;
-    };
-    const writeToJSONFile = (readJSONFile: JSON) => {
-      fs.writeFileSync(testDataJSONPath, JSON.stringify(readJSONFile, null, 2));
-    };
-    if (!fs.existsSync(testDataJSONPath) || fs.statSync(testDataJSONPath).size == 0) {
-      fs.writeFileSync(testDataJSONPath, JSON.stringify(createNewJSONObject(), null, 2));
-    } else {
-      const readJSONFile = await JSON.parse(fs.readFileSync(testDataJSONPath, 'utf8'));
-      if (Object.prototype.hasOwnProperty.call(readJSONFile, jsonRootParentNode)) {
-        const rootParentNodeValues = readJSONFile[jsonRootParentNode];
-        rootParentNodeValues[jsonParentNode] = extractedValuesInMemory;
-        writeToJSONFile(readJSONFile);
-      } else {
-        const newJSONObjectChildData = {
-          [jsonParentNode]: extractedValuesInMemory,
-        };
-        readJSONFile[jsonRootParentNode] = newJSONObjectChildData;
-        writeToJSONFile(readJSONFile);
-      }
-    }
-  }
-
   async seperateQSetDataBySections(extractedValuesInMemory: JSON, sectionsMap: Map<string, string>): Promise<JSON> {
     const sectionBasedJSON: JSON = {} as JSON;
     const extractedDataKeySet: string[] = [];
