@@ -1,13 +1,13 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../hooks/CustomFixtures';
 import {
-  getJSONpath,
   getRegexforFieldsfromJSONconfig,
   generateTestDataTitle,
   generateTestDataEmail,
   generateTestDataForename,
   generateTestDataSurname,
   generateTestDataTelephone,
+  writeGeneratedTestDataToJSON,
 } from '../../utils/GenerateTestData';
 const { Given, When, Then } = createBdd(test);
 import * as userProfileGeneratedataConfig from '../../resources/test_data/user_administration/testdata_generator/user_profile_generate_data_config.json';
@@ -170,50 +170,65 @@ Given(
     }
   }
 );
-let testdata_output: any;
-let testdata_output_faker: any;
+
 Then(
   'I generate {string} test data for {string}',
   async ({ questionSetPage }, typeofdata: string, fieldName: string) => {
-    const [jsonPath, jsonPath_faker] = getJSONpath();
+    let testdata_output: any;
+    let testdata_output_faker: any;
     const [forename_valid, surname_valid, telephone_valid, title_valid, email_valid, pattern_invalid] =
       getRegexforFieldsfromJSONconfig(typeofdata, fieldName);
-    [testdata_output, testdata_output_faker] = generateTestDataTitle(
-      title_valid,
-      fieldName,
-      typeofdata,
-      pattern_invalid
-    );
-    [testdata_output, testdata_output_faker] = generateTestDataEmail(
-      email_valid,
-      fieldName,
-      typeofdata,
-      pattern_invalid
-    );
-    [testdata_output, testdata_output_faker] = generateTestDataForename(
-      forename_valid,
-      fieldName,
-      typeofdata,
-      pattern_invalid
-    );
-    [testdata_output, testdata_output_faker] = generateTestDataSurname(
-      surname_valid,
-      fieldName,
-      typeofdata,
-      pattern_invalid
-    );
-    [testdata_output, testdata_output_faker] = generateTestDataTelephone(
-      telephone_valid,
-      fieldName,
-      typeofdata,
-      pattern_invalid
-    );
-
-    const parentNodesJSONMap = new Map<string, string>();
-    parentNodesJSONMap.set('jsonRootParentNode', fieldName);
-    parentNodesJSONMap.set('jsonParentNode', typeofdata);
-    await questionSetPage.writeExtractedDataFromMemoryToJSON(testdata_output, jsonPath, parentNodesJSONMap);
-    await questionSetPage.writeExtractedDataFromMemoryToJSON(testdata_output_faker, jsonPath_faker, parentNodesJSONMap);
+    switch (fieldName) {
+      case 'Title': {
+        [testdata_output, testdata_output_faker] = generateTestDataTitle(
+          title_valid,
+          fieldName,
+          typeofdata,
+          pattern_invalid
+        );
+        break;
+      }
+      case 'Forename': {
+        [testdata_output, testdata_output_faker] = generateTestDataForename(
+          forename_valid,
+          fieldName,
+          typeofdata,
+          pattern_invalid
+        );
+        break;
+      }
+      case 'Surname': {
+        [testdata_output, testdata_output_faker] = generateTestDataSurname(
+          surname_valid,
+          fieldName,
+          typeofdata,
+          pattern_invalid
+        );
+        break;
+      }
+      case 'Email': {
+        [testdata_output, testdata_output_faker] = generateTestDataEmail(
+          email_valid,
+          fieldName,
+          typeofdata,
+          pattern_invalid
+        );
+        break;
+      }
+      case 'Telephone': {
+        [testdata_output, testdata_output_faker] = generateTestDataTelephone(
+          telephone_valid,
+          fieldName,
+          typeofdata,
+          pattern_invalid
+        );
+        break;
+      }
+      default: {
+        throw new Error(`${fieldName} is not a valid option`);
+      }
+    }
+    writeGeneratedTestDataToJSON({ questionSetPage }, fieldName, typeofdata, testdata_output, testdata_output_faker);
   }
 );
 Then('I attach the generated test data json files to the report', async ({ $testInfo }) => {
