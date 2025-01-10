@@ -212,7 +212,7 @@ export async function generateAxeHTMLReport($bddWorld, axeScanResults) {
 }
 
 export function getOSNameVersion() {
-  let osVersion;
+  let osVersion: string;
   if (`${os.version}`.includes('Ubuntu')) {
     osVersion = `${os.type}` + ' ' + `${os.release}`;
   } else {

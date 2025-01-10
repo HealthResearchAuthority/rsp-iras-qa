@@ -4,9 +4,8 @@ import 'dotenv/config';
 import { browserVal, platformVal } from './src/utils/UtilFunctions';
 
 // Select Browser to use in Pipeline, Set in .env File Locally
-
-const browser: any = `${browserVal}`;
-const platform: string = `${platformVal}`;
+const browser: any = browserVal;
+const platform: string = platformVal;
 
 const config: PlaywrightTestConfig = {
   reporter: [
@@ -56,7 +55,7 @@ const config: PlaywrightTestConfig = {
         features: [
           'tests/features/cross-compatible/stories/**/*.feature',
           'tests/features/cross-compatible/accessibility/**/*.feature', //comment out to prevent running accessibility tests locally
-           // 'tests/features/cross-compatible/userAdministration/**/*.feature',//comment out to prevent running User Administration tests locally
+          // 'tests/features/cross-compatible/userAdministration/**/*.feature', //comment out to prevent running User Administration tests locally
           `tests/features/${platform}/**/*.feature`,
         ],
         steps: ['src/steps/**/*.ts', 'src/hooks/CustomFixtures.ts'],
@@ -67,6 +66,7 @@ const config: PlaywrightTestConfig = {
         launchOptions: {
           slowMo: 0,
         },
+        javaScriptEnabled: false,
       },
     },
   ],

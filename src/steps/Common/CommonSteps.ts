@@ -1,7 +1,16 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../hooks/CustomFixtures';
-
+import {
+  getJSONpath,
+  getRegexforFieldsfromJSONconfig,
+  generateTestDataTitle,
+  generateTestDataEmail,
+  generateTestDataForename,
+  generateTestDataSurname,
+  generateTestDataTelephone,
+} from '../../utils/GenerateTestData';
 const { Given, When, Then } = createBdd(test);
+import * as userProfileGeneratedataConfig from '../../resources/test_data/user_administration/testdata_generator/user_profile_generate_data_config.json';
 
 Given('I have navigated to the {string}', async ({ loginPage, homePage, createApplicationPage }, page: string) => {
   switch (page) {
@@ -161,3 +170,61 @@ Given(
     }
   }
 );
+let testdata_output: any;
+let testdata_output_faker: any;
+Then(
+  'I generate {string} test data for {string}',
+  async ({ questionSetPage }, typeofdata: string, fieldName: string) => {
+    const [jsonPath, jsonPath_faker] = getJSONpath();
+    const [forename_valid, surname_valid, telephone_valid, title_valid, email_valid, pattern_invalid] =
+      getRegexforFieldsfromJSONconfig(typeofdata, fieldName);
+    [testdata_output, testdata_output_faker] = generateTestDataTitle(
+      title_valid,
+      fieldName,
+      typeofdata,
+      pattern_invalid
+    );
+    [testdata_output, testdata_output_faker] = generateTestDataEmail(
+      email_valid,
+      fieldName,
+      typeofdata,
+      pattern_invalid
+    );
+    [testdata_output, testdata_output_faker] = generateTestDataForename(
+      forename_valid,
+      fieldName,
+      typeofdata,
+      pattern_invalid
+    );
+    [testdata_output, testdata_output_faker] = generateTestDataSurname(
+      surname_valid,
+      fieldName,
+      typeofdata,
+      pattern_invalid
+    );
+    [testdata_output, testdata_output_faker] = generateTestDataTelephone(
+      telephone_valid,
+      fieldName,
+      typeofdata,
+      pattern_invalid
+    );
+
+    const parentNodesJSONMap = new Map<string, string>();
+    parentNodesJSONMap.set('jsonRootParentNode', fieldName);
+    parentNodesJSONMap.set('jsonParentNode', typeofdata);
+    await questionSetPage.writeExtractedDataFromMemoryToJSON(testdata_output, jsonPath, parentNodesJSONMap);
+    await questionSetPage.writeExtractedDataFromMemoryToJSON(testdata_output_faker, jsonPath_faker, parentNodesJSONMap);
+  }
+);
+Then('I attach the generated test data json files to the report', async ({ $testInfo }) => {
+  const jsonPath = userProfileGeneratedataConfig.JSON_Properties['json_path'];
+  const jsonPath_faker = userProfileGeneratedataConfig.JSON_Properties['json_path_faker'];
+  $testInfo.attach('User Attributes test data generated using Faker library', {
+    path: jsonPath_faker,
+    contentType: 'text/plain',
+  });
+  $testInfo.attach('User Attributes test data generated using regular expression', {
+    path: jsonPath,
+    contentType: 'text/plain',
+  });
+});

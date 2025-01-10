@@ -1,0 +1,83 @@
+{
+  "JSON_Properties": {
+    "json_path": "./src/resources/test_data/user_administration/testdata_generator/results/user_profile_generate_test_data.json",
+    "json_path_faker": "./src/resources/test_data/user_administration/testdata_generator/results/user_profile_generate_faker_test_data.json"
+  },
+  "valid_data": {
+    "Forename": {
+      "regexp": "^[A-Z][a-zA-Z]*$",
+      "count": "10",
+      "minLength": "6",
+      "maxLength": "254"
+    },
+    "Surname": {
+      "regexp": "^[A-Z][a-zA-Z'-]{1,19}$",
+      "count": "10",
+      "minLength": "6",
+      "maxLength": "254"
+    },
+    "Email": {
+      "regexp": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+      "count": "10",
+      "minLength": "6",
+      "maxLength": "254"
+    },
+    "Telephone": {
+      "regexp": "^\\+?[0-9]{1,3}[- ]?\\(?[0-9]{3}\\)?[- ]?[0-9]{3}[- ]?[0-9]{4}$",
+      "us": "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$",
+      "uk": "^(((\\+44\\s?\\d{4}|\\(?0\\d{4}\\)?)\\s?\\d{3}\\s?\\d{3})|((\\+44\\s?\\d{3}|\\(?0\\d{3}\\)?)\\s?\\d{3}\\s?\\d{4})|((\\+44\\s?\\d{2}|\\(?0\\d{2}\\)?)\\s?\\d{4}\\s?\\d{4}))(\\s?\\#(\\d{4}|\\d{3}))?$/",
+      "french": "^(?:(?:\\+|00)33[\\s.-]{0,3}(?:\\(0\\)[\\s.-]{0,3})?|0)[1-9](?:(?:[\\s.-]?\\d{2}){4}|\\d{2}(?:[\\s.-]?\\d{3}){2})$",
+      "german": "^/(\\(?([\\d \\-\\)\\–\\+/\\(]+){6,}\\)?([ .\\-–/]?)([\\d]+))/$",
+      "chinese": "^(?:(?:\\d{3}-)?\\d{8}|^(?:\\d{4}-)?\\d{7,8})(?:-\\d+)?$",
+      "india": "^((\\+*)((0[ -]*)*|((91 )*))((\\d{12})+|(\\d{10})+))|\\d{5}([- ]*)\\d{6}$",
+      "count": "10",
+      "minLength": "10",
+      "maxLength": "10"
+    },
+    "Title": {
+      "regexp": "^(Mr|Mrs|Ms|Miss|Mx|Dr|Prof|Eng|Arch|PhD|MSc|BSc|MBA|Capt|Col|Gen|Maj|Lt|Sgt|Sir|Lady|Dame|Lord|Baron|Baroness|Count|Countess|Fr|Rev|Rabbi|Imam|Pastor|Bishop|Pope|Hon|Esq|Amb|Pres)\\.?$",
+      "count": "10",
+      "minLength": "10",
+      "maxLength": "10"
+    }
+  },
+  "invalid_data": {
+    "Forename": {
+      "regexp": "^(?!.*@.*\\..*).*$|^.*@.*@.*$|^.*@.*\\..*\\..*$",
+      "count": "10"
+    },
+    "Surname": {
+      "regexp": "^[A-Z][a-zA-Z'-]{1,19}$",
+      "count": "10"
+    },
+    "Email": {
+      "regexp": "^(?!.*@.*\\..*).*$|^.*@.*@.*$|^.*@.*\\..*\\..*$",
+      "condition1": "removeAtSymbol",
+      "condition2": "removeDomainpart",
+      "condition3": "removeLocalpart",
+      "condition4": "replaceLocalpart",
+      "data_condition4": "おえあいう",
+      "condition5": "words",
+      "condition6": "NoTLD",
+      "condition7": "TooManydots",
+      "condition8": "NumericTLD",
+      "condition9": "ExtraChars",
+      "count": "10"
+    },
+    "Telephone": {
+      "regexp": "^(?!.*@.*\\..*).*$|^.*@.*@.*$|^.*@.*\\..*\\..*$",
+      "condition1": "Not a number",
+      "condition2": "6 digits",
+      "condition3": "4 digits",
+      "condition4": "More digits",
+      "condition5": "Mixed characters",
+      "condition6": "No Prefix National",
+      "condition7": "No Prefix International",
+      "count": "10"
+    },
+    "Title": {
+      "regexp": "^([a-zA-Z0-9._%+-]Mr|[a-zA-Z0-9.-]Mrs|12Ms|£$%Miss|Mx*J|Dr.(|Prof96|Eng[a-zA-Z0-9._%+-]|[a-zA-Z0-9._%+-]Arch|PhD[a-zA-Z0-9._%+-]|MSc[a-zA-Z0-9._%+-]|[a-zA-Z0-9._%+-]BSc|MBA[a-zA-Z0-9._%+-]|Capt|Col[a-zA-Z0-9._%+-]|Gen[a-zA-Z0-9._%+-]|Maj[a-zA-Z0-9._%+-]|Lt[a-zA-Z0-9._%+-]|Sgt[a-zA-Z0-9._%+-]|Sir[a-zA-Z0-9._%+-]|Lady[a-zA-Z0-9._%+-]|Dame[a-zA-Z0-9._%+-]|Lord[a-zA-Z0-9._%+-]|Baron[a-zA-Z0-9._%+-]|Baroness[a-zA-Z0-9._%+-]|Count[a-zA-Z0-9._%+-]|Countess[a-zA-Z0-9._%+-]|Fr[a-zA-Z0-9._%+-]|Rev[a-zA-Z0-9._%+-]|Rabbi[a-zA-Z0-9._%+-]|Imam[a-zA-Z0-9._%+-]|Pastor[a-zA-Z0-9._%+-]|Bishop[a-zA-Z0-9._%+-]|Pope[a-zA-Z0-9._%+-]|@Hon|Esq;|44Amb|Pres44)\\.?$",
+      "count": "10"
+    }
+  }
+}
