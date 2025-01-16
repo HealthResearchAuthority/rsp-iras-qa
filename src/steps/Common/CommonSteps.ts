@@ -173,7 +173,7 @@ Given(
 
 Then(
   'I generate {string} test data for {string}',
-  async ({ questionSetPage }, typeofdata: string, fieldName: string) => {
+  async ({ commonItemsPage }, typeofdata: string, fieldName: string) => {
     let testdata_output: any;
     let testdata_output_faker: any;
     const [forename_valid, surname_valid, telephone_valid, title_valid, email_valid, pattern_invalid] =
@@ -228,7 +228,7 @@ Then(
         throw new Error(`${fieldName} is not a valid option`);
       }
     }
-    writeGeneratedTestDataToJSON({ questionSetPage }, fieldName, typeofdata, testdata_output, testdata_output_faker);
+    writeGeneratedTestDataToJSON({ commonItemsPage }, fieldName, typeofdata, testdata_output, testdata_output_faker);
   }
 );
 Then('I attach the generated test data json files to the report', async ({ $testInfo }) => {

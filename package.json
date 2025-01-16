@@ -17,26 +17,26 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@eslint/js": "^9.16.0",
-    "@faker-js/faker": "^9.3.0",
-    "@playwright/test": "^1.48.2",
+    "@eslint/js": "^9.18.0",
+    "@faker-js/faker": "^9.4.0",
+    "@playwright/test": "^1.49.1",
     "@types/eslint__js": "^8.42.3",
-    "@types/node": "^22.8.5",
-    "eslint": "^9.16.0",
+    "@types/node": "^22.10.7",
+    "eslint": "^9.18.0",
     "exceljs": "^4.4.0",
-    "husky": "^9.1.6",
-    "lint-staged": "^15.2.10",
-    "multiple-cucumber-html-reporter": "^3.8.0",
-    "playwright-bdd": "^7.5.0",
-    "prettier": "^3.3.3",
-    "typescript": "^5.6.3",
-    "typescript-eslint": "^8.17.0"
+    "husky": "^9.1.7",
+    "lint-staged": "^15.4.0",
+    "multiple-cucumber-html-reporter": "3.8.0",
+    "playwright-bdd": "^8.0.1",
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.20.0"
   },
   "dependencies": {
-    "@axe-core/playwright": "^4.10.0",
+    "@axe-core/playwright": "^4.10.1",
     "axe-html-reporter": "^2.2.11",
-    "dotenv": "^16.4.5",
-    "playwright": "^1.48.2",
+    "dotenv": "^16.4.7",
+    "playwright": "^1.49.1",
     "randexp": "^0.5.3"
   }
 }

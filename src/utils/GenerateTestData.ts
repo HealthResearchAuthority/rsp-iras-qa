@@ -1,6 +1,8 @@
 import * as userProfileGeneratedataConfig from '../resources/test_data/user_administration/testdata_generator/user_profile_generate_data_config.json';
 import RandExp from 'randexp';
 import { faker } from '@faker-js/faker';
+import path from 'path';
+import fs from 'fs';
 
 let forenamePattern_valid: RegExp;
 let surnamePattern_valid: RegExp;
@@ -663,7 +665,7 @@ export function generatefakerDataValidTelephone(regex: RegExp, fieldName: string
   return results;
 }
 export async function writeGeneratedTestDataToJSON(
-  { questionSetPage },
+  { commonItemsPage },
   fieldName: string,
   typeofdata: string,
   testdata_output: any,
@@ -673,6 +675,25 @@ export async function writeGeneratedTestDataToJSON(
   parentNodesJSONMap.set('jsonRootParentNode', fieldName);
   parentNodesJSONMap.set('jsonParentNode', typeofdata);
   const [jsonPath, jsonPath_faker] = getJSONpath();
-  await questionSetPage.writeExtractedDataFromMemoryToJSON(testdata_output, jsonPath, parentNodesJSONMap);
-  await questionSetPage.writeExtractedDataFromMemoryToJSON(testdata_output_faker, jsonPath_faker, parentNodesJSONMap);
+  await commonItemsPage.writeExtractedDataFromMemoryToJSON(testdata_output, jsonPath, parentNodesJSONMap);
+  await commonItemsPage.writeExtractedDataFromMemoryToJSON(testdata_output_faker, jsonPath_faker, parentNodesJSONMap);
+}
+export async function removeGeneratedTestdatafilesinTeardown(resultsfolder: any) {
+  try {
+    let parentDirectory = path.resolve(resultsfolder, '..');
+    if (fs.existsSync(resultsfolder)) {
+      fs.rmSync(resultsfolder, { recursive: true, force: true });
+      while (path.basename(parentDirectory) != 'testdata_generator') {
+        if (fs.existsSync(parentDirectory) && fs.lstatSync(parentDirectory).isDirectory()) {
+          const files = fs.readdirSync(parentDirectory);
+          if (files.length === 0) {
+            fs.rmdirSync(parentDirectory);
+          }
+        }
+        parentDirectory = path.resolve(parentDirectory, '..');
+      }
+    }
+  } catch (err) {
+    console.error(err);
+  }
 }

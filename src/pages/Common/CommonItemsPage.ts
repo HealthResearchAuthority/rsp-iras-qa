@@ -2,6 +2,7 @@ import { expect, Locator, Page } from '@playwright/test';
 import * as buttonTextData from '../../resources/test_data/common/button_text_data.json';
 import * as linkTextData from '../../resources/test_data/common/link_text_data.json';
 import fs from 'fs';
+import path from 'path';
 
 //Declare Page Objects
 export default class CommonItemsPage {
@@ -115,10 +116,17 @@ export default class CommonItemsPage {
       firstNode[jsonParentNode] = extractedValuesInMemory;
       return newJSONObjectData;
     };
+    const parentDirectory = path.resolve(testDataJSONPath, '..');
     const writeToJSONFile = (readJSONFile: JSON) => {
+      if (!fs.existsSync(parentDirectory)) {
+        fs.mkdirSync(parentDirectory, { recursive: true });
+      }
       fs.writeFileSync(testDataJSONPath, JSON.stringify(readJSONFile, null, 2));
     };
     if (!fs.existsSync(testDataJSONPath) || fs.statSync(testDataJSONPath).size == 0) {
+      if (!fs.existsSync(parentDirectory)) {
+        fs.mkdirSync(parentDirectory, { recursive: true });
+      }
       fs.writeFileSync(testDataJSONPath, JSON.stringify(createNewJSONObject(), null, 2));
     } else {
       const readJSONFile = await JSON.parse(fs.readFileSync(testDataJSONPath, 'utf8'));
