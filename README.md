@@ -144,8 +144,60 @@ Click the html document in either to download and view the relevant report.
 
 This artifact will also be published to the teams SharePoint space [here](https://healthresearchauthority.sharepoint.com/:f:/r/sites/Future-IRAS/Testing/Test%20Reports?csf=1&web=1&e=8jF7Ic)  
 &nbsp; 
+
+# Framework dependencies upgrade and validation
+
+Regularly updating dependencies in `package.json` file, guarantees that we have access to the latest features, bug fixes, and safety patches.
+
+The `package.json` file carries dependencies on which project works, at the side of their respective versions.
+
+There are following steps that were followed for updating `package.json` dependencies to the latest version.
+
+## Step 1: Identifying NPM Outdated Dependencies
+
+Before updating the dependencies to their modern version, we need to be aware of the availability of the new version of dependencies. 
+
+For this purpose, use `npm-check-updates` package.
+
+Executed the below command in my terminal to install the npm-check-updates package:
+
+`npm install npm-check-updates`
+
+The npm-check-updates package permits to check for updates of dependencies by running an easy command in the project’s directory:
+
+`npx npm-check-updates`
+
+This command will scan package.json file and display a list of packages that have newer versions available.
+
+## Step 2: Updating Dependencies
+
+Once we have identified the outdated dependencies, it’s time to update them. There are two ways: manually update each package or use a package manager like npm.
+
+**Updating Dependencies Manually**
+
+Manually change the version of a dependency that we want to update in the `package.json` and run the `npm install` command to update it. 
+
+**Updating Dependencies with NPM**
+
+Update each dependency to its latest version in the npm registry all at once by using npm directly.
+
+Execute `npx npm-check-updates -u` to upgrade `package.json`. Now package.json is updated with latest version of the dependencies.
+
+Then execute `npm install` to install new versions.
+
+## Test and make sure the code works as expected in local devBox.
+
+After updating dependencies, it is of extreme significance to conduct the whole testing of the software to affirm proper functioning. 
+
+Due to playwright-bdd upgrade of `"playwright-bdd": "^8.0.1"`, `beforeEach` need to be used instead of `before` in `CustomFixtures.ts`.
+
+After the upgrade, execute tests in local devBox and Azure DevOps pipeline. Then validate reports of the run.
+
+As a result of the upgrade of `"multiple-cucumber-html-reporter":"^3.8.0"` to `"multiple-cucumber-html-reporter": "^3.9.0"`, multiple cucumber html report was broken.
+
+So downgraded the version to `"multiple-cucumber-html-reporter":"^3.8.0"`. Now the cucumber report behaves as expected.
  
-**Known Warnings in the Azure DevOps pipeline**
+# Known Warnings in the Azure DevOps pipeline
 
 ##[warning]SharePoint Online does not support 0-Byte files: '/home/vsts/work/1/s/test-reports/playwright/trace/recorder.B_SY1GJM.css'.
 
