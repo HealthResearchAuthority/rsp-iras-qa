@@ -98,7 +98,7 @@ export default class QuestionSetPage {
             ) {
               uiDisplaySequenceDataMap.set(
                 row.getCell(sectionColumnIndex).value + '_' + row.getCell(uniqueIDColumnIndex).value,
-                Number(row.getCell(uiDisplaySequenceColumnIndex).value!)
+                Number(row.getCell(uiDisplaySequenceColumnIndex).value)
               );
             }
           });
