@@ -23,7 +23,7 @@ Feature: Question Set - Research Application - Project Filter
       | Project_X | Valid_Data_All_Fields     | Valid_Data_All_Fields | Valid_Data_All_Fields | Continue          |
       | Project_Y | Data_With_No_NIHR_Funding | Valid_Data_All_Fields | Valid_Data_All_Fields | Continue          |
 
-@rsp-2048
+  @rsp-2048 @rsp-2166
   Scenario Outline: Validate the question set labels in project filter page
     And I generate the list of expected values to validate 'question set field labels' for 'project filter'
     And I enter the application name and description for '<Project>'

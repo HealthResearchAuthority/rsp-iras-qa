@@ -8,7 +8,9 @@
     "qset_unique_id_column_name": "Unique ID",
     "qset_section_column_name": "Section",
     "qset_field_label_column_name": "Field label",
-    "qset_radio_checkbox_label_column_name": "Values"
+    "qset_radio_checkbox_label_column_name": "Values",
+    "question_number_column_name": "Proposed Q#",
+    "ui_display_sequence_column_name": "UI display sequence"
   },
   "JSON_Properties":{
     "parent_node_field_label": "Field_Labels",

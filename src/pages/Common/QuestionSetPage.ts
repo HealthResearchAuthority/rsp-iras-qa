@@ -31,33 +31,84 @@ export default class QuestionSetPage {
   }
 
   //Page Methods
-  async storeQSetExcelDataToMemory(sheetName: string, extractingColumnName: string): Promise<JSON> {
-    const qSetExcelData: JSON = {} as JSON;
+  async storeQSetExcelDataToMemory(sheetName: string, columnToExtract: string): Promise<JSON> {
+    let qSetExcelData: JSON = {} as JSON;
+    let columnName: string = '';
+    const sectionNameSet = new Set<string>();
     const excelFilePath = this.qsetExcelJSONConfigTestData.Excel_Properties['file_path'];
     const uniqueIDColumnName = this.qsetExcelJSONConfigTestData.Excel_Properties['qset_unique_id_column_name'];
     const sectionColumnName = this.qsetExcelJSONConfigTestData.Excel_Properties['qset_section_column_name'];
     const columnHeaderIndex = this.qsetExcelJSONConfigTestData.Excel_Properties['qset_column_header_index'];
+    const questionNumberColumnName = this.qsetExcelJSONConfigTestData.Excel_Properties['question_number_column_name'];
+    const uiDisplaySequenceColumnName =
+      this.qsetExcelJSONConfigTestData.Excel_Properties['ui_display_sequence_column_name'];
+    if (columnToExtract === 'question set field labels') {
+      columnName = this.qsetExcelJSONConfigTestData.Excel_Properties['qset_field_label_column_name'];
+    } else if (columnToExtract === 'radio and checkbox labels') {
+      columnName = this.qsetExcelJSONConfigTestData.Excel_Properties['qset_radio_checkbox_label_column_name'];
+    }
     const workbook = new excel.Workbook();
     await workbook.xlsx.readFile(excelFilePath).then(function () {
       const worksheet = workbook.getWorksheet(sheetName);
       let uniqueIDColumnIndex: number;
       let sectionColumnIndex: number;
       let extractingColumnIndex: number;
+      let questionNumberColumnIndex: number;
+      let uiDisplaySequenceColumnIndex: number;
       worksheet?.getRow(columnHeaderIndex).eachCell((cell, colNumber) => {
         if (cell.value === uniqueIDColumnName) {
           uniqueIDColumnIndex = colNumber;
         } else if (cell.value === sectionColumnName) {
           sectionColumnIndex = colNumber;
-        } else if (cell.value === extractingColumnName) {
+        } else if (cell.value === columnName) {
           extractingColumnIndex = colNumber;
+        } else if (cell.value === questionNumberColumnName) {
+          questionNumberColumnIndex = colNumber;
+        } else if (cell.value === uiDisplaySequenceColumnName) {
+          uiDisplaySequenceColumnIndex = colNumber;
         }
       });
       worksheet?.eachRow({ includeEmpty: false }, function (row) {
         if (row.getCell(sectionColumnIndex).value !== 'n/a' && row.getCell(sectionColumnIndex).value !== 'Section') {
-          qSetExcelData[row.getCell(sectionColumnIndex).value + '_' + row.getCell(uniqueIDColumnIndex).value] =
-            row.getCell(extractingColumnIndex).value;
+          if (
+            columnToExtract === 'question set field labels' &&
+            row.getCell(questionNumberColumnIndex).value !== 'n/a'
+          ) {
+            qSetExcelData[row.getCell(sectionColumnIndex).value + '_' + row.getCell(uniqueIDColumnIndex).value] =
+              row.getCell(questionNumberColumnIndex).value + '. ' + row.getCell(extractingColumnIndex).value;
+          } else {
+            qSetExcelData[row.getCell(sectionColumnIndex).value + '_' + row.getCell(uniqueIDColumnIndex).value] =
+              row.getCell(extractingColumnIndex).value;
+          }
         }
       });
+      if (columnToExtract === 'question set field labels') {
+        const orderedQSetExcelData: JSON = {} as JSON;
+        Object.entries(qSetExcelData).forEach(([jsonKey]) => {
+          const sectionName = jsonKey.replace(/_.*/, '');
+          sectionNameSet.add(sectionName);
+        });
+        sectionNameSet.forEach(function (value) {
+          let uiDisplaySequenceDataMap = new Map<string, number>();
+          worksheet?.eachRow({ includeEmpty: false }, function (row) {
+            if (
+              row.getCell(sectionColumnIndex).value === value &&
+              row.getCell(sectionColumnIndex).value !== 'n/a' &&
+              row.getCell(sectionColumnIndex).value !== 'Section'
+            ) {
+              uiDisplaySequenceDataMap.set(
+                row.getCell(sectionColumnIndex).value + '_' + row.getCell(uniqueIDColumnIndex).value,
+                Number(row.getCell(uiDisplaySequenceColumnIndex).value!)
+              );
+            }
+          });
+          uiDisplaySequenceDataMap = new Map([...uiDisplaySequenceDataMap.entries()].sort((a, b) => a[1] - b[1]));
+          uiDisplaySequenceDataMap.forEach((value: number, key: string) => {
+            orderedQSetExcelData[key] = qSetExcelData[key];
+          });
+        });
+        qSetExcelData = orderedQSetExcelData;
+      }
     });
     return qSetExcelData;
   }

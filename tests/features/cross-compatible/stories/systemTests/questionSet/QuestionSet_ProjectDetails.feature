@@ -34,7 +34,7 @@ Feature: Question Set - Research Application - Project Details
       | Project_X | Valid_Data_In_All_Fields     | Valid_Data_In_All_Fields | Valid_Data_In_All_Fields | Valid_Data_In_All_Fields | Valid_Data_In_All_Fields | Valid_Data_In_All_Fields | Valid_Data_In_All_Fields | Valid_Data_In_All_Fields | Valid_Data_In_All_Fields | Valid_Data_In_All_Fields | Valid_Data_In_All_Fields | Valid_Data_In_All_Fields        |
       | Project_Y | Protocol_Ref_Number_ABC_Data | No_Involvement           | Valid_Data_In_All_Fields | No_Standard_Of_Care      | Valid_Data_In_All_Fields | Valid_Data_In_All_Fields | No_Risks_Or_Conflicts    | No_Ethical_Concerns      | Valid_Data_In_All_Fields | Valid_Data_In_All_Fields | Negative_Responses       | The_Answer_No                   |
 
-@rsp-2048
+  @rsp-2048 @rsp-2166
   Scenario Outline: Validate the question set labels in project details page
     And I generate the list of expected values to validate 'question set field labels' for 'project details'
     And I enter the application name and description for '<Project>'
@@ -50,7 +50,7 @@ Feature: Question Set - Research Application - Project Details
       | Project   |
       | Project_X |
 
-@rsp-2049
+  @rsp-2049
   Scenario Outline: Validate the radio and checkbox labels for the question set in the project details page
     And I generate the list of expected values to validate 'radio and checkbox labels' for 'project details'
     And I enter the application name and description for '<Project>'

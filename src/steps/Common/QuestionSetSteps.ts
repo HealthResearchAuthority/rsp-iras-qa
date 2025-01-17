@@ -5,7 +5,6 @@ const { Then } = createBdd(test);
 Then(
   'I generate the list of expected values to validate {string} for {string}',
   async ({ questionSetPage, commonItemsPage }, columnToExtract: string, pageName: string) => {
-    let columnName: string = '';
     let excelValuesJSON: JSON;
     const sheetName = await questionSetPage.getExcelSheetName(pageName);
     const sectionsMap = new Map<string, string>();
@@ -17,13 +16,7 @@ Then(
     Object.entries(sections).forEach(([key, value]) => {
       sectionsMap.set(key, value);
     });
-    if (columnToExtract === 'question set field labels') {
-      columnName = questionSetPage.qsetExcelJSONConfigTestData.Excel_Properties['qset_field_label_column_name'];
-    } else if (columnToExtract === 'radio and checkbox labels') {
-      columnName =
-        questionSetPage.qsetExcelJSONConfigTestData.Excel_Properties['qset_radio_checkbox_label_column_name'];
-    }
-    excelValuesJSON = await questionSetPage.storeQSetExcelDataToMemory(sheetName, columnName);
+    excelValuesJSON = await questionSetPage.storeQSetExcelDataToMemory(sheetName, columnToExtract);
     excelValuesJSON = await questionSetPage.seperateQSetDataBySections(excelValuesJSON, sectionsMap);
     if (columnToExtract === 'radio and checkbox labels') {
       excelValuesJSON = await questionSetPage.getRadioCheckboxLabelsToMemory(excelValuesJSON);

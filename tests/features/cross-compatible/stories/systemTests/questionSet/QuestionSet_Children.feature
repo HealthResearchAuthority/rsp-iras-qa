@@ -23,7 +23,7 @@ Feature: Question Set - Research Application - Children
       | Project_X | Valid_Data_All_Fields      | Continue          |
       | Project_Y | Child_Not_Treated_Urgently | Continue          |
 
-@rsp-2048
+  @rsp-2048 @rsp-2166
   Scenario Outline: Validate the question set labels in children page
     And I generate the list of expected values to validate 'question set field labels' for 'children'
     And I enter the application name and description for '<Project>'

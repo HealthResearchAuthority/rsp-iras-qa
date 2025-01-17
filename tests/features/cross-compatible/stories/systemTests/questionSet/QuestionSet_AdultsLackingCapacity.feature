@@ -24,7 +24,7 @@ Feature: Question Set - Research Application - Adults Lacking Capacity
       | Project_X | Valid_Data_All_Fields                          | Valid_Data_All_Fields             | Continue          |
       | Project_Y | Participant_With_No_Urgent_Treatment_Recruited | Valid_Data_All_Fields             | Continue          |
 
-@rsp-2048
+  @rsp-2048 @rsp-2166
   Scenario Outline: Validate the question set labels in adults lacking capacity page
     And I generate the list of expected values to validate 'question set field labels' for 'adults lacking capacity'
     And I enter the application name and description for '<Project>'
@@ -40,7 +40,7 @@ Feature: Question Set - Research Application - Adults Lacking Capacity
       | Project   |
       | Project_X |
 
- @rsp-2049
+  @rsp-2049
   Scenario Outline: Validate the radio and checkbox labels for the question set in the adults lacking capacity page
     And I generate the list of expected values to validate 'radio and checkbox labels' for 'adults lacking capacity'
     And I enter the application name and description for '<Project>'
