@@ -185,17 +185,9 @@ Execute `npx npm-check-updates -u` to upgrade `package.json`. Now package.json i
 
 Then execute `npm install` to install new versions.
 
-## Test and make sure the code works as expected in local devBox.
+## Test and make sure the code works as expected in local devBox and Azure DevOps pipeline.
 
-After updating dependencies, it is of extreme significance to conduct the whole testing of the software to affirm proper functioning. 
-
-Due to playwright-bdd upgrade of `"playwright-bdd": "^8.0.1"`, `beforeEach` need to be used instead of `before` in `CustomFixtures.ts`.
-
-After the upgrade, execute tests in local devBox and Azure DevOps pipeline. Then validate reports of the run.
-
-As a result of the upgrade of `"multiple-cucumber-html-reporter":"^3.8.0"` to `"multiple-cucumber-html-reporter": "^3.9.0"`, multiple cucumber html report was broken.
-
-So downgraded the version to `"multiple-cucumber-html-reporter":"^3.8.0"`. Now the cucumber report behaves as expected.
+After updating dependencies, it is of extreme significance to conduct the whole testing of the software to affirm proper functioning.
  
 # Known Warnings in the Azure DevOps pipeline
 
