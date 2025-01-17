@@ -12,9 +12,9 @@ async function globalTeardown() {
   } catch (err) {
     console.error(err);
   }
-  const resultsfolderjson = userProfileGeneratedataConfig.JSON_Properties['json_path'] + '/../';
-  removeGeneratedTestdatafilesinTeardown(resultsfolderjson);
-  const resultsfolderjsonfaker = userProfileGeneratedataConfig.JSON_Properties['json_path_faker'] + '/../';
-  removeGeneratedTestdatafilesinTeardown(resultsfolderjsonfaker);
+  const resultsFolderJson = userProfileGeneratedataConfig.JSON_Properties['json_path'] + '/../';
+  await removeGeneratedTestdatafilesinTeardown(resultsFolderJson);
+  const resultsFolderJsonFaker = userProfileGeneratedataConfig.JSON_Properties['json_path_faker'] + '/../';
+  await removeGeneratedTestdatafilesinTeardown(resultsFolderJsonFaker);
 }
 export default globalTeardown;

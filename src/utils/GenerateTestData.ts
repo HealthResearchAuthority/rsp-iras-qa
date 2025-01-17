@@ -678,11 +678,11 @@ export async function writeGeneratedTestDataToJSON(
   await commonItemsPage.writeExtractedDataFromMemoryToJSON(testdata_output, jsonPath, parentNodesJSONMap);
   await commonItemsPage.writeExtractedDataFromMemoryToJSON(testdata_output_faker, jsonPath_faker, parentNodesJSONMap);
 }
-export async function removeGeneratedTestdatafilesinTeardown(resultsfolder: any) {
+export async function removeGeneratedTestdatafilesinTeardown(resultsFolder: string) {
   try {
-    let parentDirectory = path.resolve(resultsfolder, '..');
-    if (fs.existsSync(resultsfolder)) {
-      fs.rmSync(resultsfolder, { recursive: true, force: true });
+    let parentDirectory = path.resolve(resultsFolder, '..');
+    if (fs.existsSync(resultsFolder)) {
+      fs.rmSync(resultsFolder, { recursive: true, force: true });
       while (path.basename(parentDirectory) != 'testdata_generator') {
         if (fs.existsSync(parentDirectory) && fs.lstatSync(parentDirectory).isDirectory()) {
           const files = fs.readdirSync(parentDirectory);

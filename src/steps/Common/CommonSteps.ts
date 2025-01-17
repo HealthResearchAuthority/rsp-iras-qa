@@ -228,7 +228,13 @@ Then(
         throw new Error(`${fieldName} is not a valid option`);
       }
     }
-    writeGeneratedTestDataToJSON({ commonItemsPage }, fieldName, typeofdata, testdata_output, testdata_output_faker);
+    await writeGeneratedTestDataToJSON(
+      { commonItemsPage },
+      fieldName,
+      typeofdata,
+      testdata_output,
+      testdata_output_faker
+    );
   }
 );
 Then('I attach the generated test data json files to the report', async ({ $testInfo }) => {
