@@ -5,3 +5,4 @@ export default globalSetup;
 export const deviceDSafari = 'Desktop Safari';
 export const deviceDFirefox = 'Desktop Firefox';
 export const deviceDChrome = 'Desktop Chrome';
+export const deviceDEdge = 'Desktop Edge';

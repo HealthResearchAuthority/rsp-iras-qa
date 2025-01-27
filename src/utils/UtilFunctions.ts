@@ -3,7 +3,7 @@ import { Locator, devices } from '@playwright/test';
 import crypto from 'crypto';
 import { readFile, writeFile } from 'fs/promises';
 import 'dotenv/config';
-import { deviceDSafari, deviceDFirefox, deviceDChrome } from '../hooks/GlobalSetup';
+import { deviceDSafari, deviceDFirefox, deviceDChrome, deviceDEdge } from '../hooks/GlobalSetup';
 import fs from 'fs';
 import { createHtmlReport } from 'axe-html-reporter';
 import os from 'os';
@@ -90,7 +90,14 @@ export async function getTextFromElementArray(inputArray: Locator[]): Promise<st
 
 export function getBrowserType(deviceType: string): string {
   const browser = devices[`${deviceType}`];
-  const browserName = JSON.parse(JSON.stringify(browser)).defaultBrowserType;
+  let browserName: string;
+  if (`${process.env.BROWSER?.toLowerCase()}` == 'microsoft edge') {
+    browserName = 'Microsoft Edge';
+  } else if (`${process.env.BROWSER?.toLowerCase()}` == 'google chrome') {
+    browserName = 'Google Chrome';
+  } else {
+    browserName = JSON.parse(JSON.stringify(browser)).defaultBrowserType;
+  }
   return browserName;
 }
 
@@ -141,6 +148,12 @@ function getDesktopBrowserData() {
     browserdata = devices[`${deviceDFirefox}`];
     deviceType = `${deviceDFirefox}`;
   } else if (`${process.env.BROWSER?.toLowerCase()}` == 'chromium') {
+    browserdata = devices[`${deviceDChrome}`];
+    deviceType = `${deviceDChrome}`;
+  } else if (`${process.env.BROWSER?.toLowerCase()}` == 'microsoft edge') {
+    browserdata = devices[`${deviceDEdge}`];
+    deviceType = `${deviceDEdge}`;
+  } else if (`${process.env.BROWSER?.toLowerCase()}` == 'google chrome') {
     browserdata = devices[`${deviceDChrome}`];
     deviceType = `${deviceDChrome}`;
   } else {
