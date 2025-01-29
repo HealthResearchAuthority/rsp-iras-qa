@@ -5,7 +5,7 @@ name: Run Playwright Tests
 
 trigger:
   # - main
-  feature/rsp-2214-branded-browsers-poc
+  - feature/rsp-2214-branded-browsers-poc
 
 schedules:
   - cron: '10 17 * * Mon-Fri'
@@ -13,7 +13,7 @@ schedules:
     branches:
       include:
         # - main
-        feature/rsp-2214-branded-browsers-poc
+        - feature/rsp-2214-branded-browsers-poc
     always: true
 
 pool:
