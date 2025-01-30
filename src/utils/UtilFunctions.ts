@@ -147,15 +147,15 @@ function getDesktopBrowserData() {
   } else if (`${process.env.BROWSER?.toLowerCase()}` == 'firefox') {
     browserdata = devices[`${deviceDFirefox}`];
     deviceType = `${deviceDFirefox}`;
-  } else if (`${process.env.BROWSER?.toLowerCase()}` == 'chromium') {
+  } else if (
+    `${process.env.BROWSER?.toLowerCase()}` == 'chromium' ||
+    `${process.env.BROWSER?.toLowerCase()}` == 'google chrome'
+  ) {
     browserdata = devices[`${deviceDChrome}`];
     deviceType = `${deviceDChrome}`;
   } else if (`${process.env.BROWSER?.toLowerCase()}` == 'microsoft edge') {
     browserdata = devices[`${deviceDEdge}`];
     deviceType = `${deviceDEdge}`;
-  } else if (`${process.env.BROWSER?.toLowerCase()}` == 'google chrome') {
-    browserdata = devices[`${deviceDChrome}`];
-    deviceType = `${deviceDChrome}`;
   } else {
     browserdata = devices[`${deviceDChrome}`];
     deviceType = `${deviceDChrome}`;
