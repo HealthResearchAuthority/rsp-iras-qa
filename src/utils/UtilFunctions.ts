@@ -306,7 +306,7 @@ export async function getBrandedBrowserVersion(provider: string, browser: string
 }
 export function switchBackDirectory() {
   try {
-    exec('cd bash', (error, stdout, stderr) => {
+    exec('cd /bash', (error, stdout, stderr) => {
       if (error) {
         console.error(`Error: ${error.message}`);
         return;
