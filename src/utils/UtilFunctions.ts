@@ -8,7 +8,7 @@ import fs from 'fs';
 import { createHtmlReport } from 'axe-html-reporter';
 import os from 'os';
 import { exec } from 'child_process';
-import path from 'path';
+// import path from 'path';
 
 let browserdata: any;
 let deviceType: string;
@@ -116,10 +116,10 @@ export async function getBrowserVersionDevices(deviceType: string): Promise<stri
       version = subresult.split(' ')[0];
     } else if (`${process.env.BROWSER?.toLowerCase()}` == 'microsoft edge') {
       version = await getBrandedBrowserVersion('Microsoft', 'Edge', platform);
-      switchBackDirectory();
+      // switchBackDirectory();
     } else if (`${process.env.BROWSER?.toLowerCase()}` == 'google chrome') {
       version = await getBrandedBrowserVersion('Google', 'Chrome', platform);
-      switchBackDirectory();
+      // switchBackDirectory();
     }
   } else if (browserType == 'webkit') {
     const result: string[] = userAgent.split('Version/');
@@ -254,9 +254,9 @@ export async function getBrandedBrowserVersion(provider: string, browser: string
       command = 'reg query "HKEY_CURRENT_USER\\Software\\Microsoft\\Edge\\BLBeacon" /v version';
     }
   } else {
-    const targetDir = path.dirname('/usr/bin/bash');
-    process.chdir(targetDir);
-    console.log(`Directory changed to :${process.cwd()}`);
+    // const targetDir = path.dirname('/usr/bin/bash');
+    // process.chdir(targetDir);
+    console.log(`Current Directory changed to :${process.cwd()}`);
     if (browser === 'Chrome') {
       command = '/usr/bin/google-chrome --version';
     } else {
