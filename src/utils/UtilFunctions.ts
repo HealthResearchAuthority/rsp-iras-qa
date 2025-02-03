@@ -306,7 +306,7 @@ export async function getBrandedBrowserVersion(provider: string, browser: string
 }
 export function switchBackDirectory() {
   try {
-    exec('cd /bash', (error, stdout, stderr) => {
+    exec('cd ..', (error, stdout, stderr) => {
       if (error) {
         console.error(`Error: ${error.message}`);
         return;
@@ -316,8 +316,9 @@ export function switchBackDirectory() {
         return;
       }
       console.log(`Stdout: ${stdout}`);
-      console.log(`Directory changed to: ${process.cwd()}`);
+      // console.log(`Directory changed to: ${process.cwd()}`);
     });
+    console.log(`Directory changed to: ${process.cwd()}`);
     // const targetDir = path.dirname('/usr/bin/bash');
     // // const targetDir = path.join('/usr/bin', 'bash');
     // if (fs.existsSync(targetDir)) {
