@@ -105,6 +105,7 @@ export function getBrowserType(deviceType: string): string {
 export async function getBrowserVersionDevices(deviceType: string): Promise<string | undefined> {
   const browser = devices[`${deviceType}`];
   let version: string | undefined;
+  const platform = os.platform();
   const browserType = `${JSON.parse(JSON.stringify(browser)).defaultBrowserType}`;
   const userAgent = `${JSON.parse(JSON.stringify(browser)).userAgent}`;
   if (browserType == 'chromium') {
@@ -113,9 +114,9 @@ export async function getBrowserVersionDevices(deviceType: string): Promise<stri
       const subresult: string = result[1];
       version = subresult.split(' ')[0];
     } else if (`${process.env.BROWSER?.toLowerCase()}` == 'microsoft edge') {
-      version = await getBrandedBrowserVersion('Microsoft', 'Edge');
+      version = await getBrandedBrowserVersion('Microsoft', 'Edge', platform, 'microsoft-edge');
     } else if (`${process.env.BROWSER?.toLowerCase()}` == 'google chrome') {
-      version = await getBrandedBrowserVersion('Google', 'Chrome');
+      version = await getBrandedBrowserVersion('Google', 'Chrome', platform, 'google-chrome');
     }
   } else if (browserType == 'webkit') {
     const result: string[] = userAgent.split('Version/');
@@ -241,26 +242,42 @@ export function getOSNameVersion() {
   return osVersion;
 }
 
-export async function getBrandedBrowserVersion(provider: string, browser: string): Promise<string> {
+export async function getBrandedBrowserVersion(
+  provider: string,
+  browser: string,
+  platform: string,
+  browserVal: string
+): Promise<string> {
+  const command =
+    platform === 'win32'
+      ? 'reg query "HKEY_CURRENT_USER\\Software\\' + provider + '\\' + browser + '\\BLBeacon" /v version'
+      : platform === 'darwin'
+        ? '/Applications/' +
+          provider +
+          '\\ ' +
+          browser +
+          '.app/Contents/MacOS/' +
+          provider +
+          '\\' +
+          browser +
+          ' --version'
+        : '' + browserVal + ' --version';
   return new Promise((resolve, reject) => {
-    exec(
-      'reg query "HKEY_CURRENT_USER\\Software\\' + provider + '\\' + browser + '\\BLBeacon" /v version',
-      (error, stdout, stderr) => {
-        if (error) {
-          reject(`Error: ${error.message}`);
-          return;
-        }
-        if (stderr) {
-          reject(`Stderr: ${stderr}`);
-          return;
-        }
-        const versionMatch = stdout.match(/version\s+REG_SZ\s+([^\s]+)/);
-        if (versionMatch?.[1]) {
-          resolve(versionMatch[1]);
-        } else {
-          reject(provider + ' ' + browser + ' version not found');
-        }
+    exec(command, (error, stdout, stderr) => {
+      if (error) {
+        reject(`Error: ${error.message}`);
+        return;
       }
-    );
+      if (stderr) {
+        reject(`Stderr: ${stderr}`);
+        return;
+      }
+      const versionMatch = stdout.match(/version\s+REG_SZ\s+([^\s]+)/);
+      if (versionMatch?.[1]) {
+        resolve(versionMatch[1]);
+      } else {
+        reject(provider + ' ' + browser + ' version not found');
+      }
+    });
   });
 }
