@@ -116,8 +116,10 @@ export async function getBrowserVersionDevices(deviceType: string): Promise<stri
       version = subresult.split(' ')[0];
     } else if (`${process.env.BROWSER?.toLowerCase()}` == 'microsoft edge') {
       version = await getBrandedBrowserVersion('Microsoft', 'Edge', platform);
+      switchBackDirectory();
     } else if (`${process.env.BROWSER?.toLowerCase()}` == 'google chrome') {
       version = await getBrandedBrowserVersion('Google', 'Chrome', platform);
+      switchBackDirectory();
     }
   } else if (browserType == 'webkit') {
     const result: string[] = userAgent.split('Version/');
@@ -299,8 +301,19 @@ export async function getBrandedBrowserVersion(provider: string, browser: string
           }
         }
       }
-
-      stdout.trim();
     });
   });
+}
+export function switchBackDirectory() {
+  try {
+    const targetDir = path.join('/usr/bin', 'bash');
+    if (fs.existsSync(targetDir)) {
+      process.chdir(targetDir);
+      console.log(`Directory changed to: ${process.cwd()}`);
+    } else {
+      console.error(`Directory not found: ${targetDir}`);
+    }
+  } catch (err) {
+    console.error(`Failed to change directory: ${(err as Error).message}`);
+  }
 }
