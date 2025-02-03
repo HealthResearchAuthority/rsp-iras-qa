@@ -114,9 +114,9 @@ export async function getBrowserVersionDevices(deviceType: string): Promise<stri
       const subresult: string = result[1];
       version = subresult.split(' ')[0];
     } else if (`${process.env.BROWSER?.toLowerCase()}` == 'microsoft edge') {
-      version = await getBrandedBrowserVersion('Microsoft', 'Edge', platform);
+      version = await getBrandedBrowserVersion('Microsoft', 'Edge', platform, 'microsoft-edge');
     } else if (`${process.env.BROWSER?.toLowerCase()}` == 'google chrome') {
-      version = await getBrandedBrowserVersion('Google', 'Chrome', platform);
+      version = await getBrandedBrowserVersion('Google', 'Chrome', platform, 'google-chrome');
     }
   } else if (browserType == 'webkit') {
     const result: string[] = userAgent.split('Version/');
@@ -241,7 +241,12 @@ export function getOSNameVersion() {
   }
   return osVersion;
 }
-export async function getInstalledBrowserVersion(provider: string, browser: string, platform: string) {
+export async function getCommandforInstalledBrowserVersion(
+  provider: string,
+  browser: string,
+  platform: string,
+  browserVal: string
+): Promise<string> {
   let command: string;
   if (platform === 'win32') {
     command = 'reg query "HKEY_CURRENT_USER\\Software\\' + provider + '\\' + browser + '\\BLBeacon" /v version';
@@ -251,8 +256,13 @@ export async function getInstalledBrowserVersion(provider: string, browser: stri
   return command;
 }
 
-export async function getBrandedBrowserVersion(provider: string, browser: string, platform: string): Promise<string> {
-  const command = await getInstalledBrowserVersion(provider, browser, platform);
+export async function getBrandedBrowserVersion(
+  provider: string,
+  browser: string,
+  platform: string,
+  browserVal: string
+): Promise<string> {
+  const command = await getCommandforInstalledBrowserVersion(provider, browser, platform, browserVal);
   return new Promise((resolve, reject) => {
     exec(command, async (error, stdout, stderr) => {
       if (error) {
