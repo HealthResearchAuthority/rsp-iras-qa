@@ -8,7 +8,6 @@ import fs from 'fs';
 import { createHtmlReport } from 'axe-html-reporter';
 import os from 'os';
 import { exec } from 'child_process';
-// import path from 'path';
 
 let browserdata: any;
 let deviceType: string;
@@ -115,11 +114,9 @@ export async function getBrowserVersionDevices(deviceType: string): Promise<stri
       const subresult: string = result[1];
       version = subresult.split(' ')[0];
     } else if (`${process.env.BROWSER?.toLowerCase()}` == 'microsoft edge') {
-      version = await getBrandedBrowserVersion('Microsoft', 'Edge', platform);
-      // switchBackDirectory();
+      version = await getBrandedBrowserVersion('Microsoft', 'Edge', platform, 'microsoft-edge');
     } else if (`${process.env.BROWSER?.toLowerCase()}` == 'google chrome') {
-      version = await getBrandedBrowserVersion('Google', 'Chrome', platform);
-      // switchBackDirectory();
+      version = await getBrandedBrowserVersion('Google', 'Chrome', platform, 'google-chrome');
     }
   } else if (browserType == 'webkit') {
     const result: string[] = userAgent.split('Version/');
@@ -245,7 +242,7 @@ export function getOSNameVersion() {
   return osVersion;
 }
 
-export async function getBrandedBrowserVersion(provider: string, browser: string, platform: string): Promise<string> {
+export async function getBrandedBrowserVersion1(provider: string, browser: string, platform: string): Promise<string> {
   let command: string;
   if (platform === 'win32') {
     if (browser === 'Chrome') {
@@ -254,8 +251,6 @@ export async function getBrandedBrowserVersion(provider: string, browser: string
       command = 'reg query "HKEY_CURRENT_USER\\Software\\Microsoft\\Edge\\BLBeacon" /v version';
     }
   } else {
-    // const targetDir = path.dirname('/usr/bin/bash');
-    // process.chdir(targetDir);
     console.log(`Current Directory changed to :${process.cwd()}`);
     if (browser === 'Chrome') {
       command = '/usr/bin/google-chrome --version';
@@ -304,30 +299,56 @@ export async function getBrandedBrowserVersion(provider: string, browser: string
     });
   });
 }
-export function switchBackDirectory() {
-  try {
-    exec('cd .. && cd bash', (error, stdout, stderr) => {
+export async function getBrandedBrowserVersion(
+  provider: string,
+  browser: string,
+  platform: string,
+  browserVal: string
+): Promise<string> {
+  let command: string;
+  if (platform === 'win32') {
+    command = 'reg query "HKEY_CURRENT_USER\\Software\\' + provider + '\\' + browser + '\\BLBeacon" /v version';
+  } else {
+    command = '/usr/bin/' + browserVal + ' --version';
+  }
+  return new Promise((resolve, reject) => {
+    exec(command, (error, stdout, stderr) => {
       if (error) {
-        console.error(`Error: ${error.message}`);
+        reject(`Error: ${error.message}`);
         return;
       }
       if (stderr) {
-        console.error(`Stderr: ${stderr}`);
+        reject(`Stderr: ${stderr}`);
         return;
       }
-      // console.log(`Stdout: ${stdout}`);
-      // console.log(`Directory changed to: ${process.cwd()}`);
+      if (platform === 'win32') {
+        const versionMatch = stdout.match(/version\s+REG_SZ\s+([^\s]+)/);
+        if (versionMatch?.[1]) {
+          resolve(versionMatch[1]);
+        } else {
+          reject(provider + ' ' + browser + ' version not found');
+        }
+      } else {
+        if (browser === 'Chrome') {
+          console.log(`Version info :${stdout}`);
+          const versionMatch = stdout.match(/' + provider + ' ' + browser + ' (\d+\.\d+\.\d+\.\d+)/);
+          if (versionMatch?.[1]) {
+            resolve(versionMatch[1]);
+            console.log(`Installed browser version of ${browser} :${versionMatch[1]}`);
+          } else {
+            reject(provider + ' ' + browser + ' version not found');
+          }
+        } else if (browser === 'Edge') {
+          console.log(`Version info :${stdout}`);
+          const versionMatch = stdout.match(/Microsoft Edge (\d+\.\d+\.\d+\.\d+)/);
+          if (versionMatch?.[1]) {
+            resolve(versionMatch[1]);
+            console.log(`versionMatch[1] :${versionMatch[1]}`);
+          } else {
+            reject(provider + ' ' + browser + ' version not found');
+          }
+        }
+      }
     });
-    console.log(`Current Directory: ${process.cwd()}`);
-    // const targetDir = path.dirname('/usr/bin/bash');
-    // // const targetDir = path.join('/usr/bin', 'bash');
-    // if (fs.existsSync(targetDir)) {
-    //   process.chdir(targetDir);
-    //   console.log(`Directory changed to: ${process.cwd()}`);
-    // } else {
-    //   console.error(`Directory not found: ${targetDir}`);
-    // }
-  } catch (err) {
-    console.error(`Failed to change directory: ${(err as Error).message}`);
-  }
+  });
 }
