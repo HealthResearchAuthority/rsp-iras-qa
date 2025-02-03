@@ -7,6 +7,7 @@ import { deviceDSafari, deviceDFirefox, deviceDChrome, deviceDEdge } from '../ho
 import fs from 'fs';
 import { createHtmlReport } from 'axe-html-reporter';
 import os from 'os';
+import { exec } from 'child_process';
 
 let browserdata: any;
 let deviceType: string;
@@ -101,15 +102,21 @@ export function getBrowserType(deviceType: string): string {
   return browserName;
 }
 
-export function getBrowserVersionDevices(deviceType: string): string | undefined {
+export async function getBrowserVersionDevices(deviceType: string): Promise<string | undefined> {
   const browser = devices[`${deviceType}`];
   let version: string | undefined;
   const browserType = `${JSON.parse(JSON.stringify(browser)).defaultBrowserType}`;
   const userAgent = `${JSON.parse(JSON.stringify(browser)).userAgent}`;
   if (browserType == 'chromium') {
-    const result: string[] = userAgent.split('Chrome/');
-    const subresult: string = result[1];
-    version = subresult.split(' ')[0];
+    if (`${process.env.BROWSER?.toLowerCase()}` == 'chromium') {
+      const result: string[] = userAgent.split('Chrome/');
+      const subresult: string = result[1];
+      version = subresult.split(' ')[0];
+    } else if (`${process.env.BROWSER?.toLowerCase()}` == 'microsoft edge') {
+      version = await getBrandedBrowserVersion('Microsoft', 'Edge');
+    } else if (`${process.env.BROWSER?.toLowerCase()}` == 'google chrome') {
+      version = await getBrandedBrowserVersion('Google', 'Chrome');
+    }
   } else if (browserType == 'webkit') {
     const result: string[] = userAgent.split('Version/');
     const subresult: string = result[1];
@@ -232,4 +239,28 @@ export function getOSNameVersion() {
     osVersion = `${os.version}`;
   }
   return osVersion;
+}
+
+export async function getBrandedBrowserVersion(provider: string, browser: string): Promise<string> {
+  return new Promise((resolve, reject) => {
+    exec(
+      'reg query "HKEY_CURRENT_USER\\Software\\' + provider + '\\' + browser + '\\BLBeacon" /v version',
+      (error, stdout, stderr) => {
+        if (error) {
+          reject(`Error: ${error.message}`);
+          return;
+        }
+        if (stderr) {
+          reject(`Stderr: ${stderr}`);
+          return;
+        }
+        const versionMatch = stdout.match(/version\s+REG_SZ\s+([^\s]+)/);
+        if (versionMatch && versionMatch[1]) {
+          resolve(versionMatch[1]);
+        } else {
+          reject(provider + ' ' + browser + ' version not found');
+        }
+      }
+    );
+  });
 }
