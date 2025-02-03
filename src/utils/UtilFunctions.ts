@@ -273,39 +273,53 @@ export async function getBrandedBrowserVersion(
         }
       } else {
         if (browser === 'Chrome') {
-          await getChromeVersion(browser, stdout, provider);
+          console.log(`Version info :${stdout}`);
+          const versionMatch = stdout.match(/Google Chrome (\d+\.\d+\.\d+\.\d+)/);
+          if (versionMatch?.[1]) {
+            resolve(versionMatch[1]);
+            console.log(`Installed browser version of ${browser} :${versionMatch[1]}`);
+          } else {
+            reject(provider + ' ' + browser + ' version not found');
+          }
         } else if (browser === 'Edge') {
-          await getEdgeVersion(browser, stdout, provider);
+          console.log(`Version info :${stdout}`);
+          const versionMatch = stdout.match(/Microsoft Edge (\d+\.\d+\.\d+\.\d+)/);
+          if (versionMatch?.[1]) {
+            resolve(versionMatch[1]);
+            console.log(`Installed browser version of ${browser} :${versionMatch[1]}`);
+          } else {
+            reject(provider + ' ' + browser + ' version not found');
+          }
         }
       }
     });
   });
 }
-export async function getChromeVersion(browser: string, stdout: string, provider: string) {
-  return new Promise((resolve, reject) => {
-    if (browser === 'Chrome') {
-      console.log(`Version info :${stdout}`);
-      const versionMatch = stdout.match(/Google Chrome (\d+\.\d+\.\d+\.\d+)/);
-      if (versionMatch?.[1]) {
-        resolve(versionMatch[1]);
-        console.log(`Installed browser version of ${browser} :${versionMatch[1]}`);
-      } else {
-        reject(provider + ' ' + browser + ' version not found');
-      }
-    }
-  });
-}
-export async function getEdgeVersion(browser: string, stdout: string, provider: string) {
-  return new Promise((resolve, reject) => {
-    if (browser === 'Edge') {
-      console.log(`Version info :${stdout}`);
-      const versionMatch = stdout.match(/Microsoft Edge (\d+\.\d+\.\d+\.\d+)/);
-      if (versionMatch?.[1]) {
-        resolve(versionMatch[1]);
-        console.log(`versionMatch[1] :${versionMatch[1]}`);
-      } else {
-        reject(provider + ' ' + browser + ' version not found');
-      }
-    }
-  });
-}
+// export async function getChromeVersion(browser: string, stdout: string, provider: string) {
+//   return new Promise((resolve, reject) => {
+//     if (browser === 'Chrome') {
+//       console.log(`Version info :${stdout}`);
+//       const versionMatch = stdout.match(/Google Chrome (\d+\.\d+\.\d+\.\d+)/);
+//       if (versionMatch?.[1]) {
+//         resolve(versionMatch[1]);
+//         console.log(`Installed browser version of ${browser} :${versionMatch[1]}`);
+//       } else {
+//         reject(provider + ' ' + browser + ' version not found');
+//       }
+//     }
+//   });
+// }
+// export async function getEdgeVersion(browser: string, stdout: string, provider: string) {
+//   return new Promise((resolve, reject) => {
+//     if (browser === 'Edge') {
+//       console.log(`Version info :${stdout}`);
+//       const versionMatch = stdout.match(/Microsoft Edge (\d+\.\d+\.\d+\.\d+)/);
+//       if (versionMatch?.[1]) {
+//         resolve(versionMatch[1]);
+//         console.log(`versionMatch[1] :${versionMatch[1]}`);
+//       } else {
+//         reject(provider + ' ' + browser + ' version not found');
+//       }
+//     }
+//   });
+// }
