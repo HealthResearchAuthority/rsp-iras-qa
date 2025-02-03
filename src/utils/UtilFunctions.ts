@@ -306,7 +306,8 @@ export async function getBrandedBrowserVersion(provider: string, browser: string
 }
 export function switchBackDirectory() {
   try {
-    const targetDir = path.join('/usr/bin', 'bash');
+    const targetDir = path.dirname('/usr/bin/bash');
+    // const targetDir = path.join('/usr/bin', 'bash');
     if (fs.existsSync(targetDir)) {
       process.chdir(targetDir);
       console.log(`Directory changed to: ${process.cwd()}`);
