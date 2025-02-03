@@ -8,6 +8,7 @@ import fs from 'fs';
 import { createHtmlReport } from 'axe-html-reporter';
 import os from 'os';
 import { exec } from 'child_process';
+import path from 'path';
 
 let browserdata: any;
 let deviceType: string;
@@ -251,6 +252,9 @@ export async function getBrandedBrowserVersion(provider: string, browser: string
       command = 'reg query "HKEY_CURRENT_USER\\Software\\Microsoft\\Edge\\BLBeacon" /v version';
     }
   } else {
+    const targetDir = path.dirname('/usr/bin/bash');
+    process.chdir(targetDir);
+    console.log(`Directory changed to :${process.cwd()}`);
     if (browser === 'Chrome') {
       command = '/usr/bin/google-chrome --version';
     } else {
@@ -275,11 +279,24 @@ export async function getBrandedBrowserVersion(provider: string, browser: string
           reject(provider + ' ' + browser + ' version not found');
         }
       } else {
-        const versionMatch = stdout.trim();
-        if (versionMatch?.[1]) {
-          resolve(versionMatch[1]);
-        } else {
-          reject(provider + ' ' + browser + ' version not found');
+        if (browser === 'Chrome') {
+          console.log(`stdout :${stdout}`);
+          const versionMatch = stdout.match(/Google Chrome (\d+\.\d+\.\d+\.\d+)/);
+          if (versionMatch?.[1]) {
+            resolve(versionMatch[1]);
+            console.log(`versionMatch[1] :${versionMatch[1]}`);
+          } else {
+            reject(provider + ' ' + browser + ' version not found');
+          }
+        } else if (browser === 'Edge') {
+          console.log(`stdout :${stdout}`);
+          const versionMatch = stdout.match(/Microsoft Edge (\d+\.\d+\.\d+\.\d+)/);
+          if (versionMatch?.[1]) {
+            resolve(versionMatch[1]);
+            console.log(`versionMatch[1] :${versionMatch[1]}`);
+          } else {
+            reject(provider + ' ' + browser + ' version not found');
+          }
         }
       }
 
