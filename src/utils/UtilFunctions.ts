@@ -255,7 +255,7 @@ export async function getBrandedBrowserVersion(provider: string, browser: string
           return;
         }
         const versionMatch = stdout.match(/version\s+REG_SZ\s+([^\s]+)/);
-        if (versionMatch && versionMatch[1]) {
+        if (versionMatch?.[1]) {
           resolve(versionMatch[1]);
         } else {
           reject(provider + ' ' + browser + ' version not found');
