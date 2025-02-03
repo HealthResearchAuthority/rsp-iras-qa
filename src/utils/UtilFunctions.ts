@@ -306,14 +306,26 @@ export async function getBrandedBrowserVersion(provider: string, browser: string
 }
 export function switchBackDirectory() {
   try {
-    const targetDir = path.dirname('/usr/bin/bash');
-    // const targetDir = path.join('/usr/bin', 'bash');
-    if (fs.existsSync(targetDir)) {
-      process.chdir(targetDir);
+    exec('cd /usr/bin && /usr/bin/bash', (error, stdout, stderr) => {
+      if (error) {
+        console.error(`Error: ${error.message}`);
+        return;
+      }
+      if (stderr) {
+        console.error(`Stderr: ${stderr}`);
+        return;
+      }
+      console.log(`Stdout: ${stdout}`);
       console.log(`Directory changed to: ${process.cwd()}`);
-    } else {
-      console.error(`Directory not found: ${targetDir}`);
-    }
+    });
+    // const targetDir = path.dirname('/usr/bin/bash');
+    // // const targetDir = path.join('/usr/bin', 'bash');
+    // if (fs.existsSync(targetDir)) {
+    //   process.chdir(targetDir);
+    //   console.log(`Directory changed to: ${process.cwd()}`);
+    // } else {
+    //   console.error(`Directory not found: ${targetDir}`);
+    // }
   } catch (err) {
     console.error(`Failed to change directory: ${(err as Error).message}`);
   }
