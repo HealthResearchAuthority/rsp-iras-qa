@@ -280,7 +280,7 @@ export async function getBrandedBrowserVersion(
         } else {
           reject(provider + ' ' + browser + ' version not found');
         }
-      } else {
+      } else if (platform === 'linux') {
         console.log(`platform info :${platform}`);
         if (browser === 'Chrome') {
           console.log(`Version info :${stdout}`);
