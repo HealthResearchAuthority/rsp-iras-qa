@@ -252,9 +252,9 @@ export async function getBrandedBrowserVersion(provider: string, browser: string
     }
   } else {
     if (browser === 'Chrome') {
-      command = 'google-chrome --version';
+      command = '/usr/bin/google-chrome --version';
     } else {
-      command = 'microsoft-edge --version';
+      command = '/usr/bin/microsoft-edge --version';
     }
   }
   return new Promise((resolve, reject) => {
