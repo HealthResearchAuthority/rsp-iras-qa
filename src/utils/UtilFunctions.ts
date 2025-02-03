@@ -114,9 +114,9 @@ export async function getBrowserVersionDevices(deviceType: string): Promise<stri
       const subresult: string = result[1];
       version = subresult.split(' ')[0];
     } else if (`${process.env.BROWSER?.toLowerCase()}` == 'microsoft edge') {
-      version = await getBrandedBrowserVersion('Microsoft', 'Edge', platform, 'microsoft-edge');
+      version = await getBrandedBrowserVersion('Microsoft', 'Edge', platform);
     } else if (`${process.env.BROWSER?.toLowerCase()}` == 'google chrome') {
-      version = await getBrandedBrowserVersion('Google', 'Chrome', platform, 'google-chrome');
+      version = await getBrandedBrowserVersion('Google', 'Chrome', platform);
     }
   } else if (browserType == 'webkit') {
     const result: string[] = userAgent.split('Version/');
@@ -242,26 +242,21 @@ export function getOSNameVersion() {
   return osVersion;
 }
 
-export async function getBrandedBrowserVersion(
-  provider: string,
-  browser: string,
-  platform: string,
-  browserVal: string
-): Promise<string> {
-  const command =
-    platform === 'win32'
-      ? 'reg query "HKEY_CURRENT_USER\\Software\\' + provider + '\\' + browser + '\\BLBeacon" /v version'
-      : platform === 'darwin'
-        ? '/Applications/' +
-          provider +
-          '\\ ' +
-          browser +
-          '.app/Contents/MacOS/' +
-          provider +
-          '\\' +
-          browser +
-          ' --version'
-        : '' + browserVal + ' --version';
+export async function getBrandedBrowserVersion(provider: string, browser: string, platform: string): Promise<string> {
+  let command: string;
+  if (platform === 'win32') {
+    if (browser === 'Chrome') {
+      command = 'reg query "HKEY_CURRENT_USER\\Software\\Google\\Chrome\\BLBeacon" /v version';
+    } else {
+      command = 'reg query "HKEY_CURRENT_USER\\Software\\Microsoft\\Edge\\BLBeacon" /v version';
+    }
+  } else {
+    if (browser === 'Chrome') {
+      command = 'google-chrome --version';
+    } else {
+      command = 'microsoft-edge --version';
+    }
+  }
   return new Promise((resolve, reject) => {
     exec(command, (error, stdout, stderr) => {
       if (error) {
@@ -278,6 +273,7 @@ export async function getBrandedBrowserVersion(
       } else {
         reject(provider + ' ' + browser + ' version not found');
       }
+      stdout.trim();
     });
   });
 }
