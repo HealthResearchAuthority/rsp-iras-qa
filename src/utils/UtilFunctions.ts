@@ -267,12 +267,22 @@ export async function getBrandedBrowserVersion(provider: string, browser: string
         reject(`Stderr: ${stderr}`);
         return;
       }
-      const versionMatch = stdout.match(/version\s+REG_SZ\s+([^\s]+)/);
-      if (versionMatch?.[1]) {
-        resolve(versionMatch[1]);
+      if (platform === 'win32') {
+        const versionMatch = stdout.match(/version\s+REG_SZ\s+([^\s]+)/);
+        if (versionMatch?.[1]) {
+          resolve(versionMatch[1]);
+        } else {
+          reject(provider + ' ' + browser + ' version not found');
+        }
       } else {
-        reject(provider + ' ' + browser + ' version not found');
+        const versionMatch = stdout.trim();
+        if (versionMatch?.[1]) {
+          resolve(versionMatch[1]);
+        } else {
+          reject(provider + ' ' + browser + ' version not found');
+        }
       }
+
       stdout.trim();
     });
   });
