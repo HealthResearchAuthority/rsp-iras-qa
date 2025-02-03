@@ -592,19 +592,19 @@ Below steps to follow to use the Self Healing locators mechanism:
 
 1. Self healer locator method is created under 'CommonItemsPage.ts'.
 
-![self healing](src/resources\images\selfHealingCode.png =600x600)
+![self healing](src/resources\images\selfHealingCode.png)
 
 2. Extend the CommonItemsPage class to the page where we need to use the self healing locator. Below example of how extended for the LoginPage
 
-![self healing - login page](src/resources\images\selfHealingLoginPage.png =600x600)
+![self healing - login page](src/resources\images\selfHealingLoginPage.png)
 
 3. Declare Locators as an array, and list the possible different combinations of locators for the web element as in below screenshot:
 
-![self healing - login page](src/resources\images\selfHealingLocatorsAsArray.png =600x600)
+![self healing - login page](src/resources\images\selfHealingLocatorsAsArray.png)
 
 4. Use the 'selfHealLocator' method created in 'CommonItemsPage.ts' to get the valid locator from the list of locators.
 
-![self healing - login page](src/resources\images\selfHealingLoginPageCode.png =600x600) 
+![self healing - login page](src/resources\images\selfHealingLoginPageCode.png) 
 
 # Supporting Documentation
 
