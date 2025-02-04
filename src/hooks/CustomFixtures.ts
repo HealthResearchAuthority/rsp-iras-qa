@@ -110,6 +110,15 @@ export const test = base.extend<CustomFixtures>({
     await use(storageState);
   },
 
+  channel: async ({ channel }, use) => {
+    if (`${process.env.BROWSER?.toLowerCase()}` == 'microsoft edge') {
+      channel = 'msedge';
+    } else if (`${process.env.BROWSER?.toLowerCase()}` == 'google chrome') {
+      channel = 'chrome';
+    }
+    await use(channel);
+  },
+
   //Attach relevant ticket links to each scenario in test report
   $beforeEach: async ({ $tags, $testInfo }, use) => {
     const tickets = getTicketReferenceTags($tags);

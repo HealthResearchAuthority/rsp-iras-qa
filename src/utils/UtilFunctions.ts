@@ -3,10 +3,12 @@ import { Locator, devices } from '@playwright/test';
 import crypto from 'crypto';
 import { readFile, writeFile } from 'fs/promises';
 import 'dotenv/config';
-import { deviceDSafari, deviceDFirefox, deviceDChrome } from '../hooks/GlobalSetup';
+import { deviceDSafari, deviceDFirefox, deviceDChrome, deviceDEdge } from '../hooks/GlobalSetup';
 import fs from 'fs';
 import { createHtmlReport } from 'axe-html-reporter';
 import os from 'os';
+import { exec } from 'child_process';
+import * as brandedBrowserdataConfig from '../resources/test_data/common/branded_browser_data.json';
 
 let browserdata: any;
 let deviceType: string;
@@ -90,19 +92,33 @@ export async function getTextFromElementArray(inputArray: Locator[]): Promise<st
 
 export function getBrowserType(deviceType: string): string {
   const browser = devices[`${deviceType}`];
-  const browserName = JSON.parse(JSON.stringify(browser)).defaultBrowserType;
+  let browserName: string;
+  if (`${process.env.BROWSER?.toLowerCase()}` == 'microsoft edge') {
+    browserName = 'Microsoft Edge';
+  } else if (`${process.env.BROWSER?.toLowerCase()}` == 'google chrome') {
+    browserName = 'Google Chrome';
+  } else {
+    browserName = JSON.parse(JSON.stringify(browser)).defaultBrowserType;
+  }
   return browserName;
 }
 
-export function getBrowserVersionDevices(deviceType: string): string | undefined {
+export async function getBrowserVersionDevices(deviceType: string): Promise<string | undefined> {
   const browser = devices[`${deviceType}`];
   let version: string | undefined;
+  const platform = os.platform();
   const browserType = `${JSON.parse(JSON.stringify(browser)).defaultBrowserType}`;
   const userAgent = `${JSON.parse(JSON.stringify(browser)).userAgent}`;
   if (browserType == 'chromium') {
-    const result: string[] = userAgent.split('Chrome/');
-    const subresult: string = result[1];
-    version = subresult.split(' ')[0];
+    if (`${process.env.BROWSER?.toLowerCase()}` == 'chromium') {
+      const result: string[] = userAgent.split('Chrome/');
+      const subresult: string = result[1];
+      version = subresult.split(' ')[0];
+    } else if (`${process.env.BROWSER?.toLowerCase()}` == 'microsoft edge') {
+      version = await getBrandedBrowserVersion('Edge', platform);
+    } else if (`${process.env.BROWSER?.toLowerCase()}` == 'google chrome') {
+      version = await getBrandedBrowserVersion('Chrome', platform);
+    }
   } else if (browserType == 'webkit') {
     const result: string[] = userAgent.split('Version/');
     const subresult: string = result[1];
@@ -140,9 +156,15 @@ function getDesktopBrowserData() {
   } else if (`${process.env.BROWSER?.toLowerCase()}` == 'firefox') {
     browserdata = devices[`${deviceDFirefox}`];
     deviceType = `${deviceDFirefox}`;
-  } else if (`${process.env.BROWSER?.toLowerCase()}` == 'chromium') {
+  } else if (
+    `${process.env.BROWSER?.toLowerCase()}` == 'chromium' ||
+    `${process.env.BROWSER?.toLowerCase()}` == 'google chrome'
+  ) {
     browserdata = devices[`${deviceDChrome}`];
     deviceType = `${deviceDChrome}`;
+  } else if (`${process.env.BROWSER?.toLowerCase()}` == 'microsoft edge') {
+    browserdata = devices[`${deviceDEdge}`];
+    deviceType = `${deviceDEdge}`;
   } else {
     browserdata = devices[`${deviceDChrome}`];
     deviceType = `${deviceDChrome}`;
@@ -219,4 +241,101 @@ export function getOSNameVersion() {
     osVersion = `${os.version}`;
   }
   return osVersion;
+}
+
+export function getCommandforInstalledBrowserVersion(browser: string, platform: string): string {
+  let command = '';
+  if (platform === 'win32') {
+    if (browser === 'Edge') {
+      const commandEdge = brandedBrowserdataConfig.platform.win32['Edge'];
+      command = 'reg query "' + commandEdge + '" /v version';
+    } else if (browser === 'Chrome') {
+      const commandChrome = brandedBrowserdataConfig.platform.win32['Chrome'];
+      command = 'reg query "' + commandChrome + '" /v version';
+    }
+  } else if (platform === 'linux') {
+    if (browser === 'Edge') {
+      command = brandedBrowserdataConfig.platform.linux['Edge'];
+    } else if (browser === 'Chrome') {
+      command = brandedBrowserdataConfig.platform.linux['Chrome'];
+    }
+  }
+  return command;
+}
+
+export async function getVersionLinuxPlatform(
+  browser: string,
+  platform: string,
+  command: string
+): Promise<string | undefined> {
+  let versionMatch: any[] | null;
+  return new Promise((resolve, reject) => {
+    if (platform === 'linux') {
+      exec(command, (error, stdout, stderr) => {
+        if (error) {
+          console.error(`Error: ${error.message}`);
+          return;
+        }
+        if (stderr) {
+          console.error(`Stderr: ${stderr}`);
+          return;
+        }
+        console.log(`Version info :${stdout}`);
+        if (browser === 'Chrome') {
+          const regExp = new RegExp(brandedBrowserdataConfig.platform.linux['Regexp_Chrome']);
+          versionMatch = stdout.match(regExp);
+        } else if (browser === 'Edge') {
+          const regExp = new RegExp(brandedBrowserdataConfig.platform.linux['Regexp_Edge']);
+          versionMatch = stdout.match(regExp);
+        }
+        if (versionMatch?.[1]) {
+          resolve(versionMatch[1]);
+          console.log(`Installed browser version of ${browser} :${versionMatch[1]}`);
+        } else {
+          reject(`Installed browser version of ${browser} version not found`);
+        }
+      });
+    }
+  });
+}
+
+export async function getVersionWinPlatform(
+  browser: string,
+  platform: string,
+  command: string
+): Promise<string | undefined> {
+  return new Promise((resolve, reject) => {
+    if (platform === 'win32') {
+      exec(command, (error, stdout, stderr) => {
+        if (error) {
+          console.error(`Error: ${error.message}`);
+          return;
+        }
+        if (stderr) {
+          console.error(`Stderr: ${stderr}`);
+          return;
+        }
+        console.log(`Version info :${stdout}`);
+        const regExp = new RegExp(brandedBrowserdataConfig.platform.win32['Regexp']);
+        const versionMatch = stdout.match(regExp);
+        if (versionMatch?.[1]) {
+          resolve(versionMatch[1]);
+          console.log(`Installed browser version of ${browser} :${versionMatch[1]}`);
+        } else {
+          reject(`Installed browser version of ${browser} version not found`);
+        }
+      });
+    }
+  });
+}
+
+export async function getBrandedBrowserVersion(browser: string, platform: string): Promise<string | undefined> {
+  const command = getCommandforInstalledBrowserVersion(browser, platform);
+  let version: string | PromiseLike<string | undefined> | undefined;
+  if (platform === 'win32') {
+    version = await getVersionWinPlatform(browser, platform, command);
+  } else if (platform === 'linux') {
+    version = await getVersionLinuxPlatform(browser, platform, command);
+  }
+  return version;
 }

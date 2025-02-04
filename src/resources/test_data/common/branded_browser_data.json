@@ -1,0 +1,15 @@
+{
+  "platform": {
+    "win32": {
+      "Edge": "HKEY_CURRENT_USER\\Software\\Microsoft\\Edge\\BLBeacon",
+      "Chrome": "HKEY_CURRENT_USER\\Software\\Google\\Chrome\\BLBeacon",
+      "Regexp": "version\\s+REG_SZ\\s+([^\\s]+)"
+    },
+    "linux": {
+      "Edge": "/usr/bin/microsoft-edge --version",
+      "Chrome": "/usr/bin/google-chrome --version",
+      "Regexp_Edge": "Microsoft Edge (\\d+\\.\\d+\\.\\d+\\.\\d+)",
+      "Regexp_Chrome": "Google Chrome (\\d+\\.\\d+\\.\\d+\\.\\d+)"
+    }
+  }
+}
