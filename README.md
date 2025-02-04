@@ -606,6 +606,8 @@ Below steps to follow to use the Self Healing locators mechanism:
 
 ![self healing - login page](src/resources\images\selfHealingLoginPageCode.png) 
 
+**Note**: Self healing should only be used for locators that have a history of being unreliable (flaky).
+
 # Supporting Documentation
 
 - [Playwright Documentation](https://playwright.dev/docs/api/class-playwright)
