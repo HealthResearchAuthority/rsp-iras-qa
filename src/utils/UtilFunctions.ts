@@ -241,6 +241,7 @@ export function getOSNameVersion() {
   }
   return osVersion;
 }
+
 export async function getCommandforInstalledBrowserVersion(
   provider: string,
   browser: string,
@@ -256,52 +257,81 @@ export async function getCommandforInstalledBrowserVersion(
   return command;
 }
 
+export async function getVersionLinuxPlatform(
+  browser: string,
+  platform: string,
+  command: string
+): Promise<string | undefined> {
+  let versionMatch: any[] | null;
+  return new Promise((resolve, reject) => {
+    if (platform === 'linux') {
+      exec(command, (error, stdout, stderr) => {
+        if (error) {
+          console.error(`Error: ${error.message}`);
+          return;
+        }
+        if (stderr) {
+          console.error(`Stderr: ${stderr}`);
+          return;
+        }
+        console.log(`Version info :${stdout}`);
+        if (browser === 'Chrome') {
+          versionMatch = stdout.match(/Google Chrome (\d+\.\d+\.\d+\.\d+)/);
+        } else if (browser === 'Edge') {
+          versionMatch = stdout.match(/Microsoft Edge (\d+\.\d+\.\d+\.\d+)/);
+        }
+        if (versionMatch?.[1]) {
+          resolve(versionMatch[1]);
+          console.log(`Installed browser version of ${browser} :${versionMatch[1]}`);
+        } else {
+          reject(`Installed browser version of ${browser} version not found`);
+        }
+      });
+    }
+  });
+}
+
+export async function getVersionWinPlatform(
+  browser: string,
+  platform: string,
+  command: string
+): Promise<string | undefined> {
+  return new Promise((resolve, reject) => {
+    if (platform === 'win32') {
+      exec(command, (error, stdout, stderr) => {
+        if (error) {
+          console.error(`Error: ${error.message}`);
+          return;
+        }
+        if (stderr) {
+          console.error(`Stderr: ${stderr}`);
+          return;
+        }
+        console.log(`Version info :${stdout}`);
+        const versionMatch = stdout.match(/version\s+REG_SZ\s+([^\s]+)/);
+        if (versionMatch?.[1]) {
+          resolve(versionMatch[1]);
+          console.log(`Installed browser version of ${browser} :${versionMatch[1]}`);
+        } else {
+          reject(`Installed browser version of ${browser} version not found`);
+        }
+      });
+    }
+  });
+}
+
 export async function getBrandedBrowserVersion(
   provider: string,
   browser: string,
   platform: string,
   browserVal: string
-): Promise<string> {
+): Promise<string | undefined> {
   const command = await getCommandforInstalledBrowserVersion(provider, browser, platform, browserVal);
-  return new Promise((resolve, reject) => {
-    exec(command, async (error, stdout, stderr) => {
-      if (error) {
-        reject(`Error: ${error.message}`);
-        return;
-      }
-      if (stderr) {
-        reject(`Stderr: ${stderr}`);
-        return;
-      }
-      if (platform === 'win32') {
-        const versionMatch = stdout.match(/version\s+REG_SZ\s+([^\s]+)/);
-        if (versionMatch?.[1]) {
-          resolve(versionMatch[1]);
-        } else {
-          reject(provider + ' ' + browser + ' version not found');
-        }
-      } else if (platform === 'linux') {
-        console.log(`platform info :${platform}`);
-        if (browser === 'Chrome') {
-          console.log(`Version info :${stdout}`);
-          const versionMatch = stdout.match(/Google Chrome (\d+\.\d+\.\d+\.\d+)/);
-          if (versionMatch?.[1]) {
-            resolve(versionMatch[1]);
-            console.log(`Installed browser version of ${browser} :${versionMatch[1]}`);
-          } else {
-            reject(provider + ' ' + browser + ' version not found');
-          }
-        } else if (browser === 'Edge') {
-          console.log(`Version info :${stdout}`);
-          const versionMatch = stdout.match(/Microsoft Edge (\d+\.\d+\.\d+\.\d+)/);
-          if (versionMatch?.[1]) {
-            resolve(versionMatch[1]);
-            console.log(`Installed browser version of ${browser} :${versionMatch[1]}`);
-          } else {
-            reject(provider + ' ' + browser + ' version not found');
-          }
-        }
-      }
-    });
-  });
+  let version: string | PromiseLike<string | undefined> | undefined;
+  if (platform === 'win32') {
+    version = await getVersionWinPlatform(browser, platform, command);
+  } else if (platform === 'linux') {
+    version = await getVersionLinuxPlatform(browser, platform, command);
+  }
+  return version;
 }
