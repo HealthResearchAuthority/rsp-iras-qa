@@ -26,6 +26,14 @@ Then('I analyse the results from the Axe scan', async ({ $testInfo }) => {
     contentType: 'application/json',
   });
   const file = $testInfo.outputPath(`temp-axe-results.json`);
+<<<<<<< HEAD
+=======
+  axeScanResults.violations.sort(compareWcagStandards);
+  const wcagStandardAchieved = await assertWcagCompliance(axeScanResults.violations);
+  axeScanResults.passes.sort(compareWcagStandards);
+  axeScanResults.incomplete.sort(compareWcagStandards);
+  axeScanResults.inapplicable.sort(compareWcagStandards);
+>>>>>>> 92e8811 (adding an insert into AXE HTML Report that states the WCAG standard achieved, also removing redundant old generateAxeReport method)
   await writeFile(file, JSON.stringify(axeScanResults, null, 2), 'utf8');
   const htmlReport = createHtmlReport({
     results: axeScanResults,
