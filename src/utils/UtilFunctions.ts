@@ -5,7 +5,6 @@ import { readFile, writeFile } from 'fs/promises';
 import 'dotenv/config';
 import { deviceDSafari, deviceDFirefox, deviceDChrome, deviceDEdge } from '../hooks/GlobalSetup';
 import fs from 'fs';
-// import { createHtmlReport } from 'axe-html-reporter';
 import os from 'os';
 
 let browserdata: any;
