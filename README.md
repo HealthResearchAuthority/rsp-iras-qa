@@ -584,6 +584,30 @@ E.g. `npx bddgen --tags "@authSetup or <@yourTestTag>" && npx playwright test`
 5. All files created and stored in the `auth-storage-states` folder are deleted after the test run,  
 as part the `GlobalTeardown.ts` file
 
+# Self Healing locators
+
+Self-healing locators refers to the capability of testing framework to automatically detect and recover from issues due to invalid locators that cause tests to fail.
+
+Below steps to follow to use the Self Healing locators mechanism:
+
+1. Self healer locator method is created under 'CommonItemsPage.ts'.
+
+![self healing](src/resources\images\selfHealingCode.png)
+
+2. Extend the CommonItemsPage class to the page where we need to use the self healing locator. Below example of how extended for the LoginPage
+
+![self healing - login page](src/resources\images\selfHealingLoginPage.png)
+
+3. Declare Locators as an array, and list the possible different combinations of locators for the web element as in below screenshot:
+
+![self healing - login page](src/resources\images\selfHealingLocatorsAsArray.png)
+
+4. Use the 'selfHealLocator' method created in 'CommonItemsPage.ts' to get the valid locator from the list of locators.
+
+![self healing - login page](src/resources\images\selfHealingLoginPageCode.png) 
+
+**Note**: Self healing should only be used for locators that have a history of being unreliable (flaky).
+
 # Supporting Documentation
 
 - [Playwright Documentation](https://playwright.dev/docs/api/class-playwright)
