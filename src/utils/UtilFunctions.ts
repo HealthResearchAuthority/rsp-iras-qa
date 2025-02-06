@@ -273,12 +273,12 @@ export async function getAllBrowserVersion(browserName: string): Promise<string>
 export function compareWcagStandards(a: { tags: string[] }, b: { tags: string[] }) {
   const wcagStandardRegex = new RegExp(/(?<=wcag2(?:1|2)?)a+/);
   const wcagGuidelineRegex = new RegExp(/\d+/);
-  const aWcagTag = confirmStringNotNull(a.tags.find((tag) => tag.match(wcagStandardRegex)));
-  const bWcagTag = confirmStringNotNull(b.tags.find((tag) => tag.match(wcagStandardRegex)));
-  const aWcagTagGuideline = parseInt(confirmStringNotNull(aWcagTag.match(wcagGuidelineRegex)?.toString()));
-  const bWcagTagGuideline = parseInt(confirmStringNotNull(bWcagTag.match(wcagGuidelineRegex)?.toString()));
-  const aWcagTagStandard = confirmStringNotNull(aWcagTag.match(wcagStandardRegex)?.toString());
-  const bWcagTagStandard = confirmStringNotNull(bWcagTag.match(wcagStandardRegex)?.toString());
+  const aWcagTag = confirmStringNotNull(a.tags.find((tag) => wcagStandardRegex.exec(tag)));
+  const bWcagTag = confirmStringNotNull(b.tags.find((tag) => wcagStandardRegex.exec(tag)));
+  const aWcagTagGuideline = parseInt(confirmStringNotNull(wcagGuidelineRegex.exec(aWcagTag)?.toString()));
+  const bWcagTagGuideline = parseInt(confirmStringNotNull(wcagGuidelineRegex.exec(bWcagTag)?.toString()));
+  const aWcagTagStandard = confirmStringNotNull(wcagStandardRegex.exec(aWcagTag)?.toString());
+  const bWcagTagStandard = confirmStringNotNull(wcagStandardRegex.exec(bWcagTag)?.toString());
 
   if (aWcagTagStandard.length < bWcagTagStandard.length) {
     return -1;
@@ -289,8 +289,7 @@ export function compareWcagStandards(a: { tags: string[] }, b: { tags: string[] 
       return -1;
     } else if (aWcagTagGuideline < bWcagTagGuideline) {
       return 1;
-    } else {
-      return 0;
     }
+    return 0;
   }
 }
