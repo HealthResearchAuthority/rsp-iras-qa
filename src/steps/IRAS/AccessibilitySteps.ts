@@ -1,6 +1,11 @@
 import { createBdd } from 'playwright-bdd';
 import { test, expect } from '../../hooks/CustomFixtures';
-import { readAxeResultsContents, generatehtmlReport, compareWcagStandards } from '../../utils/UtilFunctions';
+import {
+  readAxeResultsContents,
+  generatehtmlReport,
+  compareWcagStandards,
+  assertWcagCompliance,
+} from '../../utils/UtilFunctions';
 import { writeFile } from 'fs/promises';
 import { createHtmlReport } from 'axe-html-reporter';
 
@@ -22,6 +27,7 @@ Then('I analyse the results from the Axe scan', async ({ $testInfo }) => {
   });
   const file = $testInfo.outputPath(`temp-axe-results.json`);
   axeScanResults.violations.sort(compareWcagStandards);
+  const wcagStandardAchieved = await assertWcagCompliance(axeScanResults.violations);
   axeScanResults.passes.sort(compareWcagStandards);
   axeScanResults.incomplete.sort(compareWcagStandards);
   axeScanResults.inapplicable.sort(compareWcagStandards);
@@ -34,7 +40,7 @@ Then('I analyse the results from the Axe scan', async ({ $testInfo }) => {
     },
   });
   //write the html report for each page
-  generatehtmlReport(`${$testInfo.title.replace(' ', '_')}`, htmlReport);
+  generatehtmlReport(`${$testInfo.title.replace(' ', '_')}`, htmlReport, wcagStandardAchieved);
 });
 
 Then('I expect to receive no WCAG Violations', async ({ $testInfo }) => {

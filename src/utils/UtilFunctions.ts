@@ -5,7 +5,7 @@ import { readFile, writeFile } from 'fs/promises';
 import 'dotenv/config';
 import { deviceDSafari, deviceDFirefox, deviceDChrome, deviceDEdge } from '../hooks/GlobalSetup';
 import fs from 'fs';
-import { createHtmlReport } from 'axe-html-reporter';
+// import { createHtmlReport } from 'axe-html-reporter';
 import os from 'os';
 
 let browserdata: any;
@@ -198,13 +198,19 @@ export function formatedDuration(duration: number) {
   return formattedTime;
 }
 
-export function generatehtmlReport(path: string, htmlReport: string) {
+export function generatehtmlReport(path: string, htmlReport: string, wcagStandard: string) {
   if (!fs.existsSync(path)) {
     fs.mkdirSync('./test-reports/axeAccessibility', {
       recursive: true,
     });
   }
-  fs.writeFileSync(`./test-reports/axeAccessibility/${path}.html`, htmlReport);
+  const adjustedHtmlReport = htmlReport
+    .replace(
+      /violations/,
+      `violations<br />The ${path.replace('_', ' ')} ${wcagStandard}<br />Please Note that this is Subject to Further Manual Checks`
+    )
+    .replace(/project/, '');
+  fs.writeFileSync(`./test-reports/axeAccessibility/${path}.html`, adjustedHtmlReport);
 }
 
 export async function generateJSON($bddWorld, axeScanResults, jsonfile) {
@@ -214,17 +220,6 @@ export async function generateJSON($bddWorld, axeScanResults, jsonfile) {
   });
   const file = $bddWorld.testInfo.outputPath(`${jsonfile}`);
   await writeFile(file, JSON.stringify(axeScanResults, null, 2), 'utf8');
-}
-
-export async function generateAxeHTMLReport($bddWorld, axeScanResults) {
-  const htmlReport = createHtmlReport({
-    results: axeScanResults,
-    options: {
-      projectKey: $bddWorld.testInfo.title,
-      doNotCreateReportFile: false,
-    },
-  });
-  generatehtmlReport(`${$bddWorld.testInfo.title.replace(' ', '_')}.html`, htmlReport);
 }
 
 export function getOSNameVersion() {
@@ -271,14 +266,12 @@ export async function getAllBrowserVersion(browserName: string): Promise<string>
 
 //Sort Accessibilty Report Results based on WCAG Standard, A --> AAA
 export function compareWcagStandards(a: { tags: string[] }, b: { tags: string[] }) {
-  const wcagStandardRegex = new RegExp(/(?<=wcag2(?:[1-2])?)a+/);
-  const wcagGuidelineRegex = new RegExp(/\d+/);
-  const aWcagTag = confirmStringNotNull(a.tags.find((tag) => wcagStandardRegex.exec(tag)));
-  const bWcagTag = confirmStringNotNull(b.tags.find((tag) => wcagStandardRegex.exec(tag)));
-  const aWcagTagGuideline = parseInt(confirmStringNotNull(wcagGuidelineRegex.exec(aWcagTag)?.toString()));
-  const bWcagTagGuideline = parseInt(confirmStringNotNull(wcagGuidelineRegex.exec(bWcagTag)?.toString()));
-  const aWcagTagStandard = confirmStringNotNull(wcagStandardRegex.exec(aWcagTag)?.toString());
-  const bWcagTagStandard = confirmStringNotNull(wcagStandardRegex.exec(bWcagTag)?.toString());
+  const aWcagTag = extractWcagTag(a.tags);
+  const bWcagTag = extractWcagTag(b.tags);
+  const aWcagTagGuideline = extractWcagGuideline(aWcagTag);
+  const bWcagTagGuideline = extractWcagGuideline(bWcagTag);
+  const aWcagTagStandard = extractWcagStandard(aWcagTag);
+  const bWcagTagStandard = extractWcagStandard(bWcagTag);
 
   if (aWcagTagStandard.length < bWcagTagStandard.length) {
     return -1;
@@ -291,5 +284,50 @@ export function compareWcagStandards(a: { tags: string[] }, b: { tags: string[] 
       return 1;
     }
     return 0;
+  }
+}
+
+export async function assertWcagCompliance(violations: { tags: string[] }[]): Promise<string> {
+  let doubleAStandardViolation: number = 0;
+  let tripleAStandardViolation: number = 0;
+  for (const violation of violations) {
+    const wcagTag = extractWcagTag(violation.tags);
+    const wcagTagStandard = extractWcagStandard(wcagTag);
+    if (wcagTagStandard == 'a') {
+      return 'is Not WCAG Compliant';
+    } else if (wcagTagStandard == 'aa') {
+      doubleAStandardViolation++;
+    } else {
+      tripleAStandardViolation++;
+    }
+  }
+  return standardAcheived(doubleAStandardViolation, tripleAStandardViolation);
+}
+
+function extractWcagTag(tags: string[]): string {
+  const wcagStandardRegex = new RegExp(/(?<=wcag2(?:[1-2])?)a+/);
+  const wcagTag = confirmStringNotNull(tags.find((tag) => wcagStandardRegex.exec(tag)));
+  return wcagTag;
+}
+
+function extractWcagStandard(wcagTag: string): string {
+  const wcagStandardRegex = new RegExp(/(?<=wcag2(?:[1-2])?)a+/);
+  const wcagTagStandard = confirmStringNotNull(wcagStandardRegex.exec(wcagTag)?.toString());
+  return wcagTagStandard;
+}
+
+function extractWcagGuideline(wcagTag: string): number {
+  const wcagGuidelineRegex = new RegExp(/\d+/);
+  const wcagTagGuideline = parseInt(confirmStringNotNull(wcagGuidelineRegex.exec(wcagTag)?.toString()));
+  return wcagTagGuideline;
+}
+
+function standardAcheived(doubleViolation: number, tripleViolation: number) {
+  if (doubleViolation > 0) {
+    return 'is WCAG Compliant to the A Standard';
+  } else if (tripleViolation > 0) {
+    return 'is WCAG Compliant to the AA Standard';
+  } else {
+    return 'is WCAG Compliant to the AAA Standard';
   }
 }
