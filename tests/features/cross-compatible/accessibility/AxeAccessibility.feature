@@ -1,7 +1,7 @@
 @axeAccessibility @jsEnabled
 Feature: Run Axe Accessibilty Test Tool Against App Pages
 
-    @axeAccessibilityTasks @adminUser
+    @axeAccessibilityHome @adminUser
     Scenario: Home Page
         Given I have navigated to the 'Home_Page'
         When I Scan the page with the Axe Accessibilty Tool
@@ -15,14 +15,14 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
         And I analyse the results from the Axe scan
         Then I expect to receive no WCAG Violations
 
-    @axeAccessibilityTasks @adminUser
+    @axeAccessibilityCreate @adminUser
     Scenario: Create Application Page
         Given I have navigated to the 'Create_Application_Page'
         When I Scan the page with the Axe Accessibilty Tool
         And I analyse the results from the Axe scan
         Then I expect to receive no WCAG Violations
 
-    @axeAccessibilityTasks @adminUser
+    @axeAccessibilityProjFilter @adminUser
     Scenario: Project Filter Question Set
         Given I have navigated to the 'Home_Page'
         And I click the 'Make_Changes_To_Research' button on the 'Home_Page'
