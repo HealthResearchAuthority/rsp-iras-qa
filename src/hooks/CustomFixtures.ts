@@ -118,5 +118,13 @@ export const test = base.extend<CustomFixtures>({
     }
     await use();
   },
+
+  //Enable JavaScript in the BrowserContext for applicable, tagged scenarios
+  javaScriptEnabled: async ({ $tags, javaScriptEnabled }, use) => {
+    if ($tags.includes('@jsEnabled')) {
+      javaScriptEnabled = true;
+    }
+    await use(javaScriptEnabled);
+  },
 });
 export { expect } from '@playwright/test';
