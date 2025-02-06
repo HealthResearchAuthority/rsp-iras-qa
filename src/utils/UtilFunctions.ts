@@ -271,7 +271,7 @@ export async function getAllBrowserVersion(browserName: string): Promise<string>
 
 //Sort Accessibilty Report Results based on WCAG Standard, A --> AAA
 export function compareWcagStandards(a: { tags: string[] }, b: { tags: string[] }) {
-  const wcagStandardRegex = new RegExp(/(?<=wcag2(?:1|2)?)a+/);
+  const wcagStandardRegex = new RegExp(/(?<=wcag2(?:[1-2])?)a+/);
   const wcagGuidelineRegex = new RegExp(/\d+/);
   const aWcagTag = confirmStringNotNull(a.tags.find((tag) => wcagStandardRegex.exec(tag)));
   const bWcagTag = confirmStringNotNull(b.tags.find((tag) => wcagStandardRegex.exec(tag)));
