@@ -203,12 +203,15 @@ export function generatehtmlReport(path: string, htmlReport: string, wcagStandar
       recursive: true,
     });
   }
-  const adjustedHtmlReport = htmlReport
-    .replace(
-      /violations/,
-      `violations<br />The ${path.replace('_', ' ')} ${wcagStandard}<br />Please Note that this is Subject to Further Manual Checks`
-    )
-    .replace(/project/, '');
+  let resultHeaderInsert: string;
+  if (wcagStandard.startsWith('is Not')) {
+    resultHeaderInsert = `violations<br /><span style="color: #ff0000">The ${path.replace('_', ' ')} ${wcagStandard}</span>
+      <h4>Please Note that this is Subject to Further Manual Checks</h4>`;
+  } else {
+    resultHeaderInsert = `violations<br />The ${path.replace('_', ' ')} ${wcagStandard}
+      <h4>Please Note that this is Subject to Further Manual Checks</h4>`;
+  }
+  const adjustedHtmlReport = htmlReport.replace(/violations/, resultHeaderInsert).replace(/project/, '');
   fs.writeFileSync(`./test-reports/axeAccessibility/${path}.html`, adjustedHtmlReport);
 }
 
