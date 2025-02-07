@@ -4,7 +4,7 @@ Feature: As an Authenticated Admin User I have Access to Authorised Application 
   Background:
     Given I have navigated to the 'Home_Page'
 
-  @logoutSmoke
+  @logoutSmoke @RSP-001 @testData
   Scenario: I am able to Logout
     When I click the 'Logout' button on the 'Banner'
     Then I can see the 'Unauthenticated_Home_Page'

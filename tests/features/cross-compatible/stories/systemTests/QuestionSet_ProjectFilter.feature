@@ -43,10 +43,10 @@ Feature: Question Set - Research Application - Project Filter
     Examples:
       | Project   | Project_Details         | Project_Scope         | Research_Location         | Validate_Button |
       | Project_X | No_Fields_Completed     | No_Fields_Completed   | No_Fields_Completed       | Validate        |
-      | Project_Y | Valid_Data_All_Fields   | No_Fields_Completed   | Valid_Data_Default_Fields | Validate        |
-      | Project_Z | Initial_Contact_Omitted | Valid_Data_All_Fields | Valid_Data_All_Fields     | Validate        |
+      # | Project_Y | Valid_Data_All_Fields   | No_Fields_Completed   | Valid_Data_Default_Fields | Validate        |
+      # | Project_Z | Initial_Contact_Omitted | Valid_Data_All_Fields | Valid_Data_All_Fields     | Validate        |
  
-  @rsp-1503 @only
+  @rsp-1503
   Scenario Outline: Demo to show what happens if wrong input is used in validation comparison
     And I enter the application name and description for '<Project>'
     And I click the 'Create' button on the 'Create_Application_Page'

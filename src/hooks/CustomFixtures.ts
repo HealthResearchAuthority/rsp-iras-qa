@@ -106,5 +106,22 @@ export const test = base.extend<CustomFixtures>({
     }
     await use();
   },
+
+  $after: async ({ $tags, $testInfo }, use) => {
+    console.log('IN AFTER HOOK');
+    if ($tags.includes('@testData')) {
+      console.log('IN AFTER HOOK IF STATEMENT');
+      const filePath = 'src/resources/test_data/common/button_text_data.json';
+      $testInfo.attach('Data File', { path: filePath });
+    }
+    await use();
+  },
+
+  javaScriptEnabled: async ({ $tags, javaScriptEnabled }, use) => {
+    if ($tags.includes('@authSetup')) {
+      javaScriptEnabled = true;
+    }
+    await use(javaScriptEnabled);
+  },
 });
 export { expect } from '@playwright/test';

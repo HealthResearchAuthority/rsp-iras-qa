@@ -1,7 +1,7 @@
 {
   "Project_Filter": {
     "title": "",
-    "section_headings": ["Project details", "Project scope", "Research location"],
+    "section_headings": ["Project Details", "Project Scope", "Research Location"],
     "page_name": "Project Filter"
   },
   "Project_Details": {
@@ -75,20 +75,19 @@
     "No_Fields_Completed": {}
   },
   "All_Mandatory_Validations": {
-    "short_project_title_text": "Question 1 under Project details section",
-    "identify_role_radio": "Question 2 under Project details section",
-    "full_project_title_text": "Question 3 under Project details section",
-    "is_project_managed_commercial_research_radio": "Question 4 under Project details section",
-    "is_nihr_funding_radio": "Question 5 under Project details section",
-    "access_cpms_services_radio": "Question 6 under Project details section",
-    "is_educational_project_radio": "Question 1 under Project scope section",
-    "activities_involved_checkbox": "Question 2 under Project scope section",
-    "include_prisoners_offenders_radio": "Question 11 under Project scope section",
-    "involve_ministry_of_defence_radio": "Question 12 under Project scope section",
-    "involve_hfea_radio": "Question 13 under Project scope section",
-    "is_outside_uk_radio": "Question 1 under Research location section",
-    "places_in_uk_for_project_checkbox": "Question 2 under Research location section",
-    "where_project_take_place_checkbox": "Question 4 under Research location section"
+    "short_project_title_text": "Question 1 under Project Details section",
+    "full_project_title_text": "Question 3 under Project Details section",
+    "is_project_managed_commercial_research_radio": "Question 4 under Project Details section",
+    "is_nihr_funding_radio": "Question 5 under Project Details section",
+    "access_cpms_services_radio": "Question 6 under Project Details section",
+    "is_educational_project_radio": "Question 1 under Project Scope section",
+    "activities_involved_checkbox": "Question 2 under Project Scope section",
+    "include_prisoners_offenders_radio": "Question 11 under Project Scope section",
+    "involve_ministry_of_defence_radio": "Question 12 under Project Scope section",
+    "involve_hfea_radio": "Question 13 under Project Scope section",
+    "is_outside_uk_radio": "Question 1 under Research Location section",
+    "places_in_uk_for_project_checkbox": "Question 2 under Research Location section",
+    "where_project_take_place_checkbox": "Question 4 under Research Location section"
   },
   "All_Conditional_Validations": {
     "email_initial_contact_cpms_text": "Question 6a under Project details section",

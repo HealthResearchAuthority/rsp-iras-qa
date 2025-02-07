@@ -1,10 +1,10 @@
 {
   "Admin_User": {
-    "username": "future_iras_auto_admin_user@dev.id.nihr.ac.uk",
+    "username": "future_iras_auto_admin_user@test.id.nihr.ac.uk",
     "password": "`${process.env.ADMIN_USER_PASS}`"
   },
   "Login_Page": {
-    "header": "Please note this is the Development Identity Gateway",
+    "header": "This is the TEST Identity Gateway",
     "partial_link": "id.nihr.ac.uk/authenticationendpoint/login"
   }
 }

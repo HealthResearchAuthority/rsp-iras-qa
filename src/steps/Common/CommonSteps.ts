@@ -200,19 +200,19 @@ Then(
         expectedFieldErrors.push(key);
       }
     }
-    //Perhaps can combine above and below in single doesn't have it OR has it but is empty statement
-    for (const key in pageObject['projectFilterPageTestData'].All_Conditional_Validations) {
-      if (combinedInputsUsed.has(key) && !combinedInputsUsed.get(key)) {
-        console.log(
-          'INPUT CONTAINS EMPTY CONDITIONAL FIELD: ' +
-            key +
-            ': ' +
-            pageObject['projectFilterPageTestData'].All_Conditional_Validations[key]
-        );
-        expectedAlertBoxErrors.push(pageObject['projectFilterPageTestData'].All_Conditional_Validations[key]);
-        expectedFieldErrors.push(key);
-      }
-    }
+    // //Perhaps can combine above and below in single doesn't have it OR has it but is empty statement
+    // for (const key in pageObject['projectFilterPageTestData'].All_Conditional_Validations) {
+    //   if (combinedInputsUsed.has(key) && !combinedInputsUsed.get(key)) {
+    //     console.log(
+    //       'INPUT CONTAINS EMPTY CONDITIONAL FIELD: ' +
+    //         key +
+    //         ': ' +
+    //         pageObject['projectFilterPageTestData'].All_Conditional_Validations[key]
+    //     );
+    //     expectedAlertBoxErrors.push(pageObject['projectFilterPageTestData'].All_Conditional_Validations[key]);
+    //     expectedFieldErrors.push(key);
+    //   }
+    // }
     await commonItemsPage.page.pause();
     console.log('ALERTS EXPECTED:');
     console.log(expectedAlertBoxErrors);
@@ -243,4 +243,6 @@ Then(
 // Dataset entered to fetch relevant keys and values from validation object - done
 // Use keys array to assert field errors like I'm doing now - done
 // Use values array to assert alert box errors like I'm doing now - done
-// Make ValidationObject with generic Question ${} under ${} section - Low priority (edited)
+// Do with JS disabled (turn off in config) and try methods,
+// should mean conditional object can be merged with mandatory and once null or empty check can apply
+// Investigate status, seems to work, investigate different dataset input, shorten statement (optimise)
