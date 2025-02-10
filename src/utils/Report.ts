@@ -25,7 +25,7 @@ class MyReporter implements Reporter {
       metadata: [
         { name: 'Device Type', value: `${deviceTypeVal}` },
         { name: 'Browser Name', value: getBrowserType(deviceTypeVal) },
-        { name: 'Browser Version', value: getBrowserVersionDevices(deviceTypeVal) },
+        { name: 'Browser Version', value: await getBrowserVersionDevices(deviceTypeVal) },
       ],
 
       customData: {

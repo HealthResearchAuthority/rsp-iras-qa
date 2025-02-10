@@ -27,7 +27,7 @@
     "husky": "^9.1.7",
     "lint-staged": "^15.4.0",
     "multiple-cucumber-html-reporter": "3.8.0",
-    "playwright-bdd": "^8.0.1",
+    "playwright-bdd": "^8.1.0",
     "prettier": "^3.4.2",
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.20.0"

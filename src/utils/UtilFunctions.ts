@@ -1,9 +1,9 @@
 import { DataTable } from 'playwright-bdd';
-import { Locator, devices } from '@playwright/test';
+import { Locator, chromium, devices, firefox, webkit } from '@playwright/test';
 import crypto from 'crypto';
 import { readFile, writeFile } from 'fs/promises';
 import 'dotenv/config';
-import { deviceDSafari, deviceDFirefox, deviceDChrome } from '../hooks/GlobalSetup';
+import { deviceDSafari, deviceDFirefox, deviceDChrome, deviceDEdge } from '../hooks/GlobalSetup';
 import fs from 'fs';
 import { createHtmlReport } from 'axe-html-reporter';
 import os from 'os';
@@ -90,27 +90,37 @@ export async function getTextFromElementArray(inputArray: Locator[]): Promise<st
 
 export function getBrowserType(deviceType: string): string {
   const browser = devices[`${deviceType}`];
-  const browserName = JSON.parse(JSON.stringify(browser)).defaultBrowserType;
+  let browserName: string;
+  if (`${process.env.BROWSER?.toLowerCase()}` == 'microsoft edge') {
+    browserName = 'Microsoft Edge';
+  } else if (`${process.env.BROWSER?.toLowerCase()}` == 'google chrome') {
+    browserName = 'Google Chrome';
+  } else {
+    browserName = JSON.parse(JSON.stringify(browser)).defaultBrowserType;
+  }
   return browserName;
 }
 
-export function getBrowserVersionDevices(deviceType: string): string | undefined {
+export async function getBrowserVersionDevices(deviceType: string): Promise<string | undefined> {
   const browser = devices[`${deviceType}`];
   let version: string | undefined;
   const browserType = `${JSON.parse(JSON.stringify(browser)).defaultBrowserType}`;
-  const userAgent = `${JSON.parse(JSON.stringify(browser)).userAgent}`;
   if (browserType == 'chromium') {
-    const result: string[] = userAgent.split('Chrome/');
-    const subresult: string = result[1];
-    version = subresult.split(' ')[0];
+    if (`${process.env.PLATFORM?.toLowerCase()}` == 'desktop') {
+      if (`${process.env.BROWSER?.toLowerCase()}` == 'chromium') {
+        version = await getChromiumVersion();
+      } else if (`${process.env.BROWSER?.toLowerCase()}` == 'microsoft edge') {
+        version = await getMicrosoftEdgeVersion();
+      } else if (`${process.env.BROWSER?.toLowerCase()}` == 'google chrome') {
+        version = await getGoogleChromeVersion();
+      }
+    } else {
+      version = await getChromiumVersion();
+    }
   } else if (browserType == 'webkit') {
-    const result: string[] = userAgent.split('Version/');
-    const subresult: string = result[1];
-    version = subresult.split(' ')[0];
+    version = await getWebkitVersion();
   } else if (browserType == 'firefox') {
-    const result: string[] = userAgent.split('Firefox/');
-    const subresult: string = result[1];
-    version = subresult;
+    version = await getFirefoxVersion();
   }
   return version;
 }
@@ -140,9 +150,15 @@ function getDesktopBrowserData() {
   } else if (`${process.env.BROWSER?.toLowerCase()}` == 'firefox') {
     browserdata = devices[`${deviceDFirefox}`];
     deviceType = `${deviceDFirefox}`;
-  } else if (`${process.env.BROWSER?.toLowerCase()}` == 'chromium') {
+  } else if (
+    `${process.env.BROWSER?.toLowerCase()}` == 'chromium' ||
+    `${process.env.BROWSER?.toLowerCase()}` == 'google chrome'
+  ) {
     browserdata = devices[`${deviceDChrome}`];
     deviceType = `${deviceDChrome}`;
+  } else if (`${process.env.BROWSER?.toLowerCase()}` == 'microsoft edge') {
+    browserdata = devices[`${deviceDEdge}`];
+    deviceType = `${deviceDEdge}`;
   } else {
     browserdata = devices[`${deviceDChrome}`];
     deviceType = `${deviceDChrome}`;
@@ -219,4 +235,39 @@ export function getOSNameVersion() {
     osVersion = `${os.version}`;
   }
   return osVersion;
+}
+
+export async function getMicrosoftEdgeVersion(): Promise<string> {
+  const browserLaunch = await chromium.launch({ channel: 'msedge', headless: true });
+  const version = browserLaunch.version();
+  await browserLaunch.close();
+  return version;
+}
+
+export async function getGoogleChromeVersion(): Promise<string> {
+  const browserLaunch = await chromium.launch({ channel: 'chrome', headless: true });
+  const version = browserLaunch.version();
+  await browserLaunch.close();
+  return version;
+}
+
+export async function getChromiumVersion(): Promise<string> {
+  const browserLaunch = await chromium.launch({ headless: true });
+  const version = browserLaunch.version();
+  await browserLaunch.close();
+  return version;
+}
+
+export async function getWebkitVersion(): Promise<string> {
+  const browserLaunch = await webkit.launch({ headless: true });
+  const version = browserLaunch.version();
+  await browserLaunch.close();
+  return version;
+}
+
+export async function getFirefoxVersion(): Promise<string> {
+  const browserLaunch = await firefox.launch({ headless: true });
+  const version = browserLaunch.version();
+  await browserLaunch.close();
+  return version;
 }
