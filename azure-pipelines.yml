@@ -105,6 +105,6 @@ stages:
           upload_to_sharepoint: true
           tests_run_timeout: ${{ parameters.tests_run_timeout }}
           run_accessibility_tests: ${{ parameters.run_accessibility_tests }}
-          sonar_project_key: FutureIRAS_rsp-iras-qa
+          sonar_project_key: HealthResearchAuthority_rsp-iras-qa
           sonar_project_name: rsp-iras-qa
           run_sonarcloud_analysis: ${{ parameters.run_sonarcloud_analysis }}

@@ -143,4 +143,24 @@ export default class CommonItemsPage {
       }
     }
   }
+
+  async selfHealLocator(locatorList: Locator[]): Promise<Locator> {
+    let selfHealedLocator: Locator | null = null;
+    for (const locator of locatorList) {
+      try {
+        await expect(locator).toBeAttached();
+        selfHealedLocator = locator;
+        break;
+      } catch {
+        // This catch block is defined empty so that even if the element is not present in the DOM, the loop will continue to check for the next element.
+        // If no locators from the list are found valid then the below 'if' statement will throw the error to fail the test execution.
+      }
+    }
+    if (!selfHealedLocator) {
+      throw new Error(
+        `Self Healing for locator has failed. Automation was not able to find a valid locator from the available list:[ ${locatorList} ]. Add a new valid locator to the list`
+      );
+    }
+    return selfHealedLocator;
+  }
 }
