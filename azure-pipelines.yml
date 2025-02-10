@@ -33,6 +33,8 @@ parameters:
       - chromium
       - safari
       - firefox
+      - microsoft edge
+      - google chrome
   - name: mobile_os
     displayName: Select mobile OS type (only for mobile)
     type: string
