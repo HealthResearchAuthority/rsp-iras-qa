@@ -108,19 +108,19 @@ export async function getBrowserVersionDevices(deviceType: string): Promise<stri
   if (browserType == 'chromium') {
     if (`${process.env.PLATFORM?.toLowerCase()}` == 'desktop') {
       if (`${process.env.BROWSER?.toLowerCase()}` == 'chromium') {
-        version = await getChromiumVersion();
+        version = await getAllBrowserVersion('chromium');
       } else if (`${process.env.BROWSER?.toLowerCase()}` == 'microsoft edge') {
-        version = await getMicrosoftEdgeVersion();
+        version = await getAllBrowserVersion('microsoft edge');
       } else if (`${process.env.BROWSER?.toLowerCase()}` == 'google chrome') {
-        version = await getGoogleChromeVersion();
+        version = await getAllBrowserVersion('google chrome');
       }
     } else {
-      version = await getChromiumVersion();
+      version = await getAllBrowserVersion('chromium');
     }
   } else if (browserType == 'webkit') {
-    version = await getWebkitVersion();
+    version = await getAllBrowserVersion('webkit');
   } else if (browserType == 'firefox') {
-    version = await getFirefoxVersion();
+    version = await getAllBrowserVersion('firefox');
   }
   return version;
 }
@@ -237,36 +237,33 @@ export function getOSNameVersion() {
   return osVersion;
 }
 
-export async function getMicrosoftEdgeVersion(): Promise<string> {
-  const browserLaunch = await chromium.launch({ channel: 'msedge', headless: true });
-  const version = browserLaunch.version();
-  await browserLaunch.close();
-  return version;
-}
-
-export async function getGoogleChromeVersion(): Promise<string> {
-  const browserLaunch = await chromium.launch({ channel: 'chrome', headless: true });
-  const version = browserLaunch.version();
-  await browserLaunch.close();
-  return version;
-}
-
-export async function getChromiumVersion(): Promise<string> {
-  const browserLaunch = await chromium.launch({ headless: true });
-  const version = browserLaunch.version();
-  await browserLaunch.close();
-  return version;
-}
-
-export async function getWebkitVersion(): Promise<string> {
-  const browserLaunch = await webkit.launch({ headless: true });
-  const version = browserLaunch.version();
-  await browserLaunch.close();
-  return version;
-}
-
-export async function getFirefoxVersion(): Promise<string> {
-  const browserLaunch = await firefox.launch({ headless: true });
+export async function getAllBrowserVersion(browserName: string): Promise<string> {
+  let browserLaunch: any;
+  switch (browserName) {
+    case 'microsoft edge': {
+      browserLaunch = await chromium.launch({ channel: 'msedge', headless: true });
+      break;
+    }
+    case 'google chrome': {
+      browserLaunch = await chromium.launch({ channel: 'chrome', headless: true });
+      break;
+    }
+    case 'chromium': {
+      browserLaunch = await chromium.launch({ headless: true });
+      break;
+    }
+    case 'webkit': {
+      browserLaunch = await webkit.launch({ headless: true });
+      break;
+    }
+    case 'firefox': {
+      browserLaunch = await firefox.launch({ headless: true });
+      break;
+    }
+    default: {
+      throw new Error(`${browserName} is not defined`);
+    }
+  }
   const version = browserLaunch.version();
   await browserLaunch.close();
   return version;
