@@ -1,6 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { test, expect } from '../../hooks/CustomFixtures';
-import { readAxeResultsContents, generatehtmlReport } from '../../utils/UtilFunctions';
+import { readAxeResultsContents, generatehtmlReport, compareWcagStandards } from '../../utils/UtilFunctions';
 import { writeFile } from 'fs/promises';
 import { createHtmlReport } from 'axe-html-reporter';
 
@@ -21,6 +21,10 @@ Then('I analyse the results from the Axe scan', async ({ $testInfo }) => {
     contentType: 'application/json',
   });
   const file = $testInfo.outputPath(`temp-axe-results.json`);
+  axeScanResults.violations.sort(compareWcagStandards);
+  axeScanResults.passes.sort(compareWcagStandards);
+  axeScanResults.incomplete.sort(compareWcagStandards);
+  axeScanResults.inapplicable.sort(compareWcagStandards);
   await writeFile(file, JSON.stringify(axeScanResults, null, 2), 'utf8');
   const htmlReport = createHtmlReport({
     results: axeScanResults,

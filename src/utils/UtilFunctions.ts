@@ -23,7 +23,7 @@ export function getAuthState(user: string): string {
   return authState;
 }
 
-export function confirmStringNotNull(inputString: string | null): string {
+export function confirmStringNotNull(inputString: string | null | undefined): string {
   if (inputString != null) {
     return inputString.trim();
   } else {
@@ -267,4 +267,30 @@ export async function getAllBrowserVersion(browserName: string): Promise<string>
   const version = browserLaunch.version();
   await browserLaunch.close();
   return version;
+}
+
+//Sort Accessibilty Report Results based on WCAG Standard, A --> AAA
+export function compareWcagStandards(a: { tags: string[] }, b: { tags: string[] }) {
+  const wcagStandardRegex = new RegExp(/(?<=wcag2(?:1|2)?)a+/);
+  const wcagGuidelineRegex = new RegExp(/\d+/);
+  const aWcagTag = confirmStringNotNull(a.tags.find((tag) => tag.match(wcagStandardRegex)));
+  const bWcagTag = confirmStringNotNull(b.tags.find((tag) => tag.match(wcagStandardRegex)));
+  const aWcagTagGuideline = parseInt(confirmStringNotNull(aWcagTag.match(wcagGuidelineRegex)?.toString()));
+  const bWcagTagGuideline = parseInt(confirmStringNotNull(bWcagTag.match(wcagGuidelineRegex)?.toString()));
+  const aWcagTagStandard = confirmStringNotNull(aWcagTag.match(wcagStandardRegex)?.toString());
+  const bWcagTagStandard = confirmStringNotNull(bWcagTag.match(wcagStandardRegex)?.toString());
+
+  if (aWcagTagStandard.length < bWcagTagStandard.length) {
+    return -1;
+  } else if (aWcagTagStandard.length > bWcagTagStandard.length) {
+    return 1;
+  } else {
+    if (aWcagTagGuideline > bWcagTagGuideline) {
+      return -1;
+    } else if (aWcagTagGuideline < bWcagTagGuideline) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
 }
