@@ -234,7 +234,6 @@ export function getOSNameVersion() {
   return osVersion;
 }
 
-<<<<<<< HEAD
 export async function getAllBrowserVersion(browserName: string): Promise<string> {
   let browserLaunch: any;
   switch (browserName) {
@@ -275,18 +274,6 @@ export function compareWcagStandards(a: { tags: string[] }, b: { tags: string[] 
   const bWcagTagGuideline = extractWcagGuideline(bWcagTag);
   const aWcagTagStandard = extractWcagStandard(aWcagTag);
   const bWcagTagStandard = extractWcagStandard(bWcagTag);
-=======
-//Sort Accessibilty Report Results based on WCAG Standard, A --> AAA
-export function compareWcagStandards(a: { tags: string[] }, b: { tags: string[] }) {
-  const wcagStandardRegex = new RegExp(/(?<=wcag2(?:1|2)?)a+/);
-  const wcagGuidelineRegex = new RegExp(/\d+/);
-  const aWcagTag = confirmStringNotNull(a.tags.find((tag) => tag.match(wcagStandardRegex)));
-  const bWcagTag = confirmStringNotNull(b.tags.find((tag) => tag.match(wcagStandardRegex)));
-  const aWcagTagGuideline = parseInt(confirmStringNotNull(aWcagTag.match(wcagGuidelineRegex)?.toString()));
-  const bWcagTagGuideline = parseInt(confirmStringNotNull(bWcagTag.match(wcagGuidelineRegex)?.toString()));
-  const aWcagTagStandard = confirmStringNotNull(aWcagTag.match(wcagStandardRegex)?.toString());
-  const bWcagTagStandard = confirmStringNotNull(bWcagTag.match(wcagStandardRegex)?.toString());
->>>>>>> 13cabe5 (adding compare function to sort axe result array based wcag tags, adding Create App and Qset page scenarios to test implementation)
 
   if (aWcagTagStandard.length < bWcagTagStandard.length) {
     return -1;
@@ -297,7 +284,6 @@ export function compareWcagStandards(a: { tags: string[] }, b: { tags: string[] 
       return -1;
     } else if (aWcagTagGuideline < bWcagTagGuideline) {
       return 1;
-<<<<<<< HEAD
     }
     return 0;
   }
@@ -346,10 +332,4 @@ function standardAcheived(doubleViolation: number, tripleViolation: number) {
   } else {
     return 'is WCAG Compliant to the AAA Standard';
   }
-=======
-    } else {
-      return 0;
-    }
-  }
->>>>>>> 13cabe5 (adding compare function to sort axe result array based wcag tags, adding Create App and Qset page scenarios to test implementation)
 }
