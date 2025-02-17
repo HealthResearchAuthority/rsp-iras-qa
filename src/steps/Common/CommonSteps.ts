@@ -165,6 +165,7 @@ Given(
 Then(
   'I see the expected validation errors appearing on the {string} page based on those inputs',
   async ({ commonItemsPage }, pageName: string, data: DataTable) => {
+    // await commonItemsPage.page.pause();
     const combinedInputsUsed = new Map<string, any>();
     const expectedAlertBoxErrors: string[] = [];
     const expectedFieldErrors: string[] = [];

@@ -8,6 +8,7 @@ import DevicesPage from '../IRAS/DevicesPage';
 import TissuePage from '../IRAS/TissuePage';
 import StudentPage from '../IRAS/StudentPage';
 import AdultsLackingCapacityPage from '../IRAS/AdultsLackingCapacityPage';
+import BookingPage from '../IRAS/BookingPage';
 
 import { PageObjectDataName } from '../../utils/CustomTypes';
 
@@ -160,6 +161,11 @@ export default class CommonItemsPage {
         const dataName = 'projectDetailsPageTestData';
         return { pageObject, dataName };
       }
+      case 'student': {
+        const pageObject = new StudentPage(this.page);
+        const dataName = 'studentPageTestData';
+        return { pageObject, dataName };
+      }
       case 'devices': {
         const pageObject = new DevicesPage(this.page);
         const dataName = 'devicesPageTestData';
@@ -170,14 +176,15 @@ export default class CommonItemsPage {
         const dataName = 'tissuePageTestData';
         return { pageObject, dataName };
       }
-      case 'student': {
-        const pageObject = new StudentPage(this.page);
-        const dataName = 'studentPageTestData';
-        return { pageObject, dataName };
-      }
       case 'alc': {
         const pageObject = new AdultsLackingCapacityPage(this.page);
         const dataName = 'adultsLackingCapacityPageTestData';
+        return { pageObject, dataName };
+      }
+      //children
+      case 'booking': {
+        const pageObject = new BookingPage(this.page);
+        const dataName = 'bookingPageTestData';
         return { pageObject, dataName };
       }
       default:
@@ -194,19 +201,22 @@ export default class CommonItemsPage {
       case 'project details':
         inputDataset = new ProjectDetailsPage(this.page).projectDetailsPageTestData[dataType][datasetName];
         break;
+      case 'student':
+        inputDataset = new StudentPage(this.page).studentPageTestData[dataType][datasetName];
+        break;
       case 'devices':
         inputDataset = new DevicesPage(this.page).devicesPageTestData[dataType][datasetName];
         break;
       case 'tissue':
         inputDataset = new TissuePage(this.page).tissuePageTestData[dataType][datasetName];
         break;
-      case 'student':
-        inputDataset = new StudentPage(this.page).studentPageTestData[dataType][datasetName];
-        break;
       case 'alc':
         inputDataset = new AdultsLackingCapacityPage(this.page).adultsLackingCapacityPageTestData[dataType][
           datasetName
         ];
+        break;
+      case 'booking':
+        inputDataset = new BookingPage(this.page).bookingPageTestData[dataType][datasetName];
         break;
       default:
         throw new Error(`${page} is not a valid option`);
