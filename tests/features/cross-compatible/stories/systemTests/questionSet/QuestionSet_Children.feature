@@ -1,4 +1,4 @@
-@adminUser @questionSetChildren @SystemTest
+@adminUser @questionSetChildren @SystemTest @only
 Feature: Question Set - Research Application - Children
 
   Background:
