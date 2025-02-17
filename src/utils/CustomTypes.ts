@@ -1,11 +1,11 @@
-import AdultsLackingCapacityPage from '../pages/IRAS/AdultsLackingCapacityPage';
-import BookingPage from '../pages/IRAS/BookingPage';
-import ChildrenPage from '../pages/IRAS/ChildrenPage';
-import DevicesPage from '../pages/IRAS/DevicesPage';
-import ProjectDetailsPage from '../pages/IRAS/ProjectDetailsPage';
-import ProjectFilterPage from '../pages/IRAS/ProjectFilterPage';
-import StudentPage from '../pages/IRAS/StudentPage';
-import TissuePage from '../pages/IRAS/TissuePage';
+import AdultsLackingCapacityPage from '../pages/IRAS/questionSet/AdultsLackingCapacityPage';
+import BookingPage from '../pages/IRAS/questionSet/BookingPage';
+import ChildrenPage from '../pages/IRAS/questionSet/ChildrenPage';
+import DevicesPage from '../pages/IRAS/questionSet/DevicesPage';
+import ProjectDetailsPage from '../pages/IRAS/questionSet/ProjectDetailsPage';
+import ProjectFilterPage from '../pages/IRAS/questionSet/ProjectFilterPage';
+import StudentPage from '../pages/IRAS/questionSet/StudentPage';
+import TissuePage from '../pages/IRAS/questionSet/TissuePage';
 
 export type PageObjectDataName =
   | { pageObject: ProjectFilterPage; dataName: 'projectFilterPageTestData' }

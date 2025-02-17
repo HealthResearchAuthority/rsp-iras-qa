@@ -2,16 +2,16 @@ import { expect, Locator, Page } from '@playwright/test';
 import * as buttonTextData from '../../resources/test_data/common/button_text_data.json';
 import * as linkTextData from '../../resources/test_data/common/link_text_data.json';
 import * as questionSetData from '../../resources/test_data/common/question_set_data.json';
-import ProjectFilterPage from '../IRAS/ProjectFilterPage';
-import ProjectDetailsPage from '../IRAS/ProjectDetailsPage';
-import DevicesPage from '../IRAS/DevicesPage';
-import TissuePage from '../IRAS/TissuePage';
-import StudentPage from '../IRAS/StudentPage';
-import AdultsLackingCapacityPage from '../IRAS/AdultsLackingCapacityPage';
-import BookingPage from '../IRAS/BookingPage';
+import ProjectFilterPage from '../IRAS/questionSet/ProjectFilterPage';
+import ProjectDetailsPage from '../IRAS/questionSet/ProjectDetailsPage';
+import DevicesPage from '../IRAS/questionSet/DevicesPage';
+import TissuePage from '../IRAS/questionSet/TissuePage';
+import StudentPage from '../IRAS/questionSet/StudentPage';
+import AdultsLackingCapacityPage from '../IRAS/questionSet/AdultsLackingCapacityPage';
+import BookingPage from '../IRAS/questionSet/BookingPage';
 
 import { PageObjectDataName } from '../../utils/CustomTypes';
-import ChildrenPage from '../IRAS/ChildrenPage';
+import ChildrenPage from '../IRAS/questionSet/ChildrenPage';
 
 //Declare Page Objects
 export default class CommonItemsPage {

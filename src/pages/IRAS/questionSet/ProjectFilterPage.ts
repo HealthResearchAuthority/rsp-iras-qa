@@ -1,6 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
-import * as projectFilterPageTestData from '../../resources/test_data/iras/project_filter_page_data.json';
-import { getTextFromElementArray } from '../../utils/UtilFunctions';
+import * as projectFilterPageTestData from '../../../resources/test_data/iras/project_filter_page_data.json';
+import { getTextFromElementArray } from '../../../utils/UtilFunctions';
 
 //Declare Page Objects
 export default class ProjectFilterPage {

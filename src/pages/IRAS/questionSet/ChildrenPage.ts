@@ -1,6 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
-import * as childrenPageTestData from '../../resources/test_data/iras/children_page_data.json';
-import { getTextFromElementArray } from '../../utils/UtilFunctions';
+import * as childrenPageTestData from '../../../resources/test_data/iras/children_page_data.json';
+import { getTextFromElementArray } from '../../../utils/UtilFunctions';
 
 //Declare Page Objects
 export default class ChildrenPage {

@@ -1,6 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
-import * as adultsLackingCapacityPageTestData from '../../resources/test_data/iras/adults_lacking_capacity_page_data.json';
-import { getTextFromElementArray } from '../../utils/UtilFunctions';
+import * as adultsLackingCapacityPageTestData from '../../../resources/test_data/iras/adults_lacking_capacity_page_data.json';
+import { getTextFromElementArray } from '../../../utils/UtilFunctions';
 
 //Declare Page Objects
 export default class AdultsLackingCapacityPage {

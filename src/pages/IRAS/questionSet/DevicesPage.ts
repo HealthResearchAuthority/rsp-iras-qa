@@ -1,6 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
-import * as devicesPageTestData from '../../resources/test_data/iras/devices_page_data.json';
-import { getTextFromElementArray } from '../../utils/UtilFunctions';
+import * as devicesPageTestData from '../../../resources/test_data/iras/devices_page_data.json';
+import { getTextFromElementArray } from '../../../utils/UtilFunctions';
 
 //Declare Page Objects
 export default class DevicesPage {
