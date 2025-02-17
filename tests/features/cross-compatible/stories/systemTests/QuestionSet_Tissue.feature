@@ -15,8 +15,8 @@ Feature: Question Set - Research Application - Tissue
     And I can see the 'Project_Filter' question set
     And I click the 'Tissue' link on the 'Progress_Bar'
     And I can see the 'Tissue' question set
-    And I fill the human biological samples section in the tissue page with '<Human_Biological_Samples>'
-    And I fill the health related findings section in the tissue page with '<Health_Related_Findings>'
+    When I fill the 'Human_Biological_Samples' section in the tissue page with '<Human_Biological_Samples>'
+    And I fill the 'Health_Related_Findings' section in the tissue page with '<Health_Related_Findings>'
     Then I click the '<Navigation_Button>' button on the 'Question_Set'
 
     Examples:
@@ -33,10 +33,13 @@ Feature: Question Set - Research Application - Tissue
     And I can see the 'Project_Filter' question set
     And I click the 'Tissue' link on the 'Progress_Bar'
     And I can see the 'Tissue' question set
-    And I fill the human biological samples section in the tissue page with '<Human_Biological_Samples>'
-    And I fill the health related findings section in the tissue page with '<Health_Related_Findings>'
+    When I fill the 'Human_Biological_Samples' section in the tissue page with '<Human_Biological_Samples>'
+    And I fill the 'Health_Related_Findings' section in the tissue page with '<Health_Related_Findings>'
     And I click the 'Validate' button on the 'Question_Set'
     Then I see the expected validation errors appearing on the 'tissue' page based on those inputs
+      | Section                  | Dataset                    |
+      | Human_Biological_Samples | <Human_Biological_Samples> |
+      | Health_Related_Findings  | <Health_Related_Findings>  |
 
     Examples:
       | Project   | Human_Biological_Samples | Health_Related_Findings |
