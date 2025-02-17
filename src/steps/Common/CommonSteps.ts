@@ -169,56 +169,31 @@ Then(
     const expectedAlertBoxErrors: string[] = [];
     const expectedFieldErrors: string[] = [];
 
-    const pageObject = await commonItemsPage.getQsetPageObject(pageName);
+    const { pageObject, dataName } = await commonItemsPage.getQsetPageObjectDataName(pageName);
     for (const row of data.hashes()) {
       const sectionInputsUsed = await commonItemsPage.getQsetPageValidationData(pageName, row.Section, row.Dataset);
       sectionInputsUsed.forEach((value: any, key: string) => {
         combinedInputsUsed.set(key, value);
       });
     }
-    await commonItemsPage.page.pause();
 
-    for (const key in pageObject['projectFilterPageTestData'].All_Mandatory_Validations) {
-      if (!combinedInputsUsed.has(key)) {
-        console.log(
-          'INPUT DOES NOT CONTAIN MANDATORY FIELD: ' +
-            key +
-            ': ' +
-            pageObject['projectFilterPageTestData'].All_Mandatory_Validations[key]
-        );
-        expectedAlertBoxErrors.push(pageObject['projectFilterPageTestData'].All_Mandatory_Validations[key]);
-        expectedFieldErrors.push(key);
-      } else if (!combinedInputsUsed.get(key)) {
-        //possiby add as an OR statement above
-        console.log(
-          'INPUT CONTAINS EMPTY MANDATORY FIELD: ' +
-            key +
-            ': ' +
-            pageObject['projectFilterPageTestData'].All_Mandatory_Validations[key]
-        );
-        expectedAlertBoxErrors.push(pageObject['projectFilterPageTestData'].All_Mandatory_Validations[key]);
+    for (const key in pageObject[dataName].All_Mandatory_Validations) {
+      if (!combinedInputsUsed.has(key) || !combinedInputsUsed.get(key)) {
+        expectedAlertBoxErrors.push(pageObject[dataName].All_Mandatory_Validations[key]);
         expectedFieldErrors.push(key);
       }
     }
-    // //Perhaps can combine above and below in single doesn't have it OR has it but is empty statement
-    // for (const key in pageObject['projectFilterPageTestData'].All_Conditional_Validations) {
-    //   if (combinedInputsUsed.has(key) && !combinedInputsUsed.get(key)) {
-    //     console.log(
-    //       'INPUT CONTAINS EMPTY CONDITIONAL FIELD: ' +
-    //         key +
-    //         ': ' +
-    //         pageObject['projectFilterPageTestData'].All_Conditional_Validations[key]
-    //     );
-    //     expectedAlertBoxErrors.push(pageObject['projectFilterPageTestData'].All_Conditional_Validations[key]);
-    //     expectedFieldErrors.push(key);
-    //   }
-    // }
-    await commonItemsPage.page.pause();
+    // Any Expected Conditional Field Validation must be included in input dataset with an empty value
+    for (const key in pageObject[dataName].All_Conditional_Validations) {
+      if (combinedInputsUsed.has(key) && !combinedInputsUsed.get(key)) {
+        expectedAlertBoxErrors.push(pageObject[dataName].All_Conditional_Validations[key]);
+        expectedFieldErrors.push(key);
+      }
+    }
     console.log('ALERTS EXPECTED:');
     console.log(expectedAlertBoxErrors);
     console.log('FIELDS EXPECTED:');
     console.log(expectedFieldErrors);
-    await commonItemsPage.page.pause();
 
     await expect(commonItemsPage.alert_box).toBeVisible();
     await expect(commonItemsPage.alert_box_headings).toHaveText(
@@ -243,6 +218,6 @@ Then(
 // Dataset entered to fetch relevant keys and values from validation object - done
 // Use keys array to assert field errors like I'm doing now - done
 // Use values array to assert alert box errors like I'm doing now - done
-// Do with JS disabled (turn off in config) and try methods,
-// should mean conditional object can be merged with mandatory and once null or empty check can apply
-// Investigate status, seems to work, investigate different dataset input, shorten statement (optimise)
+// Do with JS disabled (turn off in config) and try methods - done
+// should mean conditional object can be merged with mandatory and once null or empty check can apply - done
+// Investigate status, seems to work, investigate different dataset input, shorten statement (optimise) - to do and PR

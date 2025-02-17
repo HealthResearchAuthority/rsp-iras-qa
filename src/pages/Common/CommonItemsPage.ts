@@ -7,6 +7,7 @@ import ProjectDetailsPage from '../IRAS/ProjectDetailsPage';
 import DevicesPage from '../IRAS/DevicesPage';
 import TissuePage from '../IRAS/TissuePage';
 import StudentPage from '../IRAS/StudentPage';
+import { PageObjectDataName } from '../../utils/CustomTypes';
 
 //Declare Page Objects
 export default class CommonItemsPage {
@@ -145,30 +146,36 @@ export default class CommonItemsPage {
     }
   }
 
-  async getQsetPageObject(
-    page: string
-  ): Promise<ProjectDetailsPage | ProjectFilterPage | DevicesPage | TissuePage | StudentPage> {
-    let pageObject: ProjectFilterPage | ProjectDetailsPage | DevicesPage | TissuePage | StudentPage;
+  async getQsetPageObjectDataName(page: string): Promise<PageObjectDataName> {
     switch (page.toLowerCase()) {
-      case 'project filter':
-        pageObject = new ProjectFilterPage(this.page);
-        break;
-      case 'project details':
-        pageObject = new ProjectDetailsPage(this.page);
-        break;
-      case 'devices':
-        pageObject = new DevicesPage(this.page);
-        break;
-      case 'tissue':
-        pageObject = new TissuePage(this.page);
-        break;
-      case 'student':
-        pageObject = new StudentPage(this.page);
-        break;
+      case 'project filter': {
+        const pageObject = new ProjectFilterPage(this.page);
+        const dataName = 'projectFilterPageTestData';
+        return { pageObject, dataName };
+      }
+      case 'project details': {
+        const pageObject = new ProjectDetailsPage(this.page);
+        const dataName = 'projectDetailsPageTestData';
+        return { pageObject, dataName };
+      }
+      case 'devices': {
+        const pageObject = new DevicesPage(this.page);
+        const dataName = 'devicesPageTestData';
+        return { pageObject, dataName };
+      }
+      case 'tissue': {
+        const pageObject = new TissuePage(this.page);
+        const dataName = 'tissuePageTestData';
+        return { pageObject, dataName };
+      }
+      case 'student': {
+        const pageObject = new StudentPage(this.page);
+        const dataName = 'studentPageTestData';
+        return { pageObject, dataName };
+      }
       default:
         throw new Error(`${page} is not a valid option`);
     }
-    return pageObject;
   }
 
   async getQsetPageValidationData(page: string, dataType: string, datasetName: string): Promise<Map<string, any>> {
@@ -192,24 +199,7 @@ export default class CommonItemsPage {
       default:
         throw new Error(`${page} is not a valid option`);
     }
-    // console.log('ENTRIES');
-    // console.log(Object.entries(inputDataset));
     const test = Object.entries(inputDataset);
-    // console.log('MAP');
-    const myMap = new Map(test);
-    // console.log(myMap);
-    // console.log('KEYS');
-    // const keys = myMap.keys();
-    // for (const key of keys) {
-    //   console.log(key);
-    // }
-    // console.log('VALUES');
-    // const values = myMap.values();
-    // for (const value of values) {
-    //   console.log(value);
-    // }
-    // await this.page.pause();
-    return myMap;
-    // return validationData;
+    return new Map(test);
   }
 }

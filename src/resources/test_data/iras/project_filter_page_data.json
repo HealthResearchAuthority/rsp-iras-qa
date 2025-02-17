@@ -7,7 +7,6 @@
   "Project_Details": {
     "Valid_Data_All_Fields": {
       "short_project_title_text": "Test Research - Short Title",
-      "identify_role_radio": "Chief investigator",
       "full_project_title_text": "Test Research - Full Title",
       "is_project_managed_commercial_research_radio": "Yes",
       "is_nihr_funding_radio": "Yes",
@@ -15,7 +14,6 @@
     },
     "Data_With_No_NIHR_Funding": {
       "short_project_title_text": "Sample Research - Short Title",
-      "identify_role_radio": "Chief investigator",
       "full_project_title_text": "Sample Research - Full Title",
       "is_project_managed_commercial_research_radio": "Yes",
       "is_nihr_funding_radio": "No",
@@ -25,7 +23,6 @@
     "No_Fields_Completed": { "short_project_title_text": "", "full_project_title_text": "" },
     "Initial_Contact_Omitted": {
       "short_project_title_text": "Test Research - Short Title",
-      "identify_role_radio": "Chief investigator",
       "full_project_title_text": "Sample Research - Full Title",
       "is_project_managed_commercial_research_radio": "Yes",
       "is_nihr_funding_radio": "Yes",
@@ -72,6 +69,14 @@
       "places_in_uk_for_project_checkbox": ["England", "Northern Ireland", "Wales"],
       "where_project_take_place_checkbox": ["Local councils", "University"]
     },
+    "Further_Location_Sample_Details_Omitted": {
+      "is_outside_uk_radio": "UK only",
+      "places_in_uk_for_project_checkbox": ["England", "Northern Ireland", "Wales"],
+      "where_human_sample_held_checkbox": "",
+      "where_human_sample_obtained_checkbox": "",
+      "where_project_take_place_checkbox": ["Other"],
+      "details_other_organisation_text": ""
+    },
     "No_Fields_Completed": {}
   },
   "All_Mandatory_Validations": {
@@ -90,20 +95,20 @@
     "where_project_take_place_checkbox": "Question 4 under Research Location section"
   },
   "All_Conditional_Validations": {
-    "email_initial_contact_cpms_text": "Question 6a under Project details section",
-    "is_research_bioresource_radio": "Question 3 under Project scope section",
-    "bioresource_established_nhs_hsc_radio": "Question 3a under Project scope section",
-    "is_ctimp_radio": "Question 4 under Project scope section",
-    "options_applied_for_project_radio": "Question 4a under Project scope section",
-    "is_clinical_or_medical_devices_radio": "Question 5 under Project scope section",
-    "exposing_ionising_radiation_radio": "Question 6 under Project scope section",
-    "using_human_biological_samples_radio": "Question 7 under Project scope section",
-    "patient_data_accessed_outside_radio": "Question 8 under Project scope section",
-    "research_with_adults_lacking_capacity_to_consent_radio": "Question 9 under Project scope section",
-    "include_children_radio": "Question 10 under Project scope section",
-    "where_human_sample_held_checkbox": "Question 3a under Research location section",
-    "where_human_sample_obtained_checkbox": "Question 3b under Research location section",
-    "details_other_organisation_text": "Question 4a under Research location section",
-    "use_pic_radio": "Question 5 under Research location section"
+    "email_initial_contact_cpms_text": "Question 6a under Project Details section",
+    "is_research_bioresource_radio": "Question 3 under Project Scope section",
+    "bioresource_established_nhs_hsc_radio": "Question 3a under Project Scope section",
+    "is_ctimp_radio": "Question 4 under Project Scope section",
+    "options_applied_for_project_radio": "Question 4a under Project Scope section",
+    "is_clinical_or_medical_devices_radio": "Question 5 under Project Scope section",
+    "exposing_ionising_radiation_radio": "Question 6 under Project Scope section",
+    "using_human_biological_samples_radio": "Question 7 under Project Scope section",
+    "patient_data_accessed_outside_radio": "Question 8 under Project Scope section",
+    "research_with_adults_lacking_capacity_to_consent_radio": "Question 9 under Project Scope section",
+    "include_children_radio": "Question 10 under Project Scope section",
+    "where_human_sample_held_checkbox": "Question 3a under Research Location section",
+    "where_human_sample_obtained_checkbox": "Question 3b under Research Location section",
+    "details_other_organisation_text": "Question 4a under Research Location section",
+    "use_pic_radio": "Question 5 under Research Location section"
   }
 }

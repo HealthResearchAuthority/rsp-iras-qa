@@ -15,18 +15,18 @@ Feature: Question Set - Research Application - Project Details
     And I can see the 'Project_Filter' question set
     And I click the 'Project_Details' link on the 'Progress_Bar'
     And I can see the 'Project_Details' question set
-    When I fill the project information section on the project details page with '<Project_Information>'
-    And I fill the public involvement section on the project details page with '<Public_Involvement>'
-    And I fill the research design and methodology section on the project details page with '<Research_Design>'
-    And I fill the research activities section on the project details page with '<Research_Activities>'
-    And I fill the participants section on the project details page with '<Participants>'
-    And I fill the consent section on the project details page with '<Consent>'
-    And I fill the risks and conflicts of interest section on the project details page with '<Risks_Conflicts>'
-    And I fill the summary ethical issues section on the project details page with '<Summary_Ethical_Issues>'
-    And I fill the research analysis section on the project details page with '<Research_Analysis>'
-    And I fill the governance and management section on the project details page with '<Governance_Management>'
-    And I fill the transparency section on the project details page with '<Transparency>'
-    And I fill the confidentiality and information governance section on the project details page with '<Confidentiality_Info_Management>'
+    When I fill the 'Project_Information' section on the project details page with '<Project_Information>'
+    And I fill the 'Public_Involvement' section on the project details page with '<Public_Involvement>'
+    And I fill the 'Research_Design' section on the project details page with '<Research_Design>'
+    And I fill the 'Research_Activities' section on the project details page with '<Research_Activities>'
+    And I fill the 'Participants' section on the project details page with '<Participants>'
+    And I fill the 'Consent' section on the project details page with '<Consent>'
+    And I fill the 'Risks_Conflicts' section on the project details page with '<Risks_Conflicts>'
+    And I fill the 'Summary_Ethical_Issues' section on the project details page with '<Summary_Ethical_Issues>'
+    And I fill the 'Research_Analysis' section on the project details page with '<Research_Analysis>'
+    And I fill the 'Governance_Management' section on the project details page with '<Governance_Management>'
+    And I fill the 'Transparency' section on the project details page with '<Transparency>'
+    And I fill the 'Confidentiality_Info_Management' section on the project details page with '<Confidentiality_Info_Management>'
     Then I click the 'Continue' button on the 'Question_Set'
 
     Examples:
@@ -43,20 +43,33 @@ Feature: Question Set - Research Application - Project Details
     And I can see the 'Project_Filter' question set
     And I click the 'Project_Details' link on the 'Progress_Bar'
     And I can see the 'Project_Details' question set
-    When I fill the project information section on the project details page with '<Project_Information>'
-    And I fill the public involvement section on the project details page with '<Public_Involvement>'
-    And I fill the research design and methodology section on the project details page with '<Research_Design>'
-    And I fill the research activities section on the project details page with '<Research_Activities>'
-    And I fill the participants section on the project details page with '<Participants>'
-    And I fill the consent section on the project details page with '<Consent>'
-    And I fill the risks and conflicts of interest section on the project details page with '<Risks_Conflicts>'
-    And I fill the summary ethical issues section on the project details page with '<Summary_Ethical_Issues>'
-    And I fill the research analysis section on the project details page with '<Research_Analysis>'
-    And I fill the governance and management section on the project details page with '<Governance_Management>'
-    And I fill the transparency section on the project details page with '<Transparency>'
-    And I fill the confidentiality and information governance section on the project details page with '<Confidentiality_Info_Management>'
+    When I fill the 'Project_Information' section on the project details page with '<Project_Information>'
+    And I fill the 'Public_Involvement' section on the project details page with '<Public_Involvement>'
+    And I fill the 'Research_Design' section on the project details page with '<Research_Design>'
+    And I fill the 'Research_Activities' section on the project details page with '<Research_Activities>'
+    And I fill the 'Participants' section on the project details page with '<Participants>'
+    And I fill the 'Consent' section on the project details page with '<Consent>'
+    And I fill the 'Risks_Conflicts' section on the project details page with '<Risks_Conflicts>'
+    And I fill the 'Summary_Ethical_Issues' section on the project details page with '<Summary_Ethical_Issues>'
+    And I fill the 'Research_Analysis' section on the project details page with '<Research_Analysis>'
+    And I fill the 'Governance_Management' section on the project details page with '<Governance_Management>'
+    And I fill the 'Transparency' section on the project details page with '<Transparency>'
+    And I fill the 'Confidentiality_Info_Management' section on the project details page with '<Confidentiality_Info_Management>'
     And I click the 'Validate' button on the 'Question_Set'
     Then I see the expected validation errors appearing on the 'project details' page based on those inputs
+      | Section                         | Dataset                           |
+      | Project_Information             | <Project_Information>             |
+      | Public_Involvement              | <Public_Involvement>              |
+      | Research_Design                 | <Research_Design>                 |
+      | Research_Activities             | <Research_Activities>             |
+      | Participants                    | <Participants>                    |
+      | Consent                         | <Consent>                         |
+      | Risks_Conflicts                 | <Risks_Conflicts>                 |
+      | Summary_Ethical_Issues          | <Summary_Ethical_Issues>          |
+      | Research_Analysis               | <Research_Analysis>               |
+      | Governance_Management           | <Governance_Management>           |
+      | Transparency                    | <Transparency>                    |
+      | Confidentiality_Info_Management | <Confidentiality_Info_Management> |
 
     Examples:
       | Project   | Project_Information      | Public_Involvement       | Research_Design       | Research_Activities      | Participants             | Consent                  | Risks_Conflicts          | Summary_Ethical_Issues   | Research_Analysis        | Governance_Management    | Transparency             | Confidentiality_Info_Management |
