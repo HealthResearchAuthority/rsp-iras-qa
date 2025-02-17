@@ -187,15 +187,15 @@ export default class CommonItemsPage {
       case 'project details':
         inputDataset = new ProjectDetailsPage(this.page).projectDetailsPageTestData[dataType][datasetName];
         break;
-      // case 'devices':
-      //   validationData = new DevicesPage(this.page).devicesPageTestData.Validation[dataType][datasetName];
-      //   break;
-      // case 'tissue':
-      //   validationData = new TissuePage(this.page).tissuePageTestData.Validation[dataType][datasetName];
-      //   break;
-      // case 'student':
-      //   validationData = new StudentPage(this.page).studentPageTestData.Validation[dataType][datasetName];
-      //   break;
+      case 'devices':
+        inputDataset = new DevicesPage(this.page).devicesPageTestData[dataType][datasetName];
+        break;
+      case 'tissue':
+        inputDataset = new TissuePage(this.page).tissuePageTestData[dataType][datasetName];
+        break;
+      case 'student':
+        inputDataset = new StudentPage(this.page).studentPageTestData[dataType][datasetName];
+        break;
       default:
         throw new Error(`${page} is not a valid option`);
     }

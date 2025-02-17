@@ -46,44 +46,18 @@
     },
     "No_Fields_Completed": {}
   },
-  "Validation": {
-    "Alert_Box_Errors": {
-      "All_Mandatory_Fields": [
-        "Question 1 under Devices Filter Questions section",
-        "Question 2 under Devices Filter Questions section",
-        "Question 1 under Device investigations not requiring review by MHRA section",
-        "Question 2a under Device investigations not requiring review by MHRA section",
-        "Question 2b under Device investigations not requiring review by MHRA section",
-        "Question 2c under Device investigations not requiring review by MHRA section",
-        "Question 2d under Device investigations not requiring review by MHRA section",
-        "Question 2e under Device investigations not requiring review by MHRA section",
-        "Question 2f under Device investigations not requiring review by MHRA section",
-        "Question 3 under Device investigations not requiring review by MHRA section",
-        "Question 4 under Device investigations not requiring review by MHRA section"
-      ],
-      "Mandatory_Device_Filter_Questions": [
-        "Question 1 under Devices Filter Questions section",
-        "Question 2 under Devices Filter Questions section"
-      ]
-    },
-    "Field_Errors": {
-      "All_Mandatory_Fields": [
-        "is_sponsored_by_device_company_radio",
-        "will_research_conducted_northern_ireland_radio",
-        "is_manufacturer_lead_sponsor_radio",
-        "name_of_manufacturer_text",
-        "trade_name_for_device_text",
-        "name_for_device_text",
-        "number_for_device_text",
-        "generic_name_of_device_text",
-        "length_of_time_device_used_text",
-        "type_of_research_project_radio",
-        "procedures_involved_non_invasive_radio"
-      ],
-      "Mandatory_Device_Filter_Questions": [
-        "is_sponsored_by_device_company_radio",
-        "will_research_conducted_northern_ireland_radio"
-      ]
-    }
-  }
+  "All_Mandatory_Validations": {
+    "is_sponsored_by_device_company_radio": "Question 1 under Devices Filter Questions section",
+    "will_research_conducted_northern_ireland_radio": "Question 2 under Devices Filter Questions section",
+    "is_manufacturer_lead_sponsor_radio": "Question 1 under Device investigations not requiring review by MHRA section",
+    "name_of_manufacturer_text": "Question 2a under Device investigations not requiring review by MHRA section",
+    "trade_name_for_device_text": "Question 2b under Device investigations not requiring review by MHRA section",
+    "name_for_device_text": "Question 2c under Device investigations not requiring review by MHRA section",
+    "number_for_device_text": "Question 2d under Device investigations not requiring review by MHRA section",
+    "generic_name_of_device_text": "Question 2e under Device investigations not requiring review by MHRA section",
+    "length_of_time_device_used_text": "Question 2f under Device investigations not requiring review by MHRA section",
+    "type_of_research_project_radio": "Question 3 under Device investigations not requiring review by MHRA section",
+    "procedures_involved_non_invasive_radio": "Question 4 under Device investigations not requiring review by MHRA section"
+  },
+  "All_Conditional_Validations": {}
 }

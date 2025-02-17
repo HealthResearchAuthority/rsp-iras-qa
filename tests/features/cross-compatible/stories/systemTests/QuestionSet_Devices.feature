@@ -15,8 +15,8 @@ Feature: Question Set - Research Application - Devices
     And I can see the 'Project_Filter' question set
     And I click the 'Devices' link on the 'Progress_Bar'
     And I can see the 'Devices' question set
-    And I fill the devices filter questions section in the devices page with '<Devices_Filter_Questions>'
-    And I fill the device investigation no mhra section in the devices page with '<Device_Investigation_No_MHRA>'
+    And I fill the 'Devices_Filter_Questions' section in the devices page with '<Devices_Filter_Questions>'
+    And I fill the 'Device_Investigation_No_MHRA' section in the devices page with '<Device_Investigation_No_MHRA>'
     Then I click the '<Navigation_Button>' button on the 'Question_Set'
 
     Examples:
@@ -33,10 +33,13 @@ Feature: Question Set - Research Application - Devices
     And I can see the 'Project_Filter' question set
     And I click the 'Devices' link on the 'Progress_Bar'
     And I can see the 'Devices' question set
-    And I fill the devices filter questions section in the devices page with '<Devices_Filter_Questions>'
-    And I fill the device investigation no mhra section in the devices page with '<Device_Investigation_No_MHRA>'
+    When I fill the 'Devices_Filter_Questions' section in the devices page with '<Devices_Filter_Questions>'
+    And I fill the 'Device_Investigation_No_MHRA' section in the devices page with '<Device_Investigation_No_MHRA>'
     And I click the 'Validate' button on the 'Question_Set'
     Then I see the expected validation errors appearing on the 'devices' page based on those inputs
+      | Section                      | Dataset                        |
+      | Devices_Filter_Questions     | <Devices_Filter_Questions>     |
+      | Device_Investigation_No_MHRA | <Device_Investigation_No_MHRA> |
 
     Examples:
       | Project   | Devices_Filter_Questions | Device_Investigation_No_MHRA |
