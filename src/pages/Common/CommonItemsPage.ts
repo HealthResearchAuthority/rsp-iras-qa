@@ -11,6 +11,7 @@ import AdultsLackingCapacityPage from '../IRAS/AdultsLackingCapacityPage';
 import BookingPage from '../IRAS/BookingPage';
 
 import { PageObjectDataName } from '../../utils/CustomTypes';
+import ChildrenPage from '../IRAS/ChildrenPage';
 
 //Declare Page Objects
 export default class CommonItemsPage {
@@ -181,7 +182,11 @@ export default class CommonItemsPage {
         const dataName = 'adultsLackingCapacityPageTestData';
         return { pageObject, dataName };
       }
-      //children
+      case 'children': {
+        const pageObject = new ChildrenPage(this.page);
+        const dataName = 'childrenPageTestData';
+        return { pageObject, dataName };
+      }
       case 'booking': {
         const pageObject = new BookingPage(this.page);
         const dataName = 'bookingPageTestData';
@@ -214,6 +219,9 @@ export default class CommonItemsPage {
         inputDataset = new AdultsLackingCapacityPage(this.page).adultsLackingCapacityPageTestData[dataType][
           datasetName
         ];
+        break;
+      case 'children':
+        inputDataset = new ChildrenPage(this.page).childrenPageTestData[dataType][datasetName];
         break;
       case 'booking':
         inputDataset = new BookingPage(this.page).bookingPageTestData[dataType][datasetName];

@@ -165,7 +165,6 @@ Given(
 Then(
   'I see the expected validation errors appearing on the {string} page based on those inputs',
   async ({ commonItemsPage }, pageName: string, data: DataTable) => {
-    // await commonItemsPage.page.pause();
     const combinedInputsUsed = new Map<string, any>();
     const expectedAlertBoxErrors: string[] = [];
     const expectedFieldErrors: string[] = [];
@@ -213,12 +212,3 @@ Then(
     }
   }
 );
-
-// Use Alfred fillUIComponent update with section param - done
-// Use Alfred Validation Object with everything - created for Project Filter, do for others
-// Dataset entered to fetch relevant keys and values from validation object - done
-// Use keys array to assert field errors like I'm doing now - done
-// Use values array to assert alert box errors like I'm doing now - done
-// Do with JS disabled (turn off in config) and try methods - done
-// should mean conditional object can be merged with mandatory and once null or empty check can apply - done
-// Investigate status, seems to work, investigate different dataset input, shorten statement (optimise) - to do and PR
