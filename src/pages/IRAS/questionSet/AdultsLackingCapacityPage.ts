@@ -76,7 +76,7 @@ export default class AdultsLackingCapacityPage {
       this.adults_lacking_capacity_ctimp_section.getByTestId('IQA0289_Text');
     this.steps_to_ensure_nothing_done_contrary_to_statement_text =
       this.adults_lacking_capacity_ctimp_section.getByTestId('IQA0290_Text');
-    //Adults Lacking Capacity (CTIMP) Section
+    //Adults Lacking Capacity (Non CTIMP) Section
     this.adults_lacking_capacity_non_ctimp_section = this.page.locator(
       '//legend[contains(text(),"Non-CTIMP Adults Lacking Capacity")]/parent::fieldset'
     );
