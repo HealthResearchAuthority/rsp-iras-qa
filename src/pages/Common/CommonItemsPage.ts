@@ -7,6 +7,8 @@ import ProjectDetailsPage from '../IRAS/ProjectDetailsPage';
 import DevicesPage from '../IRAS/DevicesPage';
 import TissuePage from '../IRAS/TissuePage';
 import StudentPage from '../IRAS/StudentPage';
+import AdultsLackingCapacityPage from '../IRAS/AdultsLackingCapacityPage';
+
 import { PageObjectDataName } from '../../utils/CustomTypes';
 
 //Declare Page Objects
@@ -173,6 +175,11 @@ export default class CommonItemsPage {
         const dataName = 'studentPageTestData';
         return { pageObject, dataName };
       }
+      case 'alc': {
+        const pageObject = new AdultsLackingCapacityPage(this.page);
+        const dataName = 'adultsLackingCapacityPageTestData';
+        return { pageObject, dataName };
+      }
       default:
         throw new Error(`${page} is not a valid option`);
     }
@@ -195,6 +202,11 @@ export default class CommonItemsPage {
         break;
       case 'student':
         inputDataset = new StudentPage(this.page).studentPageTestData[dataType][datasetName];
+        break;
+      case 'alc':
+        inputDataset = new AdultsLackingCapacityPage(this.page).adultsLackingCapacityPageTestData[dataType][
+          datasetName
+        ];
         break;
       default:
         throw new Error(`${page} is not a valid option`);

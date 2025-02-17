@@ -1,3 +1,4 @@
+import AdultsLackingCapacityPage from '../pages/IRAS/AdultsLackingCapacityPage';
 import DevicesPage from '../pages/IRAS/DevicesPage';
 import ProjectDetailsPage from '../pages/IRAS/ProjectDetailsPage';
 import ProjectFilterPage from '../pages/IRAS/ProjectFilterPage';
@@ -9,4 +10,5 @@ export type PageObjectDataName =
   | { pageObject: ProjectDetailsPage; dataName: 'projectDetailsPageTestData' }
   | { pageObject: DevicesPage; dataName: 'devicesPageTestData' }
   | { pageObject: TissuePage; dataName: 'tissuePageTestData' }
-  | { pageObject: StudentPage; dataName: 'studentPageTestData' };
+  | { pageObject: StudentPage; dataName: 'studentPageTestData' }
+  | { pageObject: AdultsLackingCapacityPage; dataName: 'adultsLackingCapacityPageTestData' };

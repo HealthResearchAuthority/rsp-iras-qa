@@ -34,7 +34,7 @@ Feature: Question Set - Research Application - Student
     And I click the 'Student' link on the 'Progress_Bar'
     And I can see the 'Student' question set
     When I fill the 'Educational_Project' section in the student page with '<Educational_Project>'
-    When I click the 'Validate' button on the 'Question_Set'
+    And I click the 'Validate' button on the 'Question_Set'
     Then I see the expected validation errors appearing on the 'student' page based on those inputs
       | Section             | Dataset               |
       | Educational_Project | <Educational_Project> |
