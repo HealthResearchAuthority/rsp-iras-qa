@@ -15,7 +15,7 @@ Feature: Question Set - Research Application - Student
     And I can see the 'Project_Filter' question set
     And I click the 'Student' link on the 'Progress_Bar'
     And I can see the 'Student' question set
-    When I fill the educational project section in the student page with '<Educational_Project>'
+    When I fill the 'Educational_Project' section in the student page with '<Educational_Project>'
     Then I click the '<Navigation_Button>' button on the 'Question_Set'
 
     Examples:
@@ -33,9 +33,11 @@ Feature: Question Set - Research Application - Student
     And I can see the 'Project_Filter' question set
     And I click the 'Student' link on the 'Progress_Bar'
     And I can see the 'Student' question set
-    And I fill the educational project section in the student page with '<Educational_Project>'
+    When I fill the 'Educational_Project' section in the student page with '<Educational_Project>'
     When I click the 'Validate' button on the 'Question_Set'
     Then I see the expected validation errors appearing on the 'student' page based on those inputs
+      | Section             | Dataset               |
+      | Educational_Project | <Educational_Project> |
 
     Examples:
       | Project   | Educational_Project          |

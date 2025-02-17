@@ -62,41 +62,18 @@
     },
     "No_Fields_Completed": {}
   },
-  "Validation": {
-    "Alert_Box_Errors": {
-      "All_Mandatory_Fields": [
-        "Question 1 under Educational Project section",
-        "Question 2 under Educational Project section",
-        "Question 3 under Educational Project section",
-        "Question 4a under Educational Project section",
-        "Question 5 under Educational Project section",
-        "Question 6 under Educational Project section",
-        "Question 9a under Educational Project section",
-        "Question 9b under Educational Project section",
-        "Question 9c under Educational Project section",
-        "Question 9d under Educational Project section",
-        "Question 9e under Educational Project section"
-      ],
-      "University_And_Course_Name": [
-        "Question 4a under Educational Project section",
-        "Question 5 under Educational Project section"
-      ]
-    },
-    "Field_Errors": {
-      "All_Mandatory_Fields": [
-        "role_of_student_text",
-        "is_group_project_radio",
-        "level_of_course_radio",
-        "university_text",
-        "course_text",
-        "is_university_sponsor_radio",
-        "ci_first_name_text",
-        "ci_last_name_text",
-        "ci_job_title_text",
-        "ci_university_text",
-        "ci_email_text"
-      ],
-      "University_And_Course_Name": ["university_text", "course_text"]
-    }
-  }
+  "All_Mandatory_Validations": {
+    "role_of_student_text": "Question 1 under Educational Project section",
+    "is_group_project_radio": "Question 2 under Educational Project section",
+    "level_of_course_radio": "Question 3 under Educational Project section",
+    "university_text": "Question 4a under Educational Project section",
+    "course_text": "Question 5 under Educational Project section",
+    "is_university_sponsor_radio": "Question 6 under Educational Project section",
+    "ci_first_name_text": "Question 9a under Educational Project section",
+    "ci_last_name_text": "Question 9b under Educational Project section",
+    "ci_job_title_text": "Question 9c under Educational Project section",
+    "ci_university_text": "Question 9d under Educational Project section",
+    "ci_email_text": "Question 9e under Educational Project section"
+  },
+  "All_Conditional_Validations": {}
 }
