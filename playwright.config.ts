@@ -63,7 +63,7 @@ const config: PlaywrightTestConfig = {
         outputDir: 'generated-feature-files/future-iras',
       }),
       use: {
-        headless: false,
+        headless: true,
         launchOptions: {
           slowMo: 0,
         },
