@@ -279,10 +279,6 @@ Then(
         expectedFieldErrors.push(key);
       }
     }
-    console.log('ALERTS EXPECTED:');
-    console.log(expectedAlertBoxErrors);
-    console.log('FIELDS EXPECTED:');
-    console.log(expectedFieldErrors);
 
     await expect(commonItemsPage.alert_box).toBeVisible();
     await expect(commonItemsPage.alert_box_headings).toHaveText(
@@ -296,7 +292,6 @@ Then(
     for (const key of expectedFieldErrors) {
       const expectedFieldErrorMessage = await commonItemsPage.getFieldTypeErrorMessage(key, pageObject);
       const actualFieldError = await commonItemsPage.getFieldErrors(key, pageObject);
-      console.log('EXPECT ' + (await actualFieldError.textContent()) + ' TO EQUAL ' + expectedFieldErrorMessage);
       await expect(actualFieldError).toHaveText(expectedFieldErrorMessage);
     }
   }
