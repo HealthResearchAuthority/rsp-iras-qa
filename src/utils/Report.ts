@@ -9,14 +9,30 @@ import {
   displayTimeZone,
   formatedDuration,
   getOSNameVersion,
+  getDeviceName,
+  getTodaysDateStamp,
 } from '../utils/UtilFunctions';
 
 class MyReporter implements Reporter {
   async onEnd(result: FullResult) {
     const endTime = new Date().toLocaleString();
     report.generate({
-      jsonDir: './test-reports/cucumber/json/',
-      reportPath: './test-reports/cucumber/html/',
+      jsonDir:
+        './test-reports/' +
+        getDeviceName() +
+        '/' +
+        getBrowserType(deviceTypeVal) +
+        '/' +
+        getTodaysDateStamp() +
+        '/cucumber/json/',
+      reportPath:
+        './test-reports/' +
+        getDeviceName() +
+        '/' +
+        getBrowserType(deviceTypeVal) +
+        '/' +
+        getTodaysDateStamp() +
+        '/cucumber/html/',
       pageTitle: 'Multiple Cucumber HTML reporter',
       reportName: 'Future IRAS Automation Test Report-Playwright',
       displayDuration: true,

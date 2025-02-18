@@ -234,6 +234,22 @@ export function getOSNameVersion() {
   return osVersion;
 }
 
+export function getDeviceName() {
+  let deviceName: string;
+  if (`${process.env.PLATFORM?.toLowerCase()}` == 'desktop') {
+    deviceName = 'Desktop';
+  } else {
+    deviceName = deviceTypeVal;
+  }
+  return deviceName;
+}
+
+export function getTodaysDateStamp() {
+  const todayDate = new Date();
+  const dateStamp = `${todayDate.getDate()} ${todayDate.toLocaleString('default', { month: 'long' })} ${todayDate.getFullYear()}`;
+  return dateStamp;
+}
+
 export async function getAllBrowserVersion(browserName: string): Promise<string> {
   let browserLaunch: any;
   switch (browserName) {
