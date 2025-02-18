@@ -3,7 +3,7 @@ Feature: Question Set - Research Application - Children
 
   Background:
     Given I have navigated to the 'Home_Page'
-    And I click the 'New_Application' button on the 'Home_Page'
+    And I click the 'Make_Changes_To_Research' button on the 'Home_Page'
     And I can see the 'Create_Application_Page'
 
   @rsp-1305
