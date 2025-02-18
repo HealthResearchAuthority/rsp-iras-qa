@@ -49,9 +49,10 @@ export default class AdultsLackingCapacityPage {
     //Locators
     this.alc_section_headings = this.page.locator('.govuk-fieldset__legend--l');
     //Adults Lacking Capacity (CTIMP) Section
-    this.adults_lacking_capacity_ctimp_section = this.page.locator(
-      '//legend[contains(text(),"CTIMP Adults lacking capacity")]/parent::fieldset'
-    );
+    this.adults_lacking_capacity_ctimp_section = this.page
+      .locator('legend')
+      .getByText('Adults Lacking Capacity (CTIMP)')
+      .locator('..');
     this.how_project_meet_requirement_life_threatening_text =
       this.adults_lacking_capacity_ctimp_section.getByTestId('IQA0278_Text');
     this.why_project_essential_to_validate_data_text =
@@ -77,9 +78,10 @@ export default class AdultsLackingCapacityPage {
     this.steps_to_ensure_nothing_done_contrary_to_statement_text =
       this.adults_lacking_capacity_ctimp_section.getByTestId('IQA0290_Text');
     //Adults Lacking Capacity (Non CTIMP) Section
-    this.adults_lacking_capacity_non_ctimp_section = this.page.locator(
-      '//legend[contains(text(),"Non-CTIMP Adults Lacking Capacity")]/parent::fieldset'
-    );
+    this.adults_lacking_capacity_non_ctimp_section = this.page
+      .locator('legend')
+      .getByText('Adults Lacking Capacity (Non CTIMP)')
+      .locator('..');
     this.project_connected_impairing_condition_text =
       this.adults_lacking_capacity_non_ctimp_section.getByTestId('IQA0291_Text');
     this.why_project_not_carried_out_text = this.adults_lacking_capacity_non_ctimp_section.getByTestId('IQA0292_Text');

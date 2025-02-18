@@ -48,7 +48,7 @@ export default class ProjectFilterPage {
     //Locators
     this.project_filter_section_headings = this.page.locator('.govuk-fieldset__legend--l');
     //Project Details Section
-    this.project_details_section = this.page.locator('//legend[contains(text(),"Project details")]/parent::fieldset');
+    this.project_details_section = this.page.locator('legend').getByText('Project Details').locator('..');
     this.short_project_title_text = this.project_details_section.getByTestId('IQA0002_Text');
     this.full_project_title_text = this.project_details_section.getByTestId('IQA0003_Text');
     this.is_project_managed_commercial_research_radio = this.project_details_section.getByTestId(/^IQA0004/);
@@ -56,7 +56,7 @@ export default class ProjectFilterPage {
     this.access_cpms_services_radio = this.project_details_section.getByTestId(/^IQA0005/);
     this.email_initial_contact_cpms_text = this.project_details_section.getByTestId('IQA0006_Text');
     //Project Scope Section
-    this.project_scope_section = this.page.locator('//legend[contains(text(),"Project scope")]/parent::fieldset');
+    this.project_scope_section = this.page.locator('legend').getByText('Project Scope').locator('..');
     this.is_educational_project_radio = this.project_scope_section.getByTestId(/^IQA0012/);
     this.activities_involved_checkbox = this.project_scope_section.getByTestId(/^IQA0061/);
     this.is_research_bioresource_radio = this.project_scope_section.getByTestId(/^IQA0014_OPT/);
@@ -75,9 +75,7 @@ export default class ProjectFilterPage {
     this.involve_ministry_of_defence_radio = this.project_scope_section.getByTestId(/^IQA0028/);
     this.involve_hfea_radio = this.project_scope_section.getByTestId(/^IQA0029/);
     //Research Location Section
-    this.research_location_section = this.page.locator(
-      '//legend[contains(text(),"Research location")]/parent::fieldset'
-    );
+    this.research_location_section = this.page.locator('legend').getByText('Research Location').locator('..');
     this.is_outside_uk_radio = this.research_location_section.getByTestId(/^IQA0142/);
     this.places_in_uk_for_project_checkbox = this.research_location_section.getByTestId(/^IQA0032/);
     this.where_human_sample_held_checkbox = this.research_location_section.getByTestId(/^IQA0033_OPT/);

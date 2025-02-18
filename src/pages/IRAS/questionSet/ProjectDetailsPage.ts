@@ -164,16 +164,12 @@ export default class ProjectDetailsPage {
     //Locators
     this.project_details_section_headings = this.page.locator('.govuk-fieldset__legend--l');
     //Project Information Section
-    this.project_information_section = this.page.locator(
-      '//legend[contains(text(),"Project information")]/parent::fieldset'
-    );
+    this.project_information_section = this.page.locator('legend').getByText('Project Information').locator('..');
     this.protocol_ref_no_text = this.project_information_section.getByTestId('IQA0036_Text');
     this.eu_trial_no_text = this.project_information_section.getByTestId('IQA0037_Text');
     this.research_project_public_summary_text = this.project_information_section.getByTestId('IQA0040_Text');
     //Public Involvement Section
-    this.public_involvement_section = this.page.locator(
-      '//legend[contains(text(),"Public involvement")]/parent::fieldset'
-    );
+    this.public_involvement_section = this.page.locator('legend').getByText('Public Involvement').locator('..');
     this.aspects_already_actively_involved_checkbox = this.public_involvement_section.getByTestId(/^IQA0045/);
     this.details_involved_contributors_text = this.public_involvement_section.getByTestId('IQA0046_Text');
     this.reasons_for_not_involving_text = this.public_involvement_section.getByTestId('IQA0048_Text');
@@ -189,9 +185,10 @@ export default class ProjectDetailsPage {
     this.justify_approach_and_absence_of_public_involvement_text =
       this.public_involvement_section.getByTestId('IQA03276_Text');
     //Research Design & Methodology Section
-    this.research_design_section = this.page.locator(
-      '//legend[contains(text(),"Research design and methodology")]/parent::fieldset'
-    );
+    this.research_design_section = this.page
+      .locator('legend')
+      .getByText('Research Design and Methodology')
+      .locator('..');
     this.methods_using_checkbox = this.research_design_section.getByTestId(/^IQA0049/);
     this.detail_methods_using_text = this.research_design_section.getByTestId('IQA0050_Text');
     this.specify_methods_text = this.research_design_section.getByTestId('IQA0052_Text');
@@ -208,9 +205,7 @@ export default class ProjectDetailsPage {
     this.describe_ai_type_again_text = this.research_design_section.getByTestId('IQA03281_Text');
     this.what_will_happen_participants_text = this.research_design_section.getByTestId('IQA0060_Text');
     //Research Activities Section
-    this.research_activities_section = this.page.locator(
-      '//legend[contains(text(),"Research activities")]/parent::fieldset'
-    );
+    this.research_activities_section = this.page.locator('legend').getByText('Research Activities').locator('..');
     this.what_intervention_treatment_being_studied_text = this.research_activities_section.getByTestId('IQA0062_Text');
     this.is_treatment_first_human_radio = this.research_activities_section.getByTestId(/^IQA0063/);
     this.does_involve_change_delay_care_radio = this.research_activities_section.getByTestId(/^IQA0064/);
@@ -234,7 +229,7 @@ export default class ProjectDetailsPage {
     this.describe_care_arrangements_after_finished_text = this.research_activities_section.getByTestId('IQA0081_Text');
     this.when_plan_finish_collecting_data_date = this.research_activities_section.getByTestId('IQA0082_Text');
     //Participants Section
-    this.participants_section = this.page.locator('//legend[contains(text(),"Participants")]/parent::fieldset');
+    this.participants_section = this.page.locator('legend').getByText('Participants').locator('..');
     this.primary_conditions_problems_checkbox = this.participants_section.getByTestId(/^IQA0083/);
     this.list_principal_inclusion_criteria_text = this.participants_section.getByTestId('IQA0084_Text');
     this.list_principal_exclusion_criteria_text = this.participants_section.getByTestId('IQA0085_Text');
@@ -247,7 +242,7 @@ export default class ProjectDetailsPage {
     this.what_arrangements_apply_to_participants_involved_text = this.participants_section.getByTestId('IQA0092_Text');
     this.could_any_participants_be_vulnerable_radio = this.participants_section.getByTestId(/^IQA0093/);
     //Consent Section
-    this.consent_section = this.page.locator('//legend[contains(text(),"Consent")]/parent::fieldset');
+    this.consent_section = this.page.locator('legend').getByText('Consent').locator('..');
     this.only_include_adults_lacking_capacity_checkbox = this.consent_section.getByTestId(/^IQA0096/);
     this.only_include_children_radio = this.consent_section.getByTestId(/^IQA0095/);
     this.seek_consent_prior_to_participation_radio = this.consent_section.getByTestId(/^IQA0097/);
@@ -262,9 +257,7 @@ export default class ProjectDetailsPage {
     this.what_arrangements_participants_recieve_info_text = this.consent_section.getByTestId('IQA0107_Text');
     this.what_steps_if_paticipant_loses_capacity_radio = this.consent_section.getByTestId(/^IQA0108/);
     //Risks and Conflicts of Interest Section
-    this.risks_conflict_section = this.page.locator(
-      '//legend[contains(text(),"Risks and conflicts of interest")]/parent::fieldset'
-    );
+    this.risks_conflict_section = this.page.locator('legend').getByText('Risk and Conflicts of Interest').locator('..');
     this.describe_risks_to_team_and_how_managed_text = this.risks_conflict_section.getByTestId('IQA0110_Text');
     this.does_investigator_have_personal_involvement_radio = this.risks_conflict_section.getByTestId(/^IQA0111/);
     this.give_details_of_relevant_conflict_text = this.risks_conflict_section.getByTestId('IQA0112_Text');
@@ -274,9 +267,7 @@ export default class ProjectDetailsPage {
       this.risks_conflict_section.getByTestId(/^IQA0115/);
     this.give_details_of_payment_incentives_text = this.risks_conflict_section.getByTestId('IQA0116_Text');
     //Summary Ethical Issues Section
-    this.summary_ethical_issues_section = this.page.locator(
-      '//legend[contains(text(),"Summary ethical issues")]/parent::fieldset'
-    );
+    this.summary_ethical_issues_section = this.page.locator('legend').getByText('Summary Ethical Issues').locator('..');
     this.summarise_main_ethical_issues_text = this.summary_ethical_issues_section.getByTestId('IQA0117_Text');
     this.is_application_any_of_following_checkbox = this.summary_ethical_issues_section.getByTestId(/^IQA0118/);
     this.provide_iras_id_of_unfavorable_opinion_text = this.summary_ethical_issues_section.getByTestId('IQA0119_Text');
@@ -284,9 +275,7 @@ export default class ProjectDetailsPage {
       this.summary_ethical_issues_section.getByTestId('IQA0120_Text');
     this.provide_info_about_project_background_text = this.summary_ethical_issues_section.getByTestId('IQA0039_Text');
     //Resarch Analysis Section
-    this.research_analysis_section = this.page.locator(
-      '//legend[contains(text(),"Research analysis")]/parent::fieldset'
-    );
+    this.research_analysis_section = this.page.locator('legend').getByText('Research Analysis').locator('..');
     this.how_quality_research_been_assessed_checkbox = this.research_analysis_section.getByTestId(/^IQA0121/);
     this.detail_how_quality_research_assessed_text = this.research_analysis_section.getByTestId('IQA0122_Text');
     this.explain_why_review_process_appropriate_text = this.research_analysis_section.getByTestId('IQA0123_Text');
@@ -301,9 +290,10 @@ export default class ProjectDetailsPage {
     this.how_was_sample_size_decided_text = this.research_analysis_section.getByTestId('IQA0131_Text');
     this.what_criteria_electively_stopping_early_text = this.research_analysis_section.getByTestId('IQA0132_Text');
     //Governance and Management Section
-    this.governance_management_section = this.page.locator(
-      '//legend[contains(text(),"Governance and management")]/parent::fieldset'
-    );
+    this.governance_management_section = this.page
+      .locator('legend')
+      .getByText('Governance and Management')
+      .locator('..');
     this.detail_source_funding_materials_text = this.governance_management_section.getByTestId('IQA0139_Text');
     this.describe_logistical_legal_risks_text = this.governance_management_section.getByTestId('IQA0140_Text');
     this.arrangements_for_monitoring_conduct_checkbox = this.governance_management_section.getByTestId(/^IQA0147/);
@@ -323,7 +313,7 @@ export default class ProjectDetailsPage {
       this.governance_management_section.getByTestId(/^IQA0157/);
     this.detail_proposed_oversight_arrangements_text = this.governance_management_section.getByTestId('IQA0158_Text');
     //Transparency Section
-    this.transparency_section = this.page.locator('//legend[contains(text(),"Transparency")]/parent::fieldset');
+    this.transparency_section = this.page.locator('legend').getByText('Transparency').locator('..');
     this.publication_deferral_request_radio = this.transparency_section.getByTestId(/^IQA0165/);
     this.first_provide_justification_for_deferral_text = this.transparency_section.getByTestId('IQA0166_Text');
     this.first_confirm_arrangements_registration_of_project_checkbox =
@@ -352,9 +342,10 @@ export default class ProjectDetailsPage {
     this.second_telephone_text = this.transparency_section.getByTestId('IQA0190_Text');
     this.second_postal_address_text = this.transparency_section.getByTestId('IQA0191_Text');
     //Confidentiality and Information Governance Section
-    this.confidentiality_info_governance_section = this.page.locator(
-      '//legend[contains(text(),"Confidentiality and information governance")]/parent::fieldset'
-    );
+    this.confidentiality_info_governance_section = this.page
+      .locator('legend')
+      .getByText('Confidentiality and Information Governance')
+      .locator('..');
     this.is_study_limited_to_data_only_radio = this.confidentiality_info_governance_section.getByTestId(/^IQA0251/);
   }
 
