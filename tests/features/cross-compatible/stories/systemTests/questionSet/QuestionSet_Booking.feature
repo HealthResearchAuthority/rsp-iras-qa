@@ -41,8 +41,8 @@ Feature: Question Set - Research Application - Booking
       | Application_Booking | <Application_Booking> |
 
     Examples:
-      | Project   | Application_Booking   |
-      | Project_X | All_Empty_Fields      |
+      | Project   | Application_Booking |
+      | Project_X | All_Empty_Fields    |
 
   @rsp-2048 @rsp-2166
   Scenario Outline: Validate the question set labels in booking page
