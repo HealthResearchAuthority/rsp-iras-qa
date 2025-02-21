@@ -9,6 +9,7 @@ import os from 'os';
 
 let browserdata: any;
 let deviceType: string;
+const todayDate = new Date();
 
 export function getAuthState(user: string): string {
   let authState: string;
@@ -244,10 +245,17 @@ export function getDeviceName() {
   return deviceName;
 }
 
-export function getTodaysDateStamp() {
-  const todayDate = new Date();
-  const dateStamp = `${todayDate.getDate()} ${todayDate.toLocaleString('default', { month: 'long' })} ${todayDate.getFullYear()}`;
-  return dateStamp;
+export function getReportFolderName() {
+  const day = todayDate.getDate();
+  const month = todayDate.toLocaleString('default', { month: 'short' });
+  const year = todayDate.getFullYear();
+  const hours = (todayDate.getHours() < 10 ? '0' : '') + todayDate.getHours();
+  const minutes = (todayDate.getMinutes() < 10 ? '0' : '') + todayDate.getMinutes();
+  const deviceName = getDeviceName().replace(/^./, (char) => char.toUpperCase());
+  const browserName = getBrowserType(deviceTypeVal).replace(/^./, (char) => char.toUpperCase());
+  const testReportFolderName =
+    day + '_' + month + '_' + year + ' ' + hours + minutes + ' ' + deviceName + '_' + browserName;
+  return testReportFolderName;
 }
 
 export async function getAllBrowserVersion(browserName: string): Promise<string> {
