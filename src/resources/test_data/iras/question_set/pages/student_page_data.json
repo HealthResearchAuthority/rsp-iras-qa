@@ -42,6 +42,38 @@
       "ci_job_title_text": "CI Job Title - Example",
       "ci_university_text": "CI University - Example",
       "ci_email_text": "thisisatestemail@test.com"
-    }
-  }
+    },
+    "No_University_Or_Course_Name": {
+      "role_of_student_text": "Role of student in the project - Example",
+      "is_group_project_radio": "Yes",
+      "level_of_course_radio": "Masters or equivalent",
+      "which_declaration_included_for_submission_radio": "Eligible and Supplementary Declaration A included",
+      "is_university_sponsor_radio": "No",
+      "why_university_not_sponsor_text": "Why university is not being part of sponsor reason - Example",
+      "first_name_text": "First name - Example",
+      "last_name_text": "Last name - Example",
+      "email_text": "thisisatestemail@test.com",
+      "who_is_chief_investigator_radio": "Academic supervisor",
+      "ci_first_name_text": "CI First name - Example",
+      "ci_last_name_text": "CI Last name - Example",
+      "ci_job_title_text": "CI Job Title - Example",
+      "ci_university_text": "CI University - Example",
+      "ci_email_text": "thisisatestemail@test.com"
+    },
+    "No_Fields_Completed": {}
+  },
+  "All_Mandatory_Validations": {
+    "role_of_student_text": "Question 1 under Educational Project section",
+    "is_group_project_radio": "Question 2 under Educational Project section",
+    "level_of_course_radio": "Question 3 under Educational Project section",
+    "university_text": "Question 4a under Educational Project section",
+    "course_text": "Question 5 under Educational Project section",
+    "is_university_sponsor_radio": "Question 6 under Educational Project section",
+    "ci_first_name_text": "Question 9a under Educational Project section",
+    "ci_last_name_text": "Question 9b under Educational Project section",
+    "ci_job_title_text": "Question 9c under Educational Project section",
+    "ci_university_text": "Question 9d under Educational Project section",
+    "ci_email_text": "Question 9e under Educational Project section"
+  },
+  "All_Conditional_Validations": {}
 }

@@ -27,7 +27,8 @@
       "protocol_ref_no_text": "Proto_Ref_ABC123",
       "eu_trial_no_text": "EU_ABC123",
       "research_project_public_summary_text": "Research Project to Investigate ABC's"
-    }
+    },
+    "No_Fields_Completed": {}
   },
   "Public_Involvement": {
     "Valid_Data_In_All_Fields": {
@@ -71,7 +72,8 @@
       "give_details_other_aspects_text": "N/A",
       "justify_approach_decribe_benefits_of_contributors_text": "I could not be bothered due to A, B and C",
       "justify_approach_and_absence_of_public_involvement_text": "I can justify my approach, and the absence of public involvement due to A, B and C"
-    }
+    },
+    "No_Fields_Completed": {}
   },
   "Research_Design": {
     "Valid_Data_In_All_Fields": {
@@ -93,7 +95,27 @@
       ],
       "describe_ai_type_again_text": "The type of AI is Y",
       "what_will_happen_participants_text": "X, Y and Z will happen to each participant"
-    }
+    },
+    "Methods_Using_Omitted": {
+      "detail_methods_using_text": "Methodologies will be X, Y and Z",
+      "specify_methods_text": "Methodologies will be X.a, Y.b and Z.c",
+      "more_detail_method_text": "Methodology X.a is big, Methodology Y.b is medium, Methodology Z.c is small",
+      "is_novel_intervention_trial_radio": "Yes",
+      "is_compare_interventions_trial_radio": "Yes",
+      "is_intervention_gold_standard_radio": "Yes",
+      "principle_research_question_objective_text": "The principle research question is X",
+      "secondary_research_question_objective_text": "The secondary research question is Y",
+      "does_project_use_ai_checkbox": ["designing, developing or testing an AI product or tool"],
+      "developing_best_describe_ai_type_checkbox": ["image analysis", "robotics"],
+      "describe_ai_type_text": "The type of AI is X",
+      "existing_best_describe_ai_type_checkbox": [
+        "other machine learning applications",
+        "generative AI or large language models"
+      ],
+      "describe_ai_type_again_text": "The type of AI is Y",
+      "what_will_happen_participants_text": "X, Y and Z will happen to each participant"
+    },
+    "No_Fields_Completed": {}
   },
   "Research_Activities": {
     "Valid_Data_In_All_Fields": {
@@ -137,7 +159,8 @@
       "describe_all_arrangements_for_continued_treatment_text": "There will be no arrangements",
       "describe_care_arrangements_after_finished_text": "N/A",
       "when_plan_finish_collecting_data_date": "2029-09-03"
-    }
+    },
+    "No_Fields_Completed": {}
   },
   "Participants": {
     "Valid_Data_In_All_Fields": {
@@ -156,7 +179,8 @@
       "how_long_participant_in_project_text": "I would expect each participant to remain in the project for X-Y weeks",
       "what_arrangements_apply_to_participants_involved_text": "The arrangements X, Y and Z will apply",
       "could_any_participants_be_vulnerable_radio": "Yes"
-    }
+    },
+    "No_Fields_Completed": {}
   },
   "Consent": {
     "Valid_Data_In_All_Fields": {
@@ -177,7 +201,8 @@
       "what_arrangements_unable_written_consent_text": "We have arrangements for X, Y and Z in place",
       "what_arrangements_participants_recieve_info_text": "We have arranged for X, Y and Z to occur",
       "what_steps_if_paticipant_loses_capacity_radio": "The participant would be withdrawn from the project. Identifiable data or tissue already collected with consent would be retained and used. No further data or tissue would be collected or any other research procedures carried out on or in relation to the participant."
-    }
+    },
+    "No_Fields_Completed": {}
   },
   "Risks_Conflicts": {
     "Valid_Data_In_All_Fields": {
@@ -208,7 +233,8 @@
         "Wales REC 6"
       ],
       "will_chief_investigators_recieve_payment_incentives_radio": "No"
-    }
+    },
+    "No_Fields_Completed": {}
   },
   "Summary_Ethical_Issues": {
     "Valid_Data_In_All_Fields": {
@@ -225,7 +251,8 @@
       "summarise_main_ethical_issues_text": "We anticipate no ethical issues at this time",
       "is_application_any_of_following_checkbox": ["none of the above"],
       "provide_info_about_project_background_text": "The project has the background A and B, hence why decision C was made"
-    }
+    },
+    "No_Fields_Completed": {}
   },
   "Research_Analysis": {
     "Valid_Data_In_All_Fields": {
@@ -249,7 +276,8 @@
       "how_many_participants_samples_records_studied_text": "We plan on studying 125 samples",
       "how_was_sample_size_decided_text": "It was decided by X, Y and Z",
       "what_criteria_electively_stopping_early_text": "The criteria for electively stopping early will be X, Y and Z"
-    }
+    },
+    "No_Fields_Completed": {}
   },
   "Governance_Management": {
     "Valid_Data_In_All_Fields": {
@@ -270,7 +298,8 @@
       "detail_cro_ctu_management_responsibilities_text": "The management responsibilities X, Y and Z have been delegated to the CRO",
       "has_responsibility_research_activity_delegated_radio": "Yes",
       "detail_proposed_oversight_arrangements_text": "The subcontractors are X and the proposed oversight arrangements are Y and Z"
-    }
+    },
+    "No_Fields_Completed": {}
   },
   "Transparency": {
     "Valid_Data_In_All_Fields": {
@@ -336,7 +365,8 @@
       "first_email_text": "tester@tester.com",
       "first_telephone_text": "59301578335",
       "first_postal_address_text": "3 Tester Street, Tester Road, TST 003"
-    }
+    },
+    "No_Fields_Completed": {}
   },
   "Confidentiality_Info_Management": {
     "Valid_Data_In_All_Fields": {
@@ -344,6 +374,64 @@
     },
     "The_Answer_No": {
       "is_study_limited_to_data_only_radio": "No"
-    }
-  }
+    },
+    "No_Fields_Completed": {}
+  },
+  "All_Mandatory_Validations": {
+    "research_project_public_summary_text": "Question 2 under Project Information section",
+    "aspects_already_actively_involved_checkbox": "Question 1 under Public Involvement section",
+    "tell_us_about_contributors_text": "Question 2b under Public Involvement section",
+    "how_plan_involve_contributors_remaining_stages_checkbox": "Question 4 under Public Involvement section",
+    "methods_using_checkbox": "Question 1 under Research Design and Methodology section",
+    "more_detail_method_text": "Question 2c under Research Design and Methodology section",
+    "principle_research_question_objective_text": "Question 4 under Research Design and Methodology section",
+    "secondary_research_question_objective_text": "Question 5 under Research Design and Methodology section",
+    "does_project_use_ai_checkbox": "Question 6 under Research Design and Methodology section",
+    "what_will_happen_participants_text": "Question 7 under Research Design and Methodology section",
+    "select_type_questions_used_checkbox": "Question 5 under Research Activities section",
+    "potential_benefits_participants_society_text": "Question 8 under Research Activities section",
+    "when_plan_finish_collecting_data_date": "Question 13 under Research Activities section",
+    "primary_conditions_problems_checkbox": "Question 1 under Participants section",
+    "list_principal_inclusion_criteria_text": "Question 2 under Participants section",
+    "list_principal_exclusion_criteria_text": "Question 3 under Participants section",
+    "how_making_sure_reflects_real_world_population_text": "Question 4 under Participants section",
+    "how_ensure_people_able_fully_participate_text": "Question 5 under Participants section",
+    "groups_participate_provide_samples_checkbox": "Question 6 under Participants section",
+    "when_plan_start_recruiting_collecting_date": "Question 7 under Participants section",
+    "only_include_children_radio": "Question 2 under Consent section",
+    "seek_consent_prior_to_participation_radio": "Question 3 under Consent section",
+    "describe_risks_to_team_and_how_managed_text": "Question 1 under Risk and Conflicts of Interest section",
+    "does_investigator_have_personal_involvement_radio": "Question 2 under Risk and Conflicts of Interest section",
+    "is_chief_member_of_nhs_ethics_rec_radio": "Question 3 under Risk and Conflicts of Interest section",
+    "will_chief_investigators_recieve_payment_incentives_radio": "Question 4 under Risk and Conflicts of Interest section",
+    "summarise_main_ethical_issues_text": "Question 1 under Summary Ethical Issues section",
+    "is_application_any_of_following_checkbox": "Question 2 under Summary Ethical Issues section",
+    "how_quality_research_been_assessed_checkbox": "Question 1 under Research Analysis section",
+    "explain_why_review_process_appropriate_text": "Question 2 under Research Analysis section",
+    "what_primary_form_of_analysis_radio": "Question 3 under Research Analysis section",
+    "detail_methods_for_analysing_data_text": "Question 3a under Research Analysis section",
+    "what_criteria_electively_stopping_early_text": "Question 5 under Research Analysis section",
+    "detail_source_funding_materials_text": "Question 1 under Governance and Management section",
+    "describe_logistical_legal_risks_text": "Question 2 under Governance and Management section",
+    "arrangements_for_insurance_sponsors_management_text": "Question 5 under Governance and Management section",
+    "arrangements_for_insurance_sponsors_design_text": "Question 6 under Governance and Management section",
+    "arrangements_for_insurance_investigators_text": "Question 7 under Governance and Management section",
+    "describe_participants_excluded_insurance_text": "Question 8 under Governance and Management section",
+    "have_sponsors_arranged_payment_compensation_radio": "Question 9 under Governance and Management section",
+    "project_registered_elsewhere_label": "Question 1a under Transparency section",
+    "second_confirm_arrangements_registration_of_project_checkbox": "Question 1f under Transparency section",
+    "planned_end_date": "Question 3 under Transparency section",
+    "how_intend_report_results_of_project_checkbox": "Question 4 under Transparency section",
+    "how_you_will_inform_participants_of_results_text": "Question 5 under Transparency section",
+    "do_plan_to_share_participant_level_data_radio": "Question 6 under Transparency section",
+    "detail_plans_sharing_participant_level_data_text": "Question 7 under Transparency section",
+    "first_email_text": "Question 9a under Transparency section",
+    "first_telephone_text": "Question 9b under Transparency section",
+    "first_postal_address_text": "Question 9c under Transparency section",
+    "second_email_text": "Question 10a under Transparency section",
+    "second_telephone_text": "Question 10b under Transparency section",
+    "second_postal_address_text": "Question 10c under Transparency section",
+    "is_study_limited_to_data_only_radio": "Question 1 under Confidentiality and Information Governance section"
+  },
+  "All_Conditional_Validations": {}
 }

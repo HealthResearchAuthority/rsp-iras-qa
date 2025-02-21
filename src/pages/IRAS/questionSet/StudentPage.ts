@@ -34,9 +34,7 @@ export default class StudentPage {
     //Locators
     this.student_section_headings = this.page.locator('.govuk-fieldset__legend--l');
     //Educational Project Section
-    this.educational_project_section = this.page.locator(
-      '//legend[contains(text(),"Educational project")]/parent::fieldset'
-    );
+    this.educational_project_section = this.page.locator('legend').getByText('Educational Project').locator('..');
     this.role_of_student_text = this.educational_project_section.getByTestId('IQA0218_Text');
     this.is_group_project_radio = this.educational_project_section.getByTestId(/^IQA0219/);
     this.level_of_course_radio = this.educational_project_section.getByTestId(/^IQA0222/);
