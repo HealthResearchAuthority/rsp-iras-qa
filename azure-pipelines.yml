@@ -90,6 +90,7 @@ resources:
       type: github
       name: 'HealthResearchAuthority/rsp-azure-devops-library'
       endpoint: AzureDevOpsToGitHubConnection
+      ref: ${{ parameters.devops_library_branch }}
 
 stages:
   - stage: E2EPlaywrightTests
