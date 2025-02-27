@@ -104,7 +104,7 @@ We can also trigger the job manually by:
 - Set the Sonar Cloud Analysis value to true or false, set to true by default
 - Click Run
 
-<img src="https://github.com/HealthResearchAuthority/rsp-iras-qa/blob/main/src/resources/images/runPipeline.png" alt="runJob" width="400" height="300">    
+<img src="https://github.com/HealthResearchAuthority/rsp-iras-qa/blob/main/src/resources/images/runPipeline.png" alt="runJob" width="300" height="200">    
 &nbsp; 
 
 This will kick off a new Run, which will appear on the **Runs** tab
