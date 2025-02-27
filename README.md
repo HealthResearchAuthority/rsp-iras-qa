@@ -228,7 +228,7 @@ you must first raise a Pull Request against your source branch that contains you
 
 To do this click the **Create a pull request** button within your branch page on Azure Devops
 
-<img src="https://github.com/HealthResearchAuthority/rsp-iras-qa/blob/main/src/resources/images/prButton.png" alt="pr button" width="200" height="300">   
+<img src="https://github.com/HealthResearchAuthority/rsp-iras-qa/blob/main/src/resources/images/prButton.png" alt="pr button" width="2211" height="357">   
 &nbsp; 
 
 This will present you with a Pull Request Template form which must be completed before the PR can be raised.  
