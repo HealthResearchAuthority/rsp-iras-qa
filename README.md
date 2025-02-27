@@ -260,7 +260,7 @@ The checks include:
 Once all the above checks have passed, or have been satisfied,  
 then Complete button will become available and you may complete the merge
 
-<img src="https://github.com/HealthResearchAuthority/rsp-iras-qa/blob/main/src/resources/images/prComplete.png" alt="pr complete" width="800" height="500">  
+<img src="https://github.com/HealthResearchAuthority/rsp-iras-qa/blob/main/src/resources/images/prComplete.png" alt="pr complete" width="677" height="104">  
 &nbsp; 
 
 **When completing a PR please select the option to delete your source branch**  
