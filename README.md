@@ -46,7 +46,7 @@ For example the screenhot below shows 2 feature files containing 3 test scenario
 - The `PocTest.feature` has 2 scenarios one of which has the Scenario tag `@exampleTestTag`  
 &nbsp; 
 
-![running with tags](src/resources\images\runWithTag.png =1400x700)  
+<img src="https://github.com/HealthResearchAuthority/rsp-iras-qa/blob/main/src/resources/images/runWithTag.png" alt="running with tags" width="1400" height="700">  
 &nbsp;
 
 So when I run the command `npx bddgen --tags "@authSetup or exampleTestTag" && npx playwright test` only 2 of the 3 scenarios execute
