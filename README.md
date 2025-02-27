@@ -592,7 +592,7 @@ Below steps to follow to use the Self Healing locators mechanism:
 
 1. Self healer locator method is created under 'CommonItemsPage.ts'.
 
-<img src="https://github.com/HealthResearchAuthority/rsp-iras-qa/blob/main/src/resources/images/selfHealingCode.png" alt="self healing" width="600" height="600"> 
+<img src="https://github.com/HealthResearchAuthority/rsp-iras-qa/blob/main/src/resources/images/selfHealingCode.png" alt="self healing" width="1423" height="479"> 
 
 2. Extend the CommonItemsPage class to the page where we need to use the self healing locator. Below example of how extended for the LoginPage
 
