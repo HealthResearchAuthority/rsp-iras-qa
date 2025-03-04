@@ -6,8 +6,20 @@
   },
   "Children_Section": {
     "Valid_Data_All_Fields": {
-      "specify_ages_checkbox": ["In utero","Preterm newborn infants (up to gestational age less than 37 weeks)", "Newborn (0 to 27 days)", "28 days to 23 months", "2 to 11 years", "12 to 17 years", "12 to 15 years", "16 years"],
-      "children_unable_understand_details_checkbox": ["Children who will be unable to fully understand", "Children who will be able to understand"],
+      "specify_ages_checkbox": [
+        "In utero",
+        "Preterm newborn infants (up to gestational age less than 37 weeks)",
+        "Newborn (0 to 27 days)",
+        "28 days to 23 months",
+        "2 to 11 years",
+        "12 to 17 years",
+        "12 to 15 years",
+        "16 years"
+      ],
+      "children_unable_understand_details_checkbox": [
+        "Children who will be unable to fully understand",
+        "Children who will be able to understand"
+      ],
       "arrangements_obtaining_consent_parental_text": "Describe the arrangements for obtaining consent from a person who has parental rights and responsibility for children who will not be able to fully understand the details of the project and consequences of their participation. - Example",
       "provide_children_information_of_project_text": "Describe how you intend to provide children who will not be able to fully understand the details of the project and consequences of their participation, with information about the project. How will you seek their assent, if they are able? Describe how this process will be adapted to their age and level of understanding. - Example",
       "seek_informed_consent_from_children_text": "Describe how you intend to seek informed consent from children who will be able to understand the details of the project and the consequences of participation, and willing to give consent on their own behalf, alongside parental agreement. For sites in Scotland, this may include children over the age of 12 years who are willing and able to give consent as the Children (Scotland) Act specifies that a child of 12 years or more should be presumed to be of sufficient age and maturity to form a view. - Example",
@@ -20,8 +32,20 @@
       "explain_materials_resources_for_explaining_text": "Explain how you have tested the materials and resources for explaining this project with children and adults with parental rights and responsibility. - Example"
     },
     "Child_Not_Treated_Urgently": {
-      "specify_ages_checkbox": ["In utero","Preterm newborn infants (up to gestational age less than 37 weeks)", "Newborn (0 to 27 days)", "28 days to 23 months", "2 to 11 years", "12 to 17 years", "12 to 15 years", "16 years"],
-      "children_unable_understand_details_checkbox": ["Children who will be unable to fully understand", "Children who will be able to understand"],
+      "specify_ages_checkbox": [
+        "In utero",
+        "Preterm newborn infants (up to gestational age less than 37 weeks)",
+        "Newborn (0 to 27 days)",
+        "28 days to 23 months",
+        "2 to 11 years",
+        "12 to 17 years",
+        "12 to 15 years",
+        "16 years"
+      ],
+      "children_unable_understand_details_checkbox": [
+        "Children who will be unable to fully understand",
+        "Children who will be able to understand"
+      ],
       "arrangements_obtaining_consent_parental_text": "Describe the arrangements for obtaining consent from a person who has parental rights and responsibility for children who will not be able to fully understand the details of the project and consequences of their participation. - Example",
       "provide_children_information_of_project_text": "Describe how you intend to provide children who will not be able to fully understand the details of the project and consequences of their participation, with information about the project. How will you seek their assent, if they are able? Describe how this process will be adapted to their age and level of understanding. - Example",
       "seek_informed_consent_from_children_text": "Describe how you intend to seek informed consent from children who will be able to understand the details of the project and the consequences of participation, and willing to give consent on their own behalf, alongside parental agreement. For sites in Scotland, this may include children over the age of 12 years who are willing and able to give consent as the Children (Scotland) Act specifies that a child of 12 years or more should be presumed to be of sufficient age and maturity to form a view. - Example",
@@ -32,6 +56,29 @@
       "arrangements_to_seek_consent_text": "What arrangements will you make to seek consent to continue in the project when participating children are able to give consent for themselves? - Example",
       "arrangements_to_seek_consent_reached_age_text": "What arrangements will you make to seek consent to continue in the trial when participating children reach the age of 16? - Example",
       "explain_materials_resources_for_explaining_text": "Explain how you have tested the materials and resources for explaining this project with children and adults with parental rights and responsibility. - Example"
+    },
+    "All_Empty_Fields": {},
+    "Some_Empty_Fields": {
+      "children_unable_understand_details_checkbox": [
+        "Children who will be unable to fully understand",
+        "Children who will be able to understand"
+      ],
+      "arrangements_obtaining_consent_parental_text": "Conditional question - Dev Not Implemented for Validation",
+      "provide_children_information_of_project_text": "Conditional question - Dev Not Implemented for Validation",
+      "seek_informed_consent_from_children_text": "Conditional question - Dev Not Implemented for Validation",
+      "seek_informed_consent_parental_under_age_text": "Conditional question - Dev Not Implemented for Validation",
+      "provide_children_information_about_trial_text": "Conditional question - Dev Not Implemented for Validation",
+      "justify_need_for_urgent_treatment_text": "Conditional question - Dev Not Implemented for Validation",
+      "arrangements_to_seek_consent_text": "Conditional question - Dev Not Implemented for Validation",
+      "arrangements_to_seek_consent_reached_age_text": "Conditional question - Dev Not Implemented for Validation",
+      "explain_materials_resources_for_explaining_text": "Explain how you have tested the materials and resources for explaining this project with children and adults with parental rights and responsibility. - Example"
     }
-  }
+  },
+  "All_Mandatory_Validations": {
+    "specify_ages_checkbox": "Question 1 under Children section",
+    "children_unable_understand_details_checkbox": "Question 2 under Children section",
+    "is_child_treated_urgently_radio": "Question 3 under Children section",
+    "explain_materials_resources_for_explaining_text": "Question 5 under Children section"
+  },
+  "All_Conditional_Validations": {}
 }

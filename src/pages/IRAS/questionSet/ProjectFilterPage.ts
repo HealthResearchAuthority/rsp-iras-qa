@@ -48,7 +48,7 @@ export default class ProjectFilterPage {
     //Locators
     this.project_filter_section_headings = this.page.locator('.govuk-fieldset__legend--l');
     //Project Details Section
-    this.project_details_section = this.page.locator('//legend[contains(text(),"Project details")]/parent::fieldset');
+    this.project_details_section = this.page.locator('legend').getByText('Project Details').locator('..');
     this.short_project_title_text = this.project_details_section.getByTestId('IQA0002_Text');
     this.full_project_title_text = this.project_details_section.getByTestId('IQA0003_Text');
     this.is_project_managed_commercial_research_radio = this.project_details_section.getByTestId(/^IQA0004/);
@@ -56,31 +56,30 @@ export default class ProjectFilterPage {
     this.access_cpms_services_radio = this.project_details_section.getByTestId(/^IQA0005/);
     this.email_initial_contact_cpms_text = this.project_details_section.getByTestId('IQA0006_Text');
     //Project Scope Section
-    this.project_scope_section = this.page.locator('//legend[contains(text(),"Project scope")]/parent::fieldset');
+    this.project_scope_section = this.page.locator('legend').getByText('Project Scope').locator('..');
     this.is_educational_project_radio = this.project_scope_section.getByTestId(/^IQA0012/);
     this.activities_involved_checkbox = this.project_scope_section.getByTestId(/^IQA0061/);
-    this.is_research_bioresource_radio = this.project_scope_section.getByTestId(/^IQA0014/);
-    this.bioresource_established_nhs_hsc_radio = this.project_scope_section.getByTestId(/^IQA0015/);
-    this.is_ctimp_radio = this.project_scope_section.getByTestId(/^IQA0017/);
-    this.options_applied_for_project_radio = this.project_scope_section.getByTestId(/^IQA0018/);
+    this.is_research_bioresource_radio = this.project_scope_section.getByTestId(/^IQA0014_OPT/);
+    this.bioresource_established_nhs_hsc_radio = this.project_scope_section.getByTestId(/^IQA0015_OPT/);
+    this.is_ctimp_radio = this.project_scope_section.getByTestId(/^IQA0017_OPT/);
+    this.options_applied_for_project_radio = this.project_scope_section.getByTestId(/^IQA0018_OPT/);
     this.product_contain_genetically_modified_organism_radio = this.project_scope_section.getByTestId(/^IQA03282/);
     this.is_clinical_or_medical_devices_radio = this.project_scope_section.getByTestId(/^IQA0020/);
-    this.exposing_ionising_radiation_radio = this.project_scope_section.getByTestId(/^IQA0021/);
-    this.using_human_biological_samples_radio = this.project_scope_section.getByTestId(/^IQA0022/);
-    this.patient_data_accessed_outside_radio = this.project_scope_section.getByTestId(/^IQA0024/);
-    this.research_with_adults_lacking_capacity_to_consent_radio = this.project_scope_section.getByTestId(/^IQA0025/);
-    this.include_children_radio = this.project_scope_section.getByTestId(/^IQA0026/);
+    this.exposing_ionising_radiation_radio = this.project_scope_section.getByTestId(/^IQA0021_OPT/);
+    this.using_human_biological_samples_radio = this.project_scope_section.getByTestId(/^IQA0022_OPT/);
+    this.patient_data_accessed_outside_radio = this.project_scope_section.getByTestId(/^IQA0024_OPT/);
+    this.research_with_adults_lacking_capacity_to_consent_radio =
+      this.project_scope_section.getByTestId(/^IQA0025_OPT/);
+    this.include_children_radio = this.project_scope_section.getByTestId(/^IQA0026_OPT/);
     this.include_prisoners_offenders_radio = this.project_scope_section.getByTestId(/^IQA0027/);
     this.involve_ministry_of_defence_radio = this.project_scope_section.getByTestId(/^IQA0028/);
     this.involve_hfea_radio = this.project_scope_section.getByTestId(/^IQA0029/);
     //Research Location Section
-    this.research_location_section = this.page.locator(
-      '//legend[contains(text(),"Research location")]/parent::fieldset'
-    );
+    this.research_location_section = this.page.locator('legend').getByText('Research Location').locator('..');
     this.is_outside_uk_radio = this.research_location_section.getByTestId(/^IQA0142/);
     this.places_in_uk_for_project_checkbox = this.research_location_section.getByTestId(/^IQA0032/);
-    this.where_human_sample_held_checkbox = this.research_location_section.getByTestId(/^IQA0033/);
-    this.where_human_sample_obtained_checkbox = this.research_location_section.getByTestId(/^IQA0034/);
+    this.where_human_sample_held_checkbox = this.research_location_section.getByTestId(/^IQA0033_OPT/);
+    this.where_human_sample_obtained_checkbox = this.research_location_section.getByTestId(/^IQA0034_OPT/);
     this.where_project_take_place_checkbox = this.research_location_section.getByTestId(/^IQA0144/);
     this.details_other_organisation_text = this.research_location_section.getByTestId('IQA0145_Text');
     this.use_pic_radio = this.research_location_section.getByTestId(/^IQA0146/);

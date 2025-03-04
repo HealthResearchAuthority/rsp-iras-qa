@@ -1,7 +1,7 @@
 {
   "Devices": {
     "title": "",
-    "section_headings": ["Devices Filter Questions","Device investigations not requiring review by MHRA"],
+    "section_headings": ["Devices Filter Questions", "Device investigations not requiring review by MHRA"],
     "page_name": "Devices"
   },
   "Devices_Filter_Questions": {
@@ -20,7 +20,8 @@
       "will_research_conducted_northern_ireland_radio": "No",
       "what_review_needed_first_radio": "MHRA and REC",
       "what_review_needed_second_radio": "MHRA and REC"
-    }
+    },
+    "No_Fields_Completed": {}
   },
   "Device_Investigation_No_MHRA": {
     "Valid_Data_All_Fields": {
@@ -42,6 +43,21 @@
       "what_safety_testing_undertaken_text": "Safety and performance testing has been undertaken on the investigational device and its constituents - Example",
       "sponsors_plan_further_development_text": "Sponsor’s plans for further development and use of the device - Example",
       "details_device_manufactures_standards_expected_text": "Details of the arrangements for ensuring that the device has been manufactured to the standards expected - Example"
-    }
-  }
+    },
+    "No_Fields_Completed": {}
+  },
+  "All_Mandatory_Validations": {
+    "is_sponsored_by_device_company_radio": "Question 1 under Devices Filter Questions section",
+    "will_research_conducted_northern_ireland_radio": "Question 2 under Devices Filter Questions section",
+    "is_manufacturer_lead_sponsor_radio": "Question 1 under Device investigations not requiring review by MHRA section",
+    "name_of_manufacturer_text": "Question 2a under Device investigations not requiring review by MHRA section",
+    "trade_name_for_device_text": "Question 2b under Device investigations not requiring review by MHRA section",
+    "name_for_device_text": "Question 2c under Device investigations not requiring review by MHRA section",
+    "number_for_device_text": "Question 2d under Device investigations not requiring review by MHRA section",
+    "generic_name_of_device_text": "Question 2e under Device investigations not requiring review by MHRA section",
+    "length_of_time_device_used_text": "Question 2f under Device investigations not requiring review by MHRA section",
+    "type_of_research_project_radio": "Question 3 under Device investigations not requiring review by MHRA section",
+    "procedures_involved_non_invasive_radio": "Question 4 under Device investigations not requiring review by MHRA section"
+  },
+  "All_Conditional_Validations": {}
 }
