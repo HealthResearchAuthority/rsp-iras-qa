@@ -136,7 +136,9 @@ Any artifacts published will be available at the top level of the job (click lin
 
 If you click the link to view the published Artifacts,  
 
-You will see a page displaying the `cucumber-report` folder & `playwright-report` folder.  
+You will see a page displaying the `test-report` folder and if you expand that folder,there is a sub folder with name `Day_Month_Year HHMM DeviceName_BrowserName` format.
+
+If you expand that folder, you can see `cucumber` folder & `playwright` folder.  
 
 Click the html document in either to download and view the relevant report.
 
