@@ -91,7 +91,7 @@ This repo has an associated Azure DevOps Pipeline job, which can run our tests r
 
 The Pipeline job is configured in the `azure-pipelines.yml`
 
-The Pipeline job can be found [here](https://dev.azure.com/FutureIRAS/Research%20Systems%20Programme/_build?definitionId=9)
+The Pipeline job can be found [here](https://dev.azure.com/FutureIRAS/Research%20Systems%20Programme/_build?definitionId=60)
 
 The job will trigger when we push code to our `main` branch
 
