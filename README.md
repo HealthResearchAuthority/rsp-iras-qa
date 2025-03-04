@@ -46,7 +46,7 @@ For example the screenhot below shows 2 feature files containing 3 test scenario
 - The `PocTest.feature` has 2 scenarios one of which has the Scenario tag `@exampleTestTag`  
 &nbsp; 
 
-<img src="src/resources/images/runWithTag.png" alt="running with tags" width="1400" height="700">  
+<img src="src/resources/images/runWithTag.png" alt="running with tags">  
 &nbsp;
 
 So when I run the command `npx bddgen --tags "@authSetup or exampleTestTag" && npx playwright test` only 2 of the 3 scenarios execute
@@ -82,7 +82,7 @@ Both reports are stored within the top level `test-reports` folder (which is set
 Within their respective `playwright` and `cucumber` folders  
 This configuration is set within the `reporter` array property in the `playwright.config.ts` file
 
-<img src="src/resources/images/reporters.png" alt="reporters" width="600" height="400">  
+<img src="src/resources/images/reporters.png" alt="reporters">  
 &nbsp; 
    
 ## Running in Azure Devops Pipeline
@@ -104,7 +104,7 @@ We can also trigger the job manually by:
 - Set the Sonar Cloud Analysis value to true or false, set to true by default
 - Click Run
 
-<img src="src/resources/images/runPipeline.png" alt="runJob" width="2721" height="550">    
+<img src="src/resources/images/runPipeline.png" alt="runJob">    
 &nbsp; 
 
 This will kick off a new Run, which will appear on the **Runs** tab
@@ -118,7 +118,7 @@ It shows:
 - any artifacts published (click link to view)
 - the list of jobs that were executed
 
-<img src="src/resources/images/jobSummary.png" alt="jobSummary" width="600" height="400">  
+<img src="src/resources/images/jobSummary.png" alt="jobSummary">  
 &nbsp; 
 
 To see a detailed view of the run,
