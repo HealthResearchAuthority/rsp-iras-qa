@@ -7,14 +7,14 @@ const encryption_key = '<Add secret key here which is 32 character long>';
 const textToEncrypt = '<sensitive-data>';
 
 function encrypt(text) {
-  const cipher = createCipheriv('aes-256-gcm', Buffer.from(encryption_key), Buffer.alloc(16));
+  const cipher = createCipheriv('AES-256-GCM', Buffer.from(encryption_key), Buffer.alloc(16));
   var crypted = cipher.update(text, 'utf8', 'hex');
   crypted += cipher.final('hex');
   return crypted;
 }
 
 function decrypt(text) {
-  const decipher = createDecipheriv('aes-256-gcm', Buffer.from(encryption_key), Buffer.alloc(16));
+  const decipher = createDecipheriv('AES-256-GCM', Buffer.from(encryption_key), Buffer.alloc(16));
   let dec = decipher.update(text, 'hex', 'utf8');
   dec += decipher.final('utf8');
   return dec;
