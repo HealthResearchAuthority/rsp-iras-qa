@@ -260,7 +260,7 @@ The checks include:
 &nbsp; 
 
 Once all the above checks have passed, or have been satisfied,  
-then Complete button will become available and you may complete the merge
+then Rebase and Merge button will become available and you may complete the merge
 
 <img src="src/resources/images/prComplete.png" alt="pr complete">  
 &nbsp; 
