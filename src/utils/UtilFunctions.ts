@@ -1,6 +1,6 @@
 import { DataTable } from 'playwright-bdd';
 import { Locator, chromium, devices, firefox, webkit } from '@playwright/test';
-import crypto from 'crypto';
+import { createDecipheriv } from 'crypto';
 import { readFile, writeFile } from 'fs/promises';
 import 'dotenv/config';
 import { deviceDSafari, deviceDFirefox, deviceDChrome, deviceDEdge } from '../hooks/GlobalSetup';
@@ -59,7 +59,8 @@ export function getTicketReferenceTags(tags: string[]): string[] {
 export function getDecryptedValue(data: string) {
   let value: string = '';
   if (process.env.SECRET_KEY) {
-    const decipher = crypto.createDecipheriv('aes-256-cbc', Buffer.from(`${process.env.SECRET_KEY}`), Buffer.alloc(16));
+    const decipher = createDecipheriv('AES-256-GCM', Buffer.from(process.env.SECRET_KEY), Buffer.alloc(16));
+    decipher.setAuthTag(Buffer.from(`${process.env.AUTH_TAG}`, 'hex'));
     let decrypted = decipher.update(data, 'hex', 'utf8');
     decrypted = decrypted + decipher.final('utf8');
     value = decrypted;
