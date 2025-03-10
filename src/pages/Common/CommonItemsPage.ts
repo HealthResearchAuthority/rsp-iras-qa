@@ -163,4 +163,14 @@ export default class CommonItemsPage {
     }
     return selfHealedLocator;
   }
+
+  async captureScreenshot(page: Page, $step: any, $testInfo: any) {
+    const screenshot = await page.screenshot({ path: 'screenshot.png', fullPage: true });
+    await $testInfo.attach(`[step] ${$step.title}`, { body: screenshot, contentType: 'image/png' });
+  }
+
+  async captureComponentScreenshot(locator: Locator, $step: any, $testInfo: any) {
+    const screenshot = await locator.screenshot({ path: 'screenshot.png' });
+    await $testInfo.attach(`[step] ${$step.title}`, { body: screenshot, contentType: 'image/png' });
+  }
 }

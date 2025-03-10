@@ -9,8 +9,20 @@ import {
   generateTestDataTelephone,
   writeGeneratedTestDataToJSON,
 } from '../../utils/GenerateTestData';
-const { Given, When, Then } = createBdd(test);
+const { Given, When, Then, AfterStep } = createBdd(test);
 import * as userProfileGeneratedataConfig from '../../resources/test_data/user_administration/testdata_generator/user_profile_generate_data_config.json';
+
+AfterStep(async ({ page, $step, $testInfo }) => {
+  if (
+    `${process.env.STEP_SCREENSHOT?.toLowerCase()}` === 'yes' ||
+    `${$step.title}` === 'I capture the page screenshot'
+  ) {
+    const screenshot = await page.screenshot({ path: 'screenshot.png', fullPage: true });
+    await $testInfo.attach(`[step] ${$step.title}`, { body: screenshot, contentType: 'image/png' });
+  }
+});
+
+Then('I capture the page screenshot', async () => {});
 
 Given('I have navigated to the {string}', async ({ loginPage, homePage, createApplicationPage }, page: string) => {
   switch (page) {

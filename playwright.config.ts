@@ -26,7 +26,10 @@ const config: PlaywrightTestConfig = {
     ...browser,
     trace: 'on',
     baseURL: `${process.env.BASE_URL}`,
-    screenshot: 'only-on-failure',
+    screenshot: {
+      mode: 'only-on-failure',
+      fullPage: true,
+    },
     actionTimeout: 30000,
     navigationTimeout: 30000,
     testIdAttribute: 'id',
