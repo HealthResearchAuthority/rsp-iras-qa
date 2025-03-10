@@ -18,9 +18,7 @@ export default class BookingPage {
     //Locators
     this.booking_section_headings = this.page.locator('.govuk-fieldset__legend--l');
     //Application Booking Section
-    this.application_booking_section = this.page.locator(
-      '//legend[contains(text(),"Application booking")]/parent::fieldset'
-    );
+    this.application_booking_section = this.page.locator('legend').getByText('Application Booking').locator('..');
     this.agree_project_information_be_used_text = this.application_booking_section.getByTestId('IQA00D1_Text');
   }
 

@@ -44,7 +44,7 @@ export default class DevicesPage {
     //Devices Filter Questions Section
     //Check on the below xpath. - Convert this to CSS if possible. Need to investigate further
     this.devices_filter_questions_section = this.page.locator(
-      '//legend[contains(text(),"Devices filter questions")]/parent::fieldset'
+      '//legend[contains(text(),"Devices Filter Questions")]/parent::fieldset'
     );
     this.is_sponsored_by_device_company_radio = this.devices_filter_questions_section.getByTestId(/^IQA0309/);
     this.type_of_project_first_radio = this.devices_filter_questions_section.getByTestId(/^IQA03010/);
