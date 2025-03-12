@@ -60,7 +60,7 @@ const config: PlaywrightTestConfig = {
         features: [
           'tests/features/cross-compatible/stories/**/*.feature',
           'tests/features/cross-compatible/accessibility/**/*.feature', //comment out to prevent running accessibility tests locally
-          // 'tests/features/cross-compatible/userAdministration/**/*.feature', //comment out to prevent running User Administration tests locally
+          'tests/features/cross-compatible/userAdministration/**/*.feature', //comment out to prevent running User Administration tests locally
           `tests/features/${platform}/**/*.feature`,
         ],
         steps: ['src/steps/**/*.ts', 'src/hooks/CustomFixtures.ts'],

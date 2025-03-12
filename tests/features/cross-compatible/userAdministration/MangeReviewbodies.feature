@@ -1,13 +1,25 @@
 @UserAdministration  @ManageReviewBodies
 Feature: HRAPROG-393- User Administration: Manage Review Bodies
 
-    Background:
-        Given I have navigated to the 'UserAdministration_Login_Page'
-        When I login to the application as the 'Admin_User'
-        Then I can see the 'UserAdministration_Page'
-        And I click on 'Manage Review bodies'
+    # Background:
+    #     Given I have navigated to the 'Login_Page'
+    #     When I login to the application as the 'Admin_User'
+    #     Then I can see the 'System_Administration_Home_Page'
+    #     And I will store the 'Admin_User' authentication state
+        
+
+    Scenario Outline: User logged in as System Administrator
+        Given I have navigated to the 'Login_Page'
+        When I login to the application as the '<User>'
+        Then I can see the 'System administration Home_Page'
+        And I will store the '<User>' authentication state
+        Examples:
+        | User       |
+        | Admin_User |
 
     Scenario Outline: View list of review bodies
+        When I click the 'Manage review bodies' link on the 'System_Administration_Home_Page'
+        Then I can see the 'Manage review Bodies' page
         And I click on view list of review bodies
         And I can see list of review bodies by '<filter_by>'
         Examples:
@@ -24,6 +36,14 @@ Feature: HRAPROG-393- User Administration: Manage Review Bodies
             | reviewbody     |
 
     Scenario Outline: Create a new review body
+        When I click the 'Add a new review body record' link on the 'Manage review Bodies page'
+        # And I fill the all the mandatory fields and click on 'Complete' button
+        #     - Organisation Name -text box, mandatory
+        #     - Country – check box, mandatory
+        #     - Email address – text, mandatory
+        Then I can see the 'Check and Create review body' page and click on 'Create Profile' button
+        And I can see the confirmation message 'Review body has been successfully added'
+
         And I click on 'Add new review body' button
         And I fill review body organisation profile information using '<reviewbody_organisation_profile_data>'
         And I click on 'Save' button
