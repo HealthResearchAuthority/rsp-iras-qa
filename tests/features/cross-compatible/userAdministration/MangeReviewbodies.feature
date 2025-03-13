@@ -5,37 +5,11 @@ Feature: HRAPROG-393- User Administration: Manage Review Bodies
     #     Given I have navigated to the 'Login_Page'
     #     When I login to the application as the 'Admin_User'
     #     Then I can see the 'System_Administration_Home_Page'
-    #     And I will store the 'Admin_User' authentication state
-        
-
-    Scenario Outline: User logged in as System Administrator
-        Given I have navigated to the 'Login_Page'
-        When I login to the application as the '<User>'
-        Then I can see the 'System administration Home_Page'
-        And I will store the '<User>' authentication state
-        Examples:
-        | User       |
-        | Admin_User |
-
-    Scenario Outline: View list of review bodies
-        When I click the 'Manage review bodies' link on the 'System_Administration_Home_Page'
-        Then I can see the 'Manage review Bodies' page
-        And I click on view list of review bodies
-        And I can see list of review bodies by '<filter_by>'
-        Examples:
-            | filter_by  |
-            | reviewbody |
-
-    Scenario Outline: Review bodies Search
-        And I click on view list of review bodies
-        And I can search review bodies by '<Search_keyword>'
-        And I can see the search results
-        And the results are sorted in '' order
-        Examples:
-            | Search_keyword |
-            | reviewbody     |
+    #     And I will store the 'Admin_User' authentication state 
 
     Scenario Outline: Create a new review body
+        When I click the 'Manage review bodies' link on the 'System_Administration_Home_Page'
+        Then I can see the 'Manage review Bodies' page
         When I click the 'Add a new review body record' link on the 'Manage review Bodies page'
         # And I fill the all the mandatory fields and click on 'Complete' button
         #     - Organisation Name -text box, mandatory
@@ -54,6 +28,24 @@ Feature: HRAPROG-393- User Administration: Manage Review Bodies
         Examples:
             | reviewbody_organisation_profile_data |
             | reviewbody                           |
+    
+    Scenario Outline: View list of review bodies
+        When I click the 'Manage review bodies' link on the 'System_Administration_Home_Page'
+        Then I can see the 'Manage review Bodies' page
+        And I click on view list of review bodies
+        And I can see list of review bodies by '<filter_by>'
+        Examples:
+            | filter_by  |
+            | reviewbody |
+
+    Scenario Outline: Review bodies Search
+        And I click on view list of review bodies
+        And I can search review bodies by '<Search_keyword>'
+        And I can see the search results
+        And the results are sorted in '' order
+        Examples:
+            | Search_keyword |
+            | reviewbody     |
 
     Scenario Outline: View review body organisation profile
         And I click on view list of review bodies
