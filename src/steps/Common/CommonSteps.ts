@@ -60,6 +60,9 @@ When(
       case 'Proceed_Application_Page':
         await proceedApplicationPage.assertOnProceedApplicationPage();
         break;
+      case 'Add_new_review_body_Page':
+        await addNewReviewbodyPage.assertOnAddNewReviewbodyPage();
+        break;
       default:
         throw new Error(`${page} is not a valid option`);
     }
@@ -160,6 +163,8 @@ Given(
     } else if (pageKey === 'Banner' && linkKey === 'My_Applications') {
       await commonItemsPage.bannerMyApplications.click();
     } else if (pageKey === 'Home_Page' && linkKey === 'My_Applications') {
+      await homePage.myApplicationsLink.click();
+    } else if (pageKey === 'Home_Page' && linkKey === 'Manage_Review_Bodies') {
       await homePage.myApplicationsLink.click();
     } else {
       await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
