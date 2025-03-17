@@ -47,7 +47,7 @@ Feature: HRAPROG-393- User Administration: Manage Review Bodies
         
 
     @rsp-2570
-    Scenario Outline: Verify the user is able to create a new review body and repeat the journey by clicking 'Add another review body' from the Confirmation message screen   
+    Scenario Outline: Verify the user is able to create a new review body and repeat the journey by clicking 'Add another review body'link from the Confirmation message screen   
         # When I fill the project information section on the project details page with '<Project_Information>'
         When I fill the new review body page using '<Add_Review_Body>'
         And I click the 'Complete' button on the 'Add_new_review_body_Page'

@@ -16,6 +16,10 @@ import CreateApplicationPage from '../pages/IRAS/CreateApplicationPage';
 import ProceedApplicationPage from '../pages/IRAS/ProceedApplicationPage';
 import QuestionSetPage from '../pages/Common/QuestionSetPage';
 import EmailNotificationPage from '../pages/Common/emailNotificationPage';
+import ManageReviewBodiesPage from '../pages/IRAS/reviewResearch/manageReviewBodies/ManageReviewBodiesPage';
+import CreateReviewBodyPage from '../pages/IRAS/reviewResearch/manageReviewBodies/CreateReviewBodyPage';
+import CheckCreateReviewBodyPage from '../pages/IRAS/reviewResearch/manageReviewBodies/CheckCreateReviewBodyPage';
+import CreateReviewBodyConfirmationPage from '../pages/IRAS/reviewResearch/manageReviewBodies/CreateReviewBodyConfirmationPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -33,6 +37,10 @@ type CustomFixtures = {
   proceedApplicationPage: ProceedApplicationPage;
   questionSetPage: QuestionSetPage;
   emailNotificationPage: EmailNotificationPage;
+  manageReviewBodiesPage: ManageReviewBodiesPage;
+  createReviewBodyPage: CreateReviewBodyPage;
+  checkCreateReviewBodyPage: CheckCreateReviewBodyPage;
+  createReviewBodyConfirmationPage: CreateReviewBodyConfirmationPage;
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -95,6 +103,22 @@ export const test = base.extend<CustomFixtures>({
 
   emailNotificationPage: async ({ page }, use) => {
     await use(new EmailNotificationPage(page));
+  },
+
+  manageReviewBodiesPage: async ({ page }, use) => {
+    await use(new ManageReviewBodiesPage(page));
+  },
+
+  createReviewBodyPage: async ({ page }, use) => {
+    await use(new CreateReviewBodyPage(page));
+  },
+
+  checkCreateReviewBodyPage: async ({ page }, use) => {
+    await use(new CheckCreateReviewBodyPage(page));
+  },
+
+  createReviewBodyConfirmationPage: async ({ page }, use) => {
+    await use(new CreateReviewBodyConfirmationPage(page));
   },
 
   makeAxeBuilder: async ({ page }, use) => {

@@ -19,5 +19,12 @@
     "Continue": "Save and Continue",
     "Validate": "Validate",
     "Proceed_Submit": "Proceed to Submit"
+  },
+  "Create_Review_Body_Page": {
+    "Complete": "Complete",
+    "Back": "Back"
+  },
+  "Check_Create_Review_Body_Page": {
+    "Create_Profile": "Create profile"
   }
 }
