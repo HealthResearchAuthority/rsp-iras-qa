@@ -1,0 +1,31 @@
+{
+  "Project_Details_IRAS_Page": {
+    "title": "",
+    "heading": "Project details"
+  },
+  "Label_Texts": {
+    "iras_textbox_label": "IRAS ID",
+    "iras_textbox_hint": "This is the 4 to 7 digit ID generated when you created your initial application"
+  },
+  "Error_Message_IRAS_ID": {
+    "error_message": "IRAS ID must only contain numbers"  
+  },
+  "Valid_IRAS_ID": {
+    "iras_id": 1234567
+  },
+  "Invalid_IRAS_ID_Letters": {
+    "iras_id": "abcdefg"
+  },
+  "Invalid_IRAS_ID_Symbols": {
+    "iras_id": "!£$%^&*"
+  },
+  "Invalid_IRAS_ID_Letters_Symbols": {
+    "iras_id": "a!b£c£D%"
+  },
+  "Invalid_IRAS_ID_Min_Length": {
+    "iras_id": 123
+  },
+  "Invalid_IRAS_ID_Max_Length": {
+    "iras_id": 123456789
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "Project_Details_Title_Page": {
+    "title": "",
+    "heading": "Project details"
+  },
+  "Label_Texts": {
+    "short_project_title_textbox_label": "Short project title",
+    "planned_end_date_textbox_label": "Planned project end date",
+    "day_textbox_label": "Day",
+    "month_textbox_label": "Month",
+    "year_textbox_label": "Year"
+  },
+  "Error_Message_Title_Max_Length": {
+    "error_message": "Short project title must not contain more than XX characters"  
+  },
+  "Valid_Data_All_Fields": {
+    "short_project_title": "QA_Automation - This is a short project title",
+    "planned_project_end_date": "01/01/2028"
+  }
+}
