@@ -19,5 +19,17 @@
     "Continue": "Save and Continue",
     "Validate": "Validate",
     "Proceed_Submit": "Proceed to Submit"
+  },
+  "My_Research_Projects_Page": {
+    "Create_Project_Record": "Create project record"
+  },
+  "Create_Project_Record_Page": {
+    "Start": "Start"
+  },
+  "Project_Details_IRAS_Page": {
+    "Save_Continue": "Save and continue"
+  },
+  "Project_Details_Title_Page": {
+    "Save_Continue": "Save and continue"
   }
 }

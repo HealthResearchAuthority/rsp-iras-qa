@@ -16,6 +16,10 @@ import CreateApplicationPage from '../pages/IRAS/CreateApplicationPage';
 import ProceedApplicationPage from '../pages/IRAS/ProceedApplicationPage';
 import QuestionSetPage from '../pages/Common/QuestionSetPage';
 import EmailNotificationPage from '../pages/Common/emailNotificationPage';
+import MyResearchProjectsPage from '../pages/IRAS/createAmendment/MyResearchProjectsPage';
+import CreateProjectRecordPage from '../pages/IRAS/createAmendment/CreateProjectRecordPage';
+import ProjectDetailsIRASPage from '../pages/IRAS/createAmendment/ProjectDetailsIRASPage';
+import ProjectDetailsTitlePage from '../pages/IRAS/createAmendment/ProjectDetailsTitlePage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -33,6 +37,10 @@ type CustomFixtures = {
   proceedApplicationPage: ProceedApplicationPage;
   questionSetPage: QuestionSetPage;
   emailNotificationPage: EmailNotificationPage;
+  myResearchProjectsPage: MyResearchProjectsPage;
+  createProjectRecordPage: CreateProjectRecordPage;
+  projectDetailsIRASPage: ProjectDetailsIRASPage;
+  projectDetailsTitlePage: ProjectDetailsTitlePage;
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -95,6 +103,22 @@ export const test = base.extend<CustomFixtures>({
 
   emailNotificationPage: async ({ page }, use) => {
     await use(new EmailNotificationPage(page));
+  },
+
+  myResearchProjectsPage: async ({ page }, use) => {
+    await use(new MyResearchProjectsPage(page));
+  },
+
+  createProjectRecordPage: async ({ page }, use) => {
+    await use(new CreateProjectRecordPage(page));
+  },
+
+  projectDetailsIRASPage: async ({ page }, use) => {
+    await use(new ProjectDetailsIRASPage(page));
+  },
+
+  projectDetailsTitlePage: async ({ page }, use) => {
+    await use(new ProjectDetailsTitlePage(page));
   },
 
   makeAxeBuilder: async ({ page }, use) => {
