@@ -165,7 +165,7 @@ Given(
     } else if (pageKey === 'Home_Page' && linkKey === 'My_Applications') {
       await homePage.myApplicationsLink.click();
     } else if (pageKey === 'Home_Page' && linkKey === 'Manage_Review_Bodies') {
-      await homePage.myApplicationsLink.click();
+      await homePage.manageReviewbodiesLink.click();
     } else {
       await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
     }
