@@ -1,0 +1,9 @@
+{
+  "Create_Review_Body_Confirmation_Page": {
+    "selected_tab_top": "Manage review bodies",
+    "confirmation_message": "Review body has been successfully added",
+    "consent": "A confirmation email will be sent to HSC Research and Development to confirm that their profile has been added. Their status is now active. ",
+    "add_another_review_body_link": "Add another review body",
+    "back_to_manage_review_bodies_link": "Back to Manage review bodies"
+  }
+}

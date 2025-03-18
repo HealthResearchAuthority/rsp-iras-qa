@@ -1,7 +1,7 @@
 import { createBdd } from 'playwright-bdd';
-import { test } from '../../../../hooks/CustomFixtures';
+import { test } from '../../../../../hooks/CustomFixtures';
 
-const { When } = createBdd(test);
+const { When, Then } = createBdd(test);
 
 When(
   'I fill the new review body page using {string}',
@@ -14,3 +14,8 @@ When(
     }
   }
 );
+
+Then('I can see the Add a new review body page', async ({ createReviewBodyPage }) => {
+  //update
+  await createReviewBodyPage.assertOnCreateReviewbodyPage();
+});

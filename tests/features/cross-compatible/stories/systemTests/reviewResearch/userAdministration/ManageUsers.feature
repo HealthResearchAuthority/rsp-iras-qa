@@ -2,7 +2,7 @@
 Feature: HRAPROG-393- User Administration: Manage Review Bodies
 
     Background:
-        When I click the 'Manage review bodies' link on the 'Home_Page' #done
+        When I click the 'Manage_Review_Bodies' link on the 'Home_Page' #done
         Then I can see the 'Manage_Review_Bodies_Page' #done
         When I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page' #done
         Then I can see the 'Add_New_Review_Body_Page' #done

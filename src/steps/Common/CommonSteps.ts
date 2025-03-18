@@ -46,19 +46,7 @@ Given('I have navigated to the {string}', async ({ loginPage, homePage, createAp
 
 When(
   'I can see the {string}',
-  async (
-    {
-      loginPage,
-      homePage,
-      createApplicationPage,
-      proceedApplicationPage,
-      manageReviewBodiesPage,
-      createReviewBodyPage,
-      checkCreateReviewBodyPage,
-      createReviewBodyConfirmationPage,
-    },
-    page: string
-  ) => {
+  async ({ loginPage, homePage, createApplicationPage, proceedApplicationPage }, page: string) => {
     switch (page) {
       case 'Login_Page':
         await loginPage.assertOnLoginPage();
@@ -72,18 +60,7 @@ When(
       case 'Proceed_Application_Page':
         await proceedApplicationPage.assertOnProceedApplicationPage();
         break;
-      case 'Manage_Review_Bodies_Page':
-        await manageReviewBodiesPage.assertOnManageReviewBodiesPage();
-        break;
-      case 'Add_New_Review_Body_Page':
-        await createReviewBodyPage.assertOnCreateReviewbodyPage();
-        break;
-      case 'Check_And_Create_Review_Body_Page':
-        await checkCreateReviewBodyPage.assertOnCheckCreateReviewbodyPage();
-        break;
-      case 'Create_Review_Body_Confirmation':
-        await createReviewBodyConfirmationPage.assertOnCreateReviewbodyConfirmationPage();
-        break;
+
       default:
         throw new Error(`${page} is not a valid option`);
     }
@@ -149,20 +126,12 @@ Then('I see something {string}', async ({ commonItemsPage }, testType: string) =
 
 Then(
   'I click the {string} button on the {string}',
-  async (
-    { commonItemsPage, homePage, createReviewBodyPage, checkCreateReviewBodyPage },
-    buttonKey: string,
-    pageKey: string
-  ) => {
+  async ({ commonItemsPage, homePage }, buttonKey: string, pageKey: string) => {
     const buttonValue = commonItemsPage.buttonTextData[pageKey][buttonKey];
     if (pageKey === 'Banner' && buttonKey === 'Login') {
       await commonItemsPage.bannerLoginBtn.click();
     } else if (pageKey === 'Home_Page' && buttonKey === 'Login') {
       await homePage.loginBtn.click();
-    } else if (pageKey === 'Add_New_Review_Body_Page' && buttonKey === 'Complete') {
-      await createReviewBodyPage.completeBtn.click();
-    } else if (pageKey === 'Check_And_Create_Review_Body_Page' && buttonKey === 'Create_Profile') {
-      await checkCreateReviewBodyPage.createProfileBtn.click();
     } else {
       await commonItemsPage.govUkButton.getByText(buttonValue, { exact: true }).click();
     }
@@ -185,11 +154,7 @@ Then(
 
 Given(
   'I click the {string} link on the {string}',
-  async (
-    { commonItemsPage, homePage, manageReviewBodiesPage, createReviewBodyConfirmationPage },
-    linkKey: string,
-    pageKey: string
-  ) => {
+  async ({ commonItemsPage, homePage }, linkKey: string, pageKey: string) => {
     const linkValue = commonItemsPage.linkTextData[pageKey][linkKey];
     if (pageKey === 'Progress_Bar') {
       await commonItemsPage.qSetProgressBarStageLink.getByText(linkValue, { exact: true }).click();
@@ -197,14 +162,6 @@ Given(
       await commonItemsPage.bannerMyApplications.click();
     } else if (pageKey === 'Home_Page' && linkKey === 'My_Applications') {
       await homePage.myApplicationsLink.click();
-    } else if (pageKey === 'Home_Page' && linkKey === 'Manage_Review_Bodies') {
-      await homePage.manageReviewbodiesLink.click();
-    } else if (pageKey === 'Manage_Review_Bodies_Page' && linkKey === 'Add_New_Review_Body_Record') {
-      await manageReviewBodiesPage.addNewReviewBodyRecordLink.click();
-    } else if (pageKey === 'Create_Review_Body_Confirmation_Page' && linkKey === 'Back_To_Manage_Review_Bodies') {
-      await createReviewBodyConfirmationPage.backToManageReviewBodiesLink.click();
-    } else if (pageKey === 'Create_Review_Body_Confirmation_Page' && linkKey === 'Add_Another_Review_Body') {
-      await createReviewBodyConfirmationPage.addAnotherReviewBodyLink.click();
     } else {
       await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
     }

@@ -16,10 +16,14 @@ import CreateApplicationPage from '../pages/IRAS/CreateApplicationPage';
 import ProceedApplicationPage from '../pages/IRAS/ProceedApplicationPage';
 import QuestionSetPage from '../pages/Common/QuestionSetPage';
 import EmailNotificationPage from '../pages/Common/emailNotificationPage';
-import ManageReviewBodiesPage from '../pages/IRAS/reviewResearch/manageReviewBodies/ManageReviewBodiesPage';
-import CreateReviewBodyPage from '../pages/IRAS/reviewResearch/manageReviewBodies/CreateReviewBodyPage';
-import CheckCreateReviewBodyPage from '../pages/IRAS/reviewResearch/manageReviewBodies/CheckCreateReviewBodyPage';
-import CreateReviewBodyConfirmationPage from '../pages/IRAS/reviewResearch/manageReviewBodies/CreateReviewBodyConfirmationPage';
+import ManageReviewBodiesPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/ManageReviewBodiesPage';
+import CreateReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/CreateReviewBodyPage';
+import CheckCreateReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/CheckCreateReviewBodyPage';
+import CreateReviewBodyConfirmationPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/CreateReviewBodyConfirmationPage';
+import ManageUsersPage from '../pages/IRAS/reviewResearch/userAdministration/manageUsers/ManageUsersPage';
+import CreateUserProfilePage from '../pages/IRAS/reviewResearch/userAdministration/manageUsers/CreateUserProfilePage';
+import CreateUserProfileConfirmationPage from '../pages/IRAS/reviewResearch/userAdministration/manageUsers/CreateUserProfileConfirmationPage';
+import CheckCreateUserProfilePage from '../pages/IRAS/reviewResearch/userAdministration/manageUsers/CheckCreateUserProfilePage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -41,6 +45,10 @@ type CustomFixtures = {
   createReviewBodyPage: CreateReviewBodyPage;
   checkCreateReviewBodyPage: CheckCreateReviewBodyPage;
   createReviewBodyConfirmationPage: CreateReviewBodyConfirmationPage;
+  manageUsersPage: ManageUsersPage;
+  createUserProfilePage: CreateUserProfilePage;
+  createUserProfileConfirmationPage: CreateUserProfileConfirmationPage;
+  checkCreateUserProfilePage: CheckCreateUserProfilePage;
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -103,6 +111,18 @@ export const test = base.extend<CustomFixtures>({
 
   emailNotificationPage: async ({ page }, use) => {
     await use(new EmailNotificationPage(page));
+  },
+
+  createUserProfilePage: async ({ page }, use) => {
+    await use(new CreateUserProfilePage(page));
+  },
+
+  createUserProfileConfirmationPage: async ({ page }, use) => {
+    await use(new CreateUserProfileConfirmationPage(page));
+  },
+
+  checkCreateUserProfilePage: async ({ page }, use) => {
+    await use(new CheckCreateUserProfilePage(page));
   },
 
   manageReviewBodiesPage: async ({ page }, use) => {

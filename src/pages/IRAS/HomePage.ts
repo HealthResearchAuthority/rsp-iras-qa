@@ -14,6 +14,7 @@ export default class HomePage {
   readonly loginBtn: Locator;
   readonly myApplicationsLink: Locator;
   readonly manageReviewbodiesLink: Locator;
+  readonly manageUsersLink: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -32,6 +33,9 @@ export default class HomePage {
       exact: true,
     });
     this.manageReviewbodiesLink = this.mainPageContent.getByText(this.linkTextData.Home_Page.Manage_Review_Bodies, {
+      exact: true,
+    });
+    this.manageUsersLink = this.mainPageContent.getByText(this.linkTextData.Home_Page.Manage_Users, {
       exact: true,
     });
   }

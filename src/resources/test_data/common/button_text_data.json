@@ -26,5 +26,12 @@
   },
   "Check_Create_Review_Body_Page": {
     "Create_Profile": "Create profile"
+  },
+  "Create_User_Profile_Page": {
+    "Complete": "Complete",
+    "Back": "Back"
+  },
+  "Check_Create_User_Profile_Page": {
+    "Create_Profile": "Create profile"
   }
 }

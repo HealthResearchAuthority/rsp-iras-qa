@@ -1,6 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
-import * as checkCreateReviewBodyPageData from '../../../../resources/test_data/iras/reviewResearch/manageReviewBodies/pages/check_create_review_body_page_data.json';
-import * as buttonTextData from '../../../../resources/test_data/common/button_text_data.json';
+import * as checkCreateReviewBodyPageData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageReviewBodies/pages/check_create_review_body_page_data.json';
+import * as buttonTextData from '../../../../../resources/test_data/common/button_text_data.json';
 
 //Declare Page Objects
 export default class CheckCreateReviewBodyPage {

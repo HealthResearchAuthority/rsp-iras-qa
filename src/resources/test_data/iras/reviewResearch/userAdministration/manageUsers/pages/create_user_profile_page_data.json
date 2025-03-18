@@ -1,0 +1,36 @@
+{
+  "Create_User_Profile_Page": {
+    "selected_tab_top": "Manage review bodies",
+    "back_button": "Back",
+    "heading": "Add a new review body",
+    "organisation_name_label": "Organisation Name",
+    "country_label": "Country",
+    "country_option1_label": "England",
+    "country_option2_label": "Northern Ireland",
+    "country_option3_label": "Scotland",
+    "country_option4_label": "Wales",
+    "email_address_label": "Email address",
+    "description_label": "Description",
+    "complete_button": "Complete"
+  },
+  "Create_User_Profile": {
+    "Valid_Data_In_All_Fields": {
+      "organisation_name_text": "HSC Research and Development",
+      "country_checkbox": ["Northern Ireland"],
+      "email_address_text": "hscrd@health.org",
+      "description_text": "Responsible for confirmation of research governance compliance for projects taking place in Northern Ireland."
+    },
+    "Valid_Data_In_All_Mandatory_Fields": {
+      "organisation_name_text": "Health Research Authority (HRA)",
+      "country_checkbox": ["England"],
+      "email_address_text": "healthresearchauthority@reviewbodies.com",
+      "description_text": "This is a new description for testing purposes"
+    },
+    "Missing_All_Mandatory_Fields": {
+      "organisation_name_text": "",
+      "country_checkbox": "",
+      "email_address_text": "",
+      "description_text": ""
+    }
+  }
+}
