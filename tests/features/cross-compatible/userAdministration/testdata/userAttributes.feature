@@ -8,13 +8,13 @@ Feature: Generate test data for field validation of user attributes across user 
 
         Examples:
             | FieldName | TypeofData |
-            # | Title     | Valid      |
-            # | Title     | Invalid    |
-            # | Forename  | Valid      |
-            # | Forename  | Invalid    |
-            # | Surname   | Valid      |
-            # | Surname   | Invalid    |
+            | Title     | Valid      |
+            | Title     | Invalid    |
+            | Forename  | Valid      |
+            | Forename  | Invalid    |
+            | Surname   | Valid      |
+            | Surname   | Invalid    |
             | Email     | Valid      |
             | Email     | Invalid    |
-            # | Telephone | Valid      |
-            # | Telephone | Invalid    |
+            | Telephone | Valid      |
+            | Telephone | Invalid    |

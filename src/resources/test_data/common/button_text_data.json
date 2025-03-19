@@ -25,10 +25,11 @@
     "Back": "Back"
   },
   "Check_Create_Review_Body_Page": {
-    "Create_Profile": "Create profile"
+    "Create_Profile": "Create profile",
+    "Back": "Back"
   },
   "Create_User_Profile_Page": {
-    "Complete": "Complete",
+    "Continue": "Continue",
     "Back": "Back"
   },
   "Check_Create_User_Profile_Page": {

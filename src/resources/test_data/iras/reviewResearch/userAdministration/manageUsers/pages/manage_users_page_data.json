@@ -1,14 +1,16 @@
 {
   "Manage_Users_Page": {
-    "selected_tab_top": "Manage users",
+    "selected_tab_top": "Manage Users",
     "back_button": "Back",
-    "heading": "Manage review bodies",
-    "Add_New_User_Profile_Record_link": "Add a new user profile record",
-    "organisation_name_column_header": "Organisation name",
-    "country_column_header": "Country",
+    "heading": "Manage users",
+    "add_new_users_record_link": "Add a new user profile record",
+    "first_name_column_header": "First name",
+    "last_name_column_header": "Last name",
+    "email_address_column_header": "Email address",
     "status_column_header": "Status",
-    "actions_column_header": "Actions",
-    "find_review_body_title": "Find a review body",
+    "last_logged_in": "Last logged in",
+    "actions_column_header": "Action",
+    "find_review_body_title": "Find a user",
     "search_button": "Search",
     "search_box": ""
   }

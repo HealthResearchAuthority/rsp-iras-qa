@@ -17,7 +17,7 @@ export default class ManageUsersPage {
     this.manageUsersPageData = manageUsersPageData;
 
     //Locators
-    this.pageHeading = this.page.getByTestId('title');
+    this.pageHeading = this.page.locator('.govuk-heading-l');
     this.mainPageContent = this.page.getByTestId('main-content');
     this.addNewUserProfileRecordLink = this.mainPageContent.getByText(
       this.linkTextData.Manage_Users_Page.Add_New_User_Profile_Record,
@@ -29,7 +29,7 @@ export default class ManageUsersPage {
 
   //Page Methods
   async goto() {
-    await this.page.goto('application/startnewapplication'); // need to update URL here
+    await this.page.goto(''); // need to update URL here
   }
 
   async assertOnManageUsersPage() {

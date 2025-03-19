@@ -15,22 +15,49 @@
   },
   "Create_Review_Body": {
     "Valid_Data_In_All_Fields": {
-      "organisation_name_text": "HSC Research and Development",
+      "organisation_name_text": "QA Automation HSC Research and Development",
       "country_checkbox": ["Northern Ireland"],
-      "email_address_text": "hscrd@health.org",
-      "description_text": "Responsible for confirmation of research governance compliance for projects taking place in Northern Ireland."
+      "email_address_text": "qaauto_hscrd@health.org",
+      "description_text": "qaauto_Responsible for confirmation of research governance compliance for projects taking place in Northern Ireland."
+    },
+    "Valid_Data_In_All_Fields_Another": {
+      "organisation_name_text": "QA Automation HSC Research and Development Test",
+      "country_checkbox": ["Northern Ireland"],
+      "email_address_text": "qaautotest_hscrd@health.org",
+      "description_text": "qaautotest_Responsible for confirmation of research governance compliance for projects taking place in Northern Ireland."
     },
     "Valid_Data_In_All_Mandatory_Fields": {
-      "organisation_name_text": "Health Research Authority (HRA)",
+      "organisation_name_text": "QA Automation Health Research Authority (HRA)",
       "country_checkbox": ["England"],
-      "email_address_text": "healthresearchauthority@reviewbodies.com",
-      "description_text": "This is a new description for testing purposes"
+      "email_address_text": "qaauto_healthresearchauthority@reviewbodies.com",
+      "description_text": ""
     },
-    "Missing_All_Mandatory_Fields": {
+    "Valid_Data_In_All_Mandatory_Fields_Another": {
+      "organisation_name_text": "QA Automation Test Health Research Authority (HRA)",
+      "country_checkbox": ["England"],
+      "email_address_text": "qaautotest_healthresearchauthority@reviewbodies.com",
+      "description_text": ""
+    },
+    "Missing_Data_All_Fields": {
       "organisation_name_text": "",
       "country_checkbox": "",
       "email_address_text": "",
       "description_text": ""
+    },
+    "Missing_Data_All_Mandatory_Fields": {
+      "organisation_name_text": "",
+      "country_checkbox": "",
+      "email_address_text": "",
+      "description_text": "This is a new description for testing purposes"
+    },
+    "Organisation_Name_Field_Min_Data": {
+      "organisation_name_text": "",
+      "country_checkbox": "",
+      "email_address_text": "",
+      "description_text": ""
+    },
+    "Validation": {
+      "error_message": "An error has occured"
     }
   }
 }

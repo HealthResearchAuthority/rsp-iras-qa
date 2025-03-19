@@ -96,6 +96,10 @@ export default class CommonItemsPage {
       for (const checkbox of dataset[key]) {
         await locator.locator('..').getByLabel(checkbox, { exact: true }).check();
       }
+    } else if (typeAttribute === 'dropdown') {
+      for (const dropdown of dataset[key]) {
+        await locator.locator('..').getByLabel(dropdown, { exact: true }).check();
+      }
     }
   }
 

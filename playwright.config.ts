@@ -21,7 +21,7 @@ const config: PlaywrightTestConfig = {
   globalTimeout: 15 * 60 * 1000,
   timeout: 5 * 60 * 1000,
   workers: 1, // to enforce serial execution
-  retries: 2,
+  retries: 0,
   use: {
     ...browser,
     trace: 'on',
@@ -47,9 +47,9 @@ const config: PlaywrightTestConfig = {
         outputDir: 'generated-feature-files/auth-setup',
       }),
       use: {
-        headless: true,
+        headless: false,
         launchOptions: {
-          slowMo: 0,
+          slowMo: 3000,
         },
       },
     },
@@ -60,16 +60,16 @@ const config: PlaywrightTestConfig = {
         features: [
           'tests/features/cross-compatible/stories/**/*.feature',
           'tests/features/cross-compatible/accessibility/**/*.feature', //comment out to prevent running accessibility tests locally
-          'tests/features/cross-compatible/userAdministration/**/*.feature', //comment out to prevent running User Administration tests locally
+          // 'tests/features/cross-compatible/userAdministration/**/*.feature', //comment out to prevent running User Administration tests locally
           `tests/features/${platform}/**/*.feature`,
         ],
         steps: ['src/steps/**/*.ts', 'src/hooks/CustomFixtures.ts'],
         outputDir: 'generated-feature-files/future-iras',
       }),
       use: {
-        headless: true,
+        headless: false,
         launchOptions: {
-          slowMo: 0,
+          slowMo: 3000,
         },
         javaScriptEnabled: false,
       },

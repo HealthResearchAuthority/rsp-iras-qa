@@ -1,36 +1,46 @@
 {
   "Create_User_Profile_Page": {
-    "selected_tab_top": "Manage review bodies",
+    "selected_tab_top": "Manage Users",
     "back_button": "Back",
-    "heading": "Add a new review body",
-    "organisation_name_label": "Organisation Name",
-    "country_label": "Country",
-    "country_option1_label": "England",
-    "country_option2_label": "Northern Ireland",
-    "country_option3_label": "Scotland",
-    "country_option4_label": "Wales",
+    "heading": "Add a new user profile record",
+    "title_label": "Title",
+    "first_name_label": "First name",
+    "last_name_label": "Last name",
     "email_address_label": "Email address",
-    "description_label": "Description",
-    "complete_button": "Complete"
+    "telephone_label": "Telephone",
+    "organisation_label": "Organisation",
+    "job_title_label": "Job title",
+    "role_label": "Role",
+    "committee_label": "Committee",
+    "country_label": "Country",
+    "access_required_label": "Access Required",
+    "review_body_label": "Review body",
+    "continue_button": "Continue"
   },
   "Create_User_Profile": {
     "Valid_Data_In_All_Fields": {
-      "organisation_name_text": "HSC Research and Development",
-      "country_checkbox": ["Northern Ireland"],
+      "title_text": "Mr",
+      "first_name_text": "First Name Test",
+      "last_name_text": "Test Last Name",
       "email_address_text": "hscrd@health.org",
-      "description_text": "Responsible for confirmation of research governance compliance for projects taking place in Northern Ireland."
+      "telephone_text": "07000000000",
+      "organisation_text": "HRA",
+      "job_title_text": "Sr.Reviewer",
+      "role_dropdown": "Operations",
+      "committee_dropdown": "East Midlands-Derby",
+      "country_checkbox": "England",
+      "access_required_checkbox": "Research Ethics Committee",
+      "review_body_dropdown": "HRA"
     },
     "Valid_Data_In_All_Mandatory_Fields": {
-      "organisation_name_text": "Health Research Authority (HRA)",
-      "country_checkbox": ["England"],
-      "email_address_text": "healthresearchauthority@reviewbodies.com",
-      "description_text": "This is a new description for testing purposes"
+      "first_name_text": "First Name Test",
+      "last_name_text": "Test Last Name",
+      "email_address_text": "hscrd@health.org"
     },
     "Missing_All_Mandatory_Fields": {
-      "organisation_name_text": "",
-      "country_checkbox": "",
-      "email_address_text": "",
-      "description_text": ""
+      "first_name_text": "",
+      "last_name_text": "",
+      "email_address_text": ""
     }
   }
 }

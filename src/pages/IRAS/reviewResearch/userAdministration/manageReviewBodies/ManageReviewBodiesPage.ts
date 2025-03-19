@@ -29,7 +29,7 @@ export default class ManageReviewBodiesPage {
 
   //Page Methods
   async goto() {
-    await this.page.goto('application/startnewapplication'); // need to update URL here
+    await this.page.goto(''); // need to update URL here
   }
 
   async assertOnManageReviewBodiesPage() {

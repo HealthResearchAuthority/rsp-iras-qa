@@ -117,6 +117,10 @@ export const test = base.extend<CustomFixtures>({
     await use(new CreateUserProfilePage(page));
   },
 
+  manageUsersPage: async ({ page }, use) => {
+    await use(new ManageUsersPage(page));
+  },
+
   createUserProfileConfirmationPage: async ({ page }, use) => {
     await use(new CreateUserProfileConfirmationPage(page));
   },
