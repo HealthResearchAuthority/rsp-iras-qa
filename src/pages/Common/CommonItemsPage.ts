@@ -180,4 +180,10 @@ export default class CommonItemsPage {
     const screenshot = await locator.screenshot({ path: 'screenshot.png' });
     await $testInfo.attach(`[step] ${$step.title}`, { body: screenshot, contentType: 'image/png' });
   }
+  async generateUniqueEmail(keyVal: string): Promise<string> {
+    const prefix = 'QAAutomation';
+    const timestamp = new Date().toISOString().replace(/[-:.TZ]/g, '');
+    const domain = keyVal;
+    return `${prefix}${timestamp}${domain}`;
+  }
 }

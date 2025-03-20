@@ -30,5 +30,8 @@
   },
   "Manage_Users_Page": {
     "Add_New_User_Profile_Record": "Add new user profile record"
+  },
+  "Create_User_Profile_Confirmation_Page": {
+    "Back_To_Manage_Users": "Back to Manage users"
   }
 }

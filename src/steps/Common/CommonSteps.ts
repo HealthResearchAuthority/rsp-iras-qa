@@ -134,6 +134,7 @@ Then(
       await homePage.loginBtn.click();
     } else if (pageKey === 'Check_Create_User_Profile_Page' && buttonKey === 'Create_Profile') {
       await checkCreateUserProfilePage.create_profile_button.click();
+      //added this as a workaround >>Create_Profile button issue
     } else {
       await commonItemsPage.govUkButton.getByText(buttonValue, { exact: true }).click();
     }
@@ -156,7 +157,7 @@ Then(
 
 Given(
   'I click the {string} link on the {string}',
-  async ({ commonItemsPage, homePage }, linkKey: string, pageKey: string) => {
+  async ({ commonItemsPage, homePage, manageUsersPage }, linkKey: string, pageKey: string) => {
     const linkValue = commonItemsPage.linkTextData[pageKey][linkKey];
     if (pageKey === 'Progress_Bar') {
       await commonItemsPage.qSetProgressBarStageLink.getByText(linkValue, { exact: true }).click();
@@ -164,6 +165,8 @@ Given(
       await commonItemsPage.bannerMyApplications.click();
     } else if (pageKey === 'Home_Page' && linkKey === 'My_Applications') {
       await homePage.myApplicationsLink.click();
+    } else if (pageKey === 'Manage_Users_Page' && linkKey === 'View_Edit') {
+      await manageUsersPage.view_edit_link.click();
     } else {
       await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
     }

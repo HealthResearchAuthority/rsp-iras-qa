@@ -16,7 +16,7 @@ export default class ManageUsersPage {
   // readonly status_column_header: Locator;
   // readonly last_logged_in_column_header: Locator;
   // readonly actions_column_header: Locator;
-  // readonly view_edit_link: Locator;
+  readonly view_edit_link: Locator;
   // readonly find_user_title: Locator;
   // readonly search_box: Locator;
   // readonly search_button_label: Locator;
@@ -36,7 +36,7 @@ export default class ManageUsersPage {
     // this.status_column_header = this.page.getByTestId('main-content');
     // this.last_logged_in_column_header = this.page.getByTestId('main-content');
     // this.actions_column_header = this.page.getByTestId('main-content');
-    // this.view_edit_link = this.page.getByTestId('main-content');
+    this.view_edit_link = this.page.locator('(//a[@class="govuk-link" and text()="View/Edit"])[1]');
     // this.find_user_title = this.page.getByTestId('main-content');
     // this.search_box = this.page.getByTestId('main-content');
     // this.search_button_label = this.page.getByTestId('main-content');

@@ -7,11 +7,17 @@ Then(
   'I can see the create user profile confirmation page for {string}',
   async ({ createUserProfileConfirmationPage, createUserProfilePage }, datasetName: string) => {
     //update
+    //added a workaround for getting unique email here for automation run
     const dataset = createUserProfilePage.createUserProfilePageData.Create_User_Profile[datasetName];
     await createUserProfileConfirmationPage.assertOnCreateUserProfileConfirmationPage();
     const expectedConsent =
-      dataset.first_name_text + 'has been sent an email confirming their account details. Their status is now active.';
-    const actualConsent = await createUserProfileConfirmationPage.consentVal.nth(1).textContent();
+      dataset.first_name_text +
+      ' ' +
+      dataset.last_name_text +
+      ' has been sent an email confirming their account details. Their status is now active.';
+    const valConsentUI: string | null = await createUserProfileConfirmationPage.consentVal.textContent();
+    const safeValConsentUI = valConsentUI ?? 'default value';
+    const actualConsent = safeValConsentUI.replace(/\s+/g, ' ').trim();
     expect(actualConsent).toBe(expectedConsent);
   }
 );
