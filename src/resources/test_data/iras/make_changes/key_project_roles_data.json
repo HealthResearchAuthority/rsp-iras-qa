@@ -1,0 +1,13 @@
+{
+  "Key_Project_roles_Page": {
+    "heading": "Key project roles"
+  },
+  "Label_Texts": {
+    "no_projects": "You don't have any projects available in the new service"
+  },
+  "Valid_Data_All_Fields": {
+    "nations_participating_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+    "is_nhs_hsc_organisation_radio": "Yes",
+    "lead_nation_radio": "England"
+  }
+}

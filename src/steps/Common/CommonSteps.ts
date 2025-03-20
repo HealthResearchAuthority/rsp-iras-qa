@@ -24,48 +24,29 @@ AfterStep(async ({ page, $step, $testInfo }) => {
 
 Then('I capture the page screenshot', async () => {});
 
-Given(
-  'I have navigated to the {string}',
-  async ({ loginPage, homePage, createApplicationPage, myResearchProjectsPage }, page: string) => {
-    switch (page) {
-      case 'Login_Page':
-        await homePage.goto();
-        await homePage.loginBtn.click();
-        await loginPage.assertOnLoginPage();
-        break;
-      case 'Home_Page':
-        await homePage.goto();
-        await homePage.assertOnHomePage();
-        break;
-      case 'Create_Application_Page':
-        await createApplicationPage.goto();
-        await createApplicationPage.assertOnCreateApplicationPage();
-        break;
-      case 'My_Research_Projects_Page':
-        await myResearchProjectsPage.goto();
-        await myResearchProjectsPage.assertOnMyResearchProjectsPage();
-        break;
-      default:
-        throw new Error(`${page} is not a valid option`);
-    }
+Given('I have navigated to the {string}', async ({ loginPage, homePage, createApplicationPage }, page: string) => {
+  switch (page) {
+    case 'Login_Page':
+      await homePage.goto();
+      await homePage.loginBtn.click();
+      await loginPage.assertOnLoginPage();
+      break;
+    case 'Home_Page':
+      await homePage.goto();
+      await homePage.assertOnHomePage();
+      break;
+    case 'Create_Application_Page':
+      await createApplicationPage.goto();
+      await createApplicationPage.assertOnCreateApplicationPage();
+      break;
+    default:
+      throw new Error(`${page} is not a valid option`);
   }
-);
+});
 
 When(
   'I can see the {string}',
-  async (
-    {
-      loginPage,
-      homePage,
-      createApplicationPage,
-      proceedApplicationPage,
-      myResearchProjectsPage,
-      createProjectRecordPage,
-      projectDetailsIRASPage,
-      projectDetailsTitlePage,
-    },
-    page: string
-  ) => {
+  async ({ loginPage, homePage, createApplicationPage, proceedApplicationPage }, page: string) => {
     switch (page) {
       case 'Login_Page':
         await loginPage.assertOnLoginPage();
@@ -78,18 +59,6 @@ When(
         break;
       case 'Proceed_Application_Page':
         await proceedApplicationPage.assertOnProceedApplicationPage();
-        break;
-      case 'My_Research_Projects_Page':
-        await myResearchProjectsPage.assertOnMyResearchProjectsPage();
-        break;
-      case 'Create_Project_Record_Page':
-        await createProjectRecordPage.assertOnCreateProjectRecordPage();
-        break;
-      case 'Project_Details_IRAS_Page':
-        await projectDetailsIRASPage.assertOnProjectDetailsIRASPage();
-        break;
-      case 'Project_Details_Title_Page':
-        await projectDetailsTitlePage.assertOnProjectDetailsTitlePage();
         break;
       default:
         throw new Error(`${page} is not a valid option`);

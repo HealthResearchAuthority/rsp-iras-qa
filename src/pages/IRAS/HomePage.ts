@@ -23,7 +23,7 @@ export default class HomePage {
 
     //Locators
     this.mainPageContent = this.page.getByTestId('main-content');
-    this.pageHeading = this.page.getByTestId('govuk-notification-banner-title');
+    this.pageHeading = this.page.getByTestId('title');
     this.loginBtn = this.page
       .locator('.gem-c-button')
       .and(this.page.getByText(this.buttonTextData.Home_Page.Login, { exact: true }));
