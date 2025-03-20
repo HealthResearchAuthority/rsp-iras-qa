@@ -2,7 +2,7 @@
   "Create_Review_Body_Page": {
     "selected_tab_top": "Manage review bodies",
     "back_button": "Back",
-    "heading": "Add a new review body",
+    "page_heading": "Add a new review body",
     "organisation_name_label": "Organisation Name",
     "country_label": "Country",
     "country_option1_label": "England",

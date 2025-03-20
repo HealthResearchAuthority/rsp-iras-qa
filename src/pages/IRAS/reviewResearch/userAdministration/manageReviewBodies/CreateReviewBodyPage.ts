@@ -7,9 +7,9 @@ export default class CreateReviewBodyPage {
   readonly page: Page;
   readonly createReviewBodyPageData: typeof createReviewBodyPageData;
   readonly buttonTextData: typeof buttonTextData;
-  readonly pageHeading: Locator;
-  readonly organisationNameLbl: Locator;
-  readonly organisationNameVal: Locator;
+  readonly page_heading: Locator;
+  readonly organisation_name_label: Locator;
+  readonly organisation_name_text: Locator;
   readonly organisationNameError: Locator;
   readonly countryLbl: Locator;
   readonly countryVal: Locator;
@@ -31,9 +31,9 @@ export default class CreateReviewBodyPage {
     this.createReviewBodyPageData = createReviewBodyPageData;
 
     //Locators
-    this.pageHeading = this.page.getByTestId('title'); // update
-    this.organisationNameLbl = this.page.getByTestId('Name').locator('label'); // update
-    this.organisationNameVal = this.page.getByTestId('Name').locator('label'); // update
+    this.page_heading = this.page.getByTestId('title'); // update
+    this.organisation_name_label = this.page.getByTestId('Name').locator('label'); // update
+    this.organisation_name_text = this.page.getByTestId('Name').locator('label'); // update
     this.organisationNameError = this.page.getByTestId('Name').locator('label'); // update
     this.countryLbl = this.page.getByTestId('app-name'); // update
     this.countryVal = this.page.getByTestId('app-name'); // update selected country here
@@ -58,9 +58,9 @@ export default class CreateReviewBodyPage {
   }
 
   async assertOnCreateReviewbodyPage() {
-    await expect(this.pageHeading).toBeVisible();
-    await expect(this.pageHeading).toHaveText(this.createReviewBodyPageData.Create_Review_Body_Page.heading);
-    await expect(this.organisationNameLbl).toHaveText(
+    await expect(this.page_heading).toBeVisible();
+    await expect(this.page_heading).toHaveText(this.createReviewBodyPageData.Create_Review_Body_Page.page_heading);
+    await expect(this.organisation_name_label).toHaveText(
       this.createReviewBodyPageData.Create_Review_Body_Page.organisation_name_label
     );
     await expect(this.countryLbl).toHaveText(this.createReviewBodyPageData.Create_Review_Body_Page.country_label);

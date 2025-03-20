@@ -24,7 +24,7 @@ Then('I can see the Add new review body page for {string}', async ({ createRevie
   //update
   const dataset = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body[datasetName];
   await createReviewBodyPage.assertOnCreateReviewbodyPage();
-  const actualOrganisationName = await createReviewBodyPage.organisationNameVal.nth(1).textContent();
+  const actualOrganisationName = await createReviewBodyPage.organisation_name_text.nth(1).textContent();
   const actualCountry = await createReviewBodyPage.countryVal.textContent(); //selected country
   const actualEmailAddress = await createReviewBodyPage.emailAddressVal.textContent();
   const actualDescription = await createReviewBodyPage.descriptionVal.textContent();

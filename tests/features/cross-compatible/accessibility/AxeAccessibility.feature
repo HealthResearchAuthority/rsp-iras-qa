@@ -36,7 +36,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
         And I analyse the results from the Axe scan
         Then I expect to receive no WCAG Violations
 
-    @axeAccessibilityManageUsers @adminUser @axeManageUsersList
+    @axeAccessibilityManageUsers @adminUser
     Scenario: Manage Users list page
         Given I have navigated to the 'Home_Page'
         When I click the 'Manage_Users' link on the 'Home_Page'       
@@ -51,50 +51,43 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
         When I click the 'Manage_Users' link on the 'Home_Page'       
         Then I can see the Manage users list page
         When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'       
-        Then I can see the Add a new user profile page
+        Then I can see the Add a new user profile page        
         When I Scan the page with the Axe Accessibilty Tool
         And I analyse the results from the Axe scan
         Then I expect to receive no WCAG Violations
 
-    # @axeAccessibilityManageUsers @adminUser
-    # Scenario Outline: Check and create user profile page        
-    #     Given I have navigated to the 'Home_Page'
-    #     When I click the 'Manage_Users' link on the 'Home_Page'#done        
-    #     Then I can see the Manage users list page #done
-    #     When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page' #done        
-    #     Then I can see the Add a new user profile page   #done
-    #     When I fill the new user profile page using '<Add_User_Profile>' #done 
-    #     And I click the 'Complete' button on the 'Create_User_Profile_Page'  #done      
-    #     Then I can see the Check and create user profile page for '<Add_User_Profile>' #done 
-    #     When I Scan the page with the Axe Accessibilty Tool
-    #     And I analyse the results from the Axe scan
-    #     Then I expect to receive no WCAG Violations   
+    @axeAccessibilityManageUsers @adminUser
+    Scenario: Check and create user profile page        
+        Given I have navigated to the 'Home_Page'
+        When I click the 'Manage_Users' link on the 'Home_Page'        
+        Then I can see the Manage users list page
+        When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'        
+        Then I can see the Add a new user profile page
+        When I fill the new user profile page using 'Valid_Data_In_All_Fields_Role_Operations'
+        And I click the 'Continue' button on the 'Create_User_Profile_Page'    
+        Then I can see the Check and create user profile page for 'Valid_Data_In_All_Fields_Role_Operations'
+        When I Scan the page with the Axe Accessibilty Tool
+        And I analyse the results from the Axe scan
+        Then I expect to receive no WCAG Violations  
+       
+       
 
-    #     Examples:
-    #     | Add_User_Profile                      |
-    #     | Valid_Data_In_All_Fields             | 
-    #     | Valid_Data_In_All_Mandatory_Fields   | 
+    @axeAccessibilityManageUsers @adminUser @axeManageUsers
+    Scenario: Create user profile confirmation page        
+        Given I have navigated to the 'Home_Page'
+        When I click the 'Manage_Users' link on the 'Home_Page'      
+        Then I can see the Manage users list page
+        When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'        
+        Then I can see the Add a new user profile page
+        When I fill the new user profile page using 'Valid_Data_In_All_Fields_Role_Operations'
+        And I click the 'Continue' button on the 'Create_User_Profile_Page'       
+        Then I can see the Check and create user profile page for 'Valid_Data_In_All_Fields_Role_Operations' 
+        And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'       
+        Then I can see the create user profile confirmation page for 'Valid_Data_In_All_Fields_Role_Operations'
+        When I Scan the page with the Axe Accessibilty Tool
+        And I analyse the results from the Axe scan
+        Then I expect to receive no WCAG Violations  
 
-    # @axeAccessibilityManageUsers @adminUser
-    # Scenario Outline: Create user profile confirmation page        
-    #     Given I have navigated to the 'Home_Page'
-    #     When I click the 'Manage_Users' link on the 'Home_Page'#done        
-    #     Then I can see the Manage users list page #done
-    #     When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page' #done        
-    #     Then I can see the Add a new user profile page   #done
-    #     When I fill the new user profile page using '<Add_User_Profile>' #done 
-    #     And I click the 'Complete' button on the 'Create_User_Profile_Page'       
-    #     Then I can see the Check and create user profile page for '<Add_User_Profile>' 
-    #     And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page' #done        
-    #     Then I can see the create user profile confirmation page for '<Add_User_Profile>' #done
-    #     When I Scan the page with the Axe Accessibilty Tool
-    #     And I analyse the results from the Axe scan
-    #     Then I expect to receive no WCAG Violations   
-
-    #     Examples:
-    #     | Add_User_Profile                      |
-    #     | Valid_Data_In_All_Fields             | 
-    #     | Valid_Data_In_All_Mandatory_Fields   |
 
     # @axeAccessibilityManageReviewBodies @adminUser
     # Scenario: Manage Review Bodies list page

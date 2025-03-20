@@ -1,17 +1,20 @@
 {
   "Manage_Users_Page": {
-    "selected_tab_top": "Manage Users",
+    "selected_bread_crumbs": "Manage Users",
     "back_button": "Back",
-    "heading": "Manage users",
+    "page_heading": "Manage Users",
     "add_new_users_record_link": "Add a new user profile record",
     "first_name_column_header": "First name",
     "last_name_column_header": "Last name",
     "email_address_column_header": "Email address",
     "status_column_header": "Status",
-    "last_logged_in": "Last logged in",
+    "last_logged_in_column_header": "Last logged in",
     "actions_column_header": "Action",
     "find_review_body_title": "Find a user",
     "search_button": "Search",
+    "view_edit_link": "View/Edit",
+    "find_user_title": "Find a user",
+    "search_button_label": "Search",
     "search_box": ""
   }
 }

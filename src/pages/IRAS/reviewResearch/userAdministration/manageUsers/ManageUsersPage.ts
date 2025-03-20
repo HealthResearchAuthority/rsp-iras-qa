@@ -7,9 +7,19 @@ export default class ManageUsersPage {
   readonly page: Page;
   readonly manageUsersPageData: typeof manageUsersPageData;
   readonly linkTextData: typeof linkTextData;
-  readonly pageHeading: Locator;
-  readonly addNewUserProfileRecordLink: Locator;
-  readonly mainPageContent: Locator;
+  readonly page_heading: Locator;
+  // readonly add_new_users_record_link: Locator;
+  // // readonly mainPageContent: Locator;
+  // readonly first_name_column_header: Locator;
+  // readonly last_name_column_header: Locator;
+  // readonly email_address_column_header: Locator;
+  // readonly status_column_header: Locator;
+  // readonly last_logged_in_column_header: Locator;
+  // readonly actions_column_header: Locator;
+  // readonly view_edit_link: Locator;
+  // readonly find_user_title: Locator;
+  // readonly search_box: Locator;
+  // readonly search_button_label: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -17,24 +27,35 @@ export default class ManageUsersPage {
     this.manageUsersPageData = manageUsersPageData;
 
     //Locators
-    this.pageHeading = this.page.locator('.govuk-heading-l');
-    this.mainPageContent = this.page.getByTestId('main-content');
-    this.addNewUserProfileRecordLink = this.mainPageContent.getByText(
-      this.linkTextData.Manage_Users_Page.Add_New_User_Profile_Record,
-      {
-        exact: true,
-      }
-    );
-  }
-
-  //Page Methods
-  async goto() {
-    await this.page.goto(''); // need to update URL here
+    this.page_heading = this.page.locator('.govuk-heading-l');
+    // this.mainPageContent = this.page.getByTestId('main-content');
+    // this.add_new_users_record_link = this.page.getByTestId('main-content');
+    // this.first_name_column_header = this.page.getByTestId('main-content');
+    // this.last_name_column_header = this.page.getByTestId('main-content');
+    // this.email_address_column_header = this.page.getByTestId('main-content');
+    // this.status_column_header = this.page.getByTestId('main-content');
+    // this.last_logged_in_column_header = this.page.getByTestId('main-content');
+    // this.actions_column_header = this.page.getByTestId('main-content');
+    // this.view_edit_link = this.page.getByTestId('main-content');
+    // this.find_user_title = this.page.getByTestId('main-content');
+    // this.search_box = this.page.getByTestId('main-content');
+    // this.search_button_label = this.page.getByTestId('main-content');
   }
 
   async assertOnManageUsersPage() {
     //need to update code here
-    await expect(this.pageHeading).toBeVisible();
-    await expect(this.pageHeading).toHaveText(this.manageUsersPageData.Manage_Users_Page.heading);
+    await expect(this.page_heading).toBeVisible();
+    await expect(this.page_heading).toHaveText(this.manageUsersPageData.Manage_Users_Page.page_heading);
+    //need to update code here
+    // await expect(this.add_new_users_record_link).toHaveText(this.manageUsersPageData.Manage_Users_Page.add_new_users_record_link);
+    // await expect(this.first_name_column_header).toHaveText(this.manageUsersPageData.Manage_Users_Page.first_name_column_header);
+    // await expect(this.last_name_column_header).toHaveText(this.manageUsersPageData.Manage_Users_Page.last_logged_in_column_header);
+    // await expect(this.email_address_column_header).toHaveText(this.manageUsersPageData.Manage_Users_Page.email_address_column_header);
+    // await expect(this.status_column_header).toHaveText(this.manageUsersPageData.Manage_Users_Page.status_column_header);
+    // await expect(this.last_logged_in_column_header).toHaveText(this.manageUsersPageData.Manage_Users_Page.last_logged_in_column_header);
+    // await expect(this.actions_column_header).toHaveText(this.manageUsersPageData.Manage_Users_Page.actions_column_header);
+    // await expect(this.view_edit_link).toHaveText(this.manageUsersPageData.Manage_Users_Page.view_edit_link);
+    // await expect(this.find_user_title).toHaveText(this.manageUsersPageData.Manage_Users_Page.find_user_title);
+    // await expect(this.search_button_label).toHaveText(this.manageUsersPageData.Manage_Users_Page.search_button_label);
   }
 }

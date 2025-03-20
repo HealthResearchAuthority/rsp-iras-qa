@@ -33,6 +33,9 @@
     "Back": "Back"
   },
   "Check_Create_User_Profile_Page": {
-    "Create_Profile": "Create profile"
+    "Create_Profile": "Create Profile"
+  },
+  "User_Profile_Page": {
+    "Disable_User_Record": "Disable user record"
   }
 }

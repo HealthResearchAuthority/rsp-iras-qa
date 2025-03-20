@@ -88,7 +88,7 @@ export default class CommonItemsPage {
   async fillUIComponent<PageObject>(dataset: JSON, key: string, page: PageObject) {
     const locator: Locator = page[key];
     const typeAttribute = await locator.first().getAttribute('type');
-    if (typeAttribute === 'text' || typeAttribute === 'date') {
+    if (typeAttribute === 'text' || typeAttribute === 'date' || typeAttribute === 'email' || typeAttribute === 'tel') {
       await locator.fill(dataset[key]);
     } else if (typeAttribute === 'radio') {
       await locator.locator('..').getByLabel(dataset[key], { exact: true }).check();
@@ -96,9 +96,12 @@ export default class CommonItemsPage {
       for (const checkbox of dataset[key]) {
         await locator.locator('..').getByLabel(checkbox, { exact: true }).check();
       }
-    } else if (typeAttribute === 'dropdown') {
-      for (const dropdown of dataset[key]) {
-        await locator.locator('..').getByLabel(dropdown, { exact: true }).check();
+    } else {
+      const isSelectTag = await locator.evaluate((el) => el.tagName.toLowerCase() === 'select');
+      if (isSelectTag) {
+        {
+          await locator.selectOption({ label: dataset[key] });
+        }
       }
     }
   }

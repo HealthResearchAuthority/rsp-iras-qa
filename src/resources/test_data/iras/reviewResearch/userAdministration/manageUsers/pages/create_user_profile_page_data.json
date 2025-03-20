@@ -2,7 +2,7 @@
   "Create_User_Profile_Page": {
     "selected_tab_top": "Manage Users",
     "back_button": "Back",
-    "heading": "Add a new user profile record",
+    "page_heading": "Add a new user profile record",
     "title_label": "Title",
     "first_name_label": "First name",
     "last_name_label": "Last name",
@@ -18,19 +18,27 @@
     "continue_button": "Continue"
   },
   "Create_User_Profile": {
-    "Valid_Data_In_All_Fields": {
+    "Valid_Data_In_All_Fields_Role_Operations": {
       "title_text": "Mr",
-      "first_name_text": "First Name Test",
+      "first_name_text": "QA Automation First Name Test",
       "last_name_text": "Test Last Name",
-      "email_address_text": "hscrd@health.org",
+      "email_address_text": "QAAutomation3hscrd@health.org",
       "telephone_text": "07000000000",
-      "organisation_text": "HRA",
+      "organisation_text": "QA Automation HRA",
       "job_title_text": "Sr.Reviewer",
-      "role_dropdown": "Operations",
-      "committee_dropdown": "East Midlands-Derby",
-      "country_checkbox": "England",
-      "access_required_checkbox": "Research Ethics Committee",
-      "review_body_dropdown": "HRA"
+      "role_dropdown": "operations",
+      "country_checkbox": ["England"],
+      "access_required_checkbox": ["Research Ethics Comittee"]
+    },
+    "Valid_Data_In_All_Fields_Role_Reviewer": {
+      "title_text": "Mr",
+      "first_name_text": "QA Automation First Name Test",
+      "last_name_text": "Test Last Name",
+      "email_address_text": "QAAutomationhscrd@health.org",
+      "telephone_text": "07000000000",
+      "organisation_text": "QA Automation HRA",
+      "job_title_text": "Sr.Reviewer",
+      "role_dropdown": "reviewer"
     },
     "Valid_Data_In_All_Mandatory_Fields": {
       "first_name_text": "First Name Test",

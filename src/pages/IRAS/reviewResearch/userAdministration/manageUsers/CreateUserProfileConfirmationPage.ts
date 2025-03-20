@@ -1,17 +1,17 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as createUserProfileConfirmationPageData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageUsers/pages/create_user_profile_confirmation_page_data.json';
-import * as buttonTextData from '../../../../../resources/test_data/common/button_text_data.json';
+// import * as buttonTextData from '../../../../../resources/test_data/common/button_text_data.json';
 
 //Declare Page Objects
 export default class CreateUserProfileConfirmationPage {
   readonly page: Page;
   readonly createUserProfileConfirmationPageData: typeof createUserProfileConfirmationPageData;
-  readonly buttonTextData: typeof buttonTextData;
-  readonly selectedBreadCrumbs: Locator;
-  readonly confirmationMessageContent: Locator;
+  // readonly buttonTextData: typeof buttonTextData;
+  // readonly selectedBreadCrumbs: Locator;
+  readonly confirmation_message: Locator;
   readonly consentVal: Locator;
-  readonly addAnotherReviewBodyLink: Locator;
-  readonly backToManageReviewBodiesLink: Locator;
+  readonly add_another_user_link: Locator;
+  readonly back_to_manage_user_link: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -19,29 +19,28 @@ export default class CreateUserProfileConfirmationPage {
     this.createUserProfileConfirmationPageData = createUserProfileConfirmationPageData;
 
     //Locators
-    this.selectedBreadCrumbs = this.page.getByTestId('title'); // update
-    this.confirmationMessageContent = this.page.getByTestId('Name').locator('label'); // update
-    this.consentVal = this.page.getByTestId('app-name'); // update
-    this.addAnotherReviewBodyLink = this.page.getByTestId('Name').locator('label'); // update
-    this.backToManageReviewBodiesLink = this.page.getByTestId('Name').locator('label'); // update
+    // this.selectedBreadCrumbs = this.page.getByTestId('title'); // update
+    this.confirmation_message = this.page.locator('.govuk-panel__title');
+    this.add_another_user_link = this.page.locator('a[href="/admin/users/createuser"]');
+    this.back_to_manage_user_link = this.page.locator('//a[@href="/admin/users" and text()="Back to Manage users"]');
   }
 
   //Page Methods
-  async goto() {
-    await this.page.goto('application/startnewapplication'); //update
-  }
+  // async goto() {
+  //   await this.page.goto('application/startnewapplication'); //update
+  // }
 
   async assertOnCreateUserProfileConfirmationPage() {
     //update
-    await expect(this.confirmationMessageContent).toBeVisible();
-    await expect(this.confirmationMessageContent).toHaveText(
-      this.createUserProfileConfirmationPageData.Create_Review_Body_Confirmation_Page.confirmation_message
+    await expect(this.confirmation_message).toBeVisible();
+    await expect(this.confirmation_message).toHaveText(
+      this.createUserProfileConfirmationPageData.Create_User_Profile_Confirmation_Page.confirmation_message
     );
-    await expect(this.addAnotherReviewBodyLink).toHaveText(
-      this.createUserProfileConfirmationPageData.Create_Review_Body_Confirmation_Page.add_another_review_body_link
+    await expect(this.add_another_user_link).toHaveText(
+      this.createUserProfileConfirmationPageData.Create_User_Profile_Confirmation_Page.add_another_user_link
     );
-    await expect(this.backToManageReviewBodiesLink).toHaveText(
-      this.createUserProfileConfirmationPageData.Create_Review_Body_Confirmation_Page.back_to_manage_review_bodies_link
+    await expect(this.back_to_manage_user_link).toHaveText(
+      this.createUserProfileConfirmationPageData.Create_User_Profile_Confirmation_Page.back_to_manage_user_link
     );
   }
 }
