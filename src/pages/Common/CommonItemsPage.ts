@@ -3,6 +3,7 @@ import * as buttonTextData from '../../resources/test_data/common/button_text_da
 import * as linkTextData from '../../resources/test_data/common/link_text_data.json';
 import fs from 'fs';
 import path from 'path';
+import * as fse from 'fs-extra';
 
 //Declare Page Objects
 export default class CommonItemsPage {
@@ -185,5 +186,21 @@ export default class CommonItemsPage {
     const timestamp = new Date().toISOString().replace(/[-:.TZ]/g, '');
     const domain = keyVal;
     return `${prefix}${timestamp}${domain}`;
+  }
+  async updateEmail(filePath: string, newEmail: string) {
+    (async () => {
+      try {
+        const data = await fse.readJson(filePath);
+        data.Create_User_Profile.Valid_Data_In_All_Fields_Role_Operations.email_address_text = newEmail;
+        await fse.writeJson(filePath, data, { spaces: 2 });
+      } catch (error) {
+        console.error('Error updating email:', error);
+      }
+    })();
+  }
+  async removeUnwantedChars(value: string | null): Promise<string> {
+    const safe_val = value ?? 'default value';
+    const actual_val = safe_val.replace(/\s+/g, ' ').trim();
+    return actual_val;
   }
 }

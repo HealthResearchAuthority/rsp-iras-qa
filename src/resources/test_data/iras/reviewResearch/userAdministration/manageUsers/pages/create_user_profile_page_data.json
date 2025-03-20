@@ -22,19 +22,23 @@
       "title_text": "Mr",
       "first_name_text": "QA Automation First Name Test",
       "last_name_text": "Test Last Name",
-      "email_address_text": "hscrd@health.org",
+      "email_address_text": "QAAutomation20250320204921906hscrd@health.org",
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA",
       "job_title_text": "Sr.Reviewer",
       "role_dropdown": "operations",
-      "country_checkbox": ["England"],
-      "access_required_checkbox": ["Research Ethics Comittee"]
+      "country_checkbox": [
+        "England"
+      ],
+      "access_required_checkbox": [
+        "Research Ethics Comittee"
+      ]
     },
     "Valid_Data_In_All_Fields_Role_Reviewer": {
       "title_text": "Mr",
       "first_name_text": "QA Automation First Name Test",
       "last_name_text": "Test Last Name",
-      "email_address_text": "QAAutomationhscrd@health.org",
+      "email_address_text": "hscrd@health.org",
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA",
       "job_title_text": "Sr.Reviewer",

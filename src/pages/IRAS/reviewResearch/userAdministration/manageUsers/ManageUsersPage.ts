@@ -58,4 +58,44 @@ export default class ManageUsersPage {
     // await expect(this.find_user_title).toHaveText(this.manageUsersPageData.Manage_Users_Page.find_user_title);
     // await expect(this.search_button_label).toHaveText(this.manageUsersPageData.Manage_Users_Page.search_button_label);
   }
+  async checkAlphabeticalSorting(dataset: any) {
+    const SEARCH_RECORD =
+      dataset.first_name_text +
+      '|' +
+      dataset.last_name_text +
+      '|' +
+      dataset.email_address_text +
+      '| ACTIVE |' +
+      '| View/Edit'; //'"alfred | dcruz | alfred.dcruz@hra.nhs.uk | ACTIVE |  | View/Edit"'; //  | ACTIVE |  | View/Edit
+    let foundRecord = false;
+    let hasNextPage = true;
+    const firstNames: string[] = [];
+    while (hasNextPage) {
+      // Get all rows on the current page
+      const rows = await this.page.locator('.govuk-table__row').all(); // Adjust selector
+      for (const row of rows) {
+        // Extract and combine all column values into a full-row string
+        const columns = await row.locator('.govuk-table__cell').allTextContents(); // Adjust selector
+        const fullRowData = columns.map((col) => col.trim()).join(' | '); // Extract first name (assuming it's in the first column)
+        const firstName = columns[0]?.trim() || '';
+        firstNames.push(firstName);
+        // Check if the record matches the search
+
+        if (fullRowData === SEARCH_RECORD) {
+          foundRecord = true;
+        }
+      }
+      // Check if pagination "Next" button is available
+      const nextButton = this.page.locator('.govuk-pagination__next a'); // Adjust selector
+      hasNextPage = (await nextButton.isVisible()) && !(await nextButton.isDisabled());
+      if (hasNextPage) {
+        await nextButton.click();
+        await this.page.waitForLoadState('domcontentloaded');
+      }
+    }
+    // Validate if names are sorted alphabetically
+    const sortedFirstNames = [...firstNames].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
+    expect(firstNames).toEqual(sortedFirstNames); // Validate that the record was found
+    expect(foundRecord).toBeTruthy();
+  }
 }

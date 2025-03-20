@@ -63,12 +63,12 @@ export default class CheckCreateUserProfilePage {
     this.title_text = this.page.locator('(//tr[@class="govuk-table__row"])[1]/td[2]');
     this.title_change_link = this.page.locator('(//tr[@class="govuk-table__row"])[1]/td[3]/button');
     this.first_name_label = this.page.locator('(//tr[@class="govuk-table__row"])[2]/td/b');
-    this.first_name_text = this.page.getByTestId('(//tr[@class="govuk-table__row"])[2]/td[2]');
+    this.first_name_text = this.page.locator('(//tr[@class="govuk-table__row"])[2]/td[2]');
     this.first_name_change_link = this.page.locator('(//tr[@class="govuk-table__row"])[2]/td[3]/button');
     this.last_name_label = this.page.locator('[class="govuk-label"][for="LastName"] b');
-    this.last_name_text = this.page.getByTestId('LastName');
+    this.last_name_text = this.page.locator('(//tr[@class="govuk-table__row"])[3]/td[2]');
     this.email_address_label = this.page.locator('[class="govuk-label"][for="Email"] b');
-    this.email_address_text = this.page.getByTestId('Email');
+    this.email_address_text = this.page.locator('//input[@name="Email"]/..');
     this.telephone_label = this.page.locator('[class="govuk-label"][for="Telephone"] b');
     this.telephone_text = this.page.getByTestId('Telephone');
     this.organisation_label = this.page.locator('[class="govuk-label"][for="Organisation"] b');
