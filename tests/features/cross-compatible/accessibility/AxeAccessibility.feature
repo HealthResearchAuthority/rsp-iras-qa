@@ -68,9 +68,8 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
         Then I can see the Check and create user profile page for 'Valid_Data_In_All_Fields_Role_Operations'
         When I Scan the page with the Axe Accessibilty Tool
         And I analyse the results from the Axe scan
-        Then I expect to receive no WCAG Violations  
-       
-       
+        Then I expect to receive no WCAG Violations   
+      
 
     @axeAccessibilityManageUsers @adminUser
     Scenario: Create user profile confirmation page        
@@ -94,10 +93,23 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
         When I click the 'Manage_Users' link on the 'Home_Page'      
         Then I can see the Manage users list page
         When I click the 'View_Edit' link on the 'Manage_Users_Page'        
-        # Then I can see the user profile page       
+        Then I can see the user profile page     
         When I Scan the page with the Axe Accessibilty Tool
         And I analyse the results from the Axe scan
         Then I expect to receive no WCAG Violations 
+
+    @axeAccessibilityManageUsers @adminUser @axeManageUsersEdit
+    Scenario: Edit user profile page        
+        Given I have navigated to the 'Home_Page'
+        When I click the 'Manage_Users' link on the 'Home_Page'      
+        Then I can see the Manage users list page
+        When I click the 'View_Edit' link on the 'Manage_Users_Page'        
+        Then I can see the user profile page
+        When I click the 'Change' link on the 'User_Profile_Page'
+        Then I can see the edit user profile page    
+        When I Scan the page with the Axe Accessibilty Tool
+        And I analyse the results from the Axe scan
+        Then I expect to receive no WCAG Violations     
 
 
     # @axeAccessibilityManageReviewBodies @adminUser

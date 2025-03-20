@@ -17,9 +17,9 @@ Feature: HRAPROG-394- User Administration: Manage Users
         Then I can see the create user profile confirmation page for '<Add_User_Profile>'
         When I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'       
         Then I can see the Manage users list page
-        # Then I can see the list is sorted by default in the alphabetical order of 'Organisation Name'
-        # And I can see the newly created 'review body' should be present in the list
-        # And I can see the status of the newly created 'review body' is 'active'
+        # Then I can see the list is sorted by default in the alphabetical order of 'First Name'
+        # And I can see the newly created user record should be present in the list
+        # And I can see the status of the newly created user record is 'active'
 
         Examples:
         | Add_User_Profile                                      |

@@ -41,6 +41,7 @@ export default class UserProfilePage {
   readonly disable_this_user_record_label: Locator;
   readonly disable_this_user_record_sub_label: Locator;
   readonly disable_user_record_button: Locator;
+  readonly first_change_link: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -48,55 +49,56 @@ export default class UserProfilePage {
     this.userProfilePageData = userProfilePageData;
 
     //Locators
-    this.selected_bread_crumbs = this.page.getByTestId('title'); // update
-    this.back_button = this.page.getByTestId('title'); // update
-    this.page_heading = this.page.getByTestId('title'); // update
+    // this.selected_bread_crumbs = this.page.getByTestId('title'); // update
+    // this.back_button = this.page.getByTestId('title'); // update
+    this.page_heading = this.page.locator('.govuk-heading-l'); // update
+    this.first_change_link = this.page.locator('(//a[@class="govuk-link" and text()="Change"])[1]'); // update
 
-    this.title_label = this.page.getByTestId('Name').locator('label'); // update
-    this.title_text = this.page.getByTestId('Name').locator('label'); // update
-    this.title_change_link = this.page.getByTestId('Name').locator('label'); // update
+    // this.title_label = this.page.getByTestId('Name').locator('label'); // update
+    // this.title_text = this.page.getByTestId('Name').locator('label'); // update
+    // this.title_change_link = this.page.getByTestId('Name').locator('label'); // update
 
-    this.first_name_label = this.page.getByTestId('app-name'); // update#
-    this.first_name_text = this.page.getByTestId('app-name'); // update
-    this.first_name_change_link = this.page.getByTestId('Name').locator('label'); // update
+    // this.first_name_label = this.page.getByTestId('app-name'); // update#
+    // this.first_name_text = this.page.getByTestId('app-name'); // update
+    // this.first_name_change_link = this.page.getByTestId('Name').locator('label'); // update
 
-    this.last_name_label = this.page.getByTestId('app-name'); // update#
-    this.last_name_text = this.page.getByTestId('app-name'); // update
-    this.last_name_change_link = this.page.getByTestId('Name').locator('label'); // update
+    // this.last_name_label = this.page.getByTestId('app-name'); // update#
+    // this.last_name_text = this.page.getByTestId('app-name'); // update
+    // this.last_name_change_link = this.page.getByTestId('Name').locator('label'); // update
 
-    this.email_address_label = this.page.getByTestId('app-description'); // update
-    this.email_address_text = this.page.getByTestId('app-description'); // update
-    this.email_address_change_link = this.page.getByTestId('Name').locator('label'); // update
+    // this.email_address_label = this.page.getByTestId('app-description'); // update
+    // this.email_address_text = this.page.getByTestId('app-description'); // update
+    // this.email_address_change_link = this.page.getByTestId('Name').locator('label'); // update
 
-    this.telephone_label = this.page.getByTestId('app-description'); // update
-    this.telephone_text = this.page.getByTestId('app-description'); // update
-    this.telephone_change_link = this.page.getByTestId('Name').locator('label'); // update
+    // this.telephone_label = this.page.getByTestId('app-description'); // update
+    // this.telephone_text = this.page.getByTestId('app-description'); // update
+    // this.telephone_change_link = this.page.getByTestId('Name').locator('label'); // update
 
-    this.organisation_label = this.page.getByTestId('Name').locator('label'); // update
-    this.organisation_text = this.page.getByTestId('Name').locator('label'); // update
-    this.organisation_change_link = this.page.getByTestId('Name').locator('label'); // update
+    // this.organisation_label = this.page.getByTestId('Name').locator('label'); // update
+    // this.organisation_text = this.page.getByTestId('Name').locator('label'); // update
+    // this.organisation_change_link = this.page.getByTestId('Name').locator('label'); // update
 
-    this.job_title_label = this.page.getByTestId('Name').locator('label'); // update
-    this.job_title_text = this.page.getByTestId('Name').locator('label'); // update
-    this.job_title_change_link = this.page.getByTestId('Name').locator('label'); // update
+    // this.job_title_label = this.page.getByTestId('Name').locator('label'); // update
+    // this.job_title_text = this.page.getByTestId('Name').locator('label'); // update
+    // this.job_title_change_link = this.page.getByTestId('Name').locator('label'); // update
 
-    this.role_label = this.page.getByTestId('Name').locator('label'); // update
-    this.role_text = this.page.getByTestId('Name').locator('label'); // update
-    this.role_change_link = this.page.getByTestId('Name').locator('label'); // update
+    // this.role_label = this.page.getByTestId('Name').locator('label'); // update
+    // this.role_text = this.page.getByTestId('Name').locator('label'); // update
+    // this.role_change_link = this.page.getByTestId('Name').locator('label'); // update
 
-    this.audit_label = this.page.getByTestId('Name').locator('label'); // update
-    this.audit_link = this.page.getByTestId('Name').locator('label'); // update
+    // this.audit_label = this.page.getByTestId('Name').locator('label'); // update
+    // this.audit_link = this.page.getByTestId('Name').locator('label'); // update
 
-    this.last_updated_label = this.page.getByTestId('Name').locator('label'); // update
-    this.last_updated_text = this.page.getByTestId('Name').locator('label'); // update
+    // this.last_updated_label = this.page.getByTestId('Name').locator('label'); // update
+    // this.last_updated_text = this.page.getByTestId('Name').locator('label'); // update
 
-    this.disable_this_user_record_label = this.page.getByTestId('Name').locator('label'); // update
-    this.disable_this_user_record_sub_label = this.page.getByTestId('Name').locator('label'); // update
+    // this.disable_this_user_record_label = this.page.getByTestId('Name').locator('label'); // update
+    // this.disable_this_user_record_sub_label = this.page.getByTestId('Name').locator('label'); // update
 
-    //update locator
-    this.disable_user_record_button = this.page
-      .locator('.gem-c-button')
-      .and(this.page.getByText(this.buttonTextData.User_Profile_Page.Disable_User_Record, { exact: true }));
+    // //update locator
+    // this.disable_user_record_button = this.page
+    //   .locator('.gem-c-button')
+    //   .and(this.page.getByText(this.buttonTextData.User_Profile_Page.Disable_User_Record, { exact: true }));
   }
 
   //Page Methods
@@ -107,43 +109,43 @@ export default class UserProfilePage {
   async assertOnUserProfilePage() {
     //update
     await expect(this.page_heading).toBeVisible();
-    // await expect(this.page_heading).toMatch(new RegExp(userProfilePageData.User_Profile_Page.page_heading));
-    await expect(this.title_label).toHaveText(this.userProfilePageData.User_Profile_Page.title_label);
-    await expect(this.title_change_link).toHaveText(this.userProfilePageData.User_Profile_Page.title_change_link);
-    await expect(this.first_name_label).toHaveText(this.userProfilePageData.User_Profile_Page.first_name_label);
-    await expect(this.first_name_change_link).toHaveText(
-      this.userProfilePageData.User_Profile_Page.first_name_change_link
-    );
-    await expect(this.last_name_label).toHaveText(this.userProfilePageData.User_Profile_Page.last_name_label);
-    await expect(this.last_name_change_link).toHaveText(
-      this.userProfilePageData.User_Profile_Page.last_name_change_link
-    );
-    await expect(this.email_address_label).toHaveText(this.userProfilePageData.User_Profile_Page.email_address_label);
-    await expect(this.email_address_change_link).toHaveText(
-      this.userProfilePageData.User_Profile_Page.email_address_change_link
-    );
-    await expect(this.telephone_label).toHaveText(this.userProfilePageData.User_Profile_Page.telephone_label);
-    await expect(this.telephone_change_link).toHaveText(
-      this.userProfilePageData.User_Profile_Page.telephone_change_link
-    );
-    await expect(this.organisation_label).toHaveText(this.userProfilePageData.User_Profile_Page.organisation_label);
-    await expect(this.organisation_change_link).toHaveText(
-      this.userProfilePageData.User_Profile_Page.organisation_change_link
-    );
-    await expect(this.job_title_label).toHaveText(this.userProfilePageData.User_Profile_Page.job_title_label);
-    await expect(this.job_title_change_link).toHaveText(
-      this.userProfilePageData.User_Profile_Page.job_title_change_link
-    );
-    await expect(this.role_label).toHaveText(this.userProfilePageData.User_Profile_Page.role_label);
-    await expect(this.role_change_link).toHaveText(this.userProfilePageData.User_Profile_Page.role_change_link);
-    await expect(this.audit_label).toHaveText(this.userProfilePageData.User_Profile_Page.audit_label);
-    await expect(this.audit_link).toHaveText(this.userProfilePageData.User_Profile_Page.audit_link);
-    await expect(this.last_updated_label).toHaveText(this.userProfilePageData.User_Profile_Page.last_updated_label);
-    await expect(this.disable_this_user_record_label).toHaveText(
-      this.userProfilePageData.User_Profile_Page.disable_this_user_record_label
-    );
-    await expect(this.disable_this_user_record_sub_label).toHaveText(
-      this.userProfilePageData.User_Profile_Page.disable_this_user_record_sub_label
-    );
+    await expect(this.page_heading).toContainText(new RegExp(userProfilePageData.User_Profile_Page.page_heading));
+    // await expect(this.title_label).toHaveText(this.userProfilePageData.User_Profile_Page.title_label);
+    // await expect(this.title_change_link).toHaveText(this.userProfilePageData.User_Profile_Page.title_change_link);
+    // await expect(this.first_name_label).toHaveText(this.userProfilePageData.User_Profile_Page.first_name_label);
+    // await expect(this.first_name_change_link).toHaveText(
+    //   this.userProfilePageData.User_Profile_Page.first_name_change_link
+    // );
+    // await expect(this.last_name_label).toHaveText(this.userProfilePageData.User_Profile_Page.last_name_label);
+    // await expect(this.last_name_change_link).toHaveText(
+    //   this.userProfilePageData.User_Profile_Page.last_name_change_link
+    // );
+    // await expect(this.email_address_label).toHaveText(this.userProfilePageData.User_Profile_Page.email_address_label);
+    // await expect(this.email_address_change_link).toHaveText(
+    //   this.userProfilePageData.User_Profile_Page.email_address_change_link
+    // );
+    // await expect(this.telephone_label).toHaveText(this.userProfilePageData.User_Profile_Page.telephone_label);
+    // await expect(this.telephone_change_link).toHaveText(
+    //   this.userProfilePageData.User_Profile_Page.telephone_change_link
+    // );
+    // await expect(this.organisation_label).toHaveText(this.userProfilePageData.User_Profile_Page.organisation_label);
+    // await expect(this.organisation_change_link).toHaveText(
+    //   this.userProfilePageData.User_Profile_Page.organisation_change_link
+    // );
+    // await expect(this.job_title_label).toHaveText(this.userProfilePageData.User_Profile_Page.job_title_label);
+    // await expect(this.job_title_change_link).toHaveText(
+    //   this.userProfilePageData.User_Profile_Page.job_title_change_link
+    // );
+    // await expect(this.role_label).toHaveText(this.userProfilePageData.User_Profile_Page.role_label);
+    // await expect(this.role_change_link).toHaveText(this.userProfilePageData.User_Profile_Page.role_change_link);
+    // await expect(this.audit_label).toHaveText(this.userProfilePageData.User_Profile_Page.audit_label);
+    // await expect(this.audit_link).toHaveText(this.userProfilePageData.User_Profile_Page.audit_link);
+    // await expect(this.last_updated_label).toHaveText(this.userProfilePageData.User_Profile_Page.last_updated_label);
+    // await expect(this.disable_this_user_record_label).toHaveText(
+    //   this.userProfilePageData.User_Profile_Page.disable_this_user_record_label
+    // );
+    // await expect(this.disable_this_user_record_sub_label).toHaveText(
+    //   this.userProfilePageData.User_Profile_Page.disable_this_user_record_sub_label
+    // );
   }
 }

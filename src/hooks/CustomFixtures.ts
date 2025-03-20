@@ -24,6 +24,8 @@ import ManageUsersPage from '../pages/IRAS/reviewResearch/userAdministration/man
 import CreateUserProfilePage from '../pages/IRAS/reviewResearch/userAdministration/manageUsers/CreateUserProfilePage';
 import CreateUserProfileConfirmationPage from '../pages/IRAS/reviewResearch/userAdministration/manageUsers/CreateUserProfileConfirmationPage';
 import CheckCreateUserProfilePage from '../pages/IRAS/reviewResearch/userAdministration/manageUsers/CheckCreateUserProfilePage';
+import UserProfilePage from '../pages/IRAS/reviewResearch/userAdministration/manageUsers/UserProfilePage';
+import EditUserProfilePage from '../pages/IRAS/reviewResearch/userAdministration/manageUsers/EditUserProfilePage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -49,6 +51,8 @@ type CustomFixtures = {
   createUserProfilePage: CreateUserProfilePage;
   createUserProfileConfirmationPage: CreateUserProfileConfirmationPage;
   checkCreateUserProfilePage: CheckCreateUserProfilePage;
+  userProfilePage: UserProfilePage;
+  editUserProfilePage: EditUserProfilePage;
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -127,6 +131,14 @@ export const test = base.extend<CustomFixtures>({
 
   checkCreateUserProfilePage: async ({ page }, use) => {
     await use(new CheckCreateUserProfilePage(page));
+  },
+
+  userProfilePage: async ({ page }, use) => {
+    await use(new UserProfilePage(page));
+  },
+
+  editUserProfilePage: async ({ page }, use) => {
+    await use(new EditUserProfilePage(page));
   },
 
   manageReviewBodiesPage: async ({ page }, use) => {

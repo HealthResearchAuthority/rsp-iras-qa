@@ -33,5 +33,8 @@
   },
   "Create_User_Profile_Confirmation_Page": {
     "Back_To_Manage_Users": "Back to Manage users"
+  },
+  "User_Profile_Page": {
+    "Change": "Change"
   }
 }

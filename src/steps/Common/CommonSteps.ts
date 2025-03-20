@@ -157,7 +157,7 @@ Then(
 
 Given(
   'I click the {string} link on the {string}',
-  async ({ commonItemsPage, homePage, manageUsersPage }, linkKey: string, pageKey: string) => {
+  async ({ commonItemsPage, homePage, manageUsersPage, userProfilePage }, linkKey: string, pageKey: string) => {
     const linkValue = commonItemsPage.linkTextData[pageKey][linkKey];
     if (pageKey === 'Progress_Bar') {
       await commonItemsPage.qSetProgressBarStageLink.getByText(linkValue, { exact: true }).click();
@@ -166,7 +166,9 @@ Given(
     } else if (pageKey === 'Home_Page' && linkKey === 'My_Applications') {
       await homePage.myApplicationsLink.click();
     } else if (pageKey === 'Manage_Users_Page' && linkKey === 'View_Edit') {
-      await manageUsersPage.view_edit_link.click();
+      await manageUsersPage.view_edit_link.click(); //work around for now >> to click on first View/Edit link
+    } else if (pageKey === 'User_Profile_Page' && linkKey === 'Change') {
+      await userProfilePage.first_change_link.click(); //work around for now >> to click on first Change link
     } else {
       await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
     }

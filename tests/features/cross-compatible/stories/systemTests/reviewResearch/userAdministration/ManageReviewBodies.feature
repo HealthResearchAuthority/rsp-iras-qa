@@ -2,19 +2,19 @@
 Feature: HRAPROG-393- User Administration: Manage Review Bodies
 
     Background:
-        When I click the 'Manage_Review_Bodies' link on the 'Home_Page' #done        
+        When I click the 'Manage_Review_Bodies' link on the 'Home_Page'        
         Then I can see the Manage review bodies list page #done
-        When I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page' #done        
+        When I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'        
         Then I can see the Add a new review body page #done
 
     @rsp-2570
     Scenario Outline: Verify the user is able to create a new review body with valid data     
-        When I fill the new review body page using '<Add_Review_Body>'  #done
-        And I click the 'Complete' button on the 'Create_Review_Body_Page' #done        
+        When I fill the new review body page using '<Add_Review_Body>'
+        And I click the 'Complete' button on the 'Create_Review_Body_Page'        
         Then I can see the Check and create review body page for '<Add_Review_Body>' #done
-        And I click the 'Create_Profile' button on the 'Check_And_Create_Review_Body_Page' #done        
+        And I click the 'Create_Profile' button on the 'Check_And_Create_Review_Body_Page'        
         Then I can see the create Review body confirmation page for '<Add_Review_Body>' #done
-        When I click the 'Back_To_Manage_Review_Bodies' link on the 'Create_Review_Body_Confirmation_Page' #done        
+        When I click the 'Back_To_Manage_Review_Bodies' link on the 'Create_Review_Body_Confirmation_Page'        
         Then I can see the Manage review bodies list page #done
         Then I can see the list is sorted by default in the alphabetical order of 'Organisation Name'
         And I can see the newly created 'review body' should be present in the list
@@ -27,12 +27,12 @@ Feature: HRAPROG-393- User Administration: Manage Review Bodies
     
     @rsp-2570
     Scenario Outline: Verify the user is able to create a new review body with real data      
-        When I fill the new review body page using '<Add_Review_Body>'  #done
+        When I fill the new review body page using '<Add_Review_Body>'
         And I click the 'Complete' button on the 'Create_Review_Body_Page' #done
-        Then I can see the Check and create review body page for '<Add_Review_Body>' #done       
+        Then I can see the Check and create review body page for '<Add_Review_Body>'       
         And I click the 'Create_Profile' button on the 'Check_And_Create_Review_Body_Page' #done
         Then I can see the create Review body confirmation page for '<Add_Review_Body>' #done
-        When I click the 'Back_To_Manage_Review_Bodies' link on the 'Create_Review_Body_Confirmation_Page' #done        
+        When I click the 'Back_To_Manage_Review_Bodies' link on the 'Create_Review_Body_Confirmation_Page'        
         Then I can see the Manage review bodies list page #done
         Then I can see the list is sorted by default in the alphabetical order of 'Organisation Name'
         And I can see the newly created 'review body' should be present in the list
@@ -46,19 +46,19 @@ Feature: HRAPROG-393- User Administration: Manage Review Bodies
 
     @rsp-2570
     Scenario Outline: Verify the user is able to create a new review body and repeat the journey by clicking 'add another review body' link from the Confirmation message screen   
-       When I fill the new review body page using '<Add_Review_Body>'  #done
+       When I fill the new review body page using '<Add_Review_Body>'
        And I click the 'Complete' button on the 'Create_Review_Body_Page' #done
-       Then I can see the Check and create review body page for '<Add_Review_Body>' #done        
+       Then I can see the Check and create review body page for '<Add_Review_Body>'        
         And I click the 'Create_Profile' button on the 'Check_And_Create_Review_Body_Page' #done
         Then I can see the create Review body confirmation page for '<Add_Review_Body>' #done
-        When I click the 'Add_Another_Review_Body' link on the 'Create_Review_Body_Confirmation_Page' #done        
+        When I click the 'Add_Another_Review_Body' link on the 'Create_Review_Body_Confirmation_Page'        
         Then I can see the Add a new review body page #done
         When I fill the new review body page using '<Add_Another_Review_Body>' #done
         And I click the 'Complete' button on the 'Create_Review_Body_Page'
-        Then I can see the Check and create review body page for '<Add_Another_Review_Body>' #done        
+        Then I can see the Check and create review body page for '<Add_Another_Review_Body>'        
         And I click the 'Create_Profile' button on the 'Check_And_Create_Review_Body_Page' #done
         Then I can see the create Review body confirmation page for '<Add_Another_Review_Body>' #done
-        When I click the 'Back_To_Manage_Review_Bodies' link on the 'Create_Review_Body_Confirmation_Page' #done        
+        When I click the 'Back_To_Manage_Review_Bodies' link on the 'Create_Review_Body_Confirmation_Page'        
         Then I can see the Manage review bodies list page #done
         Then I can see the list is sorted by default in the alphabetical order of 'Organisation Name'
         And I can see the newly created 'review body' should be present in the list
@@ -72,21 +72,21 @@ Feature: HRAPROG-393- User Administration: Manage Review Bodies
     @rsp-2570
     Scenario: Verify the user can navigate from 'Add a new review body' page by clicking 'Back' button 
         And I click the 'Back' button on the 'Create_Review_Body_Page' #done
-        Then I can see the Manage review bodies list page #done 
+        Then I can see the Manage review bodies list page 
 
     @rsp-2570
     Scenario Outline: Verify the user can navigate from 'Check and create review body' page by clicking 'Back' button
-        When I fill the new review body page using '<Add_Review_Body>'  #done
+        When I fill the new review body page using '<Add_Review_Body>'
         And I click the 'Complete' button on the 'Create_Review_Body_Page' #done
-        Then I can see the Check and create review body page for '<Add_Review_Body>' #done 
-        And I click the 'Back' button on the 'Check_Create_Review_Body_Page' #done        
+        Then I can see the Check and create review body page for '<Add_Review_Body>' 
+        And I click the 'Back' button on the 'Check_Create_Review_Body_Page'        
         Then I can see the Add new review body page for '<Add_Review_Body>' #done
-        And I fill the new review body page using '<Add_Another_Review_Body>'  #done
+        And I fill the new review body page using '<Add_Another_Review_Body>'
         And I click the 'Complete' button on the 'Create_Review_Body_Page' #done
         Then I can see the Check and create review body page for '<Add_Another_Review_Body>' #done
         And I click the 'Create_Profile' button on the 'Check_And_Create_Review_Body_Page' #done
-        Then I can see the create Review body confirmation page for '<Add_Another_Review_Body>' #done 
-        When I click the 'Back_To_Manage_Review_Bodies' link on the 'Create_Review_Body_Confirmation_Page' #done        
+        Then I can see the create Review body confirmation page for '<Add_Another_Review_Body>' 
+        When I click the 'Back_To_Manage_Review_Bodies' link on the 'Create_Review_Body_Confirmation_Page'        
         Then I can see the Manage review bodies list page #done
 
         Examples:
@@ -95,17 +95,17 @@ Feature: HRAPROG-393- User Administration: Manage Review Bodies
 
     @rsp-2570
     Scenario Outline: Verify the user can navigate from 'Check and create review body' page by clicking 'Change' button against all the fields
-        When I fill the new review body page using '<Add_Review_Body>'  #done
+        When I fill the new review body page using '<Add_Review_Body>'
         And I click the 'Complete' button on the 'Create_Review_Body_Page' #done
-        Then I can see the Check and create review body page for '<Add_Review_Body>' #done 
+        Then I can see the Check and create review body page for '<Add_Review_Body>' 
         When I click the 'Change' link against '<Field_Name>' on the 'Check_Create_Review_Body_Page' #done
         Then I can see the Add new review body page for '<Add_Review_Body>' #done
-        And I fill the new review body page using '<Add_Another_Review_Body>'  #done
+        And I fill the new review body page using '<Add_Another_Review_Body>'
         And I click the 'Complete' button on the 'Create_Review_Body_Page' #done
         Then I can see the Check and create review body page for '<Add_Another_Review_Body>' #done
         And I click the 'Create_Profile' button on the 'Check_And_Create_Review_Body_Page' #done
-        Then I can see the create Review body confirmation page for '<Add_Another_Review_Body>' #done 
-        When I click the 'Back_To_Manage_Review_Bodies' link on the 'Create_Review_Body_Confirmation_Page' #done        
+        Then I can see the create Review body confirmation page for '<Add_Another_Review_Body>' 
+        When I click the 'Back_To_Manage_Review_Bodies' link on the 'Create_Review_Body_Confirmation_Page'        
         Then I can see the Manage review bodies list page #done
         
         Examples:
@@ -117,9 +117,9 @@ Feature: HRAPROG-393- User Administration: Manage Review Bodies
     
     @rsp-2570
     Scenario Outline: Field Validation with minimum and maximum characters in Organisation Name and Description
-        When I fill the new review body page using '<Add_Review_Body>'  #done
+        When I fill the new review body page using '<Add_Review_Body>'
         And I click the 'Complete' button on the 'Create_Review_Body_Page' #done
-        Then I can see the Check and create review body page for '<Add_Review_Body>' #done     
+        Then I can see the Check and create review body page for '<Add_Review_Body>'     
         
         Examples:
         | Add_Review_Body                                   |     
@@ -132,7 +132,7 @@ Feature: HRAPROG-393- User Administration: Manage Review Bodies
 
     @rsp-2570
     Scenario Outline: Field Validation and Error Message Validation
-        When I fill the new review body page using '<Add_Review_Body>'  #done
+        When I fill the new review body page using '<Add_Review_Body>'
         And I click the 'Complete' button on the 'Create_Review_Body_Page' #done
         Then I can see the error message against '<Field_Name>'      
         
