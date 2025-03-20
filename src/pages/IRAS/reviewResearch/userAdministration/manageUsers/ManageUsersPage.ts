@@ -60,13 +60,7 @@ export default class ManageUsersPage {
   }
   async checkAlphabeticalSorting(dataset: any) {
     const SEARCH_RECORD =
-      dataset.first_name_text +
-      '|' +
-      dataset.last_name_text +
-      '|' +
-      dataset.email_address_text +
-      '| ACTIVE |' +
-      '| View/Edit'; //'"alfred | dcruz | alfred.dcruz@hra.nhs.uk | ACTIVE |  | View/Edit"'; //  | ACTIVE |  | View/Edit
+      dataset.first_name_text + '|' + dataset.last_name_text + '|' + dataset.email_address_text + '|ACTIVE'; //'"alfred | dcruz | alfred.dcruz@hra.nhs.uk | ACTIVE |  | View/Edit"'; //  | ACTIVE |  | View/Edit
     let foundRecord = false;
     let hasNextPage = true;
     const firstNames: string[] = [];
@@ -76,8 +70,10 @@ export default class ManageUsersPage {
       for (const row of rows) {
         // Extract and combine all column values into a full-row string
         const columns = await row.locator('.govuk-table__cell').allTextContents(); // Adjust selector
-        const fullRowData = columns.map((col) => col.trim()).join(' | '); // Extract first name (assuming it's in the first column)
-        const firstName = columns[0]?.trim() || '';
+        // Fetch only the first 4 columns
+        const firstFourColumns = columns.slice(0, 4);
+        const fullRowData = firstFourColumns.map((col) => col.trim()).join('|'); // Extract first name (assuming it's in the first column)
+        const firstName = firstFourColumns[0]?.trim() || '';
         firstNames.push(firstName);
         // Check if the record matches the search
 
