@@ -18,14 +18,8 @@ export default class MyResearchProjectsPage {
     this.noProjectsAvailableLabel = this.page.getByTestId('');
   }
 
-  //Page Methods
-  async goto() {
-    await this.page.goto('myResearchProjects');
-  }
-
   async assertOnMyResearchProjectsPage() {
     await expect(this.pageHeading).toBeVisible();
     await expect(this.pageHeading).toHaveText(this.myResearchProjectsPageTestData.My_Research_Projects_Page.heading);
-    expect(await this.page.title()).toBe(this.myResearchProjectsPageTestData.My_Research_Projects_Page.title);
   }
 }

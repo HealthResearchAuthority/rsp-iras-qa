@@ -1,6 +1,5 @@
 {
   "Project_Details_Title_Page": {
-    "title": "",
     "heading": "Project details"
   },
   "Label_Texts": {
@@ -14,7 +13,9 @@
     "error_message": "Short project title must not contain more than XX characters"  
   },
   "Valid_Data_All_Fields": {
-    "short_project_title": "QA_Automation - This is a short project title",
-    "planned_project_end_date": "01/01/2028"
+    "short_project_title_text": "QA_Automation - This is a short project title",
+    "planned_project_end_day_text": "01",
+    "planned_project_end_month_text": "01",
+    "planned_project_end_year_text": "2040"
   }
 }

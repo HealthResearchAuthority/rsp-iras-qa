@@ -1,6 +1,5 @@
 {
   "Project_Details_IRAS_Page": {
-    "title": "",
     "heading": "Project details"
   },
   "Label_Texts": {
@@ -11,21 +10,33 @@
     "error_message": "IRAS ID must only contain numbers"  
   },
   "Valid_IRAS_ID": {
-    "iras_id": 1234567
+    "iras_id_text": "1234567"
   },
   "Invalid_IRAS_ID_Letters": {
-    "iras_id": "abcdefg"
+    "iras_id_text": "abcdefg"
   },
   "Invalid_IRAS_ID_Symbols": {
-    "iras_id": "!£$%^&*"
+    "iras_id_text": "!£$%^&*"
   },
   "Invalid_IRAS_ID_Letters_Symbols": {
-    "iras_id": "a!b£c£D%"
+    "iras_id_text": "a!b£c£D%"
   },
   "Invalid_IRAS_ID_Min_Length": {
-    "iras_id": 123
+    "iras_id_text": "123"
   },
   "Invalid_IRAS_ID_Max_Length": {
-    "iras_id": 123456789
+    "iras_id_text": "123456789"
+  },
+  "Invalid_IRAS_ID_Leading_Zero": {
+    "iras_id_text": "00987"
+  },
+  "Invalid_IRAS_ID_Special_Char": {
+    "iras_id_text": "!£$%^&*"
+  },
+  "Invalid_IRAS_ID_Start_Spaces": {
+    "iras_id_text": " 345456"
+  },
+  "Invalid_IRAS_ID_Spaces_Between": {
+    "iras_id_text": "23 5 63"
   }
 }

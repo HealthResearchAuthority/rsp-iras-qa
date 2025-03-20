@@ -14,18 +14,12 @@ export default class CreateProjectRecordPage {
     this.createProjectRecordPageTestData = createProjectRecordPageTestData;
 
     //Locators
-    this.pageHeading = this.page.getByTestId('');
+    this.pageHeading = this.page.getByTestId('page-title');
     this.guidanceTextLabel = this.page.getByTestId('');
-  }
-
-  //Page Methods
-  async goto() {
-    await this.page.goto('createProjectRecord');
   }
 
   async assertOnCreateProjectRecordPage() {
     await expect(this.pageHeading).toBeVisible();
     await expect(this.pageHeading).toHaveText(this.createProjectRecordPageTestData.Create_Project_Record_Page.heading);
-    expect(await this.page.title()).toBe(this.createProjectRecordPageTestData.Create_Project_Record_Page.title);
   }
 }

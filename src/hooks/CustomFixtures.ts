@@ -20,6 +20,8 @@ import MyResearchProjectsPage from '../pages/IRAS/createAmendment/MyResearchProj
 import CreateProjectRecordPage from '../pages/IRAS/createAmendment/CreateProjectRecordPage';
 import ProjectDetailsIRASPage from '../pages/IRAS/createAmendment/ProjectDetailsIRASPage';
 import ProjectDetailsTitlePage from '../pages/IRAS/createAmendment/ProjectDetailsTitlePage';
+import ReseachLocationsPage from '../pages/IRAS/createAmendment/ResearchLocationsPage';
+import KeyProjectRolesPage from '../pages/IRAS/createAmendment/KeyProjectRolesPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -41,6 +43,8 @@ type CustomFixtures = {
   createProjectRecordPage: CreateProjectRecordPage;
   projectDetailsIRASPage: ProjectDetailsIRASPage;
   projectDetailsTitlePage: ProjectDetailsTitlePage;
+  reseachLocationsPage: ReseachLocationsPage;
+  keyProjectRolesPage: KeyProjectRolesPage;
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -119,6 +123,14 @@ export const test = base.extend<CustomFixtures>({
 
   projectDetailsTitlePage: async ({ page }, use) => {
     await use(new ProjectDetailsTitlePage(page));
+  },
+
+  reseachLocationsPage: async ({ page }, use) => {
+    await use(new ReseachLocationsPage(page));
+  },
+
+  keyProjectRolesPage: async ({ page }, use) => {
+    await use(new KeyProjectRolesPage(page));
   },
 
   makeAxeBuilder: async ({ page }, use) => {
