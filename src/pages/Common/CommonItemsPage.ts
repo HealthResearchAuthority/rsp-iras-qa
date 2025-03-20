@@ -181,20 +181,25 @@ export default class CommonItemsPage {
     const screenshot = await locator.screenshot({ path: 'screenshot.png' });
     await $testInfo.attach(`[step] ${$step.title}`, { body: screenshot, contentType: 'image/png' });
   }
+  pathToTestDataJson =
+    './src/resources/test_data/iras/reviewResearch/userAdministration/manageUsers/pages/create_user_profile_page_data.json';
   async generateUniqueEmail(keyVal: string): Promise<string> {
     const prefix = 'QAAutomation';
     const timestamp = new Date().toISOString().replace(/[-:.TZ]/g, '');
+    const filePath = path.resolve(this.pathToTestDataJson);
+    await this.updatePrefix(filePath, timestamp);
     const domain = keyVal;
     return `${prefix}${timestamp}${domain}`;
   }
-  async updateEmail(filePath: string, newEmail: string) {
+  async updatePrefix(filePath: string, timestamp: string) {
     (async () => {
       try {
         const data = await fse.readJson(filePath);
-        data.Create_User_Profile.Valid_Data_In_All_Fields_Role_Operations.email_address_text = newEmail;
+        data.Create_User_Profile.email_address_timestamp = timestamp;
+        // data.Create_User_Profile.Valid_Data_In_All_Fields_Role_Operations.email_address_text = newEmail;
         await fse.writeJson(filePath, data, { spaces: 2 });
       } catch (error) {
-        console.error('Error updating email:', error);
+        console.error('Error updating prefix:', error);
       }
     })();
   }

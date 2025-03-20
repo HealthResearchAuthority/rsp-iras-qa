@@ -18,11 +18,13 @@
     "continue_button": "Continue"
   },
   "Create_User_Profile": {
+    "email_address_prefix": "QAAutomation",
+    "email_address_timestamp": "20250320214347642",
     "Valid_Data_In_All_Fields_Role_Operations": {
       "title_text": "Mr",
       "first_name_text": "QA Automation First Name Test",
       "last_name_text": "Test Last Name",
-      "email_address_text": "QAAutomation20250320211341018hscrd@health.org",
+      "email_address_text": "hscrd@health.org",
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA",
       "job_title_text": "Sr.Reviewer",

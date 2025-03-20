@@ -60,7 +60,7 @@ export default class ManageUsersPage {
   }
   async checkAlphabeticalSorting(dataset: any) {
     const SEARCH_RECORD =
-      dataset.first_name_text + '|' + dataset.last_name_text + '|' + dataset.email_address_text + '|ACTIVE'; //'"alfred | dcruz | alfred.dcruz@hra.nhs.uk | ACTIVE |  | View/Edit"'; //  | ACTIVE |  | View/Edit
+      dataset.first_name_text + '|' + dataset.last_name_text + '|' + dataset.email_address_text + '|ACTIVE';
     let foundRecord = false;
     let hasNextPage = true;
     const firstNames: string[] = [];
