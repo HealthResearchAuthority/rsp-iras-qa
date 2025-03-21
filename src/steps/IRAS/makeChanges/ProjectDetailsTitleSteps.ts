@@ -8,14 +8,17 @@ Then('I can see the project details title page', async ({ projectDetailsTitlePag
 });
 
 Then(
-  'I can see the {string} on the project details title page',
+  'I can see the {string} ui labels on the project details title page',
   async ({ projectDetailsTitlePage }, datasetName: string) => {
     const dataset = projectDetailsTitlePage.projectDetailsTitlePageTestData[datasetName];
-    expect(await projectDetailsTitlePage.shortProjectTitleTextBoxLabel.textContent()).toBe(
+    expect((await projectDetailsTitlePage.shortProjectTitleTextBoxLabel.textContent())?.trim()).toBe(
       dataset.short_project_title_textbox_label
     );
-    expect(await projectDetailsTitlePage.plannedEndDateLabel.textContent()).toBe(
+    expect((await projectDetailsTitlePage.plannedEndDateLabel.textContent())?.trim()).toBe(
       dataset.planned_end_date_textbox_label
+    );
+    expect((await projectDetailsTitlePage.plannedEndDateHintLabel.textContent())?.trim()).toBe(
+      dataset.planned_end_date_hint_label
     );
     expect(await projectDetailsTitlePage.plannedEndDateDayLabel.textContent()).toBe(dataset.day_textbox_label);
     expect(await projectDetailsTitlePage.plannedEndDateMonthLabel.textContent()).toBe(dataset.month_textbox_label);
@@ -36,10 +39,56 @@ Then(
 );
 
 Then(
-  'I can see {string} displayed on the project details title page',
+  'I fill todays date for planned project end date in project details title page',
+  async ({ projectDetailsTitlePage }) => {
+    const todayDate = new Date();
+    await projectDetailsTitlePage.planned_project_end_day_text.fill(todayDate.getDate().toString());
+    await projectDetailsTitlePage.planned_project_end_month_text.fill((todayDate.getMonth() + 1).toString());
+    await projectDetailsTitlePage.planned_project_end_year_text.fill(todayDate.getFullYear().toString());
+  }
+);
+
+Then(
+  'I can see previously saved values for {string} displayed on the project details title page',
   async ({ projectDetailsTitlePage }, datasetName: string) => {
     const dataset = projectDetailsTitlePage.projectDetailsTitlePageTestData[datasetName];
-    expect(await projectDetailsTitlePage.shortProjectTitleTextBox.textContent()).toBe(dataset.short_project_title);
-    expect(await projectDetailsTitlePage.plannedEndDateTextBox.textContent()).toBe(dataset.planned_project_end_date);
+    expect(await projectDetailsTitlePage.short_project_title_text.getAttribute('value')).toBe(
+      dataset.short_project_title_text
+    );
+    expect(await projectDetailsTitlePage.planned_project_end_day_text.getAttribute('value')).toBe(
+      dataset.planned_project_end_day_text
+    );
+    expect(await projectDetailsTitlePage.planned_project_end_month_text.getAttribute('value')).toBe(
+      dataset.planned_project_end_month_text
+    );
+    expect(await projectDetailsTitlePage.planned_project_end_year_text.getAttribute('value')).toBe(
+      dataset.planned_project_end_year_text
+    );
+  }
+);
+
+Then(
+  'I validate {string} and {string} displayed on project details title page for {string}',
+  async (
+    { commonItemsPage, projectDetailsTitlePage },
+    errorMessageFieldDatasetName: string,
+    errorMessageSummaryDatasetName: string,
+    invalidFieldsDatasetName: string
+  ) => {
+    const errorMessageFieldDataset =
+      projectDetailsTitlePage.projectDetailsTitlePageTestData[errorMessageFieldDatasetName];
+    const errorMessageSummaryDataset =
+      projectDetailsTitlePage.projectDetailsTitlePageTestData[errorMessageSummaryDatasetName];
+    const invalidFieldsDataset = projectDetailsTitlePage.projectDetailsTitlePageTestData[invalidFieldsDatasetName];
+    for (const key in invalidFieldsDataset) {
+      if (Object.prototype.hasOwnProperty.call(invalidFieldsDataset, key)) {
+        await commonItemsPage.validateErrorMessage(
+          errorMessageFieldDataset,
+          errorMessageSummaryDataset,
+          key,
+          projectDetailsTitlePage
+        );
+      }
+    }
   }
 );

@@ -28,6 +28,7 @@ export default class ResearchLocationsPage {
     this.lead_nation_label = this.page.locator('Questions[2].SelectedOption');
   }
 
+  //Page Methods
   async assertOnResearchLocationsPage() {
     await expect(this.pageHeading).toBeVisible();
     await expect(this.pageHeading).toHaveText(this.researchLocationsPageTestData.Research_Locations_Page.heading);

@@ -46,6 +46,7 @@ export default class ProjectDetailsTitlePage {
     this.planned_project_end_year_text = this.page.getByTestId('Questions_1_Year');
   }
 
+  //Page Methods
   async assertOnProjectDetailsTitlePage() {
     await expect(this.pageHeading).toBeVisible();
     await expect(this.pageHeading).toHaveText(this.projectDetailsTitlePageTestData.Project_Details_Title_Page.heading);

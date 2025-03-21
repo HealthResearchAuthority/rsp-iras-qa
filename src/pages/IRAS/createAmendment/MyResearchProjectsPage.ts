@@ -14,8 +14,13 @@ export default class MyResearchProjectsPage {
     this.myResearchProjectsPageTestData = myResearchProjectsPageTestData;
 
     //Locators
-    this.pageHeading = this.page.getByTestId('');
-    this.noProjectsAvailableLabel = this.page.getByTestId('');
+    this.pageHeading = this.page.getByTestId('title');
+    this.noProjectsAvailableLabel = this.page.locator('p[class="govuk-body"]').nth(0);
+  }
+
+  //Page Methods
+  async goto() {
+    await this.page.goto('');
   }
 
   async assertOnMyResearchProjectsPage() {

@@ -16,6 +16,7 @@ export default class KeyProjectRolesPage {
     this.pageHeading = this.page.getByTestId('title');
   }
 
+  //Page Methods
   async assertOnKeyProjectRolesPage() {
     await expect(this.pageHeading).toBeVisible();
     await expect(this.pageHeading).toHaveText(this.keyProjectRolesPageTestData.Key_Project_roles_Page.heading);
