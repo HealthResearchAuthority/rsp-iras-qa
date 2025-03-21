@@ -22,6 +22,8 @@ export default class CommonItemsPage {
   readonly bannerNavBar: Locator;
   readonly bannerLoginBtn: Locator;
   readonly bannerMyApplications: Locator;
+  readonly errorMessageFieldLabel: Locator;
+  readonly errorMessageSummaryLabel: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -43,6 +45,8 @@ export default class CommonItemsPage {
     this.bannerNavBar = this.page.getByLabel('Service information');
     this.bannerLoginBtn = this.bannerNavBar.getByText(this.buttonTextData.Banner.Login, { exact: true });
     this.bannerMyApplications = this.bannerNavBar.getByText(this.linkTextData.Banner.My_Applications, { exact: true });
+    this.errorMessageFieldLabel = page.locator('span[class="govuk-error-message field-validation-error"]');
+    this.errorMessageSummaryLabel = page.locator('div[class="govuk-error-summary"]');
   }
 
   //Page Methods
@@ -172,5 +176,34 @@ export default class CommonItemsPage {
   async captureComponentScreenshot(locator: Locator, $step: any, $testInfo: any) {
     const screenshot = await locator.screenshot({ path: 'screenshot.png' });
     await $testInfo.attach(`[step] ${$step.title}`, { body: screenshot, contentType: 'image/png' });
+  }
+
+  async validateErrorMessage<PageObject>(
+    errorMessageFieldDataset: string,
+    errorMessageSummaryDataset: string,
+    key: string,
+    page: PageObject
+  ) {
+    const typeAttribute = await page[key].first().getAttribute('type');
+    await expect(
+      this.errorMessageSummaryLabel.getByText(errorMessageSummaryDataset['error_message_summary_header'])
+    ).toBeVisible();
+    await expect(this.errorMessageSummaryLabel.getByText(errorMessageSummaryDataset[key])).toBeVisible();
+    if (typeAttribute === 'checkbox') {
+      const checkboxLocator = page[key].locator('../../../..').locator(this.errorMessageFieldLabel);
+      await expect(checkboxLocator).toHaveText(errorMessageFieldDataset[key]);
+    } else if (typeAttribute === 'radio') {
+      const radioLocator = page[key].locator('../../../..').locator(this.errorMessageFieldLabel);
+      await expect(radioLocator).toHaveText(errorMessageFieldDataset[key]);
+    } else if (
+      typeAttribute === 'date' ||
+      (await page[key].first().getAttribute('class')).toLowerCase().includes('date')
+    ) {
+      const dateLocator = page[key].locator('../../../../../..').locator(this.errorMessageFieldLabel);
+      await expect(dateLocator).toHaveText(errorMessageFieldDataset[key]);
+    } else {
+      const otherLocator = page[key].locator('..').locator(this.errorMessageFieldLabel);
+      await expect(otherLocator).toHaveText(errorMessageFieldDataset[key]);
+    }
   }
 }

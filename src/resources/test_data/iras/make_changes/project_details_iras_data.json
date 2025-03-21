@@ -4,13 +4,20 @@
   },
   "Label_Texts": {
     "iras_textbox_label": "IRAS ID",
-    "iras_textbox_hint": "This is the 4 to 7 digit ID generated when you created your initial application"
+    "iras_textbox_hint": "This is the 6 or 7 digit ID generated when you created your initial application"
   },
-  "Error_Message_IRAS_ID": {
-    "error_message": "IRAS ID must only contain numbers"  
+  "Summary_Error_Message": {
+    "error_message_summary_header": "There is a problem",
+    "iras_id_text": "IRAS ID must only contain numbers"
   },
-  "Valid_IRAS_ID": {
+  "Field_Error_Message": {
+    "iras_id_text": "IRAS ID must only contain numbers"
+  },
+  "Valid_IRAS_ID_Max": {
     "iras_id_text": "1234567"
+  },
+  "Valid_IRAS_ID_Min": {
+    "iras_id_text": "1234"
   },
   "Invalid_IRAS_ID_Letters": {
     "iras_id_text": "abcdefg"
@@ -25,18 +32,21 @@
     "iras_id_text": "123"
   },
   "Invalid_IRAS_ID_Max_Length": {
-    "iras_id_text": "123456789"
+    "iras_id_text": "12345678"
   },
-  "Invalid_IRAS_ID_Leading_Zero": {
-    "iras_id_text": "00987"
+  "Invalid_IRAS_ID_Leading_Zeros": {
+    "iras_id_text": "000123"
   },
-  "Invalid_IRAS_ID_Special_Char": {
-    "iras_id_text": "!£$%^&*"
+  "Invalid_IRAS_ID_Spaces": {
+    "iras_id_text": "    "
   },
-  "Invalid_IRAS_ID_Start_Spaces": {
-    "iras_id_text": " 345456"
+  "Invalid_IRAS_ID_Spaces_Suffix": {
+    "iras_id_text": "1234  "
   },
-  "Invalid_IRAS_ID_Spaces_Between": {
-    "iras_id_text": "23 5 63"
+  "Invalid_IRAS_ID_Spaces_Prefix": {
+    "iras_id_text": " 1234"
+  },
+  "Invalid_IRAS_ID_Spaces_Seperator": {
+    "iras_id_text": "12 34"
   }
 }

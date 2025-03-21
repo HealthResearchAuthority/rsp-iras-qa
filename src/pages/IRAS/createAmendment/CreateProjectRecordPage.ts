@@ -6,7 +6,6 @@ export default class CreateProjectRecordPage {
   readonly page: Page;
   readonly createProjectRecordPageTestData: typeof createProjectRecordPageTestData;
   readonly pageHeading: Locator;
-  readonly guidanceTextLabel: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -15,9 +14,9 @@ export default class CreateProjectRecordPage {
 
     //Locators
     this.pageHeading = this.page.getByTestId('page-title');
-    this.guidanceTextLabel = this.page.getByTestId('');
   }
 
+  //Page Methods
   async assertOnCreateProjectRecordPage() {
     await expect(this.pageHeading).toBeVisible();
     await expect(this.pageHeading).toHaveText(this.createProjectRecordPageTestData.Create_Project_Record_Page.heading);
