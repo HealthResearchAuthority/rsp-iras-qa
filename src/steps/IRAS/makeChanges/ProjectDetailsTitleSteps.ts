@@ -50,20 +50,13 @@ Then(
 
 Then(
   'I can see previously saved values for {string} displayed on the project details title page',
-  async ({ projectDetailsTitlePage }, datasetName: string) => {
+  async ({ commonItemsPage, projectDetailsTitlePage }, datasetName: string) => {
     const dataset = projectDetailsTitlePage.projectDetailsTitlePageTestData[datasetName];
-    expect(await projectDetailsTitlePage.short_project_title_text.getAttribute('value')).toBe(
-      dataset.short_project_title_text
-    );
-    expect(await projectDetailsTitlePage.planned_project_end_day_text.getAttribute('value')).toBe(
-      dataset.planned_project_end_day_text
-    );
-    expect(await projectDetailsTitlePage.planned_project_end_month_text.getAttribute('value')).toBe(
-      dataset.planned_project_end_month_text
-    );
-    expect(await projectDetailsTitlePage.planned_project_end_year_text.getAttribute('value')).toBe(
-      dataset.planned_project_end_year_text
-    );
+    for (const key in dataset) {
+      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+        await commonItemsPage.validateUIComponentValues(dataset, key, projectDetailsTitlePage);
+      }
+    }
   }
 );
 

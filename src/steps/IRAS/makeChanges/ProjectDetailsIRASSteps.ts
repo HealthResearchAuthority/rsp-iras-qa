@@ -30,9 +30,13 @@ Then(
 
 Then(
   'I can see previously saved values for {string} displayed on the project details iras page',
-  async ({ projectDetailsIRASPage }, datasetName: string) => {
+  async ({ commonItemsPage, projectDetailsIRASPage }, datasetName: string) => {
     const dataset = projectDetailsIRASPage.projectDetailsIRASPageTestData[datasetName];
-    expect(await projectDetailsIRASPage.iras_id_text.getAttribute('value')).toBe(dataset.iras_id_text);
+    for (const key in dataset) {
+      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+        await commonItemsPage.validateUIComponentValues(dataset, key, projectDetailsIRASPage);
+      }
+    }
   }
 );
 

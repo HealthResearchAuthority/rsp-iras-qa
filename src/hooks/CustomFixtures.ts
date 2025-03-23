@@ -22,6 +22,7 @@ import ProjectDetailsIRASPage from '../pages/IRAS/createAmendment/ProjectDetails
 import ProjectDetailsTitlePage from '../pages/IRAS/createAmendment/ProjectDetailsTitlePage';
 import ReseachLocationsPage from '../pages/IRAS/createAmendment/ResearchLocationsPage';
 import KeyProjectRolesPage from '../pages/IRAS/createAmendment/KeyProjectRolesPage';
+import ReviewYourApplicationPage from '../pages/IRAS/createAmendment/ReviewYourApplicationPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -45,6 +46,7 @@ type CustomFixtures = {
   projectDetailsTitlePage: ProjectDetailsTitlePage;
   reseachLocationsPage: ReseachLocationsPage;
   keyProjectRolesPage: KeyProjectRolesPage;
+  reviewYourApplicationPage: ReviewYourApplicationPage;
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -133,6 +135,10 @@ export const test = base.extend<CustomFixtures>({
     await use(new KeyProjectRolesPage(page));
   },
 
+  reviewYourApplicationPage: async ({ page }, use) => {
+    await use(new ReviewYourApplicationPage(page));
+  },
+
   makeAxeBuilder: async ({ page }, use) => {
     const makeAxeBuilder = () => new AxeBuilder({ page });
     await use(makeAxeBuilder);
@@ -168,6 +174,8 @@ export const test = base.extend<CustomFixtures>({
   javaScriptEnabled: async ({ $tags, javaScriptEnabled }, use) => {
     if ($tags.includes('@jsEnabled')) {
       javaScriptEnabled = true;
+    } else if ($tags.includes('@jsDisabled')) {
+      javaScriptEnabled = false;
     }
     await use(javaScriptEnabled);
   },

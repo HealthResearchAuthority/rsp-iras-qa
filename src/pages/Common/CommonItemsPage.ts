@@ -66,6 +66,14 @@ export default class CommonItemsPage {
     return isExpanded;
   }
 
+  async goBack() {
+    await this.page.goBack();
+  }
+
+  async goForward() {
+    await this.page.goForward();
+  }
+
   async toggleAccordion(accordion: Locator) {
     await accordion.click();
   }
@@ -204,6 +212,20 @@ export default class CommonItemsPage {
     } else {
       const otherLocator = page[key].locator('..').locator(this.errorMessageFieldLabel);
       await expect(otherLocator).toHaveText(errorMessageFieldDataset[key]);
+    }
+  }
+
+  async validateUIComponentValues<PageObject>(dataset: JSON, key: string, page: PageObject) {
+    const locator: Locator = page[key];
+    const typeAttribute = await locator.first().getAttribute('type');
+    if (typeAttribute === 'text' || typeAttribute === 'date') {
+      expect(await locator.getAttribute('value')).toBe(dataset[key]);
+    } else if (typeAttribute === 'radio') {
+      expect(await locator.locator('..').getByLabel(dataset[key], { exact: true }).isChecked());
+    } else if (typeAttribute === 'checkbox') {
+      for (const checkbox of dataset[key]) {
+        expect(await locator.locator('..').getByLabel(checkbox, { exact: true }).isChecked());
+      }
     }
   }
 }

@@ -249,6 +249,7 @@ Then(
     );
   }
 );
+
 Then('I attach the generated test data json files to the report', async ({ $testInfo }) => {
   const jsonPath = userProfileGeneratedataConfig.JSON_Properties['json_path'];
   const jsonPath_faker = userProfileGeneratedataConfig.JSON_Properties['json_path_faker'];
@@ -260,4 +261,17 @@ Then('I attach the generated test data json files to the report', async ({ $test
     path: jsonPath,
     contentType: 'text/plain',
   });
+});
+
+Then('I navigate {string}', async ({ commonItemsPage }, navigation: string) => {
+  switch (navigation) {
+    case 'forward':
+      await commonItemsPage.goForward();
+      break;
+    case 'back':
+      await commonItemsPage.goBack();
+      break;
+    default:
+      throw new Error(`${navigation} is not a valid option`);
+  }
 });

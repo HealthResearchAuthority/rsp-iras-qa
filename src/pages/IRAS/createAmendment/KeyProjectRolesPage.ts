@@ -6,6 +6,12 @@ export default class KeyProjectRolesPage {
   readonly page: Page;
   readonly keyProjectRolesPageTestData: typeof keyProjectRolesPageTestData;
   readonly pageHeading: Locator;
+  readonly chief_investigator_header_label: Locator;
+  readonly chief_investigator_email_label: Locator;
+  readonly sponsor_contact_header_label: Locator;
+  readonly sponsor_contact_email_label: Locator;
+  readonly chief_investigator_email_text: Locator;
+  readonly sponsor_contact_email_text: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -14,6 +20,18 @@ export default class KeyProjectRolesPage {
 
     //Locators
     this.pageHeading = this.page.getByTestId('title');
+    this.chief_investigator_header_label = this.page.locator('label[for="IQA0311_Text"]');
+    this.chief_investigator_email_label = this.page
+      .locator('label[for="IQA0311_Text"]')
+      .locator('..')
+      .locator('div[id="rule-hint"] p');
+    this.sponsor_contact_header_label = this.page.locator('label[for="IQA0313_Text"]');
+    this.sponsor_contact_email_label = this.page
+      .locator('label[for="IQA0313_Text"]')
+      .locator('..')
+      .locator('div[id="rule-hint"] p');
+    this.chief_investigator_email_text = this.page.getByTestId('IQA0311_Text');
+    this.sponsor_contact_email_text = this.page.getByTestId('IQA0313_Text');
   }
 
   //Page Methods

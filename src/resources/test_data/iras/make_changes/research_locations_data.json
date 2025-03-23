@@ -3,11 +3,33 @@
     "heading": "Research locations"
   },
   "Label_Texts": {
-    "no_projects": "You don't have any projects available in the new service"
+    "nations_participating_label": "Which nations are participating in your project?",
+    "nations_participating_hint_label": "Select all that apply",
+    "is_nhs_hsc_organisation_label": "Is the project taking place at any NHS / HSC organisations?",
+    "lead_nation_label": "What is the lead nation for the project?"
   },
   "Valid_Data_All_Fields": {
     "nations_participating_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
     "is_nhs_hsc_organisation_radio": "Yes",
     "lead_nation_radio": "England"
+  },
+  "Data_With_No_NHS_HSC": {
+    "nations_participating_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+    "is_nhs_hsc_organisation_radio": "No"
+  },
+  "Data_With_Lead_Nation_Northern_Ireland": {
+    "nations_participating_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+    "is_nhs_hsc_organisation_radio": "Yes",
+    "lead_nation_radio": "Northern Ireland"
+  },
+  "Data_With_Lead_Nation_Scotland": {
+    "nations_participating_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+    "is_nhs_hsc_organisation_radio": "Yes",
+    "lead_nation_radio": "Scotland"
+  },
+  "Data_With_Lead_Nation_Wales": {
+    "nations_participating_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+    "is_nhs_hsc_organisation_radio": "Yes",
+    "lead_nation_radio": "Wales"
   }
 }

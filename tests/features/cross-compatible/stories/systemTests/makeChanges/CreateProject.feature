@@ -54,7 +54,7 @@ Feature: Create Amendment - Create Project
   Scenario Outline: Validate breadcrumb navigations in project details iras id page
     And I click the '<Navigation_Button_1>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_2>' button on the 'Create_Project_Record_Page'
-    Then I can see the project details iras page
+    And I can see the project details iras page
     When I click the '<Navigation_Link>' link on the 'Project_Details_IRAS_Page'
     Then I can see the create project record page
 
@@ -69,8 +69,8 @@ Feature: Create Amendment - Create Project
     And I fill the project details iras page with '<Project_Details_IRAS>'
     When I click the '<Navigation_Button_3>' button on the 'Project_Details_IRAS_Page'
     Then I can see the project details title page
-    And I can see the '<Validation_Text>' ui labels on the project details title page
-    And I fill the project details title page with '<Project_Details_Title>'
+    Then I can see the '<Validation_Text>' ui labels on the project details title page
+    Then I fill the project details title page with '<Project_Details_Title>'
     When I click the '<Navigation_Button_3>' button on the 'Project_Details_Title_Page'
     Then I can see the key project roles page
     When I click the '<Navigation_Link>' link on the 'Key_Project_Roles_Page'
@@ -91,12 +91,12 @@ Feature: Create Amendment - Create Project
       | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_11 | Back            |
       | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_12 | Back            |
 
-  @rsp-1859-make-changes-dataset-error
+  @rsp-1859-make-changes-dataset-error-OG
   Scenario Outline: Validate error messages displayed when user fill invalid data for short project title and project end date
     And I click the '<Navigation_Button_1>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_2>' button on the 'Create_Project_Record_Page'
     And I fill the project details iras page with '<Project_Details_IRAS>'
-    When I click the '<Navigation_Button_3>' button on the 'Project_Details_IRAS_Page'
+    And I click the '<Navigation_Button_3>' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     When I click the '<Navigation_Button_3>' button on the 'Project_Details_Title_Page'
     Then I validate '<Field_Error_Message>' and '<Summary_Error_Message>' displayed on project details title page for '<Project_Details_Title>'
@@ -114,7 +114,6 @@ Feature: Create Amendment - Create Project
       | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Invalid_Year_Number_2                       | Field_Error_Message | Summary_Error_Message |
       | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Invalid_Year_Letters                        | Field_Error_Message | Summary_Error_Message |
       | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Invalid_Date_Past                           | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Invalid_Date_Current                        | Field_Error_Message | Summary_Error_Message |
       | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Invalid_Date_No_Day                         | Field_Error_Message | Summary_Error_Message |
       | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Invalid_Date_No_Month                       | Field_Error_Message | Summary_Error_Message |
       | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Invalid_Date_No_Year                        | Field_Error_Message | Summary_Error_Message |
@@ -124,7 +123,7 @@ Feature: Create Amendment - Create Project
     And I click the '<Navigation_Button_1>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_2>' button on the 'Create_Project_Record_Page'
     And I fill the project details iras page with '<Project_Details_IRAS>'
-    When I click the '<Navigation_Button_3>' button on the 'Project_Details_IRAS_Page'
+    And I click the '<Navigation_Button_3>' button on the 'Project_Details_IRAS_Page'
     And I fill todays date for planned project end date in project details title page
     When I click the '<Navigation_Button_3>' button on the 'Project_Details_Title_Page'
     Then I validate '<Field_Error_Message>' and '<Summary_Error_Message>' displayed on project details title page for '<Project_Details_Title>'
@@ -138,11 +137,93 @@ Feature: Create Amendment - Create Project
     And I click the '<Navigation_Button_1>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_2>' button on the 'Create_Project_Record_Page'
     And I fill the project details iras page with '<Project_Details_IRAS>'
-    When I click the '<Navigation_Button_3>' button on the 'Project_Details_IRAS_Page'
-    Then I can see the project details title page
+    And I click the '<Navigation_Button_3>' button on the 'Project_Details_IRAS_Page'
+    And I can see the project details title page
     When I click the '<Navigation_Link>' link on the 'Project_Details_Title_Page'
     Then I can see the project details iras page
 
     Examples:
       | Navigation_Button_1   | Navigation_Button_2 | Project_Details_IRAS | Navigation_Button_3 | Navigation_Link |
       | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Back            |
+
+  @rsp-1901
+  Scenario Outline: Validate user is able to fill research locations page
+    And I click the '<Navigation_Button_1>' button on the 'My_Research_Projects_Page'
+    And I click the '<Navigation_Button_2>' button on the 'Create_Project_Record_Page'
+    And I fill the project details iras page with '<Project_Details_IRAS>'
+    And I click the '<Navigation_Button_3>' button on the 'Project_Details_IRAS_Page'
+    And I fill the project details title page with '<Project_Details_Title>'
+    And I click the '<Navigation_Button_3>' button on the 'Project_Details_Title_Page'
+    And I fill the key project roles page with '<Key_Project_Roles>'
+    When I click the '<Navigation_Button_3>' button on the 'Key_Project_Roles_Page'
+    Then I can see the research locations page
+    Then I can see the '<Validation_Text>' ui labels on the research locations page
+    Then I fill the research locations page with '<Research_Locations>'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your application page
+    When I navigate 'back'
+    Then I can see the research locations page
+    Then I can see previously saved values for '<Research_Locations>' displayed on the research locations page
+
+    Examples:
+      | Navigation_Button_1   | Navigation_Button_2 | Project_Details_IRAS | Navigation_Button_3 | Validation_Text | Project_Details_Title   | Key_Project_Roles     | Research_Locations                     |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_All_Fields | Valid_Data_All_Fields                  |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_All_Fields | Data_With_No_NHS_HSC                   |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_All_Fields | Data_With_Lead_Nation_Northern_Ireland |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_All_Fields | Data_With_Lead_Nation_Scotland         |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_All_Fields | Data_With_Lead_Nation_Wales            |
+
+  @rsp-1901 @jsEnabled
+  Scenario Outline: Validate lead nation radio option when javascript is enabled
+    And I click the '<Navigation_Button_1>' button on the 'My_Research_Projects_Page'
+    And I click the '<Navigation_Button_2>' button on the 'Create_Project_Record_Page'
+    And I fill the project details iras page with '<Project_Details_IRAS>'
+    And I click the '<Navigation_Button_3>' button on the 'Project_Details_IRAS_Page'
+    And I fill the project details title page with '<Project_Details_Title>'
+    And I click the '<Navigation_Button_3>' button on the 'Project_Details_Title_Page'
+    And I fill the key project roles page with '<Key_Project_Roles>'
+    When I click the '<Navigation_Button_3>' button on the 'Key_Project_Roles_Page'
+    Then I can see the research locations page
+    Then I fill the research locations page with '<Research_Locations>'
+    Then I validate lead nation radio option for '<Research_Locations>'
+
+    Examples:
+      | Navigation_Button_1   | Navigation_Button_2 | Project_Details_IRAS | Navigation_Button_3 | Validation_Text | Project_Details_Title   | Key_Project_Roles     | Research_Locations    |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_All_Fields | Valid_Data_All_Fields |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_All_Fields | Data_With_No_NHS_HSC  |
+
+  @rsp-1901-Run @jsDisabled
+  Scenario Outline: Validate lead nation radio option when javascript is disabled
+    And I click the '<Navigation_Button_1>' button on the 'My_Research_Projects_Page'
+    And I click the '<Navigation_Button_2>' button on the 'Create_Project_Record_Page'
+    And I fill the project details iras page with '<Project_Details_IRAS>'
+    And I click the '<Navigation_Button_3>' button on the 'Project_Details_IRAS_Page'
+    And I fill the project details title page with '<Project_Details_Title>'
+    And I click the '<Navigation_Button_3>' button on the 'Project_Details_Title_Page'
+    And I fill the key project roles page with '<Key_Project_Roles>'
+    When I click the '<Navigation_Button_3>' button on the 'Key_Project_Roles_Page'
+    Then I can see the research locations page
+    Then I fill the research locations page with '<Research_Locations>'
+    Then I validate lead nation radio option for '<Research_Locations>'
+
+    Examples:
+      | Navigation_Button_1   | Navigation_Button_2 | Project_Details_IRAS | Navigation_Button_3 | Validation_Text | Project_Details_Title   | Key_Project_Roles     | Research_Locations    |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_All_Fields | Data_With_No_NHS_HSC  |
+
+  @rsp-1901
+  Scenario Outline: Validate breadcrumb navigations in research locations page
+    And I click the '<Navigation_Button_1>' button on the 'My_Research_Projects_Page'
+    And I click the '<Navigation_Button_2>' button on the 'Create_Project_Record_Page'
+    And I fill the project details iras page with '<Project_Details_IRAS>'
+    And I click the '<Navigation_Button_3>' button on the 'Project_Details_IRAS_Page'
+    And I fill the project details title page with '<Project_Details_Title>'
+    And I click the '<Navigation_Button_3>' button on the 'Project_Details_Title_Page'
+    And I fill the key project roles page with '<Key_Project_Roles>'
+    And I click the '<Navigation_Button_3>' button on the 'Key_Project_Roles_Page'
+    And I can see the research locations page
+    When I click the '<Navigation_Link>' link on the 'Research_Locations_Page'
+    Then I can see the key project roles page
+
+    Examples:
+      | Navigation_Button_1   | Navigation_Button_2 | Project_Details_IRAS | Navigation_Button_3 | Project_Details_Title   | Key_Project_Roles     | Navigation_Link |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Valid_Data_All_Fields_1 | Valid_Data_All_Fields | Back            |
