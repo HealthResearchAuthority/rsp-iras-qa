@@ -1,4 +1,4 @@
-@adminUser @questionSetProjectDetails @SystemTest
+@adminUser @questionSetProjectDetails
 Feature: Question Set - Research Application - Project Details
 
   Background:

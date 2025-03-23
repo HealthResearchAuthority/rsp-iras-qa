@@ -1,4 +1,4 @@
-@adminUser @questionSetDevices @SystemTest
+@adminUser @questionSetDevices
 Feature: Question Set - Research Application - Devices
 
   Background:
