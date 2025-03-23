@@ -1,4 +1,4 @@
-@adminUser @questionSetALC @SystemTest
+@adminUser @questionSetALC
 Feature: Question Set - Research Application - Adults Lacking Capacity
 
   Background:

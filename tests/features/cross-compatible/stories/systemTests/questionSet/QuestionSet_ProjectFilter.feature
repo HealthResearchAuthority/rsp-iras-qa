@@ -1,4 +1,4 @@
-@adminUser @questionSetProjectFilter @SystemTest
+@adminUser @questionSetProjectFilter
 Feature: Question Set - Research Application - Project Filter
 
   Background:
