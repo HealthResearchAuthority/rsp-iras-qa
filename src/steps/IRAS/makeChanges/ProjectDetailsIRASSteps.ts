@@ -1,5 +1,5 @@
 import { createBdd } from 'playwright-bdd';
-import { expect, test } from '../../../hooks/CustomFixtures';
+import { test } from '../../../hooks/CustomFixtures';
 
 const { Then } = createBdd(test);
 
@@ -9,10 +9,13 @@ Then('I can see the project details iras page', async ({ projectDetailsIRASPage 
 
 Then(
   'I can see the {string} ui labels on the project details iras page',
-  async ({ projectDetailsIRASPage }, datasetName: string) => {
+  async ({ commonItemsPage, projectDetailsIRASPage }, datasetName: string) => {
     const dataset = projectDetailsIRASPage.projectDetailsIRASPageTestData[datasetName];
-    expect((await projectDetailsIRASPage.irasIDTextBoxLabel.textContent())?.trim()).toBe(dataset.iras_textbox_label);
-    expect((await projectDetailsIRASPage.irasIDTextBoxHintLabel.textContent())?.trim()).toBe(dataset.iras_textbox_hint);
+    for (const key in dataset) {
+      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+        await commonItemsPage.validateUILabels(dataset, key, projectDetailsIRASPage);
+      }
+    }
   }
 );
 

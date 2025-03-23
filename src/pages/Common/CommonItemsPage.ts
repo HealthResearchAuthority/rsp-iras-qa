@@ -228,4 +228,9 @@ export default class CommonItemsPage {
       }
     }
   }
+
+  async validateUILabels<PageObject>(dataset: JSON, key: string, page: PageObject) {
+    const locator: Locator = page[key];
+    expect((await locator.textContent())?.trim()).toBe(dataset[key]);
+  }
 }
