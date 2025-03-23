@@ -1,5 +1,5 @@
 import { createBdd } from 'playwright-bdd';
-import { expect, test } from '../../../hooks/CustomFixtures';
+import { test } from '../../../hooks/CustomFixtures';
 
 const { Then } = createBdd(test);
 
@@ -9,20 +9,13 @@ Then('I can see the project details title page', async ({ projectDetailsTitlePag
 
 Then(
   'I can see the {string} ui labels on the project details title page',
-  async ({ projectDetailsTitlePage }, datasetName: string) => {
+  async ({ commonItemsPage, projectDetailsTitlePage }, datasetName: string) => {
     const dataset = projectDetailsTitlePage.projectDetailsTitlePageTestData[datasetName];
-    expect((await projectDetailsTitlePage.shortProjectTitleTextBoxLabel.textContent())?.trim()).toBe(
-      dataset.short_project_title_textbox_label
-    );
-    expect((await projectDetailsTitlePage.plannedEndDateLabel.textContent())?.trim()).toBe(
-      dataset.planned_end_date_textbox_label
-    );
-    expect((await projectDetailsTitlePage.plannedEndDateHintLabel.textContent())?.trim()).toBe(
-      dataset.planned_end_date_hint_label
-    );
-    expect(await projectDetailsTitlePage.plannedEndDateDayLabel.textContent()).toBe(dataset.day_textbox_label);
-    expect(await projectDetailsTitlePage.plannedEndDateMonthLabel.textContent()).toBe(dataset.month_textbox_label);
-    expect(await projectDetailsTitlePage.plannedEndDateYearLabel.textContent()).toBe(dataset.year_textbox_label);
+    for (const key in dataset) {
+      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+        await commonItemsPage.validateUILabels(dataset, key, projectDetailsTitlePage);
+      }
+    }
   }
 );
 

@@ -21,16 +21,13 @@ Then(
 
 Then(
   'I can see the {string} ui labels on the research locations page',
-  async ({ reseachLocationsPage }, datasetName: string) => {
+  async ({ commonItemsPage, reseachLocationsPage }, datasetName: string) => {
     const dataset = reseachLocationsPage.researchLocationsPageTestData[datasetName];
-    expect((await reseachLocationsPage.nations_participating_label.textContent())?.trim()).toBe(
-      dataset.nations_participating_label
-    );
-    // expect((await reseachLocationsPage.nations_participating_hint_label.textContent())?.trim()).toBe(dataset.nations_participating_hint_label);
-    expect((await reseachLocationsPage.is_nhs_hsc_organisation_label.textContent())?.trim()).toBe(
-      dataset.is_nhs_hsc_organisation_label
-    );
-    expect((await reseachLocationsPage.lead_nation_label.textContent())?.trim()).toBe(dataset.lead_nation_label);
+    for (const key in dataset) {
+      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+        await commonItemsPage.validateUILabels(dataset, key, reseachLocationsPage);
+      }
+    }
   }
 );
 
