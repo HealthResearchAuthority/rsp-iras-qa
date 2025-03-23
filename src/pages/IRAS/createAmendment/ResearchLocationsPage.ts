@@ -10,6 +10,7 @@ export default class ResearchLocationsPage {
   readonly is_nhs_hsc_organisation_radio: Locator;
   readonly lead_nation_radio: Locator;
   readonly nations_participating_label: Locator;
+  readonly nations_participating_hint_label: Locator;
   readonly is_nhs_hsc_organisation_label: Locator;
   readonly lead_nation_label: Locator;
 
@@ -24,8 +25,13 @@ export default class ResearchLocationsPage {
     this.is_nhs_hsc_organisation_radio = this.page.getByTestId(/^IQA0004/);
     this.lead_nation_radio = this.page.getByTestId(/^IQA0005/);
     this.nations_participating_label = this.page.locator('div[id="Questions[0].Answers"] legend');
-    this.is_nhs_hsc_organisation_label = this.page.locator('Questions[1].SelectedOption');
-    this.lead_nation_label = this.page.locator('Questions[2].SelectedOption');
+    this.nations_participating_hint_label = this.page
+      .locator('div[id="Questions[0].Answers"] legend')
+      .locator('..')
+      .locator('..')
+      .locator('div[id="rule-hint"]');
+    this.is_nhs_hsc_organisation_label = this.page.locator('div[id="Questions[1].SelectedOption"] legend');
+    this.lead_nation_label = this.page.locator('div[id="Questions[2].SelectedOption"] legend');
   }
 
   //Page Methods
