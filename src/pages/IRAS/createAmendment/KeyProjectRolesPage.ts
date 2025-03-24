@@ -24,10 +24,12 @@ export default class KeyProjectRolesPage {
     this.chief_investigator_email_label = this.page
       .locator('label[for="IQA0311_Text"]')
       .locator('..')
+      .locator('..')
       .locator('div[id="rule-hint"] p');
     this.sponsor_contact_header_label = this.page.locator('label[for="IQA0313_Text"]');
     this.sponsor_contact_email_label = this.page
       .locator('label[for="IQA0313_Text"]')
+      .locator('..')
       .locator('..')
       .locator('div[id="rule-hint"] p');
     this.chief_investigator_email_text = this.page.getByTestId('IQA0311_Text');
