@@ -190,7 +190,7 @@ Feature: Create Amendment - Create Project
       | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_26 |
       | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_27 |
 
-  @rsp-1897-Alfred
+  @rsp-1897-Pending
   Scenario Outline: Validate error messages displayed when user inputs invalid data in key project roles page
     And I click the '<Navigation_Button_1>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_2>' button on the 'Create_Project_Record_Page'
