@@ -9,19 +9,16 @@ Feature: Create Amendment - Create Project
   Scenario Outline: Validate user is able to amend a project using an iras id
     And I can see the my research projects page
     And I can see the '<Validation_Text>' on the my research project page
-    Then I can see a '<Navigation_Button_1>' button on the 'My_Research_Projects_Page'
     When I click the '<Navigation_Button_1>' button on the 'My_Research_Projects_Page'
     Then I can see the create project record page
-    And I can see a '<Navigation_Button_2>' button on the 'Create_Project_Record_Page'
     When I click the '<Navigation_Button_2>' button on the 'Create_Project_Record_Page'
     Then I can see the project details iras page
     And I can see the '<Validation_Text>' ui labels on the project details iras page
     And I fill the project details iras page with '<Project_Details_IRAS>'
-    And I can see a '<Navigation_Button_3>' button on the 'Project_Details_IRAS_Page'
     When I click the '<Navigation_Button_3>' button on the 'Project_Details_IRAS_Page'
     Then I can see the project details title page
     When I click the '<Navigation_Link>' link on the 'Project_Details_Title_Page'
-    Then I can see the project details title page
+    Then I can see the project details iras page
     Then I can see previously saved values for '<Project_Details_IRAS>' displayed on the project details iras page
 
     Examples:
@@ -91,7 +88,7 @@ Feature: Create Amendment - Create Project
       | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_11 | Back            |
       | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_12 | Back            |
 
-  @rsp-1859-make-changes-dataset-error-OG
+  @rsp-1859
   Scenario Outline: Validate error messages displayed when user fill invalid data for short project title and project end date
     And I click the '<Navigation_Button_1>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_2>' button on the 'Create_Project_Record_Page'
@@ -146,6 +143,88 @@ Feature: Create Amendment - Create Project
       | Navigation_Button_1   | Navigation_Button_2 | Project_Details_IRAS | Navigation_Button_3 | Navigation_Link |
       | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Back            |
 
+  @rsp-1897
+  Scenario Outline: Validate user is able to fill key project roles page with valid data
+    And I click the '<Navigation_Button_1>' button on the 'My_Research_Projects_Page'
+    And I click the '<Navigation_Button_2>' button on the 'Create_Project_Record_Page'
+    And I fill the project details iras page with '<Project_Details_IRAS>'
+    And I click the '<Navigation_Button_3>' button on the 'Project_Details_IRAS_Page'
+    And I fill the project details title page with '<Project_Details_Title>'
+    When I click the '<Navigation_Button_3>' button on the 'Project_Details_Title_Page'
+    Then I can see the key project roles page
+    Then I can see the '<Validation_Text>' ui labels on the key project roles page
+    Then I fill the key project roles page with '<Key_Project_Roles>'
+    Then I click the '<Navigation_Button_3>' button on the 'Key_Project_Roles_Page'
+    Then I can see the research locations page
+    When I click the '<Navigation_Link>' link on the 'Research_Locations_Page'
+    Then I can see the key project roles page
+    Then I can see previously saved values for '<Key_Project_Roles>' displayed on the key project roles page
+
+    Examples:
+      | Navigation_Button_1   | Navigation_Button_2 | Project_Details_IRAS | Navigation_Button_3 | Validation_Text | Project_Details_Title   | Key_Project_Roles              |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_1  |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_2  |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_3  |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_4  |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_5  |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_6  |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_7  |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_8  |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_9  |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_10 |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_11 |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_12 |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_13 |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_14 |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_15 |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_16 |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_17 |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_18 |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_19 |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_20 |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_21 |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_22 |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_23 |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_24 |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_25 |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_26 |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_27 |
+
+  @rsp-1897-Alfred
+  Scenario Outline: Validate error messages displayed when user inputs invalid data in key project roles page
+    And I click the '<Navigation_Button_1>' button on the 'My_Research_Projects_Page'
+    And I click the '<Navigation_Button_2>' button on the 'Create_Project_Record_Page'
+    And I fill the project details iras page with '<Project_Details_IRAS>'
+    And I click the '<Navigation_Button_3>' button on the 'Project_Details_IRAS_Page'
+    And I fill the project details title page with '<Project_Details_Title>'
+    And I click the '<Navigation_Button_3>' button on the 'Project_Details_Title_Page'
+    And I fill the research locations page with '<Research_Locations>'
+    And I click the '<Navigation_Button_3>' button on the 'Research_Locations_Page'
+    And I can see the key project roles page
+    Then I fill the key project roles page with '<Key_Project_Roles>'
+    Then I click the '<Navigation_Button_3>' button on the 'Key_Project_Roles_Page'
+    Then I validate '<Field_Error_Message>' and '<Summary_Error_Message>' displayed on key project roles page for '<Key_Project_Roles>'
+
+    Examples:
+      | Navigation_Button_1   | Navigation_Button_2 | Project_Details_IRAS | Navigation_Button_3 | Validation_Text | Project_Details_Title   | Key_Project_Roles             | Field_Error_Message | Summary_Error_Message | Research_Locations    |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Invalid_Data_For_Email_Fields_1 | Field_Error_Message | Summary_Error_Message | Valid_Data_All_Fields |
+
+  @rsp-1897
+  Scenario Outline: Validate breadcrumb navigations in key project roles page
+    And I click the '<Navigation_Button_1>' button on the 'My_Research_Projects_Page'
+    And I click the '<Navigation_Button_2>' button on the 'Create_Project_Record_Page'
+    And I fill the project details iras page with '<Project_Details_IRAS>'
+    And I click the '<Navigation_Button_3>' button on the 'Project_Details_IRAS_Page'
+    And I fill the project details title page with '<Project_Details_Title>'
+    And I click the '<Navigation_Button_3>' button on the 'Project_Details_Title_Page'
+    And I can see the key project roles page
+    When I click the '<Navigation_Link>' link on the 'Key_Project_Roles_Page'
+    Then I can see the project details title page
+
+    Examples:
+      | Navigation_Button_1   | Navigation_Button_2 | Project_Details_IRAS | Navigation_Button_3 | Project_Details_Title   | Navigation_Link |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Valid_Data_All_Fields_1 | Back            |
+
   @rsp-1901
   Scenario Outline: Validate user is able to fill research locations page
     And I click the '<Navigation_Button_1>' button on the 'My_Research_Projects_Page'
@@ -159,7 +238,7 @@ Feature: Create Amendment - Create Project
     Then I can see the research locations page
     Then I can see the '<Validation_Text>' ui labels on the research locations page
     Then I fill the research locations page with '<Research_Locations>'
-    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    When I click the '<Navigation_Button_3>' button on the 'Research_Locations_Page'
     Then I can see the review your application page
     When I navigate 'back'
     Then I can see the research locations page
@@ -207,8 +286,8 @@ Feature: Create Amendment - Create Project
     Then I validate lead nation radio option for '<Research_Locations>'
 
     Examples:
-      | Navigation_Button_1   | Navigation_Button_2 | Project_Details_IRAS | Navigation_Button_3 | Validation_Text | Project_Details_Title   | Key_Project_Roles     | Research_Locations    |
-      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_All_Fields | Data_With_No_NHS_HSC  |
+      | Navigation_Button_1   | Navigation_Button_2 | Project_Details_IRAS | Navigation_Button_3 | Validation_Text | Project_Details_Title   | Key_Project_Roles     | Research_Locations   |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_All_Fields | Data_With_No_NHS_HSC |
 
   @rsp-1901
   Scenario Outline: Validate breadcrumb navigations in research locations page
