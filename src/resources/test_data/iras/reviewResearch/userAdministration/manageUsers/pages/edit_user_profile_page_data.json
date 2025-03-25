@@ -40,7 +40,19 @@
       "job_title_text": "Sr.Reviewer",
       "role_dropdown": "reviewer"
     },
-    "Valid_Data_In_All_Mandatory_Fields": {
+    "Edit_User_Valid_Data": {
+      "title_text": "Mr",
+      "first_name_text": "QA Automation First Name Test",
+      "last_name_text": "Test Last Name",
+      "email_address_text": "hscrd@health.org",
+      "telephone_text": "07000000000",
+      "organisation_text": "QA Automation HRA",
+      "job_title_text": "Sr.Reviewer",
+      "role_dropdown": "operations",
+      "country_checkbox": ["England"],
+      "access_required_checkbox": ["Research Ethics Comittee"]
+    },
+    "Valid_Mandatory_Fields": {
       "first_name_text": "First Name Test",
       "last_name_text": "Test Last Name",
       "email_address_text": "hscrd@health.org"

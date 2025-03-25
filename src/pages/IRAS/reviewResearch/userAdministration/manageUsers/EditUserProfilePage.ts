@@ -33,6 +33,7 @@ export default class EditUserProfilePage {
   readonly review_body_label: Locator;
   readonly review_body_dropdown: Locator;
   readonly save_button: Locator;
+  // readonly user_Role: string;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -63,6 +64,8 @@ export default class EditUserProfilePage {
     this.committee_dropdown = this.page.getByTestId('Committee');
     this.country_label = this.page.locator('[class="govuk-label"][for="Country"] b'); //update
     this.country_checkbox = this.page.locator('[name="Country"][type="checkbox"]');
+    //this.isCountrySelected = this.page.locator('[name="Country"][type="checkbox"]').isChecked();
+    //this.country_England_checkbox
     this.access_required_label = this.page.locator('[class="govuk-label"][for="AccessRequired"] b'); //update
     this.access_required_checkbox = this.page.locator('[name="AccessRequired"][type="checkbox"]');
     this.review_body_label = this.page.locator('[class="govuk-label"][for="ReviewBody"] b');
@@ -80,15 +83,13 @@ export default class EditUserProfilePage {
     await expect(this.page_heading).toBeVisible();
     await expect(this.page_heading).toHaveText(this.editUserProfilePageData.Edit_User_Profile_Page.page_heading);
     await expect(this.title_label).toHaveText(this.editUserProfilePageData.Edit_User_Profile_Page.title_label);
-    // await expect(this.first_name_label).toHaveText(
-    //   this.editUserProfilePageData.Edit_User_Profile_Page.first_name_label
-    // );
-    // await expect(this.last_name_label).toHaveText(
-    //   this.editUserProfilePageData.Edit_User_Profile_Page.last_name_label
-    // );
-    // await expect(this.email_address_label).toHaveText(
-    //   this.editUserProfilePageData.Edit_User_Profile_Page.email_address_label
-    // );
+    await expect(this.first_name_label).toHaveText(
+      this.editUserProfilePageData.Edit_User_Profile_Page.first_name_label
+    );
+    await expect(this.last_name_label).toHaveText(this.editUserProfilePageData.Edit_User_Profile_Page.last_name_label);
+    await expect(this.email_address_label).toHaveText(
+      this.editUserProfilePageData.Edit_User_Profile_Page.email_address_label
+    );
     await expect(this.telephone_label).toHaveText(this.editUserProfilePageData.Edit_User_Profile_Page.telephone_label);
     await expect(this.organisation_label).toHaveText(
       this.editUserProfilePageData.Edit_User_Profile_Page.organisation_label
@@ -96,6 +97,26 @@ export default class EditUserProfilePage {
     await expect(this.job_title_label).toHaveText(this.editUserProfilePageData.Edit_User_Profile_Page.job_title_label);
     await expect(this.role_label).toHaveText(this.editUserProfilePageData.Edit_User_Profile_Page.role_label);
     await expect(this.save_button).toHaveText(this.editUserProfilePageData.Edit_User_Profile_Page.save_button);
+    if ((await this.role_dropdown.inputValue()).trim().toLocaleLowerCase() == 'operations') {
+      await expect(this.job_title_label).toHaveText(
+        this.editUserProfilePageData.Edit_User_Profile_Page.committee_label
+      );
+      await expect(this.role_label).toHaveText(this.editUserProfilePageData.Edit_User_Profile_Page.country_label);
+      await expect(this.save_button).toHaveText(
+        this.editUserProfilePageData.Edit_User_Profile_Page.access_required_label
+      );
+      await expect(this.save_button).toHaveText(this.editUserProfilePageData.Edit_User_Profile_Page.review_body_label);
+    }
   }
-  //need to select 'Operations' as role and validate fields are displayed
+
+  async clearOptionalFields() {
+    await this.title_text.clear();
+    await this.telephone_text.clear();
+    await this.organisation_text.clear();
+    await this.job_title_text.clear();
+    const isCountrySelected = await this.country_checkbox.isChecked();
+    if (isCountrySelected) {
+      this.country_checkbox.uncheck();
+    }
+  }
 }
