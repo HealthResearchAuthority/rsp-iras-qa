@@ -24,7 +24,7 @@ Feature: HRAPROG-394- User Administration: Manage Users
         | Add_User_Profile                                      |
         | Valid_Data_In_All_Fields_Role_Operations              | 
         | Valid_Data_In_All_Fields_Role_Reviewer                |
-        # | Valid_Data_In_All_Mandatory_Fields                     | 
+        # | Valid_Data_In_All_Mandatory_Fields                  | 
     
     # @rsp-2570
     # Scenario Outline: Verify the user is able to create a new review body with real data      
