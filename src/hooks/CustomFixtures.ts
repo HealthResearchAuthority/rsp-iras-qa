@@ -157,6 +157,14 @@ export const test = base.extend<CustomFixtures>({
     await use(new CreateReviewBodyConfirmationPage(page));
   },
 
+  userProfilePage: async ({ page }, use) => {
+    await use(new UserProfilePage(page));
+  },
+
+  editUserProfilePage: async ({ page }, use) => {
+    await use(new EditUserProfilePage(page));
+  },
+
   makeAxeBuilder: async ({ page }, use) => {
     const makeAxeBuilder = () => new AxeBuilder({ page });
     await use(makeAxeBuilder);

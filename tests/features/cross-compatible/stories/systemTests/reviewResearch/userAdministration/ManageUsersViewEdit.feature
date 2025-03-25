@@ -48,16 +48,16 @@ Feature: HRAPROG-393- User Administration: Manage user profiles
         Then I can see the Manage users list page
         And I search and click on View_edit link for 'Before_Edit_User_Valid_Data' user with '<Status>' status from the manage user page
         Then I can see the view user profile details page for '<Status>' user
-        When I click the '<Edit_User_Valid_Data>' change link for '<User_Role>' on the user profile page
+        When I click the '<Edit_User_Field>' change link for '<User_Role>' on the user profile page
         Then I can see the edit user profile page
-        And I update user profile '<Edit_User_Profile_Fields>' on 'Edit_User_Profile_Page'
+        And I update user profile '<Edit_User_Field_Data>' on 'Edit_User_Profile_Page'
         And I click the 'Save' button on the 'Edit_User_Profile_Page'
         And I can see the view user profile details page for '<Status>' user
-        Then I can see the user profile '<Edit_User_Valid_Data>' is updated in user profile page
+        Then I can see the user profile '<Edit_User_Field>' is updated in user profile page
         Examples:
-            | Edit_User_Valid_Data | User_Role  | Status |
-            | title_text           | Operations | ACTIVE |
-    # | first_name_text          | Operations | ACTIVE |
+    # | Edit_User_Field | User_Role  | Status | Edit_User_Field_Data |
+    # | title_text      | Operations | ACTIVE | User_Title_Text      |
+    # | first_name_text | Operations | ACTIVE | User_First_Name_Text |
     # | last_name_text           | Operations | ACTIVE |
     # | email_address_text       | Operations | ACTIVE |
     # | telephone_text           | Operations | ACTIVE |

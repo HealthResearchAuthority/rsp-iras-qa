@@ -126,7 +126,11 @@ Then('I see something {string}', async ({ commonItemsPage }, testType: string) =
 
 Then(
   'I click the {string} button on the {string}',
-  async ({ commonItemsPage, homePage, checkCreateUserProfilePage }, buttonKey: string, pageKey: string) => {
+  async (
+    { commonItemsPage, homePage, checkCreateUserProfilePage, manageUsersPage, userProfilePage },
+    buttonKey: string,
+    pageKey: string
+  ) => {
     const buttonValue = commonItemsPage.buttonTextData[pageKey][buttonKey];
     if (pageKey === 'Banner' && buttonKey === 'Login') {
       await commonItemsPage.bannerLoginBtn.click();
@@ -135,6 +139,10 @@ Then(
     } else if (pageKey === 'Check_Create_User_Profile_Page' && buttonKey === 'Create_Profile') {
       await checkCreateUserProfilePage.create_profile_button.click();
       //added this as a workaround >>Create_Profile button issue
+    } else if (pageKey === 'Manage_Users_Page' && buttonKey === 'Back') {
+      await manageUsersPage.back_button.click();
+    } else if (pageKey === 'User_Profile_Page' && buttonKey === 'Back') {
+      await userProfilePage.back_button.click();
     } else {
       await commonItemsPage.govUkButton.getByText(buttonValue, { exact: true }).click();
     }
@@ -165,8 +173,10 @@ Given(
       await commonItemsPage.bannerMyApplications.click();
     } else if (pageKey === 'Home_Page' && linkKey === 'My_Applications') {
       await homePage.myApplicationsLink.click();
-    } else if (pageKey === 'Manage_Users_Page' && linkKey === 'View_Edit') {
-      await manageUsersPage.view_edit_link.click(); //work around for now >> to click on first View/Edit link
+    } else if (pageKey === 'Manage_Users_Page' && linkKey === 'Back_Link') {
+      await manageUsersPage.back_button.click();
+    } else if (pageKey === 'User_Profile_Page' && linkKey === 'Back_Link') {
+      await userProfilePage.back_button.click(); //work around for now >> to click on first View/Edit link
     } else if (pageKey === 'User_Profile_Page' && linkKey === 'Change') {
       await userProfilePage.first_change_link.click(); //work around for now >> to click on first Change link
     } else {

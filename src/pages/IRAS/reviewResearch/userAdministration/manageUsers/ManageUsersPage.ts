@@ -8,18 +8,22 @@ export default class ManageUsersPage {
   readonly manageUsersPageData: typeof manageUsersPageData;
   readonly linkTextData: typeof linkTextData;
   readonly page_heading: Locator;
-  // readonly add_new_users_record_link: Locator;
-  // // readonly mainPageContent: Locator;
-  // readonly first_name_column_header: Locator;
-  // readonly last_name_column_header: Locator;
-  // readonly email_address_column_header: Locator;
-  // readonly status_column_header: Locator;
-  // readonly last_logged_in_column_header: Locator;
-  // readonly actions_column_header: Locator;
+  readonly back_button: Locator;
+  readonly add_new_users_record_link: Locator;
+  readonly first_name_column_header: Locator;
+  readonly last_name_column_header: Locator;
+  readonly email_address_column_header: Locator;
+  readonly status_column_header: Locator;
+  readonly last_logged_in_column_header: Locator;
+  readonly actions_column_header: Locator;
   readonly view_edit_link: Locator;
-  // readonly find_user_title: Locator;
-  // readonly search_box: Locator;
-  // readonly search_button_label: Locator;
+  readonly find_user_title: Locator;
+  readonly search_box: Locator;
+  readonly search_button_label: Locator;
+  readonly firstNameFromListLabel: Locator;
+  readonly users_list_rows: Locator;
+
+  //td:nth-child(1)
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -27,36 +31,97 @@ export default class ManageUsersPage {
     this.manageUsersPageData = manageUsersPageData;
 
     //Locators
+    this.users_list_rows = this.page.locator('table tbody tr');
+
     this.page_heading = this.page.locator('.govuk-heading-l');
-    // this.mainPageContent = this.page.getByTestId('main-content');
-    // this.add_new_users_record_link = this.page.getByTestId('main-content');
-    // this.first_name_column_header = this.page.getByTestId('main-content');
-    // this.last_name_column_header = this.page.getByTestId('main-content');
-    // this.email_address_column_header = this.page.getByTestId('main-content');
-    // this.status_column_header = this.page.getByTestId('main-content');
-    // this.last_logged_in_column_header = this.page.getByTestId('main-content');
-    // this.actions_column_header = this.page.getByTestId('main-content');
-    this.view_edit_link = this.page.locator('(//a[@class="govuk-link" and text()="View/Edit"])[1]');
-    // this.find_user_title = this.page.getByTestId('main-content');
-    // this.search_box = this.page.getByTestId('main-content');
-    // this.search_button_label = this.page.getByTestId('main-content');
+    this.back_button = this.page.getByText('Back');
+    this.add_new_users_record_link = this.page.getByText('Add a new user profile record');
+    this.first_name_column_header = this.page.getByText('First name');
+    this.last_name_column_header = this.page.getByText('Last name');
+    this.email_address_column_header = this.page.getByText('Email address');
+    this.status_column_header = this.page.getByText('Status');
+    this.last_logged_in_column_header = this.page.getByText('Last logged in');
+    this.actions_column_header = this.page.getByText('Action');
+    this.view_edit_link = this.page.getByText('View/Edit').first();
+    this.find_user_title = this.page.getByText('Find a user');
+    this.search_box = this.page.getByTestId('SearchUser');
+    this.search_button_label = this.page.getByText('Search');
+    this.firstNameFromListLabel = this.page.locator('td:nth-child(1)');
+    // add next button pagination
   }
 
   async assertOnManageUsersPage() {
     //need to update code here
     await expect(this.page_heading).toBeVisible();
     await expect(this.page_heading).toHaveText(this.manageUsersPageData.Manage_Users_Page.page_heading);
-    //need to update code here
-    // await expect(this.add_new_users_record_link).toHaveText(this.manageUsersPageData.Manage_Users_Page.add_new_users_record_link);
-    // await expect(this.first_name_column_header).toHaveText(this.manageUsersPageData.Manage_Users_Page.first_name_column_header);
-    // await expect(this.last_name_column_header).toHaveText(this.manageUsersPageData.Manage_Users_Page.last_logged_in_column_header);
-    // await expect(this.email_address_column_header).toHaveText(this.manageUsersPageData.Manage_Users_Page.email_address_column_header);
-    // await expect(this.status_column_header).toHaveText(this.manageUsersPageData.Manage_Users_Page.status_column_header);
-    // await expect(this.last_logged_in_column_header).toHaveText(this.manageUsersPageData.Manage_Users_Page.last_logged_in_column_header);
-    // await expect(this.actions_column_header).toHaveText(this.manageUsersPageData.Manage_Users_Page.actions_column_header);
-    // await expect(this.view_edit_link).toHaveText(this.manageUsersPageData.Manage_Users_Page.view_edit_link);
-    // await expect(this.find_user_title).toHaveText(this.manageUsersPageData.Manage_Users_Page.find_user_title);
-    // await expect(this.search_button_label).toHaveText(this.manageUsersPageData.Manage_Users_Page.search_button_label);
+    //defect raised for add new user profile typo
+    await expect(this.add_new_users_record_link).toHaveText(
+      this.manageUsersPageData.Manage_Users_Page.add_new_users_record_link
+    );
+    await expect(this.first_name_column_header).toHaveText(
+      this.manageUsersPageData.Manage_Users_Page.first_name_column_header
+    );
+    await expect(this.last_name_column_header).toHaveText(
+      this.manageUsersPageData.Manage_Users_Page.last_name_column_header
+    );
+    await expect(this.email_address_column_header).toHaveText(
+      this.manageUsersPageData.Manage_Users_Page.email_address_column_header
+    );
+    await expect(this.status_column_header).toHaveText(this.manageUsersPageData.Manage_Users_Page.status_column_header);
+    await expect(this.last_logged_in_column_header).toHaveText(
+      this.manageUsersPageData.Manage_Users_Page.last_logged_in_column_header
+    );
+    await expect(this.actions_column_header).toHaveText(
+      this.manageUsersPageData.Manage_Users_Page.actions_column_header
+    );
+    await expect(this.view_edit_link).toHaveText(this.manageUsersPageData.Manage_Users_Page.view_edit_link);
+    await expect(this.find_user_title).toHaveText(this.manageUsersPageData.Manage_Users_Page.find_user_title);
+    await expect(this.search_button_label).toHaveText(this.manageUsersPageData.Manage_Users_Page.search_button_label);
+  }
+
+  async findUserProfile(userFirstName: string, userLastName: string, userEmail: string, userStatus: string) {
+    let dataFound = false;
+    while (!dataFound) {
+      // Capture all rows in the table using locator
+      //const rows = this.page.locator('table tbody tr');
+      const rowCount = await this.users_list_rows.count();
+      for (let i = 0; i < rowCount; i++) {
+        // Get the text content of the first name, last name, and email columns (adjust the selectors as needed)
+        const firstNameText = await this.users_list_rows.nth(i).locator(this.firstNameFromListLabel).textContent();
+        const lastNameText = await this.users_list_rows.nth(i).locator('td:nth-child(2)').textContent();
+        const emailText = await this.users_list_rows.nth(i).locator('td:nth-child(3)').textContent();
+        const statusText = await this.users_list_rows.nth(i).locator('td:nth-child(4)').textContent();
+
+        // Check if all three values match
+        if (
+          firstNameText?.trim() === userFirstName &&
+          lastNameText?.trim() === userLastName &&
+          emailText?.trim() === userEmail &&
+          statusText?.trim() === userStatus
+        ) {
+          console.log(`Data found: ${firstNameText}, ${lastNameText}, ${emailText}`);
+          // Click the "View" button in the same row
+          await this.users_list_rows.nth(i).getByText('View/Edit').click();
+          dataFound = true;
+          break;
+        }
+      }
+
+      if (!dataFound) {
+        // Check if the "Next" button is available using locator
+        const nextButton = this.page.locator('.govuk-pagination__next');
+
+        if ((await nextButton.count()) > 0) {
+          // Click the "Next" button
+          await nextButton.click();
+          // Wait for the next page to load
+          await this.page.waitForSelector('table tbody tr');
+        } else {
+          console.log('Reached the last page, data not found.');
+          break;
+        }
+      }
+    }
   }
   async checkAlphabeticalSorting(dataset: any) {
     const SEARCH_RECORD =

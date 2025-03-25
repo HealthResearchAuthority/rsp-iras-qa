@@ -35,7 +35,15 @@
   "Check_Create_User_Profile_Page": {
     "Create_Profile": "Create Profile"
   },
+  "Manage_Users_Page": {
+    "Back": "Back"
+  },
   "User_Profile_Page": {
-    "Disable_User_Record": "Disable user record"
+    "Disable_User_Record": "Disable user record",
+    "Back": "Back"
+  },
+  "Edit_User_Profile_Page": {
+    "Save": "Save",
+    "Back": "Back"
   }
 }

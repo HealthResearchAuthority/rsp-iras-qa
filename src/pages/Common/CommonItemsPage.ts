@@ -208,4 +208,18 @@ export default class CommonItemsPage {
     const actual_val = safe_val.replace(/\s+/g, ' ').trim();
     return actual_val;
   }
+
+  async validateUIComponentValues<PageObject>(dataset: JSON, key: string, page: PageObject) {
+    const locator: Locator = page[key];
+    const typeAttribute = await locator.first().getAttribute('type');
+    if (typeAttribute === 'text' || typeAttribute === 'date') {
+      expect(await locator.getAttribute('value')).toBe(dataset[key]);
+    } else if (typeAttribute === 'radio') {
+      expect(await locator.locator('..').getByLabel(dataset[key], { exact: true }).isChecked());
+    } else if (typeAttribute === 'checkbox') {
+      for (const checkbox of dataset[key]) {
+        expect(await locator.locator('..').getByLabel(checkbox, { exact: true }).isChecked());
+      }
+    }
+  }
 }

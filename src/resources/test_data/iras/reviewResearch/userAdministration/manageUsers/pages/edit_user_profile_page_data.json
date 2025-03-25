@@ -17,6 +17,24 @@
     "review_body_label": "Review body",
     "save_button": "Save"
   },
+  "Before_Edit_User_Valid_Data": {
+    "title_text": "Mr",
+    "first_name_text": "Automation",
+    "last_name_text": "Admin",
+    "email_address_text": "jhiusegdfgdfuisea@test.com",
+    "telephone_text": "07111111112",
+    "organisation_text": "HRA",
+    "job_title_text": "Reviewer",
+    "role_dropdown": "Admin",
+    "country_checkbox": ["England"],
+    "access_required_checkbox": ["Research Ethics Comittee"]
+  },
+  "User_Title_Text": {
+    "title_text": "Mr"
+  },
+  "User_First_Name_Text": {
+    "first_name_text": "Automation_FN"
+  },
   "Edit_User_Profile": {
     "Valid_Data_In_All_Fields_Role_Operations": {
       "title_text": "Mr",
@@ -39,18 +57,6 @@
       "organisation_text": "QA Automation HRA",
       "job_title_text": "Sr.Reviewer",
       "role_dropdown": "reviewer"
-    },
-    "Edit_User_Valid_Data": {
-      "title_text": "Mr",
-      "first_name_text": "QA Automation First Name Test",
-      "last_name_text": "Test Last Name",
-      "email_address_text": "hscrd@health.org",
-      "telephone_text": "07000000000",
-      "organisation_text": "QA Automation HRA",
-      "job_title_text": "Sr.Reviewer",
-      "role_dropdown": "operations",
-      "country_checkbox": ["England"],
-      "access_required_checkbox": ["Research Ethics Comittee"]
     },
     "Valid_Mandatory_Fields": {
       "first_name_text": "First Name Test",
