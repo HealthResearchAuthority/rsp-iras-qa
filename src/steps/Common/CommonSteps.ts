@@ -24,25 +24,32 @@ AfterStep(async ({ page, $step, $testInfo }) => {
 
 Then('I capture the page screenshot', async () => {});
 
-Given('I have navigated to the {string}', async ({ loginPage, homePage, createApplicationPage }, page: string) => {
-  switch (page) {
-    case 'Login_Page':
-      await homePage.goto();
-      await homePage.loginBtn.click();
-      await loginPage.assertOnLoginPage();
-      break;
-    case 'Home_Page':
-      await homePage.goto();
-      await homePage.assertOnHomePage();
-      break;
-    case 'Create_Application_Page':
-      await createApplicationPage.goto();
-      await createApplicationPage.assertOnCreateApplicationPage();
-      break;
-    default:
-      throw new Error(`${page} is not a valid option`);
+Given(
+  'I have navigated to the {string}',
+  async ({ loginPage, homePage, createApplicationPage, systemAdministrationHomePage }, page: string) => {
+    switch (page) {
+      case 'Login_Page':
+        await homePage.goto();
+        await homePage.loginBtn.click();
+        await loginPage.assertOnLoginPage();
+        break;
+      case 'Home_Page':
+        await homePage.goto();
+        await homePage.assertOnHomePage();
+        break;
+      case 'Create_Application_Page':
+        await createApplicationPage.goto();
+        await createApplicationPage.assertOnCreateApplicationPage();
+        break;
+      case 'System_Administration_Home_Page':
+        await systemAdministrationHomePage.goto();
+        await systemAdministrationHomePage.assertOnSystemAdministrationHomePage();
+        break;
+      default:
+        throw new Error(`${page} is not a valid option`);
+    }
   }
-});
+);
 
 When(
   'I can see the {string}',

@@ -1,9 +1,10 @@
-@UserAdministration  @ManageReviewBodies @adminUser @SystemTest
+@UserAdministration  @ManageUsers @adminUser @SystemTest
 Feature: HRAPROG-394- User Administration: Manage Users
 
     Background:
-        Given I have navigated to the 'Home_Page'
-        When I click the 'Manage_Users' link on the 'Home_Page'       
+        # Given I have navigated to the 'Home_Page'
+        Given I have navigated to the 'System_Administration_Home_Page'
+        When I click the 'Manage_Users' link on the 'System_Administration_Home_Page'       
         Then I can see the Manage users list page
         When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'       
         Then I can see the Add a new user profile page 
@@ -17,8 +18,9 @@ Feature: HRAPROG-394- User Administration: Manage Users
         Then I can see the create user profile confirmation page for '<Add_User_Profile>'
         When I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'       
         Then I can see the Manage users list page
-        Then I can see the list is sorted by default in the alphabetical order of the First Name and I can see the newly created user record should be present in the list for '<Add_User_Profile>'
-        # And I can see the status of the newly created user record is 'active'
+        And I can see the newly created user record should be present in the list for '<Add_User_Profile>' with '<Status>' status in the manage user page
+        And I can see the list is sorted by default in the alphabetical order of the 'First Name'
+        
 
         Examples:
         | Add_User_Profile                                      |

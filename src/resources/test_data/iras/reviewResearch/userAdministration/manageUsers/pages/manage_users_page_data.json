@@ -2,7 +2,7 @@
   "Manage_Users_Page": {
     "selected_bread_crumbs": "Manage Users",
     "back_button": "Back",
-    "page_heading": "Manage Users",
+    "page_heading": "Manage users",
     "add_new_users_record_link": "Add a new user profile record",
     "first_name_column_header": "First name",
     "last_name_column_header": "Last name",

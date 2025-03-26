@@ -181,12 +181,10 @@ export default class CommonItemsPage {
     const screenshot = await locator.screenshot({ path: 'screenshot.png' });
     await $testInfo.attach(`[step] ${$step.title}`, { body: screenshot, contentType: 'image/png' });
   }
-  pathToTestDataJson =
-    './src/resources/test_data/iras/reviewResearch/userAdministration/manageUsers/pages/create_user_profile_page_data.json';
-  async generateUniqueEmail(keyVal: string): Promise<string> {
-    const prefix = 'QAAutomation';
+
+  async generateUniqueEmail(keyVal: string, prefix: string, pathToTestDataJson: string): Promise<string> {
     const timestamp = new Date().toISOString().replace(/[-:.TZ]/g, '');
-    const filePath = path.resolve(this.pathToTestDataJson);
+    const filePath = path.resolve(pathToTestDataJson);
     await this.updatePrefix(filePath, timestamp);
     const domain = keyVal;
     return `${prefix}${timestamp}${domain}`;

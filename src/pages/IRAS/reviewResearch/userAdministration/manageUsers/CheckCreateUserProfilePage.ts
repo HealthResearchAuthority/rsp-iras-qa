@@ -103,9 +103,9 @@ export default class CheckCreateUserProfilePage {
     //   this.checkCreateUserProfilePageData.Check_Create_User_Profile_Page_Role_Operations.page_heading
     // );
     await expect(this.subHeading).toBeVisible();
-    // await expect(this.subHeading).toHaveText(
-    //   this.checkCreateUserProfilePageData.Check_Create_User_Profile_Page_Role_Operations.sub_heading
-    // );
+    await expect(this.subHeading).toHaveText(
+      this.checkCreateUserProfilePageData.Check_Create_User_Profile_Page_Role_Operations.sub_heading
+    );
 
     // await expect(this.organisationNameLbl).toHaveText(
     //   this.checkCreateUserProfilePageData.Check_Create_User_Profile_Page.organisation_name_label

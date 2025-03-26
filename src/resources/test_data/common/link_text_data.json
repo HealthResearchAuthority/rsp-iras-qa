@@ -21,6 +21,10 @@
     "Manage_Review_Bodies": "Manage review bodies",
     "Manage_Users": "Manage Users"
   },
+  "System_Administration_Home_Page": {
+    "Manage_Review_Bodies": "Manage review bodies",
+    "Manage_Users": "Manage users"
+  },
   "Manage_Review_Bodies_Page": {
     "Add_New_Review_Body_Record": "Add a new review body record"
   },
@@ -29,7 +33,7 @@
     "Add_Another_Review_Body": "Add another review body"
   },
   "Manage_Users_Page": {
-    "Add_New_User_Profile_Record": "Add new user profile record"
+    "Add_New_User_Profile_Record": "Add a new user profile record"
   },
   "Create_User_Profile_Confirmation_Page": {
     "Back_To_Manage_Users": "Back to Manage users"
