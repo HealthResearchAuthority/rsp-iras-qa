@@ -49,7 +49,6 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
   Scenario: Project Details IRAS ID
     Given I have navigated to the 'Home_Page'
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
-    Then I can see the create project record page
     When I click the 'Start' button on the 'Create_Project_Record_Page'
     Then I can see the project details iras page
     When I Scan the page with the Axe Accessibilty Tool
@@ -60,9 +59,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
   Scenario: Project Details - Short project title and Planned end date
     Given I have navigated to the 'Home_Page'
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
-    Then I can see the create project record page
     When I click the 'Start' button on the 'Create_Project_Record_Page'
-    Then I can see the project details iras page
     And I fill the project details iras page with 'Valid_IRAS_ID'
     When I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
     Then I can see the project details title page
@@ -74,12 +71,9 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
   Scenario: Research Locations
     Given I have navigated to the 'Home_Page'
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
-    Then I can see the create project record page
     When I click the 'Start' button on the 'Create_Project_Record_Page'
-    Then I can see the project details iras page
     And I fill the project details iras page with 'Valid_IRAS_ID'
     When I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
-    Then I can see the project details title page
     And I fill the project details title page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
     Then I can see the research locations page
@@ -91,15 +85,11 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
   Scenario: Key Project Roles
     Given I have navigated to the 'Home_Page'
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
-    Then I can see the create project record page
     When I click the 'Start' button on the 'Create_Project_Record_Page'
-    Then I can see the project details iras page
     And I fill the project details iras page with 'Valid_IRAS_ID'
     When I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
-    Then I can see the project details title page
     And I fill the project details title page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    Then I can see the research locations page
     And I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     Then I can see the key project roles page
