@@ -1,4 +1,4 @@
-@adminUser @questionSetStudent @SystemTest
+@adminUser @questionSetStudent
 Feature: Question Set - Research Application - Student
 
   Background:

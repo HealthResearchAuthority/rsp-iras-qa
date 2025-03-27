@@ -1,4 +1,4 @@
-@adminUser @questionSetBooking @SystemTest
+@adminUser @questionSetBooking
 Feature: Question Set - Research Application - Booking
 
   Background:

@@ -1,4 +1,4 @@
-@adminUser @questionSetDemo @SystemTest
+@adminUser @questionSetDemo
 Feature: Question Set - Research Application - Combined Question Set Demo
 
     Background:

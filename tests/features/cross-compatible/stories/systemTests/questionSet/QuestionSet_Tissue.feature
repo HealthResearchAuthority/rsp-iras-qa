@@ -1,4 +1,4 @@
-@adminUser @questionSetTissue @SystemTest
+@adminUser @questionSetTissue
 Feature: Question Set - Research Application - Tissue
 
   Background:

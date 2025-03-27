@@ -6,7 +6,7 @@
   "Home_Page": {
     "New_Application": "Create New Application",
     "Login": "Sign In",
-    "Make_Changes_To_Research": "Make changes to an approved project"
+    "Create_Project_Record": "Create project record"
   },
   "Create_Application_Page": {
     "Create": "Create"
@@ -19,5 +19,23 @@
     "Continue": "Save and Continue",
     "Validate": "Validate",
     "Proceed_Submit": "Proceed to Submit"
+  },
+  "My_Research_Projects_Page": {
+    "Create_Project_Record": "Create project record"
+  },
+  "Create_Project_Record_Page": {
+    "Start": "Start"
+  },
+  "Project_Details_IRAS_Page": {
+    "Save_Continue": "Save and continue"
+  },
+  "Project_Details_Title_Page": {
+    "Save_Continue": "Save and continue"
+  },
+  "Research_Locations_Page": {
+    "Save_Continue": "Save and continue"
+  },
+  "Key_Project_Roles_Page": {
+    "Save_Continue": "Save and continue"
   }
 }

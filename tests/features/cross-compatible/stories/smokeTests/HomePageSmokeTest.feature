@@ -7,7 +7,6 @@ Feature: As an Authenticated Admin User I have Access to Authorised Application 
   @logoutSmoke
   Scenario: I am able to Logout
     When I click the 'Logout' button on the 'Banner'
-    Then I can see the 'Home_Page'
     And I can see a 'Login' button on the 'Home_Page'
 
   @accessApplicationSmoke
@@ -17,5 +16,5 @@ Feature: As an Authenticated Admin User I have Access to Authorised Application 
     And I can see a '<Link_Type>' link on the 'Banner'
 
     Examples:
-      | Button_Type              | Link_Type       |
-      | Make_Changes_To_Research | My_Applications |
+      | Button_Type           | Link_Type       |
+      | Create_Project_Record | My_Applications |

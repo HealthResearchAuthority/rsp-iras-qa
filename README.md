@@ -46,7 +46,7 @@ For example the screenhot below shows 2 feature files containing 3 test scenario
 - The `PocTest.feature` has 2 scenarios one of which has the Scenario tag `@exampleTestTag`  
 &nbsp; 
 
-![running with tags](src/resources\images\runWithTag.png =1400x700)  
+<img src="src/resources/images/runWithTag.png" alt="running with tags">  
 &nbsp;
 
 So when I run the command `npx bddgen --tags "@authSetup or exampleTestTag" && npx playwright test` only 2 of the 3 scenarios execute
@@ -82,7 +82,7 @@ Both reports are stored within the top level `test-reports` folder (which is set
 Within their respective `playwright` and `cucumber` folders  
 This configuration is set within the `reporter` array property in the `playwright.config.ts` file
 
-![reporters](src/resources\images\reporters.png)  
+<img src="src/resources/images/reporters.png" alt="reporters">  
 &nbsp; 
    
 ## Running in Azure Devops Pipeline
@@ -91,7 +91,7 @@ This repo has an associated Azure DevOps Pipeline job, which can run our tests r
 
 The Pipeline job is configured in the `azure-pipelines.yml`
 
-The Pipeline job can be found [here](https://dev.azure.com/FutureIRAS/Research%20Systems%20Programme/_build?definitionId=9)
+The Pipeline job can be found [here](https://dev.azure.com/FutureIRAS/Research%20Systems%20Programme/_build?definitionId=60)
 
 The job will trigger when we push code to our `main` branch
 
@@ -104,7 +104,7 @@ We can also trigger the job manually by:
 - Set the Sonar Cloud Analysis value to true or false, set to true by default
 - Click Run
 
-![runJob](src/resources\images\runPipeline.png)  
+<img src="src/resources/images/runPipeline.png" alt="runJob">    
 &nbsp; 
 
 This will kick off a new Run, which will appear on the **Runs** tab
@@ -118,7 +118,7 @@ It shows:
 - any artifacts published (click link to view)
 - the list of jobs that were executed
 
-![jobSummary](src/resources\images\jobSummary.png)  
+<img src="src/resources/images/jobSummary.png" alt="jobSummary">  
 &nbsp; 
 
 To see a detailed view of the run,
@@ -131,16 +131,18 @@ You can click each step to display the step logs.
 
 Any artifacts published will be available at the top level of the job (click link to view).
 
-![azureJobDetails](src/resources\images\azureJobDetails.png =500x500)  
+<img src="src/resources/images/azureJobDetails.png" alt="azureJobDetails">   
 &nbsp; 
 
 If you click the link to view the published Artifacts,  
 
-You will see a page displaying the `cucumber-report` folder & `playwright-report` folder.  
+You will see a page displaying the `test-report` folder and if you expand that folder,there is a sub folder with name `Day_Month_Year HHMM DeviceName_BrowserName` format.
+
+If you expand that folder, you can see `cucumber` folder & `playwright` folder.  
 
 Click the html document in either to download and view the relevant report.
 
-![artifacts](src/resources\images\artifactsPage.png =200x300)  
+<img src="src/resources/images/artifactsPage.png" alt="artifacts">  
 
 This artifact will also be published to the teams SharePoint space [here](https://healthresearchauthority.sharepoint.com/:f:/r/sites/Future-IRAS/Testing/Test%20Reports?csf=1&web=1&e=8jF7Ic)  
 &nbsp; 
@@ -228,7 +230,7 @@ you must first raise a Pull Request against your source branch that contains you
 
 To do this click the **Create a pull request** button within your branch page on Azure Devops
 
-![pr button](src/resources\images\prButton.png)  
+<img src="src/resources/images/prButton.png" alt="pr button">   
 &nbsp; 
 
 This will present you with a Pull Request Template form which must be completed before the PR can be raised.  
@@ -239,7 +241,7 @@ The form provides information regarding the PR to the reviewer such as:
 
 It also provides a checklist of items that will help you to assess the readiness of your branch for PR review.
 
-![pr form](src/resources\images\prForm.png =600x600) 
+<img src="src/resources/images/prForm.png" alt="pr form"> 
 &nbsp;  
 
 ## Quality Checks 
@@ -254,13 +256,13 @@ The checks include:
 - Any comments that have been left by either a team member or the Sonar Cloud analysis, must be marked as resolved.
 - There must be no merge conflicts
 
-![pr checks](src/resources\images\prChecks.png =800x500)  
+<img src="src/resources/images/prChecks.png" alt="pr checks"> 
 &nbsp; 
 
 Once all the above checks have passed, or have been satisfied,  
-then Complete button will become available and you may complete the merge
+then Rebase and Merge button will become available and you may complete the merge
 
-![pr complete](src/resources\images\prComplete.png)  
+<img src="src/resources/images/prComplete.png" alt="pr complete">  
 &nbsp; 
 
 **When completing a PR please select the option to delete your source branch**  
@@ -276,7 +278,7 @@ To access the Quality Gate, open [SonarCloud](https://sonarcloud.io/) and login
 **Speak to DevOps lead if necessary**  
 Select your profile options by clicking the icon in the top right of the screen
 
-![sonar project](src/resources\images\sonarProject.png =1000x200) 
+<img src="src/resources/images/sonarProject.png" alt="sonar project">
 &nbsp; 
 
 On the subsequent screen select the **Quality Gates tab**  
@@ -285,7 +287,7 @@ And then select the **Automation Testing** option from the list
 Here you can adjust the conditions that the code must meet in order to pass the quality gate.  
 You can also add or remove it from a repository within your project.
 
-![sonar quality gate](src/resources\images\sonarQualityGate.png =1200x700) 
+<img src="src/resources/images/sonarQualityGate.png" alt="sonar quality gate">
 &nbsp; 
 
 When the Azure DevOps Pipeline job runs  
@@ -296,24 +298,24 @@ against the conditons that have been set in the Automation Testing quality gate.
 
 The results of the SonarCloud analysis can be viewed within the Extensions tab of the pipeline summary page
 
-![sonar summary](src/resources\images\sonarSummary.png) 
+<img src="src/resources/images/sonarSummary.png" alt="sonar summary">
 &nbsp; 
 
 By clicking the **See analysis details on SonarCloud** link you will be taken to the results page on SonarCloud for more detailed results.
 
-![quality gate results](src/resources\images\qualityGateResults.png =1000x500) 
+<img src="src/resources/images/qualityGateResults.png" alt="quality gate results">
 &nbsp; 
 
 By clicking on the numbers within the various sections you can get a detailed view of the issues raised.  
 For example clicking the **7** within **New Issues** in the above screenshot would take you to the page below.
 
-![issues analysis](src/resources\images\issuesAnalysis.png =1000x500) 
+<img src="src/resources/images/issuesAnalysis.png" alt="issues analysis">
 &nbsp; 
 
 Any issues raised are also automatically added as comments on the PR (set under the name Shahzad Hassan),  
 meaning that they will require some form of resolution before the PR can be merged into main branch.
 
-![pull request issue comments](src/resources\images\pullRequest_IssueComments.png =700x600) 
+<img src="src/resources/images/pullRequest_IssueComments.png" alt="pull request issue comments">
 &nbsp; 
 
 It should be noted that the SonarCloud Analysis is an optional quality check.  
@@ -424,7 +426,7 @@ Once the conversion has completed, the `npx playwright test` portion of the comm
 The Playwright compatible files are output and stored to the `generated-feature-files`, this folder is set to be git ignored.  
 &nbsp; 
 
-![feature to playwright test file](src/resources\images\featureToPwTestFile.png =1000x500)  
+<img src="src/resources/images/featureToPwTestFile.png" alt="feature to playwright test file">  
 &nbsp; 
 
 
@@ -445,7 +447,7 @@ This is not an issue for the cucumber html report that the test run also produce
 that this is the one shared with non-technical stakeholders.  
 &nbsp; 
 
-![playwright background report limitation](src/resources\images\pwReportBackgroundLimitation.png =600x600)  
+<img src="src/resources/images/pwReportBackgroundLimitation.png" alt="playwright background report limitation">    
 &nbsp; 
 
 
@@ -486,7 +488,7 @@ The `Traceability.feature` Feature file below shows:
 - Unique Scenario level tags for each Scenario - `<@uniqueScenario` & `<@anotherUniqueScenario`  
 - Scenario level tags which link each Scenario to a ticket in JIRA - `<@RSP-744` for both & `<@RSP-745` for the second Scenario  
 
-![best practice feature tagging](src/resources\images\scenarioTagsVsCode.png =500x400)  
+<img src="src/resources/images/scenarioTagsVsCode.png" alt="best practice feature tagging">   
 &nbsp; 
 
 This will output the following Cucumber report which:
@@ -494,7 +496,7 @@ This will output the following Cucumber report which:
 - Allows us to find any specific Feature or Scenario - searching with a unique Feature or Scenario level tag
 - Generates a list of Ticket References for each Scenario, which provide a link to the relevant User Stories in JIRA
 
-![best practice tagging report](src/resources\images\scenarioTagsReport.png =500x600)  
+<img src="src/resources/images/scenarioTagsReport.png" alt="best practice tagging report"> 
 &nbsp; 
 
 
@@ -513,7 +515,7 @@ One of those projects is named `AuthSetup` and it is set to run only the Feature
 In subsequent projects, we name the `AuthSetup` as a dependency, which ensure that the Features in the `AuthSetup` project are ran first  
 &nbsp; 
 
-![feature to playwright test file](src/resources\images\authConfig.png =500x500)  
+<img src="src/resources/images/authConfig.png" alt="feature to playwright test file">  
 &nbsp; 
 
 ## Setting the Authentication State
@@ -531,7 +533,7 @@ The page method then gets the `storageState` (cookies) of the current browser co
 And saves them to a file path associated with the releavant user.  
 &nbsp; 
 
-![feature to playwright test file](src/resources\images\authSteps.png =600x600)  
+<img src="src/resources/images/authSteps.png" alt="feature to playwright test file">   
 &nbsp; 
 
 All the storage state are stored in the `auth-storage-states` folder which is set to be git ignored.
@@ -560,7 +562,7 @@ Within the custom `storageState` fixture:
 In this example the outcome will be true, so the test will load the Tasks Page as the POC user, without having to go through the Login process again.  
 &nbsp; 
 
-![feature to playwright test file](src/resources\images\authUse.png =600x600)  
+<img src="src/resources/images/authUse.png" alt="feature to playwright test file">   
 &nbsp; 
 
 
@@ -592,19 +594,19 @@ Below steps to follow to use the Self Healing locators mechanism:
 
 1. Self healer locator method is created under 'CommonItemsPage.ts'.
 
-![self healing](src/resources\images\selfHealingCode.png)
+<img src="src/resources/images/selfHealingCode.png" alt="self healing"> 
 
 2. Extend the CommonItemsPage class to the page where we need to use the self healing locator. Below example of how extended for the LoginPage
 
-![self healing - login page](src/resources\images\selfHealingLoginPage.png)
+<img src="src/resources/images/selfHealingLoginPage.png" alt="self healing - login page"> 
 
 3. Declare Locators as an array, and list the possible different combinations of locators for the web element as in below screenshot:
 
-![self healing - login page](src/resources\images\selfHealingLocatorsAsArray.png)
+<img src="src/resources/images/selfHealingLocatorsAsArray.png" alt="self healing - login page"> 
 
 4. Use the 'selfHealLocator' method created in 'CommonItemsPage.ts' to get the valid locator from the list of locators.
 
-![self healing - login page](src/resources\images\selfHealingLoginPageCode.png) 
+<img src="src/resources/images/selfHealingLoginPageCode.png" alt="self healing - login page"> 
 
 **Note**: Self healing should only be used for locators that have a history of being unreliable (flaky).
 

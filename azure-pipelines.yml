@@ -7,7 +7,7 @@ trigger:
   - main
 
 schedules:
-  - cron: '0 0 * * Mon-Fri'
+  - cron: '0 0 * * *'
     displayName: 'Nightly run - full suite'
     branches:
       include:
@@ -87,8 +87,9 @@ variables:
 resources:
   repositories:
     - repository: library
-      type: git
-      name: DevOps/rsp-azure-devops-library
+      type: github
+      name: 'HealthResearchAuthority/rsp-azure-devops-library'
+      endpoint: AzureDevOpsToGitHubConnection
       ref: ${{ parameters.devops_library_branch }}
 
 stages:

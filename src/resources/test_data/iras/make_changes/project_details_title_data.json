@@ -1,0 +1,179 @@
+{
+  "Project_Details_Title_Page": {
+    "heading": "Project details"
+  },
+  "Label_Texts": {
+    "short_project_title_textbox_label": "Short project title",
+    "planned_end_date_textbox_label": "Planned project end date",
+    "planned_end_date_hint_label": "For Example, 10 6 2025",
+    "day_textbox_label": "Day",
+    "month_textbox_label": "Month",
+    "year_textbox_label": "Year"
+  },
+  "Summary_Error_Message": {
+    "error_message_summary_header": "You need to complete these questions before you can continue::",
+    "short_project_title_text": "Question 1 under Project details section",
+    "planned_project_end_day_text": "Question 2 under Project details section",
+    "planned_project_end_month_text": "Question 2 under Project details section",
+    "planned_project_end_year_text": "Question 2 under Project details section",
+    "error_message_summary_header_OG": "There is a problem",
+    "short_project_title_text_OG": "Short project title must not contain more than XX characters",
+    "planned_project_end_day_text_OG": "",
+    "planned_project_end_month_text_OG": "",
+    "planned_project_end_year_text_OG": ""
+  },
+  "Field_Error_Message": {
+    "short_project_title_text": "Short project title should be between the specified characters limit",
+    "planned_project_end_day_text": "The date should be a valid date and in future",
+    "planned_project_end_month_text": "The date should be a valid date and in future",
+    "planned_project_end_year_text": "The date should be a valid date and in future",
+    "short_project_title_text_OG": "Short project title must not contain more than XX characters",
+    "planned_project_end_day_text_OG": "",
+    "planned_project_end_month_text_OG": "",
+    "planned_project_end_year_text_OG": ""
+  },
+  "Valid_Data_All_Fields_1": {
+    "short_project_title_text": "QA_Automation - This is a short project title",
+    "planned_project_end_day_text": "1",
+    "planned_project_end_month_text": "1",
+    "planned_project_end_year_text": "2028"
+  },
+  "Valid_Data_All_Fields_2": {
+    "short_project_title_text": "QA_Automation Virtual Engagement Rehabilitation Assistant (VERA) in the community",
+    "planned_project_end_day_text": "1",
+    "planned_project_end_month_text": "1",
+    "planned_project_end_year_text": "2030"
+  },
+  "Valid_Data_All_Fields_3": {
+    "short_project_title_text": "QA_Automation - CSL511_3003",
+    "planned_project_end_day_text": "11",
+    "planned_project_end_month_text": "1",
+    "planned_project_end_year_text": "2028"
+  },
+  "Valid_Data_All_Fields_4": {
+    "short_project_title_text": "QA_Automation - The (P)atient (R)eported (C)omplications study",
+    "planned_project_end_day_text": "1",
+    "planned_project_end_month_text": "12",
+    "planned_project_end_year_text": "2028"
+  },
+  "Valid_Data_All_Fields_5": {
+    "short_project_title_text": "QA_Automation - GO29365 - Phase Ib/II Study of Polatuzumab Vedotin in r/r FL or DLBCL",
+    "planned_project_end_day_text": "6",
+    "planned_project_end_month_text": "6",
+    "planned_project_end_year_text": "2028"
+  },
+  "Valid_Data_All_Fields_6": {
+    "short_project_title_text": "QA_Automation - [11C]-(R)-PK11195 PET in metastatic prostate cancer",
+    "planned_project_end_day_text": "31",
+    "planned_project_end_month_text": "12",
+    "planned_project_end_year_text": "2028"
+  },
+  "Valid_Data_All_Fields_7": {
+    "short_project_title_text": "QA_Automation - Hu5F9-G4 + Rituximab in Relapsed/Refractory B Cell NHL",
+    "planned_project_end_day_text": "29",
+    "planned_project_end_month_text": "2",
+    "planned_project_end_year_text": "2028"
+  },
+  "Valid_Data_All_Fields_8": {
+    "short_project_title_text": "QA_Automation - *1451-0001 PARTRIDGE Study",
+    "planned_project_end_day_text": "1",
+    "planned_project_end_month_text": "4",
+    "planned_project_end_year_text": "2036"
+  },
+  "Valid_Data_All_Fields_9": {
+    "short_project_title_text": "QA_Automation - Impact of omega (ω)-3 polyunsaturated fatty acids (n-3 PUFA) upon blood",
+    "planned_project_end_day_text": "1",
+    "planned_project_end_month_text": "11",
+    "planned_project_end_year_text": "2029"
+  },
+  "Valid_Data_All_Fields_10": {
+    "short_project_title_text": "QA_Automation - A pilot study of ferumoxytol (Feraheme ©) as an imaging biomarker",
+    "planned_project_end_day_text": "1",
+    "planned_project_end_month_text": "1",
+    "planned_project_end_year_text": "2028"
+  },
+  "Valid_Data_All_Fields_11": {
+    "short_project_title_text": "QA_Automation - ™ © ® ° ± ≤ ≥ ÷ ≠ ≡ ≈ √ σ ν ο ι τ χ α ρ φ π λ ε η Η ϑ μ θ δ BGO IRAS - sp characters",
+    "planned_project_end_day_text": "1",
+    "planned_project_end_month_text": "1",
+    "planned_project_end_year_text": "2028"
+  },
+  "Valid_Data_All_Fields_12": {
+    "short_project_title_text": "QA_Automation - ! ” £ $ % ^ & * ( ) _  + [ ] { } ; : @ ‘ ~ # < > , . ? /` ¬ - Special characters",
+    "planned_project_end_day_text": "1",
+    "planned_project_end_month_text": "1",
+    "planned_project_end_year_text": "2028"
+  },
+  "Invalid_All_Fields": {
+    "short_project_title_text": "QA_Automation - Max short study title length one two three four five six seven eight nine ten one END",
+    "planned_project_end_day_text": "32",
+    "planned_project_end_month_text": "13",
+    "planned_project_end_year_text": "228"
+  },
+  "Invalid_Data_Short_Project_Title_Max_Length": {
+    "short_project_title_text": "QA_Automation - Max short study title length one two three four five six seven eight nine ten one END"
+  },
+  "Invalid_Data_Short_Project_Title_Min_Length": {
+    "short_project_title_text": "QA"
+  },
+  "Invalid_Day_Number": {
+    "planned_project_end_day_text": "32",
+    "planned_project_end_month_text": "12",
+    "planned_project_end_year_text": "2028"
+  },
+  "Invalid_Day_Letters": {
+    "planned_project_end_day_text": "o1",
+    "planned_project_end_month_text": "1",
+    "planned_project_end_year_text": "2028"
+  },
+  "Invalid_Month_Number": {
+    "planned_project_end_day_text": "1",
+    "planned_project_end_month_text": "13",
+    "planned_project_end_year_text": "2028"
+  },
+  "Invalid_Month_Letters": {
+    "planned_project_end_day_text": "1",
+    "planned_project_end_month_text": "feb",
+    "planned_project_end_year_text": "2028"
+  },
+  "Invalid_Year_Number_1": {
+    "planned_project_end_day_text": "1",
+    "planned_project_end_month_text": "1",
+    "planned_project_end_year_text": "28"
+  },
+  "Invalid_Year_Number_2": {
+    "planned_project_end_day_text": "1",
+    "planned_project_end_month_text": "1",
+    "planned_project_end_year_text": "'28"
+  },
+  "Invalid_Year_Letters": {
+    "planned_project_end_day_text": "1",
+    "planned_project_end_month_text": "1",
+    "planned_project_end_year_text": "'2ooo"
+  },
+  "Invalid_Date_Past": {
+    "planned_project_end_day_text": "1",
+    "planned_project_end_month_text": "1",
+    "planned_project_end_year_text": "'2020"
+  },
+  "Invalid_Date_Today": {
+    "planned_project_end_day_text": "Today_Day",
+    "planned_project_end_month_text": "Today_Month",
+    "planned_project_end_year_text": "'Today_Year"
+  },
+  "Invalid_Date_No_Day": {
+    "planned_project_end_day_text": "",
+    "planned_project_end_month_text": "1",
+    "planned_project_end_year_text": "2028"
+  },
+  "Invalid_Date_No_Month": {
+    "planned_project_end_day_text": "1",
+    "planned_project_end_month_text": "",
+    "planned_project_end_year_text": "2028"
+  },
+  "Invalid_Date_No_Year": {
+    "planned_project_end_day_text": "1",
+    "planned_project_end_month_text": "1",
+    "planned_project_end_year_text": ""
+  }
+}

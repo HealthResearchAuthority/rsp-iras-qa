@@ -1,7 +1,7 @@
 import { PlaywrightTestConfig } from '@playwright/test';
 import { cucumberReporter, defineBddConfig } from 'playwright-bdd';
 import 'dotenv/config';
-import { browserVal, platformVal } from './src/utils/UtilFunctions';
+import { browserVal, platformVal, getReportFolderName } from './src/utils/UtilFunctions';
 
 // Select Browser to use in Pipeline, Set in .env File Locally
 const browser: any = browserVal;
@@ -10,8 +10,10 @@ const platform: string = platformVal;
 const config: PlaywrightTestConfig = {
   reporter: [
     ['list', { printSteps: true }],
-    ['html', { outputFolder: './test-reports/playwright', open: 'never' }],
-    cucumberReporter('json', { outputFile: './test-reports/cucumber/json/test_report.json' }),
+    ['html', { outputFolder: './test-reports/' + getReportFolderName() + '/playwright', open: 'never' }],
+    cucumberReporter('json', {
+      outputFile: './test-reports/' + getReportFolderName() + '/cucumber/json/test_report.json',
+    }),
     ['./src/utils/Report.ts', { customOption: 'Cucumber HTML Report Generation' }],
   ],
   globalSetup: 'src/hooks/GlobalSetup.ts',
@@ -24,7 +26,10 @@ const config: PlaywrightTestConfig = {
     ...browser,
     trace: 'on',
     baseURL: `${process.env.BASE_URL}`,
-    screenshot: 'only-on-failure',
+    screenshot: {
+      mode: 'only-on-failure',
+      fullPage: true,
+    },
     actionTimeout: 30000,
     navigationTimeout: 30000,
     testIdAttribute: 'id',

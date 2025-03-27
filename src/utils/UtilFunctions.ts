@@ -1,6 +1,6 @@
 import { DataTable } from 'playwright-bdd';
 import { Locator, chromium, devices, firefox, webkit } from '@playwright/test';
-import crypto from 'crypto';
+import { createDecipheriv } from 'crypto';
 import { readFile, writeFile } from 'fs/promises';
 import 'dotenv/config';
 import { deviceDSafari, deviceDFirefox, deviceDChrome, deviceDEdge } from '../hooks/GlobalSetup';
@@ -9,6 +9,7 @@ import os from 'os';
 
 let browserdata: any;
 let deviceType: string;
+const todayDate = new Date();
 
 export function getAuthState(user: string): string {
   let authState: string;
@@ -58,7 +59,8 @@ export function getTicketReferenceTags(tags: string[]): string[] {
 export function getDecryptedValue(data: string) {
   let value: string = '';
   if (process.env.SECRET_KEY) {
-    const decipher = crypto.createDecipheriv('aes-256-cbc', Buffer.from(`${process.env.SECRET_KEY}`), Buffer.alloc(16));
+    const decipher = createDecipheriv('AES-256-GCM', Buffer.from(process.env.SECRET_KEY), Buffer.alloc(16));
+    decipher.setAuthTag(Buffer.from(`${process.env.AUTH_TAG}`, 'hex'));
     let decrypted = decipher.update(data, 'hex', 'utf8');
     decrypted = decrypted + decipher.final('utf8');
     value = decrypted;
@@ -232,6 +234,29 @@ export function getOSNameVersion() {
     osVersion = `${os.version}`;
   }
   return osVersion;
+}
+
+export function getDeviceName() {
+  let deviceName: string;
+  if (`${process.env.PLATFORM?.toLowerCase()}` == 'desktop') {
+    deviceName = 'Desktop';
+  } else {
+    deviceName = deviceTypeVal;
+  }
+  return deviceName;
+}
+
+export function getReportFolderName() {
+  const day = todayDate.getDate();
+  const month = todayDate.toLocaleString('default', { month: 'short' });
+  const year = todayDate.getFullYear();
+  const hours = (todayDate.getHours() < 10 ? '0' : '') + todayDate.getHours();
+  const minutes = (todayDate.getMinutes() < 10 ? '0' : '') + todayDate.getMinutes();
+  const deviceName = getDeviceName().replace(/^./, (char) => char.toUpperCase());
+  const browserName = getBrowserType(deviceTypeVal).replace(/^./, (char) => char.toUpperCase());
+  const testReportFolderName =
+    day + '_' + month + '_' + year + ' ' + hours + minutes + ' ' + deviceName + '_' + browserName;
+  return testReportFolderName;
 }
 
 export async function getAllBrowserVersion(browserName: string): Promise<string> {
