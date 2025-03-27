@@ -133,7 +133,11 @@ Then('I see something {string}', async ({ commonItemsPage }, testType: string) =
 
 Then(
   'I click the {string} button on the {string}',
-  async ({ commonItemsPage, homePage, checkCreateUserProfilePage }, buttonKey: string, pageKey: string) => {
+  async (
+    { commonItemsPage, homePage, checkCreateUserProfilePage, manageUsersPage },
+    buttonKey: string,
+    pageKey: string
+  ) => {
     const buttonValue = commonItemsPage.buttonTextData[pageKey][buttonKey];
     if (pageKey === 'Banner' && buttonKey === 'Login') {
       await commonItemsPage.bannerLoginBtn.click();
@@ -142,6 +146,9 @@ Then(
     } else if (pageKey === 'Check_Create_User_Profile_Page' && buttonKey === 'Create_Profile') {
       await checkCreateUserProfilePage.create_profile_button.click();
       //added this as a workaround >>Create_Profile button issue
+    } else if (pageKey === 'Manage_Users_Page' && buttonKey === 'Back') {
+      await manageUsersPage.back_button.click(); //work around for now >> to click on first View/Edit link
+      //added this as a workaround >>Back button issue
     } else {
       await commonItemsPage.govUkButton.getByText(buttonValue, { exact: true }).click();
     }
