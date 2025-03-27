@@ -37,5 +37,8 @@
   },
   "User_Profile_Page": {
     "Disable_User_Record": "Disable user record"
+  },
+  "Manage_Users_Page": {
+    "Back": "Back"
   }
 }

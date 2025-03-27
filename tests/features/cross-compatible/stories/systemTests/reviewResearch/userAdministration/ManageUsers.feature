@@ -20,14 +20,20 @@ Feature: HRAPROG-394- User Administration: Manage Users
         When I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'       
         Then I can see the Manage users list page
         # And I can see the newly created user record should be present in the list for '<Add_User_Profile>' with 'ACTIVE' status and the list is sorted by default in the alphabetical order of the 'First Name'
-        And I can see the list is sorted by default in the alphabetical order of the 'First Name'
-        And I can see the newly created user record should be present in the list for '<Add_User_Profile>' with '<Status>' status in the manage user page      
+        And I can see the newly created user record should be present in the list for '<Add_User_Profile>' with 'ACTIVE' status in the manage user page
+        # And I click the 'Back' button on the 'Manage_Users_Page'
+        # Then I have navigated to the 'System_Administration_Home_Page'
+        # When I click the 'Manage_Users' link on the 'System_Administration_Home_Page'
+        When I click the 'Manage_Users' link on the 'Home_Page'       
+        Then I can see the Manage users list page
+        And I can see the list is sorted by default in the alphabetical order of the 'First Name'    
         
         Examples:
         | Add_User_Profile                                      |
         | Valid_Data_In_All_Fields_Role_Operations              | 
         | Valid_Data_In_All_Fields_Role_Reviewer                |
-        # | Valid_Data_In_All_Mandatory_Fields                  |     
+        | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer      | 
+        | Valid_Data_In_All_Mandatory_Fields_Role_Operations    |    
 
         
 
@@ -47,15 +53,25 @@ Feature: HRAPROG-394- User Administration: Manage Users
         And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'        
         Then I can see the create user profile confirmation page for '<Add_Another_User_Profile>'
         When I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'       
+        Then I can see the Manage users list page        
+        And I can see the newly created user record should be present in the list for '<Add_User_Profile>' with 'ACTIVE' status in the manage user page        
+        And I click the 'Back' button on the 'Manage_Users_Page'
+        Then I have navigated to the 'System_Administration_Home_Page'
+        When I click the 'Manage_Users' link on the 'System_Administration_Home_Page'       
         Then I can see the Manage users list page
-        And I can see the list is sorted by default in the alphabetical order of the 'First Name'
-        And I can see the newly created user record should be present in the list for '<Add_User_Profile>' with '<Status>' status in the manage user page
-        And I can see the newly created user record should be present in the list for '<Add_Another_User_Profile>' with '<Status>' status in the manage user page
+        And I can see the newly created user record should be present in the list for '<Add_Another_User_Profile>' with 'ACTIVE' status in the manage user page
+         And I click the 'Back' button on the 'Manage_Users_Page'
+        Then I have navigated to the 'System_Administration_Home_Page'
+        When I click the 'Manage_Users' link on the 'System_Administration_Home_Page'       
+        Then I can see the Manage users list page
+        And I can see the list is sorted by default in the alphabetical order of the 'First Name' 
         
         Examples:
-        | Add_User_Profile                     |Add_Another_User_Profile                        |                     
-        | Valid_Data_In_All_Fields             | Valid_Data_In_All_Fields_Another               |  
-        | Valid_Data_In_All_Mandatory_Fields   |  Valid_Data_In_All_Mandatory_Fields_Another    | 
+        | Add_User_Profile                                      |Add_Another_User_Profile                                           |                     
+        | Valid_Data_In_All_Fields_Role_Operations              | Valid_Data_In_All_Fields_Role_Operations_Another                  |  
+        | Valid_Data_In_All_Fields_Role_Reviewer                | Valid_Data_In_All_Fields_Role_Reviewer_Another                    |
+        | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer      | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer_Another          |
+        | Valid_Data_In_All_Mandatory_Fields_Role_Operations    | Valid_Data_In_All_Mandatory_Fields_Role_Operations                |
 
     @rsp-2827
     Scenario: Verify the user can navigate from 'Add a new user profile' page by clicking 'Back' button 
@@ -75,14 +91,20 @@ Feature: HRAPROG-394- User Administration: Manage Users
         And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'        
         Then I can see the create user profile confirmation page for '<Add_Another_User_Profile>'
         When I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'       
-        Then I can see the Manage users list page
-        And I can see the list is sorted by default in the alphabetical order of the 'First Name'
-        And I can see the newly created user record should be present in the list for '<Add_User_Profile>' with '<Status>' status in the manage user page
-        And I can see the newly created user record should be present in the list for '<Add_Another_User_Profile>' with '<Status>' status in the manage user page        
+        Then I can see the Manage users list page               
+        And I can see the newly created user record should be present in the list for '<Add_Another_User_Profile>' with 'ACTIVE' status in the manage user page        
+        And I click the 'Back' button on the 'Manage_Users_Page'
+        Then I have navigated to the 'System_Administration_Home_Page'
+        When I click the 'Manage_Users' link on the 'System_Administration_Home_Page'       
+        Then I can see the Manage users list page        
+        And I can see the list is sorted by default in the alphabetical order of the 'First Name'         
 
         Examples:
-        | Add_User_Profile                     |Add_Another_User_Profile            |
-        | Valid_Data_In_All_Fields             | Valid_Data_In_All_Fields_Another   |  
+        | Add_User_Profile                                      |Add_Another_User_Profile                                           |
+        | Valid_Data_In_All_Fields_Role_Operations              | Valid_Data_In_All_Fields_Role_Operations_Another                  |  
+        | Valid_Data_In_All_Fields_Role_Reviewer                | Valid_Data_In_All_Fields_Role_Reviewer_Another                    |
+        | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer      | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer_Another          |
+        | Valid_Data_In_All_Mandatory_Fields_Role_Operations    | Valid_Data_In_All_Mandatory_Fields_Role_Operations_Another        |
 
     @rsp-2827
     Scenario Outline: Verify the user can navigate from 'Check and create user profile' page by clicking 'Change' button against all the fields
@@ -97,22 +119,34 @@ Feature: HRAPROG-394- User Administration: Manage Users
         And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'        
         Then I can see the create user profile confirmation page for '<Add_Another_User_Profile>'
         When I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'       
-        Then I can see the Manage users list page
-        And I can see the list is sorted by default in the alphabetical order of the 'First Name'        
-        And I can see the newly created user record should be present in the list for '<Add_Another_User_Profile>' with '<Status>' status in the manage user page
+        Then I can see the Manage users list page            
+        And I can see the newly created user record should be present in the list for '<Add_Another_User_Profile>' with 'ACTIVE' status in the manage user page        
+        And I click the 'Back' button on the 'Manage_Users_Page'
+        Then I have navigated to the 'System_Administration_Home_Page'
+        When I click the 'Manage_Users' link on the 'System_Administration_Home_Page'       
+        Then I can see the Manage users list page        
+        And I can see the list is sorted by default in the alphabetical order of the 'First Name'
         
         Examples:
-        | Add_User_Profile                     |Field_Name          | Add_Another_User_Profile        |
-        | Valid_Data_In_All_Fields             |Title               | Valid_Data_In_All_Fields_Another|
-        | Valid_Data_In_All_Fields             |First name          | Valid_Data_In_All_Fields_Another|
-        | Valid_Data_In_All_Fields             |Last name           | Valid_Data_In_All_Fields_Another|    
-        | Valid_Data_In_All_Fields             |Email address       | Valid_Data_In_All_Fields_Another|  
-        | Valid_Data_In_All_Fields             |Telephone           | Valid_Data_In_All_Fields_Another|  
-        | Valid_Data_In_All_Fields             |Organisation        | Valid_Data_In_All_Fields_Another|  
-        | Valid_Data_In_All_Fields             |Job title           | Valid_Data_In_All_Fields_Another|
-        | Valid_Data_In_All_Fields             |Role                | Valid_Data_In_All_Fields_Another|
+        | Add_User_Profile                                     |Field_Name          | Add_Another_User_Profile                         |
+        | Valid_Data_In_All_Fields_Role_Operations             |Title               | Valid_Data_In_All_Fields_Role_Operations_Another |
+        | Valid_Data_In_All_Fields_Role_Operations             |First name          | Valid_Data_In_All_Fields_Role_Operations_Another |
+        | Valid_Data_In_All_Fields_Role_Operations             |Last name           | Valid_Data_In_All_Fields_Role_Operations_Another |    
+        | Valid_Data_In_All_Fields_Role_Operations             |Email address       | Valid_Data_In_All_Fields_Role_Operations_Another |  
+        | Valid_Data_In_All_Fields_Role_Operations             |Telephone           | Valid_Data_In_All_Fields_Role_Operations_Another |  
+        | Valid_Data_In_All_Fields_Role_Operations             |Organisation        | Valid_Data_In_All_Fields_Role_Operations_Another |  
+        | Valid_Data_In_All_Fields_Role_Operations             |Job title           | Valid_Data_In_All_Fields_Role_Operations_Another |
+        | Valid_Data_In_All_Fields_Role_Operations             |Role                | Valid_Data_In_All_Fields_Role_Operations_Another |
+        | Valid_Data_In_All_Fields_Role_Reviewer               |Title               | Valid_Data_In_All_Fields_Role_Reviewer_Another   |
+        | Valid_Data_In_All_Fields_Role_Reviewer               |First name          | Valid_Data_In_All_Fields_Role_Reviewer_Another   |
+        | Valid_Data_In_All_Fields_Role_Reviewer               |Last name           | Valid_Data_In_All_Fields_Role_Reviewer_Another   |    
+        | Valid_Data_In_All_Fields_Role_Reviewer               |Email address       | Valid_Data_In_All_Fields_Role_Reviewer_Another   |  
+        | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer     |Telephone           | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer_Another |  
+        | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer     |Organisation        | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer_Another |  
+        | Valid_Data_In_All_Mandatory_Fields_Role_Operations   |Job title           | Valid_Data_In_All_Mandatory_Fields_Role_Operations_Another |
+        | Valid_Data_In_All_Mandatory_Fields_Role_Operations   |Role                | Valid_Data_In_All_Mandatory_Fields_Role_Operations_Another |
     
-    @rsp-2827
+    @rsp-2827-pending
     Scenario Outline: Field Validation with minimum and maximum characters in Organisation Name and Description
         When I fill the new review body page using '<Add_Review_Body>'  #done
         And I click the 'Complete' button on the 'Create_Review_Body_Page' #done
@@ -127,7 +161,7 @@ Feature: HRAPROG-394- User Administration: Manage Users
         | Description_Field_Max_Data                        |   
         | Description_Field_between_Min_Max_Data            |   
 
-    @rsp-2827
+    @rsp-2827-pending
     Scenario Outline: Field Validation and Error Message Validation
         When I fill the new review body page using '<Add_Review_Body>'  #done
         And I click the 'Complete' button on the 'Create_Review_Body_Page' #done
@@ -135,27 +169,45 @@ Feature: HRAPROG-394- User Administration: Manage Users
         
         Examples:
         | Add_User_Profile                       |Field_Name          |
-        | Missing_Data_All_Fields               |All_Mandatory       |
-        | Missing_Data_All_Mandatory_Fields     |All_Mandatory       |
-        | Missing_Data_Organisation_Name_Field  |Organisation_Name   |
-        | Missing_Data_Country_Field            |Country             |
-        | Missing_Data_Email_Address_Field      |Email_Address       | 
-        | Invalid_Data_Organisation_Name_Field  |Organisation_Name   |  
-        | Invalid_Data_Email_Address_Field      |Email_Address       | 
-        | Invalid_Data_Description_Field        |Description         |  
+        | Missing_Data_All_Fields                |All_Mandatory       |
+        | Missing_Data_All_Mandatory_Fields      |All_Mandatory       |
+        | Missing_Data_Organisation_Name_Field   |Organisation_Name   |
+        | Missing_Data_Country_Field             |Country             |
+        | Missing_Data_Email_Address_Field       |Email_Address       | 
+        | Invalid_Data_Organisation_Name_Field   |Organisation_Name   |  
+        | Invalid_Data_Email_Address_Field       |Email_Address       | 
+        | Invalid_Data_Description_Field         |Description         |  
        
 
     
 
         # Field validation(Error message)-mandatory/optional, min/max ,datatype: 
 
-        # Organisation Name- Varchar/ Text- 250 characters- Mandatory
+        # Title-Varchar/ Text-250 characters-Optional
 
-        # Country-Checkbox -England/Northern Ireland/Scotland/Wales-Mandatory
+        # First name-Varchar/ Text-250 characters-Mandatory
 
-        # Email address-Varchar/ Text-Mandatory-@ validation/Allow apostrophes
+        # Last name-Varchar/ Text-250 characters-Mandatory
 
-        # Description-Varchar/ Text-250 words-Optional 
+        # Email address-Varchar/ Text-Mandatory-@ validation/Allow all special characters
+
+        # Telephone-Integer/ Numerical-11-Optional
+
+        # Organisation-Varchar/ Text-250 characters-Optional
+
+        # Job title-Varchar/ Text-250 characters-Optional
+
+        # Role -Drop down-Operations-Optional-System user roles
+
+        # Committee-Drop down-Optional-If the role operations is selected the user is presented with this field
+
+        # Country-Checkbox-England/Northern Ireland/Scotland/Wales -Mandatory-If the role operations is selected the user is presented with this field
+
+        # Access required-Checkbox-Study wide review/Research Ethics Committee/CAG/Technical Assurance-Mandatory-If the role operations is selected the user is presented with this field
+
+        # Review body-Drop down-Optional-If the role operations is selected the user is presented with this field-Created review bodies will appear in the drop down
+
+       
         
 
   
