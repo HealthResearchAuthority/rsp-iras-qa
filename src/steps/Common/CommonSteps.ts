@@ -1,4 +1,4 @@
-import { createBdd } from 'playwright-bdd';
+import { createBdd, DataTable } from 'playwright-bdd';
 import { expect, test } from '../../hooks/CustomFixtures';
 import {
   getRegexforFieldsfromJSONconfig,
@@ -262,6 +262,52 @@ Then('I attach the generated test data json files to the report', async ({ $test
     contentType: 'text/plain',
   });
 });
+
+Then(
+  'I see the expected validation errors appearing on the {string} page based on those inputs',
+  async ({ commonItemsPage }, pageName: string, data: DataTable) => {
+    const combinedInputsUsed = new Map<string, any>();
+    const expectedAlertBoxErrors: string[] = [];
+    const expectedFieldErrors: string[] = [];
+
+    const { pageObject, dataName } = await commonItemsPage.getQsetPageObjectDataName(pageName);
+    for (const row of data.hashes()) {
+      const sectionInputsUsed = await commonItemsPage.getQsetPageValidationData(pageName, row.Section, row.Dataset);
+      sectionInputsUsed.forEach((value: any, key: string) => {
+        combinedInputsUsed.set(key, value);
+      });
+    }
+
+    for (const key in pageObject[dataName].All_Mandatory_Validations) {
+      if (!combinedInputsUsed.has(key) || !combinedInputsUsed.get(key)) {
+        expectedAlertBoxErrors.push(pageObject[dataName].All_Mandatory_Validations[key]);
+        expectedFieldErrors.push(key);
+      }
+    }
+    // Any Expected Conditional Field Validation must be included in input dataset with an empty value
+    for (const key in pageObject[dataName].All_Conditional_Validations) {
+      if (combinedInputsUsed.has(key) && !combinedInputsUsed.get(key)) {
+        expectedAlertBoxErrors.push(pageObject[dataName].All_Conditional_Validations[key]);
+        expectedFieldErrors.push(key);
+      }
+    }
+
+    await expect(commonItemsPage.alert_box).toBeVisible();
+    await expect(commonItemsPage.alert_box_headings).toHaveText(
+      commonItemsPage.questionSetData.Validation.alert_box_heading
+    );
+
+    const actualAlertBoxErrors = commonItemsPage.alert_box_list_items;
+    const actualFieldErrorsArray = await commonItemsPage.govUkFieldValidationError.all();
+    await expect(actualAlertBoxErrors).toHaveText(expectedAlertBoxErrors, { useInnerText: true });
+    expect(actualFieldErrorsArray).toHaveLength(expectedFieldErrors.length);
+    for (const key of expectedFieldErrors) {
+      const expectedFieldErrorMessage = await commonItemsPage.getFieldTypeErrorMessage(key, pageObject);
+      const actualFieldError = await commonItemsPage.getFieldErrors(key, pageObject);
+      await expect(actualFieldError).toHaveText(expectedFieldErrorMessage);
+    }
+  }
+);
 
 Then('I navigate {string}', async ({ commonItemsPage }, navigation: string) => {
   switch (navigation) {
