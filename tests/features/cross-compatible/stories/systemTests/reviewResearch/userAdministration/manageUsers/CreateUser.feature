@@ -10,12 +10,14 @@ Feature: HRAPROG-394- User Administration: Manage Users
         Then I can see the Add a new user profile page 
       
     @rsp-2827 @rsp-2827-create-user
-    Scenario Outline: Verify the user is able to create a new user profile with valid data     
+    Scenario Outline: Verify the user is able to create a new user profile with valid data
+        Then I can see the '<Validation_Text>' ui labels on the add a new user profile page for '<Role_Dropdown>'   
         When I fill the new user profile page using '<Add_User_Profile>'
         And I click the 'Continue' button on the 'Create_User_Profile_Page'
-        Then I can see the Check and create user profile page for '<Add_User_Profile>'      
+        Then I can see the Check and create user profile page
+        Then I can see previously saved values for '<Add_User_Profile>' displayed on the check and create user profile page      
         And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'        
-        Then I can see the create user profile confirmation page for '<Add_User_Profile>'
+        Then I can see the create user profile confirmation page for '<Add_User_Profile>'        
         # "Back to Manage Users" in app, "Back to Manage users" in figma >>clarification needed ...>>>Back to manage users
         When I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'       
         Then I can see the Manage users list page       
@@ -27,11 +29,11 @@ Feature: HRAPROG-394- User Administration: Manage Users
         And I can see the list is sorted by default in the alphabetical order of the 'First Name'    
         
         Examples:
-        | Add_User_Profile                                      |
-        | Valid_Data_In_All_Fields_Role_Operations              | 
-        | Valid_Data_In_All_Fields_Role_Reviewer                |
-        | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer      | 
-        | Valid_Data_In_All_Mandatory_Fields_Role_Operations    |    
+        | Add_User_Profile                                      |Validation_Text                    | Role_Dropdown|
+        | Valid_Data_In_All_Fields_Role_Operations              | Label_Texts_Role_Operations       |Role_Operations|
+        # | Valid_Data_In_All_Fields_Role_Reviewer                |Label_Texts_Role_Not_Operations    |Role_Not_Operations|
+        # | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer      | Label_Texts_Role_Not_Operations   |Role_Not_Operations|
+        # | Valid_Data_In_All_Mandatory_Fields_Role_Operations    | Label_Texts_Role_Operations       |  Role_Operations| 
 
         
 

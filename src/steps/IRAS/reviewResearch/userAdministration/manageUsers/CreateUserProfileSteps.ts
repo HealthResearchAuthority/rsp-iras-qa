@@ -65,3 +65,21 @@ Then(
     // "audit_label": "Audit",
   }
 );
+
+Then(
+  'I can see the {string} ui labels on the add a new user profile page for {string}',
+  async ({ commonItemsPage, createUserProfilePage }, datasetName: string, datasetValName: string) => {
+    const datasetVal = createUserProfilePage.createUserProfilePageData.Create_User_Profile[datasetValName];
+    if (datasetValName === 'Role_Operations') {
+      for (const key in datasetVal) {
+        await commonItemsPage.fillUIComponent(datasetVal, key, createUserProfilePage);
+      }
+    }
+    const dataset = createUserProfilePage.createUserProfilePageData.Create_User_Profile[datasetName];
+    for (const key in dataset) {
+      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+        await commonItemsPage.validateUILabels(dataset, key, createUserProfilePage);
+      }
+    }
+  }
+);

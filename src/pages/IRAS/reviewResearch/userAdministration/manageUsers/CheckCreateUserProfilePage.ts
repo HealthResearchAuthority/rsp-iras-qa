@@ -70,66 +70,32 @@ export default class CheckCreateUserProfilePage {
     this.email_address_label = this.page.locator('[class="govuk-label"][for="Email"] b');
     this.email_address_text = this.page.locator('//input[@name="Email"]/..');
     this.telephone_label = this.page.locator('[class="govuk-label"][for="Telephone"] b');
-    this.telephone_text = this.page.getByTestId('Telephone');
+    this.telephone_text = this.page.locator('//input[@name="Telephone"]/..');
     this.organisation_label = this.page.locator('[class="govuk-label"][for="Organisation"] b');
-    this.organisation_text = this.page.getByTestId('Organisation');
+    this.organisation_text = this.page.locator('//input[@name="Organisation"]/..');
     this.job_title_label = this.page.locator('[class="govuk-label"][for="JobTitle"] b');
-    this.job_title_text = this.page.getByTestId('JobTitle');
+    this.job_title_text = this.page.locator('//input[@name="JobTitle"]/..');
     this.role_label = this.page.locator('[class="govuk-label"][for="Role"] b');
-    this.role_dropdown = this.page.getByTestId('Role');
-    this.role_label = this.page.locator('[class="govuk-label"][for="Role"] b');
-    this.role_dropdown = this.page.getByTestId('Role');
+    this.role_dropdown = this.page.locator('//input[@name="Role"]/..');
     this.committee_label = this.page.locator('[class="govuk-label"][for="Committee"] b');
-    this.committee_dropdown = this.page.getByTestId('Committee');
-    this.country_label = this.page.locator('[class="govuk-label"][for="Country"] b'); //update
-    this.country_checkbox = this.page.locator('[name="Country"][type="checkbox"]');
-    this.access_required_label = this.page.locator('[class="govuk-label"][for="AccessRequired"] b'); //update
-    this.access_required_checkbox = this.page.locator('[name="AccessRequired"][type="checkbox"]');
+    this.committee_dropdown = this.page.getByTestId('Committee'); //update
+    this.country_label = this.page.locator('[class="govuk-label"][for="Country"] b');
+    this.country_checkbox = this.page.locator('//input[starts-with(@name,"Country")]/..');
+    this.access_required_label = this.page.locator('[class="govuk-label"][for="AccessRequired"] b');
+    this.access_required_checkbox = this.page.locator('//input[starts-with(@name,"AccessRequired")]/..');
     this.review_body_label = this.page.locator('[class="govuk-label"][for="ReviewBody"] b');
     this.review_body_dropdown = this.page.getByTestId('ReviewBody');
     this.create_profile_button = this.page.locator('button[class="govuk-button"]');
   }
 
-  //Page Methods
-  // async goto() {
-  //   await this.page.goto(''); //update
-  // }
-
   async assertOnCheckCreateUserProfilePage() {
-    //update
-    //commented page_heading validation due to defect
-    // await expect(this.page_heading).toBeVisible();
-    // await expect(this.page_heading).toHaveText(
-    //   this.checkCreateUserProfilePageData.Check_Create_User_Profile_Page_Role_Operations.page_heading
-    // );
+    await expect(this.page_heading).toBeVisible();
+    await expect(this.page_heading).toHaveText(
+      this.checkCreateUserProfilePageData.Check_Create_User_Profile_Page_Role_Operations.page_heading
+    );
     await expect(this.subHeading).toBeVisible();
     await expect(this.subHeading).toHaveText(
       this.checkCreateUserProfilePageData.Check_Create_User_Profile_Page_Role_Operations.sub_heading
     );
-
-    // await expect(this.organisationNameLbl).toHaveText(
-    //   this.checkCreateUserProfilePageData.Check_Create_User_Profile_Page.organisation_name_label
-    // );
-    // await expect(this.organisationNameChangeLink).toHaveText(
-    //   this.checkCreateUserProfilePageData.Check_Create_User_Profile_Page.organisation_name_change_link
-    // );
-    // await expect(this.countryLbl).toHaveText(
-    //   this.checkCreateUserProfilePageData.Check_Create_User_Profile_Page.country_label
-    // );
-    // await expect(this.countryChangeLink).toHaveText(
-    //   this.checkCreateUserProfilePageData.Check_Create_User_Profile_Page.country_change_link
-    // );
-    // await expect(this.emailAddressLbl).toHaveText(
-    //   this.checkCreateUserProfilePageData.Check_Create_User_Profile_Page.email_address_label
-    // );
-    // await expect(this.emailAddressChangeLink).toHaveText(
-    //   this.checkCreateUserProfilePageData.Check_Create_User_Profile_Page.email_address_change_link
-    // );
-    // await expect(this.descriptionLbl).toHaveText(
-    //   this.checkCreateUserProfilePageData.Check_Create_User_Profile_Page.description_label
-    // );
-    // await expect(this.descriptionChangeLink).toHaveText(
-    //   this.checkCreateUserProfilePageData.Check_Create_User_Profile_Page.description_change_link
-    // );
   }
 }

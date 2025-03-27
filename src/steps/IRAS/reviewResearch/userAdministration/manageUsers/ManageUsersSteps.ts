@@ -12,28 +12,6 @@ Then('I can see the Manage users list page', async ({ manageUsersPage }) => {
   await manageUsersPage.assertOnManageUsersPage();
 });
 
-// Then(
-//   'I can see the newly created user record should be present in the list for {string} with {string} status and the list is sorted by default in the alphabetical order of the {string}',
-//   async ({ manageUsersPage, createUserProfilePage }, datasetName: string, userStatus: string, fieldName: string) => {
-//     let fieldNameIndex: number = 0;
-//     if (fieldName === 'First Name') {
-//       fieldNameIndex = 0;
-//     }
-//     const dataset = createUserProfilePage.createUserProfilePageData.Create_User_Profile[datasetName];
-//     const userFirstName = dataset.first_name_text;
-//     const userLastName = dataset.last_name_text;
-//     const filePath = path.resolve(pathToTestDataJson);
-//     const data = await fse.readJson(filePath);
-//     const userEmail = data.Create_User_Profile.email_address_unique;
-//     await manageUsersPage.checkAlphabeticalSortingandfindUserProfile(
-//       userFirstName,
-//       userLastName,
-//       userEmail,
-//       userStatus,
-//       fieldNameIndex
-//     );
-//   }
-// );
 Then(
   'I can see the list is sorted by default in the alphabetical order of the {string}',
   async ({ manageUsersPage }, fieldName: string) => {
@@ -44,22 +22,6 @@ Then(
     await manageUsersPage.checkAlphabeticalSorting(fieldNameIndex);
   }
 );
-// Then(
-//   'I can see the newly created user record should be present in the list for {string} with {string} status and the list is sorted by default in the alphabetical order of the {string}',
-//   async ({ manageUsersPage, createUserProfilePage }, datasetName: string, userStatus: string, fieldName: string) => {
-//     let fieldNameIndex: number = 0;
-//     if (fieldName === 'First Name') {
-//       fieldNameIndex = 0;
-//     }
-//     const dataset = createUserProfilePage.createUserProfilePageData.Create_User_Profile[datasetName];
-//     const userFirstName = dataset.first_name_text;
-//     const userLastName = dataset.last_name_text;
-//     const filePath = path.resolve(pathToTestDataJson);
-//     const data = await fse.readJson(filePath);
-//     const userEmail = data.Create_User_Profile.email_address_unique;
-//     await manageUsersPage.findUserProfile(userFirstName, userLastName, userEmail, userStatus, fieldNameIndex);
-//   }
-// );
 
 When(
   'I can see the newly created user record should be present in the list for {string} with {string} status in the manage user page',
