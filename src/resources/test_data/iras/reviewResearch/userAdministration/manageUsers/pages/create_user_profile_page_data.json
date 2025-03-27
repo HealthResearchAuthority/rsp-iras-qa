@@ -19,7 +19,8 @@
   },
   "Create_User_Profile": {
     "email_address_prefix": "QAAutomation",
-    "email_address_timestamp": "20250326184443424",
+    "email_address_timestamp": "",
+    "email_address_unique": "QAAutomation20250327142127132hscrd@health.org",
     "Valid_Data_In_All_Fields_Role_Operations": {
       "title_text": "Mr",
       "first_name_text": "QA Automation First Name Test",
@@ -33,7 +34,7 @@
         "England"
       ],
       "access_required_checkbox": [
-        "Research Ethics Comittee"
+        "Research Ethics Committee"
       ]
     },
     "Valid_Data_In_All_Fields_Role_Reviewer": {

@@ -182,25 +182,24 @@ export default class CommonItemsPage {
     await $testInfo.attach(`[step] ${$step.title}`, { body: screenshot, contentType: 'image/png' });
   }
 
-  async generateUniqueEmail(keyVal: string, prefix: string, pathToTestDataJson: string): Promise<string> {
+  async generateUniqueEmail(keyVal: string, prefix: string): Promise<string> {
     const timestamp = new Date().toISOString().replace(/[-:.TZ]/g, '');
-    const filePath = path.resolve(pathToTestDataJson);
-    await this.updatePrefix(filePath, timestamp);
     const domain = keyVal;
     return `${prefix}${timestamp}${domain}`;
   }
-  async updatePrefix(filePath: string, timestamp: string) {
+
+  async updateUniqueEmailTestDataJson(filePath: string, updateVal: string) {
     (async () => {
       try {
         const data = await fse.readJson(filePath);
-        data.Create_User_Profile.email_address_timestamp = timestamp;
-        // data.Create_User_Profile.Valid_Data_In_All_Fields_Role_Operations.email_address_text = newEmail;
+        data.Create_User_Profile.email_address_unique = updateVal;
         await fse.writeJson(filePath, data, { spaces: 2 });
       } catch (error) {
         console.error('Error updating prefix:', error);
       }
     })();
   }
+
   async removeUnwantedChars(value: string | null): Promise<string> {
     const safe_val = value ?? 'default value';
     const actual_val = safe_val.replace(/\s+/g, ' ').trim();

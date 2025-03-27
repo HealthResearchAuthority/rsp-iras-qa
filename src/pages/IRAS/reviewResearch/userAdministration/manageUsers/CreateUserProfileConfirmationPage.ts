@@ -23,7 +23,7 @@ export default class CreateUserProfileConfirmationPage {
     this.confirmation_message = this.page.locator('.govuk-panel__title');
     this.consentVal = this.page.locator('//*[contains(@class,"govuk-panel--confirmation")]/../p[1]');
     this.add_another_user_link = this.page.locator('a[href="/admin/users/createuser"]');
-    this.back_to_manage_user_link = this.page.locator('//a[@href="/admin/users" and text()="Back to Manage users"]');
+    this.back_to_manage_user_link = this.page.locator('(//a[@href="/admin/users"])[2]');
   }
 
   //Page Methods

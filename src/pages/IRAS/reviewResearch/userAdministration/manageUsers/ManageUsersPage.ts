@@ -22,6 +22,7 @@ export default class ManageUsersPage {
   readonly search_button_label: Locator;
   readonly firstNameFromListLabel: Locator;
   readonly users_list_rows: Locator;
+  readonly next_button: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -46,6 +47,7 @@ export default class ManageUsersPage {
     this.search_button_label = this.page.getByText('Search');
     this.firstNameFromListLabel = this.page.locator('td:nth-child(1)');
     // add next button pagination
+    this.next_button = this.page.locator('.govuk-pagination__next a');
   }
 
   async assertOnManageUsersPage() {
@@ -65,46 +67,52 @@ export default class ManageUsersPage {
     // await expect(this.search_button_label).toHaveText(this.manageUsersPageData.Manage_Users_Page.search_button_label);
   }
   async checkAlphabeticalSorting(fieldNameIndex: number) {
-    // const SEARCH_RECORD =
-    //   dataset.first_name_text + '|' + dataset.last_name_text + '|' + dataset.email_address_text + '|ACTIVE';
-    // let foundRecord = false;
     let hasNextPage = true;
     const firstNames: string[] = [];
     while (hasNextPage) {
-      // Get all rows on the current page
-      const rows = await this.page.locator('.govuk-table__row').all(); // Adjust selector
+      const rows = await this.page.locator('.govuk-table__row').all();
       for (const row of rows) {
-        // Extract and combine all column values into a full-row string
-        const columns = await row.locator('.govuk-table__cell').allTextContents(); // Adjust selector
-        // Fetch only the first 4 columns
+        const columns = await row.locator('.govuk-table__cell').allTextContents();
         const firstFourColumns = columns.slice(0, 4);
-
-        // const fullRowData = firstFourColumns.map((col) => col.trim()).join('|');
-
-        // Extract first name (assuming it's in the first column)
-        // const firstName = firstFourColumns[0]?.trim() || '';
         const firstName = firstFourColumns[fieldNameIndex]?.trim() || '';
         firstNames.push(firstName);
-        // Check if the record matches the search
-
-        // if (fullRowData === SEARCH_RECORD) {
-        //   foundRecord = true;
-        // }
       }
-      // Check if pagination "Next" button is available
-      const nextButton = this.page.locator('.govuk-pagination__next a'); // Adjust selector
-      hasNextPage = (await nextButton.isVisible()) && !(await nextButton.isDisabled());
+      hasNextPage = (await this.next_button.isVisible()) && !(await this.next_button.isDisabled());
       if (hasNextPage) {
-        await nextButton.click();
+        await this.next_button.click();
         await this.page.waitForLoadState('domcontentloaded');
       }
     }
-    // Validate if names are sorted alphabetically
     const sortedFirstNames = [...firstNames].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
-    expect(firstNames).toEqual(sortedFirstNames); // Validate that the record was found
-    // expect(foundRecord).toBeTruthy();
+    expect(firstNames).toEqual(sortedFirstNames);
   }
   async findUserProfile(userFirstName: string, userLastName: string, userEmail: string, userStatus: string) {
+    const searchRecord = userFirstName + '|' + userLastName + '|' + userEmail + '|' + userStatus;
+    let foundRecord = false;
+    let hasNextPage = true;
+    let count: number = 0;
+    while (hasNextPage) {
+      const rows = await this.page.locator('.govuk-table__row').all();
+      for (const row of rows) {
+        const columns = await row.locator('.govuk-table__cell').allTextContents();
+        const firstFourColumns = columns.slice(0, 4);
+        const fullRowData = firstFourColumns.map((col) => col.trim()).join('|');
+        if (fullRowData === searchRecord) {
+          foundRecord = true;
+          count = count + 1;
+          console.log(`Data found: ${searchRecord}`);
+        }
+      }
+      hasNextPage = (await this.next_button.isVisible()) && !(await this.next_button.isDisabled());
+      if (hasNextPage) {
+        await this.next_button.click();
+        await this.page.waitForLoadState('domcontentloaded');
+      }
+    }
+    expect(foundRecord).toBeTruthy();
+    expect(count).toBe(1);
+  }
+  async findUserProfile1(userFirstName: string, userLastName: string, userEmail: string, userStatus: string) {
     let dataFound = false;
     while (!dataFound) {
       // Capture all rows in the table using locator
@@ -127,7 +135,7 @@ export default class ManageUsersPage {
           console.log(`Data found: ${firstNameText}, ${lastNameText}, ${emailText},${statusText}`);
           // Click the "View" button in the same row
           //And I search and click on View_edit link
-          // await this.users_list_rows.nth(i).getByText('View/Edit').click();
+          await this.users_list_rows.nth(i).getByText('View/Edit').click();
           dataFound = true;
           break;
         }

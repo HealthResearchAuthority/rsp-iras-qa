@@ -164,7 +164,11 @@ Then(
 
 Given(
   'I click the {string} link on the {string}',
-  async ({ commonItemsPage, homePage, manageUsersPage, userProfilePage }, linkKey: string, pageKey: string) => {
+  async (
+    { commonItemsPage, homePage, manageUsersPage, userProfilePage, createUserProfileConfirmationPage },
+    linkKey: string,
+    pageKey: string
+  ) => {
     const linkValue = commonItemsPage.linkTextData[pageKey][linkKey];
     if (pageKey === 'Progress_Bar') {
       await commonItemsPage.qSetProgressBarStageLink.getByText(linkValue, { exact: true }).click();
@@ -176,6 +180,8 @@ Given(
       await manageUsersPage.view_edit_link.click(); //work around for now >> to click on first View/Edit link
     } else if (pageKey === 'User_Profile_Page' && linkKey === 'Change') {
       await userProfilePage.first_change_link.click(); //work around for now >> to click on first Change link
+    } else if (pageKey === 'Create_User_Profile_Confirmation_Page' && linkKey === 'Back_To_Manage_Users') {
+      await createUserProfileConfirmationPage.back_to_manage_user_link.click(); //work around for now >> to click on Back_To_Manage_Users link ..# "Back to Manage Users" in app, "Back to Manage users" in figma >>clarification needed
     } else {
       await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
     }

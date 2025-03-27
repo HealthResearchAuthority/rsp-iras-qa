@@ -1,6 +1,9 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../../hooks/CustomFixtures';
-
+import * as fse from 'fs-extra';
+import path from 'path';
+const pathToTestDataJson =
+  './src/resources/test_data/iras/reviewResearch/userAdministration/manageUsers/pages/create_user_profile_page_data.json';
 const { Then } = createBdd(test);
 
 Then(
@@ -21,11 +24,9 @@ Then(
     expect(actual_title_text).toBe(dataset.title_text);
     expect(actual_first_name_text).toBe(dataset.first_name_text);
     expect(actual_last_name_text).toBe(dataset.last_name_text);
-    // const email_prefix = createUserProfilePage.createUserProfilePageData.Create_User_Profile.email_address_prefix;
-    // const email_timestamp = createUserProfilePage.createUserProfilePageData.Create_User_Profile.email_address_timestamp;
-    const email_address_text = dataset.email_address_text;
-    const expected_email_address_text = email_address_text;
-    // const expected_email_address_text = email_prefix + email_timestamp + email_address_text;
+    const filePath = path.resolve(pathToTestDataJson);
+    const data = await fse.readJson(filePath);
+    const expected_email_address_text = data.Create_User_Profile.email_address_unique;
     expect(actual_email_address_text).toBe(expected_email_address_text);
     //need to update other fields also
     // "telephone_label": "Telephone",
