@@ -8,7 +8,7 @@ Feature: HRAPROG-394- User Administration: Manage Users
         When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
         Then I can see the add a new user profile page
 
-    @rsp-2827 @rsp-2870 @rsp-2827-create-user @rsp-2870-view-list-of-users
+    @rsp-2827 @rsp-2870
     Scenario Outline: Verify the user is able to create a new user profile with valid data
         Validate ui labels on the add a new user profile page
         Validate ui labels on the check and create user profile page
@@ -108,7 +108,7 @@ Feature: HRAPROG-394- User Administration: Manage Users
             | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer   | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer_Another   |
             | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Valid_Data_In_All_Mandatory_Fields_Role_Operations_Another |
 
-    @rsp-2827 @rsp-2827-create-user-change
+    @rsp-2827
     Scenario Outline: Verify the user can navigate from 'Check and create user profile' page by clicking 'Change' button against all the fields
         When I fill the new user profile page using '<Add_User_Profile>'
         And I click the 'Continue' button on the 'Create_User_Profile_Page'
