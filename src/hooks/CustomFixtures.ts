@@ -23,6 +23,13 @@ import ProjectDetailsTitlePage from '../pages/IRAS/createAmendment/ProjectDetail
 import ReseachLocationsPage from '../pages/IRAS/createAmendment/ResearchLocationsPage';
 import KeyProjectRolesPage from '../pages/IRAS/createAmendment/KeyProjectRolesPage';
 import ReviewYourApplicationPage from '../pages/IRAS/createAmendment/ReviewYourApplicationPage';
+import ManageUsersPage from '../pages/IRAS/reviewResearch/userAdministration/manageUsers/ManageUsersPage';
+import CreateUserProfilePage from '../pages/IRAS/reviewResearch/userAdministration/manageUsers/CreateUserProfilePage';
+import CreateUserProfileConfirmationPage from '../pages/IRAS/reviewResearch/userAdministration/manageUsers/CreateUserProfileConfirmationPage';
+import CheckCreateUserProfilePage from '../pages/IRAS/reviewResearch/userAdministration/manageUsers/CheckCreateUserProfilePage';
+import UserProfilePage from '../pages/IRAS/reviewResearch/userAdministration/manageUsers/UserProfilePage';
+import EditUserProfilePage from '../pages/IRAS/reviewResearch/userAdministration/manageUsers/EditUserProfilePage';
+import SystemAdministrationHomePage from '../pages/IRAS/reviewResearch/userAdministration/SystemAdministrationHomePage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -47,6 +54,13 @@ type CustomFixtures = {
   reseachLocationsPage: ReseachLocationsPage;
   keyProjectRolesPage: KeyProjectRolesPage;
   reviewYourApplicationPage: ReviewYourApplicationPage;
+  systemAdministrationHomePage: SystemAdministrationHomePage;
+  manageUsersPage: ManageUsersPage;
+  createUserProfilePage: CreateUserProfilePage;
+  createUserProfileConfirmationPage: CreateUserProfileConfirmationPage;
+  checkCreateUserProfilePage: CheckCreateUserProfilePage;
+  userProfilePage: UserProfilePage;
+  editUserProfilePage: EditUserProfilePage;
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -137,6 +151,34 @@ export const test = base.extend<CustomFixtures>({
 
   reviewYourApplicationPage: async ({ page }, use) => {
     await use(new ReviewYourApplicationPage(page));
+  },
+
+  systemAdministrationHomePage: async ({ page }, use) => {
+    await use(new SystemAdministrationHomePage(page));
+  },
+
+  createUserProfilePage: async ({ page }, use) => {
+    await use(new CreateUserProfilePage(page));
+  },
+
+  manageUsersPage: async ({ page }, use) => {
+    await use(new ManageUsersPage(page));
+  },
+
+  createUserProfileConfirmationPage: async ({ page }, use) => {
+    await use(new CreateUserProfileConfirmationPage(page));
+  },
+
+  checkCreateUserProfilePage: async ({ page }, use) => {
+    await use(new CheckCreateUserProfilePage(page));
+  },
+
+  userProfilePage: async ({ page }, use) => {
+    await use(new UserProfilePage(page));
+  },
+
+  editUserProfilePage: async ({ page }, use) => {
+    await use(new EditUserProfilePage(page));
   },
 
   makeAxeBuilder: async ({ page }, use) => {

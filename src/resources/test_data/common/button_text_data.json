@@ -37,5 +37,19 @@
   },
   "Key_Project_Roles_Page": {
     "Save_Continue": "Save and continue"
+  },
+  "Create_User_Profile_Page": {
+    "Continue": "Continue",
+    "Back": "Back"
+  },
+  "Check_Create_User_Profile_Page": {
+    "Create_Profile": "Create Profile",
+    "Back": "Back"
+  },
+  "User_Profile_Page": {
+    "Disable_User_Record": "Disable user record"
+  },
+  "Manage_Users_Page": {
+    "Back": "Back"
   }
 }
