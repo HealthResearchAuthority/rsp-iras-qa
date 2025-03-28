@@ -1,0 +1,134 @@
+{
+  "Create_User_Profile_Page": {
+    "selected_tab_top": "Manage Users",
+    "back_button": "Back",
+    "page_heading": "Add a new user profile record",
+    "continue_button": "Continue"
+  },
+  "Field_Error_Message_Invalid_Character_Limit": {
+    "title_text": "Max 250 characters allowed",
+    "first_name_text": "Max 250 characters allowed",
+    "last_name_text": "Max 250 characters allowed",
+    "email_address_text": "Max 255 characters allowed",
+    "telephone_text": "Max 11 characters allowed",
+    "organisation_text": "Max 250 characters allowed",
+    "job_title_text": "Max 250 characters allowed"
+  },
+  "Field_Error_Message_Incorrect_Format": {
+    "email_address_text": "Invalid email format."
+  },
+  "Field_Error_Message_Missing_Mandatory_Fields": {
+    "first_name_text": "The FirstName field is required.",
+    "last_name_text": "The LastName field is required.",
+    "email_address_text": "The Email field is required."
+  },
+  "Create_User_Profile": {
+    "email_address_prefix": "QAAutomation",
+    "email_address_timestamp": "",
+    "email_address_unique": "QAAutomation20250328222519468hscrd@health.org",
+    "Role_Operations": {
+      "role_dropdown": "Operations"
+    },
+    "Role_Not_Operations": {
+      "role_dropdown": "Reviewer"
+    },
+    "Label_Texts_Role_Not_Operations": {
+      "title_textbox_label": "Title",
+      "first_name_textbox_label": "First name",
+      "last_name_textbox_label": "Last name",
+      "email_address_textbox_label": "Email address",
+      "telephone_textbox_label": "Telephone",
+      "organisation_textbox_label": "Organisation",
+      "job_title_textbox_label": "Job title",
+      "role_dropdown_label": "Role"
+    },
+    "Label_Texts_Role_Operations": {
+      "title_textbox_label": "Title",
+      "first_name_textbox_label": "First name",
+      "last_name_textbox_label": "Last name",
+      "email_address_textbox_label": "Email address",
+      "telephone_textbox_label": "Telephone",
+      "organisation_textbox_label": "Organisation",
+      "job_title_textbox_label": "Job title",
+      "role_dropdown_label": "Role",
+      "committee_dropdown_label": "Committee",
+      "country_checkbox_label": "Country",
+      "access_required_checkbox_label": "Access required",
+      "review_body_dropdown_label": "Review body"
+    },
+    "Valid_Data_In_All_Fields_Role_Operations": {
+      "title_text": "Mr",
+      "first_name_text": "QA Automation First Name Test Role_Operations",
+      "last_name_text": "Test Last Name Role_Operations",
+      "email_address_text": "hscrd@health.org",
+      "telephone_text": "07000000000",
+      "organisation_text": "QA Automation HRA Role_Operations",
+      "job_title_text": "Sr.Reviewer Role_Operations",
+      "role_dropdown": "operations",
+      "country_checkbox": [
+        "England"
+      ],
+      "access_required_checkbox": [
+        "Research Ethics Committee"
+      ]
+    },
+    "Valid_Data_In_All_Fields_Role_Reviewer": {
+      "title_text": "Mr",
+      "first_name_text": "QA Automation First Name Test Role_Reviewer",
+      "last_name_text": "Test Last Name Role_Reviewer",
+      "email_address_text": "hscrd@health.org",
+      "telephone_text": "07000000000",
+      "organisation_text": "QA Automation HRA Role_Reviewer",
+      "job_title_text": "Sr.Reviewer Role_Reviewer",
+      "role_dropdown": "reviewer"
+    },
+    "Valid_Data_In_All_Fields_Role_Operations_Another": {
+      "title_text": "Mr",
+      "first_name_text": "QA Automation First Name Test Role_Operations_Another",
+      "last_name_text": "Test Last Name Role_Operations_Another",
+      "email_address_text": "hscrd@health.org",
+      "telephone_text": "07000000000",
+      "organisation_text": "QA Automation HRA Role_Operations_Another",
+      "job_title_text": "Sr.Reviewer Role_Operations_Another",
+      "role_dropdown": "operations",
+      "country_checkbox": [
+        "England"
+      ],
+      "access_required_checkbox": [
+        "Research Ethics Committee"
+      ]
+    },
+    "Valid_Data_In_All_Fields_Role_Reviewer_Another": {
+      "title_text": "Mr",
+      "first_name_text": "QA Automation First Name Test Role_Reviewer_Another",
+      "last_name_text": "Test Last Name Role_Reviewer_Another",
+      "email_address_text": "hscrd@health.org",
+      "telephone_text": "07000000000",
+      "organisation_text": "QA Automation HRA Role_Reviewer_Another",
+      "job_title_text": "Sr.Reviewer Role_Reviewer_Another",
+      "role_dropdown": "reviewer"
+    },
+    "Valid_Data_In_All_Mandatory_Fields": {
+      "first_name_text": "First Name Test",
+      "last_name_text": "Test Last Name",
+      "email_address_text": "hscrd@health.org"
+    },
+    "Missing_Data_All_Mandatory_Fields": {
+      "first_name_text": "",
+      "last_name_text": "",
+      "email_address_text": ""
+    },
+    "Invalid_Character_Limit": {
+      "title_text": "Exploring the Intricacies of Advanced Quantum Computing: Unveiling the Potential of Quantum Algorithms, Quantum Cryptography, and Quantum Machine Learning in Revolutionizing Technology and Shaping the Future of Computational Science and Engineering Morethan250chars",
+      "first_name_text": "AelianaSophiaIsabellaGabriellaAlexandriaSeraphinaValentinaAnastasiaEvangelineArabellaCassandraJulianaEmmanuellaTheodosiaChristabellaMariabellaRosabellaViolettaAngelinaSerenellaElizabellaMarcellinaMirabellaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx Morethan250chars",
+      "last_name_text": "AelianaSophiaIsabellaGabriellaAlexandriaSeraphinaValentinaAnastasiaEvangelineArabellaCassandraJulianaEmmanuellaTheodosiaChristabellaMariabellaRosabellaViolettaAngelinaSerenellaElizabellaMarcellinaMirabellaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx Morethan250charss",
+      "email_address_text": "averylongemailaddresscreatedforillustrationpurposesonlyandnotmeanttobeusedinreallife@exampledomain.comaverylongemailaddresscreatedforillustrationpurposesonlyandnotmeanttobeusedinreallife@exampledomain.comaverylongemailaddresscreatedforillustrationpurposesonlyandnotmeanttobeusedinreallife@exampledomain55.com",
+      "telephone_text": "+12345678901",
+      "organisation_text": "AelianaSophiaIsabellaGabriellaAlexandriaSeraphinaValentinaAnastasiaEvangelineArabellaCassandraJulianaEmmanuellaTheodosiaChristabellaMariabellaRosabellaViolettaAngelinaSerenellaElizabellaMarcellinaMirabellaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx Morethan250chars",
+      "job_title_text": "AelianaSophiaIsabellaGabriellaAlexandriaSeraphinaValentinaAnastasiaEvangelineArabellaCassandraJulianaEmmanuellaTheodosiaChristabellaMariabellaRosabellaViolettaAngelinaSerenellaElizabellaMarcellinaMirabellaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx Morethan250chars"
+    },
+    "Incorrect_Format": {
+      "email_address_text": "O(*()*(*()"
+    }
+  }
+}

@@ -24,25 +24,32 @@ AfterStep(async ({ page, $step, $testInfo }) => {
 
 Then('I capture the page screenshot', async () => {});
 
-Given('I have navigated to the {string}', async ({ loginPage, homePage, createApplicationPage }, page: string) => {
-  switch (page) {
-    case 'Login_Page':
-      await homePage.goto();
-      await homePage.loginBtn.click();
-      await loginPage.assertOnLoginPage();
-      break;
-    case 'Home_Page':
-      await homePage.goto();
-      await homePage.assertOnHomePage();
-      break;
-    case 'Create_Application_Page':
-      await createApplicationPage.goto();
-      await createApplicationPage.assertOnCreateApplicationPage();
-      break;
-    default:
-      throw new Error(`${page} is not a valid option`);
+Given(
+  'I have navigated to the {string}',
+  async ({ loginPage, homePage, createApplicationPage, systemAdministrationHomePage }, page: string) => {
+    switch (page) {
+      case 'Login_Page':
+        await homePage.goto();
+        await homePage.loginBtn.click();
+        await loginPage.assertOnLoginPage();
+        break;
+      case 'Home_Page':
+        await homePage.goto();
+        await homePage.assertOnHomePage();
+        break;
+      case 'Create_Application_Page':
+        await createApplicationPage.goto();
+        await createApplicationPage.assertOnCreateApplicationPage();
+        break;
+      case 'System_Administration_Home_Page':
+        await systemAdministrationHomePage.goto();
+        await systemAdministrationHomePage.assertOnSystemAdministrationHomePage();
+        break;
+      default:
+        throw new Error(`${page} is not a valid option`);
+    }
   }
-});
+);
 
 When(
   'I can see the {string}',
@@ -125,12 +132,24 @@ Then('I see something {string}', async ({ commonItemsPage }, testType: string) =
 
 Then(
   'I click the {string} button on the {string}',
-  async ({ commonItemsPage, homePage }, buttonKey: string, pageKey: string) => {
+  async (
+    { commonItemsPage, homePage, checkCreateUserProfilePage, manageUsersPage },
+    buttonKey: string,
+    pageKey: string
+  ) => {
     const buttonValue = commonItemsPage.buttonTextData[pageKey][buttonKey];
     if (pageKey === 'Banner' && buttonKey === 'Login') {
       await commonItemsPage.bannerLoginBtn.click();
     } else if (pageKey === 'Home_Page' && buttonKey === 'Login') {
       await homePage.loginBtn.click();
+    } else if (pageKey === 'Check_Create_User_Profile_Page' && buttonKey === 'Create_Profile') {
+      await checkCreateUserProfilePage.create_profile_button.click();
+      //added this as a workaround >>Create_Profile button issue
+    } else if (pageKey === 'Manage_Users_Page' && buttonKey === 'Back') {
+      await manageUsersPage.back_button.click(); //work around for now //added this as a workaround >>Back button issue
+    } else if (pageKey === 'Check_Create_User_Profile_Page' && buttonKey === 'Back') {
+      await checkCreateUserProfilePage.back_button.click(); //work around for now >> to click on first View/Edit link
+      //added this as a workaround >>Back button issue
     } else {
       await commonItemsPage.govUkButton.getByText(buttonValue, { exact: true }).click();
     }
@@ -153,7 +172,11 @@ Then(
 
 Given(
   'I click the {string} link on the {string}',
-  async ({ commonItemsPage, homePage }, linkKey: string, pageKey: string) => {
+  async (
+    { commonItemsPage, homePage, manageUsersPage, userProfilePage, createUserProfileConfirmationPage },
+    linkKey: string,
+    pageKey: string
+  ) => {
     const linkValue = commonItemsPage.linkTextData[pageKey][linkKey];
     if (pageKey === 'Progress_Bar') {
       await commonItemsPage.qSetProgressBarStageLink.getByText(linkValue, { exact: true }).click();
@@ -161,6 +184,12 @@ Given(
       await commonItemsPage.bannerMyApplications.click();
     } else if (pageKey === 'Home_Page' && linkKey === 'My_Applications') {
       await homePage.myApplicationsLink.click();
+    } else if (pageKey === 'Manage_Users_Page' && linkKey === 'View_Edit') {
+      await manageUsersPage.view_edit_link.click(); //work around for now >> to click on first View/Edit link
+    } else if (pageKey === 'User_Profile_Page' && linkKey === 'Change') {
+      await userProfilePage.first_change_link.click(); //work around for now >> to click on first Change link
+    } else if (pageKey === 'Create_User_Profile_Confirmation_Page' && linkKey === 'Back_To_Manage_Users') {
+      await createUserProfileConfirmationPage.back_to_manage_user_link.click(); //work around for now >> to click on Back_To_Manage_Users link ..# "Back to Manage Users" in app, "Back to Manage users" in figma >>clarification needed
     } else {
       await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
     }

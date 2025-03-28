@@ -1,0 +1,9 @@
+{
+  "Create_User_Profile_Confirmation_Page": {
+    "selected_tab_top": "Manage Users",
+    "confirmation_message": "User has been successfully added",
+    "consent": "Christiana Taylor-kamara has been sent an email confirming their account details. Their status is now active.",
+    "add_another_user_link": "Add another user",
+    "back_to_manage_user_link": "Back to Manage Users"
+  }
+}
