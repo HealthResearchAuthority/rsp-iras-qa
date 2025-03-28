@@ -23,6 +23,7 @@ export default class CommonItemsPage {
   readonly bannerNavBar: Locator;
   readonly bannerLoginBtn: Locator;
   readonly bannerMyApplications: Locator;
+  readonly errorMessageFieldLabel: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -44,6 +45,7 @@ export default class CommonItemsPage {
     this.bannerNavBar = this.page.getByLabel('Service information');
     this.bannerLoginBtn = this.bannerNavBar.getByText(this.buttonTextData.Banner.Login, { exact: true });
     this.bannerMyApplications = this.bannerNavBar.getByText(this.linkTextData.Banner.My_Applications, { exact: true });
+    this.errorMessageFieldLabel = page.locator('span[class="govuk-error-message field-validation-error"]');
   }
 
   //Page Methods
@@ -206,34 +208,34 @@ export default class CommonItemsPage {
     return actual_val;
   }
 
-  // async validateErrorMessage<PageObject>(
-  //   errorMessageFieldDataset: string,
-  //   errorMessageSummaryDataset: string,
-  //   key: string,
-  //   page: PageObject
-  // ) {
-  //   const typeAttribute = await page[key].first().getAttribute('type');
-  //   await expect(
-  //     this.errorMessageSummaryLabel.getByText(errorMessageSummaryDataset['error_message_summary_header'])
-  //   ).toBeVisible();
-  //   await expect(this.errorMessageSummaryLabel.getByText(errorMessageSummaryDataset[key])).toBeVisible();
-  //   if (typeAttribute === 'checkbox') {
-  //     const checkboxLocator = page[key].locator('../../../..').locator(this.errorMessageFieldLabel);
-  //     await expect(checkboxLocator).toHaveText(errorMessageFieldDataset[key]);
-  //   } else if (typeAttribute === 'radio') {
-  //     const radioLocator = page[key].locator('../../../..').locator(this.errorMessageFieldLabel);
-  //     await expect(radioLocator).toHaveText(errorMessageFieldDataset[key]);
-  //   } else if (
-  //     typeAttribute === 'date' ||
-  //     (await page[key].first().getAttribute('class')).toLowerCase().includes('date')
-  //   ) {
-  //     const dateLocator = page[key].locator('../../../../../..').locator(this.errorMessageFieldLabel);
-  //     await expect(dateLocator).toHaveText(errorMessageFieldDataset[key]);
-  //   } else {
-  //     const otherLocator = page[key].locator('..').locator(this.errorMessageFieldLabel);
-  //     await expect(otherLocator).toHaveText(errorMessageFieldDataset[key]);
-  //   }
-  // }
+  async validateFieldErrorMessage<PageObject>(
+    errorMessageFieldDataset: string,
+
+    key: string,
+    page: PageObject
+  ) {
+    const typeAttribute = await page[key].first().getAttribute('type');
+    // await expect(
+    //   this.errorMessageSummaryLabel.getByText(errorMessageSummaryDataset['error_message_summary_header'])
+    // ).toBeVisible();
+    // await expect(this.errorMessageSummaryLabel.getByText(errorMessageSummaryDataset[key])).toBeVisible();
+    if (typeAttribute === 'checkbox') {
+      const checkboxLocator = page[key].locator('../../../..').locator(this.errorMessageFieldLabel);
+      await expect(checkboxLocator).toHaveText(errorMessageFieldDataset[key]);
+    } else if (typeAttribute === 'radio') {
+      const radioLocator = page[key].locator('../../../..').locator(this.errorMessageFieldLabel);
+      await expect(radioLocator).toHaveText(errorMessageFieldDataset[key]);
+    } else if (
+      typeAttribute === 'date' ||
+      (await page[key].first().getAttribute('class')).toLowerCase().includes('date')
+    ) {
+      const dateLocator = page[key].locator('../../../../../..').locator(this.errorMessageFieldLabel);
+      await expect(dateLocator).toHaveText(errorMessageFieldDataset[key]);
+    } else {
+      const otherLocator = page[key].locator('..').locator(this.errorMessageFieldLabel);
+      await expect(otherLocator).toHaveText(errorMessageFieldDataset[key]);
+    }
+  }
 
   async validateUIComponentValues<PageObject>(dataset: JSON, key: string, page: PageObject) {
     const locator: Locator = page[key];
@@ -268,6 +270,66 @@ export default class CommonItemsPage {
       expect(await this.removeUnwantedChars(await locator.textContent())).toBe(dataset[key][0]);
     } else {
       expect(await this.removeUnwantedChars(await locator.textContent())).toBe(dataset[key]);
+    }
+  }
+
+  async validateSelectedValuesCreateUser<PageObject>(dataset: JSON, key: string, page: PageObject) {
+    const locator: Locator = page[key];
+    const typeAttribute = await locator.first().getAttribute('type');
+    if (typeAttribute === 'text' || typeAttribute === 'date' || typeAttribute === 'tel') {
+      expect(await this.removeUnwantedChars(await locator.getAttribute('value'))).toBe(dataset[key]);
+    } else if (typeAttribute === 'radio') {
+      expect(await locator.locator('..').getByLabel(dataset[key], { exact: true }).isChecked());
+    } else if (typeAttribute === 'checkbox') {
+      for (const checkbox of dataset[key]) {
+        expect(await locator.locator('..').getByLabel(checkbox, { exact: true }).isChecked());
+      }
+    } else if (typeAttribute === 'email') {
+      if (key === 'email_address_text') {
+        const filePath = path.resolve(this.pathToTestDataJson);
+        const data = await fse.readJson(filePath);
+        expect(await this.removeUnwantedChars(await locator.getAttribute('value'))).toBe(
+          data.Create_User_Profile.email_address_unique
+        );
+      }
+    } else {
+      const isSelectTag = await locator.evaluate((el) => el.tagName.toLowerCase() === 'select');
+      if (isSelectTag) {
+        {
+          expect(
+            await this.removeUnwantedChars(
+              await this.page.locator('select option[selected=selected]').getAttribute('value')
+            )
+          ).toBe(dataset[key]);
+        }
+      }
+    }
+  }
+
+  async clearUIComponent<PageObject>(dataset: JSON, key: string, page: PageObject) {
+    const locator: Locator = page[key];
+    const typeAttribute = await locator.first().getAttribute('type');
+    if (typeAttribute === 'text' || typeAttribute === 'date' || typeAttribute === 'email' || typeAttribute === 'tel') {
+      await locator.clear();
+    } else if (typeAttribute === 'radio') {
+      if (await locator.locator('..').getByLabel(dataset[key], { exact: true }).isChecked()) {
+        await locator.locator('..').getByLabel(dataset[key], { exact: true }).uncheck();
+        expect(await locator.locator('..').getByLabel(dataset[key], { exact: true }).isChecked()).toBeFalsy();
+      }
+    } else if (typeAttribute === 'checkbox') {
+      for (const checkbox of dataset[key]) {
+        if (await locator.locator('..').getByLabel(checkbox, { exact: true }).isChecked()) {
+          await locator.locator('..').getByLabel(checkbox, { exact: true }).uncheck();
+          expect(await locator.locator('..').getByLabel(checkbox, { exact: true }).isChecked()).toBeFalsy();
+        }
+      }
+    } else {
+      const isSelectTag = await locator.evaluate((el) => el.tagName.toLowerCase() === 'select');
+      if (isSelectTag) {
+        {
+          await locator.selectOption({ label: '' });
+        }
+      }
     }
   }
 }

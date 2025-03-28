@@ -4,34 +4,38 @@
     "back_button": "Back",
     "page_heading": "Check and create user profile",
     "sub_heading": "Check the information here is correct before creating the profile.",
-    "title_label": "Title",
-    "first_name_label": "First name",
-    "last_name_label": "Last name",
-    "email_address_label": "Email address",
-    "telephone_label": "Telephone",
-    "organisation_label": "Organisation",
-    "job_title_label": "Job title",
-    "role_label": "Role",
-    "create_profile_button": "Create profile"
+    "create_profile_button": "Create profile",
+    "Label_Texts_Role_Not_Operations": {
+      "title_label": "Title",
+      "first_name_label": "First name",
+      "last_name_label": "Last name",
+      "email_address_label": "Email address",
+      "telephone_label": "Telephone",
+      "organisation_label": "Organisation",
+      "job_title_label": "Job title",
+      "role_label": "Role"
+    }
   },
   "Check_Create_User_Profile_Page_Role_Operations": {
     "selected_tab_top": "Manage Users",
     "back_button": "Back",
     "page_heading": "Check and create user profile",
     "sub_heading": "Check the information here is correct before creating the profile.",
-    "title_label": "Title",
-    "first_name_label": "First name",
-    "last_name_label": "Last name",
-    "email_address_label": "Email address",
-    "telephone_label": "Telephone",
-    "organisation_label": "Organisation",
-    "job_title_label": "Job title",
-    "role_label": "Role",
-    "committee_label": "Committee",
-    "country_label": "Country",
-    "access_required_label": "Access Required",
-    "review_body_label": "Review body",
     "audit_label": "Audit",
-    "create_profile_button": "Create profile"
+    "create_profile_button": "Create profile",
+    "Label_Texts_Role_Operations": {
+      "title_label": "Title",
+      "first_name_label": "First name",
+      "last_name_label": "Last name",
+      "email_address_label": "Email address",
+      "telephone_label": "Telephone",
+      "organisation_label": "Organisation",
+      "job_title_label": "Job title",
+      "role_label": "Role",
+      "committee_label": "Committee",
+      "country_label": "Country",
+      "access_required_label": "Access Required",
+      "review_body_label": "Review body"
+    }
   }
 }

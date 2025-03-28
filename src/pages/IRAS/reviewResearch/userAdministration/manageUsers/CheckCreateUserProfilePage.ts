@@ -8,7 +8,7 @@ export default class CheckCreateUserProfilePage {
   readonly checkCreateUserProfilePageData: typeof checkCreateUserProfilePageData;
   readonly buttonTextData: typeof buttonTextData;
   // readonly selectedBreadCrumbs: Locator;
-  readonly backButton: Locator;
+  readonly back_button: Locator;
   readonly page_heading: Locator;
   readonly subHeading: Locator;
   readonly title_label: Locator;
@@ -56,35 +56,45 @@ export default class CheckCreateUserProfilePage {
 
     //Locators
     // this.selectedBreadCrumbs = this.page.getByTestId('title'); // update
-    // this.backButton = this.page.getByTestId('title'); // update
+    this.back_button = this.page.getByText('Back');
     this.page_heading = this.page.locator('.govuk-heading-l');
     this.subHeading = this.page.locator('.govuk-heading-l').locator('..').locator('p');
     this.title_label = this.page.locator('(//tr[@class="govuk-table__row"])[1]/td/b');
-    this.title_text = this.page.locator('(//tr[@class="govuk-table__row"])[1]/td[2]');
-    this.title_change_link = this.page.locator('(//tr[@class="govuk-table__row"])[1]/td[3]/button');
+    this.title_text = this.page.locator('//input[@name="Title"]/..');
+    this.title_change_link = this.page.locator('//input[@name="Title"]/../..//button');
     this.first_name_label = this.page.locator('(//tr[@class="govuk-table__row"])[2]/td/b');
-    this.first_name_text = this.page.locator('(//tr[@class="govuk-table__row"])[2]/td[2]');
-    this.first_name_change_link = this.page.locator('(//tr[@class="govuk-table__row"])[2]/td[3]/button');
-    this.last_name_label = this.page.locator('[class="govuk-label"][for="LastName"] b');
-    this.last_name_text = this.page.locator('(//tr[@class="govuk-table__row"])[3]/td[2]');
-    this.email_address_label = this.page.locator('[class="govuk-label"][for="Email"] b');
+    this.first_name_text = this.page.locator('//input[@name="FirstName"]/..');
+    this.first_name_change_link = this.page.locator('//input[@name="FirstName"]/../..//button');
+    this.last_name_label = this.page.locator('(//tr[@class="govuk-table__row"])[3]/td/b');
+    this.last_name_text = this.page.locator('//input[@name="LastName"]/..');
+    this.last_name_change_link = this.page.locator('//input[@name="LastName"]/../..//button');
+    this.email_address_label = this.page.locator('(//tr[@class="govuk-table__row"])[4]/td/b');
     this.email_address_text = this.page.locator('//input[@name="Email"]/..');
-    this.telephone_label = this.page.locator('[class="govuk-label"][for="Telephone"] b');
+    this.email_address_change_link = this.page.locator('//input[@name="Email"]/../..//button');
+    this.telephone_label = this.page.locator('(//tr[@class="govuk-table__row"])[5]/td/b');
     this.telephone_text = this.page.locator('//input[@name="Telephone"]/..');
-    this.organisation_label = this.page.locator('[class="govuk-label"][for="Organisation"] b');
+    this.telephone_change_link = this.page.locator('//input[@name="Telephone"]/../..//button');
+    this.organisation_label = this.page.locator('(//tr[@class="govuk-table__row"])[6]/td/b');
     this.organisation_text = this.page.locator('//input[@name="Organisation"]/..');
-    this.job_title_label = this.page.locator('[class="govuk-label"][for="JobTitle"] b');
+    this.organisation_change_link = this.page.locator('//input[@name="Organisation"]/../..//button');
+    this.job_title_label = this.page.locator('(//tr[@class="govuk-table__row"])[7]/td/b');
     this.job_title_text = this.page.locator('//input[@name="JobTitle"]/..');
-    this.role_label = this.page.locator('[class="govuk-label"][for="Role"] b');
+    this.job_title_change_link = this.page.locator('//input[@name="JobTitle"]/../..//button');
+    this.role_label = this.page.locator('(//tr[@class="govuk-table__row"])[8]/td/b');
     this.role_dropdown = this.page.locator('//input[@name="Role"]/..');
-    this.committee_label = this.page.locator('[class="govuk-label"][for="Committee"] b');
-    this.committee_dropdown = this.page.getByTestId('Committee'); //update
-    this.country_label = this.page.locator('[class="govuk-label"][for="Country"] b');
+    this.role_change_link = this.page.locator('//input[@name="Role"]/../..//button');
+    this.committee_label = this.page.locator('(//tr[@class="govuk-table__row"])[9]/td/b');
+    this.committee_dropdown = this.page.locator('//input[@name="Committee"]/..'); //update
+    this.committee_change_link = this.page.locator('tr.govuk-table__row:nth-child(9) button.govuk-link-button');
+    this.country_label = this.page.locator('(//tr[@class="govuk-table__row"])[10]/td/b');
     this.country_checkbox = this.page.locator('//input[starts-with(@name,"Country")]/..');
-    this.access_required_label = this.page.locator('[class="govuk-label"][for="AccessRequired"] b');
+    this.country_change_link = this.page.locator('//input[starts-with(@name,"Country")]/../..//button');
+    this.access_required_label = this.page.locator('(//tr[@class="govuk-table__row"])[11]/td/b');
     this.access_required_checkbox = this.page.locator('//input[starts-with(@name,"AccessRequired")]/..');
-    this.review_body_label = this.page.locator('[class="govuk-label"][for="ReviewBody"] b');
-    this.review_body_dropdown = this.page.getByTestId('ReviewBody');
+    this.access_required_change_link = this.page.locator('//input[starts-with(@name,"AccessRequired")]/../..//button');
+    this.review_body_label = this.page.locator('(//tr[@class="govuk-table__row"])[12]/td/b');
+    this.review_body_dropdown = this.page.getByTestId('ReviewBody'); //update
+    this.review_body_change_link = this.page.locator('tr.govuk-table__row:nth-child(12) button.govuk-link-button');
     this.create_profile_button = this.page.locator('button[class="govuk-button"]');
   }
 
@@ -97,5 +107,47 @@ export default class CheckCreateUserProfilePage {
     await expect(this.subHeading).toHaveText(
       this.checkCreateUserProfilePageData.Check_Create_User_Profile_Page_Role_Operations.sub_heading
     );
+  }
+  async clickOnChangeButtonRoleOperations(fieldKey: string) {
+    switch (fieldKey) {
+      case 'Title':
+        await this.title_change_link.click();
+        break;
+      case 'First_Name':
+        await this.first_name_change_link.click();
+        break;
+      case 'Last_Name':
+        await this.last_name_change_link.click();
+        break;
+      case 'Email_Address':
+        await this.email_address_change_link.click();
+        break;
+      case 'Telephone':
+        await this.telephone_change_link.click();
+        break;
+      case 'Organisation':
+        await this.organisation_change_link.click();
+        break;
+      case 'Job_Title':
+        await this.job_title_change_link.click();
+        break;
+      case 'Role':
+        await this.role_change_link.click();
+        break;
+      case 'Committee':
+        await this.committee_change_link.click();
+        break;
+      case 'Country':
+        await this.country_change_link.click();
+        break;
+      case 'Access_Required':
+        await this.access_required_change_link.click();
+        break;
+      case 'Review_Body':
+        await this.review_body_change_link.click();
+        break;
+      default:
+        throw new Error(`${fieldKey} is not a valid option`);
+    }
   }
 }

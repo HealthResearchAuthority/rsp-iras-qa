@@ -5,20 +5,18 @@
     "page_heading": "Add a new user profile record",
     "continue_button": "Continue"
   },
-  "Summary_Error_Message": {
-    "error_message_summary_header": "You need to complete these questions before you can continue::",
-    "short_project_title_text": "Question 1 under Project details section",
-    "planned_project_end_day_text": "Question 2 under Project details section",
-    "planned_project_end_month_text": "Question 2 under Project details section",
-    "planned_project_end_year_text": "Question 2 under Project details section",
-    "error_message_summary_header_OG": "There is a problem",
+  "Field_Error_Message_Max": {
+    "title_text": "Max 250 characters allowed",
+    "planned_project_end_day_text": "The date should be a valid date and in future",
+    "planned_project_end_month_text": "The date should be a valid date and in future",
+    "planned_project_end_year_text": "The date should be a valid date and in future",
     "short_project_title_text_OG": "Short project title must not contain more than XX characters",
     "planned_project_end_day_text_OG": "",
     "planned_project_end_month_text_OG": "",
     "planned_project_end_year_text_OG": ""
   },
-  "Field_Error_Message": {
-    "short_project_title_text": "Short project title should be between the specified characters limit",
+  "Field_Error_Message_Mandatory": {
+    "title_text": "Max 250 characters allowed",
     "planned_project_end_day_text": "The date should be a valid date and in future",
     "planned_project_end_month_text": "The date should be a valid date and in future",
     "planned_project_end_year_text": "The date should be a valid date and in future",
@@ -30,7 +28,7 @@
   "Create_User_Profile": {
     "email_address_prefix": "QAAutomation",
     "email_address_timestamp": "",
-    "email_address_unique": "QAAutomation20250327210607630hscrd@health.org",
+    "email_address_unique": "QAAutomation20250328181957021hscrd@health.org",
     "Role_Operations": {
       "role_dropdown": "Operations"
     },
@@ -58,17 +56,17 @@
       "role_dropdown_label": "Role",
       "committee_dropdown_label": "Committee",
       "country_checkbox_label": "Country",
-      "access_required_checkbox_label": "Access Required",
+      "access_required_checkbox_label": "Access required",
       "review_body_dropdown_label": "Review body"
     },
     "Valid_Data_In_All_Fields_Role_Operations": {
       "title_text": "Mr",
-      "first_name_text": "QA Automation First Name Test",
-      "last_name_text": "Test Last Name",
+      "first_name_text": "QA Automation First Name Test Role_Operations",
+      "last_name_text": "Test Last Name Role_Operations",
       "email_address_text": "hscrd@health.org",
       "telephone_text": "07000000000",
-      "organisation_text": "QA Automation HRA",
-      "job_title_text": "Sr.Reviewer",
+      "organisation_text": "QA Automation HRA Role_Operations",
+      "job_title_text": "Sr.Reviewer Role_Operations",
       "role_dropdown": "operations",
       "country_checkbox": [
         "England"
@@ -79,13 +77,39 @@
     },
     "Valid_Data_In_All_Fields_Role_Reviewer": {
       "title_text": "Mr",
-      "first_name_text": "QA Automation First Name Test",
-      "last_name_text": "Test Last Name",
+      "first_name_text": "QA Automation First Name Test Role_Reviewer",
+      "last_name_text": "Test Last Name Role_Reviewer",
       "email_address_text": "hscrd@health.org",
       "telephone_text": "07000000000",
-      "organisation_text": "QA Automation HRA",
-      "job_title_text": "Sr.Reviewer",
-      "role_dropdown": "Reviewer"
+      "organisation_text": "QA Automation HRA Role_Reviewer",
+      "job_title_text": "Sr.Reviewer Role_Reviewer",
+      "role_dropdown": "reviewer"
+    },
+    "Valid_Data_In_All_Fields_Role_Operations_Another": {
+      "title_text": "Mr",
+      "first_name_text": "QA Automation First Name Test Role_Operations_Another",
+      "last_name_text": "Test Last Name Role_Operations_Another",
+      "email_address_text": "hscrd@health.org",
+      "telephone_text": "07000000000",
+      "organisation_text": "QA Automation HRA Role_Operations_Another",
+      "job_title_text": "Sr.Reviewer Role_Operations_Another",
+      "role_dropdown": "operations",
+      "country_checkbox": [
+        "England"
+      ],
+      "access_required_checkbox": [
+        "Research Ethics Committee"
+      ]
+    },
+    "Valid_Data_In_All_Fields_Role_Reviewer_Another": {
+      "title_text": "Mr",
+      "first_name_text": "QA Automation First Name Test Role_Reviewer_Another",
+      "last_name_text": "Test Last Name Role_Reviewer_Another",
+      "email_address_text": "hscrd@health.org",
+      "telephone_text": "07000000000",
+      "organisation_text": "QA Automation HRA Role_Reviewer_Another",
+      "job_title_text": "Sr.Reviewer Role_Reviewer_Another",
+      "role_dropdown": "reviewer"
     },
     "Valid_Data_In_All_Mandatory_Fields": {
       "first_name_text": "First Name Test",

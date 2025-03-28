@@ -147,7 +147,9 @@ Then(
       await checkCreateUserProfilePage.create_profile_button.click();
       //added this as a workaround >>Create_Profile button issue
     } else if (pageKey === 'Manage_Users_Page' && buttonKey === 'Back') {
-      await manageUsersPage.back_button.click(); //work around for now >> to click on first View/Edit link
+      await manageUsersPage.back_button.click(); //work around for now //added this as a workaround >>Back button issue
+    } else if (pageKey === 'Check_Create_User_Profile_Page' && buttonKey === 'Back') {
+      await checkCreateUserProfilePage.back_button.click(); //work around for now >> to click on first View/Edit link
       //added this as a workaround >>Back button issue
     } else {
       await commonItemsPage.govUkButton.getByText(buttonValue, { exact: true }).click();

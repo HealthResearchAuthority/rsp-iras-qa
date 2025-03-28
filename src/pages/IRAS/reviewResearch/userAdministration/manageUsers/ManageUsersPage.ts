@@ -10,14 +10,14 @@ export default class ManageUsersPage {
   readonly page_heading: Locator;
   readonly back_button: Locator;
   readonly add_new_users_record_link: Locator;
-  readonly first_name_column_header: Locator;
-  readonly last_name_column_header: Locator;
-  readonly email_address_column_header: Locator;
-  readonly status_column_header: Locator;
-  readonly last_logged_in_column_header: Locator;
-  readonly actions_column_header: Locator;
+  readonly first_name_column_header_label: Locator;
+  readonly last_name_column_header_label: Locator;
+  readonly email_address_column_header_label: Locator;
+  readonly status_column_header_label: Locator;
+  readonly last_logged_in_column_header_label: Locator;
+  readonly actions_column_header_label: Locator;
   readonly view_edit_link: Locator;
-  readonly find_user_title: Locator;
+  readonly search_box_label: Locator;
   readonly search_box: Locator;
   readonly search_button_label: Locator;
   readonly firstNameFromListLabel: Locator;
@@ -36,13 +36,25 @@ export default class ManageUsersPage {
     this.users_list_rows = this.page.locator('table tbody tr');
     this.back_button = this.page.getByText('Back');
     this.add_new_users_record_link = this.page.getByText('Add a new user profile record');
-    this.first_name_column_header = this.page.getByText('First name');
-    this.last_name_column_header = this.page.getByText('Last name');
-    this.email_address_column_header = this.page.getByText('Email address');
-    this.status_column_header = this.page.getByText('Status');
-    this.last_logged_in_column_header = this.page.getByText('Last logged in');
-    this.actions_column_header = this.page.getByText('Action');
-    this.find_user_title = this.page.getByText('Find a user');
+    this.first_name_column_header_label = this.page.locator(
+      '[class$="govuk-table-users"] [class^="govuk-table__header"]:nth-child(1)'
+    );
+    this.last_name_column_header_label = this.page.locator(
+      '[class$="govuk-table-users"] [class^="govuk-table__header"]:nth-child(2)'
+    );
+    this.email_address_column_header_label = this.page.locator(
+      '[class$="govuk-table-users"] [class^="govuk-table__header"]:nth-child(3)'
+    );
+    this.status_column_header_label = this.page.locator(
+      '[class$="govuk-table-users"] [class^="govuk-table__header"]:nth-child(4)'
+    );
+    this.last_logged_in_column_header_label = this.page.locator(
+      '[class$="govuk-table-users"] [class^="govuk-table__header"]:nth-child(5)'
+    );
+    this.actions_column_header_label = this.page.locator(
+      '[class$="govuk-table-users"] [class^="govuk-table__header"]:nth-child(6)'
+    );
+    this.search_box_label = this.page.locator('label[for="SearchUser"]');
     this.search_box = this.page.getByTestId('SearchUser');
     this.search_button_label = this.page.getByText('Search');
     this.firstNameFromListLabel = this.page.locator('td:nth-child(1)');
@@ -51,20 +63,8 @@ export default class ManageUsersPage {
   }
 
   async assertOnManageUsersPage() {
-    //need to update code here
     await expect(this.page_heading).toBeVisible();
     await expect(this.page_heading).toHaveText(this.manageUsersPageData.Manage_Users_Page.page_heading);
-    //need to update code here
-    // await expect(this.add_new_users_record_link).toHaveText(this.manageUsersPageData.Manage_Users_Page.add_new_users_record_link);
-    // await expect(this.first_name_column_header).toHaveText(this.manageUsersPageData.Manage_Users_Page.first_name_column_header);
-    // await expect(this.last_name_column_header).toHaveText(this.manageUsersPageData.Manage_Users_Page.last_logged_in_column_header);
-    // await expect(this.email_address_column_header).toHaveText(this.manageUsersPageData.Manage_Users_Page.email_address_column_header);
-    // await expect(this.status_column_header).toHaveText(this.manageUsersPageData.Manage_Users_Page.status_column_header);
-    // await expect(this.last_logged_in_column_header).toHaveText(this.manageUsersPageData.Manage_Users_Page.last_logged_in_column_header);
-    // await expect(this.actions_column_header).toHaveText(this.manageUsersPageData.Manage_Users_Page.actions_column_header);
-    // await expect(this.view_edit_link).toHaveText(this.manageUsersPageData.Manage_Users_Page.view_edit_link);
-    // await expect(this.find_user_title).toHaveText(this.manageUsersPageData.Manage_Users_Page.find_user_title);
-    // await expect(this.search_button_label).toHaveText(this.manageUsersPageData.Manage_Users_Page.search_button_label);
   }
   async checkAlphabeticalSorting(fieldNameIndex: number) {
     let hasNextPage = true;

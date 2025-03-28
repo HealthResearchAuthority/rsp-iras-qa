@@ -7,8 +7,7 @@ const pathToTestDataJson =
 
 const { When, Then } = createBdd(test);
 
-Then('I can see the Manage users list page', async ({ manageUsersPage }) => {
-  //update
+Then('I can see the manage users list page', async ({ manageUsersPage }) => {
   await manageUsersPage.assertOnManageUsersPage();
 });
 
@@ -33,5 +32,17 @@ When(
     const data = await fse.readJson(filePath);
     const userEmail = data.Create_User_Profile.email_address_unique;
     await manageUsersPage.findUserProfile(userFirstName, userLastName, userEmail, userStatus);
+  }
+);
+
+Then(
+  'I can see the {string} ui labels on the manage users list page',
+  async ({ commonItemsPage, manageUsersPage }, datasetName: string) => {
+    const dataset = manageUsersPage.manageUsersPageData.Manage_Users_Page[datasetName];
+    for (const key in dataset) {
+      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+        await commonItemsPage.validateUILabels(dataset, key, manageUsersPage);
+      }
+    }
   }
 );

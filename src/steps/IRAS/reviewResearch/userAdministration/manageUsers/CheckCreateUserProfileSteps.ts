@@ -1,18 +1,43 @@
 import { createBdd } from 'playwright-bdd';
 import { test } from '../../../../../hooks/CustomFixtures';
-const { Then } = createBdd(test);
+const { When, Then } = createBdd(test);
 
-Then('I can see the Check and create user profile page', async ({ checkCreateUserProfilePage }) => {
+Then('I can see the check and create user profile page', async ({ checkCreateUserProfilePage }) => {
   await checkCreateUserProfilePage.assertOnCheckCreateUserProfilePage();
 });
 
 Then(
-  'I can see previously saved values for {string} displayed on the check and create user profile page',
+  'I can see previously filled values in the new user profile page for {string} displayed on the check and create user profile page',
   async ({ commonItemsPage, createUserProfilePage, checkCreateUserProfilePage }, datasetName: string) => {
     const dataset = createUserProfilePage.createUserProfilePageData.Create_User_Profile[datasetName];
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
         await commonItemsPage.validateSelectedValues(dataset, key, checkCreateUserProfilePage);
+      }
+    }
+  }
+);
+
+When(
+  'I click the change link against {string} on the check and create user profile page',
+  async ({ checkCreateUserProfilePage }, fieldKey: string) => {
+    checkCreateUserProfilePage.clickOnChangeButtonRoleOperations(fieldKey);
+  }
+);
+
+Then(
+  'I can see the {string} ui labels on the check and create user profile page for {string}',
+  async ({ commonItemsPage, createUserProfilePage }, datasetName: string, datasetValName: string) => {
+    const datasetVal = createUserProfilePage.createUserProfilePageData.Create_User_Profile[datasetValName];
+    if (datasetValName === 'Role_Operations') {
+      for (const key in datasetVal) {
+        await commonItemsPage.fillUIComponent(datasetVal, key, createUserProfilePage);
+      }
+    }
+    const dataset = createUserProfilePage.createUserProfilePageData.Create_User_Profile[datasetName];
+    for (const key in dataset) {
+      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+        await commonItemsPage.validateUILabels(dataset, key, createUserProfilePage);
       }
     }
   }

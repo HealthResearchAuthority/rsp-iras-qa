@@ -4,17 +4,16 @@
     "back_button": "Back",
     "page_heading": "Manage users",
     "add_new_users_record_link": "Add a new user profile record",
-    "first_name_column_header": "First name",
-    "last_name_column_header": "Last name",
-    "email_address_column_header": "Email address",
-    "status_column_header": "Status",
-    "last_logged_in_column_header": "Last logged in",
-    "actions_column_header": "Action",
-    "find_review_body_title": "Find a user",
-    "search_button": "Search",
     "view_edit_link": "View/Edit",
-    "find_user_title": "Find a user",
     "search_button_label": "Search",
-    "search_box": ""
+    "Label_Texts_Manage_Users_List": {
+      "first_name_column_header_label": "First name",
+      "last_name_column_header_label": "Last name",
+      "email_address_column_header_label": "Email address",
+      "status_column_header_label": "Status",
+      "last_logged_in_column_header_label": "Last logged in",
+      "actions_column_header_label": "Action",
+      "search_box_label": "Find a user"
+    }
   }
 }
