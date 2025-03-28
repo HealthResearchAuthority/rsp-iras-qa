@@ -202,7 +202,7 @@ export default class UserProfilePage {
       case 'organisation_text':
         await this.organisation_change_link.click();
         break;
-      case 'job title_text':
+      case 'job_title_text':
         await this.job_title_change_link.click();
         break;
       case 'role_dropdown':
@@ -215,14 +215,14 @@ export default class UserProfilePage {
           await this.committee_change_link.click();
           break;
         }
-      case 'country':
+      case 'country_checkbox':
         if (userRole.trim().toLocaleLowerCase() != 'operations') {
           break;
         } else {
           await this.country_change_link.click();
           break;
         }
-      case 'review body':
+      case 'review_body':
         if (userRole.trim().toLocaleLowerCase() != 'operations') {
           break;
         } else {

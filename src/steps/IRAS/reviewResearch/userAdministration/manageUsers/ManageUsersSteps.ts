@@ -68,5 +68,3 @@ Then(
     }
   }
 );
-
-When('I clear optional fields in edit user profile page', async () => {});

@@ -82,6 +82,10 @@ export default class EditUserProfilePage {
     //commented  lines due to bug >>mismatch with figma and application
     await expect(this.page_heading).toBeVisible();
     //   await expect(this.page_heading).toHaveText(this.editUserProfilePageData.Edit_User_Profile_Page.page_heading);
+    // expect(this.page_heading.textContent()).toMatch(
+    //   `/^${this.editUserProfilePageData.Edit_User_Profile_Page.page_heading}/`
+    // );
+
     await expect(this.title_label).toHaveText(this.editUserProfilePageData.Edit_User_Profile_Page.title_label);
     await expect(this.first_name_label).toHaveText(
       this.editUserProfilePageData.Edit_User_Profile_Page.first_name_label
@@ -99,13 +103,13 @@ export default class EditUserProfilePage {
     await expect(this.save_button).toHaveText(this.editUserProfilePageData.Edit_User_Profile_Page.save_button);
     if ((await this.role_dropdown.inputValue()).trim().toLocaleLowerCase() == 'operations') {
       await expect(this.job_title_label).toHaveText(
-        this.editUserProfilePageData.Edit_User_Profile_Page.committee_label
+        this.editUserProfilePageData.Edit_User_Profile_Page.job_title_label
       );
-      await expect(this.role_label).toHaveText(this.editUserProfilePageData.Edit_User_Profile_Page.country_label);
-      await expect(this.save_button).toHaveText(
+      await expect(this.role_label).toHaveText(this.editUserProfilePageData.Edit_User_Profile_Page.role_label);
+      await expect(this.access_required_label).toHaveText(
         this.editUserProfilePageData.Edit_User_Profile_Page.access_required_label
       );
-      await expect(this.save_button).toHaveText(this.editUserProfilePageData.Edit_User_Profile_Page.review_body_label);
+      await expect(this.save_button).toHaveText(this.editUserProfilePageData.Edit_User_Profile_Page.save_button);
     }
   }
 
@@ -117,6 +121,16 @@ export default class EditUserProfilePage {
     const isCountrySelected = await this.country_checkbox.isChecked();
     if (isCountrySelected) {
       this.country_checkbox.uncheck();
+    }
+  }
+
+  async removeUserProfileMandatoryFields(userEditField: string) {
+    if (userEditField == 'first_name_text') {
+      await this.first_name_text.fill('');
+    } else if (userEditField == 'last_name_text') {
+      await this.last_name_text.fill('');
+    } else if (userEditField == 'email_address_text') {
+      await this.email_address_text.fill('');
     }
   }
 }
