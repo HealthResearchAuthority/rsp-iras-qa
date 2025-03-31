@@ -74,19 +74,19 @@ Feature: Create Amendment - Create Project
     Then I can see previously saved values for '<Project_Details_Title>' displayed on the project details title page
 
     Examples:
-      | Navigation_Button_First | Navigation_Button_Second | Project_Details_IRAS | Navigation_Button_Third | Validation_Text | Project_Details_Title        | Navigation_Link |
-      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Label_Texts     | Valid_Data_All_Fields_One    | Back            |
-      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Label_Texts     | Valid_Data_All_Fields_Two    | Back            |
-      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Label_Texts     | Valid_Data_All_Fields_Three  | Back            |
-      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Label_Texts     | Valid_Data_All_Fields_Four   | Back            |
-      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Label_Texts     | Valid_Data_All_Fields_Five   | Back            |
-      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Label_Texts     | Valid_Data_All_Fields_Six    | Back            |
-      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Label_Texts     | Valid_Data_All_Fields_Seven  | Back            |
-      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Label_Texts     | Valid_Data_All_Fields_Eight  | Back            |
-      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Label_Texts     | Valid_Data_All_Fields_Nine   | Back            |
-      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Label_Texts     | Valid_Data_All_Fields_Ten    | Back            |
-      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Label_Texts     | Valid_Data_All_Fields_Eleven | Back            |
-      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Label_Texts     | Valid_Data_All_Fields_Twelve | Back            |
+      | Navigation_Button_First | Navigation_Button_Second | Project_Details_IRAS | Navigation_Button_Third | Validation_Text | Project_Details_Title                         | Navigation_Link |
+      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Label_Texts     | Valid_Data_All_Fields                         | Back            |
+      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Label_Texts     | Valid_Data_All_Fields_VERA                    | Back            |
+      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Label_Texts     | Valid_Data_All_Fields_CSL                     | Back            |
+      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Label_Texts     | Valid_Data_All_Fields_Special_Character_One   | Back            |
+      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Label_Texts     | Valid_Data_All_Fields_Special_Character_Two   | Back            |
+      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Label_Texts     | Valid_Data_All_Fields_Special_Character_Three | Back            |
+      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Label_Texts     | Valid_Data_All_Fields_Special_Character_Four  | Back            |
+      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Label_Texts     | Valid_Data_All_Fields_PARTRIDGE               | Back            |
+      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Label_Texts     | Valid_Data_All_Fields_OMEGA                   | Back            |
+      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Label_Texts     | Valid_Data_All_Fields_Ferumoxytol             | Back            |
+      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Label_Texts     | Valid_Data_All_Fields_Special_Character_Five  | Back            |
+      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Label_Texts     | Valid_Data_All_Fields_Special_Character_Six   | Back            |
 
   @rsp-1859
   Scenario Outline: Validate error messages displayed when user fill invalid data for short project title and project end date
