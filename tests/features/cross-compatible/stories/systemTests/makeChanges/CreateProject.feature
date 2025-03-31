@@ -116,7 +116,7 @@ Feature: Create Amendment - Create Project
       | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Invalid_Date_No_Year                        | Field_Error_Message | Summary_Error_Message |
 
   @rsp-1859
-  Scenario Outline: Validate error messages displayed when user fill todays data for project end date
+  Scenario Outline: Validate error messages displayed when user fill todays date for project end date
     And I click the '<Navigation_Button_1>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_2>' button on the 'Create_Project_Record_Page'
     And I fill the project details iras page with '<Project_Details_IRAS>'
@@ -153,44 +153,47 @@ Feature: Create Amendment - Create Project
     When I click the '<Navigation_Button_3>' button on the 'Project_Details_Title_Page'
     Then I can see the key project roles page
     Then I can see the '<Validation_Text>' ui labels on the key project roles page
+    And I capture the page screenshot
     Then I fill the key project roles page with '<Key_Project_Roles>'
+    And I capture the page screenshot
     Then I click the '<Navigation_Button_3>' button on the 'Key_Project_Roles_Page'
     Then I can see the research locations page
     When I click the '<Navigation_Link>' link on the 'Research_Locations_Page'
     Then I can see the key project roles page
     Then I can see previously saved values for '<Key_Project_Roles>' displayed on the key project roles page
+    And I capture the page screenshot
 
     Examples:
-      | Navigation_Button_1   | Navigation_Button_2 | Project_Details_IRAS | Navigation_Button_3 | Validation_Text | Project_Details_Title   | Key_Project_Roles              |
-      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_1  |
-      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_2  |
-      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_3  |
-      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_4  |
-      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_5  |
-      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_6  |
-      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_7  |
-      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_8  |
-      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_9  |
-      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_10 |
-      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_11 |
-      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_12 |
-      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_13 |
-      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_14 |
-      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_15 |
-      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_16 |
-      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_17 |
-      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_18 |
-      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_19 |
-      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_20 |
-      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_21 |
-      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_22 |
-      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_23 |
-      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_24 |
-      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_25 |
-      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_26 |
-      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_27 |
+      | Navigation_Button_1   | Navigation_Button_2 | Project_Details_IRAS | Navigation_Button_3 | Validation_Text | Project_Details_Title   | Key_Project_Roles              | Navigation_Link |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_1  | Back            |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_2  | Back            |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_3  | Back            |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_4  | Back            |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_5  | Back            |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_6  | Back            |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_7  | Back            |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_8  | Back            |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_9  | Back            |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_10 | Back            |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_11 | Back            |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_12 | Back            |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_13 | Back            |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_14 | Back            |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_15 | Back            |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_16 | Back            |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_17 | Back            |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_18 | Back            |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_19 | Back            |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_20 | Back            |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_21 | Back            |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_22 | Back            |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_23 | Back            |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_24 | Back            |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_25 | Back            |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_26 | Back            |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_For_Email_Fields_27 | Back            |
 
-  @rsp-1897-Pending
+  @rsp-1897
   Scenario Outline: Validate error messages displayed when user inputs invalid data in key project roles page
     And I click the '<Navigation_Button_1>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_2>' button on the 'Create_Project_Record_Page'
@@ -198,16 +201,42 @@ Feature: Create Amendment - Create Project
     And I click the '<Navigation_Button_3>' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I click the '<Navigation_Button_3>' button on the 'Project_Details_Title_Page'
-    And I fill the research locations page with '<Research_Locations>'
-    And I click the '<Navigation_Button_3>' button on the 'Research_Locations_Page'
     And I can see the key project roles page
     Then I fill the key project roles page with '<Key_Project_Roles>'
+    And I capture the page screenshot
     Then I click the '<Navigation_Button_3>' button on the 'Key_Project_Roles_Page'
     Then I validate '<Field_Error_Message>' and '<Summary_Error_Message>' displayed on key project roles page for '<Key_Project_Roles>'
+    And I capture the page screenshot
 
     Examples:
-      | Navigation_Button_1   | Navigation_Button_2 | Project_Details_IRAS | Navigation_Button_3 | Validation_Text | Project_Details_Title   | Key_Project_Roles             | Field_Error_Message | Summary_Error_Message | Research_Locations    |
-      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Invalid_Data_For_Email_Fields_1 | Field_Error_Message | Summary_Error_Message | Valid_Data_All_Fields |
+      | Navigation_Button_1   | Navigation_Button_2 | Project_Details_IRAS | Navigation_Button_3 | Project_Details_Title   | Key_Project_Roles                | Field_Error_Message | Summary_Error_Message |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Valid_Data_All_Fields_1 | Invalid_Data_For_Email_Fields_1  | Field_Error_Message | Summary_Error_Message |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Valid_Data_All_Fields_1 | Invalid_Data_For_Email_Fields_2  | Field_Error_Message | Summary_Error_Message |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Valid_Data_All_Fields_1 | Invalid_Data_For_Email_Fields_3  | Field_Error_Message | Summary_Error_Message |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Valid_Data_All_Fields_1 | Invalid_Data_For_Email_Fields_4  | Field_Error_Message | Summary_Error_Message |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Valid_Data_All_Fields_1 | Invalid_Data_For_Email_Fields_5  | Field_Error_Message | Summary_Error_Message |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Valid_Data_All_Fields_1 | Invalid_Data_For_Email_Fields_6  | Field_Error_Message | Summary_Error_Message |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Valid_Data_All_Fields_1 | Invalid_Data_For_Email_Fields_7  | Field_Error_Message | Summary_Error_Message |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Valid_Data_All_Fields_1 | Invalid_Data_For_Email_Fields_8  | Field_Error_Message | Summary_Error_Message |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Valid_Data_All_Fields_1 | Invalid_Data_For_Email_Fields_9  | Field_Error_Message | Summary_Error_Message |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Valid_Data_All_Fields_1 | Invalid_Data_For_Email_Fields_10 | Field_Error_Message | Summary_Error_Message |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Valid_Data_All_Fields_1 | Invalid_Data_For_Email_Fields_11 | Field_Error_Message | Summary_Error_Message |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Valid_Data_All_Fields_1 | Invalid_Data_For_Email_Fields_12 | Field_Error_Message | Summary_Error_Message |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Valid_Data_All_Fields_1 | Invalid_Data_For_Email_Fields_13 | Field_Error_Message | Summary_Error_Message |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Valid_Data_All_Fields_1 | Invalid_Data_For_Email_Fields_14 | Field_Error_Message | Summary_Error_Message |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Valid_Data_All_Fields_1 | Invalid_Data_For_Email_Fields_15 | Field_Error_Message | Summary_Error_Message |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Valid_Data_All_Fields_1 | Invalid_Data_For_Email_Fields_16 | Field_Error_Message | Summary_Error_Message |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Valid_Data_All_Fields_1 | Invalid_Data_For_Email_Fields_17 | Field_Error_Message | Summary_Error_Message |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Valid_Data_All_Fields_1 | Invalid_Data_For_Email_Fields_18 | Field_Error_Message | Summary_Error_Message |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Valid_Data_All_Fields_1 | Invalid_Data_For_Email_Fields_19 | Field_Error_Message | Summary_Error_Message |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Valid_Data_All_Fields_1 | Invalid_Data_For_Email_Fields_20 | Field_Error_Message | Summary_Error_Message |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Valid_Data_All_Fields_1 | Invalid_Data_For_Email_Fields_21 | Field_Error_Message | Summary_Error_Message |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Valid_Data_All_Fields_1 | Invalid_Data_For_Email_Fields_22 | Field_Error_Message | Summary_Error_Message |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Valid_Data_All_Fields_1 | Invalid_Data_For_Email_Fields_23 | Field_Error_Message | Summary_Error_Message |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Valid_Data_All_Fields_1 | Invalid_Data_For_Email_Fields_24 | Field_Error_Message | Summary_Error_Message |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Valid_Data_All_Fields_1 | Invalid_Data_For_Email_Fields_25 | Field_Error_Message | Summary_Error_Message |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Valid_Data_All_Fields_1 | Invalid_Data_For_Email_Fields_26 | Field_Error_Message | Summary_Error_Message |
+      | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Valid_Data_All_Fields_1 | Invalid_Data_For_Email_Fields_27 | Field_Error_Message | Summary_Error_Message |
 
   @rsp-1897
   Scenario Outline: Validate breadcrumb navigations in key project roles page
@@ -218,8 +247,10 @@ Feature: Create Amendment - Create Project
     And I fill the project details title page with '<Project_Details_Title>'
     And I click the '<Navigation_Button_3>' button on the 'Project_Details_Title_Page'
     And I can see the key project roles page
+    And I capture the page screenshot
     When I click the '<Navigation_Link>' link on the 'Key_Project_Roles_Page'
     Then I can see the project details title page
+    And I capture the page screenshot
 
     Examples:
       | Navigation_Button_1   | Navigation_Button_2 | Project_Details_IRAS | Navigation_Button_3 | Project_Details_Title   | Navigation_Link |
