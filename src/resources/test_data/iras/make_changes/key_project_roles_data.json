@@ -10,10 +10,12 @@
   },
   "Summary_Error_Message": {
     "error_message_summary_header": "There is a problem",
-    "iras_id_text": "Enter an email address in the correct format"
+    "chief_investigator_email_text": "Enter an email address in the correct format",
+    "sponsor_contact_email_text": "Enter an email address in the correct format"
   },
   "Field_Error_Message": {
-    "iras_id_text": "Enter an email address in the correct format"
+    "chief_investigator_email_text": "Enter an email address in the correct format",
+    "sponsor_contact_email_text": "Enter an email address in the correct format"
   },
   "Valid_Data_All_Fields": {
     "chief_investigator_email_text": "ci_test@test.com",
@@ -126,5 +128,109 @@
   "Valid_Data_For_Email_Fields_27": {
     "chief_investigator_email_text": "Johndoe2@example.com",
     "sponsor_contact_email_text": "Johndoe2@example.com"
+  },
+  "Invalid_Data_For_Email_Fields_1": {
+    "chief_investigator_email_text": ".john@example.com",
+    "sponsor_contact_email_text": ".john@example.com"
+  },
+  "Invalid_Data_For_Email_Fields_3": {
+    "chief_investigator_email_text": "john..doe@example.com",
+    "sponsor_contact_email_text": "john..doe@example.com"
+  },
+  "Invalid_Data_For_Email_Fields_4": {
+    "chief_investigator_email_text": "john doe@example.com",
+    "sponsor_contact_email_text": "john doe@example.com"
+  },
+  "Invalid_Data_For_Email_Fields_5": {
+    "chief_investigator_email_text": "john[at]example.",
+    "sponsor_contact_email_text": "john[at]example."
+  },
+  "Invalid_Data_For_Email_Fields_6": {
+    "chief_investigator_email_text": "john<doe>@example.com",
+    "sponsor_contact_email_text": "john<doe>@example.com"
+  },
+  "Invalid_Data_For_Email_Fields_7": {
+    "chief_investigator_email_text": "john:doe@example.com",
+    "sponsor_contact_email_text": "john:doe@example.com"
+  },
+  "Invalid_Data_For_Email_Fields_8": {
+    "chief_investigator_email_text": "john;doe@example.com",
+    "sponsor_contact_email_text": "john;doe@example.com"
+  },
+  "Invalid_Data_For_Email_Fields_9": {
+    "chief_investigator_email_text": "john,@example.com",
+    "sponsor_contact_email_text": "john,@example.com"
+  },
+  "Invalid_Data_For_Email_Fields_10": {
+    "chief_investigator_email_text": "-john@example.com",
+    "sponsor_contact_email_text": "-john@example.com"
+  },
+  "Invalid_Data_For_Email_Fields_11": {
+    "chief_investigator_email_text": "john@example-.com",
+    "sponsor_contact_email_text": "john@example-.com"
+  },
+  "Invalid_Data_For_Email_Fields_12": {
+    "chief_investigator_email_text": "john.@example..com",
+    "sponsor_contact_email_text": "john.@example..com"
+  },
+  "Invalid_Data_For_Email_Fields_13": {
+    "chief_investigator_email_text": "john!doe@exa!mple.com",
+    "sponsor_contact_email_text": "john!doe@exa!mple.com"
+  },
+  "Invalid_Data_For_Email_Fields_14": {
+    "chief_investigator_email_text": "johñ@example.com",
+    "sponsor_contact_email_text": "johñ@example.com"
+  },
+  "Invalid_Data_For_Email_Fields_15": {
+    "chief_investigator_email_text": "john.doe'@example.com",
+    "sponsor_contact_email_text": "john.doe'@example.com"
+  },
+  "Invalid_Data_For_Email_Fields_16": {
+    "chief_investigator_email_text": "john.doe@example.com",
+    "sponsor_contact_email_text": "john.doe@example.com"
+  },
+  "Invalid_Data_For_Email_Fields_17": {
+    "chief_investigator_email_text": "averyveryverylongdomainnamewithmanysubdomainsandmorecharacters.com",
+    "sponsor_contact_email_text": "averyveryverylongdomainnamewithmanysubdomainsandmorecharacters.com"
+  },
+  "Invalid_Data_For_Email_Fields_18": {
+    "chief_investigator_email_text": "averyveryverylongemailaddressthatexceedscharacters@example.com",
+    "sponsor_contact_email_text": "averyveryverylongemailaddressthatexceedscharacters@example.com"
+  },
+  "Invalid_Data_For_Email_Fields_19": {
+    "chief_investigator_email_text": "john@example..com",
+    "sponsor_contact_email_text": "john@example..com"
+  },
+  "Invalid_Data_For_Email_Fields_20": {
+    "chief_investigator_email_text": "mail..sub.example.com",
+    "sponsor_contact_email_text": "mail..sub.example.com"
+  },
+  "Invalid_Data_For_Email_Fields_21": {
+    "chief_investigator_email_text": "john..doe'@example..com",
+    "sponsor_contact_email_text": "john..doe'@example..com"
+  },
+  "Invalid_Data_For_Email_Fields_22": {
+    "chief_investigator_email_text": "john🙂@example.com",
+    "sponsor_contact_email_text": "john🙂@example.com"
+  },
+  "Invalid_Data_For_Email_Fields_23": {
+    "chief_investigator_email_text": "john.doe@example.1234",
+    "sponsor_contact_email_text": "john.doe@example.1234"
+  },
+  "Invalid_Data_For_Email_Fields_24": {
+    "chief_investigator_email_text": "john.doeexample.com",
+    "sponsor_contact_email_text": "john.doeexample.com"
+  },
+  "Invalid_Data_For_Email_Fields_25": {
+    "chief_investigator_email_text": "john.doe@localhost",
+    "sponsor_contact_email_text": "john.doe@localhost"
+  },
+  "Invalid_Data_For_Email_Fields_26": {
+    "chief_investigator_email_text": "john@example.xn--mgbh0fb",
+    "sponsor_contact_email_text": "john@example.xn--mgbh0fb"
+  },
+  "Invalid_Data_For_Email_Fields_27": {
+    "chief_investigator_email_text": "EmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExcee@example.com",
+    "sponsor_contact_email_text": "EmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExcee@example.com"
   }
 }

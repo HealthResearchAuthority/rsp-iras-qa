@@ -193,10 +193,13 @@ export default class CommonItemsPage {
     page: PageObject
   ) {
     const typeAttribute = await page[key].first().getAttribute('type');
+    // Create a new locator in required pages to validate the summary error labels.
+    // The name of locator should be the same as in the test data and appended by '_summary_error_label'.
+    const summaryLocatorKey = key + '_summary_error_label';
     await expect(
       this.errorMessageSummaryLabel.getByText(errorMessageSummaryDataset['error_message_summary_header'])
     ).toBeVisible();
-    await expect(this.errorMessageSummaryLabel.getByText(errorMessageSummaryDataset[key])).toBeVisible();
+    await expect(page[summaryLocatorKey].getByText(errorMessageSummaryDataset[key])).toBeVisible();
     if (typeAttribute === 'checkbox') {
       const checkboxLocator = page[key].locator('../../../..').locator(this.errorMessageFieldLabel);
       await expect(checkboxLocator).toHaveText(errorMessageFieldDataset[key]);
