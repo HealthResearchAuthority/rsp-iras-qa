@@ -43,9 +43,10 @@ export default class ProjectDetailsTitlePage {
     this.planned_project_end_month_text = this.page.getByTestId('Questions_1_Month');
     this.planned_project_end_year_text = this.page.getByTestId('Questions_1_Year');
     this.short_project_title_text_summary_error_label = this.page.locator('a[href="#Questions[0].AnswerText"]');
-    this.planned_project_end_day_text_summary_error_label = this.page.locator('a[href="#Questions[1].AnswerText"]');
-    this.planned_project_end_month_text_summary_error_label = this.page.locator('a[href="#Questions[1].AnswerText"]');
-    this.planned_project_end_year_text_summary_error_label = this.page.locator('a[href="#Questions[1].AnswerText"]');
+    this.planned_project_end_day_text_summary_error_label =
+      this.planned_project_end_month_text_summary_error_label =
+      this.planned_project_end_year_text_summary_error_label =
+        this.page.locator('a[href="#Questions[1].AnswerText"]');
   }
 
   //Page Methods

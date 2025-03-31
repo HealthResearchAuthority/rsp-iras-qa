@@ -74,7 +74,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I click the 'Start' button on the 'Create_Project_Record_Page'
     And I fill the project details iras page with 'Valid_IRAS_ID_Max'
     When I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
-    And I fill the project details title page with 'Valid_Data_All_Fields_1'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
     Then I can see the key project roles page
     When I Scan the page with the Axe Accessibilty Tool
@@ -88,7 +88,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I click the 'Start' button on the 'Create_Project_Record_Page'
     And I fill the project details iras page with 'Valid_IRAS_ID_Max'
     When I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
-    And I fill the project details title page with 'Valid_Data_All_Fields_1'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
     And I fill the key project roles page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
