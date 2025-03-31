@@ -4,7 +4,7 @@
   },
   "Label_Texts": {
     "iras_textbox_label": "IRAS ID",
-    "iras_textbox_hint": "This is the 6 or 7 digit ID generated when you created your initial application"
+    "iras_textbox_hint": "This is the 4 to 7 digit ID generated when you created your initial application"
   },
   "Summary_Error_Message": {
     "error_message_summary_header": "There is a problem",

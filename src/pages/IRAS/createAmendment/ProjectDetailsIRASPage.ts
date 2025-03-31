@@ -8,6 +8,7 @@ export default class ProjectDetailsIRASPage {
   readonly pageHeading: Locator;
   readonly iras_textbox_label: Locator;
   readonly iras_id_text: Locator;
+  readonly iras_id_text_summary_error_label: Locator;
   readonly iras_textbox_hint: Locator;
 
   //Initialize Page Objects
@@ -20,6 +21,7 @@ export default class ProjectDetailsIRASPage {
     this.iras_textbox_label = this.page.locator('label[for="IQA0001_Text"]');
     this.iras_textbox_hint = this.page.getByTestId('rule-hint');
     this.iras_id_text = this.page.getByTestId('IQA0001_Text');
+    this.iras_id_text_summary_error_label = this.page.locator('a[href="#Questions[0].AnswerText"]');
   }
 
   //Page Methods

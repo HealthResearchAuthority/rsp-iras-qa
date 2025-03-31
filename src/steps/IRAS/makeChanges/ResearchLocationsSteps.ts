@@ -52,3 +52,7 @@ Then('I validate lead nation radio option for {string}', async ({ reseachLocatio
     await expect(reseachLocationsPage.lead_nation_radio.first()).toBeVisible();
   }
 });
+
+Then('I validate lead nation radio option when javascript disabled', async ({ reseachLocationsPage }) => {
+  await expect(reseachLocationsPage.lead_nation_radio.first()).toBeVisible();
+});

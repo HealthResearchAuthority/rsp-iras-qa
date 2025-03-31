@@ -11,26 +11,17 @@
     "year_textbox_label": "Year"
   },
   "Summary_Error_Message": {
-    "error_message_summary_header": "You need to complete these questions before you can continue::",
-    "short_project_title_text": "Question 1 under Project details section",
-    "planned_project_end_day_text": "Question 2 under Project details section",
-    "planned_project_end_month_text": "Question 2 under Project details section",
-    "planned_project_end_year_text": "Question 2 under Project details section",
-    "error_message_summary_header_OG": "There is a problem",
-    "short_project_title_text_OG": "Short project title must not contain more than XX characters",
-    "planned_project_end_day_text_OG": "",
-    "planned_project_end_month_text_OG": "",
-    "planned_project_end_year_text_OG": ""
-  },
-  "Field_Error_Message": {
-    "short_project_title_text": "Short project title should be between the specified characters limit",
+    "error_message_summary_header": "There is a problem",
+    "short_project_title_text": "Short project title must not contain more than XX characters",
     "planned_project_end_day_text": "The date should be a valid date and in future",
     "planned_project_end_month_text": "The date should be a valid date and in future",
-    "planned_project_end_year_text": "The date should be a valid date and in future",
-    "short_project_title_text_OG": "Short project title must not contain more than XX characters",
-    "planned_project_end_day_text_OG": "",
-    "planned_project_end_month_text_OG": "",
-    "planned_project_end_year_text_OG": ""
+    "planned_project_end_year_text": "The date should be a valid date and in future"
+  },
+  "Field_Error_Message": {
+    "short_project_title_text": "Short project title must not contain more than XX characters",
+    "planned_project_end_day_text": "The date should be a valid date and in future",
+    "planned_project_end_month_text": "The date should be a valid date and in future",
+    "planned_project_end_year_text": "The date should be a valid date and in future"
   },
   "Valid_Data_All_Fields_1": {
     "short_project_title_text": "QA_Automation - This is a short project title",
