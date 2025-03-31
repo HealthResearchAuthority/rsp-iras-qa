@@ -302,7 +302,7 @@ Feature: Create Amendment - Create Project
       | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_All_Fields | Valid_Data_All_Fields |
       | Create_Project_Record | Start               | Valid_IRAS_ID_Min    | Save_Continue       | Label_Texts     | Valid_Data_All_Fields_1 | Valid_Data_All_Fields | Data_With_No_NHS_HSC  |
 
-  @rsp-1901-Run @jsDisabled
+  @rsp-1901 @jsDisabled
   Scenario Outline: Validate lead nation radio option when javascript is disabled
     And I click the '<Navigation_Button_1>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_2>' button on the 'Create_Project_Record_Page'
@@ -314,7 +314,7 @@ Feature: Create Amendment - Create Project
     When I click the '<Navigation_Button_3>' button on the 'Key_Project_Roles_Page'
     Then I can see the research locations page
     Then I fill the research locations page with '<Research_Locations>'
-    Then I validate lead nation radio option for '<Research_Locations>'
+    Then I validate lead nation radio option when javascript disabled
 
     Examples:
       | Navigation_Button_1   | Navigation_Button_2 | Project_Details_IRAS | Navigation_Button_3 | Validation_Text | Project_Details_Title   | Key_Project_Roles     | Research_Locations   |
