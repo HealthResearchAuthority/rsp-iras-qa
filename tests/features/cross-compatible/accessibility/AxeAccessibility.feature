@@ -60,23 +60,9 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Given I have navigated to the 'Home_Page'
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     When I click the 'Start' button on the 'Create_Project_Record_Page'
-    And I fill the project details iras page with 'Valid_IRAS_ID'
+    And I fill the project details iras page with 'Valid_IRAS_ID_Max'
     When I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
     Then I can see the project details title page
-    When I Scan the page with the Axe Accessibilty Tool
-    And I analyse the results from the Axe scan
-    Then I expect to receive no WCAG Violations
-
-  @axeAccessibilityResearchLocations @adminUser
-  Scenario: Research Locations
-    Given I have navigated to the 'Home_Page'
-    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
-    When I click the 'Start' button on the 'Create_Project_Record_Page'
-    And I fill the project details iras page with 'Valid_IRAS_ID'
-    When I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
-    And I fill the project details title page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    Then I can see the research locations page
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
@@ -86,13 +72,27 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Given I have navigated to the 'Home_Page'
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     When I click the 'Start' button on the 'Create_Project_Record_Page'
-    And I fill the project details iras page with 'Valid_IRAS_ID'
+    And I fill the project details iras page with 'Valid_IRAS_ID_Max'
     When I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    And I fill the research locations page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     Then I can see the key project roles page
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityResearchLocations @adminUser
+  Scenario: Research Locations
+    Given I have navigated to the 'Home_Page'
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    When I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the project details iras page with 'Valid_IRAS_ID_Max'
+    When I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    And I fill the key project roles page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    Then I can see the research locations page
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
