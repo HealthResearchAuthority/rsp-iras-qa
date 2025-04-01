@@ -36,6 +36,7 @@ export default class CreateUserProfilePage {
   readonly review_body_dropdown_label: Locator;
   readonly review_body_dropdown: Locator;
   readonly continue_button: Locator;
+  readonly selected_dropdown: Locator;
   pathToTestDataJson =
     './src/resources/test_data/iras/reviewResearch/userAdministration/manageUsers/pages/create_user_profile_page_data.json';
 
@@ -71,6 +72,7 @@ export default class CreateUserProfilePage {
     this.review_body_dropdown_label = this.page.locator('[class="govuk-label"][for="ReviewBody"] b');
     this.review_body_dropdown = this.page.getByTestId('ReviewBody');
     this.continue_button = this.page.locator('.govuk-button[type="submit"]');
+    this.selected_dropdown = this.page.locator('select option[selected=selected]');
   }
 
   async assertOnCreateUserProfilePage() {
@@ -105,11 +107,9 @@ export default class CreateUserProfilePage {
     } else {
       const isSelectTag = await locator.evaluate((el) => el.tagName.toLowerCase() === 'select');
       if (isSelectTag) {
-        expect(
-          await commonItemsPage.removeUnwantedChars(
-            await this.page.locator('select option[selected=selected]').getAttribute('value')
-          )
-        ).toBe(dataset[key]);
+        expect(await commonItemsPage.removeUnwantedChars(await this.selected_dropdown.getAttribute('value'))).toBe(
+          dataset[key]
+        );
       }
     }
   }
