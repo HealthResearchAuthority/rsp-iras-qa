@@ -1,5 +1,5 @@
 {
-  "Check_Create_User_Profile_Page_Role_Not_Operations": {
+  "Check_Create_User_Profile_Page": {
     "selected_tab_top": "Manage Users",
     "back_button": "Back",
     "page_heading": "Check and create user profile",
@@ -14,15 +14,7 @@
       "organisation_label": "Organisation",
       "job_title_label": "Job title",
       "role_label": "Role"
-    }
-  },
-  "Check_Create_User_Profile_Page_Role_Operations": {
-    "selected_tab_top": "Manage Users",
-    "back_button": "Back",
-    "page_heading": "Check and create user profile",
-    "sub_heading": "Check the information here is correct before creating the profile.",
-    "audit_label": "Audit",
-    "create_profile_button": "Create profile",
+    },
     "Label_Texts_Role_Operations": {
       "title_label": "Title",
       "first_name_label": "First name",

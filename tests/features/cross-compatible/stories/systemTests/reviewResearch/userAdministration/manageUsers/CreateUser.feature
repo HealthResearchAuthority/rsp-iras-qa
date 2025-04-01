@@ -8,7 +8,7 @@ Feature: HRAPROG-394- User Administration: Manage Users
         When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
         Then I can see the add a new user profile page
 
-    @rsp-2827 @rsp-2870
+    @rsp-2827 @rsp-2870 @rsp-2870-test
     Scenario Outline: Verify the user is able to create a new user profile with valid data
         Then I can see the '<Validation_Text_Add_New_User_Profile>' ui labels on the add a new user profile page for '<Role_Dropdown>'
         When I fill the new user profile page using '<Add_User_Profile>'

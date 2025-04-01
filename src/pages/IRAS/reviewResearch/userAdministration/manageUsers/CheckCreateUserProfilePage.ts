@@ -105,11 +105,11 @@ export default class CheckCreateUserProfilePage {
   async assertOnCheckCreateUserProfilePage() {
     await expect(this.page_heading).toBeVisible();
     await expect(this.page_heading).toHaveText(
-      this.checkCreateUserProfilePageTestData.Check_Create_User_Profile_Page_Role_Operations.page_heading
+      this.checkCreateUserProfilePageTestData.Check_Create_User_Profile_Page.page_heading
     );
     await expect(this.subHeading).toBeVisible();
     await expect(this.subHeading).toHaveText(
-      this.checkCreateUserProfilePageTestData.Check_Create_User_Profile_Page_Role_Operations.sub_heading
+      this.checkCreateUserProfilePageTestData.Check_Create_User_Profile_Page.sub_heading
     );
   }
   async clickOnChangeButtonRoleOperations(fieldKey: string) {
