@@ -211,7 +211,7 @@ export default class CommonItemsPage {
   }
 
   async getQsetPageValidationData(page: string, dataType: string, datasetName: string): Promise<Map<string, any>> {
-    let inputDataset: JSON = {} as JSON;
+    let inputDataset = {} as JSON; //check this works
     switch (page.toLowerCase()) {
       case 'project filter':
         inputDataset = new ProjectFilterPage(this.page).projectFilterPageTestData[dataType][datasetName];
