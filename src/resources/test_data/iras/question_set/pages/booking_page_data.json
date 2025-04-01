@@ -10,6 +10,11 @@
     },
     "Dont_Agree_Data": {
       "agree_project_information_be_used_text": "I Don't Agree - Example"
-    }
-  }
+    },
+    "All_Empty_Fields": {}
+  },
+  "All_Mandatory_Validations": {
+    "agree_project_information_be_used_text": "Question 1 under Application Booking section"
+  },
+  "All_Conditional_Validations": {}
 }
