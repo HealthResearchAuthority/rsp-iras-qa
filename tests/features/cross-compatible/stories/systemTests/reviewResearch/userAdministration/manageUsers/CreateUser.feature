@@ -11,19 +11,26 @@ Feature: HRAPROG-394- User Administration: Manage Users
     @rsp-2827 @rsp-2870
     Scenario Outline: Verify the user is able to create a new user profile with valid data
         Then I can see the '<Validation_Text_Add_New_User_Profile>' ui labels on the add a new user profile page for '<Role_Dropdown>'
+        And I capture the page screenshot
         When I fill the new user profile page using '<Add_User_Profile>'
+        And I capture the page screenshot
         And I click the 'Continue' button on the 'Create_User_Profile_Page'
         Then I can see the check and create user profile page
+        And I capture the page screenshot
         Then I can see the '<Validation_Text_Add_New_User_Profile>' ui labels on the check and create user profile page for '<Role_Dropdown>'
         Then I can see previously filled values in the new user profile page for '<Add_User_Profile>' displayed on the check and create user profile page
         And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
         Then I can see the create user profile confirmation page for '<Add_User_Profile>'
+        And I capture the page screenshot
         When I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
         Then I can see the manage users list page
+        And I capture the page screenshot
         Then I can see the '<Validation_Text_Manage_Users_List>' ui labels on the manage users list page
         And I can see the newly created user record should be present in the list for '<Add_User_Profile>' with 'ACTIVE' status in the manage user page
+        And I capture the page screenshot
         And I click the 'Back' button on the 'Manage_Users_Page'
         Then I have navigated to the 'System_Administration_Home_Page'
+        And I capture the page screenshot
         When I click the 'Manage_Users' link on the 'System_Administration_Home_Page'
         Then I can see the manage users list page
         And I can see the list is sorted by default in the alphabetical order of the 'First Name'
@@ -41,16 +48,21 @@ Feature: HRAPROG-394- User Administration: Manage Users
         And I click the 'Continue' button on the 'Create_User_Profile_Page'
         Then I can see the check and create user profile page
         Then I can see previously filled values in the new user profile page for '<Add_User_Profile>' displayed on the check and create user profile page
+        And I capture the page screenshot
         And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
         Then I can see the create user profile confirmation page for '<Add_User_Profile>'
+        And I capture the page screenshot
         When I click the 'Add_another_user' link on the 'Create_User_Profile_Confirmation_Page'
         Then I can see the add a new user profile page
+        And I capture the page screenshot
         When I fill the new user profile page using '<Add_Another_User_Profile>'
         And I click the 'Continue' button on the 'Create_User_Profile_Page'
         Then I can see the check and create user profile page
         Then I can see previously filled values in the new user profile page for '<Add_Another_User_Profile>' displayed on the check and create user profile page
+        And I capture the page screenshot
         And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
         Then I can see the create user profile confirmation page for '<Add_Another_User_Profile>'
+        And I capture the page screenshot
         When I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
         Then I can see the manage users list page
         And I click the 'Back' button on the 'Manage_Users_Page'
@@ -105,11 +117,14 @@ Feature: HRAPROG-394- User Administration: Manage Users
         When I click the change link against '<Field_Name>' on the check and create user profile page
         Then I can see the add a new user profile page
         Then I can see previously filled values in the new user profile page for '<Add_User_Profile>' displayed on the add a new user profile page
+        And I capture the page screenshot
         And I clear the previously entered values on the add a new user profile page for '<Add_User_Profile>'
+        And I capture the page screenshot
         When I fill the new user profile page using '<Add_Another_User_Profile>'
         And I click the 'Continue' button on the 'Create_User_Profile_Page'
         Then I can see the check and create user profile page
         Then I can see previously filled values in the new user profile page for '<Add_Another_User_Profile>' displayed on the check and create user profile page
+        And I capture the page screenshot
 
         Examples:
             | Add_User_Profile                                   | Field_Name      | Add_Another_User_Profile                                   |
@@ -143,6 +158,7 @@ Feature: HRAPROG-394- User Administration: Manage Users
         When I fill the new user profile page using '<Invalid_Data_User_Profile>' for field validation
         And I click the 'Continue' button on the 'Create_User_Profile_Page'
         Then I validate '<Field_Error_Message>' displayed on create user profile page for '<Invalid_Data_User_Profile>'
+        And I capture the page screenshot
 
         Examples:
             | Invalid_Data_User_Profile                          | Field_Error_Message                          |
@@ -180,9 +196,12 @@ Feature: HRAPROG-394- User Administration: Manage Users
     Scenario Outline: Validate user is able to fill user profile page with valid data
         Validate email address field with different valid data
         When I fill the new user profile page using '<Add_User_Profile>'
+        And I capture the page screenshot
         And I click the 'Continue' button on the 'Create_User_Profile_Page'
         Then I can see the check and create user profile page
         Then I can see previously filled values in the new user profile page for '<Add_User_Profile>' displayed on the check and create user profile page
+        And I capture the page screenshot
+
         Examples:
             | Add_User_Profile                    |
             | Valid_Email_Underscore              |
@@ -208,5 +227,5 @@ Feature: HRAPROG-394- User Administration: Manage Users
             | Valid_Email_Data_Hyphen_Underscore  |
             | Valid_Email_Data_Multiple_Unicode   |
             # | Valid_Email_Data_Multiple_Sub_Domains |
+            # | Valid_Email_Data_Other_Language       |
             | Valid_Email_Data_Domain             |
-# | Valid_Email_Data_Other_Language       |
