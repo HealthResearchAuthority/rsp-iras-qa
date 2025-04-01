@@ -42,7 +42,7 @@ export default class SystemAdministrationHomePage {
 
   //Page Methods
   async goto() {
-    await this.page.goto('');
+    await this.page.goto('systemadmin');
   }
 
   async assertOnSystemAdministrationHomePage() {

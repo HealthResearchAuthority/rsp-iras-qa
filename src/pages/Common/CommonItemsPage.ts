@@ -272,54 +272,6 @@ export default class CommonItemsPage {
     await expect(otherLocator).toHaveText(errorMessageFieldDataset[key]);
   }
 
-  pathToTestDataJson =
-    './src/resources/test_data/iras/reviewResearch/userAdministration/manageUsers/pages/create_user_profile_page_data.json';
-  async validateSelectedValues<PageObject>(dataset: JSON, key: string, page: PageObject) {
-    const locator: Locator = page[key];
-    if (key === 'email_address_text') {
-      const filePath = path.resolve(this.pathToTestDataJson);
-      const data = await fse.readJson(filePath);
-      expect(await this.removeUnwantedChars(await locator.textContent())).toBe(
-        data.Create_User_Profile.email_address_unique
-      );
-    } else if (key === 'country_checkbox' || key === 'access_required_checkbox') {
-      expect(await this.removeUnwantedChars(await locator.textContent())).toBe(dataset[key][0]);
-    } else {
-      expect(await this.removeUnwantedChars(await locator.textContent())).toBe(dataset[key]);
-    }
-  }
-
-  async validateSelectedValuesCreateUser<PageObject>(dataset: JSON, key: string, page: PageObject) {
-    const locator: Locator = page[key];
-    const typeAttribute = await locator.first().getAttribute('type');
-    if (typeAttribute === 'text' || typeAttribute === 'date' || typeAttribute === 'tel') {
-      expect(await this.removeUnwantedChars(await locator.getAttribute('value'))).toBe(dataset[key]);
-    } else if (typeAttribute === 'radio') {
-      expect(await locator.locator('..').getByLabel(dataset[key], { exact: true }).isChecked());
-    } else if (typeAttribute === 'checkbox') {
-      for (const checkbox of dataset[key]) {
-        expect(await locator.locator('..').getByLabel(checkbox, { exact: true }).isChecked());
-      }
-    } else if (typeAttribute === 'email') {
-      if (key === 'email_address_text') {
-        const filePath = path.resolve(this.pathToTestDataJson);
-        const data = await fse.readJson(filePath);
-        expect(await this.removeUnwantedChars(await locator.getAttribute('value'))).toBe(
-          data.Create_User_Profile.email_address_unique
-        );
-      }
-    } else {
-      const isSelectTag = await locator.evaluate((el) => el.tagName.toLowerCase() === 'select');
-      if (isSelectTag) {
-        expect(
-          await this.removeUnwantedChars(
-            await this.page.locator('select option[selected=selected]').getAttribute('value')
-          )
-        ).toBe(dataset[key]);
-      }
-    }
-  }
-
   async clearUIComponent<PageObject>(dataset: JSON, key: string, page: PageObject) {
     const locator: Locator = page[key];
     const typeAttribute = await locator.first().getAttribute('type');

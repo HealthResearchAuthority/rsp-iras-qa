@@ -12,7 +12,12 @@ Then(
     const dataset = createUserProfilePage.createUserProfilePageData.Create_User_Profile[datasetName];
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        await commonItemsPage.validateSelectedValues(dataset, key, checkCreateUserProfilePage);
+        await checkCreateUserProfilePage.validateSelectedValues(
+          dataset,
+          key,
+          checkCreateUserProfilePage,
+          commonItemsPage
+        );
       }
     }
   }

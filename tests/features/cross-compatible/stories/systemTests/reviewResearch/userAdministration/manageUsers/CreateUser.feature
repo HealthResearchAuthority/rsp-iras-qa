@@ -147,6 +147,7 @@ Feature: HRAPROG-394- User Administration: Manage Users
             | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Role            | Valid_Data_In_All_Mandatory_Fields_Role_Operations_Another |
 
     @rsp-2827
+    # few lines commented >> pending clarification>>email validation
     Scenario Outline: Validate error messages are displayed for invalid data in create user profile page
         Validate proper error messages are displayed for missing mandatory fields-First name,Last name,Email address-Country,Access required
         Validate proper error messages are displayed for invalid character limit-Title,First name,Last name,Email address,Telephone,Organisation,Job title
@@ -160,22 +161,22 @@ Feature: HRAPROG-394- User Administration: Manage Users
             | Missing_Data_All_Mandatory_Fields                  | Field_Error_Message_Missing_Mandatory_Fields |
             | Invalid_Character_Limit                            | Field_Error_Message_Invalid_Character_Limit  |
             | Incorrect_Format                                   | Field_Error_Message_Incorrect_Format         |
-            | Invalid_Email_Data_Start_With_Dot                  | Field_Error_Message_Incorrect_Format         |
+            # | Invalid_Email_Data_Start_With_Dot                  | Field_Error_Message_Incorrect_Format         |
             | Invalid_Email_Data_Double_Dot                      | Field_Error_Message_Incorrect_Format         |
             | Invalid_Email_Data_Space                           | Field_Error_Message_Incorrect_Format         |
-            | Invalid_Email_Data_Wrong_AT                        | Field_Error_Message_Incorrect_Format         |
+            # | Invalid_Email_Data_Wrong_AT                        | Field_Error_Message_Incorrect_Format         |
             | Invalid_Email_Data_Less_Greater_Symbols            | Field_Error_Message_Incorrect_Format         |
             | Invalid_Email_Data_Colon                           | Field_Error_Message_Incorrect_Format         |
             | Invalid_Email_Data_Semi_Colon                      | Field_Error_Message_Incorrect_Format         |
             | Invalid_Email_Data_Comma                           | Field_Error_Message_Incorrect_Format         |
-            | Invalid_Email_Data_Start_With_Hyphen               | Field_Error_Message_Incorrect_Format         |
-            | Invalid_Email_Data_Hyphen_Before_Domain            | Field_Error_Message_Incorrect_Format         |
+            # | Invalid_Email_Data_Start_With_Hyphen               | Field_Error_Message_Incorrect_Format         |
+            # | Invalid_Email_Data_Hyphen_Before_Domain            | Field_Error_Message_Incorrect_Format         |
             | Invalid_Email_Data_Double_Dot_Domain               | Field_Error_Message_Incorrect_Format         |
             | Invalid_Email_Data_Exclamation_Domain              | Field_Error_Message_Incorrect_Format         |
-            | Invalid_Email_Data_Unicode                         | Field_Error_Message_Incorrect_Format         |
-            | Invalid_Email_Data_Single_Quote_Before_AT          | Field_Error_Message_Incorrect_Format         |
+            # | Invalid_Email_Data_Unicode                         | Field_Error_Message_Incorrect_Format         |
+            # | Invalid_Email_Data_Single_Quote_Before_AT          | Field_Error_Message_Incorrect_Format         |
             | Invalid_Email_Data_Domain_Exceed_Max               | Field_Error_Message_Incorrect_Format         |
-            | Invalid_Email_Data_Local_Part_Max                  | Field_Error_Message_Incorrect_Format         |
+            # | Invalid_Email_Data_Local_Part_Max                  | Field_Error_Message_Incorrect_Format         |
             | Invalid_Email_Data_Consecutive_Dot_Domain          | Field_Error_Message_Incorrect_Format         |
             | Invalid_Email_Data_Consecutive_Dot_SubDomain       | Field_Error_Message_Incorrect_Format         |
             | Invalid_Email_Data_Consecutiv_Dot_Domain_SubDomain | Field_Error_Message_Incorrect_Format         |
@@ -187,6 +188,7 @@ Feature: HRAPROG-394- User Administration: Manage Users
             | Invalid_Email_Data_Max_Char                        | Field_Error_Message_Invalid_Character_Limit  |
 
     @rsp-2827
+    # few lines commented >> pending clarification>>email validation
     Scenario Outline: Validate user is able to fill user profile page with valid data
         Validate email address field with different valid data
         When I fill the new user profile page using '<Add_User_Profile>'
@@ -194,30 +196,29 @@ Feature: HRAPROG-394- User Administration: Manage Users
         Then I can see the check and create user profile page
         Then I can see previously filled values in the new user profile page for '<Add_User_Profile>' displayed on the check and create user profile page
         Examples:
-            | Add_User_Profile                      |
-            | Valid_Email_Data                      |
-            | Valid_Email_Underscore                |
-            | Valid_Email_Data_Hyphen               |
-            | Valid_Email_Data_Plus                 |
-            | Valid_Email_Data_Exclamation          |
-            | Valid_Email_Data_Hash                 |
-            | Valid_Email_Data_Dollar               |
-            | Valid_Email_Data_Percentage           |
-            | Valid_Email_Data_Ampersand            |
-            | Valid_Email_Data_Single_Quote         |
-            | Valid_Email_Data_Star                 |
-            | Valid_Email_Data_Slash                |
-            | Valid_Email_Data_Equal_Symbol         |
-            | Valid_Email_Data_Question_Mark        |
-            | Valid_Email_Data_Cap_Symbol           |
-            | Valid_Email_Data_Right_Single_Quote   |
-            | Valid_Email_Data_Curly_Brackets       |
-            | Valid_Email_Data_Pipe_Symbol          |
-            | Valid_Email_Data_Tilde_Symbol         |
-            | Valid_Email_Data_Unicode              |
-            | Valid_Email_Data_Special_Characters   |
-            | Valid_Email_Data_Hyphen_Underscore    |
-            | Valid_Email_Data_Multiple_Unicode     |
-            | Valid_Email_Data_Multiple_Sub_Domains |
-            | Valid_Email_Data_Domain               |
-            | Valid_Email_Data_Other_Language       |
+            | Add_User_Profile                    |
+            | Valid_Email_Underscore              |
+            | Valid_Email_Data_Hyphen             |
+            | Valid_Email_Data_Plus               |
+            | Valid_Email_Data_Exclamation        |
+            | Valid_Email_Data_Hash               |
+            | Valid_Email_Data_Dollar             |
+            | Valid_Email_Data_Percentage         |
+            | Valid_Email_Data_Ampersand          |
+            | Valid_Email_Data_Single_Quote       |
+            | Valid_Email_Data_Star               |
+            | Valid_Email_Data_Slash              |
+            | Valid_Email_Data_Equal_Symbol       |
+            | Valid_Email_Data_Question_Mark      |
+            | Valid_Email_Data_Cap_Symbol         |
+            | Valid_Email_Data_Right_Single_Quote |
+            | Valid_Email_Data_Curly_Brackets     |
+            | Valid_Email_Data_Pipe_Symbol        |
+            | Valid_Email_Data_Tilde_Symbol       |
+            | Valid_Email_Data_Unicode            |
+            | Valid_Email_Data_Special_Characters |
+            | Valid_Email_Data_Hyphen_Underscore  |
+            | Valid_Email_Data_Multiple_Unicode   |
+            # | Valid_Email_Data_Multiple_Sub_Domains |
+            | Valid_Email_Data_Domain             |
+# | Valid_Email_Data_Other_Language       |

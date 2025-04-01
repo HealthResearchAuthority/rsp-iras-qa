@@ -23,6 +23,8 @@ export default class ManageUsersPage {
   readonly firstNameFromListLabel: Locator;
   readonly users_list_rows: Locator;
   readonly next_button: Locator;
+  readonly userListRows: Locator;
+  readonly userListCell: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -58,6 +60,8 @@ export default class ManageUsersPage {
     this.search_button_label = this.page.getByText('Search');
     this.firstNameFromListLabel = this.page.locator('td:nth-child(1)');
     this.next_button = this.page.locator('.govuk-pagination__next a');
+    this.userListRows = this.page.locator('.govuk-table__row');
+    this.userListCell = this.page.locator('.govuk-table__cell');
   }
 
   async assertOnManageUsersPage() {
@@ -68,9 +72,9 @@ export default class ManageUsersPage {
     let hasNextPage = true;
     const firstNames: string[] = [];
     while (hasNextPage) {
-      const rows = await this.page.locator('.govuk-table__row').all();
+      const rows = await this.userListRows.all();
       for (const row of rows) {
-        const columns = await row.locator('.govuk-table__cell').allTextContents();
+        const columns = await row.locator(this.userListCell).allTextContents();
         const firstFourColumns = columns.slice(0, 4);
         const firstName = firstFourColumns[fieldNameIndex]?.trim() || '';
         firstNames.push(firstName);
@@ -90,9 +94,9 @@ export default class ManageUsersPage {
     let hasNextPage = true;
     let count: number = 0;
     while (hasNextPage) {
-      const rows = await this.page.locator('.govuk-table__row').all();
+      const rows = await this.userListRows.all();
       for (const row of rows) {
-        const columns = await row.locator('.govuk-table__cell').allTextContents();
+        const columns = await row.locator(this.userListCell).allTextContents();
         const firstFourColumns = columns.slice(0, 4);
         const fullRowData = firstFourColumns.map((col) => col.trim()).join('|');
         if (fullRowData === searchRecord) {

@@ -1,6 +1,9 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as checkCreateUserProfilePageData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageUsers/pages/check_create_user_profile_page_data.json';
 import * as buttonTextData from '../../../../../resources/test_data/common/button_text_data.json';
+import path from 'path';
+import * as fse from 'fs-extra';
+import CommonItemsPage from '../../../../Common/CommonItemsPage';
 
 //Declare Page Objects
 export default class CheckCreateUserProfilePage {
@@ -48,6 +51,8 @@ export default class CheckCreateUserProfilePage {
   readonly review_body_dropdown: Locator;
   readonly review_body_change_link: Locator;
   readonly create_profile_button: Locator;
+  pathToTestDataJson =
+    './src/resources/test_data/iras/reviewResearch/userAdministration/manageUsers/pages/create_user_profile_page_data.json';
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -147,6 +152,26 @@ export default class CheckCreateUserProfilePage {
         break;
       default:
         throw new Error(`${fieldKey} is not a valid option`);
+    }
+  }
+
+  async validateSelectedValues<PageObject>(
+    dataset: JSON,
+    key: string,
+    page: PageObject,
+    commonItemsPage: CommonItemsPage
+  ) {
+    const locator: Locator = page[key];
+    if (key === 'email_address_text') {
+      const filePath = path.resolve(this.pathToTestDataJson);
+      const data = await fse.readJson(filePath);
+      expect(await commonItemsPage.removeUnwantedChars(await locator.textContent())).toBe(
+        data.Create_User_Profile.email_address_unique
+      );
+    } else if (key === 'country_checkbox' || key === 'access_required_checkbox') {
+      expect(await commonItemsPage.removeUnwantedChars(await locator.textContent())).toBe(dataset[key][0]);
+    } else {
+      expect(await commonItemsPage.removeUnwantedChars(await locator.textContent())).toBe(dataset[key]);
     }
   }
 }

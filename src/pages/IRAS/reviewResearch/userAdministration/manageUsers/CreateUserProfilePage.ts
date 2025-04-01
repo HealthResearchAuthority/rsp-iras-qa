@@ -1,6 +1,9 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as createUserProfilePageData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageUsers/pages/create_user_profile_page_data.json';
 import * as buttonTextData from '../../../../../resources/test_data/common/button_text_data.json';
+import path from 'path';
+import * as fse from 'fs-extra';
+import CommonItemsPage from '../../../../Common/CommonItemsPage';
 
 //Declare Page Objects
 export default class CreateUserProfilePage {
@@ -33,6 +36,8 @@ export default class CreateUserProfilePage {
   readonly review_body_dropdown_label: Locator;
   readonly review_body_dropdown: Locator;
   readonly continue_button: Locator;
+  pathToTestDataJson =
+    './src/resources/test_data/iras/reviewResearch/userAdministration/manageUsers/pages/create_user_profile_page_data.json';
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -71,5 +76,41 @@ export default class CreateUserProfilePage {
   async assertOnCreateUserProfilePage() {
     await expect(this.page_heading).toBeVisible();
     await expect(this.page_heading).toHaveText(this.createUserProfilePageData.Create_User_Profile_Page.page_heading);
+  }
+
+  async validateSelectedValuesCreateUser<PageObject>(
+    dataset: JSON,
+    key: string,
+    page: PageObject,
+    commonItemsPage: CommonItemsPage
+  ) {
+    const locator: Locator = page[key];
+    const typeAttribute = await locator.first().getAttribute('type');
+    if (typeAttribute === 'text' || typeAttribute === 'date' || typeAttribute === 'tel') {
+      expect(await commonItemsPage.removeUnwantedChars(await locator.getAttribute('value'))).toBe(dataset[key]);
+    } else if (typeAttribute === 'radio') {
+      expect(await locator.locator('..').getByLabel(dataset[key], { exact: true }).isChecked());
+    } else if (typeAttribute === 'checkbox') {
+      for (const checkbox of dataset[key]) {
+        expect(await locator.locator('..').getByLabel(checkbox, { exact: true }).isChecked());
+      }
+    } else if (typeAttribute === 'email') {
+      if (key === 'email_address_text') {
+        const filePath = path.resolve(this.pathToTestDataJson);
+        const data = await fse.readJson(filePath);
+        expect(await commonItemsPage.removeUnwantedChars(await locator.getAttribute('value'))).toBe(
+          data.Create_User_Profile.email_address_unique
+        );
+      }
+    } else {
+      const isSelectTag = await locator.evaluate((el) => el.tagName.toLowerCase() === 'select');
+      if (isSelectTag) {
+        expect(
+          await commonItemsPage.removeUnwantedChars(
+            await this.page.locator('select option[selected=selected]').getAttribute('value')
+          )
+        ).toBe(dataset[key]);
+      }
+    }
   }
 }
