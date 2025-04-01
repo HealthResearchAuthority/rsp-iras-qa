@@ -1,4 +1,9 @@
 @adminUser @questionSetTissue
+# This Qset work was completed during Alpha phase with placeholder UI Screens
+# QSet Feature not yet developed in actual application
+# Therefore this feature is not part of the test pack
+# But is being kept as most of the steps can be re-used once Qset is in development
+# And the feature can be re-worked
 Feature: Question Set - Research Application - Tissue
 
   Background:
