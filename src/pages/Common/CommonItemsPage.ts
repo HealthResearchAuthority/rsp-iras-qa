@@ -41,10 +41,6 @@ export default class CommonItemsPage {
   readonly alert_box_list_items: Locator;
   readonly errorMessageFieldLabel: Locator;
   readonly errorMessageSummaryLabel: Locator;
-  readonly alert_box: Locator;
-  readonly alert_box_headings: Locator;
-  readonly alert_box_list: Locator;
-  readonly alert_box_list_items: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
