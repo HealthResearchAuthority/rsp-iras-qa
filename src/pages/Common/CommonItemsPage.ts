@@ -112,9 +112,7 @@ export default class CommonItemsPage {
     } else {
       const isSelectTag = await locator.evaluate((el) => el.tagName.toLowerCase() === 'select');
       if (isSelectTag) {
-        {
-          await locator.selectOption({ label: dataset[key] });
-        }
+        await locator.selectOption({ label: dataset[key] });
       }
     }
   }
@@ -313,13 +311,11 @@ export default class CommonItemsPage {
     } else {
       const isSelectTag = await locator.evaluate((el) => el.tagName.toLowerCase() === 'select');
       if (isSelectTag) {
-        {
-          expect(
-            await this.removeUnwantedChars(
-              await this.page.locator('select option[selected=selected]').getAttribute('value')
-            )
-          ).toBe(dataset[key]);
-        }
+        expect(
+          await this.removeUnwantedChars(
+            await this.page.locator('select option[selected=selected]').getAttribute('value')
+          )
+        ).toBe(dataset[key]);
       }
     }
   }
@@ -344,9 +340,7 @@ export default class CommonItemsPage {
     } else {
       const isSelectTag = await locator.evaluate((el) => el.tagName.toLowerCase() === 'select');
       if (isSelectTag) {
-        {
-          await locator.selectOption({ label: '' });
-        }
+        await locator.selectOption({ label: '' });
       }
     }
   }

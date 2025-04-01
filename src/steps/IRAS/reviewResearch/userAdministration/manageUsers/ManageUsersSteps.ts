@@ -14,11 +14,10 @@ Then('I can see the manage users list page', async ({ manageUsersPage }) => {
 Then(
   'I can see the list is sorted by default in the alphabetical order of the {string}',
   async ({ manageUsersPage }, fieldName: string) => {
-    let fieldNameIndex: number = 0;
     if (fieldName === 'First Name') {
-      fieldNameIndex = 0;
+      const fieldNameIndex = 0;
+      await manageUsersPage.checkAlphabeticalSorting(fieldNameIndex);
     }
-    await manageUsersPage.checkAlphabeticalSorting(fieldNameIndex);
   }
 );
 
