@@ -25,6 +25,10 @@ export default class CommonItemsPage {
   readonly bannerMyApplications: Locator;
   readonly errorMessageFieldLabel: Locator;
   readonly errorMessageSummaryLabel: Locator;
+  readonly alert_box: Locator;
+  readonly alert_box_headings: Locator;
+  readonly alert_box_list: Locator;
+  readonly alert_box_list_items: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -48,6 +52,11 @@ export default class CommonItemsPage {
     this.bannerMyApplications = this.bannerNavBar.getByText(this.linkTextData.Banner.My_Applications, { exact: true });
     this.errorMessageFieldLabel = page.locator('[class$="field-validation-error"]');
     this.errorMessageSummaryLabel = page.locator('div[class="govuk-error-summary"]');
+    //Validation Alert Box
+    this.alert_box = this.page.getByRole('alert');
+    this.alert_box_headings = this.alert_box.getByRole('heading');
+    this.alert_box_list = this.alert_box.getByRole('list');
+    this.alert_box_list_items = this.alert_box.getByRole('listitem');
   }
 
   //Page Methods
