@@ -139,7 +139,7 @@ Feature: HRAPROG-394- User Administration: Manage Users
             | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Role            | Valid_Data_In_All_Mandatory_Fields_Role_Operations_Another |
 
     @rsp-2827
-    # few lines commented >> pending clarification>>email validation
+    # few lines commented>> pending clarification >> email validation
     Scenario Outline: Validate error messages are displayed for invalid data in create user profile page
         Validate proper error messages are displayed for missing mandatory fields-First name,Last name,Email address-Country,Access required
         Validate proper error messages are displayed for invalid character limit-Title,First name,Last name,Email address,Telephone,Organisation,Job title

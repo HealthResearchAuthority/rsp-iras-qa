@@ -6,9 +6,7 @@ const { Then } = createBdd(test);
 Then(
   'I can see the create user profile confirmation page for {string}',
   async ({ createUserProfileConfirmationPage, createUserProfilePage }, datasetName: string) => {
-    //update
-    //added a workaround for getting unique email here for automation run
-    const dataset = createUserProfilePage.createUserProfilePageData.Create_User_Profile[datasetName];
+    const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
     await createUserProfileConfirmationPage.assertOnCreateUserProfileConfirmationPage();
     const expectedConsent =
       dataset.first_name_text +

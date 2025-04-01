@@ -1,5 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
-import * as checkCreateUserProfilePageData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageUsers/pages/check_create_user_profile_page_data.json';
+import * as checkCreateUserProfilePageTestData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageUsers/pages/check_create_user_profile_page_data.json';
 import * as buttonTextData from '../../../../../resources/test_data/common/button_text_data.json';
 import path from 'path';
 import * as fse from 'fs-extra';
@@ -8,7 +8,7 @@ import CommonItemsPage from '../../../../Common/CommonItemsPage';
 //Declare Page Objects
 export default class CheckCreateUserProfilePage {
   readonly page: Page;
-  readonly checkCreateUserProfilePageData: typeof checkCreateUserProfilePageData;
+  readonly checkCreateUserProfilePageTestData: typeof checkCreateUserProfilePageTestData;
   readonly buttonTextData: typeof buttonTextData;
   // readonly selectedBreadCrumbs: Locator;
   readonly back_button: Locator;
@@ -57,7 +57,7 @@ export default class CheckCreateUserProfilePage {
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page;
-    this.checkCreateUserProfilePageData = checkCreateUserProfilePageData;
+    this.checkCreateUserProfilePageTestData = checkCreateUserProfilePageTestData;
 
     //Locators
     this.back_button = this.page.getByText('Back');
@@ -105,11 +105,11 @@ export default class CheckCreateUserProfilePage {
   async assertOnCheckCreateUserProfilePage() {
     await expect(this.page_heading).toBeVisible();
     await expect(this.page_heading).toHaveText(
-      this.checkCreateUserProfilePageData.Check_Create_User_Profile_Page_Role_Operations.page_heading
+      this.checkCreateUserProfilePageTestData.Check_Create_User_Profile_Page_Role_Operations.page_heading
     );
     await expect(this.subHeading).toBeVisible();
     await expect(this.subHeading).toHaveText(
-      this.checkCreateUserProfilePageData.Check_Create_User_Profile_Page_Role_Operations.sub_heading
+      this.checkCreateUserProfilePageTestData.Check_Create_User_Profile_Page_Role_Operations.sub_heading
     );
   }
   async clickOnChangeButtonRoleOperations(fieldKey: string) {

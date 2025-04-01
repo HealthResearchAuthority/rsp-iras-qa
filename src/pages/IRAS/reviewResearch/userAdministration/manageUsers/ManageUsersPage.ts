@@ -1,11 +1,11 @@
 import { expect, Locator, Page } from '@playwright/test';
-import * as manageUsersPageData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageUsers/pages/manage_users_page_data.json';
+import * as manageUsersPageTestData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageUsers/pages/manage_users_page_data.json';
 import * as linkTextData from '../../../../../resources/test_data/common/link_text_data.json';
 
 //Declare Page Objects
 export default class ManageUsersPage {
   readonly page: Page;
-  readonly manageUsersPageData: typeof manageUsersPageData;
+  readonly manageUsersPageTestData: typeof manageUsersPageTestData;
   readonly linkTextData: typeof linkTextData;
   readonly page_heading: Locator;
   readonly back_button: Locator;
@@ -29,7 +29,7 @@ export default class ManageUsersPage {
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page;
-    this.manageUsersPageData = manageUsersPageData;
+    this.manageUsersPageTestData = manageUsersPageTestData;
 
     //Locators
     this.page_heading = this.page.locator('.govuk-heading-l');
@@ -66,7 +66,7 @@ export default class ManageUsersPage {
 
   async assertOnManageUsersPage() {
     await expect(this.page_heading).toBeVisible();
-    await expect(this.page_heading).toHaveText(this.manageUsersPageData.Manage_Users_Page.page_heading);
+    await expect(this.page_heading).toHaveText(this.manageUsersPageTestData.Manage_Users_Page.page_heading);
   }
   async checkAlphabeticalSorting(fieldNameIndex: number) {
     let hasNextPage = true;

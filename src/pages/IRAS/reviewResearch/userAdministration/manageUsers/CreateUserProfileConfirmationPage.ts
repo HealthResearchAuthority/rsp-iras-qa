@@ -1,10 +1,10 @@
 import { expect, Locator, Page } from '@playwright/test';
-import * as createUserProfileConfirmationPageData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageUsers/pages/create_user_profile_confirmation_page_data.json';
+import * as createUserProfileConfirmationPageTestData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageUsers/pages/create_user_profile_confirmation_page_data.json';
 
 //Declare Page Objects
 export default class CreateUserProfileConfirmationPage {
   readonly page: Page;
-  readonly createUserProfileConfirmationPageData: typeof createUserProfileConfirmationPageData;
+  readonly createUserProfileConfirmationPageTestData: typeof createUserProfileConfirmationPageTestData;
   readonly confirmation_message: Locator;
   readonly consentVal: Locator;
   readonly add_another_user_link: Locator;
@@ -13,7 +13,7 @@ export default class CreateUserProfileConfirmationPage {
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page;
-    this.createUserProfileConfirmationPageData = createUserProfileConfirmationPageData;
+    this.createUserProfileConfirmationPageTestData = createUserProfileConfirmationPageTestData;
 
     //Locators
 
@@ -27,14 +27,14 @@ export default class CreateUserProfileConfirmationPage {
     //update
     await expect(this.confirmation_message).toBeVisible();
     await expect(this.confirmation_message).toHaveText(
-      this.createUserProfileConfirmationPageData.Create_User_Profile_Confirmation_Page.confirmation_message
+      this.createUserProfileConfirmationPageTestData.Create_User_Profile_Confirmation_Page.confirmation_message
     );
     await expect(this.add_another_user_link).toHaveText(
-      this.createUserProfileConfirmationPageData.Create_User_Profile_Confirmation_Page.add_another_user_link
+      this.createUserProfileConfirmationPageTestData.Create_User_Profile_Confirmation_Page.add_another_user_link
     );
     //Back to Manage Users or Back to Manage users >> check figma and app
     // await expect(this.back_to_manage_user_link).toHaveText(
-    //   this.createUserProfileConfirmationPageData.Create_User_Profile_Confirmation_Page.back_to_manage_user_link
+    //   this.createUserProfileConfirmationPageTestData.Create_User_Profile_Confirmation_Page.back_to_manage_user_link
     // );
   }
 }

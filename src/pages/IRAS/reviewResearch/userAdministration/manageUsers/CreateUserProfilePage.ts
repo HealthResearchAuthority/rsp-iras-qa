@@ -1,5 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
-import * as createUserProfilePageData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageUsers/pages/create_user_profile_page_data.json';
+import * as createUserProfilePageTestData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageUsers/pages/create_user_profile_page_data.json';
 import * as buttonTextData from '../../../../../resources/test_data/common/button_text_data.json';
 import path from 'path';
 import * as fse from 'fs-extra';
@@ -8,7 +8,7 @@ import CommonItemsPage from '../../../../Common/CommonItemsPage';
 //Declare Page Objects
 export default class CreateUserProfilePage {
   readonly page: Page;
-  readonly createUserProfilePageData: typeof createUserProfilePageData;
+  readonly createUserProfilePageTestData: typeof createUserProfilePageTestData;
   readonly buttonTextData: typeof buttonTextData;
   readonly page_heading: Locator;
   readonly title_textbox_label: Locator;
@@ -43,7 +43,7 @@ export default class CreateUserProfilePage {
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page;
-    this.createUserProfilePageData = createUserProfilePageData;
+    this.createUserProfilePageTestData = createUserProfilePageTestData;
 
     //Locators
     this.page_heading = this.page.locator('.govuk-heading-l');
@@ -77,7 +77,9 @@ export default class CreateUserProfilePage {
 
   async assertOnCreateUserProfilePage() {
     await expect(this.page_heading).toBeVisible();
-    await expect(this.page_heading).toHaveText(this.createUserProfilePageData.Create_User_Profile_Page.page_heading);
+    await expect(this.page_heading).toHaveText(
+      this.createUserProfilePageTestData.Create_User_Profile_Page.page_heading
+    );
   }
 
   async validateSelectedValuesCreateUser<PageObject>(

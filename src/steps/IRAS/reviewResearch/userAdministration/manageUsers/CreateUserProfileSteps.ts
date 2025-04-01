@@ -9,12 +9,12 @@ const { When, Then } = createBdd(test);
 When(
   'I fill the new user profile page using {string}',
   async ({ createUserProfilePage, commonItemsPage }, datasetName: string) => {
-    const dataset = createUserProfilePage.createUserProfilePageData.Create_User_Profile[datasetName];
+    const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
     let uniqueEmail: any;
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
         if (key === 'email_address_text') {
-          const prefix = createUserProfilePage.createUserProfilePageData.Create_User_Profile.email_address_prefix;
+          const prefix = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile.email_address_prefix;
           uniqueEmail = await commonItemsPage.generateUniqueEmail(dataset[key], prefix);
           dataset[key] = uniqueEmail;
           const filePath = path.resolve(pathToTestDataJson);
@@ -29,7 +29,7 @@ When(
 When(
   'I fill the new user profile page using {string} for field validation',
   async ({ createUserProfilePage, commonItemsPage }, datasetName: string) => {
-    const dataset = createUserProfilePage.createUserProfilePageData.Create_User_Profile[datasetName];
+    const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
         await commonItemsPage.fillUIComponent(dataset, key, createUserProfilePage);
@@ -41,7 +41,7 @@ When(
 Then(
   'I clear the previously entered values on the add a new user profile page for {string}',
   async ({ createUserProfilePage, commonItemsPage }, datasetName: string) => {
-    const dataset = createUserProfilePage.createUserProfilePageData.Create_User_Profile[datasetName];
+    const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
         await commonItemsPage.clearUIComponent(dataset, key, createUserProfilePage);
@@ -58,7 +58,7 @@ Then('I can see the add a new user profile page', async ({ createUserProfilePage
 Then(
   'I can see previously filled values in the new user profile page for {string} displayed on the add a new user profile page',
   async ({ commonItemsPage, createUserProfilePage }, datasetName: string) => {
-    const dataset = createUserProfilePage.createUserProfilePageData.Create_User_Profile[datasetName];
+    const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
         await createUserProfilePage.validateSelectedValuesCreateUser(
@@ -75,13 +75,13 @@ Then(
 Then(
   'I can see the {string} ui labels on the add a new user profile page for {string}',
   async ({ commonItemsPage, createUserProfilePage }, datasetName: string, datasetValName: string) => {
-    const datasetVal = createUserProfilePage.createUserProfilePageData.Create_User_Profile[datasetValName];
+    const datasetVal = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetValName];
     if (datasetValName === 'Role_Operations') {
       for (const key in datasetVal) {
         await commonItemsPage.fillUIComponent(datasetVal, key, createUserProfilePage);
       }
     }
-    const dataset = createUserProfilePage.createUserProfilePageData.Create_User_Profile[datasetName];
+    const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
         await commonItemsPage.validateUILabels(dataset, key, createUserProfilePage);
@@ -97,9 +97,9 @@ Then(
     errorMessageFieldDatasetName: string,
     invalidFieldsDatasetName: string
   ) => {
-    const errorMessageFieldDataset = createUserProfilePage.createUserProfilePageData[errorMessageFieldDatasetName];
+    const errorMessageFieldDataset = createUserProfilePage.createUserProfilePageTestData[errorMessageFieldDatasetName];
     const invalidFieldsDataset =
-      createUserProfilePage.createUserProfilePageData.Create_User_Profile[invalidFieldsDatasetName];
+      createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[invalidFieldsDatasetName];
     for (const key in invalidFieldsDataset) {
       if (Object.prototype.hasOwnProperty.call(invalidFieldsDataset, key)) {
         await commonItemsPage.validateFieldErrorMessage(errorMessageFieldDataset, key, createUserProfilePage);

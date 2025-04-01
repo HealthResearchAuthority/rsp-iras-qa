@@ -1,11 +1,11 @@
 import { expect, Locator, Page } from '@playwright/test';
-import * as editUserProfilePageData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageUsers/pages/edit_user_profile_page_data.json';
+import * as editUserProfilePageTestData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageUsers/pages/edit_user_profile_page_data.json';
 import * as buttonTextData from '../../../../../resources/test_data/common/button_text_data.json';
 
 //Declare Page Objects
 export default class EditUserProfilePage {
   readonly page: Page;
-  readonly editUserProfilePageData: typeof editUserProfilePageData;
+  readonly editUserProfilePageTestData: typeof editUserProfilePageTestData;
   readonly buttonTextData: typeof buttonTextData;
   readonly page_heading: Locator;
   readonly title_label: Locator;
@@ -37,7 +37,7 @@ export default class EditUserProfilePage {
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page;
-    this.editUserProfilePageData = editUserProfilePageData;
+    this.editUserProfilePageTestData = editUserProfilePageTestData;
 
     //Locators
     this.page_heading = this.page.locator('.govuk-heading-l');
@@ -72,7 +72,7 @@ export default class EditUserProfilePage {
 
   async assertOnEditUserProfilePage() {
     await expect(this.page_heading).toBeVisible();
-    await expect(this.page_heading).toHaveText(this.editUserProfilePageData.Edit_User_Profile_Page.page_heading);
+    await expect(this.page_heading).toHaveText(this.editUserProfilePageTestData.Edit_User_Profile_Page.page_heading);
   }
 
   async clearOptionalFields() {

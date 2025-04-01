@@ -24,7 +24,7 @@ Then(
 When(
   'I can see the newly created user record should be present in the list for {string} with {string} status in the manage user page',
   async ({ manageUsersPage, createUserProfilePage }, datasetName: string, userStatus: string) => {
-    const dataset = createUserProfilePage.createUserProfilePageData.Create_User_Profile[datasetName];
+    const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
     const userFirstName = dataset.first_name_text;
     const userLastName = dataset.last_name_text;
     const filePath = path.resolve(pathToTestDataJson);
@@ -37,7 +37,7 @@ When(
 Then(
   'I can see the {string} ui labels on the manage users list page',
   async ({ commonItemsPage, manageUsersPage }, datasetName: string) => {
-    const dataset = manageUsersPage.manageUsersPageData.Manage_Users_Page[datasetName];
+    const dataset = manageUsersPage.manageUsersPageTestData.Manage_Users_Page[datasetName];
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
         await commonItemsPage.validateUILabels(dataset, key, manageUsersPage);
