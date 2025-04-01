@@ -98,7 +98,6 @@ export default class ManageUsersPage {
         if (fullRowData === searchRecord) {
           foundRecord = true;
           count = count + 1;
-          console.log(`Data found: ${searchRecord}`);
         }
       }
       hasNextPage = (await this.next_button.isVisible()) && !(await this.next_button.isDisabled());
