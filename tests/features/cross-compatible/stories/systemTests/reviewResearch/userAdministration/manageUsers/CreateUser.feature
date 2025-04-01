@@ -10,14 +10,6 @@ Feature: HRAPROG-394- User Administration: Manage Users
 
     @rsp-2827 @rsp-2870
     Scenario Outline: Verify the user is able to create a new user profile with valid data
-        Validate ui labels on the add a new user profile page
-        Validate ui labels on the check and create user profile page
-        Validate information on the check and create user profile page
-        Validate create user profile confirmation page
-        Validate ui labels on the manage users list page
-        Validate navigation of back button on the manage users list page
-        Validate newly created user record should be present in the manage user list page with active status
-        Validate the list is sorted by default in the alphabetical order of the first name
         Then I can see the '<Validation_Text_Add_New_User_Profile>' ui labels on the add a new user profile page for '<Role_Dropdown>'
         When I fill the new user profile page using '<Add_User_Profile>'
         And I click the 'Continue' button on the 'Create_User_Profile_Page'
@@ -46,7 +38,7 @@ Feature: HRAPROG-394- User Administration: Manage Users
 
 
     @rsp-2827 @rsp-2870
-    Scenario Outline: Verify the user is able to create a new user profile and repeat the journey by clicking 'add another user' link from the Confirmation message screen
+    Scenario Outline: Verify the user is able to add another user from the Confirmation message screen using the link
         When I fill the new user profile page using '<Add_User_Profile>'
         And I click the 'Continue' button on the 'Create_User_Profile_Page'
         Then I can see the check and create user profile page
