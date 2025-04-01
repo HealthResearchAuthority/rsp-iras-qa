@@ -110,9 +110,12 @@ Feature: HRAPROG-394- User Administration: Manage Users
 
     @rsp-2827
     Scenario Outline: Verify the user can navigate from 'Check and create user profile' page by clicking 'Change' button against all the fields
+        And I capture the page screenshot
         When I fill the new user profile page using '<Add_User_Profile>'
+        And I capture the page screenshot
         And I click the 'Continue' button on the 'Create_User_Profile_Page'
         Then I can see the check and create user profile page
+        And I capture the page screenshot
         Then I can see previously filled values in the new user profile page for '<Add_User_Profile>' displayed on the check and create user profile page
         When I click the change link against '<Field_Name>' on the check and create user profile page
         Then I can see the add a new user profile page
@@ -121,6 +124,7 @@ Feature: HRAPROG-394- User Administration: Manage Users
         And I clear the previously entered values on the add a new user profile page for '<Add_User_Profile>'
         And I capture the page screenshot
         When I fill the new user profile page using '<Add_Another_User_Profile>'
+        And I capture the page screenshot
         And I click the 'Continue' button on the 'Create_User_Profile_Page'
         Then I can see the check and create user profile page
         Then I can see previously filled values in the new user profile page for '<Add_Another_User_Profile>' displayed on the check and create user profile page

@@ -4,7 +4,6 @@ import * as linkTextData from '../../resources/test_data/common/link_text_data.j
 import * as questionSetData from '../../resources/test_data/common/question_set_data.json';
 import fs from 'fs';
 import path from 'path';
-import * as fse from 'fs-extra';
 import ProjectFilterPage from '../IRAS/questionSet/ProjectFilterPage';
 import ProjectDetailsPage from '../IRAS/questionSet/ProjectDetailsPage';
 import DevicesPage from '../IRAS/questionSet/DevicesPage';
@@ -382,18 +381,6 @@ export default class CommonItemsPage {
     const timestamp = new Date().toISOString().replace(/[-:.TZ]/g, '');
     const domain = keyVal;
     return `${prefix}${timestamp}${domain}`;
-  }
-
-  async updateUniqueEmailTestDataJson(filePath: string, updateVal: string) {
-    (async () => {
-      try {
-        const data = await fse.readJson(filePath);
-        data.Create_User_Profile.email_address_unique = updateVal;
-        await fse.writeJson(filePath, data, { spaces: 2 });
-      } catch (error) {
-        throw new Error(`${error} Error updating unique email to testdata json file:`);
-      }
-    })();
   }
 
   async removeUnwantedChars(value: string | null): Promise<string> {

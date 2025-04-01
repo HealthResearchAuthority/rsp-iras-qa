@@ -117,4 +117,16 @@ export default class CreateUserProfilePage {
       }
     }
   }
+
+  async updateUniqueEmailTestDataJson(filePath: string, updateVal: string) {
+    (async () => {
+      try {
+        const data = await fse.readJson(filePath);
+        data.Create_User_Profile.email_address_unique = updateVal;
+        await fse.writeJson(filePath, data, { spaces: 2 });
+      } catch (error) {
+        throw new Error(`${error} Error updating unique email to testdata json file:`);
+      }
+    })();
+  }
 }

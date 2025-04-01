@@ -18,7 +18,7 @@ When(
           uniqueEmail = await commonItemsPage.generateUniqueEmail(dataset[key], prefix);
           dataset[key] = uniqueEmail;
           const filePath = path.resolve(pathToTestDataJson);
-          await commonItemsPage.updateUniqueEmailTestDataJson(filePath, uniqueEmail);
+          await createUserProfilePage.updateUniqueEmailTestDataJson(filePath, uniqueEmail);
         }
         await commonItemsPage.fillUIComponent(dataset, key, createUserProfilePage);
       }

@@ -24,7 +24,6 @@ export default class CreateUserProfileConfirmationPage {
   }
 
   async assertOnCreateUserProfileConfirmationPage() {
-    //update
     await expect(this.confirmation_message).toBeVisible();
     await expect(this.confirmation_message).toHaveText(
       this.createUserProfileConfirmationPageTestData.Create_User_Profile_Confirmation_Page.confirmation_message
