@@ -35,8 +35,6 @@ Feature: HRAPROG-394- User Administration: Manage Users
             | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer   | Label_Texts_Role_Not_Operations      | Role_Not_Operations | Label_Texts_Manage_Users_List     |
             | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Label_Texts_Role_Operations          | Role_Operations     | Label_Texts_Manage_Users_List     |
 
-
-
     @rsp-2827 @rsp-2870
     Scenario Outline: Verify the user is able to add another user from the Confirmation message screen using the link
         When I fill the new user profile page using '<Add_User_Profile>'
