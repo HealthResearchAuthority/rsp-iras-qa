@@ -18,13 +18,28 @@
       "full_project_title_text": "Sample Research - Full Title",
       "is_project_managed_commercial_research_radio": "Yes",
       "is_nihr_funding_radio": "No",
-      "access_cpms_services_radio": "Yes"
+      "access_cpms_services_radio": "Yes",
+      "email_initial_contact_cpms_text": "test_cpms_contact@test.com"
+    },
+    "No_Fields_Completed": { "short_project_title_text": "", "full_project_title_text": "" },
+    "Initial_Contact_Omitted": {
+      "short_project_title_text": "Test Research - Short Title",
+      "full_project_title_text": "Sample Research - Full Title",
+      "is_project_managed_commercial_research_radio": "Yes",
+      "is_nihr_funding_radio": "Yes",
+      "access_cpms_services_radio": "Yes",
+      "email_initial_contact_cpms_text": ""
     }
   },
   "Project_Scope": {
     "Valid_Data_All_Fields": {
       "is_educational_project_radio": "Yes",
-      "activities_involved_checkbox": ["Use of previously collected data about people","Research involving staff only","Non-clinical activities with people (other than staff), such as interviews or surveys","Treatment, such as medicines, devices, surgery, vaccines or therapies"],
+      "activities_involved_checkbox": [
+        "Use of previously collected data about people",
+        "Research involving staff only",
+        "Non-clinical activities with people (other than staff), such as interviews or surveys",
+        "Treatment, such as medicines, devices, surgery, vaccines or therapies"
+      ],
       "is_research_bioresource_radio": "Yes",
       "bioresource_established_nhs_hsc_radio": "Yes",
       "is_ctimp_radio": "Yes",
@@ -39,17 +54,71 @@
       "include_prisoners_offenders_radio": "Yes",
       "involve_ministry_of_defence_radio": "Yes",
       "involve_hfea_radio": "Yes"
-    }
+    },
+    "No_Fields_Completed": {}
   },
   "Research_Location": {
     "Valid_Data_All_Fields": {
       "is_outside_uk_radio": "UK only",
-      "places_in_uk_for_project_checkbox": ["England","Northern Ireland","Wales"],
-      "where_human_sample_held_checkbox": ["England","Northern Ireland"],
-      "where_human_sample_obtained_checkbox": ["Northern Ireland","Scotland","Wales"],
-      "where_project_take_place_checkbox": ["Independent research units","Phase 1 trial units (non-NHS or HSC organisation)","Prison or probation setting","Social care settings","Voluntary sector or private organisations","Community settings"],
+      "places_in_uk_for_project_checkbox": ["England", "Northern Ireland", "Wales"],
+      "where_human_sample_held_checkbox": ["England", "Northern Ireland"],
+      "where_human_sample_obtained_checkbox": ["Northern Ireland", "Scotland", "Wales"],
+      "where_project_take_place_checkbox": [
+        "Independent research units",
+        "Phase 1 trial units (non-NHS or HSC organisation)",
+        "Prison or probation setting",
+        "Social care settings",
+        "Voluntary sector or private organisations",
+        "Community settings"
+      ],
       "details_other_organisation_text": "test organisation",
       "use_pic_radio": "Yes"
-    }
+    },
+    "Valid_Data_Default_Fields": {
+      "is_outside_uk_radio": "UK only",
+      "places_in_uk_for_project_checkbox": ["England", "Northern Ireland", "Wales"],
+      "where_project_take_place_checkbox": ["Local councils", "University"]
+    },
+    "Further_Location_Sample_Details_Omitted": {
+      "is_outside_uk_radio": "UK only",
+      "places_in_uk_for_project_checkbox": ["England", "Northern Ireland", "Wales"],
+      "where_human_sample_held_checkbox": "",
+      "where_human_sample_obtained_checkbox": "",
+      "where_project_take_place_checkbox": ["Other"],
+      "details_other_organisation_text": ""
+    },
+    "No_Fields_Completed": {}
+  },
+  "All_Mandatory_Validations": {
+    "short_project_title_text": "Question 1 under Project Details section",
+    "full_project_title_text": "Question 3 under Project Details section",
+    "is_project_managed_commercial_research_radio": "Question 4 under Project Details section",
+    "is_nihr_funding_radio": "Question 5 under Project Details section",
+    "access_cpms_services_radio": "Question 6 under Project Details section",
+    "is_educational_project_radio": "Question 1 under Project Scope section",
+    "activities_involved_checkbox": "Question 2 under Project Scope section",
+    "include_prisoners_offenders_radio": "Question 11 under Project Scope section",
+    "involve_ministry_of_defence_radio": "Question 12 under Project Scope section",
+    "involve_hfea_radio": "Question 13 under Project Scope section",
+    "is_outside_uk_radio": "Question 1 under Research Location section",
+    "places_in_uk_for_project_checkbox": "Question 2 under Research Location section",
+    "where_project_take_place_checkbox": "Question 4 under Research Location section"
+  },
+  "All_Conditional_Validations": {
+    "email_initial_contact_cpms_text": "Question 6a under Project Details section",
+    "is_research_bioresource_radio": "Question 3 under Project Scope section",
+    "bioresource_established_nhs_hsc_radio": "Question 3a under Project Scope section",
+    "is_ctimp_radio": "Question 4 under Project Scope section",
+    "options_applied_for_project_radio": "Question 4a under Project Scope section",
+    "is_clinical_or_medical_devices_radio": "Question 5 under Project Scope section",
+    "exposing_ionising_radiation_radio": "Question 6 under Project Scope section",
+    "using_human_biological_samples_radio": "Question 7 under Project Scope section",
+    "patient_data_accessed_outside_radio": "Question 8 under Project Scope section",
+    "research_with_adults_lacking_capacity_to_consent_radio": "Question 9 under Project Scope section",
+    "include_children_radio": "Question 10 under Project Scope section",
+    "where_human_sample_held_checkbox": "Question 3a under Research Location section",
+    "where_human_sample_obtained_checkbox": "Question 3b under Research Location section",
+    "details_other_organisation_text": "Question 4a under Research Location section",
+    "use_pic_radio": "Question 5 under Research Location section"
   }
 }
