@@ -37,6 +37,7 @@ export default class CreateUserProfilePage {
   readonly review_body_dropdown: Locator;
   readonly continue_button: Locator;
   readonly selected_dropdown: Locator;
+  readonly back_button: Locator;
   pathToTestDataJson =
     './src/resources/test_data/iras/reviewResearch/userAdministration/manageUsers/create_user_profile_page_data.json';
 
@@ -73,6 +74,7 @@ export default class CreateUserProfilePage {
     this.review_body_dropdown = this.page.getByTestId('ReviewBody');
     this.continue_button = this.page.locator('.govuk-button[type="submit"]');
     this.selected_dropdown = this.page.locator('select option[selected=selected]');
+    this.back_button = this.page.getByText('Back');
   }
 
   async assertOnCreateUserProfilePage() {
