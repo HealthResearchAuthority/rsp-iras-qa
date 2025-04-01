@@ -3,7 +3,7 @@ import { test } from '../../../../../hooks/CustomFixtures';
 import * as fse from 'fs-extra';
 import path from 'path';
 const pathToTestDataJson =
-  './src/resources/test_data/iras/reviewResearch/userAdministration/manageUsers/pages/create_user_profile_page_data.json';
+  './src/resources/test_data/iras/reviewResearch/userAdministration/manageUsers/create_user_profile_page_data.json';
 
 const { When, Then } = createBdd(test);
 

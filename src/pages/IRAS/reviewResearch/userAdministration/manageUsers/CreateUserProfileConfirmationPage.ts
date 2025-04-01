@@ -1,5 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
-import * as createUserProfileConfirmationPageTestData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageUsers/pages/create_user_profile_confirmation_page_data.json';
+import * as createUserProfileConfirmationPageTestData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageUsers/create_user_profile_confirmation_page_data.json';
 
 //Declare Page Objects
 export default class CreateUserProfileConfirmationPage {

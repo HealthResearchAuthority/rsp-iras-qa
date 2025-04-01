@@ -1,5 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
-import * as createUserProfilePageTestData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageUsers/pages/create_user_profile_page_data.json';
+import * as createUserProfilePageTestData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageUsers/create_user_profile_page_data.json';
 import * as buttonTextData from '../../../../../resources/test_data/common/button_text_data.json';
 import path from 'path';
 import * as fse from 'fs-extra';
@@ -38,7 +38,7 @@ export default class CreateUserProfilePage {
   readonly continue_button: Locator;
   readonly selected_dropdown: Locator;
   pathToTestDataJson =
-    './src/resources/test_data/iras/reviewResearch/userAdministration/manageUsers/pages/create_user_profile_page_data.json';
+    './src/resources/test_data/iras/reviewResearch/userAdministration/manageUsers/create_user_profile_page_data.json';
 
   //Initialize Page Objects
   constructor(page: Page) {

@@ -390,7 +390,7 @@ export default class CommonItemsPage {
         data.Create_User_Profile.email_address_unique = updateVal;
         await fse.writeJson(filePath, data, { spaces: 2 });
       } catch (error) {
-        console.error('Error updating prefix:', error);
+        throw new Error(`${error} Error updating unique email to testdata json file:`);
       }
     })();
   }

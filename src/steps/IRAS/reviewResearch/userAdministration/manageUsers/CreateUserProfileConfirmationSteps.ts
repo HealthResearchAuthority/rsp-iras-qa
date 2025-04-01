@@ -1,5 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../../hooks/CustomFixtures';
+import * as createUserProfileConfirmationPageTestData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageUsers/create_user_profile_confirmation_page_data.json';
 
 const { Then } = createBdd(test);
 
@@ -12,7 +13,7 @@ Then(
       dataset.first_name_text +
       ' ' +
       dataset.last_name_text +
-      ' has been sent an email confirming their account details. Their status is now active.';
+      createUserProfileConfirmationPageTestData.Create_User_Profile_Confirmation_Page.consent;
     const valConsentUI: string | null = await createUserProfileConfirmationPage.consentVal.textContent();
     const safeValConsentUI = valConsentUI ?? 'default value';
     const actualConsent = safeValConsentUI.replace(/\s+/g, ' ').trim();
