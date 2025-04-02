@@ -1,6 +1,7 @@
 import { createBdd } from 'playwright-bdd';
 import { test } from '../../../../../hooks/CustomFixtures';
 import path from 'path';
+import { Locator } from 'playwright';
 const pathToTestDataJson =
   './src/resources/test_data/iras/reviewResearch/userAdministration/manageUsers/create_user_profile_page_data.json';
 
@@ -10,17 +11,19 @@ When(
   'I fill the new user profile page using {string}',
   async ({ createUserProfilePage, commonItemsPage }, datasetName: string) => {
     const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
-    let uniqueEmail: any;
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
         if (key === 'email_address_text') {
           const prefix = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile.email_address_prefix;
-          uniqueEmail = await commonItemsPage.generateUniqueEmail(dataset[key], prefix);
-          dataset[key] = uniqueEmail;
+          const uniqueEmail = await commonItemsPage.generateUniqueEmail(dataset[key], prefix);
           const filePath = path.resolve(pathToTestDataJson);
           await createUserProfilePage.updateUniqueEmailTestDataJson(filePath, uniqueEmail);
+          const locator: Locator = createUserProfilePage[key];
+          await locator.clear();
+          await locator.fill(uniqueEmail);
+        } else {
+          await commonItemsPage.fillUIComponent(dataset, key, createUserProfilePage);
         }
-        await commonItemsPage.fillUIComponent(dataset, key, createUserProfilePage);
       }
     }
   }
@@ -51,7 +54,6 @@ Then(
 );
 
 Then('I can see the add a new user profile page', async ({ createUserProfilePage }) => {
-  //update
   await createUserProfilePage.assertOnCreateUserProfilePage();
 });
 

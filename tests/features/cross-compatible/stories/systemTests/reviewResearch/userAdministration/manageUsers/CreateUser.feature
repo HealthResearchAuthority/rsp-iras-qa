@@ -109,7 +109,7 @@ Feature: HRAPROG-394- User Administration: Manage Users
             | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Valid_Data_In_All_Mandatory_Fields_Role_Operations_Another |
 
     @rsp-2827
-    Scenario Outline: Verify the user can navigate from 'Check and create user profile' page by clicking 'Change' button against all the fields
+    Scenario Outline: Verify the user can navigate from 'Check and create user profile' page by clicking 'Change' button against all the fields when the role is selected as operations
         And I capture the page screenshot
         When I fill the new user profile page using '<Add_User_Profile>'
         And I capture the page screenshot
@@ -142,16 +142,41 @@ Feature: HRAPROG-394- User Administration: Manage Users
             | Valid_Data_In_All_Fields_Role_Operations           | Role            | Valid_Data_In_All_Fields_Role_Operations_Another           |
             | Valid_Data_In_All_Fields_Role_Operations           | Committee       | Valid_Data_In_All_Fields_Role_Operations_Another           |
             | Valid_Data_In_All_Fields_Role_Operations           | Country         | Valid_Data_In_All_Fields_Role_Operations_Another           |
-            | Valid_Data_In_All_Fields_Role_Operations           | Access_Required | Valid_Data_In_All_Fields_Role_Operations_Another           |
-            | Valid_Data_In_All_Fields_Role_Operations           | Review_Body     | Valid_Data_In_All_Fields_Role_Operations_Another           |
-            | Valid_Data_In_All_Fields_Role_Reviewer             | Title           | Valid_Data_In_All_Fields_Role_Reviewer_Another             |
-            | Valid_Data_In_All_Fields_Role_Reviewer             | First_Name      | Valid_Data_In_All_Fields_Role_Reviewer_Another             |
-            | Valid_Data_In_All_Fields_Role_Reviewer             | Last_Name       | Valid_Data_In_All_Fields_Role_Reviewer_Another             |
-            | Valid_Data_In_All_Fields_Role_Reviewer             | Email_Address   | Valid_Data_In_All_Fields_Role_Reviewer_Another             |
-            | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer   | Telephone       | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer_Another   |
-            | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer   | Organisation    | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer_Another   |
-            | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Job_Title       | Valid_Data_In_All_Mandatory_Fields_Role_Operations_Another |
-            | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Role            | Valid_Data_In_All_Mandatory_Fields_Role_Operations_Another |
+            | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Access_Required | Valid_Data_In_All_Mandatory_Fields_Role_Operations_Another |
+            | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Review_Body     | Valid_Data_In_All_Mandatory_Fields_Role_Operations_Another |
+
+    @rsp-2827
+    Scenario Outline: Verify the user can navigate from 'Check and create user profile' page by clicking 'Change' button against all the fields when the role is selected as reviewer
+        And I capture the page screenshot
+        When I fill the new user profile page using '<Add_User_Profile>'
+        And I capture the page screenshot
+        And I click the 'Continue' button on the 'Create_User_Profile_Page'
+        Then I can see the check and create user profile page
+        And I capture the page screenshot
+        Then I can see previously filled values in the new user profile page for '<Add_User_Profile>' displayed on the check and create user profile page
+        When I click the change link against '<Field_Name>' on the check and create user profile page
+        Then I can see the add a new user profile page
+        Then I can see previously filled values in the new user profile page for '<Add_User_Profile>' displayed on the add a new user profile page
+        And I capture the page screenshot
+        And I clear the previously entered values on the add a new user profile page for '<Add_User_Profile>'
+        And I capture the page screenshot
+        When I fill the new user profile page using '<Add_Another_User_Profile>'
+        And I capture the page screenshot
+        And I click the 'Continue' button on the 'Create_User_Profile_Page'
+        Then I can see the check and create user profile page
+        Then I can see previously filled values in the new user profile page for '<Add_Another_User_Profile>' displayed on the check and create user profile page
+        And I capture the page screenshot
+
+        Examples:
+            | Add_User_Profile                                 | Field_Name    | Add_Another_User_Profile                                 |
+            | Valid_Data_In_All_Fields_Role_Reviewer           | Title         | Valid_Data_In_All_Fields_Role_Reviewer_Another           |
+            | Valid_Data_In_All_Fields_Role_Reviewer           | First_Name    | Valid_Data_In_All_Fields_Role_Reviewer_Another           |
+            | Valid_Data_In_All_Fields_Role_Reviewer           | Last_Name     | Valid_Data_In_All_Fields_Role_Reviewer_Another           |
+            | Valid_Data_In_All_Fields_Role_Reviewer           | Email_Address | Valid_Data_In_All_Fields_Role_Reviewer_Another           |
+            | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer | Telephone     | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer_Another |
+            | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer | Organisation  | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer_Another |
+            | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer | Job_Title     | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer_Another |
+            | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer | Role          | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer_Another |
 
     @rsp-2827
     # few lines commented>> pending clarification >> email validation
