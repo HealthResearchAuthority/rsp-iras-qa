@@ -16,12 +16,13 @@ export default class UserProfilePage {
     this.userProfilePageTestData = userProfilePageTestData;
 
     //Locators
-    this.page_heading = this.page.locator('.govuk-heading-l');
+    this.page_heading = this.page
+      .getByRole('heading')
+      .getByText(this.userProfilePageTestData.User_Profile_Page.page_heading);
     this.first_change_link = this.page.getByRole('link').getByText('Change').first();
   }
 
   async assertOnUserProfilePage() {
     await expect(this.page_heading).toBeVisible();
-    await expect(this.page_heading).toContainText(new RegExp(userProfilePageTestData.User_Profile_Page.page_heading));
   }
 }

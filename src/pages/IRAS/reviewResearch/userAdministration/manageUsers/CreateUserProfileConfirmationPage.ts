@@ -16,24 +16,28 @@ export default class CreateUserProfileConfirmationPage {
     this.createUserProfileConfirmationPageTestData = createUserProfileConfirmationPageTestData;
 
     //Locators
-
-    this.confirmation_message = this.page.locator('.govuk-panel__title');
-    this.consentVal = this.page.locator('//*[contains(@class,"govuk-panel--confirmation")]/../p[1]');
-    this.add_another_user_link = this.page.locator('a[href="/admin/users/createuser"]');
-    this.back_to_manage_user_link = this.page.locator('(//a[@href="/admin/users"])[2]');
+    this.confirmation_message = this.page
+      .getByRole('heading')
+      .getByText(
+        this.createUserProfileConfirmationPageTestData.Create_User_Profile_Confirmation_Page.confirmation_message
+      );
+    this.consentVal = this.page.locator('[class$="confirmation"]').locator('..').locator('p').first();
+    this.add_another_user_link = this.page
+      .getByRole('link')
+      .getByText(
+        this.createUserProfileConfirmationPageTestData.Create_User_Profile_Confirmation_Page.add_another_user_link
+      );
+    this.back_to_manage_user_link = this.page
+      .getByRole('link')
+      .getByText(
+        this.createUserProfileConfirmationPageTestData.Create_User_Profile_Confirmation_Page.back_to_manage_user_link
+      );
   }
 
   async assertOnCreateUserProfileConfirmationPage() {
     await expect(this.confirmation_message).toBeVisible();
-    await expect(this.confirmation_message).toHaveText(
-      this.createUserProfileConfirmationPageTestData.Create_User_Profile_Confirmation_Page.confirmation_message
-    );
-    await expect(this.add_another_user_link).toHaveText(
-      this.createUserProfileConfirmationPageTestData.Create_User_Profile_Confirmation_Page.add_another_user_link
-    );
+    await expect(this.add_another_user_link).toBeVisible();
     //Back to Manage Users or Back to Manage users >> check figma and app
-    // await expect(this.back_to_manage_user_link).toHaveText(
-    //   this.createUserProfileConfirmationPageTestData.Create_User_Profile_Confirmation_Page.back_to_manage_user_link
-    // );
+    // await expect(this.back_to_manage_user_link).toBeVisible();
   }
 }

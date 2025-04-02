@@ -59,7 +59,9 @@ export default class CheckCreateUserProfilePage {
 
     //Locators
     this.back_button = this.page.getByText('Back');
-    this.page_heading = this.page.locator('.govuk-heading-l');
+    this.page_heading = this.page
+      .getByRole('heading')
+      .getByText(this.checkCreateUserProfilePageTestData.Check_Create_User_Profile_Page.page_heading);
     this.subHeading = this.page_heading.locator('..').locator('p');
     this.userTableRows = this.page.getByRole('table').getByRole('row');
     this.title_label = this.userTableRows.getByRole('cell').getByText('Title', { exact: true });
@@ -80,7 +82,7 @@ export default class CheckCreateUserProfilePage {
     this.organisation_label = this.userTableRows.getByRole('cell').getByText('Organisation', { exact: true });
     this.organisation_text = this.userTableRows.getByRole('cell').getByTestId('Organisation').locator('..');
     this.organisation_change_link = this.organisation_text.locator('..').getByText('Change');
-    this.job_title_label = this.userTableRows.getByRole('cell').getByText('JobTitle', { exact: true });
+    this.job_title_label = this.userTableRows.getByRole('cell').getByText('Job title', { exact: true });
     this.job_title_text = this.userTableRows.getByRole('cell').getByTestId('JobTitle').locator('..');
     this.job_title_change_link = this.job_title_text.locator('..').getByText('Change');
     this.role_label = this.userTableRows.getByRole('cell').getByText('Role', { exact: true });
@@ -106,9 +108,6 @@ export default class CheckCreateUserProfilePage {
 
   async assertOnCheckCreateUserProfilePage() {
     await expect(this.page_heading).toBeVisible();
-    await expect(this.page_heading).toHaveText(
-      this.checkCreateUserProfilePageTestData.Check_Create_User_Profile_Page.page_heading
-    );
     await expect(this.subHeading).toBeVisible();
     await expect(this.subHeading).toHaveText(
       this.checkCreateUserProfilePageTestData.Check_Create_User_Profile_Page.sub_heading

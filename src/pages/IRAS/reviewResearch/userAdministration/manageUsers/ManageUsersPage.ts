@@ -32,7 +32,9 @@ export default class ManageUsersPage {
     this.manageUsersPageTestData = manageUsersPageTestData;
 
     //Locators
-    this.page_heading = this.page.locator('.govuk-heading-l');
+    this.page_heading = this.page
+      .getByRole('heading')
+      .getByText(this.manageUsersPageTestData.Manage_Users_Page.page_heading);
     this.view_edit_link = this.page.getByText('View/Edit').first();
     this.users_list_rows = this.page.locator('table tbody tr');
     this.back_button = this.page.getByText('Back');
@@ -66,7 +68,6 @@ export default class ManageUsersPage {
 
   async assertOnManageUsersPage() {
     await expect(this.page_heading).toBeVisible();
-    await expect(this.page_heading).toHaveText(this.manageUsersPageTestData.Manage_Users_Page.page_heading);
   }
   async checkAlphabeticalSorting(fieldNameIndex: number) {
     let hasNextPage = true;
