@@ -17,10 +17,20 @@
     "My_Applications": "My Applications"
   },
   "Home_Page": {
-    "My_Applications": "If you need to make changes to an approved project, click on the Make changes to an approved project button to start the process.",
-    "Manage_Review_Bodies": "Manage review bodies",
-    "Manage_Users": "Manage Users"
+    "My_Applications": "You don't have any projects available in the new service"
   },
+  "Project_Details_IRAS_Page": {
+    "Back": "Back"
+  },
+  "Project_Details_Title_Page": {
+    "Back": "Back"
+  },
+  "Key_Project_Roles_Page": {
+    "Back": "Back"
+  },
+  "Research_Locations_Page": {
+    "Back": "Back"
+  }
   "System_Administration_Home_Page": {
     "Manage_Review_Bodies": "Manage review bodies",
     "Manage_Users": "Manage users"

@@ -29,7 +29,7 @@ export default class ChildrenPage {
     //Locators
     this.children_section_headings = this.page.locator('.govuk-fieldset__legend--l');
     //Children Section
-    this.children_section = this.page.locator('//legend[contains(text(),"Children")]/parent::fieldset');
+    this.children_section = this.page.locator('legend').getByText('Children').locator('..');
     this.specify_ages_checkbox = this.children_section.getByTestId(/^IQA0238/);
     this.children_unable_understand_details_checkbox = this.children_section.getByTestId(/^IQA0239/);
     this.arrangements_obtaining_consent_parental_text = this.children_section.getByTestId('IQA0240_Text');

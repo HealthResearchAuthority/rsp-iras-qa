@@ -39,9 +39,10 @@ export default class TissuePage {
     //Locators
     this.tissue_section_headings = this.page.locator('.govuk-fieldset__legend--l');
     //Human Biological Samples Section
-    this.human_biological_samples_section = this.page.locator(
-      '//legend[contains(text(),"Human biological samples")]/parent::fieldset'
-    );
+    this.human_biological_samples_section = this.page
+      .locator('legend')
+      .getByText('Human Biological Samples')
+      .locator('..');
     this.describe_type_of_material_text = this.human_biological_samples_section.getByTestId('IQA0253_Text');
     this.is_sample_collected_from_new_participants_radio =
       this.human_biological_samples_section.getByTestId(/^IQA0254/);
@@ -64,9 +65,10 @@ export default class TissuePage {
     this.how_destruction_material_undertaken_text = this.human_biological_samples_section.getByTestId('IQA0269_Text');
     this.further_details_proposed_post_study_text = this.human_biological_samples_section.getByTestId('IQA0270_Text');
     //Health-related findings Section
-    this.health_related_findings_section = this.page.locator(
-      '//legend[contains(text(),"Health-related findings")]/parent::fieldset'
-    );
+    this.health_related_findings_section = this.page
+      .locator('legend')
+      .getByText('Health-related findings')
+      .locator('..');
     this.will_project_produce_health_related_findings_radio =
       this.health_related_findings_section.getByTestId(/^IQA0271/);
     this.will_arrangements_made_notify_individuals_radio = this.health_related_findings_section.getByTestId(/^IQA0272/);
