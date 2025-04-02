@@ -368,8 +368,3 @@ export async function generateUniqueEmail(keyVal: string, prefix: string): Promi
 export async function removeUnwantedWhitespace(value: string): Promise<string> {
   return value.replaceAll(/\s+/g, ' ').trim();
 }
-// export async function removeUnwantedWhitespace(value: string | null): Promise<string> {
-//   const safe_val = value ?? 'default value';
-//   const actual_val = safe_val.replace(/\s+/g, ' ').trim();
-//   return actual_val;
-// }
