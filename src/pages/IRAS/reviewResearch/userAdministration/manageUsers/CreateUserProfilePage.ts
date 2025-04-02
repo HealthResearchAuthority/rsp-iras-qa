@@ -63,7 +63,7 @@ export default class CreateUserProfilePage {
     this.job_title_textbox_label = this.page.locator('[class="govuk-label"][for="JobTitle"] b');
     this.job_title_text = this.page.getByTestId('JobTitle');
     this.role_dropdown_label = this.page.locator('[class="govuk-label"][for="Role"] b');
-    this.role_dropdown = this.page.getByTestId('Role');
+    this.role_dropdown = this.page.locator('select[id="Role"]');
     this.committee_dropdown_label = this.page.locator('[class="govuk-label"][for="Committee"] b');
     this.committee_dropdown = this.page.getByTestId('Committee');
     this.country_checkbox_label = this.page.locator('[class="govuk-label"][for="Country"] b');

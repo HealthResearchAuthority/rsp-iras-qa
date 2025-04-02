@@ -1,6 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as checkCreateUserProfilePageTestData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageUsers/check_create_user_profile_page_data.json';
-import * as buttonTextData from '../../../../../resources/test_data/common/button_text_data.json';
 import path from 'path';
 import * as fse from 'fs-extra';
 import CommonItemsPage from '../../../../Common/CommonItemsPage';
@@ -9,8 +8,6 @@ import CommonItemsPage from '../../../../Common/CommonItemsPage';
 export default class CheckCreateUserProfilePage {
   readonly page: Page;
   readonly checkCreateUserProfilePageTestData: typeof checkCreateUserProfilePageTestData;
-  readonly buttonTextData: typeof buttonTextData;
-  // readonly selectedBreadCrumbs: Locator;
   readonly back_button: Locator;
   readonly page_heading: Locator;
   readonly subHeading: Locator;

@@ -97,7 +97,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityManageUsers @adminUser
+  @axeAccessibilityManageUsersList @adminUser @axeAccessibilityManageUsers
   Scenario: Manage Users list page
     Given I have navigated to the 'System_Administration_Home_Page'
     When I click the 'Manage_Users' link on the 'System_Administration_Home_Page'
@@ -106,7 +106,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityManageUsers @adminUser
+  @axeAccessibilityAddNewUserProfile @adminUser @axeAccessibilityManageUsers
   Scenario: Add a new user profile record page
     Given I have navigated to the 'System_Administration_Home_Page'
     When I click the 'Manage_Users' link on the 'System_Administration_Home_Page'
@@ -117,7 +117,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityManageUsers @adminUser
+  @axeAccessibilityCheckCreateUserProfile @adminUser @axeAccessibilityManageUsers
   Scenario: Check and create user profile page
     Given I have navigated to the 'System_Administration_Home_Page'
     When I click the 'Manage_Users' link on the 'System_Administration_Home_Page'
@@ -131,7 +131,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityManageUsers @adminUser
+  @axeAccessibilityCreateUserConfirmation @adminUser @axeAccessibilityManageUsers
   Scenario: Create user profile confirmation page
     Given I have navigated to the 'System_Administration_Home_Page'
     When I click the 'Manage_Users' link on the 'System_Administration_Home_Page'
@@ -147,7 +147,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityManageUsers @adminUser
+  @axeAccessibilityViewUserProfile @adminUser @axeAccessibilityManageUsers
   Scenario: View user profile page
     Given I have navigated to the 'System_Administration_Home_Page'
     When I click the 'Manage_Users' link on the 'System_Administration_Home_Page'
@@ -158,7 +158,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityManageUsers @adminUser
+  @axeAccessibilityEditUserProfile @adminUser @axeAccessibilityManageUsers
   Scenario: Edit user profile page
     Given I have navigated to the 'System_Administration_Home_Page'
     When I click the 'Manage_Users' link on the 'System_Administration_Home_Page'
