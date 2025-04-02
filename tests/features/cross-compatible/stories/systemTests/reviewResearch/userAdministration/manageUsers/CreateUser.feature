@@ -8,7 +8,7 @@ Feature: HRAPROG-394- User Administration: Manage Users
         When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
         Then I can see the add a new user profile page
 
-    @rsp-2827 @rsp-2870
+    @rsp-2827 @rsp-2870 @verifyUserCreation
     Scenario Outline: Verify the user is able to create a new user profile with valid data
         Then I can see the '<Validation_Text_Add_New_User_Profile>' ui labels on the add a new user profile page for '<Role_Dropdown>'
         And I capture the page screenshot
@@ -42,7 +42,7 @@ Feature: HRAPROG-394- User Administration: Manage Users
             | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer   | Label_Texts_Role_Not_Operations      | Role_Not_Operations | Label_Texts_Manage_Users_List     |
             | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Label_Texts_Role_Operations          | Role_Operations     | Label_Texts_Manage_Users_List     |
 
-    @rsp-2827 @rsp-2870
+    @rsp-2827 @rsp-2870 @verifyAddAnotherUser
     Scenario Outline: Verify the user is able to add another user from the Confirmation message screen using the link
         When I fill the new user profile page using '<Add_User_Profile>'
         And I click the 'Continue' button on the 'Create_User_Profile_Page'
@@ -77,12 +77,12 @@ Feature: HRAPROG-394- User Administration: Manage Users
             | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer   | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer_Another   |
             | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Valid_Data_In_All_Mandatory_Fields_Role_Operations_Another |
 
-    @rsp-2827
+    @rsp-2827 @verifyCreateUserProfileBackButton
     Scenario: Verify the user can navigate from 'Add a new user profile' page by clicking 'Back' button
         And I click the 'Back' button on the 'Create_User_Profile_Page'
         Then I can see the manage users list page
 
-    @rsp-2827
+    @rsp-2827 @verifyCheckCreateUserProfileBackButton
     Scenario Outline: Verify the user can navigate from 'Check and create user profile' page to add a new user profile page by clicking 'Back' button
         When I fill the new user profile page using '<Add_User_Profile>'
         And I click the 'Continue' button on the 'Create_User_Profile_Page'
@@ -108,7 +108,7 @@ Feature: HRAPROG-394- User Administration: Manage Users
             | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer   | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer_Another   |
             | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Valid_Data_In_All_Mandatory_Fields_Role_Operations_Another |
 
-    @rsp-2827
+    @rsp-2827 @verifyCheckCreateUserProfileChangeLinkRoleOperations
     Scenario Outline: Verify the user can navigate from 'Check and create user profile' page by clicking 'Change' button against all the fields when the role is selected as operations
         And I capture the page screenshot
         When I fill the new user profile page using '<Add_User_Profile>'
@@ -145,7 +145,7 @@ Feature: HRAPROG-394- User Administration: Manage Users
             | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Access_Required | Valid_Data_In_All_Mandatory_Fields_Role_Operations_Another |
             | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Review_Body     | Valid_Data_In_All_Mandatory_Fields_Role_Operations_Another |
 
-    @rsp-2827
+    @rsp-2827 @verifyCheckCreateUserProfileChangeLinkRoleNotOperations
     Scenario Outline: Verify the user can navigate from 'Check and create user profile' page by clicking 'Change' button against all the fields when the role is selected as reviewer
         And I capture the page screenshot
         When I fill the new user profile page using '<Add_User_Profile>'
@@ -178,7 +178,7 @@ Feature: HRAPROG-394- User Administration: Manage Users
             | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer | Job_Title     | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer_Another |
             | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer | Role          | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer_Another |
 
-    @rsp-2827
+    @rsp-2827 @verifyErrorMessagesInvalidData
     # few lines commented>> pending clarification >> email validation
     Scenario Outline: Validate error messages are displayed for invalid data in create user profile page
         Validate proper error messages are displayed for missing mandatory fields-First name,Last name,Email address-Country,Access required
@@ -220,7 +220,7 @@ Feature: HRAPROG-394- User Administration: Manage Users
             | Invalid_Email_Data_Punycode                        | Field_Error_Message_Incorrect_Format         |
             | Invalid_Email_Data_Max_Char                        | Field_Error_Message_Invalid_Character_Limit  |
 
-    @rsp-2827
+    @rsp-2827 @verifyNoErrorMessagesValidData
     # few lines commented >> pending clarification>>email validation
     Scenario Outline: Validate user is able to fill user profile page with valid data
         Validate email address field with different valid data

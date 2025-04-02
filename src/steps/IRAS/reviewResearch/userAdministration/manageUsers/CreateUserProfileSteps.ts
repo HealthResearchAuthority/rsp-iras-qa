@@ -2,6 +2,7 @@ import { createBdd } from 'playwright-bdd';
 import { test } from '../../../../../hooks/CustomFixtures';
 import path from 'path';
 import { Locator } from 'playwright';
+import { generateUniqueEmail } from '../../../../../utils/UtilFunctions';
 const pathToTestDataJson =
   './src/resources/test_data/iras/reviewResearch/userAdministration/manageUsers/create_user_profile_page_data.json';
 
@@ -15,11 +16,10 @@ When(
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
         if (key === 'email_address_text') {
           const prefix = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile.email_address_prefix;
-          const uniqueEmail = await commonItemsPage.generateUniqueEmail(dataset[key], prefix);
+          const uniqueEmail = await generateUniqueEmail(dataset[key], prefix);
           const filePath = path.resolve(pathToTestDataJson);
           await createUserProfilePage.updateUniqueEmailTestDataJson(filePath, uniqueEmail);
           const locator: Locator = createUserProfilePage[key];
-          await locator.clear();
           await locator.fill(uniqueEmail);
         } else {
           await commonItemsPage.fillUIComponent(dataset, key, createUserProfilePage);
@@ -59,16 +59,11 @@ Then('I can see the add a new user profile page', async ({ createUserProfilePage
 
 Then(
   'I can see previously filled values in the new user profile page for {string} displayed on the add a new user profile page',
-  async ({ commonItemsPage, createUserProfilePage }, datasetName: string) => {
+  async ({ createUserProfilePage }, datasetName: string) => {
     const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        await createUserProfilePage.validateSelectedValuesCreateUser(
-          dataset,
-          key,
-          createUserProfilePage,
-          commonItemsPage
-        );
+        await createUserProfilePage.validateSelectedValuesCreateUser(dataset, key, createUserProfilePage);
       }
     }
   }

@@ -358,3 +358,18 @@ function standardAcheived(doubleViolation: number, tripleViolation: number) {
     return 'is WCAG Compliant to the AAA Standard';
   }
 }
+
+export async function generateUniqueEmail(keyVal: string, prefix: string): Promise<string> {
+  const timestamp = new Date().toISOString().replace(/[-:.TZ]/g, '');
+  const domain = keyVal;
+  return `${prefix}${timestamp}${domain}`;
+}
+
+export async function removeUnwantedWhitespace(value: string): Promise<string> {
+  return value.replaceAll(/\s+/g, ' ').trim();
+}
+// export async function removeUnwantedWhitespace(value: string | null): Promise<string> {
+//   const safe_val = value ?? 'default value';
+//   const actual_val = safe_val.replace(/\s+/g, ' ').trim();
+//   return actual_val;
+// }

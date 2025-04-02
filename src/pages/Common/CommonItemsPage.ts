@@ -377,17 +377,6 @@ export default class CommonItemsPage {
     const locator: Locator = page[key];
     expect((await locator.textContent())?.trim()).toBe(dataset[key]);
   }
-  async generateUniqueEmail(keyVal: string, prefix: string): Promise<string> {
-    const timestamp = new Date().toISOString().replace(/[-:.TZ]/g, '');
-    const domain = keyVal;
-    return `${prefix}${timestamp}${domain}`;
-  }
-
-  async removeUnwantedChars(value: string | null): Promise<string> {
-    const safe_val = value ?? 'default value';
-    const actual_val = safe_val.replace(/\s+/g, ' ').trim();
-    return actual_val;
-  }
 
   async validateFieldErrorMessage<PageObject>(errorMessageFieldDataset: string, key: string, page: PageObject) {
     const locator: Locator = page[key];
@@ -401,16 +390,10 @@ export default class CommonItemsPage {
     if (typeAttribute === 'text' || typeAttribute === 'date' || typeAttribute === 'email' || typeAttribute === 'tel') {
       await locator.clear();
     } else if (typeAttribute === 'radio') {
-      if (await locator.locator('..').getByLabel(dataset[key], { exact: true }).isChecked()) {
-        await locator.locator('..').getByLabel(dataset[key], { exact: true }).uncheck();
-        expect(await locator.locator('..').getByLabel(dataset[key], { exact: true }).isChecked()).toBeFalsy();
-      }
+      await locator.locator('..').getByLabel(dataset[key], { exact: true }).uncheck();
     } else if (typeAttribute === 'checkbox') {
       for (const checkbox of dataset[key]) {
-        if (await locator.locator('..').getByLabel(checkbox, { exact: true }).isChecked()) {
-          await locator.locator('..').getByLabel(checkbox, { exact: true }).uncheck();
-          expect(await locator.locator('..').getByLabel(checkbox, { exact: true }).isChecked()).toBeFalsy();
-        }
+        await locator.locator('..').getByLabel(checkbox, { exact: true }).uncheck();
       }
     } else {
       const isSelectTag = await locator.evaluate((el) => el.tagName.toLowerCase() === 'select');

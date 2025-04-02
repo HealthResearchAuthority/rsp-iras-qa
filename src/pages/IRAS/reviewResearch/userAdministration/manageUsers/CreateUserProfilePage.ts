@@ -3,7 +3,7 @@ import * as createUserProfilePageTestData from '../../../../../resources/test_da
 import * as buttonTextData from '../../../../../resources/test_data/common/button_text_data.json';
 import path from 'path';
 import * as fse from 'fs-extra';
-import CommonItemsPage from '../../../../Common/CommonItemsPage';
+import { confirmStringNotNull, removeUnwantedWhitespace } from '../../../../../utils/UtilFunctions';
 
 //Declare Page Objects
 export default class CreateUserProfilePage {
@@ -84,16 +84,13 @@ export default class CreateUserProfilePage {
     );
   }
 
-  async validateSelectedValuesCreateUser<PageObject>(
-    dataset: JSON,
-    key: string,
-    page: PageObject,
-    commonItemsPage: CommonItemsPage
-  ) {
+  async validateSelectedValuesCreateUser<PageObject>(dataset: JSON, key: string, page: PageObject) {
     const locator: Locator = page[key];
     const typeAttribute = await locator.first().getAttribute('type');
     if (typeAttribute === 'text' || typeAttribute === 'date' || typeAttribute === 'tel') {
-      expect(await commonItemsPage.removeUnwantedChars(await locator.getAttribute('value'))).toBe(dataset[key]);
+      expect(await removeUnwantedWhitespace(confirmStringNotNull(await locator.getAttribute('value')))).toBe(
+        dataset[key]
+      );
     } else if (typeAttribute === 'radio') {
       expect(await locator.locator('..').getByLabel(dataset[key], { exact: true }).isChecked());
     } else if (typeAttribute === 'checkbox') {
@@ -104,16 +101,16 @@ export default class CreateUserProfilePage {
       if (key === 'email_address_text') {
         const filePath = path.resolve(this.pathToTestDataJson);
         const data = await fse.readJson(filePath);
-        expect(await commonItemsPage.removeUnwantedChars(await locator.getAttribute('value'))).toBe(
+        expect(await removeUnwantedWhitespace(confirmStringNotNull(await locator.getAttribute('value')))).toBe(
           data.Create_User_Profile.email_address_unique
         );
       }
     } else {
       const isSelectTag = await locator.evaluate((el) => el.tagName.toLowerCase() === 'select');
       if (isSelectTag) {
-        expect(await commonItemsPage.removeUnwantedChars(await this.selected_dropdown.getAttribute('value'))).toBe(
-          dataset[key]
-        );
+        expect(
+          await removeUnwantedWhitespace(confirmStringNotNull(await this.selected_dropdown.getAttribute('value')))
+        ).toBe(dataset[key]);
       }
     }
   }

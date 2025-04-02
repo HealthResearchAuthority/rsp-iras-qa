@@ -15,7 +15,9 @@ export default class SystemAdministrationHomePage {
     this.systemAdminHomePageTestData = systemAdminHomePageTestData;
 
     //Locators
-    this.pageHeading = this.page.locator('h1.govuk-heading-l');
+    this.pageHeading = this.page
+      .getByRole('heading')
+      .getByText(this.systemAdminHomePageTestData.System_Admin_Home_Page.pageHeading);
   }
 
   //Page Methods
@@ -25,6 +27,5 @@ export default class SystemAdministrationHomePage {
 
   async assertOnSystemAdministrationHomePage() {
     await expect(this.pageHeading).toBeVisible();
-    await expect(this.pageHeading).toHaveText(this.systemAdminHomePageTestData.System_Admin_Home_Page.pageHeading);
   }
 }

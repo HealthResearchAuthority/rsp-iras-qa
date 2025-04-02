@@ -2,7 +2,7 @@ import { expect, Locator, Page } from '@playwright/test';
 import * as checkCreateUserProfilePageTestData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageUsers/check_create_user_profile_page_data.json';
 import path from 'path';
 import * as fse from 'fs-extra';
-import CommonItemsPage from '../../../../Common/CommonItemsPage';
+import { confirmStringNotNull, removeUnwantedWhitespace } from '../../../../../utils/UtilFunctions';
 
 //Declare Page Objects
 export default class CheckCreateUserProfilePage {
@@ -59,7 +59,8 @@ export default class CheckCreateUserProfilePage {
     //Locators
     this.back_button = this.page.getByText('Back');
     this.page_heading = this.page.locator('.govuk-heading-l');
-    this.subHeading = this.page.locator('.govuk-heading-l').locator('..').locator('p');
+    this.subHeading = this.page_heading.locator('..').locator('p');
+
     this.title_label = this.page.locator('(//tr[@class="govuk-table__row"])[1]/td/b');
     this.title_text = this.page.locator('//input[@name="Title"]/..');
     this.title_change_link = this.page.locator('//input[@name="Title"]/../..//button');
@@ -110,65 +111,22 @@ export default class CheckCreateUserProfilePage {
     );
   }
   async clickOnChangeButtonRoleOperations(fieldKey: string) {
-    switch (fieldKey) {
-      case 'Title':
-        await this.title_change_link.click();
-        break;
-      case 'First_Name':
-        await this.first_name_change_link.click();
-        break;
-      case 'Last_Name':
-        await this.last_name_change_link.click();
-        break;
-      case 'Email_Address':
-        await this.email_address_change_link.click();
-        break;
-      case 'Telephone':
-        await this.telephone_change_link.click();
-        break;
-      case 'Organisation':
-        await this.organisation_change_link.click();
-        break;
-      case 'Job_Title':
-        await this.job_title_change_link.click();
-        break;
-      case 'Role':
-        await this.role_change_link.click();
-        break;
-      case 'Committee':
-        await this.committee_change_link.click();
-        break;
-      case 'Country':
-        await this.country_change_link.click();
-        break;
-      case 'Access_Required':
-        await this.access_required_change_link.click();
-        break;
-      case 'Review_Body':
-        await this.review_body_change_link.click();
-        break;
-      default:
-        throw new Error(`${fieldKey} is not a valid option`);
-    }
+    const locatorName = fieldKey.toLowerCase() + '_change_link';
+    await this[locatorName].click();
   }
 
-  async validateSelectedValues<PageObject>(
-    dataset: JSON,
-    key: string,
-    page: PageObject,
-    commonItemsPage: CommonItemsPage
-  ) {
+  async validateSelectedValues<PageObject>(dataset: JSON, key: string, page: PageObject) {
     const locator: Locator = page[key];
     if (key === 'email_address_text') {
       const filePath = path.resolve(this.pathToTestDataJson);
       const data = await fse.readJson(filePath);
-      expect(await commonItemsPage.removeUnwantedChars(await locator.textContent())).toBe(
+      expect(await removeUnwantedWhitespace(confirmStringNotNull(await locator.textContent()))).toBe(
         data.Create_User_Profile.email_address_unique
       );
     } else if (key === 'country_checkbox' || key === 'access_required_checkbox') {
-      expect(await commonItemsPage.removeUnwantedChars(await locator.textContent())).toBe(dataset[key][0]);
+      expect(await removeUnwantedWhitespace(confirmStringNotNull(await locator.textContent()))).toBe(dataset[key][0]);
     } else {
-      expect(await commonItemsPage.removeUnwantedChars(await locator.textContent())).toBe(dataset[key]);
+      expect(await removeUnwantedWhitespace(confirmStringNotNull(await locator.textContent()))).toBe(dataset[key]);
     }
   }
 }

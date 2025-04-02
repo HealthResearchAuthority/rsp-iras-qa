@@ -8,16 +8,11 @@ Then('I can see the check and create user profile page', async ({ checkCreateUse
 
 Then(
   'I can see previously filled values in the new user profile page for {string} displayed on the check and create user profile page',
-  async ({ commonItemsPage, createUserProfilePage, checkCreateUserProfilePage }, datasetName: string) => {
+  async ({ createUserProfilePage, checkCreateUserProfilePage }, datasetName: string) => {
     const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        await checkCreateUserProfilePage.validateSelectedValues(
-          dataset,
-          key,
-          checkCreateUserProfilePage,
-          commonItemsPage
-        );
+        await checkCreateUserProfilePage.validateSelectedValues(dataset, key, checkCreateUserProfilePage);
       }
     }
   }

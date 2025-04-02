@@ -17,7 +17,7 @@ export default class UserProfilePage {
 
     //Locators
     this.page_heading = this.page.locator('.govuk-heading-l');
-    this.first_change_link = this.page.locator('(//a[@class="govuk-link" and text()="Change"])[1]');
+    this.first_change_link = this.page.getByRole('link').getByText('Change').first();
   }
 
   async assertOnUserProfilePage() {
