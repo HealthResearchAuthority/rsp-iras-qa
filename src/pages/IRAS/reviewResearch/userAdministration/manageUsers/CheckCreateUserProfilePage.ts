@@ -3,11 +3,14 @@ import * as checkCreateUserProfilePageTestData from '../../../../../resources/te
 import path from 'path';
 import * as fse from 'fs-extra';
 import { confirmStringNotNull, removeUnwantedWhitespace } from '../../../../../utils/UtilFunctions';
+const pathToTestDataJson =
+  './src/resources/test_data/iras/reviewResearch/userAdministration/manageUsers/create_user_profile_page_data.json';
 
 //Declare Page Objects
 export default class CheckCreateUserProfilePage {
   readonly page: Page;
   readonly checkCreateUserProfilePageTestData: typeof checkCreateUserProfilePageTestData;
+  readonly pathToTestDataJson: typeof pathToTestDataJson;
   readonly back_button: Locator;
   readonly page_heading: Locator;
   readonly subHeading: Locator;
@@ -49,13 +52,12 @@ export default class CheckCreateUserProfilePage {
   readonly review_body_dropdown: Locator;
   readonly review_body_change_link: Locator;
   readonly create_profile_button: Locator;
-  pathToTestDataJson =
-    './src/resources/test_data/iras/reviewResearch/userAdministration/manageUsers/create_user_profile_page_data.json';
 
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page;
     this.checkCreateUserProfilePageTestData = checkCreateUserProfilePageTestData;
+    this.pathToTestDataJson = pathToTestDataJson;
 
     //Locators
     this.back_button = this.page.getByText('Back');
