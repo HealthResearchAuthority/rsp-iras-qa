@@ -100,7 +100,7 @@ export default class CommonItemsPage {
   async fillUIComponent<PageObject>(dataset: JSON, key: string, page: PageObject) {
     const locator: Locator = page[key];
     const typeAttribute = await locator.first().getAttribute('type');
-    if (typeAttribute === 'text' || typeAttribute === 'date') {
+    if (typeAttribute === 'text' || typeAttribute === 'date' || typeAttribute == 'email' || typeAttribute == 'tel') {
       await locator.fill(dataset[key]);
     } else if (typeAttribute === 'radio') {
       await locator.locator('..').getByLabel(dataset[key], { exact: true }).check();
@@ -186,35 +186,6 @@ export default class CommonItemsPage {
     await $testInfo.attach(`[step] ${$step.title}`, { body: screenshot, contentType: 'image/png' });
   }
 
-  async validateErrorMessage<PageObject>(
-    errorMessageFieldDataset: string,
-    errorMessageSummaryDataset: string,
-    key: string,
-    page: PageObject
-  ) {
-    const typeAttribute = await page[key].first().getAttribute('type');
-    await expect(
-      this.errorMessageSummaryLabel.getByText(errorMessageSummaryDataset['error_message_summary_header'])
-    ).toBeVisible();
-    await expect(this.errorMessageSummaryLabel.getByText(errorMessageSummaryDataset[key])).toBeVisible();
-    if (typeAttribute === 'checkbox') {
-      const checkboxLocator = page[key].locator('../../../..').locator(this.errorMessageFieldLabel);
-      await expect(checkboxLocator).toHaveText(errorMessageFieldDataset[key]);
-    } else if (typeAttribute === 'radio') {
-      const radioLocator = page[key].locator('../../../..').locator(this.errorMessageFieldLabel);
-      await expect(radioLocator).toHaveText(errorMessageFieldDataset[key]);
-    } else if (
-      typeAttribute === 'date' ||
-      (await page[key].first().getAttribute('class')).toLowerCase().includes('date')
-    ) {
-      const dateLocator = page[key].locator('../../../../../..').locator(this.errorMessageFieldLabel);
-      await expect(dateLocator).toHaveText(errorMessageFieldDataset[key]);
-    } else {
-      const otherLocator = page[key].locator('..').locator(this.errorMessageFieldLabel);
-      await expect(otherLocator).toHaveText(errorMessageFieldDataset[key]);
-    }
-  }
-
   async validateUIComponentValues<PageObject>(dataset: JSON, key: string, page: PageObject) {
     const locator: Locator = page[key];
     const typeAttribute = await locator.first().getAttribute('type');
@@ -232,5 +203,25 @@ export default class CommonItemsPage {
   async validateUILabels<PageObject>(dataset: JSON, key: string, page: PageObject) {
     const locator: Locator = page[key];
     expect((await locator.textContent())?.trim()).toBe(dataset[key]);
+  }
+  //This code will be removed when error summary label available on manage users screens
+  async validateErrorMessage<PageObject>(errorMessageFieldDataset: string, key: string, page: PageObject) {
+    const typeAttribute = await page[key].first().getAttribute('type');
+    if (typeAttribute === 'checkbox') {
+      const checkboxLocator = page[key].locator('../../../..').locator(this.errorMessageFieldLabel);
+      await expect(checkboxLocator).toHaveText(errorMessageFieldDataset[key]);
+    } else if (typeAttribute === 'radio') {
+      const radioLocator = page[key].locator('../../../..').locator(this.errorMessageFieldLabel);
+      await expect(radioLocator).toHaveText(errorMessageFieldDataset[key]);
+    } else if (
+      typeAttribute === 'date' ||
+      (await page[key].first().getAttribute('class')).toLowerCase().includes('date')
+    ) {
+      const dateLocator = page[key].locator('../../../../../..').locator(this.errorMessageFieldLabel);
+      await expect(dateLocator).toHaveText(errorMessageFieldDataset[key]);
+    } else {
+      const otherLocator = page[key].locator('..').locator(this.errorMessageFieldLabel);
+      await expect(otherLocator).toHaveText(errorMessageFieldDataset[key]);
+    }
   }
 }
