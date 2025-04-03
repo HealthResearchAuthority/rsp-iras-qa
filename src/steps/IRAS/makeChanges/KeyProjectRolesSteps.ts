@@ -1,5 +1,5 @@
 import { createBdd } from 'playwright-bdd';
-import { test } from '../../../hooks/CustomFixtures';
+import { expect, test } from '../../../hooks/CustomFixtures';
 
 const { Then } = createBdd(test);
 
@@ -25,7 +25,8 @@ Then(
     const dataset = keyProjectRolesPage.keyProjectRolesPageTestData[datasetName];
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        await commonItemsPage.getUiLabel(dataset, key, keyProjectRolesPage);
+        const labelVal = await commonItemsPage.getUiLabel(dataset, key, keyProjectRolesPage);
+        expect(labelVal).toBe(dataset[key]);
       }
     }
   }
