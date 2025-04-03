@@ -10,121 +10,223 @@
   },
   "Summary_Error_Message": {
     "error_message_summary_header": "There is a problem",
-    "iras_id_text": "Enter an email address in the correct format"
+    "chief_investigator_email_text": "Enter an email address in the correct format",
+    "sponsor_contact_email_text": "Enter an email address in the correct format"
   },
   "Field_Error_Message": {
-    "iras_id_text": "Enter an email address in the correct format"
+    "chief_investigator_email_text": "Enter an email address in the correct format",
+    "sponsor_contact_email_text": "Enter an email address in the correct format"
   },
   "Valid_Data_All_Fields": {
     "chief_investigator_email_text": "ci_test@test.com",
     "sponsor_contact_email_text": "sc_test@test.com"
   },
-  "Valid_Data_For_Email_Fields_1": {
+  "Valid_Email_Data": {
     "chief_investigator_email_text": "john.doe@example.com",
     "sponsor_contact_email_text": "john.doe@example.com"
   },
-  "Valid_Data_For_Email_Fields_2": {
+  "Valid_Email_Underscore": {
     "chief_investigator_email_text": "john_doe@example.com",
     "sponsor_contact_email_text": "john_doe@example.com"
   },
-  "Valid_Data_For_Email_Fields_3": {
+  "Valid_Email_Data_Hyphen": {
     "chief_investigator_email_text": "john-doe@example.com",
     "sponsor_contact_email_text": "john-doe@example.com"
   },
-  "Valid_Data_For_Email_Fields_4": {
+  "Valid_Email_Data_Plus": {
     "chief_investigator_email_text": "john+newsletter@example.com",
     "sponsor_contact_email_text": "john+newsletter@example.com"
   },
-  "Valid_Data_For_Email_Fields_5": {
+  "Valid_Email_Data_Exclamation": {
     "chief_investigator_email_text": "john!doe@example.com",
     "sponsor_contact_email_text": "john!doe@example.com"
   },
-  "Valid_Data_For_Email_Fields_6": {
+  "Valid_Email_Data_Hash": {
     "chief_investigator_email_text": "john#profile@example.com",
     "sponsor_contact_email_text": "john#profile@example.com"
   },
-  "Valid_Data_For_Email_Fields_7": {
+  "Valid_Email_Data_Dollar": {
     "chief_investigator_email_text": "john$invoice@example.com",
     "sponsor_contact_email_text": "john$invoice@example.com"
   },
-  "Valid_Data_For_Email_Fields_8": {
+  "Valid_Email_Data_Percentage": {
     "chief_investigator_email_text": "john%discount@example.com",
     "sponsor_contact_email_text": "john%discount@example.com"
   },
-  "Valid_Data_For_Email_Fields_9": {
+  "Valid_Email_Data_Ampersand": {
     "chief_investigator_email_text": "john&team@example.com",
     "sponsor_contact_email_text": "john&team@example.com"
   },
-  "Valid_Data_For_Email_Fields_10": {
+  "Valid_Email_Data_Single_Quote": {
     "chief_investigator_email_text": "john's@example.com",
     "sponsor_contact_email_text": "john's@example.com"
   },
-  "Valid_Data_For_Email_Fields_11": {
+  "Valid_Email_Data_Star": {
     "chief_investigator_email_text": "john*star@example.com",
     "sponsor_contact_email_text": "john*star@example.com"
   },
-  "Valid_Data_For_Email_Fields_12": {
+  "Valid_Email_Data_Slash": {
     "chief_investigator_email_text": "john/everyone@example.com",
     "sponsor_contact_email_text": "john/everyone@example.com"
   },
-  "Valid_Data_For_Email_Fields_13": {
+  "Valid_Email_Data_Equal_Symbol": {
     "chief_investigator_email_text": "john=equals@example.com",
     "sponsor_contact_email_text": "john=equals@example.com"
   },
-  "Valid_Data_For_Email_Fields_14": {
+  "Valid_Email_Data_Question_Mark": {
     "chief_investigator_email_text": "john?query@example.com",
     "sponsor_contact_email_text": "john?query@example.com"
   },
-  "Valid_Data_For_Email_Fields_15": {
+  "Valid_Email_Data_Cap_Symbol": {
     "chief_investigator_email_text": "john^caret@example.com",
     "sponsor_contact_email_text": "john^caret@example.com"
   },
-  "Valid_Data_For_Email_Fields_16": {
+  "Valid_Email_Data_Right_Single_Quote": {
     "chief_investigator_email_text": "john`code@example.com",
     "sponsor_contact_email_text": "john`code@example.com"
   },
-  "Valid_Data_For_Email_Fields_17": {
+  "Valid_Email_Data_Curly_Brackets": {
     "chief_investigator_email_text": "john{editor}@example.com",
     "sponsor_contact_email_text": "john{editor}@example.com"
   },
-  "Valid_Data_For_Email_Fields_18": {
+  "Valid_Email_Data_Pipe_Symbol": {
     "chief_investigator_email_text": "john|vertical@example.com",
     "sponsor_contact_email_text": "john|vertical@example.com"
   },
-  "Valid_Data_For_Email_Fields_19": {
+  "Valid_Email_Data_Tilde_Symbol": {
     "chief_investigator_email_text": "john~tilde@example.com",
     "sponsor_contact_email_text": "john~tilde@example.com"
   },
-  "Valid_Data_For_Email_Fields_20": {
+  "Valid_Email_Data_Unicode": {
     "chief_investigator_email_text": "johñ.unicode@example.com",
     "sponsor_contact_email_text": "johñ.unicode@example.com"
   },
-  "Valid_Data_For_Email_Fields_21": {
+  "Valid_Email_Data_Special_Characters": {
     "chief_investigator_email_text": "john!#$%&'*+-/=?^_`{|}~doe@example.com",
     "sponsor_contact_email_text": "john!#$%&'*+-/=?^_`{|}~doe@example.com"
   },
-  "Valid_Data_For_Email_Fields_22": {
+  "Valid_Email_Data_Hyphen_Underscore": {
     "chief_investigator_email_text": "john-_doe@example.com",
     "sponsor_contact_email_text": "john-_doe@example.com"
   },
-  "Valid_Data_For_Email_Fields_23": {
+  "Valid_Email_Data_Multiple_Unicode": {
     "chief_investigator_email_text": "johñ.döe@example.com",
     "sponsor_contact_email_text": "johñ.döe@example.com"
   },
-  "Valid_Data_For_Email_Fields_24": {
+  "Valid_Email_Data_Multiple_Sub_Domains": {
     "chief_investigator_email_text": "mail.sub.subsub.sub.example.com",
     "sponsor_contact_email_text": "mail.sub.subsub.sub.example.com"
   },
-  "Valid_Data_For_Email_Fields_25": {
+  "Valid_Email_Data_Domain": {
     "chief_investigator_email_text": "john.doe@example.photography",
     "sponsor_contact_email_text": "john.doe@example.photography"
   },
-  "Valid_Data_For_Email_Fields_26": {
+  "Valid_Email_Data_Other_Language": {
     "chief_investigator_email_text": "john@example.भारत",
     "sponsor_contact_email_text": "john@example.भारत"
   },
-  "Valid_Data_For_Email_Fields_27": {
+  "Valid_Email_Data_Number": {
     "chief_investigator_email_text": "Johndoe2@example.com",
     "sponsor_contact_email_text": "Johndoe2@example.com"
+  },
+  "Invalid_Email_Data_Start_With_Dot": {
+    "chief_investigator_email_text": ".john@example.com",
+    "sponsor_contact_email_text": ".john@example.com"
+  },
+  "Invalid_Email_Data_Double_Dot": {
+    "chief_investigator_email_text": "john..doe@example.com",
+    "sponsor_contact_email_text": "john..doe@example.com"
+  },
+  "Invalid_Email_Data_Space": {
+    "chief_investigator_email_text": "john doe@example.com",
+    "sponsor_contact_email_text": "john doe@example.com"
+  },
+  "Invalid_Email_Data_Wrong_AT": {
+    "chief_investigator_email_text": "john[at]example.",
+    "sponsor_contact_email_text": "john[at]example."
+  },
+  "Invalid_Email_Data_Less_Greater_Symbols": {
+    "chief_investigator_email_text": "john<doe>@example.com",
+    "sponsor_contact_email_text": "john<doe>@example.com"
+  },
+  "Invalid_Email_Data_Colon": {
+    "chief_investigator_email_text": "john:doe@example.com",
+    "sponsor_contact_email_text": "john:doe@example.com"
+  },
+  "Invalid_Email_Data_Semi_Colon": {
+    "chief_investigator_email_text": "john;doe@example.com",
+    "sponsor_contact_email_text": "john;doe@example.com"
+  },
+  "Invalid_Email_Data_Comma": {
+    "chief_investigator_email_text": "john,@example.com",
+    "sponsor_contact_email_text": "john,@example.com"
+  },
+  "Invalid_Email_Data_Start_With_Hyphen": {
+    "chief_investigator_email_text": "-john@example.com",
+    "sponsor_contact_email_text": "-john@example.com"
+  },
+  "Invalid_Email_Data_Hyphen_Before_Domain": {
+    "chief_investigator_email_text": "john@example-.com",
+    "sponsor_contact_email_text": "john@example-.com"
+  },
+  "Invalid_Email_Data_Double_Dot_Domain": {
+    "chief_investigator_email_text": "john.@example..com",
+    "sponsor_contact_email_text": "john.@example..com"
+  },
+  "Invalid_Email_Data_Exclamation_Domain": {
+    "chief_investigator_email_text": "john!doe@exa!mple.com",
+    "sponsor_contact_email_text": "john!doe@exa!mple.com"
+  },
+  "Invalid_Email_Data_Unicode": {
+    "chief_investigator_email_text": "johñ@example.com",
+    "sponsor_contact_email_text": "johñ@example.com"
+  },
+  "Invalid_Email_Data_Single_Quote_Before_AT": {
+    "chief_investigator_email_text": "john.doe'@example.com",
+    "sponsor_contact_email_text": "john.doe'@example.com"
+  },
+  "Invalid_Email_Data_Domain_Exceed_Max": {
+    "chief_investigator_email_text": "averyveryverylongdomainnamewithmanysubdomainsandmorecharacters.com",
+    "sponsor_contact_email_text": "averyveryverylongdomainnamewithmanysubdomainsandmorecharacters.com"
+  },
+  "Invalid_Email_Data_Local_Part_Max": {
+    "chief_investigator_email_text": "averyveryverylongemailaddressthatexceedscharacters@example.com",
+    "sponsor_contact_email_text": "averyveryverylongemailaddressthatexceedscharacters@example.com"
+  },
+  "Invalid_Email_Data_Consecutive_Dot_Domain": {
+    "chief_investigator_email_text": "john@example..com",
+    "sponsor_contact_email_text": "john@example..com"
+  },
+  "Invalid_Email_Data_Consecutive_Dot_SubDomain": {
+    "chief_investigator_email_text": "mail..sub.example.com",
+    "sponsor_contact_email_text": "mail..sub.example.com"
+  },
+  "Invalid_Email_Data_Consecutiv_Dot_Domain_SubDomain": {
+    "chief_investigator_email_text": "john..doe'@example..com",
+    "sponsor_contact_email_text": "john..doe'@example..com"
+  },
+  "Invalid_Email_Data_Emoji": {
+    "chief_investigator_email_text": "john🙂@example.com",
+    "sponsor_contact_email_text": "john🙂@example.com"
+  },
+  "Invalid_Email_Data_TLD": {
+    "chief_investigator_email_text": "john.doe@example.1234",
+    "sponsor_contact_email_text": "john.doe@example.1234"
+  },
+  "Invalid_Email_Data_Missing_AT": {
+    "chief_investigator_email_text": "john.doeexample.com",
+    "sponsor_contact_email_text": "john.doeexample.com"
+  },
+  "Invalid_Email_Data_Reserved_Domain": {
+    "chief_investigator_email_text": "john.doe@localhost",
+    "sponsor_contact_email_text": "john.doe@localhost"
+  },
+  "Invalid_Email_Data_Punycode": {
+    "chief_investigator_email_text": "john@example.xn--mgbh0fb",
+    "sponsor_contact_email_text": "john@example.xn--mgbh0fb"
+  },
+  "Invalid_Email_Data_Max_Char": {
+    "chief_investigator_email_text": "EmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExcee@example.com",
+    "sponsor_contact_email_text": "EmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExcee@example.com"
   }
 }

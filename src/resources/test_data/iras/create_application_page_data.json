@@ -12,5 +12,9 @@
   "Project_Y": {
     "name": "Project Y",
     "description": "This application is for Project Y"
+  },
+  "Project_Z": {
+    "name": "Project Z",
+    "description": "This application is for Project Z"
   }
 }
