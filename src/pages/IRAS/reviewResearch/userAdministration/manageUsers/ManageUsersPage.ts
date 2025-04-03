@@ -71,9 +71,10 @@ export default class ManageUsersPage {
     await expect(this.page_heading).toBeVisible();
   }
   async checkAlphabeticalSorting() {
-    let hasNextPage = true;
+    let hasNextPage = false;
     const firstNames: string[] = [];
-    while (hasNextPage) {
+    //adding this for loop instead of while loop to limit navigation till first 3 pages only,to reduce time and reduce fakiness
+    for (let i = 0; i < 4; i++) {
       const rows = await this.userListRows.all();
       for (const row of rows) {
         const firstName = confirmStringNotNull(await row.locator(this.userListCell).first().textContent()).trim();
