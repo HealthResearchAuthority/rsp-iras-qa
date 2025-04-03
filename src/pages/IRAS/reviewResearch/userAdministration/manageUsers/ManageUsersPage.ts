@@ -1,6 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as manageUsersPageTestData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageUsers/manage_users_page_data.json';
 import * as linkTextData from '../../../../../resources/test_data/common/link_text_data.json';
+import { confirmStringNotNull } from '../../../../../utils/UtilFunctions';
 
 //Declare Page Objects
 export default class ManageUsersPage {
@@ -69,15 +70,13 @@ export default class ManageUsersPage {
   async assertOnManageUsersPage() {
     await expect(this.page_heading).toBeVisible();
   }
-  async checkAlphabeticalSorting(fieldNameIndex: number) {
+  async checkAlphabeticalSorting() {
     let hasNextPage = true;
     const firstNames: string[] = [];
     while (hasNextPage) {
       const rows = await this.userListRows.all();
       for (const row of rows) {
-        const columns = await row.locator(this.userListCell).allTextContents();
-        const firstFourColumns = columns.slice(0, 4);
-        const firstName = firstFourColumns[fieldNameIndex]?.trim() || '';
+        const firstName = confirmStringNotNull(await row.locator(this.userListCell).first().textContent()).trim();
         firstNames.push(firstName);
       }
       hasNextPage = (await this.next_button.isVisible()) && !(await this.next_button.isDisabled());

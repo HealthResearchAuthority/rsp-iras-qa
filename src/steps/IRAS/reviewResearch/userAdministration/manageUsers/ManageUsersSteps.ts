@@ -13,17 +13,15 @@ Then('I can see the manage users list page', async ({ manageUsersPage }) => {
 
 Then(
   'I can see the list is sorted by default in the alphabetical order of the {string}',
-  async ({ manageUsersPage }, fieldName: string) => {
-    if (fieldName === 'First Name') {
-      const fieldNameIndex = 0;
-      await manageUsersPage.checkAlphabeticalSorting(fieldNameIndex);
-    }
+  async ({ manageUsersPage }) => {
+    await manageUsersPage.checkAlphabeticalSorting();
   }
 );
 
 When(
   'I can see the newly created user record should be present in the list for {string} with {string} status in the manage user page',
   async ({ manageUsersPage, createUserProfilePage }, datasetName: string, userStatus: string) => {
+    //this step should be updated to explicitly search for the record using the search functionality is developed
     const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
     const userFirstName = dataset.first_name_text;
     const userLastName = dataset.last_name_text;
