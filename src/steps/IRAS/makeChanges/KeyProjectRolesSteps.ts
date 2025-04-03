@@ -25,7 +25,7 @@ Then(
     const dataset = keyProjectRolesPage.keyProjectRolesPageTestData[datasetName];
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        await commonItemsPage.validateUILabels(dataset, key, keyProjectRolesPage);
+        await commonItemsPage.getUiLabel(dataset, key, keyProjectRolesPage);
       }
     }
   }

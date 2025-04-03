@@ -82,7 +82,7 @@ export async function readAxeResultsContents(path: string): Promise<string> {
 
 export async function getTextFromElementArray(inputArray: Locator[]): Promise<string[]> {
   const arrInputText: Array<string> = [];
-  for await (const input of inputArray) {
+  for (const input of inputArray) {
     const inputText = confirmStringNotNull(await input.textContent());
     arrInputText.push(inputText.trim());
   }

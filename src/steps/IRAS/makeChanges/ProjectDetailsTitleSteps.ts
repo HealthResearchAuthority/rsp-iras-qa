@@ -13,7 +13,7 @@ Then(
     const dataset = projectDetailsTitlePage.projectDetailsTitlePageTestData[datasetName];
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        await commonItemsPage.validateUILabels(dataset, key, projectDetailsTitlePage);
+        await commonItemsPage.getUiLabel(dataset, key, projectDetailsTitlePage);
       }
     }
   }

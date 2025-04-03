@@ -91,7 +91,11 @@ export default class CreateUserProfilePage {
       return await locator.locator('..').getByLabel(dataset[key], { exact: true }).isChecked();
     } else if (typeAttribute === 'checkbox') {
       for (const checkbox of dataset[key]) {
-        return await locator.locator('..').getByLabel(checkbox, { exact: true }).isChecked();
+        if (!(await locator.locator('..').getByLabel(checkbox, { exact: true }).isChecked())) {
+          return false;
+        } else {
+          return true;
+        }
       }
     } else if (typeAttribute === 'email') {
       if (key === 'email_address_text') {
