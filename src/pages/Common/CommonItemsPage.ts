@@ -13,6 +13,7 @@ import AdultsLackingCapacityPage from '../IRAS/questionSet/AdultsLackingCapacity
 import BookingPage from '../IRAS/questionSet/BookingPage';
 import ChildrenPage from '../IRAS/questionSet/ChildrenPage';
 import { PageObjectDataName } from '../../utils/CustomTypes';
+import { confirmStringNotNull } from '../../utils/UtilFunctions';
 
 //Declare Page Objects
 export default class CommonItemsPage {
@@ -372,9 +373,9 @@ export default class CommonItemsPage {
     }
   }
 
-  async validateUILabels<PageObject>(dataset: JSON, key: string, page: PageObject) {
+  async getUiLabel<PageObject>(dataset: JSON, key: string, page: PageObject) {
     const locator: Locator = page[key];
-    return (await locator.textContent())?.trim();
+    return confirmStringNotNull(await locator.textContent());
   }
 
   async getFieldErrorMessage<PageObject>(errorMessageFieldDataset: string, key: string, page: PageObject) {

@@ -96,7 +96,7 @@ Then(
       }
       for (const key in dataset) {
         if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-          const labelVal = await commonItemsPage.validateUILabels(dataset, key, createUserProfilePage);
+          const labelVal = await commonItemsPage.getUiLabel(dataset, key, createUserProfilePage);
           expect(labelVal).toBe(dataset[key]);
         }
       }
