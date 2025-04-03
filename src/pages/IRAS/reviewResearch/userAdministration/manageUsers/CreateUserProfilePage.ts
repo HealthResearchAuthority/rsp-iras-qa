@@ -47,31 +47,46 @@ export default class CreateUserProfilePage {
     this.createUserProfilePageTestData = createUserProfilePageTestData;
 
     //Locators
-    this.page_heading = this.page.locator('.govuk-heading-l');
-    this.title_textbox_label = this.page.locator('[class="govuk-label"][for="Title"] b');
-    this.title_text = this.page.getByTestId('Title');
-    this.first_name_textbox_label = this.page.locator('[class="govuk-label"][for="FirstName"] b');
-    this.first_name_text = this.page.getByTestId('FirstName');
-    this.last_name_textbox_label = this.page.locator('[class="govuk-label"][for="LastName"] b');
-    this.last_name_text = this.page.getByTestId('LastName');
-    this.email_address_textbox_label = this.page.locator('[class="govuk-label"][for="Email"] b');
-    this.email_address_text = this.page.getByTestId('Email');
-    this.telephone_textbox_label = this.page.locator('[class="govuk-label"][for="Telephone"] b');
-    this.telephone_text = this.page.getByTestId('Telephone');
-    this.organisation_textbox_label = this.page.locator('[class="govuk-label"][for="Organisation"] b');
-    this.organisation_text = this.page.getByTestId('Organisation');
-    this.job_title_textbox_label = this.page.locator('[class="govuk-label"][for="JobTitle"] b');
-    this.job_title_text = this.page.getByTestId('JobTitle');
-    this.role_dropdown_label = this.page.locator('[class="govuk-label"][for="Role"] b');
-    this.role_dropdown = this.page.locator('select[id="Role"]');
-    this.committee_dropdown_label = this.page.locator('[class="govuk-label"][for="Committee"] b');
-    this.committee_dropdown = this.page.getByTestId('Committee');
+    this.page_heading = this.page
+      .getByRole('heading')
+      .getByText(this.createUserProfilePageTestData.Create_User_Profile_Page.page_heading);
+    // this.title_textbox_label = this.page.locator('[class="govuk-label"][for="Title"] b');
+    // this.title_textbox_label = this.page.getByLabel('Title', { exact: true });
+    // this.title_text = this.page.getByTestId('Title');
+    this.title_text = this.page.getByLabel('Title', { exact: true });
+    // this.first_name_textbox_label = this.page.locator('[class="govuk-label"][for="FirstName"] b');
+    // this.first_name_text = this.page.getByTestId('FirstName');
+    this.first_name_text = this.page.getByLabel('First name', { exact: true });
+    // this.last_name_textbox_label = this.page.locator('[class="govuk-label"][for="LastName"] b');
+    // this.last_name_text = this.page.getByTestId('LastName');
+    this.last_name_text = this.page.getByLabel('Last name', { exact: true });
+    // this.email_address_textbox_label = this.page.locator('[class="govuk-label"][for="Email"] b');
+    // this.email_address_text = this.page.getByTestId('Email');
+    this.email_address_text = this.page.getByLabel('Email address', { exact: true });
+    // this.telephone_textbox_label = this.page.locator('[class="govuk-label"][for="Telephone"] b');
+    // this.telephone_text = this.page.getByTestId('Telephone');
+    this.telephone_text = this.page.getByLabel('Telephone', { exact: true });
+    // this.organisation_textbox_label = this.page.locator('[class="govuk-label"][for="Organisation"] b');
+    // this.organisation_text = this.page.getByTestId('Organisation');
+    this.organisation_text = this.page.getByLabel('Organisation', { exact: true });
+    // this.job_title_textbox_label = this.page.locator('[class="govuk-label"][for="JobTitle"] b');
+    // this.job_title_text = this.page.getByTestId('JobTitle');
+    this.job_title_text = this.page.getByLabel('Job title', { exact: true });
+    // this.role_dropdown_label = this.page.locator('[class="govuk-label"][for="Role"] b');
+    // this.role_dropdown = this.page.locator('select[id="Role"]');
+    this.role_dropdown = this.page.getByLabel('Role', { exact: true });
+    // this.committee_dropdown_label = this.page.locator('[class="govuk-label"][for="Committee"] b');
+    // this.committee_dropdown = this.page.getByTestId('Committee');
+    this.committee_dropdown = this.page.getByLabel('Committee', { exact: true });
     this.country_checkbox_label = this.page.locator('[class="govuk-label"][for="Country"] b');
     this.country_checkbox = this.page.locator('[name="Country"][type="checkbox"]');
+    // this.country_checkbox = this.page.getByLabel('Country', { exact: true });//
     this.access_required_checkbox_label = this.page.locator('[class="govuk-label"][for="AccessRequired"] b');
     this.access_required_checkbox = this.page.locator('[name="AccessRequired"][type="checkbox"]');
-    this.review_body_dropdown_label = this.page.locator('[class="govuk-label"][for="ReviewBody"] b');
-    this.review_body_dropdown = this.page.getByTestId('ReviewBody');
+    // this.access_required_checkbox = this.page.getByLabel('Access required', { exact: true });
+    // this.review_body_dropdown_label = this.page.locator('[class="govuk-label"][for="ReviewBody"] b');
+    // this.review_body_dropdown = this.page.getByTestId('ReviewBody');
+    this.review_body_dropdown = this.page.getByLabel('Review body', { exact: true });
     this.continue_button = this.page.locator('.govuk-button[type="submit"]');
     this.selected_dropdown = this.page.locator('select option[selected=selected]');
     this.back_button = this.page.getByText('Back');
@@ -79,9 +94,6 @@ export default class CreateUserProfilePage {
 
   async assertOnCreateUserProfilePage() {
     await expect(this.page_heading).toBeVisible();
-    await expect(this.page_heading).toHaveText(
-      this.createUserProfilePageTestData.Create_User_Profile_Page.page_heading
-    );
   }
 
   async validateSelectedValuesCreateUser<PageObject>(dataset: JSON, key: string, page: PageObject) {
