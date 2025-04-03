@@ -1,16 +1,10 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as userProfilePageData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageUsers/pages/user_profile_page_data.json';
-//import * as buttonTextData from '../../../../../resources/test_data/common/button_text_data.json';
-//import * as manageUsersPageData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageUsers/pages/manage_users_page_data.json';
-//import * as editUsersPageData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageUsers/pages/edit_user_profile_page_data.json';
 
 //Declare Page Objects
 export default class UserProfilePage {
   readonly page: Page;
   readonly userProfilePageData: typeof userProfilePageData;
-  // readonly manageUsersPageData: typeof manageUsersPageData;
-  // readonly editUsersPageData: typeof editUsersPageData;
-  //readonly buttonTextData: typeof buttonTextData;
   readonly selected_bread_crumbs: Locator;
   readonly back_button: Locator;
   readonly page_heading: Locator;
@@ -59,7 +53,6 @@ export default class UserProfilePage {
   constructor(page: Page) {
     this.page = page;
     this.userProfilePageData = userProfilePageData;
-    //this.manageUsersPageData = manageUsersPageData;
     this.page_heading = this.page.locator('.govuk-heading-l');
     this.first_change_link = this.page.locator('(//a[@class="govuk-link" and text()="Change"])[1]');
     this.title_textbox_label = this.page.locator('tbody tr:nth-child(1) td:nth-child(1) b');

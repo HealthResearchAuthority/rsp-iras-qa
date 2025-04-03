@@ -36,7 +36,11 @@ Then(
       editUserProfilePage.editUserProfilePageData.Empty_UserProfile_Mandatory_Data[invalidFieldsDatasetName];
     for (const key in invalidFieldsDataset) {
       if (Object.prototype.hasOwnProperty.call(invalidFieldsDataset, key)) {
-        await commonItemsPage.validateErrorMessage(errorMessageFieldDataset, key, editUserProfilePage);
+        await commonItemsPage.validateErrorMessageWithoutErrorHeading(
+          errorMessageFieldDataset,
+          key,
+          editUserProfilePage
+        );
       }
     }
   }
