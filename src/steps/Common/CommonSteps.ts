@@ -125,16 +125,12 @@ Then('I see something {string}', async ({ commonItemsPage }, testType: string) =
 
 Then(
   'I click the {string} button on the {string}',
-  async ({ commonItemsPage, homePage, manageUsersPage, userProfilePage }, buttonKey: string, pageKey: string) => {
+  async ({ commonItemsPage, homePage }, buttonKey: string, pageKey: string) => {
     const buttonValue = commonItemsPage.buttonTextData[pageKey][buttonKey];
     if (pageKey === 'Banner' && buttonKey === 'Login') {
       await commonItemsPage.bannerLoginBtn.click();
     } else if (pageKey === 'Home_Page' && buttonKey === 'Login') {
       await homePage.loginBtn.click();
-    } else if (pageKey === 'Manage_Users_Page' && buttonKey === 'Back') {
-      await manageUsersPage.back_button.click();
-    } else if (pageKey === 'User_Profile_Page' && buttonKey === 'Back') {
-      await userProfilePage.back_button.click();
     } else {
       await commonItemsPage.govUkButton.getByText(buttonValue, { exact: true }).click();
     }
