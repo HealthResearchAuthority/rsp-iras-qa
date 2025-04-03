@@ -27,14 +27,6 @@ export default class CreateUserProfilePage {
   readonly continue_button: Locator;
   readonly selected_dropdown: Locator;
   readonly back_button: Locator;
-  readonly country_england_checkbox_label: Locator;
-  readonly country_northern_ireland_checkbox_label: Locator;
-  readonly country_scotland_checkbox_label: Locator;
-  readonly country_wales_checkbox_label: Locator;
-  readonly access_required_swr_checkbox_label: Locator;
-  readonly access_required_rec_checkbox_label: Locator;
-  readonly access_required_cag_checkbox_label: Locator;
-  readonly access_required_ta_checkbox_label: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -56,18 +48,8 @@ export default class CreateUserProfilePage {
     this.committee_dropdown = this.page.getByLabel('Committee', { exact: true });
     this.country_checkbox_label = this.page.locator('[class="govuk-label"][for="Country"] b');
     this.country_checkbox = this.page.locator('[name="Country"][type="checkbox"]');
-    this.country_england_checkbox_label = this.page.locator('[class^="govuk-label"][for="England"]');
-    this.country_northern_ireland_checkbox_label = this.page.locator('[class^="govuk-label"][for="Northern Ireland"]');
-    this.country_scotland_checkbox_label = this.page.locator('[class^="govuk-label"][for="Scotland"]');
-    this.country_wales_checkbox_label = this.page.locator('[class^="govuk-label"][for="Wales"]');
     this.access_required_checkbox_label = this.page.locator('[class="govuk-label"][for="AccessRequired"] b');
     this.access_required_checkbox = this.page.locator('[name="AccessRequired"][type="checkbox"]');
-    this.access_required_swr_checkbox_label = this.page.locator('[class^="govuk-label"][for="Study Wide Review"]');
-    this.access_required_rec_checkbox_label = this.page.locator(
-      '[class^="govuk-label"][for="Research Ethics Committee"]'
-    );
-    this.access_required_cag_checkbox_label = this.page.locator('[class^="govuk-label"][for="CAG"]');
-    this.access_required_ta_checkbox_label = this.page.locator('[class^="govuk-label"][for="Technical Assurance"]');
     this.review_body_dropdown = this.page.getByLabel('Review body', { exact: true });
     this.continue_button = this.page.locator('.govuk-button[type="submit"]');
     this.selected_dropdown = this.page.locator('select option[selected=selected]');

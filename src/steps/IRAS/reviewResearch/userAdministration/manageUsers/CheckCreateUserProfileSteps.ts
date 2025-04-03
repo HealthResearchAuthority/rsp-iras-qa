@@ -26,7 +26,11 @@ Then(
           const data = await fse.readJson(filePath);
           expect(fieldValActual).toBe(data.Create_User_Profile.email_address_unique);
         } else if (key === 'country_checkbox' || key === 'access_required_checkbox') {
-          expect(fieldValActual).toBe(dataset[key][0]);
+          const fieldValActuals = fieldValActual.split(', ');
+          fieldValActuals.forEach((val, index) => {
+            const fieldValActual = val;
+            expect(fieldValActual).toBe(dataset[key][index]);
+          });
         } else {
           expect(fieldValActual).toBe(dataset[key]);
         }
