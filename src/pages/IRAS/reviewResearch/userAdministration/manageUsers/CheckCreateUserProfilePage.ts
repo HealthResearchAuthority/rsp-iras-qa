@@ -1,16 +1,11 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as checkCreateUserProfilePageTestData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageUsers/check_create_user_profile_page_data.json';
-import path from 'path';
-import * as fse from 'fs-extra';
 import { confirmStringNotNull, removeUnwantedWhitespace } from '../../../../../utils/UtilFunctions';
-const pathToTestDataJson =
-  './src/resources/test_data/iras/reviewResearch/userAdministration/manageUsers/create_user_profile_page_data.json';
 
 //Declare Page Objects
 export default class CheckCreateUserProfilePage {
   readonly page: Page;
   readonly checkCreateUserProfilePageTestData: typeof checkCreateUserProfilePageTestData;
-  readonly pathToTestDataJson: typeof pathToTestDataJson;
   readonly back_button: Locator;
   readonly page_heading: Locator;
   readonly subHeading: Locator;
@@ -57,7 +52,6 @@ export default class CheckCreateUserProfilePage {
   constructor(page: Page) {
     this.page = page;
     this.checkCreateUserProfilePageTestData = checkCreateUserProfilePageTestData;
-    this.pathToTestDataJson = pathToTestDataJson;
 
     //Locators
     this.back_button = this.page.getByText('Back');
@@ -120,18 +114,8 @@ export default class CheckCreateUserProfilePage {
     await this[locatorName].click();
   }
 
-  async validateSelectedValues<PageObject>(dataset: JSON, key: string, page: PageObject) {
+  async getSelectedValues<PageObject>(dataset: JSON, key: string, page: PageObject) {
     const locator: Locator = page[key];
-    if (key === 'email_address_text') {
-      const filePath = path.resolve(this.pathToTestDataJson);
-      const data = await fse.readJson(filePath);
-      expect(await removeUnwantedWhitespace(confirmStringNotNull(await locator.textContent()))).toBe(
-        data.Create_User_Profile.email_address_unique
-      );
-    } else if (key === 'country_checkbox' || key === 'access_required_checkbox') {
-      expect(await removeUnwantedWhitespace(confirmStringNotNull(await locator.textContent()))).toBe(dataset[key][0]);
-    } else {
-      expect(await removeUnwantedWhitespace(confirmStringNotNull(await locator.textContent()))).toBe(dataset[key]);
-    }
+    return await removeUnwantedWhitespace(confirmStringNotNull(await locator.textContent()));
   }
 }

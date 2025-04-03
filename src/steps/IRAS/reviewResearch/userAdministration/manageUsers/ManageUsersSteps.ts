@@ -1,5 +1,5 @@
 import { createBdd } from 'playwright-bdd';
-import { test } from '../../../../../hooks/CustomFixtures';
+import { expect, test } from '../../../../../hooks/CustomFixtures';
 import * as fse from 'fs-extra';
 import path from 'path';
 const pathToTestDataJson =
@@ -14,7 +14,9 @@ Then('I can see the manage users list page', async ({ manageUsersPage }) => {
 Then(
   'I can see the list is sorted by default in the alphabetical order of the {string}',
   async ({ manageUsersPage }) => {
-    await manageUsersPage.checkAlphabeticalSorting();
+    const firstNames: string[] = await manageUsersPage.getFirstNamesListFromUI();
+    const sortedFirstNames = [...firstNames].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
+    expect(firstNames).toEqual(sortedFirstNames);
   }
 );
 
@@ -28,7 +30,8 @@ When(
     const filePath = path.resolve(pathToTestDataJson);
     const data = await fse.readJson(filePath);
     const userEmail = data.Create_User_Profile.email_address_unique;
-    await manageUsersPage.findUserProfile(userFirstName, userLastName, userEmail, userStatus);
+    const count = await manageUsersPage.findUserProfile(userFirstName, userLastName, userEmail, userStatus);
+    expect(count).toBe(1);
   }
 );
 
@@ -38,7 +41,8 @@ Then(
     const dataset = manageUsersPage.manageUsersPageTestData.Manage_Users_Page[datasetName];
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        await commonItemsPage.validateUILabels(dataset, key, manageUsersPage);
+        const labelVal = await commonItemsPage.validateUILabels(dataset, key, manageUsersPage);
+        expect(labelVal).toBe(dataset[key]);
       }
     }
   }

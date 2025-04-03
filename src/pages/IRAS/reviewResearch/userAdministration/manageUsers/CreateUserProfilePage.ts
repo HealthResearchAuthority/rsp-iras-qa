@@ -1,18 +1,14 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as createUserProfilePageTestData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageUsers/create_user_profile_page_data.json';
 import * as buttonTextData from '../../../../../resources/test_data/common/button_text_data.json';
-import path from 'path';
 import * as fse from 'fs-extra';
 import { confirmStringNotNull, removeUnwantedWhitespace } from '../../../../../utils/UtilFunctions';
-const pathToTestDataJson =
-  './src/resources/test_data/iras/reviewResearch/userAdministration/manageUsers/create_user_profile_page_data.json';
 
 //Declare Page Objects
 export default class CreateUserProfilePage {
   readonly page: Page;
   readonly createUserProfilePageTestData: typeof createUserProfilePageTestData;
   readonly buttonTextData: typeof buttonTextData;
-  readonly pathToTestDataJson: typeof pathToTestDataJson;
   readonly page_heading: Locator;
   readonly title_text: Locator;
   readonly first_name_text: Locator;
@@ -44,7 +40,6 @@ export default class CreateUserProfilePage {
   constructor(page: Page) {
     this.page = page;
     this.createUserProfilePageTestData = createUserProfilePageTestData;
-    this.pathToTestDataJson = pathToTestDataJson;
 
     //Locators
     this.page_heading = this.page
@@ -83,35 +78,32 @@ export default class CreateUserProfilePage {
     await expect(this.page_heading).toBeVisible();
   }
 
-  async validateSelectedValuesCreateUser<PageObject>(dataset: JSON, key: string, page: PageObject) {
+  async getSelectedValuesCreateUser<PageObject>(
+    dataset: JSON,
+    key: string,
+    page: PageObject
+  ): Promise<string | boolean> {
     const locator: Locator = page[key];
     const typeAttribute = await locator.first().getAttribute('type');
     if (typeAttribute === 'text' || typeAttribute === 'date' || typeAttribute === 'tel') {
-      expect(await removeUnwantedWhitespace(confirmStringNotNull(await locator.getAttribute('value')))).toBe(
-        dataset[key]
-      );
+      return await removeUnwantedWhitespace(confirmStringNotNull(await locator.getAttribute('value')));
     } else if (typeAttribute === 'radio') {
-      expect(await locator.locator('..').getByLabel(dataset[key], { exact: true }).isChecked());
+      return await locator.locator('..').getByLabel(dataset[key], { exact: true }).isChecked();
     } else if (typeAttribute === 'checkbox') {
       for (const checkbox of dataset[key]) {
-        expect(await locator.locator('..').getByLabel(checkbox, { exact: true }).isChecked());
+        return await locator.locator('..').getByLabel(checkbox, { exact: true }).isChecked();
       }
     } else if (typeAttribute === 'email') {
       if (key === 'email_address_text') {
-        const filePath = path.resolve(this.pathToTestDataJson);
-        const data = await fse.readJson(filePath);
-        expect(await removeUnwantedWhitespace(confirmStringNotNull(await locator.getAttribute('value')))).toBe(
-          data.Create_User_Profile.email_address_unique
-        );
+        return await removeUnwantedWhitespace(confirmStringNotNull(await locator.getAttribute('value')));
       }
     } else {
       const isSelectTag = await locator.evaluate((el) => el.tagName.toLowerCase() === 'select');
       if (isSelectTag) {
-        expect(
-          await removeUnwantedWhitespace(confirmStringNotNull(await this.selected_dropdown.getAttribute('value')))
-        ).toBe(dataset[key]);
+        return await removeUnwantedWhitespace(confirmStringNotNull(await locator.getAttribute('value')));
       }
     }
+    return 'No input element found';
   }
 
   async updateUniqueEmailTestDataJson(filePath: string, updateVal: string) {

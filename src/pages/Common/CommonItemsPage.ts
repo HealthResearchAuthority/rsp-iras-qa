@@ -374,13 +374,11 @@ export default class CommonItemsPage {
 
   async validateUILabels<PageObject>(dataset: JSON, key: string, page: PageObject) {
     const locator: Locator = page[key];
-    expect((await locator.textContent())?.trim()).toBe(dataset[key]);
+    return (await locator.textContent())?.trim();
   }
 
-  async validateFieldErrorMessage<PageObject>(errorMessageFieldDataset: string, key: string, page: PageObject) {
-    const locator: Locator = page[key];
-    const otherLocator = locator.locator('..').locator(this.errorMessageFieldLabel);
-    await expect(otherLocator).toHaveText(errorMessageFieldDataset[key]);
+  async getFieldErrorMessage<PageObject>(errorMessageFieldDataset: string, key: string, page: PageObject) {
+    return page[key].locator('..').locator(this.errorMessageFieldLabel);
   }
 
   async clearUIComponent<PageObject>(dataset: JSON, key: string, page: PageObject) {

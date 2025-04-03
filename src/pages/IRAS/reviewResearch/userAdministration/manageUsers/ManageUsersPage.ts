@@ -70,7 +70,8 @@ export default class ManageUsersPage {
   async assertOnManageUsersPage() {
     await expect(this.page_heading).toBeVisible();
   }
-  async checkAlphabeticalSorting() {
+
+  async getFirstNamesListFromUI() {
     let hasNextPage = false;
     const firstNames: string[] = [];
     //adding this for loop instead of while loop to limit navigation till first 3 pages only,to reduce time and reduce fakiness
@@ -86,8 +87,7 @@ export default class ManageUsersPage {
         await this.page.waitForLoadState('domcontentloaded');
       }
     }
-    const sortedFirstNames = [...firstNames].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
-    expect(firstNames).toEqual(sortedFirstNames);
+    return firstNames;
   }
   async findUserProfile(userFirstName: string, userLastName: string, userEmail: string, userStatus: string) {
     const searchRecord = userFirstName + '|' + userLastName + '|' + userEmail + '|' + userStatus;
@@ -111,7 +111,10 @@ export default class ManageUsersPage {
         await this.page.waitForLoadState('domcontentloaded');
       }
     }
-    expect(foundRecord).toBeTruthy();
-    expect(count).toBe(1);
+    if (foundRecord) {
+      return count;
+    } else {
+      throw new Error(`No matching record found`);
+    }
   }
 }

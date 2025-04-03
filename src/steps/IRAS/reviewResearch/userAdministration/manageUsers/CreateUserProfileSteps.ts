@@ -1,6 +1,7 @@
 import { createBdd } from 'playwright-bdd';
-import { test } from '../../../../../hooks/CustomFixtures';
+import { expect, test } from '../../../../../hooks/CustomFixtures';
 import path from 'path';
+import * as fse from 'fs-extra';
 import { Locator } from 'playwright';
 import { generateUniqueEmail } from '../../../../../utils/UtilFunctions';
 const pathToTestDataJson =
@@ -63,7 +64,22 @@ Then(
     const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        await createUserProfilePage.validateSelectedValuesCreateUser(dataset, key, createUserProfilePage);
+        const fieldValActual: string | boolean = await createUserProfilePage.getSelectedValuesCreateUser(
+          dataset,
+          key,
+          createUserProfilePage
+        );
+        if (typeof fieldValActual == 'string') {
+          if (key === 'email_address_text') {
+            const filePath = path.resolve(pathToTestDataJson);
+            const data = await fse.readJson(filePath);
+            expect(fieldValActual).toBe(data.Create_User_Profile.email_address_unique);
+          } else {
+            expect(fieldValActual).toBe(dataset[key]);
+          }
+        } else if (typeof fieldValActual == 'boolean') {
+          expect(fieldValActual).toBeTruthy();
+        }
       }
     }
   }
@@ -80,7 +96,8 @@ Then(
       }
       for (const key in dataset) {
         if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-          await commonItemsPage.validateUILabels(dataset, key, createUserProfilePage);
+          const labelVal = await commonItemsPage.validateUILabels(dataset, key, createUserProfilePage);
+          expect(labelVal).toBe(dataset[key]);
         }
       }
     }
@@ -99,7 +116,12 @@ Then(
       createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[invalidFieldsDatasetName];
     for (const key in invalidFieldsDataset) {
       if (Object.prototype.hasOwnProperty.call(invalidFieldsDataset, key)) {
-        await commonItemsPage.validateFieldErrorMessage(errorMessageFieldDataset, key, createUserProfilePage);
+        const locatorVal: Locator = await commonItemsPage.getFieldErrorMessage(
+          errorMessageFieldDataset,
+          key,
+          createUserProfilePage
+        );
+        await expect(locatorVal).toHaveText(errorMessageFieldDataset[key]);
       }
     }
   }
