@@ -124,7 +124,6 @@ export default class CommonItemsPage {
     const locator: Locator = page[key];
     const typeAttribute = await locator.first().getAttribute('type');
     if (typeAttribute === 'text' || typeAttribute === 'date' || typeAttribute === 'email' || typeAttribute === 'tel') {
-      await locator.clear();
       await locator.fill(dataset[key]);
     } else if (typeAttribute === 'radio') {
       await locator.locator('..').getByLabel(dataset[key], { exact: true }).check();
