@@ -162,7 +162,6 @@ export default class ManageUsersPage {
           await this.page.waitForSelector('table tbody tr');
         } else {
           throw new Error('Reached the last page, data not found.');
-          break;
         }
       }
     }
