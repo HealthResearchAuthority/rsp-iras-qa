@@ -25,7 +25,8 @@ Then(
     const dataset = reseachLocationsPage.researchLocationsPageTestData[datasetName];
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        await commonItemsPage.validateUILabels(dataset, key, reseachLocationsPage);
+        const labelVal = await commonItemsPage.getUiLabel(dataset, key, reseachLocationsPage);
+        expect(labelVal).toBe(dataset[key]);
       }
     }
   }

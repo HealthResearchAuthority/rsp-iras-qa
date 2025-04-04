@@ -14,7 +14,7 @@ When('I edit to remove {string} mandatory field value', async ({ editUserProfile
 Then(
   'I can see the {string} ui labels on the edit user profile page',
   async ({ commonItemsPage, editUserProfilePage }, datasetName: string) => {
-    const dataset = editUserProfilePage.editUserProfilePageData[datasetName];
+    const dataset = editUserProfilePage.editUserProfilePageTestData[datasetName];
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
         await commonItemsPage.validateUILabels(dataset, key, editUserProfilePage);
@@ -31,9 +31,9 @@ Then(
     invalidFieldsDatasetName: string
   ) => {
     const errorMessageFieldDataset =
-      editUserProfilePage.editUserProfilePageData.Mandatory_Field_Error_Message[errorMessageFieldDatasetName];
+      editUserProfilePage.editUserProfilePageTestData.Mandatory_Field_Error_Message[errorMessageFieldDatasetName];
     const invalidFieldsDataset =
-      editUserProfilePage.editUserProfilePageData.Empty_UserProfile_Mandatory_Data[invalidFieldsDatasetName];
+      editUserProfilePage.editUserProfilePageTestData.Empty_UserProfile_Mandatory_Data[invalidFieldsDatasetName];
     for (const key in invalidFieldsDataset) {
       if (Object.prototype.hasOwnProperty.call(invalidFieldsDataset, key)) {
         await commonItemsPage.validateErrorMessageWithoutErrorHeading(

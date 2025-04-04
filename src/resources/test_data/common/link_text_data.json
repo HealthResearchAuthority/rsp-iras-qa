@@ -17,9 +17,9 @@
     "My_Applications": "My Applications"
   },
   "Home_Page": {
-    "My_Applications": "If you need to make changes to an approved project, click on the Make changes to an approved project button to start the process.",
-    "Manage_Review_Bodies": "Manage review bodies",
-    "Manage_Users": "Manage Users"
+    "My_Applications": "You don't have any projects available in the new service",
+    "Manage_Users": "Manage Users",
+    "Manage_Review_Bodies": "Manage review bodies"
   },
   "Project_Details_IRAS_Page": {
     "Back": "Back"
@@ -33,13 +33,17 @@
   "Research_Locations_Page": {
     "Back": "Back"
   },
-  "Manage_Review_Bodies_Page": {
-    "Add_New_Review_Body_Record": "Add a new review body record"
+  "System_Administration_Home_Page": {
+    "Manage_Review_Bodies": "Manage review bodies",
+    "Manage_Users": "Manage users"
   },
-
   "Manage_Users_Page": {
-    "Add_New_User_Profile_Record": "Add new user profile record",
+    "Add_New_User_Profile_Record": "Add a new user profile record",
     "Back": "Back"
+  },
+  "Create_User_Profile_Confirmation_Page": {
+    "Back_To_Manage_Users": "Back to Manage users",
+    "Add_another_user": "Add another user"
   },
   "User_Profile_Page": {
     "Change": "Change",

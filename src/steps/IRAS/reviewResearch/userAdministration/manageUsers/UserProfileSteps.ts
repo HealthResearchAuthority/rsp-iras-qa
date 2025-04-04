@@ -1,5 +1,5 @@
 import { createBdd } from 'playwright-bdd';
-import { test } from '../../../../../hooks/CustomFixtures';
+import { expect, test } from '../../../../../hooks/CustomFixtures';
 
 const { Then, When } = createBdd(test);
 
@@ -13,7 +13,8 @@ Then(
     const dataset = userProfilePage.userProfilePageData[datasetName];
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        await commonItemsPage.validateUILabels(dataset, key, userProfilePage);
+        const labelValue = await commonItemsPage.getUiLabel(dataset, key, userProfilePage);
+        expect(labelValue).toBe(dataset[key]);
       }
     }
   }
@@ -25,3 +26,7 @@ When(
     await userProfilePage.clickOnChangeUserProfileDetails(editUserFieldName, userRole);
   }
 );
+
+Then('I can see the user profile page', async ({ userProfilePage }) => {
+  await userProfilePage.assertOnUserProfilePage();
+});
