@@ -1,0 +1,11 @@
+{
+  "Review_Body_Audit_History_Page": {
+    "back_button": "Back",
+    "page_heading": "Audit history:"
+  },
+  "header_Texts": {
+    "date_label": "Date",
+    "event_description_label": "Event description",
+    "system_admin_label": "System administrator"
+  }
+}
