@@ -139,7 +139,7 @@ Then('I see something {string}', async ({ commonItemsPage }, testType: string) =
 Then(
   'I click the {string} button on the {string}',
   async (
-    { commonItemsPage, homePage, checkCreateUserProfilePage, manageUsersPage },
+    { commonItemsPage, homePage, checkCreateUserProfilePage, manageUsersPage, createUserProfilePage },
     buttonKey: string,
     pageKey: string
   ) => {
@@ -155,6 +155,9 @@ Then(
       await manageUsersPage.back_button.click(); //work around for now //added this as a workaround >>Back button issue
     } else if (pageKey === 'Check_Create_User_Profile_Page' && buttonKey === 'Back') {
       await checkCreateUserProfilePage.back_button.click(); //work around for now >> to click on first View/Edit link
+      //added this as a workaround >>Back button issue
+    } else if (pageKey === 'Create_User_Profile_Page' && buttonKey === 'Back') {
+      await createUserProfilePage.back_button.click(); //work around for now >> to click on first View/Edit link
       //added this as a workaround >>Back button issue
     } else {
       await commonItemsPage.govUkButton.getByText(buttonValue, { exact: true }).click();

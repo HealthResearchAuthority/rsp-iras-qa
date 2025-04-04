@@ -23,7 +23,9 @@
     "My_Applications": "My Applications"
   },
   "Home_Page": {
-    "My_Applications": "You don't have any projects available in the new service"
+    "My_Applications": "You don't have any projects available in the new service",
+    "Manage_Users": "Manage Users",
+    "Manage_Review_Bodies": "Manage review bodies"
   },
   "Project_Details_IRAS_Page": {
     "Back": "Back"
@@ -36,6 +38,16 @@
   },
   "Research_Locations_Page": {
     "Back": "Back"
+  },
+  "Manage_Users_Page": {
+    "Add_New_User_Profile_Record": "Add a new user profile record"
+  },
+  "Create_User_Profile_Confirmation_Page": {
+    "Back_To_Manage_Users": "Back to Manage users",
+    "Add_another_user": "Add another user"
+  },
+  "User_Profile_Page": {
+    "Change": "Change"
   },
   "System_Administration_Page": {
     "Manage_Review_Bodies": "Manage review bodies",
@@ -50,15 +62,5 @@
   "Create_Review_Body_Confirmation_Page": {
     "Back_To_Manage_Review_Bodies": "Back to Manage review bodies",
     "Add_Another_Review_Body": "Add another review body"
-  },
-  "Manage_Users_Page": {
-    "Add_New_User_Profile_Record": "Add a new user profile record"
-  },
-  "Create_User_Profile_Confirmation_Page": {
-    "Back_To_Manage_Users": "Back to Manage users",
-    "Add_another_user": "Add another user"
-  },
-  "User_Profile_Page": {
-    "Change": "Change"
   }
 }

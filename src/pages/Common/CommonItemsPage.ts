@@ -13,6 +13,7 @@ import AdultsLackingCapacityPage from '../IRAS/questionSet/AdultsLackingCapacity
 import BookingPage from '../IRAS/questionSet/BookingPage';
 import ChildrenPage from '../IRAS/questionSet/ChildrenPage';
 import { PageObjectDataName } from '../../utils/CustomTypes';
+import { confirmStringNotNull } from '../../utils/UtilFunctions';
 import * as fse from 'fs-extra';
 
 //Declare Page Objects
@@ -79,13 +80,13 @@ export default class CommonItemsPage {
     this.bannerQuestionSet = this.bannerNavBar.getByText(this.linkTextData.Banner.Question_Set, { exact: true });
     this.bannerSystemAdmin = this.bannerNavBar.getByText(this.linkTextData.Banner.System_Admin, { exact: true });
     this.bannerMyApplications = this.bannerNavBar.getByText(this.linkTextData.Banner.My_Applications, { exact: true });
+    this.errorMessageFieldLabel = page.locator('[class$="field-validation-error"]');
+    this.errorMessageSummaryLabel = page.locator('div[class="govuk-error-summary"]');
     //Validation Alert Box
     this.alert_box = this.page.getByRole('alert');
     this.alert_box_headings = this.alert_box.getByRole('heading');
     this.alert_box_list = this.alert_box.getByRole('list');
     this.alert_box_list_items = this.alert_box.getByRole('listitem');
-    this.errorMessageFieldLabel = page.locator('span[class="govuk-error-message field-validation-error"]');
-    this.errorMessageSummaryLabel = page.locator('div[class="govuk-error-summary"]');
   }
 
   //Page Methods
@@ -414,9 +415,32 @@ export default class CommonItemsPage {
     }
   }
 
-  async validateUILabels<PageObject>(dataset: JSON, key: string, page: PageObject) {
+  async getUiLabel<PageObject>(dataset: JSON, key: string, page: PageObject) {
     const locator: Locator = page[key];
-    expect((await locator.textContent())?.trim()).toBe(dataset[key]);
+    return confirmStringNotNull(await locator.textContent());
+  }
+
+  async getFieldErrorMessage<PageObject>(errorMessageFieldDataset: string, key: string, page: PageObject) {
+    return page[key].locator('..').locator(this.errorMessageFieldLabel);
+  }
+
+  async clearUIComponent<PageObject>(dataset: JSON, key: string, page: PageObject) {
+    const locator: Locator = page[key];
+    const typeAttribute = await locator.first().getAttribute('type');
+    if (typeAttribute === 'text' || typeAttribute === 'date' || typeAttribute === 'email' || typeAttribute === 'tel') {
+      await locator.clear();
+    } else if (typeAttribute === 'radio') {
+      await locator.locator('..').getByLabel(dataset[key], { exact: true }).uncheck();
+    } else if (typeAttribute === 'checkbox') {
+      for (const checkbox of dataset[key]) {
+        await locator.locator('..').getByLabel(checkbox, { exact: true }).uncheck();
+      }
+    } else {
+      const isSelectTag = await locator.evaluate((el) => el.tagName.toLowerCase() === 'select');
+      if (isSelectTag) {
+        await locator.selectOption({ label: '' });
+      }
+    }
   }
 
   pathToTestDataJson =
@@ -464,33 +488,6 @@ export default class CommonItemsPage {
               await this.page.locator('select option[selected=selected]').getAttribute('value')
             )
           ).toBe(dataset[key]);
-        }
-      }
-    }
-  }
-
-  async clearUIComponent<PageObject>(dataset: JSON, key: string, page: PageObject) {
-    const locator: Locator = page[key];
-    const typeAttribute = await locator.first().getAttribute('type');
-    if (typeAttribute === 'text' || typeAttribute === 'date' || typeAttribute === 'email' || typeAttribute === 'tel') {
-      await locator.clear();
-    } else if (typeAttribute === 'radio') {
-      if (await locator.locator('..').getByLabel(dataset[key], { exact: true }).isChecked()) {
-        await locator.locator('..').getByLabel(dataset[key], { exact: true }).uncheck();
-        expect(await locator.locator('..').getByLabel(dataset[key], { exact: true }).isChecked()).toBeFalsy();
-      }
-    } else if (typeAttribute === 'checkbox') {
-      for (const checkbox of dataset[key]) {
-        if (await locator.locator('..').getByLabel(checkbox, { exact: true }).isChecked()) {
-          await locator.locator('..').getByLabel(checkbox, { exact: true }).uncheck();
-          expect(await locator.locator('..').getByLabel(checkbox, { exact: true }).isChecked()).toBeFalsy();
-        }
-      }
-    } else {
-      const isSelectTag = await locator.evaluate((el) => el.tagName.toLowerCase() === 'select');
-      if (isSelectTag) {
-        {
-          await locator.selectOption({ label: '' });
         }
       }
     }

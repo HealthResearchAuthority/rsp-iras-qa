@@ -38,26 +38,26 @@
   "Key_Project_Roles_Page": {
     "Save_Continue": "Save and continue"
   },
-  "Create_Review_Body_Page": {
-    "Continue": "Continue",
-    "Back": "Back"
-  },
-  "Check_And_Create_Review_Body_Page": {
-    "Create_Profile": "Create profile",
-    "Back": "Back"
-  },
   "Create_User_Profile_Page": {
     "Continue": "Continue",
     "Back": "Back"
   },
   "Check_Create_User_Profile_Page": {
-    "Create_Profile": "Create profile",
+    "Create_Profile": "Create Profile",
     "Back": "Back"
   },
   "User_Profile_Page": {
     "Disable_User_Record": "Disable user record"
   },
   "Manage_Users_Page": {
+    "Back": "Back"
+  },
+  "Create_Review_Body_Page": {
+    "Continue": "Continue",
+    "Back": "Back"
+  },
+  "Check_And_Create_Review_Body_Page": {
+    "Create_Profile": "Create profile",
     "Back": "Back"
   }
 }
