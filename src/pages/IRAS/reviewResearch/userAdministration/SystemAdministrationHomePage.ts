@@ -8,6 +8,8 @@ export default class SystemAdministrationHomePage {
   readonly pageHeading: Locator;
   readonly manageReviewbodiesLink: Locator;
   readonly manageUsersLink: Locator;
+  readonly manage_review_bodies_hint_label: Locator;
+  readonly manage_users_hint_label: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -18,6 +20,8 @@ export default class SystemAdministrationHomePage {
     this.pageHeading = this.page
       .getByRole('heading')
       .getByText(this.systemAdminHomePageTestData.System_Admin_Home_Page.pageHeading);
+    this.manage_review_bodies_hint_label = this.page.locator('p[class="govuk-body"]').first();
+    this.manage_users_hint_label = this.page.locator('p[class="govuk-body"]').nth(1);
   }
 
   //Page Methods
@@ -27,5 +31,6 @@ export default class SystemAdministrationHomePage {
 
   async assertOnSystemAdministrationHomePage() {
     await expect(this.pageHeading).toBeVisible();
+    await expect(this.pageHeading).toHaveText(this.systemAdminHomePageTestData.System_Admin_Home_Page.pageHeading);
   }
 }
