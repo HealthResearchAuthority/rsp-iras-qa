@@ -2,7 +2,7 @@ import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../../hooks/CustomFixtures';
 import path from 'path';
 import * as fse from 'fs-extra';
-import { Locator } from 'playwright';
+import { Locator } from 'playwright/test';
 import { generateUniqueEmail } from '../../../../../utils/UtilFunctions';
 const pathToTestDataJson =
   './src/resources/test_data/iras/reviewResearch/userAdministration/manageUsers/create_user_profile_page_data.json';
