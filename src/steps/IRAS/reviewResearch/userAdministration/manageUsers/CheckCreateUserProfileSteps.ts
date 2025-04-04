@@ -28,8 +28,7 @@ Then(
         } else if (key === 'country_checkbox' || key === 'access_required_checkbox') {
           const fieldValActuals = fieldValActual.split(', ');
           fieldValActuals.forEach((val, index) => {
-            const fieldValActual = val;
-            expect(fieldValActual).toBe(dataset[key][index]);
+            expect(val).toBe(dataset[key][index]);
           });
         } else {
           expect(fieldValActual).toBe(dataset[key]);

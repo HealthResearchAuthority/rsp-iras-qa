@@ -86,7 +86,7 @@ export default class CreateUserProfilePage {
     } else {
       const isSelectTag = await locator.evaluate((el) => el.tagName.toLowerCase() === 'select');
       if (isSelectTag) {
-        return await removeUnwantedWhitespace(confirmStringNotNull(await locator.getAttribute('value')));
+        return await removeUnwantedWhitespace(confirmStringNotNull(await locator.inputValue()));
       }
     }
     return 'No input element found';
@@ -102,5 +102,13 @@ export default class CreateUserProfilePage {
         throw new Error(`${error} Error updating unique email to testdata json file:`);
       }
     })();
+  }
+
+  async selectRoleDropdownAndGetValue(dataset: JSON, key: string) {
+    const dropdown = this.role_dropdown;
+    await dropdown.scrollIntoViewIfNeeded();
+    await dropdown.selectOption({ value: dataset[key] });
+    const selectedValue = await dropdown.inputValue();
+    return selectedValue;
   }
 }

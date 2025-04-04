@@ -43,12 +43,27 @@ When(
 );
 
 Then(
-  'I clear the previously entered values on the add a new user profile page for {string}',
-  async ({ createUserProfilePage, commonItemsPage }, datasetName: string) => {
+  'I clear the previously entered values on the add a new user profile page for {string} for {string}',
+  async ({ createUserProfilePage, commonItemsPage }, datasetName: string, datasetValName: string) => {
     const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
-    for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        await commonItemsPage.clearUIComponent(dataset, key, createUserProfilePage);
+    if (datasetValName === 'Role_Operations') {
+      const checkboxArray = await commonItemsPage.govUkCheckboxes.locator('input').all();
+      for (let index = 0; index < checkboxArray.length; index++) {
+        await checkboxArray[index].scrollIntoViewIfNeeded();
+        await checkboxArray[index].uncheck();
+      }
+      for (const key in dataset) {
+        if (key !== 'country_checkbox' && key !== 'access_required_checkbox') {
+          if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+            await commonItemsPage.clearUIComponent(dataset, key, createUserProfilePage);
+          }
+        }
+      }
+    } else {
+      for (const key in dataset) {
+        if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+          await commonItemsPage.clearUIComponent(dataset, key, createUserProfilePage);
+        }
       }
     }
   }
@@ -92,12 +107,15 @@ Then(
     const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
     if (datasetValName === 'Role_Operations') {
       for (const key in datasetVal) {
-        await commonItemsPage.fillUIComponent(datasetVal, key, createUserProfilePage);
+        if (key === 'role_dropdown') {
+          const selectedValue = await createUserProfilePage.selectRoleDropdownAndGetValue(datasetVal, key);
+          expect(selectedValue).toBe(datasetVal[key]);
+        }
       }
       for (const key in dataset) {
         if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-          const labelVal = await commonItemsPage.getUiLabel(dataset, key, createUserProfilePage);
-          expect(labelVal).toBe(dataset[key]);
+          const labelValue = await commonItemsPage.getUiLabel(dataset, key, createUserProfilePage);
+          expect(labelValue).toBe(dataset[key]);
         }
       }
     }
@@ -116,12 +134,12 @@ Then(
       createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[invalidFieldsDatasetName];
     for (const key in invalidFieldsDataset) {
       if (Object.prototype.hasOwnProperty.call(invalidFieldsDataset, key)) {
-        const locatorVal: Locator = await commonItemsPage.getFieldErrorMessage(
+        const locatorValue: Locator = await commonItemsPage.getFieldErrorMessage(
           errorMessageFieldDataset,
           key,
           createUserProfilePage
         );
-        await expect(locatorVal).toHaveText(errorMessageFieldDataset[key]);
+        await expect(locatorValue).toHaveText(errorMessageFieldDataset[key]);
       }
     }
   }

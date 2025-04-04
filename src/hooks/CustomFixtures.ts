@@ -61,6 +61,7 @@ type CustomFixtures = {
   keyProjectRolesPage: KeyProjectRolesPage;
   reviewYourApplicationPage: ReviewYourApplicationPage;
   systemAdministrationPage: SystemAdministrationPage;
+  systemAdministrationHomePage: SystemAdministrationHomePage;
   manageReviewBodiesPage: ManageReviewBodiesPage;
   createReviewBodyPage: CreateReviewBodyPage;
   checkCreateReviewBodyPage: CheckCreateReviewBodyPage;
@@ -168,6 +169,10 @@ export const test = base.extend<CustomFixtures>({
     await use(new SystemAdministrationPage(page));
   },
 
+  systemAdministrationHomePage: async ({ page }, use) => {
+    await use(new SystemAdministrationHomePage(page));
+  },
+
   createUserProfilePage: async ({ page }, use) => {
     await use(new CreateUserProfilePage(page));
   },
@@ -206,6 +211,7 @@ export const test = base.extend<CustomFixtures>({
 
   createReviewBodyConfirmationPage: async ({ page }, use) => {
     await use(new CreateReviewBodyConfirmationPage(page));
+  },
   confirmationPage: async ({ page }, use) => {
     await use(new ConfirmationPage(page));
   },
