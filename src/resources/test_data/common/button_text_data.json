@@ -47,9 +47,13 @@
     "Back": "Back"
   },
   "User_Profile_Page": {
-    "Disable_User_Record": "Disable user record"
+    "Disable_User_Record": "Disable user record",
+    "Back": "Back"
   },
   "Manage_Users_Page": {
     "Back": "Back"
+  },
+  "Edit_User_Profile_Page": {
+    "Save": "Save"
   }
 }
