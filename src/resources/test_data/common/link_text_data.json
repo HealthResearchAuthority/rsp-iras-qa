@@ -14,6 +14,12 @@
     "Booking": "Booking"
   },
   "Banner": {
+    "Home": "Home",
+    "Review_Applications": "Review Applications",
+    "Admin": "Admin",
+    "Manage_Users": "Manage Users",
+    "Question_Set": "Question Set",
+    "System_Admin": "System Admin",
     "My_Applications": "My Applications"
   },
   "Home_Page": {
@@ -31,12 +37,15 @@
   "Research_Locations_Page": {
     "Back": "Back"
   },
-  "System_Administration_Home_Page": {
+  "System_Administration_Page": {
     "Manage_Review_Bodies": "Manage review bodies",
     "Manage_Users": "Manage users"
   },
   "Manage_Review_Bodies_Page": {
     "Add_New_Review_Body_Record": "Add a new review body record"
+  },
+  "Check_Create_Review_Body_Page": {
+    "Change": "Change"
   },
   "Create_Review_Body_Confirmation_Page": {
     "Back_To_Manage_Review_Bodies": "Back to Manage review bodies",

@@ -16,7 +16,6 @@ When(
 );
 
 Then('I can see the Add a new review body page', async ({ createReviewBodyPage }) => {
-  //update
   await createReviewBodyPage.assertOnCreateReviewbodyPage();
 });
 
@@ -26,8 +25,8 @@ Then('I can see the Add new review body page for {string}', async ({ createRevie
   await createReviewBodyPage.assertOnCreateReviewbodyPage();
   const actualOrganisationName = await createReviewBodyPage.organisation_name_text.nth(1).textContent();
   const actualCountry = await createReviewBodyPage.countryVal.textContent(); //selected country
-  const actualEmailAddress = await createReviewBodyPage.emailAddressVal.textContent();
-  const actualDescription = await createReviewBodyPage.descriptionVal.textContent();
+  const actualEmailAddress = await createReviewBodyPage.email_address_text.textContent();
+  const actualDescription = await createReviewBodyPage.description_text.textContent();
   expect(actualOrganisationName).toBe(dataset.organisation_name);
   expect(actualCountry).toBe(dataset.country);
   expect(actualEmailAddress).toBe(dataset.email_address);

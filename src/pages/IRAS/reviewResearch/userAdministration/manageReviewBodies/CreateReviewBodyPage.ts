@@ -8,10 +8,9 @@ export default class CreateReviewBodyPage {
   readonly createReviewBodyPageData: typeof createReviewBodyPageData;
   readonly buttonTextData: typeof buttonTextData;
   readonly page_heading: Locator;
-  readonly organisation_name_label: Locator;
   readonly organisation_name_text: Locator;
   readonly organisationNameError: Locator;
-  readonly countryLbl: Locator;
+  // readonly country_label: Locator;
   readonly countryVal: Locator;
   readonly countryError: Locator;
   readonly countryOption1Lbl: Locator;
@@ -19,69 +18,55 @@ export default class CreateReviewBodyPage {
   readonly countryOption3Lbl: Locator;
   readonly countryOption4Lbl: Locator;
   readonly emailAddressLbl: Locator;
-  readonly emailAddressVal: Locator;
+  readonly email_address_text: Locator;
   readonly emailAddressError: Locator;
   readonly descriptionLbl: Locator;
-  readonly descriptionVal: Locator;
-  readonly completeBtn: Locator;
+  readonly description_text: Locator;
+  readonly continueBtn: Locator;
+  readonly country_fieldset: Locator;
+  readonly country_checkbox: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page;
     this.createReviewBodyPageData = createReviewBodyPageData;
+    this.buttonTextData = buttonTextData;
 
     //Locators
-    this.page_heading = this.page.getByTestId('title'); // update
-    this.organisation_name_label = this.page.getByTestId('Name').locator('label'); // update
-    this.organisation_name_text = this.page.getByTestId('Name').locator('label'); // update
+    this.page_heading = this.page
+      .getByRole('heading')
+      .getByText(this.createReviewBodyPageData.Create_Review_Body_Page.page_heading);
+    this.organisation_name_text = this.page.getByLabel(
+      this.createReviewBodyPageData.Create_Review_Body_Page.organisation_name_label,
+      { exact: true }
+    );
     this.organisationNameError = this.page.getByTestId('Name').locator('label'); // update
-    this.countryLbl = this.page.getByTestId('app-name'); // update
-    this.countryVal = this.page.getByTestId('app-name'); // update selected country here
+    this.country_fieldset = this.page.getByRole('group', {
+      name: this.createReviewBodyPageData.Create_Review_Body_Page.country_label,
+      exact: true,
+    });
+    this.country_checkbox = this.country_fieldset.getByRole('checkbox');
     this.countryError = this.page.getByTestId('app-name'); // update
-    this.countryOption1Lbl = this.page.getByTestId('Description').locator('label'); // update
-    this.countryOption2Lbl = this.page.getByTestId('app-description'); // update
-    this.countryOption3Lbl = this.page.getByTestId('app-description'); // update
-    this.countryOption4Lbl = this.page.getByTestId('app-description'); // update
-    this.emailAddressLbl = this.page.getByTestId('app-description'); // update
-    this.emailAddressVal = this.page.getByTestId('app-description'); // update
+    this.email_address_text = this.page.getByLabel(
+      this.createReviewBodyPageData.Create_Review_Body_Page.email_address_label,
+      { exact: true }
+    );
     this.emailAddressError = this.page.getByTestId('app-description'); // update
-    this.descriptionLbl = this.page.getByTestId('app-description'); // update
-    this.descriptionVal = this.page.getByTestId('app-description'); // update
-    this.completeBtn = this.page
-      .locator('.gem-c-button')
-      .and(this.page.getByText(this.buttonTextData.Create_Review_Body_Page.Complete, { exact: true }));
+    this.description_text = this.page.getByLabel(
+      this.createReviewBodyPageData.Create_Review_Body_Page.description_label
+    );
+    this.continueBtn = this.page
+      .getByRole('button')
+      .getByText(this.buttonTextData.Create_Review_Body_Page.Continue, { exact: true });
   }
 
   //Page Methods
   async goto() {
-    await this.page.goto('application/startnewapplication'); //update
+    await this.page.goto('reviewbody/create');
   }
 
   async assertOnCreateReviewbodyPage() {
     await expect(this.page_heading).toBeVisible();
-    await expect(this.page_heading).toHaveText(this.createReviewBodyPageData.Create_Review_Body_Page.page_heading);
-    await expect(this.organisation_name_label).toHaveText(
-      this.createReviewBodyPageData.Create_Review_Body_Page.organisation_name_label
-    );
-    await expect(this.countryLbl).toHaveText(this.createReviewBodyPageData.Create_Review_Body_Page.country_label);
-    await expect(this.countryOption1Lbl).toHaveText(
-      this.createReviewBodyPageData.Create_Review_Body_Page.country_option1_label
-    );
-    await expect(this.countryOption2Lbl).toHaveText(
-      this.createReviewBodyPageData.Create_Review_Body_Page.country_option2_label
-    );
-    await expect(this.countryOption3Lbl).toHaveText(
-      this.createReviewBodyPageData.Create_Review_Body_Page.country_option3_label
-    );
-    await expect(this.countryOption4Lbl).toHaveText(
-      this.createReviewBodyPageData.Create_Review_Body_Page.country_option4_label
-    );
-    await expect(this.emailAddressLbl).toHaveText(
-      this.createReviewBodyPageData.Create_Review_Body_Page.email_address_label
-    );
-    await expect(this.descriptionLbl).toHaveText(
-      this.createReviewBodyPageData.Create_Review_Body_Page.description_label
-    );
   }
 
   async checkErrorMessageOrganisationName() {
@@ -97,6 +82,7 @@ export default class CreateReviewBodyPage {
       this.createReviewBodyPageData.Create_Review_Body['Validation'].error_message
     );
   }
+
   async checkErrorMessageEmailAddress() {
     await expect(this.emailAddressError).toBeVisible();
     await expect(this.emailAddressError).toHaveText(

@@ -39,10 +39,10 @@
     "Save_Continue": "Save and continue"
   },
   "Create_Review_Body_Page": {
-    "Complete": "Complete",
+    "Continue": "Continue",
     "Back": "Back"
   },
-  "Check_Create_Review_Body_Page": {
+  "Check_And_Create_Review_Body_Page": {
     "Create_Profile": "Create profile",
     "Back": "Back"
   },
@@ -51,7 +51,7 @@
     "Back": "Back"
   },
   "Check_Create_User_Profile_Page": {
-    "Create_Profile": "Create Profile",
+    "Create_Profile": "Create profile",
     "Back": "Back"
   },
   "User_Profile_Page": {

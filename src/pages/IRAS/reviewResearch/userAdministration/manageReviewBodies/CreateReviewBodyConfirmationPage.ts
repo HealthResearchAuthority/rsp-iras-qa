@@ -8,10 +8,10 @@ export default class CreateReviewBodyConfirmationPage {
   readonly createReviewBodyConfirmationPageData: typeof createReviewBodyConfirmationPageData;
   readonly buttonTextData: typeof buttonTextData;
   readonly selectedBreadCrumbs: Locator;
-  readonly confirmationMessageContent: Locator;
-  readonly consentVal: Locator;
-  readonly addAnotherReviewBodyLink: Locator;
-  readonly backToManageReviewBodiesLink: Locator;
+  readonly confirmation_panel_heading: Locator;
+  readonly confirmation_email_note: Locator;
+  readonly add_another_review_body_link: Locator;
+  readonly back_manage_review_bodies_link: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -20,28 +20,32 @@ export default class CreateReviewBodyConfirmationPage {
 
     //Locators
     this.selectedBreadCrumbs = this.page.getByTestId('title'); // update
-    this.confirmationMessageContent = this.page.getByTestId('Name').locator('label'); // update
-    this.consentVal = this.page.getByTestId('app-name'); // update
-    this.addAnotherReviewBodyLink = this.page.getByTestId('Name').locator('label'); // update
-    this.backToManageReviewBodiesLink = this.page.getByTestId('Name').locator('label'); // update
+    this.confirmation_panel_heading = this.page
+      .getByRole('heading')
+      .getByText(this.createReviewBodyConfirmationPageData.Create_Review_Body_Confirmation_Page.confirmation_message, {
+        exact: true,
+      });
+    this.confirmation_email_note = this.page.getByRole('paragraph');
+    this.add_another_review_body_link = this.page
+      .getByRole('link')
+      .getByText(
+        this.createReviewBodyConfirmationPageData.Create_Review_Body_Confirmation_Page.add_another_review_body_link
+      );
+    this.back_manage_review_bodies_link = this.page
+      .getByRole('link')
+      .getByText(
+        this.createReviewBodyConfirmationPageData.Create_Review_Body_Confirmation_Page.back_manage_review_bodies_link
+      );
   }
 
   //Page Methods
   async goto() {
-    await this.page.goto('application/startnewapplication'); //update
+    await this.page.goto('reviewbody/submit');
   }
 
   async assertOnCreateReviewbodyConfirmationPage() {
-    //update
-    await expect(this.confirmationMessageContent).toBeVisible();
-    await expect(this.confirmationMessageContent).toHaveText(
-      this.createReviewBodyConfirmationPageData.Create_Review_Body_Confirmation_Page.confirmation_message
-    );
-    await expect(this.addAnotherReviewBodyLink).toHaveText(
-      this.createReviewBodyConfirmationPageData.Create_Review_Body_Confirmation_Page.add_another_review_body_link
-    );
-    await expect(this.backToManageReviewBodiesLink).toHaveText(
-      this.createReviewBodyConfirmationPageData.Create_Review_Body_Confirmation_Page.back_to_manage_review_bodies_link
-    );
+    await expect(this.confirmation_panel_heading).toBeVisible();
+    await expect(this.add_another_review_body_link).toBeVisible();
+    await expect(this.back_manage_review_bodies_link).toBeVisible();
   }
 }

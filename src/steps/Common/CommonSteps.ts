@@ -26,7 +26,7 @@ Then('I capture the page screenshot', async () => {});
 
 Given(
   'I have navigated to the {string}',
-  async ({ loginPage, homePage, createApplicationPage, systemAdministrationHomePage }, page: string) => {
+  async ({ loginPage, homePage, createApplicationPage, systemAdministrationPage }, page: string) => {
     switch (page) {
       case 'Login_Page':
         await homePage.goto();
@@ -41,9 +41,9 @@ Given(
         await createApplicationPage.goto();
         await createApplicationPage.assertOnCreateApplicationPage();
         break;
-      case 'System_Administration_Home_Page':
-        await systemAdministrationHomePage.goto();
-        await systemAdministrationHomePage.assertOnSystemAdministrationHomePage();
+      case 'System_Administration_Page':
+        await systemAdministrationPage.goto();
+        await systemAdministrationPage.assertOnSystemAdministrationPage();
         break;
       default:
         throw new Error(`${page} is not a valid option`);
@@ -53,7 +53,10 @@ Given(
 
 When(
   'I can see the {string}',
-  async ({ loginPage, homePage, createApplicationPage, proceedApplicationPage }, page: string) => {
+  async (
+    { loginPage, homePage, createApplicationPage, proceedApplicationPage, systemAdministrationPage },
+    page: string
+  ) => {
     switch (page) {
       case 'Login_Page':
         await loginPage.assertOnLoginPage();
@@ -67,7 +70,9 @@ When(
       case 'Proceed_Application_Page':
         await proceedApplicationPage.assertOnProceedApplicationPage();
         break;
-
+      case 'System_Administration_Page':
+        await systemAdministrationPage.assertOnSystemAdministrationPage();
+        break;
       default:
         throw new Error(`${page} is not a valid option`);
     }
@@ -174,17 +179,13 @@ Then(
 Given(
   'I click the {string} link on the {string}',
   async (
-    { commonItemsPage, homePage, manageUsersPage, userProfilePage, createUserProfileConfirmationPage },
+    { commonItemsPage, manageUsersPage, userProfilePage, createUserProfileConfirmationPage },
     linkKey: string,
     pageKey: string
   ) => {
     const linkValue = commonItemsPage.linkTextData[pageKey][linkKey];
     if (pageKey === 'Progress_Bar') {
       await commonItemsPage.qSetProgressBarStageLink.getByText(linkValue, { exact: true }).click();
-    } else if (pageKey === 'Banner' && linkKey === 'My_Applications') {
-      await commonItemsPage.bannerMyApplications.click();
-    } else if (pageKey === 'Home_Page' && linkKey === 'My_Applications') {
-      await homePage.myApplicationsLink.click();
     } else if (pageKey === 'Manage_Users_Page' && linkKey === 'View_Edit') {
       await manageUsersPage.view_edit_link.click(); //work around for now >> to click on first View/Edit link
     } else if (pageKey === 'User_Profile_Page' && linkKey === 'Change') {
@@ -197,21 +198,14 @@ Given(
   }
 );
 
-Given(
-  'I can see a {string} link on the {string}',
-  async ({ commonItemsPage, homePage }, linkKey: string, pageKey: string) => {
-    const linkValue = commonItemsPage.linkTextData[pageKey][linkKey];
-    if (pageKey === 'Progress_Bar') {
-      await expect(commonItemsPage.qSetProgressBarStageLink.getByText(linkValue, { exact: true })).toBeVisible();
-    } else if (pageKey === 'Banner' && linkKey === 'My_Applications') {
-      await expect(commonItemsPage.bannerMyApplications).toBeVisible();
-    } else if (pageKey === 'Home_Page' && linkKey === 'My_Applications') {
-      await expect(homePage.myApplicationsLink).toBeVisible();
-    } else {
-      await expect(commonItemsPage.govUkLink.getByText(linkValue, { exact: true })).toBeVisible();
-    }
+Given('I can see a {string} link on the {string}', async ({ commonItemsPage }, linkKey: string, pageKey: string) => {
+  const linkValue = commonItemsPage.linkTextData[pageKey][linkKey];
+  if (pageKey === 'Progress_Bar') {
+    await expect(commonItemsPage.qSetProgressBarStageLink.getByText(linkValue, { exact: true })).toBeVisible();
+  } else {
+    await expect(commonItemsPage.govUkLink.getByText(linkValue, { exact: true })).toBeVisible();
   }
-);
+});
 
 Then(
   'I generate {string} test data for {string}',

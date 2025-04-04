@@ -3,15 +3,11 @@
     "selected_tab_top": "Manage review bodies",
     "back_button": "Back",
     "heading": "Check and create review body",
-    "sub_heading": "Check the information here is correct before creating the profile.",
-    "organisation_name_label": "Organisation Name",
-    "organisation_name_change_link": "Change",
+    "guidance_text": "Check the information here is correct before creating the profile.",
+    "sub_heading": "Review body details",
+    "organisation_name_label": "Organisation name",
     "country_label": "Country",
-    "country_change_link": "Change",
     "email_address_label": "Email address",
-    "email_address_change_link": "Change",
-    "description_label": "Description",
-    "description_change_link": "Change",
-    "create_profile_button": "Create profile"
+    "description_label": "Description"
   }
 }
