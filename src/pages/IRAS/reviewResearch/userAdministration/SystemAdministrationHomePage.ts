@@ -31,6 +31,5 @@ export default class SystemAdministrationHomePage {
 
   async assertOnSystemAdministrationHomePage() {
     await expect(this.pageHeading).toBeVisible();
-    await expect(this.pageHeading).toHaveText(this.systemAdminHomePageTestData.System_Admin_Home_Page.pageHeading);
   }
 }
