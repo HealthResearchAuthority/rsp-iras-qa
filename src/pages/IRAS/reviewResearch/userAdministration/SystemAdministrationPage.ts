@@ -11,7 +11,6 @@ export default class SystemAdministrationPage {
   readonly linkTextData: typeof linkTextData;
   readonly mainPageContent: Locator;
   readonly pageHeading: Locator;
-  readonly subHeading: Locator;
   readonly manageReviewbodiesLink: Locator;
   readonly manageUsersLink: Locator;
 
@@ -27,9 +26,6 @@ export default class SystemAdministrationPage {
     this.pageHeading = this.page
       .getByRole('heading')
       .getByText(this.systemAdminPageTestData.System_Admin_Page.pageHeading);
-    this.subHeading = this.page
-      .getByRole('heading')
-      .getByText(this.systemAdminPageTestData.System_Admin_Page.sub_heading);
     this.manageReviewbodiesLink = this.mainPageContent.getByText(
       this.linkTextData.System_Administration_Page.Manage_Review_Bodies,
       {
@@ -48,6 +44,5 @@ export default class SystemAdministrationPage {
 
   async assertOnSystemAdministrationPage() {
     await expect(this.pageHeading).toBeVisible();
-    await expect(this.subHeading).toBeVisible();
   }
 }
