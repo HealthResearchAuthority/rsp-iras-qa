@@ -2,7 +2,7 @@ import { Locator, Page } from '@playwright/test';
 import * as confirmationPageTestData from '../../resources/test_data/iras/confirmation_page_data.json';
 
 //Declare Page Objects
-export default class CreateUserProfileConfirmationPage {
+export default class ConfirmationPage {
   readonly page: Page;
   readonly confirmationPageTestData: typeof confirmationPageTestData;
   readonly confirmation_header_label: Locator;
