@@ -169,64 +169,190 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I can see the edit user profile page
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
-    Then I expect to receive no WCAG Violations  
+    Then I expect to receive no WCAG Violations
 
-    # @axeAccessibilityManageReviewBodies @adminUser
-    # Scenario: Manage Review Bodies list page
-    #     Given I have navigated to the 'Home_Page'
-    #     When I click the 'Manage_Review_Bodies' link on the 'Home_Page' #done        
-    #     Then I can see the Manage review bodies list page #done
-    #     When I Scan the page with the Axe Accessibilty Tool
-    #     And I analyse the results from the Axe scan
-    #     Then I expect to receive no WCAG Violations
+  @axeAccessibilityUserProfileDisable @adminUser
+  Scenario: View user profile page with disable button available
+    Given I have navigated to the 'System_Administration_Home_Page'
+    And I click the 'Manage_Users' link on the 'System_Administration_Home_Page'
+    And I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
+    And I fill the new user profile page using 'Valid_Data_In_All_Fields_Role_Operations'
+    And I click the 'Continue' button on the 'Create_User_Profile_Page'
+    And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
+    And I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
+    And I can see the manage users list page
+    And I search and click on view edit link for 'Valid_Data_In_All_Fields_Role_Operations' user with 'ACTIVE' status from the manage user page
+    And I can see the user profile page
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
 
-    # @axeAccessibilityManageReviewBodies @adminUser
-    # Scenario: Add a new review body page
-    #     Given I have navigated to the 'Home_Page'
-    #     When I click the 'Manage_Review_Bodies' link on the 'Home_Page' #done        
-    #     Then I can see the Manage review bodies list page #done
-    #     When I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page' #done        
-    #     Then I can see the Add a new review body page #done
-    #     When I Scan the page with the Axe Accessibilty Tool
-    #     And I analyse the results from the Axe scan
-    #     Then I expect to receive no WCAG Violations
+  @axeAccessibilityUserProfileDisableConfirmation @adminUser
+  Scenario: View disable confirmation page for user roles
+    Given I have navigated to the 'System_Administration_Home_Page'
+    And I click the 'Manage_Users' link on the 'System_Administration_Home_Page'
+    And I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
+    And I fill the new user profile page using 'Valid_Data_In_All_Fields_Role_Operations'
+    And I click the 'Continue' button on the 'Create_User_Profile_Page'
+    And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
+    And I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
+    And I can see the manage users list page
+    And I search and click on view edit link for 'Valid_Data_In_All_Fields_Role_Operations' user with 'ACTIVE' status from the manage user page
+    And I click the 'Disable_User_Record' button on the 'User_Profile_Page'
+    And I can see a 'Confirm' button on the 'Confirmation_Page'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
 
-    # @axeAccessibilityManageReviewBodies @adminUser
-    # Scenario Outline: Check and create review body page        
-    #     Given I have navigated to the 'Home_Page'
-    #     When I click the 'Manage_Review_Bodies' link on the 'Home_Page' #done        
-    #     Then I can see the Manage review bodies list page #done
-    #     When I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page' #done        
-    #     Then I can see the Add a new review body page #done     
-    #     When I fill the new review body page using '<Add_Review_Body>'  #done
-    #     And I click the 'Complete' button on the 'Add_New_Review_Body_Page' #done       
-    #     Then I can see the Check and create review body page for '<Add_Review_Body>' #done
-    #     When I Scan the page with the Axe Accessibilty Tool
-    #     And I analyse the results from the Axe scan
-    #     Then I expect to receive no WCAG Violations   
+  @axeAccessibilityUserProfileDisableSuccess @adminUser
+  Scenario: View disable confirmation success page for user roles
+    Given I have navigated to the 'System_Administration_Home_Page'
+    And I click the 'Manage_Users' link on the 'System_Administration_Home_Page'
+    And I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
+    And I fill the new user profile page using 'Valid_Data_In_All_Fields_Role_Operations'
+    And I click the 'Continue' button on the 'Create_User_Profile_Page'
+    And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
+    And I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
+    And I can see the manage users list page
+    And I search and click on view edit link for 'Valid_Data_In_All_Fields_Role_Operations' user with 'ACTIVE' status from the manage user page
+    And I click the 'Disable_User_Record' button on the 'User_Profile_Page'
+    And I click the 'Confirm' button on the 'Confirmation_Page'
+    And I can see a 'Back_To_Manage_Users' link on the 'Confirmation_Page'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
 
-    #     Examples:
-    #     | Add_Review_Body                      |
-    #     | Valid_Data_In_All_Fields             | 
-    #     | Valid_Data_In_All_Mandatory_Fields   | 
+  @axeAccessibilityUserProfileEnable @adminUser
+  Scenario: View user profile page with enable button available
+    Given I have navigated to the 'System_Administration_Home_Page'
+    And I click the 'Manage_Users' link on the 'System_Administration_Home_Page'
+    And I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
+    And I fill the new user profile page using 'Valid_Data_In_All_Fields_Role_Operations'
+    And I click the 'Continue' button on the 'Create_User_Profile_Page'
+    And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
+    And I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
+    And I can see the manage users list page
+    And I search and click on view edit link for 'Valid_Data_In_All_Fields_Role_Operations' user with 'ACTIVE' status from the manage user page
+    And I click the 'Disable_User_Record' button on the 'User_Profile_Page'
+    And I click the 'Confirm' button on the 'Confirmation_Page'
+    And I click the 'Back_To_Manage_Users' link on the 'Confirmation_Page'
+    And I can see the manage users list page
+    And I search and click on view edit link for 'Valid_Data_In_All_Fields_Role_Operations' user with 'DISABLED' status from the manage user page
+    And I can see the user profile page
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
 
-    # @axeAccessibilityManageReviewBodies @adminUser
-    # Scenario Outline: Create Review body confirmation page        
-    #     Given I have navigated to the 'Home_Page'
-    #     When I click the 'Manage_Review_Bodies' link on the 'Home_Page' #done        
-    #     Then I can see the Manage review bodies list page #done
-    #     When I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page' #done        
-    #     Then I can see the Add a new review body page #done     
-    #     When I fill the new review body page using '<Add_Review_Body>'  #done
-    #     And I click the 'Complete' button on the 'Add_New_Review_Body_Page' #done       
-    #     Then I can see the Check and create review body page for '<Add_Review_Body>' #done
-    #     And I click the 'Create_Profile' button on the 'Check_And_Create_Review_Body_Page' #done        
-    #     Then I can see the create Review body confirmation page for '<Add_Review_Body>' #done
-    #     When I Scan the page with the Axe Accessibilty Tool
-    #     And I analyse the results from the Axe scan
-    #     Then I expect to receive no WCAG Violations   
+  @axeAccessibilityUserProfileEnableConfirmation @adminUser
+  Scenario: View enable confirmation page for user roles
+    Given I have navigated to the 'System_Administration_Home_Page'
+    And I click the 'Manage_Users' link on the 'System_Administration_Home_Page'
+    And I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
+    And I fill the new user profile page using 'Valid_Data_In_All_Fields_Role_Operations'
+    And I click the 'Continue' button on the 'Create_User_Profile_Page'
+    And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
+    And I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
+    And I can see the manage users list page
+    And I search and click on view edit link for 'Valid_Data_In_All_Fields_Role_Operations' user with 'ACTIVE' status from the manage user page
+    And I click the 'Disable_User_Record' button on the 'User_Profile_Page'
+    And I click the 'Confirm' button on the 'Confirmation_Page'
+    And I click the 'Back_To_Manage_Users' link on the 'Confirmation_Page'
+    And I can see the manage users list page
+    And I search and click on view edit link for 'Valid_Data_In_All_Fields_Role_Operations' user with 'DISABLED' status from the manage user page
+    And I click the 'Enable_User_Record' button on the 'User_Profile_Page'
+    And I can see a 'Confirm' button on the 'Confirmation_Page'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
 
-    #     Examples:
-    #     | Add_Review_Body                      |
-    #     | Valid_Data_In_All_Fields             | 
-    #     | Valid_Data_In_All_Mandatory_Fields   |
+  @axeAccessibilityUserProfileEnableSuccess @adminUser
+  Scenario: View enable confirmation success page for user roles
+    Given I have navigated to the 'System_Administration_Home_Page'
+    And I click the 'Manage_Users' link on the 'System_Administration_Home_Page'
+    And I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
+    And I fill the new user profile page using 'Valid_Data_In_All_Fields_Role_Operations'
+    And I click the 'Continue' button on the 'Create_User_Profile_Page'
+    And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
+    And I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
+    And I can see the manage users list page
+    And I search and click on view edit link for 'Valid_Data_In_All_Fields_Role_Operations' user with 'ACTIVE' status from the manage user page
+    And I click the 'Disable_User_Record' button on the 'User_Profile_Page'
+    And I click the 'Confirm' button on the 'Confirmation_Page'
+    And I click the 'Back_To_Manage_Users' link on the 'Confirmation_Page'
+    And I can see the manage users list page
+    And I search and click on view edit link for 'Valid_Data_In_All_Fields_Role_Operations' user with 'DISABLED' status from the manage user page
+    And I click the 'Enable_User_Record' button on the 'User_Profile_Page'
+    And I click the 'Confirm' button on the 'Confirmation_Page'
+    And I can see a 'Back_To_Manage_Users' link on the 'Confirmation_Page'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilitySystemAdministrationHomePage @adminUser
+  Scenario: System administration home page
+    Given I have navigated to the 'System_Administration_Home_Page'
+    Then I can see the system administration home page
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+
+# @axeAccessibilityManageReviewBodies @adminUser
+# Scenario: Manage Review Bodies list page
+#     Given I have navigated to the 'Home_Page'
+#     When I click the 'Manage_Review_Bodies' link on the 'Home_Page' #done
+#     Then I can see the Manage review bodies list page #done
+#     When I Scan the page with the Axe Accessibilty Tool
+#     And I analyse the results from the Axe scan
+#     Then I expect to receive no WCAG Violations
+
+# @axeAccessibilityManageReviewBodies @adminUser
+# Scenario: Add a new review body page
+#     Given I have navigated to the 'Home_Page'
+#     When I click the 'Manage_Review_Bodies' link on the 'Home_Page' #done
+#     Then I can see the Manage review bodies list page #done
+#     When I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page' #done
+#     Then I can see the Add a new review body page #done
+#     When I Scan the page with the Axe Accessibilty Tool
+#     And I analyse the results from the Axe scan
+#     Then I expect to receive no WCAG Violations
+
+# @axeAccessibilityManageReviewBodies @adminUser
+# Scenario Outline: Check and create review body page
+#     Given I have navigated to the 'Home_Page'
+#     When I click the 'Manage_Review_Bodies' link on the 'Home_Page' #done
+#     Then I can see the Manage review bodies list page #done
+#     When I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page' #done
+#     Then I can see the Add a new review body page #done
+#     When I fill the new review body page using '<Add_Review_Body>'  #done
+#     And I click the 'Complete' button on the 'Add_New_Review_Body_Page' #done
+#     Then I can see the Check and create review body page for '<Add_Review_Body>' #done
+#     When I Scan the page with the Axe Accessibilty Tool
+#     And I analyse the results from the Axe scan
+#     Then I expect to receive no WCAG Violations
+
+#     Examples:
+#     | Add_Review_Body                      |
+#     | Valid_Data_In_All_Fields             |
+#     | Valid_Data_In_All_Mandatory_Fields   |
+
+# @axeAccessibilityManageReviewBodies @adminUser
+# Scenario Outline: Create Review body confirmation page
+#     Given I have navigated to the 'Home_Page'
+#     When I click the 'Manage_Review_Bodies' link on the 'Home_Page' #done
+#     Then I can see the Manage review bodies list page #done
+#     When I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page' #done
+#     Then I can see the Add a new review body page #done
+#     When I fill the new review body page using '<Add_Review_Body>'  #done
+#     And I click the 'Complete' button on the 'Add_New_Review_Body_Page' #done
+#     Then I can see the Check and create review body page for '<Add_Review_Body>' #done
+#     And I click the 'Create_Profile' button on the 'Check_And_Create_Review_Body_Page' #done
+#     Then I can see the create Review body confirmation page for '<Add_Review_Body>' #done
+#     When I Scan the page with the Axe Accessibilty Tool
+#     And I analyse the results from the Axe scan
+#     Then I expect to receive no WCAG Violations
+
+#     Examples:
+#     | Add_Review_Body                      |
+#     | Valid_Data_In_All_Fields             |
+#     | Valid_Data_In_All_Mandatory_Fields   |

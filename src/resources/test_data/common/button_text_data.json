@@ -47,10 +47,14 @@
     "Back": "Back"
   },
   "User_Profile_Page": {
-    "Disable_User_Record": "Disable user record"
+    "Disable_User_Record": "Disable user record",
+    "Enable_User_Record": "Enable user record"
   },
   "Manage_Users_Page": {
     "Back": "Back"
+  },
+  "Confirmation_Page": {
+    "Confirm": "Confirm"
   },
   "Create_Review_Body_Page": {
     "Continue": "Continue",
