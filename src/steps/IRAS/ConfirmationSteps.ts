@@ -1,5 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../hooks/CustomFixtures';
+import { confirmStringNotNull } from '../../utils/UtilFunctions';
 
 const { Then } = createBdd(test);
 
@@ -15,8 +16,10 @@ Then(
       userDetailsdataset.first_name_text +
       ' ' +
       userDetailsdataset.last_name_text;
-    expect((await confirmationPage.confirmation_header_label.textContent())?.trim()).toBe(expectedConfirmationHeader);
-    expect((await confirmationPage.confirmation_body_label.textContent())?.trim()).toBe(
+    expect(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim()).toBe(
+      expectedConfirmationHeader
+    );
+    expect(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim()).toBe(
       validationLabelsDataset.disable_confirmation_body_label
     );
   }
@@ -42,12 +45,12 @@ Then(
       userDetailsdataset.last_name_text +
       ' ' +
       validationLabelsDataset.disable_confirmation_success_body_two_label;
-    expect((await confirmationPage.disable_confirmation_success_header_label.textContent())?.trim()).toBe(
-      expectedSuccessHeader
-    );
-    expect((await confirmationPage.disable_confirmation_success_body_label.textContent())?.trim()).toBe(
-      expectedSuccessBody
-    );
+    expect(
+      confirmStringNotNull(await confirmationPage.disable_confirmation_success_header_label.textContent()).trim()
+    ).toBe(expectedSuccessHeader);
+    expect(
+      confirmStringNotNull(await confirmationPage.disable_confirmation_success_body_label.textContent()).trim()
+    ).toBe(expectedSuccessBody);
   }
 );
 
@@ -63,8 +66,10 @@ Then(
       userDetailsdataset.first_name_text +
       ' ' +
       userDetailsdataset.last_name_text;
-    expect((await confirmationPage.confirmation_header_label.textContent())?.trim()).toBe(expectedConfirmationHeader);
-    expect((await confirmationPage.confirmation_body_label.textContent())?.trim()).toBe(
+    expect(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim()).toBe(
+      expectedConfirmationHeader
+    );
+    expect(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim()).toBe(
       validationLabelsDataset.enable_confirmation_body_label
     );
   }
@@ -90,11 +95,11 @@ Then(
       userDetailsdataset.last_name_text +
       ' ' +
       validationLabelsDataset.enable_confirmation_success_body_two_label;
-    expect((await confirmationPage.enable_confirmation_success_header_label.textContent())?.trim()).toBe(
-      expectedSuccessHeader
-    );
-    expect((await confirmationPage.enable_confirmation_success_body_label.textContent())?.trim()).toBe(
-      expectedSuccessBody
-    );
+    expect(
+      confirmStringNotNull(await confirmationPage.enable_confirmation_success_header_label.textContent()).trim()
+    ).toBe(expectedSuccessHeader);
+    expect(
+      confirmStringNotNull(await confirmationPage.enable_confirmation_success_body_label.textContent()).trim()
+    ).toBe(expectedSuccessBody);
   }
 );
