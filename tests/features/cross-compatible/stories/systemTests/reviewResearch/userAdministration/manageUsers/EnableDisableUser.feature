@@ -1,5 +1,5 @@
 @UserAdministration @ManageUsers @adminUser @SystemTest
-Feature: User Administration: Manage Users
+Feature: User Administration: Manage Users - Enable / Disable users
 
   Background:
     Given I have navigated to the 'System_Administration_Home_Page'
