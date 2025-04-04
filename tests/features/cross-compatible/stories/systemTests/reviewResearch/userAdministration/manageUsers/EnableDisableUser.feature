@@ -16,7 +16,7 @@ Feature: User Administration: Manage Users
     And I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
     And I can see the manage users list page
     When I search and click on view edit link for '<Add_User_Profile>' user with 'ACTIVE' status from the manage user page
-    Then I can see the '<Disable_Label_Texts>' ui labels on the user profile page
+    Then I can see the '<Disable_Label_Texts>' ui labels on the manage users list page
     And I capture the page screenshot
     When I click the 'Disable_User_Record' button on the 'User_Profile_Page'
     Then I validate '<Disable_User_Profile_Labels>' labels displayed in disable user profile confirmation page using the '<Add_User_Profile>' details
@@ -64,7 +64,7 @@ Feature: User Administration: Manage Users
     And I click the 'Back_To_Manage_Users' link on the 'Confirmation_Page'
     And I can see the manage users list page
     When I search and click on view edit link for '<Add_User_Profile>' user with 'DISABLED' status from the manage user page
-    Then I can see the '<Enable_Label_Texts>' ui labels on the user profile page
+    Then I can see the '<Enable_Label_Texts>' ui labels on the manage users list page
     And I capture the page screenshot
     When I click the 'Enable_User_Record' button on the 'User_Profile_Page'
     Then I validate '<Enable_User_Profile_Labels>' labels displayed in enable user profile confirmation page using the '<Add_User_Profile>' details
