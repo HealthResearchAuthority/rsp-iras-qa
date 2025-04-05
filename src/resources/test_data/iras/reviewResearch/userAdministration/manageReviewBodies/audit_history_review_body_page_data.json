@@ -1,7 +1,12 @@
 {
   "Review_Body_Audit_History_Page": {
     "back_button": "Back",
-    "page_heading": "Audit history:"
+    "page_heading": "Audit history: ",
+    "Create_Review_Body": {
+      "date_text": "",
+      "event_description_text": " was created",
+      "system_admin_email_text": "futureiras.automation@hra.nhs.uk"
+    }
   },
   "header_Texts": {
     "date_label": "Date",

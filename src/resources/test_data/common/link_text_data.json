@@ -80,9 +80,6 @@
     "View_this_review_body_audit_history": "View this review body's audit history"
   },
   "Review_Body_Audit_History_Page": {
-    "Back": "Back",
-    "Change": "Change",
-    "View_this_review_body_list_of_users": "View this review body's list of users",
-    "View_this_review_body_audit_history": "View this review body's audit history"
+    "Back": "Back"
   }
 }

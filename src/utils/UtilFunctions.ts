@@ -359,7 +359,7 @@ function standardAcheived(doubleViolation: number, tripleViolation: number) {
   }
 }
 
-export async function generateUniqueEmail(keyVal: string, prefix: string): Promise<string> {
+export async function generateUniqueValue(keyVal: string, prefix: string): Promise<string> {
   const timestamp = new Date().toISOString().replace(/[-:.TZ]/g, '');
   const domain = keyVal;
   return `${prefix}${timestamp}${domain}`;
@@ -367,4 +367,15 @@ export async function generateUniqueEmail(keyVal: string, prefix: string): Promi
 
 export async function removeUnwantedWhitespace(value: string): Promise<string> {
   return value.replaceAll(/\s+/g, ' ').trim();
+}
+
+export async function getCurrentTimeFormatted(): Promise<string> {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const day = String(now.getDate()).padStart(2, '0');
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const seconds = String(now.getSeconds()).padStart(2, '0');
+  return `${day} ${month} ${year} ${hours}:${minutes}:${seconds}`;
 }

@@ -2,31 +2,29 @@
 Feature: User Administration: Manage Review Bodies - View audit history for review body
 
     Background:
-        Given I have navigated to the 'Home_Page'
-        And I click the 'System_Admin' link on the 'Banner'
-        And I can see the 'System_Administration_Page'
-        And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
-        And I can see the Manage review bodies list page
-        And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
-        And I can see the Add a new review body page
+        Given I have navigated to the 'System_Administration_Home_Page'
+        And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Home_Page'
+        And I can see the manage review bodies list page
+    # And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
+    # And I can see the add a new review body page
 
-    @verifyCreateReviewBody
-    Scenario Outline: Verify the user is able to create a new review body with valid data
-        When I fill the new review body page using '<Add_Review_Body>'
-        And I click the 'Continue' button on the 'Create_Review_Body_Page'
-        Then I can see the Check and create review body page for '<Add_Review_Body>'
-        When I click the 'Create_Profile' button on the 'Check_And_Create_Review_Body_Page'
-        Then I can see the create Review body confirmation page for '<Add_Review_Body>'
-        When I click the 'Back_To_Manage_Review_Bodies' link on the 'Create_Review_Body_Confirmation_Page'
-        Then I can see the Manage review bodies list page
-        Then I can see the list is sorted by default in the alphabetical order of 'Organisation Name'
-        # Can I Reuse below step from Create?
-        # And I can see the list is sorted by default in the alphabetical order of the 'First Name'
-        # Update Valid Data Org Name with timestamps to enable search for below
-        And I can see the newly created 'review body' should be present in the list
-        And I can see the status of the newly created 'review body' is 'active'
+    @VerifyAuditHistoryCreateReviewBody
+    Scenario Outline: Verify the user can view the audit history after creating a review body
+        # When I fill the new review body page using '<Add_Review_Body>'
+        # And I click the 'Continue' button on the 'Create_Review_Body_Page'
+        # Then I can see the Check and create review body page for '<Add_Review_Body>'
+        # When I click the 'Create_Profile' button on the 'Check_And_Create_Review_Body_Page'
+        # Then I can see the create Review body confirmation page for '<Add_Review_Body>'
+        # When I click the 'Back_To_Manage_Review_Bodies' link on the 'Create_Review_Body_Confirmation_Page'
+        # Then I can see the manage review bodies list page
+        When I search and click on view edit link of the newly created review body for '<Add_Review_Body>' with 'ACTIVE' status from the manage review bodies page
+        And I click the 'View_this_review_body_audit_history' link on the 'View_Review_Body_Page'
+        Then I can see the audit history page of the review body
+        And I can see the '<Validation_Text>' ui labels on the audit history page of the review body
+        And I can see the audit history for '<Audit_History>'
 
         Examples:
-            | Add_Review_Body                    |
-            | Valid_Data_In_All_Fields           |
-            | Valid_Data_In_All_Mandatory_Fields |
+            | Add_Review_Body          | Validation_Text | Audit_History      |
+            | Valid_Data_In_All_Fields | header_Texts    | Create_Review_Body |
+# | Valid_Data_In_All_Mandatory_Fields |header_Texts|Create_Review_Body||
+

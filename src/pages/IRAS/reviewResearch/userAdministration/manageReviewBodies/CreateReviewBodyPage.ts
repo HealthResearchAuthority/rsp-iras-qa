@@ -1,6 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
-import * as createReviewBodyPageData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageReviewBodies/pages/create_review_body_page_data.json';
+import * as createReviewBodyPageData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageReviewBodies/create_review_body_page_data.json';
 import * as buttonTextData from '../../../../../resources/test_data/common/button_text_data.json';
+import * as fse from 'fs-extra';
 
 //Declare Page Objects
 export default class CreateReviewBodyPage {
@@ -88,5 +89,17 @@ export default class CreateReviewBodyPage {
     await expect(this.emailAddressError).toHaveText(
       this.createReviewBodyPageData.Create_Review_Body['Validation'].error_message
     );
+  }
+
+  async updateUniqueOrgNameTestDataJson(filePath: string, updateVal: string) {
+    (async () => {
+      try {
+        const data = await fse.readJson(filePath);
+        data.Create_Review_Body.organisation_name_unique = updateVal;
+        await fse.writeJson(filePath, data, { spaces: 2 });
+      } catch (error) {
+        throw new Error(`${error} Error updating unique email to testdata json file:`);
+      }
+    })();
   }
 }

@@ -24,8 +24,7 @@
   },
   "Create_User_Profile": {
     "email_address_prefix": "QAAutomation",
-    "email_address_timestamp": "",
-    "email_address_unique": "QAAutomation20250404153150746hscrd@health.org",
+    "email_address_unique": "QAAutomation20250405093503115john.doe@example.photography",
     "Role_Operations": {
       "role_dropdown": "operations"
     },
