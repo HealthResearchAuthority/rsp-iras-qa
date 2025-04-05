@@ -54,6 +54,10 @@
     "Manage_Review_Bodies": "Manage review bodies",
     "Manage_Users": "Manage users"
   },
+  "System_Administration_Home_Page": {
+    "Manage_Review_Bodies": "Manage review bodies",
+    "Manage_Users": "Manage users"
+  },
   "Manage_Review_Bodies_Page": {
     "Add_New_Review_Body_Record": "Add a new review body record",
     "Back": "Back"
