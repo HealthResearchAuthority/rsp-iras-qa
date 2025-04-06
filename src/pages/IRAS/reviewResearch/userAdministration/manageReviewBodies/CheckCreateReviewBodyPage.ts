@@ -102,7 +102,7 @@ export default class CheckCreateReviewBodyPage {
   async assertOnCheckCreateReviewbodyPage() {
     //update
     await expect(this.page_heading).toBeVisible();
-    // await expect(this.guidance_text).toBeVisible(); //bug - missing full stop in display text
+    await expect(this.guidance_text).toBeVisible(); //bug - missing full stop in display text
     await expect(this.sub_heading).toBeVisible();
   }
 }
