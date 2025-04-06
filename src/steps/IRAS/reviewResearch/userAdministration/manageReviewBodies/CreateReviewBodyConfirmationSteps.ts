@@ -1,6 +1,5 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../../hooks/CustomFixtures';
-import { confirmStringNotNull } from '../../../../../utils/UtilFunctions';
 
 const { Then } = createBdd(test);
 
@@ -21,8 +20,6 @@ Then(
       createReviewBodyConfirmationPage.createReviewBodyConfirmationPageData.Create_Review_Body_Confirmation_Page
         .confirmation_email_note_end;
     await createReviewBodyConfirmationPage.assertOnCreateReviewbodyConfirmationPage();
-    expect(confirmStringNotNull(await createReviewBodyConfirmationPage.confirmation_email_note.textContent())).toBe(
-      expectedConfirmationEmailNote
-    ); //bug - missing full stop in display text
+    await expect(createReviewBodyConfirmationPage.confirmation_email_note).toHaveText(expectedConfirmationEmailNote); //bug - missing full stop in display text
   }
 );

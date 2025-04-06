@@ -1,6 +1,5 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../../hooks/CustomFixtures';
-import { confirmStringNotNull } from '../../../../../utils/UtilFunctions';
 
 const { When, Then } = createBdd(test);
 
@@ -12,26 +11,18 @@ Then(
 
     await checkCreateReviewBodyPage.assertOnCheckCreateReviewbodyPage();
     if (datasetName.startsWith('Valid_')) {
-      expect(confirmStringNotNull(await checkCreateReviewBodyPage.organisation_name_value.textContent())).toBe(
+      await expect(checkCreateReviewBodyPage.organisation_name_value).toHaveText(
         await createReviewBodyPage.getUniqueOrgName()
       );
     } else {
-      expect(confirmStringNotNull(await checkCreateReviewBodyPage.organisation_name_value.textContent())).toBe(
-        dataset.organisation_name_text
-      );
+      await expect(checkCreateReviewBodyPage.organisation_name_value).toHaveText(dataset.organisation_name_text);
     }
     await expect(checkCreateReviewBodyPage.organisation_name_change_link).toBeVisible();
-    expect(confirmStringNotNull(await checkCreateReviewBodyPage.country_value.textContent())).toBe(
-      expectedCountryValues.replaceAll(',', ', ')
-    );
+    await expect(checkCreateReviewBodyPage.country_value).toHaveText(expectedCountryValues.replaceAll(',', ', '));
     await expect(checkCreateReviewBodyPage.country_change_link).toBeVisible();
-    expect(confirmStringNotNull(await checkCreateReviewBodyPage.email_address_value.textContent())).toBe(
-      dataset.email_address_text
-    );
+    await expect(checkCreateReviewBodyPage.email_address_value).toHaveText(dataset.email_address_text);
     await expect(checkCreateReviewBodyPage.email_address_change_link).toBeVisible();
-    expect(confirmStringNotNull(await checkCreateReviewBodyPage.description_value.textContent())).toBe(
-      dataset.description_text
-    );
+    await expect(checkCreateReviewBodyPage.description_value).toHaveText(dataset.description_text);
     await expect(checkCreateReviewBodyPage.description_change_link).toBeVisible();
   }
 );
