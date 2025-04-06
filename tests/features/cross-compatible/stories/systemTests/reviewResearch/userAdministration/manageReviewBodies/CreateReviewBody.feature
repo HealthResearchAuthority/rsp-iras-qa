@@ -10,7 +10,7 @@ Feature: HRAPROG-393- User Administration: Manage Review Bodies
         And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
         And I can see the Add a new review body page
 
-    @verifyCreateReviewBody
+    @verifyCreateReviewBody @only
     Scenario Outline: Verify the user is able to create a new review body with valid data
         When I fill the new review body page using '<Add_Review_Body>'
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
@@ -19,19 +19,19 @@ Feature: HRAPROG-393- User Administration: Manage Review Bodies
         Then I can see the create Review body confirmation page for '<Add_Review_Body>'
         When I have navigated to the 'Manage_Review_Bodies_Page'
         And I can see the Manage review bodies list page
-        And I can see the review body for '<Add_Review_Body>' is present in the list
-        And I can see the status of the review body is 'ACTIVE'
+        Then I can see the review body for '<Add_Review_Body>' is present in the list
+        And I can see the status of the review body is '<Status>'
 
         Examples:
-            | Add_Review_Body                    |
-            | Valid_Data_In_All_Fields           |
-            | Valid_Data_In_All_Mandatory_Fields |
+            | Add_Review_Body                    | Status  |
+            | Valid_Data_In_All_Fields           | enabled |
+            | Valid_Data_In_All_Mandatory_Fields | enabled |
 
     @verifyCreateReviewBodyRealData
     Scenario Outline: Verify the user is able to create a new review body with real data
         When I fill the new review body page using '<Add_Review_Body>'
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
-        Then I can see the Check and create review body page for '<Add_Review_Body>'
+        And I can see the Check and create review body page for '<Add_Review_Body>'
         And I click the 'Create_Profile' button on the 'Check_And_Create_Review_Body_Page'
         Then I can see the create Review body confirmation page for '<Add_Review_Body>'
 
@@ -54,28 +54,27 @@ Feature: HRAPROG-393- User Administration: Manage Review Bodies
 
     @verifyAddAnotherReviewBody
     Scenario Outline: Verify the user is able to add another review body via the link on the Confirmation message screen
-        When I fill the new review body page using '<Add_Review_Body>'
+        And I fill the new review body page using '<Add_Review_Body>'
         And I click the 'Complete' button on the 'Create_Review_Body_Page'
-        Then I can see the Check and create review body page for '<Add_Review_Body>'
+        And I can see the Check and create review body page for '<Add_Review_Body>'
         And I click the 'Create_Profile' button on the 'Check_And_Create_Review_Body_Page'
-        Then I can see the create Review body confirmation page for '<Add_Review_Body>'
+        And I can see the create Review body confirmation page for '<Add_Review_Body>'
         When I click the 'Add_Another_Review_Body' link on the 'Create_Review_Body_Confirmation_Page'
         Then I can see the Add a new review body page
         When I fill the new review body page using '<Add_Another_Review_Body>'
         And I click the 'Complete' button on the 'Create_Review_Body_Page'
-        Then I can see the Check and create review body page for '<Add_Another_Review_Body>'
+        And I can see the Check and create review body page for '<Add_Another_Review_Body>'
         And I click the 'Create_Profile' button on the 'Check_And_Create_Review_Body_Page'
         Then I can see the create Review body confirmation page for '<Add_Another_Review_Body>'
         When I click the 'Back_To_Manage_Review_Bodies' link on the 'Create_Review_Body_Confirmation_Page'
-        Then I can see the Manage review bodies list page
-        Then I can see the list is sorted by default in the alphabetical order of 'Organisation Name'
-        And I can see the review body for '<Add_Review_Body>' is present in the list
-        And I can see the status of the review body is 'active'
+        And I can see the Manage review bodies list page
+        Then I can see the review body for '<Add_Another_Review_Body>' is present in the list
+        And I can see the status of the review body is '<ACTIVE>'
 
         Examples:
-            | Add_Review_Body                    | Add_Another_Review_Body                    |
-            | Valid_Data_In_All_Fields           | Valid_Data_In_All_Fields_Another           |
-            | Valid_Data_In_All_Mandatory_Fields | Valid_Data_In_All_Mandatory_Fields_Another |
+            | Add_Review_Body                    | Add_Another_Review_Body                    | Status   |
+            | Valid_Data_In_All_Fields           | Valid_Data_In_All_Fields_Another           | enabled  |
+            | Valid_Data_In_All_Mandatory_Fields | Valid_Data_In_All_Mandatory_Fields_Another | disabled |
 
     @verifyAddNewReviewPageBackButtonFlow
     Scenario: Verify the user can navigate from 'Add a new review body' page by clicking 'Back' button

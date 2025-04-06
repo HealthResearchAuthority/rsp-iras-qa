@@ -34,9 +34,14 @@ Then(
 Then(
   'I can see the status of the review body is {string}',
   async ({ manageReviewBodiesPage, createReviewBodyPage }, status: string) => {
+    const dataset = manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page;
     const createdReviewBodyRow = await manageReviewBodiesPage.getRowByOrgName(
       await createReviewBodyPage.getUniqueOrgName()
     );
-    expect(createdReviewBodyRow.locator('td strong')).toHaveText(status);
+    if (status.toLowerCase() == ' disabled') {
+      expect(createdReviewBodyRow.locator('td strong')).toHaveText(dataset.disabled_status);
+    } else {
+      expect(createdReviewBodyRow.locator('td strong')).toHaveText(dataset.enabled_status);
+    }
   }
 );

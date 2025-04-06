@@ -11,6 +11,8 @@
     "actions_column_header": "Actions",
     "find_review_body_title": "Find a review body",
     "search_button": "Search",
-    "search_box": ""
+    "search_box": "",
+    "enabled_status": "ACTIVE",
+    "disabled_status": "DISABLED"
   }
 }
