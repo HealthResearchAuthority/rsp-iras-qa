@@ -1,5 +1,5 @@
 import { createBdd } from 'playwright-bdd';
-import { test } from '../../../../../hooks/CustomFixtures';
+import { test, expect } from '../../../../../hooks/CustomFixtures';
 
 const { Then } = createBdd(test);
 
@@ -17,19 +17,26 @@ Then(
 );
 
 Then(
-  'I can see the newly created {string} should be present in the list',
-  async ({ manageReviewBodiesPage }, reviewBody: string) => {
-    //update
-    await manageReviewBodiesPage.assertOnManageReviewBodiesPage();
-    console.log(reviewBody);
+  'I can see the review body for {string} is present in the list',
+  async ({ manageReviewBodiesPage, createReviewBodyPage }, datasetName: string) => {
+    const dataset = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body[datasetName];
+    const expectedCountryValue: string = dataset.country_checkbox.toString();
+    const createdReviewBodyRow = await manageReviewBodiesPage.getRowByOrgName(
+      await createReviewBodyPage.getUniqueOrgName()
+    );
+    const createdReviewBodyCountry = createdReviewBodyRow.locator('td', {
+      hasText: expectedCountryValue.replaceAll(',', ', '),
+    });
+    expect(createdReviewBodyRow).toHaveCount(1);
+    await expect(createdReviewBodyCountry).toBeVisible();
   }
 );
 Then(
-  'I can see the status of the newly created {string} is {string}',
-  async ({ manageReviewBodiesPage }, reviewBody: string, isActive: string) => {
-    //update
-    await manageReviewBodiesPage.assertOnManageReviewBodiesPage();
-    console.log(reviewBody);
-    console.log(isActive);
+  'I can see the status of the review body is {string}',
+  async ({ manageReviewBodiesPage, createReviewBodyPage }, status: string) => {
+    const createdReviewBodyRow = await manageReviewBodiesPage.getRowByOrgName(
+      await createReviewBodyPage.getUniqueOrgName()
+    );
+    expect(createdReviewBodyRow.locator('td strong')).toHaveText(status);
   }
 );

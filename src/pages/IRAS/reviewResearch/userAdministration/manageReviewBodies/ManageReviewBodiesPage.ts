@@ -39,4 +39,10 @@ export default class ManageReviewBodiesPage {
     await expect(this.pageHeading).toBeVisible();
     expect(await this.page.title()).toBe(this.manageReviewBodiesPageData.Manage_Review_Body_Page.title);
   }
+
+  async getRowByOrgName(orgName: string) {
+    return this.mainPageContent.locator('tr', {
+      has: this.page.locator('td').getByText(`${orgName}`, { exact: true }),
+    });
+  }
 }

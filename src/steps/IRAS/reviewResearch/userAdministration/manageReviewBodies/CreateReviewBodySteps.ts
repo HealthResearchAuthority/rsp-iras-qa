@@ -1,5 +1,7 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../../hooks/CustomFixtures';
+import { generateTimeStampedValue } from '../../../../../utils/UtilFunctions';
+import { Locator } from 'playwright/test';
 
 const { When, Then } = createBdd(test);
 
@@ -9,7 +11,14 @@ When(
     const dataset = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body[datasetName];
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        await commonItemsPage.fillUIComponent(dataset, key, createReviewBodyPage);
+        if (datasetName.startsWith('Valid_') && key == 'organisation_name_text') {
+          const orgNameLocator: Locator = createReviewBodyPage[key];
+          const uniqueOrgNameValue = await generateTimeStampedValue(dataset[key], ' ');
+          await orgNameLocator.fill(uniqueOrgNameValue);
+          await createReviewBodyPage.setUniqueOrgName(uniqueOrgNameValue);
+        } else {
+          await commonItemsPage.fillUIComponent(dataset, key, createReviewBodyPage);
+        }
       }
     }
   }

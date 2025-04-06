@@ -11,9 +11,15 @@ Then(
     const expectedCountryValues: string = dataset.country_checkbox.toString();
 
     await checkCreateReviewBodyPage.assertOnCheckCreateReviewbodyPage();
-    expect(confirmStringNotNull(await checkCreateReviewBodyPage.organisation_name_value.textContent())).toBe(
-      dataset.organisation_name_text
-    );
+    if (datasetName.startsWith('Valid_')) {
+      expect(confirmStringNotNull(await checkCreateReviewBodyPage.organisation_name_value.textContent())).toBe(
+        await createReviewBodyPage.getUniqueOrgName()
+      );
+    } else {
+      expect(confirmStringNotNull(await checkCreateReviewBodyPage.organisation_name_value.textContent())).toBe(
+        dataset.organisation_name_text
+      );
+    }
     await expect(checkCreateReviewBodyPage.organisation_name_change_link).toBeVisible();
     expect(confirmStringNotNull(await checkCreateReviewBodyPage.country_value.textContent())).toBe(
       expectedCountryValues.replaceAll(',', ', ')

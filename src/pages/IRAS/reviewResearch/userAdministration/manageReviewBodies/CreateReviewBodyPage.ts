@@ -7,30 +7,25 @@ export default class CreateReviewBodyPage {
   readonly page: Page;
   readonly createReviewBodyPageData: typeof createReviewBodyPageData;
   readonly buttonTextData: typeof buttonTextData;
+  private _unique_org_name: string;
   readonly page_heading: Locator;
   readonly organisation_name_text: Locator;
   readonly organisationNameError: Locator;
-  // readonly country_label: Locator;
-  readonly countryVal: Locator;
-  readonly countryError: Locator;
-  readonly countryOption1Lbl: Locator;
-  readonly countryOption2Lbl: Locator;
-  readonly countryOption3Lbl: Locator;
-  readonly countryOption4Lbl: Locator;
-  readonly emailAddressLbl: Locator;
   readonly email_address_text: Locator;
   readonly emailAddressError: Locator;
-  readonly descriptionLbl: Locator;
   readonly description_text: Locator;
   readonly continueBtn: Locator;
   readonly country_fieldset: Locator;
   readonly country_checkbox: Locator;
+  readonly countryError: Locator;
+  readonly countryVal: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page;
     this.createReviewBodyPageData = createReviewBodyPageData;
     this.buttonTextData = buttonTextData;
+    this._unique_org_name = '';
 
     //Locators
     this.page_heading = this.page
@@ -88,5 +83,14 @@ export default class CreateReviewBodyPage {
     await expect(this.emailAddressError).toHaveText(
       this.createReviewBodyPageData.Create_Review_Body['Validation'].error_message
     );
+  }
+
+  //Getters & Setters for Private Variables
+  async getUniqueOrgName(): Promise<string> {
+    return this._unique_org_name;
+  }
+
+  async setUniqueOrgName(value: string): Promise<void> {
+    this._unique_org_name = value;
   }
 }

@@ -17,14 +17,10 @@ Feature: HRAPROG-393- User Administration: Manage Review Bodies
         Then I can see the Check and create review body page for '<Add_Review_Body>'
         When I click the 'Create_Profile' button on the 'Check_And_Create_Review_Body_Page'
         Then I can see the create Review body confirmation page for '<Add_Review_Body>'
-        When I click the 'Back_To_Manage_Review_Bodies' link on the 'Create_Review_Body_Confirmation_Page'
-        Then I can see the Manage review bodies list page
-        Then I can see the list is sorted by default in the alphabetical order of 'Organisation Name'
-        # Can I Reuse below step from Create?
-        # And I can see the list is sorted by default in the alphabetical order of the 'First Name'
-        # Update Valid Data Org Name with timestamps to enable search for below
-        And I can see the newly created 'review body' should be present in the list
-        And I can see the status of the newly created 'review body' is 'active'
+        When I have navigated to the 'Manage_Review_Bodies_Page'
+        And I can see the Manage review bodies list page
+        And I can see the review body for '<Add_Review_Body>' is present in the list
+        And I can see the status of the review body is 'ACTIVE'
 
         Examples:
             | Add_Review_Body                    |
@@ -73,8 +69,8 @@ Feature: HRAPROG-393- User Administration: Manage Review Bodies
         When I click the 'Back_To_Manage_Review_Bodies' link on the 'Create_Review_Body_Confirmation_Page'
         Then I can see the Manage review bodies list page
         Then I can see the list is sorted by default in the alphabetical order of 'Organisation Name'
-        And I can see the newly created 'review body' should be present in the list
-        And I can see the status of the newly created 'review body' is 'active'
+        And I can see the review body for '<Add_Review_Body>' is present in the list
+        And I can see the status of the review body is 'active'
 
         Examples:
             | Add_Review_Body                    | Add_Another_Review_Body                    |
