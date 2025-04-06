@@ -193,7 +193,10 @@ Given(
       await userProfilePage.first_change_link.click(); //work around for now >> to click on first Change link
     } else if (pageKey === 'Create_User_Profile_Confirmation_Page' && linkKey === 'Back_To_Manage_Users') {
       await createUserProfileConfirmationPage.back_to_manage_user_link.click(); //work around for now >> to click on Back_To_Manage_Users link ..# "Back to Manage Users" in app, "Back to Manage users" in figma >>clarification needed
-    } else {
+    }else if (pageKey === 'Manage_Review_Bodies_Page' && linkKey === 'View_Edit') {
+      await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).first().click();
+    } 
+    else {
       await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
     }
   }

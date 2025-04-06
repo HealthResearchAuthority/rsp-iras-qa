@@ -53,6 +53,13 @@
     "Back_To_Manage_Users": "Back to Manage users"
   },
   "Manage_Review_Bodies_Page": {
+    "View_Edit": "View/Edit",
+    "Back": "Back"
+  },
+  "Review_Body_Profile_Page": {
+    "Change": "Change",
+    "View_This_Review_Body_List_Of_Users": "View this review body's list of users",
+    "View_This_Review_Body_Audit_History": "View this review body's audit history",
     "Back": "Back"
   }
 }
