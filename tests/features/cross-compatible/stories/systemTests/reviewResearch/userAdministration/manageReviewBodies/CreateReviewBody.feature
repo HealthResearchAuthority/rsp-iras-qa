@@ -99,7 +99,6 @@ Feature: User Administration: Manage Review Bodies - Create review body
     Scenario: Verify the user can navigate from 'Add a new review body' page by clicking 'Back' link
         And I capture the page screenshot
         And I click the 'Back' link on the 'Create_Review_Body_Page'
-        And I capture the page screenshot
         Then I can see the manage review bodies list page
 
     # Test blocked due to back button defect, marking as should fail
