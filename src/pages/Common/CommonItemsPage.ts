@@ -150,12 +150,7 @@ export default class CommonItemsPage {
         await locator.locator('..').getByLabel(checkbox, { exact: true }).check();
       }
     } else {
-      const isSelectTag = await locator.evaluate((el) => el.tagName.toLowerCase() === 'select');
-      if (isSelectTag) {
-        {
-          await locator.selectOption({ label: dataset[key] });
-        }
-      }
+      await locator.selectOption({ label: dataset[key] });
     }
   }
 
