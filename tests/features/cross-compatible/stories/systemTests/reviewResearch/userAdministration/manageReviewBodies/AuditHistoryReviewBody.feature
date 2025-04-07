@@ -20,7 +20,8 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
     Scenario Outline: Verify the user can view the audit history after creating a review body
         When I search and click on view edit link of the newly created review body for '<Add_Review_Body>' with 'ACTIVE' status from the manage review bodies page
         And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'
-        Then I can see the audit history page of the review body
+        # Then I can see the audit history page of the review body
+        Then I can see the audit history page of the selected review body
         And I can see the '<Validation_Text>' ui labels on the audit history page of the review body
         And I can see the audit history for the review body created event with '<Audit_History>'
 

@@ -1,8 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as auditHistoryReviewBodyPageTestData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageReviewBodies/audit_history_review_body_page_data.json';
 import { confirmStringNotNull, removeUnwantedWhitespace } from '../../../../../utils/UtilFunctions';
-import path from 'path';
-import * as fse from 'fs-extra';
+
 const pathToTestDataJson =
   './src/resources/test_data/iras/reviewResearch/userAdministration/manageReviewBodies/create_review_body_page_data.json';
 
@@ -41,11 +40,8 @@ export default class AuditHistoryReviewBodyPage {
 
   async assertOnAuditHistoryReviewBodyPage() {
     await expect(this.page_heading).toBeVisible();
-    const filePath = path.resolve(pathToTestDataJson);
-    const data = await fse.readJson(filePath);
-    await expect(this.page_heading).toHaveText(
-      this.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.page_heading +
-        data.Create_Review_Body.organisation_name_unique
+    await expect(this.page_heading).toContainText(
+      this.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.page_heading
     );
   }
 

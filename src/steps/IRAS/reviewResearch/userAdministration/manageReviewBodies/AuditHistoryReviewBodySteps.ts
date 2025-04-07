@@ -17,6 +17,15 @@ const pathToAuditTestDataJson =
 Then('I can see the audit history page of the review body', async ({ auditHistoryReviewBodyPage }) => {
   await auditHistoryReviewBodyPage.assertOnAuditHistoryReviewBodyPage();
 });
+Then('I can see the audit history page of the selected review body', async ({ auditHistoryReviewBodyPage }) => {
+  await auditHistoryReviewBodyPage.assertOnAuditHistoryReviewBodyPage();
+  const filePath = path.resolve(pathToTestDataJson);
+  const data = await fse.readJson(filePath);
+  await expect(auditHistoryReviewBodyPage.page_heading).toHaveText(
+    auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.page_heading +
+      data.Create_Review_Body.organisation_name_unique
+  );
+});
 
 Then(
   'I can see the {string} ui labels on the audit history page of the review body',

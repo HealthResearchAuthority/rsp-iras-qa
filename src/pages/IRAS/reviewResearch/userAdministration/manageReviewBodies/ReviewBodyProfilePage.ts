@@ -50,7 +50,10 @@ export default class ReviewBodyProfilePage {
     this.linkTextData = linkTextData;
 
     //Locators
-    this.page_heading = this.page.locator('.govuk-heading-l');
+    // this.page_heading = this.page.locator('.govuk-heading-l');
+    this.page_heading = this.page
+      .getByRole('heading')
+      .getByText(this.reviewBodyProfilePageData.Review_Body_Profile_Page.heading_prefix_label);
     this.back_link = this.page
       .getByRole('link')
       .getByText(this.reviewBodyProfilePageData.Review_Body_Profile_Page.back_link);
