@@ -15,7 +15,7 @@
   },
   "Create_Review_Body": {
     "organisation_name_prefix": "QAAutomation",
-    "organisation_name_unique": "QAAutomation20250407113104518QA Automation Health Research Authority (HRA)",
+    "organisation_name_unique": "QAAutomation20250407201112395HSC Research and Development Test Update Org Name",
     "Valid_Data_In_All_Fields": {
       "organisation_name_text": "_HSC Research and Development",
       "country_checkbox": [
@@ -38,7 +38,7 @@
     "Valid_Data_In_All_Mandatory_Fields": {
       "organisation_name_text": "QA Automation Health Research Authority (HRA)",
       "country_checkbox": [
-        "England"
+        "Northern Ireland"
       ],
       "email_address_text": "qaauto_healthresearchauthority@reviewbodies.com",
       "description_text": ""
@@ -190,6 +190,9 @@
     },
     "Validation": {
       "error_message": "An error has occured"
+    },
+    "Organisation_Name_Another": {
+      "organisation_name_text": "HSC Research and Development Test Update Org Name"
     }
   }
 }

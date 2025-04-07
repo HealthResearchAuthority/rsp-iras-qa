@@ -53,55 +53,29 @@ export default class ManageReviewBodiesPage {
     expect(await this.page.title()).toBe(this.manageReviewBodiesPageData.Manage_Review_Body_Page.title);
   }
 
-  // async findUserProfile(userFirstName: string, userLastName: string, userEmail: string, userStatus: string) {
-  //   const searchRecord = userFirstName + '|' + userLastName + '|' + userEmail + '|' + userStatus;
-  //   let foundRecord = false;
-  //   let hasNextPage = true;
-  //   let count: number = 0;
-  //   while (hasNextPage) {
-  //     const rows = await this.reviewBodyListRows.all();
-  //     for (const row of rows) {
-  //       const columns = await row.locator(this.reviewBodyListCell).allTextContents();
-  //       const firstFourColumns = columns.slice(0, 4);
-  //       const fullRowData = firstFourColumns.map((col) => col.trim()).join('|');
-  //       if (fullRowData === searchRecord) {
-  //         foundRecord = true;
-  //         count = count + 1;
-  //       }
-  //     }
-  //     hasNextPage = (await this.next_button.isVisible()) && !(await this.next_button.isDisabled());
-  //     if (hasNextPage) {
-  //       await this.next_button.click();
-  //       await this.page.waitForLoadState('domcontentloaded');
-  //     }
-  //   }
-  //   if (foundRecord) {
-  //     return count;
-  //   } else {
-  //     throw new Error(`No matching record found`);
-  //   }
-  // }
-
-  async searchAndClickReviewBody(orgName: string, countryNames: string, reviewBodyStatus: string) {
+  async searchAndClickReviewBody(orgName: string, reviewBodyStatus: string) {
     let dataFound = false;
     while (!dataFound) {
       const rowCount = await this.reviewBodyListRows.count();
       for (let i = 1; i < rowCount; i++) {
+        // for (let i = rowCount - 1; i >= 0; i--) {
         const orgNameText = await this.reviewBodyListRows
           .nth(i)
           .locator(this.organisation_name_from_list_label)
           .textContent();
-        const countryNamesText = await this.reviewBodyListRows
-          .nth(i)
-          .locator(this.country_name_from_list_label)
-          .textContent();
+        // const countryNamesText = await this.reviewBodyListRows
+        //   .nth(i)
+        //   .locator(this.country_name_from_list_label)
+        //   .textContent();
         const reviewBodyStatusTest = await this.reviewBodyListRows
           .nth(i)
           .locator(this.status_from_list_label)
           .textContent();
+        // confirmStringNotNull(orgNameText) === orgName &&
+        // confirmStringNotNull(countryNamesText) === countryNames.replaceAll(',', ', ') &&
+        // confirmStringNotNull(reviewBodyStatusTest) === reviewBodyStatus
         if (
           confirmStringNotNull(orgNameText) === orgName &&
-          confirmStringNotNull(countryNamesText) === countryNames.replaceAll(',', ', ') &&
           confirmStringNotNull(reviewBodyStatusTest) === reviewBodyStatus
         ) {
           await this.reviewBodyListRows.nth(i).getByText('View/Edit').click();

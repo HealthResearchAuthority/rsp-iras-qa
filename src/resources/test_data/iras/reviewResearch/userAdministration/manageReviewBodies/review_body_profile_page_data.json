@@ -1,0 +1,16 @@
+{
+  "Review_Body_Profile_Page": {
+    "selected_tab_top": "Manage review bodies",
+    "back_link": "Back",
+    "heading_prefix_label": "Review body profile: ",
+    "organisation_name_label": "Organisation name",
+    "country_label": "Country",
+    "email_address_label": "Email address",
+    "description_label": "Description",
+    "users_label": "Users",
+    "audit_label": "Audit",
+    "view_this_review_body_list_of_users_link": "View this review body's list of users",
+    "view_this_review_body_audit_history_link": "View this review body's audit history",
+    "last_updated_label": "Last updated"
+  }
+}

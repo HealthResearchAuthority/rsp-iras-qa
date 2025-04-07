@@ -26,6 +26,7 @@ export default class CreateReviewBodyPage {
   readonly continueBtn: Locator;
   readonly country_fieldset: Locator;
   readonly country_checkbox: Locator;
+  private _unique_org_name: string;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -137,5 +138,39 @@ export default class CreateReviewBodyPage {
         throw new Error(`${error} Error updating current time to testdata json file:`);
       }
     })();
+  }
+
+  async updateCurrentTimeAfterEditOrgNameTestDataJson(filePath: string, updateVal: string) {
+    (async () => {
+      try {
+        const data = await fse.readJson(filePath);
+        data.Review_Body_Audit_History_Page.Edit_Review_Body_Organisation_Name.date_text = updateVal;
+        await fse.writeJson(filePath, data, { spaces: 2 });
+      } catch (error) {
+        throw new Error(`${error} Error updating current time to testdata json file:`);
+      }
+    })();
+  }
+  async updatePreviousOrgNameTestDataJson(filePath: string, updateVal: string) {
+    (async () => {
+      try {
+        const data = await fse.readJson(filePath);
+        // data.Create_Review_Body.organisation_name_previous = updateVal;
+        data.Review_Body_Audit_History_Page.Edit_Review_Body_Organisation_Name.organisation_name_unique_previous =
+          updateVal;
+        await fse.writeJson(filePath, data, { spaces: 2 });
+      } catch (error) {
+        throw new Error(`${error} Error updating unique email to testdata json file:`);
+      }
+    })();
+  }
+
+  //Getters & Setters for Private Variables
+  async getUniqueOrgName(): Promise<string> {
+    return this._unique_org_name;
+  }
+
+  async setUniqueOrgName(value: string): Promise<void> {
+    this._unique_org_name = value;
   }
 }

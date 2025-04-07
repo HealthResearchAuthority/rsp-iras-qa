@@ -56,6 +56,7 @@
   },
   "Manage_Review_Bodies_Page": {
     "Add_New_Review_Body_Record": "Add a new review body record",
+    "View_Edit": "View/Edit",
     "Back": "Back"
   },
   "Check_Create_Review_Body_Page": {
@@ -73,8 +74,8 @@
   "Review_Body_Profile_Page": {
     "Back": "Back",
     "Change": "Change",
-    "View_this_review_body_list_of_users": "View this review body's list of users",
-    "View_this_review_body_audit_history": "View this review body's audit history"
+    "View_This_Review_Body_List_Of_Users": "View this review body's list of users",
+    "View_This_Review_Body_Audit_History": "View this review body's audit history"
   },
   "Review_Body_Audit_History_Page": {
     "Back": "Back"

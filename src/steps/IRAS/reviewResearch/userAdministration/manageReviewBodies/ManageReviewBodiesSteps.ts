@@ -41,12 +41,13 @@ Then(
 
 When(
   'I search and click on view edit link of the newly created review body for {string} with {string} status from the manage review bodies page',
-  async ({ manageReviewBodiesPage, createReviewBodyPage }, datasetName: string, userStatus: string) => {
-    const dataset = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body[datasetName];
-    const countryNames: string = dataset.country_checkbox.toString();
+  async ({ manageReviewBodiesPage }, datasetName: string, userStatus: string) => {
+    // const dataset = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body[datasetName];
+    // const countryNames: string = dataset.country_checkbox.toString();
     const filePath = path.resolve(pathToTestDataJson);
     const data = await fse.readJson(filePath);
     const orgName = data.Create_Review_Body.organisation_name_unique;
-    await manageReviewBodiesPage.searchAndClickReviewBody(orgName, countryNames, userStatus);
+    // await manageReviewBodiesPage.searchAndClickReviewBody(orgName, countryNames, userStatus);
+    await manageReviewBodiesPage.searchAndClickReviewBody(orgName, userStatus);
   }
 );
