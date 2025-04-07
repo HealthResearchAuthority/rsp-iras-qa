@@ -332,7 +332,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
         | Add_Review_Body                      |
         | Valid_Data_In_All_Fields             | 
 
-    @axeAccessibilityManageReviewBodies @adminUser
+    @axeAccessibilityConfirmReviewBodies @adminUser
     Scenario Outline: Create Review body confirmation page        
         Given I have navigated to the 'Manage_Review_Bodies_Page'
         And I can see the manage review bodies list page
