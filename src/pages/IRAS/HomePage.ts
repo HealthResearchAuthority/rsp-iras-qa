@@ -11,6 +11,7 @@ export default class HomePage {
   readonly linkTextData: typeof linkTextData;
   readonly mainPageContent: Locator;
   readonly pageHeading: Locator;
+  readonly projectGuidanceText: Locator;
   readonly loginBtn: Locator;
 
   //Initialize Page Objects
@@ -23,6 +24,7 @@ export default class HomePage {
     //Locators
     this.mainPageContent = this.page.getByTestId('main-content');
     this.pageHeading = this.page.getByRole('heading').getByText(this.homePageTestData.Home_Page.heading);
+    this.projectGuidanceText = this.page.getByRole('paragraph');
     this.loginBtn = this.page
       .locator('.gem-c-button')
       .and(this.page.getByText(this.buttonTextData.Home_Page.Login, { exact: true }));
