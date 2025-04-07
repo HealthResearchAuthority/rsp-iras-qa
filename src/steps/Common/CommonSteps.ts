@@ -143,48 +143,25 @@ Then('I see something {string}', async ({ commonItemsPage }, testType: string) =
   commonItemsPage.samplePageAction(testType);
 });
 
-Then(
-  'I click the {string} button on the {string}',
-  async (
-    { commonItemsPage, homePage, checkCreateUserProfilePage, manageUsersPage, createUserProfilePage },
-    buttonKey: string,
-    pageKey: string
-  ) => {
-    const buttonValue = commonItemsPage.buttonTextData[pageKey][buttonKey];
-    if (pageKey === 'Banner' && buttonKey === 'Login') {
-      await commonItemsPage.bannerLoginBtn.click();
-    } else if (pageKey === 'Home_Page' && buttonKey === 'Login') {
-      await homePage.loginBtn.click();
-    } else if (pageKey === 'Check_Create_User_Profile_Page' && buttonKey === 'Create_Profile') {
-      await checkCreateUserProfilePage.create_profile_button.click();
-      //added this as a workaround >>Create_Profile button issue
-    } else if (pageKey === 'Manage_Users_Page' && buttonKey === 'Back') {
-      await manageUsersPage.back_button.click(); //work around for now //added this as a workaround >>Back button issue
-    } else if (pageKey === 'Check_Create_User_Profile_Page' && buttonKey === 'Back') {
-      await checkCreateUserProfilePage.back_button.click(); //work around for now >> to click on first View/Edit link
-      //added this as a workaround >>Back button issue
-    } else if (pageKey === 'Create_User_Profile_Page' && buttonKey === 'Back') {
-      await createUserProfilePage.back_button.click(); //work around for now >> to click on first View/Edit link
-      //added this as a workaround >>Back button issue
-    } else {
-      await commonItemsPage.govUkButton.getByText(buttonValue, { exact: true }).click();
-    }
-  }
-);
+Then('I click the {string} button on the {string}', async ({ commonItemsPage }, buttonKey: string, pageKey: string) => {
+  await commonItemsPage.page.pause();
+  const buttonValue = commonItemsPage.buttonTextData[pageKey][buttonKey];
+  await commonItemsPage.govUkButton
+    .getByText(buttonValue, { exact: true })
+    .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
+    .first()
+    .click();
+});
 
-Then(
-  'I can see a {string} button on the {string}',
-  async ({ commonItemsPage, homePage }, buttonKey: string, pageKey: string) => {
-    const buttonValue = commonItemsPage.buttonTextData[pageKey][buttonKey];
-    if (pageKey === 'Banner' && buttonKey === 'Login') {
-      await expect(commonItemsPage.bannerLoginBtn).toBeVisible();
-    } else if (pageKey === 'Home_Page' && buttonKey === 'Login') {
-      await expect(homePage.loginBtn).toBeVisible();
-    } else {
-      await expect(commonItemsPage.govUkButton.getByText(buttonValue, { exact: true })).toBeVisible();
-    }
-  }
-);
+Then('I can see a {string} button on the {string}', async ({ commonItemsPage }, buttonKey: string, pageKey: string) => {
+  const buttonValue = commonItemsPage.buttonTextData[pageKey][buttonKey];
+  await expect(
+    commonItemsPage.govUkButton
+      .getByText(buttonValue, { exact: true })
+      .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
+      .first()
+  ).toBeVisible();
+});
 
 Given(
   'I click the {string} link on the {string}',

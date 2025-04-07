@@ -22,6 +22,7 @@ export default class CommonItemsPage {
   readonly linkTextData: typeof linkTextData;
   readonly questionSetData: typeof questionSetData;
   readonly showAllSectionsAccordion: Locator;
+  readonly genericButton: Locator;
   readonly govUkButton: Locator;
   readonly govUkCheckboxes: Locator;
   readonly govUkCheckboxItem: Locator;
@@ -57,7 +58,8 @@ export default class CommonItemsPage {
 
     //Locators
     this.showAllSectionsAccordion = page.locator('.govuk-accordion__show-all"');
-    this.govUkButton = this.page.getByRole('button');
+    this.genericButton = this.page.getByRole('button');
+    this.govUkButton = this.page.locator('.govuk-button');
     this.govUkCheckboxes = this.page.locator('.govuk-checkboxes');
     this.govUkCheckboxItem = this.govUkCheckboxes.locator('.govuk-checkboxes__item');
     this.govUkLink = this.page.getByRole('link');
