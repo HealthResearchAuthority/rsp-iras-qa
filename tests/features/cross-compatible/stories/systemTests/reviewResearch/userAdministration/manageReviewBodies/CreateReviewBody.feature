@@ -72,7 +72,7 @@ Feature: HRAPROG-393- User Administration: Manage Review Bodies
         When I click the 'Back_To_Manage_Review_Bodies' link on the 'Create_Review_Body_Confirmation_Page'
         And I can see the manage review bodies list page
         Then I can see the review body for '<Add_Another_Review_Body>' is present in the list
-        And I can see the status of the review body is '<ACTIVE>'
+        And I can see the status of the review body is '<Status>'
 
         Examples:
             | Add_Review_Body                    | Add_Another_Review_Body                    | Status   |
