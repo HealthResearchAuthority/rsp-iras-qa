@@ -102,4 +102,40 @@ export default class CreateReviewBodyPage {
       }
     })();
   }
+
+  async updateCurrentTimeAfterCreateTestDataJson(filePath: string, updateVal: string) {
+    (async () => {
+      try {
+        const data = await fse.readJson(filePath);
+        data.Review_Body_Audit_History_Page.Create_Review_Body.date_text = updateVal;
+        await fse.writeJson(filePath, data, { spaces: 2 });
+      } catch (error) {
+        throw new Error(`${error} Error updating current time to testdata json file:`);
+      }
+    })();
+  }
+
+  async updateCurrentTimeAfterDisableTestDataJson(filePath: string, updateVal: string) {
+    (async () => {
+      try {
+        const data = await fse.readJson(filePath);
+        data.Review_Body_Audit_History_Page.Disable_Review_Body.date_text = updateVal;
+        await fse.writeJson(filePath, data, { spaces: 2 });
+      } catch (error) {
+        throw new Error(`${error} Error updating current time to testdata json file:`);
+      }
+    })();
+  }
+
+  async updateCurrentTimeAfterEnableTestDataJson(filePath: string, updateVal: string) {
+    (async () => {
+      try {
+        const data = await fse.readJson(filePath);
+        data.Review_Body_Audit_History_Page.Enable_Review_Body.date_text = updateVal;
+        await fse.writeJson(filePath, data, { spaces: 2 });
+      } catch (error) {
+        throw new Error(`${error} Error updating current time to testdata json file:`);
+      }
+    })();
+  }
 }

@@ -10,7 +10,6 @@ const pathToTestDataJson =
 Then(
   'I can see the create Review body confirmation page for {string}',
   async ({ createReviewBodyConfirmationPage }) => {
-    // const dataset = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body[datasetName];
     const filePath = path.resolve(pathToTestDataJson);
     const data = await fse.readJson(filePath);
     const expectedConfirmationEmailNote =
@@ -24,6 +23,5 @@ Then(
     expect(confirmStringNotNull(await createReviewBodyConfirmationPage.confirmation_email_note.textContent())).toBe(
       expectedConfirmationEmailNote
     );
-    //bug - missing full stop in display text
   }
 );

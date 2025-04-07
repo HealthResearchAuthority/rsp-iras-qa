@@ -63,5 +63,9 @@
   "Check_And_Create_Review_Body_Page": {
     "Create_Profile": "Create profile",
     "Back": "Back"
+  },
+  "Review_Body_Profile_Page": {
+    "Disable_Review_Body": "Disable review body",
+    "Enable_Review_Body": "Enable review body"
   }
 }

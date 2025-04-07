@@ -371,11 +371,27 @@ export async function removeUnwantedWhitespace(value: string): Promise<string> {
 
 export async function getCurrentTimeFormatted(): Promise<string> {
   const now = new Date();
-  const year = now.getFullYear();
-  const month = String(now.getMonth() + 1).padStart(2, '0');
-  const day = String(now.getDate()).padStart(2, '0');
-  const hours = String(now.getHours()).padStart(2, '0');
-  const minutes = String(now.getMinutes()).padStart(2, '0');
-  const seconds = String(now.getSeconds()).padStart(2, '0');
-  return `${day} ${month} ${year} ${hours}:${minutes}:${seconds}`;
+  // Subtract one hour from the current time
+  now.setHours(now.getHours() - 1);
+  const formatter = new Intl.DateTimeFormat('en-GB', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+    timeZone: 'Europe/London',
+    // timeZoneName: 'short',
+  });
+
+  const parts = formatter.formatToParts(now);
+
+  // Build the string manually from the parts
+  const getPart = (type: string) => parts.find((p) => p.type === type)?.value || '';
+
+  const formatted = `${getPart('day')} ${getPart('month')} ${getPart('year')} ${getPart('hour')}:${getPart('minute')}`;
+  // const formatted = `${getPart('day')} ${getPart('month')} ${getPart('year')} : ${getPart('hour')}:${getPart('minute')} ${getPart('timeZoneName')}`;
+
+  console.log(formatted);
+  return formatted;
 }

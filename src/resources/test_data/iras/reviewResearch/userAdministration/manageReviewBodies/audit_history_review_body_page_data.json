@@ -3,8 +3,18 @@
     "back_button": "Back",
     "page_heading": "Audit history: ",
     "Create_Review_Body": {
-      "date_text": "",
+      "date_text": "07 Apr 2025 11:31",
       "event_description_text": " was created",
+      "system_admin_email_text": "futureiras.automation@hra.nhs.uk"
+    },
+    "Disable_Review_Body": {
+      "date_text": "07 Apr 2025 14:02",
+      "event_description_text": " was disabled",
+      "system_admin_email_text": "futureiras.automation@hra.nhs.uk"
+    },
+    "Enable_Review_Body": {
+      "date_text": "07 Apr 2025 14:08",
+      "event_description_text": " was enabled",
       "system_admin_email_text": "futureiras.automation@hra.nhs.uk"
     }
   },
