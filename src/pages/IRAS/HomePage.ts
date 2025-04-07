@@ -37,6 +37,5 @@ export default class HomePage {
 
   async assertOnHomePage() {
     await expect(this.pageHeading).toBeVisible();
-    // expect(await this.page.title()).toBe(this.homePageTestData.Home_Page.title); //Devs need to add page title in html head
   }
 }
