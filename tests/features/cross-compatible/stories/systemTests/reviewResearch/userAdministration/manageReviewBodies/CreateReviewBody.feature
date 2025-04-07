@@ -6,9 +6,9 @@ Feature: HRAPROG-393- User Administration: Manage Review Bodies
         And I click the 'System_Admin' link on the 'Banner'
         And I can see the 'System_Administration_Page'
         And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
-        And I can see the Manage review bodies list page
+        And I can see the manage review bodies list page
         And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
-        And I can see the Add a new review body page
+        And I can see the add a new review body page
 
     @verifyCreateReviewBody
     Scenario Outline: Verify the user is able to create a new review body with valid data
@@ -18,7 +18,7 @@ Feature: HRAPROG-393- User Administration: Manage Review Bodies
         When I click the 'Create_Profile' button on the 'Check_And_Create_Review_Body_Page'
         Then I can see the create Review body confirmation page for '<Add_Review_Body>'
         When I click the 'Back_To_Manage_Review_Bodies' link on the 'Create_Review_Body_Confirmation_Page'
-        Then I can see the Manage review bodies list page
+        Then I can see the manage review bodies list page
         Then I can see the list is sorted by default in the alphabetical order of 'Organisation Name'
         # Can I Reuse below step from Create?
         # And I can see the list is sorted by default in the alphabetical order of the 'First Name'

@@ -34,7 +34,6 @@ import CheckCreateUserProfilePage from '../pages/IRAS/reviewResearch/userAdminis
 import UserProfilePage from '../pages/IRAS/reviewResearch/userAdministration/manageUsers/UserProfilePage';
 import EditUserProfilePage from '../pages/IRAS/reviewResearch/userAdministration/manageUsers/EditUserProfilePage';
 import SystemAdministrationPage from '../pages/IRAS/reviewResearch/userAdministration/SystemAdministrationPage';
-import SystemAdministrationHomePage from '../pages/IRAS/reviewResearch/userAdministration/SystemAdministrationHomePage';
 import AuditHistoryReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/AuditHistoryReviewBodyPage';
 import ConfirmationPage from '../pages/IRAS/ConfirmationPage';
 
@@ -62,7 +61,6 @@ type CustomFixtures = {
   keyProjectRolesPage: KeyProjectRolesPage;
   reviewYourApplicationPage: ReviewYourApplicationPage;
   systemAdministrationPage: SystemAdministrationPage;
-  systemAdministrationHomePage: SystemAdministrationHomePage;
   manageReviewBodiesPage: ManageReviewBodiesPage;
   createReviewBodyPage: CreateReviewBodyPage;
   checkCreateReviewBodyPage: CheckCreateReviewBodyPage;
@@ -169,10 +167,6 @@ export const test = base.extend<CustomFixtures>({
 
   systemAdministrationPage: async ({ page }, use) => {
     await use(new SystemAdministrationPage(page));
-  },
-
-  systemAdministrationHomePage: async ({ page }, use) => {
-    await use(new SystemAdministrationHomePage(page));
   },
 
   createUserProfilePage: async ({ page }, use) => {

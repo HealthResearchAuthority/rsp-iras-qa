@@ -2,8 +2,8 @@
 Feature: User Administration: Manage Review Bodies - View audit history for review body
 
     Background:
-        Given I have navigated to the 'System_Administration_Home_Page'
-        And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Home_Page'
+        Given I have navigated to the 'System_Administration_Page'
+        And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
         And I can see the manage review bodies list page
     # And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
     # And I can see the add a new review body page
