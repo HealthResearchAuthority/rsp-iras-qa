@@ -54,9 +54,9 @@ Then(
     const dataCreateReviewBody = await fse.readJson(filePathCreateReviewBody);
     const eventDescriptionExpectedValue =
       dataCreateReviewBody.Create_Review_Body.organisation_name_unique + dataset.event_description_text;
-    expect(auditLog[0]).toBe(timeExpected);
-    expect(auditLog[1]).toBe(eventDescriptionExpectedValue);
-    expect(auditLog[2]).toBe(dataset.system_admin_email_text);
+    expect(auditLog[0][0]).toBe(timeExpected);
+    expect(auditLog[1][0]).toBe(eventDescriptionExpectedValue);
+    expect(auditLog[2][0]).toBe(dataset.system_admin_email_text);
   }
 );
 

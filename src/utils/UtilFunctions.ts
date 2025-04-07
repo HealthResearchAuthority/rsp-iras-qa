@@ -362,7 +362,7 @@ function standardAcheived(doubleViolation: number, tripleViolation: number) {
 export async function generateUniqueValue(keyVal: string, prefix: string): Promise<string> {
   const timestamp = new Date().toISOString().replace(/[-:.TZ]/g, '');
   const domain = keyVal;
-  return `${prefix}${timestamp}${domain}`;
+  return `${domain}${prefix}${timestamp}`;
 }
 
 export async function removeUnwantedWhitespace(value: string): Promise<string> {
