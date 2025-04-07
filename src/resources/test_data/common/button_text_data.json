@@ -55,5 +55,9 @@
   },
   "Confirmation_Page": {
     "Confirm": "Confirm"
+  },
+  "Review_Body_Profile_Page": {
+    "Disable_User_Record": "Disable review body",
+    "Enable_User_Record": "Enable review body"
   }
 }

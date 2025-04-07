@@ -295,3 +295,129 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityReviewBodyDisable @adminUser
+  Scenario: View review body page with disable button available
+    Given I have navigated to the 'System_Administration_Page'
+    And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
+    And I can see the manage review bodies list page
+    And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
+    And I fill the new review body page using 'Valid_Data_In_All_Fields'
+    And I click the 'Continue' button on the 'Create_Review_Body_Page'
+    And I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
+    And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
+    And I can see the manage review bodies list page
+    And I click the view edit link for the newly created review body
+    Then I can see the 'Disable_Label_Texts' ui labels on the manage review body profile page
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityReviewBodyDisableConfirmation @adminUser
+  Scenario: View disable confirmation page for review body
+    Given I have navigated to the 'System_Administration_Page'
+    And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
+    And I can see the manage review bodies list page
+    And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
+    And I fill the new review body page using 'Valid_Data_In_All_Fields'
+    And I click the 'Continue' button on the 'Create_Review_Body_Page'
+    And I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
+    And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
+    And I can see the manage review bodies list page
+    And I click the view edit link for the newly created review body
+    And I click the 'Disable_User_Record' button on the 'Review_Body_Profile_Page'
+    And I can see a 'Confirm' button on the 'Confirmation_Page'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityReviewBodyDisableSuccess @adminUser
+  Scenario: View disable confirmation success page for review body
+    Given I have navigated to the 'System_Administration_Page'
+    And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
+    And I can see the manage review bodies list page
+    And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
+    And I fill the new review body page using 'Valid_Data_In_All_Fields'
+    And I click the 'Continue' button on the 'Create_Review_Body_Page'
+    And I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
+    And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
+    And I can see the manage review bodies list page
+    And I click the view edit link for the newly created review body
+    And I click the 'Disable_User_Record' button on the 'Review_Body_Profile_Page'
+    And I click the 'Confirm' button on the 'Confirmation_Page'
+    And I can see a 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityReviewBodyEnable @adminUser
+  Scenario: View review body page with enable button available
+    Given I have navigated to the 'System_Administration_Page'
+    And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
+    And I can see the manage review bodies list page
+    And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
+    And I fill the new review body page using 'Valid_Data_In_All_Fields'
+    And I click the 'Continue' button on the 'Create_Review_Body_Page'
+    And I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
+    And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
+    And I can see the manage review bodies list page
+    And I click the view edit link for the newly created review body
+    And I click the 'Disable_User_Record' button on the 'Review_Body_Profile_Page'
+    And I click the 'Confirm' button on the 'Confirmation_Page'
+    And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
+    And I can see the manage review bodies list page
+    And I can see the status of the review body is 'disabled'
+    And I click the view edit link for the newly created review body
+    And I can see the 'Enable_Label_Texts' ui labels on the manage review body profile page
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityReviewBodyEnableConfirmation @adminUser
+  Scenario: View enable confirmation page for review body
+    Given I have navigated to the 'System_Administration_Page'
+    And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
+    And I can see the manage review bodies list page
+    And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
+    And I fill the new review body page using 'Valid_Data_In_All_Fields'
+    And I click the 'Continue' button on the 'Create_Review_Body_Page'
+    And I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
+    And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
+    And I can see the manage review bodies list page
+    And I click the view edit link for the newly created review body
+    And I click the 'Disable_User_Record' button on the 'Review_Body_Profile_Page'
+    And I click the 'Confirm' button on the 'Confirmation_Page'
+    And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
+    And I can see the manage review bodies list page
+    And I can see the status of the review body is 'disabled'
+    And I click the view edit link for the newly created review body
+    And I click the 'Enable_User_Record' button on the 'Review_Body_Profile_Page'
+    And I can see a 'Confirm' button on the 'Confirmation_Page'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityReviewBodyEnableSuccess @adminUser
+  Scenario: View enable confirmation success page for review body
+    Given I have navigated to the 'System_Administration_Page'
+    And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
+    And I can see the manage review bodies list page
+    And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
+    And I fill the new review body page using 'Valid_Data_In_All_Fields'
+    And I click the 'Continue' button on the 'Create_Review_Body_Page'
+    And I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
+    And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
+    And I can see the manage review bodies list page
+    And I click the view edit link for the newly created review body
+    And I click the 'Disable_User_Record' button on the 'Review_Body_Profile_Page'
+    And I click the 'Confirm' button on the 'Confirmation_Page'
+    And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
+    And I can see the manage review bodies list page
+    And I can see the status of the review body is 'disabled'
+    And I click the view edit link for the newly created review body
+    And I click the 'Enable_User_Record' button on the 'Review_Body_Profile_Page'
+    When I click the 'Confirm' button on the 'Confirmation_Page'
+    And I can see a 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
