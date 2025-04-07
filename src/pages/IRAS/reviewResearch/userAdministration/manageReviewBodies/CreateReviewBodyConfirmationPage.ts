@@ -23,7 +23,7 @@ export default class CreateReviewBodyConfirmationPage {
       .getByText(this.createReviewBodyConfirmationPageData.Create_Review_Body_Confirmation_Page.confirmation_message, {
         exact: true,
       });
-    this.confirmation_email_note = this.page.getByRole('paragraph');
+    this.confirmation_email_note = this.page.getByRole('paragraph').first();
     this.add_another_review_body_link = this.page
       .getByRole('link')
       .getByText(

@@ -298,7 +298,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
   
 
     @axeAccessibilityManageReviewBodies @adminUser
-    Scenario: Manage Review Bodies list page
+    Scenario: Manage review bodies list page
         Given I have navigated to the 'Manage_Review_Bodies_Page'
         And I can see the manage review bodies list page
         When I Scan the page with the Axe Accessibilty Tool
@@ -321,32 +321,25 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
         And I can see the manage review bodies list page
         And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
         And I can see the add a new review body page
-        When I fill the new review body page using '<Add_Review_Body>'
+        When I fill the new review body page using 'Valid_Data_In_All_Fields'
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
-        Then I can see the check and create review body page for '<Add_Review_Body>'
+        Then I can see the check and create review body page for 'Valid_Data_In_All_Fields'
         When I Scan the page with the Axe Accessibilty Tool
         And I analyse the results from the Axe scan
         Then I expect to receive no WCAG Violations   
 
-        Examples:
-        | Add_Review_Body                      |
-        | Valid_Data_In_All_Fields             | 
 
     @axeAccessibilityConfirmReviewBodies @adminUser
-    Scenario Outline: Create Review body confirmation page        
+    Scenario Outline: Create review body confirmation page        
         Given I have navigated to the 'Manage_Review_Bodies_Page'
         And I can see the manage review bodies list page
         And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
         And I can see the add a new review body page   
-        When I fill the new review body page using '<Add_Review_Body>'
+        When I fill the new review body page using 'Valid_Data_In_All_Fields'
         And I click the 'Continue' button on the 'Create_Review_Body_Page'      
-        Then I can see the check and create review body page for '<Add_Review_Body>'
+        Then I can see the check and create review body page for 'Valid_Data_In_All_Fields'
         And I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
-        Then I can see the create Review body confirmation page for '<Add_Review_Body>'
+        Then I can see the create Review body confirmation page for 'Valid_Data_In_All_Fields'
         When I Scan the page with the Axe Accessibilty Tool
         And I analyse the results from the Axe scan
         Then I expect to receive no WCAG Violations   
-
-        Examples:
-        | Add_Review_Body                      |
-        | Valid_Data_In_All_Fields             | 
