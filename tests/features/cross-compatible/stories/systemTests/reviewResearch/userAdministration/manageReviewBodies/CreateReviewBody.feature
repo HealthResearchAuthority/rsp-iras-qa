@@ -14,13 +14,17 @@ Feature: User Administration: Manage Review Bodies - Create review body
     @verifyCreateReviewBody @fail
     Scenario Outline: Verify the user is able to create a new review body with valid data
         When I fill the new review body page using '<Add_Review_Body>'
+        And I capture the page screenshot
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
         Then I can see the check and create review body page for '<Add_Review_Body>'
+        And I capture the page screenshot
         When I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
         Then I can see the create Review body confirmation page for '<Add_Review_Body>'
+        And I capture the page screenshot
         When I have navigated to the 'Manage_Review_Bodies_Page'
         And I can see the manage review bodies list page
         Then I can see the review body for '<Add_Review_Body>' is present in the list
+        And I capture the page screenshot
         And I can see the status of the review body is '<Status>'
 
         Examples:
@@ -32,9 +36,12 @@ Feature: User Administration: Manage Review Bodies - Create review body
     @verifyCreateReviewBodyRealData @fail
     Scenario Outline: Verify the user is able to create a new review body with real data
         When I fill the new review body page using '<Add_Review_Body>'
+        And I capture the page screenshot
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
         And I can see the check and create review body page for '<Add_Review_Body>'
+        And I capture the page screenshot
         And I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
+        And I capture the page screenshot
         Then I can see the create Review body confirmation page for '<Add_Review_Body>'
 
         Examples:
@@ -62,16 +69,25 @@ Feature: User Administration: Manage Review Bodies - Create review body
         And I can see the check and create review body page for '<Add_Review_Body>'
         And I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
         And I can see the create Review body confirmation page for '<Add_Review_Body>'
+        And I capture the page screenshot
         When I click the 'Add_Another_Review_Body' link on the 'Create_Review_Body_Confirmation_Page'
         Then I can see the add a new review body page
+        And I capture the page screenshot
+
         When I fill the new review body page using '<Add_Another_Review_Body>'
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
         And I can see the check and create review body page for '<Add_Another_Review_Body>'
+        And I capture the page screenshot
+
         And I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
         Then I can see the create Review body confirmation page for '<Add_Another_Review_Body>'
+        And I capture the page screenshot
+
         When I click the 'Back_To_Manage_Review_Bodies' link on the 'Create_Review_Body_Confirmation_Page'
         And I can see the manage review bodies list page
         Then I can see the review body for '<Add_Another_Review_Body>' is present in the list
+        And I capture the page screenshot
+
         And I can see the status of the review body is '<Status>'
 
         Examples:
@@ -81,7 +97,9 @@ Feature: User Administration: Manage Review Bodies - Create review body
 
     @verifyAddNewReviewPageBackButtonFlow
     Scenario: Verify the user can navigate from 'Add a new review body' page by clicking 'Back' link
+        And I capture the page screenshot
         And I click the 'Back' link on the 'Create_Review_Body_Page'
+        And I capture the page screenshot
         Then I can see the manage review bodies list page
 
     # Test blocked due to back button defect, marking as should fail
@@ -90,15 +108,20 @@ Feature: User Administration: Manage Review Bodies - Create review body
         When I fill the new review body page using '<Add_Review_Body>'
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
         Then I can see the check and create review body page for '<Add_Review_Body>'
+        And I capture the page screenshot
         And I click the 'Back' button on the 'Check_Create_Review_Body_Page'
         Then I can see the Add new review body page for '<Add_Review_Body>'
         And I fill the new review body page using '<Add_Another_Review_Body>'
+        And I capture the page screenshot
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
         Then I can see the check and create review body page for '<Add_Another_Review_Body>'
+        And I capture the page screenshot
         And I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
         Then I can see the create Review body confirmation page for '<Add_Another_Review_Body>'
+        And I capture the page screenshot
         When I click the 'Back_To_Manage_Review_Bodies' link on the 'Create_Review_Body_Confirmation_Page'
         Then I can see the manage review bodies list page
+        And I capture the page screenshot
 
         Examples:
             | Add_Review_Body          | Add_Another_Review_Body          |
@@ -110,8 +133,10 @@ Feature: User Administration: Manage Review Bodies - Create review body
         When I fill the new review body page using '<Add_Review_Body>'
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
         Then I can see the check and create review body page for '<Add_Review_Body>'
+        And I capture the page screenshot
         When I click the change link against '<Field_Name>' on the check review body page
         Then I can see the Add new review body page for '<Add_Review_Body>'
+        And I capture the page screenshot
 
         Examples:
             | Add_Review_Body          | Field_Name        |
@@ -124,8 +149,10 @@ Feature: User Administration: Manage Review Bodies - Create review body
     @verifyValidReviewBodyCharacterLimits @fail
     Scenario Outline: Field validation passes with minimum and maximum characters in organisation name and description
         When I fill the new review body page using '<Add_Review_Body>'
+        And I capture the page screenshot
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
         Then I can see the check and create review body page for '<Add_Review_Body>'
+        And I capture the page screenshot
 
         Examples:
             | Add_Review_Body                              |
@@ -139,8 +166,10 @@ Feature: User Administration: Manage Review Bodies - Create review body
     @verifyValidationErrors
     Scenario Outline: When min/max character field validation fails correct error messages display
         When I fill the new review body page using '<Add_Review_Body>'
+        And I capture the page screenshot
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
         Then I can see the '<Error>' validation message for '<Field_Name>'
+        And I capture the page screenshot
 
         Examples:
             | Add_Review_Body                      | Error           | Field_Name              |
@@ -155,8 +184,10 @@ Feature: User Administration: Manage Review Bodies - Create review body
     @verifyEmailValidationErrors
     Scenario Outline: Verify that email field validation prevents innvalid email formats
         When I fill the new review body page using '<Add_Review_Body>'
+        And I capture the page screenshot
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
         Then I can see the '<Error>' validation message for '<Field_Name>'
+        And I capture the page screenshot
 
         Examples:
             | Add_Review_Body                                     | Error           | Field_Name          |
