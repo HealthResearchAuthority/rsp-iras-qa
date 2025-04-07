@@ -310,7 +310,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
         Given I have navigated to the 'Manage_Review_Bodies_Page'
         And I can see the manage review bodies list page
         And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
-        And I can see the Add a new review body page
+        And I can see the add a new review body page
         When I Scan the page with the Axe Accessibilty Tool
         And I analyse the results from the Axe scan
         Then I expect to receive no WCAG Violations
@@ -320,10 +320,10 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
         Given I have navigated to the 'Manage_Review_Bodies_Page'
         And I can see the manage review bodies list page
         And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
-        And I can see the Add a new review body page
+        And I can see the add a new review body page
         When I fill the new review body page using '<Add_Review_Body>'
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
-        Then I can see the Check and create review body page for '<Add_Review_Body>'
+        Then I can see the check and create review body page for '<Add_Review_Body>'
         When I Scan the page with the Axe Accessibilty Tool
         And I analyse the results from the Axe scan
         Then I expect to receive no WCAG Violations   
@@ -337,10 +337,10 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
         Given I have navigated to the 'Manage_Review_Bodies_Page'
         And I can see the manage review bodies list page
         And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
-        And I can see the Add a new review body page   
+        And I can see the add a new review body page   
         When I fill the new review body page using '<Add_Review_Body>'
         And I click the 'Continue' button on the 'Create_Review_Body_Page'      
-        Then I can see the Check and create review body page for '<Add_Review_Body>'
+        Then I can see the check and create review body page for '<Add_Review_Body>'
         And I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
         Then I can see the create Review body confirmation page for '<Add_Review_Body>'
         When I Scan the page with the Axe Accessibilty Tool

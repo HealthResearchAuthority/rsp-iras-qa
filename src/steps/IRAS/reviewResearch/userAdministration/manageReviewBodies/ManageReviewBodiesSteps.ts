@@ -8,15 +8,6 @@ Then('I can see the manage review bodies list page', async ({ manageReviewBodies
 });
 
 Then(
-  'I can see the list is sorted by default in the alphabetical order of {string}',
-  async ({ manageReviewBodiesPage }, fieldName: string) => {
-    //Update RE-USE Tiji method
-    await manageReviewBodiesPage.assertOnManageReviewBodiesPage();
-    console.log(fieldName);
-  }
-);
-
-Then(
   'I can see the review body for {string} is present in the list',
   async ({ manageReviewBodiesPage, createReviewBodyPage }, datasetName: string) => {
     const dataset = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body[datasetName];

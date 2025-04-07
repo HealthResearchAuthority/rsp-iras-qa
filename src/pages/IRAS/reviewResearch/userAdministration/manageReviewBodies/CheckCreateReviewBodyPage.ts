@@ -9,8 +9,6 @@ export default class CheckCreateReviewBodyPage {
   readonly checkCreateReviewBodyPageData: typeof checkCreateReviewBodyPageData;
   readonly buttonTextData: typeof buttonTextData;
   readonly linkTextData: typeof linkTextData;
-  readonly selectedBreadCrumbs: Locator;
-  readonly backButton: Locator;
   readonly page_heading: Locator;
   readonly sub_heading: Locator;
   readonly guidance_text: Locator;
@@ -38,8 +36,6 @@ export default class CheckCreateReviewBodyPage {
     this.linkTextData = linkTextData;
 
     //Locators
-    this.selectedBreadCrumbs = this.page.getByTestId('title'); // update
-    this.backButton = this.page.getByTestId('title'); // update
     this.page_heading = this.page
       .getByRole('heading')
       .getByText(this.checkCreateReviewBodyPageData.Check_Create_Review_Body_Page.heading, { exact: true });

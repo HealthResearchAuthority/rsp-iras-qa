@@ -1,5 +1,5 @@
 @UserAdministration @ManageReviewBodies @adminUser @SystemTest @rsp-2570
-Feature: HRAPROG-393- User Administration: Manage Review Bodies
+Feature: User Administration: Manage Review Bodies - Create review body
 
     Background:
         Given I have navigated to the 'Home_Page'
@@ -8,14 +8,14 @@ Feature: HRAPROG-393- User Administration: Manage Review Bodies
         And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
         And I can see the manage review bodies list page
         And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
-        And I can see the Add a new review body page
+        And I can see the add a new review body page
 
     # Test blocked due text defect, marking as should fail
     @verifyCreateReviewBody @fail
     Scenario Outline: Verify the user is able to create a new review body with valid data
         When I fill the new review body page using '<Add_Review_Body>'
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
-        Then I can see the Check and create review body page for '<Add_Review_Body>'
+        Then I can see the check and create review body page for '<Add_Review_Body>'
         When I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
         Then I can see the create Review body confirmation page for '<Add_Review_Body>'
         When I have navigated to the 'Manage_Review_Bodies_Page'
@@ -33,7 +33,7 @@ Feature: HRAPROG-393- User Administration: Manage Review Bodies
     Scenario Outline: Verify the user is able to create a new review body with real data
         When I fill the new review body page using '<Add_Review_Body>'
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
-        And I can see the Check and create review body page for '<Add_Review_Body>'
+        And I can see the check and create review body page for '<Add_Review_Body>'
         And I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
         Then I can see the create Review body confirmation page for '<Add_Review_Body>'
 
@@ -59,14 +59,14 @@ Feature: HRAPROG-393- User Administration: Manage Review Bodies
     Scenario Outline: Verify the user is able to add another review body via the link on the Confirmation message screen
         And I fill the new review body page using '<Add_Review_Body>'
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
-        And I can see the Check and create review body page for '<Add_Review_Body>'
+        And I can see the check and create review body page for '<Add_Review_Body>'
         And I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
         And I can see the create Review body confirmation page for '<Add_Review_Body>'
         When I click the 'Add_Another_Review_Body' link on the 'Create_Review_Body_Confirmation_Page'
-        Then I can see the Add a new review body page
+        Then I can see the add a new review body page
         When I fill the new review body page using '<Add_Another_Review_Body>'
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
-        And I can see the Check and create review body page for '<Add_Another_Review_Body>'
+        And I can see the check and create review body page for '<Add_Another_Review_Body>'
         And I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
         Then I can see the create Review body confirmation page for '<Add_Another_Review_Body>'
         When I click the 'Back_To_Manage_Review_Bodies' link on the 'Create_Review_Body_Confirmation_Page'
@@ -89,12 +89,12 @@ Feature: HRAPROG-393- User Administration: Manage Review Bodies
     Scenario Outline: Verify the user can navigate from the check and confirm review body pages using the back options
         When I fill the new review body page using '<Add_Review_Body>'
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
-        Then I can see the Check and create review body page for '<Add_Review_Body>'
+        Then I can see the check and create review body page for '<Add_Review_Body>'
         And I click the 'Back' button on the 'Check_Create_Review_Body_Page'
         Then I can see the Add new review body page for '<Add_Review_Body>'
         And I fill the new review body page using '<Add_Another_Review_Body>'
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
-        Then I can see the Check and create review body page for '<Add_Another_Review_Body>'
+        Then I can see the check and create review body page for '<Add_Another_Review_Body>'
         And I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
         Then I can see the create Review body confirmation page for '<Add_Another_Review_Body>'
         When I click the 'Back_To_Manage_Review_Bodies' link on the 'Create_Review_Body_Confirmation_Page'
@@ -109,7 +109,7 @@ Feature: HRAPROG-393- User Administration: Manage Review Bodies
     Scenario Outline: Verify the user can navigate from the check review body page via the change links for all fields
         When I fill the new review body page using '<Add_Review_Body>'
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
-        Then I can see the Check and create review body page for '<Add_Review_Body>'
+        Then I can see the check and create review body page for '<Add_Review_Body>'
         When I click the 'Change' link against '<Field_Name>' on the 'Check_Create_Review_Body_Page'
         Then I can see the Add new review body page for '<Add_Review_Body>'
 
@@ -125,7 +125,7 @@ Feature: HRAPROG-393- User Administration: Manage Review Bodies
     Scenario Outline: Field validation passes with minimum and maximum characters in organisation name and description
         When I fill the new review body page using '<Add_Review_Body>'
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
-        Then I can see the Check and create review body page for '<Add_Review_Body>'
+        Then I can see the check and create review body page for '<Add_Review_Body>'
 
         Examples:
             | Add_Review_Body                              |

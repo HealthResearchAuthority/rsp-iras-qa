@@ -4,7 +4,7 @@ import { expect, test } from '../../../../../hooks/CustomFixtures';
 const { When, Then } = createBdd(test);
 
 Then(
-  'I can see the Check and create review body page for {string}',
+  'I can see the check and create review body page for {string}',
   async ({ checkCreateReviewBodyPage, createReviewBodyPage }, datasetName: string) => {
     const dataset = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body[datasetName];
     const expectedCountryValues: string = dataset.country_checkbox.toString();

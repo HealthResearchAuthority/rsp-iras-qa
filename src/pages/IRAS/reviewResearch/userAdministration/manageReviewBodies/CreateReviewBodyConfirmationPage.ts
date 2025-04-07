@@ -7,7 +7,6 @@ export default class CreateReviewBodyConfirmationPage {
   readonly page: Page;
   readonly createReviewBodyConfirmationPageData: typeof createReviewBodyConfirmationPageData;
   readonly buttonTextData: typeof buttonTextData;
-  readonly selectedBreadCrumbs: Locator;
   readonly confirmation_panel_heading: Locator;
   readonly confirmation_email_note: Locator;
   readonly add_another_review_body_link: Locator;
@@ -19,7 +18,6 @@ export default class CreateReviewBodyConfirmationPage {
     this.createReviewBodyConfirmationPageData = createReviewBodyConfirmationPageData;
 
     //Locators
-    this.selectedBreadCrumbs = this.page.getByTestId('title'); // update
     this.confirmation_panel_heading = this.page
       .getByRole('heading')
       .getByText(this.createReviewBodyConfirmationPageData.Create_Review_Body_Confirmation_Page.confirmation_message, {

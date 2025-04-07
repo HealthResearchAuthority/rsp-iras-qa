@@ -144,7 +144,6 @@ Then('I see something {string}', async ({ commonItemsPage }, testType: string) =
 });
 
 Then('I click the {string} button on the {string}', async ({ commonItemsPage }, buttonKey: string, pageKey: string) => {
-  await commonItemsPage.page.pause();
   const buttonValue = commonItemsPage.buttonTextData[pageKey][buttonKey];
   await commonItemsPage.govUkButton
     .getByText(buttonValue, { exact: true })

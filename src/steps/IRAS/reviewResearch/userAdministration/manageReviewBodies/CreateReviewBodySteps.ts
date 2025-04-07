@@ -24,7 +24,7 @@ When(
   }
 );
 
-Then('I can see the Add a new review body page', async ({ createReviewBodyPage }) => {
+Then('I can see the add a new review body page', async ({ createReviewBodyPage }) => {
   await createReviewBodyPage.assertOnCreateReviewbodyPage();
 });
 
@@ -32,7 +32,6 @@ Then('I can see the Add new review body page for {string}', async ({ createRevie
   const dataset = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body[datasetName];
   await createReviewBodyPage.assertOnCreateReviewbodyPage();
   if (datasetName.startsWith('Valid_')) {
-    console.log(await createReviewBodyPage.organisation_name_text.textContent());
     await expect(createReviewBodyPage.organisation_name_text).toHaveValue(
       await createReviewBodyPage.getUniqueOrgName()
     );
