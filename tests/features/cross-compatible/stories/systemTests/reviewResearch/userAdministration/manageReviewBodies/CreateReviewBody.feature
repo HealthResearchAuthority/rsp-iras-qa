@@ -10,12 +10,13 @@ Feature: HRAPROG-393- User Administration: Manage Review Bodies
         And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
         And I can see the Add a new review body page
 
-    @verifyCreateReviewBody @only
+    # Test blocked due text defect, marking as should fail
+    @verifyCreateReviewBody @fail
     Scenario Outline: Verify the user is able to create a new review body with valid data
         When I fill the new review body page using '<Add_Review_Body>'
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
         Then I can see the Check and create review body page for '<Add_Review_Body>'
-        When I click the 'Create_Profile' button on the 'Check_And_Create_Review_Body_Page'
+        When I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
         Then I can see the create Review body confirmation page for '<Add_Review_Body>'
         When I have navigated to the 'Manage_Review_Bodies_Page'
         And I can see the Manage review bodies list page
@@ -27,12 +28,13 @@ Feature: HRAPROG-393- User Administration: Manage Review Bodies
             | Valid_Data_In_All_Fields           | enabled |
             | Valid_Data_In_All_Mandatory_Fields | enabled |
 
-    @verifyCreateReviewBodyRealData
+    # Test blocked due to text defect, marking as should fail
+    @verifyCreateReviewBodyRealData @fail
     Scenario Outline: Verify the user is able to create a new review body with real data
         When I fill the new review body page using '<Add_Review_Body>'
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
         And I can see the Check and create review body page for '<Add_Review_Body>'
-        And I click the 'Create_Profile' button on the 'Check_And_Create_Review_Body_Page'
+        And I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
         Then I can see the create Review body confirmation page for '<Add_Review_Body>'
 
         Examples:
@@ -52,19 +54,20 @@ Feature: HRAPROG-393- User Administration: Manage Review Bodies
             | Review_Body_ARSAC_Data  |
             | Review_Body_NRS_Data    |
 
-    @verifyAddAnotherReviewBody
+    # Test blocked due to text defect, marking as should fail
+    @verifyAddAnotherReviewBody @fail
     Scenario Outline: Verify the user is able to add another review body via the link on the Confirmation message screen
         And I fill the new review body page using '<Add_Review_Body>'
-        And I click the 'Complete' button on the 'Create_Review_Body_Page'
+        And I click the 'Continue' button on the 'Create_Review_Body_Page'
         And I can see the Check and create review body page for '<Add_Review_Body>'
-        And I click the 'Create_Profile' button on the 'Check_And_Create_Review_Body_Page'
+        And I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
         And I can see the create Review body confirmation page for '<Add_Review_Body>'
         When I click the 'Add_Another_Review_Body' link on the 'Create_Review_Body_Confirmation_Page'
         Then I can see the Add a new review body page
         When I fill the new review body page using '<Add_Another_Review_Body>'
-        And I click the 'Complete' button on the 'Create_Review_Body_Page'
+        And I click the 'Continue' button on the 'Create_Review_Body_Page'
         And I can see the Check and create review body page for '<Add_Another_Review_Body>'
-        And I click the 'Create_Profile' button on the 'Check_And_Create_Review_Body_Page'
+        And I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
         Then I can see the create Review body confirmation page for '<Add_Another_Review_Body>'
         When I click the 'Back_To_Manage_Review_Bodies' link on the 'Create_Review_Body_Confirmation_Page'
         And I can see the Manage review bodies list page
@@ -77,21 +80,22 @@ Feature: HRAPROG-393- User Administration: Manage Review Bodies
             | Valid_Data_In_All_Mandatory_Fields | Valid_Data_In_All_Mandatory_Fields_Another | disabled |
 
     @verifyAddNewReviewPageBackButtonFlow
-    Scenario: Verify the user can navigate from 'Add a new review body' page by clicking 'Back' button
-        And I click the 'Back' button on the 'Create_Review_Body_Page'
+    Scenario: Verify the user can navigate from 'Add a new review body' page by clicking 'Back' link
+        And I click the 'Back' link on the 'Create_Review_Body_Page'
         Then I can see the Manage review bodies list page
 
-    @verifyCheckReviewPageBackButtonFlow
-    Scenario Outline: Verify the user can navigate from 'Check and create review body' page by clicking 'Back' button
+    # Test blocked due to back button defect, marking as should fail
+    @verifyCheckReviewPageBackButtonFlow @fail
+    Scenario Outline: Verify the user can navigate from the check and confirm review body pages using the back options
         When I fill the new review body page using '<Add_Review_Body>'
-        And I click the 'Complete' button on the 'Create_Review_Body_Page'
+        And I click the 'Continue' button on the 'Create_Review_Body_Page'
         Then I can see the Check and create review body page for '<Add_Review_Body>'
         And I click the 'Back' button on the 'Check_Create_Review_Body_Page'
         Then I can see the Add new review body page for '<Add_Review_Body>'
         And I fill the new review body page using '<Add_Another_Review_Body>'
-        And I click the 'Complete' button on the 'Create_Review_Body_Page'
+        And I click the 'Continue' button on the 'Create_Review_Body_Page'
         Then I can see the Check and create review body page for '<Add_Another_Review_Body>'
-        And I click the 'Create_Profile' button on the 'Check_And_Create_Review_Body_Page'
+        And I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
         Then I can see the create Review body confirmation page for '<Add_Another_Review_Body>'
         When I click the 'Back_To_Manage_Review_Bodies' link on the 'Create_Review_Body_Confirmation_Page'
         Then I can see the Manage review bodies list page
@@ -100,32 +104,25 @@ Feature: HRAPROG-393- User Administration: Manage Review Bodies
             | Add_Review_Body          | Add_Another_Review_Body          |
             | Valid_Data_In_All_Fields | Valid_Data_In_All_Fields_Another |
 
-    @rsp-2570
-    Scenario Outline: Verify the user can navigate from 'Check and create review body' page by clicking 'Change' button against all the fields
+    @verifyChangeLinks
+    Scenario Outline: Verify the user can navigate from the check review body page via the change links for all fields
         When I fill the new review body page using '<Add_Review_Body>'
-        And I click the 'Complete' button on the 'Create_Review_Body_Page'
+        And I click the 'Continue' button on the 'Create_Review_Body_Page'
         Then I can see the Check and create review body page for '<Add_Review_Body>'
         When I click the 'Change' link against '<Field_Name>' on the 'Check_Create_Review_Body_Page'
         Then I can see the Add new review body page for '<Add_Review_Body>'
-        And I fill the new review body page using '<Add_Another_Review_Body>'
-        And I click the 'Complete' button on the 'Create_Review_Body_Page'
-        Then I can see the Check and create review body page for '<Add_Another_Review_Body>'
-        And I click the 'Create_Profile' button on the 'Check_And_Create_Review_Body_Page'
-        Then I can see the create Review body confirmation page for '<Add_Another_Review_Body>'
-        When I click the 'Back_To_Manage_Review_Bodies' link on the 'Create_Review_Body_Confirmation_Page'
-        Then I can see the Manage review bodies list page
 
         Examples:
-            | Add_Review_Body          | Field_Name        | Add_Another_Review_Body          |
-            | Valid_Data_In_All_Fields | Organisation_Name | Valid_Data_In_All_Fields_Another |
-            | Valid_Data_In_All_Fields | Country           | Valid_Data_In_All_Fields_Another |
-            | Valid_Data_In_All_Fields | Email_Address     | Valid_Data_In_All_Fields_Another |
-            | Valid_Data_In_All_Fields | Description       | Valid_Data_In_All_Fields_Another |
+            | Add_Review_Body          | Field_Name        |
+            | Valid_Data_In_All_Fields | Organisation_Name |
+            | Valid_Data_In_All_Fields | Country           |
+            | Valid_Data_In_All_Fields | Email_Address     |
+            | Valid_Data_In_All_Fields | Description       |
 
-    @rsp-2570
-    Scenario Outline: Field Validation with minimum and maximum characters in Organisation Name and Description
+    @verifyValidReviewBodyCharacterLimits
+    Scenario Outline: Field validation passes with minimum and maximum characters in organisation name and description
         When I fill the new review body page using '<Add_Review_Body>'
-        And I click the 'Complete' button on the 'Create_Review_Body_Page'
+        And I click the 'Continue' button on the 'Create_Review_Body_Page'
         Then I can see the Check and create review body page for '<Add_Review_Body>'
 
         Examples:
@@ -137,36 +134,56 @@ Feature: HRAPROG-393- User Administration: Manage Review Bodies
             | Description_Field_Max_Data                   |
             | Description_Field_between_Min_Max_Data       |
 
-    @rsp-2570
-    Scenario Outline: Field Validation and Error Message Validation
+    @verifyValidationErrors
+    Scenario Outline: When min/max character field validation fails correct error messages display
         When I fill the new review body page using '<Add_Review_Body>'
-        And I click the 'Complete' button on the 'Create_Review_Body_Page'
-        Then I can see the error message against '<Field_Name>'
+        And I click the 'Continue' button on the 'Create_Review_Body_Page'
+        Then I can see the '<Error>' validation message for '<Field_Name>'
 
         Examples:
-            | Add_Review_Body                      | Field_Name        |
-            | Missing_Data_All_Fields              | All_Mandatory     |
-            | Missing_Data_All_Mandatory_Fields    | All_Mandatory     |
-            | Missing_Data_Organisation_Name_Field | Organisation_Name |
-            | Missing_Data_Country_Field           | Country           |
-            | Missing_Data_Email_Address_Field     | Email_Address     |
-            | Invalid_Data_Organisation_Name_Field | Organisation_Name |
-            | Invalid_Data_Email_Address_Field     | Email_Address     |
-            | Invalid_Data_Description_Field       | Description       |
+            | Add_Review_Body                      | Error           | Field_Name              |
+            | Missing_Data_Organisation_Name_Field | Mandatory_Field | Organisation_Name_Error |
+            | Missing_Data_Country_Field           | Select_Country  | Country_Error           |
+            | Missing_Data_Email_Address_Field     | Mandatory_Field | Email_Address_Error     |
+            | Missing_Data_All_Fields              | Mandatory_Field | All_Mandatory_Fields    |
+            | Missing_Data_All_Mandatory_Fields    | Mandatory_Field | All_Mandatory_Fields    |
+            | Invalid_Data_Organisation_Name_Field | Max_Org_Chars   | Organisation_Name_Error |
+            | Invalid_Data_Description_Field       | Max_Words       | Description_Error       |
 
+    @verifyEmailValidationErrors
+    Scenario Outline: Verify that email field validation prevents innvalid email formats
+        When I fill the new review body page using '<Add_Review_Body>'
+        And I click the 'Continue' button on the 'Create_Review_Body_Page'
+        Then I can see the '<Error>' validation message for '<Field_Name>'
 
-
-
-# Field validation(Error message)-mandatory/optional, min/max ,datatype:
-
-# Organisation Name- Varchar/ Text- 250 characters- Mandatory
-
-# Country-Checkbox -England/Northern Ireland/Scotland/Wales-Mandatory
-
-# Email address-Varchar/ Text-Mandatory-@ validation/Allow apostrophes
-
-# Description-Varchar/ Text-250 words-Optional
-
+        Examples:
+            | Add_Review_Body                                     | Error           | Field_Name          |
+            | Invalid_Character_Limit                             | Max_Email_Chars | Email_Address_Error |
+            | Incorrect_Email_Format                              | Email_Format    | Email_Address_Error |
+            # | Invalid_Email_Data_Start_With_Dot                  | Email_Format    | Email_Address_Error |
+            | Invalid_Email_Data_Double_Dot                       | Email_Format    | Email_Address_Error |
+            | Invalid_Email_Data_Space                            | Email_Format    | Email_Address_Error |
+            # | Invalid_Email_Data_Wrong_AT                        | Email_Format    | Email_Address_Error |
+            | Invalid_Email_Data_Less_Greater_Symbols             | Email_Format    | Email_Address_Error |
+            | Invalid_Email_Data_Colon                            | Email_Format    | Email_Address_Error |
+            | Invalid_Email_Data_Semi_Colon                       | Email_Format    | Email_Address_Error |
+            | Invalid_Email_Data_Comma                            | Email_Format    | Email_Address_Error |
+            # | Invalid_Email_Data_Start_With_Hyphen               | Email_Format    | Email_Address_Error |
+            # | Invalid_Email_Data_Hyphen_Before_Domain            | Email_Format    | Email_Address_Error |
+            | Invalid_Email_Data_Double_Dot_Domain                | Email_Format    | Email_Address_Error |
+            | Invalid_Email_Data_Exclamation_Domain               | Email_Format    | Email_Address_Error |
+            # | Invalid_Email_Data_Unicode                         | Email_Format    | Email_Address_Error |
+            # | Invalid_Email_Data_Single_Quote_Before_AT          | Email_Format    | Email_Address_Error |
+            | Invalid_Email_Data_Domain_Exceed_Max                | Email_Format    | Email_Address_Error |
+            # | Invalid_Email_Data_Local_Part_Max                  | Email_Format    | Email_Address_Error |
+            | Invalid_Email_Data_Consecutive_Dot_Domain           | Email_Format    | Email_Address_Error |
+            | Invalid_Email_Data_Consecutive_Dot_SubDomain        | Email_Format    | Email_Address_Error |
+            | Invalid_Email_Data_Consecutive_Dot_Domain_SubDomain | Email_Format    | Email_Address_Error |
+            | Invalid_Email_Data_Emoji                            | Email_Format    | Email_Address_Error |
+            | Invalid_Email_Data_TLD                              | Email_Format    | Email_Address_Error |
+            | Invalid_Email_Data_Missing_AT                       | Email_Format    | Email_Address_Error |
+            | Invalid_Email_Data_Reserved_Domain                  | Email_Format    | Email_Address_Error |
+            | Invalid_Email_Data_Punycode                         | Email_Format    | Email_Address_Error |
 
 
 

@@ -57,7 +57,7 @@ export default class CommonItemsPage {
 
     //Locators
     this.showAllSectionsAccordion = page.locator('.govuk-accordion__show-all"');
-    this.govUkButton = this.page.locator('.govuk-button');
+    this.govUkButton = this.page.getByRole('button');
     this.govUkCheckboxes = this.page.locator('.govuk-checkboxes');
     this.govUkCheckboxItem = this.govUkCheckboxes.locator('.govuk-checkboxes__item');
     this.govUkLink = this.page.getByRole('link');

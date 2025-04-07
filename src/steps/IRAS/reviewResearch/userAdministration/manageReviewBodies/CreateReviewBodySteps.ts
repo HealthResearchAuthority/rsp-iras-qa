@@ -29,30 +29,35 @@ Then('I can see the Add a new review body page', async ({ createReviewBodyPage }
 });
 
 Then('I can see the Add new review body page for {string}', async ({ createReviewBodyPage }, datasetName: string) => {
-  //update
   const dataset = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body[datasetName];
   await createReviewBodyPage.assertOnCreateReviewbodyPage();
-  const actualOrganisationName = await createReviewBodyPage.organisation_name_text.nth(1).textContent();
-  const actualCountry = await createReviewBodyPage.countryVal.textContent(); //selected country
-  const actualEmailAddress = await createReviewBodyPage.email_address_text.textContent();
-  const actualDescription = await createReviewBodyPage.description_text.textContent();
-  expect(actualOrganisationName).toBe(dataset.organisation_name);
-  expect(actualCountry).toBe(dataset.country);
-  expect(actualEmailAddress).toBe(dataset.email_address);
-  expect(actualDescription).toBe(dataset.description);
+  if (datasetName.startsWith('Valid_')) {
+    console.log(await createReviewBodyPage.organisation_name_text.textContent());
+    await expect(createReviewBodyPage.organisation_name_text).toHaveValue(
+      await createReviewBodyPage.getUniqueOrgName()
+    );
+  } else {
+    await expect(createReviewBodyPage.organisation_name_text).toHaveValue(dataset.organisation_name_text);
+  }
+  for (const checkbox of dataset.country_checkbox) {
+    await expect(
+      createReviewBodyPage.country_checkbox.locator('..').getByLabel(checkbox, { exact: true })
+    ).toBeChecked();
+  }
+  await expect(createReviewBodyPage.email_address_text).toHaveValue(dataset.email_address_text);
+  await expect(createReviewBodyPage.description_text).toHaveValue(dataset.description_text);
 });
 
-Then('I can see the error message against {string}', async ({ createReviewBodyPage }, fieldName: string) => {
-  //update
-  if (fieldName === 'All_Mandatory') {
-    await createReviewBodyPage.checkErrorMessageOrganisationName();
-    await createReviewBodyPage.checkErrorMessageCountry();
-    await createReviewBodyPage.checkErrorMessageEmailAddress();
-  } else if (fieldName === 'Organisation_Name') {
-    await createReviewBodyPage.checkErrorMessageOrganisationName();
-  } else if (fieldName === 'Country') {
-    await createReviewBodyPage.checkErrorMessageCountry();
-  } else if (fieldName === 'Email_Address') {
-    await createReviewBodyPage.checkErrorMessageEmailAddress();
+Then(
+  'I can see the {string} validation message for {string}',
+  async ({ createReviewBodyPage }, errorMsg: string, fieldName: string) => {
+    const dataset = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body.Validation;
+    if (fieldName.toLowerCase() == 'all_mandatory_fields') {
+      await expect(createReviewBodyPage.organisation_name_error).toHaveText(dataset.Mandatory_Field);
+      await expect(createReviewBodyPage.country_error).toHaveText(dataset.Select_Country);
+      await expect(createReviewBodyPage.email_address_error).toHaveText(dataset.Mandatory_Field);
+    } else {
+      await expect(createReviewBodyPage[fieldName.toLowerCase()]).toHaveText(dataset[errorMsg]);
+    }
   }
-});
+);
