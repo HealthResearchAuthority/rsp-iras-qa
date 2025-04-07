@@ -6,7 +6,7 @@ Feature: HRAPROG-393- User Administration: Manage Review Bodies
         And I click the 'System_Admin' link on the 'Banner'
         And I can see the 'System_Administration_Page'
         And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
-        And I can see the Manage review bodies list page
+        And I can see the manage review bodies list page
         And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
         And I can see the Add a new review body page
 
@@ -19,7 +19,7 @@ Feature: HRAPROG-393- User Administration: Manage Review Bodies
         When I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
         Then I can see the create Review body confirmation page for '<Add_Review_Body>'
         When I have navigated to the 'Manage_Review_Bodies_Page'
-        And I can see the Manage review bodies list page
+        And I can see the manage review bodies list page
         Then I can see the review body for '<Add_Review_Body>' is present in the list
         And I can see the status of the review body is '<Status>'
 
@@ -70,7 +70,7 @@ Feature: HRAPROG-393- User Administration: Manage Review Bodies
         And I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
         Then I can see the create Review body confirmation page for '<Add_Another_Review_Body>'
         When I click the 'Back_To_Manage_Review_Bodies' link on the 'Create_Review_Body_Confirmation_Page'
-        And I can see the Manage review bodies list page
+        And I can see the manage review bodies list page
         Then I can see the review body for '<Add_Another_Review_Body>' is present in the list
         And I can see the status of the review body is '<ACTIVE>'
 
@@ -82,7 +82,7 @@ Feature: HRAPROG-393- User Administration: Manage Review Bodies
     @verifyAddNewReviewPageBackButtonFlow
     Scenario: Verify the user can navigate from 'Add a new review body' page by clicking 'Back' link
         And I click the 'Back' link on the 'Create_Review_Body_Page'
-        Then I can see the Manage review bodies list page
+        Then I can see the manage review bodies list page
 
     # Test blocked due to back button defect, marking as should fail
     @verifyCheckReviewPageBackButtonFlow @fail
@@ -98,7 +98,7 @@ Feature: HRAPROG-393- User Administration: Manage Review Bodies
         And I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
         Then I can see the create Review body confirmation page for '<Add_Another_Review_Body>'
         When I click the 'Back_To_Manage_Review_Bodies' link on the 'Create_Review_Body_Confirmation_Page'
-        Then I can see the Manage review bodies list page
+        Then I can see the manage review bodies list page
 
         Examples:
             | Add_Review_Body          | Add_Another_Review_Body          |

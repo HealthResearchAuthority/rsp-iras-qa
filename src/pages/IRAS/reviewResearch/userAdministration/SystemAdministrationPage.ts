@@ -13,6 +13,8 @@ export default class SystemAdministrationPage {
   readonly pageHeading: Locator;
   readonly manageReviewbodiesLink: Locator;
   readonly manageUsersLink: Locator;
+  readonly manage_review_bodies_hint_label: Locator;
+  readonly manage_users_hint_label: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -35,11 +37,13 @@ export default class SystemAdministrationPage {
     this.manageUsersLink = this.mainPageContent.getByText(this.linkTextData.System_Administration_Page.Manage_Users, {
       exact: true,
     });
+    this.manage_review_bodies_hint_label = this.page.locator('p[class="govuk-body"]').first();
+    this.manage_users_hint_label = this.page.locator('p[class="govuk-body"]').nth(1);
   }
 
   //Page Methods
   async goto() {
-    await this.page.goto('');
+    await this.page.goto('systemadmin');
   }
 
   async assertOnSystemAdministrationPage() {

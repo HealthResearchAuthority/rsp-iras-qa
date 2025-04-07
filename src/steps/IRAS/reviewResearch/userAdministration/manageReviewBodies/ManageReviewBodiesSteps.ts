@@ -3,7 +3,7 @@ import { test, expect } from '../../../../../hooks/CustomFixtures';
 
 const { Then } = createBdd(test);
 
-Then('I can see the Manage review bodies list page', async ({ manageReviewBodiesPage }) => {
+Then('I can see the manage review bodies list page', async ({ manageReviewBodiesPage }) => {
   await manageReviewBodiesPage.assertOnManageReviewBodiesPage();
 });
 
