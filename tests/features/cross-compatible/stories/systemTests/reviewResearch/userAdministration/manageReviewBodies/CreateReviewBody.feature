@@ -110,7 +110,7 @@ Feature: User Administration: Manage Review Bodies - Create review body
         When I fill the new review body page using '<Add_Review_Body>'
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
         Then I can see the check and create review body page for '<Add_Review_Body>'
-        When I click the 'Change' link against '<Field_Name>' on the 'Check_Create_Review_Body_Page'
+        When I click the change link against '<Field_Name>' on the check review body page
         Then I can see the Add new review body page for '<Add_Review_Body>'
 
         Examples:

@@ -28,16 +28,8 @@ Then(
 );
 
 When(
-  'I click the {string} link against {string} on the {string}',
-  async ({ checkCreateReviewBodyPage }, buttonKey: string, fieldKey: string, pageKey: string) => {
-    if (pageKey === 'Check_Create_Review_Body_Page' && buttonKey === 'Change' && fieldKey === 'Organisation_Name') {
-      await checkCreateReviewBodyPage.organisation_name_change_link.click();
-    } else if (pageKey === 'Check_Create_Review_Body_Page' && buttonKey === 'Change' && fieldKey === 'Country') {
-      await checkCreateReviewBodyPage.country_change_link.click();
-    } else if (pageKey === 'Check_Create_Review_Body_Page' && buttonKey === 'Change' && fieldKey === 'Email_Address') {
-      await checkCreateReviewBodyPage.email_address_change_link.click();
-    } else if (pageKey === 'Check_Create_Review_Body_Page' && buttonKey === 'Change' && fieldKey === 'Description') {
-      await checkCreateReviewBodyPage.description_change_link.click();
-    }
+  'I click the change link against {string} on the check review body page',
+  async ({ checkCreateReviewBodyPage }, fieldKey: string) => {
+    checkCreateReviewBodyPage.clickOnChangeButton(fieldKey);
   }
 );
