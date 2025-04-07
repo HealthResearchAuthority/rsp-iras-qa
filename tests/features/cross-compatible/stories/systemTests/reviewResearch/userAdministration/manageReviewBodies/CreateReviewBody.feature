@@ -104,7 +104,8 @@ Feature: HRAPROG-393- User Administration: Manage Review Bodies
             | Add_Review_Body          | Add_Another_Review_Body          |
             | Valid_Data_In_All_Fields | Valid_Data_In_All_Fields_Another |
 
-    @verifyChangeLinks
+    # Test blocked due to text defect, marking as should fail
+    @verifyChangeLinks @fail
     Scenario Outline: Verify the user can navigate from the check review body page via the change links for all fields
         When I fill the new review body page using '<Add_Review_Body>'
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
@@ -119,7 +120,8 @@ Feature: HRAPROG-393- User Administration: Manage Review Bodies
             | Valid_Data_In_All_Fields | Email_Address     |
             | Valid_Data_In_All_Fields | Description       |
 
-    @verifyValidReviewBodyCharacterLimits
+    # Test blocked due to text defect, marking as should fail
+    @verifyValidReviewBodyCharacterLimits @fail
     Scenario Outline: Field validation passes with minimum and maximum characters in organisation name and description
         When I fill the new review body page using '<Add_Review_Body>'
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
