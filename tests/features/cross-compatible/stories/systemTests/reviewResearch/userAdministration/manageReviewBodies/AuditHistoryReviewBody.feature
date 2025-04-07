@@ -153,7 +153,6 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
 
 
 # The default sort should be the most recent entry first based on date and time.
-
 # Validate date time format.
-
 # Validate audit history for each review body when the the system admin user email is updated.- Suitable for manual validation
+# edit all field together and check audit history
