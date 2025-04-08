@@ -24,5 +24,13 @@
     "last_updated_label": "Last updated",
     "disable_this_user_record_label": "Disable this user record",
     "disable_this_user_record_sub_label": "Disabling a user record will prevent the administrator from accessing their account. This can be reversed once requested"
+  },
+  "Disable_Label_Texts": {
+    "disable_header_label": "Disable this user record",
+    "disable_hint_label": "Disabling a user record will lock their account and can be reversed"
+  },
+  "Enable_Label_Texts": {
+    "enable_header_label": "Enable this user record",
+    "enable_hint_label": "Enabling a user record will unlock their account"
   }
 }

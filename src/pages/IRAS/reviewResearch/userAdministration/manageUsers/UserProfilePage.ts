@@ -52,6 +52,10 @@ export default class UserProfilePage {
   readonly audit_link: Locator;
   readonly last_updated_row: Locator;
   readonly last_updated_value: Locator;
+  readonly disable_header_label: Locator;
+  readonly disable_hint_label: Locator;
+  readonly enable_header_label: Locator;
+  readonly enable_hint_label: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -155,6 +159,8 @@ export default class UserProfilePage {
       }),
     });
     this.last_updated_value = this.last_updated_row.locator('td', { has: this.row_value_locator });
+    this.disable_header_label = this.enable_header_label = this.page.locator('h2[class="govuk-heading-m"]');
+    this.disable_hint_label = this.enable_hint_label = this.page.locator('div[class="govuk-hint"]');
   }
 
   async assertOnUserProfilePage() {

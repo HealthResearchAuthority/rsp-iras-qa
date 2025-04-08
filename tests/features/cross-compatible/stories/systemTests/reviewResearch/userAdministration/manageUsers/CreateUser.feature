@@ -1,9 +1,10 @@
+
 @UserAdministration  @ManageUsers @adminUser @SystemTest
 Feature: HRAPROG-394- User Administration: Manage Users
 
     Background:
-        Given I have navigated to the 'System_Administration_Home_Page'
-        When I click the 'Manage_Users' link on the 'System_Administration_Home_Page'
+        Given I have navigated to the 'System_Administration_Page'
+        When I click the 'Manage_Users' link on the 'System_Administration_Page'
         Then I can see the manage users list page
         When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
         Then I can see the add a new user profile page
@@ -28,10 +29,10 @@ Feature: HRAPROG-394- User Administration: Manage Users
         Then I can see the '<Validation_Text_Manage_Users_List>' ui labels on the manage users list page
         And I can see the newly created user record should be present in the list for '<Add_User_Profile>' with 'ACTIVE' status in the manage user page
         And I capture the page screenshot
-        And I click the 'Back' button on the 'Manage_Users_Page'
-        Then I have navigated to the 'System_Administration_Home_Page'
+        And I click the 'Back' link on the 'Manage_Users_Page'
+        Then I have navigated to the 'System_Administration_Page'
         And I capture the page screenshot
-        When I click the 'Manage_Users' link on the 'System_Administration_Home_Page'
+        When I click the 'Manage_Users' link on the 'System_Administration_Page'
         Then I can see the manage users list page
         And I can see the list is sorted by default in the alphabetical order of the 'First Name'
 
@@ -65,9 +66,9 @@ Feature: HRAPROG-394- User Administration: Manage Users
         And I capture the page screenshot
         When I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
         Then I can see the manage users list page
-        And I click the 'Back' button on the 'Manage_Users_Page'
-        Then I have navigated to the 'System_Administration_Home_Page'
-        When I click the 'Manage_Users' link on the 'System_Administration_Home_Page'
+        And I click the 'Back' link on the 'Manage_Users_Page'
+        Then I have navigated to the 'System_Administration_Page'
+        When I click the 'Manage_Users' link on the 'System_Administration_Page'
         Then I can see the manage users list page
 
         Examples:

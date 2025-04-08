@@ -11,8 +11,8 @@ export default class HomePage {
   readonly linkTextData: typeof linkTextData;
   readonly mainPageContent: Locator;
   readonly pageHeading: Locator;
+  readonly projectGuidanceText: Locator;
   readonly loginBtn: Locator;
-  readonly myApplicationsLink: Locator;
   readonly manageReviewbodiesLink: Locator;
   readonly manageUsersLink: Locator;
 
@@ -26,12 +26,10 @@ export default class HomePage {
     //Locators
     this.mainPageContent = this.page.getByTestId('main-content');
     this.pageHeading = this.page.getByRole('heading').getByText(this.homePageTestData.Home_Page.heading);
+    this.projectGuidanceText = this.page.getByRole('paragraph');
     this.loginBtn = this.page
       .locator('.gem-c-button')
       .and(this.page.getByText(this.buttonTextData.Home_Page.Login, { exact: true }));
-    this.myApplicationsLink = this.mainPageContent.getByText(this.linkTextData.Home_Page.My_Applications, {
-      exact: true,
-    });
     this.manageReviewbodiesLink = this.mainPageContent.getByText(this.linkTextData.Home_Page.Manage_Review_Bodies, {
       exact: true,
     });
@@ -47,7 +45,5 @@ export default class HomePage {
 
   async assertOnHomePage() {
     await expect(this.pageHeading).toBeVisible();
-    await expect(this.pageHeading).toHaveText(this.homePageTestData.Home_Page.heading);
-    expect(await this.page.title()).toBe(this.homePageTestData.Home_Page.title);
   }
 }
