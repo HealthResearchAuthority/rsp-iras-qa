@@ -383,15 +383,8 @@ export async function getCurrentTimeFormatted(): Promise<string> {
     timeZone: 'Europe/London',
     // timeZoneName: 'short',
   });
-
   const parts = formatter.formatToParts(now);
-
-  // Build the string manually from the parts
   const getPart = (type: string) => parts.find((p) => p.type === type)?.value || '';
-
   const formatted = `${getPart('day')} ${getPart('month')} ${getPart('year')} ${getPart('hour')}:${getPart('minute')}`;
-  // const formatted = `${getPart('day')} ${getPart('month')} ${getPart('year')} : ${getPart('hour')}:${getPart('minute')} ${getPart('timeZoneName')}`;
-
-  console.log(formatted);
   return formatted;
 }

@@ -17,6 +17,8 @@ export default class AuditHistoryReviewBodyPage {
   readonly date_label: Locator;
   readonly event_description_label: Locator;
   readonly system_admin_label: Locator;
+  readonly next_button: Locator;
+  readonly hidden_next_button: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -36,6 +38,8 @@ export default class AuditHistoryReviewBodyPage {
     this.system_admin_label = this.auditTableRows
       .getByRole('columnheader')
       .getByText('System administrator', { exact: true });
+    this.next_button = this.page.locator('.govuk-pagination__next a');
+    this.hidden_next_button = this.page.locator('[class="govuk-pagination__next"][style="visibility: hidden"]');
   }
 
   async assertOnAuditHistoryReviewBodyPage() {
@@ -46,19 +50,30 @@ export default class AuditHistoryReviewBodyPage {
   }
 
   async getAuditLog() {
-    const rowCount = await this.auditTableRows.count();
     const timeValues: string[] = [];
     const eventValues: string[] = [];
     const adminEmailValues: string[] = [];
-    for (let i = 1; i < rowCount; i++) {
-      const columns = this.auditTableRows.nth(i).getByRole('cell');
-      const timeValue = confirmStringNotNull(await columns.first().textContent());
-      timeValues.push(timeValue);
-      const eventValue = confirmStringNotNull(await columns.nth(1).textContent());
-      eventValues.push(eventValue);
-      const adminEmailValue = confirmStringNotNull(await columns.nth(2).textContent());
-      adminEmailValues.push(adminEmailValue);
+    let hasNextPage = true;
+    while (hasNextPage) {
+      const rowCount = await this.auditTableRows.count();
+      for (let i = 1; i < rowCount; i++) {
+        const columns = this.auditTableRows.nth(i).getByRole('cell');
+        const timeValue = confirmStringNotNull(await columns.nth(0).textContent());
+        timeValues.push(timeValue);
+        const eventValue = confirmStringNotNull(await columns.nth(1).textContent());
+        eventValues.push(eventValue);
+        const adminEmailValue = confirmStringNotNull(await columns.nth(2).textContent());
+        adminEmailValues.push(adminEmailValue);
+      }
+      hasNextPage = (await this.next_button.isVisible()) && !(await this.next_button.isDisabled());
+      if (hasNextPage) {
+        await this.next_button.click();
+        await this.page.waitForLoadState('domcontentloaded');
+      } else if ((await this.hidden_next_button.count()) > 0) {
+        break;
+      }
     }
+
     return [timeValues, eventValues, adminEmailValues];
   }
 

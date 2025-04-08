@@ -207,6 +207,30 @@ Then(
   }
 );
 
+Then(
+  'I can see the audit history for email address edited event with {string}',
+  async ({ auditHistoryReviewBodyPage, createReviewBodyPage }, datasetName: string) => {
+    const dataset =
+      auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page[datasetName];
+    const filePathAuditHistory = path.resolve(pathToAuditTestDataJson);
+    const datafilePathAuditHistory = await fse.readJson(filePathAuditHistory);
+    const auditLog = await auditHistoryReviewBodyPage.getAuditLog();
+    const timeExpected =
+      datafilePathAuditHistory.Review_Body_Audit_History_Page.Edit_Review_Body_Organisation_Name.date_text;
+    const organisationNameUniquePrevious = await createReviewBodyPage.getUniqueOrgName();
+    const filePathCreateReviewBody = path.resolve(pathToTestDataJson);
+    const dataCreateReviewBody = await fse.readJson(filePathCreateReviewBody);
+    const eventDescriptionPart1 = dataset.event_description_text;
+    const eventDescriptionPart2 = organisationNameUniquePrevious;
+    const eventDescriptionPart3 = ' to ' + dataCreateReviewBody.Create_Review_Body.organisation_name_unique;
+    const eventDescriptionExpectedValue = eventDescriptionPart1 + eventDescriptionPart2 + eventDescriptionPart3;
+    console.log(eventDescriptionExpectedValue);
+    expect(auditLog[0][0]).toBe(timeExpected);
+    expect(auditLog[1][0]).toBe(eventDescriptionExpectedValue);
+    expect(auditLog[2][0]).toBe(dataset.system_admin_email_text);
+  }
+);
+
 When(
   'I fill the edit review body page using {string}',
   async ({ createReviewBodyPage, commonItemsPage }, datasetName: string) => {
@@ -233,22 +257,15 @@ Then(
   async ({ auditHistoryReviewBodyPage }) => {
     const timeValues: string[] = [];
     const auditLog = await auditHistoryReviewBodyPage.getAuditLog();
-    auditLog.forEach((val, index) => {
-      timeValues.push(auditLog[0][index]);
+    const rowCount = auditLog[0].length;
+    for (let i = 0; i < rowCount; i++) {
+      timeValues.push(auditLog[0][i]);
+    }
+    const timeDates = timeValues.map((time) => new Date(time));
+    const isSortedDesc = timeDates.every((time, i, arr) => {
+      if (i === 0) return true;
+      return arr[i - 1] >= time;
     });
-    // // Check if sorted in descending order
-    // const isSorted = dates.every((date, i) => {
-    //   return i === 0 || date <= dates[i - 1];
-    // });
-    // console.log(isSorted ? 'Sorted correctly' : 'Not sorted');
-    // Convert time values to Date objects
-    const dates = timeValues.map((time) => new Date(time));
-
-    // Check if sorted in descending order
-    const isSortedDescending = dates.every((date, i, arr) => {
-      return i === 0 || date <= arr[i - 1];
-    });
-
-    console.log(isSortedDescending ? 'Sorted correctly' : 'Not sorted');
+    expect(isSortedDesc).toBe(true);
   }
 );
