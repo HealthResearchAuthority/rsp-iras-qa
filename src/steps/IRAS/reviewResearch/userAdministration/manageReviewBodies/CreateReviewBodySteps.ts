@@ -48,7 +48,7 @@ Then('I can see the Add new review body page for {string}', async ({ createRevie
 });
 
 Then(
-  'I can see the {string} validation message for {string}',
+  'I can see the {string} validation message for {string} on the Add new review body page',
   async ({ createReviewBodyPage }, errorMsg: string, fieldName: string) => {
     const dataset = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body.Validation;
     if (fieldName.toLowerCase() == 'all_mandatory_fields') {

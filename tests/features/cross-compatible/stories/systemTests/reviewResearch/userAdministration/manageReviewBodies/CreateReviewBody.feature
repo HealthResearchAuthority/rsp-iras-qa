@@ -1,4 +1,4 @@
-@UserAdministration @ManageReviewBodies @adminUser @SystemTest @rsp-2570
+@UserAdministration @ManageReviewBodies @CreateReviewBody @adminUser @SystemTest @rsp-2570
 Feature: User Administration: Manage Review Bodies - Create review body
 
     Background:
@@ -73,16 +73,13 @@ Feature: User Administration: Manage Review Bodies - Create review body
         When I click the 'Add_Another_Review_Body' link on the 'Create_Review_Body_Confirmation_Page'
         Then I can see the add a new review body page
         And I capture the page screenshot
-
         When I fill the new review body page using '<Add_Another_Review_Body>'
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
         And I can see the check and create review body page for '<Add_Another_Review_Body>'
         And I capture the page screenshot
-
         And I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
         Then I can see the create Review body confirmation page for '<Add_Another_Review_Body>'
         And I capture the page screenshot
-
         When I click the 'Back_To_Manage_Review_Bodies' link on the 'Create_Review_Body_Confirmation_Page'
         And I can see the manage review bodies list page
         Then I can see the review body for '<Add_Another_Review_Body>' is present in the list
@@ -167,7 +164,7 @@ Feature: User Administration: Manage Review Bodies - Create review body
         When I fill the new review body page using '<Add_Review_Body>'
         And I capture the page screenshot
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
-        Then I can see the '<Error>' validation message for '<Field_Name>'
+        Then I can see the '<Error>' validation message for '<Field_Name>' on the Add new review body page
         And I capture the page screenshot
 
         Examples:
@@ -181,11 +178,11 @@ Feature: User Administration: Manage Review Bodies - Create review body
             | Invalid_Data_Description_Field       | Max_Words       | Description_Error       |
 
     @verifyEmailValidationErrors
-    Scenario Outline: Verify that email field validation prevents innvalid email formats
+    Scenario Outline: Verify that email field validation prevents invalid email formats
         When I fill the new review body page using '<Add_Review_Body>'
         And I capture the page screenshot
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
-        Then I can see the '<Error>' validation message for '<Field_Name>'
+        Then I can see the '<Error>' validation message for '<Field_Name>' on the Add new review body page
         And I capture the page screenshot
 
         Examples:

@@ -10,6 +10,8 @@ export default class ManageReviewBodiesPage {
   readonly pageHeading: Locator;
   readonly addNewReviewBodyRecordLink: Locator;
   readonly mainPageContent: Locator;
+  readonly actionsLink: Locator;
+  readonly statusCell: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -28,6 +30,10 @@ export default class ManageReviewBodiesPage {
         exact: true,
       }
     );
+    this.actionsLink = this.page
+      .getByRole('link')
+      .getByText(this.manageReviewBodiesPageData.Manage_Review_Body_Page.actions_link, { exact: true });
+    this.statusCell = this.page.getByRole('cell').locator('strong');
   }
 
   //Page Methods
@@ -40,9 +46,9 @@ export default class ManageReviewBodiesPage {
     expect(await this.page.title()).toBe(this.manageReviewBodiesPageData.Manage_Review_Body_Page.title);
   }
 
-  async getRowByOrgName(orgName: string) {
+  async getRowByOrgName(orgName: string, exactMatch: boolean) {
     return this.mainPageContent.locator('tr', {
-      has: this.page.locator('td').getByText(`${orgName}`, { exact: true }),
+      has: this.page.locator('td').getByText(`${orgName}`, { exact: exactMatch }),
     });
   }
 }

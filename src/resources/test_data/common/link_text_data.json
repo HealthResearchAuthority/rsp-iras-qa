@@ -56,7 +56,8 @@
   },
   "Manage_Review_Bodies_Page": {
     "Back": "Back",
-    "Add_New_Review_Body_Record": "Add a new review body record"
+    "Add_New_Review_Body_Record": "Add a new review body record",
+    "View_Edit": "View/Edit"
   },
   "System_Administration_Page": {
     "Manage_Review_Bodies": "Manage review bodies",
@@ -72,5 +73,14 @@
   "Create_Review_Body_Confirmation_Page": {
     "Back_To_Manage_Review_Bodies": "Back to Manage review bodies",
     "Add_Another_Review_Body": "Add another review body"
+  },
+  "Review_Body_Profile_Page": {
+    "Change": "Change",
+    "View_This_Review_Body_List_Of_Users": "View this review body's list of users",
+    "View_This_Review_Body_Audit_History": "View this review body's audit history",
+    "Back": "Back"
+  },
+  "Edit_Review_Body_Page": {
+    "Back": "Back"
   }
 }
