@@ -35,6 +35,8 @@ import UserProfilePage from '../pages/IRAS/reviewResearch/userAdministration/man
 import EditUserProfilePage from '../pages/IRAS/reviewResearch/userAdministration/manageUsers/EditUserProfilePage';
 import ConfirmationPage from '../pages/IRAS/ConfirmationPage';
 import SystemAdministrationPage from '../pages/IRAS/reviewResearch/userAdministration/SystemAdministrationPage';
+import ReviewBodyProfilePage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/ReviewBodyProfilePage';
+import EditReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/EditReviewBodyPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -71,6 +73,8 @@ type CustomFixtures = {
   userProfilePage: UserProfilePage;
   editUserProfilePage: EditUserProfilePage;
   confirmationPage: ConfirmationPage;
+  reviewBodyProfilePage: ReviewBodyProfilePage;
+  editReviewBodyPage: EditReviewBodyPage;
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -209,6 +213,14 @@ export const test = base.extend<CustomFixtures>({
 
   createReviewBodyConfirmationPage: async ({ page }, use) => {
     await use(new CreateReviewBodyConfirmationPage(page));
+  },
+
+  reviewBodyProfilePage: async ({ page }, use) => {
+    await use(new ReviewBodyProfilePage(page));
+  },
+
+  editReviewBodyPage: async ({ page }, use) => {
+    await use(new EditReviewBodyPage(page));
   },
 
   makeAxeBuilder: async ({ page }, use) => {

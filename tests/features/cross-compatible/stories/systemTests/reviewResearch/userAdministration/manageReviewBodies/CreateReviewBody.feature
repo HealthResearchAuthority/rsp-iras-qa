@@ -1,4 +1,4 @@
-@UserAdministration @ManageReviewBodies @adminUser @SystemTest @rsp-2570
+@UserAdministration @ManageReviewBodies @CreateReviewBody @adminUser @SystemTest @rsp-2570
 Feature: User Administration: Manage Review Bodies - Create review body
 
     Background:
@@ -10,8 +10,7 @@ Feature: User Administration: Manage Review Bodies - Create review body
         And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
         And I can see the add a new review body page
 
-    # Test blocked due text defect, marking as should fail
-    @verifyCreateReviewBody @fail
+    @verifyCreateReviewBody
     Scenario Outline: Verify the user is able to create a new review body with valid data
         When I fill the new review body page using '<Add_Review_Body>'
         And I capture the page screenshot
@@ -32,8 +31,7 @@ Feature: User Administration: Manage Review Bodies - Create review body
             | Valid_Data_In_All_Fields           | enabled |
             | Valid_Data_In_All_Mandatory_Fields | enabled |
 
-    # Test blocked due to text defect, marking as should fail
-    @verifyCreateReviewBodyRealData @fail
+    @verifyCreateReviewBodyRealData
     Scenario Outline: Verify the user is able to create a new review body with real data
         When I fill the new review body page using '<Add_Review_Body>'
         And I capture the page screenshot
@@ -61,8 +59,7 @@ Feature: User Administration: Manage Review Bodies - Create review body
             | Review_Body_ARSAC_Data  |
             | Review_Body_NRS_Data    |
 
-    # Test blocked due to text defect, marking as should fail
-    @verifyAddAnotherReviewBody @fail
+    @verifyAddAnotherReviewBody
     Scenario Outline: Verify the user is able to add another review body via the link on the Confirmation message screen
         And I fill the new review body page using '<Add_Review_Body>'
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
@@ -73,21 +70,17 @@ Feature: User Administration: Manage Review Bodies - Create review body
         When I click the 'Add_Another_Review_Body' link on the 'Create_Review_Body_Confirmation_Page'
         Then I can see the add a new review body page
         And I capture the page screenshot
-
         When I fill the new review body page using '<Add_Another_Review_Body>'
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
         And I can see the check and create review body page for '<Add_Another_Review_Body>'
         And I capture the page screenshot
-
         And I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
         Then I can see the create Review body confirmation page for '<Add_Another_Review_Body>'
         And I capture the page screenshot
-
         When I click the 'Back_To_Manage_Review_Bodies' link on the 'Create_Review_Body_Confirmation_Page'
         And I can see the manage review bodies list page
         Then I can see the review body for '<Add_Another_Review_Body>' is present in the list
         And I capture the page screenshot
-
         And I can see the status of the review body is '<Status>'
 
         Examples:
@@ -101,8 +94,7 @@ Feature: User Administration: Manage Review Bodies - Create review body
         And I click the 'Back' link on the 'Create_Review_Body_Page'
         Then I can see the manage review bodies list page
 
-    # Test blocked due to back button defect, marking as should fail
-    @verifyCheckReviewPageBackButtonFlow @fail
+    @verifyCheckReviewPageBackButtonFlow
     Scenario Outline: Verify the user can navigate from the check and confirm review body pages using the back options
         When I fill the new review body page using '<Add_Review_Body>'
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
@@ -126,8 +118,7 @@ Feature: User Administration: Manage Review Bodies - Create review body
             | Add_Review_Body          | Add_Another_Review_Body          |
             | Valid_Data_In_All_Fields | Valid_Data_In_All_Fields_Another |
 
-    # Test blocked due to text defect, marking as should fail
-    @verifyChangeLinks @fail
+    @verifyChangeLinks
     Scenario Outline: Verify the user can navigate from the check review body page via the change links for all fields
         When I fill the new review body page using '<Add_Review_Body>'
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
@@ -144,8 +135,7 @@ Feature: User Administration: Manage Review Bodies - Create review body
             | Valid_Data_In_All_Fields | Email_Address     |
             | Valid_Data_In_All_Fields | Description       |
 
-    # Test blocked due to text defect, marking as should fail
-    @verifyValidReviewBodyCharacterLimits @fail
+    @verifyValidReviewBodyCharacterLimits
     Scenario Outline: Field validation passes with minimum and maximum characters in organisation name and description
         When I fill the new review body page using '<Add_Review_Body>'
         And I capture the page screenshot
@@ -167,7 +157,7 @@ Feature: User Administration: Manage Review Bodies - Create review body
         When I fill the new review body page using '<Add_Review_Body>'
         And I capture the page screenshot
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
-        Then I can see the '<Error>' validation message for '<Field_Name>'
+        Then I can see the '<Error>' validation message for '<Field_Name>' on the Add new review body page
         And I capture the page screenshot
 
         Examples:
@@ -181,11 +171,11 @@ Feature: User Administration: Manage Review Bodies - Create review body
             | Invalid_Data_Description_Field       | Max_Words       | Description_Error       |
 
     @verifyEmailValidationErrors
-    Scenario Outline: Verify that email field validation prevents innvalid email formats
+    Scenario Outline: Verify that email field validation prevents invalid email formats
         When I fill the new review body page using '<Add_Review_Body>'
         And I capture the page screenshot
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
-        Then I can see the '<Error>' validation message for '<Field_Name>'
+        Then I can see the '<Error>' validation message for '<Field_Name>' on the Add new review body page
         And I capture the page screenshot
 
         Examples:
