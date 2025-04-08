@@ -23,15 +23,20 @@ import ProjectDetailsTitlePage from '../pages/IRAS/createAmendment/ProjectDetail
 import ReseachLocationsPage from '../pages/IRAS/createAmendment/ResearchLocationsPage';
 import KeyProjectRolesPage from '../pages/IRAS/createAmendment/KeyProjectRolesPage';
 import ReviewYourApplicationPage from '../pages/IRAS/createAmendment/ReviewYourApplicationPage';
+import ManageReviewBodiesPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/ManageReviewBodiesPage';
+import CreateReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/CreateReviewBodyPage';
+import CheckCreateReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/CheckCreateReviewBodyPage';
+import CreateReviewBodyConfirmationPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/CreateReviewBodyConfirmationPage';
 import ManageUsersPage from '../pages/IRAS/reviewResearch/userAdministration/manageUsers/ManageUsersPage';
 import CreateUserProfilePage from '../pages/IRAS/reviewResearch/userAdministration/manageUsers/CreateUserProfilePage';
 import CreateUserProfileConfirmationPage from '../pages/IRAS/reviewResearch/userAdministration/manageUsers/CreateUserProfileConfirmationPage';
 import CheckCreateUserProfilePage from '../pages/IRAS/reviewResearch/userAdministration/manageUsers/CheckCreateUserProfilePage';
 import UserProfilePage from '../pages/IRAS/reviewResearch/userAdministration/manageUsers/UserProfilePage';
 import EditUserProfilePage from '../pages/IRAS/reviewResearch/userAdministration/manageUsers/EditUserProfilePage';
-import SystemAdministrationHomePage from '../pages/IRAS/reviewResearch/userAdministration/SystemAdministrationHomePage';
 import ConfirmationPage from '../pages/IRAS/ConfirmationPage';
+import SystemAdministrationPage from '../pages/IRAS/reviewResearch/userAdministration/SystemAdministrationPage';
 import ReviewBodyProfilePage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/ReviewBodyProfilePage';
+import EditReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/EditReviewBodyPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -56,7 +61,11 @@ type CustomFixtures = {
   reseachLocationsPage: ReseachLocationsPage;
   keyProjectRolesPage: KeyProjectRolesPage;
   reviewYourApplicationPage: ReviewYourApplicationPage;
-  systemAdministrationHomePage: SystemAdministrationHomePage;
+  systemAdministrationPage: SystemAdministrationPage;
+  manageReviewBodiesPage: ManageReviewBodiesPage;
+  createReviewBodyPage: CreateReviewBodyPage;
+  checkCreateReviewBodyPage: CheckCreateReviewBodyPage;
+  createReviewBodyConfirmationPage: CreateReviewBodyConfirmationPage;
   manageUsersPage: ManageUsersPage;
   createUserProfilePage: CreateUserProfilePage;
   createUserProfileConfirmationPage: CreateUserProfileConfirmationPage;
@@ -65,6 +74,7 @@ type CustomFixtures = {
   editUserProfilePage: EditUserProfilePage;
   confirmationPage: ConfirmationPage;
   reviewBodyProfilePage: ReviewBodyProfilePage;
+  editReviewBodyPage: EditReviewBodyPage;
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -157,8 +167,8 @@ export const test = base.extend<CustomFixtures>({
     await use(new ReviewYourApplicationPage(page));
   },
 
-  systemAdministrationHomePage: async ({ page }, use) => {
-    await use(new SystemAdministrationHomePage(page));
+  systemAdministrationPage: async ({ page }, use) => {
+    await use(new SystemAdministrationPage(page));
   },
 
   createUserProfilePage: async ({ page }, use) => {
@@ -189,10 +199,30 @@ export const test = base.extend<CustomFixtures>({
     await use(new ConfirmationPage(page));
   },
 
+  manageReviewBodiesPage: async ({ page }, use) => {
+    await use(new ManageReviewBodiesPage(page));
+  },
+
+  createReviewBodyPage: async ({ page }, use) => {
+    await use(new CreateReviewBodyPage(page));
+  },
+
+  checkCreateReviewBodyPage: async ({ page }, use) => {
+    await use(new CheckCreateReviewBodyPage(page));
+  },
+
+  createReviewBodyConfirmationPage: async ({ page }, use) => {
+    await use(new CreateReviewBodyConfirmationPage(page));
+  },
+
   reviewBodyProfilePage: async ({ page }, use) => {
     await use(new ReviewBodyProfilePage(page));
   },
-  
+
+  editReviewBodyPage: async ({ page }, use) => {
+    await use(new EditReviewBodyPage(page));
+  },
+
   makeAxeBuilder: async ({ page }, use) => {
     const makeAxeBuilder = () => new AxeBuilder({ page });
     await use(makeAxeBuilder);

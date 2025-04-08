@@ -1,5 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
-import * as manageReviewBodiesPageData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageReviewBodies/pages/manage_review_body_page_data.json';
+import * as manageReviewBodiesPageData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageReviewBodies/manage_review_body_page_data.json';
 import * as linkTextData from '../../../../../resources/test_data/common/link_text_data.json';
 
 //Declare Page Objects
@@ -13,6 +13,8 @@ export default class ManageReviewBodiesPage {
   readonly review_bodies_list_rows: Locator;
   readonly organisation_name_from_list: Locator;
   readonly status_from_list: Locator;
+  readonly actionsLink: Locator;
+  readonly statusCell: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -34,6 +36,10 @@ export default class ManageReviewBodiesPage {
     this.review_bodies_list_rows = this.page.locator('table tbody tr');
     this.organisation_name_from_list = this.page.locator('td:nth-child(1)');
     this.status_from_list = this.page.locator('td:nth-child(3)');
+    this.actionsLink = this.page
+      .getByRole('link')
+      .getByText(this.manageReviewBodiesPageData.Manage_Review_Body_Page.actions_link, { exact: true });
+    this.statusCell = this.page.getByRole('cell').locator('strong');
   }
 
   //Page Methods
@@ -70,5 +76,11 @@ export default class ManageReviewBodiesPage {
         throw new Error('Review body, Data not found');
       }
     }
+  }
+  
+  async getRowByOrgName(orgName: string, exactMatch: boolean) {
+    return this.mainPageContent.locator('tr', {
+      has: this.page.locator('td').getByText(`${orgName}`, { exact: exactMatch }),
+    });
   }
 }

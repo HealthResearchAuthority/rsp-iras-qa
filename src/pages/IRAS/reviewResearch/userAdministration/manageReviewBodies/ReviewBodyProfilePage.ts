@@ -1,18 +1,20 @@
 import { expect, Locator, Page } from '@playwright/test';
-import * as reviewBodyProfilePageData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageReviewBodies/pages/review_body_profile_page_data.json';
+import * as reviewBodyProfilePageData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageReviewBodies/review_body_profile_page_data.json';
 import * as buttonTextData from '../../../../../resources/test_data/common/button_text_data.json';
 import * as linkTextData from '../../../../../resources/test_data/common/link_text_data.json';
 
 //Declare Page Objects
-export default class CheckCreateReviewBodyPage {
+export default class ReviewBodyProfilePage {
   readonly page: Page;
   readonly reviewBodyProfilePageData: typeof reviewBodyProfilePageData;
   readonly buttonTextData: typeof buttonTextData;
   readonly linkTextData: typeof linkTextData;
+  private _org_name: string;
+  private _countries: string[];
+  private _email_address: string;
+  private _description: string;
   readonly back_link: Locator;
   readonly page_heading: Locator;
-  readonly sub_heading: Locator;
-  readonly guidance_text: Locator;
   readonly row_value_locator: Locator;
   readonly row_change_link_locator: Locator;
   readonly organisation_name_row: Locator;
@@ -37,6 +39,9 @@ export default class CheckCreateReviewBodyPage {
   readonly audit_row: Locator;
   readonly last_updated_row: Locator;
   readonly last_updated_value: Locator;
+  readonly disable_sub_heading: Locator;
+  readonly disable_guidance_text: Locator;
+  readonly disable_button: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -44,9 +49,15 @@ export default class CheckCreateReviewBodyPage {
     this.reviewBodyProfilePageData = reviewBodyProfilePageData;
     this.buttonTextData = buttonTextData;
     this.linkTextData = linkTextData;
+    this._org_name = '';
+    this._countries = [];
+    this._email_address = '';
+    this._description = '';
 
     //Locators
-    this.page_heading = this.page.locator('.govuk-heading-l');
+    this.page_heading = this.page
+      .getByRole('heading')
+      .getByText(this.reviewBodyProfilePageData.Review_Body_Profile_Page.heading_prefix_label);
     this.back_link = this.page
       .getByRole('link')
       .getByText(this.reviewBodyProfilePageData.Review_Body_Profile_Page.back_link);
@@ -123,9 +134,56 @@ export default class CheckCreateReviewBodyPage {
         }),
     });
     this.last_updated_value = this.last_updated_row.locator('td', { has: this.row_value_locator });
+    this.disable_sub_heading = this.page
+      .getByRole('heading')
+      .getByText(this.reviewBodyProfilePageData.Review_Body_Profile_Page.disable_sub_heading, { exact: true });
+    this.disable_guidance_text = this.page
+      .getByRole('paragraph')
+      .getByText(this.reviewBodyProfilePageData.Review_Body_Profile_Page.disable_guidance_text, { exact: true });
+    this.disable_button = this.page
+      .getByRole('button')
+      .getByText(this.reviewBodyProfilePageData.Review_Body_Profile_Page.disable_button, { exact: true });
   }
 
   async assertOnReviewbodyProfilePage() {
     await expect(this.page_heading).toBeVisible();
+  }
+
+  async clickOnChangeButton(fieldKey: string) {
+    const locatorName = fieldKey.toLowerCase() + '_change_link';
+    await this[locatorName].click();
+  }
+
+  //Getters & Setters for Private Variables
+  async getOrgName(): Promise<string> {
+    return this._org_name;
+  }
+
+  async setOrgName(value: string): Promise<void> {
+    this._org_name = value;
+  }
+
+  async getCountries(): Promise<string[]> {
+    return this._countries;
+  }
+
+  async setCountries(value: string[]): Promise<void> {
+    this._countries = value;
+  }
+
+  async getEmail(): Promise<string> {
+    return this._email_address;
+  }
+
+  async setEmail(value: string): Promise<void> {
+    this._email_address = value;
+  }
+
+  async getDescription(): Promise<string> {
+    return this._description;
+  }
+
+  async setDescription(value: string): Promise<void> {
+    this._description = value;
   }
 }

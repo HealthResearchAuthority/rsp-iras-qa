@@ -1,0 +1,13 @@
+{
+  "Check_Create_Review_Body_Page": {
+    "selected_tab_top": "Manage review bodies",
+    "back_button": "Back",
+    "heading": "Check and create review body",
+    "guidance_text": "Check the information here is correct before creating the profile.",
+    "sub_heading": "Review body details",
+    "organisation_name_label": "Organisation name",
+    "country_label": "Country",
+    "email_address_label": "Email address",
+    "description_label": "Description"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "ReviewBody": {
+    "Valid_Data_In_All_Fields": {
+      "Organisation name": "",
+      "Country": "",
+      "Email address": "",
+      "Desription": ""
+    },
+    "Valid_Data_In_All_Mandatory_Fields": {
+      "Organisation name": "",
+      "Country": "",
+      "Email address": ""
+    },
+    "Missing_All_Mandatory_Fields": {
+      "Organisation name": "",
+      "Country": "",
+      "Email address": "",
+      "Desription": ""
+    }
+  }
+}

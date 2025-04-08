@@ -99,8 +99,8 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
 
   @axeAccessibilityManageUsersList @adminUser @axeAccessibilityManageUsers
   Scenario: Manage Users list page
-    Given I have navigated to the 'System_Administration_Home_Page'
-    When I click the 'Manage_Users' link on the 'System_Administration_Home_Page'
+    Given I have navigated to the 'System_Administration_Page'
+    When I click the 'Manage_Users' link on the 'System_Administration_Page'
     Then I can see the manage users list page
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
@@ -108,8 +108,8 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
 
   @axeAccessibilityAddNewUserProfile @adminUser @axeAccessibilityManageUsers
   Scenario: Add a new user profile record page
-    Given I have navigated to the 'System_Administration_Home_Page'
-    When I click the 'Manage_Users' link on the 'System_Administration_Home_Page'
+    Given I have navigated to the 'System_Administration_Page'
+    When I click the 'Manage_Users' link on the 'System_Administration_Page'
     Then I can see the manage users list page
     When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
     Then I can see the add a new user profile page
@@ -119,8 +119,8 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
 
   @axeAccessibilityCheckCreateUserProfile @adminUser @axeAccessibilityManageUsers
   Scenario: Check and create user profile page
-    Given I have navigated to the 'System_Administration_Home_Page'
-    When I click the 'Manage_Users' link on the 'System_Administration_Home_Page'
+    Given I have navigated to the 'System_Administration_Page'
+    When I click the 'Manage_Users' link on the 'System_Administration_Page'
     Then I can see the manage users list page
     When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
     Then I can see the add a new user profile page
@@ -133,8 +133,8 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
 
   @axeAccessibilityCreateUserConfirmation @adminUser @axeAccessibilityManageUsers
   Scenario: Create user profile confirmation page
-    Given I have navigated to the 'System_Administration_Home_Page'
-    When I click the 'Manage_Users' link on the 'System_Administration_Home_Page'
+    Given I have navigated to the 'System_Administration_Page'
+    When I click the 'Manage_Users' link on the 'System_Administration_Page'
     Then I can see the manage users list page
     When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
     Then I can see the add a new user profile page
@@ -149,8 +149,8 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
 
   @axeAccessibilityViewUserProfile @adminUser @axeAccessibilityManageUsers
   Scenario: View user profile page
-    Given I have navigated to the 'System_Administration_Home_Page'
-    When I click the 'Manage_Users' link on the 'System_Administration_Home_Page'
+    Given I have navigated to the 'System_Administration_Page'
+    When I click the 'Manage_Users' link on the 'System_Administration_Page'
     Then I can see the manage users list page
     When I click the 'View_Edit' link on the 'Manage_Users_Page'
     Then I can see the user profile page
@@ -160,8 +160,8 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
 
   @axeAccessibilityEditUserProfile @adminUser @axeAccessibilityManageUsers
   Scenario: Edit user profile page
-    Given I have navigated to the 'System_Administration_Home_Page'
-    When I click the 'Manage_Users' link on the 'System_Administration_Home_Page'
+    Given I have navigated to the 'System_Administration_Page'
+    When I click the 'Manage_Users' link on the 'System_Administration_Page'
     Then I can see the manage users list page
     When I click the 'View_Edit' link on the 'Manage_Users_Page'
     Then I can see the user profile page
@@ -197,8 +197,8 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
 
   @axeAccessibilityUserProfileDisable @adminUser
   Scenario: View user profile page with disable button available
-    Given I have navigated to the 'System_Administration_Home_Page'
-    And I click the 'Manage_Users' link on the 'System_Administration_Home_Page'
+    Given I have navigated to the 'System_Administration_Page'
+    And I click the 'Manage_Users' link on the 'System_Administration_Page'
     And I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
     And I fill the new user profile page using 'Valid_Data_In_All_Fields_Role_Operations'
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
@@ -213,8 +213,8 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
 
   @axeAccessibilityUserProfileDisableConfirmation @adminUser
   Scenario: View disable confirmation page for user roles
-    Given I have navigated to the 'System_Administration_Home_Page'
-    And I click the 'Manage_Users' link on the 'System_Administration_Home_Page'
+    Given I have navigated to the 'System_Administration_Page'
+    And I click the 'Manage_Users' link on the 'System_Administration_Page'
     And I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
     And I fill the new user profile page using 'Valid_Data_In_All_Fields_Role_Operations'
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
@@ -230,8 +230,8 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
 
   @axeAccessibilityUserProfileDisableSuccess @adminUser
   Scenario: View disable confirmation success page for user roles
-    Given I have navigated to the 'System_Administration_Home_Page'
-    And I click the 'Manage_Users' link on the 'System_Administration_Home_Page'
+    Given I have navigated to the 'System_Administration_Page'
+    And I click the 'Manage_Users' link on the 'System_Administration_Page'
     And I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
     And I fill the new user profile page using 'Valid_Data_In_All_Fields_Role_Operations'
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
@@ -248,8 +248,8 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
 
   @axeAccessibilityUserProfileEnable @adminUser
   Scenario: View user profile page with enable button available
-    Given I have navigated to the 'System_Administration_Home_Page'
-    And I click the 'Manage_Users' link on the 'System_Administration_Home_Page'
+    Given I have navigated to the 'System_Administration_Page'
+    And I click the 'Manage_Users' link on the 'System_Administration_Page'
     And I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
     And I fill the new user profile page using 'Valid_Data_In_All_Fields_Role_Operations'
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
@@ -269,8 +269,8 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
 
   @axeAccessibilityUserProfileEnableConfirmation @adminUser
   Scenario: View enable confirmation page for user roles
-    Given I have navigated to the 'System_Administration_Home_Page'
-    And I click the 'Manage_Users' link on the 'System_Administration_Home_Page'
+    Given I have navigated to the 'System_Administration_Page'
+    And I click the 'Manage_Users' link on the 'System_Administration_Page'
     And I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
     And I fill the new user profile page using 'Valid_Data_In_All_Fields_Role_Operations'
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
@@ -291,8 +291,8 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
 
   @axeAccessibilityUserProfileEnableSuccess @adminUser
   Scenario: View enable confirmation success page for user roles
-    Given I have navigated to the 'System_Administration_Home_Page'
-    And I click the 'Manage_Users' link on the 'System_Administration_Home_Page'
+    Given I have navigated to the 'System_Administration_Page'
+    And I click the 'Manage_Users' link on the 'System_Administration_Page'
     And I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
     And I fill the new user profile page using 'Valid_Data_In_All_Fields_Role_Operations'
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
@@ -312,10 +312,80 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilitySystemAdministrationHomePage @adminUser
+  @axeAccessibilitySystemAdministrationPage @adminUser
   Scenario: System administration home page
-    Given I have navigated to the 'System_Administration_Home_Page'
+    Given I have navigated to the 'System_Administration_Page'
     Then I can see the system administration home page
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+
+  @axeAccessibilityManageReviewBodies @adminUser
+  Scenario: Manage review bodies list page
+    Given I have navigated to the 'Manage_Review_Bodies_Page'
+    And I can see the manage review bodies list page
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityAddReviewBodies @adminUser
+  Scenario: Add a new review body page
+    Given I have navigated to the 'Manage_Review_Bodies_Page'
+    And I can see the manage review bodies list page
+    And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
+    And I can see the add a new review body page
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityCheckReviewBodies @adminUser
+  Scenario Outline: Check and create review body page
+    Given I have navigated to the 'Manage_Review_Bodies_Page'
+    And I can see the manage review bodies list page
+    And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
+    And I can see the add a new review body page
+    When I fill the new review body page using 'Valid_Data_In_All_Fields'
+    And I click the 'Continue' button on the 'Create_Review_Body_Page'
+    Then I can see the check and create review body page for 'Valid_Data_In_All_Fields'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+
+  @axeAccessibilityConfirmReviewBodies @adminUser
+  Scenario Outline: Create review body confirmation page
+    Given I have navigated to the 'Manage_Review_Bodies_Page'
+    And I can see the manage review bodies list page
+    And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
+    And I can see the add a new review body page
+    When I fill the new review body page using 'Valid_Data_In_All_Fields'
+    And I click the 'Continue' button on the 'Create_Review_Body_Page'
+    Then I can see the check and create review body page for 'Valid_Data_In_All_Fields'
+    And I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
+    Then I can see the create Review body confirmation page for 'Valid_Data_In_All_Fields'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityReviewBodiesProfile @adminUser
+  Scenario Outline: Review body profile page
+    Given I have navigated to the 'Manage_Review_Bodies_Page'
+    And I can see the manage review bodies list page
+    And I select a 'QA Automation' Review Body to View and Edit which is 'active'
+    And I can see the review body profile page
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityEditReviewBodies @adminUser
+  Scenario Outline: Edit review body page
+    Given I have navigated to the 'Manage_Review_Bodies_Page'
+    And I can see the manage review bodies list page
+    And I select a 'QA Automation' Review Body to View and Edit which is 'active'
+    And I can see the review body profile page
+    And I click the change link against 'Organisation_Name' on the review body profile page
+    And I can see the edit review body page
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
