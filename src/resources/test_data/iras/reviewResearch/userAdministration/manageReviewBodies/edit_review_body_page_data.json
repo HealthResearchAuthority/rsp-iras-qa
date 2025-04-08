@@ -1,38 +1,26 @@
 {
-  "Create_Review_Body_Page": {
-    "selected_tab_top": "Manage review bodies",
+  "Edit_Review_Body_Page": {
     "back_button": "Back",
-    "page_heading": "Add a new review body",
+    "page_heading": "Edit review body details",
     "organisation_name_label": "Organisation name",
     "country_label": "Country",
     "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
     "email_address_label": "Email address",
-    "description_label": "Description",
-    "complete_button": "Complete"
+    "description_label": "Add description",
+    "save_button": "Save",
+    "test": { "co": "Research_Locations_Page" }
   },
-  "Create_Review_Body": {
+  "Edit_Review_Body": {
     "Valid_Data_In_All_Fields": {
       "organisation_name_text": "QA Automation HSC Research and Development",
-      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "country_checkbox": ["Scotland", "Wales"],
       "email_address_text": "qaauto_hscrd@health.org",
       "description_text": "qaauto_Responsible for confirmation of research governance compliance"
-    },
-    "Valid_Data_In_All_Fields_Another": {
-      "organisation_name_text": "QA Automation HSC Research and Development Test",
-      "country_checkbox": ["Northern Ireland"],
-      "email_address_text": "qaautotest_hscrd@health.org",
-      "description_text": "qaautotest_Responsible for confirmation of research governance compliance for projects taking place in Northern Ireland."
     },
     "Valid_Data_In_All_Mandatory_Fields": {
       "organisation_name_text": "QA Automation Health Research Authority (HRA)",
       "country_checkbox": ["England"],
       "email_address_text": "qaauto_healthresearchauthority@reviewbodies.com",
-      "description_text": ""
-    },
-    "Valid_Data_In_All_Mandatory_Fields_Another": {
-      "organisation_name_text": "QA Automation Test Health Research Authority (HRA)",
-      "country_checkbox": ["England"],
-      "email_address_text": "qaautotest_healthresearchauthority@reviewbodies.com",
       "description_text": ""
     },
     "Review_Body_HCRW_Data": {

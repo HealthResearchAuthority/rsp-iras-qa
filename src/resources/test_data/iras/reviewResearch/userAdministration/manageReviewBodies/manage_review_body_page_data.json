@@ -13,6 +13,7 @@
     "search_button": "Search",
     "search_box": "",
     "enabled_status": "ACTIVE",
-    "disabled_status": "DISABLED"
+    "disabled_status": "DISABLED",
+    "actions_link": "View/Edit"
   }
 }
