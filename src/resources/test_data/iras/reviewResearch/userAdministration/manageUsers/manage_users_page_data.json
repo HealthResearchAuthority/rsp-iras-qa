@@ -15,5 +15,78 @@
       "actions_column_header_label": "Action",
       "search_box_label": "Find a user"
     }
+  },
+  "Active_User_Role_Operations": {
+    "title_text": "Mr",
+    "first_name_text": "QA Automation First Name Test",
+    "last_name_text": "Test Last Name",
+    "email_address_text": "QAAutomation20250320193106982hscrd@health.org",
+    "telephone_text": "07000000000",
+    "organisation_text": "QA Automation HRA",
+    "job_title_text": "Sr.Reviewer",
+    "role_dropdown": "operations",
+    "country_checkbox": ["England"],
+    "access_required_checkbox": ["Research Ethics Comittee"]
+  },
+
+  "Disabled_User_Role_Operations": {
+    "title_text": "Mr",
+    "first_name_text": "QA Automation First Name Test",
+    "last_name_text": "Last Name Test",
+    "email_address_text": "QAAutomation20250327114615166hscrd@health.org",
+    "telephone_text": "07000000000",
+    "organisation_text": "QA Automation HRA",
+    "job_title_text": "Sr.Reviewer",
+    "role_dropdown": "operations",
+    "country_checkbox": ["England"],
+    "access_required_checkbox": ["Research Ethics Comittee"]
+  },
+  "Active_User_Role_Reviewer": {
+    "title_text": "Mr",
+    "first_name_text": "QA Automation First Name Test",
+    "last_name_text": "Test Last Name",
+    "email_address_text": "QAAutomation20250327122528558hscrd@health.org",
+    "telephone_text": "07000000000",
+    "organisation_text": "QA Automation HRA",
+    "job_title_text": "Sr.Reviewer",
+    "role_dropdown": "Reviewer"
+  },
+  "Valid_Data_Role_Operations": {
+    "title_text": "Mr",
+    "first_name_text": "QA Automation First Name Test",
+    "last_name_text": "Test Last Name",
+    "email_address_text": "QAAutomation20250320153916365QAAutomationhscrd@health.org",
+    "telephone_text": "07111111112",
+    "organisation_text": "HRA",
+    "job_title_text": "Reviewer",
+    "role_dropdown": "Admin",
+    "country_checkbox": ["England"],
+    "access_required_checkbox": ["Research Ethics Committee"]
+  },
+  "Disabled_User_Role_Reviewer": {
+    "title_text": "Mr",
+    "first_name_text": "QA Automation First Name Test",
+    "last_name_text": "Test Last Name",
+    "email_address_text": "QAAutomation20250320153825980hscrd@health.org",
+    "telephone_text": "07000000000",
+    "organisation_text": "HRA",
+    "job_title_text": "Reviewer",
+    "role_dropdown": "Reviewer"
+  },
+
+  "Valid_Data_In_All_Fields_Role_Reviewer": {
+    "title_text": "Mr",
+    "first_name_text": "QA Automation First Name Test",
+    "last_name_text": "Test Last Name",
+    "email_address_text": "QAAutomationhscrd@health.org",
+    "telephone_text": "07000000000",
+    "organisation_text": "QA Automation HRA",
+    "job_title_text": "Sr.Reviewer",
+    "role_dropdown": "reviewer"
+  },
+  "Edit_User_Only_Mandatory_Fields_Data": {
+    "first_name_text": "QA Automation First Name Test",
+    "last_name_text": "Test Last Name",
+    "email_address_text": "QAAutomation20250327115050148hscrd@health.org"
   }
 }

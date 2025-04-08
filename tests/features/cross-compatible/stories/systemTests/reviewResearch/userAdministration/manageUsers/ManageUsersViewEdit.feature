@@ -1,4 +1,4 @@
-@UserAdministration  @EditViewUsers @adminUser
+@UserAdministration  @EditViewUsers @adminUser @rsp-2830 @rsp-2828
 Feature: HRAPROG-393- User Administration: Manage user profiles
     As a user
     I want the ability to edit and view a user profile record
@@ -7,45 +7,42 @@ Feature: HRAPROG-393- User Administration: Manage user profiles
     Background:
         Given I have navigated to the 'Home_Page'
         When I click the 'Manage_Users' link on the 'Home_Page'
-        Then I can see the Manage users list page
+        Then I can see the manage users list page
 
-    @rsp-2830-view-user
+    @viewUserProfileRoleOperations
     Scenario Outline: View User profile details for the user with role as Operations
         And I search and click on view edit link for '<View_User_Profile>' user with '<Status>' status from the manage user page
         Then I can see the view user profile details page
-        And I can see the '<Validation_Text_User_Profile>' ui labels on the user profile page
         And I click the 'Back' link on the 'User_Profile_Page'
-        Then I can see the Manage users list page
+        Then I can see the manage users list page
         And I click the 'Back' link on the 'Manage_Users_Page'
         Then I have navigated to the 'Home_Page'
 
         Examples:
-            | View_User_Profile             | Status   | Validation_Text_User_Profile |
-            | Active_User_Role_Operations   | ACTIVE   | Label_Texts_Role_Operations  |
-            | Disabled_User_Role_Operations | DISABLED | Label_Texts_Role_Operations  |
+            | View_User_Profile             | Status   |
+            | Active_User_Role_Operations   | ACTIVE   |
+            | Disabled_User_Role_Operations | DISABLED |
 
-    @rsp-2830-view-user
+    @viewUserProfileRoleReviewer
     Scenario Outline: View User profile details for the user with role as reviewer
         And I search and click on view edit link for '<View_User_Profile>' user with '<Status>' status from the manage user page
         Then I can see the view user profile details page
-        And I can see the '<Validation_Text_User_Profile>' ui labels on the user profile page
         And I click the 'Back' link on the 'User_Profile_Page'
-        Then I can see the Manage users list page
+        Then I can see the manage users list page
         And I click the 'Back' link on the 'Manage_Users_Page'
         Then I have navigated to the 'Home_Page'
 
         Examples:
-            | View_User_Profile           | Status   | Validation_Text_User_Profile |
-            | Active_User_Role_Reviewer   | ACTIVE   | Label_Texts_Role_Reviewer    |
-            | Disabled_User_Role_Reviewer | DISABLED | Label_Texts_Role_Reviewer    |
+            | View_User_Profile           | Status   |
+            | Active_User_Role_Reviewer   | ACTIVE   |
+            | Disabled_User_Role_Reviewer | DISABLED |
 
-    @rsp-2828-edit-user
+    @editUserProfileOperations
     Scenario Outline: Successful user profile update for user role as Operations
         And I search and click on view edit link for 'Valid_Data_Role_Operations' user with '<Status>' status from the manage user page
         Then I can see the view user profile details page
         When I click the '<Edit_User_Field>' change link for '<User_Role>' on the user profile page
         Then I can see the edit user profile page
-        And I can see the '<Validation_Text_User_Profile>' ui labels on the edit user profile page
         And I update user profile '<Edit_User_Field_Data>' on 'Edit_User_Profile_Page'
         And I click the 'Save' button on the 'Edit_User_Profile_Page'
         And I can see the view user profile details page
@@ -55,26 +52,25 @@ Feature: HRAPROG-393- User Administration: Manage user profiles
         And I click the 'Save' button on the 'Edit_User_Profile_Page'
         And I can see the view user profile details page
         When I click the 'Back' link on the 'User_Profile_Page'
-        Then I can see the Manage users list page
+        Then I can see the manage users list page
         Examples:
-            | Edit_User_Field    | User_Role  | Status | Edit_User_Field_Data        | Original_Data                   | Validation_Text_User_Profile |
-            | title_text         | Operations | ACTIVE | User_Title_Text_One         | Original_Title_Text_One         | Label_Texts_Role_Operations  |
-            | first_name_text    | Operations | ACTIVE | User_First_Name_Text_One    | Original_First_Name_Text_One    | Label_Texts_Role_Operations  |
-            | last_name_text     | Operations | ACTIVE | User_Last_Name_Text_One     | Original_Last_Name_Text_One     | Label_Texts_Role_Operations  |
-            | email_address_text | Operations | ACTIVE | User_Email_Address_Text_One | Original_Email_Address_Text_One | Label_Texts_Role_Operations  |
-            | telephone_text     | Operations | ACTIVE | User_Telephone_Text_One     | Original_Telephone_Text_One     | Label_Texts_Role_Operations  |
-            | organisation_text  | Operations | ACTIVE | User_Organisation_Text_One  | Original_Organisation_Text_One  | Label_Texts_Role_Operations  |
-            | job_title_text     | Operations | ACTIVE | User_Job_Title_Text_One     | Original_Job_Title_Text_One     | Label_Texts_Role_Operations  |
-            | role_dropdown      | Operations | ACTIVE | User_Role_Dropdown_One      | Original_Role_Dropdown_One      | Label_Texts_Role_Operations  |
-            | country_checkbox   | Operations | ACTIVE | User_Country_Checkbox_One   | Original_Country_Checkbox_One   | Label_Texts_Role_Operations  |
+            | Edit_User_Field    | User_Role  | Status | Edit_User_Field_Data        | Original_Data                   |
+            | title_text         | Operations | ACTIVE | User_Title_Text_One         | Original_Title_Text_One         |
+            | first_name_text    | Operations | ACTIVE | User_First_Name_Text_One    | Original_First_Name_Text_One    |
+            | last_name_text     | Operations | ACTIVE | User_Last_Name_Text_One     | Original_Last_Name_Text_One     |
+            | email_address_text | Operations | ACTIVE | User_Email_Address_Text_One | Original_Email_Address_Text_One |
+            | telephone_text     | Operations | ACTIVE | User_Telephone_Text_One     | Original_Telephone_Text_One     |
+            | organisation_text  | Operations | ACTIVE | User_Organisation_Text_One  | Original_Organisation_Text_One  |
+            | job_title_text     | Operations | ACTIVE | User_Job_Title_Text_One     | Original_Job_Title_Text_One     |
+            | role_dropdown      | Operations | ACTIVE | User_Role_Dropdown_One      | Original_Role_Dropdown_One      |
+            | country_checkbox   | Operations | ACTIVE | User_Country_Checkbox_One   | Original_Country_Checkbox_One   |
 
-    @rsp-2828-edit-user
+    @editUserProfileReviewer
     Scenario Outline: Successful user profile update for user as Reviewer
         And I search and click on view edit link for 'Active_User_Role_Reviewer' user with '<Status>' status from the manage user page
         Then I can see the view user profile details page
         When I click the '<Edit_User_Field>' change link for '<User_Role>' on the user profile page
         Then I can see the edit user profile page
-        And I can see the '<Validation_Text_User_Profile>' ui labels on the edit user profile page
         And I update user profile '<Edit_User_Field_Data>' on 'Edit_User_Profile_Page'
         And I click the 'Save' button on the 'Edit_User_Profile_Page'
         And I can see the view user profile details page
@@ -84,19 +80,19 @@ Feature: HRAPROG-393- User Administration: Manage user profiles
         And I click the 'Save' button on the 'Edit_User_Profile_Page'
         And I can see the view user profile details page
         When I click the 'Back' link on the 'User_Profile_Page'
-        Then I can see the Manage users list page
+        Then I can see the manage users list page
         Examples:
-            | Edit_User_Field    | User_Role  | Status | Edit_User_Field_Data        | Original_Data                   | Validation_Text_User_Profile |
-            | title_text         | Reviewer   | ACTIVE | User_Title_Text_Two         | Original_Title_Text_Two         | Label_Texts_Role_Reviewer    |
-            | first_name_text    | Reviewer   | ACTIVE | User_First_Name_Text_Two    | Original_First_Name_Text_Two    | Label_Texts_Role_Reviewer    |
-            | last_name_text     | Reviewer   | ACTIVE | User_Last_Name_Text_Two     | Original_Last_Name_Text_Two     | Label_Texts_Role_Reviewer    |
-            | email_address_text | Reviewer   | ACTIVE | User_Email_Address_Text_Two | Original_Email_Address_Text_Two | Label_Texts_Role_Reviewer    |
-            | telephone_text     | Reviewer   | ACTIVE | User_Telephone_Text_Two     | Original_Telephone_Text_Two     | Label_Texts_Role_Reviewer    |
-            | organisation_text  | Reviewer   | ACTIVE | User_Organisation_Text_Two  | Original_Organisation_Text_Two  | Label_Texts_Role_Reviewer    |
-            | job_title_text     | Reviewer   | ACTIVE | User_Job_Title_Text_Two     | Original_Job_Title_Text_Two     | Label_Texts_Role_Reviewer    |
-            | role_dropdown      | Operations | ACTIVE | User_Role_Dropdown_Two      | Original_Role_Dropdown_Two      | Label_Texts_Role_Operations  |
+            | Edit_User_Field    | User_Role  | Status | Edit_User_Field_Data        | Original_Data                   |
+            | title_text         | Reviewer   | ACTIVE | User_Title_Text_Two         | Original_Title_Text_Two         |
+            | first_name_text    | Reviewer   | ACTIVE | User_First_Name_Text_Two    | Original_First_Name_Text_Two    |
+            | last_name_text     | Reviewer   | ACTIVE | User_Last_Name_Text_Two     | Original_Last_Name_Text_Two     |
+            | email_address_text | Reviewer   | ACTIVE | User_Email_Address_Text_Two | Original_Email_Address_Text_Two |
+            | telephone_text     | Reviewer   | ACTIVE | User_Telephone_Text_Two     | Original_Telephone_Text_Two     |
+            | organisation_text  | Reviewer   | ACTIVE | User_Organisation_Text_Two  | Original_Organisation_Text_Two  |
+            | job_title_text     | Reviewer   | ACTIVE | User_Job_Title_Text_Two     | Original_Job_Title_Text_Two     |
+            | role_dropdown      | Operations | ACTIVE | User_Role_Dropdown_Two      | Original_Role_Dropdown_Two      |
 
-    @rsp-2828-edit-user_dryrun
+    @editUserProfileValidEmailAddress
     Scenario Outline: Successful user profile update with multiple combination of email address formats
         And I search and click on view edit link for 'Edit_User_Only_Mandatory_Fields_Data' user with '<Status>' status from the manage user page
         Then I can see the view user profile details page
@@ -111,7 +107,7 @@ Feature: HRAPROG-393- User Administration: Manage user profiles
         And I click the 'Save' button on the 'Edit_User_Profile_Page'
         And I can see the view user profile details page
         When I click the 'Back' link on the 'User_Profile_Page'
-        Then I can see the Manage users list page
+        Then I can see the manage users list page
         Examples:
             | Edit_User_Field    | User_Role  | Status | Original_Data                     | Edit_User_Field_Data                  |
             | email_address_text | Operations | ACTIVE | Original_Email_Address_Text_Three | Valid_Email_Data_Dot                  |
@@ -142,7 +138,7 @@ Feature: HRAPROG-393- User Administration: Manage user profiles
             | email_address_text | Operations | ACTIVE | Original_Email_Address_Text_Three | Valid_Email_Data_Other_Language       |
             | email_address_text | Operations | ACTIVE | Original_Email_Address_Text_Three | Valid_Email_Data_Number               |
 
-    @rsp-2828-edit-user
+    @editUserProfileInvalidEmailAddress
     Scenario Outline: Verify error message when an invalid email format is entered in edit user profile page
         And I search and click on view edit link for 'Edit_User_Only_Mandatory_Fields_Data' user with '<Status>' status from the manage user page
         Then I can see the view user profile details page
@@ -180,7 +176,7 @@ Feature: HRAPROG-393- User Administration: Manage user profiles
             | email_address_text | Operations | ACTIVE | Invalid_Email_Data_Reserved_Domain                 | invalid_email_id_error         |
             | email_address_text | Operations | ACTIVE | Invalid_Email_Data_Punycode                        | invalid_email_id_error         |
 
-    @rsp-2828-edit-user
+    @editUserProfileOnlyMandatoryFields
     Scenario Outline: Successful user profile update with only mandatory fields
         And I search and click on view edit link for 'Edit_User_Only_Mandatory_Fields_Data' user with '<Status>' status from the manage user page
         Then I can see the view user profile details page
@@ -195,14 +191,14 @@ Feature: HRAPROG-393- User Administration: Manage user profiles
         And I click the 'Save' button on the 'Edit_User_Profile_Page'
         And I can see the view user profile details page
         When I click the 'Back' link on the 'User_Profile_Page'
-        Then I can see the Manage users list page
+        Then I can see the manage users list page
         Examples:
             | Edit_User_Field    | User_Role  | Status | Edit_User_Field_Data          | Original_Data                     |
             | first_name_text    | Operations | ACTIVE | User_First_Name_Text_Three    | Original_First_Name_Text_Three    |
             | last_name_text     | Operations | ACTIVE | User_Last_Name_Text_Three     | Original_Last_Name_Text_Three     |
             | email_address_text | Operations | ACTIVE | User_Email_Address_Text_Three | Original_Email_Address_Text_Three |
 
-    @rsp-2828-edit-user
+    @editUserProfileMandatoryFieldsValidation
     Scenario Outline: Verify error message when mandatory fields are left blank on edit user profile page
         And I search and click on view edit link for 'Edit_User_Only_Mandatory_Fields_Data' user with '<Status>' status from the manage user page
         Then I can see the view user profile details page
@@ -217,7 +213,7 @@ Feature: HRAPROG-393- User Administration: Manage user profiles
             | last_name_text     | Operations | ACTIVE | empty_last_name_text     | last_name_mandatory_error     |
             | email_address_text | Operations | ACTIVE | empty_email_address_text | email_address_mandatory_error |
 
-    @rsp-2828-edit-user
+    @editUserProfileMaxFieldLengthValidation
     Scenario Outline: Verify error message for field input exceeding maximum length on edit user profile page
         And I search and click on view edit link for 'Edit_User_Only_Mandatory_Fields_Data' user with '<Status>' status from the manage user page
         Then I can see the view user profile details page

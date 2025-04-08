@@ -2,9 +2,9 @@
   "User_Profile_Page": {
     "selected_bread_crumbs": "Manage Users",
     "back_button": "Back",
-    "page_heading": "User profile:",
+    "page_heading_prefix": "User profile:",
     "title_label": "Title",
-    "title_change_link":"Change",
+    "title_change_link": "Change",
     "first_name_label": "First name",
     "first_name_change_link": "Change",
     "last_name_label": "Last name",
@@ -20,9 +20,9 @@
     "role_label": "Role",
     "role_change_link": "Change",
     "audit_label": "Audit",
-    "audit_link":"View this user's audit history",
+    "audit_link": "View this user's audit history",
     "last_updated_label": "Last updated",
-    "disable_this_user_record_label":"Disable this user record",
+    "disable_this_user_record_label": "Disable this user record",
     "disable_this_user_record_sub_label": "Disabling a user record will prevent the administrator from accessing their account. This can be reversed once requested"
   }
 }

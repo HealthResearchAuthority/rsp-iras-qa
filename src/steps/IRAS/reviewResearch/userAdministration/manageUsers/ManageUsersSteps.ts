@@ -70,15 +70,3 @@ Then(
     }
   }
 );
-
-Then(
-  'I can see the user profile {string} is updated in user profile page',
-  async ({ commonItemsPage, editUserProfilePage, userProfilePage }, datasetName: string) => {
-    const dataset = editUserProfilePage.editUserProfilePageTestData[datasetName];
-    for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        await commonItemsPage.validateUIComponentValues(dataset, key, userProfilePage);
-      }
-    }
-  }
-);

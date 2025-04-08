@@ -1,5 +1,5 @@
 import { createBdd } from 'playwright-bdd';
-import { test } from '../../../../../hooks/CustomFixtures';
+import { test, expect } from '../../../../../hooks/CustomFixtures';
 
 const { Then, When } = createBdd(test);
 
@@ -17,7 +17,9 @@ Then(
     const dataset = editUserProfilePage.editUserProfilePageTestData[datasetName];
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        await commonItemsPage.validateUILabels(dataset, key, editUserProfilePage);
+        //await commonItemsPage.getUiLabel(dataset, key, editUserProfilePage);
+        const labelVal = await commonItemsPage.getUiLabel(dataset, key, editUserProfilePage);
+        expect(labelVal).toBe(dataset[key]);
       }
     }
   }

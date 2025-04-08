@@ -1,103 +1,160 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as userProfilePageTestData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageUsers/user_profile_page_data.json';
 import * as buttonTextData from '../../../../../resources/test_data/common/button_text_data.json';
+import * as linkTextData from '../../../../../resources/test_data/common/link_text_data.json';
 
 //Declare Page Objects
 export default class UserProfilePage {
   readonly page: Page;
   readonly userProfilePageTestData: typeof userProfilePageTestData;
+  readonly linkTextData: typeof linkTextData;
+  readonly buttonTextData: typeof buttonTextData;
   readonly selected_bread_crumbs: Locator;
   readonly back_button: Locator;
   readonly page_heading: Locator;
-  readonly title_textbox_label: Locator;
-  readonly title_text: Locator;
-  readonly title_change_link: Locator;
-  readonly first_name_textbox_label: Locator;
-  readonly first_name_text: Locator;
-  readonly first_name_change_link: Locator;
-  readonly last_name_textbox_label: Locator;
-  readonly last_name_text: Locator;
-  readonly last_name_change_link: Locator;
-  readonly email_address_textbox_label: Locator;
-  readonly email_address_text: Locator;
-  readonly email_address_change_link: Locator;
-  readonly telephone_textbox_label: Locator;
-  readonly telephone_text: Locator;
-  readonly telephone_change_link: Locator;
-  readonly organisation_textbox_label: Locator;
-  readonly organisation_text: Locator;
-  readonly organisation_change_link: Locator;
-  readonly job_title_textbox_label: Locator;
-  readonly job_title_text: Locator;
-  readonly job_title_change_link: Locator;
-  readonly role_dropdown_label: Locator;
-  readonly role_text: Locator;
-  readonly role_change_link: Locator;
-  readonly committee_dropdown_label: Locator;
-  readonly committee_text: Locator;
-  readonly committee_change_link: Locator;
-  readonly country_checkbox_label: Locator;
-  readonly country_text: Locator;
-  readonly country_change_link: Locator;
-  readonly review_body_dropdown_label: Locator;
-  readonly review_body_text: Locator;
-  readonly review_body_change_link: Locator;
-  readonly audit_label: Locator;
-  readonly audit_link: Locator;
-  readonly last_updated_label: Locator;
-  readonly last_updated_text: Locator;
-  readonly disable_this_user_record_sub_label: Locator;
-  readonly disable_user_record_button: Locator;
-  readonly buttonTextData: typeof buttonTextData;
   readonly first_change_link: Locator;
+  readonly row_value_locator: Locator;
+  readonly row_change_link_locator: Locator;
+  readonly title_row: Locator;
+  readonly title_value: Locator;
+  readonly title_change_link: Locator;
+  readonly first_name_row: Locator;
+  readonly first_name_value: Locator;
+  readonly first_name_change_link: Locator;
+  readonly last_name_row: Locator;
+  readonly last_name_value: Locator;
+  readonly last_name_change_link: Locator;
+  readonly email_address_row: Locator;
+  readonly email_address_value: Locator;
+  readonly email_address_change_link: Locator;
+  readonly telephone_row: Locator;
+  readonly telephone_value: Locator;
+  readonly telephone_change_link: Locator;
+  readonly organisation_row: Locator;
+  readonly organisation_value: Locator;
+  readonly organisation_change_link: Locator;
+  readonly job_title_row: Locator;
+  readonly job_title_value: Locator;
+  readonly job_title_change_link: Locator;
+  readonly role_row: Locator;
+  readonly role_value: Locator;
+  readonly role_change_link: Locator;
+  readonly committee_row: Locator;
+  readonly committee_value: Locator;
+  readonly committee_change_link: Locator;
+  readonly country_row: Locator;
+  readonly country_value: Locator;
+  readonly country_change_link: Locator;
+  readonly review_body_row: Locator;
+  readonly review_body_value: Locator;
+  readonly review_body_change_link: Locator;
+  readonly audit_row: Locator;
+  readonly audit_link: Locator;
+  readonly last_updated_row: Locator;
+  readonly last_updated_value: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page;
     this.userProfilePageTestData = userProfilePageTestData;
+    this.linkTextData = linkTextData;
     this.page_heading = this.page
       .getByRole('heading')
-      .getByText(this.userProfilePageTestData.User_Profile_Page.page_heading);
-    this.first_change_link = this.page.getByRole('link').getByText('Change').first();
-    this.title_textbox_label = this.page.locator('tbody tr:nth-child(1) td:nth-child(1) b');
-    this.title_text = this.page.locator('tbody tr:nth-child(1) td:nth-child(2)');
-    this.title_change_link = this.page.locator('tbody tr:nth-child(1) td:nth-child(3) a');
-    this.first_name_textbox_label = this.page.locator('tbody tr:nth-child(2) td:nth-child(1)');
-    this.first_name_text = this.page.locator('tbody tr:nth-child(2) td:nth-child(2)');
-    this.first_name_change_link = this.page.locator('tbody tr:nth-child(2) td:nth-child(3) a');
-    this.last_name_textbox_label = this.page.locator('tbody tr:nth-child(3) td:nth-child(1)');
-    this.last_name_text = this.page.locator('tbody tr:nth-child(3) td:nth-child(2)');
-    this.last_name_change_link = this.page.locator('tbody tr:nth-child(3) td:nth-child(3) a');
-    this.email_address_textbox_label = this.page.locator('tbody tr:nth-child(4) td:nth-child(1)');
-    this.email_address_text = this.page.locator('tbody tr:nth-child(4) td:nth-child(2)');
-    this.email_address_change_link = this.page.locator('tbody tr:nth-child(4) td:nth-child(3) a');
-    this.telephone_textbox_label = this.page.locator('tbody tr:nth-child(5) td:nth-child(1)');
-    this.telephone_text = this.page.locator('tbody tr:nth-child(5) td:nth-child(2)');
-    this.telephone_change_link = this.page.locator('tbody tr:nth-child(5) td:nth-child(3) a');
-    this.organisation_textbox_label = this.page.locator('tbody tr:nth-child(6) td:nth-child(1)');
-    this.organisation_text = this.page.locator('tbody tr:nth-child(6) td:nth-child(2)');
-    this.organisation_change_link = this.page.locator('tbody tr:nth-child(6) td:nth-child(3) a');
-    this.job_title_textbox_label = this.page.locator('tbody tr:nth-child(7) td:nth-child(1)');
-    this.job_title_text = this.page.locator('tbody tr:nth-child(7) td:nth-child(2)');
-    this.job_title_change_link = this.page.locator('tbody tr:nth-child(7) td:nth-child(3) a');
-    this.role_dropdown_label = this.page.locator('tbody tr:nth-child(8) td:nth-child(1)');
-    this.role_text = this.page.locator('tbody tr:nth-child(8) td:nth-child(2)');
-    this.role_change_link = this.page.locator('tbody tr:nth-child(8) td:nth-child(3) a');
-    this.committee_dropdown_label = this.page.locator('tbody tr:nth-child(9) td:nth-child(1)');
-    this.committee_text = this.page.locator('tbody tr:nth-child(9) td:nth-child(2)');
-    this.committee_change_link = this.page.locator('tbody tr:nth-child(9) td:nth-child(3) a');
-    this.country_checkbox_label = this.page.locator('tbody tr:nth-child(10) td:nth-child(1)');
-    this.country_text = this.page.locator('tbody tr:nth-child(10) td:nth-child(2)');
-    this.country_change_link = this.page.locator('tbody tr:nth-child(10) td:nth-child(3) a');
-    this.review_body_dropdown_label = this.page.locator('tbody tr:nth-child(11) td:nth-child(1)');
-    this.review_body_text = this.page.locator('tbody tr:nth-child(11) td:nth-child(2)');
-    this.review_body_change_link = this.page.locator('tbody tr:nth-child(11) td:nth-child(3) a');
-    this.audit_label = this.page.getByText('Audit', { exact: true });
-    this.audit_link = this.page.getByText("View this user's audit trail");
-    this.last_updated_label = this.page.getByText('Last updated', { exact: true });
-    this.last_updated_text = this.page.locator('tbody tr:nth-child(13) td:nth-child(2)');
-    this.disable_this_user_record_sub_label = this.page.locator('.govuk-hint');
-    this.disable_user_record_button = this.page.getByText('Disable user record');
+      .getByText(this.userProfilePageTestData.User_Profile_Page.page_heading_prefix, { exact: false });
+
+    this.row_value_locator = this.page.locator('input');
+    this.row_change_link_locator = this.page
+      .getByRole('cell')
+      .getByText(this.linkTextData.User_Profile_Page.Change, { exact: true });
+    this.title_row = this.page.locator('tr', {
+      has: this.page.getByRole('cell').getByText(this.userProfilePageTestData.User_Profile_Page.title_label, {
+        exact: true,
+      }),
+    });
+    this.title_value = this.title_row.locator('td', { has: this.row_value_locator });
+    this.title_change_link = this.title_row.locator(this.row_change_link_locator);
+    this.first_name_row = this.page.locator('tr', {
+      has: this.page.getByRole('cell').getByText(this.userProfilePageTestData.User_Profile_Page.first_name_label, {
+        exact: true,
+      }),
+    });
+    this.first_name_value = this.first_name_row.locator('td', { has: this.row_value_locator });
+    this.first_name_change_link = this.first_name_row.locator(this.row_change_link_locator);
+    this.last_name_row = this.page.locator('tr', {
+      has: this.page.getByRole('cell').getByText(this.userProfilePageTestData.User_Profile_Page.first_name_label, {
+        exact: true,
+      }),
+    });
+    this.last_name_value = this.last_name_row.locator('td', { has: this.row_value_locator });
+    this.last_name_change_link = this.last_name_row.locator(this.row_change_link_locator);
+    this.email_address_row = this.page.locator('tr', {
+      has: this.page.getByRole('cell').getByText(this.userProfilePageTestData.User_Profile_Page.first_name_label, {
+        exact: true,
+      }),
+    });
+    this.email_address_value = this.email_address_row.locator('td', { has: this.row_value_locator });
+    this.email_address_change_link = this.email_address_row.locator(this.row_change_link_locator);
+    this.telephone_row = this.page.locator('tr', {
+      has: this.page.getByRole('cell').getByText(this.userProfilePageTestData.User_Profile_Page.first_name_label, {
+        exact: true,
+      }),
+    });
+    this.telephone_value = this.telephone_row.locator('td', { has: this.row_value_locator });
+    this.telephone_change_link = this.telephone_row.locator(this.row_change_link_locator);
+    this.organisation_row = this.page.locator('tr', {
+      has: this.page.getByRole('cell').getByText(this.userProfilePageTestData.User_Profile_Page.first_name_label, {
+        exact: true,
+      }),
+    });
+    this.organisation_value = this.organisation_row.locator('td', { has: this.row_value_locator });
+    this.organisation_change_link = this.organisation_row.locator(this.row_change_link_locator);
+    this.job_title_row = this.page.locator('tr', {
+      has: this.page.getByRole('cell').getByText(this.userProfilePageTestData.User_Profile_Page.first_name_label, {
+        exact: true,
+      }),
+    });
+    this.job_title_value = this.job_title_row.locator('td', { has: this.row_value_locator });
+    this.job_title_change_link = this.job_title_row.locator(this.row_change_link_locator);
+    this.role_row = this.page.locator('tr', {
+      has: this.page.getByRole('cell').getByText(this.userProfilePageTestData.User_Profile_Page.first_name_label, {
+        exact: true,
+      }),
+    });
+    this.role_value = this.role_row.locator('td', { has: this.row_value_locator });
+    this.role_change_link = this.role_row.locator(this.row_change_link_locator);
+    this.committee_row = this.page.locator('tr', {
+      has: this.page.getByRole('cell').getByText(this.userProfilePageTestData.User_Profile_Page.first_name_label, {
+        exact: true,
+      }),
+    });
+    this.committee_value = this.committee_row.locator('td', { has: this.row_value_locator });
+    this.committee_change_link = this.committee_row.locator(this.row_change_link_locator);
+    this.country_row = this.page.locator('tr', {
+      has: this.page.getByRole('cell').getByText(this.userProfilePageTestData.User_Profile_Page.first_name_label, {
+        exact: true,
+      }),
+    });
+    this.country_value = this.country_row.locator('td', { has: this.row_value_locator });
+    this.country_change_link = this.country_row.locator(this.row_change_link_locator);
+    this.review_body_row = this.page.locator('tr', {
+      has: this.page.getByRole('cell').getByText(this.userProfilePageTestData.User_Profile_Page.first_name_label, {
+        exact: true,
+      }),
+    });
+    this.review_body_value = this.review_body_row.locator('td', { has: this.row_value_locator });
+    this.review_body_change_link = this.review_body_row.locator(this.row_change_link_locator);
+    this.audit_row = this.page.locator('tr', {
+      has: this.page.getByRole('cell').getByText(this.userProfilePageTestData.User_Profile_Page.first_name_label, {
+        exact: true,
+      }),
+    });
+    this.audit_link = this.audit_row.locator(this.row_change_link_locator);
+    this.last_updated_row = this.page.locator('tr', {
+      has: this.page.getByRole('cell').getByText(this.userProfilePageTestData.User_Profile_Page.first_name_label, {
+        exact: true,
+      }),
+    });
+    this.last_updated_value = this.last_updated_row.locator('td', { has: this.row_value_locator });
   }
 
   async assertOnUserProfilePage() {

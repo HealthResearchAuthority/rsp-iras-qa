@@ -25,7 +25,7 @@ export default class HomePage {
 
     //Locators
     this.mainPageContent = this.page.getByTestId('main-content');
-    this.pageHeading = this.page.locator('h2.govuk-heading-l');
+    this.pageHeading = this.page.getByRole('heading').getByText(this.homePageTestData.Home_Page.heading);
     this.loginBtn = this.page
       .locator('.gem-c-button')
       .and(this.page.getByText(this.buttonTextData.Home_Page.Login, { exact: true }));

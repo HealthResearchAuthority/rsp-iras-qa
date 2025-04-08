@@ -76,10 +76,10 @@ export default class ManageUsersPage {
     this.next_button = this.page.locator('.govuk-pagination__next a');
     this.userListRows = this.page.locator('.govuk-table__row');
     this.userListCell = this.page.locator('.govuk-table__cell');
-    this.first_name_from_list_label = this.page.locator('td:nth-child(1)');
-    this.last_name_from_list_label = this.page.locator('td:nth-child(2)');
-    this.email_address_from_list_label = this.page.locator('td:nth-child(3)');
-    this.status_from_list_label = this.page.locator('td:nth-child(4)');
+    this.first_name_from_list_label = this.page.locator('td').nth(0);
+    this.last_name_from_list_label = this.page.locator('td').nth(1);
+    this.email_address_from_list_label = this.page.locator('td').nth(2);
+    this.status_from_list_label = this.page.locator('td').nth(3);
   }
 
   async assertOnManageUsersPage() {
@@ -159,7 +159,7 @@ export default class ManageUsersPage {
         const nextButton = this.page.locator('.govuk-pagination__next');
         if ((await nextButton.count()) > 0) {
           await nextButton.click();
-          await this.page.waitForSelector('table tbody tr');
+          await this.page.getByRole('row').first().waitFor();
         } else {
           throw new Error('Reached the last page, data not found.');
         }
