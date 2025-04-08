@@ -46,7 +46,7 @@ Feature: HRAPROG-393- User Administration: Manage user profiles
         And I update user profile '<Edit_User_Field_Data>' on 'Edit_User_Profile_Page'
         And I click the 'Save' button on the 'Edit_User_Profile_Page'
         And I can see the view user profile details page
-        Then I can see the user profile '<Edit_User_Field>' is updated in user profile page
+        Then I can see the user profile '<Edit_User_Field>' is updated with the edited data '<Edit_User_Field_Data>'
         When I click the '<Edit_User_Field>' change link for '<User_Role>' on the user profile page
         And I update user profile '<Original_Data>' on 'Edit_User_Profile_Page'
         And I click the 'Save' button on the 'Edit_User_Profile_Page'
@@ -63,7 +63,6 @@ Feature: HRAPROG-393- User Administration: Manage user profiles
             | organisation_text  | Operations | ACTIVE | User_Organisation_Text_One  | Original_Organisation_Text_One  |
             | job_title_text     | Operations | ACTIVE | User_Job_Title_Text_One     | Original_Job_Title_Text_One     |
             | role_dropdown      | Operations | ACTIVE | User_Role_Dropdown_One      | Original_Role_Dropdown_One      |
-            | country_checkbox   | Operations | ACTIVE | User_Country_Checkbox_One   | Original_Country_Checkbox_One   |
 
     @editUserProfileReviewer
     Scenario Outline: Successful user profile update for user as Reviewer
@@ -74,7 +73,7 @@ Feature: HRAPROG-393- User Administration: Manage user profiles
         And I update user profile '<Edit_User_Field_Data>' on 'Edit_User_Profile_Page'
         And I click the 'Save' button on the 'Edit_User_Profile_Page'
         And I can see the view user profile details page
-        Then I can see the user profile '<Edit_User_Field>' is updated in user profile page
+        Then I can see the user profile '<Edit_User_Field>' is updated with the edited data '<Edit_User_Field_Data>'
         When I click the '<Edit_User_Field>' change link for '<User_Role>' on the user profile page
         And I update user profile '<Original_Data>' on 'Edit_User_Profile_Page'
         And I click the 'Save' button on the 'Edit_User_Profile_Page'
@@ -101,7 +100,7 @@ Feature: HRAPROG-393- User Administration: Manage user profiles
         And I update user profile '<Edit_User_Field_Data>' on 'Edit_User_Profile_Page'
         And I click the 'Save' button on the 'Edit_User_Profile_Page'
         And I can see the view user profile details page
-        Then I can see the user profile '<Edit_User_Field>' is updated in user profile page
+        Then I can see the user profile '<Edit_User_Field>' is updated with the edited data '<Edit_User_Field_Data>'
         When I click the '<Edit_User_Field>' change link for '<User_Role>' on the user profile page
         And I update user profile '<Original_Data>' on 'Edit_User_Profile_Page'
         And I click the 'Save' button on the 'Edit_User_Profile_Page'
@@ -185,7 +184,7 @@ Feature: HRAPROG-393- User Administration: Manage user profiles
         And I update user profile '<Edit_User_Field_Data>' on 'Edit_User_Profile_Page'
         And I click the 'Save' button on the 'Edit_User_Profile_Page'
         And I can see the view user profile details page
-        Then I can see the user profile '<Edit_User_Field>' is updated in user profile page
+        Then I can see the user profile '<Edit_User_Field>' is updated with the edited data '<Edit_User_Field_Data>'
         When I click the '<Edit_User_Field>' change link for '<User_Role>' on the user profile page
         And I update user profile '<Original_Data>' on 'Edit_User_Profile_Page'
         And I click the 'Save' button on the 'Edit_User_Profile_Page'

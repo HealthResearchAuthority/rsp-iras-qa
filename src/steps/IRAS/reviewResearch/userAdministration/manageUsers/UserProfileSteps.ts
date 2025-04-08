@@ -1,5 +1,5 @@
 import { createBdd } from 'playwright-bdd';
-import { test } from '../../../../../hooks/CustomFixtures';
+import { test, expect } from '../../../../../hooks/CustomFixtures';
 
 const { Then, When } = createBdd(test);
 
@@ -8,14 +8,12 @@ Then('I can see the view user profile details page', async ({ userProfilePage })
 });
 
 Then(
-  'I can see the user profile {string} is updated in user profile page',
-  async ({ commonItemsPage, editUserProfilePage, userProfilePage }, datasetName: string) => {
-    const dataset = editUserProfilePage.editUserProfilePageTestData[datasetName];
-    for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        await commonItemsPage.validateUIComponentValues(dataset, key, userProfilePage);
-      }
-    }
+  'I can see the user profile {string} is updated with the edited data {string}',
+  async ({ userProfilePage, editUserProfilePage }, editFieldName: string, datesetName: string) => {
+    const dataset = editUserProfilePage.editUserProfilePageTestData[datesetName];
+    const actualValue = await userProfilePage.getUserProfileValue(editFieldName);
+    const expectedValue = dataset[editFieldName];
+    expect(actualValue?.trim()).toBe(expectedValue);
   }
 );
 

@@ -85,76 +85,76 @@ export default class UserProfilePage {
     this.first_name_value = this.first_name_row.locator('td', { has: this.row_value_locator });
     this.first_name_change_link = this.first_name_row.locator(this.row_change_link_locator);
     this.last_name_row = this.page.locator('tr', {
-      has: this.page.getByRole('cell').getByText(this.userProfilePageTestData.User_Profile_Page.first_name_label, {
+      has: this.page.getByRole('cell').getByText(this.userProfilePageTestData.User_Profile_Page.last_name_label, {
         exact: true,
       }),
     });
     this.last_name_value = this.last_name_row.locator('td', { has: this.row_value_locator });
     this.last_name_change_link = this.last_name_row.locator(this.row_change_link_locator);
     this.email_address_row = this.page.locator('tr', {
-      has: this.page.getByRole('cell').getByText(this.userProfilePageTestData.User_Profile_Page.first_name_label, {
+      has: this.page.getByRole('cell').getByText(this.userProfilePageTestData.User_Profile_Page.email_address_label, {
         exact: true,
       }),
     });
     this.email_address_value = this.email_address_row.locator('td', { has: this.row_value_locator });
     this.email_address_change_link = this.email_address_row.locator(this.row_change_link_locator);
     this.telephone_row = this.page.locator('tr', {
-      has: this.page.getByRole('cell').getByText(this.userProfilePageTestData.User_Profile_Page.first_name_label, {
+      has: this.page.getByRole('cell').getByText(this.userProfilePageTestData.User_Profile_Page.telephone_label, {
         exact: true,
       }),
     });
     this.telephone_value = this.telephone_row.locator('td', { has: this.row_value_locator });
     this.telephone_change_link = this.telephone_row.locator(this.row_change_link_locator);
     this.organisation_row = this.page.locator('tr', {
-      has: this.page.getByRole('cell').getByText(this.userProfilePageTestData.User_Profile_Page.first_name_label, {
+      has: this.page.getByRole('cell').getByText(this.userProfilePageTestData.User_Profile_Page.organisation_label, {
         exact: true,
       }),
     });
     this.organisation_value = this.organisation_row.locator('td', { has: this.row_value_locator });
     this.organisation_change_link = this.organisation_row.locator(this.row_change_link_locator);
     this.job_title_row = this.page.locator('tr', {
-      has: this.page.getByRole('cell').getByText(this.userProfilePageTestData.User_Profile_Page.first_name_label, {
+      has: this.page.getByRole('cell').getByText(this.userProfilePageTestData.User_Profile_Page.job_title_label, {
         exact: true,
       }),
     });
     this.job_title_value = this.job_title_row.locator('td', { has: this.row_value_locator });
     this.job_title_change_link = this.job_title_row.locator(this.row_change_link_locator);
     this.role_row = this.page.locator('tr', {
-      has: this.page.getByRole('cell').getByText(this.userProfilePageTestData.User_Profile_Page.first_name_label, {
+      has: this.page.getByRole('cell').getByText(this.userProfilePageTestData.User_Profile_Page.role_label, {
         exact: true,
       }),
     });
     this.role_value = this.role_row.locator('td', { has: this.row_value_locator });
     this.role_change_link = this.role_row.locator(this.row_change_link_locator);
     this.committee_row = this.page.locator('tr', {
-      has: this.page.getByRole('cell').getByText(this.userProfilePageTestData.User_Profile_Page.first_name_label, {
+      has: this.page.getByRole('cell').getByText(this.userProfilePageTestData.User_Profile_Page.committee_label, {
         exact: true,
       }),
     });
     this.committee_value = this.committee_row.locator('td', { has: this.row_value_locator });
     this.committee_change_link = this.committee_row.locator(this.row_change_link_locator);
     this.country_row = this.page.locator('tr', {
-      has: this.page.getByRole('cell').getByText(this.userProfilePageTestData.User_Profile_Page.first_name_label, {
+      has: this.page.getByRole('cell').getByText(this.userProfilePageTestData.User_Profile_Page.country_label, {
         exact: true,
       }),
     });
     this.country_value = this.country_row.locator('td', { has: this.row_value_locator });
     this.country_change_link = this.country_row.locator(this.row_change_link_locator);
     this.review_body_row = this.page.locator('tr', {
-      has: this.page.getByRole('cell').getByText(this.userProfilePageTestData.User_Profile_Page.first_name_label, {
+      has: this.page.getByRole('cell').getByText(this.userProfilePageTestData.User_Profile_Page.review_body_label, {
         exact: true,
       }),
     });
     this.review_body_value = this.review_body_row.locator('td', { has: this.row_value_locator });
     this.review_body_change_link = this.review_body_row.locator(this.row_change_link_locator);
     this.audit_row = this.page.locator('tr', {
-      has: this.page.getByRole('cell').getByText(this.userProfilePageTestData.User_Profile_Page.first_name_label, {
+      has: this.page.getByRole('cell').getByText(this.userProfilePageTestData.User_Profile_Page.audit_label, {
         exact: true,
       }),
     });
     this.audit_link = this.audit_row.locator(this.row_change_link_locator);
     this.last_updated_row = this.page.locator('tr', {
-      has: this.page.getByRole('cell').getByText(this.userProfilePageTestData.User_Profile_Page.first_name_label, {
+      has: this.page.getByRole('cell').getByText(this.userProfilePageTestData.User_Profile_Page.last_updated_label, {
         exact: true,
       }),
     });
@@ -216,6 +216,31 @@ export default class UserProfilePage {
         }
       default:
         throw new Error(`${editUserFieldName} is not a valid field to edit user profile`);
+    }
+  }
+
+  async getUserProfileValue(editUserFieldName: string) {
+    switch (editUserFieldName) {
+      case 'title_text':
+        return this.title_value.textContent();
+      case 'first_name_text':
+        return await this.first_name_value.textContent();
+      case 'last_name_text':
+        return await this.last_name_value.click();
+      case 'email_address_text':
+        return await this.email_address_value.textContent();
+      case 'telephone_text':
+        return await this.telephone_value.textContent();
+      case 'organisation_text':
+        return await this.organisation_value.textContent();
+      case 'job_title_text':
+        return await this.job_title_value.textContent();
+      case 'role_dropdown':
+        return await this.role_value.textContent();
+      case 'country_checkbox':
+        return await this.country_value.textContent();
+      default:
+        throw new Error(`${editUserFieldName} is not a valid user profile field`);
     }
   }
 }
