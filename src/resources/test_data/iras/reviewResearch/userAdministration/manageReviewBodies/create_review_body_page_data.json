@@ -5,10 +5,7 @@
     "page_heading": "Add a new review body",
     "organisation_name_label": "Organisation name",
     "country_label": "Country",
-    "country_option1_label": "England",
-    "country_option2_label": "Northern Ireland",
-    "country_option3_label": "Scotland",
-    "country_option4_label": "Wales",
+    "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
     "email_address_label": "Email address",
     "description_label": "Description",
     "complete_button": "Complete"

@@ -43,7 +43,7 @@ export default class CheckCreateReviewBodyPage {
       .getByRole('heading')
       .getByText(this.checkCreateReviewBodyPageData.Check_Create_Review_Body_Page.sub_heading, { exact: true });
     this.guidance_text = this.page
-      .getByRole('heading')
+      .getByRole('paragraph')
       .getByText(this.checkCreateReviewBodyPageData.Check_Create_Review_Body_Page.guidance_text, { exact: true });
     this.row_value_locator = this.page.locator('input');
     this.row_change_link_locator = this.page
@@ -98,7 +98,7 @@ export default class CheckCreateReviewBodyPage {
   async assertOnCheckCreateReviewbodyPage() {
     //update
     await expect(this.page_heading).toBeVisible();
-    await expect(this.guidance_text).toBeVisible(); //bug - missing full stop in display text
+    await expect(this.guidance_text).toBeVisible();
     await expect(this.sub_heading).toBeVisible();
   }
 

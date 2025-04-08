@@ -9,6 +9,9 @@ When(
   'I fill the new review body page using {string}',
   async ({ createReviewBodyPage, commonItemsPage }, datasetName: string) => {
     const dataset = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body[datasetName];
+    const datasetNameClear: string = 'Create_Review_Body_Page';
+    const clearDataset = createReviewBodyPage.createReviewBodyPageData[datasetNameClear];
+    await commonItemsPage.clearUIComponent(clearDataset, 'country_checkbox', createReviewBodyPage);
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
         if (datasetName.startsWith('Valid_') && key == 'organisation_name_text') {
