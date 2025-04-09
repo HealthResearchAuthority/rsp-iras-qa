@@ -24,10 +24,9 @@
   },
   "Create_User_Profile": {
     "email_address_prefix": "QAAutomation",
-    "email_address_timestamp": "",
     "email_address_unique": "QAAutomation20250403173014925hscrd@health.org",
     "Role_Operations": {
-      "role_dropdown": "Operations"
+      "role_dropdown": "operations"
     },
     "Role_Not_Operations": {
       "role_dropdown": "Reviewer"
@@ -95,8 +94,8 @@
       "organisation_text": "QA Automation HRA Role_Operations_Another",
       "job_title_text": "Sr.Reviewer Role_Operations_Another",
       "role_dropdown": "operations",
-      "country_checkbox": ["England"],
-      "access_required_checkbox": ["Research Ethics Committee"]
+      "country_checkbox": ["England", "Scotland"],
+      "access_required_checkbox": ["Research Ethics Committee", "CAG"]
     },
     "Valid_Data_In_All_Fields_Role_Reviewer_Another": {
       "title_text": "Mr",

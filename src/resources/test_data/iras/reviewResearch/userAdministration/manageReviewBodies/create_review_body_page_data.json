@@ -11,6 +11,8 @@
     "complete_button": "Complete"
   },
   "Create_Review_Body": {
+    "organisation_name_prefix": "QAAutomation",
+    "organisation_name_unique": "HSC Research and Development Test Update Org NameQAAutomation20250408115221305",
     "Valid_Data_In_All_Fields": {
       "organisation_name_text": "QA Automation HSC Research and Development",
       "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
@@ -366,6 +368,12 @@
       "Max_Words": "The description cannot exceed 500 words.",
       "Max_Email_Chars": "Max 255 characters allowed",
       "Email_Format": "Invalid email format"
+    },
+    "Organisation_Name_Another": {
+      "organisation_name_text": "HSC Research and Development Test Update Org Name"
+    },
+    "Email_Another": {
+      "organisation_name_text": "HSC Research and Development Test Update Org Name"
     }
   }
 }

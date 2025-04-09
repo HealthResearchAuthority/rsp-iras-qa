@@ -26,6 +26,10 @@ export default class ManageUsersPage {
   readonly next_button: Locator;
   readonly userListRows: Locator;
   readonly userListCell: Locator;
+  readonly first_name_from_list_label: Locator;
+  readonly last_name_from_list_label: Locator;
+  readonly email_address_from_list_label: Locator;
+  readonly status_from_list_label: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -65,6 +69,10 @@ export default class ManageUsersPage {
     this.next_button = this.page.locator('.govuk-pagination__next a');
     this.userListRows = this.page.locator('.govuk-table__row');
     this.userListCell = this.page.locator('.govuk-table__cell');
+    this.first_name_from_list_label = this.page.locator('td:nth-child(1)');
+    this.last_name_from_list_label = this.page.locator('td:nth-child(2)');
+    this.email_address_from_list_label = this.page.locator('td:nth-child(3)');
+    this.status_from_list_label = this.page.locator('td:nth-child(4)');
   }
 
   async assertOnManageUsersPage() {
@@ -78,7 +86,7 @@ export default class ManageUsersPage {
     for (let i = 0; i < 4; i++) {
       const rows = await this.userListRows.all();
       for (const row of rows) {
-        const firstName = confirmStringNotNull(await row.locator(this.userListCell).first().textContent()).trim();
+        const firstName = confirmStringNotNull(await row.locator(this.userListCell).first().textContent());
         firstNames.push(firstName);
       }
       hasNextPage = (await this.next_button.isVisible()) && !(await this.next_button.isDisabled());
@@ -115,6 +123,39 @@ export default class ManageUsersPage {
       return count;
     } else {
       throw new Error(`No matching record found`);
+    }
+  }
+
+  async searchAndClickUserProfile(userFirstName: string, userLastName: string, userEmail: string, userStatus: string) {
+    let dataFound = false;
+    while (!dataFound) {
+      const rowCount = await this.users_list_rows.count();
+      for (let i = 0; i < rowCount; i++) {
+        const firstNameText = await this.users_list_rows.nth(i).locator(this.first_name_from_list_label).textContent();
+        const lastNameText = await this.users_list_rows.nth(i).locator(this.last_name_from_list_label).textContent();
+        const emailText = await this.users_list_rows.nth(i).locator(this.email_address_from_list_label).textContent();
+        const statusText = await this.users_list_rows.nth(i).locator(this.status_from_list_label).textContent();
+        if (
+          firstNameText?.trim() === userFirstName &&
+          lastNameText?.trim() === userLastName &&
+          emailText?.trim() === userEmail &&
+          statusText?.trim() === userStatus
+        ) {
+          await this.users_list_rows.nth(i).getByText('View/Edit').click();
+          dataFound = true;
+          break;
+        }
+      }
+
+      if (!dataFound) {
+        const nextButton = this.page.locator('.govuk-pagination__next');
+        if ((await nextButton.count()) > 0) {
+          await nextButton.click();
+          await this.page.waitForSelector('table tbody tr');
+        } else {
+          throw new Error('Reached the last page, data not found.');
+        }
+      }
     }
   }
 }

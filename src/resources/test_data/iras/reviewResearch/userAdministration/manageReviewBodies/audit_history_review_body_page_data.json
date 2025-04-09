@@ -1,0 +1,50 @@
+{
+  "Review_Body_Audit_History_Page": {
+    "back_button": "Back",
+    "page_heading": "Audit history: ",
+    "Create_Review_Body": {
+      "date_text": "08 Apr 2025 09:56",
+      "event_description_text": " was created",
+      "system_admin_email_text": "futureiras.automation@hra.nhs.uk"
+    },
+    "Disable_Review_Body": {
+      "date_text": "08 Apr 2025 09:56",
+      "event_description_text": " was disabled",
+      "system_admin_email_text": "futureiras.automation@hra.nhs.uk"
+    },
+    "Enable_Review_Body": {
+      "date_text": "08 Apr 2025 09:57",
+      "event_description_text": " was enabled",
+      "system_admin_email_text": "futureiras.automation@hra.nhs.uk"
+    },
+    "Edit_Review_Body_Organisation_Name": {
+      "date_text": "08 Apr 2025 11:52",
+      "event_description_text": "OrganisationName was changed from ",
+      "system_admin_email_text": "futureiras.automation@hra.nhs.uk",
+      "organisation_name_unique_previous": "Audit Test Update 1 Update 3"
+    },
+    "Edit_Review_Body_Country": {
+      "date_text": "07 Apr 2025 19:30",
+      "event_description_text": "Countries was changed from ",
+      "system_admin_email_text": "futureiras.automation@hra.nhs.uk",
+      "country_previous": ""
+    },
+    "Edit_Review_Body_Email_Address": {
+      "date_text": "07 Apr 2025 19:30",
+      "event_description_text": "EmailAddress was changed from ",
+      "system_admin_email_text": "futureiras.automation@hra.nhs.uk",
+      "email_previous": ""
+    },
+    "Edit_Review_Body_Description": {
+      "date_text": "07 Apr 2025 19:30",
+      "event_description_text": "Description was changed from ",
+      "system_admin_email_text": "futureiras.automation@hra.nhs.uk",
+      "description_previous": ""
+    }
+  },
+  "header_Texts": {
+    "date_label": "Date",
+    "event_description_label": "Event description",
+    "system_admin_label": "System administrator"
+  }
+}

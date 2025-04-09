@@ -359,10 +359,10 @@ function standardAcheived(doubleViolation: number, tripleViolation: number) {
   }
 }
 
-export async function generateUniqueEmail(keyVal: string, prefix: string): Promise<string> {
+export async function generateUniqueValue(keyVal: string, prefix: string): Promise<string> {
   const timestamp = new Date().toISOString().replace(/[-:.TZ]/g, '');
   const domain = keyVal;
-  return `${prefix}${timestamp}${domain}`;
+  return `${domain}${prefix}${timestamp}`;
 }
 
 export async function removeUnwantedWhitespace(value: string): Promise<string> {
@@ -372,4 +372,24 @@ export async function removeUnwantedWhitespace(value: string): Promise<string> {
 export async function generateTimeStampedValue(keyVal: string, separator: string): Promise<string> {
   const timestamp = new Date().toISOString().replace(/[-:.TZ]/g, '');
   return `${keyVal}${separator}${timestamp}`;
+}
+
+export async function getCurrentTimeFormatted(): Promise<string> {
+  const now = new Date();
+  // Subtract one hour from the current time
+  now.setHours(now.getHours() - 1);
+  const formatter = new Intl.DateTimeFormat('en-GB', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+    timeZone: 'Europe/London',
+    // timeZoneName: 'short',
+  });
+  const parts = formatter.formatToParts(now);
+  const getPart = (type: string) => parts.find((p) => p.type === type)?.value || '';
+  const formatted = `${getPart('day')} ${getPart('month')} ${getPart('year')} ${getPart('hour')}:${getPart('minute')}`;
+  return formatted;
 }

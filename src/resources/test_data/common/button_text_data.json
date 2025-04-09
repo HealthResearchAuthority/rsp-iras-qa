@@ -65,6 +65,11 @@
     "Back": "Back"
   },
   "Edit_Review_Body_Page": {
-    "Save": "Save"
+    "Save": "Save",
+    "Back": "Back"
+  },
+  "Review_Body_Profile_Page": {
+    "Disable_Review_Body": "Disable review body",
+    "Enable_Review_Body": "Enable review body"
   }
 }

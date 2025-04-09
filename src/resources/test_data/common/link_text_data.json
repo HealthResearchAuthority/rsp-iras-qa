@@ -52,7 +52,8 @@
   },
   "Confirmation_Page": {
     "Back": "Back",
-    "Back_To_Manage_Users": "Back to Manage users"
+    "Back_To_Manage_Users": "Back to Manage users",
+    "Back_To_Manage_Review_Bodies": "Back to Manage review bodies"
   },
   "Manage_Review_Bodies_Page": {
     "Back": "Back",
@@ -81,6 +82,9 @@
     "Back": "Back"
   },
   "Edit_Review_Body_Page": {
+    "Back": "Back"
+  },
+  "Review_Body_Audit_History_Page": {
     "Back": "Back"
   }
 }
