@@ -13,6 +13,8 @@ export default class HomePage {
   readonly pageHeading: Locator;
   readonly projectGuidanceText: Locator;
   readonly loginBtn: Locator;
+  readonly manageReviewbodiesLink: Locator;
+  readonly manageUsersLink: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -28,6 +30,12 @@ export default class HomePage {
     this.loginBtn = this.page
       .locator('.gem-c-button')
       .and(this.page.getByText(this.buttonTextData.Home_Page.Login, { exact: true }));
+    this.manageReviewbodiesLink = this.mainPageContent.getByText(this.linkTextData.Home_Page.Manage_Review_Bodies, {
+      exact: true,
+    });
+    this.manageUsersLink = this.mainPageContent.getByText(this.linkTextData.Home_Page.Manage_Users, {
+      exact: true,
+    });
   }
 
   //Page Methods

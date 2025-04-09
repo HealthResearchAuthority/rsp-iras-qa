@@ -48,7 +48,8 @@
   },
   "User_Profile_Page": {
     "Disable_User_Record": "Disable user record",
-    "Enable_User_Record": "Enable user record"
+    "Enable_User_Record": "Enable user record",
+    "Back": "Back"
   },
   "Manage_Users_Page": {
     "Back": "Back"
@@ -65,6 +66,9 @@
     "Back": "Back"
   },
   "Edit_Review_Body_Page": {
+    "Save": "Save"
+  },
+  "Edit_User_Profile_Page": {
     "Save": "Save"
   }
 }
