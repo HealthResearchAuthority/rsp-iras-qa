@@ -1,5 +1,5 @@
 @UserAdministration  @EditViewUsers @adminUser @rsp-2830 @rsp-2828
-Feature: HRAPROG-393- User Administration: Manage user profiles
+Feature: HRAPROG-393- User Administration: Manage user profiles, view and edit user profile
     As a user
     I want the ability to edit and view a user profile record
     So that I can access all the user information and keep user information up to date

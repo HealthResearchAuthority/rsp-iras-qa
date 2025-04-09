@@ -2,6 +2,7 @@ import { expect, Locator, Page } from '@playwright/test';
 import * as userProfilePageTestData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageUsers/user_profile_page_data.json';
 import * as buttonTextData from '../../../../../resources/test_data/common/button_text_data.json';
 import * as linkTextData from '../../../../../resources/test_data/common/link_text_data.json';
+import { confirmStringNotNull } from '../../../../../utils/UtilFunctions';
 
 //Declare Page Objects
 export default class UserProfilePage {
@@ -222,23 +223,23 @@ export default class UserProfilePage {
   async getUserProfileValue(editUserFieldName: string) {
     switch (editUserFieldName) {
       case 'title_text':
-        return this.title_value.textContent();
+        return confirmStringNotNull(await this.title_value.textContent()).trim();
       case 'first_name_text':
-        return await this.first_name_value.textContent();
+        return confirmStringNotNull(await this.first_name_value.textContent()).trim();
       case 'last_name_text':
-        return await this.last_name_value.click();
+        return confirmStringNotNull(await this.last_name_value.textContent()).trim();
       case 'email_address_text':
-        return await this.email_address_value.textContent();
+        return confirmStringNotNull(await this.email_address_value.textContent()).trim();
       case 'telephone_text':
-        return await this.telephone_value.textContent();
+        return confirmStringNotNull(await this.telephone_value.textContent()).trim();
       case 'organisation_text':
-        return await this.organisation_value.textContent();
+        return confirmStringNotNull(await this.organisation_value.textContent()).trim();
       case 'job_title_text':
-        return await this.job_title_value.textContent();
+        return confirmStringNotNull(await this.job_title_value.textContent()).trim();
       case 'role_dropdown':
-        return await this.role_value.textContent();
+        return confirmStringNotNull(await this.role_value.textContent()).trim();
       case 'country_checkbox':
-        return await this.country_value.textContent();
+        return confirmStringNotNull(await this.country_value.textContent()).trim();
       default:
         throw new Error(`${editUserFieldName} is not a valid user profile field`);
     }

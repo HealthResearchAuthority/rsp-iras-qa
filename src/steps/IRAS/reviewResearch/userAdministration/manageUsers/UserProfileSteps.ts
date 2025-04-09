@@ -13,7 +13,7 @@ Then(
     const dataset = editUserProfilePage.editUserProfilePageTestData[datesetName];
     const actualValue = await userProfilePage.getUserProfileValue(editFieldName);
     const expectedValue = dataset[editFieldName];
-    expect(actualValue?.trim()).toBe(expectedValue);
+    expect(actualValue).toBe(expectedValue);
   }
 );
 

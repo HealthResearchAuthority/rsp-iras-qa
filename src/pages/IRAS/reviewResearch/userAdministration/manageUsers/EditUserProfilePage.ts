@@ -15,7 +15,6 @@ export default class EditUserProfilePage {
   readonly telephone_text: Locator;
   readonly organisation_text: Locator;
   readonly job_title_text: Locator;
-  readonly role_dropdown_label: Locator;
   readonly role_dropdown: Locator;
   readonly committee_dropdown: Locator;
   readonly country_checkbox: Locator;
