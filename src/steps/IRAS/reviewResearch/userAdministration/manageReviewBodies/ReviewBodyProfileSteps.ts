@@ -63,3 +63,16 @@ When(
     await expect(reviewBodyProfilePage.description_value).toHaveText(dataset.description_text);
   }
 );
+
+Then(
+  'I can see the {string} ui labels on the manage review body profile page',
+  async ({ commonItemsPage, reviewBodyProfilePage }, datasetName: string) => {
+    const dataset = reviewBodyProfilePage.reviewBodyProfilePageData[datasetName];
+    for (const key in dataset) {
+      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+        const labelVal = await commonItemsPage.getUiLabel(dataset, key, reviewBodyProfilePage);
+        expect(labelVal).toBe(dataset[key]);
+      }
+    }
+  }
+);

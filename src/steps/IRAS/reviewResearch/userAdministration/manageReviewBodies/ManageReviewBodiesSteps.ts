@@ -51,7 +51,7 @@ Then(
       await createReviewBodyPage.getUniqueOrgName(),
       true
     );
-    if (status.toLowerCase() == ' disabled') {
+    if (status.toLowerCase() == 'disabled') {
       expect(createdReviewBodyRow.locator(manageReviewBodiesPage.statusCell)).toHaveText(dataset.disabled_status);
     } else {
       expect(createdReviewBodyRow.locator(manageReviewBodiesPage.statusCell)).toHaveText(dataset.enabled_status);
@@ -79,24 +79,12 @@ Then(
 );
 
 Then(
-    'I click the view edit link for the newly created review body',
-    async ({ manageReviewBodiesPage, createReviewBodyPage }) => {
-      const createdReviewBodyRow = await manageReviewBodiesPage.getRowByOrgName(
-        await createReviewBodyPage.getUniqueOrgName()
-      );
-      await createdReviewBodyRow.locator(manageReviewBodiesPage.viewEditLink).click();
-    }
-  );
-  
-  Then(
-    'I can see the {string} ui labels on the manage review body profile page',
-    async ({ commonItemsPage, manageReviewBodiesPage }, datasetName: string) => {
-      const dataset = manageReviewBodiesPage.manageReviewBodiesPageData[datasetName];
-      for (const key in dataset) {
-        if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-          const labelVal = await commonItemsPage.getUiLabel(dataset, key, manageReviewBodiesPage);
-          expect(labelVal).toBe(dataset[key]);
-        }
-      }
-    }
-  );
+  'I click the view edit link for the newly created review body',
+  async ({ manageReviewBodiesPage, createReviewBodyPage }) => {
+    const createdReviewBodyRow = await manageReviewBodiesPage.getRowByOrgName(
+      await createReviewBodyPage.getUniqueOrgName(),
+      true
+    );
+    await createdReviewBodyRow.locator(manageReviewBodiesPage.viewEditLink).click();
+  }
+);

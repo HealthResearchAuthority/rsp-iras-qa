@@ -8,7 +8,7 @@ Feature: User Administration: Manage Review Bodies - Enable / Disable Review Bod
     And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
     And I can see the manage review bodies list page
     And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
-    And I can see the Add a new review body page
+    And I can see the add a new review body page
 
   @rsp-2573 @DisableReviewBody
   Scenario Outline: Verify the user is able to disable a review body

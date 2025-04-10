@@ -7,7 +7,6 @@ export default class ConfirmationPage {
   readonly confirmationPageTestData: typeof confirmationPageTestData;
   readonly confirmation_header_label: Locator;
   readonly confirmation_body_label: Locator;
-  readonly confirmation_hint_label: Locator;
   readonly disable_confirmation_success_header_label: Locator;
   readonly disable_confirmation_success_body_label: Locator;
   readonly enable_confirmation_success_header_label: Locator;
@@ -20,14 +19,12 @@ export default class ConfirmationPage {
 
     //Locators
 
-    this.confirmation_header_label = this.page.locator('[class$="govuk-heading-l"]');
-    this.confirmation_body_label = this.page.locator('[class$="govuk-body"]');
-    this.confirmation_hint_label = this.page.locator('[class$="govuk-hint"]');
-    this.disable_confirmation_success_header_label = this.enable_confirmation_success_header_label = this.page.locator(
-      'h1[class="govuk-panel__title"]'
-    );
+    this.confirmation_header_label = this.page.getByRole('heading');
+    this.confirmation_body_label = this.page.getByRole('paragraph');
+    this.disable_confirmation_success_header_label = this.enable_confirmation_success_header_label =
+      this.page.getByRole('heading');
     this.disable_confirmation_success_body_label = this.enable_confirmation_success_body_label = this.page
-      .locator('p[class="govuk-body"]')
+      .getByRole('paragraph')
       .first();
   }
 }

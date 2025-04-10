@@ -110,13 +110,11 @@ Then(
     const organisationNameMemory = await createReviewBodyPage.getUniqueOrgName();
     const validationLabelsDataset = confirmationPage.confirmationPageTestData[validationLabelsDatasetName];
     const expectedConfirmationHeader =
-      validationLabelsDataset.disable_confirmation_header_label +
-      ' ' +
-      organisationNameMemory;
+      validationLabelsDataset.disable_confirmation_header_label + ' ' + organisationNameMemory;
     expect(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim()).toBe(
       expectedConfirmationHeader
     );
-    expect(confirmStringNotNull(await confirmationPage.confirmation_hint_label.textContent()).trim()).toBe(
+    expect(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim()).toBe(
       validationLabelsDataset.disable_confirmation_body_label
     );
   }
@@ -149,13 +147,11 @@ Then(
     const organisationNameMemory = await createReviewBodyPage.getUniqueOrgName();
     const validationLabelsDataset = confirmationPage.confirmationPageTestData[validationLabelsDatasetName];
     const expectedConfirmationHeader =
-      validationLabelsDataset.enable_confirmation_header_label +
-      ' ' +
-      organisationNameMemory;
+      validationLabelsDataset.enable_confirmation_header_label + ' ' + organisationNameMemory;
     expect(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim()).toBe(
       expectedConfirmationHeader
     );
-    expect(confirmStringNotNull(await confirmationPage.confirmation_hint_label.textContent()).trim()).toBe(
+    expect(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim()).toBe(
       validationLabelsDataset.enable_confirmation_body_label
     );
   }

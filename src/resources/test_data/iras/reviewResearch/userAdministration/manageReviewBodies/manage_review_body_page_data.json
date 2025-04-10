@@ -15,13 +15,5 @@
     "enabled_status": "ACTIVE",
     "disabled_status": "DISABLED",
     "actions_link": "View/Edit"
-  },
-  "Disable_Label_Texts": {
-    "disable_header_label": "Disable this review body",
-    "disable_hint_label": "Disabling a review body will lock their account and can be reversed"
-  },
-  "Enable_Label_Texts": {
-    "enable_header_label": "Enable this review body",
-    "enable_hint_label": "Enabling a review body will unlock their account"
   }
 }
