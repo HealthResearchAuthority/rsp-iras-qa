@@ -17,9 +17,7 @@ export default class EditUserProfilePage {
   readonly job_title_text: Locator;
   readonly role_dropdown: Locator;
   readonly committee_dropdown: Locator;
-  readonly country_checkbox_label: Locator;
   readonly country_checkbox: Locator;
-  readonly access_required_checkbox_label: Locator;
   readonly access_required_checkbox: Locator;
   readonly review_body_dropdown: Locator;
   readonly continue_button: Locator;
@@ -44,9 +42,7 @@ export default class EditUserProfilePage {
     this.job_title_text = this.page.getByLabel('Job title', { exact: true });
     this.role_dropdown = this.page.getByLabel('Role', { exact: true });
     this.committee_dropdown = this.page.getByLabel('Committee', { exact: true });
-    this.country_checkbox_label = this.page.locator('[class="govuk-label"][for="Country"] b');
     this.country_checkbox = this.page.locator('[name="Country"][type="checkbox"]');
-    this.access_required_checkbox_label = this.page.locator('[class="govuk-label"][for="AccessRequired"] b');
     this.access_required_checkbox = this.page.locator('[name="AccessRequired"][type="checkbox"]');
     this.review_body_dropdown = this.page.getByLabel('Review body', { exact: true });
     this.continue_button = this.page.locator('.govuk-button[type="submit"]');
@@ -66,6 +62,16 @@ export default class EditUserProfilePage {
     const isCountrySelected = await this.country_checkbox.isChecked();
     if (isCountrySelected) {
       this.country_checkbox.uncheck();
+    }
+  }
+
+  async removeUserProfileMandatoryFields(userEditField: string) {
+    if (userEditField == 'first_name_text') {
+      await this.first_name_text.clear();
+    } else if (userEditField == 'last_name_text') {
+      await this.last_name_text.clear();
+    } else if (userEditField == 'email_address_text') {
+      await this.email_address_text.clear();
     }
   }
 }

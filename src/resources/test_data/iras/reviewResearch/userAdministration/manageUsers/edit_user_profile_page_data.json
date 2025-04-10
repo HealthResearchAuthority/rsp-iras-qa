@@ -62,5 +62,385 @@
       "last_name_text": "",
       "email_address_text": ""
     }
+  },
+  "Label_Texts_Role_Operations": {
+    "title_textbox_label": "Title",
+    "first_name_textbox_label": "First name",
+    "last_name_textbox_label": "Last name",
+    "email_address_textbox_label": "Email address",
+    "telephone_textbox_label": "Telephone",
+    "organisation_textbox_label": "Organisation",
+    "job_title_textbox_label": "Job title",
+    "role_dropdown_label": "Role",
+    "committee_dropdown_label": "Committee",
+    "access_required_checkbox_label": "Access required",
+    "country_checkbox_label": "Country"
+  },
+
+  "Label_Texts_Role_Reviewer": {
+    "title_textbox_label": "Title",
+    "first_name_textbox_label": "First name",
+    "last_name_textbox_label": "Last name",
+    "email_address_textbox_label": "Email address",
+    "telephone_textbox_label": "Telephone",
+    "organisation_textbox_label": "Organisation",
+    "job_title_textbox_label": "Job title",
+    "role_dropdown_label": "Role"
+  },
+  "Invalid_Email_Id_Error_Message": {
+    "invalid_email_id_error": "Max 250 characters allowed"
+  },
+  "Max_Field_Length_Error_Message": {
+    "max_field_length_error": "Max 250 characters allowed"
+  },
+  "Mandatory_Field_Error_Message": {
+    "first_name_error": "The FirstName field is required.",
+    "last_name_error": "The LastName field is required.",
+    "email_address_error": "The Email field is required."
+  },
+  "Empty_UserProfile_Mandatory_Data": {
+    "empty_first_name_text": "",
+    "empty_last_name_text": "",
+    "empty_email_address_text": ""
+  },
+  "User_Title_Text_One": {
+    "title_text": "Miss",
+    "access_required_checkbox": ["Research Ethics Committee"]
+  },
+  "User_First_Name_Text_One": {
+    "first_name_text": "First Name Updated",
+    "access_required_checkbox": ["Research Ethics Committee"]
+  },
+  "User_Last_Name_Text_One": {
+    "last_name_text": "Last name updated",
+    "access_required_checkbox": ["Research Ethics Committee"]
+  },
+  "User_Email_Address_Text_One": {
+    "email_address_text": "QAAutomation98342jksdfbrohsbrddfsssdjs_updated@test1.com",
+    "access_required_checkbox": ["Research Ethics Committee"]
+  },
+  "User_Telephone_Text_One": {
+    "telephone_text": "07999999999",
+    "access_required_checkbox": ["Research Ethics Committee"]
+  },
+  "User_Organisation_Text_One": {
+    "organisation_text": "Automation HRA",
+    "access_required_checkbox": ["Research Ethics Committee"]
+  },
+  "User_Job_Title_Text_One": {
+    "job_title_text": "Sr.Reviewer updated",
+    "access_required_checkbox": ["Research Ethics Committee"]
+  },
+  "User_Role_Dropdown_One": {
+    "role_dropdown": "Operations",
+    "access_required_checkbox": ["Research Ethics Committee"]
+  },
+  "User_Country_Checkbox_One": {
+    "country_checkbox": ["England, Wales"],
+    "access_required_checkbox": ["Research Ethics Committee"]
+  },
+  "User_Access_Required_Checkbox_One": {
+    "access_required_checkbox": ["Research Ethics Committee"]
+  },
+  "Original_Title_Text_One": {
+    "title_text": "Mr",
+    "access_required_checkbox": ["Research Ethics Committee"]
+  },
+  "Original_First_Name_Text_One": {
+    "first_name_text": "QA Automation First Name Test",
+    "access_required_checkbox": ["Research Ethics Committee"]
+  },
+  "Original_Last_Name_Text_One": {
+    "last_name_text": "Test Last Name",
+    "access_required_checkbox": ["Research Ethics Committee"]
+  },
+  "Original_Email_Address_Text_One": {
+    "email_address_text": "QAAutomation20250320135015064hscrd@health.org",
+    "access_required_checkbox": ["Research Ethics Committee"]
+  },
+  "Original_Telephone_Text_One": {
+    "telephone_text": "07111111112",
+    "access_required_checkbox": ["Research Ethics Committee"]
+  },
+  "Original_Organisation_Text_One": {
+    "organisation_text": "HRA",
+    "access_required_checkbox": ["Research Ethics Committee"]
+  },
+  "Original_Job_Title_Text_One": {
+    "job_title_text": "Admin",
+    "access_required_checkbox": ["Research Ethics Committee"]
+  },
+  "Original_Role_Dropdown_One": {
+    "role_dropdown": "Operations",
+    "access_required_checkbox": ["Research Ethics Committee"]
+  },
+  "Original_Country_Checkbox_One": {
+    "country_checkbox": ["England"],
+    "access_required_checkbox": ["Research Ethics Committee"]
+  },
+  "Original_Access_Required_Checkbox_One": {
+    "access_required_checkbox": ["Research Ethics Committee"]
+  },
+
+  "User_Title_Text_Two": {
+    "title_text": "Miss"
+  },
+  "User_First_Name_Text_Two": {
+    "first_name_text": "First Name Updated"
+  },
+  "User_Last_Name_Text_Two": {
+    "last_name_text": "Last name updated"
+  },
+  "User_Email_Address_Text_Two": {
+    "email_address_text": "QAAutomationjksdfbrohsbrsdjs_updated@test1.com"
+  },
+  "User_Telephone_Text_Two": {
+    "telephone_text": "07999999999"
+  },
+  "User_Organisation_Text_Two": {
+    "organisation_text": "Automation HRA"
+  },
+  "User_Job_Title_Text_Two": {
+    "job_title_text": "Sr.Reviewer updated"
+  },
+  "User_Role_Dropdown_Two": {
+    "role_dropdown": "Reviewer"
+  },
+
+  "Original_Title_Text_Two": {
+    "title_text": "Mr"
+  },
+  "Original_First_Name_Text_Two": {
+    "first_name_text": "QA Automation First Name Test"
+  },
+  "Original_Last_Name_Text_Two": {
+    "last_name_text": "Test Last Name"
+  },
+  "Original_Email_Address_Text_Two": {
+    "email_address_text": "QAAutomation20250327122528dtef558hscrd@health.org"
+  },
+  "Original_Telephone_Text_Two": {
+    "telephone_text": "07111111112"
+  },
+  "Original_Organisation_Text_Two": {
+    "organisation_text": "QA Automation HRA"
+  },
+  "Original_Job_Title_Text_Two": {
+    "job_title_text": "Sr.Reviewer"
+  },
+  "Original_Role_Dropdown_Two": {
+    "role_dropdown": "Reviewer"
+  },
+
+  "User_First_Name_Text_Three": {
+    "first_name_text": "QAAutomation First Name Updated"
+  },
+  "User_Last_Name_Text_Three": {
+    "last_name_text": "Test Last Name"
+  },
+  "User_Email_Address_Text_Three": {
+    "email_address_text": "QAAutomation20250327115050148hscrd@health.org"
+  },
+
+  "Original_First_Name_Text_Three": {
+    "first_name_text": "QA Automation First Name Test"
+  },
+  "Original_Last_Name_Text_Three": {
+    "last_name_text": "Test Last Name"
+  },
+  "Original_Email_Address_Text_Three": {
+    "email_address_text": "QAAutomation20250327115050148hscrd@health.org"
+  },
+  "User_Title_Text_Max": {
+    "title_text": "';.,/f12`33437943780078jdsdhbklyfb slnbdur129064<>?|'@989342nkfvdkvmdifbjskldmsidhvfnb jvvdjnvjkbnfjbndfkjbnjdfbndkfbmndfkbdkfbndkfbndfklbmdigjdkmkdfnbdflmdfklbmdfklbmdfkbmdfbkmdflkbmdfkbmdflkdkdkdfkkdfkdkldkfkbijbdijbdijdibjifbbmndkbmdfbmdfkbmfdbmdfb"
+  },
+
+  "User_First_Name_Text_Max": {
+    "first_name_text": "kjdigjdgkdgusgnskegnirdghdjgnsuhgsjnvjfnsnskvdfvd;';hudg,.hudghij3276424092438463njkfndvnksnvhfdsiefsnvhbhfsknjghud8734238472907562387203983773878ngidfjgiodgndjgndgjdiogjr7938472999328kjjgdkmdbfjdifjklvdfdivndnbduijgdibnidfjbdbdogdigdnbdujgdigigdigjdy"
+  },
+
+  "User_Last_Name_Text_Max": {
+    "last_name_text": "kjdigjdgkdgusgnskegnirdghdjgnsuhgsjnvjfnsnskvdfvd;';hudg,.hudghij3276424092438463njkfndvnksnvhfdsiefsnvhbhfsknjghud8734238472907562387203983773878ngidfjgiodgndjgndgjdiogjr7938472999328kjjgdkmdbfjdifjklvdfdivndnbduijgdibnidfjbdbdogdigdnbdujgdigigdigjdz"
+  },
+
+  "User_Email_Address_Text_Max": {
+    "email_address_text": "jhfdjgbldfdfsdhgiduhgiddddldddnbidufnjndkjfndfkmldkfnjdknbjfdnlksmknjjjjjjjjjjjjjjjjjjnvsdvdsknvdfjvnfjnbdknvjdnbjfdnsdiejieuehuinvsdjvnbudfvndnvivndi@co.com"
+  },
+
+  "User_Telephone_Text_Max": {
+    "telephone_text": "076578234561"
+  },
+
+  "User_Organisation_Text_Max": {
+    "organisation_text": "kjdigjdgkdgusgnskegnirdghdjgnsuhgsjnvjfnsnskvdfvd;';hudg,.hudghij3276424092438463njkfndvnksnvhfdsiefsnvhbhfsknjghud8734238472907562387203983773878ngidfjgiodgndjgndgjdiogjr7938472999328kjjgdkmdbfjdivndnbduijgdibnidfjbdbdogdigdnbdujgdigigdigjdy879345345"
+  },
+
+  "User_Job_Title_Text_Max": {
+    "job_title_text": "jobtitlekjdigjdgkdgusgnskegnirdghdjgnsuhgsjnvjfnsnskvdfvd;';hudg,.hudghij3276424092438463njkfndvnksnvhfdsiefsnvhbhfsknjghud8734238472907562387203983773878ngidfjgiodgndjgndgjdiogjr7938472999328kjjgdkmdbfjdivndnbdidfjbdbdogdigdnbdujgdigigdigjdy879345345"
+  },
+  "Field_Error_Message": {
+    "iras_id_text": "Enter an email address in the correct format"
+  },
+
+  "Invalid_Email_Id": {
+    "email_address_text": "john.doe.example.com"
+  },
+
+  "Valid_Email_Data_Dot": {
+    "email_address_text": "john.doe@example.com"
+  },
+  "Valid_Email_Data_Underscore": {
+    "email_address_text": "john_doe@example.com"
+  },
+  "Valid_Email_Data_Hyphen": {
+    "email_address_text": "john-doe@example.com"
+  },
+  "Valid_Email_Data_Plus": {
+    "email_address_text": "john+newsletter@example.com"
+  },
+  "Valid_Email_Data_Exclamation": {
+    "email_address_text": "john!doe@example.com"
+  },
+  "Valid_Email_Data_Hash": {
+    "email_address_text": "john#profile@example.com"
+  },
+  "Valid_Email_Data_Dollar": {
+    "email_address_text": "john$invoice@example.com"
+  },
+  "Valid_Email_Data_Percentage": {
+    "email_address_text": "john%discount@example.com"
+  },
+  "Valid_Email_Data_Ampersand": {
+    "email_address_text": "john&team@example.com"
+  },
+  "Valid_Email_Data_Single_Quote": {
+    "email_address_text": "john's@example.com"
+  },
+  "Valid_Email_Data_Star": {
+    "email_address_text": "john*star@example.com"
+  },
+  "Valid_Email_Data_Slash": {
+    "email_address_text": "john/everyone@example.com"
+  },
+  "Valid_Email_Data_Equal_Symbol": {
+    "email_address_text": "john=equals@example.com"
+  },
+  "Valid_Email_Data_Question_Mark": {
+    "email_address_text": "john?query@example.com"
+  },
+  "Valid_Email_Data_Cap_Symbol": {
+    "email_address_text": "john^caret@example.com"
+  },
+  "Valid_Email_Data_Right_Single_Quote": {
+    "email_address_text": "john`code@example.com"
+  },
+  "Valid_Email_Data_Curly_Brackets": {
+    "email_address_text": "john{editor}@example.com"
+  },
+  "Valid_Email_Data_Pipe_Symbol": {
+    "email_address_text": "john|vertical@example.com"
+  },
+  "Valid_Email_Data_Tilde_Symbol": {
+    "email_address_text": "john~tilde@example.com"
+  },
+  "Valid_Email_Data_Unicode": {
+    "email_address_text": "johñ.unicode@example.com"
+  },
+  "Valid_Email_Data_Special_Characters": {
+    "email_address_text": "john!#$%&'*+-/=?^_`{|}~doe@example.com"
+  },
+  "Valid_Email_Data_Hyphen_Underscore": {
+    "email_address_text": "john-_doe@example.com"
+  },
+  "Valid_Email_Data_Multiple_Unicode": {
+    "email_address_text": "johñ.döe@example.com"
+  },
+  "Valid_Email_Data_Multiple_Sub_Domains": {
+    "email_address_text": "mail.sub.subsub.sub.example.com"
+  },
+  "Valid_Email_Data_Domain": {
+    "email_address_text": "john.doe@example.photography"
+  },
+  "Valid_Email_Data_Other_Language": {
+    "email_address_text": "john@example.भारत"
+  },
+  "Valid_Email_Data_Number": {
+    "email_address_text": "Johndoe2@example.com"
+  },
+  "Incorrect_Format": {
+    "email_address_text": "O(*()*(*()"
+  },
+  "Invalid_Email_Data_Start_With_Dot": {
+    "email_address_text": ".john@example.com"
+  },
+  "Invalid_Email_Data_Double_Dot": {
+    "email_address_text": "john..doe@example.com"
+  },
+  "Invalid_Email_Data_Space": {
+    "email_address_text": "john doe@example.com"
+  },
+  "Invalid_Email_Data_Wrong_AT": {
+    "email_address_text": "john[at]example.",
+    "sponsor_contact_email_text": "john[at]example."
+  },
+  "Invalid_Email_Data_Less_Greater_Symbols": {
+    "email_address_text": "john<doe>@example.com"
+  },
+  "Invalid_Email_Data_Colon": {
+    "email_address_text": "john:doe@example.com"
+  },
+  "Invalid_Email_Data_Semi_Colon": {
+    "email_address_text": "john;doe@example.com"
+  },
+  "Invalid_Email_Data_Comma": {
+    "email_address_text": "john,@example.com"
+  },
+  "Invalid_Email_Data_Start_With_Hyphen": {
+    "email_address_text": "-john@example.com"
+  },
+  "Invalid_Email_Data_Hyphen_Before_Domain": {
+    "email_address_text": "john@example-.com"
+  },
+  "Invalid_Email_Data_Double_Dot_Domain": {
+    "email_address_text": "john.@example..com"
+  },
+  "Invalid_Email_Data_Exclamation_Domain": {
+    "email_address_text": "john!doe@exa!mple.com"
+  },
+  "Invalid_Email_Data_Unicode": {
+    "email_address_text": "johñ@example.com"
+  },
+  "Invalid_Email_Data_Single_Quote_Before_AT": {
+    "email_address_text": "john.doe'@example.com"
+  },
+  "Invalid_Email_Data_Domain_Exceed_Max": {
+    "email_address_text": "averyveryverylongdomainnamewithmanysubdomainsandmorecharacters.com"
+  },
+  "Invalid_Email_Data_Local_Part_Max": {
+    "email_address_text": "averyveryverylongemailaddressthatexceedscharacters@example.com"
+  },
+  "Invalid_Email_Data_Consecutive_Dot_Domain": {
+    "email_address_text": "john@example..com"
+  },
+  "Invalid_Email_Data_Consecutive_Dot_SubDomain": {
+    "email_address_text": "mail..sub.example.com"
+  },
+  "Invalid_Email_Data_Consecutiv_Dot_Domain_SubDomain": {
+    "email_address_text": "john..doe'@example..com"
+  },
+  "Invalid_Email_Data_Emoji": {
+    "email_address_text": "john🙂@example.com"
+  },
+  "Invalid_Email_Data_TLD": {
+    "email_address_text": "john.doe@example.1234"
+  },
+  "Invalid_Email_Data_Missing_AT": {
+    "email_address_text": "john.doeexample.com"
+  },
+  "Invalid_Email_Data_Reserved_Domain": {
+    "email_address_text": "john.doe@localhost"
+  },
+  "Invalid_Email_Data_Punycode": {
+    "email_address_text": "john@example.xn--mgbh0fb"
   }
 }
