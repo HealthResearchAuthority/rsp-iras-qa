@@ -1,10 +1,5 @@
 import { createBdd } from 'playwright-bdd';
 import { test, expect } from '../../../../../hooks/CustomFixtures';
-import path from 'path';
-import * as fse from 'fs-extra';
-const pathToTestDataJson =
-  './src/resources/test_data/iras/reviewResearch/userAdministration/manageReviewBodies/create_review_body_page_data.json';
-
 const { When, Then } = createBdd(test);
 
 Then('I can see the manage review bodies list page', async ({ manageReviewBodiesPage }) => {
@@ -84,13 +79,30 @@ Then(
 
 When(
   'I search and click on view edit link of the newly created review body for {string} with {string} status from the manage review bodies page',
-  async ({ manageReviewBodiesPage }, datasetName: string, userStatus: string) => {
-    // const dataset = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body[datasetName];
-    // const countryNames: string = dataset.country_checkbox.toString();
-    const filePath = path.resolve(pathToTestDataJson);
-    const data = await fse.readJson(filePath);
-    const orgName = data.Create_Review_Body.organisation_name_unique;
-    // await manageReviewBodiesPage.searchAndClickReviewBody(orgName, countryNames, userStatus);
-    await manageReviewBodiesPage.searchAndClickReviewBody(orgName, userStatus);
+  async ({ manageReviewBodiesPage, createReviewBodyPage }, datasetName: string, userStatus: string) => {
+    const dataset = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body[datasetName];
+    const countryNames: string = dataset.country_checkbox.toString();
+    const organisationName = await createReviewBodyPage.getUniqueOrgName();
+    await manageReviewBodiesPage.searchAndClickReviewBody(organisationName, countryNames, userStatus);
+  }
+);
+
+When(
+  'I search and click on view edit link of the disabled review body with {string} status from the manage review bodies page',
+  async ({ manageReviewBodiesPage, reviewBodyProfilePage }, userStatus: string) => {
+    const organisationName = await reviewBodyProfilePage.getOrgName();
+    const countryNames: string[] = await reviewBodyProfilePage.getCountries();
+    const countriesString: string = countryNames.join(', ');
+    await manageReviewBodiesPage.searchAndClickReviewBody(organisationName, countriesString, userStatus);
+  }
+);
+
+When(
+  'I search and click on view edit link of the enabled review body with {string} status from the manage review bodies page',
+  async ({ manageReviewBodiesPage, reviewBodyProfilePage }, userStatus: string) => {
+    const organisationName = await reviewBodyProfilePage.getOrgName();
+    const countryNames: string[] = await reviewBodyProfilePage.getCountries();
+    const countriesString: string = countryNames.join(', ');
+    await manageReviewBodiesPage.searchAndClickReviewBody(organisationName, countriesString, userStatus);
   }
 );

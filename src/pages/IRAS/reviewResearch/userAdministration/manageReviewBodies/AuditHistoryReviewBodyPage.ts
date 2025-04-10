@@ -53,8 +53,8 @@ export default class AuditHistoryReviewBodyPage {
     const timeValues: string[] = [];
     const eventValues: string[] = [];
     const adminEmailValues: string[] = [];
-    let hasNextPage = true;
-    while (hasNextPage) {
+    const dataFound = false;
+    while (!dataFound) {
       const rowCount = await this.auditTableRows.count();
       for (let i = 1; i < rowCount; i++) {
         const columns = this.auditTableRows.nth(i).getByRole('cell');
@@ -65,15 +65,15 @@ export default class AuditHistoryReviewBodyPage {
         const adminEmailValue = confirmStringNotNull(await columns.nth(2).textContent());
         adminEmailValues.push(adminEmailValue);
       }
-      hasNextPage = (await this.next_button.isVisible()) && !(await this.next_button.isDisabled());
-      if (hasNextPage) {
+      if ((await this.next_button.isVisible()) && !(await this.next_button.isDisabled())) {
         await this.next_button.click();
         await this.page.waitForLoadState('domcontentloaded');
       } else if ((await this.hidden_next_button.count()) > 0) {
         break;
+      } else if ((await this.next_button.count()) == 0) {
+        break;
       }
     }
-
     return [timeValues, eventValues, adminEmailValues];
   }
 

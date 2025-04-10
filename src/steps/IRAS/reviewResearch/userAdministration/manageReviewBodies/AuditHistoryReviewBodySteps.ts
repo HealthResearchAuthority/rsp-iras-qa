@@ -17,15 +17,23 @@ const pathToAuditTestDataJson =
 Then('I can see the audit history page of the review body', async ({ auditHistoryReviewBodyPage }) => {
   await auditHistoryReviewBodyPage.assertOnAuditHistoryReviewBodyPage();
 });
-Then('I can see the audit history page of the selected review body', async ({ auditHistoryReviewBodyPage }) => {
-  await auditHistoryReviewBodyPage.assertOnAuditHistoryReviewBodyPage();
-  const filePath = path.resolve(pathToTestDataJson);
-  const data = await fse.readJson(filePath);
-  await expect(auditHistoryReviewBodyPage.page_heading).toHaveText(
-    auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.page_heading +
-      data.Create_Review_Body.organisation_name_unique
-  );
-});
+Then(
+  'I can see the audit history page of the selected review body for {string}',
+  async ({ auditHistoryReviewBodyPage, createReviewBodyPage }, datasetName: string) => {
+    const dataset = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body[datasetName];
+    await auditHistoryReviewBodyPage.assertOnAuditHistoryReviewBodyPage();
+    let organisationName: string;
+    if (datasetName.startsWith('Valid_')) {
+      organisationName = await createReviewBodyPage.getUniqueOrgName();
+    } else {
+      organisationName = dataset.organisation_name_text;
+    }
+    await expect(auditHistoryReviewBodyPage.page_heading).toHaveText(
+      auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.page_heading +
+        organisationName
+    );
+  }
+);
 
 Then(
   'I can see the {string} ui labels on the audit history page of the review body',
@@ -42,56 +50,64 @@ Then(
 );
 
 Then(
-  'I can see the audit history for the review body created event with {string}',
-  async ({ auditHistoryReviewBodyPage }, datasetName: string) => {
-    const dataset =
-      auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page[datasetName];
+  'I can see the audit history for the review body created event for {string} with {string}',
+  async ({ auditHistoryReviewBodyPage, createReviewBodyPage }, datasetName: string, datasetValName: string) => {
+    const datasetCreateReviewBody = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body[datasetName];
+    const datasetAudit =
+      auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page[datasetValName];
     const filePathAuditHistory = path.resolve(pathToAuditTestDataJson);
     const datafilePathAuditHistory = await fse.readJson(filePathAuditHistory);
     const auditLog = await auditHistoryReviewBodyPage.getAuditLog();
     const timeExpected = datafilePathAuditHistory.Review_Body_Audit_History_Page.Create_Review_Body.date_text;
-    const filePathCreateReviewBody = path.resolve(pathToTestDataJson);
-    const dataCreateReviewBody = await fse.readJson(filePathCreateReviewBody);
-    const eventDescriptionExpectedValue =
-      dataCreateReviewBody.Create_Review_Body.organisation_name_unique + dataset.event_description_text;
+    let organisationName: string;
+    if (datasetName.startsWith('Valid_')) {
+      organisationName = await createReviewBodyPage.getUniqueOrgName();
+    } else {
+      organisationName = datasetCreateReviewBody.organisation_name_text;
+    }
+    const eventDescriptionExpectedValue = organisationName + datasetAudit.event_description_text;
     expect(auditLog[0][0]).toBe(timeExpected);
     expect(auditLog[1][0]).toBe(eventDescriptionExpectedValue);
-    expect(auditLog[2][0]).toBe(dataset.system_admin_email_text);
+    expect(auditLog[2][0]).toBe(datasetAudit.system_admin_email_text);
   }
 );
 
 Then(
   'I can see the audit history for the review body disabled event with {string}',
-  async ({ auditHistoryReviewBodyPage }, datasetName: string) => {
-    const dataset =
+  async ({ auditHistoryReviewBodyPage, reviewBodyProfilePage }, datasetName: string) => {
+    const datasetAudit =
       auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page[datasetName];
     const filePathAuditHistory = path.resolve(pathToAuditTestDataJson);
     const datafilePathAuditHistory = await fse.readJson(filePathAuditHistory);
     const auditLog = await auditHistoryReviewBodyPage.getAuditLog();
     const timeExpected = datafilePathAuditHistory.Review_Body_Audit_History_Page.Disable_Review_Body.date_text;
-    const filePathCreateReviewBody = path.resolve(pathToTestDataJson);
-    const dataCreateReviewBody = await fse.readJson(filePathCreateReviewBody);
-    const eventDescriptionExpectedValue =
-      dataCreateReviewBody.Create_Review_Body.organisation_name_unique + dataset.event_description_text;
+    const organisationName = await reviewBodyProfilePage.getOrgName();
+    const eventDescriptionExpectedValue = organisationName + datasetAudit.event_description_text;
+    await expect(auditHistoryReviewBodyPage.page_heading).toHaveText(
+      auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.page_heading +
+        organisationName
+    );
     expect(auditLog[0][0]).toBe(timeExpected);
     expect(auditLog[1][0]).toBe(eventDescriptionExpectedValue);
-    expect(auditLog[2][0]).toBe(dataset.system_admin_email_text);
+    expect(auditLog[2][0]).toBe(datasetAudit.system_admin_email_text);
   }
 );
 
 Then(
   'I can see the audit history for the review body enabled event with {string}',
-  async ({ auditHistoryReviewBodyPage }, datasetName: string) => {
+  async ({ auditHistoryReviewBodyPage, reviewBodyProfilePage }, datasetName: string) => {
     const dataset =
       auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page[datasetName];
     const filePathAuditHistory = path.resolve(pathToAuditTestDataJson);
     const datafilePathAuditHistory = await fse.readJson(filePathAuditHistory);
-    const auditLog = await auditHistoryReviewBodyPage.getAuditLog();
     const timeExpected = datafilePathAuditHistory.Review_Body_Audit_History_Page.Enable_Review_Body.date_text;
-    const filePathCreateReviewBody = path.resolve(pathToTestDataJson);
-    const dataCreateReviewBody = await fse.readJson(filePathCreateReviewBody);
-    const eventDescriptionExpectedValue =
-      dataCreateReviewBody.Create_Review_Body.organisation_name_unique + dataset.event_description_text;
+    const organisationName = await reviewBodyProfilePage.getOrgName();
+    const eventDescriptionExpectedValue = organisationName + dataset.event_description_text;
+    const auditLog = await auditHistoryReviewBodyPage.getAuditLog();
+    await expect(auditHistoryReviewBodyPage.page_heading).toHaveText(
+      auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.page_heading +
+        organisationName
+    );
     expect(auditLog[0][0]).toBe(timeExpected);
     expect(auditLog[1][0]).toBe(eventDescriptionExpectedValue);
     expect(auditLog[2][0]).toBe(dataset.system_admin_email_text);
@@ -121,13 +137,6 @@ Then('I capture the current time after editing a review body', async ({ createRe
   await createReviewBodyPage.updateCurrentTimeAfterEditOrgNameTestDataJson(filePath, currentTime);
 });
 
-// When(
-//   'I click the change link against {string} on the review body profile page',
-//   async ({ reviewBodyProfilePage }, fieldKey: string) => {
-//     reviewBodyProfilePage.clickOnChangeButton(fieldKey);
-//   }
-// );
-
 Then('I can see the edit review body page for audit', async ({ createReviewBodyPage }) => {
   //update
   // const dataset = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body[datasetName];
@@ -155,37 +164,10 @@ Then('I can see the edit review body page for audit', async ({ createReviewBodyP
   //   confirmStringNotNull(actualOrganisationName)
   // );
 });
-// Then(
-//   'I can see previously filled values in the new user profile page for {string} displayed on the check and create user profile page',
-//   async ({ createUserProfilePage, checkCreateUserProfilePage }, datasetName: string) => {
-//     const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
-//     for (const key in dataset) {
-//       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-//         const fieldValActual = await checkCreateUserProfilePage.getSelectedValues(
-//           dataset,
-//           key,
-//           checkCreateUserProfilePage
-//         );
-//         if (key === 'email_address_text') {
-//           const filePath = path.resolve(pathToTestDataJson);
-//           const data = await fse.readJson(filePath);
-//           expect(fieldValActual).toBe(data.Create_User_Profile.email_address_unique);
-//         } else if (key === 'country_checkbox' || key === 'access_required_checkbox') {
-//           const fieldValActuals = fieldValActual.split(', ');
-//           fieldValActuals.forEach((val, index) => {
-//             expect(val).toBe(dataset[key][index]);
-//           });
-//         } else {
-//           expect(fieldValActual).toBe(dataset[key]);
-//         }
-//       }
-//     }
-//   }
-// );
 
 Then(
   'I can see the audit history for organisation name edited event with {string}',
-  async ({ auditHistoryReviewBodyPage, createReviewBodyPage }, datasetName: string) => {
+  async ({ auditHistoryReviewBodyPage, reviewBodyProfilePage }, datasetName: string) => {
     const dataset =
       auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page[datasetName];
     const filePathAuditHistory = path.resolve(pathToAuditTestDataJson);
@@ -193,14 +175,43 @@ Then(
     const auditLog = await auditHistoryReviewBodyPage.getAuditLog();
     const timeExpected =
       datafilePathAuditHistory.Review_Body_Audit_History_Page.Edit_Review_Body_Organisation_Name.date_text;
-    const organisationNameUniquePrevious = await createReviewBodyPage.getUniqueOrgName();
-    const filePathCreateReviewBody = path.resolve(pathToTestDataJson);
-    const dataCreateReviewBody = await fse.readJson(filePathCreateReviewBody);
+    const organisationNamePrevious = await reviewBodyProfilePage.getOrgName();
+    const organisationNameCurrent = await reviewBodyProfilePage.getNewOrgName();
     const eventDescriptionPart1 = dataset.event_description_text;
-    const eventDescriptionPart2 = organisationNameUniquePrevious;
-    const eventDescriptionPart3 = ' to ' + dataCreateReviewBody.Create_Review_Body.organisation_name_unique;
+    const eventDescriptionPart2 = organisationNamePrevious;
+    const eventDescriptionPart3 = ' to ' + organisationNameCurrent;
     const eventDescriptionExpectedValue = eventDescriptionPart1 + eventDescriptionPart2 + eventDescriptionPart3;
-    console.log(eventDescriptionExpectedValue);
+    await expect(auditHistoryReviewBodyPage.page_heading).toHaveText(
+      auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.page_heading +
+        organisationNameCurrent
+    );
+    expect(auditLog[0][0]).toBe(timeExpected);
+    expect(auditLog[1][0]).toBe(eventDescriptionExpectedValue);
+    expect(auditLog[2][0]).toBe(dataset.system_admin_email_text);
+  }
+);
+
+Then(
+  'I can see the audit history for country edited event with {string}',
+  async ({ auditHistoryReviewBodyPage, reviewBodyProfilePage }, datasetName: string) => {
+    const dataset =
+      auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page[datasetName];
+    const filePathAuditHistory = path.resolve(pathToAuditTestDataJson);
+    const datafilePathAuditHistory = await fse.readJson(filePathAuditHistory);
+    const auditLog = await auditHistoryReviewBodyPage.getAuditLog();
+    const timeExpected =
+      datafilePathAuditHistory.Review_Body_Audit_History_Page.Edit_Review_Body_Organisation_Name.date_text;
+    const countryNamesPrevious: string = (await reviewBodyProfilePage.getCountries()).join(', ');
+    const countryNamesCurrent = (await reviewBodyProfilePage.getNewCountries()).join(', ');
+    const eventDescriptionPart1 = dataset.event_description_text;
+    const eventDescriptionPart2 = countryNamesPrevious;
+    const eventDescriptionPart3 = ' to ' + countryNamesCurrent;
+    const eventDescriptionExpectedValue = eventDescriptionPart1 + eventDescriptionPart2 + eventDescriptionPart3;
+    const organisationName = await reviewBodyProfilePage.getNewOrgName();
+    await expect(auditHistoryReviewBodyPage.page_heading).toHaveText(
+      auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.page_heading +
+        organisationName
+    );
     expect(auditLog[0][0]).toBe(timeExpected);
     expect(auditLog[1][0]).toBe(eventDescriptionExpectedValue);
     expect(auditLog[2][0]).toBe(dataset.system_admin_email_text);

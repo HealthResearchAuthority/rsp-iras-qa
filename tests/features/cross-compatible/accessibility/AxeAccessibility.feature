@@ -171,7 +171,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityUserProfileDisable @adminUser
+  @axeAccessibilityUserProfileDisable @adminUser @axeAccessibilityManageUsers
   Scenario: View user profile page with disable button available
     Given I have navigated to the 'System_Administration_Page'
     And I click the 'Manage_Users' link on the 'System_Administration_Page'
@@ -187,7 +187,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityUserProfileDisableConfirmation @adminUser
+  @axeAccessibilityUserProfileDisableConfirmation @adminUser @axeAccessibilityManageUsers
   Scenario: View disable confirmation page for user roles
     Given I have navigated to the 'System_Administration_Page'
     And I click the 'Manage_Users' link on the 'System_Administration_Page'
@@ -204,7 +204,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityUserProfileDisableSuccess @adminUser
+  @axeAccessibilityUserProfileDisableSuccess @adminUser @axeAccessibilityManageUsers
   Scenario: View disable confirmation success page for user roles
     Given I have navigated to the 'System_Administration_Page'
     And I click the 'Manage_Users' link on the 'System_Administration_Page'
@@ -222,7 +222,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityUserProfileEnable @adminUser
+  @axeAccessibilityUserProfileEnable @adminUser @axeAccessibilityManageUsers
   Scenario: View user profile page with enable button available
     Given I have navigated to the 'System_Administration_Page'
     And I click the 'Manage_Users' link on the 'System_Administration_Page'
@@ -243,7 +243,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityUserProfileEnableConfirmation @adminUser
+  @axeAccessibilityUserProfileEnableConfirmation @adminUser @axeAccessibilityManageUsers
   Scenario: View enable confirmation page for user roles
     Given I have navigated to the 'System_Administration_Page'
     And I click the 'Manage_Users' link on the 'System_Administration_Page'
@@ -265,7 +265,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityUserProfileEnableSuccess @adminUser
+  @axeAccessibilityUserProfileEnableSuccess @adminUser @axeAccessibilityManageUsers
   Scenario: View enable confirmation success page for user roles
     Given I have navigated to the 'System_Administration_Page'
     And I click the 'Manage_Users' link on the 'System_Administration_Page'
@@ -297,7 +297,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I expect to receive no WCAG Violations
 
 
-  @axeAccessibilityManageReviewBodies @adminUser
+  @axeAccessibilityManageReviewBodiesList @adminUser @axeAccessibilityManageReviewBodies
   Scenario: Manage review bodies list page
     Given I have navigated to the 'Manage_Review_Bodies_Page'
     And I can see the manage review bodies list page
@@ -305,7 +305,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityAddReviewBodies @adminUser
+  @axeAccessibilityAddReviewBodies @adminUser @axeAccessibilityManageReviewBodies
   Scenario: Add a new review body page
     Given I have navigated to the 'Manage_Review_Bodies_Page'
     And I can see the manage review bodies list page
@@ -315,7 +315,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityCheckReviewBodies @adminUser
+  @axeAccessibilityCheckReviewBodies @adminUser @axeAccessibilityManageReviewBodies
   Scenario Outline: Check and create review body page
     Given I have navigated to the 'Manage_Review_Bodies_Page'
     And I can see the manage review bodies list page
@@ -329,7 +329,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I expect to receive no WCAG Violations
 
 
-  @axeAccessibilityConfirmReviewBodies @adminUser
+  @axeAccessibilityConfirmReviewBodies @adminUser @axeAccessibilityManageReviewBodies
   Scenario Outline: Create review body confirmation page
     Given I have navigated to the 'Manage_Review_Bodies_Page'
     And I can see the manage review bodies list page
@@ -344,7 +344,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityReviewBodiesProfile @adminUser
+  @axeAccessibilityReviewBodiesProfile @adminUser @axeAccessibilityManageReviewBodies
   Scenario Outline: Review body profile page
     Given I have navigated to the 'Manage_Review_Bodies_Page'
     And I can see the manage review bodies list page
@@ -354,7 +354,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityEditReviewBodies @adminUser
+  @axeAccessibilityEditReviewBodies @adminUser @axeAccessibilityManageReviewBodies
   Scenario Outline: Edit review body page
     Given I have navigated to the 'Manage_Review_Bodies_Page'
     And I can see the manage review bodies list page
@@ -362,6 +362,19 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I can see the review body profile page
     And I click the change link against 'Organisation_Name' on the review body profile page
     And I can see the edit review body page
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityAuditHistoryReviewBody @adminUser @axeAccessibilityManageReviewBodies
+  Scenario: Audit history page of reviewBody
+    Given I have navigated to the 'System_Administration_Page'
+    And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
+    And I can see the manage review bodies list page
+    When I click the 'View_Edit' link on the 'Manage_Review_Bodies_Page'
+    And I can see the review body profile page
+    And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'
+    Then I can see the audit history page of the review body
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations

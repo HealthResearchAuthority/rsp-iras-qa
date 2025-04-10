@@ -59,3 +59,25 @@ Then(
     }
   }
 );
+
+When(
+  'I fill the edit review body page using {string} for field {string}',
+  async ({ editReviewBodyPage, commonItemsPage }, datasetName: string) => {
+    const dataset = editReviewBodyPage.editReviewBodyPageData.Edit_Review_Body[datasetName];
+    for (const key in dataset) {
+      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+        if (
+          (datasetName.startsWith('Valid_') || datasetName.startsWith('Review_')) &&
+          key == 'organisation_name_text'
+        ) {
+          const orgNameLocator: Locator = editReviewBodyPage[key];
+          const uniqueOrgNameValue = await generateTimeStampedValue(dataset[key], ' ');
+          await orgNameLocator.fill(uniqueOrgNameValue);
+          await editReviewBodyPage.setUniqueOrgName(uniqueOrgNameValue);
+        } else {
+          await commonItemsPage.fillUIComponent(dataset, key, editReviewBodyPage);
+        }
+      }
+    }
+  }
+);
