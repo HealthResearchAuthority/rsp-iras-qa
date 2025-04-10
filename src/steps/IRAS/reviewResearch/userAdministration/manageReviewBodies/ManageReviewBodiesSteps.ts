@@ -85,6 +85,6 @@ Then(
       await createReviewBodyPage.getUniqueOrgName(),
       true
     );
-    await createdReviewBodyRow.locator(manageReviewBodiesPage.viewEditLink).click();
+    await createdReviewBodyRow.locator(manageReviewBodiesPage.actionsLink).click();
   }
 );

@@ -12,15 +12,11 @@ export default class ManageReviewBodiesPage {
   readonly mainPageContent: Locator;
   readonly actionsLink: Locator;
   readonly statusCell: Locator;
-  readonly viewEditLink: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page;
     this.manageReviewBodiesPageData = manageReviewBodiesPageData;
-
-    //Locators
-    this.viewEditLink = this.page.locator('td a');
     this.linkTextData = linkTextData;
 
     //Locators
