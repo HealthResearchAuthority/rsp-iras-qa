@@ -10,3 +10,4 @@ artifacts
 user_profile_generate_test_data.json
 user_profile_generate_faker_test_data.json
 .vscode
+screenshot.png

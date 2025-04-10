@@ -22,6 +22,7 @@ export default class CommonItemsPage {
   readonly linkTextData: typeof linkTextData;
   readonly questionSetData: typeof questionSetData;
   readonly showAllSectionsAccordion: Locator;
+  readonly genericButton: Locator;
   readonly govUkButton: Locator;
   readonly govUkCheckboxes: Locator;
   readonly govUkCheckboxItem: Locator;
@@ -34,6 +35,12 @@ export default class CommonItemsPage {
   readonly qSetProgressBarActiveStageLink: Locator;
   readonly bannerNavBar: Locator;
   readonly bannerLoginBtn: Locator;
+  readonly bannerHome: Locator;
+  readonly bannerReviewApplications: Locator;
+  readonly bannerAdmin: Locator;
+  readonly bannerManageUsers: Locator;
+  readonly bannerQuestionSet: Locator;
+  readonly bannerSystemAdmin: Locator;
   readonly bannerMyApplications: Locator;
   readonly alert_box: Locator;
   readonly alert_box_headings: Locator;
@@ -51,6 +58,7 @@ export default class CommonItemsPage {
 
     //Locators
     this.showAllSectionsAccordion = page.locator('.govuk-accordion__show-all"');
+    this.genericButton = this.page.getByRole('button');
     this.govUkButton = this.page.locator('.govuk-button');
     this.govUkCheckboxes = this.page.locator('.govuk-checkboxes');
     this.govUkCheckboxItem = this.govUkCheckboxes.locator('.govuk-checkboxes__item');
@@ -61,8 +69,17 @@ export default class CommonItemsPage {
     this.qSetProgressBarActiveStage = this.qSetProgressBar.locator('.stage.active');
     this.qSetProgressBarStageLink = this.qSetProgressBarStage.locator('.stage-label').getByRole('button');
     this.qSetProgressBarActiveStageLink = this.qSetProgressBarActiveStage.locator('.stage-label').getByRole('button');
+    //Banner
     this.bannerNavBar = this.page.getByLabel('Service information');
     this.bannerLoginBtn = this.bannerNavBar.getByText(this.buttonTextData.Banner.Login, { exact: true });
+    this.bannerHome = this.bannerNavBar.getByText(this.linkTextData.Banner.Home, { exact: true });
+    this.bannerReviewApplications = this.bannerNavBar.getByText(this.linkTextData.Banner.Review_Applications, {
+      exact: true,
+    });
+    this.bannerAdmin = this.bannerNavBar.getByText(this.linkTextData.Banner.Admin, { exact: true });
+    this.bannerManageUsers = this.bannerNavBar.getByText(this.linkTextData.Banner.Manage_Users, { exact: true });
+    this.bannerQuestionSet = this.bannerNavBar.getByText(this.linkTextData.Banner.Question_Set, { exact: true });
+    this.bannerSystemAdmin = this.bannerNavBar.getByText(this.linkTextData.Banner.System_Admin, { exact: true });
     this.bannerMyApplications = this.bannerNavBar.getByText(this.linkTextData.Banner.My_Applications, { exact: true });
     this.errorMessageFieldLabel = page.locator('[class$="field-validation-error"]');
     this.errorMessageSummaryLabel = page.locator('div[class="govuk-error-summary"]');
@@ -133,10 +150,7 @@ export default class CommonItemsPage {
         await locator.locator('..').getByLabel(checkbox, { exact: true }).check();
       }
     } else {
-      const isSelectTag = await locator.evaluate((el) => el.tagName.toLowerCase() === 'select');
-      if (isSelectTag) {
-        await locator.selectOption({ label: dataset[key] });
-      }
+      await locator.selectOption({ label: dataset[key] });
     }
   }
 
@@ -326,7 +340,6 @@ export default class CommonItemsPage {
     const screenshot = await locator.screenshot({ path: 'screenshot.png' });
     await $testInfo.attach(`[step] ${$step.title}`, { body: screenshot, contentType: 'image/png' });
   }
-
   async validateErrorMessage<PageObject>(
     errorMessageFieldDataset: string,
     errorMessageSummaryDataset: string,
@@ -358,7 +371,6 @@ export default class CommonItemsPage {
       await expect(otherLocator).toHaveText(errorMessageFieldDataset[key]);
     }
   }
-
   async validateUIComponentValues<PageObject>(dataset: JSON, key: string, page: PageObject) {
     const locator: Locator = page[key];
     const typeAttribute = await locator.first().getAttribute('type');
@@ -398,6 +410,31 @@ export default class CommonItemsPage {
       if (isSelectTag) {
         await locator.selectOption({ label: '' });
       }
+    }
+  }
+
+  //This code will be removed when error summary label available on manage users screens
+  async validateErrorMessageWithoutErrorHeading<PageObject>(
+    errorMessageFieldDataset: string,
+    key: string,
+    page: PageObject
+  ) {
+    const typeAttribute = await page[key].first().getAttribute('type');
+    if (typeAttribute === 'checkbox') {
+      const checkboxLocator = page[key].locator('../../../..').locator(this.errorMessageFieldLabel);
+      await expect(checkboxLocator).toHaveText(errorMessageFieldDataset[key]);
+    } else if (typeAttribute === 'radio') {
+      const radioLocator = page[key].locator('../../../..').locator(this.errorMessageFieldLabel);
+      await expect(radioLocator).toHaveText(errorMessageFieldDataset[key]);
+    } else if (
+      typeAttribute === 'date' ||
+      (await page[key].first().getAttribute('class')).toLowerCase().includes('date')
+    ) {
+      const dateLocator = page[key].locator('../../../../../..').locator(this.errorMessageFieldLabel);
+      await expect(dateLocator).toHaveText(errorMessageFieldDataset[key]);
+    } else {
+      const otherLocator = page[key].locator('..').locator(this.errorMessageFieldLabel);
+      await expect(otherLocator).toHaveText(errorMessageFieldDataset[key]);
     }
   }
 }

@@ -1,4 +1,21 @@
 {
+  "Manage_Review_Body_Page": {
+    "selected_tab_top": "Manage review bodies",
+    "back_button": "Back",
+    "heading": "Manage review bodies",
+    "title": "View review bodies",
+    "Add_New_Review_Body_Record_link": "Add a new review body record",
+    "organisation_name_column_header": "Organisation name",
+    "country_column_header": "Country",
+    "status_column_header": "Status",
+    "actions_column_header": "Actions",
+    "find_review_body_title": "Find a review body",
+    "search_button": "Search",
+    "search_box": "",
+    "enabled_status": "ACTIVE",
+    "disabled_status": "DISABLED",
+    "actions_link": "View/Edit"
+  },
   "Disable_Label_Texts": {
     "disable_header_label": "Disable this review body",
     "disable_hint_label": "Disabling a review body will lock their account and can be reversed"

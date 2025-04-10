@@ -2,8 +2,8 @@
 Feature: User Administration: Manage Users - Enable / Disable users
 
   Background:
-    Given I have navigated to the 'System_Administration_Home_Page'
-    When I click the 'Manage_Users' link on the 'System_Administration_Home_Page'
+    Given I have navigated to the 'System_Administration_Page'
+    When I click the 'Manage_Users' link on the 'System_Administration_Page'
     Then I can see the manage users list page
     When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
     Then I can see the add a new user profile page

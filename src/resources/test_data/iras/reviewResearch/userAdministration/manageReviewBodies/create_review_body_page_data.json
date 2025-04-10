@@ -1,0 +1,371 @@
+{
+  "Create_Review_Body_Page": {
+    "selected_tab_top": "Manage review bodies",
+    "back_button": "Back",
+    "page_heading": "Add a new review body",
+    "organisation_name_label": "Organisation name",
+    "country_label": "Country",
+    "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+    "email_address_label": "Email address",
+    "description_label": "Description",
+    "complete_button": "Complete"
+  },
+  "Create_Review_Body": {
+    "Valid_Data_In_All_Fields": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "email_address_text": "qaauto_hscrd@health.org",
+      "description_text": "qaauto_Responsible for confirmation of research governance compliance"
+    },
+    "Valid_Data_In_All_Fields_Another": {
+      "organisation_name_text": "QA Automation HSC Research and Development Test",
+      "country_checkbox": ["Northern Ireland"],
+      "email_address_text": "qaautotest_hscrd@health.org",
+      "description_text": "qaautotest_Responsible for confirmation of research governance compliance for projects taking place in Northern Ireland."
+    },
+    "Valid_Data_In_All_Mandatory_Fields": {
+      "organisation_name_text": "QA Automation Health Research Authority (HRA)",
+      "country_checkbox": ["England"],
+      "email_address_text": "qaauto_healthresearchauthority@reviewbodies.com",
+      "description_text": ""
+    },
+    "Valid_Data_In_All_Mandatory_Fields_Another": {
+      "organisation_name_text": "QA Automation Test Health Research Authority (HRA)",
+      "country_checkbox": ["England"],
+      "email_address_text": "qaautotest_healthresearchauthority@reviewbodies.com",
+      "description_text": ""
+    },
+    "Review_Body_HCRW_Data": {
+      "organisation_name_text": "QA Automation Health and Care Research Wales (HCRW)",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "qaautohealthandcareresearch@wales.nhs.uk",
+      "description_text": "Health and Care Research Wales promotes health and social care research in Wales to help improve and save lives."
+    },
+    "Review_Body_HSCNI_Data": {
+      "organisation_name_text": "QA Automation Health and Social Care Northern Ireland (HSCNI)",
+      "country_checkbox": ["Northern Ireland"],
+      "email_address_text": "qaautomade.up@northerntrust.hscni.net",
+      "description_text": "Health and Social Care is the publicly funded healthcare system in Northern Ireland. Although having been created separately to the National Health Service, it is nonetheless considered a part of the overall national health service in the United Kingdom."
+    },
+    "Review_Body_RandD_Data": {
+      "organisation_name_text": "QA Automation NHS/HSC Research & Development offices (R&D)",
+      "country_checkbox": ["England", "Wales"],
+      "email_address_text": "qaautoinfo@rdforum.org.uk",
+      "description_text": "The R&D department or office is responsible for the research management, support and leadership of all aspects of research across the Trust and performs a variety of roles and functions to drive and deliver clinical research in a supportive and safe environment."
+    },
+    "Review_Body_HRA_Data": {
+      "organisation_name_text": "QA Automation Health Research Authority (HRA)",
+      "country_checkbox": ["England"],
+      "email_address_text": "qaautohealthresearchauthority@hra.nhs.uk",
+      "description_text": "The Health Research Authority (HRA) protects and promotes the interests of patients and the public in health research. HRA is an executive non-departmental public body, sponsored by the Department of Health and Social Care."
+    },
+    "Review_Body_NIPS_Data": {
+      "organisation_name_text": "QA Automation Northern Ireland Prison Service (NIPS)",
+      "country_checkbox": ["Northern Ireland"],
+      "email_address_text": "qaautoNI.PrisonService@justice-ni.gov.uk",
+      "description_text": "The overall aim of the Northern Ireland Prison Service is to improve public safety by reducing the risk of re-offending through the management and rehabilitation of offenders in custody. Its main statutory duties are set out in the Prison Act (Northern Ireland) 1953."
+    },
+    "Review_Body_HFEA_Data": {
+      "organisation_name_text": "QA Automation Human Fertilisation and Embryology Authority (HFEA)",
+      "country_checkbox": ["England"],
+      "email_address_text": "qaautoenquiriesteam@hfea.gov.uk",
+      "description_text": "The Human Fertilisation and Embryology Authority (HFEA) oversees the use of gametes and embryos in fertility treatment and research. It licenses fertility clinics and centres carrying out in vitro fertilisation (IVF), other assisted conception procedures and human embryo research."
+    },
+    "Review_Body_HMPPS_Data": {
+      "organisation_name_text": "QA Automation His Majesty’s Prison and Probation Service (HMPPS)",
+      "country_checkbox": ["England"],
+      "email_address_text": "qaautoHMPPSPublicEnquiries@justice.gov.uk",
+      "description_text": "We carry out sentences given by the courts, in custody and the community, and rehabilitate people in our care through education and employment."
+    },
+    "Review_Body_MODREC_Data": {
+      "organisation_name_text": "QA Automation Ministry of Defence Research Ethics Committee (MODREC)",
+      "country_checkbox": ["England"],
+      "email_address_text": "qaautoDST-MODRECTeam@mod.gov.uk",
+      "description_text": "The Ministry of Defence Research Ethics Committee (MODREC) ensures that all research involving human participants either undertaken, funded or sponsored by MOD meets nationally and internationally accepted ethical standards."
+    },
+    "Review_Body_HTA_Data": {
+      "organisation_name_text": "QA Automation Human Tissue Authority (HTA)",
+      "country_checkbox": ["England"],
+      "email_address_text": "qaautoenquiries@hta.gov.uk",
+      "description_text": "The regulator of human tissue and organs, a non-departmental public body of the Department of Health and Social Care"
+    },
+    "Review_Body_SPS_Data": {
+      "organisation_name_text": "QA Automation Scottish Prison Service (SPS)",
+      "country_checkbox": ["Scotland"],
+      "email_address_text": "qaautospsnews@prisons.gov.scot",
+      "description_text": "The Scottish Prison Service (SPS) is an Executive Agency of the Scottish Government. There are seventeen operational prisons located across Scotland: sixteen directly operated by SPS and one operated by a private sector operator under contract to SPS"
+    },
+    "Review_Body_MHRA_Data": {
+      "organisation_name_text": "QA Automation Medicines and Healthcare products Regulatory Agency (MHRA) Medicines",
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "email_address_text": "qaautoinfo@mhra.gov.uk",
+      "description_text": "The Medicines and Healthcare products Regulatory Agency regulates medicines, medical devices and blood components for transfusion in the UK. MHRA is an executive agency, sponsored by the Department of Health and Social Care."
+    },
+    "Review_Body_CAG_Data": {
+      "organisation_name_text": "QA Automation Confidentiality Advisory Group (CAG)",
+      "country_checkbox": ["England"],
+      "email_address_text": "qaautocag@hra.nhs.uk",
+      "description_text": "The Confidentiality Advisory Group (CAG) is an independent body which provides expert advice on the use of confidential patient information. This includes providing advice to us, the Health Research Authority (HRA) for research uses. It also provides advice to the Secretary of State for Health for non-research uses. The key purpose of CAG is to protect and promote the interests of patients and the public, while at the same time facilitating appropriate use of confidential patient information for purposes beyond direct patient care."
+    },
+    "Review_Body_ARSAC_Data": {
+      "organisation_name_text": "QA Automation Administration of Radioactive Substances Advisory Committee (ARSAC)",
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "email_address_text": "qaautoarsac@ukhsa.gov.uk",
+      "description_text": "ARSAC advises the licensing authorities on applications from practitioners, employers and researchers who want to use radioactive substances on people. ARSAC works with the Department of Health and Social Care."
+    },
+    "Review_Body_NRS_Data": {
+      "organisation_name_text": "QA Automation NHS Research Scotland (NRS)",
+      "country_checkbox": ["Scotland"],
+      "email_address_text": "qaautocommunications@nrs.org.uk",
+      "description_text": "NHS Research Scotland promotes and supports excellence in clinical and translational research in Scotland so that patients can benefit from new and better treatments. Formed through a partnership of Scottish NHS Boards and the Chief Scientist Office (CSO) of Scottish Government, we work to ensure that NHS Scotland provides the best environment to support clinical research."
+    },
+    "Missing_Data_All_Fields": {
+      "organisation_name_text": "",
+      "country_checkbox": "",
+      "email_address_text": "",
+      "description_text": ""
+    },
+    "Missing_Data_All_Mandatory_Fields": {
+      "organisation_name_text": "",
+      "country_checkbox": "",
+      "email_address_text": "",
+      "description_text": "This is a new description for testing purposes"
+    },
+    "Missing_Data_Organisation_Name_Field": {
+      "organisation_name_text": "",
+      "country_checkbox": ["Northern Ireland"],
+      "email_address_text": "qaautocommunications@nrs.org.uk",
+      "description_text": "This is a new description for testing purposes"
+    },
+    "Missing_Data_Country_Field": {
+      "organisation_name_text": "QA Automation NHS Research Scotland (NRS)",
+      "country_checkbox": "",
+      "email_address_text": "qaautocommunications@nrs.org.uk",
+      "description_text": "This is a new description for testing purposes"
+    },
+    "Missing_Data_Email_Address_Field": {
+      "organisation_name_text": "QA Automation NHS Research Scotland (NRS)",
+      "country_checkbox": ["England"],
+      "email_address_text": "",
+      "description_text": "This is a new description for testing purposes"
+    },
+    "Organisation_Name_Field_Min_Data": {
+      "organisation_name_text": "l",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "qaauto_hscrd@health.org",
+      "description_text": ""
+    },
+    "Organisation_Name_Field_Max_Data": {
+      "organisation_name_text": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium.",
+      "country_checkbox": ["Scotland"],
+      "email_address_text": "qaauto_hscrd@health.org",
+      "description_text": ""
+    },
+    "Organisation_Name_Field_between_Min_Max_Data": {
+      "organisation_name_text": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque.",
+      "country_checkbox": ["Northern Ireland"],
+      "email_address_text": "qaauto_hscrd@health.org",
+      "description_text": ""
+    },
+    "Description_Field_Min_Data": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["England"],
+      "email_address_text": "qaauto_hscrd@health.org",
+      "description_text": "l"
+    },
+    "Description_Field_Max_Data": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "qaauto_hscrd@health.org",
+      "description_text": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium."
+    },
+    "Description_Field_between_Min_Max_Data": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Scotland"],
+      "email_address_text": "qaauto_hscrd@health.org",
+      "description_text": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque."
+    },
+    "Invalid_Data_Organisation_Name_Field": {
+      "organisation_name_text": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium q",
+      "country_checkbox": ["Scotland"],
+      "email_address_text": "qaauto_hscrd@health.org",
+      "description_text": ""
+    },
+    "Invalid_Data_Description_Field": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "qaauto_hscrd@health.org",
+      "description_text": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia. Nam pretium turpis et arcu. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Sed aliquam ultrices mauris. Integer ante arcu, accumsan a, consectetuer eget, posuere ut, mauris. Praesent adipiscing. Phasellus ullamcorper ipsum rutrum nunc. Nunc nonummy metus. Vestibulum volutpat pretium libero. Cras id dui. Aenean ut eros et nisl sagittis vestibulum. Nullam nulla eros, ultricies sit amet, nonummy id, imperdiet feugiat, pede. Sed lectus. Donec mollis hendrerit risus. Phasellus nec sem in justo pellentesque facilisis. Etiam imperdiet imperdiet orci. Nunc nec neque. Phasellus leo dolor, tempus non, auctor et, hendrerit quis, nisi. Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo. Maecenas malesuada. Praesent congue erat at massa. Sed cursus turpis vitae tortor. Donec posuere vulputate arcu. Phasellus accumsan cursus velit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed aliquam, nisi quis porttitor congue, elit erat euismod orci, ac placerat dolor lectus quis orci. Phasellus consectetuer vestibulum elit. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc. Vestibulum fringilla pede sit amet augue. In turpis. Pellentesque posuere. Praesent turpis. Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc, eu sollicitudin urna dolor sagittis lacus. Donec elit libero, sodales nec, volutpat a, suscipit non, turpis. Nullam sagittis. Suspendisse pulvinar, augue ac venenatis condimentum, sem libero volutpat nibh, nec pellentesque velit pede quis nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Fusce id purus. Ut varius tincidunt libero. Phasellus dolor. Maecenas vestibulum mollis diam."
+    },
+    "Invalid_Character_Limit": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "averylongemailaddresscreatedforillustrationpurposesonlyandnotmeanttobeusedinreallife@exampledomain.comaverylongemailaddresscreatedforillustrationpurposesonlyandnotmeanttobeusedinreallife@exampledomain.comaverylongemailaddresscreatedforillustrationpurposesonlyandnotmeanttobeusedinreallife@exampledomain55.com",
+      "description_text": ""
+    },
+    "Incorrect_Email_Format": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "O(*()*(*()",
+      "description_text": ""
+    },
+    "Invalid_Email_Data_Start_With_Dot": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": ".john@example.com",
+      "description_text": ""
+    },
+    "Invalid_Email_Data_Double_Dot": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "john..doe@example.com",
+      "description_text": ""
+    },
+    "Invalid_Email_Data_Space": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "john doe@example.com",
+      "description_text": ""
+    },
+    "Invalid_Email_Data_Wrong_AT": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "john[at]example.",
+      "description_text": ""
+    },
+    "Invalid_Email_Data_Less_Greater_Symbols": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "john<doe>@example.com",
+      "description_text": ""
+    },
+    "Invalid_Email_Data_Colon": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "john:doe@example.com",
+      "description_text": ""
+    },
+    "Invalid_Email_Data_Semi_Colon": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "john;doe@example.com",
+      "description_text": ""
+    },
+    "Invalid_Email_Data_Comma": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "john,@example.com",
+      "description_text": ""
+    },
+    "Invalid_Email_Data_Start_With_Hyphen": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "-john@example.com",
+      "description_text": ""
+    },
+    "Invalid_Email_Data_Hyphen_Before_Domain": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "john@example-.com",
+      "description_text": ""
+    },
+    "Invalid_Email_Data_Double_Dot_Domain": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "john.@example..com",
+      "description_text": ""
+    },
+    "Invalid_Email_Data_Exclamation_Domain": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "john!doe@exa!mple.com",
+      "description_text": ""
+    },
+    "Invalid_Email_Data_Unicode": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "johñ@example.com",
+      "description_text": ""
+    },
+    "Invalid_Email_Data_Single_Quote_Before_AT": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "john.doe'@example.com",
+      "description_text": ""
+    },
+    "Invalid_Email_Data_Domain_Exceed_Max": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "averyveryverylongdomainnamewithmanysubdomainsandmorecharacters.com",
+      "description_text": ""
+    },
+    "Invalid_Email_Data_Local_Part_Max": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "averyveryverylongemailaddressthatexceedscharacters@example.com",
+      "description_text": ""
+    },
+    "Invalid_Email_Data_Consecutive_Dot_Domain": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "john@example..com",
+      "description_text": ""
+    },
+    "Invalid_Email_Data_Consecutive_Dot_SubDomain": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "mail..sub.example.com",
+      "description_text": ""
+    },
+    "Invalid_Email_Data_Consecutive_Dot_Domain_SubDomain": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "john..doe'@example..com",
+      "description_text": ""
+    },
+    "Invalid_Email_Data_Emoji": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "john🙂@example.com",
+      "description_text": ""
+    },
+    "Invalid_Email_Data_TLD": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "john.doe@example.1234",
+      "description_text": ""
+    },
+    "Invalid_Email_Data_Missing_AT": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "john.doeexample.com",
+      "description_text": ""
+    },
+    "Invalid_Email_Data_Reserved_Domain": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "john.doe@localhost",
+      "description_text": ""
+    },
+    "Invalid_Email_Data_Punycode": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "john@example.xn--mgbh0fb",
+      "description_text": ""
+    },
+    "Invalid_Email_Data_Max_Char": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "EmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExcee@example.com",
+      "description_text": ""
+    },
+    "Validation": {
+      "Mandatory_Field": "Field is mandatory",
+      "Select_Country": "Select at least one country.",
+      "Max_Org_Chars": "Max 250 characters allowed",
+      "Max_Words": "The description cannot exceed 500 words.",
+      "Max_Email_Chars": "Max 255 characters allowed",
+      "Email_Format": "Invalid email format"
+    }
+  }
+}

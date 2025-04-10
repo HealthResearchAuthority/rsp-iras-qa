@@ -6,6 +6,12 @@ import * as linkTextData from '../../../../../resources/test_data/common/link_te
 export default class ManageReviewBodiesPage {
   readonly page: Page;
   readonly manageReviewBodiesPageData: typeof manageReviewBodiesPageData;
+  readonly linkTextData: typeof linkTextData;
+  readonly pageHeading: Locator;
+  readonly addNewReviewBodyRecordLink: Locator;
+  readonly mainPageContent: Locator;
+  readonly actionsLink: Locator;
+  readonly statusCell: Locator;
   readonly viewEditLink: Locator;
   readonly disable_header_label: Locator;
   readonly disable_hint_label: Locator;
@@ -21,10 +27,38 @@ export default class ManageReviewBodiesPage {
     this.viewEditLink = this.page.locator('td a');
     this.disable_header_label = this.enable_header_label = this.page.locator('h2[class="govuk-heading-m"]');
     this.disable_hint_label = this.enable_hint_label = this.page.locator('p[class="govuk-hint"]');
+    this.linkTextData = linkTextData;
+
+    //Locators
+    this.pageHeading = this.page
+      .getByRole('heading')
+      .getByText(this.manageReviewBodiesPageData.Manage_Review_Body_Page.heading);
+    this.mainPageContent = this.page.getByTestId('main-content');
+    this.addNewReviewBodyRecordLink = this.mainPageContent.getByText(
+      this.linkTextData.Manage_Review_Bodies_Page.Add_New_Review_Body_Record,
+      {
+        exact: true,
+      }
+    );
+    this.actionsLink = this.page
+      .getByRole('link')
+      .getByText(this.manageReviewBodiesPageData.Manage_Review_Body_Page.actions_link, { exact: true });
+    this.statusCell = this.page.getByRole('cell').locator('strong');
   }
 
   //Page Methods
   async goto() {
     await this.page.goto('reviewbody/view');
+  }
+
+  async assertOnManageReviewBodiesPage() {
+    await expect(this.pageHeading).toBeVisible();
+    expect(await this.page.title()).toBe(this.manageReviewBodiesPageData.Manage_Review_Body_Page.title);
+  }
+
+  async getRowByOrgName(orgName: string, exactMatch: boolean) {
+    return this.mainPageContent.locator('tr', {
+      has: this.page.locator('td').getByText(`${orgName}`, { exact: exactMatch }),
+    });
   }
 }
