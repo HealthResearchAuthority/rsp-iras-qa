@@ -128,7 +128,7 @@ Then('I capture the current time after editing a review body', async ({ createRe
 //   }
 // );
 
-Then('I can see the edit review body page', async ({ createReviewBodyPage }) => {
+Then('I can see the edit review body page for audit', async ({ createReviewBodyPage }) => {
   //update
   // const dataset = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body[datasetName];
   // await createReviewBodyPage.assertOnCreateReviewbodyPage();
@@ -267,5 +267,26 @@ Then(
       return arr[i - 1] >= time;
     });
     expect(isSortedDesc).toBe(true);
+  }
+);
+
+When(
+  'I fill the new review body page for audit using {string}',
+  async ({ createReviewBodyPage, commonItemsPage }, datasetName: string) => {
+    const dataset = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body[datasetName];
+    for (const key in dataset) {
+      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+        if (key === 'organisation_name_text') {
+          const prefix = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body.organisation_name_prefix;
+          const uniqueOrgName = await generateUniqueValue(dataset[key], prefix);
+          const filePath = path.resolve(pathToTestDataJson);
+          await createReviewBodyPage.updateUniqueOrgNameTestDataJson(filePath, uniqueOrgName);
+          const locator = createReviewBodyPage[key];
+          await locator.fill(uniqueOrgName);
+        } else {
+          await commonItemsPage.fillUIComponent(dataset, key, createReviewBodyPage);
+        }
+      }
+    }
   }
 );

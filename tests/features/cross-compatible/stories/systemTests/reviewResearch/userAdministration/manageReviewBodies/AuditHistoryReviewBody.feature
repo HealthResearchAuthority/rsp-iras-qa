@@ -10,7 +10,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         When I fill the new review body page for audit using 'Valid_Data_In_All_Mandatory_Fields'
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
         Then I can see the Check and create review body page for audit 'Valid_Data_In_All_Mandatory_Fields'
-        When I click the 'Create_Profile' button on the 'Check_And_Create_Review_Body_Page'
+        When I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
         Then I can see the create Review body confirmation page for audit 'Valid_Data_In_All_Mandatory_Fields'
         And I capture the current time after creating a review body
         When I click the 'Back_To_Manage_Review_Bodies' link on the 'Create_Review_Body_Confirmation_Page'
@@ -79,8 +79,8 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         When I search and click on view edit link of the newly created review body for '<Add_Review_Body>' with 'ACTIVE' status from the manage review bodies page
         When I click the change link against '<Field_Name>' on the review body profile page
         # When I click the change link against '<Field_Name>' on the review body profile page
-        Then I can see the edit review body page
-        And I fill the new review body page using '<Edit_Review_Body>'
+        Then I can see the edit review body page for audit
+        And I fill the new review body page for audit using '<Edit_Review_Body>'
         And I click the 'Save' button on the 'Edit_Review_Body_Page'
         And I capture the current time after editing a review body
         And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'
@@ -98,8 +98,8 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         When I search and click on view edit link of the newly created review body for '<Add_Review_Body>' with 'ACTIVE' status from the manage review bodies page
         When I click the change link against '<Field_Name>' on the review body profile page
         # When I click the change link against '<Field_Name>' on the review body profile page
-        Then I can see the edit review body page
-        And I fill the new review body page using '<Edit_Review_Body>'
+        Then I can see the edit review body page for audit
+        And I fill the new review body page for audit using '<Edit_Review_Body>'
         And I click the 'Save' button on the 'Edit_Review_Body_Page'
         And I capture the current time after editing a review body
         And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'
@@ -116,8 +116,8 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         When I search and click on view edit link of the newly created review body for '<Add_Review_Body>' with 'ACTIVE' status from the manage review bodies page
         When I click the change link against '<Field_Name>' on the review body profile page
         # When I click the change link against '<Field_Name>' on the review body profile page
-        Then I can see the edit review body page
-        And I fill the new review body page using '<Edit_Review_Body>'
+        Then I can see the edit review body page for audit
+        And I fill the new review body page for audit using '<Edit_Review_Body>'
         And I click the 'Save' button on the 'Edit_Review_Body_Page'
         And I capture the current time after editing a review body
         And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'
@@ -134,8 +134,8 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         When I search and click on view edit link of the newly created review body for '<Add_Review_Body>' with 'ACTIVE' status from the manage review bodies page
         When I click the change link against '<Field_Name>' on the review body profile page
         # When I click the change link against '<Field_Name>' on the review body profile page
-        Then I can see the edit review body page
-        And I fill the new review body page using '<Edit_Review_Body>'
+        Then I can see the edit review body page for audit
+        And I fill the new review body page for audit using '<Edit_Review_Body>'
         And I click the 'Save' button on the 'Edit_Review_Body_Page'
         And I capture the current time after editing a review body
         And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'
@@ -189,8 +189,8 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         When I search and click on view edit link of the newly created review body for 'Valid_Data_In_All_Mandatory_Fields' with 'ACTIVE' status from the manage review bodies page
         When I click the change link against 'Organisation_Name' on the review body profile page
         # When I click the change link against '<Field_Name>' on the review body profile page
-        Then I can see the edit review body page
-        And I fill the new review body page using 'Organisation_Name_Another'
+        Then I can see the edit review body page for audit
+        And I fill the new review body page for audit using 'Organisation_Name_Another'
         And I click the 'Save' button on the 'Edit_Review_Body_Page'
         And I capture the current time after editing a review body
         And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'
@@ -200,8 +200,8 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         When I search and click on view edit link of the newly created review body for 'Valid_Data_In_All_Mandatory_Fields' with 'ACTIVE' status from the manage review bodies page
         When I click the change link against 'Email_Address' on the review body profile page
         # When I click the change link against '<Field_Name>' on the review body profile page
-        Then I can see the edit review body page
-        And I fill the new review body page using 'Email_Another'
+        Then I can see the edit review body page for audit
+        And I fill the new review body page for audit using 'Email_Another'
         And I click the 'Save' button on the 'Edit_Review_Body_Page'
         And I capture the current time after editing a review body
         And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'
