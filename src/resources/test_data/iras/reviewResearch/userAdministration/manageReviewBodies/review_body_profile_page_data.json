@@ -14,6 +14,16 @@
     "last_updated_label": "Last updated",
     "disable_sub_heading": "Disable this review body?",
     "disable_guidance_text": "Disabling a review body will lock their account and can be reversed",
+    "enable_sub_heading": "Enable this review body",
+    "enable_guidance_text": "Enabling a review body will unlock their account",
     "disable_button": "Disable review body"
+  },
+  "Disable_Label_Texts": {
+    "disable_sub_heading": "Disable this review body",
+    "disable_guidance_text": "Disabling a review body will lock their account and can be reversed"
+  },
+  "Enable_Label_Texts": {
+    "enable_sub_heading": "Enable this review body",
+    "enable_guidance_text": "Enabling a review body will unlock their account"
   }
 }

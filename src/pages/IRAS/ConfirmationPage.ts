@@ -19,13 +19,12 @@ export default class ConfirmationPage {
 
     //Locators
 
-    this.confirmation_header_label = this.page.locator('h2[class="govuk-heading-l"]');
-    this.confirmation_body_label = this.page.locator('p[class="govuk-body"]');
-    this.disable_confirmation_success_header_label = this.enable_confirmation_success_header_label = this.page.locator(
-      'h1[class="govuk-panel__title"]'
-    );
+    this.confirmation_header_label = this.page.getByRole('heading');
+    this.confirmation_body_label = this.page.getByRole('paragraph');
+    this.disable_confirmation_success_header_label = this.enable_confirmation_success_header_label =
+      this.page.getByRole('heading');
     this.disable_confirmation_success_body_label = this.enable_confirmation_success_body_label = this.page
-      .locator('p[class="govuk-body"]')
+      .getByRole('paragraph')
       .first();
   }
 }
