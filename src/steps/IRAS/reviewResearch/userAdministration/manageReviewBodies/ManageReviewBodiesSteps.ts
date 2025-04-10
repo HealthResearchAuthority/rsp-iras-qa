@@ -77,3 +77,17 @@ Then(
     await selectedReviewBodyRow.locator(manageReviewBodiesPage.actionsLink).click();
   }
 );
+
+Then(
+  'I search {string} review body and click on view edit link for {string} with {string} status',
+  async ({ createReviewBodyPage, manageReviewBodiesPage }, recordType: string, datasetName: string, status: string) => {
+    if (recordType.toLocaleLowerCase() == 'existing') {
+      const dataset = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body[datasetName];
+      const existingOrgName = dataset.organisation_name_text;
+      await manageReviewBodiesPage.searchAndClickReviewBodyProfile(existingOrgName, status);
+    } else if (recordType.toLocaleLowerCase() == 'new') {
+      const newOrgName = await createReviewBodyPage.getUniqueOrgName();
+      await manageReviewBodiesPage.searchAndClickReviewBodyProfile(newOrgName, status);
+    }
+  }
+);

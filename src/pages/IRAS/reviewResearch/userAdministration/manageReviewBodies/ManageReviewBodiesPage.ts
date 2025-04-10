@@ -1,6 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as manageReviewBodiesPageData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageReviewBodies/manage_review_body_page_data.json';
 import * as linkTextData from '../../../../../resources/test_data/common/link_text_data.json';
+import { confirmStringNotNull } from '../../../../../utils/UtilFunctions';
 
 //Declare Page Objects
 export default class ManageReviewBodiesPage {
@@ -15,6 +16,7 @@ export default class ManageReviewBodiesPage {
   readonly status_from_list: Locator;
   readonly actionsLink: Locator;
   readonly statusCell: Locator;
+  readonly orgListRows: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -40,6 +42,7 @@ export default class ManageReviewBodiesPage {
       .getByRole('link')
       .getByText(this.manageReviewBodiesPageData.Manage_Review_Body_Page.actions_link, { exact: true });
     this.statusCell = this.page.getByRole('cell').locator('strong');
+    this.orgListRows = this.page.getByRole('table').getByRole('row');
   }
 
   //Page Methods
@@ -77,10 +80,21 @@ export default class ManageReviewBodiesPage {
       }
     }
   }
-  
+
   async getRowByOrgName(orgName: string, exactMatch: boolean) {
     return this.mainPageContent.locator('tr', {
       has: this.page.locator('td').getByText(`${orgName}`, { exact: exactMatch }),
     });
+  }
+
+  async getOrgNamesListFromUI() {
+    const orgNames: string[] = [];
+    const rowCount = await this.orgListRows.count();
+    for (let i = 1; i < rowCount; i++) {
+      const columns = this.orgListRows.nth(i).getByRole('cell');
+      const orgValue = confirmStringNotNull(await columns.nth(0).textContent());
+      orgNames.push(orgValue);
+    }
+    return orgNames;
   }
 }
