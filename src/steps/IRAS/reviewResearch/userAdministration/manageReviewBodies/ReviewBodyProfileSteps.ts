@@ -77,6 +77,6 @@ Then(
 );
 
 Then('I can see the last updated date field is blank', async ({ reviewBodyProfilePage }) => {
-  const lastUpdatedDateActualValue = (await reviewBodyProfilePage.getLastUpdatedDate()).trim();
+  const lastUpdatedDateActualValue = confirmStringNotNull(await reviewBodyProfilePage.getLastUpdatedDate()).trim();
   expect(lastUpdatedDateActualValue).toBe(''); // defect open - last updated date stamped for new review body
 });
