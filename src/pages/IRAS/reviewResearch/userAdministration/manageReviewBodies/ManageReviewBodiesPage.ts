@@ -92,7 +92,7 @@ export default class ManageReviewBodiesPage {
     const rowCount = await this.orgListRows.count();
     for (let i = 1; i < rowCount; i++) {
       const columns = this.orgListRows.nth(i).getByRole('cell');
-      const orgValue = confirmStringNotNull(await columns.nth(0).textContent());
+      const orgValue = confirmStringNotNull(await columns.first().textContent());
       orgNames.push(orgValue);
     }
     return orgNames;

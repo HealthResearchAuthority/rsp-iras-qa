@@ -67,15 +67,6 @@ When(
   }
 );
 
-Then(
-  'I can see the list is sorted by default in the alphabetical order of {string}',
-  async ({ manageReviewBodiesPage }) => {
-    const OrgNames: string[] = await manageReviewBodiesPage.getOrgNamesListFromUI();
-    const sortedOrgNames = [...OrgNames].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
-    expect(OrgNames).toEqual(sortedOrgNames);
-  }
-);
-
 Then('I can see the last updated date field is blank', async ({ reviewBodyProfilePage }) => {
   const lastUpdatedDateActualValue = confirmStringNotNull(await reviewBodyProfilePage.getLastUpdatedDate()).trim();
   expect(lastUpdatedDateActualValue).toBe(''); // defect open - last updated date stamped for new review body

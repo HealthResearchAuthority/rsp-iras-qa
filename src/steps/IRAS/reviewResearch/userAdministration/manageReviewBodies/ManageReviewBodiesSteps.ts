@@ -81,13 +81,21 @@ Then(
 Then(
   'I search {string} review body and click on view edit link for {string} with {string} status',
   async ({ createReviewBodyPage, manageReviewBodiesPage }, recordType: string, datasetName: string, status: string) => {
-    if (recordType.toLocaleLowerCase() == 'existing') {
+    if (recordType.toLowerCase() == 'existing') {
       const dataset = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body[datasetName];
       const existingOrgName = dataset.organisation_name_text;
       await manageReviewBodiesPage.searchAndClickReviewBodyProfile(existingOrgName, status);
-    } else if (recordType.toLocaleLowerCase() == 'new') {
-      const newOrgName = await createReviewBodyPage.getUniqueOrgName();
-      await manageReviewBodiesPage.searchAndClickReviewBodyProfile(newOrgName, status);
+    } else {
+      await manageReviewBodiesPage.getRowByOrgName(await createReviewBodyPage.getUniqueOrgName(), true);
     }
+  }
+);
+
+Then(
+  'I can see the list is sorted by default in the alphabetical order of {string}',
+  async ({ manageReviewBodiesPage }) => {
+    const orgNames: string[] = await manageReviewBodiesPage.getOrgNamesListFromUI();
+    const sortedOrgNames = [...orgNames].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
+    expect(orgNames).toEqual(sortedOrgNames);
   }
 );

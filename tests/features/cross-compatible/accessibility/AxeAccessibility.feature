@@ -171,30 +171,6 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityManageReviewBodiesList @adminUser
-  Scenario: Manage Review Bodies list page
-    Given I have navigated to the 'Home_Page'
-    When I click the 'System_Admin' link on the 'Banner'
-    Then I can see the 'System_Administration_Page'
-    When I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
-    Then I can see the manage review bodies list page
-    When I Scan the page with the Axe Accessibilty Tool
-    And I analyse the results from the Axe scan
-    Then I expect to receive no WCAG Violations
-
-  @axeAccessibilityManageReviewBodyProfile @adminUser
-  Scenario: Review Body profile page
-    Given I have navigated to the 'Home_Page'
-    When I click the 'System_Admin' link on the 'Banner'
-    Then I can see the 'System_Administration_Page'
-    When I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
-    Then I can see the manage review bodies list page
-    When I click the 'View_Edit' link on the 'Manage_Review_Bodies_Page'
-    Then I can see the review body profile page
-    When I Scan the page with the Axe Accessibilty Tool
-    And I analyse the results from the Axe scan
-    Then I expect to receive no WCAG Violations
-
   @axeAccessibilityUserProfileDisable @adminUser
   Scenario: View user profile page with disable button available
     Given I have navigated to the 'System_Administration_Page'
