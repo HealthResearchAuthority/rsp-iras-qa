@@ -158,7 +158,7 @@ Then(
 );
 
 Then(
-  'I validate {string} labels displayed in enable user profile success page using the organisation name',
+  'I validate {string} labels displayed in enable review body success page using the organisation name',
   async ({ confirmationPage, createReviewBodyPage }, validationLabelsDatasetName) => {
     const organisationNameMemory = await createReviewBodyPage.getUniqueOrgName();
     const validationLabelsDataset = confirmationPage.confirmationPageTestData[validationLabelsDatasetName];

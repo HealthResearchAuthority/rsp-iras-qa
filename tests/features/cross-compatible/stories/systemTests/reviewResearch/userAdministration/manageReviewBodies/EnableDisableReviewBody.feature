@@ -80,7 +80,7 @@ Feature: User Administration: Manage Review Bodies - Enable / Disable Review Bod
     And I validate '<Enable_Review_Body_Labels>' labels displayed in enable review body confirmation page using the organisation name
     And I capture the page screenshot
     When I click the 'Confirm' button on the 'Confirmation_Page'
-    Then I validate '<Enable_Review_Body_Labels>' labels displayed in enable user profile success page using the organisation name
+    Then I validate '<Enable_Review_Body_Labels>' labels displayed in enable review body success page using the organisation name
     And I capture the page screenshot
     When I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
     Then I can see the manage review bodies list page
