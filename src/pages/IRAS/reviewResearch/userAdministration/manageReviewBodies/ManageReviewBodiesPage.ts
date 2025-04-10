@@ -42,7 +42,6 @@ export default class ManageReviewBodiesPage {
       .getByRole('link')
       .getByText(this.manageReviewBodiesPageData.Manage_Review_Body_Page.actions_link, { exact: true });
     this.statusCell = this.page.getByRole('cell').locator('strong');
-    // this.reviewBodyListRows = this.page.locator('.govuk-table__row');
     this.reviewBodyListRows = this.page.getByRole('table').getByRole('row');
     this.reviewBodyListCell = this.page.locator('.govuk-table__cell');
     this.organisation_name_from_list_label = 'td:nth-child(1)';
@@ -73,26 +72,10 @@ export default class ManageReviewBodiesPage {
     while (!dataFound) {
       const rowCount = await this.reviewBodyListRows.count();
       for (let i = 1; i < rowCount; i++) {
-        // for (let i = rowCount - 1; i >= 0; i--) {
         const columns = this.reviewBodyListRows.nth(i).getByRole('cell');
         const orgNameValue = confirmStringNotNull(await columns.nth(0).textContent());
         const countryNamesValue = confirmStringNotNull(await columns.nth(1).textContent());
         const reviewBodyStatusValue = confirmStringNotNull(await columns.nth(2).textContent());
-        // const orgNameText = await this.reviewBodyListRows
-        //   .nth(i)
-        //   .locator(this.organisation_name_from_list_label)
-        //   .textContent();
-        // const countryNamesText = await this.reviewBodyListRows
-        //   .nth(i)
-        //   .locator(this.country_name_from_list_label)
-        //   .textContent();
-        // const reviewBodyStatusTest = await this.reviewBodyListRows
-        //   .nth(i)
-        //   .locator(this.status_from_list_label)
-        //   .textContent();
-
-        // confirmStringNotNull(orgNameText) === orgName &&
-        //   confirmStringNotNull(reviewBodyStatusTest) === reviewBodyStatus;
         if (
           confirmStringNotNull(orgNameValue) === orgName &&
           confirmStringNotNull(countryNamesValue) === countryNames.replaceAll(',', ', ') &&
@@ -109,16 +92,6 @@ export default class ManageReviewBodiesPage {
       } else if ((await this.hidden_next_button.count()) > 0) {
         throw new Error('Reached the last page, data not found.');
       }
-
-      // if (!dataFound) {
-      //   if ((await this.next_button.count()) > 0) {
-      //     await this.next_button.click();
-      //     await this.page.waitForSelector('table tbody tr');
-      //     await this.page.waitForLoadState('domcontentloaded');
-      //   } else {
-      //     throw new Error('Reached the last page, data not found.');
-      //   }
-      // }
     }
   }
 }

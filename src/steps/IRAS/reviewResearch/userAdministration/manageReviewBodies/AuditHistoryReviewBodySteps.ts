@@ -1,18 +1,7 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../../hooks/CustomFixtures';
-const { When, Then } = createBdd(test);
-import path from 'path';
-import * as fse from 'fs-extra';
-import {
-  confirmStringNotNull,
-  generateUniqueValue,
-  getCurrentTimeFormatted,
-  removeUnwantedWhitespace,
-} from '../../../../../utils/UtilFunctions';
-const pathToTestDataJson =
-  './src/resources/test_data/iras/reviewResearch/userAdministration/manageReviewBodies/create_review_body_page_data.json';
-const pathToAuditTestDataJson =
-  './src/resources/test_data/iras/reviewResearch/userAdministration/manageReviewBodies/audit_history_review_body_page_data.json';
+const { Then } = createBdd(test);
+import { getCurrentTimeFormatted } from '../../../../../utils/UtilFunctions';
 
 Then('I can see the audit history page of the review body', async ({ auditHistoryReviewBodyPage }) => {
   await auditHistoryReviewBodyPage.assertOnAuditHistoryReviewBodyPage();
@@ -55,10 +44,8 @@ Then(
     const datasetCreateReviewBody = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body[datasetName];
     const datasetAudit =
       auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page[datasetValName];
-    const filePathAuditHistory = path.resolve(pathToAuditTestDataJson);
-    const datafilePathAuditHistory = await fse.readJson(filePathAuditHistory);
     const auditLog = await auditHistoryReviewBodyPage.getAuditLog();
-    const timeExpected = datafilePathAuditHistory.Review_Body_Audit_History_Page.Create_Review_Body.date_text;
+    const timeExpected = await auditHistoryReviewBodyPage.getUpdatedTime();
     let organisationName: string;
     if (datasetName.startsWith('Valid_')) {
       organisationName = await createReviewBodyPage.getUniqueOrgName();
@@ -77,10 +64,8 @@ Then(
   async ({ auditHistoryReviewBodyPage, reviewBodyProfilePage }, datasetName: string) => {
     const datasetAudit =
       auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page[datasetName];
-    const filePathAuditHistory = path.resolve(pathToAuditTestDataJson);
-    const datafilePathAuditHistory = await fse.readJson(filePathAuditHistory);
     const auditLog = await auditHistoryReviewBodyPage.getAuditLog();
-    const timeExpected = datafilePathAuditHistory.Review_Body_Audit_History_Page.Disable_Review_Body.date_text;
+    const timeExpected = await auditHistoryReviewBodyPage.getUpdatedTime();
     const organisationName = await reviewBodyProfilePage.getOrgName();
     const eventDescriptionExpectedValue = organisationName + datasetAudit.event_description_text;
     await expect(auditHistoryReviewBodyPage.page_heading).toHaveText(
@@ -98,9 +83,7 @@ Then(
   async ({ auditHistoryReviewBodyPage, reviewBodyProfilePage }, datasetName: string) => {
     const dataset =
       auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page[datasetName];
-    const filePathAuditHistory = path.resolve(pathToAuditTestDataJson);
-    const datafilePathAuditHistory = await fse.readJson(filePathAuditHistory);
-    const timeExpected = datafilePathAuditHistory.Review_Body_Audit_History_Page.Enable_Review_Body.date_text;
+    const timeExpected = await auditHistoryReviewBodyPage.getUpdatedTime();
     const organisationName = await reviewBodyProfilePage.getOrgName();
     const eventDescriptionExpectedValue = organisationName + dataset.event_description_text;
     const auditLog = await auditHistoryReviewBodyPage.getAuditLog();
@@ -113,56 +96,10 @@ Then(
     expect(auditLog[2][0]).toBe(dataset.system_admin_email_text);
   }
 );
-Then('I capture the current time after creating a review body', async ({ createReviewBodyPage }) => {
-  const currentTime = await getCurrentTimeFormatted();
-  const filePath = path.resolve(pathToAuditTestDataJson);
-  await createReviewBodyPage.updateCurrentTimeAfterCreateTestDataJson(filePath, currentTime);
-});
 
-Then('I capture the current time after disabling a review body', async ({ createReviewBodyPage }) => {
+Then('I capture the current time', async ({ auditHistoryReviewBodyPage }) => {
   const currentTime = await getCurrentTimeFormatted();
-  const filePath = path.resolve(pathToAuditTestDataJson);
-  await createReviewBodyPage.updateCurrentTimeAfterDisableTestDataJson(filePath, currentTime);
-});
-
-Then('I capture the current time after enabling a review body', async ({ createReviewBodyPage }) => {
-  const currentTime = await getCurrentTimeFormatted();
-  const filePath = path.resolve(pathToAuditTestDataJson);
-  await createReviewBodyPage.updateCurrentTimeAfterEnableTestDataJson(filePath, currentTime);
-});
-
-Then('I capture the current time after editing a review body', async ({ createReviewBodyPage }) => {
-  const currentTime = await getCurrentTimeFormatted();
-  const filePath = path.resolve(pathToAuditTestDataJson);
-  await createReviewBodyPage.updateCurrentTimeAfterEditOrgNameTestDataJson(filePath, currentTime);
-});
-
-Then('I can see the edit review body page for audit', async ({ createReviewBodyPage }) => {
-  //update
-  // const dataset = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body[datasetName];
-  // await createReviewBodyPage.assertOnCreateReviewbodyPage();
-  // const actualOrganisationName = await createReviewBodyPage.organisation_name_text.nth(1).textContent();
-  const actualOrganisationName = await removeUnwantedWhitespace(
-    confirmStringNotNull(await createReviewBodyPage.organisation_name_text.getAttribute('value'))
-  );
-  // const actualCountry = await createReviewBodyPage.countryVal.textContent(); //selected country
-  // const actualEmailAddress = await removeUnwantedWhitespace(
-  //   confirmStringNotNull(await createReviewBodyPage.email_address_text.getAttribute('value'))
-  // );
-  // const actualDescription = await createReviewBodyPage.description_text.textContent();
-  const filePathCreateReviewBody = path.resolve(pathToTestDataJson);
-  const dataCreateReviewBody = await fse.readJson(filePathCreateReviewBody);
-  const expectedOrganisationName = dataCreateReviewBody.Create_Review_Body.organisation_name_unique;
-  expect(actualOrganisationName).toBe(expectedOrganisationName);
-  // expect(actualCountry).toBe(dataset.country);
-  // expect(actualEmailAddress).toBe(dataCreateReviewBody.Create_Review_Body.email_address);
-  // expect(actualDescription).toBe(dataset.description);
-  await createReviewBodyPage.setUniqueOrgName(actualOrganisationName);
-  // const filePathAuditHistory = path.resolve(pathToAuditTestDataJson);
-  // await createReviewBodyPage.updatePreviousOrgNameTestDataJson(
-  //   filePathAuditHistory,
-  //   confirmStringNotNull(actualOrganisationName)
-  // );
+  await auditHistoryReviewBodyPage.setUpdatedTime(currentTime);
 });
 
 Then(
@@ -170,11 +107,8 @@ Then(
   async ({ auditHistoryReviewBodyPage, reviewBodyProfilePage }, datasetName: string) => {
     const dataset =
       auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page[datasetName];
-    const filePathAuditHistory = path.resolve(pathToAuditTestDataJson);
-    const datafilePathAuditHistory = await fse.readJson(filePathAuditHistory);
     const auditLog = await auditHistoryReviewBodyPage.getAuditLog();
-    const timeExpected =
-      datafilePathAuditHistory.Review_Body_Audit_History_Page.Edit_Review_Body_Organisation_Name.date_text;
+    const timeExpected = await auditHistoryReviewBodyPage.getUpdatedTime();
     const organisationNamePrevious = await reviewBodyProfilePage.getOrgName();
     const organisationNameCurrent = await reviewBodyProfilePage.getNewOrgName();
     const eventDescriptionPart1 = dataset.event_description_text;
@@ -196,18 +130,15 @@ Then(
   async ({ auditHistoryReviewBodyPage, reviewBodyProfilePage }, datasetName: string) => {
     const dataset =
       auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page[datasetName];
-    const filePathAuditHistory = path.resolve(pathToAuditTestDataJson);
-    const datafilePathAuditHistory = await fse.readJson(filePathAuditHistory);
     const auditLog = await auditHistoryReviewBodyPage.getAuditLog();
-    const timeExpected =
-      datafilePathAuditHistory.Review_Body_Audit_History_Page.Edit_Review_Body_Organisation_Name.date_text;
+    const timeExpected = await auditHistoryReviewBodyPage.getUpdatedTime();
     const countryNamesPrevious: string = (await reviewBodyProfilePage.getCountries()).join(', ');
     const countryNamesCurrent = (await reviewBodyProfilePage.getNewCountries()).join(', ');
     const eventDescriptionPart1 = dataset.event_description_text;
     const eventDescriptionPart2 = countryNamesPrevious;
     const eventDescriptionPart3 = ' to ' + countryNamesCurrent;
     const eventDescriptionExpectedValue = eventDescriptionPart1 + eventDescriptionPart2 + eventDescriptionPart3;
-    const organisationName = await reviewBodyProfilePage.getNewOrgName();
+    const organisationName = await reviewBodyProfilePage.getOrgName();
     await expect(auditHistoryReviewBodyPage.page_heading).toHaveText(
       auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.page_heading +
         organisationName
@@ -220,48 +151,119 @@ Then(
 
 Then(
   'I can see the audit history for email address edited event with {string}',
-  async ({ auditHistoryReviewBodyPage, createReviewBodyPage }, datasetName: string) => {
+  async ({ auditHistoryReviewBodyPage, reviewBodyProfilePage }, datasetName: string) => {
     const dataset =
       auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page[datasetName];
-    const filePathAuditHistory = path.resolve(pathToAuditTestDataJson);
-    const datafilePathAuditHistory = await fse.readJson(filePathAuditHistory);
     const auditLog = await auditHistoryReviewBodyPage.getAuditLog();
-    const timeExpected =
-      datafilePathAuditHistory.Review_Body_Audit_History_Page.Edit_Review_Body_Organisation_Name.date_text;
-    const organisationNameUniquePrevious = await createReviewBodyPage.getUniqueOrgName();
-    const filePathCreateReviewBody = path.resolve(pathToTestDataJson);
-    const dataCreateReviewBody = await fse.readJson(filePathCreateReviewBody);
+    const timeExpected = await auditHistoryReviewBodyPage.getUpdatedTime();
+    const emailPrevious = await reviewBodyProfilePage.getEmail();
+    const emailCurrent = await reviewBodyProfilePage.getNewEmail();
     const eventDescriptionPart1 = dataset.event_description_text;
-    const eventDescriptionPart2 = organisationNameUniquePrevious;
-    const eventDescriptionPart3 = ' to ' + dataCreateReviewBody.Create_Review_Body.organisation_name_unique;
+    const eventDescriptionPart2 = emailPrevious;
+    const eventDescriptionPart3 = ' to ' + emailCurrent;
     const eventDescriptionExpectedValue = eventDescriptionPart1 + eventDescriptionPart2 + eventDescriptionPart3;
-    console.log(eventDescriptionExpectedValue);
     expect(auditLog[0][0]).toBe(timeExpected);
     expect(auditLog[1][0]).toBe(eventDescriptionExpectedValue);
     expect(auditLog[2][0]).toBe(dataset.system_admin_email_text);
   }
 );
 
-When(
-  'I fill the edit review body page using {string}',
-  async ({ createReviewBodyPage, commonItemsPage }, datasetName: string) => {
-    const dataset = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body[datasetName];
-    for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        if (key === 'organisation_name_text') {
-          const prefix = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body.organisation_name_prefix;
-          const uniqueOrgName = await generateUniqueValue(dataset[key], prefix);
-          const filePath = path.resolve(pathToTestDataJson);
-          await createReviewBodyPage.updateUniqueOrgNameTestDataJson(filePath, uniqueOrgName);
-          const locator = createReviewBodyPage[key];
-          await locator.fill(uniqueOrgName);
-        } else {
-          await commonItemsPage.fillUIComponent(dataset, key, createReviewBodyPage);
-        }
-      }
-    }
+Then(
+  'I can see the audit history for description edited event with {string}',
+  async ({ auditHistoryReviewBodyPage, reviewBodyProfilePage }, datasetName: string) => {
+    const dataset =
+      auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page[datasetName];
+    const auditLog = await auditHistoryReviewBodyPage.getAuditLog();
+    const timeExpected = await auditHistoryReviewBodyPage.getUpdatedTime();
+    const descriptionPrevious = await reviewBodyProfilePage.getDescription();
+    const descriptionCurrent = await reviewBodyProfilePage.getNewDescription();
+    const eventDescriptionPart1 = dataset.event_description_text;
+    const eventDescriptionPart2 = descriptionPrevious;
+    const eventDescriptionPart3 = ' to ' + descriptionCurrent;
+    const eventDescriptionExpectedValue = eventDescriptionPart1 + eventDescriptionPart2 + eventDescriptionPart3;
+    expect(auditLog[0][0]).toBe(timeExpected);
+    expect(auditLog[1][0]).toBe(eventDescriptionExpectedValue);
+    expect(auditLog[2][0]).toBe(dataset.system_admin_email_text);
   }
 );
+
+Then(
+  'I can see the audit history for all the fields edited event with {string}',
+  async ({ auditHistoryReviewBodyPage, reviewBodyProfilePage }, datasetName: string) => {
+    const dataset =
+      auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page[datasetName];
+    const auditLog = await auditHistoryReviewBodyPage.getAuditLog();
+    const timeExpected = await auditHistoryReviewBodyPage.getUpdatedTime();
+    const descriptionPrevious = await reviewBodyProfilePage.getDescription();
+    const descriptionCurrent = await reviewBodyProfilePage.getNewDescription();
+    const descriptionEventDescriptionPart1 = dataset.description_event_description_text;
+    const descriptionEventDescriptionPart2 = descriptionPrevious;
+    const descriptionEventDescriptionPart3 = ' to ' + descriptionCurrent;
+    const descriptionEventDescriptionExpectedValue =
+      descriptionEventDescriptionPart1 + descriptionEventDescriptionPart2 + descriptionEventDescriptionPart3;
+    const emailPrevious = await reviewBodyProfilePage.getEmail();
+    const emailCurrent = await reviewBodyProfilePage.getNewEmail();
+    const emailEventDescriptionPart1 = dataset.email_address_event_description_text;
+    const emailEventDescriptionPart2 = emailPrevious;
+    const emailEventDescriptionPart3 = ' to ' + emailCurrent;
+    const emailEventDescriptionExpectedValue =
+      emailEventDescriptionPart1 + emailEventDescriptionPart2 + emailEventDescriptionPart3;
+    const countryNamesPrevious: string = (await reviewBodyProfilePage.getCountries()).join(',');
+    const countryNamesCurrent = (await reviewBodyProfilePage.getNewCountries()).join(',');
+    const CountryEventDescriptionPart1 = dataset.country_event_description_text;
+    const countryEventDescriptionPart2 = countryNamesPrevious;
+    const countryEventDescriptionPart3 = ' to ' + countryNamesCurrent;
+    const countryEventDescriptionExpectedValue =
+      CountryEventDescriptionPart1 + countryEventDescriptionPart2 + countryEventDescriptionPart3;
+    const organisationNamePrevious = await reviewBodyProfilePage.getOrgName();
+    const organisationNameCurrent = await reviewBodyProfilePage.getNewOrgName();
+    const orgNameEventDescriptionPart1 = dataset.organisation_name_event_description_text;
+    const orgNameEventDescriptionPart2 = organisationNamePrevious;
+    const orgNameEventDescriptionPart3 = ' to ' + organisationNameCurrent;
+    const orgNameEventDescriptionExpectedValue =
+      orgNameEventDescriptionPart1 + orgNameEventDescriptionPart2 + orgNameEventDescriptionPart3;
+    await expect(auditHistoryReviewBodyPage.page_heading).toHaveText(
+      auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.page_heading +
+        organisationNameCurrent
+    );
+    expect(auditLog[0][0]).toBe(timeExpected);
+    expect(auditLog[1][0]).toBe(countryEventDescriptionExpectedValue);
+    expect(auditLog[2][0]).toBe(dataset.system_admin_email_text);
+
+    expect(auditLog[0][1]).toBe(timeExpected);
+    expect(auditLog[1][1]).toBe(descriptionEventDescriptionExpectedValue);
+    expect(auditLog[2][1]).toBe(dataset.system_admin_email_text);
+
+    expect(auditLog[0][2]).toBe(timeExpected);
+    expect(auditLog[1][2]).toBe(emailEventDescriptionExpectedValue);
+    expect(auditLog[2][2]).toBe(dataset.system_admin_email_text);
+
+    expect(auditLog[0][3]).toBe(timeExpected);
+    expect(auditLog[1][3]).toBe(orgNameEventDescriptionExpectedValue);
+    expect(auditLog[2][3]).toBe(dataset.system_admin_email_text);
+  }
+);
+
+// When(
+//   'I fill the edit review body page using {string}',
+//   async ({ createReviewBodyPage, commonItemsPage, auditHistoryReviewBodyPage }, datasetName: string) => {
+//     const dataset = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body[datasetName];
+//     for (const key in dataset) {
+//       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+//         if (key === 'organisation_name_text') {
+//           const prefix = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body.organisation_name_prefix;
+//           const uniqueOrgName = await generateUniqueValue(dataset[key], prefix);
+//           const filePath = path.resolve(pathToTestDataJson);
+//           await auditHistoryReviewBodyPage.updateUniqueOrgNameTestDataJson(filePath, uniqueOrgName);
+//           const locator = createReviewBodyPage[key];
+//           await locator.fill(uniqueOrgName);
+//         } else {
+//           await commonItemsPage.fillUIComponent(dataset, key, createReviewBodyPage);
+//         }
+//       }
+//     }
+//   }
+// );
 
 Then(
   'I can see the default sort should be the most recent entry first based on date and time',
@@ -278,26 +280,5 @@ Then(
       return arr[i - 1] >= time;
     });
     expect(isSortedDesc).toBe(true);
-  }
-);
-
-When(
-  'I fill the new review body page for audit using {string}',
-  async ({ createReviewBodyPage, commonItemsPage }, datasetName: string) => {
-    const dataset = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body[datasetName];
-    for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        if (key === 'organisation_name_text') {
-          const prefix = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body.organisation_name_prefix;
-          const uniqueOrgName = await generateUniqueValue(dataset[key], prefix);
-          const filePath = path.resolve(pathToTestDataJson);
-          await createReviewBodyPage.updateUniqueOrgNameTestDataJson(filePath, uniqueOrgName);
-          const locator = createReviewBodyPage[key];
-          await locator.fill(uniqueOrgName);
-        } else {
-          await commonItemsPage.fillUIComponent(dataset, key, createReviewBodyPage);
-        }
-      }
-    }
   }
 );

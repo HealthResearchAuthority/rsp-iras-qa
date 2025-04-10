@@ -363,15 +363,15 @@
     },
 
     "Valid_Data_Country_Another": {
-      "country_checkbox": ["Scotland", "Wales"]
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
     },
 
     "Valid_Data_Description_Another": {
-      "email_address_text": "qaauto_Responsible for confirmation of research governance compliance Test Update description"
+      "description_text": "qaauto_Responsible for confirmation of research governance compliance Test Update description"
     },
     "Valid_Data_Edit_All_Fields": {
       "organisation_name_text": "QA Automation HSC Research and Development Test Update All fields",
-      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "country_checkbox": ["Northern Ireland", "Scotland", "Wales"],
       "email_address_text": "qaauto_test_update_all_hscrd@health.org",
       "description_text": "qaauto_Responsible for confirmation of research governance compliance Test Update all fields"
     }

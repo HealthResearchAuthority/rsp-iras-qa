@@ -3,43 +3,43 @@
     "back_button": "Back",
     "page_heading": "Audit history: ",
     "Create_Review_Body": {
-      "date_text": "10 Apr 2025 10:28",
       "event_description_text": " was created",
       "system_admin_email_text": "futureiras.automation@hra.nhs.uk"
     },
     "Disable_Review_Body": {
-      "date_text": "10 Apr 2025 11:23",
       "event_description_text": " was disabled",
       "system_admin_email_text": "futureiras.automation@hra.nhs.uk"
     },
     "Enable_Review_Body": {
-      "date_text": "10 Apr 2025 11:37",
       "event_description_text": " was enabled",
       "system_admin_email_text": "futureiras.automation@hra.nhs.uk"
     },
     "Edit_Review_Body_Organisation_Name": {
-      "date_text": "10 Apr 2025 13:57",
       "event_description_text": "OrganisationName was changed from ",
       "system_admin_email_text": "futureiras.automation@hra.nhs.uk",
       "organisation_name_unique_previous": "Audit Test Update 1 Update 3"
     },
     "Edit_Review_Body_Country": {
-      "date_text": "07 Apr 2025 19:30",
       "event_description_text": "Countries was changed from ",
       "system_admin_email_text": "futureiras.automation@hra.nhs.uk",
       "country_previous": ""
     },
     "Edit_Review_Body_Email_Address": {
-      "date_text": "07 Apr 2025 19:30",
       "event_description_text": "EmailAddress was changed from ",
       "system_admin_email_text": "futureiras.automation@hra.nhs.uk",
       "email_previous": ""
     },
     "Edit_Review_Body_Description": {
-      "date_text": "07 Apr 2025 19:30",
       "event_description_text": "Description was changed from ",
       "system_admin_email_text": "futureiras.automation@hra.nhs.uk",
       "description_previous": ""
+    },
+    "Edit_Review_Body_All_Fields": {
+      "organisation_name_event_description_text": "OrganisationName was changed from ",
+      "country_event_description_text": "Countries was changed from ",
+      "email_address_event_description_text": "EmailAddress was changed from ",
+      "description_event_description_text": "Description was changed from ",
+      "system_admin_email_text": "futureiras.automation@hra.nhs.uk"
     }
   },
   "header_Texts": {

@@ -1,7 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as auditHistoryReviewBodyPageTestData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageReviewBodies/audit_history_review_body_page_data.json';
 import { confirmStringNotNull, removeUnwantedWhitespace } from '../../../../../utils/UtilFunctions';
-
+import * as fse from 'fs-extra';
 const pathToTestDataJson =
   './src/resources/test_data/iras/reviewResearch/userAdministration/manageReviewBodies/create_review_body_page_data.json';
 
@@ -10,6 +10,7 @@ export default class AuditHistoryReviewBodyPage {
   readonly page: Page;
   readonly auditHistoryReviewBodyPageTestData: typeof auditHistoryReviewBodyPageTestData;
   readonly pathToTestDataJson: typeof pathToTestDataJson;
+  private _updated_time: string;
   readonly back_button: Locator;
   readonly page_heading: Locator;
   readonly subHeading: Locator;
@@ -80,5 +81,110 @@ export default class AuditHistoryReviewBodyPage {
   async getSelectedValues<PageObject>(dataset: JSON, key: string, page: PageObject) {
     const locator: Locator = page[key];
     return await removeUnwantedWhitespace(confirmStringNotNull(await locator.textContent()));
+  }
+  async updateUniqueOrgNameTestDataJson(filePath: string, updateVal: string) {
+    (async () => {
+      try {
+        const data = await fse.readJson(filePath);
+        data.Create_Review_Body.organisation_name_unique = updateVal;
+        await fse.writeJson(filePath, data, { spaces: 2 });
+      } catch (error) {
+        throw new Error(`${error} Error updating unique email to testdata json file:`);
+      }
+    })();
+  }
+
+  async updateCurrentTimeAfterCreateTestDataJson(filePath: string, updateVal: string) {
+    (async () => {
+      try {
+        const data = await fse.readJson(filePath);
+        data.Review_Body_Audit_History_Page.Create_Review_Body.date_text = updateVal;
+        await fse.writeJson(filePath, data, { spaces: 2 });
+      } catch (error) {
+        throw new Error(`${error} Error updating current time to testdata json file:`);
+      }
+    })();
+  }
+
+  async updateCurrentTimeAfterDisableTestDataJson(filePath: string, updateVal: string) {
+    (async () => {
+      try {
+        const data = await fse.readJson(filePath);
+        data.Review_Body_Audit_History_Page.Disable_Review_Body.date_text = updateVal;
+        await fse.writeJson(filePath, data, { spaces: 2 });
+      } catch (error) {
+        throw new Error(`${error} Error updating current time to testdata json file:`);
+      }
+    })();
+  }
+
+  async updateCurrentTimeAfterEnableTestDataJson(filePath: string, updateVal: string) {
+    (async () => {
+      try {
+        const data = await fse.readJson(filePath);
+        data.Review_Body_Audit_History_Page.Enable_Review_Body.date_text = updateVal;
+        await fse.writeJson(filePath, data, { spaces: 2 });
+      } catch (error) {
+        throw new Error(`${error} Error updating current time to testdata json file:`);
+      }
+    })();
+  }
+
+  async updateCurrentTimeAfterEditOrgNameTestDataJson(filePath: string, updateVal: string) {
+    (async () => {
+      try {
+        const data = await fse.readJson(filePath);
+        data.Review_Body_Audit_History_Page.Edit_Review_Body_Organisation_Name.date_text = updateVal;
+        await fse.writeJson(filePath, data, { spaces: 2 });
+      } catch (error) {
+        throw new Error(`${error} Error updating current time to testdata json file:`);
+      }
+    })();
+  }
+
+  async updateCurrentTimeAfterEditEmailTestDataJson(filePath: string, updateVal: string) {
+    (async () => {
+      try {
+        const data = await fse.readJson(filePath);
+        data.Review_Body_Audit_History_Page.Edit_Review_Body_Email_Address.date_text = updateVal;
+        await fse.writeJson(filePath, data, { spaces: 2 });
+      } catch (error) {
+        throw new Error(`${error} Error updating current time to testdata json file:`);
+      }
+    })();
+  }
+
+  async updateCurrentTimeAfterEditDescriptionTestDataJson(filePath: string, updateVal: string) {
+    (async () => {
+      try {
+        const data = await fse.readJson(filePath);
+        data.Review_Body_Audit_History_Page.Edit_Review_Body_Description.date_text = updateVal;
+        await fse.writeJson(filePath, data, { spaces: 2 });
+      } catch (error) {
+        throw new Error(`${error} Error updating current time to testdata json file:`);
+      }
+    })();
+  }
+  async updatePreviousOrgNameTestDataJson(filePath: string, updateVal: string) {
+    (async () => {
+      try {
+        const data = await fse.readJson(filePath);
+        data.Review_Body_Audit_History_Page.Edit_Review_Body_Organisation_Name.organisation_name_unique_previous =
+          updateVal;
+        await fse.writeJson(filePath, data, { spaces: 2 });
+      } catch (error) {
+        throw new Error(`${error} Error updating unique email to testdata json file:`);
+      }
+    })();
+  }
+
+  //Getters & Setters for Private Variables
+
+  async getUpdatedTime(): Promise<string> {
+    return this._updated_time;
+  }
+
+  async setUpdatedTime(value: string): Promise<void> {
+    this._updated_time = value;
   }
 }
