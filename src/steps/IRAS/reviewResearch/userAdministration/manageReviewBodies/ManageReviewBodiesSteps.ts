@@ -51,7 +51,7 @@ Then(
       await createReviewBodyPage.getUniqueOrgName(),
       true
     );
-    if (status.toLowerCase() == ' disabled') {
+    if (status.toLowerCase() == 'disabled') {
       expect(createdReviewBodyRow.locator(manageReviewBodiesPage.statusCell)).toHaveText(dataset.disabled_status);
     } else {
       expect(createdReviewBodyRow.locator(manageReviewBodiesPage.statusCell)).toHaveText(dataset.enabled_status);
@@ -97,5 +97,16 @@ Then(
     const orgNames: string[] = await manageReviewBodiesPage.getOrgNamesListFromUI();
     const sortedOrgNames = [...orgNames].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
     expect(orgNames).toEqual(sortedOrgNames);
+  }
+);
+
+Then(
+  'I click the view edit link for the newly created review body',
+  async ({ manageReviewBodiesPage, createReviewBodyPage }) => {
+    const createdReviewBodyRow = await manageReviewBodiesPage.getRowByOrgName(
+      await createReviewBodyPage.getUniqueOrgName(),
+      true
+    );
+    await createdReviewBodyRow.locator(manageReviewBodiesPage.actionsLink).click();
   }
 );

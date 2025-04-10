@@ -43,6 +43,8 @@ export default class ReviewBodyProfilePage {
   readonly disable_sub_heading: Locator;
   readonly disable_guidance_text: Locator;
   readonly disable_button: Locator;
+  readonly enable_sub_heading: Locator;
+  readonly enable_guidance_text: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -145,6 +147,12 @@ export default class ReviewBodyProfilePage {
     this.disable_button = this.page
       .getByRole('button')
       .getByText(this.reviewBodyProfilePageData.Review_Body_Profile_Page.disable_button, { exact: true });
+    this.enable_sub_heading = this.page
+      .getByRole('heading')
+      .getByText(this.reviewBodyProfilePageData.Review_Body_Profile_Page.enable_sub_heading, { exact: true });
+    this.enable_guidance_text = this.page
+      .getByRole('paragraph')
+      .getByText(this.reviewBodyProfilePageData.Review_Body_Profile_Page.enable_guidance_text, { exact: true });
   }
 
   async assertOnReviewbodyProfilePage() {
