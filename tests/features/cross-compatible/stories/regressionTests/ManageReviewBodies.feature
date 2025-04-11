@@ -48,8 +48,8 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         And I can see the audit history for the review body disabled event with '<Audit_History>'
 
         Examples:
-            | Validation_Text | Audit_History       |
-            | header_Texts    | Disable_Review_Body |
+            | Add_Review_Body          | Validation_Text | Audit_History       |
+            | Valid_Data_In_All_Fields | header_Texts    | Disable_Review_Body |
 
     @RegressionTestVerifyEnableAndEditReviewBodyAuditHistory
     Scenario Outline: Verify the user can view the audit history after enabling a review body
@@ -78,8 +78,8 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         Then I can see the audit history page of the review body
         And I capture the page screenshot
         And I can see the '<Validation_Text>' ui labels on the audit history page of the review body
-        And I can see the audit history for all the fields edited event with '<Audit_History>'
         And I can see the default sort should be the most recent entry first based on date and time
+        And I can see the audit history for all the fields edited event with '<Audit_History>'
 
         Examples:
             | Add_Review_Body          | Field_Name_One    | Field_Name_Two | Field_Name_Three | Field_Name_Four | Edit_Review_Body           | Validation_Text | Audit_History               |
@@ -189,6 +189,9 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
 
     @RegressionTestVerifyValidReviewBodyCharacterLimits
     Scenario Outline: Field validation passes with minimum and maximum characters in organisation name and description
+        And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
+        Then I can see the 'Create_Review_Body_Page'
+        And I capture the page screenshot
         When I fill the new review body page using '<Add_Review_Body>'
         And I capture the page screenshot
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
@@ -204,8 +207,11 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
             | Description_Field_Max_Data                   |
             | Description_Field_between_Min_Max_Data       |
 
-    @VRegressionTesterifyValidationErrors
+    @RegressionTestVerifyValidationErrors
     Scenario Outline: When min/max character field validation fails correct error messages display
+        And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
+        Then I can see the 'Create_Review_Body_Page'
+        And I capture the page screenshot
         When I fill the new review body page using '<Add_Review_Body>'
         And I capture the page screenshot
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
