@@ -71,9 +71,6 @@ When(
   'I now see the review body profile page with the updated {string} for field {string}',
   async ({ editReviewBodyPage, reviewBodyProfilePage }, datasetName: string, fieldName: string) => {
     await reviewBodyProfilePage.assertOnReviewbodyProfilePage();
-    // await expect(reviewBodyProfilePage.last_updated_value).toHaveText(
-    //   await auditHistoryReviewBodyPage.getUpdatedTime()
-    // );
     const dataset = editReviewBodyPage.editReviewBodyPageData.Edit_Review_Body[datasetName];
     if (fieldName == 'Organisation_Name') {
       if (datasetName.startsWith('Valid_') || datasetName.startsWith('Review_')) {
