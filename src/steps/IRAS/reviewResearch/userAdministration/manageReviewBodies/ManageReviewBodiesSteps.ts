@@ -86,7 +86,11 @@ Then(
       const existingOrgName = dataset.organisation_name_text;
       await manageReviewBodiesPage.searchAndClickReviewBodyProfile(existingOrgName, status);
     } else {
-      await manageReviewBodiesPage.getRowByOrgName(await createReviewBodyPage.getUniqueOrgName(), true);
+      const reviewBodyRow = await manageReviewBodiesPage.getRowByOrgName(
+        await createReviewBodyPage.getUniqueOrgName(),
+        true
+      );
+      await reviewBodyRow.locator(manageReviewBodiesPage.actionsLink).click();
     }
   }
 );
@@ -95,7 +99,7 @@ Then(
   'I can see the list is sorted by default in the alphabetical order of {string}',
   async ({ manageReviewBodiesPage }) => {
     const orgNames: string[] = await manageReviewBodiesPage.getOrgNamesListFromUI();
-    const sortedOrgNames = [...orgNames].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
+    const sortedOrgNames = orgNames.sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
     expect(orgNames).toEqual(sortedOrgNames);
   }
 );
