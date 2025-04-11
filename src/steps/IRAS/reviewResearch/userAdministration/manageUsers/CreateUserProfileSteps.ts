@@ -3,7 +3,7 @@ import { expect, test } from '../../../../../hooks/CustomFixtures';
 import path from 'path';
 import * as fse from 'fs-extra';
 import { Locator } from 'playwright/test';
-import { generateUniqueValue } from '../../../../../utils/UtilFunctions';
+import { generateUniqueEmail } from '../../../../../utils/UtilFunctions';
 const pathToTestDataJson =
   './src/resources/test_data/iras/reviewResearch/userAdministration/manageUsers/create_user_profile_page_data.json';
 
@@ -17,7 +17,7 @@ When(
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
         if (key === 'email_address_text') {
           const prefix = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile.email_address_prefix;
-          const uniqueEmail = await generateUniqueValue(dataset[key], prefix);
+          const uniqueEmail = await generateUniqueEmail(dataset[key], prefix);
           const filePath = path.resolve(pathToTestDataJson);
           await createUserProfilePage.updateUniqueEmailTestDataJson(filePath, uniqueEmail);
           const locator: Locator = createUserProfilePage[key];
@@ -48,10 +48,7 @@ Then(
     const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
     if (datasetValName === 'Role_Operations') {
       const checkboxArray = await commonItemsPage.govUkCheckboxes.locator('input').all();
-      for (let index = 0; index < checkboxArray.length; index++) {
-        await checkboxArray[index].scrollIntoViewIfNeeded();
-        await checkboxArray[index].uncheck();
-      }
+      createUserProfilePage.clearCheckboxes(checkboxArray);
       for (const key in dataset) {
         if (key !== 'country_checkbox' && key !== 'access_required_checkbox') {
           if (Object.prototype.hasOwnProperty.call(dataset, key)) {

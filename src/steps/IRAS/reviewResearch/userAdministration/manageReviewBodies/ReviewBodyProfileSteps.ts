@@ -131,10 +131,6 @@ When(
     fieldNameFour: string
   ) => {
     await reviewBodyProfilePage.assertOnReviewbodyProfilePage();
-    //need to enable once the last updated correctly>>design updation>>GMT format
-    // await expect(reviewBodyProfilePage.last_updated_value).toHaveText(
-    //   await auditHistoryReviewBodyPage.getUpdatedTime()
-    // );
     const dataset = editReviewBodyPage.editReviewBodyPageData.Edit_Review_Body[datasetName];
     if (fieldNameOne == 'Organisation_Name') {
       if (datasetName.startsWith('Valid_') || datasetName.startsWith('Review_')) {

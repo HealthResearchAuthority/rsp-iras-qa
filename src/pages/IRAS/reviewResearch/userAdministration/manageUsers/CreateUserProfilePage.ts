@@ -111,4 +111,11 @@ export default class CreateUserProfilePage {
     const selectedValue = await dropdown.inputValue();
     return selectedValue;
   }
+
+  async clearCheckboxes(checkboxArray: Locator[]) {
+    for (const checkbox of checkboxArray) {
+      await checkbox.scrollIntoViewIfNeeded();
+      await checkbox.uncheck();
+    }
+  }
 }

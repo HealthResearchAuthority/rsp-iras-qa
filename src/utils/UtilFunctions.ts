@@ -359,6 +359,12 @@ function standardAcheived(doubleViolation: number, tripleViolation: number) {
   }
 }
 
+export async function generateUniqueEmail(keyVal: string, prefix: string): Promise<string> {
+  const timestamp = new Date().toISOString().replace(/[-:.TZ]/g, '');
+  const domain = keyVal;
+  return `${prefix}${timestamp}${domain}`;
+}
+
 export async function generateUniqueValue(keyVal: string, prefix: string): Promise<string> {
   const timestamp = new Date().toISOString().replace(/[-:.TZ]/g, '');
   const domain = keyVal;
