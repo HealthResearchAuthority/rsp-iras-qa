@@ -246,27 +246,6 @@ Then(
   }
 );
 
-// When(
-//   'I fill the edit review body page using {string}',
-//   async ({ createReviewBodyPage, commonItemsPage, auditHistoryReviewBodyPage }, datasetName: string) => {
-//     const dataset = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body[datasetName];
-//     for (const key in dataset) {
-//       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-//         if (key === 'organisation_name_text') {
-//           const prefix = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body.organisation_name_prefix;
-//           const uniqueOrgName = await generateUniqueValue(dataset[key], prefix);
-//           const filePath = path.resolve(pathToTestDataJson);
-//           await auditHistoryReviewBodyPage.updateUniqueOrgNameTestDataJson(filePath, uniqueOrgName);
-//           const locator = createReviewBodyPage[key];
-//           await locator.fill(uniqueOrgName);
-//         } else {
-//           await commonItemsPage.fillUIComponent(dataset, key, createReviewBodyPage);
-//         }
-//       }
-//     }
-//   }
-// );
-
 Then(
   'I can see the default sort should be the most recent entry first based on date and time',
   async ({ auditHistoryReviewBodyPage }) => {

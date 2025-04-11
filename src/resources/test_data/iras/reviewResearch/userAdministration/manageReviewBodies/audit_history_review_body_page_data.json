@@ -16,23 +16,19 @@
     },
     "Edit_Review_Body_Organisation_Name": {
       "event_description_text": "OrganisationName was changed from ",
-      "system_admin_email_text": "futureiras.automation@hra.nhs.uk",
-      "organisation_name_unique_previous": "Audit Test Update 1 Update 3"
+      "system_admin_email_text": "futureiras.automation@hra.nhs.uk"
     },
     "Edit_Review_Body_Country": {
       "event_description_text": "Countries was changed from ",
-      "system_admin_email_text": "futureiras.automation@hra.nhs.uk",
-      "country_previous": ""
+      "system_admin_email_text": "futureiras.automation@hra.nhs.uk"
     },
     "Edit_Review_Body_Email_Address": {
       "event_description_text": "EmailAddress was changed from ",
-      "system_admin_email_text": "futureiras.automation@hra.nhs.uk",
-      "email_previous": ""
+      "system_admin_email_text": "futureiras.automation@hra.nhs.uk"
     },
     "Edit_Review_Body_Description": {
       "event_description_text": "Description was changed from ",
-      "system_admin_email_text": "futureiras.automation@hra.nhs.uk",
-      "description_previous": ""
+      "system_admin_email_text": "futureiras.automation@hra.nhs.uk"
     },
     "Edit_Review_Body_All_Fields": {
       "organisation_name_event_description_text": "OrganisationName was changed from ",
