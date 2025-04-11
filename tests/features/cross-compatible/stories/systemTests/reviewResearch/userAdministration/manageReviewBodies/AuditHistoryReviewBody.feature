@@ -4,12 +4,12 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
     Background:
         Given I have navigated to the 'System_Administration_Page'
         And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
-        And I can see the manage review bodies list page
+        Then I can see the 'Manage_Review_Bodies_Page'
 
     @VerifyAuditHistoryCreateReviewBody
     Scenario Outline: Verify the user can view the audit history after creating a review body
         And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
-        And I can see the add a new review body page
+        Then I can see the 'Create_Review_Body_Page'
         And I capture the page screenshot
         When I fill the new review body page using '<Add_Review_Body>'
         And I capture the page screenshot
@@ -21,7 +21,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         And I capture the current time
         And I capture the page screenshot
         When I click the 'Back_To_Manage_Review_Bodies' link on the 'Create_Review_Body_Confirmation_Page'
-        Then I can see the manage review bodies list page
+        Then I can see the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
         When I search and click on view edit link of the newly created review body for '<Add_Review_Body>' with 'ACTIVE' status from the manage review bodies page
         And I capture the page screenshot
@@ -46,7 +46,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         And I click the 'Confirm' button on the 'Confirmation_Page'
         And I capture the current time
         And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
-        Then I can see the manage review bodies list page
+        Then I can see the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
         When I search and click on view edit link of the disabled review body with 'DISABLED' status from the manage review bodies page
         And I capture the page screenshot
@@ -70,7 +70,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         And I click the 'Confirm' button on the 'Confirmation_Page'
         And I capture the current time
         And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
-        Then I can see the manage review bodies list page
+        Then I can see the 'Manage_Review_Bodies_Page'
         When I search and click on view edit link of the enabled review body with 'ACTIVE' status from the manage review bodies page
         And I can see the review body profile page
         And I capture the page screenshot
@@ -212,13 +212,13 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         And I click the 'Disable_Review_Body' button on the 'Review_Body_Profile_Page'
         And I click the 'Confirm' button on the 'Confirmation_Page'
         And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
-        Then I can see the manage review bodies list page
+        Then I can see the 'Manage_Review_Bodies_Page'
         When I search and click on view edit link of the disabled review body with 'DISABLED' status from the manage review bodies page
         And I can see the review body profile page
         And I click the 'Enable_Review_Body' button on the 'Review_Body_Profile_Page'
         And I click the 'Confirm' button on the 'Confirmation_Page'
         And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
-        Then I can see the manage review bodies list page
+        Then I can see the 'Manage_Review_Bodies_Page'
         When I search and click on view edit link of the enabled review body with 'ACTIVE' status from the manage review bodies page
         And I can see the review body profile page
         And I click the change link against 'Organisation_Name' on the review body profile page
@@ -243,13 +243,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         And I can see the review body profile page
 
 
-
-
-
-
-
-
-
+# Points to note:
 # Validate date time format.>>will change later
 # Validate audit history for each review body when the the system admin user email is updated.- Suitable for manual validation
 # Out of scope now >>need to cover later when the feature is developed[User added to review body/User removed from review body]

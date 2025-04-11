@@ -27,10 +27,6 @@ When(
   }
 );
 
-Then('I can see the add a new review body page', async ({ createReviewBodyPage }) => {
-  await createReviewBodyPage.assertOnCreateReviewbodyPage();
-});
-
 Then('I can see the Add new review body page for {string}', async ({ createReviewBodyPage }, datasetName: string) => {
   const dataset = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body[datasetName];
   await createReviewBodyPage.assertOnCreateReviewbodyPage();

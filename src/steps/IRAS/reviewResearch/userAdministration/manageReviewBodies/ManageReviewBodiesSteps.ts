@@ -2,10 +2,6 @@ import { createBdd } from 'playwright-bdd';
 import { test, expect } from '../../../../../hooks/CustomFixtures';
 const { When, Then } = createBdd(test);
 
-Then('I can see the manage review bodies list page', async ({ manageReviewBodiesPage }) => {
-  await manageReviewBodiesPage.assertOnManageReviewBodiesPage();
-});
-
 Then(
   'I can see the review body for {string} is present in the list',
   async ({ manageReviewBodiesPage, createReviewBodyPage }, datasetName: string) => {

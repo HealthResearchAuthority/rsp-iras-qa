@@ -37,7 +37,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         And I click the 'Confirm' button on the 'Confirmation_Page'
         And I capture the current time
         And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
-        Then I can see the manage review bodies list page
+        Then I can see the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
         When I search and click on view edit link of the disabled review body with 'DISABLED' status from the manage review bodies page
         And I capture the page screenshot
