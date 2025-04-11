@@ -25,7 +25,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         And I click the 'Back' link on the 'Create_Review_Body_Page'
         And I capture the page screenshot
         Then I can see the 'Manage_Review_Bodies_Page'
-        # alphabetical sorting code-vijay
+        Then I can see the list is sorted by default in the alphabetical order of 'Organisation Name'
         And I capture the page screenshot
         When I search and click on view edit link of the newly created review body for '<Add_Review_Body>' with 'ACTIVE' status from the manage review bodies page
         And I capture the page screenshot
