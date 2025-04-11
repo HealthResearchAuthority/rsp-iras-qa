@@ -6,12 +6,12 @@ Feature: HRAPROG-393- User Administration: Manage Review Bodies list and view re
         And I click the 'System_Admin' link on the 'Banner'
         And I can see the 'System_Administration_Page'
         And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
-        And I can see the manage review bodies list page
+        Then I can see the 'Manage_Review_Bodies_Page'
 
     @viewListOfReviewBodies
     Scenario Outline: Verify the user is able to view list of review bodies in alphabetical order of Organisation Name
         And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
-        And I can see the add a new review body page
+        Then I can see the 'Create_Review_Body_Page'
         When I fill the new review body page using '<Add_Review_Body>'
         And I capture the page screenshot
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
@@ -21,7 +21,7 @@ Feature: HRAPROG-393- User Administration: Manage Review Bodies list and view re
         Then I can see the create Review body confirmation page for '<Add_Review_Body>'
         And I capture the page screenshot
         When I have navigated to the 'Manage_Review_Bodies_Page'
-        And I can see the manage review bodies list page
+        Then I can see the 'Manage_Review_Bodies_Page'
         Then I can see the review body for '<Add_Review_Body>' is present in the list
         And I capture the page screenshot
         And I can see the status of the review body is '<Status>'
@@ -44,7 +44,7 @@ Feature: HRAPROG-393- User Administration: Manage Review Bodies list and view re
         And I capture the page screenshot
         When I click the 'Back' link on the 'Review_Body_Profile_Page'
         And I capture the page screenshot
-        Then I can see the manage review bodies list page
+        Then I can see the 'Manage_Review_Bodies_Page'
 
         Examples:
             | Review_Body_Name                  | Status   |
@@ -55,7 +55,7 @@ Feature: HRAPROG-393- User Administration: Manage Review Bodies list and view re
     @viewNewReviewBody
     Scenario Outline: Verify that user is able to view review body details with blank last updated date for the new record
         And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
-        And I can see the add a new review body page
+        Then I can see the 'Create_Review_Body_Page'
         When I fill the new review body page using '<Review_Body_Name>'
         And I capture the page screenshot
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
@@ -65,7 +65,7 @@ Feature: HRAPROG-393- User Administration: Manage Review Bodies list and view re
         Then I can see the create Review body confirmation page for '<Review_Body_Name>'
         And I capture the page screenshot
         When I have navigated to the 'Manage_Review_Bodies_Page'
-        And I can see the manage review bodies list page
+        Then I can see the 'Manage_Review_Bodies_Page'
         And I search 'new' review body and click on view edit link for '<Review_Body_Name>' with '<Status>' status
         And I can see the review body profile page
         And I capture the page screenshot

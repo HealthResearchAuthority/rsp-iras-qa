@@ -37,7 +37,6 @@ export default class CreateUserProfileConfirmationPage {
   async assertOnCreateUserProfileConfirmationPage() {
     await expect(this.confirmation_message).toBeVisible();
     await expect(this.add_another_user_link).toBeVisible();
-    //Back to Manage Users or Back to Manage users >> check figma and app
-    // await expect(this.back_to_manage_user_link).toBeVisible();
+    await expect(this.back_to_manage_user_link).toBeVisible();
   }
 }

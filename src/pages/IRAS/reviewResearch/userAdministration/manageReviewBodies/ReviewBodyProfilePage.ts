@@ -13,6 +13,10 @@ export default class ReviewBodyProfilePage {
   private _countries: string[];
   private _email_address: string;
   private _description: string;
+  private _new_org_name: string;
+  private _new_countries: string[];
+  private _new_email_address: string;
+  private _new_description: string;
   private _last_updated_date: string;
   readonly back_link: Locator;
   readonly page_heading: Locator;
@@ -195,6 +199,37 @@ export default class ReviewBodyProfilePage {
 
   async setDescription(value: string): Promise<void> {
     this._description = value;
+  }
+  async getNewOrgName(): Promise<string> {
+    return this._new_org_name;
+  }
+
+  async setNewOrgName(value: string): Promise<void> {
+    this._new_org_name = value;
+  }
+
+  async getNewCountries(): Promise<string[]> {
+    return this._new_countries;
+  }
+
+  async setNewCountries(value: string[]): Promise<void> {
+    this._new_countries = value;
+  }
+
+  async getNewEmail(): Promise<string> {
+    return this._new_email_address;
+  }
+
+  async setNewEmail(value: string): Promise<void> {
+    this._new_email_address = value;
+  }
+
+  async getNewDescription(): Promise<string> {
+    return this._new_description;
+  }
+
+  async setNewDescription(value: string): Promise<void> {
+    this._new_description = value;
   }
 
   async getLastUpdatedDate(): Promise<string> {

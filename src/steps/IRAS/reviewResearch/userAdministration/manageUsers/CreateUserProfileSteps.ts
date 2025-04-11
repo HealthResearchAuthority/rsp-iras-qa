@@ -92,12 +92,15 @@ Then(
     const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
     if (datasetValName === 'Role_Operations') {
       for (const key in datasetVal) {
-        await commonItemsPage.fillUIComponent(datasetVal, key, createUserProfilePage);
+        if (key === 'role_checkbox') {
+          const selectedValue = await createUserProfilePage.selectRoleCheckBoxAndGetValue();
+          expect(selectedValue).toBeTruthy();
+        }
       }
       for (const key in dataset) {
         if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-          const labelVal = await commonItemsPage.getUiLabel(dataset, key, createUserProfilePage);
-          expect(labelVal).toBe(dataset[key]);
+          const labelValue = await commonItemsPage.getUiLabel(dataset, key, createUserProfilePage);
+          expect(labelValue).toBe(dataset[key]);
         }
       }
     }
@@ -116,12 +119,12 @@ Then(
       createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[invalidFieldsDatasetName];
     for (const key in invalidFieldsDataset) {
       if (Object.prototype.hasOwnProperty.call(invalidFieldsDataset, key)) {
-        const locatorVal: Locator = await commonItemsPage.getFieldErrorMessage(
+        const locatorValue: Locator = await commonItemsPage.getFieldErrorMessage(
           errorMessageFieldDataset,
           key,
           createUserProfilePage
         );
-        await expect(locatorVal).toHaveText(errorMessageFieldDataset[key]);
+        await expect(locatorValue).toHaveText(errorMessageFieldDataset[key]);
       }
     }
   }

@@ -61,7 +61,15 @@ Given(
 When(
   'I can see the {string}',
   async (
-    { loginPage, homePage, createApplicationPage, proceedApplicationPage, systemAdministrationPage },
+    {
+      loginPage,
+      homePage,
+      createApplicationPage,
+      proceedApplicationPage,
+      systemAdministrationPage,
+      createReviewBodyPage,
+      manageReviewBodiesPage,
+    },
     page: string
   ) => {
     switch (page) {
@@ -79,6 +87,12 @@ When(
         break;
       case 'System_Administration_Page':
         await systemAdministrationPage.assertOnSystemAdministrationPage();
+        break;
+      case 'Create_Review_Body_Page':
+        await createReviewBodyPage.assertOnCreateReviewbodyPage();
+        break;
+      case 'Manage_Review_Bodies_Page':
+        await manageReviewBodiesPage.assertOnManageReviewBodiesPage();
         break;
       default:
         throw new Error(`${page} is not a valid option`);
@@ -178,10 +192,9 @@ Given(
       await userProfilePage.first_change_link.click(); //work around for now >> to click on first Change link
     } else if (pageKey === 'Create_User_Profile_Confirmation_Page' && linkKey === 'Back_To_Manage_Users') {
       await createUserProfileConfirmationPage.back_to_manage_user_link.click(); //work around for now >> to click on Back_To_Manage_Users link ..# "Back to Manage Users" in app, "Back to Manage users" in figma >>clarification needed
-    }else if (pageKey === 'Manage_Review_Bodies_Page' && linkKey === 'View_Edit') {
+    } else if (pageKey === 'Manage_Review_Bodies_Page' && linkKey === 'View_Edit') {
       await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).first().click();
-    } 
-    else {
+    } else {
       await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
     }
   }

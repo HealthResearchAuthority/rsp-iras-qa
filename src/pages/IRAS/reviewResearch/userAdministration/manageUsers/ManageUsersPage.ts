@@ -93,7 +93,7 @@ export default class ManageUsersPage {
     for (let i = 0; i < 4; i++) {
       const rows = await this.userListRows.all();
       for (const row of rows) {
-        const firstName = confirmStringNotNull(await row.locator(this.userListCell).first().textContent()).trim();
+        const firstName = confirmStringNotNull(await row.locator(this.userListCell).first().textContent());
         firstNames.push(firstName);
       }
       hasNextPage = (await this.next_button.isVisible()) && !(await this.next_button.isDisabled());

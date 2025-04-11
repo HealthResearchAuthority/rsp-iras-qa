@@ -17,7 +17,8 @@ export default class CreateUserProfilePage {
   readonly telephone_text: Locator;
   readonly organisation_text: Locator;
   readonly job_title_text: Locator;
-  readonly role_dropdown: Locator;
+  readonly role_checkbox_label: Locator;
+  readonly role_checkbox: Locator;
   readonly committee_dropdown: Locator;
   readonly country_checkbox_label: Locator;
   readonly country_checkbox: Locator;
@@ -44,7 +45,8 @@ export default class CreateUserProfilePage {
     this.telephone_text = this.page.getByLabel('Telephone', { exact: true });
     this.organisation_text = this.page.getByLabel('Organisation', { exact: true });
     this.job_title_text = this.page.getByLabel('Job title', { exact: true });
-    this.role_dropdown = this.page.getByLabel('Role', { exact: true });
+    this.role_checkbox_label = this.page.locator('[class="govuk-label"][for="UserRoles"] b');
+    this.role_checkbox = this.page.locator('[name^="UserRoles"][type="checkbox"]');
     this.committee_dropdown = this.page.getByLabel('Committee', { exact: true });
     this.country_checkbox_label = this.page.locator('[class="govuk-label"][for="Country"] b');
     this.country_checkbox = this.page.locator('[name="Country"][type="checkbox"]');
@@ -86,7 +88,7 @@ export default class CreateUserProfilePage {
     } else {
       const isSelectTag = await locator.evaluate((el) => el.tagName.toLowerCase() === 'select');
       if (isSelectTag) {
-        return await removeUnwantedWhitespace(confirmStringNotNull(await locator.getAttribute('value')));
+        return await removeUnwantedWhitespace(confirmStringNotNull(await locator.inputValue()));
       }
     }
     return 'No input element found';
@@ -102,5 +104,19 @@ export default class CreateUserProfilePage {
         throw new Error(`${error} Error updating unique email to testdata json file:`);
       }
     })();
+  }
+
+  async selectRoleCheckBoxAndGetValue() {
+    const checkbox = this.role_checkbox;
+    await checkbox.scrollIntoViewIfNeeded();
+    await checkbox.check();
+    return checkbox.isChecked();
+  }
+
+  async clearCheckboxes(checkboxArray: Locator[]) {
+    for (const checkbox of checkboxArray) {
+      await checkbox.scrollIntoViewIfNeeded();
+      await checkbox.uncheck();
+    }
   }
 }
