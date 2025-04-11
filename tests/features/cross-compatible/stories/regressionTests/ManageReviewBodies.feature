@@ -119,7 +119,6 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         And I capture the page screenshot
         When I click the '<Navigation_Link>' link on the 'Manage_Review_Bodies_Page'
         Then I can see the 'System_Administration_Page'
-
         Then I capture the page screenshot
 
         Examples:

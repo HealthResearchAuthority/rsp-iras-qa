@@ -291,16 +291,15 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
   @axeAccessibilitySystemAdministrationPage @adminUser
   Scenario: System administration home page
     Given I have navigated to the 'System_Administration_Page'
-    Then I can see the system administration home page
+    Then I can see the 'System_Administration_Page'
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-
   @axeAccessibilityManageReviewBodiesList @adminUser @axeAccessibilityManageReviewBodies
   Scenario: Manage review bodies list page
     Given I have navigated to the 'Manage_Review_Bodies_Page'
-    And I can see the manage review bodies list page
+    Then I can see the 'Manage_Review_Bodies_Page'
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
@@ -308,9 +307,9 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
   @axeAccessibilityAddReviewBodies @adminUser @axeAccessibilityManageReviewBodies
   Scenario: Add a new review body page
     Given I have navigated to the 'Manage_Review_Bodies_Page'
-    And I can see the manage review bodies list page
+    Then I can see the 'Manage_Review_Bodies_Page'
     And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
-    And I can see the add a new review body page
+    Then I can see the 'Create_Review_Body_Page'
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
@@ -318,9 +317,9 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
   @axeAccessibilityCheckReviewBodies @adminUser @axeAccessibilityManageReviewBodies
   Scenario Outline: Check and create review body page
     Given I have navigated to the 'Manage_Review_Bodies_Page'
-    And I can see the manage review bodies list page
+    Then I can see the 'Manage_Review_Bodies_Page'
     And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
-    And I can see the add a new review body page
+    Then I can see the 'Create_Review_Body_Page'
     When I fill the new review body page using 'Valid_Data_In_All_Fields'
     And I click the 'Continue' button on the 'Create_Review_Body_Page'
     Then I can see the check and create review body page for 'Valid_Data_In_All_Fields'
@@ -332,9 +331,9 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
   @axeAccessibilityConfirmReviewBodies @adminUser @axeAccessibilityManageReviewBodies
   Scenario Outline: Create review body confirmation page
     Given I have navigated to the 'Manage_Review_Bodies_Page'
-    And I can see the manage review bodies list page
+    Then I can see the 'Manage_Review_Bodies_Page'
     And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
-    And I can see the add a new review body page
+    Then I can see the 'Create_Review_Body_Page'
     When I fill the new review body page using 'Valid_Data_In_All_Fields'
     And I click the 'Continue' button on the 'Create_Review_Body_Page'
     Then I can see the check and create review body page for 'Valid_Data_In_All_Fields'
@@ -347,7 +346,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
   @axeAccessibilityReviewBodiesProfile @adminUser @axeAccessibilityManageReviewBodies
   Scenario Outline: Review body profile page
     Given I have navigated to the 'Manage_Review_Bodies_Page'
-    And I can see the manage review bodies list page
+    Then I can see the 'Manage_Review_Bodies_Page'
     And I select a 'QA Automation' Review Body to View and Edit which is 'active'
     And I can see the review body profile page
     When I Scan the page with the Axe Accessibilty Tool
@@ -357,7 +356,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
   @axeAccessibilityEditReviewBodies @adminUser @axeAccessibilityManageReviewBodies
   Scenario Outline: Edit review body page
     Given I have navigated to the 'Manage_Review_Bodies_Page'
-    And I can see the manage review bodies list page
+    Then I can see the 'Manage_Review_Bodies_Page'
     And I select a 'QA Automation' Review Body to View and Edit which is 'active'
     And I can see the review body profile page
     And I click the change link against 'Organisation_Name' on the review body profile page
@@ -370,13 +369,13 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
   Scenario: View review body page with disable button available
     Given I have navigated to the 'System_Administration_Page'
     And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
-    And I can see the manage review bodies list page
+    Then I can see the 'Manage_Review_Bodies_Page'
     And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
     And I fill the new review body page using 'Valid_Data_In_All_Fields'
     And I click the 'Continue' button on the 'Create_Review_Body_Page'
     And I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
     And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
-    And I can see the manage review bodies list page
+    Then I can see the 'Manage_Review_Bodies_Page'
     And I click the view edit link for the newly created review body
     Then I can see the 'Disable_Label_Texts' ui labels on the manage review body profile page
     When I Scan the page with the Axe Accessibilty Tool
@@ -387,13 +386,13 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
   Scenario: View disable confirmation page for review body
     Given I have navigated to the 'System_Administration_Page'
     And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
-    And I can see the manage review bodies list page
+    Then I can see the 'Manage_Review_Bodies_Page'
     And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
     And I fill the new review body page using 'Valid_Data_In_All_Fields'
     And I click the 'Continue' button on the 'Create_Review_Body_Page'
     And I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
     And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
-    And I can see the manage review bodies list page
+    Then I can see the 'Manage_Review_Bodies_Page'
     And I click the view edit link for the newly created review body
     And I click the 'Disable_User_Record' button on the 'Review_Body_Profile_Page'
     And I can see a 'Confirm' button on the 'Confirmation_Page'
@@ -405,13 +404,13 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
   Scenario: View disable confirmation success page for review body
     Given I have navigated to the 'System_Administration_Page'
     And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
-    And I can see the manage review bodies list page
+    Then I can see the 'Manage_Review_Bodies_Page'
     And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
     And I fill the new review body page using 'Valid_Data_In_All_Fields'
     And I click the 'Continue' button on the 'Create_Review_Body_Page'
     And I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
     And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
-    And I can see the manage review bodies list page
+    Then I can see the 'Manage_Review_Bodies_Page'
     And I click the view edit link for the newly created review body
     And I click the 'Disable_User_Record' button on the 'Review_Body_Profile_Page'
     And I click the 'Confirm' button on the 'Confirmation_Page'
@@ -424,18 +423,18 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
   Scenario: View review body page with enable button available
     Given I have navigated to the 'System_Administration_Page'
     And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
-    And I can see the manage review bodies list page
+    Then I can see the 'Manage_Review_Bodies_Page'
     And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
     And I fill the new review body page using 'Valid_Data_In_All_Fields'
     And I click the 'Continue' button on the 'Create_Review_Body_Page'
     And I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
     And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
-    And I can see the manage review bodies list page
+    Then I can see the 'Manage_Review_Bodies_Page'
     And I click the view edit link for the newly created review body
     And I click the 'Disable_User_Record' button on the 'Review_Body_Profile_Page'
     And I click the 'Confirm' button on the 'Confirmation_Page'
     And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
-    And I can see the manage review bodies list page
+    Then I can see the 'Manage_Review_Bodies_Page'
     And I can see the status of the review body is 'disabled'
     And I click the view edit link for the newly created review body
     And I can see the 'Enable_Label_Texts' ui labels on the manage review body profile page
@@ -447,18 +446,18 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
   Scenario: View enable confirmation page for review body
     Given I have navigated to the 'System_Administration_Page'
     And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
-    And I can see the manage review bodies list page
+    Then I can see the 'Manage_Review_Bodies_Page'
     And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
     And I fill the new review body page using 'Valid_Data_In_All_Fields'
     And I click the 'Continue' button on the 'Create_Review_Body_Page'
     And I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
     And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
-    And I can see the manage review bodies list page
+    Then I can see the 'Manage_Review_Bodies_Page'
     And I click the view edit link for the newly created review body
     And I click the 'Disable_User_Record' button on the 'Review_Body_Profile_Page'
     And I click the 'Confirm' button on the 'Confirmation_Page'
     And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
-    And I can see the manage review bodies list page
+    Then I can see the 'Manage_Review_Bodies_Page'
     And I can see the status of the review body is 'disabled'
     And I click the view edit link for the newly created review body
     And I click the 'Enable_User_Record' button on the 'Review_Body_Profile_Page'
@@ -471,18 +470,18 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
   Scenario: View enable confirmation success page for review body
     Given I have navigated to the 'System_Administration_Page'
     And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
-    And I can see the manage review bodies list page
+    Then I can see the 'Manage_Review_Bodies_Page'
     And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
     And I fill the new review body page using 'Valid_Data_In_All_Fields'
     And I click the 'Continue' button on the 'Create_Review_Body_Page'
     And I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
     And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
-    And I can see the manage review bodies list page
+    Then I can see the 'Manage_Review_Bodies_Page'
     And I click the view edit link for the newly created review body
     And I click the 'Disable_User_Record' button on the 'Review_Body_Profile_Page'
     And I click the 'Confirm' button on the 'Confirmation_Page'
     And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
-    And I can see the manage review bodies list page
+    Then I can see the 'Manage_Review_Bodies_Page'
     And I can see the status of the review body is 'disabled'
     And I click the view edit link for the newly created review body
     And I click the 'Enable_User_Record' button on the 'Review_Body_Profile_Page'
@@ -496,7 +495,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
   Scenario: Audit history page of the review body
     Given I have navigated to the 'System_Administration_Page'
     And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
-    And I can see the manage review bodies list page
+    Then I can see the 'Manage_Review_Bodies_Page'
     When I click the 'View_Edit' link on the 'Manage_Review_Bodies_Page'
     And I can see the review body profile page
     And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'

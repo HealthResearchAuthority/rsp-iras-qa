@@ -43,6 +43,12 @@
     "Add_New_User_Profile_Record": "Add a new user profile record",
     "Back": "Back"
   },
+  "Create_User_Profile_Page": {
+    "Back": "Back"
+  },
+  "Check_Create_User_Profile_Page": {
+    "Back": "Back"
+  },
   "Create_User_Profile_Confirmation_Page": {
     "Back_To_Manage_Users": "Back to Manage users",
     "Add_another_user": "Add another user"
