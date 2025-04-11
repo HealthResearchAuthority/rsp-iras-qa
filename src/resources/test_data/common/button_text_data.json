@@ -39,34 +39,29 @@
     "Save_Continue": "Save and continue"
   },
   "Create_User_Profile_Page": {
-    "Continue": "Continue",
-    "Back": "Back"
+    "Continue": "Continue"
   },
   "Check_Create_User_Profile_Page": {
-    "Create_Profile": "Create profile",
-    "Back": "Back"
+    "Create_Profile": "Create profile"
   },
   "User_Profile_Page": {
     "Disable_User_Record": "Disable user record",
     "Enable_User_Record": "Enable user record"
   },
-  "Manage_Users_Page": {
-    "Back": "Back"
-  },
   "Confirmation_Page": {
     "Confirm": "Confirm"
   },
   "Create_Review_Body_Page": {
-    "Continue": "Continue",
-    "Back": "Back"
+    "Continue": "Continue"
   },
   "Check_Create_Review_Body_Page": {
-    "Create_Profile": "Create profile",
-    "Back": "Back"
+    "Create_Profile": "Create profile"
   },
   "Edit_Review_Body_Page": {
-    "Save": "Save",
-    "Back": "Back"
+    "Save": "Save"
+  },
+  "Edit_User_Profile_Page": {
+    "Save": "Save"
   },
   "Review_Body_Profile_Page": {
     "Disable_Review_Body": "Disable review body",

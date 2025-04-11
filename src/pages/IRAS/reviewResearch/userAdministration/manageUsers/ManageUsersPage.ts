@@ -1,6 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
-import * as manageUsersPageTestData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageUsers/manage_users_page_data.json';
 import * as linkTextData from '../../../../../resources/test_data/common/link_text_data.json';
+import * as manageUsersPageTestData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageUsers/manage_users_page_data.json';
 import { confirmStringNotNull } from '../../../../../utils/UtilFunctions';
 
 //Declare Page Objects
@@ -11,25 +11,32 @@ export default class ManageUsersPage {
   readonly page_heading: Locator;
   readonly back_button: Locator;
   readonly add_new_users_record_link: Locator;
+  readonly first_name_column_header: Locator;
+  readonly last_name_column_header: Locator;
+  readonly email_address_column_header: Locator;
+  readonly status_column_header: Locator;
+  readonly last_logged_in_column_header: Locator;
+  readonly actions_column_header: Locator;
+  readonly view_edit_link: Locator;
+  readonly find_user_title: Locator;
+  readonly search_box: Locator;
+  readonly search_button_label: Locator;
+  readonly first_name_from_list_label: Locator;
+  readonly users_list_rows: Locator;
+  readonly last_name_from_list_label: Locator;
+  readonly email_address_from_list_label: Locator;
+  readonly status_from_list_label: Locator;
+  readonly next_button: Locator;
   readonly first_name_column_header_label: Locator;
   readonly last_name_column_header_label: Locator;
   readonly email_address_column_header_label: Locator;
   readonly status_column_header_label: Locator;
   readonly last_logged_in_column_header_label: Locator;
   readonly actions_column_header_label: Locator;
-  readonly view_edit_link: Locator;
   readonly search_box_label: Locator;
-  readonly search_box: Locator;
-  readonly search_button_label: Locator;
   readonly firstNameFromListLabel: Locator;
-  readonly users_list_rows: Locator;
-  readonly next_button: Locator;
   readonly userListRows: Locator;
   readonly userListCell: Locator;
-  readonly first_name_from_list_label: Locator;
-  readonly last_name_from_list_label: Locator;
-  readonly email_address_from_list_label: Locator;
-  readonly status_from_list_label: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -69,10 +76,10 @@ export default class ManageUsersPage {
     this.next_button = this.page.locator('.govuk-pagination__next a');
     this.userListRows = this.page.locator('.govuk-table__row');
     this.userListCell = this.page.locator('.govuk-table__cell');
-    this.first_name_from_list_label = this.page.locator('td:nth-child(1)');
-    this.last_name_from_list_label = this.page.locator('td:nth-child(2)');
-    this.email_address_from_list_label = this.page.locator('td:nth-child(3)');
-    this.status_from_list_label = this.page.locator('td:nth-child(4)');
+    this.first_name_from_list_label = this.page.locator('td').nth(0);
+    this.last_name_from_list_label = this.page.locator('td').nth(1);
+    this.email_address_from_list_label = this.page.locator('td').nth(2);
+    this.status_from_list_label = this.page.locator('td').nth(3);
   }
 
   async assertOnManageUsersPage() {
@@ -97,6 +104,7 @@ export default class ManageUsersPage {
     }
     return firstNames;
   }
+
   async findUserProfile(userFirstName: string, userLastName: string, userEmail: string, userStatus: string) {
     const searchRecord = userFirstName + '|' + userLastName + '|' + userEmail + '|' + userStatus;
     let foundRecord = false;
@@ -151,7 +159,7 @@ export default class ManageUsersPage {
         const nextButton = this.page.locator('.govuk-pagination__next');
         if ((await nextButton.count()) > 0) {
           await nextButton.click();
-          await this.page.waitForSelector('table tbody tr');
+          await this.page.getByRole('row').first().waitFor();
         } else {
           throw new Error('Reached the last page, data not found.');
         }
