@@ -2,6 +2,7 @@ import { expect, Locator, Page } from '@playwright/test';
 import * as manageReviewBodiesPageData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageReviewBodies/manage_review_body_page_data.json';
 import * as linkTextData from '../../../../../resources/test_data/common/link_text_data.json';
 import { confirmStringNotNull } from '../../../../../utils/UtilFunctions';
+import { confirmStringNotNull } from '../../../../../utils/UtilFunctions';
 
 //Declare Page Objects
 export default class ManageReviewBodiesPage {
@@ -11,6 +12,9 @@ export default class ManageReviewBodiesPage {
   readonly pageHeading: Locator;
   readonly addNewReviewBodyRecordLink: Locator;
   readonly mainPageContent: Locator;
+  readonly review_bodies_list_rows: Locator;
+  readonly organisation_name_from_list: Locator;
+  readonly status_from_list: Locator;
   readonly actionsLink: Locator;
   readonly statusCell: Locator;
   readonly reviewBodyListRows: Locator;
@@ -20,6 +24,7 @@ export default class ManageReviewBodiesPage {
   readonly status_from_list_label: string;
   readonly next_button: Locator;
   readonly hidden_next_button: Locator;
+  readonly orgListRows: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -38,6 +43,9 @@ export default class ManageReviewBodiesPage {
         exact: true,
       }
     );
+    this.review_bodies_list_rows = this.page.locator('table tbody tr');
+    this.organisation_name_from_list = this.page.locator('td:nth-child(1)');
+    this.status_from_list = this.page.locator('td:nth-child(3)');
     this.actionsLink = this.page
       .getByRole('link')
       .getByText(this.manageReviewBodiesPageData.Manage_Review_Body_Page.actions_link, { exact: true });
@@ -49,6 +57,7 @@ export default class ManageReviewBodiesPage {
     this.status_from_list_label = 'td:nth-child(3)';
     this.next_button = this.page.locator('.govuk-pagination__next a');
     this.hidden_next_button = this.page.locator('[class="govuk-pagination__next"][style="visibility: hidden"]');
+    this.orgListRows = this.page.getByRole('table').getByRole('row');
   }
 
   //Page Methods
@@ -59,6 +68,32 @@ export default class ManageReviewBodiesPage {
   async assertOnManageReviewBodiesPage() {
     await expect(this.pageHeading).toBeVisible();
     expect(await this.page.title()).toBe(this.manageReviewBodiesPageData.Manage_Review_Body_Page.title);
+  }
+
+  async searchAndClickReviewBodyProfile(reviewBodyName: string, reviewBodyStatus: string) {
+    let dataFound = false;
+    while (!dataFound) {
+      const rowCount = await this.review_bodies_list_rows.count();
+      for (let i = rowCount - 1; i > 0; i--) {
+        const organisationNameText = await this.review_bodies_list_rows
+          .nth(i)
+          .locator(this.organisation_name_from_list)
+          .textContent();
+        const organisationStatusText = await this.review_bodies_list_rows
+          .nth(i)
+          .locator(this.status_from_list)
+          .textContent();
+        if (organisationNameText?.trim() === reviewBodyName && organisationStatusText?.trim() === reviewBodyStatus) {
+          await this.review_bodies_list_rows.nth(i).getByText('View/Edit').click();
+          dataFound = true;
+          break;
+        }
+      }
+      // This code need to be updated when pagination enabled in manage review bodies page
+      if (!dataFound) {
+        throw new Error('Review body, Data not found');
+      }
+    }
   }
 
   async getRowByOrgName(orgName: string, exactMatch: boolean) {
@@ -93,5 +128,16 @@ export default class ManageReviewBodiesPage {
         throw new Error('Reached the last page, data not found.');
       }
     }
+  }
+
+  async getOrgNamesListFromUI() {
+    const orgNames: string[] = [];
+    const rowCount = await this.orgListRows.count();
+    for (let i = 1; i < rowCount; i++) {
+      const columns = this.orgListRows.nth(i).getByRole('cell');
+      const orgValue = confirmStringNotNull(await columns.first().textContent());
+      orgNames.push(orgValue);
+    }
+    return orgNames;
   }
 }

@@ -2,7 +2,7 @@ import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../../hooks/CustomFixtures';
 import { confirmStringNotNull } from '../../../../../utils/UtilFunctions';
 
-const { When, Then } = createBdd(test);
+const { Then, When } = createBdd(test);
 
 Then('I can see the review body profile page', async ({ reviewBodyProfilePage }) => {
   await reviewBodyProfilePage.assertOnReviewbodyProfilePage();
@@ -17,6 +17,9 @@ Then('I can see the review body profile page', async ({ reviewBodyProfilePage })
   );
   await reviewBodyProfilePage.setDescription(
     confirmStringNotNull(await reviewBodyProfilePage.description_value.textContent())
+  );
+  await reviewBodyProfilePage.setLastUpdatedDate(
+    confirmStringNotNull(await reviewBodyProfilePage.last_updated_value.textContent())
   );
 });
 
@@ -174,6 +177,11 @@ When(
     }
   }
 );
+
+Then('I can see the last updated date field is blank', async ({ reviewBodyProfilePage }) => {
+  const lastUpdatedDateActualValue = confirmStringNotNull(await reviewBodyProfilePage.getLastUpdatedDate()).trim();
+  expect(lastUpdatedDateActualValue).toBe(''); // defect open - last updated date stamped for new review body
+});
 
 Then(
   'I can see the {string} ui labels on the manage review body profile page',
