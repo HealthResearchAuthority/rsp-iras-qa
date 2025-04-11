@@ -366,6 +366,12 @@
       "Max_Words": "The description cannot exceed 500 words.",
       "Max_Email_Chars": "Max 255 characters allowed",
       "Email_Format": "Invalid email format"
+    },
+    "Valid_Data_In_All_Fields_Disabled": {
+      "organisation_name_text": "QA Automation HSC Research and Development 20250406050232641",
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "email_address_text": "qaauto_hscrd@health.org",
+      "description_text": "qaauto_Responsible for confirmation of research governance compliance"
     }
   }
 }

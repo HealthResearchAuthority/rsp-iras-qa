@@ -13,6 +13,7 @@ export default class ReviewBodyProfilePage {
   private _countries: string[];
   private _email_address: string;
   private _description: string;
+  private _last_updated_date: string;
   readonly back_link: Locator;
   readonly page_heading: Locator;
   readonly row_value_locator: Locator;
@@ -55,6 +56,7 @@ export default class ReviewBodyProfilePage {
     this._countries = [];
     this._email_address = '';
     this._description = '';
+    this._last_updated_date = '';
 
     //Locators
     this.page_heading = this.page
@@ -193,5 +195,13 @@ export default class ReviewBodyProfilePage {
 
   async setDescription(value: string): Promise<void> {
     this._description = value;
+  }
+
+  async getLastUpdatedDate(): Promise<string> {
+    return this._last_updated_date;
+  }
+
+  async setLastUpdatedDate(value: string): Promise<void> {
+    this._last_updated_date = value;
   }
 }
