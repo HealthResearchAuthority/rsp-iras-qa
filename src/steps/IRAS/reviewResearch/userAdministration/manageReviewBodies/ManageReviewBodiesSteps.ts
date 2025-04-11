@@ -99,7 +99,7 @@ Then(
   'I can see the list is sorted by default in the alphabetical order of {string}',
   async ({ manageReviewBodiesPage }) => {
     const orgNames: string[] = await manageReviewBodiesPage.getOrgNamesListFromUI();
-    const sortedOrgNames = orgNames.sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
+    const sortedOrgNames = [...orgNames].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
     expect(orgNames).toEqual(sortedOrgNames);
   }
 );
