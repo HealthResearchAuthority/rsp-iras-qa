@@ -367,7 +367,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I expect to receive no WCAG Violations
 
   @axeAccessibilityAuditHistoryReviewBody @adminUser @axeAccessibilityManageReviewBodies
-  Scenario: Audit history page of reviewBody
+  Scenario: Audit history page of the review body
     Given I have navigated to the 'System_Administration_Page'
     And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
     And I can see the manage review bodies list page

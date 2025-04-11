@@ -61,7 +61,15 @@ Given(
 When(
   'I can see the {string}',
   async (
-    { loginPage, homePage, createApplicationPage, proceedApplicationPage, systemAdministrationPage },
+    {
+      loginPage,
+      homePage,
+      createApplicationPage,
+      proceedApplicationPage,
+      systemAdministrationPage,
+      createReviewBodyPage,
+      manageReviewBodiesPage,
+    },
     page: string
   ) => {
     switch (page) {
@@ -79,6 +87,12 @@ When(
         break;
       case 'System_Administration_Page':
         await systemAdministrationPage.assertOnSystemAdministrationPage();
+        break;
+      case 'Create_Review_Body_Page':
+        await createReviewBodyPage.assertOnCreateReviewbodyPage();
+        break;
+      case 'Manage_Review_Bodies_Page':
+        await manageReviewBodiesPage.assertOnManageReviewBodiesPage();
         break;
       default:
         throw new Error(`${page} is not a valid option`);
