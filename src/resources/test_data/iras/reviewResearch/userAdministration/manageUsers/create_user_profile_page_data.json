@@ -24,14 +24,19 @@
   },
   "Create_User_Profile": {
     "email_address_prefix": "QAAutomation",
-    "email_address_unique": "QAAutomation20250411180757153hscrd@health.org",
+    "email_address_unique": "QAAutomation20250411192924398hscrd@health.org",
     "Role_Operations": {
-      "role_dropdown": "operations"
+      "role_checkbox": [
+        "operations"
+      ]
     },
     "Role_Not_Operations": {
-      "role_dropdown": "Reviewer"
+      "role_checkbox": [
+        "reviewer"
+      ]
     },
     "Label_Texts_Role_Operations": {
+      "role_checkbox_label": "Role",
       "country_checkbox_label": "Country",
       "access_required_checkbox_label": "Access required"
     },
@@ -43,7 +48,9 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Operations",
       "job_title_text": "Sr.Reviewer Role_Operations",
-      "role_dropdown": "operations",
+      "role_checkbox": [
+        "operations"
+      ],
       "country_checkbox": [
         "England",
         "Northern Ireland",
@@ -61,7 +68,9 @@
       "first_name_text": "QA Automation First Name Test Role_Operations",
       "last_name_text": "Test Last Name Role_Operations",
       "email_address_text": "hscrd@health.org",
-      "role_dropdown": "operations",
+      "role_checkbox": [
+        "operations"
+      ],
       "country_checkbox": [
         "England",
         "Northern Ireland",
@@ -79,7 +88,9 @@
       "first_name_text": "QA Automation First Name Test Role_Operations_Another",
       "last_name_text": "Test Last Name Role_Operations_Another",
       "email_address_text": "hscrd@health.org",
-      "role_dropdown": "operations",
+      "role_checkbox": [
+        "operations"
+      ],
       "country_checkbox": [
         "England"
       ],
@@ -95,19 +106,25 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Reviewer",
       "job_title_text": "Sr.Reviewer Role_Reviewer",
-      "role_dropdown": "reviewer"
+      "role_checkbox": [
+        "reviewer"
+      ]
     },
     "Valid_Data_In_All_Mandatory_Fields_Role_Reviewer": {
       "first_name_text": "QA Automation First Name Test Role_Operations",
       "last_name_text": "Test Last Name Role_Operations",
       "email_address_text": "hscrd@health.org",
-      "role_dropdown": "reviewer"
+      "role_checkbox": [
+        "reviewer"
+      ]
     },
     "Valid_Data_In_All_Mandatory_Fields_Role_Reviewer_Another": {
       "first_name_text": "QA Automation First Name Test Role_Operations_Another",
       "last_name_text": "Test Last Name Role_Operations_Another",
       "email_address_text": "hscrd@health.org",
-      "role_dropdown": "reviewer"
+      "role_checkbox": [
+        "reviewer"
+      ]
     },
     "Valid_Data_In_All_Fields_Role_Operations_Another": {
       "title_text": "Mr",
@@ -117,7 +134,9 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Operations_Another",
       "job_title_text": "Sr.Reviewer Role_Operations_Another",
-      "role_dropdown": "operations",
+      "role_checkbox": [
+        "operations"
+      ],
       "country_checkbox": [
         "England",
         "Scotland"
@@ -135,7 +154,9 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Reviewer_Another",
       "job_title_text": "Sr.Reviewer Role_Reviewer_Another",
-      "role_dropdown": "reviewer"
+      "role_checkbox": [
+        "reviewer"
+      ]
     },
     "Valid_Data_In_All_Mandatory_Fields": {
       "first_name_text": "First Name Test",

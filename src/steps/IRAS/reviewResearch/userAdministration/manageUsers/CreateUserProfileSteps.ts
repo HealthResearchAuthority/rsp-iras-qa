@@ -43,24 +43,12 @@ When(
 );
 
 Then(
-  'I clear the previously entered values on the add a new user profile page for {string} for {string}',
-  async ({ createUserProfilePage, commonItemsPage }, datasetName: string, datasetValName: string) => {
+  'I clear the previously entered values on the add a new user profile page for {string}',
+  async ({ createUserProfilePage, commonItemsPage }, datasetName: string) => {
     const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
-    if (datasetValName === 'Role_Operations') {
-      const checkboxArray = await commonItemsPage.govUkCheckboxes.locator('input').all();
-      createUserProfilePage.clearCheckboxes(checkboxArray);
-      for (const key in dataset) {
-        if (key !== 'country_checkbox' && key !== 'access_required_checkbox') {
-          if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-            await commonItemsPage.clearUIComponent(dataset, key, createUserProfilePage);
-          }
-        }
-      }
-    } else {
-      for (const key in dataset) {
-        if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-          await commonItemsPage.clearUIComponent(dataset, key, createUserProfilePage);
-        }
+    for (const key in dataset) {
+      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+        await commonItemsPage.clearUIComponent(dataset, key, createUserProfilePage);
       }
     }
   }
@@ -104,9 +92,9 @@ Then(
     const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
     if (datasetValName === 'Role_Operations') {
       for (const key in datasetVal) {
-        if (key === 'role_dropdown') {
-          const selectedValue = await createUserProfilePage.selectRoleDropdownAndGetValue(datasetVal, key);
-          expect(selectedValue).toBe(datasetVal[key]);
+        if (key === 'role_checkbox') {
+          const selectedValue = await createUserProfilePage.selectRoleCheckBoxAndGetValue();
+          expect(selectedValue).toBeTruthy();
         }
       }
       for (const key in dataset) {

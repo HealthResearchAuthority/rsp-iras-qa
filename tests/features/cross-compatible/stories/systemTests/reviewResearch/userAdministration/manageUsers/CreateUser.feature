@@ -122,7 +122,8 @@ Feature: HRAPROG-394- User Administration: Manage Users
         Then I can see the add a new user profile page
         Then I can see previously filled values in the new user profile page for '<Add_User_Profile>' displayed on the add a new user profile page
         And I capture the page screenshot
-        And I clear the previously entered values on the add a new user profile page for '<Add_User_Profile>' for '<Role_Dropdown>'
+        # And I clear the previously entered values on the add a new user profile page for '<Add_User_Profile>' for '<Role_Dropdown>'
+        And I clear the previously entered values on the add a new user profile page for '<Add_User_Profile>'
         And I capture the page screenshot
         When I fill the new user profile page using '<Add_Another_User_Profile>'
         And I capture the page screenshot
@@ -159,7 +160,8 @@ Feature: HRAPROG-394- User Administration: Manage Users
         Then I can see the add a new user profile page
         Then I can see previously filled values in the new user profile page for '<Add_User_Profile>' displayed on the add a new user profile page
         And I capture the page screenshot
-        And I clear the previously entered values on the add a new user profile page for '<Add_User_Profile>' for '<Role_Dropdown>'
+        # And I clear the previously entered values on the add a new user profile page for '<Add_User_Profile>' for '<Role_Dropdown>'
+        And I clear the previously entered values on the add a new user profile page for '<Add_User_Profile>'
         And I capture the page screenshot
         When I fill the new user profile page using '<Add_Another_User_Profile>'
         And I capture the page screenshot
