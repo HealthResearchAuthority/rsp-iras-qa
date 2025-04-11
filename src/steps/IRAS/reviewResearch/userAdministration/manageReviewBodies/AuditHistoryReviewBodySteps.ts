@@ -231,6 +231,8 @@ Then(
     expect(auditLog[2][0]).toBe(dataset.system_admin_email_text);
 
     expect(auditLog[0][1]).toBe(timeExpected);
+    //fail in this case when the previous description was empty
+    // Description was changed from (null) to qaauto_Responsible for confirmation of research governance compliance Test Update all fields
     expect(auditLog[1][1]).toBe(descriptionEventDescriptionExpectedValue);
     expect(auditLog[2][1]).toBe(dataset.system_admin_email_text);
 

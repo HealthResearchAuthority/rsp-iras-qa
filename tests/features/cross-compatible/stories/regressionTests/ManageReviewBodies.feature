@@ -51,7 +51,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
             | Add_Review_Body          | Validation_Text | Audit_History       |
             | Valid_Data_In_All_Fields | header_Texts    | Disable_Review_Body |
 
-    @RegressionTestVerifyEnableAndEditReviewBodyAuditHistory
+    @RegressionTestVerifyEnableAndEditReviewBodyAuditHistory @failAuditDescription
     Scenario Outline: Verify the user can view the audit history after enabling a review body
         And I select a 'QA Automation' Review Body to View and Edit which is 'disabled'
         And I can see the review body profile page
