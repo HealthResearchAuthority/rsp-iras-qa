@@ -1,6 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { test, expect } from '../../../../../hooks/CustomFixtures';
-const { When, Then } = createBdd(test);
+const { Then } = createBdd(test);
 
 Then(
   'I can see the review body for {string} is present in the list',
@@ -73,33 +73,11 @@ Then(
   }
 );
 
-When(
-  'I search and click on view edit link of the newly created review body for {string} with {string} status from the manage review bodies page',
-  async ({ manageReviewBodiesPage, createReviewBodyPage }, datasetName: string, userStatus: string) => {
-    const dataset = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body[datasetName];
-    const countryNames: string = dataset.country_checkbox.toString();
-    const organisationName = await createReviewBodyPage.getUniqueOrgName();
-    await manageReviewBodiesPage.searchAndClickReviewBody(organisationName, countryNames, userStatus);
-  }
-);
-
-When(
-  'I search and click on view edit link of the disabled review body with {string} status from the manage review bodies page',
-  async ({ manageReviewBodiesPage, reviewBodyProfilePage }, userStatus: string) => {
-    const organisationName = await reviewBodyProfilePage.getOrgName();
-    const countryNames: string[] = await reviewBodyProfilePage.getCountries();
-    const countriesString: string = countryNames.join(', ');
-    await manageReviewBodiesPage.searchAndClickReviewBody(organisationName, countriesString, userStatus);
-  }
-);
-
-When(
-  'I search and click on view edit link of the enabled review body with {string} status from the manage review bodies page',
-  async ({ manageReviewBodiesPage, reviewBodyProfilePage }, userStatus: string) => {
-    const organisationName = await reviewBodyProfilePage.getOrgName();
-    const countryNames: string[] = await reviewBodyProfilePage.getCountries();
-    const countriesString: string = countryNames.join(', ');
-    await manageReviewBodiesPage.searchAndClickReviewBody(organisationName, countriesString, userStatus);
+Then(
+  'I click the view edit link for the {string} review body',
+  async ({ manageReviewBodiesPage, reviewBodyProfilePage }) => {
+    const reviewBodyRow = await manageReviewBodiesPage.getRowByOrgName(await reviewBodyProfilePage.getOrgName(), true);
+    await reviewBodyRow.locator(manageReviewBodiesPage.actionsLink).click();
   }
 );
 

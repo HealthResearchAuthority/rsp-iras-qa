@@ -27,7 +27,10 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         Then I can see the 'Manage_Review_Bodies_Page'
         Then I can see the list is sorted by default in the alphabetical order of 'Organisation Name'
         And I capture the page screenshot
-        When I search and click on view edit link of the newly created review body for '<Add_Review_Body>' with 'ACTIVE' status from the manage review bodies page
+        Then I can see the review body for '<Add_Review_Body>' is present in the list
+        And I capture the page screenshot
+        And I can see the status of the review body is '<Status>'
+        Then I click the view edit link for the newly created review body
         And I capture the page screenshot
         And I can see the review body profile page
         # profile validation code-vijay
@@ -39,13 +42,13 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
         Then I can see the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
-        When I search and click on view edit link of the disabled review body with 'DISABLED' status from the manage review bodies page
+        Then I click the view edit link for the 'disabled' review body
         And I capture the page screenshot
         And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'
         Then I can see the audit history page of the review body
         And I capture the page screenshot
         And I can see the '<Validation_Text>' ui labels on the audit history page of the review body
-        And I can see the audit history for the review body disabled event with '<Audit_History>'
+        And I can see the audit history for the review body 'disabled' event for '<Add_Review_Body>' with '<Audit_History>'
 
         Examples:
             | Add_Review_Body          | Validation_Text | Audit_History       |
@@ -62,7 +65,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
         Then I can see the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
-        When I search and click on view edit link of the enabled review body with 'ACTIVE' status from the manage review bodies page
+        Then I click the view edit link for the 'enabled' review body
         And I can see the review body profile page
         And I capture the page screenshot
         When I click the change link against '<Field_Name_One>' on the review body profile page
