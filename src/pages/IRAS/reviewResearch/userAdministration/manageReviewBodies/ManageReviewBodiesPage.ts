@@ -93,34 +93,6 @@ export default class ManageReviewBodiesPage {
     });
   }
 
-  async searchAndClickReviewBody(orgName: string, countryNames: string, reviewBodyStatus: string) {
-    let dataFound = false;
-    while (!dataFound) {
-      const rowCount = await this.reviewBodyListRows.count();
-      for (let i = 1; i < rowCount; i++) {
-        const columns = this.reviewBodyListRows.nth(i).getByRole('cell');
-        const orgNameValue = confirmStringNotNull(await columns.nth(0).textContent());
-        const countryNamesValue = confirmStringNotNull(await columns.nth(1).textContent());
-        const reviewBodyStatusValue = confirmStringNotNull(await columns.nth(2).textContent());
-        if (
-          confirmStringNotNull(orgNameValue) === orgName &&
-          confirmStringNotNull(countryNamesValue) === countryNames.replaceAll(',', ', ') &&
-          confirmStringNotNull(reviewBodyStatusValue) === reviewBodyStatus
-        ) {
-          await this.reviewBodyListRows.nth(i).getByText('View/Edit').click();
-          dataFound = true;
-          break;
-        }
-      }
-      if ((await this.next_button.isVisible()) && !(await this.next_button.isDisabled())) {
-        await this.next_button.click();
-        await this.page.waitForLoadState('domcontentloaded');
-      } else if ((await this.hidden_next_button.count()) > 0) {
-        throw new Error('Reached the last page, data not found.');
-      }
-    }
-  }
-
   async getOrgNamesListFromUI() {
     const orgNames: string[] = [];
     const rowCount = await this.orgListRows.count();

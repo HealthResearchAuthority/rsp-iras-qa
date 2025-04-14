@@ -1,5 +1,5 @@
 @RegressionManageReviewBodies @adminUser @Regression
-Feature: User Administration: Manage Review Bodies - View audit history for review body
+Feature: User Administration: Manage Review Bodies
 
     Background:
         Given I have navigated to the 'System_Administration_Page'

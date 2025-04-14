@@ -38,7 +38,9 @@ export default class AuditHistoryReviewBodyPage {
     this.system_admin_label = this.auditTableRows
       .getByRole('columnheader')
       .getByText('System administrator', { exact: true });
-    this.next_button = this.page.locator('.govuk-pagination__next a');
+    this.next_button = this.page
+      .getByRole('link')
+      .getByText(this.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.next_button, { exact: true });
     this.hidden_next_button = this.page.locator('[class="govuk-pagination__next"][style="visibility: hidden"]');
   }
 
