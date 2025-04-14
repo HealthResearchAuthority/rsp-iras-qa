@@ -48,12 +48,25 @@ When(
 );
 
 When(
-  'I search and click on view edit link for {string} user with {string} status from the manage user page',
+  'I search and click on view edit link for existing {string} user with {string} status from the manage user page',
   async ({ manageUsersPage }, datasetName: string, userStatus: string) => {
     const dataset = manageUsersPage.manageUsersPageTestData[datasetName];
     const userFirstName = dataset.first_name_text;
     const userLastName = dataset.last_name_text;
     const userEmail = dataset.email_address_text;
+    await manageUsersPage.searchAndClickUserProfile(userFirstName, userLastName, userEmail, userStatus);
+  }
+);
+
+When(
+  'I search and click on view edit link for {string} user with {string} status from the manage user page',
+  async ({ manageUsersPage, createUserProfilePage }, datasetName: string, userStatus: string) => {
+    const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
+    const userFirstName = dataset.first_name_text;
+    const userLastName = dataset.last_name_text;
+    const filePath = path.resolve(pathToTestDataJson);
+    const data = await fse.readJson(filePath);
+    const userEmail = data.Create_User_Profile.email_address_unique;
     await manageUsersPage.searchAndClickUserProfile(userFirstName, userLastName, userEmail, userStatus);
   }
 );
@@ -68,18 +81,5 @@ Then(
         expect(labelVal).toBe(dataset[key]);
       }
     }
-  }
-);
-
-When(
-  'I search and click on view edit link for {string} user with {string} status from the manage user page',
-  async ({ manageUsersPage, createUserProfilePage }, datasetName: string, userStatus: string) => {
-    const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
-    const userFirstName = dataset.first_name_text;
-    const userLastName = dataset.last_name_text;
-    const filePath = path.resolve(pathToTestDataJson);
-    const data = await fse.readJson(filePath);
-    const userEmail = data.Create_User_Profile.email_address_unique;
-    await manageUsersPage.searchAndClickUserProfile(userFirstName, userLastName, userEmail, userStatus);
   }
 );

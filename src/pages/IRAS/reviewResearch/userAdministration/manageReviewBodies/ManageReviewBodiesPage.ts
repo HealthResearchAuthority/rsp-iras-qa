@@ -17,10 +17,6 @@ export default class ManageReviewBodiesPage {
   readonly actionsLink: Locator;
   readonly statusCell: Locator;
   readonly reviewBodyListRows: Locator;
-  readonly reviewBodyListCell: Locator;
-  readonly organisation_name_from_list_label: string;
-  readonly country_name_from_list_label: string;
-  readonly status_from_list_label: string;
   readonly next_button: Locator;
   readonly hidden_next_button: Locator;
   readonly orgListRows: Locator;
@@ -50,10 +46,6 @@ export default class ManageReviewBodiesPage {
       .getByText(this.manageReviewBodiesPageData.Manage_Review_Body_Page.actions_link, { exact: true });
     this.statusCell = this.page.getByRole('cell').locator('strong');
     this.reviewBodyListRows = this.page.getByRole('table').getByRole('row');
-    this.reviewBodyListCell = this.page.locator('.govuk-table__cell');
-    this.organisation_name_from_list_label = 'td:nth-child(1)';
-    this.country_name_from_list_label = 'td:nth-child(2)';
-    this.status_from_list_label = 'td:nth-child(3)';
     this.next_button = this.page.locator('.govuk-pagination__next a');
     this.hidden_next_button = this.page.locator('[class="govuk-pagination__next"][style="visibility: hidden"]');
     this.orgListRows = this.page.getByRole('table').getByRole('row');

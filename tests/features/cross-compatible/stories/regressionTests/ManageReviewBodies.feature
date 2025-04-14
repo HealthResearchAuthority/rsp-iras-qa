@@ -7,7 +7,8 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         Then I can see the 'Manage_Review_Bodies_Page'
 
     @RegressionTestVerifyCreateAndDisableReviewBodyAuditHistory
-    Scenario Outline: Verify the user can view the audit history after creating a review body
+    Scenario Outline: Verify the user can view the audit history after disabling a newly created review body
+        # create review body from manage review body page
         And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
         Then I can see the 'Create_Review_Body_Page'
         And I capture the page screenshot
@@ -19,22 +20,28 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         When I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
         Then I can see the create Review body confirmation page for '<Add_Review_Body>'
         And I capture the page screenshot
+        # navigate to add review body page from confirmation page by clicking 'add another review body' link
         When I click the 'Add_Another_Review_Body' link on the 'Create_Review_Body_Confirmation_Page'
         And I capture the page screenshot
         Then I can see the 'Create_Review_Body_Page'
+        # back link navigation from add a review body page
         And I click the 'Back' link on the 'Create_Review_Body_Page'
         And I capture the page screenshot
         Then I can see the 'Manage_Review_Bodies_Page'
+        # alphabetical sorting in manage review body page
         Then I can see the list is sorted by default in the alphabetical order of 'Organisation Name'
         And I capture the page screenshot
+        # find the newly created review body in the list with 'active' status
         Then I can see the review body for '<Add_Review_Body>' is present in the list
         And I capture the page screenshot
-        And I can see the status of the review body is '<Status>'
+        And I can see the status of the review body is 'ACTIVE'
         Then I click the view edit link for the newly created review body
         And I capture the page screenshot
         And I can see the review body profile page
+        # validate review body profile page with the created review body
         And I now see the review body profile page with the created '<Add_Review_Body>'
         And I capture the page screenshot
+        # disable review body
         And I click the 'Disable_Review_Body' button on the 'Review_Body_Profile_Page'
         And I capture the page screenshot
         And I click the 'Confirm' button on the 'Confirmation_Page'
@@ -44,6 +51,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         And I capture the page screenshot
         Then I click the view edit link for the 'disabled' review body
         And I capture the page screenshot
+        # audit history
         And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'
         Then I can see the audit history page of the review body
         And I capture the page screenshot
@@ -59,6 +67,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         And I select a 'QA Automation' Review Body to View and Edit which is 'disabled'
         And I can see the review body profile page
         And I capture the page screenshot
+        # enable review body
         And I click the 'Enable_Review_Body' button on the 'Review_Body_Profile_Page'
         And I capture the page screenshot
         And I click the 'Confirm' button on the 'Confirmation_Page'
@@ -68,6 +77,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         Then I click the view edit link for the 'enabled' review body
         And I can see the review body profile page
         And I capture the page screenshot
+        # edit review body
         When I click the change link against '<Field_Name_One>' on the review body profile page
         And I can see the edit review body page
         And I capture the page screenshot
@@ -75,15 +85,18 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         And I capture the page screenshot
         And I click the 'Save' button on the 'Edit_Review_Body_Page'
         And I capture the current time
+        # validate edited data in review body profile page
         Then I now see the review body profile page with the updated '<Edit_Review_Body>' for organisation name field
         Then I now see the review body profile page with the updated '<Edit_Review_Body>' for country field
         Then I now see the review body profile page with the updated '<Edit_Review_Body>' for email address field
         Then I now see the review body profile page with the updated '<Edit_Review_Body>' for description field
         And I capture the page screenshot
+        # audit history
         And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'
         Then I can see the audit history page of the review body
         And I capture the page screenshot
         And I can see the '<Validation_Text>' ui labels on the audit history page of the review body
+        # audit history sorting
         And I can see the default sort should be the most recent entry first based on date and time
         And I can see the audit history for all the fields edited event with '<Audit_History>'
 

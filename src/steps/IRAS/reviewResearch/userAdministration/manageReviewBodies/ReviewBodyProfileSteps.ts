@@ -37,6 +37,10 @@ Then(
       await expect(reviewBodyProfilePage.disable_sub_heading).toBeVisible();
       await expect(reviewBodyProfilePage.disable_guidance_text).toBeVisible();
       await expect(reviewBodyProfilePage.disable_button).toBeVisible();
+    } else if (status.toLowerCase() == 'disabled') {
+      await expect(reviewBodyProfilePage.enable_sub_heading).toBeVisible();
+      await expect(reviewBodyProfilePage.enable_guidance_text).toBeVisible();
+      await expect(reviewBodyProfilePage.enable_button).toBeVisible();
     }
   }
 );

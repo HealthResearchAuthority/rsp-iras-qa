@@ -16,7 +16,8 @@
     "disable_guidance_text": "Disabling a review body will lock their account and can be reversed",
     "enable_sub_heading": "Enable this review body",
     "enable_guidance_text": "Enabling a review body will unlock their account",
-    "disable_button": "Disable review body"
+    "disable_button": "Disable review body",
+    "enable_button": "Enable review body"
   },
   "Disable_Label_Texts": {
     "disable_sub_heading": "Disable this review body",
