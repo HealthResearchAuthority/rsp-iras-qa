@@ -1,4 +1,4 @@
-@RegressionManageReviewBodies @adminUser @RegressionTest
+@RegressionManageReviewBodies @adminUser @Regression
 Feature: User Administration: Manage Review Bodies - View audit history for review body
 
     Background:
@@ -33,7 +33,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         Then I click the view edit link for the newly created review body
         And I capture the page screenshot
         And I can see the review body profile page
-        # profile validation code-vijay
+        And I now see the review body profile page with the created '<Add_Review_Body>'
         And I capture the page screenshot
         And I click the 'Disable_Review_Body' button on the 'Review_Body_Profile_Page'
         And I capture the page screenshot
@@ -54,7 +54,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
             | Add_Review_Body          | Validation_Text | Audit_History       |
             | Valid_Data_In_All_Fields | header_Texts    | Disable_Review_Body |
 
-    @RegressionTestVerifyEnableAndEditReviewBodyAuditHistory @failAuditDescription
+    @RegressionTestVerifyEnableAndEditReviewBodyAuditHistory
     Scenario Outline: Verify the user can view the audit history after enabling a review body
         And I select a 'QA Automation' Review Body to View and Edit which is 'disabled'
         And I can see the review body profile page
@@ -75,7 +75,10 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         And I capture the page screenshot
         And I click the 'Save' button on the 'Edit_Review_Body_Page'
         And I capture the current time
-        And I now see the review body profile page with the updated '<Edit_Review_Body>' for fields '<Field_Name_One>','<Field_Name_Two>','<Field_Name_Three>','<Field_Name_Four>'
+        Then I now see the review body profile page with the updated '<Edit_Review_Body>' for organisation name field
+        Then I now see the review body profile page with the updated '<Edit_Review_Body>' for country field
+        Then I now see the review body profile page with the updated '<Edit_Review_Body>' for email address field
+        Then I now see the review body profile page with the updated '<Edit_Review_Body>' for description field
         And I capture the page screenshot
         And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'
         Then I can see the audit history page of the review body
