@@ -16,9 +16,6 @@ export default class ManageReviewBodiesPage {
   readonly status_from_list: Locator;
   readonly actionsLink: Locator;
   readonly statusCell: Locator;
-  readonly reviewBodyListRows: Locator;
-  readonly next_button: Locator;
-  readonly hidden_next_button: Locator;
   readonly orgListRows: Locator;
 
   //Initialize Page Objects
@@ -45,9 +42,6 @@ export default class ManageReviewBodiesPage {
       .getByRole('link')
       .getByText(this.manageReviewBodiesPageData.Manage_Review_Body_Page.actions_link, { exact: true });
     this.statusCell = this.page.getByRole('cell').locator('strong');
-    this.reviewBodyListRows = this.page.getByRole('table').getByRole('row');
-    this.next_button = this.page.locator('.govuk-pagination__next a');
-    this.hidden_next_button = this.page.locator('[class="govuk-pagination__next"][style="visibility: hidden"]');
     this.orgListRows = this.page.getByRole('table').getByRole('row');
   }
 

@@ -1,18 +1,13 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as auditHistoryReviewBodyPageTestData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageReviewBodies/audit_history_review_body_page_data.json';
 import { confirmStringNotNull, removeUnwantedWhitespace } from '../../../../../utils/UtilFunctions';
-const pathToTestDataJson =
-  './src/resources/test_data/iras/reviewResearch/userAdministration/manageReviewBodies/create_review_body_page_data.json';
 
 //Declare Page Objects
 export default class AuditHistoryReviewBodyPage {
   readonly page: Page;
   readonly auditHistoryReviewBodyPageTestData: typeof auditHistoryReviewBodyPageTestData;
-  readonly pathToTestDataJson: typeof pathToTestDataJson;
   private _updated_time: string;
-  readonly back_button: Locator;
   readonly page_heading: Locator;
-  readonly subHeading: Locator;
   readonly auditTableRows: Locator;
   readonly date_label: Locator;
   readonly event_description_label: Locator;
@@ -24,12 +19,9 @@ export default class AuditHistoryReviewBodyPage {
   constructor(page: Page) {
     this.page = page;
     this.auditHistoryReviewBodyPageTestData = auditHistoryReviewBodyPageTestData;
-    this.pathToTestDataJson = pathToTestDataJson;
 
     //Locators
-    this.back_button = this.page.getByText('Back');
     this.page_heading = this.page.getByRole('heading');
-    this.subHeading = this.page_heading.locator('..').locator('p');
     this.auditTableRows = this.page.getByRole('table').getByRole('row');
     this.date_label = this.auditTableRows.getByRole('columnheader').getByText('Date', { exact: true });
     this.event_description_label = this.auditTableRows
