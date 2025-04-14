@@ -52,6 +52,22 @@ Then(
       auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page[datasetValName];
     const auditLog = await auditHistoryReviewBodyPage.getAuditLog();
     const timeExpected = await auditHistoryReviewBodyPage.getUpdatedTime();
+    const timeIndex = parseInt(
+      auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.time_index,
+      10
+    );
+    const descrIndex = parseInt(
+      auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.description_index,
+      10
+    );
+    const emailIndex = parseInt(
+      auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.admin_email_index,
+      10
+    );
+    const rowIndex = parseInt(
+      auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.index,
+      10
+    );
     if (eventName === 'created') {
       if (datasetName.startsWith('Valid_')) {
         organisationName = await createReviewBodyPage.getUniqueOrgName();
@@ -66,9 +82,9 @@ Then(
         organisationName
     );
     const eventDescriptionExpectedValue = organisationName + datasetAudit.event_description_text;
-    expect(auditLog[0][0]).toBe(timeExpected);
-    expect(auditLog[1][0]).toBe(eventDescriptionExpectedValue);
-    expect(auditLog[2][0]).toBe(datasetAudit.system_admin_email_text);
+    expect(auditLog[timeIndex][rowIndex]).toBe(timeExpected);
+    expect(auditLog[descrIndex][rowIndex]).toBe(eventDescriptionExpectedValue);
+    expect(auditLog[emailIndex][rowIndex]).toBe(datasetAudit.system_admin_email_text);
   }
 );
 
