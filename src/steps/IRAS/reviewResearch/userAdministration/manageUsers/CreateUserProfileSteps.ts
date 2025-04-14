@@ -43,12 +43,42 @@ When(
 );
 
 Then(
-  'I clear the previously entered values on the add a new user profile page for {string}',
+  'I clear the previously entered values on the add a new user profile page for {string} for role is not selected as operations',
   async ({ createUserProfilePage, commonItemsPage }, datasetName: string) => {
     const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
         await commonItemsPage.clearUIComponent(dataset, key, createUserProfilePage);
+      }
+    }
+  }
+);
+
+Then(
+  'I uncheck the previously selected checkboxes on the add a new user profile page for {string} for the role is selected as operations',
+  async ({ createUserProfilePage, commonItemsPage }, datasetName: string) => {
+    const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
+    for (const key in dataset) {
+      if (key === 'country_checkbox' || key === 'access_required_checkbox') {
+        if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+          await commonItemsPage.clearUIComponent(dataset, key, createUserProfilePage);
+        }
+      }
+    }
+  }
+);
+
+Then(
+  'I clear the previously entered values on the add a new user profile page for {string} for {string}',
+  async ({ createUserProfilePage, commonItemsPage }, datasetName: string, datasetValName: string) => {
+    const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
+    if (datasetValName === 'Role_Operations') {
+      for (const key in dataset) {
+        if (key !== 'country_checkbox' && key !== 'access_required_checkbox') {
+          if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+            await commonItemsPage.clearUIComponent(dataset, key, createUserProfilePage);
+          }
+        }
       }
     }
   }

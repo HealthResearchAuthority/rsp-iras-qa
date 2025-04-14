@@ -122,8 +122,8 @@ Feature: HRAPROG-394- User Administration: Manage Users
         Then I can see the add a new user profile page
         Then I can see previously filled values in the new user profile page for '<Add_User_Profile>' displayed on the add a new user profile page
         And I capture the page screenshot
-        # And I clear the previously entered values on the add a new user profile page for '<Add_User_Profile>' for '<Role_Dropdown>'
-        And I clear the previously entered values on the add a new user profile page for '<Add_User_Profile>'
+        And I uncheck the previously selected checkboxes on the add a new user profile page for '<Add_User_Profile>' for the role is selected as operations
+        And I clear the previously entered values on the add a new user profile page for '<Add_User_Profile>' for '<Role_Dropdown>'
         And I capture the page screenshot
         When I fill the new user profile page using '<Add_Another_User_Profile>'
         And I capture the page screenshot
@@ -160,8 +160,7 @@ Feature: HRAPROG-394- User Administration: Manage Users
         Then I can see the add a new user profile page
         Then I can see previously filled values in the new user profile page for '<Add_User_Profile>' displayed on the add a new user profile page
         And I capture the page screenshot
-        # And I clear the previously entered values on the add a new user profile page for '<Add_User_Profile>' for '<Role_Dropdown>'
-        And I clear the previously entered values on the add a new user profile page for '<Add_User_Profile>'
+        And I clear the previously entered values on the add a new user profile page for '<Add_User_Profile>' for role is not selected as operations
         And I capture the page screenshot
         When I fill the new user profile page using '<Add_Another_User_Profile>'
         And I capture the page screenshot
@@ -171,15 +170,15 @@ Feature: HRAPROG-394- User Administration: Manage Users
         And I capture the page screenshot
 
         Examples:
-            | Add_User_Profile                                 | Field_Name    | Add_Another_User_Profile                                 | Role_Dropdown       |
-            | Valid_Data_In_All_Fields_Role_Reviewer           | Title         | Valid_Data_In_All_Fields_Role_Reviewer_Another           | Role_Not_Operations |
-            | Valid_Data_In_All_Fields_Role_Reviewer           | First_Name    | Valid_Data_In_All_Fields_Role_Reviewer_Another           | Role_Not_Operations |
-            | Valid_Data_In_All_Fields_Role_Reviewer           | Last_Name     | Valid_Data_In_All_Fields_Role_Reviewer_Another           | Role_Not_Operations |
-            | Valid_Data_In_All_Fields_Role_Reviewer           | Email_Address | Valid_Data_In_All_Fields_Role_Reviewer_Another           | Role_Not_Operations |
-            | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer | Telephone     | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer_Another | Role_Not_Operations |
-            | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer | Organisation  | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer_Another | Role_Not_Operations |
-            | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer | Job_Title     | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer_Another | Role_Not_Operations |
-            | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer | Role          | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer_Another | Role_Not_Operations |
+            | Add_User_Profile                                 | Field_Name    | Add_Another_User_Profile                                 |
+            | Valid_Data_In_All_Fields_Role_Reviewer           | Title         | Valid_Data_In_All_Fields_Role_Reviewer_Another           |
+            | Valid_Data_In_All_Fields_Role_Reviewer           | First_Name    | Valid_Data_In_All_Fields_Role_Reviewer_Another           |
+            | Valid_Data_In_All_Fields_Role_Reviewer           | Last_Name     | Valid_Data_In_All_Fields_Role_Reviewer_Another           |
+            | Valid_Data_In_All_Fields_Role_Reviewer           | Email_Address | Valid_Data_In_All_Fields_Role_Reviewer_Another           |
+            | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer | Telephone     | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer_Another |
+            | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer | Organisation  | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer_Another |
+            | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer | Job_Title     | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer_Another |
+            | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer | Role          | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer_Another |
 
     @rsp-2827 @verifyErrorMessagesInvalidData
     # few lines commented>> pending clarification >> email validation
@@ -261,6 +260,3 @@ Feature: HRAPROG-394- User Administration: Manage Users
             # | Valid_Email_Data_Multiple_Sub_Domains |
             # | Valid_Email_Data_Other_Language       |
             | Valid_Email_Data_Domain             |
-
-# check when the role is selected as operations>> related fields are displayed
-# in Javascript enabled and disabled scenarios

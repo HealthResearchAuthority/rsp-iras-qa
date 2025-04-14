@@ -24,7 +24,7 @@
   },
   "Create_User_Profile": {
     "email_address_prefix": "QAAutomation",
-    "email_address_unique": "QAAutomation20250411192924398hscrd@health.org",
+    "email_address_unique": "QAAutomation20250414092418796hscrd@health.org",
     "Role_Operations": {
       "role_checkbox": [
         "operations"
@@ -49,7 +49,8 @@
       "organisation_text": "QA Automation HRA Role_Operations",
       "job_title_text": "Sr.Reviewer Role_Operations",
       "role_checkbox": [
-        "operations"
+        "operations",
+        "reviewer"
       ],
       "country_checkbox": [
         "England",
