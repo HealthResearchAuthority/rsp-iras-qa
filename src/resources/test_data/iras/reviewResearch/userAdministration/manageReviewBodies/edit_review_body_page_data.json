@@ -363,7 +363,7 @@
     },
 
     "Valid_Data_Country_Another": {
-      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
+      "country_checkbox": ["Northern Ireland", "Scotland", "Wales"]
     },
 
     "Valid_Data_Description_Another": {

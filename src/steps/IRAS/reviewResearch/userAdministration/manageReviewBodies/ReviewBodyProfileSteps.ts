@@ -90,7 +90,7 @@ When(
   }
 );
 
-When('I now see the review body profile page heading', async ({ reviewBodyProfilePage }) => {
+When('I can see the review body profile page heading', async ({ reviewBodyProfilePage }) => {
   await reviewBodyProfilePage.assertOnReviewbodyProfilePage();
   await expect(reviewBodyProfilePage.page_heading).toHaveText(
     reviewBodyProfilePage.reviewBodyProfilePageData.Review_Body_Profile_Page.heading_prefix_label +

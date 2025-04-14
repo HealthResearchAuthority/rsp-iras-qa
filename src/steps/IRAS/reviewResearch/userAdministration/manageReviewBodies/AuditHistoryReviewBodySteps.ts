@@ -94,8 +94,8 @@ Then(
           valueCurrent
       );
     } else if (fieldName == 'Country') {
-      valuePrevious = (await reviewBodyProfilePage.getCountries()).join(', ');
-      valueCurrent = (await reviewBodyProfilePage.getNewCountries()).join(', ');
+      valuePrevious = (await reviewBodyProfilePage.getCountries()).join(',');
+      valueCurrent = (await reviewBodyProfilePage.getNewCountries()).join(',');
       const organisationName = await reviewBodyProfilePage.getOrgName();
       await expect(auditHistoryReviewBodyPage.page_heading).toHaveText(
         auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.page_heading +
@@ -118,13 +118,15 @@ Then(
           organisationName
       );
     }
-    const eventDescriptionPart1 = dataset.event_description_text;
-    const eventDescriptionPart2 = valuePrevious;
-    const eventDescriptionPart3 = ' to ' + valueCurrent;
-    const eventDescriptionExpectedValue = eventDescriptionPart1 + eventDescriptionPart2 + eventDescriptionPart3;
-    expect(auditLog[0][0]).toBe(timeExpected);
-    expect(auditLog[1][0]).toBe(eventDescriptionExpectedValue);
-    expect(auditLog[2][0]).toBe(dataset.system_admin_email_text);
+    if (valuePrevious !== valueCurrent) {
+      const eventDescriptionPart1 = dataset.event_description_text;
+      const eventDescriptionPart2 = valuePrevious;
+      const eventDescriptionPart3 = ' to ' + valueCurrent;
+      const eventDescriptionExpectedValue = eventDescriptionPart1 + eventDescriptionPart2 + eventDescriptionPart3;
+      expect(auditLog[0][0]).toBe(timeExpected);
+      expect(auditLog[1][0]).toBe(eventDescriptionExpectedValue);
+      expect(auditLog[2][0]).toBe(dataset.system_admin_email_text);
+    }
   }
 );
 
@@ -167,23 +169,36 @@ Then(
       auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.page_heading +
         organisationNameCurrent
     );
-    expect(auditLog[0][0]).toBe(timeExpected);
-    expect(auditLog[1][0]).toBe(countryEventDescriptionExpectedValue);
-    expect(auditLog[2][0]).toBe(dataset.system_admin_email_text);
-
-    expect(auditLog[0][1]).toBe(timeExpected);
-    //fail in this case when the previous description was empty
-    // Description was changed from (null) to qaauto_Responsible for confirmation of research governance compliance Test Update all fields
-    expect(auditLog[1][1]).toBe(descriptionEventDescriptionExpectedValue);
-    expect(auditLog[2][1]).toBe(dataset.system_admin_email_text);
-
-    expect(auditLog[0][2]).toBe(timeExpected);
-    expect(auditLog[1][2]).toBe(emailEventDescriptionExpectedValue);
-    expect(auditLog[2][2]).toBe(dataset.system_admin_email_text);
-
-    expect(auditLog[0][3]).toBe(timeExpected);
-    expect(auditLog[1][3]).toBe(orgNameEventDescriptionExpectedValue);
-    expect(auditLog[2][3]).toBe(dataset.system_admin_email_text);
+    if (countryNamesPrevious !== countryNamesCurrent) {
+      expect(auditLog[0][0]).toBe(timeExpected);
+      expect(auditLog[1][0]).toBe(countryEventDescriptionExpectedValue);
+      expect(auditLog[2][0]).toBe(dataset.system_admin_email_text);
+      expect(auditLog[0][1]).toBe(timeExpected);
+      //fail in this case when the previous description was empty
+      // Description was changed from (null) to qaauto_Responsible for confirmation of research governance compliance Test Update all fields
+      if (descriptionPrevious !== '') {
+        expect(auditLog[1][1]).toBe(descriptionEventDescriptionExpectedValue);
+      }
+      expect(auditLog[2][1]).toBe(dataset.system_admin_email_text);
+      expect(auditLog[0][2]).toBe(timeExpected);
+      expect(auditLog[1][2]).toBe(emailEventDescriptionExpectedValue);
+      expect(auditLog[2][2]).toBe(dataset.system_admin_email_text);
+      expect(auditLog[0][3]).toBe(timeExpected);
+      expect(auditLog[1][3]).toBe(orgNameEventDescriptionExpectedValue);
+      expect(auditLog[2][3]).toBe(dataset.system_admin_email_text);
+    } else {
+      expect(auditLog[0][0]).toBe(timeExpected);
+      if (descriptionPrevious !== '') {
+        expect(auditLog[1][0]).toBe(descriptionEventDescriptionExpectedValue);
+      }
+      expect(auditLog[2][0]).toBe(dataset.system_admin_email_text);
+      expect(auditLog[0][1]).toBe(timeExpected);
+      expect(auditLog[1][1]).toBe(emailEventDescriptionExpectedValue);
+      expect(auditLog[2][1]).toBe(dataset.system_admin_email_text);
+      expect(auditLog[0][2]).toBe(timeExpected);
+      expect(auditLog[1][2]).toBe(orgNameEventDescriptionExpectedValue);
+      expect(auditLog[2][2]).toBe(dataset.system_admin_email_text);
+    }
   }
 );
 

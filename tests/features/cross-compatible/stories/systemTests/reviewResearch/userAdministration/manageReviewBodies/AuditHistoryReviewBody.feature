@@ -121,7 +121,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         And I click the 'Save' button on the 'Edit_Review_Body_Page'
         And I capture the current time
         Then I now see the review body profile page with the updated '<Edit_Review_Body>' for country field
-        And I now see the review body profile page heading
+        And I can see the review body profile page heading
         And I capture the page screenshot
         And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'
         Then I can see the audit history page of the review body
@@ -146,7 +146,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         And I click the 'Save' button on the 'Edit_Review_Body_Page'
         And I capture the current time
         Then I now see the review body profile page with the updated '<Edit_Review_Body>' for email address field
-        And I now see the review body profile page heading
+        And I can see the review body profile page heading
         And I capture the page screenshot
         And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'
         Then I can see the audit history page of the review body
@@ -215,22 +215,35 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
     Scenario: Verify the default sort of the audit history should be the most recent entry first based on date and time
         And I select a 'QA Automation' Review Body to View and Edit which is 'active'
         And I can see the review body profile page
+        And I capture the page screenshot
         And I click the 'Disable_Review_Body' button on the 'Review_Body_Profile_Page'
+        And I capture the page screenshot
         And I click the 'Confirm' button on the 'Confirmation_Page'
+        And I capture the page screenshot
         And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
         Then I can see the 'Manage_Review_Bodies_Page'
+        And I capture the page screenshot
         Then I click the view edit link for the 'disabled' review body
         And I can see the review body profile page
+        And I capture the page screenshot
         And I click the 'Enable_Review_Body' button on the 'Review_Body_Profile_Page'
+        And I capture the page screenshot
         And I click the 'Confirm' button on the 'Confirmation_Page'
+        And I capture the page screenshot
         And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
         Then I can see the 'Manage_Review_Bodies_Page'
+        And I capture the page screenshot
         Then I click the view edit link for the 'enabled' review body
         And I can see the review body profile page
+        And I capture the page screenshot
         And I click the change link against 'Organisation_Name' on the review body profile page
         And I can see the edit review body page
-        Then I now see the review body profile page with the updated 'Valid_Data_Organisation_Name_Another' for organisation name field
+        And I capture the page screenshot
+        When I fill the edit review body page using 'Valid_Data_Organisation_Name_Another' for field 'Organisation_Name'
+        And I capture the page screenshot
         And I click the 'Save' button on the 'Edit_Review_Body_Page'
+        And I capture the current time
+        And I capture the page screenshot
         Then I now see the review body profile page with the updated 'Valid_Data_Organisation_Name_Another' for organisation name field
         And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'
         Then I can see the audit history page of the review body
@@ -255,3 +268,5 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
 # Out of scope now >>need to cover later when the feature is developed[User added to review body/User removed from review body]
 # User added to review body- [User email address] was added to [Organisation name]
 # User removed from review body-[User email address] was removed from [Organisation name]
+# fail in this case when the previous description was empty
+# Description was changed from (null) to qaauto_Responsible for confirmation of research governance compliance Test Update all fields
