@@ -94,8 +94,8 @@ Then(
           valueCurrent
       );
     } else if (fieldName == 'Country') {
-      valuePrevious = (await reviewBodyProfilePage.getCountries()).join(',');
-      valueCurrent = (await reviewBodyProfilePage.getNewCountries()).join(',');
+      valuePrevious = (await reviewBodyProfilePage.getCountries()).join(', ');
+      valueCurrent = (await reviewBodyProfilePage.getNewCountries()).join(', ');
       const organisationName = await reviewBodyProfilePage.getOrgName();
       await expect(auditHistoryReviewBodyPage.page_heading).toHaveText(
         auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.page_heading +
@@ -151,8 +151,8 @@ Then(
     const emailEventDescriptionPart3 = ' to ' + emailCurrent;
     const emailEventDescriptionExpectedValue =
       emailEventDescriptionPart1 + emailEventDescriptionPart2 + emailEventDescriptionPart3;
-    const countryNamesPrevious: string = (await reviewBodyProfilePage.getCountries()).join(',');
-    const countryNamesCurrent = (await reviewBodyProfilePage.getNewCountries()).join(',');
+    const countryNamesPrevious: string = (await reviewBodyProfilePage.getCountries()).join(', ');
+    const countryNamesCurrent = (await reviewBodyProfilePage.getNewCountries()).join(', ');
     const CountryEventDescriptionPart1 = dataset.country_event_description_text;
     const countryEventDescriptionPart2 = countryNamesPrevious;
     const countryEventDescriptionPart3 = ' to ' + countryNamesCurrent;
@@ -170,34 +170,45 @@ Then(
         organisationNameCurrent
     );
     if (countryNamesPrevious !== countryNamesCurrent) {
-      expect(auditLog[0][0]).toBe(timeExpected);
-      expect(auditLog[1][0]).toBe(countryEventDescriptionExpectedValue);
-      expect(auditLog[2][0]).toBe(dataset.system_admin_email_text);
-      expect(auditLog[0][1]).toBe(timeExpected);
-      //fail in this case when the previous description was empty
-      // Description was changed from (null) to qaauto_Responsible for confirmation of research governance compliance Test Update all fields
-      if (descriptionPrevious !== '') {
-        expect(auditLog[1][1]).toBe(descriptionEventDescriptionExpectedValue);
-      }
-      expect(auditLog[2][1]).toBe(dataset.system_admin_email_text);
-      expect(auditLog[0][2]).toBe(timeExpected);
-      expect(auditLog[1][2]).toBe(emailEventDescriptionExpectedValue);
-      expect(auditLog[2][2]).toBe(dataset.system_admin_email_text);
       expect(auditLog[0][3]).toBe(timeExpected);
-      expect(auditLog[1][3]).toBe(orgNameEventDescriptionExpectedValue);
+      expect(auditLog[1][3]).toBe(countryEventDescriptionExpectedValue);
       expect(auditLog[2][3]).toBe(dataset.system_admin_email_text);
-    } else {
-      expect(auditLog[0][0]).toBe(timeExpected);
+      expect(auditLog[0][2]).toBe(timeExpected);
+
       if (descriptionPrevious !== '') {
-        expect(auditLog[1][0]).toBe(descriptionEventDescriptionExpectedValue);
+        expect(auditLog[1][2]).toBe(descriptionEventDescriptionExpectedValue);
+      } else {
+        // defect is there when the previous description was empty
+        // Description was changed from (null) to qaauto_Responsible for confirmation of research governance compliance Test Update all fields
+        const descriptionEventDescriptionExpectedValue =
+          descriptionEventDescriptionPart1 + '(null)' + descriptionEventDescriptionPart3;
+        expect(auditLog[1][2]).toBe(descriptionEventDescriptionExpectedValue);
       }
-      expect(auditLog[2][0]).toBe(dataset.system_admin_email_text);
+      expect(auditLog[2][2]).toBe(dataset.system_admin_email_text);
       expect(auditLog[0][1]).toBe(timeExpected);
       expect(auditLog[1][1]).toBe(emailEventDescriptionExpectedValue);
       expect(auditLog[2][1]).toBe(dataset.system_admin_email_text);
+      expect(auditLog[0][0]).toBe(timeExpected);
+      expect(auditLog[1][0]).toBe(orgNameEventDescriptionExpectedValue);
+      expect(auditLog[2][0]).toBe(dataset.system_admin_email_text);
+    } else {
       expect(auditLog[0][2]).toBe(timeExpected);
-      expect(auditLog[1][2]).toBe(orgNameEventDescriptionExpectedValue);
+      if (descriptionPrevious !== '') {
+        expect(auditLog[1][2]).toBe(descriptionEventDescriptionExpectedValue);
+      } else {
+        // defect is there when the previous description was empty
+        // Description was changed from (null) to qaauto_Responsible for confirmation of research governance compliance Test Update all fields
+        const descriptionEventDescriptionExpectedValue =
+          descriptionEventDescriptionPart1 + '(null)' + descriptionEventDescriptionPart3;
+        expect(auditLog[1][2]).toBe(descriptionEventDescriptionExpectedValue);
+      }
       expect(auditLog[2][2]).toBe(dataset.system_admin_email_text);
+      expect(auditLog[0][1]).toBe(timeExpected);
+      expect(auditLog[1][1]).toBe(emailEventDescriptionExpectedValue);
+      expect(auditLog[2][1]).toBe(dataset.system_admin_email_text);
+      expect(auditLog[0][0]).toBe(timeExpected);
+      expect(auditLog[1][0]).toBe(orgNameEventDescriptionExpectedValue);
+      expect(auditLog[2][0]).toBe(dataset.system_admin_email_text);
     }
   }
 );

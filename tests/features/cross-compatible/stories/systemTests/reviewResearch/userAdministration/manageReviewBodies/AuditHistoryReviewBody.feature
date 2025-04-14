@@ -69,6 +69,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         And I capture the page screenshot
         And I click the 'Confirm' button on the 'Confirmation_Page'
         And I capture the current time
+        And I capture the page screenshot
         And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
         Then I can see the 'Manage_Review_Bodies_Page'
         Then I click the view edit link for the 'enabled' review body
