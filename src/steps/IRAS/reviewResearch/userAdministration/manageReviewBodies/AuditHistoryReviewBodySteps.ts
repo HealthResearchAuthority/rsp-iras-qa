@@ -77,6 +77,14 @@ Then('I capture the current time', async ({ auditHistoryReviewBodyPage }) => {
   await auditHistoryReviewBodyPage.setUpdatedTime(currentTime);
 });
 
+Then('I can see the audit history page heading', async ({ auditHistoryReviewBodyPage, reviewBodyProfilePage }) => {
+  const organisationName = await reviewBodyProfilePage.getOrgName();
+  await expect(auditHistoryReviewBodyPage.page_heading).toHaveText(
+    auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.page_heading +
+      organisationName
+  );
+});
+
 Then(
   'I can see the audit history for {string} edited event with {string}',
   async ({ auditHistoryReviewBodyPage, reviewBodyProfilePage }, fieldName: string, datasetName: string) => {
@@ -96,27 +104,12 @@ Then(
     } else if (fieldName == 'Country') {
       valuePrevious = (await reviewBodyProfilePage.getCountries()).join(', ');
       valueCurrent = (await reviewBodyProfilePage.getNewCountries()).join(', ');
-      const organisationName = await reviewBodyProfilePage.getOrgName();
-      await expect(auditHistoryReviewBodyPage.page_heading).toHaveText(
-        auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.page_heading +
-          organisationName
-      );
     } else if (fieldName == 'Email_Address') {
       valuePrevious = await reviewBodyProfilePage.getEmail();
       valueCurrent = await reviewBodyProfilePage.getNewEmail();
-      const organisationName = await reviewBodyProfilePage.getOrgName();
-      await expect(auditHistoryReviewBodyPage.page_heading).toHaveText(
-        auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.page_heading +
-          organisationName
-      );
     } else if (fieldName == 'Description') {
       valuePrevious = await reviewBodyProfilePage.getDescription();
       valueCurrent = await reviewBodyProfilePage.getNewDescription();
-      const organisationName = await reviewBodyProfilePage.getOrgName();
-      await expect(auditHistoryReviewBodyPage.page_heading).toHaveText(
-        auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.page_heading +
-          organisationName
-      );
     }
     if (valuePrevious !== valueCurrent) {
       const eventDescriptionPart1 = dataset.event_description_text;

@@ -128,6 +128,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         Then I can see the audit history page of the review body
         And I capture the page screenshot
         And I can see the '<Validation_Text>' ui labels on the audit history page of the review body
+        And I can see the audit history page heading
         And I can see the audit history for 'Country' edited event with '<Audit_History>'
 
         Examples:
@@ -153,6 +154,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         Then I can see the audit history page of the review body
         And I capture the page screenshot
         And I can see the '<Validation_Text>' ui labels on the audit history page of the review body
+        And I can see the audit history page heading
         And I can see the audit history for 'Email_Address' edited event with '<Audit_History>'
 
         Examples:
@@ -178,6 +180,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         Then I can see the audit history page of the review body
         And I capture the page screenshot
         And I can see the '<Validation_Text>' ui labels on the audit history page of the review body
+        And I can see the audit history page heading
         And I can see the audit history for 'Description' edited event with '<Audit_History>'
 
         Examples:
