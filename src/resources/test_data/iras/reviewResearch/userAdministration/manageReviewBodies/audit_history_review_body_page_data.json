@@ -2,6 +2,10 @@
   "Review_Body_Audit_History_Page": {
     "page_heading": "Audit history: ",
     "next_button": "Next   page",
+    "time_index": "0",
+    "description_index": "1",
+    "admin_email_index": "2",
+    "index": "0",
     "Create_Review_Body": {
       "event_description_text": " was created",
       "system_admin_email_text": "futureiras.automation@hra.nhs.uk"
@@ -35,7 +39,11 @@
       "country_event_description_text": "Countries was changed from ",
       "email_address_event_description_text": "EmailAddress was changed from ",
       "description_event_description_text": "Description was changed from ",
-      "system_admin_email_text": "futureiras.automation@hra.nhs.uk"
+      "system_admin_email_text": "futureiras.automation@hra.nhs.uk",
+      "organisation_index": "0",
+      "email_index": "1",
+      "description_index": "2",
+      "country_index": "3"
     }
   },
   "header_Texts": {
