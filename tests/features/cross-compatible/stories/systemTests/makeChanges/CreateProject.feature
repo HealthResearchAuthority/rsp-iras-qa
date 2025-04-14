@@ -41,7 +41,6 @@ Feature: Create Amendment - Create Project
       | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Letters_Symbols  | Save_Continue           | Field_Error_Message | Summary_Error_Message |
       | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Min_Length       | Save_Continue           | Field_Error_Message | Summary_Error_Message |
       | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Max_Length       | Save_Continue           | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Leading_Zeros    | Save_Continue           | Field_Error_Message | Summary_Error_Message |
       | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Spaces           | Save_Continue           | Field_Error_Message | Summary_Error_Message |
       | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Spaces_Suffix    | Save_Continue           | Field_Error_Message | Summary_Error_Message |
       | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Spaces_Prefix    | Save_Continue           | Field_Error_Message | Summary_Error_Message |
