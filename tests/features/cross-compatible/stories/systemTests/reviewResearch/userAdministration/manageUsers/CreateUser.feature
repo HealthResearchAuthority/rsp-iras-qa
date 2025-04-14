@@ -109,7 +109,7 @@ Feature: HRAPROG-394- User Administration: Manage Users
             | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer   | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer_Another   |
             | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Valid_Data_In_All_Mandatory_Fields_Role_Operations_Another |
 
-    @rsp-2827 @verifyCheckCreateUserProfileChangeLinkRoleOperations
+    @rsp-2827 @verifyCheckCreateUserProfileChangeLinkRoleOperations @RoleCheckbox
     Scenario Outline: Verify the user can navigate from 'Check and create user profile' page by clicking 'Change' button against all the fields when the role is selected as operations
         And I capture the page screenshot
         When I fill the new user profile page using '<Add_User_Profile>'
@@ -147,7 +147,7 @@ Feature: HRAPROG-394- User Administration: Manage Users
             | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Access_Required | Valid_Data_In_All_Mandatory_Fields_Role_Operations_Another | Role_Operations |
             | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Review_Body     | Valid_Data_In_All_Mandatory_Fields_Role_Operations_Another | Role_Operations |
 
-    @rsp-2827 @verifyCheckCreateUserProfileChangeLinkRoleNotOperations
+    @rsp-2827 @verifyCheckCreateUserProfileChangeLinkRoleNotOperations @RoleCheckbox
     Scenario Outline: Verify the user can navigate from 'Check and create user profile' page by clicking 'Change' button against all the fields when the role is selected as reviewer
         And I capture the page screenshot
         When I fill the new user profile page using '<Add_User_Profile>'

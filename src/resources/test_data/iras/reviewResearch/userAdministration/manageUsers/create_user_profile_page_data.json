@@ -24,7 +24,7 @@
   },
   "Create_User_Profile": {
     "email_address_prefix": "QAAutomation",
-    "email_address_unique": "QAAutomation20250414092418796hscrd@health.org",
+    "email_address_unique": "QAAutomation20250414094039689hscrd@health.org",
     "Role_Operations": {
       "role_checkbox": [
         "operations"
@@ -50,7 +50,7 @@
       "job_title_text": "Sr.Reviewer Role_Operations",
       "role_checkbox": [
         "operations",
-        "reviewer"
+        "admin"
       ],
       "country_checkbox": [
         "England",
@@ -108,6 +108,7 @@
       "organisation_text": "QA Automation HRA Role_Reviewer",
       "job_title_text": "Sr.Reviewer Role_Reviewer",
       "role_checkbox": [
+        "admin",
         "reviewer"
       ]
     },
@@ -136,6 +137,7 @@
       "organisation_text": "QA Automation HRA Role_Operations_Another",
       "job_title_text": "Sr.Reviewer Role_Operations_Another",
       "role_checkbox": [
+        "user",
         "operations"
       ],
       "country_checkbox": [
@@ -156,6 +158,7 @@
       "organisation_text": "QA Automation HRA Role_Reviewer_Another",
       "job_title_text": "Sr.Reviewer Role_Reviewer_Another",
       "role_checkbox": [
+        "user",
         "reviewer"
       ]
     },
