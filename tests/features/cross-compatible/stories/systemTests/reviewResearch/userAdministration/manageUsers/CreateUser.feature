@@ -261,3 +261,6 @@ Feature: HRAPROG-394- User Administration: Manage Users
             # | Valid_Email_Data_Multiple_Sub_Domains |
             # | Valid_Email_Data_Other_Language       |
             | Valid_Email_Data_Domain             |
+
+# check when the role is selected as operations>> related fields are displayed
+# in Javascript enabled and disabled scenarios

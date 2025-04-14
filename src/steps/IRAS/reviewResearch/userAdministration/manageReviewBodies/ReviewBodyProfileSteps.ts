@@ -68,106 +68,70 @@ When(
 );
 
 When(
-  'I now see the review body profile page with the updated {string} for field {string}',
-  async ({ editReviewBodyPage, reviewBodyProfilePage }, datasetName: string, fieldName: string) => {
+  'I now see the review body profile page with the updated {string} for organisation name field',
+  async ({ editReviewBodyPage, reviewBodyProfilePage }, datasetName: string) => {
     await reviewBodyProfilePage.assertOnReviewbodyProfilePage();
     const dataset = editReviewBodyPage.editReviewBodyPageData.Edit_Review_Body[datasetName];
-    if (fieldName == 'Organisation_Name') {
-      if (datasetName.startsWith('Valid_') || datasetName.startsWith('Review_')) {
-        await expect(reviewBodyProfilePage.organisation_name_value).toHaveText(
-          await editReviewBodyPage.getUniqueOrgName()
-        );
-        await expect(reviewBodyProfilePage.page_heading).toHaveText(
-          reviewBodyProfilePage.reviewBodyProfilePageData.Review_Body_Profile_Page.heading_prefix_label +
-            (await editReviewBodyPage.getUniqueOrgName())
-        );
-      } else {
-        await expect(reviewBodyProfilePage.organisation_name_value).toHaveText(dataset.organisation_name_text);
-        await expect(reviewBodyProfilePage.page_heading).toHaveText(dataset.organisation_name_text);
-      }
-      await reviewBodyProfilePage.setNewOrgName(
-        confirmStringNotNull(await reviewBodyProfilePage.organisation_name_value.textContent())
+    if (datasetName.startsWith('Valid_') || datasetName.startsWith('Review_')) {
+      await expect(reviewBodyProfilePage.organisation_name_value).toHaveText(
+        await editReviewBodyPage.getUniqueOrgName()
       );
-    } else if (fieldName == 'Country') {
       await expect(reviewBodyProfilePage.page_heading).toHaveText(
         reviewBodyProfilePage.reviewBodyProfilePageData.Review_Body_Profile_Page.heading_prefix_label +
-          (await reviewBodyProfilePage.getOrgName())
+          (await editReviewBodyPage.getUniqueOrgName())
       );
-      const expectedCountryValues: string = dataset.country_checkbox.toString();
-      await expect(reviewBodyProfilePage.country_value).toHaveText(expectedCountryValues.replaceAll(',', ', '));
-      await reviewBodyProfilePage.setNewCountries(
-        confirmStringNotNull(await reviewBodyProfilePage.country_value.textContent()).split(', ')
-      );
-    } else if (fieldName == 'Email_Address') {
-      await expect(reviewBodyProfilePage.page_heading).toHaveText(
-        reviewBodyProfilePage.reviewBodyProfilePageData.Review_Body_Profile_Page.heading_prefix_label +
-          (await reviewBodyProfilePage.getOrgName())
-      );
-      await expect(reviewBodyProfilePage.email_address_value).toHaveText(dataset.email_address_text);
-      await reviewBodyProfilePage.setNewEmail(
-        confirmStringNotNull(await reviewBodyProfilePage.email_address_value.textContent())
-      );
-    } else if (fieldName == 'Description') {
-      await expect(reviewBodyProfilePage.page_heading).toHaveText(
-        reviewBodyProfilePage.reviewBodyProfilePageData.Review_Body_Profile_Page.heading_prefix_label +
-          (await reviewBodyProfilePage.getOrgName())
-      );
-      await expect(reviewBodyProfilePage.description_value).toHaveText(dataset.description_text);
-      await reviewBodyProfilePage.setNewDescription(
-        confirmStringNotNull(await reviewBodyProfilePage.description_value.textContent())
-      );
+    } else {
+      await expect(reviewBodyProfilePage.organisation_name_value).toHaveText(dataset.organisation_name_text);
+      await expect(reviewBodyProfilePage.page_heading).toHaveText(dataset.organisation_name_text);
     }
+    await reviewBodyProfilePage.setNewOrgName(
+      confirmStringNotNull(await reviewBodyProfilePage.organisation_name_value.textContent())
+    );
+  }
+);
+
+When('I now see the review body profile page heading', async ({ reviewBodyProfilePage }) => {
+  await reviewBodyProfilePage.assertOnReviewbodyProfilePage();
+  await expect(reviewBodyProfilePage.page_heading).toHaveText(
+    reviewBodyProfilePage.reviewBodyProfilePageData.Review_Body_Profile_Page.heading_prefix_label +
+      (await reviewBodyProfilePage.getOrgName())
+  );
+});
+
+When(
+  'I now see the review body profile page with the updated {string} for country field',
+  async ({ editReviewBodyPage, reviewBodyProfilePage }, datasetName: string) => {
+    await reviewBodyProfilePage.assertOnReviewbodyProfilePage();
+    const dataset = editReviewBodyPage.editReviewBodyPageData.Edit_Review_Body[datasetName];
+    const expectedCountryValues: string = dataset.country_checkbox.toString();
+    await expect(reviewBodyProfilePage.country_value).toHaveText(expectedCountryValues.replaceAll(',', ', '));
+    await reviewBodyProfilePage.setNewCountries(
+      confirmStringNotNull(await reviewBodyProfilePage.country_value.textContent()).split(', ')
+    );
   }
 );
 
 When(
-  'I now see the review body profile page with the updated {string} for fields {string},{string},{string},{string}',
-  async (
-    { editReviewBodyPage, reviewBodyProfilePage },
-    datasetName: string,
-    fieldNameOne: string,
-    fieldNameTwo: string,
-    fieldNameThree: string,
-    fieldNameFour: string
-  ) => {
+  'I now see the review body profile page with the updated {string} for email address field',
+  async ({ editReviewBodyPage, reviewBodyProfilePage }, datasetName: string) => {
     await reviewBodyProfilePage.assertOnReviewbodyProfilePage();
     const dataset = editReviewBodyPage.editReviewBodyPageData.Edit_Review_Body[datasetName];
-    if (fieldNameOne == 'Organisation_Name') {
-      if (datasetName.startsWith('Valid_') || datasetName.startsWith('Review_')) {
-        await expect(reviewBodyProfilePage.organisation_name_value).toHaveText(
-          await editReviewBodyPage.getUniqueOrgName()
-        );
-        await expect(reviewBodyProfilePage.page_heading).toHaveText(
-          reviewBodyProfilePage.reviewBodyProfilePageData.Review_Body_Profile_Page.heading_prefix_label +
-            (await editReviewBodyPage.getUniqueOrgName())
-        );
-      } else {
-        await expect(reviewBodyProfilePage.organisation_name_value).toHaveText(dataset.organisation_name_text);
-        await expect(reviewBodyProfilePage.page_heading).toHaveText(dataset.organisation_name_text);
-      }
-      await reviewBodyProfilePage.setNewOrgName(
-        confirmStringNotNull(await reviewBodyProfilePage.organisation_name_value.textContent())
-      );
-    }
-    if (fieldNameTwo == 'Country') {
-      const expectedCountryValues: string = dataset.country_checkbox.toString();
-      await expect(reviewBodyProfilePage.country_value).toHaveText(expectedCountryValues.replaceAll(',', ', '));
-      await reviewBodyProfilePage.setNewCountries(
-        confirmStringNotNull(await reviewBodyProfilePage.country_value.textContent()).split(', ')
-      );
-    }
-    if (fieldNameThree == 'Email_Address') {
-      await expect(reviewBodyProfilePage.email_address_value).toHaveText(dataset.email_address_text);
-      await reviewBodyProfilePage.setNewEmail(
-        confirmStringNotNull(await reviewBodyProfilePage.email_address_value.textContent())
-      );
-    }
-    if (fieldNameFour == 'Description') {
-      await expect(reviewBodyProfilePage.description_value).toHaveText(dataset.description_text);
-      await reviewBodyProfilePage.setNewDescription(
-        confirmStringNotNull(await reviewBodyProfilePage.description_value.textContent())
-      );
-    }
+    await expect(reviewBodyProfilePage.email_address_value).toHaveText(dataset.email_address_text);
+    await reviewBodyProfilePage.setNewEmail(
+      confirmStringNotNull(await reviewBodyProfilePage.email_address_value.textContent())
+    );
+  }
+);
+
+When(
+  'I now see the review body profile page with the updated {string} for description field',
+  async ({ editReviewBodyPage, reviewBodyProfilePage }, datasetName: string) => {
+    await reviewBodyProfilePage.assertOnReviewbodyProfilePage();
+    const dataset = editReviewBodyPage.editReviewBodyPageData.Edit_Review_Body[datasetName];
+    await expect(reviewBodyProfilePage.description_value).toHaveText(dataset.description_text);
+    await reviewBodyProfilePage.setNewDescription(
+      confirmStringNotNull(await reviewBodyProfilePage.description_value.textContent())
+    );
   }
 );
 
