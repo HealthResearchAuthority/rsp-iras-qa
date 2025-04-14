@@ -133,6 +133,7 @@ Then(
 Then(
   'I can see the audit history for all the fields edited event with {string}',
   async ({ auditHistoryReviewBodyPage, reviewBodyProfilePage }, datasetName: string) => {
+    // defect is there when the previous description was empty
     const dataset =
       auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page[datasetName];
     const auditLog = await auditHistoryReviewBodyPage.getAuditLog();
@@ -178,8 +179,6 @@ Then(
       if (descriptionPrevious !== '') {
         expect(auditLog[1][2]).toBe(descriptionEventDescriptionExpectedValue);
       } else {
-        // defect is there when the previous description was empty
-        // Description was changed from (null) to qaauto_Responsible for confirmation of research governance compliance Test Update all fields
         const descriptionEventDescriptionExpectedValue =
           descriptionEventDescriptionPart1 + '(null)' + descriptionEventDescriptionPart3;
         expect(auditLog[1][2]).toBe(descriptionEventDescriptionExpectedValue);
@@ -196,8 +195,6 @@ Then(
       if (descriptionPrevious !== '') {
         expect(auditLog[1][2]).toBe(descriptionEventDescriptionExpectedValue);
       } else {
-        // defect is there when the previous description was empty
-        // Description was changed from (null) to qaauto_Responsible for confirmation of research governance compliance Test Update all fields
         const descriptionEventDescriptionExpectedValue =
           descriptionEventDescriptionPart1 + '(null)' + descriptionEventDescriptionPart3;
         expect(auditLog[1][2]).toBe(descriptionEventDescriptionExpectedValue);

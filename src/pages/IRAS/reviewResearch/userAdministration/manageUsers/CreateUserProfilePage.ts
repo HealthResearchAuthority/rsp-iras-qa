@@ -112,11 +112,4 @@ export default class CreateUserProfilePage {
     await checkbox.check();
     return checkbox.isChecked();
   }
-
-  async clearCheckboxes(checkboxArray: Locator[]) {
-    for (const checkbox of checkboxArray) {
-      await checkbox.scrollIntoViewIfNeeded();
-      await checkbox.uncheck();
-    }
-  }
 }
