@@ -72,7 +72,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         And I capture the page screenshot
         And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
         Then I can see the 'Manage_Review_Bodies_Page'
-        Then I click the view edit link for the 'enabled' review body
+        Then I click the view edit link for the 'active' review body
         And I can see the review body profile page
         And I capture the page screenshot
         And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'
@@ -237,12 +237,12 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
         Then I can see the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
-        Then I click the view edit link for the 'enabled' review body
+        Then I click the view edit link for the 'active' review body
+        And I capture the page screenshot
         And I can see the review body profile page
-        And I capture the page screenshot
         And I click the change link against 'Organisation_Name' on the review body profile page
-        And I can see the edit review body page
         And I capture the page screenshot
+        And I can see the edit review body page
         When I fill the edit review body page using 'Valid_Data_Organisation_Name_Another' for field 'Organisation_Name'
         And I capture the page screenshot
         And I click the 'Save' button on the 'Edit_Review_Body_Page'

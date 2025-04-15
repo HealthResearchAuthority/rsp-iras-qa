@@ -46,45 +46,34 @@ Then(
     datasetName: string,
     datasetValName: string
   ) => {
-    let organisationName = '';
     const datasetCreateReviewBody = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body[datasetName];
     const datasetAudit =
       auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page[datasetValName];
     const auditLog = await auditHistoryReviewBodyPage.getAuditLog();
     const timeExpected = await auditHistoryReviewBodyPage.getUpdatedTime();
-    const timeIndex = parseInt(
-      auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.time_index,
-      10
-    );
-    const descrIndex = parseInt(
-      auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.description_index,
-      10
-    );
-    const emailIndex = parseInt(
-      auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.admin_email_index,
-      10
-    );
     const rowIndex = parseInt(
-      auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.index,
+      auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.first_row_index,
       10
     );
+    let organisationName = await reviewBodyProfilePage.getOrgName();
     if (eventName === 'created') {
       if (datasetName.startsWith('Valid_')) {
         organisationName = await createReviewBodyPage.getUniqueOrgName();
       } else {
         organisationName = datasetCreateReviewBody.organisation_name_text;
       }
-    } else {
-      organisationName = await reviewBodyProfilePage.getOrgName();
     }
     await expect(auditHistoryReviewBodyPage.page_heading).toHaveText(
       auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.page_heading +
         organisationName
     );
     const eventDescriptionExpectedValue = organisationName + datasetAudit.event_description_text;
-    expect(auditLog[timeIndex][rowIndex]).toBe(timeExpected);
-    expect(auditLog[descrIndex][rowIndex]).toBe(eventDescriptionExpectedValue);
-    expect(auditLog[emailIndex][rowIndex]).toBe(
+    const timeValues: any = auditLog.get('timeValues');
+    const eventValues: any = auditLog.get('eventValues');
+    const adminEmailValues: any = auditLog.get('adminEmailValues');
+    expect(timeValues[rowIndex]).toBe(timeExpected);
+    expect(eventValues[rowIndex]).toBe(eventDescriptionExpectedValue);
+    expect(adminEmailValues[rowIndex]).toBe(
       auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page
         .system_admin_email_text
     );
@@ -111,20 +100,8 @@ Then(
       auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page[datasetName];
     const auditLog = await auditHistoryReviewBodyPage.getAuditLog();
     const timeExpected = await auditHistoryReviewBodyPage.getUpdatedTime();
-    const timeIndex = parseInt(
-      auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.time_index,
-      10
-    );
-    const descrIndex = parseInt(
-      auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.description_index,
-      10
-    );
-    const emailIndex = parseInt(
-      auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.admin_email_index,
-      10
-    );
     const rowIndex = parseInt(
-      auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.index,
+      auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.first_row_index,
       10
     );
     let valuePrevious: string = '';
@@ -148,9 +125,12 @@ Then(
     }
     if (valuePrevious !== valueCurrent) {
       const eventDescriptionExpectedValue = dataset.event_description_text + valuePrevious + ' to ' + valueCurrent;
-      expect(auditLog[timeIndex][rowIndex]).toBe(timeExpected);
-      expect(auditLog[descrIndex][rowIndex]).toBe(eventDescriptionExpectedValue);
-      expect(auditLog[emailIndex][rowIndex]).toBe(
+      const timeValues: any = auditLog.get('timeValues');
+      const eventValues: any = auditLog.get('eventValues');
+      const adminEmailValues: any = auditLog.get('adminEmailValues');
+      expect(timeValues[rowIndex]).toBe(timeExpected);
+      expect(eventValues[rowIndex]).toBe(eventDescriptionExpectedValue);
+      expect(adminEmailValues[rowIndex]).toBe(
         auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page
           .system_admin_email_text
       );
@@ -190,46 +170,37 @@ Then(
     const emailIndex = parseInt(dataset.email_index, 10);
     const descriptionIndex = parseInt(dataset.description_index, 10);
     const countryIndex = parseInt(dataset.country_index, 10);
-    const timeIndex = parseInt(
-      auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.time_index,
-      10
-    );
-    const descrIndex = parseInt(
-      auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.description_index,
-      10
-    );
-    const adminEmailIndex = parseInt(
-      auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.admin_email_index,
-      10
-    );
-    expect(auditLog[timeIndex][organisationIndex]).toBe(timeExpected);
-    expect(auditLog[descrIndex][organisationIndex]).toBe(orgNameEventDescriptionExpectedValue);
-    expect(auditLog[adminEmailIndex][organisationIndex]).toBe(
+    const timeValues: any = auditLog.get('timeValues');
+    const eventValues: any = auditLog.get('eventValues');
+    const adminEmailValues: any = auditLog.get('adminEmailValues');
+    expect(timeValues[organisationIndex]).toBe(timeExpected);
+    expect(eventValues[organisationIndex]).toBe(orgNameEventDescriptionExpectedValue);
+    expect(adminEmailValues[organisationIndex]).toBe(
       auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page
         .system_admin_email_text
     );
-    expect(auditLog[timeIndex][emailIndex]).toBe(timeExpected);
-    expect(auditLog[descrIndex][emailIndex]).toBe(emailEventDescriptionExpectedValue);
-    expect(auditLog[adminEmailIndex][emailIndex]).toBe(
+    expect(timeValues[emailIndex]).toBe(timeExpected);
+    expect(eventValues[emailIndex]).toBe(emailEventDescriptionExpectedValue);
+    expect(adminEmailValues[emailIndex]).toBe(
       auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page
         .system_admin_email_text
     );
-    expect(auditLog[timeIndex][descriptionIndex]).toBe(timeExpected);
+    expect(timeValues[descriptionIndex]).toBe(timeExpected);
     if (descriptionPrevious !== '') {
-      expect(auditLog[descrIndex][descriptionIndex]).toBe(descriptionEventDescriptionExpectedValue);
+      expect(eventValues[descriptionIndex]).toBe(descriptionEventDescriptionExpectedValue);
     } else {
       const descriptionEventDescriptionExpectedValue =
         dataset.description_event_description_text + '(null)' + ' to ' + descriptionCurrent;
-      expect(auditLog[descrIndex][descriptionIndex]).toBe(descriptionEventDescriptionExpectedValue);
+      expect(eventValues[descriptionIndex]).toBe(descriptionEventDescriptionExpectedValue);
     }
-    expect(auditLog[adminEmailIndex][descriptionIndex]).toBe(
+    expect(adminEmailValues[descriptionIndex]).toBe(
       auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page
         .system_admin_email_text
     );
     if (countryNamesPrevious !== countryNamesCurrent) {
-      expect(auditLog[timeIndex][countryIndex]).toBe(timeExpected);
-      expect(auditLog[descrIndex][countryIndex]).toBe(countryEventDescriptionExpectedValue);
-      expect(auditLog[adminEmailIndex][countryIndex]).toBe(
+      expect(timeValues[countryIndex]).toBe(timeExpected);
+      expect(eventValues[countryIndex]).toBe(countryEventDescriptionExpectedValue);
+      expect(adminEmailValues[countryIndex]).toBe(
         auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page
           .system_admin_email_text
       );
@@ -240,16 +211,15 @@ Then(
 Then(
   'I can see the default sort should be the most recent entry first based on date and time',
   async ({ auditHistoryReviewBodyPage }) => {
-    const timeValues: string[] = [];
     const auditLog = await auditHistoryReviewBodyPage.getAuditLog();
-    const rowCount = auditLog[0].length;
-    for (let i = 0; i < rowCount; i++) {
-      timeValues.push(auditLog[0][i]);
-    }
-    const timeDates = timeValues.map((time) => new Date(time));
-    const isSortedDesc = timeDates.every((time, i, arr) => {
-      if (i === 0) return true;
-      return arr[i - 1] >= time;
+    const timeValues: any = auditLog.get('timeValues');
+    const timeDates = timeValues.map((time: any) => new Date(time));
+    const isSortedDesc = timeDates.every((time: number, i: number, arr: number[]) => {
+      if (i === 0) {
+        return true;
+      } else {
+        return arr[i - 1] >= time;
+      }
     });
     expect(isSortedDesc).toBe(true);
   }
