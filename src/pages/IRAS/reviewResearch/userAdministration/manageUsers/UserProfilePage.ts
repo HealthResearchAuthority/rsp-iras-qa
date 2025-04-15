@@ -63,6 +63,7 @@ export default class UserProfilePage {
     this.page = page;
     this.userProfilePageTestData = userProfilePageTestData;
     this.linkTextData = linkTextData;
+    this.buttonTextData = buttonTextData;
     this.page_heading = this.page
       .getByRole('heading')
       .getByText(this.userProfilePageTestData.User_Profile_Page.page_heading_prefix, { exact: false });

@@ -3,7 +3,7 @@ import { test, expect } from '../../../../../hooks/CustomFixtures';
 
 const { Then, When } = createBdd(test);
 
-Then('I can see the view user profile details page', async ({ userProfilePage }) => {
+Then('I can see the user profile page', async ({ userProfilePage }) => {
   await userProfilePage.assertOnUserProfilePage();
 });
 
@@ -23,7 +23,3 @@ When(
     await userProfilePage.clickOnChangeUserProfileDetails(editUserFieldName, userRole);
   }
 );
-
-Then('I can see the user profile page', async ({ userProfilePage }) => {
-  await userProfilePage.assertOnUserProfilePage();
-});
