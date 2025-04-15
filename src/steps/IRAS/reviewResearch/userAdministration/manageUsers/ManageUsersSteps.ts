@@ -59,7 +59,7 @@ When(
 );
 
 When(
-  'I search and click on view edit link for {string} user with {string} status from the manage user page',
+  'I search and click on view edit link for unique {string} user with {string} status from the manage user page',
   async ({ manageUsersPage, createUserProfilePage }, datasetName: string, userStatus: string) => {
     const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
     const userFirstName = dataset.first_name_text;
