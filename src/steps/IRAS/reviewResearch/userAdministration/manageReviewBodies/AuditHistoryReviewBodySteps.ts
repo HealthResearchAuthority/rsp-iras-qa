@@ -25,7 +25,7 @@ Then(
 );
 
 Then(
-  'I can see the {string} ui labels on the audit history page of the review body',
+  'I can see the {string} labels on the audit history page of the review body',
   async ({ commonItemsPage, auditHistoryReviewBodyPage }, datasetName: string) => {
     const dataset =
       auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page[datasetName];

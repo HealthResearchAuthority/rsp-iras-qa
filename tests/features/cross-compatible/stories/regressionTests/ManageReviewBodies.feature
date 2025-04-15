@@ -55,12 +55,12 @@ Feature: User Administration: Manage Review Bodies
         And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'
         Then I can see the audit history page of the review body
         And I capture the page screenshot
-        And I can see the '<Validation_Text>' ui labels on the audit history page of the review body
+        And I can see the '<Validation_Text>' labels on the audit history page of the review body
         And I can see the audit history for the review body 'disabled' event for '<Add_Review_Body>' with '<Audit_History>'
 
         Examples:
-            | Add_Review_Body          | Validation_Text | Audit_History       |
-            | Valid_Data_In_All_Fields | header_Texts    | Disable_Review_Body |
+            | Add_Review_Body          | Validation_Text           | Audit_History       |
+            | Valid_Data_In_All_Fields | Review_Body_Audit_History | Disable_Review_Body |
 
     @RegressionTestVerifyEnableAndEditReviewBodyAuditHistory
     Scenario Outline: Verify the user can view the audit history after enabling a review body
