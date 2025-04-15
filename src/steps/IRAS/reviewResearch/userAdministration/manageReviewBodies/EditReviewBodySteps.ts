@@ -72,11 +72,9 @@ When(
           await orgNameLocator.fill(uniqueOrgNameValue);
           await editReviewBodyPage.setUniqueOrgName(uniqueOrgNameValue);
         } else if (fieldName == 'Country') {
-          if (key === 'country_checkbox') {
-            const datasetNameClear: string = 'Edit_Review_Body_Page';
-            const clearDataset = editReviewBodyPage.editReviewBodyPageData[datasetNameClear];
-            await commonItemsPage.clearUIComponent(clearDataset, 'country_checkbox', editReviewBodyPage);
-          }
+          const datasetNameClear: string = 'Edit_Review_Body_Page';
+          const clearDataset = editReviewBodyPage.editReviewBodyPageData[datasetNameClear];
+          await commonItemsPage.clearUIComponent(clearDataset, 'country_checkbox', editReviewBodyPage);
           await commonItemsPage.fillUIComponent(dataset, key, editReviewBodyPage);
         } else {
           await commonItemsPage.fillUIComponent(dataset, key, editReviewBodyPage);
