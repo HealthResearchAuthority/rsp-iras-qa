@@ -124,7 +124,11 @@ Then(
       valueCurrent = await reviewBodyProfilePage.getNewDescription();
     }
     if (valuePrevious !== valueCurrent) {
-      const eventDescriptionExpectedValue = dataset.event_description_text + valuePrevious + ' to ' + valueCurrent;
+      const eventDescriptionExpectedValue = await auditHistoryReviewBodyPage.getEventDescriptionValue(
+        dataset.event_description_text,
+        valuePrevious,
+        valueCurrent
+      );
       const timeValues: any = auditLog.get('timeValues');
       const eventValues: any = auditLog.get('eventValues');
       const adminEmailValues: any = auditLog.get('adminEmailValues');
@@ -146,25 +150,25 @@ Then(
       auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page[datasetName];
     const auditLog = await auditHistoryReviewBodyPage.getAuditLog();
     const timeExpected = await auditHistoryReviewBodyPage.getUpdatedTime();
-    const descriptionPrevious = await reviewBodyProfilePage.getDescription();
-    const descriptionCurrent = await reviewBodyProfilePage.getNewDescription();
-    const descriptionEventDescriptionExpectedValue =
-      dataset.description_event_description_text + descriptionPrevious + ' to ' + descriptionCurrent;
-    const emailPrevious = await reviewBodyProfilePage.getEmail();
-    const emailCurrent = await reviewBodyProfilePage.getNewEmail();
-    const emailEventDescriptionExpectedValue =
-      dataset.email_address_event_description_text + emailPrevious + ' to ' + emailCurrent;
-    const countryNamesPrevious: string = (await reviewBodyProfilePage.getCountries()).join(', ');
-    const countryNamesCurrent = (await reviewBodyProfilePage.getNewCountries()).join(', ');
-    const countryEventDescriptionExpectedValue =
-      dataset.country_event_description_text + countryNamesPrevious + ' to ' + countryNamesCurrent;
-    const organisationNamePrevious = await reviewBodyProfilePage.getOrgName();
-    const organisationNameCurrent = await reviewBodyProfilePage.getNewOrgName();
-    const orgNameEventDescriptionExpectedValue =
-      dataset.organisation_name_event_description_text + organisationNamePrevious + ' to ' + organisationNameCurrent;
-    await expect(auditHistoryReviewBodyPage.page_heading).toHaveText(
-      auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.page_heading +
-        organisationNameCurrent
+    const orgNameEventDescriptionExpectedValue = await auditHistoryReviewBodyPage.getEventDescriptionValue(
+      dataset.organisation_name_event_description_text,
+      await reviewBodyProfilePage.getOrgName(),
+      await reviewBodyProfilePage.getNewOrgName()
+    );
+    const emailEventDescriptionExpectedValue = await auditHistoryReviewBodyPage.getEventDescriptionValue(
+      dataset.email_address_event_description_text,
+      await reviewBodyProfilePage.getEmail(),
+      await reviewBodyProfilePage.getNewEmail()
+    );
+    const descriptionEventDescriptionExpectedValue = await auditHistoryReviewBodyPage.getEventDescriptionValue(
+      dataset.description_event_description_text,
+      await reviewBodyProfilePage.getDescription(),
+      await reviewBodyProfilePage.getNewDescription()
+    );
+    const countryEventDescriptionExpectedValue = await auditHistoryReviewBodyPage.getEventDescriptionValue(
+      dataset.country_event_description_text,
+      (await reviewBodyProfilePage.getCountries()).join(', '),
+      (await reviewBodyProfilePage.getNewCountries()).join(', ')
     );
     const organisationIndex = parseInt(dataset.organisation_index, 10);
     const emailIndex = parseInt(dataset.email_index, 10);
@@ -186,18 +190,24 @@ Then(
         .system_admin_email_text
     );
     expect(timeValues[descriptionIndex]).toBe(timeExpected);
-    if (descriptionPrevious !== '') {
+    if ((await reviewBodyProfilePage.getDescription()) !== '') {
       expect(eventValues[descriptionIndex]).toBe(descriptionEventDescriptionExpectedValue);
     } else {
       const descriptionEventDescriptionExpectedValue =
-        dataset.description_event_description_text + '(null)' + ' to ' + descriptionCurrent;
+        dataset.description_event_description_text +
+        '(null)' +
+        ' to ' +
+        (await reviewBodyProfilePage.getNewDescription());
       expect(eventValues[descriptionIndex]).toBe(descriptionEventDescriptionExpectedValue);
     }
     expect(adminEmailValues[descriptionIndex]).toBe(
       auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page
         .system_admin_email_text
     );
-    if (countryNamesPrevious !== countryNamesCurrent) {
+    if (
+      (await reviewBodyProfilePage.getCountries()).join(', ') !==
+      (await reviewBodyProfilePage.getNewCountries()).join(', ')
+    ) {
       expect(timeValues[countryIndex]).toBe(timeExpected);
       expect(eventValues[countryIndex]).toBe(countryEventDescriptionExpectedValue);
       expect(adminEmailValues[countryIndex]).toBe(
