@@ -1,6 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as auditHistoryReviewBodyPageTestData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageReviewBodies/audit_history_review_body_page_data.json';
-import { confirmStringNotNull, removeUnwantedWhitespace } from '../../../../../utils/UtilFunctions';
+import { confirmStringNotNull } from '../../../../../utils/UtilFunctions';
 
 //Declare Page Objects
 export default class AuditHistoryReviewBodyPage {
@@ -21,7 +21,9 @@ export default class AuditHistoryReviewBodyPage {
     this.auditHistoryReviewBodyPageTestData = auditHistoryReviewBodyPageTestData;
 
     //Locators
-    this.page_heading = this.page.getByRole('heading');
+    this.page_heading = this.page
+      .getByRole('heading')
+      .getByText(this.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.page_heading);
     this.auditTableRows = this.page.getByRole('table').getByRole('row');
     this.date_label = this.auditTableRows.getByRole('columnheader').getByText('Date', { exact: true });
     this.event_description_label = this.auditTableRows
@@ -38,9 +40,6 @@ export default class AuditHistoryReviewBodyPage {
 
   async assertOnAuditHistoryReviewBodyPage() {
     await expect(this.page_heading).toBeVisible();
-    await expect(this.page_heading).toContainText(
-      this.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.page_heading
-    );
   }
 
   //Getters & Setters for Private Variables
@@ -53,11 +52,11 @@ export default class AuditHistoryReviewBodyPage {
     this._updated_time = value;
   }
 
-  async getAuditLog() {
+  async getAuditLog(): Promise<Map<string, string[]>> {
     const timeValues: string[] = [];
     const eventValues: string[] = [];
     const adminEmailValues: string[] = [];
-    const dataFound = false;
+    let dataFound = false;
     while (!dataFound) {
       const rowCount = await this.auditTableRows.count();
       for (let i = 1; i < rowCount; i++) {
@@ -72,17 +71,15 @@ export default class AuditHistoryReviewBodyPage {
       if ((await this.next_button.isVisible()) && !(await this.next_button.isDisabled())) {
         await this.next_button.click();
         await this.page.waitForLoadState('domcontentloaded');
-      } else if ((await this.hidden_next_button.count()) > 0) {
-        break;
-      } else if ((await this.next_button.count()) == 0) {
-        break;
+      } else {
+        dataFound = true;
       }
     }
-    return [timeValues, eventValues, adminEmailValues];
-  }
-
-  async getSelectedValues<PageObject>(dataset: JSON, key: string, page: PageObject) {
-    const locator: Locator = page[key];
-    return await removeUnwantedWhitespace(confirmStringNotNull(await locator.textContent()));
+    const auditMap = new Map([
+      ['timeValues', timeValues],
+      ['eventValues', eventValues],
+      ['adminEmailValues', adminEmailValues],
+    ]);
+    return auditMap;
   }
 }

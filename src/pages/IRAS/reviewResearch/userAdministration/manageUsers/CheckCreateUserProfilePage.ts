@@ -1,6 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as checkCreateUserProfilePageTestData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageUsers/check_create_user_profile_page_data.json';
-import { confirmStringNotNull, removeUnwantedWhitespace } from '../../../../../utils/UtilFunctions';
 
 //Declare Page Objects
 export default class CheckCreateUserProfilePage {
@@ -112,10 +111,5 @@ export default class CheckCreateUserProfilePage {
   async clickOnChangeButtonRoleOperations(fieldKey: string) {
     const locatorName = fieldKey.toLowerCase() + '_change_link';
     await this[locatorName].click();
-  }
-
-  async getSelectedValues<PageObject>(dataset: JSON, key: string, page: PageObject) {
-    const locator: Locator = page[key];
-    return await removeUnwantedWhitespace(confirmStringNotNull(await locator.textContent()));
   }
 }
