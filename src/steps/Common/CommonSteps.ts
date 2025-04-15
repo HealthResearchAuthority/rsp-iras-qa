@@ -11,6 +11,7 @@ import {
 } from '../../utils/GenerateTestData';
 const { Given, When, Then, AfterStep } = createBdd(test);
 import * as userProfileGeneratedataConfig from '../../resources/test_data/user_administration/testdata_generator/user_profile_generate_data_config.json';
+import { getCurrentTimeFormatted } from '../../utils/UtilFunctions';
 
 AfterStep(async ({ page, $step, $testInfo }) => {
   if (
@@ -336,3 +337,20 @@ Then('I navigate {string}', async ({ commonItemsPage }, navigation: string) => {
       throw new Error(`${navigation} is not a valid option`);
   }
 });
+
+Then(
+  'I capture the current time for {string}',
+  async ({ auditHistoryReviewBodyPage, auditHistoryUserPage }, page: string) => {
+    const currentTime = await getCurrentTimeFormatted();
+    switch (page) {
+      case 'Audit_History_Review_Body_Page':
+        await auditHistoryReviewBodyPage.setUpdatedTime(currentTime);
+        break;
+      case 'Audit_History_User_Page':
+        await auditHistoryUserPage.setUpdatedTime(currentTime);
+        break;
+      default:
+        throw new Error(`${page} is not a valid option`);
+    }
+  }
+);

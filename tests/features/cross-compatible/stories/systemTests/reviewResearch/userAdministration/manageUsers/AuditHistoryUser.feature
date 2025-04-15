@@ -51,7 +51,7 @@ Feature: User Administration: Manage Users - View audit history for users
         And I can see the 'Manage_Users_Page'
 
     @VerifyAuditHistoryCreateUser @only
-    Scenario Outline: Verify the user can view the audit history after creating a user
+    Scenario Outline: Verify the user can view the audit history after creating a new user
         When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
         Then I can see the add a new user profile page
         When I fill the new user profile page using '<Add_User_Profile>'
@@ -61,5 +61,5 @@ Feature: User Administration: Manage Users - View audit history for users
         And I capture the page screenshot
         And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
         Then I can see the create user profile confirmation page for '<Add_User_Profile>'
-        And I capture the current time
+        And I capture the current time for 'Audit_History_User_Page'
         And I capture the page screenshot
