@@ -37,6 +37,8 @@ import ConfirmationPage from '../pages/IRAS/ConfirmationPage';
 import SystemAdministrationPage from '../pages/IRAS/reviewResearch/userAdministration/SystemAdministrationPage';
 import ReviewBodyProfilePage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/ReviewBodyProfilePage';
 import EditReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/EditReviewBodyPage';
+import AuditHistoryReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/AuditHistoryReviewBodyPage';
+import AuditHistoryUserPage from '../pages/IRAS/reviewResearch/userAdministration/manageUsers/AuditHistoryUserPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -75,6 +77,8 @@ type CustomFixtures = {
   confirmationPage: ConfirmationPage;
   reviewBodyProfilePage: ReviewBodyProfilePage;
   editReviewBodyPage: EditReviewBodyPage;
+  auditHistoryReviewBodyPage: AuditHistoryReviewBodyPage;
+  auditHistoryUserPage: AuditHistoryUserPage;
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -221,6 +225,14 @@ export const test = base.extend<CustomFixtures>({
 
   editReviewBodyPage: async ({ page }, use) => {
     await use(new EditReviewBodyPage(page));
+  },
+
+  auditHistoryReviewBodyPage: async ({ page }, use) => {
+    await use(new AuditHistoryReviewBodyPage(page));
+  },
+
+  auditHistoryUserPage: async ({ page }, use) => {
+    await use(new AuditHistoryUserPage(page));
   },
 
   makeAxeBuilder: async ({ page }, use) => {
