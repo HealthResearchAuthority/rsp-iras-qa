@@ -17,9 +17,10 @@ export default class CreateUserProfilePage {
   readonly telephone_text: Locator;
   readonly organisation_text: Locator;
   readonly job_title_text: Locator;
+  readonly role_label: Locator;
   readonly role_fieldset: Locator;
   readonly role_checkbox: Locator;
-  readonly committee_dropdown: Locator;
+  readonly committee_dropdown_label: Locator;
   readonly country_fieldset: Locator;
   readonly country_checkbox: Locator;
   readonly access_required_fieldset: Locator;
@@ -77,17 +78,20 @@ export default class CreateUserProfilePage {
         exact: true,
       }
     );
-    this.role_fieldset = this.page.getByRole('group', {
-      name: this.createUserProfilePageTestData.Create_User_Profile_Page.role_label,
-      exact: true,
-    });
+    this.role_label = this.page
+      .locator('label b')
+      .getByText(this.createUserProfilePageTestData.Create_User_Profile_Page.role_label, { exact: true });
+    this.role_fieldset = this.page.locator('.govuk-form-group', { has: this.role_label });
     this.role_checkbox = this.role_fieldset.getByRole('checkbox');
-    this.committee_dropdown = this.page.getByLabel('Committee', { exact: true });
+    this.committee_dropdown_label = this.page.getByLabel(
+      this.createUserProfilePageTestData.Create_User_Profile_Page.commitee_label,
+      { exact: true }
+    );
     this.country_fieldset = this.page.getByRole('group', {
       name: this.createUserProfilePageTestData.Create_User_Profile_Page.country_label,
       exact: true,
     });
-    this.country_checkbox = this.country_fieldset.locator('..').getByRole('checkbox');
+    this.country_checkbox = this.country_fieldset.getByRole('checkbox');
     this.access_required_fieldset = this.page.getByRole('group', {
       name: this.createUserProfilePageTestData.Create_User_Profile_Page.access_required_label,
       exact: true,

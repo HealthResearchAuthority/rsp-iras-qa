@@ -12,6 +12,7 @@
     "organisation_label": "Organisation",
     "job_title_label": "Job title",
     "role_label": "Role",
+    "commitee_label": "Committee",
     "role_checkbox": [
       "user",
       "operations",
@@ -53,7 +54,7 @@
   },
   "Create_User_Profile": {
     "email_address_prefix": "QAAutomation",
-    "email_address_unique": "QAAutomation20250415135535464hscrd@health.org",
+    "email_address_unique": "QAAutomation20250415161437370hscrd@health.org",
     "Role_Operations": {
       "role_checkbox": [
         "operations"
