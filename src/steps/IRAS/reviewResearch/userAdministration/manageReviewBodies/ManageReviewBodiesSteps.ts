@@ -75,9 +75,12 @@ Then(
 
 Then(
   'I click the view edit link for the {string} review body',
-  async ({ manageReviewBodiesPage, reviewBodyProfilePage }) => {
+  async ({ manageReviewBodiesPage, reviewBodyProfilePage }, status: string) => {
     const reviewBodyRow = await manageReviewBodiesPage.getRowByOrgName(await reviewBodyProfilePage.getOrgName(), true);
-    await reviewBodyRow.locator(manageReviewBodiesPage.actionsLink).click();
+    const organisationStatusText = await reviewBodyRow.locator(manageReviewBodiesPage.status_from_list).textContent();
+    if (status === organisationStatusText) {
+      await reviewBodyRow.locator(manageReviewBodiesPage.actionsLink).click();
+    }
   }
 );
 
