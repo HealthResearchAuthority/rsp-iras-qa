@@ -77,7 +77,6 @@ export default class CreateUserProfilePage {
         exact: true,
       }
     );
-    // this.role_checkbox = this.page.locator('[name^="UserRoles"][type="checkbox"]');
     this.role_fieldset = this.page.getByRole('group', {
       name: this.createUserProfilePageTestData.Create_User_Profile_Page.role_label,
       exact: true,
@@ -88,13 +87,11 @@ export default class CreateUserProfilePage {
       name: this.createUserProfilePageTestData.Create_User_Profile_Page.country_label,
       exact: true,
     });
-    // this.country_checkbox = this.page.locator('[name="Country"][type="checkbox"]');
     this.country_checkbox = this.country_fieldset.locator('..').getByRole('checkbox');
     this.access_required_fieldset = this.page.getByRole('group', {
       name: this.createUserProfilePageTestData.Create_User_Profile_Page.access_required_label,
       exact: true,
     });
-    // this.access_required_checkbox = this.page.locator('[name="AccessRequired"][type="checkbox"]');
     this.access_required_checkbox = this.access_required_fieldset.getByRole('checkbox');
     this.review_body_dropdown = this.page.getByLabel(
       this.createUserProfilePageTestData.Create_User_Profile_Page.review_body_label,
