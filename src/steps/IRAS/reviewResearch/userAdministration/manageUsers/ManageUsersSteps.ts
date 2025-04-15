@@ -7,10 +7,6 @@ const pathToTestDataJson =
 
 const { When, Then } = createBdd(test);
 
-Then('I can see the manage users list page', async ({ manageUsersPage }) => {
-  await manageUsersPage.assertOnManageUsersPage();
-});
-
 Then(
   'I can see the list is sorted by default in the alphabetical order of the {string}',
   async ({ manageUsersPage }) => {

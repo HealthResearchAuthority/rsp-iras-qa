@@ -101,7 +101,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
   Scenario: Manage Users list page
     Given I have navigated to the 'System_Administration_Page'
     When I click the 'Manage_Users' link on the 'System_Administration_Page'
-    Then I can see the manage users list page
+    Then I can see the 'Manage_Users_Page'
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
@@ -110,7 +110,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
   Scenario: Add a new user profile record page
     Given I have navigated to the 'System_Administration_Page'
     When I click the 'Manage_Users' link on the 'System_Administration_Page'
-    Then I can see the manage users list page
+    Then I can see the 'Manage_Users_Page'
     When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
     Then I can see the add a new user profile page
     When I Scan the page with the Axe Accessibilty Tool
@@ -121,7 +121,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
   Scenario: Check and create user profile page
     Given I have navigated to the 'System_Administration_Page'
     When I click the 'Manage_Users' link on the 'System_Administration_Page'
-    Then I can see the manage users list page
+    Then I can see the 'Manage_Users_Page'
     When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
     Then I can see the add a new user profile page
     When I fill the new user profile page using 'Valid_Data_In_All_Fields_Role_Operations'
@@ -135,7 +135,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
   Scenario: Create user profile confirmation page
     Given I have navigated to the 'System_Administration_Page'
     When I click the 'Manage_Users' link on the 'System_Administration_Page'
-    Then I can see the manage users list page
+    Then I can see the 'Manage_Users_Page'
     When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
     Then I can see the add a new user profile page
     When I fill the new user profile page using 'Valid_Data_In_All_Fields_Role_Operations'
@@ -151,7 +151,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
   Scenario: View user profile page
     Given I have navigated to the 'System_Administration_Page'
     When I click the 'Manage_Users' link on the 'System_Administration_Page'
-    Then I can see the manage users list page
+    Then I can see the 'Manage_Users_Page'
     When I click the 'View_Edit' link on the 'Manage_Users_Page'
     Then I can see the user profile page
     When I Scan the page with the Axe Accessibilty Tool
@@ -162,7 +162,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
   Scenario: Edit user profile page
     Given I have navigated to the 'System_Administration_Page'
     When I click the 'Manage_Users' link on the 'System_Administration_Page'
-    Then I can see the manage users list page
+    Then I can see the 'Manage_Users_Page'
     When I click the 'View_Edit' link on the 'Manage_Users_Page'
     Then I can see the user profile page
     When I click the 'Change' link on the 'User_Profile_Page'
@@ -180,7 +180,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
     And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
     And I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
-    And I can see the manage users list page
+    And I can see the 'Manage_Users_Page'
     And I search and click on view edit link for 'Valid_Data_In_All_Fields_Role_Operations' user with 'ACTIVE' status from the manage user page
     And I can see the user profile page
     When I Scan the page with the Axe Accessibilty Tool
@@ -196,7 +196,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
     And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
     And I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
-    And I can see the manage users list page
+    And I can see the 'Manage_Users_Page'
     And I search and click on view edit link for 'Valid_Data_In_All_Fields_Role_Operations' user with 'ACTIVE' status from the manage user page
     And I click the 'Disable_User_Record' button on the 'User_Profile_Page'
     And I can see a 'Confirm' button on the 'Confirmation_Page'
@@ -213,7 +213,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
     And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
     And I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
-    And I can see the manage users list page
+    And I can see the 'Manage_Users_Page'
     And I search and click on view edit link for 'Valid_Data_In_All_Fields_Role_Operations' user with 'ACTIVE' status from the manage user page
     And I click the 'Disable_User_Record' button on the 'User_Profile_Page'
     And I click the 'Confirm' button on the 'Confirmation_Page'
@@ -231,12 +231,12 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
     And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
     And I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
-    And I can see the manage users list page
+    And I can see the 'Manage_Users_Page'
     And I search and click on view edit link for 'Valid_Data_In_All_Fields_Role_Operations' user with 'ACTIVE' status from the manage user page
     And I click the 'Disable_User_Record' button on the 'User_Profile_Page'
     And I click the 'Confirm' button on the 'Confirmation_Page'
     And I click the 'Back_To_Manage_Users' link on the 'Confirmation_Page'
-    And I can see the manage users list page
+    And I can see the 'Manage_Users_Page'
     And I search and click on view edit link for 'Valid_Data_In_All_Fields_Role_Operations' user with 'DISABLED' status from the manage user page
     And I can see the user profile page
     When I Scan the page with the Axe Accessibilty Tool
@@ -252,12 +252,12 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
     And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
     And I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
-    And I can see the manage users list page
+    And I can see the 'Manage_Users_Page'
     And I search and click on view edit link for 'Valid_Data_In_All_Fields_Role_Operations' user with 'ACTIVE' status from the manage user page
     And I click the 'Disable_User_Record' button on the 'User_Profile_Page'
     And I click the 'Confirm' button on the 'Confirmation_Page'
     And I click the 'Back_To_Manage_Users' link on the 'Confirmation_Page'
-    And I can see the manage users list page
+    And I can see the 'Manage_Users_Page'
     And I search and click on view edit link for 'Valid_Data_In_All_Fields_Role_Operations' user with 'DISABLED' status from the manage user page
     And I click the 'Enable_User_Record' button on the 'User_Profile_Page'
     And I can see a 'Confirm' button on the 'Confirmation_Page'
@@ -274,12 +274,12 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
     And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
     And I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
-    And I can see the manage users list page
+    And I can see the 'Manage_Users_Page'
     And I search and click on view edit link for 'Valid_Data_In_All_Fields_Role_Operations' user with 'ACTIVE' status from the manage user page
     And I click the 'Disable_User_Record' button on the 'User_Profile_Page'
     And I click the 'Confirm' button on the 'Confirmation_Page'
     And I click the 'Back_To_Manage_Users' link on the 'Confirmation_Page'
-    And I can see the manage users list page
+    And I can see the 'Manage_Users_Page'
     And I search and click on view edit link for 'Valid_Data_In_All_Fields_Role_Operations' user with 'DISABLED' status from the manage user page
     And I click the 'Enable_User_Record' button on the 'User_Profile_Page'
     And I click the 'Confirm' button on the 'Confirmation_Page'

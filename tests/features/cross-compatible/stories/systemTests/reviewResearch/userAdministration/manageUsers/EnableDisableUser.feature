@@ -4,7 +4,7 @@ Feature: User Administration: Manage Users - Enable / Disable users
   Background:
     Given I have navigated to the 'System_Administration_Page'
     When I click the 'Manage_Users' link on the 'System_Administration_Page'
-    Then I can see the manage users list page
+    Then I can see the 'Manage_Users_Page'
     When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
     Then I can see the add a new user profile page
 
@@ -14,7 +14,7 @@ Feature: User Administration: Manage Users - Enable / Disable users
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
     And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
     And I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
-    And I can see the manage users list page
+    And I can see the 'Manage_Users_Page'
     When I search and click on view edit link for '<Add_User_Profile>' user with 'ACTIVE' status from the manage user page
     Then I can see the '<Disable_Label_Texts>' ui labels on the manage users list page
     And I capture the page screenshot
@@ -25,7 +25,7 @@ Feature: User Administration: Manage Users - Enable / Disable users
     Then I validate '<Disable_User_Profile_Labels>' labels displayed in disable user profile success page using the '<Add_User_Profile>' details
     And I capture the page screenshot
     When I click the 'Back_To_Manage_Users' link on the 'Confirmation_Page'
-    And I can see the manage users list page
+    And I can see the 'Manage_Users_Page'
     Then I can see the newly created user record should be present in the list for '<Add_User_Profile>' with 'DISABLED' status in the manage user page
     And I capture the page screenshot
 
@@ -39,7 +39,7 @@ Feature: User Administration: Manage Users - Enable / Disable users
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
     And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
     And I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
-    And I can see the manage users list page
+    And I can see the 'Manage_Users_Page'
     And I search and click on view edit link for '<Add_User_Profile>' user with 'ACTIVE' status from the manage user page
     And I click the 'Disable_User_Record' button on the 'User_Profile_Page'
     And I capture the page screenshot
@@ -57,12 +57,12 @@ Feature: User Administration: Manage Users - Enable / Disable users
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
     And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
     And I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
-    And I can see the manage users list page
+    And I can see the 'Manage_Users_Page'
     And I search and click on view edit link for '<Add_User_Profile>' user with 'ACTIVE' status from the manage user page
     And I click the 'Disable_User_Record' button on the 'User_Profile_Page'
     And I click the 'Confirm' button on the 'Confirmation_Page'
     And I click the 'Back_To_Manage_Users' link on the 'Confirmation_Page'
-    And I can see the manage users list page
+    And I can see the 'Manage_Users_Page'
     When I search and click on view edit link for '<Add_User_Profile>' user with 'DISABLED' status from the manage user page
     Then I can see the '<Enable_Label_Texts>' ui labels on the manage users list page
     And I capture the page screenshot
@@ -73,7 +73,7 @@ Feature: User Administration: Manage Users - Enable / Disable users
     Then I validate '<Enable_User_Profile_Labels>' labels displayed in enable user profile success page using the '<Add_User_Profile>' details
     And I capture the page screenshot
     When I click the 'Back_To_Manage_Users' link on the 'Confirmation_Page'
-    And I can see the manage users list page
+    And I can see the 'Manage_Users_Page'
     Then I can see the newly created user record should be present in the list for '<Add_User_Profile>' with 'ACTIVE' status in the manage user page
     And I capture the page screenshot
 
@@ -87,12 +87,12 @@ Feature: User Administration: Manage Users - Enable / Disable users
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
     And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
     And I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
-    And I can see the manage users list page
+    And I can see the 'Manage_Users_Page'
     And I search and click on view edit link for '<Add_User_Profile>' user with 'ACTIVE' status from the manage user page
     And I click the 'Disable_User_Record' button on the 'User_Profile_Page'
     And I click the 'Confirm' button on the 'Confirmation_Page'
     And I click the 'Back_To_Manage_Users' link on the 'Confirmation_Page'
-    And I can see the manage users list page
+    And I can see the 'Manage_Users_Page'
     When I search and click on view edit link for '<Add_User_Profile>' user with 'DISABLED' status from the manage user page
     When I click the 'Enable_User_Record' button on the 'User_Profile_Page'
     And I capture the page screenshot

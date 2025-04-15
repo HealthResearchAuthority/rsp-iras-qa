@@ -18,7 +18,7 @@ Feature: User Administration: System Administration
     Then I can see the system administration home page
     Then I capture the page screenshot
     When I click the '<Navigation_Link_Second>' link on the 'System_Administration_Page'
-    Then I can see the manage users list page
+    Then I can see the 'Manage_Users_Page'
     Then I capture the page screenshot
     When I click the '<Navigation_Link>' link on the 'Manage_Users_Page'
     Then I can see the system administration home page

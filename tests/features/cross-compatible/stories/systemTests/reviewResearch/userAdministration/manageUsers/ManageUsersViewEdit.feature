@@ -7,14 +7,14 @@ Feature: HRAPROG-393- User Administration: Manage user profiles, view and edit u
     Background:
         Given I have navigated to the 'Home_Page'
         When I click the 'Manage_Users' link on the 'Home_Page'
-        Then I can see the manage users list page
+        Then I can see the 'Manage_Users_Page'
 
     @viewUserProfileRoleOperations
     Scenario Outline: View User profile details for the user with role as Operations
         And I search and click on view edit link for '<View_User_Profile>' user with '<Status>' status from the manage user page
         Then I can see the view user profile details page
         And I click the 'Back' link on the 'User_Profile_Page'
-        Then I can see the manage users list page
+        Then I can see the 'Manage_Users_Page'
         And I click the 'Back' link on the 'Manage_Users_Page'
         Then I have navigated to the 'Home_Page'
 
@@ -28,7 +28,7 @@ Feature: HRAPROG-393- User Administration: Manage user profiles, view and edit u
         And I search and click on view edit link for '<View_User_Profile>' user with '<Status>' status from the manage user page
         Then I can see the view user profile details page
         And I click the 'Back' link on the 'User_Profile_Page'
-        Then I can see the manage users list page
+        Then I can see the 'Manage_Users_Page'
         And I click the 'Back' link on the 'Manage_Users_Page'
         Then I have navigated to the 'Home_Page'
 
@@ -52,7 +52,7 @@ Feature: HRAPROG-393- User Administration: Manage user profiles, view and edit u
         And I click the 'Save' button on the 'Edit_User_Profile_Page'
         And I can see the view user profile details page
         When I click the 'Back' link on the 'User_Profile_Page'
-        Then I can see the manage users list page
+        Then I can see the 'Manage_Users_Page'
         Examples:
             | Edit_User_Field    | User_Role  | Status | Edit_User_Field_Data        | Original_Data                   |
             | title_text         | Operations | ACTIVE | User_Title_Text_One         | Original_Title_Text_One         |
@@ -79,7 +79,7 @@ Feature: HRAPROG-393- User Administration: Manage user profiles, view and edit u
         And I click the 'Save' button on the 'Edit_User_Profile_Page'
         And I can see the view user profile details page
         When I click the 'Back' link on the 'User_Profile_Page'
-        Then I can see the manage users list page
+        Then I can see the 'Manage_Users_Page'
         Examples:
             | Edit_User_Field    | User_Role  | Status | Edit_User_Field_Data        | Original_Data                   |
             | title_text         | Reviewer   | ACTIVE | User_Title_Text_Two         | Original_Title_Text_Two         |
@@ -106,7 +106,7 @@ Feature: HRAPROG-393- User Administration: Manage user profiles, view and edit u
         And I click the 'Save' button on the 'Edit_User_Profile_Page'
         And I can see the view user profile details page
         When I click the 'Back' link on the 'User_Profile_Page'
-        Then I can see the manage users list page
+        Then I can see the 'Manage_Users_Page'
         Examples:
             | Edit_User_Field    | User_Role  | Status | Original_Data                     | Edit_User_Field_Data                  |
             | email_address_text | Operations | ACTIVE | Original_Email_Address_Text_Three | Valid_Email_Data_Dot                  |
@@ -190,7 +190,7 @@ Feature: HRAPROG-393- User Administration: Manage user profiles, view and edit u
         And I click the 'Save' button on the 'Edit_User_Profile_Page'
         And I can see the view user profile details page
         When I click the 'Back' link on the 'User_Profile_Page'
-        Then I can see the manage users list page
+        Then I can see the 'Manage_Users_Page'
         Examples:
             | Edit_User_Field    | User_Role  | Status | Edit_User_Field_Data          | Original_Data                     |
             | first_name_text    | Operations | ACTIVE | User_First_Name_Text_Three    | Original_First_Name_Text_Three    |
