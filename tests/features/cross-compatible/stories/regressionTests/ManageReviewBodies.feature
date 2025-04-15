@@ -86,10 +86,10 @@ Feature: User Administration: Manage Review Bodies
         And I click the 'Save' button on the 'Edit_Review_Body_Page'
         And I capture the current time
         # validate edited data in review body profile page
-        Then I now see the review body profile page with the updated '<Edit_Review_Body>' for organisation name field
-        Then I now see the review body profile page with the updated '<Edit_Review_Body>' for country field
-        Then I now see the review body profile page with the updated '<Edit_Review_Body>' for email address field
-        Then I now see the review body profile page with the updated '<Edit_Review_Body>' for description field
+        Then I now see the review body profile page with the updated '<Edit_Review_Body>' for field '<Field_Name_One>'
+        Then I now see the review body profile page with the updated '<Edit_Review_Body>' for field '<Field_Name_Two>'
+        Then I now see the review body profile page with the updated '<Edit_Review_Body>' for field '<Field_Name_Three>'
+        Then I now see the review body profile page with the updated '<Edit_Review_Body>' for field '<Field_Name_Four>'
         And I capture the page screenshot
         # audit history
         And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'
