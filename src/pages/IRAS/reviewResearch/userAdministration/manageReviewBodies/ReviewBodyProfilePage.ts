@@ -62,6 +62,10 @@ export default class ReviewBodyProfilePage {
     this._email_address = '';
     this._description = '';
     this._last_updated_date = '';
+    this._new_org_name = '';
+    this._new_countries = [];
+    this._new_email_address = '';
+    this._new_description = '';
 
     //Locators
     this.page_heading = this.page

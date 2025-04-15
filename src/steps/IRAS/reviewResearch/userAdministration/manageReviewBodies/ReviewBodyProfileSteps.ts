@@ -159,7 +159,7 @@ Then(
   }
 );
 
-When('I can see the review body profile page heading', async ({ reviewBodyProfilePage }) => {
+When('I can see the updated review body profile page heading', async ({ reviewBodyProfilePage }) => {
   await expect(reviewBodyProfilePage.page_heading).toHaveText(
     reviewBodyProfilePage.reviewBodyProfilePageData.Review_Body_Profile_Page.heading_prefix_label +
       (await reviewBodyProfilePage.getOrgName())

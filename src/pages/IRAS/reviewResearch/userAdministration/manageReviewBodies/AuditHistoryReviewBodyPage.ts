@@ -19,6 +19,7 @@ export default class AuditHistoryReviewBodyPage {
   constructor(page: Page) {
     this.page = page;
     this.auditHistoryReviewBodyPageTestData = auditHistoryReviewBodyPageTestData;
+    this._updated_time = '';
 
     //Locators
     this.page_heading = this.page
