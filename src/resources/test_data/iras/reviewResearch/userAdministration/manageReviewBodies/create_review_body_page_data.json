@@ -374,10 +374,10 @@
       "description_text": "qaauto_Responsible for confirmation of research governance compliance"
     },
     "Organisation_Name_Another": {
-      "organisation_name_text": "HSC Research and Development Test Update Org Name"
+      "organisation_name_text": "QA Automation HSC Research and Development Test Update Org Name"
     },
     "Email_Another": {
-      "organisation_name_text": "HSC Research and Development Test Update Org Name"
+      "email_address_text": "qaauto_test_update_email_hscrd@health.org"
     }
   }
 }

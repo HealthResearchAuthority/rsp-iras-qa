@@ -17,12 +17,12 @@ export default class CreateUserProfilePage {
   readonly telephone_text: Locator;
   readonly organisation_text: Locator;
   readonly job_title_text: Locator;
-  readonly role_checkbox_label: Locator;
+  readonly role_fieldset: Locator;
   readonly role_checkbox: Locator;
   readonly committee_dropdown: Locator;
-  readonly country_checkbox_label: Locator;
+  readonly country_fieldset: Locator;
   readonly country_checkbox: Locator;
-  readonly access_required_checkbox_label: Locator;
+  readonly access_required_fieldset: Locator;
   readonly access_required_checkbox: Locator;
   readonly review_body_dropdown: Locator;
   readonly continue_button: Locator;
@@ -45,13 +45,22 @@ export default class CreateUserProfilePage {
     this.telephone_text = this.page.getByLabel('Telephone', { exact: true });
     this.organisation_text = this.page.getByLabel('Organisation', { exact: true });
     this.job_title_text = this.page.getByLabel('Job title', { exact: true });
-    this.role_checkbox_label = this.page.locator('[class="govuk-label"][for="UserRoles"] b');
-    this.role_checkbox = this.page.locator('[name^="UserRoles"][type="checkbox"]');
+    this.role_fieldset = this.page.getByRole('group', {
+      name: this.createUserProfilePageTestData.Create_User_Profile_Page.role_label,
+      exact: true,
+    });
+    this.role_checkbox = this.role_fieldset.getByRole('checkbox');
     this.committee_dropdown = this.page.getByLabel('Committee', { exact: true });
-    this.country_checkbox_label = this.page.locator('[class="govuk-label"][for="Country"] b');
-    this.country_checkbox = this.page.locator('[name="Country"][type="checkbox"]');
-    this.access_required_checkbox_label = this.page.locator('[class="govuk-label"][for="AccessRequired"] b');
-    this.access_required_checkbox = this.page.locator('[name="AccessRequired"][type="checkbox"]');
+    this.country_fieldset = this.page.getByRole('group', {
+      name: this.createUserProfilePageTestData.Create_User_Profile_Page.country_label,
+      exact: true,
+    });
+    this.country_checkbox = this.country_fieldset.getByRole('checkbox');
+    this.access_required_fieldset = this.page.getByRole('group', {
+      name: this.createUserProfilePageTestData.Create_User_Profile_Page.access_required_label,
+      exact: true,
+    });
+    this.access_required_checkbox = this.country_fieldset.getByRole('checkbox');
     this.review_body_dropdown = this.page.getByLabel('Review body', { exact: true });
     this.continue_button = this.page.locator('.govuk-button[type="submit"]');
     this.selected_dropdown = this.page.locator('select option[selected=selected]');
@@ -108,7 +117,6 @@ export default class CreateUserProfilePage {
 
   async selectRoleCheckBoxAndGetValue() {
     const checkbox = this.role_checkbox;
-    await checkbox.scrollIntoViewIfNeeded();
     await checkbox.check();
     return checkbox.isChecked();
   }

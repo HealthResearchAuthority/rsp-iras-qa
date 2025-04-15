@@ -6,40 +6,33 @@
     "description_index": "1",
     "admin_email_index": "2",
     "index": "0",
+    "system_admin_email_text": "futureiras.automation@hra.nhs.uk",
     "Create_Review_Body": {
-      "event_description_text": " was created",
-      "system_admin_email_text": "futureiras.automation@hra.nhs.uk"
+      "event_description_text": " was created"
     },
     "Disable_Review_Body": {
-      "event_description_text": " was disabled",
-      "system_admin_email_text": "futureiras.automation@hra.nhs.uk"
+      "event_description_text": " was disabled"
     },
     "Enable_Review_Body": {
-      "event_description_text": " was enabled",
-      "system_admin_email_text": "futureiras.automation@hra.nhs.uk"
+      "event_description_text": " was enabled"
     },
     "Edit_Review_Body_Organisation_Name": {
-      "event_description_text": "OrganisationName was changed from ",
-      "system_admin_email_text": "futureiras.automation@hra.nhs.uk"
+      "event_description_text": "OrganisationName was changed from "
     },
     "Edit_Review_Body_Country": {
-      "event_description_text": "Countries was changed from ",
-      "system_admin_email_text": "futureiras.automation@hra.nhs.uk"
+      "event_description_text": "Countries was changed from "
     },
     "Edit_Review_Body_Email_Address": {
-      "event_description_text": "EmailAddress was changed from ",
-      "system_admin_email_text": "futureiras.automation@hra.nhs.uk"
+      "event_description_text": "EmailAddress was changed from "
     },
     "Edit_Review_Body_Description": {
-      "event_description_text": "Description was changed from ",
-      "system_admin_email_text": "futureiras.automation@hra.nhs.uk"
+      "event_description_text": "Description was changed from "
     },
     "Edit_Review_Body_All_Fields": {
       "organisation_name_event_description_text": "OrganisationName was changed from ",
       "country_event_description_text": "Countries was changed from ",
       "email_address_event_description_text": "EmailAddress was changed from ",
       "description_event_description_text": "Description was changed from ",
-      "system_admin_email_text": "futureiras.automation@hra.nhs.uk",
       "organisation_index": "0",
       "email_index": "1",
       "description_index": "2",

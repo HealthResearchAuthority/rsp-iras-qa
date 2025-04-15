@@ -84,7 +84,10 @@ Then(
     const eventDescriptionExpectedValue = organisationName + datasetAudit.event_description_text;
     expect(auditLog[timeIndex][rowIndex]).toBe(timeExpected);
     expect(auditLog[descrIndex][rowIndex]).toBe(eventDescriptionExpectedValue);
-    expect(auditLog[emailIndex][rowIndex]).toBe(datasetAudit.system_admin_email_text);
+    expect(auditLog[emailIndex][rowIndex]).toBe(
+      auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page
+        .system_admin_email_text
+    );
   }
 );
 
@@ -147,7 +150,10 @@ Then(
       const eventDescriptionExpectedValue = dataset.event_description_text + valuePrevious + ' to ' + valueCurrent;
       expect(auditLog[timeIndex][rowIndex]).toBe(timeExpected);
       expect(auditLog[descrIndex][rowIndex]).toBe(eventDescriptionExpectedValue);
-      expect(auditLog[emailIndex][rowIndex]).toBe(dataset.system_admin_email_text);
+      expect(auditLog[emailIndex][rowIndex]).toBe(
+        auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page
+          .system_admin_email_text
+      );
     }
   }
 );
@@ -198,10 +204,16 @@ Then(
     );
     expect(auditLog[timeIndex][organisationIndex]).toBe(timeExpected);
     expect(auditLog[descrIndex][organisationIndex]).toBe(orgNameEventDescriptionExpectedValue);
-    expect(auditLog[adminEmailIndex][organisationIndex]).toBe(dataset.system_admin_email_text);
+    expect(auditLog[adminEmailIndex][organisationIndex]).toBe(
+      auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page
+        .system_admin_email_text
+    );
     expect(auditLog[timeIndex][emailIndex]).toBe(timeExpected);
     expect(auditLog[descrIndex][emailIndex]).toBe(emailEventDescriptionExpectedValue);
-    expect(auditLog[adminEmailIndex][emailIndex]).toBe(dataset.system_admin_email_text);
+    expect(auditLog[adminEmailIndex][emailIndex]).toBe(
+      auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page
+        .system_admin_email_text
+    );
     expect(auditLog[timeIndex][descriptionIndex]).toBe(timeExpected);
     if (descriptionPrevious !== '') {
       expect(auditLog[descrIndex][descriptionIndex]).toBe(descriptionEventDescriptionExpectedValue);
@@ -210,11 +222,17 @@ Then(
         dataset.description_event_description_text + '(null)' + ' to ' + descriptionCurrent;
       expect(auditLog[descrIndex][descriptionIndex]).toBe(descriptionEventDescriptionExpectedValue);
     }
-    expect(auditLog[adminEmailIndex][descriptionIndex]).toBe(dataset.system_admin_email_text);
+    expect(auditLog[adminEmailIndex][descriptionIndex]).toBe(
+      auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page
+        .system_admin_email_text
+    );
     if (countryNamesPrevious !== countryNamesCurrent) {
       expect(auditLog[timeIndex][countryIndex]).toBe(timeExpected);
       expect(auditLog[descrIndex][countryIndex]).toBe(countryEventDescriptionExpectedValue);
-      expect(auditLog[adminEmailIndex][countryIndex]).toBe(dataset.system_admin_email_text);
+      expect(auditLog[adminEmailIndex][countryIndex]).toBe(
+        auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page
+          .system_admin_email_text
+      );
     }
   }
 );
