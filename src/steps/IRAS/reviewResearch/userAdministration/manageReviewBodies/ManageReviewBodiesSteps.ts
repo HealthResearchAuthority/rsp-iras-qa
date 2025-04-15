@@ -1,5 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { test, expect } from '../../../../../hooks/CustomFixtures';
+import { confirmStringNotNull, removeUnwantedWhitespace } from '../../../../../utils/UtilFunctions';
 const { Then } = createBdd(test);
 
 Then(
@@ -77,8 +78,10 @@ Then(
   'I click the view edit link for the {string} review body',
   async ({ manageReviewBodiesPage, reviewBodyProfilePage }, status: string) => {
     const reviewBodyRow = await manageReviewBodiesPage.getRowByOrgName(await reviewBodyProfilePage.getOrgName(), true);
-    const organisationStatusText = await reviewBodyRow.locator(manageReviewBodiesPage.status_from_list).textContent();
-    if (status === organisationStatusText) {
+    const organisationStatusText = await removeUnwantedWhitespace(
+      confirmStringNotNull(await reviewBodyRow.locator(manageReviewBodiesPage.status_from_list).textContent())
+    );
+    if (status === organisationStatusText.toLowerCase()) {
       await reviewBodyRow.locator(manageReviewBodiesPage.actionsLink).click();
     }
   }

@@ -381,9 +381,9 @@ export async function generateTimeStampedValue(keyVal: string, separator: string
 }
 
 export async function getCurrentTimeFormatted(): Promise<string> {
-  const now = new Date();
-  // Subtract one hour from the current time
-  now.setHours(now.getHours() - 1);
+  const now = new Date().getTime(); //UTC time
+  const oneHourAgo = now - 60 * 60 * 1000; // Subtract one hour in milliseconds
+  const dateOneHourAgo = new Date(oneHourAgo);
   const formatter = new Intl.DateTimeFormat('en-GB', {
     day: '2-digit',
     month: 'short',
@@ -394,7 +394,7 @@ export async function getCurrentTimeFormatted(): Promise<string> {
     timeZone: 'Europe/London',
     // timeZoneName: 'short',
   });
-  const parts = formatter.formatToParts(now);
+  const parts = formatter.formatToParts(dateOneHourAgo);
   const getPart = (type: string) => parts.find((p) => p.type === type)?.value || '';
   const formatted = `${getPart('day')} ${getPart('month')} ${getPart('year')} ${getPart('hour')}:${getPart('minute')}`;
   return formatted;
