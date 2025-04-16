@@ -6,7 +6,7 @@ Feature: User Administration: Manage Review Bodies - Edit review body
         And I click the 'System_Admin' link on the 'Banner'
         And I can see the 'System_Administration_Page'
         And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
-        And I can see the manage review bodies list page
+        Then I can see the 'Manage_Review_Bodies_Page'
         And I select a 'QA Automation' Review Body to View and Edit which is 'active'
 
     @accessReviewBodyProfile
@@ -49,7 +49,7 @@ Feature: User Administration: Manage Review Bodies - Edit review body
         Then I now see the review body profile page with the updated '<Edit_Review_Body>'
         And I capture the page screenshot
         When I have navigated to the 'Manage_Review_Bodies_Page'
-        And I can see the manage review bodies list page
+        Then I can see the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
         Then I can see the updated review body is present in the list with '<Edit_Review_Body>'
 
@@ -71,7 +71,7 @@ Feature: User Administration: Manage Review Bodies - Edit review body
         Then I now see the review body profile page with the updated '<Edit_Review_Body>'
         And I capture the page screenshot
         When I have navigated to the 'Manage_Review_Bodies_Page'
-        And I can see the manage review bodies list page
+        Then I can see the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
         Then I can see the updated review body is present in the list with '<Edit_Review_Body>'
 

@@ -12,7 +12,7 @@ Feature: User Administration: System Administration
     Then I can see the '<Validation_Text>' ui labels on the system administration home page
     Then I capture the page screenshot
     When I click the '<Navigation_Link_First>' link on the 'System_Administration_Page'
-    Then I can see the manage review bodies list page
+    Then I can see the 'Manage_Review_Bodies_Page'
     Then I capture the page screenshot
     When I click the '<Navigation_Link>' link on the 'Manage_Review_Bodies_Page'
     Then I can see the system administration home page

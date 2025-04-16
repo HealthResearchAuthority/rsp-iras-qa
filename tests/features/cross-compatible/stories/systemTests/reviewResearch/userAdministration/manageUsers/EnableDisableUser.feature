@@ -14,8 +14,8 @@ Feature: User Administration: Manage Users - Enable / Disable users
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
     And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
     And I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
-    And I can see the 'Manage_Users_Page'
-    When I search and click on view edit link for '<Add_User_Profile>' user with 'ACTIVE' status from the manage user page
+    And I can see the manage users list page
+    When I search and click on view edit link for unique '<Add_User_Profile>' user with 'ACTIVE' status from the manage user page
     Then I can see the '<Disable_Label_Texts>' ui labels on the manage users list page
     And I capture the page screenshot
     When I click the 'Disable_User_Record' button on the 'User_Profile_Page'
@@ -39,8 +39,8 @@ Feature: User Administration: Manage Users - Enable / Disable users
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
     And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
     And I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
-    And I can see the 'Manage_Users_Page'
-    And I search and click on view edit link for '<Add_User_Profile>' user with 'ACTIVE' status from the manage user page
+    And I can see the manage users list page
+    And I search and click on view edit link for unique '<Add_User_Profile>' user with 'ACTIVE' status from the manage user page
     And I click the 'Disable_User_Record' button on the 'User_Profile_Page'
     And I capture the page screenshot
     When I click the '<Navigation_Link>' link on the 'Confirmation_Page'
@@ -57,13 +57,13 @@ Feature: User Administration: Manage Users - Enable / Disable users
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
     And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
     And I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
-    And I can see the 'Manage_Users_Page'
-    And I search and click on view edit link for '<Add_User_Profile>' user with 'ACTIVE' status from the manage user page
+    And I can see the manage users list page
+    And I search and click on view edit link for unique '<Add_User_Profile>' user with 'ACTIVE' status from the manage user page
     And I click the 'Disable_User_Record' button on the 'User_Profile_Page'
     And I click the 'Confirm' button on the 'Confirmation_Page'
     And I click the 'Back_To_Manage_Users' link on the 'Confirmation_Page'
-    And I can see the 'Manage_Users_Page'
-    When I search and click on view edit link for '<Add_User_Profile>' user with 'DISABLED' status from the manage user page
+    And I can see the manage users list page
+    When I search and click on view edit link for unique '<Add_User_Profile>' user with 'DISABLED' status from the manage user page
     Then I can see the '<Enable_Label_Texts>' ui labels on the manage users list page
     And I capture the page screenshot
     When I click the 'Enable_User_Record' button on the 'User_Profile_Page'
@@ -87,13 +87,13 @@ Feature: User Administration: Manage Users - Enable / Disable users
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
     And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
     And I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
-    And I can see the 'Manage_Users_Page'
-    And I search and click on view edit link for '<Add_User_Profile>' user with 'ACTIVE' status from the manage user page
+    And I can see the manage users list page
+    And I search and click on view edit link for unique '<Add_User_Profile>' user with 'ACTIVE' status from the manage user page
     And I click the 'Disable_User_Record' button on the 'User_Profile_Page'
     And I click the 'Confirm' button on the 'Confirmation_Page'
     And I click the 'Back_To_Manage_Users' link on the 'Confirmation_Page'
-    And I can see the 'Manage_Users_Page'
-    When I search and click on view edit link for '<Add_User_Profile>' user with 'DISABLED' status from the manage user page
+    And I can see the manage users list page
+    When I search and click on view edit link for unique '<Add_User_Profile>' user with 'DISABLED' status from the manage user page
     When I click the 'Enable_User_Record' button on the 'User_Profile_Page'
     And I capture the page screenshot
     When I click the '<Navigation_Link>' link on the 'Confirmation_Page'

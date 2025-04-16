@@ -354,6 +354,26 @@
       "Max_Words": "The description cannot exceed 500 words.",
       "Max_Email_Chars": "Max 255 characters allowed",
       "Email_Format": "Invalid email format"
+    },
+    "Valid_Data_Organisation_Name_Another": {
+      "organisation_name_text": "QA Automation HSC Research and Development Test Update Org Name"
+    },
+    "Valid_Data_Email_Another": {
+      "email_address_text": "qaauto_test_update_email_hscrd@health.org"
+    },
+
+    "Valid_Data_Country_Another": {
+      "country_checkbox": ["Northern Ireland", "Scotland", "Wales"]
+    },
+
+    "Valid_Data_Description_Another": {
+      "description_text": "qaauto_Responsible for confirmation of research governance compliance Test Update description"
+    },
+    "Valid_Data_Edit_All_Fields": {
+      "organisation_name_text": "QA Automation HSC Research and Development Test Update All fields",
+      "country_checkbox": ["Northern Ireland", "Scotland", "Wales"],
+      "email_address_text": "qaauto_test_update_all_hscrd@health.org",
+      "description_text": "qaauto_Responsible for confirmation of research governance compliance Test Update all fields"
     }
   }
 }

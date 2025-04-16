@@ -12,24 +12,19 @@ Then('I can see the check and create user profile page', async ({ checkCreateUse
 
 Then(
   'I can see previously filled values in the new user profile page for {string} displayed on the check and create user profile page',
-  async ({ createUserProfilePage, checkCreateUserProfilePage }, datasetName: string) => {
+  async ({ createUserProfilePage, checkCreateUserProfilePage, commonItemsPage }, datasetName: string) => {
     const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        const fieldValActual = await checkCreateUserProfilePage.getSelectedValues(
-          dataset,
-          key,
-          checkCreateUserProfilePage
-        );
+        const fieldValActual = await commonItemsPage.getSelectedValues(key, checkCreateUserProfilePage);
         if (key === 'email_address_text') {
           const filePath = path.resolve(pathToTestDataJson);
           const data = await fse.readJson(filePath);
           expect(fieldValActual).toBe(data.Create_User_Profile.email_address_unique);
-        } else if (key === 'country_checkbox' || key === 'access_required_checkbox') {
+        } else if (key === 'country_checkbox' || key === 'access_required_checkbox' || key === 'role_checkbox') {
           const fieldValActuals = fieldValActual.split(', ');
           fieldValActuals.forEach((val, index) => {
-            const fieldValActual = val;
-            expect(fieldValActual).toBe(dataset[key][index]);
+            expect(val).toBe(dataset[key][index]);
           });
         } else {
           expect(fieldValActual).toBe(dataset[key]);

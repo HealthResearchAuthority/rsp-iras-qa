@@ -6,9 +6,9 @@ Feature: User Administration: Manage Review Bodies - Create review body
         And I click the 'System_Admin' link on the 'Banner'
         And I can see the 'System_Administration_Page'
         And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
-        And I can see the manage review bodies list page
+        Then I can see the 'Manage_Review_Bodies_Page'
         And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
-        And I can see the add a new review body page
+        Then I can see the 'Create_Review_Body_Page'
 
     @verifyCreateReviewBody
     Scenario Outline: Verify the user is able to create a new review body with valid data
@@ -21,7 +21,7 @@ Feature: User Administration: Manage Review Bodies - Create review body
         Then I can see the create Review body confirmation page for '<Add_Review_Body>'
         And I capture the page screenshot
         When I have navigated to the 'Manage_Review_Bodies_Page'
-        And I can see the manage review bodies list page
+        Then I can see the 'Manage_Review_Bodies_Page'
         Then I can see the review body for '<Add_Review_Body>' is present in the list
         And I capture the page screenshot
         And I can see the status of the review body is '<Status>'
@@ -68,7 +68,7 @@ Feature: User Administration: Manage Review Bodies - Create review body
         And I can see the create Review body confirmation page for '<Add_Review_Body>'
         And I capture the page screenshot
         When I click the 'Add_Another_Review_Body' link on the 'Create_Review_Body_Confirmation_Page'
-        Then I can see the add a new review body page
+        Then I can see the 'Create_Review_Body_Page'
         And I capture the page screenshot
         When I fill the new review body page using '<Add_Another_Review_Body>'
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
@@ -78,7 +78,7 @@ Feature: User Administration: Manage Review Bodies - Create review body
         Then I can see the create Review body confirmation page for '<Add_Another_Review_Body>'
         And I capture the page screenshot
         When I click the 'Back_To_Manage_Review_Bodies' link on the 'Create_Review_Body_Confirmation_Page'
-        And I can see the manage review bodies list page
+        Then I can see the 'Manage_Review_Bodies_Page'
         Then I can see the review body for '<Add_Another_Review_Body>' is present in the list
         And I capture the page screenshot
         And I can see the status of the review body is '<Status>'
@@ -92,7 +92,7 @@ Feature: User Administration: Manage Review Bodies - Create review body
     Scenario: Verify the user can navigate from 'Add a new review body' page by clicking 'Back' link
         And I capture the page screenshot
         And I click the 'Back' link on the 'Create_Review_Body_Page'
-        Then I can see the manage review bodies list page
+        Then I can see the 'Manage_Review_Bodies_Page'
 
     @verifyCheckReviewPageBackButtonFlow
     Scenario Outline: Verify the user can navigate from the check and confirm review body pages using the back options
@@ -111,7 +111,7 @@ Feature: User Administration: Manage Review Bodies - Create review body
         Then I can see the create Review body confirmation page for '<Add_Another_Review_Body>'
         And I capture the page screenshot
         When I click the 'Back_To_Manage_Review_Bodies' link on the 'Create_Review_Body_Confirmation_Page'
-        Then I can see the manage review bodies list page
+        Then I can see the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
 
         Examples:

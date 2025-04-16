@@ -37,6 +37,10 @@ Then(
       await expect(reviewBodyProfilePage.disable_sub_heading).toBeVisible();
       await expect(reviewBodyProfilePage.disable_guidance_text).toBeVisible();
       await expect(reviewBodyProfilePage.disable_button).toBeVisible();
+    } else if (status.toLowerCase() == 'disabled') {
+      await expect(reviewBodyProfilePage.enable_sub_heading).toBeVisible();
+      await expect(reviewBodyProfilePage.enable_guidance_text).toBeVisible();
+      await expect(reviewBodyProfilePage.enable_button).toBeVisible();
     }
   }
 );
@@ -58,12 +62,82 @@ When(
       await expect(reviewBodyProfilePage.organisation_name_value).toHaveText(
         await editReviewBodyPage.getUniqueOrgName()
       );
+      await expect(reviewBodyProfilePage.page_heading).toHaveText(
+        reviewBodyProfilePage.reviewBodyProfilePageData.Review_Body_Profile_Page.heading_prefix_label +
+          (await editReviewBodyPage.getUniqueOrgName())
+      );
     } else {
       await expect(reviewBodyProfilePage.organisation_name_value).toHaveText(dataset.organisation_name_text);
+      await expect(reviewBodyProfilePage.page_heading).toHaveText(dataset.organisation_name_text);
+    }
+    await expect(reviewBodyProfilePage.country_value).toHaveText(expectedCountryValues.replaceAll(',', ','));
+    await expect(reviewBodyProfilePage.email_address_value).toHaveText(dataset.email_address_text);
+    await expect(reviewBodyProfilePage.description_value).toHaveText(dataset.description_text);
+  }
+);
+
+When(
+  'I now see the review body profile page with the created {string}',
+  async ({ createReviewBodyPage, reviewBodyProfilePage }, datasetName: string) => {
+    const dataset = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body[datasetName];
+    const expectedCountryValues: string = dataset.country_checkbox.toString();
+    await reviewBodyProfilePage.assertOnReviewbodyProfilePage();
+    if (datasetName.startsWith('Valid_') || datasetName.startsWith('Review_')) {
+      await expect(reviewBodyProfilePage.organisation_name_value).toHaveText(
+        await createReviewBodyPage.getUniqueOrgName()
+      );
+      await expect(reviewBodyProfilePage.page_heading).toHaveText(
+        reviewBodyProfilePage.reviewBodyProfilePageData.Review_Body_Profile_Page.heading_prefix_label +
+          (await createReviewBodyPage.getUniqueOrgName())
+      );
+    } else {
+      await expect(reviewBodyProfilePage.organisation_name_value).toHaveText(dataset.organisation_name_text);
+      await expect(reviewBodyProfilePage.page_heading).toHaveText(dataset.organisation_name_text);
     }
     await expect(reviewBodyProfilePage.country_value).toHaveText(expectedCountryValues.replaceAll(',', ', '));
     await expect(reviewBodyProfilePage.email_address_value).toHaveText(dataset.email_address_text);
     await expect(reviewBodyProfilePage.description_value).toHaveText(dataset.description_text);
+  }
+);
+
+When(
+  'I now see the review body profile page with the updated {string} for field {string}',
+  async ({ editReviewBodyPage, reviewBodyProfilePage }, datasetName: string, fieldName: string) => {
+    await reviewBodyProfilePage.assertOnReviewbodyProfilePage();
+    const dataset = editReviewBodyPage.editReviewBodyPageData.Edit_Review_Body[datasetName];
+    let organisationName = await reviewBodyProfilePage.getOrgName();
+    if (fieldName == 'Organisation_Name') {
+      if (datasetName.startsWith('Valid_') || datasetName.startsWith('Review_')) {
+        organisationName = await editReviewBodyPage.getUniqueOrgName();
+        await expect(reviewBodyProfilePage.organisation_name_value).toHaveText(organisationName);
+        await expect(reviewBodyProfilePage.page_heading).toHaveText(
+          reviewBodyProfilePage.reviewBodyProfilePageData.Review_Body_Profile_Page.heading_prefix_label +
+            organisationName
+        );
+      } else {
+        await expect(reviewBodyProfilePage.organisation_name_value).toHaveText(dataset.organisation_name_text);
+        await expect(reviewBodyProfilePage.page_heading).toHaveText(dataset.organisation_name_text);
+      }
+      await reviewBodyProfilePage.setNewOrgName(
+        confirmStringNotNull(await reviewBodyProfilePage.organisation_name_value.textContent())
+      );
+    } else if (fieldName == 'Country') {
+      const expectedCountryValues: string = dataset.country_checkbox.toString();
+      await expect(reviewBodyProfilePage.country_value).toHaveText(expectedCountryValues.replaceAll(',', ', '));
+      await reviewBodyProfilePage.setNewCountries(
+        confirmStringNotNull(await reviewBodyProfilePage.country_value.textContent()).split(', ')
+      );
+    } else if (fieldName == 'Email_Address') {
+      await expect(reviewBodyProfilePage.email_address_value).toHaveText(dataset.email_address_text);
+      await reviewBodyProfilePage.setNewEmail(
+        confirmStringNotNull(await reviewBodyProfilePage.email_address_value.textContent())
+      );
+    } else if (fieldName == 'Description') {
+      await expect(reviewBodyProfilePage.description_value).toHaveText(dataset.description_text);
+      await reviewBodyProfilePage.setNewDescription(
+        confirmStringNotNull(await reviewBodyProfilePage.description_value.textContent())
+      );
+    }
   }
 );
 
@@ -84,3 +158,10 @@ Then(
     }
   }
 );
+
+When('I can see the updated review body profile page heading', async ({ reviewBodyProfilePage }) => {
+  await expect(reviewBodyProfilePage.page_heading).toHaveText(
+    reviewBodyProfilePage.reviewBodyProfilePageData.Review_Body_Profile_Page.heading_prefix_label +
+      (await reviewBodyProfilePage.getOrgName())
+  );
+});

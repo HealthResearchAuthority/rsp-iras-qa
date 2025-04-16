@@ -62,7 +62,16 @@ Given(
 When(
   'I can see the {string}',
   async (
-    { loginPage, homePage, createApplicationPage, proceedApplicationPage, systemAdministrationPage, manageUsersPage },
+    {
+      loginPage,
+      homePage,
+      createApplicationPage,
+      proceedApplicationPage,
+      systemAdministrationPage,
+      createReviewBodyPage,
+      manageReviewBodiesPage,
+      manageUsersPage,
+    },
     page: string
   ) => {
     switch (page) {
@@ -80,6 +89,12 @@ When(
         break;
       case 'System_Administration_Page':
         await systemAdministrationPage.assertOnSystemAdministrationPage();
+        break;
+      case 'Create_Review_Body_Page':
+        await createReviewBodyPage.assertOnCreateReviewbodyPage();
+        break;
+      case 'Manage_Review_Bodies_Page':
+        await manageReviewBodiesPage.assertOnManageReviewBodiesPage();
         break;
       case 'Manage_Users_Page':
         await manageUsersPage.assertOnManageUsersPage();

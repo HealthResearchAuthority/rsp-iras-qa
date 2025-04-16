@@ -13,7 +13,7 @@ import AdultsLackingCapacityPage from '../IRAS/questionSet/AdultsLackingCapacity
 import BookingPage from '../IRAS/questionSet/BookingPage';
 import ChildrenPage from '../IRAS/questionSet/ChildrenPage';
 import { PageObjectDataName } from '../../utils/CustomTypes';
-import { confirmStringNotNull } from '../../utils/UtilFunctions';
+import { confirmStringNotNull, removeUnwantedWhitespace } from '../../utils/UtilFunctions';
 
 //Declare Page Objects
 export default class CommonItemsPage {
@@ -436,5 +436,10 @@ export default class CommonItemsPage {
       const otherLocator = page[key].locator('..').locator(this.errorMessageFieldLabel);
       await expect(otherLocator).toHaveText(errorMessageFieldDataset[key]);
     }
+  }
+
+  async getSelectedValues<PageObject>(key: string, page: PageObject) {
+    const locator: Locator = page[key];
+    return await removeUnwantedWhitespace(confirmStringNotNull(await locator.textContent()));
   }
 }

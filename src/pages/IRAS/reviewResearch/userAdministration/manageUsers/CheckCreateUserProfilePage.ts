@@ -1,6 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as checkCreateUserProfilePageTestData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageUsers/check_create_user_profile_page_data.json';
-import { confirmStringNotNull, removeUnwantedWhitespace } from '../../../../../utils/UtilFunctions';
 
 //Declare Page Objects
 export default class CheckCreateUserProfilePage {
@@ -32,7 +31,7 @@ export default class CheckCreateUserProfilePage {
   readonly job_title_text: Locator;
   readonly job_title_change_link: Locator;
   readonly role_label: Locator;
-  readonly role_dropdown: Locator;
+  readonly role_checkbox: Locator;
   readonly role_change_link: Locator;
   readonly committee_label: Locator;
   readonly committee_dropdown: Locator;
@@ -82,8 +81,8 @@ export default class CheckCreateUserProfilePage {
     this.job_title_text = this.userTableRows.getByRole('cell').getByTestId('JobTitle').locator('..');
     this.job_title_change_link = this.job_title_text.locator('..').getByText('Change');
     this.role_label = this.userTableRows.getByRole('cell').getByText('Role', { exact: true });
-    this.role_dropdown = this.userTableRows.getByRole('cell').getByTestId('Role').locator('..');
-    this.role_change_link = this.role_dropdown.locator('..').getByText('Change');
+    this.role_checkbox = this.userTableRows.getByRole('cell').locator('[id^="UserRoles"]').locator('..');
+    this.role_change_link = this.role_checkbox.locator('..').getByText('Change');
     this.committee_label = this.userTableRows.getByRole('cell').getByText('Committee', { exact: true });
     this.committee_dropdown = this.userTableRows.getByRole('cell').getByTestId('Committee').locator('..'); //update later when the Committee is available
     this.committee_change_link = this.page.locator('tr.govuk-table__row:nth-child(9) button.govuk-link-button'); //update later when the Committee is available
@@ -112,10 +111,5 @@ export default class CheckCreateUserProfilePage {
   async clickOnChangeButtonRoleOperations(fieldKey: string) {
     const locatorName = fieldKey.toLowerCase() + '_change_link';
     await this[locatorName].click();
-  }
-
-  async getSelectedValues<PageObject>(dataset: JSON, key: string, page: PageObject) {
-    const locator: Locator = page[key];
-    return await removeUnwantedWhitespace(confirmStringNotNull(await locator.textContent()));
   }
 }

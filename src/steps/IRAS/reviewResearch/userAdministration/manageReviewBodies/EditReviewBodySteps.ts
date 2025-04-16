@@ -59,3 +59,27 @@ Then(
     }
   }
 );
+
+When(
+  'I fill the edit review body page using {string} for field {string}',
+  async ({ editReviewBodyPage, commonItemsPage }, datasetName: string, fieldName: string) => {
+    const dataset = editReviewBodyPage.editReviewBodyPageData.Edit_Review_Body[datasetName];
+    for (const key in dataset) {
+      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+        if (fieldName == 'Organisation_Name') {
+          const orgNameLocator: Locator = editReviewBodyPage[key];
+          const uniqueOrgNameValue = await generateTimeStampedValue(dataset[key], ' ');
+          await orgNameLocator.fill(uniqueOrgNameValue);
+          await editReviewBodyPage.setUniqueOrgName(uniqueOrgNameValue);
+        } else if (fieldName == 'Country') {
+          const datasetNameClear: string = 'Edit_Review_Body_Page';
+          const clearDataset = editReviewBodyPage.editReviewBodyPageData[datasetNameClear];
+          await commonItemsPage.clearUIComponent(clearDataset, 'country_checkbox', editReviewBodyPage);
+          await commonItemsPage.fillUIComponent(dataset, key, editReviewBodyPage);
+        } else {
+          await commonItemsPage.fillUIComponent(dataset, key, editReviewBodyPage);
+        }
+      }
+    }
+  }
+);
