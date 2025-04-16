@@ -1,7 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../../hooks/CustomFixtures';
 const { Then } = createBdd(test);
-import { getCurrentTimeFormatted } from '../../../../../utils/UtilFunctions';
 
 Then('I can see the audit history page of the review body', async ({ auditHistoryReviewBodyPage }) => {
   await auditHistoryReviewBodyPage.assertOnAuditHistoryReviewBodyPage();
@@ -79,11 +78,6 @@ Then(
     );
   }
 );
-
-Then('I capture the current time', async ({ auditHistoryReviewBodyPage }) => {
-  const currentTime = await getCurrentTimeFormatted();
-  await auditHistoryReviewBodyPage.setUpdatedTime(currentTime);
-});
 
 Then('I can see the audit history page heading', async ({ auditHistoryReviewBodyPage, reviewBodyProfilePage }) => {
   const organisationName = await reviewBodyProfilePage.getOrgName();
