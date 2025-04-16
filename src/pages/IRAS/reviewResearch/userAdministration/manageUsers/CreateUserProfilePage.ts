@@ -17,11 +17,13 @@ export default class CreateUserProfilePage {
   readonly telephone_text: Locator;
   readonly organisation_text: Locator;
   readonly job_title_text: Locator;
-  readonly role_dropdown: Locator;
+  readonly role_label: Locator;
+  readonly role_fieldset: Locator;
+  readonly role_checkbox: Locator;
   readonly committee_dropdown: Locator;
-  readonly country_checkbox_label: Locator;
+  readonly country_fieldset: Locator;
   readonly country_checkbox: Locator;
-  readonly access_required_checkbox_label: Locator;
+  readonly access_required_fieldset: Locator;
   readonly access_required_checkbox: Locator;
   readonly review_body_dropdown: Locator;
   readonly continue_button: Locator;
@@ -37,23 +39,55 @@ export default class CreateUserProfilePage {
     this.page_heading = this.page
       .getByRole('heading')
       .getByText(this.createUserProfilePageTestData.Create_User_Profile_Page.page_heading);
-    this.title_text = this.page.getByLabel('Title', { exact: true });
-    this.first_name_text = this.page.getByLabel('First name', { exact: true });
-    this.last_name_text = this.page.getByLabel('Last name', { exact: true });
-    this.email_address_text = this.page.getByLabel('Email address', { exact: true });
-    this.telephone_text = this.page.getByLabel('Telephone', { exact: true });
-    this.organisation_text = this.page.getByLabel('Organisation', { exact: true });
-    this.job_title_text = this.page.getByLabel('Job title', { exact: true });
-    this.role_dropdown = this.page.getByLabel('Role', { exact: true });
-    this.committee_dropdown = this.page.getByLabel('Committee', { exact: true });
-    this.country_checkbox_label = this.page.locator('[class="govuk-label"][for="Country"] b');
-    this.country_checkbox = this.page.locator('[name="Country"][type="checkbox"]');
-    this.access_required_checkbox_label = this.page.locator('[class="govuk-label"][for="AccessRequired"] b');
-    this.access_required_checkbox = this.page.locator('[name="AccessRequired"][type="checkbox"]');
+    this.title_text = this.page.getByLabel(this.createUserProfilePageTestData.Create_User_Profile_Page.title_label, {
+      exact: true,
+    });
+    this.first_name_text = this.page.getByLabel(
+      this.createUserProfilePageTestData.Create_User_Profile_Page.first_name_label,
+      { exact: true }
+    );
+    this.last_name_text = this.page.getByLabel(
+      this.createUserProfilePageTestData.Create_User_Profile_Page.last_name_label,
+      { exact: true }
+    );
+    this.email_address_text = this.page.getByLabel(
+      this.createUserProfilePageTestData.Create_User_Profile_Page.email_label,
+      { exact: true }
+    );
+    this.telephone_text = this.page.getByLabel(
+      this.createUserProfilePageTestData.Create_User_Profile_Page.phone_label,
+      { exact: true }
+    );
+    this.organisation_text = this.page.getByLabel(
+      this.createUserProfilePageTestData.Create_User_Profile_Page.org_label,
+      { exact: true }
+    );
+    this.job_title_text = this.page.getByLabel(this.createUserProfilePageTestData.Create_User_Profile_Page.job_label, {
+      exact: true,
+    });
+    this.role_label = this.page
+      .locator('label b')
+      .getByText(this.createUserProfilePageTestData.Create_User_Profile_Page.role_label, { exact: true });
+    this.role_fieldset = this.page.locator('.govuk-form-group', { has: this.role_label });
+    this.role_checkbox = this.role_fieldset.getByRole('checkbox');
+    this.committee_dropdown = this.page.getByLabel(
+      this.createUserProfilePageTestData.Create_User_Profile_Page.committee_label,
+      { exact: true }
+    );
+    this.country_fieldset = this.page.getByRole('group', {
+      name: this.createUserProfilePageTestData.Create_User_Profile_Page.country_label,
+      exact: true,
+    });
+    this.country_checkbox = this.country_fieldset.getByRole('checkbox');
+    this.access_required_fieldset = this.page.getByRole('group', {
+      name: this.createUserProfilePageTestData.Create_User_Profile_Page.access_required_label,
+      exact: true,
+    });
+    this.access_required_checkbox = this.access_required_fieldset.getByRole('checkbox');
     this.review_body_dropdown = this.page.getByLabel('Review body', { exact: true });
-    this.continue_button = this.page.locator('.govuk-button[type="submit"]');
+    this.continue_button = this.page.locator('.govuk-button[type="submit"]'); //change to data text
     this.selected_dropdown = this.page.locator('select option[selected=selected]');
-    this.back_button = this.page.getByText('Back');
+    this.back_button = this.page.getByText('Back'); //change to data text
   }
 
   async assertOnCreateUserProfilePage() {

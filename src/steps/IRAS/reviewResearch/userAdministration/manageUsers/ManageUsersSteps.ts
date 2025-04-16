@@ -44,7 +44,7 @@ When(
 );
 
 When(
-  'I search and click on view edit link for {string} user with {string} status from the manage user page',
+  'I search and click on view edit link for existing {string} user with {string} status from the manage user page',
   async ({ manageUsersPage }, datasetName: string, userStatus: string) => {
     const dataset = manageUsersPage.manageUsersPageTestData[datasetName];
     const userFirstName = dataset.first_name_text;
