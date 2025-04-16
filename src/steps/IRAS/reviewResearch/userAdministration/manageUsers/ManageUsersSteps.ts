@@ -9,10 +9,17 @@ const { When, Then } = createBdd(test);
 
 Then(
   'I can see the list is sorted by default in the alphabetical order of the {string}',
-  async ({ manageUsersPage }) => {
-    const firstNames: string[] = await manageUsersPage.getFirstNamesListFromUI();
-    const sortedFirstNames = [...firstNames].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
-    expect(firstNames).toEqual(sortedFirstNames);
+  async ({ manageUsersPage }, sortField: string) => {
+    let actualList: string[];
+    switch (sortField.toLowerCase()) {
+      case 'first name':
+        actualList = await manageUsersPage.getFirstNamesListFromUI();
+        break;
+      default:
+        throw new Error(`${sortField} is not a valid option`);
+    }
+    const sortedList = [...actualList].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
+    expect(actualList).toEqual(sortedList);
   }
 );
 

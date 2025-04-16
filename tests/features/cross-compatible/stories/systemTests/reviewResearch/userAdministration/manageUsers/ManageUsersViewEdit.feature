@@ -12,7 +12,7 @@ Feature: HRAPROG-393- User Administration: Manage user profiles, view and edit u
     @viewUserProfileRoleOperations
     Scenario Outline: View User profile details for the user with role as Operations
         And I search and click on view edit link for existing '<View_User_Profile>' user with '<Status>' status from the manage user page
-        Then I can see the view user profile details page
+        Then I can see the user profile page
         And I click the 'Back' link on the 'User_Profile_Page'
         Then I can see the 'Manage_Users_Page'
         And I click the 'Back' link on the 'Manage_Users_Page'
@@ -26,7 +26,7 @@ Feature: HRAPROG-393- User Administration: Manage user profiles, view and edit u
     @viewUserProfileRoleReviewer
     Scenario Outline: View User profile details for the user with role as reviewer
         And I search and click on view edit link for existing '<View_User_Profile>' user with '<Status>' status from the manage user page
-        Then I can see the view user profile details page
+        Then I can see the user profile page
         And I click the 'Back' link on the 'User_Profile_Page'
         Then I can see the 'Manage_Users_Page'
         And I click the 'Back' link on the 'Manage_Users_Page'
@@ -40,7 +40,7 @@ Feature: HRAPROG-393- User Administration: Manage user profiles, view and edit u
     @editUserProfileOperations
     Scenario Outline: Successful user profile update for user role as Operations
         And I search and click on view edit link for existing 'Valid_Data_Role_Operations' user with '<Status>' status from the manage user page
-        Then I can see the view user profile details page
+        Then I can see the user profile page
         When I click the '<Edit_User_Field>' change link for '<User_Role>' on the user profile page
         Then I can see the edit user profile page
         And I update user profile '<Edit_User_Field_Data>' on 'Edit_User_Profile_Page'
@@ -67,7 +67,7 @@ Feature: HRAPROG-393- User Administration: Manage user profiles, view and edit u
     @editUserProfileReviewer
     Scenario Outline: Successful user profile update for user as Reviewer
         And I search and click on view edit link for existing 'Active_User_Role_Reviewer' user with '<Status>' status from the manage user page
-        Then I can see the view user profile details page
+        Then I can see the user profile page
         When I click the '<Edit_User_Field>' change link for '<User_Role>' on the user profile page
         Then I can see the edit user profile page
         And I update user profile '<Edit_User_Field_Data>' on 'Edit_User_Profile_Page'
@@ -94,7 +94,7 @@ Feature: HRAPROG-393- User Administration: Manage user profiles, view and edit u
     @editUserProfileValidEmailAddress
     Scenario Outline: Successful user profile update with multiple combination of email address formats
         And I search and click on view edit link for existing 'Edit_User_Only_Mandatory_Fields_Data' user with '<Status>' status from the manage user page
-        Then I can see the view user profile details page
+        Then I can see the user profile page
         When I click the '<Edit_User_Field>' change link for '<User_Role>' on the user profile page
         Then I can see the edit user profile page
         And I update user profile '<Edit_User_Field_Data>' on 'Edit_User_Profile_Page'
@@ -140,7 +140,7 @@ Feature: HRAPROG-393- User Administration: Manage user profiles, view and edit u
     @editUserProfileInvalidEmailAddress
     Scenario Outline: Verify error message when an invalid email format is entered in edit user profile page
         And I search and click on view edit link for existing 'Edit_User_Only_Mandatory_Fields_Data' user with '<Status>' status from the manage user page
-        Then I can see the view user profile details page
+        Then I can see the user profile page
         When I click the '<Edit_User_Field>' change link for '<User_Role>' on the user profile page
         Then I can see the edit user profile page
         And I update user profile '<Edit_User_Field_Data>' on 'Edit_User_Profile_Page'
@@ -178,7 +178,7 @@ Feature: HRAPROG-393- User Administration: Manage user profiles, view and edit u
     @editUserProfileOnlyMandatoryFields
     Scenario Outline: Successful user profile update with only mandatory fields
         And I search and click on view edit link for existing 'Edit_User_Only_Mandatory_Fields_Data' user with '<Status>' status from the manage user page
-        Then I can see the view user profile details page
+        Then I can see the user profile page
         When I click the '<Edit_User_Field>' change link for '<User_Role>' on the user profile page
         Then I can see the edit user profile page
         And I update user profile '<Edit_User_Field_Data>' on 'Edit_User_Profile_Page'
@@ -200,7 +200,7 @@ Feature: HRAPROG-393- User Administration: Manage user profiles, view and edit u
     @editUserProfileMandatoryFieldsValidation
     Scenario Outline: Verify error message when mandatory fields are left blank on edit user profile page
         And I search and click on view edit link for existing 'Edit_User_Only_Mandatory_Fields_Data' user with '<Status>' status from the manage user page
-        Then I can see the view user profile details page
+        Then I can see the user profile page
         When I click the '<Edit_User_Field>' change link for '<User_Role>' on the user profile page
         Then I can see the edit user profile page
         And I edit to remove '<Edit_User_Field>' mandatory field value
@@ -215,7 +215,7 @@ Feature: HRAPROG-393- User Administration: Manage user profiles, view and edit u
     @editUserProfileMaxFieldLengthValidation
     Scenario Outline: Verify error message for field input exceeding maximum length on edit user profile page
         And I search and click on view edit link for existing 'Edit_User_Only_Mandatory_Fields_Data' user with '<Status>' status from the manage user page
-        Then I can see the view user profile details page
+        Then I can see the user profile page
         When I click the '<Edit_User_Field>' change link for '<User_Role>' on the user profile page
         Then I can see the edit user profile page
         And I update user profile '<Edit_User_Field_Data>' on 'Edit_User_Profile_Page'

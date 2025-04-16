@@ -36,11 +36,11 @@ Feature: HRAPROG-394- User Administration: Manage Users
         And I can see the list is sorted by default in the alphabetical order of the 'First Name'
 
         Examples:
-            | Add_User_Profile                         | Validation_Text_Add_New_User_Profile | Role_Dropdown   | Validation_Text_Manage_Users_List |
-            # | Valid_Data_In_All_Fields_Role_Reviewer             | Label_Texts_Role_Not_Operations      | Role_Not_Operations | Label_Texts_Manage_Users_List     |
-            # | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer   | Label_Texts_Role_Not_Operations      | Role_Not_Operations | Label_Texts_Manage_Users_List     |
-            | Valid_Data_In_All_Fields_Role_Operations | Label_Texts_Role_Operations          | Role_Operations | Label_Texts_Manage_Users_List     |
-    # | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Label_Texts_Role_Operations          | Role_Operations     | Label_Texts_Manage_Users_List     |
+            | Add_User_Profile                                   | Validation_Text_Add_New_User_Profile | Role_Dropdown       | Validation_Text_Manage_Users_List |
+            | Valid_Data_In_All_Fields_Role_Reviewer             | Label_Texts_Role_Not_Operations      | Role_Not_Operations | Label_Texts_Manage_Users_List     |
+            | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer   | Label_Texts_Role_Not_Operations      | Role_Not_Operations | Label_Texts_Manage_Users_List     |
+            | Valid_Data_In_All_Fields_Role_Operations           | Label_Texts_Role_Operations          | Role_Operations     | Label_Texts_Manage_Users_List     |
+            | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Label_Texts_Role_Operations          | Role_Operations     | Label_Texts_Manage_Users_List     |
 
     @rsp-2827 @rsp-2870 @verifyAddAnotherUser
     Scenario Outline: Verify the user is able to add another user from the Confirmation message screen using the link

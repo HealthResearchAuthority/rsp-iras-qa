@@ -95,14 +95,14 @@ Feature: User Administration: Manage Review Bodies
         And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'
         Then I can see the audit history page of the review body
         And I capture the page screenshot
-        And I can see the '<Validation_Text>' ui labels on the audit history page of the review body
+        And I can see the '<Validation_Text>' labels on the audit history page of the review body
         # audit history sorting
         And I can see the default sort should be the most recent entry first based on date and time
         And I can see the audit history for all the fields edited event with '<Audit_History>'
 
         Examples:
-            | Add_Review_Body          | Field_Name_One    | Field_Name_Two | Field_Name_Three | Field_Name_Four | Edit_Review_Body           | Validation_Text | Audit_History               |
-            | Valid_Data_In_All_Fields | Organisation_Name | Country        | Email_Address    | Description     | Valid_Data_Edit_All_Fields | header_Texts    | Edit_Review_Body_All_Fields |
+            | Add_Review_Body          | Field_Name_One    | Field_Name_Two | Field_Name_Three | Field_Name_Four | Edit_Review_Body           | Validation_Text           | Audit_History               |
+            | Valid_Data_In_All_Fields | Organisation_Name | Country        | Email_Address    | Description     | Valid_Data_Edit_All_Fields | Review_Body_Audit_History | Edit_Review_Body_All_Fields |
 
     @RegressionTestVerifyBackAndChangeLinkNavigationManageReviewBodies
     Scenario Outline: Verify the user can navigate by clicking 'Back' link and 'Change' link from review body profile page and edit review body page and audit history page
