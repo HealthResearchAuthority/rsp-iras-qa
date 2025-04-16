@@ -381,21 +381,12 @@ export async function generateTimeStampedValue(keyVal: string, separator: string
 }
 
 export async function getCurrentTimeFormatted(): Promise<string> {
-  const now = new Date().getTime(); //UTC time
-  const oneHourAgo = now - 60 * 60 * 1000; // Subtract one hour in milliseconds
-  const dateOneHourAgo = new Date(oneHourAgo);
-  const formatter = new Intl.DateTimeFormat('en-GB', {
-    day: '2-digit',
-    month: 'short',
-    year: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: false,
-    timeZone: 'Europe/London',
-    // timeZoneName: 'short',
-  });
-  const parts = formatter.formatToParts(dateOneHourAgo);
-  const getPart = (type: string) => parts.find((p) => p.type === type)?.value || '';
-  const formatted = `${getPart('day')} ${getPart('month')} ${getPart('year')} ${getPart('hour')}:${getPart('minute')}`;
-  return formatted;
+  const date = new Date();
+  const utcDay = date.getUTCDate().toString().padStart(2, '0');
+  const utcMonth = date.toLocaleString('en-GB', { month: 'short', timeZone: 'UTC' });
+  const utcYear = date.getUTCFullYear();
+  const utcHours = date.getUTCHours().toString().padStart(2, '0');
+  const utcMinutes = date.getUTCMinutes().toString().padStart(2, '0');
+  const formattedUTC = `${utcDay} ${utcMonth} ${utcYear} ${utcHours}:${utcMinutes}`;
+  return formattedUTC;
 }
