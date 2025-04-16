@@ -365,6 +365,12 @@ export async function generateUniqueEmail(keyVal: string, prefix: string): Promi
   return `${prefix}${timestamp}${domain}`;
 }
 
+export async function generateUniqueValue(keyVal: string, prefix: string): Promise<string> {
+  const timestamp = new Date().toISOString().replace(/[-:.TZ]/g, '');
+  const domain = keyVal;
+  return `${domain}${prefix}${timestamp}`;
+}
+
 export async function removeUnwantedWhitespace(value: string): Promise<string> {
   return value.replaceAll(/\s+/g, ' ').trim();
 }
@@ -372,4 +378,24 @@ export async function removeUnwantedWhitespace(value: string): Promise<string> {
 export async function generateTimeStampedValue(keyVal: string, separator: string): Promise<string> {
   const timestamp = new Date().toISOString().replace(/[-:.TZ]/g, '');
   return `${keyVal}${separator}${timestamp}`;
+}
+
+export async function getCurrentTimeFormatted(): Promise<string> {
+  const now = new Date().getTime(); //UTC time
+  const oneHourAgo = now - 60 * 60 * 1000; // Subtract one hour in milliseconds
+  const dateOneHourAgo = new Date(oneHourAgo);
+  const formatter = new Intl.DateTimeFormat('en-GB', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+    timeZone: 'Europe/London',
+    // timeZoneName: 'short',
+  });
+  const parts = formatter.formatToParts(dateOneHourAgo);
+  const getPart = (type: string) => parts.find((p) => p.type === type)?.value || '';
+  const formatted = `${getPart('day')} ${getPart('month')} ${getPart('year')} ${getPart('hour')}:${getPart('minute')}`;
+  return formatted;
 }

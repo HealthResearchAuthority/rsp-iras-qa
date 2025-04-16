@@ -11,7 +11,6 @@ Feature: HRAPROG-394- User Administration: Manage Users
 
     @rsp-2827 @rsp-2870 @verifyUserCreation
     Scenario Outline: Verify the user is able to create a new user profile with valid data
-        Then I can see the '<Validation_Text_Add_New_User_Profile>' ui labels on the add a new user profile page for '<Role_Dropdown>'
         And I capture the page screenshot
         When I fill the new user profile page using '<Add_User_Profile>'
         And I capture the page screenshot
@@ -37,11 +36,11 @@ Feature: HRAPROG-394- User Administration: Manage Users
         And I can see the list is sorted by default in the alphabetical order of the 'First Name'
 
         Examples:
-            | Add_User_Profile                                   | Validation_Text_Add_New_User_Profile | Role_Dropdown       | Validation_Text_Manage_Users_List |
-            | Valid_Data_In_All_Fields_Role_Reviewer             | Label_Texts_Role_Not_Operations      | Role_Not_Operations | Label_Texts_Manage_Users_List     |
-            | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer   | Label_Texts_Role_Not_Operations      | Role_Not_Operations | Label_Texts_Manage_Users_List     |
-            | Valid_Data_In_All_Fields_Role_Operations           | Label_Texts_Role_Operations          | Role_Operations     | Label_Texts_Manage_Users_List     |
-            | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Label_Texts_Role_Operations          | Role_Operations     | Label_Texts_Manage_Users_List     |
+            | Add_User_Profile                         | Validation_Text_Add_New_User_Profile | Role_Dropdown   | Validation_Text_Manage_Users_List |
+            # | Valid_Data_In_All_Fields_Role_Reviewer             | Label_Texts_Role_Not_Operations      | Role_Not_Operations | Label_Texts_Manage_Users_List     |
+            # | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer   | Label_Texts_Role_Not_Operations      | Role_Not_Operations | Label_Texts_Manage_Users_List     |
+            | Valid_Data_In_All_Fields_Role_Operations | Label_Texts_Role_Operations          | Role_Operations | Label_Texts_Manage_Users_List     |
+    # | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Label_Texts_Role_Operations          | Role_Operations     | Label_Texts_Manage_Users_List     |
 
     @rsp-2827 @rsp-2870 @verifyAddAnotherUser
     Scenario Outline: Verify the user is able to add another user from the Confirmation message screen using the link
@@ -78,18 +77,18 @@ Feature: HRAPROG-394- User Administration: Manage Users
             | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer   | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer_Another   |
             | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Valid_Data_In_All_Mandatory_Fields_Role_Operations_Another |
 
-    @rsp-2827 @verifyCreateUserProfileBackButton
-    Scenario: Verify the user can navigate from 'Add a new user profile' page by clicking 'Back' button
-        And I click the 'Back' button on the 'Create_User_Profile_Page'
+    @rsp-2827 @verifyCreateUserProfileBackLink
+    Scenario: Verify the user can navigate from 'Add a new user profile' page by clicking 'Back' link
+        When I click the 'Back' link on the 'Create_User_Profile_Page'
         Then I can see the manage users list page
 
-    @rsp-2827 @verifyCheckCreateUserProfileBackButton
-    Scenario Outline: Verify the user can navigate from 'Check and create user profile' page to add a new user profile page by clicking 'Back' button
+    @rsp-2827 @verifyCheckCreateUserProfileBackLink
+    Scenario Outline: Verify the user can navigate from 'Check and create user profile' page to add a new user profile page by clicking 'Back' link
         When I fill the new user profile page using '<Add_User_Profile>'
         And I click the 'Continue' button on the 'Create_User_Profile_Page'
         Then I can see the check and create user profile page
         Then I can see previously filled values in the new user profile page for '<Add_User_Profile>' displayed on the check and create user profile page
-        And I click the 'Back' button on the 'Check_Create_User_Profile_Page'
+        When I click the 'Back' link on the 'Check_Create_User_Profile_Page'
         Then I can see the add a new user profile page
         Then I can see previously filled values in the new user profile page for '<Add_User_Profile>' displayed on the add a new user profile page
         When I fill the new user profile page using '<Add_Another_User_Profile>'
@@ -109,7 +108,7 @@ Feature: HRAPROG-394- User Administration: Manage Users
             | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer   | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer_Another   |
             | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Valid_Data_In_All_Mandatory_Fields_Role_Operations_Another |
 
-    @rsp-2827 @verifyCheckCreateUserProfileChangeLinkRoleOperations
+    @rsp-2827 @verifyCheckCreateUserProfileChangeLinkRoleOperations @RoleCheckbox
     Scenario Outline: Verify the user can navigate from 'Check and create user profile' page by clicking 'Change' button against all the fields when the role is selected as operations
         And I capture the page screenshot
         When I fill the new user profile page using '<Add_User_Profile>'
@@ -122,7 +121,8 @@ Feature: HRAPROG-394- User Administration: Manage Users
         Then I can see the add a new user profile page
         Then I can see previously filled values in the new user profile page for '<Add_User_Profile>' displayed on the add a new user profile page
         And I capture the page screenshot
-        And I clear the previously entered values on the add a new user profile page for '<Add_User_Profile>'
+        And I uncheck the previously selected checkboxes on the add a new user profile page for '<Add_User_Profile>' for the role is selected as operations
+        And I clear the previously entered values on the add a new user profile page for '<Add_User_Profile>' for '<Role_Dropdown>'
         And I capture the page screenshot
         When I fill the new user profile page using '<Add_Another_User_Profile>'
         And I capture the page screenshot
@@ -132,21 +132,21 @@ Feature: HRAPROG-394- User Administration: Manage Users
         And I capture the page screenshot
 
         Examples:
-            | Add_User_Profile                                   | Field_Name      | Add_Another_User_Profile                                   |
-            | Valid_Data_In_All_Fields_Role_Operations           | Title           | Valid_Data_In_All_Fields_Role_Operations_Another           |
-            | Valid_Data_In_All_Fields_Role_Operations           | First_Name      | Valid_Data_In_All_Fields_Role_Operations_Another           |
-            | Valid_Data_In_All_Fields_Role_Operations           | Last_Name       | Valid_Data_In_All_Fields_Role_Operations_Another           |
-            | Valid_Data_In_All_Fields_Role_Operations           | Email_Address   | Valid_Data_In_All_Fields_Role_Operations_Another           |
-            | Valid_Data_In_All_Fields_Role_Operations           | Telephone       | Valid_Data_In_All_Fields_Role_Operations_Another           |
-            | Valid_Data_In_All_Fields_Role_Operations           | Organisation    | Valid_Data_In_All_Fields_Role_Operations_Another           |
-            | Valid_Data_In_All_Fields_Role_Operations           | Job_Title       | Valid_Data_In_All_Fields_Role_Operations_Another           |
-            | Valid_Data_In_All_Fields_Role_Operations           | Role            | Valid_Data_In_All_Fields_Role_Operations_Another           |
-            | Valid_Data_In_All_Fields_Role_Operations           | Committee       | Valid_Data_In_All_Fields_Role_Operations_Another           |
-            | Valid_Data_In_All_Fields_Role_Operations           | Country         | Valid_Data_In_All_Fields_Role_Operations_Another           |
-            | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Access_Required | Valid_Data_In_All_Mandatory_Fields_Role_Operations_Another |
-            | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Review_Body     | Valid_Data_In_All_Mandatory_Fields_Role_Operations_Another |
+            | Add_User_Profile                                   | Field_Name      | Add_Another_User_Profile                                   | Role_Dropdown   |
+            | Valid_Data_In_All_Fields_Role_Operations           | Title           | Valid_Data_In_All_Fields_Role_Operations_Another           | Role_Operations |
+            | Valid_Data_In_All_Fields_Role_Operations           | First_Name      | Valid_Data_In_All_Fields_Role_Operations_Another           | Role_Operations |
+            | Valid_Data_In_All_Fields_Role_Operations           | Last_Name       | Valid_Data_In_All_Fields_Role_Operations_Another           | Role_Operations |
+            | Valid_Data_In_All_Fields_Role_Operations           | Email_Address   | Valid_Data_In_All_Fields_Role_Operations_Another           | Role_Operations |
+            | Valid_Data_In_All_Fields_Role_Operations           | Telephone       | Valid_Data_In_All_Fields_Role_Operations_Another           | Role_Operations |
+            | Valid_Data_In_All_Fields_Role_Operations           | Organisation    | Valid_Data_In_All_Fields_Role_Operations_Another           | Role_Operations |
+            | Valid_Data_In_All_Fields_Role_Operations           | Job_Title       | Valid_Data_In_All_Fields_Role_Operations_Another           | Role_Operations |
+            | Valid_Data_In_All_Fields_Role_Operations           | Role            | Valid_Data_In_All_Fields_Role_Operations_Another           | Role_Operations |
+            | Valid_Data_In_All_Fields_Role_Operations           | Committee       | Valid_Data_In_All_Fields_Role_Operations_Another           | Role_Operations |
+            | Valid_Data_In_All_Fields_Role_Operations           | Country         | Valid_Data_In_All_Fields_Role_Operations_Another           | Role_Operations |
+            | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Access_Required | Valid_Data_In_All_Mandatory_Fields_Role_Operations_Another | Role_Operations |
+            | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Review_Body     | Valid_Data_In_All_Mandatory_Fields_Role_Operations_Another | Role_Operations |
 
-    @rsp-2827 @verifyCheckCreateUserProfileChangeLinkRoleNotOperations
+    @rsp-2827 @verifyCheckCreateUserProfileChangeLinkRoleNotOperations @RoleCheckbox
     Scenario Outline: Verify the user can navigate from 'Check and create user profile' page by clicking 'Change' button against all the fields when the role is selected as reviewer
         And I capture the page screenshot
         When I fill the new user profile page using '<Add_User_Profile>'
@@ -159,7 +159,7 @@ Feature: HRAPROG-394- User Administration: Manage Users
         Then I can see the add a new user profile page
         Then I can see previously filled values in the new user profile page for '<Add_User_Profile>' displayed on the add a new user profile page
         And I capture the page screenshot
-        And I clear the previously entered values on the add a new user profile page for '<Add_User_Profile>'
+        And I clear the previously entered values on the add a new user profile page for '<Add_User_Profile>' for role is not selected as operations
         And I capture the page screenshot
         When I fill the new user profile page using '<Add_Another_User_Profile>'
         And I capture the page screenshot

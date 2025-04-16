@@ -372,6 +372,12 @@
       "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
       "email_address_text": "qaauto_hscrd@health.org",
       "description_text": "qaauto_Responsible for confirmation of research governance compliance"
+    },
+    "Organisation_Name_Another": {
+      "organisation_name_text": "QA Automation HSC Research and Development Test Update Org Name"
+    },
+    "Email_Another": {
+      "email_address_text": "qaauto_test_update_email_hscrd@health.org"
     }
   }
 }

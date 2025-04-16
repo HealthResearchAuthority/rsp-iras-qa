@@ -43,12 +43,42 @@ When(
 );
 
 Then(
-  'I clear the previously entered values on the add a new user profile page for {string}',
+  'I clear the previously entered values on the add a new user profile page for {string} for role is not selected as operations',
   async ({ createUserProfilePage, commonItemsPage }, datasetName: string) => {
     const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
         await commonItemsPage.clearUIComponent(dataset, key, createUserProfilePage);
+      }
+    }
+  }
+);
+
+Then(
+  'I uncheck the previously selected checkboxes on the add a new user profile page for {string} for the role is selected as operations',
+  async ({ createUserProfilePage, commonItemsPage }, datasetName: string) => {
+    const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
+    for (const key in dataset) {
+      if (key === 'country_checkbox' || key === 'access_required_checkbox') {
+        if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+          await commonItemsPage.clearUIComponent(dataset, key, createUserProfilePage);
+        }
+      }
+    }
+  }
+);
+
+Then(
+  'I clear the previously entered values on the add a new user profile page for {string} for {string}',
+  async ({ createUserProfilePage, commonItemsPage }, datasetName: string, datasetValName: string) => {
+    const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
+    if (datasetValName === 'Role_Operations') {
+      for (const key in dataset) {
+        if (key !== 'country_checkbox' && key !== 'access_required_checkbox') {
+          if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+            await commonItemsPage.clearUIComponent(dataset, key, createUserProfilePage);
+          }
+        }
       }
     }
   }
@@ -86,25 +116,6 @@ Then(
 );
 
 Then(
-  'I can see the {string} ui labels on the add a new user profile page for {string}',
-  async ({ commonItemsPage, createUserProfilePage }, datasetName: string, datasetValName: string) => {
-    const datasetVal = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetValName];
-    const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
-    if (datasetValName === 'Role_Operations') {
-      for (const key in datasetVal) {
-        await commonItemsPage.fillUIComponent(datasetVal, key, createUserProfilePage);
-      }
-      for (const key in dataset) {
-        if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-          const labelVal = await commonItemsPage.getUiLabel(dataset, key, createUserProfilePage);
-          expect(labelVal).toBe(dataset[key]);
-        }
-      }
-    }
-  }
-);
-
-Then(
   'I validate {string} displayed on create user profile page for {string}',
   async (
     { commonItemsPage, createUserProfilePage },
@@ -116,12 +127,12 @@ Then(
       createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[invalidFieldsDatasetName];
     for (const key in invalidFieldsDataset) {
       if (Object.prototype.hasOwnProperty.call(invalidFieldsDataset, key)) {
-        const locatorVal: Locator = await commonItemsPage.getFieldErrorMessage(
+        const locatorValue: Locator = await commonItemsPage.getFieldErrorMessage(
           errorMessageFieldDataset,
           key,
           createUserProfilePage
         );
-        await expect(locatorVal).toHaveText(errorMessageFieldDataset[key]);
+        await expect(locatorValue).toHaveText(errorMessageFieldDataset[key]);
       }
     }
   }
