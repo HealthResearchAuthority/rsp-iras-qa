@@ -80,7 +80,7 @@ Feature: HRAPROG-394- User Administration: Manage Users
     @rsp-2827 @verifyCreateUserProfileBackLink
     Scenario: Verify the user can navigate from 'Add a new user profile' page by clicking 'Back' link
         When I click the 'Back' link on the 'Create_User_Profile_Page'
-        Then I can see the manage users list page
+        Then I can see the 'Manage_Users_Page'
 
     @rsp-2827 @verifyCheckCreateUserProfileBackLink
     Scenario Outline: Verify the user can navigate from 'Check and create user profile' page to add a new user profile page by clicking 'Back' link
