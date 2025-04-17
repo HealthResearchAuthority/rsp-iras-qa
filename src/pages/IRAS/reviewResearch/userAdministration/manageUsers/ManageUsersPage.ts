@@ -86,6 +86,15 @@ export default class ManageUsersPage {
     await expect(this.page_heading).toBeVisible();
   }
 
+  async goto(pageSize?: string) {
+    if (typeof pageSize !== 'undefined') {
+      await this.page.goto(`admin/users?pageSize=${pageSize}`);
+    } else {
+      await this.page.goto('admin/users');
+    }
+    await this.assertOnManageUsersPage();
+  }
+
   async getFirstNamesListFromUI() {
     let hasNextPage = false;
     const firstNames: string[] = [];
@@ -109,8 +118,7 @@ export default class ManageUsersPage {
     const searchRecord = userFirstName + '|' + userLastName + '|' + userEmail + '|' + userStatus;
     let foundRecord = false;
     let hasNextPage = true;
-    let count: number = 0;
-    while (hasNextPage) {
+    while (hasNextPage && !foundRecord) {
       const rows = await this.userListRows.all();
       for (const row of rows) {
         const columns = await row.locator(this.userListCell).allTextContents();
@@ -118,20 +126,16 @@ export default class ManageUsersPage {
         const fullRowData = firstFourColumns.map((col) => col.trim()).join('|');
         if (fullRowData === searchRecord) {
           foundRecord = true;
-          count = count + 1;
+          return row;
         }
       }
       hasNextPage = (await this.next_button.isVisible()) && !(await this.next_button.isDisabled());
-      if (hasNextPage) {
+      if (hasNextPage && !foundRecord) {
         await this.next_button.click();
         await this.page.waitForLoadState('domcontentloaded');
       }
     }
-    if (foundRecord) {
-      return count;
-    } else {
-      throw new Error(`No matching record found`);
-    }
+    throw new Error(`No matching record found`);
   }
 
   async searchAndClickUserProfile(userFirstName: string, userLastName: string, userEmail: string, userStatus: string) {
