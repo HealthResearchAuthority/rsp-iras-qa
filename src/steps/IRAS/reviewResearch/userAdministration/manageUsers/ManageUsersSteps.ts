@@ -45,8 +45,10 @@ When(
     const filePath = path.resolve(pathToTestDataJson);
     const data = await fse.readJson(filePath);
     const userEmail = data.Create_User_Profile.email_address_unique;
-    const count = await manageUsersPage.findUserProfile(userFirstName, userLastName, userEmail, userStatus);
-    expect(count).toBe(1);
+    await manageUsersPage.goto(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size);
+    const foundRecords = await manageUsersPage.findUserProfile(userFirstName, userLastName, userEmail, userStatus);
+    expect(foundRecords).toBeDefined();
+    expect(foundRecords).toHaveCount(1);
   }
 );
 
@@ -57,7 +59,11 @@ When(
     const userFirstName = dataset.first_name_text;
     const userLastName = dataset.last_name_text;
     const userEmail = dataset.email_address_text;
-    await manageUsersPage.searchAndClickUserProfile(userFirstName, userLastName, userEmail, userStatus);
+    await manageUsersPage.goto(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size);
+    //change searchAndClick to findUserProfile, test and then remove searchAndClick
+    // await manageUsersPage.searchAndClickUserProfile(userFirstName, userLastName, userEmail, userStatus);
+    const foundRecord = await manageUsersPage.findUserProfile(userFirstName, userLastName, userEmail, userStatus);
+    await foundRecord.locator(manageUsersPage.view_edit_link).click();
   }
 );
 
@@ -70,6 +76,8 @@ When(
     const filePath = path.resolve(pathToTestDataJson);
     const data = await fse.readJson(filePath);
     const userEmail = data.Create_User_Profile.email_address_unique;
+    await manageUsersPage.goto(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size);
+    //change searchAndClick to findUserProfile, test and then remove searchAndClick
     await manageUsersPage.searchAndClickUserProfile(userFirstName, userLastName, userEmail, userStatus);
   }
 );
