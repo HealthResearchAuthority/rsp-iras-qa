@@ -41,7 +41,8 @@
   },
   "Manage_Users_Page": {
     "Add_New_User_Profile_Record": "Add a new user profile record",
-    "Back": "Back"
+    "Back": "Back",
+    "View_Users_Audit_History": "View this user's audit history"
   },
   "Create_User_Profile_Page": {
     "Back": "Back"
