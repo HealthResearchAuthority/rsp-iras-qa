@@ -17,7 +17,7 @@ Then(
     const dataset = editUserProfilePage.editUserProfilePageTestData[datasetName];
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        const labelVal = await commonItemsPage.getUiLabel(dataset, key, editUserProfilePage);
+        const labelVal = await commonItemsPage.getUiLabel(key, editUserProfilePage);
         expect(labelVal).toBe(dataset[key]);
       }
     }

@@ -60,7 +60,7 @@ When(
     const userLastName = dataset.last_name_text;
     const userEmail = dataset.email_address_text;
     await manageUsersPage.goto(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size);
-    //change searchAndClick to findUserProfile, test and then remove searchAndClick
+    //change searchAndClick to findUserProfile, test and then remove searchAndClick method
     // await manageUsersPage.searchAndClickUserProfile(userFirstName, userLastName, userEmail, userStatus);
     const foundRecord = await manageUsersPage.findUserProfile(userFirstName, userLastName, userEmail, userStatus);
     await foundRecord.locator(manageUsersPage.view_edit_link).click();
@@ -78,7 +78,9 @@ When(
     const userEmail = data.Create_User_Profile.email_address_unique;
     await manageUsersPage.goto(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size);
     //change searchAndClick to findUserProfile, test and then remove searchAndClick
-    await manageUsersPage.searchAndClickUserProfile(userFirstName, userLastName, userEmail, userStatus);
+    // await manageUsersPage.searchAndClickUserProfile(userFirstName, userLastName, userEmail, userStatus);
+    const foundRecord = await manageUsersPage.findUserProfile(userFirstName, userLastName, userEmail, userStatus);
+    await foundRecord.locator(manageUsersPage.view_edit_link).click();
   }
 );
 
@@ -88,9 +90,24 @@ Then(
     const dataset = manageUsersPage.manageUsersPageTestData.Manage_Users_Page[datasetName];
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        const labelVal = await commonItemsPage.getUiLabel(dataset, key, manageUsersPage);
+        const labelVal = await commonItemsPage.getUiLabel(key, manageUsersPage);
         expect(labelVal).toBe(dataset[key]);
       }
     }
+  }
+);
+
+Then(
+  'I select a {string} User to View and Edit which is {string}',
+  async ({ manageUsersPage }, userNamePrefix: string, status: string) => {
+    let statusText: string;
+    if (status.toLowerCase() == 'active') {
+      statusText = manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enabled_status;
+    } else {
+      statusText = manageUsersPage.manageUsersPageTestData.Manage_Users_Page.disabled_status;
+    }
+    await manageUsersPage.goto(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size);
+    const selectedReviewBodyRow = await manageUsersPage.getRowByUserNameStatus(userNamePrefix, false, statusText);
+    await selectedReviewBodyRow.locator(manageUsersPage.view_edit_link).click();
   }
 );
