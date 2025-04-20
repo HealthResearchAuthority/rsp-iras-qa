@@ -13,7 +13,7 @@ Then(
     const dataset = projectDetailsIRASPage.projectDetailsIRASPageTestData[datasetName];
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        const labelVal = await commonItemsPage.getUiLabel(dataset, key, projectDetailsIRASPage);
+        const labelVal = await commonItemsPage.getUiLabel(key, projectDetailsIRASPage);
         expect(labelVal).toBe(dataset[key]);
       }
     }
