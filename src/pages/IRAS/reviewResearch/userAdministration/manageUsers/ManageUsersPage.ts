@@ -37,6 +37,7 @@ export default class ManageUsersPage {
   readonly firstNameFromListLabel: Locator;
   readonly userListRows: Locator;
   readonly userListCell: Locator;
+  readonly statusCell: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -76,6 +77,7 @@ export default class ManageUsersPage {
     this.next_button = this.page.locator('.govuk-pagination__next a');
     this.userListRows = this.page.locator('tbody').getByRole('row');
     this.userListCell = this.page.getByRole('cell');
+    this.statusCell = this.page.getByRole('cell').locator('strong');
     this.first_name_from_list_label = this.page.locator('td').nth(0);
     this.last_name_from_list_label = this.page.locator('td').nth(1);
     this.email_address_from_list_label = this.page.locator('td').nth(2);
@@ -169,5 +171,16 @@ export default class ManageUsersPage {
         }
       }
     }
+  }
+
+  async getRowByUserNameStatus(userName: string, exactMatch: boolean, status: string) {
+    const userRows = this.userListRows
+      .filter({ has: this.page.locator('td').getByText(`${userName}`, { exact: exactMatch }) })
+      .filter({ has: this.statusCell.getByText(status) });
+    const noOfRows = await userRows.count();
+    const randomIndex = Math.floor(Math.random() * (noOfRows - 1));
+    await userRows.nth(randomIndex).scrollIntoViewIfNeeded();
+    await userRows.nth(randomIndex).highlight();
+    return userRows.nth(randomIndex);
   }
 }

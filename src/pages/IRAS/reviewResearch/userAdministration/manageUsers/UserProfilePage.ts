@@ -10,6 +10,8 @@ export default class UserProfilePage {
   readonly userProfilePageTestData: typeof userProfilePageTestData;
   readonly linkTextData: typeof linkTextData;
   readonly buttonTextData: typeof buttonTextData;
+  private _userid: string;
+  private _email_address: string;
   readonly selected_bread_crumbs: Locator;
   readonly back_button: Locator;
   readonly page_heading: Locator;
@@ -64,6 +66,8 @@ export default class UserProfilePage {
     this.userProfilePageTestData = userProfilePageTestData;
     this.linkTextData = linkTextData;
     this.buttonTextData = buttonTextData;
+    this._userid = '';
+    this._email_address = '';
     this.page_heading = this.page
       .getByRole('heading')
       .getByText(this.userProfilePageTestData.User_Profile_Page.page_heading_prefix, { exact: false });
@@ -169,6 +173,10 @@ export default class UserProfilePage {
     await expect(this.page_heading).toBeVisible();
   }
 
+  async goto(userId: string) {
+    await this.page.goto(`admin/users/viewuser?userId=${userId}`);
+  }
+
   async clickOnChangeUserProfileDetails(editUserFieldName: string, userRole: string) {
     switch (editUserFieldName) {
       case 'title_text':
@@ -244,5 +252,23 @@ export default class UserProfilePage {
       default:
         throw new Error(`${editUserFieldName} is not a valid user profile field`);
     }
+  }
+
+  //Getters & Setters for Private Variables
+
+  async getUserId(): Promise<string> {
+    return this._userid;
+  }
+
+  async setUserId(value: string): Promise<void> {
+    this._userid = value;
+  }
+
+  async getEmail(): Promise<string> {
+    return this._email_address;
+  }
+
+  async setEmail(value: string): Promise<void> {
+    this._email_address = value;
   }
 }
