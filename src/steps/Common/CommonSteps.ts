@@ -28,7 +28,7 @@ Then('I capture the page screenshot', async () => {});
 Given(
   'I have navigated to the {string}',
   async (
-    { loginPage, homePage, createApplicationPage, systemAdministrationPage, manageReviewBodiesPage },
+    { loginPage, homePage, createApplicationPage, systemAdministrationPage, manageReviewBodiesPage, userProfilePage },
     page: string
   ) => {
     switch (page) {
@@ -52,6 +52,10 @@ Given(
       case 'Manage_Review_Bodies_Page':
         await manageReviewBodiesPage.goto();
         await manageReviewBodiesPage.assertOnManageReviewBodiesPage();
+        break;
+      case 'User_Profile_Page':
+        await userProfilePage.goto(await userProfilePage.getUserId());
+        await userProfilePage.assertOnUserProfilePage();
         break;
       default:
         throw new Error(`${page} is not a valid option`);
