@@ -23,6 +23,7 @@ Then(
   }
 );
 
+// This step need to be Fixed underlying locators are wrong due to dataset being passed in, assertion loop is never entered therefore no error thrown
 Then(
   'I can see the {string} labels on the audit history page of the review body',
   async ({ commonItemsPage, auditHistoryReviewBodyPage }, datasetName: string) => {
@@ -30,7 +31,7 @@ Then(
       auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page[datasetName];
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        const labelVal = await commonItemsPage.getUiLabel(dataset, key, auditHistoryReviewBodyPage);
+        const labelVal = await commonItemsPage.getUiLabel(key, auditHistoryReviewBodyPage);
         expect(labelVal).toBe(dataset[key]);
       }
     }
@@ -89,7 +90,11 @@ Then('I can see the audit history page heading', async ({ auditHistoryReviewBody
 
 Then(
   'I can see the audit history for {string} edited event with {string}',
-  async ({ auditHistoryReviewBodyPage, reviewBodyProfilePage }, fieldName: string, datasetName: string) => {
+  async (
+    { auditHistoryReviewBodyPage, reviewBodyProfilePage, commonItemsPage },
+    fieldName: string,
+    datasetName: string
+  ) => {
     const dataset =
       auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page[datasetName];
     const auditLog = await auditHistoryReviewBodyPage.getAuditLog();
@@ -118,7 +123,7 @@ Then(
       valueCurrent = await reviewBodyProfilePage.getNewDescription();
     }
     if (valuePrevious !== valueCurrent) {
-      const eventDescriptionExpectedValue = await auditHistoryReviewBodyPage.getEventDescriptionValue(
+      const eventDescriptionExpectedValue = await commonItemsPage.getAuditEventDescriptionValue(
         dataset.event_description_text,
         valuePrevious,
         valueCurrent
@@ -138,28 +143,28 @@ Then(
 
 Then(
   'I can see the audit history for all the fields edited event with {string}',
-  async ({ auditHistoryReviewBodyPage, reviewBodyProfilePage }, datasetName: string) => {
+  async ({ auditHistoryReviewBodyPage, reviewBodyProfilePage, commonItemsPage }, datasetName: string) => {
     // defect: when the previous description was empty
     const dataset =
       auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page[datasetName];
     const auditLog = await auditHistoryReviewBodyPage.getAuditLog();
     const timeExpected = await auditHistoryReviewBodyPage.getUpdatedTime();
-    const orgNameEventDescriptionExpectedValue = await auditHistoryReviewBodyPage.getEventDescriptionValue(
+    const orgNameEventDescriptionExpectedValue = await commonItemsPage.getAuditEventDescriptionValue(
       dataset.organisation_name_event_description_text,
       await reviewBodyProfilePage.getOrgName(),
       await reviewBodyProfilePage.getNewOrgName()
     );
-    const emailEventDescriptionExpectedValue = await auditHistoryReviewBodyPage.getEventDescriptionValue(
+    const emailEventDescriptionExpectedValue = await commonItemsPage.getAuditEventDescriptionValue(
       dataset.email_address_event_description_text,
       await reviewBodyProfilePage.getEmail(),
       await reviewBodyProfilePage.getNewEmail()
     );
-    const descriptionEventDescriptionExpectedValue = await auditHistoryReviewBodyPage.getEventDescriptionValue(
+    const descriptionEventDescriptionExpectedValue = await commonItemsPage.getAuditEventDescriptionValue(
       dataset.description_event_description_text,
       await reviewBodyProfilePage.getDescription(),
       await reviewBodyProfilePage.getNewDescription()
     );
-    const countryEventDescriptionExpectedValue = await auditHistoryReviewBodyPage.getEventDescriptionValue(
+    const countryEventDescriptionExpectedValue = await commonItemsPage.getAuditEventDescriptionValue(
       dataset.country_event_description_text,
       (await reviewBodyProfilePage.getCountries()).join(', '),
       (await reviewBodyProfilePage.getNewCountries()).join(', ')
