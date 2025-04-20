@@ -31,6 +31,14 @@ export function confirmStringNotNull(inputString: string | null | undefined): st
   }
 }
 
+export function confirmArrayNotNull<ArrayType>(inputArr: ArrayType[] | null | undefined): ArrayType[] {
+  if (Array.isArray(inputArr)) {
+    return inputArr;
+  } else {
+    throw new Error(`The input array is null`);
+  }
+}
+
 export function getValuesFromDataTable(data: DataTable): string[] {
   const dataRowValues = data.rows();
   const dataValues: string[] = [];
