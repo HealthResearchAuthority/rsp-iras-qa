@@ -50,66 +50,56 @@ Feature: User Administration: Manage Users - View audit history for users
         And I click the 'Manage_Users' link on the 'Banner'
         And I can see the 'Manage_Users_Page'
 
-    @VerifyAuditHistoryCreateUser @only
+    @VerifyAuditHistoryCreateUser
     Scenario Outline: Verify the user can view the audit history after creating a new user
-        When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
-        Then I can see the add a new user profile page
-        When I fill the new user profile page using '<Add_User_Profile>'
+        And I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
+        And I can see the add a new user profile page
+        And I fill the new user profile page using '<Add_User_Profile>'
         And I capture the page screenshot
         And I click the 'Continue' button on the 'Create_User_Profile_Page'
-        Then I can see the check and create user profile page
+        And I can see the check and create user profile page
         And I capture the page screenshot
         And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
-        Then I can see the create user profile confirmation page for '<Add_User_Profile>'
+        And I can see the create user profile confirmation page for '<Add_User_Profile>'
         And I capture the current time for 'Audit_History_User_Page'
         And I capture the page screenshot
-        # REFINE TIME TO USE GET TUC STRING AND TRIM BITS DONT NEED
-
-        # When I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
-        # Then I can see the 'Manage_Users_Page'
-        # And I capture the page screenshot
-        # # And I can see the newly created user record should be present in the list for '<Add_User_Profile>' with 'ACTIVE' status in the manage user page
-        # Then I click the view edit link for the newly created review body
-        # # Above for user
-        # Then I can see the user profile page
-        # And I capture the page screenshot
-        # And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'
-        # # Above for user
-        # Then I can see the audit history page of the selected review body for '<Add_Review_Body>'
-        # # Above for user
-        # And I can see the '<Validation_Text>' ui labels on the audit history page of the review body
-        # # Above for user but re-word to expected layouts
-        # And I capture the page screenshot
-        # And I can see the audit history for the review body 'created' event for '<Add_Review_Body>' with '<Audit_History>'
+        And I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
+        And I can see the 'Manage_Users_Page'
+        And I capture the page screenshot
+        And I search and click on view edit link for unique '<Add_User_Profile>' user with 'ACTIVE' status from the manage user page
+        And I can see the user profile page
+        And I capture the page screenshot
+        When I click the 'View_Users_Audit_History' link on the 'Manage_Users_Page'
+        Then I can see the audit history page of the selected '<Add_User_Profile>' user
+        And I capture the page screenshot
+        And I can see the audit history for the newly created '<Add_User_Profile>'
 
         Examples:
-            | Add_User_Profile                         | Validation_Text | Audit_History      |
-            | Valid_Data_In_All_Fields_Role_Operations | header_Texts    | Create_Review_Body |
-            # | Valid_Data_In_All_Mandatory_Fields       | header_Texts    | Create_Review_Body |
+            | Add_User_Profile                                   |
+            | Valid_Data_In_All_Fields_Role_Operations           |
+            | Valid_Data_In_All_Fields_Role_Reviewer_Another     |
+            | Valid_Data_In_All_Mandatory_Fields_Role_Operations |
 
-# @VerifyAuditHistoryDisableReviewBody
-# Scenario Outline: Verify the user can view the audit history after disabling a review body
-#     And I select a 'QA Automation' Review Body to View and Edit which is 'active'
-#     And I can see the review body profile page
-#     And I capture the page screenshot
-#     And I click the 'Disable_Review_Body' button on the 'Review_Body_Profile_Page'
-#     And I capture the page screenshot
-#     And I click the 'Confirm' button on the 'Confirmation_Page'
-#     And I capture the current time
-#     And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
-#     Then I can see the 'Manage_Review_Bodies_Page'
-#     And I capture the page screenshot
-#     Then I click the view edit link for the 'disabled' review body
-#     And I capture the page screenshot
-#     And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'
-#     Then I can see the audit history page of the review body
-#     And I capture the page screenshot
-#     And I can see the '<Validation_Text>' ui labels on the audit history page of the review body
-#     And I can see the audit history for the review body 'disabled' event for '<Add_Review_Body>' with '<Audit_History>'
+    @VerifyAuditHistoryEnableDisableUser @only
+    Scenario Outline: Verify the user can view the audit history after changing the status of a user
+        And I select a 'QA Automation' User to View and Edit which is '<Status>'
+        And I can see the user profile page
+        And I capture the page screenshot
+        And I click the '<Change_Status>' button on the 'User_Profile_Page'
+        And I capture the page screenshot
+        And I click the 'Confirm' button on the 'Confirmation_Page'
+        And I capture the current time for 'Audit_History_User_Page'
+        And I have navigated to the 'User_Profile_Page'
+        And I capture the page screenshot
+        When I click the 'View_Users_Audit_History' link on the 'Manage_Users_Page'
+        And I can see the audit history page of the user profile
+        And I capture the page screenshot
+        And I can see the users audit history with the '<Audit_History>' event as the most recent entry
 
-#     Examples:
-#         | Add_Review_Body          | Validation_Text | Audit_History       |
-#         | Valid_Data_In_All_Fields | header_Texts    | Disable_Review_Body |
+        Examples:
+            | Status   | Change_Status       | Audit_History |
+            | active   | Disable_User_Record | Disable_User  |
+            | disabled | Enable_User_Record  | Enable_User   |
 
 # @VerifyAuditHistoryEnableReviewBody
 # Scenario Outline: Verify the user can view the audit history after enabling a review body

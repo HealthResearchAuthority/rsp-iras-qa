@@ -84,4 +84,9 @@ export default class AuditHistoryReviewBodyPage {
     ]);
     return auditMap;
   }
+
+  async getAuditEventDescriptionValue(eventDescriptionText: string, valuePrevious: string, valueCurrent: string) {
+    const eventDescriptionValue = eventDescriptionText + valuePrevious + ' to ' + valueCurrent;
+    return eventDescriptionValue;
+  }
 }
