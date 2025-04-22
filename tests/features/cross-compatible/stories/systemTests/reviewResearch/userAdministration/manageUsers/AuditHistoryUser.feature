@@ -168,7 +168,6 @@ Feature: User Administration: Manage Users - View audit history for users
         And I search and click on view edit link for unique '<Add_User_Profile>' user with 'ACTIVE' status from the manage user page
         And I can see the user profile page
         And I capture the page screenshot
-
         And I click the change link against '<Field_Name>' on the user profile page
         And I can see the edit user profile page
         And I capture the page screenshot
