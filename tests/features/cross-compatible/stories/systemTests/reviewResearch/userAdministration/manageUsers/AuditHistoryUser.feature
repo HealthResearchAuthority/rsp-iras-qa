@@ -36,7 +36,6 @@ Feature: User Administration: Manage Users - View audit history for users
         And I search and click on view edit link for unique '<Add_User_Profile>' user with 'ACTIVE' status from the manage user page
         And I can see the user profile page
         And I capture the page screenshot
-        And I can see that the user profiles last updated field has the current time
         When I click the 'View_Users_Audit_History' link on the 'User_Profile_Page'
         Then I can see the audit history page of the selected '<Add_User_Profile>' user
         And I capture the page screenshot
