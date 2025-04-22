@@ -54,7 +54,7 @@
   },
   "Create_User_Profile": {
     "email_address_prefix": "QAAutomation",
-    "email_address_unique": "QAAutomation20250416171541095hscrd@health.org",
+    "email_address_unique": "QAAutomation20250422024739086hscrd@health.org",
     "Role_Operations": {
       "role_checkbox": [
         "operations"
@@ -190,6 +190,27 @@
       "role_checkbox": [
         "user",
         "reviewer"
+      ]
+    },
+    "Valid_Data_All_Roles": {
+      "title_text": "Mr",
+      "first_name_text": "QA Automation First Name Test Role_All",
+      "last_name_text": "Test Last Name Role_All",
+      "email_address_text": "hscrd@health.org",
+      "telephone_text": "07000000000",
+      "organisation_text": "QA Automation HRA Role_All",
+      "job_title_text": "Sr.Reviewer Role_All",
+      "role_checkbox": [
+        "user",
+        "operations",
+        "admin",
+        "reviewer"
+      ],
+      "country_checkbox": [
+        "Wales"
+      ],
+      "access_required_checkbox": [
+        "Research Ethics Committee"
       ]
     },
     "Valid_Data_In_All_Mandatory_Fields": {

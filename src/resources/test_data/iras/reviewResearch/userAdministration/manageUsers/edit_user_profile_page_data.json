@@ -15,7 +15,9 @@
     "country_label": "Country",
     "access_required_label": "Access Required",
     "review_body_label": "Review body",
-    "save_button": "Save"
+    "save_button": "Save",
+    "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+    "role_checkbox": ["user", "operations", "admin", "reviewer"]
   },
   "Edit_User_Profile": {
     "Valid_Data_In_All_Fields_Role_Operations": {
@@ -136,7 +138,7 @@
     "access_required_checkbox": ["Research Ethics Committee"]
   },
   "User_Country_Checkbox_One": {
-    "country_checkbox": ["England, Wales"],
+    "country_checkbox": ["England", "Wales"],
     "access_required_checkbox": ["Research Ethics Committee"]
   },
   "User_Access_Required_Checkbox_One": {
@@ -206,7 +208,14 @@
   "User_Role_Dropdown_Two": {
     "role_dropdown": "Reviewer"
   },
-
+  "User_Country_Checkbox_Two": {
+    "country_checkbox": ["Northern Ireland", "Scotland"],
+    "access_required_checkbox": ["Research Ethics Committee"]
+  },
+  "User_Roles_Checkbox_Empty": {
+    "role_checkbox": [],
+    "access_required_checkbox": ["Research Ethics Committee"]
+  },
   "Original_Title_Text_Two": {
     "title_text": "Mr"
   },
