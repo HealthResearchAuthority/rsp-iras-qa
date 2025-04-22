@@ -85,7 +85,7 @@ Feature: User Administration: Manage Users - View audit history for users
             | Valid_Data_In_All_Fields_Role_Reviewer_Another | Role       | User_Roles_Checkbox_Empty |
             | Valid_Data_All_Roles                           | Role       | User_Roles_Checkbox_Empty |
 
-    @VerifyAuditHistoryEnableDisableUser @only
+    @VerifyAuditHistoryEnableDisableUser
     Scenario Outline: Verify the user can view the audit history after changing the status of a user
         And I select a 'QA Automation' User to View and Edit which is '<Status>'
         And I can see the user profile page
