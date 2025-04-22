@@ -54,7 +54,7 @@
   },
   "Create_User_Profile": {
     "email_address_prefix": "QAAutomation",
-    "email_address_unique": "QAAutomation20250422024739086hscrd@health.org",
+    "email_address_unique": "QAAutomation20250422142654413hscrd@health.org",
     "Role_Operations": {
       "role_checkbox": [
         "operations"
@@ -212,6 +212,15 @@
       "access_required_checkbox": [
         "Research Ethics Committee"
       ]
+    },
+    "Valid_Data_No_Roles": {
+      "title_text": "Mr",
+      "first_name_text": "QA Automation First Name Test No_Roles",
+      "last_name_text": "Test Last Name No_Roles",
+      "email_address_text": "hscrd@health.org",
+      "telephone_text": "07000000000",
+      "organisation_text": "QA Automation HRA No_Roles",
+      "job_title_text": "Sr.Reviewer No_Roles"
     },
     "Valid_Data_In_All_Mandatory_Fields": {
       "first_name_text": "First Name Test",

@@ -57,3 +57,29 @@ When(
     await expect(userProfilePage.last_updated_value).toHaveText(expectedValue);
   }
 );
+
+When(
+  'I can see the {string} user has the correct roles assigned on their profile page',
+  async ({ userProfilePage, createUserProfilePage }, datasetName: string) => {
+    if (datasetName.endsWith('_No_Roles')) {
+      await expect(userProfilePage.role_value).not.toBeVisible();
+    } else {
+      const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
+      const actualValues = confirmStringNotNull(await userProfilePage.role_value.textContent());
+      const expectedValues = dataset.role_checkbox.toString().replaceAll(',', ', ');
+      expect(actualValues).toBe(expectedValues);
+    }
+  }
+);
+
+When(
+  'I can see that the {string} users data persists on the edit profile page',
+  async ({ createUserProfilePage, commonItemsPage, editUserProfilePage }, datasetName: string) => {
+    const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
+    for (const key in dataset) {
+      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+        await commonItemsPage.validateUIComponentValues(dataset, key, editUserProfilePage);
+      }
+    }
+  }
+);

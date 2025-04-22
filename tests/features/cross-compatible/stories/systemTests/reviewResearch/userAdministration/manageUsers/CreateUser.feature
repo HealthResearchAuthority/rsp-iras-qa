@@ -179,6 +179,34 @@ Feature: HRAPROG-394- User Administration: Manage Users
             | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer | Job_Title     | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer_Another |
             | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer | Role          | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer_Another |
 
+    @rsp-2827 @rsp-2870 @rsp-3107 @rsp-3108 @verifyCreateUserMultiUserRoles
+    Scenario Outline: Verify the user is able to create a new user profile with multiple roles
+        When I fill the new user profile page using '<Add_User_Profile>'
+        And I capture the page screenshot
+        And I click the 'Continue' button on the 'Create_User_Profile_Page'
+        Then I can see the check and create user profile page
+        And I capture the page screenshot
+        And I can see previously filled values in the new user profile page for '<Add_User_Profile>' displayed on the check and create user profile page
+        When I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
+        Then I can see the create user profile confirmation page for '<Add_User_Profile>'
+        And I capture the page screenshot
+        When I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
+        And I can see the 'Manage_Users_Page'
+        And I capture the page screenshot
+        And I search and click on view edit link for unique '<Add_User_Profile>' user with 'ACTIVE' status from the manage user page
+        When I can see the user profile page
+        Then I can see the '<Add_User_Profile>' user has the correct roles assigned on their profile page
+        When I click the change link against '<Field_Name>' on the user profile page
+        Then I can see that the '<Add_User_Profile>' users data persists on the edit profile page
+
+        Examples:
+            | Add_User_Profile                                   | Field_Name |
+            | Valid_Data_In_All_Fields_Role_Operations           | Role       |
+            | Valid_Data_In_All_Fields_Role_Reviewer_Another     | Role       |
+            | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Role       |
+            | Valid_Data_All_Roles                               | Role       |
+            | Valid_Data_No_Roles                                | Role       |
+
     @rsp-2827 @verifyErrorMessagesInvalidData
     # few lines commented>> pending clarification >> email validation
     Scenario Outline: Validate error messages are displayed for invalid data in create user profile page
