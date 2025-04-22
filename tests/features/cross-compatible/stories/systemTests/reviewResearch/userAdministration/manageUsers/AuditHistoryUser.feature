@@ -1,4 +1,4 @@
-@UserAdministration @ManageUsers @adminUser @SystemTest @AuditHistoryUser @rsp-2928
+@UserAdministration @ManageUsers @adminUser @SystemTest @AuditHistoryUser @rsp-2928 @only
 Feature: User Administration: Manage Users - View audit history for users
 
     Background:
@@ -85,7 +85,7 @@ Feature: User Administration: Manage Users - View audit history for users
             | Valid_Data_In_All_Fields_Role_Reviewer_Another | Role       | User_Roles_Checkbox_Empty |
             | Valid_Data_All_Roles                           | Role       | User_Roles_Checkbox_Empty |
 
-    @VerifyAuditHistoryEnableDisableUser
+    @VerifyAuditHistoryEnableDisableUser @only
     Scenario Outline: Verify the user can view the audit history after changing the status of a user
         And I select a 'QA Automation' User to View and Edit which is '<Status>'
         And I can see the user profile page
@@ -94,6 +94,7 @@ Feature: User Administration: Manage Users - View audit history for users
         And I capture the page screenshot
         And I click the 'Confirm' button on the 'Confirmation_Page'
         And I capture the current time for 'Audit_History_User_Page'
+        And I click the 'Back_To_Manage_Users' link on the 'Confirmation_Page'
         And I have navigated to the 'User_Profile_Page'
         And I capture the page screenshot
         And I can see that the user profiles last updated field has the current time
@@ -195,11 +196,13 @@ Feature: User Administration: Manage Users - View audit history for users
         And I click the 'Disable_User_Record' button on the 'User_Profile_Page'
         And I capture the page screenshot
         And I click the 'Confirm' button on the 'Confirmation_Page'
+        And I click the 'Back_To_Manage_Users' link on the 'Confirmation_Page'
         And I have navigated to the 'User_Profile_Page'
         And I capture the page screenshot
         And I click the 'Enable_User_Record' button on the 'User_Profile_Page'
         And I capture the page screenshot
         And I click the 'Confirm' button on the 'Confirmation_Page'
+        And I click the 'Back_To_Manage_Users' link on the 'Confirmation_Page'
         And I have navigated to the 'User_Profile_Page'
         And I click the change link against '<Field_Name>' on the user profile page
         And I can see the edit user profile page
