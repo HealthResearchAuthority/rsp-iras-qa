@@ -179,8 +179,6 @@ export default class ManageUsersPage {
       .filter({ has: this.statusCell.getByText(status) });
     const noOfRows = await userRows.count();
     const randomIndex = Math.floor(Math.random() * (noOfRows - 1));
-    await userRows.nth(randomIndex).scrollIntoViewIfNeeded();
-    await userRows.nth(randomIndex).highlight();
     return userRows.nth(randomIndex);
   }
 }
