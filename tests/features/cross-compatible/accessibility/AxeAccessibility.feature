@@ -503,3 +503,16 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityAuditHistoryUser @adminUser
+  Scenario: Audit history page of the user
+    Given I have navigated to the 'Home_Page'
+    And I click the 'Manage_Users' link on the 'Banner'
+    And I can see the 'Manage_Users_Page'
+    And I select a 'QA Automation' User to View and Edit which is 'active'
+    And I can see the user profile page
+    When I click the 'View_Users_Audit_History' link on the 'User_Profile_Page'
+    Then I can see the audit history page of the user profile
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
