@@ -1,48 +1,4 @@
-# Test Case Design - ACs for Automation:
-
-# Login
-
-# Landing page- System administration Home page
-
-# Navigate to Manage users list page by clicking 'Manage users' hyperlink
-
-# Prerequisite Test Data setup - By following Create a new user record journey
-
-# Navigate to User profile page on clicking View/Edit link (under Actions column)
-
-# Navigated to Audit history page' on clicking View this users audit history link
-
-# Scenario: Verify that create user record history is
-
-# Scenario: Verify that  all changes made to the user profile is displayed in Audit history page
-
-# Validate that a single entry should be generated automatically for each modification that has occurred
-
-# The default sort should be the most recent entry first based on date and time
-
-# Each entry should include the following details:
-
-# Date and time – DD Month YYYY (e.g. 05 Jan 2025) HH:MM (GMT 24 hour) when the modification occurred
-
-# Description – this is the description of the change
-
-# User – the user who made the change
-
-#  Scenario: Verify that new user creation is displayed in audit history page
-
-# Scenario: Verify that user enabled is displayed in audit history page
-
-# Scenario: Verify that user disabled is displayed in audit history page
-
-
-
-# Out of scope
-
-# [Email address] was assigned [Role name] role
-
-# [Email address] was unassigned [Role name] role
-
-@UserAdministration @ManageUsers @adminUser @SystemTest @AuditHistoryUser @rsp-2927
+@UserAdministration @ManageUsers @adminUser @SystemTest @AuditHistoryUser @rsp-2928
 Feature: User Administration: Manage Users - View audit history for users
 
     Background:
@@ -50,8 +6,19 @@ Feature: User Administration: Manage Users - View audit history for users
         And I click the 'Manage_Users' link on the 'Banner'
         And I can see the 'Manage_Users_Page'
 
-    @VerifyAuditHistoryCreateUser
-    Scenario Outline: Verify the user can view the audit history after creating a new user
+    @VerifyAuditHistoryUserBackLinkNavigation
+    Scenario: Verify the user can navigate from audit History page of the user by clicking 'Back' link
+        And I select a 'QA Automation' User to View and Edit which is 'active'
+        And I can see the user profile page
+        When I click the 'View_Users_Audit_History' link on the 'User_Profile_Page'
+        Then I can see the audit history page of the user profile
+        And I capture the page screenshot
+        And I click the 'Back' link on the 'User_Profile_Page'
+        And I capture the page screenshot
+        And I can see the user profile page
+
+    @VerifyAuditHistoryCreateUserAssignRoles
+    Scenario Outline: Verify the user can view the audit history with roles assigned after creating a new user
         And I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
         And I can see the add a new user profile page
         And I fill the new user profile page using '<Add_User_Profile>'
@@ -69,10 +36,11 @@ Feature: User Administration: Manage Users - View audit history for users
         And I search and click on view edit link for unique '<Add_User_Profile>' user with 'ACTIVE' status from the manage user page
         And I can see the user profile page
         And I capture the page screenshot
-        When I click the 'View_Users_Audit_History' link on the 'Manage_Users_Page'
+        And I can see that the user profiles last updated field has the current time
+        When I click the 'View_Users_Audit_History' link on the 'User_Profile_Page'
         Then I can see the audit history page of the selected '<Add_User_Profile>' user
         And I capture the page screenshot
-        And I can see the audit history for the newly created '<Add_User_Profile>'
+        And I can see the audit history for the newly created '<Add_User_Profile>' user with roles assigned
 
         Examples:
             | Add_User_Profile                                   |
@@ -80,7 +48,7 @@ Feature: User Administration: Manage Users - View audit history for users
             | Valid_Data_In_All_Fields_Role_Reviewer_Another     |
             | Valid_Data_In_All_Mandatory_Fields_Role_Operations |
 
-    @VerifyAuditHistoryEnableDisableUser @only
+    @VerifyAuditHistoryEnableDisableUser
     Scenario Outline: Verify the user can view the audit history after changing the status of a user
         And I select a 'QA Automation' User to View and Edit which is '<Status>'
         And I can see the user profile page
@@ -91,7 +59,8 @@ Feature: User Administration: Manage Users - View audit history for users
         And I capture the current time for 'Audit_History_User_Page'
         And I have navigated to the 'User_Profile_Page'
         And I capture the page screenshot
-        When I click the 'View_Users_Audit_History' link on the 'Manage_Users_Page'
+        And I can see that the user profiles last updated field has the current time
+        When I click the 'View_Users_Audit_History' link on the 'User_Profile_Page'
         And I can see the audit history page of the user profile
         And I capture the page screenshot
         And I can see the users audit history with the '<Audit_History>' event as the most recent entry
@@ -101,207 +70,157 @@ Feature: User Administration: Manage Users - View audit history for users
             | active   | Disable_User_Record | Disable_User  |
             | disabled | Enable_User_Record  | Enable_User   |
 
-# @VerifyAuditHistoryEnableReviewBody
-# Scenario Outline: Verify the user can view the audit history after enabling a review body
-#     And I select a 'QA Automation' Review Body to View and Edit which is 'disabled'
-#     And I can see the review body profile page
-#     And I capture the page screenshot
-#     And I click the 'Enable_Review_Body' button on the 'Review_Body_Profile_Page'
-#     And I capture the page screenshot
-#     And I click the 'Confirm' button on the 'Confirmation_Page'
-#     And I capture the current time
-#     And I capture the page screenshot
-#     And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
-#     Then I can see the 'Manage_Review_Bodies_Page'
-#     Then I click the view edit link for the 'enabled' review body
-#     And I can see the review body profile page
-#     And I capture the page screenshot
-#     And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'
-#     Then I can see the audit history page of the review body
-#     And I capture the page screenshot
-#     And I can see the '<Validation_Text>' ui labels on the audit history page of the review body
-#     And I can see the audit history for the review body 'enabled' event for '<Add_Review_Body>' with '<Audit_History>'
+    @VerifyAuditHistoryEditCommonUserFields
+    Scenario Outline: Verify the user can view the audit history after editing common user profile fields
+        And I select a 'QA Automation' User to View and Edit which is 'active'
+        And I can see the user profile page
+        And I capture the page screenshot
+        And I click the change link against '<Field_Name>' on the user profile page
+        And I can see the edit user profile page
+        And I capture the page screenshot
+        And I edit the users '<Field_Name>' field with '<Edit_User>'
+        And I capture the page screenshot
+        And I click the 'Save' button on the 'Edit_User_Profile_Page'
+        And I capture the current time for 'Audit_History_User_Page'
+        And I capture the page screenshot
+        And I can see that the user profiles last updated field has the current time
+        When I click the 'View_Users_Audit_History' link on the 'User_Profile_Page'
+        And I can see the audit history page of the user profile
+        And I capture the page screenshot
+        Then I can see the users audit history with the '<Audit_History>' event as the most recent entry
+        When I click the 'Back' link on the 'Audit_History_User_Page'
+        And I click the change link against '<Field_Name>' on the user profile page
+        And I can see the edit user profile page
+        And I capture the page screenshot
+        And I revert the '<Field_Name>' update of the user profile
+        And I capture the page screenshot
+        And I click the 'Save' button on the 'Edit_User_Profile_Page'
+        And I capture the current time for 'Audit_History_User_Page'
+        And I capture the page screenshot
+        And I can see that the user profiles last updated field has the current time
+        And I click the 'View_Users_Audit_History' link on the 'User_Profile_Page'
+        And I can see the audit history page of the user profile
+        And I capture the page screenshot
+        Then I can see the users audit history with the '<Audit_History>' event as the most recent entry
 
-#     Examples:
-#         | Validation_Text | Audit_History      |
-#         | header_Texts    | Enable_Review_Body |
+        Examples:
+            | Field_Name    | Edit_User                   | Audit_History          |
+            | Title         | User_Title_Update           | Edit_User_Title        |
+            | First_Name    | User_First_Name_Text_One    | Edit_User_First_Name   |
+            | Last_Name     | User_Last_Name_Text_One     | Edit_User_Last_Name    |
+            | Email_Address | User_Email_Address_Text_One | Edit_User_Email        |
+            | Telephone     | User_Telephone_Text_One     | Edit_User_Telephone    |
+            | Organisation  | User_Organisation_Text_One  | Edit_User_Organisation |
+            | Job_Title     | User_Job_Title_Text_One     | Edit_User_Job_Title    |
 
-# @VerifyAuditHistoryEditReviewBodyOrgName
-# Scenario Outline: Verify the user can view the audit history after editing organization name of a review body
-#     And I select a 'QA Automation' Review Body to View and Edit which is 'active'
-#     And I can see the review body profile page
-#     And I capture the page screenshot
-#     And I click the change link against '<Field_Name>' on the review body profile page
-#     And I can see the edit review body page
-#     And I capture the page screenshot
-#     When I fill the edit review body page using '<Edit_Review_Body>' for field '<Field_Name>'
-#     And I capture the page screenshot
-#     And I click the 'Save' button on the 'Edit_Review_Body_Page'
-#     And I capture the current time
-#     Then I now see the review body profile page with the updated '<Edit_Review_Body>' for organisation name field
-#     And I capture the page screenshot
-#     And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'
-#     Then I can see the audit history page of the review body
-#     And I capture the page screenshot
-#     And I can see the '<Validation_Text>' ui labels on the audit history page of the review body
-#     And I can see the audit history for 'Organisation_Name' edited event with '<Audit_History>'
+    @VerifyAuditHistoryEditOperationUserFields
+    Scenario Outline: Verify the user can view the audit history after editing fields for an operations user
+        And I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
+        And I can see the add a new user profile page
+        And I fill the new user profile page using '<Add_User_Profile>'
+        And I capture the page screenshot
+        And I click the 'Continue' button on the 'Create_User_Profile_Page'
+        And I can see the check and create user profile page
+        And I capture the page screenshot
+        And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
+        And I can see the create user profile confirmation page for '<Add_User_Profile>'
+        And I capture the page screenshot
+        And I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
+        And I can see the 'Manage_Users_Page'
+        And I capture the page screenshot
+        And I search and click on view edit link for unique '<Add_User_Profile>' user with 'ACTIVE' status from the manage user page
+        And I can see the user profile page
+        And I capture the page screenshot
+        And I click the change link against '<Field_Name>' on the user profile page
+        And I can see the edit user profile page
+        And I capture the page screenshot
+        And I edit the users '<Field_Name>' field with '<Edit_User>'
+        And I capture the page screenshot
+        And I click the 'Save' button on the 'Edit_User_Profile_Page'
+        And I capture the current time for 'Audit_History_User_Page'
+        And I capture the page screenshot
+        And I can see that the user profiles last updated field has the current time
+        When I click the 'View_Users_Audit_History' link on the 'User_Profile_Page'
+        Then I can see the audit history page of the selected '<Add_User_Profile>' user
+        And I capture the page screenshot
+        And I can see the users audit history with the '<Audit_History>' event as the most recent entry
 
-#     Examples:
-#         | Field_Name        | Edit_Review_Body                     | Validation_Text | Audit_History                      |
-#         | Organisation_Name | Valid_Data_Organisation_Name_Another | header_Texts    | Edit_Review_Body_Organisation_Name |
+        Examples:
+            | Add_User_Profile                                   | Field_Name | Edit_User                 | Audit_History     |
+            | Valid_Data_In_All_Fields_Role_Operations           | Country    | User_Country_Checkbox_One | Edit_User_Country |
+            | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Country    | User_Country_Checkbox_Two | Edit_User_Country |
 
-# @VerifyAuditHistoryEditReviewBodyCountry
-# Scenario Outline: Verify the user can view the audit history after editing country of a review body
-#     And I select a 'QA Automation' Review Body to View and Edit which is 'active'
-#     And I can see the review body profile page
-#     And I capture the page screenshot
-#     When I click the change link against '<Field_Name>' on the review body profile page
-#     And I can see the edit review body page
-#     And I capture the page screenshot
-#     When I fill the edit review body page using '<Edit_Review_Body>' for field '<Field_Name>'
-#     And I capture the page screenshot
-#     And I click the 'Save' button on the 'Edit_Review_Body_Page'
-#     And I capture the current time
-#     Then I now see the review body profile page with the updated '<Edit_Review_Body>' for country field
-#     And I can see the review body profile page heading
-#     And I capture the page screenshot
-#     And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'
-#     Then I can see the audit history page of the review body
-#     And I capture the page screenshot
-#     And I can see the '<Validation_Text>' ui labels on the audit history page of the review body
-#     And I can see the audit history page heading
-#     And I can see the audit history for 'Country' edited event with '<Audit_History>'
+    @VerifyAuditHistoryUserUnassignRole
+    Scenario Outline: Verify the user can view the unassign role event in the audit history
+        And I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
+        And I can see the add a new user profile page
+        And I fill the new user profile page using '<Add_User_Profile>'
+        And I capture the page screenshot
+        And I click the 'Continue' button on the 'Create_User_Profile_Page'
+        And I can see the check and create user profile page
+        And I capture the page screenshot
+        And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
+        And I can see the create user profile confirmation page for '<Add_User_Profile>'
+        And I capture the page screenshot
+        And I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
+        And I can see the 'Manage_Users_Page'
+        And I capture the page screenshot
+        And I search and click on view edit link for unique '<Add_User_Profile>' user with 'ACTIVE' status from the manage user page
+        And I can see the user profile page
+        And I capture the page screenshot
 
-#     Examples:
-#         | Field_Name | Edit_Review_Body           | Validation_Text | Audit_History            |
-#         | Country    | Valid_Data_Country_Another | header_Texts    | Edit_Review_Body_Country |
+        And I click the change link against '<Field_Name>' on the user profile page
+        And I can see the edit user profile page
+        And I capture the page screenshot
+        And I edit the users '<Field_Name>' field with '<Edit_User>'
+        And I capture the page screenshot
+        And I click the 'Save' button on the 'Edit_User_Profile_Page'
+        And I capture the current time for 'Audit_History_User_Page'
+        And I capture the page screenshot
+        And I can see that the user profiles last updated field has the current time
+        When I click the 'View_Users_Audit_History' link on the 'User_Profile_Page'
+        And I can see the audit history page of the selected '<Add_User_Profile>' user
+        And I capture the page screenshot
+        Then I can see the '<Add_User_Profile>' user has had their roles unassigned in the audit history
 
-# @VerifyAuditHistoryEditReviewBodyEmail
-# Scenario Outline: Verify the user can view the audit history after editing email address of a review body
-#     And I select a 'QA Automation' Review Body to View and Edit which is 'active'
-#     And I can see the review body profile page
-#     And I capture the page screenshot
-#     When I click the change link against '<Field_Name>' on the review body profile page
-#     And I can see the edit review body page
-#     And I capture the page screenshot
-#     When I fill the edit review body page using '<Edit_Review_Body>' for field '<Field_Name>'
-#     And I capture the page screenshot
-#     And I click the 'Save' button on the 'Edit_Review_Body_Page'
-#     And I capture the current time
-#     Then I now see the review body profile page with the updated '<Edit_Review_Body>' for email address field
-#     And I can see the review body profile page heading
-#     And I capture the page screenshot
-#     And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'
-#     Then I can see the audit history page of the review body
-#     And I capture the page screenshot
-#     And I can see the '<Validation_Text>' ui labels on the audit history page of the review body
-#     And I can see the audit history page heading
-#     And I can see the audit history for 'Email_Address' edited event with '<Audit_History>'
+        Examples:
+            | Add_User_Profile                               | Field_Name | Edit_User                 |
+            | Valid_Data_In_All_Fields_Role_Operations       | Role       | User_Roles_Checkbox_Empty |
+            | Valid_Data_In_All_Fields_Role_Reviewer_Another | Role       | User_Roles_Checkbox_Empty |
+            | Valid_Data_All_Roles                           | Role       | User_Roles_Checkbox_Empty |
 
-#     Examples:
-#         | Field_Name    | Edit_Review_Body         | Validation_Text | Audit_History                  |
-#         | Email_Address | Valid_Data_Email_Another | header_Texts    | Edit_Review_Body_Email_Address |
+    @VerifyAuditHistoryUserDefaultSort
+    Scenario Outline: Verify the users audit history should be sorted with the most recent entry first
+        And I select a 'QA Automation' User to View and Edit which is 'active'
+        And I can see the user profile page
+        And I capture the page screenshot
+        And I click the 'Disable_User_Record' button on the 'User_Profile_Page'
+        And I capture the page screenshot
+        And I click the 'Confirm' button on the 'Confirmation_Page'
+        And I have navigated to the 'User_Profile_Page'
+        And I capture the page screenshot
+        And I click the 'Enable_User_Record' button on the 'User_Profile_Page'
+        And I capture the page screenshot
+        And I click the 'Confirm' button on the 'Confirmation_Page'
+        And I have navigated to the 'User_Profile_Page'
+        And I click the change link against '<Field_Name>' on the user profile page
+        And I can see the edit user profile page
+        And I capture the page screenshot
+        And I edit the users '<Field_Name>' field with '<Edit_User>'
+        And I capture the page screenshot
+        And I click the 'Save' button on the 'Edit_User_Profile_Page'
+        And I click the change link against '<Field_Name>' on the user profile page
+        And I can see the edit user profile page
+        And I capture the page screenshot
+        And I revert the '<Field_Name>' update of the user profile
+        And I capture the page screenshot
+        And I click the 'Save' button on the 'Edit_User_Profile_Page'
+        And I capture the page screenshot
+        When I click the 'View_Users_Audit_History' link on the 'User_Profile_Page'
+        Then I can see the audit history page of the user profile
+        And I capture the page screenshot
+        And I can see the default sort should be the most recent entry first based on date and time
 
-# @VerifyAuditHistoryEditReviewBodyDescription
-# Scenario Outline: Verify the user can view the audit history after editing description of a review body
-#     And I select a 'QA Automation' Review Body to View and Edit which is 'active'
-#     And I can see the review body profile page
-#     And I capture the page screenshot
-#     When I click the change link against '<Field_Name>' on the review body profile page
-#     And I can see the edit review body page
-#     And I capture the page screenshot
-#     When I fill the edit review body page using '<Edit_Review_Body>' for field '<Field_Name>'
-#     And I capture the page screenshot
-#     And I click the 'Save' button on the 'Edit_Review_Body_Page'
-#     And I capture the current time
-#     Then I now see the review body profile page with the updated '<Edit_Review_Body>' for description field
-#     And I can see the review body profile page heading
-#     And I capture the page screenshot
-#     And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'
-#     Then I can see the audit history page of the review body
-#     And I capture the page screenshot
-#     And I can see the '<Validation_Text>' ui labels on the audit history page of the review body
-#     And I can see the audit history page heading
-#     And I can see the audit history for 'Description' edited event with '<Audit_History>'
-
-#     Examples:
-#         | Field_Name  | Edit_Review_Body               | Validation_Text | Audit_History                |
-#         | Description | Valid_Data_Description_Another | header_Texts    | Edit_Review_Body_Description |
-
-# @VerifyAuditHistoryEditReviewBodyAllFields
-# Scenario Outline: Verify the user can view the audit history after editing all the fields of a review body
-#     And I select a 'QA Automation' Review Body to View and Edit which is 'active'
-#     And I can see the review body profile page
-#     And I capture the page screenshot
-#     When I click the change link against '<Field_Name_One>' on the review body profile page
-#     And I can see the edit review body page
-#     And I capture the page screenshot
-#     When I fill the edit review body page using '<Edit_Review_Body>'
-#     And I capture the page screenshot
-#     And I click the 'Save' button on the 'Edit_Review_Body_Page'
-#     And I capture the current time
-#     Then I now see the review body profile page with the updated '<Edit_Review_Body>' for organisation name field
-#     Then I now see the review body profile page with the updated '<Edit_Review_Body>' for country field
-#     Then I now see the review body profile page with the updated '<Edit_Review_Body>' for email address field
-#     Then I now see the review body profile page with the updated '<Edit_Review_Body>' for description field
-#     And I capture the page screenshot
-#     And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'
-#     Then I can see the audit history page of the review body
-#     And I capture the page screenshot
-#     And I can see the '<Validation_Text>' ui labels on the audit history page of the review body
-#     And I can see the audit history for all the fields edited event with '<Audit_History>'
-
-#     Examples:
-#         | Field_Name_One    | Field_Name_Two | Field_Name_Three | Field_Name_Four | Edit_Review_Body           | Validation_Text | Audit_History               |
-#         | Organisation_Name | Country        | Email_Address    | Description     | Valid_Data_Edit_All_Fields | header_Texts    | Edit_Review_Body_All_Fields |
-
-
-# @VerifyAuditHistoryDefaultSort
-# Scenario: Verify the default sort of the audit history should be the most recent entry first based on date and time
-#     And I select a 'QA Automation' Review Body to View and Edit which is 'active'
-#     And I can see the review body profile page
-#     And I capture the page screenshot
-#     And I click the 'Disable_Review_Body' button on the 'Review_Body_Profile_Page'
-#     And I capture the page screenshot
-#     And I click the 'Confirm' button on the 'Confirmation_Page'
-#     And I capture the page screenshot
-#     And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
-#     Then I can see the 'Manage_Review_Bodies_Page'
-#     And I capture the page screenshot
-#     Then I click the view edit link for the 'disabled' review body
-#     And I can see the review body profile page
-#     And I capture the page screenshot
-#     And I click the 'Enable_Review_Body' button on the 'Review_Body_Profile_Page'
-#     And I capture the page screenshot
-#     And I click the 'Confirm' button on the 'Confirmation_Page'
-#     And I capture the page screenshot
-#     And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
-#     Then I can see the 'Manage_Review_Bodies_Page'
-#     And I capture the page screenshot
-#     Then I click the view edit link for the 'enabled' review body
-#     And I can see the review body profile page
-#     And I capture the page screenshot
-#     And I click the change link against 'Organisation_Name' on the review body profile page
-#     And I can see the edit review body page
-#     And I capture the page screenshot
-#     When I fill the edit review body page using 'Valid_Data_Organisation_Name_Another' for field 'Organisation_Name'
-#     And I capture the page screenshot
-#     And I click the 'Save' button on the 'Edit_Review_Body_Page'
-#     And I capture the current time
-#     And I capture the page screenshot
-#     Then I now see the review body profile page with the updated 'Valid_Data_Organisation_Name_Another' for organisation name field
-#     And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'
-#     Then I can see the audit history page of the review body
-#     And I capture the page screenshot
-#     And I can see the default sort should be the most recent entry first based on date and time
-
-# @VerifyAuditHistoryBackLinkNavigation
-# Scenario: Verify the user can navigate from audit History page of the review body by clicking 'Back' link
-#     And I select a 'QA Automation' Review Body to View and Edit which is 'active'
-#     And I can see the review body profile page
-#     And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'
-#     Then I can see the audit history page of the review body
-#     And I capture the page screenshot
-#     And I click the 'Back' link on the 'Review_Body_Audit_History_Page'
-#     And I capture the page screenshot
-#     And I can see the review body profile page
+        Examples:
+            | Field_Name | Edit_User               |
+            | Telephone  | User_Telephone_Text_One |

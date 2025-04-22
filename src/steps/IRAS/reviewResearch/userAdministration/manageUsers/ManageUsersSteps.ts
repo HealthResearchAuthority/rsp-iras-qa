@@ -23,17 +23,14 @@ Then(
   }
 );
 
-When(
-  'I update user profile {string} on {string}',
-  async ({ commonItemsPage, editUserProfilePage }, datasetName: string) => {
-    const dataset = editUserProfilePage.editUserProfilePageTestData[datasetName];
-    for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        await commonItemsPage.fillUIComponent(dataset, key, editUserProfilePage);
-      }
+When('I update user profile with {string}', async ({ commonItemsPage, editUserProfilePage }, datasetName: string) => {
+  const dataset = editUserProfilePage.editUserProfilePageTestData[datasetName];
+  for (const key in dataset) {
+    if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      await commonItemsPage.fillUIComponent(dataset, key, editUserProfilePage);
     }
   }
-);
+});
 
 When(
   'I can see the newly created user record should be present in the list for {string} with {string} status in the manage user page',
@@ -60,10 +57,8 @@ When(
     const userLastName = dataset.last_name_text;
     const userEmail = dataset.email_address_text;
     await manageUsersPage.goto(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size);
-    //change searchAndClick to findUserProfile, test and then remove searchAndClick method
-    // await manageUsersPage.searchAndClickUserProfile(userFirstName, userLastName, userEmail, userStatus);
-    const foundRecord = await manageUsersPage.findUserProfile(userFirstName, userLastName, userEmail, userStatus);
-    await foundRecord.locator(manageUsersPage.view_edit_link).click();
+    // this doesn't appear to work?
+    await manageUsersPage.searchAndClickUserProfile(userFirstName, userLastName, userEmail, userStatus);
   }
 );
 
@@ -77,8 +72,6 @@ When(
     const data = await fse.readJson(filePath);
     const userEmail = data.Create_User_Profile.email_address_unique;
     await manageUsersPage.goto(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size);
-    //change searchAndClick to findUserProfile, test and then remove searchAndClick
-    // await manageUsersPage.searchAndClickUserProfile(userFirstName, userLastName, userEmail, userStatus);
     const foundRecord = await manageUsersPage.findUserProfile(userFirstName, userLastName, userEmail, userStatus);
     await foundRecord.locator(manageUsersPage.view_edit_link).click();
   }

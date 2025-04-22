@@ -213,6 +213,7 @@ Then(
   }
 );
 
+//try to change to common step if/when getAuditLog is changd to common method
 Then(
   'I can see the default sort should be the most recent entry first based on date and time',
   async ({ auditHistoryReviewBodyPage }) => {

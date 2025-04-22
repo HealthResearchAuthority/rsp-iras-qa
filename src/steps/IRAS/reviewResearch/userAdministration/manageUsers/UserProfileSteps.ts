@@ -9,19 +9,18 @@ Then('I can see the user profile page', async ({ userProfilePage }) => {
   const userIdStartIndex = userProfilePage.page.url().indexOf('=') + 1;
   const userIdEndIndex = userProfilePage.page.url().indexOf('&');
   await userProfilePage.setUserId(userProfilePage.page.url().substring(userIdStartIndex, userIdEndIndex));
-  // await reviewBodyProfilePage.setOrgName(
-  //   confirmStringNotNull(await reviewBodyProfilePage.organisation_name_value.textContent())
-  // );
-  // await reviewBodyProfilePage.setCountries(
-  //   confirmStringNotNull(await reviewBodyProfilePage.country_value.textContent()).split(', ')
-  // );
+  await userProfilePage.setTitle(confirmStringNotNull(await userProfilePage.title_value.textContent()));
+  await userProfilePage.setFirstName(confirmStringNotNull(await userProfilePage.first_name_value.textContent()));
+  await userProfilePage.setLastName(confirmStringNotNull(await userProfilePage.last_name_value.textContent()));
   await userProfilePage.setEmail(confirmStringNotNull(await userProfilePage.email_address_value.textContent()));
-  // await reviewBodyProfilePage.setDescription(
-  //   confirmStringNotNull(await reviewBodyProfilePage.description_value.textContent())
-  // );
-  // await reviewBodyProfilePage.setLastUpdatedDate(
-  //   confirmStringNotNull(await reviewBodyProfilePage.last_updated_value.textContent())
-  // );
+  await userProfilePage.setTelephone(confirmStringNotNull(await userProfilePage.telephone_value.textContent()));
+  await userProfilePage.setOrganisation(confirmStringNotNull(await userProfilePage.organisation_value.textContent()));
+  await userProfilePage.setJobTitle(confirmStringNotNull(await userProfilePage.job_title_value.textContent()));
+  if (await userProfilePage.country_row.isVisible()) {
+    await userProfilePage.setCountries(
+      confirmStringNotNull(await userProfilePage.country_value.textContent()).split(', ')
+    );
+  }
 });
 
 Then(
@@ -38,5 +37,23 @@ When(
   'I click the {string} change link for {string} on the user profile page',
   async ({ userProfilePage }, editUserFieldName: string, userRole: string) => {
     await userProfilePage.clickOnChangeUserProfileDetails(editUserFieldName, userRole);
+  }
+);
+
+When(
+  'I click the change link against {string} on the user profile page',
+  async ({ userProfilePage }, fieldKey: string) => {
+    userProfilePage.clickOnChangeButton(fieldKey);
+  }
+);
+
+When(
+  'I can see that the user profiles last updated field has the current time',
+  async ({ userProfilePage, auditHistoryUserPage }) => {
+    const abbreviatedValue = await auditHistoryUserPage.getUpdatedTime();
+    const shortMonth = new Date().toLocaleString('en-GB', { month: 'short', timeZone: 'UTC' });
+    const longMonth = new Date().toLocaleString('en-GB', { month: 'long', timeZone: 'UTC' });
+    const expectedValue = abbreviatedValue.replace(shortMonth, longMonth);
+    await expect(userProfilePage.last_updated_value).toHaveText(expectedValue);
   }
 );

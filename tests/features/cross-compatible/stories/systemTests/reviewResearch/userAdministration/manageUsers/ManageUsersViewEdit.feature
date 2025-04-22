@@ -43,12 +43,12 @@ Feature: HRAPROG-393- User Administration: Manage user profiles, view and edit u
         Then I can see the user profile page
         When I click the '<Edit_User_Field>' change link for '<User_Role>' on the user profile page
         Then I can see the edit user profile page
-        And I update user profile '<Edit_User_Field_Data>' on 'Edit_User_Profile_Page'
+        And I update user profile with '<Edit_User_Field_Data>'
         And I click the 'Save' button on the 'Edit_User_Profile_Page'
         And I can see the user profile page
         Then I can see the user profile '<Edit_User_Field>' is updated with the edited data '<Edit_User_Field_Data>'
         When I click the '<Edit_User_Field>' change link for '<User_Role>' on the user profile page
-        And I update user profile '<Original_Data>' on 'Edit_User_Profile_Page'
+        And I update user profile with '<Original_Data>'
         And I click the 'Save' button on the 'Edit_User_Profile_Page'
         And I can see the user profile page
         When I click the 'Back' link on the 'User_Profile_Page'
@@ -70,12 +70,12 @@ Feature: HRAPROG-393- User Administration: Manage user profiles, view and edit u
         Then I can see the user profile page
         When I click the '<Edit_User_Field>' change link for '<User_Role>' on the user profile page
         Then I can see the edit user profile page
-        And I update user profile '<Edit_User_Field_Data>' on 'Edit_User_Profile_Page'
+        And I update user profile with '<Edit_User_Field_Data>'
         And I click the 'Save' button on the 'Edit_User_Profile_Page'
         And I can see the user profile page
         Then I can see the user profile '<Edit_User_Field>' is updated with the edited data '<Edit_User_Field_Data>'
         When I click the '<Edit_User_Field>' change link for '<User_Role>' on the user profile page
-        And I update user profile '<Original_Data>' on 'Edit_User_Profile_Page'
+        And I update user profile with '<Original_Data>'
         And I click the 'Save' button on the 'Edit_User_Profile_Page'
         And I can see the user profile page
         When I click the 'Back' link on the 'User_Profile_Page'
@@ -97,12 +97,12 @@ Feature: HRAPROG-393- User Administration: Manage user profiles, view and edit u
         Then I can see the user profile page
         When I click the '<Edit_User_Field>' change link for '<User_Role>' on the user profile page
         Then I can see the edit user profile page
-        And I update user profile '<Edit_User_Field_Data>' on 'Edit_User_Profile_Page'
+        And I update user profile with '<Edit_User_Field_Data>'
         And I click the 'Save' button on the 'Edit_User_Profile_Page'
         And I can see the user profile page
         Then I can see the user profile '<Edit_User_Field>' is updated with the edited data '<Edit_User_Field_Data>'
         When I click the '<Edit_User_Field>' change link for '<User_Role>' on the user profile page
-        And I update user profile '<Original_Data>' on 'Edit_User_Profile_Page'
+        And I update user profile with '<Original_Data>'
         And I click the 'Save' button on the 'Edit_User_Profile_Page'
         And I can see the user profile page
         When I click the 'Back' link on the 'User_Profile_Page'
@@ -143,7 +143,7 @@ Feature: HRAPROG-393- User Administration: Manage user profiles, view and edit u
         Then I can see the user profile page
         When I click the '<Edit_User_Field>' change link for '<User_Role>' on the user profile page
         Then I can see the edit user profile page
-        And I update user profile '<Edit_User_Field_Data>' on 'Edit_User_Profile_Page'
+        And I update user profile with '<Edit_User_Field_Data>'
         And I click the 'Save' button on the 'Edit_User_Profile_Page'
         Then I validate '<Invalid_Email_Id_Error_Message>' is displayed on edit user profile page for '<Edit_User_Field_Data>'
         Examples:
@@ -181,12 +181,12 @@ Feature: HRAPROG-393- User Administration: Manage user profiles, view and edit u
         Then I can see the user profile page
         When I click the '<Edit_User_Field>' change link for '<User_Role>' on the user profile page
         Then I can see the edit user profile page
-        And I update user profile '<Edit_User_Field_Data>' on 'Edit_User_Profile_Page'
+        And I update user profile with '<Edit_User_Field_Data>'
         And I click the 'Save' button on the 'Edit_User_Profile_Page'
         And I can see the user profile page
         Then I can see the user profile '<Edit_User_Field>' is updated with the edited data '<Edit_User_Field_Data>'
         When I click the '<Edit_User_Field>' change link for '<User_Role>' on the user profile page
-        And I update user profile '<Original_Data>' on 'Edit_User_Profile_Page'
+        And I update user profile with '<Original_Data>'
         And I click the 'Save' button on the 'Edit_User_Profile_Page'
         And I can see the user profile page
         When I click the 'Back' link on the 'User_Profile_Page'
@@ -218,7 +218,7 @@ Feature: HRAPROG-393- User Administration: Manage user profiles, view and edit u
         Then I can see the user profile page
         When I click the '<Edit_User_Field>' change link for '<User_Role>' on the user profile page
         Then I can see the edit user profile page
-        And I update user profile '<Edit_User_Field_Data>' on 'Edit_User_Profile_Page'
+        And I update user profile with '<Edit_User_Field_Data>'
         And I click the 'Save' button on the 'Edit_User_Profile_Page'
         Then I validate '<Max_Field_Length_Error_Message>' is displayed on edit user profile page for '<Edit_User_Field_Data>'
         Examples:
