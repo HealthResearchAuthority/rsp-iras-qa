@@ -144,6 +144,10 @@
   "User_Access_Required_Checkbox_One": {
     "access_required_checkbox": ["Research Ethics Committee"]
   },
+  "User_Title_Update": {
+    "title_text": "Master",
+    "access_required_checkbox": ["Research Ethics Committee"]
+  },
   "Original_Title_Text_One": {
     "title_text": "Mr",
     "access_required_checkbox": ["Research Ethics Committee"]
