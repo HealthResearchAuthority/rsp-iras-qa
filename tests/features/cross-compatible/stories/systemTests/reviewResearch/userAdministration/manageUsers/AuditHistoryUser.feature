@@ -47,6 +47,44 @@ Feature: User Administration: Manage Users - View audit history for users
             | Valid_Data_In_All_Fields_Role_Reviewer_Another     |
             | Valid_Data_In_All_Mandatory_Fields_Role_Operations |
 
+    @VerifyAuditHistoryUserUnassignRole
+    Scenario Outline: Verify the user can view the unassign role event in the audit history
+        And I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
+        And I can see the add a new user profile page
+        And I fill the new user profile page using '<Add_User_Profile>'
+        And I capture the page screenshot
+        And I click the 'Continue' button on the 'Create_User_Profile_Page'
+        And I can see the check and create user profile page
+        And I capture the page screenshot
+        And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
+        And I can see the create user profile confirmation page for '<Add_User_Profile>'
+        And I capture the page screenshot
+        And I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
+        And I can see the 'Manage_Users_Page'
+        And I capture the page screenshot
+        And I search and click on view edit link for unique '<Add_User_Profile>' user with 'ACTIVE' status from the manage user page
+        And I can see the user profile page
+        And I capture the page screenshot
+        And I click the change link against '<Field_Name>' on the user profile page
+        And I can see the edit user profile page
+        And I capture the page screenshot
+        And I edit the users '<Field_Name>' field with '<Edit_User>'
+        And I capture the page screenshot
+        And I click the 'Save' button on the 'Edit_User_Profile_Page'
+        And I capture the current time for 'Audit_History_User_Page'
+        And I capture the page screenshot
+        And I can see that the user profiles last updated field has the current time
+        When I click the 'View_Users_Audit_History' link on the 'User_Profile_Page'
+        And I can see the audit history page of the selected '<Add_User_Profile>' user
+        And I capture the page screenshot
+        Then I can see the '<Add_User_Profile>' user has had their roles unassigned in the audit history
+
+        Examples:
+            | Add_User_Profile                               | Field_Name | Edit_User                 |
+            | Valid_Data_In_All_Fields_Role_Operations       | Role       | User_Roles_Checkbox_Empty |
+            | Valid_Data_In_All_Fields_Role_Reviewer_Another | Role       | User_Roles_Checkbox_Empty |
+            | Valid_Data_All_Roles                           | Role       | User_Roles_Checkbox_Empty |
+
     @VerifyAuditHistoryEnableDisableUser
     Scenario Outline: Verify the user can view the audit history after changing the status of a user
         And I select a 'QA Automation' User to View and Edit which is '<Status>'
@@ -148,44 +186,6 @@ Feature: User Administration: Manage Users - View audit history for users
             | Add_User_Profile                                   | Field_Name | Edit_User                 | Audit_History     |
             | Valid_Data_In_All_Fields_Role_Operations           | Country    | User_Country_Checkbox_One | Edit_User_Country |
             | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Country    | User_Country_Checkbox_Two | Edit_User_Country |
-
-    @VerifyAuditHistoryUserUnassignRole
-    Scenario Outline: Verify the user can view the unassign role event in the audit history
-        And I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
-        And I can see the add a new user profile page
-        And I fill the new user profile page using '<Add_User_Profile>'
-        And I capture the page screenshot
-        And I click the 'Continue' button on the 'Create_User_Profile_Page'
-        And I can see the check and create user profile page
-        And I capture the page screenshot
-        And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
-        And I can see the create user profile confirmation page for '<Add_User_Profile>'
-        And I capture the page screenshot
-        And I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
-        And I can see the 'Manage_Users_Page'
-        And I capture the page screenshot
-        And I search and click on view edit link for unique '<Add_User_Profile>' user with 'ACTIVE' status from the manage user page
-        And I can see the user profile page
-        And I capture the page screenshot
-        And I click the change link against '<Field_Name>' on the user profile page
-        And I can see the edit user profile page
-        And I capture the page screenshot
-        And I edit the users '<Field_Name>' field with '<Edit_User>'
-        And I capture the page screenshot
-        And I click the 'Save' button on the 'Edit_User_Profile_Page'
-        And I capture the current time for 'Audit_History_User_Page'
-        And I capture the page screenshot
-        And I can see that the user profiles last updated field has the current time
-        When I click the 'View_Users_Audit_History' link on the 'User_Profile_Page'
-        And I can see the audit history page of the selected '<Add_User_Profile>' user
-        And I capture the page screenshot
-        Then I can see the '<Add_User_Profile>' user has had their roles unassigned in the audit history
-
-        Examples:
-            | Add_User_Profile                               | Field_Name | Edit_User                 |
-            | Valid_Data_In_All_Fields_Role_Operations       | Role       | User_Roles_Checkbox_Empty |
-            | Valid_Data_In_All_Fields_Role_Reviewer_Another | Role       | User_Roles_Checkbox_Empty |
-            | Valid_Data_All_Roles                           | Role       | User_Roles_Checkbox_Empty |
 
     @VerifyAuditHistoryUserDefaultSort
     Scenario Outline: Verify the users audit history should be sorted with the most recent entry first
