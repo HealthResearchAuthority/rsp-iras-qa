@@ -31,7 +31,7 @@ Then(
     const datasetAudit = auditHistoryUserPage.auditHistoryUserPageTestData.Audit_History_User_Page;
     const auditLog = await auditHistoryReviewBodyPage.getAuditLog();
     const timeExpected = await auditHistoryUserPage.getUpdatedTime();
-    const rolesInExpectedOrder = datasetCreateUser.role_checkbox.reverse();
+    const rolesInExpectedOrder: string[] = datasetCreateUser.role_checkbox.slice().reverse();
     const filePath = path.resolve(pathToTestDataJson);
     const data = await fse.readJson(filePath);
     const userEmail = data.Create_User_Profile.email_address_unique;
@@ -121,7 +121,7 @@ Then(
     const datasetAudit = auditHistoryUserPage.auditHistoryUserPageTestData.Audit_History_User_Page;
     const auditLog = await auditHistoryReviewBodyPage.getAuditLog();
     const timeExpected = await auditHistoryUserPage.getUpdatedTime();
-    const rolesInExpectedOrder: string[] = datasetCreateUser.role_checkbox.reverse();
+    const rolesInExpectedOrder: string[] = datasetCreateUser.role_checkbox.slice().reverse();
     const filePath = path.resolve(pathToTestDataJson);
     const data = await fse.readJson(filePath);
     const userEmail = data.Create_User_Profile.email_address_unique;
