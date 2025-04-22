@@ -442,9 +442,4 @@ export default class CommonItemsPage {
     const locator: Locator = page[key];
     return await removeUnwantedWhitespace(confirmStringNotNull(await locator.textContent()));
   }
-
-  async getAuditEventDescriptionValue(eventDescriptionText: string, valuePrevious: string, valueCurrent: string) {
-    const eventDescriptionValue = eventDescriptionText + valuePrevious + ' to ' + valueCurrent;
-    return eventDescriptionValue;
-  }
 }

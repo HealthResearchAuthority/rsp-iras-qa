@@ -46,6 +46,11 @@ export default class AuditHistoryUserPage {
     await expect(this.sys_admin_column_header).toBeVisible();
   }
 
+  async getUserAuditEventDescriptionValue(eventDescriptionText: string, valuePrevious: string, valueCurrent: string) {
+    const eventDescriptionValue = `${valuePrevious}${eventDescriptionText}${valueCurrent}`;
+    return eventDescriptionValue.trim();
+  }
+
   //Getters & Setters for Private Variables
 
   async getUpdatedTime(): Promise<string> {
