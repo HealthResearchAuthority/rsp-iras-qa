@@ -165,7 +165,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I can see the 'Manage_Users_Page'
     When I click the 'View_Edit' link on the 'Manage_Users_Page'
     Then I can see the user profile page
-    When I click the 'Change' link on the 'User_Profile_Page'
+    When I click the change link against 'First_Name' on the user profile page
     Then I can see the edit user profile page
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
