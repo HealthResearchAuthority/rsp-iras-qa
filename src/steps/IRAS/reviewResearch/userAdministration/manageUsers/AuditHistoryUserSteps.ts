@@ -66,51 +66,47 @@ Then(
     const timeExpected = await auditHistoryUserPage.getUpdatedTime();
     const adminEmailExpected =
       auditHistoryUserPage.auditHistoryUserPageTestData.Audit_History_User_Page.system_admin_email_text;
-    let valuePrevious: string = '';
-    let valueCurrent: string = '';
+    let methodType: string = '';
     let eventDescriptionExpectedValue: string;
     if (datasetName == 'Edit_User_Title') {
-      valuePrevious = await userProfilePage.getTitle();
-      valueCurrent = await userProfilePage.getNewTitle();
+      methodType = 'Title';
     } else if (datasetName == 'Edit_User_First_Name') {
-      valuePrevious = await userProfilePage.getFirstName();
-      valueCurrent = await userProfilePage.getNewFirstName();
+      methodType = 'FirstName';
     } else if (datasetName == 'Edit_User_Last_Name') {
-      valuePrevious = await userProfilePage.getLastName();
-      valueCurrent = await userProfilePage.getNewLastName();
+      methodType = 'LastName';
     } else if (datasetName == 'Edit_User_Email') {
-      valuePrevious = await userProfilePage.getEmail();
-      valueCurrent = await userProfilePage.getNewEmail();
+      methodType = 'Email';
     } else if (datasetName == 'Edit_User_Telephone') {
-      valuePrevious = await userProfilePage.getTelephone();
-      valueCurrent = await userProfilePage.getNewTelephone();
+      methodType = 'Telephone';
     } else if (datasetName == 'Edit_User_Organisation') {
-      valuePrevious = await userProfilePage.getOrganisation();
-      valueCurrent = await userProfilePage.getNewOrganisation();
+      methodType = 'Organisation';
     } else if (datasetName == 'Edit_User_Job_Title') {
-      valuePrevious = await userProfilePage.getJobTitle();
-      valueCurrent = await userProfilePage.getNewJobTitle();
+      methodType = 'JobTitle';
     } else if (datasetName == 'Edit_User_Country') {
-      //defect - should be ', ', change after fix is in
-      valuePrevious = (await userProfilePage.getCountries()).join(',');
-      valueCurrent = (await userProfilePage.getNewCountries()).join(',');
+      methodType = 'Countries';
     }
     if (datasetName == 'Disable_User' || datasetName == 'Enable_User') {
       const userEmail = await userProfilePage.getEmail();
       eventDescriptionExpectedValue = userEmail + dataset.event_description_text;
     } else {
-      eventDescriptionExpectedValue = await auditHistoryUserPage.getUserAuditEventDescriptionValue(
-        dataset.event_description_text,
-        valuePrevious,
-        valueCurrent
-      );
+      if (datasetName == 'Edit_User_Country') {
+        //defect - should be ', ', change after fix is in
+        eventDescriptionExpectedValue = await auditHistoryUserPage.getUserAuditEventDescriptionValue(
+          dataset.event_description_text,
+          (await userProfilePage[`get${methodType}`]()).join(','),
+          (await userProfilePage[`getNew${methodType}`]()).join(',')
+        );
+      } else {
+        eventDescriptionExpectedValue = await auditHistoryUserPage.getUserAuditEventDescriptionValue(
+          dataset.event_description_text,
+          await userProfilePage[`get${methodType}`](),
+          await userProfilePage[`getNew${methodType}`]()
+        );
+      }
     }
-    const timeValues: any = auditLog.get('timeValues');
-    const eventValues: any = auditLog.get('eventValues');
-    const adminEmailValues: any = auditLog.get('adminEmailValues');
-    expect(timeValues[0]).toBe(timeExpected);
-    expect(eventValues[0]).toBe(eventDescriptionExpectedValue);
-    expect(adminEmailValues[0]).toBe(adminEmailExpected);
+    expect(confirmArrayNotNull(auditLog.get('timeValues'))[0]).toBe(timeExpected);
+    expect(confirmArrayNotNull(auditLog.get('eventValues'))[0]).toBe(eventDescriptionExpectedValue);
+    expect(confirmArrayNotNull(auditLog.get('adminEmailValues'))[0]).toBe(adminEmailExpected);
   }
 );
 
