@@ -4,10 +4,10 @@
 name: Run Playwright Tests
 
 trigger:
-  - main
+  - feature/rsp-3122-users-error-validation
 
 schedules:
-  - cron: '0 0 * * *'
+  - cron: '55 17 * * *'
     displayName: 'Nightly run - full suite'
     branches:
       include:
