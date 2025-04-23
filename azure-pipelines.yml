@@ -7,7 +7,7 @@ trigger:
   - feature/rsp-3122-users-error-validation
 
 schedules:
-  - cron: '55 17 * * *'
+  - cron: '10 18 * * *'
     displayName: 'Nightly run - full suite'
     branches:
       include:
@@ -73,7 +73,7 @@ parameters:
   - name: devops_library_branch
     displayName: DevOps Library Branch
     type: string
-    default: main
+    default: feature/test-regression-scheduled-run
   - name: tests_run_timeout
     type: number
     displayName: Playwright Tests Run Timeout
