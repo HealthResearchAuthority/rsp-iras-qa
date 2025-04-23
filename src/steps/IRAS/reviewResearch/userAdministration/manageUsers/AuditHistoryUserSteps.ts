@@ -37,8 +37,6 @@ Then(
     const userEmail = data.Create_User_Profile.email_address_unique;
     const createdEventDescriptionExpectedValue = userEmail + datasetAudit.Create_User.event_description_text;
     const timeValues = confirmArrayNotNull(auditLog.get('timeValues'));
-    const eventValues = confirmArrayNotNull(auditLog.get('eventValues'));
-    const adminEmailValues = confirmArrayNotNull(auditLog.get('adminEmailValues'));
 
     for (let index = 0; index < timeValues.length; index++) {
       let eventDescriptionExpectedValue: string;
@@ -51,9 +49,9 @@ Then(
           rolesInExpectedOrder[index].toUpperCase() +
           datasetAudit.Assign_User.event_description_suffix_text;
       }
-      expect(timeValues[index]).toBe(timeExpected);
-      expect(eventValues[index]).toBe(eventDescriptionExpectedValue);
-      expect(adminEmailValues[index]).toBe(datasetAudit.system_admin_email_text);
+      expect(confirmArrayNotNull(auditLog.get('timeValues'))[index]).toBe(timeExpected);
+      expect(confirmArrayNotNull(auditLog.get('eventValues'))[index]).toBe(eventDescriptionExpectedValue);
+      expect(confirmArrayNotNull(auditLog.get('adminEmailValues'))[index]).toBe(datasetAudit.system_admin_email_text);
     }
   }
 );
