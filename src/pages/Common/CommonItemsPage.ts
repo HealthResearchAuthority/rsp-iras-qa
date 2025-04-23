@@ -61,6 +61,7 @@ export default class CommonItemsPage {
     this.buttonTextData = buttonTextData;
     this.linkTextData = linkTextData;
     this.questionSetData = questionSetData;
+    this.auditHistoryReviewBodyPageTestData = auditHistoryReviewBodyPageTestData;
 
     //Locators
     this.showAllSectionsAccordion = page.locator('.govuk-accordion__show-all"');
