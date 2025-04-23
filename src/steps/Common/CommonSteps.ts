@@ -347,3 +347,20 @@ Then('I navigate {string}', async ({ commonItemsPage }, navigation: string) => {
       throw new Error(`${navigation} is not a valid option`);
   }
 });
+
+Then(
+  'I can see the default sort should be the most recent entry first based on date and time',
+  async ({ commonItemsPage }) => {
+    const auditLog = await commonItemsPage.getAuditLog();
+    const timeValues: any = auditLog.get('timeValues');
+    const timeDates = timeValues.map((time: any) => new Date(time));
+    const isSortedDesc = timeDates.every((time: number, i: number, arr: number[]) => {
+      if (i === 0) {
+        return true;
+      } else {
+        return arr[i - 1] >= time;
+      }
+    });
+    expect(isSortedDesc).toBe(true);
+  }
+);

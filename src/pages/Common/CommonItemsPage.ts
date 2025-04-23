@@ -2,6 +2,8 @@ import { expect, Locator, Page } from '@playwright/test';
 import * as buttonTextData from '../../resources/test_data/common/button_text_data.json';
 import * as linkTextData from '../../resources/test_data/common/link_text_data.json';
 import * as questionSetData from '../../resources/test_data/common/question_set_data.json';
+import * as auditHistoryReviewBodyPageTestData from '../../resources/test_data/iras/reviewResearch/userAdministration/manageReviewBodies/audit_history_review_body_page_data.json';
+
 import fs from 'fs';
 import path from 'path';
 import ProjectFilterPage from '../IRAS/questionSet/ProjectFilterPage';
@@ -21,6 +23,7 @@ export default class CommonItemsPage {
   readonly buttonTextData: typeof buttonTextData;
   readonly linkTextData: typeof linkTextData;
   readonly questionSetData: typeof questionSetData;
+  readonly auditHistoryReviewBodyPageTestData: typeof auditHistoryReviewBodyPageTestData;
   readonly showAllSectionsAccordion: Locator;
   readonly genericButton: Locator;
   readonly govUkButton: Locator;
@@ -48,6 +51,9 @@ export default class CommonItemsPage {
   readonly alert_box_list_items: Locator;
   readonly errorMessageFieldLabel: Locator;
   readonly errorMessageSummaryLabel: Locator;
+  readonly auditTableRows: Locator;
+  readonly hidden_next_button: Locator;
+  readonly next_button: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -69,6 +75,8 @@ export default class CommonItemsPage {
     this.qSetProgressBarActiveStage = this.qSetProgressBar.locator('.stage.active');
     this.qSetProgressBarStageLink = this.qSetProgressBarStage.locator('.stage-label').getByRole('button');
     this.qSetProgressBarActiveStageLink = this.qSetProgressBarActiveStage.locator('.stage-label').getByRole('button');
+    this.auditTableRows = this.page.getByRole('table').getByRole('row');
+    this.hidden_next_button = this.page.locator('[class="govuk-pagination__next"][style="visibility: hidden"]');
     //Banner
     this.bannerNavBar = this.page.getByLabel('Service information');
     this.bannerLoginBtn = this.bannerNavBar.getByText(this.buttonTextData.Banner.Login, { exact: true });
@@ -81,6 +89,9 @@ export default class CommonItemsPage {
     this.bannerQuestionSet = this.bannerNavBar.getByText(this.linkTextData.Banner.Question_Set, { exact: true });
     this.bannerSystemAdmin = this.bannerNavBar.getByText(this.linkTextData.Banner.System_Admin, { exact: true });
     this.bannerMyApplications = this.bannerNavBar.getByText(this.linkTextData.Banner.My_Applications, { exact: true });
+    this.next_button = this.page
+      .getByRole('link')
+      .getByText(this.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.next_button, { exact: true });
     this.errorMessageFieldLabel = page.locator('[class$="field-validation-error"]');
     this.errorMessageSummaryLabel = page.locator('div[class="govuk-error-summary"]');
     //Validation Alert Box
@@ -441,5 +452,36 @@ export default class CommonItemsPage {
   async getSelectedValues<PageObject>(key: string, page: PageObject) {
     const locator: Locator = page[key];
     return await removeUnwantedWhitespace(confirmStringNotNull(await locator.textContent()));
+  }
+
+  async getAuditLog(): Promise<Map<string, string[]>> {
+    const timeValues: string[] = [];
+    const eventValues: string[] = [];
+    const adminEmailValues: string[] = [];
+    let dataFound = false;
+    while (!dataFound) {
+      const rowCount = await this.auditTableRows.count();
+      for (let i = 1; i < rowCount; i++) {
+        const columns = this.auditTableRows.nth(i).getByRole('cell');
+        const timeValue = confirmStringNotNull(await columns.nth(0).textContent());
+        timeValues.push(timeValue);
+        const eventValue = confirmStringNotNull(await columns.nth(1).textContent());
+        eventValues.push(eventValue);
+        const adminEmailValue = confirmStringNotNull(await columns.nth(2).textContent());
+        adminEmailValues.push(adminEmailValue);
+      }
+      if ((await this.next_button.isVisible()) && !(await this.next_button.isDisabled())) {
+        await this.next_button.click();
+        await this.page.waitForLoadState('domcontentloaded');
+      } else {
+        dataFound = true;
+      }
+    }
+    const auditMap = new Map([
+      ['timeValues', timeValues],
+      ['eventValues', eventValues],
+      ['adminEmailValues', adminEmailValues],
+    ]);
+    return auditMap;
   }
 }
