@@ -93,7 +93,8 @@ export default class CommonItemsPage {
     this.next_button = this.page
       .getByRole('link')
       .getByText(this.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.next_button, { exact: true });
-    this.errorMessageFieldLabel = page.locator('[class$="error-message"]');
+    this.errorMessageFieldLabel = page.locator('[class$="error-message"]'); //    const errorMessage = await page.getByRole('alert', { name: /Title/ });
+
     this.errorMessageSummaryLabel = page.locator('div[class="govuk-error-summary"]');
     //Validation Alert Box
     this.alert_box = this.page.getByRole('alert');
