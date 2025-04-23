@@ -2,7 +2,7 @@ import { expect, Locator, Page } from '@playwright/test';
 import * as createUserProfilePageTestData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageUsers/create_user_profile_page_data.json';
 import * as buttonTextData from '../../../../../resources/test_data/common/button_text_data.json';
 import * as fse from 'fs-extra';
-import { confirmStringNotNull, removeUnwantedWhitespace } from '../../../../../utils/UtilFunctions';
+import { confirmStringNotNull, removeUnwantedWhitespace, returnDataFromJSON } from '../../../../../utils/UtilFunctions';
 
 //Declare Page Objects
 export default class CreateUserProfilePage {
@@ -147,7 +147,7 @@ export default class CreateUserProfilePage {
   async updateUniqueEmailTestDataJson(filePath: string, updateVal: string) {
     (async () => {
       try {
-        const data = await fse.readJson(filePath);
+        const data = await returnDataFromJSON();
         data.Create_User_Profile.email_address_unique = updateVal;
         await fse.writeJson(filePath, data, { spaces: 2 });
       } catch (error) {

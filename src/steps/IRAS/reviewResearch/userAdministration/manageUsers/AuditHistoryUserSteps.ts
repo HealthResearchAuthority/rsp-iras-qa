@@ -1,10 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../../hooks/CustomFixtures';
-import { confirmArrayNotNull } from '../../../../../utils/UtilFunctions';
-import * as fse from 'fs-extra';
-import path from 'path';
-const pathToTestDataJson =
-  './src/resources/test_data/iras/reviewResearch/userAdministration/manageUsers/create_user_profile_page_data.json';
+import { confirmArrayNotNull, returnDataFromJSON } from '../../../../../utils/UtilFunctions';
 
 const { Then } = createBdd(test);
 
@@ -32,8 +28,7 @@ Then(
     const auditLog = await auditHistoryReviewBodyPage.getAuditLog();
     const timeExpected = await auditHistoryUserPage.getUpdatedTime();
     const rolesInExpectedOrder: string[] = datasetCreateUser.role_checkbox.slice().reverse();
-    const filePath = path.resolve(pathToTestDataJson);
-    const data = await fse.readJson(filePath);
+    const data = await returnDataFromJSON();
     const userEmail = data.Create_User_Profile.email_address_unique;
     const createdEventDescriptionExpectedValue = userEmail + datasetAudit.Create_User.event_description_text;
     const timeValues = confirmArrayNotNull(auditLog.get('timeValues'));
@@ -49,7 +44,7 @@ Then(
           rolesInExpectedOrder[index].toUpperCase() +
           datasetAudit.Assign_User.event_description_suffix_text;
       }
-      expect(confirmArrayNotNull(auditLog.get('timeValues'))[index]).toBe(timeExpected);
+      expect(timeValues[index]).toBe(timeExpected);
       expect(confirmArrayNotNull(auditLog.get('eventValues'))[index]).toBe(eventDescriptionExpectedValue);
       expect(confirmArrayNotNull(auditLog.get('adminEmailValues'))[index]).toBe(datasetAudit.system_admin_email_text);
     }
@@ -114,12 +109,8 @@ Then(
     const auditLog = await auditHistoryReviewBodyPage.getAuditLog();
     const timeExpected = await auditHistoryUserPage.getUpdatedTime();
     const rolesInExpectedOrder: string[] = datasetCreateUser.role_checkbox.slice().reverse();
-    const filePath = path.resolve(pathToTestDataJson);
-    const data = await fse.readJson(filePath);
+    const data = await returnDataFromJSON();
     const userEmail = data.Create_User_Profile.email_address_unique;
-    const timeValues = confirmArrayNotNull(auditLog.get('timeValues'));
-    const eventValues = confirmArrayNotNull(auditLog.get('eventValues'));
-    const adminEmailValues = confirmArrayNotNull(auditLog.get('adminEmailValues'));
 
     for (let index = 0; index < rolesInExpectedOrder.length; index++) {
       const eventDescriptionExpectedValue =
@@ -127,9 +118,9 @@ Then(
         datasetAudit.Unassign_User.event_description_prefix_text +
         rolesInExpectedOrder[index].toUpperCase() +
         datasetAudit.Unassign_User.event_description_suffix_text;
-      expect(timeValues[index]).toBe(timeExpected);
-      expect(eventValues[index]).toBe(eventDescriptionExpectedValue);
-      expect(adminEmailValues[index]).toBe(datasetAudit.system_admin_email_text);
+      expect(confirmArrayNotNull(auditLog.get('timeValues'))[index]).toBe(timeExpected);
+      expect(confirmArrayNotNull(auditLog.get('eventValues'))[index]).toBe(eventDescriptionExpectedValue);
+      expect(confirmArrayNotNull(auditLog.get('adminEmailValues'))[index]).toBe(datasetAudit.system_admin_email_text);
     }
   }
 );

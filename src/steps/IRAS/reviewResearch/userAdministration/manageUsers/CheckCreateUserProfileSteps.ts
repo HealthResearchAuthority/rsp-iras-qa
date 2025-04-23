@@ -1,10 +1,7 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../../hooks/CustomFixtures';
 const { When, Then } = createBdd(test);
-import path from 'path';
-import * as fse from 'fs-extra';
-const pathToTestDataJson =
-  './src/resources/test_data/iras/reviewResearch/userAdministration/manageUsers/create_user_profile_page_data.json';
+import { returnDataFromJSON } from '../../../../../utils/UtilFunctions';
 
 Then('I can see the check and create user profile page', async ({ checkCreateUserProfilePage }) => {
   await checkCreateUserProfilePage.assertOnCheckCreateUserProfilePage();
@@ -18,8 +15,7 @@ Then(
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
         const fieldValActual = await commonItemsPage.getSelectedValues(key, checkCreateUserProfilePage);
         if (key === 'email_address_text') {
-          const filePath = path.resolve(pathToTestDataJson);
-          const data = await fse.readJson(filePath);
+          const data = await returnDataFromJSON();
           expect(fieldValActual).toBe(data.Create_User_Profile.email_address_unique);
         } else if (key === 'country_checkbox' || key === 'access_required_checkbox' || key === 'role_checkbox') {
           const fieldValActuals = fieldValActual.split(', ');

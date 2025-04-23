@@ -1,9 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../../hooks/CustomFixtures';
-import * as fse from 'fs-extra';
-import path from 'path';
-const pathToTestDataJson =
-  './src/resources/test_data/iras/reviewResearch/userAdministration/manageUsers/create_user_profile_page_data.json';
+import { returnDataFromJSON } from '../../../../../utils/UtilFunctions';
 
 const { When, Then } = createBdd(test);
 
@@ -39,8 +36,7 @@ When(
     const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
     const userFirstName = dataset.first_name_text;
     const userLastName = dataset.last_name_text;
-    const filePath = path.resolve(pathToTestDataJson);
-    const data = await fse.readJson(filePath);
+    const data = await returnDataFromJSON();
     const userEmail = data.Create_User_Profile.email_address_unique;
     await manageUsersPage.goto(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size);
     const foundRecords = await manageUsersPage.findUserProfile(userFirstName, userLastName, userEmail, userStatus);
@@ -68,8 +64,7 @@ When(
     const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
     const userFirstName = dataset.first_name_text;
     const userLastName = dataset.last_name_text;
-    const filePath = path.resolve(pathToTestDataJson);
-    const data = await fse.readJson(filePath);
+    const data = await returnDataFromJSON();
     const userEmail = data.Create_User_Profile.email_address_unique;
     await manageUsersPage.goto(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size);
     const foundRecord = await manageUsersPage.findUserProfile(userFirstName, userLastName, userEmail, userStatus);

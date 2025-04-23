@@ -6,7 +6,11 @@ import 'dotenv/config';
 import { deviceDSafari, deviceDFirefox, deviceDChrome, deviceDEdge } from '../hooks/GlobalSetup';
 import fs from 'fs';
 import os from 'os';
+import * as fse from 'fs-extra';
+import path from 'path';
 
+const pathToCreateUserTestDataJson =
+  './src/resources/test_data/iras/reviewResearch/userAdministration/manageUsers/create_user_profile_page_data.json';
 let browserdata: any;
 let deviceType: string;
 const todayDate = new Date();
@@ -397,4 +401,14 @@ export async function getCurrentTimeFormatted(): Promise<string> {
   const utcMinutes = date.getUTCMinutes().toString().padStart(2, '0');
   const formattedUTC = `${utcDay} ${utcMonth} ${utcYear} ${utcHours}:${utcMinutes}`;
   return formattedUTC;
+}
+
+export async function returnDataFromJSON(filePath?: string): Promise<any> {
+  if (typeof filePath !== 'undefined') {
+    const definedPath = path.resolve(filePath);
+    return await fse.readJson(definedPath);
+  } else {
+    const createUserPath = path.resolve(pathToCreateUserTestDataJson);
+    return await fse.readJson(createUserPath);
+  }
 }
