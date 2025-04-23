@@ -1,5 +1,8 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../hooks/CustomFixtures';
+import { generateRandomNumber } from '../.././../utils/GenerateTestData';
+import path from 'path';
+const pathToTestDataJson = './src/resources/test_data/iras/make_changes/project_details_iras_data.json';
 
 const { Then } = createBdd(test);
 
@@ -32,6 +35,19 @@ Then(
   }
 );
 
+Then('I fill the unique iras id in project details iras page', async ({ projectDetailsIRASPage }) => {
+  const uniqueIrasId = generateRandomNumber();
+  await projectDetailsIRASPage.setUniqueIrasId(uniqueIrasId);
+  const filePath = path.resolve(pathToTestDataJson);
+  await projectDetailsIRASPage.updateUniqueIrasIdTestDataJson(filePath, uniqueIrasId);
+  await projectDetailsIRASPage.iras_id_text.fill(uniqueIrasId);
+});
+
+Then('I fill the existing iras id in project details iras page', async ({ projectDetailsIRASPage }) => {
+  const irasIdRunTime = await projectDetailsIRASPage.getUniqueIrasId();
+  await projectDetailsIRASPage.iras_id_text.fill(irasIdRunTime);
+});
+
 Then(
   'I can see previously saved values for {string} displayed on the project details iras page',
   async ({ commonItemsPage, projectDetailsIRASPage }, datasetName: string) => {
@@ -59,7 +75,7 @@ Then(
     const invalidFieldsDataset = projectDetailsIRASPage.projectDetailsIRASPageTestData[invalidFieldsDatasetName];
     for (const key in invalidFieldsDataset) {
       if (Object.prototype.hasOwnProperty.call(invalidFieldsDataset, key)) {
-        await commonItemsPage.validateErrorMessage(
+        await commonItemsPage.validateErrorMessageOrderAndViewport(
           errorMessageFieldDataset,
           errorMessageSummaryDataset,
           key,

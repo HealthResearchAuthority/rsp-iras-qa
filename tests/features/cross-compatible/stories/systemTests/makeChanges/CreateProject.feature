@@ -1,4 +1,4 @@
-@adminUser @createProject @createAmendment @SystemTest
+@adminUser @createProject @createAmendment @SystemTest @rsp-1860
 Feature: Create Amendment - Create Project
 
   Background:
@@ -26,7 +26,7 @@ Feature: Create Amendment - Create Project
       | Label_Texts     | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Back            |
       | Label_Texts     | Create_Project_Record   | Start                    | Valid_IRAS_ID_Max    | Save_Continue           | Back            |
 
-  @rsp-1858
+  @rsp-1858 @invalidIrasIdValidations
   Scenario Outline: Validate error messages displayed when user amend the project using invalid iras id
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
@@ -35,16 +35,18 @@ Feature: Create Amendment - Create Project
     Then I validate '<Field_Error_Message>' and '<Summary_Error_Message>' displayed on project details iras page for '<Project_Details_IRAS>'
 
     Examples:
-      | Navigation_Button_First | Navigation_Button_Second | Project_Details_IRAS             | Navigation_Button_Third | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Letters          | Save_Continue           | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Symbols          | Save_Continue           | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Letters_Symbols  | Save_Continue           | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Min_Length       | Save_Continue           | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Max_Length       | Save_Continue           | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Spaces           | Save_Continue           | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Spaces_Suffix    | Save_Continue           | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Spaces_Prefix    | Save_Continue           | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Spaces_Seperator | Save_Continue           | Field_Error_Message | Summary_Error_Message |
+      | Navigation_Button_First | Navigation_Button_Second | Project_Details_IRAS             | Navigation_Button_Third | Field_Error_Message                   | Summary_Error_Message                   |
+      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Letters          | Save_Continue           | Field_Error_Message                   | Summary_Error_Message                   |
+      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Symbols          | Save_Continue           | Field_Error_Message                   | Summary_Error_Message                   |
+      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Letters_Symbols  | Save_Continue           | Field_Error_Message                   | Summary_Error_Message                   |
+      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Min_Length       | Save_Continue           | Field_Error_Message_Iras_Id_Length    | Summary_Error_Message_Iras_Id_Length    |
+      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Max_Length       | Save_Continue           | Field_Error_Message                   | Summary_Error_Message                   |
+      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Leading_Zeros    | Save_Continue           | Field_Error_Message                   | Summary_Error_Message                   |
+      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Spaces           | Save_Continue           | Field_Error_Message_Iras_Id_Mandatory | Summary_Error_Message_Iras_Id_Mandatory |
+      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Spaces_Suffix    | Save_Continue           | Field_Error_Message                   | Summary_Error_Message                   |
+      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Spaces_Prefix    | Save_Continue           | Field_Error_Message                   | Summary_Error_Message                   |
+      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Spaces_Seperator | Save_Continue           | Field_Error_Message                   | Summary_Error_Message                   |
+      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Blank            | Save_Continue           | Field_Error_Message_Iras_Id_Mandatory | Summary_Error_Message_Iras_Id_Mandatory |
 
   @rsp-1858
   Scenario Outline: Validate breadcrumb navigations in project details iras id page
@@ -334,3 +336,24 @@ Feature: Create Amendment - Create Project
     Examples:
       | Navigation_Button_First | Navigation_Button_Second | Project_Details_IRAS | Navigation_Button_Third | Project_Details_Title | Key_Project_Roles     | Navigation_Link |
       | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Valid_Data_All_Fields | Valid_Data_All_Fields | Back            |
+
+  @duplicateIrasIdValidation
+  Scenario Outline: Verify the duplicate IRAS ID error message when user enters the existing IRAS ID
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    Then I can see the project details iras page
+    And I fill the unique iras id in project details iras page
+    And I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
+    Then I can see the project details title page
+    And  I have navigated to the my research projects page
+    And I can see the my research projects page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    Then I can see the project details iras page
+    And I fill the existing iras id in project details iras page
+    When I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
+    Then I validate '<Field_Error_Message>' and '<Summary_Error_Message>' displayed on project details iras page for '<Project_Details_IRAS>'
+
+    Examples:
+      | Project_Details_IRAS      | Field_Error_Message                   | Summary_Error_Message                   |
+      | Invalid_IRAS_ID_Duplicate | Field_Error_Message_Iras_Id_Duplicate | Summary_Error_Message_Iras_Id_Duplicate |
