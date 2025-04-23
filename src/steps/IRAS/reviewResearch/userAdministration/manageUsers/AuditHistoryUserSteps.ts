@@ -88,21 +88,19 @@ Then(
     if (datasetName == 'Disable_User' || datasetName == 'Enable_User') {
       const userEmail = await userProfilePage.getEmail();
       eventDescriptionExpectedValue = userEmail + dataset.event_description_text;
+    } else if (datasetName == 'Edit_User_Country') {
+      //defect - should be ', ', change after fix is in
+      eventDescriptionExpectedValue = await auditHistoryUserPage.getUserAuditEventDescriptionValue(
+        dataset.event_description_text,
+        (await userProfilePage[`get${methodType}`]()).join(','),
+        (await userProfilePage[`getNew${methodType}`]()).join(',')
+      );
     } else {
-      if (datasetName == 'Edit_User_Country') {
-        //defect - should be ', ', change after fix is in
-        eventDescriptionExpectedValue = await auditHistoryUserPage.getUserAuditEventDescriptionValue(
-          dataset.event_description_text,
-          (await userProfilePage[`get${methodType}`]()).join(','),
-          (await userProfilePage[`getNew${methodType}`]()).join(',')
-        );
-      } else {
-        eventDescriptionExpectedValue = await auditHistoryUserPage.getUserAuditEventDescriptionValue(
-          dataset.event_description_text,
-          await userProfilePage[`get${methodType}`](),
-          await userProfilePage[`getNew${methodType}`]()
-        );
-      }
+      eventDescriptionExpectedValue = await auditHistoryUserPage.getUserAuditEventDescriptionValue(
+        dataset.event_description_text,
+        await userProfilePage[`get${methodType}`](),
+        await userProfilePage[`getNew${methodType}`]()
+      );
     }
     expect(confirmArrayNotNull(auditLog.get('timeValues'))[0]).toBe(timeExpected);
     expect(confirmArrayNotNull(auditLog.get('eventValues'))[0]).toBe(eventDescriptionExpectedValue);
