@@ -13,27 +13,33 @@
     "job_title_label": "Job title",
     "role_label": "Role",
     "commitee_label": "Committee",
-    "role_checkbox": [
-      "user",
-      "operations",
-      "admin",
-      "reviewer"
-    ],
+    "role_checkbox": ["user", "operations", "admin", "reviewer"],
     "country_label": "Country",
-    "country_checkbox": [
-      "England",
-      "Northern Ireland",
-      "Scotland",
-      "Wales"
-    ],
+    "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
     "access_required_label": "Access required",
-    "access_required_checkbox": [
-      "Study Wide Review",
-      "Research Ethics Committee",
-      "CAG",
-      "Technical Assurance"
-    ],
+    "access_required_checkbox": ["Study Wide Review", "Research Ethics Committee", "CAG", "Technical Assurance"],
     "review_body_label": "Review body"
+  },
+  "Field_Error_Message_Iras_Id_Duplicate": {
+    "iras_id_text": "A record for the project with this IRAS ID already exists"
+  },
+  "Field_Error_Message_Iras_Id_Mandatory": {
+    "iras_id_text": "Enter an IRAS ID"
+  },
+  "Field_Error_Message_Iras_Id_Length": {
+    "iras_id_text": "IRAS ID must be 4 to 7 digits"
+  },
+  "Summary_Error_Message_Iras_Id_Duplicate": {
+    "error_message_summary_header": "There is a problem",
+    "iras_id_text": "A record for the project with this IRAS ID already exists"
+  },
+  "Summary_Error_Message_Iras_Id_Mandatory": {
+    "error_message_summary_header": "There is a problem",
+    "iras_id_text": "Enter an IRAS ID"
+  },
+  "Summary_Error_Message_Iras_Id_Length": {
+    "error_message_summary_header": "There is a problem",
+    "iras_id_text": "IRAS ID must be 4 to 7 digits"
   },
   "Field_Error_Message_Invalid_Character_Limit": {
     "title_text": "Max 250 characters allowed",
@@ -56,14 +62,10 @@
     "email_address_prefix": "QAAutomation",
     "email_address_unique": "QAAutomation20250415161437370hscrd@health.org",
     "Role_Operations": {
-      "role_checkbox": [
-        "operations"
-      ]
+      "role_checkbox": ["operations"]
     },
     "Role_Not_Operations": {
-      "role_checkbox": [
-        "reviewer"
-      ]
+      "role_checkbox": ["reviewer"]
     },
     "Label_Texts_Role_Operations": {
       "role_checkbox_label": "Role",
@@ -78,56 +80,25 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Operations",
       "job_title_text": "Sr.Reviewer Role_Operations",
-      "role_checkbox": [
-        "operations",
-        "admin"
-      ],
-      "country_checkbox": [
-        "England",
-        "Northern Ireland",
-        "Scotland",
-        "Wales"
-      ],
-      "access_required_checkbox": [
-        "Study Wide Review",
-        "Research Ethics Committee",
-        "CAG",
-        "Technical Assurance"
-      ]
+      "role_checkbox": ["operations", "admin"],
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "access_required_checkbox": ["Study Wide Review", "Research Ethics Committee", "CAG", "Technical Assurance"]
     },
     "Valid_Data_In_All_Mandatory_Fields_Role_Operations": {
       "first_name_text": "QA Automation First Name Test Role_Operations",
       "last_name_text": "Test Last Name Role_Operations",
       "email_address_text": "hscrd@health.org",
-      "role_checkbox": [
-        "operations"
-      ],
-      "country_checkbox": [
-        "England",
-        "Northern Ireland",
-        "Scotland",
-        "Wales"
-      ],
-      "access_required_checkbox": [
-        "Study Wide Review",
-        "Research Ethics Committee",
-        "CAG",
-        "Technical Assurance"
-      ]
+      "role_checkbox": ["operations"],
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "access_required_checkbox": ["Study Wide Review", "Research Ethics Committee", "CAG", "Technical Assurance"]
     },
     "Valid_Data_In_All_Mandatory_Fields_Role_Operations_Another": {
       "first_name_text": "QA Automation First Name Test Role_Operations_Another",
       "last_name_text": "Test Last Name Role_Operations_Another",
       "email_address_text": "hscrd@health.org",
-      "role_checkbox": [
-        "operations"
-      ],
-      "country_checkbox": [
-        "England"
-      ],
-      "access_required_checkbox": [
-        "Research Ethics Committee"
-      ]
+      "role_checkbox": ["operations"],
+      "country_checkbox": ["England"],
+      "access_required_checkbox": ["Research Ethics Committee"]
     },
     "Valid_Data_In_All_Fields_Role_Reviewer": {
       "title_text": "Mr",
@@ -137,26 +108,19 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Reviewer",
       "job_title_text": "Sr.Reviewer Role_Reviewer",
-      "role_checkbox": [
-        "admin",
-        "reviewer"
-      ]
+      "role_checkbox": ["admin", "reviewer"]
     },
     "Valid_Data_In_All_Mandatory_Fields_Role_Reviewer": {
       "first_name_text": "QA Automation First Name Test Role_Operations",
       "last_name_text": "Test Last Name Role_Operations",
       "email_address_text": "hscrd@health.org",
-      "role_checkbox": [
-        "reviewer"
-      ]
+      "role_checkbox": ["reviewer"]
     },
     "Valid_Data_In_All_Mandatory_Fields_Role_Reviewer_Another": {
       "first_name_text": "QA Automation First Name Test Role_Operations_Another",
       "last_name_text": "Test Last Name Role_Operations_Another",
       "email_address_text": "hscrd@health.org",
-      "role_checkbox": [
-        "reviewer"
-      ]
+      "role_checkbox": ["reviewer"]
     },
     "Valid_Data_In_All_Fields_Role_Operations_Another": {
       "title_text": "Mr",
@@ -166,18 +130,9 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Operations_Another",
       "job_title_text": "Sr.Reviewer Role_Operations_Another",
-      "role_checkbox": [
-        "user",
-        "operations"
-      ],
-      "country_checkbox": [
-        "England",
-        "Scotland"
-      ],
-      "access_required_checkbox": [
-        "Research Ethics Committee",
-        "CAG"
-      ]
+      "role_checkbox": ["user", "operations"],
+      "country_checkbox": ["England", "Scotland"],
+      "access_required_checkbox": ["Research Ethics Committee", "CAG"]
     },
     "Valid_Data_In_All_Fields_Role_Reviewer_Another": {
       "title_text": "Mr",
@@ -187,10 +142,7 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Reviewer_Another",
       "job_title_text": "Sr.Reviewer Role_Reviewer_Another",
-      "role_checkbox": [
-        "user",
-        "reviewer"
-      ]
+      "role_checkbox": ["user", "reviewer"]
     },
     "Valid_Data_In_All_Mandatory_Fields": {
       "first_name_text": "First Name Test",

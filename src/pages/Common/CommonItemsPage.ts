@@ -93,7 +93,7 @@ export default class CommonItemsPage {
     this.next_button = this.page
       .getByRole('link')
       .getByText(this.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.next_button, { exact: true });
-    this.errorMessageFieldLabel = page.locator('[class$="field-validation-error"]');
+    this.errorMessageFieldLabel = page.locator('[class$="error-message"]');
     this.errorMessageSummaryLabel = page.locator('div[class="govuk-error-summary"]');
     //Validation Alert Box
     this.alert_box = this.page.getByRole('alert');
@@ -484,5 +484,49 @@ export default class CommonItemsPage {
       ['adminEmailValues', adminEmailValues],
     ]);
     return auditMap;
+  }
+
+  async validateErrorMessageOrderAndViewport<PageObject>(
+    errorMessageFieldDataset: string,
+    errorMessageSummaryDataset: string,
+    key: string,
+    page: PageObject
+  ) {
+    const errorSummaryHeading = errorMessageSummaryDataset['error_message_summary_header'];
+    await expect(this.errorMessageSummaryLabel.getByText(errorSummaryHeading)).toBeVisible();
+    const allFieldKeys = Object.keys(errorMessageFieldDataset);
+    const summaryErrorLinks = this.errorMessageSummaryLabel.locator('ul li a');
+    const totalSummaryErrorLinks = await summaryErrorLinks.count();
+
+    for (let i = 0; i < allFieldKeys.length; i++) {
+      const fieldKey = allFieldKeys[i];
+      const element = page[fieldKey].first();
+      // Create a new locator in required pages to validate the summary error labels.
+      // The name of locator should be the same as in the test data and appended by '_summary_error_label'.
+      const summaryErrorLocatorKey = `${key}_summary_error_label`;
+      const fieldGroup = element.locator('..').locator('..');
+      const fieldErrorLocator = fieldGroup.locator(this.errorMessageFieldLabel);
+      await expect(fieldErrorLocator).toContainText(errorMessageFieldDataset[fieldKey]);
+      await expect(page[summaryErrorLocatorKey].getByText(errorMessageSummaryDataset[fieldKey])).toBeVisible();
+      if (i < totalSummaryErrorLinks) {
+        const summaryErrorLink = summaryErrorLinks.nth(i);
+        await expect(summaryErrorLink).toHaveText(errorMessageFieldDataset[fieldKey]);
+        await summaryErrorLink.click();
+        await expect(element).toBeVisible();
+        const box = await element.boundingBox();
+        const viewportSize = await element.page().viewportSize();
+        if (!box || !viewportSize) {
+          throw new Error(`Cannot determine viewport or element position for: ${fieldKey} `);
+        }
+        const isInViewport = box.y >= 0 && box.y + box.height <= viewportSize.height;
+        if (!isInViewport) {
+          throw new Error(
+            `Field ${fieldKey} is not in the visible viewport after clicking the summary error link: ${summaryErrorLink}`
+          );
+        }
+      } else {
+        throw new Error(`Missing summary error link for field: ${fieldKey}`);
+      }
+    }
   }
 }

@@ -155,13 +155,4 @@ export default class CreateUserProfilePage {
       }
     })();
   }
-
-  // async selectRoleCheckBoxAndGetValue() {
-  //   for (const checkbox of dataset[key]) {
-  //     await locator.locator('..').getByLabel(checkbox, { exact: true }).check();
-  //   }
-  //   const checkbox = this.role_checkbox;
-  //   await checkbox.check();
-  //   return checkbox.isChecked();
-  // }
 }
