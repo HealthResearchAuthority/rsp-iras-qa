@@ -103,9 +103,13 @@ export default class CreateUserProfilePage {
         exact: true,
       }
     );
-    this.continue_button = this.page.locator('.govuk-button[type="submit"]'); //change to data text
+    this.continue_button = this.page
+      .getByRole('button')
+      .getByText(this.createUserProfilePageTestData.Create_User_Profile_Page.continue_button);
     this.selected_dropdown = this.page.locator('select option[selected=selected]');
-    this.back_button = this.page.getByText('Back'); //change to data text
+    this.back_button = this.page
+      .getByRole('link')
+      .getByText(this.createUserProfilePageTestData.Create_User_Profile_Page.back_button);
   }
 
   async assertOnCreateUserProfilePage() {
