@@ -13,7 +13,7 @@ Feature: User Administration: Manage Users - View audit history for users
         When I click the 'View_Users_Audit_History' link on the 'User_Profile_Page'
         Then I can see the audit history page of the user profile
         And I capture the page screenshot
-        And I click the 'Back' link on the 'User_Profile_Page'
+        And I click the 'Back' link on the 'Audit_History_User_Page'
         And I capture the page screenshot
         And I can see the user profile page
 

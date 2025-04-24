@@ -60,29 +60,4 @@ export default class AuditHistoryUserPage {
   async setUpdatedTime(value: string): Promise<void> {
     this._updated_time = value;
   }
-
-  //   async getUserProfileValue(editUserFieldName: string) {
-  //     switch (editUserFieldName) {
-  //       case 'title_text':
-  //         return confirmStringNotNull(await this.title_value.textContent()).trim();
-  //       case 'first_name_text':
-  //         return confirmStringNotNull(await this.first_name_value.textContent()).trim();
-  //       case 'last_name_text':
-  //         return confirmStringNotNull(await this.last_name_value.textContent()).trim();
-  //       case 'email_address_text':
-  //         return confirmStringNotNull(await this.email_address_value.textContent()).trim();
-  //       case 'telephone_text':
-  //         return confirmStringNotNull(await this.telephone_value.textContent()).trim();
-  //       case 'organisation_text':
-  //         return confirmStringNotNull(await this.organisation_value.textContent()).trim();
-  //       case 'job_title_text':
-  //         return confirmStringNotNull(await this.job_title_value.textContent()).trim();
-  //       case 'role_dropdown':
-  //         return confirmStringNotNull(await this.role_value.textContent()).trim();
-  //       case 'country_checkbox':
-  //         return confirmStringNotNull(await this.country_value.textContent()).trim();
-  //       default:
-  //         throw new Error(`${editUserFieldName} is not a valid user profile field`);
-  //     }
-  //   }
 }
