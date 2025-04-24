@@ -28,8 +28,9 @@ Then(
     const auditLog = await auditHistoryReviewBodyPage.getAuditLog();
     const timeExpected = await auditHistoryUserPage.getUpdatedTime();
     const rolesInExpectedOrder: string[] = datasetCreateUser.role_checkbox.slice().reverse();
-    const data = await returnDataFromJSON();
-    const userEmail = data.Create_User_Profile.email_address_unique;
+    const userEmail = await returnDataFromJSON().then((data) => {
+      return data.Create_User_Profile.email_address_unique;
+    });
     const createdEventDescriptionExpectedValue = userEmail + datasetAudit.Create_User.event_description_text;
     const timeValues = confirmArrayNotNull(auditLog.get('timeValues'));
 
@@ -109,8 +110,9 @@ Then(
     const auditLog = await auditHistoryReviewBodyPage.getAuditLog();
     const timeExpected = await auditHistoryUserPage.getUpdatedTime();
     const rolesInExpectedOrder: string[] = datasetCreateUser.role_checkbox.slice().reverse();
-    const data = await returnDataFromJSON();
-    const userEmail = data.Create_User_Profile.email_address_unique;
+    const userEmail = await returnDataFromJSON().then((data) => {
+      return data.Create_User_Profile.email_address_unique;
+    });
 
     for (let index = 0; index < rolesInExpectedOrder.length; index++) {
       const eventDescriptionExpectedValue =
