@@ -105,24 +105,26 @@ Then(
 Then(
   'I can see the {string} user has had their roles unassigned in the audit history',
   async ({ auditHistoryUserPage, createUserProfilePage, auditHistoryReviewBodyPage }, datasetName: string) => {
-    const datasetCreateUser = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
-    const datasetAudit = auditHistoryUserPage.auditHistoryUserPageTestData.Audit_History_User_Page;
-    const auditLog = await auditHistoryReviewBodyPage.getAuditLog();
+    const datasetUser = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
+    const datasetAuditEvent = auditHistoryUserPage.auditHistoryUserPageTestData.Audit_History_User_Page;
+    const actualAuditLog = await auditHistoryReviewBodyPage.getAuditLog();
     const timeExpected = await auditHistoryUserPage.getUpdatedTime();
-    const rolesInExpectedOrder: string[] = datasetCreateUser.role_checkbox.slice().reverse();
-    const userEmail = await returnDataFromJSON().then((data) => {
+    const rolesInExpectedOrder: string[] = datasetUser.role_checkbox.slice().reverse();
+    const usersEmail = await returnDataFromJSON().then((data) => {
       return data.Create_User_Profile.email_address_unique;
     });
 
     for (let index = 0; index < rolesInExpectedOrder.length; index++) {
       const eventDescriptionExpectedValue =
-        userEmail +
-        datasetAudit.Unassign_User.event_description_prefix_text +
+        usersEmail +
+        datasetAuditEvent.Unassign_User.event_description_prefix_text +
         rolesInExpectedOrder[index].toUpperCase() +
-        datasetAudit.Unassign_User.event_description_suffix_text;
-      expect(confirmArrayNotNull(auditLog.get('timeValues'))[index]).toBe(timeExpected);
-      expect(confirmArrayNotNull(auditLog.get('eventValues'))[index]).toBe(eventDescriptionExpectedValue);
-      expect(confirmArrayNotNull(auditLog.get('adminEmailValues'))[index]).toBe(datasetAudit.system_admin_email_text);
+        datasetAuditEvent.Unassign_User.event_description_suffix_text;
+      expect(confirmArrayNotNull(actualAuditLog.get('timeValues'))[index]).toBe(timeExpected);
+      expect(confirmArrayNotNull(actualAuditLog.get('eventValues'))[index]).toBe(eventDescriptionExpectedValue);
+      expect(confirmArrayNotNull(actualAuditLog.get('adminEmailValues'))[index]).toBe(
+        datasetAuditEvent.system_admin_email_text
+      );
     }
   }
 );
