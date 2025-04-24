@@ -109,16 +109,16 @@ Then(
     const datasetAuditEvent = auditHistoryUserPage.auditHistoryUserPageTestData.Audit_History_User_Page;
     const actualAuditLog = await auditHistoryReviewBodyPage.getAuditLog();
     const timeExpected = await auditHistoryUserPage.getUpdatedTime();
-    const rolesInExpectedOrder: string[] = datasetUser.role_checkbox.slice().reverse();
+    const expectedOrderedRoles: string[] = datasetUser.role_checkbox.slice().reverse();
     const usersEmail = await returnDataFromJSON().then((data) => {
       return data.Create_User_Profile.email_address_unique;
     });
 
-    for (let index = 0; index < rolesInExpectedOrder.length; index++) {
+    for (let index = 0; index < expectedOrderedRoles.length; index++) {
       const eventDescriptionExpectedValue =
         usersEmail +
         datasetAuditEvent.Unassign_User.event_description_prefix_text +
-        rolesInExpectedOrder[index].toUpperCase() +
+        expectedOrderedRoles[index].toUpperCase() +
         datasetAuditEvent.Unassign_User.event_description_suffix_text;
       expect(confirmArrayNotNull(actualAuditLog.get('timeValues'))[index]).toBe(timeExpected);
       expect(confirmArrayNotNull(actualAuditLog.get('eventValues'))[index]).toBe(eventDescriptionExpectedValue);
