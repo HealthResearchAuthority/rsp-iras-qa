@@ -48,17 +48,23 @@
   "Error_Message_Missing_Mandatory_Field_Access_Required_Role_Operations": {
     "access_required_checkbox": "You must provide the access required"
   },
-  "Field_Error_Message_Invalid_Character_Limit": {
-    "title_text": "Max 250 characters allowed",
-    "first_name_text": "Max 250 characters allowed",
-    "last_name_text": "Max 250 characters allowed",
-    "email_address_text": "Max 255 characters allowed",
-    "telephone_text": "Max 11 characters allowed",
-    "organisation_text": "Max 250 characters allowed",
-    "job_title_text": "Max 250 characters allowed"
+  "Error_Message_Invalid_Character_Limit": {
+    "title_text": "Title must be 250 characters or less",
+    "first_name_text": "First name must be 250 characters or less",
+    "last_name_text": "Last name must be 250 characters or less",
+    "email_address_text": "Email address must be 250 characters or less",
+    "telephone_text": "Telephone must be 11 characters or less",
+    "organisation_text": "Organisation must be 250 characters or less",
+    "job_title_text": "Job title must be 250 characters or less"
   },
-  "Field_Error_Message_Incorrect_Format": {
-    "email_address_text": "Invalid email format."
+  "Error_Message_Invalid_Character_Limit_field_Email_Address": {
+    "email_address_text": "Email address must be 250 characters or less"
+  },
+  "Error_Message_Incorrect_Format_field_Telephone": {
+    "telephone_text": "Telephone must only contain numbers"
+  },
+  "Error_Message_Incorrect_Format_field_Email_Address": {
+    "email_address_text": "Enter an email address in the correct format"
   },
   "Create_User_Profile": {
     "email_address_prefix": "QAAutomation",
@@ -348,89 +354,147 @@
       "title_text": "Exploring the Intricacies of Advanced Quantum Computing: Unveiling the Potential of Quantum Algorithms, Quantum Cryptography, and Quantum Machine Learning in Revolutionizing Technology and Shaping the Future of Computational Science and Engineering Morethan250chars",
       "first_name_text": "AelianaSophiaIsabellaGabriellaAlexandriaSeraphinaValentinaAnastasiaEvangelineArabellaCassandraJulianaEmmanuellaTheodosiaChristabellaMariabellaRosabellaViolettaAngelinaSerenellaElizabellaMarcellinaMirabellaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx Morethan250chars",
       "last_name_text": "AelianaSophiaIsabellaGabriellaAlexandriaSeraphinaValentinaAnastasiaEvangelineArabellaCassandraJulianaEmmanuellaTheodosiaChristabellaMariabellaRosabellaViolettaAngelinaSerenellaElizabellaMarcellinaMirabellaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx Morethan250charss",
-      "email_address_text": "averylongemailaddresscreatedforillustrationpurposesonlyandnotmeanttobeusedinreallife@exampledomain.comaverylongemailaddresscreatedforillustrationpurposesonlyandnotmeanttobeusedinreallife@exampledomain.comaverylongemailaddresscreatedforillustrationpurposesonlyandnotmeanttobeusedinreallife@exampledomain55.com",
+      "email_address_text": "EmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExcee@example.com",
       "telephone_text": "+12345678901",
       "organisation_text": "AelianaSophiaIsabellaGabriellaAlexandriaSeraphinaValentinaAnastasiaEvangelineArabellaCassandraJulianaEmmanuellaTheodosiaChristabellaMariabellaRosabellaViolettaAngelinaSerenellaElizabellaMarcellinaMirabellaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx Morethan250chars",
       "job_title_text": "AelianaSophiaIsabellaGabriellaAlexandriaSeraphinaValentinaAnastasiaEvangelineArabellaCassandraJulianaEmmanuellaTheodosiaChristabellaMariabellaRosabellaViolettaAngelinaSerenellaElizabellaMarcellinaMirabellaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx Morethan250chars"
     },
-    "Incorrect_Format": {
+    "Incorrect_Format_Email": {
+      "first_name_text": "Test First Name Role_Reviewer",
+      "last_name_text": "Test Last Name Role_Reviewer",
       "email_address_text": "O(*()*(*()"
     },
     "Invalid_Email_Data_Start_With_Dot": {
+      "first_name_text": "Test First Name Role_Reviewer",
+      "last_name_text": "Test Last Name Role_Reviewer",
       "email_address_text": ".john@example.com"
     },
     "Invalid_Email_Data_Double_Dot": {
+      "first_name_text": "Test First Name Role_Reviewer",
+      "last_name_text": "Test Last Name Role_Reviewer",
       "email_address_text": "john..doe@example.com"
     },
     "Invalid_Email_Data_Space": {
+      "first_name_text": "Test First Name Role_Reviewer",
+      "last_name_text": "Test Last Name Role_Reviewer",
       "email_address_text": "john doe@example.com"
     },
     "Invalid_Email_Data_Wrong_AT": {
+      "first_name_text": "Test First Name Role_Reviewer",
+      "last_name_text": "Test Last Name Role_Reviewer",
       "email_address_text": "john[at]example.",
       "sponsor_contact_email_text": "john[at]example."
     },
     "Invalid_Email_Data_Less_Greater_Symbols": {
+      "first_name_text": "Test First Name Role_Reviewer",
+      "last_name_text": "Test Last Name Role_Reviewer",
       "email_address_text": "john<doe>@example.com"
     },
     "Invalid_Email_Data_Colon": {
+      "first_name_text": "Test First Name Role_Reviewer",
+      "last_name_text": "Test Last Name Role_Reviewer",
       "email_address_text": "john:doe@example.com"
     },
     "Invalid_Email_Data_Semi_Colon": {
+      "first_name_text": "Test First Name Role_Reviewer",
+      "last_name_text": "Test Last Name Role_Reviewer",
       "email_address_text": "john;doe@example.com"
     },
     "Invalid_Email_Data_Comma": {
+      "first_name_text": "Test First Name Role_Reviewer",
+      "last_name_text": "Test Last Name Role_Reviewer",
       "email_address_text": "john,@example.com"
     },
     "Invalid_Email_Data_Start_With_Hyphen": {
+      "first_name_text": "Test First Name Role_Reviewer",
+      "last_name_text": "Test Last Name Role_Reviewer",
       "email_address_text": "-john@example.com"
     },
     "Invalid_Email_Data_Hyphen_Before_Domain": {
+      "first_name_text": "Test First Name Role_Reviewer",
+      "last_name_text": "Test Last Name Role_Reviewer",
       "email_address_text": "john@example-.com"
     },
     "Invalid_Email_Data_Double_Dot_Domain": {
+      "first_name_text": "Test First Name Role_Reviewer",
+      "last_name_text": "Test Last Name Role_Reviewer",
       "email_address_text": "john.@example..com"
     },
     "Invalid_Email_Data_Exclamation_Domain": {
+      "first_name_text": "Test First Name Role_Reviewer",
+      "last_name_text": "Test Last Name Role_Reviewer",
       "email_address_text": "john!doe@exa!mple.com"
     },
     "Invalid_Email_Data_Unicode": {
+      "first_name_text": "Test First Name Role_Reviewer",
+      "last_name_text": "Test Last Name Role_Reviewer",
       "email_address_text": "johñ@example.com"
     },
     "Invalid_Email_Data_Single_Quote_Before_AT": {
+      "first_name_text": "Test First Name Role_Reviewer",
+      "last_name_text": "Test Last Name Role_Reviewer",
       "email_address_text": "john.doe'@example.com"
     },
     "Invalid_Email_Data_Domain_Exceed_Max": {
+      "first_name_text": "Test First Name Role_Reviewer",
+      "last_name_text": "Test Last Name Role_Reviewer",
       "email_address_text": "averyveryverylongdomainnamewithmanysubdomainsandmorecharacters.com"
     },
     "Invalid_Email_Data_Local_Part_Max": {
+      "first_name_text": "Test First Name Role_Reviewer",
+      "last_name_text": "Test Last Name Role_Reviewer",
       "email_address_text": "averyveryverylongemailaddressthatexceedscharacters@example.com"
     },
     "Invalid_Email_Data_Consecutive_Dot_Domain": {
+      "first_name_text": "Test First Name Role_Reviewer",
+      "last_name_text": "Test Last Name Role_Reviewer",
       "email_address_text": "john@example..com"
     },
     "Invalid_Email_Data_Consecutive_Dot_SubDomain": {
+      "first_name_text": "Test First Name Role_Reviewer",
+      "last_name_text": "Test Last Name Role_Reviewer",
       "email_address_text": "mail..sub.example.com"
     },
     "Invalid_Email_Data_Consecutiv_Dot_Domain_SubDomain": {
+      "first_name_text": "Test First Name Role_Reviewer",
+      "last_name_text": "Test Last Name Role_Reviewer",
       "email_address_text": "john..doe'@example..com"
     },
     "Invalid_Email_Data_Emoji": {
+      "first_name_text": "Test First Name Role_Reviewer",
+      "last_name_text": "Test Last Name Role_Reviewer",
       "email_address_text": "john🙂@example.com"
     },
     "Invalid_Email_Data_TLD": {
+      "first_name_text": "Test First Name Role_Reviewer",
+      "last_name_text": "Test Last Name Role_Reviewer",
       "email_address_text": "john.doe@example.1234"
     },
     "Invalid_Email_Data_Missing_AT": {
+      "first_name_text": "Test First Name Role_Reviewer",
+      "last_name_text": "Test Last Name Role_Reviewer",
       "email_address_text": "john.doeexample.com"
     },
     "Invalid_Email_Data_Reserved_Domain": {
+      "first_name_text": "Test First Name Role_Reviewer",
+      "last_name_text": "Test Last Name Role_Reviewer",
       "email_address_text": "john.doe@localhost"
     },
     "Invalid_Email_Data_Punycode": {
+      "first_name_text": "Test First Name Role_Reviewer",
+      "last_name_text": "Test Last Name Role_Reviewer",
       "email_address_text": "john@example.xn--mgbh0fb"
     },
     "Invalid_Email_Data_Max_Char": {
+      "first_name_text": "Test First Name Role_Reviewer",
+      "last_name_text": "Test Last Name Role_Reviewer",
       "email_address_text": "EmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExcee@example.com"
+    },
+    "Incorrect_Format_Telephone_Data": {
+      "first_name_text": "First Name Test",
+      "last_name_text": "Test Last Name",
+      "email_address_text": "Johndoe2@example.com",
+      "telephone_text": "abcd"
     }
   }
 }

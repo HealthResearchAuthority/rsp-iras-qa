@@ -97,13 +97,11 @@ export default class CommonItemsPage {
       .getByRole('link')
       .getByText(this.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.next_button, { exact: true });
     this.errorMessageFieldLabel = page.locator('[class$="field-validation-error"]');
-    //    const errorMessage = await page.getByRole('alert', { name: /Title/ });
     this.errorMessageSummaryLabel = this.page
       .getByRole('heading')
       .getByText(this.createUserProfilePageTestData.error_message_summary_header, {
         exact: true,
       });
-    // this.errorMessageSummaryLabel = page.locator('div[class="govuk-error-summary"]');
     //Validation Alert Box
     this.alert_box = this.page.getByRole('alert');
     this.alert_box_headings = this.alert_box.getByRole('heading');
