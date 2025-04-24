@@ -116,24 +116,10 @@ Then(
 );
 
 Then(
-  'I validate {string} displayed on create user profile page for {string}',
-  async (
-    { commonItemsPage, createUserProfilePage },
-    errorMessageFieldDatasetName: string,
-    invalidFieldsDatasetName: string
-  ) => {
-    const errorMessageFieldDataset = createUserProfilePage.createUserProfilePageTestData[errorMessageFieldDatasetName];
-    const invalidFieldsDataset =
-      createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[invalidFieldsDatasetName];
-    for (const key in invalidFieldsDataset) {
-      if (Object.prototype.hasOwnProperty.call(invalidFieldsDataset, key)) {
-        const locatorValue: Locator = await commonItemsPage.getFieldErrorMessage(
-          errorMessageFieldDataset,
-          key,
-          createUserProfilePage
-        );
-        await expect(locatorValue).toHaveText(errorMessageFieldDataset[key]);
-      }
-    }
+  'I validate {string} displayed on create user profile page',
+  async ({ commonItemsPage, createUserProfilePage }, errorMessageFieldAndSummaryDatasetName: string) => {
+    const errorMessageFieldDataset =
+      createUserProfilePage.createUserProfilePageTestData[errorMessageFieldAndSummaryDatasetName];
+    await commonItemsPage.validateErrorMessageOrderAndViewport(errorMessageFieldDataset, createUserProfilePage);
   }
 );

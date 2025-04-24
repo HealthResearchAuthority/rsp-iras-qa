@@ -3,6 +3,7 @@ import * as buttonTextData from '../../resources/test_data/common/button_text_da
 import * as linkTextData from '../../resources/test_data/common/link_text_data.json';
 import * as questionSetData from '../../resources/test_data/common/question_set_data.json';
 import * as auditHistoryReviewBodyPageTestData from '../../resources/test_data/iras/reviewResearch/userAdministration/manageReviewBodies/audit_history_review_body_page_data.json';
+import * as createUserProfilePageTestData from '../../resources/test_data/iras/reviewResearch/userAdministration/manageUsers/create_user_profile_page_data.json';
 
 import fs from 'fs';
 import path from 'path';
@@ -24,6 +25,7 @@ export default class CommonItemsPage {
   readonly linkTextData: typeof linkTextData;
   readonly questionSetData: typeof questionSetData;
   readonly auditHistoryReviewBodyPageTestData: typeof auditHistoryReviewBodyPageTestData;
+  readonly createUserProfilePageTestData: typeof createUserProfilePageTestData;
   readonly showAllSectionsAccordion: Locator;
   readonly genericButton: Locator;
   readonly govUkButton: Locator;
@@ -62,6 +64,7 @@ export default class CommonItemsPage {
     this.linkTextData = linkTextData;
     this.questionSetData = questionSetData;
     this.auditHistoryReviewBodyPageTestData = auditHistoryReviewBodyPageTestData;
+    this.createUserProfilePageTestData = createUserProfilePageTestData;
 
     //Locators
     this.showAllSectionsAccordion = page.locator('.govuk-accordion__show-all"');
@@ -93,9 +96,14 @@ export default class CommonItemsPage {
     this.next_button = this.page
       .getByRole('link')
       .getByText(this.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.next_button, { exact: true });
-    this.errorMessageFieldLabel = page.locator('[class$="error-message"]'); //    const errorMessage = await page.getByRole('alert', { name: /Title/ });
-
-    this.errorMessageSummaryLabel = page.locator('div[class="govuk-error-summary"]');
+    this.errorMessageFieldLabel = page.locator('[class$="field-validation-error"]');
+    //    const errorMessage = await page.getByRole('alert', { name: /Title/ });
+    this.errorMessageSummaryLabel = this.page
+      .getByRole('heading')
+      .getByText(this.createUserProfilePageTestData.error_message_summary_header, {
+        exact: true,
+      });
+    // this.errorMessageSummaryLabel = page.locator('div[class="govuk-error-summary"]');
     //Validation Alert Box
     this.alert_box = this.page.getByRole('alert');
     this.alert_box_headings = this.alert_box.getByRole('heading');
@@ -403,10 +411,6 @@ export default class CommonItemsPage {
     return confirmStringNotNull(await locator.textContent());
   }
 
-  async getFieldErrorMessage<PageObject>(errorMessageFieldDataset: string, key: string, page: PageObject) {
-    return page[key].locator('..').locator(this.errorMessageFieldLabel);
-  }
-
   async clearUIComponent<PageObject>(dataset: JSON, key: string, page: PageObject) {
     const locator: Locator = page[key];
     const typeAttribute = await locator.first().getAttribute('type');
@@ -487,32 +491,31 @@ export default class CommonItemsPage {
     return auditMap;
   }
 
-  async validateErrorMessageOrderAndViewport<PageObject>(
-    errorMessageFieldDataset: string,
-    errorMessageSummaryDataset: string,
-    key: string,
-    page: PageObject
-  ) {
-    const errorSummaryHeading = errorMessageSummaryDataset['error_message_summary_header'];
-    await expect(this.errorMessageSummaryLabel.getByText(errorSummaryHeading)).toBeVisible();
+  async validateErrorMessageOrderAndViewport<PageObject>(errorMessageFieldDataset: string, page: PageObject) {
+    await expect(this.errorMessageSummaryLabel).toBeVisible();
     const allFieldKeys = Object.keys(errorMessageFieldDataset);
-    const summaryErrorLinks = this.errorMessageSummaryLabel.locator('ul li a');
+    const summaryErrorLinks = this.errorMessageSummaryLabel.locator('..').getByRole('listitem').getByRole('link');
     const totalSummaryErrorLinks = await summaryErrorLinks.count();
-
+    //defect>> order need to be confirmed
+    const allSummaryErrorValues = Object.values(errorMessageFieldDataset).toString();
+    const summaryErrorTexts = await removeUnwantedWhitespace(
+      confirmStringNotNull((await summaryErrorLinks.allTextContents()).toString())
+    );
+    expect(summaryErrorTexts).toEqual(allSummaryErrorValues); //defect>> order need to be confirmed
     for (let i = 0; i < allFieldKeys.length; i++) {
       const fieldKey = allFieldKeys[i];
       const element = page[fieldKey].first();
-      // Create a new locator in required pages to validate the summary error labels.
-      // The name of locator should be the same as in the test data and appended by '_summary_error_label'.
-      const summaryErrorLocatorKey = `${key}_summary_error_label`;
-      const fieldGroup = element.locator('..').locator('..');
+      let fieldGroup: Locator;
+      if (fieldKey.endsWith('_checkbox')) {
+        fieldGroup = element.locator('..').locator('..').locator('..');
+      } else {
+        fieldGroup = element.locator('..');
+      }
       const fieldErrorLocator = fieldGroup.locator(this.errorMessageFieldLabel);
-      await expect(fieldErrorLocator).toContainText(errorMessageFieldDataset[fieldKey]);
-      await expect(page[summaryErrorLocatorKey].getByText(errorMessageSummaryDataset[fieldKey])).toBeVisible();
+      await expect(fieldErrorLocator).toHaveText(errorMessageFieldDataset[fieldKey]);
       if (i < totalSummaryErrorLinks) {
         const summaryErrorLink = summaryErrorLinks.nth(i);
-        await expect(summaryErrorLink).toHaveText(errorMessageFieldDataset[fieldKey]);
-        await summaryErrorLink.click();
+        await summaryErrorLinks.filter({ hasText: errorMessageFieldDataset[fieldKey] }).click();
         await expect(element).toBeVisible();
         const box = await element.boundingBox();
         const viewportSize = await element.page().viewportSize();

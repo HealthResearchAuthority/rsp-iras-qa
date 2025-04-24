@@ -20,26 +20,33 @@
     "access_required_checkbox": ["Study Wide Review", "Research Ethics Committee", "CAG", "Technical Assurance"],
     "review_body_label": "Review body"
   },
-  "Field_Error_Message_Iras_Id_Duplicate": {
-    "iras_id_text": "A record for the project with this IRAS ID already exists"
+  "error_message_summary_header": "There is a problem",
+  "Error_Message_Missing_Mandatory_Fields_Role_Not_Operations": {
+    "first_name_text": "Enter a first name",
+    "last_name_text": "Enter a last name",
+    "email_address_text": "Enter an email address"
   },
-  "Field_Error_Message_Iras_Id_Mandatory": {
-    "iras_id_text": "Enter an IRAS ID"
+  "Error_Message_Missing_Mandatory_Fields_Role_Operations": {
+    "first_name_text": "Enter a first name",
+    "last_name_text": "Enter a last name",
+    "email_address_text": "Enter an email address",
+    "country_checkbox": "You must provide a country",
+    "access_required_checkbox": "You must provide the access required"
   },
-  "Field_Error_Message_Iras_Id_Length": {
-    "iras_id_text": "IRAS ID must be 4 to 7 digits"
+  "Error_Message_Missing_Mandatory_Field_First_Name_Role_Not_Operations": {
+    "first_name_text": "Enter a first name"
   },
-  "Summary_Error_Message_Iras_Id_Duplicate": {
-    "error_message_summary_header": "There is a problem",
-    "iras_id_text": "A record for the project with this IRAS ID already exists"
+  "Error_Message_Missing_Mandatory_Field_Last_Name_Role_Not_Operations": {
+    "last_name_text": "Enter a last name"
   },
-  "Summary_Error_Message_Iras_Id_Mandatory": {
-    "error_message_summary_header": "There is a problem",
-    "iras_id_text": "Enter an IRAS ID"
+  "Error_Message_Missing_Mandatory_Field_Email_Address_Role_Not_Operations": {
+    "email_address_text": "Enter an email address"
   },
-  "Summary_Error_Message_Iras_Id_Length": {
-    "error_message_summary_header": "There is a problem",
-    "iras_id_text": "IRAS ID must be 4 to 7 digits"
+  "Error_Message_Missing_Mandatory_Field_Country_Role_Operations": {
+    "country_checkbox": "You must provide a country"
+  },
+  "Error_Message_Missing_Mandatory_Field_Access_Required_Role_Operations": {
+    "access_required_checkbox": "You must provide the access required"
   },
   "Field_Error_Message_Invalid_Character_Limit": {
     "title_text": "Max 250 characters allowed",
@@ -52,11 +59,6 @@
   },
   "Field_Error_Message_Incorrect_Format": {
     "email_address_text": "Invalid email format."
-  },
-  "Field_Error_Message_Missing_Mandatory_Fields": {
-    "first_name_text": "The FirstName field is required.",
-    "last_name_text": "The LastName field is required.",
-    "email_address_text": "The Email field is required."
   },
   "Create_User_Profile": {
     "email_address_prefix": "QAAutomation",
@@ -279,10 +281,68 @@
       "last_name_text": "Test Last Name",
       "email_address_text": "Johndoe2@example.com"
     },
-    "Missing_Data_All_Mandatory_Fields": {
+    "Missing_Mandatory_Fields_Role_Not_Operations": {
       "first_name_text": "",
       "last_name_text": "",
       "email_address_text": ""
+    },
+    "Missing_Mandatory_Fields_Role_Operations": {
+      "first_name_text": "",
+      "last_name_text": "",
+      "email_address_text": "",
+      "role_checkbox": ["operations"]
+    },
+    "Missing_Mandatory_Field_First_Name_Role_Not_Operations": {
+      "title_text": "Mr",
+      "first_name_text": "",
+      "last_name_text": "Test Last Name Role_Reviewer",
+      "email_address_text": "hscrd@health.org",
+      "telephone_text": "07000000000",
+      "organisation_text": "QA Automation HRA Role_Reviewer",
+      "job_title_text": "Sr.Reviewer Role_Reviewer",
+      "role_checkbox": ["admin", "reviewer"]
+    },
+    "Missing_Mandatory_Field_Last_Name_Role_Not_Operations": {
+      "title_text": "Mr",
+      "first_name_text": "Test First Name Role_Reviewer",
+      "last_name_text": "",
+      "email_address_text": "hscrd@health.org",
+      "telephone_text": "07000000000",
+      "organisation_text": "QA Automation HRA Role_Reviewer",
+      "job_title_text": "Sr.Reviewer Role_Reviewer",
+      "role_checkbox": ["admin", "reviewer"]
+    },
+    "Missing_Mandatory_Field_Email_Address_Role_Not_Operations": {
+      "title_text": "Mr",
+      "first_name_text": "Test First Name Role_Reviewer",
+      "last_name_text": "Test Last Name Role_Reviewer",
+      "email_address_text": "",
+      "telephone_text": "07000000000",
+      "organisation_text": "QA Automation HRA Role_Reviewer",
+      "job_title_text": "Sr.Reviewer Role_Reviewer",
+      "role_checkbox": ["admin", "reviewer"]
+    },
+    "Missing_Mandatory_Field_Country_Role_Operations": {
+      "title_text": "Mr",
+      "first_name_text": "Test First Name Role_Reviewer",
+      "last_name_text": "Test Last Name Role_Reviewer",
+      "email_address_text": "hscrd@health.org",
+      "telephone_text": "07000000000",
+      "organisation_text": "QA Automation HRA Role_Reviewer",
+      "job_title_text": "Sr.Reviewer Role_Reviewer",
+      "role_checkbox": ["operations"],
+      "access_required_checkbox": ["Research Ethics Committee", "CAG"]
+    },
+    "Missing_Mandatory_Field_Access_Required_Role_Operations": {
+      "title_text": "Mr",
+      "first_name_text": "Test First Name Role_Reviewer",
+      "last_name_text": "Test Last Name Role_Reviewer",
+      "email_address_text": "hscrd@health.org",
+      "telephone_text": "07000000000",
+      "organisation_text": "QA Automation HRA Role_Reviewer",
+      "job_title_text": "Sr.Reviewer Role_Reviewer",
+      "role_checkbox": ["operations"],
+      "country_checkbox": ["England", "Scotland"]
     },
     "Invalid_Character_Limit": {
       "title_text": "Exploring the Intricacies of Advanced Quantum Computing: Unveiling the Potential of Quantum Algorithms, Quantum Cryptography, and Quantum Machine Learning in Revolutionizing Technology and Shaping the Future of Computational Science and Engineering Morethan250chars",
