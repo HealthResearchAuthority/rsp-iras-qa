@@ -141,16 +141,16 @@ export default class CommonItemsPage {
   async fillUIComponent<PageObject>(dataset: JSON, key: string, page: PageObject) {
     const locator: Locator = page[key];
     const typeAttribute = await locator.first().getAttribute('type');
-    if (typeAttribute === 'text' || typeAttribute === 'date' || typeAttribute === 'email' || typeAttribute === 'tel') {
-      await locator.fill(dataset[key]);
-    } else if (typeAttribute === 'radio') {
+    if (typeAttribute === 'radio') {
       await locator.locator('..').getByLabel(dataset[key], { exact: true }).check();
     } else if (typeAttribute === 'checkbox') {
       for (const checkbox of dataset[key]) {
         await locator.locator('..').getByLabel(checkbox, { exact: true }).check();
       }
-    } else {
+    } else if (confirmStringNotNull(await locator.getAttribute('class')).includes('govuk-select')) {
       await locator.selectOption({ label: dataset[key] });
+    } else {
+      await locator.fill(dataset[key]);
     }
   }
 

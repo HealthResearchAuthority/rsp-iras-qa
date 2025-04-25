@@ -20,7 +20,7 @@ export default class CreateUserProfilePage {
   readonly role_label: Locator;
   readonly role_fieldset: Locator;
   readonly role_checkbox: Locator;
-  readonly committee_dropdown_label: Locator;
+  readonly committee_dropdown: Locator;
   readonly country_fieldset: Locator;
   readonly country_checkbox: Locator;
   readonly access_required_fieldset: Locator;
@@ -83,7 +83,7 @@ export default class CreateUserProfilePage {
       .getByText(this.createUserProfilePageTestData.Create_User_Profile_Page.role_label, { exact: true });
     this.role_fieldset = this.page.locator('.govuk-form-group', { has: this.role_label });
     this.role_checkbox = this.role_fieldset.getByRole('checkbox');
-    this.committee_dropdown_label = this.page.getByLabel(
+    this.committee_dropdown = this.page.getByLabel(
       this.createUserProfilePageTestData.Create_User_Profile_Page.commitee_label,
       { exact: true }
     );
