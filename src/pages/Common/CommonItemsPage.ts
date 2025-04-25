@@ -385,7 +385,7 @@ export default class CommonItemsPage {
     }
   }
 
-  async getUiLabel<PageObject>(dataset: JSON, key: string, page: PageObject) {
+  async getUiLabel<PageObject>(key: string, page: PageObject) {
     const locator: Locator = page[key];
     return confirmStringNotNull(await locator.textContent());
   }

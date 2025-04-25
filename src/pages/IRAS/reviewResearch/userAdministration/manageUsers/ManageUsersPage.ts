@@ -37,6 +37,7 @@ export default class ManageUsersPage {
   readonly firstNameFromListLabel: Locator;
   readonly userListRows: Locator;
   readonly userListCell: Locator;
+  readonly statusCell: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -74,8 +75,9 @@ export default class ManageUsersPage {
     this.search_button_label = this.page.getByText('Search');
     this.firstNameFromListLabel = this.page.locator('td:nth-child(1)');
     this.next_button = this.page.locator('.govuk-pagination__next a');
-    this.userListRows = this.page.locator('.govuk-table__row');
-    this.userListCell = this.page.locator('.govuk-table__cell');
+    this.userListRows = this.page.locator('tbody').getByRole('row');
+    this.userListCell = this.page.getByRole('cell');
+    this.statusCell = this.page.getByRole('cell').locator('strong');
     this.first_name_from_list_label = this.page.locator('td').nth(0);
     this.last_name_from_list_label = this.page.locator('td').nth(1);
     this.email_address_from_list_label = this.page.locator('td').nth(2);
@@ -84,6 +86,15 @@ export default class ManageUsersPage {
 
   async assertOnManageUsersPage() {
     await expect(this.page_heading).toBeVisible();
+  }
+
+  async goto(pageSize?: string) {
+    if (typeof pageSize !== 'undefined') {
+      await this.page.goto(`admin/users?pageSize=${pageSize}`);
+    } else {
+      await this.page.goto('admin/users');
+    }
+    await this.assertOnManageUsersPage();
   }
 
   async getFirstNamesListFromUI() {
@@ -109,8 +120,7 @@ export default class ManageUsersPage {
     const searchRecord = userFirstName + '|' + userLastName + '|' + userEmail + '|' + userStatus;
     let foundRecord = false;
     let hasNextPage = true;
-    let count: number = 0;
-    while (hasNextPage) {
+    while (hasNextPage && !foundRecord) {
       const rows = await this.userListRows.all();
       for (const row of rows) {
         const columns = await row.locator(this.userListCell).allTextContents();
@@ -118,20 +128,16 @@ export default class ManageUsersPage {
         const fullRowData = firstFourColumns.map((col) => col.trim()).join('|');
         if (fullRowData === searchRecord) {
           foundRecord = true;
-          count = count + 1;
+          return row;
         }
       }
       hasNextPage = (await this.next_button.isVisible()) && !(await this.next_button.isDisabled());
-      if (hasNextPage) {
+      if (hasNextPage && !foundRecord) {
         await this.next_button.click();
         await this.page.waitForLoadState('domcontentloaded');
       }
     }
-    if (foundRecord) {
-      return count;
-    } else {
-      throw new Error(`No matching record found`);
-    }
+    throw new Error(`No matching record found`);
   }
 
   async searchAndClickUserProfile(userFirstName: string, userLastName: string, userEmail: string, userStatus: string) {
@@ -165,5 +171,14 @@ export default class ManageUsersPage {
         }
       }
     }
+  }
+
+  async getRowByUserNameStatus(userName: string, exactMatch: boolean, status: string) {
+    const userRows = this.userListRows
+      .filter({ has: this.page.locator('td').getByText(`${userName}`, { exact: exactMatch }) })
+      .filter({ has: this.statusCell.getByText(status) });
+    const noOfRows = await userRows.count();
+    const randomIndex = Math.floor(Math.random() * (noOfRows - 1));
+    return userRows.nth(randomIndex);
   }
 }

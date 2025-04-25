@@ -53,6 +53,7 @@ export default class AuditHistoryReviewBodyPage {
     this._updated_time = value;
   }
 
+  //try to change to common method (requires table and next button to be added to common page)
   async getAuditLog(): Promise<Map<string, string[]>> {
     const timeValues: string[] = [];
     const eventValues: string[] = [];
@@ -84,7 +85,7 @@ export default class AuditHistoryReviewBodyPage {
     return auditMap;
   }
 
-  async getEventDescriptionValue(eventDescriptionText: string, valuePrevious: string, valueCurrent: string) {
+  async getAuditEventDescriptionValue(eventDescriptionText: string, valuePrevious: string, valueCurrent: string) {
     const eventDescriptionValue = eventDescriptionText + valuePrevious + ' to ' + valueCurrent;
     return eventDescriptionValue;
   }

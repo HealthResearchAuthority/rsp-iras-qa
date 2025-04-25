@@ -15,7 +15,9 @@ export default class EditUserProfilePage {
   readonly telephone_text: Locator;
   readonly organisation_text: Locator;
   readonly job_title_text: Locator;
-  readonly role_dropdown: Locator;
+  readonly role_label: Locator;
+  readonly role_fieldset: Locator;
+  readonly role_checkbox: Locator;
   readonly committee_dropdown: Locator;
   readonly country_checkbox: Locator;
   readonly access_required_checkbox: Locator;
@@ -40,7 +42,11 @@ export default class EditUserProfilePage {
     this.telephone_text = this.page.getByLabel('Telephone', { exact: true });
     this.organisation_text = this.page.getByLabel('Organisation', { exact: true });
     this.job_title_text = this.page.getByLabel('Job title', { exact: true });
-    this.role_dropdown = this.page.getByLabel('Role', { exact: true });
+    this.role_label = this.page
+      .locator('label b')
+      .getByText(this.editUserProfilePageTestData.Edit_User_Profile_Page.role_label, { exact: true });
+    this.role_fieldset = this.page.locator('.govuk-form-group', { has: this.role_label });
+    this.role_checkbox = this.role_fieldset.getByRole('checkbox');
     this.committee_dropdown = this.page.getByLabel('Committee', { exact: true });
     this.country_checkbox = this.page.locator('[name="Country"][type="checkbox"]');
     this.access_required_checkbox = this.page.locator('[name="AccessRequired"][type="checkbox"]');

@@ -2,7 +2,7 @@ import { expect, Locator, Page } from '@playwright/test';
 import * as createUserProfilePageTestData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageUsers/create_user_profile_page_data.json';
 import * as buttonTextData from '../../../../../resources/test_data/common/button_text_data.json';
 import * as fse from 'fs-extra';
-import { confirmStringNotNull, removeUnwantedWhitespace } from '../../../../../utils/UtilFunctions';
+import { confirmStringNotNull, removeUnwantedWhitespace, returnDataFromJSON } from '../../../../../utils/UtilFunctions';
 
 //Declare Page Objects
 export default class CreateUserProfilePage {
@@ -103,9 +103,13 @@ export default class CreateUserProfilePage {
         exact: true,
       }
     );
-    this.continue_button = this.page.locator('.govuk-button[type="submit"]');
+    this.continue_button = this.page
+      .getByRole('button')
+      .getByText(this.createUserProfilePageTestData.Create_User_Profile_Page.continue_button);
     this.selected_dropdown = this.page.locator('select option[selected=selected]');
-    this.back_button = this.page.getByText('Back');
+    this.back_button = this.page
+      .getByRole('link')
+      .getByText(this.createUserProfilePageTestData.Create_User_Profile_Page.back_button);
   }
 
   async assertOnCreateUserProfilePage() {
@@ -147,7 +151,7 @@ export default class CreateUserProfilePage {
   async updateUniqueEmailTestDataJson(filePath: string, updateVal: string) {
     (async () => {
       try {
-        const data = await fse.readJson(filePath);
+        const data = await returnDataFromJSON();
         data.Create_User_Profile.email_address_unique = updateVal;
         await fse.writeJson(filePath, data, { spaces: 2 });
       } catch (error) {
@@ -155,13 +159,4 @@ export default class CreateUserProfilePage {
       }
     })();
   }
-
-  // async selectRoleCheckBoxAndGetValue() {
-  //   for (const checkbox of dataset[key]) {
-  //     await locator.locator('..').getByLabel(checkbox, { exact: true }).check();
-  //   }
-  //   const checkbox = this.role_checkbox;
-  //   await checkbox.check();
-  //   return checkbox.isChecked();
-  // }
 }
