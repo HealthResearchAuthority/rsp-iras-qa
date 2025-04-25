@@ -26,20 +26,20 @@ export default class AuditHistoryReviewBodyPage {
       .getByText(this.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.page_heading);
     this.auditTableRows = this.page.getByRole('table').getByRole('row');
     this.date_column_header = this.auditTableRows
-      .getByRole('columnheader')
+      .locator('th')
       .getByText(
         this.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.Column_Header_Labels.date_header_label,
         { exact: true }
       );
     this.event_description_column_header = this.auditTableRows
-      .getByRole('columnheader')
+      .locator('th')
       .getByText(
         this.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.Column_Header_Labels
           .event_description_label,
         { exact: true }
       );
     this.sys_admin_column_header = this.auditTableRows
-      .getByRole('columnheader')
+      .locator('th')
       .getByText(
         this.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.Column_Header_Labels.sys_admin_label,
         { exact: true }
