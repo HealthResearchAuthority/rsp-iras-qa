@@ -62,7 +62,7 @@ Feature: HRAPROG-393- User Administration: Manage user profiles, view and edit u
             | telephone_text     | Operations | ACTIVE | User_Telephone_Text_One     | Original_Telephone_Text_One     |
             | organisation_text  | Operations | ACTIVE | User_Organisation_Text_One  | Original_Organisation_Text_One  |
             | job_title_text     | Operations | ACTIVE | User_Job_Title_Text_One     | Original_Job_Title_Text_One     |
-            | role_dropdown      | Operations | ACTIVE | User_Role_Dropdown_One      | Original_Role_Dropdown_One      |
+            | role_checkbox      | Operations | ACTIVE | User_Role_Checkbox_One      | Original_Role_Checkbox_One      |
 
     @editUserProfileReviewer
     Scenario Outline: Successful user profile update for user as Reviewer
@@ -89,7 +89,7 @@ Feature: HRAPROG-393- User Administration: Manage user profiles, view and edit u
             | telephone_text     | Reviewer   | ACTIVE | User_Telephone_Text_Two     | Original_Telephone_Text_Two     |
             | organisation_text  | Reviewer   | ACTIVE | User_Organisation_Text_Two  | Original_Organisation_Text_Two  |
             | job_title_text     | Reviewer   | ACTIVE | User_Job_Title_Text_Two     | Original_Job_Title_Text_Two     |
-            | role_dropdown      | Operations | ACTIVE | User_Role_Dropdown_Two      | Original_Role_Dropdown_Two      |
+            | role_checkbox      | Operations | ACTIVE | User_Role_Checkbox_Two      | Original_Role_Checkbox_Two      |
 
     @editUserProfileValidEmailAddress
     Scenario Outline: Successful user profile update with multiple combination of email address formats

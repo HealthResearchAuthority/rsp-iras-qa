@@ -17,7 +17,7 @@ Feature: HRAPROG-394- User Administration: Manage Users
         And I click the 'Continue' button on the 'Create_User_Profile_Page'
         Then I can see the check and create user profile page
         And I capture the page screenshot
-        Then I can see the '<Validation_Text_Add_New_User_Profile>' ui labels on the check and create user profile page for '<Role_Dropdown>'
+        Then I can see the '<Validation_Text_Add_New_User_Profile>' ui labels on the check and create user profile page for '<Role_Checkbox>'
         Then I can see previously filled values in the new user profile page for '<Add_User_Profile>' displayed on the check and create user profile page
         And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
         Then I can see the create user profile confirmation page for '<Add_User_Profile>'
@@ -36,7 +36,7 @@ Feature: HRAPROG-394- User Administration: Manage Users
         And I can see the list is sorted by default in the alphabetical order of the 'First Name'
 
         Examples:
-            | Add_User_Profile                                   | Validation_Text_Add_New_User_Profile | Role_Dropdown       | Validation_Text_Manage_Users_List |
+            | Add_User_Profile                                   | Validation_Text_Add_New_User_Profile | Role_Checkbox       | Validation_Text_Manage_Users_List |
             | Valid_Data_In_All_Fields_Role_Reviewer             | Label_Texts_Role_Not_Operations      | Role_Not_Operations | Label_Texts_Manage_Users_List     |
             | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer   | Label_Texts_Role_Not_Operations      | Role_Not_Operations | Label_Texts_Manage_Users_List     |
             | Valid_Data_In_All_Fields_Role_Operations           | Label_Texts_Role_Operations          | Role_Operations     | Label_Texts_Manage_Users_List     |
@@ -122,7 +122,7 @@ Feature: HRAPROG-394- User Administration: Manage Users
         Then I can see previously filled values in the new user profile page for '<Add_User_Profile>' displayed on the add a new user profile page
         And I capture the page screenshot
         And I uncheck the previously selected checkboxes on the add a new user profile page for '<Add_User_Profile>' for the role is selected as operations
-        And I clear the previously entered values on the add a new user profile page for '<Add_User_Profile>' for '<Role_Dropdown>'
+        And I clear the previously entered values on the add a new user profile page for '<Add_User_Profile>' for '<Role_Checkbox>'
         And I capture the page screenshot
         When I fill the new user profile page using '<Add_Another_User_Profile>'
         And I capture the page screenshot
@@ -132,7 +132,7 @@ Feature: HRAPROG-394- User Administration: Manage Users
         And I capture the page screenshot
 
         Examples:
-            | Add_User_Profile                                   | Field_Name      | Add_Another_User_Profile                                   | Role_Dropdown   |
+            | Add_User_Profile                                   | Field_Name      | Add_Another_User_Profile                                   | Role_Checkbox   |
             | Valid_Data_In_All_Fields_Role_Operations           | Title           | Valid_Data_In_All_Fields_Role_Operations_Another           | Role_Operations |
             | Valid_Data_In_All_Fields_Role_Operations           | First_Name      | Valid_Data_In_All_Fields_Role_Operations_Another           | Role_Operations |
             | Valid_Data_In_All_Fields_Role_Operations           | Last_Name       | Valid_Data_In_All_Fields_Role_Operations_Another           | Role_Operations |

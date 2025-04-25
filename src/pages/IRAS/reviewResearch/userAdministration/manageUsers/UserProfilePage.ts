@@ -230,7 +230,7 @@ export default class UserProfilePage {
       case 'job_title_text':
         await this.job_title_change_link.click();
         break;
-      case 'role_dropdown':
+      case 'role_checkbox':
         await this.role_change_link.click();
         break;
       case 'committee':
@@ -280,7 +280,7 @@ export default class UserProfilePage {
         return confirmStringNotNull(await this.organisation_value.textContent()).trim();
       case 'job_title_text':
         return confirmStringNotNull(await this.job_title_value.textContent()).trim();
-      case 'role_dropdown':
+      case 'role_checkbox':
         return confirmStringNotNull(await this.role_value.textContent()).trim();
       case 'country_checkbox':
         return confirmStringNotNull(await this.country_value.textContent()).trim();

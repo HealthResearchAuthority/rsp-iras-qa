@@ -27,7 +27,7 @@
     "telephone_text": "07000000000",
     "organisation_text": "QA Automation HRA",
     "job_title_text": "Sr.Reviewer",
-    "role_dropdown": "operations",
+    "role_checkbox": ["operations"],
     "country_checkbox": ["England"],
     "access_required_checkbox": ["Research Ethics Comittee"]
   },
@@ -40,7 +40,7 @@
     "telephone_text": "07000000000",
     "organisation_text": "QA Automation HRA",
     "job_title_text": "Sr.Reviewer",
-    "role_dropdown": "operations",
+    "role_checkbox": ["operations"],
     "country_checkbox": ["England"],
     "access_required_checkbox": ["Research Ethics Comittee"]
   },
@@ -52,7 +52,7 @@
     "telephone_text": "07000000000",
     "organisation_text": "QA Automation HRA",
     "job_title_text": "Sr.Reviewer",
-    "role_dropdown": "Reviewer"
+    "role_checkbox": ["Reviewer"]
   },
   "Valid_Data_Role_Operations": {
     "title_text": "Mr",
@@ -62,7 +62,7 @@
     "telephone_text": "07111111112",
     "organisation_text": "HRA",
     "job_title_text": "Reviewer",
-    "role_dropdown": "Admin",
+    "role_checkbox": ["Admin"],
     "country_checkbox": ["England"],
     "access_required_checkbox": ["Research Ethics Committee"]
   },
@@ -74,7 +74,7 @@
     "telephone_text": "07000000000",
     "organisation_text": "HRA",
     "job_title_text": "Reviewer",
-    "role_dropdown": "Reviewer"
+    "role_checkbox": ["Reviewer"]
   },
 
   "Valid_Data_In_All_Fields_Role_Reviewer": {
@@ -85,7 +85,7 @@
     "telephone_text": "07000000000",
     "organisation_text": "QA Automation HRA",
     "job_title_text": "Sr.Reviewer",
-    "role_dropdown": "reviewer"
+    "role_checkbox": ["reviewer"]
   },
   "Edit_User_Only_Mandatory_Fields_Data": {
     "first_name_text": "QA Automation First Name Test",
