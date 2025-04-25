@@ -120,6 +120,20 @@ Then(
   async ({ commonItemsPage, createUserProfilePage }, errorMessageFieldAndSummaryDatasetName: string) => {
     const errorMessageFieldDataset =
       createUserProfilePage.createUserProfilePageTestData[errorMessageFieldAndSummaryDatasetName];
-    await commonItemsPage.validateErrorMessageOrderAndViewport(errorMessageFieldDataset, createUserProfilePage);
+    const allFieldKeys = Object.keys(errorMessageFieldDataset);
+    await expect(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
+    const totalSummaryErrorLinks = await commonItemsPage.summaryErrorLinks.count();
+    expect(totalSummaryErrorLinks).toBe(allFieldKeys.length);
+    const allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset).toString();
+    const summaryErrorActualValues = await commonItemsPage.getSummaryErrorMessages();
+    expect(summaryErrorActualValues).toEqual(allSummaryErrorExpectedValues);
+    for (const key in errorMessageFieldDataset) {
+      if (Object.prototype.hasOwnProperty.call(errorMessageFieldDataset, key)) {
+        const fieldErrorMessagesActualValues = await commonItemsPage.getFieldErrorMessages(key, createUserProfilePage);
+        expect(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
+        const element = await commonItemsPage.checkViewport(errorMessageFieldDataset, key, createUserProfilePage);
+        expect(element).toBeInViewport();
+      }
+    }
   }
 );

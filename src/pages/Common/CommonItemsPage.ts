@@ -53,9 +53,11 @@ export default class CommonItemsPage {
   readonly alert_box_list_items: Locator;
   readonly errorMessageFieldLabel: Locator;
   readonly errorMessageSummaryLabel: Locator;
+  readonly summaryErrorLinks: Locator;
   readonly auditTableRows: Locator;
   readonly hidden_next_button: Locator;
   readonly next_button: Locator;
+  readonly fieldGroup: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -73,6 +75,7 @@ export default class CommonItemsPage {
     this.govUkCheckboxes = this.page.locator('.govuk-checkboxes');
     this.govUkCheckboxItem = this.govUkCheckboxes.locator('.govuk-checkboxes__item');
     this.govUkLink = this.page.getByRole('link');
+    this.fieldGroup = this.page.locator('.govuk-form-group');
     this.govUkFieldValidationError = this.page.locator('.govuk-error-message.field-validation-error');
     this.qSetProgressBar = page.locator('.progress-container');
     this.qSetProgressBarStage = this.qSetProgressBar.locator('.stage');
@@ -102,6 +105,7 @@ export default class CommonItemsPage {
       .getByText(this.createUserProfilePageTestData.error_message_summary_header, {
         exact: true,
       });
+    this.summaryErrorLinks = this.errorMessageSummaryLabel.locator('..').getByRole('listitem').getByRole('link');
     //Validation Alert Box
     this.alert_box = this.page.getByRole('alert');
     this.alert_box_headings = this.alert_box.getByRole('heading');
@@ -488,47 +492,22 @@ export default class CommonItemsPage {
     ]);
     return auditMap;
   }
-
-  async validateErrorMessageOrderAndViewport<PageObject>(errorMessageFieldDataset: string, page: PageObject) {
-    await expect(this.errorMessageSummaryLabel).toBeVisible();
-    const allFieldKeys = Object.keys(errorMessageFieldDataset);
-    const summaryErrorLinks = this.errorMessageSummaryLabel.locator('..').getByRole('listitem').getByRole('link');
-    const totalSummaryErrorLinks = await summaryErrorLinks.count();
-    //defect>> order need to be confirmed
-    const allSummaryErrorValues = Object.values(errorMessageFieldDataset).toString();
-    const summaryErrorTexts = await removeUnwantedWhitespace(
-      confirmStringNotNull((await summaryErrorLinks.allTextContents()).toString())
+  async getSummaryErrorMessages() {
+    const summaryErrorActualValues = await removeUnwantedWhitespace(
+      confirmStringNotNull((await this.summaryErrorLinks.allTextContents()).toString())
     );
-    expect(summaryErrorTexts).toEqual(allSummaryErrorValues); //defect>> order need to be confirmed
-    for (let i = 0; i < allFieldKeys.length; i++) {
-      const fieldKey = allFieldKeys[i];
-      const element = page[fieldKey].first();
-      let fieldGroup: Locator;
-      if (fieldKey.endsWith('_checkbox')) {
-        fieldGroup = element.locator('..').locator('..').locator('..');
-      } else {
-        fieldGroup = element.locator('..');
-      }
-      const fieldErrorLocator = fieldGroup.locator(this.errorMessageFieldLabel);
-      await expect(fieldErrorLocator).toHaveText(errorMessageFieldDataset[fieldKey]);
-      if (i < totalSummaryErrorLinks) {
-        const summaryErrorLink = summaryErrorLinks.nth(i);
-        await summaryErrorLinks.filter({ hasText: errorMessageFieldDataset[fieldKey] }).click();
-        await expect(element).toBeVisible();
-        const box = await element.boundingBox();
-        const viewportSize = await element.page().viewportSize();
-        if (!box || !viewportSize) {
-          throw new Error(`Cannot determine viewport or element position for: ${fieldKey} `);
-        }
-        const isInViewport = box.y >= 0 && box.y + box.height <= viewportSize.height;
-        if (!isInViewport) {
-          throw new Error(
-            `Field ${fieldKey} is not in the visible viewport after clicking the summary error link: ${summaryErrorLink}`
-          );
-        }
-      } else {
-        throw new Error(`Missing summary error link for field: ${fieldKey}`);
-      }
-    }
+    return summaryErrorActualValues;
+  }
+
+  async getFieldErrorMessages<PageObject>(key: string, page: PageObject) {
+    const element = await page[key].first();
+    const fieldErrorLocator = this.fieldGroup.filter({ has: element }).locator(this.errorMessageFieldLabel);
+    return await fieldErrorLocator.textContent();
+  }
+
+  async checkViewport<PageObject>(errorMessageFieldDataset: JSON, key: string, page: PageObject) {
+    const element = await page[key].first();
+    await this.summaryErrorLinks.filter({ hasText: errorMessageFieldDataset[key] }).click();
+    return await element;
   }
 }
