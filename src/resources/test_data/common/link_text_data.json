@@ -55,7 +55,8 @@
   },
   "User_Profile_Page": {
     "Change": "Change",
-    "Back": "Back"
+    "Back": "Back",
+    "View_Users_Audit_History": "View this user's audit history"
   },
   "Confirmation_Page": {
     "Back": "Back",
@@ -92,6 +93,9 @@
     "Back": "Back"
   },
   "Review_Body_Audit_History_Page": {
+    "Back": "Back"
+  },
+  "Audit_History_User_Page": {
     "Back": "Back"
   }
 }

@@ -1,9 +1,8 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../../hooks/CustomFixtures';
 import path from 'path';
-import * as fse from 'fs-extra';
 import { Locator } from 'playwright/test';
-import { generateUniqueEmail } from '../../../../../utils/UtilFunctions';
+import { generateUniqueEmail, returnDataFromJSON } from '../../../../../utils/UtilFunctions';
 const pathToTestDataJson =
   './src/resources/test_data/iras/reviewResearch/userAdministration/manageUsers/create_user_profile_page_data.json';
 
@@ -101,8 +100,7 @@ Then(
         );
         if (typeof fieldValActual == 'string') {
           if (key === 'email_address_text') {
-            const filePath = path.resolve(pathToTestDataJson);
-            const data = await fse.readJson(filePath);
+            const data = await returnDataFromJSON();
             expect(fieldValActual).toBe(data.Create_User_Profile.email_address_unique);
           } else {
             expect(fieldValActual).toBe(dataset[key]);

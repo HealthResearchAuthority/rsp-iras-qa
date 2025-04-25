@@ -18,7 +18,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         Then I can see the check and create review body page for '<Add_Review_Body>'
         When I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
         Then I can see the create Review body confirmation page for '<Add_Review_Body>'
-        And I capture the current time
+        And I capture the current time for 'Audit_History_Review_Body_Page'
         And I capture the page screenshot
         When I click the 'Back_To_Manage_Review_Bodies' link on the 'Create_Review_Body_Confirmation_Page'
         Then I can see the 'Manage_Review_Bodies_Page'
@@ -43,7 +43,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         And I click the 'Disable_Review_Body' button on the 'Review_Body_Profile_Page'
         And I capture the page screenshot
         And I click the 'Confirm' button on the 'Confirmation_Page'
-        And I capture the current time
+        And I capture the current time for 'Audit_History_Review_Body_Page'
         And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
         Then I can see the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
@@ -66,7 +66,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         And I click the 'Enable_Review_Body' button on the 'Review_Body_Profile_Page'
         And I capture the page screenshot
         And I click the 'Confirm' button on the 'Confirmation_Page'
-        And I capture the current time
+        And I capture the current time for 'Audit_History_Review_Body_Page'
         And I capture the page screenshot
         And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
         Then I can see the 'Manage_Review_Bodies_Page'
@@ -93,7 +93,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         When I fill the edit review body page using '<Edit_Review_Body>' for field '<Field_Name>'
         And I capture the page screenshot
         And I click the 'Save' button on the 'Edit_Review_Body_Page'
-        And I capture the current time
+        And I capture the current time for 'Audit_History_Review_Body_Page'
         Then I now see the review body profile page with the updated '<Edit_Review_Body>' for field '<Field_Name>'
         And I capture the page screenshot
         And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'
@@ -116,7 +116,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         When I fill the edit review body page using '<Edit_Review_Body>' for field '<Field_Name>'
         And I capture the page screenshot
         And I click the 'Save' button on the 'Edit_Review_Body_Page'
-        And I capture the current time
+        And I capture the current time for 'Audit_History_Review_Body_Page'
         Then I now see the review body profile page with the updated '<Edit_Review_Body>' for field '<Field_Name>'
         And I can see the updated review body profile page heading
         And I capture the page screenshot
@@ -141,7 +141,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         When I fill the edit review body page using '<Edit_Review_Body>' for field '<Field_Name>'
         And I capture the page screenshot
         And I click the 'Save' button on the 'Edit_Review_Body_Page'
-        And I capture the current time
+        And I capture the current time for 'Audit_History_Review_Body_Page'
         Then I now see the review body profile page with the updated '<Edit_Review_Body>' for field '<Field_Name>'
         And I can see the updated review body profile page heading
         And I capture the page screenshot
@@ -166,7 +166,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         When I fill the edit review body page using '<Edit_Review_Body>' for field '<Field_Name>'
         And I capture the page screenshot
         And I click the 'Save' button on the 'Edit_Review_Body_Page'
-        And I capture the current time
+        And I capture the current time for 'Audit_History_Review_Body_Page'
         Then I now see the review body profile page with the updated '<Edit_Review_Body>' for field '<Field_Name>'
         And I can see the updated review body profile page heading
         And I capture the page screenshot
@@ -191,7 +191,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         When I fill the edit review body page using '<Edit_Review_Body>'
         And I capture the page screenshot
         And I click the 'Save' button on the 'Edit_Review_Body_Page'
-        And I capture the current time
+        And I capture the current time for 'Audit_History_Review_Body_Page'
         Then I now see the review body profile page with the updated '<Edit_Review_Body>' for field '<Field_Name_One>'
         Then I now see the review body profile page with the updated '<Edit_Review_Body>' for field '<Field_Name_Two>'
         Then I now see the review body profile page with the updated '<Edit_Review_Body>' for field '<Field_Name_Three>'
@@ -238,7 +238,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         When I fill the edit review body page using 'Valid_Data_Organisation_Name_Another' for field 'Organisation_Name'
         And I capture the page screenshot
         And I click the 'Save' button on the 'Edit_Review_Body_Page'
-        And I capture the current time
+        And I capture the current time for 'Audit_History_Review_Body_Page'
         And I capture the page screenshot
         Then I now see the review body profile page with the updated 'Valid_Data_Organisation_Name_Another' for field 'Organisation_Name'
         And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'

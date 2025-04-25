@@ -11,6 +11,7 @@ import {
 } from '../../utils/GenerateTestData';
 const { Given, When, Then, AfterStep } = createBdd(test);
 import * as userProfileGeneratedataConfig from '../../resources/test_data/user_administration/testdata_generator/user_profile_generate_data_config.json';
+import { getCurrentTimeFormatted } from '../../utils/UtilFunctions';
 
 AfterStep(async ({ page, $step, $testInfo }) => {
   if (
@@ -27,7 +28,7 @@ Then('I capture the page screenshot', async () => {});
 Given(
   'I have navigated to the {string}',
   async (
-    { loginPage, homePage, createApplicationPage, systemAdministrationPage, manageReviewBodiesPage },
+    { loginPage, homePage, createApplicationPage, systemAdministrationPage, manageReviewBodiesPage, userProfilePage },
     page: string
   ) => {
     switch (page) {
@@ -52,6 +53,10 @@ Given(
         await manageReviewBodiesPage.goto();
         await manageReviewBodiesPage.assertOnManageReviewBodiesPage();
         break;
+      case 'User_Profile_Page':
+        await userProfilePage.goto(await userProfilePage.getUserId());
+        await userProfilePage.assertOnUserProfilePage();
+        break;
       default:
         throw new Error(`${page} is not a valid option`);
     }
@@ -69,6 +74,7 @@ When(
       systemAdministrationPage,
       createReviewBodyPage,
       manageReviewBodiesPage,
+      manageUsersPage,
     },
     page: string
   ) => {
@@ -93,6 +99,9 @@ When(
         break;
       case 'Manage_Review_Bodies_Page':
         await manageReviewBodiesPage.assertOnManageReviewBodiesPage();
+        break;
+      case 'Manage_Users_Page':
+        await manageUsersPage.assertOnManageUsersPage();
         break;
       default:
         throw new Error(`${page} is not a valid option`);
@@ -362,5 +371,22 @@ Then(
       }
     });
     expect(isSortedDesc).toBe(true);
+  }
+);
+
+Then(
+  'I capture the current time for {string}',
+  async ({ auditHistoryReviewBodyPage, auditHistoryUserPage }, page: string) => {
+    const currentTime = await getCurrentTimeFormatted();
+    switch (page) {
+      case 'Audit_History_Review_Body_Page':
+        await auditHistoryReviewBodyPage.setUpdatedTime(currentTime);
+        break;
+      case 'Audit_History_User_Page':
+        await auditHistoryUserPage.setUpdatedTime(currentTime);
+        break;
+      default:
+        throw new Error(`${page} is not a valid option`);
+    }
   }
 );

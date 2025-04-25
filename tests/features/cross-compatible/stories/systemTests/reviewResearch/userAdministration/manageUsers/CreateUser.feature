@@ -5,7 +5,7 @@ Feature: User Administration: Manage Users - Create user
     Background:
         Given I have navigated to the 'System_Administration_Page'
         When I click the 'Manage_Users' link on the 'System_Administration_Page'
-        Then I can see the manage users list page
+        Then I can see the 'Manage_Users_Page'
         When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
         Then I can see the add a new user profile page
 
@@ -17,13 +17,13 @@ Feature: User Administration: Manage Users - Create user
         And I click the 'Continue' button on the 'Create_User_Profile_Page'
         Then I can see the check and create user profile page
         And I capture the page screenshot
-        Then I can see the '<Validation_Text_Add_New_User_Profile>' ui labels on the check and create user profile page for '<Role_Dropdown>'
+        Then I can see the '<Validation_Text_Add_New_User_Profile>' ui labels on the check and create user profile page for '<Role_Checkbox>'
         Then I can see previously filled values in the new user profile page for '<Add_User_Profile>' displayed on the check and create user profile page
         And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
         Then I can see the create user profile confirmation page for '<Add_User_Profile>'
         And I capture the page screenshot
         When I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
-        Then I can see the manage users list page
+        Then I can see the 'Manage_Users_Page'
         And I capture the page screenshot
         Then I can see the '<Validation_Text_Manage_Users_List>' ui labels on the manage users list page
         And I can see the newly created user record should be present in the list for '<Add_User_Profile>' with 'ACTIVE' status in the manage user page
@@ -32,15 +32,15 @@ Feature: User Administration: Manage Users - Create user
         Then I have navigated to the 'System_Administration_Page'
         And I capture the page screenshot
         When I click the 'Manage_Users' link on the 'System_Administration_Page'
-        Then I can see the manage users list page
+        Then I can see the 'Manage_Users_Page'
         And I can see the list is sorted by default in the alphabetical order of the 'First Name'
 
         Examples:
-            | Add_User_Profile                         | Validation_Text_Add_New_User_Profile | Role_Dropdown   | Validation_Text_Manage_Users_List |
-            # | Valid_Data_In_All_Fields_Role_Reviewer             | Label_Texts_Role_Not_Operations      | Role_Not_Operations | Label_Texts_Manage_Users_List     |
-            # | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer   | Label_Texts_Role_Not_Operations      | Role_Not_Operations | Label_Texts_Manage_Users_List     |
-            | Valid_Data_In_All_Fields_Role_Operations | Label_Texts_Role_Operations          | Role_Operations | Label_Texts_Manage_Users_List     |
-    # | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Label_Texts_Role_Operations          | Role_Operations     | Label_Texts_Manage_Users_List     |
+            | Add_User_Profile                                   | Validation_Text_Add_New_User_Profile | Role_Checkbox       | Validation_Text_Manage_Users_List |
+            | Valid_Data_In_All_Fields_Role_Reviewer             | Label_Texts_Role_Not_Operations      | Role_Not_Operations | Label_Texts_Manage_Users_List     |
+            | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer   | Label_Texts_Role_Not_Operations      | Role_Not_Operations | Label_Texts_Manage_Users_List     |
+            | Valid_Data_In_All_Fields_Role_Operations           | Label_Texts_Role_Operations          | Role_Operations     | Label_Texts_Manage_Users_List     |
+            | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Label_Texts_Role_Operations          | Role_Operations     | Label_Texts_Manage_Users_List     |
 
     @rsp-2827 @rsp-2870 @verifyAddAnotherUser
     Scenario Outline: Verify the user is able to add another user from the Confirmation message screen using the link
@@ -64,11 +64,11 @@ Feature: User Administration: Manage Users - Create user
         Then I can see the create user profile confirmation page for '<Add_Another_User_Profile>'
         And I capture the page screenshot
         When I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
-        Then I can see the manage users list page
+        Then I can see the 'Manage_Users_Page'
         And I click the 'Back' link on the 'Manage_Users_Page'
         Then I have navigated to the 'System_Administration_Page'
         When I click the 'Manage_Users' link on the 'System_Administration_Page'
-        Then I can see the manage users list page
+        Then I can see the 'Manage_Users_Page'
 
         Examples:
             | Add_User_Profile                                   | Add_Another_User_Profile                                   |
@@ -80,7 +80,7 @@ Feature: User Administration: Manage Users - Create user
     @rsp-2827 @verifyCreateUserProfileBackLink
     Scenario: Verify the user can navigate from 'Add a new user profile' page by clicking 'Back' link
         When I click the 'Back' link on the 'Create_User_Profile_Page'
-        Then I can see the manage users list page
+        Then I can see the 'Manage_Users_Page'
 
     @rsp-2827 @verifyCheckCreateUserProfileBackLink
     Scenario Outline: Verify the user can navigate from 'Check and create user profile' page to add a new user profile page by clicking 'Back' link
@@ -98,7 +98,7 @@ Feature: User Administration: Manage Users - Create user
         And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
         Then I can see the create user profile confirmation page for '<Add_Another_User_Profile>'
         When I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
-        Then I can see the manage users list page
+        Then I can see the 'Manage_Users_Page'
         And I can see the newly created user record should be present in the list for '<Add_Another_User_Profile>' with 'ACTIVE' status in the manage user page
 
         Examples:
@@ -122,7 +122,7 @@ Feature: User Administration: Manage Users - Create user
         Then I can see previously filled values in the new user profile page for '<Add_User_Profile>' displayed on the add a new user profile page
         And I capture the page screenshot
         And I uncheck the previously selected checkboxes on the add a new user profile page for '<Add_User_Profile>' for the role is selected as operations
-        And I clear the previously entered values on the add a new user profile page for '<Add_User_Profile>' for '<Role_Dropdown>'
+        And I clear the previously entered values on the add a new user profile page for '<Add_User_Profile>' for '<Role_Checkbox>'
         And I capture the page screenshot
         When I fill the new user profile page using '<Add_Another_User_Profile>'
         And I capture the page screenshot
@@ -132,7 +132,7 @@ Feature: User Administration: Manage Users - Create user
         And I capture the page screenshot
 
         Examples:
-            | Add_User_Profile                                   | Field_Name      | Add_Another_User_Profile                                   | Role_Dropdown   |
+            | Add_User_Profile                                   | Field_Name      | Add_Another_User_Profile                                   | Role_Checkbox   |
             | Valid_Data_In_All_Fields_Role_Operations           | Title           | Valid_Data_In_All_Fields_Role_Operations_Another           | Role_Operations |
             | Valid_Data_In_All_Fields_Role_Operations           | First_Name      | Valid_Data_In_All_Fields_Role_Operations_Another           | Role_Operations |
             | Valid_Data_In_All_Fields_Role_Operations           | Last_Name       | Valid_Data_In_All_Fields_Role_Operations_Another           | Role_Operations |
@@ -178,6 +178,34 @@ Feature: User Administration: Manage Users - Create user
             | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer | Organisation  | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer_Another |
             | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer | Job_Title     | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer_Another |
             | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer | Role          | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer_Another |
+
+    @rsp-2827 @rsp-2870 @rsp-3107 @rsp-3108 @verifyCreateUserMultiUserRoles
+    Scenario Outline: Verify the user is able to create a new user profile with multiple roles
+        When I fill the new user profile page using '<Add_User_Profile>'
+        And I capture the page screenshot
+        And I click the 'Continue' button on the 'Create_User_Profile_Page'
+        Then I can see the check and create user profile page
+        And I capture the page screenshot
+        And I can see previously filled values in the new user profile page for '<Add_User_Profile>' displayed on the check and create user profile page
+        When I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
+        Then I can see the create user profile confirmation page for '<Add_User_Profile>'
+        And I capture the page screenshot
+        When I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
+        And I can see the 'Manage_Users_Page'
+        And I capture the page screenshot
+        And I search and click on view edit link for unique '<Add_User_Profile>' user with 'ACTIVE' status from the manage user page
+        When I can see the user profile page
+        Then I can see the '<Add_User_Profile>' user has the correct roles assigned on their profile page
+        When I click the change link against '<Field_Name>' on the user profile page
+        Then I can see that the '<Add_User_Profile>' users data persists on the edit profile page
+
+        Examples:
+            | Add_User_Profile                                   | Field_Name |
+            | Valid_Data_In_All_Fields_Role_Operations           | Role       |
+            | Valid_Data_In_All_Fields_Role_Reviewer_Another     | Role       |
+            | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Role       |
+            | Valid_Data_All_Roles                               | Role       |
+            | Valid_Data_No_Roles                                | Role       |
 
     @rsp-2827 @verifyErrorMessagesInvalidData
     # few lines commented>> pending clarification >> email validation

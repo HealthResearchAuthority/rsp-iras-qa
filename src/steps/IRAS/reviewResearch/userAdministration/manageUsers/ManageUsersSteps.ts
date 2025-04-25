@@ -1,36 +1,33 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../../hooks/CustomFixtures';
-import * as fse from 'fs-extra';
-import path from 'path';
-const pathToTestDataJson =
-  './src/resources/test_data/iras/reviewResearch/userAdministration/manageUsers/create_user_profile_page_data.json';
+import { returnDataFromJSON } from '../../../../../utils/UtilFunctions';
 
 const { When, Then } = createBdd(test);
 
-Then('I can see the manage users list page', async ({ manageUsersPage }) => {
-  await manageUsersPage.assertOnManageUsersPage();
-});
-
 Then(
   'I can see the list is sorted by default in the alphabetical order of the {string}',
-  async ({ manageUsersPage }) => {
-    const firstNames: string[] = await manageUsersPage.getFirstNamesListFromUI();
-    const sortedFirstNames = [...firstNames].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
-    expect(firstNames).toEqual(sortedFirstNames);
+  async ({ manageUsersPage }, sortField: string) => {
+    let actualList: string[];
+    switch (sortField.toLowerCase()) {
+      case 'first name':
+        actualList = await manageUsersPage.getFirstNamesListFromUI();
+        break;
+      default:
+        throw new Error(`${sortField} is not a valid option`);
+    }
+    const sortedList = [...actualList].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
+    expect(actualList).toEqual(sortedList);
   }
 );
 
-When(
-  'I update user profile {string} on {string}',
-  async ({ commonItemsPage, editUserProfilePage }, datasetName: string) => {
-    const dataset = editUserProfilePage.editUserProfilePageTestData[datasetName];
-    for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        await commonItemsPage.fillUIComponent(dataset, key, editUserProfilePage);
-      }
+When('I update user profile with {string}', async ({ commonItemsPage, editUserProfilePage }, datasetName: string) => {
+  const dataset = editUserProfilePage.editUserProfilePageTestData[datasetName];
+  for (const key in dataset) {
+    if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      await commonItemsPage.fillUIComponent(dataset, key, editUserProfilePage);
     }
   }
-);
+});
 
 When(
   'I can see the newly created user record should be present in the list for {string} with {string} status in the manage user page',
@@ -39,11 +36,12 @@ When(
     const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
     const userFirstName = dataset.first_name_text;
     const userLastName = dataset.last_name_text;
-    const filePath = path.resolve(pathToTestDataJson);
-    const data = await fse.readJson(filePath);
+    const data = await returnDataFromJSON();
     const userEmail = data.Create_User_Profile.email_address_unique;
-    const count = await manageUsersPage.findUserProfile(userFirstName, userLastName, userEmail, userStatus);
-    expect(count).toBe(1);
+    await manageUsersPage.goto(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size);
+    const foundRecords = await manageUsersPage.findUserProfile(userFirstName, userLastName, userEmail, userStatus);
+    expect(foundRecords).toBeDefined();
+    expect(foundRecords).toHaveCount(1);
   }
 );
 
@@ -54,6 +52,8 @@ When(
     const userFirstName = dataset.first_name_text;
     const userLastName = dataset.last_name_text;
     const userEmail = dataset.email_address_text;
+    await manageUsersPage.goto(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size);
+    // this doesn't appear to work?
     await manageUsersPage.searchAndClickUserProfile(userFirstName, userLastName, userEmail, userStatus);
   }
 );
@@ -64,10 +64,11 @@ When(
     const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
     const userFirstName = dataset.first_name_text;
     const userLastName = dataset.last_name_text;
-    const filePath = path.resolve(pathToTestDataJson);
-    const data = await fse.readJson(filePath);
+    const data = await returnDataFromJSON();
     const userEmail = data.Create_User_Profile.email_address_unique;
-    await manageUsersPage.searchAndClickUserProfile(userFirstName, userLastName, userEmail, userStatus);
+    await manageUsersPage.goto(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size);
+    const foundRecord = await manageUsersPage.findUserProfile(userFirstName, userLastName, userEmail, userStatus);
+    await foundRecord.locator(manageUsersPage.view_edit_link).click();
   }
 );
 
@@ -77,9 +78,24 @@ Then(
     const dataset = manageUsersPage.manageUsersPageTestData.Manage_Users_Page[datasetName];
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        const labelVal = await commonItemsPage.getUiLabel(dataset, key, manageUsersPage);
+        const labelVal = await commonItemsPage.getUiLabel(key, manageUsersPage);
         expect(labelVal).toBe(dataset[key]);
       }
     }
+  }
+);
+
+Then(
+  'I select a {string} User to View and Edit which is {string}',
+  async ({ manageUsersPage }, userNamePrefix: string, status: string) => {
+    let statusText: string;
+    if (status.toLowerCase() == 'active') {
+      statusText = manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enabled_status;
+    } else {
+      statusText = manageUsersPage.manageUsersPageTestData.Manage_Users_Page.disabled_status;
+    }
+    await manageUsersPage.goto(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size);
+    const selectedReviewBodyRow = await manageUsersPage.getRowByUserNameStatus(userNamePrefix, false, statusText);
+    await selectedReviewBodyRow.locator(manageUsersPage.view_edit_link).click();
   }
 );

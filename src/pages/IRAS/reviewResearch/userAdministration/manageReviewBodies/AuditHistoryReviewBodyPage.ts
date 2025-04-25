@@ -67,7 +67,7 @@ export default class AuditHistoryReviewBodyPage {
     this._updated_time = value;
   }
 
-  async getEventDescriptionValue(eventDescriptionText: string, valuePrevious: string, valueCurrent: string) {
+  async getAuditEventDescriptionValue(eventDescriptionText: string, valuePrevious: string, valueCurrent: string) {
     const eventDescriptionValue = eventDescriptionText + valuePrevious + ' to ' + valueCurrent;
     return eventDescriptionValue;
   }
