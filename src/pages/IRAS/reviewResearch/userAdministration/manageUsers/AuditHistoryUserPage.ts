@@ -2,7 +2,6 @@ import { expect, Locator, Page } from '@playwright/test';
 import * as auditHistoryUserPageTestData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageUsers/audit_history_user_page_data.json';
 import * as buttonTextData from '../../../../../resources/test_data/common/button_text_data.json';
 import * as linkTextData from '../../../../../resources/test_data/common/link_text_data.json';
-// import { confirmStringNotNull } from '../../../../../utils/UtilFunctions';
 
 //Declare Page Objects
 export default class AuditHistoryUserPage {
