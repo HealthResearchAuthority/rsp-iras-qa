@@ -24,19 +24,19 @@ Then(
 );
 
 // This step need to be Fixed underlying locators are wrong due to dataset being passed in, assertion loop is never entered therefore no error thrown
-Then(
-  'I can see the {string} labels on the audit history page of the review body',
-  async ({ commonItemsPage, auditHistoryReviewBodyPage }, datasetName: string) => {
-    const dataset =
-      auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page[datasetName];
-    for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        const labelVal = await commonItemsPage.getUiLabel(key, auditHistoryReviewBodyPage);
-        expect(labelVal).toBe(dataset[key]);
-      }
-    }
-  }
-);
+// Then(
+//   'I can see the {string} labels on the audit history page of the review body',
+//   async ({ commonItemsPage, auditHistoryReviewBodyPage }, datasetName: string) => {
+//     const dataset =
+//       auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page[datasetName];
+//     for (const key in dataset) {
+//       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+//         const labelVal = await commonItemsPage.getUiLabel(key, auditHistoryReviewBodyPage);
+//         expect(labelVal).toBe(dataset[key]);
+//       }
+//     }
+//   }
+// );
 
 Then(
   'I can see the audit history for the review body {string} event for {string} with {string}',

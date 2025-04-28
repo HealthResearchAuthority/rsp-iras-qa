@@ -5,9 +5,8 @@ import * as checkCreateUserProfilePageTestData from '../../../../../resources/te
 export default class CheckCreateUserProfilePage {
   readonly page: Page;
   readonly checkCreateUserProfilePageTestData: typeof checkCreateUserProfilePageTestData;
-  readonly back_button: Locator;
   readonly page_heading: Locator;
-  readonly subHeading: Locator;
+  readonly guidance_text: Locator;
   readonly userTableRows: Locator;
   readonly title_label: Locator;
   readonly title_text: Locator;
@@ -53,15 +52,30 @@ export default class CheckCreateUserProfilePage {
     this.checkCreateUserProfilePageTestData = checkCreateUserProfilePageTestData;
 
     //Locators
-    this.back_button = this.page.getByText('Back');
     this.page_heading = this.page
       .getByRole('heading')
       .getByText(this.checkCreateUserProfilePageTestData.Check_Create_User_Profile_Page.page_heading);
-    this.subHeading = this.page_heading.locator('..').locator('p');
+    // this.subHeading = this.page_heading.locator('..').locator('p');
+    this.guidance_text = this.page
+      .getByRole('paragraph')
+      .getByText(this.checkCreateUserProfilePageTestData.Check_Create_User_Profile_Page.guidance_text, { exact: true });
     this.userTableRows = this.page.getByRole('table').getByRole('row');
     this.title_label = this.userTableRows.getByRole('cell').getByText('Title', { exact: true });
     this.title_text = this.userTableRows.getByRole('cell').getByTestId('Title').locator('..');
     this.title_change_link = this.title_text.locator('..').getByText('Change');
+    // this.row_value_locator = this.page.locator('input');
+    // this.row_change_link_locator = this.page
+    //   .getByRole('button')
+    //   .getByText(this.linkTextData.Check_Create_Review_Body_Page.Change, { exact: true });
+    // this.organisation_name_row = this.page.locator('tr', {
+    //   has: this.page
+    //     .getByRole('cell')
+    //     .getByText(this.checkCreateReviewBodyPageData.Check_Create_Review_Body_Page.organisation_name_label, {
+    //       exact: true,
+    //     }),
+    // });
+    // this.organisation_name_value = this.organisation_name_row.locator('td', { has: this.row_value_locator });
+    // this.organisation_name_change_link = this.organisation_name_row.locator(this.row_change_link_locator);
     this.first_name_label = this.userTableRows.getByRole('cell').getByText('First name', { exact: true });
     this.first_name_text = this.userTableRows.getByRole('cell').getByTestId('FirstName').locator('..');
     this.first_name_change_link = this.first_name_text.locator('..').getByText('Change');
@@ -103,10 +117,10 @@ export default class CheckCreateUserProfilePage {
 
   async assertOnCheckCreateUserProfilePage() {
     await expect(this.page_heading).toBeVisible();
-    await expect(this.subHeading).toBeVisible();
-    await expect(this.subHeading).toHaveText(
-      this.checkCreateUserProfilePageTestData.Check_Create_User_Profile_Page.sub_heading
-    );
+    await expect(this.guidance_text).toBeVisible();
+    // await expect(this.subHeading).toHaveText(
+    //   this.checkCreateUserProfilePageTestData.Check_Create_User_Profile_Page.sub_heading
+    // );
   }
   async clickOnChangeButtonRoleOperations(fieldKey: string) {
     const locatorName = fieldKey.toLowerCase() + '_change_link';

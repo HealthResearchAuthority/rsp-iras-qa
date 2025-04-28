@@ -1,7 +1,6 @@
 {
   "User_Profile_Page": {
     "selected_bread_crumbs": "Manage Users",
-    "back_button": "Back",
     "page_heading_prefix": "User profile:",
     "title_label": "Title",
     "title_change_link": "Change",

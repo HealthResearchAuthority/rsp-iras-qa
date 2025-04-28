@@ -1,9 +1,8 @@
 {
   "Check_Create_User_Profile_Page": {
     "selected_tab_top": "Manage Users",
-    "back_button": "Back",
     "page_heading": "Check and create user profile",
-    "sub_heading": "Check the information here is correct before creating the profile.",
+    "guidance_text": "Check the information here is correct before creating the profile.",
     "create_profile_button": "Create profile",
     "Label_Texts_Role_Not_Operations": {
       "title_label": "Title",

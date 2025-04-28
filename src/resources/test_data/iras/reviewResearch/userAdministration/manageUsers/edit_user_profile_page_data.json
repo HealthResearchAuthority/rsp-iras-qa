@@ -1,7 +1,6 @@
 {
   "Edit_User_Profile_Page": {
     "selected_tab_top": "Manage Users",
-    "back_button": "Back",
     "page_heading": "Edit user profile record",
     "title_label": "Title",
     "first_name_label": "First name",

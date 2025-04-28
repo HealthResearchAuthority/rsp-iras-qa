@@ -29,7 +29,6 @@ export default class UserProfilePage {
   private _new_countries: string[];
   private _role: string[];
   readonly selected_bread_crumbs: Locator;
-  readonly back_button: Locator;
   readonly page_heading: Locator;
   readonly first_change_link: Locator;
   readonly row_value_locator: Locator;

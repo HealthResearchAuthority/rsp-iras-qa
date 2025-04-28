@@ -1,7 +1,6 @@
 {
   "Create_User_Profile_Page": {
     "selected_tab_top": "Manage Users",
-    "back_button": "Back",
     "page_heading": "Add a new user profile record",
     "continue_button": "Continue",
     "title_label": "Title",

@@ -26,9 +26,6 @@ export default class CreateUserProfilePage {
   readonly access_required_fieldset: Locator;
   readonly access_required_checkbox: Locator;
   readonly review_body_dropdown: Locator;
-  readonly continue_button: Locator;
-  readonly selected_dropdown: Locator;
-  readonly back_button: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -103,13 +100,6 @@ export default class CreateUserProfilePage {
         exact: true,
       }
     );
-    this.continue_button = this.page
-      .getByRole('button')
-      .getByText(this.createUserProfilePageTestData.Create_User_Profile_Page.continue_button);
-    this.selected_dropdown = this.page.locator('select option[selected=selected]');
-    this.back_button = this.page
-      .getByRole('link')
-      .getByText(this.createUserProfilePageTestData.Create_User_Profile_Page.back_button);
   }
 
   async assertOnCreateUserProfilePage() {

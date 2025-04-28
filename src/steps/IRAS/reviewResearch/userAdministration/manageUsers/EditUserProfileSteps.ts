@@ -169,7 +169,6 @@ When(
 Then(
   'I uncheck the previously selected checkboxes on the edit user profile page for {string} when the role is selected as operations',
   async ({ userProfilePage, editUserProfilePage, commonItemsPage }, datasetName: string) => {
-    // const roleValue = await userProfilePage.getRole();
     const roleValue = (await userProfilePage.getRole()).join(', ');
     if (roleValue.includes('operations')) {
       const dataset = editUserProfilePage.editUserProfilePageTestData.Edit_User_Profile[datasetName];
@@ -180,11 +179,6 @@ Then(
           }
         }
       }
-      // await editUserProfilePage.country_checkbox.locator('..').getByLabel('Country', { exact: true }).uncheck();
-      // await editUserProfilePage.access_required_checkbox
-      //   .locator('..')
-      //   .getByLabel('Access required', { exact: true })
-      //   .uncheck();
     }
   }
 );
