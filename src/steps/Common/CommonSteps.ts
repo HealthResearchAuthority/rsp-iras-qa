@@ -347,3 +347,30 @@ Then('I navigate {string}', async ({ commonItemsPage }, navigation: string) => {
       throw new Error(`${navigation} is not a valid option`);
   }
 });
+
+Then(
+  'I validate {string} displayed on {string}',
+  async (
+    { commonItemsPage, projectDetailsIRASPage },
+    errorMessageFieldAndSummaryDatasetName: string,
+    pageKey: string
+  ) => {
+    let errorMessageFieldDataset: any;
+    if (pageKey == 'Project_Details_IRAS_Page') {
+      errorMessageFieldDataset =
+        projectDetailsIRASPage.projectDetailsIRASPageTestData[errorMessageFieldAndSummaryDatasetName];
+    }
+    await expect(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
+    const allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset);
+    const summaryErrorActualValues = await commonItemsPage.getSummaryErrorMessages();
+    expect(summaryErrorActualValues).toEqual(allSummaryErrorExpectedValues);
+    for (const key in errorMessageFieldDataset) {
+      if (Object.prototype.hasOwnProperty.call(errorMessageFieldDataset, key)) {
+        const fieldErrorMessagesActualValues = await commonItemsPage.getFieldErrorMessages(key, projectDetailsIRASPage);
+        expect(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
+        const element = await commonItemsPage.checkViewport(errorMessageFieldDataset, key, projectDetailsIRASPage);
+        expect(element).toBeInViewport();
+      }
+    }
+  }
+);

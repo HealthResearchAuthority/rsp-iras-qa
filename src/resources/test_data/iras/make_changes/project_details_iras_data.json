@@ -6,22 +6,6 @@
     "iras_textbox_label": "IRAS ID",
     "iras_textbox_hint": "This is the 4 to 7 digit ID generated when you created your initial application"
   },
-  "Summary_Error_Message": {
-    "error_message_summary_header": "There is a problem",
-    "iras_id_text": "IRAS ID must only contain numbers"
-  },
-  "Summary_Error_Message_Iras_Id_Duplicate": {
-    "error_message_summary_header": "There is a problem",
-    "iras_id_text": "A record for the project with this IRAS ID already exists"
-  },
-  "Summary_Error_Message_Iras_Id_Mandatory": {
-    "error_message_summary_header": "There is a problem",
-    "iras_id_text": "Enter an IRAS ID"
-  },
-  "Summary_Error_Message_Iras_Id_Length": {
-    "error_message_summary_header": "There is a problem",
-    "iras_id_text": "IRAS ID must be 4 to 7 digits"
-  },
   "Field_Error_Message": {
     "iras_id_text": "IRAS ID must only contain numbers"
   },

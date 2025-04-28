@@ -22,7 +22,9 @@ export default class ProjectDetailsIRASPage {
     this.iras_textbox_label = this.page.getByText(this.projectDetailsIRASPageTestData.Label_Texts.iras_textbox_label, {
       exact: true,
     });
-    this.iras_textbox_hint = this.page.getByTestId('rule-hint');
+    this.iras_textbox_hint = this.page.getByText(this.projectDetailsIRASPageTestData.Label_Texts.iras_textbox_hint, {
+      exact: true,
+    });
     this.iras_id_text = this.page.getByTestId('IrasId');
     this.iras_id_text_summary_error_label = this.page.locator('.govuk-error-summary__list [href^="#IrasId"]');
   }

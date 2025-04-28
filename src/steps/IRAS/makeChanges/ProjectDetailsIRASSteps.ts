@@ -59,29 +59,3 @@ Then(
     }
   }
 );
-
-Then(
-  'I validate {string} and {string} displayed on project details iras page for {string}',
-  async (
-    { commonItemsPage, projectDetailsIRASPage },
-    errorMessageFieldDatasetName: string,
-    errorMessageSummaryDatasetName: string,
-    invalidFieldsDatasetName: string
-  ) => {
-    const errorMessageFieldDataset =
-      projectDetailsIRASPage.projectDetailsIRASPageTestData[errorMessageFieldDatasetName];
-    const errorMessageSummaryDataset =
-      projectDetailsIRASPage.projectDetailsIRASPageTestData[errorMessageSummaryDatasetName];
-    const invalidFieldsDataset = projectDetailsIRASPage.projectDetailsIRASPageTestData[invalidFieldsDatasetName];
-    for (const key in invalidFieldsDataset) {
-      if (Object.prototype.hasOwnProperty.call(invalidFieldsDataset, key)) {
-        await commonItemsPage.validateErrorMessageOrderAndViewport(
-          errorMessageFieldDataset,
-          errorMessageSummaryDataset,
-          key,
-          projectDetailsIRASPage
-        );
-      }
-    }
-  }
-);
