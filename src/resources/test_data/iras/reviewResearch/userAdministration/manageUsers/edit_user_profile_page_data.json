@@ -12,7 +12,7 @@
     "role_label": "Role",
     "committee_label": "Committee",
     "country_label": "Country",
-    "access_required_label": "Access Required",
+    "access_required_label": "Access required",
     "review_body_label": "Review body",
     "save_button": "Save",
     "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
@@ -74,8 +74,8 @@
       "organisation_text": "QA Automation HRA",
       "job_title_text": "Sr.Reviewer",
       "role_checkbox": ["operations"],
-      "country_checkbox": ["England"],
-      "access_required_checkbox": ["Research Ethics Comittee"]
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "access_required_checkbox": ["Study Wide Review", "Research Ethics Committee", "CAG", "Technical Assurance"]
     },
     "Valid_Data_In_All_Fields_Role_Reviewer": {
       "title_text": "Mr",
@@ -97,7 +97,7 @@
       "job_title_text": "Sr.Reviewer",
       "role_checkbox": ["operations"],
       "country_checkbox": ["England"],
-      "access_required_checkbox": ["Research Ethics Comittee"]
+      "access_required_checkbox": ["Research Ethics Committee"]
     },
     "Valid_Mandatory_Fields": {
       "first_name_text": "First Name Test",
@@ -425,82 +425,6 @@
   "Valid_Email_Data_Number": {
     "email_address_text": "Johndoe2@example.com"
   },
-  "Incorrect_Format": {
-    "email_address_text": "O(*()*(*()"
-  },
-  "Invalid_Email_Data_Start_With_Dot": {
-    "email_address_text": ".john@example.com"
-  },
-  "Invalid_Email_Data_Double_Dot": {
-    "email_address_text": "john..doe@example.com"
-  },
-  "Invalid_Email_Data_Space": {
-    "email_address_text": "john doe@example.com"
-  },
-  "Invalid_Email_Data_Wrong_AT": {
-    "email_address_text": "john[at]example.",
-    "sponsor_contact_email_text": "john[at]example."
-  },
-  "Invalid_Email_Data_Less_Greater_Symbols": {
-    "email_address_text": "john<doe>@example.com"
-  },
-  "Invalid_Email_Data_Colon": {
-    "email_address_text": "john:doe@example.com"
-  },
-  "Invalid_Email_Data_Semi_Colon": {
-    "email_address_text": "john;doe@example.com"
-  },
-  "Invalid_Email_Data_Comma": {
-    "email_address_text": "john,@example.com"
-  },
-  "Invalid_Email_Data_Start_With_Hyphen": {
-    "email_address_text": "-john@example.com"
-  },
-  "Invalid_Email_Data_Hyphen_Before_Domain": {
-    "email_address_text": "john@example-.com"
-  },
-  "Invalid_Email_Data_Double_Dot_Domain": {
-    "email_address_text": "john.@example..com"
-  },
-  "Invalid_Email_Data_Exclamation_Domain": {
-    "email_address_text": "john!doe@exa!mple.com"
-  },
-  "Invalid_Email_Data_Unicode": {
-    "email_address_text": "johñ@example.com"
-  },
-  "Invalid_Email_Data_Single_Quote_Before_AT": {
-    "email_address_text": "john.doe'@example.com"
-  },
-  "Invalid_Email_Data_Domain_Exceed_Max": {
-    "email_address_text": "averyveryverylongdomainnamewithmanysubdomainsandmorecharacters.com"
-  },
-  "Invalid_Email_Data_Local_Part_Max": {
-    "email_address_text": "averyveryverylongemailaddressthatexceedscharacters@example.com"
-  },
-  "Invalid_Email_Data_Consecutive_Dot_Domain": {
-    "email_address_text": "john@example..com"
-  },
-  "Invalid_Email_Data_Consecutive_Dot_SubDomain": {
-    "email_address_text": "mail..sub.example.com"
-  },
-  "Invalid_Email_Data_Consecutiv_Dot_Domain_SubDomain": {
-    "email_address_text": "john..doe'@example..com"
-  },
-  "Invalid_Email_Data_Emoji": {
-    "email_address_text": "john🙂@example.com"
-  },
-  "Invalid_Email_Data_TLD": {
-    "email_address_text": "john.doe@example.1234"
-  },
-  "Invalid_Email_Data_Missing_AT": {
-    "email_address_text": "john.doeexample.com"
-  },
-  "Invalid_Email_Data_Reserved_Domain": {
-    "email_address_text": "john.doe@localhost"
-  },
-  "Invalid_Email_Data_Punycode": {
-    "email_address_text": "john@example.xn--mgbh0fb"
-  },
   "Missing_Mandatory_Fields_Role_Not_Operations": {
     "first_name_text": "",
     "last_name_text": "",
@@ -571,5 +495,142 @@
     "telephone_text": "+12345678901",
     "organisation_text": "AelianaSophiaIsabellaGabriellaAlexandriaSeraphinaValentinaAnastasiaEvangelineArabellaCassandraJulianaEmmanuellaTheodosiaChristabellaMariabellaRosabellaViolettaAngelinaSerenellaElizabellaMarcellinaMirabellaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx Morethan250chars",
     "job_title_text": "AelianaSophiaIsabellaGabriellaAlexandriaSeraphinaValentinaAnastasiaEvangelineArabellaCassandraJulianaEmmanuellaTheodosiaChristabellaMariabellaRosabellaViolettaAngelinaSerenellaElizabellaMarcellinaMirabellaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx Morethan250chars"
+  },
+  "Incorrect_Format_Email": {
+    "first_name_text": "Test First Name Role_Reviewer",
+    "last_name_text": "Test Last Name Role_Reviewer",
+    "email_address_text": "O(*()*(*()"
+  },
+  "Invalid_Email_Data_Start_With_Dot": {
+    "first_name_text": "Test First Name Role_Reviewer",
+    "last_name_text": "Test Last Name Role_Reviewer",
+    "email_address_text": ".john@example.com"
+  },
+  "Invalid_Email_Data_Double_Dot": {
+    "first_name_text": "Test First Name Role_Reviewer",
+    "last_name_text": "Test Last Name Role_Reviewer",
+    "email_address_text": "john..doe@example.com"
+  },
+  "Invalid_Email_Data_Space": {
+    "first_name_text": "Test First Name Role_Reviewer",
+    "last_name_text": "Test Last Name Role_Reviewer",
+    "email_address_text": "john doe@example.com"
+  },
+  "Invalid_Email_Data_Wrong_AT": {
+    "first_name_text": "Test First Name Role_Reviewer",
+    "last_name_text": "Test Last Name Role_Reviewer",
+    "email_address_text": "john[at]example.",
+    "sponsor_contact_email_text": "john[at]example."
+  },
+  "Invalid_Email_Data_Less_Greater_Symbols": {
+    "first_name_text": "Test First Name Role_Reviewer",
+    "last_name_text": "Test Last Name Role_Reviewer",
+    "email_address_text": "john<doe>@example.com"
+  },
+  "Invalid_Email_Data_Colon": {
+    "first_name_text": "Test First Name Role_Reviewer",
+    "last_name_text": "Test Last Name Role_Reviewer",
+    "email_address_text": "john:doe@example.com"
+  },
+  "Invalid_Email_Data_Semi_Colon": {
+    "first_name_text": "Test First Name Role_Reviewer",
+    "last_name_text": "Test Last Name Role_Reviewer",
+    "email_address_text": "john;doe@example.com"
+  },
+  "Invalid_Email_Data_Comma": {
+    "first_name_text": "Test First Name Role_Reviewer",
+    "last_name_text": "Test Last Name Role_Reviewer",
+    "email_address_text": "john,@example.com"
+  },
+  "Invalid_Email_Data_Start_With_Hyphen": {
+    "first_name_text": "Test First Name Role_Reviewer",
+    "last_name_text": "Test Last Name Role_Reviewer",
+    "email_address_text": "-john@example.com"
+  },
+  "Invalid_Email_Data_Hyphen_Before_Domain": {
+    "first_name_text": "Test First Name Role_Reviewer",
+    "last_name_text": "Test Last Name Role_Reviewer",
+    "email_address_text": "john@example-.com"
+  },
+  "Invalid_Email_Data_Double_Dot_Domain": {
+    "first_name_text": "Test First Name Role_Reviewer",
+    "last_name_text": "Test Last Name Role_Reviewer",
+    "email_address_text": "john.@example..com"
+  },
+  "Invalid_Email_Data_Exclamation_Domain": {
+    "first_name_text": "Test First Name Role_Reviewer",
+    "last_name_text": "Test Last Name Role_Reviewer",
+    "email_address_text": "john!doe@exa!mple.com"
+  },
+  "Invalid_Email_Data_Unicode": {
+    "first_name_text": "Test First Name Role_Reviewer",
+    "last_name_text": "Test Last Name Role_Reviewer",
+    "email_address_text": "johñ@example.com"
+  },
+  "Invalid_Email_Data_Single_Quote_Before_AT": {
+    "first_name_text": "Test First Name Role_Reviewer",
+    "last_name_text": "Test Last Name Role_Reviewer",
+    "email_address_text": "john.doe'@example.com"
+  },
+  "Invalid_Email_Data_Domain_Exceed_Max": {
+    "first_name_text": "Test First Name Role_Reviewer",
+    "last_name_text": "Test Last Name Role_Reviewer",
+    "email_address_text": "averyveryverylongdomainnamewithmanysubdomainsandmorecharacters.com"
+  },
+  "Invalid_Email_Data_Local_Part_Max": {
+    "first_name_text": "Test First Name Role_Reviewer",
+    "last_name_text": "Test Last Name Role_Reviewer",
+    "email_address_text": "averyveryverylongemailaddressthatexceedscharacters@example.com"
+  },
+  "Invalid_Email_Data_Consecutive_Dot_Domain": {
+    "first_name_text": "Test First Name Role_Reviewer",
+    "last_name_text": "Test Last Name Role_Reviewer",
+    "email_address_text": "john@example..com"
+  },
+  "Invalid_Email_Data_Consecutive_Dot_SubDomain": {
+    "first_name_text": "Test First Name Role_Reviewer",
+    "last_name_text": "Test Last Name Role_Reviewer",
+    "email_address_text": "mail..sub.example.com"
+  },
+  "Invalid_Email_Data_Consecutiv_Dot_Domain_SubDomain": {
+    "first_name_text": "Test First Name Role_Reviewer",
+    "last_name_text": "Test Last Name Role_Reviewer",
+    "email_address_text": "john..doe'@example..com"
+  },
+  "Invalid_Email_Data_Emoji": {
+    "first_name_text": "Test First Name Role_Reviewer",
+    "last_name_text": "Test Last Name Role_Reviewer",
+    "email_address_text": "john🙂@example.com"
+  },
+  "Invalid_Email_Data_TLD": {
+    "first_name_text": "Test First Name Role_Reviewer",
+    "last_name_text": "Test Last Name Role_Reviewer",
+    "email_address_text": "john.doe@example.1234"
+  },
+  "Invalid_Email_Data_Missing_AT": {
+    "first_name_text": "Test First Name Role_Reviewer",
+    "last_name_text": "Test Last Name Role_Reviewer",
+    "email_address_text": "john.doeexample.com"
+  },
+  "Invalid_Email_Data_Reserved_Domain": {
+    "first_name_text": "Test First Name Role_Reviewer",
+    "last_name_text": "Test Last Name Role_Reviewer",
+    "email_address_text": "john.doe@localhost"
+  },
+  "Invalid_Email_Data_Punycode": {
+    "first_name_text": "Test First Name Role_Reviewer",
+    "last_name_text": "Test Last Name Role_Reviewer",
+    "email_address_text": "john@example.xn--mgbh0fb"
+  },
+  "Invalid_Email_Data_Max_Char": {
+    "first_name_text": "Test First Name Role_Reviewer",
+    "last_name_text": "Test Last Name Role_Reviewer",
+    "email_address_text": "EmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExcee@example.com"
+  },
+  "Incorrect_Format_Telephone_Data": {
+    "first_name_text": "First Name Test",
+    "last_name_text": "Test Last Name",
+    "email_address_text": "Johndoe2@example.com",
+    "telephone_text": "abcd"
   }
 }

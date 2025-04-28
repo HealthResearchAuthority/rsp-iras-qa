@@ -24,29 +24,6 @@ Then(
   }
 );
 
-Then(
-  'I validate {string} is displayed on edit user profile page for {string}',
-  async (
-    { commonItemsPage, editUserProfilePage },
-    errorMessageFieldDatasetName: string,
-    invalidFieldsDatasetName: string
-  ) => {
-    const errorMessageFieldDataset =
-      editUserProfilePage.editUserProfilePageTestData.Mandatory_Field_Error_Message[errorMessageFieldDatasetName];
-    const invalidFieldsDataset =
-      editUserProfilePage.editUserProfilePageTestData.Empty_UserProfile_Mandatory_Data[invalidFieldsDatasetName];
-    for (const key in invalidFieldsDataset) {
-      if (Object.prototype.hasOwnProperty.call(invalidFieldsDataset, key)) {
-        await commonItemsPage.validateErrorMessageWithoutErrorHeading(
-          errorMessageFieldDataset,
-          key,
-          editUserProfilePage
-        );
-      }
-    }
-  }
-);
-
 When(
   'I edit the users {string} field with {string}',
   async ({ commonItemsPage, editUserProfilePage, userProfilePage }, fieldName: string, datasetName: string) => {
@@ -179,6 +156,7 @@ Then(
           }
         }
       }
+      await commonItemsPage.clearUIComponent(dataset, 'role_checkbox', editUserProfilePage);
     }
   }
 );

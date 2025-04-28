@@ -188,7 +188,13 @@ Then('I can see a {string} button on the {string}', async ({ commonItemsPage }, 
 Given(
   'I click the {string} link on the {string}',
   async (
-    { commonItemsPage, manageUsersPage, userProfilePage, createUserProfileConfirmationPage },
+    {
+      commonItemsPage,
+      manageUsersPage,
+      userProfilePage,
+      createUserProfileConfirmationPage,
+      checkCreateUserProfilePage,
+    },
     linkKey: string,
     pageKey: string
   ) => {
@@ -203,6 +209,8 @@ Given(
       await createUserProfileConfirmationPage.back_to_manage_user_link.click(); //work around for now >> to click on Back_To_Manage_Users link ..# "Back to Manage Users" in app, "Back to Manage users" in figma >>clarification needed
     } else if (pageKey === 'Manage_Review_Bodies_Page' && linkKey === 'View_Edit') {
       await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).first().click();
+    } else if (pageKey === 'Check_Create_User_Profile_Page' && linkKey === 'Back') {
+      await checkCreateUserProfilePage.back_button.click(); //work around for now >> to click on Back link
     } else {
       await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
     }
@@ -387,6 +395,36 @@ Then(
         break;
       default:
         throw new Error(`${page} is not a valid option`);
+    }
+  }
+);
+
+Then(
+  'I validate {string} displayed on {string}',
+  async (
+    { commonItemsPage, createUserProfilePage, editUserProfilePage },
+    errorMessageFieldAndSummaryDatasetName: string,
+    page: string
+  ) => {
+    let errorMessageFieldDataset: any;
+    if (page === 'Create_User_Profile_Page') {
+      errorMessageFieldDataset =
+        createUserProfilePage.createUserProfilePageTestData[errorMessageFieldAndSummaryDatasetName];
+    } else if (page === 'Edit_User_Profile_Page') {
+      errorMessageFieldDataset =
+        editUserProfilePage.editUserProfilePageTestData[errorMessageFieldAndSummaryDatasetName];
+    }
+    await expect(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
+    const allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset);
+    const summaryErrorActualValues = await commonItemsPage.getSummaryErrorMessages();
+    expect(summaryErrorActualValues).toEqual(allSummaryErrorExpectedValues);
+    for (const key in errorMessageFieldDataset) {
+      if (Object.prototype.hasOwnProperty.call(errorMessageFieldDataset, key)) {
+        const fieldErrorMessagesActualValues = await commonItemsPage.getFieldErrorMessages(key, createUserProfilePage);
+        expect(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
+        const element = await commonItemsPage.checkViewport(errorMessageFieldDataset, key, createUserProfilePage);
+        expect(element).toBeInViewport();
+      }
     }
   }
 );
