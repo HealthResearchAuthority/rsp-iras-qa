@@ -1,7 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../../hooks/CustomFixtures';
 const { Then } = createBdd(test);
-import { getCurrentTimeFormatted } from '../../../../../utils/UtilFunctions';
 
 Then('I can see the audit history page of the review body', async ({ auditHistoryReviewBodyPage }) => {
   await auditHistoryReviewBodyPage.assertOnAuditHistoryReviewBodyPage();
@@ -24,6 +23,7 @@ Then(
   }
 );
 
+// This step need to be Fixed underlying locators are wrong due to dataset being passed in, assertion loop is never entered therefore no error thrown
 Then(
   'I can see the {string} labels on the audit history page of the review body',
   async ({ commonItemsPage, auditHistoryReviewBodyPage }, datasetName: string) => {
@@ -31,7 +31,7 @@ Then(
       auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page[datasetName];
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        const labelVal = await commonItemsPage.getUiLabel(dataset, key, auditHistoryReviewBodyPage);
+        const labelVal = await commonItemsPage.getUiLabel(key, auditHistoryReviewBodyPage);
         expect(labelVal).toBe(dataset[key]);
       }
     }
@@ -80,11 +80,6 @@ Then(
   }
 );
 
-Then('I capture the current time', async ({ auditHistoryReviewBodyPage }) => {
-  const currentTime = await getCurrentTimeFormatted();
-  await auditHistoryReviewBodyPage.setUpdatedTime(currentTime);
-});
-
 Then('I can see the audit history page heading', async ({ auditHistoryReviewBodyPage, reviewBodyProfilePage }) => {
   const organisationName = await reviewBodyProfilePage.getOrgName();
   await expect(auditHistoryReviewBodyPage.page_heading).toHaveText(
@@ -124,7 +119,7 @@ Then(
       valueCurrent = await reviewBodyProfilePage.getNewDescription();
     }
     if (valuePrevious !== valueCurrent) {
-      const eventDescriptionExpectedValue = await auditHistoryReviewBodyPage.getEventDescriptionValue(
+      const eventDescriptionExpectedValue = await auditHistoryReviewBodyPage.getAuditEventDescriptionValue(
         dataset.event_description_text,
         valuePrevious,
         valueCurrent
@@ -150,22 +145,22 @@ Then(
       auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page[datasetName];
     const auditLog = await auditHistoryReviewBodyPage.getAuditLog();
     const timeExpected = await auditHistoryReviewBodyPage.getUpdatedTime();
-    const orgNameEventDescriptionExpectedValue = await auditHistoryReviewBodyPage.getEventDescriptionValue(
+    const orgNameEventDescriptionExpectedValue = await auditHistoryReviewBodyPage.getAuditEventDescriptionValue(
       dataset.organisation_name_event_description_text,
       await reviewBodyProfilePage.getOrgName(),
       await reviewBodyProfilePage.getNewOrgName()
     );
-    const emailEventDescriptionExpectedValue = await auditHistoryReviewBodyPage.getEventDescriptionValue(
+    const emailEventDescriptionExpectedValue = await auditHistoryReviewBodyPage.getAuditEventDescriptionValue(
       dataset.email_address_event_description_text,
       await reviewBodyProfilePage.getEmail(),
       await reviewBodyProfilePage.getNewEmail()
     );
-    const descriptionEventDescriptionExpectedValue = await auditHistoryReviewBodyPage.getEventDescriptionValue(
+    const descriptionEventDescriptionExpectedValue = await auditHistoryReviewBodyPage.getAuditEventDescriptionValue(
       dataset.description_event_description_text,
       await reviewBodyProfilePage.getDescription(),
       await reviewBodyProfilePage.getNewDescription()
     );
-    const countryEventDescriptionExpectedValue = await auditHistoryReviewBodyPage.getEventDescriptionValue(
+    const countryEventDescriptionExpectedValue = await auditHistoryReviewBodyPage.getAuditEventDescriptionValue(
       dataset.country_event_description_text,
       (await reviewBodyProfilePage.getCountries()).join(', '),
       (await reviewBodyProfilePage.getNewCountries()).join(', ')
@@ -218,6 +213,7 @@ Then(
   }
 );
 
+//try to change to common step if/when getAuditLog is changd to common method
 Then(
   'I can see the default sort should be the most recent entry first based on date and time',
   async ({ auditHistoryReviewBodyPage }) => {

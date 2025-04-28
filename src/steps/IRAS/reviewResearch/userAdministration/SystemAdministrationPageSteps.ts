@@ -13,7 +13,7 @@ Then(
     const dataset = systemAdministrationPage.systemAdminPageTestData[datasetName];
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        const labelValue = await commonItemsPage.getUiLabel(dataset, key, systemAdministrationPage);
+        const labelValue = await commonItemsPage.getUiLabel(key, systemAdministrationPage);
         expect(labelValue).toBe(dataset[key]);
       }
     }

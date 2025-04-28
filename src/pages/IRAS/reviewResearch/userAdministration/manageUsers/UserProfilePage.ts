@@ -10,6 +10,23 @@ export default class UserProfilePage {
   readonly userProfilePageTestData: typeof userProfilePageTestData;
   readonly linkTextData: typeof linkTextData;
   readonly buttonTextData: typeof buttonTextData;
+  private _userid: string;
+  private _title: string;
+  private _new_title: string;
+  private _first_name: string;
+  private _new_first_name: string;
+  private _last_name: string;
+  private _new_last_name: string;
+  private _email_address: string;
+  private _new_email_address: string;
+  private _telephone: string;
+  private _new_telephone: string;
+  private _organisation: string;
+  private _new_organisation: string;
+  private _job_title: string;
+  private _new_job_title: string;
+  private _countries: string[];
+  private _new_countries: string[];
   readonly selected_bread_crumbs: Locator;
   readonly back_button: Locator;
   readonly page_heading: Locator;
@@ -63,6 +80,24 @@ export default class UserProfilePage {
     this.page = page;
     this.userProfilePageTestData = userProfilePageTestData;
     this.linkTextData = linkTextData;
+    this.buttonTextData = buttonTextData;
+    this._userid = '';
+    this._title = '';
+    this._new_title = '';
+    this._first_name = '';
+    this._new_first_name = '';
+    this._last_name = '';
+    this._new_last_name = '';
+    this._email_address = '';
+    this._new_email_address = '';
+    this._telephone = '';
+    this._new_telephone = '';
+    this._organisation = '';
+    this._new_organisation = '';
+    this._job_title = '';
+    this._new_job_title = '';
+    this._countries = [];
+    this._new_countries = [];
     this.page_heading = this.page
       .getByRole('heading')
       .getByText(this.userProfilePageTestData.User_Profile_Page.page_heading_prefix, { exact: false });
@@ -159,13 +194,17 @@ export default class UserProfilePage {
         exact: true,
       }),
     });
-    this.last_updated_value = this.last_updated_row.locator('td', { has: this.row_value_locator });
+    this.last_updated_value = this.last_updated_row.locator('td').nth(1);
     this.disable_header_label = this.enable_header_label = this.page.locator('h2[class="govuk-heading-m"]');
     this.disable_hint_label = this.enable_hint_label = this.page.locator('div[class="govuk-hint"]');
   }
 
   async assertOnUserProfilePage() {
     await expect(this.page_heading).toBeVisible();
+  }
+
+  async goto(userId: string) {
+    await this.page.goto(`admin/users/viewuser?userId=${userId}`);
   }
 
   async clickOnChangeUserProfileDetails(editUserFieldName: string, userRole: string) {
@@ -191,7 +230,7 @@ export default class UserProfilePage {
       case 'job_title_text':
         await this.job_title_change_link.click();
         break;
-      case 'role_dropdown':
+      case 'role_checkbox':
         await this.role_change_link.click();
         break;
       case 'committee':
@@ -220,6 +259,11 @@ export default class UserProfilePage {
     }
   }
 
+  async clickOnChangeButton(fieldKey: string) {
+    const locatorName = fieldKey.toLowerCase() + '_change_link';
+    await this[locatorName].click();
+  }
+
   async getUserProfileValue(editUserFieldName: string) {
     switch (editUserFieldName) {
       case 'title_text':
@@ -236,12 +280,150 @@ export default class UserProfilePage {
         return confirmStringNotNull(await this.organisation_value.textContent()).trim();
       case 'job_title_text':
         return confirmStringNotNull(await this.job_title_value.textContent()).trim();
-      case 'role_dropdown':
+      case 'role_checkbox':
         return confirmStringNotNull(await this.role_value.textContent()).trim();
       case 'country_checkbox':
         return confirmStringNotNull(await this.country_value.textContent()).trim();
       default:
         throw new Error(`${editUserFieldName} is not a valid user profile field`);
     }
+  }
+
+  //Getters & Setters for Private Variables
+
+  async getUserId(): Promise<string> {
+    return this._userid;
+  }
+
+  async setUserId(value: string): Promise<void> {
+    this._userid = value;
+  }
+
+  async getTitle(): Promise<string> {
+    return this._title;
+  }
+
+  async setTitle(value: string): Promise<void> {
+    this._title = value;
+  }
+
+  async getNewTitle(): Promise<string> {
+    return this._new_title;
+  }
+
+  async setNewTitle(value: string): Promise<void> {
+    this._new_title = value;
+  }
+
+  async getFirstName(): Promise<string> {
+    return this._first_name;
+  }
+
+  async setFirstName(value: string): Promise<void> {
+    this._first_name = value;
+  }
+
+  async getNewFirstName(): Promise<string> {
+    return this._new_first_name;
+  }
+
+  async setNewFirstName(value: string): Promise<void> {
+    this._new_first_name = value;
+  }
+
+  async getLastName(): Promise<string> {
+    return this._last_name;
+  }
+
+  async setLastName(value: string): Promise<void> {
+    this._last_name = value;
+  }
+
+  async getNewLastName(): Promise<string> {
+    return this._new_last_name;
+  }
+
+  async setNewLastName(value: string): Promise<void> {
+    this._new_last_name = value;
+  }
+
+  async getEmail(): Promise<string> {
+    return this._email_address;
+  }
+
+  async setEmail(value: string): Promise<void> {
+    this._email_address = value;
+  }
+
+  async getNewEmail(): Promise<string> {
+    return this._new_email_address;
+  }
+
+  async setNewEmail(value: string): Promise<void> {
+    this._new_email_address = value;
+  }
+
+  async getTelephone(): Promise<string> {
+    return this._telephone;
+  }
+
+  async setTelephone(value: string): Promise<void> {
+    this._telephone = value;
+  }
+
+  async getNewTelephone(): Promise<string> {
+    return this._new_telephone;
+  }
+
+  async setNewTelephone(value: string): Promise<void> {
+    this._new_telephone = value;
+  }
+
+  async getOrganisation(): Promise<string> {
+    return this._organisation;
+  }
+
+  async setOrganisation(value: string): Promise<void> {
+    this._organisation = value;
+  }
+
+  async getNewOrganisation(): Promise<string> {
+    return this._new_organisation;
+  }
+
+  async setNewOrganisation(value: string): Promise<void> {
+    this._new_organisation = value;
+  }
+
+  async getJobTitle(): Promise<string> {
+    return this._job_title;
+  }
+
+  async setJobTitle(value: string): Promise<void> {
+    this._job_title = value;
+  }
+
+  async getNewJobTitle(): Promise<string> {
+    return this._new_job_title;
+  }
+
+  async setNewJobTitle(value: string): Promise<void> {
+    this._new_job_title = value;
+  }
+
+  async getCountries(): Promise<string[]> {
+    return this._countries;
+  }
+
+  async setCountries(value: string[]): Promise<void> {
+    this._countries = value;
+  }
+
+  async getNewCountries(): Promise<string[]> {
+    return this._new_countries;
+  }
+
+  async setNewCountries(value: string[]): Promise<void> {
+    this._new_countries = value;
   }
 }

@@ -45,7 +45,7 @@ Feature: User Administration: Manage Review Bodies
         And I click the 'Disable_Review_Body' button on the 'Review_Body_Profile_Page'
         And I capture the page screenshot
         And I click the 'Confirm' button on the 'Confirmation_Page'
-        And I capture the current time
+        And I capture the current time for 'Audit_History_Review_Body_Page'
         And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
         Then I can see the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
@@ -84,7 +84,7 @@ Feature: User Administration: Manage Review Bodies
         When I fill the edit review body page using '<Edit_Review_Body>'
         And I capture the page screenshot
         And I click the 'Save' button on the 'Edit_Review_Body_Page'
-        And I capture the current time
+        And I capture the current time for 'Audit_History_Review_Body_Page'
         # validate edited data in review body profile page
         Then I now see the review body profile page with the updated '<Edit_Review_Body>' for field '<Field_Name_One>'
         Then I now see the review body profile page with the updated '<Edit_Review_Body>' for field '<Field_Name_Two>'
@@ -95,14 +95,14 @@ Feature: User Administration: Manage Review Bodies
         And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'
         Then I can see the audit history page of the review body
         And I capture the page screenshot
-        And I can see the '<Validation_Text>' ui labels on the audit history page of the review body
+        And I can see the '<Validation_Text>' labels on the audit history page of the review body
         # audit history sorting
         And I can see the default sort should be the most recent entry first based on date and time
         And I can see the audit history for all the fields edited event with '<Audit_History>'
 
         Examples:
-            | Add_Review_Body          | Field_Name_One    | Field_Name_Two | Field_Name_Three | Field_Name_Four | Edit_Review_Body           | Validation_Text | Audit_History               |
-            | Valid_Data_In_All_Fields | Organisation_Name | Country        | Email_Address    | Description     | Valid_Data_Edit_All_Fields | header_Texts    | Edit_Review_Body_All_Fields |
+            | Add_Review_Body          | Field_Name_One    | Field_Name_Two | Field_Name_Three | Field_Name_Four | Edit_Review_Body           | Validation_Text           | Audit_History               |
+            | Valid_Data_In_All_Fields | Organisation_Name | Country        | Email_Address    | Description     | Valid_Data_Edit_All_Fields | Review_Body_Audit_History | Edit_Review_Body_All_Fields |
 
     @RegressionTestVerifyBackAndChangeLinkNavigationManageReviewBodies
     Scenario Outline: Verify the user can navigate by clicking 'Back' link and 'Change' link from review body profile page and edit review body page and audit history page

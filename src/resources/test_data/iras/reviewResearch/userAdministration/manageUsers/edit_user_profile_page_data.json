@@ -15,7 +15,9 @@
     "country_label": "Country",
     "access_required_label": "Access Required",
     "review_body_label": "Review body",
-    "save_button": "Save"
+    "save_button": "Save",
+    "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+    "role_checkbox": ["user", "operations", "admin", "reviewer"]
   },
   "Edit_User_Profile": {
     "Valid_Data_In_All_Fields_Role_Operations": {
@@ -26,7 +28,7 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA",
       "job_title_text": "Sr.Reviewer",
-      "role_dropdown": "operations",
+      "role_checkbox": ["operations"],
       "country_checkbox": ["England"],
       "access_required_checkbox": ["Research Ethics Comittee"]
     },
@@ -38,7 +40,7 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA",
       "job_title_text": "Sr.Reviewer",
-      "role_dropdown": "reviewer"
+      "role_checkbox": ["reviewer"]
     },
     "Edit_User_Valid_Data": {
       "title_text": "Mr",
@@ -48,7 +50,7 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA",
       "job_title_text": "Sr.Reviewer",
-      "role_dropdown": "operations",
+      "role_checkbox": ["operations"],
       "country_checkbox": ["England"],
       "access_required_checkbox": ["Research Ethics Comittee"]
     },
@@ -71,7 +73,7 @@
     "telephone_textbox_label": "Telephone",
     "organisation_textbox_label": "Organisation",
     "job_title_textbox_label": "Job title",
-    "role_dropdown_label": "Role",
+    "role_checkbox_label": "Role",
     "committee_dropdown_label": "Committee",
     "access_required_checkbox_label": "Access required",
     "country_checkbox_label": "Country"
@@ -85,7 +87,7 @@
     "telephone_textbox_label": "Telephone",
     "organisation_textbox_label": "Organisation",
     "job_title_textbox_label": "Job title",
-    "role_dropdown_label": "Role"
+    "role_checkbox_label": "Role"
   },
   "Invalid_Email_Id_Error_Message": {
     "invalid_email_id_error": "Max 250 characters allowed"
@@ -131,15 +133,19 @@
     "job_title_text": "Sr.Reviewer updated",
     "access_required_checkbox": ["Research Ethics Committee"]
   },
-  "User_Role_Dropdown_One": {
-    "role_dropdown": "Operations",
+  "User_Role_Checkbox_One": {
+    "role_checkbox": ["Operations"],
     "access_required_checkbox": ["Research Ethics Committee"]
   },
   "User_Country_Checkbox_One": {
-    "country_checkbox": ["England, Wales"],
+    "country_checkbox": ["England", "Wales"],
     "access_required_checkbox": ["Research Ethics Committee"]
   },
   "User_Access_Required_Checkbox_One": {
+    "access_required_checkbox": ["Research Ethics Committee"]
+  },
+  "User_Title_Update": {
+    "title_text": "Master",
     "access_required_checkbox": ["Research Ethics Committee"]
   },
   "Original_Title_Text_One": {
@@ -170,8 +176,8 @@
     "job_title_text": "Admin",
     "access_required_checkbox": ["Research Ethics Committee"]
   },
-  "Original_Role_Dropdown_One": {
-    "role_dropdown": "Operations",
+  "Original_Role_Checkbox_One": {
+    "role_checkbox": ["Operations"],
     "access_required_checkbox": ["Research Ethics Committee"]
   },
   "Original_Country_Checkbox_One": {
@@ -203,10 +209,17 @@
   "User_Job_Title_Text_Two": {
     "job_title_text": "Sr.Reviewer updated"
   },
-  "User_Role_Dropdown_Two": {
-    "role_dropdown": "Reviewer"
+  "User_Role_Checkbox_Two": {
+    "role_checkbox": ["Reviewer"]
   },
-
+  "User_Country_Checkbox_Two": {
+    "country_checkbox": ["Northern Ireland", "Scotland"],
+    "access_required_checkbox": ["Research Ethics Committee"]
+  },
+  "User_Roles_Checkbox_Empty": {
+    "role_checkbox": [],
+    "access_required_checkbox": ["Research Ethics Committee"]
+  },
   "Original_Title_Text_Two": {
     "title_text": "Mr"
   },
@@ -228,8 +241,8 @@
   "Original_Job_Title_Text_Two": {
     "job_title_text": "Sr.Reviewer"
   },
-  "Original_Role_Dropdown_Two": {
-    "role_dropdown": "Reviewer"
+  "Original_Role_Checkbox_Two": {
+    "role_checkbox": ["Reviewer"]
   },
 
   "User_First_Name_Text_Three": {
