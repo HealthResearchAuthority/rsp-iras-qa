@@ -42,7 +42,7 @@ Then(
         eventDescriptionExpectedValue =
           userEmail +
           datasetAudit.Assign_User.event_description_prefix_text +
-          rolesInExpectedOrder[index].toUpperCase() +
+          rolesInExpectedOrder[index] +
           datasetAudit.Assign_User.event_description_suffix_text;
       }
       expect(timeValues[index]).toBe(timeExpected);
@@ -86,8 +86,8 @@ Then(
       //defect - should be ', ', change after fix is in
       eventDescriptionExpectedValue = await auditHistoryUserPage.getUserAuditEventDescriptionValue(
         dataset.event_description_text,
-        (await userProfilePage[`get${methodType}`]()).join(','),
-        (await userProfilePage[`getNew${methodType}`]()).join(',')
+        (await userProfilePage[`get${methodType}`]()).join(', '),
+        (await userProfilePage[`getNew${methodType}`]()).join(', ')
       );
     } else {
       eventDescriptionExpectedValue = await auditHistoryUserPage.getUserAuditEventDescriptionValue(
@@ -118,7 +118,7 @@ Then(
       const eventDescriptionExpectedValue =
         usersEmail +
         datasetAuditEvent.Unassign_User.event_description_prefix_text +
-        expectedOrderedRoles[index].toUpperCase() +
+        expectedOrderedRoles[index] +
         datasetAuditEvent.Unassign_User.event_description_suffix_text;
       expect(confirmArrayNotNull(actualAuditLog.get('timeValues'))[index]).toBe(timeExpected);
       expect(confirmArrayNotNull(actualAuditLog.get('eventValues'))[index]).toBe(eventDescriptionExpectedValue);
