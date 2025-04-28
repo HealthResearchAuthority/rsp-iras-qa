@@ -12,7 +12,7 @@
     "organisation_label": "Organisation",
     "job_title_label": "Job title",
     "role_label": "Role",
-    "commitee_label": "Committee",
+    "committee_label": "Committee",
     "role_checkbox": ["user", "operations", "admin", "reviewer"],
     "country_label": "Country",
     "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
@@ -160,18 +160,9 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_All",
       "job_title_text": "Sr.Reviewer Role_All",
-      "role_checkbox": [
-        "user",
-        "operations",
-        "admin",
-        "reviewer"
-      ],
-      "country_checkbox": [
-        "Wales"
-      ],
-      "access_required_checkbox": [
-        "Research Ethics Committee"
-      ]
+      "role_checkbox": ["user", "operations", "admin", "reviewer"],
+      "country_checkbox": ["Wales"],
+      "access_required_checkbox": ["Research Ethics Committee"]
     },
     "Valid_Data_No_Roles": {
       "title_text": "Mr",

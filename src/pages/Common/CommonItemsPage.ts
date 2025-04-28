@@ -493,9 +493,7 @@ export default class CommonItemsPage {
     return auditMap;
   }
   async getSummaryErrorMessages() {
-    const summaryErrorActualValues = await removeUnwantedWhitespace(
-      confirmStringNotNull((await this.summaryErrorLinks.allTextContents()).toString())
-    );
+    const summaryErrorActualValues = await this.summaryErrorLinks.allTextContents();
     return summaryErrorActualValues;
   }
 

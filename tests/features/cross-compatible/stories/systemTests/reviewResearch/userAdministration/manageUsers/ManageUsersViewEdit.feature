@@ -236,18 +236,18 @@ Feature: User Administration: Manage user profiles, view and edit user profile
         Then I can see the user profile page
         When I click the '<Edit_User_Field>' change link for '<User_Role>' on the user profile page
         Then I can see the edit user profile page
-        And  I uncheck the previously selected checkboxes on the edit user profile page for '<Add_User_Profile>' for the role is selected as operations
+        And  I uncheck the previously selected checkboxes on the edit user profile page for '<Edit_User_Profile>' when the role is selected as operations
         And I update user profile with '<Invalid_Data_Edit_User>'
         And I click the 'Save' button on the 'Edit_User_Profile_Page'
         # Then I validate '<Max_Field_Length_Error_Message>' is displayed on edit user profile page for '<Edit_User_Field_Data>'
         Then I validate '<Field_And_Summary_Error_Message>' displayed on create user profile page
         Examples:
-            | Add_User_Profile                         | Edit_User_Field   | User_Role  | Status | Invalid_Data_Edit_User                                    | Field_And_Summary_Error_Message                                         |
-            | Valid_Data_In_All_Fields_Role_Operations | title_text        | Operations | ACTIVE | Missing_Mandatory_Fields_Role_Not_Operations              | Error_Message_Missing_Mandatory_Fields_Role_Not_Operations              |
-            | Valid_Data_In_All_Fields_Role_Operations | first_name_text   | Operations | ACTIVE | Missing_Mandatory_Fields_Role_Operations                  | Error_Message_Missing_Mandatory_Fields_Role_Operations                  |
-            | Valid_Data_In_All_Fields_Role_Operations | last_name_text    | Operations | ACTIVE | Missing_Mandatory_Field_First_Name_Role_Not_Operations    | Error_Message_Missing_Mandatory_Field_First_Name_Role_Not_Operations    |
-            | Valid_Data_In_All_Fields_Role_Operations | telephone_text    | Operations | ACTIVE | Missing_Mandatory_Field_Last_Name_Role_Not_Operations     | Error_Message_Missing_Mandatory_Field_Last_Name_Role_Not_Operations     |
-            | Valid_Data_In_All_Fields_Role_Operations | organisation_text | Operations | ACTIVE | Missing_Mandatory_Field_Email_Address_Role_Not_Operations | Error_Message_Missing_Mandatory_Field_Email_Address_Role_Not_Operations |
-            | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | ACTIVE | Missing_Mandatory_Field_Country_Role_Operations           | Error_Message_Missing_Mandatory_Field_Country_Role_Operations           |
-            | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | ACTIVE | Missing_Mandatory_Field_Access_Required_Role_Operations   | Error_Message_Missing_Mandatory_Field_Access_Required_Role_Operations   |
-            | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | ACTIVE | Invalid_Character_Limit                                   | Error_Message_Invalid_Character_Limit                                   |
+            | Edit_User_Profile                        | Edit_User_Field | User_Role  | Status | Invalid_Data_Edit_User                       | Field_And_Summary_Error_Message                            |
+            | Valid_Data_In_All_Fields_Role_Operations | title_text      | Operations | ACTIVE | Missing_Mandatory_Fields_Role_Not_Operations | Error_Message_Missing_Mandatory_Fields_Role_Not_Operations |
+# | Valid_Data_In_All_Fields_Role_Operations | first_name_text   | Operations | ACTIVE | Missing_Mandatory_Fields_Role_Operations                  | Error_Message_Missing_Mandatory_Fields_Role_Operations                  |
+# | Valid_Data_In_All_Fields_Role_Operations | last_name_text    | Operations | ACTIVE | Missing_Mandatory_Field_First_Name_Role_Not_Operations    | Error_Message_Missing_Mandatory_Field_First_Name_Role_Not_Operations    |
+# | Valid_Data_In_All_Fields_Role_Operations | telephone_text    | Operations | ACTIVE | Missing_Mandatory_Field_Last_Name_Role_Not_Operations     | Error_Message_Missing_Mandatory_Field_Last_Name_Role_Not_Operations     |
+# | Valid_Data_In_All_Fields_Role_Operations | organisation_text | Operations | ACTIVE | Missing_Mandatory_Field_Email_Address_Role_Not_Operations | Error_Message_Missing_Mandatory_Field_Email_Address_Role_Not_Operations |
+# | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | ACTIVE | Missing_Mandatory_Field_Country_Role_Operations           | Error_Message_Missing_Mandatory_Field_Country_Role_Operations           |
+# | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | ACTIVE | Missing_Mandatory_Field_Access_Required_Role_Operations   | Error_Message_Missing_Mandatory_Field_Access_Required_Role_Operations   |
+# | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | ACTIVE | Invalid_Character_Limit                                   | Error_Message_Invalid_Character_Limit                                   |

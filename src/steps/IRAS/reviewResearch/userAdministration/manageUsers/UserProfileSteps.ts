@@ -16,7 +16,7 @@ Then('I can see the user profile page', async ({ userProfilePage }) => {
   await userProfilePage.setTelephone(confirmStringNotNull(await userProfilePage.telephone_value.textContent()));
   await userProfilePage.setOrganisation(confirmStringNotNull(await userProfilePage.organisation_value.textContent()));
   await userProfilePage.setJobTitle(confirmStringNotNull(await userProfilePage.job_title_value.textContent()));
-  if (await userProfilePage.role_row.isVisible()) {
+  if (await userProfilePage.role_value.isVisible()) {
     await userProfilePage.setRole(confirmStringNotNull(await userProfilePage.role_value.textContent()).split(', '));
   }
   if (await userProfilePage.country_row.isVisible()) {

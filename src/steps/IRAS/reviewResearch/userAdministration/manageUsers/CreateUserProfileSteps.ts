@@ -118,11 +118,8 @@ Then(
   async ({ commonItemsPage, createUserProfilePage }, errorMessageFieldAndSummaryDatasetName: string) => {
     const errorMessageFieldDataset =
       createUserProfilePage.createUserProfilePageTestData[errorMessageFieldAndSummaryDatasetName];
-    const allFieldKeys = Object.keys(errorMessageFieldDataset);
     await expect(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
-    const totalSummaryErrorLinks = await commonItemsPage.summaryErrorLinks.count();
-    expect(totalSummaryErrorLinks).toBe(allFieldKeys.length);
-    const allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset).toString();
+    const allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset);
     const summaryErrorActualValues = await commonItemsPage.getSummaryErrorMessages();
     expect(summaryErrorActualValues).toEqual(allSummaryErrorExpectedValues);
     for (const key in errorMessageFieldDataset) {

@@ -167,16 +167,16 @@ When(
 );
 
 Then(
-  'I uncheck the previously selected checkboxes on the edit user profile page for {string} for the role is selected as operations',
-  async ({ userProfilePage, createUserProfilePage, commonItemsPage }, datasetName: string) => {
+  'I uncheck the previously selected checkboxes on the edit user profile page for {string} when the role is selected as operations',
+  async ({ userProfilePage, editUserProfilePage, commonItemsPage }, datasetName: string) => {
     // const roleValue = await userProfilePage.getRole();
     const roleValue = (await userProfilePage.getRole()).join(', ');
     if (roleValue.includes('operations')) {
-      const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
+      const dataset = editUserProfilePage.editUserProfilePageTestData.Edit_User_Profile[datasetName];
       for (const key in dataset) {
         if (key === 'country_checkbox' || key === 'access_required_checkbox') {
           if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-            await commonItemsPage.clearUIComponent(dataset, key, createUserProfilePage);
+            await commonItemsPage.clearUIComponent(dataset, key, editUserProfilePage);
           }
         }
       }

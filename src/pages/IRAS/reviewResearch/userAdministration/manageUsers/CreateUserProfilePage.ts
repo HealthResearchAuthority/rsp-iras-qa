@@ -84,7 +84,7 @@ export default class CreateUserProfilePage {
     this.role_fieldset = this.page.locator('.govuk-form-group', { has: this.role_label });
     this.role_checkbox = this.role_fieldset.getByRole('checkbox');
     this.committee_dropdown = this.page.getByLabel(
-      this.createUserProfilePageTestData.Create_User_Profile_Page.commitee_label,
+      this.createUserProfilePageTestData.Create_User_Profile_Page.committee_label,
       { exact: true }
     );
     this.country_fieldset = this.page.getByRole('group', {
