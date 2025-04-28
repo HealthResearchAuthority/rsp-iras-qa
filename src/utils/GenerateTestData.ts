@@ -699,8 +699,10 @@ export async function removeGeneratedTestdatafilesinTeardown(resultsFolder: stri
 }
 
 export function generateRandomNumber(minLength: number = 4, maxLength: number = 7): string {
-  const min = 10 ** (minLength - 1);
-  const max = 10 ** maxLength - 1;
-  const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+  const min = Math.pow(10, minLength - 1);
+  const max = Math.pow(10, maxLength) - 1;
+  const randomArray = new Uint32Array(1);
+  crypto.getRandomValues(randomArray);
+  const randomNumber = (randomArray[0] % (max - min + 1)) + min;
   return randomNumber.toString();
 }
