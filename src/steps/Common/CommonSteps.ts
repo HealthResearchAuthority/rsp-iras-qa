@@ -395,7 +395,7 @@ Then(
         const fieldErrorMessagesActualValues = await commonItemsPage.getFieldErrorMessages(key, projectDetailsIRASPage);
         expect(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
         const element = await commonItemsPage.checkViewport(errorMessageFieldDataset, key, projectDetailsIRASPage);
-        expect(element).toBeInViewport();
+        await expect(element).toBeInViewport();
       }
     }
   }
