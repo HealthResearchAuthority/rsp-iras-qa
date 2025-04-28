@@ -7,11 +7,11 @@ trigger:
   - feature/rsp-3122-users-error-validation
 
 schedules:
-  - cron: '47 12 * * *'
+  - cron: '50 12 * * *'
     displayName: 'Nightly run - full suite'
     branches:
       include:
-        - main
+        - feature/rsp-3122-users-error-validation
     always: true
 
 pool:
