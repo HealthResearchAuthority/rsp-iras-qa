@@ -18,7 +18,6 @@
     "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
     "role_checkbox": ["user", "operations", "admin", "reviewer"]
   },
-  "error_message_summary_header": "There is a problem",
   "Error_Message_Missing_Mandatory_Fields_Role_Not_Operations": {
     "email_address_text": "Enter an email address",
     "last_name_text": "Enter a last name",

@@ -3,7 +3,7 @@ import * as buttonTextData from '../../resources/test_data/common/button_text_da
 import * as linkTextData from '../../resources/test_data/common/link_text_data.json';
 import * as questionSetData from '../../resources/test_data/common/question_set_data.json';
 import * as auditHistoryReviewBodyPageTestData from '../../resources/test_data/iras/reviewResearch/userAdministration/manageReviewBodies/audit_history_review_body_page_data.json';
-import * as createUserProfilePageTestData from '../../resources/test_data/iras/reviewResearch/userAdministration/manageUsers/create_user_profile_page_data.json';
+import * as commonTestData from '../../resources/test_data/common/common_data.json';
 
 import fs from 'fs';
 import path from 'path';
@@ -25,7 +25,7 @@ export default class CommonItemsPage {
   readonly linkTextData: typeof linkTextData;
   readonly questionSetData: typeof questionSetData;
   readonly auditHistoryReviewBodyPageTestData: typeof auditHistoryReviewBodyPageTestData;
-  readonly createUserProfilePageTestData: typeof createUserProfilePageTestData;
+  readonly commonTestData: typeof commonTestData;
   readonly showAllSectionsAccordion: Locator;
   readonly genericButton: Locator;
   readonly govUkButton: Locator;
@@ -66,7 +66,7 @@ export default class CommonItemsPage {
     this.linkTextData = linkTextData;
     this.questionSetData = questionSetData;
     this.auditHistoryReviewBodyPageTestData = auditHistoryReviewBodyPageTestData;
-    this.createUserProfilePageTestData = createUserProfilePageTestData;
+    this.commonTestData = commonTestData;
 
     //Locators
     this.showAllSectionsAccordion = page.locator('.govuk-accordion__show-all"');
@@ -102,7 +102,7 @@ export default class CommonItemsPage {
     this.errorMessageFieldLabel = page.locator('[class$="field-validation-error"]');
     this.errorMessageSummaryLabel = this.page
       .getByRole('heading')
-      .getByText(this.createUserProfilePageTestData.error_message_summary_header, {
+      .getByText(this.commonTestData.error_message_summary_header, {
         exact: true,
       });
     this.summaryErrorLinks = this.errorMessageSummaryLabel.locator('..').getByRole('listitem').getByRole('link');
