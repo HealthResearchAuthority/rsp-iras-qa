@@ -30,6 +30,7 @@ export default class ProjectDetailsTitlePage {
     this.pageHeading = this.page.getByTestId('title');
     this.short_project_title_textbox_label = this.page.locator('label[for="IQA0002_Text"]');
     this.short_project_title_text = this.page.getByTestId('IQA0002_Text');
+    //this.short_project_title_text = this.page.locator('input[name="Questions[0].AnswerText"]');
     this.planned_end_date_textbox_label = this.page.locator('label[for="IQA0003_Text"]');
     this.planned_end_date_hint_label = this.page
       .locator('label[for="IQA0003_Text"]')

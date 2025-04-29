@@ -95,24 +95,24 @@ Feature: Create Amendment - Create Project
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     When I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
-    Then I validate '<Field_Error_Message>' and '<Summary_Error_Message>' displayed on project details title page for '<Project_Details_Title>'
+    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Project_Details_Title_Page'
 
     Examples:
-      | Navigation_Button_First | Navigation_Button_Second | Project_Details_IRAS | Navigation_Button_Third | Project_Details_Title                       | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Invalid_All_Fields                          | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Invalid_Data_Short_Project_Title_Max_Length | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Invalid_Data_Short_Project_Title_Min_Length | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Invalid_Day_Number                          | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Invalid_Day_Letters                         | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Invalid_Month_Number                        | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Invalid_Month_Letters                       | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Invalid_Year_Number_1                       | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Invalid_Year_Number_2                       | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Invalid_Year_Letters                        | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Invalid_Date_Past                           | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Invalid_Date_No_Day                         | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Invalid_Date_No_Month                       | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Invalid_Date_No_Year                        | Field_Error_Message | Summary_Error_Message |
+      | Navigation_Button_First | Navigation_Button_Second | Project_Details_IRAS | Navigation_Button_Third | Project_Details_Title                       | Field_And_Summary_Error_Message |
+      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Invalid_All_Fields                          | All_Field_Error_Message         |
+      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Invalid_Data_Short_Project_Title_Max_Length | Title_Field_Error_Message       |
+      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Invalid_Data_Short_Project_Title_Min_Length | Title_Field_Error_Message       |
+      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Invalid_Day_Number                          | Date_Day_Field_Error_Message    |
+      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Invalid_Day_Letters                         | Date_Day_Field_Error_Message    |
+      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Invalid_Month_Number                        | Date_Month_Field_Error_Message  |
+      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Invalid_Month_Letters                       | Date_Month_Field_Error_Message  |
+      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Invalid_Year_Number_1                       | Date_Year_Field_Error_Message   |
+      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Invalid_Year_Number_2                       | Date_Year_Field_Error_Message   |
+      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Invalid_Year_Letters                        | Date_Year_Field_Error_Message   |
+      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Invalid_Date_Past                           | Date_Day_Field_Error_Message    |
+      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Invalid_Date_No_Day                         | Date_Day_Field_Error_Message    |
+      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Invalid_Date_No_Month                       | Date_Month_Field_Error_Message  |
+      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Invalid_Date_No_Year                        | Date_Year_Field_Error_Message   |
 
   @rsp-1859
   Scenario Outline: Validate error messages displayed when user fill todays date for project end date
@@ -355,3 +355,189 @@ Feature: Create Amendment - Create Project
     Examples:
       | Project_Details_IRAS      | Field_And_Summary_Error_Message       |
       | Invalid_IRAS_ID_Duplicate | Field_Error_Message_Iras_Id_Duplicate |
+
+
+  @rsp-1863 @saveLaterProjectTitle
+  Scenario Outline: Verify product details are saved when user saves the record on create project - Project details page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    Then I can see the project details iras page
+    And I fill the unique iras id in project details iras page
+    And I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
+    Then I can see the project details title page
+    And I fill the project details title page with '<Project_Details_Title>'
+    When I click the 'Save_For_Later' button on the 'Project_Details_Title_Page'
+    Then I can see the project overview save for later page
+    And I can see the short project title on project overview save for later page for '<Project_Details_Title>'
+    When I click the 'Project_Details' link on the 'Project_Overview_Save_For_Later_Page'
+    And I can see the project details title page
+    Then I can see previously saved values for '<Project_Details_Title>' displayed on the project details title page
+
+    Examples:
+      | Project_Details_Title |
+      | Valid_Data_All_Fields |
+
+  @rsp-1863 @saveLaterProjectRoles
+  Scenario Outline: Verify product details are saved when user saves the record on create project - key project roles page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    Then I can see the project details iras page
+    And I fill the unique iras id in project details iras page
+    And I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
+    And I fill the project details title page with '<Project_Details_Title>'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    Then I fill the key project roles page with '<Key_Project_Roles>'
+    And I capture the page screenshot
+    Then I click the 'Save_For_Later' button on the 'Key_Project_Roles_Page'
+    Then I can see the project overview save for later page
+    And I can see the short project title on project overview save for later page for '<Project_Details_Title>'
+    When I click the 'Project_Details' link on the 'Project_Overview_Save_For_Later_Page'
+    Then I can see the project details title page
+    And I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    And I can see the key project roles page
+    Then I can see previously saved values for '<Key_Project_Roles>' displayed on the key project roles page
+
+    Examples:
+      | Project_Details_Title | Key_Project_Roles     |
+      | Valid_Data_All_Fields | Valid_Data_All_Fields |
+
+  @rsp-1863 @saveLaterProjectLocations
+  Scenario Outline: Verify product details are saved when user saves the record on create project - research locations page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    Then I can see the project details iras page
+    And I fill the unique iras id in project details iras page
+    And I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
+    And I fill the project details title page with '<Project_Details_Title>'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    Then I fill the key project roles page with '<Key_Project_Roles>'
+    And I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    Then I fill the research locations page with '<Research_Locations>'
+    And I click the 'Save_For_Later' button on the 'Research_Locations_Page'
+    Then I can see the project overview save for later page
+    And I can see the short project title on project overview save for later page for '<Project_Details_Title>'
+    When I click the 'Project_Details' link on the 'Project_Overview_Save_For_Later_Page'
+    Then I can see the project details title page
+    And I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    And I can see the key project roles page
+    And I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    Then I can see previously saved values for '<Research_Locations>' displayed on the research locations page
+
+    Examples:
+      | Project_Details_Title | Key_Project_Roles     | Research_Locations    |
+      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields |
+
+  @rsp-1863 @saveLaterProjTitleValidations
+  Scenario Outline: Validate error messages when user saves the project with invalid data on project title page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
+    And I fill the project details title page with '<Project_Details_Title>'
+    When I click the 'Save_For_Later' button on the 'Project_Details_Title_Page'
+    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Project_Details_Title_Page'
+
+    Examples:
+      | Project_Details_Title                       | Field_And_Summary_Error_Message |
+      | Invalid_All_Fields                          | All_Field_Error_Message         |
+      | Invalid_Data_Short_Project_Title_Max_Length | Title_Field_Error_Message       |
+      | Invalid_Data_Short_Project_Title_Min_Length | Title_Field_Error_Message       |
+      | Invalid_Day_Number                          | Date_Day_Field_Error_Message    |
+      | Invalid_Day_Letters                         | Date_Day_Field_Error_Message    |
+      | Invalid_Month_Number                        | Date_Month_Field_Error_Message  |
+      | Invalid_Month_Letters                       | Date_Month_Field_Error_Message  |
+      | Invalid_Year_Number_1                       | Date_Year_Field_Error_Message   |
+      | Invalid_Year_Number_2                       | Date_Year_Field_Error_Message   |
+      | Invalid_Year_Letters                        | Date_Year_Field_Error_Message   |
+      | Invalid_Date_Past                           | Date_Day_Field_Error_Message    |
+      | Invalid_Date_No_Day                         | Date_Day_Field_Error_Message    |
+      | Invalid_Date_No_Month                       | Date_Month_Field_Error_Message  |
+      | Invalid_Date_No_Year                        | Date_Year_Field_Error_Message   |
+
+
+  @rsp-1863 @saveLaterChiefInvEmailValidations
+  Scenario Outline: Validate error messages when user saves the project with invalid Chief Investigator email data on key project roles page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
+    And I fill the project details title page with '<Project_Details_Title>'
+    And I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    And I can see the key project roles page
+    Then I fill the key project roles page with '<Key_Project_Roles>'
+    And I capture the page screenshot
+    Then I click the 'Save_For_Later' button on the 'Key_Project_Roles_Page'
+    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Key_Project_Roles_Page'
+    And I capture the page screenshot
+
+    Examples:
+      | Project_Details_Title | Key_Project_Roles                                      | Field_And_Summary_Error_Message |
+      | Valid_Data_All_Fields | Invalid_Email_Data_One_Start_With_Dot                  | Field_Error_Chief_Email         |
+      | Valid_Data_All_Fields | Invalid_Email_Data_One_Double_Dot                      | Field_Error_Chief_Email         |
+      | Valid_Data_All_Fields | Invalid_Email_Data_One_Space                           | Field_Error_Chief_Email         |
+      | Valid_Data_All_Fields | Invalid_Email_Data_One_Wrong_AT                        | Field_Error_Chief_Email         |
+      | Valid_Data_All_Fields | Invalid_Email_Data_One_Less_Greater_Symbols            | Field_Error_Chief_Email         |
+      | Valid_Data_All_Fields | Invalid_Email_Data_One_Colon                           | Field_Error_Chief_Email         |
+      | Valid_Data_All_Fields | Invalid_Email_Data_One_Semi_Colon                      | Field_Error_Chief_Email         |
+      | Valid_Data_All_Fields | Invalid_Email_Data_One_Comma                           | Field_Error_Chief_Email         |
+      | Valid_Data_All_Fields | Invalid_Email_Data_One_Start_With_Hyphen               | Field_Error_Chief_Email         |
+      | Valid_Data_All_Fields | Invalid_Email_Data_One_Hyphen_Before_Domain            | Field_Error_Chief_Email         |
+      | Valid_Data_All_Fields | Invalid_Email_Data_One_Double_Dot_Domain               | Field_Error_Chief_Email         |
+      | Valid_Data_All_Fields | Invalid_Email_Data_One_Exclamation_Domain              | Field_Error_Chief_Email         |
+      | Valid_Data_All_Fields | Invalid_Email_Data_One_Unicode                         | Field_Error_Chief_Email         |
+      | Valid_Data_All_Fields | Invalid_Email_Data_One_Single_Quote_Before_AT          | Field_Error_Chief_Email         |
+      | Valid_Data_All_Fields | Invalid_Email_Data_One_Domain_Exceed_Max               | Field_Error_Chief_Email         |
+      | Valid_Data_All_Fields | Invalid_Email_Data_One_Local_Part_Max                  | Field_Error_Chief_Email         |
+      | Valid_Data_All_Fields | Invalid_Email_Data_One_Consecutive_Dot_Domain          | Field_Error_Chief_Email         |
+      | Valid_Data_All_Fields | Invalid_Email_Data_One_Consecutive_Dot_SubDomain       | Field_Error_Chief_Email         |
+      | Valid_Data_All_Fields | Invalid_Email_Data_One_Consecutiv_Dot_Domain_SubDomain | Field_Error_Chief_Email         |
+      | Valid_Data_All_Fields | Invalid_Email_Data_One_Emoji                           | Field_Error_Chief_Email         |
+      | Valid_Data_All_Fields | Invalid_Email_Data_One_TLD                             | Field_Error_Chief_Email         |
+      | Valid_Data_All_Fields | Invalid_Email_Data_One_Missing_AT                      | Field_Error_Chief_Email         |
+      | Valid_Data_All_Fields | Invalid_Email_Data_One_Reserved_Domain                 | Field_Error_Chief_Email         |
+      | Valid_Data_All_Fields | Invalid_Email_Data_One_Punycode                        | Field_Error_Chief_Email         |
+      | Valid_Data_All_Fields | Invalid_Email_Data_One_Max_Char                        | Field_Error_Chief_Email         |
+
+
+  @rsp-1863 @saveLaterSponsorEmailValidations
+  Scenario Outline: Validate error messages when user saves the project with invalid sponsor email data on key project roles page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
+    And I fill the project details title page with '<Project_Details_Title>'
+    And I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    And I can see the key project roles page
+    Then I fill the key project roles page with '<Key_Project_Roles>'
+    And I capture the page screenshot
+    Then I click the 'Save_For_Later' button on the 'Key_Project_Roles_Page'
+    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Key_Project_Roles_Page'
+    And I capture the page screenshot
+
+    Examples:
+      | Project_Details_Title | Key_Project_Roles                                      | Field_And_Summary_Error_Message |
+      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Start_With_Dot                  | Field_Error_Sponsor_Email       |
+      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Double_Dot                      | Field_Error_Sponsor_Email       |
+      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Space                           | Field_Error_Sponsor_Email       |
+      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Wrong_AT                        | Field_Error_Sponsor_Email       |
+      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Less_Greater_Symbols            | Field_Error_Sponsor_Email       |
+      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Colon                           | Field_Error_Sponsor_Email       |
+      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Semi_Colon                      | Field_Error_Sponsor_Email       |
+      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Comma                           | Field_Error_Sponsor_Email       |
+      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Start_With_Hyphen               | Field_Error_Sponsor_Email       |
+      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Hyphen_Before_Domain            | Field_Error_Sponsor_Email       |
+      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Double_Dot_Domain               | Field_Error_Sponsor_Email       |
+      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Exclamation_Domain              | Field_Error_Sponsor_Email       |
+      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Unicode                         | Field_Error_Sponsor_Email       |
+      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Single_Quote_Before_AT          | Field_Error_Sponsor_Email       |
+      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Domain_Exceed_Max               | Field_Error_Sponsor_Email       |
+      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Local_Part_Max                  | Field_Error_Sponsor_Email       |
+      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Consecutive_Dot_Domain          | Field_Error_Sponsor_Email       |
+      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Consecutive_Dot_SubDomain       | Field_Error_Sponsor_Email       |
+      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Consecutiv_Dot_Domain_SubDomain | Field_Error_Sponsor_Email       |
+      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Emoji                           | Field_Error_Sponsor_Email       |
+      | Valid_Data_All_Fields | Invalid_Email_Data_Two_TLD                             | Field_Error_Sponsor_Email       |
+      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Missing_AT                      | Field_Error_Sponsor_Email       |
+      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Reserved_Domain                 | Field_Error_Sponsor_Email       |
+      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Punycode                        | Field_Error_Sponsor_Email       |
+      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Max_Char                        | Field_Error_Sponsor_Email       |
