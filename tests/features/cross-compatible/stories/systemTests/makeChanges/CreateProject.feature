@@ -14,37 +14,37 @@ Feature: Create Amendment - Create Project
     When I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
     Then I can see the project details iras page
     And I can see the '<Validation_Text>' ui labels on the project details iras page
-    And I fill the project details iras page with '<Project_Details_IRAS>'
+    And I fill the unique iras id in project details iras page
     When I click the '<Navigation_Button_Third>' button on the 'Project_Details_IRAS_Page'
     Then I can see the project details title page
     When I click the '<Navigation_Link>' link on the 'Project_Details_Title_Page'
     Then I can see the project details iras page
-    Then I can see previously saved values for '<Project_Details_IRAS>' displayed on the project details iras page
 
     Examples:
       | Validation_Text | Navigation_Button_First | Navigation_Button_Second | Project_Details_IRAS | Navigation_Button_Third | Navigation_Link |
       | Label_Texts     | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Back            |
       | Label_Texts     | Create_Project_Record   | Start                    | Valid_IRAS_ID_Max    | Save_Continue           | Back            |
 
-  @rsp-1858
+  @rsp-1858 @rsp-1860 @invalidIrasIdValidations
   Scenario Outline: Validate error messages displayed when user amend the project using invalid iras id
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
     And I fill the project details iras page with '<Project_Details_IRAS>'
     When I click the '<Navigation_Button_Third>' button on the 'Project_Details_IRAS_Page'
-    Then I validate '<Field_Error_Message>' and '<Summary_Error_Message>' displayed on project details iras page for '<Project_Details_IRAS>'
+    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Project_Details_IRAS_Page'
 
     Examples:
-      | Navigation_Button_First | Navigation_Button_Second | Project_Details_IRAS             | Navigation_Button_Third | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Letters          | Save_Continue           | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Symbols          | Save_Continue           | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Letters_Symbols  | Save_Continue           | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Min_Length       | Save_Continue           | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Max_Length       | Save_Continue           | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Spaces           | Save_Continue           | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Spaces_Suffix    | Save_Continue           | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Spaces_Prefix    | Save_Continue           | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Spaces_Seperator | Save_Continue           | Field_Error_Message | Summary_Error_Message |
+      | Navigation_Button_First | Navigation_Button_Second | Project_Details_IRAS             | Navigation_Button_Third | Field_And_Summary_Error_Message       |
+      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Letters          | Save_Continue           | Field_Error_Message                   |
+      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Symbols          | Save_Continue           | Field_Error_Message                   |
+      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Letters_Symbols  | Save_Continue           | Field_Error_Message                   |
+      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Min_Length       | Save_Continue           | Field_Error_Message_Iras_Id_Length    |
+      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Max_Length       | Save_Continue           | Field_Error_Message                   |
+      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Spaces           | Save_Continue           | Field_Error_Message_Iras_Id_Mandatory |
+      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Spaces_Suffix    | Save_Continue           | Field_Error_Message                   |
+      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Spaces_Prefix    | Save_Continue           | Field_Error_Message                   |
+      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Spaces_Seperator | Save_Continue           | Field_Error_Message                   |
+      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Blank            | Save_Continue           | Field_Error_Message_Iras_Id_Mandatory |
 
   @rsp-1858
   Scenario Outline: Validate breadcrumb navigations in project details iras id page
@@ -62,7 +62,7 @@ Feature: Create Amendment - Create Project
   Scenario Outline: Validate user is able to fill project details page for short project title and project end date
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
-    And I fill the project details iras page with '<Project_Details_IRAS>'
+    And I fill the unique iras id in project details iras page
     When I click the '<Navigation_Button_Third>' button on the 'Project_Details_IRAS_Page'
     Then I can see the project details title page
     Then I can see the '<Validation_Text>' ui labels on the project details title page
@@ -91,7 +91,7 @@ Feature: Create Amendment - Create Project
   Scenario Outline: Validate error messages displayed when user fill invalid data for short project title and project end date
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
-    And I fill the project details iras page with '<Project_Details_IRAS>'
+    And I fill the unique iras id in project details iras page
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     When I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
@@ -118,7 +118,7 @@ Feature: Create Amendment - Create Project
   Scenario Outline: Validate error messages displayed when user fill todays date for project end date
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
-    And I fill the project details iras page with '<Project_Details_IRAS>'
+    And I fill the unique iras id in project details iras page
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_IRAS_Page'
     And I fill todays date for planned project end date in project details title page
     When I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
@@ -132,7 +132,7 @@ Feature: Create Amendment - Create Project
   Scenario Outline: Validate breadcrumb navigations in project details short project title page
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
-    And I fill the project details iras page with '<Project_Details_IRAS>'
+    And I fill the unique iras id in project details iras page
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_IRAS_Page'
     And I can see the project details title page
     When I click the '<Navigation_Link>' link on the 'Project_Details_Title_Page'
@@ -146,7 +146,7 @@ Feature: Create Amendment - Create Project
   Scenario Outline: Validate user is able to fill key project roles page with valid data
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
-    And I fill the project details iras page with '<Project_Details_IRAS>'
+    And I fill the unique iras id in project details iras page
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     When I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
@@ -196,7 +196,7 @@ Feature: Create Amendment - Create Project
   Scenario Outline: Validate error messages displayed when user inputs invalid data in key project roles page
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
-    And I fill the project details iras page with '<Project_Details_IRAS>'
+    And I fill the unique iras id in project details iras page
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
@@ -239,7 +239,7 @@ Feature: Create Amendment - Create Project
   Scenario Outline: Validate breadcrumb navigations in key project roles page
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
-    And I fill the project details iras page with '<Project_Details_IRAS>'
+    And I fill the unique iras id in project details iras page
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
@@ -257,7 +257,7 @@ Feature: Create Amendment - Create Project
   Scenario Outline: Validate user is able to fill research locations page
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
-    And I fill the project details iras page with '<Project_Details_IRAS>'
+    And I fill the unique iras id in project details iras page
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
@@ -284,7 +284,7 @@ Feature: Create Amendment - Create Project
   Scenario Outline: Validate lead nation radio option when javascript is enabled
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
-    And I fill the project details iras page with '<Project_Details_IRAS>'
+    And I fill the unique iras id in project details iras page
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
@@ -303,7 +303,7 @@ Feature: Create Amendment - Create Project
   Scenario Outline: Validate lead nation radio option when javascript is disabled
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
-    And I fill the project details iras page with '<Project_Details_IRAS>'
+    And I fill the unique iras id in project details iras page
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
@@ -321,7 +321,7 @@ Feature: Create Amendment - Create Project
   Scenario Outline: Validate breadcrumb navigations in research locations page
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
-    And I fill the project details iras page with '<Project_Details_IRAS>'
+    And I fill the unique iras id in project details iras page
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
@@ -334,3 +334,24 @@ Feature: Create Amendment - Create Project
     Examples:
       | Navigation_Button_First | Navigation_Button_Second | Project_Details_IRAS | Navigation_Button_Third | Project_Details_Title | Key_Project_Roles     | Navigation_Link |
       | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Valid_Data_All_Fields | Valid_Data_All_Fields | Back            |
+
+  @rsp-1860 @duplicateIrasIdValidation
+  Scenario Outline: Verify the duplicate IRAS ID error message when user enters the existing IRAS ID
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    Then I can see the project details iras page
+    And I fill the unique iras id in project details iras page
+    And I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
+    Then I can see the project details title page
+    And  I have navigated to the my research projects page
+    And I can see the my research projects page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    Then I can see the project details iras page
+    And I fill the existing iras id in project details iras page
+    When I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
+    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Project_Details_IRAS_Page'
+
+    Examples:
+      | Project_Details_IRAS      | Field_And_Summary_Error_Message       |
+      | Invalid_IRAS_ID_Duplicate | Field_Error_Message_Iras_Id_Duplicate |

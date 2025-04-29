@@ -394,6 +394,7 @@ export default class CommonItemsPage {
       await expect(otherLocator).toHaveText(errorMessageFieldDataset[key]);
     }
   }
+
   async validateUIComponentValues<PageObject>(dataset: JSON, key: string, page: PageObject) {
     const locator: Locator = page[key];
     const typeAttribute = await locator.first().getAttribute('type');
