@@ -407,15 +407,19 @@ Then(
     pageKey: string
   ) => {
     let errorMessageFieldDataset: any;
+    let page: any;
     if (pageKey === 'Create_User_Profile_Page') {
       errorMessageFieldDataset =
         createUserProfilePage.createUserProfilePageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = createUserProfilePage;
     } else if (pageKey === 'Edit_User_Profile_Page') {
       errorMessageFieldDataset =
         editUserProfilePage.editUserProfilePageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = editUserProfilePage;
     } else if (pageKey == 'Project_Details_IRAS_Page') {
       errorMessageFieldDataset =
         projectDetailsIRASPage.projectDetailsIRASPageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = projectDetailsIRASPage;
     }
     await expect(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
     const allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset);
@@ -423,9 +427,9 @@ Then(
     expect(summaryErrorActualValues).toEqual(allSummaryErrorExpectedValues);
     for (const key in errorMessageFieldDataset) {
       if (Object.prototype.hasOwnProperty.call(errorMessageFieldDataset, key)) {
-        const fieldErrorMessagesActualValues = await commonItemsPage.getFieldErrorMessages(key, createUserProfilePage);
+        const fieldErrorMessagesActualValues = await commonItemsPage.getFieldErrorMessages(key, page);
         expect(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
-        const element = await commonItemsPage.checkViewport(errorMessageFieldDataset, key, createUserProfilePage);
+        const element = await commonItemsPage.checkViewport(errorMessageFieldDataset, key, page);
         expect(element).toBeInViewport();
       }
     }
