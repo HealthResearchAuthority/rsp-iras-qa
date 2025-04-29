@@ -386,9 +386,9 @@ Feature: Create Amendment - Create Project
     And I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    Then I fill the key project roles page with '<Key_Project_Roles>'
+    And I fill the key project roles page with '<Key_Project_Roles>'
     And I capture the page screenshot
-    Then I click the 'Save_For_Later' button on the 'Key_Project_Roles_Page'
+    When I click the 'Save_For_Later' button on the 'Key_Project_Roles_Page'
     Then I can see the project overview save for later page
     And I can see the short project title on project overview save for later page for '<Project_Details_Title>'
     When I click the 'Project_Details' link on the 'Project_Overview_Save_For_Later_Page'
@@ -410,9 +410,9 @@ Feature: Create Amendment - Create Project
     And I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    Then I fill the key project roles page with '<Key_Project_Roles>'
+    And  I fill the key project roles page with '<Key_Project_Roles>'
     And I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
-    Then I fill the research locations page with '<Research_Locations>'
+    And I fill the research locations page with '<Research_Locations>'
     And I click the 'Save_For_Later' button on the 'Research_Locations_Page'
     Then I can see the project overview save for later page
     And I can see the short project title on project overview save for later page for '<Project_Details_Title>'
@@ -466,7 +466,7 @@ Feature: Create Amendment - Create Project
     And I can see the key project roles page
     Then I fill the key project roles page with '<Key_Project_Roles>'
     And I capture the page screenshot
-    Then I click the 'Save_For_Later' button on the 'Key_Project_Roles_Page'
+    And  I click the 'Save_For_Later' button on the 'Key_Project_Roles_Page'
     Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Key_Project_Roles_Page'
     And I capture the page screenshot
 
@@ -510,7 +510,7 @@ Feature: Create Amendment - Create Project
     And I can see the key project roles page
     Then I fill the key project roles page with '<Key_Project_Roles>'
     And I capture the page screenshot
-    Then I click the 'Save_For_Later' button on the 'Key_Project_Roles_Page'
+    And  I click the 'Save_For_Later' button on the 'Key_Project_Roles_Page'
     Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Key_Project_Roles_Page'
     And I capture the page screenshot
 
