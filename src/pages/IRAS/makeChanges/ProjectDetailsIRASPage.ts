@@ -17,7 +17,9 @@ export default class ProjectDetailsIRASPage {
     this.projectDetailsIRASPageTestData = projectDetailsIRASPageTestData;
 
     //Locators
-    this.pageHeading = this.page.getByTestId('title');
+    this.pageHeading = this.page
+      .getByRole('heading')
+      .getByText(this.projectDetailsIRASPageTestData.Project_Details_IRAS_Page.heading, { exact: true });
     this.iras_textbox_label = this.page.locator('label[for="IQA0001_Text"]');
     this.iras_textbox_hint = this.page.getByTestId('rule-hint');
     this.iras_id_text = this.page.getByTestId('IQA0001_Text');
@@ -27,6 +29,5 @@ export default class ProjectDetailsIRASPage {
   //Page Methods
   async assertOnProjectDetailsIRASPage() {
     await expect(this.pageHeading).toBeVisible();
-    await expect(this.pageHeading).toHaveText(this.projectDetailsIRASPageTestData.Project_Details_IRAS_Page.heading);
   }
 }

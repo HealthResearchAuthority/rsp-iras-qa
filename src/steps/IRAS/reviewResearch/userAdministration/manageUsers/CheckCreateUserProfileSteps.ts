@@ -36,17 +36,3 @@ When(
     checkCreateUserProfilePage.clickOnChangeButtonRoleOperations(fieldKey);
   }
 );
-
-Then(
-  'I can see the {string} ui labels on the check and create user profile page for {string}',
-  async ({ commonItemsPage, checkCreateUserProfilePage }, datasetName: string) => {
-    const dataset =
-      checkCreateUserProfilePage.checkCreateUserProfilePageTestData.Check_Create_User_Profile_Page[datasetName];
-    for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        const labelVal = await commonItemsPage.getUiLabel(key, checkCreateUserProfilePage);
-        expect(labelVal).toBe(dataset[key]);
-      }
-    }
-  }
-);

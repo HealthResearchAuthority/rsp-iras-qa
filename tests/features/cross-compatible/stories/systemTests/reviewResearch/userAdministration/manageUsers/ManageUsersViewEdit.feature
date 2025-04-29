@@ -160,7 +160,7 @@ Feature: User Administration: Manage user profiles, view and edit user profile
             | email_address_text | Operations | ACTIVE | Original_Email_Address_Text_Three | Valid_Email_Data_Number               |
 
 
-    @EditUserProfileVerifyErrorMessagesInvalidData
+    @rsp-3122 @VerifyErrorMessagesInvalidData @EditUserProfileVerifyErrorMessagesInvalidData
     Scenario Outline: Validate error messages are displayed for invalid data in edit user profile page
         Validate proper error messages are displayed for missing mandatory fields-First name,Last name,Email address-Country,Access required
         Validate proper error messages are displayed for invalid character limit-Title,First name,Last name,Email address,Telephone,Organisation,Job title

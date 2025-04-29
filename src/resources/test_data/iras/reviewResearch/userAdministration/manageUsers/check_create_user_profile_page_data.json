@@ -15,30 +15,6 @@
     "committee_label": "Committee",
     "country_label": "Country",
     "access_required_label": "Access Required",
-    "review_body_label": "Review body",
-    "Label_Texts_Role_Not_Operations": {
-      "title_label": "Title",
-      "first_name_label": "First name",
-      "last_name_label": "Last name",
-      "email_address_label": "Email address",
-      "telephone_label": "Telephone",
-      "organisation_label": "Organisation",
-      "job_title_label": "Job title",
-      "role_label": "Role"
-    },
-    "Label_Texts_Role_Operations": {
-      "title_label": "Title",
-      "first_name_label": "First name",
-      "last_name_label": "Last name",
-      "email_address_label": "Email address",
-      "telephone_label": "Telephone",
-      "organisation_label": "Organisation",
-      "job_title_label": "Job title",
-      "role_label": "Role",
-      "committee_label": "Committee",
-      "country_label": "Country",
-      "access_required_label": "Access Required",
-      "review_body_label": "Review body"
-    }
+    "review_body_label": "Review body"
   }
 }

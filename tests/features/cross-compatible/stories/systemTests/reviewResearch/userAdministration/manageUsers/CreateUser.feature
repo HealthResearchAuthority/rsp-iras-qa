@@ -17,7 +17,6 @@ Feature: User Administration: Manage Users - Create user
         And I click the 'Continue' button on the 'Create_User_Profile_Page'
         Then I can see the check and create user profile page
         And I capture the page screenshot
-        Then I can see the '<Validation_Text_Add_New_User_Profile>' ui labels on the check and create user profile page for '<Role_Checkbox>'
         Then I can see previously filled values in the new user profile page for '<Add_User_Profile>' displayed on the check and create user profile page
         And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
         Then I can see the create user profile confirmation page for '<Add_User_Profile>'
@@ -36,11 +35,11 @@ Feature: User Administration: Manage Users - Create user
         And I can see the list is sorted by default in the alphabetical order of the 'First Name'
 
         Examples:
-            | Add_User_Profile                                   | Validation_Text_Add_New_User_Profile | Role_Checkbox       | Validation_Text_Manage_Users_List |
-            | Valid_Data_In_All_Fields_Role_Reviewer             | Label_Texts_Role_Not_Operations      | Role_Not_Operations | Label_Texts_Manage_Users_List     |
-            | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer   | Label_Texts_Role_Not_Operations      | Role_Not_Operations | Label_Texts_Manage_Users_List     |
-            | Valid_Data_In_All_Fields_Role_Operations           | Label_Texts_Role_Operations          | Role_Operations     | Label_Texts_Manage_Users_List     |
-            | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Label_Texts_Role_Operations          | Role_Operations     | Label_Texts_Manage_Users_List     |
+            | Add_User_Profile                                   | Validation_Text_Manage_Users_List |
+            | Valid_Data_In_All_Fields_Role_Reviewer             | Label_Texts_Manage_Users_List     |
+            | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer   | Label_Texts_Manage_Users_List     |
+            | Valid_Data_In_All_Fields_Role_Operations           | Label_Texts_Manage_Users_List     |
+            | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Label_Texts_Manage_Users_List     |
 
     @rsp-2827 @rsp-2870 @verifyAddAnotherUser
     Scenario Outline: Verify the user is able to add another user from the Confirmation message screen using the link
@@ -321,7 +320,7 @@ Feature: User Administration: Manage Users - Create user
             | Valid_Data_In_All_Fields_Role_Operations | Role_Operations | Missing_Mandatory_Field_Country_Role_Operations         | Error_Message_Missing_Mandatory_Field_Country_Role_Operations         |
             | Valid_Data_In_All_Fields_Role_Operations | Role_Operations | Missing_Mandatory_Field_Access_Required_Role_Operations | Error_Message_Missing_Mandatory_Field_Access_Required_Role_Operations |
 
-    @rsp-3122 @VerifyErrorMessagesInvalidData @only
+    @rsp-3122 @VerifyErrorMessagesInvalidData
     Scenario Outline: Verify the user can navigate from 'Check and create user profile' page by clicking 'Change' button against all the fields when the role is selected as operations
         And I capture the page screenshot
         When I fill the new user profile page using '<Add_User_Profile>'

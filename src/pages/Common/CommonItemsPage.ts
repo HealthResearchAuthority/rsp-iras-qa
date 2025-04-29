@@ -75,7 +75,7 @@ export default class CommonItemsPage {
     this.govUkCheckboxes = this.page.locator('.govuk-checkboxes');
     this.govUkCheckboxItem = this.govUkCheckboxes.locator('.govuk-checkboxes__item');
     this.govUkLink = this.page.getByRole('link');
-    this.fieldGroup = this.page.locator('.govuk-form-group');
+    this.fieldGroup = this.page.locator('.govuk-form-group--error');
     this.govUkFieldValidationError = this.page.locator('.govuk-error-message.field-validation-error');
     this.qSetProgressBar = page.locator('.progress-container');
     this.qSetProgressBarStage = this.qSetProgressBar.locator('.stage');

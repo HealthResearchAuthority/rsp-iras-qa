@@ -14,7 +14,6 @@ export default class MyResearchProjectsPage {
     this.myResearchProjectsPageTestData = myResearchProjectsPageTestData;
 
     //Locators
-    // this.pageHeading = this.page.getByTestId('title');
     this.pageHeading = this.page
       .getByRole('heading')
       .getByText(this.myResearchProjectsPageTestData.My_Research_Projects_Page.heading, { exact: true });
@@ -28,6 +27,5 @@ export default class MyResearchProjectsPage {
 
   async assertOnMyResearchProjectsPage() {
     await expect(this.pageHeading).toBeVisible();
-    // await expect(this.pageHeading).toHaveText(this.myResearchProjectsPageTestData.My_Research_Projects_Page.heading);
   }
 }
