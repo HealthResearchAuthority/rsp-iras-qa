@@ -200,7 +200,7 @@
     "Invalid_Character_Limit": {
       "organisation_name_text": "QA Automation HSC Research and Development",
       "country_checkbox": ["Wales"],
-      "email_address_text": "averylongemailaddresscreatedforillustrationpurposesonlyandnotmeanttobeusedinreallife@exampledomain.comaverylongemailaddresscreatedforillustrationpurposesonlyandnotmeanttobeusedinreallife@exampledomain.comaverylongemailaddresscreatedforillustrationpurposesonlyandnotmeanttobeusedinreallife@exampledomain55.com",
+      "email_address_text": "averylongemailaddresscreatedforillustrationpurposesonlyandnotmeanttobeusedinreallifeaverylongemailaddresscreatedforillustrationpurposesonlyandnotmeanttobeusedinreallifeaverylongemailaddresscreatedforillustrationpurposesonlyandnotmeanttobeusedinreallife@exampledomain.com",
       "description_text": ""
     },
     "Incorrect_Email_Format": {
@@ -360,12 +360,17 @@
       "description_text": ""
     },
     "Validation": {
-      "Mandatory_Field": "Field is mandatory",
+      "All_Mandatory_Fields": {
+        "organisation_name_error": "organisation name",
+        "country_error": "country",
+        "email_address_error": "email address"
+      },
+      "Mandatory_Field": "Enter",
       "Select_Country": "Select at least one country.",
-      "Max_Org_Chars": "Max 250 characters allowed",
-      "Max_Words": "The description cannot exceed 500 words.",
-      "Max_Email_Chars": "Max 255 characters allowed",
-      "Email_Format": "Invalid email format"
+      "Max_Chars": "must be 250 characters or less",
+      "Max_Description_Words": "The description must be 250 words or less",
+      "Max_Description_Reason": "You have 251 words too many",
+      "Email_Format": "Enter an email address in the correct format"
     },
     "Valid_Data_In_All_Fields_Disabled": {
       "organisation_name_text": "QA Automation HSC Research and Development 20250406050232641",
