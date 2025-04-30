@@ -290,7 +290,7 @@ Feature: User Administration: Manage Users - Create user
             | Invalid_Email_Data_Punycode                               | Error_Message_Incorrect_Format_field_Email_Address                      |
 
     @rsp-3122 @VerifyErrorMessagesInvalidData @VerifyErrorInvalidDataCreateUserFromCheckCreateUserProfileBackLink
-    Scenario Outline: Validate error messages are displayed for invalid data in create user profile page when the user navigated from 'Check and create user profile' page by clicking 'Back' link
+    Scenario Outline: Validation messages are displayed for invalid data entered after the user has navigated back from 'Check and create user profile' page
         When I fill the new user profile page using '<Add_User_Profile>'
         And I click the 'Continue' button on the 'Create_User_Profile_Page'
         Then I can see the check and create user profile page
