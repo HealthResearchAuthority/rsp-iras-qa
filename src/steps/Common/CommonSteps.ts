@@ -188,7 +188,13 @@ Then('I can see a {string} button on the {string}', async ({ commonItemsPage }, 
 Given(
   'I click the {string} link on the {string}',
   async (
-    { commonItemsPage, manageUsersPage, userProfilePage, createUserProfileConfirmationPage },
+    {
+      commonItemsPage,
+      manageUsersPage,
+      userProfilePage,
+      createUserProfileConfirmationPage,
+      checkCreateUserProfilePage,
+    },
     linkKey: string,
     pageKey: string
   ) => {
@@ -203,6 +209,8 @@ Given(
       await createUserProfileConfirmationPage.back_to_manage_user_link.click(); //work around for now >> to click on Back_To_Manage_Users link ..# "Back to Manage Users" in app, "Back to Manage users" in figma >>clarification needed
     } else if (pageKey === 'Manage_Review_Bodies_Page' && linkKey === 'View_Edit') {
       await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).first().click();
+    } else if (pageKey === 'Check_Create_User_Profile_Page' && linkKey === 'Back') {
+      await checkCreateUserProfilePage.back_button.click(); //work around for now >> to click on Back link
     } else {
       await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
     }
@@ -358,6 +366,23 @@ Then('I navigate {string}', async ({ commonItemsPage }, navigation: string) => {
 });
 
 Then(
+  'I can see the default sort should be the most recent entry first based on date and time',
+  async ({ commonItemsPage }) => {
+    const auditLog = await commonItemsPage.getAuditLog();
+    const timeValues: any = auditLog.get('timeValues');
+    const timeDates = timeValues.map((time: any) => new Date(time));
+    const isSortedDesc = timeDates.every((time: number, i: number, arr: number[]) => {
+      if (i === 0) {
+        return true;
+      } else {
+        return arr[i - 1] >= time;
+      }
+    });
+    expect(isSortedDesc).toBe(true);
+  }
+);
+
+Then(
   'I capture the current time for {string}',
   async ({ auditHistoryReviewBodyPage, auditHistoryUserPage }, page: string) => {
     const currentTime = await getCurrentTimeFormatted();
@@ -377,13 +402,28 @@ Then(
 Then(
   'I validate {string} displayed on {string}',
   async (
-    { commonItemsPage, projectDetailsIRASPage, projectDetailsTitlePage, keyProjectRolesPage },
+    {
+      commonItemsPage,
+      createUserProfilePage,
+      editUserProfilePage,
+      projectDetailsIRASPage,
+      projectDetailsTitlePage,
+      keyProjectRolesPage,
+    },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
   ) => {
     let errorMessageFieldDataset: any;
     let page: any;
-    if (pageKey == 'Project_Details_IRAS_Page') {
+    if (pageKey === 'Create_User_Profile_Page') {
+      errorMessageFieldDataset =
+        createUserProfilePage.createUserProfilePageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = createUserProfilePage;
+    } else if (pageKey === 'Edit_User_Profile_Page') {
+      errorMessageFieldDataset =
+        editUserProfilePage.editUserProfilePageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = editUserProfilePage;
+    } else if (pageKey == 'Project_Details_IRAS_Page') {
       errorMessageFieldDataset =
         projectDetailsIRASPage.projectDetailsIRASPageTestData[errorMessageFieldAndSummaryDatasetName];
       page = projectDetailsIRASPage;
