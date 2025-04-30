@@ -18,6 +18,9 @@
   "Field_Error_Message_Iras_Id_Length": {
     "iras_id_text": "IRAS ID must be 4 to 7 digits"
   },
+  "Field_Error_Message_Iras_Id_Leading_Zeros": {
+    "iras_id_text": "IRAS ID cannot start with '0'"
+  },
   "Valid_IRAS_ID_Max": {
     "iras_id_text": "1234567"
   },
@@ -58,6 +61,6 @@
     "iras_id_text": ""
   },
   "Invalid_IRAS_ID_Duplicate": {
-    "iras_id_text": "3379"
+    "iras_id_text": "1812231"
   }
 }

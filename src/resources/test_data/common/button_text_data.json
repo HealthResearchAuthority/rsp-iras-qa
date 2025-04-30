@@ -30,13 +30,16 @@
     "Save_Continue": "Save and continue"
   },
   "Project_Details_Title_Page": {
-    "Save_Continue": "Save and continue"
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later"
   },
   "Research_Locations_Page": {
-    "Save_Continue": "Save and continue"
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later"
   },
   "Key_Project_Roles_Page": {
-    "Save_Continue": "Save and continue"
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later"
   },
   "Create_User_Profile_Page": {
     "Continue": "Continue"
