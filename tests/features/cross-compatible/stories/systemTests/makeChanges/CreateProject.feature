@@ -364,14 +364,18 @@ Feature: Create Amendment - Create Project
     And I click the 'Start' button on the 'Create_Project_Record_Page'
     Then I can see the project details iras page
     And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
     Then I can see the project details title page
     And I fill the project details title page with '<Project_Details_Title>'
+    And I capture the page screenshot
     When I click the 'Save_For_Later' button on the 'Project_Details_Title_Page'
     Then I can see the project overview save for later page
+    And I capture the page screenshot
     And I can see the short project title on project overview save for later page for '<Project_Details_Title>'
     When I click the 'Project_Details' link on the 'Project_Overview_Save_For_Later_Page'
     And I can see the project details title page
+    And I capture the page screenshot
     Then I can see previously saved values for '<Project_Details_Title>' displayed on the project details title page
 
     Examples:
@@ -387,18 +391,23 @@ Feature: Create Amendment - Create Project
     And I click the 'Start' button on the 'Create_Project_Record_Page'
     Then I can see the project details iras page
     And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
+    And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
     And I fill the key project roles page with '<Key_Project_Roles>'
     And I capture the page screenshot
     When I click the 'Save_For_Later' button on the 'Key_Project_Roles_Page'
     Then I can see the project overview save for later page
+    And I capture the page screenshot
     And I can see the short project title on project overview save for later page for '<Project_Details_Title>'
     When I click the 'Project_Details' link on the 'Project_Overview_Save_For_Later_Page'
     Then I can see the project details title page
+    And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
     And I can see the key project roles page
+    And I capture the page screenshot
     Then I can see previously saved values for '<Key_Project_Roles>' displayed on the key project roles page
 
     Examples:
@@ -414,20 +423,28 @@ Feature: Create Amendment - Create Project
     And I click the 'Start' button on the 'Create_Project_Record_Page'
     Then I can see the project details iras page
     And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
+    And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
     And  I fill the key project roles page with '<Key_Project_Roles>'
+    And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
     And I fill the research locations page with '<Research_Locations>'
+    And I capture the page screenshot
     And I click the 'Save_For_Later' button on the 'Research_Locations_Page'
     Then I can see the project overview save for later page
+    And I capture the page screenshot
     And I can see the short project title on project overview save for later page for '<Project_Details_Title>'
     When I click the 'Project_Details' link on the 'Project_Overview_Save_For_Later_Page'
     Then I can see the project details title page
+    And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
     And I can see the key project roles page
+    And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    And I capture the page screenshot
     Then I can see previously saved values for '<Research_Locations>' displayed on the research locations page
 
     Examples:
@@ -442,9 +459,11 @@ Feature: Create Amendment - Create Project
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     When I click the 'Save_For_Later' button on the 'Project_Details_Title_Page'
+    And I capture the page screenshot
     Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Project_Details_Title_Page'
 
     Examples:
@@ -470,8 +489,10 @@ Feature: Create Amendment - Create Project
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
+    And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
     And I can see the key project roles page
     Then I fill the key project roles page with '<Key_Project_Roles>'
@@ -514,8 +535,10 @@ Feature: Create Amendment - Create Project
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
+    And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
     And I can see the key project roles page
     Then I fill the key project roles page with '<Key_Project_Roles>'

@@ -52,6 +52,7 @@ export default class CommonItemsPage {
   readonly errorMessageSummaryLabel: Locator;
   readonly summaryErrorLinks: Locator;
   readonly fieldGroup: Locator;
+  readonly errorFieldGroup: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -68,7 +69,8 @@ export default class CommonItemsPage {
     this.govUkCheckboxes = this.page.locator('.govuk-checkboxes');
     this.govUkCheckboxItem = this.govUkCheckboxes.locator('.govuk-checkboxes__item');
     this.govUkLink = this.page.getByRole('link');
-    this.fieldGroup = this.page.locator('.govuk-form-group--error');
+    this.fieldGroup = this.page.locator('.govuk-form-group');
+    this.errorFieldGroup = this.page.locator('.govuk-form-group--error');
     this.govUkFieldValidationError = this.page.locator('.govuk-error-message.field-validation-error');
     this.qSetProgressBar = page.locator('.progress-container');
     this.qSetProgressBarStage = this.qSetProgressBar.locator('.stage');
@@ -462,7 +464,7 @@ export default class CommonItemsPage {
 
   async getFieldErrorMessages<PageObject>(key: string, page: PageObject) {
     const element = await page[key].first();
-    const fieldErrorLocator = this.fieldGroup.filter({ has: element }).locator(this.errorMessageFieldLabel);
+    const fieldErrorLocator = this.errorFieldGroup.filter({ has: element }).locator(this.errorMessageFieldLabel);
     return await fieldErrorLocator.textContent();
   }
 
