@@ -1,0 +1,15 @@
+{
+  "Review_Body_User_List_Page": {
+    "page_heading": "Users for ",
+    "guidance_text": "Search, assign or remove users from this review body",
+    "search_box_label": "Find a user",
+    "Column_Header_Labels": {
+      "first_name_label": "First name",
+      "last_name_label": "Last name",
+      "email_address_label": "Email address",
+      "status_label": "Status",
+      "last_logged_in_label": "Last logged in",
+      "actions_label": "Action"
+    }
+  }
+}
