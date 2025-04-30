@@ -2,7 +2,6 @@ import { expect, Locator, Page } from '@playwright/test';
 import * as buttonTextData from '../../resources/test_data/common/button_text_data.json';
 import * as linkTextData from '../../resources/test_data/common/link_text_data.json';
 import * as questionSetData from '../../resources/test_data/common/question_set_data.json';
-import * as auditHistoryReviewBodyPageTestData from '../../resources/test_data/iras/reviewResearch/userAdministration/manageReviewBodies/audit_history_review_body_page_data.json';
 import * as commonTestData from '../../resources/test_data/common/common_data.json';
 
 import fs from 'fs';
@@ -24,7 +23,6 @@ export default class CommonItemsPage {
   readonly buttonTextData: typeof buttonTextData;
   readonly linkTextData: typeof linkTextData;
   readonly questionSetData: typeof questionSetData;
-  readonly auditHistoryReviewBodyPageTestData: typeof auditHistoryReviewBodyPageTestData;
   readonly commonTestData: typeof commonTestData;
   readonly showAllSectionsAccordion: Locator;
   readonly genericButton: Locator;
@@ -65,7 +63,6 @@ export default class CommonItemsPage {
     this.buttonTextData = buttonTextData;
     this.linkTextData = linkTextData;
     this.questionSetData = questionSetData;
-    this.auditHistoryReviewBodyPageTestData = auditHistoryReviewBodyPageTestData;
     this.commonTestData = commonTestData;
 
     //Locators
@@ -96,9 +93,7 @@ export default class CommonItemsPage {
     this.bannerQuestionSet = this.bannerNavBar.getByText(this.linkTextData.Banner.Question_Set, { exact: true });
     this.bannerSystemAdmin = this.bannerNavBar.getByText(this.linkTextData.Banner.System_Admin, { exact: true });
     this.bannerMyApplications = this.bannerNavBar.getByText(this.linkTextData.Banner.My_Applications, { exact: true });
-    this.next_button = this.page
-      .getByRole('link')
-      .getByText(this.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.next_button, { exact: true });
+    this.next_button = this.page.getByRole('link').getByText(this.commonTestData.next_button, { exact: true });
     this.errorMessageFieldLabel = page.locator('[class$="field-validation-error"]');
     this.errorMessageSummaryLabel = this.page
       .getByRole('heading')
