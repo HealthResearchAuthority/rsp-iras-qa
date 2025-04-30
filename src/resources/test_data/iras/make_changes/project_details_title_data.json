@@ -39,6 +39,21 @@
   "Date_Year_Field_Error_Message": {
     "planned_project_end_year_text": "The date should be a valid date and in future"
   },
+  "Valid_Data_All_Empty_Fields": {
+    "short_project_title_text": "",
+    "planned_project_end_day_text": "",
+    "planned_project_end_month_text": "",
+    "planned_project_end_year_text": ""
+  },
+  "Valid_Data_Only_Title_Field": {
+    "short_project_title_text": "QA_Automation - This is a short project title"
+  },
+  "Valid_Data_Only_Date_Fields": {
+    "short_project_title_text": "",
+    "planned_project_end_day_text": "1",
+    "planned_project_end_month_text": "1",
+    "planned_project_end_year_text": "2030"
+  },
   "Valid_Data_All_Fields": {
     "short_project_title_text": "QA_Automation - This is a short project title",
     "planned_project_end_day_text": "1",

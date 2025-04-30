@@ -34,17 +34,18 @@ Feature: Create Amendment - Create Project
     Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Project_Details_IRAS_Page'
 
     Examples:
-      | Navigation_Button_First | Navigation_Button_Second | Project_Details_IRAS             | Navigation_Button_Third | Field_And_Summary_Error_Message       |
-      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Letters          | Save_Continue           | Field_Error_Message                   |
-      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Symbols          | Save_Continue           | Field_Error_Message                   |
-      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Letters_Symbols  | Save_Continue           | Field_Error_Message                   |
-      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Min_Length       | Save_Continue           | Field_Error_Message_Iras_Id_Length    |
-      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Max_Length       | Save_Continue           | Field_Error_Message                   |
-      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Spaces           | Save_Continue           | Field_Error_Message_Iras_Id_Mandatory |
-      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Spaces_Suffix    | Save_Continue           | Field_Error_Message                   |
-      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Spaces_Prefix    | Save_Continue           | Field_Error_Message                   |
-      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Spaces_Seperator | Save_Continue           | Field_Error_Message                   |
-      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Blank            | Save_Continue           | Field_Error_Message_Iras_Id_Mandatory |
+      | Navigation_Button_First | Navigation_Button_Second | Project_Details_IRAS             | Navigation_Button_Third | Field_And_Summary_Error_Message           |
+      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Letters          | Save_Continue           | Field_Error_Message                       |
+      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Symbols          | Save_Continue           | Field_Error_Message                       |
+      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Letters_Symbols  | Save_Continue           | Field_Error_Message                       |
+      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Min_Length       | Save_Continue           | Field_Error_Message_Iras_Id_Length        |
+      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Max_Length       | Save_Continue           | Field_Error_Message                       |
+      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Leading_Zeros    | Save_Continue           | Field_Error_Message_Iras_Id_Leading_Zeros |
+      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Spaces           | Save_Continue           | Field_Error_Message_Iras_Id_Mandatory     |
+      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Spaces_Suffix    | Save_Continue           | Field_Error_Message                       |
+      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Spaces_Prefix    | Save_Continue           | Field_Error_Message                       |
+      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Spaces_Seperator | Save_Continue           | Field_Error_Message                       |
+      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Blank            | Save_Continue           | Field_Error_Message_Iras_Id_Mandatory     |
 
   @rsp-1858
   Scenario Outline: Validate breadcrumb navigations in project details iras id page
@@ -374,8 +375,11 @@ Feature: Create Amendment - Create Project
     Then I can see previously saved values for '<Project_Details_Title>' displayed on the project details title page
 
     Examples:
-      | Project_Details_Title |
-      | Valid_Data_All_Fields |
+      | Project_Details_Title       |
+      | Valid_Data_All_Fields       |
+      | Valid_Data_All_Empty_Fields |
+      | Valid_Data_Only_Title_Field |
+      | Valid_Data_Only_Date_Fields |
 
   @rsp-1863 @saveLaterProjectRoles
   Scenario Outline: Verify product details are saved when user saves the record on create project - key project roles page
@@ -398,8 +402,11 @@ Feature: Create Amendment - Create Project
     Then I can see previously saved values for '<Key_Project_Roles>' displayed on the key project roles page
 
     Examples:
-      | Project_Details_Title | Key_Project_Roles     |
-      | Valid_Data_All_Fields | Valid_Data_All_Fields |
+      | Project_Details_Title | Key_Project_Roles                        |
+      | Valid_Data_All_Fields | Valid_Data_All_Fields                    |
+      | Valid_Data_All_Fields | Valid_Data_All_Empty_Fields              |
+      | Valid_Data_All_Fields | Valid_Data_Only_Investigator_Email_Field |
+      | Valid_Data_All_Fields | Valid_Data_Only_Sponsor_Email_Field      |
 
   @rsp-1863 @saveLaterProjectLocations
   Scenario Outline: Verify product details are saved when user saves the record on create project - research locations page
@@ -424,8 +431,11 @@ Feature: Create Amendment - Create Project
     Then I can see previously saved values for '<Research_Locations>' displayed on the research locations page
 
     Examples:
-      | Project_Details_Title | Key_Project_Roles     | Research_Locations    |
-      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields |
+      | Project_Details_Title | Key_Project_Roles     | Research_Locations                       |
+      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields                    |
+      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Empty_Fields              |
+      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_Only_Investigator_Email_Field |
+      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_Only_Sponsor_Email_Field      |
 
   @rsp-1863 @saveLaterProjTitleValidations
   Scenario Outline: Validate error messages when user saves the project with invalid data on project title page

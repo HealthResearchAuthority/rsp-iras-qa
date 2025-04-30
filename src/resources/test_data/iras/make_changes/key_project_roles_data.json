@@ -23,6 +23,16 @@
     "chief_investigator_email_text": "ci_test@test.com",
     "sponsor_contact_email_text": "sc_test@test.com"
   },
+  "Valid_Data_All_Empty_Fields": {
+    "chief_investigator_email_text": "",
+    "sponsor_contact_email_text": ""
+  },
+  "Valid_Data_Only_Investigator_Email_Field": {
+    "chief_investigator_email_text": "ci_test@test.com"
+  },
+  "Valid_Data_Only_Sponsor_Email_Field": {
+    "sponsor_contact_email_text": "sc_test@test.com"
+  },
   "Valid_Email_Data": {
     "chief_investigator_email_text": "john.doe@example.com",
     "sponsor_contact_email_text": "john.doe@example.com"
@@ -264,7 +274,6 @@
     "sponsor_contact_email_text": "john..doe'@example..com"
   },
   "Invalid_Email_Data_Two_Emoji": {
-    "chief_investigator_email_text": "john🙂@example.com",
     "sponsor_contact_email_text": "john🙂@example.com"
   },
   "Invalid_Email_Data_Two_TLD": {

@@ -13,6 +13,16 @@
     "is_nhs_hsc_organisation_radio": "Yes",
     "lead_nation_radio": "England"
   },
+  "Valid_Data_All_Empty_Fields": {
+    "nations_participating_checkbox": []
+  },
+  "Valid_Data_Only_Nations_Participating_Field": {
+    "nations_participating_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
+  },
+  "Valid_Data_Only_Nhs_Hsc_Organisation_Field": {
+    "is_nhs_hsc_organisation_radio": "Yes",
+    "lead_nation_radio": "England"
+  },
   "Data_With_No_NHS_HSC": {
     "nations_participating_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
     "is_nhs_hsc_organisation_radio": "No"
