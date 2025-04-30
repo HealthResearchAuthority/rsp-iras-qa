@@ -402,7 +402,14 @@ Then(
 Then(
   'I validate {string} displayed on {string}',
   async (
-    { commonItemsPage, createUserProfilePage, editUserProfilePage, projectDetailsIRASPage },
+    {
+      commonItemsPage,
+      createUserProfilePage,
+      editUserProfilePage,
+      projectDetailsIRASPage,
+      projectDetailsTitlePage,
+      keyProjectRolesPage,
+    },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
   ) => {
@@ -420,6 +427,14 @@ Then(
       errorMessageFieldDataset =
         projectDetailsIRASPage.projectDetailsIRASPageTestData[errorMessageFieldAndSummaryDatasetName];
       page = projectDetailsIRASPage;
+    } else if (pageKey == 'Project_Details_Title_Page') {
+      errorMessageFieldDataset =
+        projectDetailsTitlePage.projectDetailsTitlePageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = projectDetailsTitlePage;
+    } else if (pageKey == 'Key_Project_Roles_Page') {
+      errorMessageFieldDataset =
+        keyProjectRolesPage.keyProjectRolesPageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = keyProjectRolesPage;
     }
     await expect(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
     const allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset);
