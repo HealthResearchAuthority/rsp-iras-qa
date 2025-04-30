@@ -162,9 +162,6 @@ Feature: User Administration: Manage user profiles, view and edit user profile
 
     @rsp-3122 @VerifyErrorMessagesInvalidData @EditUserProfileVerifyErrorMessagesInvalidData
     Scenario Outline: Validate error messages are displayed for invalid data in edit user profile page
-        Validate proper error messages are displayed for missing mandatory fields-First name,Last name,Email address-Country,Access required
-        Validate proper error messages are displayed for invalid character limit-Title,First name,Last name,Email address,Telephone,Organisation,Job title
-        Validate proper error messages are displayed for incorrect format-Email address,Telephone
         And I select a 'QA Automation' User to View and Edit which is '<Status>'
         Then I can see the user profile page
         When I click the '<Edit_User_Field>' change link for '<User_Role>' on the user profile page

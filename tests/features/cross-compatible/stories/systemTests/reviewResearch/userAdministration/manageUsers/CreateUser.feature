@@ -206,8 +206,7 @@ Feature: User Administration: Manage Users - Create user
             | Valid_Data_All_Roles                               | Role       |
             | Valid_Data_No_Roles                                | Role       |
 
-    @rsp-2827 @verifyNoErrorMessagesValidData
-    # few lines commented >> pending clarification>>email validation
+    @rsp-2827 @VerifyNoErrorMessagesValidData @VerifyNoErrorMessagesValidDataCreateUserPage
     Scenario Outline: Validate user is able to fill user profile page with valid data
         Validate email address field with different valid data
         When I fill the new user profile page using '<Add_User_Profile>'
@@ -245,14 +244,8 @@ Feature: User Administration: Manage Users - Create user
             | Valid_Email_Data_Other_Language       |
             | Valid_Email_Data_Domain               |
 
-    @rsp-3122 @VerifyErrorMessagesInvalidData
-    # few lines commented>> pending clarification >> email validation
-    # telephone :- Telephone must be 11 digits or less
-    # telephone incorrect format
+    @rsp-3122 @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage
     Scenario Outline: Validate error messages are displayed for invalid data in create user profile page
-        Validate proper error messages are displayed for missing mandatory fields-First name,Last name,Email address-Country,Access required
-        Validate proper error messages are displayed for invalid character limit-Title,First name,Last name,Email address,Telephone,Organisation,Job title
-        Validate proper error messages are displayed for incorrect format-Email address,Telephone
         When I fill the new user profile page using '<Invalid_Data_User_Profile>' for field validation
         And I click the 'Continue' button on the 'Create_User_Profile_Page'
         Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Create_User_Profile_Page'
@@ -296,8 +289,8 @@ Feature: User Administration: Manage Users - Create user
             | Invalid_Email_Data_Reserved_Domain                        | Error_Message_Incorrect_Format_field_Email_Address                      |
             | Invalid_Email_Data_Punycode                               | Error_Message_Incorrect_Format_field_Email_Address                      |
 
-    @rsp-3122 @VerifyErrorMessagesInvalidData
-    Scenario Outline: Verify the user can navigate from 'Check and create user profile' page to add a new user profile page by clicking 'Back' link
+    @rsp-3122 @VerifyErrorMessagesInvalidData @VerifyErrorInvalidDataCreateUserFromCheckCreateUserProfileBackLink
+    Scenario Outline: Validate error messages are displayed for invalid data in create user profile page when the user navigated from 'Check and create user profile' page by clicking 'Back' link
         When I fill the new user profile page using '<Add_User_Profile>'
         And I click the 'Continue' button on the 'Create_User_Profile_Page'
         Then I can see the check and create user profile page
@@ -320,8 +313,8 @@ Feature: User Administration: Manage Users - Create user
             | Valid_Data_In_All_Fields_Role_Operations | Role_Operations | Missing_Mandatory_Field_Country_Role_Operations         | Error_Message_Missing_Mandatory_Field_Country_Role_Operations         |
             | Valid_Data_In_All_Fields_Role_Operations | Role_Operations | Missing_Mandatory_Field_Access_Required_Role_Operations | Error_Message_Missing_Mandatory_Field_Access_Required_Role_Operations |
 
-    @rsp-3122 @VerifyErrorMessagesInvalidData
-    Scenario Outline: Verify the user can navigate from 'Check and create user profile' page by clicking 'Change' button against all the fields when the role is selected as operations
+    @rsp-3122 @VerifyErrorMessagesInvalidData @VerifyErrorInvalidDataCreateUserFromCheckCreateUserProfileChangeLink
+    Scenario Outline: Validate error messages are displayed for invalid data in create user profile page when the user navigated from 'Check and create user profile' page by clicking 'Change' button against the fields
         And I capture the page screenshot
         When I fill the new user profile page using '<Add_User_Profile>'
         And I capture the page screenshot
