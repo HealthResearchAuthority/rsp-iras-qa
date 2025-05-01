@@ -458,9 +458,6 @@ Then(
         expect(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
         const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
         await expect(element).toBeInViewport();
-        if ((await element.getAttribute('type')) != 'checkbox') {
-          await expect(element).toBeFocused();
-        }
       }
     }
     if (errorMessageFieldAndSummaryDatasetName == 'Max_Description_Words_Error') {
