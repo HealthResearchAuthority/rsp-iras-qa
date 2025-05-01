@@ -11,9 +11,6 @@ export default class CreateReviewBodyPage {
   readonly page_heading: Locator;
   readonly validation_error: Locator;
   readonly char_count_error: Locator;
-  readonly error_summary_alert: Locator;
-  readonly error_summary_alert_heading: Locator;
-  readonly error_summary_list: Locator;
   readonly organisation_name_text: Locator;
   readonly organisation_name_error: Locator;
   readonly email_address_text: Locator;
