@@ -47,6 +47,7 @@
     "Back": "Back"
   },
   "Check_Create_User_Profile_Page": {
+    "Change": "Change",
     "Back": "Back"
   },
   "Create_User_Profile_Confirmation_Page": {
@@ -97,5 +98,8 @@
   },
   "Audit_History_User_Page": {
     "Back": "Back"
+  },
+  "Project_Overview_Save_For_Later_Page": {
+    "Project_Details": "Project details"
   }
 }

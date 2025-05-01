@@ -2,6 +2,8 @@ import { expect, Locator, Page } from '@playwright/test';
 import * as buttonTextData from '../../resources/test_data/common/button_text_data.json';
 import * as linkTextData from '../../resources/test_data/common/link_text_data.json';
 import * as questionSetData from '../../resources/test_data/common/question_set_data.json';
+import * as commonTestData from '../../resources/test_data/common/common_data.json';
+
 import fs from 'fs';
 import path from 'path';
 import ProjectFilterPage from '../IRAS/questionSet/ProjectFilterPage';
@@ -21,6 +23,7 @@ export default class CommonItemsPage {
   readonly buttonTextData: typeof buttonTextData;
   readonly linkTextData: typeof linkTextData;
   readonly questionSetData: typeof questionSetData;
+  readonly commonTestData: typeof commonTestData;
   readonly showAllSectionsAccordion: Locator;
   readonly genericButton: Locator;
   readonly govUkButton: Locator;
@@ -48,6 +51,12 @@ export default class CommonItemsPage {
   readonly alert_box_list_items: Locator;
   readonly errorMessageFieldLabel: Locator;
   readonly errorMessageSummaryLabel: Locator;
+  readonly summaryErrorLinks: Locator;
+  readonly auditTableRows: Locator;
+  readonly hidden_next_button: Locator;
+  readonly next_button: Locator;
+  readonly fieldGroup: Locator;
+  readonly errorFieldGroup: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -55,6 +64,7 @@ export default class CommonItemsPage {
     this.buttonTextData = buttonTextData;
     this.linkTextData = linkTextData;
     this.questionSetData = questionSetData;
+    this.commonTestData = commonTestData;
 
     //Locators
     this.showAllSectionsAccordion = page.locator('.govuk-accordion__show-all"');
@@ -63,12 +73,16 @@ export default class CommonItemsPage {
     this.govUkCheckboxes = this.page.locator('.govuk-checkboxes');
     this.govUkCheckboxItem = this.govUkCheckboxes.locator('.govuk-checkboxes__item');
     this.govUkLink = this.page.getByRole('link');
+    this.fieldGroup = this.page.locator('.govuk-form-group');
+    this.errorFieldGroup = this.page.locator('.govuk-form-group--error');
     this.govUkFieldValidationError = this.page.locator('.govuk-error-message.field-validation-error');
     this.qSetProgressBar = page.locator('.progress-container');
     this.qSetProgressBarStage = this.qSetProgressBar.locator('.stage');
     this.qSetProgressBarActiveStage = this.qSetProgressBar.locator('.stage.active');
     this.qSetProgressBarStageLink = this.qSetProgressBarStage.locator('.stage-label').getByRole('button');
     this.qSetProgressBarActiveStageLink = this.qSetProgressBarActiveStage.locator('.stage-label').getByRole('button');
+    this.auditTableRows = this.page.getByRole('table').getByRole('row');
+    this.hidden_next_button = this.page.locator('[class="govuk-pagination__next"][style="visibility: hidden"]');
     //Banner
     this.bannerNavBar = this.page.getByLabel('Service information');
     this.bannerLoginBtn = this.bannerNavBar.getByText(this.buttonTextData.Banner.Login, { exact: true });
@@ -81,8 +95,14 @@ export default class CommonItemsPage {
     this.bannerQuestionSet = this.bannerNavBar.getByText(this.linkTextData.Banner.Question_Set, { exact: true });
     this.bannerSystemAdmin = this.bannerNavBar.getByText(this.linkTextData.Banner.System_Admin, { exact: true });
     this.bannerMyApplications = this.bannerNavBar.getByText(this.linkTextData.Banner.My_Applications, { exact: true });
+    this.next_button = this.page.getByRole('link').getByText(this.commonTestData.next_button, { exact: true });
     this.errorMessageFieldLabel = page.locator('[class$="field-validation-error"]');
-    this.errorMessageSummaryLabel = page.locator('div[class="govuk-error-summary"]');
+    this.errorMessageSummaryLabel = this.page
+      .getByRole('heading')
+      .getByText(this.commonTestData.error_message_summary_header, {
+        exact: true,
+      });
+    this.summaryErrorLinks = this.errorMessageSummaryLabel.locator('..').getByRole('listitem').getByRole('link');
     //Validation Alert Box
     this.alert_box = this.page.getByRole('alert');
     this.alert_box_headings = this.alert_box.getByRole('heading');
@@ -371,6 +391,7 @@ export default class CommonItemsPage {
       await expect(otherLocator).toHaveText(errorMessageFieldDataset[key]);
     }
   }
+
   async validateUIComponentValues<PageObject>(dataset: JSON, key: string, page: PageObject) {
     const locator: Locator = page[key];
     const typeAttribute = await locator.first().getAttribute('type');
@@ -388,10 +409,6 @@ export default class CommonItemsPage {
   async getUiLabel<PageObject>(key: string, page: PageObject) {
     const locator: Locator = page[key];
     return confirmStringNotNull(await locator.textContent());
-  }
-
-  async getFieldErrorMessage<PageObject>(errorMessageFieldDataset: string, key: string, page: PageObject) {
-    return page[key].locator('..').locator(this.errorMessageFieldLabel);
   }
 
   async clearUIComponent<PageObject>(dataset: JSON, key: string, page: PageObject) {
@@ -413,33 +430,55 @@ export default class CommonItemsPage {
     }
   }
 
-  //This code will be removed when error summary label available on manage users screens
-  async validateErrorMessageWithoutErrorHeading<PageObject>(
-    errorMessageFieldDataset: string,
-    key: string,
-    page: PageObject
-  ) {
-    const typeAttribute = await page[key].first().getAttribute('type');
-    if (typeAttribute === 'checkbox') {
-      const checkboxLocator = page[key].locator('../../../..').locator(this.errorMessageFieldLabel);
-      await expect(checkboxLocator).toHaveText(errorMessageFieldDataset[key]);
-    } else if (typeAttribute === 'radio') {
-      const radioLocator = page[key].locator('../../../..').locator(this.errorMessageFieldLabel);
-      await expect(radioLocator).toHaveText(errorMessageFieldDataset[key]);
-    } else if (
-      typeAttribute === 'date' ||
-      (await page[key].first().getAttribute('class')).toLowerCase().includes('date')
-    ) {
-      const dateLocator = page[key].locator('../../../../../..').locator(this.errorMessageFieldLabel);
-      await expect(dateLocator).toHaveText(errorMessageFieldDataset[key]);
-    } else {
-      const otherLocator = page[key].locator('..').locator(this.errorMessageFieldLabel);
-      await expect(otherLocator).toHaveText(errorMessageFieldDataset[key]);
-    }
-  }
-
   async getSelectedValues<PageObject>(key: string, page: PageObject) {
     const locator: Locator = page[key];
     return await removeUnwantedWhitespace(confirmStringNotNull(await locator.textContent()));
+  }
+
+  async getAuditLog(): Promise<Map<string, string[]>> {
+    const timeValues: string[] = [];
+    const eventValues: string[] = [];
+    const adminEmailValues: string[] = [];
+    let dataFound = false;
+    while (!dataFound) {
+      const rowCount = await this.auditTableRows.count();
+      for (let i = 1; i < rowCount; i++) {
+        const columns = this.auditTableRows.nth(i).getByRole('cell');
+        const timeValue = confirmStringNotNull(await columns.nth(0).textContent());
+        timeValues.push(timeValue);
+        const eventValue = confirmStringNotNull(await columns.nth(1).textContent());
+        eventValues.push(eventValue);
+        const adminEmailValue = confirmStringNotNull(await columns.nth(2).textContent());
+        adminEmailValues.push(adminEmailValue);
+      }
+      if ((await this.next_button.isVisible()) && !(await this.next_button.isDisabled())) {
+        await this.next_button.click();
+        await this.page.waitForLoadState('domcontentloaded');
+      } else {
+        dataFound = true;
+      }
+    }
+    const auditMap = new Map([
+      ['timeValues', timeValues],
+      ['eventValues', eventValues],
+      ['adminEmailValues', adminEmailValues],
+    ]);
+    return auditMap;
+  }
+  async getSummaryErrorMessages() {
+    const summaryErrorActualValues = await this.summaryErrorLinks.allTextContents();
+    return summaryErrorActualValues;
+  }
+
+  async getFieldErrorMessages<PageObject>(key: string, page: PageObject) {
+    const element = await page[key].first();
+    const fieldErrorLocator = this.errorFieldGroup.filter({ has: element }).locator(this.errorMessageFieldLabel);
+    return await fieldErrorLocator.textContent();
+  }
+
+  async checkViewport<PageObject>(errorMessageFieldDataset: JSON, key: string, page: PageObject) {
+    const element = await page[key].first();
+    await this.summaryErrorLinks.filter({ hasText: errorMessageFieldDataset[key] }).click();
+    return await element;
   }
 }

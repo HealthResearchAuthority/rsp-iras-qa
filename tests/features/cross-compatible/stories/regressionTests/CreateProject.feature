@@ -98,19 +98,20 @@ Feature: Create Amendment - Create Project - Regression Tests
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
     And I fill the project details iras page with '<Project_Details_IRAS>'
     When I click the '<Navigation_Button_Third>' button on the 'Project_Details_IRAS_Page'
-    Then I validate '<Field_Error_Message>' and '<Summary_Error_Message>' displayed on project details iras page for '<Project_Details_IRAS>'
+    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Project_Details_IRAS_Page'
 
     Examples:
-      | Navigation_Button_First | Navigation_Button_Second | Project_Details_IRAS             | Navigation_Button_Third | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Letters          | Save_Continue           | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Symbols          | Save_Continue           | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Letters_Symbols  | Save_Continue           | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Min_Length       | Save_Continue           | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Max_Length       | Save_Continue           | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Spaces           | Save_Continue           | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Spaces_Suffix    | Save_Continue           | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Spaces_Prefix    | Save_Continue           | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Spaces_Seperator | Save_Continue           | Field_Error_Message | Summary_Error_Message |
+      | Navigation_Button_First | Navigation_Button_Second | Project_Details_IRAS             | Navigation_Button_Third | Field_And_Summary_Error_Message       |
+      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Letters          | Save_Continue           | Field_Error_Message                   |
+      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Symbols          | Save_Continue           | Field_Error_Message                   |
+      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Letters_Symbols  | Save_Continue           | Field_Error_Message                   |
+      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Min_Length       | Save_Continue           | Field_Error_Message_Iras_Id_Length    |
+      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Max_Length       | Save_Continue           | Field_Error_Message                   |
+      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Spaces           | Save_Continue           | Field_Error_Message_Iras_Id_Mandatory |
+      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Spaces_Suffix    | Save_Continue           | Field_Error_Message                   |
+      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Spaces_Prefix    | Save_Continue           | Field_Error_Message                   |
+      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Spaces_Seperator | Save_Continue           | Field_Error_Message                   |
+      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Blank            | Save_Continue           | Field_Error_Message_Iras_Id_Mandatory |
 
   @ErrorMessageInvalidTitleEndDateRegression
   Scenario Outline: Validate error messages displayed when user fill invalid data for short project title and project end date

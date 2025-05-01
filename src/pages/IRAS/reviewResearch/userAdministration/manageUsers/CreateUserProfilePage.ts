@@ -26,9 +26,6 @@ export default class CreateUserProfilePage {
   readonly access_required_fieldset: Locator;
   readonly access_required_checkbox: Locator;
   readonly review_body_dropdown: Locator;
-  readonly continue_button: Locator;
-  readonly selected_dropdown: Locator;
-  readonly back_button: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -84,7 +81,7 @@ export default class CreateUserProfilePage {
     this.role_fieldset = this.page.locator('.govuk-form-group', { has: this.role_label });
     this.role_checkbox = this.role_fieldset.getByRole('checkbox');
     this.committee_dropdown = this.page.getByLabel(
-      this.createUserProfilePageTestData.Create_User_Profile_Page.commitee_label,
+      this.createUserProfilePageTestData.Create_User_Profile_Page.committee_label,
       { exact: true }
     );
     this.country_fieldset = this.page.getByRole('group', {
@@ -103,13 +100,6 @@ export default class CreateUserProfilePage {
         exact: true,
       }
     );
-    this.continue_button = this.page
-      .getByRole('button')
-      .getByText(this.createUserProfilePageTestData.Create_User_Profile_Page.continue_button);
-    this.selected_dropdown = this.page.locator('select option[selected=selected]');
-    this.back_button = this.page
-      .getByRole('link')
-      .getByText(this.createUserProfilePageTestData.Create_User_Profile_Page.back_button);
   }
 
   async assertOnCreateUserProfilePage() {

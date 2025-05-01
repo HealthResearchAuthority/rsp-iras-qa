@@ -6,12 +6,20 @@
     "iras_textbox_label": "IRAS ID",
     "iras_textbox_hint": "This is the 4 to 7 digit ID generated when you created your initial application"
   },
-  "Summary_Error_Message": {
-    "error_message_summary_header": "There is a problem",
-    "iras_id_text": "IRAS ID must only contain numbers"
-  },
   "Field_Error_Message": {
     "iras_id_text": "IRAS ID must only contain numbers"
+  },
+  "Field_Error_Message_Iras_Id_Duplicate": {
+    "iras_id_text": "A record for the project with this IRAS ID already exists"
+  },
+  "Field_Error_Message_Iras_Id_Mandatory": {
+    "iras_id_text": "Enter an IRAS ID"
+  },
+  "Field_Error_Message_Iras_Id_Length": {
+    "iras_id_text": "IRAS ID must be 4 to 7 digits"
+  },
+  "Field_Error_Message_Iras_Id_Leading_Zeros": {
+    "iras_id_text": "IRAS ID cannot start with '0'"
   },
   "Valid_IRAS_ID_Max": {
     "iras_id_text": "1234567"
@@ -48,5 +56,11 @@
   },
   "Invalid_IRAS_ID_Spaces_Seperator": {
     "iras_id_text": "12 34"
+  },
+  "Invalid_IRAS_ID_Blank": {
+    "iras_id_text": ""
+  },
+  "Invalid_IRAS_ID_Duplicate": {
+    "iras_id_text": "1812231"
   }
 }

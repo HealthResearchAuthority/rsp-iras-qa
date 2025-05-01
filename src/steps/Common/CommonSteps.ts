@@ -188,7 +188,13 @@ Then('I can see a {string} button on the {string}', async ({ commonItemsPage }, 
 Given(
   'I click the {string} link on the {string}',
   async (
-    { commonItemsPage, manageUsersPage, userProfilePage, createUserProfileConfirmationPage },
+    {
+      commonItemsPage,
+      manageUsersPage,
+      userProfilePage,
+      createUserProfileConfirmationPage,
+      checkCreateUserProfilePage,
+    },
     linkKey: string,
     pageKey: string
   ) => {
@@ -203,6 +209,8 @@ Given(
       await createUserProfileConfirmationPage.back_to_manage_user_link.click(); //work around for now >> to click on Back_To_Manage_Users link ..# "Back to Manage Users" in app, "Back to Manage users" in figma >>clarification needed
     } else if (pageKey === 'Manage_Review_Bodies_Page' && linkKey === 'View_Edit') {
       await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).first().click();
+    } else if (pageKey === 'Check_Create_User_Profile_Page' && linkKey === 'Back') {
+      await checkCreateUserProfilePage.back_button.click(); //work around for now >> to click on Back link
     } else {
       await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
     }
@@ -358,6 +366,23 @@ Then('I navigate {string}', async ({ commonItemsPage }, navigation: string) => {
 });
 
 Then(
+  'I can see the default sort should be the most recent entry first based on date and time',
+  async ({ commonItemsPage }) => {
+    const auditLog = await commonItemsPage.getAuditLog();
+    const timeValues: any = auditLog.get('timeValues');
+    const timeDates = timeValues.map((time: any) => new Date(time));
+    const isSortedDesc = timeDates.every((time: number, i: number, arr: number[]) => {
+      if (i === 0) {
+        return true;
+      } else {
+        return arr[i - 1] >= time;
+      }
+    });
+    expect(isSortedDesc).toBe(true);
+  }
+);
+
+Then(
   'I capture the current time for {string}',
   async ({ auditHistoryReviewBodyPage, auditHistoryUserPage }, page: string) => {
     const currentTime = await getCurrentTimeFormatted();
@@ -370,6 +395,58 @@ Then(
         break;
       default:
         throw new Error(`${page} is not a valid option`);
+    }
+  }
+);
+
+Then(
+  'I validate {string} displayed on {string}',
+  async (
+    {
+      commonItemsPage,
+      createUserProfilePage,
+      editUserProfilePage,
+      projectDetailsIRASPage,
+      projectDetailsTitlePage,
+      keyProjectRolesPage,
+    },
+    errorMessageFieldAndSummaryDatasetName: string,
+    pageKey: string
+  ) => {
+    let errorMessageFieldDataset: any;
+    let page: any;
+    if (pageKey === 'Create_User_Profile_Page') {
+      errorMessageFieldDataset =
+        createUserProfilePage.createUserProfilePageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = createUserProfilePage;
+    } else if (pageKey === 'Edit_User_Profile_Page') {
+      errorMessageFieldDataset =
+        editUserProfilePage.editUserProfilePageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = editUserProfilePage;
+    } else if (pageKey == 'Project_Details_IRAS_Page') {
+      errorMessageFieldDataset =
+        projectDetailsIRASPage.projectDetailsIRASPageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = projectDetailsIRASPage;
+    } else if (pageKey == 'Project_Details_Title_Page') {
+      errorMessageFieldDataset =
+        projectDetailsTitlePage.projectDetailsTitlePageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = projectDetailsTitlePage;
+    } else if (pageKey == 'Key_Project_Roles_Page') {
+      errorMessageFieldDataset =
+        keyProjectRolesPage.keyProjectRolesPageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = keyProjectRolesPage;
+    }
+    await expect(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
+    const allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset);
+    const summaryErrorActualValues = await commonItemsPage.getSummaryErrorMessages();
+    expect(summaryErrorActualValues).toEqual(allSummaryErrorExpectedValues);
+    for (const key in errorMessageFieldDataset) {
+      if (Object.prototype.hasOwnProperty.call(errorMessageFieldDataset, key)) {
+        const fieldErrorMessagesActualValues = await commonItemsPage.getFieldErrorMessages(key, page);
+        expect(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
+        const element = await commonItemsPage.checkViewport(errorMessageFieldDataset, key, page);
+        expect(element).toBeInViewport();
+      }
     }
   }
 );

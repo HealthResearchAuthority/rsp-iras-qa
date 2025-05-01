@@ -22,10 +22,10 @@ Then(
 
 Then(
   'I can see the audit history for the newly created {string} user with roles assigned',
-  async ({ auditHistoryUserPage, createUserProfilePage, auditHistoryReviewBodyPage }, datasetName: string) => {
+  async ({ auditHistoryUserPage, createUserProfilePage, commonItemsPage }, datasetName: string) => {
     const datasetCreateUser = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
     const datasetAudit = auditHistoryUserPage.auditHistoryUserPageTestData.Audit_History_User_Page;
-    const auditLog = await auditHistoryReviewBodyPage.getAuditLog();
+    const auditLog = await commonItemsPage.getAuditLog();
     const timeExpected = await auditHistoryUserPage.getUpdatedTime();
     const rolesInExpectedOrder: string[] = datasetCreateUser.role_checkbox.slice().reverse();
     const userEmail = await returnDataFromJSON().then((data) => {
@@ -54,9 +54,9 @@ Then(
 
 Then(
   'I can see the users audit history with the {string} event as the most recent entry',
-  async ({ auditHistoryUserPage, auditHistoryReviewBodyPage, userProfilePage }, datasetName: string) => {
+  async ({ auditHistoryUserPage, commonItemsPage, userProfilePage }, datasetName: string) => {
     const dataset = auditHistoryUserPage.auditHistoryUserPageTestData.Audit_History_User_Page[datasetName];
-    const auditLog = await auditHistoryReviewBodyPage.getAuditLog();
+    const auditLog = await commonItemsPage.getAuditLog();
     const timeExpected = await auditHistoryUserPage.getUpdatedTime();
     const adminEmailExpected =
       auditHistoryUserPage.auditHistoryUserPageTestData.Audit_History_User_Page.system_admin_email_text;
@@ -104,10 +104,10 @@ Then(
 
 Then(
   'I can see the {string} user has had their roles unassigned in the audit history',
-  async ({ auditHistoryUserPage, createUserProfilePage, auditHistoryReviewBodyPage }, datasetName: string) => {
+  async ({ auditHistoryUserPage, createUserProfilePage, commonItemsPage }, datasetName: string) => {
     const datasetUser = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
     const datasetAuditEvent = auditHistoryUserPage.auditHistoryUserPageTestData.Audit_History_User_Page;
-    const actualAuditLog = await auditHistoryReviewBodyPage.getAuditLog();
+    const actualAuditLog = await commonItemsPage.getAuditLog();
     const timeExpected = await auditHistoryUserPage.getUpdatedTime();
     const expectedOrderedRoles: string[] = datasetUser.role_checkbox.slice().reverse();
     const usersEmail = await returnDataFromJSON().then((data) => {
