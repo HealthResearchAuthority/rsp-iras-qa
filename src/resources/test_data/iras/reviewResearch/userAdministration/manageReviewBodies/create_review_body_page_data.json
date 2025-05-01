@@ -360,18 +360,26 @@
       "description_text": ""
     },
     "Validation": {
-      "Error_Summary_Title": "There is a problem",
-      "All_Mandatory_Fields": {
-        "organisation_name_error": "organisation name",
-        "country_error": "country",
-        "email_address_error": "email address"
+      "All_Mandatory_Field_Errors": {
+        "country_checkbox": "Enter a country",
+        "email_address_text": "Enter an email address",
+        "organisation_name_text": "Enter an organisation name"
       },
-      "Mandatory_Field": "Enter",
-      "Select_Country": "Select at least one country.",
-      "Max_Chars": "must be 250 characters or less",
-      "Max_Description_Words": "The description must be 250 words or less",
-      "Max_Description_Reason": "You have 251 words too many",
-      "Email_Format": "Enter an email address in the correct format"
+      "Email_Format": "Enter an email address in the correct format",
+      "Mandatory_Field_Organisation_Name_Error": { "organisation_name_text": "Enter an organisation name" },
+      "Max_Chars_Organisation_Name_Error": {
+        "organisation_name_text": "Organisation name must be 250 characters or less"
+      },
+      "Mandatory_Field_Email_Address_Error": { "email_address_text": "Enter an email address" },
+      "Max_Chars_Email_Address_Error": { "email_address_text": "Email address must be 250 characters or less" },
+      "Email_Format_Error": { "email_address_text": "Enter an email address in the correct format" },
+      "Mandatory_Field_Country_Error": {
+        "country_checkbox": "Enter a country"
+      },
+      "Max_Description_Words_Error": {
+        "description_text": "The description must be 250 words or less"
+      },
+      "Max_Description_Reason": "You have 251 words too many"
     },
     "Valid_Data_In_All_Fields_Disabled": {
       "organisation_name_text": "QA Automation HSC Research and Development 20250406050232641",
