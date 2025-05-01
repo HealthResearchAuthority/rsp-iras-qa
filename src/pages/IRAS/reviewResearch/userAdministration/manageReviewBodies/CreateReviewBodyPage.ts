@@ -39,11 +39,6 @@ export default class CreateReviewBodyPage {
       .getByText(this.createReviewBodyPageData.Create_Review_Body_Page.page_heading);
     this.validation_error = this.page.locator('.govuk-error-message');
     this.char_count_error = this.page.locator('.govuk-character-count__message');
-    this.error_summary_alert = this.page.getByRole('alert');
-    this.error_summary_alert_heading = this.error_summary_alert.getByText(
-      this.createReviewBodyPageData.Create_Review_Body.Validation.Error_Summary_Title
-    );
-    this.error_summary_list = this.error_summary_alert.getByRole('list');
     this.organisation_name_text = this.page.getByLabel(
       this.createReviewBodyPageData.Create_Review_Body_Page.organisation_name_label,
       { exact: true }
