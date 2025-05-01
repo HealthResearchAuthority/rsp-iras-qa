@@ -153,7 +153,7 @@ Feature: User Administration: Manage Review Bodies - Create review body
             | Description_Field_between_Min_Max_Data       |
 
     @verifyValidationErrors @rsp-3123
-    Scenario Outline: When input field validation fails correct error messaging displays to the user
+    Scenario Outline: When input field validation fails on the create review body page, correct error messaging displays to the user
         When I fill the new review body page using '<Add_Review_Body>'
         And I capture the page screenshot
         And I click the 'Continue' button on the 'Create_Review_Body_Page'

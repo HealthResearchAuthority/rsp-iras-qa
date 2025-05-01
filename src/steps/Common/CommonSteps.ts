@@ -410,6 +410,7 @@ Then(
       projectDetailsTitlePage,
       keyProjectRolesPage,
       createReviewBodyPage,
+      editReviewBodyPage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
@@ -441,6 +442,10 @@ Then(
         createReviewBodyPage.createReviewBodyPageData.Create_Review_Body.Validation[
           errorMessageFieldAndSummaryDatasetName
         ];
+      page = createReviewBodyPage;
+    } else if (pageKey == 'Edit_Review_Body_Page') {
+      errorMessageFieldDataset =
+        editReviewBodyPage.editReviewBodyPageData.Edit_Review_Body.Validation[errorMessageFieldAndSummaryDatasetName];
       page = createReviewBodyPage;
     }
     await expect(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
