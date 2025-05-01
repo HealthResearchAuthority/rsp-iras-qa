@@ -360,6 +360,7 @@
       "description_text": ""
     },
     "Validation": {
+      "Error_Summary_Title": "There is a problem",
       "All_Mandatory_Fields": {
         "organisation_name_error": "organisation name",
         "country_error": "country",
