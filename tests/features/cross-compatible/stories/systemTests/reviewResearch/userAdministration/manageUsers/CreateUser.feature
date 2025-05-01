@@ -250,7 +250,6 @@ Feature: User Administration: Manage Users - Create user
         And I click the 'Continue' button on the 'Create_User_Profile_Page'
         Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Create_User_Profile_Page'
         And I capture the page screenshot
-        # fix below
 
         Examples:
             | Invalid_Data_User_Profile                                 | Field_And_Summary_Error_Message                                         |
