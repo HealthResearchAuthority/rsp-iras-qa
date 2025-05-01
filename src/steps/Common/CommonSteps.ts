@@ -346,8 +346,8 @@ Then(
     expect(actualFieldErrorsArray).toHaveLength(expectedFieldErrors.length);
     for (const key of expectedFieldErrors) {
       const expectedFieldErrorMessage = await commonItemsPage.getFieldTypeErrorMessage(key, pageObject);
-      const actualFieldError = await commonItemsPage.getFieldErrors(key, pageObject);
-      await expect(actualFieldError).toHaveText(expectedFieldErrorMessage);
+      const actualFieldError = await commonItemsPage.getFieldErrorMessages(key, pageObject);
+      expect(actualFieldError).toEqual(expectedFieldErrorMessage);
     }
   }
 );
@@ -409,6 +409,7 @@ Then(
       projectDetailsIRASPage,
       projectDetailsTitlePage,
       keyProjectRolesPage,
+      createReviewBodyPage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
@@ -435,6 +436,12 @@ Then(
       errorMessageFieldDataset =
         keyProjectRolesPage.keyProjectRolesPageTestData[errorMessageFieldAndSummaryDatasetName];
       page = keyProjectRolesPage;
+    } else if (pageKey == 'Create_Review_Body_Page') {
+      errorMessageFieldDataset =
+        createReviewBodyPage.createReviewBodyPageData.Create_Review_Body.Validation[
+          errorMessageFieldAndSummaryDatasetName
+        ];
+      page = createReviewBodyPage;
     }
     await expect(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
     const allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset);
@@ -444,9 +451,17 @@ Then(
       if (Object.prototype.hasOwnProperty.call(errorMessageFieldDataset, key)) {
         const fieldErrorMessagesActualValues = await commonItemsPage.getFieldErrorMessages(key, page);
         expect(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
-        const element = await commonItemsPage.checkViewport(errorMessageFieldDataset, key, page);
-        expect(element).toBeInViewport();
+        const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
+        await expect(element).toBeInViewport();
+        if ((await element.getAttribute('type')) != 'checkbox') {
+          await expect(element).toBeFocused();
+        }
       }
+    }
+    if (errorMessageFieldAndSummaryDatasetName == 'Max_Description_Words_Error') {
+      await expect(createReviewBodyPage.description_reason_error).toHaveText(
+        createReviewBodyPage.createReviewBodyPageData.Create_Review_Body.Validation.Max_Description_Reason
+      );
     }
   }
 );
