@@ -6,6 +6,7 @@ export default class UserListReviewBodyPage {
   readonly page: Page;
   readonly userListReviewBodyPageTestData: typeof userListReviewBodyPageTestData;
   private _search_key: string;
+  private _user_list: string[];
   readonly page_heading: Locator;
   readonly guidance_text: Locator;
   readonly userListTableRows: Locator;
@@ -25,7 +26,7 @@ export default class UserListReviewBodyPage {
     this.page = page;
     this.userListReviewBodyPageTestData = userListReviewBodyPageTestData;
     this._search_key = '';
-
+    this._user_list = [];
     //Locators
     this.page_heading = this.page
       .getByRole('heading')
@@ -68,7 +69,7 @@ export default class UserListReviewBodyPage {
       .getByText(this.userListReviewBodyPageTestData.Review_Body_User_List_Page.Column_Header_Labels.actions_label, {
         exact: true,
       });
-    this.search_box_label = this.page.getByLabel(
+    this.search_box_label = this.page.getByText(
       this.userListReviewBodyPageTestData.Review_Body_User_List_Page.search_box_label,
       {
         exact: true,
@@ -110,8 +111,11 @@ export default class UserListReviewBodyPage {
     this._search_key = value;
   }
 
-  // async getAuditEventDescriptionValue(eventDescriptionText: string, valuePrevious: string, valueCurrent: string) {
-  //   const eventDescriptionValue = eventDescriptionText + valuePrevious + ' to ' + valueCurrent;
-  //   return eventDescriptionValue;
-  // }
+  async getUserListBeforeSearch(): Promise<string[]> {
+    return this._user_list;
+  }
+
+  async setUserListBeforeSearch(value: string[]): Promise<void> {
+    this._user_list = value;
+  }
 }

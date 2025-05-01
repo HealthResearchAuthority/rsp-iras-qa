@@ -514,4 +514,28 @@ export default class CommonItemsPage {
     ]);
     return userMap;
   }
+  async getUsersSearchResults(): Promise<Map<string, string[]>> {
+    const searchResultValues: string[] = [];
+    await this.page.waitForLoadState('domcontentloaded');
+    await this.page.waitForTimeout(3000);
+    let dataFound = false;
+    while (!dataFound) {
+      const rowCount = await this.userTableRows.count();
+      for (let i = 1; i < rowCount; i++) {
+        const columns = this.userTableRows.nth(i).getByRole('cell');
+        const firstName = confirmStringNotNull(await columns.nth(0).textContent());
+        const lastName = confirmStringNotNull(await columns.nth(1).textContent());
+        const emailAddress = confirmStringNotNull(await columns.nth(2).textContent());
+        searchResultValues.push(firstName + '|' + lastName + '|' + emailAddress);
+      }
+      if ((await this.next_button.isVisible()) && !(await this.next_button.isDisabled())) {
+        await this.next_button.click();
+        await this.page.waitForLoadState('domcontentloaded');
+      } else {
+        dataFound = true;
+      }
+    }
+    const searchResultMap = new Map([['searchResultValues', searchResultValues]]);
+    return searchResultMap;
+  }
 }

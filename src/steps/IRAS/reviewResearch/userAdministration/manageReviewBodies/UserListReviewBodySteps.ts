@@ -19,18 +19,24 @@ When('I search for a user of the current review body', async ({ userListReviewBo
     const emailAddressValues: any = userList.get('emailAddressValues');
     searchKey = emailAddressValues[0]; //modify method to search with first name, last name also
   }
-  userListReviewBodyPage.search_text.fill(searchKey);
+  const userListBeforeSearch = await commonItemsPage.getUsersSearchResults();
+  const userValues: any = userListBeforeSearch.get('searchResultValues');
+  await userListReviewBodyPage.setUserListBeforeSearch(userValues);
   await userListReviewBodyPage.setSearchKey(searchKey);
+  userListReviewBodyPage.search_text.fill(searchKey);
 });
 
 Then(
   'the system displays search results matching the search criteria',
   async ({ userListReviewBodyPage, commonItemsPage }) => {
-    const userList = await commonItemsPage.getUsers();
-    const emailAddressValues: any = userList.get('emailAddressValues');
+    const userValues = await userListReviewBodyPage.getUserListBeforeSearch();
     const searchKey = await userListReviewBodyPage.getSearchKey();
-    for (const val of emailAddressValues) {
-      if (val === searchKey) {
+    const filteredSearchResults: string[] = userValues.filter((result) => result.includes(searchKey));
+    const userList = await commonItemsPage.getUsersSearchResults();
+    const userListAfterSearch: any = userList.get('searchResultValues');
+    expect(filteredSearchResults).toEqual(userListAfterSearch);
+    for (const val of userListAfterSearch) {
+      if (val.includes(searchKey)) {
         return true;
       }
     }
