@@ -34,7 +34,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
             | Valid_Data_In_All_Fields           |
             | Valid_Data_In_All_Mandatory_Fields |
 
-    @VerifyUserListFirstReviewBody
+    @VerifyUserListFirstReviewBody @SearchResultsFound
     Scenario: Verify the user can view the user list page of the first review body and search for the users in it
         When I click the 'View_Edit' link on the 'Manage_Review_Bodies_Page'
         And I can see the review body profile page
@@ -45,8 +45,31 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         When I search for a user of the current review body
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         Then the system displays search results matching the search criteria
-    # And I search for a user not present in the current review body
-    # And the system displays no results found message
+
+    @VerifyUserListFirstReviewBody @NoResultsFound
+    Scenario: Verify the user can view the user list page of the first review body and search for the users in it
+        When I click the 'View_Edit' link on the 'Manage_Review_Bodies_Page'
+        And I can see the review body profile page
+        And I capture the page screenshot
+        And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
+        Then I can see the user list page of the review body
+        And I capture the page screenshot
+        When I enter an input into the search field to search for the existing user of the current review body
+        And I click the 'Search' button on the 'Review_Body_User_List_Page'
+        Then the system displays search results matching the search criteria
+        When I click the 'Remove' link on the 'Review_Body_User_List_Page'
+        Then I can see the check and remove user profile page
+        And I click the 'Remove_User_Profile' button on the 'Check_Remove_User_Profile_Page'
+        And I validate 'Remove_User_From_Review_Body_Labels' labels displayed in the success confirmation page when the user removed from the review body
+        And I click the 'Remove_Another_User_From_The_Review_Body' link on the 'Confirmation_Page'
+        # When I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
+        When I click the 'Remove' link on the 'Review_Body_User_List_Page'
+        And I enter an input into the search field to search for the removed user of the review body
+        And I click the 'Search' button on the 'Review_Body_User_List_Page'
+        Then the system displays no results found message
+
+
+
 
     #     Given the user has entered an input into the search field
     #     When they select search

@@ -20,6 +20,7 @@ export default class UserListReviewBodyPage {
   readonly last_logged_in_label: Locator;
   readonly actions_label: Locator;
   readonly search_text: Locator;
+  readonly remove_link: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -79,6 +80,7 @@ export default class UserListReviewBodyPage {
     //   name: this.userListReviewBodyPageTestData.Review_Body_User_List_Page.search_box_label,
     // });
     this.search_text = this.page.locator('#SearchQuery');
+    this.remove_link = this.page.getByText('Remove').first();
     //
 
     // this.next_button = this.page

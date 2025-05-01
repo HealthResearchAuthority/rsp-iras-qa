@@ -72,5 +72,8 @@
   },
   "Review_Body_User_List_Page": {
     "Search": "Search"
+  },
+  "Check_Remove_User_Profile_Page": {
+    "Remove_User_Profile": "Remove user profile"
   }
 }

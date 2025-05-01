@@ -10,21 +10,22 @@ Then('I can see the user list page of the review body', async ({ userListReviewB
   );
 });
 
-// And I search for a user not present in the current review body
-// And the system displays no results found message
-When('I search for a user of the current review body', async ({ userListReviewBodyPage, commonItemsPage }) => {
-  let searchKey: any;
-  if ((await userListReviewBodyPage.userListTableRows.count()) >= 2) {
-    const userList = await commonItemsPage.getUsers();
-    const emailAddressValues: any = userList.get('emailAddressValues');
-    searchKey = emailAddressValues[0]; //modify method to search with first name, last name also
+When(
+  'I enter an input into the search field to search for the existing user of the current review body',
+  async ({ userListReviewBodyPage, commonItemsPage }) => {
+    let searchKey: any;
+    if ((await userListReviewBodyPage.userListTableRows.count()) >= 2) {
+      const userList = await commonItemsPage.getUsers();
+      const emailAddressValues: any = userList.get('emailAddressValues');
+      searchKey = emailAddressValues[0]; //modify method to search with first name, last name also
+    }
+    const userListBeforeSearch = await commonItemsPage.getUsersSearchResults();
+    const userValues: any = userListBeforeSearch.get('searchResultValues');
+    await userListReviewBodyPage.setUserListBeforeSearch(userValues);
+    await userListReviewBodyPage.setSearchKey(searchKey);
+    userListReviewBodyPage.search_text.fill(searchKey);
   }
-  const userListBeforeSearch = await commonItemsPage.getUsersSearchResults();
-  const userValues: any = userListBeforeSearch.get('searchResultValues');
-  await userListReviewBodyPage.setUserListBeforeSearch(userValues);
-  await userListReviewBodyPage.setSearchKey(searchKey);
-  userListReviewBodyPage.search_text.fill(searchKey);
-});
+);
 
 Then(
   'the system displays search results matching the search criteria',
@@ -41,5 +42,14 @@ Then(
       }
     }
     return false;
+  }
+);
+
+When(
+  'I enter an input into the search field to search for the removed user of the review body',
+  async ({ userListReviewBodyPage, checkRemoveUserReviewBodyPage }) => {
+    const searchKey = await checkRemoveUserReviewBodyPage.getEmail();
+    await userListReviewBodyPage.setSearchKey(searchKey);
+    await userListReviewBodyPage.search_text.fill(searchKey);
   }
 );

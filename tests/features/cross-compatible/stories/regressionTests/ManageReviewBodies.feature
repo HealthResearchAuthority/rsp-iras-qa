@@ -180,7 +180,8 @@ Feature: User Administration: Manage Review Bodies
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
         Then I can see the check and create review body page for '<Add_Review_Body>'
         And I capture the page screenshot
-        And I click the 'Back' button on the 'Check_Create_Review_Body_Page'
+        # And I click the 'Back' button on the 'Check_Create_Review_Body_Page'
+        When I click the 'Back' link on the 'Check_Create_Review_Body_Page'
         Then I can see the Add new review body page for '<Add_Review_Body>'
         And I capture the page screenshot
         And I fill the new review body page using '<Add_Another_Review_Body>'

@@ -177,3 +177,21 @@ Then(
     ).toBe(expectedSuccessBody);
   }
 );
+
+Then(
+  'I validate {string} labels displayed in the success confirmation page when the user removed from the review body',
+  async ({ confirmationPage, checkRemoveUserReviewBodyPage }, validationLabelsDatasetName) => {
+    const firstName = await checkRemoveUserReviewBodyPage.getFirstName();
+    const lastName = await checkRemoveUserReviewBodyPage.getLastName();
+    const validationLabelsDataset = confirmationPage.confirmationPageTestData[validationLabelsDatasetName];
+    const expectedSuccessHeader = validationLabelsDataset.remove_user_confirmation_success_header_label;
+    const expectedSuccessBody =
+      firstName + ' ' + lastName + validationLabelsDataset.remove_user_confirmation_success_body_two_label;
+    expect(
+      confirmStringNotNull(await confirmationPage.enable_confirmation_success_header_label.textContent()).trim()
+    ).toBe(expectedSuccessHeader);
+    expect(
+      confirmStringNotNull(await confirmationPage.enable_confirmation_success_body_label.textContent()).trim()
+    ).toBe(expectedSuccessBody);
+  }
+);

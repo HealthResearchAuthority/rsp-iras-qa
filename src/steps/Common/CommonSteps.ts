@@ -194,6 +194,7 @@ Given(
       userProfilePage,
       createUserProfileConfirmationPage,
       checkCreateUserProfilePage,
+      userListReviewBodyPage,
     },
     linkKey: string,
     pageKey: string
@@ -211,6 +212,10 @@ Given(
       await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).first().click();
     } else if (pageKey === 'Check_Create_User_Profile_Page' && linkKey === 'Back') {
       await checkCreateUserProfilePage.back_button.click(); //work around for now >> to click on Back link
+    } else if (pageKey === 'Check_Create_Review_Body_Page' && linkKey === 'Back') {
+      await checkCreateUserProfilePage.back_button.click(); //work around for now >> to click on Back link
+    } else if (pageKey === 'Review_Body_User_List_Page' && linkKey === 'Remove') {
+      await userListReviewBodyPage.remove_link.click(); //work around for now >> to click on first View/Edit link
     } else {
       await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
     }
