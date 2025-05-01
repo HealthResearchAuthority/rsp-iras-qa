@@ -52,10 +52,17 @@ Then(
     const dataset = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body.Validation;
     const fieldNameLocator = fieldName.toLowerCase();
     const normalisedFieldName = fieldNameLocator.replaceAll('_', ' ').replace('error', '').trim();
+    await expect(createReviewBodyPage.error_summary_alert).toBeVisible();
+    await expect(createReviewBodyPage.error_summary_alert_heading).toBeVisible();
     if (fieldName == 'All_Mandatory_Fields') {
       for (const key in dataset[fieldName]) {
         if (Object.prototype.hasOwnProperty.call(dataset[fieldName], key)) {
           const determiner = await getCorrectDeterminer(key);
+          await expect(
+            createReviewBodyPage.error_summary_list.getByText(
+              `${dataset[errorMsg]} ${determiner} ${dataset[fieldName][key]}`
+            )
+          ).toBeVisible();
           await expect(createReviewBodyPage[key]).toHaveText(
             `${dataset[errorMsg]} ${determiner} ${dataset[fieldName][key]}`
           );
@@ -63,19 +70,27 @@ Then(
       }
     } else if (errorMsg == 'Mandatory_Field') {
       const determiner = await getCorrectDeterminer(fieldName);
+      await expect(
+        createReviewBodyPage.error_summary_list.getByText(`${dataset[errorMsg]} ${determiner} ${normalisedFieldName}`)
+      ).toBeVisible();
       await expect(createReviewBodyPage[fieldNameLocator]).toHaveText(
         `${dataset[errorMsg]} ${determiner} ${normalisedFieldName}`
       );
     } else if (fieldName == 'Description_Error') {
+      await expect(createReviewBodyPage.error_summary_list.getByText(dataset[errorMsg])).toBeVisible();
       await expect(createReviewBodyPage[fieldNameLocator]).toHaveText(dataset[errorMsg]);
       await expect(createReviewBodyPage.description_reason_error).toHaveText(dataset['Max_Description_Reason']);
     } else if (errorMsg == 'Email_Format') {
+      await expect(createReviewBodyPage.error_summary_list.getByText(dataset[errorMsg])).toBeVisible();
       await expect(createReviewBodyPage[fieldNameLocator]).toHaveText(dataset[errorMsg]);
     } else {
       const capitilisedFieldName = normalisedFieldName.replace(
         normalisedFieldName.charAt(0),
         normalisedFieldName.charAt(0).toUpperCase()
       );
+      await expect(
+        createReviewBodyPage.error_summary_list.getByText(`${capitilisedFieldName} ${dataset[errorMsg]}`)
+      ).toBeVisible();
       await expect(createReviewBodyPage[fieldNameLocator]).toHaveText(`${capitilisedFieldName} ${dataset[errorMsg]}`);
     }
   }
