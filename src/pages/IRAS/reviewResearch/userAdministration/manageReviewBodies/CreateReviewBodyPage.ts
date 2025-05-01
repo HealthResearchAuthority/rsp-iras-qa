@@ -11,6 +11,9 @@ export default class CreateReviewBodyPage {
   readonly page_heading: Locator;
   readonly validation_error: Locator;
   readonly char_count_error: Locator;
+  readonly error_summary_alert: Locator;
+  readonly error_summary_alert_heading: Locator;
+  readonly error_summary_list: Locator;
   readonly organisation_name_text: Locator;
   readonly organisation_name_error: Locator;
   readonly email_address_text: Locator;
@@ -36,6 +39,11 @@ export default class CreateReviewBodyPage {
       .getByText(this.createReviewBodyPageData.Create_Review_Body_Page.page_heading);
     this.validation_error = this.page.locator('.govuk-error-message');
     this.char_count_error = this.page.locator('.govuk-character-count__message');
+    this.error_summary_alert = this.page.getByRole('alert');
+    this.error_summary_alert_heading = this.error_summary_alert.getByText(
+      this.createReviewBodyPageData.Create_Review_Body.Validation.Error_Summary_Title
+    );
+    this.error_summary_list = this.error_summary_alert.getByRole('list');
     this.organisation_name_text = this.page.getByLabel(
       this.createReviewBodyPageData.Create_Review_Body_Page.organisation_name_label,
       { exact: true }
