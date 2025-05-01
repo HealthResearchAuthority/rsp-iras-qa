@@ -412,12 +412,3 @@ export async function returnDataFromJSON(filePath?: string): Promise<any> {
     return await fse.readJson(createUserPath);
   }
 }
-
-export async function getCorrectDeterminer(inputValue: string): Promise<string> {
-  const startWithVowelRegex = /^[aieou].*/i;
-  if (inputValue.match(startWithVowelRegex)) {
-    return 'an';
-  } else {
-    return 'a';
-  }
-}
