@@ -53,3 +53,17 @@ When(
     await userListReviewBodyPage.search_text.fill(searchKey);
   }
 );
+
+Then('the system displays no results found message', async ({ userListReviewBodyPage, reviewBodyProfilePage }) => {
+  await userListReviewBodyPage.assertOnUserListReviewBodyPage();
+  const organisationName = await reviewBodyProfilePage.getOrgName();
+  await expect(userListReviewBodyPage.page_heading).toHaveText(
+    userListReviewBodyPage.userListReviewBodyPageTestData.Review_Body_User_List_Page.page_heading + organisationName
+  );
+  await expect(userListReviewBodyPage.no_results_heading).toHaveText(
+    userListReviewBodyPage.userListReviewBodyPageTestData.Review_Body_User_List_Page.no_results_heading
+  );
+  expect(await userListReviewBodyPage.userListTableRows.count()).toBe(0);
+  // Back to Users HRA1
+  // Manage users
+});

@@ -42,7 +42,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
         Then I can see the user list page of the review body
         And I capture the page screenshot
-        When I search for a user of the current review body
+        When I enter an input into the search field to search for the existing user of the current review body
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         Then the system displays search results matching the search criteria
 
@@ -69,11 +69,12 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         Then the system displays no results found message
 
 
+    # When I click the 'Manage_Users' link on the 'Review_Body_User_List_Page'
+    # Back to Users HRA1
 
-
-    #     Given the user has entered an input into the search field
-    #     When they select search
-    #  Then the system will search on first name, last name, and email address to find a user of the current review body who matches the search criteria
+    # Given the user has entered an input into the search field
+    # When they select search
+    # Then the system will search on first name, last name, and email address to find a user of the current review body who matches the search criteria
     # a. If there is a user/users on the system that matches the search criteria in 10.1 then they will appear in the table
     # b. If there is not a user of the current review body that matches the search criteria then the no results found message will be presented to the user
 

@@ -14,13 +14,12 @@ export default class UserListReviewBodyPage {
   readonly first_name_label: Locator;
   readonly last_name_label: Locator;
   readonly email_address_label: Locator;
-  // readonly next_button: Locator;
-  // readonly hidden_next_button: Locator;
   readonly status_label: Locator;
   readonly last_logged_in_label: Locator;
   readonly actions_label: Locator;
   readonly search_text: Locator;
   readonly remove_link: Locator;
+  readonly no_results_heading: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -35,6 +34,9 @@ export default class UserListReviewBodyPage {
     this.guidance_text = this.page
       .getByRole('paragraph')
       .getByText(this.userListReviewBodyPageTestData.Review_Body_User_List_Page.guidance_text, { exact: true });
+    this.no_results_heading = this.page
+      .getByRole('heading')
+      .getByText(this.userListReviewBodyPageTestData.Review_Body_User_List_Page.no_results_heading, { exact: true });
     this.userListTableRows = this.page.getByRole('table').getByRole('row');
     this.first_name_label = this.userListTableRows
       .locator('th')

@@ -2,6 +2,7 @@
   "Review_Body_User_List_Page": {
     "page_heading": "Users for ",
     "guidance_text": "Search, assign or remove users from this review body",
+    "no_results_heading": "No results found",
     "search_box_label": "Find a user",
     "Column_Header_Labels": {
       "first_name_label": "First name",
