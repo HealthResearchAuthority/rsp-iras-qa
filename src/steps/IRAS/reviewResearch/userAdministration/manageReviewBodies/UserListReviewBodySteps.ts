@@ -14,14 +14,18 @@ When(
   'I enter an input into the search field to search for the existing user of the current review body',
   async ({ userListReviewBodyPage, commonItemsPage }) => {
     let searchKey: any;
+    // let userListBeforeSearch: any;
     if ((await userListReviewBodyPage.userListTableRows.count()) >= 2) {
+      // userListBeforeSearch = await commonItemsPage.getUsersSearchResults();
       const userList = await commonItemsPage.getUsers();
       const emailAddressValues: any = userList.get('emailAddressValues');
       searchKey = emailAddressValues[0]; //modify method to search with first name, last name also
     }
+    await userListReviewBodyPage.first_page_link.click(); //work around due to bug
     const userListBeforeSearch = await commonItemsPage.getUsersSearchResults();
     const userValues: any = userListBeforeSearch.get('searchResultValues');
     await userListReviewBodyPage.setUserListBeforeSearch(userValues);
+    await userListReviewBodyPage.first_page_link.click(); //work around due to bug
     await userListReviewBodyPage.setSearchKey(searchKey);
     userListReviewBodyPage.search_text.fill(searchKey);
   }

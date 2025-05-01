@@ -20,6 +20,7 @@ export default class UserListReviewBodyPage {
   readonly search_text: Locator;
   readonly remove_link: Locator;
   readonly no_results_heading: Locator;
+  readonly first_page_link: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -83,6 +84,7 @@ export default class UserListReviewBodyPage {
     // });
     this.search_text = this.page.locator('#SearchQuery');
     this.remove_link = this.page.getByText('Remove').first();
+    this.first_page_link = this.page.locator('a[aria-label="Page 1"]'); //work aorund due to bug
     //
 
     // this.next_button = this.page
