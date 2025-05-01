@@ -592,21 +592,8 @@ Feature: Create Amendment - Create Project
     And I fill the research locations page with '<Research_Locations>'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Research_Locations_Page'
-
     Then I can see the review your answers page
-
     And I capture the page screenshot
-    # And I can see the short project title on project overview save for later page for '<Project_Details_Title>'
-    # When I click the 'Project_Details' link on the 'Project_Overview_Save_For_Later_Page'
-    # Then I can see the project details title page
-    # And I capture the page screenshot
-    # And I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    # And I can see the key project roles page
-    # And I capture the page screenshot
-    # And I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
-    # And I capture the page screenshot
-    # Then I can see previously saved values for '<Research_Locations>' displayed on the research locations page
-
     Examples:
       | Project_Details_Title | Key_Project_Roles     | Research_Locations    |
       | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields |
@@ -633,20 +620,8 @@ Feature: Create Amendment - Create Project
     And I fill the research locations page with '<Research_Locations>'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Research_Locations_Page'
-
     Then I can see the review your answers page
-
     And I capture the page screenshot
-    # And I can see the short project title on project overview save for later page for '<Project_Details_Title>'
-    # When I click the 'Project_Details' link on the 'Project_Overview_Save_For_Later_Page'
-    # Then I can see the project details title page
-    # And I capture the page screenshot
-    # And I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    # And I can see the key project roles page
-    # And I capture the page screenshot
-    # And I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
-    # And I capture the page screenshot
-    # Then I can see previously saved values for '<Research_Locations>' displayed on the research locations page
 
     Examples:
       | Project_Details_Title | Key_Project_Roles     | Research_Locations    |
@@ -673,20 +648,8 @@ Feature: Create Amendment - Create Project
     And I fill the research locations page with '<Research_Locations>'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Research_Locations_Page'
-
     Then I can see the review your answers page
-
     And I capture the page screenshot
-    # And I can see the short project title on project overview save for later page for '<Project_Details_Title>'
-    # When I click the 'Project_Details' link on the 'Project_Overview_Save_For_Later_Page'
-    # Then I can see the project details title page
-    # And I capture the page screenshot
-    # And I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    # And I can see the key project roles page
-    # And I capture the page screenshot
-    # And I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
-    # And I capture the page screenshot
-    # Then I can see previously saved values for '<Research_Locations>' displayed on the research locations page
 
     Examples:
       | Project_Details_Title       | Key_Project_Roles           | Research_Locations          |
