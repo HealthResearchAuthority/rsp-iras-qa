@@ -1,0 +1,19 @@
+{
+  "Review_Your_Answers_Page": {
+    "heading": "Review your answers",
+    "project_details_sub_heading": "Project details",
+    "iras_id_label": "IRAS ID",
+    "short_project_label": "Short project title",
+    "project_end_date_label": "Project end date",
+    "key_project_roles_sub_heading": "Key project roles",
+    "chief_investigator_email_label": "Chief Investigator",
+    "primary_sponsor_organisation_label": "Primary sponsor organisation",
+    "sponsor_contact_email_label": "Sponsor contact",
+    "research_locations_sub_heading": "Research locations",
+    "participating_nations_label": "Participating nations",
+    "nhs_hsc_organisations_label": "NHS / HSC organisations",
+    "lead_nation_label": "Lead nation",
+    "confirm_project_details_sub_heading": "Confirm project details",
+    "confirm_project_details_hint_label": "Review your answers and complete any missing information before confirming project details."
+  }
+}
