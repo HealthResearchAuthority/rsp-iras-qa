@@ -157,6 +157,7 @@ Feature: User Administration: Manage Review Bodies - Create review body
         When I fill the new review body page using '<Add_Review_Body>'
         And I capture the page screenshot
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
+        # repeat updates for Edit Page
         Then I can see the '<Error>' validation message for '<Field_Name>' on the Add new review body page
         And I capture the page screenshot
 
@@ -175,6 +176,7 @@ Feature: User Administration: Manage Review Bodies - Create review body
         When I fill the new review body page using '<Add_Review_Body>'
         And I capture the page screenshot
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
+        # repeat updates for Edit Page
         Then I can see the '<Error>' validation message for '<Field_Name>' on the Add new review body page
         And I capture the page screenshot
 
@@ -206,3 +208,18 @@ Feature: User Administration: Manage Review Bodies - Create review body
             | Invalid_Email_Data_Missing_AT                       | Email_Format | Email_Address_Error |
             | Invalid_Email_Data_Reserved_Domain                  | Email_Format | Email_Address_Error |
             | Invalid_Email_Data_Punycode                         | Email_Format | Email_Address_Error |
+
+    @verifyValidationSummaryLinks @rsp-3123
+    Scenario Outline: Each item in the error summary links the user to the relative input field
+        When I fill the new review body page using '<Add_Review_Body>'
+        And I capture the page screenshot
+        And I click the 'Continue' button on the 'Create_Review_Body_Page'
+        # repeat updates for Edit Page
+        Then I can see the '<Error>' validation message for '<Field_Name>' on the Add new review body page
+        And I capture the page screenshot
+
+        Examples:
+            | Add_Review_Body                      | Error                 | Field_Name              |
+            | Missing_Data_Organisation_Name_Field | Mandatory_Field       | Organisation_Name_Error |
+            | Missing_Data_Country_Field           | Mandatory_Field       | Country_Error           |
+            | Invalid_Data_Description_Field       | Max_Description_Words | Description_Error       |
