@@ -36,9 +36,10 @@
   "dependencies": {
     "@axe-core/playwright": "^4.10.1",
     "axe-html-reporter": "^2.2.11",
-    "dotenv": "^16.4.7",
+    "dotenv": "^16.5.0",
     "fs-extra": "^11.3.0",
     "playwright": "^1.49.1",
-    "randexp": "^0.5.3"
+    "randexp": "^0.5.3",
+    "save": "^2.9.0"
   }
 }
