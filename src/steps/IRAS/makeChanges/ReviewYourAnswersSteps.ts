@@ -11,7 +11,14 @@ Then('I can see the review your answers page', async ({ reviewYourAnswersPage })
 Then(
   'I can validate the field values of {string} page {string} page and {string} page',
   async (
-    { commonItemsPage, reviewYourAnswersPage, projectDetailsTitlePage, keyProjectRolesPage, reseachLocationsPage },
+    {
+      commonItemsPage,
+      reviewYourAnswersPage,
+      projectDetailsIRASPage,
+      projectDetailsTitlePage,
+      keyProjectRolesPage,
+      reseachLocationsPage,
+    },
     datasetNameProjectTitle: string,
     datasetNameKeyRoles: string,
     datasetNameResearchLocations: string
@@ -19,6 +26,8 @@ Then(
     const datasetProjectTitle = projectDetailsTitlePage.projectDetailsTitlePageTestData[datasetNameProjectTitle];
     const datasetKeyRoles = keyProjectRolesPage.keyProjectRolesPageTestData[datasetNameKeyRoles];
     const datasetResearchLoctions = reseachLocationsPage.researchLocationsPageTestData[datasetNameResearchLocations];
+    const irasIdRunTime = await projectDetailsIRASPage.getUniqueIrasId();
+    expect(confirmStringNotNull(await reviewYourAnswersPage.iras_id_text.textContent())).toBe(irasIdRunTime);
     for (const key in datasetProjectTitle) {
       if (Object.prototype.hasOwnProperty.call(datasetProjectTitle, key)) {
         if (

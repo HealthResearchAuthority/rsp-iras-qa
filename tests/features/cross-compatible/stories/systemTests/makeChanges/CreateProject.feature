@@ -601,7 +601,7 @@ Feature: Create Amendment - Create Project
 
 
   @rsp-2837 @reviewAnswersChangeProjTitleFields
-  Scenario Outline: Verify that user can change the project title details all fields from review the answers page on create project journey
+  Scenario Outline: Verify that user can change the project title details all fields from review the answers page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
     Then I can see the project details iras page
@@ -747,7 +747,7 @@ Feature: Create Amendment - Create Project
 
 
   @rsp-2837 @reviewAnswersEnterKeyRoles
-  Scenario Outline: Verify that user is not completed all questions and can enter project key roles title details from review your answers page
+  Scenario Outline: Verify that user is not completed all questions and can enter project key roles details from review your answers page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
     Then I can see the project details iras page
@@ -782,7 +782,7 @@ Feature: Create Amendment - Create Project
 
 
   @rsp-2837 @reviewAnswersEnterResearchLoc
-  Scenario Outline: Verify that user is not completed all questions and can enter key project roles from review your answers page
+  Scenario Outline: Verify that user is not completed all questions and can enter research locations details from review your answers page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
     Then I can see the project details iras page
@@ -864,7 +864,7 @@ Feature: Create Amendment - Create Project
 
 
   @rsp-2837 @reviewAnswersInvestigatorEmailValidations
-  Scenario Outline: Validate error message on key roles page when user redirected from review your answers page
+  Scenario Outline: Validate chief investigator email error messages when user redirected from review your answers page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
     Then I can see the project details iras page
@@ -921,7 +921,7 @@ Feature: Create Amendment - Create Project
 
 
   @rsp-2837 @reviewAnswersSponsorEmailValidations
-  Scenario Outline: Validate error message on key roles page when user redirected from review your answers page
+  Scenario Outline: Validate sponsor email error messages when user redirected from review your answers page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
     Then I can see the project details iras page
@@ -977,7 +977,7 @@ Feature: Create Amendment - Create Project
 
 
   @rsp-2837 @reviewAnswersProjTitleErrorValidationsChangeFlow
-  Scenario Outline: Validate error message on project title page when user redirected from review your answers page - change Fields
+  Scenario Outline: Validate error message on project title page when user redirected from review your answers page - change flow
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
     Then I can see the project details iras page
@@ -1021,7 +1021,7 @@ Feature: Create Amendment - Create Project
 
 
   @rsp-2837 @reviewAnswersInvestigatorEmailValidation_ChangeFlow
-  Scenario Outline: Validate error message on key roles page when user redirected from review your answers page
+  Scenario Outline: Validate error message for chief investigator email when user redirected from review your answers page - change flow
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
     Then I can see the project details iras page
@@ -1075,7 +1075,7 @@ Feature: Create Amendment - Create Project
       | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | chief_investigator | Invalid_Email_Data_One_Max_Char                        | Field_Error_Chief_Email         |
 
   @rsp-2837 @reviewAnswersSponsorEmailValidationsChangeFlow
-  Scenario Outline: Validate error message on key roles page when user redirected from review your answers page
+  Scenario Outline: Validate error message for sponsor email when user redirected from review your answers page - change flow
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
     Then I can see the project details iras page
