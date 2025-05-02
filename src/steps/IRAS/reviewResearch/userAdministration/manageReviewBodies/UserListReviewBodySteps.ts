@@ -95,7 +95,9 @@ Then(
   async ({ userListReviewBodyPage, commonItemsPage }) => {
     const userValues = await userListReviewBodyPage.getUserListBeforeSearch();
     const searchKey = await userListReviewBodyPage.getSearchKey();
-    const filteredSearchResults: string[] = userValues.filter((result) => result.includes(searchKey));
+    const filteredSearchResults: string[] = userValues.filter((result) =>
+      result.toLowerCase().includes(searchKey.toLowerCase())
+    );
     const userList = await commonItemsPage.getAllUsersFromTheTable();
     const userListAfterSearch: any = userList.get('searchResultValues');
     expect(filteredSearchResults).toEqual(userListAfterSearch);
@@ -135,3 +137,15 @@ Then('the system displays no results found message', async ({ userListReviewBody
       organisationName
   );
 });
+
+When(
+  'I click the first {string} link on the {string}',
+  async ({ commonItemsPage }, linkKey: string, pageKey: string) => {
+    const linkValue = commonItemsPage.linkTextData[pageKey][linkKey];
+    await commonItemsPage.govUkButton
+      .getByText(linkValue, { exact: true })
+      .or(commonItemsPage.govUkLink.getByText(linkValue, { exact: true }))
+      .first()
+      .click();
+  }
+);

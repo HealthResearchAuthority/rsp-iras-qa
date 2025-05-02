@@ -211,7 +211,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I click the 'Back' link on the 'Check_Remove_User_Profile_Page'
         Then I can see the user list page of the review body
 
-    @RemoveUserNoSearch @rsp-3273 @TestOnly
+    @RemoveUserNoSearch @rsp-3273
     Scenario: Verify the user can navigate to user list page of the review body and remove any user from the review body without using search
         When I click the 'View_Edit' link on the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
@@ -219,7 +219,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
         And I capture the page screenshot
         Then I can see the user list page of the review body
-        When I click the 'Remove' link on the 'Review_Body_User_List_Page'
+        When I click the first 'Remove' link on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then I can see the check and remove user profile page
         And I click the 'Back' link on the 'Check_Remove_User_Profile_Page'
