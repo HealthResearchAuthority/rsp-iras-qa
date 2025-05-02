@@ -9,8 +9,12 @@ Then(
     await checkRemoveUserReviewBodyPage.assertOnCheckRemoveUserProfilePage();
     const organisationName = await reviewBodyProfilePage.getOrgName();
     await expect(checkRemoveUserReviewBodyPage.page_heading).toHaveText(
-      checkRemoveUserReviewBodyPage.checkRemoveUserReviewBodyPageTestData.Check_Remove_User_Page.page_heading +
-        organisationName
+      checkRemoveUserReviewBodyPage.checkRemoveUserReviewBodyPageTestData.Check_Remove_User_Page.page_heading
+    );
+    await expect(checkRemoveUserReviewBodyPage.guidance_text).toHaveText(
+      checkRemoveUserReviewBodyPage.checkRemoveUserReviewBodyPageTestData.Check_Remove_User_Page.guidance_text +
+        organisationName +
+        '.'
     );
     await checkRemoveUserReviewBodyPage.setFirstName(
       confirmStringNotNull(await checkRemoveUserReviewBodyPage.first_name_value.textContent())

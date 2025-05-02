@@ -105,6 +105,7 @@
   },
   "Review_Body_User_List_Page": {
     "Back_To_Review_Body_Profile": "Back to review body profile",
-    "Manage_Users": "Manage users"
+    "Manage_Users": "Manage users",
+    "Remove": "Remove"
   }
 }

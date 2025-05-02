@@ -11,23 +11,34 @@ Then('I can see the user list page of the review body', async ({ userListReviewB
 });
 
 When(
-  'I enter an input into the search field to search for the existing user of the current review body',
-  async ({ userListReviewBodyPage, commonItemsPage }) => {
-    let searchKey: any;
-    // let userListBeforeSearch: any;
+  'I enter an input into the search field to search for the existing user of the current review body for {string}',
+  async ({ userListReviewBodyPage, commonItemsPage }, fieldKey: string) => {
     if ((await userListReviewBodyPage.userListTableRows.count()) >= 2) {
-      // userListBeforeSearch = await commonItemsPage.getUsersSearchResults();
+      let searchKey: string = '';
       const userList = await commonItemsPage.getUsers();
-      const emailAddressValues: any = userList.get('emailAddressValues');
-      searchKey = emailAddressValues[0]; //modify method to search with first name, last name also
+      if (fieldKey === 'Email_Address') {
+        const emailAddressValues: any = userList.get('emailAddressValues');
+        searchKey = emailAddressValues[0];
+      } else if (fieldKey === 'First_Name') {
+        const firstNameValues: any = userList.get('firstNameValues');
+        searchKey = firstNameValues[0];
+      } else if (fieldKey === 'Last_Name') {
+        const lastNameValues: any = userList.get('lastNameValues');
+        searchKey = lastNameValues[0];
+      }
+
+      if (await userListReviewBodyPage.first_page_link.isVisible()) {
+        await userListReviewBodyPage.first_page_link.click(); //work around due to bug
+      }
+      const userListBeforeSearch = await commonItemsPage.getAllUsersFromTheTable();
+      const userValues: any = userListBeforeSearch.get('searchResultValues');
+      await userListReviewBodyPage.setUserListBeforeSearch(userValues);
+      if (await userListReviewBodyPage.first_page_link.isVisible()) {
+        await userListReviewBodyPage.first_page_link.click(); //work around due to bug
+      }
+      await userListReviewBodyPage.setSearchKey(searchKey);
+      userListReviewBodyPage.search_text.fill(searchKey);
     }
-    await userListReviewBodyPage.first_page_link.click(); //work around due to bug
-    const userListBeforeSearch = await commonItemsPage.getUsersSearchResults();
-    const userValues: any = userListBeforeSearch.get('searchResultValues');
-    await userListReviewBodyPage.setUserListBeforeSearch(userValues);
-    await userListReviewBodyPage.first_page_link.click(); //work around due to bug
-    await userListReviewBodyPage.setSearchKey(searchKey);
-    userListReviewBodyPage.search_text.fill(searchKey);
   }
 );
 
@@ -37,7 +48,7 @@ Then(
     const userValues = await userListReviewBodyPage.getUserListBeforeSearch();
     const searchKey = await userListReviewBodyPage.getSearchKey();
     const filteredSearchResults: string[] = userValues.filter((result) => result.includes(searchKey));
-    const userList = await commonItemsPage.getUsersSearchResults();
+    const userList = await commonItemsPage.getAllUsersFromTheTable();
     const userListAfterSearch: any = userList.get('searchResultValues');
     expect(filteredSearchResults).toEqual(userListAfterSearch);
     for (const val of userListAfterSearch) {
@@ -67,7 +78,12 @@ Then('the system displays no results found message', async ({ userListReviewBody
   await expect(userListReviewBodyPage.no_results_heading).toHaveText(
     userListReviewBodyPage.userListReviewBodyPageTestData.Review_Body_User_List_Page.no_results_heading
   );
+  await expect(userListReviewBodyPage.no_results_guidance_text).toHaveText(
+    userListReviewBodyPage.userListReviewBodyPageTestData.Review_Body_User_List_Page.no_results_guidance_text
+  );
   expect(await userListReviewBodyPage.userListTableRows.count()).toBe(0);
-  // Back to Users HRA1
-  // Manage users
+  await expect(userListReviewBodyPage.back_to_users_link).toHaveText(
+    userListReviewBodyPage.userListReviewBodyPageTestData.Review_Body_User_List_Page.back_to_users_link +
+      organisationName
+  );
 });

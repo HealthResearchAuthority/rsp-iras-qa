@@ -10,7 +10,6 @@ export default class CheckRemoveUserReviewBodyPage {
   private _email_address: string;
   readonly page_heading: Locator;
   readonly guidance_text: Locator;
-  readonly row_value_locator: Locator;
   readonly title_row: Locator;
   readonly title_value: Locator;
   readonly first_name_row: Locator;
@@ -43,7 +42,6 @@ export default class CheckRemoveUserReviewBodyPage {
     this.guidance_text = this.page
       .getByRole('paragraph')
       .getByText(this.checkRemoveUserReviewBodyPageTestData.Check_Remove_User_Page.guidance_text);
-    this.row_value_locator = this.page.locator('input');
     this.title_row = this.page.locator('tr', {
       has: this.page
         .getByRole('cell')
@@ -51,7 +49,7 @@ export default class CheckRemoveUserReviewBodyPage {
           exact: true,
         }),
     });
-    this.title_value = this.title_row.locator('td', { has: this.row_value_locator });
+    this.title_value = this.title_row.locator('td:nth-child(2)');
     this.first_name_row = this.page.locator('tr', {
       has: this.page
         .getByRole('cell')
@@ -59,7 +57,7 @@ export default class CheckRemoveUserReviewBodyPage {
           exact: true,
         }),
     });
-    this.first_name_value = this.first_name_row.locator('td', { has: this.row_value_locator });
+    this.first_name_value = this.first_name_row.locator('td:nth-child(2)');
     this.last_name_row = this.page.locator('tr', {
       has: this.page
         .getByRole('cell')
@@ -67,7 +65,7 @@ export default class CheckRemoveUserReviewBodyPage {
           exact: true,
         }),
     });
-    this.last_name_value = this.last_name_row.locator('td', { has: this.row_value_locator });
+    this.last_name_value = this.last_name_row.locator('td:nth-child(2)');
     this.email_address_row = this.page.locator('tr', {
       has: this.page
         .getByRole('cell')
@@ -75,7 +73,7 @@ export default class CheckRemoveUserReviewBodyPage {
           exact: true,
         }),
     });
-    this.email_address_value = this.email_address_row.locator('td', { has: this.row_value_locator });
+    this.email_address_value = this.email_address_row.locator('td:nth-child(2)');
     this.telephone_row = this.page.locator('tr', {
       has: this.page
         .getByRole('cell')
@@ -83,7 +81,7 @@ export default class CheckRemoveUserReviewBodyPage {
           exact: true,
         }),
     });
-    this.telephone_value = this.telephone_row.locator('td', { has: this.row_value_locator });
+    this.telephone_value = this.telephone_row.locator('td:nth-child(2)');
     this.organisation_row = this.page.locator('tr', {
       has: this.page
         .getByRole('cell')
@@ -91,7 +89,7 @@ export default class CheckRemoveUserReviewBodyPage {
           exact: true,
         }),
     });
-    this.organisation_value = this.organisation_row.locator('td', { has: this.row_value_locator });
+    this.organisation_value = this.organisation_row.locator('td:nth-child(2)');
     this.job_title_row = this.page.locator('tr', {
       has: this.page
         .getByRole('cell')
@@ -99,7 +97,7 @@ export default class CheckRemoveUserReviewBodyPage {
           exact: true,
         }),
     });
-    this.job_title_value = this.job_title_row.locator('td', { has: this.row_value_locator });
+    this.job_title_value = this.job_title_row.locator('td:nth-child(2)');
     this.role_row = this.page.locator('tr', {
       has: this.page
         .getByRole('cell')
@@ -107,7 +105,7 @@ export default class CheckRemoveUserReviewBodyPage {
           exact: true,
         }),
     });
-    this.role_value = this.role_row.locator('td', { has: this.row_value_locator });
+    this.role_value = this.role_row.locator('td:nth-child(2)');
   }
 
   async assertOnCheckRemoveUserProfilePage() {

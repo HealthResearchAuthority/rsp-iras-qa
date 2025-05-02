@@ -490,8 +490,7 @@ export default class CommonItemsPage {
     const emailAddressValues: string[] = [];
     let dataFound = false;
     while (!dataFound) {
-      const rowCount = await this.userTableRows.count();
-      for (let i = 1; i < rowCount; i++) {
+      for (let i = 1; i < 2; i++) {
         const columns = this.userTableRows.nth(i).getByRole('cell');
         const firstName = confirmStringNotNull(await columns.nth(0).textContent());
         firstNameValues.push(firstName);
@@ -514,7 +513,7 @@ export default class CommonItemsPage {
     ]);
     return userMap;
   }
-  async getUsersSearchResults(): Promise<Map<string, string[]>> {
+  async getAllUsersFromTheTable(): Promise<Map<string, string[]>> {
     const searchResultValues: string[] = [];
     await this.page.waitForLoadState('domcontentloaded');
     await this.page.waitForTimeout(3000);
