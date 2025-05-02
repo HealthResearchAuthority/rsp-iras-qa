@@ -71,3 +71,10 @@ Then(
     await reviewYourAnswersPage.clickChangeLinks(changeLink);
   }
 );
+
+Then(
+  'I click the enter link {string} on review your answers page',
+  async ({ reviewYourAnswersPage }, enterLink: string) => {
+    await reviewYourAnswersPage.clickEnterLinks(enterLink);
+  }
+);

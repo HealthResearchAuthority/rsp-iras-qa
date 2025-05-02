@@ -141,4 +141,34 @@ export default class ReviewYourAnswersPage {
         throw new Error(`${changeLink} is not a valid option`);
     }
   }
+
+  async clickEnterLinks(enterLink: string) {
+    switch (enterLink.trim().toLowerCase()) {
+      case 'project_title':
+        await this.short_project_title_text.click();
+        break;
+      case 'project_end_date':
+        await this.planned_project_end_date_text.click();
+        await this.planned_project_end_date_text.click();
+        break;
+      case 'chief_investigator':
+        await this.chief_investigator_email_text.click();
+        break;
+      case 'sponsor_contact':
+        await this.sponsor_contact_email_text.click();
+        break;
+
+      case 'nations_participating':
+        await this.nations_participating_checkbox.click();
+        break;
+      case 'nhs_hsc_organisation':
+        await this.is_nhs_hsc_organisation_radio.click();
+        break;
+      case 'lead_nation':
+        await this.lead_nation_radio.click();
+        break;
+      default:
+        throw new Error(`${enterLink} is not a valid option`);
+    }
+  }
 }
