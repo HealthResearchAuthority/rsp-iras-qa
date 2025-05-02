@@ -2,13 +2,25 @@ import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../../hooks/CustomFixtures';
 const { When, Then } = createBdd(test);
 
-Then('I can see the user list page of the review body', async ({ userListReviewBodyPage, reviewBodyProfilePage }) => {
-  await userListReviewBodyPage.assertOnUserListReviewBodyPage();
-  const organisationName = await reviewBodyProfilePage.getOrgName();
-  await expect(userListReviewBodyPage.page_heading).toHaveText(
-    userListReviewBodyPage.userListReviewBodyPageTestData.Review_Body_User_List_Page.page_heading + organisationName
-  );
-});
+Then(
+  'I can see the user list page of the review body',
+  async ({ userListReviewBodyPage, reviewBodyProfilePage, commonItemsPage }) => {
+    await userListReviewBodyPage.assertOnUserListReviewBodyPage();
+    const organisationName = await reviewBodyProfilePage.getOrgName();
+    await expect(userListReviewBodyPage.page_heading).toHaveText(
+      userListReviewBodyPage.userListReviewBodyPageTestData.Review_Body_User_List_Page.page_heading + organisationName
+    );
+    if ((await userListReviewBodyPage.userListTableRows.count()) >= 2) {
+      const userList = await commonItemsPage.getUsers();
+      const emailAddress: any = userList.get('emailAddressValues');
+      await userListReviewBodyPage.setUserEmail(emailAddress);
+      const firstName: any = userList.get('firstNameValues');
+      await userListReviewBodyPage.setUserFirstName(firstName);
+      const lastName: any = userList.get('lastNameValues');
+      await userListReviewBodyPage.setUserLastName(lastName);
+    }
+  }
+);
 
 Then(
   'I can see no users in the review body with a message to add users to the review body',
@@ -19,19 +31,17 @@ Then(
 
 Then(
   'I can see the user list of the selected review body is sorted by default in the alphabetical order of the {string}',
-  async ({ commonItemsPage, userListReviewBodyPage }, sortField: string) => {
-    const userList = await commonItemsPage.getUsers();
+  async ({ userListReviewBodyPage }, sortField: string) => {
     let firstNameValues: any;
     switch (sortField.toLowerCase()) {
       case 'first name':
-        firstNameValues = userList.get('firstNameValues');
+        firstNameValues = await userListReviewBodyPage.getUserFirstName();
         break;
       default:
         throw new Error(`${sortField} is not a valid option`);
     }
     const sortedList = [...firstNameValues].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
     expect(firstNameValues).toEqual(sortedList);
-    await userListReviewBodyPage.setUserList(userList);
   }
 );
 
@@ -40,27 +50,25 @@ When(
   async ({ userListReviewBodyPage, commonItemsPage }, position: string, fieldKey: string) => {
     if ((await userListReviewBodyPage.userListTableRows.count()) >= 2) {
       let searchKey: string = '';
-      // const userList = await commonItemsPage.getUsers();
-      const userList = await userListReviewBodyPage.getUserList();
       if (fieldKey === 'Email_Address') {
-        const emailAddressValues: any = userList.get('emailAddressValues');
-        const rowCount = emailAddressValues.count();
+        const emailAddressValues: any = await userListReviewBodyPage.getUserEmail();
+        const rowCount = emailAddressValues.length;
         if (position == 'first') {
           searchKey = emailAddressValues[0];
         } else if (position == 'last') {
           searchKey = emailAddressValues[rowCount - 1];
         }
       } else if (fieldKey === 'First_Name') {
-        const firstNameValues: any = userList.get('firstNameValues');
-        const rowCount = firstNameValues.count();
+        const firstNameValues: any = await userListReviewBodyPage.getUserFirstName();
+        const rowCount = firstNameValues.length;
         if (position == 'first') {
           searchKey = firstNameValues[0];
         } else if (position == 'last') {
           searchKey = firstNameValues[rowCount - 1];
         }
       } else if (fieldKey === 'Last_Name') {
-        const lastNameValues: any = userList.get('lastNameValues');
-        const rowCount = lastNameValues.count();
+        const lastNameValues: any = await userListReviewBodyPage.getUserLastName();
+        const rowCount = lastNameValues.length;
         if (position == 'first') {
           searchKey = lastNameValues[0];
         } else if (position == 'last') {

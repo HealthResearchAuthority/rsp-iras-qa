@@ -8,7 +8,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
 
     @VerifyUserListCreateReviewBody @NoUsersReviewBody
     #  when there is no data to populate a table, then the table would not appear. something like 'There are no users, you can [add users]'
-    Scenario Outline: Verify the user can view the user list page of the review body and search for the users after creating a review body
+    Scenario Outline: Verify the user can view the user list page of the newly created review body
         And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
         Then I can see the 'Create_Review_Body_Page'
         And I capture the page screenshot
@@ -36,7 +36,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
             | Valid_Data_In_All_Mandatory_Fields |
 
     @VerifyUserListAnyReviewBody
-    Scenario: Verify the user can view the user list page of the any selected review body and search for the users in it
+    Scenario: Verify the user can view the user list page of the any selected review body
         And I select a 'QA Automation' Review Body to View and Edit which is 'active'
         And I can see the review body profile page
         And I capture the page screenshot
@@ -47,7 +47,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
 
 
     @SearchResultsFound @BackToReviewBodyProfileLink
-    Scenario Outline: Verify the user can view the user list page of the first review body and search for the users in it
+    Scenario Outline: Verify the user can view the user list page and search for the users in it and then navigate  back to review body profile page
         When I click the 'View_Edit' link on the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
         And I can see the review body profile page
@@ -70,7 +70,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
             | Email_Address |
 
     @SearchResultsFound @NoResultsFoundRemoveUser @rsp-3273 @RemoveAnotherUserFromTheReviewBodyLink @ManageUsersLink
-    Scenario: Verify the user can search and remove existing user of the selected review body and navigate to manage users page
+    Scenario: Verify the user can search and remove existing user of the selected review body and navigate to manage users page when no results found in the search for removed user
         When I click the 'View_Edit' link on the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
         And I can see the review body profile page
@@ -142,7 +142,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         Then I can see the 'Manage_Users_Page'
 
     @SearchResultsFound @NoResultsFoundRemoveUser @BackToReviewBodyUserListAfterRemoveUser @rsp-3273 @RemoveAnotherUserFromTheReviewBodyLink
-    Scenario: Verify the user can search and remove the user from the selected review body and navigate to review body user list page
+    Scenario: Verify the user can search and remove the user from the selected review body and navigate to review body user list page when no results found for the removed user
         When I click the 'View_Edit' link on the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
         And I can see the review body profile page
@@ -172,7 +172,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
     # Back to Users HRA1  >>bug Back to Users for HRA1
 
     @SearchResultsFound @BackToManageReviewBodiesRemoveUser @rsp-3273
-    Scenario: Verify the user can search and remove the existing user from the selected review body and navigate to manage review bodies page
+    Scenario: Verify the user can search and remove the existing user from the selected review body and navigate to manage review bodies page from the confirmation page
         When I click the 'View_Edit' link on the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
         And I can see the review body profile page
@@ -194,7 +194,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         Then I can see the 'Manage_Review_Bodies_Page'
 
     @SearchResultsFound @BackToReviewBodyUserListCheckRemoveUser @rsp-3273
-    Scenario: Verify the user can search and remove the existing user from the selected review body and navigate to manage review bodies page
+    Scenario: Verify the user can navigate to user list page of the review body from check and remove user profile page using back link
         When I click the 'View_Edit' link on the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
         And I can see the review body profile page
@@ -211,6 +211,31 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I click the 'Back' link on the 'Check_Remove_User_Profile_Page'
         Then I can see the user list page of the review body
 
+    @RemoveUserNoSearch @rsp-3273 @TestOnly
+    Scenario: Verify the user can navigate to user list page of the review body and remove any user from the review body without using search
+        When I click the 'View_Edit' link on the 'Manage_Review_Bodies_Page'
+        And I capture the page screenshot
+        And I can see the review body profile page
+        And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
+        And I capture the page screenshot
+        Then I can see the user list page of the review body
+        When I click the 'Remove' link on the 'Review_Body_User_List_Page'
+        And I capture the page screenshot
+        Then I can see the check and remove user profile page
+        And I click the 'Back' link on the 'Check_Remove_User_Profile_Page'
+        Then I can see the user list page of the review body
+
+# Notes:
+# One design change :when there is no data to populate a table, then the table would not appear. something like 'There are no users, you can [add users]'
+# https://nihr.atlassian.net/browse/RSP-3422 >> Manage review body - List of users associated with review body - search results when no matches
+# Expected Result:  AC 5.1 b. If there is not a user of the current review body that matches the search criteria then the no results found message will be presented to the user https://www.figma.com/design/w7EIAoM1EPyHZN9Z3Cj9Kf/User-administration---Manage-review-bodies?node-id=6016-4425&t=UmhNPFR7PZlgggfR-1Connect your Figma account
+# Actual Result: Text in search box disappears ,No results found message does not appear
+# https://nihr.atlassian.net/browse/RSP-3384 >> Manage review body - List of users associated with review body - typo
+# Expected Result: AC 2.3.i. When on the no results message page if the user selects the ‘Back to Users for [review body name]’ link then the user will be taken to the review body’s list of users
+# Actual Result: Link states ‘Back to Users [review body name]’
+# https://nihr.atlassian.net/browse/RSP-3506 >> Manage review body - Remove user associated with review body - Success screen - typo
+# Expected Result: First hyperlink to state: Remove another user from the review body
+# Actual Result: First hyperlink states: Remove another user from review body
 
 
 

@@ -7,7 +7,9 @@ export default class UserListReviewBodyPage {
   readonly userListReviewBodyPageTestData: typeof userListReviewBodyPageTestData;
   private _search_key: string;
   private _user_list_before_search: string[];
-  private _user_list: Map<string, string[]>;
+  private _user_email: string[];
+  private _user_fname: string[];
+  private _user_lname: string[];
   readonly page_heading: Locator;
   readonly guidance_text: Locator;
   readonly userListTableRows: Locator;
@@ -30,7 +32,9 @@ export default class UserListReviewBodyPage {
     this.userListReviewBodyPageTestData = userListReviewBodyPageTestData;
     this._search_key = '';
     this._user_list_before_search = [];
-    this._user_list = new Map<string, string[]>();
+    this._user_email = [];
+    this._user_fname = [];
+    this._user_lname = [];
     //Locators
     this.page_heading = this.page
       .getByRole('heading')
@@ -129,11 +133,26 @@ export default class UserListReviewBodyPage {
     this._user_list_before_search = value;
   }
 
-  async getUserList(): Promise<Map<string, string[]>> {
-    return this._user_list;
+  async getUserEmail(): Promise<string[]> {
+    return this._user_email;
   }
 
-  async setUserList(value: Map<string, string[]>): Promise<void> {
-    this._user_list = value;
+  async setUserEmail(value: string[]): Promise<void> {
+    this._user_email = value;
+  }
+
+  async getUserFirstName(): Promise<string[]> {
+    return this._user_fname;
+  }
+
+  async setUserFirstName(value: string[]): Promise<void> {
+    this._user_fname = value;
+  }
+  async getUserLastName(): Promise<string[]> {
+    return this._user_lname;
+  }
+
+  async setUserLastName(value: string[]): Promise<void> {
+    this._user_lname = value;
   }
 }
