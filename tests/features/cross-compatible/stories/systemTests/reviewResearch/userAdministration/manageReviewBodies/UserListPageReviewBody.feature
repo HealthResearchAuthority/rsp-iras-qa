@@ -6,7 +6,8 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
         Then I can see the 'Manage_Review_Bodies_Page'
 
-    @VerifyUserListCreateReviewBody
+    @VerifyUserListCreateReviewBody @NoUsersReviewBody
+    #  when there is no data to populate a table, then the table would not appear. something like 'There are no users, you can [add users]'
     Scenario Outline: Verify the user can view the user list page of the review body and search for the users after creating a review body
         And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
         Then I can see the 'Create_Review_Body_Page'
@@ -28,19 +29,21 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
         Then I can see the user list page of the review body
         And I capture the page screenshot
+        And I can see no users in the review body with a message to add users to the review body
 
         Examples:
             | Add_Review_Body                    |
             | Valid_Data_In_All_Mandatory_Fields |
 
     @VerifyUserListAnyReviewBody
-    Scenario: Verify the user can view the user list page of the selected review body and search for the users in it
+    Scenario: Verify the user can view the user list page of the any selected review body and search for the users in it
         And I select a 'QA Automation' Review Body to View and Edit which is 'active'
         And I can see the review body profile page
         And I capture the page screenshot
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
         And I capture the page screenshot
         Then I can see the user list page of the review body
+    # add user and then search
 
 
     @SearchResultsFound @BackToReviewBodyProfileLink
@@ -51,13 +54,15 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
         And I capture the page screenshot
         Then I can see the user list page of the review body
-        When I enter an input into the search field to search for the existing user of the current review body for '<Field_Name>'
+        And I can see the user list of the selected review body is sorted by default in the alphabetical order of the 'First Name'
+        When I enter an input into the search field to search for the existing 'first' user of the current review body for '<Field_Name>'
         And I capture the page screenshot
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then the system displays search results matching the search criteria
         When I click the 'Back_To_Review_Body_Profile' link on the 'Review_Body_User_List_Page'
         Then I can see the review body profile page
+
         Examples:
             | Field_Name    |
             | First_Name    |
@@ -65,14 +70,14 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
             | Email_Address |
 
     @SearchResultsFound @NoResultsFoundRemoveUser @rsp-3273 @RemoveAnotherUserFromTheReviewBodyLink @ManageUsersLink
-    Scenario: Verify the user can remove the user from the selected review body and navigate to manage users page
+    Scenario: Verify the user can search and remove existing user of the selected review body and navigate to manage users page
         When I click the 'View_Edit' link on the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
         And I can see the review body profile page
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
         And I capture the page screenshot
         Then I can see the user list page of the review body
-        When I enter an input into the search field to search for the existing user of the current review body for 'Email_Address'
+        When I enter an input into the search field to search for the existing 'last' user of the current review body for 'Email_Address'
         And I capture the page screenshot
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
@@ -95,14 +100,14 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         Then I can see the 'Manage_Users_Page'
 
     @SearchResultsFound @NoResultsFoundRemoveUser @rsp-3273 @RemoveAnotherUserFromTheReviewBodyLink @ManageUsersLink
-    Scenario: Verify the user can remove the user from the selected review body and navigate to manage users page
+    Scenario: Verify the user can search and remove existing user of the selected review body and repeat the process with remove another user from the review body link
         When I click the 'View_Edit' link on the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
         And I can see the review body profile page
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
         And I capture the page screenshot
         Then I can see the user list page of the review body
-        When I enter an input into the search field to search for the existing user of the current review body for 'Email_Address'
+        When I enter an input into the search field to search for the existing 'last' user of the current review body for 'Email_Address'
         And I capture the page screenshot
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
@@ -116,7 +121,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I click the 'Remove_Another_User_From_The_Review_Body' link on the 'Confirmation_Page'
         And I capture the page screenshot
         Then I can see the user list page of the review body
-        When I enter an input into the search field to search for the existing user of the current review body for 'Email_Address'
+        When I enter an input into the search field to search for the existing 'last' user of the current review body for 'Email_Address'
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then the system displays search results matching the search criteria
@@ -137,14 +142,14 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         Then I can see the 'Manage_Users_Page'
 
     @SearchResultsFound @NoResultsFoundRemoveUser @BackToReviewBodyUserListAfterRemoveUser @rsp-3273 @RemoveAnotherUserFromTheReviewBodyLink
-    Scenario: Verify the user can remove the user from the selected review body and navigate to review body user list page
+    Scenario: Verify the user can search and remove the user from the selected review body and navigate to review body user list page
         When I click the 'View_Edit' link on the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
         And I can see the review body profile page
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
         And I capture the page screenshot
         Then I can see the user list page of the review body
-        When I enter an input into the search field to search for the existing user of the current review body for 'Email_Address'
+        When I enter an input into the search field to search for the existing 'last' user of the current review body for 'Email_Address'
         And I capture the page screenshot
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
@@ -167,14 +172,14 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
     # Back to Users HRA1  >>bug Back to Users for HRA1
 
     @SearchResultsFound @BackToManageReviewBodiesRemoveUser @rsp-3273
-    Scenario: Verify the user can remove the user from the selected review body and navigate to manage review bodies page
+    Scenario: Verify the user can search and remove the existing user from the selected review body and navigate to manage review bodies page
         When I click the 'View_Edit' link on the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
         And I can see the review body profile page
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
         And I capture the page screenshot
         Then I can see the user list page of the review body
-        When I enter an input into the search field to search for the existing user of the current review body for 'Email_Address'
+        When I enter an input into the search field to search for the existing 'last' user of the current review body for 'Email_Address'
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then the system displays search results matching the search criteria
@@ -187,6 +192,24 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         When I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
         And I capture the page screenshot
         Then I can see the 'Manage_Review_Bodies_Page'
+
+    @SearchResultsFound @BackToReviewBodyUserListCheckRemoveUser @rsp-3273
+    Scenario: Verify the user can search and remove the existing user from the selected review body and navigate to manage review bodies page
+        When I click the 'View_Edit' link on the 'Manage_Review_Bodies_Page'
+        And I capture the page screenshot
+        And I can see the review body profile page
+        And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
+        And I capture the page screenshot
+        Then I can see the user list page of the review body
+        When I enter an input into the search field to search for the existing 'last' user of the current review body for 'Email_Address'
+        And I click the 'Search' button on the 'Review_Body_User_List_Page'
+        And I capture the page screenshot
+        Then the system displays search results matching the search criteria
+        When I click the 'Remove' link on the 'Review_Body_User_List_Page'
+        And I capture the page screenshot
+        Then I can see the check and remove user profile page
+        And I click the 'Back' link on the 'Check_Remove_User_Profile_Page'
+        Then I can see the user list page of the review body
 
 
 

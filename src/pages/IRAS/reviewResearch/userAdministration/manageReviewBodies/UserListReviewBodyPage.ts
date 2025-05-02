@@ -6,7 +6,8 @@ export default class UserListReviewBodyPage {
   readonly page: Page;
   readonly userListReviewBodyPageTestData: typeof userListReviewBodyPageTestData;
   private _search_key: string;
-  private _user_list: string[];
+  private _user_list_before_search: string[];
+  private _user_list: Map<string, string[]>;
   readonly page_heading: Locator;
   readonly guidance_text: Locator;
   readonly userListTableRows: Locator;
@@ -28,7 +29,8 @@ export default class UserListReviewBodyPage {
     this.page = page;
     this.userListReviewBodyPageTestData = userListReviewBodyPageTestData;
     this._search_key = '';
-    this._user_list = [];
+    this._user_list_before_search = [];
+    this._user_list = new Map<string, string[]>();
     //Locators
     this.page_heading = this.page
       .getByRole('heading')
@@ -120,10 +122,18 @@ export default class UserListReviewBodyPage {
   }
 
   async getUserListBeforeSearch(): Promise<string[]> {
-    return this._user_list;
+    return this._user_list_before_search;
   }
 
   async setUserListBeforeSearch(value: string[]): Promise<void> {
+    this._user_list_before_search = value;
+  }
+
+  async getUserList(): Promise<Map<string, string[]>> {
+    return this._user_list;
+  }
+
+  async setUserList(value: Map<string, string[]>): Promise<void> {
     this._user_list = value;
   }
 }

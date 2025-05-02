@@ -490,7 +490,8 @@ export default class CommonItemsPage {
     const emailAddressValues: string[] = [];
     let dataFound = false;
     while (!dataFound) {
-      for (let i = 1; i < 2; i++) {
+      const rowCount = await this.userTableRows.count();
+      for (let i = 1; i < rowCount; i++) {
         const columns = this.userTableRows.nth(i).getByRole('cell');
         const firstName = confirmStringNotNull(await columns.nth(0).textContent());
         firstNameValues.push(firstName);

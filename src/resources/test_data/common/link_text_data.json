@@ -107,5 +107,8 @@
     "Back_To_Review_Body_Profile": "Back to review body profile",
     "Manage_Users": "Manage users",
     "Remove": "Remove"
+  },
+  "Check_Remove_User_Profile_Page": {
+    "Back": "Back"
   }
 }
