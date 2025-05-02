@@ -1,0 +1,25 @@
+{
+  "RTS_NIHR_FHIR_Config": {
+    "idg_base_url": "https://test.id.nihr.ac.uk/",
+    "rts_base_url": "https://test.fhir.rts.nihr.ac.uk/api/",
+    "grant_type": "client_credentials",
+    "scope": "openid+profile+email",
+    "client_id": "aaU7PY4hz_x_RVOyCo09CulPbTca",
+    "client_secret": "",
+    "accept": "application/json",
+    "accept_encoding": "gzip, deflate, br",
+    "accept_language": "en-GB,en-US;q=0.9,en;q=0.8",
+    "cache_control": "no-cache",
+    "content_type": "application/x-www-form-urlencoded",
+    "content_type_json": "application/json",
+    "token_type": "Bearer",
+    "organisation_name": "",
+    "role": "CRSPNSR@2.16.840.1.113883.5.110",
+    "count": "1000"
+  },
+  "RTS_Sponsor_Organisation_Test": {
+    "organisation_name": "test",
+    "role": "CRSPNSR@2.16.840.1.113883.5.110",
+    "count": "1000"
+  }
+}
