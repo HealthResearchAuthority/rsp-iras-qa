@@ -60,8 +60,8 @@ export default class ReviewYourAnswersPage {
     this.planned_project_end_date_row = this.list_row.filter({
       has: this.page.getByText(this.reviewYourAnswersPageTestData.Review_Your_Answers_Page.project_end_date_label),
     });
-    this.planned_project_end_date_text = this.short_project_title_row.getByRole('definition').first();
-    this.planned_project_end_date_change_link = this.short_project_title_row.getByText(
+    this.planned_project_end_date_text = this.planned_project_end_date_row.getByRole('definition').first();
+    this.planned_project_end_date_change_link = this.planned_project_end_date_row.getByText(
       this.linkTextData.Review_Your_Answers_Page.Change
     );
     this.chief_investigator_email_row = this.list_row.filter({
@@ -69,36 +69,36 @@ export default class ReviewYourAnswersPage {
         this.reviewYourAnswersPageTestData.Review_Your_Answers_Page.chief_investigator_email_label
       ),
     });
-    this.chief_investigator_email_text = this.short_project_title_row.getByRole('definition').first();
-    this.chief_investigator_email_change_link = this.short_project_title_row.getByText(
+    this.chief_investigator_email_text = this.chief_investigator_email_row.getByRole('definition').first();
+    this.chief_investigator_email_change_link = this.chief_investigator_email_row.getByText(
       this.linkTextData.Review_Your_Answers_Page.Change
     );
     this.sponsor_contact_email_row = this.list_row.filter({
       has: this.page.getByText(this.reviewYourAnswersPageTestData.Review_Your_Answers_Page.sponsor_contact_email_label),
     });
-    this.sponsor_contact_email_text = this.short_project_title_row.getByRole('definition').first();
-    this.sponsor_contact_email_change_link = this.short_project_title_row.getByText(
+    this.sponsor_contact_email_text = this.sponsor_contact_email_row.getByRole('definition').first();
+    this.sponsor_contact_email_change_link = this.sponsor_contact_email_row.getByText(
       this.linkTextData.Review_Your_Answers_Page.Change
     );
     this.nations_participating_row = this.list_row.filter({
       has: this.page.getByText(this.reviewYourAnswersPageTestData.Review_Your_Answers_Page.participating_nations_label),
     });
-    this.nations_participating_checkbox = this.short_project_title_row.getByRole('definition').first();
-    this.nations_participating_change_link = this.short_project_title_row.getByText(
+    this.nations_participating_checkbox = this.nations_participating_row.getByRole('definition').first();
+    this.nations_participating_change_link = this.nations_participating_row.getByText(
       this.linkTextData.Review_Your_Answers_Page.Change
     );
     this.is_nhs_hsc_organisation_row = this.list_row.filter({
-      has: this.page.getByText(this.reviewYourAnswersPageTestData.Review_Your_Answers_Page.participating_nations_label),
+      has: this.page.getByText(this.reviewYourAnswersPageTestData.Review_Your_Answers_Page.nhs_hsc_organisations_label),
     });
-    this.is_nhs_hsc_organisation_radio = this.short_project_title_row.getByRole('definition').first();
-    this.is_nhs_hsc_organisation_change_link = this.short_project_title_row.getByText(
+    this.is_nhs_hsc_organisation_radio = this.is_nhs_hsc_organisation_row.getByRole('definition').first();
+    this.is_nhs_hsc_organisation_change_link = this.is_nhs_hsc_organisation_row.getByText(
       this.linkTextData.Review_Your_Answers_Page.Change
     );
     this.lead_nation_radio_row = this.list_row.filter({
-      has: this.page.getByText(this.reviewYourAnswersPageTestData.Review_Your_Answers_Page.participating_nations_label),
+      has: this.page.getByText(this.reviewYourAnswersPageTestData.Review_Your_Answers_Page.lead_nation_label),
     });
-    this.lead_nation_radio = this.short_project_title_row.getByRole('definition').first();
-    this.lead_nation_change_link = this.short_project_title_row.getByText(
+    this.lead_nation_radio = this.lead_nation_radio_row.getByRole('definition').first();
+    this.lead_nation_change_link = this.lead_nation_radio_row.getByText(
       this.linkTextData.Review_Your_Answers_Page.Change
     );
   }
@@ -106,5 +106,39 @@ export default class ReviewYourAnswersPage {
   //Page Methods
   async assertOnReviewYourAnswersPage() {
     await expect(this.pageHeading).toBeVisible();
+  }
+
+  async getPlannedProjectEndDate() {
+    const plannedProjectEndDate = await this.planned_project_end_date_text.textContent();
+    return plannedProjectEndDate;
+  }
+
+  async clickChangeLinks(changeLink: string) {
+    switch (changeLink.trim().toLowerCase()) {
+      case 'project_title':
+        await this.short_project_title_change_link.click();
+        break;
+      case 'project_end_date':
+        await this.planned_project_end_date_change_link.click();
+        break;
+      case 'chief_investigator':
+        await this.chief_investigator_email_change_link.click();
+        break;
+      case 'sponsor_contact':
+        await this.sponsor_contact_email_change_link.click();
+        break;
+
+      case 'nations_participating':
+        await this.nations_participating_change_link.click();
+        break;
+      case 'nhs_hsc_organisation':
+        await this.is_nhs_hsc_organisation_change_link.click();
+        break;
+      case 'lead_nation':
+        await this.lead_nation_change_link.click();
+        break;
+      default:
+        throw new Error(`${changeLink} is not a valid option`);
+    }
   }
 }

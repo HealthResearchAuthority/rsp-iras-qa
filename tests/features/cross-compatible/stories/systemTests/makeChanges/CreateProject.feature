@@ -575,7 +575,20 @@ Feature: Create Amendment - Create Project
       | Valid_Data_All_Fields | Invalid_Email_Data_Two_Punycode                        | Field_Error_Sponsor_Email       |
       | Valid_Data_All_Fields | Invalid_Email_Data_Two_Max_Char                        | Field_Error_Sponsor_Email       |
 
-  @rsp-2837 @createProjectReviewAnswers
+
+
+
+
+
+
+
+
+
+
+
+
+
+  @rsp-2837 @reviewYourAnswersAllFields
   Scenario Outline: Verify that user completed all question and can review the answers on create project journey
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -594,17 +607,14 @@ Feature: Create Amendment - Create Project
     And I click the 'Save_Continue' button on the 'Research_Locations_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
+    Then I can validate the field values of '<Project_Details_Title>' page '<Key_Project_Roles>' page and '<Research_Locations>' page
     Examples:
       | Project_Details_Title | Key_Project_Roles     | Research_Locations    |
       | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields |
-  # | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Empty_Fields              |
-  # | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_Only_Investigator_Email_Field |
-  # | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_Only_Sponsor_Email_Field      |
 
 
-
-  @rsp-2837 @createProjectReviewAnswers
-  Scenario Outline: Verify that user can change the project title details from review the answers page on create project journey
+  @rsp-2837 @reviewAnswersChangeProjTitleFields
+  Scenario Outline: Verify that user can change the project title details all fields from review the answers page on create project journey
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
     Then I can see the project details iras page
@@ -622,16 +632,99 @@ Feature: Create Amendment - Create Project
     And I click the 'Save_Continue' button on the 'Research_Locations_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
+    Then I can validate the field values of '<Project_Details_Title>' page '<Key_Project_Roles>' page and '<Research_Locations>' page
+    And I click the change link '<Change_Link_Field>' on review your answers page
+    Then I can see the project details title page
+    And I fill the project details title page with '<Project_Details_Title_Change>'
+    And I capture the page screenshot
+    When I click the 'Save_Changes' button on the 'Project_Details_Title_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    Then I can validate the field values of '<Project_Details_Title_Change>' page '<Key_Project_Roles>' page and '<Research_Locations>' page
 
     Examples:
-      | Project_Details_Title | Key_Project_Roles     | Research_Locations    |
-      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields |
-  # | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Empty_Fields              |
-  # | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_Only_Investigator_Email_Field |
-  # | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_Only_Sponsor_Email_Field      |
+      | Project_Details_Title       | Key_Project_Roles     | Research_Locations    | Change_Link_Field | Project_Details_Title_Change    |
+      | Valid_Data_All_Fields       | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_Title     | Valid_Data_All_Fields_Two       |
+      | Valid_Data_Only_Title_Field | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_Title     | Valid_Data_Only_Title_Field_Two |
+      | Valid_Data_Only_Date_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_End_Date  | Valid_Data_Only_Date_Fields_Two |
 
 
-  @rsp-2837 @createProjectReviewAnswers
+
+
+  @rsp-2837 @reviewAnswersChangeProjKeyRoles
+  Scenario Outline: Verify that user can change the project key roles all fields from review your answers page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    Then I can see the project details iras page
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
+    And I fill the project details title page with '<Project_Details_Title>'
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    And  I fill the key project roles page with '<Key_Project_Roles>'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    And I fill the research locations page with '<Research_Locations>'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    Then I can validate the field values of '<Project_Details_Title>' page '<Key_Project_Roles>' page and '<Research_Locations>' page
+    And I click the change link '<Change_Link_Field>' on review your answers page
+    Then I can see the key project roles page
+    And  I fill the key project roles page with '<Key_Project_Roles_Change>'
+    And I capture the page screenshot
+    When I click the 'Save_Changes' button on the 'Key_Project_Roles_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    Then I can validate the field values of '<Project_Details_Title>' page '<Key_Project_Roles_Change>' page and '<Research_Locations>' page
+
+    Examples:
+      | Project_Details_Title | Key_Project_Roles                        | Key_Project_Roles_Change                     | Research_Locations    | Change_Link_Field  |
+      | Valid_Data_All_Fields | Valid_Data_All_Fields                    | Valid_Data_All_Fields_Two                    | Valid_Data_All_Fields | chief_investigator |
+      | Valid_Data_All_Fields | Valid_Data_Only_Investigator_Email_Field | Valid_Data_Only_Investigator_Email_Field_Two | Valid_Data_All_Fields | chief_investigator |
+      | Valid_Data_All_Fields | Valid_Data_Only_Sponsor_Email_Field      | Valid_Data_Only_Sponsor_Email_Field_Two      | Valid_Data_All_Fields | sponsor_contact    |
+
+
+  @rsp-2837 @reviewAnswersChangeResearchLoc
+  Scenario Outline: Verify that user can change the project research locations fields from review your answers page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    Then I can see the project details iras page
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
+    And I fill the project details title page with '<Project_Details_Title>'
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    And  I fill the key project roles page with '<Key_Project_Roles>'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    And I fill the research locations page with '<Research_Locations>'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    Then I can validate the field values of '<Project_Details_Title>' page '<Key_Project_Roles>' page and '<Research_Locations>' page
+    And I click the change link '<Change_Link_Field>' on review your answers page
+    Then I can see the research locations page
+    And I fill the research locations page with '<Research_Locations_Change>'
+    And I capture the page screenshot
+    When I click the 'Save_Changes' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    Then I can validate the field values of '<Project_Details_Title>' page '<Key_Project_Roles>' page and '<Research_Locations_Change>' page
+
+    Examples:
+      | Project_Details_Title | Key_Project_Roles     | Research_Locations                      | Research_Locations_Change                   | Change_Link_Field     |
+      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields                   | Valid_Data_All_Fields_Two                   | nations_participating |
+      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_Only_Nations_Participating   | Valid_Data_Only_Nations_Participating_Two   | nations_participating |
+      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_is_nhs_hsc_organisation      | Valid_Data_is_nhs_hsc_organisation_Two      | nhs_hsc_organisation  |
+      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_Only_is_nhs_hsc_organisation | Valid_Data_Only_is_nhs_hsc_organisation_Two | nhs_hsc_organisation  |
+
+
+  @rsp-2837 @reviewAnswersAllMissingFields
   Scenario Outline: Verify that user is not completed all question and can review the answers on create project journey
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -650,10 +743,11 @@ Feature: Create Amendment - Create Project
     And I click the 'Save_Continue' button on the 'Research_Locations_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
+    Then I can see enter link for all the incomplete fields '<Review_Answers>'
 
     Examples:
-      | Project_Details_Title       | Key_Project_Roles           | Research_Locations          |
-      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields |
+      | Project_Details_Title       | Key_Project_Roles           | Research_Locations          |  | Review_Answers             |
+      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields |  | Enter_Links_Missing_Fields |
 # | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Empty_Fields              |
 # | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_Only_Investigator_Email_Field |
 # | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_Only_Sponsor_Email_Field      |
