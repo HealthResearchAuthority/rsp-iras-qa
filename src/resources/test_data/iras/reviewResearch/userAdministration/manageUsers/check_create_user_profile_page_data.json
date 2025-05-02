@@ -14,7 +14,7 @@
     "role_label": "Role",
     "committee_label": "Committee",
     "country_label": "Country",
-    "access_required_label": "Access Required",
+    "access_required_label": "Access required",
     "review_body_label": "Review body"
   }
 }
