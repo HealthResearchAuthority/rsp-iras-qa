@@ -75,5 +75,11 @@
   },
   "Check_Remove_User_Profile_Page": {
     "Remove_User_Profile": "Remove user profile"
+  },
+  "Check_Add_User_Profile_Page": {
+    "Add_User_Profile": "Add user profile"
+  },
+  "Search_For_User_To_Add_To_Review_Body": {
+    "Search": "Search"
   }
 }

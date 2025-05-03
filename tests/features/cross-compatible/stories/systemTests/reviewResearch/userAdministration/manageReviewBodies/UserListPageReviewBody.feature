@@ -43,7 +43,16 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
         And I capture the page screenshot
         Then I can see the user list page of the review body
-    # add user and then search
+        # add user and then search
+        And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
+        And I enter an input into the search field to search for a user not added in the current review body
+        And I click the 'Search' button on the 'Search_For_User_To_Add_To_Review_Body'
+        When I click the first 'Add_User' link on the 'Search_For_User_To_Add_To_Review_Body'
+        And I click the 'Add_User_Profile' button on the 'Check_Add_User_Profile_Page'
+        And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
+        And I click the 'Back' link on the 'Search_For_User_To_Add_To_Review_Body'
+        Then I can see the user list page of the review body
+
 
 
     @SearchResultsFound @BackToReviewBodyProfileLink
@@ -54,6 +63,26 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
         And I capture the page screenshot
         Then I can see the user list page of the review body
+        # add user and then search
+        And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
+        And I enter an input into the search field to search for a user not added in the current review body
+        And I click the 'Search' button on the 'Search_For_User_To_Add_To_Review_Body'
+        When I click the first 'Add_User' link on the 'Search_For_User_To_Add_To_Review_Body'
+        And I click the 'Add_User_Profile' button on the 'Check_Add_User_Profile_Page'
+        And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
+        And I click the 'Back' link on the 'Search_For_User_To_Add_To_Review_Body'
+        Then I can see the user list page of the review body
+        # add user and then search
+        And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
+        And I enter an input into the search field to search for a user not added in the current review body
+        And I click the 'Search' button on the 'Search_For_User_To_Add_To_Review_Body'
+        When I click the first 'Add_User' link on the 'Search_For_User_To_Add_To_Review_Body'
+        And I click the 'Add_User_Profile' button on the 'Check_Add_User_Profile_Page'
+        And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
+        And I click the 'Back' link on the 'Search_For_User_To_Add_To_Review_Body'
+        Then I can see the user list page of the review body
+        # add user ends here
+        And I capture the page screenshot
         And I can see the user list of the selected review body is sorted by default in the alphabetical order of the 'First Name'
         When I enter an input into the search field to search for the existing 'first' user of the current review body for '<Field_Name>'
         And I capture the page screenshot
@@ -77,6 +106,26 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
         And I capture the page screenshot
         Then I can see the user list page of the review body
+        # add user and then search
+        And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
+        And I enter an input into the search field to search for a user not added in the current review body
+        And I click the 'Search' button on the 'Search_For_User_To_Add_To_Review_Body'
+        When I click the first 'Add_User' link on the 'Search_For_User_To_Add_To_Review_Body'
+        And I click the 'Add_User_Profile' button on the 'Check_Add_User_Profile_Page'
+        And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
+        And I click the 'Back' link on the 'Search_For_User_To_Add_To_Review_Body'
+        Then I can see the user list page of the review body
+        # add user and then search
+        And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
+        And I enter an input into the search field to search for a user not added in the current review body
+        And I click the 'Search' button on the 'Search_For_User_To_Add_To_Review_Body'
+        When I click the first 'Add_User' link on the 'Search_For_User_To_Add_To_Review_Body'
+        And I click the 'Add_User_Profile' button on the 'Check_Add_User_Profile_Page'
+        And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
+        And I click the 'Back' link on the 'Search_For_User_To_Add_To_Review_Body'
+        Then I can see the user list page of the review body
+        And I capture the page screenshot
+        # add user ends here
         When I enter an input into the search field to search for the existing 'last' user of the current review body for 'Email_Address'
         And I capture the page screenshot
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
@@ -107,6 +156,35 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
         And I capture the page screenshot
         Then I can see the user list page of the review body
+        # add user and then search
+        And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
+        And I enter an input into the search field to search for a user not added in the current review body
+        And I click the 'Search' button on the 'Search_For_User_To_Add_To_Review_Body'
+        When I click the first 'Add_User' link on the 'Search_For_User_To_Add_To_Review_Body'
+        And I click the 'Add_User_Profile' button on the 'Check_Add_User_Profile_Page'
+        And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
+        And I click the 'Back' link on the 'Search_For_User_To_Add_To_Review_Body'
+        Then I can see the user list page of the review body
+        # add user and then search
+        And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
+        And I enter an input into the search field to search for a user not added in the current review body
+        And I click the 'Search' button on the 'Search_For_User_To_Add_To_Review_Body'
+        When I click the first 'Add_User' link on the 'Search_For_User_To_Add_To_Review_Body'
+        And I click the 'Add_User_Profile' button on the 'Check_Add_User_Profile_Page'
+        And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
+        And I click the 'Back' link on the 'Search_For_User_To_Add_To_Review_Body'
+        Then I can see the user list page of the review body
+        # add user and then search
+        And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
+        And I enter an input into the search field to search for a user not added in the current review body
+        And I click the 'Search' button on the 'Search_For_User_To_Add_To_Review_Body'
+        When I click the first 'Add_User' link on the 'Search_For_User_To_Add_To_Review_Body'
+        And I click the 'Add_User_Profile' button on the 'Check_Add_User_Profile_Page'
+        And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
+        And I click the 'Back' link on the 'Search_For_User_To_Add_To_Review_Body'
+        Then I can see the user list page of the review body
+        And I capture the page screenshot
+        # add user ends here
         When I enter an input into the search field to search for the existing 'last' user of the current review body for 'Email_Address'
         And I capture the page screenshot
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
@@ -149,6 +227,26 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
         And I capture the page screenshot
         Then I can see the user list page of the review body
+        # add user and then search
+        And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
+        And I enter an input into the search field to search for a user not added in the current review body
+        And I click the 'Search' button on the 'Search_For_User_To_Add_To_Review_Body'
+        When I click the first 'Add_User' link on the 'Search_For_User_To_Add_To_Review_Body'
+        And I click the 'Add_User_Profile' button on the 'Check_Add_User_Profile_Page'
+        And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
+        And I click the 'Back' link on the 'Search_For_User_To_Add_To_Review_Body'
+        Then I can see the user list page of the review body
+        # add user and then search
+        And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
+        And I enter an input into the search field to search for a user not added in the current review body
+        And I click the 'Search' button on the 'Search_For_User_To_Add_To_Review_Body'
+        When I click the first 'Add_User' link on the 'Search_For_User_To_Add_To_Review_Body'
+        And I click the 'Add_User_Profile' button on the 'Check_Add_User_Profile_Page'
+        And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
+        And I click the 'Back' link on the 'Search_For_User_To_Add_To_Review_Body'
+        Then I can see the user list page of the review body
+        And I capture the page screenshot
+        # add user ends here
         When I enter an input into the search field to search for the existing 'last' user of the current review body for 'Email_Address'
         And I capture the page screenshot
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
@@ -179,6 +277,26 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
         And I capture the page screenshot
         Then I can see the user list page of the review body
+        # add user and then search
+        And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
+        And I enter an input into the search field to search for a user not added in the current review body
+        And I click the 'Search' button on the 'Search_For_User_To_Add_To_Review_Body'
+        When I click the first 'Add_User' link on the 'Search_For_User_To_Add_To_Review_Body'
+        And I click the 'Add_User_Profile' button on the 'Check_Add_User_Profile_Page'
+        And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
+        And I click the 'Back' link on the 'Search_For_User_To_Add_To_Review_Body'
+        Then I can see the user list page of the review body
+        # add user and then search
+        And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
+        And I enter an input into the search field to search for a user not added in the current review body
+        And I click the 'Search' button on the 'Search_For_User_To_Add_To_Review_Body'
+        When I click the first 'Add_User' link on the 'Search_For_User_To_Add_To_Review_Body'
+        And I click the 'Add_User_Profile' button on the 'Check_Add_User_Profile_Page'
+        And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
+        And I click the 'Back' link on the 'Search_For_User_To_Add_To_Review_Body'
+        Then I can see the user list page of the review body
+        And I capture the page screenshot
+        # add user ends here
         When I enter an input into the search field to search for the existing 'last' user of the current review body for 'Email_Address'
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
@@ -201,6 +319,26 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
         And I capture the page screenshot
         Then I can see the user list page of the review body
+        # add user and then search
+        And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
+        And I enter an input into the search field to search for a user not added in the current review body
+        And I click the 'Search' button on the 'Search_For_User_To_Add_To_Review_Body'
+        When I click the first 'Add_User' link on the 'Search_For_User_To_Add_To_Review_Body'
+        And I click the 'Add_User_Profile' button on the 'Check_Add_User_Profile_Page'
+        And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
+        And I click the 'Back' link on the 'Search_For_User_To_Add_To_Review_Body'
+        Then I can see the user list page of the review body
+        # add user and then search
+        And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
+        And I enter an input into the search field to search for a user not added in the current review body
+        And I click the 'Search' button on the 'Search_For_User_To_Add_To_Review_Body'
+        When I click the first 'Add_User' link on the 'Search_For_User_To_Add_To_Review_Body'
+        And I click the 'Add_User_Profile' button on the 'Check_Add_User_Profile_Page'
+        And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
+        And I click the 'Back' link on the 'Search_For_User_To_Add_To_Review_Body'
+        Then I can see the user list page of the review body
+        And I capture the page screenshot
+        # add user ends here
         When I enter an input into the search field to search for the existing 'last' user of the current review body for 'Email_Address'
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
@@ -219,6 +357,26 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
         And I capture the page screenshot
         Then I can see the user list page of the review body
+        # add user and then search
+        And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
+        And I enter an input into the search field to search for a user not added in the current review body
+        And I click the 'Search' button on the 'Search_For_User_To_Add_To_Review_Body'
+        When I click the first 'Add_User' link on the 'Search_For_User_To_Add_To_Review_Body'
+        And I click the 'Add_User_Profile' button on the 'Check_Add_User_Profile_Page'
+        And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
+        And I click the 'Back' link on the 'Search_For_User_To_Add_To_Review_Body'
+        Then I can see the user list page of the review body
+        # add user and then search
+        And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
+        And I enter an input into the search field to search for a user not added in the current review body
+        And I click the 'Search' button on the 'Search_For_User_To_Add_To_Review_Body'
+        When I click the first 'Add_User' link on the 'Search_For_User_To_Add_To_Review_Body'
+        And I click the 'Add_User_Profile' button on the 'Check_Add_User_Profile_Page'
+        And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
+        And I click the 'Back' link on the 'Search_For_User_To_Add_To_Review_Body'
+        Then I can see the user list page of the review body
+        And I capture the page screenshot
+        # add user ends here
         When I click the first 'Remove' link on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then I can see the check and remove user profile page

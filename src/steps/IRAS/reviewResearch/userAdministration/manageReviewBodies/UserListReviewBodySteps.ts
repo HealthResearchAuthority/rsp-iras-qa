@@ -149,3 +149,10 @@ When(
       .click();
   }
 );
+
+When(
+  'I enter an input into the search field to search for a user not added in the current review body',
+  async ({ userListReviewBodyPage }) => {
+    await userListReviewBodyPage.search_text.fill('QA Automation');
+  }
+);

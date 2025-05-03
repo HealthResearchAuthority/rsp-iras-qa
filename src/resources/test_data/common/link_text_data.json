@@ -63,7 +63,8 @@
     "Back": "Back",
     "Back_To_Manage_Users": "Back to Manage users",
     "Back_To_Manage_Review_Bodies": "Back to Manage review bodies",
-    "Remove_Another_User_From_The_Review_Body": "Remove another user from review body"
+    "Remove_Another_User_From_The_Review_Body": "Remove another user from review body",
+    "Add_Another_User_To_The_Review_Body": " Add another user to review body"
   },
   "Manage_Review_Bodies_Page": {
     "Back": "Back",
@@ -106,9 +107,14 @@
   "Review_Body_User_List_Page": {
     "Back_To_Review_Body_Profile": "Back to review body profile",
     "Manage_Users": "Manage users",
-    "Remove": "Remove"
+    "Remove": "Remove",
+    "Add_User_To_This_Review_Body": "Add a user to this review body"
   },
   "Check_Remove_User_Profile_Page": {
+    "Back": "Back"
+  },
+  "Search_For_User_To_Add_To_Review_Body": {
+    "Add_User": "Add user",
     "Back": "Back"
   }
 }
