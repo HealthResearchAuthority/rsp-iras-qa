@@ -532,7 +532,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityUserListReviewBody @adminUser @axeAccessibilityManageReviewBodies
+  @axeAccessibilityReviewBodyUserList @adminUser @axeAccessibilityManageReviewBodies
   Scenario: User list page of the review body
     Given I have navigated to the 'System_Administration_Page'
     And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
@@ -544,3 +544,159 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
+
+  @axeAccessibilitySearchResultsFoundReviewBodyUserList @adminUser @axeAccessibilityManageReviewBodies
+  Scenario: Verify the user can search and remove existing user of the selected review body and navigate to manage users page when no results found in the search for removed user
+    When I click the 'View_Edit' link on the 'Manage_Review_Bodies_Page'
+    And I can see the review body profile page
+    And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
+    Then I can see the user list page of the review body
+    And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
+    And I enter an input into the search field to search for a user not added in the current review body
+    And I click the 'Search' button on the 'Search_For_User_To_Add_To_Review_Body'
+    When I click the first 'Add_User' link on the 'Search_For_User_To_Add_To_Review_Body'
+    And I click the 'Add_User_Profile' button on the 'Check_Add_User_Profile_Page'
+    And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
+    And I click the 'Back' link on the 'Search_For_User_To_Add_To_Review_Body'
+    Then I can see the user list page of the review body
+    And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
+    And I enter an input into the search field to search for a user not added in the current review body
+    And I click the 'Search' button on the 'Search_For_User_To_Add_To_Review_Body'
+    When I click the first 'Add_User' link on the 'Search_For_User_To_Add_To_Review_Body'
+    And I click the 'Add_User_Profile' button on the 'Check_Add_User_Profile_Page'
+    And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
+    And I click the 'Back' link on the 'Search_For_User_To_Add_To_Review_Body'
+    Then I can see the user list page of the review body
+    When I enter an input into the search field to search for the existing 'last' user of the current review body for 'Email_Address'
+    And I click the 'Search' button on the 'Review_Body_User_List_Page'
+    Then the system displays search results matching the search criteria
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityReviewBodyUserListCheckRemoveUserProfile @adminUser @axeAccessibilityManageReviewBodies
+  Scenario: Verify the user can search and remove existing user of the selected review body and navigate to manage users page when no results found in the search for removed user
+    When I click the 'View_Edit' link on the 'Manage_Review_Bodies_Page'
+    And I can see the review body profile page
+    And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
+    Then I can see the user list page of the review body
+    # add user and then search
+    And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
+    And I enter an input into the search field to search for a user not added in the current review body
+    And I click the 'Search' button on the 'Search_For_User_To_Add_To_Review_Body'
+    When I click the first 'Add_User' link on the 'Search_For_User_To_Add_To_Review_Body'
+    And I click the 'Add_User_Profile' button on the 'Check_Add_User_Profile_Page'
+    And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
+    And I click the 'Back' link on the 'Search_For_User_To_Add_To_Review_Body'
+    Then I can see the user list page of the review body
+    # add user and then search
+    And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
+    And I enter an input into the search field to search for a user not added in the current review body
+    And I click the 'Search' button on the 'Search_For_User_To_Add_To_Review_Body'
+    When I click the first 'Add_User' link on the 'Search_For_User_To_Add_To_Review_Body'
+    And I click the 'Add_User_Profile' button on the 'Check_Add_User_Profile_Page'
+    And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
+    And I click the 'Back' link on the 'Search_For_User_To_Add_To_Review_Body'
+    Then I can see the user list page of the review body
+    And I capture the page screenshot
+    # add user ends here
+    When I enter an input into the search field to search for the existing 'last' user of the current review body for 'Email_Address'
+    And I capture the page screenshot
+    And I click the 'Search' button on the 'Review_Body_User_List_Page'
+    And I capture the page screenshot
+    Then the system displays search results matching the search criteria
+    When I click the first 'Remove' link on the 'Review_Body_User_List_Page'
+    And I capture the page screenshot
+    Then I can see the check and remove user profile page
+
+
+  @axeAccessibilitySearchResultsFoundReviewBodyUserList @adminUser @axeAccessibilityManageReviewBodies
+  Scenario: Verify the user can search and remove existing user of the selected review body and navigate to manage users page when no results found in the search for removed user
+    When I click the 'View_Edit' link on the 'Manage_Review_Bodies_Page'
+    And I capture the page screenshot
+    And I can see the review body profile page
+    And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
+    And I capture the page screenshot
+    Then I can see the user list page of the review body
+    # add user and then search
+    And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
+    And I enter an input into the search field to search for a user not added in the current review body
+    And I click the 'Search' button on the 'Search_For_User_To_Add_To_Review_Body'
+    When I click the first 'Add_User' link on the 'Search_For_User_To_Add_To_Review_Body'
+    And I click the 'Add_User_Profile' button on the 'Check_Add_User_Profile_Page'
+    And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
+    And I click the 'Back' link on the 'Search_For_User_To_Add_To_Review_Body'
+    Then I can see the user list page of the review body
+    # add user and then search
+    And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
+    And I enter an input into the search field to search for a user not added in the current review body
+    And I click the 'Search' button on the 'Search_For_User_To_Add_To_Review_Body'
+    When I click the first 'Add_User' link on the 'Search_For_User_To_Add_To_Review_Body'
+    And I click the 'Add_User_Profile' button on the 'Check_Add_User_Profile_Page'
+    And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
+    And I click the 'Back' link on the 'Search_For_User_To_Add_To_Review_Body'
+    Then I can see the user list page of the review body
+    And I capture the page screenshot
+    # add user ends here
+    When I enter an input into the search field to search for the existing 'last' user of the current review body for 'Email_Address'
+    And I capture the page screenshot
+    And I click the 'Search' button on the 'Review_Body_User_List_Page'
+    And I capture the page screenshot
+    Then the system displays search results matching the search criteria
+    When I click the first 'Remove' link on the 'Review_Body_User_List_Page'
+
+    Then I can see the check and remove user profile page
+    And I click the 'Remove_User_Profile' button on the 'Check_Remove_User_Profile_Page'
+
+    And I validate 'Remove_User_From_Review_Body_Labels' labels displayed in the success confirmation page when the user removed from the review body
+
+
+  @axeAccessibilitySearchResultsFoundReviewBodyUserList @adminUser @axeAccessibilityManageReviewBodies
+  Scenario: Verify the user can search and remove existing user of the selected review body and navigate to manage users page when no results found in the search for removed user
+    When I click the 'View_Edit' link on the 'Manage_Review_Bodies_Page'
+    And I capture the page screenshot
+    And I can see the review body profile page
+    And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
+    And I capture the page screenshot
+    Then I can see the user list page of the review body
+    # add user and then search
+    And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
+    And I enter an input into the search field to search for a user not added in the current review body
+    And I click the 'Search' button on the 'Search_For_User_To_Add_To_Review_Body'
+    When I click the first 'Add_User' link on the 'Search_For_User_To_Add_To_Review_Body'
+    And I click the 'Add_User_Profile' button on the 'Check_Add_User_Profile_Page'
+    And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
+    And I click the 'Back' link on the 'Search_For_User_To_Add_To_Review_Body'
+    Then I can see the user list page of the review body
+    # add user and then search
+    And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
+    And I enter an input into the search field to search for a user not added in the current review body
+    And I click the 'Search' button on the 'Search_For_User_To_Add_To_Review_Body'
+    When I click the first 'Add_User' link on the 'Search_For_User_To_Add_To_Review_Body'
+    And I click the 'Add_User_Profile' button on the 'Check_Add_User_Profile_Page'
+    And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
+    And I click the 'Back' link on the 'Search_For_User_To_Add_To_Review_Body'
+    Then I can see the user list page of the review body
+    And I capture the page screenshot
+    # add user ends here
+    When I enter an input into the search field to search for the existing 'last' user of the current review body for 'Email_Address'
+    And I capture the page screenshot
+    And I click the 'Search' button on the 'Review_Body_User_List_Page'
+    And I capture the page screenshot
+    Then the system displays search results matching the search criteria
+    When I click the first 'Remove' link on the 'Review_Body_User_List_Page'
+    And I capture the page screenshot
+    Then I can see the check and remove user profile page
+    And I click the 'Remove_User_Profile' button on the 'Check_Remove_User_Profile_Page'
+    And I capture the page screenshot
+    And I validate 'Remove_User_From_Review_Body_Labels' labels displayed in the success confirmation page when the user removed from the review body
+    And I click the 'Remove_Another_User_From_The_Review_Body' link on the 'Confirmation_Page'
+    And I capture the page screenshot
+    Then I can see the user list page of the review body
+    And I enter an input into the search field to search for the removed user of the review body
+    And I click the 'Search' button on the 'Review_Body_User_List_Page'
+    And I capture the page screenshot
+    Then the system displays no results found message
+    When I click the 'Manage_Users' link on the 'Review_Body_User_List_Page'
+    And I capture the page screenshot
+    Then I can see the 'Manage_Users_Page'
