@@ -57,20 +57,12 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
 
     @SearchResultsFound @BackToReviewBodyProfileLink @TestOnly
     Scenario Outline: Verify the user can view the user list page and search for the users in it and then navigate  back to review body profile page
-        When I click the 'View_Edit' link on the 'Manage_Review_Bodies_Page'
+        # When I click the 'View_Edit' link on the 'Manage_Review_Bodies_Page'
+        And I select a 'QA Automation' Review Body to View and Edit which is 'active'
         And I capture the page screenshot
         And I can see the review body profile page
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
         And I capture the page screenshot
-        Then I can see the user list page of the review body
-        # add user and then search
-        And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
-        And I enter an input into the search field to search for a user not added in the current review body
-        And I click the 'Search' button on the 'Search_For_User_To_Add_To_Review_Body'
-        When I click the first 'Add_User' link on the 'Search_For_User_To_Add_To_Review_Body'
-        And I click the 'Add_User_Profile' button on the 'Check_Add_User_Profile_Page'
-        And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
-        And I click the 'Back' link on the 'Search_For_User_To_Add_To_Review_Body'
         Then I can see the user list page of the review body
         # add user and then search
         And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
@@ -95,15 +87,15 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         Examples:
             | Field_Name    |
             | First_Name    |
-            # | Last_Name     |
+            | Last_Name     |
             | Email_Address |
-    # there is bug  with Last name search: searck key is getting cleared when clicking next button,previous button also,count also different,earlier it was 44 now it is 45
+    # there is bug  with Last name search: search key is getting cleared when clicking next button,previous button also,count also different,earlier it was 44 now it is 45
 
 
-
-    @SearchResultsFound @NoResultsFoundRemoveUser @rsp-3273 @RemoveAnotherUserFromTheReviewBodyLink @ManageUsersLink
+    @NoResultsFoundRemoveUser @rsp-3273 @RemoveAnotherUserFromTheReviewBodyLink
     Scenario: Verify the user can search and remove existing user of the selected review body and navigate to manage users page when no results found in the search for removed user
-        When I click the 'View_Edit' link on the 'Manage_Review_Bodies_Page'
+        # When I click the 'View_Edit' link on the 'Manage_Review_Bodies_Page'
+        And I select a 'QA Automation' Review Body to View and Edit which is 'active'
         And I capture the page screenshot
         And I can see the review body profile page
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
@@ -118,23 +110,12 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
         And I click the 'Back' link on the 'Search_For_User_To_Add_To_Review_Body'
         Then I can see the user list page of the review body
-        # add user and then search
-        And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
-        And I enter an input into the search field to search for a user not added in the current review body
-        And I click the 'Search' button on the 'Search_For_User_To_Add_To_Review_Body'
-        When I click the first 'Add_User' link on the 'Search_For_User_To_Add_To_Review_Body'
-        And I click the 'Add_User_Profile' button on the 'Check_Add_User_Profile_Page'
-        And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
-        And I click the 'Back' link on the 'Search_For_User_To_Add_To_Review_Body'
-        Then I can see the user list page of the review body
-        And I capture the page screenshot
         # add user ends here
         When I enter an input into the search field to search for the existing 'last' user of the current review body for 'Email_Address'
         And I capture the page screenshot
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then the system displays search results matching the search criteria
-        # When I click the 'Remove' link on the 'Review_Body_User_List_Page'
         When I click the first 'Remove' link on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then I can see the check and remove user profile page
@@ -152,9 +133,10 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I capture the page screenshot
         Then I can see the 'Manage_Users_Page'
 
-    @SearchResultsFound @NoResultsFoundRemoveUser @rsp-3273 @RemoveAnotherUserFromTheReviewBodyLink @ManageUsersLink
+    @rsp-3273 @ManageUsersLink
     Scenario: Verify the user can search and remove existing user of the selected review body and repeat the process with remove another user from the review body link
-        When I click the 'View_Edit' link on the 'Manage_Review_Bodies_Page'
+        # When I click the 'View_Edit' link on the 'Manage_Review_Bodies_Page'
+        And I select a 'QA Automation' Review Body to View and Edit which is 'active'
         And I capture the page screenshot
         And I can see the review body profile page
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
@@ -169,32 +151,12 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
         And I click the 'Back' link on the 'Search_For_User_To_Add_To_Review_Body'
         Then I can see the user list page of the review body
-        # add user and then search
-        And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
-        And I enter an input into the search field to search for a user not added in the current review body
-        And I click the 'Search' button on the 'Search_For_User_To_Add_To_Review_Body'
-        When I click the first 'Add_User' link on the 'Search_For_User_To_Add_To_Review_Body'
-        And I click the 'Add_User_Profile' button on the 'Check_Add_User_Profile_Page'
-        And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
-        And I click the 'Back' link on the 'Search_For_User_To_Add_To_Review_Body'
-        Then I can see the user list page of the review body
-        # add user and then search
-        And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
-        And I enter an input into the search field to search for a user not added in the current review body
-        And I click the 'Search' button on the 'Search_For_User_To_Add_To_Review_Body'
-        When I click the first 'Add_User' link on the 'Search_For_User_To_Add_To_Review_Body'
-        And I click the 'Add_User_Profile' button on the 'Check_Add_User_Profile_Page'
-        And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
-        And I click the 'Back' link on the 'Search_For_User_To_Add_To_Review_Body'
-        Then I can see the user list page of the review body
-        And I capture the page screenshot
         # add user ends here
         When I enter an input into the search field to search for the existing 'last' user of the current review body for 'Email_Address'
         And I capture the page screenshot
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then the system displays search results matching the search criteria
-        # When I click the 'Remove' link on the 'Review_Body_User_List_Page'
         When I click the first 'Remove' link on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then I can see the check and remove user profile page
@@ -208,7 +170,6 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then the system displays search results matching the search criteria
-        # When I click the 'Remove' link on the 'Review_Body_User_List_Page'
         When I click the first 'Remove' link on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then I can see the check and remove user profile page
@@ -225,9 +186,10 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I capture the page screenshot
         Then I can see the 'Manage_Users_Page'
 
-    @SearchResultsFound @NoResultsFoundRemoveUser @BackToReviewBodyUserListAfterRemoveUser @rsp-3273 @RemoveAnotherUserFromTheReviewBodyLink
+    @BackToReviewBodyUserListAfterRemoveUser @rsp-3273 @BackToUsersLink
     Scenario: Verify the user can search and remove the user from the selected review body and navigate to review body user list page when no results found for the removed user
-        When I click the 'View_Edit' link on the 'Manage_Review_Bodies_Page'
+        # When I click the 'View_Edit' link on the 'Manage_Review_Bodies_Page'
+        And I select a 'QA Automation' Review Body to View and Edit which is 'active'
         And I capture the page screenshot
         And I can see the review body profile page
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
@@ -242,23 +204,12 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
         And I click the 'Back' link on the 'Search_For_User_To_Add_To_Review_Body'
         Then I can see the user list page of the review body
-        # add user and then search
-        And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
-        And I enter an input into the search field to search for a user not added in the current review body
-        And I click the 'Search' button on the 'Search_For_User_To_Add_To_Review_Body'
-        When I click the first 'Add_User' link on the 'Search_For_User_To_Add_To_Review_Body'
-        And I click the 'Add_User_Profile' button on the 'Check_Add_User_Profile_Page'
-        And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
-        And I click the 'Back' link on the 'Search_For_User_To_Add_To_Review_Body'
-        Then I can see the user list page of the review body
-        And I capture the page screenshot
         # add user ends here
         When I enter an input into the search field to search for the existing 'last' user of the current review body for 'Email_Address'
         And I capture the page screenshot
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then the system displays search results matching the search criteria
-        # When I click the 'Remove' link on the 'Review_Body_User_List_Page'
         When I click the first 'Remove' link on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then I can see the check and remove user profile page
@@ -276,9 +227,10 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         Then I can see the user list page of the review body
     # Back to Users HRA1  >>bug Back to Users for HRA1
 
-    @SearchResultsFound @BackToManageReviewBodiesRemoveUser @rsp-3273
+    @BackToManageReviewBodiesRemoveUser @rsp-3273
     Scenario: Verify the user can search and remove the existing user from the selected review body and navigate to manage review bodies page from the confirmation page
-        When I click the 'View_Edit' link on the 'Manage_Review_Bodies_Page'
+        # When I click the 'View_Edit' link on the 'Manage_Review_Bodies_Page'
+        And I select a 'QA Automation' Review Body to View and Edit which is 'active'
         And I capture the page screenshot
         And I can see the review body profile page
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
@@ -293,22 +245,11 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
         And I click the 'Back' link on the 'Search_For_User_To_Add_To_Review_Body'
         Then I can see the user list page of the review body
-        # add user and then search
-        And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
-        And I enter an input into the search field to search for a user not added in the current review body
-        And I click the 'Search' button on the 'Search_For_User_To_Add_To_Review_Body'
-        When I click the first 'Add_User' link on the 'Search_For_User_To_Add_To_Review_Body'
-        And I click the 'Add_User_Profile' button on the 'Check_Add_User_Profile_Page'
-        And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
-        And I click the 'Back' link on the 'Search_For_User_To_Add_To_Review_Body'
-        Then I can see the user list page of the review body
-        And I capture the page screenshot
         # add user ends here
         When I enter an input into the search field to search for the existing 'last' user of the current review body for 'Email_Address'
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then the system displays search results matching the search criteria
-        # When I click the 'Remove' link on the 'Review_Body_User_List_Page'
         When I click the first 'Remove' link on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then I can see the check and remove user profile page
@@ -319,9 +260,10 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I capture the page screenshot
         Then I can see the 'Manage_Review_Bodies_Page'
 
-    @SearchResultsFound @BackToReviewBodyUserListCheckRemoveUser @rsp-3273
+    @BackToReviewBodyUserListCheckRemoveUser @rsp-3273
     Scenario: Verify the user can navigate to user list page of the review body from check and remove user profile page using back link
-        When I click the 'View_Edit' link on the 'Manage_Review_Bodies_Page'
+        # When I click the 'View_Edit' link on the 'Manage_Review_Bodies_Page'
+        And I select a 'QA Automation' Review Body to View and Edit which is 'active'
         And I capture the page screenshot
         And I can see the review body profile page
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
@@ -336,22 +278,11 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
         And I click the 'Back' link on the 'Search_For_User_To_Add_To_Review_Body'
         Then I can see the user list page of the review body
-        # add user and then search
-        And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
-        And I enter an input into the search field to search for a user not added in the current review body
-        And I click the 'Search' button on the 'Search_For_User_To_Add_To_Review_Body'
-        When I click the first 'Add_User' link on the 'Search_For_User_To_Add_To_Review_Body'
-        And I click the 'Add_User_Profile' button on the 'Check_Add_User_Profile_Page'
-        And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
-        And I click the 'Back' link on the 'Search_For_User_To_Add_To_Review_Body'
-        Then I can see the user list page of the review body
-        And I capture the page screenshot
         # add user ends here
         When I enter an input into the search field to search for the existing 'last' user of the current review body for 'Email_Address'
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then the system displays search results matching the search criteria
-        # When I click the 'Remove' link on the 'Review_Body_User_List_Page'
         When I click the first 'Remove' link on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then I can see the check and remove user profile page
@@ -360,7 +291,8 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
 
     @RemoveUserNoSearch @rsp-3273
     Scenario: Verify the user can navigate to user list page of the review body and remove any user from the review body without using search
-        When I click the 'View_Edit' link on the 'Manage_Review_Bodies_Page'
+        # When I click the 'View_Edit' link on the 'Manage_Review_Bodies_Page'
+        And I select a 'QA Automation' Review Body to View and Edit which is 'active'
         And I capture the page screenshot
         And I can see the review body profile page
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
@@ -375,16 +307,6 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
         And I click the 'Back' link on the 'Search_For_User_To_Add_To_Review_Body'
         Then I can see the user list page of the review body
-        # add user and then search
-        And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
-        And I enter an input into the search field to search for a user not added in the current review body
-        And I click the 'Search' button on the 'Search_For_User_To_Add_To_Review_Body'
-        When I click the first 'Add_User' link on the 'Search_For_User_To_Add_To_Review_Body'
-        And I click the 'Add_User_Profile' button on the 'Check_Add_User_Profile_Page'
-        And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
-        And I click the 'Back' link on the 'Search_For_User_To_Add_To_Review_Body'
-        Then I can see the user list page of the review body
-        And I capture the page screenshot
         # add user ends here
         When I click the first 'Remove' link on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
