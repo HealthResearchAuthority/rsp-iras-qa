@@ -1,5 +1,6 @@
 @UserAdministration @ManageUsers @adminUser @SystemTest @AuditHistoryUser @rsp-2928
 Feature: User Administration: Manage Users - View audit history for users
+# Update with defect 3262 & 3263 fix
 
     Background:
         Given I have navigated to the 'Home_Page'

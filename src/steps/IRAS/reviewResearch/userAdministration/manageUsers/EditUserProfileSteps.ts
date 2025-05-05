@@ -139,6 +139,7 @@ When(
       default:
         throw new Error(`${fieldName} is not a valid option`);
     }
+    //Can remove after defect fix
     await commonItemsPage.fillUIComponent(defectWorkaroundDataset, 'access_required_checkbox', editUserProfilePage);
   }
 );

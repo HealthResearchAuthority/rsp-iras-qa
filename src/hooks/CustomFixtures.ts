@@ -40,6 +40,7 @@ import EditReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/
 import AuditHistoryReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/AuditHistoryReviewBodyPage';
 import AuditHistoryUserPage from '../pages/IRAS/reviewResearch/userAdministration/manageUsers/AuditHistoryUserPage';
 import ProjectOverviewSaveForLaterPage from '../pages/IRAS/makeChanges/ProjectOverviewSaveForLaterPage';
+import SearchAddUserReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/SearchAddUserReviewBodyPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -81,6 +82,7 @@ type CustomFixtures = {
   editReviewBodyPage: EditReviewBodyPage;
   auditHistoryReviewBodyPage: AuditHistoryReviewBodyPage;
   auditHistoryUserPage: AuditHistoryUserPage;
+  searchAddUserReviewBodyPage: SearchAddUserReviewBodyPage;
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -239,6 +241,10 @@ export const test = base.extend<CustomFixtures>({
 
   auditHistoryUserPage: async ({ page }, use) => {
     await use(new AuditHistoryUserPage(page));
+  },
+
+  searchAddUserReviewBodyPage: async ({ page }, use) => {
+    await use(new SearchAddUserReviewBodyPage(page));
   },
 
   makeAxeBuilder: async ({ page }, use) => {

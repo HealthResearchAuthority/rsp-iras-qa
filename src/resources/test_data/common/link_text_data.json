@@ -101,5 +101,15 @@
   },
   "Project_Overview_Save_For_Later_Page": {
     "Project_Details": "Project details"
-  }
+  },
+  "Review_Body_Users_Page": {
+    "Add_User_To_Review_Body": "Add a user to this review body"
+  },
+  "Search_Add_User_Review_Body_Page": {
+    "Back": "Back",
+    "Back_To_Users": "Back to Users for ",
+    "Manage_Users": "Manage users",
+    "Add_User": "Add user"
+  },
+  "Check_Add_User_Review_Body_Page": { "Back": "Back" }
 }
