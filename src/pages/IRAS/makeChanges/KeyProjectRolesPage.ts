@@ -12,6 +12,7 @@ export default class KeyProjectRolesPage {
   readonly sponsor_contact_email_label: Locator;
   readonly chief_investigator_email_text: Locator;
   readonly sponsor_contact_email_text: Locator;
+  readonly primary_sponsor_organisation_text: Locator;
   readonly chief_investigator_email_text_summary_error_label: Locator;
   readonly sponsor_contact_email_text_summary_error_label: Locator;
 
@@ -36,6 +37,7 @@ export default class KeyProjectRolesPage {
       .locator('div[id="rule-hint"]');
     this.chief_investigator_email_text = this.page.getByTestId('IQA0311_Text');
     this.sponsor_contact_email_text = this.page.getByTestId('IQA0313_Text');
+    this.primary_sponsor_organisation_text = this.page.getByTestId('IQA0312_Text');
     this.chief_investigator_email_text_summary_error_label = this.page.locator('a[href="#Questions[0].AnswerText"]');
     this.sponsor_contact_email_text_summary_error_label = this.page.locator('a[href="#Questions[1].AnswerText"]');
   }

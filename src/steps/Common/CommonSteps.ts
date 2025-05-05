@@ -409,6 +409,7 @@ Then(
       projectDetailsIRASPage,
       projectDetailsTitlePage,
       keyProjectRolesPage,
+      reviewYourAnswersPage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
@@ -435,14 +436,24 @@ Then(
       errorMessageFieldDataset =
         keyProjectRolesPage.keyProjectRolesPageTestData[errorMessageFieldAndSummaryDatasetName];
       page = keyProjectRolesPage;
+    } else if (pageKey == 'Review_Your_Answers_Page') {
+      errorMessageFieldDataset =
+        reviewYourAnswersPage.reviewYourAnswersPageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = reviewYourAnswersPage;
     }
     await expect(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
     const allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset);
     const summaryErrorActualValues = await commonItemsPage.getSummaryErrorMessages();
     expect(summaryErrorActualValues).toEqual(allSummaryErrorExpectedValues);
+    let fieldErrorMessagesActualValues: any;
     for (const key in errorMessageFieldDataset) {
       if (Object.prototype.hasOwnProperty.call(errorMessageFieldDataset, key)) {
-        const fieldErrorMessagesActualValues = await commonItemsPage.getFieldErrorMessages(key, page);
+        if (pageKey == 'Review_Your_Answers_Page') {
+          expect(await page[key].evaluate((e) => getComputedStyle(e).color)).toBe('rgb(212, 53, 28)');
+          fieldErrorMessagesActualValues = await reviewYourAnswersPage.getFieldErrorMessages(key, page);
+        } else {
+          fieldErrorMessagesActualValues = await commonItemsPage.getFieldErrorMessages(key, page);
+        }
         expect(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
         const element = await commonItemsPage.checkViewport(errorMessageFieldDataset, key, page);
         expect(element).toBeInViewport();
