@@ -33,6 +33,7 @@ When(
 Given(
   'I see that the newly added user appears in the user list page for the review body',
   async ({ searchAddUserReviewBodyPage, userListReviewBodyPage }) => {
+    await expect(userListReviewBodyPage.userListTableBodyRows).toHaveCount(1);
     await expect(userListReviewBodyPage.first_name_value_first_row).toHaveText(
       await searchAddUserReviewBodyPage.getUserFirstName()
     );

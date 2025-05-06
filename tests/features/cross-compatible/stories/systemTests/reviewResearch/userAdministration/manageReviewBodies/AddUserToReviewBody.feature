@@ -157,7 +157,3 @@ Feature: User Administration: Manage Review Bodies - Add user to review body
             | Existing_QA_User_First_Name |
             | Existing_QA_User_Last_Name  |
             | Existing_QA_User_Email      |
-
-
-# Add user and check rev body user list updated (need Tiji code)
-# For search on existing user list, search by email, expect count 1 and expect first/last name + email to show using getters
