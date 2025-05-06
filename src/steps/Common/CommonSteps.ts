@@ -28,7 +28,15 @@ Then('I capture the page screenshot', async () => {});
 Given(
   'I have navigated to the {string}',
   async (
-    { loginPage, homePage, createApplicationPage, systemAdministrationPage, manageReviewBodiesPage, userProfilePage },
+    {
+      loginPage,
+      homePage,
+      createApplicationPage,
+      systemAdministrationPage,
+      manageReviewBodiesPage,
+      userProfilePage,
+      reviewBodyProfilePage,
+    },
     page: string
   ) => {
     switch (page) {
@@ -57,6 +65,10 @@ Given(
         await userProfilePage.goto(await userProfilePage.getUserId());
         await userProfilePage.assertOnUserProfilePage();
         break;
+      case 'Review_Body_Profile_Page':
+        await reviewBodyProfilePage.goto(await reviewBodyProfilePage.getReviewBodyId());
+        await reviewBodyProfilePage.assertOnReviewbodyProfilePage();
+        break;
       default:
         throw new Error(`${page} is not a valid option`);
     }
@@ -75,6 +87,7 @@ When(
       createReviewBodyPage,
       manageReviewBodiesPage,
       manageUsersPage,
+      searchAddUserReviewBodyPage,
     },
     page: string
   ) => {
@@ -106,6 +119,9 @@ When(
       case 'Review_Body_Users_Page':
         await manageUsersPage.page.pause();
         //Add Tiji page assertion here
+        break;
+      case 'Search_Add_User_Review_Body_Page':
+        await searchAddUserReviewBodyPage.assertOnSearchAddUserReviewBodyPage();
         break;
       default:
         throw new Error(`${page} is not a valid option`);
