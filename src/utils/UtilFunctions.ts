@@ -412,3 +412,9 @@ export async function returnDataFromJSON(filePath?: string): Promise<any> {
     return await fse.readJson(createUserPath);
   }
 }
+
+export async function returnSingleRandomLocator(resolvesToMultiElements: Locator): Promise<Locator> {
+  const noOfElements = await resolvesToMultiElements.count();
+  const randomIndex = Math.floor(Math.random() * (noOfElements - 1));
+  return resolvesToMultiElements.nth(randomIndex);
+}
