@@ -449,7 +449,7 @@ Then(
     for (const key in errorMessageFieldDataset) {
       if (Object.prototype.hasOwnProperty.call(errorMessageFieldDataset, key)) {
         if (pageKey == 'Review_Your_Answers_Page') {
-          expect(await page[key].evaluate((e) => getComputedStyle(e).color)).toBe('rgb(212, 53, 28)');
+          expect(await page[key].getByRole('link').evaluate((e) => getComputedStyle(e).color)).toBe('rgb(212, 53, 28)');
           fieldErrorMessagesActualValues = await reviewYourAnswersPage.getFieldErrorMessages(key, page);
         } else {
           fieldErrorMessagesActualValues = await commonItemsPage.getFieldErrorMessages(key, page);
