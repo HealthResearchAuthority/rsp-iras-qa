@@ -105,7 +105,7 @@ Feature: User Administration: Manage Review Bodies - Add user to review body
             | Add_Another_User             | Search_Add_User_Review_Body_Page |
             | Back_To_Manage_Review_Bodies | Manage_Review_Bodies_Page        |
 
-    @verifySearchForAddedReviewbodyUserNoResults
+    @verifySearchReviewbodyUserListAddedUser
     Scenario Outline: Verify that when a user is added to a review body, that user now appears in the review body users list
         And I fill the search input for add users to review body with '<Search_Query>' as the search query
         And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
@@ -122,9 +122,9 @@ Feature: User Administration: Manage Review Bodies - Add user to review body
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
         And I can see the user list page of the review body
         And I capture the page screenshot
-        And I fill the search input for add users to review body with 'Same_Users_Email' as the search query
+        When I fill the search input for the user list page of the review body, with the newly added users email as the search query
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
-        # Add Tiji step - check one result + first name, last name, email values using getters
+        Then I see that the newly added user appears in the user list page for the review body
 
         Examples:
             | Search_Query                |

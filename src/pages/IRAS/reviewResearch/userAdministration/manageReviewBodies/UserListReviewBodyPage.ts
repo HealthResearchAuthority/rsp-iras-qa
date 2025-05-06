@@ -68,7 +68,7 @@ export default class UserListReviewBodyPage {
       .getByText(this.userListReviewBodyPageTestData.Review_Body_User_List_Page.Column_Header_Labels.first_name_label, {
         exact: true,
       });
-    this.first_name_value_first_row = this.userListTableRows.nth(1).getByRole('cell').nth(0);
+    this.first_name_value_first_row = this.userListTableRows.nth(1).getByRole('cell').first();
     this.last_name_value_first_row = this.userListTableRows.nth(1).getByRole('cell').nth(1);
     this.email_address_value_first_row = this.userListTableRows.nth(1).getByRole('cell').nth(2);
     this.status_value_first_row = this.userListTableRows.nth(1).getByRole('cell').nth(3);

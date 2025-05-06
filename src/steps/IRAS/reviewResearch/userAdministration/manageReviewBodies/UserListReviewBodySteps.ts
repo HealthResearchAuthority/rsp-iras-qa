@@ -1,6 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../../hooks/CustomFixtures';
-const { Then } = createBdd(test);
+const { Given, When, Then } = createBdd(test);
 
 Then(
   'I can see the user list page of the review body',
@@ -22,37 +22,28 @@ Then(
   }
 );
 
-// Then(
-//   'the system displays search results matching the search criteria',
-//   async ({ userListReviewBodyPage, commonItemsPage }) => {
-//     await userListReviewBodyPage.setFirstName(
-//       confirmStringNotNull(await userListReviewBodyPage.first_name_value_first_row.textContent())
-//     );
-//     await userListReviewBodyPage.setLastName(
-//       confirmStringNotNull(await userListReviewBodyPage.last_name_value_first_row.textContent())
-//     );
-//     await userListReviewBodyPage.setEmail(
-//       confirmStringNotNull(await userListReviewBodyPage.email_address_value_first_row.textContent())
-//     );
-//     await userListReviewBodyPage.setStatus(
-//       confirmStringNotNull(await userListReviewBodyPage.status_value_first_row.textContent())
-//     );
-//     const userValues = await userListReviewBodyPage.getUserListBeforeSearch();
-//     const searchKey = await userListReviewBodyPage.getSearchKey();
-//     const filteredSearchResults: string[] = userValues.filter((result) =>
-//       result.toLowerCase().includes(searchKey.toLowerCase())
-//     );
-//     const userList = await commonItemsPage.getAllUsersFromTheTable();
-//     const userListAfterSearch: any = userList.get('searchResultValues');
-//     expect(filteredSearchResults).toEqual(userListAfterSearch);
-//     const searchResult = await commonItemsPage.validateSearchResults(userListAfterSearch, searchKey);
-//     expect(searchResult).toBeTruthy();
-//   }
-// );
+When(
+  'I fill the search input for the user list page of the review body, with the newly added users email as the search query',
+  async ({ searchAddUserReviewBodyPage, userListReviewBodyPage }) => {
+    const searchQueryValue = await searchAddUserReviewBodyPage.getUserEmail();
+    await userListReviewBodyPage.search_text.fill(searchQueryValue);
+  }
+);
 
-// When(
-//   'I enter an input into the search field to search for a user not added in the current review body',
-//   async ({ userListReviewBodyPage }) => {
-//     await userListReviewBodyPage.search_text.fill('QA Automation');
-//   }
-// );
+Given(
+  'I see that the newly added user appears in the user list page for the review body',
+  async ({ searchAddUserReviewBodyPage, userListReviewBodyPage }) => {
+    await expect(userListReviewBodyPage.first_name_value_first_row).toHaveText(
+      await searchAddUserReviewBodyPage.getUserFirstName()
+    );
+    await expect(userListReviewBodyPage.last_name_value_first_row).toHaveText(
+      await searchAddUserReviewBodyPage.getUserLastName()
+    );
+    await expect(userListReviewBodyPage.email_address_value_first_row).toHaveText(
+      await searchAddUserReviewBodyPage.getUserEmail()
+    );
+    await expect(userListReviewBodyPage.status_value_first_row).toHaveText(
+      await searchAddUserReviewBodyPage.getUserStatus()
+    );
+  }
+);

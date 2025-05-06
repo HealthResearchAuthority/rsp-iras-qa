@@ -10,6 +10,7 @@ export default class SearchAddUserReviewBodyPage {
   private _user_first_name: string;
   private _user_last_name: string;
   private _user_email: string;
+  private _user_status: string;
   readonly page_heading: Locator;
   readonly page_description: Locator;
   readonly search_guidance_text: Locator;
@@ -25,6 +26,7 @@ export default class SearchAddUserReviewBodyPage {
   readonly search_result_table_first_name: Locator;
   readonly search_result_table_last_name: Locator;
   readonly search_result_table_email: Locator;
+  readonly search_result_table_status: Locator;
   readonly search_result_table_add_user_link: Locator;
 
   //Initialize Page Objects
@@ -35,6 +37,7 @@ export default class SearchAddUserReviewBodyPage {
     this._user_first_name = '';
     this._user_last_name = '';
     this._user_email = '';
+    this._user_status = '';
 
     //Locators
     this.page_heading = this.page
@@ -78,6 +81,7 @@ export default class SearchAddUserReviewBodyPage {
     this.search_result_table_first_name = this.page.getByRole('cell').first();
     this.search_result_table_last_name = this.page.getByRole('cell').nth(1);
     this.search_result_table_email = this.page.getByRole('cell').nth(2);
+    this.search_result_table_status = this.page.getByRole('cell').nth(3);
     this.search_result_table_add_user_link = this.search_result_table_row
       .getByRole('link')
       .getByText(this.linkTextData.Search_Add_User_Review_Body_Page.Add_User)
@@ -113,5 +117,12 @@ export default class SearchAddUserReviewBodyPage {
   }
   async setUserEmail(value: string): Promise<void> {
     this._user_email = value;
+  }
+
+  async getUserStatus(): Promise<string> {
+    return this._user_status;
+  }
+  async setUserStatus(value: string): Promise<void> {
+    this._user_status = value;
   }
 }

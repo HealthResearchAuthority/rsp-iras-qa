@@ -68,6 +68,14 @@ Then(
             .textContent()
         )
       );
+      await searchAddUserReviewBodyPage.setUserStatus(
+        confirmStringNotNull(
+          await searchAddUserReviewBodyPage.search_result_table_row
+            .first()
+            .locator(searchAddUserReviewBodyPage.search_result_table_status)
+            .textContent()
+        )
+      );
     }
   }
 );
