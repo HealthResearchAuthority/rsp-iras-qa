@@ -156,7 +156,7 @@ Feature: Create Amendment - Create Project
       | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_Title    | Enter_Links_Missing_Fields | Invalid_Date_No_Month                       | Date_Month_Field_Error_Message  |
       | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_Title    | Enter_Links_Missing_Fields | Invalid_Date_No_Year                        | Date_Year_Field_Error_Message   |
 
-  @rsp-2837 @rsp-1867-No @reviewAnswersInvestigatorEmailValidations
+  @rsp-2837 @rsp-1867 @reviewAnswersInvestigatorEmailValidations
   Scenario Outline: Validate chief investigator email error messages when user redirected from review your answers page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -212,7 +212,7 @@ Feature: Create Amendment - Create Project
       | Valid_Data_Title_Empty_Field | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | chief_investigator | Enter_Links_Missing_Fields | Invalid_Email_Data_One_Punycode                        | Field_Error_Chief_Email         |
       | Valid_Data_Title_Empty_Field | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | chief_investigator | Enter_Links_Missing_Fields | Invalid_Email_Data_One_Max_Char                        | Field_Error_Chief_Email         |
 
-  @rsp-2837 @rsp-1867 @reviewAnswersSponsorEmailValidations
+  @rsp-2837 @rsp-1867-No @reviewAnswersSponsorEmailValidations
   Scenario Outline: Validate sponsor email error messages when user redirected from review your answers page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
