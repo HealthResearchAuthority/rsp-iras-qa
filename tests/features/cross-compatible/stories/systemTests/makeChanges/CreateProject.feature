@@ -5,7 +5,7 @@ Feature: Create Amendment - Create Project
     Given I have navigated to the my research projects page
     And I can see the my research projects page
 
-  @rsp-2837 @rsp-1867 @reviewAnswersEnterProjTitle
+  @rsp-2837 @rsp-1867-Test @reviewAnswersEnterProjTitle
   Scenario Outline: Verify that user is not completed all questions and can enter project title details from review your answers page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -40,7 +40,7 @@ Feature: Create Amendment - Create Project
       | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_Title    | Enter_Links_Missing_Fields | Valid_Data_Only_Title_Field |
       | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_Title    | Enter_Links_Missing_Fields | Valid_Data_Only_Date_Fields |
 
-  @rsp-2837 @rsp-1867 @reviewAnswersEnterKeyRoles
+  @rsp-2837 @rsp-1867-No @reviewAnswersEnterKeyRoles
   Scenario Outline: Verify that user is not completed all questions and can enter project key roles details from review your answers page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -75,7 +75,7 @@ Feature: Create Amendment - Create Project
       | Valid_Data_Title_Empty_Field | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | chief_investigator | Enter_Links_Missing_Fields | Valid_Data_Only_Investigator_Email_Field |
       | Valid_Data_Title_Empty_Field | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | sponsor_contact    | Enter_Links_Missing_Fields | Valid_Data_Only_Sponsor_Email_Field      |
 
-  @rsp-2837 @rsp-1867 @reviewAnswersEnterResearchLoc
+  @rsp-2837 @rsp-1867-No @reviewAnswersEnterResearchLoc
   Scenario Outline: Verify that user is not completed all questions and can enter research locations details from review your answers page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -111,7 +111,7 @@ Feature: Create Amendment - Create Project
       | Valid_Data_Title_Empty_Field | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | nhs_hsc_organisation  | Enter_Links_Missing_Fields | Valid_Data_is_nhs_hsc_organisation      |
       | Valid_Data_Title_Empty_Field | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | nations_participating | Enter_Links_Missing_Fields | Valid_Data_Only_is_nhs_hsc_organisation |
 
-  @rsp-2837 @rsp-1867 @reviewAnswersProjTitleErrorValidations
+  @rsp-2837 @rsp-1867-No @reviewAnswersProjTitleErrorValidations
   Scenario Outline: Validate error message on project title page when user redirected from review your answers page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -156,7 +156,7 @@ Feature: Create Amendment - Create Project
       | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_Title    | Enter_Links_Missing_Fields | Invalid_Date_No_Month                       | Date_Month_Field_Error_Message  |
       | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_Title    | Enter_Links_Missing_Fields | Invalid_Date_No_Year                        | Date_Year_Field_Error_Message   |
 
-  @rsp-2837 @rsp-1867-No @reviewAnswersInvestigatorEmailValidations
+  @rsp-2837 @rsp-1867 @reviewAnswersInvestigatorEmailValidations
   Scenario Outline: Validate chief investigator email error messages when user redirected from review your answers page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
