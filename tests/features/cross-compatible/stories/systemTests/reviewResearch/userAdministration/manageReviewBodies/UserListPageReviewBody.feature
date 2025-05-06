@@ -54,7 +54,6 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         Then I can see the user list page of the review body
 
 
-
     @SearchResultsFound @BackToReviewBodyProfileLink
     Scenario Outline: Verify the user can view the user list page and search for the users in it and then navigate  back to review body profile page
         # When I click the 'View_Edit' link on the 'Manage_Review_Bodies_Page'

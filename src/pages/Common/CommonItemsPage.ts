@@ -538,4 +538,12 @@ export default class CommonItemsPage {
     const searchResultMap = new Map([['searchResultValues', searchResultValues]]);
     return searchResultMap;
   }
+  async validateSearchResults(userListAfterSearch: any, searchKey: string) {
+    for (const val of userListAfterSearch) {
+      if (val.includes(searchKey)) {
+        return true;
+      }
+    }
+    return false;
+  }
 }

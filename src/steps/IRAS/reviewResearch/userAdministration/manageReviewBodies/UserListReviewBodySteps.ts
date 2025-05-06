@@ -114,12 +114,8 @@ Then(
     const userList = await commonItemsPage.getAllUsersFromTheTable();
     const userListAfterSearch: any = userList.get('searchResultValues');
     expect(filteredSearchResults).toEqual(userListAfterSearch);
-    for (const val of userListAfterSearch) {
-      if (val.includes(searchKey)) {
-        return true;
-      }
-    }
-    return false;
+    const searchResult = await commonItemsPage.validateSearchResults(userListAfterSearch, searchKey);
+    expect(searchResult).toBeTruthy();
   }
 );
 
