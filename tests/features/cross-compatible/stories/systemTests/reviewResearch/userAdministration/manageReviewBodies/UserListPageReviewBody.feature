@@ -55,7 +55,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
 
 
 
-    @SearchResultsFound @BackToReviewBodyProfileLink @TestOnly
+    @SearchResultsFound @BackToReviewBodyProfileLink
     Scenario Outline: Verify the user can view the user list page and search for the users in it and then navigate  back to review body profile page
         # When I click the 'View_Edit' link on the 'Manage_Review_Bodies_Page'
         And I select a 'QA Automation' Review Body to View and Edit which is 'active'
@@ -92,7 +92,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
     # there is bug  with Last name search: search key is getting cleared when clicking next button,previous button also,count also different,earlier it was 44 now it is 45
 
 
-    @NoResultsFoundRemoveUser @rsp-3273 @RemoveAnotherUserFromTheReviewBodyLink
+    @NoResultsFoundRemoveUser @rsp-3273 @RemoveAnotherUserFromTheReviewBodyLink @TestOnly
     Scenario: Verify the user can search and remove existing user of the selected review body and navigate to manage users page when no results found in the search for removed user
         # When I click the 'View_Edit' link on the 'Manage_Review_Bodies_Page'
         And I select a 'QA Automation' Review Body to View and Edit which is 'active'
@@ -132,6 +132,8 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         When I click the 'Manage_Users' link on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then I can see the 'Manage_Users_Page'
+        And I search and click on view edit link for the removed user from the review body in the manage user page
+        Then I can see the user profile page of the removed user from the review body
 
     @rsp-3273 @ManageUsersLink
     Scenario: Verify the user can search and remove existing user of the selected review body and repeat the process with remove another user from the review body link

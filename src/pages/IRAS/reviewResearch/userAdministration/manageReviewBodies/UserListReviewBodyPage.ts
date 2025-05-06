@@ -10,11 +10,19 @@ export default class UserListReviewBodyPage {
   private _user_email: string[];
   private _user_fname: string[];
   private _user_lname: string[];
+  private _first_name: string;
+  private _last_name: string;
+  private _email_address: string;
+  private _status: string;
   readonly page_heading: Locator;
   readonly guidance_text: Locator;
   readonly userListTableRows: Locator;
   readonly search_box_label: Locator;
   readonly first_name_label: Locator;
+  readonly first_name_value_first_row: Locator;
+  readonly last_name_value_first_row: Locator;
+  readonly email_address_value_first_row: Locator;
+  readonly status_value_first_row: Locator;
   readonly last_name_label: Locator;
   readonly email_address_label: Locator;
   readonly status_label: Locator;
@@ -35,6 +43,10 @@ export default class UserListReviewBodyPage {
     this._user_email = [];
     this._user_fname = [];
     this._user_lname = [];
+    this._first_name = '';
+    this._last_name = '';
+    this._email_address = '';
+    this._status = '';
     //Locators
     this.page_heading = this.page
       .getByRole('heading')
@@ -56,6 +68,10 @@ export default class UserListReviewBodyPage {
       .getByText(this.userListReviewBodyPageTestData.Review_Body_User_List_Page.Column_Header_Labels.first_name_label, {
         exact: true,
       });
+    this.first_name_value_first_row = this.userListTableRows.nth(1).getByRole('cell').nth(0);
+    this.last_name_value_first_row = this.userListTableRows.nth(1).getByRole('cell').nth(1);
+    this.email_address_value_first_row = this.userListTableRows.nth(1).getByRole('cell').nth(2);
+    this.status_value_first_row = this.userListTableRows.nth(1).getByRole('cell').nth(3);
     this.last_name_label = this.userListTableRows
       .locator('th')
       .getByText(this.userListReviewBodyPageTestData.Review_Body_User_List_Page.Column_Header_Labels.last_name_label, {
@@ -154,5 +170,36 @@ export default class UserListReviewBodyPage {
 
   async setUserLastName(value: string[]): Promise<void> {
     this._user_lname = value;
+  }
+  async getFirstName(): Promise<string> {
+    return this._first_name;
+  }
+
+  async setFirstName(value: string): Promise<void> {
+    this._first_name = value;
+  }
+
+  async getLastName(): Promise<string> {
+    return this._last_name;
+  }
+
+  async setLastName(value: string): Promise<void> {
+    this._last_name = value;
+  }
+
+  async getEmail(): Promise<string> {
+    return this._email_address;
+  }
+
+  async setEmail(value: string): Promise<void> {
+    this._email_address = value;
+  }
+
+  async getStatus(): Promise<string> {
+    return this._status;
+  }
+
+  async setStatus(value: string): Promise<void> {
+    this._status = value;
   }
 }

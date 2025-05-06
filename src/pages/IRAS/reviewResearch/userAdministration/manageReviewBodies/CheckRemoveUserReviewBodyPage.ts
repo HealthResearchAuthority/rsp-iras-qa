@@ -5,9 +5,14 @@ import * as checkRemoveUserReviewBodyPageTestData from '../../../../../resources
 export default class CheckRemoveUserReviewBodyPage {
   readonly page: Page;
   readonly checkRemoveUserReviewBodyPageTestData: typeof checkRemoveUserReviewBodyPageTestData;
+  private _title: string;
   private _first_name: string;
   private _last_name: string;
   private _email_address: string;
+  private _telephone: string;
+  private _organisation: string;
+  private _job_title: string;
+  private _role: string;
   readonly page_heading: Locator;
   readonly guidance_text: Locator;
   readonly title_row: Locator;
@@ -31,9 +36,14 @@ export default class CheckRemoveUserReviewBodyPage {
   constructor(page: Page) {
     this.page = page;
     this.checkRemoveUserReviewBodyPageTestData = checkRemoveUserReviewBodyPageTestData;
+    this._title = '';
     this._first_name = '';
     this._last_name = '';
     this._email_address = '';
+    this._telephone = '';
+    this._organisation = '';
+    this._job_title = '';
+    this._role = '';
 
     //Locators
     this.page_heading = this.page
@@ -115,6 +125,14 @@ export default class CheckRemoveUserReviewBodyPage {
 
   //Getters & Setters for Private Variables
 
+  async getTitle(): Promise<string> {
+    return this._title;
+  }
+
+  async setTitle(value: string): Promise<void> {
+    this._title = value;
+  }
+
   async getFirstName(): Promise<string> {
     return this._first_name;
   }
@@ -137,5 +155,37 @@ export default class CheckRemoveUserReviewBodyPage {
 
   async setEmail(value: string): Promise<void> {
     this._email_address = value;
+  }
+
+  async getTelephone(): Promise<string> {
+    return this._telephone;
+  }
+
+  async setTelephone(value: string): Promise<void> {
+    this._telephone = value;
+  }
+
+  async getOrganisation(): Promise<string> {
+    return this._organisation;
+  }
+
+  async setOrganisation(value: string): Promise<void> {
+    this._organisation = value;
+  }
+
+  async getJobTitle(): Promise<string> {
+    return this._job_title;
+  }
+
+  async setJobTitle(value: string): Promise<void> {
+    this._job_title = value;
+  }
+
+  async getRole(): Promise<string> {
+    return this._role;
+  }
+
+  async setRole(value: string): Promise<void> {
+    this._role = value;
   }
 }

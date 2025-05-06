@@ -1,5 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../../hooks/CustomFixtures';
+import { confirmStringNotNull } from '../../../../../utils/UtilFunctions';
 const { When, Then } = createBdd(test);
 
 Then(
@@ -93,6 +94,18 @@ When(
 Then(
   'the system displays search results matching the search criteria',
   async ({ userListReviewBodyPage, commonItemsPage }) => {
+    await userListReviewBodyPage.setFirstName(
+      confirmStringNotNull(await userListReviewBodyPage.first_name_value_first_row.textContent())
+    );
+    await userListReviewBodyPage.setLastName(
+      confirmStringNotNull(await userListReviewBodyPage.last_name_value_first_row.textContent())
+    );
+    await userListReviewBodyPage.setEmail(
+      confirmStringNotNull(await userListReviewBodyPage.email_address_value_first_row.textContent())
+    );
+    await userListReviewBodyPage.setStatus(
+      confirmStringNotNull(await userListReviewBodyPage.status_value_first_row.textContent())
+    );
     const userValues = await userListReviewBodyPage.getUserListBeforeSearch();
     const searchKey = await userListReviewBodyPage.getSearchKey();
     const filteredSearchResults: string[] = userValues.filter((result) =>
@@ -154,5 +167,23 @@ When(
   'I enter an input into the search field to search for a user not added in the current review body',
   async ({ userListReviewBodyPage }) => {
     await userListReviewBodyPage.search_text.fill('QA Automation');
+  }
+);
+
+Then(
+  'I can see the user profile page of the removed user from the review body',
+  async ({ userProfilePage, checkRemoveUserReviewBodyPage }) => {
+    await userProfilePage.assertOnUserProfilePage();
+    const userIdStartIndex = userProfilePage.page.url().indexOf('=') + 1;
+    const userIdEndIndex = userProfilePage.page.url().indexOf('&');
+    await userProfilePage.setUserId(userProfilePage.page.url().substring(userIdStartIndex, userIdEndIndex));
+    await expect(userProfilePage.title_value).toHaveText(await checkRemoveUserReviewBodyPage.getTitle());
+    await expect(userProfilePage.first_name_value).toHaveText(await checkRemoveUserReviewBodyPage.getFirstName());
+    await expect(userProfilePage.last_name_value).toHaveText(await checkRemoveUserReviewBodyPage.getLastName());
+    await expect(userProfilePage.email_address_value).toHaveText(await checkRemoveUserReviewBodyPage.getEmail());
+    await expect(userProfilePage.telephone_value).toHaveText(await checkRemoveUserReviewBodyPage.getTelephone());
+    await expect(userProfilePage.organisation_value).toHaveText(await checkRemoveUserReviewBodyPage.getOrganisation());
+    await expect(userProfilePage.job_title_value).toHaveText(await checkRemoveUserReviewBodyPage.getJobTitle());
+    await expect(userProfilePage.role_value).toHaveText(await checkRemoveUserReviewBodyPage.getRole());
   }
 );
