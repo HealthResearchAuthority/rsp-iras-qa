@@ -1,5 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../../hooks/CustomFixtures';
+import { confirmStringNotNull } from '../../../../../utils/UtilFunctions';
 
 const { Given, When, Then } = createBdd(test);
 
@@ -8,40 +9,65 @@ Given('I can see the search for user to add to review body page', async ({ searc
 });
 
 When(
-  'I fill the search input with {string} as the search query',
+  'I fill the search input for add users to review body with {string} as the search query',
   async ({ searchAddUserReviewBodyPage, commonItemsPage }, searchQueryName: string) => {
-    const searchQueryDataset =
-      searchAddUserReviewBodyPage.searchAddUserReviewBodyPageData.Search_Add_User_Review_Body.Search_Queries[
-        searchQueryName
-      ];
-    await commonItemsPage.fillUIComponent(searchQueryDataset, 'search_input_text', searchAddUserReviewBodyPage);
+    if (searchQueryName.toLowerCase().startsWith('same')) {
+      const searchQueryValue = await searchAddUserReviewBodyPage.getUserEmail();
+      await searchAddUserReviewBodyPage.search_input_text.fill(searchQueryValue);
+    } else {
+      const searchQueryDataset =
+        searchAddUserReviewBodyPage.searchAddUserReviewBodyPageData.Search_Add_User_Review_Body.Search_Queries[
+          searchQueryName
+        ];
+      await commonItemsPage.fillUIComponent(searchQueryDataset, 'search_input_text', searchAddUserReviewBodyPage);
+    }
   }
 );
 
 Then(
   'I can see that the add users to review body search page contains {string}',
-  async ({ searchAddUserReviewBodyPage }, searchResult: string) => {
+  async ({ searchAddUserReviewBodyPage, reviewBodyProfilePage }, searchResult: string) => {
     if (searchResult.toLowerCase() == 'no_results') {
       await expect(searchAddUserReviewBodyPage.no_search_results_heading).toBeVisible();
       await expect(searchAddUserReviewBodyPage.no_search_results_guidance_text).toBeVisible();
       await expect(searchAddUserReviewBodyPage.back_to_users_link).toBeVisible();
       await expect(searchAddUserReviewBodyPage.manage_users_link).toBeVisible();
-      // await expect(searchAddUserReviewBodyPage.back_to_users_link).toHaveText(
-      //   `link text + getReviewBodyName(from Tiji step)`
-      // );
+      const expectedBackToUsersText = `${searchAddUserReviewBodyPage.linkTextData.Search_Add_User_Review_Body_Page.Back_To_Users}${await reviewBodyProfilePage.getOrgName()}`;
+      await expect(searchAddUserReviewBodyPage.back_to_users_link).toHaveText(expectedBackToUsersText);
     } else {
+      const expectedTableHeadings =
+        searchAddUserReviewBodyPage.searchAddUserReviewBodyPageData.Search_Add_User_Review_Body_Page
+          .search_table_headings;
       await expect(searchAddUserReviewBodyPage.no_search_results_heading).not.toBeVisible();
       await expect(searchAddUserReviewBodyPage.no_search_results_guidance_text).not.toBeVisible();
       await expect(searchAddUserReviewBodyPage.back_to_users_link).not.toBeVisible();
       await expect(searchAddUserReviewBodyPage.manage_users_link).not.toBeVisible();
       await expect(searchAddUserReviewBodyPage.search_result_table).toBeVisible();
-      const tableHeaders = await searchAddUserReviewBodyPage.search_result_table_header.all();
-      for (let index = 0; index < tableHeaders.length; index++) {
-        const expectedText =
-          searchAddUserReviewBodyPage.searchAddUserReviewBodyPageData.Search_Add_User_Review_Body_Page
-            .search_table_headings[index];
-        expect(await tableHeaders[index].textContent()).toBe(expectedText);
-      }
+      await expect(searchAddUserReviewBodyPage.search_result_table_header).toHaveText(expectedTableHeadings);
+      await searchAddUserReviewBodyPage.setUserFirstName(
+        confirmStringNotNull(
+          await searchAddUserReviewBodyPage.search_result_table_row
+            .first()
+            .locator(searchAddUserReviewBodyPage.search_result_table_first_name)
+            .textContent()
+        )
+      );
+      await searchAddUserReviewBodyPage.setUserLastName(
+        confirmStringNotNull(
+          await searchAddUserReviewBodyPage.search_result_table_row
+            .first()
+            .locator(searchAddUserReviewBodyPage.search_result_table_last_name)
+            .textContent()
+        )
+      );
+      await searchAddUserReviewBodyPage.setUserEmail(
+        confirmStringNotNull(
+          await searchAddUserReviewBodyPage.search_result_table_row
+            .first()
+            .locator(searchAddUserReviewBodyPage.search_result_table_email)
+            .textContent()
+        )
+      );
     }
   }
 );
@@ -55,6 +81,7 @@ Then(
       ]['search_input_text'];
     const allResultRow = await searchAddUserReviewBodyPage.search_result_table_row.all();
     switch (searchQueryName) {
+      //try with toContainText
       case 'Existing_QA_User_First_Name':
         for (const element of allResultRow) {
           const firstNameTableCell = element.locator(searchAddUserReviewBodyPage.search_result_table_first_name);
