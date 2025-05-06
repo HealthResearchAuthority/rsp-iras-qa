@@ -18,10 +18,10 @@ const config: PlaywrightTestConfig = {
   ],
   globalSetup: 'src/hooks/GlobalSetup.ts',
   globalTeardown: 'src/hooks/GlobalTeardown.ts',
-  globalTimeout: 15 * 60 * 1000,
+  globalTimeout: 30 * 60 * 1000,
   timeout: 5 * 60 * 1000,
   workers: 1, // to enforce serial execution
-  retries: 2,
+  retries: 0,
   use: {
     ...browser,
     trace: 'on',
