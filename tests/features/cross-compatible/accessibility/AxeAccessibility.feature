@@ -539,7 +539,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I can see the review body profile page
     And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
     # Add Tiji Assert on page step
-    And I click the 'Add_User_To_Review_Body' link on the 'Review_Body_Users_Page'
+    And I click the 'Add_User_To_Review_Body' link on the 'Review_Body_User_List_Page'
     And I can see the search for user to add to review body page
     And I fill the search input for add users to review body with 'Existing_QA_User_First_Name' as the search query
     And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
@@ -556,7 +556,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I can see the review body profile page
     And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
     # Add Tiji Assert on page step
-    And I click the 'Add_User_To_Review_Body' link on the 'Review_Body_Users_Page'
+    And I click the 'Add_User_To_Review_Body' link on the 'Review_Body_User_List_Page'
     And I can see the search for user to add to review body page
     And I fill the search input for add users to review body with 'Non_Existant_User_Data' as the search query
     And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
@@ -572,7 +572,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I can see the review body profile page
     And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
     # Add Tiji Assert on page step
-    And I click the 'Add_User_To_Review_Body' link on the 'Review_Body_Users_Page'
+    And I click the 'Add_User_To_Review_Body' link on the 'Review_Body_User_List_Page'
     And I can see the search for user to add to review body page
     And I fill the search input for add users to review body with 'Existing_QA_User_First_Name' as the search query
     And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
@@ -589,7 +589,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I can see the review body profile page
     And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
     # Add Tiji Assert on page step
-    And I click the 'Add_User_To_Review_Body' link on the 'Review_Body_Users_Page'
+    And I click the 'Add_User_To_Review_Body' link on the 'Review_Body_User_List_Page'
     And I can see the search for user to add to review body page
     And I fill the search input for add users to review body with 'Existing_QA_User_First_Name' as the search query
     And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'

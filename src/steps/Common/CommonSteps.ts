@@ -86,6 +86,7 @@ When(
       systemAdministrationPage,
       createReviewBodyPage,
       manageReviewBodiesPage,
+      userListReviewBodyPage,
       manageUsersPage,
       searchAddUserReviewBodyPage,
     },
@@ -116,9 +117,8 @@ When(
       case 'Manage_Users_Page':
         await manageUsersPage.assertOnManageUsersPage();
         break;
-      case 'Review_Body_Users_Page':
-        await manageUsersPage.page.pause();
-        //Add Tiji page assertion here
+      case 'Review_Body_User_List_Page':
+        await userListReviewBodyPage.assertOnUserListReviewBodyPage();
         break;
       case 'Search_Add_User_Review_Body_Page':
         await searchAddUserReviewBodyPage.assertOnSearchAddUserReviewBodyPage();

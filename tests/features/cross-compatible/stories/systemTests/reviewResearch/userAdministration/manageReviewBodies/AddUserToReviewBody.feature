@@ -1,4 +1,4 @@
-@UserAdministration @ManageReviewBodies @AddUserToReviewBody @adminUser @SystemTest @rsp-3258 @only
+@UserAdministration @ManageReviewBodies @AddUserToReviewBody @adminUser @SystemTest @rsp-3258
 Feature: User Administration: Manage Review Bodies - Add user to review body
 
     Background:
@@ -6,8 +6,8 @@ Feature: User Administration: Manage Review Bodies - Add user to review body
         And I select a 'QA Automation' Review Body to View and Edit which is 'active'
         And I can see the review body profile page
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
-        # Add Tiji Assert on page step
-        And I click the 'Add_User_To_Review_Body' link on the 'Review_Body_Users_Page'
+        And I can see the user list page of the review body
+        And I click the 'Add_User_To_Review_Body' link on the 'Review_Body_User_List_Page'
         And I can see the search for user to add to review body page
         And I capture the page screenshot
 
@@ -43,10 +43,10 @@ Feature: User Administration: Manage Review Bodies - Add user to review body
         And I capture the page screenshot
 
         Examples:
-            | Search_Query                | Link          | Page                   |
-            | Existing_QA_User_First_Name | Back          | Review_Body_Users_Page |
-            | Non_Existant_User_Data      | Back_To_Users | Review_Body_Users_Page |
-            | Non_Existant_User_Data      | Manage_Users  | Manage_Users_Page      |
+            | Search_Query                | Link          | Page                       |
+            | Existing_QA_User_First_Name | Back          | Review_Body_User_List_Page |
+            | Non_Existant_User_Data      | Back_To_Users | Review_Body_User_List_Page |
+            | Non_Existant_User_Data      | Manage_Users  | Manage_Users_Page          |
 
     @verifyCheckAddUserReviewbodyPageValues
     Scenario: Verify the check add user to review body page displays the correct user details
@@ -120,10 +120,10 @@ Feature: User Administration: Manage Review Bodies - Add user to review body
         And I have navigated to the 'Review_Body_Profile_Page'
         And I capture the page screenshot
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
-        # Add Tiji Assert on page step
+        And I can see the user list page of the review body
         And I capture the page screenshot
         And I fill the search input for add users to review body with 'Same_Users_Email' as the search query
-        And I click the 'Search' button on the 'Review_Body_Users_Page'
+        And I click the 'Search' button on the 'Review_Body_User_List_Page'
         # Add Tiji step - check one result + first name, last name, email values using getters
 
         Examples:
