@@ -7,6 +7,9 @@ export default class SearchAddUserReviewBodyPage {
   readonly page: Page;
   readonly searchAddUserReviewBodyPageData: typeof searchAddUserReviewBodyPageData;
   readonly linkTextData: typeof linkTextData;
+  private _user_first_name: string;
+  private _user_last_name: string;
+  private _user_email: string;
   readonly page_heading: Locator;
   readonly page_description: Locator;
   readonly search_guidance_text: Locator;
@@ -29,6 +32,9 @@ export default class SearchAddUserReviewBodyPage {
     this.page = page;
     this.searchAddUserReviewBodyPageData = searchAddUserReviewBodyPageData;
     this.linkTextData = linkTextData;
+    this._user_first_name = '';
+    this._user_last_name = '';
+    this._user_email = '';
 
     //Locators
     this.page_heading = this.page
@@ -84,5 +90,28 @@ export default class SearchAddUserReviewBodyPage {
     await expect(this.search_input_label).toBeVisible();
     // await expect(this.search_guidance_text).toBeVisible(); // Not available due to defect
     await expect(this.search_input_text).toBeVisible();
+  }
+
+  //Getters & Setters for Private Variables
+
+  async getUserFirstName(): Promise<string> {
+    return this._user_first_name;
+  }
+  async setUserFirstName(value: string): Promise<void> {
+    this._user_first_name = value;
+  }
+
+  async getUserLastName(): Promise<string> {
+    return this._user_last_name;
+  }
+  async setUserLastName(value: string): Promise<void> {
+    this._user_last_name = value;
+  }
+
+  async getUserEmail(): Promise<string> {
+    return this._user_email;
+  }
+  async setUserEmail(value: string): Promise<void> {
+    this._user_email = value;
   }
 }

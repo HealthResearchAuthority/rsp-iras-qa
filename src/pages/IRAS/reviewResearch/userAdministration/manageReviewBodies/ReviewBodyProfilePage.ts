@@ -18,6 +18,7 @@ export default class ReviewBodyProfilePage {
   private _new_email_address: string;
   private _new_description: string;
   private _last_updated_date: string;
+  private _review_body_id: string;
   readonly back_link: Locator;
   readonly page_heading: Locator;
   readonly row_value_locator: Locator;
@@ -66,6 +67,8 @@ export default class ReviewBodyProfilePage {
     this._new_countries = [];
     this._new_email_address = '';
     this._new_description = '';
+    this._last_updated_date = '';
+    this._review_body_id = '';
 
     //Locators
     this.page_heading = this.page
@@ -171,6 +174,10 @@ export default class ReviewBodyProfilePage {
     await expect(this.page_heading).toBeVisible();
   }
 
+  async goto(reviewBodyId: string) {
+    await this.page.goto(`reviewbody/view/${reviewBodyId}`);
+  }
+
   async clickOnChangeButton(fieldKey: string) {
     const locatorName = fieldKey.toLowerCase() + '_change_link';
     await this[locatorName].click();
@@ -246,5 +253,13 @@ export default class ReviewBodyProfilePage {
 
   async setLastUpdatedDate(value: string): Promise<void> {
     this._last_updated_date = value;
+  }
+
+  async getReviewBodyId(): Promise<string> {
+    return this._review_body_id;
+  }
+
+  async setReviewBodyId(value: string): Promise<void> {
+    this._review_body_id = value;
   }
 }
