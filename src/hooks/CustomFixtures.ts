@@ -40,6 +40,7 @@ import EditReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/
 import AuditHistoryReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/AuditHistoryReviewBodyPage';
 import AuditHistoryUserPage from '../pages/IRAS/reviewResearch/userAdministration/manageUsers/AuditHistoryUserPage';
 import ProjectOverviewSaveForLaterPage from '../pages/IRAS/makeChanges/ProjectOverviewSaveForLaterPage';
+import UserListReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/UserListReviewBodyPage';
 import SearchAddUserReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/SearchAddUserReviewBodyPage';
 import CheckAddUserReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/CheckAddUserReviewBodyPage';
 import AddUserReviewBodyConfirmationPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/AddUserReviewBodyConfirmationPage';
@@ -84,6 +85,7 @@ type CustomFixtures = {
   editReviewBodyPage: EditReviewBodyPage;
   auditHistoryReviewBodyPage: AuditHistoryReviewBodyPage;
   auditHistoryUserPage: AuditHistoryUserPage;
+  userListReviewBodyPage: UserListReviewBodyPage;
   searchAddUserReviewBodyPage: SearchAddUserReviewBodyPage;
   checkAddUserReviewBodyPage: CheckAddUserReviewBodyPage;
   addUserReviewBodyConfirmationPage: AddUserReviewBodyConfirmationPage;
@@ -245,6 +247,10 @@ export const test = base.extend<CustomFixtures>({
 
   auditHistoryUserPage: async ({ page }, use) => {
     await use(new AuditHistoryUserPage(page));
+  },
+
+  userListReviewBodyPage: async ({ page }, use) => {
+    await use(new UserListReviewBodyPage(page));
   },
 
   searchAddUserReviewBodyPage: async ({ page }, use) => {
