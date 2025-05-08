@@ -40,9 +40,7 @@ Then(
             datasetProjectTitle.planned_project_end_month_text,
             datasetProjectTitle.planned_project_end_year_text
           );
-          expect(confirmStringNotNull(await reviewYourAnswersPage.getPlannedProjectEndDate())).toBe(
-            projectEndDateFormatted
-          );
+          expect(await reviewYourAnswersPage.getPlannedProjectEndDate()).toBe(projectEndDateFormatted);
         } else {
           await commonItemsPage.validateUIComponentValues(datasetProjectTitle, key, reviewYourAnswersPage);
         }

@@ -1,7 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as reviewYourAnswersPageTestData from '../../../resources/test_data/iras/make_changes/review_your_answers_data.json';
 import * as linkTextData from '../../../resources/test_data/common/link_text_data.json';
-
+import { confirmStringNotNull } from '../../../utils/UtilFunctions';
 //Declare Page Objects
 export default class ReviewYourAnswersPage {
   readonly page: Page;
@@ -137,7 +137,7 @@ export default class ReviewYourAnswersPage {
   }
 
   async getPlannedProjectEndDate() {
-    const plannedProjectEndDate = await this.planned_project_end_date_text.textContent();
+    const plannedProjectEndDate = confirmStringNotNull(await this.planned_project_end_date_text.textContent());
     return plannedProjectEndDate;
   }
 
@@ -155,7 +155,6 @@ export default class ReviewYourAnswersPage {
       case 'sponsor_contact':
         await this.sponsor_contact_email_change_link.click();
         break;
-
       case 'nations_participating':
         await this.nations_participating_change_link.click();
         break;
