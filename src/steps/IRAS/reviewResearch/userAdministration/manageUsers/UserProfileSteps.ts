@@ -24,6 +24,12 @@ Then('I can see the user profile page', async ({ userProfilePage }) => {
       confirmStringNotNull(await userProfilePage.country_value.textContent()).split(', ')
     );
   }
+  if (await userProfilePage.access_required_row.isVisible()) {
+    await userProfilePage.setAccessRequired(
+      confirmStringNotNull(await userProfilePage.access_required_value.textContent()).split(', ')
+    );
+  }
+  console.log(await userProfilePage.getAccessRequired());
 });
 
 Then(
@@ -32,7 +38,7 @@ Then(
     const dataset = editUserProfilePage.editUserProfilePageTestData[datesetName];
     const actualValue = await userProfilePage.getUserProfileValue(editFieldName);
     const expectedValue = dataset[editFieldName];
-    expect(actualValue).toBe(expectedValue);
+    expect(actualValue).toBe(expectedValue.toString());
   }
 );
 

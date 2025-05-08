@@ -27,6 +27,8 @@ export default class UserProfilePage {
   private _new_job_title: string;
   private _countries: string[];
   private _new_countries: string[];
+  private _access_required: string[];
+  private _new_access_required: string[];
   private _role: string[];
   readonly selected_bread_crumbs: Locator;
   readonly page_heading: Locator;
@@ -63,6 +65,9 @@ export default class UserProfilePage {
   readonly country_row: Locator;
   readonly country_value: Locator;
   readonly country_change_link: Locator;
+  readonly access_required_row: Locator;
+  readonly access_required_value: Locator;
+  readonly access_required_change_link: Locator;
   readonly review_body_row: Locator;
   readonly review_body_value: Locator;
   readonly review_body_change_link: Locator;
@@ -98,6 +103,8 @@ export default class UserProfilePage {
     this._new_job_title = '';
     this._countries = [];
     this._new_countries = [];
+    this._access_required = [];
+    this._new_access_required = [];
     this._role = [];
     this.page_heading = this.page
       .getByRole('heading')
@@ -177,6 +184,13 @@ export default class UserProfilePage {
     });
     this.country_value = this.country_row.locator('td', { has: this.row_value_locator });
     this.country_change_link = this.country_row.locator(this.row_change_link_locator);
+    this.access_required_row = this.page.locator('tr', {
+      has: this.page.getByRole('cell').getByText(this.userProfilePageTestData.User_Profile_Page.access_required_label, {
+        exact: true,
+      }),
+    });
+    this.access_required_value = this.access_required_row.locator('td', { has: this.row_value_locator });
+    this.access_required_change_link = this.access_required_row.locator(this.row_change_link_locator);
     this.review_body_row = this.page.locator('tr', {
       has: this.page.getByRole('cell').getByText(this.userProfilePageTestData.User_Profile_Page.review_body_label, {
         exact: true,
@@ -233,6 +247,9 @@ export default class UserProfilePage {
         break;
       case 'role_checkbox':
         await this.role_change_link.click();
+        break;
+      case 'access_required_checkbox':
+        await this.access_required_change_link.click();
         break;
       case 'committee':
         if (userRole.trim().toLocaleLowerCase() != 'operations') {
@@ -426,6 +443,22 @@ export default class UserProfilePage {
 
   async setNewCountries(value: string[]): Promise<void> {
     this._new_countries = value;
+  }
+
+  async getAccessRequired(): Promise<string[]> {
+    return this._access_required;
+  }
+
+  async setAccessRequired(value: string[]): Promise<void> {
+    this._access_required = value;
+  }
+
+  async getNewAccessRequired(): Promise<string[]> {
+    return this._new_access_required;
+  }
+
+  async setNewAccessRequired(value: string[]): Promise<void> {
+    this._new_access_required = value;
   }
 
   async getRole(): Promise<string[]> {

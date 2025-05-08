@@ -81,9 +81,7 @@ When(
 
 When(
   'I revert the {string} update of the user profile',
-  async ({ editUserProfilePage, userProfilePage, commonItemsPage }, fieldName: string) => {
-    const defectWorkaroundDatasetName: string = 'User_Access_Required_Checkbox_One';
-    const defectWorkaroundDataset = editUserProfilePage.editUserProfilePageTestData[defectWorkaroundDatasetName];
+  async ({ editUserProfilePage, userProfilePage }, fieldName: string) => {
     let currentValue: string = '';
     let newValue: string = '';
     switch (fieldName.toLowerCase()) {
@@ -139,8 +137,6 @@ When(
       default:
         throw new Error(`${fieldName} is not a valid option`);
     }
-    //Can remove after defect fix
-    await commonItemsPage.fillUIComponent(defectWorkaroundDataset, 'access_required_checkbox', editUserProfilePage);
   }
 );
 
