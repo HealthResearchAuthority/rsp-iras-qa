@@ -262,32 +262,32 @@ Feature: User Administration: Manage Users - Create user
             | Missing_Mandatory_Field_Access_Required_Role_Operations   | Error_Message_Missing_Mandatory_Field_Access_Required_Role_Operations   |
             | Invalid_Character_Limit                                   | Error_Message_Invalid_Character_Limit                                   |
             | Invalid_Email_Data_Max_Char                               | Error_Message_Invalid_Character_Limit_field_Email_Address               |
-            | Incorrect_Format_Telephone_Data                           | Error_Message_Incorrect_Format_field_Telephone                          |
-            | Incorrect_Format_Email                                    | Error_Message_Incorrect_Format_field_Email_Address                      |
-            | Invalid_Email_Data_Start_With_Dot                         | Error_Message_Incorrect_Format_field_Email_Address                      |
-            | Invalid_Email_Data_Double_Dot                             | Error_Message_Incorrect_Format_field_Email_Address                      |
-            | Invalid_Email_Data_Space                                  | Error_Message_Incorrect_Format_field_Email_Address                      |
-            | Invalid_Email_Data_Wrong_AT                               | Error_Message_Incorrect_Format_field_Email_Address                      |
-            | Invalid_Email_Data_Less_Greater_Symbols                   | Error_Message_Incorrect_Format_field_Email_Address                      |
-            | Invalid_Email_Data_Colon                                  | Error_Message_Incorrect_Format_field_Email_Address                      |
-            | Invalid_Email_Data_Semi_Colon                             | Error_Message_Incorrect_Format_field_Email_Address                      |
-            | Invalid_Email_Data_Comma                                  | Error_Message_Incorrect_Format_field_Email_Address                      |
-            | Invalid_Email_Data_Start_With_Hyphen                      | Error_Message_Incorrect_Format_field_Email_Address                      |
-            | Invalid_Email_Data_Hyphen_Before_Domain                   | Error_Message_Incorrect_Format_field_Email_Address                      |
-            | Invalid_Email_Data_Double_Dot_Domain                      | Error_Message_Incorrect_Format_field_Email_Address                      |
-            | Invalid_Email_Data_Exclamation_Domain                     | Error_Message_Incorrect_Format_field_Email_Address                      |
-            | Invalid_Email_Data_Unicode                                | Error_Message_Incorrect_Format_field_Email_Address                      |
-            | Invalid_Email_Data_Single_Quote_Before_AT                 | Error_Message_Incorrect_Format_field_Email_Address                      |
-            | Invalid_Email_Data_Domain_Exceed_Max                      | Error_Message_Incorrect_Format_field_Email_Address                      |
-            | Invalid_Email_Data_Local_Part_Max                         | Error_Message_Incorrect_Format_field_Email_Address                      |
-            | Invalid_Email_Data_Consecutive_Dot_Domain                 | Error_Message_Incorrect_Format_field_Email_Address                      |
-            | Invalid_Email_Data_Consecutive_Dot_SubDomain              | Error_Message_Incorrect_Format_field_Email_Address                      |
-            | Invalid_Email_Data_Consecutiv_Dot_Domain_SubDomain        | Error_Message_Incorrect_Format_field_Email_Address                      |
-            | Invalid_Email_Data_Emoji                                  | Error_Message_Incorrect_Format_field_Email_Address                      |
-            | Invalid_Email_Data_TLD                                    | Error_Message_Incorrect_Format_field_Email_Address                      |
-            | Invalid_Email_Data_Missing_AT                             | Error_Message_Incorrect_Format_field_Email_Address                      |
-            | Invalid_Email_Data_Reserved_Domain                        | Error_Message_Incorrect_Format_field_Email_Address                      |
-            | Invalid_Email_Data_Punycode                               | Error_Message_Incorrect_Format_field_Email_Address                      |
+            | Incorrect_Format_Telephone_Data                           | Error_Message_Incorrect_Format_Field_Telephone                          |
+            | Incorrect_Format_Email                                    | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Invalid_Email_Data_Start_With_Dot                         | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Invalid_Email_Data_Double_Dot                             | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Invalid_Email_Data_Space                                  | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Invalid_Email_Data_Wrong_AT                               | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Invalid_Email_Data_Less_Greater_Symbols                   | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Invalid_Email_Data_Colon                                  | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Invalid_Email_Data_Semi_Colon                             | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Invalid_Email_Data_Comma                                  | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Invalid_Email_Data_Start_With_Hyphen                      | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Invalid_Email_Data_Hyphen_Before_Domain                   | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Invalid_Email_Data_Double_Dot_Domain                      | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Invalid_Email_Data_Exclamation_Domain                     | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Invalid_Email_Data_Unicode                                | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Invalid_Email_Data_Single_Quote_Before_AT                 | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Invalid_Email_Data_Domain_Exceed_Max                      | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Invalid_Email_Data_Local_Part_Max                         | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Invalid_Email_Data_Consecutive_Dot_Domain                 | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Invalid_Email_Data_Consecutive_Dot_SubDomain              | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Invalid_Email_Data_Consecutiv_Dot_Domain_SubDomain        | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Invalid_Email_Data_Emoji                                  | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Invalid_Email_Data_TLD                                    | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Invalid_Email_Data_Missing_AT                             | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Invalid_Email_Data_Reserved_Domain                        | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Invalid_Email_Data_Punycode                               | Error_Message_Incorrect_Format_Field_Email_Address                      |
 
     @rsp-3122 @VerifyErrorMessagesInvalidData @VerifyErrorInvalidDataCreateUserFromCheckCreateUserProfileBackLink
     Scenario Outline: Validation messages are displayed for invalid data entered after the user has navigated back from 'Check and create user profile' page

@@ -57,10 +57,10 @@
   "Error_Message_Invalid_Character_Limit_field_Email_Address": {
     "email_address_text": "Email address must be 250 characters or less"
   },
-  "Error_Message_Incorrect_Format_field_Telephone": {
+  "Error_Message_Incorrect_Format_Field_Telephone": {
     "telephone_text": "Telephone must only contain numbers"
   },
-  "Error_Message_Incorrect_Format_field_Email_Address": {
+  "Error_Message_Incorrect_Format_Field_Email_Address": {
     "email_address_text": "Enter an email address in the correct format"
   },
   "Edit_User_Profile": {
