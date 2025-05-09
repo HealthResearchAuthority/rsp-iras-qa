@@ -40,6 +40,7 @@ import EditReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/
 import AuditHistoryReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/AuditHistoryReviewBodyPage';
 import AuditHistoryUserPage from '../pages/IRAS/reviewResearch/userAdministration/manageUsers/AuditHistoryUserPage';
 import ProjectOverviewSaveForLaterPage from '../pages/IRAS/makeChanges/ProjectOverviewSaveForLaterPage';
+import ReviewYourAnswersPage from '../pages/IRAS/makeChanges/ReviewYourAnswersPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -65,6 +66,7 @@ type CustomFixtures = {
   keyProjectRolesPage: KeyProjectRolesPage;
   reviewYourApplicationPage: ReviewYourApplicationPage;
   projectOverviewSaveForLaterPage: ProjectOverviewSaveForLaterPage;
+  reviewYourAnswersPage: ReviewYourAnswersPage;
   systemAdministrationPage: SystemAdministrationPage;
   manageReviewBodiesPage: ManageReviewBodiesPage;
   createReviewBodyPage: CreateReviewBodyPage;
@@ -175,6 +177,10 @@ export const test = base.extend<CustomFixtures>({
 
   projectOverviewSaveForLaterPage: async ({ page }, use) => {
     await use(new ProjectOverviewSaveForLaterPage(page));
+  },
+
+  reviewYourAnswersPage: async ({ page }, use) => {
+    await use(new ReviewYourAnswersPage(page));
   },
 
   systemAdministrationPage: async ({ page }, use) => {

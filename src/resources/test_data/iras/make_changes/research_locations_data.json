@@ -13,6 +13,31 @@
     "is_nhs_hsc_organisation_radio": "Yes",
     "lead_nation_radio": "England"
   },
+  "Valid_Data_All_Fields_Two": {
+    "nations_participating_checkbox": ["Northern Ireland", "Scotland", "Wales"],
+    "is_nhs_hsc_organisation_radio": "Yes",
+    "lead_nation_radio": "Northern Ireland"
+  },
+  "Valid_Data_Only_Nations_Participating": {
+    "nations_participating_checkbox": ["Northern Ireland", "Scotland", "Wales"]
+  },
+  "Valid_Data_Only_Nations_Participating_Two": {
+    "nations_participating_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
+  },
+  "Valid_Data_is_nhs_hsc_organisation": {
+    "is_nhs_hsc_organisation_radio": "Yes",
+    "lead_nation_radio": "Northern Ireland"
+  },
+  "Valid_Data_is_nhs_hsc_organisation_Two": {
+    "is_nhs_hsc_organisation_radio": "Yes",
+    "lead_nation_radio": "Scotland"
+  },
+  "Valid_Data_Only_is_nhs_hsc_organisation": {
+    "is_nhs_hsc_organisation_radio": "Yes"
+  },
+  "Valid_Data_Only_is_nhs_hsc_organisation_Two": {
+    "is_nhs_hsc_organisation_radio": "No"
+  },
   "Valid_Data_All_Empty_Fields": {
     "nations_participating_checkbox": []
   },
