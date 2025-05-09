@@ -52,12 +52,11 @@ export default class CommonItemsPage {
   readonly errorMessageFieldLabel: Locator;
   readonly errorMessageSummaryLabel: Locator;
   readonly summaryErrorLinks: Locator;
-  readonly auditTableRows: Locator;
+  readonly tableRows: Locator;
   readonly hidden_next_button: Locator;
   readonly next_button: Locator;
   readonly fieldGroup: Locator;
   readonly errorFieldGroup: Locator;
-  readonly userTableRows: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -82,8 +81,7 @@ export default class CommonItemsPage {
     this.qSetProgressBarActiveStage = this.qSetProgressBar.locator('.stage.active');
     this.qSetProgressBarStageLink = this.qSetProgressBarStage.locator('.stage-label').getByRole('button');
     this.qSetProgressBarActiveStageLink = this.qSetProgressBarActiveStage.locator('.stage-label').getByRole('button');
-    this.auditTableRows = this.page.getByRole('table').getByRole('row');
-    this.userTableRows = this.page.getByRole('table').getByRole('row');
+    this.tableRows = this.page.getByRole('table').getByRole('row');
     this.hidden_next_button = this.page.locator('[class="govuk-pagination__next"][style="visibility: hidden"]');
     //Banner
     this.bannerNavBar = this.page.getByLabel('Service information');
@@ -443,9 +441,9 @@ export default class CommonItemsPage {
     const adminEmailValues: string[] = [];
     let dataFound = false;
     while (!dataFound) {
-      const rowCount = await this.auditTableRows.count();
+      const rowCount = await this.tableRows.count();
       for (let i = 1; i < rowCount; i++) {
-        const columns = this.auditTableRows.nth(i).getByRole('cell');
+        const columns = this.tableRows.nth(i).getByRole('cell');
         const timeValue = confirmStringNotNull(await columns.nth(0).textContent());
         timeValues.push(timeValue);
         const eventValue = confirmStringNotNull(await columns.nth(1).textContent());
@@ -490,9 +488,9 @@ export default class CommonItemsPage {
     const emailAddressValues: string[] = [];
     let dataFound = false;
     while (!dataFound) {
-      const rowCount = await this.userTableRows.count();
+      const rowCount = await this.tableRows.count();
       for (let i = 1; i < rowCount; i++) {
-        const columns = this.userTableRows.nth(i).getByRole('cell');
+        const columns = this.tableRows.nth(i).getByRole('cell');
         const firstName = confirmStringNotNull(await columns.nth(0).textContent());
         firstNameValues.push(firstName);
         const lastName = confirmStringNotNull(await columns.nth(1).textContent());
@@ -520,9 +518,9 @@ export default class CommonItemsPage {
     await this.page.waitForTimeout(3000);
     let dataFound = false;
     while (!dataFound) {
-      const rowCount = await this.userTableRows.count();
+      const rowCount = await this.tableRows.count();
       for (let i = 1; i < rowCount; i++) {
-        const columns = this.userTableRows.nth(i).getByRole('cell');
+        const columns = this.tableRows.nth(i).getByRole('cell');
         const firstName = confirmStringNotNull(await columns.nth(0).textContent());
         const lastName = confirmStringNotNull(await columns.nth(1).textContent());
         const emailAddress = confirmStringNotNull(await columns.nth(2).textContent());

@@ -45,12 +45,12 @@ Then(
       userDetailsdataset.last_name_text +
       ' ' +
       validationLabelsDataset.disable_confirmation_success_body_two_label;
-    expect(
-      confirmStringNotNull(await confirmationPage.disable_confirmation_success_header_label.textContent()).trim()
-    ).toBe(expectedSuccessHeader);
-    expect(
-      confirmStringNotNull(await confirmationPage.disable_confirmation_success_body_label.textContent()).trim()
-    ).toBe(expectedSuccessBody);
+    expect(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim()).toBe(
+      expectedSuccessHeader
+    );
+    expect(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim()).toBe(
+      expectedSuccessBody
+    );
   }
 );
 
@@ -95,12 +95,12 @@ Then(
       userDetailsdataset.last_name_text +
       ' ' +
       validationLabelsDataset.enable_confirmation_success_body_two_label;
-    expect(
-      confirmStringNotNull(await confirmationPage.enable_confirmation_success_header_label.textContent()).trim()
-    ).toBe(expectedSuccessHeader);
-    expect(
-      confirmStringNotNull(await confirmationPage.enable_confirmation_success_body_label.textContent()).trim()
-    ).toBe(expectedSuccessBody);
+    expect(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim()).toBe(
+      expectedSuccessHeader
+    );
+    expect(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim()).toBe(
+      expectedSuccessBody
+    );
   }
 );
 
@@ -132,12 +132,12 @@ Then(
       organisationNameMemory +
       ' ' +
       validationLabelsDataset.disable_confirmation_success_body_two_label;
-    expect(
-      confirmStringNotNull(await confirmationPage.disable_confirmation_success_header_label.textContent()).trim()
-    ).toBe(expectedSuccessHeader);
-    expect(
-      confirmStringNotNull(await confirmationPage.disable_confirmation_success_body_label.textContent()).trim()
-    ).toBe(expectedSuccessBody);
+    expect(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim()).toBe(
+      expectedSuccessHeader
+    );
+    expect(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim()).toBe(
+      expectedSuccessBody
+    );
   }
 );
 
@@ -169,12 +169,12 @@ Then(
       organisationNameMemory +
       ' ' +
       validationLabelsDataset.enable_confirmation_success_body_two_label;
-    expect(
-      confirmStringNotNull(await confirmationPage.enable_confirmation_success_header_label.textContent()).trim()
-    ).toBe(expectedSuccessHeader);
-    expect(
-      confirmStringNotNull(await confirmationPage.enable_confirmation_success_body_label.textContent()).trim()
-    ).toBe(expectedSuccessBody);
+    expect(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim()).toBe(
+      expectedSuccessHeader
+    );
+    expect(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim()).toBe(
+      expectedSuccessBody
+    );
   }
 );
 
@@ -193,11 +193,11 @@ Then(
       validationLabelsDataset.remove_user_confirmation_success_body_two_label +
       organisationName +
       '.';
-    expect(
-      confirmStringNotNull(await confirmationPage.enable_confirmation_success_header_label.textContent()).trim()
-    ).toBe(expectedSuccessHeader);
-    expect(
-      confirmStringNotNull(await confirmationPage.enable_confirmation_success_body_label.textContent()).trim()
-    ).toBe(expectedSuccessBody);
+    expect(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim()).toBe(
+      expectedSuccessHeader
+    );
+    expect(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim()).toBe(
+      expectedSuccessBody
+    );
   }
 );

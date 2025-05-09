@@ -73,7 +73,7 @@ Feature: User Administration: Manage Review Bodies
         And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
         Then I can see the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
-        Then I click the view edit link for the 'enabled' review body
+        Then I click the view edit link for the 'active' review body
         And I can see the review body profile page
         And I capture the page screenshot
         # edit review body
