@@ -1,5 +1,5 @@
 @UserAdministration  @EditViewUsers @adminUser @rsp-2830 @rsp-2828
-Feature: HRAPROG-393- User Administration: Manage user profiles, view and edit user profile
+Feature: User Administration: Manage user profiles, view and edit user profile
     As a user
     I want the ability to edit and view a user profile record
     So that I can access all the user information and keep user information up to date
@@ -91,6 +91,28 @@ Feature: HRAPROG-393- User Administration: Manage user profiles, view and edit u
             | job_title_text     | Reviewer   | ACTIVE | User_Job_Title_Text_Two     | Original_Job_Title_Text_Two     |
             | role_checkbox      | Operations | ACTIVE | User_Role_Checkbox_Two      | Original_Role_Checkbox_Two      |
 
+    @editUserProfileOnlyMandatoryFields
+    Scenario Outline: Successful user profile update with only mandatory fields
+        And I search and click on view edit link for existing 'Edit_User_Only_Mandatory_Fields_Data' user with '<Status>' status from the manage user page
+        Then I can see the user profile page
+        When I click the '<Edit_User_Field>' change link for '<User_Role>' on the user profile page
+        Then I can see the edit user profile page
+        And I update user profile with '<Edit_User_Field_Data>'
+        And I click the 'Save' button on the 'Edit_User_Profile_Page'
+        And I can see the user profile page
+        Then I can see the user profile '<Edit_User_Field>' is updated with the edited data '<Edit_User_Field_Data>'
+        When I click the '<Edit_User_Field>' change link for '<User_Role>' on the user profile page
+        And I update user profile with '<Original_Data>'
+        And I click the 'Save' button on the 'Edit_User_Profile_Page'
+        And I can see the user profile page
+        When I click the 'Back' link on the 'User_Profile_Page'
+        Then I can see the 'Manage_Users_Page'
+        Examples:
+            | Edit_User_Field    | User_Role  | Status | Edit_User_Field_Data          | Original_Data                     |
+            | first_name_text    | Operations | ACTIVE | User_First_Name_Text_Three    | Original_First_Name_Text_Three    |
+            | last_name_text     | Operations | ACTIVE | User_Last_Name_Text_Three     | Original_Last_Name_Text_Three     |
+            | email_address_text | Operations | ACTIVE | User_Email_Address_Text_Three | Original_Email_Address_Text_Three |
+
     @editUserProfileValidEmailAddress
     Scenario Outline: Successful user profile update with multiple combination of email address formats
         And I search and click on view edit link for existing 'Edit_User_Only_Mandatory_Fields_Data' user with '<Status>' status from the manage user page
@@ -137,95 +159,52 @@ Feature: HRAPROG-393- User Administration: Manage user profiles, view and edit u
             | email_address_text | Operations | ACTIVE | Original_Email_Address_Text_Three | Valid_Email_Data_Other_Language       |
             | email_address_text | Operations | ACTIVE | Original_Email_Address_Text_Three | Valid_Email_Data_Number               |
 
-    @editUserProfileInvalidEmailAddress
-    Scenario Outline: Verify error message when an invalid email format is entered in edit user profile page
-        And I search and click on view edit link for existing 'Edit_User_Only_Mandatory_Fields_Data' user with '<Status>' status from the manage user page
-        Then I can see the user profile page
-        When I click the '<Edit_User_Field>' change link for '<User_Role>' on the user profile page
-        Then I can see the edit user profile page
-        And I update user profile with '<Edit_User_Field_Data>'
-        And I click the 'Save' button on the 'Edit_User_Profile_Page'
-        Then I validate '<Invalid_Email_Id_Error_Message>' is displayed on edit user profile page for '<Edit_User_Field_Data>'
-        Examples:
-            | Edit_User_Field    | User_Role  | Status | Edit_User_Field_Data                               | Invalid_Email_Id_Error_Message |
-            | email_address_text | Operations | ACTIVE | Invalid_Email_Id                                   | invalid_email_id_error         |
-            | email_address_text | Operations | ACTIVE | Incorrect_Format                                   | invalid_email_id_error         |
-            | email_address_text | Operations | ACTIVE | Invalid_Email_Data_Start_With_Dot                  | invalid_email_id_error         |
-            | email_address_text | Operations | ACTIVE | Invalid_Email_Data_Double_Dot                      | invalid_email_id_error         |
-            | email_address_text | Operations | ACTIVE | Invalid_Email_Data_Space                           | invalid_email_id_error         |
-            | email_address_text | Operations | ACTIVE | Invalid_Email_Data_Wrong_AT                        | invalid_email_id_error         |
-            | email_address_text | Operations | ACTIVE | Invalid_Email_Data_Less_Greater_Symbols            | invalid_email_id_error         |
-            | email_address_text | Operations | ACTIVE | Invalid_Email_Data_Colon                           | invalid_email_id_error         |
-            | email_address_text | Operations | ACTIVE | Invalid_Email_Data_Semi_Colon                      | invalid_email_id_error         |
-            | email_address_text | Operations | ACTIVE | Invalid_Email_Data_Comma                           | invalid_email_id_error         |
-            | email_address_text | Operations | ACTIVE | Invalid_Email_Data_Start_With_Hyphen               | invalid_email_id_error         |
-            | email_address_text | Operations | ACTIVE | Invalid_Email_Data_Hyphen_Before_Domain            | invalid_email_id_error         |
-            | email_address_text | Operations | ACTIVE | Invalid_Email_Data_Double_Dot_Domain               | invalid_email_id_error         |
-            | email_address_text | Operations | ACTIVE | Invalid_Email_Data_Exclamation_Domain              | invalid_email_id_error         |
-            | email_address_text | Operations | ACTIVE | Invalid_Email_Data_Unicode                         | invalid_email_id_error         |
-            | email_address_text | Operations | ACTIVE | Invalid_Email_Data_Single_Quote_Before_AT          | invalid_email_id_error         |
-            | email_address_text | Operations | ACTIVE | Invalid_Email_Data_Domain_Exceed_Max               | invalid_email_id_error         |
-            | email_address_text | Operations | ACTIVE | Invalid_Email_Data_Local_Part_Max                  | invalid_email_id_error         |
-            | email_address_text | Operations | ACTIVE | Invalid_Email_Data_Consecutive_Dot_Domain          | invalid_email_id_error         |
-            | email_address_text | Operations | ACTIVE | Invalid_Email_Data_Consecutive_Dot_SubDomain       | invalid_email_id_error         |
-            | email_address_text | Operations | ACTIVE | Invalid_Email_Data_Consecutiv_Dot_Domain_SubDomain | invalid_email_id_error         |
-            | email_address_text | Operations | ACTIVE | Invalid_Email_Data_Emoji                           | invalid_email_id_error         |
-            | email_address_text | Operations | ACTIVE | Invalid_Email_Data_TLD                             | invalid_email_id_error         |
-            | email_address_text | Operations | ACTIVE | Invalid_Email_Data_Missing_AT                      | invalid_email_id_error         |
-            | email_address_text | Operations | ACTIVE | Invalid_Email_Data_Reserved_Domain                 | invalid_email_id_error         |
-            | email_address_text | Operations | ACTIVE | Invalid_Email_Data_Punycode                        | invalid_email_id_error         |
 
-    @editUserProfileOnlyMandatoryFields
-    Scenario Outline: Successful user profile update with only mandatory fields
-        And I search and click on view edit link for existing 'Edit_User_Only_Mandatory_Fields_Data' user with '<Status>' status from the manage user page
+    @rsp-3122 @VerifyErrorMessagesInvalidData @EditUserProfileVerifyErrorMessagesInvalidData
+    Scenario Outline: Validate error messages are displayed for invalid data in edit user profile page
+        And I select a 'QA Automation' User to View and Edit which is '<Status>'
         Then I can see the user profile page
         When I click the '<Edit_User_Field>' change link for '<User_Role>' on the user profile page
         Then I can see the edit user profile page
-        And I update user profile with '<Edit_User_Field_Data>'
+        And  I uncheck the previously selected checkboxes on the edit user profile page for '<Edit_User_Profile>' when the role is selected as operations
+        And I update user profile with '<Invalid_Data_Edit_User>'
         And I click the 'Save' button on the 'Edit_User_Profile_Page'
-        And I can see the user profile page
-        Then I can see the user profile '<Edit_User_Field>' is updated with the edited data '<Edit_User_Field_Data>'
-        When I click the '<Edit_User_Field>' change link for '<User_Role>' on the user profile page
-        And I update user profile with '<Original_Data>'
-        And I click the 'Save' button on the 'Edit_User_Profile_Page'
-        And I can see the user profile page
-        When I click the 'Back' link on the 'User_Profile_Page'
-        Then I can see the 'Manage_Users_Page'
+        Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Edit_User_Profile_Page'
         Examples:
-            | Edit_User_Field    | User_Role  | Status | Edit_User_Field_Data          | Original_Data                     |
-            | first_name_text    | Operations | ACTIVE | User_First_Name_Text_Three    | Original_First_Name_Text_Three    |
-            | last_name_text     | Operations | ACTIVE | User_Last_Name_Text_Three     | Original_Last_Name_Text_Three     |
-            | email_address_text | Operations | ACTIVE | User_Email_Address_Text_Three | Original_Email_Address_Text_Three |
+            | Edit_User_Profile                        | Edit_User_Field   | User_Role  | Status | Invalid_Data_Edit_User                                    | Field_And_Summary_Error_Message                                         |
+            | Valid_Data_In_All_Fields_Role_Operations | title_text        | Operations | ACTIVE | Missing_Mandatory_Fields_Role_Not_Operations              | Error_Message_Missing_Mandatory_Fields_Role_Not_Operations              |
+            | Valid_Data_In_All_Fields_Role_Operations | first_name_text   | Operations | ACTIVE | Missing_Mandatory_Fields_Role_Operations                  | Error_Message_Missing_Mandatory_Fields_Role_Operations                  |
+            | Valid_Data_In_All_Fields_Role_Operations | last_name_text    | Operations | ACTIVE | Missing_Mandatory_Field_First_Name_Role_Not_Operations    | Error_Message_Missing_Mandatory_Field_First_Name_Role_Not_Operations    |
+            | Valid_Data_In_All_Fields_Role_Operations | telephone_text    | Operations | ACTIVE | Missing_Mandatory_Field_Last_Name_Role_Not_Operations     | Error_Message_Missing_Mandatory_Field_Last_Name_Role_Not_Operations     |
+            | Valid_Data_In_All_Fields_Role_Operations | organisation_text | Operations | ACTIVE | Missing_Mandatory_Field_Email_Address_Role_Not_Operations | Error_Message_Missing_Mandatory_Field_Email_Address_Role_Not_Operations |
+            | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | ACTIVE | Missing_Mandatory_Field_Country_Role_Operations           | Error_Message_Missing_Mandatory_Field_Country_Role_Operations           |
+            | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | ACTIVE | Missing_Mandatory_Field_Access_Required_Role_Operations   | Error_Message_Missing_Mandatory_Field_Access_Required_Role_Operations   |
+            | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | ACTIVE | Invalid_Character_Limit                                   | Error_Message_Invalid_Character_Limit                                   |
+            | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | ACTIVE | Invalid_Email_Data_Max_Char                               | Error_Message_Invalid_Character_Limit_field_Email_Address               |
+            | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | ACTIVE | Incorrect_Format_Telephone_Data                           | Error_Message_Incorrect_Format_Field_Telephone                          |
+            | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | ACTIVE | Incorrect_Format_Email                                    | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | ACTIVE | Invalid_Email_Data_Start_With_Dot                         | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | ACTIVE | Invalid_Email_Data_Double_Dot                             | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | ACTIVE | Invalid_Email_Data_Space                                  | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | ACTIVE | Invalid_Email_Data_Wrong_AT                               | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | ACTIVE | Invalid_Email_Data_Less_Greater_Symbols                   | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | ACTIVE | Invalid_Email_Data_Colon                                  | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | ACTIVE | Invalid_Email_Data_Semi_Colon                             | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | ACTIVE | Invalid_Email_Data_Comma                                  | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | ACTIVE | Invalid_Email_Data_Start_With_Hyphen                      | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | ACTIVE | Invalid_Email_Data_Hyphen_Before_Domain                   | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | ACTIVE | Invalid_Email_Data_Double_Dot_Domain                      | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | ACTIVE | Invalid_Email_Data_Exclamation_Domain                     | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | ACTIVE | Invalid_Email_Data_Unicode                                | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | ACTIVE | Invalid_Email_Data_Single_Quote_Before_AT                 | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | ACTIVE | Invalid_Email_Data_Domain_Exceed_Max                      | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | ACTIVE | Invalid_Email_Data_Local_Part_Max                         | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | ACTIVE | Invalid_Email_Data_Consecutive_Dot_Domain                 | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | ACTIVE | Invalid_Email_Data_Consecutive_Dot_SubDomain              | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | ACTIVE | Invalid_Email_Data_Consecutiv_Dot_Domain_SubDomain        | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | ACTIVE | Invalid_Email_Data_Emoji                                  | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | ACTIVE | Invalid_Email_Data_TLD                                    | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | ACTIVE | Invalid_Email_Data_Missing_AT                             | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | ACTIVE | Invalid_Email_Data_Reserved_Domain                        | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | ACTIVE | Invalid_Email_Data_Punycode                               | Error_Message_Incorrect_Format_Field_Email_Address                      |
 
-    @editUserProfileMandatoryFieldsValidation
-    Scenario Outline: Verify error message when mandatory fields are left blank on edit user profile page
-        And I search and click on view edit link for existing 'Edit_User_Only_Mandatory_Fields_Data' user with '<Status>' status from the manage user page
-        Then I can see the user profile page
-        When I click the '<Edit_User_Field>' change link for '<User_Role>' on the user profile page
-        Then I can see the edit user profile page
-        And I edit to remove '<Edit_User_Field>' mandatory field value
-        And I click the 'Save' button on the 'Edit_User_Profile_Page'
-        Then I validate '<Mandatory_Field_Error_Message>' is displayed on edit user profile page for '<Edit_User_Field_Data>'
-        Examples:
-            | Edit_User_Field    | User_Role  | Status | Edit_User_Field_Data     | Mandatory_Field_Error_Message |
-            | first_name_text    | Operations | ACTIVE | empty_first_name_text    | first_name_mandatory_error    |
-            | last_name_text     | Operations | ACTIVE | empty_last_name_text     | last_name_mandatory_error     |
-            | email_address_text | Operations | ACTIVE | empty_email_address_text | email_address_mandatory_error |
-
-    @editUserProfileMaxFieldLengthValidation
-    Scenario Outline: Verify error message for field input exceeding maximum length on edit user profile page
-        And I search and click on view edit link for existing 'Edit_User_Only_Mandatory_Fields_Data' user with '<Status>' status from the manage user page
-        Then I can see the user profile page
-        When I click the '<Edit_User_Field>' change link for '<User_Role>' on the user profile page
-        Then I can see the edit user profile page
-        And I update user profile with '<Edit_User_Field_Data>'
-        And I click the 'Save' button on the 'Edit_User_Profile_Page'
-        Then I validate '<Max_Field_Length_Error_Message>' is displayed on edit user profile page for '<Edit_User_Field_Data>'
-        Examples:
-            | Edit_User_Field   | User_Role  | Status | Edit_User_Field_Data       | Max_Field_Length_Error_Message |
-            | title_text        | Operations | ACTIVE | User_Title_Text_Max        | max_field_length_error         |
-            | first_name_text   | Operations | ACTIVE | User_First_Name_Text_Max   | max_field_length_error         |
-            | last_name_text    | Operations | ACTIVE | User_Last_Name_Text_Max    | max_field_length_error         |
-            | telephone_text    | Operations | ACTIVE | User_Telephone_Text_Max    | max_field_length_error         |
-            | organisation_text | Operations | ACTIVE | User_Organisation_Text_Max | max_field_length_error         |
-            | job_title_text    | Operations | ACTIVE | User_Job_Title_Text_Max    | max_field_length_error         |

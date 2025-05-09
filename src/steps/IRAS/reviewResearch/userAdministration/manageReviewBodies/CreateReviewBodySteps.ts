@@ -45,17 +45,3 @@ Then('I can see the Add new review body page for {string}', async ({ createRevie
   await expect(createReviewBodyPage.email_address_text).toHaveValue(dataset.email_address_text);
   await expect(createReviewBodyPage.description_text).toHaveValue(dataset.description_text);
 });
-
-Then(
-  'I can see the {string} validation message for {string} on the Add new review body page',
-  async ({ createReviewBodyPage }, errorMsg: string, fieldName: string) => {
-    const dataset = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body.Validation;
-    if (fieldName.toLowerCase() == 'all_mandatory_fields') {
-      await expect(createReviewBodyPage.organisation_name_error).toHaveText(dataset.Mandatory_Field);
-      await expect(createReviewBodyPage.country_error).toHaveText(dataset.Select_Country);
-      await expect(createReviewBodyPage.email_address_error).toHaveText(dataset.Mandatory_Field);
-    } else {
-      await expect(createReviewBodyPage[fieldName.toLowerCase()]).toHaveText(dataset[errorMsg]);
-    }
-  }
-);

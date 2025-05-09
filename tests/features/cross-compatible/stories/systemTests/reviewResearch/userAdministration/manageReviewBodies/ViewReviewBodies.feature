@@ -1,5 +1,5 @@
 @UserAdministration @ViewReviewBodies @adminUser @SystemTest @rsp-2571 @rsp-2569
-Feature: HRAPROG-393- User Administration: Manage Review Bodies list and view review bodies profile details
+Feature: User Administration: Manage Review Bodies list and view review bodies profile details
 
     Background:
         Given I have navigated to the 'Home_Page'

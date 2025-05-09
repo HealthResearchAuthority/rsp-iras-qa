@@ -97,6 +97,39 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
+  @axeAccessibilityProjectOverviewSaveLater @adminUser
+  Scenario: Project Overview - Save for later page
+    Given I have navigated to the 'Home_Page'
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    When I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
+    Then I can see the project details title page
+    And I fill the project details title page with '<Project_Details_Title>'
+    When I click the 'Save_For_Later' button on the 'Project_Details_Title_Page'
+    Then I can see the project overview save for later page
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityReviewYourAnswers @adminUser
+  Scenario: Review your answers
+    Given I have navigated to the 'Home_Page'
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    When I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    When I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    And I fill the key project roles page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    And I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
   @axeAccessibilityManageUsersList @adminUser @axeAccessibilityManageUsers
   Scenario: Manage Users list page
     Given I have navigated to the 'System_Administration_Page'

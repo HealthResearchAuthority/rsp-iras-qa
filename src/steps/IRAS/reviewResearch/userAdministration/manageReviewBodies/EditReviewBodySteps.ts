@@ -46,20 +46,6 @@ When(
   }
 );
 
-Then(
-  'I can see the {string} validation message for {string} on the Edit review body page',
-  async ({ editReviewBodyPage }, errorMsg: string, fieldName: string) => {
-    const dataset = editReviewBodyPage.editReviewBodyPageData.Edit_Review_Body.Validation;
-    if (fieldName.toLowerCase() == 'all_mandatory_fields') {
-      await expect(editReviewBodyPage.organisation_name_error).toHaveText(dataset.Mandatory_Field);
-      await expect(editReviewBodyPage.country_error).toHaveText(dataset.Select_Country);
-      await expect(editReviewBodyPage.email_address_error).toHaveText(dataset.Mandatory_Field);
-    } else {
-      await expect(editReviewBodyPage[fieldName.toLowerCase()]).toHaveText(dataset[errorMsg]);
-    }
-  }
-);
-
 When(
   'I fill the edit review body page using {string} for field {string}',
   async ({ editReviewBodyPage, commonItemsPage }, datasetName: string, fieldName: string) => {

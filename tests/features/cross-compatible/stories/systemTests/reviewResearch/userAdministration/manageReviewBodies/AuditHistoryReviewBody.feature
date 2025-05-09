@@ -28,13 +28,12 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'
         Then I can see the audit history page of the selected review body for '<Add_Review_Body>'
         And I capture the page screenshot
-        And I can see the '<Validation_Text>' labels on the audit history page of the review body
         And I can see the audit history for the review body 'created' event for '<Add_Review_Body>' with '<Audit_History>'
 
         Examples:
-            | Add_Review_Body                    | Validation_Text           | Audit_History      |
-            | Valid_Data_In_All_Fields           | Review_Body_Audit_History | Create_Review_Body |
-            | Valid_Data_In_All_Mandatory_Fields | Review_Body_Audit_History | Create_Review_Body |
+            | Add_Review_Body                    | Audit_History      |
+            | Valid_Data_In_All_Fields           | Create_Review_Body |
+            | Valid_Data_In_All_Mandatory_Fields | Create_Review_Body |
 
     @VerifyAuditHistoryDisableReviewBody
     Scenario Outline: Verify the user can view the audit history after disabling a review body
@@ -53,12 +52,11 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'
         Then I can see the audit history page of the review body
         And I capture the page screenshot
-        And I can see the '<Validation_Text>' labels on the audit history page of the review body
         And I can see the audit history for the review body 'disabled' event for '<Add_Review_Body>' with '<Audit_History>'
 
         Examples:
-            | Add_Review_Body          | Validation_Text           | Audit_History       |
-            | Valid_Data_In_All_Fields | Review_Body_Audit_History | Disable_Review_Body |
+            | Add_Review_Body          | Audit_History       |
+            | Valid_Data_In_All_Fields | Disable_Review_Body |
 
     @VerifyAuditHistoryEnableReviewBody
     Scenario Outline: Verify the user can view the audit history after enabling a review body
@@ -78,12 +76,11 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'
         Then I can see the audit history page of the review body
         And I capture the page screenshot
-        And I can see the '<Validation_Text>' labels on the audit history page of the review body
         And I can see the audit history for the review body 'enabled' event for '<Add_Review_Body>' with '<Audit_History>'
 
         Examples:
-            | Validation_Text           | Audit_History      |
-            | Review_Body_Audit_History | Enable_Review_Body |
+            | Audit_History      |
+            | Enable_Review_Body |
 
     @VerifyAuditHistoryEditReviewBodyOrgName
     Scenario Outline: Verify the user can view the audit history after editing organization name of a review body
@@ -102,12 +99,11 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'
         Then I can see the audit history page of the review body
         And I capture the page screenshot
-        And I can see the '<Validation_Text>' labels on the audit history page of the review body
         And I can see the audit history for 'Organisation_Name' edited event with '<Audit_History>'
 
         Examples:
-            | Field_Name        | Edit_Review_Body                     | Validation_Text           | Audit_History                      |
-            | Organisation_Name | Valid_Data_Organisation_Name_Another | Review_Body_Audit_History | Edit_Review_Body_Organisation_Name |
+            | Field_Name        | Edit_Review_Body                     | Audit_History                      |
+            | Organisation_Name | Valid_Data_Organisation_Name_Another | Edit_Review_Body_Organisation_Name |
 
     @VerifyAuditHistoryEditReviewBodyCountry
     Scenario Outline: Verify the user can view the audit history after editing country of a review body
@@ -127,13 +123,12 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'
         Then I can see the audit history page of the review body
         And I capture the page screenshot
-        And I can see the '<Validation_Text>' labels on the audit history page of the review body
         And I can see the audit history page heading
         And I can see the audit history for 'Country' edited event with '<Audit_History>'
 
         Examples:
-            | Field_Name | Edit_Review_Body           | Validation_Text           | Audit_History            |
-            | Country    | Valid_Data_Country_Another | Review_Body_Audit_History | Edit_Review_Body_Country |
+            | Field_Name | Edit_Review_Body           | Audit_History            |
+            | Country    | Valid_Data_Country_Another | Edit_Review_Body_Country |
 
     @VerifyAuditHistoryEditReviewBodyEmail
     Scenario Outline: Verify the user can view the audit history after editing email address of a review body
@@ -153,13 +148,12 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'
         Then I can see the audit history page of the review body
         And I capture the page screenshot
-        And I can see the '<Validation_Text>' labels on the audit history page of the review body
         And I can see the audit history page heading
         And I can see the audit history for 'Email_Address' edited event with '<Audit_History>'
 
         Examples:
-            | Field_Name    | Edit_Review_Body         | Validation_Text           | Audit_History                  |
-            | Email_Address | Valid_Data_Email_Another | Review_Body_Audit_History | Edit_Review_Body_Email_Address |
+            | Field_Name    | Edit_Review_Body         | Audit_History                  |
+            | Email_Address | Valid_Data_Email_Another | Edit_Review_Body_Email_Address |
 
     @VerifyAuditHistoryEditReviewBodyDescription
     Scenario Outline: Verify the user can view the audit history after editing description of a review body
@@ -179,13 +173,12 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'
         Then I can see the audit history page of the review body
         And I capture the page screenshot
-        And I can see the '<Validation_Text>' labels on the audit history page of the review body
         And I can see the audit history page heading
         And I can see the audit history for 'Description' edited event with '<Audit_History>'
 
         Examples:
-            | Field_Name  | Edit_Review_Body               | Validation_Text           | Audit_History                |
-            | Description | Valid_Data_Description_Another | Review_Body_Audit_History | Edit_Review_Body_Description |
+            | Field_Name  | Edit_Review_Body               | Audit_History                |
+            | Description | Valid_Data_Description_Another | Edit_Review_Body_Description |
 
     @VerifyAuditHistoryEditReviewBodyAllFields
     Scenario Outline: Verify the user can view the audit history after editing all the fields of a review body
@@ -207,12 +200,11 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'
         Then I can see the audit history page of the review body
         And I capture the page screenshot
-        And I can see the '<Validation_Text>' labels on the audit history page of the review body
         And I can see the audit history for all the fields edited event with '<Audit_History>'
 
         Examples:
-            | Field_Name_One    | Field_Name_Two | Field_Name_Three | Field_Name_Four | Edit_Review_Body           | Validation_Text           | Audit_History               |
-            | Organisation_Name | Country        | Email_Address    | Description     | Valid_Data_Edit_All_Fields | Review_Body_Audit_History | Edit_Review_Body_All_Fields |
+            | Field_Name_One    | Field_Name_Two | Field_Name_Three | Field_Name_Four | Edit_Review_Body           | Audit_History               |
+            | Organisation_Name | Country        | Email_Address    | Description     | Valid_Data_Edit_All_Fields | Edit_Review_Body_All_Fields |
 
 
     @VerifyAuditHistoryDefaultSort

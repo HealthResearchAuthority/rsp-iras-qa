@@ -23,11 +23,60 @@
     "planned_project_end_month_text": "The date should be a valid date and in future",
     "planned_project_end_year_text": "The date should be a valid date and in future"
   },
+  "All_Field_Error_Message": {
+    "short_project_title_text": "Short project title must not contain more than XX characters",
+    "planned_project_end_day_text": "The date should be a valid date and in future"
+  },
+  "Title_Field_Error_Message": {
+    "short_project_title_text": "Short project title must not contain more than XX characters"
+  },
+  "Date_Day_Field_Error_Message": {
+    "planned_project_end_day_text": "The date should be a valid date and in future"
+  },
+  "Date_Month_Field_Error_Message": {
+    "planned_project_end_month_text": "The date should be a valid date and in future"
+  },
+  "Date_Year_Field_Error_Message": {
+    "planned_project_end_year_text": "The date should be a valid date and in future"
+  },
+  "Valid_Data_All_Empty_Fields": {
+    "short_project_title_text": "",
+    "planned_project_end_day_text": "",
+    "planned_project_end_month_text": "",
+    "planned_project_end_year_text": ""
+  },
+  "Valid_Data_Title_Empty_Field": {
+    "short_project_title_text": ""
+  },
+  "Valid_Data_Only_Title_Field": {
+    "short_project_title_text": "QA_Automation - This is a short project title"
+  },
+  "Valid_Data_Only_Title_Field_Two": {
+    "short_project_title_text": "QA_Automation - This is a short project title"
+  },
+  "Valid_Data_Only_Date_Fields": {
+    "short_project_title_text": "",
+    "planned_project_end_day_text": "1",
+    "planned_project_end_month_text": "1",
+    "planned_project_end_year_text": "2030"
+  },
+  "Valid_Data_Only_Date_Fields_Two": {
+    "short_project_title_text": "",
+    "planned_project_end_day_text": "3",
+    "planned_project_end_month_text": "3",
+    "planned_project_end_year_text": "2030"
+  },
   "Valid_Data_All_Fields": {
     "short_project_title_text": "QA_Automation - This is a short project title",
     "planned_project_end_day_text": "1",
     "planned_project_end_month_text": "1",
     "planned_project_end_year_text": "2030"
+  },
+  "Valid_Data_All_Fields_Two": {
+    "short_project_title_text": "QA_Automation - This is a short project title Modified",
+    "planned_project_end_day_text": "2",
+    "planned_project_end_month_text": "5",
+    "planned_project_end_year_text": "2031"
   },
   "Valid_Data_All_Fields_VERA": {
     "short_project_title_text": "QA_Automation Virtual Engagement Rehabilitation Assistant (VERA) in the community",

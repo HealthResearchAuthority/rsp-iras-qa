@@ -5,6 +5,7 @@ name: Run Playwright Tests
 
 trigger:
   - main
+  - dev
 
 schedules:
   - cron: '0 0 * * *'

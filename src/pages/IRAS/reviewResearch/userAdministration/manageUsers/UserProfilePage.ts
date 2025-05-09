@@ -27,8 +27,8 @@ export default class UserProfilePage {
   private _new_job_title: string;
   private _countries: string[];
   private _new_countries: string[];
+  private _role: string[];
   readonly selected_bread_crumbs: Locator;
-  readonly back_button: Locator;
   readonly page_heading: Locator;
   readonly first_change_link: Locator;
   readonly row_value_locator: Locator;
@@ -98,6 +98,7 @@ export default class UserProfilePage {
     this._new_job_title = '';
     this._countries = [];
     this._new_countries = [];
+    this._role = [];
     this.page_heading = this.page
       .getByRole('heading')
       .getByText(this.userProfilePageTestData.User_Profile_Page.page_heading_prefix, { exact: false });
@@ -425,5 +426,13 @@ export default class UserProfilePage {
 
   async setNewCountries(value: string[]): Promise<void> {
     this._new_countries = value;
+  }
+
+  async getRole(): Promise<string[]> {
+    return this._role;
+  }
+
+  async setRole(value: string[]): Promise<void> {
+    this._role = value;
   }
 }

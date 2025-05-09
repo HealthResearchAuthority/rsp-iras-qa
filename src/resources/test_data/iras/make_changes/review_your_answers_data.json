@@ -1,0 +1,34 @@
+{
+  "Review_Your_Answers_Page": {
+    "heading": "Review your answers",
+    "project_details_sub_heading": "Project details",
+    "iras_id_label": "IRAS ID",
+    "short_project_label": "Short project title",
+    "short_project_title_enter_link": "Enter short project title",
+    "project_end_date_label": "Project end date",
+    "project_end_date_enter_link": "Enter planned project end date",
+    "key_project_roles_sub_heading": "Key project roles",
+    "chief_investigator_email_label": "Chief Investigator",
+    "chief_investigator_email_enter_link": "Enter chief investigator",
+    "primary_sponsor_organisation_label": "Primary sponsor organisation",
+    "sponsor_contact_email_label": "Sponsor contact",
+    "sponsor_contact_email_enter_link": "Enter sponsor contact",
+    "research_locations_sub_heading": "Research locations",
+    "participating_nations_label": "Participating nations",
+    "nations_participating_enter_link": "Enter participating nations",
+    "nhs_hsc_organisations_label": "NHS / HSC organisations",
+    "is_nhs_hsc_organisation_enter_link": "Enter NHS / HSC organisations",
+    "lead_nation_label": "Lead nation",
+    "lead_nation_enter_link": "Enter lead nation",
+    "confirm_project_details_sub_heading": "Confirm project details",
+    "confirm_project_details_hint_label": "Review your answers and complete any missing information before confirming project details."
+  },
+  "Enter_Links_Missing_Fields": {
+    "short_project_title_text": "Enter short project title",
+    "planned_project_end_date_text": "Enter planned project end date",
+    "chief_investigator_email_text": "Enter chief investigator",
+    "sponsor_contact_email_text": "Enter sponsor contact",
+    "nations_participating_checkbox": "Enter participating nations",
+    "is_nhs_hsc_organisation_radio": "Enter NHS / HSC organisations"
+  }
+}

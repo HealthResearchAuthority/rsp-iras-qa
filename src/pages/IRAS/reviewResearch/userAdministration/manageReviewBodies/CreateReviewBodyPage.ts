@@ -10,12 +10,14 @@ export default class CreateReviewBodyPage {
   private _unique_org_name: string;
   readonly page_heading: Locator;
   readonly validation_error: Locator;
+  readonly char_count_error: Locator;
   readonly organisation_name_text: Locator;
   readonly organisation_name_error: Locator;
   readonly email_address_text: Locator;
   readonly email_address_error: Locator;
   readonly description_text: Locator;
   readonly description_error: Locator;
+  readonly description_reason_error: Locator;
   readonly continueBtn: Locator;
   readonly country_fieldset: Locator;
   readonly country_checkbox: Locator;
@@ -32,7 +34,8 @@ export default class CreateReviewBodyPage {
     this.page_heading = this.page
       .getByRole('heading')
       .getByText(this.createReviewBodyPageData.Create_Review_Body_Page.page_heading);
-    this.validation_error = this.page.locator('.field-validation-error');
+    this.validation_error = this.page.locator('.govuk-error-message');
+    this.char_count_error = this.page.locator('.govuk-character-count__message');
     this.organisation_name_text = this.page.getByLabel(
       this.createReviewBodyPageData.Create_Review_Body_Page.organisation_name_label,
       { exact: true }
@@ -52,7 +55,8 @@ export default class CreateReviewBodyPage {
     this.description_text = this.page.getByLabel(
       this.createReviewBodyPageData.Create_Review_Body_Page.description_label
     );
-    this.description_error = this.description_text.locator('..').locator(this.validation_error);
+    this.description_error = this.description_text.locator('..').locator(this.validation_error).first();
+    this.description_reason_error = this.description_text.locator('..').locator(this.char_count_error);
     this.continueBtn = this.page
       .getByRole('button')
       .getByText(this.buttonTextData.Create_Review_Body_Page.Continue, { exact: true });
