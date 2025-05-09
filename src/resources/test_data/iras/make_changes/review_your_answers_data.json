@@ -30,5 +30,87 @@
     "sponsor_contact_email_text": "Enter sponsor contact",
     "nations_participating_checkbox": "Enter participating nations",
     "is_nhs_hsc_organisation_radio": "Enter NHS / HSC organisations"
+  },
+  "All_Field_Error_Message": {
+    "short_project_title_text": "Enter short project title",
+    "planned_project_end_date_text": "Enter project end date",
+    "chief_investigator_email_text": "Enter chief investigator",
+    "primary_sponsor_organisation_text": "Enter primary sponsor organisation",
+    "sponsor_contact_email_text": "Enter sponsor contact",
+    "nations_participating_checkbox": "Enter participating nations",
+    "is_nhs_hsc_organisation_radio": "Enter NHS / HSC organisations"
+  },
+  "Field_Error_Message_Except_Project_Title": {
+    "planned_project_end_date_text": "Enter project end date",
+    "chief_investigator_email_text": "Enter chief investigator",
+    "primary_sponsor_organisation_text": "Enter primary sponsor organisation",
+    "sponsor_contact_email_text": "Enter sponsor contact",
+    "nations_participating_checkbox": "Enter participating nations",
+    "is_nhs_hsc_organisation_radio": "Enter NHS / HSC organisations"
+  },
+  "Field_Error_Message_Except_End_Date": {
+    "short_project_title_text": "Enter short project title",
+    "chief_investigator_email_text": "Enter chief investigator",
+    "primary_sponsor_organisation_text": "Enter primary sponsor organisation",
+    "sponsor_contact_email_text": "Enter sponsor contact",
+    "nations_participating_checkbox": "Enter participating nations",
+    "is_nhs_hsc_organisation_radio": "Enter NHS / HSC organisations"
+  },
+  "Field_Error_Message_Except_Chief_Investigator": {
+    "short_project_title_text": "Enter short project title",
+    "planned_project_end_date_text": "Enter project end date",
+    "primary_sponsor_organisation_text": "Enter primary sponsor organisation",
+    "sponsor_contact_email_text": "Enter sponsor contact",
+    "nations_participating_checkbox": "Enter participating nations",
+    "is_nhs_hsc_organisation_radio": "Enter NHS / HSC organisations"
+  },
+  "Field_Error_Message_Except_Sponsor_Organisation": {
+    "short_project_title_text": "Enter short project title",
+    "planned_project_end_date_text": "Enter project end date",
+    "chief_investigator_email_text": "Enter chief investigator",
+    "sponsor_contact_email_text": "Enter sponsor contact",
+    "nations_participating_checkbox": "Enter participating nations",
+    "is_nhs_hsc_organisation_radio": "Enter NHS / HSC organisations"
+  },
+  "Field_Error_Message_Except_Sponsor_Contact": {
+    "short_project_title_text": "Enter short project title",
+    "planned_project_end_date_text": "Enter project end date",
+    "chief_investigator_email_text": "Enter chief investigator",
+    "primary_sponsor_organisation_text": "Enter primary sponsor organisation",
+    "nations_participating_checkbox": "Enter participating nations",
+    "is_nhs_hsc_organisation_radio": "Enter NHS / HSC organisations"
+  },
+  "Field_Error_Message_Except_Nations_Participating": {
+    "short_project_title_text": "Enter short project title",
+    "planned_project_end_date_text": "Enter project end date",
+    "chief_investigator_email_text": "Enter chief investigator",
+    "primary_sponsor_organisation_text": "Enter primary sponsor organisation",
+    "sponsor_contact_email_text": "Enter sponsor contact",
+    "is_nhs_hsc_organisation_radio": "Enter NHS / HSC organisations"
+  },
+  "Field_Error_Message_Except_NHS_HSC_Org": {
+    "short_project_title_text": "Enter short project title",
+    "planned_project_end_date_text": "Enter project end date",
+    "chief_investigator_email_text": "Enter chief investigator",
+    "primary_sponsor_organisation_text": "Enter primary sponsor organisation",
+    "sponsor_contact_email_text": "Enter sponsor contact",
+    "nations_participating_checkbox": "Enter participating nations"
+  },
+  "Field_Error_Message_Except_NHS_HSC_Org_As_Yes": {
+    "short_project_title_text": "Enter short project title",
+    "planned_project_end_date_text": "Enter project end date",
+    "chief_investigator_email_text": "Enter chief investigator",
+    "primary_sponsor_organisation_text": "Enter primary sponsor organisation",
+    "sponsor_contact_email_text": "Enter sponsor contact",
+    "nations_participating_checkbox": "Enter participating nations",
+    "lead_nation_radio": "Enter lead nation"
+  },
+  "Field_Error_Message_Except_NHS_HSC_Org_Lead_Nation": {
+    "short_project_title_text": "Enter short project title",
+    "planned_project_end_date_text": "Enter project end date",
+    "chief_investigator_email_text": "Enter chief investigator",
+    "primary_sponsor_organisation_text": "Enter primary sponsor organisation",
+    "sponsor_contact_email_text": "Enter sponsor contact",
+    "nations_participating_checkbox": "Enter participating nations"
   }
 }

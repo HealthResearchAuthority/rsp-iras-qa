@@ -21,6 +21,7 @@
   },
   "Valid_Data_All_Fields": {
     "chief_investigator_email_text": "ci_test@test.com",
+    "primary_sponsor_organisation_text": "CHESTERFIELD ROYAL HOSPITAL NHS FOUNDATION TRUST",
     "sponsor_contact_email_text": "sc_test@test.com"
   },
   "Valid_Data_All_Fields_Two": {
