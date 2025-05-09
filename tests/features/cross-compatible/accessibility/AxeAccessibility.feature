@@ -1,6 +1,6 @@
 @axeAccessibility @jsEnabled
 Feature: Run Axe Accessibilty Test Tool Against App Pages
-
+# delete IDG, delete proj filter
   @axeAccessibilityHome @adminUser
   Scenario: Home Page
     Given I have navigated to the 'Home_Page'
@@ -8,30 +8,9 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityIdg
-  Scenario: IDG Login Page
-    Given I have navigated to the 'Login_Page'
-    When I Scan the page with the Axe Accessibilty Tool
-    And I analyse the results from the Axe scan
-    Then I expect to receive no WCAG Violations
-
   @axeAccessibilityCreate @adminUser
   Scenario: Create Application Page
     Given I have navigated to the 'Create_Application_Page'
-    When I Scan the page with the Axe Accessibilty Tool
-    And I analyse the results from the Axe scan
-    Then I expect to receive no WCAG Violations
-
-  @axeAccessibilityProjFilter @adminUser
-  Scenario: Project Filter Question Set
-    Given I have navigated to the 'Home_Page'
-    And I click the 'Make_Changes_To_Research' button on the 'Home_Page'
-    And I can see the 'Create_Application_Page'
-    And I enter the application name and description for 'Project_X'
-    And I click the 'Create' button on the 'Create_Application_Page'
-    And I can see the proceed application page for 'Project_X'
-    And I click the 'Proceed_Application' button on the 'Proceed_Application_Page'
-    And I can see the 'Project_Filter' question set
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
@@ -546,6 +525,75 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I can see the user profile page
     When I click the 'View_Users_Audit_History' link on the 'User_Profile_Page'
     Then I can see the audit history page of the user profile
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilitySearchAddUserReviewBodyResults @adminUser
+  Scenario: Search add user to review body page with results
+    Given I have navigated to the 'Manage_Review_Bodies_Page'
+    And I select a 'QA Automation' Review Body to View and Edit which is 'active'
+    And I can see the review body profile page
+    And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
+    And I can see the user list page of the review body
+    And I click the 'Add_User_To_Review_Body' link on the 'Review_Body_User_List_Page'
+    And I can see the search for user to add to review body page
+    And I fill the search input for add users to review body with 'Existing_QA_User_First_Name' as the search query
+    And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
+    And I can see that the add users to review body search page contains 'Results'
+    And the add users to review body search has returned results with the 'Existing_QA_User_First_Name'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilitySearchAddUserReviewBodyNoResults @adminUser
+  Scenario: Search add user to review body page with no results found
+    Given I have navigated to the 'Manage_Review_Bodies_Page'
+    And I select a 'QA Automation' Review Body to View and Edit which is 'active'
+    And I can see the review body profile page
+    And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
+    And I can see the user list page of the review body
+    And I click the 'Add_User_To_Review_Body' link on the 'Review_Body_User_List_Page'
+    And I can see the search for user to add to review body page
+    And I fill the search input for add users to review body with 'Non_Existant_User_Data' as the search query
+    And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
+    And I can see that the add users to review body search page contains 'No_Results'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityCheckAddUserReviewBody @adminUser
+  Scenario: Check add user to review body page
+    Given I have navigated to the 'Manage_Review_Bodies_Page'
+    And I select a 'QA Automation' Review Body to View and Edit which is 'active'
+    And I can see the review body profile page
+    And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
+    And I can see the user list page of the review body
+    And I click the 'Add_User_To_Review_Body' link on the 'Review_Body_User_List_Page'
+    And I can see the search for user to add to review body page
+    And I fill the search input for add users to review body with 'Existing_QA_User_First_Name' as the search query
+    And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
+    And I click the 'Add_User' link on the 'Search_Add_User_Review_Body_Page'
+    And I can see the check and add user to review body page    
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityAddUserReviewBodyConfirmation @adminUser
+  Scenario: Add user to review body confirmation page
+    Given I have navigated to the 'Manage_Review_Bodies_Page'
+    And I select a 'QA Automation' Review Body to View and Edit which is 'active'
+    And I can see the review body profile page
+    And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
+    And I can see the user list page of the review body
+    And I click the 'Add_User_To_Review_Body' link on the 'Review_Body_User_List_Page'
+    And I can see the search for user to add to review body page
+    And I fill the search input for add users to review body with 'Existing_QA_User_First_Name' as the search query
+    And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
+    And I click the 'Add_User' link on the 'Search_Add_User_Review_Body_Page'
+    And I can see the check and add user to review body page  
+    And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
+    And I am on the confirmation screen 
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations

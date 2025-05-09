@@ -21,6 +21,8 @@ Then('I can see the review body profile page', async ({ reviewBodyProfilePage })
   await reviewBodyProfilePage.setLastUpdatedDate(
     confirmStringNotNull(await reviewBodyProfilePage.last_updated_value.textContent())
   );
+  const revBodyIdStartIndex = reviewBodyProfilePage.page.url().lastIndexOf('/') + 1;
+  await reviewBodyProfilePage.setReviewBodyId(reviewBodyProfilePage.page.url().substring(revBodyIdStartIndex));
 });
 
 Then(
