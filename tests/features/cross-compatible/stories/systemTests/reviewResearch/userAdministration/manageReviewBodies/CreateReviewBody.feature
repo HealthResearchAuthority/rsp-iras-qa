@@ -2,9 +2,7 @@
 Feature: User Administration: Manage Review Bodies - Create review body
 
     Background:
-        Given I have navigated to the 'Home_Page'
-        And I click the 'System_Admin' link on the 'Banner'
-        And I can see the 'System_Administration_Page'
+        Given I have navigated to the 'System_Administration_Page'
         And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
         Then I can see the 'Manage_Review_Bodies_Page'
         And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'

@@ -5,8 +5,8 @@ Feature: User Administration: Manage user profiles, view and edit user profile
     So that I can access all the user information and keep user information up to date
 
     Background:
-        Given I have navigated to the 'Home_Page'
-        When I click the 'Manage_Users' link on the 'Home_Page'
+        Given I have navigated to the 'System_Administration_Page'
+        When I click the 'Manage_Users' link on the 'System_Administration_Page'
         Then I can see the 'Manage_Users_Page'
 
     @viewUserProfileRoleOperations

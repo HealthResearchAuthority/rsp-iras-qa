@@ -521,9 +521,9 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
 
   @axeAccessibilityAuditHistoryUser @adminUser @axeAccessibilityManageUsers
   Scenario: Audit history page of the user
-    Given I have navigated to the 'Home_Page'
-    And I click the 'Manage_Users' link on the 'Banner'
-    And I can see the 'Manage_Users_Page'
+    Given I have navigated to the 'System_Administration_Page'
+    When I click the 'Manage_Users' link on the 'System_Administration_Page'
+    Then I can see the 'Manage_Users_Page'
     And I select a 'QA Automation' User to View and Edit which is 'active'
     And I can see the user profile page
     When I click the 'View_Users_Audit_History' link on the 'User_Profile_Page'

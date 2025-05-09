@@ -2,13 +2,11 @@
 Feature: User Administration: System Administration
 
   Background:
-    Given I have navigated to the my research projects page
-    And I can see the my research projects page
+    Given I have navigated to the 'System_Administration_Page'
+    Then I can see the system administration home page
 
   @rsp-2931 @SystemAdministrationPage
   Scenario Outline: Validate the system administration home page
-    Given I have navigated to the 'System_Administration_Page'
-    Then I can see the system administration home page
     Then I can see the '<Validation_Text>' ui labels on the system administration home page
     Then I capture the page screenshot
     When I click the '<Navigation_Link_First>' link on the 'System_Administration_Page'

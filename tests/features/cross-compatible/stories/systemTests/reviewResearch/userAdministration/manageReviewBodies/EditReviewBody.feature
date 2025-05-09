@@ -2,9 +2,7 @@
 Feature: User Administration: Manage Review Bodies - Edit review body
     # Try to randomise the selection from search results
     Background:
-        Given I have navigated to the 'Home_Page'
-        And I click the 'System_Admin' link on the 'Banner'
-        And I can see the 'System_Administration_Page'
+        Given I have navigated to the 'System_Administration_Page'
         And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
         Then I can see the 'Manage_Review_Bodies_Page'
         And I select a 'QA Automation' Review Body to View and Edit which is 'active'
