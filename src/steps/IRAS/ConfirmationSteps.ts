@@ -2,7 +2,11 @@ import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../hooks/CustomFixtures';
 import { confirmStringNotNull } from '../../utils/UtilFunctions';
 
-const { Then } = createBdd(test);
+const { Given, When, Then } = createBdd(test);
+
+When('I am on the confirmation screen', async ({ confirmationPage }) => {
+  await confirmationPage.assertOnConfirmationPage();
+});
 
 Then(
   'I validate {string} labels displayed in disable user profile confirmation page using the {string} details',
@@ -175,5 +179,21 @@ Then(
     expect(
       confirmStringNotNull(await confirmationPage.enable_confirmation_success_body_label.textContent()).trim()
     ).toBe(expectedSuccessBody);
+  }
+);
+
+Given(
+  'the add user to review body confirmation page displays the expected guidance text',
+  async ({ confirmationPage, searchAddUserReviewBodyPage, reviewBodyProfilePage }) => {
+    const firstName = await searchAddUserReviewBodyPage.getUserFirstName();
+    const lastName = await searchAddUserReviewBodyPage.getUserLastName();
+    const reviewBodyName = await reviewBodyProfilePage.getOrgName();
+    const guidanceText = confirmationPage.confirmationPageTestData.Add_User_Review_Body_Labels.page_guidance_text;
+    await expect(confirmationPage.confirmation_header_label).toHaveText(
+      confirmationPage.confirmationPageTestData.Add_User_Review_Body_Labels.page_heading
+    );
+    await expect(confirmationPage.confirmation_body_label).toHaveText(
+      `${firstName} ${lastName}${guidanceText}${reviewBodyName}.`
+    );
   }
 );

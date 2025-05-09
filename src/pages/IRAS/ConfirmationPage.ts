@@ -1,4 +1,4 @@
-import { Locator, Page } from '@playwright/test';
+import { expect, Locator, Page } from '@playwright/test';
 import * as confirmationPageTestData from '../../resources/test_data/iras/confirmation_page_data.json';
 
 //Declare Page Objects
@@ -20,11 +20,16 @@ export default class ConfirmationPage {
     //Locators
 
     this.confirmation_header_label = this.page.getByRole('heading');
-    this.confirmation_body_label = this.page.getByRole('paragraph');
+    this.confirmation_body_label = this.page.getByRole('paragraph').first();
     this.disable_confirmation_success_header_label = this.enable_confirmation_success_header_label =
       this.page.getByRole('heading');
     this.disable_confirmation_success_body_label = this.enable_confirmation_success_body_label = this.page
       .getByRole('paragraph')
       .first();
+  }
+
+  async assertOnConfirmationPage() {
+    await expect(this.confirmation_header_label).toBeVisible();
+    await expect(this.confirmation_body_label).toBeVisible();
   }
 }

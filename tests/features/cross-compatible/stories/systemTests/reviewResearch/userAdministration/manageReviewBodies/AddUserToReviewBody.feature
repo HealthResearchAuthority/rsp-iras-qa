@@ -81,7 +81,7 @@ Feature: User Administration: Manage Review Bodies - Add user to review body
         And I can see the check and add user to review body page
         And I capture the page screenshot
         When I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
-        Then I can see the add user to review body confirmation page
+        Then I am on the confirmation screen
         And I capture the page screenshot
         And the add user to review body confirmation page displays the expected guidance text
 
@@ -94,7 +94,7 @@ Feature: User Administration: Manage Review Bodies - Add user to review body
         And I can see the check and add user to review body page
         And I capture the page screenshot
         And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
-        And I can see the add user to review body confirmation page
+        And I am on the confirmation screen
         And I capture the page screenshot
         When I click the '<Link>' link on the 'Add_User_Review_Body_Confirmation_Page'
         Then I can see the '<Page>'
@@ -115,7 +115,7 @@ Feature: User Administration: Manage Review Bodies - Add user to review body
         And I can see the check and add user to review body page
         And I capture the page screenshot
         And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
-        And I can see the add user to review body confirmation page
+        And I am on the confirmation screen
         And I capture the page screenshot
         And I have navigated to the 'Review_Body_Profile_Page'
         And I capture the page screenshot
@@ -142,7 +142,7 @@ Feature: User Administration: Manage Review Bodies - Add user to review body
         And I can see the check and add user to review body page
         And I capture the page screenshot
         And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
-        And I can see the add user to review body confirmation page
+        And I am on the confirmation screen
         And I capture the page screenshot
         And I click the 'Add_Another_User' link on the 'Add_User_Review_Body_Confirmation_Page'
         And I can see the search for user to add to review body page
