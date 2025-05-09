@@ -1,7 +1,8 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as reviewYourAnswersPageTestData from '../../../resources/test_data/iras/make_changes/review_your_answers_data.json';
 import * as linkTextData from '../../../resources/test_data/common/link_text_data.json';
-import { confirmStringNotNull } from '../../../utils/UtilFunctions';
+import { confirmStringNotNull, removeUnwantedWhitespace } from '../../../utils/UtilFunctions';
+
 //Declare Page Objects
 export default class ReviewYourAnswersPage {
   readonly page: Page;
@@ -39,6 +40,9 @@ export default class ReviewYourAnswersPage {
   readonly lead_nation_radio: Locator;
   readonly lead_nation_change_link: Locator;
   readonly lead_nation_enter_link: Locator;
+  readonly primary_sponsor_organisation_row: Locator;
+  readonly primary_sponsor_organisation_text: Locator;
+  readonly primary_sponsor_organisation_change_link: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -47,7 +51,6 @@ export default class ReviewYourAnswersPage {
     this.linkTextData = linkTextData;
 
     //Locators
-
     this.pageHeading = this.page
       .getByRole('heading')
       .getByText(this.reviewYourAnswersPageTestData.Review_Your_Answers_Page.heading);
@@ -129,6 +132,15 @@ export default class ReviewYourAnswersPage {
     this.lead_nation_enter_link = this.lead_nation_radio.getByText(
       this.reviewYourAnswersPageTestData.Review_Your_Answers_Page.lead_nation_enter_link
     );
+    this.primary_sponsor_organisation_row = this.list_row.filter({
+      has: this.page.getByText(
+        this.reviewYourAnswersPageTestData.Review_Your_Answers_Page.primary_sponsor_organisation_label
+      ),
+    });
+    this.primary_sponsor_organisation_text = this.primary_sponsor_organisation_row.getByRole('definition').first();
+    this.primary_sponsor_organisation_change_link = this.primary_sponsor_organisation_row.getByText(
+      this.linkTextData.Review_Your_Answers_Page.Change
+    );
   }
 
   //Page Methods
@@ -195,5 +207,9 @@ export default class ReviewYourAnswersPage {
       default:
         throw new Error(`${enterLink} is not a valid option`);
     }
+  }
+
+  async getFieldErrorMessages<PageObject>(key: string, page: PageObject) {
+    return removeUnwantedWhitespace(await page[key].getByRole('link').evaluate((el) => el.firstChild.textContent));
   }
 }

@@ -72,5 +72,8 @@
   "Review_Body_Profile_Page": {
     "Disable_Review_Body": "Disable review body",
     "Enable_Review_Body": "Enable review body"
+  },
+  "Review_Your_Answers_Page": {
+    "Confirm_Project_Details": "Confirm project details"
   }
 }
