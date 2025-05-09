@@ -31,15 +31,18 @@
   },
   "Project_Details_Title_Page": {
     "Save_Continue": "Save and continue",
-    "Save_For_Later": "Save for later"
+    "Save_For_Later": "Save for later",
+    "Save_Changes": "Save changes"
   },
   "Research_Locations_Page": {
     "Save_Continue": "Save and continue",
-    "Save_For_Later": "Save for later"
+    "Save_For_Later": "Save for later",
+    "Save_Changes": "Save changes"
   },
   "Key_Project_Roles_Page": {
     "Save_Continue": "Save and continue",
-    "Save_For_Later": "Save for later"
+    "Save_For_Later": "Save for later",
+    "Save_Changes": "Save changes"
   },
   "Create_User_Profile_Page": {
     "Continue": "Continue"
