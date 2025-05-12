@@ -75,7 +75,7 @@ export default class CommonItemsPage {
     this.govUkLink = this.page.getByRole('link');
     this.fieldGroup = this.page.locator('.govuk-form-group');
     this.errorFieldGroup = this.page.locator('.govuk-form-group--error');
-    this.govUkFieldValidationError = this.page.locator('.govuk-error-message.field-validation-error');
+    this.govUkFieldValidationError = this.page.locator('.govuk-error-message');
     this.qSetProgressBar = page.locator('.progress-container');
     this.qSetProgressBarStage = this.qSetProgressBar.locator('.stage');
     this.qSetProgressBarActiveStage = this.qSetProgressBar.locator('.stage.active');
@@ -96,7 +96,10 @@ export default class CommonItemsPage {
     this.bannerSystemAdmin = this.bannerNavBar.getByText(this.linkTextData.Banner.System_Admin, { exact: true });
     this.bannerMyApplications = this.bannerNavBar.getByText(this.linkTextData.Banner.My_Applications, { exact: true });
     this.next_button = this.page.getByRole('link').getByText(this.commonTestData.next_button, { exact: true });
-    this.errorMessageFieldLabel = page.locator('[class$="field-validation-error"]');
+    this.errorMessageFieldLabel = page
+      .locator('.field-validation-error')
+      .or(this.page.locator('.govuk-error-message'))
+      .first();
     this.errorMessageSummaryLabel = this.page
       .getByRole('heading')
       .getByText(this.commonTestData.error_message_summary_header, {
@@ -171,22 +174,6 @@ export default class CommonItemsPage {
       await locator.selectOption({ label: dataset[key] });
     } else {
       await locator.fill(dataset[key]);
-    }
-  }
-
-  async getFieldErrors<PageObject>(key: string, page: PageObject): Promise<Locator> {
-    const locator: Locator = page[key];
-    const typeAttribute = await locator.first().getAttribute('type');
-    //Check if Textbox or Date Field else must be Radio or Checkbox
-    if (typeAttribute === 'text' || typeAttribute == null) {
-      const fieldError = locator.locator('..').locator(this.govUkFieldValidationError);
-      return fieldError;
-    } else if (typeAttribute === 'date') {
-      const fieldError = locator.locator('../../../../..').locator(this.govUkFieldValidationError);
-      return fieldError;
-    } else {
-      const fieldError = locator.locator('../../..').locator(this.govUkFieldValidationError);
-      return fieldError;
     }
   }
 
@@ -476,10 +463,73 @@ export default class CommonItemsPage {
     return await fieldErrorLocator.textContent();
   }
 
-  async checkViewport<PageObject>(errorMessageFieldDataset: JSON, key: string, page: PageObject) {
-    const element = await page[key].first();
+  async clickErrorSummaryLink<PageObject>(errorMessageFieldDataset: JSON, key: string, page: PageObject) {
+    const element: Locator = await page[key].first();
     await this.summaryErrorLinks.filter({ hasText: errorMessageFieldDataset[key] }).click();
-    return await element;
+    return element;
+  }
+
+  async getUsers(): Promise<Map<string, string[]>> {
+    const firstNameValues: string[] = [];
+    const lastNameValues: string[] = [];
+    const emailAddressValues: string[] = [];
+    let dataFound = false;
+    while (!dataFound) {
+      const rowCount = await this.tableRows.count();
+      for (let i = 1; i < rowCount; i++) {
+        const columns = this.tableRows.nth(i).getByRole('cell');
+        const firstName = confirmStringNotNull(await columns.nth(0).textContent());
+        firstNameValues.push(firstName);
+        const lastName = confirmStringNotNull(await columns.nth(1).textContent());
+        lastNameValues.push(lastName);
+        const emailAddress = confirmStringNotNull(await columns.nth(2).textContent());
+        emailAddressValues.push(emailAddress);
+      }
+      if ((await this.next_button.isVisible()) && !(await this.next_button.isDisabled())) {
+        await this.next_button.click();
+        await this.page.waitForLoadState('domcontentloaded');
+      } else {
+        dataFound = true;
+      }
+    }
+    const userMap = new Map([
+      ['firstNameValues', firstNameValues],
+      ['lastNameValues', lastNameValues],
+      ['emailAddressValues', emailAddressValues],
+    ]);
+    return userMap;
+  }
+  async getAllUsersFromTheTable(): Promise<Map<string, string[]>> {
+    const searchResultValues: string[] = [];
+    await this.page.waitForLoadState('domcontentloaded');
+    await this.page.waitForTimeout(3000);
+    let dataFound = false;
+    while (!dataFound) {
+      const rowCount = await this.tableRows.count();
+      for (let i = 1; i < rowCount; i++) {
+        const columns = this.tableRows.nth(i).getByRole('cell');
+        const firstName = confirmStringNotNull(await columns.nth(0).textContent());
+        const lastName = confirmStringNotNull(await columns.nth(1).textContent());
+        const emailAddress = confirmStringNotNull(await columns.nth(2).textContent());
+        searchResultValues.push(firstName + '|' + lastName + '|' + emailAddress);
+      }
+      if ((await this.next_button.isVisible()) && !(await this.next_button.isDisabled())) {
+        await this.next_button.click();
+        await this.page.waitForLoadState('domcontentloaded');
+      } else {
+        dataFound = true;
+      }
+    }
+    const searchResultMap = new Map([['searchResultValues', searchResultValues]]);
+    return searchResultMap;
+  }
+  async validateSearchResults(userListAfterSearch: any, searchKey: string) {
+    for (const val of userListAfterSearch) {
+      if (val.includes(searchKey)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   async getUsers(): Promise<Map<string, string[]>> {

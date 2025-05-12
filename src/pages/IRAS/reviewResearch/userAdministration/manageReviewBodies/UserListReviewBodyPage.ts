@@ -17,6 +17,7 @@ export default class UserListReviewBodyPage {
   readonly page_heading: Locator;
   readonly guidance_text: Locator;
   readonly userListTableRows: Locator;
+  readonly userListTableBodyRows: Locator;
   readonly search_box_label: Locator;
   readonly first_name_label: Locator;
   readonly first_name_value_first_row: Locator;
@@ -63,12 +64,13 @@ export default class UserListReviewBodyPage {
         exact: true,
       });
     this.userListTableRows = this.page.getByRole('table').getByRole('row');
+    this.userListTableBodyRows = this.page.getByRole('table').locator('tbody').getByRole('row');
     this.first_name_label = this.userListTableRows
       .locator('th')
       .getByText(this.userListReviewBodyPageTestData.Review_Body_User_List_Page.Column_Header_Labels.first_name_label, {
         exact: true,
       });
-    this.first_name_value_first_row = this.userListTableRows.nth(1).getByRole('cell').nth(0);
+    this.first_name_value_first_row = this.userListTableRows.nth(1).getByRole('cell').first();
     this.last_name_value_first_row = this.userListTableRows.nth(1).getByRole('cell').nth(1);
     this.email_address_value_first_row = this.userListTableRows.nth(1).getByRole('cell').nth(2);
     this.status_value_first_row = this.userListTableRows.nth(1).getByRole('cell').nth(3);
@@ -107,9 +109,6 @@ export default class UserListReviewBodyPage {
         exact: true,
       }
     );
-    // this.search_text = this.page.getByRole('textbox', {
-    //   name: this.userListReviewBodyPageTestData.Review_Body_User_List_Page.search_box_label,
-    // });
     this.search_text = this.page.locator('#SearchQuery');
     this.back_to_users_link = this.page
       .getByRole('link')

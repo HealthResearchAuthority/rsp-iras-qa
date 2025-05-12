@@ -28,7 +28,15 @@ Then('I capture the page screenshot', async () => {});
 Given(
   'I have navigated to the {string}',
   async (
-    { loginPage, homePage, createApplicationPage, systemAdministrationPage, manageReviewBodiesPage, userProfilePage },
+    {
+      loginPage,
+      homePage,
+      createApplicationPage,
+      systemAdministrationPage,
+      manageReviewBodiesPage,
+      userProfilePage,
+      reviewBodyProfilePage,
+    },
     page: string
   ) => {
     switch (page) {
@@ -57,6 +65,10 @@ Given(
         await userProfilePage.goto(await userProfilePage.getUserId());
         await userProfilePage.assertOnUserProfilePage();
         break;
+      case 'Review_Body_Profile_Page':
+        await reviewBodyProfilePage.goto(await reviewBodyProfilePage.getReviewBodyId());
+        await reviewBodyProfilePage.assertOnReviewbodyProfilePage();
+        break;
       default:
         throw new Error(`${page} is not a valid option`);
     }
@@ -74,7 +86,9 @@ When(
       systemAdministrationPage,
       createReviewBodyPage,
       manageReviewBodiesPage,
+      userListReviewBodyPage,
       manageUsersPage,
+      searchAddUserReviewBodyPage,
     },
     page: string
   ) => {
@@ -102,6 +116,12 @@ When(
         break;
       case 'Manage_Users_Page':
         await manageUsersPage.assertOnManageUsersPage();
+        break;
+      case 'Review_Body_User_List_Page':
+        await userListReviewBodyPage.assertOnUserListReviewBodyPage();
+        break;
+      case 'Search_Add_User_Review_Body_Page':
+        await searchAddUserReviewBodyPage.assertOnSearchAddUserReviewBodyPage();
         break;
       default:
         throw new Error(`${page} is not a valid option`);
@@ -200,6 +220,7 @@ Given(
     pageKey: string
   ) => {
     const linkValue = commonItemsPage.linkTextData[pageKey][linkKey];
+    const noOfLinksFound = await commonItemsPage.govUkLink.getByText(linkValue).count();
     if (pageKey === 'Progress_Bar') {
       await commonItemsPage.qSetProgressBarStageLink.getByText(linkValue, { exact: true }).click();
     } else if (pageKey === 'Manage_Users_Page' && linkKey === 'View_Edit') {
@@ -216,9 +237,14 @@ Given(
       await checkCreateUserProfilePage.back_button.click(); //work around for now >> to click on Back link
     } else if (pageKey === 'Review_Body_User_List_Page' && linkKey === 'Back_To_Users') {
       await userListReviewBodyPage.back_to_users_link.click();
+    } else if (pageKey === 'Search_Add_User_Review_Body_Page' && linkKey === 'Back_To_Users') {
+      await commonItemsPage.govUkLink.getByText(linkValue).click();
+    } else if (noOfLinksFound > 1) {
+      await commonItemsPage.govUkLink.getByText(linkValue).first().click();
     } else {
       await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
     }
+    // investigate above and which workarounds can be removed with new count check
   }
 );
 
@@ -351,8 +377,8 @@ Then(
     expect(actualFieldErrorsArray).toHaveLength(expectedFieldErrors.length);
     for (const key of expectedFieldErrors) {
       const expectedFieldErrorMessage = await commonItemsPage.getFieldTypeErrorMessage(key, pageObject);
-      const actualFieldError = await commonItemsPage.getFieldErrors(key, pageObject);
-      await expect(actualFieldError).toHaveText(expectedFieldErrorMessage);
+      const actualFieldError = await commonItemsPage.getFieldErrorMessages(key, pageObject);
+      expect(actualFieldError).toEqual(expectedFieldErrorMessage);
     }
   }
 );
@@ -414,6 +440,8 @@ Then(
       projectDetailsIRASPage,
       projectDetailsTitlePage,
       keyProjectRolesPage,
+      createReviewBodyPage,
+      editReviewBodyPage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
@@ -440,6 +468,16 @@ Then(
       errorMessageFieldDataset =
         keyProjectRolesPage.keyProjectRolesPageTestData[errorMessageFieldAndSummaryDatasetName];
       page = keyProjectRolesPage;
+    } else if (pageKey == 'Create_Review_Body_Page') {
+      errorMessageFieldDataset =
+        createReviewBodyPage.createReviewBodyPageData.Create_Review_Body.Validation[
+          errorMessageFieldAndSummaryDatasetName
+        ];
+      page = createReviewBodyPage;
+    } else if (pageKey == 'Edit_Review_Body_Page') {
+      errorMessageFieldDataset =
+        editReviewBodyPage.editReviewBodyPageData.Edit_Review_Body.Validation[errorMessageFieldAndSummaryDatasetName];
+      page = createReviewBodyPage;
     }
     await expect(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
     const allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset);
@@ -449,9 +487,14 @@ Then(
       if (Object.prototype.hasOwnProperty.call(errorMessageFieldDataset, key)) {
         const fieldErrorMessagesActualValues = await commonItemsPage.getFieldErrorMessages(key, page);
         expect(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
-        const element = await commonItemsPage.checkViewport(errorMessageFieldDataset, key, page);
-        expect(element).toBeInViewport();
+        const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
+        await expect(element).toBeInViewport();
       }
+    }
+    if (errorMessageFieldAndSummaryDatasetName == 'Max_Description_Words_Error') {
+      await expect(createReviewBodyPage.description_reason_error).toHaveText(
+        createReviewBodyPage.createReviewBodyPageData.Create_Review_Body.Validation.Max_Description_Reason
+      );
     }
   }
 );

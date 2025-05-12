@@ -412,3 +412,28 @@ export async function returnDataFromJSON(filePath?: string): Promise<any> {
     return await fse.readJson(createUserPath);
   }
 }
+
+export async function convertDate(day: string, month: number, year: number): Promise<any> {
+  const monthNames = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+  const formattedDate = `${day.padStart(2, '0')} ${monthNames[month - 1]} ${year}`;
+  return formattedDate.toString();
+}
+
+export async function returnSingleRandomLocator(resolvesToMultiElements: Locator): Promise<Locator> {
+  const noOfElements = await resolvesToMultiElements.count();
+  const randomIndex = Math.floor(Math.random() * (noOfElements - 1));
+  return resolvesToMultiElements.nth(randomIndex);
+}

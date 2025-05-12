@@ -42,6 +42,9 @@ import AuditHistoryUserPage from '../pages/IRAS/reviewResearch/userAdministratio
 import ProjectOverviewSaveForLaterPage from '../pages/IRAS/makeChanges/ProjectOverviewSaveForLaterPage';
 import UserListReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/UserListReviewBodyPage';
 import CheckRemoveUserReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/CheckRemoveUserReviewBodyPage';
+import ReviewYourAnswersPage from '../pages/IRAS/makeChanges/ReviewYourAnswersPage';
+import SearchAddUserReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/SearchAddUserReviewBodyPage';
+import CheckAddUserReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/CheckAddUserReviewBodyPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -67,6 +70,7 @@ type CustomFixtures = {
   keyProjectRolesPage: KeyProjectRolesPage;
   reviewYourApplicationPage: ReviewYourApplicationPage;
   projectOverviewSaveForLaterPage: ProjectOverviewSaveForLaterPage;
+  reviewYourAnswersPage: ReviewYourAnswersPage;
   systemAdministrationPage: SystemAdministrationPage;
   manageReviewBodiesPage: ManageReviewBodiesPage;
   createReviewBodyPage: CreateReviewBodyPage;
@@ -85,6 +89,8 @@ type CustomFixtures = {
   auditHistoryUserPage: AuditHistoryUserPage;
   userListReviewBodyPage: UserListReviewBodyPage;
   checkRemoveUserReviewBodyPage: CheckRemoveUserReviewBodyPage;
+  searchAddUserReviewBodyPage: SearchAddUserReviewBodyPage;
+  checkAddUserReviewBodyPage: CheckAddUserReviewBodyPage;
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -181,6 +187,10 @@ export const test = base.extend<CustomFixtures>({
     await use(new ProjectOverviewSaveForLaterPage(page));
   },
 
+  reviewYourAnswersPage: async ({ page }, use) => {
+    await use(new ReviewYourAnswersPage(page));
+  },
+
   systemAdministrationPage: async ({ page }, use) => {
     await use(new SystemAdministrationPage(page));
   },
@@ -251,6 +261,14 @@ export const test = base.extend<CustomFixtures>({
 
   checkRemoveUserReviewBodyPage: async ({ page }, use) => {
     await use(new CheckRemoveUserReviewBodyPage(page));
+  },
+
+  searchAddUserReviewBodyPage: async ({ page }, use) => {
+    await use(new SearchAddUserReviewBodyPage(page));
+  },
+
+  checkAddUserReviewBodyPage: async ({ page }, use) => {
+    await use(new CheckAddUserReviewBodyPage(page));
   },
 
   makeAxeBuilder: async ({ page }, use) => {

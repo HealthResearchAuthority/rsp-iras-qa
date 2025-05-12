@@ -232,18 +232,18 @@ Feature: User Administration: Manage Review Bodies
         When I fill the new review body page using '<Add_Review_Body>'
         And I capture the page screenshot
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
-        Then I can see the '<Error>' validation message for '<Field_Name>' on the Add new review body page
+        Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Create_Review_Body_Page'
         And I capture the page screenshot
 
         Examples:
-            | Add_Review_Body                      | Error           | Field_Name              |
-            | Missing_Data_Organisation_Name_Field | Mandatory_Field | Organisation_Name_Error |
-            | Missing_Data_Country_Field           | Select_Country  | Country_Error           |
-            | Missing_Data_Email_Address_Field     | Mandatory_Field | Email_Address_Error     |
-            | Missing_Data_All_Fields              | Mandatory_Field | All_Mandatory_Fields    |
-            | Missing_Data_All_Mandatory_Fields    | Mandatory_Field | All_Mandatory_Fields    |
-            | Invalid_Data_Organisation_Name_Field | Max_Org_Chars   | Organisation_Name_Error |
-            | Invalid_Data_Description_Field       | Max_Words       | Description_Error       |
-            | Invalid_Character_Limit              | Max_Email_Chars | Email_Address_Error     |
-            | Incorrect_Email_Format               | Email_Format    | Email_Address_Error     |
-            | Invalid_Email_Data_Double_Dot        | Email_Format    | Email_Address_Error     |
+            | Add_Review_Body                      | Field_And_Summary_Error_Message         |
+            | Missing_Data_Organisation_Name_Field | Mandatory_Field_Organisation_Name_Error |
+            | Missing_Data_Country_Field           | Mandatory_Field_Country_Error           |
+            | Missing_Data_Email_Address_Field     | Mandatory_Field_Email_Address_Error     |
+            | Missing_Data_All_Fields              | All_Mandatory_Field_Errors              |
+            | Missing_Data_All_Mandatory_Fields    | All_Mandatory_Field_Errors              |
+            | Invalid_Data_Organisation_Name_Field | Max_Chars_Organisation_Name_Error       |
+            | Invalid_Data_Description_Field       | Max_Description_Words_Error             |
+            | Invalid_Character_Limit              | Max_Chars_Email_Address_Error           |
+            | Incorrect_Email_Format               | Email_Format_Error                      |
+            | Invalid_Email_Data_Double_Dot        | Email_Format_Error                      |
