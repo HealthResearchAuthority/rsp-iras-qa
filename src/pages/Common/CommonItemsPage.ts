@@ -51,6 +51,7 @@ export default class CommonItemsPage {
   readonly alert_box_list_items: Locator;
   readonly errorMessageFieldLabel: Locator;
   readonly errorMessageSummaryLabel: Locator;
+  readonly topMenuBarLinks: Locator;
   readonly summaryErrorLinks: Locator;
   readonly tableRows: Locator;
   readonly hidden_next_button: Locator;
@@ -106,6 +107,7 @@ export default class CommonItemsPage {
         exact: true,
       });
     this.summaryErrorLinks = this.errorMessageSummaryLabel.locator('..').getByRole('listitem').getByRole('link');
+    this.topMenuBarLinks = this.page.getByTestId('navigation').getByRole('listitem').getByRole('link');
     //Validation Alert Box
     this.alert_box = this.page.getByRole('alert');
     this.alert_box_headings = this.alert_box.getByRole('heading');
@@ -532,66 +534,11 @@ export default class CommonItemsPage {
     return false;
   }
 
-  async getUsers(): Promise<Map<string, string[]>> {
-    const firstNameValues: string[] = [];
-    const lastNameValues: string[] = [];
-    const emailAddressValues: string[] = [];
-    let dataFound = false;
-    while (!dataFound) {
-      const rowCount = await this.tableRows.count();
-      for (let i = 1; i < rowCount; i++) {
-        const columns = this.tableRows.nth(i).getByRole('cell');
-        const firstName = confirmStringNotNull(await columns.nth(0).textContent());
-        firstNameValues.push(firstName);
-        const lastName = confirmStringNotNull(await columns.nth(1).textContent());
-        lastNameValues.push(lastName);
-        const emailAddress = confirmStringNotNull(await columns.nth(2).textContent());
-        emailAddressValues.push(emailAddress);
-      }
-      if ((await this.next_button.isVisible()) && !(await this.next_button.isDisabled())) {
-        await this.next_button.click();
-        await this.page.waitForLoadState('domcontentloaded');
-      } else {
-        dataFound = true;
-      }
+  async getTopMenuBarLinksNames() {
+    const topMenuBarLinksValues: string[] = [];
+    for (const val of await this.topMenuBarLinks.allTextContents()) {
+      topMenuBarLinksValues.push(confirmStringNotNull(val));
     }
-    const userMap = new Map([
-      ['firstNameValues', firstNameValues],
-      ['lastNameValues', lastNameValues],
-      ['emailAddressValues', emailAddressValues],
-    ]);
-    return userMap;
-  }
-  async getAllUsersFromTheTable(): Promise<Map<string, string[]>> {
-    const searchResultValues: string[] = [];
-    await this.page.waitForLoadState('domcontentloaded');
-    await this.page.waitForTimeout(3000);
-    let dataFound = false;
-    while (!dataFound) {
-      const rowCount = await this.tableRows.count();
-      for (let i = 1; i < rowCount; i++) {
-        const columns = this.tableRows.nth(i).getByRole('cell');
-        const firstName = confirmStringNotNull(await columns.nth(0).textContent());
-        const lastName = confirmStringNotNull(await columns.nth(1).textContent());
-        const emailAddress = confirmStringNotNull(await columns.nth(2).textContent());
-        searchResultValues.push(firstName + '|' + lastName + '|' + emailAddress);
-      }
-      if ((await this.next_button.isVisible()) && !(await this.next_button.isDisabled())) {
-        await this.next_button.click();
-        await this.page.waitForLoadState('domcontentloaded');
-      } else {
-        dataFound = true;
-      }
-    }
-    const searchResultMap = new Map([['searchResultValues', searchResultValues]]);
-    return searchResultMap;
-  }
-  async validateSearchResults(userListAfterSearch: any, searchKey: string) {
-    for (const val of userListAfterSearch) {
-      if (val.includes(searchKey)) {
-        return true;
-      }
-    }
-    return false;
+    return topMenuBarLinksValues;
   }
 }

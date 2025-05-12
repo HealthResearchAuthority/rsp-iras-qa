@@ -108,7 +108,8 @@
     "Back_To_Review_Body_Profile": "Back to review body profile",
     "Manage_Users": "Manage users",
     "Remove": "Remove",
-    "Add_User_To_This_Review_Body": "Add a user to this review body"
+    "Add_User_To_This_Review_Body": "Add a user to this review body",
+    "Back_To_Users": "Back to Users for "
   },
   "Check_Remove_User_Profile_Page": {
     "Back": "Back"

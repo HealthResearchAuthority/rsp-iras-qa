@@ -51,40 +51,14 @@ When(
   async ({ userListReviewBodyPage, commonItemsPage }, position: string, fieldKey: string) => {
     if ((await userListReviewBodyPage.userListTableRows.count()) >= 2) {
       let searchKey: string = '';
-      if (fieldKey === 'Email_Address') {
-        const emailAddressValues: any = await userListReviewBodyPage.getUserEmail();
-        const rowCount = emailAddressValues.length;
-        if (position == 'first') {
-          searchKey = emailAddressValues[0];
-        } else if (position == 'last') {
-          searchKey = emailAddressValues[rowCount - 1];
-        }
-      } else if (fieldKey === 'First_Name') {
-        const firstNameValues: any = await userListReviewBodyPage.getUserFirstName();
-        const rowCount = firstNameValues.length;
-        if (position == 'first') {
-          searchKey = firstNameValues[0];
-        } else if (position == 'last') {
-          searchKey = firstNameValues[rowCount - 1];
-        }
-      } else if (fieldKey === 'Last_Name') {
-        const lastNameValues: any = await userListReviewBodyPage.getUserLastName();
-        const rowCount = lastNameValues.length;
-        if (position == 'first') {
-          searchKey = lastNameValues[0];
-        } else if (position == 'last') {
-          searchKey = lastNameValues[rowCount - 1];
-        }
-      }
-      if (await userListReviewBodyPage.first_page_link.isVisible()) {
-        await userListReviewBodyPage.first_page_link.click(); //work around due to bug
+      if (fieldKey === 'First_Name' || fieldKey === 'Last_Name' || fieldKey === 'Email_Address') {
+        searchKey = await userListReviewBodyPage.getSearchQueryFNameLNameEmail(position, fieldKey);
+      } else if (fieldKey === 'Full_Name') {
+        searchKey = await userListReviewBodyPage.getSearchQueryFullName(position, fieldKey);
       }
       const userListBeforeSearch = await commonItemsPage.getAllUsersFromTheTable();
       const userValues: any = userListBeforeSearch.get('searchResultValues');
       await userListReviewBodyPage.setUserListBeforeSearch(userValues);
-      if (await userListReviewBodyPage.first_page_link.isVisible()) {
-        await userListReviewBodyPage.first_page_link.click(); //work around due to bug
-      }
       await userListReviewBodyPage.setSearchKey(searchKey);
       userListReviewBodyPage.search_text.fill(searchKey);
     }
@@ -92,8 +66,29 @@ When(
 );
 
 Then(
-  'the system displays search results matching the search criteria',
-  async ({ userListReviewBodyPage, commonItemsPage }) => {
+  'the system displays search results matching the search criteria based on {string}',
+  async ({ userListReviewBodyPage, commonItemsPage }, fieldName: string) => {
+    let filteredSearchResults: string[] = [];
+    const userValues = await userListReviewBodyPage.getUserListBeforeSearch();
+    const searchKey = await userListReviewBodyPage.getSearchKey();
+    if (fieldName === 'First_Name' || fieldName === 'Last_Name' || fieldName === 'Email_Address') {
+      filteredSearchResults = userValues.filter((result) => result.toLowerCase().includes(searchKey.toLowerCase()));
+    } else if (fieldName === 'Full_Name') {
+      const firstName: any = (await userListReviewBodyPage.getFullName()).get('firstName');
+      const lastName: any = (await userListReviewBodyPage.getFullName()).get('lastName');
+      filteredSearchResults = userValues.filter((result) => {
+        return (
+          result.toLowerCase().includes(firstName.toLowerCase()) ||
+          result.toLowerCase().includes(lastName.toLowerCase()) ||
+          result.toLowerCase().includes(searchKey.toLowerCase())
+        );
+      });
+    }
+    const userList = await commonItemsPage.getAllUsersFromTheTable();
+    const userListAfterSearch: any = userList.get('searchResultValues');
+    expect(filteredSearchResults).toEqual(userListAfterSearch);
+    const searchResult = await commonItemsPage.validateSearchResults(userListAfterSearch, searchKey);
+    expect(searchResult).toBeTruthy();
     await userListReviewBodyPage.setFirstName(
       confirmStringNotNull(await userListReviewBodyPage.first_name_value_first_row.textContent())
     );
@@ -106,16 +101,6 @@ Then(
     await userListReviewBodyPage.setStatus(
       confirmStringNotNull(await userListReviewBodyPage.status_value_first_row.textContent())
     );
-    const userValues = await userListReviewBodyPage.getUserListBeforeSearch();
-    const searchKey = await userListReviewBodyPage.getSearchKey();
-    const filteredSearchResults: string[] = userValues.filter((result) =>
-      result.toLowerCase().includes(searchKey.toLowerCase())
-    );
-    const userList = await commonItemsPage.getAllUsersFromTheTable();
-    const userListAfterSearch: any = userList.get('searchResultValues');
-    expect(filteredSearchResults).toEqual(userListAfterSearch);
-    const searchResult = await commonItemsPage.validateSearchResults(userListAfterSearch, searchKey);
-    expect(searchResult).toBeTruthy();
   }
 );
 
@@ -181,26 +166,6 @@ Then(
     await expect(userProfilePage.organisation_value).toHaveText(await checkRemoveUserReviewBodyPage.getOrganisation());
     await expect(userProfilePage.job_title_value).toHaveText(await checkRemoveUserReviewBodyPage.getJobTitle());
     await expect(userProfilePage.role_value).toHaveText(await checkRemoveUserReviewBodyPage.getRole());
-  }
-);
-
-Then(
-  'I can see the user list page of the review body',
-  async ({ userListReviewBodyPage, reviewBodyProfilePage, commonItemsPage }) => {
-    await userListReviewBodyPage.assertOnUserListReviewBodyPage();
-    const organisationName = await reviewBodyProfilePage.getOrgName();
-    await expect(userListReviewBodyPage.page_heading).toHaveText(
-      userListReviewBodyPage.userListReviewBodyPageTestData.Review_Body_User_List_Page.page_heading + organisationName
-    );
-    if ((await userListReviewBodyPage.userListTableRows.count()) >= 2) {
-      const userList = await commonItemsPage.getUsers();
-      const emailAddress: any = userList.get('emailAddressValues');
-      await userListReviewBodyPage.setUserEmail(emailAddress);
-      const firstName: any = userList.get('firstNameValues');
-      await userListReviewBodyPage.setUserFirstName(firstName);
-      const lastName: any = userList.get('lastNameValues');
-      await userListReviewBodyPage.setUserLastName(lastName);
-    }
   }
 );
 

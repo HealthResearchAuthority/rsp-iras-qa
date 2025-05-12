@@ -14,6 +14,7 @@ export default class UserListReviewBodyPage {
   private _last_name: string;
   private _email_address: string;
   private _status: string;
+  private _user_full_name: Map<string, string>;
   readonly page_heading: Locator;
   readonly guidance_text: Locator;
   readonly userListTableRows: Locator;
@@ -33,7 +34,7 @@ export default class UserListReviewBodyPage {
   readonly back_to_users_link: Locator;
   readonly no_results_heading: Locator;
   readonly no_results_guidance_text: Locator;
-  readonly first_page_link: Locator;
+  // readonly first_page_link: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -48,6 +49,7 @@ export default class UserListReviewBodyPage {
     this._last_name = '';
     this._email_address = '';
     this._status = '';
+    this._user_full_name = new Map();
     //Locators
     this.page_heading = this.page
       .getByRole('heading')
@@ -113,7 +115,7 @@ export default class UserListReviewBodyPage {
     this.back_to_users_link = this.page
       .getByRole('link')
       .getByText(this.userListReviewBodyPageTestData.Review_Body_User_List_Page.back_to_users_link);
-    this.first_page_link = this.page.locator('a[aria-label="Page 1"]'); //work around due to bug
+    // this.first_page_link = this.page.locator('a[aria-label="Page 1"]'); //work around due to bug
   }
 
   async assertOnUserListReviewBodyPage() {
@@ -200,5 +202,57 @@ export default class UserListReviewBodyPage {
 
   async setStatus(value: string): Promise<void> {
     this._status = value;
+  }
+
+  async getFullName(): Promise<Map<string, string>> {
+    return this._user_full_name;
+  }
+
+  async setFullName(value: Map<string, string>): Promise<void> {
+    this._user_full_name = value;
+  }
+
+  async getSearchQueryFNameLNameEmail(position: string, fieldKey: string) {
+    let searchKey: string = '';
+    let searchValues: string[] = [];
+    if (fieldKey === 'Email_Address') {
+      searchValues = await this.getUserEmail();
+    } else if (fieldKey === 'First_Name') {
+      searchValues = await this.getUserFirstName();
+    } else if (fieldKey === 'Last_Name') {
+      searchValues = await this.getUserLastName();
+    }
+    const rowCount = searchValues.length;
+    if (position.toLowerCase() == 'first') {
+      searchKey = searchValues[0];
+    } else if (position.toLowerCase() == 'last') {
+      searchKey = searchValues[rowCount - 1];
+    }
+    return searchKey;
+  }
+  async getSearchQueryFullName(position: string, fieldKey: string) {
+    let searchKey: string = '';
+    let firstNameValue: string = '';
+    let lastNameValue: string = '';
+    if (fieldKey === 'Full_Name') {
+      const firstNameValues: any = await this.getUserFirstName();
+      const lastNameValues: any = await this.getUserLastName();
+      const rowCount = lastNameValues.length;
+      if (position.toLowerCase() == 'first') {
+        searchKey = firstNameValues[0] + ' ' + lastNameValues[0];
+        firstNameValue = firstNameValues[0];
+        lastNameValue = lastNameValues[0];
+      } else if (position.toLowerCase() == 'last') {
+        searchKey = firstNameValues[rowCount - 1] + ' ' + lastNameValues[rowCount - 1];
+        firstNameValue = firstNameValues[rowCount - 1];
+        lastNameValue = lastNameValues[rowCount - 1];
+      }
+    }
+    const fullNameMap = new Map([
+      ['firstName', firstNameValue],
+      ['lastName', lastNameValue],
+    ]);
+    await this.setFullName(fullNameMap);
+    return searchKey;
   }
 }

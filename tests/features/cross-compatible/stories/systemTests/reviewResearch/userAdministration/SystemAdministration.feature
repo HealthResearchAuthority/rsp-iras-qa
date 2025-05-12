@@ -25,3 +25,7 @@ Feature: User Administration: System Administration
     Examples:
       | Validation_Text | Navigation_Link_First | Navigation_Link_Second | Navigation_Link |
       | Label_Texts     | Manage_Review_Bodies  | Manage_Users           | Back            |
+
+  @rsp-3519 @ValidateTopMenuBarLinks
+  Scenario: Validate the top menu bar links
+    And the top menu bar will not have links to 'Manage Users' or 'System Admin'

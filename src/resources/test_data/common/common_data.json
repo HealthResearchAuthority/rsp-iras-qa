@@ -1,4 +1,5 @@
 {
   "error_message_summary_header": "There is a problem",
-  "next_button": "Next   page"
+  "next_button": "Next   page",
+  "top_menu_bar_links": ["Home", "Review Applications", "Admin", "Question Set", "My Applications", "Logout"]
 }
