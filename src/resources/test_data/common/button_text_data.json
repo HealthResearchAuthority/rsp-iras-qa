@@ -81,5 +81,8 @@
   },
   "Check_Add_User_Review_Body_Page": {
     "Add_User": "Add user profile"
+  },
+  "Review_Your_Answers_Page": {
+    "Confirm_Project_Details": "Confirm project details"
   }
 }

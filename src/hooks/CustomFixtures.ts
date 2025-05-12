@@ -39,7 +39,7 @@ import ReviewBodyProfilePage from '../pages/IRAS/reviewResearch/userAdministrati
 import EditReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/EditReviewBodyPage';
 import AuditHistoryReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/AuditHistoryReviewBodyPage';
 import AuditHistoryUserPage from '../pages/IRAS/reviewResearch/userAdministration/manageUsers/AuditHistoryUserPage';
-import ProjectOverviewSaveForLaterPage from '../pages/IRAS/makeChanges/ProjectOverviewSaveForLaterPage';
+import ProjectOverviewPage from '../pages/IRAS/makeChanges/ProjectOverviewPage';
 import ReviewYourAnswersPage from '../pages/IRAS/makeChanges/ReviewYourAnswersPage';
 import UserListReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/UserListReviewBodyPage';
 import SearchAddUserReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/SearchAddUserReviewBodyPage';
@@ -68,7 +68,7 @@ type CustomFixtures = {
   reseachLocationsPage: ReseachLocationsPage;
   keyProjectRolesPage: KeyProjectRolesPage;
   reviewYourApplicationPage: ReviewYourApplicationPage;
-  projectOverviewSaveForLaterPage: ProjectOverviewSaveForLaterPage;
+  projectOverviewPage: ProjectOverviewPage;
   reviewYourAnswersPage: ReviewYourAnswersPage;
   systemAdministrationPage: SystemAdministrationPage;
   manageReviewBodiesPage: ManageReviewBodiesPage;
@@ -181,8 +181,8 @@ export const test = base.extend<CustomFixtures>({
     await use(new ReviewYourApplicationPage(page));
   },
 
-  projectOverviewSaveForLaterPage: async ({ page }, use) => {
-    await use(new ProjectOverviewSaveForLaterPage(page));
+  projectOverviewPage: async ({ page }, use) => {
+    await use(new ProjectOverviewPage(page));
   },
 
   reviewYourAnswersPage: async ({ page }, use) => {
