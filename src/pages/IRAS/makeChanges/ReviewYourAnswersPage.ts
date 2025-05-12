@@ -210,6 +210,8 @@ export default class ReviewYourAnswersPage {
   }
 
   async getFieldErrorMessages<PageObject>(key: string, page: PageObject) {
-    return removeUnwantedWhitespace(await page[key].getByRole('link').evaluate((el) => el.firstChild.textContent));
+    return await removeUnwantedWhitespace(
+      await page[key].getByRole('link').evaluate((el) => el.firstChild.textContent)
+    );
   }
 }
