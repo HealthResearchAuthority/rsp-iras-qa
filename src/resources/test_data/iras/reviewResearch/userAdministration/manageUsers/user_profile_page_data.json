@@ -20,6 +20,7 @@
     "role_change_link": "Change",
     "committee_label": "Committee",
     "country_label": "Country",
+    "access_required_label": "Access required",
     "review_body_label": "Review body",
     "audit_label": "Audit",
     "audit_link": "View this user's audit history",
