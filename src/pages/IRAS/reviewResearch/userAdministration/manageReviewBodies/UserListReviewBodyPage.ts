@@ -34,7 +34,6 @@ export default class UserListReviewBodyPage {
   readonly back_to_users_link: Locator;
   readonly no_results_heading: Locator;
   readonly no_results_guidance_text: Locator;
-  // readonly first_page_link: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -115,7 +114,6 @@ export default class UserListReviewBodyPage {
     this.back_to_users_link = this.page
       .getByRole('link')
       .getByText(this.userListReviewBodyPageTestData.Review_Body_User_List_Page.back_to_users_link);
-    // this.first_page_link = this.page.locator('a[aria-label="Page 1"]'); //work around due to bug
   }
 
   async assertOnUserListReviewBodyPage() {

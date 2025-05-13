@@ -59,7 +59,7 @@ export default class CheckRemoveUserReviewBodyPage {
           exact: true,
         }),
     });
-    this.title_value = this.title_row.locator('td:nth-child(2)');
+    this.title_value = this.title_row.getByRole('cell').nth(1);
     this.first_name_row = this.page.locator('tr', {
       has: this.page
         .getByRole('cell')
@@ -67,7 +67,7 @@ export default class CheckRemoveUserReviewBodyPage {
           exact: true,
         }),
     });
-    this.first_name_value = this.first_name_row.locator('td:nth-child(2)');
+    this.first_name_value = this.first_name_row.getByRole('cell').nth(1);
     this.last_name_row = this.page.locator('tr', {
       has: this.page
         .getByRole('cell')
@@ -75,7 +75,7 @@ export default class CheckRemoveUserReviewBodyPage {
           exact: true,
         }),
     });
-    this.last_name_value = this.last_name_row.locator('td:nth-child(2)');
+    this.last_name_value = this.last_name_row.getByRole('cell').nth(1);
     this.email_address_row = this.page.locator('tr', {
       has: this.page
         .getByRole('cell')
@@ -83,7 +83,7 @@ export default class CheckRemoveUserReviewBodyPage {
           exact: true,
         }),
     });
-    this.email_address_value = this.email_address_row.locator('td:nth-child(2)');
+    this.email_address_value = this.email_address_row.getByRole('cell').nth(1);
     this.telephone_row = this.page.locator('tr', {
       has: this.page
         .getByRole('cell')
@@ -91,7 +91,7 @@ export default class CheckRemoveUserReviewBodyPage {
           exact: true,
         }),
     });
-    this.telephone_value = this.telephone_row.locator('td:nth-child(2)');
+    this.telephone_value = this.telephone_row.getByRole('cell').nth(1);
     this.organisation_row = this.page.locator('tr', {
       has: this.page
         .getByRole('cell')
@@ -99,7 +99,7 @@ export default class CheckRemoveUserReviewBodyPage {
           exact: true,
         }),
     });
-    this.organisation_value = this.organisation_row.locator('td:nth-child(2)');
+    this.organisation_value = this.organisation_row.getByRole('cell').nth(1);
     this.job_title_row = this.page.locator('tr', {
       has: this.page
         .getByRole('cell')
@@ -107,7 +107,7 @@ export default class CheckRemoveUserReviewBodyPage {
           exact: true,
         }),
     });
-    this.job_title_value = this.job_title_row.locator('td:nth-child(2)');
+    this.job_title_value = this.job_title_row.getByRole('cell').nth(1);
     this.role_row = this.page.locator('tr', {
       has: this.page
         .getByRole('cell')
@@ -115,7 +115,7 @@ export default class CheckRemoveUserReviewBodyPage {
           exact: true,
         }),
     });
-    this.role_value = this.role_row.locator('td:nth-child(2)');
+    this.role_value = this.role_row.getByRole('cell').nth(1);
   }
 
   async assertOnCheckRemoveUserProfilePage() {
