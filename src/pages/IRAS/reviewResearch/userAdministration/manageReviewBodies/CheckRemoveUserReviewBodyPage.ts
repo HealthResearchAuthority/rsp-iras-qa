@@ -129,63 +129,63 @@ export default class CheckRemoveUserReviewBodyPage {
     return this._title;
   }
 
-  async setTitle(value: string): Promise<void> {
-    this._title = value;
+  async setTitle(titleValue: string): Promise<void> {
+    this._title = titleValue;
   }
 
   async getFirstName(): Promise<string> {
     return this._first_name;
   }
 
-  async setFirstName(value: string): Promise<void> {
-    this._first_name = value;
+  async setFirstName(firstNameValue: string): Promise<void> {
+    this._first_name = firstNameValue;
   }
 
   async getLastName(): Promise<string> {
     return this._last_name;
   }
 
-  async setLastName(value: string): Promise<void> {
-    this._last_name = value;
+  async setLastName(lastNameValue: string): Promise<void> {
+    this._last_name = lastNameValue;
   }
 
   async getEmail(): Promise<string> {
     return this._email_address;
   }
 
-  async setEmail(value: string): Promise<void> {
-    this._email_address = value;
+  async setEmail(emailValue: string): Promise<void> {
+    this._email_address = emailValue;
   }
 
   async getTelephone(): Promise<string> {
     return this._telephone;
   }
 
-  async setTelephone(value: string): Promise<void> {
-    this._telephone = value;
+  async setTelephone(telephoneValue: string): Promise<void> {
+    this._telephone = telephoneValue;
   }
 
   async getOrganisation(): Promise<string> {
     return this._organisation;
   }
 
-  async setOrganisation(value: string): Promise<void> {
-    this._organisation = value;
+  async setOrganisation(orgValue: string): Promise<void> {
+    this._organisation = orgValue;
   }
 
   async getJobTitle(): Promise<string> {
     return this._job_title;
   }
 
-  async setJobTitle(value: string): Promise<void> {
-    this._job_title = value;
+  async setJobTitle(jobTitleValue: string): Promise<void> {
+    this._job_title = jobTitleValue;
   }
 
   async getRole(): Promise<string> {
     return this._role;
   }
 
-  async setRole(value: string): Promise<void> {
-    this._role = value;
+  async setRole(roleValue: string): Promise<void> {
+    this._role = roleValue;
   }
 }
