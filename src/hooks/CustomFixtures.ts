@@ -43,7 +43,6 @@ import ProjectOverviewPage from '../pages/IRAS/makeChanges/ProjectOverviewPage';
 import ReviewYourAnswersPage from '../pages/IRAS/makeChanges/ReviewYourAnswersPage';
 import UserListReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/UserListReviewBodyPage';
 import CheckRemoveUserReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/CheckRemoveUserReviewBodyPage';
-import ReviewYourAnswersPage from '../pages/IRAS/makeChanges/ReviewYourAnswersPage';
 import SearchAddUserReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/SearchAddUserReviewBodyPage';
 import CheckAddUserReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/CheckAddUserReviewBodyPage';
 
