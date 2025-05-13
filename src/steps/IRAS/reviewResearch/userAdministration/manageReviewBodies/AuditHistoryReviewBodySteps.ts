@@ -23,25 +23,10 @@ Then(
   }
 );
 
-// This step need to be Fixed underlying locators are wrong due to dataset being passed in, assertion loop is never entered therefore no error thrown
-Then(
-  'I can see the {string} labels on the audit history page of the review body',
-  async ({ commonItemsPage, auditHistoryReviewBodyPage }, datasetName: string) => {
-    const dataset =
-      auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page[datasetName];
-    for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        const labelVal = await commonItemsPage.getUiLabel(key, auditHistoryReviewBodyPage);
-        expect(labelVal).toBe(dataset[key]);
-      }
-    }
-  }
-);
-
 Then(
   'I can see the audit history for the review body {string} event for {string} with {string}',
   async (
-    { auditHistoryReviewBodyPage, createReviewBodyPage, reviewBodyProfilePage },
+    { auditHistoryReviewBodyPage, createReviewBodyPage, reviewBodyProfilePage, commonItemsPage },
     eventName: string,
     datasetName: string,
     datasetValName: string
@@ -49,7 +34,7 @@ Then(
     const datasetCreateReviewBody = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body[datasetName];
     const datasetAudit =
       auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page[datasetValName];
-    const auditLog = await auditHistoryReviewBodyPage.getAuditLog();
+    const auditLog = await commonItemsPage.getAuditLog();
     const timeExpected = await auditHistoryReviewBodyPage.getUpdatedTime();
     const rowIndex = parseInt(
       auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.first_row_index,
@@ -90,10 +75,14 @@ Then('I can see the audit history page heading', async ({ auditHistoryReviewBody
 
 Then(
   'I can see the audit history for {string} edited event with {string}',
-  async ({ auditHistoryReviewBodyPage, reviewBodyProfilePage }, fieldName: string, datasetName: string) => {
+  async (
+    { auditHistoryReviewBodyPage, reviewBodyProfilePage, commonItemsPage },
+    fieldName: string,
+    datasetName: string
+  ) => {
     const dataset =
       auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page[datasetName];
-    const auditLog = await auditHistoryReviewBodyPage.getAuditLog();
+    const auditLog = await commonItemsPage.getAuditLog();
     const timeExpected = await auditHistoryReviewBodyPage.getUpdatedTime();
     const rowIndex = parseInt(
       auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.first_row_index,
@@ -139,11 +128,11 @@ Then(
 
 Then(
   'I can see the audit history for all the fields edited event with {string}',
-  async ({ auditHistoryReviewBodyPage, reviewBodyProfilePage }, datasetName: string) => {
+  async ({ auditHistoryReviewBodyPage, reviewBodyProfilePage, commonItemsPage }, datasetName: string) => {
     // defect: when the previous description was empty
     const dataset =
       auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page[datasetName];
-    const auditLog = await auditHistoryReviewBodyPage.getAuditLog();
+    const auditLog = await commonItemsPage.getAuditLog();
     const timeExpected = await auditHistoryReviewBodyPage.getUpdatedTime();
     const orgNameEventDescriptionExpectedValue = await auditHistoryReviewBodyPage.getAuditEventDescriptionValue(
       dataset.organisation_name_event_description_text,
@@ -210,23 +199,5 @@ Then(
           .system_admin_email_text
       );
     }
-  }
-);
-
-//try to change to common step if/when getAuditLog is changd to common method
-Then(
-  'I can see the default sort should be the most recent entry first based on date and time',
-  async ({ auditHistoryReviewBodyPage }) => {
-    const auditLog = await auditHistoryReviewBodyPage.getAuditLog();
-    const timeValues: any = auditLog.get('timeValues');
-    const timeDates = timeValues.map((time: any) => new Date(time));
-    const isSortedDesc = timeDates.every((time: number, i: number, arr: number[]) => {
-      if (i === 0) {
-        return true;
-      } else {
-        return arr[i - 1] >= time;
-      }
-    });
-    expect(isSortedDesc).toBe(true);
   }
 );

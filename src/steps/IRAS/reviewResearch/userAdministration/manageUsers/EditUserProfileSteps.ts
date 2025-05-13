@@ -24,29 +24,6 @@ Then(
   }
 );
 
-Then(
-  'I validate {string} is displayed on edit user profile page for {string}',
-  async (
-    { commonItemsPage, editUserProfilePage },
-    errorMessageFieldDatasetName: string,
-    invalidFieldsDatasetName: string
-  ) => {
-    const errorMessageFieldDataset =
-      editUserProfilePage.editUserProfilePageTestData.Mandatory_Field_Error_Message[errorMessageFieldDatasetName];
-    const invalidFieldsDataset =
-      editUserProfilePage.editUserProfilePageTestData.Empty_UserProfile_Mandatory_Data[invalidFieldsDatasetName];
-    for (const key in invalidFieldsDataset) {
-      if (Object.prototype.hasOwnProperty.call(invalidFieldsDataset, key)) {
-        await commonItemsPage.validateErrorMessageWithoutErrorHeading(
-          errorMessageFieldDataset,
-          key,
-          editUserProfilePage
-        );
-      }
-    }
-  }
-);
-
 When(
   'I edit the users {string} field with {string}',
   async ({ commonItemsPage, editUserProfilePage, userProfilePage }, fieldName: string, datasetName: string) => {
@@ -104,9 +81,7 @@ When(
 
 When(
   'I revert the {string} update of the user profile',
-  async ({ editUserProfilePage, userProfilePage, commonItemsPage }, fieldName: string) => {
-    const defectWorkaroundDatasetName: string = 'User_Access_Required_Checkbox_One';
-    const defectWorkaroundDataset = editUserProfilePage.editUserProfilePageTestData[defectWorkaroundDatasetName];
+  async ({ editUserProfilePage, userProfilePage }, fieldName: string) => {
     let currentValue: string = '';
     let newValue: string = '';
     switch (fieldName.toLowerCase()) {
@@ -162,6 +137,23 @@ When(
       default:
         throw new Error(`${fieldName} is not a valid option`);
     }
-    await commonItemsPage.fillUIComponent(defectWorkaroundDataset, 'access_required_checkbox', editUserProfilePage);
+  }
+);
+
+Then(
+  'I uncheck the previously selected checkboxes on the edit user profile page for {string} when the role is selected as operations',
+  async ({ userProfilePage, editUserProfilePage, commonItemsPage }, datasetName: string) => {
+    const roleValue = (await userProfilePage.getRole()).join(', ');
+    if (roleValue.includes('operations')) {
+      const dataset = editUserProfilePage.editUserProfilePageTestData.Edit_User_Profile[datasetName];
+      for (const key in dataset) {
+        if (key === 'country_checkbox' || key === 'access_required_checkbox') {
+          if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+            await commonItemsPage.clearUIComponent(dataset, key, editUserProfilePage);
+          }
+        }
+      }
+      await commonItemsPage.clearUIComponent(dataset, 'role_checkbox', editUserProfilePage);
+    }
   }
 );

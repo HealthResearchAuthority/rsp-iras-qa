@@ -1,0 +1,16 @@
+{
+  "Check_Add_User_Review_Body_Page": {
+    "page_heading": "Check and add user profile",
+    "page_guidance_text": "Check the information here is correct before adding the profile to ",
+    "user_details_table_labels": [
+      "Title",
+      "First name",
+      "Last name",
+      "Email address",
+      "Telephone",
+      "Organisation",
+      "Job title",
+      "Role"
+    ]
+  }
+}

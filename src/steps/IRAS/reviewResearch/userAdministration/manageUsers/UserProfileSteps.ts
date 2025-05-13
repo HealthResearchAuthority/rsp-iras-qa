@@ -16,11 +16,20 @@ Then('I can see the user profile page', async ({ userProfilePage }) => {
   await userProfilePage.setTelephone(confirmStringNotNull(await userProfilePage.telephone_value.textContent()));
   await userProfilePage.setOrganisation(confirmStringNotNull(await userProfilePage.organisation_value.textContent()));
   await userProfilePage.setJobTitle(confirmStringNotNull(await userProfilePage.job_title_value.textContent()));
+  if (await userProfilePage.role_value.isVisible()) {
+    await userProfilePage.setRole(confirmStringNotNull(await userProfilePage.role_value.textContent()).split(', '));
+  }
   if (await userProfilePage.country_row.isVisible()) {
     await userProfilePage.setCountries(
       confirmStringNotNull(await userProfilePage.country_value.textContent()).split(', ')
     );
   }
+  if (await userProfilePage.access_required_row.isVisible()) {
+    await userProfilePage.setAccessRequired(
+      confirmStringNotNull(await userProfilePage.access_required_value.textContent()).split(', ')
+    );
+  }
+  console.log(await userProfilePage.getAccessRequired());
 });
 
 Then(
@@ -29,7 +38,7 @@ Then(
     const dataset = editUserProfilePage.editUserProfilePageTestData[datesetName];
     const actualValue = await userProfilePage.getUserProfileValue(editFieldName);
     const expectedValue = dataset[editFieldName];
-    expect(actualValue).toBe(expectedValue);
+    expect(actualValue).toBe(expectedValue.toString());
   }
 );
 

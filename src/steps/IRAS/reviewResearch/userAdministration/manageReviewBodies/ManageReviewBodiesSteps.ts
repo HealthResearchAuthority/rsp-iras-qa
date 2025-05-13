@@ -1,6 +1,10 @@
 import { createBdd } from 'playwright-bdd';
 import { test, expect } from '../../../../../hooks/CustomFixtures';
-import { confirmStringNotNull, removeUnwantedWhitespace } from '../../../../../utils/UtilFunctions';
+import {
+  confirmStringNotNull,
+  removeUnwantedWhitespace,
+  returnSingleRandomLocator,
+} from '../../../../../utils/UtilFunctions';
 const { Then } = createBdd(test);
 
 Then(
@@ -65,11 +69,10 @@ Then(
       statusText = manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.disabled_status;
     }
     const autoReviewBodyRows = await manageReviewBodiesPage.getRowByOrgName(orgNamePrefix, false);
-    const selectedReviewBodyRow = autoReviewBodyRows
-      .filter({
-        has: manageReviewBodiesPage.statusCell.getByText(statusText),
-      })
-      .first();
+    const activeAutoReviewBodyRows = autoReviewBodyRows.filter({
+      has: manageReviewBodiesPage.statusCell.getByText(statusText),
+    });
+    const selectedReviewBodyRow = await returnSingleRandomLocator(activeAutoReviewBodyRows);
     await selectedReviewBodyRow.locator(manageReviewBodiesPage.actionsLink).click();
   }
 );
