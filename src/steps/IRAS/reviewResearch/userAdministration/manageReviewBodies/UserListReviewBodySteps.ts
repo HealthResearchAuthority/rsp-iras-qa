@@ -63,7 +63,7 @@ When(
       const userValues: any = userListBeforeSearch.get('searchResultValues');
       await userListReviewBodyPage.setUserListBeforeSearch(userValues);
       await userListReviewBodyPage.setSearchKey(searchKey);
-      userListReviewBodyPage.search_text.fill(searchKey);
+      commonItemsPage.search_text.fill(searchKey);
     }
   }
 );
@@ -109,10 +109,10 @@ Then(
 
 When(
   'I enter an input into the search field to search for the removed user of the review body',
-  async ({ userListReviewBodyPage, checkRemoveUserReviewBodyPage }) => {
+  async ({ userListReviewBodyPage, commonItemsPage, checkRemoveUserReviewBodyPage }) => {
     const searchKey = await checkRemoveUserReviewBodyPage.getEmail();
     await userListReviewBodyPage.setSearchKey(searchKey);
-    await userListReviewBodyPage.search_text.fill(searchKey);
+    await commonItemsPage.search_text.fill(searchKey);
   }
 );
 
@@ -167,9 +167,9 @@ Then(
 
 When(
   'I fill the search input for the user list page of the review body, with the newly added users email as the search query',
-  async ({ searchAddUserReviewBodyPage, userListReviewBodyPage }) => {
+  async ({ searchAddUserReviewBodyPage, commonItemsPage }) => {
     const searchQueryValue = await searchAddUserReviewBodyPage.getUserEmail();
-    await userListReviewBodyPage.search_text.fill(searchQueryValue);
+    await commonItemsPage.search_text.fill(searchQueryValue);
   }
 );
 
