@@ -19,6 +19,9 @@ Then(
       await userListReviewBodyPage.setUserFirstName(firstName);
       const lastName: any = userList.get('lastNameValues');
       await userListReviewBodyPage.setUserLastName(lastName);
+      await userListReviewBodyPage.setFirstName(firstName[0]);
+      await userListReviewBodyPage.setLastName(lastName[0]);
+      await userListReviewBodyPage.setEmail(emailAddress[0]);
     }
   }
 );
@@ -144,13 +147,6 @@ When(
   }
 );
 
-When(
-  'I enter an input into the search field to search for a user not added in the current review body',
-  async ({ userListReviewBodyPage }) => {
-    await userListReviewBodyPage.search_text.fill('QA Automation');
-  }
-);
-
 Then(
   'I can see the user profile page of the removed user from the review body',
   async ({ userProfilePage, checkRemoveUserReviewBodyPage }) => {
@@ -193,5 +189,16 @@ Given(
     await expect(userListReviewBodyPage.status_value_first_row).toHaveText(
       await searchAddUserReviewBodyPage.getUserStatus()
     );
+  }
+);
+
+When('I enter {string} into the search field', async ({ userListReviewBodyPage }, searchKey: string) => {
+  await userListReviewBodyPage.search_text.fill(searchKey);
+});
+
+When(
+  'I enter unique organisation name of the newly created review body into the search field',
+  async ({ userListReviewBodyPage, createReviewBodyPage }) => {
+    await userListReviewBodyPage.search_text.fill(await createReviewBodyPage.getUniqueOrgName());
   }
 );
