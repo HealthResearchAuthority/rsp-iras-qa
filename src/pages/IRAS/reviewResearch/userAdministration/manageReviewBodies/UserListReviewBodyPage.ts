@@ -30,7 +30,6 @@ export default class UserListReviewBodyPage {
   readonly status_label: Locator;
   readonly last_logged_in_label: Locator;
   readonly actions_label: Locator;
-  readonly search_text: Locator;
   readonly back_to_users_link: Locator;
   readonly no_results_heading: Locator;
   readonly no_results_guidance_text: Locator;
@@ -110,7 +109,6 @@ export default class UserListReviewBodyPage {
         exact: true,
       }
     );
-    this.search_text = this.page.locator('#SearchQuery');
     this.back_to_users_link = this.page
       .getByRole('link')
       .getByText(this.userListReviewBodyPageTestData.Review_Body_User_List_Page.back_to_users_link);

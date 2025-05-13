@@ -58,6 +58,7 @@ export default class CommonItemsPage {
   readonly next_button: Locator;
   readonly fieldGroup: Locator;
   readonly errorFieldGroup: Locator;
+  readonly search_text: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -84,6 +85,7 @@ export default class CommonItemsPage {
     this.qSetProgressBarActiveStageLink = this.qSetProgressBarActiveStage.locator('.stage-label').getByRole('button');
     this.tableRows = this.page.getByRole('table').getByRole('row');
     this.hidden_next_button = this.page.locator('[class="govuk-pagination__next"][style="visibility: hidden"]');
+    this.search_text = this.page.locator('#SearchQuery');
     //Banner
     this.bannerNavBar = this.page.getByLabel('Service information');
     this.bannerLoginBtn = this.bannerNavBar.getByText(this.buttonTextData.Banner.Login, { exact: true });

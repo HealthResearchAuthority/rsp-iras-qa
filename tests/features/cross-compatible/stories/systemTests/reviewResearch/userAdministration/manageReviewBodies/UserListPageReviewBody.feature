@@ -6,18 +6,18 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
         Then I can see the 'Manage_Review_Bodies_Page'
 
-    @VerifyUserListCreateReviewBody @NoUsersReviewBody @fail @skip
+    @VerifyUserListCreateReviewBody @NoUsersReviewBody
     Scenario: Verify the user can view the user list page of the newly created review body
         And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
         Then I can see the 'Create_Review_Body_Page'
         And I capture the page screenshot
-        When I fill the new review body page using '<Add_Review_Body>'
+        When I fill the new review body page using 'Valid_Data_In_All_Mandatory_Fields'
         And I capture the page screenshot
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
         And I capture the page screenshot
         Then I can see the check and create review body page for 'Valid_Data_In_All_Mandatory_Fields'
         When I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
-        Then I can see the create Review body confirmation page for '<Add_Review_Body>'
+        Then I can see the create Review body confirmation page for 'Valid_Data_In_All_Mandatory_Fields'
         And I capture the page screenshot
         When I click the 'Back_To_Manage_Review_Bodies' link on the 'Create_Review_Body_Confirmation_Page'
         Then I can see the 'Manage_Review_Bodies_Page'

@@ -191,14 +191,3 @@ Given(
     );
   }
 );
-
-When('I enter {string} into the search field', async ({ userListReviewBodyPage }, searchKey: string) => {
-  await userListReviewBodyPage.search_text.fill(searchKey);
-});
-
-When(
-  'I enter unique organisation name of the newly created review body into the search field',
-  async ({ userListReviewBodyPage, createReviewBodyPage }) => {
-    await userListReviewBodyPage.search_text.fill(await createReviewBodyPage.getUniqueOrgName());
-  }
-);

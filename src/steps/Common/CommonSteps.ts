@@ -511,3 +511,14 @@ Then(
     }
   }
 );
+
+When('I enter {string} into the search field', async ({ commonItemsPage }, searchKey: string) => {
+  await commonItemsPage.search_text.fill(searchKey);
+});
+
+When(
+  'I enter unique organisation name of the newly created review body into the search field',
+  async ({ commonItemsPage, createReviewBodyPage }) => {
+    await commonItemsPage.search_text.fill(await createReviewBodyPage.getUniqueOrgName());
+  }
+);
