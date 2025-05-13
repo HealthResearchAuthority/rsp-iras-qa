@@ -178,7 +178,7 @@
     "access_required_checkbox": ["Research Ethics Committee"]
   },
   "User_Role_Checkbox_One": {
-    "role_checkbox": ["Operations"],
+    "role_checkbox": ["operations"],
     "access_required_checkbox": ["Research Ethics Committee"]
   },
   "User_Country_Checkbox_One": {
@@ -221,7 +221,7 @@
     "access_required_checkbox": ["Research Ethics Committee"]
   },
   "Original_Role_Checkbox_One": {
-    "role_checkbox": ["Operations"],
+    "role_checkbox": ["operations"],
     "access_required_checkbox": ["Research Ethics Committee"]
   },
   "Original_Country_Checkbox_One": {
@@ -254,15 +254,17 @@
     "job_title_text": "Sr.Reviewer updated"
   },
   "User_Role_Checkbox_Two": {
-    "role_checkbox": ["Reviewer"]
+    "role_checkbox": ["reviewer"]
   },
   "User_Country_Checkbox_Two": {
     "country_checkbox": ["Northern Ireland", "Scotland"],
     "access_required_checkbox": ["Research Ethics Committee"]
   },
+  "User_Access_Required_Checkbox_Two": {
+    "access_required_checkbox": ["CAG"]
+  },
   "User_Roles_Checkbox_Empty": {
-    "role_checkbox": [],
-    "access_required_checkbox": ["Research Ethics Committee"]
+    "role_checkbox": []
   },
   "Original_Title_Text_Two": {
     "title_text": "Mr"
@@ -286,7 +288,7 @@
     "job_title_text": "Sr.Reviewer"
   },
   "Original_Role_Checkbox_Two": {
-    "role_checkbox": ["Reviewer"]
+    "role_checkbox": ["reviewer"]
   },
 
   "User_First_Name_Text_Three": {

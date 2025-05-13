@@ -72,5 +72,17 @@
   "Review_Body_Profile_Page": {
     "Disable_Review_Body": "Disable review body",
     "Enable_Review_Body": "Enable review body"
+  },
+  "Review_Body_User_List_Page": {
+    "Search": "Search"
+  },
+  "Search_Add_User_Review_Body_Page": {
+    "Search": "Search"
+  },
+  "Check_Add_User_Review_Body_Page": {
+    "Add_User": "Add user profile"
+  },
+  "Review_Your_Answers_Page": {
+    "Confirm_Project_Details": "Confirm project details"
   }
 }

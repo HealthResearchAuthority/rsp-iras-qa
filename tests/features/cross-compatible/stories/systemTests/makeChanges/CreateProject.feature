@@ -370,9 +370,9 @@ Feature: Create Amendment - Create Project
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_For_Later' button on the 'Project_Details_Title_Page'
-    Then I can see the project overview save for later page
+    Then I can see the project overview page
     And I capture the page screenshot
-    And I can see the short project title on project overview save for later page for '<Project_Details_Title>'
+    And I can see the short project title on project overview page for '<Project_Details_Title>'
     When I click the 'Project_Details' link on the 'Project_Overview_Save_For_Later_Page'
     And I can see the project details title page
     And I capture the page screenshot
@@ -399,9 +399,9 @@ Feature: Create Amendment - Create Project
     And I fill the key project roles page with '<Key_Project_Roles>'
     And I capture the page screenshot
     When I click the 'Save_For_Later' button on the 'Key_Project_Roles_Page'
-    Then I can see the project overview save for later page
+    Then I can see the project overview page
     And I capture the page screenshot
-    And I can see the short project title on project overview save for later page for '<Project_Details_Title>'
+    And I can see the short project title on project overview page for '<Project_Details_Title>'
     When I click the 'Project_Details' link on the 'Project_Overview_Save_For_Later_Page'
     Then I can see the project details title page
     And I capture the page screenshot
@@ -434,9 +434,9 @@ Feature: Create Amendment - Create Project
     And I fill the research locations page with '<Research_Locations>'
     And I capture the page screenshot
     And I click the 'Save_For_Later' button on the 'Research_Locations_Page'
-    Then I can see the project overview save for later page
+    Then I can see the project overview page
     And I capture the page screenshot
-    And I can see the short project title on project overview save for later page for '<Project_Details_Title>'
+    And I can see the short project title on project overview page for '<Project_Details_Title>'
     When I click the 'Project_Details' link on the 'Project_Overview_Save_For_Later_Page'
     Then I can see the project details title page
     And I capture the page screenshot
