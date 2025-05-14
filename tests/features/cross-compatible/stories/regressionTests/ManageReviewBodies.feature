@@ -108,7 +108,7 @@ Feature: User Administration: Manage Review Bodies
             | Add_Review_Body          | Field_Name_One    | Field_Name_Two | Field_Name_Three | Field_Name_Four | Edit_Review_Body           | Audit_History               |
             | Valid_Data_In_All_Fields | Organisation_Name | Country        | Email_Address    | Description     | Valid_Data_Edit_All_Fields | Edit_Review_Body_All_Fields |
 
-    @RegressionTestVerifyBackAndChangeLinkNavigationManageReviewBodies @TestOnly
+    @RegressionTestVerifyBackAndChangeLinkNavigationManageReviewBodies
     Scenario Outline: Verify the user can navigate by clicking 'Back' link and 'Change' link from review body profile page and edit review body page and audit history page
         When I enter 'QA Automation' into the search field
         And I click the 'Search' button on the 'Manage_Review_Bodies_Page'

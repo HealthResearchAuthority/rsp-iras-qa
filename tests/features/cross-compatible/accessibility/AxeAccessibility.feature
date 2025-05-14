@@ -1,6 +1,6 @@
 @axeAccessibility @jsEnabled
 Feature: Run Axe Accessibilty Test Tool Against App Pages
-  # delete IDG, delete proj filter
+
   @axeAccessibilityHome @adminUser
   Scenario: Home Page
     Given I have navigated to the 'Home_Page'

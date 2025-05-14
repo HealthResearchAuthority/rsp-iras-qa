@@ -37,12 +37,10 @@ Then(
   'I can see the user list of the selected review body is sorted by default in the alphabetical order of the {string}',
   async ({ userListReviewBodyPage }, sortField: string) => {
     let firstNameValues: any;
-    switch (sortField.toLowerCase()) {
-      case 'first name':
-        firstNameValues = await userListReviewBodyPage.getUserFirstName();
-        break;
-      default:
-        throw new Error(`${sortField} is not a valid option`);
+    if (sortField.toLowerCase() === 'first name') {
+      firstNameValues = await userListReviewBodyPage.getUserFirstName();
+    } else {
+      throw new Error(`${sortField} is not a valid option`);
     }
     const sortedList = [...firstNameValues].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
     expect(firstNameValues).toEqual(sortedList);

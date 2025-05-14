@@ -207,36 +207,17 @@ Then('I can see a {string} button on the {string}', async ({ commonItemsPage }, 
 
 Given(
   'I click the {string} link on the {string}',
-  async (
-    {
-      commonItemsPage,
-      manageUsersPage,
-      userProfilePage,
-      createUserProfileConfirmationPage,
-      checkCreateUserProfilePage,
-      userListReviewBodyPage,
-    },
-    linkKey: string,
-    pageKey: string
-  ) => {
+  async ({ commonItemsPage, checkCreateUserProfilePage }, linkKey: string, pageKey: string) => {
     const linkValue = commonItemsPage.linkTextData[pageKey][linkKey];
     const noOfLinksFound = await commonItemsPage.govUkLink.getByText(linkValue).count();
     if (pageKey === 'Progress_Bar') {
       await commonItemsPage.qSetProgressBarStageLink.getByText(linkValue, { exact: true }).click();
-    } else if (pageKey === 'Manage_Users_Page' && linkKey === 'View_Edit') {
-      await manageUsersPage.view_edit_link.click(); //work around for now >> to click on first View/Edit link
-    } else if (pageKey === 'User_Profile_Page' && linkKey === 'Change') {
-      await userProfilePage.first_change_link.click(); //work around for now >> to click on first Change link
-    } else if (pageKey === 'Create_User_Profile_Confirmation_Page' && linkKey === 'Back_To_Manage_Users') {
-      await createUserProfileConfirmationPage.back_to_manage_user_link.click(); //work around for now >> to click on Back_To_Manage_Users link ..# "Back to Manage Users" in app, "Back to Manage users" in figma >>clarification needed
-    } else if (pageKey === 'Manage_Review_Bodies_Page' && linkKey === 'View_Edit') {
-      await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).first().click();
     } else if (pageKey === 'Check_Create_User_Profile_Page' && linkKey === 'Back') {
       await checkCreateUserProfilePage.back_button.click(); //work around for now >> to click on Back link
     } else if (pageKey === 'Check_Create_Review_Body_Page' && linkKey === 'Back') {
       await checkCreateUserProfilePage.back_button.click(); //work around for now >> to click on Back link
     } else if (pageKey === 'Review_Body_User_List_Page' && linkKey === 'Back_To_Users') {
-      await userListReviewBodyPage.back_to_users_link.click();
+      await commonItemsPage.govUkLink.getByText(linkValue).click();
     } else if (pageKey === 'Search_Add_User_Review_Body_Page' && linkKey === 'Back_To_Users') {
       await commonItemsPage.govUkLink.getByText(linkValue).click();
     } else if (noOfLinksFound > 1) {
