@@ -1,10 +1,8 @@
 @UserAdministration @ViewReviewBodies @adminUser @SystemTest @rsp-2571 @rsp-2569
-Feature: HRAPROG-393- User Administration: Manage Review Bodies list and view review bodies profile details
+Feature: User Administration: Manage Review Bodies list and view review bodies profile details
 
     Background:
-        Given I have navigated to the 'Home_Page'
-        And I click the 'System_Admin' link on the 'Banner'
-        And I can see the 'System_Administration_Page'
+        Given I have navigated to the 'System_Administration_Page'
         And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
         Then I can see the 'Manage_Review_Bodies_Page'
 

@@ -32,6 +32,8 @@ Feature: User Administration: Manage Review Bodies
         Then I can see the list is sorted by default in the alphabetical order of 'Organisation Name'
         And I capture the page screenshot
         # find the newly created review body in the list with 'active' status
+        When I enter unique organisation name of the newly created review body into the search field
+        And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
         Then I can see the review body for '<Add_Review_Body>' is present in the list
         And I capture the page screenshot
         And I can see the status of the review body is 'ACTIVE'
@@ -55,15 +57,16 @@ Feature: User Administration: Manage Review Bodies
         And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'
         Then I can see the audit history page of the review body
         And I capture the page screenshot
-        And I can see the '<Validation_Text>' labels on the audit history page of the review body
         And I can see the audit history for the review body 'disabled' event for '<Add_Review_Body>' with '<Audit_History>'
 
         Examples:
-            | Add_Review_Body          | Validation_Text           | Audit_History       |
-            | Valid_Data_In_All_Fields | Review_Body_Audit_History | Disable_Review_Body |
+            | Add_Review_Body          | Audit_History       |
+            | Valid_Data_In_All_Fields | Disable_Review_Body |
 
     @RegressionTestVerifyEnableAndEditReviewBodyAuditHistory
     Scenario Outline: Verify the user can view the audit history after enabling a review body
+        When I enter 'QA Automation' into the search field
+        And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
         And I select a 'QA Automation' Review Body to View and Edit which is 'disabled'
         And I can see the review body profile page
         And I capture the page screenshot
@@ -73,8 +76,10 @@ Feature: User Administration: Manage Review Bodies
         And I click the 'Confirm' button on the 'Confirmation_Page'
         And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
         Then I can see the 'Manage_Review_Bodies_Page'
+        When I enter 'QA Automation' into the search field
+        And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
-        Then I click the view edit link for the 'enabled' review body
+        Then I click the view edit link for the 'active' review body
         And I can see the review body profile page
         And I capture the page screenshot
         # edit review body
@@ -95,17 +100,18 @@ Feature: User Administration: Manage Review Bodies
         And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'
         Then I can see the audit history page of the review body
         And I capture the page screenshot
-        And I can see the '<Validation_Text>' labels on the audit history page of the review body
         # audit history sorting
         And I can see the default sort should be the most recent entry first based on date and time
         And I can see the audit history for all the fields edited event with '<Audit_History>'
 
         Examples:
-            | Add_Review_Body          | Field_Name_One    | Field_Name_Two | Field_Name_Three | Field_Name_Four | Edit_Review_Body           | Validation_Text           | Audit_History               |
-            | Valid_Data_In_All_Fields | Organisation_Name | Country        | Email_Address    | Description     | Valid_Data_Edit_All_Fields | Review_Body_Audit_History | Edit_Review_Body_All_Fields |
+            | Add_Review_Body          | Field_Name_One    | Field_Name_Two | Field_Name_Three | Field_Name_Four | Edit_Review_Body           | Audit_History               |
+            | Valid_Data_In_All_Fields | Organisation_Name | Country        | Email_Address    | Description     | Valid_Data_Edit_All_Fields | Edit_Review_Body_All_Fields |
 
     @RegressionTestVerifyBackAndChangeLinkNavigationManageReviewBodies
     Scenario Outline: Verify the user can navigate by clicking 'Back' link and 'Change' link from review body profile page and edit review body page and audit history page
+        When I enter 'QA Automation' into the search field
+        And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
         And I select a 'QA Automation' Review Body to View and Edit which is 'active'
         And I can see the review body profile page
         And I capture the page screenshot
@@ -182,7 +188,7 @@ Feature: User Administration: Manage Review Bodies
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
         Then I can see the check and create review body page for '<Add_Review_Body>'
         And I capture the page screenshot
-        And I click the 'Back' button on the 'Check_Create_Review_Body_Page'
+        When I click the 'Back' link on the 'Check_Create_Review_Body_Page'
         Then I can see the Add new review body page for '<Add_Review_Body>'
         And I capture the page screenshot
         And I fill the new review body page using '<Add_Another_Review_Body>'
@@ -233,18 +239,18 @@ Feature: User Administration: Manage Review Bodies
         When I fill the new review body page using '<Add_Review_Body>'
         And I capture the page screenshot
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
-        Then I can see the '<Error>' validation message for '<Field_Name>' on the Add new review body page
+        Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Create_Review_Body_Page'
         And I capture the page screenshot
 
         Examples:
-            | Add_Review_Body                      | Error           | Field_Name              |
-            | Missing_Data_Organisation_Name_Field | Mandatory_Field | Organisation_Name_Error |
-            | Missing_Data_Country_Field           | Select_Country  | Country_Error           |
-            | Missing_Data_Email_Address_Field     | Mandatory_Field | Email_Address_Error     |
-            | Missing_Data_All_Fields              | Mandatory_Field | All_Mandatory_Fields    |
-            | Missing_Data_All_Mandatory_Fields    | Mandatory_Field | All_Mandatory_Fields    |
-            | Invalid_Data_Organisation_Name_Field | Max_Org_Chars   | Organisation_Name_Error |
-            | Invalid_Data_Description_Field       | Max_Words       | Description_Error       |
-            | Invalid_Character_Limit              | Max_Email_Chars | Email_Address_Error     |
-            | Incorrect_Email_Format               | Email_Format    | Email_Address_Error     |
-            | Invalid_Email_Data_Double_Dot        | Email_Format    | Email_Address_Error     |
+            | Add_Review_Body                      | Field_And_Summary_Error_Message         |
+            | Missing_Data_Organisation_Name_Field | Mandatory_Field_Organisation_Name_Error |
+            | Missing_Data_Country_Field           | Mandatory_Field_Country_Error           |
+            | Missing_Data_Email_Address_Field     | Mandatory_Field_Email_Address_Error     |
+            | Missing_Data_All_Fields              | All_Mandatory_Field_Errors              |
+            | Missing_Data_All_Mandatory_Fields    | All_Mandatory_Field_Errors              |
+            | Invalid_Data_Organisation_Name_Field | Max_Chars_Organisation_Name_Error       |
+            | Invalid_Data_Description_Field       | Max_Description_Words_Error             |
+            | Invalid_Character_Limit              | Max_Chars_Email_Address_Error           |
+            | Incorrect_Email_Format               | Email_Format_Error                      |
+            | Invalid_Email_Data_Double_Dot        | Email_Format_Error                      |

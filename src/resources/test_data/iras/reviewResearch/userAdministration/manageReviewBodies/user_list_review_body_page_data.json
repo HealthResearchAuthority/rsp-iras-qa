@@ -1,0 +1,18 @@
+{
+  "Review_Body_User_List_Page": {
+    "page_heading": "Users for ",
+    "guidance_text": "Search, assign or remove users from this review body",
+    "no_results_heading": "No results found",
+    "no_results_guidance_text": "Check your spelling or enter another search term and try again. If no results are found, go to Manage users where you can check if a user profile exists and create one if needed.",
+    "search_box_label": "Find a user",
+    "back_to_users_link": "Back to Users for ",
+    "Column_Header_Labels": {
+      "first_name_label": "First name",
+      "last_name_label": "Last name",
+      "email_address_label": "Email address",
+      "status_label": "Status",
+      "last_logged_in_label": "Last logged in",
+      "actions_label": "Action"
+    }
+  }
+}

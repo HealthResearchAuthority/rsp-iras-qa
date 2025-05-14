@@ -39,6 +39,12 @@ import ReviewBodyProfilePage from '../pages/IRAS/reviewResearch/userAdministrati
 import EditReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/EditReviewBodyPage';
 import AuditHistoryReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/AuditHistoryReviewBodyPage';
 import AuditHistoryUserPage from '../pages/IRAS/reviewResearch/userAdministration/manageUsers/AuditHistoryUserPage';
+import ProjectOverviewPage from '../pages/IRAS/makeChanges/ProjectOverviewPage';
+import ReviewYourAnswersPage from '../pages/IRAS/makeChanges/ReviewYourAnswersPage';
+import UserListReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/UserListReviewBodyPage';
+import CheckRemoveUserReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/CheckRemoveUserReviewBodyPage';
+import SearchAddUserReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/SearchAddUserReviewBodyPage';
+import CheckAddUserReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/CheckAddUserReviewBodyPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -63,6 +69,8 @@ type CustomFixtures = {
   reseachLocationsPage: ReseachLocationsPage;
   keyProjectRolesPage: KeyProjectRolesPage;
   reviewYourApplicationPage: ReviewYourApplicationPage;
+  projectOverviewPage: ProjectOverviewPage;
+  reviewYourAnswersPage: ReviewYourAnswersPage;
   systemAdministrationPage: SystemAdministrationPage;
   manageReviewBodiesPage: ManageReviewBodiesPage;
   createReviewBodyPage: CreateReviewBodyPage;
@@ -79,6 +87,10 @@ type CustomFixtures = {
   editReviewBodyPage: EditReviewBodyPage;
   auditHistoryReviewBodyPage: AuditHistoryReviewBodyPage;
   auditHistoryUserPage: AuditHistoryUserPage;
+  userListReviewBodyPage: UserListReviewBodyPage;
+  checkRemoveUserReviewBodyPage: CheckRemoveUserReviewBodyPage;
+  searchAddUserReviewBodyPage: SearchAddUserReviewBodyPage;
+  checkAddUserReviewBodyPage: CheckAddUserReviewBodyPage;
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -171,6 +183,14 @@ export const test = base.extend<CustomFixtures>({
     await use(new ReviewYourApplicationPage(page));
   },
 
+  projectOverviewPage: async ({ page }, use) => {
+    await use(new ProjectOverviewPage(page));
+  },
+
+  reviewYourAnswersPage: async ({ page }, use) => {
+    await use(new ReviewYourAnswersPage(page));
+  },
+
   systemAdministrationPage: async ({ page }, use) => {
     await use(new SystemAdministrationPage(page));
   },
@@ -233,6 +253,22 @@ export const test = base.extend<CustomFixtures>({
 
   auditHistoryUserPage: async ({ page }, use) => {
     await use(new AuditHistoryUserPage(page));
+  },
+
+  userListReviewBodyPage: async ({ page }, use) => {
+    await use(new UserListReviewBodyPage(page));
+  },
+
+  checkRemoveUserReviewBodyPage: async ({ page }, use) => {
+    await use(new CheckRemoveUserReviewBodyPage(page));
+  },
+
+  searchAddUserReviewBodyPage: async ({ page }, use) => {
+    await use(new SearchAddUserReviewBodyPage(page));
+  },
+
+  checkAddUserReviewBodyPage: async ({ page }, use) => {
+    await use(new CheckAddUserReviewBodyPage(page));
   },
 
   makeAxeBuilder: async ({ page }, use) => {

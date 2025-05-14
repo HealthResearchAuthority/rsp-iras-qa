@@ -26,5 +26,13 @@
     "enable_confirmation_success_header_label": "Review body successfully enabled",
     "enable_confirmation_success_body_one_label": "A confirmation email will be sent to",
     "enable_confirmation_success_body_two_label": "to confirm that their profile has been enabled"
+  },
+  "Remove_User_From_Review_Body_Labels": {
+    "remove_user_confirmation_success_header_label": "User has been successfully removed",
+    "remove_user_confirmation_success_body_two_label": " has been sent an email confirming that they have been removed from "
+  },
+  "Add_User_Review_Body_Labels": {
+    "page_heading": "User has been successfully added",
+    "page_guidance_text": " has been sent an email confirming that they have been added to "
   }
 }
