@@ -67,10 +67,10 @@
     "job_title_text": "Job title must be 250 characters or less",
     "last_name_text": "Last name must be 250 characters or less",
     "first_name_text": "First name must be 250 characters or less",
-    "telephone_text": "Telephone must be 11 characters or less",
+    "telephone_text": "Telephone must be 11 digits or less",
     "organisation_text": "Organisation must be 250 characters or less"
   },
-  "Error_Message_Invalid_Character_Limit_field_Email_Address": {
+  "Error_Message_Invalid_Character_Limit_Field_Email_Address": {
     "email_address_text": "Email address must be 250 characters or less"
   },
   "Error_Message_Incorrect_Format_Field_Telephone": {
@@ -81,7 +81,7 @@
   },
   "Create_User_Profile": {
     "email_address_prefix": "QAAutomation",
-    "email_address_unique": "QAAutomation20250508135812983hscrd@health.org",
+    "email_address_unique": "QAAutomation20250515150523687hscrd@health.org",
     "Role_Operations": {
       "role_checkbox": [
         "operations"
@@ -473,7 +473,7 @@
       "first_name_text": "johñ.döeAelianaSophiaIsabellaGabriellaAlexandriaSeraphinaValentinaAnastasiaEvangelineArabellaCassandraJulianaEmmanuellaTheodosiaChristabellaMariabellaRosabellaViolettaAngelinaSerenellaElizabellaMarcellinaMirabellaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx Morethan250chars",
       "last_name_text": "johñ.döeAelianaSophiaIsabellaGabriellaAlexandriaSeraphinaValentinaAnastasiaEvangelineArabellaCassandraJulianaEmmanuellaTheodosiaChristabellaMariabellaRosabellaViolettaAngelinaSerenellaElizabellaMarcellinaMirabellaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx Morethan250charss",
       "email_address_text": "EmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExcee@example.com",
-      "telephone_text": "+12345678901",
+      "telephone_text": "012345678901",
       "organisation_text": "AelianaSophiaIsabellaGabriellaAlexandriaSeraphinaValentinaAnastasiaEvangelineArabellaCassandraJulianaEmmanuellaTheodosiaChristabellaMariabellaRosabellaViolettaAngelinaSerenellaElizabellaMarcellinaMirabellaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx Morethan250chars",
       "job_title_text": "AelianaSophiaIsabellaGabriellaAlexandriaSeraphinaValentinaAnastasiaEvangelineArabellaCassandraJulianaEmmanuellaTheodosiaChristabellaMariabellaRosabellaViolettaAngelinaSerenellaElizabellaMarcellinaMirabellaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx Morethan250chars"
     },
@@ -500,8 +500,7 @@
     "Invalid_Email_Data_Wrong_AT": {
       "first_name_text": "Test First Name Role_Reviewer",
       "last_name_text": "Test Last Name Role_Reviewer",
-      "email_address_text": "john[at]example.",
-      "sponsor_contact_email_text": "john[at]example."
+      "email_address_text": "john[at]example."
     },
     "Invalid_Email_Data_Less_Greater_Symbols": {
       "first_name_text": "Test First Name Role_Reviewer",

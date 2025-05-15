@@ -51,10 +51,10 @@
     "job_title_text": "Job title must be 250 characters or less",
     "last_name_text": "Last name must be 250 characters or less",
     "first_name_text": "First name must be 250 characters or less",
-    "telephone_text": "Telephone must be 11 characters or less",
+    "telephone_text": "Telephone must be 11 digits or less",
     "organisation_text": "Organisation must be 250 characters or less"
   },
-  "Error_Message_Invalid_Character_Limit_field_Email_Address": {
+  "Error_Message_Invalid_Character_Limit_Field_Email_Address": {
     "email_address_text": "Email address must be 250 characters or less"
   },
   "Error_Message_Incorrect_Format_Field_Telephone": {
@@ -154,28 +154,22 @@
     "access_required_checkbox": ["Research Ethics Committee"]
   },
   "User_First_Name_Text_One": {
-    "first_name_text": "First Name Updated",
-    "access_required_checkbox": ["Research Ethics Committee"]
+    "first_name_text": "First Name Updated"
   },
   "User_Last_Name_Text_One": {
-    "last_name_text": "Last name updated",
-    "access_required_checkbox": ["Research Ethics Committee"]
+    "last_name_text": "Last name updated"
   },
   "User_Email_Address_Text_One": {
-    "email_address_text": "QAAutomation98342jksdfbrohsbrddfsssdjs_updated@test1.com",
-    "access_required_checkbox": ["Research Ethics Committee"]
+    "email_address_text": "QAAutomation98342jksdfbrohsbrddfsssdjs_updated@test1.com"
   },
   "User_Telephone_Text_One": {
-    "telephone_text": "07999999999",
-    "access_required_checkbox": ["Research Ethics Committee"]
+    "telephone_text": "07999999999"
   },
   "User_Organisation_Text_One": {
-    "organisation_text": "Automation HRA",
-    "access_required_checkbox": ["Research Ethics Committee"]
+    "organisation_text": "Automation HRA"
   },
   "User_Job_Title_Text_One": {
-    "job_title_text": "Sr.Reviewer updated",
-    "access_required_checkbox": ["Research Ethics Committee"]
+    "job_title_text": "Sr.Reviewer updated"
   },
   "User_Role_Checkbox_One": {
     "role_checkbox": ["operations"],
@@ -189,8 +183,7 @@
     "access_required_checkbox": ["Research Ethics Committee"]
   },
   "User_Title_Update": {
-    "title_text": "Master",
-    "access_required_checkbox": ["Research Ethics Committee"]
+    "title_text": "Master"
   },
   "Original_Title_Text_One": {
     "title_text": "Mr",
@@ -493,7 +486,7 @@
     "first_name_text": "AelianaSophiaIsabellaGabriellaAlexandriaSeraphinaValentinaAnastasiaEvangelineArabellaCassandraJulianaEmmanuellaTheodosiaChristabellaMariabellaRosabellaViolettaAngelinaSerenellaElizabellaMarcellinaMirabellaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx Morethan250chars",
     "last_name_text": "AelianaSophiaIsabellaGabriellaAlexandriaSeraphinaValentinaAnastasiaEvangelineArabellaCassandraJulianaEmmanuellaTheodosiaChristabellaMariabellaRosabellaViolettaAngelinaSerenellaElizabellaMarcellinaMirabellaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx Morethan250charss",
     "email_address_text": "EmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExcee@example.com",
-    "telephone_text": "+12345678901",
+    "telephone_text": "012345678901",
     "organisation_text": "AelianaSophiaIsabellaGabriellaAlexandriaSeraphinaValentinaAnastasiaEvangelineArabellaCassandraJulianaEmmanuellaTheodosiaChristabellaMariabellaRosabellaViolettaAngelinaSerenellaElizabellaMarcellinaMirabellaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx Morethan250chars",
     "job_title_text": "AelianaSophiaIsabellaGabriellaAlexandriaSeraphinaValentinaAnastasiaEvangelineArabellaCassandraJulianaEmmanuellaTheodosiaChristabellaMariabellaRosabellaViolettaAngelinaSerenellaElizabellaMarcellinaMirabellaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx Morethan250chars"
   },
@@ -520,8 +513,7 @@
   "Invalid_Email_Data_Wrong_AT": {
     "first_name_text": "Test First Name Role_Reviewer",
     "last_name_text": "Test Last Name Role_Reviewer",
-    "email_address_text": "john[at]example.",
-    "sponsor_contact_email_text": "john[at]example."
+    "email_address_text": "john[at]example."
   },
   "Invalid_Email_Data_Less_Greater_Symbols": {
     "first_name_text": "Test First Name Role_Reviewer",
