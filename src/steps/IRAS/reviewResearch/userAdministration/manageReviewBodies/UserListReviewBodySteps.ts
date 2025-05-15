@@ -48,14 +48,14 @@ Then(
 );
 
 When(
-  'I enter an input into the search field to search for the existing {string} user of the current review body for {string}',
-  async ({ userListReviewBodyPage, commonItemsPage }, position: string, fieldKey: string) => {
+  'I enter the {string} of the {string} user shown on the current review body users list, into the search field',
+  async ({ userListReviewBodyPage, commonItemsPage }, fieldKey: string, position: string) => {
     if ((await userListReviewBodyPage.userListTableRows.count()) >= 2) {
       let searchKey: string = '';
       if (fieldKey === 'First_Name' || fieldKey === 'Last_Name' || fieldKey === 'Email_Address') {
         searchKey = await userListReviewBodyPage.getSearchQueryFNameLNameEmail(position, fieldKey);
       } else if (fieldKey === 'Full_Name') {
-        searchKey = await userListReviewBodyPage.getSearchQueryFullName(position, fieldKey);
+        searchKey = await userListReviewBodyPage.getSearchQueryFullName(position);
       }
       const userListBeforeSearch = await commonItemsPage.getAllUsersFromTheTable();
       const userValues: any = userListBeforeSearch.get('searchResultValues');
@@ -132,18 +132,6 @@ Then('the system displays no results found message', async ({ userListReviewBody
       organisationName
   );
 });
-
-When(
-  'I click the first {string} link on the {string}',
-  async ({ commonItemsPage }, linkKey: string, pageKey: string) => {
-    const linkValue = commonItemsPage.linkTextData[pageKey][linkKey];
-    await commonItemsPage.govUkButton
-      .getByText(linkValue, { exact: true })
-      .or(commonItemsPage.govUkLink.getByText(linkValue, { exact: true }))
-      .first()
-      .click();
-  }
-);
 
 Then(
   'I can see the user profile page of the removed user from the review body',

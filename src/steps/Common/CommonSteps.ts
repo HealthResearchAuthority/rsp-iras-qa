@@ -216,16 +216,16 @@ Given(
       await checkCreateUserProfilePage.back_button.click(); //work around for now >> to click on Back link
     } else if (pageKey === 'Check_Create_Review_Body_Page' && linkKey === 'Back') {
       await checkCreateUserProfilePage.back_button.click(); //work around for now >> to click on Back link
-    } else if (pageKey === 'Review_Body_User_List_Page' && linkKey === 'Back_To_Users') {
-      await commonItemsPage.govUkLink.getByText(linkValue).click();
-    } else if (pageKey === 'Search_Add_User_Review_Body_Page' && linkKey === 'Back_To_Users') {
+    } else if (
+      (pageKey === 'Search_Add_User_Review_Body_Page' || pageKey === 'Review_Body_User_List_Page') &&
+      linkKey === 'Back_To_Users'
+    ) {
       await commonItemsPage.govUkLink.getByText(linkValue).click();
     } else if (noOfLinksFound > 1) {
       await commonItemsPage.govUkLink.getByText(linkValue).first().click();
     } else {
       await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
     }
-    // investigate above and which workarounds can be removed with new count check
   }
 );
 

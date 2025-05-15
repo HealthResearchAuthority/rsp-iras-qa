@@ -226,23 +226,22 @@ export default class UserListReviewBodyPage {
     }
     return searchKey;
   }
-  async getSearchQueryFullName(position: string, fieldKey: string) {
+
+  async getSearchQueryFullName(position: string) {
     let searchKey: string = '';
     let firstNameValue: string = '';
     let lastNameValue: string = '';
-    if (fieldKey === 'Full_Name') {
-      const firstNameValues: any = await this.getUserFirstName();
-      const lastNameValues: any = await this.getUserLastName();
-      const rowCount = lastNameValues.length;
-      if (position.toLowerCase() == 'first') {
-        searchKey = firstNameValues[0] + ' ' + lastNameValues[0];
-        firstNameValue = firstNameValues[0];
-        lastNameValue = lastNameValues[0];
-      } else if (position.toLowerCase() == 'last') {
-        searchKey = firstNameValues[rowCount - 1] + ' ' + lastNameValues[rowCount - 1];
-        firstNameValue = firstNameValues[rowCount - 1];
-        lastNameValue = lastNameValues[rowCount - 1];
-      }
+    const firstNameValues: any = await this.getUserFirstName();
+    const lastNameValues: any = await this.getUserLastName();
+    const rowCount = lastNameValues.length;
+    if (position.toLowerCase() == 'first') {
+      searchKey = firstNameValues[0] + ' ' + lastNameValues[0];
+      firstNameValue = firstNameValues[0];
+      lastNameValue = lastNameValues[0];
+    } else if (position.toLowerCase() == 'last') {
+      searchKey = firstNameValues[rowCount - 1] + ' ' + lastNameValues[rowCount - 1];
+      firstNameValue = firstNameValues[rowCount - 1];
+      lastNameValue = lastNameValues[rowCount - 1];
     }
     const fullNameMap = new Map([
       ['firstName', firstNameValue],

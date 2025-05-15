@@ -555,21 +555,21 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I can see the user list page of the review body
     And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
     When I enter 'QA Automation' into the search field
-    And I click the 'Search' button on the 'Search_For_User_To_Add_To_Review_Body'
-    When I click the first 'Add_User' link on the 'Search_For_User_To_Add_To_Review_Body'
-    And I click the 'Add_User_Profile' button on the 'Check_Add_User_Profile_Page'
+    And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Review_Body_Page'
+    And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
     And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
-    And I click the 'Back' link on the 'Search_For_User_To_Add_To_Review_Body'
+    And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
     Then I can see the user list page of the review body
     And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
     When I enter 'QA Automation' into the search field
-    And I click the 'Search' button on the 'Search_For_User_To_Add_To_Review_Body'
-    When I click the first 'Add_User' link on the 'Search_For_User_To_Add_To_Review_Body'
-    And I click the 'Add_User_Profile' button on the 'Check_Add_User_Profile_Page'
+    And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Review_Body_Page'
+    And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
     And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
-    And I click the 'Back' link on the 'Search_For_User_To_Add_To_Review_Body'
+    And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
     Then I can see the user list page of the review body
-    When I enter an input into the search field to search for the existing 'last' user of the current review body for 'Email_Address'
+    When I enter the 'Email Address' of the 'last' user shown on the current review body users list, into the search field
     And I click the 'Search' button on the 'Review_Body_User_List_Page'
     Then the system displays search results matching the search criteria based on 'Email_Address'
     When I Scan the page with the Axe Accessibilty Tool
@@ -589,24 +589,24 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I can see the user list page of the review body
     And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
     When I enter 'QA Automation' into the search field
-    And I click the 'Search' button on the 'Search_For_User_To_Add_To_Review_Body'
-    When I click the first 'Add_User' link on the 'Search_For_User_To_Add_To_Review_Body'
-    And I click the 'Add_User_Profile' button on the 'Check_Add_User_Profile_Page'
+    And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Review_Body_Page'
+    And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
     And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
-    And I click the 'Back' link on the 'Search_For_User_To_Add_To_Review_Body'
+    And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
     Then I can see the user list page of the review body
     And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
     When I enter 'QA Automation' into the search field
-    And I click the 'Search' button on the 'Search_For_User_To_Add_To_Review_Body'
-    When I click the first 'Add_User' link on the 'Search_For_User_To_Add_To_Review_Body'
-    And I click the 'Add_User_Profile' button on the 'Check_Add_User_Profile_Page'
+    And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Review_Body_Page'
+    And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
     And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
-    And I click the 'Back' link on the 'Search_For_User_To_Add_To_Review_Body'
+    And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
     Then I can see the user list page of the review body
-    When I enter an input into the search field to search for the existing 'last' user of the current review body for 'Email_Address'
+    When I enter the 'Email Address' of the 'last' user shown on the current review body users list, into the search field
     And I click the 'Search' button on the 'Review_Body_User_List_Page'
     Then the system displays search results matching the search criteria based on 'Email_Address'
-    When I click the first 'Remove' link on the 'Review_Body_User_List_Page'
+    When I click the 'Remove' link on the 'Review_Body_User_List_Page'
     Then I can see the check and remove user profile page
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
@@ -625,24 +625,24 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I can see the user list page of the review body
     And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
     When I enter 'QA Automation' into the search field
-    And I click the 'Search' button on the 'Search_For_User_To_Add_To_Review_Body'
-    When I click the first 'Add_User' link on the 'Search_For_User_To_Add_To_Review_Body'
-    And I click the 'Add_User_Profile' button on the 'Check_Add_User_Profile_Page'
+    And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Review_Body_Page'
+    And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
     And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
-    And I click the 'Back' link on the 'Search_For_User_To_Add_To_Review_Body'
+    And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
     Then I can see the user list page of the review body
     And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
     When I enter 'QA Automation' into the search field
-    And I click the 'Search' button on the 'Search_For_User_To_Add_To_Review_Body'
-    When I click the first 'Add_User' link on the 'Search_For_User_To_Add_To_Review_Body'
-    And I click the 'Add_User_Profile' button on the 'Check_Add_User_Profile_Page'
+    And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Review_Body_Page'
+    And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
     And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
-    And I click the 'Back' link on the 'Search_For_User_To_Add_To_Review_Body'
+    And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
     Then I can see the user list page of the review body
-    When I enter an input into the search field to search for the existing 'last' user of the current review body for 'Email_Address'
+    When I enter the 'Email Address' of the 'last' user shown on the current review body users list, into the search field
     And I click the 'Search' button on the 'Review_Body_User_List_Page'
     Then the system displays search results matching the search criteria based on 'Email_Address'
-    When I click the first 'Remove' link on the 'Review_Body_User_List_Page'
+    When I click the 'Remove' link on the 'Review_Body_User_List_Page'
     Then I can see the check and remove user profile page
     And I click the 'Remove_User_Profile' button on the 'Check_Remove_User_Profile_Page'
     And I validate 'Remove_User_From_Review_Body_Labels' labels displayed in the success confirmation page when the user removed from the review body
@@ -663,24 +663,24 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I can see the user list page of the review body
     And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
     When I enter 'QA Automation' into the search field
-    And I click the 'Search' button on the 'Search_For_User_To_Add_To_Review_Body'
-    When I click the first 'Add_User' link on the 'Search_For_User_To_Add_To_Review_Body'
-    And I click the 'Add_User_Profile' button on the 'Check_Add_User_Profile_Page'
+    And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Review_Body_Page'
+    And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
     And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
-    And I click the 'Back' link on the 'Search_For_User_To_Add_To_Review_Body'
+    And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
     Then I can see the user list page of the review body
     And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
     When I enter 'QA Automation' into the search field
-    And I click the 'Search' button on the 'Search_For_User_To_Add_To_Review_Body'
-    When I click the first 'Add_User' link on the 'Search_For_User_To_Add_To_Review_Body'
-    And I click the 'Add_User_Profile' button on the 'Check_Add_User_Profile_Page'
+    And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Review_Body_Page'
+    And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
     And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
-    And I click the 'Back' link on the 'Search_For_User_To_Add_To_Review_Body'
+    And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
     Then I can see the user list page of the review body
-    When I enter an input into the search field to search for the existing 'last' user of the current review body for 'Email_Address'
+    When I enter the 'Email Address' of the 'last' user shown on the current review body users list, into the search field
     And I click the 'Search' button on the 'Review_Body_User_List_Page'
     Then the system displays search results matching the search criteria based on 'Email_Address'
-    When I click the first 'Remove' link on the 'Review_Body_User_List_Page'
+    When I click the 'Remove' link on the 'Review_Body_User_List_Page'
     Then I can see the check and remove user profile page
     And I click the 'Remove_User_Profile' button on the 'Check_Remove_User_Profile_Page'
     And I validate 'Remove_User_From_Review_Body_Labels' labels displayed in the success confirmation page when the user removed from the review body
