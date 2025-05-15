@@ -13,9 +13,28 @@ export default class HomePage {
   readonly pageHeading: Locator;
   readonly projectGuidanceText: Locator;
   readonly loginBtn: Locator;
-  readonly manageReviewbodiesLink: Locator;
-  readonly manageUsersLink: Locator;
-
+  readonly workspacesHeading: Locator;
+  readonly approvalsLink: Locator;
+  readonly cagMembersLink: Locator;
+  readonly catLink: Locator;
+  readonly memeberManagementLink: Locator;
+  readonly myResearchLink: Locator;
+  readonly recMembersLink: Locator;
+  readonly sponsorLink: Locator;
+  readonly systemAdministrationLink: Locator;
+  readonly technicalAssuranceLink: Locator;
+  readonly technicalAssuranceReviewersLink: Locator;
+  /*  readonly approvalsHintLabel: Locator;
+  readonly cagMembersHintLabel: Locator;
+  readonly catHintLabel: Locator;
+  readonly memeberManagementHintLabel: Locator;
+  readonly myResearchHintLabel: Locator;
+  readonly recMembersHintLabel: Locator;
+  readonly sponsorHintLabel: Locator;
+  readonly systemAdministrationHintLabel: Locator;
+  readonly technicalAssuranceHintLabel: Locator;
+  readonly technicalAssuranceReviewersHintLabel: Locator;
+*/
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page;
@@ -26,16 +45,32 @@ export default class HomePage {
     //Locators
     this.mainPageContent = this.page.getByTestId('main-content');
     this.pageHeading = this.page.getByRole('heading').getByText(this.homePageTestData.Home_Page.heading);
-    this.projectGuidanceText = this.page.getByRole('paragraph');
+    this.projectGuidanceText = this.page.getByText(this.homePageTestData.Home_Page.guidance_text);
+
+    this.workspacesHeading = this.page.getByRole('heading').getByText(this.homePageTestData.Home_Page.workspaceHeading);
+
     this.loginBtn = this.page
       .locator('.gem-c-button')
       .and(this.page.getByText(this.buttonTextData.Home_Page.Login, { exact: true }));
-    this.manageReviewbodiesLink = this.mainPageContent.getByText(this.linkTextData.Home_Page.Manage_Review_Bodies, {
+
+    this.approvalsLink = this.page.getByRole('link', { name: 'Approvals', exact: true });
+    this.cagMembersLink = this.page.getByRole('link', { name: 'CAG members', exact: true });
+    this.catLink = this.page.getByRole('link', { name: 'CAT', exact: true });
+    this.memeberManagementLink = this.page.getByRole('link', { name: 'Member management', exact: true });
+    this.myResearchLink = this.page.getByRole('link', { name: 'My research', exact: true });
+    this.recMembersLink = this.page.getByRole('link', { name: 'REC members', exact: true });
+    this.sponsorLink = this.page.getByRole('link', { name: 'Sponsor', exact: true });
+    this.systemAdministrationLink = this.page.getByRole('link', { name: 'System administration', exact: true });
+    this.technicalAssuranceLink = this.page.getByRole('link', { name: 'Technical Assurance', exact: true });
+    this.technicalAssuranceReviewersLink = this.page.getByRole('link', {
+      name: 'Technical Assurance reviewers',
       exact: true,
     });
-    this.manageUsersLink = this.mainPageContent.getByText(this.linkTextData.Home_Page.Manage_Users, {
-      exact: true,
-    });
+  }
+
+  //using method is used to get hint label next to headers
+  getFollowingParagraphElement(baseLocator: Locator): Locator {
+    return baseLocator.locator('xpath=following-sibling::p[1]');
   }
 
   //Page Methods
@@ -45,5 +80,6 @@ export default class HomePage {
 
   async assertOnHomePage() {
     await expect(this.pageHeading).toBeVisible();
+    await expect(this.projectGuidanceText).toBeVisible();
   }
 }

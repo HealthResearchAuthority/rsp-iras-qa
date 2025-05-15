@@ -23,9 +23,16 @@
     "My_Applications": "My Applications"
   },
   "Home_Page": {
-    "My_Applications": "You don't have any projects available in the new service",
-    "Manage_Users": "Manage Users",
-    "Manage_Review_Bodies": "Manage review bodies"
+    "Approvals": "Approvals",
+    "CAG_members": "CAG members",
+    "CAT": "CAT",
+    "Member management": "Member management",
+    "My research": "My research",
+    "REC members": "REC members",
+    "Sponsor": "Sponsor",
+    "System administration": "System administration",
+    "Technical Assurance": "Technical Assurance",
+    "Technical Assurance reviewers": "Technical Assurance reviewers"
   },
   "Project_Details_IRAS_Page": {
     "Back": "Back"

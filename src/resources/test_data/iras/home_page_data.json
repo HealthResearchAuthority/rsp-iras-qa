@@ -1,7 +1,21 @@
 {
   "Home_Page": {
     "title": "",
-    "heading": "My research",
-    "guidance_text": "You don't have any projects available in the new service"
+    "heading": "My Account homepage",
+    "guidance_text": "This is your account homepage where you can access your workspaces",
+    "workspaceHeading": "My workspaces"
+  },
+
+  "Label_Texts": {
+    "approvals_hint_label": "Workspace for approvals service staff to receive and process applications and post approval activity for review.",
+    "cagMembers_hint_label": " Workspace for members to review applications and post approval activity.",
+    "cat_hint_label": "Workspace for CAT staff to receive and process applications and post approval activity for review.",
+    "memeberManagement_hint_label": "Workspace for staff to view and update committee member records.",
+    "myResearch_hint_label": "Workspace to view and manage the research I am responsible for.",
+    "recMembers_hint_label": "Workspace for members to review applications and post approval activity.",
+    "sponsor_hint_label": "Workspace to view, manage and authorise the research I am responsible for.",
+    "systemAdministration_hint_label": "Workspace for system administrators to view and manage system administration functions.",
+    "technicalAssurance_hint_label": "Workspace for Technical Assurance staff to receive and process applications and post approval activity for review.",
+    "technicalAssuranceReviewers_hint_label": "Workspace for Technical Assurance reviewers to review applications and post approval activity."
   }
 }
