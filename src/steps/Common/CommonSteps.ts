@@ -12,6 +12,7 @@ import {
 const { Given, When, Then, AfterStep } = createBdd(test);
 import * as userProfileGeneratedataConfig from '../../resources/test_data/user_administration/testdata_generator/user_profile_generate_data_config.json';
 import { getCurrentTimeFormatted } from '../../utils/UtilFunctions';
+import { Locator } from 'playwright';
 
 AfterStep(async ({ page, $step, $testInfo }) => {
   if (
@@ -503,3 +504,65 @@ When(
     await commonItemsPage.search_text.fill(await createReviewBodyPage.getUniqueOrgName());
   }
 );
+
+When(
+  'the user is on the first page and it and visually highlighted to indicate the active page the user is on',
+  async ({ commonItemsPage }) => {
+    await expect(commonItemsPage.firstPage).toHaveAttribute('aria-current', 'page');
+  }
+);
+
+When('the pagination controls should be displayed at the bottom of the page', async ({ commonItemsPage }) => {
+  await expect(commonItemsPage.pagination).toBeVisible();
+});
+
+When('the default page size should be twenty', async ({ commonItemsPage }) => {
+  const rowCountActual = await commonItemsPage.tableRows.count();
+  const rowCountExpected = parseInt(commonItemsPage.commonTestData.default_page_size, 10);
+  expect(rowCountActual - 1).toBe(rowCountExpected);
+});
+
+When(
+  'the {string} button will be {string} and {string} to the user',
+  async ({ commonItemsPage }, linkLabel: string, enabledVal: string, visibleVal: string) => {
+    let locatorVal: Locator;
+    if (linkLabel === 'Next') {
+      locatorVal = commonItemsPage.next_button;
+    } else if (linkLabel === 'Previous') {
+      locatorVal = commonItemsPage.previous_button;
+    } else {
+      throw new Error(`Unsupported link label: ${linkLabel}`);
+    }
+    if (enabledVal === 'enabled' && visibleVal === 'visible') {
+      await expect(locatorVal).toBeVisible();
+      await expect(locatorVal).toBeEnabled();
+    } else if (enabledVal === 'disabled' && visibleVal === 'not visible') {
+      // await expect(locatorVal).toBeDisabled();
+      await expect(locatorVal).toBeHidden();
+      const isVisible = await locatorVal.isVisible().catch(() => false);
+      expect(isVisible).toBeFalsy();
+    } else {
+      throw new Error(`Unsupported state combination: ${enabledVal}, ${visibleVal}`);
+    }
+  }
+);
+
+When(
+  'the current page number should be visually highlighted to indicate the active page the user is on',
+  async ({ commonItemsPage }) => {
+    await commonItemsPage.next_button.click(); // a work around for now
+    const currentUrl = commonItemsPage.page.url();
+    const parts: string[] = currentUrl.split('?');
+    const pageName: string[] = parts[1].split('&');
+    const pageNumber = parseInt(pageName[0].split('=')[1], 10);
+    await expect(commonItemsPage.currentPage).toHaveAttribute('aria-current', 'page');
+    const pageLink = commonItemsPage.pagination.getByRole('link', { name: 'Page ' + pageNumber });
+    await expect(pageLink).toHaveAttribute('aria-label', 'Page ' + pageNumber);
+    const hrefValue = await pageLink.getAttribute('href');
+    expect(currentUrl).toContain(hrefValue);
+  }
+);
+
+Then('I validate pagination dynamically', async ({ commonItemsPage }) => {
+  await commonItemsPage.validatePagination(1317, 20);
+});

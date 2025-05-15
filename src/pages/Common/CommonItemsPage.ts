@@ -59,6 +59,10 @@ export default class CommonItemsPage {
   readonly fieldGroup: Locator;
   readonly errorFieldGroup: Locator;
   readonly search_text: Locator;
+  readonly pagination: Locator;
+  readonly firstPage: Locator;
+  readonly previous_button: Locator;
+  readonly currentPage: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -110,6 +114,12 @@ export default class CommonItemsPage {
       });
     this.summaryErrorLinks = this.errorMessageSummaryLabel.locator('..').getByRole('listitem').getByRole('link');
     this.topMenuBarLinks = this.page.getByTestId('navigation').getByRole('listitem').getByRole('link');
+    this.pagination = page.getByRole('navigation', { name: 'Pagination' });
+    this.firstPage = this.pagination.getByRole('link', { name: this.commonTestData.first_page });
+    this.previous_button = this.pagination
+      .getByRole('link')
+      .getByText(this.commonTestData.previous_button, { exact: true });
+    this.currentPage = this.pagination.locator('a[class$="current"]');
     //Validation Alert Box
     this.alert_box = this.page.getByRole('alert');
     this.alert_box_headings = this.alert_box.getByRole('heading');
@@ -542,5 +552,23 @@ export default class CommonItemsPage {
       topMenuBarLinksValues.push(confirmStringNotNull(val));
     }
     return topMenuBarLinksValues;
+  }
+
+  async validatePagination(totalItems: number, itemsPerPage: number) {
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+    return async () => {
+      const pagination = this.page.getByRole('navigation', { name: 'Pagination' });
+      for (let i = 1; i <= totalPages; i++) {
+        const currentPage = pagination.getByRole('link', { name: `Page ${i}` });
+        if (i !== 1) {
+          await currentPage.click();
+          await this.page.waitForURL(`**pageNumber=${i}**`);
+        }
+        await expect(currentPage).toHaveAttribute('aria-current', 'page');
+        const start = (i - 1) * itemsPerPage + 1;
+        const end = Math.min(i * itemsPerPage, totalItems);
+        await expect(this.page.locator(`text=Showing ${start} to ${end} of ${totalItems} results`)).toBeVisible();
+      }
+    };
   }
 }

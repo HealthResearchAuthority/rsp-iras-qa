@@ -2,7 +2,8 @@
 Feature: User Administration: System Administration
 
   Background:
-    Given I have navigated to the 'System_Administration_Page'
+    Given I have navigated to the 'Home_Page'
+    When I click the 'System_Administration' link on the 'Home_Page'
     Then I can see the system administration home page
 
   @rsp-2931 @SystemAdministrationPage

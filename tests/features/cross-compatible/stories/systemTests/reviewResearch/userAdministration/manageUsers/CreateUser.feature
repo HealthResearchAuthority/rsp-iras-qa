@@ -3,7 +3,10 @@
 Feature: User Administration: Manage Users - Create user
 
     Background:
-        Given I have navigated to the 'System_Administration_Page'
+        Given I have navigated to the 'Home_Page'
+        When I click the 'System_Administration' link on the 'Home_Page'
+        Then I can see the system administration home page
+        # Given I have navigated to the 'System_Administration_Page'
         When I click the 'Manage_Users' link on the 'System_Administration_Page'
         Then I can see the 'Manage_Users_Page'
         When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
