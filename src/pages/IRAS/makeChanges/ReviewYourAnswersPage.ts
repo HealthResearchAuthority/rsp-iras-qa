@@ -43,6 +43,7 @@ export default class ReviewYourAnswersPage {
   readonly primary_sponsor_organisation_row: Locator;
   readonly primary_sponsor_organisation_text: Locator;
   readonly primary_sponsor_organisation_change_link: Locator;
+  readonly primary_sponsor_orgainisation_enter_link: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -141,6 +142,9 @@ export default class ReviewYourAnswersPage {
     this.primary_sponsor_organisation_change_link = this.primary_sponsor_organisation_row.getByText(
       this.linkTextData.Review_Your_Answers_Page.Change
     );
+    this.primary_sponsor_orgainisation_enter_link = this.primary_sponsor_organisation_text.getByText(
+      this.reviewYourAnswersPageTestData.Review_Your_Answers_Page.primary_sponsor_orgainisation_enter_link
+    );
   }
 
   //Page Methods
@@ -163,6 +167,9 @@ export default class ReviewYourAnswersPage {
         break;
       case 'chief_investigator':
         await this.chief_investigator_email_change_link.click();
+        break;
+      case 'primary_sponsor_organisation':
+        await this.primary_sponsor_organisation_change_link.click();
         break;
       case 'sponsor_contact':
         await this.sponsor_contact_email_change_link.click();
@@ -191,6 +198,9 @@ export default class ReviewYourAnswersPage {
         break;
       case 'chief_investigator':
         await this.chief_investigator_email_enter_link.click();
+        break;
+      case 'primary_sponsor_organisation':
+        await this.primary_sponsor_orgainisation_enter_link.click();
         break;
       case 'sponsor_contact':
         await this.sponsor_contact_email_enter_link.click();

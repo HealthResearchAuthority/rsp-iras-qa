@@ -1,20 +1,25 @@
-import { Page } from '@playwright/test';
+import { Locator, Page } from '@playwright/test';
 import * as rtsPageTestData from '../../resources/test_data/common/rts_page_data.json';
 
 //Declare Page Objects
 export default class RtsPage {
   readonly page: Page;
   readonly rtsPageTestData: typeof rtsPageTestData;
+  readonly jsonDataPreLabel: Locator;
+  bearerToken: string;
+  rtsResponseList: string[] = [];
 
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page;
     this.rtsPageTestData = rtsPageTestData;
+
+    //Locators
+    this.jsonDataPreLabel = page.locator('pre');
   }
 
   //Page Methods
   async authoriseRTS(request: any, dataset: any): Promise<string> {
-    let bearerToken: string;
     const idgBaseUrl: string = dataset.idg_base_url;
     const form = {
       grant_type: dataset.grant_type,
@@ -45,7 +50,7 @@ export default class RtsPage {
         console.error(authResponse);
         throw Error('REQUESTS WILL BE UNAUTHORIZED - STOPPING TEST EXECUTION');
       } else {
-        bearerToken = 'Bearer ' + authResponse.access_token;
+        this.bearerToken = 'Bearer ' + authResponse.access_token;
       }
     } catch (error) {
       console.error(error);
@@ -57,7 +62,7 @@ export default class RtsPage {
       console.error(await response.text());
       throw Error('FAILURE! REQUESTS WILL BE UNAUTHORIZED - STOPPING TEST EXECUTION');
     }
-    return bearerToken;
+    return this.bearerToken;
   }
 
   async executeRTSRequest(request: any, dataset: any, bearerToken: string, requestHeader: string): Promise<any> {
