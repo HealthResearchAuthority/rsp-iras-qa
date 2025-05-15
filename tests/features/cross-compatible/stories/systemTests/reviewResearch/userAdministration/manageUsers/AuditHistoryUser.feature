@@ -7,7 +7,7 @@ Feature: User Administration: Manage Users - View audit history for users
         And I can see the 'Manage_Users_Page'
 
     @VerifyAuditHistoryUserBackLinkNavigation
-    Scenario: Verify the user can navigate from audit History page of the user by clicking 'Back' link
+    Scenario: Verify the user can navigate from audit history page of the user by clicking 'Back' link
         And I select a 'QA Automation' User to View and Edit which is 'active'
         And I can see the user profile page
         When I click the 'View_Users_Audit_History' link on the 'User_Profile_Page'

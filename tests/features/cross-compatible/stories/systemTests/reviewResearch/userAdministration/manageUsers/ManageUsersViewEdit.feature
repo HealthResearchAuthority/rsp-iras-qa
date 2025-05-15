@@ -162,11 +162,11 @@ Feature: User Administration: Manage user profiles, view and edit user profile
 
     @rsp-3122 @VerifyErrorMessagesInvalidData @EditUserProfileVerifyErrorMessagesInvalidData
     Scenario Outline: Validate error messages are displayed for invalid data in edit user profile page
-        And I select a 'QA Automation' User to View and Edit which is '<Status>'
+        And I search and click on view edit link for existing 'Valid_Data_Role_Operations' user with '<Status>' status from the manage user page
         Then I can see the user profile page
         When I click the '<Edit_User_Field>' change link for '<User_Role>' on the user profile page
         Then I can see the edit user profile page
-        And  I uncheck the previously selected checkboxes on the edit user profile page for '<Edit_User_Profile>' when the role is selected as operations
+        And I uncheck the previously selected checkboxes on the edit user profile page for '<Edit_User_Profile>' when the role is selected as operations
         And I update user profile with '<Invalid_Data_Edit_User>'
         And I click the 'Save' button on the 'Edit_User_Profile_Page'
         Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Edit_User_Profile_Page'
@@ -180,7 +180,7 @@ Feature: User Administration: Manage user profiles, view and edit user profile
             | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | ACTIVE | Missing_Mandatory_Field_Country_Role_Operations           | Error_Message_Missing_Mandatory_Field_Country_Role_Operations           |
             | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | ACTIVE | Missing_Mandatory_Field_Access_Required_Role_Operations   | Error_Message_Missing_Mandatory_Field_Access_Required_Role_Operations   |
             | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | ACTIVE | Invalid_Character_Limit                                   | Error_Message_Invalid_Character_Limit                                   |
-            | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | ACTIVE | Invalid_Email_Data_Max_Char                               | Error_Message_Invalid_Character_Limit_field_Email_Address               |
+            | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | ACTIVE | Invalid_Email_Data_Max_Char                               | Error_Message_Invalid_Character_Limit_Field_Email_Address               |
             | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | ACTIVE | Incorrect_Format_Telephone_Data                           | Error_Message_Incorrect_Format_Field_Telephone                          |
             | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | ACTIVE | Incorrect_Format_Email                                    | Error_Message_Incorrect_Format_Field_Email_Address                      |
             | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | ACTIVE | Invalid_Email_Data_Start_With_Dot                         | Error_Message_Incorrect_Format_Field_Email_Address                      |

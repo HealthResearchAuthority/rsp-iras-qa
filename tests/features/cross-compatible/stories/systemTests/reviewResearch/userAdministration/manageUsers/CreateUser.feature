@@ -24,7 +24,7 @@ Feature: User Administration: Manage Users - Create user
         When I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
         Then I can see the 'Manage_Users_Page'
         And I capture the page screenshot
-        Then I can see the '<Validation_Text_Manage_Users_List>' ui labels on the manage users list page
+        Then I can see the '<Validation_Text_Manage_Users_List>' ui labels on the user profile page
         And I can see the newly created user record should be present in the list for '<Add_User_Profile>' with 'ACTIVE' status in the manage user page
         And I capture the page screenshot
         And I click the 'Back' link on the 'Manage_Users_Page'
@@ -261,7 +261,7 @@ Feature: User Administration: Manage Users - Create user
             | Missing_Mandatory_Field_Country_Role_Operations           | Error_Message_Missing_Mandatory_Field_Country_Role_Operations           |
             | Missing_Mandatory_Field_Access_Required_Role_Operations   | Error_Message_Missing_Mandatory_Field_Access_Required_Role_Operations   |
             | Invalid_Character_Limit                                   | Error_Message_Invalid_Character_Limit                                   |
-            | Invalid_Email_Data_Max_Char                               | Error_Message_Invalid_Character_Limit_field_Email_Address               |
+            | Invalid_Email_Data_Max_Char                               | Error_Message_Invalid_Character_Limit_Field_Email_Address               |
             | Incorrect_Format_Telephone_Data                           | Error_Message_Incorrect_Format_Field_Telephone                          |
             | Incorrect_Format_Email                                    | Error_Message_Incorrect_Format_Field_Email_Address                      |
             | Invalid_Email_Data_Start_With_Dot                         | Error_Message_Incorrect_Format_Field_Email_Address                      |
