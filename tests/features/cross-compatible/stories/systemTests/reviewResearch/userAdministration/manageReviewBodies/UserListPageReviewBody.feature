@@ -6,7 +6,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
         Then I can see the 'Manage_Review_Bodies_Page'
 
-    @VerifyUserListCreateReviewBody @NoUsersReviewBody
+    @VerifyUserListCreateReviewBody @UserListReviewBodyNoUsersReviewBody
     Scenario: Verify the user can view the user list page of the newly created review body
         And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
         Then I can see the 'Create_Review_Body_Page'
@@ -36,7 +36,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I capture the page screenshot
         Then the system displays no results found message
 
-    @DefaultSort
+    @UserListReviewBodyDefaultSort
     Scenario: Verify the user can view the user list page of any selected review body and it is sorted by default in the alphabetical order of the 'First Name'
         When I enter 'QA Automation' into the search field
         And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
@@ -58,7 +58,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I can see the user list of the selected review body is sorted by default in the alphabetical order of the 'First Name'
 
 
-    @SearchResultsFound @BackToReviewBodyProfileLink
+    @UserListReviewBodySearchResultsFound @UserListReviewBodyBackToReviewBodyProfileLink
     Scenario Outline: Verify the user can search for the users in the user list page and navigate back to review body profile page
         When I enter 'QA Automation' into the search field
         And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
@@ -95,7 +95,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
             | Full_Name     | First    |
             | Full_Name     | Last     |
 
-    @NoResultsFoundRemoveUser @rsp-3273 @RemoveAnotherUserFromTheReviewBodyLink
+    @UserListReviewBodyNoResultsFoundRemoveUser @rsp-3273 @UserListReviewBodyRemoveAnotherUserFromTheReviewBodyLink
     Scenario: Verify the user can search and remove existing user of the selected review body and navigate to manage users page when no results found in the search for removed user
         When I enter 'QA Automation' into the search field
         And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
@@ -136,7 +136,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I search and click on view edit link for the removed user from the review body in the manage user page
         Then I can see the user profile page of the removed user from the review body
 
-    @rsp-3273 @ManageUsersLink
+    @rsp-3273 @UserListReviewBodyManageUsersLink
     Scenario: Verify the user can search and remove existing user of the selected review body and repeat the process with remove another user from the review body link
         When I enter 'QA Automation' into the search field
         And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
@@ -188,7 +188,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I capture the page screenshot
         Then I can see the 'Manage_Users_Page'
 
-    @BackToReviewBodyUserListAfterRemoveUser @rsp-3273 @BackToUsersLink
+    @UserListReviewBodyBackToReviewBodyUserListAfterRemoveUser @rsp-3273 @UserListReviewBodyBackToUsersLink
     Scenario: Verify the user can search and remove the user from the selected review body and navigate to review body user list page when no results found for the removed user
         When I enter 'QA Automation' into the search field
         And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
@@ -227,7 +227,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         Then I can see the user list page of the review body
 
 
-    @BackToManageReviewBodiesRemoveUser @rsp-3273
+    @UserListReviewBodyBackToManageReviewBodiesRemoveUser @rsp-3273
     Scenario: Verify the user can search and remove the existing user from the selected review body and navigate to manage review bodies page from the confirmation page
         When I enter 'QA Automation' into the search field
         And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
@@ -258,7 +258,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I capture the page screenshot
         Then I can see the 'Manage_Review_Bodies_Page'
 
-    @BackToReviewBodyUserListCheckRemoveUser @rsp-3273
+    @UserListReviewBodyBackToReviewBodyUserListCheckRemoveUser @rsp-3273
     Scenario: Verify the user can navigate to user list page of the review body from check and remove user profile page using back link
         When I enter 'QA Automation' into the search field
         And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
@@ -285,7 +285,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I click the 'Back' link on the 'Check_Remove_User_Profile_Page'
         Then I can see the user list page of the review body
 
-    @RemoveUserNoSearch @rsp-3273
+    @UserListReviewBodyRemoveUserNoSearch @rsp-3273
     Scenario: Verify the user can navigate to user list page of the review body and remove any user from the review body without using search
         When I enter 'QA Automation' into the search field
         And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
