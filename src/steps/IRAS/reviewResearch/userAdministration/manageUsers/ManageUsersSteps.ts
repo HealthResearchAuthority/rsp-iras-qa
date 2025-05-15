@@ -73,19 +73,6 @@ When(
 );
 
 Then(
-  'I can see the {string} ui labels on the manage users list page',
-  async ({ commonItemsPage, manageUsersPage }, datasetName: string) => {
-    const dataset = manageUsersPage.manageUsersPageTestData.Manage_Users_Page[datasetName];
-    for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        const labelVal = await commonItemsPage.getUiLabel(key, manageUsersPage);
-        expect(labelVal).toBe(dataset[key]);
-      }
-    }
-  }
-);
-
-Then(
   'I select a {string} User to View and Edit which is {string}',
   async ({ manageUsersPage }, userNamePrefix: string, status: string) => {
     let statusText: string;

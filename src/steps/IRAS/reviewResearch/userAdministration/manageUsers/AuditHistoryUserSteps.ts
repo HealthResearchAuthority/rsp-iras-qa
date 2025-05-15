@@ -83,7 +83,6 @@ Then(
       const userEmail = await userProfilePage.getEmail();
       eventDescriptionExpectedValue = userEmail + dataset.event_description_text;
     } else if (datasetName == 'Edit_User_Country') {
-      //defect - should be ', ', change after fix is in
       eventDescriptionExpectedValue = await auditHistoryUserPage.getUserAuditEventDescriptionValue(
         dataset.event_description_text,
         (await userProfilePage[`get${methodType}`]()).join(', '),

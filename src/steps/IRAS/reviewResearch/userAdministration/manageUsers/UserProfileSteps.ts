@@ -29,7 +29,6 @@ Then('I can see the user profile page', async ({ userProfilePage }) => {
       confirmStringNotNull(await userProfilePage.access_required_value.textContent()).split(', ')
     );
   }
-  console.log(await userProfilePage.getAccessRequired());
 });
 
 Then(
@@ -88,6 +87,19 @@ When(
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
         await commonItemsPage.validateUIComponentValues(dataset, key, editUserProfilePage);
+      }
+    }
+  }
+);
+
+Then(
+  'I can see the {string} ui labels on the user profile page',
+  async ({ commonItemsPage, userProfilePage }, datasetName: string) => {
+    const dataset = userProfilePage.userProfilePageTestData[datasetName];
+    for (const key in dataset) {
+      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+        const labelVal = await commonItemsPage.getUiLabel(key, userProfilePage);
+        expect(labelVal).toBe(dataset[key]);
       }
     }
   }
