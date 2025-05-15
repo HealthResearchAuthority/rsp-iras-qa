@@ -41,7 +41,8 @@
   },
   "Manage_Users_Page": {
     "Add_New_User_Profile_Record": "Add a new user profile record",
-    "Back": "Back"
+    "Back": "Back",
+    "View_Edit": "View/Edit"
   },
   "Create_User_Profile_Page": {
     "Back": "Back"
@@ -62,7 +63,9 @@
   "Confirmation_Page": {
     "Back": "Back",
     "Back_To_Manage_Users": "Back to Manage users",
-    "Back_To_Manage_Review_Bodies": "Back to Manage review bodies"
+    "Back_To_Manage_Review_Bodies": "Back to Manage review bodies",
+    "Remove_Another_User_From_The_Review_Body": "Remove another user from review body",
+    "Add_Another_User_To_The_Review_Body": " Add another user to review body"
   },
   "Manage_Review_Bodies_Page": {
     "Back": "Back",
@@ -102,12 +105,19 @@
   "Project_Overview_Save_For_Later_Page": {
     "Project_Details": "Project details"
   },
+  "Review_Body_User_List_Page": {
+    "Back_To_Review_Body_Profile": "Back to review body profile",
+    "Manage_Users": "Manage users",
+    "Remove": "Remove",
+    "Add_User_To_This_Review_Body": "Add a user to this review body",
+    "Back_To_Users": "Back to Users for "
+  },
+  "Check_Remove_User_Profile_Page": {
+    "Back": "Back"
+  },
   "Review_Your_Answers_Page": {
     "Back": "Back",
     "Change": "Change"
-  },
-  "Review_Body_User_List_Page": {
-    "Add_User_To_Review_Body": "Add a user to this review body"
   },
   "Search_Add_User_Review_Body_Page": {
     "Back": "Back",

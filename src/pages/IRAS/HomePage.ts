@@ -26,7 +26,9 @@ export default class HomePage {
     //Locators
     this.mainPageContent = this.page.getByTestId('main-content');
     this.pageHeading = this.page.getByRole('heading').getByText(this.homePageTestData.Home_Page.heading);
-    this.projectGuidanceText = this.page.getByRole('paragraph');
+    this.projectGuidanceText = this.page
+      .getByRole('paragraph')
+      .getByText(this.homePageTestData.Home_Page.guidance_text);
     this.loginBtn = this.page
       .locator('.gem-c-button')
       .and(this.page.getByText(this.buttonTextData.Home_Page.Login, { exact: true }));
@@ -45,5 +47,6 @@ export default class HomePage {
 
   async assertOnHomePage() {
     await expect(this.pageHeading).toBeVisible();
+    await expect(this.projectGuidanceText).toBeVisible();
   }
 }

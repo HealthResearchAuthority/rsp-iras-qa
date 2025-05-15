@@ -29,7 +29,6 @@ Then('I can see the user profile page', async ({ userProfilePage }) => {
       confirmStringNotNull(await userProfilePage.access_required_value.textContent()).split(', ')
     );
   }
-  console.log(await userProfilePage.getAccessRequired());
 });
 
 Then(

@@ -182,6 +182,36 @@ Then(
   }
 );
 
+Then(
+  'I validate {string} labels displayed in the success confirmation page when the user removed from the review body',
+  async ({ confirmationPage, checkRemoveUserReviewBodyPage, reviewBodyProfilePage }, validationLabelsDatasetName) => {
+    const firstName = await checkRemoveUserReviewBodyPage.getFirstName();
+    const lastName = await checkRemoveUserReviewBodyPage.getLastName();
+    const organisationName = await reviewBodyProfilePage.getOrgName();
+    const validationLabelsDataset = confirmationPage.confirmationPageTestData[validationLabelsDatasetName];
+    const expectedSuccessHeader = validationLabelsDataset.remove_user_confirmation_success_header_label;
+    const expectedSuccessBody =
+      firstName +
+      ' ' +
+      lastName +
+      validationLabelsDataset.remove_user_confirmation_success_body_two_label +
+      organisationName +
+      '.';
+    expect(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim()).toBe(
+      expectedSuccessHeader
+    );
+    expect(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim()).toBe(
+      expectedSuccessBody
+    );
+    expect(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim()).toBe(
+      expectedSuccessHeader
+    );
+    expect(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim()).toBe(
+      expectedSuccessBody
+    );
+  }
+);
+
 Given(
   'the add user to review body confirmation page displays the expected guidance text',
   async ({ confirmationPage, searchAddUserReviewBodyPage, reviewBodyProfilePage }) => {

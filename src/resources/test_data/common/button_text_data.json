@@ -76,11 +76,17 @@
   "Review_Body_User_List_Page": {
     "Search": "Search"
   },
-  "Search_Add_User_Review_Body_Page": {
-    "Search": "Search"
+  "Check_Remove_User_Profile_Page": {
+    "Remove_User_Profile": "Remove user profile"
   },
   "Check_Add_User_Review_Body_Page": {
     "Add_User": "Add user profile"
+  },
+  "Search_Add_User_Review_Body_Page": {
+    "Search": "Search"
+  },
+  "Manage_Review_Bodies_Page": {
+    "Search": "Search"
   },
   "Review_Your_Answers_Page": {
     "Confirm_Project_Details": "Confirm project details"
