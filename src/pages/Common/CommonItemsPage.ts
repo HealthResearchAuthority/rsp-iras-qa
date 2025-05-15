@@ -465,7 +465,7 @@ export default class CommonItemsPage {
 
   async clickErrorSummaryLink<PageObject>(errorMessageFieldDataset: JSON, key: string, page: PageObject) {
     const element: Locator = await page[key].first();
-    await this.summaryErrorLinks.filter({ hasText: errorMessageFieldDataset[key] }).click();
+    await this.summaryErrorLinks.filter({ hasText: new RegExp(`${errorMessageFieldDataset[key]}`) }).click();
     return element;
   }
 
