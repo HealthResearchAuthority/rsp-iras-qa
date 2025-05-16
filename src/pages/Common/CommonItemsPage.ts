@@ -556,26 +556,166 @@ export default class CommonItemsPage {
     return topMenuBarLinksValues;
   }
 
-  async validatePagination(totalItems: number, itemsPerPage: number) {
+  async validatePaginationResults(totalItems: number, itemsPerPage: number) {
     const totalPages = Math.ceil(totalItems / itemsPerPage);
-    return async () => {
-      const pagination = this.page.getByRole('navigation', { name: 'Pagination' });
-      for (let i = 1; i <= totalPages; i++) {
-        const currentPage = pagination.getByRole('link', { name: `Page ${i}` });
-        if (i !== 1) {
-          await currentPage.click();
-          await this.page.waitForURL(`**pageNumber=${i}**`);
-        }
-        await expect(currentPage).toHaveAttribute('aria-current', 'page');
-        const start = (i - 1) * itemsPerPage + 1;
-        const end = Math.min(i * itemsPerPage, totalItems);
-        await expect(this.page.locator(`text=Showing ${start} to ${end} of ${totalItems} results`)).toBeVisible();
+    for (let i = 1; i <= totalPages; i++) {
+      const currentPage = this.pagination.getByRole('link', { name: `Page ${i}`, exact: true });
+      if (i !== 1) {
+        await currentPage.click();
+        const currentUrl = this.page.url();
+        const hrefValue = await currentPage.getAttribute('href');
+        expect(currentUrl).toContain(hrefValue);
       }
-    };
+      await expect(currentPage).toHaveAttribute('aria-current', 'page');
+      const start = (i - 1) * itemsPerPage + 1;
+      const end = Math.min(i * itemsPerPage, totalItems);
+      await expect(this.pagination_results).toBeVisible();
+      await expect(this.pagination_results).toHaveText(`Showing ${start} to ${end} of ${totalItems} results`);
+    }
   }
 
   async getPaginationResults() {
-    const summaryErrorActualValues = confirmStringNotNull(await this.pagination_results.textContent());
-    return summaryErrorActualValues;
+    const paginationResultsActualValues = confirmStringNotNull(await this.pagination_results.textContent());
+    return paginationResultsActualValues;
+  }
+
+  async validatePagination(totalItems: number, itemsPerPage: number) {
+    await this.firstPage.click();
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+    for (let i = 1; i <= totalPages; i++) {
+      const currentPage = this.pagination.getByRole('link', { name: `Page ${i}`, exact: true });
+      if (i !== 1) {
+        await currentPage.click();
+      }
+      await expect(currentPage).toHaveAttribute('aria-current', 'page');
+      const start = (i - 1) * itemsPerPage + 1;
+      const end = Math.min(i * itemsPerPage, totalItems);
+      await expect(this.pagination_results).toHaveText(`Showing ${start} to ${end} of ${totalItems} results`);
+      const pageLinks = this.pagination.locator('a[aria-label^="Page"]');
+      const count = await pageLinks.count();
+      const labels: string[] = [];
+      for (let i = 0; i < count; i++) {
+        labels.push(confirmStringNotNull(await pageLinks.nth(i).getAttribute('aria-label')));
+      }
+      const numericPages = labels
+        .map((label) => label?.match(/^Page (\d+)$/)?.[1]) // Extract the number part
+        .filter(Boolean) // Remove null/undefined
+        .map(Number) // Convert to number
+        .sort((a, b) => a - b); // Sort ascending
+      const currentPageLink = this.pagination.locator('a[aria-current="page"]');
+      const currentPageLabel = await currentPageLink.getAttribute('aria-label');
+      const currentPageNumber = parseInt(currentPageLabel?.replace('Page ', '') || '', 10);
+      expect(numericPages).toContain(1); // First page
+      expect(numericPages).toContain(Math.max(...numericPages)); // Last page
+      expect(numericPages).toContain(currentPageNumber); // Current page
+      if (currentPageNumber !== 1) {
+        expect(numericPages).toContain(currentPageNumber - 1); // One before
+      }
+      if (currentPageNumber !== Math.max(...numericPages)) {
+        expect(numericPages).toContain(currentPageNumber + 1); // One after
+      }
+    }
+  }
+
+  async validateEllipsesInPagination() {
+    await this.firstPage.click();
+    const getPageItems = () => this.pagination.locator('li'); // Adjust if your structure differs
+    const totalPages = await this.getTotalPages(this.pagination);
+    const ellipsisPositions: Record<number, number[]> = {}; // currentPage -> ellipsis indices
+
+    for (let currentPage = 1; currentPage <= totalPages; currentPage++) {
+      // Click the current page if it's not already selected
+      const currentPageLink = this.pagination.locator(`a[aria-label="Page ${currentPage}"]`);
+      if (await currentPageLink.isVisible()) {
+        await currentPageLink.click();
+        await this.page.waitForLoadState('networkidle');
+      }
+
+      const items = await getPageItems().allTextContents();
+      const ellipsisIndices: number[] = [];
+
+      for (let i = 0; i < items.length; i++) {
+        const text = items[i].trim();
+        if (text === '⋯') {
+          ellipsisIndices.push(i);
+        }
+      }
+
+      if (ellipsisIndices.length > 0) {
+        ellipsisPositions[currentPage] = ellipsisIndices;
+      }
+
+      // Validate that ellipses appear only when pages are skipped
+      const visiblePages = items
+        .map((text) => text.trim())
+        .filter((text) => /^\d+$/.test(text))
+        .map(Number);
+
+      // Step 1: Get all pagination items with their index
+      const itemsWithIndex = items.map((text, index) => ({
+        text: text.trim(),
+        index,
+      }));
+      // Step 2: Identify ellipsis index
+      const ellipsisIndex = itemsWithIndex.find((item) => item.text === '⋯' || item.text.includes('⋯'))?.index;
+
+      // Step 3: Identify visible page indices
+      const visiblePageIndices = itemsWithIndex.filter((item) => /^\d+$/.test(item.text)).map((item) => item.index);
+      // Step 4: Validate ellipsis is between visible pages
+      if (ellipsisIndex !== undefined && visiblePageIndices.length >= 2) {
+        const minIndex = Math.min(...visiblePageIndices);
+        const maxIndex = Math.max(...visiblePageIndices);
+        expect(ellipsisIndex).toBeGreaterThan(minIndex);
+        expect(ellipsisIndex).toBeLessThan(maxIndex);
+      }
+
+      const hasSkippedPages =
+        visiblePages.length >= 2 && visiblePages[visiblePages.length - 1] - visiblePages[1] > visiblePages.length - 2;
+
+      if (hasSkippedPages) {
+        expect(ellipsisIndices.length).toBeGreaterThan(0); // Ellipsis should appear
+      } else {
+        expect(ellipsisIndices.length).toBe(0); // No ellipsis if no skipped pages
+      }
+      if (currentPage === 1) {
+        expect(visiblePages).toEqual([1, 2, totalPages]);
+        // expect(ellipsisPositions).toBeBetween(2, totalPages);//wrong
+      }
+
+      // Validation logic
+      expect(visiblePages).toContain(currentPage); // Current page is visible
+
+      if (currentPage > 1) {
+        expect(visiblePages).toContain(currentPage - 1); // Previous page
+      }
+
+      if (currentPage < totalPages) {
+        expect(visiblePages).toContain(currentPage + 1); // Next page
+      }
+
+      expect(visiblePages).toContain(1); // First page
+      expect(visiblePages).toContain(totalPages); // Last page
+    }
+    // Pseudocode logic for visible pages and ellipsis
+
+    console.log('Ellipsis positions by page:', ellipsisPositions);
+  }
+
+  // Helper to get the last page number from the pagination
+  async getTotalPages(pagination: Locator): Promise<number> {
+    const pageLinks = pagination.locator('a[aria-label^="Page"]');
+    const count = await pageLinks.count();
+    let maxPage = 1;
+
+    for (let i = 0; i < count; i++) {
+      const label = await pageLinks.nth(i).getAttribute('aria-label');
+      const match = label?.match(/^Page (\d+)$/);
+      if (match) {
+        const num = parseInt(match[1], 10);
+        if (num > maxPage) maxPage = num;
+      }
+    }
+
+    return maxPage;
   }
 }

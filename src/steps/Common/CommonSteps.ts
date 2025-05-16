@@ -559,14 +559,43 @@ When(
     await expect(pageLink).toHaveAttribute('aria-label', 'Page ' + pageNumber);
     const hrefValue = await pageLink.getAttribute('href');
     expect(currentUrl).toContain(hrefValue);
+    await commonItemsPage.previous_button.click();
   }
 );
 
-Then('I validate pagination dynamically', async ({ commonItemsPage }) => {
-  const paginationResults = await commonItemsPage.getPaginationResults();
-  const paginationResultsParts: string[] = paginationResults.split(' results');
-  const paginationResultsPartsOne: string[] = paginationResultsParts[0].split('Showing ');
-  const paginationResultsPartsTwo: string[] = paginationResultsPartsOne[1].split(' of ');
-  const totalItems = parseInt(paginationResultsPartsTwo[1], 10);
-  await commonItemsPage.validatePagination(totalItems, 20);
+Then(
+  'I sequentially click through each page and verify that the pagination results are correctly displayed at the bottom',
+  async ({ commonItemsPage }) => {
+    const paginationResults = await commonItemsPage.getPaginationResults();
+    const paginationResultsParts: string[] = paginationResults.split(' results');
+    const paginationResultsPartsOne: string[] = paginationResultsParts[0].split('Showing ');
+    const paginationResultsPartsTwo: string[] = paginationResultsPartsOne[1].split(' of ');
+    const totalItems = parseInt(paginationResultsPartsTwo[1], 10);
+    const pageSize = parseInt(commonItemsPage.commonTestData.default_page_size, 10);
+    await commonItemsPage.validatePaginationResults(totalItems, pageSize);
+  }
+);
+
+Then(
+  'the pagination should show at least one page immediately before and after the current page and the first and last pages',
+  async ({ commonItemsPage }) => {
+    const paginationResults = await commonItemsPage.getPaginationResults();
+    const paginationResultsParts: string[] = paginationResults.split(' results');
+    const paginationResultsPartsOne: string[] = paginationResultsParts[0].split('Showing ');
+    const paginationResultsPartsTwo: string[] = paginationResultsPartsOne[1].split(' of ');
+    const totalItems = parseInt(paginationResultsPartsTwo[1], 10);
+    const pageSize = parseInt(commonItemsPage.commonTestData.default_page_size, 10);
+    await commonItemsPage.validatePagination(totalItems, pageSize);
+  }
+);
+
+Then('if there are any skipped pages then ellipses will be used to replace the number', async ({ commonItemsPage }) => {
+  // const paginationResults = await commonItemsPage.getPaginationResults();
+  // const paginationResultsParts: string[] = paginationResults.split(' results');
+  // const paginationResultsPartsOne: string[] = paginationResultsParts[0].split('Showing ');
+  // const paginationResultsPartsTwo: string[] = paginationResultsPartsOne[1].split(' of ');
+  // const totalItems = parseInt(paginationResultsPartsTwo[1], 10);
+  // const pageSize = parseInt(commonItemsPage.commonTestData.default_page_size, 10);
+  // await commonItemsPage.validatePagination(totalItems, pageSize);
+  await commonItemsPage.validateEllipsesInPagination();
 });

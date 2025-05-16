@@ -216,9 +216,9 @@ Feature: User Administration: Manage user profiles, view and edit user profile
         And the 'Next' button will be 'enabled' and 'visible' to the user
         And the 'Previous' button will be 'disabled' and 'not visible' to the user
         And the current page number should be visually highlighted to indicate the active page the user is on
-        Then I validate pagination dynamically
-# And the pagination should show at least one page immediately before and after the current page and the first and last pages
-# And If there are any skipped pages then ellipses will be used to replace the number
+        Then I sequentially click through each page and verify that the pagination results are correctly displayed at the bottom
+        And the pagination should show at least one page immediately before and after the current page and the first and last pages
+        And if there are any skipped pages then ellipses will be used to replace the number
 
 # @ManageUserPagination @ManageUserPaginationLastPage
 # Scenario: Verify pagination in manage users page when user is on the last page
