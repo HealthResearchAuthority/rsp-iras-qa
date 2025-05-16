@@ -86,7 +86,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I can see the project details title page
     And I fill the project details title page with '<Project_Details_Title>'
     When I click the 'Save_For_Later' button on the 'Project_Details_Title_Page'
-    Then I can see the project overview save for later page
+    Then I can see the project overview page
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
