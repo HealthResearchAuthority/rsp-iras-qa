@@ -63,6 +63,7 @@ export default class CommonItemsPage {
   readonly firstPage: Locator;
   readonly previous_button: Locator;
   readonly currentPage: Locator;
+  readonly pagination_results: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -120,6 +121,7 @@ export default class CommonItemsPage {
       .getByRole('link')
       .getByText(this.commonTestData.previous_button, { exact: true });
     this.currentPage = this.pagination.locator('a[class$="current"]');
+    this.pagination_results = page.getByRole('navigation', { name: 'Pagination' }).locator('..').getByRole('paragraph');
     //Validation Alert Box
     this.alert_box = this.page.getByRole('alert');
     this.alert_box_headings = this.alert_box.getByRole('heading');
@@ -570,5 +572,10 @@ export default class CommonItemsPage {
         await expect(this.page.locator(`text=Showing ${start} to ${end} of ${totalItems} results`)).toBeVisible();
       }
     };
+  }
+
+  async getPaginationResults() {
+    const summaryErrorActualValues = confirmStringNotNull(await this.pagination_results.textContent());
+    return summaryErrorActualValues;
   }
 }

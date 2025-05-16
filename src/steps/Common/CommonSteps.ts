@@ -537,7 +537,6 @@ When(
       await expect(locatorVal).toBeVisible();
       await expect(locatorVal).toBeEnabled();
     } else if (enabledVal === 'disabled' && visibleVal === 'not visible') {
-      // await expect(locatorVal).toBeDisabled();
       await expect(locatorVal).toBeHidden();
       const isVisible = await locatorVal.isVisible().catch(() => false);
       expect(isVisible).toBeFalsy();
@@ -564,5 +563,10 @@ When(
 );
 
 Then('I validate pagination dynamically', async ({ commonItemsPage }) => {
-  await commonItemsPage.validatePagination(1317, 20);
+  const paginationResults = await commonItemsPage.getPaginationResults();
+  const paginationResultsParts: string[] = paginationResults.split(' results');
+  const paginationResultsPartsOne: string[] = paginationResultsParts[0].split('Showing ');
+  const paginationResultsPartsTwo: string[] = paginationResultsPartsOne[1].split(' of ');
+  const totalItems = parseInt(paginationResultsPartsTwo[1], 10);
+  await commonItemsPage.validatePagination(totalItems, 20);
 });
