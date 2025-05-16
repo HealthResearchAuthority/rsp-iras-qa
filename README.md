@@ -20,21 +20,32 @@ This guide contains steps to:
 
 # Running Tests
 
-## Running Locally via CLI  
+## .env file setup  
 
-In the current POC the password for the poc user will need to be hardcoded locally with the applicable value.  
-Once a method for securely storing passwords has been agreed and established, then the code + this guide will be updated.  
-For now Chris McNeill can provide the password.  
+Before running tests locally, there are certain values that need to be set and configured in a local .env file with the correct value. 
+These values include the passwords for each test user. 
+- A  '.env-example' file has been provided which contains all the environment variables required, as well as all the values that do not compromise security, e.g. the BROWSER variable. 
+- Create a '.env' file in the projects root folder and copy and paste the contents of the example file into it. 
 
-- The `password` value to be changed is in the `src/pages/LoginPage.ts` file
-- Within the `loginWithUserCreds` method
-- Within the `poc` switch case.
+### Encryption of Sensitive-Data: 
 
-**To run all tests:** `npm test` OR `npx bddgen && npx playwright test`
+All the test executions performed in DevBox should make sure that the sensitive test data are encrypted and not committed to the code repository. Below steps to encrypt and use the sensitive data: 
+ -  An executable encrypt utility is created under src/utils/Encrypt.mjs 
+ - Replace '<Add secret key here which is 32 character long>' with any key of your choice (Should follow the security standards of a password and should be 32 characters long). Replace '<sensitive-data>' with the Future IRAS automation portal test password.
+ - To run the utility, right click on the Encrypt.mjs file and click on 'Open in Integrated Terminal' option. Run this file using the script: 'node .\Encrypt.mjs'. 
+ - The result of the execution will create an encrypted value, which should be stored in .env file (this file is never pushed to the code repository) and test execution can use the encrypted value from the .env file wherever needed. 
+ - Copy and paste the generated encrypted value into the relevant user password variable in the .env file. 
+    -- SECRET_KEY=<this is same 32 chars used in Encrypt.mjs file to generate auth>
+    -- AUTH_TAG='<Auth-Tag Value generated in console after execution>'
+    -- ADMIN_USER_PASS='<encrypted value generated in console after execution>'
+ - Once encrypted value is generated revert the code in the Encrypt.mjs file immediately to ensure no secret values are stored within the local code. 
+
+## Running Locally via CLI
+**To run all tests:** `npm run test` OR `npx bddgen && npx playwright test`
 
 **To rerun all failed tests:** `npm run test-failed` OR `npx bddgen && npx playwright test --last-failed`
 
-*NOTE:* `npm test` and `npm run test-failed` is set as a script in the `package.json` file to trigger the longer command  
+*NOTE:* `npm run test` and `npm run test-failed` is set as a script in the `package.json` file to trigger the longer command  
 &nbsp;  
  
 **To run tag specific tests:** `npx bddgen --tags "@authSetup or <@yourTestTag>" && npx playwright test`
@@ -63,14 +74,7 @@ So when I run the command `npx bddgen --tags "@authSetup or exampleTestTag" && n
 &nbsp;  
 
 **To run test in local DevBox:**
-All the test executions performed in DevBox should make sure that the sensitive test data are encrypted and not committed to the code repository. Below steps to encrypt and use the sensitive data:
-- An executable encrypt utility is created under src/utils/Encrypt.mjs
-- Run this utility to generate an encrypted value. Replace '<Add secret key here which is 32 character long>' with any key of your choice (Should follow the security standards of a password and should be 32 characters long).
-- To run the utility, right click on the Encrypt.mjs file and click on 'Open in Integrated Terminal' option. Run this file using the script: 'node .\Encrypt.mjs'.
-- The result of the execution will create an encrypted value, which should be stored in .env file (this file is never pushed to the code repository) and test execution can use the encrypted value from the .env file wherever needed.
-- Copy and paste the generated encrypted value into the relevant user password variable in the .env file.
-- Once encrypted value is generated revert the code in the Encrypt.mjs file immediately to ensure no secret values are stored within the local code.
-- When running test case in local DevBox use following code in Git Bash Terminal: `SECRET_KEY='<Add secret key here which is 32 character long>' npm run test`
+When running test case in local DevBox use following code in Git Bash Terminal: `SECRET_KEY='<Add secret key here which is 32 character long>' npm run test`
 
 ## Test reports
 
