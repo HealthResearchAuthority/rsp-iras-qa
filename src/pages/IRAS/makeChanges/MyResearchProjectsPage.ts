@@ -7,6 +7,7 @@ export default class MyResearchProjectsPage {
   readonly myResearchProjectsPageTestData: typeof myResearchProjectsPageTestData;
   readonly pageHeading: Locator;
   readonly noProjectsAvailableLabel: Locator;
+  readonly btnCreateProjectRecord: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -18,14 +19,16 @@ export default class MyResearchProjectsPage {
       .getByRole('heading')
       .getByText(this.myResearchProjectsPageTestData.My_Research_Projects_Page.heading, { exact: true });
     this.noProjectsAvailableLabel = this.page.locator('p[class="govuk-body"]').nth(0);
+    this.btnCreateProjectRecord = this.page.getByRole('link', { name: 'Create project record' });
   }
 
   //Page Methods
   async goto() {
-    await this.page.goto('');
+    await this.page.goto('application/welcome');
   }
 
   async assertOnMyResearchProjectsPage() {
     await expect(this.pageHeading).toBeVisible();
+    await expect(this.btnCreateProjectRecord).toBeVisible();
   }
 }

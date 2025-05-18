@@ -21,7 +21,7 @@ const config: PlaywrightTestConfig = {
   globalTimeout: 15 * 60 * 1000,
   timeout: 5 * 60 * 1000,
   workers: 1, // to enforce serial execution
-  //retries: 2,
+  retries: 2,
   use: {
     ...browser,
     trace: 'on',
@@ -47,7 +47,7 @@ const config: PlaywrightTestConfig = {
         outputDir: 'generated-feature-files/auth-setup',
       }),
       use: {
-        headless: false,
+        headless: true,
         launchOptions: {
           slowMo: 0,
         },

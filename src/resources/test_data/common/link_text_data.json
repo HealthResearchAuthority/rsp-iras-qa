@@ -127,5 +127,8 @@
   "Add_User_Review_Body_Confirmation_Page": {
     "Add_Another_User": "Add another user to review body",
     "Back_To_Manage_Review_Bodies": "Back to Manage review bodies"
+  },
+  "My_Research_Page": {
+    "Back": "Back"
   }
 }

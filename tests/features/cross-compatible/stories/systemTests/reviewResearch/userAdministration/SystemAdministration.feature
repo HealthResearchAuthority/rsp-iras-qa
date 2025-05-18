@@ -5,7 +5,7 @@ Feature: User Administration: System Administration
     Given I have navigated to the 'Home_Page'
     And I can see the my account home page
 
-  @rsp-3423 @SystemAdministrationPage @testtest
+  @rsp-3423 @SystemAdministrationPage
   Scenario Outline: Validate the system administration home page
     Given I have navigated to the 'System_Administration_Page'
     Then I can see the system administration home page
@@ -28,7 +28,7 @@ Feature: User Administration: System Administration
       | Validation_Text | Navigation_Link_First | Navigation_Link_Second | Navigation_Link |
       | Label_Texts     | Manage_Review_Bodies  | Manage_Users           | Back            |
 
-@rsp-3423 @SystemAdministrationPage @testtest
+@rsp-3423 @SystemAdministrationPage
   Scenario Outline: Validate return to home page from system administration home page
     Given I have navigated to the 'System_Administration_Page'
     Then I can see the system administration home page

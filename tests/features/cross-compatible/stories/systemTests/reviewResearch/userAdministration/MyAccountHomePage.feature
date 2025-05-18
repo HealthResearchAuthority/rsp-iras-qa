@@ -10,17 +10,17 @@ Feature: My Account Home page
     Then I can see the my account home page
     Then I can see the '<Validation_Text>' ui labels on the my account home page
     Then I capture the page screenshot
+    When I click the '<Navigation_Link_First>' link on the 'Home_Page'
+    Then I can see the 'My_Research_Page'
+    Then I capture the page screenshot
+    When I click the '<Navigation_Link>' link on the 'My_Research_Page'
+    Then I can see the my account home page
+    Then I capture the page screenshot
     When I click the '<Navigation_Link_Second>' link on the 'Home_Page'
     Then I can see the system administration home page
     Then I capture the page screenshot
     When I click the '<Navigation_Link>' link on the 'System_Administration_Page'
     Then I can see the my account home page
-    When I click the '<Navigation_Link_First>' link on the 'Home_Page'
-    Then I can see the 'My_research_Page'
-    Then I capture the page screenshot
-    When I click the '<Navigation_Link>' link on the 'My_research_Page'
-    Then I can see the my account home page
-    Then I capture the page screenshot
 
     Examples:
       | Validation_Text | Navigation_Link_First | Navigation_Link_Second | Navigation_Link |
