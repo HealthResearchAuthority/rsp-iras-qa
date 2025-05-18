@@ -24,17 +24,17 @@ export default class HomePage {
   readonly systemAdministrationLink: Locator;
   readonly technicalAssuranceLink: Locator;
   readonly technicalAssuranceReviewersLink: Locator;
-  /*  readonly approvalsHintLabel: Locator;
-  readonly cagMembersHintLabel: Locator;
-  readonly catHintLabel: Locator;
-  readonly memeberManagementHintLabel: Locator;
-  readonly myResearchHintLabel: Locator;
-  readonly recMembersHintLabel: Locator;
-  readonly sponsorHintLabel: Locator;
-  readonly systemAdministrationHintLabel: Locator;
-  readonly technicalAssuranceHintLabel: Locator;
-  readonly technicalAssuranceReviewersHintLabel: Locator;
-*/
+  readonly approvals_hint_label: Locator;
+  readonly cag_members_hint_label: Locator;
+  readonly cat_hint_label: Locator;
+  readonly memeber_management_hint_label: Locator;
+  readonly my_research_hint_label: Locator;
+  readonly rec_members_hint_label: Locator;
+  readonly sponsor_hint_label: Locator;
+  readonly system_administration_hint_label: Locator;
+  readonly technical_assurance_hint_label: Locator;
+  readonly technical_assurance_reviewers_hint_label: Locator;
+
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page;
@@ -66,6 +66,19 @@ export default class HomePage {
       name: 'Technical Assurance reviewers',
       exact: true,
     });
+
+    this.approvals_hint_label = this.getFollowingParagraphElement(this.approvalsLink);
+    this.cag_members_hint_label = this.getFollowingParagraphElement(this.cagMembersLink);
+    this.cat_hint_label = this.getFollowingParagraphElement(this.catLink);
+    this.memeber_management_hint_label = this.getFollowingParagraphElement(this.memeberManagementLink);
+    this.my_research_hint_label = this.getFollowingParagraphElement(this.myResearchLink);
+    this.rec_members_hint_label = this.getFollowingParagraphElement(this.recMembersLink);
+    this.sponsor_hint_label = this.getFollowingParagraphElement(this.sponsorLink);
+    this.system_administration_hint_label = this.getFollowingParagraphElement(this.systemAdministrationLink);
+    this.technical_assurance_hint_label = this.getFollowingParagraphElement(this.technicalAssuranceLink);
+    this.technical_assurance_reviewers_hint_label = this.getFollowingParagraphElement(
+      this.technicalAssuranceReviewersLink
+    );
   }
 
   //using method is used to get hint label next to headers

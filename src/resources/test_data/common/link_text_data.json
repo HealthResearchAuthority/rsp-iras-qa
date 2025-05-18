@@ -26,13 +26,13 @@
     "Approvals": "Approvals",
     "CAG_members": "CAG members",
     "CAT": "CAT",
-    "Member management": "Member management",
-    "My research": "My research",
-    "REC members": "REC members",
+    "Member_management": "Member management",
+    "My_research": "My research",
+    "REC_members": "REC members",
     "Sponsor": "Sponsor",
-    "System administration": "System administration",
-    "Technical Assurance": "Technical Assurance",
-    "Technical Assurance reviewers": "Technical Assurance reviewers"
+    "System_administration": "System administration",
+    "Technical|_Assurance": "Technical Assurance",
+    "Technical_Assurance_reviewers": "Technical Assurance reviewers"
   },
   "Project_Details_IRAS_Page": {
     "Back": "Back"
@@ -77,6 +77,7 @@
     "View_Edit": "View/Edit"
   },
   "System_Administration_Page": {
+    "Back": "Back",
     "Manage_Review_Bodies": "Manage review bodies",
     "Manage_Users": "Manage users"
   },

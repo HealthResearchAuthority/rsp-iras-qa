@@ -2,10 +2,10 @@
 Feature: User Administration: System Administration
 
   Background:
-    Given I have navigated to the my research projects page
-    And I can see the my research projects page
+    Given I have navigated to the 'Home_Page'
+    And I can see the my account home page
 
-  @rsp-2931 @SystemAdministrationPage
+  @rsp-3423 @SystemAdministrationPage @testtest
   Scenario Outline: Validate the system administration home page
     Given I have navigated to the 'System_Administration_Page'
     Then I can see the system administration home page
@@ -27,3 +27,15 @@ Feature: User Administration: System Administration
     Examples:
       | Validation_Text | Navigation_Link_First | Navigation_Link_Second | Navigation_Link |
       | Label_Texts     | Manage_Review_Bodies  | Manage_Users           | Back            |
+
+@rsp-3423 @SystemAdministrationPage @testtest
+  Scenario Outline: Validate return to home page from system administration home page
+    Given I have navigated to the 'System_Administration_Page'
+    Then I can see the system administration home page
+    When I click the 'Back' link on the 'System_Administration_Page'
+    Then I can see the my account home page
+    Then I capture the page screenshot
+    When I have navigated to the 'System_Administration_Page'
+    When I click the 'Home' link on the 'Banner'
+    Then I can see the my account home page
+    Then I capture the page screenshot
