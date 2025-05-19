@@ -67,7 +67,7 @@
     "job_title_text": "Job title must be 250 characters or less",
     "last_name_text": "Last name must be 250 characters or less",
     "first_name_text": "First name must be 250 characters or less",
-    "telephone_text": "Telephone must be 11 characters or less",
+    "telephone_text": "Telephone must be 11 digits or less",
     "organisation_text": "Organisation must be 250 characters or less"
   },
   "Error_Message_Invalid_Character_Limit_field_Email_Address": {
@@ -81,7 +81,7 @@
   },
   "Create_User_Profile": {
     "email_address_prefix": "QAAutomation",
-    "email_address_unique": "QAAutomation20250508135812983hscrd@health.org",
+    "email_address_unique": "QAAutomation20250514091548493hscrd@health.org",
     "Role_Operations": {
       "role_checkbox": [
         "operations"

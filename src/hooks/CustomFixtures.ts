@@ -42,6 +42,7 @@ import AuditHistoryUserPage from '../pages/IRAS/reviewResearch/userAdministratio
 import ProjectOverviewPage from '../pages/IRAS/makeChanges/ProjectOverviewPage';
 import ReviewYourAnswersPage from '../pages/IRAS/makeChanges/ReviewYourAnswersPage';
 import UserListReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/UserListReviewBodyPage';
+import CheckRemoveUserReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/CheckRemoveUserReviewBodyPage';
 import SearchAddUserReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/SearchAddUserReviewBodyPage';
 import CheckAddUserReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/CheckAddUserReviewBodyPage';
 import MyResearchPage from '../pages/IRAS/makeChanges/MyResearchProjectsPage';
@@ -88,6 +89,7 @@ type CustomFixtures = {
   auditHistoryReviewBodyPage: AuditHistoryReviewBodyPage;
   auditHistoryUserPage: AuditHistoryUserPage;
   userListReviewBodyPage: UserListReviewBodyPage;
+  checkRemoveUserReviewBodyPage: CheckRemoveUserReviewBodyPage;
   searchAddUserReviewBodyPage: SearchAddUserReviewBodyPage;
   checkAddUserReviewBodyPage: CheckAddUserReviewBodyPage;
   myResearchPage: MyResearchPage;
@@ -257,6 +259,10 @@ export const test = base.extend<CustomFixtures>({
 
   userListReviewBodyPage: async ({ page }, use) => {
     await use(new UserListReviewBodyPage(page));
+  },
+
+  checkRemoveUserReviewBodyPage: async ({ page }, use) => {
+    await use(new CheckRemoveUserReviewBodyPage(page));
   },
 
   searchAddUserReviewBodyPage: async ({ page }, use) => {

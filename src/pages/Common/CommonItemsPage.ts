@@ -51,12 +51,14 @@ export default class CommonItemsPage {
   readonly alert_box_list_items: Locator;
   readonly errorMessageFieldLabel: Locator;
   readonly errorMessageSummaryLabel: Locator;
+  readonly topMenuBarLinks: Locator;
   readonly summaryErrorLinks: Locator;
   readonly tableRows: Locator;
   readonly hidden_next_button: Locator;
   readonly next_button: Locator;
   readonly fieldGroup: Locator;
   readonly errorFieldGroup: Locator;
+  readonly search_text: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -83,6 +85,7 @@ export default class CommonItemsPage {
     this.qSetProgressBarActiveStageLink = this.qSetProgressBarActiveStage.locator('.stage-label').getByRole('button');
     this.tableRows = this.page.getByRole('table').getByRole('row');
     this.hidden_next_button = this.page.locator('[class="govuk-pagination__next"][style="visibility: hidden"]');
+    this.search_text = this.page.locator('#SearchQuery');
     //Banner
     this.bannerNavBar = this.page.getByLabel('Service information');
     this.bannerLoginBtn = this.bannerNavBar.getByText(this.buttonTextData.Banner.Login, { exact: true });
@@ -106,6 +109,7 @@ export default class CommonItemsPage {
         exact: true,
       });
     this.summaryErrorLinks = this.errorMessageSummaryLabel.locator('..').getByRole('listitem').getByRole('link');
+    this.topMenuBarLinks = this.page.getByTestId('navigation').getByRole('listitem').getByRole('link');
     //Validation Alert Box
     this.alert_box = this.page.getByRole('alert');
     this.alert_box_headings = this.alert_box.getByRole('heading');
@@ -530,5 +534,13 @@ export default class CommonItemsPage {
       }
     }
     return false;
+  }
+
+  async getTopMenuBarLinksNames() {
+    const topMenuBarLinksValues: string[] = [];
+    for (const val of await this.topMenuBarLinks.allTextContents()) {
+      topMenuBarLinksValues.push(confirmStringNotNull(val));
+    }
+    return topMenuBarLinksValues;
   }
 }

@@ -19,3 +19,14 @@ Then(
     }
   }
 );
+
+Then(
+  'the top menu bar will not have links to {string} or {string}',
+  async ({ commonItemsPage }, usersLink: string, adminLink: string) => {
+    const allTopMenuBarLinksExpectedValues = commonItemsPage.commonTestData.top_menu_bar_links;
+    const allTopMenuBarLinksActualValues = await commonItemsPage.getTopMenuBarLinksNames();
+    expect(allTopMenuBarLinksActualValues).toEqual(allTopMenuBarLinksExpectedValues);
+    expect(allTopMenuBarLinksActualValues).not.toContain(usersLink);
+    expect(allTopMenuBarLinksActualValues).not.toContain(adminLink);
+  }
+);

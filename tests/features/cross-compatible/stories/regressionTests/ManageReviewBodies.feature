@@ -32,6 +32,8 @@ Feature: User Administration: Manage Review Bodies
         Then I can see the list is sorted by default in the alphabetical order of 'Organisation Name'
         And I capture the page screenshot
         # find the newly created review body in the list with 'active' status
+        When I enter unique organisation name of the newly created review body into the search field
+        And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
         Then I can see the review body for '<Add_Review_Body>' is present in the list
         And I capture the page screenshot
         And I can see the status of the review body is 'ACTIVE'
@@ -63,6 +65,8 @@ Feature: User Administration: Manage Review Bodies
 
     @RegressionTestVerifyEnableAndEditReviewBodyAuditHistory
     Scenario Outline: Verify the user can view the audit history after enabling a review body
+        When I enter 'QA Automation' into the search field
+        And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
         And I select a 'QA Automation' Review Body to View and Edit which is 'disabled'
         And I can see the review body profile page
         And I capture the page screenshot
@@ -72,8 +76,10 @@ Feature: User Administration: Manage Review Bodies
         And I click the 'Confirm' button on the 'Confirmation_Page'
         And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
         Then I can see the 'Manage_Review_Bodies_Page'
+        When I enter 'QA Automation' into the search field
+        And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
-        Then I click the view edit link for the 'enabled' review body
+        Then I click the view edit link for the 'active' review body
         And I can see the review body profile page
         And I capture the page screenshot
         # edit review body
@@ -104,6 +110,8 @@ Feature: User Administration: Manage Review Bodies
 
     @RegressionTestVerifyBackAndChangeLinkNavigationManageReviewBodies
     Scenario Outline: Verify the user can navigate by clicking 'Back' link and 'Change' link from review body profile page and edit review body page and audit history page
+        When I enter 'QA Automation' into the search field
+        And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
         And I select a 'QA Automation' Review Body to View and Edit which is 'active'
         And I can see the review body profile page
         And I capture the page screenshot
@@ -180,7 +188,7 @@ Feature: User Administration: Manage Review Bodies
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
         Then I can see the check and create review body page for '<Add_Review_Body>'
         And I capture the page screenshot
-        And I click the 'Back' button on the 'Check_Create_Review_Body_Page'
+        When I click the 'Back' link on the 'Check_Create_Review_Body_Page'
         Then I can see the Add new review body page for '<Add_Review_Body>'
         And I capture the page screenshot
         And I fill the new review body page using '<Add_Another_Review_Body>'

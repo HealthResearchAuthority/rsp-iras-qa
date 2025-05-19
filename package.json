@@ -38,7 +38,7 @@
     "axe-html-reporter": "^2.2.11",
     "dotenv": "^16.5.0",
     "fs-extra": "^11.3.0",
-    "playwright": "^1.49.1",
+    "playwright": "^1.52.0",
     "randexp": "^0.5.3"
   }
 }

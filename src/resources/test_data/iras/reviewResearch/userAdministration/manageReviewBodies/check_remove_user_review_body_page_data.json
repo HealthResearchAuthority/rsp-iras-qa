@@ -1,0 +1,14 @@
+{
+  "Check_Remove_User_Page": {
+    "page_heading": "Check and remove user profile",
+    "guidance_text": "Check the information here is correct before removing the profile from ",
+    "title_label": "Title",
+    "first_name_label": "First name",
+    "last_name_label": "Last name",
+    "email_address_label": "Email address",
+    "telephone_label": "Telephone",
+    "organisation_label": "Organisation",
+    "job_title_label": "Job title",
+    "role_label": "Role"
+  }
+}

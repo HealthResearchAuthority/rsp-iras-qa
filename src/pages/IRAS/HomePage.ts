@@ -13,7 +13,7 @@ export default class HomePage {
   readonly pageHeading: Locator;
   readonly projectGuidanceText: Locator;
   readonly loginBtn: Locator;
-  readonly workspacesHeading: Locator;
+  readonly myWorkspacesHeading: Locator;
   readonly approvalsLink: Locator;
   readonly cagMembersLink: Locator;
   readonly catLink: Locator;
@@ -45,9 +45,12 @@ export default class HomePage {
     //Locators
     this.mainPageContent = this.page.getByTestId('main-content');
     this.pageHeading = this.page.getByRole('heading').getByText(this.homePageTestData.Home_Page.heading);
-    this.projectGuidanceText = this.page.getByText(this.homePageTestData.Home_Page.guidance_text);
-
-    this.workspacesHeading = this.page.getByRole('heading').getByText(this.homePageTestData.Home_Page.workspaceHeading);
+    this.projectGuidanceText = this.page
+      .getByRole('paragraph')
+      .getByText(this.homePageTestData.Home_Page.guidance_text);
+    this.myWorkspacesHeading = this.page
+      .getByRole('heading')
+      .getByText(this.homePageTestData.Home_Page.workspaceHeading);
 
     this.loginBtn = this.page
       .locator('.gem-c-button')
@@ -93,6 +96,7 @@ export default class HomePage {
 
   async assertOnHomePage() {
     await expect(this.pageHeading).toBeVisible();
+    await expect(this.myWorkspacesHeading).toBeVisible();
     await expect(this.projectGuidanceText).toBeVisible();
   }
 }

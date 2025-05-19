@@ -51,7 +51,7 @@
     "job_title_text": "Job title must be 250 characters or less",
     "last_name_text": "Last name must be 250 characters or less",
     "first_name_text": "First name must be 250 characters or less",
-    "telephone_text": "Telephone must be 11 characters or less",
+    "telephone_text": "Telephone must be 11 digits or less",
     "organisation_text": "Organisation must be 250 characters or less"
   },
   "Error_Message_Invalid_Character_Limit_field_Email_Address": {

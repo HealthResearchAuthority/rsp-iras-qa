@@ -7,7 +7,7 @@ Feature: User Administration: Manage Review Bodies - Add user to review body
         And I can see the review body profile page
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
         And I can see the user list page of the review body
-        And I click the 'Add_User_To_Review_Body' link on the 'Review_Body_User_List_Page'
+        And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
         And I can see the search for user to add to review body page
         And I capture the page screenshot
 

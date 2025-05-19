@@ -1,6 +1,6 @@
 @axeAccessibility @jsEnabled
 Feature: Run Axe Accessibilty Test Tool Against App Pages
-# delete IDG, delete proj filter
+
   @axeAccessibilityHome @adminUser
   Scenario: Home Page
     Given I have navigated to the 'Home_Page'
@@ -377,7 +377,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityReviewBodyDisable @adminUser
+  @axeAccessibilityReviewBodyDisable @adminUser @axeAccessibilityManageReviewBodies
   Scenario: View review body page with disable button available
     Given I have navigated to the 'System_Administration_Page'
     And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
@@ -394,7 +394,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityReviewBodyDisableConfirmation @adminUser
+  @axeAccessibilityReviewBodyDisableConfirmation @adminUser @axeAccessibilityManageReviewBodies
   Scenario: View disable confirmation page for review body
     Given I have navigated to the 'System_Administration_Page'
     And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
@@ -412,7 +412,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityReviewBodyDisableSuccess @adminUser
+  @axeAccessibilityReviewBodyDisableSuccess @adminUser @axeAccessibilityManageReviewBodies
   Scenario: View disable confirmation success page for review body
     Given I have navigated to the 'System_Administration_Page'
     And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
@@ -431,7 +431,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityReviewBodyEnable @adminUser
+  @axeAccessibilityReviewBodyEnable @adminUser @axeAccessibilityManageReviewBodies
   Scenario: View review body page with enable button available
     Given I have navigated to the 'System_Administration_Page'
     And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
@@ -454,7 +454,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityReviewBodyEnableConfirmation @adminUser
+  @axeAccessibilityReviewBodyEnableConfirmation @adminUser @axeAccessibilityManageReviewBodies
   Scenario: View enable confirmation page for review body
     Given I have navigated to the 'System_Administration_Page'
     And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
@@ -478,7 +478,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityReviewBodyEnableSuccess @adminUser
+  @axeAccessibilityReviewBodyEnableSuccess @adminUser @axeAccessibilityManageReviewBodies
   Scenario: View enable confirmation success page for review body
     Given I have navigated to the 'System_Administration_Page'
     And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
@@ -516,11 +516,11 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityAuditHistoryUser @adminUser
+  @axeAccessibilityAuditHistoryUser @adminUser @axeAccessibilityManageUsers
   Scenario: Audit history page of the user
-    Given I have navigated to the 'Home_Page'
-    And I click the 'Manage_Users' link on the 'Banner'
-    And I can see the 'Manage_Users_Page'
+    Given I have navigated to the 'System_Administration_Page'
+    When I click the 'Manage_Users' link on the 'System_Administration_Page'
+    Then I can see the 'Manage_Users_Page'
     And I select a 'QA Automation' User to View and Edit which is 'active'
     And I can see the user profile page
     When I click the 'View_Users_Audit_History' link on the 'User_Profile_Page'
@@ -529,14 +529,180 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
+  @axeAccessibilityReviewBodyUserList @adminUser @axeAccessibilityManageReviewBodies
+  Scenario: View user list page of the review body
+    Given I have navigated to the 'System_Administration_Page'
+    And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
+    Then I can see the 'Manage_Review_Bodies_Page'
+    When I click the 'View_Edit' link on the 'Manage_Review_Bodies_Page'
+    And I can see the review body profile page
+    And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
+    Then I can see the user list page of the review body
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityReviewBodyUserListSearchResultsFound @axeAccessibilityReviewBodyUserList @adminUser @axeAccessibilityManageReviewBodies
+  Scenario: View user list page of the review body when search results found
+    Given I have navigated to the 'System_Administration_Page'
+    And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
+    Then I can see the 'Manage_Review_Bodies_Page'
+    When I enter 'QA Automation' into the search field
+    And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
+    And I select a 'QA Automation' Review Body to View and Edit which is 'active'
+    And I can see the review body profile page
+    And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
+    Then I can see the user list page of the review body
+    And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
+    When I enter 'QA Automation' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Review_Body_Page'
+    And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
+    And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
+    And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
+    Then I can see the user list page of the review body
+    And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
+    When I enter 'QA Automation' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Review_Body_Page'
+    And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
+    And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
+    And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
+    Then I can see the user list page of the review body
+    When I enter the 'Email Address' of the 'last' user shown on the current review body users list, into the search field
+    And I click the 'Search' button on the 'Review_Body_User_List_Page'
+    Then the system displays search results matching the search criteria based on 'Email_Address'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityReviewBodyUserListCheckRemoveUserProfile @axeAccessibilityReviewBodyUserList @adminUser @axeAccessibilityManageReviewBodies
+  Scenario: View check and remove user profile page
+    Given I have navigated to the 'System_Administration_Page'
+    And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
+    Then I can see the 'Manage_Review_Bodies_Page'
+    When I enter 'QA Automation' into the search field
+    And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
+    And I select a 'QA Automation' Review Body to View and Edit which is 'active'
+    And I can see the review body profile page
+    And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
+    Then I can see the user list page of the review body
+    And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
+    When I enter 'QA Automation' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Review_Body_Page'
+    And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
+    And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
+    And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
+    Then I can see the user list page of the review body
+    And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
+    When I enter 'QA Automation' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Review_Body_Page'
+    And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
+    And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
+    And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
+    Then I can see the user list page of the review body
+    When I enter the 'Email Address' of the 'last' user shown on the current review body users list, into the search field
+    And I click the 'Search' button on the 'Review_Body_User_List_Page'
+    Then the system displays search results matching the search criteria based on 'Email_Address'
+    When I click the 'Remove' link on the 'Review_Body_User_List_Page'
+    Then I can see the check and remove user profile page
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityReviewBodyUserListCheckRemoveUserConfirmation @axeAccessibilityReviewBodyUserList @adminUser @axeAccessibilityManageReviewBodies
+  Scenario: View remove user confirmation page
+    Given I have navigated to the 'System_Administration_Page'
+    And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
+    Then I can see the 'Manage_Review_Bodies_Page'
+    When I enter 'QA Automation' into the search field
+    And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
+    And I select a 'QA Automation' Review Body to View and Edit which is 'active'
+    And I can see the review body profile page
+    And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
+    Then I can see the user list page of the review body
+    And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
+    When I enter 'QA Automation' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Review_Body_Page'
+    And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
+    And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
+    And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
+    Then I can see the user list page of the review body
+    And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
+    When I enter 'QA Automation' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Review_Body_Page'
+    And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
+    And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
+    And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
+    Then I can see the user list page of the review body
+    When I enter the 'Email Address' of the 'last' user shown on the current review body users list, into the search field
+    And I click the 'Search' button on the 'Review_Body_User_List_Page'
+    Then the system displays search results matching the search criteria based on 'Email_Address'
+    When I click the 'Remove' link on the 'Review_Body_User_List_Page'
+    Then I can see the check and remove user profile page
+    And I click the 'Remove_User_Profile' button on the 'Check_Remove_User_Profile_Page'
+    And I validate 'Remove_User_From_Review_Body_Labels' labels displayed in the success confirmation page when the user removed from the review body
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityReviewBodyUserListSearchNoResultsFound  @axeAccessibilityReviewBodyUserList @adminUser @axeAccessibilityManageReviewBodies
+  Scenario: View user list page of the review body when search results not found
+    Given I have navigated to the 'System_Administration_Page'
+    And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
+    Then I can see the 'Manage_Review_Bodies_Page'
+    When I enter 'QA Automation' into the search field
+    And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
+    And I select a 'QA Automation' Review Body to View and Edit which is 'active'
+    And I can see the review body profile page
+    And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
+    Then I can see the user list page of the review body
+    And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
+    When I enter 'QA Automation' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Review_Body_Page'
+    And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
+    And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
+    And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
+    Then I can see the user list page of the review body
+    And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
+    When I enter 'QA Automation' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Review_Body_Page'
+    And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
+    And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
+    And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
+    Then I can see the user list page of the review body
+    When I enter the 'Email Address' of the 'last' user shown on the current review body users list, into the search field
+    And I click the 'Search' button on the 'Review_Body_User_List_Page'
+    Then the system displays search results matching the search criteria based on 'Email_Address'
+    When I click the 'Remove' link on the 'Review_Body_User_List_Page'
+    Then I can see the check and remove user profile page
+    And I click the 'Remove_User_Profile' button on the 'Check_Remove_User_Profile_Page'
+    And I validate 'Remove_User_From_Review_Body_Labels' labels displayed in the success confirmation page when the user removed from the review body
+    And I click the 'Remove_Another_User_From_The_Review_Body' link on the 'Confirmation_Page'
+    Then I can see the user list page of the review body
+    And I enter an input into the search field to search for the removed user of the review body
+    And I click the 'Search' button on the 'Review_Body_User_List_Page'
+    Then the system displays no results found message
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
   @axeAccessibilitySearchAddUserReviewBodyResults @adminUser
   Scenario: Search add user to review body page with results
     Given I have navigated to the 'Manage_Review_Bodies_Page'
+    When I enter 'QA Automation' into the search field
+    And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
     And I select a 'QA Automation' Review Body to View and Edit which is 'active'
     And I can see the review body profile page
     And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
     And I can see the user list page of the review body
-    And I click the 'Add_User_To_Review_Body' link on the 'Review_Body_User_List_Page'
+    And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
     And I can see the search for user to add to review body page
     And I fill the search input for add users to review body with 'Existing_QA_User_First_Name' as the search query
     And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
@@ -549,11 +715,13 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
   @axeAccessibilitySearchAddUserReviewBodyNoResults @adminUser
   Scenario: Search add user to review body page with no results found
     Given I have navigated to the 'Manage_Review_Bodies_Page'
+    When I enter 'QA Automation' into the search field
+    And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
     And I select a 'QA Automation' Review Body to View and Edit which is 'active'
     And I can see the review body profile page
     And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
     And I can see the user list page of the review body
-    And I click the 'Add_User_To_Review_Body' link on the 'Review_Body_User_List_Page'
+    And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
     And I can see the search for user to add to review body page
     And I fill the search input for add users to review body with 'Non_Existant_User_Data' as the search query
     And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
@@ -565,16 +733,18 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
   @axeAccessibilityCheckAddUserReviewBody @adminUser
   Scenario: Check add user to review body page
     Given I have navigated to the 'Manage_Review_Bodies_Page'
+    When I enter 'QA Automation' into the search field
+    And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
     And I select a 'QA Automation' Review Body to View and Edit which is 'active'
     And I can see the review body profile page
     And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
     And I can see the user list page of the review body
-    And I click the 'Add_User_To_Review_Body' link on the 'Review_Body_User_List_Page'
+    And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
     And I can see the search for user to add to review body page
     And I fill the search input for add users to review body with 'Existing_QA_User_First_Name' as the search query
     And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
     And I click the 'Add_User' link on the 'Search_Add_User_Review_Body_Page'
-    And I can see the check and add user to review body page    
+    And I can see the check and add user to review body page
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
@@ -582,18 +752,20 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
   @axeAccessibilityAddUserReviewBodyConfirmation @adminUser
   Scenario: Add user to review body confirmation page
     Given I have navigated to the 'Manage_Review_Bodies_Page'
+    When I enter 'QA Automation' into the search field
+    And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
     And I select a 'QA Automation' Review Body to View and Edit which is 'active'
     And I can see the review body profile page
     And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
     And I can see the user list page of the review body
-    And I click the 'Add_User_To_Review_Body' link on the 'Review_Body_User_List_Page'
+    And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
     And I can see the search for user to add to review body page
     And I fill the search input for add users to review body with 'Existing_QA_User_First_Name' as the search query
     And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
     And I click the 'Add_User' link on the 'Search_Add_User_Review_Body_Page'
-    And I can see the check and add user to review body page  
+    And I can see the check and add user to review body page
     And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
-    And I am on the confirmation screen 
+    And I am on the confirmation screen
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations

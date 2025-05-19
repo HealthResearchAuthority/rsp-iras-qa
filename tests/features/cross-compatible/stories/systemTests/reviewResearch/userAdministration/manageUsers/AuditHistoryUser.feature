@@ -2,9 +2,9 @@
 Feature: User Administration: Manage Users - View audit history for users
 
     Background:
-        Given I have navigated to the 'Home_Page'
-        And I click the 'Manage_Users' link on the 'Banner'
-        And I can see the 'Manage_Users_Page'
+        Given I have navigated to the 'System_Administration_Page'
+        When I click the 'Manage_Users' link on the 'System_Administration_Page'
+        Then I can see the 'Manage_Users_Page'
 
     @VerifyAuditHistoryUserBackLinkNavigation
     Scenario: Verify the user can navigate from audit History page of the user by clicking 'Back' link
