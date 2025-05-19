@@ -208,28 +208,36 @@ Feature: User Administration: Manage user profiles, view and edit user profile
             | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | ACTIVE | Invalid_Email_Data_Reserved_Domain                        | Error_Message_Incorrect_Format_Field_Email_Address                      |
             | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | ACTIVE | Invalid_Email_Data_Punycode                               | Error_Message_Incorrect_Format_Field_Email_Address                      |
 
-    @ManageUserPagination @ManageUserPaginationFirstPage @TestOnly
-    Scenario: Verify pagination in manage users page when user is on the first page
-        And the user is on the first page and it and visually highlighted to indicate the active page the user is on
+    @ManageUserPagination @ManageUserPaginationFirstPage @ManageUserPaginationPageNumber
+    Scenario: Verify pagination in manage users page when user is on the first page and navigate through each page by clicking page number
+        And the user is on the first page and it should be visually highlighted to indicate the active page the user is on
         Then the pagination controls should be displayed at the bottom of the page
         And the default page size should be twenty
         And the 'Next' button will be 'enabled' and 'visible' to the user
         And the 'Previous' button will be 'disabled' and 'not visible' to the user
         And the current page number should be visually highlighted to indicate the active page the user is on
-        Then I sequentially click through each page and verify that the pagination results are correctly displayed at the bottom
-        And the pagination should show at least one page immediately before and after the current page and the first and last pages
-        And if there are any skipped pages then ellipses will be used to replace the number
+        Then I sequentially navigate through each page by 'clicking on page number' from 'first' page to verify pagination results, surrounding pages, and ellipses for skipped ranges
 
-# @ManageUserPagination @ManageUserPaginationLastPage
-# Scenario: Verify pagination in manage users page when user is on the last page
-#     And the user is on the last page
-#     Then the pagination controls should be displayed at the bottom of the page
-#     And the default page size should be 20 items (in the last page, may be less than 20)
-#     And the 'Next' button will be disabled and not visible to the user
-#     And the 'Previous' button will be enabled and visible to the user
-#     And the current page number should be visually highlighted to indicate the active page the user is on
-#     And the pagination should show at least one page immediately before and after the current page and the first and last pages
-#     And If there are any skipped pages then ellipses will be used to replace the number
+    @ManageUserPagination @ManageUserPaginationFirstPage @ManageUserPaginationNextLinkClick
+    Scenario: Verify pagination in manage users page when user is on the first page and navigate through each page by clicking next link
+        And the user is on the first page and it should be visually highlighted to indicate the active page the user is on
+        Then the pagination controls should be displayed at the bottom of the page
+        And the default page size should be twenty
+        And the 'Next' button will be 'enabled' and 'visible' to the user
+        And the 'Previous' button will be 'disabled' and 'not visible' to the user
+        And the current page number should be visually highlighted to indicate the active page the user is on
+        Then I sequentially navigate through each page by 'clicking on next link' from 'first' page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+
+    @ManageUserPagination @ManageUserPaginationLastPage  @ManageUserPaginationPreviousLinkClick @TestOnly
+    Scenario: Verify pagination in manage users page when user is on the last page and navigate through each page by clicking previous link
+        And the user is on the last page and it and visually highlighted to indicate the active page the user is on
+        Then the pagination controls should be displayed at the bottom of the page
+        # And the default page size should be twenty
+        And the 'Next' button will be 'disabled' and 'not visible' to the user
+        And the 'Previous' button will be 'enabled' and 'visible' to the user
+        # And the current page number should be visually highlighted to indicate the active page the user is on
+        Then I sequentially navigate through each page by 'clicking on previous link' from 'last' page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+
 
 # @ManageUserPagination @ManageUserPaginationPageNumber
 # Scenario: Verify pagination in manage users page when the user selects page number

@@ -506,9 +506,18 @@ When(
 );
 
 When(
-  'the user is on the first page and it and visually highlighted to indicate the active page the user is on',
+  'the user is on the first page and it should be visually highlighted to indicate the active page the user is on',
   async ({ commonItemsPage }) => {
     await expect(commonItemsPage.firstPage).toHaveAttribute('aria-current', 'page');
+  }
+);
+
+When(
+  'the user is on the last page and it and visually highlighted to indicate the active page the user is on',
+  async ({ commonItemsPage }) => {
+    const totalPages = await commonItemsPage.getTotalPages();
+    const currentPageLocator = await commonItemsPage.clickOnPages(totalPages, 'clicking on page number');
+    await expect(currentPageLocator).toHaveAttribute('aria-current', 'page');
   }
 );
 
@@ -525,14 +534,7 @@ When('the default page size should be twenty', async ({ commonItemsPage }) => {
 When(
   'the {string} button will be {string} and {string} to the user',
   async ({ commonItemsPage }, linkLabel: string, enabledVal: string, visibleVal: string) => {
-    let locatorVal: Locator;
-    if (linkLabel === 'Next') {
-      locatorVal = commonItemsPage.next_button;
-    } else if (linkLabel === 'Previous') {
-      locatorVal = commonItemsPage.previous_button;
-    } else {
-      throw new Error(`Unsupported link label: ${linkLabel}`);
-    }
+    const locatorVal: Locator = await commonItemsPage.getLocatorforNextPreviousLinks(linkLabel);
     if (enabledVal === 'enabled' && visibleVal === 'visible') {
       await expect(locatorVal).toBeVisible();
       await expect(locatorVal).toBeEnabled();
@@ -549,11 +551,9 @@ When(
 When(
   'the current page number should be visually highlighted to indicate the active page the user is on',
   async ({ commonItemsPage }) => {
-    await commonItemsPage.next_button.click(); // a work around for now
+    await commonItemsPage.next_button.click();
     const currentUrl = commonItemsPage.page.url();
-    const parts: string[] = currentUrl.split('?');
-    const pageName: string[] = parts[1].split('&');
-    const pageNumber = parseInt(pageName[0].split('=')[1], 10);
+    const pageNumber = await commonItemsPage.getPageNumber(currentUrl);
     await expect(commonItemsPage.currentPage).toHaveAttribute('aria-current', 'page');
     const pageLink = commonItemsPage.pagination.getByRole('link', { name: 'Page ' + pageNumber });
     await expect(pageLink).toHaveAttribute('aria-label', 'Page ' + pageNumber);
@@ -564,38 +564,126 @@ When(
 );
 
 Then(
-  'I sequentially click through each page and verify that the pagination results are correctly displayed at the bottom',
-  async ({ commonItemsPage }) => {
-    const paginationResults = await commonItemsPage.getPaginationResults();
-    const paginationResultsParts: string[] = paginationResults.split(' results');
-    const paginationResultsPartsOne: string[] = paginationResultsParts[0].split('Showing ');
-    const paginationResultsPartsTwo: string[] = paginationResultsPartsOne[1].split(' of ');
-    const totalItems = parseInt(paginationResultsPartsTwo[1], 10);
+  'I sequentially navigate through each page by {string} from {string} page to verify pagination results, surrounding pages, and ellipses for skipped ranges',
+  async ({ commonItemsPage }, navigateMethod: string, startPosition: string) => {
+    if (startPosition === 'first') {
+      await commonItemsPage.firstPage.click();
+    } else if (startPosition === 'last') {
+      const totalPages = await commonItemsPage.getTotalPages();
+      await commonItemsPage.clickOnPages(totalPages, 'clicking on page number');
+    }
+    const totalItems = await commonItemsPage.getTotalItems();
     const pageSize = parseInt(commonItemsPage.commonTestData.default_page_size, 10);
-    await commonItemsPage.validatePaginationResults(totalItems, pageSize);
+    const totalPages = await commonItemsPage.getTotalPages();
+    for (let currentPage = 1; currentPage <= totalPages; currentPage++) {
+      const currentPageLocator = await commonItemsPage.clickOnPages(currentPage, navigateMethod);
+      await expect(currentPageLocator).toHaveAttribute('aria-current', 'page');
+      const startEndPagesMap = await commonItemsPage.getStartEndPages(currentPage, pageSize, totalItems);
+      const start = startEndPagesMap.get('start');
+      const end = startEndPagesMap.get('end');
+      await expect(commonItemsPage.pagination_results).toHaveText(
+        `Showing ${start} to ${end} of ${totalItems} results`
+      );
+      const itemsMap = await commonItemsPage.getPaginationValues();
+      const ellipsisIndices: any = itemsMap.get('ellipsisIndices');
+      const itemsValues: any = itemsMap.get('items');
+      const visiblePagesMap = await commonItemsPage.getVisiblePages(itemsValues);
+      const visiblePages: any = visiblePagesMap.get('visiblePages');
+      const allVisibleItems: any = itemsMap.get('allVisibleItems');
+      if (totalPages <= 7) {
+        expect(visiblePages).toEqual(allVisibleItems);
+        expect(ellipsisIndices.length).toBe(0);
+      }
+      const firstPage = 1;
+      const lastPage = totalPages;
+      if (totalPages > 7) {
+        if (currentPage <= 3) {
+          if (currentPage === firstPage) {
+            expect(visiblePages).toEqual([firstPage, currentPage + 1, lastPage]);
+            expect(allVisibleItems).toEqual([`${firstPage}`, `${currentPage + 1}`, '⋯', `${lastPage}`]);
+          } else if (currentPage === firstPage + 1) {
+            expect(visiblePages).toEqual([firstPage, currentPage, currentPage + 1, lastPage]);
+            expect(allVisibleItems).toEqual([
+              `${firstPage}`,
+              `${currentPage}`,
+              `${currentPage + 1}`,
+              '⋯',
+              `${lastPage}`,
+            ]);
+          } else if (currentPage === firstPage + 2) {
+            expect(visiblePages).toEqual([firstPage, currentPage - 1, currentPage, currentPage + 1, lastPage]);
+            expect(allVisibleItems).toEqual([
+              `${firstPage}`,
+              `${currentPage - 1}`,
+              `${currentPage}`,
+              `${currentPage + 1}`,
+              '⋯',
+              `${lastPage}`,
+            ]);
+          }
+        } else if (currentPage >= totalPages - 2) {
+          if (currentPage === lastPage - 2) {
+            expect(visiblePages).toEqual([firstPage, currentPage - 1, currentPage, currentPage + 1, lastPage]);
+            expect(allVisibleItems).toEqual([
+              `${firstPage}`,
+              '⋯',
+              `${currentPage - 1}`,
+              `${currentPage}`,
+              `${currentPage + 1}`,
+              `${lastPage}`,
+            ]);
+          } else if (currentPage === lastPage - 1) {
+            expect(visiblePages).toEqual([firstPage, currentPage - 1, currentPage, lastPage]);
+            expect(allVisibleItems).toEqual([
+              `${firstPage}`,
+              '⋯',
+              `${currentPage - 1}`,
+              `${currentPage}`,
+              `${lastPage}`,
+            ]);
+          } else if (currentPage === lastPage) {
+            expect(visiblePages).toEqual([firstPage, currentPage - 1, lastPage]);
+            expect(allVisibleItems).toEqual([`${firstPage}`, '⋯', `${currentPage - 1}`, `${lastPage}`]);
+          }
+        } else {
+          expect(visiblePages).toEqual([firstPage, currentPage - 1, currentPage, currentPage + 1, lastPage]);
+          expect(allVisibleItems).toEqual([
+            `${firstPage}`,
+            '⋯',
+            `${currentPage - 1}`,
+            `${currentPage}`,
+            `${currentPage + 1}`,
+            '⋯',
+            `${lastPage}`,
+          ]);
+        }
+        console.log('visiblePages:', visiblePages);
+        console.log('allVisibleItems with ...:', allVisibleItems);
+      }
+      expect(visiblePages).toContain(currentPage);
+      if (currentPage > 1) {
+        expect(visiblePages).toContain(currentPage - 1);
+      }
+      if (currentPage < totalPages) {
+        expect(visiblePages).toContain(currentPage + 1);
+      }
+      expect(visiblePages).toContain(1);
+      expect(visiblePages).toContain(totalPages);
+      if (navigateMethod === 'clicking on next link') {
+        const hasNextPage =
+          (await commonItemsPage.next_button.isVisible()) && !(await commonItemsPage.next_button.isDisabled());
+        if (hasNextPage) {
+          await commonItemsPage.next_button.click();
+          await commonItemsPage.page.waitForLoadState('domcontentloaded');
+        }
+      } else if (navigateMethod === 'clicking on previous link') {
+        const hasNextPage =
+          (await commonItemsPage.previous_button.isVisible()) && !(await commonItemsPage.previous_button.isDisabled());
+        if (hasNextPage) {
+          await commonItemsPage.previous_button.click();
+          await commonItemsPage.page.waitForLoadState('domcontentloaded');
+        }
+      }
+    }
   }
 );
-
-Then(
-  'the pagination should show at least one page immediately before and after the current page and the first and last pages',
-  async ({ commonItemsPage }) => {
-    const paginationResults = await commonItemsPage.getPaginationResults();
-    const paginationResultsParts: string[] = paginationResults.split(' results');
-    const paginationResultsPartsOne: string[] = paginationResultsParts[0].split('Showing ');
-    const paginationResultsPartsTwo: string[] = paginationResultsPartsOne[1].split(' of ');
-    const totalItems = parseInt(paginationResultsPartsTwo[1], 10);
-    const pageSize = parseInt(commonItemsPage.commonTestData.default_page_size, 10);
-    await commonItemsPage.validatePagination(totalItems, pageSize);
-  }
-);
-
-Then('if there are any skipped pages then ellipses will be used to replace the number', async ({ commonItemsPage }) => {
-  // const paginationResults = await commonItemsPage.getPaginationResults();
-  // const paginationResultsParts: string[] = paginationResults.split(' results');
-  // const paginationResultsPartsOne: string[] = paginationResultsParts[0].split('Showing ');
-  // const paginationResultsPartsTwo: string[] = paginationResultsPartsOne[1].split(' of ');
-  // const totalItems = parseInt(paginationResultsPartsTwo[1], 10);
-  // const pageSize = parseInt(commonItemsPage.commonTestData.default_page_size, 10);
-  // await commonItemsPage.validatePagination(totalItems, pageSize);
-  await commonItemsPage.validateEllipsesInPagination();
-});
