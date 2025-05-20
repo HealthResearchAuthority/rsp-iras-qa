@@ -302,7 +302,8 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
 
   @axeAccessibilitySystemAdministrationPage @adminUser
   Scenario: System administration home page
-    Given I have navigated to the 'System_Administration_Page'
+    Given I have navigated to the 'Home_Page'
+    When I click the 'System_administration' link on the 'Home_Page'
     Then I can see the 'System_Administration_Page'
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
@@ -766,6 +767,16 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I can see the check and add user to review body page
     And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
     And I am on the confirmation screen
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+  
+
+  @axeAccessibilityMyResearchPage @adminUser
+  Scenario: My Research Home Page
+    Given I have navigated to the 'Home_Page'
+    When I click the 'My_research' link on the 'Home_Page'
+    Then I can see the 'My_Research_Page'
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations

@@ -1,4 +1,4 @@
-@MyResearchPage @adminUser @SystemTest
+@MyResearch @adminUser @SystemTest
 Feature: User Administration: My Research
 
   Background:
