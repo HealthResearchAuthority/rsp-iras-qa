@@ -654,8 +654,8 @@ Then(
             `${lastPage}`,
           ]);
         }
-        console.log('visiblePages:', visiblePages);
-        console.log('allVisibleItems with ...:', allVisibleItems);
+        // console.log('visiblePages:', visiblePages);
+        // console.log('allVisibleItems with ...:', allVisibleItems);
       }
       expect(visiblePages).toContain(currentPage);
       if (currentPage > 1) {
@@ -766,8 +766,8 @@ Then(
             `${lastPage}`,
           ]);
         }
-        console.log('visiblePages:', visiblePages);
-        console.log('allVisibleItems with ...:', allVisibleItems);
+        // console.log('visiblePages:', visiblePages);
+        // console.log('allVisibleItems with ...:', allVisibleItems);
       }
       expect(visiblePages).toContain(currentPage);
       if (currentPage > 1) {

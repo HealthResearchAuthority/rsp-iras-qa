@@ -590,9 +590,7 @@ export default class CommonItemsPage {
 
   async clickOnNavigationButton(button: Locator) {
     const isButtonVisible = await button.isVisible();
-    const isButtonEnabled = !(await button.isDisabled());
-
-    if (isButtonVisible && isButtonEnabled) {
+    if (isButtonVisible) {
       await button.click();
       await this.page.waitForLoadState('domcontentloaded');
     }
