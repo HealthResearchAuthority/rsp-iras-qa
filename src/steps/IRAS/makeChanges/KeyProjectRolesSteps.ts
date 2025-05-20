@@ -1,5 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../hooks/CustomFixtures';
+import { sortArray } from '../../../utils/UtilFunctions';
 
 const { Then } = createBdd(test);
 
@@ -11,23 +12,24 @@ Then(
   'I fill the key project roles page with {string}',
   async ({ commonItemsPage, keyProjectRolesPage, $tags }, datasetName: string) => {
     const dataset = keyProjectRolesPage.keyProjectRolesPageTestData[datasetName];
-    for (let key in dataset) {
+    for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        if (key === 'primary_sponsor_organisation_text') {
-          if ($tags.includes('@jsEnabled')) {
-            key = 'primary_sponsor_organisation_jsenabled_text';
-          }
-          dataset[key] = dataset['primary_sponsor_organisation_text'];
+        if (key === 'primary_sponsor_organisation_text' && $tags.includes('@jsEnabled')) {
+          dataset['primary_sponsor_organisation_jsenabled_text'] = dataset['primary_sponsor_organisation_text'];
+          await commonItemsPage.fillUIComponent(
+            dataset,
+            'primary_sponsor_organisation_jsenabled_text',
+            keyProjectRolesPage
+          );
+        } else {
+          await commonItemsPage.fillUIComponent(dataset, key, keyProjectRolesPage);
         }
-        await commonItemsPage.fillUIComponent(dataset, key, keyProjectRolesPage);
-        if (key === 'primary_sponsor_organisation_jsenabled_text') {
-          if ($tags.includes('@jsEnabled')) {
-            await keyProjectRolesPage.page.waitForTimeout(2000);
-            if (await keyProjectRolesPage.primary_sponsor_organisation_suggestion_list_labels.first().isVisible()) {
-              await keyProjectRolesPage.primary_sponsor_organisation_suggestion_list_labels.first().click();
-            }
-            delete dataset[key];
+        if (key === 'primary_sponsor_organisation_text' && $tags.includes('@jsEnabled')) {
+          await keyProjectRolesPage.page.waitForTimeout(2000);
+          if (await keyProjectRolesPage.primary_sponsor_organisation_suggestion_list_labels.first().isVisible()) {
+            await keyProjectRolesPage.primary_sponsor_organisation_suggestion_list_labels.first().click();
           }
+          delete dataset['primary_sponsor_organisation_jsenabled_text'];
         }
       }
     }
@@ -88,9 +90,7 @@ Then(
   async ({ keyProjectRolesPage, rtsPage }, datasetName: string, suggestionCommonDatasetName) => {
     const dataset = keyProjectRolesPage.keyProjectRolesPageTestData[datasetName];
     const suggestionHeadersDatasetName = keyProjectRolesPage.keyProjectRolesPageTestData[suggestionCommonDatasetName];
-    let sponsorOrganisationNameListExpected = rtsPage.rtsResponseList.sort((a, b) =>
-      a.localeCompare(b, undefined, { sensitivity: 'base' })
-    );
+    let sponsorOrganisationNameListExpected = await sortArray(rtsPage.rtsResponseList);
     if (sponsorOrganisationNameListExpected.length > 5) {
       sponsorOrganisationNameListExpected = sponsorOrganisationNameListExpected.slice(0, 5);
     }

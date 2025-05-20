@@ -25,7 +25,7 @@ export default class RtsPage {
       grant_type: dataset.grant_type,
       scope: dataset.scope,
       client_id: dataset.client_id,
-      client_secret: eval(dataset.client_secret),
+      client_secret: `${process.env.RTS_CLIENT_SECRET}`,
     };
     const headers = {
       accept: dataset.accept,

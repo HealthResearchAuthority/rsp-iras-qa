@@ -1,6 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { test, expect } from '../../hooks/CustomFixtures';
-import { confirmStringNotNull } from '../../utils/UtilFunctions';
+import { confirmStringNotNull, sortArray } from '../../utils/UtilFunctions';
 
 const { When, Then } = createBdd(test);
 
@@ -68,12 +68,8 @@ Then(
       offset;
     await rtsPage.page.goto(newApplicationURL);
     const rtsDataFromApplication = confirmStringNotNull(await rtsPage.jsonDataPreLabel.textContent());
-    const rtsDataFromApplicationJSONActual = JSON.parse(rtsDataFromApplication).sort((a, b) =>
-      a.localeCompare(b, undefined, { sensitivity: 'base' })
-    );
-    const rtsResponseDataExpected = rtsPage.rtsResponseList.sort((a, b) =>
-      a.localeCompare(b, undefined, { sensitivity: 'base' })
-    );
+    const rtsDataFromApplicationJSONActual = await sortArray(JSON.parse(rtsDataFromApplication));
+    const rtsResponseDataExpected = await sortArray(rtsPage.rtsResponseList);
     expect(rtsDataFromApplicationJSONActual).toEqual(rtsResponseDataExpected);
   }
 );
