@@ -506,14 +506,14 @@ When(
 );
 
 When(
-  'the user is on the first page and it should be visually highlighted to indicate the active page the user is on',
+  'I am on the first page and it should be visually highlighted to indicate the active page the user is on',
   async ({ commonItemsPage }) => {
     await expect(commonItemsPage.firstPage).toHaveAttribute('aria-current', 'page');
   }
 );
 
 When(
-  'the user is on the last page and it and visually highlighted to indicate the active page the user is on',
+  'I am on the last page and it and visually highlighted to indicate the active page the user is on',
   async ({ commonItemsPage }) => {
     const totalPages = await commonItemsPage.getTotalPages();
     const currentPageLocator = await commonItemsPage.clickOnPages(totalPages, 'clicking on page number');
@@ -667,19 +667,9 @@ Then(
       expect(visiblePages).toContain(1);
       expect(visiblePages).toContain(totalPages);
       if (navigateMethod === 'clicking on next link') {
-        const hasNextPage =
-          (await commonItemsPage.next_button.isVisible()) && !(await commonItemsPage.next_button.isDisabled());
-        if (hasNextPage) {
-          await commonItemsPage.next_button.click();
-          await commonItemsPage.page.waitForLoadState('domcontentloaded');
-        }
+        await commonItemsPage.clickOnNextLink();
       } else if (navigateMethod === 'clicking on previous link') {
-        const hasNextPage =
-          (await commonItemsPage.previous_button.isVisible()) && !(await commonItemsPage.previous_button.isDisabled());
-        if (hasNextPage) {
-          await commonItemsPage.previous_button.click();
-          await commonItemsPage.page.waitForLoadState('domcontentloaded');
-        }
+        await commonItemsPage.clickOnPreviousLink();
       }
     }
   }
@@ -789,19 +779,9 @@ Then(
       expect(visiblePages).toContain(1);
       expect(visiblePages).toContain(totalPages);
       if (navigateMethod === 'clicking on next link') {
-        const hasNextPage =
-          (await commonItemsPage.next_button.isVisible()) && !(await commonItemsPage.next_button.isDisabled());
-        if (hasNextPage) {
-          await commonItemsPage.next_button.click();
-          await commonItemsPage.page.waitForLoadState('domcontentloaded');
-        }
+        await commonItemsPage.clickOnNextLink();
       } else if (navigateMethod === 'clicking on previous link') {
-        const hasNextPage =
-          (await commonItemsPage.previous_button.isVisible()) && !(await commonItemsPage.previous_button.isDisabled());
-        if (hasNextPage) {
-          await commonItemsPage.previous_button.click();
-          await commonItemsPage.page.waitForLoadState('domcontentloaded');
-        }
+        await commonItemsPage.clickOnPreviousLink();
       }
     }
   }

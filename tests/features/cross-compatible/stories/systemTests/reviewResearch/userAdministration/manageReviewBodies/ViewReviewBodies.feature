@@ -73,4 +73,52 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
             | Review_Body_Name         | Status |
             | Valid_Data_In_All_Fields | ACTIVE |
 
+    @rsp-3523 @ManageReviewBodiesPagination @ManageReviewBodiesPaginationFirstPage @ManageReviewBodiesPaginationPageNumber
+    Scenario: Verify pagination in manage review bodies page when user is on the first page and navigate through each page by clicking page number
+        And I am on the first page and it should be visually highlighted to indicate the active page the user is on
+        And I capture the page screenshot
+        Then the pagination controls should be displayed at the bottom of the page
+        And the default page size should be twenty
+        And the 'Next' button will be 'enabled' and 'visible' to the user
+        And the 'Previous' button will be 'disabled' and 'not visible' to the user
+        And the current page number should be visually highlighted to indicate the active page the user is on
+        Then I sequentially navigate through each page by 'clicking on page number' from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+        And I capture the page screenshot
+
+    @rsp-3523 @ManageReviewBodiesPagination @ManageReviewBodiesPaginationFirstPage @ManageReviewBodiesPaginationNextLinkClick
+    Scenario: Verify pagination in manage review bodies page when user is on the first page and navigate through each page by clicking next link
+        And I am on the first page and it should be visually highlighted to indicate the active page the user is on
+        And I capture the page screenshot
+        Then the pagination controls should be displayed at the bottom of the page
+        And the default page size should be twenty
+        And the 'Next' button will be 'enabled' and 'visible' to the user
+        And the 'Previous' button will be 'disabled' and 'not visible' to the user
+        And the current page number should be visually highlighted to indicate the active page the user is on
+        And I capture the page screenshot
+        Then I sequentially navigate through each page by 'clicking on next link' from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+        And I capture the page screenshot
+
+    @rsp-3523 @ManageReviewBodiesPagination @ManageReviewBodiesPaginationLastPage  @ManageReviewBodiesPaginationPreviousLinkClick
+    Scenario: Verify pagination in manage review bodies page when user is on the last page and navigate through each page by clicking previous link
+        And I am on the last page and it and visually highlighted to indicate the active page the user is on
+        And I capture the page screenshot
+        Then the pagination controls should be displayed at the bottom of the page
+        And the 'Next' button will be 'disabled' and 'not visible' to the user
+        And the 'Previous' button will be 'enabled' and 'visible' to the user
+        And I capture the page screenshot
+        Then I sequentially navigate through each page by 'clicking on previous link' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+        And I capture the page screenshot
+
+    @rsp-3523 @ManageReviewBodiesPagination @ManageReviewBodiesPaginationLastPage   @ManageReviewBodiesPaginationPageNumber
+    Scenario: Verify pagination in manage review bodies page when user is on the last page and navigate through each page by clicking page number
+        And I am on the last page and it and visually highlighted to indicate the active page the user is on
+        And I capture the page screenshot
+        Then the pagination controls should be displayed at the bottom of the page
+        And the 'Next' button will be 'disabled' and 'not visible' to the user
+        And the 'Previous' button will be 'enabled' and 'visible' to the user
+        And I capture the page screenshot
+        Then I sequentially navigate through each page by 'clicking on page number' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+        And I capture the page screenshot
+
+
 

@@ -588,6 +588,24 @@ export default class CommonItemsPage {
     return rowCount;
   }
 
+  async clickOnNavigationButton(button: Locator) {
+    const isButtonVisible = await button.isVisible();
+    const isButtonEnabled = !(await button.isDisabled());
+
+    if (isButtonVisible && isButtonEnabled) {
+      await button.click();
+      await this.page.waitForLoadState('domcontentloaded');
+    }
+  }
+
+  async clickOnNextLink() {
+    await this.clickOnNavigationButton(this.next_button);
+  }
+
+  async clickOnPreviousLink() {
+    await this.clickOnNavigationButton(this.previous_button);
+  }
+
   async getLocatorforNextPreviousLinks(linkLabel: string) {
     let locatorVal: Locator;
     if (linkLabel === 'Next') {
