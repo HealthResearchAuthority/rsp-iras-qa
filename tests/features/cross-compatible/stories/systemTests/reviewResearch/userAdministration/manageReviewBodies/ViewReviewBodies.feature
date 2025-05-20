@@ -120,5 +120,44 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
         Then I sequentially navigate through each page by 'clicking on page number' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
         And I capture the page screenshot
 
+    @rsp-3459 @ManageReviewBodiesSearchAndPagination @ManageReviewBodiesSearchAndPaginationFirstPage @ManageReviewBodiesSearchAndPaginationPageNumber
+    Scenario: Verify pagination in manage review bodies page when user is on the first page and navigate through each page by clicking page number
+        When I enter 'QA Automation' into the search field
+        And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
+        Then the system displays search results matching the search criteria based on '<Field_Name>'
+        And I am on the first page and it should be visually highlighted to indicate the active page the user is on
+        And I capture the page screenshot
+        Then the pagination controls should be displayed at the bottom of the page
+        And the default page size should be twenty
+        And the 'Next' button will be 'enabled' and 'visible' to the user
+        And the 'Previous' button will be 'disabled' and 'not visible' to the user
+        And the current page number should be visually highlighted to indicate the active page the user is on
+        Then I sequentially navigate through each page by 'clicking on page number' from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+        And I capture the page screenshot
+        When I click the 'Back_To_Review_Body_Profile' link on the 'Review_Body_User_List_Page'
+        Then I can see the review body profile page
 
+        Examples:
+            | Field_Name        | Position |
+            | Organisation_Name | First    |
+            | Organisation_Name | Last     |
 
+    @rsp-3459 @VerifyUserListCreateReviewBody @UserListReviewBodyNoUsersReviewBody
+    Scenario: Verify the user can view the user list page of the newly created review body
+        And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
+        Then I can see the 'Create_Review_Body_Page'
+        And I capture the page screenshot
+        When I fill the new review body page using 'Valid_Data_In_All_Mandatory_Fields'
+        And I capture the page screenshot
+        And I click the 'Continue' button on the 'Create_Review_Body_Page'
+        And I capture the page screenshot
+        Then I can see the check and create review body page for 'Valid_Data_In_All_Mandatory_Fields'
+        When I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
+        Then I can see the create Review body confirmation page for 'Valid_Data_In_All_Mandatory_Fields'
+        And I capture the page screenshot
+        When I click the 'Back_To_Manage_Review_Bodies' link on the 'Create_Review_Body_Confirmation_Page'
+        Then I can see the 'Manage_Review_Bodies_Page'
+        And I capture the page screenshot
+        When I enter unique organisation name of the newly created review body into the search field
+        And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
+'
