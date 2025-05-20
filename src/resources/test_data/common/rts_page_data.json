@@ -4,7 +4,6 @@
     "grant_type": "client_credentials",
     "scope": "openid+profile+email",
     "client_id": "aaU7PY4hz_x_RVOyCo09CulPbTca",
-    "client_secret": "`${process.env.RTS_CLIENT_SECRET}`",
     "accept": "application/json",
     "accept_encoding": "gzip, deflate, br",
     "accept_language": "en-GB,en-US;q=0.9,en;q=0.8",
