@@ -583,6 +583,10 @@ export default class CommonItemsPage {
     const totalItems = parseInt(paginationResultsPartsTwo[1], 10);
     return totalItems;
   }
+  async getItemsPerPage() {
+    const rowCount = await this.tableRows.count();
+    return rowCount;
+  }
 
   async getLocatorforNextPreviousLinks(linkLabel: string) {
     let locatorVal: Locator;
@@ -623,7 +627,7 @@ export default class CommonItemsPage {
     const visiblePagesMap = new Map([['visiblePages', visiblePages]]);
     return visiblePagesMap;
   }
-  async getStartEndPages(i, pageSize, totalItems) {
+  async getStartEndPages(i: number, pageSize: number, totalItems: number) {
     const start = (i - 1) * pageSize + 1;
     const end = Math.min(i * pageSize, totalItems);
     const startEndPagesMap = new Map([

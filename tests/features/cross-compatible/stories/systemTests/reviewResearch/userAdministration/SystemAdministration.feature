@@ -30,3 +30,4 @@ Feature: User Administration: System Administration
   @rsp-3519 @ValidateTopMenuBarLinks
   Scenario: Validate the top menu bar links
     And the top menu bar will not have links to 'Manage Users' or 'System Admin'
+    And I capture the page screenshot
