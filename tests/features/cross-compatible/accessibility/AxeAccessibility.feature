@@ -339,7 +339,6 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-
   @axeAccessibilityConfirmReviewBodies @adminUser @axeAccessibilityManageReviewBodies
   Scenario Outline: Create review body confirmation page
     Given I have navigated to the 'Manage_Review_Bodies_Page'
@@ -650,7 +649,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityReviewBodyUserListSearchNoResultsFound  @axeAccessibilityReviewBodyUserList @adminUser @axeAccessibilityManageReviewBodies
+  @axeAccessibilityReviewBodyUserListSearchNoResultsFound @axeAccessibilityReviewBodyUserList @adminUser @axeAccessibilityManageReviewBodies
   Scenario: View user list page of the review body when search results not found
     Given I have navigated to the 'System_Administration_Page'
     And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
@@ -766,6 +765,20 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I can see the check and add user to review body page
     And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
     And I am on the confirmation screen
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityKeyProjectRolesSponsorOrganisation @adminUser
+  Scenario: Key Project Roles - Primary Sponsor Organisation Suggestion List
+    Given I have navigated to the my research projects page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    When I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    When I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    Then I can see the key project roles page
+    And I fill the key project roles page with 'Sponsor_Organisation_Partial_Text_NHS'
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
