@@ -133,7 +133,7 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
             | Organisation_Name | First    |
             | Organisation_Name | Last     |
 
-    @rsp-3459 @ManageReviewBodiesSearchNoResultsFound @TestOnly
+    @rsp-3459 @ManageReviewBodiesSearchNoResultsFound
     Scenario Outline: Verify no results found message will be presented to the user in manage review bodies page if there is no review body on the system that matches the search criteria
         When I enter the '<Search_Query>' as the search query into the search field
         And I capture the page screenshot

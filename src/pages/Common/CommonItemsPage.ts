@@ -708,7 +708,6 @@ export default class CommonItemsPage {
   async getUserListByPosition(position: string) {
     let userList: any;
     if (position.toLowerCase() == 'first') {
-      // await this.firstPage.click();
       userList = await this.getUsersByPage();
     } else if (position.toLowerCase() == 'last') {
       const totalPages = await this.getTotalPages();

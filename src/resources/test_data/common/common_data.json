@@ -5,7 +5,7 @@
   "top_menu_bar_links": ["Home", "Review Applications", "Admin", "Question Set", "My Applications", "Logout"],
   "enabled_status": "ACTIVE",
   "disabled_status": "DISABLED",
-  "first_page": "1",
+  "first_page": "Page 1",
   "default_page_size": "20",
   "previous_button": "Previous   page"
 }
