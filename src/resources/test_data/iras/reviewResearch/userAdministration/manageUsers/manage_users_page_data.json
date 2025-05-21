@@ -5,6 +5,8 @@
     "add_new_users_record_link": "Add a new user profile record",
     "view_edit_link": "View/Edit",
     "search_button_label": "Search",
+    "no_results_heading": "No results found",
+    "no_results_guidance_text": "Check your spelling or enter another search term and try again. If no results are found, you can create a new user profile record.",
     "Label_Texts_Manage_Users_List": {
       "first_name_column_header_label": "First name",
       "last_name_column_header_label": "Last name",

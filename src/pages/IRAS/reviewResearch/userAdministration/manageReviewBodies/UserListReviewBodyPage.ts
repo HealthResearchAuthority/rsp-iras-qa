@@ -1,5 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as userListReviewBodyPageTestData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageReviewBodies/user_list_review_body_page_data.json';
+import { confirmStringNotNull } from '../../../../../utils/UtilFunctions';
 
 //Declare Page Objects
 export default class UserListReviewBodyPage {
@@ -249,5 +250,11 @@ export default class UserListReviewBodyPage {
     ]);
     await this.setFullName(fullNameMap);
     return searchKey;
+  }
+  async updateUserInfo() {
+    await this.setFirstName(confirmStringNotNull(await this.first_name_value_first_row.textContent()));
+    await this.setLastName(confirmStringNotNull(await this.last_name_value_first_row.textContent()));
+    await this.setEmail(confirmStringNotNull(await this.email_address_value_first_row.textContent()));
+    await this.setStatus(confirmStringNotNull(await this.status_value_first_row.textContent()));
   }
 }

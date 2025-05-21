@@ -255,4 +255,66 @@ Feature: User Administration: Manage user profiles, view and edit user profile
         Then I sequentially navigate through each page by 'clicking on page number' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
         And I capture the page screenshot
 
+    @rsp-3456 @ManageUsersSearchResultsFound
+    Scenario Outline: Verify search results in manage users page when user search by first value of first name, last name, full name and email address
+        When I enter the '<Field_Name>' of the '<Position>' item in the list, into the search field
+        And I capture the page screenshot
+        And I click the 'Search' button on the 'Manage_Users_Page'
+        And I capture the page screenshot
+        Then the system displays search results matching the search criteria
+        And I capture the page screenshot
+        Examples:
+            | Field_Name    | Position |
+            | First_Name    | First    |
+            | Last_Name     | First    |
+            | Email_Address | First    |
+            | Full_Name     | First    |
+
+    @rsp-3456 @ManageUsersSearchResultsFound @TestOnly
+    Scenario Outline: Verify search results in manage users page when user search by last value of first name, last name and email address
+        When I enter the '<Field_Name>' of the '<Position>' item in the list, into the search field
+        And I capture the page screenshot
+        And I click the 'Search' button on the 'Manage_Users_Page'
+        And I capture the page screenshot
+        Then the system displays search results matching the search criteria
+        And I capture the page screenshot
+        Examples:
+            | Field_Name | Position |
+            # | First_Name    | Last     |
+            # | Last_Name     | Last     |
+            # | Email_Address | Last     |
+            | Full_Name  | Last     |
+
+    @rsp-3456 @ManageUsersSearchNoResultsFound @TestOnly
+    Scenario Outline: Verify no results found message will be presented to the user in manage users page if there is not a user on the system that matches the search criteria
+        When I enter the '<Search_Query>' as the search query into the search field
+        And I capture the page screenshot
+        And I click the 'Search' button on the 'Manage_Users_Page'
+        And I capture the page screenshot
+        Then the system displays no results found message if there is no user on the system that matches the search criteria
+        And I capture the page screenshot
+        Examples:
+            | Search_Query                |
+            | ThisShouldNot ReturnAResult |
+
+    @rsp-3456 @ManageUsersSearchAndPagination
+    Scenario Outline: Verify search results and pagination in manage users page when user searches and navigate through each page by clicking previous link
+        When I enter the '<Search_Query>' as the search query into the search field
+        And I capture the page screenshot
+        And I click the 'Search' button on the 'Manage_Users_Page'
+        And I capture the page screenshot
+        Then the system displays search results matching the search criteria
+        And I capture the page screenshot
+        And I am on the last page and it and visually highlighted to indicate the active page the user is on
+        And I capture the page screenshot
+        Then the pagination controls should be displayed at the bottom of the page
+        And the 'Next' button will be 'disabled' and 'not visible' to the user
+        And the 'Previous' button will be 'enabled' and 'visible' to the user
+        And I capture the page screenshot
+        Then I sequentially navigate through each page by 'clicking on previous link' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+        And I capture the page screenshot
+        Examples:
+            | Search_Query       |
+            | QA Automation      |
+            | QA Automation Test |
 

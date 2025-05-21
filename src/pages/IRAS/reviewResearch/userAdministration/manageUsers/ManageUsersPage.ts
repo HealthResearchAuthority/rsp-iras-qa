@@ -38,6 +38,8 @@ export default class ManageUsersPage {
   readonly userListRows: Locator;
   readonly userListCell: Locator;
   readonly statusCell: Locator;
+  readonly no_results_heading: Locator;
+  readonly no_results_guidance_text: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -82,6 +84,14 @@ export default class ManageUsersPage {
     this.last_name_from_list_label = this.page.locator('td').nth(1);
     this.email_address_from_list_label = this.page.locator('td').nth(2);
     this.status_from_list_label = this.page.locator('td').nth(3);
+    this.no_results_heading = this.page
+      .getByRole('heading')
+      .getByText(this.manageUsersPageTestData.Manage_Users_Page.no_results_heading, { exact: true });
+    this.no_results_guidance_text = this.page
+      .getByRole('paragraph')
+      .getByText(this.manageUsersPageTestData.Manage_Users_Page.no_results_guidance_text, {
+        exact: true,
+      });
   }
 
   async assertOnManageUsersPage() {

@@ -34,7 +34,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         When I enter 'QA Automation' into the search field
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
-        Then the system displays no results found message
+        Then the system displays no results found message in the user list page of the review body
 
     @UserListReviewBodyDefaultSort
     Scenario: Verify the user can view the user list page of any selected review body and it is sorted by default in the alphabetical order of the 'First Name'
@@ -80,7 +80,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I capture the page screenshot
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
-        Then the system displays search results matching the search criteria based on '<Field_Name>'
+        Then the system displays search results matching the search criteria
         When I click the 'Back_To_Review_Body_Profile' link on the 'Review_Body_User_List_Page'
         Then I can see the review body profile page
 
@@ -117,7 +117,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I capture the page screenshot
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
-        Then the system displays search results matching the search criteria based on 'Email_Address'
+        Then the system displays search results matching the search criteria
         When I click the 'Remove' link on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then I can see the check and remove user profile page
@@ -129,7 +129,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I enter an input into the search field to search for the removed user of the review body
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
-        Then the system displays no results found message
+        Then the system displays no results found message in the user list page of the review body
         When I click the 'Manage_Users' link on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then I can see the 'Manage_Users_Page'
@@ -158,7 +158,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I capture the page screenshot
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
-        Then the system displays search results matching the search criteria based on 'Email_Address'
+        Then the system displays search results matching the search criteria
         When I click the 'Remove' link on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then I can see the check and remove user profile page
@@ -171,7 +171,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         When I enter the 'Email Address' of the 'last' user shown on the current review body users list, into the search field
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
-        Then the system displays search results matching the search criteria based on 'Email_Address'
+        Then the system displays search results matching the search criteria
         When I click the 'Remove' link on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then I can see the check and remove user profile page
@@ -183,7 +183,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I enter an input into the search field to search for the removed user of the review body
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
-        Then the system displays no results found message
+        Then the system displays no results found message in the user list page of the review body
         When I click the 'Manage_Users' link on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then I can see the 'Manage_Users_Page'
@@ -209,7 +209,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I capture the page screenshot
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
-        Then the system displays search results matching the search criteria based on 'Email_Address'
+        Then the system displays search results matching the search criteria
         When I click the 'Remove' link on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then I can see the check and remove user profile page
@@ -221,7 +221,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I enter an input into the search field to search for the removed user of the review body
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
-        Then the system displays no results found message
+        Then the system displays no results found message in the user list page of the review body
         When I click the 'Back_To_Users' link on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then I can see the user list page of the review body
@@ -247,7 +247,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         When I enter the 'Email Address' of the 'last' user shown on the current review body users list, into the search field
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
-        Then the system displays search results matching the search criteria based on 'Email_Address'
+        Then the system displays search results matching the search criteria
         When I click the 'Remove' link on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then I can see the check and remove user profile page
@@ -278,7 +278,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         When I enter the 'Email Address' of the 'last' user shown on the current review body users list, into the search field
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
-        Then the system displays search results matching the search criteria based on 'Email_Address'
+        Then the system displays search results matching the search criteria
         When I click the 'Remove' link on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then I can see the check and remove user profile page

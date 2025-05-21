@@ -14,6 +14,8 @@
     "search_box": "",
     "enabled_status": "ACTIVE",
     "disabled_status": "DISABLED",
-    "actions_link": "View/Edit"
+    "actions_link": "View/Edit",
+    "no_results_heading": "No results found",
+    "no_results_guidance_text": "Check your spelling or enter another search term and try again. If no results are found, you can create a new review body record."
   }
 }

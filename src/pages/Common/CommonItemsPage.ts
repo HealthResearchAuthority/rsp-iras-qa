@@ -16,6 +16,7 @@ import BookingPage from '../IRAS/questionSet/BookingPage';
 import ChildrenPage from '../IRAS/questionSet/ChildrenPage';
 import { PageObjectDataName } from '../../utils/CustomTypes';
 import { confirmStringNotNull, removeUnwantedWhitespace } from '../../utils/UtilFunctions';
+import UserListReviewBodyPage from '../IRAS/reviewResearch/userAdministration/manageReviewBodies/UserListReviewBodyPage';
 
 //Declare Page Objects
 export default class CommonItemsPage {
@@ -554,6 +555,32 @@ export default class CommonItemsPage {
     }
     return false;
   }
+  async validateSearchResultsFullName(
+    userListAfterSearch: any,
+    firstName: string,
+    lastName: string,
+    searchKey: string
+  ) {
+    for (const val of userListAfterSearch) {
+      if (
+        val.toLowerCase().includes(firstName.toLowerCase()) ||
+        val.toLowerCase().includes(lastName.toLowerCase()) ||
+        val.toLowerCase().includes(searchKey.toLowerCase())
+      ) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  async validateSearchResultsMultipleWordsSearchKey(
+    userListAfterSearch: string[],
+    searchTerms: string[]
+  ): Promise<boolean> {
+    return userListAfterSearch.every((user) =>
+      searchTerms.some((term) => user.toLowerCase().includes(term.toLowerCase()))
+    );
+  }
 
   async getTopMenuBarLinksNames() {
     const topMenuBarLinksValues: string[] = [];
@@ -676,5 +703,85 @@ export default class CommonItemsPage {
       }
     }
     return maxPage;
+  }
+
+  async getUserListByPosition(position: string) {
+    let userList: any;
+    if (position.toLowerCase() == 'first') {
+      // await this.firstPage.click();
+      userList = await this.getUsersByPage();
+    } else if (position.toLowerCase() == 'last') {
+      const totalPages = await this.getTotalPages();
+      await this.clickOnPages(totalPages, 'clicking on page number');
+      userList = await this.getUsersByPage();
+    }
+    return userList;
+  }
+  async getSearchQueryFNameLNameEmailByPosition(
+    position: string,
+    fieldKey: string,
+    userListReviewBodyPage: UserListReviewBodyPage
+  ) {
+    let searchValues: any;
+    const userList = await this.getUserListByPosition(position);
+    if (fieldKey === 'Email_Address') {
+      searchValues = userList.get('emailAddressValues');
+    } else if (fieldKey === 'First_Name') {
+      searchValues = userList.get('firstNameValues');
+      await userListReviewBodyPage.setUserFirstName(searchValues);
+    } else if (fieldKey === 'Last_Name') {
+      searchValues = userList.get('lastNameValues');
+      await userListReviewBodyPage.setUserLastName(searchValues);
+    }
+    return searchValues[0];
+  }
+
+  async getUsersByPage(): Promise<Map<string, string[]>> {
+    const firstNameValues: string[] = [];
+    const lastNameValues: string[] = [];
+    const emailAddressValues: string[] = [];
+    for (let i = 1; i < 2; i++) {
+      const columns = this.tableRows.nth(i).getByRole('cell');
+      const firstName = confirmStringNotNull(await columns.nth(0).textContent());
+      firstNameValues.push(firstName);
+      const lastName = confirmStringNotNull(await columns.nth(1).textContent());
+      lastNameValues.push(lastName);
+      const emailAddress = confirmStringNotNull(await columns.nth(2).textContent());
+      emailAddressValues.push(emailAddress);
+    }
+    const userMap = new Map([
+      ['firstNameValues', firstNameValues],
+      ['lastNameValues', lastNameValues],
+      ['emailAddressValues', emailAddressValues],
+    ]);
+    return userMap;
+  }
+
+  async getSearchQueryFullNameByPosition(
+    position: string,
+    fieldKey: string,
+    userListReviewBodyPage: UserListReviewBodyPage
+  ) {
+    const userList = await this.getUserListByPosition(position);
+    if (fieldKey === 'Full_Name') {
+      await userListReviewBodyPage.setUserFirstName(userList.get('firstNameValues'));
+      await userListReviewBodyPage.setUserLastName(userList.get('lastNameValues'));
+    }
+  }
+
+  async splitSearchTerm(term: string) {
+    return term.trim().split(/\s+/);
+  }
+
+  async filterResults(results: string[], searchTerms: string[]) {
+    return results.filter((result) => searchTerms.some((term) => result.toLowerCase().includes(term.toLowerCase())));
+  }
+
+  async getFilteredSearchResultsBeforeSearch(userListReviewBodyPage: UserListReviewBodyPage) {
+    const userValues = await userListReviewBodyPage.getUserListBeforeSearch();
+    const searchKey = await userListReviewBodyPage.getSearchKey();
+    const searchTerms = await this.splitSearchTerm(searchKey);
+    const filteredSearchResults = await this.filterResults(userValues, searchTerms);
+    return filteredSearchResults;
   }
 }

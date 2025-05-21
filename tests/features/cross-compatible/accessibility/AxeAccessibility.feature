@@ -571,7 +571,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I can see the user list page of the review body
     When I enter the 'Email Address' of the 'last' user shown on the current review body users list, into the search field
     And I click the 'Search' button on the 'Review_Body_User_List_Page'
-    Then the system displays search results matching the search criteria based on 'Email_Address'
+    Then the system displays search results matching the search criteria
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
@@ -605,7 +605,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I can see the user list page of the review body
     When I enter the 'Email Address' of the 'last' user shown on the current review body users list, into the search field
     And I click the 'Search' button on the 'Review_Body_User_List_Page'
-    Then the system displays search results matching the search criteria based on 'Email_Address'
+    Then the system displays search results matching the search criteria
     When I click the 'Remove' link on the 'Review_Body_User_List_Page'
     Then I can see the check and remove user profile page
     When I Scan the page with the Axe Accessibilty Tool
@@ -641,7 +641,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I can see the user list page of the review body
     When I enter the 'Email Address' of the 'last' user shown on the current review body users list, into the search field
     And I click the 'Search' button on the 'Review_Body_User_List_Page'
-    Then the system displays search results matching the search criteria based on 'Email_Address'
+    Then the system displays search results matching the search criteria
     When I click the 'Remove' link on the 'Review_Body_User_List_Page'
     Then I can see the check and remove user profile page
     And I click the 'Remove_User_Profile' button on the 'Check_Remove_User_Profile_Page'
@@ -679,7 +679,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I can see the user list page of the review body
     When I enter the 'Email Address' of the 'last' user shown on the current review body users list, into the search field
     And I click the 'Search' button on the 'Review_Body_User_List_Page'
-    Then the system displays search results matching the search criteria based on 'Email_Address'
+    Then the system displays search results matching the search criteria
     When I click the 'Remove' link on the 'Review_Body_User_List_Page'
     Then I can see the check and remove user profile page
     And I click the 'Remove_User_Profile' button on the 'Check_Remove_User_Profile_Page'
@@ -688,7 +688,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I can see the user list page of the review body
     And I enter an input into the search field to search for the removed user of the review body
     And I click the 'Search' button on the 'Review_Body_User_List_Page'
-    Then the system displays no results found message
+    Then the system displays no results found message in the user list page of the review body
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations

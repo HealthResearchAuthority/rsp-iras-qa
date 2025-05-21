@@ -17,6 +17,8 @@ export default class ManageReviewBodiesPage {
   readonly actionsLink: Locator;
   readonly statusCell: Locator;
   readonly orgListRows: Locator;
+  readonly no_results_heading: Locator;
+  readonly no_results_guidance_text: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -43,6 +45,14 @@ export default class ManageReviewBodiesPage {
       .getByText(this.manageReviewBodiesPageData.Manage_Review_Body_Page.actions_link, { exact: true });
     this.statusCell = this.page.getByRole('cell').locator('strong');
     this.orgListRows = this.page.getByRole('table').getByRole('row');
+    this.no_results_heading = this.page
+      .getByRole('heading')
+      .getByText(this.manageReviewBodiesPageData.Manage_Review_Body_Page.no_results_heading, { exact: true });
+    this.no_results_guidance_text = this.page
+      .getByRole('paragraph')
+      .getByText(this.manageReviewBodiesPageData.Manage_Review_Body_Page.no_results_guidance_text, {
+        exact: true,
+      });
   }
 
   //Page Methods

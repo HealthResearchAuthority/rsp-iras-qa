@@ -786,3 +786,75 @@ Then(
     }
   }
 );
+
+When(
+  'I enter the {string} of the {string} item in the list, into the search field',
+  async ({ userListReviewBodyPage, commonItemsPage, manageUsersPage }, fieldKey: string, position: string) => {
+    if ((await commonItemsPage.tableRows.count()) >= 2) {
+      let searchKey: string = '';
+      if (fieldKey === 'First_Name' || fieldKey === 'Last_Name' || fieldKey === 'Email_Address') {
+        searchKey = await commonItemsPage.getSearchQueryFNameLNameEmailByPosition(
+          position,
+          fieldKey,
+          userListReviewBodyPage
+        );
+      } else if (fieldKey === 'Full_Name') {
+        await commonItemsPage.getSearchQueryFullNameByPosition(position, fieldKey, userListReviewBodyPage);
+        searchKey = await userListReviewBodyPage.getSearchQueryFullName(position);
+      }
+      await manageUsersPage.goto(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size);
+      const userListBeforeSearch = await commonItemsPage.getAllUsersFromTheTable();
+      const userValues: any = userListBeforeSearch.get('searchResultValues');
+      await userListReviewBodyPage.setUserListBeforeSearch(userValues);
+      await userListReviewBodyPage.setSearchKey(searchKey);
+      await commonItemsPage.search_text.fill(searchKey);
+    } else {
+      throw new Error(`There are no items in list to search`);
+    }
+  }
+);
+
+When(
+  'I enter the {string} as the search query into the search field',
+  async ({ userListReviewBodyPage, commonItemsPage }, searchKey: string) => {
+    if ((await commonItemsPage.tableRows.count()) >= 2) {
+      const userListBeforeSearch = await commonItemsPage.getAllUsersFromTheTable();
+      const userValues: any = userListBeforeSearch.get('searchResultValues');
+      await userListReviewBodyPage.setUserListBeforeSearch(userValues);
+      await userListReviewBodyPage.setSearchKey(searchKey);
+      await commonItemsPage.search_text.fill(searchKey);
+    } else {
+      throw new Error(`There are no items in list to search`);
+    }
+  }
+);
+
+Then(
+  'the system displays no results found message if there is no user on the system that matches the search criteria',
+  async ({ manageUsersPage, commonItemsPage, userListReviewBodyPage }) => {
+    const filteredSearchResults = await commonItemsPage.getFilteredSearchResultsBeforeSearch(userListReviewBodyPage);
+    expect(await commonItemsPage.tableRows.count()).toBe(0);
+    expect(filteredSearchResults).toEqual([]);
+    await expect(manageUsersPage.no_results_heading).toHaveText(
+      manageUsersPage.manageUsersPageTestData.Manage_Users_Page.no_results_heading
+    );
+    await expect(manageUsersPage.no_results_guidance_text).toHaveText(
+      manageUsersPage.manageUsersPageTestData.Manage_Users_Page.no_results_guidance_text
+    );
+  }
+);
+
+Then(
+  'the system displays no results found message if there is no review body on the system that matches the search criteria',
+  async ({ manageReviewBodiesPage, commonItemsPage, userListReviewBodyPage }) => {
+    const filteredSearchResults = await commonItemsPage.getFilteredSearchResultsBeforeSearch(userListReviewBodyPage);
+    expect(await commonItemsPage.tableRows.count()).toBe(0);
+    expect(filteredSearchResults).toEqual([]);
+    await expect(manageReviewBodiesPage.no_results_heading).toHaveText(
+      manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.no_results_heading
+    );
+    await expect(manageReviewBodiesPage.no_results_guidance_text).toHaveText(
+      manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.no_results_guidance_text
+    );
+  }
+);
