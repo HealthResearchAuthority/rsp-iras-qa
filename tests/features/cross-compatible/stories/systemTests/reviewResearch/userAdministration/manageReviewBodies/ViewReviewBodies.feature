@@ -135,19 +135,19 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
 
     @rsp-3459 @ManageReviewBodiesSearchNoResultsFound
     Scenario Outline: Verify no results found message will be presented to the user in manage review bodies page if there is no review body on the system that matches the search criteria
-        When I enter the '<Search_Query>' as the search query into the search field
+        When I fill the search input for searching review bodies in manage review bodies page with '<Search_Query>' as the search query
         And I capture the page screenshot
         And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
         Then the system displays no results found message if there is no review body on the system that matches the search criteria
         And I capture the page screenshot
         Examples:
-            | Search_Query                |
-            | ThisShouldNot ReturnAResult |
+            | Search_Query      |
+            | Non_Existant_Data |
 
     @rsp-3459 @ManageReviewBodiesSearchAndPagination
     Scenario Outline: Verify search results and pagination in manage review bodies page when user searches and navigate through each page by clicking previous link
-        When I enter the '<Search_Query>' as the search query into the search field
+        When I fill the search input for searching review bodies in manage review bodies page with '<Search_Query>' as the search query
         And I capture the page screenshot
         And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
@@ -162,6 +162,21 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
         Then I sequentially navigate through each page by 'clicking on previous link' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
         And I capture the page screenshot
         Examples:
-            | Search_Query       |
-            | QA Automation      |
-            | QA Automation Test |
+            | Search_Query         |
+            | Existing_QA_Data_One |
+            | Existing_QA_Data_Two |
+
+    # out of scope for now
+    @rsp-3459 @ManageReviewBodiesSearchLeadingAndTrailingWhiteSpaces @fail @skip
+    Scenario Outline: Verify search results in manage review bodies page when the search keyword contains leading and trailing white spaces
+        When I fill the search input for searching review bodies in manage review bodies page with '<Search_Query>' as the search query
+        And I capture the page screenshot
+        And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
+        And I capture the page screenshot
+        Then the system displays search results matching the search criteria
+        And I capture the page screenshot
+        Examples:
+            | Search_Query                          |
+            | Leading_White_Space_Data              |
+            | Leading_And_Trailing_White_Space_Data |
+            | Trailing_White_Space_Data             |

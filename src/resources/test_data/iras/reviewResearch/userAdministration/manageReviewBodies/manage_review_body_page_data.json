@@ -17,5 +17,15 @@
     "actions_link": "View/Edit",
     "no_results_heading": "No results found",
     "no_results_guidance_text": "Check your spelling or enter another search term and try again. If no results are found, you can create a new review body record."
+  },
+  "Search_For_Review_Bodies": {
+    "Search_Queries": {
+      "Non_Existant_Data": { "search_input_text": "ThisShouldNot ReturnAResult" },
+      "Leading_White_Space_Data": { "search_input_text": " QA Automation" },
+      "Leading_And_Trailing_White_Space_Data": { "search_input_text": " QA Automation " },
+      "Trailing_White_Space_Data": { "search_input_text": "QA Automation " },
+      "Existing_QA_Data_One": { "search_input_text": "QA Automation" },
+      "Existing_QA_Data_Two": { "search_input_text": "QA Automation Test" }
+    }
   }
 }

@@ -5,7 +5,7 @@ import {
   removeUnwantedWhitespace,
   returnSingleRandomLocator,
 } from '../../../../../utils/UtilFunctions';
-const { Then } = createBdd(test);
+const { When, Then } = createBdd(test);
 
 Then(
   'I can see the review body for {string} is present in the list',
@@ -124,5 +124,23 @@ Then(
       true
     );
     await createdReviewBodyRow.locator(manageReviewBodiesPage.actionsLink).click();
+  }
+);
+
+When(
+  'I fill the search input for searching review bodies in manage review bodies page with {string} as the search query',
+  async ({ manageReviewBodiesPage, commonItemsPage, userListReviewBodyPage }, searchQueryName: string) => {
+    const searchQueryDataset =
+      manageReviewBodiesPage.manageReviewBodiesPageData.Search_For_Review_Bodies.Search_Queries[searchQueryName];
+    const searchKey = searchQueryDataset['search_input_text'];
+    if ((await commonItemsPage.tableRows.count()) >= 2) {
+      const userListBeforeSearch = await commonItemsPage.getAllUsersFromTheTable();
+      const userValues: any = userListBeforeSearch.get('searchResultValues');
+      await userListReviewBodyPage.setUserListBeforeSearch(userValues);
+      await userListReviewBodyPage.setSearchKey(searchKey);
+      await commonItemsPage.search_text.fill(searchKey);
+    } else {
+      throw new Error(`There are no items in list to search`);
+    }
   }
 );
