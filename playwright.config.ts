@@ -7,6 +7,58 @@ import { browserVal, platformVal, getReportFolderName } from './src/utils/UtilFu
 const browser: any = browserVal;
 const platform: string = platformVal;
 
+/*
+const customIOS744x1133 = {
+  viewport: { width: 744, height: 1133 },
+  userAgent:
+    '(iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1',
+  deviceScaleFactor: 2,
+  isMobile: true,
+  hasTouch: true,
+  javaScriptEnabled: true,
+};
+
+const customIOS428x926 = {
+  viewport: { width: 428, height: 926 },
+  userAgent:
+    ' (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Mobile/15E148 Safari/604.1',
+  deviceScaleFactor: 3,
+  isMobile: true,
+  hasTouch: true,
+  javaScriptEnabled: true,
+};
+
+const customAndroid700x840 = {
+  viewport: { width: 700, height: 840 },
+  userAgent:
+    'Mozilla/5.0 (Linux; Android 12; Pixel 5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Mobile Safari/537.36',
+  deviceScaleFactor: 2,
+  isMobile: true,
+  hasTouch: true,
+  javaScriptEnabled: true,
+};
+
+const customAndroid412x917 = {
+  viewport: { width: 412, height: 917 },
+  userAgent: 'Mozilla/5.0 (Linux; Android 12; Pixel 4a) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0',
+  deviceScaleFactor: 2.625,
+  isMobile: true,
+  hasTouch: true,
+  javaScriptEnabled: true,
+};
+
+*/
+
+const customIOS744x1133 = {
+  viewport: { width: 744, height: 1133 },
+  userAgent:
+    '(iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1',
+  deviceScaleFactor: 2,
+  isMobile: true,
+  hasTouch: true,
+  javaScriptEnabled: true,
+};
+
 const config: PlaywrightTestConfig = {
   reporter: [
     ['list', { printSteps: true }],
@@ -67,11 +119,12 @@ const config: PlaywrightTestConfig = {
         outputDir: 'generated-feature-files/future-iras',
       }),
       use: {
-        headless: true,
+        ...customIOS744x1133,
+        headless: false,
         launchOptions: {
           slowMo: 0,
         },
-        javaScriptEnabled: false,
+        javaScriptEnabled: true,
       },
     },
   ],
