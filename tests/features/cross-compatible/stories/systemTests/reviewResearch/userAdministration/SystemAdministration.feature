@@ -5,7 +5,7 @@ Feature: User Administration: System Administration
     Given I have navigated to the 'System_Administration_Page'
     Then I can see the system administration home page
 
-  @rsp-3423 @SystemAdministrationPage
+  @rsp-2931 @rsp-3423 @SystemAdministrationPage
   Scenario Outline: Validate the system administration home page
     Then I can see the '<Validation_Text>' ui labels on the system administration home page
     Then I capture the page screenshot
