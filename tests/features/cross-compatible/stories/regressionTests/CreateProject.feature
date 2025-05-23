@@ -219,3 +219,20 @@ Feature: Create Amendment - Create Project - Regression Tests
     Examples:
       | Navigation_Button_First | Navigation_Button_Second | Project_Details_IRAS | Navigation_Button_Third | Validation_Text | Project_Details_Title | Key_Project_Roles     | Research_Locations   |
       | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Data_With_No_NHS_HSC |
+
+  @CreateProjectRTSRegression @jsEnabled
+  Scenario Outline: Validate the active primary sponsor organisation from rts with data in database
+    When I authorise the rts api using '<RTS_API_Data>'
+    Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation
+    And I validate the list of sponsor organisations retrieved in ui compared to the rts response received using '<RTS_Request>'
+
+    Examples:
+      | RTS_API_Data         | RTS_Request                                 |
+      | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS         |
+      | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_MAN         |
+      | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Brackets    |
+      | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Dot_Comma   |
+      | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Slash       |
+      | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Hyphen      |
+      | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Start_Space |
+      | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space  |

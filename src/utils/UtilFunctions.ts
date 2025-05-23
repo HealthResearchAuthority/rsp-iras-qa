@@ -573,3 +573,7 @@ export async function returnSingleRandomLocator(resolvesToMultiElements: Locator
   const randomIndex = Math.floor(Math.random() * (noOfElements - 1));
   return resolvesToMultiElements.nth(randomIndex);
 }
+
+export async function sortArray(value: string[]): Promise<string[]> {
+  return value.sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }));
+}
