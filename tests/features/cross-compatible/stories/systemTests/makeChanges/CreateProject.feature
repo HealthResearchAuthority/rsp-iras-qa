@@ -641,8 +641,8 @@ Feature: Create Amendment - Create Project
     When I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
     Then I can see the key project roles page
     And I capture the page screenshot
-    When I authorise the rts api using '<RTS_API_Data>' and store the bearer token in memory
-    Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation and save the response in memory
+    When I authorise the rts api using '<RTS_API_Data>'
+    Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation
     And I type valid '<Sponsor_Organisation>' for primary sponsor organisation suggestion box and validate the suggestion list along with '<Suggestion_List_Headers>'
     And I type invalid '<Sponsor_Organisation_Invalid>' for primary sponsor organisation suggestion box and validate the suggestion list along with '<Suggestion_List_Headers>'
     And I type min characters '<Sponsor_Organisation_Min>' for primary sponsor organisation suggestion box and validate the suggestion list along with '<Suggestion_List_Headers>'
@@ -660,9 +660,9 @@ Feature: Create Amendment - Create Project
 
   @rsp-1861 @jsEnabled
   Scenario Outline: Validate the active primary sponsor organisation from rts with data in database
-    When I authorise the rts api using '<RTS_API_Data>' and store the bearer token in memory
-    Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation and save the response in memory
-    And I validate the list of sponsor organisations retrieved in ui vs rts response recieved using '<RTS_Request>'
+    When I authorise the rts api using '<RTS_API_Data>'
+    Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation
+    And I validate the list of sponsor organisations retrieved in ui compared to the rts response received using '<RTS_Request>'
 
     Examples:
       | RTS_API_Data         | RTS_Request                                 |
