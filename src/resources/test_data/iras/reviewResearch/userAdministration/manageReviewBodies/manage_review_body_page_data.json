@@ -12,11 +12,12 @@
     "find_review_body_title": "Find a review body",
     "search_button": "Search",
     "search_box": "",
-    "enabled_status": "ACTIVE",
-    "disabled_status": "DISABLED",
+    "enabled_status": "Active",
+    "disabled_status": "Disabled",
     "actions_link": "View/Edit",
     "no_results_heading": "No results found",
-    "no_results_guidance_text": "Check your spelling or enter another search term and try again. If no results are found, you can create a new review body record."
+    "no_results_guidance_text": "Check your spelling or enter another search term and try again. If no results are found, you can create a new review body record.",
+    "enlarged_page_size": "100"
   },
   "Search_For_Review_Bodies": {
     "Search_Queries": {

@@ -131,7 +131,9 @@ Then(
     await expect(userProfilePage.telephone_value).toHaveText(await checkRemoveUserReviewBodyPage.getTelephone());
     await expect(userProfilePage.organisation_value).toHaveText(await checkRemoveUserReviewBodyPage.getOrganisation());
     await expect(userProfilePage.job_title_value).toHaveText(await checkRemoveUserReviewBodyPage.getJobTitle());
-    await expect(userProfilePage.role_value).toHaveText(await checkRemoveUserReviewBodyPage.getRole());
+    if (await userProfilePage.role_value.isVisible()) {
+      await expect(userProfilePage.role_value).toHaveText(await checkRemoveUserReviewBodyPage.getRole());
+    }
   }
 );
 

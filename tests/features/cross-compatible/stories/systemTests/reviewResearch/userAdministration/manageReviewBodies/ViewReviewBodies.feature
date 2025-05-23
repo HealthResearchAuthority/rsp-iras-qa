@@ -20,10 +20,14 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
         And I capture the page screenshot
         When I have navigated to the 'Manage_Review_Bodies_Page'
         Then I can see the 'Manage_Review_Bodies_Page'
-        Then I can see the review body for '<Add_Review_Body>' is present in the list
         And I capture the page screenshot
-        And I can see the status of the review body is '<Status>'
+        When I enter unique organisation name of the newly created review body into the search field
+        And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
+        And I capture the page screenshot
+        And I can see the newly created review body should be present in the list with 'Active' status in the manage review bodies page
+        And I capture the page screenshot
         Then I can see the list is sorted by default in the alphabetical order of 'Organisation Name'
+        And I capture the page screenshot
 
         Examples:
             | Add_Review_Body          | Status  |
@@ -32,6 +36,7 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
     @verifyManageReviewBodiesPageBackButtonFlow
     Scenario: Verify the user can navigate from 'Manage review bodies' page by clicking 'Back' button
         And I click the 'Back' link on the 'Manage_Review_Bodies_Page'
+        And I capture the page screenshot
         Then I can see the 'System_Administration_Page'
 
 
@@ -46,8 +51,8 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
 
         Examples:
             | Review_Body_Name                  | Status   |
-            | Valid_Data_In_All_Fields          | ACTIVE   |
-            | Valid_Data_In_All_Fields_Disabled | DISABLED |
+            | Valid_Data_In_All_Fields          | Active   |
+            | Valid_Data_In_All_Fields_Disabled | Disabled |
 
 
     @viewNewReviewBody

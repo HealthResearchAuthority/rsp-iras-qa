@@ -19,6 +19,9 @@ export default class ManageReviewBodiesPage {
   readonly orgListRows: Locator;
   readonly no_results_heading: Locator;
   readonly no_results_guidance_text: Locator;
+  readonly listRows: Locator;
+  readonly listCell: Locator;
+  readonly next_button: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -53,13 +56,24 @@ export default class ManageReviewBodiesPage {
       .getByText(this.manageReviewBodiesPageData.Manage_Review_Body_Page.no_results_guidance_text, {
         exact: true,
       });
+    this.listRows = this.page.locator('tbody').getByRole('row');
+    this.listCell = this.page.getByRole('cell');
+    this.next_button = this.page.locator('.govuk-pagination__next a');
   }
 
   //Page Methods
-  async goto() {
-    await this.page.goto('reviewbody/view');
-  }
+  // async goto() {
+  //   await this.page.goto('reviewbody/view');
+  // }
 
+  async goto(pageSize?: string) {
+    if (typeof pageSize !== 'undefined') {
+      await this.page.goto(`reviewbody/view?pageSize=${pageSize}`);
+    } else {
+      await this.page.goto('reviewbody/view');
+    }
+    await this.assertOnManageReviewBodiesPage();
+  }
   async assertOnManageReviewBodiesPage() {
     await expect(this.pageHeading).toBeVisible();
     expect(await this.page.title()).toBe(this.manageReviewBodiesPageData.Manage_Review_Body_Page.title);
@@ -106,5 +120,50 @@ export default class ManageReviewBodiesPage {
       orgNames.push(orgValue);
     }
     return orgNames;
+  }
+
+  async findReviewBody(reviewBodyName: string, reviewBodyStatus: string) {
+    const searchRecord = reviewBodyName + '|' + reviewBodyStatus;
+    let foundRecord = false;
+    let hasNextPage = true;
+    while (hasNextPage && !foundRecord) {
+      const rows = await this.listRows.all();
+      for (const row of rows) {
+        const columns = await row.locator(this.listCell).allTextContents();
+        const selectedColumns = [columns[0], columns[2]];
+        const fullRowData = selectedColumns.map((col) => col.trim()).join('|');
+        if (fullRowData === searchRecord) {
+          foundRecord = true;
+          return row;
+        }
+      }
+      hasNextPage = (await this.next_button.isVisible()) && !(await this.next_button.isDisabled());
+      if (hasNextPage && !foundRecord) {
+        await this.next_button.click();
+        await this.page.waitForLoadState('domcontentloaded');
+      }
+    }
+    throw new Error(`No matching record found`);
+  }
+
+  async findReviewBodyByStatus(reviewBodyName: string, reviewBodyStatus: string) {
+    let foundRecord = false;
+    let hasNextPage = true;
+    while (hasNextPage && !foundRecord) {
+      const rows = await this.listRows.all();
+      for (const row of rows) {
+        const columns = await row.locator(this.listCell).allTextContents();
+        if (columns[0].trim().includes(reviewBodyName) && columns[2].trim() === reviewBodyStatus) {
+          foundRecord = true;
+          return row;
+        }
+      }
+      hasNextPage = (await this.next_button.isVisible()) && !(await this.next_button.isDisabled());
+      if (hasNextPage && !foundRecord) {
+        await this.next_button.click();
+        await this.page.waitForLoadState('domcontentloaded');
+      }
+    }
+    throw new Error(`No matching record found`);
   }
 }

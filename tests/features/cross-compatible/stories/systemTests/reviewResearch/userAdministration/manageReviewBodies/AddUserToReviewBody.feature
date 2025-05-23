@@ -3,7 +3,7 @@ Feature: User Administration: Manage Review Bodies - Add user to review body
 
     Background:
         Given I have navigated to the 'Manage_Review_Bodies_Page'
-        And I select a 'QA Automation' Review Body to View and Edit which is 'active'
+        And I select a 'QA Automation' Review Body to View and Edit which is 'Active'
         And I can see the review body profile page
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
         And I can see the user list page of the review body
@@ -24,7 +24,7 @@ Feature: User Administration: Manage Review Bodies - Add user to review body
             | Existing_QA_User_First_Name |
             | Existing_QA_User_Last_Name  |
             | Existing_QA_User_Email      |
-    # | Existing_QA_User_Full_Name  | defect?
+    # | Existing_QA_User_Full_Name  |    # defect?
 
     @addUserReviewBodySearchFunctionNoResults
     Scenario: Verify that the add users to review body search function returns a no results page, when no such user exists
