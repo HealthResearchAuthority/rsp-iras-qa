@@ -4,16 +4,13 @@ import { confirmStringNotNull, sortArray } from '../../utils/UtilFunctions';
 
 const { When, Then } = createBdd(test);
 
-When(
-  'I authorise the rts api using {string} and store the bearer token in memory',
-  async ({ request, rtsPage }, datasetName: string) => {
-    const dataset = rtsPage.rtsPageTestData[datasetName];
-    await rtsPage.authoriseRTS(request, dataset);
-  }
-);
+When('I authorise the rts api using {string}', async ({ request, rtsPage }, datasetName: string) => {
+  const dataset = rtsPage.rtsPageTestData[datasetName];
+  await rtsPage.authoriseRTS(request, dataset);
+});
 
 Then(
-  'I make a request to the rts api using {string} dataset for sponsor organisation and save the response in memory',
+  'I make a request to the rts api using {string} dataset for sponsor organisation',
   async ({ request, rtsPage }, datasetName: string) => {
     const dataset = rtsPage.rtsPageTestData[datasetName];
     const rtsBaseUrl: string = dataset.rts_base_url;
@@ -51,7 +48,7 @@ Then(
 );
 
 Then(
-  'I validate the list of sponsor organisations retrieved in ui vs rts response recieved using {string}',
+  'I validate the list of sponsor organisations retrieved in ui compared to the rts response received using {string}',
   async ({ rtsPage }, datasetName: string) => {
     const dataset = rtsPage.rtsPageTestData[datasetName];
     const applicationUrl: string = `${process.env.BASE_URL}`;

@@ -222,9 +222,9 @@ Feature: Create Amendment - Create Project - Regression Tests
 
   @CreateProjectRTSRegression @jsEnabled
   Scenario Outline: Validate the active primary sponsor organisation from rts with data in database
-    When I authorise the rts api using '<RTS_API_Data>' and store the bearer token in memory
-    Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation and save the response in memory
-    And I validate the list of sponsor organisations retrieved in ui vs rts response recieved using '<RTS_Request>'
+    When I authorise the rts api using '<RTS_API_Data>'
+    Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation
+    And I validate the list of sponsor organisations retrieved in ui compared to the rts response received using '<RTS_Request>'
 
     Examples:
       | RTS_API_Data         | RTS_Request                                 |
