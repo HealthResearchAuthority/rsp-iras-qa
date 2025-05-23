@@ -86,7 +86,7 @@ export default class HomePage {
 
   //using method is used to get hint label next to headers
   getFollowingParagraphElement(baseLocator: Locator): Locator {
-    return baseLocator.locator('xpath=following-sibling::p[1]');
+    return baseLocator.locator('..').locator('p').first();
   }
 
   //Page Methods

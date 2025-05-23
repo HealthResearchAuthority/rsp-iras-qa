@@ -772,7 +772,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I expect to receive no WCAG Violations
   
 
-  @axeAccessibilityMyResearchPage @adminUser
+  @axeAccessibilitymyResearchProjectsPage @adminUser
   Scenario: My Research Home Page
     Given I have navigated to the 'Home_Page'
     When I click the 'My_research' link on the 'Home_Page'

@@ -36,7 +36,7 @@ Given(
       manageReviewBodiesPage,
       userProfilePage,
       reviewBodyProfilePage,
-      myResearchPage,
+      myResearchProjectsPage,
     },
     page: string
   ) => {
@@ -71,8 +71,8 @@ Given(
         await reviewBodyProfilePage.assertOnReviewbodyProfilePage();
         break;
       case 'My_Research_Page':
-        await myResearchPage.goto();
-        await myResearchPage.assertOnMyResearchProjectsPage();
+        await myResearchProjectsPage.goto();
+        await myResearchProjectsPage.assertOnMyResearchProjectsPage();
         break;
       default:
         throw new Error(`${page} is not a valid option`);
@@ -94,7 +94,7 @@ When(
       userListReviewBodyPage,
       manageUsersPage,
       searchAddUserReviewBodyPage,
-      myResearchPage,
+      myResearchProjectsPage,
     },
     page: string
   ) => {
@@ -130,7 +130,7 @@ When(
         await searchAddUserReviewBodyPage.assertOnSearchAddUserReviewBodyPage();
         break;
       case 'My_Research_Page':
-        await myResearchPage.assertOnMyResearchProjectsPage();
+        await myResearchProjectsPage.assertOnMyResearchProjectsPage();
         break;
       default:
         throw new Error(`${page} is not a valid option`);
