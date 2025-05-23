@@ -99,14 +99,12 @@ Then(
     const sponsorOrganisationNameListActual =
       await keyProjectRolesPage.primary_sponsor_organisation_suggestion_list_labels.allTextContents();
     expect(sponsorOrganisationNameListActual).toEqual(sponsorOrganisationNameListExpected);
-    const suggestionsHeaderLabelActual = await keyProjectRolesPage.primary_sponsor_organisation_suggestion_list_labels
-      .locator('..')
+    const suggestionsHeaderLabelActual = await keyProjectRolesPage.primary_sponsor_organisation_suggestion_listbox
       .first()
       .getAttribute('data-before-suggestions');
     const suggestionsHeaderLabelExpected = suggestionHeadersDatasetName.suggestion_header;
     expect(suggestionsHeaderLabelActual).toEqual(suggestionsHeaderLabelExpected);
-    const suggestionsFooterLabelActual = await keyProjectRolesPage.primary_sponsor_organisation_suggestion_list_labels
-      .locator('..')
+    const suggestionsFooterLabelActual = await keyProjectRolesPage.primary_sponsor_organisation_suggestion_listbox
       .first()
       .getAttribute('data-after-suggestions');
     const suggestionsFooterLabelExpected = suggestionHeadersDatasetName.suggestion_footer;
@@ -140,11 +138,9 @@ Then(
       dataset['primary_sponsor_organisation_text']
     );
     await keyProjectRolesPage.page.waitForTimeout(2000);
-    const continueEnteringSuggestionActual =
-      await keyProjectRolesPage.primary_sponsor_organisation_suggestion_list_labels
-        .locator('..')
-        .first()
-        .getAttribute('data-before-suggestions');
+    const continueEnteringSuggestionActual = await keyProjectRolesPage.primary_sponsor_organisation_suggestion_listbox
+      .first()
+      .getAttribute('data-before-suggestions');
     const suggestionsHeaderLabelExpected = suggestionHeadersDatasetName.suggestion_footer;
     expect(continueEnteringSuggestionActual).toEqual(suggestionsHeaderLabelExpected);
   }

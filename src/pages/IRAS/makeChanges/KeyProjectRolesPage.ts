@@ -18,6 +18,7 @@ export default class KeyProjectRolesPage {
   readonly primary_sponsor_organisation_header_label: Locator;
   readonly primary_sponsor_organisation_jsenabled_text: Locator;
   readonly primary_sponsor_organisation_suggestion_list_labels: Locator;
+  readonly primary_sponsor_organisation_suggestion_listbox: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -36,13 +37,15 @@ export default class KeyProjectRolesPage {
     this.sponsor_contact_email_text_summary_error_label = this.page.locator('a[href="#Questions[1].AnswerText"]');
     this.primary_sponsor_organisation_text = this.page.getByTestId('IQA0312_Text');
     this.primary_sponsor_organisation_header_label = this.page.locator('label[for="IQA0312_Text"]');
-    this.primary_sponsor_organisation_jsenabled_text = this.page
-      .getByTestId('Questions[1].AnswerText')
-      .getByTestId('input-autocomplete');
-    this.primary_sponsor_organisation_suggestion_list_labels = this.page
-      .getByRole('combobox', { name: 'Primary sponsor organisation' })
+    this.primary_sponsor_organisation_jsenabled_text = this.page.getByRole('combobox', {
+      name: keyProjectRolesPageTestData.Label_Texts.primary_sponsor_organisation_header_label,
+    });
+    this.primary_sponsor_organisation_suggestion_list_labels = this.primary_sponsor_organisation_jsenabled_text
       .locator('..')
       .getByRole('option');
+    this.primary_sponsor_organisation_suggestion_listbox = this.primary_sponsor_organisation_jsenabled_text
+      .locator('..')
+      .getByRole('listbox');
   }
 
   //Page Methods
