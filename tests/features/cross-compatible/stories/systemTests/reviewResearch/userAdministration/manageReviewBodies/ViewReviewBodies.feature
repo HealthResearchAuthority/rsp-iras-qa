@@ -120,7 +120,7 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
         Then I sequentially navigate through each page by 'clicking on page number' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
         And I capture the page screenshot
 
-    @rsp-3459 @ManageReviewBodiesSearchResultsFound
+    @rsp-3459 @ManageReviewBodiesSearchResultsFound @rsp-3459_Test1
     Scenario Outline: Verify search results in manage review bodies page when user search by first and last organisation names
         When I enter the '<Field_Name>' of the '<Position>' item in the list, into the search field
         And I capture the page screenshot
@@ -133,7 +133,7 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
             | Organisation_Name | First    |
             | Organisation_Name | Last     |
 
-    @rsp-3459 @ManageReviewBodiesSearchNoResultsFound
+    @rsp-3459 @ManageReviewBodiesSearchNoResultsFound @rsp-3459_Test2
     Scenario Outline: Verify no results found message will be presented to the user in manage review bodies page if there is no review body on the system that matches the search criteria
         When I fill the search input for searching review bodies in manage review bodies page with '<Search_Query>' as the search query
         And I capture the page screenshot
@@ -145,7 +145,7 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
             | Search_Query      |
             | Non_Existant_Data |
 
-    @rsp-3459 @ManageReviewBodiesSearchAndPagination
+    @rsp-3459 @ManageReviewBodiesSearchAndPagination @rsp-3459_Test2
     Scenario Outline: Verify search results and pagination in manage review bodies page when user searches and navigate through each page by clicking previous link
         When I fill the search input for searching review bodies in manage review bodies page with '<Search_Query>' as the search query
         And I capture the page screenshot
