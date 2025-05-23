@@ -40,8 +40,9 @@ export default class KeyProjectRolesPage {
       .getByTestId('Questions[1].AnswerText')
       .getByTestId('input-autocomplete');
     this.primary_sponsor_organisation_suggestion_list_labels = this.page
-      .getByTestId('Questions[1].AnswerText')
-      .locator('ul[role="listbox"] li');
+      .getByRole('combobox', { name: 'Primary sponsor organisation' })
+      .locator('..')
+      .getByRole('option');
   }
 
   //Page Methods
