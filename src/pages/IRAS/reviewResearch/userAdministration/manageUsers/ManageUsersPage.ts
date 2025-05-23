@@ -70,14 +70,14 @@ export default class ManageUsersPage {
     this.actions_column_header_label = this.page.locator(
       '[class$="govuk-table-users"] [class^="govuk-table__header"]:nth-child(6)'
     );
-    this.search_box_label = this.page.locator('label[for="SearchUser"]');
-    this.search_box = this.page.getByTestId('SearchUser');
+    this.search_box_label = this.page.locator('label[for="SearchQuery"]');
+    this.search_box = this.page.getByTestId('SearchQuery');
     this.search_button_label = this.page.getByText('Search');
     this.firstNameFromListLabel = this.page.locator('td:nth-child(1)');
     this.next_button = this.page.locator('.govuk-pagination__next a');
     this.userListRows = this.page.locator('tbody').getByRole('row');
     this.userListCell = this.page.getByRole('cell');
-    this.statusCell = this.page.getByRole('cell').locator('strong');
+    this.statusCell = this.page.getByRole('cell');
     this.first_name_from_list_label = this.page.locator('td').nth(0);
     this.last_name_from_list_label = this.page.locator('td').nth(1);
     this.email_address_from_list_label = this.page.locator('td').nth(2);
@@ -118,6 +118,8 @@ export default class ManageUsersPage {
 
   async findUserProfile(userFirstName: string, userLastName: string, userEmail: string, userStatus: string) {
     const searchRecord = userFirstName + '|' + userLastName + '|' + userEmail + '|' + userStatus;
+    await this.search_box.fill(userEmail);
+    await this.search_button_label.click();
     let foundRecord = false;
     let hasNextPage = true;
     while (hasNextPage && !foundRecord) {
