@@ -302,7 +302,8 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
 
   @axeAccessibilitySystemAdministrationPage @adminUser
   Scenario: System administration home page
-    Given I have navigated to the 'System_Administration_Page'
+    Given I have navigated to the 'Home_Page'
+    When I click the 'System_administration' link on the 'Home_Page'
     Then I can see the 'System_Administration_Page'
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
@@ -768,6 +769,15 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
+  
+  @axeAccessibilitymyResearchProjectsPage @adminUser
+  Scenario: My Research Home Page
+    Given I have navigated to the 'Home_Page'
+    When I click the 'My_research' link on the 'Home_Page'
+    Then I can see the 'My_Research_Page'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
 
   @axeAccessibilityKeyProjectRolesSponsorOrganisation @adminUser
   Scenario: Key Project Roles - Primary Sponsor Organisation Suggestion List
@@ -782,3 +792,4 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
+

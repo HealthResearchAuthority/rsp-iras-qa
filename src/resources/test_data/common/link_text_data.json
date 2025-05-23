@@ -23,9 +23,16 @@
     "My_Applications": "My Applications"
   },
   "Home_Page": {
-    "My_Applications": "You don't have any projects available in the new service",
-    "Manage_Users": "Manage Users",
-    "Manage_Review_Bodies": "Manage review bodies"
+    "Approvals": "Approvals",
+    "CAG_members": "CAG members",
+    "CAT": "CAT",
+    "Member_management": "Member management",
+    "My_research": "My research",
+    "REC_members": "REC members",
+    "Sponsor": "Sponsor",
+    "System_administration": "System administration",
+    "Technical|_Assurance": "Technical Assurance",
+    "Technical_Assurance_reviewers": "Technical Assurance reviewers"
   },
   "Project_Details_IRAS_Page": {
     "Back": "Back"
@@ -73,6 +80,7 @@
     "View_Edit": "View/Edit"
   },
   "System_Administration_Page": {
+    "Back": "Back",
     "Manage_Review_Bodies": "Manage review bodies",
     "Manage_Users": "Manage users"
   },
@@ -129,5 +137,8 @@
   "Add_User_Review_Body_Confirmation_Page": {
     "Add_Another_User": "Add another user to review body",
     "Back_To_Manage_Review_Bodies": "Back to Manage review bodies"
+  },
+  "My_Research_Page": {
+    "Back": "Back"
   }
 }
