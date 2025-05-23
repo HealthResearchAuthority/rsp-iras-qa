@@ -24,7 +24,7 @@ export default class MyResearchProjectsPage {
 
   //Page Methods
   async goto() {
-    await this.page.goto('application/welcome');
+    await this.page.goto('/application/welcome/');
   }
 
   async assertOnMyResearchProjectsPage() {
