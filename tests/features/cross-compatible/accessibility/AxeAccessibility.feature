@@ -17,7 +17,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
 
   @axeAccessibilityCreateProjectRecord @adminUser
   Scenario: Create a project record
-    Given I have navigated to the 'Home_Page'
+    Given I have navigated to the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     Then I can see the create project record page
     When I Scan the page with the Axe Accessibilty Tool
@@ -26,7 +26,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
 
   @axeAccessibilityProjectDetailsIRAS @adminUser
   Scenario: Project Details IRAS ID
-    Given I have navigated to the 'Home_Page'
+    Given I have navigated to the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     When I click the 'Start' button on the 'Create_Project_Record_Page'
     Then I can see the project details iras page
@@ -36,7 +36,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
 
   @axeAccessibilityProjectDetailsTitle @adminUser
   Scenario: Project Details - Short project title and Planned end date
-    Given I have navigated to the 'Home_Page'
+    Given I have navigated to the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     When I click the 'Start' button on the 'Create_Project_Record_Page'
     And I fill the project details iras page with 'Valid_IRAS_ID_Max'
@@ -48,7 +48,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
 
   @axeAccessibilityKeyProjectRoles @adminUser
   Scenario: Key Project Roles
-    Given I have navigated to the 'Home_Page'
+    Given I have navigated to the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     When I click the 'Start' button on the 'Create_Project_Record_Page'
     And I fill the project details iras page with 'Valid_IRAS_ID_Max'
@@ -62,7 +62,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
 
   @axeAccessibilityResearchLocations @adminUser
   Scenario: Research Locations
-    Given I have navigated to the 'Home_Page'
+    Given I have navigated to the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     When I click the 'Start' button on the 'Create_Project_Record_Page'
     And I fill the project details iras page with 'Valid_IRAS_ID_Max'
@@ -78,7 +78,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
 
   @axeAccessibilityProjectOverviewSaveLater @adminUser
   Scenario: Project Overview - Save for later page
-    Given I have navigated to the 'Home_Page'
+    Given I have navigated to the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     When I click the 'Start' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
@@ -93,7 +93,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
 
   @axeAccessibilityReviewYourAnswers @adminUser
   Scenario: Review your answers
-    Given I have navigated to the 'Home_Page'
+    Given I have navigated to the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     When I click the 'Start' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
@@ -302,7 +302,8 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
 
   @axeAccessibilitySystemAdministrationPage @adminUser
   Scenario: System administration home page
-    Given I have navigated to the 'System_Administration_Page'
+    Given I have navigated to the 'Home_Page'
+    When I click the 'System_administration' link on the 'Home_Page'
     Then I can see the 'System_Administration_Page'
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
@@ -765,6 +766,15 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I can see the check and add user to review body page
     And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
     And I am on the confirmation screen
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+  
+  @axeAccessibilitymyResearchProjectsPage @adminUser
+  Scenario: My Research Home Page
+    Given I have navigated to the 'Home_Page'
+    When I click the 'My_research' link on the 'Home_Page'
+    Then I can see the 'My_Research_Page'
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations

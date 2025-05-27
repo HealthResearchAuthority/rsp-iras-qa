@@ -698,9 +698,72 @@ export async function removeGeneratedTestdatafilesinTeardown(resultsFolder: stri
   }
 }
 
-export function generateRandomNumber(minLength: number = 4, maxLength: number = 7): string {
+export function generateRandomNumber(minLength, maxLength): string {
   const min = Math.pow(10, minLength - 1);
   const max = Math.pow(10, maxLength) - 1;
   const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
   return randomNumber.toString();
+}
+
+export function generateIrasId(irasIdType: string): string {
+  let irasId: string;
+
+  switch (irasIdType) {
+    case 'Valid_IRAS_ID_Max':
+      irasId = generateRandomValidIrasIdMax();
+      break;
+    case 'Valid_IRAS_ID_Min':
+      irasId = generateRandomValidIrasIdMin();
+      break;
+    case 'Invalid_IRAS_ID_Min_Length':
+      irasId = generateRandomInvalidIrasIdMin();
+      break;
+    case 'Invalid_IRAS_ID_Max_Length':
+      irasId = generateRandomInvalidIrasIdMax();
+      break;
+    default:
+      throw new Error(`Unknown IRAS ID Type: ${irasIdType}`);
+  }
+
+  return irasId;
+}
+
+/**
+ * Generates random number with a digit lenght between 4 and 7 (inclusive)
+ * @returns A string representing a random number with 4 and 7 digits
+ */
+export function generateRandomValidIrasId(): string {
+  return generateRandomNumber(4, 7);
+}
+
+/**
+ * Generates random number with a digit lenght 7
+ * @returns A string representing a random number with 7 digits
+ */
+export function generateRandomValidIrasIdMax(): string {
+  return generateRandomNumber(7, 7);
+}
+
+/**
+ * Generates random number with a digit lenght 4
+ * @returns A string representing a random number with 4 digits
+ */
+export function generateRandomValidIrasIdMin(): string {
+  return generateRandomNumber(4, 4);
+}
+
+/**
+ * Generates random number with a digit lenght 8
+ * @returns A string representing a random number with 8 digits
+ */
+export function generateRandomInvalidIrasIdMax(): string {
+  return generateRandomNumber(8, 8);
+}
+
+/**
+ * Generates random number with a digit lenght 3
+ * @returns A string representing a random number with 3 digits
+ */
+export function generateRandomInvalidIrasIdMin(): string {
+  return generateRandomNumber(3, 3);
 }

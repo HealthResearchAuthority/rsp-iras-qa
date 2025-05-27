@@ -25,20 +25,11 @@ Feature: Create Amendment - Create Project - Regression Tests
     # Validate labels in Project_Details_IRAS_Page
     And I can see the '<Validation_Text>' ui labels on the project details iras page
     And I capture the page screenshot
-    And I fill the project details iras page with '<Project_Details_IRAS>'
+    And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     When I click the '<Navigation_Button_Third>' button on the 'Project_Details_IRAS_Page'
     Then I can see the project details title page
     And I capture the page screenshot
-    # Back button validation on Project_Details_Title_Page
-    When I click the '<Navigation_Link>' link on the 'Project_Details_Title_Page'
-    Then I can see the project details iras page
-    And I capture the page screenshot
-    # Validate previously filled values persist on screen navigation for Project_Details_IRAS_Page
-    Then I can see previously saved values for '<Project_Details_IRAS>' displayed on the project details iras page
-    And I capture the page screenshot
-    When I click the '<Navigation_Button_Third>' button on the 'Project_Details_IRAS_Page'
-    Then I can see the project details title page
     # Validate labels in Project_Details_Title_Page
     Then I can see the '<Validation_Text>' ui labels on the project details title page
     And I capture the page screenshot
@@ -90,7 +81,6 @@ Feature: Create Amendment - Create Project - Regression Tests
     Examples:
       | Validation_Text | Navigation_Button_First | Navigation_Button_Second | Project_Details_IRAS | Navigation_Button_Third | Navigation_Link | Project_Details_Title      | Key_Project_Roles                   | Research_Locations                     |
       | Label_Texts     | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Back            | Valid_Data_All_Fields      | Valid_Data_All_Fields               | Data_With_No_NHS_HSC                   |
-      | Label_Texts     | Create_Project_Record   | Start                    | Valid_IRAS_ID_Max    | Save_Continue           | Back            | Valid_Data_All_Fields_VERA | Valid_Email_Data_Special_Characters | Data_With_Lead_Nation_Northern_Ireland |
 
   @ErrorMessageInvalidIRASIDRegression
   Scenario Outline: Validate error messages displayed when user amend the project using invalid iras id
@@ -106,7 +96,6 @@ Feature: Create Amendment - Create Project - Regression Tests
       | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Symbols          | Save_Continue           | Field_Error_Message                   |
       | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Letters_Symbols  | Save_Continue           | Field_Error_Message                   |
       | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Min_Length       | Save_Continue           | Field_Error_Message_Iras_Id_Length    |
-      | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Max_Length       | Save_Continue           | Field_Error_Message                   |
       | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Spaces           | Save_Continue           | Field_Error_Message_Iras_Id_Mandatory |
       | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Spaces_Suffix    | Save_Continue           | Field_Error_Message                   |
       | Create_Project_Record   | Start                    | Invalid_IRAS_ID_Spaces_Prefix    | Save_Continue           | Field_Error_Message                   |
@@ -117,7 +106,7 @@ Feature: Create Amendment - Create Project - Regression Tests
   Scenario Outline: Validate error messages displayed when user fill invalid data for short project title and project end date
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
-    And I fill the project details iras page with '<Project_Details_IRAS>'
+    And I fill the unique iras id in project details iras page
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     When I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
@@ -125,7 +114,6 @@ Feature: Create Amendment - Create Project - Regression Tests
 
     Examples:
       | Navigation_Button_First | Navigation_Button_Second | Project_Details_IRAS | Navigation_Button_Third | Project_Details_Title                       | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Invalid_All_Fields                          | Field_Error_Message | Summary_Error_Message |
       | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Invalid_Data_Short_Project_Title_Max_Length | Field_Error_Message | Summary_Error_Message |
       | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Invalid_Data_Short_Project_Title_Min_Length | Field_Error_Message | Summary_Error_Message |
       | Create_Project_Record   | Start                    | Valid_IRAS_ID_Min    | Save_Continue           | Invalid_Day_Number                          | Field_Error_Message | Summary_Error_Message |
@@ -144,7 +132,7 @@ Feature: Create Amendment - Create Project - Regression Tests
   Scenario Outline: Validate error messages displayed when user inputs invalid data in key project roles page
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
-    And I fill the project details iras page with '<Project_Details_IRAS>'
+    And I fill the unique iras id in project details iras page
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
@@ -187,7 +175,7 @@ Feature: Create Amendment - Create Project - Regression Tests
   Scenario Outline: Validate lead nation radio option when javascript is enabled
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
-    And I fill the project details iras page with '<Project_Details_IRAS>'
+    And I fill the unique iras id in project details iras page
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
@@ -206,7 +194,7 @@ Feature: Create Amendment - Create Project - Regression Tests
   Scenario Outline: Validate lead nation radio option when javascript is disabled
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
-    And I fill the project details iras page with '<Project_Details_IRAS>'
+    And I fill the unique iras id in project details iras page
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'

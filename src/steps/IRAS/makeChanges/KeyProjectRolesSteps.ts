@@ -14,7 +14,7 @@ Then(
     const dataset = keyProjectRolesPage.keyProjectRolesPageTestData[datasetName];
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        if (key === 'primary_sponsor_organisation_text' && $tags.includes('@jsEnabled')) {
+        if (key === 'primary_sponsor_organisation_text' || $tags.includes('@jsEnabled')) {
           dataset['primary_sponsor_organisation_jsenabled_text'] = dataset['primary_sponsor_organisation_text'];
           await commonItemsPage.fillUIComponent(
             dataset,
