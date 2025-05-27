@@ -7,6 +7,7 @@ import { confirmStringNotNull } from '../../../../../utils/UtilFunctions';
 export default class ManageReviewBodiesPage {
   readonly page: Page;
   readonly manageReviewBodiesPageData: typeof manageReviewBodiesPageData;
+  private _org_name: string[];
   readonly linkTextData: typeof linkTextData;
   readonly pageHeading: Locator;
   readonly addNewReviewBodyRecordLink: Locator;
@@ -28,6 +29,7 @@ export default class ManageReviewBodiesPage {
     this.page = page;
     this.manageReviewBodiesPageData = manageReviewBodiesPageData;
     this.linkTextData = linkTextData;
+    this._org_name = [];
 
     //Locators
     this.pageHeading = this.page
@@ -46,7 +48,8 @@ export default class ManageReviewBodiesPage {
     this.actionsLink = this.page
       .getByRole('link')
       .getByText(this.manageReviewBodiesPageData.Manage_Review_Body_Page.actions_link, { exact: true });
-    this.statusCell = this.page.getByRole('cell').locator('strong');
+    this.statusCell = this.page.getByRole('cell').nth(2);
+    // this.statusCell = this.page.getByRole('cell').locator('strong');
     this.orgListRows = this.page.getByRole('table').getByRole('row');
     this.no_results_heading = this.page
       .getByRole('heading')
@@ -61,13 +64,24 @@ export default class ManageReviewBodiesPage {
     this.next_button = this.page.locator('.govuk-pagination__next a');
   }
 
+  //Getters & Setters for Private Variables
+
+  async getOrgName(): Promise<string[]> {
+    return this._org_name;
+  }
+
+  async setOrgName(value: string[]): Promise<void> {
+    this._org_name = value;
+  }
+
   //Page Methods
   // async goto() {
   //   await this.page.goto('reviewbody/view');
   // }
-
-  async goto(pageSize?: string) {
-    if (typeof pageSize !== 'undefined') {
+  async goto(pageSize?: string, searchQuery?: string) {
+    if (typeof pageSize !== 'undefined' && typeof searchQuery !== 'undefined') {
+      await this.page.goto(`reviewbody/view?SearchQuery=${searchQuery}&PageSize=${pageSize}`);
+    } else if (typeof pageSize !== 'undefined') {
       await this.page.goto(`reviewbody/view?pageSize=${pageSize}`);
     } else {
       await this.page.goto('reviewbody/view');
@@ -122,15 +136,25 @@ export default class ManageReviewBodiesPage {
     return orgNames;
   }
 
-  async findReviewBody(reviewBodyName: string, reviewBodyStatus: string) {
-    const searchRecord = reviewBodyName + '|' + reviewBodyStatus;
+  async findReviewBody(reviewBodyName: string, reviewBodyStatus?: string) {
+    let searchRecord: string;
+    let selectedColumns: any[];
+    if (typeof reviewBodyStatus !== 'undefined') {
+      searchRecord = reviewBodyName + '|' + reviewBodyStatus;
+    } else {
+      searchRecord = reviewBodyName;
+    }
     let foundRecord = false;
     let hasNextPage = true;
     while (hasNextPage && !foundRecord) {
       const rows = await this.listRows.all();
       for (const row of rows) {
         const columns = await row.locator(this.listCell).allTextContents();
-        const selectedColumns = [columns[0], columns[2]];
+        if (typeof reviewBodyStatus !== 'undefined') {
+          selectedColumns = [columns[0], columns[2]];
+        } else {
+          selectedColumns = [columns[0]];
+        }
         const fullRowData = selectedColumns.map((col) => col.trim()).join('|');
         if (fullRowData === searchRecord) {
           foundRecord = true;
@@ -145,6 +169,30 @@ export default class ManageReviewBodiesPage {
     }
     throw new Error(`No matching record found`);
   }
+
+  // async findReviewBodyByName(reviewBodyName: string) {
+  //   const searchRecord = reviewBodyName;
+  //   let foundRecord = false;
+  //   let hasNextPage = true;
+  //   while (hasNextPage && !foundRecord) {
+  //     const rows = await this.listRows.all();
+  //     for (const row of rows) {
+  //       const columns = await row.locator(this.listCell).allTextContents();
+  //       const selectedColumns = [columns[0]];
+  //       const fullRowData = selectedColumns.map((col) => col.trim()).join('|');
+  //       if (fullRowData === searchRecord) {
+  //         foundRecord = true;
+  //         return row;
+  //       }
+  //     }
+  //     hasNextPage = (await this.next_button.isVisible()) && !(await this.next_button.isDisabled());
+  //     if (hasNextPage && !foundRecord) {
+  //       await this.next_button.click();
+  //       await this.page.waitForLoadState('domcontentloaded');
+  //     }
+  //   }
+  //   throw new Error(`No matching record found`);
+  // }
 
   async findReviewBodyByStatus(reviewBodyName: string, reviewBodyStatus: string) {
     let foundRecord = false;
@@ -165,5 +213,17 @@ export default class ManageReviewBodiesPage {
       }
     }
     throw new Error(`No matching record found`);
+  }
+
+  async getSearchQueryOrgName(position: string) {
+    let searchKey: string = '';
+    const orgNameValues: any = await this.getOrgName();
+    const rowCount = orgNameValues.length;
+    if (position.toLowerCase() == 'first') {
+      searchKey = orgNameValues[0];
+    } else if (position.toLowerCase() == 'last') {
+      searchKey = orgNameValues[rowCount - 1];
+    }
+    return searchKey;
   }
 }

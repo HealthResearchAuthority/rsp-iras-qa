@@ -38,7 +38,7 @@ When(
     const userLastName = dataset.last_name_text;
     const data = await returnDataFromJSON();
     const userEmail = data.Create_User_Profile.email_address_unique;
-    await manageUsersPage.goto(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size);
+    await manageUsersPage.goto(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size, userEmail);
     const foundRecords = await manageUsersPage.findUserProfile(userFirstName, userLastName, userEmail, userStatus);
     expect(foundRecords).toBeDefined();
     expect(foundRecords).toHaveCount(1);
@@ -52,9 +52,11 @@ When(
     const userFirstName = dataset.first_name_text;
     const userLastName = dataset.last_name_text;
     const userEmail = dataset.email_address_text;
-    await manageUsersPage.goto(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size);
+    await manageUsersPage.goto(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size, userEmail);
     // this doesn't appear to work?
-    await manageUsersPage.searchAndClickUserProfile(userFirstName, userLastName, userEmail, userStatus);
+    // await manageUsersPage.searchAndClickUserProfile(userFirstName, userLastName, userEmail, userStatus);
+    const foundRecord = await manageUsersPage.findUserProfile(userFirstName, userLastName, userEmail, userStatus);
+    await foundRecord.locator(manageUsersPage.view_edit_link).click();
   }
 );
 
@@ -66,7 +68,7 @@ When(
     const userLastName = dataset.last_name_text;
     const data = await returnDataFromJSON();
     const userEmail = data.Create_User_Profile.email_address_unique;
-    await manageUsersPage.goto(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size);
+    await manageUsersPage.goto(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size, userEmail);
     const foundRecord = await manageUsersPage.findUserProfile(userFirstName, userLastName, userEmail, userStatus);
     await foundRecord.locator(manageUsersPage.view_edit_link).click();
   }
@@ -94,7 +96,10 @@ Then(
     } else {
       statusText = manageUsersPage.manageUsersPageTestData.Manage_Users_Page.disabled_status;
     }
-    await manageUsersPage.goto(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size);
+    await manageUsersPage.goto(
+      manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size,
+      userNamePrefix
+    );
     const selectedReviewBodyRow = await manageUsersPage.getRowByUserNameStatus(userNamePrefix, false, statusText);
     await selectedReviewBodyRow.locator(manageUsersPage.view_edit_link).click();
   }
@@ -103,11 +108,11 @@ Then(
 When(
   'I search and click on view edit link for the removed user from the review body in the manage user page',
   async ({ manageUsersPage, checkRemoveUserReviewBodyPage, userListReviewBodyPage }) => {
-    await manageUsersPage.goto(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size);
     const userFirstName = await checkRemoveUserReviewBodyPage.getFirstName();
     const userLastName = await checkRemoveUserReviewBodyPage.getLastName();
     const userEmail = await checkRemoveUserReviewBodyPage.getEmail();
     const userStatus = await userListReviewBodyPage.getStatus();
+    await manageUsersPage.goto(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size, userEmail);
     const foundRecord = await manageUsersPage.findUserProfile(userFirstName, userLastName, userEmail, userStatus);
     await foundRecord.locator(manageUsersPage.view_edit_link).click();
   }
@@ -119,13 +124,29 @@ When(
     const searchQueryDataset = manageUsersPage.manageUsersPageTestData.Search_For_Users.Search_Queries[searchQueryName];
     const searchKey = searchQueryDataset['search_input_text'];
     if ((await commonItemsPage.tableRows.count()) >= 2) {
-      const userListBeforeSearch = await commonItemsPage.getAllUsersFromTheTable();
-      const userValues: any = userListBeforeSearch.get('searchResultValues');
-      await userListReviewBodyPage.setUserListBeforeSearch(userValues);
+      // const userListBeforeSearch = await commonItemsPage.getAllUsersFromTheTable();
+      // const userValues: any = userListBeforeSearch.get('searchResultValues');
+      // await userListReviewBodyPage.setUserListBeforeSearch(userValues);
       await userListReviewBodyPage.setSearchKey(searchKey);
       await commonItemsPage.search_text.fill(searchKey);
     } else {
       throw new Error(`There are no items in list to search`);
     }
+  }
+);
+
+Then(
+  'the system displays user records matching the search criteria',
+  async ({ userListReviewBodyPage, commonItemsPage }) => {
+    const searchKey = await userListReviewBodyPage.getSearchKey();
+    const searchTerms = await commonItemsPage.splitSearchTerm(searchKey);
+    const userList = await commonItemsPage.getAllUsersFromTheTable();
+    const userListAfterSearch: any = userList.get('searchResultValues');
+    const searchResult = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
+      userListAfterSearch,
+      searchTerms
+    );
+    expect(searchResult).toBeTruthy();
+    await userListReviewBodyPage.updateUserInfo();
   }
 );

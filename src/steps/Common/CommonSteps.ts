@@ -654,8 +654,6 @@ Then(
             `${lastPage}`,
           ]);
         }
-        // console.log('visiblePages:', visiblePages);
-        // console.log('allVisibleItems with ...:', allVisibleItems);
       }
       expect(visiblePages).toContain(currentPage);
       if (currentPage > 1) {
@@ -766,8 +764,6 @@ Then(
             `${lastPage}`,
           ]);
         }
-        // console.log('visiblePages:', visiblePages);
-        // console.log('allVisibleItems with ...:', allVisibleItems);
       }
       expect(visiblePages).toContain(currentPage);
       if (currentPage > 1) {
@@ -789,7 +785,7 @@ Then(
 
 When(
   'I enter the {string} of the {string} item in the list, into the search field',
-  async ({ userListReviewBodyPage, commonItemsPage, manageUsersPage }, fieldKey: string, position: string) => {
+  async ({ userListReviewBodyPage, commonItemsPage, manageReviewBodiesPage }, fieldKey: string, position: string) => {
     if ((await commonItemsPage.tableRows.count()) >= 2) {
       let searchKey: string = '';
       if (fieldKey === 'First_Name' || fieldKey === 'Last_Name' || fieldKey === 'Email_Address') {
@@ -799,13 +795,12 @@ When(
           userListReviewBodyPage
         );
       } else if (fieldKey === 'Full_Name') {
-        await commonItemsPage.getSearchQueryFullNameByPosition(position, fieldKey, userListReviewBodyPage);
+        await commonItemsPage.setSearchQueryFullNameByPosition(position, fieldKey, userListReviewBodyPage);
         searchKey = await userListReviewBodyPage.getSearchQueryFullName(position);
+      } else if (fieldKey === 'Organisation_Name') {
+        await commonItemsPage.setSearchQueryReviewBodyByPosition(position, fieldKey, manageReviewBodiesPage);
+        searchKey = await manageReviewBodiesPage.getSearchQueryOrgName(position);
       }
-      await manageUsersPage.goto(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size);
-      const userListBeforeSearch = await commonItemsPage.getAllUsersFromTheTable();
-      const userValues: any = userListBeforeSearch.get('searchResultValues');
-      await userListReviewBodyPage.setUserListBeforeSearch(userValues);
       await userListReviewBodyPage.setSearchKey(searchKey);
       await commonItemsPage.search_text.fill(searchKey);
     } else {

@@ -70,9 +70,12 @@ When(
       );
     } else {
       await expect(reviewBodyProfilePage.organisation_name_value).toHaveText(dataset.organisation_name_text);
-      await expect(reviewBodyProfilePage.page_heading).toHaveText(dataset.organisation_name_text);
+      await expect(reviewBodyProfilePage.page_heading).toHaveText(
+        reviewBodyProfilePage.reviewBodyProfilePageData.Review_Body_Profile_Page.heading_prefix_label +
+          dataset.organisation_name_text
+      );
     }
-    await expect(reviewBodyProfilePage.country_value).toHaveText(expectedCountryValues.replaceAll(',', ','));
+    await expect(reviewBodyProfilePage.country_value).toHaveText(expectedCountryValues.replaceAll(',', ', '));
     await expect(reviewBodyProfilePage.email_address_value).toHaveText(dataset.email_address_text);
     await expect(reviewBodyProfilePage.description_value).toHaveText(dataset.description_text);
   }

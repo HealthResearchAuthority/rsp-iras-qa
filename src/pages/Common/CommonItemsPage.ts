@@ -17,6 +17,7 @@ import ChildrenPage from '../IRAS/questionSet/ChildrenPage';
 import { PageObjectDataName } from '../../utils/CustomTypes';
 import { confirmStringNotNull, removeUnwantedWhitespace } from '../../utils/UtilFunctions';
 import UserListReviewBodyPage from '../IRAS/reviewResearch/userAdministration/manageReviewBodies/UserListReviewBodyPage';
+import ManageReviewBodiesPage from '../IRAS/reviewResearch/userAdministration/manageReviewBodies/ManageReviewBodiesPage';
 
 //Declare Page Objects
 export default class CommonItemsPage {
@@ -547,6 +548,29 @@ export default class CommonItemsPage {
     const searchResultMap = new Map([['searchResultValues', searchResultValues]]);
     return searchResultMap;
   }
+
+  async getAllOrgNamesFromTheTable(): Promise<Map<string, string[]>> {
+    const searchResultValues: string[] = [];
+    await this.page.waitForLoadState('domcontentloaded');
+    await this.page.waitForTimeout(3000);
+    let dataFound = false;
+    while (!dataFound) {
+      const rowCount = await this.tableRows.count();
+      for (let i = 1; i < rowCount; i++) {
+        const columns = this.tableRows.nth(i).getByRole('cell');
+        const orgName = confirmStringNotNull(await columns.nth(0).textContent());
+        searchResultValues.push(orgName);
+      }
+      if ((await this.next_button.isVisible()) && !(await this.next_button.isDisabled())) {
+        await this.next_button.click();
+        await this.page.waitForLoadState('domcontentloaded');
+      } else {
+        dataFound = true;
+      }
+    }
+    const searchResultMap = new Map([['searchResultValues', searchResultValues]]);
+    return searchResultMap;
+  }
   async validateSearchResults(userListAfterSearch: any, searchKey: string) {
     for (const val of userListAfterSearch) {
       if (val.includes(searchKey)) {
@@ -573,13 +597,18 @@ export default class CommonItemsPage {
     return false;
   }
 
-  async validateSearchResultsMultipleWordsSearchKey(
-    userListAfterSearch: string[],
-    searchTerms: string[]
-  ): Promise<boolean> {
-    return userListAfterSearch.every((user) =>
-      searchTerms.some((term) => user.toLowerCase().includes(term.toLowerCase()))
-    );
+  // async validateSearchResultsMultipleWordsSearchKey(
+  //   listAfterSearch: string[],
+  //   searchTerms: string[]
+  // ): Promise<boolean> {
+  //   return listAfterSearch.every((item) => searchTerms.some((term) => item.toLowerCase().includes(term.toLowerCase())));
+  // }
+
+  async validateSearchResultsMultipleWordsSearchKey(results: string[], searchTerms: string[]) {
+    const matchesSearchTerm = (text: string) =>
+      searchTerms.some((term) => text.toLowerCase().includes(term.toLowerCase()));
+    const resultsAfterFiltering = results.filter(matchesSearchTerm);
+    return resultsAfterFiltering;
   }
 
   async getTopMenuBarLinksNames() {
@@ -705,6 +734,18 @@ export default class CommonItemsPage {
     return maxPage;
   }
 
+  async getReviewBodyListByPosition(position: string) {
+    let orgList: any;
+    if (position.toLowerCase() == 'first') {
+      orgList = await this.getReviewBodiesByPage();
+    } else if (position.toLowerCase() == 'last') {
+      const totalPages = await this.getTotalPages();
+      await this.clickOnPages(totalPages, 'clicking on page number');
+      orgList = await this.getReviewBodiesByPage();
+    }
+    return orgList;
+  }
+
   async getUserListByPosition(position: string) {
     let userList: any;
     if (position.toLowerCase() == 'first') {
@@ -756,7 +797,18 @@ export default class CommonItemsPage {
     return userMap;
   }
 
-  async getSearchQueryFullNameByPosition(
+  async getReviewBodiesByPage(): Promise<Map<string, string[]>> {
+    const orgNameValues: string[] = [];
+    for (let i = 1; i < 2; i++) {
+      const columns = this.tableRows.nth(i).getByRole('cell');
+      const orgName = confirmStringNotNull(await columns.nth(0).textContent());
+      orgNameValues.push(orgName);
+    }
+    const reviewBodyMap = new Map([['orgNameValues', orgNameValues]]);
+    return reviewBodyMap;
+  }
+
+  async setSearchQueryFullNameByPosition(
     position: string,
     fieldKey: string,
     userListReviewBodyPage: UserListReviewBodyPage
@@ -765,6 +817,17 @@ export default class CommonItemsPage {
     if (fieldKey === 'Full_Name') {
       await userListReviewBodyPage.setUserFirstName(userList.get('firstNameValues'));
       await userListReviewBodyPage.setUserLastName(userList.get('lastNameValues'));
+    }
+  }
+
+  async setSearchQueryReviewBodyByPosition(
+    position: string,
+    fieldKey: string,
+    manageReviewBodiesPage: ManageReviewBodiesPage
+  ) {
+    const orgList = await this.getReviewBodyListByPosition(position);
+    if (fieldKey === 'Organisation_Name') {
+      await manageReviewBodiesPage.setOrgName(orgList.get('orgNameValues'));
     }
   }
 

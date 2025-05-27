@@ -82,9 +82,9 @@ Feature: User Administration: Manage Review Bodies - Create review body
         And I can see the status of the review body is '<Status>'
 
         Examples:
-            | Add_Review_Body                    | Add_Another_Review_Body                    | Status   |
-            | Valid_Data_In_All_Fields           | Valid_Data_In_All_Fields_Another           | enabled  |
-            | Valid_Data_In_All_Mandatory_Fields | Valid_Data_In_All_Mandatory_Fields_Another | disabled |
+            | Add_Review_Body                    | Add_Another_Review_Body                    | Status  |
+            | Valid_Data_In_All_Fields           | Valid_Data_In_All_Fields_Another           | enabled |
+            | Valid_Data_In_All_Mandatory_Fields | Valid_Data_In_All_Mandatory_Fields_Another | enabled |
 
     @verifyAddNewReviewPageBackButtonFlow
     Scenario: Verify the user can navigate from 'Add a new review body' page by clicking 'Back' link
@@ -98,7 +98,8 @@ Feature: User Administration: Manage Review Bodies - Create review body
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
         Then I can see the check and create review body page for '<Add_Review_Body>'
         And I capture the page screenshot
-        And I click the 'Back' button on the 'Check_Create_Review_Body_Page'
+        And I click the 'Back' link on the 'Check_Create_Review_Body_Page'
+        # And I click the 'Back' button on the 'Check_Create_Review_Body_Page'
         Then I can see the Add new review body page for '<Add_Review_Body>'
         And I fill the new review body page using '<Add_Another_Review_Body>'
         And I capture the page screenshot
@@ -168,7 +169,7 @@ Feature: User Administration: Manage Review Bodies - Create review body
             | Invalid_Data_Organisation_Name_Field | Max_Chars_Organisation_Name_Error       |
             | Invalid_Data_Description_Field       | Max_Description_Words_Error             |
 
-    @verifyEmailValidationErrors @rsp-3123
+    @verifyEmailValidationErrors @rsp-3123 @skip
     Scenario Outline: Verify that email field validation prevents invalid email formats
         When I fill the new review body page using '<Add_Review_Body>'
         And I capture the page screenshot

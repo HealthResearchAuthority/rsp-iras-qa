@@ -98,8 +98,10 @@ export default class ManageUsersPage {
     await expect(this.page_heading).toBeVisible();
   }
 
-  async goto(pageSize?: string) {
-    if (typeof pageSize !== 'undefined') {
+  async goto(pageSize?: string, searchQuery?: string) {
+    if (typeof pageSize !== 'undefined' && typeof searchQuery !== 'undefined') {
+      await this.page.goto(`admin/users?SearchQuery=${searchQuery}&PageSize=${pageSize}`);
+    } else if (typeof pageSize !== 'undefined') {
       await this.page.goto(`admin/users?pageSize=${pageSize}`);
     } else {
       await this.page.goto('admin/users');
@@ -150,38 +152,38 @@ export default class ManageUsersPage {
     throw new Error(`No matching record found`);
   }
 
-  async searchAndClickUserProfile(userFirstName: string, userLastName: string, userEmail: string, userStatus: string) {
-    let dataFound = false;
-    while (!dataFound) {
-      const rowCount = await this.users_list_rows.count();
-      for (let i = 0; i < rowCount; i++) {
-        const firstNameText = await this.users_list_rows.nth(i).locator(this.first_name_from_list_label).textContent();
-        const lastNameText = await this.users_list_rows.nth(i).locator(this.last_name_from_list_label).textContent();
-        const emailText = await this.users_list_rows.nth(i).locator(this.email_address_from_list_label).textContent();
-        const statusText = await this.users_list_rows.nth(i).locator(this.status_from_list_label).textContent();
-        if (
-          firstNameText?.trim() === userFirstName &&
-          lastNameText?.trim() === userLastName &&
-          emailText?.trim() === userEmail &&
-          statusText?.trim() === userStatus
-        ) {
-          await this.users_list_rows.nth(i).getByText('View/Edit').click();
-          dataFound = true;
-          break;
-        }
-      }
+  // async searchAndClickUserProfile(userFirstName: string, userLastName: string, userEmail: string, userStatus: string) {
+  //   let dataFound = false;
+  //   while (!dataFound) {
+  //     const rowCount = await this.users_list_rows.count();
+  //     for (let i = 0; i < rowCount; i++) {
+  //       const firstNameText = await this.users_list_rows.nth(i).locator(this.first_name_from_list_label).textContent();
+  //       const lastNameText = await this.users_list_rows.nth(i).locator(this.last_name_from_list_label).textContent();
+  //       const emailText = await this.users_list_rows.nth(i).locator(this.email_address_from_list_label).textContent();
+  //       const statusText = await this.users_list_rows.nth(i).locator(this.status_from_list_label).textContent();
+  //       if (
+  //         firstNameText?.trim() === userFirstName &&
+  //         lastNameText?.trim() === userLastName &&
+  //         emailText?.trim() === userEmail &&
+  //         statusText?.trim() === userStatus
+  //       ) {
+  //         await this.users_list_rows.nth(i).getByText('View/Edit').click();
+  //         dataFound = true;
+  //         break;
+  //       }
+  //     }
 
-      if (!dataFound) {
-        const nextButton = this.page.locator('.govuk-pagination__next');
-        if ((await nextButton.count()) > 0) {
-          await nextButton.click();
-          await this.page.getByRole('row').first().waitFor();
-        } else {
-          throw new Error('Reached the last page, data not found.');
-        }
-      }
-    }
-  }
+  //     if (!dataFound) {
+  //       const nextButton = this.page.locator('.govuk-pagination__next');
+  //       if ((await nextButton.count()) > 0) {
+  //         await nextButton.click();
+  //         await this.page.getByRole('row').first().waitFor();
+  //       } else {
+  //         throw new Error('Reached the last page, data not found.');
+  //       }
+  //     }
+  //   }
+  // }
 
   async getRowByUserNameStatus(userName: string, exactMatch: boolean, status: string) {
     const userRows = this.userListRows

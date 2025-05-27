@@ -73,10 +73,13 @@ export default class EditUserProfilePage {
         exact: true,
       }
     );
-    this.role_label = this.page
-      .locator('label b')
-      .getByText(this.editUserProfilePageTestData.Edit_User_Profile_Page.role_label, { exact: true });
-    this.role_fieldset = this.page.locator('.govuk-form-group', { has: this.role_label });
+    this.role_label = this.page.getByLabel(this.editUserProfilePageTestData.Edit_User_Profile_Page.role_label, {
+      exact: true,
+    });
+    this.role_fieldset = this.page.getByRole('group', {
+      name: this.editUserProfilePageTestData.Edit_User_Profile_Page.role_label,
+      exact: true,
+    });
     this.role_checkbox = this.role_fieldset.getByRole('checkbox');
     this.committee_dropdown = this.page.getByLabel(
       this.editUserProfilePageTestData.Edit_User_Profile_Page.committee_label,

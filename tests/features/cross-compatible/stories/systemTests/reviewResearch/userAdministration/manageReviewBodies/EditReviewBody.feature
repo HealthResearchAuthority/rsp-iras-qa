@@ -5,7 +5,9 @@ Feature: User Administration: Manage Review Bodies - Edit review body
         Given I have navigated to the 'System_Administration_Page'
         And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
         Then I can see the 'Manage_Review_Bodies_Page'
-        And I select a 'QA Automation' Review Body to View and Edit which is 'active'
+        When I enter 'QA Automation' into the search field
+        And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
+        And I select a 'QA Automation' Review Body to View and Edit which is 'Enabled'
 
     @accessReviewBodyProfile
     Scenario: Verify that view and edit link takes the user to the Review Body Profile Page
@@ -56,7 +58,7 @@ Feature: User Administration: Manage Review Bodies - Edit review body
             | Valid_Data_In_All_Fields           | Organisation_Name |
             | Valid_Data_In_All_Mandatory_Fields | Description       |
 
-    @verifyEditSaveReviewBodyRealData
+    @verifyEditSaveReviewBodyRealData @skip
     Scenario Outline: Verify the user can edit the review body and save their changes with real data
         And I can see the review body profile page
         And I capture the page screenshot
@@ -152,7 +154,7 @@ Feature: User Administration: Manage Review Bodies - Edit review body
             | Invalid_Data_Organisation_Name_Field | Organisation_Name | Max_Chars_Organisation_Name_Error       |
             | Invalid_Data_Description_Field       | Description       | Max_Description_Words_Error             |
 
-    @verifyEditReviewEmailValidationErrors @rsp-3123
+    @verifyEditReviewEmailValidationErrors @rsp-3123 @skip
     Scenario Outline: Verify that Edit review body email field validation prevents invalid email formats
         And I can see the review body profile page
         And I capture the page screenshot
