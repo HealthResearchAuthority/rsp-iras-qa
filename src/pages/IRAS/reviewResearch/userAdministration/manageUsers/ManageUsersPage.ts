@@ -118,8 +118,6 @@ export default class ManageUsersPage {
 
   async findUserProfile(userFirstName: string, userLastName: string, userEmail: string, userStatus: string) {
     const searchRecord = userFirstName + '|' + userLastName + '|' + userEmail + '|' + userStatus;
-    await this.search_box.fill(userEmail);
-    await this.search_button_label.click();
     let foundRecord = false;
     let hasNextPage = true;
     while (hasNextPage && !foundRecord) {
