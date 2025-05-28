@@ -3,9 +3,9 @@
     "username": "futureiras.automation@hra.nhs.uk",
     "password": "`${process.env.ADMIN_USER_PASS}`"
   },
-  "Admin_User_Nihr": {
+  "Non_Admin_User": {
     "username": "future_iras_auto_admin_user@test.id.nihr.ac.uk",
-    "password": "`${process.env.ADMIN_USER_NIHR_PASS}`"
+    "password": "`${process.env.NON_ADMIN_USER_PASS}`"
   },
   "Login_Page": {
     "header": "This is the TEST Identity Gateway",

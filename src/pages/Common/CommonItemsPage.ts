@@ -141,9 +141,13 @@ export default class CommonItemsPage {
   //Page Methods
   async storeAuthState(user: string) {
     const authAdminUserFile = 'auth-storage-states/adminUser.json';
+    const authNonAdminUserFile = 'auth-storage-states/nonAdminUser.json';
     switch (user.toLowerCase()) {
       case 'admin_user':
         await this.page.context().storageState({ path: authAdminUserFile });
+        break;
+      case 'non_admin_user':
+        await this.page.context().storageState({ path: authNonAdminUserFile });
         break;
       default:
         throw new Error(`${user} is not a valid option`);

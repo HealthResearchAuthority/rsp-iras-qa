@@ -97,8 +97,13 @@ When(
       case 'Login_Page':
         await loginPage.assertOnLoginPage();
         break;
-      case 'Home_Page':
+      case 'Admin_Home_Page':
         await homePage.assertOnHomePage();
+        break;
+      case 'Non_Admin_Home_Page':
+        await homePage.assertOnHomePage();
+        await systemAdministrationPage.goto();
+        await systemAdministrationPage.assertOnSystemAdministrationPage();
         break;
       case 'Create_Application_Page':
         await createApplicationPage.assertOnCreateApplicationPage();

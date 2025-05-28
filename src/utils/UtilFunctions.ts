@@ -21,6 +21,9 @@ export function getAuthState(user: string): string {
     case 'adminuser':
       authState = 'auth-storage-states/adminUser.json';
       break;
+    case 'non_adminuser':
+      authState = 'auth-storage-states/nonAdminUser.json';
+      break;
     default:
       throw new Error(`${user} is not a valid option`);
   }
@@ -68,11 +71,25 @@ export function getTicketReferenceTags(tags: string[]): string[] {
   return tickets;
 }
 
-export function getDecryptedValue(data: string) {
+// export function getDecryptedValue(data: string,secretKey?:string,authTag?:string) {
+//   let value: string = '';
+//   if (process.env.SECRET_KEY) {
+//     const decipher = createDecipheriv('AES-256-GCM', Buffer.from(process.env.SECRET_KEY), Buffer.alloc(16));
+//     decipher.setAuthTag(Buffer.from(`${process.env.AUTH_TAG}`, 'hex'));
+//     let decrypted = decipher.update(data, 'hex', 'utf8');
+//     decrypted = decrypted + decipher.final('utf8');
+//     value = decrypted;
+//   } else {
+//     value = data;
+//   }
+//   return value;
+// }
+
+export function getDecryptedValue(data: string, secretKey?: any, authTag?: string) {
   let value: string = '';
-  if (process.env.SECRET_KEY) {
-    const decipher = createDecipheriv('AES-256-GCM', Buffer.from(process.env.SECRET_KEY), Buffer.alloc(16));
-    decipher.setAuthTag(Buffer.from(`${process.env.AUTH_TAG}`, 'hex'));
+  if (secretKey) {
+    const decipher = createDecipheriv('AES-256-GCM', Buffer.from(`${secretKey}`), Buffer.alloc(16));
+    decipher.setAuthTag(Buffer.from(`${authTag}`, 'hex'));
     let decrypted = decipher.update(data, 'hex', 'utf8');
     decrypted = decrypted + decipher.final('utf8');
     value = decrypted;
