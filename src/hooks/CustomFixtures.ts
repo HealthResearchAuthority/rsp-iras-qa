@@ -45,6 +45,7 @@ import UserListReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministrat
 import CheckRemoveUserReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/CheckRemoveUserReviewBodyPage';
 import SearchAddUserReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/SearchAddUserReviewBodyPage';
 import CheckAddUserReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/CheckAddUserReviewBodyPage';
+import AccessDeniedPage from '../pages/IRAS/AccessDeniedPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -91,6 +92,7 @@ type CustomFixtures = {
   checkRemoveUserReviewBodyPage: CheckRemoveUserReviewBodyPage;
   searchAddUserReviewBodyPage: SearchAddUserReviewBodyPage;
   checkAddUserReviewBodyPage: CheckAddUserReviewBodyPage;
+  accessDeniedPage: AccessDeniedPage;
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -271,6 +273,10 @@ export const test = base.extend<CustomFixtures>({
     await use(new CheckAddUserReviewBodyPage(page));
   },
 
+  accessDeniedPage: async ({ page }, use) => {
+    await use(new AccessDeniedPage(page));
+  },
+
   makeAxeBuilder: async ({ page }, use) => {
     const makeAxeBuilder = () => new AxeBuilder({ page });
     await use(makeAxeBuilder);
@@ -279,9 +285,9 @@ export const test = base.extend<CustomFixtures>({
   //Set the Storage State based on User Tag from Feature File
   storageState: async ({ $tags, storageState }, use) => {
     if ($tags.includes('@adminUser')) {
-      storageState = getAuthState('adminUser');
+      storageState = getAuthState('admin_user');
     } else if ($tags.includes('@nonAdminUser')) {
-      storageState = getAuthState('non_adminuser');
+      storageState = getAuthState('non_admin_user');
     }
     await use(storageState);
   },

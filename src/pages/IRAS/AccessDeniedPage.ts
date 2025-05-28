@@ -1,33 +1,21 @@
 import { expect, Locator, Page } from '@playwright/test';
-import * as homePageTestData from '../../resources/test_data/iras/home_page_data.json';
-import * as buttonTextData from '../../resources/test_data/common/button_text_data.json';
-import * as linkTextData from '../../resources/test_data/common/link_text_data.json';
+import * as commonTestData from '../../resources/test_data/common/common_data.json';
 
 //Declare Page Objects
 export default class AccessDeniedPage {
   readonly page: Page;
-  readonly homePageTestData: typeof homePageTestData;
-  readonly buttonTextData: typeof buttonTextData;
-  readonly linkTextData: typeof linkTextData;
-  readonly mainPageContent: Locator;
+  readonly commonTestData: typeof commonTestData;
   readonly pageHeading: Locator;
   readonly projectGuidanceText: Locator;
-  readonly loginBtn: Locator;
-  readonly manageReviewbodiesLink: Locator;
-  readonly manageUsersLink: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page;
-    this.homePageTestData = homePageTestData;
-    this.buttonTextData = buttonTextData;
-    this.linkTextData = linkTextData;
+    this.commonTestData = commonTestData;
 
     //Locators
-    this.pageHeading = this.page.getByRole('heading').getByText(this.homePageTestData.Home_Page.heading);
-    this.projectGuidanceText = this.page
-      .getByRole('paragraph')
-      .getByText(this.homePageTestData.Home_Page.guidance_text);
+    this.pageHeading = this.page.getByRole('heading').getByText(this.commonTestData.heading);
+    this.projectGuidanceText = this.page.getByRole('paragraph').getByText(this.commonTestData.guidance_text);
   }
 
   //Page Methods
@@ -35,7 +23,7 @@ export default class AccessDeniedPage {
     await this.page.goto('');
   }
 
-  async assertOnNonAdminSysAdminPage() {
+  async assertOnAccessDeniedPage() {
     await expect(this.pageHeading).toBeVisible();
     await expect(this.projectGuidanceText).toBeVisible();
   }

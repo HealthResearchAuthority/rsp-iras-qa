@@ -11,8 +11,9 @@ import {
 } from '../../utils/GenerateTestData';
 const { Given, When, Then, AfterStep } = createBdd(test);
 import * as userProfileGeneratedataConfig from '../../resources/test_data/user_administration/testdata_generator/user_profile_generate_data_config.json';
-import { getCurrentTimeFormatted } from '../../utils/UtilFunctions';
+import { getAuthState, getCurrentTimeFormatted } from '../../utils/UtilFunctions';
 import { Locator } from 'playwright';
+import fs from 'fs';
 
 AfterStep(async ({ page, $step, $testInfo }) => {
   if (
@@ -90,6 +91,7 @@ When(
       userListReviewBodyPage,
       manageUsersPage,
       searchAddUserReviewBodyPage,
+      accessDeniedPage,
     },
     page: string
   ) => {
@@ -103,7 +105,7 @@ When(
       case 'Non_Admin_Home_Page':
         await homePage.assertOnHomePage();
         await systemAdministrationPage.goto();
-        await systemAdministrationPage.assertOnSystemAdministrationPage();
+        await accessDeniedPage.assertOnAccessDeniedPage();
         break;
       case 'Create_Application_Page':
         await createApplicationPage.assertOnCreateApplicationPage();
@@ -856,5 +858,123 @@ Then(
     await expect(manageReviewBodiesPage.no_results_guidance_text).toHaveText(
       manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.no_results_guidance_text
     );
+  }
+);
+
+Given(
+  'I have navigated to the {string} as {string}',
+  async (
+    {
+      loginPage,
+      homePage,
+      createApplicationPage,
+      systemAdministrationPage,
+      accessDeniedPage,
+      manageReviewBodiesPage,
+      userProfilePage,
+      reviewBodyProfilePage,
+    },
+    page: string,
+    user: string
+  ) => {
+    const authStatePath = getAuthState(user);
+    const authState = JSON.parse(fs.readFileSync(authStatePath, 'utf-8'));
+    switch (page) {
+      case 'Login_Page':
+        await homePage.goto();
+        await homePage.loginBtn.click();
+        await loginPage.assertOnLoginPage();
+        break;
+      case 'Home_Page':
+        await homePage.page.context().addCookies(authState.cookies);
+        await homePage.goto();
+        await homePage.assertOnHomePage();
+        break;
+      case 'Create_Application_Page':
+        await createApplicationPage.goto();
+        await createApplicationPage.assertOnCreateApplicationPage();
+        break;
+      case 'System_Administration_Page':
+        console.log(getAuthState(user));
+        await systemAdministrationPage.page.context().addCookies(authState.cookies);
+        await systemAdministrationPage.goto();
+        await systemAdministrationPage.assertOnSystemAdministrationPage();
+        break;
+      case 'Access_Denied_Page':
+        console.log(getAuthState(user));
+        await systemAdministrationPage.page.context().addCookies(authState.cookies);
+        await systemAdministrationPage.goto();
+        await accessDeniedPage.assertOnAccessDeniedPage();
+        break;
+      case 'Manage_Review_Bodies_Page':
+        await manageReviewBodiesPage.goto();
+        await manageReviewBodiesPage.assertOnManageReviewBodiesPage();
+        break;
+      case 'User_Profile_Page':
+        await userProfilePage.goto(await userProfilePage.getUserId());
+        await userProfilePage.assertOnUserProfilePage();
+        break;
+      case 'Review_Body_Profile_Page':
+        await reviewBodyProfilePage.goto(await reviewBodyProfilePage.getReviewBodyId());
+        await reviewBodyProfilePage.assertOnReviewbodyProfilePage();
+        break;
+      default:
+        throw new Error(`${page} is not a valid option`);
+    }
+  }
+);
+
+Given(
+  'I logged out from the {string} as {string}',
+  async (
+    {
+      loginPage,
+      homePage,
+      createApplicationPage,
+      systemAdministrationPage,
+      accessDeniedPage,
+      manageReviewBodiesPage,
+      userProfilePage,
+      reviewBodyProfilePage,
+    },
+    page: string,
+    user: string
+  ) => {
+    const authStatePath = getAuthState(user);
+    const authState = JSON.parse(fs.readFileSync(authStatePath, 'utf-8'));
+    switch (page) {
+      case 'Login_Page':
+        await homePage.goto();
+        await homePage.loginBtn.click();
+        await loginPage.assertOnLoginPage();
+        break;
+      case 'Home_Page':
+        await homePage.page.context().clearCookies(authState.cookies);
+        break;
+      case 'Create_Application_Page':
+        await createApplicationPage.goto();
+        await createApplicationPage.assertOnCreateApplicationPage();
+        break;
+      case 'System_Administration_Page':
+        await systemAdministrationPage.page.context().clearCookies(authState.cookies);
+        break;
+      case 'Access_Denied_Page':
+        await accessDeniedPage.page.context().clearCookies(authState.cookies);
+        break;
+      case 'Manage_Review_Bodies_Page':
+        await manageReviewBodiesPage.goto();
+        await manageReviewBodiesPage.assertOnManageReviewBodiesPage();
+        break;
+      case 'User_Profile_Page':
+        await userProfilePage.goto(await userProfilePage.getUserId());
+        await userProfilePage.assertOnUserProfilePage();
+        break;
+      case 'Review_Body_Profile_Page':
+        await reviewBodyProfilePage.goto(await reviewBodyProfilePage.getReviewBodyId());
+        await reviewBodyProfilePage.assertOnReviewbodyProfilePage();
+        break;
+      default:
+        throw new Error(`${page} is not a valid option`);
+    }
   }
 );

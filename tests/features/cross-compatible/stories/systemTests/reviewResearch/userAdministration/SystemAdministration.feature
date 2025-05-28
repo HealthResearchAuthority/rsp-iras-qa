@@ -1,13 +1,16 @@
-@SystemAdministration @adminUser @SystemTest
+@SystemAdministration @SystemTest
 Feature: User Administration: System Administration
 
-  Background:
+  # Background:
+  #   Given I have navigated to the 'Home_Page'
+  #   When I click the 'System_Administration' link on the 'Home_Page'
+  #   Then I can see the system administration home page
+
+  @rsp-2931 @SystemAdministrationPage @adminUser
+  Scenario Outline: Validate the system administration home page
     Given I have navigated to the 'Home_Page'
     When I click the 'System_Administration' link on the 'Home_Page'
     Then I can see the system administration home page
-
-  @rsp-2931 @SystemAdministrationPage
-  Scenario Outline: Validate the system administration home page
     Then I can see the '<Validation_Text>' ui labels on the system administration home page
     Then I capture the page screenshot
     When I click the '<Navigation_Link_First>' link on the 'System_Administration_Page'
@@ -27,7 +30,23 @@ Feature: User Administration: System Administration
       | Validation_Text | Navigation_Link_First | Navigation_Link_Second | Navigation_Link |
       | Label_Texts     | Manage_Review_Bodies  | Manage_Users           | Back            |
 
-  @rsp-3519 @ValidateTopMenuBarLinks
+  @rsp-3519 @ValidateTopMenuBarLinks @adminUser
   Scenario: Validate the top menu bar links
+    Given I have navigated to the 'Home_Page'
+    When I click the 'System_Administration' link on the 'Home_Page'
+    Then I can see the system administration home page
     And the top menu bar will not have links to 'Manage Users' or 'System Admin'
     And I capture the page screenshot
+
+  @rsp-3821 @SystemAdministrationPage
+  Scenario Outline: Validate the system administration home page
+    Given I have navigated to the '<Page>' as '<User>'
+    Then I capture the page screenshot
+    And I logged out from the '<Page>' as '<User>'
+    Examples:
+      | User           | Page                       |
+      | Admin_User     | Home_Page                  |
+      | Non_Admin_User | Access_Denied_Page         |
+      | Admin_User     | System_Administration_Page |
+      | Non_Admin_User | Home_Page                  |
+
