@@ -1,7 +1,21 @@
 {
   "Home_Page": {
-    "title": "",
+    "title": "My account",
     "heading": "My Account homepage",
-    "guidance_text": "This is your account homepage where you can access your workspaces"
+    "guidance_text": "This is your account homepage where you can access your workspaces",
+    "workspaceHeading": "My workspaces"
+  },
+
+  "Label_Texts": {
+    "approvals_hint_label": "Workspace for approvals service staff to receive and process applications and post approval activity for review.",
+    "cag_members_hint_label": "Workspace for members to review applications and post approval activity.",
+    "cat_hint_label": "Workspace for CAT staff to receive and process applications and post approval activity for review.",
+    "memeber_management_hint_label": "Workspace for staff to view and update committee member records.",
+    "my_research_hint_label": "Workspace to view and manage the research I am responsible for.",
+    "rec_members_hint_label": "Workspace for members to review applications and post approval activity.",
+    "sponsor_hint_label": "Workspace to view, manage and authorise the research I am responsible for.",
+    "system_administration_hint_label": "Workspace for system administrators to view and manage system administration functions.",
+    "technical_assurance_hint_label": "Workspace for Technical Assurance staff to receive and process applications and post approval activity for review.",
+    "technical_assurance_reviewers_hint_label": "Workspace for Technical Assurance reviewers to review applications and post approval activity."
   }
 }
