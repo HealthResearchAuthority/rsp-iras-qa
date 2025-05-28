@@ -1,11 +1,6 @@
 @SystemAdministration @SystemTest
 Feature: User Administration: System Administration
 
-  # Background:
-  #   Given I have navigated to the 'Home_Page'
-  #   When I click the 'System_Administration' link on the 'Home_Page'
-  #   Then I can see the system administration home page
-
   @rsp-2931 @SystemAdministrationPage @adminUser
   Scenario Outline: Validate the system administration home page
     Given I have navigated to the 'Home_Page'
@@ -33,8 +28,6 @@ Feature: User Administration: System Administration
   @rsp-3519 @ValidateTopMenuBarLinks @adminUser
   Scenario: Validate the top menu bar links
     Given I have navigated to the 'Home_Page'
-    When I click the 'System_Administration' link on the 'Home_Page'
-    Then I can see the system administration home page
     And the top menu bar will not have links to 'Manage Users' or 'System Admin'
     And I capture the page screenshot
 
