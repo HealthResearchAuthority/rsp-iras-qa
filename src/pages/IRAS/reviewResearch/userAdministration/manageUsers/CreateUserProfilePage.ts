@@ -76,7 +76,7 @@ export default class CreateUserProfilePage {
       }
     );
     this.role_label = this.page
-      .locator('label b')
+      .locator('.govuk-label')
       .getByText(this.createUserProfilePageTestData.Create_User_Profile_Page.role_label, { exact: true });
     this.role_fieldset = this.page.locator('.govuk-form-group', { has: this.role_label });
     this.role_checkbox = this.role_fieldset.getByRole('checkbox');
