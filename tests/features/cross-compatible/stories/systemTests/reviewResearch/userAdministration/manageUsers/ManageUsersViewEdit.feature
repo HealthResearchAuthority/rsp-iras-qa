@@ -261,7 +261,7 @@ Feature: User Administration: Manage user profiles, view and edit user profile
         And I capture the page screenshot
         And I click the 'Search' button on the 'Manage_Users_Page'
         And I capture the page screenshot
-        Then the system displays search results matching the search criteria
+        Then the system displays user records matching the search criteria
         And I capture the page screenshot
         Examples:
             | Field_Name    | Position |
@@ -276,7 +276,7 @@ Feature: User Administration: Manage user profiles, view and edit user profile
         And I capture the page screenshot
         And I click the 'Search' button on the 'Manage_Users_Page'
         And I capture the page screenshot
-        Then the system displays search results matching the search criteria
+        Then the system displays user records matching the search criteria
         And I capture the page screenshot
         Examples:
             | Field_Name    | Position |
@@ -303,7 +303,7 @@ Feature: User Administration: Manage user profiles, view and edit user profile
         And I capture the page screenshot
         And I click the 'Search' button on the 'Manage_Users_Page'
         And I capture the page screenshot
-        Then the system displays search results matching the search criteria
+        Then the system displays user records matching the search criteria
         And I capture the page screenshot
         Then I sequentially navigate through each page by 'clicking on previous link' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
         And I capture the page screenshot
@@ -320,7 +320,7 @@ Feature: User Administration: Manage user profiles, view and edit user profile
         And I capture the page screenshot
         And I click the 'Search' button on the 'Manage_Users_Page'
         And I capture the page screenshot
-        Then the system displays search results matching the search criteria
+        Then the system displays user records matching the search criteria
         And I capture the page screenshot
         Examples:
             | Search_Query                               |

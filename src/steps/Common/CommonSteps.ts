@@ -473,24 +473,51 @@ Then(
         reviewYourAnswersPage.reviewYourAnswersPageTestData[errorMessageFieldAndSummaryDatasetName];
       page = reviewYourAnswersPage;
     }
+    let allSummaryErrorExpectedValues: any;
+    let summaryErrorActualValues: any;
     await expect(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
-    const allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset);
-    const summaryErrorActualValues = await commonItemsPage.getSummaryErrorMessages();
+    if (
+      errorMessageFieldAndSummaryDatasetName === 'Error_Message_Incorrect_Format_Invalid_Character_Limit_Telephone' ||
+      errorMessageFieldAndSummaryDatasetName === 'Error_Message_Incorrect_Format_Invalid_Character_Limit_Email_Address'
+    ) {
+      allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset).toString();
+      summaryErrorActualValues = (await commonItemsPage.getSummaryErrorMessages()).toString();
+    } else {
+      allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset);
+      summaryErrorActualValues = await commonItemsPage.getSummaryErrorMessages();
+    }
     expect(summaryErrorActualValues).toEqual(allSummaryErrorExpectedValues);
     for (const key in errorMessageFieldDataset) {
       if (Object.prototype.hasOwnProperty.call(errorMessageFieldDataset, key)) {
         let fieldErrorMessagesActualValues: any;
         if (pageKey == 'Review_Your_Answers_Page') {
-          expect(await page[key].getByRole('link').evaluate((e) => getComputedStyle(e).color)).toBe(
+          expect(await page[key].getByRole('link').evaluate((e: any) => getComputedStyle(e).color)).toBe(
             commonItemsPage.commonTestData.rgb_red_color
           );
           fieldErrorMessagesActualValues = await reviewYourAnswersPage.getFieldErrorMessages(key, page);
+          expect(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
+          const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
+          await expect(element).toBeInViewport();
+        } else if (
+          errorMessageFieldAndSummaryDatasetName ===
+            'Error_Message_Incorrect_Format_Invalid_Character_Limit_Telephone' ||
+          errorMessageFieldAndSummaryDatasetName ===
+            'Error_Message_Incorrect_Format_Invalid_Character_Limit_Email_Address'
+        ) {
+          fieldErrorMessagesActualValues = (await commonItemsPage.getMultipleFieldErrorMessages(key, page)).toString();
+          const allFieldErrorExpectedValues = Object.values(errorMessageFieldDataset).toString();
+          expect(fieldErrorMessagesActualValues).toEqual(allFieldErrorExpectedValues); //defect https://nihr.atlassian.net/browse/RSP-3878
+          const fieldValActuals = summaryErrorActualValues.split(',');
+          for (const val of fieldValActuals) {
+            const element = await commonItemsPage.clickErrorSummaryLinkMultipleErrorField(val, key, page);
+            await expect(element).toBeInViewport();
+          }
         } else {
           fieldErrorMessagesActualValues = await commonItemsPage.getFieldErrorMessages(key, page);
+          expect(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
+          const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
+          await expect(element).toBeInViewport();
         }
-        expect(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
-        const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
-        await expect(element).toBeInViewport();
       }
     }
     if (errorMessageFieldAndSummaryDatasetName == 'Max_Description_Words_Error') {
@@ -864,59 +891,37 @@ Then(
 Given(
   'I have navigated to the {string} as {string}',
   async (
-    {
-      loginPage,
-      homePage,
-      createApplicationPage,
-      systemAdministrationPage,
-      accessDeniedPage,
-      manageReviewBodiesPage,
-      userProfilePage,
-      reviewBodyProfilePage,
-    },
+    { homePage, createApplicationPage, systemAdministrationPage, accessDeniedPage, manageReviewBodiesPage },
     page: string,
     user: string
   ) => {
     const authStatePath = getAuthState(user);
     const authState = JSON.parse(fs.readFileSync(authStatePath, 'utf-8'));
     switch (page) {
-      case 'Login_Page':
-        await homePage.goto();
-        await homePage.loginBtn.click();
-        await loginPage.assertOnLoginPage();
-        break;
       case 'Home_Page':
         await homePage.page.context().addCookies(authState.cookies);
         await homePage.goto();
         await homePage.assertOnHomePage();
         break;
       case 'Create_Application_Page':
+        await createApplicationPage.page.context().addCookies(authState.cookies);
         await createApplicationPage.goto();
         await createApplicationPage.assertOnCreateApplicationPage();
         break;
       case 'System_Administration_Page':
-        console.log(getAuthState(user));
         await systemAdministrationPage.page.context().addCookies(authState.cookies);
         await systemAdministrationPage.goto();
         await systemAdministrationPage.assertOnSystemAdministrationPage();
         break;
       case 'Access_Denied_Page':
-        console.log(getAuthState(user));
         await systemAdministrationPage.page.context().addCookies(authState.cookies);
         await systemAdministrationPage.goto();
         await accessDeniedPage.assertOnAccessDeniedPage();
         break;
       case 'Manage_Review_Bodies_Page':
+        await manageReviewBodiesPage.page.context().addCookies(authState.cookies);
         await manageReviewBodiesPage.goto();
         await manageReviewBodiesPage.assertOnManageReviewBodiesPage();
-        break;
-      case 'User_Profile_Page':
-        await userProfilePage.goto(await userProfilePage.getUserId());
-        await userProfilePage.assertOnUserProfilePage();
-        break;
-      case 'Review_Body_Profile_Page':
-        await reviewBodyProfilePage.goto(await reviewBodyProfilePage.getReviewBodyId());
-        await reviewBodyProfilePage.assertOnReviewbodyProfilePage();
         break;
       default:
         throw new Error(`${page} is not a valid option`);
@@ -928,7 +933,6 @@ Given(
   'I logged out from the {string} as {string}',
   async (
     {
-      loginPage,
       homePage,
       createApplicationPage,
       systemAdministrationPage,
@@ -943,17 +947,11 @@ Given(
     const authStatePath = getAuthState(user);
     const authState = JSON.parse(fs.readFileSync(authStatePath, 'utf-8'));
     switch (page) {
-      case 'Login_Page':
-        await homePage.goto();
-        await homePage.loginBtn.click();
-        await loginPage.assertOnLoginPage();
-        break;
       case 'Home_Page':
         await homePage.page.context().clearCookies(authState.cookies);
         break;
       case 'Create_Application_Page':
-        await createApplicationPage.goto();
-        await createApplicationPage.assertOnCreateApplicationPage();
+        await createApplicationPage.page.context().clearCookies(authState.cookies);
         break;
       case 'System_Administration_Page':
         await systemAdministrationPage.page.context().clearCookies(authState.cookies);
@@ -962,16 +960,13 @@ Given(
         await accessDeniedPage.page.context().clearCookies(authState.cookies);
         break;
       case 'Manage_Review_Bodies_Page':
-        await manageReviewBodiesPage.goto();
-        await manageReviewBodiesPage.assertOnManageReviewBodiesPage();
+        await manageReviewBodiesPage.page.context().clearCookies(authState.cookies);
         break;
       case 'User_Profile_Page':
-        await userProfilePage.goto(await userProfilePage.getUserId());
-        await userProfilePage.assertOnUserProfilePage();
+        await userProfilePage.page.context().clearCookies(authState.cookies);
         break;
       case 'Review_Body_Profile_Page':
-        await reviewBodyProfilePage.goto(await reviewBodyProfilePage.getReviewBodyId());
-        await reviewBodyProfilePage.assertOnReviewbodyProfilePage();
+        await reviewBodyProfilePage.page.context().clearCookies(authState.cookies);
         break;
       default:
         throw new Error(`${page} is not a valid option`);

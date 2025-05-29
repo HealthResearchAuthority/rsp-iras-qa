@@ -17,8 +17,8 @@
       "search_box_label": "Find a user"
     },
     "enlarged_page_size": "100",
-    "enabled_status": "ACTIVE",
-    "disabled_status": "DISABLED"
+    "enabled_status": "Active",
+    "disabled_status": "Disabled"
   },
   "Active_User_Role_Operations": {
     "title_text": "Mr",

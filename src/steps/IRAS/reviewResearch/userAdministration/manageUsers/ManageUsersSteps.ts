@@ -31,13 +31,19 @@ When('I update user profile with {string}', async ({ commonItemsPage, editUserPr
 
 When(
   'I can see the newly created user record should be present in the list for {string} with {string} status in the manage user page',
-  async ({ manageUsersPage, createUserProfilePage }, datasetName: string, userStatus: string) => {
-    //this step should be updated to explicitly search for the record using the search functionality is developed
+  async ({ manageUsersPage, createUserProfilePage }, datasetName: string, status: string) => {
+    let userStatus: string;
     const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
     const userFirstName = dataset.first_name_text;
     const userLastName = dataset.last_name_text;
     const data = await returnDataFromJSON();
     const userEmail = data.Create_User_Profile.email_address_unique;
+    const datasetStatus = manageUsersPage.manageUsersPageTestData.Manage_Users_Page;
+    if (status.toLowerCase() == 'disabled') {
+      userStatus = datasetStatus.disabled_status;
+    } else {
+      userStatus = datasetStatus.enabled_status;
+    }
     await manageUsersPage.goto(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size, userEmail);
     const foundRecords = await manageUsersPage.findUserProfile(userFirstName, userLastName, userEmail, userStatus);
     expect(foundRecords).toBeDefined();
@@ -47,29 +53,45 @@ When(
 
 When(
   'I search and click on view edit link for existing {string} user with {string} status from the manage user page',
-  async ({ manageUsersPage }, datasetName: string, userStatus: string) => {
+  async ({ manageUsersPage }, datasetName: string, status: string) => {
+    let userStatus: string;
     const dataset = manageUsersPage.manageUsersPageTestData[datasetName];
     const userFirstName = dataset.first_name_text;
     const userLastName = dataset.last_name_text;
     const userEmail = dataset.email_address_text;
+    const datasetStatus = manageUsersPage.manageUsersPageTestData.Manage_Users_Page;
+    if (status.toLowerCase() == 'disabled') {
+      userStatus = datasetStatus.disabled_status;
+    } else {
+      userStatus = datasetStatus.enabled_status;
+    }
     await manageUsersPage.goto(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size, userEmail);
-    // this doesn't appear to work?
-    // await manageUsersPage.searchAndClickUserProfile(userFirstName, userLastName, userEmail, userStatus);
     const foundRecord = await manageUsersPage.findUserProfile(userFirstName, userLastName, userEmail, userStatus);
+    expect(foundRecord).toBeDefined();
+    expect(foundRecord).toHaveCount(1);
     await foundRecord.locator(manageUsersPage.view_edit_link).click();
   }
 );
 
 When(
   'I search and click on view edit link for unique {string} user with {string} status from the manage user page',
-  async ({ manageUsersPage, createUserProfilePage }, datasetName: string, userStatus: string) => {
+  async ({ manageUsersPage, createUserProfilePage }, datasetName: string, status: string) => {
+    let userStatus: string;
     const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
     const userFirstName = dataset.first_name_text;
     const userLastName = dataset.last_name_text;
     const data = await returnDataFromJSON();
     const userEmail = data.Create_User_Profile.email_address_unique;
+    const datasetStatus = manageUsersPage.manageUsersPageTestData.Manage_Users_Page;
+    if (status.toLowerCase() == 'disabled') {
+      userStatus = datasetStatus.disabled_status;
+    } else {
+      userStatus = datasetStatus.enabled_status;
+    }
     await manageUsersPage.goto(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size, userEmail);
     const foundRecord = await manageUsersPage.findUserProfile(userFirstName, userLastName, userEmail, userStatus);
+    expect(foundRecord).toBeDefined();
+    expect(foundRecord).toHaveCount(1);
     await foundRecord.locator(manageUsersPage.view_edit_link).click();
   }
 );
@@ -124,9 +146,6 @@ When(
     const searchQueryDataset = manageUsersPage.manageUsersPageTestData.Search_For_Users.Search_Queries[searchQueryName];
     const searchKey = searchQueryDataset['search_input_text'];
     if ((await commonItemsPage.tableRows.count()) >= 2) {
-      // const userListBeforeSearch = await commonItemsPage.getAllUsersFromTheTable();
-      // const userValues: any = userListBeforeSearch.get('searchResultValues');
-      // await userListReviewBodyPage.setUserListBeforeSearch(userValues);
       await userListReviewBodyPage.setSearchKey(searchKey);
       await commonItemsPage.search_text.fill(searchKey);
     } else {

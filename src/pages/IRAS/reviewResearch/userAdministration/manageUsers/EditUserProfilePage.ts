@@ -24,6 +24,8 @@ export default class EditUserProfilePage {
   readonly access_required_fieldset: Locator;
   readonly access_required_checkbox: Locator;
   readonly review_body_dropdown: Locator;
+  readonly country_label: Locator;
+  readonly access_required_label: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -73,9 +75,6 @@ export default class EditUserProfilePage {
         exact: true,
       }
     );
-    // this.role_label = this.page.getByLabel(this.editUserProfilePageTestData.Edit_User_Profile_Page.role_label, {
-    //   exact: true,
-    // });
     // this.role_fieldset = this.page.getByRole('group', {
     //   name: this.editUserProfilePageTestData.Edit_User_Profile_Page.role_label,
     //   exact: true,
@@ -90,15 +89,23 @@ export default class EditUserProfilePage {
       this.editUserProfilePageTestData.Edit_User_Profile_Page.committee_label,
       { exact: true }
     );
-    this.country_fieldset = this.page.getByRole('group', {
-      name: this.editUserProfilePageTestData.Edit_User_Profile_Page.country_label,
-      exact: true,
-    });
+    // this.country_fieldset = this.page.getByRole('group', {
+    //   name: this.editUserProfilePageTestData.Edit_User_Profile_Page.country_label,
+    //   exact: true,
+    // });
+    this.country_label = this.page
+      .locator('.govuk-label')
+      .getByText(this.editUserProfilePageTestData.Edit_User_Profile_Page.country_label, { exact: true });
+    this.country_fieldset = this.page.locator('.govuk-form-group', { has: this.country_label });
     this.country_checkbox = this.country_fieldset.getByRole('checkbox');
-    this.access_required_fieldset = this.page.getByRole('group', {
-      name: this.editUserProfilePageTestData.Edit_User_Profile_Page.access_required_label,
-      exact: true,
-    });
+    // this.access_required_fieldset = this.page.getByRole('group', {
+    //   name: this.editUserProfilePageTestData.Edit_User_Profile_Page.access_required_label,
+    //   exact: true,
+    // });
+    this.access_required_label = this.page
+      .locator('.govuk-label')
+      .getByText(this.editUserProfilePageTestData.Edit_User_Profile_Page.access_required_label, { exact: true });
+    this.access_required_fieldset = this.page.locator('.govuk-form-group', { has: this.access_required_label });
     this.access_required_checkbox = this.access_required_fieldset.getByRole('checkbox');
     this.review_body_dropdown = this.page.getByLabel(
       this.editUserProfilePageTestData.Edit_User_Profile_Page.review_body_label,

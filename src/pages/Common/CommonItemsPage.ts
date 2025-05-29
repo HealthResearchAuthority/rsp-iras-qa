@@ -108,7 +108,7 @@ export default class CommonItemsPage {
     this.bannerSystemAdmin = this.bannerNavBar.getByText(this.linkTextData.Banner.System_Admin, { exact: true });
     this.bannerMyApplications = this.bannerNavBar.getByText(this.linkTextData.Banner.My_Applications, { exact: true });
     this.next_button = this.page.getByRole('link').getByText(this.commonTestData.next_button, { exact: true });
-    this.errorMessageFieldLabel = page
+    this.errorMessageFieldLabel = this.page
       .locator('.field-validation-error')
       .or(this.page.locator('.govuk-error-message'))
       .first();
@@ -487,14 +487,45 @@ export default class CommonItemsPage {
   }
 
   async getFieldErrorMessages<PageObject>(key: string, page: PageObject) {
+    let fieldErrorMessage: any;
     const element = await page[key].first();
-    const fieldErrorLocator = this.errorFieldGroup.filter({ has: element }).locator(this.errorMessageFieldLabel);
-    return await fieldErrorLocator.textContent();
+    const typeAttribute = await element.getAttribute('type');
+    if (typeAttribute === 'checkbox') {
+      key = key.replace('checkbox', 'label');
+      fieldErrorMessage = await this.errorFieldGroup
+        .filter({ has: page[key] })
+        .locator(this.errorMessageFieldLabel)
+        .textContent();
+    } else {
+      fieldErrorMessage = await this.errorFieldGroup
+        .filter({ has: element })
+        .locator(this.errorMessageFieldLabel)
+        .textContent();
+    }
+    return fieldErrorMessage;
+  }
+
+  async getMultipleFieldErrorMessages<PageObject>(key: string, page: PageObject) {
+    const element = await page[key];
+    const fieldErrorMessage = await this.errorFieldGroup
+      .filter({ has: element })
+      .locator(this.errorMessageFieldLabel)
+      .allTextContents();
+    return fieldErrorMessage;
   }
 
   async clickErrorSummaryLink<PageObject>(errorMessageFieldDataset: JSON, key: string, page: PageObject) {
     const element: Locator = await page[key].first();
-    await this.summaryErrorLinks.filter({ hasText: errorMessageFieldDataset[key] }).click();
+    await this.summaryErrorLinks
+      .locator('..')
+      .getByRole('link', { name: errorMessageFieldDataset[key], exact: true })
+      .click();
+    return element;
+  }
+
+  async clickErrorSummaryLinkMultipleErrorField<PageObject>(errorMessage: any, key: string, page: PageObject) {
+    const element: Locator = await page[key].first();
+    await this.summaryErrorLinks.locator('..').getByRole('link', { name: errorMessage, exact: true }).click();
     return element;
   }
 
@@ -600,13 +631,6 @@ export default class CommonItemsPage {
     }
     return false;
   }
-
-  // async validateSearchResultsMultipleWordsSearchKey(
-  //   listAfterSearch: string[],
-  //   searchTerms: string[]
-  // ): Promise<boolean> {
-  //   return listAfterSearch.every((item) => searchTerms.some((term) => item.toLowerCase().includes(term.toLowerCase())));
-  // }
 
   async validateSearchResultsMultipleWordsSearchKey(results: string[], searchTerms: string[]) {
     const matchesSearchTerm = (text: string) =>

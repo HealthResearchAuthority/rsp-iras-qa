@@ -49,7 +49,6 @@ export default class ManageReviewBodiesPage {
       .getByRole('link')
       .getByText(this.manageReviewBodiesPageData.Manage_Review_Body_Page.actions_link, { exact: true });
     this.statusCell = this.page.getByRole('cell').nth(2);
-    // this.statusCell = this.page.getByRole('cell').locator('strong');
     this.orgListRows = this.page.getByRole('table').getByRole('row');
     this.no_results_heading = this.page
       .getByRole('heading')
@@ -75,9 +74,7 @@ export default class ManageReviewBodiesPage {
   }
 
   //Page Methods
-  // async goto() {
-  //   await this.page.goto('reviewbody/view');
-  // }
+
   async goto(pageSize?: string, searchQuery?: string) {
     if (typeof pageSize !== 'undefined' && typeof searchQuery !== 'undefined') {
       await this.page.goto(`reviewbody/view?SearchQuery=${searchQuery}&PageSize=${pageSize}`);
@@ -93,31 +90,31 @@ export default class ManageReviewBodiesPage {
     expect(await this.page.title()).toBe(this.manageReviewBodiesPageData.Manage_Review_Body_Page.title);
   }
 
-  async searchAndClickReviewBodyProfile(reviewBodyName: string, reviewBodyStatus: string) {
-    let dataFound = false;
-    while (!dataFound) {
-      const rowCount = await this.review_bodies_list_rows.count();
-      for (let i = rowCount - 1; i > 0; i--) {
-        const organisationNameText = await this.review_bodies_list_rows
-          .nth(i)
-          .locator(this.organisation_name_from_list)
-          .textContent();
-        const organisationStatusText = await this.review_bodies_list_rows
-          .nth(i)
-          .locator(this.status_from_list)
-          .textContent();
-        if (organisationNameText?.trim() === reviewBodyName && organisationStatusText?.trim() === reviewBodyStatus) {
-          await this.review_bodies_list_rows.nth(i).getByText('View/Edit').click();
-          dataFound = true;
-          break;
-        }
-      }
-      // This code need to be updated when pagination enabled in manage review bodies page
-      if (!dataFound) {
-        throw new Error('Review body, Data not found');
-      }
-    }
-  }
+  // async searchAndClickReviewBodyProfile(reviewBodyName: string, reviewBodyStatus: string) {
+  //   let dataFound = false;
+  //   while (!dataFound) {
+  //     const rowCount = await this.review_bodies_list_rows.count();
+  //     for (let i = rowCount - 1; i > 0; i--) {
+  //       const organisationNameText = await this.review_bodies_list_rows
+  //         .nth(i)
+  //         .locator(this.organisation_name_from_list)
+  //         .textContent();
+  //       const organisationStatusText = await this.review_bodies_list_rows
+  //         .nth(i)
+  //         .locator(this.status_from_list)
+  //         .textContent();
+  //       if (organisationNameText?.trim() === reviewBodyName && organisationStatusText?.trim() === reviewBodyStatus) {
+  //         await this.review_bodies_list_rows.nth(i).getByText('View/Edit').click();
+  //         dataFound = true;
+  //         break;
+  //       }
+  //     }
+  //     // This code need to be updated when pagination enabled in manage review bodies page
+  //     if (!dataFound) {
+  //       throw new Error('Review body, Data not found');
+  //     }
+  //   }
+  // }
 
   async getRowByOrgName(orgName: string, exactMatch: boolean) {
     return this.mainPageContent.locator('tr', {
@@ -169,30 +166,6 @@ export default class ManageReviewBodiesPage {
     }
     throw new Error(`No matching record found`);
   }
-
-  // async findReviewBodyByName(reviewBodyName: string) {
-  //   const searchRecord = reviewBodyName;
-  //   let foundRecord = false;
-  //   let hasNextPage = true;
-  //   while (hasNextPage && !foundRecord) {
-  //     const rows = await this.listRows.all();
-  //     for (const row of rows) {
-  //       const columns = await row.locator(this.listCell).allTextContents();
-  //       const selectedColumns = [columns[0]];
-  //       const fullRowData = selectedColumns.map((col) => col.trim()).join('|');
-  //       if (fullRowData === searchRecord) {
-  //         foundRecord = true;
-  //         return row;
-  //       }
-  //     }
-  //     hasNextPage = (await this.next_button.isVisible()) && !(await this.next_button.isDisabled());
-  //     if (hasNextPage && !foundRecord) {
-  //       await this.next_button.click();
-  //       await this.page.waitForLoadState('domcontentloaded');
-  //     }
-  //   }
-  //   throw new Error(`No matching record found`);
-  // }
 
   async findReviewBodyByStatus(reviewBodyName: string, reviewBodyStatus: string) {
     let foundRecord = false;

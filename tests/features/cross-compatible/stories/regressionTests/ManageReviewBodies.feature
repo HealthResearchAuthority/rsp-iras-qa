@@ -77,7 +77,7 @@ Feature: User Administration: Manage Review Bodies
 
         Examples:
             | Add_Review_Body          | Audit_History       | Status_Enabled | Status_Disabled |
-            | Valid_Data_In_All_Fields | Disable_Review_Body | enabled        | disabled        |
+            | Valid_Data_In_All_Fields | Disable_Review_Body | Enabled        | Disabled        |
 
     @RegressionTestVerifyEnableAndEditReviewBodyAuditHistory
     Scenario Outline: Verify the user can view the audit history after enabling a review body
@@ -122,7 +122,7 @@ Feature: User Administration: Manage Review Bodies
 
         Examples:
             | Add_Review_Body          | Field_Name_One    | Field_Name_Two | Field_Name_Three | Field_Name_Four | Edit_Review_Body           | Audit_History               | Status_Enabled | Status_Disabled |
-            | Valid_Data_In_All_Fields | Organisation_Name | Country        | Email_Address    | Description     | Valid_Data_Edit_All_Fields | Edit_Review_Body_All_Fields | enabled        | disabled        |
+            | Valid_Data_In_All_Fields | Organisation_Name | Country        | Email_Address    | Description     | Valid_Data_Edit_All_Fields | Edit_Review_Body_All_Fields | Enabled        | Disabled        |
 
     @RegressionTestVerifyBackAndChangeLinkNavigationManageReviewBodies
     Scenario Outline: Verify the user can navigate by clicking 'Back' link and 'Change' link from review body profile page and edit review body page and audit history page
@@ -186,7 +186,7 @@ Feature: User Administration: Manage Review Bodies
 
         Examples:
             | Field_Name_Two | Field_Name_Three | Field_Name_Four | Navigation_Link | Status_Enabled | Status_Disabled |
-            | Country        | Email_Address    | Description     | Back            | enabled        | disabled        |
+            | Country        | Email_Address    | Description     | Back            | Enabled        | Disabled        |
 
     @RegressionTestVerifyBackAndChangeLinksCreateAndCheckCreateReviewBody
     Scenario Outline: Verify the user can navigate via the change links and back links
@@ -245,7 +245,7 @@ Feature: User Administration: Manage Review Bodies
 
         Examples:
             | Add_Review_Body          | Field_Name_One    | Field_Name_Two | Field_Name_Three | Field_Name_Four | Add_Another_Review_Body          | Status_Enabled | Status_Disabled |
-            | Valid_Data_In_All_Fields | Organisation_Name | Country        | Email_Address    | Description     | Valid_Data_In_All_Fields_Another | enabled        | disabled        |
+            | Valid_Data_In_All_Fields | Organisation_Name | Country        | Email_Address    | Description     | Valid_Data_In_All_Fields_Another | Enabled        | Disabled        |
 
 
     @RegressionTestVerifyValidReviewBodyCharacterLimits
@@ -334,7 +334,7 @@ Feature: User Administration: Manage Review Bodies
         Then I can see the user profile page of the removed user from the review body
         Examples:
             | Status_Enabled | Status_Disabled |
-            | enabled        | disabled        |
+            | Enabled        | Disabled        |
 
 
     @RegressionTestUserListReviewBodyManageUsersLink
@@ -390,7 +390,7 @@ Feature: User Administration: Manage Review Bodies
         Then I can see the 'Manage_Users_Page'
         Examples:
             | Status_Enabled | Status_Disabled |
-            | enabled        | disabled        |
+            | Enabled        | Disabled        |
 
     @RegressionTestUserListReviewBodyBackToReviewBodyUserListAfterRemoveUser
     Scenario Outline: Verify the user can search and remove the user from the selected review body and navigate to review body user list page when no results found for the removed user
@@ -431,7 +431,7 @@ Feature: User Administration: Manage Review Bodies
         Then I can see the user list page of the review body
         Examples:
             | Status_Enabled | Status_Disabled |
-            | enabled        | disabled        |
+            | Enabled        | Disabled        |
 
 
     @RegressionTestUserListReviewBodyBackToManageReviewBodiesRemoveUser
@@ -466,7 +466,7 @@ Feature: User Administration: Manage Review Bodies
         Then I can see the 'Manage_Review_Bodies_Page'
         Examples:
             | Status_Enabled | Status_Disabled |
-            | enabled        | disabled        |
+            | Enabled        | Disabled        |
 
     @RegressionTestUserListReviewBodyBackToReviewBodyUserListCheckRemoveUser
     Scenario Outline: Verify the user can navigate to user list page of the review body from check and remove user profile page using back link
@@ -496,7 +496,7 @@ Feature: User Administration: Manage Review Bodies
         Then I can see the user list page of the review body
         Examples:
             | Status_Enabled | Status_Disabled |
-            | enabled        | disabled        |
+            | Enabled        | Disabled        |
 
     @RegressionTestUserListReviewBodyRemoveUserNoSearch
     Scenario Outline: Verify the user can navigate to user list page of the review body and remove any user from the review body without using search
@@ -525,4 +525,4 @@ Feature: User Administration: Manage Review Bodies
         Then I can see the user list page of the review body
         Examples:
             | Status_Enabled | Status_Disabled |
-            | enabled        | disabled        |
+            | Enabled        | Disabled        |

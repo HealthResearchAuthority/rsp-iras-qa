@@ -4,14 +4,16 @@ Feature: User Administration: Manage Users - Create user
 
     Background:
         Given I have navigated to the 'System_Administration_Page'
+        And I capture the page screenshot
         When I click the 'Manage_Users' link on the 'System_Administration_Page'
+        And I capture the page screenshot
         Then I can see the 'Manage_Users_Page'
         When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
+        And I capture the page screenshot
         Then I can see the add a new user profile page
 
     @rsp-2827 @rsp-2870 @verifyUserCreation
     Scenario Outline: Verify the user is able to create a new user profile with valid data
-        And I capture the page screenshot
         When I fill the new user profile page using '<Add_User_Profile>'
         And I capture the page screenshot
         And I click the 'Continue' button on the 'Create_User_Profile_Page'
@@ -25,87 +27,111 @@ Feature: User Administration: Manage Users - Create user
         Then I can see the 'Manage_Users_Page'
         And I capture the page screenshot
         Then I can see the '<Validation_Text_Manage_Users_List>' ui labels on the manage users list page
-        And I can see the newly created user record should be present in the list for '<Add_User_Profile>' with 'ACTIVE' status in the manage user page
+        And I can see the newly created user record should be present in the list for '<Add_User_Profile>' with '<Status_Enabled>' status in the manage user page
         And I capture the page screenshot
         And I click the 'Back' link on the 'Manage_Users_Page'
-        Then I have navigated to the 'System_Administration_Page'
         And I capture the page screenshot
+        Then I have navigated to the 'System_Administration_Page'
         When I click the 'Manage_Users' link on the 'System_Administration_Page'
+        And I capture the page screenshot
         Then I can see the 'Manage_Users_Page'
         And I can see the list is sorted by default in the alphabetical order of the 'First Name'
+        And I capture the page screenshot
 
         Examples:
-            | Add_User_Profile                                   | Validation_Text_Manage_Users_List |
-            | Valid_Data_In_All_Fields_Role_Reviewer             | Label_Texts_Manage_Users_List     |
-            | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer   | Label_Texts_Manage_Users_List     |
-            | Valid_Data_In_All_Fields_Role_Operations           | Label_Texts_Manage_Users_List     |
-            | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Label_Texts_Manage_Users_List     |
+            | Add_User_Profile                                   | Validation_Text_Manage_Users_List | Status_Enabled |
+            | Valid_Data_In_All_Fields_Role_Reviewer             | Label_Texts_Manage_Users_List     | Enabled        |
+            | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer   | Label_Texts_Manage_Users_List     | Enabled        |
+            | Valid_Data_In_All_Fields_Role_Operations           | Label_Texts_Manage_Users_List     | Enabled        |
+            | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Label_Texts_Manage_Users_List     | Enabled        |
 
     @rsp-2827 @rsp-2870 @verifyAddAnotherUser
     Scenario Outline: Verify the user is able to add another user from the Confirmation message screen using the link
         When I fill the new user profile page using '<Add_User_Profile>'
+        And I capture the page screenshot
         And I click the 'Continue' button on the 'Create_User_Profile_Page'
+        And I capture the page screenshot
         Then I can see the check and create user profile page
         Then I can see previously filled values in the new user profile page for '<Add_User_Profile>' displayed on the check and create user profile page
-        And I capture the page screenshot
         And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
+        And I capture the page screenshot
         Then I can see the create user profile confirmation page for '<Add_User_Profile>'
-        And I capture the page screenshot
         When I click the 'Add_another_user' link on the 'Create_User_Profile_Confirmation_Page'
-        Then I can see the add a new user profile page
         And I capture the page screenshot
+        Then I can see the add a new user profile page
         When I fill the new user profile page using '<Add_Another_User_Profile>'
+        And I capture the page screenshot
         And I click the 'Continue' button on the 'Create_User_Profile_Page'
+        And I capture the page screenshot
         Then I can see the check and create user profile page
         Then I can see previously filled values in the new user profile page for '<Add_Another_User_Profile>' displayed on the check and create user profile page
         And I capture the page screenshot
         And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
-        Then I can see the create user profile confirmation page for '<Add_Another_User_Profile>'
         And I capture the page screenshot
+        Then I can see the create user profile confirmation page for '<Add_Another_User_Profile>'
         When I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
+        And I capture the page screenshot
         Then I can see the 'Manage_Users_Page'
+        And I can see the newly created user record should be present in the list for '<Add_Another_User_Profile>' with '<Status_Enabled>' status in the manage user page
+        And I capture the page screenshot
         And I click the 'Back' link on the 'Manage_Users_Page'
+        And I capture the page screenshot
         Then I have navigated to the 'System_Administration_Page'
         When I click the 'Manage_Users' link on the 'System_Administration_Page'
+        And I capture the page screenshot
         Then I can see the 'Manage_Users_Page'
 
         Examples:
-            | Add_User_Profile                                   | Add_Another_User_Profile                                   |
-            | Valid_Data_In_All_Fields_Role_Operations           | Valid_Data_In_All_Fields_Role_Operations_Another           |
-            | Valid_Data_In_All_Fields_Role_Reviewer             | Valid_Data_In_All_Fields_Role_Reviewer_Another             |
-            | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer   | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer_Another   |
-            | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Valid_Data_In_All_Mandatory_Fields_Role_Operations_Another |
+            | Add_User_Profile                                   | Add_Another_User_Profile                                   | Status_Enabled |
+            | Valid_Data_In_All_Fields_Role_Operations           | Valid_Data_In_All_Fields_Role_Operations_Another           | Enabled        |
+            | Valid_Data_In_All_Fields_Role_Reviewer             | Valid_Data_In_All_Fields_Role_Reviewer_Another             | Enabled        |
+            | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer   | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer_Another   | Enabled        |
+            | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Valid_Data_In_All_Mandatory_Fields_Role_Operations_Another | Enabled        |
 
     @rsp-2827 @verifyCreateUserProfileBackLink
     Scenario: Verify the user can navigate from 'Add a new user profile' page by clicking 'Back' link
         When I click the 'Back' link on the 'Create_User_Profile_Page'
+        And I capture the page screenshot
         Then I can see the 'Manage_Users_Page'
 
     @rsp-2827 @verifyCheckCreateUserProfileBackLink
     Scenario Outline: Verify the user can navigate from 'Check and create user profile' page to add a new user profile page by clicking 'Back' link
         When I fill the new user profile page using '<Add_User_Profile>'
+        And I capture the page screenshot
         And I click the 'Continue' button on the 'Create_User_Profile_Page'
+        And I capture the page screenshot
         Then I can see the check and create user profile page
         Then I can see previously filled values in the new user profile page for '<Add_User_Profile>' displayed on the check and create user profile page
         When I click the 'Back' link on the 'Check_Create_User_Profile_Page'
+        And I capture the page screenshot
         Then I can see the add a new user profile page
         Then I can see previously filled values in the new user profile page for '<Add_User_Profile>' displayed on the add a new user profile page
+        And I capture the page screenshot
+        And I uncheck the previously selected checkboxes on the add a new user profile page for '<Add_User_Profile>' for the role is selected as operations
+        And I capture the page screenshot
+        And I clear the previously entered values on the add a new user profile page for '<Add_User_Profile>' for '<Role_Checkbox>'
+        And I capture the page screenshot
         When I fill the new user profile page using '<Add_Another_User_Profile>'
+        And I capture the page screenshot
         And I click the 'Continue' button on the 'Create_User_Profile_Page'
+        And I capture the page screenshot
         Then I can see the check and create user profile page
         Then I can see previously filled values in the new user profile page for '<Add_Another_User_Profile>' displayed on the check and create user profile page
         And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
+        And I capture the page screenshot
         Then I can see the create user profile confirmation page for '<Add_Another_User_Profile>'
         When I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
+        And I capture the page screenshot
         Then I can see the 'Manage_Users_Page'
-        And I can see the newly created user record should be present in the list for '<Add_Another_User_Profile>' with 'ACTIVE' status in the manage user page
+        And I can see the newly created user record should be present in the list for '<Add_Another_User_Profile>' with '<Status_Enabled>' status in the manage user page
+        And I capture the page screenshot
 
         Examples:
-            | Add_User_Profile                                   | Add_Another_User_Profile                                   |
-            | Valid_Data_In_All_Fields_Role_Operations           | Valid_Data_In_All_Fields_Role_Operations_Another           |
-            | Valid_Data_In_All_Fields_Role_Reviewer             | Valid_Data_In_All_Fields_Role_Reviewer_Another             |
-            | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer   | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer_Another   |
-            | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Valid_Data_In_All_Mandatory_Fields_Role_Operations_Another |
+            | Add_User_Profile                                   | Add_Another_User_Profile                                   | Status_Enabled | Role_Checkbox       |
+            | Valid_Data_In_All_Fields_Role_Operations           | Valid_Data_In_All_Fields_Role_Operations_Another           | Enabled        | Role_Operations     |
+            | Valid_Data_In_All_Fields_Role_Reviewer             | Valid_Data_In_All_Fields_Role_Reviewer_Another             | Enabled        | Role_Not_Operations |
+            | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer   | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer_Another   | Enabled        | Role_Not_Operations |
+            | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Valid_Data_In_All_Mandatory_Fields_Role_Operations_Another | Enabled        | Role_Operations     |
 
     @rsp-2827 @verifyCheckCreateUserProfileChangeLinkRoleOperations @RoleCheckbox
     Scenario Outline: Verify the user can navigate from 'Check and create user profile' page by clicking 'Change' button against all the fields when the role is selected as operations
@@ -192,23 +218,22 @@ Feature: User Administration: Manage Users - Create user
         When I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
         And I can see the 'Manage_Users_Page'
         And I capture the page screenshot
-        And I search and click on view edit link for unique '<Add_User_Profile>' user with 'ACTIVE' status from the manage user page
+        And I search and click on view edit link for unique '<Add_User_Profile>' user with '<Status_Enabled>' status from the manage user page
         When I can see the user profile page
         Then I can see the '<Add_User_Profile>' user has the correct roles assigned on their profile page
         When I click the change link against '<Field_Name>' on the user profile page
         Then I can see that the '<Add_User_Profile>' users data persists on the edit profile page
 
         Examples:
-            | Add_User_Profile                                   | Field_Name |
-            | Valid_Data_In_All_Fields_Role_Operations           | Role       |
-            | Valid_Data_In_All_Fields_Role_Reviewer_Another     | Role       |
-            | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Role       |
-            | Valid_Data_All_Roles                               | Role       |
-            | Valid_Data_No_Roles                                | Role       |
+            | Add_User_Profile                                   | Field_Name | Status_Enabled |
+            | Valid_Data_In_All_Fields_Role_Operations           | Role       | Enabled        |
+            | Valid_Data_In_All_Fields_Role_Reviewer_Another     | Role       | Enabled        |
+            | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Role       | Enabled        |
+            | Valid_Data_All_Roles                               | Role       | Enabled        |
+            | Valid_Data_No_Roles                                | Role       | Enabled        |
 
     @rsp-2827 @VerifyNoErrorMessagesValidData @VerifyNoErrorMessagesValidDataCreateUserPage
-    Scenario Outline: Validate user is able to fill user profile page with valid data
-        Validate email address field with different valid data
+    Scenario Outline: Validate user is able to fill the email address field in the create user profile page with valid data
         When I fill the new user profile page using '<Add_User_Profile>'
         And I capture the page screenshot
         And I click the 'Continue' button on the 'Create_User_Profile_Page'
@@ -244,6 +269,7 @@ Feature: User Administration: Manage Users - Create user
             | Valid_Email_Data_Other_Language       |
             | Valid_Email_Data_Domain               |
 
+    # defect https://nihr.atlassian.net/browse/RSP-3878
     @rsp-3122 @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage
     Scenario Outline: Validate error messages are displayed for invalid data in create user profile page
         When I fill the new user profile page using '<Invalid_Data_User_Profile>' for field validation
@@ -263,31 +289,43 @@ Feature: User Administration: Manage Users - Create user
             | Invalid_Character_Limit                                   | Error_Message_Invalid_Character_Limit                                   |
             | Invalid_Email_Data_Max_Char                               | Error_Message_Invalid_Character_Limit_field_Email_Address               |
             | Incorrect_Format_Telephone_Data                           | Error_Message_Incorrect_Format_Field_Telephone                          |
-            | Incorrect_Format_Email                                    | Error_Message_Incorrect_Format_Field_Email_Address                      |
-            | Invalid_Email_Data_Start_With_Dot                         | Error_Message_Incorrect_Format_Field_Email_Address                      |
-            | Invalid_Email_Data_Double_Dot                             | Error_Message_Incorrect_Format_Field_Email_Address                      |
-            | Invalid_Email_Data_Space                                  | Error_Message_Incorrect_Format_Field_Email_Address                      |
-            | Invalid_Email_Data_Wrong_AT                               | Error_Message_Incorrect_Format_Field_Email_Address                      |
-            | Invalid_Email_Data_Less_Greater_Symbols                   | Error_Message_Incorrect_Format_Field_Email_Address                      |
-            | Invalid_Email_Data_Colon                                  | Error_Message_Incorrect_Format_Field_Email_Address                      |
-            | Invalid_Email_Data_Semi_Colon                             | Error_Message_Incorrect_Format_Field_Email_Address                      |
-            | Invalid_Email_Data_Comma                                  | Error_Message_Incorrect_Format_Field_Email_Address                      |
-            | Invalid_Email_Data_Start_With_Hyphen                      | Error_Message_Incorrect_Format_Field_Email_Address                      |
-            | Invalid_Email_Data_Hyphen_Before_Domain                   | Error_Message_Incorrect_Format_Field_Email_Address                      |
-            | Invalid_Email_Data_Double_Dot_Domain                      | Error_Message_Incorrect_Format_Field_Email_Address                      |
-            | Invalid_Email_Data_Exclamation_Domain                     | Error_Message_Incorrect_Format_Field_Email_Address                      |
-            | Invalid_Email_Data_Unicode                                | Error_Message_Incorrect_Format_Field_Email_Address                      |
-            | Invalid_Email_Data_Single_Quote_Before_AT                 | Error_Message_Incorrect_Format_Field_Email_Address                      |
-            | Invalid_Email_Data_Domain_Exceed_Max                      | Error_Message_Incorrect_Format_Field_Email_Address                      |
-            | Invalid_Email_Data_Local_Part_Max                         | Error_Message_Incorrect_Format_Field_Email_Address                      |
-            | Invalid_Email_Data_Consecutive_Dot_Domain                 | Error_Message_Incorrect_Format_Field_Email_Address                      |
-            | Invalid_Email_Data_Consecutive_Dot_SubDomain              | Error_Message_Incorrect_Format_Field_Email_Address                      |
-            | Invalid_Email_Data_Consecutiv_Dot_Domain_SubDomain        | Error_Message_Incorrect_Format_Field_Email_Address                      |
-            | Invalid_Email_Data_Emoji                                  | Error_Message_Incorrect_Format_Field_Email_Address                      |
-            | Invalid_Email_Data_TLD                                    | Error_Message_Incorrect_Format_Field_Email_Address                      |
-            | Invalid_Email_Data_Missing_AT                             | Error_Message_Incorrect_Format_Field_Email_Address                      |
-            | Invalid_Email_Data_Reserved_Domain                        | Error_Message_Incorrect_Format_Field_Email_Address                      |
-            | Invalid_Email_Data_Punycode                               | Error_Message_Incorrect_Format_Field_Email_Address                      |
+            | Incorrect_Format_Invalid_Character_Limit_Telephone_Data   | Error_Message_Incorrect_Format_Invalid_Character_Limit_Telephone        |
+            | Incorrect_Format_Invalid_Character_Limit_Email_Data       | Error_Message_Incorrect_Format_Invalid_Character_Limit_Email_Address    |
+
+    @rsp-3122 @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage @skip
+    Scenario Outline: Validate error messages are displayed for invalid data in the email address field of create user profile page
+        When I fill the new user profile page using '<Invalid_Data_User_Profile>' for field validation
+        And I click the 'Continue' button on the 'Create_User_Profile_Page'
+        Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Create_User_Profile_Page'
+        And I capture the page screenshot
+
+        Examples:
+            | Invalid_Data_User_Profile                          | Field_And_Summary_Error_Message                    |
+            | Incorrect_Format_Email                             | Error_Message_Incorrect_Format_Field_Email_Address |
+            | Invalid_Email_Data_Start_With_Dot                  | Error_Message_Incorrect_Format_Field_Email_Address |
+            | Invalid_Email_Data_Double_Dot                      | Error_Message_Incorrect_Format_Field_Email_Address |
+            | Invalid_Email_Data_Space                           | Error_Message_Incorrect_Format_Field_Email_Address |
+            | Invalid_Email_Data_Wrong_AT                        | Error_Message_Incorrect_Format_Field_Email_Address |
+            | Invalid_Email_Data_Less_Greater_Symbols            | Error_Message_Incorrect_Format_Field_Email_Address |
+            | Invalid_Email_Data_Colon                           | Error_Message_Incorrect_Format_Field_Email_Address |
+            | Invalid_Email_Data_Semi_Colon                      | Error_Message_Incorrect_Format_Field_Email_Address |
+            | Invalid_Email_Data_Comma                           | Error_Message_Incorrect_Format_Field_Email_Address |
+            | Invalid_Email_Data_Start_With_Hyphen               | Error_Message_Incorrect_Format_Field_Email_Address |
+            | Invalid_Email_Data_Hyphen_Before_Domain            | Error_Message_Incorrect_Format_Field_Email_Address |
+            | Invalid_Email_Data_Double_Dot_Domain               | Error_Message_Incorrect_Format_Field_Email_Address |
+            | Invalid_Email_Data_Exclamation_Domain              | Error_Message_Incorrect_Format_Field_Email_Address |
+            | Invalid_Email_Data_Unicode                         | Error_Message_Incorrect_Format_Field_Email_Address |
+            | Invalid_Email_Data_Single_Quote_Before_AT          | Error_Message_Incorrect_Format_Field_Email_Address |
+            | Invalid_Email_Data_Domain_Exceed_Max               | Error_Message_Incorrect_Format_Field_Email_Address |
+            | Invalid_Email_Data_Local_Part_Max                  | Error_Message_Incorrect_Format_Field_Email_Address |
+            | Invalid_Email_Data_Consecutive_Dot_Domain          | Error_Message_Incorrect_Format_Field_Email_Address |
+            | Invalid_Email_Data_Consecutive_Dot_SubDomain       | Error_Message_Incorrect_Format_Field_Email_Address |
+            | Invalid_Email_Data_Consecutiv_Dot_Domain_SubDomain | Error_Message_Incorrect_Format_Field_Email_Address |
+            | Invalid_Email_Data_Emoji                           | Error_Message_Incorrect_Format_Field_Email_Address |
+            | Invalid_Email_Data_TLD                             | Error_Message_Incorrect_Format_Field_Email_Address |
+            | Invalid_Email_Data_Missing_AT                      | Error_Message_Incorrect_Format_Field_Email_Address |
+            | Invalid_Email_Data_Reserved_Domain                 | Error_Message_Incorrect_Format_Field_Email_Address |
+            | Invalid_Email_Data_Punycode                        | Error_Message_Incorrect_Format_Field_Email_Address |
 
     @rsp-3122 @VerifyErrorMessagesInvalidData @VerifyErrorInvalidDataCreateUserFromCheckCreateUserProfileBackLink
     Scenario Outline: Validation messages are displayed for invalid data entered after the user has navigated back from 'Check and create user profile' page
