@@ -18,7 +18,7 @@ Feature: User Administration: Manage Review Bodies - Edit review body
     Scenario: Verify that the review body profile page has the expected layout
         When I can see the review body profile page
         And I capture the page screenshot
-        Then I see that the 'active' review body profile page has the expected layout
+        Then I see that the 'Enabled' review body profile page has the expected layout
 
     @verifyReviewBodyChangeLinks
     Scenario Outline: Verify the user can navigate to the edit review profile page via the change links for all fields

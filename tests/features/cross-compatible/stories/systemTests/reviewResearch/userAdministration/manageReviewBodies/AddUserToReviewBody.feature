@@ -3,7 +3,7 @@ Feature: User Administration: Manage Review Bodies - Add user to review body
 
     Background:
         Given I have navigated to the 'Manage_Review_Bodies_Page'
-        And I select a 'QA Automation' Review Body to View and Edit which is 'Active'
+        And I select a 'QA Automation' Review Body to View and Edit which is 'Enabled'
         And I can see the review body profile page
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
         And I can see the user list page of the review body

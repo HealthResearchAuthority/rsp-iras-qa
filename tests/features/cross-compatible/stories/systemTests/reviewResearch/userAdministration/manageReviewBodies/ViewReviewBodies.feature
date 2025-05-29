@@ -24,7 +24,7 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
         When I enter unique organisation name of the newly created review body into the search field
         And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
-        And I can see the newly created review body should be present in the list with 'Active' status in the manage review bodies page
+        And I can see the newly created review body should be present in the list with 'Enabled' status in the manage review bodies page
         And I capture the page screenshot
         Then I can see the list is sorted by default in the alphabetical order of 'Organisation Name'
         And I capture the page screenshot

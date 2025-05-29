@@ -35,7 +35,7 @@ Then(
     await expect(reviewBodyProfilePage.view_this_review_body_list_of_users_link).toBeVisible();
     await expect(reviewBodyProfilePage.view_this_review_body_audit_history_link).toBeVisible();
     await expect(reviewBodyProfilePage.last_updated_row).toBeVisible();
-    if (status.toLowerCase() == 'active') {
+    if (status.toLowerCase() == 'enabled') {
       await expect(reviewBodyProfilePage.disable_sub_heading).toBeVisible();
       await expect(reviewBodyProfilePage.disable_guidance_text).toBeVisible();
       await expect(reviewBodyProfilePage.disable_button).toBeVisible();

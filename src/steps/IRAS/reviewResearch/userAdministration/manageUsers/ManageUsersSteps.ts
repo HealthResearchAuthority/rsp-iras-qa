@@ -112,17 +112,18 @@ Then(
 Then(
   'I select a {string} User to View and Edit which is {string}',
   async ({ manageUsersPage }, userNamePrefix: string, status: string) => {
-    let statusText: string;
-    if (status.toLowerCase() == 'active') {
-      statusText = manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enabled_status;
+    let userStatus: string;
+    const datasetStatus = manageUsersPage.manageUsersPageTestData.Manage_Users_Page;
+    if (status.toLowerCase() == 'disabled') {
+      userStatus = datasetStatus.disabled_status;
     } else {
-      statusText = manageUsersPage.manageUsersPageTestData.Manage_Users_Page.disabled_status;
+      userStatus = datasetStatus.enabled_status;
     }
     await manageUsersPage.goto(
       manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size,
       userNamePrefix
     );
-    const selectedReviewBodyRow = await manageUsersPage.getRowByUserNameStatus(userNamePrefix, false, statusText);
+    const selectedReviewBodyRow = await manageUsersPage.getRowByUserNameStatus(userNamePrefix, false, userStatus);
     await selectedReviewBodyRow.locator(manageUsersPage.view_edit_link).click();
   }
 );

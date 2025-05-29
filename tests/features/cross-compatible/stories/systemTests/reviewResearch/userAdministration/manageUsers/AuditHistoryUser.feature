@@ -8,7 +8,7 @@ Feature: User Administration: Manage Users - View audit history for users
 
     @VerifyAuditHistoryUserBackLinkNavigation
     Scenario: Verify the user can navigate from audit History page of the user by clicking 'Back' link
-        And I select a 'QA Automation' User to View and Edit which is 'active'
+        And I select a 'QA Automation' User to View and Edit which is '<Status_Enabled>'
         And I can see the user profile page
         When I click the 'View_Users_Audit_History' link on the 'User_Profile_Page'
         Then I can see the audit history page of the user profile
@@ -16,6 +16,9 @@ Feature: User Administration: Manage Users - View audit history for users
         And I click the 'Back' link on the 'Audit_History_User_Page'
         And I capture the page screenshot
         And I can see the user profile page
+        Examples:
+            | Status_Enabled |
+            | Enabled        |
 
     @VerifyAuditHistoryCreateUserAssignRoles
     Scenario Outline: Verify the user can view the audit history with roles assigned after creating a new user
@@ -33,7 +36,7 @@ Feature: User Administration: Manage Users - View audit history for users
         And I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
         And I can see the 'Manage_Users_Page'
         And I capture the page screenshot
-        And I search and click on view edit link for unique '<Add_User_Profile>' user with 'ACTIVE' status from the manage user page
+        And I search and click on view edit link for unique '<Add_User_Profile>' user with '<Status_Enabled>' status from the manage user page
         And I can see the user profile page
         And I capture the page screenshot
         When I click the 'View_Users_Audit_History' link on the 'User_Profile_Page'
@@ -42,10 +45,10 @@ Feature: User Administration: Manage Users - View audit history for users
         And I can see the audit history for the newly created '<Add_User_Profile>' user with roles assigned
 
         Examples:
-            | Add_User_Profile                                   |
-            | Valid_Data_In_All_Fields_Role_Operations           |
-            | Valid_Data_In_All_Fields_Role_Reviewer_Another     |
-            | Valid_Data_In_All_Mandatory_Fields_Role_Operations |
+            | Add_User_Profile                                   | Status_Enabled |
+            | Valid_Data_In_All_Fields_Role_Operations           | Enabled        |
+            | Valid_Data_In_All_Fields_Role_Reviewer_Another     | Enabled        |
+            | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Enabled        |
 
     @VerifyAuditHistoryUserUnassignRole
     Scenario Outline: Verify the user can view the unassign role event in the audit history
@@ -62,7 +65,7 @@ Feature: User Administration: Manage Users - View audit history for users
         And I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
         And I can see the 'Manage_Users_Page'
         And I capture the page screenshot
-        And I search and click on view edit link for unique '<Add_User_Profile>' user with 'ACTIVE' status from the manage user page
+        And I search and click on view edit link for unique '<Add_User_Profile>' user with '<Status_Enabled>' status from the manage user page
         And I can see the user profile page
         And I capture the page screenshot
         And I click the change link against '<Field_Name>' on the user profile page
@@ -80,10 +83,10 @@ Feature: User Administration: Manage Users - View audit history for users
         Then I can see the '<Add_User_Profile>' user has had their roles unassigned in the audit history
 
         Examples:
-            | Add_User_Profile                               | Field_Name | Edit_User                 |
-            | Valid_Data_In_All_Fields_Role_Operations       | Role       | User_Roles_Checkbox_Empty |
-            | Valid_Data_In_All_Fields_Role_Reviewer_Another | Role       | User_Roles_Checkbox_Empty |
-            | Valid_Data_All_Roles                           | Role       | User_Roles_Checkbox_Empty |
+            | Add_User_Profile                               | Field_Name | Edit_User                 | Status_Enabled |
+            | Valid_Data_In_All_Fields_Role_Operations       | Role       | User_Roles_Checkbox_Empty | Enabled        |
+            | Valid_Data_In_All_Fields_Role_Reviewer_Another | Role       | User_Roles_Checkbox_Empty | Enabled        |
+            | Valid_Data_All_Roles                           | Role       | User_Roles_Checkbox_Empty | Enabled        |
 
     @VerifyAuditHistoryEnableDisableUser
     Scenario Outline: Verify the user can view the audit history after changing the status of a user
@@ -105,12 +108,12 @@ Feature: User Administration: Manage Users - View audit history for users
 
         Examples:
             | Status   | Change_Status       | Audit_History |
-            | active   | Disable_User_Record | Disable_User  |
-            | disabled | Enable_User_Record  | Enable_User   |
+            | Enabled  | Disable_User_Record | Disable_User  |
+            | Disabled | Enable_User_Record  | Enable_User   |
 
     @VerifyAuditHistoryEditCommonUserFields
     Scenario Outline: Verify the user can view the audit history after editing common user profile fields
-        And I select a 'QA Automation' User to View and Edit which is 'active'
+        And I select a 'QA Automation' User to View and Edit which is '<Status_Enabled>'
         And I can see the user profile page
         And I capture the page screenshot
         And I click the change link against '<Field_Name>' on the user profile page
@@ -142,14 +145,14 @@ Feature: User Administration: Manage Users - View audit history for users
         Then I can see the users audit history with the '<Audit_History>' event as the most recent entry
 
         Examples:
-            | Field_Name    | Edit_User                   | Audit_History          |
-            | Title         | User_Title_Update           | Edit_User_Title        |
-            | First_Name    | User_First_Name_Text_One    | Edit_User_First_Name   |
-            | Last_Name     | User_Last_Name_Text_One     | Edit_User_Last_Name    |
-            | Email_Address | User_Email_Address_Text_One | Edit_User_Email        |
-            | Telephone     | User_Telephone_Text_One     | Edit_User_Telephone    |
-            | Organisation  | User_Organisation_Text_One  | Edit_User_Organisation |
-            | Job_Title     | User_Job_Title_Text_One     | Edit_User_Job_Title    |
+            | Field_Name    | Edit_User                   | Audit_History          | Status_Enabled |
+            | Title         | User_Title_Update           | Edit_User_Title        | Enabled        |
+            | First_Name    | User_First_Name_Text_One    | Edit_User_First_Name   | Enabled        |
+            | Last_Name     | User_Last_Name_Text_One     | Edit_User_Last_Name    | Enabled        |
+            | Email_Address | User_Email_Address_Text_One | Edit_User_Email        | Enabled        |
+            | Telephone     | User_Telephone_Text_One     | Edit_User_Telephone    | Enabled        |
+            | Organisation  | User_Organisation_Text_One  | Edit_User_Organisation | Enabled        |
+            | Job_Title     | User_Job_Title_Text_One     | Edit_User_Job_Title    | Enabled        |
 
     @VerifyAuditHistoryEditOperationUserFields
     Scenario Outline: Verify the user can view the audit history after editing fields for an operations user
@@ -166,7 +169,7 @@ Feature: User Administration: Manage Users - View audit history for users
         And I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
         And I can see the 'Manage_Users_Page'
         And I capture the page screenshot
-        And I search and click on view edit link for unique '<Add_User_Profile>' user with 'ACTIVE' status from the manage user page
+        And I search and click on view edit link for unique '<Add_User_Profile>' user with '<Status_Enabled>' status from the manage user page
         And I can see the user profile page
         And I capture the page screenshot
         And I click the change link against '<Field_Name>' on the user profile page
@@ -184,13 +187,13 @@ Feature: User Administration: Manage Users - View audit history for users
         And I can see the users audit history with the '<Audit_History>' event as the most recent entry
 
         Examples:
-            | Add_User_Profile                                   | Field_Name | Edit_User                 | Audit_History     |
-            | Valid_Data_In_All_Fields_Role_Operations           | Country    | User_Country_Checkbox_One | Edit_User_Country |
-            | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Country    | User_Country_Checkbox_Two | Edit_User_Country |
+            | Add_User_Profile                                   | Field_Name | Edit_User                 | Audit_History     | Status_Enabled |
+            | Valid_Data_In_All_Fields_Role_Operations           | Country    | User_Country_Checkbox_One | Edit_User_Country | Enabled        |
+            | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Country    | User_Country_Checkbox_Two | Edit_User_Country | Enabled        |
 
     @VerifyAuditHistoryUserDefaultSort
     Scenario Outline: Verify the users audit history should be sorted with the most recent entry first
-        And I select a 'QA Automation' User to View and Edit which is 'active'
+        And I select a 'QA Automation' User to View and Edit which is '<Status_Enabled>'
         And I can see the user profile page
         And I capture the page screenshot
         And I click the 'Disable_User_Record' button on the 'User_Profile_Page'
@@ -223,5 +226,5 @@ Feature: User Administration: Manage Users - View audit history for users
         And I can see the default sort should be the most recent entry first based on date and time
 
         Examples:
-            | Field_Name | Edit_User               |
-            | Telephone  | User_Telephone_Text_One |
+            | Field_Name | Edit_User               | Status_Enabled |
+            | Telephone  | User_Telephone_Text_One | Enabled        |
