@@ -33,7 +33,7 @@ Feature: User Administration: Manage Users - View audit history for users
         And I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
         And I can see the 'Manage_Users_Page'
         And I capture the page screenshot
-        And I search and click on view edit link for unique '<Add_User_Profile>' user with 'ACTIVE' status from the manage user page
+        And I search and click on view edit link for unique '<Add_User_Profile>' user with 'Active' status from the manage user page
         And I can see the user profile page
         And I capture the page screenshot
         When I click the 'View_Users_Audit_History' link on the 'User_Profile_Page'
@@ -62,7 +62,7 @@ Feature: User Administration: Manage Users - View audit history for users
         And I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
         And I can see the 'Manage_Users_Page'
         And I capture the page screenshot
-        And I search and click on view edit link for unique '<Add_User_Profile>' user with 'ACTIVE' status from the manage user page
+        And I search and click on view edit link for unique '<Add_User_Profile>' user with 'Active' status from the manage user page
         And I can see the user profile page
         And I capture the page screenshot
         And I click the change link against '<Field_Name>' on the user profile page
