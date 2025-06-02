@@ -1,8 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../hooks/CustomFixtures';
 import { generateIrasId, generateRandomValidIrasId } from '../.././../utils/GenerateTestData';
-import path from 'path';
-const pathToTestDataJson = './src/resources/test_data/iras/make_changes/project_details_iras_data.json';
 
 const { Then } = createBdd(test);
 
@@ -48,9 +46,7 @@ Then(
 Then('I fill the unique iras id in project details iras page', async ({ projectDetailsIRASPage }) => {
   const uniqueIrasId = generateRandomValidIrasId();
   await projectDetailsIRASPage.setUniqueIrasId(uniqueIrasId);
-  const filePath = path.resolve(pathToTestDataJson);
-  await projectDetailsIRASPage.updateUniqueIrasIdTestDataJson(filePath, uniqueIrasId);
-  await projectDetailsIRASPage.iras_id_text.fill(uniqueIrasId);
+  await projectDetailsIRASPage.iras_id_text.fill(await projectDetailsIRASPage.getUniqueIrasId());
 });
 
 Then('I fill the existing iras id in project details iras page', async ({ projectDetailsIRASPage }) => {

@@ -1,6 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as projectDetailsIRASPageTestData from '../../../resources/test_data/iras/make_changes/project_details_iras_data.json';
-import * as fse from 'fs-extra';
 //Declare Page Objects
 export default class ProjectDetailsIRASPage {
   readonly page: Page;
@@ -41,17 +40,5 @@ export default class ProjectDetailsIRASPage {
 
   async getUniqueIrasId(): Promise<string> {
     return this._unique_iras_id;
-  }
-
-  async updateUniqueIrasIdTestDataJson(filePath: string, updateVal: string) {
-    (async () => {
-      try {
-        const data = await fse.readJson(filePath);
-        data.Invalid_IRAS_ID_Duplicate.iras_id_text = updateVal;
-        await fse.writeJson(filePath, data, { spaces: 2 });
-      } catch (error) {
-        throw new Error(`${error} Error updating unique iras id to testdata json file:`);
-      }
-    })();
   }
 }

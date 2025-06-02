@@ -21,7 +21,7 @@ export default class ResearchLocationsPage {
 
     //Locators
     this.pageHeading = this.page.getByTestId('title');
-    this.nations_participating_checkbox = this.page.getByTestId(/^IQA0032/);
+    this.nations_participating_checkbox = this.page.locator('input[id^="Questions[0]"]:not([type="hidden"])');
     this.is_nhs_hsc_organisation_radio = this.page.getByTestId(/^IQA0004/);
     this.lead_nation_radio = this.page.getByTestId(/^IQA0005/);
     this.nations_participating_label = this.page.locator('div[id="Questions[0].Answers"] govuk-fieldset-legend');
