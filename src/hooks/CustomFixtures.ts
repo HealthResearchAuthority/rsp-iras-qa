@@ -1,6 +1,6 @@
 import { test as base } from 'playwright-bdd';
 import AxeBuilder from '@axe-core/playwright';
-import { getAuthState, getTicketReferenceTags } from '../utils/UtilFunctions';
+import { getAuthState } from '../utils/UtilFunctions';
 import CommonItemsPage from '../pages/Common/CommonItemsPage';
 import LoginPage from '../pages/Common/LoginPage';
 import HomePage from '../pages/IRAS/HomePage';
@@ -297,15 +297,6 @@ export const test = base.extend<CustomFixtures>({
       channel = 'chrome';
     }
     await use(channel);
-  },
-
-  //Attach relevant ticket links to each scenario in test report
-  $beforeEach: async ({ $tags, $testInfo }, use) => {
-    const tickets = getTicketReferenceTags($tags);
-    if (tickets.length > 0) {
-      $testInfo.attach('Ticket Reference:', { body: tickets.toString().replace(/,/g, '') });
-    }
-    await use();
   },
 
   //Enable JavaScript in the BrowserContext for applicable, tagged scenarios
