@@ -347,6 +347,12 @@
       "email_address_text": "EmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExcee@example.com",
       "description_text": ""
     },
+    "Incorrect_Format_Invalid_Character_Limit_Email_Field": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "EmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExcee@examplecom",
+      "description_text": ""
+    },
     "Validation": {
       "All_Mandatory_Field_Errors": {
         "country_checkbox": "Enter a country",

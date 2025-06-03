@@ -477,8 +477,8 @@ Then(
     let summaryErrorActualValues: any;
     await expect(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
     if (
-      errorMessageFieldAndSummaryDatasetName === 'Error_Message_Incorrect_Format_Invalid_Character_Limit_Telephone' ||
-      errorMessageFieldAndSummaryDatasetName === 'Error_Message_Incorrect_Format_Invalid_Character_Limit_Email_Address'
+      errorMessageFieldAndSummaryDatasetName === 'Incorrect_Format_Invalid_Character_Limit_Telephone_Error' ||
+      errorMessageFieldAndSummaryDatasetName === 'Incorrect_Format_Invalid_Character_Limit_Email_Address_Error'
     ) {
       allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset).toString();
       summaryErrorActualValues = (await commonItemsPage.getSummaryErrorMessages()).toString();
@@ -499,14 +499,12 @@ Then(
           const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
           await expect(element).toBeInViewport();
         } else if (
-          errorMessageFieldAndSummaryDatasetName ===
-            'Error_Message_Incorrect_Format_Invalid_Character_Limit_Telephone' ||
-          errorMessageFieldAndSummaryDatasetName ===
-            'Error_Message_Incorrect_Format_Invalid_Character_Limit_Email_Address'
+          errorMessageFieldAndSummaryDatasetName === 'Incorrect_Format_Invalid_Character_Limit_Telephone_Error' ||
+          errorMessageFieldAndSummaryDatasetName === 'Incorrect_Format_Invalid_Character_Limit_Email_Address_Error'
         ) {
           fieldErrorMessagesActualValues = (await commonItemsPage.getMultipleFieldErrorMessages(key, page)).toString();
           const allFieldErrorExpectedValues = Object.values(errorMessageFieldDataset).toString();
-          expect(fieldErrorMessagesActualValues).toEqual(allFieldErrorExpectedValues); //defect https://nihr.atlassian.net/browse/RSP-3878
+          expect.soft(fieldErrorMessagesActualValues).toEqual(allFieldErrorExpectedValues);
           const fieldValActuals = summaryErrorActualValues.split(',');
           for (const val of fieldValActuals) {
             const element = await commonItemsPage.clickErrorSummaryLinkMultipleErrorField(val, key, page);

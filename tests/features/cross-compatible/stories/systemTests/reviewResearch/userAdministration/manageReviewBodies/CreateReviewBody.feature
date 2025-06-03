@@ -151,7 +151,7 @@ Feature: User Administration: Manage Review Bodies - Create review body
             | Description_Field_Max_Data                   |
             | Description_Field_between_Min_Max_Data       |
 
-    @verifyValidationErrors @rsp-3123
+    @verifyValidationErrors @rsp-3123 @TestOnly
     Scenario Outline: When input field validation fails on the create review body page, correct error messaging displays to the user
         When I fill the new review body page using '<Add_Review_Body>'
         And I capture the page screenshot
@@ -160,14 +160,15 @@ Feature: User Administration: Manage Review Bodies - Create review body
         And I capture the page screenshot
 
         Examples:
-            | Add_Review_Body                      | Field_And_Summary_Error_Message         |
-            | Missing_Data_Organisation_Name_Field | Mandatory_Field_Organisation_Name_Error |
-            | Missing_Data_Country_Field           | Mandatory_Field_Country_Error           |
-            | Missing_Data_Email_Address_Field     | Mandatory_Field_Email_Address_Error     |
-            | Missing_Data_All_Fields              | All_Mandatory_Field_Errors              |
-            | Missing_Data_All_Mandatory_Fields    | All_Mandatory_Field_Errors              |
-            | Invalid_Data_Organisation_Name_Field | Max_Chars_Organisation_Name_Error       |
-            | Invalid_Data_Description_Field       | Max_Description_Words_Error             |
+            | Add_Review_Body                                      | Field_And_Summary_Error_Message                              |
+            | Missing_Data_Organisation_Name_Field                 | Mandatory_Field_Organisation_Name_Error                      |
+            | Missing_Data_Country_Field                           | Mandatory_Field_Country_Error                                |
+            | Missing_Data_Email_Address_Field                     | Mandatory_Field_Email_Address_Error                          |
+            | Missing_Data_All_Fields                              | All_Mandatory_Field_Errors                                   |
+            | Missing_Data_All_Mandatory_Fields                    | All_Mandatory_Field_Errors                                   |
+            | Invalid_Data_Organisation_Name_Field                 | Max_Chars_Organisation_Name_Error                            |
+            | Invalid_Data_Description_Field                       | Max_Description_Words_Error                                  |
+            | Incorrect_Format_Invalid_Character_Limit_Email_Field | Incorrect_Format_Invalid_Character_Limit_Email_Address_Error |
 
     @verifyEmailValidationErrors @rsp-3123 @skip
     Scenario Outline: Verify that email field validation prevents invalid email formats
@@ -181,22 +182,22 @@ Feature: User Administration: Manage Review Bodies - Create review body
             | Add_Review_Body                                     | Field_And_Summary_Error_Message |
             | Invalid_Character_Limit                             | Max_Chars_Email_Address_Error   |
             | Incorrect_Email_Format                              | Email_Format_Error              |
-            # | Invalid_Email_Data_Start_With_Dot                   | Email_Format_Error              |
+            | Invalid_Email_Data_Start_With_Dot                   | Email_Format_Error              |
             | Invalid_Email_Data_Double_Dot                       | Email_Format_Error              |
             | Invalid_Email_Data_Space                            | Email_Format_Error              |
-            # | Invalid_Email_Data_Wrong_AT                         | Email_Format_Error              |
+            | Invalid_Email_Data_Wrong_AT                         | Email_Format_Error              |
             | Invalid_Email_Data_Less_Greater_Symbols             | Email_Format_Error              |
             | Invalid_Email_Data_Colon                            | Email_Format_Error              |
             | Invalid_Email_Data_Semi_Colon                       | Email_Format_Error              |
             | Invalid_Email_Data_Comma                            | Email_Format_Error              |
-            # | Invalid_Email_Data_Start_With_Hyphen                | Email_Format_Error              |
-            # | Invalid_Email_Data_Hyphen_Before_Domain             | Email_Format_Error              |
+            | Invalid_Email_Data_Start_With_Hyphen                | Email_Format_Error              |
+            | Invalid_Email_Data_Hyphen_Before_Domain             | Email_Format_Error              |
             | Invalid_Email_Data_Double_Dot_Domain                | Email_Format_Error              |
             | Invalid_Email_Data_Exclamation_Domain               | Email_Format_Error              |
-            # | Invalid_Email_Data_Unicode                          | Email_Format_Error              |
-            # | Invalid_Email_Data_Single_Quote_Before_AT           | Email_Format_Error              |
+            | Invalid_Email_Data_Unicode                          | Email_Format_Error              |
+            | Invalid_Email_Data_Single_Quote_Before_AT           | Email_Format_Error              |
             | Invalid_Email_Data_Domain_Exceed_Max                | Email_Format_Error              |
-            # | Invalid_Email_Data_Local_Part_Max                   | Email_Format_Error              |
+            | Invalid_Email_Data_Local_Part_Max                   | Email_Format_Error              |
             | Invalid_Email_Data_Consecutive_Dot_Domain           | Email_Format_Error              |
             | Invalid_Email_Data_Consecutive_Dot_SubDomain        | Email_Format_Error              |
             | Invalid_Email_Data_Consecutive_Dot_Domain_SubDomain | Email_Format_Error              |

@@ -269,8 +269,7 @@ Feature: User Administration: Manage Users - Create user
             | Valid_Email_Data_Other_Language       |
             | Valid_Email_Data_Domain               |
 
-    # defect https://nihr.atlassian.net/browse/RSP-3878
-    @rsp-3122 @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage
+    @rsp-3122 @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage @TestOnly
     Scenario Outline: Validate error messages are displayed for invalid data in create user profile page
         When I fill the new user profile page using '<Invalid_Data_User_Profile>' for field validation
         And I click the 'Continue' button on the 'Create_User_Profile_Page'
@@ -278,19 +277,19 @@ Feature: User Administration: Manage Users - Create user
         And I capture the page screenshot
 
         Examples:
-            | Invalid_Data_User_Profile                                 | Field_And_Summary_Error_Message                                         |
-            | Missing_Mandatory_Fields_Role_Not_Operations              | Error_Message_Missing_Mandatory_Fields_Role_Not_Operations              |
-            | Missing_Mandatory_Fields_Role_Operations                  | Error_Message_Missing_Mandatory_Fields_Role_Operations                  |
-            | Missing_Mandatory_Field_First_Name_Role_Not_Operations    | Error_Message_Missing_Mandatory_Field_First_Name_Role_Not_Operations    |
-            | Missing_Mandatory_Field_Last_Name_Role_Not_Operations     | Error_Message_Missing_Mandatory_Field_Last_Name_Role_Not_Operations     |
-            | Missing_Mandatory_Field_Email_Address_Role_Not_Operations | Error_Message_Missing_Mandatory_Field_Email_Address_Role_Not_Operations |
-            | Missing_Mandatory_Field_Country_Role_Operations           | Error_Message_Missing_Mandatory_Field_Country_Role_Operations           |
-            | Missing_Mandatory_Field_Access_Required_Role_Operations   | Error_Message_Missing_Mandatory_Field_Access_Required_Role_Operations   |
-            | Invalid_Character_Limit                                   | Error_Message_Invalid_Character_Limit                                   |
-            | Invalid_Email_Data_Max_Char                               | Error_Message_Invalid_Character_Limit_field_Email_Address               |
-            | Incorrect_Format_Telephone_Data                           | Error_Message_Incorrect_Format_Field_Telephone                          |
-            | Incorrect_Format_Invalid_Character_Limit_Telephone_Data   | Error_Message_Incorrect_Format_Invalid_Character_Limit_Telephone        |
-            | Incorrect_Format_Invalid_Character_Limit_Email_Data       | Error_Message_Incorrect_Format_Invalid_Character_Limit_Email_Address    |
+            | Invalid_Data_User_Profile                                 | Field_And_Summary_Error_Message                                 |
+            | Missing_Mandatory_Fields_Role_Not_Operations              | Missing_Mandatory_Fields_Role_Not_Operations_Error              |
+            | Missing_Mandatory_Fields_Role_Operations                  | Missing_Mandatory_Fields_Role_Operations_Error                  |
+            | Missing_Mandatory_Field_First_Name_Role_Not_Operations    | Missing_Mandatory_Field_First_Name_Role_Not_Operations_Error    |
+            | Missing_Mandatory_Field_Last_Name_Role_Not_Operations     | Missing_Mandatory_Field_Last_Name_Role_Not_Operations_Error     |
+            | Missing_Mandatory_Field_Email_Address_Role_Not_Operations | Missing_Mandatory_Field_Email_Address_Role_Not_Operations_Error |
+            | Missing_Mandatory_Field_Country_Role_Operations           | Missing_Mandatory_Field_Country_Role_Operations_Error           |
+            | Missing_Mandatory_Field_Access_Required_Role_Operations   | Missing_Mandatory_Field_Access_Required_Role_Operations_Error   |
+            | Invalid_Character_Limit                                   | Invalid_Character_Limit_Error                                   |
+            | Invalid_Email_Data_Max_Char                               | Invalid_Character_Limit_field_Email_Address_Error               |
+            | Incorrect_Format_Telephone_Data                           | Incorrect_Format_Field_Telephone_Error                          |
+            | Incorrect_Format_Invalid_Character_Limit_Telephone_Data   | Incorrect_Format_Invalid_Character_Limit_Telephone_Error        |
+            | Incorrect_Format_Invalid_Character_Limit_Email_Data       | Incorrect_Format_Invalid_Character_Limit_Email_Address_Error    |
 
     @rsp-3122 @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage @skip
     Scenario Outline: Validate error messages are displayed for invalid data in the email address field of create user profile page
@@ -300,34 +299,34 @@ Feature: User Administration: Manage Users - Create user
         And I capture the page screenshot
 
         Examples:
-            | Invalid_Data_User_Profile                          | Field_And_Summary_Error_Message                    |
-            | Incorrect_Format_Email                             | Error_Message_Incorrect_Format_Field_Email_Address |
-            | Invalid_Email_Data_Start_With_Dot                  | Error_Message_Incorrect_Format_Field_Email_Address |
-            | Invalid_Email_Data_Double_Dot                      | Error_Message_Incorrect_Format_Field_Email_Address |
-            | Invalid_Email_Data_Space                           | Error_Message_Incorrect_Format_Field_Email_Address |
-            | Invalid_Email_Data_Wrong_AT                        | Error_Message_Incorrect_Format_Field_Email_Address |
-            | Invalid_Email_Data_Less_Greater_Symbols            | Error_Message_Incorrect_Format_Field_Email_Address |
-            | Invalid_Email_Data_Colon                           | Error_Message_Incorrect_Format_Field_Email_Address |
-            | Invalid_Email_Data_Semi_Colon                      | Error_Message_Incorrect_Format_Field_Email_Address |
-            | Invalid_Email_Data_Comma                           | Error_Message_Incorrect_Format_Field_Email_Address |
-            | Invalid_Email_Data_Start_With_Hyphen               | Error_Message_Incorrect_Format_Field_Email_Address |
-            | Invalid_Email_Data_Hyphen_Before_Domain            | Error_Message_Incorrect_Format_Field_Email_Address |
-            | Invalid_Email_Data_Double_Dot_Domain               | Error_Message_Incorrect_Format_Field_Email_Address |
-            | Invalid_Email_Data_Exclamation_Domain              | Error_Message_Incorrect_Format_Field_Email_Address |
-            | Invalid_Email_Data_Unicode                         | Error_Message_Incorrect_Format_Field_Email_Address |
-            | Invalid_Email_Data_Single_Quote_Before_AT          | Error_Message_Incorrect_Format_Field_Email_Address |
-            | Invalid_Email_Data_Domain_Exceed_Max               | Error_Message_Incorrect_Format_Field_Email_Address |
-            | Invalid_Email_Data_Local_Part_Max                  | Error_Message_Incorrect_Format_Field_Email_Address |
-            | Invalid_Email_Data_Consecutive_Dot_Domain          | Error_Message_Incorrect_Format_Field_Email_Address |
-            | Invalid_Email_Data_Consecutive_Dot_SubDomain       | Error_Message_Incorrect_Format_Field_Email_Address |
-            | Invalid_Email_Data_Consecutiv_Dot_Domain_SubDomain | Error_Message_Incorrect_Format_Field_Email_Address |
-            | Invalid_Email_Data_Emoji                           | Error_Message_Incorrect_Format_Field_Email_Address |
-            | Invalid_Email_Data_TLD                             | Error_Message_Incorrect_Format_Field_Email_Address |
-            | Invalid_Email_Data_Missing_AT                      | Error_Message_Incorrect_Format_Field_Email_Address |
-            | Invalid_Email_Data_Reserved_Domain                 | Error_Message_Incorrect_Format_Field_Email_Address |
-            | Invalid_Email_Data_Punycode                        | Error_Message_Incorrect_Format_Field_Email_Address |
+            | Invalid_Data_User_Profile                          | Field_And_Summary_Error_Message            |
+            | Incorrect_Format_Email                             | Incorrect_Format_Field_Email_Address_Error |
+            | Invalid_Email_Data_Start_With_Dot                  | Incorrect_Format_Field_Email_Address_Error |
+            | Invalid_Email_Data_Double_Dot                      | Incorrect_Format_Field_Email_Address_Error |
+            | Invalid_Email_Data_Space                           | Incorrect_Format_Field_Email_Address_Error |
+            | Invalid_Email_Data_Wrong_AT                        | Incorrect_Format_Field_Email_Address_Error |
+            | Invalid_Email_Data_Less_Greater_Symbols            | Incorrect_Format_Field_Email_Address_Error |
+            | Invalid_Email_Data_Colon                           | Incorrect_Format_Field_Email_Address_Error |
+            | Invalid_Email_Data_Semi_Colon                      | Incorrect_Format_Field_Email_Address_Error |
+            | Invalid_Email_Data_Comma                           | Incorrect_Format_Field_Email_Address_Error |
+            | Invalid_Email_Data_Start_With_Hyphen               | Incorrect_Format_Field_Email_Address_Error |
+            | Invalid_Email_Data_Hyphen_Before_Domain            | Incorrect_Format_Field_Email_Address_Error |
+            | Invalid_Email_Data_Double_Dot_Domain               | Incorrect_Format_Field_Email_Address_Error |
+            | Invalid_Email_Data_Exclamation_Domain              | Incorrect_Format_Field_Email_Address_Error |
+            | Invalid_Email_Data_Unicode                         | Incorrect_Format_Field_Email_Address_Error |
+            | Invalid_Email_Data_Single_Quote_Before_AT          | Incorrect_Format_Field_Email_Address_Error |
+            | Invalid_Email_Data_Domain_Exceed_Max               | Incorrect_Format_Field_Email_Address_Error |
+            | Invalid_Email_Data_Local_Part_Max                  | Incorrect_Format_Field_Email_Address_Error |
+            | Invalid_Email_Data_Consecutive_Dot_Domain          | Incorrect_Format_Field_Email_Address_Error |
+            | Invalid_Email_Data_Consecutive_Dot_SubDomain       | Incorrect_Format_Field_Email_Address_Error |
+            | Invalid_Email_Data_Consecutiv_Dot_Domain_SubDomain | Incorrect_Format_Field_Email_Address_Error |
+            | Invalid_Email_Data_Emoji                           | Incorrect_Format_Field_Email_Address_Error |
+            | Invalid_Email_Data_TLD                             | Incorrect_Format_Field_Email_Address_Error |
+            | Invalid_Email_Data_Missing_AT                      | Incorrect_Format_Field_Email_Address_Error |
+            | Invalid_Email_Data_Reserved_Domain                 | Incorrect_Format_Field_Email_Address_Error |
+            | Invalid_Email_Data_Punycode                        | Incorrect_Format_Field_Email_Address_Error |
 
-    @rsp-3122 @VerifyErrorMessagesInvalidData @VerifyErrorInvalidDataCreateUserFromCheckCreateUserProfileBackLink
+    @rsp-3122 @VerifyErrorMessagesInvalidData @VerifyErrorInvalidDataCreateUserFromCheckCreateUserProfileBackLink @TestOnly
     Scenario Outline: Validation messages are displayed for invalid data entered after the user has navigated back from 'Check and create user profile' page
         When I fill the new user profile page using '<Add_User_Profile>'
         And I click the 'Continue' button on the 'Create_User_Profile_Page'
@@ -346,12 +345,12 @@ Feature: User Administration: Manage Users - Create user
 
         Examples:
 
-            | Add_User_Profile                         | Role_Checkbox   | Invalid_Data_User_Profile                               | Field_And_Summary_Error_Message                                       |
-            | Valid_Data_In_All_Fields_Role_Operations | Role_Operations | Missing_Mandatory_Fields_Role_Operations                | Error_Message_Missing_Mandatory_Fields_Role_Operations                |
-            | Valid_Data_In_All_Fields_Role_Operations | Role_Operations | Missing_Mandatory_Field_Country_Role_Operations         | Error_Message_Missing_Mandatory_Field_Country_Role_Operations         |
-            | Valid_Data_In_All_Fields_Role_Operations | Role_Operations | Missing_Mandatory_Field_Access_Required_Role_Operations | Error_Message_Missing_Mandatory_Field_Access_Required_Role_Operations |
+            | Add_User_Profile                         | Role_Checkbox   | Invalid_Data_User_Profile                               | Field_And_Summary_Error_Message                               |
+            | Valid_Data_In_All_Fields_Role_Operations | Role_Operations | Missing_Mandatory_Fields_Role_Operations                | Missing_Mandatory_Fields_Role_Operations_Error                |
+            | Valid_Data_In_All_Fields_Role_Operations | Role_Operations | Missing_Mandatory_Field_Country_Role_Operations         | Missing_Mandatory_Field_Country_Role_Operations_Error         |
+            | Valid_Data_In_All_Fields_Role_Operations | Role_Operations | Missing_Mandatory_Field_Access_Required_Role_Operations | Missing_Mandatory_Field_Access_Required_Role_Operations_Error |
 
-    @rsp-3122 @VerifyErrorMessagesInvalidData @VerifyErrorInvalidDataCreateUserFromCheckCreateUserProfileChangeLink
+    @rsp-3122 @VerifyErrorMessagesInvalidData @VerifyErrorInvalidDataCreateUserFromCheckCreateUserProfileChangeLink @TestOnly
     Scenario Outline: Validate error messages are displayed for invalid data in create user profile page when the user navigated from 'Check and create user profile' page by clicking 'Change' button against the fields
         And I capture the page screenshot
         When I fill the new user profile page using '<Add_User_Profile>'
@@ -372,9 +371,9 @@ Feature: User Administration: Manage Users - Create user
         And I capture the page screenshot
 
         Examples:
-            | Add_User_Profile                         | Field_Name | Role_Checkbox   | Invalid_Data_User_Profile                               | Field_And_Summary_Error_Message                                       |
-            | Valid_Data_In_All_Fields_Role_Operations | Title      | Role_Operations | Missing_Mandatory_Fields_Role_Operations                | Error_Message_Missing_Mandatory_Fields_Role_Operations                |
-            | Valid_Data_In_All_Fields_Role_Operations | First_Name | Role_Operations | Missing_Mandatory_Field_Country_Role_Operations         | Error_Message_Missing_Mandatory_Field_Country_Role_Operations         |
-            | Valid_Data_In_All_Fields_Role_Operations | Last_Name  | Role_Operations | Missing_Mandatory_Field_Access_Required_Role_Operations | Error_Message_Missing_Mandatory_Field_Access_Required_Role_Operations |
+            | Add_User_Profile                         | Field_Name | Role_Checkbox   | Invalid_Data_User_Profile                               | Field_And_Summary_Error_Message                               |
+            | Valid_Data_In_All_Fields_Role_Operations | Title      | Role_Operations | Missing_Mandatory_Fields_Role_Operations                | Missing_Mandatory_Fields_Role_Operations_Error                |
+            | Valid_Data_In_All_Fields_Role_Operations | First_Name | Role_Operations | Missing_Mandatory_Field_Country_Role_Operations         | Missing_Mandatory_Field_Country_Role_Operations_Error         |
+            | Valid_Data_In_All_Fields_Role_Operations | Last_Name  | Role_Operations | Missing_Mandatory_Field_Access_Required_Role_Operations | Missing_Mandatory_Field_Access_Required_Role_Operations_Error |
 
 

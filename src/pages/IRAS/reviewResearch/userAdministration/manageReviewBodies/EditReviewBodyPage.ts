@@ -21,6 +21,7 @@ export default class EditReviewBodyPage {
   readonly country_fieldset: Locator;
   readonly country_checkbox: Locator;
   readonly country_error: Locator;
+  readonly country_label: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -39,10 +40,14 @@ export default class EditReviewBodyPage {
       { exact: true }
     );
     this.organisation_name_error = this.organisation_name_text.locator('..').locator(this.validation_error);
-    this.country_fieldset = this.page.getByRole('group', {
-      name: this.editReviewBodyPageData.Edit_Review_Body_Page.country_label,
-      exact: true,
-    });
+    // this.country_fieldset = this.page.getByRole('group', {
+    //   name: this.editReviewBodyPageData.Edit_Review_Body_Page.country_label,
+    //   exact: true,
+    // });
+    this.country_label = this.page
+      .locator('.govuk-label')
+      .getByText(this.editReviewBodyPageData.Edit_Review_Body_Page.country_label, { exact: true });
+    this.country_fieldset = this.page.locator('.govuk-form-group', { has: this.country_label });
     this.country_checkbox = this.country_fieldset.getByRole('checkbox');
     this.country_error = this.country_fieldset.locator(this.validation_error);
     this.email_address_text = this.page.getByLabel(

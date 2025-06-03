@@ -40,6 +40,7 @@ export default class ManageUsersPage {
   readonly statusCell: Locator;
   readonly no_results_heading: Locator;
   readonly no_results_guidance_text: Locator;
+  readonly listCell: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -92,10 +93,12 @@ export default class ManageUsersPage {
       .getByText(this.manageUsersPageTestData.Manage_Users_Page.no_results_guidance_text, {
         exact: true,
       });
+    this.listCell = this.page.getByRole('cell');
   }
 
   async assertOnManageUsersPage() {
     await expect(this.page_heading).toBeVisible();
+    expect(await this.page.title()).toBe(this.manageUsersPageTestData.Manage_Users_Page.title);
   }
 
   async goto(pageSize?: string, searchQuery?: string) {
@@ -159,5 +162,32 @@ export default class ManageUsersPage {
     const noOfRows = await userRows.count();
     const randomIndex = Math.floor(Math.random() * (noOfRows - 1));
     return userRows.nth(randomIndex);
+  }
+
+  async findUserByStatus(searchKey: string, userStatus: string) {
+    let foundRecord = false;
+    let hasNextPage = true;
+    while (hasNextPage && !foundRecord) {
+      const rows = await this.userListRows.all();
+      for (const row of rows) {
+        const columns = await row.locator(this.listCell).allTextContents();
+        if (
+          columns[0].trim().includes(searchKey) ||
+          columns[1].trim().includes(searchKey) ||
+          columns[2].trim().includes(searchKey)
+        ) {
+          if (columns[3].trim() === userStatus) {
+            foundRecord = true;
+            return row;
+          }
+        }
+      }
+      hasNextPage = (await this.next_button.isVisible()) && !(await this.next_button.isDisabled());
+      if (hasNextPage && !foundRecord) {
+        await this.next_button.click();
+        await this.page.waitForLoadState('domcontentloaded');
+      }
+    }
+    throw new Error(`No matching record found`);
   }
 }

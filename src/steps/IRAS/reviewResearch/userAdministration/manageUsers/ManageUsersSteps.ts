@@ -123,8 +123,10 @@ Then(
       manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size,
       userNamePrefix
     );
-    const selectedReviewBodyRow = await manageUsersPage.getRowByUserNameStatus(userNamePrefix, false, userStatus);
-    await selectedReviewBodyRow.locator(manageUsersPage.view_edit_link).click();
+    const foundRecords = await manageUsersPage.findUserByStatus(userNamePrefix, userStatus);
+    expect(foundRecords).toBeDefined();
+    expect(foundRecords).toHaveCount(1);
+    await foundRecords.locator(manageUsersPage.view_edit_link).click();
   }
 );
 

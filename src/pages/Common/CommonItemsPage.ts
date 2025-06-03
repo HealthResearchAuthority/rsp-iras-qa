@@ -507,11 +507,10 @@ export default class CommonItemsPage {
 
   async getMultipleFieldErrorMessages<PageObject>(key: string, page: PageObject) {
     const element = await page[key];
-    const fieldErrorMessage = await this.errorFieldGroup
-      .filter({ has: element })
-      .locator(this.errorMessageFieldLabel)
-      .allTextContents();
-    return fieldErrorMessage;
+    const errorSpan = this.errorFieldGroup.filter({ has: element }).locator(this.errorMessageFieldLabel);
+    const htmlContent = await errorSpan.innerHTML();
+    const fieldErrorMessages = htmlContent.split('<br>').map(confirmStringNotNull);
+    return fieldErrorMessages;
   }
 
   async clickErrorSummaryLink<PageObject>(errorMessageFieldDataset: JSON, key: string, page: PageObject) {
