@@ -25,6 +25,18 @@ Feature: User Administration: System Administration
       | Validation_Text | Navigation_Link_First | Navigation_Link_Second | Navigation_Link |
       | Label_Texts     | Manage_Review_Bodies  | Manage_Users           | Back            |
 
+  @rsp-3423 @SystemAdministrationPage
+  Scenario Outline: Validate return to home page from system administration home page
+    Given I have navigated to the 'System_Administration_Page'
+    Then I can see the system administration home page
+    When I click the 'Back' link on the 'System_Administration_Page'
+    Then I can see the my account home page
+    Then I capture the page screenshot
+    When I have navigated to the 'System_Administration_Page'
+    When I click the 'Home' link on the 'Banner'
+    Then I can see the my account home page
+    Then I capture the page screenshot
+
   @rsp-3519 @ValidateTopMenuBarLinks @adminUser
   Scenario: Validate the top menu bar links
     Given I have navigated to the 'Home_Page'
@@ -43,4 +55,3 @@ Feature: User Administration: System Administration
       | Non_Admin_User | Access_Denied_Page         |
       | Admin_User     | System_Administration_Page |
       | Non_Admin_User | Home_Page                  |
-

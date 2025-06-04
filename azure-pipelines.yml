@@ -78,7 +78,7 @@ parameters:
   - name: tests_run_timeout
     type: number
     displayName: Playwright Tests Run Timeout
-    default: 180
+    default: 120
   - name: run_sonarcloud_analysis
     displayName: Run SonarCloud Analysis
     default: true

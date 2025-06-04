@@ -80,7 +80,7 @@ export default class ManageUsersPage {
     this.next_button = this.page.locator('.govuk-pagination__next a');
     this.userListRows = this.page.locator('tbody').getByRole('row');
     this.userListCell = this.page.getByRole('cell');
-    this.statusCell = this.page.getByRole('cell').locator('strong');
+    this.statusCell = this.page.getByRole('cell');
     this.first_name_from_list_label = this.page.locator('td').nth(0);
     this.last_name_from_list_label = this.page.locator('td').nth(1);
     this.email_address_from_list_label = this.page.locator('td').nth(2);

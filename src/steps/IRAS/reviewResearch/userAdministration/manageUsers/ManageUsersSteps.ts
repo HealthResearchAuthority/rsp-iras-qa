@@ -172,3 +172,16 @@ Then(
     await userListReviewBodyPage.updateUserInfo();
   }
 );
+
+When(
+  'I search and click on view edit link for the removed user from the review body in the manage user page',
+  async ({ manageUsersPage, checkRemoveUserReviewBodyPage, userListReviewBodyPage }) => {
+    await manageUsersPage.goto(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size);
+    const userFirstName = await checkRemoveUserReviewBodyPage.getFirstName();
+    const userLastName = await checkRemoveUserReviewBodyPage.getLastName();
+    const userEmail = await checkRemoveUserReviewBodyPage.getEmail();
+    const userStatus = await userListReviewBodyPage.getStatus();
+    const foundRecord = await manageUsersPage.findUserProfile(userFirstName, userLastName, userEmail, userStatus);
+    await foundRecord.locator(manageUsersPage.view_edit_link).click();
+  }
+);
