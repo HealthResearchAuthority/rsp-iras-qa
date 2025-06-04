@@ -1,4 +1,20 @@
 {
+  "System_Admin": {
+    "username": "FutureIRAS.SysAdmin@hra.nhs.uk",
+    "password": "`${process.env.SYSTEM_ADMIN_PASS}`"
+  },
+  "User": {
+    "username": "futureiras.automation@hra.nhs.uk",
+    "password": "`${process.env.USER_PASS}`"
+  },
+  "Reviewer": {
+    "username": "FutureIRAS.BackStage@hra.nhs.uk",
+    "password": "`${process.env.REVIEWER_PASS}`"
+  },
+  "Operations": {
+    "username": "FutureIRAS.BackStage@hra.nhs.uk",
+    "password": "`${process.env.OPERATIONS_PASS}`"
+  },
   "Admin_User": {
     "username": "futureiras.automation@hra.nhs.uk",
     "password": "`${process.env.ADMIN_USER_PASS}`"

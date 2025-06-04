@@ -37,16 +37,34 @@ export default class LoginPage {
   //passwords to be set in AzureDevops Pipeline, add encrypted values to .env when running locally
   async loginWithUserCreds(dataset: string) {
     const username = this.loginPageTestData[dataset].username;
-    let password: string = '';
-    if (dataset === 'Admin_User') {
-      const secretKey = process.env.ADMIN_USER_SECRET_KEY;
-      const authTag = process.env.ADMIN_USER_AUTH_TAG;
-      password = getDecryptedValue(resolveEnvExpression(this.loginPageTestData[dataset].password), secretKey, authTag);
+    let secretKey: any;
+    let authTag: any;
+    if (dataset === 'System_Admin') {
+      secretKey = process.env.SYSTEM_ADMIN_SECRET_KEY;
+      authTag = process.env.SYSTEM_ADMIN_AUTH_TAG;
+      // password = getDecryptedValue(resolveEnvExpression(this.loginPageTestData[dataset].password), secretKey, authTag);
+    } else if (dataset === 'User') {
+      secretKey = process.env.USER_SECRET_KEY;
+      authTag = process.env.USER_AUTH_TAG;
+      // password = getDecryptedValue(resolveEnvExpression(this.loginPageTestData[dataset].password), secretKey, authTag);
+    } else if (dataset === 'Reviewer') {
+      secretKey = process.env.REVIEWER_SECRET_KEY;
+      authTag = process.env.REVIEWER_AUTH_TAG;
+      // password = getDecryptedValue(resolveEnvExpression(this.loginPageTestData[dataset].password), secretKey, authTag);
+    } else if (dataset === 'Admin_User') {
+      secretKey = process.env.ADMIN_USER_SECRET_KEY;
+      authTag = process.env.ADMIN_USER_AUTH_TAG;
+      // password = getDecryptedValue(resolveEnvExpression(this.loginPageTestData[dataset].password), secretKey, authTag);
     } else if (dataset === 'Non_Admin_User') {
-      const secretKey = process.env.NON_ADMIN_USER_SECRET_KEY;
-      const authTag = process.env.NON_ADMIN_USER_AUTH_TAG;
-      password = getDecryptedValue(resolveEnvExpression(this.loginPageTestData[dataset].password), secretKey, authTag);
+      secretKey = process.env.NON_ADMIN_USER_SECRET_KEY;
+      authTag = process.env.NON_ADMIN_USER_AUTH_TAG;
+      // password = getDecryptedValue(resolveEnvExpression(this.loginPageTestData[dataset].password), secretKey, authTag);
     }
+    const password = getDecryptedValue(
+      resolveEnvExpression(this.loginPageTestData[dataset].password),
+      secretKey,
+      authTag
+    );
     await this.usernameInput.fill(username);
     await this.btnNext.click();
     await this.passwordInput.fill(password);

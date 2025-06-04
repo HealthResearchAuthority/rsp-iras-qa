@@ -8,6 +8,10 @@ Feature: Authenticate Test Users once only, before test run
     And I will store the '<User>' authentication state
     Examples:
       | User       | Page            |
+      # | System_Admin | Admin_Home_Page     |
+      # | User         | Non_Admin_Home_Page |
+      # | Reviewer     | Reviewer_Home_Page  |
+      # | Operations   | Reviewer_Home_Page  |
       | Admin_User | Admin_Home_Page |
 # | Non_Admin_User | Non_Admin_Home_Page |
 
