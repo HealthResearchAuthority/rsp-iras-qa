@@ -71,20 +71,6 @@ export function getTicketReferenceTags(tags: string[]): string[] {
   return tickets;
 }
 
-// export function getDecryptedValue(data: string,secretKey?:string,authTag?:string) {
-//   let value: string = '';
-//   if (process.env.SECRET_KEY) {
-//     const decipher = createDecipheriv('AES-256-GCM', Buffer.from(process.env.SECRET_KEY), Buffer.alloc(16));
-//     decipher.setAuthTag(Buffer.from(`${process.env.AUTH_TAG}`, 'hex'));
-//     let decrypted = decipher.update(data, 'hex', 'utf8');
-//     decrypted = decrypted + decipher.final('utf8');
-//     value = decrypted;
-//   } else {
-//     value = data;
-//   }
-//   return value;
-// }
-
 export function getDecryptedValue(data: string, secretKey?: any, authTag?: string) {
   let value: string = '';
   if (secretKey) {
@@ -457,4 +443,17 @@ export async function returnSingleRandomLocator(resolvesToMultiElements: Locator
 
 export async function sortArray(value: string[]): Promise<string[]> {
   return value.sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }));
+}
+
+export function resolveEnvExpression(template: string): string {
+  const passwordParts = template.split('`${process.env.');
+  if (passwordParts.length < 2) {
+    throw new Error('Invalid template format');
+  }
+  const envVar = passwordParts[1].split('}`')[0];
+  const value = process.env[envVar];
+  if (!value) {
+    throw new Error(`Environment variable "${envVar}" is not defined`);
+  }
+  return value;
 }

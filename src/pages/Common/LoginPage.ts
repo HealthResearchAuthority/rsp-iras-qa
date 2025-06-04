@@ -1,6 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as loginPageTestData from '../../resources/test_data/common/login_page_data.json';
-import { getDecryptedValue } from '../../utils/UtilFunctions';
+import { getDecryptedValue, resolveEnvExpression } from '../../utils/UtilFunctions';
 
 //Declare Page Objects
 export default class LoginPage {
@@ -41,12 +41,11 @@ export default class LoginPage {
     if (dataset === 'Admin_User') {
       const secretKey = process.env.ADMIN_USER_SECRET_KEY;
       const authTag = process.env.ADMIN_USER_AUTH_TAG;
-      password = getDecryptedValue(eval(this.loginPageTestData[dataset].password), secretKey, authTag);
-      // password = getDecryptedValue(this.loginPageTestData[dataset].password, secretKey, authTag);
+      password = getDecryptedValue(resolveEnvExpression(this.loginPageTestData[dataset].password), secretKey, authTag);
     } else if (dataset === 'Non_Admin_User') {
       const secretKey = process.env.NON_ADMIN_USER_SECRET_KEY;
       const authTag = process.env.NON_ADMIN_USER_AUTH_TAG;
-      password = getDecryptedValue(eval(this.loginPageTestData[dataset].password), secretKey, authTag);
+      password = getDecryptedValue(resolveEnvExpression(this.loginPageTestData[dataset].password), secretKey, authTag);
     }
     await this.usernameInput.fill(username);
     await this.btnNext.click();
