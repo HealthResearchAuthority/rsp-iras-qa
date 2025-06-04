@@ -42,13 +42,6 @@ export default class CreateReviewBodyPage {
       { exact: true }
     );
     this.organisation_name_error = this.organisation_name_text.locator('..').locator(this.validation_error);
-    // this.country_fieldset = this.page.getByRole('group', {
-    //   name: this.createReviewBodyPageData.Create_Review_Body_Page.country_label,
-    //   exact: true,
-    // });
-    // this.country_label = this.page.getByLabel(this.createReviewBodyPageData.Create_Review_Body_Page.country_label, {
-    //   exact: true,
-    // });
     this.country_label = this.page
       .locator('.govuk-label')
       .getByText(this.createReviewBodyPageData.Create_Review_Body_Page.country_label, { exact: true });

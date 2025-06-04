@@ -40,10 +40,6 @@ export default class EditReviewBodyPage {
       { exact: true }
     );
     this.organisation_name_error = this.organisation_name_text.locator('..').locator(this.validation_error);
-    // this.country_fieldset = this.page.getByRole('group', {
-    //   name: this.editReviewBodyPageData.Edit_Review_Body_Page.country_label,
-    //   exact: true,
-    // });
     this.country_label = this.page
       .locator('.govuk-label')
       .getByText(this.editReviewBodyPageData.Edit_Review_Body_Page.country_label, { exact: true });

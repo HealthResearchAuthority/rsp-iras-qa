@@ -75,10 +75,6 @@ export default class EditUserProfilePage {
         exact: true,
       }
     );
-    // this.role_fieldset = this.page.getByRole('group', {
-    //   name: this.editUserProfilePageTestData.Edit_User_Profile_Page.role_label,
-    //   exact: true,
-    // });
 
     this.role_label = this.page
       .locator('.govuk-label')
@@ -89,19 +85,11 @@ export default class EditUserProfilePage {
       this.editUserProfilePageTestData.Edit_User_Profile_Page.committee_label,
       { exact: true }
     );
-    // this.country_fieldset = this.page.getByRole('group', {
-    //   name: this.editUserProfilePageTestData.Edit_User_Profile_Page.country_label,
-    //   exact: true,
-    // });
     this.country_label = this.page
       .locator('.govuk-label')
       .getByText(this.editUserProfilePageTestData.Edit_User_Profile_Page.country_label, { exact: true });
     this.country_fieldset = this.page.locator('.govuk-form-group', { has: this.country_label });
     this.country_checkbox = this.country_fieldset.getByRole('checkbox');
-    // this.access_required_fieldset = this.page.getByRole('group', {
-    //   name: this.editUserProfilePageTestData.Edit_User_Profile_Page.access_required_label,
-    //   exact: true,
-    // });
     this.access_required_label = this.page
       .locator('.govuk-label')
       .getByText(this.editUserProfilePageTestData.Edit_User_Profile_Page.access_required_label, { exact: true });
