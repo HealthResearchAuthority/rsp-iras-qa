@@ -35,7 +35,8 @@ Feature: User Administration: System Administration
   Scenario Outline: Validate the system administration home page
     Given I have navigated to the '<Page>' as '<User>'
     Then I capture the page screenshot
-    And I logged out from the '<Page>' as '<User>'
+    Then I logged out from the system
+    Then I capture the page screenshot
     Examples:
       | User           | Page                       |
       | Admin_User     | Home_Page                  |

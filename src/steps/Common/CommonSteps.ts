@@ -927,47 +927,18 @@ Given(
   }
 );
 
-Given(
-  'I logged out from the {string} as {string}',
-  async (
-    {
-      homePage,
-      createApplicationPage,
-      systemAdministrationPage,
-      accessDeniedPage,
-      manageReviewBodiesPage,
-      userProfilePage,
-      reviewBodyProfilePage,
-    },
-    page: string,
-    user: string
-  ) => {
-    const authStatePath = getAuthState(user);
-    const authState = JSON.parse(fs.readFileSync(authStatePath, 'utf-8'));
-    switch (page) {
-      case 'Home_Page':
-        await homePage.page.context().clearCookies(authState.cookies);
-        break;
-      case 'Create_Application_Page':
-        await createApplicationPage.page.context().clearCookies(authState.cookies);
-        break;
-      case 'System_Administration_Page':
-        await systemAdministrationPage.page.context().clearCookies(authState.cookies);
-        break;
-      case 'Access_Denied_Page':
-        await accessDeniedPage.page.context().clearCookies(authState.cookies);
-        break;
-      case 'Manage_Review_Bodies_Page':
-        await manageReviewBodiesPage.page.context().clearCookies(authState.cookies);
-        break;
-      case 'User_Profile_Page':
-        await userProfilePage.page.context().clearCookies(authState.cookies);
-        break;
-      case 'Review_Body_Profile_Page':
-        await reviewBodyProfilePage.page.context().clearCookies(authState.cookies);
-        break;
-      default:
-        throw new Error(`${page} is not a valid option`);
-    }
+Given('I logged out from the {string} as {string}', async ({ homePage }, page: string, user: string) => {
+  const authStatePath = getAuthState(user);
+  const authState = JSON.parse(fs.readFileSync(authStatePath, 'utf-8'));
+  switch (page) {
+    case 'Home_Page':
+      await homePage.page.context().clearCookies(authState.cookies);
+      break;
+    default:
+      throw new Error(`${page} is not a valid option`);
   }
-);
+});
+
+Given('I logged out from the system', async ({ commonItemsPage }) => {
+  await commonItemsPage.page.context().clearCookies();
+});
