@@ -24,12 +24,11 @@ export default class ResearchLocationsPage {
     this.nations_participating_checkbox = this.page.locator('input[id^="Questions[0]"]:not([type="hidden"])');
     this.is_nhs_hsc_organisation_radio = this.page.getByTestId(/^IQA0004/);
     this.lead_nation_radio = this.page.getByTestId(/^IQA0005/);
-    this.nations_participating_label = this.page.locator('div[id="Questions[0].Answers"] govuk-fieldset-legend');
-    this.nations_participating_hint_label = this.page
-      .locator('div[id="Questions[0].Answers"] govuk-fieldset-legend')
+    this.nations_participating_label = this.page.getByTestId('Questions[0]_Answers').locator('govuk-fieldset-legend');
+    this.nations_participating_hint_label = this.nations_participating_label
       .locator('..')
       .locator('..')
-      .locator('div[id="rule-hint"]');
+      .getByTestId('Questions[0]_Answers-hint');
     this.is_nhs_hsc_organisation_label = this.page.locator(
       'div[id="Questions[1].SelectedOption"] govuk-fieldset-legend'
     );

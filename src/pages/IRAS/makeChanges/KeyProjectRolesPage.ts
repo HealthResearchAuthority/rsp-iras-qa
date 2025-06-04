@@ -36,7 +36,9 @@ export default class KeyProjectRolesPage {
     this.chief_investigator_email_text_summary_error_label = this.page.locator('a[href="#Questions[0].AnswerText"]');
     this.sponsor_contact_email_text_summary_error_label = this.page.locator('a[href="#Questions[1].AnswerText"]');
     this.primary_sponsor_organisation_text = this.page.getByTestId('Questions_1_AnswerText');
-    this.primary_sponsor_organisation_header_label = this.page.locator('label[for="IQA0312_Text"]');
+    this.primary_sponsor_organisation_header_label = this.page.locator(
+      'label[for="Questions_1_AnswerText_autocomplete"]'
+    );
     this.primary_sponsor_organisation_jsenabled_text = this.page.getByRole('combobox', {
       name: keyProjectRolesPageTestData.Label_Texts.primary_sponsor_organisation_header_label,
     });
