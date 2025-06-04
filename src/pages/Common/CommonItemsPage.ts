@@ -87,11 +87,17 @@ export default class CommonItemsPage {
     this.fieldGroup = this.page.locator('.govuk-form-group');
     this.errorFieldGroup = this.page.locator('.govuk-form-group--error');
     this.govUkFieldValidationError = this.page.locator('.govuk-error-message');
+    this.fieldGroup = this.page.locator('.govuk-form-group');
+    this.errorFieldGroup = this.page.locator('.govuk-form-group--error');
+    this.govUkFieldValidationError = this.page.locator('.govuk-error-message');
     this.qSetProgressBar = page.locator('.progress-container');
     this.qSetProgressBarStage = this.qSetProgressBar.locator('.stage');
     this.qSetProgressBarActiveStage = this.qSetProgressBar.locator('.stage.active');
     this.qSetProgressBarStageLink = this.qSetProgressBarStage.locator('.stage-label').getByRole('button');
     this.qSetProgressBarActiveStageLink = this.qSetProgressBarActiveStage.locator('.stage-label').getByRole('button');
+    this.tableRows = this.page.getByRole('table').getByRole('row');
+    this.hidden_next_button = this.page.locator('[class="govuk-pagination__next"][style="visibility: hidden"]');
+    this.search_text = this.page.locator('#SearchQuery');
     this.tableRows = this.page.getByRole('table').getByRole('row');
     this.hidden_next_button = this.page.locator('[class="govuk-pagination__next"][style="visibility: hidden"]');
     this.search_text = this.page.locator('#SearchQuery');

@@ -346,4 +346,3 @@ Feature: User Administration: Manage user profiles, view and edit user profile
             | Leading_And_Trailing_White_Space_User_Data |
             | Trailing_White_Space_User_Data             |
 
-

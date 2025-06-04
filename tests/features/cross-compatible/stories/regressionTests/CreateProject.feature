@@ -81,8 +81,8 @@ Feature: Create Amendment - Create Project - Regression Tests
     Examples:
       | Validation_Text | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Third | Navigation_Link | Project_Details_Title      | Key_Project_Roles                   | Research_Locations                     |
       | Label_Texts     | Create_Project_Record   | Start                    | Save_Continue           | Back            | Valid_Data_All_Fields      | Valid_Data_All_Fields               | Data_With_No_NHS_HSC                   |
-      | Label_Texts     | Create_Project_Record   | Start                    | Save_Continue          | Back  | Valid_Data_All_Fields_VERA | Valid_Email_Data_Special_Characters | Data_With_Lead_Nation_Northern_Ireland |
-  
+      | Label_Texts     | Create_Project_Record   | Start                    | Save_Continue           | Back            | Valid_Data_All_Fields_VERA | Valid_Email_Data_Special_Characters | Data_With_Lead_Nation_Northern_Ireland |
+
   @ErrorMessageInvalidIRASIDRegression
   Scenario Outline: Validate error messages displayed when user amend the project using invalid iras id
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
