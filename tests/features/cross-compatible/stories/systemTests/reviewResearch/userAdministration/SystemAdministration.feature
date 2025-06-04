@@ -52,6 +52,6 @@ Feature: User Administration: System Administration
     Examples:
       | User       | Page                       |
       | Admin_User | Home_Page                  |
-      # | Non_Admin_User | Access_Denied_Page         |
       | Admin_User | System_Administration_Page |
 # | Non_Admin_User | Home_Page                  |
+# | Non_Admin_User | Access_Denied_Page         |

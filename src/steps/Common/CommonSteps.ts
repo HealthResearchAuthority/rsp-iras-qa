@@ -105,6 +105,9 @@ When(
       case 'Login_Page':
         await loginPage.assertOnLoginPage();
         break;
+      case 'Home_Page':
+        await homePage.assertOnHomePage();
+        break;
       case 'Admin_Home_Page':
         await homePage.assertOnHomePage();
         break;
