@@ -8,7 +8,6 @@ Feature: Create Amendment - Create Project
   @rsp-1858 @rsp-1862
   Scenario Outline: Validate user is able to amend a project using an iras id
     And I can see the my research projects page
-    And I can see the '<Validation_Text>' on the my research project page
     When I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     Then I can see the create project record page
     When I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'

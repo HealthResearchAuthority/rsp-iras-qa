@@ -18,7 +18,9 @@ export default class MyResearchProjectsPage {
     this.pageHeading = this.page
       .getByRole('heading')
       .getByText(this.myResearchProjectsPageTestData.My_Research_Projects_Page.heading, { exact: true });
-    this.noProjectsAvailableLabel = this.page.locator('p[class="govuk-body"]').nth(0);
+    this.noProjectsAvailableLabel = this.page
+      .locator('p[class="govuk-body"]')
+      .getByText(this.myResearchProjectsPageTestData.Label_Texts.no_projects);
     this.btnCreateProjectRecord = this.page.getByRole('link', { name: 'Create project record' });
   }
 
@@ -30,5 +32,6 @@ export default class MyResearchProjectsPage {
   async assertOnMyResearchProjectsPage() {
     await expect(this.pageHeading).toBeVisible();
     await expect(this.btnCreateProjectRecord).toBeVisible();
+    await expect(this.noProjectsAvailableLabel).toBeVisible();
   }
 }
