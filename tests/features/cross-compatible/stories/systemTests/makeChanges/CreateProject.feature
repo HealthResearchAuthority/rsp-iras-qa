@@ -127,7 +127,7 @@ Feature: Create Amendment - Create Project
       | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Add_Project | Navigation_Button_Third | Project_Details_Title | Field_Error_Message | Summary_Error_Message |
       | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Invalid_Date_Today    | Field_Error_Message | Summary_Error_Message |
 
-  @rsp-1859 @rsp-1865 @jsEnabled
+  @rsp-1859 @rsp-1865
   Scenario Outline: Validate breadcrumb navigations in project details short project title page
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
@@ -152,7 +152,8 @@ Feature: Create Amendment - Create Project
     When I click the '<Navigation_Link_Second>' link on the 'Project_Overview_Page'
     And I can see the project details title page
     And I capture the page screenshot
-    And I cannot see a '<Navigation_Link>' link on the 'Project_Details_Title_Page'
+    And I click the '<Navigation_Link>' link on the 'Project_Details_Title_Page'
+    Then I can see the project overview page
 
     Examples:
       | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Add_Project | Navigation_Button_Third | Navigation_Button_Fourth | Navigation_Link | Navigation_Link_Second | Project_Details_Title | Key_Project_Roles     | Research_Locations    | Change_Link_Field |
