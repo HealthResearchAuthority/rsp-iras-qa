@@ -29,7 +29,7 @@ Feature: User Administration: Manage Review Bodies
                 And I capture the page screenshot
                 Then I can see the 'Manage_Review_Bodies_Page'
                 # alphabetical sorting in manage review body page
-                Then I can see the list is sorted by default in the alphabetical order of 'Organisation Name'
+                And I can see the list is sorted by default in the alphabetical order of the 'Organisation Name'
                 And I capture the page screenshot
                 # find the newly created review body in the list with 'active' status
                 When I enter unique organisation name of the newly created review body into the search field

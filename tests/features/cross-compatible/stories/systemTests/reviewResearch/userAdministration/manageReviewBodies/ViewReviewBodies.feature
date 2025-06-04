@@ -26,7 +26,7 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
         And I capture the page screenshot
         And I can see the newly created review body should be present in the list with 'Enabled' status in the manage review bodies page
         And I capture the page screenshot
-        Then I can see the list is sorted by default in the alphabetical order of 'Organisation Name'
+        And I can see the list is sorted by default in the alphabetical order of the 'Organisation Name'
         And I capture the page screenshot
 
         Examples:

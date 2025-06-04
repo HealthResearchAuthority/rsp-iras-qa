@@ -954,3 +954,22 @@ Given('I logged out from the {string} as {string}', async ({ homePage }, page: s
 Given('I logged out from the system', async ({ commonItemsPage }) => {
   await commonItemsPage.page.context().clearCookies();
 });
+
+Then(
+  'I can see the list is sorted by default in the alphabetical order of the {string}',
+  async ({ manageUsersPage, manageReviewBodiesPage }, sortField: string) => {
+    let actualList: string[];
+    switch (sortField.toLowerCase()) {
+      case 'first name':
+        actualList = await manageUsersPage.getFirstNamesListFromUI();
+        break;
+      case 'organisation name':
+        actualList = await manageReviewBodiesPage.getOrgNamesListFromUI();
+        break;
+      default:
+        throw new Error(`${sortField} is not a valid option`);
+    }
+    const sortedList = [...actualList].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
+    expect(actualList).toEqual(sortedList);
+  }
+);

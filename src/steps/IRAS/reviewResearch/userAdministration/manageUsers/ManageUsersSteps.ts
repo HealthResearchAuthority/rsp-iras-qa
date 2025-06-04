@@ -4,22 +4,6 @@ import { returnDataFromJSON } from '../../../../../utils/UtilFunctions';
 
 const { When, Then } = createBdd(test);
 
-Then(
-  'I can see the list is sorted by default in the alphabetical order of the {string}',
-  async ({ manageUsersPage }, sortField: string) => {
-    let actualList: string[];
-    switch (sortField.toLowerCase()) {
-      case 'first name':
-        actualList = await manageUsersPage.getFirstNamesListFromUI();
-        break;
-      default:
-        throw new Error(`${sortField} is not a valid option`);
-    }
-    const sortedList = [...actualList].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
-    expect(actualList).toEqual(sortedList);
-  }
-);
-
 When('I update user profile with {string}', async ({ commonItemsPage, editUserProfilePage }, datasetName: string) => {
   const dataset = editUserProfilePage.editUserProfilePageTestData[datasetName];
   for (const key in dataset) {
@@ -172,16 +156,3 @@ When(
     await foundRecord.locator(manageUsersPage.view_edit_link).click();
   }
 );
-
-// When(
-//   'I search and click on view edit link for the removed user from the review body in the manage user page',
-//   async ({ manageUsersPage, checkRemoveUserReviewBodyPage, userListReviewBodyPage }) => {
-//     const userFirstName = await checkRemoveUserReviewBodyPage.getFirstName();
-//     const userLastName = await checkRemoveUserReviewBodyPage.getLastName();
-//     const userEmail = await checkRemoveUserReviewBodyPage.getEmail();
-//     const userStatus = await userListReviewBodyPage.getStatus();
-//     await manageUsersPage.goto(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size, userEmail);
-//     const foundRecord = await manageUsersPage.findUserProfile(userFirstName, userLastName, userEmail, userStatus);
-//     await foundRecord.locator(manageUsersPage.view_edit_link).click();
-//   }
-// );
