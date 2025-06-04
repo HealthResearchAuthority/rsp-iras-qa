@@ -269,7 +269,7 @@ Feature: User Administration: Manage Users - Create user
                         | Valid_Email_Data_Other_Language       |
                         | Valid_Email_Data_Domain               |
 
-        @rsp-3122 @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage @TestOnly
+        @rsp-3122 @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage
         Scenario Outline: Validate error messages are displayed for invalid data in create user profile page
                 When I fill the new user profile page using '<Invalid_Data_User_Profile>' for field validation
                 And I click the 'Continue' button on the 'Create_User_Profile_Page'
@@ -326,7 +326,7 @@ Feature: User Administration: Manage Users - Create user
                         | Invalid_Email_Data_Reserved_Domain                 | Incorrect_Format_Field_Email_Address_Error |
                         | Invalid_Email_Data_Punycode                        | Incorrect_Format_Field_Email_Address_Error |
 
-        @rsp-3122 @VerifyErrorMessagesInvalidData @VerifyErrorInvalidDataCreateUserFromCheckCreateUserProfileBackLink @TestOnly
+        @rsp-3122 @VerifyErrorMessagesInvalidData @VerifyErrorInvalidDataCreateUserFromCheckCreateUserProfileBackLink
         Scenario Outline: Validation messages are displayed for invalid data entered after the user has navigated back from 'Check and create user profile' page
                 When I fill the new user profile page using '<Add_User_Profile>'
                 And I click the 'Continue' button on the 'Create_User_Profile_Page'
@@ -350,7 +350,7 @@ Feature: User Administration: Manage Users - Create user
                         | Valid_Data_In_All_Fields_Role_Operations | Role_Operations | Missing_Mandatory_Field_Country_Role_Operations         | Missing_Mandatory_Field_Country_Role_Operations_Error         |
                         | Valid_Data_In_All_Fields_Role_Operations | Role_Operations | Missing_Mandatory_Field_Access_Required_Role_Operations | Missing_Mandatory_Field_Access_Required_Role_Operations_Error |
 
-        @rsp-3122 @VerifyErrorMessagesInvalidData @VerifyErrorInvalidDataCreateUserFromCheckCreateUserProfileChangeLink @TestOnly
+        @rsp-3122 @VerifyErrorMessagesInvalidData @VerifyErrorInvalidDataCreateUserFromCheckCreateUserProfileChangeLink
         Scenario Outline: Validate error messages are displayed for invalid data in create user profile page when the user navigated from 'Check and create user profile' page by clicking 'Change' button against the fields
                 And I capture the page screenshot
                 When I fill the new user profile page using '<Add_User_Profile>'

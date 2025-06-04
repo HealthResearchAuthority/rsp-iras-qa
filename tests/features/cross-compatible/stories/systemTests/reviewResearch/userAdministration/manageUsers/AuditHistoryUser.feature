@@ -111,7 +111,7 @@ Feature: User Administration: Manage Users - View audit history for users
                         | Enabled  | Disable_User_Record | Disable_User  |
                         | Disabled | Enable_User_Record  | Enable_User   |
 
-        @VerifyAuditHistoryEditCommonUserFields
+        @VerifyAuditHistoryEditCommonUserFields @fail @duplicateEmailAddress
         Scenario Outline: Verify the user can view the audit history after editing common user profile fields
                 And I select a 'QA Automation' User to View and Edit which is '<Status_Enabled>'
                 And I can see the user profile page

@@ -131,19 +131,6 @@ Then(
 );
 
 When(
-  'I search and click on view edit link for the removed user from the review body in the manage user page',
-  async ({ manageUsersPage, checkRemoveUserReviewBodyPage, userListReviewBodyPage }) => {
-    const userFirstName = await checkRemoveUserReviewBodyPage.getFirstName();
-    const userLastName = await checkRemoveUserReviewBodyPage.getLastName();
-    const userEmail = await checkRemoveUserReviewBodyPage.getEmail();
-    const userStatus = await userListReviewBodyPage.getStatus();
-    await manageUsersPage.goto(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size, userEmail);
-    const foundRecord = await manageUsersPage.findUserProfile(userFirstName, userLastName, userEmail, userStatus);
-    await foundRecord.locator(manageUsersPage.view_edit_link).click();
-  }
-);
-
-When(
   'I fill the search input for searching users in manage users page with {string} as the search query',
   async ({ manageUsersPage, commonItemsPage, userListReviewBodyPage }, searchQueryName: string) => {
     const searchQueryDataset = manageUsersPage.manageUsersPageTestData.Search_For_Users.Search_Queries[searchQueryName];
@@ -185,3 +172,16 @@ When(
     await foundRecord.locator(manageUsersPage.view_edit_link).click();
   }
 );
+
+// When(
+//   'I search and click on view edit link for the removed user from the review body in the manage user page',
+//   async ({ manageUsersPage, checkRemoveUserReviewBodyPage, userListReviewBodyPage }) => {
+//     const userFirstName = await checkRemoveUserReviewBodyPage.getFirstName();
+//     const userLastName = await checkRemoveUserReviewBodyPage.getLastName();
+//     const userEmail = await checkRemoveUserReviewBodyPage.getEmail();
+//     const userStatus = await userListReviewBodyPage.getStatus();
+//     await manageUsersPage.goto(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size, userEmail);
+//     const foundRecord = await manageUsersPage.findUserProfile(userFirstName, userLastName, userEmail, userStatus);
+//     await foundRecord.locator(manageUsersPage.view_edit_link).click();
+//   }
+// );

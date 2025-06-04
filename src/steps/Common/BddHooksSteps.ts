@@ -32,6 +32,7 @@ BeforeScenario(
         return response.status();
       })) != 200
     ) {
+      test.use({ javaScriptEnabled: true });
       console.info('Current auth states have expired!\nReauthenticating test users before continuing test execution');
       await commonItemsPage.page.context().clearCookies();
       await homePage.goto();
@@ -40,6 +41,7 @@ BeforeScenario(
       await loginPage.loginWithUserCreds('Admin_User');
       await homePage.assertOnHomePage();
       await commonItemsPage.storeAuthState('Admin_User');
+      test.use({ javaScriptEnabled: false });
     }
   }
 );

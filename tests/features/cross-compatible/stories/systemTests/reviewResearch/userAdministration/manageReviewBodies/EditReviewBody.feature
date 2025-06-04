@@ -131,7 +131,7 @@ Feature: User Administration: Manage Review Bodies - Edit review body
             | Description_Field_Max_Data                   | Organisation_Name |
             | Description_Field_between_Min_Max_Data       | Country           |
 
-    @verifyEditReviewValidationErrors @rsp-3123 @TestOnly
+    @verifyEditReviewValidationErrors @rsp-3123
     Scenario Outline: When input field validation fails on the edit review body page, correct error messaging displays to the user
         And I can see the review body profile page
         And I capture the page screenshot
