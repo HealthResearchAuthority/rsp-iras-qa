@@ -1,6 +1,7 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../hooks/CustomFixtures';
 import { sortArray } from '../../../utils/UtilFunctions';
+import config from '../../../../playwright.config';
 
 const { Then } = createBdd(test);
 
@@ -14,7 +15,10 @@ Then(
     const dataset = keyProjectRolesPage.keyProjectRolesPageTestData[datasetName];
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        if (key === 'primary_sponsor_organisation_text' && $tags.includes('@jsEnabled')) {
+        if (
+          key === 'primary_sponsor_organisation_text' &&
+          ($tags.includes('@jsEnabled') || config.projects?.[1].use?.javaScriptEnabled)
+        ) {
           dataset['primary_sponsor_organisation_jsenabled_text'] = dataset['primary_sponsor_organisation_text'];
           await commonItemsPage.fillUIComponent(
             dataset,
