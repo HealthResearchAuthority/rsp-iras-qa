@@ -26,9 +26,7 @@ BeforeScenario(
 
 BeforeScenario(
   { name: 'Check that current auth state has not expired', tags: '@Regression or @SystemTest and not @NoAuth' },
-  async function ({ commonItemsPage, loginPage, homePage }) {
-    // console.log('in hooks');
-    // console.log((await commonItemsPage.page.request.get('application/welcome', { maxRedirects: 0 })).status());
+  async function ({ commonItemsPage, loginPageTimeout }) {
     const users = ['System_Admin', 'Frontstage_User', 'Backstage_User', 'Admin_User', 'Non_Admin_User']; //Add all users data ref names here
     for (const user of users) {
       if (isAuthStateExpired(user)) {
@@ -40,22 +38,19 @@ BeforeScenario(
         // {
         console.info('Current auth states have expired!\nReauthenticating test users before continuing test execution');
         const browser = await chromium.launch();
-        const context = await browser.newContext({
-          javaScriptEnabled: true,
-        });
+        const context = await browser.newContext({ javaScriptEnabled: true });
         await context.clearCookies();
-        // await commonItemsPage.page.context().clearCookies();
-        await homePage.goto();
-        await homePage.loginBtn.click();
-        await loginPage.assertOnLoginPage();
-        await loginPage.loginWithUserCreds(user);
-        await homePage.assertOnHomePage();
+        //  await commonItemsPage.page.context().clearCookies();
+        const loginPageNewContext = await context.newPage();
+        loginPageTimeout.sessionTimeoutLoginPage = await context.newPage();
+        await loginPageNewContext.goto('');
+        await loginPageTimeout.loginBtn.click();
+        await loginPageTimeout.assertOnLoginPage();
+        await loginPageTimeout.loginWithUserCreds(user);
+        await loginPageTimeout.assertOnHomePage();
         await commonItemsPage.storeAuthState(user);
+        await browser.close();
       }
-      //  await browser.newContext({
-      //   javaScriptEnabled: true,
-      // });
-      // base.use({ javaScriptEnabled: false });
     }
   }
 );

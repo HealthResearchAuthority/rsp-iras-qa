@@ -476,6 +476,5 @@ export function isAuthStateExpired(user: any) {
   );
   if (!sessionCookie) return true;
   const now = Date.now() / 1000;
-  // console.log(sessionCookie.expires && sessionCookie.expires < now);
   return sessionCookie.expires && sessionCookie.expires < now;
 }
