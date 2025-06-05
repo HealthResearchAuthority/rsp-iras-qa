@@ -47,7 +47,6 @@ import SearchAddUserReviewBodyPage from '../pages/IRAS/reviewResearch/userAdmini
 import CheckAddUserReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/CheckAddUserReviewBodyPage';
 import AccessDeniedPage from '../pages/IRAS/AccessDeniedPage';
 import RtsPage from '../pages/Common/RtsPage';
-import LoginPageTimeout from '../pages/Common/LoginPageTimeout';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -96,7 +95,6 @@ type CustomFixtures = {
   checkAddUserReviewBodyPage: CheckAddUserReviewBodyPage;
   accessDeniedPage: AccessDeniedPage;
   rtsPage: RtsPage;
-  loginPageTimeout: LoginPageTimeout;
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -111,10 +109,6 @@ export const test = base.extend<CustomFixtures>({
 
   loginPage: async ({ page }, use) => {
     await use(new LoginPage(page));
-  },
-
-  loginPageTimeout: async ({ page }, use) => {
-    await use(new LoginPageTimeout(page));
   },
 
   homePage: async ({ page }, use) => {

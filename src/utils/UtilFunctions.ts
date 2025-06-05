@@ -466,15 +466,3 @@ export function resolveEnvExpression(template: string): string {
   }
   return value;
 }
-
-export function isAuthStateExpired(user: any) {
-  const authStatePath = getAuthState(user);
-  const storage = JSON.parse(fs.readFileSync(authStatePath, 'utf-8'));
-  const cookies = storage.cookies || [];
-  const sessionCookie = cookies.find(
-    (c: any) => c.name.toLowerCase() === 'session' || c.name.toLowerCase().includes('auth')
-  );
-  if (!sessionCookie) return true;
-  const now = Date.now() / 1000;
-  return sessionCookie.expires && sessionCookie.expires < now;
-}
