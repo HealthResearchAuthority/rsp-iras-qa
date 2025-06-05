@@ -5,7 +5,7 @@ Feature: Create Amendment - Create Project - Regression Tests
     Given I have navigated to the my research projects page
     And I can see the my research projects page
 
-  @CreateProjectValidRegression
+  @CreateProjectValidRegression @Smoke
   Scenario Outline: Validate user is able to amend a project
     # Validate labels in My_Research_Projects_Page
     And I can see the my research projects page
@@ -76,11 +76,29 @@ Feature: Create Amendment - Create Project - Regression Tests
     # Validate previously filled values persist on screen navigation for Research_Locations_Page
     Then I can see previously saved values for '<Research_Locations>' displayed on the research locations page
     And I capture the page screenshot
+    When I click the '<Navigation_Button_Third>' button on the 'Research_Locations_Page'
+    # Validate saved values in different pages is displayed in review answers page
+    Then I can see the review your application page
+    Then I can validate the field values of '<Project_Details_Title>' page '<Key_Project_Roles>' page and '<Research_Locations>' page
+    # Validate change link functionality in review answers page
+    And I click the change link '<Change_Link_Field>' on review your answers page
+    Then I can see the key project roles page
+    And I fill the key project roles page with '<Key_Project_Roles_Change>'
+    And I capture the page screenshot
+    When I click the 'Save_Changes' button on the 'Key_Project_Roles_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    Then I can validate the field values of '<Project_Details_Title>' page '<Key_Project_Roles_Change>' page and '<Research_Locations>' page
+    And I capture the page screenshot
+    # Validate project overview page
+    When I click the '<Navigation_Button_Fourth>' button on the 'Review_Your_Answers_Page'
+    Then I can see the project overview page
+    And I capture the page screenshot
 
     Examples:
-      | Validation_Text | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Third | Navigation_Button_Add_Project | Navigation_Link | Project_Details_Title      | Key_Project_Roles                   | Research_Locations                     |
-      | Label_Texts     | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Back            | Valid_Data_All_Fields      | Valid_Data_All_Fields               | Data_With_No_NHS_HSC                   |
-      | Label_Texts     | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Back            | Valid_Data_All_Fields_VERA | Valid_Email_Data_Special_Characters | Data_With_Lead_Nation_Northern_Ireland |
+      | Validation_Text | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Third | Navigation_Button_Fourth | Navigation_Button_Add_Project | Navigation_Link | Project_Details_Title      | Key_Project_Roles                   | Research_Locations                     | Change_Link_Field  | Key_Project_Roles_Change                     |
+      | Label_Texts     | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Add_Project                   | Back            | Valid_Data_All_Fields      | Valid_Data_All_Fields               | Data_With_No_NHS_HSC                   | chief_investigator | Valid_Data_Only_Investigator_Email_Field_Two |
+      | Label_Texts     | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Add_Project                   | Back            | Valid_Data_All_Fields_VERA | Valid_Email_Data_Special_Characters | Data_With_Lead_Nation_Northern_Ireland | sponsor_contact    | Valid_Data_Only_Sponsor_Email_Field_Two      |
 
   @ErrorMessageInvalidIRASIDRegression
   Scenario Outline: Validate error messages displayed when user amend the project using invalid iras id
