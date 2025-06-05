@@ -25,23 +25,28 @@ BeforeScenario(
 );
 
 BeforeScenario(
-  { name: 'Check that current auth state has not expired', tags: '@Regression or @SystemTest' },
+  { name: 'Check that current auth state has not expired', tags: '@Regression or @SystemTest and not @NoAuth' },
   async function ({ commonItemsPage, loginPage, homePage }) {
+    console.log('in hooks');
+    console.log((await commonItemsPage.page.request.get('application/welcome', { maxRedirects: 0 })).status());
     if (
       (await commonItemsPage.page.request.get('application/welcome', { maxRedirects: 0 }).then((response) => {
         return response.status();
       })) != 200
     ) {
-      test.use({ javaScriptEnabled: true });
+      // test.use({ javaScriptEnabled: true });
       console.info('Current auth states have expired!\nReauthenticating test users before continuing test execution');
-      await commonItemsPage.page.context().clearCookies();
-      await homePage.goto();
-      await homePage.loginBtn.click();
-      await loginPage.assertOnLoginPage();
-      await loginPage.loginWithUserCreds('Admin_User');
-      await homePage.assertOnHomePage();
-      await commonItemsPage.storeAuthState('Admin_User');
-      test.use({ javaScriptEnabled: false });
+      const users = ['System_Admin', 'Frontstage_User', 'Backstage_User', 'Admin_User', 'Non_Admin_User']; //Add all users data ref names here
+      for (const user of users) {
+        await commonItemsPage.page.context().clearCookies();
+        await homePage.goto();
+        await homePage.loginBtn.click();
+        await loginPage.assertOnLoginPage();
+        await loginPage.loginWithUserCreds(user);
+        await homePage.assertOnHomePage();
+        await commonItemsPage.storeAuthState(user);
+      }
+      // test.use({ javaScriptEnabled: false });
     }
   }
 );

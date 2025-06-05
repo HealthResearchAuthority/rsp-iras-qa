@@ -42,23 +42,18 @@ export default class LoginPage {
     if (dataset === 'System_Admin') {
       secretKey = process.env.SYSTEM_ADMIN_SECRET_KEY;
       authTag = process.env.SYSTEM_ADMIN_AUTH_TAG;
-      // password = getDecryptedValue(resolveEnvExpression(this.loginPageTestData[dataset].password), secretKey, authTag);
-    } else if (dataset === 'User') {
-      secretKey = process.env.USER_SECRET_KEY;
-      authTag = process.env.USER_AUTH_TAG;
-      // password = getDecryptedValue(resolveEnvExpression(this.loginPageTestData[dataset].password), secretKey, authTag);
-    } else if (dataset === 'Reviewer') {
-      secretKey = process.env.REVIEWER_SECRET_KEY;
-      authTag = process.env.REVIEWER_AUTH_TAG;
-      // password = getDecryptedValue(resolveEnvExpression(this.loginPageTestData[dataset].password), secretKey, authTag);
+    } else if (dataset === 'Frontstage_User') {
+      secretKey = process.env.FRONTSTAGE_USER_SECRET_KEY;
+      authTag = process.env.FRONTSTAGE_USER_AUTH_TAG;
+    } else if (dataset === 'Backstage_User') {
+      secretKey = process.env.BACKSTAGE_USER_SECRET_KEY;
+      authTag = process.env.BACKSTAGE_USER_AUTH_TAG;
     } else if (dataset === 'Admin_User') {
       secretKey = process.env.ADMIN_USER_SECRET_KEY;
       authTag = process.env.ADMIN_USER_AUTH_TAG;
-      // password = getDecryptedValue(resolveEnvExpression(this.loginPageTestData[dataset].password), secretKey, authTag);
     } else if (dataset === 'Non_Admin_User') {
       secretKey = process.env.NON_ADMIN_USER_SECRET_KEY;
       authTag = process.env.NON_ADMIN_USER_AUTH_TAG;
-      // password = getDecryptedValue(resolveEnvExpression(this.loginPageTestData[dataset].password), secretKey, authTag);
     }
     const password = getDecryptedValue(
       resolveEnvExpression(this.loginPageTestData[dataset].password),

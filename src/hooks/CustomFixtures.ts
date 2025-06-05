@@ -290,7 +290,13 @@ export const test = base.extend<CustomFixtures>({
 
   //Set the Storage State based on User Tag from Feature File
   storageState: async ({ $tags, storageState }, use) => {
-    if ($tags.includes('@adminUser')) {
+    if ($tags.includes('@SysAdminUser')) {
+      storageState = getAuthState('system_admin');
+    } else if ($tags.includes('@FrontStageUser')) {
+      storageState = getAuthState('frontstage_user');
+    } else if ($tags.includes('@BackStageUser')) {
+      storageState = getAuthState('backstage_user');
+    } else if ($tags.includes('@adminUser')) {
       storageState = getAuthState('admin_user');
     } else if ($tags.includes('@nonAdminUser')) {
       storageState = getAuthState('non_admin_user');

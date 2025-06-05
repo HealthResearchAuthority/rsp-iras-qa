@@ -1,4 +1,4 @@
-@UserAdministration @ManageReviewBodies @EditReviewBody @adminUser @SystemTest @rsp-2572
+@UserAdministration @ManageReviewBodies @EditReviewBody @SysAdminUser @SystemTest @rsp-2572
 Feature: User Administration: Manage Review Bodies - Edit review body
     # Try to randomise the selection from search results
     Background:

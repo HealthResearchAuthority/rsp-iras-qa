@@ -1,4 +1,4 @@
-@UserAdministration @ManageUsers @adminUser @SystemTest
+@UserAdministration @ManageUsers @SysAdminUser @SystemTest
 Feature: User Administration: Manage Users - Enable / Disable users
 
     Background:

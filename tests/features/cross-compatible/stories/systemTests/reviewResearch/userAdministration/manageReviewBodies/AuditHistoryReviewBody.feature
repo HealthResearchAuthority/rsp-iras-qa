@@ -1,4 +1,4 @@
-@UserAdministration @ManageReviewBodies @adminUser @SystemTest @AuditHistoryReviewBody @rsp-2927
+@UserAdministration @ManageReviewBodies @SysAdminUser @SystemTest @AuditHistoryReviewBody @rsp-2927
 Feature: User Administration: Manage Review Bodies - View audit history for review body
 
     Background:

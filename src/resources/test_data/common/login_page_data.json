@@ -3,17 +3,13 @@
     "username": "FutureIRAS.SysAdmin@hra.nhs.uk",
     "password": "`${process.env.SYSTEM_ADMIN_PASS}`"
   },
-  "User": {
+  "Frontstage_User": {
     "username": "futureiras.automation@hra.nhs.uk",
-    "password": "`${process.env.USER_PASS}`"
+    "password": "`${process.env.FRONTSTAGE_USER_PASS}`"
   },
-  "Reviewer": {
+  "Backstage_User": {
     "username": "FutureIRAS.BackStage@hra.nhs.uk",
-    "password": "`${process.env.REVIEWER_PASS}`"
-  },
-  "Operations": {
-    "username": "FutureIRAS.BackStage@hra.nhs.uk",
-    "password": "`${process.env.OPERATIONS_PASS}`"
+    "password": "`${process.env.BACKSTAGE_USER_PASS}`"
   },
   "Admin_User": {
     "username": "futureiras.automation@hra.nhs.uk",

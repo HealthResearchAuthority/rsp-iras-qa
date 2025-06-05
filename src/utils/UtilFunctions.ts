@@ -18,6 +18,15 @@ const todayDate = new Date();
 export function getAuthState(user: string): string {
   let authState: string;
   switch (user.toLowerCase()) {
+    case 'system_admin':
+      authState = 'auth-storage-states/sysAdminUser.json';
+      break;
+    case 'frontstage_user':
+      authState = 'auth-storage-states/frontStageUser.json';
+      break;
+    case 'backstage_user':
+      authState = 'auth-storage-states/backStageUser.json';
+      break;
     case 'admin_user':
       authState = 'auth-storage-states/adminUser.json';
       break;

@@ -27,61 +27,6 @@ AfterStep(async ({ page, $step, $testInfo }) => {
 
 Then('I capture the page screenshot', async () => {});
 
-Given(
-  'I have navigated to the {string}',
-  async (
-    {
-      loginPage,
-      homePage,
-      createApplicationPage,
-      systemAdministrationPage,
-      manageReviewBodiesPage,
-      userProfilePage,
-      reviewBodyProfilePage,
-      myResearchProjectsPage,
-    },
-    page: string
-  ) => {
-    switch (page) {
-      case 'Login_Page':
-        await homePage.goto();
-        await homePage.loginBtn.click();
-        await loginPage.assertOnLoginPage();
-        break;
-      case 'Home_Page':
-        await homePage.goto();
-        await homePage.assertOnHomePage();
-        break;
-      case 'Create_Application_Page':
-        await createApplicationPage.goto();
-        await createApplicationPage.assertOnCreateApplicationPage();
-        break;
-      case 'System_Administration_Page':
-        await systemAdministrationPage.goto();
-        await systemAdministrationPage.assertOnSystemAdministrationPage();
-        break;
-      case 'Manage_Review_Bodies_Page':
-        await manageReviewBodiesPage.goto();
-        await manageReviewBodiesPage.assertOnManageReviewBodiesPage();
-        break;
-      case 'User_Profile_Page':
-        await userProfilePage.goto(await userProfilePage.getUserId());
-        await userProfilePage.assertOnUserProfilePage();
-        break;
-      case 'Review_Body_Profile_Page':
-        await reviewBodyProfilePage.goto(await reviewBodyProfilePage.getReviewBodyId());
-        await reviewBodyProfilePage.assertOnReviewbodyProfilePage();
-        break;
-      case 'My_Research_Page':
-        await myResearchProjectsPage.goto();
-        await myResearchProjectsPage.assertOnMyResearchProjectsPage();
-        break;
-      default:
-        throw new Error(`${page} is not a valid option`);
-    }
-  }
-);
-
 When(
   'I can see the {string}',
   async (
@@ -899,9 +844,73 @@ Then(
 );
 
 Given(
+  'I have navigated to the {string}',
+  async (
+    {
+      loginPage,
+      homePage,
+      createApplicationPage,
+      systemAdministrationPage,
+      manageReviewBodiesPage,
+      userProfilePage,
+      reviewBodyProfilePage,
+      myResearchProjectsPage,
+    },
+    page: string
+  ) => {
+    switch (page) {
+      case 'Login_Page':
+        await homePage.goto();
+        await homePage.loginBtn.click();
+        await loginPage.assertOnLoginPage();
+        break;
+      case 'Home_Page':
+        await homePage.goto();
+        await homePage.assertOnHomePage();
+        break;
+      case 'Create_Application_Page':
+        await createApplicationPage.goto();
+        await createApplicationPage.assertOnCreateApplicationPage();
+        break;
+      case 'System_Administration_Page':
+        await systemAdministrationPage.goto();
+        await systemAdministrationPage.assertOnSystemAdministrationPage();
+        break;
+      case 'Manage_Review_Bodies_Page':
+        await manageReviewBodiesPage.goto();
+        await manageReviewBodiesPage.assertOnManageReviewBodiesPage();
+        break;
+      case 'User_Profile_Page':
+        await userProfilePage.goto(await userProfilePage.getUserId());
+        await userProfilePage.assertOnUserProfilePage();
+        break;
+      case 'Review_Body_Profile_Page':
+        await reviewBodyProfilePage.goto(await reviewBodyProfilePage.getReviewBodyId());
+        await reviewBodyProfilePage.assertOnReviewbodyProfilePage();
+        break;
+      case 'My_Research_Page':
+        await myResearchProjectsPage.goto();
+        await myResearchProjectsPage.assertOnMyResearchProjectsPage();
+        break;
+      default:
+        throw new Error(`${page} is not a valid option`);
+    }
+  }
+);
+
+Given(
   'I have navigated to the {string} as {string}',
   async (
-    { homePage, createApplicationPage, systemAdministrationPage, accessDeniedPage, manageReviewBodiesPage },
+    {
+      homePage,
+      createApplicationPage,
+      systemAdministrationPage,
+      accessDeniedPage,
+      manageReviewBodiesPage,
+      userProfilePage,
+      reviewBodyProfilePage,
+      myResearchProjectsPage,
+    },
     page: string,
     user: string
   ) => {
@@ -932,6 +941,21 @@ Given(
         await manageReviewBodiesPage.page.context().addCookies(authState.cookies);
         await manageReviewBodiesPage.goto();
         await manageReviewBodiesPage.assertOnManageReviewBodiesPage();
+        break;
+      case 'User_Profile_Page':
+        await userProfilePage.page.context().addCookies(authState.cookies);
+        await userProfilePage.goto(await userProfilePage.getUserId());
+        await userProfilePage.assertOnUserProfilePage();
+        break;
+      case 'Review_Body_Profile_Page':
+        await reviewBodyProfilePage.page.context().addCookies(authState.cookies);
+        await reviewBodyProfilePage.goto(await reviewBodyProfilePage.getReviewBodyId());
+        await reviewBodyProfilePage.assertOnReviewbodyProfilePage();
+        break;
+      case 'My_Research_Page':
+        await myResearchProjectsPage.page.context().addCookies(authState.cookies);
+        await myResearchProjectsPage.goto();
+        await myResearchProjectsPage.assertOnMyResearchProjectsPage();
         break;
       default:
         throw new Error(`${page} is not a valid option`);
