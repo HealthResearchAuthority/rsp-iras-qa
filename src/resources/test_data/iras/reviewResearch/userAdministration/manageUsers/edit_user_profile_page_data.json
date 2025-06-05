@@ -16,7 +16,7 @@
     "review_body_label": "Review body",
     "save_button": "Save",
     "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
-    "role_checkbox": ["user", "operations", "admin", "reviewer"]
+    "role_checkbox": ["user", "operations", "system administrator", "reviewer"]
   },
   "Missing_Mandatory_Fields_Role_Not_Operations_Error": {
     "email_address_text": "Enter an email address",
@@ -453,7 +453,7 @@
     "telephone_text": "07000000000",
     "organisation_text": "QA Automation HRA Role_Reviewer",
     "job_title_text": "Sr.Reviewer Role_Reviewer",
-    "role_checkbox": ["admin", "reviewer"]
+    "role_checkbox": ["system administrator", "reviewer"]
   },
   "Missing_Mandatory_Field_Last_Name_Role_Not_Operations": {
     "title_text": "Mr",
@@ -463,7 +463,7 @@
     "telephone_text": "07000000000",
     "organisation_text": "QA Automation HRA Role_Reviewer",
     "job_title_text": "Sr.Reviewer Role_Reviewer",
-    "role_checkbox": ["admin", "reviewer"]
+    "role_checkbox": ["system administrator", "reviewer"]
   },
   "Missing_Mandatory_Field_Email_Address_Role_Not_Operations": {
     "title_text": "Mr",
@@ -473,7 +473,7 @@
     "telephone_text": "07000000000",
     "organisation_text": "QA Automation HRA Role_Reviewer",
     "job_title_text": "Sr.Reviewer Role_Reviewer",
-    "role_checkbox": ["admin", "reviewer"]
+    "role_checkbox": ["system administrator", "reviewer"]
   },
   "Missing_Mandatory_Field_Country_Role_Operations": {
     "title_text": "Mr",
