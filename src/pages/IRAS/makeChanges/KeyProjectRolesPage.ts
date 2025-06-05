@@ -34,7 +34,7 @@ export default class KeyProjectRolesPage {
     this.chief_investigator_email_text = this.page.getByTestId('IQA0311_Text');
     this.sponsor_contact_email_text = this.page.getByTestId('IQA0313_Text');
     this.chief_investigator_email_text_summary_error_label = this.page.locator('a[href="#Questions[0].AnswerText"]');
-    this.sponsor_contact_email_text_summary_error_label = this.page.locator('a[href="#Questions[1].AnswerText"]');
+    this.sponsor_contact_email_text_summary_error_label = this.page.locator('a[href="#Questions[2].AnswerText"]');
     this.primary_sponsor_organisation_text = this.page.getByTestId('Questions_1_AnswerText');
     this.primary_sponsor_organisation_header_label = this.page.locator(
       'label[for="Questions_1_AnswerText_autocomplete"]'

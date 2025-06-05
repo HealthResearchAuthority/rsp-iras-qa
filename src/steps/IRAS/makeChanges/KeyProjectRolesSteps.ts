@@ -144,7 +144,7 @@ Then(
     await keyProjectRolesPage.page.waitForTimeout(2000);
     const continueEnteringSuggestionActual = await keyProjectRolesPage.primary_sponsor_organisation_suggestion_listbox
       .first()
-      .getAttribute('data-before-suggestions');
+      .getAttribute('data-after-suggestions');
     const suggestionsHeaderLabelExpected = suggestionHeadersDatasetName.suggestion_footer;
     expect(continueEnteringSuggestionActual).toEqual(suggestionsHeaderLabelExpected);
   }
