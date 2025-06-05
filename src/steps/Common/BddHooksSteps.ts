@@ -1,7 +1,7 @@
 import { createBdd } from 'playwright-bdd';
 import { test } from '../../hooks/CustomFixtures';
-import { getTicketReferenceTags } from '../../utils/UtilFunctions';
-
+import { getTicketReferenceTags, isAuthStateExpired } from '../../utils/UtilFunctions';
+import { chromium } from 'playwright';
 const { AfterStep, BeforeScenario } = createBdd(test);
 
 AfterStep(async ({ page, $step, $testInfo }) => {
@@ -27,18 +27,24 @@ BeforeScenario(
 BeforeScenario(
   { name: 'Check that current auth state has not expired', tags: '@Regression or @SystemTest and not @NoAuth' },
   async function ({ commonItemsPage, loginPage, homePage }) {
-    console.log('in hooks');
-    console.log((await commonItemsPage.page.request.get('application/welcome', { maxRedirects: 0 })).status());
-    if (
-      (await commonItemsPage.page.request.get('application/welcome', { maxRedirects: 0 }).then((response) => {
-        return response.status();
-      })) != 200
-    ) {
-      // test.use({ javaScriptEnabled: true });
-      console.info('Current auth states have expired!\nReauthenticating test users before continuing test execution');
-      const users = ['System_Admin', 'Frontstage_User', 'Backstage_User', 'Admin_User', 'Non_Admin_User']; //Add all users data ref names here
-      for (const user of users) {
-        await commonItemsPage.page.context().clearCookies();
+    // console.log('in hooks');
+    // console.log((await commonItemsPage.page.request.get('application/welcome', { maxRedirects: 0 })).status());
+    const users = ['System_Admin', 'Frontstage_User', 'Backstage_User', 'Admin_User', 'Non_Admin_User']; //Add all users data ref names here
+    for (const user of users) {
+      if (isAuthStateExpired(user)) {
+        // if (
+        //   (await commonItemsPage.page.request.get('application/welcome', { maxRedirects: 0 }).then((response) => {
+        //     return response.status();
+        //   })) != 200
+        // )
+        // {
+        console.info('Current auth states have expired!\nReauthenticating test users before continuing test execution');
+        const browser = await chromium.launch();
+        const context = await browser.newContext({
+          javaScriptEnabled: true,
+        });
+        await context.clearCookies();
+        // await commonItemsPage.page.context().clearCookies();
         await homePage.goto();
         await homePage.loginBtn.click();
         await loginPage.assertOnLoginPage();
@@ -46,7 +52,10 @@ BeforeScenario(
         await homePage.assertOnHomePage();
         await commonItemsPage.storeAuthState(user);
       }
-      // test.use({ javaScriptEnabled: false });
+      //  await browser.newContext({
+      //   javaScriptEnabled: true,
+      // });
+      // base.use({ javaScriptEnabled: false });
     }
   }
 );

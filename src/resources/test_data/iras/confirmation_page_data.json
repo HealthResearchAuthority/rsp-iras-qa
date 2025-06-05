@@ -34,5 +34,6 @@
   "Add_User_Review_Body_Labels": {
     "page_heading": "User has been successfully added",
     "page_guidance_text": " has been sent an email confirming that they have been added to "
-  }
+  },
+  "confirmation_success_header_label": "User has been successfully"
 }

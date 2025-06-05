@@ -14,7 +14,9 @@ export default class ConfirmationPage {
     this.confirmationPageTestData = confirmationPageTestData;
 
     //Locators
-    this.confirmation_header_label = this.page.getByRole('heading');
+    this.confirmation_header_label = this.page.getByRole('heading', {
+      name: confirmationPageTestData.confirmation_success_header_label,
+    });
     this.confirmation_body_label = this.page.getByRole('paragraph').first();
   }
 
