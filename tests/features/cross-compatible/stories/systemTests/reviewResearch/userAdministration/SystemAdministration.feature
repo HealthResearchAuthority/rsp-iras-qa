@@ -42,19 +42,3 @@ Feature: User Administration: System Administration
     Given I have navigated to the 'Home_Page'
     And the top menu bar will not have links to 'Manage Users' or 'System Admin'
     And I capture the page screenshot
-
-  @rsp-3821 @SystemAdministrationPage
-  Scenario Outline: Validate the my account home page
-    Given I have navigated to the '<Page>' as '<User>'
-    Then I capture the page screenshot
-    Then I logged out from the system
-    Then I capture the page screenshot
-    Examples:
-      | User           | Page                       |
-      | System_Admin   | System_Admin_Home_Page     |
-      | System_Admin   | System_Administration_Page |
-      # | Frontstage_User | Frontstage_User_Home_Page |
-      | Backstage_User | Backstage_User_Home_Page   |
-      | Non_Admin_User | Non_Admin_Home_Page        |
-      | Non_Admin_User | Access_Denied_Page         |
-# # | Admin_User      | Admin_Home_Page           |

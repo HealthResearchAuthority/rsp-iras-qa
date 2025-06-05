@@ -7,10 +7,10 @@ Feature: Authenticate Test Users once only, before test run
     Then I can see the '<Page>'
     And I will store the '<User>' authentication state
     Examples:
-      | User         | Page      |
-      | System_Admin | Home_Page |
-# | Frontstage_User | Home_Page |
-# | Backstage_User  | Home_Page |
-# | Admin_User      | Home_Page |
-# | Non_Admin_User  | Home_Page |
+      | User            | Page      |
+      | System_Admin    | Home_Page |
+      | Frontstage_User | Home_Page |
+      | Backstage_User  | Home_Page |
+      | Admin_User      | Home_Page |
+      | Non_Admin_User  | Home_Page |
 
