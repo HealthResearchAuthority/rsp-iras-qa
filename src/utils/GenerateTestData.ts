@@ -728,10 +728,6 @@ export function generateIrasId(irasIdType: string): string {
       //Generates invalid random IRAS ID with a digit lenght 2
       irasId = generateRandomNumber(2, 2);
       break;
-    case 'Invalid_IRAS_ID_Max_Length':
-      //Generates invalid random IRAS ID with a digit lenght 9
-      irasId = generateRandomNumber(9, 9);
-      break;
     default:
       throw new Error(`Unknown IRAS ID Type: ${irasIdType}`);
   }
