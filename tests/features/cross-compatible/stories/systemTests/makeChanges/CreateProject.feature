@@ -55,8 +55,10 @@ Feature: Create Amendment - Create Project
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
     And I can see the project details iras page
+    And I capture the page screenshot
     When I click the '<Navigation_Link>' link on the 'Project_Details_IRAS_Page'
     Then I can see the create project record page
+    And I capture the page screenshot
 
     Examples:
       | Navigation_Button_First | Navigation_Button_Second | Navigation_Link |
@@ -71,10 +73,13 @@ Feature: Create Amendment - Create Project
     Then I can see the project details title page
     Then I can see the '<Validation_Text>' ui labels on the project details title page
     Then I fill the project details title page with '<Project_Details_Title>'
+    And I capture the page screenshot
     When I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
     Then I can see the key project roles page
+    And I capture the page screenshot
     When I click the '<Navigation_Link>' link on the 'Key_Project_Roles_Page'
     Then I can see previously saved values for '<Project_Details_Title>' displayed on the project details title page
+    And I capture the page screenshot
 
     Examples:
       | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Add_Project | Navigation_Button_Third | Validation_Text | Project_Details_Title                         | Navigation_Link |
@@ -98,8 +103,10 @@ Feature: Create Amendment - Create Project
     And I fill the unique iras id in project details iras page
     And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
+    And I capture the page screenshot
     When I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
     Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Project_Details_Title_Page'
+    And I capture the page screenshot
 
     Examples:
       | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Add_Project | Navigation_Button_Third | Project_Details_Title                       | Field_And_Summary_Error_Message |
@@ -125,8 +132,10 @@ Feature: Create Amendment - Create Project
     And I fill the unique iras id in project details iras page
     And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
     And I fill todays date for planned project end date in project details title page
+    And I capture the page screenshot
     When I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
     Then I validate '<Field_Error_Message>' and '<Summary_Error_Message>' displayed on project details title page for '<Project_Details_Title>'
+    And I capture the page screenshot
 
     Examples:
       | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Add_Project | Navigation_Button_Third | Project_Details_Title | Field_Error_Message | Summary_Error_Message |
