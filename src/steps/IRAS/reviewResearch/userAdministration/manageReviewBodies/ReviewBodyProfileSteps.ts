@@ -158,7 +158,7 @@ Then(
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
         const labelVal = await commonItemsPage.getUiLabel(key, reviewBodyProfilePage);
-        expect(labelVal).toBe(dataset[key]);
+        expect.soft(labelVal).toBe(dataset[key]);
       }
     }
   }

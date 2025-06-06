@@ -92,10 +92,12 @@ Feature: User Administration: Manage Review Bodies
                 And I click the 'Confirm' button on the 'Confirmation_Page'
                 And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
                 Then I can see the 'Manage_Review_Bodies_Page'
-                When I enter 'QA Automation' into the search field
+                And I capture the page screenshot
+                When I enter organisation name of the previously used review body into the search field
                 And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
                 And I capture the page screenshot
-                And I select a 'QA Automation' Review Body to View and Edit which is '<Status_Enabled>'
+                And I select the previously used review body should be present in the list with '<Status_Enabled>' status in the manage review bodies page
+                And I capture the page screenshot
                 And I can see the review body profile page
                 And I capture the page screenshot
                 # edit review body
@@ -164,10 +166,11 @@ Feature: User Administration: Manage Review Bodies
                 Then I capture the page screenshot
                 And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
                 Then I can see the 'Manage_Review_Bodies_Page'
-                Then I capture the page screenshot
-                When I enter 'QA Automation' into the search field
+                And I capture the page screenshot
+                When I enter organisation name of the previously used review body into the search field
                 And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
-                And I select a 'QA Automation' Review Body to View and Edit which is '<Status_Enabled>'
+                And I capture the page screenshot
+                And I select the previously used review body should be present in the list with '<Status_Enabled>' status in the manage review bodies page
                 And I capture the page screenshot
                 And I can see the review body profile page
                 And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'

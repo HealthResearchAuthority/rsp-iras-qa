@@ -488,6 +488,13 @@ When('I enter {string} into the search field', async ({ commonItemsPage }, searc
 });
 
 When(
+  'I enter organisation name of the previously used review body into the search field',
+  async ({ commonItemsPage, reviewBodyProfilePage }) => {
+    await commonItemsPage.search_text.fill(await reviewBodyProfilePage.getOrgName());
+  }
+);
+
+When(
   'I enter unique organisation name of the newly created review body into the search field',
   async ({ commonItemsPage, createReviewBodyPage }) => {
     await commonItemsPage.search_text.fill(await createReviewBodyPage.getUniqueOrgName());

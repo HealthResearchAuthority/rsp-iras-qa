@@ -173,6 +173,27 @@ When(
     expect(foundRecords).toHaveCount(1);
   }
 );
+When(
+  'I select the previously used review body should be present in the list with {string} status in the manage review bodies page',
+  async ({ manageReviewBodiesPage, reviewBodyProfilePage }, status: string) => {
+    let reviewBodyStatus: string;
+    const dataset = manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page;
+    if (status.toLowerCase() == 'disabled') {
+      reviewBodyStatus = dataset.disabled_status;
+    } else {
+      reviewBodyStatus = dataset.enabled_status;
+    }
+    const reviewBodyName = await reviewBodyProfilePage.getOrgName();
+    await manageReviewBodiesPage.goto(
+      manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.enlarged_page_size,
+      reviewBodyName
+    );
+    const foundRecords = await manageReviewBodiesPage.findReviewBody(reviewBodyName, reviewBodyStatus);
+    expect(foundRecords).toBeDefined();
+    expect(foundRecords).toHaveCount(1);
+    await foundRecords.locator(manageReviewBodiesPage.actionsLink).click();
+  }
+);
 
 When(
   'I select a {string} Review Body to View and Edit which is {string}',
