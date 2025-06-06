@@ -725,12 +725,8 @@ export function generateIrasId(irasIdType: string): string {
       irasId = generateRandomNumber(4, 4);
       break;
     case 'Invalid_IRAS_ID_Min_Length':
-      //Generates invalid random IRAS ID with a digit lenght 8
-      irasId = generateRandomNumber(8, 8);
-      break;
-    case 'Invalid_IRAS_ID_Max_Length':
-      //Generates invalid random IRAS ID with a digit lenght 3
-      irasId = generateRandomNumber(3, 3);
+      //Generates invalid random IRAS ID with a digit lenght 2
+      irasId = generateRandomNumber(2, 2);
       break;
     default:
       throw new Error(`Unknown IRAS ID Type: ${irasIdType}`);

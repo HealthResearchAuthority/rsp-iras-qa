@@ -237,6 +237,11 @@ Given('I can see a {string} link on the {string}', async ({ commonItemsPage }, l
   }
 });
 
+Given('I cannot see a {string} link on the {string}', async ({ commonItemsPage }, linkKey: string, pageKey: string) => {
+  const linkValue = commonItemsPage.linkTextData[pageKey][linkKey];
+  await expect(commonItemsPage.govUkLink.getByText(linkValue, { exact: true })).toHaveCount(0);
+});
+
 Then(
   'I generate {string} test data for {string}',
   async ({ commonItemsPage }, typeofdata: string, fieldName: string) => {
