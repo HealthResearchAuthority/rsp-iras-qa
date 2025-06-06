@@ -127,4 +127,20 @@ export default class EditUserProfilePage {
       await this.email_address_text.clear();
     }
   }
+
+  async getCheckedCheckboxLabels() {
+    const checkboxes = this.page.getByRole('checkbox');
+    const count = await checkboxes.count();
+    const checkedLabels: string[] = [];
+    for (let i = 0; i < count; i++) {
+      const checkbox = checkboxes.nth(i);
+      const isChecked = await checkbox.isChecked();
+      if (isChecked) {
+        const id = await checkbox.getAttribute('id');
+        const label = await this.page.locator(`label[for="${id}"]`).textContent();
+        checkedLabels.push(label?.trim() || '');
+      }
+    }
+    return checkedLabels;
+  }
 }

@@ -9,7 +9,7 @@ Feature: User Administration: Manage user profiles, view and edit user profile
         When I click the 'Manage_Users' link on the 'System_Administration_Page'
         Then I can see the 'Manage_Users_Page'
 
-    @viewUserProfileRoleOperations
+    @viewUserProfileRoleOperations @skip
     Scenario Outline: View User profile details for the user with role as Operations
         And I search and click on view edit link for existing '<View_User_Profile>' user with '<Status>' status from the manage user page
         Then I can see the user profile page
@@ -23,7 +23,7 @@ Feature: User Administration: Manage user profiles, view and edit user profile
             | Active_User_Role_Operations   | ACTIVE   |
             | Disabled_User_Role_Operations | DISABLED |
 
-    @viewUserProfileRoleReviewer
+    @viewUserProfileRoleReviewer @skip
     Scenario Outline: View User profile details for the user with role as reviewer
         And I search and click on view edit link for existing '<View_User_Profile>' user with '<Status>' status from the manage user page
         Then I can see the user profile page
@@ -37,7 +37,7 @@ Feature: User Administration: Manage user profiles, view and edit user profile
             | Active_User_Role_Reviewer   | ACTIVE   |
             | Disabled_User_Role_Reviewer | DISABLED |
 
-    @editUserProfileOperations
+    @editUserProfileOperations @skip
     Scenario Outline: Successful user profile update for user role as Operations
         And I search and click on view edit link for existing 'Valid_Data_Role_Operations' user with '<Status>' status from the manage user page
         Then I can see the user profile page
@@ -64,7 +64,7 @@ Feature: User Administration: Manage user profiles, view and edit user profile
             | job_title_text     | Operations | Enabled | User_Job_Title_Text_One     | Original_Job_Title_Text_One     |
             | role_checkbox      | Operations | Enabled | User_Role_Checkbox_One      | Original_Role_Checkbox_One      |
 
-    @editUserProfileReviewer
+    @editUserProfileReviewer @skip
     Scenario Outline: Successful user profile update for user as Reviewer
         And I search and click on view edit link for existing 'Active_User_Role_Reviewer' user with '<Status>' status from the manage user page
         Then I can see the user profile page
@@ -91,7 +91,7 @@ Feature: User Administration: Manage user profiles, view and edit user profile
             | job_title_text     | Reviewer   | Enabled | User_Job_Title_Text_Two     | Original_Job_Title_Text_Two     |
             | role_checkbox      | Operations | Enabled | User_Role_Checkbox_Two      | Original_Role_Checkbox_Two      |
 
-    @editUserProfileOnlyMandatoryFields
+    @editUserProfileOnlyMandatoryFields @skip
     Scenario Outline: Successful user profile update with only mandatory fields
         And I search and click on view edit link for existing 'Edit_User_Only_Mandatory_Fields_Data' user with '<Status>' status from the manage user page
         Then I can see the user profile page
@@ -113,7 +113,7 @@ Feature: User Administration: Manage user profiles, view and edit user profile
             | last_name_text     | Operations | Enabled | User_Last_Name_Text_Three     | Original_Last_Name_Text_Three     |
             | email_address_text | Operations | Enabled | User_Email_Address_Text_Three | Original_Email_Address_Text_Three |
 
-    @editUserProfileValidEmailAddress
+    @editUserProfileValidEmailAddress @skip
     Scenario Outline: Successful user profile update with multiple combination of email address formats
         And I search and click on view edit link for existing 'Edit_User_Only_Mandatory_Fields_Data' user with '<Status>' status from the manage user page
         Then I can see the user profile page

@@ -13,10 +13,10 @@
     "role_label": "Role",
     "committee_label": "Committee",
     "role_checkbox": [
-      "user",
       "operations",
-      "system administrator",
-      "reviewer"
+      "reviewer",
+      "user",
+      "system administrator"
     ],
     "country_label": "Country",
     "country_checkbox": [
@@ -93,7 +93,7 @@
   },
   "Create_User_Profile": {
     "email_address_prefix": "QAAutomation",
-    "email_address_unique": "QAAutomation20250605211353104hscrd@health.org",
+    "email_address_unique": "QAAutomation20250606142651833hscrd@health.org",
     "Role_Operations": {
       "role_checkbox": [
         "operations"
@@ -177,8 +177,8 @@
       "organisation_text": "QA Automation HRA Role_Reviewer",
       "job_title_text": "Sr.Reviewer Role_Reviewer",
       "role_checkbox": [
-        "system administrator",
-        "reviewer"
+        "reviewer",
+        "system administrator"
       ]
     },
     "Valid_Data_In_All_Mandatory_Fields_Role_Reviewer": {
@@ -206,8 +206,8 @@
       "organisation_text": "QA Automation HRA Role_Operations_Another",
       "job_title_text": "Sr.Reviewer Role_Operations_Another",
       "role_checkbox": [
-        "user",
-        "operations"
+        "operations",
+        "user"
       ],
       "country_checkbox": [
         "England",
@@ -227,8 +227,8 @@
       "organisation_text": "QA Automation HRA Role_Reviewer_Another",
       "job_title_text": "Sr.Reviewer Role_Reviewer_Another",
       "role_checkbox": [
-        "user",
-        "reviewer"
+        "reviewer",
+        "user"
       ]
     },
     "Valid_Data_All_Roles": {
@@ -240,10 +240,10 @@
       "organisation_text": "QA Automation HRA Role_All",
       "job_title_text": "Sr.Reviewer Role_All",
       "role_checkbox": [
-        "user",
         "operations",
-        "system administrator",
-        "reviewer"
+        "reviewer",
+        "user",
+        "system administrator"
       ],
       "country_checkbox": [
         "Wales"
@@ -418,8 +418,8 @@
       "organisation_text": "QA Automation HRA Role_Reviewer",
       "job_title_text": "Sr.Reviewer Role_Reviewer",
       "role_checkbox": [
-        "system administrator",
-        "reviewer"
+        "reviewer",
+        "system administrator"
       ]
     },
     "Missing_Mandatory_Field_Last_Name_Role_Not_Operations": {
@@ -431,8 +431,8 @@
       "organisation_text": "QA Automation HRA Role_Reviewer",
       "job_title_text": "Sr.Reviewer Role_Reviewer",
       "role_checkbox": [
-        "system administrator",
-        "reviewer"
+        "reviewer",
+        "system administrator"
       ]
     },
     "Missing_Mandatory_Field_Email_Address_Role_Not_Operations": {
@@ -444,8 +444,8 @@
       "organisation_text": "QA Automation HRA Role_Reviewer",
       "job_title_text": "Sr.Reviewer Role_Reviewer",
       "role_checkbox": [
-        "system administrator",
-        "reviewer"
+        "reviewer",
+        "system administrator"
       ]
     },
     "Missing_Mandatory_Field_Country_Role_Operations": {

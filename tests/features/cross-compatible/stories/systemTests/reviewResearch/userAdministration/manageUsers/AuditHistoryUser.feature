@@ -20,6 +20,8 @@ Feature: User Administration: Manage Users - View audit history for users
                         | Status_Enabled |
                         | Enabled        |
 
+        #  defect https://nihr.atlassian.net/browse/RSP-3938
+        # fail
         @VerifyAuditHistoryCreateUserAssignRoles
         Scenario Outline: Verify the user can view the audit history with roles assigned after creating a new user
                 And I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
@@ -50,6 +52,8 @@ Feature: User Administration: Manage Users - View audit history for users
                         | Valid_Data_In_All_Fields_Role_Reviewer_Another     | Enabled        |
                         | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Enabled        |
 
+        #  defect https://nihr.atlassian.net/browse/RSP-3938
+        # fail
         @VerifyAuditHistoryUserUnassignRole
         Scenario Outline: Verify the user can view the unassign role event in the audit history
                 And I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
@@ -111,7 +115,7 @@ Feature: User Administration: Manage Users - View audit history for users
                         | Enabled  | Disable_User_Record | Disable_User  |
                         | Disabled | Enable_User_Record  | Enable_User   |
 
-        @VerifyAuditHistoryEditCommonUserFields @fail @duplicateEmailAddress
+        @VerifyAuditHistoryEditCommonUserFields
         Scenario Outline: Verify the user can view the audit history after editing common user profile fields
                 And I select a 'QA Automation' User to View and Edit which is '<Status_Enabled>'
                 And I can see the user profile page
