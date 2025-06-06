@@ -7,6 +7,7 @@ export default class ProjectDetailsTitlePage {
   readonly projectDetailsTitlePageTestData: typeof projectDetailsTitlePageTestData;
   readonly pageHeading: Locator;
   readonly short_project_title_textbox_label: Locator;
+  readonly provide_project_title_textbox_label: Locator;
   readonly short_project_title_text: Locator;
   readonly planned_end_date_textbox_label: Locator;
   readonly planned_end_date_hint_label: Locator;
@@ -29,13 +30,10 @@ export default class ProjectDetailsTitlePage {
     //Locators
     this.pageHeading = this.page.getByTestId('title');
     this.short_project_title_textbox_label = this.page.locator('label[for="IQA0002_Text"]');
+    this.provide_project_title_textbox_label = this.page.locator('#short-project-title-hint p');
     this.short_project_title_text = this.page.getByTestId('IQA0002_Text');
     this.planned_end_date_textbox_label = this.page.locator('label[for="IQA0003_Text"]');
-    this.planned_end_date_hint_label = this.page
-      .locator('label[for="IQA0003_Text"]')
-      .locator('..')
-      .locator('..')
-      .locator('div[id="rule-hint"]');
+    this.planned_end_date_hint_label = this.page.locator('#planned-project-end-date-hint p');
     this.day_textbox_label = this.page.locator('label[for="Questions_1_Day"]');
     this.month_textbox_label = this.page.locator('label[for="Questions_1_Month"]');
     this.year_textbox_label = this.page.locator('label[for="Questions_1_Year"]');

@@ -1,4 +1,4 @@
- @UserAdministration @UserProfiles
+@UserProfiles
 Feature: As an Authenticated User I have to validate permissions,system or project level roles,applicable services and applicable personna group for various user roles
 
     # More Info: Drafted scenarios based on https://lucid.app/lucidspark/ceb048e1-d00a-4f46-9356-54c0933e999d/edit?invitationId=inv_774c8339-0191-48d5-800f-5dafda9765ff&page=0_0#

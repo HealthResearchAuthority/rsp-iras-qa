@@ -38,6 +38,9 @@ export default class ManageUsersPage {
   readonly userListRows: Locator;
   readonly userListCell: Locator;
   readonly statusCell: Locator;
+  readonly no_results_heading: Locator;
+  readonly no_results_guidance_text: Locator;
+  readonly listCell: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -70,26 +73,38 @@ export default class ManageUsersPage {
     this.actions_column_header_label = this.page.locator(
       '[class$="govuk-table-users"] [class^="govuk-table__header"]:nth-child(6)'
     );
-    this.search_box_label = this.page.locator('label[for="SearchUser"]');
-    this.search_box = this.page.getByTestId('SearchUser');
+    this.search_box_label = this.page.locator('label[for="SearchQuery"]');
+    this.search_box = this.page.getByTestId('SearchQuery');
     this.search_button_label = this.page.getByText('Search');
     this.firstNameFromListLabel = this.page.locator('td:nth-child(1)');
     this.next_button = this.page.locator('.govuk-pagination__next a');
     this.userListRows = this.page.locator('tbody').getByRole('row');
     this.userListCell = this.page.getByRole('cell');
-    this.statusCell = this.page.getByRole('cell').locator('strong');
+    this.statusCell = this.page.getByRole('cell');
     this.first_name_from_list_label = this.page.locator('td').nth(0);
     this.last_name_from_list_label = this.page.locator('td').nth(1);
     this.email_address_from_list_label = this.page.locator('td').nth(2);
     this.status_from_list_label = this.page.locator('td').nth(3);
+    this.no_results_heading = this.page
+      .getByRole('heading')
+      .getByText(this.manageUsersPageTestData.Manage_Users_Page.no_results_heading, { exact: true });
+    this.no_results_guidance_text = this.page
+      .getByRole('paragraph')
+      .getByText(this.manageUsersPageTestData.Manage_Users_Page.no_results_guidance_text, {
+        exact: true,
+      });
+    this.listCell = this.page.getByRole('cell');
   }
 
   async assertOnManageUsersPage() {
     await expect(this.page_heading).toBeVisible();
+    expect(await this.page.title()).toBe(this.manageUsersPageTestData.Manage_Users_Page.title);
   }
 
-  async goto(pageSize?: string) {
-    if (typeof pageSize !== 'undefined') {
+  async goto(pageSize?: string, searchQuery?: string) {
+    if (typeof pageSize !== 'undefined' && typeof searchQuery !== 'undefined') {
+      await this.page.goto(`admin/users?SearchQuery=${searchQuery}&PageSize=${pageSize}`);
+    } else if (typeof pageSize !== 'undefined') {
       await this.page.goto(`admin/users?pageSize=${pageSize}`);
     } else {
       await this.page.goto('admin/users');
@@ -140,39 +155,6 @@ export default class ManageUsersPage {
     throw new Error(`No matching record found`);
   }
 
-  async searchAndClickUserProfile(userFirstName: string, userLastName: string, userEmail: string, userStatus: string) {
-    let dataFound = false;
-    while (!dataFound) {
-      const rowCount = await this.users_list_rows.count();
-      for (let i = 0; i < rowCount; i++) {
-        const firstNameText = await this.users_list_rows.nth(i).locator(this.first_name_from_list_label).textContent();
-        const lastNameText = await this.users_list_rows.nth(i).locator(this.last_name_from_list_label).textContent();
-        const emailText = await this.users_list_rows.nth(i).locator(this.email_address_from_list_label).textContent();
-        const statusText = await this.users_list_rows.nth(i).locator(this.status_from_list_label).textContent();
-        if (
-          firstNameText?.trim() === userFirstName &&
-          lastNameText?.trim() === userLastName &&
-          emailText?.trim() === userEmail &&
-          statusText?.trim() === userStatus
-        ) {
-          await this.users_list_rows.nth(i).getByText('View/Edit').click();
-          dataFound = true;
-          break;
-        }
-      }
-
-      if (!dataFound) {
-        const nextButton = this.page.locator('.govuk-pagination__next');
-        if ((await nextButton.count()) > 0) {
-          await nextButton.click();
-          await this.page.getByRole('row').first().waitFor();
-        } else {
-          throw new Error('Reached the last page, data not found.');
-        }
-      }
-    }
-  }
-
   async getRowByUserNameStatus(userName: string, exactMatch: boolean, status: string) {
     const userRows = this.userListRows
       .filter({ has: this.page.locator('td').getByText(`${userName}`, { exact: exactMatch }) })
@@ -180,5 +162,32 @@ export default class ManageUsersPage {
     const noOfRows = await userRows.count();
     const randomIndex = Math.floor(Math.random() * (noOfRows - 1));
     return userRows.nth(randomIndex);
+  }
+
+  async findUserByStatus(searchKey: string, userStatus: string) {
+    let foundRecord = false;
+    let hasNextPage = true;
+    while (hasNextPage && !foundRecord) {
+      const rows = await this.userListRows.all();
+      for (const row of rows) {
+        const columns = await row.locator(this.listCell).allTextContents();
+        if (
+          columns[0].trim().includes(searchKey) ||
+          columns[1].trim().includes(searchKey) ||
+          columns[2].trim().includes(searchKey)
+        ) {
+          if (columns[3].trim() === userStatus) {
+            foundRecord = true;
+            return row;
+          }
+        }
+      }
+      hasNextPage = (await this.next_button.isVisible()) && !(await this.next_button.isDisabled());
+      if (hasNextPage && !foundRecord) {
+        await this.next_button.click();
+        await this.page.waitForLoadState('domcontentloaded');
+      }
+    }
+    throw new Error(`No matching record found`);
   }
 }

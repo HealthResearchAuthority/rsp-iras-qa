@@ -7,6 +7,7 @@ import { confirmStringNotNull } from '../../../../../utils/UtilFunctions';
 export default class ManageReviewBodiesPage {
   readonly page: Page;
   readonly manageReviewBodiesPageData: typeof manageReviewBodiesPageData;
+  private _org_name: string[];
   readonly linkTextData: typeof linkTextData;
   readonly pageHeading: Locator;
   readonly addNewReviewBodyRecordLink: Locator;
@@ -17,12 +18,18 @@ export default class ManageReviewBodiesPage {
   readonly actionsLink: Locator;
   readonly statusCell: Locator;
   readonly orgListRows: Locator;
+  readonly no_results_heading: Locator;
+  readonly no_results_guidance_text: Locator;
+  readonly listRows: Locator;
+  readonly listCell: Locator;
+  readonly next_button: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page;
     this.manageReviewBodiesPageData = manageReviewBodiesPageData;
     this.linkTextData = linkTextData;
+    this._org_name = [];
 
     //Locators
     this.pageHeading = this.page
@@ -41,45 +48,73 @@ export default class ManageReviewBodiesPage {
     this.actionsLink = this.page
       .getByRole('link')
       .getByText(this.manageReviewBodiesPageData.Manage_Review_Body_Page.actions_link, { exact: true });
-    this.statusCell = this.page.getByRole('cell').locator('strong');
+    this.statusCell = this.page.getByRole('cell').nth(2);
     this.orgListRows = this.page.getByRole('table').getByRole('row');
+    this.no_results_heading = this.page
+      .getByRole('heading')
+      .getByText(this.manageReviewBodiesPageData.Manage_Review_Body_Page.no_results_heading, { exact: true });
+    this.no_results_guidance_text = this.page
+      .getByRole('paragraph')
+      .getByText(this.manageReviewBodiesPageData.Manage_Review_Body_Page.no_results_guidance_text, {
+        exact: true,
+      });
+    this.listRows = this.page.locator('tbody').getByRole('row');
+    this.listCell = this.page.getByRole('cell');
+    this.next_button = this.page.locator('.govuk-pagination__next a');
+  }
+
+  //Getters & Setters for Private Variables
+
+  async getOrgName(): Promise<string[]> {
+    return this._org_name;
+  }
+
+  async setOrgName(value: string[]): Promise<void> {
+    this._org_name = value;
   }
 
   //Page Methods
-  async goto() {
-    await this.page.goto('reviewbody/view');
-  }
 
+  async goto(pageSize?: string, searchQuery?: string) {
+    if (typeof pageSize !== 'undefined' && typeof searchQuery !== 'undefined') {
+      await this.page.goto(`reviewbody/view?SearchQuery=${searchQuery}&PageSize=${pageSize}`);
+    } else if (typeof pageSize !== 'undefined') {
+      await this.page.goto(`reviewbody/view?pageSize=${pageSize}`);
+    } else {
+      await this.page.goto('reviewbody/view');
+    }
+    await this.assertOnManageReviewBodiesPage();
+  }
   async assertOnManageReviewBodiesPage() {
     await expect(this.pageHeading).toBeVisible();
     expect(await this.page.title()).toBe(this.manageReviewBodiesPageData.Manage_Review_Body_Page.title);
   }
 
-  async searchAndClickReviewBodyProfile(reviewBodyName: string, reviewBodyStatus: string) {
-    let dataFound = false;
-    while (!dataFound) {
-      const rowCount = await this.review_bodies_list_rows.count();
-      for (let i = rowCount - 1; i > 0; i--) {
-        const organisationNameText = await this.review_bodies_list_rows
-          .nth(i)
-          .locator(this.organisation_name_from_list)
-          .textContent();
-        const organisationStatusText = await this.review_bodies_list_rows
-          .nth(i)
-          .locator(this.status_from_list)
-          .textContent();
-        if (organisationNameText?.trim() === reviewBodyName && organisationStatusText?.trim() === reviewBodyStatus) {
-          await this.review_bodies_list_rows.nth(i).getByText('View/Edit').click();
-          dataFound = true;
-          break;
-        }
-      }
-      // This code need to be updated when pagination enabled in manage review bodies page
-      if (!dataFound) {
-        throw new Error('Review body, Data not found');
-      }
-    }
-  }
+  // async searchAndClickReviewBodyProfile(reviewBodyName: string, reviewBodyStatus: string) {
+  //   let dataFound = false;
+  //   while (!dataFound) {
+  //     const rowCount = await this.review_bodies_list_rows.count();
+  //     for (let i = rowCount - 1; i > 0; i--) {
+  //       const organisationNameText = await this.review_bodies_list_rows
+  //         .nth(i)
+  //         .locator(this.organisation_name_from_list)
+  //         .textContent();
+  //       const organisationStatusText = await this.review_bodies_list_rows
+  //         .nth(i)
+  //         .locator(this.status_from_list)
+  //         .textContent();
+  //       if (organisationNameText?.trim() === reviewBodyName && organisationStatusText?.trim() === reviewBodyStatus) {
+  //         await this.review_bodies_list_rows.nth(i).getByText('View/Edit').click();
+  //         dataFound = true;
+  //         break;
+  //       }
+  //     }
+  //     // This code need to be updated when pagination enabled in manage review bodies page
+  //     if (!dataFound) {
+  //       throw new Error('Review body, Data not found');
+  //     }
+  //   }
+  // }
 
   async getRowByOrgName(orgName: string, exactMatch: boolean) {
     return this.mainPageContent.locator('tr', {
@@ -96,5 +131,72 @@ export default class ManageReviewBodiesPage {
       orgNames.push(orgValue);
     }
     return orgNames;
+  }
+
+  async findReviewBody(reviewBodyName: string, reviewBodyStatus?: string) {
+    let searchRecord: string;
+    let selectedColumns: any[];
+    if (typeof reviewBodyStatus !== 'undefined') {
+      searchRecord = reviewBodyName + '|' + reviewBodyStatus;
+    } else {
+      searchRecord = reviewBodyName;
+    }
+    let foundRecord = false;
+    let hasNextPage = true;
+    while (hasNextPage && !foundRecord) {
+      const rows = await this.listRows.all();
+      for (const row of rows) {
+        const columns = await row.locator(this.listCell).allTextContents();
+        if (typeof reviewBodyStatus !== 'undefined') {
+          selectedColumns = [columns[0], columns[2]];
+        } else {
+          selectedColumns = [columns[0]];
+        }
+        const fullRowData = selectedColumns.map((col) => col.trim()).join('|');
+        if (fullRowData === searchRecord) {
+          foundRecord = true;
+          return row;
+        }
+      }
+      hasNextPage = (await this.next_button.isVisible()) && !(await this.next_button.isDisabled());
+      if (hasNextPage && !foundRecord) {
+        await this.next_button.click();
+        await this.page.waitForLoadState('domcontentloaded');
+      }
+    }
+    throw new Error(`No matching record found`);
+  }
+
+  async findReviewBodyByStatus(reviewBodyName: string, reviewBodyStatus: string) {
+    let foundRecord = false;
+    let hasNextPage = true;
+    while (hasNextPage && !foundRecord) {
+      const rows = await this.listRows.all();
+      for (const row of rows) {
+        const columns = await row.locator(this.listCell).allTextContents();
+        if (columns[0].trim().includes(reviewBodyName) && columns[2].trim() === reviewBodyStatus) {
+          foundRecord = true;
+          return row;
+        }
+      }
+      hasNextPage = (await this.next_button.isVisible()) && !(await this.next_button.isDisabled());
+      if (hasNextPage && !foundRecord) {
+        await this.next_button.click();
+        await this.page.waitForLoadState('domcontentloaded');
+      }
+    }
+    throw new Error(`No matching record found`);
+  }
+
+  async getSearchQueryOrgName(position: string) {
+    let searchKey: string = '';
+    const orgNameValues: any = await this.getOrgName();
+    const rowCount = orgNameValues.length;
+    if (position.toLowerCase() == 'first') {
+      searchKey = orgNameValues[0];
+    } else if (position.toLowerCase() == 'last') {
+      searchKey = orgNameValues[rowCount - 1];
+    }
+    return searchKey;
   }
 }

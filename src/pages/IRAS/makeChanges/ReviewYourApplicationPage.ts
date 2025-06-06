@@ -13,7 +13,7 @@ export default class ReviewYourApplicationPage {
     this.reviewYourApplicationPageTestData = reviewYourApplicationPageTestData;
 
     //Locators
-    this.pageHeading = this.page.getByTestId('title');
+    this.pageHeading = this.page.getByRole('heading', { level: 1 });
   }
 
   //Page Methods

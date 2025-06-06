@@ -1,5 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as userListReviewBodyPageTestData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageReviewBodies/user_list_review_body_page_data.json';
+import { confirmStringNotNull } from '../../../../../utils/UtilFunctions';
 
 //Declare Page Objects
 export default class UserListReviewBodyPage {
@@ -226,23 +227,22 @@ export default class UserListReviewBodyPage {
     }
     return searchKey;
   }
-  async getSearchQueryFullName(position: string, fieldKey: string) {
+
+  async getSearchQueryFullName(position: string) {
     let searchKey: string = '';
     let firstNameValue: string = '';
     let lastNameValue: string = '';
-    if (fieldKey === 'Full_Name') {
-      const firstNameValues: any = await this.getUserFirstName();
-      const lastNameValues: any = await this.getUserLastName();
-      const rowCount = lastNameValues.length;
-      if (position.toLowerCase() == 'first') {
-        searchKey = firstNameValues[0] + ' ' + lastNameValues[0];
-        firstNameValue = firstNameValues[0];
-        lastNameValue = lastNameValues[0];
-      } else if (position.toLowerCase() == 'last') {
-        searchKey = firstNameValues[rowCount - 1] + ' ' + lastNameValues[rowCount - 1];
-        firstNameValue = firstNameValues[rowCount - 1];
-        lastNameValue = lastNameValues[rowCount - 1];
-      }
+    const firstNameValues: any = await this.getUserFirstName();
+    const lastNameValues: any = await this.getUserLastName();
+    const rowCount = lastNameValues.length;
+    if (position.toLowerCase() == 'first') {
+      searchKey = firstNameValues[0] + ' ' + lastNameValues[0];
+      firstNameValue = firstNameValues[0];
+      lastNameValue = lastNameValues[0];
+    } else if (position.toLowerCase() == 'last') {
+      searchKey = firstNameValues[rowCount - 1] + ' ' + lastNameValues[rowCount - 1];
+      firstNameValue = firstNameValues[rowCount - 1];
+      lastNameValue = lastNameValues[rowCount - 1];
     }
     const fullNameMap = new Map([
       ['firstName', firstNameValue],
@@ -250,5 +250,11 @@ export default class UserListReviewBodyPage {
     ]);
     await this.setFullName(fullNameMap);
     return searchKey;
+  }
+  async updateUserInfo() {
+    await this.setFirstName(confirmStringNotNull(await this.first_name_value_first_row.textContent()));
+    await this.setLastName(confirmStringNotNull(await this.last_name_value_first_row.textContent()));
+    await this.setEmail(confirmStringNotNull(await this.email_address_value_first_row.textContent()));
+    await this.setStatus(confirmStringNotNull(await this.status_value_first_row.textContent()));
   }
 }

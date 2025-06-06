@@ -2,7 +2,7 @@
   "Audit_History_User_Page": {
     "page_heading": "Audit history:",
     "next_button": "Next   page",
-    "system_admin_email_text": "futureiras.automation@hra.nhs.uk",
+    "system_admin_email_text": "FutureIRAS.SysAdmin@hra.nhs.uk",
     "Column_Header_Labels": {
       "date_header_label": " Date",
       "event_description_label": "Event description",

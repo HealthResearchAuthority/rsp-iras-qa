@@ -1,4 +1,4 @@
-@UserAdministration @UserProfiles
+@UserProfiles
 Feature: As an Authenticated Admin User I have to validate different user profiles and their attributes
 
     # More Info: Drafted scenarios based on https://lucid.app/lucidspark/ceb048e1-d00a-4f46-9356-54c0933e999d/edit?invitationId=inv_774c8339-0191-48d5-800f-5dafda9765ff&page=0_0#

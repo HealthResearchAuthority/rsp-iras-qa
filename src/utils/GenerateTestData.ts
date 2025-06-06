@@ -698,9 +698,42 @@ export async function removeGeneratedTestdatafilesinTeardown(resultsFolder: stri
   }
 }
 
-export function generateRandomNumber(minLength: number = 4, maxLength: number = 7): string {
+function generateRandomNumber(minLength, maxLength): string {
   const min = Math.pow(10, minLength - 1);
   const max = Math.pow(10, maxLength) - 1;
   const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
   return randomNumber.toString();
+}
+
+/**
+ * Generates random number with a digit lenght between 4 and 7 (inclusive)
+ * @returns A string representing a random number with 4 and 7 digits
+ */
+export function generateRandomValidIrasId(): string {
+  return generateRandomNumber(4, 7);
+}
+
+export function generateIrasId(irasIdType: string): string {
+  let irasId: string;
+  switch (irasIdType) {
+    case 'Valid_IRAS_ID_Max':
+      //Generates valid random IRAS ID with a digit lenght 7
+      irasId = generateRandomNumber(7, 7);
+      break;
+    case 'Valid_IRAS_ID_Min':
+      //Generates valid random IRAS ID with a digit lenght 4
+      irasId = generateRandomNumber(4, 4);
+      break;
+    case 'Invalid_IRAS_ID_Min_Length':
+      //Generates invalid random IRAS ID with a digit lenght 8
+      irasId = generateRandomNumber(8, 8);
+      break;
+    case 'Invalid_IRAS_ID_Max_Length':
+      //Generates invalid random IRAS ID with a digit lenght 3
+      irasId = generateRandomNumber(3, 3);
+      break;
+    default:
+      throw new Error(`Unknown IRAS ID Type: ${irasIdType}`);
+  }
+  return irasId;
 }

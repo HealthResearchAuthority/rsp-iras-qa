@@ -3,7 +3,7 @@
     "selected_tab_top": "Manage review bodies",
     "back_button": "Back",
     "heading": "Manage review bodies",
-    "title": "View review bodies",
+    "title": "View review bodies - Plan and manage healthcare research",
     "Add_New_Review_Body_Record_link": "Add a new review body record",
     "organisation_name_column_header": "Organisation name",
     "country_column_header": "Country",
@@ -12,8 +12,22 @@
     "find_review_body_title": "Find a review body",
     "search_button": "Search",
     "search_box": "",
-    "enabled_status": "ACTIVE",
-    "disabled_status": "DISABLED",
-    "actions_link": "View/Edit"
+    "enabled_status": "Active",
+    "disabled_status": "Disabled",
+    "actions_link": "View/Edit",
+    "no_results_heading": "No results found",
+    "no_results_guidance_text": "Check your spelling or enter another search term and try again. If no results are found, you can create a new review body record.",
+    "enlarged_page_size": "100"
+  },
+  "Search_For_Review_Bodies": {
+    "Search_Queries": {
+      "Non_Existant_Data": { "search_input_text": "ThisShouldNot ReturnAResult" },
+      "Leading_White_Space_Data": { "search_input_text": " QA Automation" },
+      "Leading_And_Trailing_White_Space_Data": { "search_input_text": " QA Automation " },
+      "Trailing_White_Space_Data": { "search_input_text": "QA Automation " },
+      "Existing_QA_Data_One": { "search_input_text": "QA Automation" },
+      "Existing_QA_Data_Two": { "search_input_text": "QA Automation Test" },
+      "Existing_QA_Data_Three": { "search_input_text": "ZZ Top" }
+    }
   }
 }

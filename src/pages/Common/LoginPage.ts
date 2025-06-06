@@ -1,6 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as loginPageTestData from '../../resources/test_data/common/login_page_data.json';
-import { getDecryptedValue } from '../../utils/UtilFunctions';
+import { getDecryptedValue, resolveEnvExpression } from '../../utils/UtilFunctions';
 
 //Declare Page Objects
 export default class LoginPage {
@@ -37,7 +37,29 @@ export default class LoginPage {
   //passwords to be set in AzureDevops Pipeline, add encrypted values to .env when running locally
   async loginWithUserCreds(dataset: string) {
     const username = this.loginPageTestData[dataset].username;
-    const password = getDecryptedValue(eval(this.loginPageTestData[dataset].password));
+    let secretKey: any;
+    let authTag: any;
+    if (dataset === 'System_Admin') {
+      secretKey = process.env.SYSTEM_ADMIN_SECRET_KEY;
+      authTag = process.env.SYSTEM_ADMIN_AUTH_TAG;
+    } else if (dataset === 'Frontstage_User') {
+      secretKey = process.env.FRONTSTAGE_USER_SECRET_KEY;
+      authTag = process.env.FRONTSTAGE_USER_AUTH_TAG;
+    } else if (dataset === 'Backstage_User') {
+      secretKey = process.env.BACKSTAGE_USER_SECRET_KEY;
+      authTag = process.env.BACKSTAGE_USER_AUTH_TAG;
+    } else if (dataset === 'Admin_User') {
+      secretKey = process.env.ADMIN_USER_SECRET_KEY;
+      authTag = process.env.ADMIN_USER_AUTH_TAG;
+    } else if (dataset === 'Non_Admin_User') {
+      secretKey = process.env.NON_ADMIN_USER_SECRET_KEY;
+      authTag = process.env.NON_ADMIN_USER_AUTH_TAG;
+    }
+    const password = getDecryptedValue(
+      resolveEnvExpression(this.loginPageTestData[dataset].password),
+      secretKey,
+      authTag
+    );
     await this.usernameInput.fill(username);
     await this.btnNext.click();
     await this.passwordInput.fill(password);

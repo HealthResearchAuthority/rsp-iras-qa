@@ -1,4 +1,4 @@
-@UserAdministration @testdata
+@testdata
 Feature: Generate test data for field validation of user attributes across user persona
 
     @rsp-2087

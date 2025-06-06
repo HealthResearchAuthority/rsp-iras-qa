@@ -4,6 +4,7 @@
   },
   "Label_Texts": {
     "short_project_title_textbox_label": "Short project title",
+    "provide_project_title_textbox_label": "Provide project title between 3 and 100 characters",
     "planned_end_date_textbox_label": "Planned project end date",
     "planned_end_date_hint_label": "For example, 19 06 2025",
     "day_textbox_label": "Day",

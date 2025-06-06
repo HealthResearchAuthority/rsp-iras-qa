@@ -89,7 +89,6 @@ Then(
       ]['search_input_text'];
     const allResultRow = await searchAddUserReviewBodyPage.search_result_table_row.all();
     switch (searchQueryName) {
-      //try with toContainText
       case 'Existing_QA_User_First_Name':
         for (const element of allResultRow) {
           const firstNameTableCell = element.locator(searchAddUserReviewBodyPage.search_result_table_first_name);

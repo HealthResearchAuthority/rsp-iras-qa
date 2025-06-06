@@ -16,6 +16,8 @@ import BookingPage from '../IRAS/questionSet/BookingPage';
 import ChildrenPage from '../IRAS/questionSet/ChildrenPage';
 import { PageObjectDataName } from '../../utils/CustomTypes';
 import { confirmStringNotNull, removeUnwantedWhitespace } from '../../utils/UtilFunctions';
+import UserListReviewBodyPage from '../IRAS/reviewResearch/userAdministration/manageReviewBodies/UserListReviewBodyPage';
+import ManageReviewBodiesPage from '../IRAS/reviewResearch/userAdministration/manageReviewBodies/ManageReviewBodiesPage';
 
 //Declare Page Objects
 export default class CommonItemsPage {
@@ -59,6 +61,13 @@ export default class CommonItemsPage {
   readonly fieldGroup: Locator;
   readonly errorFieldGroup: Locator;
   readonly search_text: Locator;
+  readonly pagination: Locator;
+  readonly firstPage: Locator;
+  readonly previous_button: Locator;
+  readonly currentPage: Locator;
+  readonly pagination_results: Locator;
+  readonly pagination_items: Locator;
+  readonly pageLinks: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -99,7 +108,7 @@ export default class CommonItemsPage {
     this.bannerSystemAdmin = this.bannerNavBar.getByText(this.linkTextData.Banner.System_Admin, { exact: true });
     this.bannerMyApplications = this.bannerNavBar.getByText(this.linkTextData.Banner.My_Applications, { exact: true });
     this.next_button = this.page.getByRole('link').getByText(this.commonTestData.next_button, { exact: true });
-    this.errorMessageFieldLabel = page
+    this.errorMessageFieldLabel = this.page
       .locator('.field-validation-error')
       .or(this.page.locator('.govuk-error-message'))
       .first();
@@ -110,6 +119,18 @@ export default class CommonItemsPage {
       });
     this.summaryErrorLinks = this.errorMessageSummaryLabel.locator('..').getByRole('listitem').getByRole('link');
     this.topMenuBarLinks = this.page.getByTestId('navigation').getByRole('listitem').getByRole('link');
+    this.pagination = page.getByRole('navigation', { name: 'Pagination' });
+    this.firstPage = this.pagination.getByRole('link', { name: this.commonTestData.first_page, exact: true });
+    this.previous_button = this.pagination
+      .getByRole('link')
+      .getByText(this.commonTestData.previous_button, { exact: true });
+    this.currentPage = this.pagination.locator('a[class$="current"]');
+    this.pagination_results = this.page
+      .getByRole('navigation', { name: 'Pagination' })
+      .locator('..')
+      .getByRole('paragraph');
+    this.pagination_items = this.pagination.getByRole('listitem');
+    this.pageLinks = this.pagination.locator('a[aria-label^="Page"]');
     //Validation Alert Box
     this.alert_box = this.page.getByRole('alert');
     this.alert_box_headings = this.alert_box.getByRole('heading');
@@ -119,10 +140,26 @@ export default class CommonItemsPage {
 
   //Page Methods
   async storeAuthState(user: string) {
+    const authSysAdminUserFile = 'auth-storage-states/sysAdminUser.json';
+    const authFrontStageUserFile = 'auth-storage-states/frontStageUser.json';
+    const authBackStageUserFile = 'auth-storage-states/backStageUser.json';
     const authAdminUserFile = 'auth-storage-states/adminUser.json';
+    const authNonAdminUserFile = 'auth-storage-states/nonAdminUser.json';
     switch (user.toLowerCase()) {
+      case 'system_admin':
+        await this.page.context().storageState({ path: authSysAdminUserFile });
+        break;
+      case 'frontstage_user':
+        await this.page.context().storageState({ path: authFrontStageUserFile });
+        break;
+      case 'backstage_user':
+        await this.page.context().storageState({ path: authBackStageUserFile });
+        break;
       case 'admin_user':
         await this.page.context().storageState({ path: authAdminUserFile });
+        break;
+      case 'non_admin_user':
+        await this.page.context().storageState({ path: authNonAdminUserFile });
         break;
       default:
         throw new Error(`${user} is not a valid option`);
@@ -462,14 +499,44 @@ export default class CommonItemsPage {
   }
 
   async getFieldErrorMessages<PageObject>(key: string, page: PageObject) {
+    let fieldErrorMessage: any;
     const element = await page[key].first();
-    const fieldErrorLocator = this.errorFieldGroup.filter({ has: element }).locator(this.errorMessageFieldLabel);
-    return await fieldErrorLocator.textContent();
+    const typeAttribute = await element.getAttribute('type');
+    if (typeAttribute === 'checkbox') {
+      key = key.replace('checkbox', 'label');
+      fieldErrorMessage = await this.errorFieldGroup
+        .filter({ has: page[key] })
+        .locator(this.errorMessageFieldLabel)
+        .textContent();
+    } else {
+      fieldErrorMessage = await this.errorFieldGroup
+        .filter({ has: element })
+        .locator(this.errorMessageFieldLabel)
+        .textContent();
+    }
+    return fieldErrorMessage;
+  }
+
+  async getMultipleFieldErrorMessages<PageObject>(key: string, page: PageObject) {
+    const element = await page[key];
+    const errorSpan = this.errorFieldGroup.filter({ has: element }).locator(this.errorMessageFieldLabel);
+    const htmlContent = await errorSpan.innerHTML();
+    const fieldErrorMessages = htmlContent.split('<br>').map(confirmStringNotNull);
+    return fieldErrorMessages;
   }
 
   async clickErrorSummaryLink<PageObject>(errorMessageFieldDataset: JSON, key: string, page: PageObject) {
     const element: Locator = await page[key].first();
-    await this.summaryErrorLinks.filter({ hasText: errorMessageFieldDataset[key] }).click();
+    await this.summaryErrorLinks
+      .locator('..')
+      .getByRole('link', { name: errorMessageFieldDataset[key], exact: true })
+      .click();
+    return element;
+  }
+
+  async clickErrorSummaryLinkMultipleErrorField<PageObject>(errorMessage: any, key: string, page: PageObject) {
+    const element: Locator = await page[key].first();
+    await this.summaryErrorLinks.locator('..').getByRole('link', { name: errorMessage, exact: true }).click();
     return element;
   }
 
@@ -527,6 +594,29 @@ export default class CommonItemsPage {
     const searchResultMap = new Map([['searchResultValues', searchResultValues]]);
     return searchResultMap;
   }
+
+  async getAllOrgNamesFromTheTable(): Promise<Map<string, string[]>> {
+    const searchResultValues: string[] = [];
+    await this.page.waitForLoadState('domcontentloaded');
+    await this.page.waitForTimeout(3000);
+    let dataFound = false;
+    while (!dataFound) {
+      const rowCount = await this.tableRows.count();
+      for (let i = 1; i < rowCount; i++) {
+        const columns = this.tableRows.nth(i).getByRole('cell');
+        const orgName = confirmStringNotNull(await columns.nth(0).textContent());
+        searchResultValues.push(orgName);
+      }
+      if ((await this.next_button.isVisible()) && !(await this.next_button.isDisabled())) {
+        await this.next_button.click();
+        await this.page.waitForLoadState('domcontentloaded');
+      } else {
+        dataFound = true;
+      }
+    }
+    const searchResultMap = new Map([['searchResultValues', searchResultValues]]);
+    return searchResultMap;
+  }
   async validateSearchResults(userListAfterSearch: any, searchKey: string) {
     for (const val of userListAfterSearch) {
       if (val.includes(searchKey)) {
@@ -535,6 +625,30 @@ export default class CommonItemsPage {
     }
     return false;
   }
+  async validateSearchResultsFullName(
+    userListAfterSearch: any,
+    firstName: string,
+    lastName: string,
+    searchKey: string
+  ) {
+    for (const val of userListAfterSearch) {
+      if (
+        val.toLowerCase().includes(firstName.toLowerCase()) ||
+        val.toLowerCase().includes(lastName.toLowerCase()) ||
+        val.toLowerCase().includes(searchKey.toLowerCase())
+      ) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  async validateSearchResultsMultipleWordsSearchKey(results: string[], searchTerms: string[]) {
+    const matchesSearchTerm = (text: string) =>
+      searchTerms.some((term) => text.toLowerCase().includes(term.toLowerCase()));
+    const resultsAfterFiltering = results.filter(matchesSearchTerm);
+    return resultsAfterFiltering;
+  }
 
   async getTopMenuBarLinksNames() {
     const topMenuBarLinksValues: string[] = [];
@@ -542,5 +656,233 @@ export default class CommonItemsPage {
       topMenuBarLinksValues.push(confirmStringNotNull(val));
     }
     return topMenuBarLinksValues;
+  }
+
+  async getPaginationResults() {
+    const paginationResultsActualValues = confirmStringNotNull(await this.pagination_results.textContent());
+    return paginationResultsActualValues;
+  }
+
+  async getPageNumber(currentUrl: string) {
+    const parts: string[] = currentUrl.split('?');
+    const pageName: string[] = parts[1].split('&');
+    const pageNumber = parseInt(pageName[0].split('=')[1], 10);
+    return pageNumber;
+  }
+
+  async getTotalItems() {
+    const paginationResults = await this.getPaginationResults();
+    const paginationResultsParts: string[] = paginationResults.split(' results');
+    const paginationResultsPartsOne: string[] = paginationResultsParts[0].split('Showing ');
+    const paginationResultsPartsTwo: string[] = paginationResultsPartsOne[1].split(' of ');
+    const totalItems = parseInt(paginationResultsPartsTwo[1], 10);
+    return totalItems;
+  }
+  async getItemsPerPage() {
+    const rowCount = await this.tableRows.count();
+    return rowCount;
+  }
+
+  async clickOnNavigationButton(button: Locator) {
+    const isButtonVisible = await button.isVisible();
+    if (isButtonVisible) {
+      await button.click();
+      await this.page.waitForLoadState('domcontentloaded');
+    }
+  }
+
+  async clickOnNextLink() {
+    await this.clickOnNavigationButton(this.next_button);
+  }
+
+  async clickOnPreviousLink() {
+    await this.clickOnNavigationButton(this.previous_button);
+  }
+
+  async getLocatorforNextPreviousLinks(linkLabel: string) {
+    let locatorVal: Locator;
+    if (linkLabel === 'Next') {
+      locatorVal = this.next_button;
+    } else if (linkLabel === 'Previous') {
+      locatorVal = this.previous_button;
+    } else {
+      throw new Error(`Unsupported link label: ${linkLabel}`);
+    }
+    return locatorVal;
+  }
+
+  async getPaginationValues() {
+    const items = await this.pagination_items.allTextContents();
+    const ellipsisIndices: number[] = [];
+    const allVisibleItems: any[] = [];
+    for (let i = 0; i < items.length; i++) {
+      const text = items[i].trim();
+      allVisibleItems.push(text);
+      if (text === '⋯') {
+        ellipsisIndices.push(i);
+      }
+    }
+    const itemsMap = new Map([
+      ['ellipsisIndices', ellipsisIndices],
+      ['allVisibleItems', allVisibleItems],
+      ['items', items],
+    ]);
+    return itemsMap;
+  }
+
+  async getVisiblePages(itemsValues: any[]) {
+    const visiblePages = itemsValues
+      .map((text) => text.trim())
+      .filter((text) => /^\d+$/.test(text))
+      .map(Number);
+    const visiblePagesMap = new Map([['visiblePages', visiblePages]]);
+    return visiblePagesMap;
+  }
+  async getStartEndPages(i: number, pageSize: number, totalItems: number) {
+    const start = (i - 1) * pageSize + 1;
+    const end = Math.min(i * pageSize, totalItems);
+    const startEndPagesMap = new Map([
+      ['start', start],
+      ['end', end],
+    ]);
+    return startEndPagesMap;
+  }
+
+  async clickOnPages(currentPageNumber: number, navigateMethod: string) {
+    const currentPageLink = this.pagination.getByRole('link', { name: `Page ${currentPageNumber}`, exact: true });
+    if (navigateMethod === 'clicking on page number') {
+      if (await currentPageLink.isVisible()) {
+        await currentPageLink.click();
+        await this.page.waitForLoadState('networkidle');
+      }
+    }
+    return currentPageLink;
+  }
+
+  async getTotalPages(): Promise<number> {
+    const count = await this.pageLinks.count();
+    let maxPage = 1;
+    for (let i = 0; i < count; i++) {
+      const label = await this.pageLinks.nth(i).getAttribute('aria-label');
+      const match = label?.match(/^Page (\d+)$/);
+      if (match) {
+        const num = parseInt(match[1], 10);
+        if (num > maxPage) maxPage = num;
+      }
+    }
+    return maxPage;
+  }
+
+  async getReviewBodyListByPosition(position: string) {
+    let orgList: any;
+    if (position.toLowerCase() == 'first') {
+      orgList = await this.getReviewBodiesByPage();
+    } else if (position.toLowerCase() == 'last') {
+      const totalPages = await this.getTotalPages();
+      await this.clickOnPages(totalPages, 'clicking on page number');
+      orgList = await this.getReviewBodiesByPage();
+    }
+    return orgList;
+  }
+
+  async getUserListByPosition(position: string) {
+    let userList: any;
+    if (position.toLowerCase() == 'first') {
+      userList = await this.getUsersByPage();
+    } else if (position.toLowerCase() == 'last') {
+      const totalPages = await this.getTotalPages();
+      await this.clickOnPages(totalPages, 'clicking on page number');
+      userList = await this.getUsersByPage();
+    }
+    return userList;
+  }
+  async getSearchQueryFNameLNameEmailByPosition(
+    position: string,
+    fieldKey: string,
+    userListReviewBodyPage: UserListReviewBodyPage
+  ) {
+    let searchValues: any;
+    const userList = await this.getUserListByPosition(position);
+    if (fieldKey === 'Email_Address') {
+      searchValues = userList.get('emailAddressValues');
+    } else if (fieldKey === 'First_Name') {
+      searchValues = userList.get('firstNameValues');
+      await userListReviewBodyPage.setUserFirstName(searchValues);
+    } else if (fieldKey === 'Last_Name') {
+      searchValues = userList.get('lastNameValues');
+      await userListReviewBodyPage.setUserLastName(searchValues);
+    }
+    return searchValues[0];
+  }
+
+  async getUsersByPage(): Promise<Map<string, string[]>> {
+    const firstNameValues: string[] = [];
+    const lastNameValues: string[] = [];
+    const emailAddressValues: string[] = [];
+    for (let i = 1; i < 2; i++) {
+      const columns = this.tableRows.nth(i).getByRole('cell');
+      const firstName = confirmStringNotNull(await columns.nth(0).textContent());
+      firstNameValues.push(firstName);
+      const lastName = confirmStringNotNull(await columns.nth(1).textContent());
+      lastNameValues.push(lastName);
+      const emailAddress = confirmStringNotNull(await columns.nth(2).textContent());
+      emailAddressValues.push(emailAddress);
+    }
+    const userMap = new Map([
+      ['firstNameValues', firstNameValues],
+      ['lastNameValues', lastNameValues],
+      ['emailAddressValues', emailAddressValues],
+    ]);
+    return userMap;
+  }
+
+  async getReviewBodiesByPage(): Promise<Map<string, string[]>> {
+    const orgNameValues: string[] = [];
+    for (let i = 1; i < 2; i++) {
+      const columns = this.tableRows.nth(i).getByRole('cell');
+      const orgName = confirmStringNotNull(await columns.nth(0).textContent());
+      orgNameValues.push(orgName);
+    }
+    const reviewBodyMap = new Map([['orgNameValues', orgNameValues]]);
+    return reviewBodyMap;
+  }
+
+  async setSearchQueryFullNameByPosition(
+    position: string,
+    fieldKey: string,
+    userListReviewBodyPage: UserListReviewBodyPage
+  ) {
+    const userList = await this.getUserListByPosition(position);
+    if (fieldKey === 'Full_Name') {
+      await userListReviewBodyPage.setUserFirstName(userList.get('firstNameValues'));
+      await userListReviewBodyPage.setUserLastName(userList.get('lastNameValues'));
+    }
+  }
+
+  async setSearchQueryReviewBodyByPosition(
+    position: string,
+    fieldKey: string,
+    manageReviewBodiesPage: ManageReviewBodiesPage
+  ) {
+    const orgList = await this.getReviewBodyListByPosition(position);
+    if (fieldKey === 'Organisation_Name') {
+      await manageReviewBodiesPage.setOrgName(orgList.get('orgNameValues'));
+    }
+  }
+
+  async splitSearchTerm(term: string) {
+    return term.trim().split(/\s+/);
+  }
+
+  async filterResults(results: string[], searchTerms: string[]) {
+    return results.filter((result) => searchTerms.some((term) => result.toLowerCase().includes(term.toLowerCase())));
+  }
+
+  async getFilteredSearchResultsBeforeSearch(userListReviewBodyPage: UserListReviewBodyPage) {
+    const userValues = await userListReviewBodyPage.getUserListBeforeSearch();
+    const searchKey = await userListReviewBodyPage.getSearchKey();
+    const searchTerms = await this.splitSearchTerm(searchKey);
+    const filteredSearchResults = await this.filterResults(userValues, searchTerms);
+    return filteredSearchResults;
   }
 }
