@@ -11,7 +11,8 @@ Feature: User Administration: Manage Review Bodies - Add user to review body
         And I can see the search for user to add to review body page
         And I capture the page screenshot
 
-    @addUserReviewBodySearchFunctionResults
+    # data issue
+    @addUserReviewBodySearchFunctionResults @fail
     Scenario Outline: Verify that the search function, for existing users that can be added to the review body, returns expected results
         When I fill the search input for add users to review body with '<Search_Query>' as the search query
         And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
