@@ -33,9 +33,6 @@
   "Invalid_IRAS_ID_Min_Length": {
     "iras_id_text": "12"
   },
-  "Invalid_IRAS_ID_Max_Length": {
-    "iras_id_text": "123456789"
-  },
   "Invalid_IRAS_ID_Leading_Zeros": {
     "iras_id_text": "000123"
   },

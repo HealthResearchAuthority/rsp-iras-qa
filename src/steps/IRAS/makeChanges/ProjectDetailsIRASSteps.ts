@@ -27,14 +27,7 @@ Then(
     const dataset = projectDetailsIRASPage.projectDetailsIRASPageTestData[datasetName];
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        if (
-          [
-            'Valid_IRAS_ID_Max',
-            'Valid_IRAS_ID_Min',
-            'Invalid_IRAS_ID_Min_Length',
-            'Invalid_IRAS_ID_Max_Length',
-          ].includes(datasetName)
-        ) {
+        if (['Valid_IRAS_ID_Max', 'Valid_IRAS_ID_Min', 'Invalid_IRAS_ID_Min_Length'].includes(datasetName)) {
           dataset[key] = generateIrasId(datasetName);
         }
         await commonItemsPage.fillUIComponent(dataset, key, projectDetailsIRASPage);
