@@ -29,6 +29,7 @@ BeforeScenario(
     });
     if (!authStateIsValid) {
       console.info('Current auth states have expired!\nReauthenticating test users before continuing test execution');
+      await commonItemsPage.page.context().clearCookies();
       const jsBrowser = await chromium.launch();
       const jsContext = await jsBrowser.newContext({ javaScriptEnabled: true });
       const jsPage = await jsContext.newPage();
@@ -38,15 +39,16 @@ BeforeScenario(
       const users = ['System_Admin', 'Frontstage_User', 'Backstage_User', 'Admin_User', 'Non_Admin_User'];
       for (const user of users) {
         // await jsCommonItemsPage.page.context().clearCookies();
+        await jsContext.clearCookies(); // or jsPage.context().clearCookies()
         await jsHomePage.goto();
         await jsHomePage.loginBtn.click();
         await jsLoginPage.assertOnLoginPage();
         await jsLoginPage.loginWithUserCreds(user);
         await jsHomePage.assertOnHomePage();
         await jsCommonItemsPage.storeAuthState(user);
-        await jsContext.close();
-        await jsBrowser.close();
       }
+      await jsContext.close();
+      await jsBrowser.close();
       let newCookiesCurrentUser: any;
       if ($tags.includes('@SysAdminUser')) {
         const reauthenticatedState = JSON.parse(readFileSync(getAuthState('system_admin')).toString());

@@ -165,28 +165,22 @@
     "access_required_checkbox": ["Research Ethics Committee"]
   },
   "User_First_Name_Text_One": {
-    "first_name_text": "First Name Updated",
-    "access_required_checkbox": ["Research Ethics Committee"]
+    "first_name_text": "First Name Updated"
   },
   "User_Last_Name_Text_One": {
-    "last_name_text": "Last name updated",
-    "access_required_checkbox": ["Research Ethics Committee"]
+    "last_name_text": "Last name updated"
   },
   "User_Email_Address_Text_One": {
-    "email_address_text": "QAAutomation98342jksdfbrohsbrddfsssdjs_updated@test1.com",
-    "access_required_checkbox": ["Research Ethics Committee"]
+    "email_address_text": "QAAutomation98342jksdfbrohsbrddfsssdjs_updated@test1.com"
   },
   "User_Telephone_Text_One": {
-    "telephone_text": "07999999999",
-    "access_required_checkbox": ["Research Ethics Committee"]
+    "telephone_text": "07999999999"
   },
   "User_Organisation_Text_One": {
-    "organisation_text": "Automation HRA",
-    "access_required_checkbox": ["Research Ethics Committee"]
+    "organisation_text": "Automation HRA"
   },
   "User_Job_Title_Text_One": {
-    "job_title_text": "Sr.Reviewer updated",
-    "access_required_checkbox": ["Research Ethics Committee"]
+    "job_title_text": "Sr.Reviewer updated"
   },
   "User_Role_Checkbox_One": {
     "role_checkbox": ["operations"],
@@ -200,8 +194,7 @@
     "access_required_checkbox": ["Research Ethics Committee"]
   },
   "User_Title_Update": {
-    "title_text": "Master",
-    "access_required_checkbox": ["Research Ethics Committee"]
+    "title_text": "Master"
   },
   "Original_Title_Text_One": {
     "title_text": "Mr",

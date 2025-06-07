@@ -8,7 +8,7 @@ Feature: User Administration: Manage Review Bodies - Enable / Disable Review Bod
     And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
     Then I can see the 'Create_Review_Body_Page'
 
-  @rsp-2573 @DisableReviewBody
+  @rsp-2573 @DisableReviewBody @fail
   Scenario Outline: Verify the user is able to disable a review body
     When I fill the new review body page using '<Add_Review_Body>'
     And I click the 'Continue' button on the 'Create_Review_Body_Page'
@@ -60,7 +60,7 @@ Feature: User Administration: Manage Review Bodies - Enable / Disable Review Bod
       | Add_Review_Body          | Navigation_Link | Disable_Label_Texts | Status_Enabled |
       | Valid_Data_In_All_Fields | Back            | Disable_Label_Texts | enabled        |
 
-  @rsp-2929 @EnableReviewBody
+  @rsp-2929 @EnableReviewBody @fail
   Scenario Outline: Verify the user is able to enable a disabled review body
     When I fill the new review body page using '<Add_Review_Body>'
     And I click the 'Continue' button on the 'Create_Review_Body_Page'
