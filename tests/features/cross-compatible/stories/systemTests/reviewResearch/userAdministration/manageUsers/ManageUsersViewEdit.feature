@@ -276,7 +276,7 @@ Feature: User Administration: Manage user profiles, view and edit user profile
         Then I sequentially navigate through each page by 'clicking on page number' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
         And I capture the page screenshot
 
-    @rsp-3456 @ManageUsersSearchResultsFound
+    @rsp-3456 @ManageUsersSearchResultsFound @Smoke
     Scenario Outline: Verify search results in manage users page when user search by first value of first name, last name, full name and email address
         When I enter the '<Field_Name>' of the '<Position>' item in the list, into the search field
         And I capture the page screenshot
@@ -291,7 +291,7 @@ Feature: User Administration: Manage user profiles, view and edit user profile
             | Email_Address | First    |
             | Full_Name     | First    |
 
-    @rsp-3456 @ManageUsersSearchResultsFound
+    @rsp-3456 @ManageUsersSearchResultsFound @Smoke
     Scenario Outline: Verify search results in manage users page when user search by last value of first name, last name and email address
         When I enter the '<Field_Name>' of the '<Position>' item in the list, into the search field
         And I capture the page screenshot
