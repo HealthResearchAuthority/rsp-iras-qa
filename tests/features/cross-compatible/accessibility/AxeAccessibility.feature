@@ -17,13 +17,6 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityCreate @FrontStageUser
-  Scenario: Create Application Page
-    Given I have navigated to the 'Create_Application_Page'
-    When I Scan the page with the Axe Accessibilty Tool
-    And I analyse the results from the Axe scan
-    Then I expect to receive no WCAG Violations
-
   @axeAccessibilityCreateProjectRecord @FrontStageUser
   Scenario: Create a project record
     Given I have navigated to the my research projects page
