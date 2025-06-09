@@ -97,37 +97,7 @@ export default class HomePage {
     await this.page.goto('');
   }
 
-  async assertOnHomePage($tags: any, loginPage: any, commonItemsPage: any) {
-    if (await this.loginBtn.isVisible()) {
-      console.info('Sign In button is displayed');
-      console.info(this.page.url());
-      let user: string = '';
-      if ($tags.includes('@SysAdminUser')) {
-        user = 'System_Admin';
-      } else if ($tags.includes('Frontstage_User')) {
-        user = 'Frontstage_User';
-      } else if ($tags.includes('Backstage_User')) {
-        user = 'Backstage_User';
-      }
-      await this.loginBtn.click();
-      await this.page.waitForLoadState('domcontentloaded');
-      await this.page.waitForTimeout(3000);
-      console.info(await this.pageHeading.textContent());
-      if (await this.pageHeading.isVisible()) {
-        console.info('My account home page is displayed');
-        await expect(this.pageHeading).toBeVisible();
-        await expect(this.myWorkspacesHeading).toBeVisible();
-        await expect(this.projectGuidanceText).toBeVisible();
-      } else {
-        await loginPage.assertOnLoginPage();
-        console.info('Login page is displayed');
-        await loginPage.loginWithUserCreds(user);
-        await expect(this.pageHeading).toBeVisible();
-        await expect(this.myWorkspacesHeading).toBeVisible();
-        await expect(this.projectGuidanceText).toBeVisible();
-        await commonItemsPage.storeAuthState(user);
-      }
-    }
+  async assertOnHomePage() {
     await expect(this.pageHeading).toBeVisible();
     await expect(this.myWorkspacesHeading).toBeVisible();
     await expect(this.projectGuidanceText).toBeVisible();

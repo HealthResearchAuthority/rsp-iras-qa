@@ -1,5 +1,5 @@
 import { createBdd } from 'playwright-bdd';
-import { test } from '../../hooks/CustomFixtures';
+import { expect, test } from '../../hooks/CustomFixtures';
 import { chromium } from 'playwright';
 import CommonItemsPage from '../../pages/Common/CommonItemsPage';
 import HomePage from '../../pages/IRAS/HomePage';
@@ -52,7 +52,8 @@ BeforeScenario(
         await jsHomePage.loginBtn.click();
         await jsLoginPage.assertOnLoginPage();
         await jsLoginPage.loginWithUserCreds(user);
-        await jsHomePage.assertOnHomePage($tags, loginPage, commonItemsPage);
+        await jsHomePage.assertOnHomePage();
+        // await jsHomePage.assertOnHomePage($tags, loginPage, commonItemsPage);
         await jsCommonItemsPage.storeAuthState(user);
       }
 
@@ -88,6 +89,35 @@ BeforeScenario(
       const newCookies = getReauthenticatedCookies();
       await commonItemsPage.page.context().clearCookies();
       await commonItemsPage.page.context().addCookies(newCookies);
+    } else if (await homePage.loginBtn.isVisible()) {
+      console.info('Sign In button is displayed');
+      console.info(homePage.page.url());
+      let user: string = '';
+      if ($tags.includes('@SysAdminUser')) {
+        user = 'System_Admin';
+      } else if ($tags.includes('Frontstage_User')) {
+        user = 'Frontstage_User';
+      } else if ($tags.includes('Backstage_User')) {
+        user = 'Backstage_User';
+      }
+      await homePage.loginBtn.click();
+      await homePage.page.waitForLoadState('domcontentloaded');
+      await homePage.page.waitForTimeout(3000);
+      console.info(await homePage.pageHeading.textContent());
+      if (await homePage.pageHeading.isVisible()) {
+        console.info('My account home page is displayed');
+        await expect(homePage.pageHeading).toBeVisible();
+        await expect(homePage.myWorkspacesHeading).toBeVisible();
+        await expect(homePage.projectGuidanceText).toBeVisible();
+      } else {
+        await loginPage.assertOnLoginPage();
+        console.info('Login page is displayed');
+        await loginPage.loginWithUserCreds(user);
+        await expect(homePage.pageHeading).toBeVisible();
+        await expect(homePage.myWorkspacesHeading).toBeVisible();
+        await expect(homePage.projectGuidanceText).toBeVisible();
+        await commonItemsPage.storeAuthState(user);
+      }
     }
   }
 );

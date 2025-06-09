@@ -1,4 +1,4 @@
-@UserAdministration @ManageUsers @EditViewUsers @SysAdminUser @rsp-2830 @rsp-2828
+@UserAdministration @ManageUsers @EditViewUsers @SysAdminUser @SystemTest @rsp-2830 @rsp-2828
 Feature: User Administration: Manage user profiles, view and edit user profile
     As a user
     I want the ability to edit and view a user profile record
