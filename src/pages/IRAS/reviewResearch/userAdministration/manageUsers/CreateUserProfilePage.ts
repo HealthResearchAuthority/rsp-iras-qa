@@ -86,15 +86,17 @@ export default class CreateUserProfilePage {
       this.createUserProfilePageTestData.Create_User_Profile_Page.committee_label,
       { exact: true }
     );
-    this.country_label = this.page
-      .locator('.govuk-label')
-      .getByText(this.createUserProfilePageTestData.Create_User_Profile_Page.country_label, { exact: true });
-    this.country_fieldset = this.page.locator('.govuk-form-group', { has: this.country_label });
+    const { label: country_label, fieldset: country_fieldset } = this.getFieldsetByLabelText(
+      this.createUserProfilePageTestData.Create_User_Profile_Page.country_label
+    );
+    this.country_label = country_label;
+    this.country_fieldset = country_fieldset;
     this.country_checkbox = this.country_fieldset.getByRole('checkbox');
-    this.access_required_label = this.page
-      .locator('.govuk-label')
-      .getByText(this.createUserProfilePageTestData.Create_User_Profile_Page.access_required_label, { exact: true });
-    this.access_required_fieldset = this.page.locator('.govuk-form-group', { has: this.access_required_label });
+    const { label: access_required_label, fieldset: access_required_fieldset } = this.getFieldsetByLabelText(
+      this.createUserProfilePageTestData.Create_User_Profile_Page.access_required_label
+    );
+    this.access_required_label = access_required_label;
+    this.access_required_fieldset = access_required_fieldset;
     this.access_required_checkbox = this.access_required_fieldset.getByRole('checkbox');
     this.review_body_dropdown = this.page.getByLabel(
       this.createUserProfilePageTestData.Create_User_Profile_Page.review_body_label,
@@ -102,6 +104,12 @@ export default class CreateUserProfilePage {
         exact: true,
       }
     );
+  }
+
+  private getFieldsetByLabelText(labelText: string) {
+    const label = this.page.locator('.govuk-label').getByText(labelText, { exact: true });
+    const fieldset = this.page.locator('.govuk-form-group', { has: label });
+    return { label, fieldset };
   }
 
   async assertOnCreateUserProfilePage() {

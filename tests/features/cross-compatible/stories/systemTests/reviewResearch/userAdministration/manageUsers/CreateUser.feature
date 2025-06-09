@@ -6,7 +6,6 @@ Feature: User Administration: Manage Users - Create user
                 Given I have navigated to the 'Home_Page'
                 When I click the 'System_Administration' link on the 'Home_Page'
                 Then I can see the system administration home page
-                # Given I have navigated to the 'System_Administration_Page'
                 And I capture the page screenshot
                 When I click the 'Manage_Users' link on the 'System_Administration_Page'
                 And I capture the page screenshot

@@ -1,6 +1,6 @@
 @UserAdministration @ManageReviewBodies @EditReviewBody @SysAdminUser @SystemTest @rsp-2572
 Feature: User Administration: Manage Review Bodies - Edit review body
-    # Try to randomise the selection from search results
+
     Background:
         Given I have navigated to the 'System_Administration_Page'
         And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
