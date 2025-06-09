@@ -1,4 +1,4 @@
-@FrontStageUser @createProject @createAmendment @SystemTest
+@FrontStageUser @createProject @createProjectReviewYourAnswers @createAmendment @SystemTest
 Feature: Create Amendment - Create Project - Review your answers
 
   Background:
@@ -12,7 +12,7 @@ Feature: Create Amendment - Create Project - Review your answers
     Then I can see the project details iras page
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
@@ -36,7 +36,7 @@ Feature: Create Amendment - Create Project - Review your answers
     Then I can see the project details iras page
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
@@ -71,7 +71,7 @@ Feature: Create Amendment - Create Project - Review your answers
     Then I can see the project details iras page
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
@@ -106,7 +106,7 @@ Feature: Create Amendment - Create Project - Review your answers
     Then I can see the project details iras page
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
@@ -142,7 +142,7 @@ Feature: Create Amendment - Create Project - Review your answers
     Then I can see the project details iras page
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
@@ -176,7 +176,7 @@ Feature: Create Amendment - Create Project - Review your answers
     Then I can see the project details iras page
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
@@ -210,7 +210,7 @@ Feature: Create Amendment - Create Project - Review your answers
     Then I can see the project details iras page
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
@@ -245,7 +245,7 @@ Feature: Create Amendment - Create Project - Review your answers
     Then I can see the project details iras page
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
@@ -281,7 +281,7 @@ Feature: Create Amendment - Create Project - Review your answers
     Then I can see the project details iras page
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
@@ -311,7 +311,7 @@ Feature: Create Amendment - Create Project - Review your answers
     Then I can see the project details iras page
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
@@ -465,7 +465,7 @@ Feature: Create Amendment - Create Project - Review your answers
     Then I can see the project details iras page
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
@@ -508,7 +508,7 @@ Feature: Create Amendment - Create Project - Review your answers
     Then I can see the project details iras page
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
@@ -615,7 +615,7 @@ Feature: Create Amendment - Create Project - Review your answers
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
-    And I click the '<Navigation_Button_Third>' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
@@ -642,7 +642,7 @@ Feature: Create Amendment - Create Project - Review your answers
     Then I can see the project details iras page
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
-    And I click the '<Navigation_Button_Third>' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'

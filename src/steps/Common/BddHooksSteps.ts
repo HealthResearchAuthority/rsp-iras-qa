@@ -4,7 +4,7 @@ import { chromium } from 'playwright';
 import CommonItemsPage from '../../pages/Common/CommonItemsPage';
 import HomePage from '../../pages/IRAS/HomePage';
 import LoginPage from '../../pages/Common/LoginPage';
-import { getAuthState } from '../../utils/UtilFunctions';
+import { getAuthState, getTicketReferenceTags } from '../../utils/UtilFunctions';
 import { readFileSync } from 'fs';
 const { AfterStep, BeforeScenario } = createBdd(test);
 
@@ -17,6 +17,16 @@ AfterStep(async ({ page, $step, $testInfo }) => {
     await $testInfo.attach(`[step] ${$step.title}`, { body: screenshot, contentType: 'image/png' });
   }
 });
+
+BeforeScenario(
+  { name: 'Attach relevant ticket links to each scenario in test report' },
+  async function ({ $tags, $testInfo }) {
+    const tickets = getTicketReferenceTags($tags);
+    if (tickets.length > 0) {
+      $testInfo.attach('Ticket Reference:', { body: tickets.toString().replace(/,/g, '') });
+    }
+  }
+);
 
 BeforeScenario(
   { name: 'Check that current auth state has not expired', tags: '@Regression or @SystemTest and not @NoAuth' },

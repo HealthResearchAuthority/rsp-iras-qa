@@ -127,6 +127,7 @@
   },
   "Valid_Email_Data_Special_Characters": {
     "chief_investigator_email_text": "john!#$%&'*+-/=?^_`{|}~doe@example.com",
+    "primary_sponsor_organisation_text": "CHESTERFIELD ROYAL HOSPITAL NHS FOUNDATION TRUST",
     "sponsor_contact_email_text": "john!#$%&'*+-/=?^_`{|}~doe@example.com"
   },
   "Valid_Email_Data_Hyphen_Underscore": {
