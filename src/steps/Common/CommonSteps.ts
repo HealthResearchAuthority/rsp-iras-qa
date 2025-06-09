@@ -947,7 +947,10 @@ Then(
       default:
         throw new Error(`${sortField} is not a valid option`);
     }
+    const uniqueList = [...new Set(actualList)];
+    const sortedListNoDuplicates = [...uniqueList].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
+    expect(uniqueList).toEqual(sortedListNoDuplicates);
     const sortedList = [...actualList].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
-    expect(actualList).toEqual(sortedList);
+    expect.soft(actualList).toEqual(sortedList);
   }
 );
