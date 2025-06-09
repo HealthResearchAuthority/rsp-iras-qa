@@ -89,6 +89,7 @@ BeforeScenario(
       await commonItemsPage.page.context().clearCookies();
       await commonItemsPage.page.context().addCookies(newCookies);
     } else if (await homePage.loginBtn.isVisible()) {
+      // Added this block for handing timeout issue.. bug is there..need to remove later
       console.info('Sign In button is displayed');
       console.info(homePage.page.url());
       let user: string = '';
