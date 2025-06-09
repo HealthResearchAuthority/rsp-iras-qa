@@ -125,7 +125,7 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
         Then I sequentially navigate through each page by 'clicking on page number' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
         And I capture the page screenshot
 
-    @rsp-3459 @ManageReviewBodiesSearchResultsFound
+    @rsp-3459 @ManageReviewBodiesSearchResultsFound @Smoke
     Scenario Outline: Verify search results in manage review bodies page when user search by first and last organisation names
         When I enter the '<Field_Name>' of the '<Position>' item in the list, into the search field
         And I capture the page screenshot
