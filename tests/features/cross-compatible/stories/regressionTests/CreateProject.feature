@@ -1,4 +1,4 @@
-@adminUser @CreateProjectRegression @Regression
+@FrontStageUser @CreateProjectRegression @Regression
 Feature: Create Amendment - Create Project - Regression Tests
 
   Background:

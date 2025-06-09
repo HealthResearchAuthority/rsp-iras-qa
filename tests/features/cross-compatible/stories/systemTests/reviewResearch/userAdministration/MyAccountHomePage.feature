@@ -1,7 +1,7 @@
 @HomePage @SystemTest
 Feature: My Account Home page
 
-  @rsp-3421 @MyAccountHomepage @SysAdminUser @TestHomePage
+  @rsp-3421 @MyAccountHomepage @SysAdminUser
   Scenario Outline: Validate the My Account Home page of system administrator user
     Given I have navigated to the 'Home_Page'
     Given I can see project guidance text on the home_page
