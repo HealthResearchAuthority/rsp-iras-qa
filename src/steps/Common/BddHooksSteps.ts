@@ -20,8 +20,7 @@ AfterStep(async ({ page, $step, $testInfo }) => {
 
 BeforeScenario(
   { name: 'Check that current auth state has not expired', tags: '@Regression or @SystemTest and not @NoAuth' },
-  async function ({ commonItemsPage, homePage, $tags }) {
-    // await commonItemsPage.page.context().clearCookies();
+  async function ({ commonItemsPage, homePage, loginPage, $tags }) {
     const authStateIsValid = await commonItemsPage.page.request.get('', { maxRedirects: 0 }).then(async (response) => {
       return await response.text().then((includes) => {
         return includes.includes(homePage.homePageTestData.Home_Page.heading);
@@ -38,13 +37,12 @@ BeforeScenario(
       const jsLoginPage = new LoginPage(jsPage);
       const users = ['System_Admin', 'Frontstage_User', 'Backstage_User', 'Admin_User', 'Non_Admin_User'];
       for (const user of users) {
-        // await jsCommonItemsPage.page.context().clearCookies();
-        await jsContext.clearCookies(); // or jsPage.context().clearCookies()
+        await jsContext.clearCookies();
         await jsHomePage.goto();
         await jsHomePage.loginBtn.click();
         await jsLoginPage.assertOnLoginPage();
         await jsLoginPage.loginWithUserCreds(user);
-        await jsHomePage.assertOnHomePage();
+        await jsHomePage.assertOnHomePage($tags, loginPage, commonItemsPage);
         await jsCommonItemsPage.storeAuthState(user);
       }
       await jsContext.close();

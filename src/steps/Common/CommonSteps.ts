@@ -43,6 +43,8 @@ When(
       searchAddUserReviewBodyPage,
       accessDeniedPage,
       myResearchProjectsPage,
+      commonItemsPage,
+      $tags,
     },
     page: string
   ) => {
@@ -51,13 +53,13 @@ When(
         await loginPage.assertOnLoginPage();
         break;
       case 'Home_Page':
-        await homePage.assertOnHomePage();
+        await homePage.assertOnHomePage($tags, loginPage, commonItemsPage);
         break;
       case 'Admin_Home_Page':
-        await homePage.assertOnHomePage();
+        await homePage.assertOnHomePage($tags, loginPage, commonItemsPage);
         break;
       case 'Non_Admin_Home_Page':
-        await homePage.assertOnHomePage();
+        await homePage.assertOnHomePage($tags, loginPage, commonItemsPage);
         await systemAdministrationPage.goto();
         await accessDeniedPage.assertOnAccessDeniedPage();
         break;
@@ -862,6 +864,8 @@ Given(
       userProfilePage,
       reviewBodyProfilePage,
       myResearchProjectsPage,
+      commonItemsPage,
+      $tags,
     },
     page: string
   ) => {
@@ -873,7 +877,7 @@ Given(
         break;
       case 'Home_Page':
         await homePage.goto();
-        await homePage.assertOnHomePage();
+        await homePage.assertOnHomePage($tags, loginPage, commonItemsPage);
         break;
       case 'Create_Application_Page':
         await createApplicationPage.goto();
@@ -917,6 +921,9 @@ Given(
       userProfilePage,
       reviewBodyProfilePage,
       myResearchProjectsPage,
+      $tags,
+      loginPage,
+      commonItemsPage,
     },
     page: string,
     user: string
@@ -927,7 +934,7 @@ Given(
       case 'Home_Page':
         await homePage.page.context().addCookies(authState.cookies);
         await homePage.goto();
-        await homePage.assertOnHomePage();
+        await homePage.assertOnHomePage($tags, loginPage, commonItemsPage);
         break;
       case 'Create_Application_Page':
         await createApplicationPage.page.context().addCookies(authState.cookies);

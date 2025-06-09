@@ -8,8 +8,8 @@ Given('I can see project guidance text on the home_page', async ({ homePage }) =
   await expect(homePage.projectGuidanceText.getByText(expectedText, { exact: true })).toBeVisible();
 });
 
-Then('I can see the my account home page', async ({ homePage }) => {
-  await homePage.assertOnHomePage();
+Then('I can see the my account home page', async ({ homePage, $tags, loginPage, commonItemsPage }) => {
+  await homePage.assertOnHomePage($tags, loginPage, commonItemsPage);
 });
 
 Then(
