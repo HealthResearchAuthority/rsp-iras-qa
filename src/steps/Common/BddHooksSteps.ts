@@ -31,14 +31,13 @@ BeforeScenario(
 BeforeScenario(
   { name: 'Check that current auth state has not expired', tags: '@Regression or @SystemTest and not @NoAuth' },
   async function ({ commonItemsPage, homePage, loginPage, $tags }) {
-    const authStateIsValid = await commonItemsPage.page.request.get('', { maxRedirects: 0 }).then(async (response) => {
-      return await response.text().then((includes) => {
-        return includes.includes(homePage.homePageTestData.Home_Page.heading);
-      });
-    });
-    if (!authStateIsValid) {
-      console.info('Current auth states have expired!\nReauthenticating test users before continuing test execution');
-      await commonItemsPage.page.context().clearCookies();
+    const isAuthStateValid = async () => {
+      const response = await commonItemsPage.page.request.get('', { maxRedirects: 0 });
+      const text = await response.text();
+      return text.includes(homePage.homePageTestData.Home_Page.heading);
+    };
+
+    const reauthenticateUsers = async () => {
       const jsBrowser = await chromium.launch();
       const jsContext = await jsBrowser.newContext({ javaScriptEnabled: true });
       const jsPage = await jsContext.newPage();
@@ -46,6 +45,7 @@ BeforeScenario(
       const jsHomePage = new HomePage(jsPage);
       const jsLoginPage = new LoginPage(jsPage);
       const users = ['System_Admin', 'Frontstage_User', 'Backstage_User', 'Admin_User', 'Non_Admin_User'];
+
       for (const user of users) {
         await jsContext.clearCookies();
         await jsHomePage.goto();
@@ -55,31 +55,39 @@ BeforeScenario(
         await jsHomePage.assertOnHomePage($tags, loginPage, commonItemsPage);
         await jsCommonItemsPage.storeAuthState(user);
       }
+
       await jsContext.close();
       await jsBrowser.close();
-      let newCookiesCurrentUser: any;
-      if ($tags.includes('@SysAdminUser')) {
-        const reauthenticatedState = JSON.parse(readFileSync(getAuthState('system_admin')).toString());
-        newCookiesCurrentUser = reauthenticatedState.cookies;
-      } else if ($tags.includes('@FrontStageUser')) {
-        const reauthenticatedState = JSON.parse(readFileSync(getAuthState('frontstage_user')).toString());
-        newCookiesCurrentUser = reauthenticatedState.cookies;
-      } else if ($tags.includes('@BackStageUser')) {
-        const reauthenticatedState = JSON.parse(readFileSync(getAuthState('backstage_user')).toString());
-        newCookiesCurrentUser = reauthenticatedState.cookies;
-      } else if ($tags.includes('@adminUser')) {
-        const reauthenticatedState = JSON.parse(readFileSync(getAuthState('admin_user')).toString());
-        newCookiesCurrentUser = reauthenticatedState.cookies;
-      } else if ($tags.includes('@nonAdminUser')) {
-        const reauthenticatedState = JSON.parse(readFileSync(getAuthState('non_admin_user')).toString());
-        newCookiesCurrentUser = reauthenticatedState.cookies;
-      } else {
-        throw new Error(
-          `A Reauthenticated User State has not been set for the current test.\nPlease review and ensure that the correct user tag has been applied to this test`
-        );
+    };
+
+    const getReauthenticatedCookies = () => {
+      const tagToUserMap: Record<string, string> = {
+        '@SysAdminUser': 'system_admin',
+        '@FrontStageUser': 'frontstage_user',
+        '@BackStageUser': 'backstage_user',
+        '@adminUser': 'admin_user',
+        '@nonAdminUser': 'non_admin_user',
+      };
+
+      for (const tag in tagToUserMap) {
+        if ($tags.includes(tag)) {
+          const state = JSON.parse(readFileSync(getAuthState(tagToUserMap[tag])).toString());
+          return state.cookies;
+        }
       }
+
+      throw new Error(
+        `A Reauthenticated User State has not been set for the current test.\nPlease review and ensure that the correct user tag has been applied to this test`
+      );
+    };
+
+    if (!(await isAuthStateValid())) {
+      console.info('Current auth states have expired!\nReauthenticating test users before continuing test execution');
       await commonItemsPage.page.context().clearCookies();
-      await commonItemsPage.page.context().addCookies(newCookiesCurrentUser);
+      await reauthenticateUsers();
+      const newCookies = getReauthenticatedCookies();
+      await commonItemsPage.page.context().clearCookies();
+      await commonItemsPage.page.context().addCookies(newCookies);
     }
   }
 );
