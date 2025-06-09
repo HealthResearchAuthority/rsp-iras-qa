@@ -1,6 +1,6 @@
 import { DataTable } from 'playwright-bdd';
 import { Locator, chromium, devices, firefox, webkit } from '@playwright/test';
-import { createDecipheriv } from 'crypto';
+import { createDecipheriv, DecipherGCM } from 'crypto';
 import { readFile, writeFile } from 'fs/promises';
 import 'dotenv/config';
 import { deviceDSafari, deviceDFirefox, deviceDChrome, deviceDEdge } from '../hooks/GlobalSetup';
@@ -83,10 +83,10 @@ export function getTicketReferenceTags(tags: string[]): string[] {
 export function getDecryptedValue(data: string, secretKey?: any, authTag?: string) {
   let value: string = '';
   if (secretKey) {
-    const decipher = createDecipheriv('AES-256-GCM', Buffer.from(`${secretKey}`), Buffer.alloc(16));
+    const decipher = createDecipheriv('AES-256-GCM', Buffer.from(secretKey), Buffer.alloc(16)) as DecipherGCM;
     decipher.setAuthTag(Buffer.from(`${authTag}`, 'hex'));
     let decrypted = decipher.update(data, 'hex', 'utf8');
-    decrypted = decrypted + decipher.final('utf8');
+    decrypted += decipher.final('utf8');
     value = decrypted;
   } else {
     value = data;
