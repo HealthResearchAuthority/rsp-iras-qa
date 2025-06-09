@@ -44,7 +44,7 @@ Feature: User Administration: Manage Review Bodies - Enable / Disable Review Bod
     And I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
     And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
     Then I can see the 'Manage_Review_Bodies_Page'
-    When I enter unique organisation name of the newly created review body into the search field
+    When I enter 'unique organisation name of the newly created review body' into the search field
     And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
     And I can see the newly created review body should be present in the list with '<Status_Enabled>' status in the manage review bodies page
     And I capture the page screenshot

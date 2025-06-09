@@ -462,43 +462,42 @@ Then(
   }
 );
 
-When('I enter {string} into the search field', async ({ commonItemsPage }, searchKey: string) => {
-  await commonItemsPage.search_text.fill(searchKey);
-});
-
 When(
-  'I enter organisation name of the previously used review body into the search field',
-  async ({ commonItemsPage, reviewBodyProfilePage }) => {
-    await commonItemsPage.search_text.fill(await reviewBodyProfilePage.getOrgName());
-  }
-);
+  'I enter {string} into the search field',
+  async ({ commonItemsPage, reviewBodyProfilePage, createReviewBodyPage }, inputType: string) => {
+    let searchValue: string;
 
-When(
-  'I enter unique organisation name of the newly created review body into the search field',
-  async ({ commonItemsPage, createReviewBodyPage }) => {
-    await commonItemsPage.search_text.fill(await createReviewBodyPage.getUniqueOrgName());
-  }
-);
-
-When(
-  'I am on the first page and it should be visually highlighted to indicate the active page the user is on',
-  async ({ commonItemsPage }) => {
-    await expect(commonItemsPage.firstPage).toHaveAttribute('aria-current', 'page');
-  }
-);
-
-When(
-  'I am on the last page and it and visually highlighted to indicate the active page the user is on',
-  async ({ commonItemsPage }) => {
-    const totalPages = await commonItemsPage.getTotalPages();
-    const currentPageLocator = await commonItemsPage.clickOnPages(totalPages, 'clicking on page number');
-    await expect(currentPageLocator).toHaveAttribute('aria-current', 'page');
+    switch (inputType) {
+      case 'organisation name of the previously used review body':
+        searchValue = await reviewBodyProfilePage.getOrgName();
+        break;
+      case 'unique organisation name of the newly created review body':
+        searchValue = await createReviewBodyPage.getUniqueOrgName();
+        break;
+      default:
+        searchValue = inputType;
+    }
+    await commonItemsPage.search_text.fill(searchValue);
   }
 );
 
 When('the pagination controls should be displayed at the bottom of the page', async ({ commonItemsPage }) => {
   await expect(commonItemsPage.pagination).toBeVisible();
 });
+
+When(
+  'I am on the {string} page and it should be visually highlighted to indicate the active page the user is on',
+  async ({ commonItemsPage }, position: string) => {
+    let pageLocator: Locator;
+    if (position === 'first') {
+      pageLocator = commonItemsPage.firstPage;
+    } else {
+      const totalPages = await commonItemsPage.getTotalPages();
+      pageLocator = await commonItemsPage.clickOnPages(totalPages, 'clicking on page number');
+    }
+    await expect(pageLocator).toHaveAttribute('aria-current', 'page');
+  }
+);
 
 When('the default page size should be twenty', async ({ commonItemsPage }) => {
   const rowCountActual = await commonItemsPage.tableRows.count();

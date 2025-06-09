@@ -47,7 +47,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
         Then I can see the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
-        When I enter organisation name of the previously used review body into the search field
+        When I enter 'organisation name of the previously used review body' into the search field
         And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
         And I select the previously used review body should be present in the list with '<Status_Disabled>' status in the manage review bodies page
@@ -74,7 +74,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
         Then I can see the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
-        When I enter organisation name of the previously used review body into the search field
+        When I enter 'organisation name of the previously used review body' into the search field
         And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
         And I select the previously used review body should be present in the list with '<Status_Enabled>' status in the manage review bodies page
@@ -227,7 +227,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
         Then I can see the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
-        When I enter organisation name of the previously used review body into the search field
+        When I enter 'organisation name of the previously used review body' into the search field
         And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
         And I select the previously used review body should be present in the list with 'disabled' status in the manage review bodies page
@@ -241,7 +241,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
         Then I can see the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
-        When I enter organisation name of the previously used review body into the search field
+        When I enter 'organisation name of the previously used review body' into the search field
         And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
         And I select the previously used review body should be present in the list with '<Status_Enabled>' status in the manage review bodies page

@@ -230,7 +230,7 @@ Feature: User Administration: Manage user profiles, view and edit user profile
 
     @rsp-3521 @ManageUsersPagination @ManageUsersPaginationFirstPage @ManageUsersPaginationPageNumber
     Scenario: Verify pagination in manage users page when user is on the first page and navigate through each page by clicking page number
-        And I am on the first page and it should be visually highlighted to indicate the active page the user is on
+        And I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
         And I capture the page screenshot
         Then the pagination controls should be displayed at the bottom of the page
         And the default page size should be twenty
@@ -243,7 +243,7 @@ Feature: User Administration: Manage user profiles, view and edit user profile
 
     @rsp-3521 @ManageUsersPagination @ManageUsersPaginationFirstPage @ManageUsersPaginationNextLinkClick
     Scenario: Verify pagination in manage users page when user is on the first page and navigate through each page by clicking next link
-        And I am on the first page and it should be visually highlighted to indicate the active page the user is on
+        And I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
         And I capture the page screenshot
         Then the pagination controls should be displayed at the bottom of the page
         And the default page size should be twenty
@@ -256,7 +256,7 @@ Feature: User Administration: Manage user profiles, view and edit user profile
 
     @rsp-3521 @ManageUsersPagination @ManageUsersPaginationLastPage  @ManageUsersPaginationPreviousLinkClick
     Scenario: Verify pagination in manage users page when user is on the last page and navigate through each page by clicking previous link
-        And I am on the last page and it and visually highlighted to indicate the active page the user is on
+        And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
         And I capture the page screenshot
         Then the pagination controls should be displayed at the bottom of the page
         And the 'Next' button will be 'disabled' and 'not visible' to the user
@@ -267,7 +267,7 @@ Feature: User Administration: Manage user profiles, view and edit user profile
 
     @rsp-3521 @ManageUsersPagination @ManageUsersPaginationLastPage  @ManageUsersPaginationPageNumber
     Scenario: Verify pagination in manage users page when user is on the last page and navigate through each page by clicking page number
-        And I am on the last page and it and visually highlighted to indicate the active page the user is on
+        And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
         And I capture the page screenshot
         Then the pagination controls should be displayed at the bottom of the page
         And the 'Next' button will be 'disabled' and 'not visible' to the user
