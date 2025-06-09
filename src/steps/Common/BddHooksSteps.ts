@@ -53,7 +53,6 @@ BeforeScenario(
         await jsLoginPage.assertOnLoginPage();
         await jsLoginPage.loginWithUserCreds(user);
         await jsHomePage.assertOnHomePage();
-        // await jsHomePage.assertOnHomePage($tags, loginPage, commonItemsPage);
         await jsCommonItemsPage.storeAuthState(user);
       }
 

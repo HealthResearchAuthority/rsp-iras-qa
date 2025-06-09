@@ -1,6 +1,5 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../../hooks/CustomFixtures';
-import { returnDataFromJSON } from '../../../../../utils/UtilFunctions';
 
 const { When, Then } = createBdd(test);
 
@@ -16,39 +15,25 @@ When('I update user profile with {string}', async ({ commonItemsPage, editUserPr
 When(
   'I can see the newly created user record should be present in the list for {string} with {string} status in the manage user page',
   async ({ manageUsersPage, createUserProfilePage }, datasetName: string, status: string) => {
-    let userStatus: string;
-    const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
-    const userFirstName = dataset.first_name_text;
-    const userLastName = dataset.last_name_text;
-    const data = await returnDataFromJSON();
-    const userEmail = data.Create_User_Profile.email_address_unique;
-    const datasetStatus = manageUsersPage.manageUsersPageTestData.Manage_Users_Page;
-    if (status.toLowerCase() == 'disabled') {
-      userStatus = datasetStatus.disabled_status;
-    } else {
-      userStatus = datasetStatus.enabled_status;
-    }
-    await manageUsersPage.goto(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size, userEmail);
-    const foundRecords = await manageUsersPage.findUserProfile(userFirstName, userLastName, userEmail, userStatus);
-    expect(foundRecords).toBeDefined();
-    expect(foundRecords).toHaveCount(1);
+    const foundRecord = await manageUsersPage.getUniqueUserRecord(
+      datasetName,
+      status,
+      createUserProfilePage,
+      manageUsersPage
+    );
+    expect(foundRecord).toBeDefined();
+    expect(foundRecord).toHaveCount(1);
   }
 );
 
 When(
   'I search and click on view edit link for existing {string} user with {string} status from the manage user page',
   async ({ manageUsersPage }, datasetName: string, status: string) => {
-    let userStatus: string;
     const dataset = manageUsersPage.manageUsersPageTestData[datasetName];
     const userFirstName = dataset.first_name_text;
     const userLastName = dataset.last_name_text;
     const userEmail = dataset.email_address_text;
-    const datasetStatus = manageUsersPage.manageUsersPageTestData.Manage_Users_Page;
-    if (status.toLowerCase() == 'disabled') {
-      userStatus = datasetStatus.disabled_status;
-    } else {
-      userStatus = datasetStatus.enabled_status;
-    }
+    const userStatus = await manageUsersPage.getUserStatus(status, manageUsersPage);
     await manageUsersPage.goto(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size, userEmail);
     const foundRecord = await manageUsersPage.findUserProfile(userFirstName, userLastName, userEmail, userStatus);
     expect(foundRecord).toBeDefined();
@@ -60,20 +45,12 @@ When(
 When(
   'I search and click on view edit link for unique {string} user with {string} status from the manage user page',
   async ({ manageUsersPage, createUserProfilePage }, datasetName: string, status: string) => {
-    let userStatus: string;
-    const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
-    const userFirstName = dataset.first_name_text;
-    const userLastName = dataset.last_name_text;
-    const data = await returnDataFromJSON();
-    const userEmail = data.Create_User_Profile.email_address_unique;
-    const datasetStatus = manageUsersPage.manageUsersPageTestData.Manage_Users_Page;
-    if (status.toLowerCase() == 'disabled') {
-      userStatus = datasetStatus.disabled_status;
-    } else {
-      userStatus = datasetStatus.enabled_status;
-    }
-    await manageUsersPage.goto(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size, userEmail);
-    const foundRecord = await manageUsersPage.findUserProfile(userFirstName, userLastName, userEmail, userStatus);
+    const foundRecord = await manageUsersPage.getUniqueUserRecord(
+      datasetName,
+      status,
+      createUserProfilePage,
+      manageUsersPage
+    );
     expect(foundRecord).toBeDefined();
     expect(foundRecord).toHaveCount(1);
     await foundRecord.locator(manageUsersPage.view_edit_link).click();
@@ -96,13 +73,7 @@ Then(
 Then(
   'I select a {string} User to View and Edit which is {string}',
   async ({ manageUsersPage }, userNamePrefix: string, status: string) => {
-    let userStatus: string;
-    const datasetStatus = manageUsersPage.manageUsersPageTestData.Manage_Users_Page;
-    if (status.toLowerCase() == 'disabled') {
-      userStatus = datasetStatus.disabled_status;
-    } else {
-      userStatus = datasetStatus.enabled_status;
-    }
+    const userStatus = await manageUsersPage.getUserStatus(status, manageUsersPage);
     await manageUsersPage.goto(
       manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size,
       userNamePrefix

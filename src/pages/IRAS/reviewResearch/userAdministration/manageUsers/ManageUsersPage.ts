@@ -1,7 +1,8 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as linkTextData from '../../../../../resources/test_data/common/link_text_data.json';
 import * as manageUsersPageTestData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageUsers/manage_users_page_data.json';
-import { confirmStringNotNull } from '../../../../../utils/UtilFunctions';
+import { confirmStringNotNull, returnDataFromJSON } from '../../../../../utils/UtilFunctions';
+import CreateUserProfilePage from './CreateUserProfilePage';
 
 //Declare Page Objects
 export default class ManageUsersPage {
@@ -189,5 +190,33 @@ export default class ManageUsersPage {
       }
     }
     throw new Error(`No matching record found`);
+  }
+
+  async getUniqueUserRecord(
+    datasetName: string,
+    status: string,
+    createUserProfilePage: CreateUserProfilePage,
+    manageUsersPage: ManageUsersPage
+  ) {
+    const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
+    const userFirstName = dataset.first_name_text;
+    const userLastName = dataset.last_name_text;
+    const data = await returnDataFromJSON();
+    const userEmail = data.Create_User_Profile.email_address_unique;
+    const userStatus = await manageUsersPage.getUserStatus(status, manageUsersPage);
+    await manageUsersPage.goto(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size, userEmail);
+    const foundRecord = await manageUsersPage.findUserProfile(userFirstName, userLastName, userEmail, userStatus);
+    return foundRecord;
+  }
+
+  async getUserStatus(status: string, manageUsersPage: ManageUsersPage) {
+    let userStatus: string;
+    const datasetStatus = manageUsersPage.manageUsersPageTestData.Manage_Users_Page;
+    if (status.toLowerCase() == 'disabled') {
+      userStatus = datasetStatus.disabled_status;
+    } else {
+      userStatus = datasetStatus.enabled_status;
+    }
+    return userStatus;
   }
 }
