@@ -1,7 +1,7 @@
 @HomePage @SystemTest
 Feature: My Account Home page
 
-  @rsp-3421 @MyAccountHomepage @SysAdminUser
+  @rsp-3421 @MyAccountHomepage @SysAdminUser @TestHomePage
   Scenario Outline: Validate the My Account Home page of system administrator user
     Given I have navigated to the 'Home_Page'
     Given I can see project guidance text on the home_page
@@ -16,7 +16,7 @@ Feature: My Account Home page
 
     Examples:
       | Validation_Text               | Navigation_Link_Second | Navigation_Link |
-      | Label_Texts_System_Admin_Role | System_administration  | Back            |
+      | Label_Texts_System_Admin_Role | System_Administration  | Back            |
 
   @rsp-3421 @MyAccountHomepage @FrontStageUser
   Scenario Outline: Validate the My Account Home page of front stage user

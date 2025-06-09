@@ -1,11 +1,14 @@
-@UserAdministration @ManageUsers @EditViewUsers @SysAdminUser @rsp-2830 @rsp-2828
+@UserAdministration @ManageUsers @EditViewUsers @SysAdminUser @rsp-2830 @rsp-2828 @ManageUsersTest2
 Feature: User Administration: Manage user profiles, view and edit user profile
     As a user
     I want the ability to edit and view a user profile record
     So that I can access all the user information and keep user information up to date
 
     Background:
-        Given I have navigated to the 'System_Administration_Page'
+        Given I have navigated to the 'Home_Page'
+        When I click the 'System_Administration' link on the 'Home_Page'
+        Then I can see the system administration home page
+        # Given I have navigated to the 'System_Administration_Page'
         When I click the 'Manage_Users' link on the 'System_Administration_Page'
         Then I can see the 'Manage_Users_Page'
 
@@ -160,7 +163,7 @@ Feature: User Administration: Manage user profiles, view and edit user profile
             | email_address_text | Operations | Enabled | Original_Email_Address_Text_Three | Valid_Email_Data_Number               |
 
 
-    @rsp-3122 @VerifyErrorMessagesInvalidData @EditUserProfileVerifyErrorMessagesInvalidData
+    @rsp-3122 @VerifyErrorMessagesInvalidData @EditUserProfileVerifyErrorMessagesInvalidData @TestEditUser
     Scenario Outline: Validate error messages are displayed for invalid data in edit user profile page
         When I enter 'QA Automation' into the search field
         And I click the 'Search' button on the 'Manage_Users_Page'

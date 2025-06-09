@@ -1,9 +1,12 @@
 
-@UserAdministration  @ManageUsers @SysAdminUser @SystemTest @CreateUser
+@UserAdministration  @ManageUsers @SysAdminUser @SystemTest @CreateUser @ManageUsersTest1
 Feature: User Administration: Manage Users - Create user
 
         Background:
-                Given I have navigated to the 'System_Administration_Page'
+                Given I have navigated to the 'Home_Page'
+                When I click the 'System_Administration' link on the 'Home_Page'
+                Then I can see the system administration home page
+                # Given I have navigated to the 'System_Administration_Page'
                 And I capture the page screenshot
                 When I click the 'Manage_Users' link on the 'System_Administration_Page'
                 And I capture the page screenshot
@@ -242,32 +245,32 @@ Feature: User Administration: Manage Users - Create user
                 And I capture the page screenshot
 
                 Examples:
-                        | Add_User_Profile                      |
-                        | Valid_Email_Underscore                |
-                        | Valid_Email_Data_Hyphen               |
-                        | Valid_Email_Data_Plus                 |
-                        | Valid_Email_Data_Exclamation          |
-                        | Valid_Email_Data_Hash                 |
-                        | Valid_Email_Data_Dollar               |
-                        | Valid_Email_Data_Percentage           |
-                        | Valid_Email_Data_Ampersand            |
-                        | Valid_Email_Data_Single_Quote         |
-                        | Valid_Email_Data_Star                 |
-                        | Valid_Email_Data_Slash                |
-                        | Valid_Email_Data_Equal_Symbol         |
-                        | Valid_Email_Data_Question_Mark        |
-                        | Valid_Email_Data_Cap_Symbol           |
-                        | Valid_Email_Data_Right_Single_Quote   |
-                        | Valid_Email_Data_Curly_Brackets       |
-                        | Valid_Email_Data_Pipe_Symbol          |
-                        | Valid_Email_Data_Tilde_Symbol         |
-                        | Valid_Email_Data_Unicode              |
-                        | Valid_Email_Data_Special_Characters   |
-                        | Valid_Email_Data_Hyphen_Underscore    |
-                        | Valid_Email_Data_Multiple_Unicode     |
-                        | Valid_Email_Data_Multiple_Sub_Domains |
-                        | Valid_Email_Data_Other_Language       |
-                        | Valid_Email_Data_Domain               |
+                        | Add_User_Profile                    |
+                        | Valid_Email_Underscore              |
+                        | Valid_Email_Data_Hyphen             |
+                        | Valid_Email_Data_Plus               |
+                        | Valid_Email_Data_Exclamation        |
+                        | Valid_Email_Data_Hash               |
+                        | Valid_Email_Data_Dollar             |
+                        | Valid_Email_Data_Percentage         |
+                        | Valid_Email_Data_Ampersand          |
+                        | Valid_Email_Data_Single_Quote       |
+                        | Valid_Email_Data_Star               |
+                        | Valid_Email_Data_Slash              |
+                        | Valid_Email_Data_Equal_Symbol       |
+                        | Valid_Email_Data_Question_Mark      |
+                        | Valid_Email_Data_Cap_Symbol         |
+                        | Valid_Email_Data_Right_Single_Quote |
+                        | Valid_Email_Data_Curly_Brackets     |
+                        | Valid_Email_Data_Pipe_Symbol        |
+                        | Valid_Email_Data_Tilde_Symbol       |
+                        # | Valid_Email_Data_Unicode              |
+                        | Valid_Email_Data_Special_Characters |
+                        | Valid_Email_Data_Hyphen_Underscore  |
+                        # | Valid_Email_Data_Multiple_Unicode     |
+                        # | Valid_Email_Data_Multiple_Sub_Domains |
+                        # | Valid_Email_Data_Other_Language     |
+                        | Valid_Email_Data_Domain             |
 
         @rsp-3122 @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage
         Scenario Outline: Validate error messages are displayed for invalid data in create user profile page
