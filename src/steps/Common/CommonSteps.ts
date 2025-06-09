@@ -9,21 +9,11 @@ import {
   generateTestDataTelephone,
   writeGeneratedTestDataToJSON,
 } from '../../utils/GenerateTestData';
-const { Given, When, Then, AfterStep } = createBdd(test);
+const { Given, When, Then } = createBdd(test);
 import * as userProfileGeneratedataConfig from '../../resources/test_data/user_administration/testdata_generator/user_profile_generate_data_config.json';
 import { getAuthState, getCurrentTimeFormatted } from '../../utils/UtilFunctions';
 import { Locator } from 'playwright';
 import fs from 'fs';
-
-AfterStep(async ({ page, $step, $testInfo }) => {
-  if (
-    `${process.env.STEP_SCREENSHOT?.toLowerCase()}` === 'yes' ||
-    `${$step.title}` === 'I capture the page screenshot'
-  ) {
-    const screenshot = await page.screenshot({ path: 'screenshot.png', fullPage: true });
-    await $testInfo.attach(`[step] ${$step.title}`, { body: screenshot, contentType: 'image/png' });
-  }
-});
 
 Then('I capture the page screenshot', async () => {});
 
@@ -913,16 +903,7 @@ Given(
 Given(
   'I have navigated to the {string} as {string}',
   async (
-    {
-      homePage,
-      createApplicationPage,
-      systemAdministrationPage,
-      accessDeniedPage,
-      manageReviewBodiesPage,
-      userProfilePage,
-      reviewBodyProfilePage,
-      myResearchProjectsPage,
-    },
+    { homePage, systemAdministrationPage, accessDeniedPage, manageReviewBodiesPage, myResearchProjectsPage },
     page: string,
     user: string
   ) => {
@@ -933,11 +914,6 @@ Given(
         await homePage.page.context().addCookies(authState.cookies);
         await homePage.goto();
         await homePage.assertOnHomePage();
-        break;
-      case 'Create_Application_Page':
-        await createApplicationPage.page.context().addCookies(authState.cookies);
-        await createApplicationPage.goto();
-        await createApplicationPage.assertOnCreateApplicationPage();
         break;
       case 'System_Administration_Page':
         await systemAdministrationPage.page.context().addCookies(authState.cookies);
@@ -954,16 +930,6 @@ Given(
         await manageReviewBodiesPage.goto();
         await manageReviewBodiesPage.assertOnManageReviewBodiesPage();
         break;
-      case 'User_Profile_Page':
-        await userProfilePage.page.context().addCookies(authState.cookies);
-        await userProfilePage.goto(await userProfilePage.getUserId());
-        await userProfilePage.assertOnUserProfilePage();
-        break;
-      case 'Review_Body_Profile_Page':
-        await reviewBodyProfilePage.page.context().addCookies(authState.cookies);
-        await reviewBodyProfilePage.goto(await reviewBodyProfilePage.getReviewBodyId());
-        await reviewBodyProfilePage.assertOnReviewbodyProfilePage();
-        break;
       case 'My_Research_Page':
         await myResearchProjectsPage.page.context().addCookies(authState.cookies);
         await myResearchProjectsPage.goto();
@@ -974,18 +940,6 @@ Given(
     }
   }
 );
-
-Given('I logged out from the {string} as {string}', async ({ homePage }, page: string, user: string) => {
-  const authStatePath = getAuthState(user);
-  const authState = JSON.parse(fs.readFileSync(authStatePath, 'utf-8'));
-  switch (page) {
-    case 'Home_Page':
-      await homePage.page.context().clearCookies(authState.cookies);
-      break;
-    default:
-      throw new Error(`${page} is not a valid option`);
-  }
-});
 
 Given('I logged out from the system', async ({ commonItemsPage }) => {
   await commonItemsPage.page.context().clearCookies();
