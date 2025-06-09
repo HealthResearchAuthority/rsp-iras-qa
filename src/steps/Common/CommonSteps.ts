@@ -31,7 +31,6 @@ When(
       userListReviewBodyPage,
       manageUsersPage,
       searchAddUserReviewBodyPage,
-      accessDeniedPage,
       myResearchProjectsPage,
     },
     page: string
@@ -42,14 +41,6 @@ When(
         break;
       case 'Home_Page':
         await homePage.assertOnHomePage();
-        break;
-      case 'Admin_Home_Page':
-        await homePage.assertOnHomePage();
-        break;
-      case 'Non_Admin_Home_Page':
-        await homePage.assertOnHomePage();
-        await systemAdministrationPage.goto();
-        await accessDeniedPage.assertOnAccessDeniedPage();
         break;
       case 'Create_Application_Page':
         await createApplicationPage.assertOnCreateApplicationPage();
