@@ -31,12 +31,10 @@ BeforeScenario(
 
 BeforeScenario(
   { name: 'Check that current auth state has not expired', tags: '@Regression or @SystemTest and not @NoAuth' },
-  async function ({ commonItemsPage, $tags }) {
-    await commonItemsPage.page.context().clearCookies();
-
+  async function ({ commonItemsPage, homePage, $tags }) {
     const authStateIsValid = await commonItemsPage.page.request.get('', { maxRedirects: 0 }).then(async (response) => {
       return await response.text().then((includes) => {
-        return includes.includes('My Account homepage');
+        return includes.includes(homePage.homePageTestData.Home_Page.heading);
       });
     });
 
