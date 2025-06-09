@@ -1,4 +1,4 @@
-@adminUser @createProject @createAmendment @SystemTest
+@FrontStageUser @createProject @createAmendment @SystemTest
 Feature: Create Amendment - Create Project - Review your answers
 
   Background:
@@ -609,7 +609,7 @@ Feature: Create Amendment - Create Project - Review your answers
       | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | sponsor_contact   | Invalid_Email_Data_Two_Punycode                        | Field_Error_Sponsor_Email       |
       | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | sponsor_contact   | Invalid_Email_Data_Two_Max_Char                        | Field_Error_Sponsor_Email       |
 
-@rsp-1867
+  @rsp-1867
   Scenario Outline: Validate user is able to see the project overview page when user submit the review answer page with all mandatory fields entered correctly
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
@@ -659,13 +659,13 @@ Feature: Create Amendment - Create Project - Review your answers
     Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Review_Your_Answers_Page'
 
     Examples:
-      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Third | Navigation_Button_Fourth | Project_Details_Title       | Key_Project_Roles                                  | Research_Locations                          | Field_And_Summary_Error_Message                    |
-      | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields                        | Valid_Data_All_Empty_Fields                 | All_Field_Error_Message                            |
-      | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_Only_Title_Field | Valid_Data_All_Empty_Fields                        | Valid_Data_All_Empty_Fields                 | Field_Error_Message_Except_Project_Title           |
-      | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_Only_Date_Fields | Valid_Data_All_Empty_Fields                        | Valid_Data_All_Empty_Fields                 | Field_Error_Message_Except_End_Date                |
-      | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_All_Empty_Fields | Valid_Data_Only_Investigator_Email_Field           | Valid_Data_All_Empty_Fields                 | Field_Error_Message_Except_Chief_Investigator      |
-      | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_All_Empty_Fields | Valid_Data_Only_Sponsor_Email_Field                | Valid_Data_All_Empty_Fields                 | Field_Error_Message_Except_Sponsor_Contact         |
-      | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields                        | Valid_Data_Only_Nations_Participating       | Field_Error_Message_Except_Nations_Participating   |
-      | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields                        | Valid_Data_Only_is_nhs_hsc_organisation_Two | Field_Error_Message_Except_NHS_HSC_Org             |
-      | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields                        | Valid_Data_Only_is_nhs_hsc_organisation     | Field_Error_Message_Except_NHS_HSC_Org_As_Yes      |
-      | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields                        | Valid_Data_is_nhs_hsc_organisation          | Field_Error_Message_Except_NHS_HSC_Org_Lead_Nation |
+      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Third | Navigation_Button_Fourth | Project_Details_Title       | Key_Project_Roles                        | Research_Locations                          | Field_And_Summary_Error_Message                    |
+      | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields              | Valid_Data_All_Empty_Fields                 | All_Field_Error_Message                            |
+      | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_Only_Title_Field | Valid_Data_All_Empty_Fields              | Valid_Data_All_Empty_Fields                 | Field_Error_Message_Except_Project_Title           |
+      | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_Only_Date_Fields | Valid_Data_All_Empty_Fields              | Valid_Data_All_Empty_Fields                 | Field_Error_Message_Except_End_Date                |
+      | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_All_Empty_Fields | Valid_Data_Only_Investigator_Email_Field | Valid_Data_All_Empty_Fields                 | Field_Error_Message_Except_Chief_Investigator      |
+      | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_All_Empty_Fields | Valid_Data_Only_Sponsor_Email_Field      | Valid_Data_All_Empty_Fields                 | Field_Error_Message_Except_Sponsor_Contact         |
+      | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields              | Valid_Data_Only_Nations_Participating       | Field_Error_Message_Except_Nations_Participating   |
+      | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields              | Valid_Data_Only_is_nhs_hsc_organisation_Two | Field_Error_Message_Except_NHS_HSC_Org             |
+      | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields              | Valid_Data_Only_is_nhs_hsc_organisation     | Field_Error_Message_Except_NHS_HSC_Org_As_Yes      |
+      | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields              | Valid_Data_is_nhs_hsc_organisation          | Field_Error_Message_Except_NHS_HSC_Org_Lead_Nation |
