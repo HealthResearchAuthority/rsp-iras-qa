@@ -90,32 +90,6 @@ export default class ManageReviewBodiesPage {
     expect(await this.page.title()).toBe(this.manageReviewBodiesPageData.Manage_Review_Body_Page.title);
   }
 
-  // async searchAndClickReviewBodyProfile(reviewBodyName: string, reviewBodyStatus: string) {
-  //   let dataFound = false;
-  //   while (!dataFound) {
-  //     const rowCount = await this.review_bodies_list_rows.count();
-  //     for (let i = rowCount - 1; i > 0; i--) {
-  //       const organisationNameText = await this.review_bodies_list_rows
-  //         .nth(i)
-  //         .locator(this.organisation_name_from_list)
-  //         .textContent();
-  //       const organisationStatusText = await this.review_bodies_list_rows
-  //         .nth(i)
-  //         .locator(this.status_from_list)
-  //         .textContent();
-  //       if (organisationNameText?.trim() === reviewBodyName && organisationStatusText?.trim() === reviewBodyStatus) {
-  //         await this.review_bodies_list_rows.nth(i).getByText('View/Edit').click();
-  //         dataFound = true;
-  //         break;
-  //       }
-  //     }
-  //     // This code need to be updated when pagination enabled in manage review bodies page
-  //     if (!dataFound) {
-  //       throw new Error('Review body, Data not found');
-  //     }
-  //   }
-  // }
-
   async getRowByOrgName(orgName: string, exactMatch: boolean) {
     return this.mainPageContent.locator('tr', {
       has: this.page.locator('td').getByText(`${orgName}`, { exact: exactMatch }),
