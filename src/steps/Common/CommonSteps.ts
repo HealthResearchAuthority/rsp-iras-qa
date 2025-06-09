@@ -799,32 +799,28 @@ When(
 );
 
 Then(
-  'the system displays no results found message if there is no user on the system that matches the search criteria',
-  async ({ manageUsersPage, commonItemsPage, userListReviewBodyPage }) => {
+  'the system displays no results found message if there is no {string} on the system that matches the search criteria',
+  async ({ commonItemsPage, userListReviewBodyPage, manageUsersPage, manageReviewBodiesPage }, entityType: string) => {
     const filteredSearchResults = await commonItemsPage.getFilteredSearchResultsBeforeSearch(userListReviewBodyPage);
     expect(await commonItemsPage.tableRows.count()).toBe(0);
     expect(filteredSearchResults).toEqual([]);
-    await expect(manageUsersPage.no_results_heading).toHaveText(
-      manageUsersPage.manageUsersPageTestData.Manage_Users_Page.no_results_heading
-    );
-    await expect(manageUsersPage.no_results_guidance_text).toHaveText(
-      manageUsersPage.manageUsersPageTestData.Manage_Users_Page.no_results_guidance_text
-    );
-  }
-);
-
-Then(
-  'the system displays no results found message if there is no review body on the system that matches the search criteria',
-  async ({ manageReviewBodiesPage, commonItemsPage, userListReviewBodyPage }) => {
-    const filteredSearchResults = await commonItemsPage.getFilteredSearchResultsBeforeSearch(userListReviewBodyPage);
-    expect(await commonItemsPage.tableRows.count()).toBe(0);
-    expect(filteredSearchResults).toEqual([]);
-    await expect(manageReviewBodiesPage.no_results_heading).toHaveText(
-      manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.no_results_heading
-    );
-    await expect(manageReviewBodiesPage.no_results_guidance_text).toHaveText(
-      manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.no_results_guidance_text
-    );
+    let headingLocator: Locator, guidanceLocator: Locator, expectedHeading: any, expectedGuidance: any;
+    if (entityType === 'user') {
+      headingLocator = manageUsersPage.no_results_heading;
+      guidanceLocator = manageUsersPage.no_results_guidance_text;
+      expectedHeading = manageUsersPage.manageUsersPageTestData.Manage_Users_Page.no_results_heading;
+      expectedGuidance = manageUsersPage.manageUsersPageTestData.Manage_Users_Page.no_results_guidance_text;
+    } else if (entityType === 'review body') {
+      headingLocator = manageReviewBodiesPage.no_results_heading;
+      guidanceLocator = manageReviewBodiesPage.no_results_guidance_text;
+      expectedHeading = manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.no_results_heading;
+      expectedGuidance =
+        manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.no_results_guidance_text;
+    } else {
+      throw new Error(`Unsupported entity type: ${entityType}`);
+    }
+    await expect(headingLocator).toHaveText(expectedHeading);
+    await expect(guidanceLocator).toHaveText(expectedGuidance);
   }
 );
 
@@ -886,7 +882,7 @@ Given(
 Given(
   'I have navigated to the {string} as {string}',
   async (
-    { homePage, systemAdministrationPage, accessDeniedPage, manageReviewBodiesPage, myResearchProjectsPage },
+    { homePage, systemAdministrationPage, accessDeniedPage, myResearchProjectsPage },
     page: string,
     user: string
   ) => {
@@ -907,11 +903,6 @@ Given(
         await systemAdministrationPage.page.context().addCookies(authState.cookies);
         await systemAdministrationPage.goto();
         await accessDeniedPage.assertOnAccessDeniedPage();
-        break;
-      case 'Manage_Review_Bodies_Page':
-        await manageReviewBodiesPage.page.context().addCookies(authState.cookies);
-        await manageReviewBodiesPage.goto();
-        await manageReviewBodiesPage.assertOnManageReviewBodiesPage();
         break;
       case 'My_Research_Page':
         await myResearchProjectsPage.page.context().addCookies(authState.cookies);
