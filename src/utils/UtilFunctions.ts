@@ -249,32 +249,24 @@ export async function getBrowserVersionDevices(deviceType: string): Promise<stri
 
 function getMobileBrowserData() {
   if (`${process.env.OS_TYPE?.toLowerCase()}` == 'ios') {
-    if (`${process.env.IOS_Device}` != 'N/A') {
-      if (`${process.env.IOS_Device}` === 'iPad Mini 6' || `${process.env.IOS_Device}` === 'iPad Mini 6 landscape') {
-        browserdata = getMobileConfig(`${process.env.IOS_Device}`);
-      } else {
-        browserdata = devices[`${process.env.IOS_Device}`];
-      }
-      deviceType = `${process.env.IOS_Device}`;
+    if (`${process.env.IOS_Device}` === 'iPad Mini 6' || `${process.env.IOS_Device}` === 'iPad Mini 6 landscape') {
+      browserdata = getMobileConfig(`${process.env.IOS_Device}`);
     } else {
-      throw new Error('Invalid iOS device type selected, Please choose any valid option');
+      browserdata = devices[`${process.env.IOS_Device}`];
     }
+    deviceType = `${process.env.IOS_Device}`;
   } else if (`${process.env.OS_TYPE?.toLowerCase()}` == 'android') {
-    if (`${process.env.ANDROID_Device}` != 'N/A') {
-      if (
-        `${process.env.ANDROID_Device}` === 'Galaxy S20 Ultra' ||
-        `${process.env.ANDROID_Device}` === 'Galaxy S20 Ultra landscape' ||
-        `${process.env.ANDROID_Device}` === 'Samsung Galaxy Z Fold 3' ||
-        `${process.env.ANDROID_Device}` === 'Samsung Galaxy Z Fold 3 landscape'
-      ) {
-        browserdata = getMobileConfig(`${process.env.ANDROID_Device}`);
-      } else {
-        browserdata = devices[`${process.env.ANDROID_Device}`];
-      }
-      deviceType = `${process.env.ANDROID_Device}`;
+    if (
+      `${process.env.ANDROID_Device}` === 'Galaxy S20 Ultra' ||
+      `${process.env.ANDROID_Device}` === 'Galaxy S20 Ultra landscape' ||
+      `${process.env.ANDROID_Device}` === 'Samsung Galaxy Z Fold 3' ||
+      `${process.env.ANDROID_Device}` === 'Samsung Galaxy Z Fold 3 landscape'
+    ) {
+      browserdata = getMobileConfig(`${process.env.ANDROID_Device}`);
     } else {
-      throw new Error('Invalid Android device type selected, Please choose any valid option');
+      browserdata = devices[`${process.env.ANDROID_Device}`];
     }
+    deviceType = `${process.env.ANDROID_Device}`;
   } else {
     throw new Error('Invalid Mobile OS type selected, Please choose any valid option');
   }
