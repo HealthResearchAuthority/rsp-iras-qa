@@ -173,4 +173,15 @@ export default class ManageReviewBodiesPage {
     }
     return searchKey;
   }
+
+  async getReviewbodyStatus(status: string, manageReviewBodiesPage: ManageReviewBodiesPage) {
+    let reviewBodyStatus: string;
+    const datasetStatus = manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page;
+    if (status.toLowerCase() == 'disabled') {
+      reviewBodyStatus = datasetStatus.disabled_status;
+    } else {
+      reviewBodyStatus = datasetStatus.enabled_status;
+    }
+    return reviewBodyStatus;
+  }
 }

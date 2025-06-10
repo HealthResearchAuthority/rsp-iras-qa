@@ -6,13 +6,7 @@ const { When, Then } = createBdd(test);
 Then(
   'I can see the review body for {string} is present in the list with {string} status',
   async ({ manageReviewBodiesPage, createReviewBodyPage }, datasetName: string, status: string) => {
-    let reviewBodyStatus: string;
-    const datasetStatus = manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page;
-    if (status.toLowerCase() == 'disabled') {
-      reviewBodyStatus = datasetStatus.disabled_status;
-    } else {
-      reviewBodyStatus = datasetStatus.enabled_status;
-    }
+    const reviewBodyStatus = await manageReviewBodiesPage.getReviewbodyStatus(status, manageReviewBodiesPage);
     const dataset = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body[datasetName];
     const expectedCountryValue: string = dataset.country_checkbox.toString();
     const reviewBodyName = await createReviewBodyPage.getUniqueOrgName();
@@ -103,19 +97,13 @@ Then(
   'I search {string} review body and click on view edit link for {string} with {string} status',
   async ({ createReviewBodyPage, manageReviewBodiesPage }, recordType: string, datasetName: string, status: string) => {
     let reviewBodyName: string;
-    let reviewBodyStatus: string;
     if (recordType.toLowerCase() == 'existing') {
       const dataset = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body[datasetName];
       reviewBodyName = dataset.organisation_name_text;
     } else {
       reviewBodyName = await createReviewBodyPage.getUniqueOrgName();
     }
-    const datasetStatus = manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page;
-    if (status.toLowerCase() == 'disabled') {
-      reviewBodyStatus = datasetStatus.disabled_status;
-    } else {
-      reviewBodyStatus = datasetStatus.enabled_status;
-    }
+    const reviewBodyStatus = await manageReviewBodiesPage.getReviewbodyStatus(status, manageReviewBodiesPage);
     await manageReviewBodiesPage.goto(
       manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.enlarged_page_size,
       reviewBodyName
@@ -156,13 +144,7 @@ When(
 When(
   'I can see the newly created review body should be present in the list with {string} status in the manage review bodies page',
   async ({ manageReviewBodiesPage, createReviewBodyPage }, status: string) => {
-    let reviewBodyStatus: string;
-    const dataset = manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page;
-    if (status.toLowerCase() == 'disabled') {
-      reviewBodyStatus = dataset.disabled_status;
-    } else {
-      reviewBodyStatus = dataset.enabled_status;
-    }
+    const reviewBodyStatus = await manageReviewBodiesPage.getReviewbodyStatus(status, manageReviewBodiesPage);
     const reviewBodyName = await createReviewBodyPage.getUniqueOrgName();
     await manageReviewBodiesPage.goto(
       manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.enlarged_page_size,
@@ -176,13 +158,7 @@ When(
 When(
   'I select the previously used review body should be present in the list with {string} status in the manage review bodies page',
   async ({ manageReviewBodiesPage, reviewBodyProfilePage }, status: string) => {
-    let reviewBodyStatus: string;
-    const dataset = manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page;
-    if (status.toLowerCase() == 'disabled') {
-      reviewBodyStatus = dataset.disabled_status;
-    } else {
-      reviewBodyStatus = dataset.enabled_status;
-    }
+    const reviewBodyStatus = await manageReviewBodiesPage.getReviewbodyStatus(status, manageReviewBodiesPage);
     const reviewBodyName = await reviewBodyProfilePage.getOrgName();
     await manageReviewBodiesPage.goto(
       manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.enlarged_page_size,
@@ -198,13 +174,7 @@ When(
 When(
   'I select a {string} Review Body to View and Edit which is {string}',
   async ({ manageReviewBodiesPage }, reviewBodyName: string, status: string) => {
-    let reviewBodyStatus: string;
-    const dataset = manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page;
-    if (status.toLowerCase() == 'disabled') {
-      reviewBodyStatus = dataset.disabled_status;
-    } else {
-      reviewBodyStatus = dataset.enabled_status;
-    }
+    const reviewBodyStatus = await manageReviewBodiesPage.getReviewbodyStatus(status, manageReviewBodiesPage);
     const foundRecords = await manageReviewBodiesPage.findReviewBodyByStatus(reviewBodyName, reviewBodyStatus);
     expect(foundRecords).toBeDefined();
     expect(foundRecords).toHaveCount(1);
