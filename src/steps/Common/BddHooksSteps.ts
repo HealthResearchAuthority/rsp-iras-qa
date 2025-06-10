@@ -21,7 +21,12 @@ AfterStep(async ({ page, $step, $testInfo }) => {
     const safeTitle = $testInfo.title.replace(/[^\w-]/g, '_');
     const fileName = `${safeTitle}-${Date.now()}.png`;
     const screenshotPath = path.join(screenshotDir, fileName);
-    await page.screenshot({ path: screenshotPath, fullPage: true });
+    const isFirefox = process.env.BROWSER?.toLowerCase() === 'firefox';
+    if (isFirefox) {
+      await page.screenshot({ path: screenshotPath, fullPage: false });
+    } else {
+      await page.screenshot({ path: screenshotPath, fullPage: true });
+    }
     let hyperlink = '';
     if (process.env.CUCUMBER_REPORT_TYPE === 'true') {
       // Relative path from Cucumber report

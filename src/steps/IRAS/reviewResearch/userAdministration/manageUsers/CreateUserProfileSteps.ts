@@ -58,8 +58,7 @@ Then(
   async ({ createUserProfilePage, commonItemsPage, editUserProfilePage }, datasetName: string) => {
     const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
     const selectedCheckboxCount = (await editUserProfilePage.getCheckedCheckboxLabels()).length;
-    const shouldClear = dataset['role_checkbox'].includes('operations') || selectedCheckboxCount > 0;
-    if (shouldClear) {
+    if (dataset['role_checkbox'].includes('operations') || selectedCheckboxCount > 0) {
       await commonItemsPage.clearCheckboxes(
         dataset,
         ['country_checkbox', 'access_required_checkbox'],
