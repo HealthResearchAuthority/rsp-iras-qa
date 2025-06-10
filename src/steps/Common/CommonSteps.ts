@@ -405,7 +405,7 @@ Then(
         data: createReviewBodyPage.createReviewBodyPageData.Create_Review_Body.Validation,
       },
       Edit_Review_Body_Page: {
-        page: createReviewBodyPage,
+        page: editReviewBodyPage,
         data: editReviewBodyPage.editReviewBodyPageData.Edit_Review_Body.Validation,
       },
       Review_Your_Answers_Page: {
@@ -413,47 +413,56 @@ Then(
         data: reviewYourAnswersPage.reviewYourAnswersPageTestData,
       },
     };
+
     const { page, data } = pageMap[pageKey];
     const errorMessageFieldDataset = data[errorMessageFieldAndSummaryDatasetName];
     const isMultiError = [
       'Incorrect_Format_Invalid_Character_Limit_Telephone_Error',
       'Incorrect_Format_Invalid_Character_Limit_Email_Address_Error',
     ].includes(errorMessageFieldAndSummaryDatasetName);
+
     await expect(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
+
     const expectedSummaryErrors = isMultiError
       ? Object.values(errorMessageFieldDataset).toString()
       : Object.values(errorMessageFieldDataset);
     const actualSummaryErrors = isMultiError
       ? (await commonItemsPage.getSummaryErrorMessages()).toString()
       : await commonItemsPage.getSummaryErrorMessages();
+
     expect(actualSummaryErrors).toEqual(expectedSummaryErrors);
+
     for (const key of Object.keys(errorMessageFieldDataset)) {
       const expectedError = errorMessageFieldDataset[key];
+
       if (pageKey === 'Review_Your_Answers_Page') {
-        expect(await page[key].getByRole('link').evaluate((e: any) => getComputedStyle(e).color)).toBe(
-          commonItemsPage.commonTestData.rgb_red_color
+        await commonItemsPage.validateReviewYourAnswersPage(
+          key,
+          expectedError,
+          page,
+          commonItemsPage,
+          reviewYourAnswersPage,
+          errorMessageFieldDataset
         );
-        const fieldErrors = await reviewYourAnswersPage.getFieldErrorMessages(key, page);
-        expect(fieldErrors).toEqual(expectedError);
-        const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
-        await expect(element).toBeInViewport();
       } else if (isMultiError) {
-        const actualFieldErrors = (await commonItemsPage.getMultipleFieldErrorMessages(key, page)).toString();
-        const expectedFieldErrors = Object.values(errorMessageFieldDataset).toString();
-        expect.soft(actualFieldErrors).toEqual(expectedFieldErrors);
-        const summaryErrors =
-          typeof actualSummaryErrors === 'string' ? actualSummaryErrors.split(',') : actualSummaryErrors;
-        for (const val of summaryErrors) {
-          const element = await commonItemsPage.clickErrorSummaryLinkMultipleErrorField(val, key, page);
-          await expect(element).toBeInViewport();
-        }
+        await commonItemsPage.validateMultiErrorField(
+          key,
+          expectedSummaryErrors,
+          actualSummaryErrors,
+          page,
+          commonItemsPage
+        );
       } else {
-        const fieldErrors = await commonItemsPage.getFieldErrorMessages(key, page);
-        expect(fieldErrors).toEqual(expectedError);
-        const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
-        await expect(element).toBeInViewport();
+        await commonItemsPage.validateStandardField(
+          key,
+          expectedError,
+          page,
+          commonItemsPage,
+          errorMessageFieldDataset
+        );
       }
     }
+
     if (errorMessageFieldAndSummaryDatasetName === 'Max_Description_Words_Error') {
       await expect(createReviewBodyPage.description_reason_error).toHaveText(
         createReviewBodyPage.createReviewBodyPageData.Create_Review_Body.Validation.Max_Description_Reason

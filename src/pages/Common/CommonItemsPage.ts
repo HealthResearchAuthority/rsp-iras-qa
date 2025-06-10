@@ -18,6 +18,7 @@ import { PageObjectDataName } from '../../utils/CustomTypes';
 import { confirmStringNotNull, removeUnwantedWhitespace } from '../../utils/UtilFunctions';
 import UserListReviewBodyPage from '../IRAS/reviewResearch/userAdministration/manageReviewBodies/UserListReviewBodyPage';
 import ManageReviewBodiesPage from '../IRAS/reviewResearch/userAdministration/manageReviewBodies/ManageReviewBodiesPage';
+import ReviewYourAnswersPage from '../IRAS/makeChanges/ReviewYourAnswersPage';
 
 //Declare Page Objects
 export default class CommonItemsPage {
@@ -884,5 +885,54 @@ export default class CommonItemsPage {
     const searchTerms = await this.splitSearchTerm(searchKey);
     const filteredSearchResults = await this.filterResults(userValues, searchTerms);
     return filteredSearchResults;
+  }
+
+  async validateReviewYourAnswersPage(
+    key: string,
+    expectedError: any,
+    page: any,
+    commonItemsPage: CommonItemsPage,
+    reviewYourAnswersPage: ReviewYourAnswersPage,
+    errorMessageFieldDataset: any
+  ) {
+    expect(await page[key].getByRole('link').evaluate((e: any) => getComputedStyle(e).color)).toBe(
+      commonItemsPage.commonTestData.rgb_red_color
+    );
+    const fieldErrors = await reviewYourAnswersPage.getFieldErrorMessages(key, page);
+    expect(fieldErrors).toEqual(expectedError);
+    const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
+    await expect(element).toBeInViewport();
+  }
+
+  async validateMultiErrorField(
+    key: string,
+    expectedFieldErrors: any,
+    actualSummaryErrors: any,
+    page: any,
+    commonItemsPage: CommonItemsPage
+  ) {
+    const actualFieldErrors = (await commonItemsPage.getMultipleFieldErrorMessages(key, page)).toString();
+    expect.soft(actualFieldErrors).toEqual(expectedFieldErrors);
+
+    const summaryErrors =
+      typeof actualSummaryErrors === 'string' ? actualSummaryErrors.split(',') : actualSummaryErrors;
+
+    for (const val of summaryErrors) {
+      const element = await commonItemsPage.clickErrorSummaryLinkMultipleErrorField(val, key, page);
+      await expect(element).toBeInViewport();
+    }
+  }
+
+  async validateStandardField(
+    key: string,
+    expectedError: any,
+    page: any,
+    commonItemsPage: CommonItemsPage,
+    errorMessageFieldDataset: any
+  ) {
+    const fieldErrors = await commonItemsPage.getFieldErrorMessages(key, page);
+    expect(fieldErrors).toEqual(expectedError);
+    const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
+    await expect(element).toBeInViewport();
   }
 }
