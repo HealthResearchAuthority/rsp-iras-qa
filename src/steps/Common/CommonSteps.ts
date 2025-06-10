@@ -413,28 +413,22 @@ Then(
         data: reviewYourAnswersPage.reviewYourAnswersPageTestData,
       },
     };
-
     const { page, data } = pageMap[pageKey];
     const errorMessageFieldDataset = data[errorMessageFieldAndSummaryDatasetName];
     const isMultiError = [
       'Incorrect_Format_Invalid_Character_Limit_Telephone_Error',
       'Incorrect_Format_Invalid_Character_Limit_Email_Address_Error',
     ].includes(errorMessageFieldAndSummaryDatasetName);
-
     await expect(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
-
     const expectedSummaryErrors = isMultiError
       ? Object.values(errorMessageFieldDataset).toString()
       : Object.values(errorMessageFieldDataset);
     const actualSummaryErrors = isMultiError
       ? (await commonItemsPage.getSummaryErrorMessages()).toString()
       : await commonItemsPage.getSummaryErrorMessages();
-
     expect(actualSummaryErrors).toEqual(expectedSummaryErrors);
-
     for (const key of Object.keys(errorMessageFieldDataset)) {
       const expectedError = errorMessageFieldDataset[key];
-
       if (pageKey === 'Review_Your_Answers_Page') {
         await commonItemsPage.validateReviewYourAnswersPage(
           key,
@@ -462,7 +456,6 @@ Then(
         );
       }
     }
-
     if (errorMessageFieldAndSummaryDatasetName === 'Max_Description_Words_Error') {
       await expect(createReviewBodyPage.description_reason_error).toHaveText(
         createReviewBodyPage.createReviewBodyPageData.Create_Review_Body.Validation.Max_Description_Reason
@@ -475,7 +468,6 @@ When(
   'I enter {string} into the search field',
   async ({ commonItemsPage, reviewBodyProfilePage, createReviewBodyPage }, inputType: string) => {
     let searchValue: string;
-
     switch (inputType) {
       case 'organisation name of the previously used review body':
         searchValue = await reviewBodyProfilePage.getOrgName();

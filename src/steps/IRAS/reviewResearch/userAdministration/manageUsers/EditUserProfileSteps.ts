@@ -159,8 +159,7 @@ Then(
     if (roleValue === '') {
       await commonItemsPage.fillUIComponent(dataset, 'role_checkbox', editUserProfilePage);
     }
-    const shouldClear = roleValue.includes('operations') || selectedCheckboxCount > 0;
-    if (shouldClear) {
+    if (roleValue.includes('operations') || selectedCheckboxCount > 0) {
       await commonItemsPage.clearCheckboxes(
         dataset,
         ['country_checkbox', 'access_required_checkbox'],
