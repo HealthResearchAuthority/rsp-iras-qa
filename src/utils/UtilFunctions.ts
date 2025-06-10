@@ -187,7 +187,7 @@ export function getMobileConfig(deviceName: string): any {
   return browser;
 }
 
-export function getBrowserType(deviceType: string): string {
+export function getBrowser(deviceType: string): any {
   let browser: any;
   if (
     `${process.env.PLATFORM?.toLowerCase()}` == 'mobile' &&
@@ -207,6 +207,11 @@ export function getBrowserType(deviceType: string): string {
   } else {
     browser = devices[`${deviceType}`];
   }
+  return browser;
+}
+
+export function getBrowserType(deviceType: string): string {
+  const browser = getBrowser(deviceType);
   let browserName: string;
   if (`${process.env.BROWSER?.toLowerCase()}` == 'microsoft edge') {
     browserName = 'Microsoft Edge';
@@ -219,25 +224,7 @@ export function getBrowserType(deviceType: string): string {
 }
 
 export async function getBrowserVersionDevices(deviceType: string): Promise<string | undefined> {
-  let browser: any;
-  if (
-    `${process.env.PLATFORM?.toLowerCase()}` == 'mobile' &&
-    `${process.env.OS_TYPE?.toLowerCase()}` == 'ios' &&
-    (`${process.env.IOS_Device}` === 'iPad Mini 6' || `${process.env.IOS_Device}` === 'iPad Mini 6 landscape')
-  ) {
-    browser = getMobileConfig(`${process.env.IOS_Device}`);
-  } else if (
-    `${process.env.PLATFORM?.toLowerCase()}` == 'mobile' &&
-    `${process.env.OS_TYPE?.toLowerCase()}` == 'android' &&
-    (`${process.env.ANDROID_Device}` === 'Galaxy S20 Ultra' ||
-      `${process.env.ANDROID_Device}` === 'Galaxy S20 Ultra landscape' ||
-      `${process.env.ANDROID_Device}` === 'Samsung Galaxy Z Fold 3' ||
-      `${process.env.ANDROID_Device}` === 'Samsung Galaxy Z Fold 3 landscape')
-  ) {
-    browser = getMobileConfig(`${process.env.ANDROID_Device}`);
-  } else {
-    browser = devices[`${deviceType}`];
-  }
+  const browser = getBrowser(deviceType);
   let version: string | undefined;
   const browserType = `${JSON.parse(JSON.stringify(browser)).defaultBrowserType}`;
   if (browserType == 'chromium') {
