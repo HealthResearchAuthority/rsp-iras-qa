@@ -58,23 +58,14 @@ Then(
   async ({ createUserProfilePage, commonItemsPage, editUserProfilePage }, datasetName: string) => {
     const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
     const selectedCheckboxCount = (await editUserProfilePage.getCheckedCheckboxLabels()).length;
-    if (dataset['role_checkbox'].includes('operations')) {
-      for (const key in dataset) {
-        if (key === 'country_checkbox' || key === 'access_required_checkbox') {
-          if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-            await commonItemsPage.clearUIComponent(dataset, key, createUserProfilePage);
-          }
-        }
-      }
-      await commonItemsPage.clearUIComponent(dataset, 'role_checkbox', createUserProfilePage);
-    } else if (selectedCheckboxCount > 0) {
-      for (const key in dataset) {
-        if (key === 'country_checkbox' || key === 'access_required_checkbox') {
-          if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-            await commonItemsPage.clearUIComponent(dataset, key, createUserProfilePage);
-          }
-        }
-      }
+    const shouldClear = dataset['role_checkbox'].includes('operations') || selectedCheckboxCount > 0;
+    if (shouldClear) {
+      await commonItemsPage.clearCheckboxes(
+        dataset,
+        ['country_checkbox', 'access_required_checkbox'],
+        commonItemsPage,
+        createUserProfilePage
+      );
       await commonItemsPage.clearUIComponent(dataset, 'role_checkbox', createUserProfilePage);
     }
   }

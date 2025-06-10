@@ -155,27 +155,18 @@ Then(
   async ({ userProfilePage, editUserProfilePage, commonItemsPage }, datasetName: string) => {
     const dataset = editUserProfilePage.editUserProfilePageTestData.Edit_User_Profile[datasetName];
     const roleValue = (await userProfilePage.getRole()).join(', ');
+    const selectedCheckboxCount = (await editUserProfilePage.getCheckedCheckboxLabels()).length;
     if (roleValue === '') {
       await commonItemsPage.fillUIComponent(dataset, 'role_checkbox', editUserProfilePage);
     }
-    const selectedCheckboxCount = (await editUserProfilePage.getCheckedCheckboxLabels()).length;
-    if (roleValue.includes('operations')) {
-      for (const key in dataset) {
-        if (key === 'country_checkbox' || key === 'access_required_checkbox') {
-          if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-            await commonItemsPage.clearUIComponent(dataset, key, editUserProfilePage);
-          }
-        }
-      }
-      await commonItemsPage.clearUIComponent(dataset, 'role_checkbox', editUserProfilePage);
-    } else if (selectedCheckboxCount > 0) {
-      for (const key in dataset) {
-        if (key === 'country_checkbox' || key === 'access_required_checkbox') {
-          if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-            await commonItemsPage.clearUIComponent(dataset, key, editUserProfilePage);
-          }
-        }
-      }
+    const shouldClear = roleValue.includes('operations') || selectedCheckboxCount > 0;
+    if (shouldClear) {
+      await commonItemsPage.clearCheckboxes(
+        dataset,
+        ['country_checkbox', 'access_required_checkbox'],
+        commonItemsPage,
+        editUserProfilePage
+      );
       await commonItemsPage.clearUIComponent(dataset, 'role_checkbox', editUserProfilePage);
     }
   }

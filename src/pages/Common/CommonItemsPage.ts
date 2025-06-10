@@ -936,4 +936,12 @@ export default class CommonItemsPage {
     const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
     await expect(element).toBeInViewport();
   }
+
+  async clearCheckboxes(dataset: any, keys: string[], commonItemsPage: any, createUserProfilePage: any) {
+    for (const key of keys) {
+      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+        await commonItemsPage.clearUIComponent(dataset, key, createUserProfilePage);
+      }
+    }
+  }
 }

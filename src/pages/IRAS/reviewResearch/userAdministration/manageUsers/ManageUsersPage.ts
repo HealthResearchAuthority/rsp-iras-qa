@@ -166,25 +166,21 @@ export default class ManageUsersPage {
   }
 
   async findUserByStatus(searchKey: string, userStatus: string) {
-    let foundRecord = false;
     let hasNextPage = true;
-    while (hasNextPage && !foundRecord) {
+    while (hasNextPage) {
       const rows = await this.userListRows.all();
       for (const row of rows) {
         const columns = await row.locator(this.listCell).allTextContents();
-        if (
+        const matchesSearchKey =
           columns[0].trim().includes(searchKey) ||
           columns[1].trim().includes(searchKey) ||
-          columns[2].trim().includes(searchKey)
-        ) {
-          if (columns[3].trim() === userStatus) {
-            foundRecord = true;
-            return row;
-          }
+          columns[2].trim().includes(searchKey);
+        if (matchesSearchKey && columns[3].trim() === userStatus) {
+          return row;
         }
       }
       hasNextPage = (await this.next_button.isVisible()) && !(await this.next_button.isDisabled());
-      if (hasNextPage && !foundRecord) {
+      if (hasNextPage) {
         await this.next_button.click();
         await this.page.waitForLoadState('domcontentloaded');
       }
