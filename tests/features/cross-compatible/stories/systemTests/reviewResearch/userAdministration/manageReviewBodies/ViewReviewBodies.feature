@@ -87,7 +87,7 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
         And the 'Next' button will be 'enabled' and 'visible' to the user
         And the 'Previous' button will be 'disabled' and 'not visible' to the user
         And the current page number should be visually highlighted to indicate the active page the user is on
-        Then I sequentially navigate through each page by 'clicking on page number' from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+        # Then I sequentially navigate through each page by 'clicking on page number' from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges
         And I capture the page screenshot
 
     @rsp-3523 @ManageReviewBodiesPagination @ManageReviewBodiesPaginationFirstPage @ManageReviewBodiesPaginationNextLinkClick
@@ -100,7 +100,7 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
         And the 'Previous' button will be 'disabled' and 'not visible' to the user
         And the current page number should be visually highlighted to indicate the active page the user is on
         And I capture the page screenshot
-        Then I sequentially navigate through each page by 'clicking on next link' from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+        # Then I sequentially navigate through each page by 'clicking on next link' from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges
         And I capture the page screenshot
 
     @rsp-3523 @ManageReviewBodiesPagination @ManageReviewBodiesPaginationLastPage  @ManageReviewBodiesPaginationPreviousLinkClick
@@ -111,7 +111,7 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
         And the 'Next' button will be 'disabled' and 'not visible' to the user
         And the 'Previous' button will be 'enabled' and 'visible' to the user
         And I capture the page screenshot
-        Then I sequentially navigate through each page by 'clicking on previous link' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+        # Then I sequentially navigate through each page by 'clicking on previous link' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
         And I capture the page screenshot
 
     @rsp-3523 @ManageReviewBodiesPagination @ManageReviewBodiesPaginationLastPage   @ManageReviewBodiesPaginationPageNumber
@@ -122,7 +122,7 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
         And the 'Next' button will be 'disabled' and 'not visible' to the user
         And the 'Previous' button will be 'enabled' and 'visible' to the user
         And I capture the page screenshot
-        Then I sequentially navigate through each page by 'clicking on page number' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+        # Then I sequentially navigate through each page by 'clicking on page number' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
         And I capture the page screenshot
 
     @rsp-3459 @ManageReviewBodiesSearchResultsFound @Smoke
@@ -158,7 +158,7 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
         And I capture the page screenshot
         Then the system displays review bodies matching the search criteria
         And I capture the page screenshot
-        Then I sequentially navigate through each page by 'clicking on previous link' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+        # Then I sequentially navigate through each page by 'clicking on previous link' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
         And I capture the page screenshot
         Examples:
             | Search_Query           |

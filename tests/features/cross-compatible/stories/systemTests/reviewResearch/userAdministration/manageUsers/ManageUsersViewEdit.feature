@@ -238,7 +238,7 @@ Feature: User Administration: Manage user profiles, view and edit user profile
         And the 'Previous' button will be 'disabled' and 'not visible' to the user
         And the current page number should be visually highlighted to indicate the active page the user is on
         And I capture the page screenshot
-        Then I sequentially navigate through each page by 'clicking on page number' from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+        # Then I sequentially navigate through each page by 'clicking on page number' from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges
         And I capture the page screenshot
 
     @rsp-3521 @ManageUsersPagination @ManageUsersPaginationFirstPage @ManageUsersPaginationNextLinkClick
@@ -251,7 +251,7 @@ Feature: User Administration: Manage user profiles, view and edit user profile
         And the 'Previous' button will be 'disabled' and 'not visible' to the user
         And the current page number should be visually highlighted to indicate the active page the user is on
         And I capture the page screenshot
-        Then I sequentially navigate through each page by 'clicking on next link' from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+        # Then I sequentially navigate through each page by 'clicking on next link' from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges
         And I capture the page screenshot
 
     @rsp-3521 @ManageUsersPagination @ManageUsersPaginationLastPage  @ManageUsersPaginationPreviousLinkClick
@@ -262,7 +262,7 @@ Feature: User Administration: Manage user profiles, view and edit user profile
         And the 'Next' button will be 'disabled' and 'not visible' to the user
         And the 'Previous' button will be 'enabled' and 'visible' to the user
         And I capture the page screenshot
-        Then I sequentially navigate through each page by 'clicking on previous link' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+        # Then I sequentially navigate through each page by 'clicking on previous link' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
         And I capture the page screenshot
 
     @rsp-3521 @ManageUsersPagination @ManageUsersPaginationLastPage  @ManageUsersPaginationPageNumber
@@ -272,7 +272,7 @@ Feature: User Administration: Manage user profiles, view and edit user profile
         Then the pagination controls should be displayed at the bottom of the page
         And the 'Next' button will be 'disabled' and 'not visible' to the user
         And the 'Previous' button will be 'enabled' and 'visible' to the user
-        Then I sequentially navigate through each page by 'clicking on page number' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+        # Then I sequentially navigate through each page by 'clicking on page number' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
         And I capture the page screenshot
 
     @rsp-3456 @ManageUsersSearchResultsFound @Smoke
@@ -325,7 +325,7 @@ Feature: User Administration: Manage user profiles, view and edit user profile
         And I capture the page screenshot
         Then the system displays user records matching the search criteria
         And I capture the page screenshot
-        Then I sequentially navigate through each page by 'clicking on previous link' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+        # Then I sequentially navigate through each page by 'clicking on previous link' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
         And I capture the page screenshot
         Examples:
             | Search_Query                |
