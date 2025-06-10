@@ -33,7 +33,7 @@ AfterStep(async ({ page, $step, $testInfo }) => {
       path: screenshotPath,
       fullPage: !isFirefox,
     });
-    console.info(`📸 Screenshot captured (${isFirefox ? 'viewport only' : 'full page'}) for browser: ${browserName}`);
+    console.info(`Screenshot captured (${isFirefox ? 'viewport only' : 'full page'}) for browser: ${browserName}`);
   } catch (err) {
     console.error('Failed to capture screenshot:', err);
     return;
