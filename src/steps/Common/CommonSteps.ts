@@ -528,11 +528,13 @@ When(
     await commonItemsPage.next_button.click();
     const currentUrl = commonItemsPage.page.url();
     const pageNumber = await commonItemsPage.getPageNumber(currentUrl);
-    await expect(commonItemsPage.currentPage).toHaveAttribute('aria-current', 'page');
-    const pageLink = commonItemsPage.pagination.getByRole('link', { name: 'Page ' + pageNumber });
-    await expect(pageLink).toHaveAttribute('aria-label', 'Page ' + pageNumber);
-    const hrefValue = await pageLink.getAttribute('href');
-    expect(currentUrl).toContain(hrefValue);
+    const pageLabel = `Page ${pageNumber}`;
+    const currentPage = commonItemsPage.currentPage;
+    const pageLink = commonItemsPage.pagination.getByRole('link', { name: pageLabel });
+    await expect(currentPage).toHaveAttribute('aria-current', 'page');
+    await expect(pageLink).toHaveAttribute('aria-label', pageLabel);
+    const href = await pageLink.getAttribute('href');
+    expect(currentUrl).toContain(href);
     await commonItemsPage.previous_button.click();
   }
 );
@@ -562,7 +564,7 @@ Then(
       const visiblePages: any = visiblePagesMap.get('visiblePages');
       const allVisibleItems: any = itemsMap.get('allVisibleItems');
       if (totalPages <= 7) {
-        expect(visiblePages).toEqual(allVisibleItems);
+        expect.soft(visiblePages).toEqual(allVisibleItems.map(Number));
         expect(ellipsisIndices.length).toBe(0);
       }
       const firstPage = 1;
@@ -574,13 +576,9 @@ Then(
             expect(allVisibleItems).toEqual([`${firstPage}`, `${currentPage + 1}`, '⋯', `${lastPage}`]);
           } else if (currentPage === firstPage + 1) {
             expect(visiblePages).toEqual([firstPage, currentPage, currentPage + 1, lastPage]);
-            expect(allVisibleItems).toEqual([
-              `${firstPage}`,
-              `${currentPage}`,
-              `${currentPage + 1}`,
-              '⋯',
-              `${lastPage}`,
-            ]);
+            expect
+              .soft(allVisibleItems.map(String))
+              .toEqual([`${firstPage}`, `${currentPage}`, `${currentPage + 1}`, '⋯', `${lastPage}`]);
           } else if (currentPage === firstPage + 2) {
             expect(visiblePages).toEqual([firstPage, currentPage - 1, currentPage, currentPage + 1, lastPage]);
             expect(allVisibleItems).toEqual([
@@ -672,7 +670,7 @@ Then(
       const visiblePages: any = visiblePagesMap.get('visiblePages');
       const allVisibleItems: any = itemsMap.get('allVisibleItems');
       if (totalPages <= 7) {
-        expect(visiblePages).toEqual(allVisibleItems);
+        expect.soft(visiblePages).toEqual(allVisibleItems.map(Number));
         expect(ellipsisIndices.length).toBe(0);
       }
       const firstPage = 1;
