@@ -108,37 +108,39 @@ export default class ManageReviewBodiesPage {
   }
 
   async findReviewBody(reviewBodyName: string, reviewBodyStatus?: string) {
-    let searchRecord: string;
-    let selectedColumns: any[];
-    if (typeof reviewBodyStatus !== 'undefined') {
-      searchRecord = reviewBodyName + '|' + reviewBodyStatus;
-    } else {
-      searchRecord = reviewBodyName;
-    }
+    const searchRecord = await this.buildSearchRecord(reviewBodyName, reviewBodyStatus);
     let foundRecord = false;
     let hasNextPage = true;
     while (hasNextPage && !foundRecord) {
       const rows = await this.listRows.all();
       for (const row of rows) {
-        const columns = await row.locator(this.listCell).allTextContents();
-        if (typeof reviewBodyStatus !== 'undefined') {
-          selectedColumns = [columns[0], columns[2]];
-        } else {
-          selectedColumns = [columns[0]];
-        }
-        const fullRowData = selectedColumns.map((col) => col.trim()).join('|');
+        const fullRowData = await this.getRowData(row, reviewBodyStatus);
         if (fullRowData === searchRecord) {
           foundRecord = true;
           return row;
         }
       }
-      hasNextPage = (await this.next_button.isVisible()) && !(await this.next_button.isDisabled());
+      hasNextPage = await this.shouldGoToNextPage();
       if (hasNextPage && !foundRecord) {
         await this.next_button.click();
         await this.page.waitForLoadState('domcontentloaded');
       }
     }
     throw new Error(`No matching record found`);
+  }
+
+  async buildSearchRecord(name: string, status?: string): Promise<string> {
+    return typeof status !== 'undefined' ? `${name}|${status}` : name;
+  }
+
+  async getRowData(row: any, status?: string): Promise<string> {
+    const columns = await row.locator(this.listCell).allTextContents();
+    const selected = typeof status !== 'undefined' ? [columns[0], columns[2]] : [columns[0]];
+    return selected.map((col) => col.trim()).join('|');
+  }
+
+  async shouldGoToNextPage(): Promise<boolean> {
+    return (await this.next_button.isVisible()) && !(await this.next_button.isDisabled());
   }
 
   async findReviewBodyByStatus(reviewBodyName: string, reviewBodyStatus: string) {

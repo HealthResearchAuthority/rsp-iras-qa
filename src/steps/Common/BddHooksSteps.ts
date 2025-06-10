@@ -5,7 +5,6 @@ import CommonItemsPage from '../../pages/Common/CommonItemsPage';
 import HomePage from '../../pages/IRAS/HomePage';
 import LoginPage from '../../pages/Common/LoginPage';
 import { getAuthState, getReportFolderName, getTicketReferenceTags } from '../../utils/UtilFunctions';
-import { readFileSync } from 'fs';
 import path from 'path';
 import fs from 'fs';
 const { AfterStep, BeforeScenario } = createBdd(test);
@@ -19,7 +18,7 @@ AfterStep(async ({ page, $step, $testInfo }) => {
     if (!fs.existsSync(screenshotDir)) {
       fs.mkdirSync(screenshotDir, { recursive: true });
     }
-    const safeTitle = $testInfo.title.replace(/[^\w\d_-]/g, '_');
+    const safeTitle = $testInfo.title.replace(/[^\w-]/g, '_');
     const fileName = `${safeTitle}-${Date.now()}.png`;
     const screenshotPath = path.join(screenshotDir, fileName);
     await page.screenshot({ path: screenshotPath, fullPage: true });
@@ -94,7 +93,7 @@ BeforeScenario(
 
       for (const tag in tagToUserMap) {
         if ($tags.includes(tag)) {
-          const state = JSON.parse(readFileSync(getAuthState(tagToUserMap[tag])).toString());
+          const state = JSON.parse(fs.readFileSync(getAuthState(tagToUserMap[tag])).toString());
           return state.cookies;
         }
       }

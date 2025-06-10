@@ -763,9 +763,10 @@ export default class CommonItemsPage {
   async getTotalPages(): Promise<number> {
     const count = await this.pageLinks.count();
     let maxPage = 1;
+    const regex = /^Page (\d+)$/;
     for (let i = 0; i < count; i++) {
       const label = await this.pageLinks.nth(i).getAttribute('aria-label');
-      const match = label?.match(/^Page (\d+)$/);
+      const match = regex.exec(label ?? '');
       if (match) {
         const num = parseInt(match[1], 10);
         if (num > maxPage) maxPage = num;
