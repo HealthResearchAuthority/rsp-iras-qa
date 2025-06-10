@@ -21,12 +21,6 @@
   "Field_Error_Message_Iras_Id_Leading_Zeros": {
     "iras_id_text": "IRAS ID cannot start with '0'"
   },
-  "Valid_IRAS_ID_Max": {
-    "iras_id_text": ""
-  },
-  "Valid_IRAS_ID_Min": {
-    "iras_id_text": ""
-  },
   "Invalid_IRAS_ID_Letters": {
     "iras_id_text": "abcdefg"
   },
@@ -37,10 +31,7 @@
     "iras_id_text": "a!b£c£D%"
   },
   "Invalid_IRAS_ID_Min_Length": {
-    "iras_id_text": ""
-  },
-  "Invalid_IRAS_ID_Max_Length": {
-    "iras_id_text": ""
+    "iras_id_text": "12"
   },
   "Invalid_IRAS_ID_Leading_Zeros": {
     "iras_id_text": "000123"
@@ -59,8 +50,5 @@
   },
   "Invalid_IRAS_ID_Blank": {
     "iras_id_text": ""
-  },
-  "Invalid_IRAS_ID_Duplicate": {
-    "iras_id_text": "4609595"
   }
 }

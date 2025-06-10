@@ -1,6 +1,7 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../hooks/CustomFixtures';
 import { sortArray } from '../../../utils/UtilFunctions';
+import config from '../../../../playwright.config';
 
 const { Then } = createBdd(test);
 
@@ -14,7 +15,10 @@ Then(
     const dataset = keyProjectRolesPage.keyProjectRolesPageTestData[datasetName];
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        if (key === 'primary_sponsor_organisation_text' && $tags.includes('@jsEnabled')) {
+        if (
+          key === 'primary_sponsor_organisation_text' &&
+          ($tags.includes('@jsEnabled') || config.projects?.[1].use?.javaScriptEnabled)
+        ) {
           dataset['primary_sponsor_organisation_jsenabled_text'] = dataset['primary_sponsor_organisation_text'];
           await commonItemsPage.fillUIComponent(
             dataset,
@@ -140,7 +144,7 @@ Then(
     await keyProjectRolesPage.page.waitForTimeout(2000);
     const continueEnteringSuggestionActual = await keyProjectRolesPage.primary_sponsor_organisation_suggestion_listbox
       .first()
-      .getAttribute('data-before-suggestions');
+      .getAttribute('data-after-suggestions');
     const suggestionsHeaderLabelExpected = suggestionHeadersDatasetName.suggestion_footer;
     expect(continueEnteringSuggestionActual).toEqual(suggestionsHeaderLabelExpected);
   }

@@ -35,8 +35,16 @@ Then(
       const receivedJson = await requestResponse.json();
       if (typeof receivedJson.entry !== 'undefined') {
         receivedJson.entry.forEach((element) => {
-          if (element.resource.active === active) {
-            rtsPage.rtsResponseList.push(element.resource.name);
+          const organisationRoles = element.resource.extension;
+          for (const organisationRole of organisationRoles) {
+            if (typeof organisationRole.extension !== 'undefined') {
+              const extensions = organisationRole.extension;
+              if (extensions[0].valueString === role) {
+                if (extensions[3].valueString === 'Active' && element.resource.active === active) {
+                  rtsPage.rtsResponseList.push(element.resource.name);
+                }
+              }
+            }
           }
         });
       } else {

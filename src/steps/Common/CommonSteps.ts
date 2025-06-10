@@ -9,19 +9,9 @@ import {
   generateTestDataTelephone,
   writeGeneratedTestDataToJSON,
 } from '../../utils/GenerateTestData';
-const { Given, When, Then, AfterStep } = createBdd(test);
+const { Given, When, Then } = createBdd(test);
 import * as userProfileGeneratedataConfig from '../../resources/test_data/user_administration/testdata_generator/user_profile_generate_data_config.json';
 import { getCurrentTimeFormatted } from '../../utils/UtilFunctions';
-
-AfterStep(async ({ page, $step, $testInfo }) => {
-  if (
-    `${process.env.STEP_SCREENSHOT?.toLowerCase()}` === 'yes' ||
-    `${$step.title}` === 'I capture the page screenshot'
-  ) {
-    const screenshot = await page.screenshot({ path: 'screenshot.png', fullPage: true });
-    await $testInfo.attach(`[step] ${$step.title}`, { body: screenshot, contentType: 'image/png' });
-  }
-});
 
 Then('I capture the page screenshot', async () => {});
 
@@ -245,6 +235,11 @@ Given('I can see a {string} link on the {string}', async ({ commonItemsPage }, l
   } else {
     await expect(commonItemsPage.govUkLink.getByText(linkValue, { exact: true })).toBeVisible();
   }
+});
+
+Given('I cannot see a {string} link on the {string}', async ({ commonItemsPage }, linkKey: string, pageKey: string) => {
+  const linkValue = commonItemsPage.linkTextData[pageKey][linkKey];
+  await expect(commonItemsPage.govUkLink.getByText(linkValue, { exact: true })).toHaveCount(0);
 });
 
 Then(
