@@ -1,20 +1,43 @@
 import { createBdd } from 'playwright-bdd';
-import { expect, test } from '../../hooks/CustomFixtures';
+import { test } from '../../hooks/CustomFixtures';
 import { chromium } from 'playwright';
 import CommonItemsPage from '../../pages/Common/CommonItemsPage';
 import HomePage from '../../pages/IRAS/HomePage';
 import LoginPage from '../../pages/Common/LoginPage';
-import { getAuthState, getTicketReferenceTags } from '../../utils/UtilFunctions';
+import { getAuthState, getReportFolderName, getTicketReferenceTags } from '../../utils/UtilFunctions';
 import { readFileSync } from 'fs';
+import path from 'path';
+import fs from 'fs';
 const { AfterStep, BeforeScenario } = createBdd(test);
 
 AfterStep(async ({ page, $step, $testInfo }) => {
-  if (
-    `${process.env.STEP_SCREENSHOT?.toLowerCase()}` === 'yes' ||
-    `${$step.title}` === 'I capture the page screenshot'
-  ) {
-    const screenshot = await page.screenshot({ path: 'screenshot.png', fullPage: true });
-    await $testInfo.attach(`[step] ${$step.title}`, { body: screenshot, contentType: 'image/png' });
+  const shouldCapture =
+    `${process.env.STEP_SCREENSHOT?.toLowerCase()}` === 'yes' || $step.title === 'I capture the page screenshot';
+  if (shouldCapture) {
+    const reportFolder = getReportFolderName();
+    const screenshotDir = path.join(process.cwd(), 'test-reports', reportFolder, 'screenshots');
+    if (!fs.existsSync(screenshotDir)) {
+      fs.mkdirSync(screenshotDir, { recursive: true });
+    }
+    const safeTitle = $testInfo.title.replace(/[^\w\d_-]/g, '_');
+    const fileName = `${safeTitle}-${Date.now()}.png`;
+    const screenshotPath = path.join(screenshotDir, fileName);
+    await page.screenshot({ path: screenshotPath, fullPage: true });
+    let hyperlink = '';
+    if (process.env.CUCUMBER_REPORT_TYPE === 'true') {
+      // Relative path from Cucumber report
+      const cucumberHtmlDir = path.join('test-reports', reportFolder, 'cucumber', 'html', 'features');
+      const relativePath = path.relative(cucumberHtmlDir, screenshotPath).replace(/\\/g, '/');
+      hyperlink = `<a href="${encodeURI(relativePath)}" target="_blank">View Screenshot</a>`;
+    }
+    if (process.env.PLAYWRIGHT_REPORT_TYPE === 'true') {
+      // Absolute file path for Playwright report
+      hyperlink = `<a href="file://${screenshotPath.replace(/\\/g, '/')}" target="_blank">View Screenshot</a>`;
+    }
+    await $testInfo.attach(`[step] ${$step.title}`, {
+      body: hyperlink,
+      contentType: 'text/html',
+    });
   }
 });
 
@@ -30,7 +53,7 @@ BeforeScenario(
 
 BeforeScenario(
   { name: 'Check that current auth state has not expired', tags: '@Regression or @SystemTest and not @NoAuth' },
-  async function ({ commonItemsPage, homePage, loginPage, $tags }) {
+  async function ({ commonItemsPage, homePage, $tags }) {
     const isAuthStateValid = async () => {
       const response = await commonItemsPage.page.request.get('', { maxRedirects: 0 });
       const text = await response.text();
@@ -88,36 +111,6 @@ BeforeScenario(
       const newCookies = getReauthenticatedCookies();
       await commonItemsPage.page.context().clearCookies();
       await commonItemsPage.page.context().addCookies(newCookies);
-    } else if (await homePage.loginBtn.isVisible()) {
-      // Added this block for handing timeout issue.. bug is there..need to remove later
-      console.info('Sign In button is displayed');
-      console.info(homePage.page.url());
-      let user: string = '';
-      if ($tags.includes('@SysAdminUser')) {
-        user = 'System_Admin';
-      } else if ($tags.includes('Frontstage_User')) {
-        user = 'Frontstage_User';
-      } else if ($tags.includes('Backstage_User')) {
-        user = 'Backstage_User';
-      }
-      await homePage.loginBtn.click();
-      await homePage.page.waitForLoadState('domcontentloaded');
-      await homePage.page.waitForTimeout(3000);
-      console.info(await homePage.pageHeading.textContent());
-      if (await homePage.pageHeading.isVisible()) {
-        console.info('My account home page is displayed');
-        await expect(homePage.pageHeading).toBeVisible();
-        await expect(homePage.myWorkspacesHeading).toBeVisible();
-        await expect(homePage.projectGuidanceText).toBeVisible();
-      } else {
-        await loginPage.assertOnLoginPage();
-        console.info('Login page is displayed');
-        await loginPage.loginWithUserCreds(user);
-        await expect(homePage.pageHeading).toBeVisible();
-        await expect(homePage.myWorkspacesHeading).toBeVisible();
-        await expect(homePage.projectGuidanceText).toBeVisible();
-        await commonItemsPage.storeAuthState(user);
-      }
     }
   }
 );

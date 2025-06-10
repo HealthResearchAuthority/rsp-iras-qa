@@ -33,41 +33,74 @@ export default class EditUserProfilePage {
     this.editUserProfilePageTestData = editUserProfilePageTestData;
 
     //Locators
-    const labels = this.editUserProfilePageTestData.Edit_User_Profile_Page;
-    this.page_heading = this.page.getByRole('heading').getByText(labels.page_heading);
-    this.title_text = this.getByExactLabel(labels.title_label);
-    this.first_name_text = this.getByExactLabel(labels.first_name_label);
-    this.last_name_text = this.getByExactLabel(labels.last_name_label);
-    this.email_address_text = this.getByExactLabel(labels.email_address_label);
-    this.telephone_text = this.getByExactLabel(labels.telephone_label);
-    this.organisation_text = this.getByExactLabel(labels.organisation_label);
-    this.job_title_text = this.getByExactLabel(labels.job_title_label);
-    this.committee_dropdown = this.getByExactLabel(labels.committee_label);
-    this.review_body_dropdown = this.getByExactLabel(labels.review_body_label);
-    const { label: role_label, fieldset: role_fieldset } = this.getFieldsetByLabelText(labels.role_label);
-    this.role_label = role_label;
-    this.role_fieldset = role_fieldset;
-    this.role_checkbox = role_fieldset.getByRole('checkbox');
-    const { label: country_label, fieldset: country_fieldset } = this.getFieldsetByLabelText(labels.country_label);
-    this.country_label = country_label;
-    this.country_fieldset = country_fieldset;
-    this.country_checkbox = country_fieldset.getByRole('checkbox');
-    const { label: access_required_label, fieldset: access_required_fieldset } = this.getFieldsetByLabelText(
-      labels.access_required_label
+    this.page_heading = this.page
+      .getByRole('heading')
+      .getByText(this.editUserProfilePageTestData.Edit_User_Profile_Page.page_heading);
+    this.title_text = this.page.getByLabel(this.editUserProfilePageTestData.Edit_User_Profile_Page.title_label, {
+      exact: true,
+    });
+    this.first_name_text = this.page.getByLabel(
+      this.editUserProfilePageTestData.Edit_User_Profile_Page.first_name_label,
+      {
+        exact: true,
+      }
     );
-    this.access_required_label = access_required_label;
-    this.access_required_fieldset = access_required_fieldset;
-    this.access_required_checkbox = access_required_fieldset.getByRole('checkbox');
-  }
+    this.last_name_text = this.page.getByLabel(
+      this.editUserProfilePageTestData.Edit_User_Profile_Page.last_name_label,
+      {
+        exact: true,
+      }
+    );
+    this.email_address_text = this.page.getByLabel(
+      this.editUserProfilePageTestData.Edit_User_Profile_Page.email_address_label,
+      {
+        exact: true,
+      }
+    );
+    this.telephone_text = this.page.getByLabel(
+      this.editUserProfilePageTestData.Edit_User_Profile_Page.telephone_label,
+      {
+        exact: true,
+      }
+    );
+    this.organisation_text = this.page.getByLabel(
+      this.editUserProfilePageTestData.Edit_User_Profile_Page.organisation_label,
+      {
+        exact: true,
+      }
+    );
+    this.job_title_text = this.page.getByLabel(
+      this.editUserProfilePageTestData.Edit_User_Profile_Page.job_title_label,
+      {
+        exact: true,
+      }
+    );
 
-  private getByExactLabel(labelText: string) {
-    return this.page.getByLabel(labelText, { exact: true });
-  }
-
-  private getFieldsetByLabelText(labelText: string) {
-    const label = this.page.locator('.govuk-label').getByText(labelText, { exact: true });
-    const fieldset = this.page.locator('.govuk-form-group', { has: label });
-    return { label, fieldset };
+    this.role_label = this.page
+      .locator('.govuk-label')
+      .getByText(this.editUserProfilePageTestData.Edit_User_Profile_Page.role_label, { exact: true });
+    this.role_fieldset = this.page.locator('.govuk-form-group', { has: this.role_label });
+    this.role_checkbox = this.role_fieldset.getByRole('checkbox');
+    this.committee_dropdown = this.page.getByLabel(
+      this.editUserProfilePageTestData.Edit_User_Profile_Page.committee_label,
+      { exact: true }
+    );
+    this.country_label = this.page
+      .locator('.govuk-label')
+      .getByText(this.editUserProfilePageTestData.Edit_User_Profile_Page.country_label, { exact: true });
+    this.country_fieldset = this.page.locator('.govuk-form-group', { has: this.country_label });
+    this.country_checkbox = this.country_fieldset.getByRole('checkbox');
+    this.access_required_label = this.page
+      .locator('.govuk-label')
+      .getByText(this.editUserProfilePageTestData.Edit_User_Profile_Page.access_required_label, { exact: true });
+    this.access_required_fieldset = this.page.locator('.govuk-form-group', { has: this.access_required_label });
+    this.access_required_checkbox = this.access_required_fieldset.getByRole('checkbox');
+    this.review_body_dropdown = this.page.getByLabel(
+      this.editUserProfilePageTestData.Edit_User_Profile_Page.review_body_label,
+      {
+        exact: true,
+      }
+    );
   }
 
   async assertOnEditUserProfilePage() {
