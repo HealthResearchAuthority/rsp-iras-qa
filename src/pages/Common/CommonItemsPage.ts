@@ -736,7 +736,7 @@ export default class CommonItemsPage {
     if (navigateMethod === 'clicking on page number') {
       if (await currentPageLink.isVisible()) {
         await currentPageLink.click();
-        await this.page.waitForLoadState('networkidle');
+        await this.page.waitForLoadState('domcontentloaded');
       }
     }
     return currentPageLink;
