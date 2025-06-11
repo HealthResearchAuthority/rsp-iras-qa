@@ -14,6 +14,20 @@ const pathToCreateUserTestDataJson =
 let browserdata: any;
 let deviceType: string;
 const todayDate = new Date();
+const iPadMini6GenPortraitViewportConfig = { width: 744, height: 1133 };
+const iPadMini6GenLandscapeViewportConfig = { width: 1133, height: 744 };
+const samsungS20UltraPortraitViewportConfig = { width: 412, height: 915 };
+const samsungS20UltraLandscapeViewportConfig = { width: 915, height: 412 };
+const galaxyZFold3PortraitViewportConfig = { width: 674, height: 840 };
+const galaxyZFold3LandscapeViewportConfig = { width: 840, height: 674 };
+const iOSMobileUserAgentConfig =
+  'Mozilla/5.0 (iPad; CPU OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1';
+const androidMobileUserAgentConfig =
+  'Mozilla/5.0 (Linux; Android 10; SM-G988B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.7103.25 Mobile Safari/537.36';
+const defaultBrowserTypeiOS = 'webkit';
+const defaultBrowserTypeAndroid = 'chromium';
+const deviceScaleFactoriPad = 2;
+const deviceScaleFactorAndroid = 3.5;
 
 export function getAuthState(user: string): string {
   let authState: string;
@@ -113,8 +127,103 @@ export async function getTextFromElementArray(inputArray: Locator[]): Promise<st
   return arrInputText;
 }
 
+export function generateMobileConfig(
+  viewportConfig: any,
+  userAgentConfig: string,
+  defaultBrowserTypeConfig: string,
+  deviceScaleFactorConfig: number
+): any {
+  const iOSMobileConfig = {
+    viewport: viewportConfig,
+    userAgent: userAgentConfig,
+    deviceScaleFactor: deviceScaleFactorConfig,
+    isMobile: true,
+    hasTouch: true,
+    defaultBrowserType: defaultBrowserTypeConfig,
+  };
+  return iOSMobileConfig;
+}
+
+export function getMobileConfig(deviceName: string): any {
+  let browser: any;
+  switch (deviceName) {
+    case 'iPad Mini 6':
+      browser = generateMobileConfig(
+        iPadMini6GenPortraitViewportConfig,
+        iOSMobileUserAgentConfig,
+        defaultBrowserTypeiOS,
+        deviceScaleFactoriPad
+      );
+      break;
+    case 'iPad Mini 6 landscape':
+      browser = generateMobileConfig(
+        iPadMini6GenLandscapeViewportConfig,
+        iOSMobileUserAgentConfig,
+        defaultBrowserTypeAndroid,
+        deviceScaleFactoriPad
+      );
+      break;
+    case 'Galaxy S20 Ultra':
+      browser = generateMobileConfig(
+        samsungS20UltraPortraitViewportConfig,
+        androidMobileUserAgentConfig,
+        defaultBrowserTypeAndroid,
+        deviceScaleFactorAndroid
+      );
+      break;
+    case 'Galaxy S20 Ultra landscape':
+      browser = generateMobileConfig(
+        samsungS20UltraLandscapeViewportConfig,
+        androidMobileUserAgentConfig,
+        defaultBrowserTypeAndroid,
+        deviceScaleFactorAndroid
+      );
+      break;
+    case 'Samsung Galaxy Z Fold 3':
+      browser = generateMobileConfig(
+        galaxyZFold3PortraitViewportConfig,
+        androidMobileUserAgentConfig,
+        defaultBrowserTypeAndroid,
+        deviceScaleFactorAndroid
+      );
+      break;
+    case 'Samsung Galaxy Z Fold 3 landscape':
+      browser = generateMobileConfig(
+        galaxyZFold3LandscapeViewportConfig,
+        androidMobileUserAgentConfig,
+        defaultBrowserTypeAndroid,
+        deviceScaleFactorAndroid
+      );
+      break;
+  }
+  return browser;
+}
+
+export function getBrowser(deviceType: string): any {
+  let browser: any;
+  if (
+    `${process.env.PLATFORM?.toLowerCase()}` == 'mobile' &&
+    `${process.env.OS_TYPE?.toLowerCase()}` == 'ios' &&
+    (`${process.env.IOS_Device}` === 'iPad Mini 6' || `${process.env.IOS_Device}` === 'iPad Mini 6 landscape')
+  ) {
+    browser = getMobileConfig(`${process.env.IOS_Device}`);
+  } else if (
+    `${process.env.PLATFORM?.toLowerCase()}` == 'mobile' &&
+    `${process.env.OS_TYPE?.toLowerCase()}` == 'android' &&
+    (`${process.env.ANDROID_Device}` === 'Galaxy S20 Ultra' ||
+      `${process.env.ANDROID_Device}` === 'Galaxy S20 Ultra landscape' ||
+      `${process.env.ANDROID_Device}` === 'Samsung Galaxy Z Fold 3' ||
+      `${process.env.ANDROID_Device}` === 'Samsung Galaxy Z Fold 3 landscape')
+  ) {
+    browser = getMobileConfig(`${process.env.ANDROID_Device}`);
+  } else {
+    browser = devices[`${deviceType}`];
+  }
+  return browser;
+}
+
 export function getBrowserType(deviceType: string): string {
-  const browser = devices[`${deviceType}`];
+  const browser = getBrowser(deviceType);
   let browserName: string;
   if (`${process.env.BROWSER?.toLowerCase()}` == 'microsoft edge') {
     browserName = 'Microsoft Edge';
@@ -127,7 +236,7 @@ export function getBrowserType(deviceType: string): string {
 }
 
 export async function getBrowserVersionDevices(deviceType: string): Promise<string | undefined> {
-  const browser = devices[`${deviceType}`];
+  const browser = getBrowser(deviceType);
   let version: string | undefined;
   const browserType = `${JSON.parse(JSON.stringify(browser)).defaultBrowserType}`;
   if (browserType == 'chromium') {
@@ -149,21 +258,27 @@ export async function getBrowserVersionDevices(deviceType: string): Promise<stri
   }
   return version;
 }
+
 function getMobileBrowserData() {
   if (`${process.env.OS_TYPE?.toLowerCase()}` == 'ios') {
-    if (`${process.env.IOS_Device}` != 'N/A') {
+    if (`${process.env.IOS_Device}` === 'iPad Mini 6' || `${process.env.IOS_Device}` === 'iPad Mini 6 landscape') {
+      browserdata = getMobileConfig(`${process.env.IOS_Device}`);
+    } else {
       browserdata = devices[`${process.env.IOS_Device}`];
-      deviceType = `${process.env.IOS_Device}`;
-    } else {
-      throw new Error('Invalid iOS device type selected, Please choose any valid option');
     }
+    deviceType = `${process.env.IOS_Device}`;
   } else if (`${process.env.OS_TYPE?.toLowerCase()}` == 'android') {
-    if (`${process.env.ANDROID_Device}` != 'N/A') {
-      browserdata = devices[`${process.env.ANDROID_Device}`];
-      deviceType = `${process.env.ANDROID_Device}`;
+    if (
+      `${process.env.ANDROID_Device}` === 'Galaxy S20 Ultra' ||
+      `${process.env.ANDROID_Device}` === 'Galaxy S20 Ultra landscape' ||
+      `${process.env.ANDROID_Device}` === 'Samsung Galaxy Z Fold 3' ||
+      `${process.env.ANDROID_Device}` === 'Samsung Galaxy Z Fold 3 landscape'
+    ) {
+      browserdata = getMobileConfig(`${process.env.ANDROID_Device}`);
     } else {
-      throw new Error('Invalid Android device type selected, Please choose any valid option');
+      browserdata = devices[`${process.env.ANDROID_Device}`];
     }
+    deviceType = `${process.env.ANDROID_Device}`;
   } else {
     throw new Error('Invalid Mobile OS type selected, Please choose any valid option');
   }
