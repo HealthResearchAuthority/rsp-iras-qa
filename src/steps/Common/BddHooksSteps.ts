@@ -11,46 +11,23 @@ const { AfterStep, BeforeScenario } = createBdd(test);
 
 AfterStep(async ({ page, $step, $testInfo }) => {
   const shouldCapture =
-    (process.env.STEP_SCREENSHOT || '').toLowerCase() === 'yes' || $step.title === 'I capture the page screenshot';
-  if (!shouldCapture) return;
-  const reportFolder = getReportFolderName();
-  const screenshotDir = path.join(process.cwd(), 'test-reports', reportFolder, 'screenshots');
-  try {
+    `${process.env.STEP_SCREENSHOT?.toLowerCase()}` === 'yes' || $step.title === 'I capture the page screenshot';
+  if (shouldCapture) {
+    const reportFolder = getReportFolderName();
+    const screenshotDir = path.join(process.cwd(), 'test-reports', reportFolder, 'screenshots');
     if (!fs.existsSync(screenshotDir)) {
       fs.mkdirSync(screenshotDir, { recursive: true });
     }
-  } catch (err) {
-    console.error('Failed to create screenshot directory:', err);
-    return;
-  }
-  const safeTitle = $testInfo.title.replace(/[^\w-]/g, '_');
-  const fileName = `${safeTitle}-${Date.now()}.png`;
-  const screenshotPath = path.join(screenshotDir, fileName);
-  const browserName = (process.env.BROWSER || '').toLowerCase();
-  const isFirefox = browserName === 'firefox';
-  try {
-    await page.screenshot({
-      path: screenshotPath,
-      fullPage: !isFirefox,
+    const safeTitle = $testInfo.title.replace(/[^\w-]/g, '_');
+    const fileName = `${safeTitle}-${Date.now()}.png`;
+    const screenshotPath = path.join(screenshotDir, fileName);
+    await page.screenshot({ path: screenshotPath, fullPage: true });
+    const hyperlink = `<a href="file://${screenshotPath.replace(/\\/g, '/')}" target="_blank">View Screenshot</a>`;
+    await $testInfo.attach(`[step] ${$step.title}`, {
+      body: hyperlink,
+      contentType: 'text/html',
     });
-    console.info(`Screenshot captured (${isFirefox ? 'viewport only' : 'full page'}) for browser: ${browserName}`);
-  } catch (err) {
-    console.error('Failed to capture screenshot:', err);
-    return;
   }
-  let hyperlink = '';
-  if (process.env.CUCUMBER_REPORT_TYPE === 'true') {
-    const cucumberHtmlDir = path.join('test-reports', reportFolder, 'cucumber', 'html', 'features');
-    const relativePath = path.relative(cucumberHtmlDir, screenshotPath).replace(/\\/g, '/');
-    hyperlink = `<a href="${encodeURI(relativePath)}" target="_blank">View Screenshot</a>`;
-  }
-  if (process.env.PLAYWRIGHT_REPORT_TYPE === 'true') {
-    hyperlink = `<a href="file://${screenshotPath.replace(/\\/g, '/')}" target="_blank">View Screenshot</a>`;
-  }
-  await $testInfo.attach(`[step] ${$step.title}`, {
-    body: hyperlink,
-    contentType: 'text/html',
-  });
 });
 
 BeforeScenario(
