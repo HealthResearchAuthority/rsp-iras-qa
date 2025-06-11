@@ -22,7 +22,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
                 When I click the 'Back_To_Manage_Review_Bodies' link on the 'Create_Review_Body_Confirmation_Page'
                 Then I can see the 'Manage_Review_Bodies_Page'
                 And I capture the page screenshot
-                When I enter 'unique organisation name of the newly created review body' into the search field
+                When I enter 'name of the new review body' into the search field
                 And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
                 Then I click the view edit link for the newly created review body
                 And I can see the review body profile page

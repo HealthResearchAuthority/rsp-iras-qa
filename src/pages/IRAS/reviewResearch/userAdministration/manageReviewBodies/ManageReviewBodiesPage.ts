@@ -2,6 +2,7 @@ import { expect, Locator, Page } from '@playwright/test';
 import * as manageReviewBodiesPageData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageReviewBodies/manage_review_body_page_data.json';
 import * as linkTextData from '../../../../../resources/test_data/common/link_text_data.json';
 import { confirmStringNotNull } from '../../../../../utils/UtilFunctions';
+import CommonItemsPage from '../../../../Common/CommonItemsPage';
 
 //Declare Page Objects
 export default class ManageReviewBodiesPage {
@@ -23,6 +24,7 @@ export default class ManageReviewBodiesPage {
   readonly listRows: Locator;
   readonly listCell: Locator;
   readonly next_button: Locator;
+  readonly tableRows: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -61,6 +63,7 @@ export default class ManageReviewBodiesPage {
     this.listRows = this.page.locator('tbody').getByRole('row');
     this.listCell = this.page.getByRole('cell');
     this.next_button = this.page.locator('.govuk-pagination__next a');
+    this.tableRows = this.page.getByRole('table').getByRole('row');
   }
 
   //Getters & Setters for Private Variables
@@ -107,6 +110,20 @@ export default class ManageReviewBodiesPage {
     return orgNames;
   }
 
+  async buildSearchRecord(name: string, status?: string): Promise<string> {
+    return typeof status !== 'undefined' ? `${name}|${status}` : name;
+  }
+
+  async getRowData(row: any, status?: string): Promise<string> {
+    const columns = await row.locator(this.listCell).allTextContents();
+    const selected = typeof status !== 'undefined' ? [columns[0], columns[2]] : [columns[0]];
+    return selected.map((col) => col.trim()).join('|');
+  }
+
+  async shouldGoToNextPage(): Promise<boolean> {
+    return (await this.next_button.isVisible()) && !(await this.next_button.isDisabled());
+  }
+
   async findReviewBody(reviewBodyName: string, reviewBodyStatus?: string) {
     const searchRecord = await this.buildSearchRecord(reviewBodyName, reviewBodyStatus);
     let hasNextPage = true;
@@ -127,39 +144,6 @@ export default class ManageReviewBodiesPage {
     throw new Error(`No matching record found`);
   }
 
-  async buildSearchRecord(name: string, status?: string): Promise<string> {
-    return typeof status !== 'undefined' ? `${name}|${status}` : name;
-  }
-
-  async getRowData(row: any, status?: string): Promise<string> {
-    const columns = await row.locator(this.listCell).allTextContents();
-    const selected = typeof status !== 'undefined' ? [columns[0], columns[2]] : [columns[0]];
-    return selected.map((col) => col.trim()).join('|');
-  }
-
-  async shouldGoToNextPage(): Promise<boolean> {
-    return (await this.next_button.isVisible()) && !(await this.next_button.isDisabled());
-  }
-
-  async findReviewBodyByStatus(reviewBodyName: string, reviewBodyStatus: string) {
-    let hasNextPage = true;
-    while (hasNextPage) {
-      const rows = await this.listRows.all();
-      for (const row of rows) {
-        const columns = await row.locator(this.listCell).allTextContents();
-        if (columns[0].trim().includes(reviewBodyName) && columns[2].trim() === reviewBodyStatus) {
-          return row;
-        }
-      }
-      hasNextPage = (await this.next_button.isVisible()) && !(await this.next_button.isDisabled());
-      if (hasNextPage) {
-        await this.next_button.click();
-        await this.page.waitForLoadState('domcontentloaded');
-      }
-    }
-    throw new Error(`No matching record found`);
-  }
-
   async getSearchQueryOrgName(position: string) {
     let searchKey: string = '';
     const orgNameValues: any = await this.getOrgName();
@@ -172,14 +156,34 @@ export default class ManageReviewBodiesPage {
     return searchKey;
   }
 
-  async getReviewbodyStatus(status: string, manageReviewBodiesPage: ManageReviewBodiesPage) {
-    let reviewBodyStatus: string;
-    const datasetStatus = manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page;
+  async getReviewbodyStatus(status: string) {
     if (status.toLowerCase() == 'disabled') {
-      reviewBodyStatus = datasetStatus.disabled_status;
+      return this.manageReviewBodiesPageData.Manage_Review_Body_Page.disabled_status;
     } else {
-      reviewBodyStatus = datasetStatus.enabled_status;
+      return this.manageReviewBodiesPageData.Manage_Review_Body_Page.enabled_status;
     }
-    return reviewBodyStatus;
+  }
+
+  async getReviewBodiesByPage(): Promise<Map<string, string[]>> {
+    const orgNameValues: string[] = [];
+    for (let i = 1; i < 2; i++) {
+      const columns = this.tableRows.nth(i).getByRole('cell');
+      const orgName = confirmStringNotNull(await columns.nth(0).textContent());
+      orgNameValues.push(orgName);
+    }
+    const reviewBodyMap = new Map([['orgNameValues', orgNameValues]]);
+    return reviewBodyMap;
+  }
+
+  async getReviewBodyListByPosition(position: string, commonItemsPage: CommonItemsPage) {
+    let orgList: any;
+    if (position.toLowerCase() == 'first') {
+      orgList = await this.getReviewBodiesByPage();
+    } else if (position.toLowerCase() == 'last') {
+      const totalPages = await commonItemsPage.getTotalPages();
+      await commonItemsPage.clickOnPages(totalPages, 'clicking on page number');
+      orgList = await this.getReviewBodiesByPage();
+    }
+    return orgList;
   }
 }

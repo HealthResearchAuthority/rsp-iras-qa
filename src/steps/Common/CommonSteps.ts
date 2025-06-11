@@ -139,6 +139,7 @@ Then('I click the {string} button on the {string}', async ({ commonItemsPage }, 
     .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
     .first()
     .click();
+  await commonItemsPage.page.waitForLoadState('domcontentloaded');
 });
 
 Then('I can see a {string} button on the {string}', async ({ commonItemsPage }, buttonKey: string, pageKey: string) => {
@@ -439,21 +440,9 @@ Then(
           errorMessageFieldDataset
         );
       } else if (isMultiError) {
-        await commonItemsPage.validateMultiErrorField(
-          key,
-          expectedSummaryErrors,
-          actualSummaryErrors,
-          page,
-          commonItemsPage
-        );
+        await commonItemsPage.validateMultiErrorField(key, expectedSummaryErrors, actualSummaryErrors, page);
       } else {
-        await commonItemsPage.validateStandardField(
-          key,
-          expectedError,
-          page,
-          commonItemsPage,
-          errorMessageFieldDataset
-        );
+        await commonItemsPage.validateStandardField(key, expectedError, page, errorMessageFieldDataset);
       }
     }
     if (errorMessageFieldAndSummaryDatasetName === 'Max_Description_Words_Error') {
@@ -469,10 +458,10 @@ When(
   async ({ commonItemsPage, reviewBodyProfilePage, createReviewBodyPage }, inputType: string) => {
     let searchValue: string;
     switch (inputType) {
-      case 'organisation name of the previously used review body':
+      case 'name of the previously used review body':
         searchValue = await reviewBodyProfilePage.getOrgName();
         break;
-      case 'unique organisation name of the newly created review body':
+      case 'name of the new review body':
         searchValue = await createReviewBodyPage.getUniqueOrgName();
         break;
       default:
@@ -481,10 +470,6 @@ When(
     await commonItemsPage.search_text.fill(searchValue);
   }
 );
-
-When('the pagination controls should be displayed at the bottom of the page', async ({ commonItemsPage }) => {
-  await expect(commonItemsPage.pagination).toBeVisible();
-});
 
 When(
   'I am on the {string} page and it should be visually highlighted to indicate the active page the user is on',
@@ -507,18 +492,16 @@ When('the default page size should be twenty', async ({ commonItemsPage }) => {
 });
 
 When(
-  'the {string} button will be {string} and {string} to the user',
-  async ({ commonItemsPage }, linkLabel: string, enabledVal: string, visibleVal: string) => {
+  'the {string} button will be {string} to the user',
+  async ({ commonItemsPage }, linkLabel: string, availabilityVal: string) => {
     const locatorVal: Locator = await commonItemsPage.getLocatorforNextPreviousLinks(linkLabel);
-    if (enabledVal === 'enabled' && visibleVal === 'visible') {
+    if (availabilityVal.toLowerCase() === 'available') {
       await expect(locatorVal).toBeVisible();
       await expect(locatorVal).toBeEnabled();
-    } else if (enabledVal === 'disabled' && visibleVal === 'not visible') {
+    } else if (availabilityVal.toLowerCase() === 'not available') {
       await expect(locatorVal).toBeHidden();
-      const isVisible = await locatorVal.isVisible().catch(() => false);
-      expect(isVisible).toBeFalsy();
     } else {
-      throw new Error(`Unsupported state combination: ${enabledVal}, ${visibleVal}`);
+      throw new Error(`Unsupported button state: ${availabilityVal}`);
     }
   }
 );
@@ -528,14 +511,12 @@ When(
   async ({ commonItemsPage }) => {
     await commonItemsPage.next_button.click();
     const currentUrl = commonItemsPage.page.url();
-    const pageNumber = await commonItemsPage.getPageNumber(currentUrl);
-    const pageLabel = `Page ${pageNumber}`;
-    const currentPage = commonItemsPage.currentPage;
-    const pageLink = commonItemsPage.pagination.getByRole('link', { name: pageLabel });
-    await expect(currentPage).toHaveAttribute('aria-current', 'page');
-    await expect(pageLink).toHaveAttribute('aria-label', pageLabel);
-    const href = await pageLink.getAttribute('href');
-    expect(currentUrl).toContain(href);
+    const currentPageNumber = await commonItemsPage.getPageNumber(currentUrl);
+    const currentPageLabel = `Page ${currentPageNumber}`;
+    const currentPageLink = commonItemsPage.pagination.getByRole('link', { name: currentPageLabel });
+    await expect(currentPageLink).toHaveAttribute('aria-current');
+    const currentPageLinkHref = await currentPageLink.getAttribute('href');
+    expect(currentUrl).toContain(currentPageLinkHref);
     await commonItemsPage.previous_button.click();
   }
 );
@@ -546,17 +527,17 @@ When(
     if ((await commonItemsPage.tableRows.count()) >= 2) {
       let searchKey: string = '';
       if (fieldKey === 'First_Name' || fieldKey === 'Last_Name' || fieldKey === 'Email_Address') {
-        searchKey = await commonItemsPage.getSearchQueryFNameLNameEmailByPosition(
+        searchKey = await userListReviewBodyPage.getSearchQueryFNameLNameEmailByPosition(
           position,
           fieldKey,
-          userListReviewBodyPage
+          commonItemsPage
         );
       } else if (fieldKey === 'Full_Name') {
-        await commonItemsPage.setSearchQueryFullNameByPosition(position, fieldKey, userListReviewBodyPage);
+        await userListReviewBodyPage.setSearchQueryFullNameByPosition(position, fieldKey, commonItemsPage);
         searchKey = await userListReviewBodyPage.getSearchQueryFullName(position);
       } else if (fieldKey === 'Organisation_Name') {
-        await commonItemsPage.setSearchQueryReviewBodyByPosition(position, fieldKey, manageReviewBodiesPage);
-        searchKey = await manageReviewBodiesPage.getSearchQueryOrgName(position);
+        const orgList = await manageReviewBodiesPage.getReviewBodyListByPosition(position, commonItemsPage);
+        await manageReviewBodiesPage.setOrgName(orgList.get('orgNameValues'));
       }
       await userListReviewBodyPage.setSearchKey(searchKey);
       await commonItemsPage.search_text.fill(searchKey);
@@ -584,7 +565,7 @@ When(
 Then(
   'the system displays no results found message if there is no {string} on the system that matches the search criteria',
   async ({ commonItemsPage, userListReviewBodyPage, manageUsersPage, manageReviewBodiesPage }, entityType: string) => {
-    const filteredSearchResults = await commonItemsPage.getFilteredSearchResultsBeforeSearch(userListReviewBodyPage);
+    const filteredSearchResults = await userListReviewBodyPage.getFilteredSearchResultsBeforeSearch(commonItemsPage);
     expect(await commonItemsPage.tableRows.count()).toBe(0);
     expect(filteredSearchResults).toEqual([]);
     let headingLocator: Locator, guidanceLocator: Locator, expectedHeading: any, expectedGuidance: any;
@@ -716,9 +697,6 @@ Then(
       default:
         throw new Error(`${sortField} is not a valid option`);
     }
-    const uniqueList = [...new Set(actualList)];
-    const sortedListNoDuplicates = [...uniqueList].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
-    expect(uniqueList).toEqual(sortedListNoDuplicates);
     const sortedList = [...actualList].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
     expect.soft(actualList).toEqual(sortedList);
   }

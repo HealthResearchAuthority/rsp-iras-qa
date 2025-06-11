@@ -16,8 +16,6 @@ import BookingPage from '../IRAS/questionSet/BookingPage';
 import ChildrenPage from '../IRAS/questionSet/ChildrenPage';
 import { PageObjectDataName } from '../../utils/CustomTypes';
 import { confirmStringNotNull, removeUnwantedWhitespace } from '../../utils/UtilFunctions';
-import UserListReviewBodyPage from '../IRAS/reviewResearch/userAdministration/manageReviewBodies/UserListReviewBodyPage';
-import ManageReviewBodiesPage from '../IRAS/reviewResearch/userAdministration/manageReviewBodies/ManageReviewBodiesPage';
 import ReviewYourAnswersPage from '../IRAS/makeChanges/ReviewYourAnswersPage';
 
 //Declare Page Objects
@@ -500,7 +498,7 @@ export default class CommonItemsPage {
   }
 
   async getFieldErrorMessages<PageObject>(key: string, page: PageObject) {
-    let fieldErrorMessage: any;
+    let fieldErrorMessage: string | null;
     const element = await page[key].first();
     const typeAttribute = await element.getAttribute('type');
     if (typeAttribute === 'checkbox') {
@@ -598,26 +596,27 @@ export default class CommonItemsPage {
 
   async getAllOrgNamesFromTheTable(): Promise<Map<string, string[]>> {
     const searchResultValues: string[] = [];
-    await this.page.waitForLoadState('domcontentloaded');
-    await this.page.waitForTimeout(3000);
-    let dataFound = false;
-    while (!dataFound) {
+    let pageCount = 0;
+    const maxPages = 3;
+    while (pageCount < maxPages) {
       const rowCount = await this.tableRows.count();
       for (let i = 1; i < rowCount; i++) {
         const columns = this.tableRows.nth(i).getByRole('cell');
         const orgName = confirmStringNotNull(await columns.nth(0).textContent());
         searchResultValues.push(orgName);
       }
-      if ((await this.next_button.isVisible()) && !(await this.next_button.isDisabled())) {
+      const hasNext = (await this.next_button.isVisible()) && !(await this.next_button.isDisabled());
+      if (hasNext && pageCount < maxPages - 1) {
         await this.next_button.click();
         await this.page.waitForLoadState('domcontentloaded');
+        pageCount++;
       } else {
-        dataFound = true;
+        break;
       }
     }
-    const searchResultMap = new Map([['searchResultValues', searchResultValues]]);
-    return searchResultMap;
+    return new Map([['searchResultValues', searchResultValues]]);
   }
+
   async validateSearchResults(userListAfterSearch: any, searchKey: string) {
     for (const val of userListAfterSearch) {
       if (val.includes(searchKey)) {
@@ -626,28 +625,11 @@ export default class CommonItemsPage {
     }
     return false;
   }
-  async validateSearchResultsFullName(
-    userListAfterSearch: any,
-    firstName: string,
-    lastName: string,
-    searchKey: string
-  ) {
-    for (const val of userListAfterSearch) {
-      if (
-        val.toLowerCase().includes(firstName.toLowerCase()) ||
-        val.toLowerCase().includes(lastName.toLowerCase()) ||
-        val.toLowerCase().includes(searchKey.toLowerCase())
-      ) {
-        return true;
-      }
-    }
-    return false;
-  }
 
-  async validateSearchResultsMultipleWordsSearchKey(results: string[], searchTerms: string[]) {
+  async validateSearchResultsMultipleWordsSearchKey(results: string[] | undefined, searchTerms: string[]) {
     const matchesSearchTerm = (text: string) =>
       searchTerms.some((term) => text.toLowerCase().includes(term.toLowerCase()));
-    const resultsAfterFiltering = results.filter(matchesSearchTerm);
+    const resultsAfterFiltering = (results ?? []).filter(matchesSearchTerm);
     return resultsAfterFiltering;
   }
 
@@ -659,7 +641,7 @@ export default class CommonItemsPage {
     return topMenuBarLinksValues;
   }
 
-  async getPaginationResults() {
+  async getPaginationResults(): Promise<string> {
     const paginationResultsActualValues = confirmStringNotNull(await this.pagination_results.textContent());
     return paginationResultsActualValues;
   }
@@ -775,117 +757,12 @@ export default class CommonItemsPage {
     return maxPage;
   }
 
-  async getReviewBodyListByPosition(position: string) {
-    let orgList: any;
-    if (position.toLowerCase() == 'first') {
-      orgList = await this.getReviewBodiesByPage();
-    } else if (position.toLowerCase() == 'last') {
-      const totalPages = await this.getTotalPages();
-      await this.clickOnPages(totalPages, 'clicking on page number');
-      orgList = await this.getReviewBodiesByPage();
-    }
-    return orgList;
-  }
-
-  async getUserListByPosition(position: string) {
-    let userList: any;
-    if (position.toLowerCase() == 'first') {
-      userList = await this.getUsersByPage();
-    } else if (position.toLowerCase() == 'last') {
-      const totalPages = await this.getTotalPages();
-      await this.clickOnPages(totalPages, 'clicking on page number');
-      userList = await this.getUsersByPage();
-    }
-    return userList;
-  }
-  async getSearchQueryFNameLNameEmailByPosition(
-    position: string,
-    fieldKey: string,
-    userListReviewBodyPage: UserListReviewBodyPage
-  ) {
-    let searchValues: any;
-    const userList = await this.getUserListByPosition(position);
-    if (fieldKey === 'Email_Address') {
-      searchValues = userList.get('emailAddressValues');
-    } else if (fieldKey === 'First_Name') {
-      searchValues = userList.get('firstNameValues');
-      await userListReviewBodyPage.setUserFirstName(searchValues);
-    } else if (fieldKey === 'Last_Name') {
-      searchValues = userList.get('lastNameValues');
-      await userListReviewBodyPage.setUserLastName(searchValues);
-    }
-    return searchValues[0];
-  }
-
-  async getUsersByPage(): Promise<Map<string, string[]>> {
-    const firstNameValues: string[] = [];
-    const lastNameValues: string[] = [];
-    const emailAddressValues: string[] = [];
-    for (let i = 1; i < 2; i++) {
-      const columns = this.tableRows.nth(i).getByRole('cell');
-      const firstName = confirmStringNotNull(await columns.nth(0).textContent());
-      firstNameValues.push(firstName);
-      const lastName = confirmStringNotNull(await columns.nth(1).textContent());
-      lastNameValues.push(lastName);
-      const emailAddress = confirmStringNotNull(await columns.nth(2).textContent());
-      emailAddressValues.push(emailAddress);
-    }
-    const userMap = new Map([
-      ['firstNameValues', firstNameValues],
-      ['lastNameValues', lastNameValues],
-      ['emailAddressValues', emailAddressValues],
-    ]);
-    return userMap;
-  }
-
-  async getReviewBodiesByPage(): Promise<Map<string, string[]>> {
-    const orgNameValues: string[] = [];
-    for (let i = 1; i < 2; i++) {
-      const columns = this.tableRows.nth(i).getByRole('cell');
-      const orgName = confirmStringNotNull(await columns.nth(0).textContent());
-      orgNameValues.push(orgName);
-    }
-    const reviewBodyMap = new Map([['orgNameValues', orgNameValues]]);
-    return reviewBodyMap;
-  }
-
-  async setSearchQueryFullNameByPosition(
-    position: string,
-    fieldKey: string,
-    userListReviewBodyPage: UserListReviewBodyPage
-  ) {
-    const userList = await this.getUserListByPosition(position);
-    if (fieldKey === 'Full_Name') {
-      await userListReviewBodyPage.setUserFirstName(userList.get('firstNameValues'));
-      await userListReviewBodyPage.setUserLastName(userList.get('lastNameValues'));
-    }
-  }
-
-  async setSearchQueryReviewBodyByPosition(
-    position: string,
-    fieldKey: string,
-    manageReviewBodiesPage: ManageReviewBodiesPage
-  ) {
-    const orgList = await this.getReviewBodyListByPosition(position);
-    if (fieldKey === 'Organisation_Name') {
-      await manageReviewBodiesPage.setOrgName(orgList.get('orgNameValues'));
-    }
-  }
-
   async splitSearchTerm(term: string) {
     return term.trim().split(/\s+/);
   }
 
   async filterResults(results: string[], searchTerms: string[]) {
     return results.filter((result) => searchTerms.some((term) => result.toLowerCase().includes(term.toLowerCase())));
-  }
-
-  async getFilteredSearchResultsBeforeSearch(userListReviewBodyPage: UserListReviewBodyPage) {
-    const userValues = await userListReviewBodyPage.getUserListBeforeSearch();
-    const searchKey = await userListReviewBodyPage.getSearchKey();
-    const searchTerms = await this.splitSearchTerm(searchKey);
-    const filteredSearchResults = await this.filterResults(userValues, searchTerms);
-    return filteredSearchResults;
   }
 
   async validateReviewYourAnswersPage(
@@ -905,35 +782,23 @@ export default class CommonItemsPage {
     await expect(element).toBeInViewport();
   }
 
-  async validateMultiErrorField(
-    key: string,
-    expectedFieldErrors: any,
-    actualSummaryErrors: any,
-    page: any,
-    commonItemsPage: CommonItemsPage
-  ) {
-    const actualFieldErrors = (await commonItemsPage.getMultipleFieldErrorMessages(key, page)).toString();
+  async validateMultiErrorField(key: string, expectedFieldErrors: any, actualSummaryErrors: any, page: any) {
+    const actualFieldErrors = (await this.getMultipleFieldErrorMessages(key, page)).toString();
     expect.soft(actualFieldErrors).toEqual(expectedFieldErrors);
 
     const summaryErrors =
       typeof actualSummaryErrors === 'string' ? actualSummaryErrors.split(',') : actualSummaryErrors;
 
     for (const val of summaryErrors) {
-      const element = await commonItemsPage.clickErrorSummaryLinkMultipleErrorField(val, key, page);
+      const element = await this.clickErrorSummaryLinkMultipleErrorField(val, key, page);
       await expect(element).toBeInViewport();
     }
   }
 
-  async validateStandardField(
-    key: string,
-    expectedError: any,
-    page: any,
-    commonItemsPage: CommonItemsPage,
-    errorMessageFieldDataset: any
-  ) {
-    const fieldErrors = await commonItemsPage.getFieldErrorMessages(key, page);
+  async validateStandardField(key: string, expectedError: any, page: any, errorMessageFieldDataset: any) {
+    const fieldErrors = await this.getFieldErrorMessages(key, page);
     expect(fieldErrors).toEqual(expectedError);
-    const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
+    const element = await this.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
     await expect(element).toBeInViewport();
   }
 

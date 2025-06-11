@@ -232,47 +232,37 @@ Feature: User Administration: Manage user profiles, view and edit user profile
     Scenario: Verify pagination in manage users page when user is on the first page and navigate through each page by clicking page number
         And I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
         And I capture the page screenshot
-        Then the pagination controls should be displayed at the bottom of the page
         And the default page size should be twenty
-        And the 'Next' button will be 'enabled' and 'visible' to the user
-        And the 'Previous' button will be 'disabled' and 'not visible' to the user
+        And the 'Next' button will be 'available' to the user
+        And the 'Previous' button will be 'not available' to the user
         And the current page number should be visually highlighted to indicate the active page the user is on
         And I capture the page screenshot
-        # Then I sequentially navigate through each page by 'clicking on page number' from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges
-        And I capture the page screenshot
+
 
     @rsp-3521 @ManageUsersPagination @ManageUsersPaginationFirstPage @ManageUsersPaginationNextLinkClick
     Scenario: Verify pagination in manage users page when user is on the first page and navigate through each page by clicking next link
         And I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
         And I capture the page screenshot
-        Then the pagination controls should be displayed at the bottom of the page
         And the default page size should be twenty
-        And the 'Next' button will be 'enabled' and 'visible' to the user
-        And the 'Previous' button will be 'disabled' and 'not visible' to the user
+        And the 'Next' button will be 'available' to the user
+        And the 'Previous' button will be 'not available' to the user
         And the current page number should be visually highlighted to indicate the active page the user is on
-        And I capture the page screenshot
-        # Then I sequentially navigate through each page by 'clicking on next link' from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges
         And I capture the page screenshot
 
     @rsp-3521 @ManageUsersPagination @ManageUsersPaginationLastPage  @ManageUsersPaginationPreviousLinkClick
     Scenario: Verify pagination in manage users page when user is on the last page and navigate through each page by clicking previous link
         And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
         And I capture the page screenshot
-        Then the pagination controls should be displayed at the bottom of the page
-        And the 'Next' button will be 'disabled' and 'not visible' to the user
-        And the 'Previous' button will be 'enabled' and 'visible' to the user
-        And I capture the page screenshot
-        # Then I sequentially navigate through each page by 'clicking on previous link' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+        And the 'Previous' button will be 'available' to the user
+        And the 'Next' button will be 'not available' to the user
         And I capture the page screenshot
 
     @rsp-3521 @ManageUsersPagination @ManageUsersPaginationLastPage  @ManageUsersPaginationPageNumber
     Scenario: Verify pagination in manage users page when user is on the last page and navigate through each page by clicking page number
         And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
         And I capture the page screenshot
-        Then the pagination controls should be displayed at the bottom of the page
-        And the 'Next' button will be 'disabled' and 'not visible' to the user
-        And the 'Previous' button will be 'enabled' and 'visible' to the user
-        # Then I sequentially navigate through each page by 'clicking on page number' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+        And the 'Previous' button will be 'available' to the user
+        And the 'Next' button will be 'not available' to the user
         And I capture the page screenshot
 
     @rsp-3456 @ManageUsersSearchResultsFound @Smoke
@@ -324,8 +314,6 @@ Feature: User Administration: Manage user profiles, view and edit user profile
         And I click the 'Search' button on the 'Manage_Users_Page'
         And I capture the page screenshot
         Then the system displays user records matching the search criteria
-        And I capture the page screenshot
-        # Then I sequentially navigate through each page by 'clicking on previous link' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
         And I capture the page screenshot
         Examples:
             | Search_Query                |

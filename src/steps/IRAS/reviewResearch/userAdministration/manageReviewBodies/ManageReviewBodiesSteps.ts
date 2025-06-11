@@ -6,7 +6,7 @@ const { When, Then } = createBdd(test);
 Then(
   'I can see the review body for {string} is present in the list with {string} status',
   async ({ manageReviewBodiesPage, createReviewBodyPage }, datasetName: string, status: string) => {
-    const reviewBodyStatus = await manageReviewBodiesPage.getReviewbodyStatus(status, manageReviewBodiesPage);
+    const reviewBodyStatus = await manageReviewBodiesPage.getReviewbodyStatus(status);
     const dataset = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body[datasetName];
     const expectedCountryValue: string = dataset.country_checkbox.toString();
     const reviewBodyName = await createReviewBodyPage.getUniqueOrgName();
@@ -103,7 +103,7 @@ Then(
     } else {
       reviewBodyName = await createReviewBodyPage.getUniqueOrgName();
     }
-    const reviewBodyStatus = await manageReviewBodiesPage.getReviewbodyStatus(status, manageReviewBodiesPage);
+    const reviewBodyStatus = await manageReviewBodiesPage.getReviewbodyStatus(status);
     await manageReviewBodiesPage.goto(
       manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.enlarged_page_size,
       reviewBodyName
@@ -144,7 +144,7 @@ When(
 When(
   'I can see the newly created review body should be present in the list with {string} status in the manage review bodies page',
   async ({ manageReviewBodiesPage, createReviewBodyPage }, status: string) => {
-    const reviewBodyStatus = await manageReviewBodiesPage.getReviewbodyStatus(status, manageReviewBodiesPage);
+    const reviewBodyStatus = await manageReviewBodiesPage.getReviewbodyStatus(status);
     const reviewBodyName = await createReviewBodyPage.getUniqueOrgName();
     await manageReviewBodiesPage.goto(
       manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.enlarged_page_size,
@@ -158,7 +158,7 @@ When(
 When(
   'I select the previously used review body should be present in the list with {string} status in the manage review bodies page',
   async ({ manageReviewBodiesPage, reviewBodyProfilePage }, status: string) => {
-    const reviewBodyStatus = await manageReviewBodiesPage.getReviewbodyStatus(status, manageReviewBodiesPage);
+    const reviewBodyStatus = await manageReviewBodiesPage.getReviewbodyStatus(status);
     const reviewBodyName = await reviewBodyProfilePage.getOrgName();
     await manageReviewBodiesPage.goto(
       manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.enlarged_page_size,
@@ -174,8 +174,8 @@ When(
 When(
   'I select a {string} Review Body to View and Edit which is {string}',
   async ({ manageReviewBodiesPage }, reviewBodyName: string, status: string) => {
-    const reviewBodyStatus = await manageReviewBodiesPage.getReviewbodyStatus(status, manageReviewBodiesPage);
-    const foundRecords = await manageReviewBodiesPage.findReviewBodyByStatus(reviewBodyName, reviewBodyStatus);
+    const reviewBodyStatus = await manageReviewBodiesPage.getReviewbodyStatus(status);
+    const foundRecords = await manageReviewBodiesPage.findReviewBody(reviewBodyName, reviewBodyStatus);
     expect(foundRecords).toBeDefined();
     expect(foundRecords).toHaveCount(1);
     await foundRecords.locator(manageReviewBodiesPage.actionsLink).click();
@@ -188,7 +188,7 @@ Then(
     const searchKey = await userListReviewBodyPage.getSearchKey();
     const searchTerms = await commonItemsPage.splitSearchTerm(searchKey);
     const orgList = await commonItemsPage.getAllOrgNamesFromTheTable();
-    const orgListAfterSearch: any = orgList.get('searchResultValues');
+    const orgListAfterSearch: string[] | undefined = orgList.get('searchResultValues');
     const searchResult = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
       orgListAfterSearch,
       searchTerms

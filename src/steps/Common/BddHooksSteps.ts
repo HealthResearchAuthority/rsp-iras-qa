@@ -1,6 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { test } from '../../hooks/CustomFixtures';
-import { chromium } from 'playwright';
+import { chromium } from '@playwright/test';
 import CommonItemsPage from '../../pages/Common/CommonItemsPage';
 import HomePage from '../../pages/IRAS/HomePage';
 import LoginPage from '../../pages/Common/LoginPage';

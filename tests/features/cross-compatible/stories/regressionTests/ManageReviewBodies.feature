@@ -32,7 +32,7 @@ Feature: User Administration: Manage Review Bodies
                 And I can see the list is sorted by default in the alphabetical order of the 'Organisation Name'
                 And I capture the page screenshot
                 # find the newly created review body in the list with 'active' status
-                When I enter 'unique organisation name of the newly created review body' into the search field
+                When I enter 'name of the new review body' into the search field
                 And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
                 And I can see the newly created review body should be present in the list with '<Status_Enabled>' status in the manage review bodies page
                 And I capture the page screenshot
@@ -51,7 +51,7 @@ Feature: User Administration: Manage Review Bodies
                 Then I can see the 'Manage_Review_Bodies_Page'
                 And I capture the page screenshot
                 # find the disabled review body in the list with 'disabled' status
-                When I enter 'unique organisation name of the newly created review body' into the search field
+                When I enter 'name of the new review body' into the search field
                 And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
                 And I can see the newly created review body should be present in the list with '<Status_Disabled>' status in the manage review bodies page
                 Then I click the view edit link for the 'disabled' review body
@@ -93,7 +93,7 @@ Feature: User Administration: Manage Review Bodies
                 And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
                 Then I can see the 'Manage_Review_Bodies_Page'
                 And I capture the page screenshot
-                When I enter 'organisation name of the previously used review body' into the search field
+                When I enter 'name of the previously used review body' into the search field
                 And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
                 And I capture the page screenshot
                 And I select the previously used review body should be present in the list with '<Status_Enabled>' status in the manage review bodies page
@@ -167,7 +167,7 @@ Feature: User Administration: Manage Review Bodies
                 And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
                 Then I can see the 'Manage_Review_Bodies_Page'
                 And I capture the page screenshot
-                When I enter 'organisation name of the previously used review body' into the search field
+                When I enter 'name of the previously used review body' into the search field
                 And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
                 And I capture the page screenshot
                 And I select the previously used review body should be present in the list with '<Status_Enabled>' status in the manage review bodies page

@@ -206,13 +206,11 @@ export default class ManageUsersPage {
   }
 
   async getUserStatus(status: string, manageUsersPage: ManageUsersPage) {
-    let userStatus: string;
     const datasetStatus = manageUsersPage.manageUsersPageTestData.Manage_Users_Page;
     if (status.toLowerCase() == 'disabled') {
-      userStatus = datasetStatus.disabled_status;
+      return datasetStatus.disabled_status;
     } else {
-      userStatus = datasetStatus.enabled_status;
+      return datasetStatus.enabled_status;
     }
-    return userStatus;
   }
 }

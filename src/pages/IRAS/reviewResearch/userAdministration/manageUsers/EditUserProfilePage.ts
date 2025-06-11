@@ -1,6 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as editUserProfilePageTestData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageUsers/edit_user_profile_page_data.json';
 import * as buttonTextData from '../../../../../resources/test_data/common/button_text_data.json';
+import { confirmStringNotNull } from '../../../../../utils/UtilFunctions';
 
 //Declare Page Objects
 export default class EditUserProfilePage {
@@ -137,8 +138,8 @@ export default class EditUserProfilePage {
       const isChecked = await checkbox.isChecked();
       if (isChecked) {
         const id = await checkbox.getAttribute('id');
-        const label = await this.page.locator(`label[for="${id}"]`).textContent();
-        checkedLabels.push(label?.trim() || '');
+        const label = confirmStringNotNull(await this.page.locator(`label[for="${id}"]`).textContent());
+        checkedLabels.push(label);
       }
     }
     return checkedLabels;
