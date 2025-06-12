@@ -83,8 +83,8 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
         And I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
         And I capture the page screenshot
         And the default page size should be twenty
-        And the 'Next' button will be 'enabled' and 'visible' to the user
-        And the 'Previous' button will be 'disabled' and 'not visible' to the user
+        And the 'Next' button will be 'available' to the user
+        And the 'Previous' button will be 'not available' to the user
         And the current page number should be visually highlighted to indicate the active page the user is on
         And I capture the page screenshot
 
@@ -92,8 +92,8 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
     Scenario: Verify pagination in manage review bodies page when user is on the last page
         And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
         And I capture the page screenshot
-        And the 'Next' button will be 'disabled' and 'not visible' to the user
-        And the 'Previous' button will be 'enabled' and 'visible' to the user
+        And the 'Previous' button will be 'available' to the user
+        And the 'Next' button will be 'not available' to the user
         And I capture the page screenshot
 
     @rsp-3459 @ManageReviewBodiesSearchResultsFound @Smoke
