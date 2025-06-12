@@ -37,7 +37,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
 
     @VerifyAuditHistoryDisableReviewBody
     Scenario Outline: Verify the user can view the audit history after disabling a review body
-        And I select a 'QA Automation' Review Body to View and Edit which is '<Status_Enabled>'
+        And I select a 'QA Automation' review Body to View and Edit which is '<Status_Enabled>'
         And I can see the review body profile page
         And I capture the page screenshot
         And I click the 'Disable_Review_Body' button on the 'Review_Body_Profile_Page'
@@ -65,7 +65,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
 
     @VerifyAuditHistoryEnableReviewBody
     Scenario Outline: Verify the user can view the audit history after enabling a review body
-        And I select a 'QA Automation' Review Body to View and Edit which is '<Status_Disabled>'
+        And I select a 'QA Automation' review Body to View and Edit which is '<Status_Disabled>'
         And I can see the review body profile page
         And I capture the page screenshot
         And I click the 'Enable_Review_Body' button on the 'Review_Body_Profile_Page'
@@ -96,7 +96,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
 
     @VerifyAuditHistoryEditReviewBodyOrgName
     Scenario Outline: Verify the user can view the audit history after editing organization name of a review body
-        And I select a 'QA Automation' Review Body to View and Edit which is '<Status_Enabled>'
+        And I select a 'QA Automation' review Body to View and Edit which is '<Status_Enabled>'
         And I can see the review body profile page
         And I capture the page screenshot
         And I click the change link against '<Field_Name>' on the review body profile page
@@ -119,7 +119,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
 
     @VerifyAuditHistoryEditReviewBodyCountry
     Scenario Outline: Verify the user can view the audit history after editing country of a review body
-        And I select a 'QA Automation' Review Body to View and Edit which is '<Status_Enabled>'
+        And I select a 'QA Automation' review Body to View and Edit which is '<Status_Enabled>'
         And I can see the review body profile page
         And I capture the page screenshot
         When I click the change link against '<Field_Name>' on the review body profile page
@@ -144,7 +144,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
 
     @VerifyAuditHistoryEditReviewBodyEmail
     Scenario Outline: Verify the user can view the audit history after editing email address of a review body
-        And I select a 'QA Automation' Review Body to View and Edit which is '<Status_Enabled>'
+        And I select a 'QA Automation' review Body to View and Edit which is '<Status_Enabled>'
         And I can see the review body profile page
         And I capture the page screenshot
         When I click the change link against '<Field_Name>' on the review body profile page
@@ -169,7 +169,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
 
     @VerifyAuditHistoryEditReviewBodyDescription @fail
     Scenario Outline: Verify the user can view the audit history after editing description of a review body
-        And I select a 'QA Automation' Review Body to View and Edit which is '<Status_Enabled>'
+        And I select a 'QA Automation' review Body to View and Edit which is '<Status_Enabled>'
         And I can see the review body profile page
         And I capture the page screenshot
         When I click the change link against '<Field_Name>' on the review body profile page
@@ -194,7 +194,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
 
     @VerifyAuditHistoryEditReviewBodyAllFields
     Scenario Outline: Verify the user can view the audit history after editing all the fields of a review body
-        And I select a 'QA Automation' Review Body to View and Edit which is '<Status_Enabled>'
+        And I select a 'QA Automation' review Body to View and Edit which is '<Status_Enabled>'
         And I can see the review body profile page
         And I capture the page screenshot
         When I click the change link against '<Field_Name_One>' on the review body profile page
@@ -221,7 +221,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
 
     @VerifyAuditHistoryDefaultSort
     Scenario: Verify the default sort of the audit history should be the most recent entry first based on date and time
-        And I select a 'QA Automation' Review Body to View and Edit which is 'Enabled'
+        And I select a 'QA Automation' review Body to View and Edit which is 'Enabled'
         And I can see the review body profile page
         And I capture the page screenshot
         And I click the 'Disable_Review_Body' button on the 'Review_Body_Profile_Page'
@@ -271,7 +271,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
 
     @VerifyAuditHistoryBackLinkNavigation
     Scenario: Verify the user can navigate from audit History page of the review body by clicking 'Back' link
-        And I select a 'QA Automation' Review Body to View and Edit which is 'Enabled'
+        And I select a 'QA Automation' review Body to View and Edit which is 'Enabled'
         And I can see the review body profile page
         And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'
         Then I can see the audit history page of the review body

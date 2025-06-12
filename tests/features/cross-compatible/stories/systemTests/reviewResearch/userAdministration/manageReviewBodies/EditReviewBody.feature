@@ -7,7 +7,7 @@ Feature: User Administration: Manage Review Bodies - Edit review body
         Then I can see the 'Manage_Review_Bodies_Page'
         When I enter 'QA Automation' into the search field
         And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
-        And I select a 'QA Automation' Review Body to View and Edit which is 'Enabled'
+        And I select a 'QA Automation' review Body to View and Edit which is 'Enabled'
 
     @accessReviewBodyProfile
     Scenario: Verify that view and edit link takes the user to the Review Body Profile Page

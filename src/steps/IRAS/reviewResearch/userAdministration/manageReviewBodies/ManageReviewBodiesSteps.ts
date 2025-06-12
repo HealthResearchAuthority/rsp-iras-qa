@@ -173,7 +173,7 @@ When(
 );
 
 When(
-  'I select a {string} Review Body to View and Edit which is {string}',
+  'I select a {string} review Body to View and Edit which is {string}',
   async ({ manageReviewBodiesPage }, reviewBodyName: string, status: string) => {
     const reviewBodyStatus = await manageReviewBodiesPage.getReviewbodyStatus(status);
     const foundRecords = await manageReviewBodiesPage.findReviewBody(reviewBodyName, reviewBodyStatus);
