@@ -380,72 +380,89 @@ Then(
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
   ) => {
-    const pageMap = {
-      Create_User_Profile_Page: {
-        page: createUserProfilePage,
-        data: createUserProfilePage.createUserProfilePageTestData,
-      },
-      Edit_User_Profile_Page: {
-        page: editUserProfilePage,
-        data: editUserProfilePage.editUserProfilePageTestData,
-      },
-      Project_Details_IRAS_Page: {
-        page: projectDetailsIRASPage,
-        data: projectDetailsIRASPage.projectDetailsIRASPageTestData,
-      },
-      Project_Details_Title_Page: {
-        page: projectDetailsTitlePage,
-        data: projectDetailsTitlePage.projectDetailsTitlePageTestData,
-      },
-      Key_Project_Roles_Page: {
-        page: keyProjectRolesPage,
-        data: keyProjectRolesPage.keyProjectRolesPageTestData,
-      },
-      Create_Review_Body_Page: {
-        page: createReviewBodyPage,
-        data: createReviewBodyPage.createReviewBodyPageData.Create_Review_Body.Validation,
-      },
-      Edit_Review_Body_Page: {
-        page: editReviewBodyPage,
-        data: editReviewBodyPage.editReviewBodyPageData.Edit_Review_Body.Validation,
-      },
-      Review_Your_Answers_Page: {
-        page: reviewYourAnswersPage,
-        data: reviewYourAnswersPage.reviewYourAnswersPageTestData,
-      },
-    };
-    const { page, data } = pageMap[pageKey];
-    const errorMessageFieldDataset = data[errorMessageFieldAndSummaryDatasetName];
-    const isMultiError = [
-      'Incorrect_Format_Invalid_Character_Limit_Telephone_Error',
-      'Incorrect_Format_Invalid_Character_Limit_Email_Address_Error',
-    ].includes(errorMessageFieldAndSummaryDatasetName);
+    let errorMessageFieldDataset: any;
+    let page: any;
+    if (pageKey === 'Create_User_Profile_Page') {
+      errorMessageFieldDataset =
+        createUserProfilePage.createUserProfilePageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = createUserProfilePage;
+    } else if (pageKey === 'Edit_User_Profile_Page') {
+      errorMessageFieldDataset =
+        editUserProfilePage.editUserProfilePageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = editUserProfilePage;
+    } else if (pageKey == 'Project_Details_IRAS_Page') {
+      errorMessageFieldDataset =
+        projectDetailsIRASPage.projectDetailsIRASPageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = projectDetailsIRASPage;
+    } else if (pageKey == 'Project_Details_Title_Page') {
+      errorMessageFieldDataset =
+        projectDetailsTitlePage.projectDetailsTitlePageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = projectDetailsTitlePage;
+    } else if (pageKey == 'Key_Project_Roles_Page') {
+      errorMessageFieldDataset =
+        keyProjectRolesPage.keyProjectRolesPageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = keyProjectRolesPage;
+    } else if (pageKey == 'Create_Review_Body_Page') {
+      errorMessageFieldDataset =
+        createReviewBodyPage.createReviewBodyPageData.Create_Review_Body.Validation[
+          errorMessageFieldAndSummaryDatasetName
+        ];
+      page = createReviewBodyPage;
+    } else if (pageKey == 'Edit_Review_Body_Page') {
+      errorMessageFieldDataset =
+        editReviewBodyPage.editReviewBodyPageData.Edit_Review_Body.Validation[errorMessageFieldAndSummaryDatasetName];
+      page = createReviewBodyPage;
+    } else if (pageKey == 'Review_Your_Answers_Page') {
+      errorMessageFieldDataset =
+        reviewYourAnswersPage.reviewYourAnswersPageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = reviewYourAnswersPage;
+    }
+    let allSummaryErrorExpectedValues: any;
+    let summaryErrorActualValues: any;
     await expect(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
-    const expectedSummaryErrors = isMultiError
-      ? Object.values(errorMessageFieldDataset).toString()
-      : Object.values(errorMessageFieldDataset);
-    const actualSummaryErrors = isMultiError
-      ? (await commonItemsPage.getSummaryErrorMessages()).toString()
-      : await commonItemsPage.getSummaryErrorMessages();
-    expect(actualSummaryErrors).toEqual(expectedSummaryErrors);
-    for (const key of Object.keys(errorMessageFieldDataset)) {
-      const expectedError = errorMessageFieldDataset[key];
-      if (pageKey === 'Review_Your_Answers_Page') {
-        await commonItemsPage.validateReviewYourAnswersPage(
-          key,
-          expectedError,
-          page,
-          commonItemsPage,
-          reviewYourAnswersPage,
-          errorMessageFieldDataset
-        );
-      } else if (isMultiError) {
-        await commonItemsPage.validateMultiErrorField(key, expectedSummaryErrors, actualSummaryErrors, page);
-      } else {
-        await commonItemsPage.validateStandardField(key, expectedError, page, errorMessageFieldDataset);
+    if (
+      errorMessageFieldAndSummaryDatasetName === 'Incorrect_Format_Invalid_Character_Limit_Telephone_Error' ||
+      errorMessageFieldAndSummaryDatasetName === 'Incorrect_Format_Invalid_Character_Limit_Email_Address_Error'
+    ) {
+      allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset).toString();
+      summaryErrorActualValues = (await commonItemsPage.getSummaryErrorMessages()).toString();
+    } else {
+      allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset);
+      summaryErrorActualValues = await commonItemsPage.getSummaryErrorMessages();
+    }
+    expect(summaryErrorActualValues).toEqual(allSummaryErrorExpectedValues);
+    for (const key in errorMessageFieldDataset) {
+      if (Object.prototype.hasOwnProperty.call(errorMessageFieldDataset, key)) {
+        let fieldErrorMessagesActualValues: any;
+        if (pageKey == 'Review_Your_Answers_Page') {
+          expect(await page[key].getByRole('link').evaluate((e: any) => getComputedStyle(e).color)).toBe(
+            commonItemsPage.commonTestData.rgb_red_color
+          );
+          fieldErrorMessagesActualValues = await reviewYourAnswersPage.getFieldErrorMessages(key, page);
+          expect(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
+          const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
+          await expect(element).toBeInViewport();
+        } else if (
+          errorMessageFieldAndSummaryDatasetName === 'Incorrect_Format_Invalid_Character_Limit_Telephone_Error' ||
+          errorMessageFieldAndSummaryDatasetName === 'Incorrect_Format_Invalid_Character_Limit_Email_Address_Error'
+        ) {
+          fieldErrorMessagesActualValues = (await commonItemsPage.getMultipleFieldErrorMessages(key, page)).toString();
+          const allFieldErrorExpectedValues = Object.values(errorMessageFieldDataset).toString();
+          expect.soft(fieldErrorMessagesActualValues).toEqual(allFieldErrorExpectedValues);
+          const fieldValActuals = summaryErrorActualValues.split(',');
+          for (const val of fieldValActuals) {
+            const element = await commonItemsPage.clickErrorSummaryLinkMultipleErrorField(val, key, page);
+            await expect(element).toBeInViewport();
+          }
+        } else {
+          fieldErrorMessagesActualValues = await commonItemsPage.getFieldErrorMessages(key, page);
+          expect(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
+          const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
+          await expect(element).toBeInViewport();
+        }
       }
     }
-    if (errorMessageFieldAndSummaryDatasetName === 'Max_Description_Words_Error') {
+    if (errorMessageFieldAndSummaryDatasetName == 'Max_Description_Words_Error') {
       await expect(createReviewBodyPage.description_reason_error).toHaveText(
         createReviewBodyPage.createReviewBodyPageData.Create_Review_Body.Validation.Max_Description_Reason
       );
@@ -538,6 +555,7 @@ When(
       } else if (fieldKey === 'Organisation_Name') {
         const orgList = await manageReviewBodiesPage.getReviewBodyListByPosition(position, commonItemsPage);
         await manageReviewBodiesPage.setOrgName(orgList.get('orgNameValues'));
+        searchKey = await manageReviewBodiesPage.getSearchQueryOrgName(position);
       }
       await userListReviewBodyPage.setSearchKey(searchKey);
       await commonItemsPage.search_text.fill(searchKey);

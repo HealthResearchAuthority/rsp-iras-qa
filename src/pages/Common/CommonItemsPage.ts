@@ -16,7 +16,6 @@ import BookingPage from '../IRAS/questionSet/BookingPage';
 import ChildrenPage from '../IRAS/questionSet/ChildrenPage';
 import { PageObjectDataName } from '../../utils/CustomTypes';
 import { confirmArrayNotNull, confirmStringNotNull, removeUnwantedWhitespace } from '../../utils/UtilFunctions';
-import ReviewYourAnswersPage from '../IRAS/makeChanges/ReviewYourAnswersPage';
 
 //Declare Page Objects
 export default class CommonItemsPage {
@@ -761,43 +760,6 @@ export default class CommonItemsPage {
 
   async filterResults(results: string[], searchTerms: string[]) {
     return results.filter((result) => searchTerms.some((term) => result.toLowerCase().includes(term.toLowerCase())));
-  }
-
-  async validateReviewYourAnswersPage(
-    key: string,
-    expectedError: any,
-    page: any,
-    commonItemsPage: CommonItemsPage,
-    reviewYourAnswersPage: ReviewYourAnswersPage,
-    errorMessageFieldDataset: any
-  ) {
-    expect(await page[key].getByRole('link').evaluate((e: any) => getComputedStyle(e).color)).toBe(
-      commonItemsPage.commonTestData.rgb_red_color
-    );
-    const fieldErrors = await reviewYourAnswersPage.getFieldErrorMessages(key, page);
-    expect(fieldErrors).toEqual(expectedError);
-    const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
-    await expect(element).toBeInViewport();
-  }
-
-  async validateMultiErrorField(key: string, expectedFieldErrors: any, actualSummaryErrors: any, page: any) {
-    const actualFieldErrors = (await this.getMultipleFieldErrorMessages(key, page)).toString();
-    expect.soft(actualFieldErrors).toEqual(expectedFieldErrors);
-
-    const summaryErrors =
-      typeof actualSummaryErrors === 'string' ? actualSummaryErrors.split(',') : actualSummaryErrors;
-
-    for (const val of summaryErrors) {
-      const element = await this.clickErrorSummaryLinkMultipleErrorField(val, key, page);
-      await expect(element).toBeInViewport();
-    }
-  }
-
-  async validateStandardField(key: string, expectedError: any, page: any, errorMessageFieldDataset: any) {
-    const fieldErrors = await this.getFieldErrorMessages(key, page);
-    expect(fieldErrors).toEqual(expectedError);
-    const element = await this.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
-    await expect(element).toBeInViewport();
   }
 
   async clearCheckboxes(dataset: any, keys: string[], commonItemsPage: any, createUserProfilePage: any) {
