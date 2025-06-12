@@ -11,7 +11,7 @@ import {
 } from '../../utils/GenerateTestData';
 const { Given, When, Then } = createBdd(test);
 import * as userProfileGeneratedataConfig from '../../resources/test_data/user_administration/testdata_generator/user_profile_generate_data_config.json';
-import { getAuthState, getCurrentTimeFormatted } from '../../utils/UtilFunctions';
+import { confirmArrayNotNull, getAuthState, getCurrentTimeFormatted } from '../../utils/UtilFunctions';
 import { Locator } from 'playwright';
 import fs from 'fs';
 
@@ -570,7 +570,7 @@ When(
   async ({ userListReviewBodyPage, commonItemsPage }, searchKey: string) => {
     if ((await commonItemsPage.tableRows.count()) >= 2) {
       const userListBeforeSearch = await commonItemsPage.getAllUsersFromTheTable();
-      const userValues: any = userListBeforeSearch.get('searchResultValues');
+      const userValues: string[] = confirmArrayNotNull(userListBeforeSearch.get('searchResultValues'));
       await userListReviewBodyPage.setUserListBeforeSearch(userValues);
       await userListReviewBodyPage.setSearchKey(searchKey);
       await commonItemsPage.search_text.fill(searchKey);

@@ -5,7 +5,7 @@ Feature: Create Amendment - Create Project - Regression Tests
     Given I have navigated to the my research projects page
     And I can see the my research projects page
 
-  @CreateProjectValidRegression
+  @CreateProjectValidRegression @Smoke
   Scenario Outline: Validate user is able to amend a project
     # Validate labels in My_Research_Projects_Page
     And I can see the my research projects page
