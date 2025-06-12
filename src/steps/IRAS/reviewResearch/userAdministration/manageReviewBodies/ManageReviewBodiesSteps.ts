@@ -118,9 +118,13 @@ Then(
 );
 
 Then(
-  'I click the view edit link for the newly created review body',
-  async ({ manageReviewBodiesPage, createReviewBodyPage }) => {
-    const reviewBodyName = await createReviewBodyPage.getUniqueOrgName();
+  'I click the view edit link for the {string}',
+  async ({ manageReviewBodiesPage, createReviewBodyPage, reviewBodyProfilePage }, inputType: string) => {
+    const reviewBodyName = await manageReviewBodiesPage.getReviewBodyName(
+      inputType,
+      reviewBodyProfilePage,
+      createReviewBodyPage
+    );
     await manageReviewBodiesPage.goto(
       manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.enlarged_page_size,
       reviewBodyName
@@ -146,10 +150,18 @@ When(
 );
 
 When(
-  'I can see the newly created review body should be present in the list with {string} status in the manage review bodies page',
-  async ({ manageReviewBodiesPage, createReviewBodyPage }, status: string) => {
+  'I can see the {string} should be present in the list with {string} status in the manage review bodies page',
+  async (
+    { manageReviewBodiesPage, createReviewBodyPage, reviewBodyProfilePage },
+    inputType: string,
+    status: string
+  ) => {
     const reviewBodyStatus = await manageReviewBodiesPage.getReviewbodyStatus(status);
-    const reviewBodyName = await createReviewBodyPage.getUniqueOrgName();
+    const reviewBodyName = await manageReviewBodiesPage.getReviewBodyName(
+      inputType,
+      reviewBodyProfilePage,
+      createReviewBodyPage
+    );
     await manageReviewBodiesPage.goto(
       manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.enlarged_page_size,
       reviewBodyName
@@ -157,21 +169,6 @@ When(
     const foundRecords = await manageReviewBodiesPage.findReviewBody(reviewBodyName, reviewBodyStatus);
     expect(foundRecords).toBeDefined();
     expect(foundRecords).toHaveCount(1);
-  }
-);
-When(
-  'I select the previously used review body should be present in the list with {string} status in the manage review bodies page',
-  async ({ manageReviewBodiesPage, reviewBodyProfilePage }, status: string) => {
-    const reviewBodyStatus = await manageReviewBodiesPage.getReviewbodyStatus(status);
-    const reviewBodyName = await reviewBodyProfilePage.getOrgName();
-    await manageReviewBodiesPage.goto(
-      manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.enlarged_page_size,
-      reviewBodyName
-    );
-    const foundRecords = await manageReviewBodiesPage.findReviewBody(reviewBodyName, reviewBodyStatus);
-    expect(foundRecords).toBeDefined();
-    expect(foundRecords).toHaveCount(1);
-    await foundRecords.locator(manageReviewBodiesPage.actionsLink).click();
   }
 );
 

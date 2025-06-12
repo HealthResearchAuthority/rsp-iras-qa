@@ -3,6 +3,8 @@ import * as manageReviewBodiesPageData from '../../../../../resources/test_data/
 import * as linkTextData from '../../../../../resources/test_data/common/link_text_data.json';
 import { confirmStringNotNull } from '../../../../../utils/UtilFunctions';
 import CommonItemsPage from '../../../../Common/CommonItemsPage';
+import ReviewBodyProfilePage from './ReviewBodyProfilePage';
+import CreateReviewBodyPage from './CreateReviewBodyPage';
 
 //Declare Page Objects
 export default class ManageReviewBodiesPage {
@@ -185,5 +187,24 @@ export default class ManageReviewBodiesPage {
       orgList = await this.getReviewBodiesByPage();
     }
     return orgList;
+  }
+
+  async getReviewBodyName(
+    inputType: string,
+    reviewBodyProfilePage: ReviewBodyProfilePage,
+    createReviewBodyPage: CreateReviewBodyPage
+  ): Promise<string> {
+    let reviewBodyName: string;
+    switch (inputType) {
+      case 'previously used review body':
+        reviewBodyName = await reviewBodyProfilePage.getOrgName();
+        break;
+      case 'newly created review body':
+        reviewBodyName = await createReviewBodyPage.getUniqueOrgName();
+        break;
+      default:
+        reviewBodyName = inputType;
+    }
+    return reviewBodyName;
   }
 }

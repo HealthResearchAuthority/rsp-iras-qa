@@ -24,7 +24,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I capture the page screenshot
         When I enter 'name of the new review body' into the search field
         And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
-        Then I click the view edit link for the newly created review body
+        Then I click the view edit link for the 'newly created review body'
         And I can see the review body profile page
         And I capture the page screenshot
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
