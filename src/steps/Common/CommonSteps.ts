@@ -508,7 +508,7 @@ When('the default page size should be twenty', async ({ commonItemsPage }) => {
   expect(rowCountActual - 1).toBe(rowCountExpected);
 });
 
-When(
+Then(
   'the {string} button will be {string} to the user',
   async ({ commonItemsPage }, linkLabel: string, availabilityVal: string) => {
     const locatorVal: Locator = await commonItemsPage.getLocatorforNextPreviousLinks(linkLabel);
