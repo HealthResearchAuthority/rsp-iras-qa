@@ -1,10 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { test, expect } from '../../../../../hooks/CustomFixtures';
-import {
-  confirmArrayNotNull,
-  confirmStringNotNull,
-  removeUnwantedWhitespace,
-} from '../../../../../utils/UtilFunctions';
+import { confirmArrayNotNull } from '../../../../../utils/UtilFunctions';
 const { When, Then } = createBdd(test);
 
 Then(
@@ -19,26 +15,6 @@ Then(
       reviewBodyName
     );
     const createdReviewBodyRow = await manageReviewBodiesPage.findReviewBody(reviewBodyName, reviewBodyStatus);
-    const createdReviewBodyCountry = createdReviewBodyRow.locator('td', {
-      hasText: expectedCountryValue.replaceAll(',', ', '),
-      hasNotText: 'QA',
-    });
-    expect(createdReviewBodyRow).toHaveCount(1);
-    await expect(createdReviewBodyCountry).toBeVisible();
-  }
-);
-
-Then(
-  'I can see the review body for {string} is present in the list',
-  async ({ manageReviewBodiesPage, createReviewBodyPage }, datasetName: string) => {
-    const dataset = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body[datasetName];
-    const expectedCountryValue: string = dataset.country_checkbox.toString();
-    const reviewBodyName = await createReviewBodyPage.getUniqueOrgName();
-    await manageReviewBodiesPage.goto(
-      manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.enlarged_page_size,
-      reviewBodyName
-    );
-    const createdReviewBodyRow = await manageReviewBodiesPage.findReviewBody(reviewBodyName);
     const createdReviewBodyCountry = createdReviewBodyRow.locator('td', {
       hasText: expectedCountryValue.replaceAll(',', ', '),
       hasNotText: 'QA',
@@ -81,39 +57,6 @@ Then(
     } else {
       expect(createdReviewBodyRow.locator(manageReviewBodiesPage.statusCell)).toHaveText(dataset.enabled_status);
     }
-  }
-);
-
-Then(
-  'I click the view edit link for the {string} review body',
-  async ({ manageReviewBodiesPage, reviewBodyProfilePage }, status: string) => {
-    const reviewBodyRow = await manageReviewBodiesPage.getRowByOrgName(await reviewBodyProfilePage.getOrgName(), true);
-    const organisationStatusText = await removeUnwantedWhitespace(
-      confirmStringNotNull(await reviewBodyRow.locator(manageReviewBodiesPage.status_from_list).textContent())
-    );
-    if (status === organisationStatusText.toLowerCase()) {
-      await reviewBodyRow.locator(manageReviewBodiesPage.actionsLink).click();
-    }
-  }
-);
-
-Then(
-  'I search {string} review body and click on view edit link for {string} with {string} status',
-  async ({ createReviewBodyPage, manageReviewBodiesPage }, recordType: string, datasetName: string, status: string) => {
-    let reviewBodyName: string;
-    if (recordType.toLowerCase() == 'existing') {
-      const dataset = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body[datasetName];
-      reviewBodyName = dataset.organisation_name_text;
-    } else {
-      reviewBodyName = await createReviewBodyPage.getUniqueOrgName();
-    }
-    const reviewBodyStatus = await manageReviewBodiesPage.getReviewbodyStatus(status);
-    await manageReviewBodiesPage.goto(
-      manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.enlarged_page_size,
-      reviewBodyName
-    );
-    const reviewBodyRow = await manageReviewBodiesPage.findReviewBody(reviewBodyName, reviewBodyStatus);
-    await reviewBodyRow.locator(manageReviewBodiesPage.actionsLink).click();
   }
 );
 
@@ -176,7 +119,7 @@ When(
   'I select a {string} review Body to View and Edit which is {string}',
   async ({ manageReviewBodiesPage }, reviewBodyName: string, status: string) => {
     const reviewBodyStatus = await manageReviewBodiesPage.getReviewbodyStatus(status);
-    const foundRecords = await manageReviewBodiesPage.findReviewBody(reviewBodyName, reviewBodyStatus);
+    const foundRecords = await manageReviewBodiesPage.findReviewBodyByStatus(reviewBodyName, reviewBodyStatus);
     expect(foundRecords).toBeDefined();
     expect(foundRecords).toHaveCount(1);
     await foundRecords.locator(manageReviewBodiesPage.actionsLink).click();

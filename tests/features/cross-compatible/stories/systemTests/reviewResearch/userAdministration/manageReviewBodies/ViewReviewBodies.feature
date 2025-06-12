@@ -42,7 +42,11 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
 
     @viewEnabledDisabledReviewBodies
     Scenario Outline: Verify that user is able to view active and disabled review bodies
-        When I search 'existing' review body and click on view edit link for '<Review_Body_Name>' with '<Status>' status
+        When I enter 'QA Automation' into the search field
+        And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
+        And I capture the page screenshot
+        And I select a 'QA Automation' review Body to View and Edit which is '<Status>'
+        And I capture the page screenshot
         Then I can see the review body profile page
         And I capture the page screenshot
         When I click the 'Back' link on the 'Review_Body_Profile_Page'
@@ -68,8 +72,15 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
         Then I can see the create Review body confirmation page for '<Review_Body_Name>'
         And I capture the page screenshot
         When I have navigated to the 'Manage_Review_Bodies_Page'
+        And I capture the page screenshot
         Then I can see the 'Manage_Review_Bodies_Page'
-        And I search 'new' review body and click on view edit link for '<Review_Body_Name>' with '<Status>' status
+        When I enter 'name of the new review body' into the search field
+        And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
+        And I capture the page screenshot
+        And I can see the 'newly created review body' should be present in the list with '<Status_Enabled>' status in the manage review bodies page
+        And I capture the page screenshot
+        Then I click the view edit link for the 'newly created review body'
+        And I capture the page screenshot
         And I can see the review body profile page
         And I capture the page screenshot
         Then I can see the last updated date field is blank
@@ -122,7 +133,7 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
             | Non_Existant_Data |
 
     @rsp-3459 @ManageReviewBodiesSearchResultsFound
-    Scenario Outline: Verify results are displayed when the user searches
+    Scenario Outline: Verify results are displayed when the user searches with existing review body details
         When I fill the search input for searching review bodies in manage review bodies page with '<Search_Query>' as the search query
         And I capture the page screenshot
         And I click the 'Search' button on the 'Manage_Review_Bodies_Page'

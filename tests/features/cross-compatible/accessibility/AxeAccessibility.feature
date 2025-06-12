@@ -471,13 +471,18 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
     And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
     Then I can see the 'Manage_Review_Bodies_Page'
+    When I enter 'name of the new review body' into the search field
+    And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
+    And I can see the 'newly created review body' should be present in the list with 'Enabled' status in the manage review bodies page
     And I click the view edit link for the 'newly created review body'
     And I click the 'Disable_User_Record' button on the 'Review_Body_Profile_Page'
     And I click the 'Confirm' button on the 'Confirmation_Page'
     And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
     Then I can see the 'Manage_Review_Bodies_Page'
-    And I can see the status of the review body is 'Disabled'
-    And I click the view edit link for the 'newly created review body'
+    When I enter 'name of the new review body' into the search field
+    And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
+    And I can see the 'newly created review body' should be present in the list with 'Disabled' status in the manage review bodies page
+    Then I click the view edit link for the 'newly created review body'
     And I can see the 'Enable_Label_Texts' ui labels on the manage review body profile page
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
@@ -494,13 +499,18 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
     And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
     Then I can see the 'Manage_Review_Bodies_Page'
-    And I click the view edit link for the 'newly created review body'
+    When I enter 'name of the new review body' into the search field
+    And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
+    And I can see the 'newly created review body' should be present in the list with 'Enabled' status in the manage review bodies page
+    Then I click the view edit link for the 'newly created review body'
     And I click the 'Disable_User_Record' button on the 'Review_Body_Profile_Page'
     And I click the 'Confirm' button on the 'Confirmation_Page'
     And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
     Then I can see the 'Manage_Review_Bodies_Page'
-    And I can see the status of the review body is 'Disabled'
-    And I click the view edit link for the 'newly created review body'
+    When I enter 'name of the new review body' into the search field
+    And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
+    And I can see the 'newly created review body' should be present in the list with 'Disabled' status in the manage review bodies page
+    Then I click the view edit link for the 'newly created review body'
     And I click the 'Enable_User_Record' button on the 'Review_Body_Profile_Page'
     And I can see a 'Confirm' button on the 'Confirmation_Page'
     When I Scan the page with the Axe Accessibilty Tool
@@ -518,13 +528,18 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
     And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
     Then I can see the 'Manage_Review_Bodies_Page'
-    And I click the view edit link for the 'newly created review body'
+    When I enter 'name of the new review body' into the search field
+    And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
+    And I can see the 'newly created review body' should be present in the list with 'Enabled' status in the manage review bodies page
+    Then I click the view edit link for the 'newly created review body'
     And I click the 'Disable_User_Record' button on the 'Review_Body_Profile_Page'
     And I click the 'Confirm' button on the 'Confirmation_Page'
     And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
     Then I can see the 'Manage_Review_Bodies_Page'
-    And I can see the status of the review body is 'Disabled'
-    And I click the view edit link for the 'newly created review body'
+    When I enter 'name of the new review body' into the search field
+    And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
+    And I can see the 'newly created review body' should be present in the list with 'Disabled' status in the manage review bodies page
+    Then I click the view edit link for the 'newly created review body'
     And I click the 'Enable_User_Record' button on the 'Review_Body_Profile_Page'
     When I click the 'Confirm' button on the 'Confirmation_Page'
     And I can see a 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'

@@ -146,6 +146,27 @@ export default class ManageReviewBodiesPage {
     throw new Error(`No matching record found`);
   }
 
+  async findReviewBodyByStatus(reviewBodyName: string, reviewBodyStatus: string) {
+    let foundRecord = false;
+    let hasNextPage = true;
+    while (hasNextPage && !foundRecord) {
+      const rows = await this.listRows.all();
+      for (const row of rows) {
+        const columns = await row.locator(this.listCell).allTextContents();
+        if (columns[0].trim().includes(reviewBodyName) && columns[2].trim() === reviewBodyStatus) {
+          foundRecord = true;
+          return row;
+        }
+      }
+      hasNextPage = (await this.next_button.isVisible()) && !(await this.next_button.isDisabled());
+      if (hasNextPage && !foundRecord) {
+        await this.next_button.click();
+        await this.page.waitForLoadState('domcontentloaded');
+      }
+    }
+    throw new Error(`No matching record found`);
+  }
+
   async getSearchQueryOrgName(position: string) {
     let searchKey: string = '';
     const orgNameValues: any = await this.getOrgName();

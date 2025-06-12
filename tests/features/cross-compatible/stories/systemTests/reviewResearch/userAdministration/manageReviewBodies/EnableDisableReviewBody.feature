@@ -15,9 +15,10 @@ Feature: User Administration: Manage Review Bodies - Enable / Disable Review Bod
     And I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
     And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
     Then I can see the 'Manage_Review_Bodies_Page'
-    And I can see the review body for '<Add_Review_Body>' is present in the list
-    And I can see the status of the review body is '<Status_Enabled>'
+    And I capture the page screenshot
+    Then I can see the review body for '<Add_Review_Body>' is present in the list with '<Status_Enabled>' status
     When I click the view edit link for the 'newly created review body'
+    And I capture the page screenshot
     Then I can see the '<Disable_Label_Texts>' ui labels on the manage review body profile page
     And I capture the page screenshot
     When I click the 'Disable_Review_Body' button on the 'Review_Body_Profile_Page'
@@ -29,8 +30,7 @@ Feature: User Administration: Manage Review Bodies - Enable / Disable Review Bod
     And I capture the page screenshot
     When I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
     Then I can see the 'Manage_Review_Bodies_Page'
-    And I can see the review body for '<Add_Review_Body>' is present in the list
-    And I can see the status of the review body is '<Status_Disabled>'
+    Then I can see the review body for '<Add_Review_Body>' is present in the list with '<Status_Disabled>' status
     And I capture the page screenshot
 
     Examples:
@@ -72,8 +72,8 @@ Feature: User Administration: Manage Review Bodies - Enable / Disable Review Bod
     And I click the 'Confirm' button on the 'Confirmation_Page'
     And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
     Then I can see the 'Manage_Review_Bodies_Page'
-    And I can see the review body for '<Add_Review_Body>' is present in the list
-    And I can see the status of the review body is '<Status_Disabled>'
+    Then I can see the review body for '<Add_Review_Body>' is present in the list with '<Status_Disabled>' status
+    And I capture the page screenshot
     When I click the view edit link for the 'newly created review body'
     Then I can see the '<Enable_Label_Texts>' ui labels on the manage review body profile page
     And I capture the page screenshot
@@ -86,8 +86,7 @@ Feature: User Administration: Manage Review Bodies - Enable / Disable Review Bod
     And I capture the page screenshot
     When I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
     Then I can see the 'Manage_Review_Bodies_Page'
-    And I can see the review body for '<Add_Review_Body>' is present in the list
-    And I can see the status of the review body is '<Status_Enabled>'
+    Then I can see the review body for '<Add_Review_Body>' is present in the list with '<Status_Enabled>' status
     And I capture the page screenshot
 
     Examples:

@@ -20,9 +20,8 @@ Feature: User Administration: Manage Review Bodies - Create review body
         And I capture the page screenshot
         When I have navigated to the 'Manage_Review_Bodies_Page'
         Then I can see the 'Manage_Review_Bodies_Page'
-        Then I can see the review body for '<Add_Review_Body>' is present in the list
+        Then I can see the review body for '<Add_Review_Body>' is present in the list with '<Status>' status
         And I capture the page screenshot
-        And I can see the status of the review body is '<Status>'
 
         Examples:
             | Add_Review_Body                    | Status  |
@@ -77,9 +76,8 @@ Feature: User Administration: Manage Review Bodies - Create review body
         And I capture the page screenshot
         When I click the 'Back_To_Manage_Review_Bodies' link on the 'Create_Review_Body_Confirmation_Page'
         Then I can see the 'Manage_Review_Bodies_Page'
-        Then I can see the review body for '<Add_Another_Review_Body>' is present in the list
+        Then I can see the review body for '<Add_Another_Review_Body>' is present in the list with '<Status>' status
         And I capture the page screenshot
-        And I can see the status of the review body is '<Status>'
 
         Examples:
             | Add_Review_Body                    | Add_Another_Review_Body                    | Status  |
@@ -99,7 +97,6 @@ Feature: User Administration: Manage Review Bodies - Create review body
         Then I can see the check and create review body page for '<Add_Review_Body>'
         And I capture the page screenshot
         And I click the 'Back' link on the 'Check_Create_Review_Body_Page'
-        # And I click the 'Back' button on the 'Check_Create_Review_Body_Page'
         Then I can see the Add new review body page for '<Add_Review_Body>'
         And I fill the new review body page using '<Add_Another_Review_Body>'
         And I capture the page screenshot
