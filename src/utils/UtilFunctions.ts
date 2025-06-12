@@ -529,21 +529,7 @@ export async function returnDataFromJSON(filePath?: string): Promise<any> {
 }
 
 export async function convertDate(day: string, month: number, year: number): Promise<any> {
-  const monthNames = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ];
-  const formattedDate = `${day.padStart(2, '0')} ${monthNames[month - 1]} ${year}`;
+  const formattedDate = `${day.padStart(2, '0')} ${month} ${year}`;
   return formattedDate.toString();
 }
 
