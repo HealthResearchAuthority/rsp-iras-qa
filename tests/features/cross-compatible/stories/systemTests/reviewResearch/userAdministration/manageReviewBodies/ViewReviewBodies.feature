@@ -121,8 +121,8 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
             | Search_Query      |
             | Non_Existant_Data |
 
-    @rsp-3459 @ManageReviewBodiesSearchAndPagination
-    Scenario Outline: Verify search results and pagination in manage review bodies page when user searches and navigate through each page
+    @rsp-3459 @ManageReviewBodiesSearchResultsFound
+    Scenario Outline: Verify results are displayed when the user searches
         When I fill the search input for searching review bodies in manage review bodies page with '<Search_Query>' as the search query
         And I capture the page screenshot
         And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
