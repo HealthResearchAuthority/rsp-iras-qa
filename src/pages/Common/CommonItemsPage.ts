@@ -15,7 +15,7 @@ import AdultsLackingCapacityPage from '../IRAS/questionSet/AdultsLackingCapacity
 import BookingPage from '../IRAS/questionSet/BookingPage';
 import ChildrenPage from '../IRAS/questionSet/ChildrenPage';
 import { PageObjectDataName } from '../../utils/CustomTypes';
-import { confirmStringNotNull, removeUnwantedWhitespace } from '../../utils/UtilFunctions';
+import { confirmArrayNotNull, confirmStringNotNull, removeUnwantedWhitespace } from '../../utils/UtilFunctions';
 import ReviewYourAnswersPage from '../IRAS/makeChanges/ReviewYourAnswersPage';
 
 //Declare Page Objects
@@ -626,10 +626,10 @@ export default class CommonItemsPage {
     return false;
   }
 
-  async validateSearchResultsMultipleWordsSearchKey(results: string[] | undefined, searchTerms: string[]) {
+  async validateSearchResultsMultipleWordsSearchKey(results: string[], searchTerms: string[]) {
     const matchesSearchTerm = (text: string) =>
       searchTerms.some((term) => text.toLowerCase().includes(term.toLowerCase()));
-    const resultsAfterFiltering = (results ?? []).filter(matchesSearchTerm);
+    const resultsAfterFiltering = confirmArrayNotNull(results).filter(matchesSearchTerm);
     return resultsAfterFiltering;
   }
 

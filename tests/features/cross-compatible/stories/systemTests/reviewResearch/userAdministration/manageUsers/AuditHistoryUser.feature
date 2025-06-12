@@ -22,9 +22,7 @@ Feature: User Administration: Manage Users - View audit history for users
                         | Status_Enabled |
                         | Enabled        |
 
-        #  defect https://nihr.atlassian.net/browse/RSP-3938
-        # fail
-        @VerifyAuditHistoryCreateUserAssignRoles
+        @VerifyAuditHistoryCreateUserAssignRoles @fail
         Scenario Outline: Verify the user can view the audit history with roles assigned after creating a new user
                 And I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
                 And I can see the add a new user profile page
@@ -54,9 +52,8 @@ Feature: User Administration: Manage Users - View audit history for users
                         | Valid_Data_In_All_Fields_Role_Reviewer_Another     | Enabled        |
                         | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Enabled        |
 
-        #  defect https://nihr.atlassian.net/browse/RSP-3938
-        # fail
-        @VerifyAuditHistoryUserUnassignRole
+
+        @VerifyAuditHistoryUserUnassignRole @fail
         Scenario Outline: Verify the user can view the unassign role event in the audit history
                 And I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
                 And I can see the add a new user profile page

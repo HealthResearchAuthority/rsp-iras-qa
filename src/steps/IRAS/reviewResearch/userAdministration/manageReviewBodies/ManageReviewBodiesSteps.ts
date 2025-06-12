@@ -1,6 +1,10 @@
 import { createBdd } from 'playwright-bdd';
 import { test, expect } from '../../../../../hooks/CustomFixtures';
-import { confirmStringNotNull, removeUnwantedWhitespace } from '../../../../../utils/UtilFunctions';
+import {
+  confirmArrayNotNull,
+  confirmStringNotNull,
+  removeUnwantedWhitespace,
+} from '../../../../../utils/UtilFunctions';
 const { When, Then } = createBdd(test);
 
 Then(
@@ -188,7 +192,7 @@ Then(
     const searchKey = await userListReviewBodyPage.getSearchKey();
     const searchTerms = await commonItemsPage.splitSearchTerm(searchKey);
     const orgList = await commonItemsPage.getAllOrgNamesFromTheTable();
-    const orgListAfterSearch: string[] | undefined = orgList.get('searchResultValues');
+    const orgListAfterSearch: string[] = confirmArrayNotNull(orgList.get('searchResultValues'));
     const searchResult = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
       orgListAfterSearch,
       searchTerms

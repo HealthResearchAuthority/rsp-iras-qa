@@ -228,8 +228,8 @@ Feature: User Administration: Manage user profiles, view and edit user profile
             | Valid_Data_In_All_Fields_Role_Operations | job_title_text  | Operations | Enabled | Invalid_Email_Data_Punycode                        | Incorrect_Format_Field_Email_Address_Error |
 
 
-    @rsp-3521 @ManageUsersPagination @ManageUsersPaginationFirstPage @ManageUsersPaginationPageNumber
-    Scenario: Verify pagination in manage users page when user is on the first page and navigate through each page by clicking page number
+    @rsp-3521 @ManageUsersPagination @ManageUsersPaginationFirstPage
+    Scenario: Verify pagination in manage users page when user is on the first page
         And I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
         And I capture the page screenshot
         And the default page size should be twenty
@@ -238,27 +238,8 @@ Feature: User Administration: Manage user profiles, view and edit user profile
         And the current page number should be visually highlighted to indicate the active page the user is on
         And I capture the page screenshot
 
-
-    @rsp-3521 @ManageUsersPagination @ManageUsersPaginationFirstPage @ManageUsersPaginationNextLinkClick
-    Scenario: Verify pagination in manage users page when user is on the first page and navigate through each page by clicking next link
-        And I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
-        And I capture the page screenshot
-        And the default page size should be twenty
-        And the 'Next' button will be 'available' to the user
-        And the 'Previous' button will be 'not available' to the user
-        And the current page number should be visually highlighted to indicate the active page the user is on
-        And I capture the page screenshot
-
-    @rsp-3521 @ManageUsersPagination @ManageUsersPaginationLastPage  @ManageUsersPaginationPreviousLinkClick
-    Scenario: Verify pagination in manage users page when user is on the last page and navigate through each page by clicking previous link
-        And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
-        And I capture the page screenshot
-        And the 'Previous' button will be 'available' to the user
-        And the 'Next' button will be 'not available' to the user
-        And I capture the page screenshot
-
-    @rsp-3521 @ManageUsersPagination @ManageUsersPaginationLastPage  @ManageUsersPaginationPageNumber
-    Scenario: Verify pagination in manage users page when user is on the last page and navigate through each page by clicking page number
+    @rsp-3521 @ManageUsersPagination @ManageUsersPaginationLastPage
+    Scenario: Verify pagination in manage users page when user is on the last page
         And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
         And I capture the page screenshot
         And the 'Previous' button will be 'available' to the user
@@ -308,7 +289,7 @@ Feature: User Administration: Manage user profiles, view and edit user profile
             | Non_Existant_User_Data |
 
     @rsp-3456 @ManageUsersSearchAndPagination
-    Scenario Outline: Verify search results and pagination in manage users page when user searches and navigate through each page by clicking previous link
+    Scenario Outline: Verify search results and pagination in manage users page when user searches and navigate through each page
         When I fill the search input for searching users in manage users page with '<Search_Query>' as the search query
         And I capture the page screenshot
         And I click the 'Search' button on the 'Manage_Users_Page'

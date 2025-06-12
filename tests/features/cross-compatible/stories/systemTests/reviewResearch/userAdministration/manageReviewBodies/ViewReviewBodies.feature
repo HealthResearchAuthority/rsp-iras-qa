@@ -78,8 +78,8 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
             | Review_Body_Name         | Status  |
             | Valid_Data_In_All_Fields | Enabled |
 
-    @rsp-3523 @ManageReviewBodiesPagination @ManageReviewBodiesPaginationFirstPage @ManageReviewBodiesPaginationPageNumber
-    Scenario: Verify pagination in manage review bodies page when user is on the first page and navigate through each page by clicking page number
+    @rsp-3523 @ManageReviewBodiesPagination @ManageReviewBodiesPaginationFirstPage
+    Scenario: Verify pagination in manage review bodies page when user is on the first page
         And I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
         And I capture the page screenshot
         And the default page size should be twenty
@@ -88,26 +88,8 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
         And the current page number should be visually highlighted to indicate the active page the user is on
         And I capture the page screenshot
 
-    @rsp-3523 @ManageReviewBodiesPagination @ManageReviewBodiesPaginationFirstPage @ManageReviewBodiesPaginationNextLinkClick
-    Scenario: Verify pagination in manage review bodies page when user is on the first page and navigate through each page by clicking next link
-        And I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
-        And I capture the page screenshot
-        And the default page size should be twenty
-        And the 'Next' button will be 'enabled' and 'visible' to the user
-        And the 'Previous' button will be 'disabled' and 'not visible' to the user
-        And the current page number should be visually highlighted to indicate the active page the user is on
-        And I capture the page screenshot
-
-    @rsp-3523 @ManageReviewBodiesPagination @ManageReviewBodiesPaginationLastPage  @ManageReviewBodiesPaginationPreviousLinkClick
-    Scenario: Verify pagination in manage review bodies page when user is on the last page and navigate through each page by clicking previous link
-        And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
-        And I capture the page screenshot
-        And the 'Next' button will be 'disabled' and 'not visible' to the user
-        And the 'Previous' button will be 'enabled' and 'visible' to the user
-        And I capture the page screenshot
-
-    @rsp-3523 @ManageReviewBodiesPagination @ManageReviewBodiesPaginationLastPage   @ManageReviewBodiesPaginationPageNumber
-    Scenario: Verify pagination in manage review bodies page when user is on the last page and navigate through each page by clicking page number
+    @rsp-3523 @ManageReviewBodiesPagination @ManageReviewBodiesPaginationLastPage
+    Scenario: Verify pagination in manage review bodies page when user is on the last page
         And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
         And I capture the page screenshot
         And the 'Next' button will be 'disabled' and 'not visible' to the user
@@ -140,7 +122,7 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
             | Non_Existant_Data |
 
     @rsp-3459 @ManageReviewBodiesSearchAndPagination
-    Scenario Outline: Verify search results and pagination in manage review bodies page when user searches and navigate through each page by clicking previous link
+    Scenario Outline: Verify search results and pagination in manage review bodies page when user searches and navigate through each page
         When I fill the search input for searching review bodies in manage review bodies page with '<Search_Query>' as the search query
         And I capture the page screenshot
         And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
