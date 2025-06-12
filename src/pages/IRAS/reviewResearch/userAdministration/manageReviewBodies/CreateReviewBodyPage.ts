@@ -55,9 +55,13 @@ export default class CreateReviewBodyPage {
     );
     this.email_address_error = this.email_address_text.locator('..').locator(this.validation_error);
     this.description_text = this.page.getByLabel(
-      this.createReviewBodyPageData.Create_Review_Body_Page.description_label,
-      { exact: true }
+      this.createReviewBodyPageData.Create_Review_Body_Page.description_label
     );
+    //commented this line Description label change
+    //  this.description_text = this.page.getByLabel(
+    //   this.createReviewBodyPageData.Create_Review_Body_Page.description_label,
+    //   { exact: true }
+    // );
     this.description_error = this.description_text.locator('..').locator(this.validation_error).first();
     this.description_reason_error = this.description_text.locator('..').locator(this.char_count_error);
     this.continueBtn = this.page

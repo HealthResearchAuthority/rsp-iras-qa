@@ -17,7 +17,7 @@ Feature: User Administration: Manage Review Bodies - Enable / Disable Review Bod
     Then I can see the 'Manage_Review_Bodies_Page'
     And I capture the page screenshot
     Then I can see the review body for '<Add_Review_Body>' is present in the list with '<Status_Enabled>' status
-    When I click the view edit link for the 'newly created review body'
+    When I click the view edit link
     And I capture the page screenshot
     Then I can see the '<Disable_Label_Texts>' ui labels on the manage review body profile page
     And I capture the page screenshot
@@ -48,7 +48,7 @@ Feature: User Administration: Manage Review Bodies - Enable / Disable Review Bod
     And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
     And I can see the 'newly created review body' should be present in the list with '<Status_Enabled>' status in the manage review bodies page
     And I capture the page screenshot
-    When I click the view edit link for the 'newly created review body'
+    When I click the view edit link
     When I click the 'Disable_Review_Body' button on the 'Review_Body_Profile_Page'
     Then I can see a 'Confirm' button on the 'Confirmation_Page'
     And I capture the page screenshot
@@ -74,7 +74,7 @@ Feature: User Administration: Manage Review Bodies - Enable / Disable Review Bod
     Then I can see the 'Manage_Review_Bodies_Page'
     Then I can see the review body for '<Add_Review_Body>' is present in the list with '<Status_Disabled>' status
     And I capture the page screenshot
-    When I click the view edit link for the 'newly created review body'
+    When I click the view edit link
     Then I can see the '<Enable_Label_Texts>' ui labels on the manage review body profile page
     And I capture the page screenshot
     When I click the 'Enable_Review_Body' button on the 'Review_Body_Profile_Page'
@@ -100,12 +100,18 @@ Feature: User Administration: Manage Review Bodies - Enable / Disable Review Bod
     And I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
     And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
     Then I can see the 'Manage_Review_Bodies_Page'
-    And I click the view edit link for the 'newly created review body'
+    When I enter 'name of the new review body' into the search field
+    And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
+    And I can see the 'newly created review body' should be present in the list with 'Enabled' status in the manage review bodies page
+    Then I click the view edit link
     And I click the 'Disable_Review_Body' button on the 'Review_Body_Profile_Page'
     And I click the 'Confirm' button on the 'Confirmation_Page'
     And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
     Then I can see the 'Manage_Review_Bodies_Page'
-    And I click the view edit link for the 'newly created review body'
+    When I enter 'name of the new review body' into the search field
+    And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
+    And I can see the 'newly created review body' should be present in the list with 'Disabled' status in the manage review bodies page
+    Then I click the view edit link
     And I click the 'Enable_Review_Body' button on the 'Review_Body_Profile_Page'
     And I can see a 'Confirm' button on the 'Confirmation_Page'
     And I capture the page screenshot

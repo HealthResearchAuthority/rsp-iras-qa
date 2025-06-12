@@ -6,7 +6,7 @@ const { When, Then } = createBdd(test);
 Then(
   'I can see the review body for {string} is present in the list with {string} status',
   async ({ manageReviewBodiesPage, createReviewBodyPage }, datasetName: string, status: string) => {
-    const reviewBodyStatus = await manageReviewBodiesPage.getReviewbodyStatus(status);
+    const reviewBodyStatus = await manageReviewBodiesPage.getReviewBodyStatus(status);
     const dataset = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body[datasetName];
     const expectedCountryValue: string = dataset.country_checkbox.toString();
     const reviewBodyName = await createReviewBodyPage.getUniqueOrgName();
@@ -21,6 +21,7 @@ Then(
     });
     expect(createdReviewBodyRow).toHaveCount(1);
     await expect(createdReviewBodyCountry).toBeVisible();
+    await manageReviewBodiesPage.setReviewBodyRow(createdReviewBodyRow);
   }
 );
 
@@ -41,6 +42,7 @@ Then(
     });
     expect(updatedReviewBodyRow).toHaveCount(1);
     await expect(updatedReviewBodyCountry).toBeVisible();
+    await manageReviewBodiesPage.setReviewBodyRow(updatedReviewBodyRow);
   }
 );
 
@@ -99,7 +101,7 @@ When(
     inputType: string,
     status: string
   ) => {
-    const reviewBodyStatus = await manageReviewBodiesPage.getReviewbodyStatus(status);
+    const reviewBodyStatus = await manageReviewBodiesPage.getReviewBodyStatus(status);
     const reviewBodyName = await manageReviewBodiesPage.getReviewBodyName(
       inputType,
       reviewBodyProfilePage,
@@ -112,14 +114,15 @@ When(
     const foundRecords = await manageReviewBodiesPage.findReviewBody(reviewBodyName, reviewBodyStatus);
     expect(foundRecords).toBeDefined();
     expect(foundRecords).toHaveCount(1);
+    await manageReviewBodiesPage.setReviewBodyRow(foundRecords);
   }
 );
 
 When(
   'I select a {string} review Body to View and Edit which is {string}',
   async ({ manageReviewBodiesPage }, reviewBodyName: string, status: string) => {
-    const reviewBodyStatus = await manageReviewBodiesPage.getReviewbodyStatus(status);
-    const foundRecords = await manageReviewBodiesPage.findReviewBodyByStatus(reviewBodyName, reviewBodyStatus);
+    const reviewBodyStatus = await manageReviewBodiesPage.getReviewBodyStatus(status);
+    const foundRecords = await manageReviewBodiesPage.findReviewBody(reviewBodyName, reviewBodyStatus);
     expect(foundRecords).toBeDefined();
     expect(foundRecords).toHaveCount(1);
     await foundRecords.locator(manageReviewBodiesPage.actionsLink).click();
@@ -141,3 +144,8 @@ Then(
     expect(orgListAfterSearch).toEqual(searchResult);
   }
 );
+
+Then('I click the view edit link', async ({ manageReviewBodiesPage }) => {
+  const createdReviewBodyRow = await manageReviewBodiesPage.getReviewBodyRow();
+  await createdReviewBodyRow.locator(manageReviewBodiesPage.actionsLink).click();
+});

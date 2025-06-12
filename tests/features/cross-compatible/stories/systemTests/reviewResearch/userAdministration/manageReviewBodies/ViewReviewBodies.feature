@@ -79,7 +79,7 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
         And I capture the page screenshot
         And I can see the 'newly created review body' should be present in the list with '<Status_Enabled>' status in the manage review bodies page
         And I capture the page screenshot
-        Then I click the view edit link for the 'newly created review body'
+        Then I click the view edit link
         And I capture the page screenshot
         And I can see the review body profile page
         And I capture the page screenshot

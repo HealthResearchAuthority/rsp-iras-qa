@@ -52,7 +52,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         And I capture the page screenshot
         And I can see the 'previously used review body' should be present in the list with '<Status_Disabled>' status in the manage review bodies page
         And I capture the page screenshot
-        Then I click the view edit link for the 'previously used review body'
+        Then I click the view edit link
         And I capture the page screenshot
         And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'
         Then I can see the audit history page of the review body
@@ -81,7 +81,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         And I capture the page screenshot
         And I can see the 'previously used review body' should be present in the list with '<Status_Enabled>' status in the manage review bodies page
         And I capture the page screenshot
-        Then I click the view edit link for the 'previously used review body'
+        Then I click the view edit link
         And I capture the page screenshot
         And I can see the review body profile page
         And I capture the page screenshot
@@ -236,7 +236,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         And I capture the page screenshot
         And I can see the 'previously used review body' should be present in the list with 'disabled' status in the manage review bodies page
         And I capture the page screenshot
-        Then I click the view edit link for the 'previously used review body'
+        Then I click the view edit link
         And I capture the page screenshot
         And I can see the review body profile page
         And I capture the page screenshot
@@ -252,7 +252,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
         And I capture the page screenshot
         And I can see the 'previously used review body' should be present in the list with 'Enabled' status in the manage review bodies page
         And I capture the page screenshot
-        Then I click the view edit link for the 'previously used review body'
+        Then I click the view edit link
         And I capture the page screenshot
         And I can see the review body profile page
         And I click the change link against 'Organisation_Name' on the review body profile page

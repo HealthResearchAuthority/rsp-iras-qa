@@ -11,6 +11,7 @@ export default class ManageReviewBodiesPage {
   readonly page: Page;
   readonly manageReviewBodiesPageData: typeof manageReviewBodiesPageData;
   private _org_name: string[];
+  private _row_val: Locator;
   readonly linkTextData: typeof linkTextData;
   readonly pageHeading: Locator;
   readonly addNewReviewBodyRecordLink: Locator;
@@ -78,6 +79,14 @@ export default class ManageReviewBodiesPage {
     this._org_name = value;
   }
 
+  async getReviewBodyRow(): Promise<Locator> {
+    return this._row_val;
+  }
+
+  async setReviewBodyRow(value: Locator): Promise<void> {
+    this._row_val = value;
+  }
+
   //Page Methods
 
   async goto(pageSize?: string, searchQuery?: string) {
@@ -112,52 +121,27 @@ export default class ManageReviewBodiesPage {
     return orgNames;
   }
 
-  async buildSearchRecord(name: string, status?: string): Promise<string> {
-    return typeof status !== 'undefined' ? `${name}|${status}` : name;
-  }
-
-  async getRowData(row: any, status?: string): Promise<string> {
-    const columns = await row.locator(this.listCell).allTextContents();
-    const selected = typeof status !== 'undefined' ? [columns[0], columns[2]] : [columns[0]];
-    return selected.map((col) => col.trim()).join('|');
-  }
-
-  async shouldGoToNextPage(): Promise<boolean> {
-    return (await this.next_button.isVisible()) && !(await this.next_button.isDisabled());
-  }
-
   async findReviewBody(reviewBodyName: string, reviewBodyStatus?: string) {
-    const searchRecord = await this.buildSearchRecord(reviewBodyName, reviewBodyStatus);
+    let foundRecord = false;
     let hasNextPage = true;
-    while (hasNextPage) {
-      const rows = await this.listRows.all();
-      for (const row of rows) {
-        const fullRowData = await this.getRowData(row, reviewBodyStatus);
-        if (fullRowData === searchRecord) {
-          return row;
-        }
-      }
-      hasNextPage = await this.shouldGoToNextPage();
-      if (hasNextPage) {
-        await this.next_button.click();
-        await this.page.waitForLoadState('domcontentloaded');
-      }
-    }
-    throw new Error(`No matching record found`);
-  }
-
-  async findReviewBodyByStatus(reviewBodyName: string, reviewBodyStatus: string) {
-    let hasNextPage = true;
-    while (hasNextPage) {
+    while (hasNextPage && !foundRecord) {
       const rows = await this.listRows.all();
       for (const row of rows) {
         const columns = await row.locator(this.listCell).allTextContents();
-        if (columns[0].trim().includes(reviewBodyName) && columns[2].trim() === reviewBodyStatus) {
-          return row;
+        if (reviewBodyName === 'QA Automation') {
+          if (columns[0].trim().includes(reviewBodyName) && columns[2].trim() === reviewBodyStatus) {
+            foundRecord = true;
+            return row;
+          }
+        } else {
+          if (columns[0].trim() === reviewBodyName && columns[2].trim() === reviewBodyStatus) {
+            foundRecord = true;
+            return row;
+          }
         }
       }
       hasNextPage = (await this.next_button.isVisible()) && !(await this.next_button.isDisabled());
-      if (hasNextPage) {
+      if (hasNextPage && !foundRecord) {
         await this.next_button.click();
         await this.page.waitForLoadState('domcontentloaded');
       }
@@ -177,7 +161,7 @@ export default class ManageReviewBodiesPage {
     return searchKey;
   }
 
-  async getReviewbodyStatus(status: string) {
+  async getReviewBodyStatus(status: string) {
     if (status.toLowerCase() == 'disabled') {
       return this.manageReviewBodiesPageData.Manage_Review_Body_Page.disabled_status;
     } else {

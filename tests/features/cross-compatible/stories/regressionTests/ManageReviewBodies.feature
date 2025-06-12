@@ -36,7 +36,7 @@ Feature: User Administration: Manage Review Bodies
                 And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
                 And I can see the 'newly created review body' should be present in the list with '<Status_Enabled>' status in the manage review bodies page
                 And I capture the page screenshot
-                Then I click the view edit link for the 'newly created review body'
+                Then I click the view edit link
                 And I capture the page screenshot
                 And I can see the review body profile page
                 # validate review body profile page with the created review body
@@ -54,7 +54,7 @@ Feature: User Administration: Manage Review Bodies
                 When I enter 'name of the new review body' into the search field
                 And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
                 And I can see the 'newly created review body' should be present in the list with '<Status_Disabled>' status in the manage review bodies page
-                Then I click the view edit link for the 'disabled' review body
+                Then I click the view edit link
                 And I capture the page screenshot
                 # audit history
                 And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'
@@ -98,7 +98,7 @@ Feature: User Administration: Manage Review Bodies
                 And I capture the page screenshot
                 And I can see the 'previously used review body' should be present in the list with '<Status_Enabled>' status in the manage review bodies page
                 And I capture the page screenshot
-                Then I click the view edit link for the 'previously used review body'
+                Then I click the view edit link
                 And I capture the page screenshot
                 And I can see the review body profile page
                 And I capture the page screenshot
@@ -174,7 +174,7 @@ Feature: User Administration: Manage Review Bodies
                 And I capture the page screenshot
                 And I can see the 'previously used review body' should be present in the list with '<Status_Enabled>' status in the manage review bodies page
                 And I capture the page screenshot
-                Then I click the view edit link for the 'previously used review body'
+                Then I click the view edit link
                 And I capture the page screenshot
                 And I can see the review body profile page
                 And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
