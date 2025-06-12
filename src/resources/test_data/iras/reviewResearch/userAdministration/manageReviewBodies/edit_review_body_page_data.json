@@ -6,7 +6,7 @@
     "country_label": "Country",
     "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
     "email_address_label": "Email address",
-    "description_label": "Add description",
+    "description_label": "Description",
     "save_button": "Save",
     "test": { "co": "Research_Locations_Page" }
   },
