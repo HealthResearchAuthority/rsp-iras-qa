@@ -33,7 +33,7 @@ When(
     const userFirstName = dataset.first_name_text;
     const userLastName = dataset.last_name_text;
     const userEmail = dataset.email_address_text;
-    const userStatus = await manageUsersPage.getUserStatus(status, manageUsersPage);
+    const userStatus = await manageUsersPage.getUserStatus(status);
     await manageUsersPage.goto(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size, userEmail);
     const foundRecord = await manageUsersPage.findUserProfile(userFirstName, userLastName, userEmail, userStatus);
     expect(foundRecord).toBeDefined();
@@ -73,7 +73,7 @@ Then(
 Then(
   'I select a {string} User to View and Edit which is {string}',
   async ({ manageUsersPage }, userNamePrefix: string, status: string) => {
-    const userStatus = await manageUsersPage.getUserStatus(status, manageUsersPage);
+    const userStatus = await manageUsersPage.getUserStatus(status);
     await manageUsersPage.goto(
       manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size,
       userNamePrefix

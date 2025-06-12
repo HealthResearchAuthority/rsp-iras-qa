@@ -199,14 +199,14 @@ export default class ManageUsersPage {
     const userLastName = dataset.last_name_text;
     const data = await returnDataFromJSON();
     const userEmail = data.Create_User_Profile.email_address_unique;
-    const userStatus = await manageUsersPage.getUserStatus(status, manageUsersPage);
+    const userStatus = await manageUsersPage.getUserStatus(status);
     await manageUsersPage.goto(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size, userEmail);
     const foundRecord = await manageUsersPage.findUserProfile(userFirstName, userLastName, userEmail, userStatus);
     return foundRecord;
   }
 
-  async getUserStatus(status: string, manageUsersPage: ManageUsersPage) {
-    const datasetStatus = manageUsersPage.manageUsersPageTestData.Manage_Users_Page;
+  async getUserStatus(status: string) {
+    const datasetStatus = this.manageUsersPageTestData.Manage_Users_Page;
     if (status.toLowerCase() == 'disabled') {
       return datasetStatus.disabled_status;
     } else {
