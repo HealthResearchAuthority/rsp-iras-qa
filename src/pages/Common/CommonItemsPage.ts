@@ -498,20 +498,18 @@ export default class CommonItemsPage {
   }
 
   async getFieldErrorMessages<PageObject>(key: string, page: PageObject) {
-    let fieldErrorMessage: string | null;
+    let fieldErrorMessage: string;
     const element = await page[key].first();
     const typeAttribute = await element.getAttribute('type');
     if (typeAttribute === 'checkbox') {
       key = key.replace('checkbox', 'label');
-      fieldErrorMessage = await this.errorFieldGroup
-        .filter({ has: page[key] })
-        .locator(this.errorMessageFieldLabel)
-        .textContent();
+      fieldErrorMessage = confirmStringNotNull(
+        await this.errorFieldGroup.filter({ has: page[key] }).locator(this.errorMessageFieldLabel).textContent()
+      );
     } else {
-      fieldErrorMessage = await this.errorFieldGroup
-        .filter({ has: element })
-        .locator(this.errorMessageFieldLabel)
-        .textContent();
+      fieldErrorMessage = confirmStringNotNull(
+        await this.errorFieldGroup.filter({ has: element }).locator(this.errorMessageFieldLabel).textContent()
+      );
     }
     return fieldErrorMessage;
   }
