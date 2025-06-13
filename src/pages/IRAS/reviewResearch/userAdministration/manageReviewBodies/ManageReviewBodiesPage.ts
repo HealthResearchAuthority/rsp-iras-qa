@@ -132,32 +132,41 @@ export default class ManageReviewBodiesPage {
   }
 
   async findReviewBody(reviewBodyName: string, reviewBodyStatus?: string) {
-    let foundRecord = false;
     let hasNextPage = true;
-    while (hasNextPage && !foundRecord) {
+    while (hasNextPage) {
       const rows = await this.listRows.all();
       for (const row of rows) {
-        if (reviewBodyName === 'QA Automation') {
-          const columns = await row.locator(this.listCell).allTextContents();
-          if (columns[0].trim().includes(reviewBodyName) && columns[2].trim() === reviewBodyStatus) {
-            foundRecord = true;
-            return row;
-          }
-        } else {
-          const searchRecord = await this.buildSearchRecord(reviewBodyName, reviewBodyStatus);
-          const fullRowData = await this.getRowData(row, reviewBodyStatus);
-          if (fullRowData === searchRecord) {
-            return row;
-          }
+        const match = await this.isMatchingRow(row, reviewBodyName, reviewBodyStatus);
+        if (match) {
+          return row;
         }
       }
-      hasNextPage = (await this.next_button.isVisible()) && !(await this.next_button.isDisabled());
-      if (hasNextPage && !foundRecord) {
-        await this.next_button.click();
-        await this.page.waitForLoadState('domcontentloaded');
+      hasNextPage = await this.shouldGoToNextPage();
+      if (hasNextPage) {
+        await this.goToNextPage();
       }
     }
     throw new Error(`No matching record found`);
+  }
+
+  async isMatchingRow(row: any, reviewBodyName: string, reviewBodyStatus?: string): Promise<boolean> {
+    if (reviewBodyName === 'QA Automation') {
+      const columns = await row.locator(this.listCell).allTextContents();
+      return columns[0].trim().includes(reviewBodyName) && columns[2].trim() === reviewBodyStatus;
+    } else {
+      const searchRecord = await this.buildSearchRecord(reviewBodyName, reviewBodyStatus);
+      const fullRowData = await this.getRowData(row, reviewBodyStatus);
+      return fullRowData === searchRecord;
+    }
+  }
+
+  async shouldGoToNextPage(): Promise<boolean> {
+    return (await this.next_button.isVisible()) && !(await this.next_button.isDisabled());
+  }
+
+  async goToNextPage(): Promise<void> {
+    await this.next_button.click();
+    await this.page.waitForLoadState('domcontentloaded');
   }
 
   async getSearchQueryOrgName(position: string) {
