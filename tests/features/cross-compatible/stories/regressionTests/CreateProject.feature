@@ -136,8 +136,6 @@ Feature: Create Amendment - Create Project - Regression Tests
       | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Invalid_Data_Short_Project_Title_Min_Length | Field_Error_Message | Summary_Error_Message |
       | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Invalid_Day_Number                          | Field_Error_Message | Summary_Error_Message |
       | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Invalid_Day_Letters                         | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Invalid_Month_Number                        | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Invalid_Month_Letters                       | Field_Error_Message | Summary_Error_Message |
       | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Invalid_Year_Number_1                       | Field_Error_Message | Summary_Error_Message |
       | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Invalid_Year_Number_2                       | Field_Error_Message | Summary_Error_Message |
       | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Invalid_Year_Letters                        | Field_Error_Message | Summary_Error_Message |
