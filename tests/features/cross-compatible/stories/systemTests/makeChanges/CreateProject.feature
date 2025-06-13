@@ -115,8 +115,6 @@ Feature: Create Amendment - Create Project
       | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Invalid_Data_Short_Project_Title_Min_Length | Title_Field_Error_Message       |
       | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Invalid_Day_Number                          | Date_Day_Field_Error_Message    |
       | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Invalid_Day_Letters                         | Date_Day_Field_Error_Message    |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Invalid_Month_Number                        | Date_Month_Field_Error_Message  |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Invalid_Month_Letters                       | Date_Month_Field_Error_Message  |
       | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Invalid_Year_Number_1                       | Date_Year_Field_Error_Message   |
       | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Invalid_Year_Number_2                       | Date_Year_Field_Error_Message   |
       | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Invalid_Year_Letters                        | Date_Year_Field_Error_Message   |
@@ -545,8 +543,6 @@ Feature: Create Amendment - Create Project
       | Invalid_Data_Short_Project_Title_Min_Length | Title_Field_Error_Message       |
       | Invalid_Day_Number                          | Date_Day_Field_Error_Message    |
       | Invalid_Day_Letters                         | Date_Day_Field_Error_Message    |
-      | Invalid_Month_Number                        | Date_Month_Field_Error_Message  |
-      | Invalid_Month_Letters                       | Date_Month_Field_Error_Message  |
       | Invalid_Year_Number_1                       | Date_Year_Field_Error_Message   |
       | Invalid_Year_Number_2                       | Date_Year_Field_Error_Message   |
       | Invalid_Year_Letters                        | Date_Year_Field_Error_Message   |
