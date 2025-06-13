@@ -24,3 +24,18 @@ Then(
     }
   }
 );
+
+Then('I can see the workspaces in my account home page for {string}', async ({ homePage }, user: string) => {
+  const expectedLinksMap = {
+    System_Admin: homePage.homePageTestData.Home_Page.workspaces_links_system_admin,
+    Frontstage_User: homePage.homePageTestData.Home_Page.workspaces_links_frontstage_user,
+    Backstage_User: homePage.homePageTestData.Home_Page.workspaces_links_backstage_user,
+    Non_Admin_User: homePage.homePageTestData.Home_Page.workspaces_links_backstage_user,
+  };
+  const expectedLinks = expectedLinksMap[user];
+  if (!expectedLinks) {
+    throw new Error(`Unexpected user type: ${user}`);
+  }
+  const actualLinks = await homePage.getMyWorkspaceLinksNames();
+  expect(actualLinks).toEqual(expectedLinks);
+});

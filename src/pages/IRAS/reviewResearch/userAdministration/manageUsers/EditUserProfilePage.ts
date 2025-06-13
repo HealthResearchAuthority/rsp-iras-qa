@@ -1,6 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as editUserProfilePageTestData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageUsers/edit_user_profile_page_data.json';
 import * as buttonTextData from '../../../../../resources/test_data/common/button_text_data.json';
+import { confirmStringNotNull } from '../../../../../utils/UtilFunctions';
 
 //Declare Page Objects
 export default class EditUserProfilePage {
@@ -24,6 +25,8 @@ export default class EditUserProfilePage {
   readonly access_required_fieldset: Locator;
   readonly access_required_checkbox: Locator;
   readonly review_body_dropdown: Locator;
+  readonly country_label: Locator;
+  readonly access_required_label: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -73,6 +76,7 @@ export default class EditUserProfilePage {
         exact: true,
       }
     );
+
     this.role_label = this.page
       .locator('.govuk-label')
       .getByText(this.editUserProfilePageTestData.Edit_User_Profile_Page.role_label, { exact: true });
@@ -82,15 +86,15 @@ export default class EditUserProfilePage {
       this.editUserProfilePageTestData.Edit_User_Profile_Page.committee_label,
       { exact: true }
     );
-    this.country_fieldset = this.page.getByRole('group', {
-      name: this.editUserProfilePageTestData.Edit_User_Profile_Page.country_label,
-      exact: true,
-    });
+    this.country_label = this.page
+      .locator('.govuk-label')
+      .getByText(this.editUserProfilePageTestData.Edit_User_Profile_Page.country_label, { exact: true });
+    this.country_fieldset = this.page.locator('.govuk-form-group', { has: this.country_label });
     this.country_checkbox = this.country_fieldset.getByRole('checkbox');
-    this.access_required_fieldset = this.page.getByRole('group', {
-      name: this.editUserProfilePageTestData.Edit_User_Profile_Page.access_required_label,
-      exact: true,
-    });
+    this.access_required_label = this.page
+      .locator('.govuk-label')
+      .getByText(this.editUserProfilePageTestData.Edit_User_Profile_Page.access_required_label, { exact: true });
+    this.access_required_fieldset = this.page.locator('.govuk-form-group', { has: this.access_required_label });
     this.access_required_checkbox = this.access_required_fieldset.getByRole('checkbox');
     this.review_body_dropdown = this.page.getByLabel(
       this.editUserProfilePageTestData.Edit_User_Profile_Page.review_body_label,
@@ -123,5 +127,21 @@ export default class EditUserProfilePage {
     } else if (userEditField == 'email_address_text') {
       await this.email_address_text.clear();
     }
+  }
+
+  async getCheckedCheckboxLabels() {
+    const checkboxes = this.page.getByRole('checkbox');
+    const count = await checkboxes.count();
+    const checkedLabels: string[] = [];
+    for (let i = 0; i < count; i++) {
+      const checkbox = checkboxes.nth(i);
+      const isChecked = await checkbox.isChecked();
+      if (isChecked) {
+        const id = await checkbox.getAttribute('id');
+        const label = confirmStringNotNull(await this.page.locator(`label[for="${id}"]`).textContent());
+        checkedLabels.push(label);
+      }
+    }
+    return checkedLabels;
   }
 }

@@ -11,64 +11,11 @@ import {
 } from '../../utils/GenerateTestData';
 const { Given, When, Then } = createBdd(test);
 import * as userProfileGeneratedataConfig from '../../resources/test_data/user_administration/testdata_generator/user_profile_generate_data_config.json';
-import { getCurrentTimeFormatted } from '../../utils/UtilFunctions';
+import { confirmArrayNotNull, getAuthState, getCurrentTimeFormatted } from '../../utils/UtilFunctions';
+import { Locator } from 'playwright';
+import fs from 'fs';
 
 Then('I capture the page screenshot', async () => {});
-
-Given(
-  'I have navigated to the {string}',
-  async (
-    {
-      loginPage,
-      homePage,
-      createApplicationPage,
-      systemAdministrationPage,
-      manageReviewBodiesPage,
-      userProfilePage,
-      reviewBodyProfilePage,
-      myResearchProjectsPage,
-    },
-    page: string
-  ) => {
-    switch (page) {
-      case 'Login_Page':
-        await homePage.goto();
-        await homePage.loginBtn.click();
-        await loginPage.assertOnLoginPage();
-        break;
-      case 'Home_Page':
-        await homePage.goto();
-        await homePage.assertOnHomePage();
-        break;
-      case 'Create_Application_Page':
-        await createApplicationPage.goto();
-        await createApplicationPage.assertOnCreateApplicationPage();
-        break;
-      case 'System_Administration_Page':
-        await systemAdministrationPage.goto();
-        await systemAdministrationPage.assertOnSystemAdministrationPage();
-        break;
-      case 'Manage_Review_Bodies_Page':
-        await manageReviewBodiesPage.goto();
-        await manageReviewBodiesPage.assertOnManageReviewBodiesPage();
-        break;
-      case 'User_Profile_Page':
-        await userProfilePage.goto(await userProfilePage.getUserId());
-        await userProfilePage.assertOnUserProfilePage();
-        break;
-      case 'Review_Body_Profile_Page':
-        await reviewBodyProfilePage.goto(await reviewBodyProfilePage.getReviewBodyId());
-        await reviewBodyProfilePage.assertOnReviewbodyProfilePage();
-        break;
-      case 'My_Research_Page':
-        await myResearchProjectsPage.goto();
-        await myResearchProjectsPage.assertOnMyResearchProjectsPage();
-        break;
-      default:
-        throw new Error(`${page} is not a valid option`);
-    }
-  }
-);
 
 When(
   'I can see the {string}',
@@ -192,6 +139,7 @@ Then('I click the {string} button on the {string}', async ({ commonItemsPage }, 
     .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
     .first()
     .click();
+  await commonItemsPage.page.waitForLoadState('domcontentloaded');
 });
 
 Then('I can see a {string} button on the {string}', async ({ commonItemsPage }, buttonKey: string, pageKey: string) => {
@@ -469,24 +417,49 @@ Then(
         reviewYourAnswersPage.reviewYourAnswersPageTestData[errorMessageFieldAndSummaryDatasetName];
       page = reviewYourAnswersPage;
     }
+    let allSummaryErrorExpectedValues: any;
+    let summaryErrorActualValues: any;
     await expect(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
-    const allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset);
-    const summaryErrorActualValues = await commonItemsPage.getSummaryErrorMessages();
+    if (
+      errorMessageFieldAndSummaryDatasetName === 'Incorrect_Format_Invalid_Character_Limit_Telephone_Error' ||
+      errorMessageFieldAndSummaryDatasetName === 'Incorrect_Format_Invalid_Character_Limit_Email_Address_Error'
+    ) {
+      allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset).toString();
+      summaryErrorActualValues = (await commonItemsPage.getSummaryErrorMessages()).toString();
+    } else {
+      allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset);
+      summaryErrorActualValues = await commonItemsPage.getSummaryErrorMessages();
+    }
     expect(summaryErrorActualValues).toEqual(allSummaryErrorExpectedValues);
     for (const key in errorMessageFieldDataset) {
       if (Object.prototype.hasOwnProperty.call(errorMessageFieldDataset, key)) {
         let fieldErrorMessagesActualValues: any;
         if (pageKey == 'Review_Your_Answers_Page') {
-          expect(await page[key].getByRole('link').evaluate((e) => getComputedStyle(e).color)).toBe(
+          expect(await page[key].getByRole('link').evaluate((e: any) => getComputedStyle(e).color)).toBe(
             commonItemsPage.commonTestData.rgb_red_color
           );
           fieldErrorMessagesActualValues = await reviewYourAnswersPage.getFieldErrorMessages(key, page);
+          expect(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
+          const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
+          await expect(element).toBeInViewport();
+        } else if (
+          errorMessageFieldAndSummaryDatasetName === 'Incorrect_Format_Invalid_Character_Limit_Telephone_Error' ||
+          errorMessageFieldAndSummaryDatasetName === 'Incorrect_Format_Invalid_Character_Limit_Email_Address_Error'
+        ) {
+          fieldErrorMessagesActualValues = (await commonItemsPage.getMultipleFieldErrorMessages(key, page)).toString();
+          const allFieldErrorExpectedValues = Object.values(errorMessageFieldDataset).toString();
+          expect.soft(fieldErrorMessagesActualValues).toEqual(allFieldErrorExpectedValues);
+          const fieldValActuals = summaryErrorActualValues.split(',');
+          for (const val of fieldValActuals) {
+            const element = await commonItemsPage.clickErrorSummaryLinkMultipleErrorField(val, key, page);
+            await expect(element).toBeInViewport();
+          }
         } else {
           fieldErrorMessagesActualValues = await commonItemsPage.getFieldErrorMessages(key, page);
+          expect(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
+          const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
+          await expect(element).toBeInViewport();
         }
-        expect(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
-        const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
-        await expect(element).toBeInViewport();
       }
     }
     if (errorMessageFieldAndSummaryDatasetName == 'Max_Description_Words_Error') {
@@ -497,13 +470,252 @@ Then(
   }
 );
 
-When('I enter {string} into the search field', async ({ commonItemsPage }, searchKey: string) => {
-  await commonItemsPage.search_text.fill(searchKey);
-});
+When(
+  'I enter {string} into the search field',
+  async ({ commonItemsPage, reviewBodyProfilePage, createReviewBodyPage }, inputType: string) => {
+    let searchValue: string;
+    switch (inputType) {
+      case 'name of the previously used review body':
+        searchValue = await reviewBodyProfilePage.getOrgName();
+        break;
+      case 'name of the new review body':
+        searchValue = await createReviewBodyPage.getUniqueOrgName();
+        break;
+      default:
+        searchValue = inputType;
+    }
+    await commonItemsPage.search_text.fill(searchValue);
+  }
+);
 
 When(
-  'I enter unique organisation name of the newly created review body into the search field',
-  async ({ commonItemsPage, createReviewBodyPage }) => {
-    await commonItemsPage.search_text.fill(await createReviewBodyPage.getUniqueOrgName());
+  'I am on the {string} page and it should be visually highlighted to indicate the active page the user is on',
+  async ({ commonItemsPage }, position: string) => {
+    let pageLocator: Locator;
+    if (position === 'first') {
+      pageLocator = commonItemsPage.firstPage;
+    } else {
+      const totalPages = await commonItemsPage.getTotalPages();
+      pageLocator = await commonItemsPage.clickOnPages(totalPages, 'clicking on page number');
+    }
+    await expect(pageLocator).toHaveAttribute('aria-current', 'page');
+  }
+);
+
+When('the default page size should be twenty', async ({ commonItemsPage }) => {
+  const rowCountActual = await commonItemsPage.tableRows.count();
+  const rowCountExpected = parseInt(commonItemsPage.commonTestData.default_page_size, 10);
+  expect(rowCountActual - 1).toBe(rowCountExpected);
+});
+
+Then(
+  'the {string} button will be {string} to the user',
+  async ({ commonItemsPage }, linkLabel: string, availabilityVal: string) => {
+    const locatorVal: Locator = await commonItemsPage.getLocatorforNextPreviousLinks(linkLabel);
+    if (availabilityVal.toLowerCase() === 'available') {
+      await expect(locatorVal).toBeVisible();
+      await expect(locatorVal).toBeEnabled();
+    } else if (availabilityVal.toLowerCase() === 'not available') {
+      await expect(locatorVal).toBeHidden();
+    } else {
+      throw new Error(`Unsupported button state: ${availabilityVal}`);
+    }
+  }
+);
+
+When(
+  'the current page number should be visually highlighted to indicate the active page the user is on',
+  async ({ commonItemsPage }) => {
+    await commonItemsPage.next_button.click();
+    const currentUrl = commonItemsPage.page.url();
+    const currentPageNumber = await commonItemsPage.getPageNumber(currentUrl);
+    const currentPageLabel = `Page ${currentPageNumber}`;
+    const currentPageLink = commonItemsPage.pagination.getByRole('link', { name: currentPageLabel });
+    await expect(currentPageLink).toHaveAttribute('aria-current');
+    const currentPageLinkHref = await currentPageLink.getAttribute('href');
+    expect(currentUrl).toContain(currentPageLinkHref);
+    await commonItemsPage.previous_button.click();
+  }
+);
+
+When(
+  'I enter the {string} of the {string} item in the list, into the search field',
+  async ({ userListReviewBodyPage, commonItemsPage, manageReviewBodiesPage }, fieldKey: string, position: string) => {
+    if ((await commonItemsPage.tableRows.count()) >= 2) {
+      let searchKey: string = '';
+      if (fieldKey === 'First_Name' || fieldKey === 'Last_Name' || fieldKey === 'Email_Address') {
+        searchKey = await userListReviewBodyPage.getSearchQueryFNameLNameEmailByPosition(
+          position,
+          fieldKey,
+          commonItemsPage
+        );
+      } else if (fieldKey === 'Full_Name') {
+        await userListReviewBodyPage.setSearchQueryFullNameByPosition(position, fieldKey, commonItemsPage);
+        searchKey = await userListReviewBodyPage.getSearchQueryFullName(position);
+      } else if (fieldKey === 'Organisation_Name') {
+        const orgList = await manageReviewBodiesPage.getReviewBodyListByPosition(position, commonItemsPage);
+        await manageReviewBodiesPage.setOrgName(orgList.get('orgNameValues'));
+        searchKey = await manageReviewBodiesPage.getSearchQueryOrgName(position);
+      }
+      await userListReviewBodyPage.setSearchKey(searchKey);
+      await commonItemsPage.search_text.fill(searchKey);
+    } else {
+      throw new Error(`There are no items in list to search`);
+    }
+  }
+);
+
+When(
+  'I enter the {string} as the search query into the search field',
+  async ({ userListReviewBodyPage, commonItemsPage }, searchKey: string) => {
+    if ((await commonItemsPage.tableRows.count()) >= 2) {
+      const userListBeforeSearch = await commonItemsPage.getAllUsersFromTheTable();
+      const userValues: string[] = confirmArrayNotNull(userListBeforeSearch.get('searchResultValues'));
+      await userListReviewBodyPage.setUserListBeforeSearch(userValues);
+      await userListReviewBodyPage.setSearchKey(searchKey);
+      await commonItemsPage.search_text.fill(searchKey);
+    } else {
+      throw new Error(`There are no items in list to search`);
+    }
+  }
+);
+
+Then(
+  'the system displays no results found message if there is no {string} on the system that matches the search criteria',
+  async ({ commonItemsPage, userListReviewBodyPage, manageUsersPage, manageReviewBodiesPage }, entityType: string) => {
+    const filteredSearchResults = await userListReviewBodyPage.getFilteredSearchResultsBeforeSearch(commonItemsPage);
+    expect(await commonItemsPage.tableRows.count()).toBe(0);
+    expect(filteredSearchResults).toEqual([]);
+    let headingLocator: Locator, guidanceLocator: Locator, expectedHeading: any, expectedGuidance: any;
+    if (entityType === 'user') {
+      headingLocator = manageUsersPage.no_results_heading;
+      guidanceLocator = manageUsersPage.no_results_guidance_text;
+      expectedHeading = manageUsersPage.manageUsersPageTestData.Manage_Users_Page.no_results_heading;
+      expectedGuidance = manageUsersPage.manageUsersPageTestData.Manage_Users_Page.no_results_guidance_text;
+    } else if (entityType === 'review body') {
+      headingLocator = manageReviewBodiesPage.no_results_heading;
+      guidanceLocator = manageReviewBodiesPage.no_results_guidance_text;
+      expectedHeading = manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.no_results_heading;
+      expectedGuidance =
+        manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.no_results_guidance_text;
+    } else {
+      throw new Error(`Unsupported entity type: ${entityType}`);
+    }
+    await expect(headingLocator).toHaveText(expectedHeading);
+    await expect(guidanceLocator).toHaveText(expectedGuidance);
+  }
+);
+
+Given(
+  'I have navigated to the {string}',
+  async (
+    {
+      loginPage,
+      homePage,
+      createApplicationPage,
+      systemAdministrationPage,
+      manageReviewBodiesPage,
+      userProfilePage,
+      reviewBodyProfilePage,
+      myResearchProjectsPage,
+    },
+    page: string
+  ) => {
+    switch (page) {
+      case 'Login_Page':
+        await homePage.goto();
+        await homePage.loginBtn.click();
+        await loginPage.assertOnLoginPage();
+        break;
+      case 'Home_Page':
+        await homePage.goto();
+        await homePage.assertOnHomePage();
+        break;
+      case 'Create_Application_Page':
+        await createApplicationPage.goto();
+        await createApplicationPage.assertOnCreateApplicationPage();
+        break;
+      case 'System_Administration_Page':
+        await systemAdministrationPage.goto();
+        await systemAdministrationPage.assertOnSystemAdministrationPage();
+        break;
+      case 'Manage_Review_Bodies_Page':
+        await manageReviewBodiesPage.goto();
+        await manageReviewBodiesPage.assertOnManageReviewBodiesPage();
+        break;
+      case 'User_Profile_Page':
+        await userProfilePage.goto(await userProfilePage.getUserId());
+        await userProfilePage.assertOnUserProfilePage();
+        break;
+      case 'Review_Body_Profile_Page':
+        await reviewBodyProfilePage.goto(await reviewBodyProfilePage.getReviewBodyId());
+        await reviewBodyProfilePage.assertOnReviewbodyProfilePage();
+        break;
+      case 'My_Research_Page':
+        await myResearchProjectsPage.goto();
+        await myResearchProjectsPage.assertOnMyResearchProjectsPage();
+        break;
+      default:
+        throw new Error(`${page} is not a valid option`);
+    }
+  }
+);
+
+Given(
+  'I have navigated to the {string} as {string}',
+  async (
+    { homePage, systemAdministrationPage, accessDeniedPage, myResearchProjectsPage },
+    page: string,
+    user: string
+  ) => {
+    const authStatePath = getAuthState(user);
+    const authState = JSON.parse(fs.readFileSync(authStatePath, 'utf-8'));
+    switch (page) {
+      case 'Home_Page':
+        await homePage.page.context().addCookies(authState.cookies);
+        await homePage.goto();
+        await homePage.assertOnHomePage();
+        break;
+      case 'System_Administration_Page':
+        await systemAdministrationPage.page.context().addCookies(authState.cookies);
+        await systemAdministrationPage.goto();
+        await systemAdministrationPage.assertOnSystemAdministrationPage();
+        break;
+      case 'Access_Denied_Page':
+        await systemAdministrationPage.page.context().addCookies(authState.cookies);
+        await systemAdministrationPage.goto();
+        await accessDeniedPage.assertOnAccessDeniedPage();
+        break;
+      case 'My_Research_Page':
+        await myResearchProjectsPage.page.context().addCookies(authState.cookies);
+        await myResearchProjectsPage.goto();
+        await myResearchProjectsPage.assertOnMyResearchProjectsPage();
+        break;
+      default:
+        throw new Error(`${page} is not a valid option`);
+    }
+  }
+);
+
+Given('I logged out from the system', async ({ commonItemsPage }) => {
+  await commonItemsPage.page.context().clearCookies();
+});
+
+Then(
+  'I can see the list is sorted by default in the alphabetical order of the {string}',
+  async ({ manageUsersPage, manageReviewBodiesPage }, sortField: string) => {
+    let actualList: string[];
+    switch (sortField.toLowerCase()) {
+      case 'first name':
+        actualList = await manageUsersPage.getFirstNamesListFromUI();
+        break;
+      case 'organisation name':
+        actualList = await manageReviewBodiesPage.getOrgNamesListFromUI();
+        break;
+      default:
+        throw new Error(`${sortField} is not a valid option`);
+    }
+    const sortedList = [...actualList].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
+    expect.soft(actualList).toEqual(sortedList);
   }
 );

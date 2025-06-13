@@ -2,9 +2,12 @@
   "Manage_Users_Page": {
     "selected_bread_crumbs": "Manage Users",
     "page_heading": "Manage users",
+    "title": "Manage users - Plan and manage healthcare research",
     "add_new_users_record_link": "Add a new user profile record",
     "view_edit_link": "View/Edit",
     "search_button_label": "Search",
+    "no_results_heading": "No results found",
+    "no_results_guidance_text": "Check your spelling or enter another search term and try again. If no results are found, you can create a new user profile record.",
     "Label_Texts_Manage_Users_List": {
       "first_name_column_header_label": "First name",
       "last_name_column_header_label": "Last name",
@@ -22,7 +25,7 @@
     "title_text": "Mr",
     "first_name_text": "QA Automation First Name Test",
     "last_name_text": "Test Last Name",
-    "email_address_text": "QAAutomation20250320193106982hscrd@health.org",
+    "email_address_text": "QAAutomation20250327174507168hscrd@health.org",
     "telephone_text": "07000000000",
     "organisation_text": "QA Automation HRA",
     "job_title_text": "Sr.Reviewer",
@@ -35,7 +38,7 @@
     "title_text": "Mr",
     "first_name_text": "QA Automation First Name Test",
     "last_name_text": "Last Name Test",
-    "email_address_text": "QAAutomation20250327114615166hscrd@health.org",
+    "email_address_text": "QAAutomation20250320211341018hscrd@health.org",
     "telephone_text": "07000000000",
     "organisation_text": "QA Automation HRA",
     "job_title_text": "Sr.Reviewer",
@@ -47,11 +50,11 @@
     "title_text": "Mr",
     "first_name_text": "QA Automation First Name Test",
     "last_name_text": "Test Last Name",
-    "email_address_text": "QAAutomation20250327122528558hscrd@health.org",
+    "email_address_text": "QAAutomation2hscrd@health.org",
     "telephone_text": "07000000000",
     "organisation_text": "QA Automation HRA",
     "job_title_text": "Sr.Reviewer",
-    "role_checkbox": ["Reviewer"]
+    "role_checkbox": ["reviewer"]
   },
   "Valid_Data_Role_Operations": {
     "title_text": "Mr",
@@ -61,7 +64,7 @@
     "telephone_text": "07111111112",
     "organisation_text": "HRA",
     "job_title_text": "Reviewer",
-    "role_checkbox": ["Admin"],
+    "role_checkbox": ["system administrator"],
     "country_checkbox": ["England"],
     "access_required_checkbox": ["Research Ethics Committee"]
   },
@@ -73,7 +76,7 @@
     "telephone_text": "07000000000",
     "organisation_text": "HRA",
     "job_title_text": "Reviewer",
-    "role_checkbox": ["Reviewer"]
+    "role_checkbox": ["reviewer"]
   },
 
   "Valid_Data_In_All_Fields_Role_Reviewer": {
@@ -90,5 +93,16 @@
     "first_name_text": "QA Automation First Name Test",
     "last_name_text": "Test Last Name",
     "email_address_text": "QAAutomation20250327115050148hscrd@health.org"
+  },
+  "Search_For_Users": {
+    "Search_Queries": {
+      "Existing_QA_User_First_Name": { "search_input_text": "QA Automation First Name Test" },
+      "Existing_QA_User_Last_Name": { "search_input_text": "Test Last Name" },
+      "Existing_QA_User_Email": { "search_input_text": "QAAutomation2025" },
+      "Non_Existant_User_Data": { "search_input_text": "ThisShouldNot ReturnAResult" },
+      "Leading_White_Space_User_Data": { "search_input_text": " Atul Patel" },
+      "Leading_And_Trailing_White_Space_User_Data": { "search_input_text": " Atul Patel " },
+      "Trailing_White_Space_User_Data": { "search_input_text": "Atul Patel " }
+    }
   }
 }

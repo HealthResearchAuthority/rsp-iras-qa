@@ -1,5 +1,7 @@
 import { createBdd } from 'playwright-bdd';
 import { test, expect } from '../../../../../hooks/CustomFixtures';
+import { generateUniqueEmail } from '../../../../../utils/UtilFunctions';
+import { Locator } from 'playwright';
 
 const { Then, When } = createBdd(test);
 
@@ -30,6 +32,7 @@ When(
     const dataset = editUserProfilePage.editUserProfilePageTestData[datasetName];
     let keyIndex = 1;
     let keyValue: any;
+    let uniqueEmail: any;
     if (fieldName.toLowerCase() == 'country' || fieldName.toLowerCase() == 'role') {
       const datasetNameClear: string = 'Edit_User_Profile_Page';
       const clearDataset = editUserProfilePage.editUserProfilePageTestData[datasetNameClear];
@@ -40,7 +43,14 @@ When(
         keyValue = dataset[key];
       }
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        await commonItemsPage.fillUIComponent(dataset, key, editUserProfilePage);
+        if (key === 'email_address_text') {
+          const prefix = editUserProfilePage.editUserProfilePageTestData.Edit_User_Profile.email_address_prefix;
+          uniqueEmail = await generateUniqueEmail(dataset[key], prefix);
+          const locator: Locator = editUserProfilePage[key];
+          await locator.fill(uniqueEmail);
+        } else {
+          await commonItemsPage.fillUIComponent(dataset, key, editUserProfilePage);
+        }
       }
       keyIndex++;
     }
@@ -55,7 +65,7 @@ When(
         await userProfilePage.setNewLastName(keyValue);
         break;
       case 'email_address':
-        await userProfilePage.setNewEmail(keyValue);
+        await userProfilePage.setNewEmail(uniqueEmail);
         break;
       case 'telephone':
         await userProfilePage.setNewTelephone(keyValue);
@@ -143,16 +153,19 @@ When(
 Then(
   'I uncheck the previously selected checkboxes on the edit user profile page for {string} when the role is selected as operations',
   async ({ userProfilePage, editUserProfilePage, commonItemsPage }, datasetName: string) => {
+    const dataset = editUserProfilePage.editUserProfilePageTestData.Edit_User_Profile[datasetName];
     const roleValue = (await userProfilePage.getRole()).join(', ');
-    if (roleValue.includes('operations')) {
-      const dataset = editUserProfilePage.editUserProfilePageTestData.Edit_User_Profile[datasetName];
-      for (const key in dataset) {
-        if (key === 'country_checkbox' || key === 'access_required_checkbox') {
-          if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-            await commonItemsPage.clearUIComponent(dataset, key, editUserProfilePage);
-          }
-        }
-      }
+    if (roleValue === '') {
+      await commonItemsPage.fillUIComponent(dataset, 'role_checkbox', editUserProfilePage);
+    }
+    const selectedCheckboxCount = (await editUserProfilePage.getCheckedCheckboxLabels()).length;
+    if (roleValue.includes('operations') || selectedCheckboxCount > 0) {
+      await commonItemsPage.clearCheckboxes(
+        dataset,
+        ['country_checkbox', 'access_required_checkbox'],
+        commonItemsPage,
+        editUserProfilePage
+      );
       await commonItemsPage.clearUIComponent(dataset, 'role_checkbox', editUserProfilePage);
     }
   }

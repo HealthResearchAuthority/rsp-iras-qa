@@ -2,6 +2,7 @@ import { expect, Locator, Page } from '@playwright/test';
 import * as homePageTestData from '../../resources/test_data/iras/home_page_data.json';
 import * as buttonTextData from '../../resources/test_data/common/button_text_data.json';
 import * as linkTextData from '../../resources/test_data/common/link_text_data.json';
+import { confirmStringNotNull } from '../../utils/UtilFunctions';
 
 //Declare Page Objects
 export default class HomePage {
@@ -34,6 +35,7 @@ export default class HomePage {
   readonly system_administration_hint_label: Locator;
   readonly technical_assurance_hint_label: Locator;
   readonly technical_assurance_reviewers_hint_label: Locator;
+  readonly workspaceLinks: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -82,6 +84,7 @@ export default class HomePage {
     this.technical_assurance_reviewers_hint_label = this.getFollowingParagraphElement(
       this.technicalAssuranceReviewersLink
     );
+    this.workspaceLinks = this.page.locator('.hra-card').getByRole('link');
   }
 
   //using method is used to get hint label next to headers
@@ -98,5 +101,13 @@ export default class HomePage {
     await expect(this.pageHeading).toBeVisible();
     await expect(this.myWorkspacesHeading).toBeVisible();
     await expect(this.projectGuidanceText).toBeVisible();
+  }
+
+  async getMyWorkspaceLinksNames() {
+    const topMenuBarLinksValues: string[] = [];
+    for (const val of await this.workspaceLinks.allTextContents()) {
+      topMenuBarLinksValues.push(confirmStringNotNull(val));
+    }
+    return topMenuBarLinksValues;
   }
 }

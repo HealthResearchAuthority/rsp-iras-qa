@@ -1,6 +1,6 @@
 import { DataTable } from 'playwright-bdd';
 import { Locator, chromium, devices, firefox, webkit } from '@playwright/test';
-import { createDecipheriv } from 'crypto';
+import { createDecipheriv, DecipherGCM } from 'crypto';
 import { readFile, writeFile } from 'fs/promises';
 import 'dotenv/config';
 import { deviceDSafari, deviceDFirefox, deviceDChrome, deviceDEdge } from '../hooks/GlobalSetup';
@@ -32,8 +32,20 @@ const deviceScaleFactorAndroid = 3.5;
 export function getAuthState(user: string): string {
   let authState: string;
   switch (user.toLowerCase()) {
-    case 'adminuser':
+    case 'system_admin':
+      authState = 'auth-storage-states/sysAdminUser.json';
+      break;
+    case 'frontstage_user':
+      authState = 'auth-storage-states/frontStageUser.json';
+      break;
+    case 'backstage_user':
+      authState = 'auth-storage-states/backStageUser.json';
+      break;
+    case 'admin_user':
       authState = 'auth-storage-states/adminUser.json';
+      break;
+    case 'non_admin_user':
+      authState = 'auth-storage-states/nonAdminUser.json';
       break;
     default:
       throw new Error(`${user} is not a valid option`);
@@ -82,13 +94,13 @@ export function getTicketReferenceTags(tags: string[]): string[] {
   return tickets;
 }
 
-export function getDecryptedValue(data: string) {
+export function getDecryptedValue(data: string, secretKey?: any, authTag?: string) {
   let value: string = '';
-  if (process.env.SECRET_KEY) {
-    const decipher = createDecipheriv('AES-256-GCM', Buffer.from(process.env.SECRET_KEY), Buffer.alloc(16));
-    decipher.setAuthTag(Buffer.from(`${process.env.AUTH_TAG}`, 'hex'));
+  if (secretKey) {
+    const decipher = createDecipheriv('AES-256-GCM', Buffer.from(secretKey), Buffer.alloc(16)) as DecipherGCM;
+    decipher.setAuthTag(Buffer.from(`${authTag}`, 'hex'));
     let decrypted = decipher.update(data, 'hex', 'utf8');
-    decrypted = decrypted + decipher.final('utf8');
+    decrypted += decipher.final('utf8');
     value = decrypted;
   } else {
     value = data;
@@ -541,4 +553,17 @@ export async function returnSingleRandomLocator(resolvesToMultiElements: Locator
 
 export async function sortArray(value: string[]): Promise<string[]> {
   return value.sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }));
+}
+
+export function resolveEnvExpression(template: string): string {
+  const passwordParts = template.split('`${process.env.');
+  if (passwordParts.length < 2) {
+    throw new Error('Invalid template format');
+  }
+  const envVar = passwordParts[1].split('}`')[0];
+  const value = process.env[envVar];
+  if (!value) {
+    throw new Error(`Environment variable "${envVar}" is not defined`);
+  }
+  return value;
 }

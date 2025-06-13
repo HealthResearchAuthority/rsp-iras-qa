@@ -1,7 +1,8 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as linkTextData from '../../../../../resources/test_data/common/link_text_data.json';
 import * as manageUsersPageTestData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageUsers/manage_users_page_data.json';
-import { confirmStringNotNull } from '../../../../../utils/UtilFunctions';
+import { confirmStringNotNull, returnDataFromJSON } from '../../../../../utils/UtilFunctions';
+import CreateUserProfilePage from './CreateUserProfilePage';
 
 //Declare Page Objects
 export default class ManageUsersPage {
@@ -38,6 +39,9 @@ export default class ManageUsersPage {
   readonly userListRows: Locator;
   readonly userListCell: Locator;
   readonly statusCell: Locator;
+  readonly no_results_heading: Locator;
+  readonly no_results_guidance_text: Locator;
+  readonly listCell: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -82,14 +86,26 @@ export default class ManageUsersPage {
     this.last_name_from_list_label = this.page.locator('td').nth(1);
     this.email_address_from_list_label = this.page.locator('td').nth(2);
     this.status_from_list_label = this.page.locator('td').nth(3);
+    this.no_results_heading = this.page
+      .getByRole('heading')
+      .getByText(this.manageUsersPageTestData.Manage_Users_Page.no_results_heading, { exact: true });
+    this.no_results_guidance_text = this.page
+      .getByRole('paragraph')
+      .getByText(this.manageUsersPageTestData.Manage_Users_Page.no_results_guidance_text, {
+        exact: true,
+      });
+    this.listCell = this.page.getByRole('cell');
   }
 
   async assertOnManageUsersPage() {
     await expect(this.page_heading).toBeVisible();
+    expect(await this.page.title()).toBe(this.manageUsersPageTestData.Manage_Users_Page.title);
   }
 
-  async goto(pageSize?: string) {
-    if (typeof pageSize !== 'undefined') {
+  async goto(pageSize?: string, searchQuery?: string) {
+    if (typeof pageSize !== 'undefined' && typeof searchQuery !== 'undefined') {
+      await this.page.goto(`admin/users?SearchQuery=${searchQuery}&PageSize=${pageSize}`);
+    } else if (typeof pageSize !== 'undefined') {
       await this.page.goto(`admin/users?pageSize=${pageSize}`);
     } else {
       await this.page.goto('admin/users');
@@ -140,39 +156,6 @@ export default class ManageUsersPage {
     throw new Error(`No matching record found`);
   }
 
-  async searchAndClickUserProfile(userFirstName: string, userLastName: string, userEmail: string, userStatus: string) {
-    let dataFound = false;
-    while (!dataFound) {
-      const rowCount = await this.users_list_rows.count();
-      for (let i = 0; i < rowCount; i++) {
-        const firstNameText = await this.users_list_rows.nth(i).locator(this.first_name_from_list_label).textContent();
-        const lastNameText = await this.users_list_rows.nth(i).locator(this.last_name_from_list_label).textContent();
-        const emailText = await this.users_list_rows.nth(i).locator(this.email_address_from_list_label).textContent();
-        const statusText = await this.users_list_rows.nth(i).locator(this.status_from_list_label).textContent();
-        if (
-          firstNameText?.trim() === userFirstName &&
-          lastNameText?.trim() === userLastName &&
-          emailText?.trim() === userEmail &&
-          statusText?.trim() === userStatus
-        ) {
-          await this.users_list_rows.nth(i).getByText('View/Edit').click();
-          dataFound = true;
-          break;
-        }
-      }
-
-      if (!dataFound) {
-        const nextButton = this.page.locator('.govuk-pagination__next');
-        if ((await nextButton.count()) > 0) {
-          await nextButton.click();
-          await this.page.getByRole('row').first().waitFor();
-        } else {
-          throw new Error('Reached the last page, data not found.');
-        }
-      }
-    }
-  }
-
   async getRowByUserNameStatus(userName: string, exactMatch: boolean, status: string) {
     const userRows = this.userListRows
       .filter({ has: this.page.locator('td').getByText(`${userName}`, { exact: exactMatch }) })
@@ -180,5 +163,54 @@ export default class ManageUsersPage {
     const noOfRows = await userRows.count();
     const randomIndex = Math.floor(Math.random() * (noOfRows - 1));
     return userRows.nth(randomIndex);
+  }
+
+  async findUserByStatus(searchKey: string, userStatus: string) {
+    let hasNextPage = true;
+    while (hasNextPage) {
+      const rows = await this.userListRows.all();
+      for (const row of rows) {
+        const columns = await row.locator(this.listCell).allTextContents();
+        const matchesSearchKey =
+          columns[0].trim().includes(searchKey) ||
+          columns[1].trim().includes(searchKey) ||
+          columns[2].trim().includes(searchKey);
+        if (matchesSearchKey && columns[3].trim() === userStatus) {
+          return row;
+        }
+      }
+      hasNextPage = (await this.next_button.isVisible()) && !(await this.next_button.isDisabled());
+      if (hasNextPage) {
+        await this.next_button.click();
+        await this.page.waitForLoadState('domcontentloaded');
+      }
+    }
+    throw new Error(`No matching record found`);
+  }
+
+  async getUniqueUserRecord(
+    datasetName: string,
+    status: string,
+    createUserProfilePage: CreateUserProfilePage,
+    manageUsersPage: ManageUsersPage
+  ) {
+    const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
+    const userFirstName = dataset.first_name_text;
+    const userLastName = dataset.last_name_text;
+    const data = await returnDataFromJSON();
+    const userEmail = data.Create_User_Profile.email_address_unique;
+    const userStatus = await manageUsersPage.getUserStatus(status);
+    await manageUsersPage.goto(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size, userEmail);
+    const foundRecord = await manageUsersPage.findUserProfile(userFirstName, userLastName, userEmail, userStatus);
+    return foundRecord;
+  }
+
+  async getUserStatus(status: string) {
+    const datasetStatus = this.manageUsersPageTestData.Manage_Users_Page;
+    if (status.toLowerCase() == 'disabled') {
+      return datasetStatus.disabled_status;
+    } else {
+      return datasetStatus.enabled_status;
+    }
   }
 }

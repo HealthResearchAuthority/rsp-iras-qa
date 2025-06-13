@@ -22,6 +22,7 @@ export default class CreateReviewBodyPage {
   readonly country_fieldset: Locator;
   readonly country_checkbox: Locator;
   readonly country_error: Locator;
+  readonly country_label: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -41,11 +42,12 @@ export default class CreateReviewBodyPage {
       { exact: true }
     );
     this.organisation_name_error = this.organisation_name_text.locator('..').locator(this.validation_error);
-    this.country_fieldset = this.page.getByRole('group', {
-      name: this.createReviewBodyPageData.Create_Review_Body_Page.country_label,
-      exact: true,
-    });
+    this.country_label = this.page
+      .locator('.govuk-label')
+      .getByText(this.createReviewBodyPageData.Create_Review_Body_Page.country_label, { exact: true });
+    this.country_fieldset = this.page.locator('.govuk-form-group', { has: this.country_label });
     this.country_checkbox = this.country_fieldset.getByRole('checkbox');
+
     this.country_error = this.country_fieldset.locator(this.validation_error);
     this.email_address_text = this.page.getByLabel(
       this.createReviewBodyPageData.Create_Review_Body_Page.email_address_label,
@@ -55,6 +57,11 @@ export default class CreateReviewBodyPage {
     this.description_text = this.page.getByLabel(
       this.createReviewBodyPageData.Create_Review_Body_Page.description_label
     );
+    //commented this line Description label change
+    //  this.description_text = this.page.getByLabel(
+    //   this.createReviewBodyPageData.Create_Review_Body_Page.description_label,
+    //   { exact: true }
+    // );
     this.description_error = this.description_text.locator('..').locator(this.validation_error).first();
     this.description_reason_error = this.description_text.locator('..').locator(this.char_count_error);
     this.continueBtn = this.page

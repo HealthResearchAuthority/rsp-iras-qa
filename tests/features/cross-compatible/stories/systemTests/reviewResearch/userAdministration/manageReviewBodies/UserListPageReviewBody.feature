@@ -1,4 +1,4 @@
-@UserAdministration @ManageReviewBodies @adminUser @SystemTest @UserListReviewBody @rsp-3270
+@UserAdministration @ManageReviewBodies @SysAdminUser @SystemTest @UserListReviewBody @rsp-3270
 Feature: User Administration: Manage Review Bodies - View user list page of the review body, Search for the users and remove user from the review body
 
     Background:
@@ -22,9 +22,10 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         When I click the 'Back_To_Manage_Review_Bodies' link on the 'Create_Review_Body_Confirmation_Page'
         Then I can see the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
-        When I enter unique organisation name of the newly created review body into the search field
+        When I enter 'name of the new review body' into the search field
         And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
-        Then I click the view edit link for the newly created review body
+        And I can see the 'newly created review body' should be present in the list with 'Enabled' status in the manage review bodies page
+        Then I click the view edit link
         And I can see the review body profile page
         And I capture the page screenshot
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
@@ -34,13 +35,13 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         When I enter 'QA Automation' into the search field
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
-        Then the system displays no results found message
+        Then the system displays no results found message in the user list page of the review body
 
     @UserListReviewBodyDefaultSort
     Scenario: Verify the user can view the user list page of any selected review body and it is sorted by default in the alphabetical order of the 'First Name'
         When I enter 'QA Automation' into the search field
         And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
-        And I select a 'QA Automation' Review Body to View and Edit which is 'active'
+        And I select a 'QA Automation' review Body to View and Edit which is 'Enabled'
         And I capture the page screenshot
         And I can see the review body profile page
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
@@ -62,7 +63,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
     Scenario Outline: Verify the user can search for the users in the user list page and navigate back to review body profile page
         When I enter 'QA Automation' into the search field
         And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
-        And I select a 'QA Automation' Review Body to View and Edit which is 'active'
+        And I select a 'QA Automation' review Body to View and Edit which is 'Enabled'
         And I capture the page screenshot
         And I can see the review body profile page
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
@@ -80,7 +81,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I capture the page screenshot
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
-        Then the system displays search results matching the search criteria based on '<Field_Name>'
+        Then the system displays search results matching the search criteria
         When I click the 'Back_To_Review_Body_Profile' link on the 'Review_Body_User_List_Page'
         Then I can see the review body profile page
 
@@ -99,7 +100,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
     Scenario: Verify the user can search and remove existing user of the selected review body and navigate to manage users page when no results found in the search for removed user
         When I enter 'QA Automation' into the search field
         And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
-        And I select a 'QA Automation' Review Body to View and Edit which is 'active'
+        And I select a 'QA Automation' review Body to View and Edit which is 'Enabled'
         And I capture the page screenshot
         And I can see the review body profile page
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
@@ -117,7 +118,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I capture the page screenshot
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
-        Then the system displays search results matching the search criteria based on 'Email_Address'
+        Then the system displays search results matching the search criteria
         When I click the 'Remove' link on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then I can see the check and remove user profile page
@@ -129,7 +130,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I enter an input into the search field to search for the removed user of the review body
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
-        Then the system displays no results found message
+        Then the system displays no results found message in the user list page of the review body
         When I click the 'Manage_Users' link on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then I can see the 'Manage_Users_Page'
@@ -140,7 +141,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
     Scenario: Verify the user can search and remove existing user of the selected review body and repeat the process with remove another user from the review body link
         When I enter 'QA Automation' into the search field
         And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
-        And I select a 'QA Automation' Review Body to View and Edit which is 'active'
+        And I select a 'QA Automation' review Body to View and Edit which is 'Enabled'
         And I capture the page screenshot
         And I can see the review body profile page
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
@@ -158,7 +159,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I capture the page screenshot
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
-        Then the system displays search results matching the search criteria based on 'Email_Address'
+        Then the system displays search results matching the search criteria
         When I click the 'Remove' link on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then I can see the check and remove user profile page
@@ -171,7 +172,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         When I enter the 'Email Address' of the 'last' user shown on the current review body users list, into the search field
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
-        Then the system displays search results matching the search criteria based on 'Email_Address'
+        Then the system displays search results matching the search criteria
         When I click the 'Remove' link on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then I can see the check and remove user profile page
@@ -183,7 +184,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I enter an input into the search field to search for the removed user of the review body
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
-        Then the system displays no results found message
+        Then the system displays no results found message in the user list page of the review body
         When I click the 'Manage_Users' link on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then I can see the 'Manage_Users_Page'
@@ -192,7 +193,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
     Scenario: Verify the user can search and remove the user from the selected review body and navigate to review body user list page when no results found for the removed user
         When I enter 'QA Automation' into the search field
         And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
-        And I select a 'QA Automation' Review Body to View and Edit which is 'active'
+        And I select a 'QA Automation' review Body to View and Edit which is 'Enabled'
         And I capture the page screenshot
         And I can see the review body profile page
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
@@ -209,7 +210,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I capture the page screenshot
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
-        Then the system displays search results matching the search criteria based on 'Email_Address'
+        Then the system displays search results matching the search criteria
         When I click the 'Remove' link on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then I can see the check and remove user profile page
@@ -221,7 +222,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I enter an input into the search field to search for the removed user of the review body
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
-        Then the system displays no results found message
+        Then the system displays no results found message in the user list page of the review body
         When I click the 'Back_To_Users' link on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then I can see the user list page of the review body
@@ -231,7 +232,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
     Scenario: Verify the user can search and remove the existing user from the selected review body and navigate to manage review bodies page from the confirmation page
         When I enter 'QA Automation' into the search field
         And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
-        And I select a 'QA Automation' Review Body to View and Edit which is 'active'
+        And I select a 'QA Automation' review Body to View and Edit which is 'Enabled'
         And I capture the page screenshot
         And I can see the review body profile page
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
@@ -247,7 +248,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         When I enter the 'Email Address' of the 'last' user shown on the current review body users list, into the search field
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
-        Then the system displays search results matching the search criteria based on 'Email_Address'
+        Then the system displays search results matching the search criteria
         When I click the 'Remove' link on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then I can see the check and remove user profile page
@@ -262,7 +263,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
     Scenario: Verify the user can navigate to user list page of the review body from check and remove user profile page using back link
         When I enter 'QA Automation' into the search field
         And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
-        And I select a 'QA Automation' Review Body to View and Edit which is 'active'
+        And I select a 'QA Automation' review Body to View and Edit which is 'Enabled'
         And I capture the page screenshot
         And I can see the review body profile page
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
@@ -278,7 +279,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         When I enter the 'Email Address' of the 'last' user shown on the current review body users list, into the search field
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
-        Then the system displays search results matching the search criteria based on 'Email_Address'
+        Then the system displays search results matching the search criteria
         When I click the 'Remove' link on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then I can see the check and remove user profile page
@@ -289,7 +290,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
     Scenario: Verify the user can navigate to user list page of the review body and remove any user from the review body without using search
         When I enter 'QA Automation' into the search field
         And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
-        And I select a 'QA Automation' Review Body to View and Edit which is 'active'
+        And I select a 'QA Automation' review Body to View and Edit which is 'Enabled'
         And I capture the page screenshot
         And I can see the review body profile page
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'

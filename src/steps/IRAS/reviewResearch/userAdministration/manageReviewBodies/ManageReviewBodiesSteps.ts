@@ -1,27 +1,27 @@
 import { createBdd } from 'playwright-bdd';
 import { test, expect } from '../../../../../hooks/CustomFixtures';
-import {
-  confirmStringNotNull,
-  removeUnwantedWhitespace,
-  returnSingleRandomLocator,
-} from '../../../../../utils/UtilFunctions';
-const { Then } = createBdd(test);
+import { confirmArrayNotNull } from '../../../../../utils/UtilFunctions';
+const { When, Then } = createBdd(test);
 
 Then(
-  'I can see the review body for {string} is present in the list',
-  async ({ manageReviewBodiesPage, createReviewBodyPage }, datasetName: string) => {
+  'I can see the review body for {string} is present in the list with {string} status',
+  async ({ manageReviewBodiesPage, createReviewBodyPage }, datasetName: string, status: string) => {
+    const reviewBodyStatus = await manageReviewBodiesPage.getReviewBodyStatus(status);
     const dataset = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body[datasetName];
     const expectedCountryValue: string = dataset.country_checkbox.toString();
-    const createdReviewBodyRow = await manageReviewBodiesPage.getRowByOrgName(
-      await createReviewBodyPage.getUniqueOrgName(),
-      true
+    const reviewBodyName = await createReviewBodyPage.getUniqueOrgName();
+    await manageReviewBodiesPage.goto(
+      manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.enlarged_page_size,
+      reviewBodyName
     );
+    const createdReviewBodyRow = await manageReviewBodiesPage.findReviewBody(reviewBodyName, reviewBodyStatus);
     const createdReviewBodyCountry = createdReviewBodyRow.locator('td', {
       hasText: expectedCountryValue.replaceAll(',', ', '),
       hasNotText: 'QA',
     });
     expect(createdReviewBodyRow).toHaveCount(1);
     await expect(createdReviewBodyCountry).toBeVisible();
+    await manageReviewBodiesPage.setReviewBodyRow(createdReviewBodyRow);
   }
 );
 
@@ -30,16 +30,19 @@ Then(
   async ({ manageReviewBodiesPage, editReviewBodyPage }, datasetName: string) => {
     const dataset = editReviewBodyPage.editReviewBodyPageData.Edit_Review_Body[datasetName];
     const expectedCountryValue: string = dataset.country_checkbox.toString();
-    const updatedReviewBodyRow = await manageReviewBodiesPage.getRowByOrgName(
-      await editReviewBodyPage.getUniqueOrgName(),
-      true
+    const reviewBodyName = await editReviewBodyPage.getUniqueOrgName();
+    await manageReviewBodiesPage.goto(
+      manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.enlarged_page_size,
+      reviewBodyName
     );
+    const updatedReviewBodyRow = await manageReviewBodiesPage.findReviewBody(reviewBodyName);
     const updatedReviewBodyCountry = updatedReviewBodyRow.locator('td', {
       hasText: expectedCountryValue.replaceAll(',', ', '),
       hasNotText: 'QA',
     });
     expect(updatedReviewBodyRow).toHaveCount(1);
     await expect(updatedReviewBodyCountry).toBeVisible();
+    await manageReviewBodiesPage.setReviewBodyRow(updatedReviewBodyRow);
   }
 );
 
@@ -60,69 +63,89 @@ Then(
 );
 
 Then(
-  'I select a {string} Review Body to View and Edit which is {string}',
-  async ({ manageReviewBodiesPage }, orgNamePrefix: string, status: string) => {
-    let statusText: string;
-    if (status.toLowerCase() == 'active') {
-      statusText = manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.enabled_status;
-    } else {
-      statusText = manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.disabled_status;
-    }
-    const autoReviewBodyRows = await manageReviewBodiesPage.getRowByOrgName(orgNamePrefix, false);
-    const activeAutoReviewBodyRows = autoReviewBodyRows.filter({
-      has: manageReviewBodiesPage.statusCell.getByText(statusText),
-    });
-    const selectedReviewBodyRow = await returnSingleRandomLocator(activeAutoReviewBodyRows);
-    await selectedReviewBodyRow.locator(manageReviewBodiesPage.actionsLink).click();
-  }
-);
-
-Then(
-  'I click the view edit link for the {string} review body',
-  async ({ manageReviewBodiesPage, reviewBodyProfilePage }, status: string) => {
-    const reviewBodyRow = await manageReviewBodiesPage.getRowByOrgName(await reviewBodyProfilePage.getOrgName(), true);
-    const organisationStatusText = await removeUnwantedWhitespace(
-      confirmStringNotNull(await reviewBodyRow.locator(manageReviewBodiesPage.status_from_list).textContent())
+  'I click the view edit link for the {string}',
+  async ({ manageReviewBodiesPage, createReviewBodyPage, reviewBodyProfilePage }, inputType: string) => {
+    const reviewBodyName = await manageReviewBodiesPage.getReviewBodyName(
+      inputType,
+      reviewBodyProfilePage,
+      createReviewBodyPage
     );
-    if (status === organisationStatusText.toLowerCase()) {
-      await reviewBodyRow.locator(manageReviewBodiesPage.actionsLink).click();
-    }
-  }
-);
-
-Then(
-  'I search {string} review body and click on view edit link for {string} with {string} status',
-  async ({ createReviewBodyPage, manageReviewBodiesPage }, recordType: string, datasetName: string, status: string) => {
-    if (recordType.toLowerCase() == 'existing') {
-      const dataset = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body[datasetName];
-      const existingOrgName = dataset.organisation_name_text;
-      await manageReviewBodiesPage.searchAndClickReviewBodyProfile(existingOrgName, status);
-    } else {
-      const reviewBodyRow = await manageReviewBodiesPage.getRowByOrgName(
-        await createReviewBodyPage.getUniqueOrgName(),
-        true
-      );
-      await reviewBodyRow.locator(manageReviewBodiesPage.actionsLink).click();
-    }
-  }
-);
-
-Then(
-  'I can see the list is sorted by default in the alphabetical order of {string}',
-  async ({ manageReviewBodiesPage }) => {
-    const orgNames: string[] = await manageReviewBodiesPage.getOrgNamesListFromUI();
-    const sortedOrgNames = [...orgNames].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
-    expect(orgNames).toEqual(sortedOrgNames);
-  }
-);
-
-Then(
-  'I click the view edit link for the newly created review body',
-  async ({ manageReviewBodiesPage, createReviewBodyPage }) => {
-    const createdReviewBodyRow = await manageReviewBodiesPage.getRowByOrgName(
-      await createReviewBodyPage.getUniqueOrgName(),
-      true
+    await manageReviewBodiesPage.goto(
+      manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.enlarged_page_size,
+      reviewBodyName
     );
+    const createdReviewBodyRow = await manageReviewBodiesPage.findReviewBody(reviewBodyName);
     await createdReviewBodyRow.locator(manageReviewBodiesPage.actionsLink).click();
   }
 );
+
+When(
+  'I fill the search input for searching review bodies in manage review bodies page with {string} as the search query',
+  async ({ manageReviewBodiesPage, commonItemsPage, userListReviewBodyPage }, searchQueryName: string) => {
+    const searchQueryDataset =
+      manageReviewBodiesPage.manageReviewBodiesPageData.Search_For_Review_Bodies.Search_Queries[searchQueryName];
+    const searchKey = searchQueryDataset['search_input_text'];
+    if ((await commonItemsPage.tableRows.count()) >= 2) {
+      await userListReviewBodyPage.setSearchKey(searchKey);
+      await commonItemsPage.search_text.fill(searchKey);
+    } else {
+      throw new Error(`There are no items in list to search`);
+    }
+  }
+);
+
+When(
+  'I can see the {string} should be present in the list with {string} status in the manage review bodies page',
+  async (
+    { manageReviewBodiesPage, createReviewBodyPage, reviewBodyProfilePage },
+    inputType: string,
+    status: string
+  ) => {
+    const reviewBodyStatus = await manageReviewBodiesPage.getReviewBodyStatus(status);
+    const reviewBodyName = await manageReviewBodiesPage.getReviewBodyName(
+      inputType,
+      reviewBodyProfilePage,
+      createReviewBodyPage
+    );
+    await manageReviewBodiesPage.goto(
+      manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.enlarged_page_size,
+      reviewBodyName
+    );
+    const foundRecords = await manageReviewBodiesPage.findReviewBody(reviewBodyName, reviewBodyStatus);
+    expect(foundRecords).toBeDefined();
+    expect(foundRecords).toHaveCount(1);
+    await manageReviewBodiesPage.setReviewBodyRow(foundRecords);
+  }
+);
+
+When(
+  'I select a {string} review Body to View and Edit which is {string}',
+  async ({ manageReviewBodiesPage }, reviewBodyName: string, status: string) => {
+    const reviewBodyStatus = await manageReviewBodiesPage.getReviewBodyStatus(status);
+    const foundRecords = await manageReviewBodiesPage.findReviewBody(reviewBodyName, reviewBodyStatus);
+    expect(foundRecords).toBeDefined();
+    expect(foundRecords).toHaveCount(1);
+    await foundRecords.locator(manageReviewBodiesPage.actionsLink).click();
+  }
+);
+
+Then(
+  'the system displays review bodies matching the search criteria',
+  async ({ userListReviewBodyPage, commonItemsPage }) => {
+    const searchKey = await userListReviewBodyPage.getSearchKey();
+    const searchTerms = await commonItemsPage.splitSearchTerm(searchKey);
+    const orgList = await commonItemsPage.getAllOrgNamesFromTheTable();
+    const orgListAfterSearch: string[] = confirmArrayNotNull(orgList.get('searchResultValues'));
+    const searchResult = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
+      orgListAfterSearch,
+      searchTerms
+    );
+    expect(searchResult).toBeTruthy();
+    expect(orgListAfterSearch).toEqual(searchResult);
+  }
+);
+
+Then('I click the view edit link', async ({ manageReviewBodiesPage }) => {
+  const createdReviewBodyRow = await manageReviewBodiesPage.getReviewBodyRow();
+  await createdReviewBodyRow.locator(manageReviewBodiesPage.actionsLink).click();
+});
