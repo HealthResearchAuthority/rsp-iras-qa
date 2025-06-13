@@ -155,10 +155,10 @@ Then(
   async ({ userProfilePage, editUserProfilePage, commonItemsPage }, datasetName: string) => {
     const dataset = editUserProfilePage.editUserProfilePageTestData.Edit_User_Profile[datasetName];
     const roleValue = (await userProfilePage.getRole()).join(', ');
-    const selectedCheckboxCount = (await editUserProfilePage.getCheckedCheckboxLabels()).length;
     if (roleValue === '') {
       await commonItemsPage.fillUIComponent(dataset, 'role_checkbox', editUserProfilePage);
     }
+    const selectedCheckboxCount = (await editUserProfilePage.getCheckedCheckboxLabels()).length;
     if (roleValue.includes('operations') || selectedCheckboxCount > 0) {
       await commonItemsPage.clearCheckboxes(
         dataset,
