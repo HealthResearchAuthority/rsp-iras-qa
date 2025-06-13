@@ -121,21 +121,32 @@ export default class ManageReviewBodiesPage {
     return orgNames;
   }
 
+  async buildSearchRecord(name: string, status?: string): Promise<string> {
+    return typeof status !== 'undefined' ? `${name}|${status}` : name;
+  }
+
+  async getRowData(row: any, status?: string): Promise<string> {
+    const columns = await row.locator(this.listCell).allTextContents();
+    const selected = typeof status !== 'undefined' ? [columns[0], columns[2]] : [columns[0]];
+    return selected.map((col) => col.trim()).join('|');
+  }
+
   async findReviewBody(reviewBodyName: string, reviewBodyStatus?: string) {
     let foundRecord = false;
     let hasNextPage = true;
     while (hasNextPage && !foundRecord) {
       const rows = await this.listRows.all();
       for (const row of rows) {
-        const columns = await row.locator(this.listCell).allTextContents();
         if (reviewBodyName === 'QA Automation') {
+          const columns = await row.locator(this.listCell).allTextContents();
           if (columns[0].trim().includes(reviewBodyName) && columns[2].trim() === reviewBodyStatus) {
             foundRecord = true;
             return row;
           }
         } else {
-          if (columns[0].trim() === reviewBodyName && columns[2].trim() === reviewBodyStatus) {
-            foundRecord = true;
+          const searchRecord = await this.buildSearchRecord(reviewBodyName, reviewBodyStatus);
+          const fullRowData = await this.getRowData(row, reviewBodyStatus);
+          if (fullRowData === searchRecord) {
             return row;
           }
         }
