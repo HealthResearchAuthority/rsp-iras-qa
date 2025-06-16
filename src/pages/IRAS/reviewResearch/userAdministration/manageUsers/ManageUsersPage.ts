@@ -27,6 +27,7 @@ export default class ManageUsersPage {
   readonly last_name_from_list_label: Locator;
   readonly email_address_from_list_label: Locator;
   readonly status_from_list_label: Locator;
+  readonly last_logged_in_from_list_label: Locator;
   readonly next_button: Locator;
   readonly first_name_column_header_label: Locator;
   readonly last_name_column_header_label: Locator;
@@ -42,6 +43,8 @@ export default class ManageUsersPage {
   readonly no_results_heading: Locator;
   readonly no_results_guidance_text: Locator;
   readonly listCell: Locator;
+  private lastLoggedInDateFull: string;
+  private lastLoggedInDateTruncated: string;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -86,6 +89,7 @@ export default class ManageUsersPage {
     this.last_name_from_list_label = this.page.locator('td').nth(1);
     this.email_address_from_list_label = this.page.locator('td').nth(2);
     this.status_from_list_label = this.page.locator('td').nth(3);
+    this.last_logged_in_from_list_label = this.page.locator('td').nth(4);
     this.no_results_heading = this.page
       .getByRole('heading')
       .getByText(this.manageUsersPageTestData.Manage_Users_Page.no_results_heading, { exact: true });
@@ -212,5 +216,21 @@ export default class ManageUsersPage {
     } else {
       return datasetStatus.enabled_status;
     }
+  }
+
+  setLastLoggedInDateFull(value: string) {
+    this.lastLoggedInDateFull = value;
+  }
+
+  getLastLoggedInDateFull(): string {
+    return this.lastLoggedInDateFull;
+  }
+
+  setLastLoggedInDateTruncated(value: string) {
+    this.lastLoggedInDateTruncated = value;
+  }
+
+  getLastLoggedInDateTruncated(): string {
+    return this.lastLoggedInDateTruncated;
   }
 }
