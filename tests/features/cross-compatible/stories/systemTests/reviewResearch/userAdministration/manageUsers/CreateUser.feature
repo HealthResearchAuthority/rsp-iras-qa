@@ -378,4 +378,86 @@ Feature: User Administration: Manage Users - Create user
             | Valid_Data_In_All_Fields_Role_Operations | First_Name | Role_Operations | Missing_Mandatory_Field_Country_Role_Operations         | Missing_Mandatory_Field_Country_Role_Operations_Error         |
             | Valid_Data_In_All_Fields_Role_Operations | Last_Name  | Role_Operations | Missing_Mandatory_Field_Access_Required_Role_Operations | Missing_Mandatory_Field_Access_Required_Role_Operations_Error |
 
+    @rsp-3952 @DuplicateEmailValidation @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage
+    Scenario Outline: Get existing email addresses from manage users list page and validate error messages are displayed for the duplicate email in create user profile page
+        When I click the 'Back' link on the 'Create_User_Profile_Page'
+        And I capture the page screenshot
+        Then I can see the 'Manage_Users_Page'
+        When I enter the '<Field_Name>' of the '<Position>' item in the list, into the search field
+        And I capture the page screenshot
+        And I click the 'Search' button on the 'Manage_Users_Page'
+        And I capture the page screenshot
+        Then the system displays user records matching the search criteria
+        And I capture the page screenshot
+        When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
+        And I capture the page screenshot
+        Then I can see the add a new user profile page
+        When I fill the new user profile page using '<Invalid_Data_User_Profile>' for field validation
+        And I click the 'Continue' button on the 'Create_User_Profile_Page'
+        Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Create_User_Profile_Page'
+        And I capture the page screenshot
+        Examples:
+            | Field_Name    | Position | Invalid_Data_User_Profile           | Field_And_Summary_Error_Message |
+            | Email_Address | First    | Duplicate_Email_Role_Not_Operations | Duplicate_Email_Error           |
+            | Email_Address | Last     | Duplicate_Email_Role_Operations     | Duplicate_Email_Error           |
+
+    @rsp-3952 @DuplicateEmailValidation @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage
+    Scenario Outline: Validate error messages are displayed for duplicate email in create user profile page
+        When I click the 'Back' link on the 'Create_User_Profile_Page'
+        And I capture the page screenshot
+        Then I can see the 'Manage_Users_Page'
+        When I fill the search input for searching users in manage users page with '<Search_Query>' as the search query
+        And I capture the page screenshot
+        And I click the 'Search' button on the 'Manage_Users_Page'
+        And I capture the page screenshot
+        Then the system displays user records matching the search criteria
+        And I capture the page screenshot
+        When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
+        And I capture the page screenshot
+        Then I can see the add a new user profile page
+        When I fill the new user profile page using '<Invalid_Data_User_Profile>' for field validation
+        And I click the 'Continue' button on the 'Create_User_Profile_Page'
+        Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Create_User_Profile_Page'
+        And I capture the page screenshot
+        Examples:
+            | Search_Query                            | Invalid_Data_User_Profile           | Field_And_Summary_Error_Message |
+            | Existing_QA_Automation_User_Email_One   | Duplicate_Email_Role_Not_Operations | Duplicate_Email_Error           |
+            | Existing_QA_Automation_User_Email_Two   | Duplicate_Email_Role_Operations     | Duplicate_Email_Error           |
+            | Existing_QA_Automation_User_Email_Three | Duplicate_Email_Role_Operations     | Duplicate_Email_Error           |
+
+    @rsp-3952 @DuplicateEmailValidation @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage
+    Scenario Outline: Validate error messages are displayed for duplicate email in create user profile page after creating a user
+        When I fill the new user profile page using '<Add_User_Profile>'
+        And I capture the page screenshot
+        And I click the 'Continue' button on the 'Create_User_Profile_Page'
+        Then I can see the check and create user profile page
+        And I capture the page screenshot
+        Then I can see previously filled values in the new user profile page for '<Add_User_Profile>' displayed on the check and create user profile page
+        And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
+        Then I can see the create user profile confirmation page for '<Add_User_Profile>'
+        And I capture the page screenshot
+        When I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
+        Then I can see the 'Manage_Users_Page'
+        And I capture the page screenshot
+        And I can see the newly created user record should be present in the list for '<Add_User_Profile>' with '<Status_Enabled>' status in the manage user page
+        And I capture the page screenshot
+        When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
+        And I capture the page screenshot
+        Then I can see the add a new user profile page
+        When I fill the new user profile page using '<Invalid_Data_User_Profile>' for field validation
+        And I click the 'Continue' button on the 'Create_User_Profile_Page'
+        Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Create_User_Profile_Page'
+        And I capture the page screenshot
+
+
+        Examples:
+            | Add_User_Profile                                   | Status_Enabled | Invalid_Data_User_Profile           | Field_And_Summary_Error_Message |
+            | Valid_Data_In_All_Fields_Role_Reviewer             | Enabled        | Duplicate_Email_Role_Not_Operations | Duplicate_Email_Error           |
+            | Valid_Data_In_All_Mandatory_Fields_Role_Reviewer   | Enabled        | Duplicate_Email_Role_Not_Operations | Duplicate_Email_Error           |
+            | Valid_Data_In_All_Fields_Role_Operations           | Enabled        | Duplicate_Email_Role_Operations     | Duplicate_Email_Error           |
+            | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Enabled        | Duplicate_Email_Role_Operations     | Duplicate_Email_Error           |
+
+
+
+
 

@@ -266,6 +266,7 @@ export default class UserListReviewBodyPage {
     const userList = await this.getUserListByPosition(position, commonItemsPage);
     if (fieldKey === 'Email_Address') {
       searchValues = userList.get('emailAddressValues');
+      await this.setUserEmail(searchValues);
     } else if (fieldKey === 'First_Name') {
       searchValues = userList.get('firstNameValues');
       await this.setUserFirstName(searchValues);

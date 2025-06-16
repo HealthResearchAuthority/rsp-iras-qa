@@ -9,6 +9,7 @@ export default class CreateUserProfilePage {
   readonly page: Page;
   readonly createUserProfilePageTestData: typeof createUserProfilePageTestData;
   readonly buttonTextData: typeof buttonTextData;
+  private _unique_email: string;
   readonly page_heading: Locator;
   readonly title_text: Locator;
   readonly first_name_text: Locator;
@@ -33,6 +34,7 @@ export default class CreateUserProfilePage {
   constructor(page: Page) {
     this.page = page;
     this.createUserProfilePageTestData = createUserProfilePageTestData;
+    this._unique_email = '';
 
     //Locators
     this.page_heading = this.page
@@ -102,6 +104,15 @@ export default class CreateUserProfilePage {
         exact: true,
       }
     );
+  }
+
+  //Getters & Setters for Private Variables
+  async getUniqueEmail(): Promise<string> {
+    return this._unique_email;
+  }
+
+  async setUniqueEmail(value: string): Promise<void> {
+    this._unique_email = value;
   }
 
   async assertOnCreateUserProfilePage() {
