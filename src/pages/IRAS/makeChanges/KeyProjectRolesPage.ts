@@ -19,6 +19,13 @@ export default class KeyProjectRolesPage {
   readonly primary_sponsor_organisation_jsenabled_text: Locator;
   readonly primary_sponsor_organisation_suggestion_list_labels: Locator;
   readonly primary_sponsor_organisation_suggestion_listbox: Locator;
+  readonly primary_sponsor_organisation_jsdisabled_search_hint_label: Locator;
+  readonly primary_sponsor_organisation_jsdisabled_result_hint_label: Locator;
+  readonly primary_sponsor_organisation_jsdisabled_search_button: Locator;
+  readonly primary_sponsor_organisation_jsdisabled_search_results_labels: Locator;
+  readonly primary_sponsor_organisation_jsdisabled_search_results_radio_button: Locator;
+  readonly primary_sponsor_organisation_jsdisabled_narrow_down_label: Locator;
+  readonly primary_sponsor_organisation_jsdisabled_no_suggestions_label: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -54,5 +61,11 @@ export default class KeyProjectRolesPage {
   async assertOnKeyProjectRolesPage() {
     await expect(this.pageHeading).toBeVisible();
     await expect(this.pageHeading).toHaveText(this.keyProjectRolesPageTestData.Key_Project_roles_Page.heading);
+  }
+
+  async searchSponsorOrganisation() {
+    await this.page.pause();
+    await this.primary_sponsor_organisation_text.highlight();
+    await this.page.pause();
   }
 }
