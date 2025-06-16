@@ -8,7 +8,7 @@ Feature: User Administration: Manage Review Bodies - Create review body
         And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
         Then I can see the 'Create_Review_Body_Page'
 
-    @verifyCreateReviewBody
+    @verifyCreateReviewBody @rsp-3887
     Scenario Outline: Verify the user is able to create a new review body with valid data
         When I fill the new review body page using '<Add_Review_Body>'
         And I capture the page screenshot
