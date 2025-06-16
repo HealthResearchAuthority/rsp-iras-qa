@@ -4,29 +4,17 @@ import { chromium } from '@playwright/test';
 import CommonItemsPage from '../../pages/Common/CommonItemsPage';
 import HomePage from '../../pages/IRAS/HomePage';
 import LoginPage from '../../pages/Common/LoginPage';
-import { getAuthState, getReportFolderName, getTicketReferenceTags } from '../../utils/UtilFunctions';
-import path from 'path';
+import { getAuthState, getTicketReferenceTags } from '../../utils/UtilFunctions';
 import fs from 'fs';
 const { AfterStep, BeforeScenario } = createBdd(test);
 
 AfterStep(async ({ page, $step, $testInfo }) => {
-  const shouldCapture =
-    `${process.env.STEP_SCREENSHOT?.toLowerCase()}` === 'yes' || $step.title === 'I capture the page screenshot';
-  if (shouldCapture) {
-    const reportFolder = getReportFolderName();
-    const screenshotDir = path.join(process.cwd(), 'test-reports', reportFolder, 'screenshots');
-    if (!fs.existsSync(screenshotDir)) {
-      fs.mkdirSync(screenshotDir, { recursive: true });
-    }
-    const safeTitle = $testInfo.title.replace(/[^\w-]/g, '_');
-    const fileName = `${safeTitle}-${Date.now()}.png`;
-    const screenshotPath = path.join(screenshotDir, fileName);
-    await page.screenshot({ path: screenshotPath, fullPage: true });
-    const hyperlink = `<a href="file://${screenshotPath.replace(/\\/g, '/')}" target="_blank">View Screenshot</a>`;
-    await $testInfo.attach(`[step] ${$step.title}`, {
-      body: hyperlink,
-      contentType: 'text/html',
-    });
+  if (
+    `${process.env.STEP_SCREENSHOT?.toLowerCase()}` === 'yes' ||
+    `${$step.title}` === 'I capture the page screenshot'
+  ) {
+    const screenshot = await page.screenshot({ path: 'screenshot.png', fullPage: true });
+    await $testInfo.attach(`[step] ${$step.title}`, { body: screenshot, contentType: 'image/png' });
   }
 });
 
