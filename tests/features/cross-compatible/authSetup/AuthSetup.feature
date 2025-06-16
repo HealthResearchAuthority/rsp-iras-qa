@@ -11,6 +11,4 @@ Feature: Authenticate Test Users once only, before test run
       | System_Admin    | Home_Page |
       | Frontstage_User | Home_Page |
       | Backstage_User  | Home_Page |
-      | Admin_User      | Home_Page |
-      | Non_Admin_User  | Home_Page |
 

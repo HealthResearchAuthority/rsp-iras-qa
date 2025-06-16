@@ -36,7 +36,7 @@ Feature: User Administration: Manage Review Bodies - Edit review body
             | Email_Address     |
             | Description       |
 
-    @verifyEditSaveReviewBody
+    @verifyEditSaveReviewBody @rsp-3887
     Scenario Outline: Verify the user can edit the review body and save their changes
         And I can see the review body profile page
         And I capture the page screenshot

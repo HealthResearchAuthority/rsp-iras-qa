@@ -43,7 +43,7 @@
   "Valid_Data_All_Empty_Fields": {
     "short_project_title_text": "",
     "planned_project_end_day_text": "",
-    "planned_project_end_month_text": "",
+    "planned_project_end_month_text": "Choose month",
     "planned_project_end_year_text": ""
   },
   "Valid_Data_Title_Empty_Field": {
@@ -148,7 +148,7 @@
   "Invalid_All_Fields": {
     "short_project_title_text": "QA_Automation - Max short study title length one two three four five six seven eight nine ten one END",
     "planned_project_end_day_text": "32",
-    "planned_project_end_month_text": "13",
+    "planned_project_end_month_text": "Choose month",
     "planned_project_end_year_text": "228"
   },
   "Invalid_Data_Short_Project_Title_Max_Length": {
@@ -159,42 +159,32 @@
   },
   "Invalid_Day_Number": {
     "planned_project_end_day_text": "32",
-    "planned_project_end_month_text": "12",
+    "planned_project_end_month_text": "December",
     "planned_project_end_year_text": "2028"
   },
   "Invalid_Day_Letters": {
     "planned_project_end_day_text": "o1",
-    "planned_project_end_month_text": "1",
-    "planned_project_end_year_text": "2028"
-  },
-  "Invalid_Month_Number": {
-    "planned_project_end_day_text": "1",
-    "planned_project_end_month_text": "13",
-    "planned_project_end_year_text": "2028"
-  },
-  "Invalid_Month_Letters": {
-    "planned_project_end_day_text": "1",
-    "planned_project_end_month_text": "feb",
+    "planned_project_end_month_text": "January",
     "planned_project_end_year_text": "2028"
   },
   "Invalid_Year_Number_1": {
     "planned_project_end_day_text": "1",
-    "planned_project_end_month_text": "1",
+    "planned_project_end_month_text": "January",
     "planned_project_end_year_text": "28"
   },
   "Invalid_Year_Number_2": {
     "planned_project_end_day_text": "1",
-    "planned_project_end_month_text": "1",
+    "planned_project_end_month_text": "January",
     "planned_project_end_year_text": "'28"
   },
   "Invalid_Year_Letters": {
     "planned_project_end_day_text": "1",
-    "planned_project_end_month_text": "1",
+    "planned_project_end_month_text": "January",
     "planned_project_end_year_text": "'2ooo"
   },
   "Invalid_Date_Past": {
     "planned_project_end_day_text": "1",
-    "planned_project_end_month_text": "1",
+    "planned_project_end_month_text": "January",
     "planned_project_end_year_text": "'2020"
   },
   "Invalid_Date_Today": {
@@ -204,17 +194,17 @@
   },
   "Invalid_Date_No_Day": {
     "planned_project_end_day_text": "",
-    "planned_project_end_month_text": "1",
+    "planned_project_end_month_text": "January",
     "planned_project_end_year_text": "2028"
   },
   "Invalid_Date_No_Month": {
     "planned_project_end_day_text": "1",
-    "planned_project_end_month_text": "",
+    "planned_project_end_month_text": "Choose month",
     "planned_project_end_year_text": "2028"
   },
   "Invalid_Date_No_Year": {
     "planned_project_end_day_text": "1",
-    "planned_project_end_month_text": "1",
+    "planned_project_end_month_text": "January",
     "planned_project_end_year_text": ""
   }
 }

@@ -338,8 +338,6 @@ Feature: Create Amendment - Create Project - Review your answers
       | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_Title    | Enter_Links_Missing_Fields | Invalid_Data_Short_Project_Title_Min_Length | Title_Field_Error_Message       |
       | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_Title    | Enter_Links_Missing_Fields | Invalid_Day_Number                          | Date_Day_Field_Error_Message    |
       | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_Title    | Enter_Links_Missing_Fields | Invalid_Day_Letters                         | Date_Day_Field_Error_Message    |
-      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_Title    | Enter_Links_Missing_Fields | Invalid_Month_Number                        | Date_Month_Field_Error_Message  |
-      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_Title    | Enter_Links_Missing_Fields | Invalid_Month_Letters                       | Date_Month_Field_Error_Message  |
       | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_Title    | Enter_Links_Missing_Fields | Invalid_Year_Number_1                       | Date_Year_Field_Error_Message   |
       | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_Title    | Enter_Links_Missing_Fields | Invalid_Year_Number_2                       | Date_Year_Field_Error_Message   |
       | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_Title    | Enter_Links_Missing_Fields | Invalid_Year_Letters                        | Date_Year_Field_Error_Message   |
@@ -491,8 +489,6 @@ Feature: Create Amendment - Create Project - Review your answers
       | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_Title     | Invalid_Data_Short_Project_Title_Min_Length | Title_Field_Error_Message       |
       | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_Title     | Invalid_Day_Number                          | Date_Day_Field_Error_Message    |
       | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_Title     | Invalid_Day_Letters                         | Date_Day_Field_Error_Message    |
-      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_Title     | Invalid_Month_Number                        | Date_Month_Field_Error_Message  |
-      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_Title     | Invalid_Month_Letters                       | Date_Month_Field_Error_Message  |
       | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_Title     | Invalid_Year_Number_1                       | Date_Year_Field_Error_Message   |
       | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_Title     | Invalid_Year_Number_2                       | Date_Year_Field_Error_Message   |
       | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_Title     | Invalid_Year_Letters                        | Date_Year_Field_Error_Message   |
