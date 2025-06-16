@@ -376,7 +376,7 @@ Feature: User Administration: Manage Users - Create user
       | Valid_Data_In_All_Fields_Role_Operations | First_Name | Role_Operations | Missing_Mandatory_Field_Country_Role_Operations         | Missing_Mandatory_Field_Country_Role_Operations_Error         |
       | Valid_Data_In_All_Fields_Role_Operations | Last_Name  | Role_Operations | Missing_Mandatory_Field_Access_Required_Role_Operations | Missing_Mandatory_Field_Access_Required_Role_Operations_Error |
 
-  @rsp-3886 @verifyLastLoggedInDate @run
+  @rsp-3886 @verifyLastLoggedInDate
   Scenario Outline: Verify the last login date of user in homepage and manage users page
     And I fill the new user profile page using '<Add_User_Profile>'
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
@@ -384,17 +384,24 @@ Feature: User Administration: Manage Users - Create user
     When I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
     And I can see the newly created user record should be present in the list for '<Add_User_Profile>' with '<Status_Enabled>' status in the manage user page
     And I validate the last logged in is displayed blank for the new user who has not yet logged in to the application
+    And I capture the page screenshot
     Then I logged out from the system
     Then I have navigated to the '<Page>' as '<User_Front_Stage>'
+    And I capture the page screenshot
     And I keep note of the current login date
     Then I logged out from the system
     Then I have navigated to the '<Page>' as '<User_System_Admin>'
-    And I validate the last logged in is displayed as full date in home page
+    And I capture the page screenshot
     And I click the 'System_Administration' link on the 'Home_Page'
     And I click the 'Manage_Users' link on the 'System_Administration_Page'
     When I fill the search input for searching users in manage users page with '<Search_Query>' as the search query
     And I click the 'Search' button on the 'Manage_Users_Page'
     And I validate the last logged in is displayed as truncated date in manage users page
+    And I capture the page screenshot
+    Then I logged out from the system
+    Then I have navigated to the '<Page>' as '<User_System_Admin>'
+    And I validate the last logged in is displayed as full date in home page
+    And I capture the page screenshot
 
     Examples:
       | Add_User_Profile                       | Status_Enabled | User_Front_Stage | User_System_Admin | Page      | Search_Query           |
