@@ -1,4 +1,4 @@
-@adminUser @homePageSmokeFeature @Smoke
+@SysAdminUser @homePageSmokeFeature @Smoke
 Feature: As an Authenticated Admin User I have Access to Authorised Application Features
 
   Background:
@@ -10,6 +10,6 @@ Feature: As an Authenticated Admin User I have Access to Authorised Application 
     And I can see a 'Login' button on the 'Home_Page'
 
   @accessResearchAccountHomePageSmoke
-  Scenario: I am able to access the research account landing page
+  Scenario: I am able to access the my account home page
     Then I can see the 'Home_Page'
     And I can see project guidance text on the home_page
