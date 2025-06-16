@@ -44,7 +44,7 @@ BeforeScenario(
       const jsCommonItemsPage = new CommonItemsPage(jsPage);
       const jsHomePage = new HomePage(jsPage);
       const jsLoginPage = new LoginPage(jsPage);
-      const users = ['System_Admin', 'Frontstage_User', 'Backstage_User', 'Admin_User', 'Non_Admin_User'];
+      const users = ['System_Admin', 'Frontstage_User', 'Backstage_User'];
 
       for (const user of users) {
         await jsContext.clearCookies();
@@ -65,8 +65,6 @@ BeforeScenario(
         '@SysAdminUser': 'system_admin',
         '@FrontStageUser': 'frontstage_user',
         '@BackStageUser': 'backstage_user',
-        '@adminUser': 'admin_user',
-        '@nonAdminUser': 'non_admin_user',
       };
 
       for (const tag in tagToUserMap) {

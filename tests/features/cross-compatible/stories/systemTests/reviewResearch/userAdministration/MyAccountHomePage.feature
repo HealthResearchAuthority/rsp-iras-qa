@@ -33,9 +33,8 @@ Feature: My Account Home page
     Then I capture the page screenshot
 
     Examples:
-      | Validation_Text               | Navigation_Link_First | Navigation_Link |
-      | Label_Texts_System_Admin_Role | My_research           | Back            |
-  # | Label_Texts_Frontstage_User_Role | My_research           | Back            |
+      | Validation_Text                  | Navigation_Link_First | Navigation_Link |
+      | Label_Texts_Frontstage_User_Role | My_research           | Back            |
 
   @rsp-3821 @MyAccountHomepage @NoAuth
   Scenario Outline: Validate the workspaces in my account home page for different user roles
@@ -47,11 +46,10 @@ Feature: My Account Home page
     Then I logged out from the system
     Then I capture the page screenshot
     Examples:
-      | User           | Validation_Text                 |
-      | System_Admin   | Label_Texts_System_Admin_Role   |
-      # | Frontstage_User | Label_Texts_Frontstage_User_Role |
-      | Backstage_User | Label_Texts_Backstage_User_Role |
-      | Non_Admin_User | Label_Texts_Backstage_User_Role |
+      | User            | Validation_Text                  |
+      | System_Admin    | Label_Texts_System_Admin_Role    |
+      | Frontstage_User | Label_Texts_Frontstage_User_Role |
+      | Backstage_User  | Label_Texts_Backstage_User_Role  |
 
   @rsp-3821 @MyAccountHomepage @NoAuth
   Scenario Outline: Validate the access of system administration page and other user role
@@ -60,6 +58,7 @@ Feature: My Account Home page
     Then I logged out from the system
     Then I capture the page screenshot
     Examples:
-      | User           | Page                       |
-      | System_Admin   | System_Administration_Page |
-      | Non_Admin_User | Access_Denied_Page         |
+      | User            | Page                       |
+      | System_Admin    | System_Administration_Page |
+      | Frontstage_User | Access_Denied_Page         |
+      | Backstage_User  | Access_Denied_Page         |

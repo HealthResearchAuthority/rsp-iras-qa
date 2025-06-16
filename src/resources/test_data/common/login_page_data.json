@@ -11,14 +11,6 @@
     "username": "FutureIRAS.BackStage@hra.nhs.uk",
     "password": "`${process.env.BACKSTAGE_USER_PASS}`"
   },
-  "Admin_User": {
-    "username": "futureiras.automation@hra.nhs.uk",
-    "password": "`${process.env.ADMIN_USER_PASS}`"
-  },
-  "Non_Admin_User": {
-    "username": "future_iras_auto_admin_user@test.id.nihr.ac.uk",
-    "password": "`${process.env.NON_ADMIN_USER_PASS}`"
-  },
   "Login_Page": {
     "header": "This is the TEST Identity Gateway",
     "partial_link": "id.nihr.ac.uk/authenticationendpoint/login"
