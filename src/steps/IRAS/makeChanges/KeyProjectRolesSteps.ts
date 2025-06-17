@@ -125,7 +125,7 @@ Then(
 );
 
 Then(
-  'I type valid {string} for primary sponsor organisation suggestion box and validate the suggestion list along with {string}',
+  'I search with valid {string} for primary sponsor organisation search box and validate the search results along with {string}',
   async ({ keyProjectRolesPage, rtsPage }, datasetName: string, searchHintsDatasetName) => {
     const dataset = keyProjectRolesPage.keyProjectRolesPageTestData[datasetName];
     const searchHintDatasetName = keyProjectRolesPage.keyProjectRolesPageTestData[searchHintsDatasetName];
@@ -183,7 +183,7 @@ Then(
 );
 
 Then(
-  'I type invalid {string} for primary sponsor organisation suggestion box and validate the suggestion list along with {string}',
+  'I search with invalid {string} for primary sponsor organisation search box and validate the search results along with {string}',
   async ({ keyProjectRolesPage }, datasetName: string, searchHintsDatasetName) => {
     const dataset = keyProjectRolesPage.keyProjectRolesPageTestData[datasetName];
     const searchHintDatasetName = keyProjectRolesPage.keyProjectRolesPageTestData[searchHintsDatasetName];
