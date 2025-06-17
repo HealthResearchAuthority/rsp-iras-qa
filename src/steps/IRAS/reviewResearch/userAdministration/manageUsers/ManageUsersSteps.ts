@@ -1,16 +1,43 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../../hooks/CustomFixtures';
+import { Locator } from 'playwright/test';
 
 const { When, Then } = createBdd(test);
 
-When('I update user profile with {string}', async ({ commonItemsPage, editUserProfilePage }, datasetName: string) => {
-  const dataset = editUserProfilePage.editUserProfilePageTestData[datasetName];
-  for (const key in dataset) {
-    if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-      await commonItemsPage.fillUIComponent(dataset, key, editUserProfilePage);
+When(
+  'I update user profile with {string}',
+  async (
+    { commonItemsPage, editUserProfilePage, createUserProfilePage, userListReviewBodyPage },
+    datasetName: string
+  ) => {
+    const dataset = editUserProfilePage.editUserProfilePageTestData[datasetName];
+    if (datasetName.startsWith('Duplicate_Email_')) {
+      for (const key in dataset) {
+        if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+          if (key === 'email_address_text') {
+            const locator: Locator = createUserProfilePage[key];
+            const email = await userListReviewBodyPage.getUserEmail();
+            if (email.length != 0) {
+              await locator.fill(email[0]);
+            } else if ((await userListReviewBodyPage.getSearchKey()) != '') {
+              await locator.fill(await userListReviewBodyPage.getSearchKey());
+            } else if ((await createUserProfilePage.getUniqueEmail()) != '') {
+              await locator.fill(await createUserProfilePage.getUniqueEmail());
+            }
+          } else {
+            await commonItemsPage.fillUIComponent(dataset, key, createUserProfilePage);
+          }
+        }
+      }
+    } else {
+      for (const key in dataset) {
+        if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+          await commonItemsPage.fillUIComponent(dataset, key, editUserProfilePage);
+        }
+      }
     }
   }
-});
+);
 
 When(
   'I can see the newly created user record should be present in the list for {string} with {string} status in the manage user page',
@@ -139,6 +166,13 @@ When(
         break;
       case 'upper case':
         searchValue = (await manageUsersPage.getUserEmail(inputType, createUserProfilePage)).toUpperCase();
+        await createUserProfilePage.setUniqueEmail(searchValue);
+        break;
+      case 'remove QAAutomation prefix':
+        searchValue = (await manageUsersPage.getUserEmail(inputType, createUserProfilePage)).replace(
+          'QAAUTOMATION',
+          ''
+        );
         await createUserProfilePage.setUniqueEmail(searchValue);
         break;
       default:

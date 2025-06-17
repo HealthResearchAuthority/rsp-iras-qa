@@ -1,7 +1,7 @@
 import { createBdd } from 'playwright-bdd';
 import { test, expect } from '../../../../../hooks/CustomFixtures';
 import { generateUniqueEmail } from '../../../../../utils/UtilFunctions';
-import { Locator } from 'playwright';
+import { Locator } from 'playwright/test';
 
 const { Then, When } = createBdd(test);
 

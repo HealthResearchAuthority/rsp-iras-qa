@@ -12,7 +12,7 @@ import {
 const { Given, When, Then } = createBdd(test);
 import * as userProfileGeneratedataConfig from '../../resources/test_data/user_administration/testdata_generator/user_profile_generate_data_config.json';
 import { confirmArrayNotNull, getAuthState, getCurrentTimeFormatted } from '../../utils/UtilFunctions';
-import { Locator } from 'playwright';
+import { Locator } from 'playwright/test';
 import fs from 'fs';
 
 Then('I capture the page screenshot', async () => {});
@@ -472,7 +472,10 @@ Then(
 
 When(
   'I enter {string} into the search field',
-  async ({ commonItemsPage, reviewBodyProfilePage, createReviewBodyPage }, inputType: string) => {
+  async (
+    { commonItemsPage, reviewBodyProfilePage, createReviewBodyPage, createUserProfilePage },
+    inputType: string
+  ) => {
     let searchValue: string;
     switch (inputType) {
       case 'name of the previously used review body':
@@ -480,6 +483,9 @@ When(
         break;
       case 'name of the new review body':
         searchValue = await createReviewBodyPage.getUniqueOrgName();
+        break;
+      case 'name of the newly created user':
+        searchValue = await createUserProfilePage.getUniqueEmail();
         break;
       default:
         searchValue = inputType;

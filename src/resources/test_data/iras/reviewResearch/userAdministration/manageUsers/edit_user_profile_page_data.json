@@ -648,5 +648,17 @@
     "first_name_text": "First Name Test",
     "last_name_text": "Test Last Name",
     "email_address_text": "EmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExcee@examplecom"
+  },
+  "Duplicate_Email_Role_Operations": {
+    "title_text": "Mr",
+    "first_name_text": "QA Automation First Name Test Role_Operations",
+    "last_name_text": "Test Last Name Role_Operations",
+    "email_address_text": "",
+    "telephone_text": "07000000000",
+    "organisation_text": "QA Automation HRA Role_Operations",
+    "job_title_text": "Sr.Reviewer Role_Operations",
+    "role_checkbox": ["operations", "system administrator"],
+    "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+    "access_required_checkbox": ["Study Wide Review", "Research Ethics Committee", "CAG", "Technical Assurance"]
   }
 }

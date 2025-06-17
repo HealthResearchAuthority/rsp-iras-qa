@@ -317,3 +317,26 @@ Feature: User Administration: Manage user profiles, view and edit user profile
             | Leading_And_Trailing_White_Space_User_Data |
             | Trailing_White_Space_User_Data             |
 
+    @rsp-3952 @DuplicateEmailValidation @VerifyErrorMessagesInvalidData @EditUserProfileVerifyErrorMessagesInvalidData
+    Scenario Outline:  Validate error messages are displayed for duplicate email in edit user profile page
+        When I fill the search input for searching users in manage users page with '<Search_Query>' as the search query
+        And I capture the page screenshot
+        And I click the 'Search' button on the 'Manage_Users_Page'
+        And I capture the page screenshot
+        Then the system displays user records matching the search criteria
+        And I capture the page screenshot
+        When I enter 'QA Automation' into the search field
+        And I click the 'Search' button on the 'Manage_Users_Page'
+        And I select a 'QA Automation' User to View and Edit which is '<Status>'
+        Then I can see the user profile page
+        When I click the '<Edit_User_Field>' change link for '<User_Role>' on the user profile page
+        Then I can see the edit user profile page
+        And  I uncheck the previously selected checkboxes on the edit user profile page for '<Edit_User_Profile>' when the role is selected as operations
+        And I update user profile with '<Invalid_Data_Edit_User>'
+        And I click the 'Save' button on the 'Edit_User_Profile_Page'
+        Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Edit_User_Profile_Page'
+        And I capture the page screenshot
+        Examples:
+            | Search_Query                          | Edit_User_Profile                        | Edit_User_Field | User_Role  | Status  | Invalid_Data_Edit_User          | Field_And_Summary_Error_Message                    |
+            | Existing_QA_Automation_User_Email_One | Valid_Data_In_All_Fields_Role_Operations | title_text      | Operations | Enabled | Duplicate_Email_Role_Operations | Missing_Mandatory_Fields_Role_Not_Operations_Error |
+
