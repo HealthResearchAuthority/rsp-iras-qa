@@ -288,7 +288,7 @@ Feature: User Administration: Manage Users - Create user
             | Missing_Mandatory_Field_Country_Role_Operations           | Missing_Mandatory_Field_Country_Role_Operations_Error           |
             | Missing_Mandatory_Field_Access_Required_Role_Operations   | Missing_Mandatory_Field_Access_Required_Role_Operations_Error   |
             | Invalid_Character_Limit                                   | Invalid_Character_Limit_Error                                   |
-            | Invalid_Email_Data_Max_Char                               | Invalid_Character_Limit_field_Email_Address_Error               |
+            | Invalid_Email_Data_Max_Char                               | Invalid_Character_Limit_Field_Email_Address_Error               |
             | Incorrect_Format_Telephone_Data                           | Incorrect_Format_Field_Telephone_Error                          |
             | Incorrect_Format_Invalid_Character_Limit_Telephone_Data   | Incorrect_Format_Invalid_Character_Limit_Telephone_Error        |
             | Incorrect_Format_Invalid_Character_Limit_Email_Data       | Incorrect_Format_Invalid_Character_Limit_Email_Address_Error    |
