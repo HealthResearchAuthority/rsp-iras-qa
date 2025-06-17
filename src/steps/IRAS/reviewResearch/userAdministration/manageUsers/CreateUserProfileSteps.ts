@@ -42,9 +42,9 @@ When(
             const email = await userListReviewBodyPage.getUserEmail();
             if (email.length != 0) {
               await locator.fill(email[0]);
-            } else if ((await userListReviewBodyPage.getSearchKey()) === '') {
+            } else if ((await userListReviewBodyPage.getSearchKey()) != '') {
               await locator.fill(await userListReviewBodyPage.getSearchKey());
-            } else if ((await createUserProfilePage.getUniqueEmail()) === '') {
+            } else if ((await createUserProfilePage.getUniqueEmail()) != '') {
               await locator.fill(await createUserProfilePage.getUniqueEmail());
             }
           } else {

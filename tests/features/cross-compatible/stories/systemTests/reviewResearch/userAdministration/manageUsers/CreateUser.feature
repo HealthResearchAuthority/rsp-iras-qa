@@ -425,7 +425,7 @@ Feature: User Administration: Manage Users - Create user
             | Existing_QA_Automation_User_Email_Two   | Duplicate_Email_Role_Operations     | Duplicate_Email_Error           |
             | Existing_QA_Automation_User_Email_Three | Duplicate_Email_Role_Operations     | Duplicate_Email_Error           |
 
-    @rsp-3952 @DuplicateEmailValidation @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage
+    @rsp-3952 @DuplicateEmailValidation @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage @TestOnly
     Scenario Outline: Validate error messages are displayed for duplicate email in create user profile page after creating a user
         When I fill the new user profile page using '<Add_User_Profile>'
         And I capture the page screenshot
@@ -444,6 +444,30 @@ Feature: User Administration: Manage Users - Create user
         When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
         And I capture the page screenshot
         Then I can see the add a new user profile page
+        When I fill the new user profile page using '<Invalid_Data_User_Profile>' for field validation
+        And I click the 'Continue' button on the 'Create_User_Profile_Page'
+        Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Create_User_Profile_Page'
+        And I capture the page screenshot
+        When I click the 'Back' link on the 'Create_User_Profile_Page'
+        And I capture the page screenshot
+        Then I can see the 'Manage_Users_Page'
+        And I capture the page screenshot
+        When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
+        And I capture the page screenshot
+        Then I can see the add a new user profile page
+        And I update the 'newly created user' email to 'lower case'
+        When I fill the new user profile page using '<Invalid_Data_User_Profile>' for field validation
+        And I click the 'Continue' button on the 'Create_User_Profile_Page'
+        Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Create_User_Profile_Page'
+        And I capture the page screenshot
+        When I click the 'Back' link on the 'Create_User_Profile_Page'
+        And I capture the page screenshot
+        Then I can see the 'Manage_Users_Page'
+        And I capture the page screenshot
+        When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
+        And I capture the page screenshot
+        Then I can see the add a new user profile page
+        And I update the 'newly created user' email to 'upper case'
         When I fill the new user profile page using '<Invalid_Data_User_Profile>' for field validation
         And I click the 'Continue' button on the 'Create_User_Profile_Page'
         Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Create_User_Profile_Page'

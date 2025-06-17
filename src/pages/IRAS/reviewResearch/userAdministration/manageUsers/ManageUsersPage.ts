@@ -225,4 +225,16 @@ export default class ManageUsersPage {
       return datasetStatus.enabled_status;
     }
   }
+
+  async getUserEmail(inputType: string, createUserProfilePage: CreateUserProfilePage): Promise<string> {
+    let emailAddress: string;
+    switch (inputType) {
+      case 'newly created user':
+        emailAddress = await createUserProfilePage.getUniqueEmail();
+        break;
+      default:
+        emailAddress = inputType;
+    }
+    return emailAddress;
+  }
 }

@@ -127,3 +127,22 @@ When(
     await foundRecord.locator(manageUsersPage.view_edit_link).click();
   }
 );
+
+When(
+  'I update the {string} email to {string}',
+  async ({ manageUsersPage, createUserProfilePage }, inputType: string, caseValue: string) => {
+    let searchValue: string;
+    switch (caseValue) {
+      case 'lower case':
+        searchValue = (await manageUsersPage.getUserEmail(inputType, createUserProfilePage)).toLowerCase();
+        await createUserProfilePage.setUniqueEmail(searchValue);
+        break;
+      case 'upper case':
+        searchValue = (await manageUsersPage.getUserEmail(inputType, createUserProfilePage)).toUpperCase();
+        await createUserProfilePage.setUniqueEmail(searchValue);
+        break;
+      default:
+        searchValue = inputType;
+    }
+  }
+);
