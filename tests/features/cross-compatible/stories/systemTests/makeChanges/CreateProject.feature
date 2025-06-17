@@ -702,7 +702,7 @@ Feature: Create Amendment - Create Project
 
 
   @rsp-3939 @jsDisabled
-  Scenario Outline: Validate the primary sponsor organisation suggestion list in key project roles page
+  Scenario Outline: Validate the primary sponsor organisation search results in key project roles page
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
@@ -714,9 +714,9 @@ Feature: Create Amendment - Create Project
     And I capture the page screenshot
     When I authorise the rts api using '<RTS_API_Data>'
     Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation
-    And I type valid '<Sponsor_Organisation>' for primary sponsor organisation suggestion box and validate the suggestion list along with '<Search_Hint_Labels>'
+    And I search with valid '<Sponsor_Organisation>' for primary sponsor organisation search box and validate the search results along with '<Search_Hint_Labels>'
     And I capture the page screenshot
-    And I type invalid '<Sponsor_Organisation_Invalid>' for primary sponsor organisation suggestion box and validate the suggestion list along with '<Search_Hint_Labels>'
+    And I search with invalid '<Sponsor_Organisation_Invalid>' for primary sponsor organisation search box and validate the search results along with '<Search_Hint_Labels>'
     And I capture the page screenshot
 
     Examples:
