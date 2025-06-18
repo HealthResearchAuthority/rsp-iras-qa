@@ -518,7 +518,7 @@ export default class CommonItemsPage {
     await this.summaryErrorLinks
       .locator('..')
       .getByRole('link', { name: errorMessageFieldDataset[key], exact: true })
-      .click();
+      .click({ force: true });
     return element;
   }
 
