@@ -159,7 +159,3 @@ When(
     );
   }
 );
-
-When('I validate the last logged in is displayed as full date in home page', async ({ manageUsersPage, homePage }) => {
-  expect(await homePage.lastLoggedIn.textContent()).toContain(manageUsersPage.getLastLoggedInDateFull());
-});
