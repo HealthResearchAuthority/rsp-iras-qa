@@ -38,3 +38,7 @@ Then('I can see the workspaces in my account home page for {string}', async ({ h
   const actualLinks = await homePage.getMyWorkspaceLinksNames();
   expect(actualLinks).toEqual(expectedLinks);
 });
+
+Then('I validate the last logged in is displayed as full date in home page', async ({ manageUsersPage, homePage }) => {
+  expect(await homePage.lastLoggedIn.textContent()).toContain(manageUsersPage.getLastLoggedInDateFull());
+});

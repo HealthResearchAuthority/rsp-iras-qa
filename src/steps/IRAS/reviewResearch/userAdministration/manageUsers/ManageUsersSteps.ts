@@ -127,3 +127,35 @@ When(
     await foundRecord.locator(manageUsersPage.view_edit_link).click();
   }
 );
+
+When(
+  'I validate the last logged in is displayed blank for the new user who has not yet logged in to the application',
+  async ({ manageUsersPage }) => {
+    expect(await manageUsersPage.last_logged_in_from_list_label.textContent()).toBe('');
+  }
+);
+
+When('I keep note of the current login date', async ({ manageUsersPage }) => {
+  const today = new Date();
+  const formattedDateFull = new Intl.DateTimeFormat('en-GB', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  }).format(today);
+  const formattedDateTruncated = new Intl.DateTimeFormat('en-GB', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+  }).format(today);
+  manageUsersPage.setLastLoggedInDateFull(formattedDateFull);
+  manageUsersPage.setLastLoggedInDateTruncated(formattedDateTruncated);
+});
+
+When(
+  'I validate the last logged in is displayed as truncated date in manage users page',
+  async ({ manageUsersPage }) => {
+    expect(await manageUsersPage.last_logged_in_from_list_label.textContent()).toBe(
+      manageUsersPage.getLastLoggedInDateTruncated()
+    );
+  }
+);
