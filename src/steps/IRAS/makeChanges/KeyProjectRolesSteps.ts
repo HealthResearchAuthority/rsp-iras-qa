@@ -36,9 +36,6 @@ Then(
               await keyProjectRolesPage.page.waitForTimeout(2000);
               await keyProjectRolesPage.primary_sponsor_organisation_jsdisabled_search_results_radio_button.isVisible();
             }
-            const totalRadioButtons =
-              await keyProjectRolesPage.primary_sponsor_organisation_jsdisabled_search_results_radio_button.count();
-            console.log(`Total radio buttons in screen : ${totalRadioButtons}`);
             if (!(datasetName == 'Sponsor_Organisation_Text_Blank')) {
               await keyProjectRolesPage.primary_sponsor_organisation_jsdisabled_search_results_radio_button
                 .first()
