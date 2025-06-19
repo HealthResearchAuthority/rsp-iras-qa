@@ -1,6 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../hooks/CustomFixtures';
-import { sortArray } from '../../../utils/UtilFunctions';
+import { sortArray, confirmStringNotNull } from '../../../utils/UtilFunctions';
 import config from '../../../../playwright.config';
 
 const { Then } = createBdd(test);
@@ -61,8 +61,9 @@ Then(
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
         if (
-          key === 'primary_sponsor_organisation_jsdisabled_search_hint_label' &&
-          (config.projects?.[1].use?.javaScriptEnabled === true || $tags.includes('@jsEnabled'))
+          key == 'primary_sponsor_organisation_jsdisabled_search_hint_label' &&
+          (config.projects?.[1].use?.javaScriptEnabled || $tags.includes('@jsEnabled')) &&
+          !$tags.includes('@jsDisabled')
         ) {
           continue;
         }
@@ -149,33 +150,22 @@ Then(
       sponsorOrganisationNameListExpected = sponsorOrganisationNameListExpected.slice(0, 5);
     }
     await keyProjectRolesPage.primary_sponsor_organisation_text.fill(dataset['primary_sponsor_organisation_text']);
-    //update this locator
     await keyProjectRolesPage.primary_sponsor_organisation_jsdisabled_search_button.click();
     await keyProjectRolesPage.page.waitForTimeout(2000);
-    const sponsorOrganisationNameListActual =
+    const sponsorOrganisationNameListActualWithSpaces =
       await keyProjectRolesPage.primary_sponsor_organisation_jsdisabled_search_results_labels.allTextContents();
+    const sponsorOrganisationNameListActual = sponsorOrganisationNameListActualWithSpaces.map((str) => str.trim());
     expect(sponsorOrganisationNameListActual).toEqual(sponsorOrganisationNameListExpected);
-
-    //update this locator
-    const suggestionsHeaderLabelActual = await keyProjectRolesPage.primary_sponsor_organisation_suggestion_listbox
-      .first()
-      .getAttribute('data-before-suggestions');
-
-    const searchHintHeaderExpected = `${searchHintDatasetName.search_hint_header_prefix} '${dataset['primary_sponsor_organisation_text']}'`;
-
-    // remove this line
-    console.log(
-      `searchHintHeaderExpected : ${searchHintHeaderExpected} suggestionsHeaderLabelActual: ${suggestionsHeaderLabelActual}`
-    );
-    expect(suggestionsHeaderLabelActual).toEqual(searchHintHeaderExpected);
-    //update this locator
-    const suggestionsFooterLabelActual = await keyProjectRolesPage.primary_sponsor_organisation_suggestion_listbox
-      .first()
-      .getAttribute('data-after-suggestions');
-
-    const searchResultFooterLabelExpected = `${totalMatchingSponsorOrganisations} ${searchHintDatasetName.search_hint_footer_prefix} '${dataset['primary_sponsor_organisation_text']}'${searchHintDatasetName.search_hint_footer}`;
-    //searchHintDatasetName.suggestion_footer;
-    expect(suggestionsFooterLabelActual).toEqual(searchResultFooterLabelExpected);
+    const searchResultHeaderHintLabelActual = confirmStringNotNull(
+      await keyProjectRolesPage.primary_sponsor_organisation_jsdisabled_result_hint_label.textContent()
+    ).trim();
+    const searchResultHeaderHintLabelExpected = `${searchHintDatasetName.search_hint_header_prefix} '${dataset['primary_sponsor_organisation_text']}'`;
+    expect(searchResultHeaderHintLabelActual).toEqual(searchResultHeaderHintLabelExpected);
+    const searchResultFooterHintLabelActual = confirmStringNotNull(
+      await keyProjectRolesPage.primary_sponsor_organisation_jsdisabled_narrow_down_label.textContent()
+    ).trim();
+    const searchResultFooterHintLabelExpected = `${totalMatchingSponsorOrganisations} ${searchHintDatasetName.search_hint_footer_prefix} '${dataset['primary_sponsor_organisation_text']}'${searchHintDatasetName.search_hint_footer}`;
+    expect(searchResultFooterHintLabelActual).toEqual(searchResultFooterHintLabelExpected);
   }
 );
 
@@ -202,14 +192,23 @@ Then(
     const dataset = keyProjectRolesPage.keyProjectRolesPageTestData[datasetName];
     const searchHintDatasetName = keyProjectRolesPage.keyProjectRolesPageTestData[searchHintsDatasetName];
     await keyProjectRolesPage.primary_sponsor_organisation_text.fill(dataset['primary_sponsor_organisation_text']);
-    //update this locators
     await keyProjectRolesPage.primary_sponsor_organisation_jsdisabled_search_button.click();
     await keyProjectRolesPage.page.waitForTimeout(2000);
-    const noResultFoundLabelActual = await keyProjectRolesPage.primary_sponsor_organisation_suggestion_list_labels
-      .first()
-      .textContent();
-    const searchResultLabelExpected = `${searchHintDatasetName.no_suggestion_found} ${dataset['primary_sponsor_organisation_text']}`;
-    expect(noResultFoundLabelActual).toEqual(searchResultLabelExpected);
+    const noResultFoundLabelActual = confirmStringNotNull(
+      await keyProjectRolesPage.primary_sponsor_organisation_jsdisabled_no_suggestions_label.textContent()
+    ).trim();
+    const noResultFoundLabelExpected = `${searchHintDatasetName.no_suggestion_found} ${dataset['primary_sponsor_organisation_text']}`;
+    expect(noResultFoundLabelActual).toEqual(noResultFoundLabelExpected);
+  }
+);
+
+Then(
+  'I search with invalid min characters {string} for primary sponsor organisation search box',
+  async ({ keyProjectRolesPage }, datasetName: string) => {
+    const dataset = keyProjectRolesPage.keyProjectRolesPageTestData[datasetName];
+    await keyProjectRolesPage.primary_sponsor_organisation_text.fill(dataset['primary_sponsor_organisation_text']);
+    await keyProjectRolesPage.primary_sponsor_organisation_jsdisabled_search_button.click();
+    await keyProjectRolesPage.page.waitForTimeout(2000);
   }
 );
 

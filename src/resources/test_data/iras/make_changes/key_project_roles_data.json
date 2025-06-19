@@ -7,8 +7,7 @@
     "chief_investigator_email_label": "Email",
     "primary_sponsor_organisation_header_label": "Primary sponsor organisation",
     "sponsor_contact_header_label": "Sponsor contact",
-    "sponsor_contact_email_label": "Email",
-    "primary_sponsor_organisation_jsdisabled_search_hint_label": "You can search by..."
+    "sponsor_contact_email_label": "Email"
   },
   "Summary_Error_Message": {
     "error_message_summary_header": "There is a problem",
@@ -360,9 +359,12 @@
     "no_suggestion_found": "No suggestions found."
   },
   "Sponsor_Organisation_Search_Hint_Labels": {
-    "search_hint_header_prefix": "Results for",
+    "search_hint_header_prefix": "Results for ",
     "search_hint_footer_prefix": "sponsor organisations match your search for",
     "search_hint_footer": ". Try narrowing down your search if the organisation you are looking for is not listed",
     "no_suggestion_found": "No suggestions found for"
+  },
+  "Sponsor_Organisation_Jsdisabled_Min_Error_Message": {
+    "primary_sponsor_organisation_jsdisabled_min_error_message": "Please provide 3 or more characters to search sponsor organisation."
   }
 }
