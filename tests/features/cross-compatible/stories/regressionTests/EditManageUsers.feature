@@ -112,7 +112,7 @@ Feature: User Administration: Edit Manage Users
         Then I can see the 'System_Administration_Page'
         And I capture the page screenshot
 
-    @RegressionTestEditUserErrorMessagesInvalidData @KNOWN-DEFECT-Incorrect_Format_Field_Email_Address_Error @only
+    @RegressionTestEditUserErrorMessagesInvalidData @KNOWN-DEFECT-Incorrect_Format_Field_Email_Address_Error
     Scenario Outline: Validate relevant error messages are displayed for invalid data entry on the edit user profile page
         And I search and click on view edit link for existing 'Valid_Data_Role_Operations' user with '<Status>' status from the manage user page
         And I can see the user profile page
@@ -124,6 +124,7 @@ Feature: User Administration: Edit Manage Users
         And I update user profile with '<Invalid_Data_Edit_User>'
         And I click the 'Save' button on the 'Edit_User_Profile_Page'
         Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Edit_User_Profile_Page'
+        And I capture the page screenshot
         Examples:
             | Edit_User_Profile   | Edit_User_Field          | User_Role  | Status | Invalid_Data_Edit_User                                    | Field_And_Summary_Error_Message                                 |
             | All_Checkbox_Fields | title_text               | Operations | ACTIVE | Missing_Mandatory_Fields_Role_Not_Operations              | Missing_Mandatory_Fields_Role_Not_Operations_Error              |

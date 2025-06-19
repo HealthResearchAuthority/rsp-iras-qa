@@ -518,7 +518,7 @@ export default class CommonItemsPage {
     await this.summaryErrorLinks
       .locator('..')
       .getByRole('link', { name: errorMessageFieldDataset[key], exact: true })
-      .click({ force: true }); //results in a viewport error in pipeline, look into it
+      .click(); // force true results in a viewport error in pipeline, look into it
     return element;
   }
 
