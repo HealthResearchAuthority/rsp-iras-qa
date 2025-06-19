@@ -13,7 +13,6 @@ const pathToCreateUserTestDataJson =
   './src/resources/test_data/iras/reviewResearch/userAdministration/manageUsers/create_user_profile_page_data.json';
 let browserdata: any;
 let deviceType: string;
-const todayDate = new Date();
 const iPadMini6GenPortraitViewportConfig = { width: 744, height: 1133 };
 const iPadMini6GenLandscapeViewportConfig = { width: 1133, height: 744 };
 const samsungS20UltraPortraitViewportConfig = { width: 412, height: 915 };
@@ -380,15 +379,29 @@ export function getDeviceName() {
 }
 
 export function getReportFolderName() {
-  const day = todayDate.getDate();
-  const month = todayDate.toLocaleString('default', { month: 'short' });
-  const year = todayDate.getFullYear();
-  const hours = (todayDate.getHours() < 10 ? '0' : '') + todayDate.getHours();
-  const minutes = (todayDate.getMinutes() < 10 ? '0' : '') + todayDate.getMinutes();
-  const deviceName = getDeviceName().replace(/^./, (char) => char.toUpperCase());
-  const browserName = getBrowserType(deviceTypeVal).replace(/^./, (char) => char.toUpperCase());
-  const testReportFolderName =
-    day + '_' + month + '_' + year + ' ' + hours + minutes + ' ' + deviceName + '_' + browserName;
+  let testReportFolderName: string;
+  const tempDir = path.join(process.cwd(), '.temp');
+  const filePath = path.join(tempDir, 'testReportPathName.json');
+  if (fs.existsSync(tempDir) && fs.existsSync(filePath)) {
+    const filePath = path.resolve(tempDir, 'testReportPathName.json');
+    const configData = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+    testReportFolderName = configData['testReportFolderName'];
+  } else {
+    const todayDate = new Date();
+    const day = todayDate.getDate();
+    const month = todayDate.toLocaleString('default', { month: 'short' });
+    const year = todayDate.getFullYear();
+    const hours = (todayDate.getHours() < 10 ? '0' : '') + todayDate.getHours();
+    const minutes = (todayDate.getMinutes() < 10 ? '0' : '') + todayDate.getMinutes();
+    const deviceName = getDeviceName().replace(/^./, (char) => char.toUpperCase());
+    const browserName = getBrowserType(deviceTypeVal).replace(/^./, (char) => char.toUpperCase());
+    testReportFolderName =
+      day + '_' + month + '_' + year + ' ' + hours + minutes + ' ' + deviceName + '_' + browserName;
+    if (!fs.existsSync(tempDir)) {
+      fs.mkdirSync(tempDir);
+    }
+    fs.writeFileSync(path.join(tempDir, 'testReportPathName.json'), JSON.stringify({ testReportFolderName }));
+  }
   return testReportFolderName;
 }
 
