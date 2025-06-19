@@ -515,11 +515,10 @@ export default class CommonItemsPage {
 
   async clickErrorSummaryLink<PageObject>(errorMessageFieldDataset: JSON, key: string, page: PageObject) {
     const element: Locator = await page[key].first();
-    const link = this.summaryErrorLinks
+    await this.summaryErrorLinks
       .locator('..')
-      .getByRole('link', { name: errorMessageFieldDataset[key], exact: true });
-    await link.scrollIntoViewIfNeeded();
-    await link.click();
+      .getByRole('link', { name: errorMessageFieldDataset[key], exact: true })
+      .click({ force: true }); //results in a viewport error in pipeline, look into it
     return element;
   }
 
