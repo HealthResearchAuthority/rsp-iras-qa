@@ -158,3 +158,29 @@ Feature: User Administration: Manage Review Bodies - Add user to review body
             | Existing_QA_User_First_Name |
             | Existing_QA_User_Last_Name  |
             | Existing_QA_User_Email      |
+
+    @rsp-3890 @addUserReviewbodySearchMultiTerms
+    Scenario Outline: Verify the add user to review body search utilises AND logic to produce accurate search results
+        When I fill the search input for searching users in manage users page with '<Initial_Search_Query>' as the search query
+        And I capture the page screenshot
+        And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
+        And I capture the page screenshot
+        Then the system displays user records matching the search criteria
+        # Perhaps grab the email of a random user here to use as input into the next search query
+        # And the add users to review body search has returned results with the '<Search_Query>'
+        # Verify which step is suitable - expect multiple results + each result on first page contains expected First + Last name - make new/adapt if needed
+        And I capture the page screenshot
+        When I fill the search input for searching users in manage users page with '<Second_Search_Query>' as the search query
+        And I capture the page screenshot
+        And I click the 'Search' button on the 'Manage_Users_Page'
+        And I capture the page screenshot
+        Then the system displays user records matching the search criteria
+        # Verify which step is suitable - expect single result + result contains expected First + Last name + Email - make new/adapt if needed
+        And I capture the page screenshot
+        Examples:
+            | Initial_Search_Query                  | Second_Search_Query               |
+            | Existing_QA_User_First_Name_Last_Name | Existing_QA_User_First_Name_Email |
+
+        # Review @addUserReviewBodySearchFunctionResults scenario above
+        # final example may now be working correctly and could be used in place of this scenario
+        # If so add the email element as well to another example

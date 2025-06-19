@@ -317,3 +317,22 @@ Feature: User Administration: Manage user profiles, view and edit user profile
             | Leading_And_Trailing_White_Space_User_Data |
             | Trailing_White_Space_User_Data             |
 
+    @rsp-3890 @ManageUsersSearchMultiTerms
+    Scenario Outline: Verify the user search utilises AND logic to produce accurate search results
+        When I fill the search input for searching users in manage users page with '<Initial_Search_Query>' as the search query
+        And I capture the page screenshot
+        And I click the 'Search' button on the 'Manage_Users_Page'
+        And I capture the page screenshot
+        Then the system displays user records matching the search criteria
+        # Verify is current step is suitable - expect multiple results + each result on first page contains expected First + Last name - make new/adapt if needed
+        And I capture the page screenshot
+        When I fill the search input for searching users in manage users page with '<Second_Search_Query>' as the search query
+        And I capture the page screenshot
+        And I click the 'Search' button on the 'Manage_Users_Page'
+        And I capture the page screenshot
+        Then the system displays user records matching the search criteria
+        # Verify is current step is suitable - expect single result + result contains expected First + Last name + Email - make new/adapt if needed
+        And I capture the page screenshot
+        Examples:
+            | Initial_Search_Query                  | Second_Search_Query               |
+            | Existing_QA_User_First_Name_Last_Name | Existing_QA_User_First_Name_Email |

@@ -312,6 +312,29 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I click the 'Back' link on the 'Check_Remove_User_Profile_Page'
         Then I can see the user list page of the review body
 
+    @rsp-3890 @UserListReviewBodySearchMultiTerms
+    Scenario Outline: Verify the review body users search utilises AND logic to produce accurate search results
+        # Navigate directly to a Review body user page that I know has multipl users
+        # Fetch the first name, last name + email of a random user record which is displayed
+        When I fill the search input for searching users in manage users page with '<Initial_Search_Query>' as the search query
+        # When I enter 'Initial_Search_Query' into the search field - Verify Which is best to use - adapt/make new if needed
+        And I capture the page screenshot
+        And I click the 'Search' button on the 'Review_Body_User_List_Page'
+        And I capture the page screenshot
+        Then the system displays user records matching the search criteria
+        # Verify is current step is suitable - expect multiple results + each result on first page contains expected First + Last name - make new/adapt if needed
+        And I capture the page screenshot
+        When I fill the search input for searching users in manage users page with '<Second_Search_Query>' as the search query
+        # When I enter 'Second_Search_Query' into the search field - Verify Which is best to use - adapt/make new if needed
+        And I capture the page screenshot
+        And I click the 'Search' button on the 'Review_Body_User_List_Page'
+        And I capture the page screenshot
+        Then the system displays user records matching the search criteria
+        # Verify is current step is suitable - expect single result + result contains expected First + Last name + Email - make new/adapt if needed
+        And I capture the page screenshot
+        Examples:
+            | Initial_Search_Query            | Second_Search_Query            |
+            | Found_User_First_Name_Last_Name | Found_QA_User_First_Name_Email |
 
 
 
