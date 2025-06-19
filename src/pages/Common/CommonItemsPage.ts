@@ -518,7 +518,13 @@ export default class CommonItemsPage {
     await this.summaryErrorLinks
       .locator('..')
       .getByRole('link', { name: errorMessageFieldDataset[key], exact: true })
-      .click();
+      .hover()
+      .then(async () => {
+        await this.summaryErrorLinks
+          .locator('..')
+          .getByRole('link', { name: errorMessageFieldDataset[key], exact: true })
+          .click();
+      });
     return element;
   }
 
