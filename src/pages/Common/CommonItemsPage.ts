@@ -515,16 +515,12 @@ export default class CommonItemsPage {
 
   async clickErrorSummaryLink<PageObject>(errorMessageFieldDataset: JSON, key: string, page: PageObject) {
     const element: Locator = await page[key].first();
+    await this.page.waitForTimeout(1000);
     await this.summaryErrorLinks
       .locator('..')
       .getByRole('link', { name: errorMessageFieldDataset[key], exact: true })
-      .hover()
-      .then(async () => {
-        await this.summaryErrorLinks
-          .locator('..')
-          .getByRole('link', { name: errorMessageFieldDataset[key], exact: true })
-          .click();
-      });
+      .click();
+    await this.page.waitForTimeout(1000);
     return element;
   }
 
