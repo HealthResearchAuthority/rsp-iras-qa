@@ -41,12 +41,6 @@ export function getAuthState(user: string): string {
     case 'backstage_user':
       authState = 'auth-storage-states/backStageUser.json';
       break;
-    case 'admin_user':
-      authState = 'auth-storage-states/adminUser.json';
-      break;
-    case 'non_admin_user':
-      authState = 'auth-storage-states/nonAdminUser.json';
-      break;
     default:
       throw new Error(`${user} is not a valid option`);
   }

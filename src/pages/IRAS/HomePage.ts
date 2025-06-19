@@ -36,6 +36,7 @@ export default class HomePage {
   readonly technical_assurance_hint_label: Locator;
   readonly technical_assurance_reviewers_hint_label: Locator;
   readonly workspaceLinks: Locator;
+  readonly lastLoggedIn: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -85,6 +86,7 @@ export default class HomePage {
       this.technicalAssuranceReviewersLink
     );
     this.workspaceLinks = this.page.locator('.hra-card').getByRole('link');
+    this.lastLoggedIn = this.page.locator('.govuk-summary-list__value');
   }
 
   //using method is used to get hint label next to headers

@@ -48,12 +48,6 @@ export default class LoginPage {
     } else if (dataset === 'Backstage_User') {
       secretKey = process.env.BACKSTAGE_USER_SECRET_KEY;
       authTag = process.env.BACKSTAGE_USER_AUTH_TAG;
-    } else if (dataset === 'Admin_User') {
-      secretKey = process.env.ADMIN_USER_SECRET_KEY;
-      authTag = process.env.ADMIN_USER_AUTH_TAG;
-    } else if (dataset === 'Non_Admin_User') {
-      secretKey = process.env.NON_ADMIN_USER_SECRET_KEY;
-      authTag = process.env.NON_ADMIN_USER_AUTH_TAG;
     }
     const password = getDecryptedValue(
       resolveEnvExpression(this.loginPageTestData[dataset].password),

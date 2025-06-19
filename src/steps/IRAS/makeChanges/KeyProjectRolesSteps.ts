@@ -16,20 +16,34 @@ Then(
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
         if (key === 'primary_sponsor_organisation_text') {
-          dataset['primary_sponsor_organisation_jsenabled_text'] = dataset['primary_sponsor_organisation_text'];
-          await commonItemsPage.fillUIComponent(
-            dataset,
-            'primary_sponsor_organisation_jsenabled_text',
-            keyProjectRolesPage
-          );
-          if ($tags.includes('@jsEnabled') || config.projects?.[1].use?.javaScriptEnabled) {
+          if (
+            ($tags.includes('@jsEnabled') || config.projects?.[1].use?.javaScriptEnabled) &&
+            !$tags.includes('@jsDisabled')
+          ) {
+            dataset['primary_sponsor_organisation_jsenabled_text'] = dataset['primary_sponsor_organisation_text'];
+            await commonItemsPage.fillUIComponent(
+              dataset,
+              'primary_sponsor_organisation_jsenabled_text',
+              keyProjectRolesPage
+            );
             if (await keyProjectRolesPage.primary_sponsor_organisation_suggestion_list_labels.first().isVisible()) {
               await keyProjectRolesPage.primary_sponsor_organisation_suggestion_list_labels.first().click();
             }
           } else {
-            // new code to handle
-            console.log('Running inside the js disabled block');
-            keyProjectRolesPage.searchSponsorOrganisation();
+            await commonItemsPage.fillUIComponent(dataset, key, keyProjectRolesPage);
+            if (!(datasetName == 'Sponsor_Organisation_Text_Blank')) {
+              await keyProjectRolesPage.primary_sponsor_organisation_jsdisabled_search_button.click();
+              await keyProjectRolesPage.page.waitForTimeout(2000);
+              await keyProjectRolesPage.primary_sponsor_organisation_jsdisabled_search_results_radio_button.isVisible();
+            }
+            const totalRadioButtons =
+              await keyProjectRolesPage.primary_sponsor_organisation_jsdisabled_search_results_radio_button.count();
+            console.log(`Total radio buttons in screen : ${totalRadioButtons}`);
+            if (!(datasetName == 'Sponsor_Organisation_Text_Blank')) {
+              await keyProjectRolesPage.primary_sponsor_organisation_jsdisabled_search_results_radio_button
+                .first()
+                .click();
+            }
           }
           delete dataset['primary_sponsor_organisation_jsenabled_text'];
         } else {

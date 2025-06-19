@@ -15,15 +15,15 @@ export default class KeyProjectRolesPage {
   readonly chief_investigator_email_text_summary_error_label: Locator;
   readonly sponsor_contact_email_text_summary_error_label: Locator;
   readonly primary_sponsor_organisation_text: Locator;
+  readonly primary_sponsor_organisation_jsdisabled_search_button: Locator;
+  readonly primary_sponsor_organisation_jsdisabled_search_results_radio_button: Locator;
   readonly primary_sponsor_organisation_header_label: Locator;
   readonly primary_sponsor_organisation_jsenabled_text: Locator;
   readonly primary_sponsor_organisation_suggestion_list_labels: Locator;
   readonly primary_sponsor_organisation_suggestion_listbox: Locator;
   readonly primary_sponsor_organisation_jsdisabled_search_hint_label: Locator;
   readonly primary_sponsor_organisation_jsdisabled_result_hint_label: Locator;
-  readonly primary_sponsor_organisation_jsdisabled_search_button: Locator;
   readonly primary_sponsor_organisation_jsdisabled_search_results_labels: Locator;
-  readonly primary_sponsor_organisation_jsdisabled_search_results_radio_button: Locator;
   readonly primary_sponsor_organisation_jsdisabled_narrow_down_label: Locator;
   readonly primary_sponsor_organisation_jsdisabled_no_suggestions_label: Locator;
 
@@ -42,30 +42,39 @@ export default class KeyProjectRolesPage {
     this.sponsor_contact_email_text = this.page.getByTestId('IQA0313_Text');
     this.chief_investigator_email_text_summary_error_label = this.page.locator('a[href="#Questions[0].AnswerText"]');
     this.sponsor_contact_email_text_summary_error_label = this.page.locator('a[href="#Questions[2].AnswerText"]');
-    this.primary_sponsor_organisation_text = this.page.getByTestId('Questions_1_AnswerText');
-    this.primary_sponsor_organisation_header_label = this.page.locator(
-      'label[for="Questions_1_AnswerText_autocomplete"]'
-    );
+    this.primary_sponsor_organisation_text = this.page.getByRole('textbox', {
+      name: keyProjectRolesPageTestData.Label_Texts.primary_sponsor_organisation_header_label,
+    });
+    this.primary_sponsor_organisation_header_label = this.page.locator('label[for="sponsor_org_search"]');
     this.primary_sponsor_organisation_jsenabled_text = this.page.getByRole('combobox', {
       name: keyProjectRolesPageTestData.Label_Texts.primary_sponsor_organisation_header_label,
     });
+
+    this.primary_sponsor_organisation_text = this.page.getByRole('textbox', {
+      name: keyProjectRolesPageTestData.Label_Texts.primary_sponsor_organisation_header_label,
+    });
+
+    this.primary_sponsor_organisation_jsdisabled_search_button = this.page.getByRole('button', {
+      name: 'Search',
+    });
+
     this.primary_sponsor_organisation_suggestion_list_labels = this.primary_sponsor_organisation_jsenabled_text
       .locator('..')
       .getByRole('option');
     this.primary_sponsor_organisation_suggestion_listbox = this.primary_sponsor_organisation_jsenabled_text
       .locator('..')
       .getByRole('listbox');
+    this.primary_sponsor_organisation_jsdisabled_search_button = this.page.getByRole('button', {
+      name: 'Search',
+    });
+    this.primary_sponsor_organisation_jsdisabled_search_results_radio_button = this.page.locator(
+      'input[type="radio"][name="SponsorOrganisation"]'
+    );
   }
 
   //Page Methods
   async assertOnKeyProjectRolesPage() {
     await expect(this.pageHeading).toBeVisible();
     await expect(this.pageHeading).toHaveText(this.keyProjectRolesPageTestData.Key_Project_roles_Page.heading);
-  }
-
-  async searchSponsorOrganisation() {
-    await this.page.pause();
-    await this.primary_sponsor_organisation_text.highlight();
-    await this.page.pause();
   }
 }
