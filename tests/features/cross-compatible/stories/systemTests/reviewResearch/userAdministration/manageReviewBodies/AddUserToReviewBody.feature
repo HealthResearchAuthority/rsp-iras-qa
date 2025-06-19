@@ -166,9 +166,9 @@ Feature: User Administration: Manage Review Bodies - Add user to review body
         And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
         And I capture the page screenshot
         Then the system displays user records matching the search criteria
-        # Perhaps grab the email of a random user here to use as input into the next search query
         # And the add users to review body search has returned results with the '<Search_Query>'
         # Verify which step is suitable - expect multiple results + each result on first page contains expected First + Last name - make new/adapt if needed
+        # Perhaps grab the email of a random user here to use as input into the next search query
         And I capture the page screenshot
         When I fill the search input for searching users in manage users page with '<Second_Search_Query>' as the search query
         And I capture the page screenshot
