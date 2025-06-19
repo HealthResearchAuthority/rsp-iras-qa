@@ -112,7 +112,7 @@ Feature: User Administration: Edit Manage Users
         Then I can see the 'System_Administration_Page'
         And I capture the page screenshot
 
-    @RegressionTestEditUserErrorMessagesInvalidData @KNOWN-DEFECT-Incorrect_Format_Field_Email_Address_Error @only
+    @RegressionTestEditUserErrorMessagesInvalidData @KNOWN-DEFECT-Incorrect_Format_Field_Email_Address_Error
     Scenario Outline: Validate relevant error messages are displayed for invalid data entry on the edit user profile page
         And I search and click on view edit link for existing 'Valid_Data_Role_Operations' user with '<Status>' status from the manage user page
         And I can see the user profile page

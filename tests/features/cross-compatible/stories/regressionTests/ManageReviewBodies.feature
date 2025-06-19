@@ -275,7 +275,7 @@ Feature: User Administration: Manage Review Bodies
                         | Description_Field_Max_Data                   |
                         | Description_Field_between_Min_Max_Data       |
 
-        @RegressionTestVerifyValidationErrors
+        @RegressionTestVerifyValidationErrors @Smoke @only
         Scenario Outline: When min/max character field validation fails correct error messages display
                 And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
                 Then I can see the 'Create_Review_Body_Page'
