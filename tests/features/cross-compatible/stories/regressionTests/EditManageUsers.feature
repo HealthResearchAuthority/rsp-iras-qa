@@ -1,4 +1,4 @@
-@RegressionEditManageUsers @RegressionManageUsers @SysAdminUser @Regression @Smoke
+@RegressionEditManageUsers @RegressionManageUsers @SysAdminUser @Regression
 Feature: User Administration: Edit Manage Users
 
     Background:
@@ -112,7 +112,7 @@ Feature: User Administration: Edit Manage Users
         Then I can see the 'System_Administration_Page'
         And I capture the page screenshot
 
-    @RegressionTestEditUserErrorMessagesInvalidData @KNOWN-DEFECT-Incorrect_Format_Field_Email_Address_Error @only
+    @RegressionTestEditUserErrorMessagesInvalidData @KNOWN-DEFECT-Incorrect_Format_Field_Email_Address_Error
     Scenario Outline: Validate relevant error messages are displayed for invalid data entry on the edit user profile page
         And I search and click on view edit link for existing 'Valid_Data_Role_Operations' user with '<Status>' status from the manage user page
         And I can see the user profile page
@@ -138,4 +138,3 @@ Feature: User Administration: Edit Manage Users
             | All_Checkbox_Fields | email_address_text       | Operations | ACTIVE | Invalid_Email_Data_Max_Char                               | Invalid_Character_Limit_Field_Email_Address_Error               |
             | All_Checkbox_Fields | telephone_text           | Operations | ACTIVE | Incorrect_Format_Telephone_Data                           | Incorrect_Format_Field_Telephone_Error                          |
             # | All_Checkbox_Fields | email_address_text       | Operations | ACTIVE | Incorrect_Format_Email                                    | Incorrect_Format_Field_Email_Address_Error                      |
-# Test with JS on

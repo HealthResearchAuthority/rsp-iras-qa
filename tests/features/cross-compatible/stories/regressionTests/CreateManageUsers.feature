@@ -1,4 +1,4 @@
-@RegressionCreateManageUsers @RegressionManageUsers @SysAdminUser @Regression @Smoke
+@RegressionCreateManageUsers @RegressionManageUsers @SysAdminUser @Regression
 Feature: User Administration: Create Manage Users
 
     Background:
@@ -175,7 +175,7 @@ Feature: User Administration: Create Manage Users
             | Add_User_Profile                       |
             | Valid_Data_In_All_Fields_Role_Reviewer |
 
-    @RegressionTestCreateUserErrorMessagesInvalidData @KNOWN-DEFECT-Incorrect_Format_Field_Email_Address_Error @only
+    @RegressionTestCreateUserErrorMessagesInvalidData @KNOWN-DEFECT-Incorrect_Format_Field_Email_Address_Error
     Scenario Outline: Validate relevant error messages are displayed for invalid data entry on the create user profile page
         When I fill the new user profile page using '<Invalid_Data_User_Profile>' for field validation
         And I capture the page screenshot
