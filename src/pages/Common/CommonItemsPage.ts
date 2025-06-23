@@ -518,13 +518,16 @@ export default class CommonItemsPage {
     await this.summaryErrorLinks
       .locator('..')
       .getByRole('link', { name: errorMessageFieldDataset[key], exact: true })
-      .click();
+      .click({ force: true });
     return element;
   }
 
   async clickErrorSummaryLinkMultipleErrorField<PageObject>(errorMessage: any, key: string, page: PageObject) {
     const element: Locator = await page[key].first();
-    await this.summaryErrorLinks.locator('..').getByRole('link', { name: errorMessage, exact: true }).click();
+    await this.summaryErrorLinks
+      .locator('..')
+      .getByRole('link', { name: errorMessage, exact: true })
+      .click({ force: true });
     return element;
   }
 
