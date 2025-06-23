@@ -51,17 +51,10 @@ Then(
 
 Then(
   'I can see the {string} ui labels on the key project roles page',
-  async ({ commonItemsPage, keyProjectRolesPage, $tags }, datasetName: string) => {
+  async ({ commonItemsPage, keyProjectRolesPage }, datasetName: string) => {
     const dataset = keyProjectRolesPage.keyProjectRolesPageTestData[datasetName];
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        if (
-          key == 'primary_sponsor_organisation_jsdisabled_search_hint_label' &&
-          (config.projects?.[1].use?.javaScriptEnabled || $tags.includes('@jsEnabled')) &&
-          !$tags.includes('@jsDisabled')
-        ) {
-          continue;
-        }
         const labelVal = await commonItemsPage.getUiLabel(key, keyProjectRolesPage);
         expect(labelVal).toBe(dataset[key]);
       }

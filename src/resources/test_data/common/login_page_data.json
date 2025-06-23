@@ -1,6 +1,6 @@
 {
   "System_Admin": {
-    "username": "futureiras.automation@hra.nhs.uk",
+    "username": "FutureIRAS.SysAdmin@hra.nhs.uk",
     "password": "`${process.env.SYSTEM_ADMIN_PASS}`"
   },
   "Frontstage_User": {

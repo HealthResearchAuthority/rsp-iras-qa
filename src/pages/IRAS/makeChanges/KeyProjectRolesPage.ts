@@ -21,12 +21,10 @@ export default class KeyProjectRolesPage {
   readonly primary_sponsor_organisation_suggestion_listbox: Locator;
   readonly primary_sponsor_organisation_jsdisabled_search_button: Locator;
   readonly primary_sponsor_organisation_jsdisabled_search_results_radio_button: Locator;
-  readonly primary_sponsor_organisation_jsdisabled_search_hint_label: Locator;
   readonly primary_sponsor_organisation_jsdisabled_result_hint_label: Locator;
   readonly primary_sponsor_organisation_jsdisabled_search_results_labels: Locator;
   readonly primary_sponsor_organisation_jsdisabled_narrow_down_label: Locator;
   readonly primary_sponsor_organisation_jsdisabled_no_suggestions_label: Locator;
-  readonly primary_sponsor_organisation_jsdisabled_min_summary_error_message: Locator;
   readonly primary_sponsor_organisation_jsdisabled_min_error_message: Locator;
 
   //Initialize Page Objects
