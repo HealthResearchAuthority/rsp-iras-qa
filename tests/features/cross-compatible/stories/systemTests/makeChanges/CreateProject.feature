@@ -64,7 +64,7 @@ Feature: Create Amendment - Create Project
       | Navigation_Button_First | Navigation_Button_Second | Navigation_Link |
       | Create_Project_Record   | Start                    | Back            |
 
-  @rsp-1859 @rsp-3819
+  @rsp-1859 @rsp-3819 @ValidateUserAbleToFillProjectDetailsPAge
   Scenario Outline: Validate user is able to fill project details page for short project title and project end date
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
