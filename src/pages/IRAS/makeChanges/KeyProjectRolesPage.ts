@@ -15,12 +15,12 @@ export default class KeyProjectRolesPage {
   readonly chief_investigator_email_text_summary_error_label: Locator;
   readonly sponsor_contact_email_text_summary_error_label: Locator;
   readonly primary_sponsor_organisation_text: Locator;
-  readonly primary_sponsor_organisation_jsdisabled_search_button: Locator;
-  readonly primary_sponsor_organisation_jsdisabled_search_results_radio_button: Locator;
   readonly primary_sponsor_organisation_header_label: Locator;
   readonly primary_sponsor_organisation_jsenabled_text: Locator;
   readonly primary_sponsor_organisation_suggestion_list_labels: Locator;
   readonly primary_sponsor_organisation_suggestion_listbox: Locator;
+  readonly primary_sponsor_organisation_jsdisabled_search_button: Locator;
+  readonly primary_sponsor_organisation_jsdisabled_search_results_radio_button: Locator;
   readonly primary_sponsor_organisation_jsdisabled_search_hint_label: Locator;
   readonly primary_sponsor_organisation_jsdisabled_result_hint_label: Locator;
   readonly primary_sponsor_organisation_jsdisabled_search_results_labels: Locator;
@@ -61,9 +61,11 @@ export default class KeyProjectRolesPage {
       .locator('..')
       .getByRole('listbox');
     this.primary_sponsor_organisation_jsdisabled_search_results_radio_button = this.page.locator(
-      'input[type="radio"][name="SponsorOrganisation"]'
+      'input[type="radio"][name="SponsorOrgSearch.SelectedOrganisation"]'
     );
-    this.primary_sponsor_organisation_jsdisabled_result_hint_label = this.page.getByTestId('SponsorOrganisation-hint');
+    this.primary_sponsor_organisation_jsdisabled_result_hint_label = this.page.getByTestId(
+      'SponsorOrgSearch.SelectedOrganisation-hint'
+    );
     this.primary_sponsor_organisation_jsdisabled_narrow_down_label = this.page.locator('.govuk-inset-text');
     this.primary_sponsor_organisation_jsdisabled_search_results_labels = this.page
       .locator('.govuk-radios__item')

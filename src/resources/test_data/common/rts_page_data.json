@@ -82,5 +82,14 @@
     "role": "CRSPNSR@2.16.840.1.113883.5.110",
     "count": "1000",
     "offset": "3000"
+  },
+  "Sponsor_Organisation_Text_Exactly_Five_Results": {
+    "rts_base_url": "https://oat.fhir.rts.nihr.ac.uk/api/",
+    "content_type_json": "application/json",
+    "organisation_name": "Asi",
+    "active": true,
+    "role": "CRSPNSR@2.16.840.1.113883.5.110",
+    "count": "1000",
+    "offset": "3000"
   }
 }

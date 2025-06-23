@@ -53,8 +53,8 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Given I have navigated to the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     When I click the 'Start' button on the 'Create_Project_Record_Page'
-    And I fill the project details iras page with 'Valid_IRAS_ID_Max'
-    When I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
+    And I fill the unique iras id in project details iras page
+    When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
     Then I can see the key project roles page
