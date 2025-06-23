@@ -605,7 +605,7 @@ Feature: Create Amendment - Create Project - Review your answers
       | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | sponsor_contact   | Invalid_Email_Data_Two_Punycode                        | Field_Error_Sponsor_Email       |
       | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | sponsor_contact   | Invalid_Email_Data_Two_Max_Char                        | Field_Error_Sponsor_Email       |
 
-  @rsp-1867 @rsp-3819
+  @rsp-1867 @rsp-3819 @ValidateConfirmProjectFlow
   Scenario Outline: Validate user is able to see the project overview page when user submit the review answer page with all mandatory fields entered correctly
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
