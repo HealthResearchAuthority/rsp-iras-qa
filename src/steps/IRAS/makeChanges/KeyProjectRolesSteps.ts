@@ -31,15 +31,10 @@ Then(
             }
           } else {
             await commonItemsPage.fillUIComponent(dataset, key, keyProjectRolesPage);
-            if (!(datasetName == 'Sponsor_Organisation_Text_Blank')) {
-              await keyProjectRolesPage.primary_sponsor_organisation_jsdisabled_search_button.click();
-              await keyProjectRolesPage.page.waitForTimeout(2000);
+            await keyProjectRolesPage.primary_sponsor_organisation_jsdisabled_search_button.click();
+            await keyProjectRolesPage.page.waitForTimeout(2000);
+            if (dataset[key] !== '') {
               await keyProjectRolesPage.primary_sponsor_organisation_jsdisabled_search_results_radio_button.isVisible();
-            }
-            const totalRadioButtons =
-              await keyProjectRolesPage.primary_sponsor_organisation_jsdisabled_search_results_radio_button.count();
-            console.log(`Total radio buttons in screen : ${totalRadioButtons}`);
-            if (!(datasetName == 'Sponsor_Organisation_Text_Blank')) {
               await keyProjectRolesPage.primary_sponsor_organisation_jsdisabled_search_results_radio_button
                 .first()
                 .click();
@@ -161,11 +156,13 @@ Then(
     ).trim();
     const searchResultHeaderHintLabelExpected = `${searchHintDatasetName.search_hint_header_prefix} '${dataset['primary_sponsor_organisation_text']}'`;
     expect(searchResultHeaderHintLabelActual).toEqual(searchResultHeaderHintLabelExpected);
-    const searchResultFooterHintLabelActual = confirmStringNotNull(
-      await keyProjectRolesPage.primary_sponsor_organisation_jsdisabled_narrow_down_label.textContent()
-    ).trim();
-    const searchResultFooterHintLabelExpected = `${totalMatchingSponsorOrganisations} ${searchHintDatasetName.search_hint_footer_prefix} '${dataset['primary_sponsor_organisation_text']}'${searchHintDatasetName.search_hint_footer}`;
-    expect(searchResultFooterHintLabelActual).toEqual(searchResultFooterHintLabelExpected);
+    if (totalMatchingSponsorOrganisations > 5) {
+      const searchResultFooterHintLabelActual = confirmStringNotNull(
+        await keyProjectRolesPage.primary_sponsor_organisation_jsdisabled_narrow_down_label.textContent()
+      ).trim();
+      const searchResultFooterHintLabelExpected = `${totalMatchingSponsorOrganisations} ${searchHintDatasetName.search_hint_footer_prefix} '${dataset['primary_sponsor_organisation_text']}'${searchHintDatasetName.search_hint_footer}`;
+      expect(searchResultFooterHintLabelActual).toEqual(searchResultFooterHintLabelExpected);
+    }
   }
 );
 
