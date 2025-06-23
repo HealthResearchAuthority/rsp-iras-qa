@@ -64,7 +64,7 @@ Feature: Create Amendment - Create Project
       | Navigation_Button_First | Navigation_Button_Second | Navigation_Link |
       | Create_Project_Record   | Start                    | Back            |
 
-  @rsp-1859
+  @rsp-1859 @rsp-3819 @ValidateUserAbleToFillProjectDetailsPAge
   Scenario Outline: Validate user is able to fill project details page for short project title and project end date
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
@@ -72,6 +72,7 @@ Feature: Create Amendment - Create Project
     When I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
     Then I can see the project details title page
     Then I can see the '<Validation_Text>' ui labels on the project details title page
+    And I validate the planned project end date '<Dropdown_Values>'
     Then I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
@@ -82,21 +83,22 @@ Feature: Create Amendment - Create Project
     And I capture the page screenshot
 
     Examples:
-      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Add_Project | Navigation_Button_Third | Validation_Text | Project_Details_Title                         | Navigation_Link |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields                         | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields_VERA                    | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields_CSL                     | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields_Special_Character_One   | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields_Special_Character_Two   | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields_Special_Character_Three | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields_Special_Character_Four  | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields_PARTRIDGE               | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields_OMEGA                   | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields_Ferumoxytol             | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields_Special_Character_Five  | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields_Special_Character_Six   | Back            |
+      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Add_Project | Navigation_Button_Third | Validation_Text | Project_Details_Title                         | Navigation_Link | Dropdown_Values |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields                         | Back            | Dropdown_Values |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields_VERA                    | Back            | Dropdown_Values |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields_CSL                     | Back            | Dropdown_Values |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields_Special_Character_One   | Back            | Dropdown_Values |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields_Special_Character_Two   | Back            | Dropdown_Values |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields_Special_Character_Three | Back            | Dropdown_Values |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields_Special_Character_Four  | Back            | Dropdown_Values |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields_PARTRIDGE               | Back            | Dropdown_Values |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields_OMEGA                   | Back            | Dropdown_Values |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields_Ferumoxytol             | Back            | Dropdown_Values |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields_Special_Character_Five  | Back            | Dropdown_Values |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields_Special_Character_Six   | Back            | Dropdown_Values |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Empty_Fields                   | Back            | Dropdown_Values |
 
-  @rsp-1859
+  @rsp-1859 @rsp-3819
   Scenario Outline: Validate error messages displayed when user fill invalid data for short project title and project end date
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
@@ -123,7 +125,7 @@ Feature: Create Amendment - Create Project
       | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Invalid_Date_No_Month                       | Date_Month_Field_Error_Message  |
       | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Invalid_Date_No_Year                        | Date_Year_Field_Error_Message   |
 
-  @rsp-1859
+  @rsp-1859 @rsp-3819
   Scenario Outline: Validate error messages displayed when user fill todays date for project end date
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
@@ -428,7 +430,7 @@ Feature: Create Amendment - Create Project
       | Field_And_Summary_Error_Message       |
       | Field_Error_Message_Iras_Id_Duplicate |
 
-  @rsp-1863 @saveLaterProjectTitle
+  @rsp-1863 @rsp-3819 @saveLaterProjectTitle
   Scenario Outline: Verify product details are saved when user saves the record on create project - Project details page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -524,7 +526,7 @@ Feature: Create Amendment - Create Project
       | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_Only_Investigator_Email_Field |
       | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_Only_Sponsor_Email_Field      |
 
-  @rsp-1863 @saveLaterProjTitleValidations
+  @rsp-1863 @rsp-3819 @saveLaterProjTitleValidations
   Scenario Outline: Validate error messages when user saves the project with invalid data on project title page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
