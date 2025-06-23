@@ -278,7 +278,7 @@ Feature: User Administration: Manage user profiles, view and edit user profile
 
     @rsp-3456 @ManageUsersSearchNoResultsFound
     Scenario Outline: Verify no results found message will be presented to the user in manage users page if there is not a user on the system that matches the search criteria
-        When I fill the search input for searching users in manage users page with '<Search_Query>' as the search query
+        When I fill the search input for searching 'users' with '<Search_Query>' as the search query
         And I capture the page screenshot
         And I click the 'Search' button on the 'Manage_Users_Page'
         And I capture the page screenshot
@@ -290,7 +290,7 @@ Feature: User Administration: Manage user profiles, view and edit user profile
 
     @rsp-3456 @ManageUsersSearchAndPagination
     Scenario Outline: Verify search results and pagination in manage users page when user searches and navigate through each page
-        When I fill the search input for searching users in manage users page with '<Search_Query>' as the search query
+        When I fill the search input for searching 'users' with '<Search_Query>' as the search query
         And I capture the page screenshot
         And I click the 'Search' button on the 'Manage_Users_Page'
         And I capture the page screenshot
@@ -305,7 +305,7 @@ Feature: User Administration: Manage user profiles, view and edit user profile
     # out of scope for now
     @rsp-3456 @ManageUsersSearchLeadingAndTrailingWhiteSpaces @fail @skip
     Scenario Outline: Verify search results in manage users page when the search keyword contains leading and trailing white spaces
-        When I fill the search input for searching users in manage users page with '<Search_Query>' as the search query
+        When I fill the search input for searching 'users' with '<Search_Query>' as the search query
         And I capture the page screenshot
         And I click the 'Search' button on the 'Manage_Users_Page'
         And I capture the page screenshot
@@ -319,21 +319,20 @@ Feature: User Administration: Manage user profiles, view and edit user profile
 
     @rsp-3890 @ManageUsersSearchMultiTerms
     Scenario Outline: Verify the user search utilises AND logic to produce accurate search results
-        When I fill the search input for searching users in manage users page with '<Initial_Search_Query>' as the search query
+        When I fill the search input for searching 'users' with '<Initial_Search_Query>' as the search query
         And I capture the page screenshot
         And I click the 'Search' button on the 'Manage_Users_Page'
         And I capture the page screenshot
         Then the system displays user records matching the search criteria
-        # Verify is current step is suitable - expect multiple results + each result on first page contains expected First + Last name - make new/adapt if needed
-        # Perhaps grab the email of a random user here to use as input into the next search query
+        And the list displays 'multiple user records'
         And I capture the page screenshot
-        When I fill the search input for searching users in manage users page with '<Second_Search_Query>' as the search query
+        When I fill the search input for searching 'users' with '<Second_Search_Query>' as the search query
         And I capture the page screenshot
         And I click the 'Search' button on the 'Manage_Users_Page'
         And I capture the page screenshot
         Then the system displays user records matching the search criteria
-        # Verify is current step is suitable - expect single result + result contains expected First + Last name + Email - make new/adapt if needed
+        And the list displays 'a single user record'
         And I capture the page screenshot
         Examples:
-            | Initial_Search_Query                  | Second_Search_Query               |
-            | Existing_QA_User_First_Name_Last_Name | Existing_QA_User_First_Name_Email |
+            | Initial_Search_Query              | Second_Search_Query             |
+            | Admin_User_Full_Name_Email_Prefix | Admin_User_Full_Name_Full_Email |

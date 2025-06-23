@@ -4,7 +4,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
     Background:
         Given I have navigated to the 'System_Administration_Page'
         And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
-        Then I can see the 'Manage_Review_Bodies_Page'
+        And I can see the 'Manage_Review_Bodies_Page'
 
     @VerifyUserListCreateReviewBody @UserListReviewBodyNoUsersReviewBody
     Scenario: Verify the user can view the user list page of the newly created review body
@@ -314,34 +314,21 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
 
     @rsp-3890 @UserListReviewBodySearchMultiTerms
     Scenario Outline: Verify the review body users search utilises AND logic to produce accurate search results
-        # Navigate directly to a Review body user page that I know has multipl users
-        # Fetch the first name, last name + email of a random user record which is displayed
-        When I fill the search input for searching users in manage users page with '<Initial_Search_Query>' as the search query
-        # When I enter 'Initial_Search_Query' into the search field - Verify Which is best to use - adapt/make new if needed
+        And I navigate to the user list page of the 'User_Search_Test' review body
+        When I fill the search input for searching 'users' with '<Initial_Search_Query>' as the search query
         And I capture the page screenshot
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then the system displays user records matching the search criteria
-        # Verify is current step is suitable - expect multiple results + each result on first page contains expected First + Last name - make new/adapt if needed
+        And the list displays 'multiple user records'
         And I capture the page screenshot
-        When I fill the search input for searching users in manage users page with '<Second_Search_Query>' as the search query
-        # When I enter 'Second_Search_Query' into the search field - Verify Which is best to use - adapt/make new if needed
+        When I fill the search input for searching 'users' with '<Second_Search_Query>' as the search query
         And I capture the page screenshot
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then the system displays user records matching the search criteria
-        # Verify is current step is suitable - expect single result + result contains expected First + Last name + Email - make new/adapt if needed
+        And the list displays 'a single user record'
         And I capture the page screenshot
         Examples:
-            | Initial_Search_Query            | Second_Search_Query            |
-            | Found_User_First_Name_Last_Name | Found_QA_User_First_Name_Email |
-
-
-
-
-
-
-
-
-
-
+            | Initial_Search_Query              | Second_Search_Query             |
+            | Admin_User_Full_Name_Email_Prefix | Admin_User_Full_Name_Full_Email |
