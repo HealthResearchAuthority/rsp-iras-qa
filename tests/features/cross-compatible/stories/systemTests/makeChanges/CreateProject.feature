@@ -700,7 +700,6 @@ Feature: Create Amendment - Create Project
       | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Slash        | Sponsor_Organisation_Text_Blank | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation | Back            |
       | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Hyphen       | Sponsor_Organisation_Text_Blank | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation | Back            |
 
-
   @rsp-1861 @rsp-3670 @jsEnabled
   Scenario Outline: Validate the primary sponsor organisation suggestion list in key project roles page
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'

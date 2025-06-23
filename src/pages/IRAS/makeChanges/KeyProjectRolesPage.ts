@@ -1,10 +1,12 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as keyProjectRolesPageTestData from '../../../resources/test_data/iras/make_changes/key_project_roles_data.json';
+import * as buttonTextData from '../../../resources/test_data/common/button_text_data.json';
 
 //Declare Page Objects
 export default class KeyProjectRolesPage {
   readonly page: Page;
   readonly keyProjectRolesPageTestData: typeof keyProjectRolesPageTestData;
+  readonly buttonTextData: typeof buttonTextData;
   readonly pageHeading: Locator;
   readonly chief_investigator_header_label: Locator;
   readonly chief_investigator_email_label: Locator;
@@ -50,7 +52,7 @@ export default class KeyProjectRolesPage {
       name: keyProjectRolesPageTestData.Label_Texts.primary_sponsor_organisation_header_label,
     });
     this.primary_sponsor_organisation_jsdisabled_search_button = this.page.getByRole('button', {
-      name: 'Search',
+      name: buttonTextData.Key_Project_Roles_Page.Search,
     });
     this.primary_sponsor_organisation_suggestion_list_labels = this.primary_sponsor_organisation_jsenabled_text
       .locator('..')
