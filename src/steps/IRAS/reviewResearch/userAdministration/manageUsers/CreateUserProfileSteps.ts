@@ -34,29 +34,20 @@ When(
   'I fill the new user profile page using {string} for field validation',
   async ({ createUserProfilePage, commonItemsPage, userListReviewBodyPage }, datasetName: string) => {
     const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
-    if (datasetName.startsWith('Duplicate_Email_')) {
-      for (const key in dataset) {
-        if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-          if (key === 'email_address_text') {
-            const locator: Locator = createUserProfilePage[key];
-            const email = await userListReviewBodyPage.getUserEmail();
-            if (email.length != 0) {
-              await locator.fill(email[0]);
-            } else if ((await userListReviewBodyPage.getSearchKey()) != '') {
-              await locator.fill(await userListReviewBodyPage.getSearchKey());
-            } else if ((await createUserProfilePage.getUniqueEmail()) != '') {
-              await locator.fill(await createUserProfilePage.getUniqueEmail());
-            }
-          } else {
-            await commonItemsPage.fillUIComponent(dataset, key, createUserProfilePage);
-          }
+    const isDuplicateEmail = datasetName.startsWith('Duplicate_Email_');
+    for (const key in dataset) {
+      if (!Object.prototype.hasOwnProperty.call(dataset, key)) continue;
+      if (isDuplicateEmail && key === 'email_address_text') {
+        const locator = createUserProfilePage[key];
+        const [email] = await userListReviewBodyPage.getUserEmail();
+        const searchKey = await userListReviewBodyPage.getSearchKey();
+        const uniqueEmail = await createUserProfilePage.getUniqueEmail();
+        const valueToFill = email || searchKey || uniqueEmail;
+        if (valueToFill) {
+          await locator.fill(valueToFill);
         }
-      }
-    } else {
-      for (const key in dataset) {
-        if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-          await commonItemsPage.fillUIComponent(dataset, key, createUserProfilePage);
-        }
+      } else {
+        await commonItemsPage.fillUIComponent(dataset, key, createUserProfilePage);
       }
     }
   }
