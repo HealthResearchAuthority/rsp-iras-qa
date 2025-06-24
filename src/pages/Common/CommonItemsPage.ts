@@ -55,6 +55,7 @@ export default class CommonItemsPage {
   readonly topMenuBarLinks: Locator;
   readonly summaryErrorLinks: Locator;
   readonly tableRows: Locator;
+  readonly tableBodyRows: Locator;
   readonly hidden_next_button: Locator;
   readonly next_button: Locator;
   readonly fieldGroup: Locator;
@@ -92,6 +93,7 @@ export default class CommonItemsPage {
     this.qSetProgressBarStageLink = this.qSetProgressBarStage.locator('.stage-label').getByRole('button');
     this.qSetProgressBarActiveStageLink = this.qSetProgressBarActiveStage.locator('.stage-label').getByRole('button');
     this.tableRows = this.page.getByRole('table').getByRole('row');
+    this.tableBodyRows = this.page.getByRole('table').locator('tbody').getByRole('row');
     this.hidden_next_button = this.page.locator('[class="govuk-pagination__next"][style="visibility: hidden"]');
     this.search_text = this.page.locator('#SearchQuery');
     //Banner
@@ -520,6 +522,7 @@ export default class CommonItemsPage {
       .locator('..')
       .getByRole('link', { name: errorMessageFieldDataset[key], exact: true })
       .click();
+    await this.page.waitForTimeout(500); //added to prevent instability when looping through multiple summary links
     return element;
   }
 
@@ -752,7 +755,7 @@ export default class CommonItemsPage {
   }
 
   async filterResults(results: string[], searchTerms: string[]) {
-    return results.filter((result) => searchTerms.some((term) => result.toLowerCase().includes(term.toLowerCase())));
+    return results.filter((result) => searchTerms.every((term) => result.toLowerCase().includes(term.toLowerCase())));
   }
 
   async clearCheckboxes(dataset: any, keys: string[], commonItemsPage: any, createUserProfilePage: any) {

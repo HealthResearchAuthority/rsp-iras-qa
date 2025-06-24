@@ -80,21 +80,6 @@ Then(
 );
 
 When(
-  'I fill the search input for searching review bodies in manage review bodies page with {string} as the search query',
-  async ({ manageReviewBodiesPage, commonItemsPage, userListReviewBodyPage }, searchQueryName: string) => {
-    const searchQueryDataset =
-      manageReviewBodiesPage.manageReviewBodiesPageData.Search_For_Review_Bodies.Search_Queries[searchQueryName];
-    const searchKey = searchQueryDataset['search_input_text'];
-    if ((await commonItemsPage.tableRows.count()) >= 2) {
-      await userListReviewBodyPage.setSearchKey(searchKey);
-      await commonItemsPage.search_text.fill(searchKey);
-    } else {
-      throw new Error(`There are no items in list to search`);
-    }
-  }
-);
-
-When(
   'I can see the {string} should be present in the list with {string} status in the manage review bodies page',
   async (
     { manageReviewBodiesPage, createReviewBodyPage, reviewBodyProfilePage },

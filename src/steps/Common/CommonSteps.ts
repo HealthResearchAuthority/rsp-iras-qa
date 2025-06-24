@@ -568,7 +568,7 @@ When(
 When(
   'I enter the {string} as the search query into the search field',
   async ({ userListReviewBodyPage, commonItemsPage }, searchKey: string) => {
-    if ((await commonItemsPage.tableRows.count()) >= 2) {
+    if ((await commonItemsPage.tableBodyRows.count()) >= 1) {
       const userListBeforeSearch = await commonItemsPage.getAllUsersFromTheTable();
       const userValues: string[] = confirmArrayNotNull(userListBeforeSearch.get('searchResultValues'));
       await userListReviewBodyPage.setUserListBeforeSearch(userValues);

@@ -394,7 +394,7 @@ Feature: User Administration: Manage Users - Create user
     And I capture the page screenshot
     And I click the 'System_Administration' link on the 'Home_Page'
     And I click the 'Manage_Users' link on the 'System_Administration_Page'
-    When I fill the search input for searching users in manage users page with '<Search_Query>' as the search query
+    When I fill the search input for searching 'users' with '<Search_Query>' as the search query
     And I click the 'Search' button on the 'Manage_Users_Page'
     And I validate the last logged in is displayed as truncated date in manage users page
     And I capture the page screenshot

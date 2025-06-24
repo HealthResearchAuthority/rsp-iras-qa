@@ -105,7 +105,11 @@
       "Trailing_White_Space_User_Data": { "search_input_text": "Atul Patel " },
       "Back_Stage_User_Email": { "search_input_text": "FutureIRAS.BackStage@hra.nhs.uk" },
       "Front_Stage_User_Email": { "search_input_text": "FutureIRAS.SysAdmin@hra.nhs.uk" },
-      "System_Admin_User_Email": { "search_input_text": "futureiras.automation@hra.nhs.uk" }
+      "System_Admin_User_Email": { "search_input_text": "futureiras.automation@hra.nhs.uk" },
+      "Admin_User_Full_Name_Email_Prefix": { "search_input_text": "auto admin future_iras_auto_admin_user" },
+      "Admin_User_Full_Name_Full_Email": {
+        "search_input_text": "auto admin future_iras_auto_admin_user@test.id.nihr.ac.uk"
+      }
     }
   }
 }

@@ -4,7 +4,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
     Background:
         Given I have navigated to the 'System_Administration_Page'
         And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
-        Then I can see the 'Manage_Review_Bodies_Page'
+        And I can see the 'Manage_Review_Bodies_Page'
 
     @VerifyUserListCreateReviewBody @UserListReviewBodyNoUsersReviewBody
     Scenario: Verify the user can view the user list page of the newly created review body
@@ -114,7 +114,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
         And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
         Then I can see the user list page of the review body
-        When I enter the 'Email Address' of the 'last' user shown on the current review body users list, into the search field
+        When I enter the 'Email_Address' of the 'last' user shown on the current review body users list, into the search field
         And I capture the page screenshot
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
@@ -155,7 +155,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
         And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
         Then I can see the user list page of the review body
-        When I enter the 'Email Address' of the 'last' user shown on the current review body users list, into the search field
+        When I enter the 'Email_Address' of the 'last' user shown on the current review body users list, into the search field
         And I capture the page screenshot
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
@@ -169,7 +169,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I click the 'Remove_Another_User_From_The_Review_Body' link on the 'Confirmation_Page'
         And I capture the page screenshot
         Then I can see the user list page of the review body
-        When I enter the 'Email Address' of the 'last' user shown on the current review body users list, into the search field
+        When I enter the 'Email_Address' of the 'last' user shown on the current review body users list, into the search field
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then the system displays search results matching the search criteria
@@ -206,7 +206,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
         And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
         And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
-        When I enter the 'Email Address' of the 'last' user shown on the current review body users list, into the search field
+        When I enter the 'Email_Address' of the 'last' user shown on the current review body users list, into the search field
         And I capture the page screenshot
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
@@ -245,7 +245,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
         And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
         And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
-        When I enter the 'Email Address' of the 'last' user shown on the current review body users list, into the search field
+        When I enter the 'Email_Address' of the 'last' user shown on the current review body users list, into the search field
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then the system displays search results matching the search criteria
@@ -276,7 +276,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
         And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
         And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
-        When I enter the 'Email Address' of the 'last' user shown on the current review body users list, into the search field
+        When I enter the 'Email_Address' of the 'last' user shown on the current review body users list, into the search field
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then the system displays search results matching the search criteria
@@ -312,13 +312,23 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I click the 'Back' link on the 'Check_Remove_User_Profile_Page'
         Then I can see the user list page of the review body
 
-
-
-
-
-
-
-
-
-
-
+    @rsp-3890 @UserListReviewBodySearchMultiTerms
+    Scenario Outline: Verify the review body users search utilises AND logic to produce accurate search results
+        And I navigate to the user list page of the 'User_Search_Test' review body
+        When I fill the search input for searching 'users' with '<Initial_Search_Query>' as the search query
+        And I capture the page screenshot
+        And I click the 'Search' button on the 'Review_Body_User_List_Page'
+        And I capture the page screenshot
+        Then the system displays user records matching the search criteria
+        And the list displays 'multiple user records'
+        And I capture the page screenshot
+        When I fill the search input for searching 'users' with '<Second_Search_Query>' as the search query
+        And I capture the page screenshot
+        And I click the 'Search' button on the 'Review_Body_User_List_Page'
+        And I capture the page screenshot
+        Then the system displays user records matching the search criteria
+        And the list displays 'a single user record'
+        And I capture the page screenshot
+        Examples:
+            | Initial_Search_Query              | Second_Search_Query             |
+            | Admin_User_Full_Name_Email_Prefix | Admin_User_Full_Name_Full_Email |
