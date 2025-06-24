@@ -181,7 +181,7 @@ export default class ReviewBodyProfilePage {
   async clickOnChangeButton(fieldKey: string) {
     const locatorName = fieldKey.toLowerCase() + '_change_link';
     await expect(this[locatorName]).toBeInViewport();
-    await this[locatorName].click({ force: true });
+    await this[locatorName].click();
   }
 
   //Getters & Setters for Private Variables
