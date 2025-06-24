@@ -132,25 +132,13 @@ When(
 When(
   'I update the {string} email to {string}',
   async ({ manageUsersPage, createUserProfilePage }, inputType: string, caseValue: string) => {
-    let searchValue: string;
-    switch (caseValue) {
-      case 'lower case':
-        searchValue = (await manageUsersPage.getUserEmail(inputType, createUserProfilePage)).toLowerCase();
-        await createUserProfilePage.setUniqueEmail(searchValue);
-        break;
-      case 'upper case':
-        searchValue = (await manageUsersPage.getUserEmail(inputType, createUserProfilePage)).toUpperCase();
-        await createUserProfilePage.setUniqueEmail(searchValue);
-        break;
-      case 'remove QAAutomation prefix':
-        searchValue = (await manageUsersPage.getUserEmail(inputType, createUserProfilePage)).replace(
-          'QAAUTOMATION',
-          ''
-        );
-        await createUserProfilePage.setUniqueEmail(searchValue);
-        break;
-      default:
-        searchValue = inputType;
+    const email = await manageUsersPage.getUserEmail(inputType, createUserProfilePage);
+    if (caseValue === 'lower case') {
+      await createUserProfilePage.setUniqueEmail(email.toLowerCase());
+    } else if (caseValue === 'upper case') {
+      await createUserProfilePage.setUniqueEmail(email.toUpperCase());
+    } else if (caseValue === 'remove QAAutomation prefix') {
+      await createUserProfilePage.setUniqueEmail(email.replace('QAAUTOMATION', ''));
     }
   }
 );

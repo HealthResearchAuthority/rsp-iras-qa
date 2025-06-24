@@ -248,13 +248,13 @@ export default class ManageUsersPage {
 
   async getUserEmail(inputType: string, createUserProfilePage: CreateUserProfilePage): Promise<string> {
     let emailAddress: string;
-    switch (inputType) {
-      case 'newly created user':
-        emailAddress = await createUserProfilePage.getUniqueEmail();
-        break;
-      default:
-        emailAddress = inputType;
+
+    if (inputType === 'newly created user') {
+      emailAddress = await createUserProfilePage.getUniqueEmail();
+    } else {
+      emailAddress = inputType;
     }
+
     return emailAddress;
   }
 }
