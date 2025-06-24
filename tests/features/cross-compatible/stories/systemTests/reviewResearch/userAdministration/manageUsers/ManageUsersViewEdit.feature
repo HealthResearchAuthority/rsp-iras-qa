@@ -184,7 +184,7 @@ Feature: User Administration: Manage user profiles, view and edit user profile
             | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | Enabled | Missing_Mandatory_Field_Country_Role_Operations           | Missing_Mandatory_Field_Country_Role_Operations_Error           |
             | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | Enabled | Missing_Mandatory_Field_Access_Required_Role_Operations   | Missing_Mandatory_Field_Access_Required_Role_Operations_Error   |
             | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | Enabled | Invalid_Character_Limit                                   | Invalid_Character_Limit_Error                                   |
-            | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | Enabled | Invalid_Email_Data_Max_Char                               | Invalid_Character_Limit_field_Email_Address_Error               |
+            | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | Enabled | Invalid_Email_Data_Max_Char                               | Invalid_Character_Limit_Field_Email_Address_Error               |
             | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | Enabled | Incorrect_Format_Telephone_Data                           | Incorrect_Format_Field_Telephone_Error                          |
             | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | Enabled | Incorrect_Format_Invalid_Character_Limit_Telephone_Data   | Incorrect_Format_Invalid_Character_Limit_Telephone_Error        |
             | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | Enabled | Incorrect_Format_Invalid_Character_Limit_Email_Data       | Incorrect_Format_Invalid_Character_Limit_Email_Address_Error    |
@@ -278,7 +278,7 @@ Feature: User Administration: Manage user profiles, view and edit user profile
 
     @rsp-3456 @ManageUsersSearchNoResultsFound
     Scenario Outline: Verify no results found message will be presented to the user in manage users page if there is not a user on the system that matches the search criteria
-        When I fill the search input for searching users in manage users page with '<Search_Query>' as the search query
+        When I fill the search input for searching 'users' with '<Search_Query>' as the search query
         And I capture the page screenshot
         And I click the 'Search' button on the 'Manage_Users_Page'
         And I capture the page screenshot
@@ -290,7 +290,7 @@ Feature: User Administration: Manage user profiles, view and edit user profile
 
     @rsp-3456 @ManageUsersSearchAndPagination
     Scenario Outline: Verify search results and pagination in manage users page when user searches and navigate through each page
-        When I fill the search input for searching users in manage users page with '<Search_Query>' as the search query
+        When I fill the search input for searching 'users' with '<Search_Query>' as the search query
         And I capture the page screenshot
         And I click the 'Search' button on the 'Manage_Users_Page'
         And I capture the page screenshot
@@ -305,7 +305,7 @@ Feature: User Administration: Manage user profiles, view and edit user profile
     # out of scope for now
     @rsp-3456 @ManageUsersSearchLeadingAndTrailingWhiteSpaces @fail @skip
     Scenario Outline: Verify search results in manage users page when the search keyword contains leading and trailing white spaces
-        When I fill the search input for searching users in manage users page with '<Search_Query>' as the search query
+        When I fill the search input for searching 'users' with '<Search_Query>' as the search query
         And I capture the page screenshot
         And I click the 'Search' button on the 'Manage_Users_Page'
         And I capture the page screenshot
@@ -316,3 +316,23 @@ Feature: User Administration: Manage user profiles, view and edit user profile
             | Leading_White_Space_User_Data              |
             | Leading_And_Trailing_White_Space_User_Data |
             | Trailing_White_Space_User_Data             |
+
+    @rsp-3890 @ManageUsersSearchMultiTerms
+    Scenario Outline: Verify the user search utilises AND logic to produce accurate search results
+        When I fill the search input for searching 'users' with '<Initial_Search_Query>' as the search query
+        And I capture the page screenshot
+        And I click the 'Search' button on the 'Manage_Users_Page'
+        And I capture the page screenshot
+        Then the system displays user records matching the search criteria
+        And the list displays 'multiple user records'
+        And I capture the page screenshot
+        When I fill the search input for searching 'users' with '<Second_Search_Query>' as the search query
+        And I capture the page screenshot
+        And I click the 'Search' button on the 'Manage_Users_Page'
+        And I capture the page screenshot
+        Then the system displays user records matching the search criteria
+        And the list displays 'a single user record'
+        And I capture the page screenshot
+        Examples:
+            | Initial_Search_Query              | Second_Search_Query             |
+            | Admin_User_Full_Name_Email_Prefix | Admin_User_Full_Name_Full_Email |

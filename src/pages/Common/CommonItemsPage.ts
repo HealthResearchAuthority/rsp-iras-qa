@@ -16,6 +16,7 @@ import BookingPage from '../IRAS/questionSet/BookingPage';
 import ChildrenPage from '../IRAS/questionSet/ChildrenPage';
 import { PageObjectDataName } from '../../utils/CustomTypes';
 import { confirmArrayNotNull, confirmStringNotNull, removeUnwantedWhitespace } from '../../utils/UtilFunctions';
+import sharp from 'sharp';
 
 //Declare Page Objects
 export default class CommonItemsPage {
@@ -54,6 +55,7 @@ export default class CommonItemsPage {
   readonly topMenuBarLinks: Locator;
   readonly summaryErrorLinks: Locator;
   readonly tableRows: Locator;
+  readonly tableBodyRows: Locator;
   readonly hidden_next_button: Locator;
   readonly next_button: Locator;
   readonly fieldGroup: Locator;
@@ -91,6 +93,7 @@ export default class CommonItemsPage {
     this.qSetProgressBarStageLink = this.qSetProgressBarStage.locator('.stage-label').getByRole('button');
     this.qSetProgressBarActiveStageLink = this.qSetProgressBarActiveStage.locator('.stage-label').getByRole('button');
     this.tableRows = this.page.getByRole('table').getByRole('row');
+    this.tableBodyRows = this.page.getByRole('table').locator('tbody').getByRole('row');
     this.hidden_next_button = this.page.locator('[class="govuk-pagination__next"][style="visibility: hidden"]');
     this.search_text = this.page.locator('#SearchQuery');
     //Banner
@@ -519,6 +522,7 @@ export default class CommonItemsPage {
       .locator('..')
       .getByRole('link', { name: errorMessageFieldDataset[key], exact: true })
       .click();
+    await this.page.waitForTimeout(500); //added to prevent instability when looping through multiple summary links
     return element;
   }
 
@@ -760,5 +764,39 @@ export default class CommonItemsPage {
         await commonItemsPage.clearUIComponent(dataset, key, createUserProfilePage);
       }
     }
+  }
+
+  async captureLargeSizeScreenshot(page: Page, outputFile: string) {
+    const viewportHeight = page.viewportSize()?.height || 800;
+    const scrollHeight = await page.evaluate(() => {
+      return document.documentElement.scrollHeight;
+    });
+    const totalParts = Math.ceil(scrollHeight / viewportHeight);
+    const screenshotBuffers: Buffer[] = [];
+    for (let i = 0; i < totalParts; i++) {
+      const scrollY = i * viewportHeight;
+      await page.evaluate((y) => window.scrollTo(0, y), scrollY);
+      await page.waitForTimeout(300);
+      const buf = await page.screenshot();
+      screenshotBuffers.push(buf);
+    }
+    const images = await Promise.all(screenshotBuffers.map((b) => sharp(b).metadata()));
+    const width = images[0].width!;
+    const heights = images.map((i) => i.height!);
+    const totalHeight = heights.reduce((a, b) => a + b, 0);
+    const stitchedImage = sharp({
+      create: {
+        width,
+        height: totalHeight,
+        channels: 4,
+        background: { r: 255, g: 255, b: 255, alpha: 1 },
+      },
+    });
+    const composites = screenshotBuffers.map((input, index) => ({
+      input,
+      top: heights.slice(0, index).reduce((a, b) => a + b, 0),
+      left: 0,
+    }));
+    await stitchedImage.composite(composites).toFile(outputFile);
   }
 }

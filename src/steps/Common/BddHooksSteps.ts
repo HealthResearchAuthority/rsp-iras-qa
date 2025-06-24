@@ -4,17 +4,35 @@ import { chromium } from '@playwright/test';
 import CommonItemsPage from '../../pages/Common/CommonItemsPage';
 import HomePage from '../../pages/IRAS/HomePage';
 import LoginPage from '../../pages/Common/LoginPage';
-import { getAuthState, getTicketReferenceTags } from '../../utils/UtilFunctions';
+import { getAuthState, getReportFolderName, getTicketReferenceTags } from '../../utils/UtilFunctions';
 import fs from 'fs';
+import path from 'path';
 const { AfterStep, BeforeScenario } = createBdd(test);
 
-AfterStep(async ({ page, $step, $testInfo }) => {
+AfterStep(async ({ page, $step, $testInfo, commonItemsPage }) => {
   if (
     `${process.env.STEP_SCREENSHOT?.toLowerCase()}` === 'yes' ||
     `${$step.title}` === 'I capture the page screenshot'
   ) {
-    const screenshot = await page.screenshot({ path: 'screenshot.png', fullPage: true });
-    await $testInfo.attach(`[step] ${$step.title}`, { body: screenshot, contentType: 'image/png' });
+    const fileName = new Date().toISOString().replace(/[-:.TZ]/g, '') + '.png';
+    const screenshotDir = './test-reports/' + getReportFolderName() + '/cucumber/html/screenshots';
+    const screenshotPath = path.join(screenshotDir, fileName);
+    try {
+      await page.screenshot({ path: screenshotPath, fullPage: true });
+    } catch (error) {
+      if (error.message.includes('Cannot take screenshot larger')) {
+        await commonItemsPage.captureLargeSizeScreenshot(page, screenshotPath);
+      } else {
+        console.error(error);
+      }
+    }
+    const relativePath = path.join('../screenshots/', fileName).replace(/\\/g, '/');
+    const htmlPreview = `
+      <a href="${relativePath}" target="_blank">
+        <img src="${relativePath}" alt="screenshot" style="max-height:1000px;border:1px solid #ccc;" />
+      </a>
+    `;
+    await $testInfo.attach(`[step] ${$step.title}`, { body: htmlPreview, contentType: 'text/html' });
   }
 });
 

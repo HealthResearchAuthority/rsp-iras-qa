@@ -80,13 +80,14 @@ When(
   }
 );
 
-When(
-  'I can see that the {string} users data persists on the edit profile page',
-  async ({ createUserProfilePage, commonItemsPage, editUserProfilePage }, datasetName: string) => {
-    const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
+Then(
+  'I can see the {string} ui labels on the user profile page',
+  async ({ commonItemsPage, userProfilePage }, datasetName: string) => {
+    const dataset = userProfilePage.userProfilePageTestData[datasetName];
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        await commonItemsPage.validateUIComponentValues(dataset, key, editUserProfilePage);
+        const labelVal = await commonItemsPage.getUiLabel(key, userProfilePage);
+        expect(labelVal).toBe(dataset[key]);
       }
     }
   }

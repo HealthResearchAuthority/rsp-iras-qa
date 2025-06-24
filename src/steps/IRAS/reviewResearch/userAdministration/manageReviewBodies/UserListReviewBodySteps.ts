@@ -2,6 +2,15 @@ import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../../hooks/CustomFixtures';
 const { Given, When, Then } = createBdd(test);
 
+When(
+  'I navigate to the user list page of the {string} review body',
+  async ({ userListReviewBodyPage }, revBodyName: string) => {
+    const reviewBodyId = userListReviewBodyPage.userListReviewBodyPageTestData.Review_Body_Ids[revBodyName];
+    userListReviewBodyPage.goto(reviewBodyId);
+    userListReviewBodyPage.assertOnUserListReviewBodyPage();
+  }
+);
+
 Then(
   'I can see the user list page of the review body',
   async ({ userListReviewBodyPage, reviewBodyProfilePage, commonItemsPage }) => {
@@ -134,14 +143,6 @@ Then(
     if (await userProfilePage.role_value.isVisible()) {
       await expect(userProfilePage.role_value).toHaveText(await checkRemoveUserReviewBodyPage.getRole());
     }
-  }
-);
-
-When(
-  'I fill the search input for the user list page of the review body, with the newly added users email as the search query',
-  async ({ searchAddUserReviewBodyPage, commonItemsPage }) => {
-    const searchQueryValue = await searchAddUserReviewBodyPage.getUserEmail();
-    await commonItemsPage.search_text.fill(searchQueryValue);
   }
 );
 

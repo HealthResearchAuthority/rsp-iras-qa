@@ -37,7 +37,9 @@ Then(
   async ({ projectDetailsTitlePage }) => {
     const todayDate = new Date();
     await projectDetailsTitlePage.planned_project_end_day_text.fill(todayDate.getDate().toString());
-    await projectDetailsTitlePage.planned_project_end_month_text.fill((todayDate.getMonth() + 1).toString());
+    await projectDetailsTitlePage.planned_project_end_month_dropdown.selectOption(
+      todayDate.toLocaleString('en-US', { month: 'long' })
+    );
     await projectDetailsTitlePage.planned_project_end_year_text.fill(todayDate.getFullYear().toString());
   }
 );
@@ -79,3 +81,12 @@ Then(
     }
   }
 );
+
+Then('I validate the planned project end date {string}', async ({ projectDetailsTitlePage }, datasetName: string) => {
+  const dataset = projectDetailsTitlePage.projectDetailsTitlePageTestData[datasetName];
+  const projectEndDateDropdownValuesExpected = dataset['month_dropdown_values'];
+  const projectEndDateDropdownValuesActual = await projectDetailsTitlePage.planned_project_end_month_dropdown
+    .locator('option')
+    .allTextContents();
+  expect(projectEndDateDropdownValuesActual).toStrictEqual(projectEndDateDropdownValuesExpected);
+});

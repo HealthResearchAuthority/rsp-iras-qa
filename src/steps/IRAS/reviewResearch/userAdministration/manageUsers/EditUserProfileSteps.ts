@@ -170,3 +170,15 @@ Then(
     }
   }
 );
+
+When(
+  'I can see that the {string} users data persists on the edit profile page',
+  async ({ createUserProfilePage, commonItemsPage, editUserProfilePage }, datasetName: string) => {
+    const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
+    for (const key in dataset) {
+      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+        await commonItemsPage.validateUIComponentValues(dataset, key, editUserProfilePage);
+      }
+    }
+  }
+);

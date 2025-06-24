@@ -32,12 +32,12 @@ Then(
       if (Object.prototype.hasOwnProperty.call(datasetProjectTitle, key)) {
         if (
           key == 'planned_project_end_day_text' ||
-          key == 'planned_project_end_month_text' ||
+          key == 'planned_project_end_month_dropdown' ||
           key == 'planned_project_end_year_text'
         ) {
           const projectEndDateFormatted = await convertDate(
             datasetProjectTitle.planned_project_end_day_text,
-            datasetProjectTitle.planned_project_end_month_text,
+            datasetProjectTitle.planned_project_end_month_dropdown,
             datasetProjectTitle.planned_project_end_year_text
           );
           expect(await reviewYourAnswersPage.getPlannedProjectEndDate()).toBe(projectEndDateFormatted);

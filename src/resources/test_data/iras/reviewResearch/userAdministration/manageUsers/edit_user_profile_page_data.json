@@ -54,7 +54,7 @@
     "telephone_text": "Telephone must be 11 digits or less",
     "organisation_text": "Organisation must be 250 characters or less"
   },
-  "Invalid_Character_Limit_field_Email_Address_Error": {
+  "Invalid_Character_Limit_Field_Email_Address_Error": {
     "email_address_text": "Email address must be 250 characters or less"
   },
   "Incorrect_Format_Field_Telephone_Error": {
@@ -118,6 +118,11 @@
       "first_name_text": "",
       "last_name_text": "",
       "email_address_text": ""
+    },
+    "All_Checkbox_Fields": {
+      "role_checkbox": ["operations", "reviewer", "user", "system administrator"],
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "access_required_checkbox": ["Study Wide Review", "Research Ethics Committee", "CAG", "Technical Assurance"]
     }
   },
   "Label_Texts_Role_Operations": {

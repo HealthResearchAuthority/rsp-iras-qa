@@ -113,36 +113,6 @@ Then(
 );
 
 When(
-  'I fill the search input for searching users in manage users page with {string} as the search query',
-  async ({ manageUsersPage, commonItemsPage, userListReviewBodyPage }, searchQueryName: string) => {
-    const searchQueryDataset = manageUsersPage.manageUsersPageTestData.Search_For_Users.Search_Queries[searchQueryName];
-    const searchKey = searchQueryDataset['search_input_text'];
-    if ((await commonItemsPage.tableRows.count()) >= 2) {
-      await userListReviewBodyPage.setSearchKey(searchKey);
-      await commonItemsPage.search_text.fill(searchKey);
-    } else {
-      throw new Error(`There are no items in list to search`);
-    }
-  }
-);
-
-Then(
-  'the system displays user records matching the search criteria',
-  async ({ userListReviewBodyPage, commonItemsPage }) => {
-    const searchKey = await userListReviewBodyPage.getSearchKey();
-    const searchTerms = await commonItemsPage.splitSearchTerm(searchKey);
-    const userList = await commonItemsPage.getAllUsersFromTheTable();
-    const userListAfterSearch: any = userList.get('searchResultValues');
-    const searchResult = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
-      userListAfterSearch,
-      searchTerms
-    );
-    expect(searchResult).toBeTruthy();
-    await userListReviewBodyPage.updateUserInfo();
-  }
-);
-
-When(
   'I search and click on view edit link for the removed user from the review body in the manage user page',
   async ({ manageUsersPage, checkRemoveUserReviewBodyPage, userListReviewBodyPage }) => {
     await manageUsersPage.goto(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size);
@@ -152,6 +122,38 @@ When(
     const userStatus = await userListReviewBodyPage.getStatus();
     const foundRecord = await manageUsersPage.findUserProfile(userFirstName, userLastName, userEmail, userStatus);
     await foundRecord.locator(manageUsersPage.view_edit_link).click();
+  }
+);
+
+When(
+  'I validate the last logged in is displayed blank for the new user who has not yet logged in to the application',
+  async ({ manageUsersPage }) => {
+    expect(await manageUsersPage.last_logged_in_from_list_label.textContent()).toBe('');
+  }
+);
+
+When('I keep note of the current login date', async ({ manageUsersPage }) => {
+  const today = new Date();
+  const formattedDateFull = new Intl.DateTimeFormat('en-GB', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  }).format(today);
+  const formattedDateTruncated = new Intl.DateTimeFormat('en-GB', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+  }).format(today);
+  manageUsersPage.setLastLoggedInDateFull(formattedDateFull);
+  manageUsersPage.setLastLoggedInDateTruncated(formattedDateTruncated);
+});
+
+When(
+  'I validate the last logged in is displayed as truncated date in manage users page',
+  async ({ manageUsersPage }) => {
+    expect(await manageUsersPage.last_logged_in_from_list_label.textContent()).toBe(
+      manageUsersPage.getLastLoggedInDateTruncated()
+    );
   }
 );
 

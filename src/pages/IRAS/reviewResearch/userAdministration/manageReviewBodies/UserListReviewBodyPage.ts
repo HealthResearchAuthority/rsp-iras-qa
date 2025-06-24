@@ -118,7 +118,11 @@ export default class UserListReviewBodyPage {
     this.tableRows = this.page.getByRole('table').getByRole('row');
   }
 
-  async assertOnUserListReviewBodyPage() {
+  async goto(reviewBodyId: string): Promise<void> {
+    this.page.goto(`reviewbody/viewreviewbodyusers?reviewBodyId=${reviewBodyId}`);
+  }
+
+  async assertOnUserListReviewBodyPage(): Promise<void> {
     await expect(this.page_heading).toBeVisible();
     await expect(this.guidance_text).toBeVisible();
     await expect(this.search_box_label).toBeVisible();
