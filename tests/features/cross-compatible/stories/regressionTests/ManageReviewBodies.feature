@@ -299,7 +299,7 @@ Feature: User Administration: Manage Review Bodies
         # | Incorrect_Email_Format               | Email_Format_Error                      |
         # | Invalid_Email_Data_Double_Dot        | Email_Format_Error                      |
 
-        @RegressionTestUserListReviewBodyNoResultsFoundRemoveUser @Smoke @only
+        @RegressionTestUserListReviewBodyNoResultsFoundRemoveUser
         Scenario Outline: Verify the user can search and remove existing user of the selected review body and navigate to manage users page when no results found in the search for removed user
                 When I enter 'QA Automation' into the search field
                 And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
@@ -344,7 +344,7 @@ Feature: User Administration: Manage Review Bodies
                         | Enabled        | Disabled        |
 
 
-        @RegressionTestUserListReviewBodyManageUsersLink @Smoke @only
+        @RegressionTestUserListReviewBodyManageUsersLink
         Scenario Outline: Verify the user can search and remove existing user of the selected review body and repeat the process with remove another user from the review body link
                 When I enter 'QA Automation' into the search field
                 And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
@@ -399,7 +399,7 @@ Feature: User Administration: Manage Review Bodies
                         | Status_Enabled | Status_Disabled |
                         | Enabled        | Disabled        |
 
-        @RegressionTestUserListReviewBodyBackToReviewBodyUserListAfterRemoveUser @Smoke @only
+        @RegressionTestUserListReviewBodyBackToReviewBodyUserListAfterRemoveUser
         Scenario Outline: Verify the user can search and remove the user from the selected review body and navigate to review body user list page when no results found for the removed user
                 When I enter 'QA Automation' into the search field
                 And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
@@ -441,7 +441,7 @@ Feature: User Administration: Manage Review Bodies
                         | Enabled        | Disabled        |
 
 
-        @RegressionTestUserListReviewBodyBackToManageReviewBodiesRemoveUser @Smoke @only
+        @RegressionTestUserListReviewBodyBackToManageReviewBodiesRemoveUser
         Scenario Outline: Verify the user can search and remove the existing user from the selected review body and navigate to manage review bodies page from the confirmation page
                 When I enter 'QA Automation' into the search field
                 And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
@@ -475,7 +475,7 @@ Feature: User Administration: Manage Review Bodies
                         | Status_Enabled | Status_Disabled |
                         | Enabled        | Disabled        |
 
-        @RegressionTestUserListReviewBodyBackToReviewBodyUserListCheckRemoveUser @Smoke @only
+        @RegressionTestUserListReviewBodyBackToReviewBodyUserListCheckRemoveUser
         Scenario Outline: Verify the user can navigate to user list page of the review body from check and remove user profile page using back link
                 When I enter 'QA Automation' into the search field
                 And I click the 'Search' button on the 'Manage_Review_Bodies_Page'

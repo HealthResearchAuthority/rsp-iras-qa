@@ -59,7 +59,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I can see the user list of the selected review body is sorted by default in the alphabetical order of the 'First Name'
 
 
-    @UserListReviewBodySearchResultsFound @UserListReviewBodyBackToReviewBodyProfileLink @Smoke @only
+    @UserListReviewBodySearchResultsFound @UserListReviewBodyBackToReviewBodyProfileLink
     Scenario Outline: Verify the user can search for the users in the user list page and navigate back to review body profile page
         When I enter 'QA Automation' into the search field
         And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
@@ -96,7 +96,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
             | Full_Name     | First    |
             | Full_Name     | Last     |
 
-    @UserListReviewBodyNoResultsFoundRemoveUser @rsp-3273 @UserListReviewBodyRemoveAnotherUserFromTheReviewBodyLink @Smoke @only
+    @UserListReviewBodyNoResultsFoundRemoveUser @rsp-3273 @UserListReviewBodyRemoveAnotherUserFromTheReviewBodyLink
     Scenario: Verify the user can search and remove existing user of the selected review body and navigate to manage users page when no results found in the search for removed user
         When I enter 'QA Automation' into the search field
         And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
@@ -137,7 +137,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I search and click on view edit link for the removed user from the review body in the manage user page
         Then I can see the user profile page of the removed user from the review body
 
-    @rsp-3273 @UserListReviewBodyManageUsersLink @Smoke @only
+    @rsp-3273 @UserListReviewBodyManageUsersLink
     Scenario: Verify the user can search and remove existing user of the selected review body and repeat the process with remove another user from the review body link
         When I enter 'QA Automation' into the search field
         And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
@@ -189,7 +189,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I capture the page screenshot
         Then I can see the 'Manage_Users_Page'
 
-    @UserListReviewBodyBackToReviewBodyUserListAfterRemoveUser @rsp-3273 @UserListReviewBodyBackToUsersLink @Smoke @only
+    @UserListReviewBodyBackToReviewBodyUserListAfterRemoveUser @rsp-3273 @UserListReviewBodyBackToUsersLink
     Scenario: Verify the user can search and remove the user from the selected review body and navigate to review body user list page when no results found for the removed user
         When I enter 'QA Automation' into the search field
         And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
@@ -228,7 +228,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         Then I can see the user list page of the review body
 
 
-    @UserListReviewBodyBackToManageReviewBodiesRemoveUser @rsp-3273 @Smoke @only
+    @UserListReviewBodyBackToManageReviewBodiesRemoveUser @rsp-3273
     Scenario: Verify the user can search and remove the existing user from the selected review body and navigate to manage review bodies page from the confirmation page
         When I enter 'QA Automation' into the search field
         And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
@@ -259,7 +259,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I capture the page screenshot
         Then I can see the 'Manage_Review_Bodies_Page'
 
-    @UserListReviewBodyBackToReviewBodyUserListCheckRemoveUser @rsp-3273 @Smoke @only
+    @UserListReviewBodyBackToReviewBodyUserListCheckRemoveUser @rsp-3273
     Scenario: Verify the user can navigate to user list page of the review body from check and remove user profile page using back link
         When I enter 'QA Automation' into the search field
         And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
