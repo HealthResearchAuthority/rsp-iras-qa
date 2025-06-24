@@ -522,6 +522,7 @@ export default class CommonItemsPage {
       .locator('..')
       .getByRole('link', { name: errorMessageFieldDataset[key], exact: true })
       .click();
+    await this.page.waitForTimeout(500); //added to prevent instability when looping through multiple summary links
     return element;
   }
 
