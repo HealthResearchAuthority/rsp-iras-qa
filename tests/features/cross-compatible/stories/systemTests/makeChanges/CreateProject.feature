@@ -746,7 +746,7 @@ Feature: Create Amendment - Create Project
       | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Start_Space |
       | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space  |
 
-  @rsp-3939 @jsDisabled
+  @rsp-3939 @searchSelectSponsorOrgJsDisabled @jsDisabled
   Scenario Outline: Validate user is able to search and select sponsor organisation in key project roles page with valid data
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
@@ -806,7 +806,7 @@ Feature: Create Amendment - Create Project
       | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Hyphen       | Sponsor_Organisation_Text_Blank | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation | Back            |
 
 
-  @rsp-3939 @jsDisabled
+  @rsp-3939 @validateSponsorOrganisationResultsJsDisabled @jsDisabled
   Scenario Outline: Validate the primary sponsor organisation search results in key project roles page
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
@@ -819,11 +819,11 @@ Feature: Create Amendment - Create Project
     And I capture the page screenshot
     When I authorise the rts api using '<RTS_API_Data>'
     Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation
-    And I search with valid '<Sponsor_Organisation>' for primary sponsor organisation search box and validate the search results along with '<Search_Hint_Labels>'
+    And With JS disabled, I search with valid '<Sponsor_Organisation>' for primary sponsor organisation search box and validate the search results along with '<Search_Hint_Labels>'
     And I capture the page screenshot
-    And I search with invalid '<Sponsor_Organisation_Invalid>' for primary sponsor organisation search box and validate the search results along with '<Search_Hint_Labels>'
+    And With JS disabled, I search with invalid '<Sponsor_Organisation_Invalid>' for primary sponsor organisation search box and validate the search results along with '<Search_Hint_Labels>'
     And I capture the page screenshot
-    And I search with invalid min characters '<Sponsor_Organisation_Min>' for primary sponsor organisation search box
+    And With JS disabled, I search with invalid min characters '<Sponsor_Organisation_Min>' for primary sponsor organisation search box
     Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Key_Project_Roles_Page'
     And I capture the page screenshot
 

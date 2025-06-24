@@ -32,9 +32,7 @@ Then(
           } else {
             await commonItemsPage.fillUIComponent(dataset, key, keyProjectRolesPage);
             await keyProjectRolesPage.primary_sponsor_organisation_jsdisabled_search_button.click();
-            await keyProjectRolesPage.page.waitForTimeout(2000);
             if (dataset[key] !== '') {
-              await keyProjectRolesPage.primary_sponsor_organisation_jsdisabled_search_results_radio_button.isVisible();
               await keyProjectRolesPage.primary_sponsor_organisation_jsdisabled_search_results_radio_button
                 .first()
                 .click();
@@ -128,7 +126,7 @@ Then(
 );
 
 Then(
-  'I search with valid {string} for primary sponsor organisation search box and validate the search results along with {string}',
+  'With JS disabled, I search with valid {string} for primary sponsor organisation search box and validate the search results along with {string}',
   async ({ keyProjectRolesPage, rtsPage }, datasetName: string, searchHintsDatasetName) => {
     const dataset = keyProjectRolesPage.keyProjectRolesPageTestData[datasetName];
     const searchHintDatasetName = keyProjectRolesPage.keyProjectRolesPageTestData[searchHintsDatasetName];
@@ -177,7 +175,7 @@ Then(
 );
 
 Then(
-  'I search with invalid {string} for primary sponsor organisation search box and validate the search results along with {string}',
+  'With JS disabled, I search with invalid {string} for primary sponsor organisation search box and validate the search results along with {string}',
   async ({ keyProjectRolesPage }, datasetName: string, searchHintsDatasetName) => {
     const dataset = keyProjectRolesPage.keyProjectRolesPageTestData[datasetName];
     const searchHintDatasetName = keyProjectRolesPage.keyProjectRolesPageTestData[searchHintsDatasetName];
@@ -193,7 +191,7 @@ Then(
 );
 
 Then(
-  'I search with invalid min characters {string} for primary sponsor organisation search box',
+  'With JS disabled, I search with invalid min characters {string} for primary sponsor organisation search box',
   async ({ keyProjectRolesPage }, datasetName: string) => {
     const dataset = keyProjectRolesPage.keyProjectRolesPageTestData[datasetName];
     await keyProjectRolesPage.primary_sponsor_organisation_text.fill(dataset['primary_sponsor_organisation_text']);
