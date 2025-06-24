@@ -518,16 +518,13 @@ export default class CommonItemsPage {
     await this.summaryErrorLinks
       .locator('..')
       .getByRole('link', { name: errorMessageFieldDataset[key], exact: true })
-      .click({ force: true });
+      .click();
     return element;
   }
 
   async clickErrorSummaryLinkMultipleErrorField<PageObject>(errorMessage: any, key: string, page: PageObject) {
     const element: Locator = await page[key].first();
-    await this.summaryErrorLinks
-      .locator('..')
-      .getByRole('link', { name: errorMessage, exact: true })
-      .click({ force: true });
+    await this.summaryErrorLinks.locator('..').getByRole('link', { name: errorMessage, exact: true }).click();
     return element;
   }
 
@@ -754,7 +751,7 @@ export default class CommonItemsPage {
   }
 
   async filterResults(results: string[], searchTerms: string[]) {
-    return results.filter((result) => searchTerms.some((term) => result.toLowerCase().includes(term.toLowerCase())));
+    return results.filter((result) => searchTerms.every((term) => result.toLowerCase().includes(term.toLowerCase())));
   }
 
   async clearCheckboxes(dataset: any, keys: string[], commonItemsPage: any, createUserProfilePage: any) {

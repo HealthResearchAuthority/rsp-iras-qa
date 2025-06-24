@@ -114,7 +114,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
         And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
         Then I can see the user list page of the review body
-        When I enter the 'Email Address' of the 'last' user shown on the current review body users list, into the search field
+        When I enter the 'Email_Address' of the 'last' user shown on the current review body users list, into the search field
         And I capture the page screenshot
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
@@ -155,7 +155,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
         And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
         Then I can see the user list page of the review body
-        When I enter the 'Email Address' of the 'last' user shown on the current review body users list, into the search field
+        When I enter the 'Email_Address' of the 'last' user shown on the current review body users list, into the search field
         And I capture the page screenshot
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
@@ -169,7 +169,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I click the 'Remove_Another_User_From_The_Review_Body' link on the 'Confirmation_Page'
         And I capture the page screenshot
         Then I can see the user list page of the review body
-        When I enter the 'Email Address' of the 'last' user shown on the current review body users list, into the search field
+        When I enter the 'Email_Address' of the 'last' user shown on the current review body users list, into the search field
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then the system displays search results matching the search criteria
@@ -206,7 +206,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
         And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
         And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
-        When I enter the 'Email Address' of the 'last' user shown on the current review body users list, into the search field
+        When I enter the 'Email_Address' of the 'last' user shown on the current review body users list, into the search field
         And I capture the page screenshot
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
@@ -245,7 +245,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
         And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
         And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
-        When I enter the 'Email Address' of the 'last' user shown on the current review body users list, into the search field
+        When I enter the 'Email_Address' of the 'last' user shown on the current review body users list, into the search field
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then the system displays search results matching the search criteria
@@ -276,7 +276,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
         And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
         And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
-        When I enter the 'Email Address' of the 'last' user shown on the current review body users list, into the search field
+        When I enter the 'Email_Address' of the 'last' user shown on the current review body users list, into the search field
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then the system displays search results matching the search criteria
