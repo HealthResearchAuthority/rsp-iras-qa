@@ -755,7 +755,7 @@ export default class CommonItemsPage {
   }
 
   async filterResults(results: string[], searchTerms: string[]) {
-    return results.filter((result) => searchTerms.some((term) => result.toLowerCase().includes(term.toLowerCase())));
+    return results.filter((result) => searchTerms.every((term) => result.toLowerCase().includes(term.toLowerCase())));
   }
 
   async clearCheckboxes(dataset: any, keys: string[], commonItemsPage: any, createUserProfilePage: any) {

@@ -299,7 +299,7 @@ Feature: User Administration: Manage Review Bodies
         # | Incorrect_Email_Format               | Email_Format_Error                      |
         # | Invalid_Email_Data_Double_Dot        | Email_Format_Error                      |
 
-        @RegressionTestUserListReviewBodyNoResultsFoundRemoveUser
+        @RegressionTestUserListReviewBodyNoResultsFoundRemoveUser @Smoke @only
         Scenario Outline: Verify the user can search and remove existing user of the selected review body and navigate to manage users page when no results found in the search for removed user
                 When I enter 'QA Automation' into the search field
                 And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
@@ -317,7 +317,7 @@ Feature: User Administration: Manage Review Bodies
                 And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
                 And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
                 Then I can see the user list page of the review body
-                When I enter the 'Email Address' of the 'last' user shown on the current review body users list, into the search field
+                When I enter the 'Email_Address' of the 'last' user shown on the current review body users list, into the search field
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Review_Body_User_List_Page'
                 And I capture the page screenshot
@@ -344,7 +344,7 @@ Feature: User Administration: Manage Review Bodies
                         | Enabled        | Disabled        |
 
 
-        @RegressionTestUserListReviewBodyManageUsersLink
+        @RegressionTestUserListReviewBodyManageUsersLink @Smoke @only
         Scenario Outline: Verify the user can search and remove existing user of the selected review body and repeat the process with remove another user from the review body link
                 When I enter 'QA Automation' into the search field
                 And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
@@ -362,7 +362,7 @@ Feature: User Administration: Manage Review Bodies
                 And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
                 And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
                 Then I can see the user list page of the review body
-                When I enter the 'Email Address' of the 'last' user shown on the current review body users list, into the search field
+                When I enter the 'Email_Address' of the 'last' user shown on the current review body users list, into the search field
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Review_Body_User_List_Page'
                 And I capture the page screenshot
@@ -376,7 +376,7 @@ Feature: User Administration: Manage Review Bodies
                 And I click the 'Remove_Another_User_From_The_Review_Body' link on the 'Confirmation_Page'
                 And I capture the page screenshot
                 Then I can see the user list page of the review body
-                When I enter the 'Email Address' of the 'last' user shown on the current review body users list, into the search field
+                When I enter the 'Email_Address' of the 'last' user shown on the current review body users list, into the search field
                 And I click the 'Search' button on the 'Review_Body_User_List_Page'
                 And I capture the page screenshot
                 Then the system displays search results matching the search criteria
@@ -399,7 +399,7 @@ Feature: User Administration: Manage Review Bodies
                         | Status_Enabled | Status_Disabled |
                         | Enabled        | Disabled        |
 
-        @RegressionTestUserListReviewBodyBackToReviewBodyUserListAfterRemoveUser
+        @RegressionTestUserListReviewBodyBackToReviewBodyUserListAfterRemoveUser @Smoke @only
         Scenario Outline: Verify the user can search and remove the user from the selected review body and navigate to review body user list page when no results found for the removed user
                 When I enter 'QA Automation' into the search field
                 And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
@@ -416,7 +416,7 @@ Feature: User Administration: Manage Review Bodies
                 And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
                 And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
                 And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
-                When I enter the 'Email Address' of the 'last' user shown on the current review body users list, into the search field
+                When I enter the 'Email_Address' of the 'last' user shown on the current review body users list, into the search field
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Review_Body_User_List_Page'
                 And I capture the page screenshot
@@ -441,7 +441,7 @@ Feature: User Administration: Manage Review Bodies
                         | Enabled        | Disabled        |
 
 
-        @RegressionTestUserListReviewBodyBackToManageReviewBodiesRemoveUser
+        @RegressionTestUserListReviewBodyBackToManageReviewBodiesRemoveUser @Smoke @only
         Scenario Outline: Verify the user can search and remove the existing user from the selected review body and navigate to manage review bodies page from the confirmation page
                 When I enter 'QA Automation' into the search field
                 And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
@@ -458,7 +458,7 @@ Feature: User Administration: Manage Review Bodies
                 And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
                 And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
                 And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
-                When I enter the 'Email Address' of the 'last' user shown on the current review body users list, into the search field
+                When I enter the 'Email_Address' of the 'last' user shown on the current review body users list, into the search field
                 And I click the 'Search' button on the 'Review_Body_User_List_Page'
                 And I capture the page screenshot
                 Then the system displays search results matching the search criteria
@@ -475,7 +475,7 @@ Feature: User Administration: Manage Review Bodies
                         | Status_Enabled | Status_Disabled |
                         | Enabled        | Disabled        |
 
-        @RegressionTestUserListReviewBodyBackToReviewBodyUserListCheckRemoveUser
+        @RegressionTestUserListReviewBodyBackToReviewBodyUserListCheckRemoveUser @Smoke @only
         Scenario Outline: Verify the user can navigate to user list page of the review body from check and remove user profile page using back link
                 When I enter 'QA Automation' into the search field
                 And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
@@ -492,7 +492,7 @@ Feature: User Administration: Manage Review Bodies
                 And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
                 And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
                 And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
-                When I enter the 'Email Address' of the 'last' user shown on the current review body users list, into the search field
+                When I enter the 'Email_Address' of the 'last' user shown on the current review body users list, into the search field
                 And I click the 'Search' button on the 'Review_Body_User_List_Page'
                 And I capture the page screenshot
                 Then the system displays search results matching the search criteria
