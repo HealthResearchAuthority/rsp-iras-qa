@@ -54,7 +54,7 @@ export default class KeyProjectRolesPage {
       name: 'Search',
     });
     this.primary_sponsor_organisation_jsdisabled_search_results_radio_button = this.page.locator(
-      'input[type="radio"][name="SponsorOrganisation"]'
+      'input[type="radio"][name="SponsorOrgSearch.SelectedOrganisation"]'
     );
   }
 

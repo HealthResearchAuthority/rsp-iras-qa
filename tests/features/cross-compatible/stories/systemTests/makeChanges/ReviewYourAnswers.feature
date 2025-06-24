@@ -5,7 +5,7 @@ Feature: Create Amendment - Create Project - Review your answers
     Given I have navigated to the my research projects page
     And I can see the my research projects page
 
-  @rsp-2837 @reviewYourAnswersAllFields
+  @rsp-2837 @rsp-3819 @reviewYourAnswersAllFields
   Scenario Outline: Verify that user completed all question and can review the answers on create project journey
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -29,7 +29,7 @@ Feature: Create Amendment - Create Project - Review your answers
       | Project_Details_Title | Key_Project_Roles     | Research_Locations    |
       | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields |
 
-  @rsp-2837 @reviewAnswersChangeProjTitleFields
+  @rsp-2837 @rsp-3819 @reviewAnswersChangeProjTitleFields
   Scenario Outline: Verify that user can change the project title details all fields from review the answers page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -203,7 +203,7 @@ Feature: Create Amendment - Create Project - Review your answers
       | Valid_Data_Title_Empty_Field | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | chief_investigator | Enter_Links_Missing_Fields | Valid_Data_Only_Investigator_Email_Field |
       | Valid_Data_Title_Empty_Field | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | sponsor_contact    | Enter_Links_Missing_Fields | Valid_Data_Only_Sponsor_Email_Field      |
 
-  @rsp-2837 @rsp-1867 @reviewAnswersEnterResearchLoc
+  @rsp-2837 @rsp-1867 @rsp-3819 @reviewAnswersEnterResearchLoc
   Scenario Outline: Verify that user has not completed all questions and can enter research locations details from review your answers page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -304,7 +304,7 @@ Feature: Create Amendment - Create Project - Review your answers
       | Project_Details_Title | Key_Project_Roles     | Research_Locations    | Change_Link_Field  |
       | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | chief_investigator |
 
-  @rsp-2837 @rsp-1867 @reviewAnswersProjTitleErrorValidations
+  @rsp-2837 @rsp-1867 @rsp-3819 @reviewAnswersProjTitleErrorValidations
   Scenario Outline: Validate error message on project title page when user redirected from review your answers page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -456,7 +456,7 @@ Feature: Create Amendment - Create Project - Review your answers
       | Valid_Data_Title_Empty_Field | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | sponsor_contact  | Enter_Links_Missing_Fields | Invalid_Email_Data_Two_Punycode                        | Field_Error_Sponsor_Email       |
       | Valid_Data_Title_Empty_Field | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | sponsor_contact  | Enter_Links_Missing_Fields | Invalid_Email_Data_Two_Max_Char                        | Field_Error_Sponsor_Email       |
 
-  @rsp-2837 @reviewAnswersProjTitleErrorValidationsChangeFlow
+  @rsp-2837 @rsp-3819 @reviewAnswersProjTitleErrorValidationsChangeFlow
   Scenario Outline: Validate error message on project title page when user redirected from review your answers page - change flow
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -605,7 +605,7 @@ Feature: Create Amendment - Create Project - Review your answers
       | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | sponsor_contact   | Invalid_Email_Data_Two_Punycode                        | Field_Error_Sponsor_Email       |
       | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | sponsor_contact   | Invalid_Email_Data_Two_Max_Char                        | Field_Error_Sponsor_Email       |
 
-  @rsp-1867
+  @rsp-1867 @rsp-3819 @ValidateConfirmProjectFlow
   Scenario Outline: Validate user is able to see the project overview page when user submit the review answer page with all mandatory fields entered correctly
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
@@ -631,7 +631,7 @@ Feature: Create Amendment - Create Project - Review your answers
       | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Third | Navigation_Button_Fourth | Project_Details_Title | Key_Project_Roles     | Research_Locations    |
       | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields |
 
-  @rsp-1867
+  @rsp-1867 @rsp-3819
   Scenario Outline: Validate user is able to see the error messages when user submit the review answer page when all mandatory fields are not entered correctly
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
