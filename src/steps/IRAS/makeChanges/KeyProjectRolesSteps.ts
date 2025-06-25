@@ -180,7 +180,6 @@ Then(
     const searchHintDataset = keyProjectRolesPage.keyProjectRolesPageTestData[searchHintsDatasetName];
     await keyProjectRolesPage.primary_sponsor_organisation_text.fill(dataset['primary_sponsor_organisation_text']);
     await keyProjectRolesPage.primary_sponsor_organisation_jsdisabled_search_button.click();
-    await keyProjectRolesPage.page.waitForTimeout(2000);
     const noResultFoundLabelActual = confirmStringNotNull(
       await keyProjectRolesPage.primary_sponsor_organisation_jsdisabled_no_suggestions_label.textContent()
     ).trim();
@@ -195,7 +194,6 @@ Then(
     const dataset = keyProjectRolesPage.keyProjectRolesPageTestData[datasetName];
     await keyProjectRolesPage.primary_sponsor_organisation_text.fill(dataset['primary_sponsor_organisation_text']);
     await keyProjectRolesPage.primary_sponsor_organisation_jsdisabled_search_button.click();
-    await keyProjectRolesPage.page.waitForTimeout(2000);
   }
 );
 
