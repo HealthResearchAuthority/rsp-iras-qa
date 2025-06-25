@@ -1,6 +1,5 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../../hooks/CustomFixtures';
-
 const { When, Then } = createBdd(test);
 
 When('I update user profile with {string}', async ({ commonItemsPage, editUserProfilePage }, datasetName: string) => {
@@ -127,5 +126,19 @@ When(
     expect(await manageUsersPage.last_logged_in_from_list_label.textContent()).toBe(
       manageUsersPage.getLastLoggedInDateTruncated()
     );
+  }
+);
+
+When(
+  'I update the {string} email to {string}',
+  async ({ manageUsersPage, createUserProfilePage }, inputType: string, caseValue: string) => {
+    const email = await manageUsersPage.getUserEmail(inputType, createUserProfilePage);
+    if (caseValue === 'lower case') {
+      await createUserProfilePage.setUniqueEmail(email.toLowerCase());
+    } else if (caseValue === 'upper case') {
+      await createUserProfilePage.setUniqueEmail(email.toUpperCase());
+    } else if (caseValue === 'remove QAAutomation prefix') {
+      await createUserProfilePage.setUniqueEmail(email.replace('QAAUTOMATION', ''));
+    }
   }
 );
