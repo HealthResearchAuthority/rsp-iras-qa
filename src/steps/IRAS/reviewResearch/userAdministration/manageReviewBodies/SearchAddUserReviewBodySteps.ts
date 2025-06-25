@@ -9,22 +9,6 @@ Given('I can see the search for user to add to review body page', async ({ searc
 });
 
 When(
-  'I fill the search input for add users to review body with {string} as the search query',
-  async ({ searchAddUserReviewBodyPage, commonItemsPage }, searchQueryName: string) => {
-    if (searchQueryName.toLowerCase().startsWith('same')) {
-      const searchQueryValue = await searchAddUserReviewBodyPage.getUserEmail();
-      await searchAddUserReviewBodyPage.search_input_text.fill(searchQueryValue);
-    } else {
-      const searchQueryDataset =
-        searchAddUserReviewBodyPage.searchAddUserReviewBodyPageData.Search_Add_User_Review_Body.Search_Queries[
-          searchQueryName
-        ];
-      await commonItemsPage.fillUIComponent(searchQueryDataset, 'search_input_text', searchAddUserReviewBodyPage);
-    }
-  }
-);
-
-Then(
   'I can see that the add users to review body search page contains {string}',
   async ({ searchAddUserReviewBodyPage, reviewBodyProfilePage }, searchResult: string) => {
     if (searchResult.toLowerCase() == 'no_results') {
@@ -99,6 +83,20 @@ Then(
         for (const element of allResultRow) {
           const lastNameTableCell = element.locator(searchAddUserReviewBodyPage.search_result_table_last_name);
           await expect(lastNameTableCell).toContainText(searchQueryValue);
+        }
+        break;
+      case 'Existing_QA_User_Full_Name':
+        for (const element of allResultRow) {
+          const firstNameTableCell = element.locator(searchAddUserReviewBodyPage.search_result_table_first_name);
+          const lastNameTableCell = element.locator(searchAddUserReviewBodyPage.search_result_table_last_name);
+          await expect(firstNameTableCell).toContainText(
+            searchAddUserReviewBodyPage.searchAddUserReviewBodyPageData.Search_Add_User_Review_Body.Search_Queries
+              .Existing_QA_User_First_Name['search_input_text']
+          );
+          await expect(lastNameTableCell).toContainText(
+            searchAddUserReviewBodyPage.searchAddUserReviewBodyPageData.Search_Add_User_Review_Body.Search_Queries
+              .Existing_QA_User_Last_Name['search_input_text']
+          );
         }
         break;
       case 'Existing_QA_User_Email':

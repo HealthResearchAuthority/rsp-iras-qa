@@ -122,7 +122,7 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
 
     @rsp-3459 @ManageReviewBodiesSearchNoResultsFound
     Scenario Outline: Verify no results found message will be presented to the user in manage review bodies page if there is no review body on the system that matches the search criteria
-        When I fill the search input for searching review bodies in manage review bodies page with '<Search_Query>' as the search query
+        When I fill the search input for searching 'review bodies' with '<Search_Query>' as the search query
         And I capture the page screenshot
         And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
@@ -134,7 +134,7 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
 
     @rsp-3459 @ManageReviewBodiesSearchResultsFound
     Scenario Outline: Verify results are displayed when the user searches with existing review body details
-        When I fill the search input for searching review bodies in manage review bodies page with '<Search_Query>' as the search query
+        When I fill the search input for searching 'review bodies' with '<Search_Query>' as the search query
         And I capture the page screenshot
         And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
@@ -149,7 +149,7 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
     # out of scope for now
     @rsp-3459 @ManageReviewBodiesSearchLeadingAndTrailingWhiteSpaces @fail @skip
     Scenario Outline: Verify search results in manage review bodies page when the search keyword contains leading and trailing white spaces
-        When I fill the search input for searching review bodies in manage review bodies page with '<Search_Query>' as the search query
+        When I fill the search input for searching 'review bodies' with '<Search_Query>' as the search query
         And I capture the page screenshot
         And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot

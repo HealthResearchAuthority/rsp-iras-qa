@@ -86,36 +86,6 @@ Then(
 );
 
 When(
-  'I fill the search input for searching users in manage users page with {string} as the search query',
-  async ({ manageUsersPage, commonItemsPage, userListReviewBodyPage }, searchQueryName: string) => {
-    const searchQueryDataset = manageUsersPage.manageUsersPageTestData.Search_For_Users.Search_Queries[searchQueryName];
-    const searchKey = searchQueryDataset['search_input_text'];
-    if ((await commonItemsPage.tableRows.count()) >= 2) {
-      await userListReviewBodyPage.setSearchKey(searchKey);
-      await commonItemsPage.search_text.fill(searchKey);
-    } else {
-      throw new Error(`There are no items in list to search`);
-    }
-  }
-);
-
-Then(
-  'the system displays user records matching the search criteria',
-  async ({ userListReviewBodyPage, commonItemsPage }) => {
-    const searchKey = await userListReviewBodyPage.getSearchKey();
-    const searchTerms = await commonItemsPage.splitSearchTerm(searchKey);
-    const userList = await commonItemsPage.getAllUsersFromTheTable();
-    const userListAfterSearch: any = userList.get('searchResultValues');
-    const searchResult = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
-      userListAfterSearch,
-      searchTerms
-    );
-    expect(searchResult).toBeTruthy();
-    await userListReviewBodyPage.updateUserInfo();
-  }
-);
-
-When(
   'I search and click on view edit link for the removed user from the review body in the manage user page',
   async ({ manageUsersPage, checkRemoveUserReviewBodyPage, userListReviewBodyPage }) => {
     await manageUsersPage.goto(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size);
