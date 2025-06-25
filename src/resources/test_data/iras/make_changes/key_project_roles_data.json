@@ -20,7 +20,7 @@
   "Field_Error_Sponsor_Email": {
     "sponsor_contact_email_text": "Enter an email address in the correct format"
   },
-  "Sponsor_Organisation_Jsdisabled_Min_Error_Message": {
+  "Field_Error_Primary_Sponsor_Organisation": {
     "primary_sponsor_organisation_text": "Please provide 3 or more characters to search sponsor organisation."
   },
   "Valid_Data_All_Fields": {
@@ -364,7 +364,7 @@
     "continue_entering_suggestion": "Continue entering to get suggestions",
     "no_suggestion_found": "No suggestions found."
   },
-  "Sponsor_Organisation_Search_Hint_Labels": {
+  "Sponsor_Organisation_Jsdisabled_Search_Hint_Labels": {
     "search_hint_header_prefix": "Results for",
     "search_hint_footer_prefix": "sponsor organisations match your search for",
     "search_hint_footer": ". Try narrowing down your search if the organisation you are looking for is not listed",
