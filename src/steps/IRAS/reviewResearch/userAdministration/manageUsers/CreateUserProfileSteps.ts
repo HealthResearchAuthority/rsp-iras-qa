@@ -36,18 +36,19 @@ When(
     const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
     const isDuplicateEmail = datasetName.startsWith('Duplicate_Email_');
     for (const key in dataset) {
-      if (!Object.prototype.hasOwnProperty.call(dataset, key)) continue;
-      if (isDuplicateEmail && key === 'email_address_text') {
-        const locator = createUserProfilePage[key];
-        const [email] = await userListReviewBodyPage.getUserEmail();
-        const searchKey = await userListReviewBodyPage.getSearchKey();
-        const uniqueEmail = await createUserProfilePage.getUniqueEmail();
-        const valueToFill = email || searchKey || uniqueEmail;
-        if (valueToFill) {
-          await locator.fill(valueToFill);
+      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+        if (isDuplicateEmail && key === 'email_address_text') {
+          const locator = createUserProfilePage[key];
+          const [email] = await userListReviewBodyPage.getUserEmail();
+          const searchKey = await userListReviewBodyPage.getSearchKey();
+          const uniqueEmail = await createUserProfilePage.getUniqueEmail();
+          const valueToFill = email || searchKey || uniqueEmail;
+          if (valueToFill) {
+            await locator.fill(valueToFill);
+          }
+        } else {
+          await commonItemsPage.fillUIComponent(dataset, key, createUserProfilePage);
         }
-      } else {
-        await commonItemsPage.fillUIComponent(dataset, key, createUserProfilePage);
       }
     }
   }
