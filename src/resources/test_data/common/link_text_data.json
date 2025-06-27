@@ -146,5 +146,9 @@
   },
   "Approvals_Page": {
     "Search_For_Modifications": "Search for modifications"
+  },
+  "Search_Modifications_Page": {
+    "Advanced_Filter": "Advanced filter",
+    "Clear_All_Filters": "Clear all filters"
   }
 }

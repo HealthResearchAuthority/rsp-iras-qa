@@ -14,30 +14,268 @@ Feature: Receive Amendment - Staff dashboard/worklist
         Then I can see the 'Search_Modifications_Page'
         And I capture the page screenshot
 
-    @viewListOfModifications
-    Scenario Outline: Verify the user is able to view list of modifications in the descending order of the modification id
-        When I fill the new review body page using '<Add_Review_Body>'
+    ##Scenario 1 -Happy Paths:
+
+    # 1. Valid IRAS ID + filters(64 combinations) >>Click Apply Filters>>Results displayed (some combinations can't give results) (Search button is not clicked)
+    ##Scenario 6 -Selected filters validation
+    # Selected filters are displayed under active filters>>tags/labels for each filter validation
+    @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters
+    Scenario Outline: Verify the user can view the list of modifications by entering valid iras id, then selected advanced filters and click on apply filters button
+        When I enter iras id in the search modifications page using '<Valid_Iras_Id>'
         And I capture the page screenshot
-        And I click the 'Continue' button on the 'Create_Review_Body_Page'
-        Then I can see the check and create review body page for '<Add_Review_Body>'
+        And I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
-        When I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
-        Then I can see the create Review body confirmation page for '<Add_Review_Body>'
+        And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
-        When I have navigated to the 'Manage_Review_Bodies_Page'
-        Then I can see the 'Manage_Review_Bodies_Page'
+        And the selected filters '<Advanced_Filters>' are displayed under active filters
+        Then the system displays modification records matching the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>'
         And I capture the page screenshot
-        When I enter 'name of the new review body' into the search field
-        And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
+        And I can see the list is sorted by default in the descending order of the 'Modification Id'
         And I capture the page screenshot
-        And I can see the 'newly created review body' should be present in the list with 'Enabled' status in the manage review bodies page
+        Examples:
+            | Valid_Iras_Id     | Advanced_Filters     |
+            | Valid_Iras_Id_One | Advanced_Filters_One |
+
+    # 2. Valid IRAS ID >>Click Search>>Results displayed>> Select Advanced Filters(64 combinations)>> Click Apply Filters>>Results displayed(filtered results)
+    ##Scenario 6 -Selected filters validation
+    # Selected filters are displayed under active filters>>tags/labels for each filter validation
+    @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters
+    Scenario Outline: Verify the user can view the list of modifications by entering valid iras id, then click on search button and then selected advanced filters and click on apply filters button
+        When I enter iras id in the search modifications page using '<Valid_Iras_Id>'
         And I capture the page screenshot
-        And I can see the list is sorted by default in the alphabetical order of the 'Organisation Name'
+        And I click the 'Search' button on the 'Search_Modifications_Page'
+        Then the system displays modification records matching the search criteria of '<Valid_Iras_Id>'
+        And I can see the list is sorted by default in the descending order of the 'Modification Id'
         And I capture the page screenshot
+        And I select advanced filters in the search modifications page using '<Advanced_Filters>'
+        And I capture the page screenshot
+        And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
+        And I capture the page screenshot
+        And the selected filters '<Advanced_Filters>' are displayed under active filters
+        Then the system displays modification records matching the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>'
+        And I capture the page screenshot
+        And I can see the list is sorted by default in the descending order of the 'Modification Id'
+        And I capture the page screenshot
+        Examples:
+            | Valid_Iras_Id     | Advanced_Filters     |
+            | Valid_Iras_Id_One | Advanced_Filters_One |
+
+    #3.Select Advanced Filters(64 combinations)>> Click Apply Filters>>Results displayed>> Valid IRAS ID >>Click Search>>Results displayed
+    ##Scenario 6 -Selected filters validation
+    # Selected filters are displayed under active filters>>tags/labels for each filter validation
+    @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters
+    Scenario Outline: Verify the user can view the list of modifications by entering valid iras id, then click on search button and then selected advanced filters and click on apply filters button
+        And I select advanced filters in the search modifications page using '<Advanced_Filters>'
+        And I capture the page screenshot
+        And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
+        And I capture the page screenshot
+        And the selected filters '<Advanced_Filters>' are displayed under active filters
+        Then the system displays modification records matching the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>'
+        And I capture the page screenshot
+        And I can see the list is sorted by default in the descending order of the 'Modification Id'
+        And I capture the page screenshot
+        When I enter iras id in the search modifications page using '<Valid_Iras_Id>'
+        And I capture the page screenshot
+        And I click the 'Search' button on the 'Search_Modifications_Page'
+        Then the system displays modification records matching the search criteria of '<Valid_Iras_Id>'
+        And I can see the list is sorted by default in the descending order of the 'Modification Id'
+        And I capture the page screenshot
+        Examples:
+            | Valid_Iras_Id     | Advanced_Filters     |
+            | Valid_Iras_Id_One | Advanced_Filters_One |
+
+    # 4. Valid IRAS ID + No Filters >>Click Search>>Results displayed
+    @viewListOfModifications @ValidIrasIdAndNoFilters
+    Scenario Outline: Verify the user can view the list of modifications based on the entered valid iras id and the search performed
+        When I enter iras id in the search modifications page using '<Valid_Iras_Id>'
+        And I capture the page screenshot
+        And I click the 'Search' button on the 'Search_Modifications_Page'
+        Then the system displays modification records matching the search criteria of '<Valid_Iras_Id>'
+        And I can see the list is sorted by default in the descending order of the 'Modification Id'
+        And I capture the page screenshot
+        Examples:
+            | Valid_Iras_Id     |
+            | Valid_Iras_Id_One |
+
+
+    #5. No IRAS ID+Filters(64 combinations)>>Click Apply Filters>>Results displayed
+    ##Scenario 6 -Selected filters validation
+    # Selected filters are displayed under active filters>>tags/labels for each filter validation
+    @viewListOfModifications @NoIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters
+    Scenario Outline: Verify the user can view the list of modifications by selecting advanced filters and click on apply filters button
+        When I selected advanced filters in the search modifications page using '<Advanced_Filters>'
+        And I capture the page screenshot
+        And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
+        And I capture the page screenshot
+        And the selected filters '<Advanced_Filters>' are displayed under active filters
+        Then the system displays modification records matching the filter criteria of '<Advanced_Filters>'
+        And I capture the page screenshot
+        And I can see the list is sorted by default in the descending order of the 'Modification Id'
+        And I capture the page screenshot
+        Examples:
+            | Advanced_Filters     |
+            | Advanced_Filters_One |
+
+    ##Scenario 2 -Unhappy paths:
+
+    #  1. No IRAS ID + No Filters >> Click Search>>No results
+    @NoResultsFound @NoIrasIdAndNoAdvancedFilters
+    Scenario Outline: Verify the user can see no matching results found message on clicking search button without entering/selecting iras id and filters
+        When I click the 'Search' button on the 'Search_Modifications_Page'
+        Then the system displays no results found message if there is no 'modification record' on the system that matches the search criteria
+        And I capture the page screenshot
+        Examples:
+            | Advanced_Filters     |
+            | Advanced_Filters_One |
+
+    # 2.  No IRAS ID + No Filters >> Click Apply Filters>>No results
+    @NoResultsFound @NoIrasIdAndNoAdvancedFilters
+    Scenario Outline: Verify the user can see no matching results found message on clicking apply filters button without entering/selecting iras id and filters
+        When I click the 'Apply_filters' button on the 'Search_Modifications_Page'
+        Then the system displays no results found message if there is no 'modification record' on the system that matches the search criteria
+        And I capture the page screenshot
+        Examples:
+            | Advanced_Filters     |
+            | Advanced_Filters_One |
+
+    #  3. Invalid IRAS ID + No Filters >>Click Search>>No results
+    @NoResultsFound @InvalidIrasIdAndNoAdvancedFilters
+    Scenario Outline: Verify the user can see no matching results found message on clicking search button after entering invalid iras id
+        When I enter iras id in the search modifications page using '<Invalid_Iras_Id>'
+        And I capture the page screenshot
+        And I click the 'Search' button on the 'Search_Modifications_Page'
+        Then the system displays no results found message if there is no 'modification record' on the system that matches the search criteria
+        And I capture the page screenshot
+        Examples:
+            | Invalid_Iras_Id     |
+            | Invalid_Iras_Id_One |
+
+    #   4. Invalid IRAS ID + filters(64 combinations) >>Apply Filters>>No results
+    ##Scenario 6 -Selected filters validation
+    # Selected filters are displayed under active filters>>tags/labels for each filter validation
+    @NoResultsFound @InvalidIrasIdAndAdvancedFilters @ActiveFilters
+    Scenario Outline: Verify the user can see no matching results found message by entering invalid iras id, then selected advanced filters and click on apply filters button
+        When I enter iras id in the search modifications page using '<Invalid_Iras_Id>'
+        And I capture the page screenshot
+        And I select advanced filters in the search modifications page using '<Advanced_Filters>'
+        And I capture the page screenshot
+        And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
+        And I capture the page screenshot
+        And the selected filters '<Advanced_Filters>' are displayed under active filters
+        Then the system displays no results found message if there is no 'modification record' on the system that matches the search criteria
+        And I capture the page screenshot
+        Examples:
+            | Invalid_Iras_Id     | Advanced_Filters     |
+            | Invalid_Iras_Id_One | Advanced_Filters_One |
+
+    #  5.  Valid IRAS ID + filters(combinations can't give results) >>Click Apply Filters>>No results (some combinations can't give results)
+    ##Scenario 6 -Selected filters validation
+    # Selected filters are displayed under active filters>>tags/labels for each filter validation
+    @NoResultsFound @ValidIrasIdAndAdvancedFilters @ActiveFilters
+    Scenario Outline: Verify the user can see no matching results found message by entering invalid iras id, then selected advanced filters and click on apply filters button
+        When I enter iras id in the search modifications page using '<Valid_Iras_Id>'
+        And I capture the page screenshot
+        And I select advanced filters in the search modifications page using '<Advanced_Filters>'
+        And I capture the page screenshot
+        And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
+        And I capture the page screenshot
+        And the selected filters '<Advanced_Filters>' are displayed under active filters
+        Then the system displays no results found message if there is no 'modification record' on the system that matches the search criteria
+        And I capture the page screenshot
+        Examples:
+            | Valid_Iras_Id     | Advanced_Filters_No_results     |
+            | Valid_Iras_Id_One | Advanced_Filters_No_results_One |
+
+    ##Scenario 4 -'Date Modification submitted' filter validation
+    ### Scenario 4.1 -'Date Modification submitted' error validation
+
+    # WHEN I select an end date in the field that is earlier than the start date,
+    # THEN I should see a clear validation error message ‘This date you’ve selected is before the search above'
+    @NoResultsFound @InvalidIrasIdAndNoAdvancedFilters
+    Scenario Outline: Verify the user can see clear validation error message This date you have selected is before the search above when an end date is earlier than the start date
+        And I select advanced filters in the search modifications page using '<Advanced_Filters>'
+        And I capture the page screenshot
+        Then the system displays error message '<Error_Message>'
+        And I capture the page screenshot
+        Examples:
+            | Invalid_Data_Advanced_Filters            | Error_Message                             |
+            | Invalid_Date_Modification_Submitted_Data | Invalid_Date_Modification_Submitted_Error |
+
+    ##Scenario 6.1 -Remove filters validation
+    # Remove filters>>one by one on clicking 'x'/ all together by clicking 'Clear all filters'
+    # The search results update accordingly
+    @viewListOfModifications @DefaultSorting @RemoveActiveFiltersOneByOne
+    Scenario Outline: Verify the user can view the list of modifications by selecting advanced filters and click on apply filters button
+        When I select advanced filters in the search modifications page using '<Advanced_Filters>'
+        And I capture the page screenshot
+        And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
+        And I capture the page screenshot
+        And the selected filters '<Advanced_Filters>' are displayed under active filters
+        Then the system displays modification records matching the filter criteria of '<Advanced_Filters>'
+        And I capture the page screenshot
+        And I can see the list is sorted by default in the descending order of the 'Modification Id'
+        And I capture the page screenshot
+        And remove selected filter '<Advanced_Filters_Remove>'
+        Then the system displays modification records matching the filter criteria of '<Advanced_Filters_After_Remove>'
 
         Examples:
-            | Search_Advanced_Filters  |
-            | Valid_Data_In_All_Fields |
+            | Advanced_Filters     | Advanced_Filters_Remove | Advanced_Filters_After_Remove |
+            | Advanced_Filters_One | CI_Name                 | Advanced_Filters_No_CI_Name   |
+
+    ##Scenario 6.1 -Remove filters validation
+    # Remove filters>>one by one on clicking 'x'/ all together by clicking 'Clear all filters'
+    # The search results update accordingly
+    @viewListOfModifications @DefaultSorting @RemoveActiveFiltersAllTogether
+    Scenario Outline: Verify the user can view the list of modifications by selecting advanced filters and click on apply filters button
+        When I select advanced filters in the search modifications page using '<Advanced_Filters>'
+        And I capture the page screenshot
+        And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
+        And I capture the page screenshot
+        And the selected filters '<Advanced_Filters>' are displayed under active filters
+        Then the system displays modification records matching the filter criteria of '<Advanced_Filters>'
+        And I capture the page screenshot
+        And I can see the list is sorted by default in the descending order of the 'Modification Id'
+        And I capture the page screenshot
+        And I click the 'Clear_All_Filters' link on the 'Search_Modifications_Page'
+        Then the system displays no results found message if there is no 'modification record' on the system that matches the search criteria
+        Examples:
+            | Advanced_Filters     |
+            | Advanced_Filters_One |
+
+    ##Scenario 6.1 -Remove filters validation
+    # Remove filters>>one by one on clicking 'x'/ all together by clicking 'Clear all filters'
+    # The search results update accordingly
+    @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @RemoveActiveFiltersAllTogether
+    Scenario Outline: Verify the user can view the list of modifications by entering valid iras id, then selected advanced filters and click on apply filters button
+        When I enter iras id in the search modifications page using '<Valid_Iras_Id>'
+        And I capture the page screenshot
+        And I select advanced filters in the search modifications page using '<Advanced_Filters>'
+        And I capture the page screenshot
+        And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
+        And I capture the page screenshot
+        And the selected filters '<Advanced_Filters>' are displayed under active filters
+        Then the system displays modification records matching the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>'
+        And I capture the page screenshot
+        And I can see the list is sorted by default in the descending order of the 'Modification Id'
+        And I capture the page screenshot
+        And I click the 'Clear_All_Filters' link on the 'Search_Modifications_Page'
+        And I capture the page screenshot
+        Then the system displays modification records matching the search criteria of '<Valid_Iras_Id>'
+        And I can see the list is sorted by default in the descending order of the 'Modification Id'
+        Examples:
+            | Valid_Iras_Id     | Advanced_Filters     |
+            | Valid_Iras_Id_One | Advanced_Filters_One |
+
+##Scenario 5 -'Sponsor organisation' filter validation (Ask Alfred for reusing Front stage)
+
+# • The search should begin after entering the first three characters.
+
+# § If more than three results are returned, only the first three should be displayed initially, with the rest accessible via a vertically scrollable list.
+
+# § If no results are found, the system must display an appropriate error message to the user.
+
+
+###*****************************************************************************************************************************
 
 ### https://nihr.atlassian.net/browse/RSP-4011   dev/test - Develop the search & filters for modification records
 
@@ -49,9 +287,9 @@ Feature: Receive Amendment - Staff dashboard/worklist
 
 # 3. No IRAS ID+Filters(64 combinations)>>Click Apply Filters>>Results displayed  (Search button is not clicked)>>Do I need to click search
 
-# 4. Valid IRAS ID >>Click Search>>Results displayed>> Select Advanced Filters(64 combinations)>> Click Apply Filters>>Results displayed(filtered results) & vice versa
+# 4. Valid IRAS ID >>Click Search>>Results displayed>> Select Advanced Filters(64 combinations)>> Click Apply Filters>>Results displayed(filtered results)
 
-# 5. Does the results will be displayed by default? No I think (performance issue)/blank search will also not work
+# 5.Select Advanced Filters(64 combinations)>> Click Apply Filters>>Results displayed>> Valid IRAS ID >>Click Search>>Results displayed
 
 ##Scenario 2 -Unhappy paths:
 
