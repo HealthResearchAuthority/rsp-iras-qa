@@ -1,18 +1,49 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../hooks/CustomFixtures';
 import { confirmArrayNotNull } from '../../../../utils/UtilFunctions';
+import config from '../../../../../playwright.config';
 const { When, Then } = createBdd(test);
 
 When(
   'I select advanced filters in the search modifications page using {string}',
-  async ({ searchModificationsPage, commonItemsPage }, irasIdDatasetName: string) => {
+  async ({ searchModificationsPage, commonItemsPage, $tags }, irasIdDatasetName: string) => {
     const dataset =
       searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[irasIdDatasetName];
     // I open the list of filters by clicking the Advanced Filter chevron,if not opened by default (for handling JS Enabled and Disabled)
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
         // I open each filter one by one by clicking the corresponding Filter chevron,if not opened by default (for handling JS Enabled and Disabled)
-        await commonItemsPage.fillUIComponent(dataset, key, searchModificationsPage);
+        if (key === 'sponsor_organisation_text') {
+          if (
+            ($tags.includes('@jsEnabled') || config.projects?.[1].use?.javaScriptEnabled) &&
+            !$tags.includes('@jsDisabled')
+          ) {
+            dataset['sponsor_organisation_jsenabled_text'] = dataset['sponsor_organisation_text'];
+            await commonItemsPage.fillUIComponent(
+              dataset,
+              'sponsor_organisation_jsenabled_text',
+              searchModificationsPage
+            );
+            if (await keyProjectRolesPage.primary_sponsor_organisation_suggestion_list_labels.first().isVisible()) {
+              await keyProjectRolesPage.primary_sponsor_organisation_suggestion_list_labels.first().click();
+            }
+          } else {
+            await commonItemsPage.fillUIComponent(dataset, key, searchModificationsPage);
+            if (!(datasetName == 'Sponsor_Organisation_Text_Blank')) {
+              await keyProjectRolesPage.primary_sponsor_organisation_jsdisabled_search_button.click();
+              await keyProjectRolesPage.page.waitForTimeout(2000);
+              await keyProjectRolesPage.primary_sponsor_organisation_jsdisabled_search_results_radio_button.isVisible();
+            }
+            if (!(datasetName == 'Sponsor_Organisation_Text_Blank')) {
+              await keyProjectRolesPage.primary_sponsor_organisation_jsdisabled_search_results_radio_button
+                .first()
+                .click();
+            }
+          }
+          delete dataset['primary_sponsor_organisation_jsenabled_text'];
+        } else {
+          await commonItemsPage.fillUIComponent(dataset, key, searchModificationsPage);
+        }
       }
     }
   }
