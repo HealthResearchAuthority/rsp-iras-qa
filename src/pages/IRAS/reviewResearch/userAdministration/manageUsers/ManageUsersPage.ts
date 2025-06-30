@@ -9,6 +9,7 @@ export default class ManageUsersPage {
   readonly page: Page;
   readonly manageUsersPageTestData: typeof manageUsersPageTestData;
   readonly linkTextData: typeof linkTextData;
+  private _unique_email: string;
   readonly page_heading: Locator;
   readonly back_button: Locator;
   readonly add_new_users_record_link: Locator;
@@ -50,6 +51,7 @@ export default class ManageUsersPage {
   constructor(page: Page) {
     this.page = page;
     this.manageUsersPageTestData = manageUsersPageTestData;
+    this._unique_email = '';
 
     //Locators
     this.page_heading = this.page
@@ -99,6 +101,15 @@ export default class ManageUsersPage {
         exact: true,
       });
     this.listCell = this.page.getByRole('cell');
+  }
+
+  //Getters & Setters for Private Variables
+  async getUniqueEmail(): Promise<string> {
+    return this._unique_email;
+  }
+
+  async setUniqueEmail(value: string): Promise<void> {
+    this._unique_email = value;
   }
 
   async assertOnManageUsersPage() {
@@ -206,6 +217,7 @@ export default class ManageUsersPage {
     const userStatus = await manageUsersPage.getUserStatus(status);
     await manageUsersPage.goto(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size, userEmail);
     const foundRecord = await manageUsersPage.findUserProfile(userFirstName, userLastName, userEmail, userStatus);
+    await manageUsersPage.setUniqueEmail(userEmail);
     return foundRecord;
   }
 
@@ -232,5 +244,17 @@ export default class ManageUsersPage {
 
   getLastLoggedInDateTruncated(): string {
     return this.lastLoggedInDateTruncated;
+  }
+
+  async getUserEmail(inputType: string, createUserProfilePage: CreateUserProfilePage): Promise<string> {
+    let emailAddress: string;
+
+    if (inputType === 'newly created user') {
+      emailAddress = await createUserProfilePage.getUniqueEmail();
+    } else {
+      emailAddress = inputType;
+    }
+
+    return emailAddress;
   }
 }

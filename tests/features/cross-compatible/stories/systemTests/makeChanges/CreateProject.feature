@@ -745,3 +745,95 @@ Feature: Create Amendment - Create Project
       | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Hyphen      |
       | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Start_Space |
       | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space  |
+
+  @rsp-3939 @searchSelectSponsorOrgJsDisabled @jsDisabled
+  Scenario Outline: Validate user is able to search and select sponsor organisation in key project roles page with valid data
+    And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
+    And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
+    And I fill the project details title page with '<Project_Details_Title>'
+    When I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
+    Then I can see the key project roles page
+    Then I can see the '<Validation_Text>' ui labels on the key project roles page
+    Then I fill the key project roles page with '<Key_Project_Roles>'
+    And I capture the page screenshot
+    Then I click the '<Navigation_Button_Third>' button on the 'Key_Project_Roles_Page'
+    Then I can see the research locations page
+    When I click the '<Navigation_Link>' link on the 'Research_Locations_Page'
+    Then I can see the key project roles page
+    Then I can see previously saved values for '<Key_Project_Roles>' displayed on the key project roles page
+    And I capture the page screenshot
+    Then I click the '<Navigation_Button_Third>' button on the 'Research_Locations_Page'
+    Then I fill the research locations page with '<Research_Locations>'
+    When I click the '<Navigation_Button_Third>' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    Then I can validate the field values of '<Project_Details_Title>' page '<Key_Project_Roles>' page and '<Research_Locations>' page
+    And I click the change link '<Change_Link_Field>' on review your answers page
+    Then I can see the key project roles page
+    Then I can see previously saved values for '<Key_Project_Roles>' displayed on the key project roles page
+    And I capture the page screenshot
+    And I fill the key project roles page with '<Key_Project_Roles_Change>'
+    And I capture the page screenshot
+    When I click the 'Save_Changes' button on the 'Key_Project_Roles_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    Then I can validate the field values of '<Project_Details_Title>' page '<Key_Project_Roles_Change>' page and '<Research_Locations>' page
+    And I click the change link '<Change_Link_Field>' on review your answers page
+    Then I can see the key project roles page
+    Then I can see previously saved values for '<Key_Project_Roles_Change>' displayed on the key project roles page
+    And I capture the page screenshot
+    And I fill the key project roles page with '<Key_Project_Roles_Change_Blank>'
+    And I capture the page screenshot
+    When I click the 'Save_Changes' button on the 'Key_Project_Roles_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    Then I can validate the field values of '<Project_Details_Title>' page '<Key_Project_Roles_Change_Blank>' page and '<Research_Locations>' page
+    And I click the enter link '<Enter_Link_Field>' on review your answers page
+    Then I can see the key project roles page
+    Then I can see previously saved values for '<Key_Project_Roles_Change_Blank>' displayed on the key project roles page
+    And I capture the page screenshot
+
+    Examples:
+      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Add_Project | Navigation_Button_Third | Validation_Text | Project_Details_Title | Key_Project_Roles     | Key_Project_Roles_Change               | Key_Project_Roles_Change_Blank  | Research_Locations    | Change_Link_Field            | Enter_Link_Field             | Navigation_Link |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Full_Text_Aalborg | Sponsor_Organisation_Text_Blank | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Brackets     | Sponsor_Organisation_Text_Blank | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Amp          | Sponsor_Organisation_Text_Blank | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Dot_Comma    | Sponsor_Organisation_Text_Blank | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Slash        | Sponsor_Organisation_Text_Blank | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Hyphen       | Sponsor_Organisation_Text_Blank | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation | Back            |
+
+
+  @rsp-3939 @validateSponsorOrganisationResultsJsDisabled @jsDisabled
+  Scenario Outline: Validate the primary sponsor organisation search results in key project roles page
+    And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
+    And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
+    And I fill the project details title page with '<Project_Details_Title>'
+    When I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
+    Then I can see the key project roles page
+    And I capture the page screenshot
+    When I authorise the rts api using '<RTS_API_Data>'
+    Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation
+    And With JS disabled, I search with valid '<Sponsor_Organisation>' for primary sponsor organisation search box and validate the search results along with '<Sponsor_Organisation_Jsdisabled_Search_Hint_Labels>'
+    And I capture the page screenshot
+    And With JS disabled, I search with invalid '<Sponsor_Organisation_Invalid>' for primary sponsor organisation search box and validate the search results along with '<Sponsor_Organisation_Jsdisabled_Search_Hint_Labels>'
+    And I capture the page screenshot
+    And With JS disabled, I search with invalid min characters '<Sponsor_Organisation_Min>' for primary sponsor organisation search box
+    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Key_Project_Roles_Page'
+    And I capture the page screenshot
+
+    Examples:
+      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Add_Project | Navigation_Button_Third | Project_Details_Title | Validation_Text | Sponsor_Organisation                           | Sponsor_Organisation_Invalid      | Sponsor_Organisation_Min      | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_API_Data         | RTS_Request                                    | Field_And_Summary_Error_Message          |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Label_Texts     | Sponsor_Organisation_Partial_Text_NHS          | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS            | Field_Error_Primary_Sponsor_Organisation |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Label_Texts     | Sponsor_Organisation_Text_Partial_Brackets     | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Brackets       | Field_Error_Primary_Sponsor_Organisation |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Label_Texts     | Sponsor_Organisation_Text_Partial_Dot_Comma    | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Dot_Comma      | Field_Error_Primary_Sponsor_Organisation |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Label_Texts     | Sponsor_Organisation_Text_Partial_Slash        | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Slash          | Field_Error_Primary_Sponsor_Organisation |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Label_Texts     | Sponsor_Organisation_Text_Partial_Hyphen       | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Hyphen         | Field_Error_Primary_Sponsor_Organisation |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Label_Texts     | Sponsor_Organisation_Text_Partial_Start_Space  | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Start_Space    | Field_Error_Primary_Sponsor_Organisation |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Label_Texts     | Sponsor_Organisation_Text_Partial_End_Space    | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space     | Field_Error_Primary_Sponsor_Organisation |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Label_Texts     | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | Sponsor_Organisation_Text_Exactly_Five_Results | Field_Error_Primary_Sponsor_Organisation |

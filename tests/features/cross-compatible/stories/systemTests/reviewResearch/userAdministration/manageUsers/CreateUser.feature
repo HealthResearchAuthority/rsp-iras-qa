@@ -265,10 +265,10 @@ Feature: User Administration: Manage Users - Create user
       | Valid_Email_Data_Special_Characters |
       | Valid_Email_Data_Hyphen_Underscore  |
       | Valid_Email_Data_Domain             |
-            # | Valid_Email_Data_Unicode              |
-            # | Valid_Email_Data_Multiple_Unicode     |
-            # | Valid_Email_Data_Multiple_Sub_Domains |
-            # | Valid_Email_Data_Other_Language     |
+  # | Valid_Email_Data_Unicode              |
+  # | Valid_Email_Data_Multiple_Unicode     |
+  # | Valid_Email_Data_Multiple_Sub_Domains |
+  # | Valid_Email_Data_Other_Language     |
 
   @rsp-3122 @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage
   Scenario Outline: Validate error messages are displayed for invalid data in create user profile page
@@ -277,20 +277,20 @@ Feature: User Administration: Manage Users - Create user
     Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Create_User_Profile_Page'
     And I capture the page screenshot
 
-        Examples:
-            | Invalid_Data_User_Profile                                 | Field_And_Summary_Error_Message                                 |
-            | Missing_Mandatory_Fields_Role_Not_Operations              | Missing_Mandatory_Fields_Role_Not_Operations_Error              |
-            | Missing_Mandatory_Fields_Role_Operations                  | Missing_Mandatory_Fields_Role_Operations_Error                  |
-            | Missing_Mandatory_Field_First_Name_Role_Not_Operations    | Missing_Mandatory_Field_First_Name_Role_Not_Operations_Error    |
-            | Missing_Mandatory_Field_Last_Name_Role_Not_Operations     | Missing_Mandatory_Field_Last_Name_Role_Not_Operations_Error     |
-            | Missing_Mandatory_Field_Email_Address_Role_Not_Operations | Missing_Mandatory_Field_Email_Address_Role_Not_Operations_Error |
-            | Missing_Mandatory_Field_Country_Role_Operations           | Missing_Mandatory_Field_Country_Role_Operations_Error           |
-            | Missing_Mandatory_Field_Access_Required_Role_Operations   | Missing_Mandatory_Field_Access_Required_Role_Operations_Error   |
-            | Invalid_Character_Limit                                   | Invalid_Character_Limit_Error                                   |
-            | Invalid_Email_Data_Max_Char                               | Invalid_Character_Limit_Field_Email_Address_Error               |
-            | Incorrect_Format_Telephone_Data                           | Incorrect_Format_Field_Telephone_Error                          |
-            | Incorrect_Format_Invalid_Character_Limit_Telephone_Data   | Incorrect_Format_Invalid_Character_Limit_Telephone_Error        |
-            | Incorrect_Format_Invalid_Character_Limit_Email_Data       | Incorrect_Format_Invalid_Character_Limit_Email_Address_Error    |
+    Examples:
+      | Invalid_Data_User_Profile                                 | Field_And_Summary_Error_Message                                 |
+      | Missing_Mandatory_Fields_Role_Not_Operations              | Missing_Mandatory_Fields_Role_Not_Operations_Error              |
+      | Missing_Mandatory_Fields_Role_Operations                  | Missing_Mandatory_Fields_Role_Operations_Error                  |
+      | Missing_Mandatory_Field_First_Name_Role_Not_Operations    | Missing_Mandatory_Field_First_Name_Role_Not_Operations_Error    |
+      | Missing_Mandatory_Field_Last_Name_Role_Not_Operations     | Missing_Mandatory_Field_Last_Name_Role_Not_Operations_Error     |
+      | Missing_Mandatory_Field_Email_Address_Role_Not_Operations | Missing_Mandatory_Field_Email_Address_Role_Not_Operations_Error |
+      | Missing_Mandatory_Field_Country_Role_Operations           | Missing_Mandatory_Field_Country_Role_Operations_Error           |
+      | Missing_Mandatory_Field_Access_Required_Role_Operations   | Missing_Mandatory_Field_Access_Required_Role_Operations_Error   |
+      | Invalid_Character_Limit                                   | Invalid_Character_Limit_Error                                   |
+      | Invalid_Email_Data_Max_Char                               | Invalid_Character_Limit_Field_Email_Address_Error               |
+      | Incorrect_Format_Telephone_Data                           | Incorrect_Format_Field_Telephone_Error                          |
+      | Incorrect_Format_Invalid_Character_Limit_Telephone_Data   | Incorrect_Format_Invalid_Character_Limit_Telephone_Error        |
+      | Incorrect_Format_Invalid_Character_Limit_Email_Data       | Incorrect_Format_Invalid_Character_Limit_Email_Address_Error    |
 
   @rsp-3122 @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage @skip
   Scenario Outline: Validate error messages are displayed for invalid data in the email address field of create user profile page
@@ -376,6 +376,116 @@ Feature: User Administration: Manage Users - Create user
       | Valid_Data_In_All_Fields_Role_Operations | First_Name | Role_Operations | Missing_Mandatory_Field_Country_Role_Operations         | Missing_Mandatory_Field_Country_Role_Operations_Error         |
       | Valid_Data_In_All_Fields_Role_Operations | Last_Name  | Role_Operations | Missing_Mandatory_Field_Access_Required_Role_Operations | Missing_Mandatory_Field_Access_Required_Role_Operations_Error |
 
+  @rsp-3952 @DuplicateEmailValidation @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage
+  Scenario Outline: Get existing email addresses from manage users list page and validate error messages are displayed for the duplicate email in create user profile page
+    When I click the 'Back' link on the 'Create_User_Profile_Page'
+    And I capture the page screenshot
+    Then I can see the 'Manage_Users_Page'
+    When I enter the '<Field_Name>' of the '<Position>' item in the list, into the search field
+    And I capture the page screenshot
+    And I click the 'Search' button on the 'Manage_Users_Page'
+    And I capture the page screenshot
+    Then the system displays user records matching the search criteria
+    And I capture the page screenshot
+    When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
+    And I capture the page screenshot
+    Then I can see the add a new user profile page
+    When I fill the new user profile page using '<Invalid_Data_User_Profile>' for field validation
+    And I click the 'Continue' button on the 'Create_User_Profile_Page'
+    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Create_User_Profile_Page'
+    And I capture the page screenshot
+    Examples:
+      | Field_Name    | Position | Invalid_Data_User_Profile           | Field_And_Summary_Error_Message |
+      | Email_Address | First    | Duplicate_Email_Role_Not_Operations | Duplicate_Email_Error           |
+      | Email_Address | Last     | Duplicate_Email_Role_Operations     | Duplicate_Email_Error           |
+
+  @rsp-3952 @DuplicateEmailValidation @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage
+  Scenario Outline: Validate error messages are displayed for duplicate email in create user profile page
+    When I click the 'Back' link on the 'Create_User_Profile_Page'
+    And I capture the page screenshot
+    Then I can see the 'Manage_Users_Page'
+    When I fill the search input for searching 'users' with '<Search_Query>' as the search query
+    And I capture the page screenshot
+    And I click the 'Search' button on the 'Manage_Users_Page'
+    And I capture the page screenshot
+    Then the system displays user records matching the search criteria
+    And I capture the page screenshot
+    When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
+    And I capture the page screenshot
+    Then I can see the add a new user profile page
+    When I fill the new user profile page using '<Invalid_Data_User_Profile>' for field validation
+    And I click the 'Continue' button on the 'Create_User_Profile_Page'
+    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Create_User_Profile_Page'
+    And I capture the page screenshot
+    Examples:
+      | Search_Query            | Invalid_Data_User_Profile           | Field_And_Summary_Error_Message |
+      | Back_Stage_User_Email   | Duplicate_Email_Role_Not_Operations | Duplicate_Email_Error           |
+      | Front_Stage_User_Email  | Duplicate_Email_Role_Operations     | Duplicate_Email_Error           |
+      | System_Admin_User_Email | Duplicate_Email_Role_Operations     | Duplicate_Email_Error           |
+
+  @rsp-3952 @DuplicateEmailValidation @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage
+  Scenario Outline: Validate error messages are displayed for duplicate email in create user profile page after creating a user
+    When I fill the new user profile page using '<Add_User_Profile>'
+    And I capture the page screenshot
+    And I click the 'Continue' button on the 'Create_User_Profile_Page'
+    Then I can see the check and create user profile page
+    And I capture the page screenshot
+    Then I can see previously filled values in the new user profile page for '<Add_User_Profile>' displayed on the check and create user profile page
+    And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
+    Then I can see the create user profile confirmation page for '<Add_User_Profile>'
+    And I capture the page screenshot
+    When I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
+    Then I can see the 'Manage_Users_Page'
+    And I capture the page screenshot
+    And I can see the newly created user record should be present in the list for '<Add_User_Profile>' with '<Status_Enabled>' status in the manage user page
+    And I capture the page screenshot
+    When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
+    And I capture the page screenshot
+    Then I can see the add a new user profile page
+    When I fill the new user profile page using '<Invalid_Data_User_Profile>' for field validation
+    And I click the 'Continue' button on the 'Create_User_Profile_Page'
+    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Create_User_Profile_Page'
+    And I capture the page screenshot
+    When I click the 'Back' link on the 'Create_User_Profile_Page'
+    And I capture the page screenshot
+    Then I can see the 'Manage_Users_Page'
+    And I capture the page screenshot
+    When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
+    And I capture the page screenshot
+    Then I can see the add a new user profile page
+    And I update the 'newly created user' email to 'lower case'
+    When I fill the new user profile page using '<Invalid_Data_User_Profile>' for field validation
+    And I click the 'Continue' button on the 'Create_User_Profile_Page'
+    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Create_User_Profile_Page'
+    And I capture the page screenshot
+    When I click the 'Back' link on the 'Create_User_Profile_Page'
+    And I capture the page screenshot
+    Then I can see the 'Manage_Users_Page'
+    And I capture the page screenshot
+    When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
+    And I capture the page screenshot
+    Then I can see the add a new user profile page
+    And I update the 'newly created user' email to 'upper case'
+    When I fill the new user profile page using '<Invalid_Data_User_Profile>' for field validation
+    And I click the 'Continue' button on the 'Create_User_Profile_Page'
+    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Create_User_Profile_Page'
+    And I capture the page screenshot
+    When I click the 'Back' link on the 'Create_User_Profile_Page'
+    And I capture the page screenshot
+    Then I can see the 'Manage_Users_Page'
+    And I capture the page screenshot
+    And I update the 'newly created user' email to 'remove QAAutomation prefix'
+    When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
+    And I capture the page screenshot
+    Then I can see the add a new user profile page
+    When I fill the new user profile page using '<Invalid_Data_User_Profile>' for field validation
+    And I click the 'Continue' button on the 'Create_User_Profile_Page'
+    Then I can see the check and create user profile page
+    And I capture the page screenshot
+    Examples:
+      | Add_User_Profile                         | Status_Enabled | Invalid_Data_User_Profile       | Field_And_Summary_Error_Message |
+      | Valid_Data_In_All_Fields_Role_Operations | Enabled        | Duplicate_Email_Role_Operations | Duplicate_Email_Error           |
+
   @rsp-3886 @verifyLastLoggedInDate
   Scenario Outline: Verify the last login date of user in homepage and manage users page
     And I fill the new user profile page using '<Add_User_Profile>'
@@ -402,7 +512,6 @@ Feature: User Administration: Manage Users - Create user
     Then I have navigated to the '<Page>' as '<User_System_Admin>'
     And I validate the last logged in is displayed as full date in home page
     And I capture the page screenshot
-
     Examples:
       | Add_User_Profile                       | Status_Enabled | User_Front_Stage | User_System_Admin | Page      | Search_Query           |
       | Valid_Data_In_All_Fields_Role_Reviewer | Enabled        | Frontstage_User  | System_Admin      | Home_Page | Front_Stage_User_Email |

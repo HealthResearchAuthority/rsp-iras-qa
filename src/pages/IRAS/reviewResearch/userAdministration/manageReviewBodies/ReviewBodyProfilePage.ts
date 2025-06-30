@@ -180,6 +180,7 @@ export default class ReviewBodyProfilePage {
 
   async clickOnChangeButton(fieldKey: string) {
     const locatorName = fieldKey.toLowerCase() + '_change_link';
+    await expect(this[locatorName]).toBeInViewport();
     await this[locatorName].click();
   }
 
