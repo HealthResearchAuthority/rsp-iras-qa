@@ -1,9 +1,5 @@
 import { createBdd } from 'playwright-bdd';
 import { test } from '../../hooks/CustomFixtures';
-import { chromium } from '@playwright/test';
-import CommonItemsPage from '../../pages/Common/CommonItemsPage';
-import HomePage from '../../pages/IRAS/HomePage';
-import LoginPage from '../../pages/Common/LoginPage';
 import { getAuthState, getReportFolderName, getTicketReferenceTags } from '../../utils/UtilFunctions';
 import fs from 'fs';
 import path from 'path';
@@ -48,7 +44,7 @@ BeforeScenario(
 
 BeforeScenario(
   { name: 'Check that current auth state has not expired', tags: '@Regression or @SystemTest and not @NoAuth' },
-  async function ({ commonItemsPage, homePage, $tags }) {
+  async function ({ commonItemsPage, homePage, loginPage, $tags }) {
     const isAuthStateValid = async () => {
       const response = await commonItemsPage.page.request.get('', { maxRedirects: 0 });
       const text = await response.text();
@@ -56,26 +52,16 @@ BeforeScenario(
     };
 
     const reauthenticateUsers = async () => {
-      const jsBrowser = await chromium.launch();
-      const jsContext = await jsBrowser.newContext({ javaScriptEnabled: true });
-      const jsPage = await jsContext.newPage();
-      const jsCommonItemsPage = new CommonItemsPage(jsPage);
-      const jsHomePage = new HomePage(jsPage);
-      const jsLoginPage = new LoginPage(jsPage);
       const users = ['System_Admin', 'Frontstage_User', 'Backstage_User'];
-
       for (const user of users) {
-        await jsContext.clearCookies();
-        await jsHomePage.goto();
-        await jsHomePage.loginBtn.click();
-        await jsLoginPage.assertOnLoginPage();
-        await jsLoginPage.loginWithUserCreds(user);
-        await jsHomePage.assertOnHomePage();
-        await jsCommonItemsPage.storeAuthState(user);
+        await commonItemsPage.page.context().clearCookies();
+        await homePage.goto();
+        await homePage.loginBtn.click();
+        await loginPage.assertOnLoginPage();
+        await loginPage.loginWithUserCreds(user);
+        await homePage.assertOnHomePage();
+        await commonItemsPage.storeAuthState(user);
       }
-
-      await jsContext.close();
-      await jsBrowser.close();
     };
 
     const getReauthenticatedCookies = () => {

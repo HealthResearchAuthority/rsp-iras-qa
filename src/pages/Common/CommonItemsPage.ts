@@ -38,7 +38,6 @@ export default class CommonItemsPage {
   readonly qSetProgressBarStageLink: Locator;
   readonly qSetProgressBarActiveStageLink: Locator;
   readonly bannerNavBar: Locator;
-  readonly bannerLoginBtn: Locator;
   readonly bannerHome: Locator;
   readonly bannerReviewApplications: Locator;
   readonly bannerAdmin: Locator;
@@ -98,7 +97,6 @@ export default class CommonItemsPage {
     this.search_text = this.page.locator('#SearchQuery');
     //Banner
     this.bannerNavBar = this.page.getByLabel('Service information');
-    this.bannerLoginBtn = this.bannerNavBar.getByText(this.buttonTextData.Banner.Login, { exact: true });
     this.bannerHome = this.bannerNavBar.getByText(this.linkTextData.Banner.Home, { exact: true });
     this.bannerReviewApplications = this.bannerNavBar.getByText(this.linkTextData.Banner.Review_Applications, {
       exact: true,

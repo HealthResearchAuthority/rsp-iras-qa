@@ -12,7 +12,6 @@
     "password": "`${process.env.BACKSTAGE_USER_PASS}`"
   },
   "Login_Page": {
-    "header": "This is the TEST Identity Gateway",
-    "partial_link": "id.nihr.ac.uk/authenticationendpoint/login"
+    "header": "Create your GOV.UK One Login or sign in"
   }
 }
