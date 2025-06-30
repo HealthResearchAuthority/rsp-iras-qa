@@ -1,8 +1,5 @@
 @ReceiveAmendments @SysAdminUser @BackStageUser @SystemTest @rsp-4011 @rsp-4016
 Feature: Receive Amendment - Staff dashboard/worklist
-    As a member of approvals staff
-    I want to be notified of amendments that don't require actioning
-    So that I have a complete record of all amendments made to the project
 
     Background:
         Given I have navigated to the 'Home_Page'
@@ -20,15 +17,16 @@ Feature: Receive Amendment - Staff dashboard/worklist
     ##Scenario 6 -Selected filters validation
     # Selected filters are displayed under active filters>>tags/labels for each filter validation
     @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters
-    Scenario Outline: Verify the user can view the list of modifications by entering valid iras id, then selected advanced filters and click on apply filters button
-        When I enter iras id in the search modifications page using '<Valid_Iras_Id>'
+    Scenario Outline: Verify the user is able to view the list of modifications by entering a valid IRAS ID, selecting the advanced filters, and clicking the 'Apply filters' button
+        # When I enter iras id in the search modifications page using '<Valid_Iras_Id>'
+        When I enter '<Valid_Iras_Id>' into the search field
         And I capture the page screenshot
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
         And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
-        And the selected filters '<Advanced_Filters>' are displayed under active filters
-        Then the system displays modification records matching the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>'
+        Then I can see the selected filters '<Advanced_Filters>' are displayed under active filters
+        And the system displays modification records matching the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>'
         And I capture the page screenshot
         And I can see the list is sorted by default in the descending order of the 'Modification Id'
         And I capture the page screenshot
@@ -40,8 +38,9 @@ Feature: Receive Amendment - Staff dashboard/worklist
     ##Scenario 6 -Selected filters validation
     # Selected filters are displayed under active filters>>tags/labels for each filter validation
     @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters
-    Scenario Outline: Verify the user can view the list of modifications by entering valid iras id, then click on search button and then selected advanced filters and click on apply filters button
-        When I enter iras id in the search modifications page using '<Valid_Iras_Id>'
+    Scenario Outline: Verify the user is able to view the list of modifications by entering valid iras id, then clicking on 'Search' button and then selecting advanced filters and clicking the 'Apply filters' button
+        # When I enter iras id in the search modifications page using '<Valid_Iras_Id>'
+        When I enter '<Valid_Iras_Id>' into the search field
         And I capture the page screenshot
         And I click the 'Search' button on the 'Search_Modifications_Page'
         Then the system displays modification records matching the search criteria of '<Valid_Iras_Id>'
@@ -51,8 +50,8 @@ Feature: Receive Amendment - Staff dashboard/worklist
         And I capture the page screenshot
         And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
-        And the selected filters '<Advanced_Filters>' are displayed under active filters
-        Then the system displays modification records matching the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>'
+        Then I can see the selected filters '<Advanced_Filters>' are displayed under active filters
+        And the system displays modification records matching the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>'
         And I capture the page screenshot
         And I can see the list is sorted by default in the descending order of the 'Modification Id'
         And I capture the page screenshot
@@ -69,12 +68,13 @@ Feature: Receive Amendment - Staff dashboard/worklist
         And I capture the page screenshot
         And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
-        And the selected filters '<Advanced_Filters>' are displayed under active filters
-        Then the system displays modification records matching the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>'
+        Then I can see the selected filters '<Advanced_Filters>' are displayed under active filters
+        And the system displays modification records matching the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>'
         And I capture the page screenshot
         And I can see the list is sorted by default in the descending order of the 'Modification Id'
         And I capture the page screenshot
-        When I enter iras id in the search modifications page using '<Valid_Iras_Id>'
+        When I enter '<Valid_Iras_Id>' into the search field
+        # When I enter iras id in the search modifications page using '<Valid_Iras_Id>'
         And I capture the page screenshot
         And I click the 'Search' button on the 'Search_Modifications_Page'
         Then the system displays modification records matching the search criteria of '<Valid_Iras_Id>'
@@ -87,7 +87,8 @@ Feature: Receive Amendment - Staff dashboard/worklist
     # 4. Valid IRAS ID + No Filters >>Click Search>>Results displayed
     @viewListOfModifications @ValidIrasIdAndNoFilters
     Scenario Outline: Verify the user can view the list of modifications based on the entered valid iras id and the search performed
-        When I enter iras id in the search modifications page using '<Valid_Iras_Id>'
+        # When I enter iras id in the search modifications page using '<Valid_Iras_Id>'
+        When I enter '<Valid_Iras_Id>' into the search field
         And I capture the page screenshot
         And I click the 'Search' button on the 'Search_Modifications_Page'
         Then the system displays modification records matching the search criteria of '<Valid_Iras_Id>'
@@ -103,12 +104,12 @@ Feature: Receive Amendment - Staff dashboard/worklist
     # Selected filters are displayed under active filters>>tags/labels for each filter validation
     @viewListOfModifications @NoIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters
     Scenario Outline: Verify the user can view the list of modifications by selecting advanced filters and click on apply filters button
-        When I selected advanced filters in the search modifications page using '<Advanced_Filters>'
+        When I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
         And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
-        And the selected filters '<Advanced_Filters>' are displayed under active filters
-        Then the system displays modification records matching the filter criteria of '<Advanced_Filters>'
+        Then I can see the selected filters '<Advanced_Filters>' are displayed under active filters
+        And the system displays modification records matching the filter criteria of '<Advanced_Filters>'
         And I capture the page screenshot
         And I can see the list is sorted by default in the descending order of the 'Modification Id'
         And I capture the page screenshot
@@ -141,7 +142,8 @@ Feature: Receive Amendment - Staff dashboard/worklist
     #  3. Invalid IRAS ID + No Filters >>Click Search>>No results
     @NoResultsFound @InvalidIrasIdAndNoAdvancedFilters
     Scenario Outline: Verify the user can see no matching results found message on clicking search button after entering invalid iras id
-        When I enter iras id in the search modifications page using '<Invalid_Iras_Id>'
+        # When I enter iras id in the search modifications page using '<Invalid_Iras_Id>'
+        When I enter '<Invalid_Iras_Id>' into the search field
         And I capture the page screenshot
         And I click the 'Search' button on the 'Search_Modifications_Page'
         Then the system displays no results found message if there is no 'modification record' on the system that matches the search criteria
@@ -155,14 +157,15 @@ Feature: Receive Amendment - Staff dashboard/worklist
     # Selected filters are displayed under active filters>>tags/labels for each filter validation
     @NoResultsFound @InvalidIrasIdAndAdvancedFilters @ActiveFilters
     Scenario Outline: Verify the user can see no matching results found message by entering invalid iras id, then selected advanced filters and click on apply filters button
-        When I enter iras id in the search modifications page using '<Invalid_Iras_Id>'
+        # When I enter iras id in the search modifications page using '<Invalid_Iras_Id>'
+        When I enter '<Invalid_Iras_Id>' into the search field
         And I capture the page screenshot
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
         And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
-        And the selected filters '<Advanced_Filters>' are displayed under active filters
-        Then the system displays no results found message if there is no 'modification record' on the system that matches the search criteria
+        Then I can see the selected filters '<Advanced_Filters>' are displayed under active filters
+        And the system displays no results found message if there is no 'modification record' on the system that matches the search criteria
         And I capture the page screenshot
         Examples:
             | Invalid_Iras_Id     | Advanced_Filters     |
@@ -173,14 +176,15 @@ Feature: Receive Amendment - Staff dashboard/worklist
     # Selected filters are displayed under active filters>>tags/labels for each filter validation
     @NoResultsFound @ValidIrasIdAndAdvancedFilters @ActiveFilters
     Scenario Outline: Verify the user can see no matching results found message by entering invalid iras id, then selected advanced filters and click on apply filters button
-        When I enter iras id in the search modifications page using '<Valid_Iras_Id>'
+        # When I enter iras id in the search modifications page using '<Valid_Iras_Id>'
+        When I enter '<Valid_Iras_Id>' into the search field
         And I capture the page screenshot
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
         And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
-        And the selected filters '<Advanced_Filters>' are displayed under active filters
-        Then the system displays no results found message if there is no 'modification record' on the system that matches the search criteria
+        Then I can see the selected filters '<Advanced_Filters>' are displayed under active filters
+        And the system displays no results found message if there is no 'modification record' on the system that matches the search criteria
         And I capture the page screenshot
         Examples:
             | Valid_Iras_Id     | Advanced_Filters_No_results     |
@@ -210,12 +214,12 @@ Feature: Receive Amendment - Staff dashboard/worklist
         And I capture the page screenshot
         And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
-        And the selected filters '<Advanced_Filters>' are displayed under active filters
-        Then the system displays modification records matching the filter criteria of '<Advanced_Filters>'
+        Then I can see the selected filters '<Advanced_Filters>' are displayed under active filters
+        And the system displays modification records matching the filter criteria of '<Advanced_Filters>'
         And I capture the page screenshot
         And I can see the list is sorted by default in the descending order of the 'Modification Id'
         And I capture the page screenshot
-        And remove selected filter '<Advanced_Filters_Remove>'
+        And I remove the selected filter '<Advanced_Filters_Remove>'
         Then the system displays modification records matching the filter criteria of '<Advanced_Filters_After_Remove>'
 
         Examples:
@@ -231,8 +235,8 @@ Feature: Receive Amendment - Staff dashboard/worklist
         And I capture the page screenshot
         And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
-        And the selected filters '<Advanced_Filters>' are displayed under active filters
-        Then the system displays modification records matching the filter criteria of '<Advanced_Filters>'
+        Then I can see the selected filters '<Advanced_Filters>' are displayed under active filters
+        And the system displays modification records matching the filter criteria of '<Advanced_Filters>'
         And I capture the page screenshot
         And I can see the list is sorted by default in the descending order of the 'Modification Id'
         And I capture the page screenshot
@@ -247,14 +251,15 @@ Feature: Receive Amendment - Staff dashboard/worklist
     # The search results update accordingly
     @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @RemoveActiveFiltersAllTogether
     Scenario Outline: Verify the user can view the list of modifications by entering valid iras id, then selected advanced filters and click on apply filters button
-        When I enter iras id in the search modifications page using '<Valid_Iras_Id>'
+        # When I enter iras id in the search modifications page using '<Valid_Iras_Id>'
+        When I enter '<Valid_Iras_Id>' into the search field
         And I capture the page screenshot
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
         And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
-        And the selected filters '<Advanced_Filters>' are displayed under active filters
-        Then the system displays modification records matching the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>'
+        Then I can see the selected filters '<Advanced_Filters>' are displayed under active filters
+        And the system displays modification records matching the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>'
         And I capture the page screenshot
         And I can see the list is sorted by default in the descending order of the 'Modification Id'
         And I capture the page screenshot
@@ -274,6 +279,7 @@ Feature: Receive Amendment - Staff dashboard/worklist
 
 # § If no results are found, the system must display an appropriate error message to the user.
 
+#### Partial Iras Id search validation
 
 ###*****************************************************************************************************************************
 
@@ -290,6 +296,8 @@ Feature: Receive Amendment - Staff dashboard/worklist
 # 4. Valid IRAS ID >>Click Search>>Results displayed>> Select Advanced Filters(64 combinations)>> Click Apply Filters>>Results displayed(filtered results)
 
 # 5.Select Advanced Filters(64 combinations)>> Click Apply Filters>>Results displayed>> Valid IRAS ID >>Click Search>>Results displayed
+
+# 6.Partial Iras ID >>Click Search>>Results displayed
 
 ##Scenario 2 -Unhappy paths:
 

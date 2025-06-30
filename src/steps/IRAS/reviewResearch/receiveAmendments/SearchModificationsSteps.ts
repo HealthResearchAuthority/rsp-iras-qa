@@ -1,70 +1,18 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../hooks/CustomFixtures';
-import { Locator } from 'playwright/test';
-import { confirmArrayNotNull, generateTimeStampedValue } from '../../../../utils/UtilFunctions';
+import { confirmArrayNotNull } from '../../../../utils/UtilFunctions';
 const { When, Then } = createBdd(test);
 
 When(
-  'I enter valid iras id and select advanced filters in the search modifications page using {string}',
-  async ({ createReviewBodyPage, commonItemsPage }, datasetName: string) => {
-    const dataset = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body[datasetName];
-    const datasetNameClear: string = 'Create_Review_Body_Page';
-    const clearDataset = createReviewBodyPage.createReviewBodyPageData[datasetNameClear];
-    await commonItemsPage.clearUIComponent(clearDataset, 'country_checkbox', createReviewBodyPage);
-    for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        if (datasetName.startsWith('Valid_') && key == 'organisation_name_text') {
-          const orgNameLocator: Locator = createReviewBodyPage[key];
-          const uniqueOrgNameValue = await generateTimeStampedValue(dataset[key], ' ');
-          await orgNameLocator.fill(uniqueOrgNameValue);
-          await createReviewBodyPage.setUniqueOrgName(uniqueOrgNameValue);
-        } else {
-          await commonItemsPage.fillUIComponent(dataset, key, createReviewBodyPage);
-        }
-      }
-    }
-  }
-);
-
-When(
-  'I enter iras id in the search modifications page using {string}',
-  async ({ createReviewBodyPage, commonItemsPage }, datasetName: string) => {
-    const dataset = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body[datasetName];
-    const datasetNameClear: string = 'Create_Review_Body_Page';
-    const clearDataset = createReviewBodyPage.createReviewBodyPageData[datasetNameClear];
-    await commonItemsPage.clearUIComponent(clearDataset, 'country_checkbox', createReviewBodyPage);
-    for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        if (datasetName.startsWith('Valid_') && key == 'organisation_name_text') {
-          const orgNameLocator: Locator = createReviewBodyPage[key];
-          const uniqueOrgNameValue = await generateTimeStampedValue(dataset[key], ' ');
-          await orgNameLocator.fill(uniqueOrgNameValue);
-          await createReviewBodyPage.setUniqueOrgName(uniqueOrgNameValue);
-        } else {
-          await commonItemsPage.fillUIComponent(dataset, key, createReviewBodyPage);
-        }
-      }
-    }
-  }
-);
-
-When(
   'I select advanced filters in the search modifications page using {string}',
-  async ({ createReviewBodyPage, commonItemsPage }, datasetName: string) => {
-    const dataset = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body[datasetName];
-    const datasetNameClear: string = 'Create_Review_Body_Page';
-    const clearDataset = createReviewBodyPage.createReviewBodyPageData[datasetNameClear];
-    await commonItemsPage.clearUIComponent(clearDataset, 'country_checkbox', createReviewBodyPage);
+  async ({ searchModificationsPage, commonItemsPage }, irasIdDatasetName: string) => {
+    const dataset =
+      searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[irasIdDatasetName];
+    // I open the list of filters by clicking the Advanced Filter chevron,if not opened by default (for handling JS Enabled and Disabled)
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        if (datasetName.startsWith('Valid_') && key == 'organisation_name_text') {
-          const orgNameLocator: Locator = createReviewBodyPage[key];
-          const uniqueOrgNameValue = await generateTimeStampedValue(dataset[key], ' ');
-          await orgNameLocator.fill(uniqueOrgNameValue);
-          await createReviewBodyPage.setUniqueOrgName(uniqueOrgNameValue);
-        } else {
-          await commonItemsPage.fillUIComponent(dataset, key, createReviewBodyPage);
-        }
+        // I open each filter one by one by clicking the corresponding Filter chevron,if not opened by default (for handling JS Enabled and Disabled)
+        await commonItemsPage.fillUIComponent(dataset, key, searchModificationsPage);
       }
     }
   }

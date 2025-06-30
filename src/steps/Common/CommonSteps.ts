@@ -477,22 +477,26 @@ Then(
 When(
   'I enter {string} into the search field',
   async (
-    { commonItemsPage, reviewBodyProfilePage, createReviewBodyPage, createUserProfilePage },
+    { commonItemsPage, reviewBodyProfilePage, createReviewBodyPage, createUserProfilePage, searchModificationsPage },
     inputType: string
   ) => {
     let searchValue: string;
-    switch (inputType) {
-      case 'name of the previously used review body':
-        searchValue = await reviewBodyProfilePage.getOrgName();
-        break;
-      case 'name of the new review body':
-        searchValue = await createReviewBodyPage.getUniqueOrgName();
-        break;
-      case 'name of the newly created user':
-        searchValue = await createUserProfilePage.getUniqueEmail();
-        break;
-      default:
-        searchValue = inputType;
+    if (inputType.startsWith('Valid_Iras_Id') || inputType.startsWith('Invalid_Iras_Id')) {
+      searchValue = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[inputType];
+    } else {
+      switch (inputType) {
+        case 'name of the previously used review body':
+          searchValue = await reviewBodyProfilePage.getOrgName();
+          break;
+        case 'name of the new review body':
+          searchValue = await createReviewBodyPage.getUniqueOrgName();
+          break;
+        case 'name of the newly created user':
+          searchValue = await createUserProfilePage.getUniqueEmail();
+          break;
+        default:
+          searchValue = inputType;
+      }
     }
     await commonItemsPage.search_text.fill(searchValue);
   }
