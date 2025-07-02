@@ -185,7 +185,7 @@ export default class ReviewBodyProfilePage {
       await this[locatorName].focus();
       await this[locatorName].press('Enter');
     } else {
-      await this[locatorName].scrollIntoViewIfNeeded();
+      await this[locatorName].scrollIntoViewIfNeeded(); // This line need to be removed after the defect fix RSP-4099
       await expect(this[locatorName]).toBeInViewport();
       await this[locatorName].click();
     }
