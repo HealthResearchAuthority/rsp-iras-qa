@@ -182,6 +182,7 @@ Given(
       await checkCreateUserProfilePage.back_button.click(); //work around for now >> to click on Back link
     } else if (pageKey === 'Check_Create_Review_Body_Page' && linkKey === 'Back') {
       await checkCreateUserProfilePage.back_button.click(); //work around for now >> to click on Back link
+      // This if condition need to be removed for android after the defect fix RSP-4099
     } else if (
       pageKey === 'User_Profile_Page' &&
       linkKey === 'View_Users_Audit_History' &&

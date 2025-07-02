@@ -185,6 +185,7 @@ export default class ReviewBodyProfilePage {
       await this[locatorName].focus();
       await this[locatorName].press('Enter');
     } else {
+      await this[locatorName].scrollIntoViewIfNeeded();
       await expect(this[locatorName]).toBeInViewport();
       await this[locatorName].click();
     }
