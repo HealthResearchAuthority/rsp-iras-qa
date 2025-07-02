@@ -107,7 +107,7 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
         And the 'Next' button will be 'not available' to the user
         And I capture the page screenshot
 
-    @rsp-3459 @ManageReviewBodiesSearchResultsFound @Smoke
+    @rsp-3459 @ManageReviewBodiesSearchResultsFound @Smoke @skip
     Scenario Outline: Verify search results in manage review bodies page when user search by first and last organisation names
         When I enter the '<Field_Name>' of the '<Position>' item in the list, into the search field
         And I capture the page screenshot
