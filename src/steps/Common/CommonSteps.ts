@@ -134,11 +134,30 @@ Then('I see something {string}', async ({ commonItemsPage }, testType: string) =
 
 Then('I click the {string} button on the {string}', async ({ commonItemsPage }, buttonKey: string, pageKey: string) => {
   const buttonValue = commonItemsPage.buttonTextData[pageKey][buttonKey];
-  await commonItemsPage.govUkButton
-    .getByText(buttonValue, { exact: true })
-    .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
-    .first()
-    .click();
+  // This if condition need to be removed for android after the defect fix RSP-4099
+  if (
+    buttonKey == 'Create_Profile' &&
+    pageKey == 'Check_Create_User_Profile_Page' &&
+    process.env.OS_TYPE?.toLowerCase() == 'android' &&
+    process.env.PLATFORM?.toLowerCase() == 'mobile'
+  ) {
+    await commonItemsPage.govUkButton
+      .getByText(buttonValue, { exact: true })
+      .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
+      .first()
+      .focus();
+    await commonItemsPage.govUkButton
+      .getByText(buttonValue, { exact: true })
+      .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
+      .first()
+      .press('Enter');
+  } else {
+    await commonItemsPage.govUkButton
+      .getByText(buttonValue, { exact: true })
+      .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
+      .first()
+      .click();
+  }
   await commonItemsPage.page.waitForLoadState('domcontentloaded');
 });
 
@@ -163,6 +182,15 @@ Given(
       await checkCreateUserProfilePage.back_button.click(); //work around for now >> to click on Back link
     } else if (pageKey === 'Check_Create_Review_Body_Page' && linkKey === 'Back') {
       await checkCreateUserProfilePage.back_button.click(); //work around for now >> to click on Back link
+      // This if condition need to be removed for android after the defect fix RSP-4099
+    } else if (
+      pageKey === 'User_Profile_Page' &&
+      linkKey === 'View_Users_Audit_History' &&
+      process.env.OS_TYPE?.toLowerCase() == 'android' &&
+      process.env.PLATFORM?.toLowerCase() == 'mobile'
+    ) {
+      await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).focus();
+      await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).press('Enter');
     } else if (
       (pageKey === 'Search_Add_User_Review_Body_Page' || pageKey === 'Review_Body_User_List_Page') &&
       linkKey === 'Back_To_Users'
