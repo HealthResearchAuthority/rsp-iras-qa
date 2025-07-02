@@ -31,8 +31,9 @@ Feature: Receive Amendment - Staff dashboard/worklist
         And I can see the list is sorted by default in the descending order of the 'Modification Id'
         And I capture the page screenshot
         Examples:
-            | Valid_Iras_Id     | Advanced_Filters     |
-            | Valid_Iras_Id_One | Advanced_Filters_One |
+            | Valid_Iras_Id     | Advanced_Filters                |
+            | Valid_Iras_Id_One | Advanced_Filters_One            |
+            | Valid_Iras_Id_One | Sponsor_Organisation_Text_Blank |
 
     # 2. Valid IRAS ID >>Click Search>>Results displayed>> Select Advanced Filters(64 combinations)>> Click Apply Filters>>Results displayed(filtered results)
     ##Scenario 6 -Selected filters validation
@@ -125,9 +126,6 @@ Feature: Receive Amendment - Staff dashboard/worklist
         When I click the 'Search' button on the 'Search_Modifications_Page'
         Then the system displays no results found message if there is no 'modification record' on the system that matches the search criteria
         And I capture the page screenshot
-        Examples:
-            | Advanced_Filters     |
-            | Advanced_Filters_One |
 
     # 2.  No IRAS ID + No Filters >> Click Apply Filters>>No results
     @NoResultsFound @NoIrasIdAndNoAdvancedFilters
@@ -135,9 +133,7 @@ Feature: Receive Amendment - Staff dashboard/worklist
         When I click the 'Apply_filters' button on the 'Search_Modifications_Page'
         Then the system displays no results found message if there is no 'modification record' on the system that matches the search criteria
         And I capture the page screenshot
-        Examples:
-            | Advanced_Filters     |
-            | Advanced_Filters_One |
+
 
     #  3. Invalid IRAS ID + No Filters >>Click Search>>No results
     @NoResultsFound @InvalidIrasIdAndNoAdvancedFilters
@@ -279,7 +275,7 @@ Feature: Receive Amendment - Staff dashboard/worklist
 
 # § If no results are found, the system must display an appropriate error message to the user.
 
-#### Partial Iras Id search validation
+#### Partial validation for all the text boxes>>Iras Id search validation
 
 ###*****************************************************************************************************************************
 

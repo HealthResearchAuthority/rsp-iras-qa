@@ -6,6 +6,7 @@
     "search_button_label": "Search",
     "no_results_heading": "There are no matching results",
     "no_results_guidance_text": "Improve your search results by: removing filters double-checking your spelling using fewer keywords searching for something less specific",
+    "advanced_filter_label": "Advanced filter",
     "chief_investigator_name_label": "Chief Investigator name",
     "chief_investigator_hint_text": "Enter the name of the Chief Investigator",
     "date_modification_submitted_label": "Date modification submitted",
@@ -26,6 +27,68 @@
     "sponsor_organisation_hint_text": "Type the name of the organisation or scroll through the list",
     "Invalid_Date_Modification_Submitted_Error": {
       "date_modification_submitted_to_date_text": "The date should be a valid date and in future"
+    },
+    "Valid_Iras_Id_One": {
+      "iras_id_text": "9800001"
+    },
+    "Advanced_Filters_One": {
+      "chief_investigator_name_text": "Barry White",
+      "date_modification_submitted_from_date_text": "",
+      "date_modification_submitted_from_month_dropdown": "January",
+      "date_modification_submitted_from_year_text": "",
+      "date_modification_submitted_to_date_text": "",
+      "date_modification_submitted_to_month_dropdown": "March",
+      "date_modification_submitted_to_year_text": "",
+      "lead_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "modification_type_checkbox": ["Minor modifications", "Modification of an important detail"],
+      "short_project_title_text": "Project 01",
+      "sponsor_organisation_text": "COLD GENESYS INC"
+    },
+    "Sponsor_Organisation_Text_Blank": {
+      "chief_investigator_name_text": "Barry White",
+      "date_modification_submitted_from_date_text": "",
+      "date_modification_submitted_from_month_dropdown": "January",
+      "date_modification_submitted_from_year_text": "",
+      "date_modification_submitted_to_date_text": "",
+      "date_modification_submitted_to_month_dropdown": "March",
+      "date_modification_submitted_to_year_text": "",
+      "lead_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "modification_type_checkbox": ["Minor modifications", "Modification of an important detail"],
+      "short_project_title_text": "Project 01",
+      "sponsor_organisation_text": ""
+    },
+    "Invalid_IRAS_ID_Letters": {
+      "iras_id_text": "abcdefg"
+    },
+    "Invalid_IRAS_ID_Symbols": {
+      "iras_id_text": "!£$%^&*"
+    },
+    "Invalid_IRAS_ID_Letters_Symbols": {
+      "iras_id_text": "a!b£c£D%"
+    },
+    "Invalid_IRAS_ID_Min_Length": {
+      "iras_id_text": "12"
+    },
+    "Invalid_IRAS_ID_Leading_Zeros": {
+      "iras_id_text": "000123"
+    },
+    "Invalid_IRAS_ID_Spaces": {
+      "iras_id_text": "    "
+    },
+    "Invalid_IRAS_ID_Spaces_Suffix": {
+      "iras_id_text": "1234  "
+    },
+    "Invalid_IRAS_ID_Spaces_Prefix": {
+      "iras_id_text": " 1234"
+    },
+    "Invalid_IRAS_ID_Spaces_Seperator": {
+      "iras_id_text": "12 34"
+    },
+    "Invalid_IRAS_ID_Blank": {
+      "iras_id_text": ""
+    },
+    "Invalid_IRAS_ID_zeros": {
+      "iras_id_text": "0000"
     }
   }
 }

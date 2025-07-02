@@ -6,13 +6,15 @@ const { When, Then } = createBdd(test);
 
 When(
   'I select advanced filters in the search modifications page using {string}',
-  async ({ searchModificationsPage, commonItemsPage, $tags }, irasIdDatasetName: string) => {
+  async ({ searchModificationsPage, commonItemsPage, $tags }, filterDatasetName: string) => {
     const dataset =
-      searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[irasIdDatasetName];
+      searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[filterDatasetName];
     // I open the list of filters by clicking the Advanced Filter chevron,if not opened by default (for handling JS Enabled and Disabled)
+    searchModificationsPage.clickAdvancedFilterChevron();
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
         // I open each filter one by one by clicking the corresponding Filter chevron,if not opened by default (for handling JS Enabled and Disabled)
+        searchModificationsPage.clickFilterChevron(key, searchModificationsPage);
         if (key === 'sponsor_organisation_text') {
           if (
             ($tags.includes('@jsEnabled') || config.projects?.[1].use?.javaScriptEnabled) &&
@@ -24,25 +26,47 @@ When(
               'sponsor_organisation_jsenabled_text',
               searchModificationsPage
             );
-            if (await keyProjectRolesPage.primary_sponsor_organisation_suggestion_list_labels.first().isVisible()) {
-              await keyProjectRolesPage.primary_sponsor_organisation_suggestion_list_labels.first().click();
+            if (await searchModificationsPage.sponsor_organisation_suggestion_list_labels.first().isVisible()) {
+              await searchModificationsPage.sponsor_organisation_suggestion_list_labels.first().click();
             }
           } else {
             await commonItemsPage.fillUIComponent(dataset, key, searchModificationsPage);
-            if (!(datasetName == 'Sponsor_Organisation_Text_Blank')) {
-              await keyProjectRolesPage.primary_sponsor_organisation_jsdisabled_search_button.click();
-              await keyProjectRolesPage.page.waitForTimeout(2000);
-              await keyProjectRolesPage.primary_sponsor_organisation_jsdisabled_search_results_radio_button.isVisible();
+            if (!(filterDatasetName == 'Sponsor_Organisation_Text_Blank')) {
+              await searchModificationsPage.sponsor_organisation_jsdisabled_search_button.click();
+              await searchModificationsPage.page.waitForTimeout(2000);
+              await searchModificationsPage.sponsor_organisation_jsdisabled_search_results_radio_button.isVisible();
             }
-            if (!(datasetName == 'Sponsor_Organisation_Text_Blank')) {
-              await keyProjectRolesPage.primary_sponsor_organisation_jsdisabled_search_results_radio_button
-                .first()
-                .click();
+            if (!(filterDatasetName == 'Sponsor_Organisation_Text_Blank')) {
+              await searchModificationsPage.sponsor_organisation_jsdisabled_search_results_radio_button.first().click();
             }
           }
-          delete dataset['primary_sponsor_organisation_jsenabled_text'];
+          delete dataset['sponsor_organisation_jsenabled_text'];
         } else {
           await commonItemsPage.fillUIComponent(dataset, key, searchModificationsPage);
+        }
+      }
+    }
+  }
+);
+
+Then(
+  'I can see the selected filters {string} are displayed under active filters',
+  async ({ searchModificationsPage, commonItemsPage }, filterDatasetName: string) => {
+    const dataset =
+      searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[filterDatasetName];
+    for (const key in dataset) {
+      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+        const fieldValActual = await commonItemsPage.getSelectedValues(key, checkCreateUserProfilePage);
+        if (key === 'email_address_text') {
+          const data = await returnDataFromJSON();
+          expect(fieldValActual).toBe(data.Create_User_Profile.email_address_unique);
+        } else if (key === 'country_checkbox' || key === 'access_required_checkbox' || key === 'role_checkbox') {
+          const fieldValActuals = fieldValActual.split(', ');
+          fieldValActuals.forEach((val, index) => {
+            expect(val).toBe(dataset[key][index]);
+          });
+        } else {
+          expect(fieldValActual).toBe(dataset[key]);
         }
       }
     }
