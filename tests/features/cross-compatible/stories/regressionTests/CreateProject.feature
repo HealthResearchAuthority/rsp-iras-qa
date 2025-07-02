@@ -145,7 +145,7 @@ Feature: Create Amendment - Create Project - Regression Tests
       | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Invalid_Date_No_Year                        | Field_Error_Message_Planned_Project_End_Year |
 
   @ErrorMessageInvalidChiefEmailKeyProjectRolesRegression
-  Scenario Outline: Validate error messages displayed when user inputs invalid data in Chief Investigator email on key project roles page
+  Scenario Outline: Validate error messages displayed when user inputs invalid data in chief investigator email on key project roles page
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
