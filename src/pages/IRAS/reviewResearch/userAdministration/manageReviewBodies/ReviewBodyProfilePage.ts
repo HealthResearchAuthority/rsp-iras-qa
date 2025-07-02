@@ -180,8 +180,14 @@ export default class ReviewBodyProfilePage {
 
   async clickOnChangeButton(fieldKey: string) {
     const locatorName = fieldKey.toLowerCase() + '_change_link';
-    await expect(this[locatorName]).toBeInViewport();
-    await this[locatorName].click();
+    // This if condition need to be removed for android after the defect fix RSP-4099
+    if (process.env.OS_TYPE?.toLowerCase() == 'android' && process.env.PLATFORM?.toLowerCase() == 'mobile') {
+      await this[locatorName].focus();
+      await this[locatorName].press('Enter');
+    } else {
+      await expect(this[locatorName]).toBeInViewport();
+      await this[locatorName].click();
+    }
   }
 
   //Getters & Setters for Private Variables

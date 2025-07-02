@@ -12,7 +12,21 @@
     "year_textbox_label": "Year"
   },
   "Dropdown_Values": {
-    "month_dropdown_values": ["Choose month", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    "month_dropdown_values": [
+      "Choose month",
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ]
   },
   "Summary_Error_Message": {
     "error_message_summary_header": "There is a problem",
@@ -26,6 +40,15 @@
     "planned_project_end_day_text": "The date should be a valid date and in future",
     "planned_project_end_month_dropdown": "The date should be a valid date and in future",
     "planned_project_end_year_text": "The date should be a valid date and in future"
+  },
+  "Field_Error_Message_Short_Project_Title": {
+    "short_project_title_text": "Short project title must not contain more than XX characters"
+  },
+  "Field_Error_Message_Planned_Project_End_Day": {
+    "planned_project_end_day_text": "The date should be a valid date and in future"
+  },
+  "Field_Error_Message_Planned_Project_End_Year": {
+    "planned_project_end_day_text": "The date should be a valid date and in future"
   },
   "All_Field_Error_Message": {
     "short_project_title_text": "Short project title must not contain more than XX characters",

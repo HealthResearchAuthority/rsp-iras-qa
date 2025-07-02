@@ -128,21 +128,21 @@ Feature: Create Amendment - Create Project - Regression Tests
     And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     When I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
-    Then I validate '<Field_Error_Message>' and '<Summary_Error_Message>' displayed on project details title page for '<Project_Details_Title>'
+    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Project_Details_Title_Page'
 
     Examples:
-      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Third | Navigation_Button_Add_Project | Project_Details_Title                       | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Invalid_Data_Short_Project_Title_Max_Length | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Invalid_Data_Short_Project_Title_Min_Length | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Invalid_Day_Number                          | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Invalid_Day_Letters                         | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Invalid_Year_Number_1                       | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Invalid_Year_Number_2                       | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Invalid_Year_Letters                        | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Invalid_Date_Past                           | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Invalid_Date_No_Day                         | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Invalid_Date_No_Month                       | Field_Error_Message | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Invalid_Date_No_Year                        | Field_Error_Message | Summary_Error_Message |
+      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Third | Navigation_Button_Add_Project | Project_Details_Title                       | Field_And_Summary_Error_Message              |
+      | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Invalid_Data_Short_Project_Title_Max_Length | Field_Error_Message_Short_Project_Title      |
+      | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Invalid_Data_Short_Project_Title_Min_Length | Field_Error_Message_Short_Project_Title      |
+      | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Invalid_Day_Number                          | Field_Error_Message_Planned_Project_End_Day  |
+      | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Invalid_Day_Letters                         | Field_Error_Message_Planned_Project_End_Day  |
+      | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Invalid_Year_Number_1                       | Field_Error_Message_Planned_Project_End_Year |
+      | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Invalid_Year_Number_2                       | Field_Error_Message_Planned_Project_End_Year |
+      | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Invalid_Year_Letters                        | Field_Error_Message_Planned_Project_End_Year |
+      | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Invalid_Date_Past                           | Field_Error_Message_Planned_Project_End_Day  |
+      | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Invalid_Date_No_Day                         | Field_Error_Message_Planned_Project_End_Day  |
+      | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Invalid_Date_No_Month                       | Field_Error_Message_Planned_Project_End_Day  |
+      | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Invalid_Date_No_Year                        | Field_Error_Message_Planned_Project_End_Year |
 
   @ErrorMessageInvalidKeyProjectRolesRegression
   Scenario Outline: Validate error messages displayed when user inputs invalid data in key project roles page
