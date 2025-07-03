@@ -39,7 +39,7 @@
       "date_modification_submitted_to_date_text": "",
       "date_modification_submitted_to_month_dropdown": "March",
       "date_modification_submitted_to_year_text": "",
-      "lead_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "lead_nation_checkbox": ["England", "Wales"],
       "modification_type_checkbox": ["Minor modifications", "Modification of an important detail"],
       "short_project_title_text": "Project 01",
       "sponsor_organisation_text": "COLD GENESYS INC"
@@ -52,8 +52,8 @@
       "date_modification_submitted_to_date_text": "",
       "date_modification_submitted_to_month_dropdown": "March",
       "date_modification_submitted_to_year_text": "",
-      "lead_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
-      "modification_type_checkbox": ["Minor modifications", "Modification of an important detail"],
+      "lead_nation_checkbox": ["England"],
+      "modification_type_checkbox": ["Minor modifications"],
       "short_project_title_text": "Project 01",
       "sponsor_organisation_text": ""
     },

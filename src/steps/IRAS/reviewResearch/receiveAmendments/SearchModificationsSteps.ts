@@ -51,23 +51,14 @@ When(
 
 Then(
   'I can see the selected filters {string} are displayed under active filters',
-  async ({ searchModificationsPage, commonItemsPage }, filterDatasetName: string) => {
+  async ({ searchModificationsPage }, filterDatasetName: string) => {
     const dataset =
       searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[filterDatasetName];
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        const fieldValActual = await commonItemsPage.getSelectedValues(key, checkCreateUserProfilePage);
-        if (key === 'email_address_text') {
-          const data = await returnDataFromJSON();
-          expect(fieldValActual).toBe(data.Create_User_Profile.email_address_unique);
-        } else if (key === 'country_checkbox' || key === 'access_required_checkbox' || key === 'role_checkbox') {
-          const fieldValActuals = fieldValActual.split(', ');
-          fieldValActuals.forEach((val, index) => {
-            expect(val).toBe(dataset[key][index]);
-          });
-        } else {
-          expect(fieldValActual).toBe(dataset[key]);
-        }
+        const fieldValActual = await searchModificationsPage.getSelectedFilterValues(key, searchModificationsPage);
+        const filterValuesExpected = await searchModificationsPage.getActiveFiltersLabels(dataset, key);
+        expect(fieldValActual).toBe(filterValuesExpected);
       }
     }
   }
