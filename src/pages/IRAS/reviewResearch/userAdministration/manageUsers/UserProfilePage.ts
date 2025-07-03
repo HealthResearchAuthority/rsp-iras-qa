@@ -226,7 +226,7 @@ export default class UserProfilePage {
     switch (editUserFieldName) {
       case 'title_text':
         // All android specific if conditions need to be removed after the defect fix RSP-4099
-        if (process.env.OS_TYPE == 'Android' && process.env.PLATFORM == 'Mobile') {
+        if (process.env.OS_TYPE?.toLowerCase() == 'android' && process.env.PLATFORM?.toLowerCase() == 'mobile') {
           await this.title_change_link.focus();
           await this.title_change_link.press('Enter');
         } else {
@@ -234,7 +234,7 @@ export default class UserProfilePage {
         }
         break;
       case 'first_name_text':
-        if (process.env.OS_TYPE == 'Android' && process.env.PLATFORM == 'Mobile') {
+        if (process.env.OS_TYPE?.toLowerCase() == 'android' && process.env.PLATFORM?.toLowerCase() == 'mobile') {
           await this.first_name_change_link.focus();
           await this.first_name_change_link.press('Enter');
         } else {
@@ -242,7 +242,7 @@ export default class UserProfilePage {
         }
         break;
       case 'last_name_text':
-        if (process.env.OS_TYPE == 'Android' && process.env.PLATFORM == 'Mobile') {
+        if (process.env.OS_TYPE?.toLowerCase() == 'android' && process.env.PLATFORM?.toLowerCase() == 'mobile') {
           await this.last_name_change_link.focus();
           await this.last_name_change_link.press('Enter');
         } else {
@@ -250,7 +250,7 @@ export default class UserProfilePage {
         }
         break;
       case 'email_address_text':
-        if (process.env.OS_TYPE == 'Android' && process.env.PLATFORM == 'Mobile') {
+        if (process.env.OS_TYPE?.toLowerCase() == 'android' && process.env.PLATFORM?.toLowerCase() == 'mobile') {
           await this.email_address_change_link.focus();
           await this.email_address_change_link.press('Enter');
         } else {
@@ -258,7 +258,7 @@ export default class UserProfilePage {
         }
         break;
       case 'telephone_text':
-        if (process.env.OS_TYPE == 'Android' && process.env.PLATFORM == 'Mobile') {
+        if (process.env.OS_TYPE?.toLowerCase() == 'android' && process.env.PLATFORM?.toLowerCase() == 'mobile') {
           await this.telephone_change_link.focus();
           await this.telephone_change_link.press('Enter');
         } else {
@@ -266,7 +266,7 @@ export default class UserProfilePage {
         }
         break;
       case 'organisation_text':
-        if (process.env.OS_TYPE == 'Android' && process.env.PLATFORM == 'Mobile') {
+        if (process.env.OS_TYPE?.toLowerCase() == 'android' && process.env.PLATFORM?.toLowerCase() == 'mobile') {
           await this.organisation_change_link.focus();
           await this.organisation_change_link.press('Enter');
         } else {
@@ -274,7 +274,7 @@ export default class UserProfilePage {
         }
         break;
       case 'job_title_text':
-        if (process.env.OS_TYPE == 'Android' && process.env.PLATFORM == 'Mobile') {
+        if (process.env.OS_TYPE?.toLowerCase() == 'android' && process.env.PLATFORM?.toLowerCase() == 'mobile') {
           await this.job_title_change_link.focus();
           await this.job_title_change_link.press('Enter');
         } else {
@@ -282,7 +282,7 @@ export default class UserProfilePage {
         }
         break;
       case 'role_checkbox':
-        if (process.env.OS_TYPE == 'Android' && process.env.PLATFORM == 'Mobile') {
+        if (process.env.OS_TYPE?.toLowerCase() == 'android' && process.env.PLATFORM?.toLowerCase() == 'mobile') {
           await this.role_change_link.focus();
           await this.role_change_link.press('Enter');
         } else {
@@ -290,7 +290,7 @@ export default class UserProfilePage {
         }
         break;
       case 'access_required_checkbox':
-        if (process.env.OS_TYPE == 'Android' && process.env.PLATFORM == 'Mobile') {
+        if (process.env.OS_TYPE?.toLowerCase() == 'android' && process.env.PLATFORM?.toLowerCase() == 'mobile') {
           await this.access_required_change_link.focus();
           await this.access_required_change_link.press('Enter');
         } else {
@@ -308,7 +308,7 @@ export default class UserProfilePage {
         if (userRole.trim().toLocaleLowerCase() != 'operations') {
           break;
         } else {
-          if (process.env.OS_TYPE == 'Android' && process.env.PLATFORM == 'Mobile') {
+          if (process.env.OS_TYPE?.toLowerCase() == 'android' && process.env.PLATFORM?.toLowerCase() == 'mobile') {
             await this.country_change_link.focus();
             await this.country_change_link.press('Enter');
           } else {
