@@ -1,7 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as linkTextData from '../../../../resources/test_data/common/link_text_data.json';
 import * as searchModificationsPageTestData from '../../../../resources/test_data/iras/reviewResearch/receiveAmendments/search_modifications_page_data.json';
-import { confirmStringNotNull, removeUnwantedWhitespace } from '../../../../utils/UtilFunctions';
+import { confirmArrayNotNull, confirmStringNotNull, removeUnwantedWhitespace } from '../../../../utils/UtilFunctions';
 
 //Declare Page Objects
 export default class SearchModificationsPage {
@@ -190,56 +190,80 @@ export default class SearchModificationsPage {
     return day && month && year ? `${day} ${month} ${year}` : null;
   }
 
-  async getActiveFiltersLabels(dataset: JSON, key: string) {
-    let filterName: string = '';
-    // let fromDate: string = '';
-    // let toDate: string = '';
-    let value: string = '';
-    if (key.startsWith('date_modification_submitted')) {
-      filterName = dataset['date_modification_submitted_label'];
-      // const fromDay = dataset['date_modification_submitted_from_date_text'];
-      // const fromMonth = dataset['date_modification_submitted_from_month_dropdown'];
-      // const fromYear = dataset['date_modification_submitted_from_year_text'];
-      // const toDay = dataset['date_modification_submitted_to_date_text'];
-      // const toMonth = dataset['date_modification_submitted_to_month_dropdown'];
-      // const toYear = dataset['date_modification_submitted_to_year_text'];
-
-      const fromDate = this.getDateString(dataset, 'date_modification_submitted_from');
-      const toDate = this.getDateString(dataset, 'date_modification_submitted_to');
-      value = [fromDate, toDate].filter(Boolean).join(' to ');
-
-      // if (fromDay && fromMonth && fromYear) {
-      //   fromDate = `${fromDay} ${fromMonth} ${fromYear}`;
-      // }
-      // if (toDay && toMonth && toYear) {
-      //   toDate = `${toDay} ${toMonth} ${toYear}`;
-      // }
-      // value = `${fromDate} to ${toDate}`;
-    } else if (key.startsWith('chief_investigator_name')) {
-      filterName = dataset['chief_investigator_name_label'];
-      value = dataset['chief_investigator_name_text'];
-    } else if (key.startsWith('short_project_title')) {
-      filterName = dataset['short_project_title_label'];
-      value = dataset['short_project_title_text'];
-    } else if (key.startsWith('sponsor_organisation')) {
-      filterName = dataset['sponsor_organisation_label'];
-      value = dataset['sponsor_organisation_text'];
-    } else if (key.startsWith('lead_nation')) {
-      filterName = dataset['lead_nation_label'];
-      // value = dataset['lead_nation_checkbox'].toString();
-      value = (dataset['lead_nation_checkbox'] || []).join(', ');
-    } else if (key.startsWith('modification_type')) {
-      filterName = dataset['modification_type_label'];
-      // value = dataset['modification_type_checkbox'].toString();
-      value = (dataset['modification_type_checkbox'] || []).join(', ');
+  async getFilterTextCheckbox(filterName: string, dataset: JSON, key: string) {
+    const filterTextsCheckbox: string[] = [];
+    for (const value of dataset[key]) {
+      const filterText = `${filterName} - ${value}`;
+      filterTextsCheckbox.push(filterText);
     }
-    const filterText = `${filterName} - ${value}`;
-    return filterText;
+    return filterTextsCheckbox;
   }
 
-  async getSelectedFilterValues<PageObject>(key: string, page: PageObject) {
-    const locator: Locator = page[key];
-    return await removeUnwantedWhitespace(confirmStringNotNull(await locator.textContent()));
+  async getActiveFiltersLabels(dataset: JSON, datasetLabels: any) {
+    let filterName: string = '';
+    const filterText: string[] = [];
+    let activeFiltersMap: any;
+    for (const key in dataset) {
+      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+        if (key !== 'lead_nation_checkbox' && key !== 'modification_type_checkbox') {
+          if (key === 'date_modification_submitted_from_date_text') {
+            filterName = datasetLabels['date_modification_submitted_label'];
+            const fromDate = await this.getDateString(dataset, 'date_modification_submitted_from');
+            if (fromDate) {
+              filterText.push(`${filterName} - from ${fromDate}`);
+            }
+          } else if (key === 'date_modification_submitted_to_date_text') {
+            filterName = datasetLabels['date_modification_submitted_label'];
+            const toDate = await this.getDateString(dataset, 'date_modification_submitted_to');
+            if (toDate) {
+              filterText.push(`${filterName} - to ${toDate}`);
+            }
+          } else if (key == 'chief_investigator_name_text') {
+            filterName = datasetLabels['chief_investigator_name_label'];
+            filterText.push(`${filterName} - ${dataset[key]}`);
+          } else if (key == 'short_project_title_text') {
+            filterName = datasetLabels['short_project_title_label'];
+            filterText.push(`${filterName} - ${dataset[key]}`);
+          } else if (key === 'sponsor_organisation_text') {
+            filterName = datasetLabels['sponsor_organisation_label'];
+            filterText.push(`${filterName} - ${dataset[key]}`);
+          }
+          activeFiltersMap = new Map([['singleSelectFilter', confirmArrayNotNull(filterText)]]);
+        }
+      }
+    }
+    return activeFiltersMap;
+  }
+  async getActiveFiltersCheckboxLabels(dataset: JSON, datasetLabels: any) {
+    let filterName: string = '';
+    const filterTextsCheckbox: any[] = [];
+    let activeFiltersMap: any;
+    for (const key in dataset) {
+      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+        if (key === 'lead_nation_checkbox' || key === 'modification_type_checkbox') {
+          if (key === 'lead_nation_checkbox') {
+            filterName = datasetLabels['lead_nation_label'];
+            const filterValues = await this.getFilterTextCheckbox(filterName, dataset, key);
+            filterTextsCheckbox.push(filterValues);
+          } else if (key === 'modification_type_checkbox') {
+            filterName = datasetLabels['modification_type_label'];
+            const filterValues = await this.getFilterTextCheckbox(filterName, dataset, key);
+            filterTextsCheckbox.push(filterValues);
+          }
+          activeFiltersMap = new Map([['multiSelectFilter', confirmArrayNotNull(filterTextsCheckbox)]]);
+        }
+      }
+    }
+    return activeFiltersMap;
+  }
+
+  async getSelectedFilterValues<PageObject>(dataset: JSON, page: PageObject) {
+    for (const key in dataset) {
+      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+        const locator: Locator = page[key];
+        return await removeUnwantedWhitespace(confirmStringNotNull(await locator.textContent()));
+      }
+    }
   }
 
   // const filterSelectors = {

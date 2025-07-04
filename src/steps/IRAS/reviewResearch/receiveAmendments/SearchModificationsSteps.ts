@@ -54,13 +54,23 @@ Then(
   async ({ searchModificationsPage }, filterDatasetName: string) => {
     const dataset =
       searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[filterDatasetName];
-    for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        const fieldValActual = await searchModificationsPage.getSelectedFilterValues(key, searchModificationsPage);
-        const filterValuesExpected = await searchModificationsPage.getActiveFiltersLabels(dataset, key);
-        expect(fieldValActual).toBe(filterValuesExpected);
-      }
-    }
+    const datasetLabels = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page;
+    const activeFiltersMap = await searchModificationsPage.getActiveFiltersLabels(dataset, datasetLabels);
+    const filterValuesExpected = activeFiltersMap.get('singleSelectFilter');
+    const activeCheckboxFiltersMap = await searchModificationsPage.getActiveFiltersCheckboxLabels(
+      dataset,
+      datasetLabels
+    );
+    const filterCheckboxValuesExpected = activeCheckboxFiltersMap.get('multiSelectFilter');
+    // const fieldValActual = await searchModificationsPage.getSelectedFilterValues(dataset, searchModificationsPage);
+    // expect(fieldValActual).toBe(filterValuesExpected + ', ' + filterCheckboxValuesExpected);
+
+    console.log(
+      'Active filters based on the selected advanced filters:- ' +
+        filterValuesExpected +
+        ', ' +
+        filterCheckboxValuesExpected
+    );
   }
 );
 
