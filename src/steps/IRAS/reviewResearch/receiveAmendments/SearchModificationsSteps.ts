@@ -74,30 +74,60 @@ Then(
   }
 );
 
+// date_modification_submitted and sponsor_organisation can't validate from UI,need to validate with Database
 Then(
   'the system displays modification records matching the search {string} and filter criteria {string}',
-  async (
-    { userListReviewBodyPage, commonItemsPage, searchModificationsPage },
-    irasIdDatasetName: string,
-    filterDatasetName: string
-  ) => {
-    const dataset =
+  async ({ commonItemsPage, searchModificationsPage }, irasIdDatasetName: string, filterDatasetName: string) => {
+    const irasIdDataset =
       searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[irasIdDatasetName];
-    console.log(dataset);
-    const dataset1 =
+    console.log(irasIdDataset);
+    const filterDataset =
       searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[filterDatasetName];
-    console.log(dataset1);
-    const searchKey = await userListReviewBodyPage.getSearchKey();
-    const searchTerms = await commonItemsPage.splitSearchTerm(searchKey);
-    const userList = await commonItemsPage.getAllUsersFromTheTable();
-    const userListAfterSearch: string[] = confirmArrayNotNull(userList.get('searchResultValues'));
+    console.log(filterDataset);
+    const irasId = irasIdDataset['iras_id_text']; //modificationId contains irasId
+    const chiefInvestigatorName = filterDataset['chief_investigator_name_text'];
+    const shortProjectTitle = filterDataset['short_project_title_text'];
+    const searchKey = irasId + '/' + chiefInvestigatorName + '/' + shortProjectTitle;
+    const searchTerms = searchKey.split('/');
+    // const searchTerms = await commonItemsPage.splitSearchTerm(searchKey);
+    console.log(searchTerms);
+    const modificationsList = await searchModificationsPage.getAllModificationsTheTable();
+    const modificationsListAfterSearch: string[] = confirmArrayNotNull(modificationsList.get('searchResultValues'));
+    const filteredSearchResults = await commonItemsPage.filterResults(modificationsListAfterSearch, searchTerms);
+    expect(filteredSearchResults).toEqual(modificationsListAfterSearch);
+    // const searchResult = commonItemsPage.validateSearchResults(modificationsListAfterSearch, irasId);
     const searchResult = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
-      userListAfterSearch,
+      modificationsListAfterSearch,
       searchTerms
     );
     expect(searchResult).toBeTruthy();
-    expect(userListAfterSearch).toHaveLength(searchResult.length);
-    await userListReviewBodyPage.updateUserInfo();
+    expect(modificationsListAfterSearch).toHaveLength(searchResult.length);
+
+    const leadNations = filterDataset['lead_nation_checkbox'];
+    console.log(leadNations);
+    const modificationTypes = filterDataset['modification_type_checkbox'];
+    console.log(modificationTypes);
+    const modificationIdListAfterSearch: string[] = confirmArrayNotNull(modificationsList.get('modificationIdValues'));
+    const searchResultIrasID = commonItemsPage.validateSearchResults(modificationIdListAfterSearch, irasId);
+    expect(searchResultIrasID).toBeTruthy();
+    const shortProjectTitleListAfterSearch: string[] = confirmArrayNotNull(
+      modificationsList.get('shortProjectTitleValues')
+    );
+    const searchResultShortProjectTitle = commonItemsPage.validateSearchResults(
+      shortProjectTitleListAfterSearch,
+      shortProjectTitle
+    );
+    expect(searchResultShortProjectTitle).toBeTruthy();
+    const chiefInvestigatorNameListAfterSearch: string[] = confirmArrayNotNull(
+      modificationsList.get('chiefInvestigatorNameValues')
+    );
+    const searchResultChiefInvestigatorName = commonItemsPage.validateSearchResults(
+      chiefInvestigatorNameListAfterSearch,
+      chiefInvestigatorName
+    );
+    expect(searchResultChiefInvestigatorName).toBeTruthy();
+    // leadNations >> a or b or c or d
+    // modificationTypes >> a or b
   }
 );
 

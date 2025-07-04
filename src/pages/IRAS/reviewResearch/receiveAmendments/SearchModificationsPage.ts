@@ -44,6 +44,7 @@ export default class SearchModificationsPage {
   readonly modification_type_checkbox_chevron: Locator;
   readonly short_project_title_text_chevron: Locator;
   readonly sponsor_organisation_text_chevron: Locator;
+  readonly tableRows: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -67,6 +68,7 @@ export default class SearchModificationsPage {
       .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.no_results_guidance_text, {
         exact: true,
       });
+    this.tableRows = this.page.getByRole('table').getByRole('row');
     this.listCell = this.page.getByRole('cell');
     this.advanced_filter_chevron = this.page.getByRole('button', {
       name: this.searchModificationsPageTestData.Search_Modifications_Page.advanced_filter_label,
@@ -264,6 +266,60 @@ export default class SearchModificationsPage {
         return await removeUnwantedWhitespace(confirmStringNotNull(await locator.textContent()));
       }
     }
+  }
+
+  async getAllModificationsTheTable(): Promise<Map<string, string[]>> {
+    const searchResultValues: string[] = [];
+    const modificationIdValues: string[] = [];
+    const shortProjectTitleValues: string[] = [];
+    const modificationTypeValues: string[] = [];
+    const chiefInvestigatorNameValues: string[] = [];
+    const leadNationValues: string[] = [];
+    await this.page.waitForLoadState('domcontentloaded');
+    await this.page.waitForTimeout(3000);
+    let dataFound = false;
+    while (!dataFound) {
+      const rowCount = await this.tableRows.count();
+      for (let i = 1; i < rowCount; i++) {
+        const columns = this.tableRows.nth(i).getByRole('cell');
+        const modificationId = confirmStringNotNull(await columns.nth(0).textContent());
+        modificationIdValues.push(modificationId);
+        const shortProjectTitle = confirmStringNotNull(await columns.nth(1).textContent());
+        shortProjectTitleValues.push(shortProjectTitle);
+        const modificationType = confirmStringNotNull(await columns.nth(2).textContent());
+        modificationTypeValues.push(modificationType);
+        const chiefInvestigatorName = confirmStringNotNull(await columns.nth(3).textContent());
+        chiefInvestigatorNameValues.push(chiefInvestigatorName);
+        const leadNation = confirmStringNotNull(await columns.nth(4).textContent());
+        leadNationValues.push(leadNation);
+        searchResultValues.push(
+          modificationId +
+            '|' +
+            shortProjectTitle +
+            '|' +
+            modificationType +
+            '|' +
+            chiefInvestigatorName +
+            '|' +
+            leadNation
+        );
+      }
+      if ((await this.next_button.isVisible()) && !(await this.next_button.isDisabled())) {
+        await this.next_button.click();
+        await this.page.waitForLoadState('domcontentloaded');
+      } else {
+        dataFound = true;
+      }
+    }
+    const searchResultMap = new Map([
+      ['searchResultValues', searchResultValues],
+      ['modificationIdValues', modificationIdValues],
+      ['shortProjectTitleValues', shortProjectTitleValues],
+      ['modificationTypeValues', modificationTypeValues],
+      ['chiefInvestigatorNameValues', chiefInvestigatorNameValues],
+      ['leadNationValues', leadNationValues],
+    ]);
+    return searchResultMap;
   }
 
   // const filterSelectors = {
