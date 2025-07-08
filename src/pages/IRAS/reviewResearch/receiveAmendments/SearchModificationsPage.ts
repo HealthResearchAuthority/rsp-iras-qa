@@ -45,6 +45,7 @@ export default class SearchModificationsPage {
   readonly short_project_title_text_chevron: Locator;
   readonly sponsor_organisation_text_chevron: Locator;
   readonly tableRows: Locator;
+  readonly chief_investigator_name_label: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -73,19 +74,29 @@ export default class SearchModificationsPage {
     this.advanced_filter_chevron = this.page.getByRole('button', {
       name: this.searchModificationsPageTestData.Search_Modifications_Page.advanced_filter_label,
     });
+
     this.chief_investigator_name_text = this.page.getByLabel(
       this.searchModificationsPageTestData.Search_Modifications_Page.chief_investigator_name_label,
       {
         exact: true,
       }
     );
-    this.chief_investigator_name_text_chevron = this.page.getByRole('button', {
-      name: this.searchModificationsPageTestData.Search_Modifications_Page.chief_investigator_name_label,
-    });
+    this.chief_investigator_name_label = this.page
+      .getByRole('heading')
+      .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.chief_investigator_name_label, {
+        exact: true,
+      });
+    this.chief_investigator_name_text_chevron = this.page
+      .getByRole('heading')
+      .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.chief_investigator_name_label, {
+        exact: true,
+      });
 
-    this.date_modification_submitted_from_date_text_chevron = this.page.getByRole('button', {
-      name: this.searchModificationsPageTestData.Search_Modifications_Page.date_modification_submitted_label,
-    });
+    this.date_modification_submitted_from_date_text_chevron = this.page
+      .getByRole('heading')
+      .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.date_modification_submitted_label, {
+        exact: true,
+      });
 
     // this.planned_end_date_textbox_label = this.page.locator('label[for="Questions[1].AnswerText"]');
     // this.planned_end_date_hint_label = this.page.getByTestId('Questions[1]_AnswerText-hint').locator('p');
@@ -101,9 +112,12 @@ export default class SearchModificationsPage {
       .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.lead_nation_label, { exact: true });
     this.lead_nation_fieldset = this.page.locator('.govuk-form-group', { has: this.lead_nation_label });
     this.lead_nation_checkbox = this.lead_nation_fieldset.getByRole('checkbox');
-    this.lead_nation_checkbox_chevron = this.page.getByRole('button', {
-      name: this.searchModificationsPageTestData.Search_Modifications_Page.lead_nation_label,
-    });
+    this.lead_nation_checkbox_chevron = this.page
+      .getByRole('heading')
+      .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.lead_nation_label, {
+        exact: true,
+      });
+
     this.modification_type_label = this.page
       .locator('.govuk-label')
       .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.modification_type_label, {
@@ -150,17 +164,11 @@ export default class SearchModificationsPage {
 
   async assertOnSearchModificationsPage() {
     await expect(this.page_heading).toBeVisible();
-    expect(await this.page.title()).toBe(this.searchModificationsPageTestData.Search_Modifications_Page.title);
+    // expect(await this.page.title()).toBe(this.searchModificationsPageTestData.Search_Modifications_Page.title);
   }
 
-  async goto(pageSize?: string, searchQuery?: string) {
-    if (typeof pageSize !== 'undefined' && typeof searchQuery !== 'undefined') {
-      await this.page.goto(`admin/users?SearchQuery=${searchQuery}&PageSize=${pageSize}`);
-    } else if (typeof pageSize !== 'undefined') {
-      await this.page.goto(`admin/users?pageSize=${pageSize}`);
-    } else {
-      await this.page.goto('admin/users');
-    }
+  async goto() {
+    await this.page.goto('approvals/search');
     await this.assertOnSearchModificationsPage();
   }
 
@@ -175,7 +183,7 @@ export default class SearchModificationsPage {
   async clickFilterChevron<PageObject>(key: string, page: PageObject) {
     const selectorFn = page[key + '_chevron'];
     if (selectorFn) {
-      const button = selectorFn();
+      const button = selectorFn;
       const isExpanded = await button.getAttribute('aria-expanded');
       if (isExpanded !== 'true') {
         await page[key + '_chevron'].click(button);

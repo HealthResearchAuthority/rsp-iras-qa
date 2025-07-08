@@ -498,7 +498,7 @@ When(
           searchValue = inputType;
       }
     }
-    await commonItemsPage.search_text.fill(searchValue);
+    await commonItemsPage.search_text.fill(searchValue['iras_id_text']);
   }
 );
 
@@ -632,6 +632,7 @@ Given(
       userProfilePage,
       reviewBodyProfilePage,
       myResearchProjectsPage,
+      searchModificationsPage,
     },
     page: string
   ) => {
@@ -668,6 +669,9 @@ Given(
       case 'My_Research_Page':
         await myResearchProjectsPage.goto();
         await myResearchProjectsPage.assertOnMyResearchProjectsPage();
+        break;
+      case 'Search_Modifications_Page':
+        await searchModificationsPage.goto();
         break;
       default:
         throw new Error(`${page} is not a valid option`);

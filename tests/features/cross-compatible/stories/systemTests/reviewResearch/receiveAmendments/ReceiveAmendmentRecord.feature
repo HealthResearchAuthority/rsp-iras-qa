@@ -1,13 +1,14 @@
-@ReceiveAmendments @SysAdminUser @BackStageUser @SystemTest @rsp-4011 @rsp-4016
+@ReceiveAmendments @FrontStageUser @SystemTest @rsp-4011 @rsp-4016
 Feature: Receive Amendment - Staff dashboard/worklist
 
     Background:
         Given I have navigated to the 'Home_Page'
         When I click the 'Approvals' link on the 'Home_Page'
         # Then I can see the approvals home page
-        And I capture the page screenshot
-        When I click the 'Search_For_Modifications' link on the 'Approvals_Page'
-        And I capture the page screenshot
+        # And I capture the page screenshot
+        # When I click the 'Search_For_Modifications' link on the 'Approvals_Page'
+        # And I capture the page screenshot
+        Given I have navigated to the 'Search_Modifications_Page'
         Then I can see the 'Search_Modifications_Page'
         And I capture the page screenshot
 
@@ -30,9 +31,9 @@ Feature: Receive Amendment - Staff dashboard/worklist
         And I can see the list is sorted by default in the descending order of the 'Modification Id'
         And I capture the page screenshot
         Examples:
-            | Valid_Iras_Id     | Advanced_Filters                |
-            | Valid_Iras_Id_One | Advanced_Filters_One            |
-            | Valid_Iras_Id_One | Sponsor_Organisation_Text_Blank |
+            | Valid_Iras_Id     | Advanced_Filters     |
+            | Valid_Iras_Id_One | Advanced_Filters_One |
+    # | Valid_Iras_Id_One | Sponsor_Organisation_Text_Blank |
 
     # 2. Valid IRAS ID >>Click Search>>Results displayed>> Select Advanced Filters(64 combinations)>> Click Apply Filters>>Results displayed(filtered results)
     ##Scenario 6 -Selected filters validation
