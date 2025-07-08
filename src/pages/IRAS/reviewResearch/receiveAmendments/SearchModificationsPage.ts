@@ -46,6 +46,7 @@ export default class SearchModificationsPage {
   readonly sponsor_organisation_text_chevron: Locator;
   readonly tableRows: Locator;
   readonly chief_investigator_name_label: Locator;
+  readonly chief_investigator_name_fieldset: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -75,17 +76,23 @@ export default class SearchModificationsPage {
       name: this.searchModificationsPageTestData.Search_Modifications_Page.advanced_filter_label,
     });
 
-    this.chief_investigator_name_text = this.page.getByLabel(
-      this.searchModificationsPageTestData.Search_Modifications_Page.chief_investigator_name_label,
-      {
-        exact: true,
-      }
-    );
+    // this.chief_investigator_name_text = this.page.getByLabel(
+    //   this.searchModificationsPageTestData.Search_Modifications_Page.chief_investigator_hint_text,
+    //   {
+    //     exact: true,
+    //   }
+    // );
+
     this.chief_investigator_name_label = this.page
       .getByRole('heading')
       .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.chief_investigator_name_label, {
         exact: true,
       });
+    this.chief_investigator_name_fieldset = this.page.locator('.govuk-form-group', {
+      has: this.chief_investigator_name_label,
+    });
+    this.chief_investigator_name_text = this.chief_investigator_name_fieldset.getByRole('textbox');
+
     this.chief_investigator_name_text_chevron = this.page
       .getByRole('heading')
       .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.chief_investigator_name_label, {
@@ -125,24 +132,39 @@ export default class SearchModificationsPage {
       });
     this.modification_type_fieldset = this.page.locator('.govuk-form-group', { has: this.modification_type_label });
     this.modification_type_checkbox = this.modification_type_fieldset.getByRole('checkbox');
-    this.modification_type_checkbox_chevron = this.page.getByRole('button', {
-      name: this.searchModificationsPageTestData.Search_Modifications_Page.modification_type_label,
-    });
+    this.modification_type_checkbox_chevron = this.page
+      .getByRole('heading')
+      .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.modification_type_label, {
+        exact: true,
+      });
+    // this.page.getByRole('button', {
+    //   name: this.searchModificationsPageTestData.Search_Modifications_Page.modification_type_label,
+    // });
     this.short_project_title_text = this.page.getByLabel(
       this.searchModificationsPageTestData.Search_Modifications_Page.short_project_title_label,
       {
         exact: true,
       }
     );
-    this.short_project_title_text_chevron = this.page.getByRole('button', {
-      name: this.searchModificationsPageTestData.Search_Modifications_Page.short_project_title_label,
-    });
+    this.short_project_title_text_chevron = this.page
+      .getByRole('heading')
+      .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.short_project_title_label, {
+        exact: true,
+      });
+    // this.page.getByRole('button', {
+    //   name: this.searchModificationsPageTestData.Search_Modifications_Page.short_project_title_label,
+    // });
     this.sponsor_organisation_text = this.page.getByRole('textbox', {
       name: searchModificationsPageTestData.Search_Modifications_Page.sponsor_organisation_label,
     });
-    this.sponsor_organisation_text_chevron = this.page.getByRole('button', {
-      name: this.searchModificationsPageTestData.Search_Modifications_Page.sponsor_organisation_label,
-    });
+    this.sponsor_organisation_text_chevron = this.page
+      .getByRole('heading')
+      .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.sponsor_organisation_label, {
+        exact: true,
+      });
+    // this.page.getByRole('button', {
+    //   name: this.searchModificationsPageTestData.Search_Modifications_Page.sponsor_organisation_label,
+    // });
     this.sponsor_organisation_jsenabled_text = this.page.getByRole('combobox', {
       name: searchModificationsPageTestData.Search_Modifications_Page.sponsor_organisation_label,
     });
