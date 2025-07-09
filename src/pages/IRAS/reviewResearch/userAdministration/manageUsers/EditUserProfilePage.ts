@@ -27,13 +27,11 @@ export default class EditUserProfilePage {
   readonly review_body_dropdown: Locator;
   readonly country_label: Locator;
   readonly access_required_label: Locator;
-  private _title: string;
 
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page;
     this.editUserProfilePageTestData = editUserProfilePageTestData;
-    this._title = '';
 
     //Locators
     this.page_heading = this.page
@@ -145,13 +143,5 @@ export default class EditUserProfilePage {
       }
     }
     return checkedLabels;
-  }
-
-  async getUniqueTitle(): Promise<string> {
-    return this._title;
-  }
-
-  async setUniqueTitle(value: string): Promise<void> {
-    this._title = value;
   }
 }

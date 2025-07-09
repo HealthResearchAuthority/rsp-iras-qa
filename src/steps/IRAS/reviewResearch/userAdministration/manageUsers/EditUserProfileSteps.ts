@@ -55,18 +55,15 @@ When(
         } else if (key == 'title_text') {
           const prefix = dataset.title_text;
           uniqueTitle = await generateUniqueValue('', prefix);
-          await editUserProfilePage.setUniqueTitle(uniqueTitle);
           const locator: Locator = editUserProfilePage[key];
           await locator.fill(uniqueTitle);
         } else if (key == 'job_title_text') {
           const prefix = dataset.job_title_text;
           uniqueJobTitle = await generateUniqueValue('', prefix);
-          await editUserProfilePage.setUniqueTitle(uniqueJobTitle);
           const locator: Locator = editUserProfilePage[key];
           await locator.fill(uniqueJobTitle);
         } else if (key == 'telephone_text') {
           uniqueTelephoneNumber = await generatePhoneNumber();
-          await editUserProfilePage.setUniqueTitle(uniqueTelephoneNumber);
           const locator: Locator = editUserProfilePage[key];
           await locator.fill(uniqueTelephoneNumber);
         } else {
