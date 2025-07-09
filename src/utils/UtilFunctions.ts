@@ -517,6 +517,16 @@ export async function generateUniqueValue(keyVal: string, prefix: string): Promi
   return `${domain}${prefix}${timestamp}`;
 }
 
+export async function generatePhoneNumber(): Promise<string> {
+  const prefix = '07';
+  const digitsNeeded = 9;
+  let number = '';
+  for (let i = 0; i < digitsNeeded; i++) {
+    number += Math.floor(Math.random() * 10).toString();
+  }
+  return prefix + number;
+}
+
 export async function removeUnwantedWhitespace(value: string): Promise<string> {
   return value.replaceAll(/\s+/g, ' ').trim();
 }
