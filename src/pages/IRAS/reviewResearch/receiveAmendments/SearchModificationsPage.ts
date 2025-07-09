@@ -1,13 +1,14 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as linkTextData from '../../../../resources/test_data/common/link_text_data.json';
 import * as searchModificationsPageTestData from '../../../../resources/test_data/iras/reviewResearch/receiveAmendments/search_modifications_page_data.json';
-import { confirmArrayNotNull, confirmStringNotNull, removeUnwantedWhitespace } from '../../../../utils/UtilFunctions';
+import { confirmArrayNotNull, confirmStringNotNull } from '../../../../utils/UtilFunctions';
 
 //Declare Page Objects
 export default class SearchModificationsPage {
   readonly page: Page;
   readonly searchModificationsPageTestData: typeof searchModificationsPageTestData;
   readonly linkTextData: typeof linkTextData;
+  private _modifications_list_after_search: string[];
   readonly page_heading: Locator;
   readonly back_button: Locator;
   readonly search_box: Locator;
@@ -39,7 +40,8 @@ export default class SearchModificationsPage {
   readonly sponsor_organisation_jsdisabled_search_button: Locator;
   readonly sponsor_organisation_jsdisabled_search_results_radio_button: Locator;
   readonly chief_investigator_name_text_chevron: Locator;
-  readonly date_modification_submitted_from_date_text_chevron: Locator;
+  readonly date_modification_submitted_from_day_text_chevron: Locator;
+  readonly date_modification_submitted_to_day_text_chevron: Locator;
   readonly lead_nation_checkbox_chevron: Locator;
   readonly modification_type_checkbox_chevron: Locator;
   readonly short_project_title_text_chevron: Locator;
@@ -47,11 +49,16 @@ export default class SearchModificationsPage {
   readonly tableRows: Locator;
   readonly chief_investigator_name_label: Locator;
   readonly chief_investigator_name_fieldset: Locator;
+  readonly date_modification_submitted_from_date_fieldset: Locator;
+  readonly date_modification_submitted_to_date_fieldset: Locator;
+  readonly short_project_title_fieldset: Locator;
+  readonly active_filters_list: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page;
     this.searchModificationsPageTestData = searchModificationsPageTestData;
+    this._modifications_list_after_search = [];
 
     //Locators
     this.page_heading = this.page
@@ -75,49 +82,94 @@ export default class SearchModificationsPage {
     this.advanced_filter_chevron = this.page.getByRole('button', {
       name: this.searchModificationsPageTestData.Search_Modifications_Page.advanced_filter_label,
     });
-
-    // this.chief_investigator_name_text = this.page.getByLabel(
-    //   this.searchModificationsPageTestData.Search_Modifications_Page.chief_investigator_hint_text,
-    //   {
-    //     exact: true,
-    //   }
-    // );
-
-    this.chief_investigator_name_label = this.page
-      .getByRole('heading')
-      .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.chief_investigator_name_label, {
-        exact: true,
-      });
-    this.chief_investigator_name_fieldset = this.page.locator('.govuk-form-group', {
-      has: this.chief_investigator_name_label,
+    this.chief_investigator_name_fieldset = this.page.locator('.govuk-fieldset', {
+      has: this.page.getByText(
+        this.searchModificationsPageTestData.Search_Modifications_Page.chief_investigator_hint_text
+      ),
     });
     this.chief_investigator_name_text = this.chief_investigator_name_fieldset.getByRole('textbox');
-
     this.chief_investigator_name_text_chevron = this.page
-      .getByRole('heading')
+      .getByRole('heading', { level: 2 })
       .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.chief_investigator_name_label, {
         exact: true,
       });
 
-    this.date_modification_submitted_from_date_text_chevron = this.page
+    this.date_modification_submitted_from_day_text_chevron = this.page
       .getByRole('heading')
       .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.date_modification_submitted_label, {
         exact: true,
       });
-
-    // this.planned_end_date_textbox_label = this.page.locator('label[for="Questions[1].AnswerText"]');
-    // this.planned_end_date_hint_label = this.page.getByTestId('Questions[1]_AnswerText-hint').locator('p');
-    // this.day_textbox_label = this.page.locator('label[for="Questions[1].Day"]');
-    // this.month_dropdown_label = this.page.locator('label[for="Questions[1].Month"]');
-    // this.year_textbox_label = this.page.locator('label[for="Questions[1].Year"]');
-    // this.planned_project_end_day_text = this.page.getByTestId('Questions[1].Day');
-    // this.planned_project_end_month_dropdown = this.page.getByTestId('Questions[1].Month');
-    // this.planned_project_end_year_text = this.page.getByTestId('Questions[1].Year');
-
+    this.date_modification_submitted_from_date_fieldset = this.page
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group', {
+        has: this.page.getByText(
+          this.searchModificationsPageTestData.Search_Modifications_Page.date_modification_submitted_from_date_hint_text
+        ),
+      });
+    this.date_modification_submitted_from_day_text = this.date_modification_submitted_from_date_fieldset
+      .locator('.govuk-form-group', {
+        has: this.page.getByText(
+          this.searchModificationsPageTestData.Search_Modifications_Page.date_modification_submitted_day_label
+        ),
+      })
+      .getByRole('textbox');
+    this.date_modification_submitted_from_month_dropdown = this.date_modification_submitted_from_date_fieldset
+      .locator('.govuk-form-group', {
+        has: this.page.getByText(
+          this.searchModificationsPageTestData.Search_Modifications_Page.date_modification_submitted_month_label
+        ),
+      })
+      .getByRole('combobox');
+    this.date_modification_submitted_from_year_text = this.date_modification_submitted_from_date_fieldset
+      .locator('.govuk-form-group', {
+        has: this.page.getByText(
+          this.searchModificationsPageTestData.Search_Modifications_Page.date_modification_submitted_year_label
+        ),
+      })
+      .getByRole('textbox');
+    this.date_modification_submitted_to_day_text_chevron = this.page
+      .getByRole('heading')
+      .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.date_modification_submitted_label, {
+        exact: true,
+      });
+    this.date_modification_submitted_to_date_fieldset = this.page
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group', {
+        has: this.page.getByText(
+          this.searchModificationsPageTestData.Search_Modifications_Page.date_modification_submitted_to_date_hint_text
+        ),
+      });
+    this.date_modification_submitted_to_day_text = this.date_modification_submitted_to_date_fieldset
+      .locator('.govuk-form-group', {
+        has: this.page.getByText(
+          this.searchModificationsPageTestData.Search_Modifications_Page.date_modification_submitted_day_label
+        ),
+      })
+      .getByRole('textbox');
+    this.date_modification_submitted_to_month_dropdown = this.date_modification_submitted_to_date_fieldset
+      .locator('.govuk-form-group', {
+        has: this.page.getByText(
+          this.searchModificationsPageTestData.Search_Modifications_Page.date_modification_submitted_month_label
+        ),
+      })
+      .getByRole('combobox');
+    this.date_modification_submitted_to_year_text = this.date_modification_submitted_to_date_fieldset
+      .locator('.govuk-form-group', {
+        has: this.page.getByText(
+          this.searchModificationsPageTestData.Search_Modifications_Page.date_modification_submitted_year_label
+        ),
+      })
+      .getByRole('textbox');
     this.lead_nation_label = this.page
-      .locator('.govuk-label')
+      .getByRole('heading', { level: 2 })
       .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.lead_nation_label, { exact: true });
-    this.lead_nation_fieldset = this.page.locator('.govuk-form-group', { has: this.lead_nation_label });
+    this.lead_nation_fieldset = this.lead_nation_label
+      .locator('..')
+      .locator('..')
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group', {
+        has: this.page.getByText(this.searchModificationsPageTestData.Search_Modifications_Page.lead_nation_hint_text),
+      });
     this.lead_nation_checkbox = this.lead_nation_fieldset.getByRole('checkbox');
     this.lead_nation_checkbox_chevron = this.page
       .getByRole('heading')
@@ -126,34 +178,43 @@ export default class SearchModificationsPage {
       });
 
     this.modification_type_label = this.page
-      .locator('.govuk-label')
+      .getByRole('heading', { level: 2 })
       .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.modification_type_label, {
         exact: true,
       });
-    this.modification_type_fieldset = this.page.locator('.govuk-form-group', { has: this.modification_type_label });
+    this.modification_type_fieldset = this.modification_type_label
+      .locator('..')
+      .locator('..')
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group', {
+        has: this.page.getByText(
+          this.searchModificationsPageTestData.Search_Modifications_Page.modification_type_hint_text
+        ),
+      });
     this.modification_type_checkbox = this.modification_type_fieldset.getByRole('checkbox');
     this.modification_type_checkbox_chevron = this.page
       .getByRole('heading')
       .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.modification_type_label, {
         exact: true,
       });
-    // this.page.getByRole('button', {
-    //   name: this.searchModificationsPageTestData.Search_Modifications_Page.modification_type_label,
-    // });
-    this.short_project_title_text = this.page.getByLabel(
-      this.searchModificationsPageTestData.Search_Modifications_Page.short_project_title_label,
-      {
-        exact: true,
-      }
-    );
+    // this.short_project_title_text = this.page.getByLabel(
+    //   this.searchModificationsPageTestData.Search_Modifications_Page.short_project_title_label,
+    //   {
+    //     exact: true,
+    //   }
+    // );
     this.short_project_title_text_chevron = this.page
       .getByRole('heading')
       .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.short_project_title_label, {
         exact: true,
       });
-    // this.page.getByRole('button', {
-    //   name: this.searchModificationsPageTestData.Search_Modifications_Page.short_project_title_label,
-    // });
+    this.short_project_title_fieldset = this.page.locator('.govuk-fieldset', {
+      has: this.page.getByText(
+        this.searchModificationsPageTestData.Search_Modifications_Page.short_project_title_hint_text
+      ),
+    });
+    this.short_project_title_text = this.short_project_title_fieldset.getByRole('textbox');
+
     this.sponsor_organisation_text = this.page.getByRole('textbox', {
       name: searchModificationsPageTestData.Search_Modifications_Page.sponsor_organisation_label,
     });
@@ -180,9 +241,28 @@ export default class SearchModificationsPage {
     this.sponsor_organisation_jsdisabled_search_results_radio_button = this.page.locator(
       'input[type="radio"][name="SponsorOrgSearch.SelectedOrganisation"]'
     );
+    this.active_filters_list = this.page
+      .getByRole('heading')
+      .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.active_filters_label, {
+        exact: true,
+      })
+      .locator('..')
+      .getByRole('listitem')
+      .getByRole('link')
+      .locator('.search-filter-summary__remove-filter-text');
   }
 
   //Getters & Setters for Private Variables
+
+  async getModificationIdListAfterSearch(): Promise<string[]> {
+    return this._modifications_list_after_search;
+  }
+
+  async setModificationIdListAfterSearch(value: string[]): Promise<void> {
+    this._modifications_list_after_search = value;
+  }
+
+  //Page Methods
 
   async assertOnSearchModificationsPage() {
     await expect(this.page_heading).toBeVisible();
@@ -196,27 +276,35 @@ export default class SearchModificationsPage {
 
   async clickAdvancedFilterChevron() {
     const button = this.advanced_filter_chevron;
-    const isExpanded = await button.getAttribute('aria-expanded');
-    if (isExpanded !== 'true') {
-      await button.click();
-    }
+    await button.click();
+    // const isExpanded = await button.getAttribute('aria-expanded');
+    // if (isExpanded !== 'true') {
+    //   await button.click();
+    // }
   }
 
-  async clickFilterChevron<PageObject>(key: string, page: PageObject) {
-    const selectorFn = page[key + '_chevron'];
-    if (selectorFn) {
-      const button = selectorFn;
-      const isExpanded = await button.getAttribute('aria-expanded');
-      if (isExpanded !== 'true') {
-        await page[key + '_chevron'].click(button);
+  async clickFilterChevron<PageObject>(dataset: JSON, key: string, page: PageObject) {
+    const button = page[key + '_chevron'];
+    const fromDate = dataset['date_modification_submitted_from_day_text'];
+    if (key !== 'date_modification_submitted_to_day_text') {
+      if (button) {
+        await button.click();
+      } else {
+        console.warn(`No selector defined for key: ${key}`);
       }
-    } else {
-      console.warn(`No selector defined for key: ${key}`);
+    } else if (key === 'date_modification_submitted_to_day_text') {
+      if (fromDate === '' || fromDate === undefined) {
+        if (button) {
+          await button.click();
+        } else {
+          console.warn(`No selector defined for key: ${key}`);
+        }
+      }
     }
   }
 
   async getDateString(dataset: JSON, prefix: string) {
-    const day = dataset[`${prefix}_date_text`];
+    const day = dataset[`${prefix}_day_text`];
     const month = dataset[`${prefix}_month_dropdown`];
     const year = dataset[`${prefix}_year_text`];
     return day && month && year ? `${day} ${month} ${year}` : null;
@@ -238,13 +326,13 @@ export default class SearchModificationsPage {
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
         if (key !== 'lead_nation_checkbox' && key !== 'modification_type_checkbox') {
-          if (key === 'date_modification_submitted_from_date_text') {
+          if (key === 'date_modification_submitted_from_day_text') {
             filterName = datasetLabels['date_modification_submitted_label'];
             const fromDate = await this.getDateString(dataset, 'date_modification_submitted_from');
             if (fromDate) {
               filterText.push(`${filterName} - from ${fromDate}`);
             }
-          } else if (key === 'date_modification_submitted_to_date_text') {
+          } else if (key === 'date_modification_submitted_to_day_text') {
             filterName = datasetLabels['date_modification_submitted_label'];
             const toDate = await this.getDateString(dataset, 'date_modification_submitted_to');
             if (toDate) {
@@ -289,13 +377,19 @@ export default class SearchModificationsPage {
     return activeFiltersMap;
   }
 
-  async getSelectedFilterValues<PageObject>(dataset: JSON, page: PageObject) {
-    for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        const locator: Locator = page[key];
-        return await removeUnwantedWhitespace(confirmStringNotNull(await locator.textContent()));
-      }
+  // async getSelectedFilterValues() {
+  //   return await removeUnwantedWhitespace(confirmStringNotNull(await this.active_filters_list.textContent()));
+  // }
+
+  async getSelectedFilterValues(): Promise<string[]> {
+    const filterItems = this.active_filters_list;
+    const count = await filterItems.count();
+    const values: string[] = [];
+    for (let i = 0; i < count; i++) {
+      const text = await filterItems.nth(i).innerText();
+      values.push(text.trim().replace('Remove filter\n', ''));
     }
+    return values;
   }
 
   async getAllModificationsTheTable(): Promise<Map<string, string[]>> {

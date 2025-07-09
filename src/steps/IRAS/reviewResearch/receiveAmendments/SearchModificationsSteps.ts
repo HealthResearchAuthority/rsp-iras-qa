@@ -14,7 +14,7 @@ When(
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
         // I open each filter one by one by clicking the corresponding Filter chevron,if not opened by default (for handling JS Enabled and Disabled)
-        searchModificationsPage.clickFilterChevron(key, searchModificationsPage);
+        await searchModificationsPage.clickFilterChevron(dataset, key, searchModificationsPage);
         if (key === 'sponsor_organisation_text') {
           if (
             ($tags.includes('@jsEnabled') || config.projects?.[1].use?.javaScriptEnabled) &&
@@ -62,7 +62,7 @@ Then(
       datasetLabels
     );
     const filterCheckboxValuesExpected = activeCheckboxFiltersMap.get('multiSelectFilter');
-    // const fieldValActual = await searchModificationsPage.getSelectedFilterValues(dataset, searchModificationsPage);
+    // const fieldValActual: string[] = await searchModificationsPage.getSelectedFilterValues();
     // expect(fieldValActual).toBe(filterValuesExpected + ', ' + filterCheckboxValuesExpected);
 
     console.log(
@@ -108,6 +108,7 @@ Then(
     const modificationTypes = filterDataset['modification_type_checkbox'];
     console.log(modificationTypes);
     const modificationIdListAfterSearch: string[] = confirmArrayNotNull(modificationsList.get('modificationIdValues'));
+    await searchModificationsPage.setModificationIdListAfterSearch(modificationIdListAfterSearch);
     const searchResultIrasID = commonItemsPage.validateSearchResults(modificationIdListAfterSearch, irasId);
     expect(searchResultIrasID).toBeTruthy();
     const shortProjectTitleListAfterSearch: string[] = confirmArrayNotNull(
@@ -173,19 +174,23 @@ Then(
 
 Then(
   'I can see the list is sorted by default in the descending order of the {string}',
-  async ({ manageUsersPage, manageReviewBodiesPage }, sortField: string) => {
+  async ({ searchModificationsPage }, sortField: string) => {
     let actualList: string[];
     switch (sortField.toLowerCase()) {
-      case 'first name':
-        actualList = await manageUsersPage.getFirstNamesListFromUI();
-        break;
-      case 'organisation name':
-        actualList = await manageReviewBodiesPage.getOrgNamesListFromUI();
+      case 'modification id':
+        actualList = await searchModificationsPage.getModificationIdListAfterSearch();
         break;
       default:
         throw new Error(`${sortField} is not a valid option`);
     }
-    const sortedList = [...actualList].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
-    expect.soft(actualList).toEqual(sortedList);
+
+    // Convert IDs like "9800001/4" to a sortable format
+    const normalizedList = actualList.map((id) => {
+      const [prefix, suffix] = id.split('/');
+      return `${prefix.padStart(10, '0')}/${suffix.padStart(4, '0')}`;
+    });
+    const sortedDescending = [...normalizedList].sort((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
+
+    expect.soft(normalizedList).toEqual(sortedDescending);
   }
 );
