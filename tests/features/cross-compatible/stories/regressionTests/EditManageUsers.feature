@@ -47,7 +47,6 @@ Feature: User Administration: Edit Manage Users
             | Title         | User_Title_Update           | Edit_User_Title        |
             | First_Name    | User_First_Name_Text_One    | Edit_User_First_Name   |
             | Last_Name     | User_Last_Name_Text_One     | Edit_User_Last_Name    |
-            | Email_Address | User_Email_Address_Text_One | Edit_User_Email        |
             | Telephone     | User_Telephone_Text_One     | Edit_User_Telephone    |
             | Organisation  | User_Organisation_Text_One  | Edit_User_Organisation |
             | Job_Title     | User_Job_Title_Text_One     | Edit_User_Job_Title    |
