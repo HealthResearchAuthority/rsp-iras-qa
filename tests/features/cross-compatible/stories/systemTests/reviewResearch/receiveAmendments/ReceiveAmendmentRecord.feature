@@ -293,7 +293,7 @@ Feature: Receive Amendment - Staff dashboard/worklist
             | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_End_Space   | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space  |
 
     @SponsorOrganisationValidation @AdvancedFilters @jsDisabled @TestOnly
-    Scenario Outline: Validate the sponsor organisation suggestion list in advanced filters when javascript is enabled
+    Scenario Outline: Validate the sponsor organisation suggestion list in advanced filters when javascript is disabled
         And I open advanced filter and each filter one by one by clicking the corresponding filter chevron,if not opened by default using '<Advanced_Filters>'
         And I capture the page screenshot
         When I authorise the rts api using '<RTS_API_Data>'
