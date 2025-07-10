@@ -20,6 +20,9 @@
   "Field_Error_Sponsor_Email": {
     "sponsor_contact_email_text": "Enter an email address in the correct format"
   },
+  "Field_Error_Primary_Sponsor_Organisation": {
+    "primary_sponsor_organisation_text": "Please provide 3 or more characters to search sponsor organisation."
+  },
   "Valid_Data_All_Fields": {
     "chief_investigator_email_text": "ci_test@test.com",
     "primary_sponsor_organisation_text": "CHESTERFIELD ROYAL HOSPITAL NHS FOUNDATION TRUST",
@@ -196,6 +199,9 @@
   "Sponsor_Organisation_Text_Hyphen": {
     "primary_sponsor_organisation_text": "e-Therapeutics"
   },
+  "Sponsor_Organisation_Text_Exactly_Five_Results": {
+    "primary_sponsor_organisation_text": "Asi"
+  },
   "Invalid_Email_Data_One_Start_With_Dot": {
     "chief_investigator_email_text": ".john@example.com"
   },
@@ -357,5 +363,11 @@
     "suggestion_footer": "Continue entering to improve suggestions",
     "continue_entering_suggestion": "Continue entering to get suggestions",
     "no_suggestion_found": "No suggestions found."
+  },
+  "Sponsor_Organisation_Jsdisabled_Search_Hint_Labels": {
+    "search_hint_header_prefix": "Results for",
+    "search_hint_footer_prefix": "sponsor organisations match your search for",
+    "search_hint_footer": ". Try narrowing down your search if the organisation you are looking for is not listed",
+    "no_suggestion_found": "No suggestions found for"
   }
 }
