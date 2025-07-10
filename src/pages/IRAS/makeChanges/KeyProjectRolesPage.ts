@@ -36,9 +36,9 @@ export default class KeyProjectRolesPage {
 
     //Locators
     this.pageHeading = this.page.getByTestId('title');
-    this.chief_investigator_header_label = this.page.locator('label[for="IQA0311_Text"]');
+    this.chief_investigator_header_label = this.page.locator('label[for="Questions[0].AnswerText"]');
     this.chief_investigator_email_label = this.page.getByTestId('chief-investigator-hint');
-    this.sponsor_contact_header_label = this.page.locator('label[for="IQA0313_Text"]');
+    this.sponsor_contact_header_label = this.page.locator('label[for="Questions[2].AnswerText"]');
     this.sponsor_contact_email_label = this.page.getByTestId('sponsor-contact-hint');
     this.chief_investigator_email_text = this.page.getByTestId('IQA0311_Text');
     this.sponsor_contact_email_text = this.page.getByTestId('IQA0313_Text');
