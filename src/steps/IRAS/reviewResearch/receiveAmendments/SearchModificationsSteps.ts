@@ -1,6 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../hooks/CustomFixtures';
-import { confirmArrayNotNull } from '../../../../utils/UtilFunctions';
+import { confirmArrayNotNull, sortArray } from '../../../../utils/UtilFunctions';
 import config from '../../../../../playwright.config';
 const { When, Then } = createBdd(test);
 
@@ -31,18 +31,46 @@ When(
             }
           } else {
             await commonItemsPage.fillUIComponent(dataset, key, searchModificationsPage);
-            if (!(filterDatasetName == 'Sponsor_Organisation_Text_Blank')) {
-              await searchModificationsPage.sponsor_organisation_jsdisabled_search_button.click();
-              await searchModificationsPage.page.waitForTimeout(2000);
-              await searchModificationsPage.sponsor_organisation_jsdisabled_search_results_radio_button.isVisible();
-            }
-            if (!(filterDatasetName == 'Sponsor_Organisation_Text_Blank')) {
+            await searchModificationsPage.sponsor_organisation_jsdisabled_search_button.click();
+            if (dataset[key] !== '') {
               await searchModificationsPage.sponsor_organisation_jsdisabled_search_results_radio_button.first().click();
             }
+            // if (!(filterDatasetName == 'Sponsor_Organisation_Text_Blank')) {
+            //   await searchModificationsPage.sponsor_organisation_jsdisabled_search_button.click();
+            //   await searchModificationsPage.page.waitForTimeout(2000);
+            //   await searchModificationsPage.sponsor_organisation_jsdisabled_search_results_radio_button.isVisible();
+            // }
+            // if (!(filterDatasetName == 'Sponsor_Organisation_Text_Blank')) {
+            //   await searchModificationsPage.sponsor_organisation_jsdisabled_search_results_radio_button.first().click();
+            // }
           }
           delete dataset['sponsor_organisation_jsenabled_text'];
         } else {
           await commonItemsPage.fillUIComponent(dataset, key, searchModificationsPage);
+        }
+      }
+    }
+  }
+);
+
+When(
+  'I open advanced filter and each filter one by one by clicking the corresponding filter chevron,if not opened by default using {string}',
+  async ({ searchModificationsPage, $tags }, filterDatasetName: string) => {
+    const dataset =
+      searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[filterDatasetName];
+    if (
+      ($tags.includes('@jsEnabled') || config.projects?.[1].use?.javaScriptEnabled) &&
+      !$tags.includes('@jsDisabled')
+    ) {
+      await searchModificationsPage.clickAdvancedFilterChevron();
+    }
+    for (const key in dataset) {
+      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+        if (
+          ($tags.includes('@jsEnabled') || config.projects?.[1].use?.javaScriptEnabled) &&
+          !$tags.includes('@jsDisabled')
+        ) {
+          await searchModificationsPage.clickFilterChevron(dataset, key, searchModificationsPage);
         }
       }
     }
@@ -192,5 +220,67 @@ Then(
     const sortedDescending = [...normalizedList].sort((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
 
     expect.soft(normalizedList).toEqual(sortedDescending);
+  }
+);
+
+Then(
+  'I type valid {string} for sponsor organisation suggestion box in advanced filters and validate the suggestion list along with {string}',
+  async ({ searchModificationsPage, rtsPage, commonItemsPage }, datasetName: string, suggestionCommonDatasetName) => {
+    const dataset = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[datasetName];
+    const suggestionHeadersDatasetName =
+      searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[suggestionCommonDatasetName];
+    let sponsorOrganisationNameListExpected = await sortArray(rtsPage.rtsResponseList);
+    if (sponsorOrganisationNameListExpected.length > 5) {
+      sponsorOrganisationNameListExpected = sponsorOrganisationNameListExpected.slice(0, 5);
+    }
+    // await searchModificationsPage.sponsor_organisation_jsenabled_text.fill(dataset['sponsor_organisation_text']);
+    dataset['sponsor_organisation_jsenabled_text'] = dataset['sponsor_organisation_text'];
+    await commonItemsPage.fillUIComponent(dataset, 'sponsor_organisation_jsenabled_text', searchModificationsPage);
+    await searchModificationsPage.page.waitForTimeout(2000);
+    const sponsorOrganisationNameListActual =
+      await searchModificationsPage.sponsor_organisation_suggestion_list_labels.allTextContents();
+    expect(sponsorOrganisationNameListActual).toEqual(sponsorOrganisationNameListExpected);
+    const suggestionsHeaderLabelActual = await searchModificationsPage.sponsor_organisation_suggestion_listbox
+      .first()
+      .getAttribute('data-before-suggestions');
+    const suggestionsHeaderLabelExpected = suggestionHeadersDatasetName.suggestion_header;
+    expect(suggestionsHeaderLabelActual).toEqual(suggestionsHeaderLabelExpected);
+    const suggestionsFooterLabelActual = await searchModificationsPage.sponsor_organisation_suggestion_listbox
+      .first()
+      .getAttribute('data-after-suggestions');
+    const suggestionsFooterLabelExpected = suggestionHeadersDatasetName.suggestion_footer;
+    expect(suggestionsFooterLabelActual).toEqual(suggestionsFooterLabelExpected);
+  }
+);
+
+Then(
+  'I type invalid {string} for sponsor organisation suggestion box in advanced filters and validate the suggestion list along with {string}',
+  async ({ searchModificationsPage }, datasetName: string, suggestionCommonDatasetName) => {
+    const dataset = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[datasetName];
+    const suggestionHeadersDatasetName =
+      searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[suggestionCommonDatasetName];
+    await searchModificationsPage.sponsor_organisation_jsenabled_text.fill(dataset['sponsor_organisation_text']);
+    await searchModificationsPage.page.waitForTimeout(2000);
+    const noResultFoundSuggestionActual = await searchModificationsPage.sponsor_organisation_suggestion_list_labels
+      .first()
+      .textContent();
+    const suggestionsHeaderLabelExpected = suggestionHeadersDatasetName.no_suggestion_found;
+    expect(noResultFoundSuggestionActual).toEqual(suggestionsHeaderLabelExpected);
+  }
+);
+
+Then(
+  'I type min characters {string} for sponsor organisation suggestion box in advanced filters and validate the suggestion list along with {string}',
+  async ({ searchModificationsPage }, datasetName: string, suggestionCommonDatasetName) => {
+    const dataset = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[datasetName];
+    const suggestionHeadersDatasetName =
+      searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[suggestionCommonDatasetName];
+    await searchModificationsPage.sponsor_organisation_jsenabled_text.fill(dataset['sponsor_organisation_text']);
+    await searchModificationsPage.page.waitForTimeout(2000);
+    const continueEnteringSuggestionActual = await searchModificationsPage.sponsor_organisation_suggestion_listbox
+      .first()
+      .getAttribute('data-before-suggestions');
+    const suggestionsHeaderLabelExpected = suggestionHeadersDatasetName.suggestion_footer;
+    expect(continueEnteringSuggestionActual).toEqual(suggestionsHeaderLabelExpected);
   }
 );

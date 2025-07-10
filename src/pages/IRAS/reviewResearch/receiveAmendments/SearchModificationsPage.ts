@@ -53,6 +53,7 @@ export default class SearchModificationsPage {
   readonly date_modification_submitted_to_date_fieldset: Locator;
   readonly short_project_title_fieldset: Locator;
   readonly active_filters_list: Locator;
+  readonly sponsor_organisation_fieldset: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -197,12 +198,6 @@ export default class SearchModificationsPage {
       .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.modification_type_label, {
         exact: true,
       });
-    // this.short_project_title_text = this.page.getByLabel(
-    //   this.searchModificationsPageTestData.Search_Modifications_Page.short_project_title_label,
-    //   {
-    //     exact: true,
-    //   }
-    // );
     this.short_project_title_text_chevron = this.page
       .getByRole('heading')
       .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.short_project_title_label, {
@@ -214,33 +209,39 @@ export default class SearchModificationsPage {
       ),
     });
     this.short_project_title_text = this.short_project_title_fieldset.getByRole('textbox');
-
-    this.sponsor_organisation_text = this.page.getByRole('textbox', {
-      name: searchModificationsPageTestData.Search_Modifications_Page.sponsor_organisation_label,
-    });
     this.sponsor_organisation_text_chevron = this.page
       .getByRole('heading')
       .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.sponsor_organisation_label, {
         exact: true,
       });
-    // this.page.getByRole('button', {
-    //   name: this.searchModificationsPageTestData.Search_Modifications_Page.sponsor_organisation_label,
-    // });
-    this.sponsor_organisation_jsenabled_text = this.page.getByRole('combobox', {
-      name: searchModificationsPageTestData.Search_Modifications_Page.sponsor_organisation_label,
+    this.sponsor_organisation_fieldset = this.page.locator('.govuk-fieldset', {
+      has: this.page.getByText(
+        this.searchModificationsPageTestData.Search_Modifications_Page.sponsor_organisation_hint_text
+      ),
     });
+    this.sponsor_organisation_jsenabled_text = this.sponsor_organisation_fieldset.getByRole('combobox');
+    this.sponsor_organisation_text = this.sponsor_organisation_fieldset.getByRole('textbox');
+
+    // this.sponsor_organisation_jsenabled_text = this.page.getByRole('combobox', {
+    //   name: searchModificationsPageTestData.Search_Modifications_Page.sponsor_organisation_label,
+    // });
     this.sponsor_organisation_suggestion_list_labels = this.sponsor_organisation_jsenabled_text
       .locator('..')
       .getByRole('option');
     this.sponsor_organisation_suggestion_listbox = this.sponsor_organisation_jsenabled_text
       .locator('..')
       .getByRole('listbox');
-    this.sponsor_organisation_jsdisabled_search_button = this.page.getByRole('button', {
+    // this.sponsor_organisation_jsdisabled_search_button = this.page.getByRole('button', {
+    //   name: 'Search',
+    // });
+    this.sponsor_organisation_jsdisabled_search_button = this.sponsor_organisation_fieldset.getByRole('button', {
       name: 'Search',
     });
-    this.sponsor_organisation_jsdisabled_search_results_radio_button = this.page.locator(
-      'input[type="radio"][name="SponsorOrgSearch.SelectedOrganisation"]'
-    );
+    this.sponsor_organisation_jsdisabled_search_results_radio_button =
+      this.sponsor_organisation_fieldset.getByRole('radio');
+    // this.sponsor_organisation_jsdisabled_search_results_radio_button = this.page.locator(
+    //   'input[type="radio"][name="SponsorOrgSearch.SelectedOrganisation"]'
+    // );
     this.active_filters_list = this.page
       .getByRole('heading')
       .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.active_filters_label, {
@@ -277,10 +278,6 @@ export default class SearchModificationsPage {
   async clickAdvancedFilterChevron() {
     const button = this.advanced_filter_chevron;
     await button.click();
-    // const isExpanded = await button.getAttribute('aria-expanded');
-    // if (isExpanded !== 'true') {
-    //   await button.click();
-    // }
   }
 
   async clickFilterChevron<PageObject>(dataset: JSON, key: string, page: PageObject) {

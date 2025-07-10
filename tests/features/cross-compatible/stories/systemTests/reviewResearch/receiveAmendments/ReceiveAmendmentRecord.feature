@@ -17,7 +17,7 @@ Feature: Receive Amendment - Staff dashboard/worklist
     # 1. Valid IRAS ID + filters(64 combinations) >>Click Apply Filters>>Results displayed (some combinations can't give results) (Search button is not clicked)
     ##Scenario 6 -Selected filters validation
     # Selected filters are displayed under active filters>>tags/labels for each filter validation
-    @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @jsEnabled @Test1
+    @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @Test1
     Scenario Outline: Verify the user is able to view the list of modifications by entering a valid IRAS ID, selecting the advanced filters, and clicking the 'Apply filters' button
         When I enter '<Valid_Iras_Id>' into the search field
         And I capture the page screenshot
@@ -38,7 +38,7 @@ Feature: Receive Amendment - Staff dashboard/worklist
     # 2. Valid IRAS ID >>Click Search>>Results displayed>> Select Advanced Filters(64 combinations)>> Click Apply Filters>>Results displayed(filtered results)
     ##Scenario 6 -Selected filters validation
     # Selected filters are displayed under active filters>>tags/labels for each filter validation
-    @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @Test2
+    @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @Test3
     Scenario Outline: Verify the user is able to view the list of modifications by entering valid iras id, then clicking on 'Search' button and then selecting advanced filters and clicking the 'Apply filters' button
         # When I enter iras id in the search modifications page using '<Valid_Iras_Id>'
         When I enter '<Valid_Iras_Id>' into the search field
@@ -267,15 +267,44 @@ Feature: Receive Amendment - Staff dashboard/worklist
             | Valid_Iras_Id     | Advanced_Filters     |
             | Valid_Iras_Id_One | Advanced_Filters_One |
 
-##Scenario 5 -'Sponsor organisation' filter validation (Ask Alfred for reusing Front stage)
+    ##Scenario 5 -'Sponsor organisation' filter validation (Ask Alfred for reusing Front stage)
+    # • The search should begin after entering the first three characters.
+    # § If more than three results are returned, only the first three should be displayed initially, with the rest accessible via a vertically scrollable list.
+    # § If no results are found, the system must display an appropriate error message to the user.
 
-# • The search should begin after entering the first three characters.
+    @SponsorOrganisationValidation @AdvancedFilters @jsEnabled @TestOnly
+    Scenario Outline: Validate the sponsor organisation suggestion list in advanced filters
+        And I open advanced filter and each filter one by one by clicking the corresponding filter chevron,if not opened by default using '<Advanced_Filters>'
+        And I capture the page screenshot
+        When I authorise the rts api using '<RTS_API_Data>'
+        Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation
+        And I type valid '<Sponsor_Organisation>' for sponsor organisation suggestion box in advanced filters and validate the suggestion list along with '<Suggestion_List_Headers>'
+        And I type invalid '<Sponsor_Organisation_Invalid>' for sponsor organisation suggestion box in advanced filters and validate the suggestion list along with '<Suggestion_List_Headers>'
+        And I type min characters '<Sponsor_Organisation_Min>' for sponsor organisation suggestion box in advanced filters and validate the suggestion list along with '<Suggestion_List_Headers>'
+        And I capture the page screenshot
+        Examples:
+            | Advanced_Filters                      | Sponsor_Organisation                          | Sponsor_Organisation_Invalid      | Sponsor_Organisation_Min      | Suggestion_List_Headers        | RTS_API_Data         | RTS_Request                                 |
+            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Partial_Text_NHS         | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS         |
+            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_Brackets    | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Brackets    |
+            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_Dot_Comma   | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Dot_Comma   |
+            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_Slash       | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Slash       |
+            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_Hyphen      | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Hyphen      |
+            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_Start_Space | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Start_Space |
+            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_End_Space   | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space  |
 
-# § If more than three results are returned, only the first three should be displayed initially, with the rest accessible via a vertically scrollable list.
 
-# § If no results are found, the system must display an appropriate error message to the user.
+    #### Partial validation for all the text boxes>>Iras Id search validation
 
-#### Partial validation for all the text boxes>>Iras Id search validation
+    @viewListOfModifications @Pagination
+    Scenario Outline: Verify the user can view the list of modifications by entering valid iras id, then click on search button and then selected advanced filters and click on apply filters button
+        And I select advanced filters in the search modifications page using '<Advanced_Filters>'
+        And I capture the page screenshot
+        And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
+        And I capture the page screenshot
+        # add pagination steps here
+        Examples:
+            | Advanced_Filters             |
+            | Advanced_Filters_Lead_Nation |
 
 ###*****************************************************************************************************************************
 
