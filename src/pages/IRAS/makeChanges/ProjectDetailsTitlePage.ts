@@ -29,7 +29,9 @@ export default class ProjectDetailsTitlePage {
 
     //Locators
     this.pageHeading = this.page.getByTestId('title');
-    this.short_project_title_textbox_label = this.page.locator('label[for="Questions[0].AnswerText"]');
+    this.short_project_title_textbox_label = this.page.getByText(
+      this.projectDetailsTitlePageTestData.Label_Texts.short_project_title_textbox_label
+    );
     this.provide_project_title_textbox_label = this.page.locator('#short-project-title-hint p');
     this.short_project_title_text = this.page.getByTestId('IQA0002_Text');
     this.planned_end_date_textbox_label = this.page.locator('label[for="Questions[1].AnswerText"]');
