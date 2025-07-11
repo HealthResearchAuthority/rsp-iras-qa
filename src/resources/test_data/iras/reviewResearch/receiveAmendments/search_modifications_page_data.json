@@ -146,8 +146,11 @@
     "Sponsor_Organisation_Text_Hyphen": {
       "sponsor_organisation_text": "e-Therapeutics"
     },
+    "Sponsor_Organisation_Text_Exactly_Five_Results": {
+      "sponsor_organisation_text": "Asi"
+    },
     "Field_Error_Sponsor_Organisation": {
-      "primary_sponsor_organisation_text": "Please provide 3 or more characters to search sponsor organisation."
+      "sponsor_organisation_text": "Please provide 3 or more characters to search sponsor organisation."
     }
   }
 }

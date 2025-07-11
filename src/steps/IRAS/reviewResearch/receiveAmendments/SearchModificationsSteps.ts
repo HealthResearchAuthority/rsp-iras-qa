@@ -107,13 +107,12 @@ Then(
     const shortProjectTitle = filterDataset['short_project_title_text'];
     const searchKey = irasId + '/' + chiefInvestigatorName + '/' + shortProjectTitle;
     const searchTerms = searchKey.split('/');
-    // const searchTerms = await commonItemsPage.splitSearchTerm(searchKey);
     console.log(searchTerms);
+
     const modificationsList = await searchModificationsPage.getAllModificationsTheTable();
     const modificationsListAfterSearch: string[] = confirmArrayNotNull(modificationsList.get('searchResultValues'));
     const filteredSearchResults = await commonItemsPage.filterResults(modificationsListAfterSearch, searchTerms);
     expect(filteredSearchResults).toEqual(modificationsListAfterSearch);
-    // const searchResult = commonItemsPage.validateSearchResults(modificationsListAfterSearch, irasId);
     const searchResult = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
       modificationsListAfterSearch,
       searchTerms
@@ -121,14 +120,11 @@ Then(
     expect(searchResult).toBeTruthy();
     expect(modificationsListAfterSearch).toHaveLength(searchResult.length);
 
-    const leadNations = filterDataset['lead_nation_checkbox'];
-    console.log(leadNations);
-    const modificationTypes = filterDataset['modification_type_checkbox'];
-    console.log(modificationTypes);
     const modificationIdListAfterSearch: string[] = confirmArrayNotNull(modificationsList.get('modificationIdValues'));
     await searchModificationsPage.setModificationIdListAfterSearch(modificationIdListAfterSearch);
     const searchResultIrasID = commonItemsPage.validateSearchResults(modificationIdListAfterSearch, irasId);
     expect(searchResultIrasID).toBeTruthy();
+
     const shortProjectTitleListAfterSearch: string[] = confirmArrayNotNull(
       modificationsList.get('shortProjectTitleValues')
     );
@@ -137,6 +133,7 @@ Then(
       shortProjectTitle
     );
     expect(searchResultShortProjectTitle).toBeTruthy();
+
     const chiefInvestigatorNameListAfterSearch: string[] = confirmArrayNotNull(
       modificationsList.get('chiefInvestigatorNameValues')
     );
@@ -145,8 +142,42 @@ Then(
       chiefInvestigatorName
     );
     expect(searchResultChiefInvestigatorName).toBeTruthy();
-    // leadNations >> a or b or c or d
+
     // modificationTypes >> a or b
+
+    const modificationTypes: string[] = filterDataset['modification_type_checkbox'];
+    console.log(modificationTypes);
+    const modificationTypeListAfterSearch: string[] = confirmArrayNotNull(
+      modificationsList.get('modificationTypeValues')
+    );
+    const filteredModificationTypeListSearchResults = await commonItemsPage.filterResults(
+      modificationTypeListAfterSearch,
+      modificationTypes
+    );
+    expect(filteredModificationTypeListSearchResults).toEqual(modificationTypeListAfterSearch);
+    const modificationTypesSearchResult = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
+      modificationTypeListAfterSearch,
+      modificationTypes
+    );
+    expect(modificationTypesSearchResult).toBeTruthy();
+    expect(modificationTypeListAfterSearch).toHaveLength(modificationTypesSearchResult.length);
+
+    // leadNations >> a or b or c or d
+
+    const leadNations: string[] = filterDataset['lead_nation_checkbox'];
+    console.log(leadNations);
+    const leadNationValuesAfterSearch: string[] = confirmArrayNotNull(modificationsList.get('leadNationValues'));
+    const filteredLeadNationValuesSearchResults = await commonItemsPage.filterResults(
+      leadNationValuesAfterSearch,
+      leadNations
+    );
+    expect(filteredLeadNationValuesSearchResults).toEqual(leadNationValuesAfterSearch);
+    const leadNationValuesSearchResult = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
+      leadNationValuesAfterSearch,
+      leadNations
+    );
+    expect(leadNationValuesSearchResult).toBeTruthy();
+    expect(leadNationValuesAfterSearch).toHaveLength(leadNationValuesSearchResult.length);
   }
 );
 
@@ -345,5 +376,30 @@ Then(
     const dataset = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[datasetName];
     await searchModificationsPage.sponsor_organisation_text.fill(dataset['sponsor_organisation_text']);
     await searchModificationsPage.sponsor_organisation_jsdisabled_search_button.click();
+  }
+);
+
+Then(
+  'I validate {string} displayed on {string} in advanced filters',
+  async (
+    { commonItemsPage, searchModificationsPage },
+    errorMessageFieldAndSummaryDatasetName: string,
+    pageKey: string
+  ) => {
+    let errorMessageFieldDataset: any;
+    let page: any;
+    if (pageKey === 'Search_Modifications_Page') {
+      errorMessageFieldDataset =
+        searchModificationsPage.searchModificationsPageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = searchModificationsPage;
+    }
+    for (const key in errorMessageFieldDataset) {
+      if (Object.prototype.hasOwnProperty.call(errorMessageFieldDataset, key)) {
+        const fieldErrorMessagesActualValues = await commonItemsPage.getFieldErrorMessages(key, page);
+        expect(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
+        const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
+        await expect(element).toBeInViewport();
+      }
+    }
   }
 );
