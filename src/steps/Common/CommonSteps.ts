@@ -33,6 +33,7 @@ When(
       searchAddUserReviewBodyPage,
       myResearchProjectsPage,
       searchModificationsPage,
+      // modificationsReadyToAssignPage,
     },
     page: string
   ) => {
@@ -73,6 +74,8 @@ When(
       case 'Search_Modifications_Page':
         await searchModificationsPage.assertOnSearchModificationsPage();
         break;
+      // case 'Modifications_Ready_To_Assign_Page':
+      //   await modificationsReadyToAssignPage.
       default:
         throw new Error(`${page} is not a valid option`);
     }
