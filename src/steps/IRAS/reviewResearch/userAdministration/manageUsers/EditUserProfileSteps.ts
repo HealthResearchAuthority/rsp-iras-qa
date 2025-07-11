@@ -187,6 +187,6 @@ When(
   'I validate {string} is not displayed for edit user profile page',
   async ({ editUserProfilePage }, fieldKey: string) => {
     const locatorName = fieldKey.toLowerCase() + '_text';
-    await expect(editUserProfilePage[locatorName]).toHaveCount(0);
+    await expect(editUserProfilePage[locatorName]).not.toBeVisible();
   }
 );

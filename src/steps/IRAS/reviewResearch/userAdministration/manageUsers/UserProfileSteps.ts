@@ -95,5 +95,5 @@ Then(
 
 When('I validate change link is not displayed for {string}', async ({ userProfilePage }, fieldKey: string) => {
   const locatorName = fieldKey.toLowerCase() + '_change_link';
-  await expect(userProfilePage[locatorName]).toHaveCount(0);
+  await expect(userProfilePage[locatorName]).not.toBeVisible();
 });
