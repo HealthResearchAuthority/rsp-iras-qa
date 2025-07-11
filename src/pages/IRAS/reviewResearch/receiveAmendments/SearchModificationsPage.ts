@@ -246,8 +246,13 @@ export default class SearchModificationsPage {
       .getByRole('listitem')
       .getByRole('link')
       .locator('.search-filter-summary__remove-filter-text');
+
+    // this.sponsor_organisation_jsdisabled_result_hint_label = this.sponsor_organisation_fieldset.getByText(
+    //   this.searchModificationsPageTestData.Search_Modifications_Page.Sponsor_Organisation_Jsdisabled_Search_Hint_Labels
+    //     .search_hint_header_prefix
+    // );
     this.sponsor_organisation_jsdisabled_result_hint_label = this.page.getByTestId(
-      'SponsorOrgSearch.SelectedOrganisation-hint'
+      'Search.SponsorOrgSearch.SelectedOrganisation-hint'
     );
     this.sponsor_organisation_jsdisabled_narrow_down_label = this.page.locator('.govuk-inset-text');
     this.sponsor_organisation_jsdisabled_search_results_labels = this.page

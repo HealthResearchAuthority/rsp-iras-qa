@@ -55,23 +55,13 @@ When(
 
 When(
   'I open advanced filter and each filter one by one by clicking the corresponding filter chevron,if not opened by default using {string}',
-  async ({ searchModificationsPage, $tags }, filterDatasetName: string) => {
+  async ({ searchModificationsPage }, filterDatasetName: string) => {
     const dataset =
       searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[filterDatasetName];
-    if (
-      ($tags.includes('@jsEnabled') || config.projects?.[1].use?.javaScriptEnabled) &&
-      !$tags.includes('@jsDisabled')
-    ) {
-      await searchModificationsPage.clickAdvancedFilterChevron();
-    }
+    await searchModificationsPage.clickAdvancedFilterChevron();
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        if (
-          ($tags.includes('@jsEnabled') || config.projects?.[1].use?.javaScriptEnabled) &&
-          !$tags.includes('@jsDisabled')
-        ) {
-          await searchModificationsPage.clickFilterChevron(dataset, key, searchModificationsPage);
-        }
+        await searchModificationsPage.clickFilterChevron(dataset, key, searchModificationsPage);
       }
     }
   }
@@ -311,8 +301,8 @@ Then(
       const searchResultFooterHintLabelActual = confirmStringNotNull(
         await searchModificationsPage.sponsor_organisation_jsdisabled_narrow_down_label.textContent()
       ).trim();
-      const searchResultFooterHintLabelExpected = `${totalMatchingSponsorOrganisations} ${searchHintDataset.search_hint_footer_prefix} '${dataset['primary_sponsor_organisation_text']}'${searchHintDataset.search_hint_footer}`;
-      expect(searchResultFooterHintLabelActual).toEqual(searchResultFooterHintLabelExpected);
+      const searchResultFooterHintLabelExpected = `${totalMatchingSponsorOrganisations} ${searchHintDataset.search_hint_footer_prefix} '${dataset['sponsor_organisation_text']}'${searchHintDataset.search_hint_footer}`;
+      expect.soft(searchResultFooterHintLabelActual).toEqual(searchResultFooterHintLabelExpected);
     }
   }
 );
