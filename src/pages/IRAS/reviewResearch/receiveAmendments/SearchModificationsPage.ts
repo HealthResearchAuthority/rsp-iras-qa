@@ -54,6 +54,11 @@ export default class SearchModificationsPage {
   readonly short_project_title_fieldset: Locator;
   readonly active_filters_list: Locator;
   readonly sponsor_organisation_fieldset: Locator;
+  readonly sponsor_organisation_jsdisabled_result_hint_label: Locator;
+  readonly sponsor_organisation_jsdisabled_search_results_labels: Locator;
+  readonly sponsor_organisation_jsdisabled_narrow_down_label: Locator;
+  readonly sponsor_organisation_jsdisabled_no_suggestions_label: Locator;
+  readonly sponsor_organisation_jsdisabled_min_error_message: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -221,27 +226,17 @@ export default class SearchModificationsPage {
     });
     this.sponsor_organisation_jsenabled_text = this.sponsor_organisation_fieldset.getByRole('combobox');
     this.sponsor_organisation_text = this.sponsor_organisation_fieldset.getByRole('textbox');
-
-    // this.sponsor_organisation_jsenabled_text = this.page.getByRole('combobox', {
-    //   name: searchModificationsPageTestData.Search_Modifications_Page.sponsor_organisation_label,
-    // });
     this.sponsor_organisation_suggestion_list_labels = this.sponsor_organisation_jsenabled_text
       .locator('..')
       .getByRole('option');
     this.sponsor_organisation_suggestion_listbox = this.sponsor_organisation_jsenabled_text
       .locator('..')
       .getByRole('listbox');
-    // this.sponsor_organisation_jsdisabled_search_button = this.page.getByRole('button', {
-    //   name: 'Search',
-    // });
     this.sponsor_organisation_jsdisabled_search_button = this.sponsor_organisation_fieldset.getByRole('button', {
       name: 'Search',
     });
     this.sponsor_organisation_jsdisabled_search_results_radio_button =
       this.sponsor_organisation_fieldset.getByRole('radio');
-    // this.sponsor_organisation_jsdisabled_search_results_radio_button = this.page.locator(
-    //   'input[type="radio"][name="SponsorOrgSearch.SelectedOrganisation"]'
-    // );
     this.active_filters_list = this.page
       .getByRole('heading')
       .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.active_filters_label, {
@@ -251,6 +246,14 @@ export default class SearchModificationsPage {
       .getByRole('listitem')
       .getByRole('link')
       .locator('.search-filter-summary__remove-filter-text');
+    this.sponsor_organisation_jsdisabled_result_hint_label = this.page.getByTestId(
+      'SponsorOrgSearch.SelectedOrganisation-hint'
+    );
+    this.sponsor_organisation_jsdisabled_narrow_down_label = this.page.locator('.govuk-inset-text');
+    this.sponsor_organisation_jsdisabled_search_results_labels = this.page
+      .locator('.govuk-radios__item')
+      .filter({ has: this.page.locator('.govuk-radios__label') });
+    this.sponsor_organisation_jsdisabled_no_suggestions_label = this.page.locator('.govuk-inset-text');
   }
 
   //Getters & Setters for Private Variables
@@ -374,10 +377,6 @@ export default class SearchModificationsPage {
     return activeFiltersMap;
   }
 
-  // async getSelectedFilterValues() {
-  //   return await removeUnwantedWhitespace(confirmStringNotNull(await this.active_filters_list.textContent()));
-  // }
-
   async getSelectedFilterValues(): Promise<string[]> {
     const filterItems = this.active_filters_list;
     const count = await filterItems.count();
@@ -442,12 +441,4 @@ export default class SearchModificationsPage {
     ]);
     return searchResultMap;
   }
-
-  // const filterSelectors = {
-  //   chiefInvestigator: () => getByRole('button', { name: /Chief Investigator name/i }),
-  //   dateSubmitted: () => getByRole('button', { name: /Date modification submitted/i }),
-  //   leadNation: () => getByRole('button', { name: /Lead nation/i }),
-  //   modificationType: () => getByRole('button', { name: /Modification type/i }),
-  //   shortTitle: () => getByRole('button', { name: /Short project title/i }),
-  // };
 }

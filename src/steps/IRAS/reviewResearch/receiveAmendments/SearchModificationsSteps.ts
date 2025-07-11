@@ -1,6 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../hooks/CustomFixtures';
-import { confirmArrayNotNull, sortArray } from '../../../../utils/UtilFunctions';
+import { confirmArrayNotNull, confirmStringNotNull, sortArray } from '../../../../utils/UtilFunctions';
 import config from '../../../../../playwright.config';
 const { When, Then } = createBdd(test);
 
@@ -282,5 +282,78 @@ Then(
       .getAttribute('data-before-suggestions');
     const suggestionsHeaderLabelExpected = suggestionHeadersDatasetName.suggestion_footer;
     expect(continueEnteringSuggestionActual).toEqual(suggestionsHeaderLabelExpected);
+  }
+);
+
+Then(
+  'With javascript disabled, I search with valid {string} for sponsor organisation search box in advanced filters and validate the search results along with {string}',
+  async ({ searchModificationsPage, rtsPage }, datasetName: string, searchHintsDatasetName) => {
+    const dataset = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[datasetName];
+    const searchHintDataset =
+      searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[searchHintsDatasetName];
+    let sponsorOrganisationNameListExpected = await sortArray(rtsPage.rtsResponseList);
+    const totalMatchingSponsorOrganisations = sponsorOrganisationNameListExpected.length;
+    if (sponsorOrganisationNameListExpected.length > 5) {
+      sponsorOrganisationNameListExpected = sponsorOrganisationNameListExpected.slice(0, 5);
+    }
+    await searchModificationsPage.sponsor_organisation_text.fill(dataset['sponsor_organisation_text']);
+    await searchModificationsPage.sponsor_organisation_jsdisabled_search_button.click();
+    const sponsorOrganisationNameListActualWithSpaces =
+      await searchModificationsPage.sponsor_organisation_jsdisabled_search_results_labels.allTextContents();
+    const sponsorOrganisationNameListActual = sponsorOrganisationNameListActualWithSpaces.map((str) => str.trim());
+    expect(sponsorOrganisationNameListActual).toEqual(sponsorOrganisationNameListExpected);
+    const searchResultHeaderHintLabelActual = confirmStringNotNull(
+      await searchModificationsPage.sponsor_organisation_jsdisabled_result_hint_label.textContent()
+    ).trim();
+    const searchResultHeaderHintLabelExpected = `${searchHintDataset.search_hint_header_prefix} '${dataset['sponsor_organisation_text']}'`;
+    expect(searchResultHeaderHintLabelActual).toEqual(searchResultHeaderHintLabelExpected);
+    if (totalMatchingSponsorOrganisations > 5) {
+      const searchResultFooterHintLabelActual = confirmStringNotNull(
+        await searchModificationsPage.sponsor_organisation_jsdisabled_narrow_down_label.textContent()
+      ).trim();
+      const searchResultFooterHintLabelExpected = `${totalMatchingSponsorOrganisations} ${searchHintDataset.search_hint_footer_prefix} '${dataset['primary_sponsor_organisation_text']}'${searchHintDataset.search_hint_footer}`;
+      expect(searchResultFooterHintLabelActual).toEqual(searchResultFooterHintLabelExpected);
+    }
+  }
+);
+
+Then(
+  'With javascript disabled, I search with invalid {string} for sponsor organisation search box in advanced filters and validate the search results along with {string}',
+  async ({ searchModificationsPage }, datasetName: string, searchHintsDatasetName) => {
+    const dataset = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[datasetName];
+    const searchHintDataset =
+      searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[searchHintsDatasetName];
+    await searchModificationsPage.sponsor_organisation_text.fill(dataset['sponsor_organisation_text']);
+    await searchModificationsPage.sponsor_organisation_jsdisabled_search_button.click();
+    const noResultFoundLabelActual = confirmStringNotNull(
+      await searchModificationsPage.sponsor_organisation_jsdisabled_no_suggestions_label.textContent()
+    ).trim();
+    const noResultFoundLabelExpected = `${searchHintDataset.no_suggestion_found} ${dataset['sponsor_organisation_text']}`;
+    expect(noResultFoundLabelActual).toEqual(noResultFoundLabelExpected);
+  }
+);
+
+// Then(
+//   'With javascript disabled, I search with invalid {string} for sponsor organisation search box in advanced filters and validate the search results along with {string}',
+//   async ({ searchModificationsPage }, datasetName: string, searchHintsDatasetName) => {
+//     const dataset = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[datasetName];
+//     const searchHintDataset =
+//       searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[searchHintsDatasetName];
+//     await searchModificationsPage.sponsor_organisation_text.fill(dataset['sponsor_organisation_text']);
+//     await searchModificationsPage.sponsor_organisation_jsdisabled_search_button.click();
+//     const noResultFoundLabelActual = confirmStringNotNull(
+//       await searchModificationsPage.sponsor_organisation_jsdisabled_no_suggestions_label.textContent()
+//     ).trim();
+//     const noResultFoundLabelExpected = `${searchHintDataset.no_suggestion_found} ${dataset['sponsor_organisation_text']}`;
+//     expect(noResultFoundLabelActual).toEqual(noResultFoundLabelExpected);
+//   }
+// );
+
+Then(
+  'With javascript disabled, I search with invalid min characters {string} for sponsor organisation search box in advanced filters',
+  async ({ searchModificationsPage }, datasetName: string) => {
+    const dataset = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[datasetName];
+    await searchModificationsPage.sponsor_organisation_text.fill(dataset['sponsor_organisation_text']);
+    await searchModificationsPage.sponsor_organisation_jsdisabled_search_button.click();
   }
 );
