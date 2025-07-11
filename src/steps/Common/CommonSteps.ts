@@ -769,14 +769,16 @@ Then(
 Then(
   'I sequentially navigate through each page by {string} from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges',
   async ({ commonItemsPage }, navigateMethod: string) => {
-    await commonItemsPage.firstPage.click();
-    const totalItems = await commonItemsPage.getTotalItems();
+    // commonItemspage and getting navigation method
+    await commonItemsPage.firstPage.click(); // Get first page locator and click on it
+    const totalItems = await commonItemsPage.getTotalItems(); // Get total items - Results showing in the page
     const pageSize = parseInt(commonItemsPage.commonTestData.default_page_size, 10);
-    const totalPages = await commonItemsPage.getTotalPages();
+    const totalPages = await commonItemsPage.getTotalPages(); // Get total pages displayed
     for (let currentPage = 1; currentPage <= totalPages; currentPage++) {
-      const currentPageLocator = await commonItemsPage.clickOnPages(currentPage, navigateMethod);
-      await expect(currentPageLocator).toHaveAttribute('aria-current');
-      const startEndPagesMap = await commonItemsPage.getStartEndPages(currentPage, pageSize, totalItems);
+      // Compare current page number with total pages and increment if current page <total pages
+      const currentPageLocator = await commonItemsPage.clickOnPages(currentPage, navigateMethod); //
+      await expect(currentPageLocator).toHaveAttribute('aria-current'); // assertion to check current page is set to aria-current
+      const startEndPagesMap = await commonItemsPage.getStartEndPages(currentPage, pageSize, totalItems); // click on current page
       const start = startEndPagesMap.get('start');
       const end = startEndPagesMap.get('end');
       await expect(commonItemsPage.pagination_results).toHaveText(
