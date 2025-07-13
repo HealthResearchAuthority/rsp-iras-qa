@@ -1,0 +1,156 @@
+{
+  "Search_Modifications_Page": {
+    "page_heading": "Search",
+    "page_guidance_text": "Enter the IRAS ID to search for all modifications received, including those submitted for notification only",
+    "title": "Search - Approvals - Plan and manage healthcare research ",
+    "search_button_label": "Search",
+    "no_results_heading": "There are no matching results",
+    "no_results_guidance_text": "Improve your search results by: removing filters double-checking your spelling using fewer keywords searching for something less specific",
+    "advanced_filter_label": "Advanced filter",
+    "chief_investigator_name_label": "Chief Investigator name",
+    "chief_investigator_hint_text": "Enter the name of the Chief Investigator",
+    "date_modification_submitted_label": "Date modification submitted",
+    "date_modification_submitted_from_date_hint_text": "Enter the date you want to search from",
+    "date_modification_submitted_from_date_help_text": "For example, 28 February 2023",
+    "date_modification_submitted_to_date_hint_text": "Enter the date you want to search to",
+    "date_modification_submitted_to_date_help_text": "For example, 12 October 2024",
+    "date_modification_submitted_day_label": "Day",
+    "date_modification_submitted_month_label": "Month",
+    "date_modification_submitted_year_label": "Year",
+    "lead_nation_label": "Lead nation",
+    "lead_nation_hint_text": "selected",
+    "lead_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+    "modification_type_label": "Modification type",
+    "modification_type_hint_text": "selected",
+    "modification_type_checkbox": ["Minor modifications", "Modification of an important detail"],
+    "short_project_title_label": "Short project title",
+    "short_project_title_hint_text": "Enter the name of short project title",
+    "sponsor_organisation_label": "Sponsor organisation",
+    "sponsor_organisation_hint_text": "Type the name of the organisation or scroll through the list",
+    "active_filters_label": "Active filters",
+    "Invalid_Date_Modification_Submitted_Error": {
+      "date_modification_submitted_to_date_text": "The date should be a valid date and in future"
+    },
+    "Valid_Iras_Id_One": {
+      "iras_id_text": "9800001"
+    },
+    "Advanced_Filters_One": {
+      "chief_investigator_name_text": "Barry White",
+      "date_modification_submitted_from_day_text": "11",
+      "date_modification_submitted_from_month_dropdown": "April",
+      "date_modification_submitted_from_year_text": "2023",
+      "date_modification_submitted_to_day_text": "02",
+      "date_modification_submitted_to_month_dropdown": "January",
+      "date_modification_submitted_to_year_text": "2025",
+      "lead_nation_checkbox": ["England", "Wales"],
+      "modification_type_checkbox": ["Modification of an important detail", "Minor modifications"],
+      "short_project_title_text": "Project 01",
+      "sponsor_organisation_text": "COLD GENESYS INC"
+    },
+    "Advanced_Filters_Sponsor_Organisation": {
+      "sponsor_organisation_text": "COLD GENESYS INC"
+    },
+    "Advanced_Filters_Lead_Nation": {
+      "lead_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
+    },
+    "Invalid_IRAS_ID_Letters": {
+      "iras_id_text": "abcdefg"
+    },
+    "Invalid_IRAS_ID_Symbols": {
+      "iras_id_text": "!£$%^&*"
+    },
+    "Invalid_IRAS_ID_Letters_Symbols": {
+      "iras_id_text": "a!b£c£D%"
+    },
+    "Invalid_IRAS_ID_Min_Length": {
+      "iras_id_text": "12"
+    },
+    "Invalid_IRAS_ID_Leading_Zeros": {
+      "iras_id_text": "000123"
+    },
+    "Invalid_IRAS_ID_Spaces": {
+      "iras_id_text": "    "
+    },
+    "Invalid_IRAS_ID_Spaces_Suffix": {
+      "iras_id_text": "1234  "
+    },
+    "Invalid_IRAS_ID_Spaces_Prefix": {
+      "iras_id_text": " 1234"
+    },
+    "Invalid_IRAS_ID_Spaces_Seperator": {
+      "iras_id_text": "12 34"
+    },
+    "Invalid_IRAS_ID_Blank": {
+      "iras_id_text": ""
+    },
+    "Invalid_IRAS_ID_zeros": {
+      "iras_id_text": "0000"
+    },
+    "Sponsor_Organisation_Invalid_Data": {
+      "sponsor_organisation_text": "test invalid data"
+    },
+    "Sponsor_Organisation_Min_Char": {
+      "sponsor_organisation_text": "nh"
+    },
+    "Suggestion_List_Common_Headers": {
+      "suggestion_header": "Suggestions",
+      "suggestion_footer": "Continue entering to improve suggestions",
+      "continue_entering_suggestion": "Continue entering to get suggestions",
+      "no_suggestion_found": "No suggestions found."
+    },
+    "Sponsor_Organisation_Jsdisabled_Search_Hint_Labels": {
+      "search_hint_header_prefix": "Results for",
+      "search_hint_footer_prefix": "sponsor organisations match your search for",
+      "search_hint_footer": ". Try narrowing down your search if the organisation you are looking for is not listed",
+      "no_suggestion_found": "No suggestions found for"
+    },
+    "Sponsor_Organisation_Partial_Text_NHS": {
+      "sponsor_organisation_text": "nhs"
+    },
+    "Sponsor_Organisation_Full_Text_Aalborg": {
+      "sponsor_organisation_text": "Aalborg University Hospital"
+    },
+    "Sponsor_Organisation_Text_Blank": {
+      "sponsor_organisation_text": ""
+    },
+    "Sponsor_Organisation_Text_Partial_Brackets": {
+      "sponsor_organisation_text": "(Sp"
+    },
+    "Sponsor_Organisation_Text_Partial_Dot_Comma": {
+      "sponsor_organisation_text": ".,L"
+    },
+    "Sponsor_Organisation_Text_Partial_Slash": {
+      "sponsor_organisation_text": "A/S"
+    },
+    "Sponsor_Organisation_Text_Partial_Hyphen": {
+      "sponsor_organisation_text": "e-T"
+    },
+    "Sponsor_Organisation_Text_Partial_Start_Space": {
+      "sponsor_organisation_text": " nh"
+    },
+    "Sponsor_Organisation_Text_Partial_End_Space": {
+      "sponsor_organisation_text": "hs "
+    },
+    "Sponsor_Organisation_Text_Brackets": {
+      "sponsor_organisation_text": "L'Institut d'Investigacions Biomediques August Pi i Sunyer (IDIBAPS) (Spain)"
+    },
+    "Sponsor_Organisation_Text_Amp": {
+      "sponsor_organisation_text": "L. MOLTENI & C. DEI FRATELLI ALITTI - SOCIETA' DI ESERCIZIO - S.P.A."
+    },
+    "Sponsor_Organisation_Text_Dot_Comma": {
+      "sponsor_organisation_text": "Eisai Co.,Ltd."
+    },
+    "Sponsor_Organisation_Text_Slash": {
+      "sponsor_organisation_text": "Y-mAbs Therapeutics A/S"
+    },
+    "Sponsor_Organisation_Text_Hyphen": {
+      "sponsor_organisation_text": "e-Therapeutics"
+    },
+    "Sponsor_Organisation_Text_Exactly_Five_Results": {
+      "sponsor_organisation_text": "Asi"
+    },
+    "Field_Error_Sponsor_Organisation": {
+      "sponsor_organisation_text": "Please provide 3 or more characters to search sponsor organisation."
+    }
+  }
+}

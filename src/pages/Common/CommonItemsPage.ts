@@ -95,7 +95,8 @@ export default class CommonItemsPage {
     this.tableRows = this.page.getByRole('table').getByRole('row');
     this.tableBodyRows = this.page.getByRole('table').locator('tbody').getByRole('row');
     this.hidden_next_button = this.page.locator('[class="govuk-pagination__next"][style="visibility: hidden"]');
-    this.search_text = this.page.locator('#SearchQuery');
+    this.search_text = this.page.locator('#Search_IrasId');
+    //  this.search_text = this.page.locator('#SearchQuery');
     //Banner
     this.bannerNavBar = this.page.getByLabel('Service information');
     this.bannerLoginBtn = this.bannerNavBar.getByText(this.buttonTextData.Banner.Login, { exact: true });

@@ -32,6 +32,7 @@ When(
       manageUsersPage,
       searchAddUserReviewBodyPage,
       myResearchProjectsPage,
+      searchModificationsPage,
     },
     page: string
   ) => {
@@ -68,6 +69,9 @@ When(
         break;
       case 'My_Research_Page':
         await myResearchProjectsPage.assertOnMyResearchProjectsPage();
+        break;
+      case 'Search_Modifications_Page':
+        await searchModificationsPage.assertOnSearchModificationsPage();
         break;
       default:
         throw new Error(`${page} is not a valid option`);
@@ -501,24 +505,28 @@ Then(
 When(
   'I enter {string} into the search field',
   async (
-    { commonItemsPage, reviewBodyProfilePage, createReviewBodyPage, createUserProfilePage },
+    { commonItemsPage, reviewBodyProfilePage, createReviewBodyPage, createUserProfilePage, searchModificationsPage },
     inputType: string
   ) => {
     let searchValue: string;
-    switch (inputType) {
-      case 'name of the previously used review body':
-        searchValue = await reviewBodyProfilePage.getOrgName();
-        break;
-      case 'name of the new review body':
-        searchValue = await createReviewBodyPage.getUniqueOrgName();
-        break;
-      case 'name of the newly created user':
-        searchValue = await createUserProfilePage.getUniqueEmail();
-        break;
-      default:
-        searchValue = inputType;
+    if (inputType.startsWith('Valid_Iras_Id') || inputType.startsWith('Invalid_Iras_Id')) {
+      searchValue = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[inputType];
+    } else {
+      switch (inputType) {
+        case 'name of the previously used review body':
+          searchValue = await reviewBodyProfilePage.getOrgName();
+          break;
+        case 'name of the new review body':
+          searchValue = await createReviewBodyPage.getUniqueOrgName();
+          break;
+        case 'name of the newly created user':
+          searchValue = await createUserProfilePage.getUniqueEmail();
+          break;
+        default:
+          searchValue = inputType;
+      }
     }
-    await commonItemsPage.search_text.fill(searchValue);
+    await commonItemsPage.search_text.fill(searchValue['iras_id_text']);
   }
 );
 
@@ -652,6 +660,7 @@ Given(
       userProfilePage,
       reviewBodyProfilePage,
       myResearchProjectsPage,
+      searchModificationsPage,
     },
     page: string
   ) => {
@@ -688,6 +697,9 @@ Given(
       case 'My_Research_Page':
         await myResearchProjectsPage.goto();
         await myResearchProjectsPage.assertOnMyResearchProjectsPage();
+        break;
+      case 'Search_Modifications_Page':
+        await searchModificationsPage.goto();
         break;
       default:
         throw new Error(`${page} is not a valid option`);
@@ -771,13 +783,13 @@ Then(
         `Showing ${start} to ${end} of ${totalItems} results`
       );
       const rowCount = await commonItemsPage.getItemsPerPage();
-      expect(rowCount - 1).toBe(parseInt(`${end}`, 10) - parseInt(`${start}`, 10) + 1); // to get end of page item number
-      const itemsMap = await commonItemsPage.getPaginationValues(); // this sets ellipses indices value
-      const ellipsisIndices: any = itemsMap.get('ellipsisIndices'); // get ellipsisIndices value
+      expect(rowCount - 1).toBe(parseInt(`${end}`, 10) - parseInt(`${start}`, 10) + 1);
+      const itemsMap = await commonItemsPage.getPaginationValues();
+      const ellipsisIndices: any = itemsMap.get('ellipsisIndices');
       const itemsValues: any = itemsMap.get('items');
       const visiblePagesMap = await commonItemsPage.getVisiblePages(itemsValues);
-      const visiblePages: any = visiblePagesMap.get('visiblePages'); // gets only the visible pages removing the ellipses
-      const allVisibleItems: any = itemsMap.get('allVisibleItems'); // gets pages values along with ellipses
+      const visiblePages: any = visiblePagesMap.get('visiblePages');
+      const allVisibleItems: any = itemsMap.get('allVisibleItems');
       if (totalPages <= 7) {
         expect(visiblePages).toEqual(allVisibleItems);
         expect(ellipsisIndices.length).toBe(0);
@@ -786,63 +798,54 @@ Then(
       const lastPage = totalPages;
       if (totalPages > 7) {
         if (currentPage <= 3) {
-          switch (currentPage) {
-            case 1:
-              expect(visiblePages).toEqual([firstPage, currentPage + 1, lastPage]);
-              expect(allVisibleItems).toEqual([`${firstPage}`, `${currentPage + 1}`, '⋯', `${lastPage}`]);
-              break;
-            case 2:
-              expect(visiblePages).toEqual([firstPage, currentPage, currentPage + 1, lastPage]);
-              expect(allVisibleItems).toEqual([
-                `${firstPage}`,
-                `${currentPage}`,
-                `${currentPage + 1}`,
-                '⋯',
-                `${lastPage}`,
-              ]);
-              break;
-            case 3:
-              expect(visiblePages).toEqual([firstPage, currentPage - 1, currentPage, currentPage + 1, lastPage]); //1,2,3,4,77
-              expect(allVisibleItems).toEqual([
-                `${firstPage}`,
-                `${currentPage - 1}`,
-                `${currentPage}`,
-                `${currentPage + 1}`,
-                '⋯',
-                `${lastPage}`,
-              ]);
-              break;
+          if (currentPage === firstPage) {
+            expect(visiblePages).toEqual([firstPage, currentPage + 1, lastPage]);
+            expect(allVisibleItems).toEqual([`${firstPage}`, `${currentPage + 1}`, '⋯', `${lastPage}`]);
+          } else if (currentPage === firstPage + 1) {
+            expect(visiblePages).toEqual([firstPage, currentPage, currentPage + 1, lastPage]);
+            expect(allVisibleItems).toEqual([
+              `${firstPage}`,
+              `${currentPage}`,
+              `${currentPage + 1}`,
+              '⋯',
+              `${lastPage}`,
+            ]);
+          } else if (currentPage === firstPage + 2) {
+            expect(visiblePages).toEqual([firstPage, currentPage - 1, currentPage, currentPage + 1, lastPage]);
+            expect(allVisibleItems).toEqual([
+              `${firstPage}`,
+              `${currentPage - 1}`,
+              `${currentPage}`,
+              `${currentPage + 1}`,
+              '⋯',
+              `${lastPage}`,
+            ]);
           }
         } else if (currentPage >= totalPages - 2) {
-          switch (currentPage) {
-            case totalPages - 2:
-              expect(visiblePages).toEqual([firstPage, currentPage - 1, currentPage, currentPage + 1, lastPage]);
-              expect(allVisibleItems).toEqual([
-                `${firstPage}`,
-                '⋯',
-                `${currentPage - 1}`,
-                `${currentPage}`,
-                `${currentPage + 1}`,
-                `${lastPage}`,
-              ]);
-              break;
-            case totalPages - 1:
-              expect(visiblePages).toEqual([firstPage, currentPage - 1, currentPage, lastPage]);
-              expect(allVisibleItems).toEqual([
-                `${firstPage}`,
-                '⋯',
-                `${currentPage - 1}`,
-                `${currentPage}`,
-                `${lastPage}`,
-              ]);
-              break;
-            case totalPages:
-              expect(visiblePages).toEqual([firstPage, currentPage - 1, lastPage]);
-              expect(allVisibleItems).toEqual([`${firstPage}`, '⋯', `${currentPage - 1}`, `${lastPage}`]);
-              break;
+          if (currentPage === lastPage - 2) {
+            expect(visiblePages).toEqual([firstPage, currentPage - 1, currentPage, currentPage + 1, lastPage]);
+            expect(allVisibleItems).toEqual([
+              `${firstPage}`,
+              '⋯',
+              `${currentPage - 1}`,
+              `${currentPage}`,
+              `${currentPage + 1}`,
+              `${lastPage}`,
+            ]);
+          } else if (currentPage === lastPage - 1) {
+            expect(visiblePages).toEqual([firstPage, currentPage - 1, currentPage, lastPage]);
+            expect(allVisibleItems).toEqual([
+              `${firstPage}`,
+              '⋯',
+              `${currentPage - 1}`,
+              `${currentPage}`,
+              `${lastPage}`,
+            ]);
+          } else if (currentPage === lastPage) {
+            expect(visiblePages).toEqual([firstPage, currentPage - 1, lastPage]);
+            expect(allVisibleItems).toEqual([`${firstPage}`, '⋯', `${currentPage - 1}`, `${lastPage}`]);
           }
         } else {
-          //All other pages other than 75, 76, 77
           expect(visiblePages).toEqual([firstPage, currentPage - 1, currentPage, currentPage + 1, lastPage]);
           expect(allVisibleItems).toEqual([
             `${firstPage}`,
@@ -855,20 +858,126 @@ Then(
           ]);
         }
       }
-      // main if
-      expect(visiblePages).toContain(currentPage); //Asserts if visible pages 1,2,77 contains 1
+      expect(visiblePages).toContain(currentPage);
       if (currentPage > 1) {
-        // doesn't execute for page 1
-        expect(visiblePages).toContain(currentPage - 1); // if current page >1, previous page must be visible
+        expect(visiblePages).toContain(currentPage - 1);
       }
       if (currentPage < totalPages) {
-        //1<77
-        expect(visiblePages).toContain(currentPage + 1); //Asserts if visible pages 1,2,77 contains 2
+        expect(visiblePages).toContain(currentPage + 1);
       }
-      expect(visiblePages).toContain(1); // this has already been validated for page 1
-      expect(visiblePages).toContain(totalPages); // Asserts if visible pages 1,2,77 contains 77
+      expect(visiblePages).toContain(1);
+      expect(visiblePages).toContain(totalPages);
       if (navigateMethod === 'clicking on next link') {
-        // doesnot execute when you click the page number
+        await commonItemsPage.clickOnNextLink();
+      } else if (navigateMethod === 'clicking on previous link') {
+        await commonItemsPage.clickOnPreviousLink();
+      }
+    }
+  }
+);
+
+Then(
+  'I sequentially navigate through each page by {string} from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges',
+  async ({ commonItemsPage }, navigateMethod: string) => {
+    const totalPages = await commonItemsPage.getTotalPages();
+    await commonItemsPage.clickOnPages(totalPages, 'clicking on page number');
+    const totalItems = await commonItemsPage.getTotalItems();
+    const pageSize = parseInt(commonItemsPage.commonTestData.default_page_size, 10);
+    for (let currentPage = totalPages; currentPage >= 1; currentPage--) {
+      const currentPageLocator = await commonItemsPage.clickOnPages(currentPage, navigateMethod);
+      await expect(currentPageLocator).toHaveAttribute('aria-current', 'page');
+      const startEndPagesMap = await commonItemsPage.getStartEndPages(currentPage, pageSize, totalItems);
+      const start = startEndPagesMap.get('start');
+      const end = startEndPagesMap.get('end');
+      await expect(commonItemsPage.pagination_results).toHaveText(
+        `Showing ${start} to ${end} of ${totalItems} results`
+      );
+      const rowCount = await commonItemsPage.getItemsPerPage();
+      expect(rowCount - 1).toBe(parseInt(`${end}`, 10) - parseInt(`${start}`, 10) + 1);
+      const itemsMap = await commonItemsPage.getPaginationValues();
+      const ellipsisIndices: any = itemsMap.get('ellipsisIndices');
+      const itemsValues: any = itemsMap.get('items');
+      const visiblePagesMap = await commonItemsPage.getVisiblePages(itemsValues);
+      const visiblePages: any = visiblePagesMap.get('visiblePages');
+      const allVisibleItems: any = itemsMap.get('allVisibleItems');
+      if (totalPages <= 7) {
+        expect(visiblePages).toEqual(allVisibleItems);
+        expect(ellipsisIndices.length).toBe(0);
+      }
+      const firstPage = 1;
+      const lastPage = totalPages;
+      if (totalPages > 7) {
+        if (currentPage <= 3) {
+          if (currentPage === firstPage) {
+            expect(visiblePages).toEqual([firstPage, currentPage + 1, lastPage]);
+            expect(allVisibleItems).toEqual([`${firstPage}`, `${currentPage + 1}`, '⋯', `${lastPage}`]);
+          } else if (currentPage === firstPage + 1) {
+            expect(visiblePages).toEqual([firstPage, currentPage, currentPage + 1, lastPage]);
+            expect(allVisibleItems).toEqual([
+              `${firstPage}`,
+              `${currentPage}`,
+              `${currentPage + 1}`,
+              '⋯',
+              `${lastPage}`,
+            ]);
+          } else if (currentPage === firstPage + 2) {
+            expect(visiblePages).toEqual([firstPage, currentPage - 1, currentPage, currentPage + 1, lastPage]);
+            expect(allVisibleItems).toEqual([
+              `${firstPage}`,
+              `${currentPage - 1}`,
+              `${currentPage}`,
+              `${currentPage + 1}`,
+              '⋯',
+              `${lastPage}`,
+            ]);
+          }
+        } else if (currentPage >= totalPages - 2) {
+          if (currentPage === lastPage - 2) {
+            expect(visiblePages).toEqual([firstPage, currentPage - 1, currentPage, currentPage + 1, lastPage]);
+            expect(allVisibleItems).toEqual([
+              `${firstPage}`,
+              '⋯',
+              `${currentPage - 1}`,
+              `${currentPage}`,
+              `${currentPage + 1}`,
+              `${lastPage}`,
+            ]);
+          } else if (currentPage === lastPage - 1) {
+            expect(visiblePages).toEqual([firstPage, currentPage - 1, currentPage, lastPage]);
+            expect(allVisibleItems).toEqual([
+              `${firstPage}`,
+              '⋯',
+              `${currentPage - 1}`,
+              `${currentPage}`,
+              `${lastPage}`,
+            ]);
+          } else if (currentPage === lastPage) {
+            expect(visiblePages).toEqual([firstPage, currentPage - 1, lastPage]);
+            expect(allVisibleItems).toEqual([`${firstPage}`, '⋯', `${currentPage - 1}`, `${lastPage}`]);
+          }
+        } else {
+          expect(visiblePages).toEqual([firstPage, currentPage - 1, currentPage, currentPage + 1, lastPage]);
+          expect(allVisibleItems).toEqual([
+            `${firstPage}`,
+            '⋯',
+            `${currentPage - 1}`,
+            `${currentPage}`,
+            `${currentPage + 1}`,
+            '⋯',
+            `${lastPage}`,
+          ]);
+        }
+      }
+      expect(visiblePages).toContain(currentPage);
+      if (currentPage > 1) {
+        expect(visiblePages).toContain(currentPage - 1);
+      }
+      if (currentPage < totalPages) {
+        expect(visiblePages).toContain(currentPage + 1);
+      }
+      expect(visiblePages).toContain(1);
+      expect(visiblePages).toContain(totalPages);
+      if (navigateMethod === 'clicking on next link') {
         await commonItemsPage.clickOnNextLink();
       } else if (navigateMethod === 'clicking on previous link') {
         await commonItemsPage.clickOnPreviousLink();
