@@ -305,6 +305,7 @@ Feature: Receive Amendment - Staff dashboard/worklist
         And I capture the page screenshot
         Then I can see the selected filters '<Advanced_Filters>' are displayed under active filters
         And I capture the page screenshot
+        # And I click the 'Advanced_Filter' link on the 'Search_Modifications_Page'
         And I open advanced filter and each filter one by one by clicking the corresponding filter chevron,if not opened by default using '<Advanced_Filters>'
         And I capture the page screenshot
         Then I validate '<Field_Error_Message>' displayed on 'Search_Modifications_Page' in advanced filters
@@ -386,6 +387,7 @@ Feature: Receive Amendment - Staff dashboard/worklist
 
     @SponsorOrganisationValidation @AdvancedFilters @jsEnabled
     Scenario Outline: Validate the sponsor organisation suggestion list in advanced filters when javascript is enabled
+        And I click the 'Advanced_Filter' link on the 'Search_Modifications_Page'
         And I open advanced filter and each filter one by one by clicking the corresponding filter chevron,if not opened by default using '<Advanced_Filters>'
         And I capture the page screenshot
         When I authorise the rts api using '<RTS_API_Data>'
@@ -406,6 +408,7 @@ Feature: Receive Amendment - Staff dashboard/worklist
 
     @SponsorOrganisationValidation @AdvancedFilters @jsDisabled
     Scenario Outline: Validate the sponsor organisation suggestion list in advanced filters when javascript is disabled
+        And I click the 'Advanced_Filter' link on the 'Search_Modifications_Page'
         And I open advanced filter and each filter one by one by clicking the corresponding filter chevron,if not opened by default using '<Advanced_Filters>'
         And I capture the page screenshot
         When I authorise the rts api using '<RTS_API_Data>'

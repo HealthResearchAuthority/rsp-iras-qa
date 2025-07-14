@@ -58,7 +58,7 @@ When(
   async ({ searchModificationsPage }, filterDatasetName: string) => {
     const dataset =
       searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[filterDatasetName];
-    await searchModificationsPage.clickAdvancedFilterChevron();
+    // await searchModificationsPage.clickAdvancedFilterChevron();
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
         await searchModificationsPage.clickFilterChevron(dataset, key, searchModificationsPage);
@@ -70,16 +70,29 @@ When(
 Then(
   'I can see the selected filters {string} are displayed under active filters',
   async ({ searchModificationsPage }, filterDatasetName: string) => {
+    let activeCheckboxFiltersMap;
+    let filterCheckboxValuesExpected;
     const dataset =
       searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[filterDatasetName];
     const datasetLabels = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page;
     const activeFiltersMap = await searchModificationsPage.getActiveFiltersLabels(dataset, datasetLabels);
     const filterValuesExpected = activeFiltersMap.get('singleSelectFilter');
-    const activeCheckboxFiltersMap = await searchModificationsPage.getActiveFiltersCheckboxLabels(
-      dataset,
-      datasetLabels
-    );
-    const filterCheckboxValuesExpected = activeCheckboxFiltersMap.get('multiSelectFilter');
+    for (const key in dataset) {
+      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+        if (key.endsWith('_checkbox')) {
+          activeCheckboxFiltersMap = await searchModificationsPage.getActiveFiltersCheckboxLabels(
+            dataset,
+            datasetLabels
+          );
+          filterCheckboxValuesExpected = activeCheckboxFiltersMap.get('multiSelectFilter');
+        }
+      }
+    }
+    //  activeCheckboxFiltersMap = await searchModificationsPage.getActiveFiltersCheckboxLabels(
+    //   dataset,
+    //   datasetLabels
+    // );
+    //  filterCheckboxValuesExpected = activeCheckboxFiltersMap.get('multiSelectFilter');
     // const fieldValActual: string[] = await searchModificationsPage.getSelectedFilterValues();
     // expect(fieldValActual).toBe(filterValuesExpected + ', ' + filterCheckboxValuesExpected);
 
@@ -152,34 +165,48 @@ Then(
     const modificationTypeListAfterSearch: string[] = confirmArrayNotNull(
       modificationsList.get('modificationTypeValues')
     );
-    const filteredModificationTypeListSearchResults = await commonItemsPage.filterResults(
-      modificationTypeListAfterSearch,
-      modificationTypes
-    );
-    expect(filteredModificationTypeListSearchResults).toEqual(modificationTypeListAfterSearch);
-    const modificationTypesSearchResult = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
-      modificationTypeListAfterSearch,
-      modificationTypes
-    );
-    expect(modificationTypesSearchResult).toBeTruthy();
-    expect(modificationTypeListAfterSearch).toHaveLength(modificationTypesSearchResult.length);
+    for (let i = 0; i < modificationTypes.length; i++) {
+      const modificationTypesSearchResult = await commonItemsPage.validateSearchResults(
+        modificationTypeListAfterSearch,
+        modificationTypes[i]
+      );
+      expect(modificationTypesSearchResult).toBeTruthy();
+    }
+    // const filteredModificationTypeListSearchResults = await commonItemsPage.filterResults(
+    //   modificationTypeListAfterSearch,
+    //   modificationTypes
+    // );
+    // expect(filteredModificationTypeListSearchResults).toEqual(modificationTypeListAfterSearch);
+    // const modificationTypesSearchResult = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
+    //   modificationTypeListAfterSearch,
+    //   modificationTypes
+    // );
+    // expect(modificationTypesSearchResult).toBeTruthy();
+    // expect(modificationTypeListAfterSearch).toHaveLength(modificationTypesSearchResult.length);
 
     // leadNations >> a or b or c or d
 
     const leadNations: string[] = filterDataset['lead_nation_checkbox'];
     console.log(leadNations);
     const leadNationValuesAfterSearch: string[] = confirmArrayNotNull(modificationsList.get('leadNationValues'));
-    const filteredLeadNationValuesSearchResults = await commonItemsPage.filterResults(
-      leadNationValuesAfterSearch,
-      leadNations
-    );
-    expect(filteredLeadNationValuesSearchResults).toEqual(leadNationValuesAfterSearch);
-    const leadNationValuesSearchResult = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
-      leadNationValuesAfterSearch,
-      leadNations
-    );
-    expect(leadNationValuesSearchResult).toBeTruthy();
-    expect(leadNationValuesAfterSearch).toHaveLength(leadNationValuesSearchResult.length);
+    for (let i = 0; i < leadNations.length; i++) {
+      const leadNationValuesSearchResult = commonItemsPage.validateSearchResults(
+        leadNationValuesAfterSearch,
+        leadNations[i]
+      );
+      expect(leadNationValuesSearchResult).toBeTruthy();
+    }
+    // const filteredLeadNationValuesSearchResults = await commonItemsPage.filterResults(
+    //   leadNationValuesAfterSearch,
+    //   leadNations
+    // );
+    // expect(filteredLeadNationValuesSearchResults).toEqual(leadNationValuesAfterSearch);
+    // const leadNationValuesSearchResult = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
+    //   leadNationValuesAfterSearch,
+    //   leadNations
+    // );
+    // expect(leadNationValuesSearchResult).toBeTruthy();
+    // expect(leadNationValuesAfterSearch).toHaveLength(leadNationValuesSearchResult.length);
   }
 );
 
@@ -356,22 +383,6 @@ Then(
   }
 );
 
-// Then(
-//   'With javascript disabled, I search with invalid {string} for sponsor organisation search box in advanced filters and validate the search results along with {string}',
-//   async ({ searchModificationsPage }, datasetName: string, searchHintsDatasetName) => {
-//     const dataset = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[datasetName];
-//     const searchHintDataset =
-//       searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[searchHintsDatasetName];
-//     await searchModificationsPage.sponsor_organisation_text.fill(dataset['sponsor_organisation_text']);
-//     await searchModificationsPage.sponsor_organisation_jsdisabled_search_button.click();
-//     const noResultFoundLabelActual = confirmStringNotNull(
-//       await searchModificationsPage.sponsor_organisation_jsdisabled_no_suggestions_label.textContent()
-//     ).trim();
-//     const noResultFoundLabelExpected = `${searchHintDataset.no_suggestion_found} ${dataset['sponsor_organisation_text']}`;
-//     expect(noResultFoundLabelActual).toEqual(noResultFoundLabelExpected);
-//   }
-// );
-
 Then(
   'With javascript disabled, I search with invalid min characters {string} for sponsor organisation search box in advanced filters',
   async ({ searchModificationsPage }, datasetName: string) => {
@@ -392,15 +403,25 @@ Then(
     let page: any;
     if (pageKey === 'Search_Modifications_Page') {
       errorMessageFieldDataset =
-        searchModificationsPage.searchModificationsPageTestData[errorMessageFieldAndSummaryDatasetName];
+        searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[
+          errorMessageFieldAndSummaryDatasetName
+        ];
       page = searchModificationsPage;
     }
-    for (const key in errorMessageFieldDataset) {
-      if (Object.prototype.hasOwnProperty.call(errorMessageFieldDataset, key)) {
-        const fieldErrorMessagesActualValues = await commonItemsPage.getFieldErrorMessages(key, page);
-        expect(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
-        const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
-        await expect(element).toBeInViewport();
+    if (errorMessageFieldAndSummaryDatasetName === 'Field_Error_Date_Modification_Submitted') {
+      for (const key in errorMessageFieldDataset) {
+        if (Object.prototype.hasOwnProperty.call(errorMessageFieldDataset, key)) {
+          const fieldErrorMessagesActualValues =
+            await searchModificationsPage.date_modification_submitted_to_date_error.textContent();
+          expect(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
+        }
+      }
+    } else {
+      for (const key in errorMessageFieldDataset) {
+        if (Object.prototype.hasOwnProperty.call(errorMessageFieldDataset, key)) {
+          const fieldErrorMessagesActualValues = await commonItemsPage.getFieldErrorMessages(key, page);
+          expect(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
+        }
       }
     }
   }

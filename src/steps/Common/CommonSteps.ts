@@ -177,7 +177,11 @@ Then('I can see a {string} button on the {string}', async ({ commonItemsPage }, 
 
 Given(
   'I click the {string} link on the {string}',
-  async ({ commonItemsPage, checkCreateUserProfilePage }, linkKey: string, pageKey: string) => {
+  async (
+    { commonItemsPage, checkCreateUserProfilePage, searchModificationsPage },
+    linkKey: string,
+    pageKey: string
+  ) => {
     const linkValue = commonItemsPage.linkTextData[pageKey][linkKey];
     const noOfLinksFound = await commonItemsPage.govUkLink.getByText(linkValue).count();
     if (pageKey === 'Progress_Bar') {
@@ -200,6 +204,9 @@ Given(
       linkKey === 'Back_To_Users'
     ) {
       await commonItemsPage.govUkLink.getByText(linkValue).click();
+    } else if (pageKey === 'Search_Modifications_Page' && linkKey === 'Advanced_Filter') {
+      await searchModificationsPage.clickAdvancedFilterChevron(); //work around for now >> to click on Advanced_Filter link
+      // This if condition need to be removed later
     } else if (noOfLinksFound > 1) {
       await commonItemsPage.govUkLink.getByText(linkValue).first().click();
     } else {
