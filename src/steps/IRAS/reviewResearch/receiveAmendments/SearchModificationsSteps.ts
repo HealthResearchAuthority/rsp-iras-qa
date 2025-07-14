@@ -137,11 +137,13 @@ Then(
     const chiefInvestigatorNameListAfterSearch: string[] = confirmArrayNotNull(
       modificationsList.get('chiefInvestigatorNameValues')
     );
-    const searchResultChiefInvestigatorName = commonItemsPage.validateSearchResults(
+    const searchTermsChiefInvestigatorName = await commonItemsPage.splitSearchTerm(chiefInvestigatorName);
+    const searchResultChiefInvestigatorName = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
       chiefInvestigatorNameListAfterSearch,
-      chiefInvestigatorName
+      searchTermsChiefInvestigatorName
     );
     expect(searchResultChiefInvestigatorName).toBeTruthy();
+    expect(chiefInvestigatorNameListAfterSearch).toHaveLength(searchResultChiefInvestigatorName.length);
 
     // modificationTypes >> a or b
 

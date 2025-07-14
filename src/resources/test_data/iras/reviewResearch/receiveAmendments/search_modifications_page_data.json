@@ -29,12 +29,12 @@
     "sponsor_organisation_hint_text": "Type the name of the organisation or scroll through the list",
     "active_filters_label": "Active filters",
     "Invalid_Date_Modification_Submitted_Error": {
-      "date_modification_submitted_to_date_text": "The date should be a valid date and in future"
+      "date_modification_submitted_to_day_text": "The date should be a valid date and in future"
     },
-    "Valid_Iras_Id_One": {
+    "Valid_Iras_Id_Nth": {
       "iras_id_text": "9800001"
     },
-    "Advanced_Filters_One": {
+    "Advanced_Filters_Nth": {
       "chief_investigator_name_text": "Barry White",
       "date_modification_submitted_from_day_text": "11",
       "date_modification_submitted_from_month_dropdown": "April",
@@ -47,6 +47,397 @@
       "short_project_title_text": "Project 01",
       "sponsor_organisation_text": "COLD GENESYS INC"
     },
+    "Valid_Iras_Id_One": {
+      "iras_id_text": ""
+    },
+    "Advanced_Filters_One": {
+      "chief_investigator_name_text": "",
+      "date_modification_submitted_from_day_text": "",
+      "date_modification_submitted_from_month_dropdown": "",
+      "date_modification_submitted_from_year_text": "",
+      "date_modification_submitted_to_day_text": "",
+      "date_modification_submitted_to_month_dropdown": "",
+      "date_modification_submitted_to_year_text": "",
+      "lead_nation_checkbox": [""],
+      "modification_type_checkbox": [""],
+      "short_project_title_text": "",
+      "sponsor_organisation_text": "Eisai Co.,Ltd."
+    },
+
+    "Valid_Iras_Id_Two": {
+      "iras_id_text": ""
+    },
+    "Advanced_Filters_Two": {
+      "chief_investigator_name_text": "",
+      "date_modification_submitted_from_day_text": "",
+      "date_modification_submitted_from_month_dropdown": "",
+      "date_modification_submitted_from_year_text": "",
+      "date_modification_submitted_to_day_text": "",
+      "date_modification_submitted_to_month_dropdown": "",
+      "date_modification_submitted_to_year_text": "",
+      "lead_nation_checkbox": [""],
+      "modification_type_checkbox": [""],
+      "short_project_title_text": "Short study title 17",
+      "sponsor_organisation_text": ""
+    },
+
+    "Valid_Iras_Id_Three": {
+      "iras_id_text": ""
+    },
+    "Advanced_Filters_Three": {
+      "chief_investigator_name_text": "",
+      "date_modification_submitted_from_day_text": "",
+      "date_modification_submitted_from_month_dropdown": "",
+      "date_modification_submitted_from_year_text": "",
+      "date_modification_submitted_to_day_text": "",
+      "date_modification_submitted_to_month_dropdown": "",
+      "date_modification_submitted_to_year_text": "",
+      "lead_nation_checkbox": [""],
+      "modification_type_checkbox": ["Minor modifications"],
+      "short_project_title_text": "",
+      "sponsor_organisation_text": ""
+    },
+
+    "Valid_Iras_Id_Four": {
+      "iras_id_text": ""
+    },
+    "Advanced_Filters_Four": {
+      "chief_investigator_name_text": "",
+      "date_modification_submitted_from_day_text": "",
+      "date_modification_submitted_from_month_dropdown": "",
+      "date_modification_submitted_from_year_text": "",
+      "date_modification_submitted_to_day_text": "",
+      "date_modification_submitted_to_month_dropdown": "",
+      "date_modification_submitted_to_year_text": "",
+      "lead_nation_checkbox": ["Scotland"],
+      "modification_type_checkbox": [""],
+      "short_project_title_text": "",
+      "sponsor_organisation_text": ""
+    },
+
+    "Valid_Iras_Id_Five": {
+      "iras_id_text": ""
+    },
+    "Advanced_Filters_Five": {
+      "chief_investigator_name_text": "",
+      "date_modification_submitted_from_day_text": "",
+      "date_modification_submitted_from_month_dropdown": "",
+      "date_modification_submitted_from_year_text": "",
+      "date_modification_submitted_to_day_text": "",
+      "date_modification_submitted_to_month_dropdown": "",
+      "date_modification_submitted_to_year_text": "",
+      "lead_nation_checkbox": ["Northern Ireland"],
+      "modification_type_checkbox": [""],
+      "short_project_title_text": "",
+      "sponsor_organisation_text": "Nottingham Trent University"
+    },
+
+    "Valid_Iras_Id_Six": {
+      "iras_id_text": ""
+    },
+    "Advanced_Filters_Six": {
+      "chief_investigator_name_text": "",
+      "date_modification_submitted_from_day_text": "",
+      "date_modification_submitted_from_month_dropdown": "",
+      "date_modification_submitted_from_year_text": "",
+      "date_modification_submitted_to_day_text": "",
+      "date_modification_submitted_to_month_dropdown": "",
+      "date_modification_submitted_to_year_text": "",
+      "lead_nation_checkbox": ["England"],
+      "modification_type_checkbox": [""],
+      "short_project_title_text": "Project 31",
+      "sponsor_organisation_text": ""
+    },
+
+    "Valid_Iras_Id_Seven": {
+      "iras_id_text": ""
+    },
+    "Advanced_Filters_Seven": {
+      "chief_investigator_name_text": "",
+      "date_modification_submitted_from_day_text": "",
+      "date_modification_submitted_from_month_dropdown": "",
+      "date_modification_submitted_from_year_text": "",
+      "date_modification_submitted_to_day_text": "",
+      "date_modification_submitted_to_month_dropdown": "",
+      "date_modification_submitted_to_year_text": "",
+      "lead_nation_checkbox": ["Wales"],
+      "modification_type_checkbox": [""],
+      "short_project_title_text": "Study title 04",
+      "sponsor_organisation_text": "ASHFORD AND ST PETER'S HOSPITALS NHS FOUNDATION TRUST"
+    },
+
+    "Valid_Iras_Id_Eight": {
+      "iras_id_text": ""
+    },
+    "Advanced_Filters_Eight": {
+      "chief_investigator_name_text": "",
+      "date_modification_submitted_from_day_text": "",
+      "date_modification_submitted_from_month_dropdown": "",
+      "date_modification_submitted_from_year_text": "",
+      "date_modification_submitted_to_day_text": "",
+      "date_modification_submitted_to_month_dropdown": "",
+      "date_modification_submitted_to_year_text": "",
+      "lead_nation_checkbox": ["England", "Northern Ireland"],
+      "modification_type_checkbox": ["Modification of an important detail"],
+      "short_project_title_text": "",
+      "sponsor_organisation_text": ""
+    },
+
+    "Valid_Iras_Id_Nine": {
+      "iras_id_text": ""
+    },
+    "Advanced_Filters_Nine": {
+      "chief_investigator_name_text": "",
+      "date_modification_submitted_from_day_text": "",
+      "date_modification_submitted_from_month_dropdown": "",
+      "date_modification_submitted_from_year_text": "",
+      "date_modification_submitted_to_day_text": "",
+      "date_modification_submitted_to_month_dropdown": "",
+      "date_modification_submitted_to_year_text": "",
+      "lead_nation_checkbox": ["England", "Scotland"],
+      "modification_type_checkbox": ["Minor modifications", "Modification of an important detail"],
+      "short_project_title_text": "",
+      "sponsor_organisation_text": "Academic Medical Center at the University of Amsterdam (Netherlands)"
+    },
+
+    "Valid_Iras_Id_Ten": {
+      "iras_id_text": ""
+    },
+    "Advanced_Filters_Ten": {
+      "chief_investigator_name_text": "",
+      "date_modification_submitted_from_day_text": "",
+      "date_modification_submitted_from_month_dropdown": "",
+      "date_modification_submitted_from_year_text": "",
+      "date_modification_submitted_to_day_text": "",
+      "date_modification_submitted_to_month_dropdown": "",
+      "date_modification_submitted_to_year_text": "",
+      "lead_nation_checkbox": ["England", "Wales"],
+      "modification_type_checkbox": ["Modification of an important detail"],
+      "short_project_title_text": "Project 13",
+      "sponsor_organisation_text": ""
+    },
+
+    "Valid_Iras_Id_Eleven": {
+      "iras_id_text": ""
+    },
+    "Advanced_Filters_Eleven": {
+      "chief_investigator_name_text": "",
+      "date_modification_submitted_from_day_text": "",
+      "date_modification_submitted_from_month_dropdown": "",
+      "date_modification_submitted_from_year_text": "",
+      "date_modification_submitted_to_day_text": "",
+      "date_modification_submitted_to_month_dropdown": "",
+      "date_modification_submitted_to_year_text": "",
+      "lead_nation_checkbox": ["Northern Ireland", "Scotland"],
+      "modification_type_checkbox": ["Modification of an important detail"],
+      "short_project_title_text": "26 -Study",
+      "sponsor_organisation_text": "AKL RESEARCH & DEVELOPMENT LIMITED"
+    },
+
+    "Valid_Iras_Id_Twelve": {
+      "iras_id_text": ""
+    },
+    "Advanced_Filters_Tweleve": {
+      "chief_investigator_name_text": "",
+      "date_modification_submitted_from_day_text": "",
+      "date_modification_submitted_from_month_dropdown": "",
+      "date_modification_submitted_from_year_text": "",
+      "date_modification_submitted_to_day_text": "3",
+      "date_modification_submitted_to_month_dropdown": "January",
+      "date_modification_submitted_to_year_text": "2000",
+      "lead_nation_checkbox": [""],
+      "modification_type_checkbox": [""],
+      "short_project_title_text": "",
+      "sponsor_organisation_text": ""
+    },
+
+    "Valid_Iras_Id_Thirteen": {
+      "iras_id_text": ""
+    },
+    "Advanced_Filters_Thirteen": {
+      "chief_investigator_name_text": "",
+      "date_modification_submitted_from_day_text": "03",
+      "date_modification_submitted_from_month_dropdown": "January",
+      "date_modification_submitted_from_year_text": "2000",
+      "date_modification_submitted_to_day_text": "",
+      "date_modification_submitted_to_month_dropdown": "",
+      "date_modification_submitted_to_year_text": "",
+      "lead_nation_checkbox": [""],
+      "modification_type_checkbox": [""],
+      "short_project_title_text": "",
+      "sponsor_organisation_text": "EOS - CS (ETHICAL ONCOLOGY SCIENCE - CLINICAL STUDIES) S.R.L."
+    },
+
+    "Valid_Iras_Id_Fourteen": {
+      "iras_id_text": ""
+    },
+    "Advanced_Filters_Fourteen": {
+      "chief_investigator_name_text": "",
+      "date_modification_submitted_from_day_text": "11",
+      "date_modification_submitted_from_month_dropdown": "April",
+      "date_modification_submitted_from_year_text": "2023",
+      "date_modification_submitted_to_day_text": "2",
+      "date_modification_submitted_to_month_dropdown": "January",
+      "date_modification_submitted_to_year_text": "2025",
+      "lead_nation_checkbox": ["Northern Ireland", "Wales"],
+      "modification_type_checkbox": [""],
+      "short_project_title_text": "",
+      "sponsor_organisation_text": ""
+    },
+
+    "Valid_Iras_Id_Fifteen": {
+      "iras_id_text": ""
+    },
+    "Advanced_Filters_Fifteen": {
+      "chief_investigator_name_text": "",
+      "date_modification_submitted_from_day_text": "01",
+      "date_modification_submitted_from_month_dropdown": "March",
+      "date_modification_submitted_from_year_text": "2024",
+      "date_modification_submitted_to_day_text": "1",
+      "date_modification_submitted_to_month_dropdown": "April",
+      "date_modification_submitted_to_year_text": "2025",
+      "lead_nation_checkbox": ["Scotland", "Wales"],
+      "modification_type_checkbox": [""],
+      "short_project_title_text": "",
+      "sponsor_organisation_text": "L. MOLTENI & C. DEI FRATELLI ALITTI - SOCIETA' DI ESERCIZIO - S.P.A"
+    },
+
+    "Valid_Iras_Id_Sixteen": {
+      "iras_id_text": ""
+    },
+    "Advanced_Filters_Sixteen": {
+      "chief_investigator_name_text": "Barry White",
+      "date_modification_submitted_from_day_text": "",
+      "date_modification_submitted_from_month_dropdown": "",
+      "date_modification_submitted_from_year_text": "",
+      "date_modification_submitted_to_day_text": "",
+      "date_modification_submitted_to_month_dropdown": "",
+      "date_modification_submitted_to_year_text": "",
+      "lead_nation_checkbox": [""],
+      "modification_type_checkbox": [""],
+      "short_project_title_text": "",
+      "sponsor_organisation_text": ""
+    },
+
+    "Valid_Iras_Id_Seventeen": {
+      "iras_id_text": ""
+    },
+    "Advanced_Filters_Seventeen": {
+      "chief_investigator_name_text": "Dr. Isabella Fernández-Hernández",
+      "date_modification_submitted_from_day_text": "",
+      "date_modification_submitted_from_month_dropdown": "",
+      "date_modification_submitted_from_year_text": "",
+      "date_modification_submitted_to_day_text": "",
+      "date_modification_submitted_to_month_dropdown": "",
+      "date_modification_submitted_to_year_text": "",
+      "lead_nation_checkbox": ["England", "Northern Ireland", "Scotland"],
+      "modification_type_checkbox": [""],
+      "short_project_title_text": "",
+      "sponsor_organisation_text": ""
+    },
+
+    "Valid_Iras_Id_Eighteen": {
+      "iras_id_text": ""
+    },
+    "Advanced_Filters_Eighteen": {
+      "chief_investigator_name_text": "Dr. Isabella Fernández-Hernández",
+      "date_modification_submitted_from_day_text": "10",
+      "date_modification_submitted_from_month_dropdown": "April",
+      "date_modification_submitted_from_year_text": "2025",
+      "date_modification_submitted_to_day_text": "12",
+      "date_modification_submitted_to_month_dropdown": "April",
+      "date_modification_submitted_to_year_text": "2025",
+      "lead_nation_checkbox": ["England", "Northern Ireland", "Scotland"],
+      "modification_type_checkbox": [""],
+      "short_project_title_text": "",
+      "sponsor_organisation_text": ""
+    },
+
+    "Valid_Iras_Id_Nineteen": {
+      "iras_id_text": "9800020"
+    },
+    "Advanced_Filters_Nineteen": {
+      "chief_investigator_name_text": "",
+      "date_modification_submitted_from_day_text": "",
+      "date_modification_submitted_from_month_dropdown": "",
+      "date_modification_submitted_from_year_text": "",
+      "date_modification_submitted_to_day_text": "",
+      "date_modification_submitted_to_month_dropdown": "",
+      "date_modification_submitted_to_year_text": "",
+      "lead_nation_checkbox": [""],
+      "modification_type_checkbox": [""],
+      "short_project_title_text": "",
+      "sponsor_organisation_text": ""
+    },
+
+    "Valid_Iras_Id_Twenty": {
+      "iras_id_text": "9800013"
+    },
+    "Advanced_Filters_Twenty": {
+      "chief_investigator_name_text": "",
+      "date_modification_submitted_from_day_text": "",
+      "date_modification_submitted_from_month_dropdown": "",
+      "date_modification_submitted_from_year_text": "",
+      "date_modification_submitted_to_day_text": "",
+      "date_modification_submitted_to_month_dropdown": "",
+      "date_modification_submitted_to_year_text": "",
+      "lead_nation_checkbox": ["England", "Scotland", "Wales"],
+      "modification_type_checkbox": [""],
+      "short_project_title_text": "",
+      "sponsor_organisation_text": ""
+    },
+
+    "Valid_Iras_Id_TwentyOne": {
+      "iras_id_text": "9800032"
+    },
+    "Advanced_Filters_TwentyOne": {
+      "chief_investigator_name_text": "",
+      "date_modification_submitted_from_day_text": "01",
+      "date_modification_submitted_from_month_dropdown": "January",
+      "date_modification_submitted_from_year_text": "2024",
+      "date_modification_submitted_to_day_text": "",
+      "date_modification_submitted_to_month_dropdown": "",
+      "date_modification_submitted_to_year_text": "",
+      "lead_nation_checkbox": ["Northern Ireland", "Scotland", "Wales"],
+      "modification_type_checkbox": [""],
+      "short_project_title_text": "",
+      "sponsor_organisation_text": ""
+    },
+
+    "Valid_Iras_Id_TwentyTwo": {
+      "iras_id_text": "9800033"
+    },
+    "Advanced_Filters_TwentyTwo": {
+      "chief_investigator_name_text": "Dr. Isabella Fernández-Hernández",
+      "date_modification_submitted_from_day_text": "",
+      "date_modification_submitted_from_month_dropdown": "",
+      "date_modification_submitted_from_year_text": "",
+      "date_modification_submitted_to_day_text": "",
+      "date_modification_submitted_to_month_dropdown": "",
+      "date_modification_submitted_to_year_text": "",
+      "lead_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "modification_type_checkbox": [""],
+      "short_project_title_text": "",
+      "sponsor_organisation_text": ""
+    },
+
+    "Valid_Iras_Id_TwentyThree": {
+      "iras_id_text": "9800010"
+    },
+    "Advanced_Filters_TwentyThree": {
+      "chief_investigator_name_text": "Commander Maximilian Thorne-Winchester III",
+      "date_modification_submitted_from_day_text": "2",
+      "date_modification_submitted_from_month_dropdown": "January",
+      "date_modification_submitted_from_year_text": "2020",
+      "date_modification_submitted_to_day_text": "",
+      "date_modification_submitted_to_month_dropdown": "",
+      "date_modification_submitted_to_year_text": "",
+      "lead_nation_checkbox": ["Northern Ireland", "Scotland", "Wales"],
+      "modification_type_checkbox": ["Minor modifications"],
+      "short_project_title_text": "Study title 10",
+      "sponsor_organisation_text": "AB SCIEX UK LIMITED"
+    },
+
     "Advanced_Filters_Sponsor_Organisation": {
       "sponsor_organisation_text": "COLD GENESYS INC"
     },
@@ -150,6 +541,17 @@
       "sponsor_organisation_text": "Asi"
     },
     "Field_Error_Sponsor_Organisation": {
+      "sponsor_organisation_text": "Please provide 3 or more characters to search sponsor organisation."
+    },
+    "Date_Modification_Submitted_Invalid_Data": {
+      "date_modification_submitted_from_day_text": "2",
+      "date_modification_submitted_from_month_dropdown": "January",
+      "date_modification_submitted_from_year_text": "2020",
+      "date_modification_submitted_to_day_text": "20",
+      "date_modification_submitted_to_month_dropdown": "March",
+      "date_modification_submitted_to_year_text": "2013"
+    },
+    "Field_Error_Date_Modification_Submitted": {
       "sponsor_organisation_text": "Please provide 3 or more characters to search sponsor organisation."
     }
   }
