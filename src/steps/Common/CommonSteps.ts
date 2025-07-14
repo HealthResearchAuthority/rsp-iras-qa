@@ -771,13 +771,13 @@ Then(
         `Showing ${start} to ${end} of ${totalItems} results`
       );
       const rowCount = await commonItemsPage.getItemsPerPage();
-      expect(rowCount - 1).toBe(parseInt(`${end}`, 10) - parseInt(`${start}`, 10) + 1);
-      const itemsMap = await commonItemsPage.getPaginationValues();
-      const ellipsisIndices: any = itemsMap.get('ellipsisIndices');
+      expect(rowCount - 1).toBe(parseInt(`${end}`, 10) - parseInt(`${start}`, 10) + 1); // to get end of page item number
+      const itemsMap = await commonItemsPage.getPaginationValues(); // this sets ellipses indices value
+      const ellipsisIndices: any = itemsMap.get('ellipsisIndices'); // get ellipsisIndices value
       const itemsValues: any = itemsMap.get('items');
       const visiblePagesMap = await commonItemsPage.getVisiblePages(itemsValues);
-      const visiblePages: any = visiblePagesMap.get('visiblePages');
-      const allVisibleItems: any = itemsMap.get('allVisibleItems');
+      const visiblePages: any = visiblePagesMap.get('visiblePages'); // gets only the visible pages removing the ellipses
+      const allVisibleItems: any = itemsMap.get('allVisibleItems'); // gets pages values along with ellipses
       if (totalPages <= 7) {
         expect(visiblePages).toEqual(allVisibleItems);
         expect(ellipsisIndices.length).toBe(0);
@@ -786,54 +786,63 @@ Then(
       const lastPage = totalPages;
       if (totalPages > 7) {
         if (currentPage <= 3) {
-          if (currentPage === firstPage) {
-            expect(visiblePages).toEqual([firstPage, currentPage + 1, lastPage]);
-            expect(allVisibleItems).toEqual([`${firstPage}`, `${currentPage + 1}`, '⋯', `${lastPage}`]);
-          } else if (currentPage === firstPage + 1) {
-            expect(visiblePages).toEqual([firstPage, currentPage, currentPage + 1, lastPage]);
-            expect(allVisibleItems).toEqual([
-              `${firstPage}`,
-              `${currentPage}`,
-              `${currentPage + 1}`,
-              '⋯',
-              `${lastPage}`,
-            ]);
-          } else if (currentPage === firstPage + 2) {
-            expect(visiblePages).toEqual([firstPage, currentPage - 1, currentPage, currentPage + 1, lastPage]);
-            expect(allVisibleItems).toEqual([
-              `${firstPage}`,
-              `${currentPage - 1}`,
-              `${currentPage}`,
-              `${currentPage + 1}`,
-              '⋯',
-              `${lastPage}`,
-            ]);
+          switch (currentPage) {
+            case 1:
+              expect(visiblePages).toEqual([firstPage, currentPage + 1, lastPage]);
+              expect(allVisibleItems).toEqual([`${firstPage}`, `${currentPage + 1}`, '⋯', `${lastPage}`]);
+              break;
+            case 2:
+              expect(visiblePages).toEqual([firstPage, currentPage, currentPage + 1, lastPage]);
+              expect(allVisibleItems).toEqual([
+                `${firstPage}`,
+                `${currentPage}`,
+                `${currentPage + 1}`,
+                '⋯',
+                `${lastPage}`,
+              ]);
+              break;
+            case 3:
+              expect(visiblePages).toEqual([firstPage, currentPage - 1, currentPage, currentPage + 1, lastPage]); //1,2,3,4,77
+              expect(allVisibleItems).toEqual([
+                `${firstPage}`,
+                `${currentPage - 1}`,
+                `${currentPage}`,
+                `${currentPage + 1}`,
+                '⋯',
+                `${lastPage}`,
+              ]);
+              break;
           }
         } else if (currentPage >= totalPages - 2) {
-          if (currentPage === lastPage - 2) {
-            expect(visiblePages).toEqual([firstPage, currentPage - 1, currentPage, currentPage + 1, lastPage]);
-            expect(allVisibleItems).toEqual([
-              `${firstPage}`,
-              '⋯',
-              `${currentPage - 1}`,
-              `${currentPage}`,
-              `${currentPage + 1}`,
-              `${lastPage}`,
-            ]);
-          } else if (currentPage === lastPage - 1) {
-            expect(visiblePages).toEqual([firstPage, currentPage - 1, currentPage, lastPage]);
-            expect(allVisibleItems).toEqual([
-              `${firstPage}`,
-              '⋯',
-              `${currentPage - 1}`,
-              `${currentPage}`,
-              `${lastPage}`,
-            ]);
-          } else if (currentPage === lastPage) {
-            expect(visiblePages).toEqual([firstPage, currentPage - 1, lastPage]);
-            expect(allVisibleItems).toEqual([`${firstPage}`, '⋯', `${currentPage - 1}`, `${lastPage}`]);
+          switch (currentPage) {
+            case totalPages - 2:
+              expect(visiblePages).toEqual([firstPage, currentPage - 1, currentPage, currentPage + 1, lastPage]);
+              expect(allVisibleItems).toEqual([
+                `${firstPage}`,
+                '⋯',
+                `${currentPage - 1}`,
+                `${currentPage}`,
+                `${currentPage + 1}`,
+                `${lastPage}`,
+              ]);
+              break;
+            case totalPages - 1:
+              expect(visiblePages).toEqual([firstPage, currentPage - 1, currentPage, lastPage]);
+              expect(allVisibleItems).toEqual([
+                `${firstPage}`,
+                '⋯',
+                `${currentPage - 1}`,
+                `${currentPage}`,
+                `${lastPage}`,
+              ]);
+              break;
+            case totalPages:
+              expect(visiblePages).toEqual([firstPage, currentPage - 1, lastPage]);
+              expect(allVisibleItems).toEqual([`${firstPage}`, '⋯', `${currentPage - 1}`, `${lastPage}`]);
+              break;
           }
         } else {
+          //All other pages other than 75, 76, 77
           expect(visiblePages).toEqual([firstPage, currentPage - 1, currentPage, currentPage + 1, lastPage]);
           expect(allVisibleItems).toEqual([
             `${firstPage}`,
@@ -846,16 +855,20 @@ Then(
           ]);
         }
       }
-      expect(visiblePages).toContain(currentPage);
+      // main if
+      expect(visiblePages).toContain(currentPage); //Asserts if visible pages 1,2,77 contains 1
       if (currentPage > 1) {
-        expect(visiblePages).toContain(currentPage - 1);
+        // doesn't execute for page 1
+        expect(visiblePages).toContain(currentPage - 1); // if current page >1, previous page must be visible
       }
       if (currentPage < totalPages) {
-        expect(visiblePages).toContain(currentPage + 1);
+        //1<77
+        expect(visiblePages).toContain(currentPage + 1); //Asserts if visible pages 1,2,77 contains 2
       }
-      expect(visiblePages).toContain(1);
-      expect(visiblePages).toContain(totalPages);
+      expect(visiblePages).toContain(1); // this has already been validated for page 1
+      expect(visiblePages).toContain(totalPages); // Asserts if visible pages 1,2,77 contains 77
       if (navigateMethod === 'clicking on next link') {
+        // doesnot execute when you click the page number
         await commonItemsPage.clickOnNextLink();
       } else if (navigateMethod === 'clicking on previous link') {
         await commonItemsPage.clickOnPreviousLink();
