@@ -1,8 +1,8 @@
 @UserAdministration @ManageUsers @EditViewUsers @SysAdminUser @SystemTest @rsp-2830 @rsp-2828
 Feature: User Administration: Manage user profiles, view and edit user profile
-    As a user
-    I want the ability to edit and view a user profile record
-    So that I can access all the user information and keep user information up to date
+  As a user
+  I want the ability to edit and view a user profile record
+  So that I can access all the user information and keep user information up to date
 
   Background:
     Given I have navigated to the 'Home_Page'
@@ -57,14 +57,14 @@ Feature: User Administration: Manage user profiles, view and edit user profile
     Then I can see the 'Manage_Users_Page'
 
     Examples:
-      | Edit_User_Field    | User_Role  | Status  | Edit_User_Field_Data        | Original_Data                   |
-      | title_text         | Operations | Enabled | User_Title_Text_One         | Original_Title_Text_One         |
-      | first_name_text    | Operations | Enabled | User_First_Name_Text_One    | Original_First_Name_Text_One    |
-      | last_name_text     | Operations | Enabled | User_Last_Name_Text_One     | Original_Last_Name_Text_One     |
-      | telephone_text     | Operations | Enabled | User_Telephone_Text_One     | Original_Telephone_Text_One     |
-      | organisation_text  | Operations | Enabled | User_Organisation_Text_One  | Original_Organisation_Text_One  |
-      | job_title_text     | Operations | Enabled | User_Job_Title_Text_One     | Original_Job_Title_Text_One     |
-      | role_checkbox      | Operations | Enabled | User_Role_Checkbox_One      | Original_Role_Checkbox_One      |
+      | Edit_User_Field   | User_Role  | Status  | Edit_User_Field_Data       | Original_Data                  |
+      | title_text        | Operations | Enabled | User_Title_Text_One        | Original_Title_Text_One        |
+      | first_name_text   | Operations | Enabled | User_First_Name_Text_One   | Original_First_Name_Text_One   |
+      | last_name_text    | Operations | Enabled | User_Last_Name_Text_One    | Original_Last_Name_Text_One    |
+      | telephone_text    | Operations | Enabled | User_Telephone_Text_One    | Original_Telephone_Text_One    |
+      | organisation_text | Operations | Enabled | User_Organisation_Text_One | Original_Organisation_Text_One |
+      | job_title_text    | Operations | Enabled | User_Job_Title_Text_One    | Original_Job_Title_Text_One    |
+      | role_checkbox     | Operations | Enabled | User_Role_Checkbox_One     | Original_Role_Checkbox_One     |
 
   @editUserProfileReviewer @skip
   Scenario Outline: Successful user profile update for user as Reviewer
@@ -164,37 +164,6 @@ Feature: User Administration: Manage user profiles, view and edit user profile
       | email_address_text | Operations | Enabled | Original_Email_Address_Text_Three | Valid_Email_Data_Other_Language       |
       | email_address_text | Operations | Enabled | Original_Email_Address_Text_Three | Valid_Email_Data_Number               |
 
-<<<<<<< HEAD
-    @rsp-3521 @ManageUsersPagination @ManageUsersPaginationFirstPage @ManageUsersPaginationPageNumber @ManageUsersPaginationNextLinkClick
-    Scenario Outline: Verify pagination in manage users page when user is on the first page and navigate through each page by clicking page number or by by clicking next link
-        And I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
-        And I capture the page screenshot
-        And the default page size should be twenty
-        And the 'Next' button will be 'available' to the user
-        And the 'Previous' button will be 'not available' to the user
-        And the current page number should be visually highlighted to indicate the active page the user is on
-        And I capture the page screenshot
-        Then I sequentially navigate through each page by '<Navigation_Method>' from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges
-        And I capture the page screenshot
-        Examples:
-            | Navigation_Method       |
-            | clicking on page number |
-            | clicking on next link   |
-
-    @rsp-3521 @ManageUsersPagination @ManageUsersPaginationLastPage @ManageUsersPaginationPageNumber @ManageUsersPaginationPreviousLinkClick
-    Scenario Outline: Verify pagination in manage users page when user is on the last page and navigate through each page by clicking page number or by by clicking on previous link
-        And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
-        And I capture the page screenshot
-        And the 'Previous' button will be 'available' to the user
-        And the 'Next' button will be 'not available' to the user
-        And I capture the page screenshot
-        Then I sequentially navigate through each page by '<Navigation_Method>' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
-        And I capture the page screenshot
-        Examples:
-            | Navigation_Method         |
-            | clicking on page number   |
-            | clicking on previous link |
-=======
   @rsp-3122 @VerifyErrorMessagesInvalidData @EditUserProfileVerifyErrorMessagesInvalidData
   Scenario Outline: Validate error messages are displayed for invalid data in edit user profile page
     When I enter 'QA Automation' into the search field
@@ -222,7 +191,7 @@ Feature: User Administration: Manage user profiles, view and edit user profile
       | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | Enabled | Incorrect_Format_Telephone_Data                           | Incorrect_Format_Field_Telephone_Error                          |
       | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | Enabled | Incorrect_Format_Invalid_Character_Limit_Telephone_Data   | Incorrect_Format_Invalid_Character_Limit_Telephone_Error        |
       | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | Enabled | Incorrect_Format_Invalid_Character_Limit_Email_Data       | Incorrect_Format_Invalid_Character_Limit_Email_Address_Error    |
->>>>>>> main
+
 
   @rsp-3122 @VerifyErrorMessagesInvalidData @EditUserProfileVerifyErrorMessagesInvalidData @skip
   Scenario Outline: Validate error messages are displayed for invalid data in the email address field of edit user profile page
@@ -263,8 +232,8 @@ Feature: User Administration: Manage user profiles, view and edit user profile
       | Valid_Data_In_All_Fields_Role_Operations | job_title_text  | Operations | Enabled | Invalid_Email_Data_Reserved_Domain                 | Incorrect_Format_Field_Email_Address_Error |
       | Valid_Data_In_All_Fields_Role_Operations | job_title_text  | Operations | Enabled | Invalid_Email_Data_Punycode                        | Incorrect_Format_Field_Email_Address_Error |
 
-  @rsp-3521 @ManageUsersPagination @ManageUsersPaginationFirstPage
-  Scenario: Verify pagination in manage users page when user is on the first page
+  @rsp-3521 @ManageUsersPagination @ManageUsersPaginationFirstPage @ManageUsersPaginationPageNumber @ManageUsersPaginationNextLinkClick
+  Scenario Outline: Verify pagination in manage users page when user is on the first page and navigate through each page by clicking page number or by by clicking next link
     And I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
     And I capture the page screenshot
     And the default page size should be twenty
@@ -272,14 +241,26 @@ Feature: User Administration: Manage user profiles, view and edit user profile
     And the 'Previous' button will be 'not available' to the user
     And the current page number should be visually highlighted to indicate the active page the user is on
     And I capture the page screenshot
+    Then I sequentially navigate through each page by '<Navigation_Method>' from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+    And I capture the page screenshot
+    Examples:
+      | Navigation_Method       |
+      | clicking on page number |
+      | clicking on next link   |
 
-  @rsp-3521 @ManageUsersPagination @ManageUsersPaginationLastPage
-  Scenario: Verify pagination in manage users page when user is on the last page
+  @rsp-3521 @ManageUsersPagination @ManageUsersPaginationLastPage @ManageUsersPaginationPageNumber @ManageUsersPaginationPreviousLinkClick
+  Scenario Outline: Verify pagination in manage users page when user is on the last page and navigate through each page by clicking page number or by by clicking on previous link
     And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
     And I capture the page screenshot
     And the 'Previous' button will be 'available' to the user
     And the 'Next' button will be 'not available' to the user
     And I capture the page screenshot
+    Then I sequentially navigate through each page by '<Navigation_Method>' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+    And I capture the page screenshot
+    Examples:
+      | Navigation_Method         |
+      | clicking on page number   |
+      | clicking on previous link |
 
   @rsp-3456 @ManageUsersSearchResultsFound @Smoke
   Scenario Outline: Verify search results in manage users page when user search by first value of first name, last name, full name and email address
@@ -340,7 +321,7 @@ Feature: User Administration: Manage user profiles, view and edit user profile
       | Existing_QA_User_First_Name |
       | Existing_QA_User_Last_Name  |
       | Existing_QA_User_Email      |
-    # out of scope for now
+  # out of scope for now
 
   @rsp-3456 @ManageUsersSearchLeadingAndTrailingWhiteSpaces @fail @skip
   Scenario Outline: Verify search results in manage users page when the search keyword contains leading and trailing white spaces
