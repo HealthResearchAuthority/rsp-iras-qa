@@ -59,6 +59,7 @@ export default class SearchModificationsPage {
   readonly sponsor_organisation_jsdisabled_narrow_down_label: Locator;
   readonly sponsor_organisation_jsdisabled_no_suggestions_label: Locator;
   readonly sponsor_organisation_jsdisabled_min_error_message: Locator;
+  readonly date_modification_submitted_to_date_error: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -138,6 +139,14 @@ export default class SearchModificationsPage {
       .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.date_modification_submitted_label, {
         exact: true,
       });
+    this.date_modification_submitted_to_date_error = this.page
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group')
+      .filter({
+        hasText:
+          this.searchModificationsPageTestData.Search_Modifications_Page.date_modification_submitted_to_date_hint_text,
+      })
+      .locator('.govuk-error-message');
     this.date_modification_submitted_to_date_fieldset = this.page
       .locator('.govuk-fieldset')
       .locator('.govuk-form-group', {
@@ -246,8 +255,13 @@ export default class SearchModificationsPage {
       .getByRole('listitem')
       .getByRole('link')
       .locator('.search-filter-summary__remove-filter-text');
+
+    // this.sponsor_organisation_jsdisabled_result_hint_label = this.sponsor_organisation_fieldset.getByText(
+    //   this.searchModificationsPageTestData.Search_Modifications_Page.Sponsor_Organisation_Jsdisabled_Search_Hint_Labels
+    //     .search_hint_header_prefix
+    // );
     this.sponsor_organisation_jsdisabled_result_hint_label = this.page.getByTestId(
-      'SponsorOrgSearch.SelectedOrganisation-hint'
+      'Search.SponsorOrgSearch.SelectedOrganisation-hint'
     );
     this.sponsor_organisation_jsdisabled_narrow_down_label = this.page.locator('.govuk-inset-text');
     this.sponsor_organisation_jsdisabled_search_results_labels = this.page

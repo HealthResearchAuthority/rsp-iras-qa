@@ -89,7 +89,7 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
             | Review_Body_Name         | Status  |
             | Valid_Data_In_All_Fields | Enabled |
 
-    @rsp-3523 @ManageReviewBodiesPagination @ManageReviewBodiesPaginationFirstPage @ManageReviewBodiesPaginationPageNumber @ManageReviewBodiesPaginationNextLinkClick @TestOnly
+    @rsp-3523 @ManageReviewBodiesPagination @ManageReviewBodiesPaginationFirstPage @ManageReviewBodiesPaginationPageNumber @ManageReviewBodiesPaginationNextLinkClick
     Scenario: Verify pagination in manage review bodies page when user is on the first page and navigate through each page by clicking page number or by by clicking next link
         And I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
         And I capture the page screenshot
@@ -105,7 +105,7 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
             | clicking on page number |
             | clicking on next link   |
 
-    @rsp-3523 @ManageReviewBodiesPagination @ManageReviewBodiesPaginationLastPage @ManageReviewBodiesPaginationPageNumber @ManageReviewBodiesPaginationPreviousLinkClick @TestOnly
+    @rsp-3523 @ManageReviewBodiesPagination @ManageReviewBodiesPaginationLastPage @ManageReviewBodiesPaginationPageNumber @ManageReviewBodiesPaginationPreviousLinkClick
     Scenario: Verify pagination in manage review bodies page when user is on the last page and navigate through each page by clicking page number or by by clicking on previous link
         And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
         And I capture the page screenshot

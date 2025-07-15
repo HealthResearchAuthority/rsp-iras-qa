@@ -55,23 +55,13 @@ When(
 
 When(
   'I open advanced filter and each filter one by one by clicking the corresponding filter chevron,if not opened by default using {string}',
-  async ({ searchModificationsPage, $tags }, filterDatasetName: string) => {
+  async ({ searchModificationsPage }, filterDatasetName: string) => {
     const dataset =
       searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[filterDatasetName];
-    if (
-      ($tags.includes('@jsEnabled') || config.projects?.[1].use?.javaScriptEnabled) &&
-      !$tags.includes('@jsDisabled')
-    ) {
-      await searchModificationsPage.clickAdvancedFilterChevron();
-    }
+    // await searchModificationsPage.clickAdvancedFilterChevron();
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        if (
-          ($tags.includes('@jsEnabled') || config.projects?.[1].use?.javaScriptEnabled) &&
-          !$tags.includes('@jsDisabled')
-        ) {
-          await searchModificationsPage.clickFilterChevron(dataset, key, searchModificationsPage);
-        }
+        await searchModificationsPage.clickFilterChevron(dataset, key, searchModificationsPage);
       }
     }
   }
@@ -80,16 +70,29 @@ When(
 Then(
   'I can see the selected filters {string} are displayed under active filters',
   async ({ searchModificationsPage }, filterDatasetName: string) => {
+    let activeCheckboxFiltersMap;
+    let filterCheckboxValuesExpected;
     const dataset =
       searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[filterDatasetName];
     const datasetLabels = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page;
     const activeFiltersMap = await searchModificationsPage.getActiveFiltersLabels(dataset, datasetLabels);
     const filterValuesExpected = activeFiltersMap.get('singleSelectFilter');
-    const activeCheckboxFiltersMap = await searchModificationsPage.getActiveFiltersCheckboxLabels(
-      dataset,
-      datasetLabels
-    );
-    const filterCheckboxValuesExpected = activeCheckboxFiltersMap.get('multiSelectFilter');
+    for (const key in dataset) {
+      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+        if (key.endsWith('_checkbox')) {
+          activeCheckboxFiltersMap = await searchModificationsPage.getActiveFiltersCheckboxLabels(
+            dataset,
+            datasetLabels
+          );
+          filterCheckboxValuesExpected = activeCheckboxFiltersMap.get('multiSelectFilter');
+        }
+      }
+    }
+    //  activeCheckboxFiltersMap = await searchModificationsPage.getActiveFiltersCheckboxLabels(
+    //   dataset,
+    //   datasetLabels
+    // );
+    //  filterCheckboxValuesExpected = activeCheckboxFiltersMap.get('multiSelectFilter');
     // const fieldValActual: string[] = await searchModificationsPage.getSelectedFilterValues();
     // expect(fieldValActual).toBe(filterValuesExpected + ', ' + filterCheckboxValuesExpected);
 
@@ -117,13 +120,12 @@ Then(
     const shortProjectTitle = filterDataset['short_project_title_text'];
     const searchKey = irasId + '/' + chiefInvestigatorName + '/' + shortProjectTitle;
     const searchTerms = searchKey.split('/');
-    // const searchTerms = await commonItemsPage.splitSearchTerm(searchKey);
     console.log(searchTerms);
+
     const modificationsList = await searchModificationsPage.getAllModificationsTheTable();
     const modificationsListAfterSearch: string[] = confirmArrayNotNull(modificationsList.get('searchResultValues'));
     const filteredSearchResults = await commonItemsPage.filterResults(modificationsListAfterSearch, searchTerms);
     expect(filteredSearchResults).toEqual(modificationsListAfterSearch);
-    // const searchResult = commonItemsPage.validateSearchResults(modificationsListAfterSearch, irasId);
     const searchResult = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
       modificationsListAfterSearch,
       searchTerms
@@ -131,14 +133,11 @@ Then(
     expect(searchResult).toBeTruthy();
     expect(modificationsListAfterSearch).toHaveLength(searchResult.length);
 
-    const leadNations = filterDataset['lead_nation_checkbox'];
-    console.log(leadNations);
-    const modificationTypes = filterDataset['modification_type_checkbox'];
-    console.log(modificationTypes);
     const modificationIdListAfterSearch: string[] = confirmArrayNotNull(modificationsList.get('modificationIdValues'));
     await searchModificationsPage.setModificationIdListAfterSearch(modificationIdListAfterSearch);
     const searchResultIrasID = commonItemsPage.validateSearchResults(modificationIdListAfterSearch, irasId);
     expect(searchResultIrasID).toBeTruthy();
+
     const shortProjectTitleListAfterSearch: string[] = confirmArrayNotNull(
       modificationsList.get('shortProjectTitleValues')
     );
@@ -147,16 +146,67 @@ Then(
       shortProjectTitle
     );
     expect(searchResultShortProjectTitle).toBeTruthy();
+
     const chiefInvestigatorNameListAfterSearch: string[] = confirmArrayNotNull(
       modificationsList.get('chiefInvestigatorNameValues')
     );
-    const searchResultChiefInvestigatorName = commonItemsPage.validateSearchResults(
+    const searchTermsChiefInvestigatorName = await commonItemsPage.splitSearchTerm(chiefInvestigatorName);
+    const searchResultChiefInvestigatorName = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
       chiefInvestigatorNameListAfterSearch,
-      chiefInvestigatorName
+      searchTermsChiefInvestigatorName
     );
     expect(searchResultChiefInvestigatorName).toBeTruthy();
-    // leadNations >> a or b or c or d
+    expect(chiefInvestigatorNameListAfterSearch).toHaveLength(searchResultChiefInvestigatorName.length);
+
     // modificationTypes >> a or b
+
+    const modificationTypes: string[] = filterDataset['modification_type_checkbox'];
+    console.log(modificationTypes);
+    const modificationTypeListAfterSearch: string[] = confirmArrayNotNull(
+      modificationsList.get('modificationTypeValues')
+    );
+    for (let i = 0; i < modificationTypes.length; i++) {
+      const modificationTypesSearchResult = await commonItemsPage.validateSearchResults(
+        modificationTypeListAfterSearch,
+        modificationTypes[i]
+      );
+      expect(modificationTypesSearchResult).toBeTruthy();
+    }
+    // const filteredModificationTypeListSearchResults = await commonItemsPage.filterResults(
+    //   modificationTypeListAfterSearch,
+    //   modificationTypes
+    // );
+    // expect(filteredModificationTypeListSearchResults).toEqual(modificationTypeListAfterSearch);
+    // const modificationTypesSearchResult = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
+    //   modificationTypeListAfterSearch,
+    //   modificationTypes
+    // );
+    // expect(modificationTypesSearchResult).toBeTruthy();
+    // expect(modificationTypeListAfterSearch).toHaveLength(modificationTypesSearchResult.length);
+
+    // leadNations >> a or b or c or d
+
+    const leadNations: string[] = filterDataset['lead_nation_checkbox'];
+    console.log(leadNations);
+    const leadNationValuesAfterSearch: string[] = confirmArrayNotNull(modificationsList.get('leadNationValues'));
+    for (let i = 0; i < leadNations.length; i++) {
+      const leadNationValuesSearchResult = commonItemsPage.validateSearchResults(
+        leadNationValuesAfterSearch,
+        leadNations[i]
+      );
+      expect(leadNationValuesSearchResult).toBeTruthy();
+    }
+    // const filteredLeadNationValuesSearchResults = await commonItemsPage.filterResults(
+    //   leadNationValuesAfterSearch,
+    //   leadNations
+    // );
+    // expect(filteredLeadNationValuesSearchResults).toEqual(leadNationValuesAfterSearch);
+    // const leadNationValuesSearchResult = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
+    //   leadNationValuesAfterSearch,
+    //   leadNations
+    // );
+    // expect(leadNationValuesSearchResult).toBeTruthy();
+    // expect(leadNationValuesAfterSearch).toHaveLength(leadNationValuesSearchResult.length);
   }
 );
 
@@ -311,8 +361,8 @@ Then(
       const searchResultFooterHintLabelActual = confirmStringNotNull(
         await searchModificationsPage.sponsor_organisation_jsdisabled_narrow_down_label.textContent()
       ).trim();
-      const searchResultFooterHintLabelExpected = `${totalMatchingSponsorOrganisations} ${searchHintDataset.search_hint_footer_prefix} '${dataset['primary_sponsor_organisation_text']}'${searchHintDataset.search_hint_footer}`;
-      expect(searchResultFooterHintLabelActual).toEqual(searchResultFooterHintLabelExpected);
+      const searchResultFooterHintLabelExpected = `${totalMatchingSponsorOrganisations} ${searchHintDataset.search_hint_footer_prefix} '${dataset['sponsor_organisation_text']}'${searchHintDataset.search_hint_footer}`;
+      expect.soft(searchResultFooterHintLabelActual).toEqual(searchResultFooterHintLabelExpected);
     }
   }
 );
@@ -333,27 +383,46 @@ Then(
   }
 );
 
-// Then(
-//   'With javascript disabled, I search with invalid {string} for sponsor organisation search box in advanced filters and validate the search results along with {string}',
-//   async ({ searchModificationsPage }, datasetName: string, searchHintsDatasetName) => {
-//     const dataset = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[datasetName];
-//     const searchHintDataset =
-//       searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[searchHintsDatasetName];
-//     await searchModificationsPage.sponsor_organisation_text.fill(dataset['sponsor_organisation_text']);
-//     await searchModificationsPage.sponsor_organisation_jsdisabled_search_button.click();
-//     const noResultFoundLabelActual = confirmStringNotNull(
-//       await searchModificationsPage.sponsor_organisation_jsdisabled_no_suggestions_label.textContent()
-//     ).trim();
-//     const noResultFoundLabelExpected = `${searchHintDataset.no_suggestion_found} ${dataset['sponsor_organisation_text']}`;
-//     expect(noResultFoundLabelActual).toEqual(noResultFoundLabelExpected);
-//   }
-// );
-
 Then(
   'With javascript disabled, I search with invalid min characters {string} for sponsor organisation search box in advanced filters',
   async ({ searchModificationsPage }, datasetName: string) => {
     const dataset = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[datasetName];
     await searchModificationsPage.sponsor_organisation_text.fill(dataset['sponsor_organisation_text']);
     await searchModificationsPage.sponsor_organisation_jsdisabled_search_button.click();
+  }
+);
+
+Then(
+  'I validate {string} displayed on {string} in advanced filters',
+  async (
+    { commonItemsPage, searchModificationsPage },
+    errorMessageFieldAndSummaryDatasetName: string,
+    pageKey: string
+  ) => {
+    let errorMessageFieldDataset: any;
+    let page: any;
+    if (pageKey === 'Search_Modifications_Page') {
+      errorMessageFieldDataset =
+        searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[
+          errorMessageFieldAndSummaryDatasetName
+        ];
+      page = searchModificationsPage;
+    }
+    if (errorMessageFieldAndSummaryDatasetName === 'Field_Error_Date_Modification_Submitted') {
+      for (const key in errorMessageFieldDataset) {
+        if (Object.prototype.hasOwnProperty.call(errorMessageFieldDataset, key)) {
+          const fieldErrorMessagesActualValues =
+            await searchModificationsPage.date_modification_submitted_to_date_error.textContent();
+          expect(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
+        }
+      }
+    } else {
+      for (const key in errorMessageFieldDataset) {
+        if (Object.prototype.hasOwnProperty.call(errorMessageFieldDataset, key)) {
+          const fieldErrorMessagesActualValues = await commonItemsPage.getFieldErrorMessages(key, page);
+          expect(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
+        }
+      }
+    }
   }
 );
