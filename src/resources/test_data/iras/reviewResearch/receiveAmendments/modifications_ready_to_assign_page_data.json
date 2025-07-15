@@ -1,0 +1,15 @@
+{
+  "Modifications_Ready_To_Assign_Page": {
+    "page_heading": "Modifications ready to assign",
+    "page_description": "This page shows all the modifications that are ready for you to assign, where the lead nation in England",
+    "modification_button_label": "Continue to assign modification",
+    "advanced_filter_label": "Advanced filter",
+    "search_button_label": "Search",
+    "modification_checkbox": "",
+    "short_project_title_label": "",
+    "modification_id_label": "",
+    "modification_type_label": "",
+    "date_submitted_label": "",
+    "days_since_submission_label": ""
+  }
+}
