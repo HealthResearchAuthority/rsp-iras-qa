@@ -23,9 +23,16 @@
     "My_Applications": "My Applications"
   },
   "Home_Page": {
-    "My_Applications": "You don't have any projects available in the new service",
-    "Manage_Users": "Manage Users",
-    "Manage_Review_Bodies": "Manage review bodies"
+    "Approvals": "Approvals",
+    "CAG_members": "CAG members",
+    "CAT": "CAT",
+    "Member_management": "Member management",
+    "My_research": "My research",
+    "REC_members": "REC members",
+    "Sponsor": "Sponsor",
+    "System_Administration": "System administration",
+    "Technical|_Assurance": "Technical Assurance",
+    "Technical_Assurance_reviewers": "Technical Assurance reviewers"
   },
   "Project_Details_IRAS_Page": {
     "Back": "Back"
@@ -60,11 +67,14 @@
     "Back": "Back",
     "View_Users_Audit_History": "View this user's audit history"
   },
+  "Edit_User_Profile_Page": {
+    "Back": "Back"
+  },
   "Confirmation_Page": {
     "Back": "Back",
     "Back_To_Manage_Users": "Back to Manage users",
     "Back_To_Manage_Review_Bodies": "Back to Manage review bodies",
-    "Remove_Another_User_From_The_Review_Body": "Remove another user from review body",
+    "Remove_Another_User_From_The_Review_Body": "Remove another user from the review body",
     "Add_Another_User_To_The_Review_Body": " Add another user to review body"
   },
   "Manage_Review_Bodies_Page": {
@@ -73,6 +83,7 @@
     "View_Edit": "View/Edit"
   },
   "System_Administration_Page": {
+    "Back": "Back",
     "Manage_Review_Bodies": "Manage review bodies",
     "Manage_Users": "Manage users"
   },
@@ -102,7 +113,7 @@
   "Audit_History_User_Page": {
     "Back": "Back"
   },
-  "Project_Overview_Save_For_Later_Page": {
+  "Project_Overview_Page": {
     "Project_Details": "Project details"
   },
   "Review_Body_User_List_Page": {
@@ -113,10 +124,6 @@
     "Back_To_Users": "Back to Users for "
   },
   "Check_Remove_User_Profile_Page": {
-    "Back": "Back"
-  },
-  "Search_For_User_To_Add_To_Review_Body": {
-    "Add_User": "Add user",
     "Back": "Back"
   },
   "Review_Your_Answers_Page": {
@@ -133,5 +140,8 @@
   "Add_User_Review_Body_Confirmation_Page": {
     "Add_Another_User": "Add another user to review body",
     "Back_To_Manage_Review_Bodies": "Back to Manage review bodies"
+  },
+  "My_Research_Page": {
+    "Back": "Back"
   }
 }

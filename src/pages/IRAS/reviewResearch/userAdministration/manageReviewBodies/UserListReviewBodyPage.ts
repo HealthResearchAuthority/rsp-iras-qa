@@ -1,5 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as userListReviewBodyPageTestData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageReviewBodies/user_list_review_body_page_data.json';
+import { confirmStringNotNull } from '../../../../../utils/UtilFunctions';
+import CommonItemsPage from '../../../../Common/CommonItemsPage';
 
 //Declare Page Objects
 export default class UserListReviewBodyPage {
@@ -33,6 +35,7 @@ export default class UserListReviewBodyPage {
   readonly back_to_users_link: Locator;
   readonly no_results_heading: Locator;
   readonly no_results_guidance_text: Locator;
+  readonly tableRows: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -112,9 +115,14 @@ export default class UserListReviewBodyPage {
     this.back_to_users_link = this.page
       .getByRole('link')
       .getByText(this.userListReviewBodyPageTestData.Review_Body_User_List_Page.back_to_users_link);
+    this.tableRows = this.page.getByRole('table').getByRole('row');
   }
 
-  async assertOnUserListReviewBodyPage() {
+  async goto(reviewBodyId: string): Promise<void> {
+    this.page.goto(`reviewbody/viewreviewbodyusers?reviewBodyId=${reviewBodyId}`);
+  }
+
+  async assertOnUserListReviewBodyPage(): Promise<void> {
     await expect(this.page_heading).toBeVisible();
     await expect(this.guidance_text).toBeVisible();
     await expect(this.search_box_label).toBeVisible();
@@ -226,23 +234,22 @@ export default class UserListReviewBodyPage {
     }
     return searchKey;
   }
-  async getSearchQueryFullName(position: string, fieldKey: string) {
+
+  async getSearchQueryFullName(position: string) {
     let searchKey: string = '';
     let firstNameValue: string = '';
     let lastNameValue: string = '';
-    if (fieldKey === 'Full_Name') {
-      const firstNameValues: any = await this.getUserFirstName();
-      const lastNameValues: any = await this.getUserLastName();
-      const rowCount = lastNameValues.length;
-      if (position.toLowerCase() == 'first') {
-        searchKey = firstNameValues[0] + ' ' + lastNameValues[0];
-        firstNameValue = firstNameValues[0];
-        lastNameValue = lastNameValues[0];
-      } else if (position.toLowerCase() == 'last') {
-        searchKey = firstNameValues[rowCount - 1] + ' ' + lastNameValues[rowCount - 1];
-        firstNameValue = firstNameValues[rowCount - 1];
-        lastNameValue = lastNameValues[rowCount - 1];
-      }
+    const firstNameValues: any = await this.getUserFirstName();
+    const lastNameValues: any = await this.getUserLastName();
+    const rowCount = lastNameValues.length;
+    if (position.toLowerCase() == 'first') {
+      searchKey = firstNameValues[0] + ' ' + lastNameValues[0];
+      firstNameValue = firstNameValues[0];
+      lastNameValue = lastNameValues[0];
+    } else if (position.toLowerCase() == 'last') {
+      searchKey = firstNameValues[rowCount - 1] + ' ' + lastNameValues[rowCount - 1];
+      firstNameValue = firstNameValues[rowCount - 1];
+      lastNameValue = lastNameValues[rowCount - 1];
     }
     const fullNameMap = new Map([
       ['firstName', firstNameValue],
@@ -250,5 +257,76 @@ export default class UserListReviewBodyPage {
     ]);
     await this.setFullName(fullNameMap);
     return searchKey;
+  }
+  async updateUserInfo() {
+    await this.setFirstName(confirmStringNotNull(await this.first_name_value_first_row.textContent()));
+    await this.setLastName(confirmStringNotNull(await this.last_name_value_first_row.textContent()));
+    await this.setEmail(confirmStringNotNull(await this.email_address_value_first_row.textContent()));
+    await this.setStatus(confirmStringNotNull(await this.status_value_first_row.textContent()));
+  }
+
+  async getSearchQueryFNameLNameEmailByPosition(position: string, fieldKey: string, commonItemsPage: CommonItemsPage) {
+    let searchValues: any;
+    const userList = await this.getUserListByPosition(position, commonItemsPage);
+    if (fieldKey === 'Email_Address') {
+      searchValues = userList.get('emailAddressValues');
+      await this.setUserEmail(searchValues);
+    } else if (fieldKey === 'First_Name') {
+      searchValues = userList.get('firstNameValues');
+      await this.setUserFirstName(searchValues);
+    } else if (fieldKey === 'Last_Name') {
+      searchValues = userList.get('lastNameValues');
+      await this.setUserLastName(searchValues);
+    }
+    return searchValues[0];
+  }
+
+  async getUserListByPosition(position: string, commonItemsPage: CommonItemsPage) {
+    let userList: any;
+    if (position.toLowerCase() == 'first') {
+      userList = await this.getUsersByPage();
+    } else if (position.toLowerCase() == 'last') {
+      const totalPages = await commonItemsPage.getTotalPages();
+      await commonItemsPage.clickOnPages(totalPages, 'clicking on page number');
+      userList = await this.getUsersByPage();
+    }
+    return userList;
+  }
+
+  async getUsersByPage(): Promise<Map<string, string[]>> {
+    const firstNameValues: string[] = [];
+    const lastNameValues: string[] = [];
+    const emailAddressValues: string[] = [];
+    for (let i = 1; i < 2; i++) {
+      const columns = this.tableRows.nth(i).getByRole('cell');
+      const firstName = confirmStringNotNull(await columns.nth(0).textContent());
+      firstNameValues.push(firstName);
+      const lastName = confirmStringNotNull(await columns.nth(1).textContent());
+      lastNameValues.push(lastName);
+      const emailAddress = confirmStringNotNull(await columns.nth(2).textContent());
+      emailAddressValues.push(emailAddress);
+    }
+    const userMap = new Map([
+      ['firstNameValues', firstNameValues],
+      ['lastNameValues', lastNameValues],
+      ['emailAddressValues', emailAddressValues],
+    ]);
+    return userMap;
+  }
+
+  async setSearchQueryFullNameByPosition(position: string, fieldKey: string, commonItemsPage: CommonItemsPage) {
+    const userList = await this.getUserListByPosition(position, commonItemsPage);
+    if (fieldKey === 'Full_Name') {
+      await this.setUserFirstName(userList.get('firstNameValues'));
+      await this.setUserLastName(userList.get('lastNameValues'));
+    }
+  }
+
+  async getFilteredSearchResultsBeforeSearch(commonItemsPage: CommonItemsPage) {
+    const userValues = await this.getUserListBeforeSearch();
+    const searchKey = await this.getSearchKey();
+    const searchTerms = await commonItemsPage.splitSearchTerm(searchKey);
+    const filteredSearchResults = await commonItemsPage.filterResults(userValues, searchTerms);
+    return filteredSearchResults;
   }
 }

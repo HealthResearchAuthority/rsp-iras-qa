@@ -5,6 +5,7 @@
   "Label_Texts": {
     "chief_investigator_header_label": "Chief Investigator",
     "chief_investigator_email_label": "Email",
+    "primary_sponsor_organisation_header_label": "Primary sponsor organisation",
     "sponsor_contact_header_label": "Sponsor contact",
     "sponsor_contact_email_label": "Email"
   },
@@ -18,6 +19,9 @@
   },
   "Field_Error_Sponsor_Email": {
     "sponsor_contact_email_text": "Enter an email address in the correct format"
+  },
+  "Field_Error_Primary_Sponsor_Organisation": {
+    "primary_sponsor_organisation_text": "Please provide 3 or more characters to search sponsor organisation."
   },
   "Valid_Data_All_Fields": {
     "chief_investigator_email_text": "ci_test@test.com",
@@ -126,6 +130,7 @@
   },
   "Valid_Email_Data_Special_Characters": {
     "chief_investigator_email_text": "john!#$%&'*+-/=?^_`{|}~doe@example.com",
+    "primary_sponsor_organisation_text": "CHESTERFIELD ROYAL HOSPITAL NHS FOUNDATION TRUST",
     "sponsor_contact_email_text": "john!#$%&'*+-/=?^_`{|}~doe@example.com"
   },
   "Valid_Email_Data_Hyphen_Underscore": {
@@ -151,6 +156,51 @@
   "Valid_Email_Data_Number": {
     "chief_investigator_email_text": "Johndoe2@example.com",
     "sponsor_contact_email_text": "Johndoe2@example.com"
+  },
+  "Sponsor_Organisation_Partial_Text_NHS": {
+    "primary_sponsor_organisation_text": "nhs"
+  },
+  "Sponsor_Organisation_Full_Text_Aalborg": {
+    "primary_sponsor_organisation_text": "Aalborg University Hospital"
+  },
+  "Sponsor_Organisation_Text_Blank": {
+    "primary_sponsor_organisation_text": ""
+  },
+  "Sponsor_Organisation_Text_Partial_Brackets": {
+    "primary_sponsor_organisation_text": "(Sp"
+  },
+  "Sponsor_Organisation_Text_Partial_Dot_Comma": {
+    "primary_sponsor_organisation_text": ".,L"
+  },
+  "Sponsor_Organisation_Text_Partial_Slash": {
+    "primary_sponsor_organisation_text": "A/S"
+  },
+  "Sponsor_Organisation_Text_Partial_Hyphen": {
+    "primary_sponsor_organisation_text": "e-T"
+  },
+  "Sponsor_Organisation_Text_Partial_Start_Space": {
+    "primary_sponsor_organisation_text": " nh"
+  },
+  "Sponsor_Organisation_Text_Partial_End_Space": {
+    "primary_sponsor_organisation_text": "hs "
+  },
+  "Sponsor_Organisation_Text_Brackets": {
+    "primary_sponsor_organisation_text": "L'Institut d'Investigacions Biomediques August Pi i Sunyer (IDIBAPS) (Spain)"
+  },
+  "Sponsor_Organisation_Text_Amp": {
+    "primary_sponsor_organisation_text": "L. MOLTENI & C. DEI FRATELLI ALITTI - SOCIETA' DI ESERCIZIO - S.P.A."
+  },
+  "Sponsor_Organisation_Text_Dot_Comma": {
+    "primary_sponsor_organisation_text": "Eisai Co.,Ltd."
+  },
+  "Sponsor_Organisation_Text_Slash": {
+    "primary_sponsor_organisation_text": "Y-mAbs Therapeutics A/S"
+  },
+  "Sponsor_Organisation_Text_Hyphen": {
+    "primary_sponsor_organisation_text": "e-Therapeutics"
+  },
+  "Sponsor_Organisation_Text_Exactly_Five_Results": {
+    "primary_sponsor_organisation_text": "Asi"
   },
   "Invalid_Email_Data_One_Start_With_Dot": {
     "chief_investigator_email_text": ".john@example.com"
@@ -301,5 +351,23 @@
   },
   "Invalid_Email_Data_Two_Max_Char": {
     "sponsor_contact_email_text": "EmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExcee@example.com"
+  },
+  "Sponsor_Organisation_Invalid_Data": {
+    "primary_sponsor_organisation_text": "test invalid data"
+  },
+  "Sponsor_Organisation_Min_Char": {
+    "primary_sponsor_organisation_text": "nh"
+  },
+  "Suggestion_List_Common_Headers": {
+    "suggestion_header": "Suggestions",
+    "suggestion_footer": "Continue entering to improve suggestions",
+    "continue_entering_suggestion": "Continue entering to get suggestions",
+    "no_suggestion_found": "No suggestions found."
+  },
+  "Sponsor_Organisation_Jsdisabled_Search_Hint_Labels": {
+    "search_hint_header_prefix": "Results for",
+    "search_hint_footer_prefix": "sponsor organisations match your search for",
+    "search_hint_footer": ". Try narrowing down your search if the organisation you are looking for is not listed",
+    "no_suggestion_found": "No suggestions found for"
   }
 }

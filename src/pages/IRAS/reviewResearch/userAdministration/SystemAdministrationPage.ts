@@ -37,8 +37,8 @@ export default class SystemAdministrationPage {
     this.manageUsersLink = this.mainPageContent.getByText(this.linkTextData.System_Administration_Page.Manage_Users, {
       exact: true,
     });
-    this.manage_review_bodies_hint_label = this.page.locator('p[class="govuk-body"]').first();
-    this.manage_users_hint_label = this.page.locator('p[class="govuk-body"]').nth(1);
+    this.manage_review_bodies_hint_label = this.manageReviewbodiesLink.locator('..').getByRole('paragraph');
+    this.manage_users_hint_label = this.manageUsersLink.locator('..').getByRole('paragraph');
   }
 
   //Page Methods

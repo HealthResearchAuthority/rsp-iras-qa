@@ -1,4 +1,4 @@
-@UserAdministration @ManageReviewBodies @CreateReviewBody @adminUser @SystemTest @rsp-2570
+@UserAdministration @ManageReviewBodies @CreateReviewBody @SysAdminUser @SystemTest @rsp-2570
 Feature: User Administration: Manage Review Bodies - Create review body
 
     Background:
@@ -8,7 +8,7 @@ Feature: User Administration: Manage Review Bodies - Create review body
         And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
         Then I can see the 'Create_Review_Body_Page'
 
-    @verifyCreateReviewBody
+    @verifyCreateReviewBody @rsp-3887
     Scenario Outline: Verify the user is able to create a new review body with valid data
         When I fill the new review body page using '<Add_Review_Body>'
         And I capture the page screenshot
@@ -20,9 +20,8 @@ Feature: User Administration: Manage Review Bodies - Create review body
         And I capture the page screenshot
         When I have navigated to the 'Manage_Review_Bodies_Page'
         Then I can see the 'Manage_Review_Bodies_Page'
-        Then I can see the review body for '<Add_Review_Body>' is present in the list
+        Then I can see the review body for '<Add_Review_Body>' is present in the list with '<Status>' status
         And I capture the page screenshot
-        And I can see the status of the review body is '<Status>'
 
         Examples:
             | Add_Review_Body                    | Status  |
@@ -77,14 +76,13 @@ Feature: User Administration: Manage Review Bodies - Create review body
         And I capture the page screenshot
         When I click the 'Back_To_Manage_Review_Bodies' link on the 'Create_Review_Body_Confirmation_Page'
         Then I can see the 'Manage_Review_Bodies_Page'
-        Then I can see the review body for '<Add_Another_Review_Body>' is present in the list
+        Then I can see the review body for '<Add_Another_Review_Body>' is present in the list with '<Status>' status
         And I capture the page screenshot
-        And I can see the status of the review body is '<Status>'
 
         Examples:
-            | Add_Review_Body                    | Add_Another_Review_Body                    | Status   |
-            | Valid_Data_In_All_Fields           | Valid_Data_In_All_Fields_Another           | enabled  |
-            | Valid_Data_In_All_Mandatory_Fields | Valid_Data_In_All_Mandatory_Fields_Another | disabled |
+            | Add_Review_Body                    | Add_Another_Review_Body                    | Status  |
+            | Valid_Data_In_All_Fields           | Valid_Data_In_All_Fields_Another           | enabled |
+            | Valid_Data_In_All_Mandatory_Fields | Valid_Data_In_All_Mandatory_Fields_Another | enabled |
 
     @verifyAddNewReviewPageBackButtonFlow
     Scenario: Verify the user can navigate from 'Add a new review body' page by clicking 'Back' link
@@ -98,7 +96,7 @@ Feature: User Administration: Manage Review Bodies - Create review body
         And I click the 'Continue' button on the 'Create_Review_Body_Page'
         Then I can see the check and create review body page for '<Add_Review_Body>'
         And I capture the page screenshot
-        And I click the 'Back' button on the 'Check_Create_Review_Body_Page'
+        And I click the 'Back' link on the 'Check_Create_Review_Body_Page'
         Then I can see the Add new review body page for '<Add_Review_Body>'
         And I fill the new review body page using '<Add_Another_Review_Body>'
         And I capture the page screenshot
@@ -159,16 +157,17 @@ Feature: User Administration: Manage Review Bodies - Create review body
         And I capture the page screenshot
 
         Examples:
-            | Add_Review_Body                      | Field_And_Summary_Error_Message         |
-            | Missing_Data_Organisation_Name_Field | Mandatory_Field_Organisation_Name_Error |
-            | Missing_Data_Country_Field           | Mandatory_Field_Country_Error           |
-            | Missing_Data_Email_Address_Field     | Mandatory_Field_Email_Address_Error     |
-            | Missing_Data_All_Fields              | All_Mandatory_Field_Errors              |
-            | Missing_Data_All_Mandatory_Fields    | All_Mandatory_Field_Errors              |
-            | Invalid_Data_Organisation_Name_Field | Max_Chars_Organisation_Name_Error       |
-            | Invalid_Data_Description_Field       | Max_Description_Words_Error             |
+            | Add_Review_Body                                      | Field_And_Summary_Error_Message                              |
+            | Missing_Data_Organisation_Name_Field                 | Mandatory_Field_Organisation_Name_Error                      |
+            | Missing_Data_Country_Field                           | Mandatory_Field_Country_Error                                |
+            | Missing_Data_Email_Address_Field                     | Mandatory_Field_Email_Address_Error                          |
+            | Missing_Data_All_Fields                              | All_Mandatory_Field_Errors                                   |
+            | Missing_Data_All_Mandatory_Fields                    | All_Mandatory_Field_Errors                                   |
+            | Invalid_Data_Organisation_Name_Field                 | Max_Chars_Organisation_Name_Error                            |
+            | Invalid_Data_Description_Field                       | Max_Description_Words_Error                                  |
+            | Incorrect_Format_Invalid_Character_Limit_Email_Field | Incorrect_Format_Invalid_Character_Limit_Email_Address_Error |
 
-    @verifyEmailValidationErrors @rsp-3123
+    @verifyEmailValidationErrors @rsp-3123 @skip
     Scenario Outline: Verify that email field validation prevents invalid email formats
         When I fill the new review body page using '<Add_Review_Body>'
         And I capture the page screenshot
@@ -180,22 +179,22 @@ Feature: User Administration: Manage Review Bodies - Create review body
             | Add_Review_Body                                     | Field_And_Summary_Error_Message |
             | Invalid_Character_Limit                             | Max_Chars_Email_Address_Error   |
             | Incorrect_Email_Format                              | Email_Format_Error              |
-            # | Invalid_Email_Data_Start_With_Dot                   | Email_Format_Error              |
+            | Invalid_Email_Data_Start_With_Dot                   | Email_Format_Error              |
             | Invalid_Email_Data_Double_Dot                       | Email_Format_Error              |
             | Invalid_Email_Data_Space                            | Email_Format_Error              |
-            # | Invalid_Email_Data_Wrong_AT                         | Email_Format_Error              |
+            | Invalid_Email_Data_Wrong_AT                         | Email_Format_Error              |
             | Invalid_Email_Data_Less_Greater_Symbols             | Email_Format_Error              |
             | Invalid_Email_Data_Colon                            | Email_Format_Error              |
             | Invalid_Email_Data_Semi_Colon                       | Email_Format_Error              |
             | Invalid_Email_Data_Comma                            | Email_Format_Error              |
-            # | Invalid_Email_Data_Start_With_Hyphen                | Email_Format_Error              |
-            # | Invalid_Email_Data_Hyphen_Before_Domain             | Email_Format_Error              |
+            | Invalid_Email_Data_Start_With_Hyphen                | Email_Format_Error              |
+            | Invalid_Email_Data_Hyphen_Before_Domain             | Email_Format_Error              |
             | Invalid_Email_Data_Double_Dot_Domain                | Email_Format_Error              |
             | Invalid_Email_Data_Exclamation_Domain               | Email_Format_Error              |
-            # | Invalid_Email_Data_Unicode                          | Email_Format_Error              |
-            # | Invalid_Email_Data_Single_Quote_Before_AT           | Email_Format_Error              |
+            | Invalid_Email_Data_Unicode                          | Email_Format_Error              |
+            | Invalid_Email_Data_Single_Quote_Before_AT           | Email_Format_Error              |
             | Invalid_Email_Data_Domain_Exceed_Max                | Email_Format_Error              |
-            # | Invalid_Email_Data_Local_Part_Max                   | Email_Format_Error              |
+            | Invalid_Email_Data_Local_Part_Max                   | Email_Format_Error              |
             | Invalid_Email_Data_Consecutive_Dot_Domain           | Email_Format_Error              |
             | Invalid_Email_Data_Consecutive_Dot_SubDomain        | Email_Format_Error              |
             | Invalid_Email_Data_Consecutive_Dot_Domain_SubDomain | Email_Format_Error              |

@@ -15,7 +15,8 @@ import AdultsLackingCapacityPage from '../IRAS/questionSet/AdultsLackingCapacity
 import BookingPage from '../IRAS/questionSet/BookingPage';
 import ChildrenPage from '../IRAS/questionSet/ChildrenPage';
 import { PageObjectDataName } from '../../utils/CustomTypes';
-import { confirmStringNotNull, removeUnwantedWhitespace } from '../../utils/UtilFunctions';
+import { confirmArrayNotNull, confirmStringNotNull, removeUnwantedWhitespace } from '../../utils/UtilFunctions';
+import sharp from 'sharp';
 
 //Declare Page Objects
 export default class CommonItemsPage {
@@ -54,11 +55,19 @@ export default class CommonItemsPage {
   readonly topMenuBarLinks: Locator;
   readonly summaryErrorLinks: Locator;
   readonly tableRows: Locator;
+  readonly tableBodyRows: Locator;
   readonly hidden_next_button: Locator;
   readonly next_button: Locator;
   readonly fieldGroup: Locator;
   readonly errorFieldGroup: Locator;
   readonly search_text: Locator;
+  readonly pagination: Locator;
+  readonly firstPage: Locator;
+  readonly previous_button: Locator;
+  readonly currentPage: Locator;
+  readonly pagination_results: Locator;
+  readonly pagination_items: Locator;
+  readonly pageLinks: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -84,6 +93,7 @@ export default class CommonItemsPage {
     this.qSetProgressBarStageLink = this.qSetProgressBarStage.locator('.stage-label').getByRole('button');
     this.qSetProgressBarActiveStageLink = this.qSetProgressBarActiveStage.locator('.stage-label').getByRole('button');
     this.tableRows = this.page.getByRole('table').getByRole('row');
+    this.tableBodyRows = this.page.getByRole('table').locator('tbody').getByRole('row');
     this.hidden_next_button = this.page.locator('[class="govuk-pagination__next"][style="visibility: hidden"]');
     this.search_text = this.page.locator('#SearchQuery');
     //Banner
@@ -99,7 +109,7 @@ export default class CommonItemsPage {
     this.bannerSystemAdmin = this.bannerNavBar.getByText(this.linkTextData.Banner.System_Admin, { exact: true });
     this.bannerMyApplications = this.bannerNavBar.getByText(this.linkTextData.Banner.My_Applications, { exact: true });
     this.next_button = this.page.getByRole('link').getByText(this.commonTestData.next_button, { exact: true });
-    this.errorMessageFieldLabel = page
+    this.errorMessageFieldLabel = this.page
       .locator('.field-validation-error')
       .or(this.page.locator('.govuk-error-message'))
       .first();
@@ -110,6 +120,18 @@ export default class CommonItemsPage {
       });
     this.summaryErrorLinks = this.errorMessageSummaryLabel.locator('..').getByRole('listitem').getByRole('link');
     this.topMenuBarLinks = this.page.getByTestId('navigation').getByRole('listitem').getByRole('link');
+    this.pagination = page.getByRole('navigation', { name: 'Pagination' });
+    this.firstPage = this.pagination.getByRole('link', { name: this.commonTestData.first_page, exact: true });
+    this.previous_button = this.pagination
+      .getByRole('link')
+      .getByText(this.commonTestData.previous_button, { exact: true });
+    this.currentPage = this.pagination.locator('a[class$="current"]');
+    this.pagination_results = this.page
+      .getByRole('navigation', { name: 'Pagination' })
+      .locator('..')
+      .getByRole('paragraph');
+    this.pagination_items = this.pagination.getByRole('listitem');
+    this.pageLinks = this.pagination.locator('a[aria-label^="Page"]');
     //Validation Alert Box
     this.alert_box = this.page.getByRole('alert');
     this.alert_box_headings = this.alert_box.getByRole('heading');
@@ -119,10 +141,18 @@ export default class CommonItemsPage {
 
   //Page Methods
   async storeAuthState(user: string) {
-    const authAdminUserFile = 'auth-storage-states/adminUser.json';
+    const authSysAdminUserFile = 'auth-storage-states/sysAdminUser.json';
+    const authFrontStageUserFile = 'auth-storage-states/frontStageUser.json';
+    const authBackStageUserFile = 'auth-storage-states/backStageUser.json';
     switch (user.toLowerCase()) {
-      case 'admin_user':
-        await this.page.context().storageState({ path: authAdminUserFile });
+      case 'system_admin':
+        await this.page.context().storageState({ path: authSysAdminUserFile });
+        break;
+      case 'frontstage_user':
+        await this.page.context().storageState({ path: authFrontStageUserFile });
+        break;
+      case 'backstage_user':
+        await this.page.context().storageState({ path: authBackStageUserFile });
         break;
       default:
         throw new Error(`${user} is not a valid option`);
@@ -462,14 +492,43 @@ export default class CommonItemsPage {
   }
 
   async getFieldErrorMessages<PageObject>(key: string, page: PageObject) {
+    let fieldErrorMessage: string;
     const element = await page[key].first();
-    const fieldErrorLocator = this.errorFieldGroup.filter({ has: element }).locator(this.errorMessageFieldLabel);
-    return await fieldErrorLocator.textContent();
+    const typeAttribute = await element.getAttribute('type');
+    if (typeAttribute === 'checkbox') {
+      key = key.replace('checkbox', 'label');
+      fieldErrorMessage = confirmStringNotNull(
+        await this.errorFieldGroup.filter({ has: page[key] }).locator(this.errorMessageFieldLabel).textContent()
+      );
+    } else {
+      fieldErrorMessage = confirmStringNotNull(
+        await this.errorFieldGroup.filter({ has: element }).locator(this.errorMessageFieldLabel).textContent()
+      );
+    }
+    return fieldErrorMessage;
+  }
+
+  async getMultipleFieldErrorMessages<PageObject>(key: string, page: PageObject) {
+    const element = await page[key];
+    const errorSpan = this.errorFieldGroup.filter({ has: element }).locator(this.errorMessageFieldLabel);
+    const htmlContent = await errorSpan.innerHTML();
+    const fieldErrorMessages = htmlContent.split('<br>').map(confirmStringNotNull);
+    return fieldErrorMessages;
   }
 
   async clickErrorSummaryLink<PageObject>(errorMessageFieldDataset: JSON, key: string, page: PageObject) {
     const element: Locator = await page[key].first();
-    await this.summaryErrorLinks.filter({ hasText: errorMessageFieldDataset[key] }).click();
+    await this.summaryErrorLinks
+      .locator('..')
+      .getByRole('link', { name: errorMessageFieldDataset[key], exact: true })
+      .click();
+    await this.page.waitForTimeout(500); //added to prevent instability when looping through multiple summary links
+    return element;
+  }
+
+  async clickErrorSummaryLinkMultipleErrorField<PageObject>(errorMessage: any, key: string, page: PageObject) {
+    const element: Locator = await page[key].first();
+    await this.summaryErrorLinks.locator('..').getByRole('link', { name: errorMessage, exact: true }).click();
     return element;
   }
 
@@ -527,6 +586,30 @@ export default class CommonItemsPage {
     const searchResultMap = new Map([['searchResultValues', searchResultValues]]);
     return searchResultMap;
   }
+
+  async getAllOrgNamesFromTheTable(): Promise<Map<string, string[]>> {
+    const searchResultValues: string[] = [];
+    let pageCount = 0;
+    const maxPages = 3;
+    while (pageCount < maxPages) {
+      const rowCount = await this.tableRows.count();
+      for (let i = 1; i < rowCount; i++) {
+        const columns = this.tableRows.nth(i).getByRole('cell');
+        const orgName = confirmStringNotNull(await columns.nth(0).textContent());
+        searchResultValues.push(orgName);
+      }
+      const hasNext = (await this.next_button.isVisible()) && !(await this.next_button.isDisabled());
+      if (hasNext && pageCount < maxPages - 1) {
+        await this.next_button.click();
+        await this.page.waitForLoadState('domcontentloaded');
+        pageCount++;
+      } else {
+        break;
+      }
+    }
+    return new Map([['searchResultValues', searchResultValues]]);
+  }
+
   async validateSearchResults(userListAfterSearch: any, searchKey: string) {
     for (const val of userListAfterSearch) {
       if (val.includes(searchKey)) {
@@ -536,11 +619,184 @@ export default class CommonItemsPage {
     return false;
   }
 
+  async validateSearchResultsMultipleWordsSearchKey(results: string[], searchTerms: string[]) {
+    const matchesSearchTerm = (text: string) =>
+      searchTerms.some((term) => text.toLowerCase().includes(term.toLowerCase()));
+    const resultsAfterFiltering = confirmArrayNotNull(results).filter(matchesSearchTerm);
+    return resultsAfterFiltering;
+  }
+
   async getTopMenuBarLinksNames() {
     const topMenuBarLinksValues: string[] = [];
     for (const val of await this.topMenuBarLinks.allTextContents()) {
       topMenuBarLinksValues.push(confirmStringNotNull(val));
     }
     return topMenuBarLinksValues;
+  }
+
+  async getPaginationResults(): Promise<string> {
+    const paginationResultsActualValues = confirmStringNotNull(await this.pagination_results.textContent());
+    return paginationResultsActualValues;
+  }
+
+  async getPageNumber(currentUrl: string) {
+    const parts: string[] = currentUrl.split('?');
+    const pageName: string[] = parts[1].split('&');
+    const pageNumber = parseInt(pageName[0].split('=')[1], 10);
+    return pageNumber;
+  }
+
+  async getTotalItems() {
+    const paginationResults = await this.getPaginationResults();
+    const paginationResultsParts: string[] = paginationResults.split(' results');
+    const paginationResultsPartsOne: string[] = paginationResultsParts[0].split('Showing ');
+    const paginationResultsPartsTwo: string[] = paginationResultsPartsOne[1].split(' of ');
+    const totalItems = parseInt(paginationResultsPartsTwo[1], 10);
+    return totalItems;
+  }
+  async getItemsPerPage() {
+    const rowCount = await this.tableRows.count();
+    return rowCount;
+  }
+
+  async clickOnNavigationButton(button: Locator) {
+    const isButtonVisible = await button.isVisible();
+    if (isButtonVisible) {
+      await button.click();
+      await this.page.waitForLoadState('domcontentloaded');
+    }
+  }
+
+  async clickOnNextLink() {
+    await this.clickOnNavigationButton(this.next_button);
+  }
+
+  async clickOnPreviousLink() {
+    await this.clickOnNavigationButton(this.previous_button);
+  }
+
+  async getLocatorforNextPreviousLinks(linkLabel: string) {
+    let locatorVal: Locator;
+    if (linkLabel === 'Next') {
+      locatorVal = this.next_button;
+    } else if (linkLabel === 'Previous') {
+      locatorVal = this.previous_button;
+    } else {
+      throw new Error(`Unsupported link label: ${linkLabel}`);
+    }
+    return locatorVal;
+  }
+
+  async getPaginationValues() {
+    const items = await this.pagination_items.allTextContents();
+    const ellipsisIndices: number[] = [];
+    const allVisibleItems: any[] = [];
+    for (let i = 0; i < items.length; i++) {
+      const text = items[i].trim();
+      allVisibleItems.push(text);
+      if (text === '⋯') {
+        ellipsisIndices.push(i);
+      }
+    }
+    const itemsMap = new Map([
+      ['ellipsisIndices', ellipsisIndices],
+      ['allVisibleItems', allVisibleItems],
+      ['items', items],
+    ]);
+    return itemsMap;
+  }
+
+  async getVisiblePages(itemsValues: any[]) {
+    const visiblePages = itemsValues
+      .map((text) => text.trim())
+      .filter((text) => /^\d+$/.test(text))
+      .map(Number);
+    const visiblePagesMap = new Map([['visiblePages', visiblePages]]);
+    return visiblePagesMap;
+  }
+  async getStartEndPages(i: number, pageSize: number, totalItems: number) {
+    const start = (i - 1) * pageSize + 1;
+    const end = Math.min(i * pageSize, totalItems);
+    const startEndPagesMap = new Map([
+      ['start', start],
+      ['end', end],
+    ]);
+    return startEndPagesMap;
+  }
+
+  async clickOnPages(currentPageNumber: number, navigateMethod: string) {
+    const currentPageLink = this.pagination.getByRole('link', { name: `Page ${currentPageNumber}`, exact: true });
+    if (navigateMethod === 'clicking on page number') {
+      if (await currentPageLink.isVisible()) {
+        await currentPageLink.click();
+        await this.page.waitForLoadState('domcontentloaded');
+      }
+    }
+    return currentPageLink;
+  }
+
+  async getTotalPages(): Promise<number> {
+    const count = await this.pageLinks.count();
+    let maxPage = 1;
+    const regex = /^Page (\d+)$/;
+    for (let i = 0; i < count; i++) {
+      const label = await this.pageLinks.nth(i).getAttribute('aria-label');
+      const match = regex.exec(label ?? '');
+      if (match) {
+        const num = parseInt(match[1], 10);
+        if (num > maxPage) maxPage = num;
+      }
+    }
+    return maxPage;
+  }
+
+  async splitSearchTerm(term: string) {
+    return term.trim().split(/\s+/);
+  }
+
+  async filterResults(results: string[], searchTerms: string[]) {
+    return results.filter((result) => searchTerms.every((term) => result.toLowerCase().includes(term.toLowerCase())));
+  }
+
+  async clearCheckboxes(dataset: any, keys: string[], commonItemsPage: any, createUserProfilePage: any) {
+    for (const key of keys) {
+      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+        await commonItemsPage.clearUIComponent(dataset, key, createUserProfilePage);
+      }
+    }
+  }
+
+  async captureLargeSizeScreenshot(page: Page, outputFile: string) {
+    const viewportHeight = page.viewportSize()?.height || 800;
+    const scrollHeight = await page.evaluate(() => {
+      return document.documentElement.scrollHeight;
+    });
+    const totalParts = Math.ceil(scrollHeight / viewportHeight);
+    const screenshotBuffers: Buffer[] = [];
+    for (let i = 0; i < totalParts; i++) {
+      const scrollY = i * viewportHeight;
+      await page.evaluate((y) => window.scrollTo(0, y), scrollY);
+      await page.waitForTimeout(300);
+      const buf = await page.screenshot();
+      screenshotBuffers.push(buf);
+    }
+    const images = await Promise.all(screenshotBuffers.map((b) => sharp(b).metadata()));
+    const width = images[0].width!;
+    const heights = images.map((i) => i.height!);
+    const totalHeight = heights.reduce((a, b) => a + b, 0);
+    const stitchedImage = sharp({
+      create: {
+        width,
+        height: totalHeight,
+        channels: 4,
+        background: { r: 255, g: 255, b: 255, alpha: 1 },
+      },
+    });
+    const composites = screenshotBuffers.map((input, index) => ({
+      input,
+      top: heights.slice(0, index).reduce((a, b) => a + b, 0),
+      left: 0,
+    }));
+    await stitchedImage.composite(composites).toFile(outputFile);
   }
 }

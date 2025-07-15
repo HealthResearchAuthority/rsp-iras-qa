@@ -1,18 +1,18 @@
-@adminUser @createProject @createAmendment @SystemTest
+@FrontStageUser @createProject @createProjectReviewYourAnswers @createAmendment @SystemTest
 Feature: Create Amendment - Create Project - Review your answers
 
   Background:
     Given I have navigated to the my research projects page
     And I can see the my research projects page
 
-  @rsp-2837 @reviewYourAnswersAllFields
+  @rsp-2837 @rsp-3819 @reviewYourAnswersAllFields
   Scenario Outline: Verify that user completed all question and can review the answers on create project journey
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
     Then I can see the project details iras page
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
@@ -29,14 +29,14 @@ Feature: Create Amendment - Create Project - Review your answers
       | Project_Details_Title | Key_Project_Roles     | Research_Locations    |
       | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields |
 
-  @rsp-2837 @reviewAnswersChangeProjTitleFields
+  @rsp-2837 @rsp-3819 @reviewAnswersChangeProjTitleFields
   Scenario Outline: Verify that user can change the project title details all fields from review the answers page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
     Then I can see the project details iras page
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
@@ -71,7 +71,7 @@ Feature: Create Amendment - Create Project - Review your answers
     Then I can see the project details iras page
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
@@ -106,7 +106,7 @@ Feature: Create Amendment - Create Project - Review your answers
     Then I can see the project details iras page
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
@@ -142,7 +142,7 @@ Feature: Create Amendment - Create Project - Review your answers
     Then I can see the project details iras page
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
@@ -176,7 +176,7 @@ Feature: Create Amendment - Create Project - Review your answers
     Then I can see the project details iras page
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
@@ -203,14 +203,14 @@ Feature: Create Amendment - Create Project - Review your answers
       | Valid_Data_Title_Empty_Field | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | chief_investigator | Enter_Links_Missing_Fields | Valid_Data_Only_Investigator_Email_Field |
       | Valid_Data_Title_Empty_Field | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | sponsor_contact    | Enter_Links_Missing_Fields | Valid_Data_Only_Sponsor_Email_Field      |
 
-  @rsp-2837 @rsp-1867 @reviewAnswersEnterResearchLoc
+  @rsp-2837 @rsp-1867 @rsp-3819 @reviewAnswersEnterResearchLoc
   Scenario Outline: Verify that user has not completed all questions and can enter research locations details from review your answers page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
     Then I can see the project details iras page
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
@@ -245,7 +245,7 @@ Feature: Create Amendment - Create Project - Review your answers
     Then I can see the project details iras page
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
@@ -281,7 +281,7 @@ Feature: Create Amendment - Create Project - Review your answers
     Then I can see the project details iras page
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
@@ -304,14 +304,14 @@ Feature: Create Amendment - Create Project - Review your answers
       | Project_Details_Title | Key_Project_Roles     | Research_Locations    | Change_Link_Field  |
       | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | chief_investigator |
 
-  @rsp-2837 @rsp-1867 @reviewAnswersProjTitleErrorValidations
+  @rsp-2837 @rsp-1867 @rsp-3819 @reviewAnswersProjTitleErrorValidations
   Scenario Outline: Validate error message on project title page when user redirected from review your answers page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
     Then I can see the project details iras page
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
@@ -338,8 +338,6 @@ Feature: Create Amendment - Create Project - Review your answers
       | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_Title    | Enter_Links_Missing_Fields | Invalid_Data_Short_Project_Title_Min_Length | Title_Field_Error_Message       |
       | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_Title    | Enter_Links_Missing_Fields | Invalid_Day_Number                          | Date_Day_Field_Error_Message    |
       | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_Title    | Enter_Links_Missing_Fields | Invalid_Day_Letters                         | Date_Day_Field_Error_Message    |
-      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_Title    | Enter_Links_Missing_Fields | Invalid_Month_Number                        | Date_Month_Field_Error_Message  |
-      | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_Title    | Enter_Links_Missing_Fields | Invalid_Month_Letters                       | Date_Month_Field_Error_Message  |
       | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_Title    | Enter_Links_Missing_Fields | Invalid_Year_Number_1                       | Date_Year_Field_Error_Message   |
       | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_Title    | Enter_Links_Missing_Fields | Invalid_Year_Number_2                       | Date_Year_Field_Error_Message   |
       | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | Project_Title    | Enter_Links_Missing_Fields | Invalid_Year_Letters                        | Date_Year_Field_Error_Message   |
@@ -458,14 +456,14 @@ Feature: Create Amendment - Create Project - Review your answers
       | Valid_Data_Title_Empty_Field | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | sponsor_contact  | Enter_Links_Missing_Fields | Invalid_Email_Data_Two_Punycode                        | Field_Error_Sponsor_Email       |
       | Valid_Data_Title_Empty_Field | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields | sponsor_contact  | Enter_Links_Missing_Fields | Invalid_Email_Data_Two_Max_Char                        | Field_Error_Sponsor_Email       |
 
-  @rsp-2837 @reviewAnswersProjTitleErrorValidationsChangeFlow
+  @rsp-2837 @rsp-3819 @reviewAnswersProjTitleErrorValidationsChangeFlow
   Scenario Outline: Validate error message on project title page when user redirected from review your answers page - change flow
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
     Then I can see the project details iras page
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
@@ -491,8 +489,6 @@ Feature: Create Amendment - Create Project - Review your answers
       | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_Title     | Invalid_Data_Short_Project_Title_Min_Length | Title_Field_Error_Message       |
       | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_Title     | Invalid_Day_Number                          | Date_Day_Field_Error_Message    |
       | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_Title     | Invalid_Day_Letters                         | Date_Day_Field_Error_Message    |
-      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_Title     | Invalid_Month_Number                        | Date_Month_Field_Error_Message  |
-      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_Title     | Invalid_Month_Letters                       | Date_Month_Field_Error_Message  |
       | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_Title     | Invalid_Year_Number_1                       | Date_Year_Field_Error_Message   |
       | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_Title     | Invalid_Year_Number_2                       | Date_Year_Field_Error_Message   |
       | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_Title     | Invalid_Year_Letters                        | Date_Year_Field_Error_Message   |
@@ -508,7 +504,7 @@ Feature: Create Amendment - Create Project - Review your answers
     Then I can see the project details iras page
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
@@ -609,13 +605,13 @@ Feature: Create Amendment - Create Project - Review your answers
       | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | sponsor_contact   | Invalid_Email_Data_Two_Punycode                        | Field_Error_Sponsor_Email       |
       | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | sponsor_contact   | Invalid_Email_Data_Two_Max_Char                        | Field_Error_Sponsor_Email       |
 
-@rsp-1867
+  @rsp-1867 @rsp-3819 @ValidateConfirmProjectFlow
   Scenario Outline: Validate user is able to see the project overview page when user submit the review answer page with all mandatory fields entered correctly
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
-    And I click the '<Navigation_Button_Third>' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
@@ -635,14 +631,14 @@ Feature: Create Amendment - Create Project - Review your answers
       | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Third | Navigation_Button_Fourth | Project_Details_Title | Key_Project_Roles     | Research_Locations    |
       | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields |
 
-  @rsp-1867
+  @rsp-1867 @rsp-3819
   Scenario Outline: Validate user is able to see the error messages when user submit the review answer page when all mandatory fields are not entered correctly
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
     Then I can see the project details iras page
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
-    And I click the '<Navigation_Button_Third>' button on the 'Project_Details_IRAS_Page'
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
@@ -659,13 +655,13 @@ Feature: Create Amendment - Create Project - Review your answers
     Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Review_Your_Answers_Page'
 
     Examples:
-      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Third | Navigation_Button_Fourth | Project_Details_Title       | Key_Project_Roles                                  | Research_Locations                          | Field_And_Summary_Error_Message                    |
-      | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields                        | Valid_Data_All_Empty_Fields                 | All_Field_Error_Message                            |
-      | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_Only_Title_Field | Valid_Data_All_Empty_Fields                        | Valid_Data_All_Empty_Fields                 | Field_Error_Message_Except_Project_Title           |
-      | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_Only_Date_Fields | Valid_Data_All_Empty_Fields                        | Valid_Data_All_Empty_Fields                 | Field_Error_Message_Except_End_Date                |
-      | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_All_Empty_Fields | Valid_Data_Only_Investigator_Email_Field           | Valid_Data_All_Empty_Fields                 | Field_Error_Message_Except_Chief_Investigator      |
-      | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_All_Empty_Fields | Valid_Data_Only_Sponsor_Email_Field                | Valid_Data_All_Empty_Fields                 | Field_Error_Message_Except_Sponsor_Contact         |
-      | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields                        | Valid_Data_Only_Nations_Participating       | Field_Error_Message_Except_Nations_Participating   |
-      | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields                        | Valid_Data_Only_is_nhs_hsc_organisation_Two | Field_Error_Message_Except_NHS_HSC_Org             |
-      | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields                        | Valid_Data_Only_is_nhs_hsc_organisation     | Field_Error_Message_Except_NHS_HSC_Org_As_Yes      |
-      | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields                        | Valid_Data_is_nhs_hsc_organisation          | Field_Error_Message_Except_NHS_HSC_Org_Lead_Nation |
+      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Third | Navigation_Button_Fourth | Project_Details_Title       | Key_Project_Roles                        | Research_Locations                          | Field_And_Summary_Error_Message                    |
+      | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields              | Valid_Data_All_Empty_Fields                 | All_Field_Error_Message                            |
+      | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_Only_Title_Field | Valid_Data_All_Empty_Fields              | Valid_Data_All_Empty_Fields                 | Field_Error_Message_Except_Project_Title           |
+      | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_Only_Date_Fields | Valid_Data_All_Empty_Fields              | Valid_Data_All_Empty_Fields                 | Field_Error_Message_Except_End_Date                |
+      | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_All_Empty_Fields | Valid_Data_Only_Investigator_Email_Field | Valid_Data_All_Empty_Fields                 | Field_Error_Message_Except_Chief_Investigator      |
+      | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_All_Empty_Fields | Valid_Data_Only_Sponsor_Email_Field      | Valid_Data_All_Empty_Fields                 | Field_Error_Message_Except_Sponsor_Contact         |
+      | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields              | Valid_Data_Only_Nations_Participating       | Field_Error_Message_Except_Nations_Participating   |
+      | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields              | Valid_Data_Only_is_nhs_hsc_organisation_Two | Field_Error_Message_Except_NHS_HSC_Org             |
+      | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields              | Valid_Data_Only_is_nhs_hsc_organisation     | Field_Error_Message_Except_NHS_HSC_Org_As_Yes      |
+      | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields              | Valid_Data_is_nhs_hsc_organisation          | Field_Error_Message_Except_NHS_HSC_Org_Lead_Nation |

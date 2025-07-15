@@ -27,7 +27,7 @@
     "Start": "Start"
   },
   "Project_Details_IRAS_Page": {
-    "Save_Continue": "Save and continue"
+    "Add_Project": "Add project"
   },
   "Project_Details_Title_Page": {
     "Save_Continue": "Save and continue",
@@ -42,7 +42,8 @@
   "Key_Project_Roles_Page": {
     "Save_Continue": "Save and continue",
     "Save_For_Later": "Save for later",
-    "Save_Changes": "Save changes"
+    "Save_Changes": "Save changes",
+    "Search": "Search"
   },
   "Create_User_Profile_Page": {
     "Continue": "Continue"
@@ -79,22 +80,19 @@
   "Check_Remove_User_Profile_Page": {
     "Remove_User_Profile": "Remove user profile"
   },
-  "Check_Add_User_Profile_Page": {
-    "Add_User_Profile": "Add user profile"
-  },
-  "Search_For_User_To_Add_To_Review_Body": {
-    "Search": "Search"
+  "Check_Add_User_Review_Body_Page": {
+    "Add_User": "Add user profile"
   },
   "Search_Add_User_Review_Body_Page": {
     "Search": "Search"
-  },
-  "Check_Add_User_Review_Body_Page": {
-    "Add_User": "Add user profile"
   },
   "Manage_Review_Bodies_Page": {
     "Search": "Search"
   },
   "Review_Your_Answers_Page": {
     "Confirm_Project_Details": "Confirm project details"
+  },
+  "Manage_Users_Page": {
+    "Search": "Search"
   }
 }

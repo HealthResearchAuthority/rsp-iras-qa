@@ -9,6 +9,7 @@ export default class CreateUserProfilePage {
   readonly page: Page;
   readonly createUserProfilePageTestData: typeof createUserProfilePageTestData;
   readonly buttonTextData: typeof buttonTextData;
+  private _unique_email: string;
   readonly page_heading: Locator;
   readonly title_text: Locator;
   readonly first_name_text: Locator;
@@ -26,11 +27,14 @@ export default class CreateUserProfilePage {
   readonly access_required_fieldset: Locator;
   readonly access_required_checkbox: Locator;
   readonly review_body_dropdown: Locator;
+  readonly country_label: Locator;
+  readonly access_required_label: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page;
     this.createUserProfilePageTestData = createUserProfilePageTestData;
+    this._unique_email = '';
 
     //Locators
     this.page_heading = this.page
@@ -76,7 +80,7 @@ export default class CreateUserProfilePage {
       }
     );
     this.role_label = this.page
-      .locator('label b')
+      .locator('.govuk-label')
       .getByText(this.createUserProfilePageTestData.Create_User_Profile_Page.role_label, { exact: true });
     this.role_fieldset = this.page.locator('.govuk-form-group', { has: this.role_label });
     this.role_checkbox = this.role_fieldset.getByRole('checkbox');
@@ -84,15 +88,15 @@ export default class CreateUserProfilePage {
       this.createUserProfilePageTestData.Create_User_Profile_Page.committee_label,
       { exact: true }
     );
-    this.country_fieldset = this.page.getByRole('group', {
-      name: this.createUserProfilePageTestData.Create_User_Profile_Page.country_label,
-      exact: true,
-    });
+    this.country_label = this.page
+      .locator('.govuk-label')
+      .getByText(this.createUserProfilePageTestData.Create_User_Profile_Page.country_label, { exact: true });
+    this.country_fieldset = this.page.locator('.govuk-form-group', { has: this.country_label });
     this.country_checkbox = this.country_fieldset.getByRole('checkbox');
-    this.access_required_fieldset = this.page.getByRole('group', {
-      name: this.createUserProfilePageTestData.Create_User_Profile_Page.access_required_label,
-      exact: true,
-    });
+    this.access_required_label = this.page
+      .locator('.govuk-label')
+      .getByText(this.createUserProfilePageTestData.Create_User_Profile_Page.access_required_label, { exact: true });
+    this.access_required_fieldset = this.page.locator('.govuk-form-group', { has: this.access_required_label });
     this.access_required_checkbox = this.access_required_fieldset.getByRole('checkbox');
     this.review_body_dropdown = this.page.getByLabel(
       this.createUserProfilePageTestData.Create_User_Profile_Page.review_body_label,
@@ -100,6 +104,15 @@ export default class CreateUserProfilePage {
         exact: true,
       }
     );
+  }
+
+  //Getters & Setters for Private Variables
+  async getUniqueEmail(): Promise<string> {
+    return this._unique_email;
+  }
+
+  async setUniqueEmail(value: string): Promise<void> {
+    this._unique_email = value;
   }
 
   async assertOnCreateUserProfilePage() {

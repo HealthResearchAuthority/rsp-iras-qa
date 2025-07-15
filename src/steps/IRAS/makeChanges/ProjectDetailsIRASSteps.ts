@@ -1,8 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../hooks/CustomFixtures';
-import { generateRandomNumber } from '../.././../utils/GenerateTestData';
-import path from 'path';
-const pathToTestDataJson = './src/resources/test_data/iras/make_changes/project_details_iras_data.json';
+import { generateIrasId, generateRandomValidIrasId } from '../.././../utils/GenerateTestData';
 
 const { Then } = createBdd(test);
 
@@ -29,6 +27,9 @@ Then(
     const dataset = projectDetailsIRASPage.projectDetailsIRASPageTestData[datasetName];
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+        if (['Valid_IRAS_ID_Max', 'Valid_IRAS_ID_Min', 'Invalid_IRAS_ID_Min_Length'].includes(datasetName)) {
+          dataset[key] = generateIrasId(datasetName);
+        }
         await commonItemsPage.fillUIComponent(dataset, key, projectDetailsIRASPage);
       }
     }
@@ -36,11 +37,9 @@ Then(
 );
 
 Then('I fill the unique iras id in project details iras page', async ({ projectDetailsIRASPage }) => {
-  const uniqueIrasId = generateRandomNumber();
+  const uniqueIrasId = generateRandomValidIrasId();
   await projectDetailsIRASPage.setUniqueIrasId(uniqueIrasId);
-  const filePath = path.resolve(pathToTestDataJson);
-  await projectDetailsIRASPage.updateUniqueIrasIdTestDataJson(filePath, uniqueIrasId);
-  await projectDetailsIRASPage.iras_id_text.fill(uniqueIrasId);
+  await projectDetailsIRASPage.iras_id_text.fill(await projectDetailsIRASPage.getUniqueIrasId());
 });
 
 Then('I fill the existing iras id in project details iras page', async ({ projectDetailsIRASPage }) => {

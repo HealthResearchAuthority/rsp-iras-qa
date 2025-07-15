@@ -25,7 +25,7 @@ export default class ProjectOverviewPage {
     this.project_details_link = this.page
       .getByRole('heading')
       .getByText(this.projectOverviewPageTestData.Project_Overview_Page.project_details_link);
-    this.project_short_title_label = this.page.locator('.govuk-caption-xl');
+    this.project_short_title_label = this.page.locator('.govuk-caption-l');
   }
 
   //Page Methods

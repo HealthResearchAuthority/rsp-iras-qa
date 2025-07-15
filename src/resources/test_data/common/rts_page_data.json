@@ -1,0 +1,95 @@
+{
+  "RTS_NIHR_FHIR_Config": {
+    "idg_base_url": "https://test.id.nihr.ac.uk/",
+    "grant_type": "client_credentials",
+    "scope": "openid+profile+email",
+    "client_id": "aaU7PY4hz_x_RVOyCo09CulPbTca",
+    "accept": "application/json",
+    "accept_encoding": "gzip, deflate, br",
+    "accept_language": "en-GB,en-US;q=0.9,en;q=0.8",
+    "cache_control": "no-cache",
+    "content_type": "application/x-www-form-urlencoded",
+    "token_type": "Bearer"
+  },
+  "RTS_Active_Sponsor_Organisation_NHS": {
+    "rts_base_url": "https://oat.fhir.rts.nihr.ac.uk/api/",
+    "content_type_json": "application/json",
+    "organisation_name": "nhs",
+    "active": true,
+    "role": "CRSPNSR@2.16.840.1.113883.5.110",
+    "count": "1000",
+    "offset": "3000"
+  },
+  "RTS_Active_Sponsor_Organisation_MAN": {
+    "rts_base_url": "https://oat.fhir.rts.nihr.ac.uk/api/",
+    "content_type_json": "application/json",
+    "organisation_name": "man",
+    "active": true,
+    "role": "CRSPNSR@2.16.840.1.113883.5.110",
+    "count": "1000",
+    "offset": "3000"
+  },
+  "RTS_Active_Sponsor_Organisation_Brackets": {
+    "rts_base_url": "https://oat.fhir.rts.nihr.ac.uk/api/",
+    "content_type_json": "application/json",
+    "organisation_name": "(Sp",
+    "active": true,
+    "role": "CRSPNSR@2.16.840.1.113883.5.110",
+    "count": "1000",
+    "offset": "3000"
+  },
+  "RTS_Active_Sponsor_Organisation_Dot_Comma": {
+    "rts_base_url": "https://oat.fhir.rts.nihr.ac.uk/api/",
+    "content_type_json": "application/json",
+    "organisation_name": ".,L",
+    "active": true,
+    "role": "CRSPNSR@2.16.840.1.113883.5.110",
+    "count": "1000",
+    "offset": "3000"
+  },
+  "RTS_Active_Sponsor_Organisation_Slash": {
+    "rts_base_url": "https://oat.fhir.rts.nihr.ac.uk/api/",
+    "content_type_json": "application/json",
+    "organisation_name": "A/S",
+    "active": true,
+    "role": "CRSPNSR@2.16.840.1.113883.5.110",
+    "count": "1000",
+    "offset": "3000"
+  },
+  "RTS_Active_Sponsor_Organisation_Hyphen": {
+    "rts_base_url": "https://oat.fhir.rts.nihr.ac.uk/api/",
+    "content_type_json": "application/json",
+    "organisation_name": "e-T",
+    "active": true,
+    "role": "CRSPNSR@2.16.840.1.113883.5.110",
+    "count": "1000",
+    "offset": "3000"
+  },
+  "RTS_Active_Sponsor_Organisation_Start_Space": {
+    "rts_base_url": "https://oat.fhir.rts.nihr.ac.uk/api/",
+    "content_type_json": "application/json",
+    "organisation_name": " nh",
+    "active": true,
+    "role": "CRSPNSR@2.16.840.1.113883.5.110",
+    "count": "1000",
+    "offset": "3000"
+  },
+  "RTS_Active_Sponsor_Organisation_Ends_Space": {
+    "rts_base_url": "https://oat.fhir.rts.nihr.ac.uk/api/",
+    "content_type_json": "application/json",
+    "organisation_name": "hs ",
+    "active": true,
+    "role": "CRSPNSR@2.16.840.1.113883.5.110",
+    "count": "1000",
+    "offset": "3000"
+  },
+  "Sponsor_Organisation_Text_Exactly_Five_Results": {
+    "rts_base_url": "https://oat.fhir.rts.nihr.ac.uk/api/",
+    "content_type_json": "application/json",
+    "organisation_name": "Asi",
+    "active": true,
+    "role": "CRSPNSR@2.16.840.1.113883.5.110",
+    "count": "1000",
+    "offset": "3000"
+  }
+}

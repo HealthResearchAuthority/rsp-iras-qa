@@ -35,7 +35,7 @@ Then(
     await expect(reviewBodyProfilePage.view_this_review_body_list_of_users_link).toBeVisible();
     await expect(reviewBodyProfilePage.view_this_review_body_audit_history_link).toBeVisible();
     await expect(reviewBodyProfilePage.last_updated_row).toBeVisible();
-    if (status.toLowerCase() == 'active') {
+    if (status.toLowerCase() == 'enabled') {
       await expect(reviewBodyProfilePage.disable_sub_heading).toBeVisible();
       await expect(reviewBodyProfilePage.disable_guidance_text).toBeVisible();
       await expect(reviewBodyProfilePage.disable_button).toBeVisible();
@@ -70,9 +70,12 @@ When(
       );
     } else {
       await expect(reviewBodyProfilePage.organisation_name_value).toHaveText(dataset.organisation_name_text);
-      await expect(reviewBodyProfilePage.page_heading).toHaveText(dataset.organisation_name_text);
+      await expect(reviewBodyProfilePage.page_heading).toHaveText(
+        reviewBodyProfilePage.reviewBodyProfilePageData.Review_Body_Profile_Page.heading_prefix_label +
+          dataset.organisation_name_text
+      );
     }
-    await expect(reviewBodyProfilePage.country_value).toHaveText(expectedCountryValues.replaceAll(',', ','));
+    await expect(reviewBodyProfilePage.country_value).toHaveText(expectedCountryValues.replaceAll(',', ', '));
     await expect(reviewBodyProfilePage.email_address_value).toHaveText(dataset.email_address_text);
     await expect(reviewBodyProfilePage.description_value).toHaveText(dataset.description_text);
   }
@@ -155,7 +158,7 @@ Then(
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
         const labelVal = await commonItemsPage.getUiLabel(key, reviewBodyProfilePage);
-        expect(labelVal).toBe(dataset[key]);
+        expect.soft(labelVal).toBe(dataset[key]);
       }
     }
   }

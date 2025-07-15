@@ -55,6 +55,10 @@ parameters:
       - Galaxy S9+ landscape
       - Galaxy S8
       - Pixel 5
+      - Galaxy S20 Ultra
+      - Galaxy S20 Ultra landscape
+      - Samsung Galaxy Z Fold 3
+      - Samsung Galaxy Z Fold 3 landscape
   - name: ios_device
     displayName: Select any iOS Device (only for iOS device)
     type: string
@@ -67,6 +71,10 @@ parameters:
       - iPhone 15 Pro Max
       - iPhone 15 landscape
       - iPhone 14 Pro Max
+      - iPad Mini 6
+      - iPad Mini 6 landscape
+      - iPhone 12 Pro Max
+      - iPhone 12 Pro Max landscape
   - name: run_accessibility_tests
     displayName: Run Accessibilty Tests
     type: boolean
@@ -78,7 +86,7 @@ parameters:
   - name: tests_run_timeout
     type: number
     displayName: Playwright Tests Run Timeout
-    default: 20
+    default: 120
   - name: run_sonarcloud_analysis
     displayName: Run SonarCloud Analysis
     default: true

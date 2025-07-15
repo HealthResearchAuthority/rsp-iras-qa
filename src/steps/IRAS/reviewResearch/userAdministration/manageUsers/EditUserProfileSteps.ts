@@ -1,5 +1,7 @@
 import { createBdd } from 'playwright-bdd';
 import { test, expect } from '../../../../../hooks/CustomFixtures';
+import { generateUniqueEmail, generateUniqueValue, generatePhoneNumber } from '../../../../../utils/UtilFunctions';
+import { Locator } from 'playwright/test';
 
 const { Then, When } = createBdd(test);
 
@@ -30,6 +32,11 @@ When(
     const dataset = editUserProfilePage.editUserProfilePageTestData[datasetName];
     let keyIndex = 1;
     let keyValue: any;
+    let uniqueEmail: any;
+    let uniqueTitle: any;
+    let uniqueJobTitle: any;
+    let uniqueTelephoneNumber: any;
+
     if (fieldName.toLowerCase() == 'country' || fieldName.toLowerCase() == 'role') {
       const datasetNameClear: string = 'Edit_User_Profile_Page';
       const clearDataset = editUserProfilePage.editUserProfilePageTestData[datasetNameClear];
@@ -40,13 +47,34 @@ When(
         keyValue = dataset[key];
       }
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        await commonItemsPage.fillUIComponent(dataset, key, editUserProfilePage);
+        if (key === 'email_address_text') {
+          const prefix = editUserProfilePage.editUserProfilePageTestData.Edit_User_Profile.email_address_prefix;
+          uniqueEmail = await generateUniqueEmail(dataset[key], prefix);
+          const locator: Locator = editUserProfilePage[key];
+          await locator.fill(uniqueEmail);
+        } else if (key == 'title_text') {
+          const prefix = dataset.title_text;
+          uniqueTitle = await generateUniqueValue('', prefix);
+          const locator: Locator = editUserProfilePage[key];
+          await locator.fill(uniqueTitle);
+        } else if (key == 'job_title_text') {
+          const prefix = dataset.job_title_text;
+          uniqueJobTitle = await generateUniqueValue('', prefix);
+          const locator: Locator = editUserProfilePage[key];
+          await locator.fill(uniqueJobTitle);
+        } else if (key == 'telephone_text') {
+          uniqueTelephoneNumber = await generatePhoneNumber();
+          const locator: Locator = editUserProfilePage[key];
+          await locator.fill(uniqueTelephoneNumber);
+        } else {
+          await commonItemsPage.fillUIComponent(dataset, key, editUserProfilePage);
+        }
       }
       keyIndex++;
     }
     switch (fieldName.toLowerCase()) {
       case 'title':
-        await userProfilePage.setNewTitle(keyValue);
+        await userProfilePage.setNewTitle(uniqueTitle);
         break;
       case 'first_name':
         await userProfilePage.setNewFirstName(keyValue);
@@ -55,16 +83,16 @@ When(
         await userProfilePage.setNewLastName(keyValue);
         break;
       case 'email_address':
-        await userProfilePage.setNewEmail(keyValue);
+        await userProfilePage.setNewEmail(uniqueEmail);
         break;
       case 'telephone':
-        await userProfilePage.setNewTelephone(keyValue);
+        await userProfilePage.setNewTelephone(uniqueTelephoneNumber);
         break;
       case 'organisation':
         await userProfilePage.setNewOrganisation(keyValue);
         break;
       case 'job_title':
-        await userProfilePage.setNewJobTitle(keyValue);
+        await userProfilePage.setNewJobTitle(uniqueJobTitle);
         break;
       case 'country':
         await userProfilePage.setNewCountries(keyValue);
@@ -143,17 +171,40 @@ When(
 Then(
   'I uncheck the previously selected checkboxes on the edit user profile page for {string} when the role is selected as operations',
   async ({ userProfilePage, editUserProfilePage, commonItemsPage }, datasetName: string) => {
+    const dataset = editUserProfilePage.editUserProfilePageTestData.Edit_User_Profile[datasetName];
     const roleValue = (await userProfilePage.getRole()).join(', ');
-    if (roleValue.includes('operations')) {
-      const dataset = editUserProfilePage.editUserProfilePageTestData.Edit_User_Profile[datasetName];
-      for (const key in dataset) {
-        if (key === 'country_checkbox' || key === 'access_required_checkbox') {
-          if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-            await commonItemsPage.clearUIComponent(dataset, key, editUserProfilePage);
-          }
-        }
-      }
+    if (roleValue === '') {
+      await commonItemsPage.fillUIComponent(dataset, 'role_checkbox', editUserProfilePage);
+    }
+    const selectedCheckboxCount = (await editUserProfilePage.getCheckedCheckboxLabels()).length;
+    if (roleValue.includes('operations') || selectedCheckboxCount > 0) {
+      await commonItemsPage.clearCheckboxes(
+        dataset,
+        ['country_checkbox', 'access_required_checkbox'],
+        commonItemsPage,
+        editUserProfilePage
+      );
       await commonItemsPage.clearUIComponent(dataset, 'role_checkbox', editUserProfilePage);
     }
+  }
+);
+
+When(
+  'I can see that the {string} users data persists on the edit profile page',
+  async ({ createUserProfilePage, commonItemsPage, editUserProfilePage }, datasetName: string) => {
+    const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
+    for (const key in dataset) {
+      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+        await commonItemsPage.validateUIComponentValues(dataset, key, editUserProfilePage);
+      }
+    }
+  }
+);
+
+When(
+  'I validate {string} is not displayed for edit user profile page',
+  async ({ editUserProfilePage }, fieldKey: string) => {
+    const locatorName = fieldKey.toLowerCase() + '_text';
+    await expect(editUserProfilePage[locatorName]).not.toBeVisible();
   }
 );

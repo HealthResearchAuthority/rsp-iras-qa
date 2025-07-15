@@ -1,6 +1,6 @@
 import { DataTable } from 'playwright-bdd';
 import { Locator, chromium, devices, firefox, webkit } from '@playwright/test';
-import { createDecipheriv } from 'crypto';
+import { createDecipheriv, DecipherGCM } from 'crypto';
 import { readFile, writeFile } from 'fs/promises';
 import 'dotenv/config';
 import { deviceDSafari, deviceDFirefox, deviceDChrome, deviceDEdge } from '../hooks/GlobalSetup';
@@ -13,13 +13,32 @@ const pathToCreateUserTestDataJson =
   './src/resources/test_data/iras/reviewResearch/userAdministration/manageUsers/create_user_profile_page_data.json';
 let browserdata: any;
 let deviceType: string;
-const todayDate = new Date();
+const iPadMini6GenPortraitViewportConfig = { width: 744, height: 1133 };
+const iPadMini6GenLandscapeViewportConfig = { width: 1133, height: 744 };
+const samsungS20UltraPortraitViewportConfig = { width: 412, height: 915 };
+const samsungS20UltraLandscapeViewportConfig = { width: 915, height: 412 };
+const galaxyZFold3PortraitViewportConfig = { width: 674, height: 840 };
+const galaxyZFold3LandscapeViewportConfig = { width: 840, height: 674 };
+const iOSMobileUserAgentConfig =
+  'Mozilla/5.0 (iPad; CPU OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1';
+const androidMobileUserAgentConfig =
+  'Mozilla/5.0 (Linux; Android 10; SM-G988B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.7103.25 Mobile Safari/537.36';
+const defaultBrowserTypeiOS = 'webkit';
+const defaultBrowserTypeAndroid = 'chromium';
+const deviceScaleFactoriPad = 2;
+const deviceScaleFactorAndroid = 3.5;
 
 export function getAuthState(user: string): string {
   let authState: string;
   switch (user.toLowerCase()) {
-    case 'adminuser':
-      authState = 'auth-storage-states/adminUser.json';
+    case 'system_admin':
+      authState = 'auth-storage-states/sysAdminUser.json';
+      break;
+    case 'frontstage_user':
+      authState = 'auth-storage-states/frontStageUser.json';
+      break;
+    case 'backstage_user':
+      authState = 'auth-storage-states/backStageUser.json';
       break;
     default:
       throw new Error(`${user} is not a valid option`);
@@ -68,13 +87,13 @@ export function getTicketReferenceTags(tags: string[]): string[] {
   return tickets;
 }
 
-export function getDecryptedValue(data: string) {
+export function getDecryptedValue(data: string, secretKey?: any, authTag?: string) {
   let value: string = '';
-  if (process.env.SECRET_KEY) {
-    const decipher = createDecipheriv('AES-256-GCM', Buffer.from(process.env.SECRET_KEY), Buffer.alloc(16));
-    decipher.setAuthTag(Buffer.from(`${process.env.AUTH_TAG}`, 'hex'));
+  if (secretKey) {
+    const decipher = createDecipheriv('AES-256-GCM', Buffer.from(secretKey), Buffer.alloc(16)) as DecipherGCM;
+    decipher.setAuthTag(Buffer.from(`${authTag}`, 'hex'));
     let decrypted = decipher.update(data, 'hex', 'utf8');
-    decrypted = decrypted + decipher.final('utf8');
+    decrypted += decipher.final('utf8');
     value = decrypted;
   } else {
     value = data;
@@ -101,8 +120,103 @@ export async function getTextFromElementArray(inputArray: Locator[]): Promise<st
   return arrInputText;
 }
 
+export function generateMobileConfig(
+  viewportConfig: any,
+  userAgentConfig: string,
+  defaultBrowserTypeConfig: string,
+  deviceScaleFactorConfig: number
+): any {
+  const iOSMobileConfig = {
+    viewport: viewportConfig,
+    userAgent: userAgentConfig,
+    deviceScaleFactor: deviceScaleFactorConfig,
+    isMobile: true,
+    hasTouch: true,
+    defaultBrowserType: defaultBrowserTypeConfig,
+  };
+  return iOSMobileConfig;
+}
+
+export function getMobileConfig(deviceName: string): any {
+  let browser: any;
+  switch (deviceName) {
+    case 'iPad Mini 6':
+      browser = generateMobileConfig(
+        iPadMini6GenPortraitViewportConfig,
+        iOSMobileUserAgentConfig,
+        defaultBrowserTypeiOS,
+        deviceScaleFactoriPad
+      );
+      break;
+    case 'iPad Mini 6 landscape':
+      browser = generateMobileConfig(
+        iPadMini6GenLandscapeViewportConfig,
+        iOSMobileUserAgentConfig,
+        defaultBrowserTypeAndroid,
+        deviceScaleFactoriPad
+      );
+      break;
+    case 'Galaxy S20 Ultra':
+      browser = generateMobileConfig(
+        samsungS20UltraPortraitViewportConfig,
+        androidMobileUserAgentConfig,
+        defaultBrowserTypeAndroid,
+        deviceScaleFactorAndroid
+      );
+      break;
+    case 'Galaxy S20 Ultra landscape':
+      browser = generateMobileConfig(
+        samsungS20UltraLandscapeViewportConfig,
+        androidMobileUserAgentConfig,
+        defaultBrowserTypeAndroid,
+        deviceScaleFactorAndroid
+      );
+      break;
+    case 'Samsung Galaxy Z Fold 3':
+      browser = generateMobileConfig(
+        galaxyZFold3PortraitViewportConfig,
+        androidMobileUserAgentConfig,
+        defaultBrowserTypeAndroid,
+        deviceScaleFactorAndroid
+      );
+      break;
+    case 'Samsung Galaxy Z Fold 3 landscape':
+      browser = generateMobileConfig(
+        galaxyZFold3LandscapeViewportConfig,
+        androidMobileUserAgentConfig,
+        defaultBrowserTypeAndroid,
+        deviceScaleFactorAndroid
+      );
+      break;
+  }
+  return browser;
+}
+
+export function getBrowser(deviceType: string): any {
+  let browser: any;
+  if (
+    `${process.env.PLATFORM?.toLowerCase()}` == 'mobile' &&
+    `${process.env.OS_TYPE?.toLowerCase()}` == 'ios' &&
+    (`${process.env.IOS_Device}` === 'iPad Mini 6' || `${process.env.IOS_Device}` === 'iPad Mini 6 landscape')
+  ) {
+    browser = getMobileConfig(`${process.env.IOS_Device}`);
+  } else if (
+    `${process.env.PLATFORM?.toLowerCase()}` == 'mobile' &&
+    `${process.env.OS_TYPE?.toLowerCase()}` == 'android' &&
+    (`${process.env.ANDROID_Device}` === 'Galaxy S20 Ultra' ||
+      `${process.env.ANDROID_Device}` === 'Galaxy S20 Ultra landscape' ||
+      `${process.env.ANDROID_Device}` === 'Samsung Galaxy Z Fold 3' ||
+      `${process.env.ANDROID_Device}` === 'Samsung Galaxy Z Fold 3 landscape')
+  ) {
+    browser = getMobileConfig(`${process.env.ANDROID_Device}`);
+  } else {
+    browser = devices[`${deviceType}`];
+  }
+  return browser;
+}
+
 export function getBrowserType(deviceType: string): string {
-  const browser = devices[`${deviceType}`];
+  const browser = getBrowser(deviceType);
   let browserName: string;
   if (`${process.env.BROWSER?.toLowerCase()}` == 'microsoft edge') {
     browserName = 'Microsoft Edge';
@@ -115,7 +229,7 @@ export function getBrowserType(deviceType: string): string {
 }
 
 export async function getBrowserVersionDevices(deviceType: string): Promise<string | undefined> {
-  const browser = devices[`${deviceType}`];
+  const browser = getBrowser(deviceType);
   let version: string | undefined;
   const browserType = `${JSON.parse(JSON.stringify(browser)).defaultBrowserType}`;
   if (browserType == 'chromium') {
@@ -137,21 +251,27 @@ export async function getBrowserVersionDevices(deviceType: string): Promise<stri
   }
   return version;
 }
+
 function getMobileBrowserData() {
   if (`${process.env.OS_TYPE?.toLowerCase()}` == 'ios') {
-    if (`${process.env.IOS_Device}` != 'N/A') {
+    if (`${process.env.IOS_Device}` === 'iPad Mini 6' || `${process.env.IOS_Device}` === 'iPad Mini 6 landscape') {
+      browserdata = getMobileConfig(`${process.env.IOS_Device}`);
+    } else {
       browserdata = devices[`${process.env.IOS_Device}`];
-      deviceType = `${process.env.IOS_Device}`;
-    } else {
-      throw new Error('Invalid iOS device type selected, Please choose any valid option');
     }
+    deviceType = `${process.env.IOS_Device}`;
   } else if (`${process.env.OS_TYPE?.toLowerCase()}` == 'android') {
-    if (`${process.env.ANDROID_Device}` != 'N/A') {
-      browserdata = devices[`${process.env.ANDROID_Device}`];
-      deviceType = `${process.env.ANDROID_Device}`;
+    if (
+      `${process.env.ANDROID_Device}` === 'Galaxy S20 Ultra' ||
+      `${process.env.ANDROID_Device}` === 'Galaxy S20 Ultra landscape' ||
+      `${process.env.ANDROID_Device}` === 'Samsung Galaxy Z Fold 3' ||
+      `${process.env.ANDROID_Device}` === 'Samsung Galaxy Z Fold 3 landscape'
+    ) {
+      browserdata = getMobileConfig(`${process.env.ANDROID_Device}`);
     } else {
-      throw new Error('Invalid Android device type selected, Please choose any valid option');
+      browserdata = devices[`${process.env.ANDROID_Device}`];
     }
+    deviceType = `${process.env.ANDROID_Device}`;
   } else {
     throw new Error('Invalid Mobile OS type selected, Please choose any valid option');
   }
@@ -259,15 +379,29 @@ export function getDeviceName() {
 }
 
 export function getReportFolderName() {
-  const day = todayDate.getDate();
-  const month = todayDate.toLocaleString('default', { month: 'short' });
-  const year = todayDate.getFullYear();
-  const hours = (todayDate.getHours() < 10 ? '0' : '') + todayDate.getHours();
-  const minutes = (todayDate.getMinutes() < 10 ? '0' : '') + todayDate.getMinutes();
-  const deviceName = getDeviceName().replace(/^./, (char) => char.toUpperCase());
-  const browserName = getBrowserType(deviceTypeVal).replace(/^./, (char) => char.toUpperCase());
-  const testReportFolderName =
-    day + '_' + month + '_' + year + ' ' + hours + minutes + ' ' + deviceName + '_' + browserName;
+  let testReportFolderName: string;
+  const tempDir = path.join(process.cwd(), '.temp');
+  const filePath = path.join(tempDir, 'testReportPathName.json');
+  if (fs.existsSync(tempDir) && fs.existsSync(filePath)) {
+    const filePath = path.resolve(tempDir, 'testReportPathName.json');
+    const configData = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+    testReportFolderName = configData['testReportFolderName'];
+  } else {
+    const todayDate = new Date();
+    const day = todayDate.getDate();
+    const month = todayDate.toLocaleString('default', { month: 'short' });
+    const year = todayDate.getFullYear();
+    const hours = (todayDate.getHours() < 10 ? '0' : '') + todayDate.getHours();
+    const minutes = (todayDate.getMinutes() < 10 ? '0' : '') + todayDate.getMinutes();
+    const deviceName = getDeviceName().replace(/^./, (char) => char.toUpperCase());
+    const browserName = getBrowserType(deviceTypeVal).replace(/^./, (char) => char.toUpperCase());
+    testReportFolderName =
+      day + '_' + month + '_' + year + ' ' + hours + minutes + ' ' + deviceName + '_' + browserName;
+    if (!fs.existsSync(tempDir)) {
+      fs.mkdirSync(tempDir);
+    }
+    fs.writeFileSync(path.join(tempDir, 'testReportPathName.json'), JSON.stringify({ testReportFolderName }));
+  }
   return testReportFolderName;
 }
 
@@ -383,6 +517,16 @@ export async function generateUniqueValue(keyVal: string, prefix: string): Promi
   return `${domain}${prefix}${timestamp}`;
 }
 
+export async function generatePhoneNumber(): Promise<string> {
+  const prefix = '07';
+  const digitsNeeded = 9;
+  let number = '';
+  for (let i = 0; i < digitsNeeded; i++) {
+    number += Math.floor(Math.random() * 10).toString();
+  }
+  return prefix + number;
+}
+
 export async function removeUnwantedWhitespace(value: string): Promise<string> {
   return value.replaceAll(/\s+/g, ' ').trim();
 }
@@ -414,21 +558,7 @@ export async function returnDataFromJSON(filePath?: string): Promise<any> {
 }
 
 export async function convertDate(day: string, month: number, year: number): Promise<any> {
-  const monthNames = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ];
-  const formattedDate = `${day.padStart(2, '0')} ${monthNames[month - 1]} ${year}`;
+  const formattedDate = `${day.padStart(2, '0')} ${month} ${year}`;
   return formattedDate.toString();
 }
 
@@ -436,4 +566,21 @@ export async function returnSingleRandomLocator(resolvesToMultiElements: Locator
   const noOfElements = await resolvesToMultiElements.count();
   const randomIndex = Math.floor(Math.random() * (noOfElements - 1));
   return resolvesToMultiElements.nth(randomIndex);
+}
+
+export async function sortArray(value: string[]): Promise<string[]> {
+  return value.sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }));
+}
+
+export function resolveEnvExpression(template: string): string {
+  const passwordParts = template.split('`${process.env.');
+  if (passwordParts.length < 2) {
+    throw new Error('Invalid template format');
+  }
+  const envVar = passwordParts[1].split('}`')[0];
+  const value = process.env[envVar];
+  if (!value) {
+    throw new Error(`Environment variable "${envVar}" is not defined`);
+  }
+  return value;
 }

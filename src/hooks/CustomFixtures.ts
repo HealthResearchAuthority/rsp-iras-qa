@@ -1,6 +1,6 @@
 import { test as base } from 'playwright-bdd';
 import AxeBuilder from '@axe-core/playwright';
-import { getAuthState, getTicketReferenceTags } from '../utils/UtilFunctions';
+import { getAuthState } from '../utils/UtilFunctions';
 import CommonItemsPage from '../pages/Common/CommonItemsPage';
 import LoginPage from '../pages/Common/LoginPage';
 import HomePage from '../pages/IRAS/HomePage';
@@ -45,6 +45,8 @@ import UserListReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministrat
 import CheckRemoveUserReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/CheckRemoveUserReviewBodyPage';
 import SearchAddUserReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/SearchAddUserReviewBodyPage';
 import CheckAddUserReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/CheckAddUserReviewBodyPage';
+import AccessDeniedPage from '../pages/IRAS/AccessDeniedPage';
+import RtsPage from '../pages/Common/RtsPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -91,6 +93,8 @@ type CustomFixtures = {
   checkRemoveUserReviewBodyPage: CheckRemoveUserReviewBodyPage;
   searchAddUserReviewBodyPage: SearchAddUserReviewBodyPage;
   checkAddUserReviewBodyPage: CheckAddUserReviewBodyPage;
+  accessDeniedPage: AccessDeniedPage;
+  rtsPage: RtsPage;
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -271,6 +275,14 @@ export const test = base.extend<CustomFixtures>({
     await use(new CheckAddUserReviewBodyPage(page));
   },
 
+  accessDeniedPage: async ({ page }, use) => {
+    await use(new AccessDeniedPage(page));
+  },
+
+  rtsPage: async ({ page }, use) => {
+    await use(new RtsPage(page));
+  },
+
   makeAxeBuilder: async ({ page }, use) => {
     const makeAxeBuilder = () => new AxeBuilder({ page });
     await use(makeAxeBuilder);
@@ -278,8 +290,12 @@ export const test = base.extend<CustomFixtures>({
 
   //Set the Storage State based on User Tag from Feature File
   storageState: async ({ $tags, storageState }, use) => {
-    if ($tags.includes('@adminUser')) {
-      storageState = getAuthState('adminUser');
+    if ($tags.includes('@SysAdminUser')) {
+      storageState = getAuthState('system_admin');
+    } else if ($tags.includes('@FrontStageUser')) {
+      storageState = getAuthState('frontstage_user');
+    } else if ($tags.includes('@BackStageUser')) {
+      storageState = getAuthState('backstage_user');
     }
     await use(storageState);
   },
@@ -291,15 +307,6 @@ export const test = base.extend<CustomFixtures>({
       channel = 'chrome';
     }
     await use(channel);
-  },
-
-  //Attach relevant ticket links to each scenario in test report
-  $beforeEach: async ({ $tags, $testInfo }, use) => {
-    const tickets = getTicketReferenceTags($tags);
-    if (tickets.length > 0) {
-      $testInfo.attach('Ticket Reference:', { body: tickets.toString().replace(/,/g, '') });
-    }
-    await use();
   },
 
   //Enable JavaScript in the BrowserContext for applicable, tagged scenarios
