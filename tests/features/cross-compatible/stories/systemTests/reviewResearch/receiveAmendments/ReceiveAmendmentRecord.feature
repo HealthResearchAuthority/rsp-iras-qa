@@ -11,7 +11,7 @@ Feature: Receive Amendment - Staff dashboard/worklist
     # 1. Valid IRAS ID + filters(64 combinations) >>Click Apply Filters>>Results displayed (Search button is not clicked)
     ##Scenario 6 -Selected filters validation
     # Selected filters are displayed under active filters>>tags/labels for each filter validation
-    @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters
+    @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @Test
     Scenario Outline: Verify the user is able to view the list of modifications by entering a valid IRAS ID, selecting the advanced filters, and clicking the 'Apply filters' button
         When I enter '<Valid_Iras_Id>' into the search field
         And I capture the page screenshot
@@ -35,7 +35,7 @@ Feature: Receive Amendment - Staff dashboard/worklist
     # 2. Valid IRAS ID >>Click Search>>Results displayed>> Select Advanced Filters(64 combinations)>> Click Apply Filters>>Results displayed(filtered results)
     ##Scenario 6 -Selected filters validation
     # Selected filters are displayed under active filters>>tags/labels for each filter validation
-    @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @Test3
+    @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters
     Scenario Outline: Verify the user is able to view the list of modifications by entering valid iras id, then clicking on 'Search' button and then selecting advanced filters and clicking the 'Apply filters' button
         When I enter '<Valid_Iras_Id>' into the search field
         And I capture the page screenshot
@@ -110,7 +110,7 @@ Feature: Receive Amendment - Staff dashboard/worklist
     #5. No IRAS ID+Filters(64 combinations)>>Click Apply Filters>>Results displayed
     ##Scenario 6 -Selected filters validation
     # Selected filters are displayed under active filters>>tags/labels for each filter validation
-    @viewListOfModifications @NoIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters
+    @viewListOfModifications @NoIrasIdAndAdvancedFilters
     Scenario Outline: Verify the user can view the list of modifications by selecting advanced filters and click on apply filters button
         When I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
@@ -144,7 +144,7 @@ Feature: Receive Amendment - Staff dashboard/worklist
             | Advanced_Filters_TwentyTwo   |
             | Advanced_Filters_TwentyThree |
 
-    @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters
+    @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @Test
     Scenario Outline: Verify the user is able to view the list of modifications filtered by sponsor organisation and modification submitted date
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
