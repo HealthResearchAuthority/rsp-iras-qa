@@ -810,3 +810,15 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
+  @axeAccessibilityAdvanceFilterSearchModifications @FrontStageUser
+  Scenario: Search - Approvals - Plan and manage healthcare research
+    Given I have navigated to the 'Search_Modifications_Page'
+    Then I can see the 'Search_Modifications_Page'
+    When I enter 'Valid_Iras_Id_Nth' into the search field
+    And I select advanced filters in the search modifications page using 'Advanced_Filters_Nth'
+    And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
+    Then I can see the selected filters 'Advanced_Filters_Nth' are displayed under active filters
+    And the system displays modification records matching the search 'Valid_Iras_Id_Nth' and filter criteria 'Advanced_Filters_Nth'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations

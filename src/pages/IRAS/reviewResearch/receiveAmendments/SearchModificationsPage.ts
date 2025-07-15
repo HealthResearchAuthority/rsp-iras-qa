@@ -60,6 +60,7 @@ export default class SearchModificationsPage {
   readonly sponsor_organisation_jsdisabled_no_suggestions_label: Locator;
   readonly sponsor_organisation_jsdisabled_min_error_message: Locator;
   readonly date_modification_submitted_to_date_error: Locator;
+  readonly result_count: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -89,6 +90,10 @@ export default class SearchModificationsPage {
     this.advanced_filter_chevron = this.page.getByRole('button', {
       name: this.searchModificationsPageTestData.Search_Modifications_Page.advanced_filter_label,
     });
+    this.result_count = this.advanced_filter_chevron
+      .locator('..')
+      .getByRole('heading', { level: 2 })
+      .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.result_count_heading);
     this.chief_investigator_name_fieldset = this.page.locator('.govuk-fieldset', {
       has: this.page.getByText(
         this.searchModificationsPageTestData.Search_Modifications_Page.chief_investigator_hint_text

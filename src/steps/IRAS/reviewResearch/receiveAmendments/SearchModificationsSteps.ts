@@ -111,17 +111,13 @@ Then(
   async ({ commonItemsPage, searchModificationsPage }, irasIdDatasetName: string, filterDatasetName: string) => {
     const irasIdDataset =
       searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[irasIdDatasetName];
-    console.log(irasIdDataset);
     const filterDataset =
       searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[filterDatasetName];
-    console.log(filterDataset);
-    const irasId = irasIdDataset['iras_id_text']; //modificationId contains irasId
+    const irasId = irasIdDataset['iras_id_text'];
     const chiefInvestigatorName = filterDataset['chief_investigator_name_text'];
     const shortProjectTitle = filterDataset['short_project_title_text'];
     const searchKey = irasId + '/' + chiefInvestigatorName + '/' + shortProjectTitle;
     const searchTerms = searchKey.split('/');
-    console.log(searchTerms);
-
     const modificationsList = await searchModificationsPage.getAllModificationsTheTable();
     const modificationsListAfterSearch: string[] = confirmArrayNotNull(modificationsList.get('searchResultValues'));
     const filteredSearchResults = await commonItemsPage.filterResults(modificationsListAfterSearch, searchTerms);
@@ -132,12 +128,10 @@ Then(
     );
     expect(searchResult).toBeTruthy();
     expect(modificationsListAfterSearch).toHaveLength(searchResult.length);
-
     const modificationIdListAfterSearch: string[] = confirmArrayNotNull(modificationsList.get('modificationIdValues'));
     await searchModificationsPage.setModificationIdListAfterSearch(modificationIdListAfterSearch);
     const searchResultIrasID = commonItemsPage.validateSearchResults(modificationIdListAfterSearch, irasId);
     expect(searchResultIrasID).toBeTruthy();
-
     const shortProjectTitleListAfterSearch: string[] = confirmArrayNotNull(
       modificationsList.get('shortProjectTitleValues')
     );
@@ -146,7 +140,6 @@ Then(
       shortProjectTitle
     );
     expect(searchResultShortProjectTitle).toBeTruthy();
-
     const chiefInvestigatorNameListAfterSearch: string[] = confirmArrayNotNull(
       modificationsList.get('chiefInvestigatorNameValues')
     );
@@ -157,9 +150,6 @@ Then(
     );
     expect(searchResultChiefInvestigatorName).toBeTruthy();
     expect(chiefInvestigatorNameListAfterSearch).toHaveLength(searchResultChiefInvestigatorName.length);
-
-    // modificationTypes >> a or b
-
     const modificationTypes: string[] = filterDataset['modification_type_checkbox'];
     console.log(modificationTypes);
     const modificationTypeListAfterSearch: string[] = confirmArrayNotNull(
@@ -172,22 +162,7 @@ Then(
       );
       expect(modificationTypesSearchResult).toBeTruthy();
     }
-    // const filteredModificationTypeListSearchResults = await commonItemsPage.filterResults(
-    //   modificationTypeListAfterSearch,
-    //   modificationTypes
-    // );
-    // expect(filteredModificationTypeListSearchResults).toEqual(modificationTypeListAfterSearch);
-    // const modificationTypesSearchResult = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
-    //   modificationTypeListAfterSearch,
-    //   modificationTypes
-    // );
-    // expect(modificationTypesSearchResult).toBeTruthy();
-    // expect(modificationTypeListAfterSearch).toHaveLength(modificationTypesSearchResult.length);
-
-    // leadNations >> a or b or c or d
-
     const leadNations: string[] = filterDataset['lead_nation_checkbox'];
-    console.log(leadNations);
     const leadNationValuesAfterSearch: string[] = confirmArrayNotNull(modificationsList.get('leadNationValues'));
     for (let i = 0; i < leadNations.length; i++) {
       const leadNationValuesSearchResult = commonItemsPage.validateSearchResults(
@@ -196,17 +171,6 @@ Then(
       );
       expect(leadNationValuesSearchResult).toBeTruthy();
     }
-    // const filteredLeadNationValuesSearchResults = await commonItemsPage.filterResults(
-    //   leadNationValuesAfterSearch,
-    //   leadNations
-    // );
-    // expect(filteredLeadNationValuesSearchResults).toEqual(leadNationValuesAfterSearch);
-    // const leadNationValuesSearchResult = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
-    //   leadNationValuesAfterSearch,
-    //   leadNations
-    // );
-    // expect(leadNationValuesSearchResult).toBeTruthy();
-    // expect(leadNationValuesAfterSearch).toHaveLength(leadNationValuesSearchResult.length);
   }
 );
 
