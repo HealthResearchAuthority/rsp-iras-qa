@@ -1,11 +1,12 @@
-//import { expect, Locator, Page } from '@playwright/test';
-import * as modificationsReadyToAssignPageData from '../../../../../resources/test_data/iras/reviewResearch/receiveAmendments/modifications_ready_to_assign_page_data.json';
+import { expect, Locator, Page } from '@playwright/test';
+import * as modificationsReadyToAssignPageData from '../../../../resources/test_data/iras/reviewResearch/receiveAmendments/modifications_ready_to_assign_page_data.json';
 
 //Declare Page Objects
 export default class ModificationsReadyToAssignPage {
   readonly page: Page;
   readonly modificationsReadyToAssignPageData: typeof modificationsReadyToAssignPageData;
 
+  readonly modifications_tasklist_link: Locator;
   readonly page_heading: Locator;
   readonly page_description: Locator;
   readonly modification_button_label: Locator;
@@ -24,18 +25,13 @@ export default class ModificationsReadyToAssignPage {
     this.modificationsReadyToAssignPageData = modificationsReadyToAssignPageData;
 
     //Locators
-    this.page_heading = this.page
-      .getByRole('heading')
-      .getByText(this.modificationsReadyToAssignPageData.Modifications_Ready_To_Assign_Page.page_heading, {
-        exact: true,
-      });
-    this.page_description = this.page
-      .getByRole('paragraph')
-      .getByText(this.modificationsReadyToAssignPageData.Modifications_Ready_To_Assign_Page.page_description, {
-        exact: true,
-      });
+    //this.page_heading = this.page.getByRole('link', { name: 'Approvals', exact: true });
+
+    this.modifications_tasklist_link = this.page.locator('.govuk-heading-s govuk-link hra-card-heading__link');
+
+    this.page_heading = this.page.getByTestId('title');
     this.modification_button_label = this.page
-      .getByRole('paragraph')
+      .getByRole('button')
       .getByText(this.modificationsReadyToAssignPageData.Modifications_Ready_To_Assign_Page.modification_button_label, {
         exact: true,
       });
@@ -47,34 +43,46 @@ export default class ModificationsReadyToAssignPage {
       name: this.modificationsReadyToAssignPageData.Modifications_Ready_To_Assign_Page.modification_checkbox,
     });
     this.short_project_title_label = this.page
-      .getByRole('paragraph')
-      .getByText(this.modificationsReadyToAssignPageData.Modifications_Ready_To_Assign_Page.short_project_title_label, {
+      .getByRole('button')
+      .getByText(this.modificationsReadyToAssignPageData.Label_Texts.short_project_title_label, {
         exact: true,
       });
     this.modification_id_label = this.page
-      .getByRole('paragraph')
-      .getByText(this.modificationsReadyToAssignPageData.Modifications_Ready_To_Assign_Page.modification_id_label, {
+      .getByRole('button')
+      .getByText(this.modificationsReadyToAssignPageData.Label_Texts.modification_id_label, {
         exact: true,
       });
     this.modification_type_label = this.page
-      .getByRole('paragraph')
-      .getByText(this.modificationsReadyToAssignPageData.Modifications_Ready_To_Assign_Page.modification_type_label, {
+      .getByRole('button')
+      .getByText(this.modificationsReadyToAssignPageData.Label_Texts.modification_type_label, {
         exact: true,
       });
     this.date_submitted_label = this.page
-      .getByRole('paragraph')
-      .getByText(this.modificationsReadyToAssignPageData.Modifications_Ready_To_Assign_Page.date_submitted_label, {
+      .getByRole('button')
+      .getByText(this.modificationsReadyToAssignPageData.Label_Texts.date_submitted_label, {
         exact: true,
       });
     this.days_since_submission_label = this.page
-      .getByRole('paragraph')
-      .getByText(
-        this.modificationsReadyToAssignPageData.Modifications_Ready_To_Assign_Page.days_since_submission_label,
-        {
-          exact: true,
-        }
-      );
+      .getByRole('button')
+      .getByText(this.modificationsReadyToAssignPageData.Label_Texts.days_since_submission_label, {
+        exact: true,
+      });
   }
 
-  //Getters & Setters for Private Variables
+  //Page Methods
+
+  async goto() {
+    await this.page.goto('modificationstasklist/index');
+  }
+  async assertOnModificationsReadyToAssignPage() {
+    await expect(this.page_heading).toBeVisible();
+  }
+
+  async assertOnNamesOfTheColumns() {
+    await expect(this.short_project_title_label).toBeVisible();
+    await expect(this.modification_id_label).toBeVisible();
+    await expect(this.modification_type_label).toBeVisible();
+    await expect(this.date_submitted_label).toBeVisible();
+    await expect(this.days_since_submission_label).toBeVisible();
+  }
 }
