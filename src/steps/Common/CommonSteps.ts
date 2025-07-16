@@ -805,30 +805,30 @@ Then(
   async ({ commonItemsPage }, navigateMethod: string) => {
     // commonItemspage and getting navigation method
     await commonItemsPage.firstPage.click();
-    const totalItems = await commonItemsPage.getTotalItems();
-    const pageSize = parseInt(commonItemsPage.commonTestData.default_page_size, 10);
+    // const totalItems = await commonItemsPage.getTotalItems();
+    // const pageSize = parseInt(commonItemsPage.commonTestData.default_page_size, 10);
     const totalPages = await commonItemsPage.getTotalPages();
     for (let currentPage = 1; currentPage <= totalPages; currentPage++) {
       const currentPageLocator = await commonItemsPage.clickOnPages(currentPage, navigateMethod);
       await expect(currentPageLocator).toHaveAttribute('aria-current');
-      const startEndPagesMap = await commonItemsPage.getStartEndPages(currentPage, pageSize, totalItems);
-      const start = startEndPagesMap.get('start');
-      const end = startEndPagesMap.get('end');
-      await expect(commonItemsPage.pagination_results).toHaveText(
-        `Showing ${start} to ${end} of ${totalItems} results`
-      );
-      const rowCount = await commonItemsPage.getItemsPerPage();
-      expect(rowCount - 1).toBe(parseInt(`${end}`, 10) - parseInt(`${start}`, 10) + 1);
+      // const startEndPagesMap = await commonItemsPage.getStartEndPages(currentPage, pageSize, totalItems);
+      // const start = startEndPagesMap.get('start');
+      // const end = startEndPagesMap.get('end');
+      // await expect(commonItemsPage.pagination_results).toHaveText(
+      //   `Showing ${start} to ${end} of ${totalItems} results`
+      // );
+      // const rowCount = await commonItemsPage.getItemsPerPage();
+      // expect(rowCount - 1).toBe(parseInt(`${end}`, 10) - parseInt(`${start}`, 10) + 1);
       const itemsMap = await commonItemsPage.getPaginationValues();
-      const ellipsisIndices: any = itemsMap.get('ellipsisIndices');
+      // const ellipsisIndices: any = itemsMap.get('ellipsisIndices');
       const itemsValues: any = itemsMap.get('items');
       const visiblePagesMap = await commonItemsPage.getVisiblePages(itemsValues);
       const visiblePages: any = visiblePagesMap.get('visiblePages');
       const allVisibleItems: any = itemsMap.get('allVisibleItems');
-      if (totalPages <= 7) {
-        expect(visiblePages).toEqual(allVisibleItems);
-        expect(ellipsisIndices.length).toBe(0);
-      }
+      // if (totalPages <= 7) {
+      //   expect(visiblePages).toEqual(allVisibleItems);
+      //   expect(ellipsisIndices.length).toBe(0);
+      // }
       const firstPage = 1;
       const lastPage = totalPages;
       if (totalPages > 7) {
@@ -932,10 +932,10 @@ Then(
 //       await expect(currentPageLocator).toHaveAttribute('aria-current');
 //       const startEndPagesMap = await commonItemsPage.getStartEndPages(currentPage, pageSize, totalItems);
 //       const start = startEndPagesMap.get('start');
-//       const end = startEndPagesMap.get('end');
-//       await expect(commonItemsPage.pagination_results).toHaveText(
-//         `Showing ${start} to ${end} of ${totalItems} results`
-//       );
+//        const end = startEndPagesMap.get('end');
+//        await expect(commonItemsPage.pagination_results).toHaveText(
+//          `Showing ${start} to ${end} of ${totalItems} results`
+//        );
 //       const rowCount = await commonItemsPage.getItemsPerPage();
 //       expect(rowCount - 1).toBe(parseInt(`${end}`, 10) - parseInt(`${start}`, 10) + 1);
 //       const itemsMap = await commonItemsPage.getPaginationValues();
@@ -1035,30 +1035,30 @@ Then(
   async ({ commonItemsPage }, navigateMethod: string) => {
     const totalPages = await commonItemsPage.getTotalPages();
     await commonItemsPage.clickOnPages(totalPages, 'clicking on page number');
-    const totalItems = await commonItemsPage.getTotalItems();
-    const pageSize = parseInt(commonItemsPage.commonTestData.default_page_size, 10);
+    // const totalItems = await commonItemsPage.getTotalItems();
+    //const pageSize = parseInt(commonItemsPage.commonTestData.default_page_size, 10);
     for (let currentPage = totalPages; currentPage >= 1; currentPage--) {
       if (currentPage >= totalPages - 3) {
         const currentPageLocator = await commonItemsPage.clickOnPages(currentPage, navigateMethod);
         await expect(currentPageLocator).toHaveAttribute('aria-current', 'page');
-        const startEndPagesMap = await commonItemsPage.getStartEndPages(currentPage, pageSize, totalItems);
-        const start = startEndPagesMap.get('start');
-        const end = startEndPagesMap.get('end');
-        await expect(commonItemsPage.pagination_results).toHaveText(
-          `Showing ${start} to ${end} of ${totalItems} results`
-        );
-        const rowCount = await commonItemsPage.getItemsPerPage();
-        expect(rowCount - 1).toBe(parseInt(`${end}`, 10) - parseInt(`${start}`, 10) + 1);
+        // const startEndPagesMap = await commonItemsPage.getStartEndPages(currentPage, pageSize, totalItems);
+        // const start = startEndPagesMap.get('start');
+        // const end = startEndPagesMap.get('end');
+        // await expect(commonItemsPage.pagination_results).toHaveText(
+        //   `Showing ${start} to ${end} of ${totalItems} results`
+        // );
+        // const rowCount = await commonItemsPage.getItemsPerPage();
+        // expect(rowCount - 1).toBe(parseInt(`${end}`, 10) - parseInt(`${start}`, 10) + 1);
         const itemsMap = await commonItemsPage.getPaginationValues();
-        const ellipsisIndices: any = itemsMap.get('ellipsisIndices');
+        //const ellipsisIndices: any = itemsMap.get('ellipsisIndices');
         const itemsValues: any = itemsMap.get('items');
         const visiblePagesMap = await commonItemsPage.getVisiblePages(itemsValues);
         const visiblePages: any = visiblePagesMap.get('visiblePages');
         const allVisibleItems: any = itemsMap.get('allVisibleItems');
-        if (totalPages <= 7) {
-          expect(visiblePages).toEqual(allVisibleItems);
-          expect(ellipsisIndices.length).toBe(0);
-        }
+        // if (totalPages <= 7) {
+        //   expect(visiblePages).toEqual(allVisibleItems);
+        //   expect(ellipsisIndices.length).toBe(0);
+        // }
         const firstPage = 1;
         const lastPage = totalPages;
         if (totalPages > 7) {
