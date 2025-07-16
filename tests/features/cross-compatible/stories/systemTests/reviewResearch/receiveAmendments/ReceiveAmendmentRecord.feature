@@ -35,7 +35,7 @@ Feature: Receive Amendment - Staff dashboard/worklist
     # 2. Valid IRAS ID >>Click Search>>Results displayed>> Select Advanced Filters(64 combinations)>> Click Apply Filters>>Results displayed(filtered results)
     ##Scenario 6 -Selected filters validation
     # Selected filters are displayed under active filters>>tags/labels for each filter validation
-    @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @Test2
+    @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @Test2 @Regression
     Scenario Outline: Verify the user is able to view the list of modifications by entering valid iras id, then clicking on 'Search' button and then selecting advanced filters and clicking the 'Apply filters' button
         When I enter '<Valid_Iras_Id>' into the search field
         And I capture the page screenshot
@@ -144,7 +144,7 @@ Feature: Receive Amendment - Staff dashboard/worklist
             | Advanced_Filters_TwentyThree |
 
     #  date_modification_submitted and sponsor_organisation can't validate from UI,need to validate with Database
-    @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @Test6
+    @viewListOfModifications @DateModificationSubmitted @SponsorOrganisation @Test6
     Scenario Outline: Verify the user is able to view the list of modifications filtered by sponsor organisation and modification submitted date
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
@@ -181,7 +181,6 @@ Feature: Receive Amendment - Staff dashboard/worklist
     #  3. Invalid IRAS ID + No Filters >>Click Search>>No results
     @NoResultsFound @InvalidIrasIdAndNoAdvancedFilters @Test9
     Scenario Outline: Verify the user can see no matching results found message on clicking search button after entering invalid iras id
-        # When I enter iras id in the search modifications page using '<Invalid_Iras_Id>'
         When I enter '<Invalid_Iras_Id>' into the search field
         And I capture the page screenshot
         And I click the 'Search' button on the 'Search_Modifications_Page'
@@ -198,7 +197,7 @@ Feature: Receive Amendment - Staff dashboard/worklist
             | Invalid_Iras_Id_Spaces_Prefix    |
             | Invalid_Iras_Id_Spaces_Seperator |
             | Invalid_Iras_Id_Blank            |
-    # | Invalid_Iras_Id_Zeros            |
+
 
 
     #   4. Invalid IRAS ID + filters(64 combinations) >>Apply Filters>>No results
@@ -354,7 +353,6 @@ Feature: Receive Amendment - Staff dashboard/worklist
     # • The search should begin after entering the first three characters.
     # § If more than three results are returned, only the first three should be displayed initially, with the rest accessible via a vertically scrollable list.
     # § If no results are found, the system must display an appropriate error message to the user.
-
     @SponsorOrganisationValidation @AdvancedFilters @jsEnabled @Test17
     Scenario Outline: Validate the sponsor organisation suggestion list in advanced filters when javascript is enabled
         And I click the 'Advanced_Filter' link on the 'Search_Modifications_Page'
@@ -404,11 +402,25 @@ Feature: Receive Amendment - Staff dashboard/worklist
             | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Text_Blank   | Sponsor_Organisation_Min_Char | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | Sponsor_Organisation_Text_Exactly_Five_Results | Field_Error_Sponsor_Organisation |
 
 
-
-
     #### Partial validation for all the text boxes>>Iras Id search validation
+    @viewListOfModifications @ValidIrasIdAndNoFilters @PartialSearchIrasID @Test19
+    Scenario Outline: Verify the user can view the list of modifications based on the entered valid iras id and the search performed
+        When I enter '<Valid_Iras_Id>' into the search field
+        And I capture the page screenshot
+        And I click the 'Search' button on the 'Search_Modifications_Page'
+        Then the system displays modification records matching the search criteria of '<Valid_Iras_Id>'
+        And I can see the list is sorted by default in the descending order of the 'Modification Id'
+        And I capture the page screenshot
+        Examples:
+            | Valid_Iras_Id             |
+            | Valid_Iras_Id_Nth         |
+            | Valid_Iras_Id_Nineteen    |
+            | Valid_Iras_Id_Twenty      |
+            | Valid_Iras_Id_TwentyOne   |
+            | Valid_Iras_Id_TwentyTwo   |
+            | Valid_Iras_Id_TwentyThree |
 
-    @viewListOfModifications @Pagination @skip
+    @viewListOfModifications @Pagination @Test20 @skip
     Scenario Outline: Verify the user can view the list of modifications by entering valid iras id, then click on search button and then selected advanced filters and click on apply filters button
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
@@ -416,8 +428,9 @@ Feature: Receive Amendment - Staff dashboard/worklist
         And I capture the page screenshot
         # add pagination steps here
         Examples:
-            | Advanced_Filters             |
-            | Advanced_Filters_Lead_Nation |
+            | Valid_Iras_Id       | Advanced_Filters             |
+            | Valid_Iras_Id_Zeros | Advanced_Filters_Lead_Nation |
+
 
 ###*****************************************************************************************************************************
 
