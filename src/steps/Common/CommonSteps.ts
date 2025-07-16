@@ -11,7 +11,12 @@ import {
 } from '../../utils/GenerateTestData';
 const { Given, When, Then } = createBdd(test);
 import * as userProfileGeneratedataConfig from '../../resources/test_data/user_administration/testdata_generator/user_profile_generate_data_config.json';
-import { confirmArrayNotNull, getAuthState, getCurrentTimeFormatted } from '../../utils/UtilFunctions';
+import {
+  confirmArrayNotNull,
+  confirmStringNotNull,
+  getAuthState,
+  getCurrentTimeFormatted,
+} from '../../utils/UtilFunctions';
 import { Locator } from 'playwright/test';
 import fs from 'fs';
 
@@ -635,7 +640,10 @@ When(
 
 Then(
   'the system displays no results found message if there is no {string} on the system that matches the search criteria',
-  async ({ commonItemsPage, userListReviewBodyPage, manageUsersPage, manageReviewBodiesPage }, entityType: string) => {
+  async (
+    { commonItemsPage, userListReviewBodyPage, manageUsersPage, manageReviewBodiesPage, searchModificationsPage },
+    entityType: string
+  ) => {
     const filteredSearchResults = await userListReviewBodyPage.getFilteredSearchResultsBeforeSearch(commonItemsPage);
     expect(await commonItemsPage.tableRows.count()).toBe(0);
     expect(filteredSearchResults).toEqual([]);
@@ -649,6 +657,17 @@ Then(
       headingLocator = manageReviewBodiesPage.no_results_heading;
       guidanceLocator = manageReviewBodiesPage.no_results_guidance_text;
       expectedHeading = manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.no_results_heading;
+      expectedGuidance =
+        manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.no_results_guidance_text;
+    } else if (entityType === 'modification record') {
+      const expectedResultCount =
+        searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.result_count_heading;
+      const actualResultCount = confirmStringNotNull(await searchModificationsPage.result_count.textContent());
+      expect(expectedResultCount).toBe(actualResultCount);
+      headingLocator = searchModificationsPage.no_results_heading;
+      guidanceLocator = manageReviewBodiesPage.no_results_guidance_text;
+      expectedHeading =
+        searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.no_results_heading;
       expectedGuidance =
         manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.no_results_guidance_text;
     } else {

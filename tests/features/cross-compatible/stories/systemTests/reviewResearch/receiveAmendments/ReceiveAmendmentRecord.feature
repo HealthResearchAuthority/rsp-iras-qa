@@ -8,10 +8,10 @@ Feature: Receive Amendment - Staff dashboard/worklist
 
     ##Scenario 1 -Happy Paths:
 
-    # 1. Valid IRAS ID + filters(64 combinations) >>Click Apply Filters>>Results displayed (some combinations can't give results) (Search button is not clicked)
+    # 1. Valid IRAS ID + filters(64 combinations) >>Click Apply Filters>>Results displayed (Search button is not clicked)
     ##Scenario 6 -Selected filters validation
     # Selected filters are displayed under active filters>>tags/labels for each filter validation
-    @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @Test1 @jsEnabled
+    @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @Test
     Scenario Outline: Verify the user is able to view the list of modifications by entering a valid IRAS ID, selecting the advanced filters, and clicking the 'Apply filters' button
         When I enter '<Valid_Iras_Id>' into the search field
         And I capture the page screenshot
@@ -27,37 +27,16 @@ Feature: Receive Amendment - Staff dashboard/worklist
         Examples:
             | Valid_Iras_Id             | Advanced_Filters             |
             | Valid_Iras_Id_Nth         | Advanced_Filters_Nth         |
-            | Valid_Iras_Id_One         | Advanced_Filters_One         |
-            | Valid_Iras_Id_Two         | Advanced_Filters_Two         |
-            | Valid_Iras_Id_Three       | Advanced_Filters_Three       |
-            | Valid_Iras_Id_Four        | Advanced_Filters_Four        |
-            | Valid_Iras_Id_Five        | Advanced_Filters_Five        |
-            | Valid_Iras_Id_Six         | Advanced_Filters_Six         |
-            | Valid_Iras_Id_Seven       | Advanced_Filters_Seven       |
-            | Valid_Iras_Id_Eight       | Advanced_Filters_Eight       |
-            | Valid_Iras_Id_Nine        | Advanced_Filters_Nine        |
-            | Valid_Iras_Id_Ten         | Advanced_Filters_Ten         |
-            | Valid_Iras_Id_Eleven      | Advanced_Filters_Eleven      |
-            | Valid_Iras_Id_Twelve      | Advanced_Filters_Tweleve     |
-            | Valid_Iras_Id_Thirteen    | Advanced_Filters_Thirteen    |
-            | Valid_Iras_Id_Fourteen    | Advanced_Filters_Fourteen    |
-            | Valid_Iras_Id_Fifteen     | Advanced_Filters_Fifteen     |
-            | Valid_Iras_Id_Sixteen     | Advanced_Filters_Sixteen     |
-            | Valid_Iras_Id_Seventeen   | Advanced_Filters_Seventeen   |
-            | Valid_Iras_Id_Eighteen    | Advanced_Filters_Eighteen    |
-            | Valid_Iras_Id_Nineteen    | Advanced_Filters_Nineteen    |
             | Valid_Iras_Id_Twenty      | Advanced_Filters_Twenty      |
             | Valid_Iras_Id_TwentyOne   | Advanced_Filters_TwentyOne   |
             | Valid_Iras_Id_TwentyTwo   | Advanced_Filters_TwentyTwo   |
             | Valid_Iras_Id_TwentyThree | Advanced_Filters_TwentyThree |
-    # | Valid_Iras_Id_One | Sponsor_Organisation_Text_Blank |
 
     # 2. Valid IRAS ID >>Click Search>>Results displayed>> Select Advanced Filters(64 combinations)>> Click Apply Filters>>Results displayed(filtered results)
     ##Scenario 6 -Selected filters validation
     # Selected filters are displayed under active filters>>tags/labels for each filter validation
-    @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @Test3
+    @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters
     Scenario Outline: Verify the user is able to view the list of modifications by entering valid iras id, then clicking on 'Search' button and then selecting advanced filters and clicking the 'Apply filters' button
-
         When I enter '<Valid_Iras_Id>' into the search field
         And I capture the page screenshot
         And I click the 'Search' button on the 'Search_Modifications_Page'
@@ -76,25 +55,6 @@ Feature: Receive Amendment - Staff dashboard/worklist
         Examples:
             | Valid_Iras_Id             | Advanced_Filters             |
             | Valid_Iras_Id_Nth         | Advanced_Filters_Nth         |
-            | Valid_Iras_Id_One         | Advanced_Filters_One         |
-            | Valid_Iras_Id_Two         | Advanced_Filters_Two         |
-            | Valid_Iras_Id_Three       | Advanced_Filters_Three       |
-            | Valid_Iras_Id_Four        | Advanced_Filters_Four        |
-            | Valid_Iras_Id_Five        | Advanced_Filters_Five        |
-            | Valid_Iras_Id_Six         | Advanced_Filters_Six         |
-            | Valid_Iras_Id_Seven       | Advanced_Filters_Seven       |
-            | Valid_Iras_Id_Eight       | Advanced_Filters_Eight       |
-            | Valid_Iras_Id_Nine        | Advanced_Filters_Nine        |
-            | Valid_Iras_Id_Ten         | Advanced_Filters_Ten         |
-            | Valid_Iras_Id_Eleven      | Advanced_Filters_Eleven      |
-            | Valid_Iras_Id_Twelve      | Advanced_Filters_Tweleve     |
-            | Valid_Iras_Id_Thirteen    | Advanced_Filters_Thirteen    |
-            | Valid_Iras_Id_Fourteen    | Advanced_Filters_Fourteen    |
-            | Valid_Iras_Id_Fifteen     | Advanced_Filters_Fifteen     |
-            | Valid_Iras_Id_Sixteen     | Advanced_Filters_Sixteen     |
-            | Valid_Iras_Id_Seventeen   | Advanced_Filters_Seventeen   |
-            | Valid_Iras_Id_Eighteen    | Advanced_Filters_Eighteen    |
-            | Valid_Iras_Id_Nineteen    | Advanced_Filters_Nineteen    |
             | Valid_Iras_Id_Twenty      | Advanced_Filters_Twenty      |
             | Valid_Iras_Id_TwentyOne   | Advanced_Filters_TwentyOne   |
             | Valid_Iras_Id_TwentyTwo   | Advanced_Filters_TwentyTwo   |
@@ -123,25 +83,6 @@ Feature: Receive Amendment - Staff dashboard/worklist
         Examples:
             | Valid_Iras_Id             | Advanced_Filters             |
             | Valid_Iras_Id_Nth         | Advanced_Filters_Nth         |
-            | Valid_Iras_Id_One         | Advanced_Filters_One         |
-            | Valid_Iras_Id_Two         | Advanced_Filters_Two         |
-            | Valid_Iras_Id_Three       | Advanced_Filters_Three       |
-            | Valid_Iras_Id_Four        | Advanced_Filters_Four        |
-            | Valid_Iras_Id_Five        | Advanced_Filters_Five        |
-            | Valid_Iras_Id_Six         | Advanced_Filters_Six         |
-            | Valid_Iras_Id_Seven       | Advanced_Filters_Seven       |
-            | Valid_Iras_Id_Eight       | Advanced_Filters_Eight       |
-            | Valid_Iras_Id_Nine        | Advanced_Filters_Nine        |
-            | Valid_Iras_Id_Ten         | Advanced_Filters_Ten         |
-            | Valid_Iras_Id_Eleven      | Advanced_Filters_Eleven      |
-            | Valid_Iras_Id_Twelve      | Advanced_Filters_Tweleve     |
-            | Valid_Iras_Id_Thirteen    | Advanced_Filters_Thirteen    |
-            | Valid_Iras_Id_Fourteen    | Advanced_Filters_Fourteen    |
-            | Valid_Iras_Id_Fifteen     | Advanced_Filters_Fifteen     |
-            | Valid_Iras_Id_Sixteen     | Advanced_Filters_Sixteen     |
-            | Valid_Iras_Id_Seventeen   | Advanced_Filters_Seventeen   |
-            | Valid_Iras_Id_Eighteen    | Advanced_Filters_Eighteen    |
-            | Valid_Iras_Id_Nineteen    | Advanced_Filters_Nineteen    |
             | Valid_Iras_Id_Twenty      | Advanced_Filters_Twenty      |
             | Valid_Iras_Id_TwentyOne   | Advanced_Filters_TwentyOne   |
             | Valid_Iras_Id_TwentyTwo   | Advanced_Filters_TwentyTwo   |
@@ -159,24 +100,6 @@ Feature: Receive Amendment - Staff dashboard/worklist
         Examples:
             | Valid_Iras_Id             |
             | Valid_Iras_Id_Nth         |
-            | Valid_Iras_Id_One         |
-            | Valid_Iras_Id_Two         |
-            | Valid_Iras_Id_Three       |
-            | Valid_Iras_Id_Four        |
-            | Valid_Iras_Id_Five        |
-            | Valid_Iras_Id_Six         |
-            | Valid_Iras_Id_Seven       |
-            | Valid_Iras_Id_Eight       |
-            | Valid_Iras_Id_Nine        |
-            | Valid_Iras_Id_Ten         |
-            | Valid_Iras_Id_Eleven      |
-            | Valid_Iras_Id_Twelve      |
-            | Valid_Iras_Id_Thirteen    |
-            | Valid_Iras_Id_Fourteen    |
-            | Valid_Iras_Id_Fifteen     |
-            | Valid_Iras_Id_Sixteen     |
-            | Valid_Iras_Id_Seventeen   |
-            | Valid_Iras_Id_Eighteen    |
             | Valid_Iras_Id_Nineteen    |
             | Valid_Iras_Id_Twenty      |
             | Valid_Iras_Id_TwentyOne   |
@@ -187,7 +110,7 @@ Feature: Receive Amendment - Staff dashboard/worklist
     #5. No IRAS ID+Filters(64 combinations)>>Click Apply Filters>>Results displayed
     ##Scenario 6 -Selected filters validation
     # Selected filters are displayed under active filters>>tags/labels for each filter validation
-    @viewListOfModifications @NoIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters
+    @viewListOfModifications @NoIrasIdAndAdvancedFilters
     Scenario Outline: Verify the user can view the list of modifications by selecting advanced filters and click on apply filters button
         When I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
@@ -201,7 +124,6 @@ Feature: Receive Amendment - Staff dashboard/worklist
         Examples:
             | Advanced_Filters             |
             | Advanced_Filters_Nth         |
-            | Advanced_Filters_One         |
             | Advanced_Filters_Two         |
             | Advanced_Filters_Three       |
             | Advanced_Filters_Four        |
@@ -212,18 +134,31 @@ Feature: Receive Amendment - Staff dashboard/worklist
             | Advanced_Filters_Nine        |
             | Advanced_Filters_Ten         |
             | Advanced_Filters_Eleven      |
-            | Advanced_Filters_Tweleve     |
-            | Advanced_Filters_Thirteen    |
             | Advanced_Filters_Fourteen    |
             | Advanced_Filters_Fifteen     |
             | Advanced_Filters_Sixteen     |
             | Advanced_Filters_Seventeen   |
             | Advanced_Filters_Eighteen    |
-            | Advanced_Filters_Nineteen    |
             | Advanced_Filters_Twenty      |
             | Advanced_Filters_TwentyOne   |
             | Advanced_Filters_TwentyTwo   |
             | Advanced_Filters_TwentyThree |
+
+    @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @Test
+    Scenario Outline: Verify the user is able to view the list of modifications filtered by sponsor organisation and modification submitted date
+        And I select advanced filters in the search modifications page using '<Advanced_Filters>'
+        And I capture the page screenshot
+        And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
+        And I capture the page screenshot
+        Then I can see the selected filters '<Advanced_Filters>' are displayed under active filters
+        And I capture the page screenshot
+        And I can see the list is sorted by default in the descending order of the 'Modification Id'
+        And I capture the page screenshot
+        Examples:
+            | Advanced_Filters          |
+            | Advanced_Filters_One      |
+            | Advanced_Filters_Tweleve  |
+            | Advanced_Filters_Thirteen |
 
     ##Scenario 2 -Unhappy paths:
 
@@ -271,13 +206,24 @@ Feature: Receive Amendment - Staff dashboard/worklist
         And the system displays no results found message if there is no 'modification record' on the system that matches the search criteria
         And I capture the page screenshot
         Examples:
-            | Invalid_Iras_Id     | Advanced_Filters     |
-            | Invalid_Iras_Id_One | Advanced_Filters_One |
+            | Invalid_Iras_Id                  | Advanced_Filters             |
+            | Invalid_IRAS_ID_Letters          | Advanced_Filters_Eleven      |
+            | Invalid_IRAS_ID_Symbols          | Advanced_Filters_Thirteen    |
+            | Invalid_IRAS_ID_Letters_Symbols  | Advanced_Filters_Fourteen    |
+            | Invalid_IRAS_ID_Min_Length       | Advanced_Filters_Fifteen     |
+            | Invalid_IRAS_ID_Leading_Zeros    | Advanced_Filters_Sixteen     |
+            | Invalid_IRAS_ID_Spaces           | Advanced_Filters_Seventeen   |
+            | Invalid_IRAS_ID_Spaces_Suffix    | Advanced_Filters_Eighteen    |
+            | Invalid_IRAS_ID_Spaces_Prefix    | Advanced_Filters_Twenty      |
+            | Invalid_IRAS_ID_Spaces_Seperator | Advanced_Filters_TwentyOne   |
+            | Invalid_IRAS_ID_Blank            | Advanced_Filters_TwentyTwo   |
+            | Invalid_IRAS_ID_Zeros            | Advanced_Filters_TwentyThree |
+
 
     #  5.  Valid IRAS ID + filters(combinations can't give results) >>Click Apply Filters>>No results (some combinations can't give results)
     ##Scenario 6 -Selected filters validation
     # Selected filters are displayed under active filters>>tags/labels for each filter validation
-    @NoResultsFound @ValidIrasIdAndAdvancedFilters @ActiveFilters
+    @NoResultsFound @ValidIrasIdAndAdvancedFilters
     Scenario Outline: Verify the user can see no matching results found message by entering invalid iras id, then selected advanced filters and click on apply filters button
         # When I enter iras id in the search modifications page using '<Valid_Iras_Id>'
         When I enter '<Valid_Iras_Id>' into the search field
@@ -290,8 +236,21 @@ Feature: Receive Amendment - Staff dashboard/worklist
         And the system displays no results found message if there is no 'modification record' on the system that matches the search criteria
         And I capture the page screenshot
         Examples:
-            | Valid_Iras_Id     | Advanced_Filters_No_results     |
-            | Valid_Iras_Id_One | Advanced_Filters_No_results_One |
+            | Valid_Iras_Id     | Advanced_Filters_No_results |
+            | Valid_Iras_Id_Nth | Advanced_Filters_Fifteen    |
+
+    @NoResultsFound
+    Scenario Outline: Verify the user can see no matching results found message by selecting advanced filters and click on apply filters button
+        And I select advanced filters in the search modifications page using '<Advanced_Filters>'
+        And I capture the page screenshot
+        And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
+        And I capture the page screenshot
+        Then I can see the selected filters '<Advanced_Filters>' are displayed under active filters
+        And the system displays no results found message if there is no 'modification record' on the system that matches the search criteria
+        And I capture the page screenshot
+        Examples:
+            | Advanced_Filters_No_results     |
+            | Advanced_Filters_No_Results_One |
 
     ##Scenario 4 -'Date Modification submitted' filter validation
     ### Scenario 4.1 -'Date Modification submitted' error validation
@@ -317,7 +276,7 @@ Feature: Receive Amendment - Staff dashboard/worklist
     ##Scenario 6.1 -Remove filters validation
     # Remove filters>>one by one on clicking 'x'/ all together by clicking 'Clear all filters'
     # The search results update accordingly
-    @viewListOfModifications @DefaultSorting @RemoveActiveFiltersOneByOne
+    @RemoveActiveFiltersOneByOne
     Scenario Outline: Verify the user can view the list of modifications by selecting advanced filters and click on apply filters button
         When I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
@@ -338,7 +297,7 @@ Feature: Receive Amendment - Staff dashboard/worklist
     ##Scenario 6.1 -Remove filters validation
     # Remove filters>>one by one on clicking 'x'/ all together by clicking 'Clear all filters'
     # The search results update accordingly
-    @viewListOfModifications @DefaultSorting @RemoveActiveFiltersAllTogether
+    @RemoveActiveFiltersAllTogether
     Scenario Outline: Verify the user can view the list of modifications by selecting advanced filters and click on apply filters button
         When I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
@@ -353,12 +312,12 @@ Feature: Receive Amendment - Staff dashboard/worklist
         Then the system displays no results found message if there is no 'modification record' on the system that matches the search criteria
         Examples:
             | Advanced_Filters     |
-            | Advanced_Filters_One |
+            | Advanced_Filters_Nth |
 
     ##Scenario 6.1 -Remove filters validation
     # Remove filters>>one by one on clicking 'x'/ all together by clicking 'Clear all filters'
     # The search results update accordingly
-    @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @RemoveActiveFiltersAllTogether
+    @RemoveActiveFiltersAllTogether
     Scenario Outline: Verify the user can view the list of modifications by entering valid iras id, then selected advanced filters and click on apply filters button
         # When I enter iras id in the search modifications page using '<Valid_Iras_Id>'
         When I enter '<Valid_Iras_Id>' into the search field
@@ -378,7 +337,7 @@ Feature: Receive Amendment - Staff dashboard/worklist
         And I can see the list is sorted by default in the descending order of the 'Modification Id'
         Examples:
             | Valid_Iras_Id     | Advanced_Filters     |
-            | Valid_Iras_Id_One | Advanced_Filters_One |
+            | Valid_Iras_Id_Nth | Advanced_Filters_Nth |
 
     ##Scenario 5 -'Sponsor organisation' filter validation
     # • The search should begin after entering the first three characters.
@@ -405,6 +364,7 @@ Feature: Receive Amendment - Staff dashboard/worklist
             | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_Hyphen      | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Hyphen      |
             | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_Start_Space | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Start_Space |
             | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_End_Space   | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space  |
+            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_End_Space   | Sponsor_Organisation_Text_Blank   | Sponsor_Organisation_Min_Char | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space  |
 
     @SponsorOrganisationValidation @AdvancedFilters @jsDisabled
     Scenario Outline: Validate the sponsor organisation suggestion list in advanced filters when javascript is disabled
@@ -430,6 +390,7 @@ Feature: Receive Amendment - Staff dashboard/worklist
             | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_Start_Space  | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Start_Space    | Field_Error_Sponsor_Organisation |
             | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_End_Space    | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space     | Field_Error_Sponsor_Organisation |
             | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | Sponsor_Organisation_Text_Exactly_Five_Results | Field_Error_Sponsor_Organisation |
+            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Text_Blank   | Sponsor_Organisation_Min_Char | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | Sponsor_Organisation_Text_Exactly_Five_Results | Field_Error_Sponsor_Organisation |
 
 
 

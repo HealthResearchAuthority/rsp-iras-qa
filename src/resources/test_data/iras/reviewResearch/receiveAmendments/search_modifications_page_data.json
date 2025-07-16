@@ -7,6 +7,7 @@
     "no_results_heading": "There are no matching results",
     "no_results_guidance_text": "Improve your search results by: removing filters double-checking your spelling using fewer keywords searching for something less specific",
     "advanced_filter_label": "Advanced filter",
+    "result_count_heading": " results",
     "chief_investigator_name_label": "Chief Investigator name",
     "chief_investigator_hint_text": "Enter the name of the Chief Investigator",
     "date_modification_submitted_label": "Date modification submitted",
@@ -24,7 +25,7 @@
     "modification_type_hint_text": "selected",
     "modification_type_checkbox": ["Minor modifications", "Modification of an important detail"],
     "short_project_title_label": "Short project title",
-    "short_project_title_hint_text": "Enter the name of short project title",
+    "short_project_title_hint_text": "Enter the name of the short project title",
     "sponsor_organisation_label": "Sponsor organisation",
     "sponsor_organisation_hint_text": "Type the name of the organisation or scroll through the list",
     "active_filters_label": "Active filters",
@@ -47,88 +48,64 @@
       "short_project_title_text": "Project 01",
       "sponsor_organisation_text": "COLD GENESYS INC"
     },
-    "Valid_Iras_Id_One": {
-      "iras_id_text": ""
+    "Advanced_Filters_No_Results_One": {
+      "date_modification_submitted_from_day_text": "01",
+      "date_modification_submitted_from_month_dropdown": "March",
+      "date_modification_submitted_from_year_text": "2025",
+      "date_modification_submitted_to_day_text": "01",
+      "date_modification_submitted_to_month_dropdown": "April",
+      "date_modification_submitted_to_year_text": "2024",
+      "lead_nation_checkbox": ["Scotland", "Wales"],
+      "sponsor_organisation_text": "L. MOLTENI & C. DEI FRATELLI ALITTI - SOCIETA' DI ESERCIZIO - S.P.A"
     },
     "Advanced_Filters_One": {
       "sponsor_organisation_text": "Eisai Co.,Ltd."
     },
 
-    "Valid_Iras_Id_Two": {
-      "iras_id_text": ""
-    },
     "Advanced_Filters_Two": {
       "short_project_title_text": "Short study title 17"
-    },
-
-    "Valid_Iras_Id_Three": {
-      "iras_id_text": ""
     },
     "Advanced_Filters_Three": {
       "modification_type_checkbox": ["Minor modifications"]
     },
 
-    "Valid_Iras_Id_Four": {
-      "iras_id_text": ""
-    },
     "Advanced_Filters_Four": {
       "lead_nation_checkbox": ["Scotland"]
     },
 
-    "Valid_Iras_Id_Five": {
-      "iras_id_text": ""
-    },
     "Advanced_Filters_Five": {
       "lead_nation_checkbox": ["Northern Ireland"],
       "sponsor_organisation_text": "Nottingham Trent University"
     },
 
-    "Valid_Iras_Id_Six": {
-      "iras_id_text": ""
-    },
     "Advanced_Filters_Six": {
       "lead_nation_checkbox": ["England"],
       "short_project_title_text": "Project 31"
     },
 
-    "Valid_Iras_Id_Seven": {
-      "iras_id_text": ""
-    },
     "Advanced_Filters_Seven": {
       "lead_nation_checkbox": ["Wales"],
       "short_project_title_text": "Study title 04",
       "sponsor_organisation_text": "ASHFORD AND ST PETER'S HOSPITALS NHS FOUNDATION TRUST"
     },
 
-    "Valid_Iras_Id_Eight": {
-      "iras_id_text": ""
-    },
     "Advanced_Filters_Eight": {
       "lead_nation_checkbox": ["England", "Northern Ireland"],
       "modification_type_checkbox": ["Modification of an important detail"]
     },
 
-    "Valid_Iras_Id_Nine": {
-      "iras_id_text": ""
-    },
     "Advanced_Filters_Nine": {
       "lead_nation_checkbox": ["England", "Scotland"],
       "modification_type_checkbox": ["Minor modifications", "Modification of an important detail"],
       "sponsor_organisation_text": "Academic Medical Center at the University of Amsterdam (Netherlands)"
     },
 
-    "Valid_Iras_Id_Ten": {
-      "iras_id_text": ""
-    },
     "Advanced_Filters_Ten": {
       "lead_nation_checkbox": ["England", "Wales"],
       "modification_type_checkbox": ["Modification of an important detail"],
       "short_project_title_text": "Project 13"
     },
 
-    "Valid_Iras_Id_Eleven": {
-      "iras_id_text": ""
-    },
     "Advanced_Filters_Eleven": {
       "lead_nation_checkbox": ["Northern Ireland", "Scotland"],
       "modification_type_checkbox": ["Modification of an important detail"],
@@ -136,28 +113,19 @@
       "sponsor_organisation_text": "AKL RESEARCH & DEVELOPMENT LIMITED"
     },
 
-    "Valid_Iras_Id_Twelve": {
-      "iras_id_text": ""
-    },
     "Advanced_Filters_Tweleve": {
       "date_modification_submitted_to_day_text": "3",
       "date_modification_submitted_to_month_dropdown": "January",
       "date_modification_submitted_to_year_text": "2000"
     },
 
-    "Valid_Iras_Id_Thirteen": {
-      "iras_id_text": ""
-    },
     "Advanced_Filters_Thirteen": {
       "date_modification_submitted_from_day_text": "03",
       "date_modification_submitted_from_month_dropdown": "January",
       "date_modification_submitted_from_year_text": "2000",
-      "sponsor_organisation_text": "EOS - CS (ETHICAL ONCOLOGY SCIENCE - CLINICAL STUDIES) S.R.L."
+      "sponsor_organisation_text": "AIREDALE NHS FOUNDATION TRUST"
     },
 
-    "Valid_Iras_Id_Fourteen": {
-      "iras_id_text": ""
-    },
     "Advanced_Filters_Fourteen": {
       "date_modification_submitted_from_day_text": "11",
       "date_modification_submitted_from_month_dropdown": "April",
@@ -168,9 +136,6 @@
       "lead_nation_checkbox": ["Northern Ireland", "Wales"]
     },
 
-    "Valid_Iras_Id_Fifteen": {
-      "iras_id_text": ""
-    },
     "Advanced_Filters_Fifteen": {
       "date_modification_submitted_from_day_text": "01",
       "date_modification_submitted_from_month_dropdown": "March",
@@ -182,24 +147,15 @@
       "sponsor_organisation_text": "L. MOLTENI & C. DEI FRATELLI ALITTI - SOCIETA' DI ESERCIZIO - S.P.A"
     },
 
-    "Valid_Iras_Id_Sixteen": {
-      "iras_id_text": ""
-    },
     "Advanced_Filters_Sixteen": {
       "chief_investigator_name_text": "Barry White"
     },
 
-    "Valid_Iras_Id_Seventeen": {
-      "iras_id_text": ""
-    },
     "Advanced_Filters_Seventeen": {
       "chief_investigator_name_text": "Dr. Isabella Fernández-Hernández",
       "lead_nation_checkbox": ["England", "Northern Ireland", "Scotland"]
     },
 
-    "Valid_Iras_Id_Eighteen": {
-      "iras_id_text": ""
-    },
     "Advanced_Filters_Eighteen": {
       "chief_investigator_name_text": "Dr. Isabella Fernández-Hernández",
       "date_modification_submitted_from_day_text": "10",
@@ -213,11 +169,6 @@
 
     "Valid_Iras_Id_Nineteen": {
       "iras_id_text": "9800020"
-    },
-    "Advanced_Filters_Nineteen": {
-      "chief_investigator_name_text": "",
-      "short_project_title_text": "",
-      "sponsor_organisation_text": ""
     },
 
     "Valid_Iras_Id_Twenty": {
@@ -295,11 +246,14 @@
     "Invalid_IRAS_ID_Blank": {
       "iras_id_text": ""
     },
-    "Invalid_IRAS_ID_zeros": {
+    "Invalid_IRAS_ID_Zeros": {
       "iras_id_text": "0000"
     },
     "Sponsor_Organisation_Invalid_Data": {
       "sponsor_organisation_text": "test invalid data"
+    },
+    "Sponsor_Organisation_Text_Blank": {
+      "sponsor_organisation_text": ""
     },
     "Sponsor_Organisation_Min_Char": {
       "sponsor_organisation_text": "nh"
@@ -321,9 +275,6 @@
     },
     "Sponsor_Organisation_Full_Text_Aalborg": {
       "sponsor_organisation_text": "Aalborg University Hospital"
-    },
-    "Sponsor_Organisation_Text_Blank": {
-      "sponsor_organisation_text": ""
     },
     "Sponsor_Organisation_Text_Partial_Brackets": {
       "sponsor_organisation_text": "(Sp"
