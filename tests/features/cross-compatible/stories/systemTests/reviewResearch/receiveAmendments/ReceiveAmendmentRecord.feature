@@ -319,7 +319,8 @@ Feature: Receive Amendment - Staff dashboard/worklist
         And I can see the list is sorted by default in the descending order of the 'Modification Id'
         And I capture the page screenshot
         And I click the 'Clear_All_Filters' link on the 'Search_Modifications_Page'
-        Then the system displays no results found message if there is no 'modification record' on the system that matches the search criteria
+        # no error message>> o results >>advanced filter closed>>
+        # Then the system displays no results found message if there is no 'modification record' on the system that matches the search criteria
         Examples:
             | Advanced_Filters     |
             | Advanced_Filters_Nth |
@@ -420,16 +421,47 @@ Feature: Receive Amendment - Staff dashboard/worklist
             | Valid_Iras_Id_TwentyTwo   |
             | Valid_Iras_Id_TwentyThree |
 
-    @viewListOfModifications @Pagination @Test20 @skip
-    Scenario Outline: Verify the user can view the list of modifications by entering valid iras id, then click on search button and then selected advanced filters and click on apply filters button
+    @ViewListOfModifications @Pagination @Test20 @ViewListOfModificationsPaginationFirstPage @ViewListOfModificationsPaginationPageNumber @ViewListOfModificationsPaginationNextLinkClick @skip
+    Scenario Outline: Verify pagination in the list of modifications page when user is on the first page and navigate through each page by clicking page number or by by clicking next link
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
         And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
-        # add pagination steps here
+        And I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
+        And I capture the page screenshot
+        And the default page size should be twenty
+        And the 'Next' button will be 'available' to the user
+        And the 'Previous' button will be 'not available' to the user
+        And the current page number should be visually highlighted to indicate the active page the user is on
+        And I capture the page screenshot
+        Then I sequentially navigate through each page by '<Navigation_Method>' from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+        And I capture the page screenshot
         Examples:
-            | Valid_Iras_Id       | Advanced_Filters             |
-            | Valid_Iras_Id_Zeros | Advanced_Filters_Lead_Nation |
+            | Navigation_Method       | Valid_Iras_Id       | Advanced_Filters             |
+            | clicking on page number | Valid_Iras_Id_Zeros | Advanced_Filters_Lead_Nation |
+            | clicking on next link   | Valid_Iras_Id_Zeros | Advanced_Filters_Lead_Nation |
+
+    @ViewListOfModifications @Pagination @Test21 @ViewListOfModificationsPaginationLastPage @ViewListOfModificationsPaginationPageNumber @ViewListOfModificationsPaginationPreviousLinkClick @skip
+    Scenario Outline: Verify pagination in the list of modifications page when user is on the last page and navigate through each page by clicking page number or by by clicking next link
+        And I select advanced filters in the search modifications page using '<Advanced_Filters>'
+        And I capture the page screenshot
+        And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
+        And I capture the page screenshot
+        And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
+        And I capture the page screenshot
+        And the 'Previous' button will be 'available' to the user
+        And the 'Next' button will be 'not available' to the user
+        And I capture the page screenshot
+        Then I sequentially navigate through each page by '<Navigation_Method>' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+        And I capture the page screenshot
+        Examples:
+            | Navigation_Method         | Valid_Iras_Id       | Advanced_Filters             |
+            | clicking on page number   | Valid_Iras_Id_Zeros | Advanced_Filters_Lead_Nation |
+            | clicking on previous link | Valid_Iras_Id_Zeros | Advanced_Filters_Lead_Nation |
+
+
+
+
 
 
 ###*****************************************************************************************************************************
