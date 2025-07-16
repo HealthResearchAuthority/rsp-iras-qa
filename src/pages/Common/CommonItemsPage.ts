@@ -620,9 +620,19 @@ export default class CommonItemsPage {
     return false;
   }
 
-  async validateSearchResultsMultipleWordsSearchKey(results: string[], searchTerms: string[]) {
-    const matchesSearchTerm = (text: string) =>
-      searchTerms.some((term) => text.toLowerCase().includes(term.toLowerCase()));
+  // async validateSearchResultsMultipleWordsSearchKey(results: string[], searchTerms: string[]) {
+  //   const matchesSearchTerm = (text: string) =>
+  //     searchTerms.some((term) => text.toLowerCase().includes(term.toLowerCase()));
+  //   const resultsAfterFiltering = confirmArrayNotNull(results).filter(matchesSearchTerm);
+  //   return resultsAfterFiltering;
+  // }
+
+  async validateSearchResultsMultipleWordsSearchKey(
+    results: string[],
+    searchTerms: string[] | string
+  ): Promise<string[]> {
+    const terms = Array.isArray(searchTerms) ? searchTerms : [searchTerms];
+    const matchesSearchTerm = (text: string) => terms.some((term) => text.toLowerCase().includes(term.toLowerCase()));
     const resultsAfterFiltering = confirmArrayNotNull(results).filter(matchesSearchTerm);
     return resultsAfterFiltering;
   }
@@ -755,8 +765,13 @@ export default class CommonItemsPage {
     return term.trim().split(/\s+/);
   }
 
-  async filterResults(results: string[], searchTerms: string[]) {
-    return results.filter((result) => searchTerms.every((term) => result.toLowerCase().includes(term.toLowerCase())));
+  // async filterResults(results: string[], searchTerms: string[]) {
+  //   return results.filter((result) => searchTerms.every((term) => result.toLowerCase().includes(term.toLowerCase())));
+  // }
+  async filterResults(results: string[], searchTerms: string[] | string): Promise<string[]> {
+    const terms = Array.isArray(searchTerms) ? searchTerms : [searchTerms];
+
+    return results.filter((result) => terms.every((term) => result.toLowerCase().includes(term.toLowerCase())));
   }
 
   async clearCheckboxes(dataset: any, keys: string[], commonItemsPage: any, createUserProfilePage: any) {
