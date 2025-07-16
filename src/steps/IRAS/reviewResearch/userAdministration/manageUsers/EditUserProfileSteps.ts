@@ -1,6 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { test, expect } from '../../../../../hooks/CustomFixtures';
-import { generateUniqueEmail } from '../../../../../utils/UtilFunctions';
+import { generateUniqueEmail, generateUniqueValue, generatePhoneNumber } from '../../../../../utils/UtilFunctions';
 import { Locator } from 'playwright/test';
 
 const { Then, When } = createBdd(test);
@@ -33,6 +33,10 @@ When(
     let keyIndex = 1;
     let keyValue: any;
     let uniqueEmail: any;
+    let uniqueTitle: any;
+    let uniqueJobTitle: any;
+    let uniqueTelephoneNumber: any;
+
     if (fieldName.toLowerCase() == 'country' || fieldName.toLowerCase() == 'role') {
       const datasetNameClear: string = 'Edit_User_Profile_Page';
       const clearDataset = editUserProfilePage.editUserProfilePageTestData[datasetNameClear];
@@ -48,6 +52,20 @@ When(
           uniqueEmail = await generateUniqueEmail(dataset[key], prefix);
           const locator: Locator = editUserProfilePage[key];
           await locator.fill(uniqueEmail);
+        } else if (key == 'title_text') {
+          const prefix = dataset.title_text;
+          uniqueTitle = await generateUniqueValue('', prefix);
+          const locator: Locator = editUserProfilePage[key];
+          await locator.fill(uniqueTitle);
+        } else if (key == 'job_title_text') {
+          const prefix = dataset.job_title_text;
+          uniqueJobTitle = await generateUniqueValue('', prefix);
+          const locator: Locator = editUserProfilePage[key];
+          await locator.fill(uniqueJobTitle);
+        } else if (key == 'telephone_text') {
+          uniqueTelephoneNumber = await generatePhoneNumber();
+          const locator: Locator = editUserProfilePage[key];
+          await locator.fill(uniqueTelephoneNumber);
         } else {
           await commonItemsPage.fillUIComponent(dataset, key, editUserProfilePage);
         }
@@ -56,7 +74,7 @@ When(
     }
     switch (fieldName.toLowerCase()) {
       case 'title':
-        await userProfilePage.setNewTitle(keyValue);
+        await userProfilePage.setNewTitle(uniqueTitle);
         break;
       case 'first_name':
         await userProfilePage.setNewFirstName(keyValue);
@@ -68,13 +86,13 @@ When(
         await userProfilePage.setNewEmail(uniqueEmail);
         break;
       case 'telephone':
-        await userProfilePage.setNewTelephone(keyValue);
+        await userProfilePage.setNewTelephone(uniqueTelephoneNumber);
         break;
       case 'organisation':
         await userProfilePage.setNewOrganisation(keyValue);
         break;
       case 'job_title':
-        await userProfilePage.setNewJobTitle(keyValue);
+        await userProfilePage.setNewJobTitle(uniqueJobTitle);
         break;
       case 'country':
         await userProfilePage.setNewCountries(keyValue);
