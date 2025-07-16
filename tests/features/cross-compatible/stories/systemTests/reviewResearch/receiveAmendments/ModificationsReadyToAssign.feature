@@ -1,4 +1,4 @@
-@ModificationsReadyToAssign @FrontStageUser @SystemTest @rsp4040 @pagination
+@ModificationsReadyToAssign @FrontStageUser @SystemTest @rsp4040 @rsp4015
 Feature: Modifications Tasklist page that displays modifications ready to be assigned   
    
     Background:
