@@ -13,10 +13,10 @@
     "role_label": "Role",
     "committee_label": "Committee",
     "role_checkbox": [
-      "operations",
-      "reviewer",
-      "user",
-      "system administrator"
+      "Operations",
+      "Reviewer",
+      "User",
+      "System administrator"
     ],
     "country_label": "Country",
     "country_checkbox": [
@@ -27,10 +27,10 @@
     ],
     "access_required_label": "Access required",
     "access_required_checkbox": [
-      "Study Wide Review",
-      "Research Ethics Committee",
+      "Study wide review",
+      "Research ethics committee",
       "CAG",
-      "Technical Assurance"
+      "Technical assurance"
     ],
     "review_body_label": "Review body"
   },
@@ -96,15 +96,15 @@
   },
   "Create_User_Profile": {
     "email_address_prefix": "QAAutomation",
-    "email_address_unique": "QAAutomation20250624175838618hscrd@health.org",
+    "email_address_unique": "QAAutomation20250716230624153hscrd@health.org",
     "Role_Operations": {
       "role_checkbox": [
-        "operations"
+        "Operations"
       ]
     },
     "Role_Not_Operations": {
       "role_checkbox": [
-        "reviewer"
+        "Reviewer"
       ]
     },
     "Label_Texts_Role_Operations": {
@@ -121,8 +121,8 @@
       "organisation_text": "QA Automation HRA Role_Operations",
       "job_title_text": "Sr.Reviewer Role_Operations",
       "role_checkbox": [
-        "operations",
-        "system administrator"
+        "Operations",
+        "System administrator"
       ],
       "country_checkbox": [
         "England",
@@ -131,10 +131,10 @@
         "Wales"
       ],
       "access_required_checkbox": [
-        "Study Wide Review",
-        "Research Ethics Committee",
+        "Study wide review",
+        "Research ethics committee",
         "CAG",
-        "Technical Assurance"
+        "Technical assurance"
       ]
     },
     "Valid_Data_In_All_Mandatory_Fields_Role_Operations": {
@@ -142,7 +142,7 @@
       "last_name_text": "Test Last Name Role_Operations",
       "email_address_text": "hscrd@health.org",
       "role_checkbox": [
-        "operations"
+        "Operations"
       ],
       "country_checkbox": [
         "England",
@@ -151,10 +151,10 @@
         "Wales"
       ],
       "access_required_checkbox": [
-        "Study Wide Review",
-        "Research Ethics Committee",
+        "Study wide review",
+        "Research ethics committee",
         "CAG",
-        "Technical Assurance"
+        "Technical assurance"
       ]
     },
     "Valid_Data_In_All_Mandatory_Fields_Role_Operations_Another": {
@@ -162,13 +162,13 @@
       "last_name_text": "Test Last Name Role_Operations_Another",
       "email_address_text": "hscrd@health.org",
       "role_checkbox": [
-        "operations"
+        "Operations"
       ],
       "country_checkbox": [
         "England"
       ],
       "access_required_checkbox": [
-        "Research Ethics Committee"
+        "Research ethics committee"
       ]
     },
     "Valid_Data_In_All_Fields_Role_Reviewer": {
@@ -180,8 +180,8 @@
       "organisation_text": "QA Automation HRA Role_Reviewer",
       "job_title_text": "Sr.Reviewer Role_Reviewer",
       "role_checkbox": [
-        "reviewer",
-        "system administrator"
+        "Reviewer",
+        "System administrator"
       ]
     },
     "Valid_Data_In_All_Mandatory_Fields_Role_Reviewer": {
@@ -189,7 +189,7 @@
       "last_name_text": "Test Last Name Role_Operations",
       "email_address_text": "hscrd@health.org",
       "role_checkbox": [
-        "reviewer"
+        "Reviewer"
       ]
     },
     "Valid_Data_In_All_Mandatory_Fields_Role_Reviewer_Another": {
@@ -197,7 +197,7 @@
       "last_name_text": "Test Last Name Role_Operations_Another",
       "email_address_text": "hscrd@health.org",
       "role_checkbox": [
-        "reviewer"
+        "Reviewer"
       ]
     },
     "Valid_Data_In_All_Fields_Role_Operations_Another": {
@@ -209,15 +209,15 @@
       "organisation_text": "QA Automation HRA Role_Operations_Another",
       "job_title_text": "Sr.Reviewer Role_Operations_Another",
       "role_checkbox": [
-        "operations",
-        "user"
+        "Operations",
+        "User"
       ],
       "country_checkbox": [
         "England",
         "Scotland"
       ],
       "access_required_checkbox": [
-        "Research Ethics Committee",
+        "Research ethics committee",
         "CAG"
       ]
     },
@@ -230,8 +230,8 @@
       "organisation_text": "QA Automation HRA Role_Reviewer_Another",
       "job_title_text": "Sr.Reviewer Role_Reviewer_Another",
       "role_checkbox": [
-        "reviewer",
-        "user"
+        "Reviewer",
+        "User"
       ]
     },
     "Valid_Data_All_Roles": {
@@ -243,16 +243,16 @@
       "organisation_text": "QA Automation HRA Role_All",
       "job_title_text": "Sr.Reviewer Role_All",
       "role_checkbox": [
-        "operations",
-        "reviewer",
-        "user",
-        "system administrator"
+        "Operations",
+        "Reviewer",
+        "User",
+        "System administrator"
       ],
       "country_checkbox": [
         "Wales"
       ],
       "access_required_checkbox": [
-        "Research Ethics Committee"
+        "Research ethics committee"
       ]
     },
     "Valid_Data_No_Roles": {
@@ -408,8 +408,8 @@
       "organisation_text": "QA Automation HRA Role_Operations",
       "job_title_text": "Sr.Reviewer Role_Operations",
       "role_checkbox": [
-        "operations",
-        "system administrator"
+        "Operations",
+        "System administrator"
       ],
       "country_checkbox": [
         "England",
@@ -418,10 +418,10 @@
         "Wales"
       ],
       "access_required_checkbox": [
-        "Study Wide Review",
-        "Research Ethics Committee",
+        "Study wide review",
+        "Research ethics committee",
         "CAG",
-        "Technical Assurance"
+        "Technical assurance"
       ]
     },
     "Duplicate_Email_Role_Not_Operations": {
@@ -433,7 +433,7 @@
       "organisation_text": "QA Automation HRA Role_Operations",
       "job_title_text": "Sr.Reviewer Role_Operations",
       "role_checkbox": [
-        "system administrator"
+        "System administrator"
       ]
     },
     "Missing_Mandatory_Fields_Role_Not_Operations": {
@@ -446,7 +446,7 @@
       "last_name_text": "",
       "email_address_text": "",
       "role_checkbox": [
-        "operations"
+        "Operations"
       ]
     },
     "Missing_Mandatory_Field_First_Name_Role_Not_Operations": {
@@ -458,8 +458,8 @@
       "organisation_text": "QA Automation HRA Role_Reviewer",
       "job_title_text": "Sr.Reviewer Role_Reviewer",
       "role_checkbox": [
-        "reviewer",
-        "system administrator"
+        "Reviewer",
+        "System administrator"
       ]
     },
     "Missing_Mandatory_Field_Last_Name_Role_Not_Operations": {
@@ -471,8 +471,8 @@
       "organisation_text": "QA Automation HRA Role_Reviewer",
       "job_title_text": "Sr.Reviewer Role_Reviewer",
       "role_checkbox": [
-        "reviewer",
-        "system administrator"
+        "Reviewer",
+        "System administrator"
       ]
     },
     "Missing_Mandatory_Field_Email_Address_Role_Not_Operations": {
@@ -484,8 +484,8 @@
       "organisation_text": "QA Automation HRA Role_Reviewer",
       "job_title_text": "Sr.Reviewer Role_Reviewer",
       "role_checkbox": [
-        "reviewer",
-        "system administrator"
+        "Reviewer",
+        "System administrator"
       ]
     },
     "Missing_Mandatory_Field_Country_Role_Operations": {
@@ -497,10 +497,10 @@
       "organisation_text": "QA Automation HRA Role_Reviewer",
       "job_title_text": "Sr.Reviewer Role_Reviewer",
       "role_checkbox": [
-        "operations"
+        "Operations"
       ],
       "access_required_checkbox": [
-        "Research Ethics Committee",
+        "Research ethics committee",
         "CAG"
       ]
     },
@@ -513,7 +513,7 @@
       "organisation_text": "QA Automation HRA Role_Reviewer",
       "job_title_text": "Sr.Reviewer Role_Reviewer",
       "role_checkbox": [
-        "operations"
+        "Operations"
       ],
       "country_checkbox": [
         "England",
