@@ -9,5 +9,7 @@
   "default_page_size": "20",
   "previous_button": "Previous   page",
   "heading": "Access Denied",
-  "guidance_text": "You do not have access to this resource"
+  "guidance_text": "You do not have access to this resource",
+  "advanced_filter_label": "Advanced filter",
+  "result_count_heading": " results"
 }
