@@ -1,5 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../../hooks/CustomFixtures';
+import dateTimeRelatedData from '../../../../../resources/test_data/common/date_time_related_data.json';
 const { When, Then } = createBdd(test);
 
 When('I update user profile with {string}', async ({ commonItemsPage, editUserProfilePage }, datasetName: string) => {
@@ -100,7 +101,7 @@ When(
 When(
   'I validate the last logged in is displayed blank for the new user who has not yet logged in to the application',
   async ({ manageUsersPage }) => {
-    expect(await manageUsersPage.last_logged_in_from_list_label.textContent()).toBe('');
+    expect(manageUsersPage.last_logged_in_from_list_label).toBeEmpty();
   }
 );
 
@@ -118,14 +119,20 @@ When('I keep note of the current login date', async ({ manageUsersPage }) => {
   }).format(today);
   manageUsersPage.setLastLoggedInDateFull(formattedDateFull);
   manageUsersPage.setLastLoggedInDateTruncated(formattedDateTruncated);
+  manageUsersPage.setLastLoggedInHours(today.getHours());
 });
 
 When(
   'I validate the last logged in is displayed as truncated date in manage users page',
   async ({ manageUsersPage }) => {
-    expect(await manageUsersPage.last_logged_in_from_list_label.textContent()).toBe(
-      manageUsersPage.getLastLoggedInDateTruncated()
+    expect(manageUsersPage.last_logged_in_from_list_label).toContainText(
+      `${manageUsersPage.getLastLoggedInDateTruncated()} ${dateTimeRelatedData.at}`
     );
+    if (manageUsersPage.getLastLoggedInHours() >= 12) {
+      expect(manageUsersPage.last_logged_in_from_list_label).toContainText(`${dateTimeRelatedData.afternoon}`);
+    } else {
+      expect(manageUsersPage.last_logged_in_from_list_label).toContainText(`${dateTimeRelatedData.morning}`);
+    }
   }
 );
 

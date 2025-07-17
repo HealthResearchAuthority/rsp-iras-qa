@@ -1,5 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../hooks/CustomFixtures';
+import dateTimeRelatedData from '../../resources/test_data/common/date_time_related_data.json';
 
 const { Given, Then } = createBdd(test);
 
@@ -40,5 +41,10 @@ Then('I can see the workspaces in my account home page for {string}', async ({ h
 });
 
 Then('I validate the last logged in is displayed as full date in home page', async ({ manageUsersPage, homePage }) => {
-  expect(await homePage.lastLoggedIn.textContent()).toContain(manageUsersPage.getLastLoggedInDateFull());
+  expect(homePage.lastLoggedIn).toContainText(`${manageUsersPage.getLastLoggedInDateFull()} ${dateTimeRelatedData.at}`);
+  if (manageUsersPage.getLastLoggedInHours() >= 12) {
+    expect(homePage.lastLoggedIn).toContainText(`${dateTimeRelatedData.afternoon} ${dateTimeRelatedData.uk_time}`);
+  } else {
+    expect(homePage.lastLoggedIn).toContainText(`${dateTimeRelatedData.morning} ${dateTimeRelatedData.uk_time}`);
+  }
 });
