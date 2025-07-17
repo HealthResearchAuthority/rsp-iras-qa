@@ -21,14 +21,14 @@
   },
   "Missing_Mandatory_Fields_Role_Not_Operations_Error": {
     "email_address_text": "Enter an email address",
-    "last_name_text": "Enter a last name",
-    "first_name_text": "Enter a first name"
+    "first_name_text": "Enter a first name",
+    "last_name_text": "Enter a last name"
   },
   "Missing_Mandatory_Fields_Role_Operations_Error": {
     "email_address_text": "Enter an email address",
     "country_checkbox": "You must provide a country",
-    "last_name_text": "Enter a last name",
     "first_name_text": "Enter a first name",
+    "last_name_text": "Enter a last name",
     "access_required_checkbox": "You must provide the access required"
   },
   "Missing_Mandatory_Field_First_Name_Role_Not_Operations_Error": {
@@ -50,9 +50,9 @@
     "email_address_text": "Email address must be 250 characters or less",
     "title_text": "Title must be 250 characters or less",
     "job_title_text": "Job title must be 250 characters or less",
-    "last_name_text": "Last name must be 250 characters or less",
     "first_name_text": "First name must be 250 characters or less",
     "telephone_text": "Telephone must be 11 digits or less",
+    "last_name_text": "Last name must be 250 characters or less",
     "organisation_text": "Organisation must be 250 characters or less"
   },
   "Invalid_Character_Limit_Field_Email_Address_Error": {
@@ -78,7 +78,7 @@
   },
   "Create_User_Profile": {
     "email_address_prefix": "QAAutomation",
-    "email_address_unique": "QAAutomation20250715141425956hscrd@health.org",
+    "email_address_unique": "QAAutomation20250717013803455hscrd@health.org",
     "Role_Operations": {
       "role_checkbox": ["Operations"]
     },
