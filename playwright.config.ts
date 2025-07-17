@@ -71,7 +71,7 @@ const config: PlaywrightTestConfig = {
         launchOptions: {
           slowMo: 0,
         },
-        javaScriptEnabled: true,
+        javaScriptEnabled: false,
       },
     },
   ],
