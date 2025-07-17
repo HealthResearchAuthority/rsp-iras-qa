@@ -68,6 +68,8 @@ export default class CommonItemsPage {
   readonly pagination_results: Locator;
   readonly pagination_items: Locator;
   readonly pageLinks: Locator;
+  readonly advanced_filter_chevron: Locator;
+  readonly result_count: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -138,6 +140,13 @@ export default class CommonItemsPage {
     this.alert_box_headings = this.alert_box.getByRole('heading');
     this.alert_box_list = this.alert_box.getByRole('list');
     this.alert_box_list_items = this.alert_box.getByRole('listitem');
+    this.advanced_filter_chevron = this.page.getByRole('button', {
+      name: this.commonTestData.advanced_filter_label,
+    });
+    this.result_count = this.advanced_filter_chevron
+      .locator('..')
+      .getByRole('heading', { level: 2 })
+      .getByText(this.commonTestData.result_count_heading);
   }
 
   //Page Methods
@@ -658,11 +667,12 @@ export default class CommonItemsPage {
   }
 
   async getTotalItems() {
-    const paginationResults = await this.getPaginationResults();
-    const paginationResultsParts: string[] = paginationResults.split(' results');
-    const paginationResultsPartsOne: string[] = paginationResultsParts[0].split('Showing ');
-    const paginationResultsPartsTwo: string[] = paginationResultsPartsOne[1].split(' of ');
-    const totalItems = parseInt(paginationResultsPartsTwo[1], 10);
+    // const paginationResults = await this.getPaginationResults();
+    // const paginationResultsParts: string[] = paginationResults.split(' results');
+    // const paginationResultsPartsOne: string[] = paginationResultsParts[0].split('Showing ');
+    // const paginationResultsPartsTwo: string[] = paginationResultsPartsOne[1].split(' of ');
+    // const totalItems = parseInt(paginationResultsPartsTwo[1], 10);
+    const totalItems = parseInt(confirmStringNotNull(await this.result_count.textContent()).split(' ')[0], 10);
     return totalItems;
   }
   async getItemsPerPage() {

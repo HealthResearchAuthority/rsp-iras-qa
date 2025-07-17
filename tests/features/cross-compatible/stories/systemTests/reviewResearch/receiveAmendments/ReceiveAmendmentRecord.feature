@@ -319,7 +319,7 @@ Feature: Receive Amendment - Staff dashboard/worklist
         And I can see the list is sorted by default in the descending order of the 'Modification Id'
         And I capture the page screenshot
         And I click the 'Clear_All_Filters' link on the 'Search_Modifications_Page'
-        # no error message>> o results >>advanced filter closed>>
+        # All the active filters are removed and no error message>> o results >>advanced filter closed>>
         # Then the system displays no results found message if there is no 'modification record' on the system that matches the search criteria
         Examples:
             | Advanced_Filters     |
@@ -330,7 +330,6 @@ Feature: Receive Amendment - Staff dashboard/worklist
     # The search results update accordingly
     @RemoveActiveFiltersAllTogether @Test16
     Scenario Outline: Verify the user can view the list of modifications by entering valid iras id, then selected advanced filters and click on apply filters button
-        # When I enter iras id in the search modifications page using '<Valid_Iras_Id>'
         When I enter '<Valid_Iras_Id>' into the search field
         And I capture the page screenshot
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
@@ -421,7 +420,7 @@ Feature: Receive Amendment - Staff dashboard/worklist
             | Valid_Iras_Id_TwentyTwo   |
             | Valid_Iras_Id_TwentyThree |
 
-    @ViewListOfModifications @Pagination @Test20 @ViewListOfModificationsPaginationFirstPage @ViewListOfModificationsPaginationPageNumber @ViewListOfModificationsPaginationNextLinkClick @skip
+    @ViewListOfModifications @Pagination @Test20 @ViewListOfModificationsPaginationFirstPage @ViewListOfModificationsPaginationPageNumber @ViewListOfModificationsPaginationNextLinkClick
     Scenario Outline: Verify pagination in the list of modifications page when user is on the first page and navigate through each page by clicking page number or by by clicking next link
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
