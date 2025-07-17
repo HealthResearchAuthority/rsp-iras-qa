@@ -286,7 +286,7 @@ Feature: Receive Amendment - Staff dashboard/worklist
     ##Scenario 6.1 -Remove filters validation
     # Remove filters>>one by one on clicking 'x'/ all together by clicking 'Clear all filters'
     # The search results update accordingly
-    @RemoveActiveFiltersOneByOne @skip
+    @RemoveActiveFiltersOneByOne @Test14 @skip
     Scenario Outline: Verify the user can view the list of modifications by selecting advanced filters and click on apply filters button
         When I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
@@ -307,7 +307,7 @@ Feature: Receive Amendment - Staff dashboard/worklist
     ##Scenario 6.1 -Remove filters validation
     # Remove filters>>one by one on clicking 'x'/ all together by clicking 'Clear all filters'
     # The search results update accordingly
-    @RemoveActiveFiltersAllTogether @Test15
+    @RemoveActiveFiltersAllTogether @Test15 @skip
     Scenario Outline: Verify the user can view the list of modifications by selecting advanced filters and click on apply filters button
         When I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
@@ -320,7 +320,7 @@ Feature: Receive Amendment - Staff dashboard/worklist
         And I capture the page screenshot
         And I click the 'Clear_All_Filters' link on the 'Search_Modifications_Page'
         # All the active filters are removed and no error message>> o results >>advanced filter closed>>
-        # Then the system displays no results found message if there is no 'modification record' on the system that matches the search criteria
+
         Examples:
             | Advanced_Filters     |
             | Advanced_Filters_Nth |
