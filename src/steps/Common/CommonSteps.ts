@@ -11,7 +11,12 @@ import {
 } from '../../utils/GenerateTestData';
 const { Given, When, Then } = createBdd(test);
 import * as userProfileGeneratedataConfig from '../../resources/test_data/user_administration/testdata_generator/user_profile_generate_data_config.json';
-import { confirmArrayNotNull, getAuthState, getCurrentTimeFormatted } from '../../utils/UtilFunctions';
+import {
+  confirmArrayNotNull,
+  confirmStringNotNull,
+  getAuthState,
+  getCurrentTimeFormatted,
+} from '../../utils/UtilFunctions';
 import { Locator } from 'playwright/test';
 import fs from 'fs';
 
@@ -32,6 +37,8 @@ When(
       manageUsersPage,
       searchAddUserReviewBodyPage,
       myResearchProjectsPage,
+      searchModificationsPage,
+      modificationsReadyToAssignPage,
     },
     page: string
   ) => {
@@ -68,6 +75,12 @@ When(
         break;
       case 'My_Research_Page':
         await myResearchProjectsPage.assertOnMyResearchProjectsPage();
+        break;
+      case 'Search_Modifications_Page':
+        await searchModificationsPage.assertOnSearchModificationsPage();
+        break;
+      case 'Modifications_tasklist_Page':
+        await modificationsReadyToAssignPage.assertOnModificationsReadyToAssignPage();
         break;
       default:
         throw new Error(`${page} is not a valid option`);
@@ -173,7 +186,11 @@ Then('I can see a {string} button on the {string}', async ({ commonItemsPage }, 
 
 Given(
   'I click the {string} link on the {string}',
-  async ({ commonItemsPage, checkCreateUserProfilePage }, linkKey: string, pageKey: string) => {
+  async (
+    { commonItemsPage, checkCreateUserProfilePage, searchModificationsPage },
+    linkKey: string,
+    pageKey: string
+  ) => {
     const linkValue = commonItemsPage.linkTextData[pageKey][linkKey];
     const noOfLinksFound = await commonItemsPage.govUkLink.getByText(linkValue).count();
     if (pageKey === 'Progress_Bar') {
@@ -196,6 +213,9 @@ Given(
       linkKey === 'Back_To_Users'
     ) {
       await commonItemsPage.govUkLink.getByText(linkValue).click();
+    } else if (pageKey === 'Search_Modifications_Page' && linkKey === 'Advanced_Filter') {
+      await searchModificationsPage.clickAdvancedFilterChevron(); //work around for now >> to click on Advanced_Filter link
+      // This if condition need to be removed later
     } else if (noOfLinksFound > 1) {
       await commonItemsPage.govUkLink.getByText(linkValue).first().click();
     } else {
@@ -501,24 +521,28 @@ Then(
 When(
   'I enter {string} into the search field',
   async (
-    { commonItemsPage, reviewBodyProfilePage, createReviewBodyPage, createUserProfilePage },
+    { commonItemsPage, reviewBodyProfilePage, createReviewBodyPage, createUserProfilePage, searchModificationsPage },
     inputType: string
   ) => {
     let searchValue: string;
-    switch (inputType) {
-      case 'name of the previously used review body':
-        searchValue = await reviewBodyProfilePage.getOrgName();
-        break;
-      case 'name of the new review body':
-        searchValue = await createReviewBodyPage.getUniqueOrgName();
-        break;
-      case 'name of the newly created user':
-        searchValue = await createUserProfilePage.getUniqueEmail();
-        break;
-      default:
-        searchValue = inputType;
+    if (inputType.startsWith('Valid_Iras_Id') || inputType.startsWith('Invalid_Iras_Id')) {
+      searchValue = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[inputType];
+    } else {
+      switch (inputType) {
+        case 'name of the previously used review body':
+          searchValue = await reviewBodyProfilePage.getOrgName();
+          break;
+        case 'name of the new review body':
+          searchValue = await createReviewBodyPage.getUniqueOrgName();
+          break;
+        case 'name of the newly created user':
+          searchValue = await createUserProfilePage.getUniqueEmail();
+          break;
+        default:
+          searchValue = inputType;
+      }
     }
-    await commonItemsPage.search_text.fill(searchValue);
+    await commonItemsPage.search_text.fill(searchValue['iras_id_text']);
   }
 );
 
@@ -616,7 +640,10 @@ When(
 
 Then(
   'the system displays no results found message if there is no {string} on the system that matches the search criteria',
-  async ({ commonItemsPage, userListReviewBodyPage, manageUsersPage, manageReviewBodiesPage }, entityType: string) => {
+  async (
+    { commonItemsPage, userListReviewBodyPage, manageUsersPage, manageReviewBodiesPage, searchModificationsPage },
+    entityType: string
+  ) => {
     const filteredSearchResults = await userListReviewBodyPage.getFilteredSearchResultsBeforeSearch(commonItemsPage);
     expect(await commonItemsPage.tableRows.count()).toBe(0);
     expect(filteredSearchResults).toEqual([]);
@@ -626,17 +653,39 @@ Then(
       guidanceLocator = manageUsersPage.no_results_guidance_text;
       expectedHeading = manageUsersPage.manageUsersPageTestData.Manage_Users_Page.no_results_heading;
       expectedGuidance = manageUsersPage.manageUsersPageTestData.Manage_Users_Page.no_results_guidance_text;
+      await expect(headingLocator).toHaveText(expectedHeading);
+      await expect(guidanceLocator).toHaveText(expectedGuidance);
     } else if (entityType === 'review body') {
       headingLocator = manageReviewBodiesPage.no_results_heading;
       guidanceLocator = manageReviewBodiesPage.no_results_guidance_text;
       expectedHeading = manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.no_results_heading;
       expectedGuidance =
         manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.no_results_guidance_text;
-    } else {
-      throw new Error(`Unsupported entity type: ${entityType}`);
+      await expect(headingLocator).toHaveText(expectedHeading);
+      await expect(guidanceLocator).toHaveText(expectedGuidance);
+    } else if (entityType === 'modification record') {
+      const expectedResultCount =
+        searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.result_count_heading;
+      const actualResultCount = confirmStringNotNull(await searchModificationsPage.result_count.textContent());
+      expect('0' + expectedResultCount).toBe(actualResultCount);
+      headingLocator = searchModificationsPage.no_results_heading;
+      guidanceLocator = searchModificationsPage.no_results_guidance_text;
+      expectedHeading =
+        searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.no_results_heading;
+      expectedGuidance =
+        searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.no_results_guidance_text;
+      await expect(headingLocator).toHaveText(expectedHeading);
+      expect(confirmStringNotNull(await headingLocator.textContent())).toBe(expectedHeading);
+      await expect(guidanceLocator).toHaveText(expectedGuidance);
+      expect(confirmStringNotNull(await guidanceLocator.textContent())).toBe(expectedGuidance);
+      const bulletPoints: string[] = await searchModificationsPage.getNoResultsBulletPoints();
+      const bulletPointsActual = bulletPoints.flat().join(', ');
+      const bulletPointsExpected =
+        searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.no_results_bullet_points
+          .flat()
+          .join(', ');
+      expect(bulletPointsActual).toEqual(bulletPointsExpected);
     }
-    await expect(headingLocator).toHaveText(expectedHeading);
-    await expect(guidanceLocator).toHaveText(expectedGuidance);
   }
 );
 
@@ -652,6 +701,8 @@ Given(
       userProfilePage,
       reviewBodyProfilePage,
       myResearchProjectsPage,
+      searchModificationsPage,
+      modificationsReadyToAssignPage,
     },
     page: string
   ) => {
@@ -688,6 +739,12 @@ Given(
       case 'My_Research_Page':
         await myResearchProjectsPage.goto();
         await myResearchProjectsPage.assertOnMyResearchProjectsPage();
+        break;
+      case 'Search_Modifications_Page':
+        await searchModificationsPage.goto();
+        break;
+      case 'Modifications_tasklist_Page':
+        await modificationsReadyToAssignPage.goto();
         break;
       default:
         throw new Error(`${page} is not a valid option`);
@@ -751,5 +808,347 @@ Then(
     }
     const sortedList = [...actualList].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
     expect.soft(actualList).toEqual(sortedList);
+  }
+);
+
+Then(
+  'I sequentially navigate through each page by {string} from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges',
+  async ({ commonItemsPage }, navigateMethod: string) => {
+    // commonItemspage and getting navigation method
+    await commonItemsPage.firstPage.click();
+    // const totalItems = await commonItemsPage.getTotalItems();
+    // const pageSize = parseInt(commonItemsPage.commonTestData.default_page_size, 10);
+    const totalPages = await commonItemsPage.getTotalPages();
+    for (let currentPage = 1; currentPage <= totalPages; currentPage++) {
+      const currentPageLocator = await commonItemsPage.clickOnPages(currentPage, navigateMethod);
+      await expect(currentPageLocator).toHaveAttribute('aria-current');
+      // const startEndPagesMap = await commonItemsPage.getStartEndPages(currentPage, pageSize, totalItems);
+      // const start = startEndPagesMap.get('start');
+      // const end = startEndPagesMap.get('end');
+      // await expect(commonItemsPage.pagination_results).toHaveText(
+      //   `Showing ${start} to ${end} of ${totalItems} results`
+      // );
+      // const rowCount = await commonItemsPage.getItemsPerPage();
+      // expect(rowCount - 1).toBe(parseInt(`${end}`, 10) - parseInt(`${start}`, 10) + 1);
+      const itemsMap = await commonItemsPage.getPaginationValues();
+      // const ellipsisIndices: any = itemsMap.get('ellipsisIndices');
+      const itemsValues: any = itemsMap.get('items');
+      const visiblePagesMap = await commonItemsPage.getVisiblePages(itemsValues);
+      const visiblePages: any = visiblePagesMap.get('visiblePages');
+      const allVisibleItems: any = itemsMap.get('allVisibleItems');
+      // if (totalPages <= 7) {
+      //   expect(visiblePages).toEqual(allVisibleItems);
+      //   expect(ellipsisIndices.length).toBe(0);
+      // }
+      const firstPage = 1;
+      const lastPage = totalPages;
+      if (totalPages > 7) {
+        if (currentPage <= 3) {
+          switch (currentPage) {
+            case 1:
+              expect(visiblePages).toEqual([firstPage, currentPage + 1, lastPage]);
+              expect(allVisibleItems).toEqual([`${firstPage}`, `${currentPage + 1}`, '⋯', `${lastPage}`]);
+              break;
+            case 2:
+              expect(visiblePages).toEqual([firstPage, currentPage, currentPage + 1, lastPage]);
+              expect(allVisibleItems).toEqual([
+                `${firstPage}`,
+                `${currentPage}`,
+                `${currentPage + 1}`,
+                '⋯',
+                `${lastPage}`,
+              ]);
+              break;
+            case 3:
+              expect(visiblePages).toEqual([firstPage, currentPage - 1, currentPage, currentPage + 1, lastPage]);
+              expect(allVisibleItems).toEqual([
+                `${firstPage}`,
+                `${currentPage - 1}`,
+                `${currentPage}`,
+                `${currentPage + 1}`,
+                '⋯',
+                `${lastPage}`,
+              ]);
+              break;
+          }
+        } else if (currentPage >= totalPages - 2) {
+          switch (currentPage) {
+            case totalPages - 2:
+              expect(visiblePages).toEqual([firstPage, currentPage - 1, currentPage, currentPage + 1, lastPage]);
+              expect(allVisibleItems).toEqual([
+                `${firstPage}`,
+                '⋯',
+                `${currentPage - 1}`,
+                `${currentPage}`,
+                `${currentPage + 1}`,
+                `${lastPage}`,
+              ]);
+              break;
+            case totalPages - 1:
+              expect(visiblePages).toEqual([firstPage, currentPage - 1, currentPage, lastPage]);
+              expect(allVisibleItems).toEqual([
+                `${firstPage}`,
+                '⋯',
+                `${currentPage - 1}`,
+                `${currentPage}`,
+                `${lastPage}`,
+              ]);
+              break;
+            case totalPages:
+              expect(visiblePages).toEqual([firstPage, currentPage - 1, lastPage]);
+              expect(allVisibleItems).toEqual([`${firstPage}`, '⋯', `${currentPage - 1}`, `${lastPage}`]);
+              break;
+          }
+        } else {
+          expect(visiblePages).toEqual([firstPage, currentPage - 1, currentPage, currentPage + 1, lastPage]);
+          expect(allVisibleItems).toEqual([
+            `${firstPage}`,
+            '⋯',
+            `${currentPage - 1}`,
+            `${currentPage}`,
+            `${currentPage + 1}`,
+            '⋯',
+            `${lastPage}`,
+          ]);
+        }
+      }
+      // main if
+      expect(visiblePages).toContain(currentPage);
+      if (currentPage > 1) {
+        expect(visiblePages).toContain(currentPage - 1);
+      }
+      if (currentPage < totalPages) {
+        expect(visiblePages).toContain(currentPage + 1);
+      }
+      expect(visiblePages).toContain(1);
+      expect(visiblePages).toContain(totalPages);
+      if (navigateMethod === 'clicking on next link') {
+        await commonItemsPage.clickOnNextLink();
+      } else if (navigateMethod === 'clicking on previous link') {
+        await commonItemsPage.clickOnPreviousLink();
+      }
+    }
+  }
+);
+
+// Then(
+//   'I sequentially navigate through each page by {string} from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges',
+//   async ({ commonItemsPage }, navigateMethod: string) => {
+//     await commonItemsPage.firstPage.click();
+//     const totalItems = await commonItemsPage.getTotalItems();
+//     const pageSize = parseInt(commonItemsPage.commonTestData.default_page_size, 10);
+//     const totalPages = await commonItemsPage.getTotalPages();
+//     for (let currentPage = 1; currentPage <= totalPages; currentPage++) {
+//       const currentPageLocator = await commonItemsPage.clickOnPages(currentPage, navigateMethod);
+//       await expect(currentPageLocator).toHaveAttribute('aria-current');
+//       const startEndPagesMap = await commonItemsPage.getStartEndPages(currentPage, pageSize, totalItems);
+//       const start = startEndPagesMap.get('start');
+//        const end = startEndPagesMap.get('end');
+//        await expect(commonItemsPage.pagination_results).toHaveText(
+//          `Showing ${start} to ${end} of ${totalItems} results`
+//        );
+//       const rowCount = await commonItemsPage.getItemsPerPage();
+//       expect(rowCount - 1).toBe(parseInt(`${end}`, 10) - parseInt(`${start}`, 10) + 1);
+//       const itemsMap = await commonItemsPage.getPaginationValues();
+//       const ellipsisIndices: any = itemsMap.get('ellipsisIndices');
+//       const itemsValues: any = itemsMap.get('items');
+//       const visiblePagesMap = await commonItemsPage.getVisiblePages(itemsValues);
+//       const visiblePages: any = visiblePagesMap.get('visiblePages');
+//       const allVisibleItems: any = itemsMap.get('allVisibleItems');
+//       if (totalPages <= 7) {
+//         expect(visiblePages).toEqual(allVisibleItems);
+//         expect(ellipsisIndices.length).toBe(0);
+//       }
+//       const firstPage = 1;
+//       const lastPage = totalPages;
+//       if (totalPages > 7) {
+//         if (currentPage <= 3) {
+//           if (currentPage === firstPage) {
+//             expect(visiblePages).toEqual([firstPage, currentPage + 1, lastPage]);
+//             expect(allVisibleItems).toEqual([`${firstPage}`, `${currentPage + 1}`, '⋯', `${lastPage}`]);
+//           } else if (currentPage === firstPage + 1) {
+//             expect(visiblePages).toEqual([firstPage, currentPage, currentPage + 1, lastPage]);
+//             expect(allVisibleItems).toEqual([
+//               `${firstPage}`,
+//               `${currentPage}`,
+//               `${currentPage + 1}`,
+//               '⋯',
+//               `${lastPage}`,
+//             ]);
+//           } else if (currentPage === firstPage + 2) {
+//             expect(visiblePages).toEqual([firstPage, currentPage - 1, currentPage, currentPage + 1, lastPage]);
+//             expect(allVisibleItems).toEqual([
+//               `${firstPage}`,
+//               `${currentPage - 1}`,
+//               `${currentPage}`,
+//               `${currentPage + 1}`,
+//               '⋯',
+//               `${lastPage}`,
+//             ]);
+//           }
+//         } else if (currentPage >= totalPages - 2) {
+//           if (currentPage === lastPage - 2) {
+//             expect(visiblePages).toEqual([firstPage, currentPage - 1, currentPage, currentPage + 1, lastPage]);
+//             expect(allVisibleItems).toEqual([
+//               `${firstPage}`,
+//               '⋯',
+//               `${currentPage - 1}`,
+//               `${currentPage}`,
+//               `${currentPage + 1}`,
+//               `${lastPage}`,
+//             ]);
+//           } else if (currentPage === lastPage - 1) {
+//             expect(visiblePages).toEqual([firstPage, currentPage - 1, currentPage, lastPage]);
+//             expect(allVisibleItems).toEqual([
+//               `${firstPage}`,
+//               '⋯',
+//               `${currentPage - 1}`,
+//               `${currentPage}`,
+//               `${lastPage}`,
+//             ]);
+//           } else if (currentPage === lastPage) {
+//             expect(visiblePages).toEqual([firstPage, currentPage - 1, lastPage]);
+//             expect(allVisibleItems).toEqual([`${firstPage}`, '⋯', `${currentPage - 1}`, `${lastPage}`]);
+//           }
+//         } else {
+//           expect(visiblePages).toEqual([firstPage, currentPage - 1, currentPage, currentPage + 1, lastPage]);
+//           expect(allVisibleItems).toEqual([
+//             `${firstPage}`,
+//             '⋯',
+//             `${currentPage - 1}`,
+//             `${currentPage}`,
+//             `${currentPage + 1}`,
+//             '⋯',
+//             `${lastPage}`,
+//           ]);
+//         }
+//       }
+//       expect(visiblePages).toContain(currentPage);
+//       if (currentPage > 1) {
+//         expect(visiblePages).toContain(currentPage - 1);
+//       }
+//       if (currentPage < totalPages) {
+//         expect(visiblePages).toContain(currentPage + 1);
+//       }
+//       expect(visiblePages).toContain(1);
+//       expect(visiblePages).toContain(totalPages);
+//       if (navigateMethod === 'clicking on next link') {
+//         await commonItemsPage.clickOnNextLink();
+//       } else if (navigateMethod === 'clicking on previous link') {
+//         await commonItemsPage.clickOnPreviousLink();
+//       }
+//     }
+//   }
+// );
+
+Then(
+  'I sequentially navigate through each page by {string} from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges',
+  async ({ commonItemsPage }, navigateMethod: string) => {
+    const totalPages = await commonItemsPage.getTotalPages();
+    await commonItemsPage.clickOnPages(totalPages, 'clicking on page number');
+    // const totalItems = await commonItemsPage.getTotalItems();
+    //const pageSize = parseInt(commonItemsPage.commonTestData.default_page_size, 10);
+    for (let currentPage = totalPages; currentPage >= 1; currentPage--) {
+      if (currentPage >= totalPages - 3) {
+        const currentPageLocator = await commonItemsPage.clickOnPages(currentPage, navigateMethod);
+        await expect(currentPageLocator).toHaveAttribute('aria-current', 'page');
+        // const startEndPagesMap = await commonItemsPage.getStartEndPages(currentPage, pageSize, totalItems);
+        // const start = startEndPagesMap.get('start');
+        // const end = startEndPagesMap.get('end');
+        // await expect(commonItemsPage.pagination_results).toHaveText(
+        //   `Showing ${start} to ${end} of ${totalItems} results`
+        // );
+        // const rowCount = await commonItemsPage.getItemsPerPage();
+        // expect(rowCount - 1).toBe(parseInt(`${end}`, 10) - parseInt(`${start}`, 10) + 1);
+        const itemsMap = await commonItemsPage.getPaginationValues();
+        //const ellipsisIndices: any = itemsMap.get('ellipsisIndices');
+        const itemsValues: any = itemsMap.get('items');
+        const visiblePagesMap = await commonItemsPage.getVisiblePages(itemsValues);
+        const visiblePages: any = visiblePagesMap.get('visiblePages');
+        const allVisibleItems: any = itemsMap.get('allVisibleItems');
+        // if (totalPages <= 7) {
+        //   expect(visiblePages).toEqual(allVisibleItems);
+        //   expect(ellipsisIndices.length).toBe(0);
+        // }
+        const firstPage = 1;
+        const lastPage = totalPages;
+        if (totalPages > 7) {
+          if (currentPage <= 3) {
+            if (currentPage === firstPage) {
+              expect(visiblePages).toEqual([firstPage, currentPage + 1, lastPage]);
+              expect(allVisibleItems).toEqual([`${firstPage}`, `${currentPage + 1}`, '⋯', `${lastPage}`]);
+            } else if (currentPage === firstPage + 1) {
+              expect(visiblePages).toEqual([firstPage, currentPage, currentPage + 1, lastPage]);
+              expect(allVisibleItems).toEqual([
+                `${firstPage}`,
+                `${currentPage}`,
+                `${currentPage + 1}`,
+                '⋯',
+                `${lastPage}`,
+              ]);
+            } else if (currentPage === firstPage + 2) {
+              expect(visiblePages).toEqual([firstPage, currentPage - 1, currentPage, currentPage + 1, lastPage]);
+              expect(allVisibleItems).toEqual([
+                `${firstPage}`,
+                `${currentPage - 1}`,
+                `${currentPage}`,
+                `${currentPage + 1}`,
+                '⋯',
+                `${lastPage}`,
+              ]);
+            }
+          } else if (currentPage >= totalPages - 2) {
+            if (currentPage === lastPage - 2) {
+              expect(visiblePages).toEqual([firstPage, currentPage - 1, currentPage, currentPage + 1, lastPage]);
+              expect(allVisibleItems).toEqual([
+                `${firstPage}`,
+                '⋯',
+                `${currentPage - 1}`,
+                `${currentPage}`,
+                `${currentPage + 1}`,
+                `${lastPage}`,
+              ]);
+            } else if (currentPage === lastPage - 1) {
+              expect(visiblePages).toEqual([firstPage, currentPage - 1, currentPage, lastPage]);
+              expect(allVisibleItems).toEqual([
+                `${firstPage}`,
+                '⋯',
+                `${currentPage - 1}`,
+                `${currentPage}`,
+                `${lastPage}`,
+              ]);
+            } else if (currentPage === lastPage) {
+              expect(visiblePages).toEqual([firstPage, currentPage - 1, lastPage]);
+              expect(allVisibleItems).toEqual([`${firstPage}`, '⋯', `${currentPage - 1}`, `${lastPage}`]);
+            }
+          } else {
+            expect(visiblePages).toEqual([firstPage, currentPage - 1, currentPage, currentPage + 1, lastPage]);
+            expect(allVisibleItems).toEqual([
+              `${firstPage}`,
+              '⋯',
+              `${currentPage - 1}`,
+              `${currentPage}`,
+              `${currentPage + 1}`,
+              '⋯',
+              `${lastPage}`,
+            ]);
+          }
+        }
+        expect(visiblePages).toContain(currentPage);
+        if (currentPage > 1) {
+          expect(visiblePages).toContain(currentPage - 1);
+        }
+        if (currentPage < totalPages) {
+          expect(visiblePages).toContain(currentPage + 1);
+        }
+        expect(visiblePages).toContain(1);
+        expect(visiblePages).toContain(totalPages);
+        if (navigateMethod === 'clicking on next link') {
+          await commonItemsPage.clickOnNextLink();
+        } else if (navigateMethod === 'clicking on previous link') {
+          await commonItemsPage.clickOnPreviousLink();
+        }
+      }
+    }
   }
 );

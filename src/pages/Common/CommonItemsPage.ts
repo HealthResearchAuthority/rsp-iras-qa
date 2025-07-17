@@ -95,7 +95,8 @@ export default class CommonItemsPage {
     this.tableRows = this.page.getByRole('table').getByRole('row');
     this.tableBodyRows = this.page.getByRole('table').locator('tbody').getByRole('row');
     this.hidden_next_button = this.page.locator('[class="govuk-pagination__next"][style="visibility: hidden"]');
-    this.search_text = this.page.locator('#SearchQuery');
+    this.search_text = this.page.locator('#Search_IrasId');
+    //  this.search_text = this.page.locator('#SearchQuery');
     //Banner
     this.bannerNavBar = this.page.getByLabel('Service information');
     this.bannerLoginBtn = this.bannerNavBar.getByText(this.buttonTextData.Banner.Login, { exact: true });
@@ -619,9 +620,19 @@ export default class CommonItemsPage {
     return false;
   }
 
-  async validateSearchResultsMultipleWordsSearchKey(results: string[], searchTerms: string[]) {
-    const matchesSearchTerm = (text: string) =>
-      searchTerms.some((term) => text.toLowerCase().includes(term.toLowerCase()));
+  // async validateSearchResultsMultipleWordsSearchKey(results: string[], searchTerms: string[]) {
+  //   const matchesSearchTerm = (text: string) =>
+  //     searchTerms.some((term) => text.toLowerCase().includes(term.toLowerCase()));
+  //   const resultsAfterFiltering = confirmArrayNotNull(results).filter(matchesSearchTerm);
+  //   return resultsAfterFiltering;
+  // }
+
+  async validateSearchResultsMultipleWordsSearchKey(
+    results: string[],
+    searchTerms: string[] | string
+  ): Promise<string[]> {
+    const terms = Array.isArray(searchTerms) ? searchTerms : [searchTerms];
+    const matchesSearchTerm = (text: string) => terms.some((term) => text.toLowerCase().includes(term.toLowerCase()));
     const resultsAfterFiltering = confirmArrayNotNull(results).filter(matchesSearchTerm);
     return resultsAfterFiltering;
   }
@@ -754,8 +765,13 @@ export default class CommonItemsPage {
     return term.trim().split(/\s+/);
   }
 
-  async filterResults(results: string[], searchTerms: string[]) {
-    return results.filter((result) => searchTerms.every((term) => result.toLowerCase().includes(term.toLowerCase())));
+  // async filterResults(results: string[], searchTerms: string[]) {
+  //   return results.filter((result) => searchTerms.every((term) => result.toLowerCase().includes(term.toLowerCase())));
+  // }
+  async filterResults(results: string[], searchTerms: string[] | string): Promise<string[]> {
+    const terms = Array.isArray(searchTerms) ? searchTerms : [searchTerms];
+
+    return results.filter((result) => terms.every((term) => result.toLowerCase().includes(term.toLowerCase())));
   }
 
   async clearCheckboxes(dataset: any, keys: string[], commonItemsPage: any, createUserProfilePage: any) {
