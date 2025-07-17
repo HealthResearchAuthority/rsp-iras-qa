@@ -61,6 +61,7 @@ export default class SearchModificationsPage {
   readonly sponsor_organisation_jsdisabled_min_error_message: Locator;
   readonly date_modification_submitted_to_date_error: Locator;
   readonly result_count: Locator;
+  readonly no_results_bullet_points: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -85,6 +86,7 @@ export default class SearchModificationsPage {
       .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.no_results_guidance_text, {
         exact: true,
       });
+    this.no_results_bullet_points = this.no_results_guidance_text.locator('..').getByRole('listitem');
     this.tableRows = this.page.getByRole('table').getByRole('row');
     this.listCell = this.page.getByRole('cell');
     this.advanced_filter_chevron = this.page.getByRole('button', {
@@ -308,23 +310,19 @@ export default class SearchModificationsPage {
     if (key !== 'date_modification_submitted_to_day_text') {
       if (button) {
         await button.click();
-      } else {
-        console.warn(`No selector defined for key: ${key}`);
       }
     } else if (key === 'date_modification_submitted_to_day_text') {
       if (fromDate === '' || fromDate === undefined) {
         if (button) {
           await button.click();
-        } else {
-          console.warn(`No selector defined for key: ${key}`);
         }
       }
     }
   }
 
   async getDateString(dataset: JSON, prefix: string) {
-    const day = dataset[`${prefix}_day_text`];
-    const month = dataset[`${prefix}_month_dropdown`];
+    const day = +dataset[`${prefix}_day_text`];
+    const month = dataset[`${prefix}_month_dropdown`].slice(0, 3);
     const year = dataset[`${prefix}_year_text`];
     return day && month && year ? `${day} ${month} ${year}` : null;
   }
@@ -403,6 +401,17 @@ export default class SearchModificationsPage {
     for (let i = 0; i < count; i++) {
       const text = await filterItems.nth(i).innerText();
       values.push(text.trim().replace('Remove filter\n', ''));
+    }
+    return values;
+  }
+
+  async getNoResultsBulletPoints(): Promise<string[]> {
+    const bulletPoints = this.no_results_bullet_points;
+    const count = await bulletPoints.count();
+    const values: string[] = [];
+    for (let i = 0; i < count; i++) {
+      const text = confirmStringNotNull(await bulletPoints.nth(i).textContent());
+      values.push(text);
     }
     return values;
   }

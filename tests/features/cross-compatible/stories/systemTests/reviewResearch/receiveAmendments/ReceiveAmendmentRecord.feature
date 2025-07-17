@@ -11,7 +11,7 @@ Feature: Receive Amendment - Staff dashboard/worklist
     # 1. Valid IRAS ID + filters(64 combinations) >>Click Apply Filters>>Results displayed (Search button is not clicked)
     ##Scenario 6 -Selected filters validation
     # Selected filters are displayed under active filters>>tags/labels for each filter validation
-    @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @Test
+    @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @Test1
     Scenario Outline: Verify the user is able to view the list of modifications by entering a valid IRAS ID, selecting the advanced filters, and clicking the 'Apply filters' button
         When I enter '<Valid_Iras_Id>' into the search field
         And I capture the page screenshot
@@ -35,7 +35,7 @@ Feature: Receive Amendment - Staff dashboard/worklist
     # 2. Valid IRAS ID >>Click Search>>Results displayed>> Select Advanced Filters(64 combinations)>> Click Apply Filters>>Results displayed(filtered results)
     ##Scenario 6 -Selected filters validation
     # Selected filters are displayed under active filters>>tags/labels for each filter validation
-    @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters
+    @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @Test2 @Regression
     Scenario Outline: Verify the user is able to view the list of modifications by entering valid iras id, then clicking on 'Search' button and then selecting advanced filters and clicking the 'Apply filters' button
         When I enter '<Valid_Iras_Id>' into the search field
         And I capture the page screenshot
@@ -63,21 +63,21 @@ Feature: Receive Amendment - Staff dashboard/worklist
     #3.Select Advanced Filters(64 combinations)>> Click Apply Filters>>Results displayed>> Valid IRAS ID >>Click Search>>Results displayed
     ##Scenario 6 -Selected filters validation
     # Selected filters are displayed under active filters>>tags/labels for each filter validation
-    @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters
+    @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @Test3
     Scenario Outline: Verify the user can view the list of modifications by entering valid iras id, then click on search button and then selected advanced filters and click on apply filters button
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
         And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
         Then I can see the selected filters '<Advanced_Filters>' are displayed under active filters
-        And the system displays modification records matching the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>'
+        And the system displays modification records matching the filter criteria of '<Advanced_Filters>'
         And I capture the page screenshot
         And I can see the list is sorted by default in the descending order of the 'Modification Id'
         And I capture the page screenshot
         When I enter '<Valid_Iras_Id>' into the search field
         And I capture the page screenshot
         And I click the 'Search' button on the 'Search_Modifications_Page'
-        Then the system displays modification records matching the search criteria of '<Valid_Iras_Id>'
+        And the system displays modification records matching the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>'
         And I can see the list is sorted by default in the descending order of the 'Modification Id'
         And I capture the page screenshot
         Examples:
@@ -89,7 +89,7 @@ Feature: Receive Amendment - Staff dashboard/worklist
             | Valid_Iras_Id_TwentyThree | Advanced_Filters_TwentyThree |
 
     # 4. Valid IRAS ID + No Filters >>Click Search>>Results displayed
-    @viewListOfModifications @ValidIrasIdAndNoFilters
+    @viewListOfModifications @ValidIrasIdAndNoFilters @Test4
     Scenario Outline: Verify the user can view the list of modifications based on the entered valid iras id and the search performed
         When I enter '<Valid_Iras_Id>' into the search field
         And I capture the page screenshot
@@ -110,7 +110,7 @@ Feature: Receive Amendment - Staff dashboard/worklist
     #5. No IRAS ID+Filters(64 combinations)>>Click Apply Filters>>Results displayed
     ##Scenario 6 -Selected filters validation
     # Selected filters are displayed under active filters>>tags/labels for each filter validation
-    @viewListOfModifications @NoIrasIdAndAdvancedFilters
+    @viewListOfModifications @NoIrasIdAndAdvancedFilters @Test5
     Scenario Outline: Verify the user can view the list of modifications by selecting advanced filters and click on apply filters button
         When I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
@@ -135,7 +135,6 @@ Feature: Receive Amendment - Staff dashboard/worklist
             | Advanced_Filters_Ten         |
             | Advanced_Filters_Eleven      |
             | Advanced_Filters_Fourteen    |
-            | Advanced_Filters_Fifteen     |
             | Advanced_Filters_Sixteen     |
             | Advanced_Filters_Seventeen   |
             | Advanced_Filters_Eighteen    |
@@ -144,7 +143,8 @@ Feature: Receive Amendment - Staff dashboard/worklist
             | Advanced_Filters_TwentyTwo   |
             | Advanced_Filters_TwentyThree |
 
-    @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @Test
+    #  date_modification_submitted and sponsor_organisation can't validate from UI,need to validate with Database
+    @viewListOfModifications @DateModificationSubmitted @SponsorOrganisation @Test6
     Scenario Outline: Verify the user is able to view the list of modifications filtered by sponsor organisation and modification submitted date
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
@@ -163,37 +163,47 @@ Feature: Receive Amendment - Staff dashboard/worklist
     ##Scenario 2 -Unhappy paths:
 
     #  1. No IRAS ID + No Filters >> Click Search>>No results
-    @NoResultsFound @NoIrasIdAndNoAdvancedFilters
+    @NoResultsFound @NoIrasIdAndNoAdvancedFilters @Test7
     Scenario: Verify the user can see no matching results found message on clicking search button without entering/selecting iras id and filters
         When I click the 'Search' button on the 'Search_Modifications_Page'
         Then the system displays no results found message if there is no 'modification record' on the system that matches the search criteria
         And I capture the page screenshot
 
     # 2.  No IRAS ID + No Filters >> Click Apply Filters>>No results
-    @NoResultsFound @NoIrasIdAndNoAdvancedFilters
+    @NoResultsFound @NoIrasIdAndNoAdvancedFilters @Test8
     Scenario: Verify the user can see no matching results found message on clicking apply filters button without entering/selecting iras id and filters
-        When I click the 'Apply_filters' button on the 'Search_Modifications_Page'
+        When I click the 'Advanced_Filter' link on the 'Search_Modifications_Page'
+        And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
         Then the system displays no results found message if there is no 'modification record' on the system that matches the search criteria
         And I capture the page screenshot
 
 
     #  3. Invalid IRAS ID + No Filters >>Click Search>>No results
-    @NoResultsFound @InvalidIrasIdAndNoAdvancedFilters
+    @NoResultsFound @InvalidIrasIdAndNoAdvancedFilters @Test9
     Scenario Outline: Verify the user can see no matching results found message on clicking search button after entering invalid iras id
-        # When I enter iras id in the search modifications page using '<Invalid_Iras_Id>'
         When I enter '<Invalid_Iras_Id>' into the search field
         And I capture the page screenshot
         And I click the 'Search' button on the 'Search_Modifications_Page'
         Then the system displays no results found message if there is no 'modification record' on the system that matches the search criteria
         And I capture the page screenshot
         Examples:
-            | Invalid_Iras_Id     |
-            | Invalid_Iras_Id_One |
+            | Invalid_Iras_Id                  |
+            | Invalid_Iras_Id_Letters          |
+            | Invalid_Iras_Id_Symbols          |
+            | Invalid_Iras_Id_Letters_Symbols  |
+            | Invalid_Iras_Id_Leading_Zeros    |
+            | Invalid_Iras_Id_Spaces           |
+            | Invalid_Iras_Id_Spaces_Suffix    |
+            | Invalid_Iras_Id_Spaces_Prefix    |
+            | Invalid_Iras_Id_Spaces_Seperator |
+            | Invalid_Iras_Id_Blank            |
+
+
 
     #   4. Invalid IRAS ID + filters(64 combinations) >>Apply Filters>>No results
     ##Scenario 6 -Selected filters validation
     # Selected filters are displayed under active filters>>tags/labels for each filter validation
-    @NoResultsFound @InvalidIrasIdAndAdvancedFilters @ActiveFilters
+    @NoResultsFound @InvalidIrasIdAndAdvancedFilters @Test10
     Scenario Outline: Verify the user can see no matching results found message by entering invalid iras id, then selected advanced filters and click on apply filters button
         # When I enter iras id in the search modifications page using '<Invalid_Iras_Id>'
         When I enter '<Invalid_Iras_Id>' into the search field
@@ -206,24 +216,23 @@ Feature: Receive Amendment - Staff dashboard/worklist
         And the system displays no results found message if there is no 'modification record' on the system that matches the search criteria
         And I capture the page screenshot
         Examples:
-            | Invalid_Iras_Id                  | Advanced_Filters             |
-            | Invalid_IRAS_ID_Letters          | Advanced_Filters_Eleven      |
-            | Invalid_IRAS_ID_Symbols          | Advanced_Filters_Thirteen    |
-            | Invalid_IRAS_ID_Letters_Symbols  | Advanced_Filters_Fourteen    |
-            | Invalid_IRAS_ID_Min_Length       | Advanced_Filters_Fifteen     |
-            | Invalid_IRAS_ID_Leading_Zeros    | Advanced_Filters_Sixteen     |
-            | Invalid_IRAS_ID_Spaces           | Advanced_Filters_Seventeen   |
-            | Invalid_IRAS_ID_Spaces_Suffix    | Advanced_Filters_Eighteen    |
-            | Invalid_IRAS_ID_Spaces_Prefix    | Advanced_Filters_Twenty      |
-            | Invalid_IRAS_ID_Spaces_Seperator | Advanced_Filters_TwentyOne   |
-            | Invalid_IRAS_ID_Blank            | Advanced_Filters_TwentyTwo   |
-            | Invalid_IRAS_ID_Zeros            | Advanced_Filters_TwentyThree |
+            | Invalid_Iras_Id                  | Advanced_Filters           |
+            | Invalid_Iras_Id_Letters          | Advanced_Filters_Eleven    |
+            | Invalid_Iras_Id_Symbols          | Advanced_Filters_Thirteen  |
+            | Invalid_Iras_Id_Letters_Symbols  | Advanced_Filters_Fourteen  |
+            | Invalid_Iras_Id_Leading_Zeros    | Advanced_Filters_Sixteen   |
+            # | Invalid_Iras_Id_Spaces           | Advanced_Filters_Seventeen   |
+            | Invalid_Iras_Id_Spaces_Suffix    | Advanced_Filters_Eighteen  |
+            | Invalid_Iras_Id_Spaces_Prefix    | Advanced_Filters_Twenty    |
+            | Invalid_Iras_Id_Spaces_Seperator | Advanced_Filters_TwentyOne |
+    # | Invalid_Iras_Id_Blank            | Advanced_Filters_TwentyTwo   |
+    # | Invalid_Iras_Id_Zeros            | Advanced_Filters_TwentyThree |
 
 
     #  5.  Valid IRAS ID + filters(combinations can't give results) >>Click Apply Filters>>No results (some combinations can't give results)
     ##Scenario 6 -Selected filters validation
     # Selected filters are displayed under active filters>>tags/labels for each filter validation
-    @NoResultsFound @ValidIrasIdAndAdvancedFilters
+    @NoResultsFound @ValidIrasIdAndAdvancedFilters @Test11
     Scenario Outline: Verify the user can see no matching results found message by entering invalid iras id, then selected advanced filters and click on apply filters button
         # When I enter iras id in the search modifications page using '<Valid_Iras_Id>'
         When I enter '<Valid_Iras_Id>' into the search field
@@ -239,7 +248,8 @@ Feature: Receive Amendment - Staff dashboard/worklist
             | Valid_Iras_Id     | Advanced_Filters_No_results |
             | Valid_Iras_Id_Nth | Advanced_Filters_Fifteen    |
 
-    @NoResultsFound
+
+    @NoResultsFound @Test12
     Scenario Outline: Verify the user can see no matching results found message by selecting advanced filters and click on apply filters button
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
@@ -256,7 +266,7 @@ Feature: Receive Amendment - Staff dashboard/worklist
     ### Scenario 4.1 -'Date Modification submitted' error validation
     # WHEN I select an end date in the field that is earlier than the start date,
     # THEN I should see a clear validation error message ‘This date you’ve selected is before the search above'
-    @DateModificationSubmittedError
+    @DateModificationSubmittedError @Test13
     Scenario Outline: Verify the user can see clear validation error message This date you have selected is before the search above when an end date is earlier than the start date
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
@@ -276,7 +286,7 @@ Feature: Receive Amendment - Staff dashboard/worklist
     ##Scenario 6.1 -Remove filters validation
     # Remove filters>>one by one on clicking 'x'/ all together by clicking 'Clear all filters'
     # The search results update accordingly
-    @RemoveActiveFiltersOneByOne
+    @RemoveActiveFiltersOneByOne @skip
     Scenario Outline: Verify the user can view the list of modifications by selecting advanced filters and click on apply filters button
         When I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
@@ -297,7 +307,7 @@ Feature: Receive Amendment - Staff dashboard/worklist
     ##Scenario 6.1 -Remove filters validation
     # Remove filters>>one by one on clicking 'x'/ all together by clicking 'Clear all filters'
     # The search results update accordingly
-    @RemoveActiveFiltersAllTogether
+    @RemoveActiveFiltersAllTogether @Test15
     Scenario Outline: Verify the user can view the list of modifications by selecting advanced filters and click on apply filters button
         When I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
@@ -309,7 +319,8 @@ Feature: Receive Amendment - Staff dashboard/worklist
         And I can see the list is sorted by default in the descending order of the 'Modification Id'
         And I capture the page screenshot
         And I click the 'Clear_All_Filters' link on the 'Search_Modifications_Page'
-        Then the system displays no results found message if there is no 'modification record' on the system that matches the search criteria
+        # no error message>> o results >>advanced filter closed>>
+        # Then the system displays no results found message if there is no 'modification record' on the system that matches the search criteria
         Examples:
             | Advanced_Filters     |
             | Advanced_Filters_Nth |
@@ -317,7 +328,7 @@ Feature: Receive Amendment - Staff dashboard/worklist
     ##Scenario 6.1 -Remove filters validation
     # Remove filters>>one by one on clicking 'x'/ all together by clicking 'Clear all filters'
     # The search results update accordingly
-    @RemoveActiveFiltersAllTogether
+    @RemoveActiveFiltersAllTogether @Test16
     Scenario Outline: Verify the user can view the list of modifications by entering valid iras id, then selected advanced filters and click on apply filters button
         # When I enter iras id in the search modifications page using '<Valid_Iras_Id>'
         When I enter '<Valid_Iras_Id>' into the search field
@@ -343,8 +354,7 @@ Feature: Receive Amendment - Staff dashboard/worklist
     # • The search should begin after entering the first three characters.
     # § If more than three results are returned, only the first three should be displayed initially, with the rest accessible via a vertically scrollable list.
     # § If no results are found, the system must display an appropriate error message to the user.
-
-    @SponsorOrganisationValidation @AdvancedFilters @jsEnabled
+    @SponsorOrganisationValidation @AdvancedFilters @jsEnabled @Test17
     Scenario Outline: Validate the sponsor organisation suggestion list in advanced filters when javascript is enabled
         And I click the 'Advanced_Filter' link on the 'Search_Modifications_Page'
         And I open advanced filter and each filter one by one by clicking the corresponding filter chevron,if not opened by default using '<Advanced_Filters>'
@@ -366,7 +376,7 @@ Feature: Receive Amendment - Staff dashboard/worklist
             | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_End_Space   | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space  |
             | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_End_Space   | Sponsor_Organisation_Text_Blank   | Sponsor_Organisation_Min_Char | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space  |
 
-    @SponsorOrganisationValidation @AdvancedFilters @jsDisabled
+    @SponsorOrganisationValidation @AdvancedFilters @jsDisabled @Test18
     Scenario Outline: Validate the sponsor organisation suggestion list in advanced filters when javascript is disabled
         And I click the 'Advanced_Filter' link on the 'Search_Modifications_Page'
         And I open advanced filter and each filter one by one by clicking the corresponding filter chevron,if not opened by default using '<Advanced_Filters>'
@@ -393,20 +403,66 @@ Feature: Receive Amendment - Staff dashboard/worklist
             | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Text_Blank   | Sponsor_Organisation_Min_Char | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | Sponsor_Organisation_Text_Exactly_Five_Results | Field_Error_Sponsor_Organisation |
 
 
-
-
     #### Partial validation for all the text boxes>>Iras Id search validation
+    @viewListOfModifications @ValidIrasIdAndNoFilters @PartialSearchIrasID @Test19
+    Scenario Outline: Verify the user can view the list of modifications based on the entered valid iras id and the search performed
+        When I enter '<Valid_Iras_Id>' into the search field
+        And I capture the page screenshot
+        And I click the 'Search' button on the 'Search_Modifications_Page'
+        Then the system displays modification records matching the search criteria of '<Valid_Iras_Id>'
+        And I can see the list is sorted by default in the descending order of the 'Modification Id'
+        And I capture the page screenshot
+        Examples:
+            | Valid_Iras_Id             |
+            | Valid_Iras_Id_Nth         |
+            | Valid_Iras_Id_Nineteen    |
+            | Valid_Iras_Id_Twenty      |
+            | Valid_Iras_Id_TwentyOne   |
+            | Valid_Iras_Id_TwentyTwo   |
+            | Valid_Iras_Id_TwentyThree |
 
-    @viewListOfModifications @Pagination
-    Scenario Outline: Verify the user can view the list of modifications by entering valid iras id, then click on search button and then selected advanced filters and click on apply filters button
+    @ViewListOfModifications @Pagination @Test20 @ViewListOfModificationsPaginationFirstPage @ViewListOfModificationsPaginationPageNumber @ViewListOfModificationsPaginationNextLinkClick @skip
+    Scenario Outline: Verify pagination in the list of modifications page when user is on the first page and navigate through each page by clicking page number or by by clicking next link
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
         And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
-        # add pagination steps here
+        And I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
+        And I capture the page screenshot
+        And the default page size should be twenty
+        And the 'Next' button will be 'available' to the user
+        And the 'Previous' button will be 'not available' to the user
+        And the current page number should be visually highlighted to indicate the active page the user is on
+        And I capture the page screenshot
+        Then I sequentially navigate through each page by '<Navigation_Method>' from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+        And I capture the page screenshot
         Examples:
-            | Advanced_Filters             |
-            | Advanced_Filters_Lead_Nation |
+            | Navigation_Method       | Valid_Iras_Id       | Advanced_Filters             |
+            | clicking on page number | Valid_Iras_Id_Zeros | Advanced_Filters_Lead_Nation |
+            | clicking on next link   | Valid_Iras_Id_Zeros | Advanced_Filters_Lead_Nation |
+
+    @ViewListOfModifications @Pagination @Test21 @ViewListOfModificationsPaginationLastPage @ViewListOfModificationsPaginationPageNumber @ViewListOfModificationsPaginationPreviousLinkClick @skip
+    Scenario Outline: Verify pagination in the list of modifications page when user is on the last page and navigate through each page by clicking page number or by by clicking next link
+        And I select advanced filters in the search modifications page using '<Advanced_Filters>'
+        And I capture the page screenshot
+        And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
+        And I capture the page screenshot
+        And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
+        And I capture the page screenshot
+        And the 'Previous' button will be 'available' to the user
+        And the 'Next' button will be 'not available' to the user
+        And I capture the page screenshot
+        Then I sequentially navigate through each page by '<Navigation_Method>' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+        And I capture the page screenshot
+        Examples:
+            | Navigation_Method         | Valid_Iras_Id       | Advanced_Filters             |
+            | clicking on page number   | Valid_Iras_Id_Zeros | Advanced_Filters_Lead_Nation |
+            | clicking on previous link | Valid_Iras_Id_Zeros | Advanced_Filters_Lead_Nation |
+
+
+
+
+
 
 ###*****************************************************************************************************************************
 

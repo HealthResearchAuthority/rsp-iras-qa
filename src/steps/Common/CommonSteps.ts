@@ -653,28 +653,39 @@ Then(
       guidanceLocator = manageUsersPage.no_results_guidance_text;
       expectedHeading = manageUsersPage.manageUsersPageTestData.Manage_Users_Page.no_results_heading;
       expectedGuidance = manageUsersPage.manageUsersPageTestData.Manage_Users_Page.no_results_guidance_text;
+      await expect(headingLocator).toHaveText(expectedHeading);
+      await expect(guidanceLocator).toHaveText(expectedGuidance);
     } else if (entityType === 'review body') {
       headingLocator = manageReviewBodiesPage.no_results_heading;
       guidanceLocator = manageReviewBodiesPage.no_results_guidance_text;
       expectedHeading = manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.no_results_heading;
       expectedGuidance =
         manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.no_results_guidance_text;
+      await expect(headingLocator).toHaveText(expectedHeading);
+      await expect(guidanceLocator).toHaveText(expectedGuidance);
     } else if (entityType === 'modification record') {
       const expectedResultCount =
         searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.result_count_heading;
       const actualResultCount = confirmStringNotNull(await searchModificationsPage.result_count.textContent());
-      expect(expectedResultCount).toBe(actualResultCount);
+      expect('0' + expectedResultCount).toBe(actualResultCount);
       headingLocator = searchModificationsPage.no_results_heading;
-      guidanceLocator = manageReviewBodiesPage.no_results_guidance_text;
+      guidanceLocator = searchModificationsPage.no_results_guidance_text;
       expectedHeading =
         searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.no_results_heading;
       expectedGuidance =
-        manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.no_results_guidance_text;
-    } else {
-      throw new Error(`Unsupported entity type: ${entityType}`);
+        searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.no_results_guidance_text;
+      await expect(headingLocator).toHaveText(expectedHeading);
+      expect(confirmStringNotNull(await headingLocator.textContent())).toBe(expectedHeading);
+      await expect(guidanceLocator).toHaveText(expectedGuidance);
+      expect(confirmStringNotNull(await guidanceLocator.textContent())).toBe(expectedGuidance);
+      const bulletPoints: string[] = await searchModificationsPage.getNoResultsBulletPoints();
+      const bulletPointsActual = bulletPoints.flat().join(', ');
+      const bulletPointsExpected =
+        searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.no_results_bullet_points
+          .flat()
+          .join(', ');
+      expect(bulletPointsActual).toEqual(bulletPointsExpected);
     }
-    await expect(headingLocator).toHaveText(expectedHeading);
-    await expect(guidanceLocator).toHaveText(expectedGuidance);
   }
 );
 

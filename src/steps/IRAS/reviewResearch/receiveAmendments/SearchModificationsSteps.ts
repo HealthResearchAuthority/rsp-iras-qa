@@ -35,14 +35,6 @@ When(
             if (dataset[key] !== '') {
               await searchModificationsPage.sponsor_organisation_jsdisabled_search_results_radio_button.first().click();
             }
-            // if (!(filterDatasetName == 'Sponsor_Organisation_Text_Blank')) {
-            //   await searchModificationsPage.sponsor_organisation_jsdisabled_search_button.click();
-            //   await searchModificationsPage.page.waitForTimeout(2000);
-            //   await searchModificationsPage.sponsor_organisation_jsdisabled_search_results_radio_button.isVisible();
-            // }
-            // if (!(filterDatasetName == 'Sponsor_Organisation_Text_Blank')) {
-            //   await searchModificationsPage.sponsor_organisation_jsdisabled_search_results_radio_button.first().click();
-            // }
           }
           delete dataset['sponsor_organisation_jsenabled_text'];
         } else {
@@ -91,28 +83,20 @@ Then(
         }
       }
     }
-    const normalize = (str: string) =>
-      str
-        .split(',')
-        .map((s) => s.trim())
-        .sort();
-
     const fieldValActual: string[] = await searchModificationsPage.getSelectedFilterValues();
     if (filterValuesExpected !== undefined && filterCheckboxValuesExpected !== undefined) {
-      const expected = normalize(filterValuesExpected + ', ' + filterCheckboxValuesExpected);
-      const actual = normalize(fieldValActual.flat().join(', '));
-      expect(actual).toEqual(expected);
-
-      // expect(fieldValActual.flat().join(', ')).toEqual(filterValuesExpected + ', ' + filterCheckboxValuesExpected);
-      // expect([fieldValActual]).toEqual(filterValuesExpected + ', ' + filterCheckboxValuesExpected);
+      const expectedFilterValues =
+        filterValuesExpected.flat().join(', ') + ', ' + filterCheckboxValuesExpected.flat().join(', ');
+      const actualFilterValues = fieldValActual.flat().join(', ');
+      expect(actualFilterValues).toEqual(expectedFilterValues);
     } else if (filterValuesExpected !== undefined && filterCheckboxValuesExpected === undefined) {
-      // expect(fieldValActual).toEqual(filterValuesExpected);
-      const expected = normalize(filterValuesExpected);
-      const actual = normalize(fieldValActual.flat().join(', '));
-      expect(actual).toEqual(expected);
-      // expect([fieldValActual]).toEqual(filterValuesExpected);
+      const expectedFilterValues = filterValuesExpected.flat().join(', ');
+      const actualFilterValues = fieldValActual.flat().join(', ');
+      expect(actualFilterValues).toEqual(expectedFilterValues);
     } else if (filterValuesExpected === undefined && filterCheckboxValuesExpected !== undefined) {
-      expect([fieldValActual]).toEqual(filterCheckboxValuesExpected);
+      const expectedFilterValues = filterCheckboxValuesExpected.flat().join(', ');
+      const actualFilterValues = fieldValActual.flat().join(', ');
+      expect(actualFilterValues).toEqual(expectedFilterValues);
     }
   }
 );
@@ -131,6 +115,10 @@ Then(
     let searchTerms: string[] = [];
     const modificationsList = await searchModificationsPage.getAllModificationsTheTable();
     const modificationsListAfterSearch: string[] = confirmArrayNotNull(modificationsList.get('searchResultValues'));
+    const expectedResultCount =
+      searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.result_count_heading;
+    const actualResultCount = confirmStringNotNull(await searchModificationsPage.result_count.textContent());
+    expect(modificationsListAfterSearch.length + expectedResultCount).toBe(actualResultCount);
     if (irasId !== undefined && chiefInvestigatorName !== undefined && shortProjectTitle !== undefined) {
       const searchKey = irasId + '/' + chiefInvestigatorName + '/' + shortProjectTitle;
       searchTerms = searchKey.split('/');
@@ -174,7 +162,6 @@ Then(
     }
 
     const modificationTypes: string[] = filterDataset['modification_type_checkbox'];
-    console.log(modificationTypes);
     if (modificationTypes !== undefined) {
       const modificationTypeListAfterSearch: string[] = confirmArrayNotNull(
         modificationsList.get('modificationTypeValues')
@@ -203,41 +190,110 @@ Then(
 
 Then(
   'the system displays modification records matching the search criteria of {string}',
-  async ({ userListReviewBodyPage, commonItemsPage, searchModificationsPage }, irasIdDatasetName: string) => {
-    const dataset =
+  async ({ commonItemsPage, searchModificationsPage }, irasIdDatasetName: string) => {
+    const irasIdDataset =
       searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[irasIdDatasetName];
-    console.log(dataset);
-    const searchKey = await userListReviewBodyPage.getSearchKey();
-    const searchTerms = await commonItemsPage.splitSearchTerm(searchKey);
-    const userList = await commonItemsPage.getAllUsersFromTheTable();
-    const userListAfterSearch: string[] = confirmArrayNotNull(userList.get('searchResultValues'));
-    const searchResult = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
-      userListAfterSearch,
-      searchTerms
-    );
-    expect(searchResult).toBeTruthy();
-    expect(userListAfterSearch).toHaveLength(searchResult.length);
-    await userListReviewBodyPage.updateUserInfo();
+    const irasId = irasIdDataset['iras_id_text'];
+    const modificationsList = await searchModificationsPage.getAllModificationsTheTable();
+    const modificationsListAfterSearch: string[] = confirmArrayNotNull(modificationsList.get('searchResultValues'));
+    const expectedResultCount =
+      searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.result_count_heading;
+    const actualResultCount = confirmStringNotNull(await searchModificationsPage.result_count.textContent());
+    expect(modificationsListAfterSearch.length + expectedResultCount).toBe(actualResultCount);
+    if (irasId !== undefined) {
+      const searchKey = irasId;
+      const filteredSearchResults = await commonItemsPage.filterResults(modificationsListAfterSearch, searchKey);
+      expect(filteredSearchResults).toEqual(modificationsListAfterSearch);
+      const searchResult = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
+        modificationsListAfterSearch,
+        searchKey
+      );
+      expect(searchResult).toBeTruthy();
+      expect(modificationsListAfterSearch).toHaveLength(searchResult.length);
+    }
+    const modificationIdListAfterSearch: string[] = confirmArrayNotNull(modificationsList.get('modificationIdValues'));
+    await searchModificationsPage.setModificationIdListAfterSearch(modificationIdListAfterSearch);
+    if (irasId !== undefined) {
+      const searchResultIrasID = await commonItemsPage.validateSearchResults(modificationIdListAfterSearch, irasId);
+      expect(searchResultIrasID).toBeTruthy();
+    }
   }
 );
 
 Then(
   'the system displays modification records matching the filter criteria of {string}',
-  async ({ userListReviewBodyPage, commonItemsPage, searchModificationsPage }, filterDatasetName: string) => {
-    const dataset =
+  async ({ commonItemsPage, searchModificationsPage }, filterDatasetName: string) => {
+    const filterDataset =
       searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[filterDatasetName];
-    console.log(dataset);
-    const searchKey = await userListReviewBodyPage.getSearchKey();
-    const searchTerms = await commonItemsPage.splitSearchTerm(searchKey);
-    const userList = await commonItemsPage.getAllUsersFromTheTable();
-    const userListAfterSearch: string[] = confirmArrayNotNull(userList.get('searchResultValues'));
-    const searchResult = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
-      userListAfterSearch,
-      searchTerms
-    );
-    expect(searchResult).toBeTruthy();
-    expect(userListAfterSearch).toHaveLength(searchResult.length);
-    await userListReviewBodyPage.updateUserInfo();
+    const chiefInvestigatorName = filterDataset['chief_investigator_name_text'];
+    const shortProjectTitle = filterDataset['short_project_title_text'];
+    let searchTerms: string[] = [];
+    const modificationsList = await searchModificationsPage.getAllModificationsTheTable();
+    const modificationsListAfterSearch: string[] = confirmArrayNotNull(modificationsList.get('searchResultValues'));
+    const expectedResultCount =
+      searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.result_count_heading;
+    const actualResultCount = confirmStringNotNull(await searchModificationsPage.result_count.textContent());
+    expect(modificationsListAfterSearch.length + expectedResultCount).toBe(actualResultCount);
+    if (chiefInvestigatorName !== undefined && shortProjectTitle !== undefined) {
+      const searchKey = chiefInvestigatorName + '/' + shortProjectTitle;
+      searchTerms = searchKey.split('/');
+      const filteredSearchResults = await commonItemsPage.filterResults(modificationsListAfterSearch, searchTerms);
+      expect(filteredSearchResults).toEqual(modificationsListAfterSearch);
+      const searchResult = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
+        modificationsListAfterSearch,
+        searchTerms
+      );
+      expect(searchResult).toBeTruthy();
+      expect(modificationsListAfterSearch).toHaveLength(searchResult.length);
+    }
+    const modificationIdListAfterSearch: string[] = confirmArrayNotNull(modificationsList.get('modificationIdValues'));
+    await searchModificationsPage.setModificationIdListAfterSearch(modificationIdListAfterSearch);
+    if (shortProjectTitle !== undefined) {
+      const shortProjectTitleListAfterSearch: string[] = confirmArrayNotNull(
+        modificationsList.get('shortProjectTitleValues')
+      );
+      const searchResultShortProjectTitle = commonItemsPage.validateSearchResults(
+        shortProjectTitleListAfterSearch,
+        shortProjectTitle
+      );
+      expect(searchResultShortProjectTitle).toBeTruthy();
+    }
+    if (chiefInvestigatorName !== undefined) {
+      const chiefInvestigatorNameListAfterSearch: string[] = confirmArrayNotNull(
+        modificationsList.get('chiefInvestigatorNameValues')
+      );
+      const searchTermsChiefInvestigatorName = await commonItemsPage.splitSearchTerm(chiefInvestigatorName);
+      const searchResultChiefInvestigatorName = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
+        chiefInvestigatorNameListAfterSearch,
+        searchTermsChiefInvestigatorName
+      );
+      expect(searchResultChiefInvestigatorName).toBeTruthy();
+      expect(chiefInvestigatorNameListAfterSearch).toHaveLength(searchResultChiefInvestigatorName.length);
+    }
+
+    const modificationTypes: string[] = filterDataset['modification_type_checkbox'];
+    if (modificationTypes !== undefined) {
+      const modificationTypeListAfterSearch: string[] = confirmArrayNotNull(
+        modificationsList.get('modificationTypeValues')
+      );
+
+      const foundExpectedModificationsModificationTypes = modificationTypes.filter((expected) =>
+        modificationTypeListAfterSearch.some((result) => result.toLowerCase().includes(expected.toLowerCase()))
+      );
+      console.log(
+        'foundExpectedModificationsModificationTypes.length:-' + foundExpectedModificationsModificationTypes.length
+      );
+      expect(foundExpectedModificationsModificationTypes.length).toBeGreaterThan(0);
+    }
+    const leadNations: string[] = filterDataset['lead_nation_checkbox'];
+    if (leadNations !== undefined) {
+      const leadNationValuesAfterSearch: string[] = confirmArrayNotNull(modificationsList.get('leadNationValues'));
+      const foundExpectedModificationsLeadNations = leadNations.filter((expected) =>
+        leadNationValuesAfterSearch.some((result) => result.toLowerCase().includes(expected.toLowerCase()))
+      );
+      console.log('foundExpectedModificationsLeadNations.length:-' + foundExpectedModificationsLeadNations.length);
+      expect(foundExpectedModificationsLeadNations.length).toBeGreaterThan(0);
+    }
   }
 );
 
@@ -252,7 +308,6 @@ Then(
       default:
         throw new Error(`${sortField} is not a valid option`);
     }
-
     // Convert IDs like "9800001/4" to a sortable format
     const normalizedList = actualList.map((id) => {
       const [prefix, suffix] = id.split('/');
@@ -274,7 +329,6 @@ Then(
     if (sponsorOrganisationNameListExpected.length > 5) {
       sponsorOrganisationNameListExpected = sponsorOrganisationNameListExpected.slice(0, 5);
     }
-    // await searchModificationsPage.sponsor_organisation_jsenabled_text.fill(dataset['sponsor_organisation_text']);
     dataset['sponsor_organisation_jsenabled_text'] = dataset['sponsor_organisation_text'];
     await commonItemsPage.fillUIComponent(dataset, 'sponsor_organisation_jsenabled_text', searchModificationsPage);
     await searchModificationsPage.page.waitForTimeout(2000);
