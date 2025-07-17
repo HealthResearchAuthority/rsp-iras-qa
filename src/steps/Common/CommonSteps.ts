@@ -1060,7 +1060,8 @@ Then(
       const visiblePages: any = visiblePagesMap.get('visiblePages');
       const allVisibleItems: any = itemsMap.get('allVisibleItems');
       if (totalPages <= 7) {
-        expect(visiblePages).toEqual(allVisibleItems);
+        // expect(visiblePages).toEqual(allVisibleItems);
+        expect(visiblePages.map(String)).toEqual(allVisibleItems);
         expect(ellipsisIndices.length).toBe(0);
       }
       const firstPage = 1;
