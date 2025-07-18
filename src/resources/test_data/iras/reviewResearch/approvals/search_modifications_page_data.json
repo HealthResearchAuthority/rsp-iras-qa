@@ -54,6 +54,79 @@
       "lead_nation_checkbox": ["England", "Wales"],
       "modification_type_checkbox": ["Minor modifications", "Modification of an important detail"]
     },
+    "Advanced_Filters_Nth_Chief_Investigator_Name_Filter": {
+      "chief_investigator_name_text": "Barry White"
+    },
+    "Advanced_Filters_Nth_After_Remove_Chief_Investigator_Name_Filter": {
+      "short_project_title_text": "Project 01",
+      "sponsor_organisation_text": "COLD GENESYS INC",
+      "date_modification_submitted_from_day_text": "11",
+      "date_modification_submitted_from_month_dropdown": "April",
+      "date_modification_submitted_from_year_text": "2023",
+      "date_modification_submitted_to_day_text": "02",
+      "date_modification_submitted_to_month_dropdown": "January",
+      "date_modification_submitted_to_year_text": "2025",
+      "lead_nation_checkbox": ["England", "Wales"],
+      "modification_type_checkbox": ["Minor modifications", "Modification of an important detail"]
+    },
+    "Advanced_Filters_Nth_All": {
+      "chief_investigator_name_text": "Barry White",
+      "short_project_title_text": "Project 01",
+      "sponsor_organisation_text": "COLD GENESYS INC",
+      "date_modification_submitted_from_day_text": "11",
+      "date_modification_submitted_from_month_dropdown": "April",
+      "date_modification_submitted_from_year_text": "2023",
+      "date_modification_submitted_to_day_text": "02",
+      "date_modification_submitted_to_month_dropdown": "January",
+      "date_modification_submitted_to_year_text": "2025",
+      "lead_nation_checkbox": ["England", "Wales"],
+      "modification_type_checkbox": ["Minor modifications", "Modification of an important detail"]
+    },
+    "Advanced_Filters_Nth_Sponsor_Organisation_Filter": {
+      "sponsor_organisation_text": "COLD GENESYS INC"
+    },
+    "Advanced_Filters_Nth_After_Remove_Sponsor_Organisation_Filter": {
+      "chief_investigator_name_text": "Barry White",
+      "short_project_title_text": "Project 01",
+      "date_modification_submitted_from_day_text": "11",
+      "date_modification_submitted_from_month_dropdown": "April",
+      "date_modification_submitted_from_year_text": "2023",
+      "date_modification_submitted_to_day_text": "02",
+      "date_modification_submitted_to_month_dropdown": "January",
+      "date_modification_submitted_to_year_text": "2025",
+      "lead_nation_checkbox": ["England", "Wales"],
+      "modification_type_checkbox": ["Minor modifications", "Modification of an important detail"]
+    },
+    "Advanced_Filters_Nth_Date_Modification_Submitted_From_Filter": {
+      "date_modification_submitted_from_day_text": "11",
+      "date_modification_submitted_from_month_dropdown": "April",
+      "date_modification_submitted_from_year_text": "2023"
+    },
+    "Advanced_Filters_Nth_After_Remove_Date_Modification_Submitted_From_Filter": {
+      "chief_investigator_name_text": "Barry White",
+      "short_project_title_text": "Project 01",
+      "sponsor_organisation_text": "COLD GENESYS INC",
+      "date_modification_submitted_to_day_text": "02",
+      "date_modification_submitted_to_month_dropdown": "January",
+      "date_modification_submitted_to_year_text": "2025",
+      "lead_nation_checkbox": ["England", "Wales"],
+      "modification_type_checkbox": ["Minor modifications", "Modification of an important detail"]
+    },
+    "Advanced_Filters_Nth_Short_Project_Title_Filter": {
+      "short_project_title_text": "Project 01"
+    },
+    "Advanced_Filters_Nth_After_Remove_Short_Project_Title_Filter": {
+      "chief_investigator_name_text": "Barry White",
+      "sponsor_organisation_text": "COLD GENESYS INC",
+      "date_modification_submitted_from_day_text": "11",
+      "date_modification_submitted_from_month_dropdown": "April",
+      "date_modification_submitted_from_year_text": "2023",
+      "date_modification_submitted_to_day_text": "02",
+      "date_modification_submitted_to_month_dropdown": "January",
+      "date_modification_submitted_to_year_text": "2025",
+      "lead_nation_checkbox": ["England", "Wales"],
+      "modification_type_checkbox": ["Minor modifications", "Modification of an important detail"]
+    },
     "Advanced_Filters_No_Results_One": {
       "sponsor_organisation_text": "L. MOLTENI & C. DEI FRATELLI ALITTI - SOCIETA' DI ESERCIZIO - S.P.A.",
       "date_modification_submitted_from_day_text": "01",

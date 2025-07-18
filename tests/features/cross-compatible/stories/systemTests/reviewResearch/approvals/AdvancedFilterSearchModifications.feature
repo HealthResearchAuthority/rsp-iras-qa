@@ -300,7 +300,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
     ##Scenario 6.1 -Remove filters validation
     # Remove filters>>one by one on clicking 'x'/ all together by clicking 'Clear all filters'
     # The search results update accordingly
-    @RemoveActiveFiltersOneByOne @Test14 @skip
+    @RemoveActiveFiltersOneByOne @Test14
     Scenario Outline: Verify the user can remove the selected filters one by one and the search results update accordingly
         When I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
@@ -311,12 +311,59 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         And I capture the page screenshot
         And I can see the list is sorted by default in the descending order of the 'Modification Id'
         And I capture the page screenshot
-        # And I remove the selected filter '<Advanced_Filters_Remove>'
+        And I remove the '<Advanced_Filters_Remove>' from the active filters
+        And I capture the page screenshot
+        Then I can see the selected filters '<Advanced_Filters_After_Remove>' are displayed under active filters
         Then the system displays modification records matching the filter criteria of '<Advanced_Filters_After_Remove>'
 
         Examples:
-            | Advanced_Filters     | Advanced_Filters_Remove | Advanced_Filters_After_Remove |
-            | Advanced_Filters_One | CI_Name                 | Advanced_Filters_No_CI_Name   |
+            | Advanced_Filters     | Advanced_Filters_Remove                             | Advanced_Filters_After_Remove                                    |
+            | Advanced_Filters_Nth | Advanced_Filters_Nth_Chief_Investigator_Name_Filter | Advanced_Filters_Nth_After_Remove_Chief_Investigator_Name_Filter |
+            | Advanced_Filters_Nth | Advanced_Filters_Nth_Short_Project_Title_Filter     | Advanced_Filters_Nth_After_Remove_Short_Project_Title_Filter     |
+            | Advanced_Filters_Nth | Advanced_Filters_Nth_Sponsor_Organisation_Filter    | Advanced_Filters_Nth_After_Remove_Sponsor_Organisation_Filter    |
+
+    @RemoveAllActiveFiltersOneByOne @Test14
+    Scenario Outline: Verify the user can remove all the selected filters one by one and the search results update accordingly
+        When I select advanced filters in the search modifications page using '<Advanced_Filters>'
+        And I capture the page screenshot
+        And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
+        And I capture the page screenshot
+        Then I can see the selected filters '<Advanced_Filters>' are displayed under active filters
+        And the system displays modification records matching the filter criteria of '<Advanced_Filters>'
+        And I capture the page screenshot
+        And I can see the list is sorted by default in the descending order of the 'Modification Id'
+        And I capture the page screenshot
+        And I remove the '<Advanced_Filters_Remove>' from the active filters
+        And I capture the page screenshot
+        Then I can see an empty state that informs me no modifications exist for the search criteria
+        And I capture the page screenshot
+
+        Examples:
+            | Advanced_Filters     | Advanced_Filters_Remove  |
+            | Advanced_Filters_Nth | Advanced_Filters_Nth_All |
+
+    @RemoveAllActiveFiltersOneByOne @Test14
+    Scenario Outline: Verify the user is able to view the list of modifications by entering a valid IRAS ID, selecting the advanced filters, and clicking the 'Apply filters' button
+        When I enter '<Valid_Iras_Id>' into the search field
+        And I capture the page screenshot
+        And I select advanced filters in the search modifications page using '<Advanced_Filters>'
+        And I capture the page screenshot
+        And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
+        And I capture the page screenshot
+        Then I can see the selected filters '<Advanced_Filters>' are displayed under active filters
+        And the system displays modification records matching the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>'
+        And I capture the page screenshot
+        And I can see the list is sorted by default in the descending order of the 'Modification Id'
+        And I capture the page screenshot
+        And I remove the '<Advanced_Filters_Remove>' from the active filters
+        And I capture the page screenshot
+        Then the system displays modification records matching the search criteria of '<Valid_Iras_Id>'
+        And I can see the list is sorted by default in the descending order of the 'Modification Id'
+        Examples:
+            | Valid_Iras_Id     | Advanced_Filters     | Advanced_Filters_Remove  |
+            | Valid_Iras_Id_Nth | Advanced_Filters_Nth | Advanced_Filters_Nth_All |
+
+
 
     ##Scenario 6.1 -Remove filters validation
     # Remove filters>>one by one on clicking 'x'/ all together by clicking 'Clear all filters'

@@ -279,7 +279,6 @@ export default class SearchModificationsPage {
     this.sponsor_organisation_jsdisabled_no_suggestions_label = this.page.locator('.govuk-inset-text');
     this.sponsor_organisation_jsdisabled_min_error_message = this.page
       .locator('.govuk-fieldset')
-      .locator('.govuk-form-group')
       .filter({
         hasText: this.searchModificationsPageTestData.Search_Modifications_Page.sponsor_organisation_hint_text,
       })
@@ -413,6 +412,21 @@ export default class SearchModificationsPage {
       values.push(text.trim().replace('Remove filter\n', ''));
     }
     return values;
+  }
+
+  async removeSelectedFilterValues(removeFilterLabel: string): Promise<string> {
+    const filterItems = this.active_filters_list;
+    const count = await filterItems.count();
+    let removedFilterValue: string = '';
+    for (let i = 0; i < count; i++) {
+      const text = await filterItems.nth(i).innerText();
+      if (text.includes(removeFilterLabel)) {
+        removedFilterValue = text.trim().replace('Remove filter\n', '');
+        await filterItems.nth(i).click();
+        break;
+      }
+    }
+    return removedFilterValue;
   }
 
   async getNoResultsBulletPoints(): Promise<string[]> {

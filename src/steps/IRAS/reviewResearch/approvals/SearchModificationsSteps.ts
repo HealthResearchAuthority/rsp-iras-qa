@@ -101,6 +101,40 @@ Then(
   }
 );
 
+Then(
+  'I remove the {string} from the active filters',
+  async ({ searchModificationsPage }, removeFilterDatasetName: string) => {
+    let activeCheckboxFiltersMap: { get: (arg0: string) => any };
+    let activeFiltersMap: any;
+    let filterCheckboxValuesExpected: any;
+    let filterValuesExpected: any;
+    let expectedFilterValues: any;
+    let removedFilterValue: string = '';
+    const dataset =
+      searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[removeFilterDatasetName];
+    const datasetLabels = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page;
+    for (const key in dataset) {
+      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+        if (key.endsWith('_checkbox')) {
+          activeCheckboxFiltersMap = await searchModificationsPage.getActiveFiltersCheckboxLabels(
+            dataset,
+            datasetLabels
+          );
+          filterCheckboxValuesExpected = activeCheckboxFiltersMap.get('multiSelectFilter');
+          expectedFilterValues = filterCheckboxValuesExpected.flat().join(', ');
+        } else {
+          activeFiltersMap = await searchModificationsPage.getActiveFiltersLabels(dataset, datasetLabels);
+          filterValuesExpected = activeFiltersMap.get('singleSelectFilter');
+          expectedFilterValues = filterValuesExpected.flat().join(', ');
+        }
+        removedFilterValue = await searchModificationsPage.removeSelectedFilterValues(expectedFilterValues);
+      }
+    }
+    const fieldValActualAfterRemoval: string[] = await searchModificationsPage.getSelectedFilterValues();
+    const actualFilterValuesAfterRemoval = fieldValActualAfterRemoval.flat().join(', ');
+    expect(actualFilterValuesAfterRemoval).not.toContain(removedFilterValue);
+  }
+);
 // date_modification_submitted and sponsor_organisation can't validate from UI,need to validate with Database
 Then(
   'the system displays modification records matching the search {string} and filter criteria {string}',
