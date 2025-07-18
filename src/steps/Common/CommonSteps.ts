@@ -404,6 +404,7 @@ Then(
       createReviewBodyPage,
       editReviewBodyPage,
       reviewYourAnswersPage,
+      selectAreaOfChangePage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
@@ -444,6 +445,10 @@ Then(
       errorMessageFieldDataset =
         reviewYourAnswersPage.reviewYourAnswersPageTestData[errorMessageFieldAndSummaryDatasetName];
       page = reviewYourAnswersPage;
+    } else if (pageKey == 'Select_Area_Of_Change_Page') {
+      errorMessageFieldDataset =
+        selectAreaOfChangePage.selectAreaOfChangePageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = selectAreaOfChangePage;
     }
     let allSummaryErrorExpectedValues: any;
     let summaryErrorActualValues: any;

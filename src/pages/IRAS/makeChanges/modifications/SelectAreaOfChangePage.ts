@@ -1,0 +1,70 @@
+import { expect, Locator, Page } from '@playwright/test';
+import * as selectAreaOfChangePageTestData from '../../../../resources/test_data/iras/make_changes/modifications/select_area_of_change_data.json';
+import * as buttonTextData from '../../../../resources/test_data/common/button_text_data.json';
+import * as linkTextData from '../../../../resources/test_data/common/link_text_data.json';
+
+//Declare Page Objects
+export default class ModificationsSelectAreaOfChangePage {
+  readonly page: Page;
+  readonly selectAreaOfChangePageTestData: typeof selectAreaOfChangePageTestData;
+  readonly buttonTextData: typeof buttonTextData;
+  readonly linkTextData: typeof linkTextData;
+  readonly pageHeading: Locator;
+  readonly iras_id_row: Locator;
+  readonly iras_id_text: Locator;
+  readonly short_project_title_text_row: Locator;
+  readonly short_project_title_text: Locator;
+  readonly modification_id_text_row: Locator;
+  readonly modification_id_text: Locator;
+  readonly remove_this_change_link: Locator;
+  readonly area_of_change_dropdown: Locator;
+  readonly specific_change_dropdown: Locator;
+  private _modification_id: string;
+
+  //Initialize Page Objects
+  constructor(page: Page) {
+    this.page = page;
+    this.selectAreaOfChangePageTestData = selectAreaOfChangePageTestData;
+    this.linkTextData = linkTextData;
+    this.buttonTextData = buttonTextData;
+
+    //Locators
+    this.pageHeading = this.page.getByRole('heading', {
+      name: selectAreaOfChangePageTestData.Select_Area_Of_Change_Page.heading,
+    });
+    this.iras_id_row = this.page.getByText(selectAreaOfChangePageTestData.Label_Texts.iras_id_label);
+    this.iras_id_text = this.iras_id_row.locator('..').locator('.govuk-summary-list__value');
+
+    this.short_project_title_text_row = this.page.getByText(
+      selectAreaOfChangePageTestData.Label_Texts.short_project_title_label
+    );
+    this.short_project_title_text = this.short_project_title_text_row
+      .locator('..')
+      .locator('.govuk-summary-list__value');
+
+    this.modification_id_text_row = this.page.getByText(
+      selectAreaOfChangePageTestData.Label_Texts.modification_id_label
+    );
+    this.modification_id_text = this.modification_id_text_row.locator('..').locator('.govuk-summary-list__value');
+    this.area_of_change_dropdown = this.page.getByTestId('Questions[0].SelectedOption');
+    this.specific_change_dropdown = this.page.getByTestId('Questions[1].SelectedOption');
+
+    this.remove_this_change_link = this.page.getByRole('link', {
+      name: this.linkTextData.Participating_Organisations_Page.Remove_This_Change,
+      exact: true,
+    });
+  }
+
+  //Page Methods
+  async assertOnSelectAreaOfChangePage() {
+    await expect(this.pageHeading).toBeVisible();
+  }
+
+  async setModificationId(modificationId: string) {
+    this._modification_id = modificationId;
+  }
+
+  async getModificationId() {
+    return this._modification_id;
+  }
+}

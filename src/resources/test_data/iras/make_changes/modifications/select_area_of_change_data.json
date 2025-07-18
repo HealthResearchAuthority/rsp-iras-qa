@@ -1,0 +1,56 @@
+{
+  "Select_Area_Of_Change_Page": {
+    "heading": "Select area of change"
+  },
+  "Label_Texts": {
+    "iras_id_label": "IRAS ID",
+    "short_project_title_label": "Short project title",
+    "modification_id_label": "Modification ID",
+    "area_of_change_dropdown_label": "Select your area of change",
+    "specific_change_dropdown_label": "Select your specific area of change"
+  },
+  "Missing_All_Mandatory_Fields": {
+    "area_of_change_dropdown": "Select area of change",
+    "specific_change_dropdown": "Select specific change"
+  },
+  "Valid_Data_All_Options_Participating_Organisation": {
+    "specific_change_dropdown": [
+      "Addition of sites undertaking the same activities as existing sites",
+      "Early closure or withdrawal of research sites",
+      "PICs - Addition of Participant Identification Centres undertaking the same activities as existing PICs",
+      "PICs - Early closure or withdrawal of Participant Identification Centres"
+    ]
+  },
+  "Specific_Area_Of_Change": {
+    "Participating_Organisation_Specific_Area_Options": [
+      "Addition of sites undertaking the same activities as existing sites",
+      "Early closure or withdrawal of research sites",
+      "PICs - Addition of Participant Identification Centres undertaking the same activities as existing PICs",
+      "PICs - Early closure or withdrawal of Participant Identification Centres"
+    ]
+  },
+  "Missing_Mandatory_Field_Specific_Change": {
+    "specific_change_dropdown": "Select specific change"
+  },
+  "Participating_Organisation_Option": {
+    "area_of_change_dropdown": "Participating Organisations"
+  },
+  "Invalid_Data_Area_Of_Change_Empty": {
+    "area_of_change_dropdown": "Please select..."
+  },
+  "Invalid_Data_Specific_Change_Empty": {
+    "specific_change_dropdown": "Please select..."
+  },
+  "Addition_Of_sites_Option": {
+    "specific_change_dropdown": "Addition of sites undertaking the same activities as existing sites"
+  },
+  "Early_closure_withdrawal_of_sites_Option": {
+    "specific_change_dropdown": "Early closure or withdrawal of research sites"
+  },
+  "Addition_Of_Participant_Identification_Centres_Option": {
+    "specific_change_dropdown": "PICs - Addition of Participant Identification Centres undertaking the same activities as existing PICs"
+  },
+  "Early_closure_Of_Participant_Identification_Centres_Option": {
+    "specific_change_dropdown": "PICs - Early closure or withdrawal of Participant Identification Centres"
+  }
+}
