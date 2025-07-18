@@ -471,3 +471,24 @@ Then(
     }
   }
 );
+
+Then(
+  'I can see an empty state that informs me no modifications exist for the search criteria',
+  async ({ commonItemsPage, searchModificationsPage }) => {
+    await expect(searchModificationsPage.page_heading).toBeVisible();
+    await expect(searchModificationsPage.page_guidance_text).toBeVisible();
+    await expect(searchModificationsPage.advanced_filter_chevron).toBeVisible();
+    expect(await searchModificationsPage.page.title()).toBe(
+      searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.title
+    );
+    expect(await commonItemsPage.tableRows.count()).toBe(0);
+    const expectedResultCount =
+      searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.result_count_heading;
+    const actualResultCount = confirmStringNotNull(await searchModificationsPage.result_count.textContent());
+    expect('0' + expectedResultCount).toBe(actualResultCount);
+    expect(await searchModificationsPage.no_results_heading.count()).toBe(0);
+    expect(await searchModificationsPage.no_results_guidance_text.count()).toBe(0);
+    expect(await searchModificationsPage.no_results_bullet_points.count()).toBe(0);
+    expect(await searchModificationsPage.active_filters_list.count()).toBe(0);
+  }
+);

@@ -10,7 +10,7 @@ export default class SearchModificationsPage {
   readonly linkTextData: typeof linkTextData;
   private _modifications_list_after_search: string[];
   readonly page_heading: Locator;
-  readonly back_button: Locator;
+  readonly page_guidance_text: Locator;
   readonly search_box: Locator;
   readonly search_button_label: Locator;
   readonly next_button: Locator;
@@ -73,7 +73,9 @@ export default class SearchModificationsPage {
     this.page_heading = this.page
       .getByRole('heading')
       .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.page_heading);
-    this.back_button = this.page.getByText('Back');
+    this.page_guidance_text = this.page
+      .getByRole('heading')
+      .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.page_guidance_text);
     this.search_box_label = this.page.locator('label[for="SearchQuery"]');
     this.search_box = this.page.getByTestId('SearchQuery');
     this.search_button_label = this.page.getByText('Search');
@@ -291,7 +293,8 @@ export default class SearchModificationsPage {
 
   async assertOnSearchModificationsPage() {
     await expect(this.page_heading).toBeVisible();
-    // expect(await this.page.title()).toBe(this.searchModificationsPageTestData.Search_Modifications_Page.title);
+    await expect(this.page_guidance_text).toBeVisible();
+    expect(await this.page.title()).toBe(this.searchModificationsPageTestData.Search_Modifications_Page.title);
   }
 
   async goto() {

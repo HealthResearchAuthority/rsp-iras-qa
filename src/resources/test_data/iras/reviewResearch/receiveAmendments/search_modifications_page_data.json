@@ -2,7 +2,7 @@
   "Search_Modifications_Page": {
     "page_heading": "Search",
     "page_guidance_text": "Enter the IRAS ID to search for all modifications received, including those submitted for notification only",
-    "title": "Search - Approvals - Plan and manage healthcare research ",
+    "title": "Search - Approvals - Plan and manage healthcare research",
     "search_button_label": "Search",
     "no_results_heading": "There are no matching results",
     "no_results_guidance_text": "Improve your search results by:",
@@ -55,7 +55,7 @@
       "modification_type_checkbox": ["Minor modifications", "Modification of an important detail"]
     },
     "Advanced_Filters_No_Results_One": {
-      "sponsor_organisation_text": "L. MOLTENI & C. DEI FRATELLI ALITTI - SOCIETA' DI ESERCIZIO - S.P.A",
+      "sponsor_organisation_text": "L. MOLTENI & C. DEI FRATELLI ALITTI - SOCIETA' DI ESERCIZIO - S.P.A.",
       "date_modification_submitted_from_day_text": "01",
       "date_modification_submitted_from_month_dropdown": "March",
       "date_modification_submitted_from_year_text": "2025",
@@ -261,6 +261,9 @@
     },
     "Sponsor_Organisation_Text_Blank": {
       "sponsor_organisation_text": ""
+    },
+    "Sponsor_Organisation_Text_Blank_Spaces": {
+      "sponsor_organisation_text": " "
     },
     "Sponsor_Organisation_Min_Char": {
       "sponsor_organisation_text": "nh"
