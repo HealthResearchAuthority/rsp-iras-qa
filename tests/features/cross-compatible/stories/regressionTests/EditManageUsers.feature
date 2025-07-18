@@ -130,7 +130,6 @@ Feature: User Administration: Edit Manage Users
             | All_Checkbox_Fields | first_name_text          | Operations | ACTIVE | Missing_Mandatory_Fields_Role_Operations                  | Missing_Mandatory_Fields_Role_Operations_Error                  |
             | All_Checkbox_Fields | last_name_text           | Operations | ACTIVE | Missing_Mandatory_Field_First_Name_Role_Not_Operations    | Missing_Mandatory_Field_First_Name_Role_Not_Operations_Error    |
             | All_Checkbox_Fields | telephone_text           | Operations | ACTIVE | Missing_Mandatory_Field_Last_Name_Role_Not_Operations     | Missing_Mandatory_Field_Last_Name_Role_Not_Operations_Error     |
-            | All_Checkbox_Fields | organisation_text        | Operations | ACTIVE | Missing_Mandatory_Field_Email_Address_Role_Not_Operations | Missing_Mandatory_Field_Email_Address_Role_Not_Operations_Error |
             | All_Checkbox_Fields | country_checkbox         | Operations | ACTIVE | Missing_Mandatory_Field_Country_Role_Operations           | Missing_Mandatory_Field_Country_Role_Operations_Error           |
             | All_Checkbox_Fields | access_required_checkbox | Operations | ACTIVE | Missing_Mandatory_Field_Access_Required_Role_Operations   | Missing_Mandatory_Field_Access_Required_Role_Operations_Error   |
             | All_Checkbox_Fields | job_title_text           | Operations | ACTIVE | Invalid_Character_Limit                                   | Invalid_Character_Limit_Error                                   |

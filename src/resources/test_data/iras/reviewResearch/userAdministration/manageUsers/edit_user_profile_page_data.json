@@ -16,18 +16,16 @@
     "review_body_label": "Review body",
     "save_button": "Save",
     "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
-    "role_checkbox": ["operations", "reviewer", "user", "system administrator"]
+    "role_checkbox": ["Operations", "Reviewer", "User", "System administrator"]
   },
   "Missing_Mandatory_Fields_Role_Not_Operations_Error": {
-    "email_address_text": "Enter an email address",
-    "last_name_text": "Enter a last name",
-    "first_name_text": "Enter a first name"
+    "first_name_text": "Enter a first name",
+    "last_name_text": "Enter a last name"
   },
   "Missing_Mandatory_Fields_Role_Operations_Error": {
-    "email_address_text": "Enter an email address",
     "country_checkbox": "You must provide a country",
-    "last_name_text": "Enter a last name",
     "first_name_text": "Enter a first name",
+    "last_name_text": "Enter a last name",
     "access_required_checkbox": "You must provide the access required"
   },
   "Missing_Mandatory_Field_First_Name_Role_Not_Operations_Error": {
@@ -36,9 +34,6 @@
   "Missing_Mandatory_Field_Last_Name_Role_Not_Operations_Error": {
     "last_name_text": "Enter a last name"
   },
-  "Missing_Mandatory_Field_Email_Address_Role_Not_Operations_Error": {
-    "email_address_text": "Enter an email address"
-  },
   "Missing_Mandatory_Field_Country_Role_Operations_Error": {
     "country_checkbox": "You must provide a country"
   },
@@ -46,31 +41,18 @@
     "access_required_checkbox": "You must provide the access required"
   },
   "Invalid_Character_Limit_Error": {
-    "email_address_text": "Email address must be 250 characters or less",
     "title_text": "Title must be 250 characters or less",
     "job_title_text": "Job title must be 250 characters or less",
-    "last_name_text": "Last name must be 250 characters or less",
     "first_name_text": "First name must be 250 characters or less",
     "telephone_text": "Telephone must be 11 digits or less",
+    "last_name_text": "Last name must be 250 characters or less",
     "organisation_text": "Organisation must be 250 characters or less"
-  },
-  "Invalid_Character_Limit_Field_Email_Address_Error": {
-    "email_address_text": "Email address must be 250 characters or less"
   },
   "Incorrect_Format_Field_Telephone_Error": {
     "telephone_text": "Telephone must only contain numbers"
   },
-  "Incorrect_Format_Field_Email_Address_Error": {
-    "email_address_text": "Enter an email address in the correct format"
-  },
   "Incorrect_Format_Invalid_Character_Limit_Telephone_Error": {
     "telephone_text": ["Telephone must be 11 digits or less", "Telephone must only contain numbers"]
-  },
-  "Incorrect_Format_Invalid_Character_Limit_Email_Address_Error": {
-    "email_address_text": [
-      "Email address must be 250 characters or less",
-      "Enter an email address in the correct format"
-    ]
   },
   "Edit_User_Profile": {
     "email_address_prefix": "QAAutomation",
@@ -83,9 +65,9 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA",
       "job_title_text": "Sr.Reviewer",
-      "role_checkbox": ["operations"],
+      "role_checkbox": ["Operations"],
       "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
-      "access_required_checkbox": ["Study Wide Review", "Research Ethics Committee", "CAG", "Technical Assurance"]
+      "access_required_checkbox": ["Study wide review", "Research ethics committee", "CAG", "Technical assurance"]
     },
     "Valid_Data_In_All_Fields_Role_Reviewer": {
       "title_text": "Mr",
@@ -95,7 +77,7 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA",
       "job_title_text": "Sr.Reviewer",
-      "role_checkbox": ["reviewer"]
+      "role_checkbox": ["Reviewer"]
     },
     "Edit_User_Valid_Data": {
       "title_text": "Mr",
@@ -105,9 +87,9 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA",
       "job_title_text": "Sr.Reviewer",
-      "role_checkbox": ["operations"],
+      "role_checkbox": ["Operations"],
       "country_checkbox": ["England"],
-      "access_required_checkbox": ["Research Ethics Committee"]
+      "access_required_checkbox": ["Research ethics committee"]
     },
     "Valid_Mandatory_Fields": {
       "first_name_text": "First Name Test",
@@ -120,9 +102,9 @@
       "email_address_text": ""
     },
     "All_Checkbox_Fields": {
-      "role_checkbox": ["operations", "reviewer", "user", "system administrator"],
+      "role_checkbox": ["Operations", "Reviewer", "User", "System administrator"],
       "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
-      "access_required_checkbox": ["Study Wide Review", "Research Ethics Committee", "CAG", "Technical Assurance"]
+      "access_required_checkbox": ["Study wide review", "Research ethics committee", "CAG", "Technical assurance"]
     }
   },
   "Label_Texts_Role_Operations": {
@@ -149,9 +131,6 @@
     "job_title_textbox_label": "Job title",
     "role_checkbox_label": "Role"
   },
-  "Invalid_Email_Id_Error_Message": {
-    "invalid_email_id_error": "Max 250 characters allowed"
-  },
   "Max_Field_Length_Error_Message": {
     "max_field_length_error": "Max 250 characters allowed"
   },
@@ -167,7 +146,7 @@
   },
   "User_Title_Text_One": {
     "title_text": "Miss",
-    "access_required_checkbox": ["Research Ethics Committee"]
+    "access_required_checkbox": ["Research ethics committee"]
   },
   "User_First_Name_Text_One": {
     "first_name_text": "First Name Updated"
@@ -185,57 +164,53 @@
     "job_title_text": "Sr.Reviewer updated"
   },
   "User_Role_Checkbox_One": {
-    "role_checkbox": ["operations"],
-    "access_required_checkbox": ["Research Ethics Committee"]
+    "role_checkbox": ["Operations"],
+    "access_required_checkbox": ["Research ethics committee"]
   },
   "User_Country_Checkbox_One": {
     "country_checkbox": ["England", "Wales"],
-    "access_required_checkbox": ["Research Ethics Committee"]
+    "access_required_checkbox": ["Research ethics committee"]
   },
   "User_Access_Required_Checkbox_One": {
-    "access_required_checkbox": ["Research Ethics Committee"]
+    "access_required_checkbox": ["Research ethics committee"]
   },
   "User_Title_Update": {
     "title_text": "Master"
   },
   "Original_Title_Text_One": {
     "title_text": "Mr",
-    "access_required_checkbox": ["Research Ethics Committee"]
+    "access_required_checkbox": ["Research ethics committee"]
   },
   "Original_First_Name_Text_One": {
-    "first_name_text": "QA Automation First Name Test",
-    "access_required_checkbox": ["Research Ethics Committee"]
+    "first_name_text": "QA Automation First Name Test Role_Operations",
+    "access_required_checkbox": ["Research ethics committee"]
   },
   "Original_Last_Name_Text_One": {
-    "last_name_text": "Test Last Name",
-    "access_required_checkbox": ["Research Ethics Committee"]
-  },
-  "Original_Email_Address_Text_One": {
-    "email_address_text": "QAAutomation20250320135015064hscrd@health.org",
-    "access_required_checkbox": ["Research Ethics Committee"]
+    "last_name_text": "Test Last Name Role_Operations",
+    "access_required_checkbox": ["Research ethics committee"]
   },
   "Original_Telephone_Text_One": {
-    "telephone_text": "07111111112",
-    "access_required_checkbox": ["Research Ethics Committee"]
+    "telephone_text": "07000000000",
+    "access_required_checkbox": ["Research ethics committee"]
   },
   "Original_Organisation_Text_One": {
-    "organisation_text": "HRA",
-    "access_required_checkbox": ["Research Ethics Committee"]
+    "organisation_text": "QA Automation HRA Role_Operations",
+    "access_required_checkbox": ["Research ethics committee"]
   },
   "Original_Job_Title_Text_One": {
-    "job_title_text": "Admin",
-    "access_required_checkbox": ["Research Ethics Committee"]
+    "job_title_text": "Sr.Reviewer Role_Operations",
+    "access_required_checkbox": ["Research ethics committee"]
   },
   "Original_Role_Checkbox_One": {
-    "role_checkbox": ["operations"],
-    "access_required_checkbox": ["Research Ethics Committee"]
+    "role_checkbox": ["Operations", "System administrator"],
+    "access_required_checkbox": ["Research ethics committee"]
   },
   "Original_Country_Checkbox_One": {
-    "country_checkbox": ["England"],
-    "access_required_checkbox": ["Research Ethics Committee"]
+    "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+    "access_required_checkbox": ["Research ethics committee"]
   },
   "Original_Access_Required_Checkbox_One": {
-    "access_required_checkbox": ["Research Ethics Committee"]
+    "access_required_checkbox": ["Study wide review", "Research ethics committee", "CAG", "Technical assurance"]
   },
 
   "User_Title_Text_Two": {
@@ -247,9 +222,6 @@
   "User_Last_Name_Text_Two": {
     "last_name_text": "Last name updated"
   },
-  "User_Email_Address_Text_Two": {
-    "email_address_text": "QAAutomationjksdfbrohsbrsdjs_updated@test1.com"
-  },
   "User_Telephone_Text_Two": {
     "telephone_text": "07999999999"
   },
@@ -260,11 +232,11 @@
     "job_title_text": "Sr.Reviewer updated"
   },
   "User_Role_Checkbox_Two": {
-    "role_checkbox": ["reviewer"]
+    "role_checkbox": ["Reviewer"]
   },
   "User_Country_Checkbox_Two": {
     "country_checkbox": ["Northern Ireland", "Scotland"],
-    "access_required_checkbox": ["Research Ethics Committee"]
+    "access_required_checkbox": ["Research ethics committee"]
   },
   "User_Access_Required_Checkbox_Two": {
     "access_required_checkbox": ["CAG"]
@@ -281,9 +253,6 @@
   "Original_Last_Name_Text_Two": {
     "last_name_text": "Test Last Name"
   },
-  "Original_Email_Address_Text_Two": {
-    "email_address_text": "QAAutomation20250327122528dtef558hscrd@health.org"
-  },
   "Original_Telephone_Text_Two": {
     "telephone_text": "07111111112"
   },
@@ -294,7 +263,7 @@
     "job_title_text": "Sr.Reviewer"
   },
   "Original_Role_Checkbox_Two": {
-    "role_checkbox": ["reviewer"]
+    "role_checkbox": ["Reviewer"]
   },
 
   "User_First_Name_Text_Three": {
@@ -303,18 +272,11 @@
   "User_Last_Name_Text_Three": {
     "last_name_text": "Test Last Name"
   },
-  "User_Email_Address_Text_Three": {
-    "email_address_text": "QAAutomation20250327115050148hscrd@health.org"
-  },
-
   "Original_First_Name_Text_Three": {
     "first_name_text": "QA Automation First Name Test"
   },
   "Original_Last_Name_Text_Three": {
     "last_name_text": "Test Last Name"
-  },
-  "Original_Email_Address_Text_Three": {
-    "email_address_text": "QAAutomation20250327115050148hscrd@health.org"
   },
   "User_Title_Text_Max": {
     "title_text": "';.,/f12`33437943780078jdsdhbklyfb slnbdur129064<>?|'@989342nkfvdkvmdifbjskldmsidhvfnb jvvdjnvjkbnfjbndfkjbnjdfbndkfbmndfkbdkfbndkfbndfklbmdigjdkmkdfnbdflmdfklbmdfklbmdfkbmdfbkmdflkbmdfkbmdflkdkdkdfkkdfkdkldkfkbijbdijbdijdibjifbbmndkbmdfbmdfkbmfdbmdfb"
@@ -327,11 +289,6 @@
   "User_Last_Name_Text_Max": {
     "last_name_text": "kjdigjdgkdgusgnskegnirdghdjgnsuhgsjnvjfnsnskvdfvd;';hudg,.hudghij3276424092438463njkfndvnksnvhfdsiefsnvhbhfsknjghud8734238472907562387203983773878ngidfjgiodgndjgndgjdiogjr7938472999328kjjgdkmdbfjdifjklvdfdivndnbduijgdibnidfjbdbdogdigdnbdujgdigigdigjdz"
   },
-
-  "User_Email_Address_Text_Max": {
-    "email_address_text": "jhfdjgbldfdfsdhgiduhgiddddldddnbidufnjndkjfndfkmldkfnjdknbjfdnlksmknjjjjjjjjjjjjjjjjjjnvsdvdsknvdfjvnfjnbdknvjdnbjfdnsdiejieuehuinvsdjvnbudfvndnvivndi@co.com"
-  },
-
   "User_Telephone_Text_Max": {
     "telephone_text": "076578234561"
   },
@@ -346,92 +303,6 @@
   "Field_Error_Message": {
     "iras_id_text": "Enter an email address in the correct format"
   },
-
-  "Invalid_Email_Id": {
-    "email_address_text": "john.doe.example.com"
-  },
-
-  "Valid_Email_Data_Dot": {
-    "email_address_text": "john.doe@example.com"
-  },
-  "Valid_Email_Data_Underscore": {
-    "email_address_text": "john_doe@example.com"
-  },
-  "Valid_Email_Data_Hyphen": {
-    "email_address_text": "john-doe@example.com"
-  },
-  "Valid_Email_Data_Plus": {
-    "email_address_text": "john+newsletter@example.com"
-  },
-  "Valid_Email_Data_Exclamation": {
-    "email_address_text": "john!doe@example.com"
-  },
-  "Valid_Email_Data_Hash": {
-    "email_address_text": "john#profile@example.com"
-  },
-  "Valid_Email_Data_Dollar": {
-    "email_address_text": "john$invoice@example.com"
-  },
-  "Valid_Email_Data_Percentage": {
-    "email_address_text": "john%discount@example.com"
-  },
-  "Valid_Email_Data_Ampersand": {
-    "email_address_text": "john&team@example.com"
-  },
-  "Valid_Email_Data_Single_Quote": {
-    "email_address_text": "john's@example.com"
-  },
-  "Valid_Email_Data_Star": {
-    "email_address_text": "john*star@example.com"
-  },
-  "Valid_Email_Data_Slash": {
-    "email_address_text": "john/everyone@example.com"
-  },
-  "Valid_Email_Data_Equal_Symbol": {
-    "email_address_text": "john=equals@example.com"
-  },
-  "Valid_Email_Data_Question_Mark": {
-    "email_address_text": "john?query@example.com"
-  },
-  "Valid_Email_Data_Cap_Symbol": {
-    "email_address_text": "john^caret@example.com"
-  },
-  "Valid_Email_Data_Right_Single_Quote": {
-    "email_address_text": "john`code@example.com"
-  },
-  "Valid_Email_Data_Curly_Brackets": {
-    "email_address_text": "john{editor}@example.com"
-  },
-  "Valid_Email_Data_Pipe_Symbol": {
-    "email_address_text": "john|vertical@example.com"
-  },
-  "Valid_Email_Data_Tilde_Symbol": {
-    "email_address_text": "john~tilde@example.com"
-  },
-  "Valid_Email_Data_Unicode": {
-    "email_address_text": "johñ.unicode@example.com"
-  },
-  "Valid_Email_Data_Special_Characters": {
-    "email_address_text": "john!#$%&'*+-/=?^_`{|}~doe@example.com"
-  },
-  "Valid_Email_Data_Hyphen_Underscore": {
-    "email_address_text": "john-_doe@example.com"
-  },
-  "Valid_Email_Data_Multiple_Unicode": {
-    "email_address_text": "johñ.döe@example.com"
-  },
-  "Valid_Email_Data_Multiple_Sub_Domains": {
-    "email_address_text": "mail.sub.subsub.sub.example.com"
-  },
-  "Valid_Email_Data_Domain": {
-    "email_address_text": "john.doe@example.photography"
-  },
-  "Valid_Email_Data_Other_Language": {
-    "email_address_text": "john@example.भारत"
-  },
-  "Valid_Email_Data_Number": {
-    "email_address_text": "Johndoe2@example.com"
-  },
   "Missing_Mandatory_Fields_Role_Not_Operations": {
     "first_name_text": "",
     "last_name_text": "",
@@ -441,7 +312,7 @@
     "first_name_text": "",
     "last_name_text": "",
     "email_address_text": "",
-    "role_checkbox": ["operations"]
+    "role_checkbox": ["Operations"]
   },
   "Missing_Mandatory_Field_First_Name_Role_Not_Operations": {
     "first_name_text": "",
@@ -450,7 +321,7 @@
     "telephone_text": "07000000000",
     "organisation_text": "QA Automation HRA Role_Reviewer",
     "job_title_text": "Sr.Reviewer Role_Reviewer",
-    "role_checkbox": ["reviewer", "system administrator"]
+    "role_checkbox": ["Reviewer", "System administrator"]
   },
   "Missing_Mandatory_Field_Last_Name_Role_Not_Operations": {
     "title_text": "Mr",
@@ -460,17 +331,7 @@
     "telephone_text": "07000000000",
     "organisation_text": "QA Automation HRA Role_Reviewer",
     "job_title_text": "Sr.Reviewer Role_Reviewer",
-    "role_checkbox": ["reviewer", "system administrator"]
-  },
-  "Missing_Mandatory_Field_Email_Address_Role_Not_Operations": {
-    "title_text": "Mr",
-    "first_name_text": "Test First Name Role_Reviewer",
-    "last_name_text": "Test Last Name Role_Reviewer",
-    "email_address_text": "",
-    "telephone_text": "07000000000",
-    "organisation_text": "QA Automation HRA Role_Reviewer",
-    "job_title_text": "Sr.Reviewer Role_Reviewer",
-    "role_checkbox": ["reviewer", "system administrator"]
+    "role_checkbox": ["Reviewer", "System administrator"]
   },
   "Missing_Mandatory_Field_Country_Role_Operations": {
     "title_text": "Mr",
@@ -480,8 +341,8 @@
     "telephone_text": "07000000000",
     "organisation_text": "QA Automation HRA Role_Reviewer",
     "job_title_text": "Sr.Reviewer Role_Reviewer",
-    "role_checkbox": ["operations"],
-    "access_required_checkbox": ["Research Ethics Committee", "CAG"]
+    "role_checkbox": ["Operations"],
+    "access_required_checkbox": ["Research ethics committee", "CAG"]
   },
   "Missing_Mandatory_Field_Access_Required_Role_Operations": {
     "title_text": "Mr",
@@ -491,7 +352,7 @@
     "telephone_text": "07000000000",
     "organisation_text": "QA Automation HRA Role_Reviewer",
     "job_title_text": "Sr.Reviewer Role_Reviewer",
-    "role_checkbox": ["operations"],
+    "role_checkbox": ["Operations"],
     "country_checkbox": ["England", "Scotland"]
   },
   "Invalid_Character_Limit": {
@@ -502,137 +363,6 @@
     "telephone_text": "9123456789014",
     "organisation_text": "AelianaSophiaIsabellaGabriellaAlexandriaSeraphinaValentinaAnastasiaEvangelineArabellaCassandraJulianaEmmanuellaTheodosiaChristabellaMariabellaRosabellaViolettaAngelinaSerenellaElizabellaMarcellinaMirabellaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx Morethan250chars",
     "job_title_text": "AelianaSophiaIsabellaGabriellaAlexandriaSeraphinaValentinaAnastasiaEvangelineArabellaCassandraJulianaEmmanuellaTheodosiaChristabellaMariabellaRosabellaViolettaAngelinaSerenellaElizabellaMarcellinaMirabellaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx Morethan250chars"
-  },
-  "Incorrect_Format_Email": {
-    "first_name_text": "Test First Name Role_Reviewer",
-    "last_name_text": "Test Last Name Role_Reviewer",
-    "email_address_text": "O(*()*(*()"
-  },
-  "Invalid_Email_Data_Start_With_Dot": {
-    "first_name_text": "Test First Name Role_Reviewer",
-    "last_name_text": "Test Last Name Role_Reviewer",
-    "email_address_text": ".john@example.com"
-  },
-  "Invalid_Email_Data_Double_Dot": {
-    "first_name_text": "Test First Name Role_Reviewer",
-    "last_name_text": "Test Last Name Role_Reviewer",
-    "email_address_text": "john..doe@example.com"
-  },
-  "Invalid_Email_Data_Space": {
-    "first_name_text": "Test First Name Role_Reviewer",
-    "last_name_text": "Test Last Name Role_Reviewer",
-    "email_address_text": "john doe@example.com"
-  },
-  "Invalid_Email_Data_Wrong_AT": {
-    "first_name_text": "Test First Name Role_Reviewer",
-    "last_name_text": "Test Last Name Role_Reviewer",
-    "email_address_text": "john[at]example.",
-    "sponsor_contact_email_text": "john[at]example."
-  },
-  "Invalid_Email_Data_Less_Greater_Symbols": {
-    "first_name_text": "Test First Name Role_Reviewer",
-    "last_name_text": "Test Last Name Role_Reviewer",
-    "email_address_text": "john<doe>@example.com"
-  },
-  "Invalid_Email_Data_Colon": {
-    "first_name_text": "Test First Name Role_Reviewer",
-    "last_name_text": "Test Last Name Role_Reviewer",
-    "email_address_text": "john:doe@example.com"
-  },
-  "Invalid_Email_Data_Semi_Colon": {
-    "first_name_text": "Test First Name Role_Reviewer",
-    "last_name_text": "Test Last Name Role_Reviewer",
-    "email_address_text": "john;doe@example.com"
-  },
-  "Invalid_Email_Data_Comma": {
-    "first_name_text": "Test First Name Role_Reviewer",
-    "last_name_text": "Test Last Name Role_Reviewer",
-    "email_address_text": "john,@example.com"
-  },
-  "Invalid_Email_Data_Start_With_Hyphen": {
-    "first_name_text": "Test First Name Role_Reviewer",
-    "last_name_text": "Test Last Name Role_Reviewer",
-    "email_address_text": "-john@example.com"
-  },
-  "Invalid_Email_Data_Hyphen_Before_Domain": {
-    "first_name_text": "Test First Name Role_Reviewer",
-    "last_name_text": "Test Last Name Role_Reviewer",
-    "email_address_text": "john@example-.com"
-  },
-  "Invalid_Email_Data_Double_Dot_Domain": {
-    "first_name_text": "Test First Name Role_Reviewer",
-    "last_name_text": "Test Last Name Role_Reviewer",
-    "email_address_text": "john.@example..com"
-  },
-  "Invalid_Email_Data_Exclamation_Domain": {
-    "first_name_text": "Test First Name Role_Reviewer",
-    "last_name_text": "Test Last Name Role_Reviewer",
-    "email_address_text": "john!doe@exa!mple.com"
-  },
-  "Invalid_Email_Data_Unicode": {
-    "first_name_text": "Test First Name Role_Reviewer",
-    "last_name_text": "Test Last Name Role_Reviewer",
-    "email_address_text": "johñ@example.com"
-  },
-  "Invalid_Email_Data_Single_Quote_Before_AT": {
-    "first_name_text": "Test First Name Role_Reviewer",
-    "last_name_text": "Test Last Name Role_Reviewer",
-    "email_address_text": "john.doe'@example.com"
-  },
-  "Invalid_Email_Data_Domain_Exceed_Max": {
-    "first_name_text": "Test First Name Role_Reviewer",
-    "last_name_text": "Test Last Name Role_Reviewer",
-    "email_address_text": "averyveryverylongdomainnamewithmanysubdomainsandmorecharacters.com"
-  },
-  "Invalid_Email_Data_Local_Part_Max": {
-    "first_name_text": "Test First Name Role_Reviewer",
-    "last_name_text": "Test Last Name Role_Reviewer",
-    "email_address_text": "averyveryverylongemailaddressthatexceedscharacters@example.com"
-  },
-  "Invalid_Email_Data_Consecutive_Dot_Domain": {
-    "first_name_text": "Test First Name Role_Reviewer",
-    "last_name_text": "Test Last Name Role_Reviewer",
-    "email_address_text": "john@example..com"
-  },
-  "Invalid_Email_Data_Consecutive_Dot_SubDomain": {
-    "first_name_text": "Test First Name Role_Reviewer",
-    "last_name_text": "Test Last Name Role_Reviewer",
-    "email_address_text": "mail..sub.example.com"
-  },
-  "Invalid_Email_Data_Consecutiv_Dot_Domain_SubDomain": {
-    "first_name_text": "Test First Name Role_Reviewer",
-    "last_name_text": "Test Last Name Role_Reviewer",
-    "email_address_text": "john..doe'@example..com"
-  },
-  "Invalid_Email_Data_Emoji": {
-    "first_name_text": "Test First Name Role_Reviewer",
-    "last_name_text": "Test Last Name Role_Reviewer",
-    "email_address_text": "john🙂@example.com"
-  },
-  "Invalid_Email_Data_TLD": {
-    "first_name_text": "Test First Name Role_Reviewer",
-    "last_name_text": "Test Last Name Role_Reviewer",
-    "email_address_text": "john.doe@example.1234"
-  },
-  "Invalid_Email_Data_Missing_AT": {
-    "first_name_text": "Test First Name Role_Reviewer",
-    "last_name_text": "Test Last Name Role_Reviewer",
-    "email_address_text": "john.doeexample.com"
-  },
-  "Invalid_Email_Data_Reserved_Domain": {
-    "first_name_text": "Test First Name Role_Reviewer",
-    "last_name_text": "Test Last Name Role_Reviewer",
-    "email_address_text": "john.doe@localhost"
-  },
-  "Invalid_Email_Data_Punycode": {
-    "first_name_text": "Test First Name Role_Reviewer",
-    "last_name_text": "Test Last Name Role_Reviewer",
-    "email_address_text": "john@example.xn--mgbh0fb"
-  },
-  "Invalid_Email_Data_Max_Char": {
-    "first_name_text": "Test First Name Role_Reviewer",
-    "last_name_text": "Test Last Name Role_Reviewer",
-    "email_address_text": "EmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExcee@example.com"
   },
   "Incorrect_Format_Telephone_Data": {
     "first_name_text": "First Name Test",
@@ -645,22 +375,5 @@
     "last_name_text": "Test Last Name",
     "email_address_text": "Johndoe2@example.com",
     "telephone_text": "+12345678901"
-  },
-  "Incorrect_Format_Invalid_Character_Limit_Email_Data": {
-    "first_name_text": "First Name Test",
-    "last_name_text": "Test Last Name",
-    "email_address_text": "EmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExcee@examplecom"
-  },
-  "Duplicate_Email_Role_Operations": {
-    "title_text": "Mr",
-    "first_name_text": "QA Automation First Name Test Role_Operations",
-    "last_name_text": "Test Last Name Role_Operations",
-    "email_address_text": "",
-    "telephone_text": "07000000000",
-    "organisation_text": "QA Automation HRA Role_Operations",
-    "job_title_text": "Sr.Reviewer Role_Operations",
-    "role_checkbox": ["operations", "system administrator"],
-    "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
-    "access_required_checkbox": ["Study Wide Review", "Research Ethics Committee", "CAG", "Technical Assurance"]
   }
 }

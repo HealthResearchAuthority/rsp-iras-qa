@@ -19,7 +19,7 @@
       "event_description_text": " was enabled"
     },
     "Edit_Review_Body_Organisation_Name": {
-      "event_description_text": "OrganisationName was changed from "
+      "event_description_text": "RegulatoryBodyName was changed from "
     },
     "Edit_Review_Body_Country": {
       "event_description_text": "Countries was changed from "
@@ -31,7 +31,7 @@
       "event_description_text": "Description was changed from "
     },
     "Edit_Review_Body_All_Fields": {
-      "organisation_name_event_description_text": "OrganisationName was changed from ",
+      "organisation_name_event_description_text": "RegulatoryBodyName was changed from ",
       "country_event_description_text": "Countries was changed from ",
       "email_address_event_description_text": "EmailAddress was changed from ",
       "description_event_description_text": "Description was changed from ",
