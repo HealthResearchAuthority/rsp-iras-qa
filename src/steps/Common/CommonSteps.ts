@@ -523,6 +523,7 @@ When(
     let searchValue: string;
     if (inputType.startsWith('Valid_Iras_Id') || inputType.startsWith('Invalid_Iras_Id')) {
       searchValue = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[inputType];
+      await commonItemsPage.iras_id_search_text.fill(searchValue['iras_id_text']);
     } else {
       switch (inputType) {
         case 'name of the previously used review body':
@@ -537,8 +538,8 @@ When(
         default:
           searchValue = inputType;
       }
+      await commonItemsPage.search_text.fill(searchValue);
     }
-    await commonItemsPage.search_text.fill(searchValue['iras_id_text']);
   }
 );
 

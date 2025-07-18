@@ -240,6 +240,9 @@
     "Invalid_Iras_Id_Leading_Zeros": {
       "iras_id_text": "000123"
     },
+    "Invalid_Iras_Id_Zeros": {
+      "iras_id_text": "000000"
+    },
     "Invalid_Iras_Id_Spaces": {
       "iras_id_text": "    "
     },
@@ -262,7 +265,7 @@
     "Sponsor_Organisation_Text_Blank": {
       "sponsor_organisation_text": ""
     },
-    "Sponsor_Organisation_Text_Blank_Spaces": {
+    "Sponsor_Organisation_Text_Min_Spaces": {
       "sponsor_organisation_text": " "
     },
     "Sponsor_Organisation_Min_Char": {

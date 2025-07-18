@@ -47,8 +47,8 @@ import SearchAddUserReviewBodyPage from '../pages/IRAS/reviewResearch/userAdmini
 import CheckAddUserReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/CheckAddUserReviewBodyPage';
 import AccessDeniedPage from '../pages/IRAS/AccessDeniedPage';
 import RtsPage from '../pages/Common/RtsPage';
-import SearchModificationsPage from '../pages/IRAS/reviewResearch/receiveAmendments/SearchModificationsPage';
-import ApprovalsPage from '../pages/IRAS/reviewResearch/receiveAmendments/ApprovalsPage';
+import SearchModificationsPage from '../pages/IRAS/reviewResearch/approvals/SearchModificationsPage';
+import ApprovalsPage from '../pages/IRAS/reviewResearch/approvals/ApprovalsPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;

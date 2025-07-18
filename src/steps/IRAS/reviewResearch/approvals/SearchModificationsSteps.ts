@@ -439,11 +439,7 @@ Then(
 
 Then(
   'I validate {string} displayed on {string} in advanced filters',
-  async (
-    { commonItemsPage, searchModificationsPage },
-    errorMessageFieldAndSummaryDatasetName: string,
-    pageKey: string
-  ) => {
+  async ({ searchModificationsPage }, errorMessageFieldAndSummaryDatasetName: string, pageKey: string) => {
     let errorMessageFieldDataset: any;
     let page: any;
     if (pageKey === 'Search_Modifications_Page') {
@@ -456,15 +452,15 @@ Then(
     if (errorMessageFieldAndSummaryDatasetName === 'Field_Error_Date_Modification_Submitted') {
       for (const key in errorMessageFieldDataset) {
         if (Object.prototype.hasOwnProperty.call(errorMessageFieldDataset, key)) {
-          const fieldErrorMessagesActualValues =
-            await searchModificationsPage.date_modification_submitted_to_date_error.textContent();
+          const fieldErrorMessagesActualValues = await page.date_modification_submitted_to_date_error.textContent();
           expect(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
         }
       }
-    } else {
+    } else if (errorMessageFieldAndSummaryDatasetName === 'Field_Error_Sponsor_Organisation') {
       for (const key in errorMessageFieldDataset) {
         if (Object.prototype.hasOwnProperty.call(errorMessageFieldDataset, key)) {
-          const fieldErrorMessagesActualValues = await commonItemsPage.getFieldErrorMessages(key, page);
+          const fieldErrorMessagesActualValues =
+            await page.sponsor_organisation_jsdisabled_min_error_message.textContent();
           expect(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
         }
       }

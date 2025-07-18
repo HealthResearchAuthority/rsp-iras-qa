@@ -1,6 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as linkTextData from '../../../../resources/test_data/common/link_text_data.json';
-import * as searchModificationsPageTestData from '../../../../resources/test_data/iras/reviewResearch/receiveAmendments/search_modifications_page_data.json';
+import * as searchModificationsPageTestData from '../../../../resources/test_data/iras/reviewResearch/approvals/search_modifications_page_data.json';
 import { confirmArrayNotNull, confirmStringNotNull } from '../../../../utils/UtilFunctions';
 
 //Declare Page Objects
@@ -74,7 +74,7 @@ export default class SearchModificationsPage {
       .getByRole('heading')
       .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.page_heading);
     this.page_guidance_text = this.page
-      .getByRole('heading')
+      .getByRole('paragraph')
       .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.page_guidance_text);
     this.search_box_label = this.page.locator('label[for="SearchQuery"]');
     this.search_box = this.page.getByTestId('SearchQuery');
@@ -277,6 +277,13 @@ export default class SearchModificationsPage {
       .locator('.govuk-radios__item')
       .filter({ has: this.page.locator('.govuk-radios__label') });
     this.sponsor_organisation_jsdisabled_no_suggestions_label = this.page.locator('.govuk-inset-text');
+    this.sponsor_organisation_jsdisabled_min_error_message = this.page
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group')
+      .filter({
+        hasText: this.searchModificationsPageTestData.Search_Modifications_Page.sponsor_organisation_hint_text,
+      })
+      .locator('.govuk-error-message');
   }
 
   //Getters & Setters for Private Variables

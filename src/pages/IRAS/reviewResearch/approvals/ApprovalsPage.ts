@@ -1,5 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
-import * as approvalsPageTestData from '../../../../resources/test_data/iras/reviewResearch/receiveAmendments/approvals_page_data.json';
+import * as approvalsPageTestData from '../../../../resources/test_data/iras/reviewResearch/approvals/approvals_page_data.json';
 import * as buttonTextData from '../../../../resources/test_data/common/button_text_data.json';
 import * as linkTextData from '../../../../resources/test_data/common/link_text_data.json';
 

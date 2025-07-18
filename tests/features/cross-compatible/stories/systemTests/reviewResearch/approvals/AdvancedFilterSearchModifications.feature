@@ -1,5 +1,5 @@
-@ReceiveAmendments @FrontStageUser @SystemTest @rsp-4011 @rsp-4016 @4118
-Feature: Receive Amendment - Staff dashboard/worklist
+@ReceiveAmendments @FrontStageUser @SystemTest @rsp-4011 @rsp-4016 @rsp-4118
+Feature: Approvals - Advanced Filter and Search combinations in the Search modifications page
 
     Background:
         Given I have navigated to the 'Home_Page'
@@ -168,18 +168,31 @@ Feature: Receive Amendment - Staff dashboard/worklist
 
     #  1. No IRAS ID + No Filters >> Click Search>>No results without any error state
     @NoResultsFound @NoIrasIdAndNoAdvancedFilters @Test7
-    Scenario: Verify the user can see no matching results found message on clicking search button without entering/selecting iras id and filters
+    Scenario: Verify the user can see an empty state that informs me no modifications exist for the search criteria on clicking search button without entering/selecting iras id and filters
         When I click the 'Search' button on the 'Search_Modifications_Page'
         Then I can see an empty state that informs me no modifications exist for the search criteria
         And I capture the page screenshot
 
     # 2.  No IRAS ID + No Filters >> Click Apply Filters>>No results without any error state
     @NoResultsFound @NoIrasIdAndNoAdvancedFilters @Test8
-    Scenario: Verify the user can see no matching results found message on clicking apply filters button without entering/selecting iras id and filters
+    Scenario: Verify the user can see an empty state that informs me no modifications exist for the search criteria on clicking apply filters button without entering/selecting iras id and filters
         When I click the 'Advanced_Filter' link on the 'Search_Modifications_Page'
         And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
         Then I can see an empty state that informs me no modifications exist for the search criteria
         And I capture the page screenshot
+
+    #  3. Invalid IRAS ID + No Filters >>Click Search>>No results
+    @NoResultsFound @InvalidIrasIdAndNoAdvancedFilters @Test9
+    Scenario Outline: Verify the user can see an empty state that informs me no modifications exist for the search criteria on clicking search button after entering invalid iras id
+        When I enter '<Invalid_Iras_Id>' into the search field
+        And I capture the page screenshot
+        And I click the 'Search' button on the 'Search_Modifications_Page'
+        Then I can see an empty state that informs me no modifications exist for the search criteria
+        And I capture the page screenshot
+        Examples:
+            | Invalid_Iras_Id        |
+            | Invalid_Iras_Id_Spaces |
+            | Invalid_Iras_Id_Blank  |
 
 
     #  3. Invalid IRAS ID + No Filters >>Click Search>>No results
@@ -196,12 +209,10 @@ Feature: Receive Amendment - Staff dashboard/worklist
             | Invalid_Iras_Id_Symbols          |
             | Invalid_Iras_Id_Letters_Symbols  |
             | Invalid_Iras_Id_Leading_Zeros    |
-            | Invalid_Iras_Id_Spaces           |
             | Invalid_Iras_Id_Spaces_Suffix    |
             | Invalid_Iras_Id_Spaces_Prefix    |
             | Invalid_Iras_Id_Spaces_Seperator |
-            | Invalid_Iras_Id_Blank            |
-
+            | Invalid_Iras_Id_Zeros            |
 
 
     #   4. Invalid IRAS ID + filters(64 combinations) >>Apply Filters>>No results
@@ -225,11 +236,11 @@ Feature: Receive Amendment - Staff dashboard/worklist
             | Invalid_Iras_Id_Symbols          | Advanced_Filters_Thirteen    |
             | Invalid_Iras_Id_Letters_Symbols  | Advanced_Filters_Fourteen    |
             | Invalid_Iras_Id_Leading_Zeros    | Advanced_Filters_Sixteen     |
-            | Invalid_Iras_Id_Spaces           | Advanced_Filters_Seventeen   |
+            | Invalid_Iras_Id_Leading_Zeros    | Advanced_Filters_Seventeen   |
             | Invalid_Iras_Id_Spaces_Suffix    | Advanced_Filters_Eighteen    |
             | Invalid_Iras_Id_Spaces_Prefix    | Advanced_Filters_Twenty      |
             | Invalid_Iras_Id_Spaces_Seperator | Advanced_Filters_TwentyOne   |
-            | Invalid_Iras_Id_Blank            | Advanced_Filters_TwentyTwo   |
+            | Invalid_Iras_Id_Spaces_Seperator | Advanced_Filters_TwentyTwo   |
             | Invalid_Iras_Id_Zeros            | Advanced_Filters_TwentyThree |
 
 
@@ -368,16 +379,16 @@ Feature: Receive Amendment - Staff dashboard/worklist
         And I type min characters '<Sponsor_Organisation_Min>' for sponsor organisation suggestion box in advanced filters and validate the suggestion list along with '<Suggestion_List_Headers>'
         And I capture the page screenshot
         Examples:
-            | Advanced_Filters                      | Sponsor_Organisation                        | Sponsor_Organisation_Invalid           | Sponsor_Organisation_Min      | Suggestion_List_Headers        | RTS_API_Data         | RTS_Request                                |
-            # | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Partial_Text_NHS         | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS         |
-            # | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_Brackets    | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Brackets    |
-            # | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_Dot_Comma   | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Dot_Comma   |
-            # | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_Slash       | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Slash       |
-            # | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_Hyphen      | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Hyphen      |
-            # | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_Start_Space | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Start_Space |
-            # | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_End_Space   | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space  |
-            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_End_Space | Sponsor_Organisation_Text_Blank_Spaces | Sponsor_Organisation_Min_Char | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space |
-    # | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_End_Space | Sponsor_Organisation_Text_Blank | Sponsor_Organisation_Min_Char | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space |
+            | Advanced_Filters                      | Sponsor_Organisation                          | Sponsor_Organisation_Invalid      | Sponsor_Organisation_Min             | Suggestion_List_Headers        | RTS_API_Data         | RTS_Request                                 |
+            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Partial_Text_NHS         | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS         |
+            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_Brackets    | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Brackets    |
+            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_Dot_Comma   | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Dot_Comma   |
+            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_Slash       | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Slash       |
+            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_Hyphen      | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Hyphen      |
+            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_Start_Space | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Start_Space |
+            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_End_Space   | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space  |
+            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_End_Space   | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Text_Min_Spaces | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space  |
+
 
     @SponsorOrganisationValidation @AdvancedFilters @jsDisabled @Test18
     Scenario Outline: Validate the sponsor organisation suggestion list in advanced filters when javascript is disabled
@@ -394,18 +405,16 @@ Feature: Receive Amendment - Staff dashboard/worklist
         Then I validate '<Field_Error_Message>' displayed on 'Search_Modifications_Page' in advanced filters
         And I capture the page screenshot
         Examples:
-            | Advanced_Filters                      | Sponsor_Organisation                           | Sponsor_Organisation_Invalid           | Sponsor_Organisation_Min      | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_API_Data         | RTS_Request                                    | Field_Error_Message              |
-            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Partial_Text_NHS          | Sponsor_Organisation_Invalid_Data      | Sponsor_Organisation_Min_Char | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS            | Field_Error_Sponsor_Organisation |
-            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_Brackets     | Sponsor_Organisation_Invalid_Data      | Sponsor_Organisation_Min_Char | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Brackets       | Field_Error_Sponsor_Organisation |
-            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_Dot_Comma    | Sponsor_Organisation_Invalid_Data      | Sponsor_Organisation_Min_Char | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Dot_Comma      | Field_Error_Sponsor_Organisation |
-            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_Slash        | Sponsor_Organisation_Invalid_Data      | Sponsor_Organisation_Min_Char | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Slash          | Field_Error_Sponsor_Organisation |
-            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_Hyphen       | Sponsor_Organisation_Invalid_Data      | Sponsor_Organisation_Min_Char | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Hyphen         | Field_Error_Sponsor_Organisation |
-            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_Start_Space  | Sponsor_Organisation_Invalid_Data      | Sponsor_Organisation_Min_Char | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Start_Space    | Field_Error_Sponsor_Organisation |
-            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_End_Space    | Sponsor_Organisation_Invalid_Data      | Sponsor_Organisation_Min_Char | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space     | Field_Error_Sponsor_Organisation |
-            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Invalid_Data      | Sponsor_Organisation_Min_Char | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | Sponsor_Organisation_Text_Exactly_Five_Results | Field_Error_Sponsor_Organisation |
-            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Text_Blank_Spaces | Sponsor_Organisation_Min_Char | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | Sponsor_Organisation_Text_Exactly_Five_Results | Field_Error_Sponsor_Organisation |
-    #   | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Text_Blank   | Sponsor_Organisation_Min_Char | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | Sponsor_Organisation_Text_Exactly_Five_Results | Field_Error_Sponsor_Organisation |
-
+            | Advanced_Filters                      | Sponsor_Organisation                           | Sponsor_Organisation_Invalid      | Sponsor_Organisation_Min             | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_API_Data         | RTS_Request                                    | Field_Error_Message              |
+            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Partial_Text_NHS          | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS            | Field_Error_Sponsor_Organisation |
+            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_Brackets     | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Brackets       | Field_Error_Sponsor_Organisation |
+            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_Dot_Comma    | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Dot_Comma      | Field_Error_Sponsor_Organisation |
+            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_Slash        | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Slash          | Field_Error_Sponsor_Organisation |
+            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_Hyphen       | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Hyphen         | Field_Error_Sponsor_Organisation |
+            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_Start_Space  | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Start_Space    | Field_Error_Sponsor_Organisation |
+            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_End_Space    | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space     | Field_Error_Sponsor_Organisation |
+            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | Sponsor_Organisation_Text_Exactly_Five_Results | Field_Error_Sponsor_Organisation |
+            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Text_Min_Spaces | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | Sponsor_Organisation_Text_Exactly_Five_Results | Field_Error_Sponsor_Organisation |
 
     #### Partial validation for all the text boxes>>Iras Id search validation
     @viewListOfModifications @ValidIrasIdAndNoFilters @PartialSearchIrasID @Test19
