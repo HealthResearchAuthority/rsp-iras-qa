@@ -810,3 +810,12 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
+  @axeAccessibilitySearchModificationsPage @FrontStageUser
+  Scenario: Search modifications page
+    Given I have navigated to the 'Search_Modifications_Page'
+    And I fill the search input for searching 'modifications' with 'Valid_Iras_Id_Prefix' as the search query
+    And I click the 'Search' button on the 'Search_Modifications_Page'
+    And the system displays modification records matching the search criteria of 'Valid_Iras_Id_Prefix'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
