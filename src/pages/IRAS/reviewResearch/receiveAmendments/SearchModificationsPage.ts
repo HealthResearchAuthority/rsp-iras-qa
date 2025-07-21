@@ -465,20 +465,42 @@ export default class SearchModificationsPage {
     return searchResultMap;
   }
 
-  async convertModificationIdListValuesToSortableFormat(modificationIds: string[]): Promise<string[]> {
+  async sortModificationIdListValues(modificationIds: string[], sortDirection: string): Promise<string[]> {
+    let sortedListAsNums: number[][];
+    const sortedListAsStrings: string[] = [];
     const formattedModificationIds = modificationIds.map((id) => {
       const [prefix, suffix] = id.split('/');
-      return `${prefix.padStart(10, '0')}/${suffix.padStart(4, '0')}`;
+      return [parseInt(prefix), parseInt(suffix)];
     });
-    return formattedModificationIds;
+    if (sortDirection.toLowerCase() == 'ascending') {
+      sortedListAsNums = formattedModificationIds.sort((a, b) => {
+        if (a[0] - b[0] == 0) {
+          return a[1] - b[1];
+        } else {
+          return a[0] - b[0];
+        }
+      });
+    } else {
+      sortedListAsNums = formattedModificationIds.sort((a, b) => {
+        if (b[0] - a[0] == 0) {
+          return b[1] - a[1];
+        } else {
+          return b[0] - a[0];
+        }
+      });
+    }
+    for (const entry of sortedListAsNums.entries()) {
+      sortedListAsStrings.push(entry[1].toString().replace(',', '/'));
+    }
+    return sortedListAsStrings;
   }
 
-  async getModificationIdListValues(tableBodyRows: Locator): Promise<string[]> {
-    const values: string[] = [];
+  async getActualListValues(tableBodyRows: Locator, columnIndex: number): Promise<string[]> {
+    const actualListValues: string[] = [];
     for (const row of await tableBodyRows.all()) {
-      const modificationId = confirmStringNotNull(await row.getByRole('cell').first().textContent());
-      values.push(modificationId);
+      const actualListValue = confirmStringNotNull(await row.getByRole('cell').nth(columnIndex).textContent());
+      actualListValues.push(actualListValue);
     }
-    return values;
+    return actualListValues;
   }
 }

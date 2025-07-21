@@ -36,45 +36,37 @@ Then(
 );
 
 Then(
-  'I can see the list is sorted by descending order of the {string}',
-  async ({ searchModificationsPage, commonItemsPage }, sortField: string) => {
-    let actualList = await searchModificationsPage.getModificationIdListValues(commonItemsPage.tableBodyRows);
+  'I can see the list is sorted by {string} order of the {string}',
+  async ({ searchModificationsPage, commonItemsPage }, sortDirection: string, sortField: string) => {
+    let sortedList: string[];
+    let columnIndex: number;
     switch (sortField.toLowerCase()) {
       case 'modification id':
-        actualList = await searchModificationsPage.convertModificationIdListValuesToSortableFormat(
-          await searchModificationsPage.getModificationIdListValues(commonItemsPage.tableBodyRows)
-        );
+        columnIndex = 0;
+        break;
+      case 'short project title':
+        columnIndex = 1;
+        break;
+      case 'modification type':
+        columnIndex = 2;
+        break;
+      case 'chief investigator':
+        columnIndex = 3;
+        break;
+      case 'lead nation':
+        columnIndex = 4;
         break;
       default:
         throw new Error(`${sortField} is not a valid option`);
     }
-    console.log('ACTUAL LIST');
-    console.log(actualList);
-    const sortedDescending = [...actualList].sort((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
-    console.log('SORTED LIST');
-    console.log(sortedDescending);
-    expect(actualList).toEqual(sortedDescending);
-  }
-);
-
-Then(
-  'I can see the list is sorted by ascending order of the {string}',
-  async ({ searchModificationsPage, commonItemsPage }, sortField: string) => {
-    let actualList: string[];
-    switch (sortField.toLowerCase()) {
-      case 'modification id':
-        actualList = await searchModificationsPage.convertModificationIdListValuesToSortableFormat(
-          await searchModificationsPage.getModificationIdListValues(commonItemsPage.tableBodyRows)
-        );
-        break;
-      default:
-        throw new Error(`${sortField} is not a valid option`);
+    const actualList = await searchModificationsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
+    if (sortField.toLowerCase() == 'modification id') {
+      sortedList = await searchModificationsPage.sortModificationIdListValues(actualList, sortDirection);
+    } else if (sortDirection.toLowerCase() == 'ascending') {
+      sortedList = [...actualList].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
+    } else {
+      sortedList = [...actualList].sort((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
     }
-    console.log('ACTUAL LIST');
-    console.log(actualList);
-    const sortedAscending = [...actualList].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
-    console.log('SORTED LIST');
-    console.log(sortedAscending);
-    expect(actualList).toEqual(sortedAscending);
+    expect(actualList).toEqual(sortedList);
   }
 );
