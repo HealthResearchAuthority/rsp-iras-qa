@@ -108,8 +108,8 @@ Then(
     let activeFiltersMap: any;
     let filterCheckboxValuesExpected: any;
     let filterValuesExpected: any;
-    let expectedFilterValues: any;
-    let removedFilterValue: string = '';
+    const expectedFilterValues: string[] = [];
+    let removedFilterValues: string[] = [];
     const dataset =
       searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[removeFilterDatasetName];
     const datasetLabels = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page;
@@ -121,20 +121,28 @@ Then(
             datasetLabels
           );
           filterCheckboxValuesExpected = activeCheckboxFiltersMap.get('multiSelectFilter');
-          expectedFilterValues = filterCheckboxValuesExpected.flat().join(', ');
+          const checkboxValues = filterCheckboxValuesExpected.flat().map((item: string) => item.trim());
+          expectedFilterValues.push(...checkboxValues); // Append to the array
         } else {
           activeFiltersMap = await searchModificationsPage.getActiveFiltersLabels(dataset, datasetLabels);
           filterValuesExpected = activeFiltersMap.get('singleSelectFilter');
-          expectedFilterValues = filterValuesExpected.flat().join(', ');
+          const singleSelectValues = filterValuesExpected.flat().map((item: string) => item.trim());
+          expectedFilterValues.push(...singleSelectValues); // Append to the array
         }
-        removedFilterValue = await searchModificationsPage.removeSelectedFilterValues(expectedFilterValues);
       }
     }
+
+    // Remove duplicates
+    const uniqueExpectedFilterValues = [...new Set(expectedFilterValues)];
+    removedFilterValues = await searchModificationsPage.removeSelectedFilterValues(uniqueExpectedFilterValues);
     const fieldValActualAfterRemoval: string[] = await searchModificationsPage.getSelectedFilterValues();
     const actualFilterValuesAfterRemoval = fieldValActualAfterRemoval.flat().join(', ');
-    expect(actualFilterValuesAfterRemoval).not.toContain(removedFilterValue);
+    for (let i = 0; i < removedFilterValues.length; i++) {
+      expect(actualFilterValuesAfterRemoval).not.toContain(removedFilterValues[i]);
+    }
   }
 );
+
 // date_modification_submitted and sponsor_organisation can't validate from UI,need to validate with Database
 Then(
   'the system displays modification records matching the search {string} and filter criteria {string}',

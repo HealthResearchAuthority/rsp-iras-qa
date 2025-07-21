@@ -264,6 +264,9 @@ export default class SearchModificationsPage {
       .getByRole('listitem')
       .getByRole('link')
       .locator('.search-filter-summary__remove-filter-text');
+    // this.active_filters_list = this.page
+    //   .locator('.search-filter-summary__remove-filters li a')
+    //   .or(this.page.locator('.search-filter-summary__remove-filters li a span'));
 
     // this.sponsor_organisation_jsdisabled_result_hint_label = this.sponsor_organisation_fieldset.getByText(
     //   this.searchModificationsPageTestData.Search_Modifications_Page.Sponsor_Organisation_Jsdisabled_Search_Hint_Labels
@@ -409,24 +412,28 @@ export default class SearchModificationsPage {
     const values: string[] = [];
     for (let i = 0; i < count; i++) {
       const text = await filterItems.nth(i).innerText();
-      values.push(text.trim().replace('Remove filter\n', ''));
+      values.push(text.trim().replace('Remove filter', '').trim());
     }
     return values;
   }
 
-  async removeSelectedFilterValues(removeFilterLabel: string): Promise<string> {
+  async removeSelectedFilterValues(removeFilterLabel: string[]): Promise<string[]> {
     const filterItems = this.active_filters_list;
     const count = await filterItems.count();
-    let removedFilterValue: string = '';
+    expect(count).toBe(removeFilterLabel.length);
+    console.log(removeFilterLabel);
+    const removedFilterValues: string[] = [];
     for (let i = 0; i < count; i++) {
-      const text = await filterItems.nth(i).innerText();
-      if (text.includes(removeFilterLabel)) {
-        removedFilterValue = text.trim().replace('Remove filter\n', '');
-        await filterItems.nth(i).click();
-        break;
+      const text = (await filterItems.nth(i).innerText()).trim().replace('Remove filter', '').trim();
+      console.log(text);
+      if (removeFilterLabel.includes(text)) {
+        removedFilterValues.push(text);
+        await filterItems.nth(i).locator('..').click({ force: true });
+        await this.page.waitForTimeout(500);
       }
     }
-    return removedFilterValue;
+    console.log(removedFilterValues);
+    return removedFilterValues;
   }
 
   async getNoResultsBulletPoints(): Promise<string[]> {
