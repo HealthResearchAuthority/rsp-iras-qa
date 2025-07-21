@@ -19,7 +19,10 @@ export default class ModificationsSelectAreaOfChangePage {
   readonly remove_this_change_link: Locator;
   readonly area_of_change_dropdown: Locator;
   readonly specific_change_dropdown: Locator;
+  readonly areaOfChangeLabel: Locator;
   private _modification_id: string;
+  readonly area_of_change_dropdown_all_options: Locator;
+  readonly specific_change_dropdown_all_options: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -46,8 +49,11 @@ export default class ModificationsSelectAreaOfChangePage {
       selectAreaOfChangePageTestData.Label_Texts.modification_id_label
     );
     this.modification_id_text = this.modification_id_text_row.locator('..').locator('.govuk-summary-list__value');
-    this.area_of_change_dropdown = this.page.getByTestId('Questions[0].SelectedOption');
-    this.specific_change_dropdown = this.page.getByTestId('Questions[1].SelectedOption');
+    this.area_of_change_dropdown = this.page.getByTestId('AreaOfChangeId');
+    this.area_of_change_dropdown_all_options = this.area_of_change_dropdown.locator('select option');
+
+    this.specific_change_dropdown = this.page.getByTestId('SpecificChangeId');
+    this.specific_change_dropdown_all_options = this.specific_change_dropdown.locator('option');
 
     this.remove_this_change_link = this.page.getByRole('link', {
       name: this.linkTextData.Participating_Organisations_Page.Remove_This_Change,

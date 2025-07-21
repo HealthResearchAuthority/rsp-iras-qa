@@ -15,8 +15,10 @@ Then(
     areaOfChangeDatasetName: string,
     specificChangeDatasetName: string
   ) => {
-    const areaOfChangeDataset = selectAreaOfChangePage.selectAreaOfChangePageTestData[areaOfChangeDatasetName];
-    const specificChangeDataset = selectAreaOfChangePage.selectAreaOfChangePageTestData[specificChangeDatasetName];
+    const areaOfChangeDataset =
+      selectAreaOfChangePage.selectAreaOfChangePageTestData.Select_Area_Of_Change[areaOfChangeDatasetName];
+    const specificChangeDataset =
+      selectAreaOfChangePage.selectAreaOfChangePageTestData.Select_Specific_Change[specificChangeDatasetName];
     for (const key in areaOfChangeDataset) {
       if (Object.prototype.hasOwnProperty.call(areaOfChangeDataset, key)) {
         await commonItemsPage.fillUIComponent(areaOfChangeDataset, key, selectAreaOfChangePage);
@@ -95,10 +97,12 @@ Then(
 Then(
   'I validate the specific change dropdown options are displayed based on the selected area of change dropdown with {string}',
   async ({ selectAreaOfChangePage }, datasetName: string) => {
-    const dataset = selectAreaOfChangePage.selectAreaOfChangePageTestData.Specific_Area_Of_Change;
-    const expectedSpecificChangeDropdownValues = dataset[datasetName];
-    const allDropdownValues = confirmStringNotNull(await selectAreaOfChangePage.specific_change_dropdown.textContent());
-    const actualSpecificChangeDropdownValues: string[] = allDropdownValues?.trim().slice(16).split(/\n/);
+    const expectedSpecificChangeDropdownValues =
+      selectAreaOfChangePage.selectAreaOfChangePageTestData.Specific_Change_Options[datasetName];
+    const actualSpecificChangeDropdownValues =
+      await selectAreaOfChangePage.specific_change_dropdown_all_options.evaluateAll((values) =>
+        values.map((value) => value.textContent)
+      );
     expect(actualSpecificChangeDropdownValues).toEqual(expectedSpecificChangeDropdownValues);
   }
 );

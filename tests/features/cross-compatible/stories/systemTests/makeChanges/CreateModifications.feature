@@ -1,4 +1,4 @@
-@FrontStageUser @createModifications @SystemTest
+@FrontStageUser @createModifications @SystemTest @jsEnabled
 Feature: Create Amendment - Create Modifications
 
   Background:
@@ -32,7 +32,7 @@ Feature: Create Amendment - Create Modifications
     Then I can see the participating organisation page
     And I capture the page screenshot
     When I click the '<Navigation_Link>' link on the 'Participating_Organisations_Page'
-    # Then I can see the select area of change page
+    Then I can see the select area of change page
     Then I can see previously saved values for '<Area_Of_Change>' and '<Specific_Change>' displayed on select area of change page
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
@@ -40,23 +40,23 @@ Feature: Create Amendment - Create Modifications
     And I capture the page screenshot
 
     Examples:
-      | Area_Of_Change                    | Specific_Change                                            | Project_Details_Title | Key_Project_Roles     | Key_Project_Roles_Change | Research_Locations    | Navigation_Link | Modifications_Tile_Link |
-      | Participating_Organisation_Option | Addition_Of_sites_Option                                   | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields    | Valid_Data_All_Fields | Back            | Modifications_Tile      |
-      | Participating_Organisation_Option | Early_closure_withdrawal_of_sites_Option                   | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields    | Valid_Data_All_Fields | Back            | Modifications_Tile      |
-      | Participating_Organisation_Option | Addition_Of_Participant_Identification_Centres_Option      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields    | Valid_Data_All_Fields | Back            | Modifications_Tile      |
-      | Participating_Organisation_Option | Early_closure_Of_Participant_Identification_Centres_Option | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields    | Valid_Data_All_Fields | Back            | Modifications_Tile      |
+      | Area_Of_Change             | Specific_Change                                            | Project_Details_Title | Navigation_Link | Modifications_Tile_Link |
+      | Participating_Organisation | Addition_Of_sites_Option                                   | Valid_Data_All_Fields | Back            | Modifications_Tile      |
+      | Participating_Organisation | Early_closure_withdrawal_of_sites_Option                   | Valid_Data_All_Fields | Back            | Modifications_Tile      |
+      | Participating_Organisation | Addition_Of_Participant_Identification_Centres_Option      | Valid_Data_All_Fields | Back            | Modifications_Tile      |
+      | Participating_Organisation | Early_closure_Of_Participant_Identification_Centres_Option | Valid_Data_All_Fields | Back            | Modifications_Tile      |
 
   @rsp-4038 @SelectAreaOfChangeDropdownListValidation
   Scenario Outline: Validate the specific change list values are displayed based on the area of change selection
     When I click the '<Modifications_Tile_Link>' link on the 'Project_Overview_Page'
     And I can see the select area of change page
     And I select '<Area_Of_Change>' from area of change dropdown and '<Specific_Change>' from specific change dropdown
-    Then I validate the specific change dropdown options are displayed based on the selected area of change dropdown with '<Valid_Data_All_Participating_Organisation_List>'
+    Then I validate the specific change dropdown options are displayed based on the selected area of change dropdown with '<All_Participating_Organisation_Options>'
 
     Examples:
-      | Area_Of_Change                    | Specific_Change                    | Valid_Data_All_Participating_Organisation_List   | Project_Details_Title | Key_Project_Roles     | Key_Project_Roles_Change | Research_Locations    | Navigation_Link | Modifications_Tile_Link |
-      | Participating_Organisation_Option | Invalid_Data_Area_Of_Change_Empty  | Participating_Organisation_Specific_Area_Options | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields    | Valid_Data_All_Fields | Back            | Modifications_Tile      |
-      | Invalid_Data_Area_Of_Change_Empty | Invalid_Data_Specific_Change_Empty | Invalid_Data_Specific_Change_Empty               | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields    | Valid_Data_All_Fields | Back            | Modifications_Tile      |
+      | Area_Of_Change             | Specific_Change | All_Participating_Organisation_Options | Navigation_Link | Modifications_Tile_Link |
+      | Participating_Organisation | Default_Value   | Participating_Organisation             | Back            | Modifications_Tile      |
+      | Default_Value              | Default_Value   | Default_Value                          | Back            | Modifications_Tile      |
 
   @rsp-4038 @SelectAreaOfChangeModificationIdValidation
   Scenario Outline: Validate the modification id on select area of change page when user creates multiple new modifications
@@ -65,8 +65,8 @@ Feature: Create Amendment - Create Modifications
     Then I validate the modification id is incremented by one for every <Modification_Count> new modification on select area of change page
 
     Examples:
-      | Area_Of_Change                    | Specific_Change          | Modification_Count | Project_Details_Title | Key_Project_Roles     | Key_Project_Roles_Change | Research_Locations    | Navigation_Link | Modifications_Tile_Link |
-      | Participating_Organisation_Option | Addition_Of_sites_Option | 10                 | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields    | Valid_Data_All_Fields | Back            | Modifications_Tile      |
+      | Area_Of_Change             | Specific_Change          | Modification_Count | Navigation_Link | Modifications_Tile_Link |
+      | Participating_Organisation | Addition_Of_sites_Option | 10                 | Back            | Modifications_Tile      |
 
   @rsp-4038 @SelectAreaOfChangeSaveLater
   Scenario Outline: Verify that user can save the modifications progress on select area of change page
@@ -81,12 +81,12 @@ Feature: Create Amendment - Create Modifications
     Then I can see the modification progress saved successful message on project overview page
 
     Examples:
-      | Area_Of_Change                    | Specific_Change                                            | Project_Details_Title | Key_Project_Roles     | Key_Project_Roles_Change | Research_Locations    | Navigation_Link | Modifications_Tile_Link |
-      | Participating_Organisation_Option | Addition_Of_sites_Option                                   | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields    | Valid_Data_All_Fields | Back            | Modifications_Tile      |
-      | Participating_Organisation_Option | Early_closure_withdrawal_of_sites_Option                   | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields    | Valid_Data_All_Fields | Back            | Modifications_Tile      |
-      | Participating_Organisation_Option | Addition_Of_Participant_Identification_Centres_Option      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields    | Valid_Data_All_Fields | Back            | Modifications_Tile      |
-      | Participating_Organisation_Option | Early_closure_Of_Participant_Identification_Centres_Option | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields    | Valid_Data_All_Fields | Back            | Modifications_Tile      |
-      | Invalid_Data_Area_Of_Change_Empty | Invalid_Data_Specific_Change_Empty                         | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields    | Valid_Data_All_Fields | Back            | Modifications_Tile      |
+      | Area_Of_Change             | Specific_Change                                            | Navigation_Link | Modifications_Tile_Link |
+      | Participating_Organisation | Addition_Of_sites_Option                                   | Back            | Modifications_Tile      |
+      | Participating_Organisation | Early_closure_withdrawal_of_sites_Option                   | Back            | Modifications_Tile      |
+      | Participating_Organisation | Addition_Of_Participant_Identification_Centres_Option      | Back            | Modifications_Tile      |
+      | Participating_Organisation | Early_closure_Of_Participant_Identification_Centres_Option | Back            | Modifications_Tile      |
+      | Default_Value              | Default_Value                                              | Back            | Modifications_Tile      |
 
   @rsp-4038 @SelectAreaOfChangeErrorValidation
   Scenario Outline: Validate the mandatory field error message on select area of change page
@@ -99,9 +99,9 @@ Feature: Create Amendment - Create Modifications
     Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Select_Area_Of_Change_Page'
 
     Examples:
-      | Field_And_Summary_Error_Message         | Area_Of_Change                    | Specific_Change                    | Project_Details_Title | Key_Project_Roles     | Key_Project_Roles_Change | Research_Locations    | Navigation_Link | Modifications_Tile_Link |
-      | Missing_All_Mandatory_Fields            | Invalid_Data_Area_Of_Change_Empty | Invalid_Data_Specific_Change_Empty | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields    | Valid_Data_All_Fields | Back            | Modifications_Tile      |
-      | Missing_Mandatory_Field_Specific_Change | Participating_Organisation_Option | Invalid_Data_Specific_Change_Empty | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields    | Valid_Data_All_Fields | Back            | Modifications_Tile      |
+      | Field_And_Summary_Error_Message        | Area_Of_Change             | Specific_Change | Navigation_Link | Modifications_Tile_Link |
+      | Missing_All_Mandatory_Fields           | Default_Value              | Default_Value   | Back            | Modifications_Tile      |
+      | Missing_Mandatory_Only_Specific_Change | Participating_Organisation | Default_Value   | Back            | Modifications_Tile      |
 
   @rsp-4039 @ParticipatingOrganisations
   Scenario Outline: Verify that user can create modifications and validate the field values in search participating organisations page
@@ -117,11 +117,11 @@ Feature: Create Amendment - Create Modifications
     And I validate the ui lables and field values with '<Project_Details_Title>' on participating organisation page
 
     Examples:
-      | Area_Of_Change                    | Specific_Change                                            | Project_Details_Title | Key_Project_Roles     | Key_Project_Roles_Change | Research_Locations    | Navigation_Link | Modifications_Tile_Link |
-      | Participating_Organisation_Option | Addition_Of_sites_Option                                   | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields    | Valid_Data_All_Fields | Back            | Modifications_Tile      |
-      | Participating_Organisation_Option | Early_closure_withdrawal_of_sites_Option                   | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields    | Valid_Data_All_Fields | Back            | Modifications_Tile      |
-      | Participating_Organisation_Option | Addition_Of_Participant_Identification_Centres_Option      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields    | Valid_Data_All_Fields | Back            | Modifications_Tile      |
-      | Participating_Organisation_Option | Early_closure_Of_Participant_Identification_Centres_Option | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields    | Valid_Data_All_Fields | Back            | Modifications_Tile      |
+      | Area_Of_Change             | Specific_Change                                            | Project_Details_Title | Navigation_Link | Modifications_Tile_Link |
+      | Participating_Organisation | Addition_Of_sites_Option                                   | Valid_Data_All_Fields | Back            | Modifications_Tile      |
+      | Participating_Organisation | Early_closure_withdrawal_of_sites_Option                   | Valid_Data_All_Fields | Back            | Modifications_Tile      |
+      | Participating_Organisation | Addition_Of_Participant_Identification_Centres_Option      | Valid_Data_All_Fields | Back            | Modifications_Tile      |
+      | Participating_Organisation | Early_closure_Of_Participant_Identification_Centres_Option | Valid_Data_All_Fields | Back            | Modifications_Tile      |
 
 
   @rsp-4039 @ParticipatingOrganisationsModificationIdValidation
@@ -137,8 +137,8 @@ Feature: Create Amendment - Create Modifications
     Then I validate the modification id on participating organisation page when user creates multiple new modifications
 
     Examples:
-      | Area_Of_Change                    | Specific_Change          | Modification_Count | Project_Details_Title | Key_Project_Roles     | Key_Project_Roles_Change | Research_Locations    | Navigation_Link | Modifications_Tile_Link |
-      | Participating_Organisation_Option | Addition_Of_sites_Option | 10                 | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields    | Valid_Data_All_Fields | Back            | Modifications_Tile      |
+      | Area_Of_Change             | Specific_Change          | Modification_Count | Navigation_Link | Modifications_Tile_Link |
+      | Participating_Organisation | Addition_Of_sites_Option | 10                 | Back            | Modifications_Tile      |
 
 
   @rsp-4039 @ParticipatingOrganisationSaveLater
@@ -157,11 +157,11 @@ Feature: Create Amendment - Create Modifications
     Then I can see the modification progress saved successful message on project overview page
 
     Examples:
-      | Area_Of_Change                    | Specific_Change                                            | Project_Details_Title | Key_Project_Roles     | Key_Project_Roles_Change | Research_Locations    | Navigation_Link | Modifications_Tile_Link |
-      | Participating_Organisation_Option | Addition_Of_sites_Option                                   | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields    | Valid_Data_All_Fields | Back            | Modifications_Tile      |
-      | Participating_Organisation_Option | Early_closure_withdrawal_of_sites_Option                   | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields    | Valid_Data_All_Fields | Back            | Modifications_Tile      |
-      | Participating_Organisation_Option | Addition_Of_Participant_Identification_Centres_Option      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields    | Valid_Data_All_Fields | Back            | Modifications_Tile      |
-      | Participating_Organisation_Option | Early_closure_Of_Participant_Identification_Centres_Option | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields    | Valid_Data_All_Fields | Back            | Modifications_Tile      |
+      | Area_Of_Change             | Specific_Change                                            | Navigation_Link | Modifications_Tile_Link |
+      | Participating_Organisation | Addition_Of_sites_Option                                   | Back            | Modifications_Tile      |
+      | Participating_Organisation | Early_closure_withdrawal_of_sites_Option                   | Back            | Modifications_Tile      |
+      | Participating_Organisation | Addition_Of_Participant_Identification_Centres_Option      | Back            | Modifications_Tile      |
+      | Participating_Organisation | Early_closure_Of_Participant_Identification_Centres_Option | Back            | Modifications_Tile      |
 
 
   @rsp-4039 @ParticipatingOrganisationsErrorValidation
@@ -173,8 +173,8 @@ Feature: Create Amendment - Create Modifications
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Participating_Organisations_Page'
-    Then I validate mandatory field summary error message is displayed on participating organisations page
+    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Participating_Organisations_Page'
 
     Examples:
-      | Area_Of_Change                    | Specific_Change          | Project_Details_Title | Key_Project_Roles     | Key_Project_Roles_Change | Research_Locations    | Navigation_Link | Modifications_Tile_Link |
-      | Participating_Organisation_Option | Addition_Of_sites_Option | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields    | Valid_Data_All_Fields | Back            | Modifications_Tile      |
+      | Field_And_Summary_Error_Message              | Area_Of_Change             | Specific_Change          | Navigation_Link | Modifications_Tile_Link |
+      | Field_Error_participating_organisations_text | Participating_Organisation | Addition_Of_sites_Option | Back            | Modifications_Tile      |

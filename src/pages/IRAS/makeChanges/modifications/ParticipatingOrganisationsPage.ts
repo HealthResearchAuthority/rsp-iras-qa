@@ -23,8 +23,6 @@ export default class MakeChangeParticipatingOrganisationsPage {
   readonly participating_organisations_search_button: Locator;
   readonly advanced_filter_link: Locator;
   readonly remove_this_change_link: Locator;
-  readonly error_message_summary_header: Locator;
-  readonly summary_error_participating_Organisations_text: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -48,8 +46,8 @@ export default class MakeChangeParticipatingOrganisationsPage {
       this.participatingOrganisationsPageTestData.Label_Texts.modification_id_label
     );
     this.modification_id_text = this.modification_id_text_row.locator('..').locator('.govuk-summary-list__value');
+    this.participating_organisations_text = this.page.getByTestId('SearchTerm');
 
-    this.participating_organisations_text = this.page.getByTestId('sponsor_org_search');
     // When search function implemented on this page the below locator need to be removed to handle in common functions
     this.participating_organisations_search_button = this.page.getByRole('button', {
       name: this.buttonTextData.Participating_Organisations_Page.Search,
@@ -61,13 +59,6 @@ export default class MakeChangeParticipatingOrganisationsPage {
     });
     this.remove_this_change_link = this.page.getByRole('link', {
       name: this.linkTextData.Participating_Organisations_Page.Remove_This_Change,
-      exact: true,
-    });
-    // Error validation locators should be removed and moved to common error validation when filed error is implemented on this page
-    this.error_message_summary_header = this.page.getByText(this.commonTestData.error_message_summary_header);
-    this.summary_error_participating_Organisations_text = this.page.getByRole('link', {
-      name: this.participatingOrganisationsPageTestData.Summary_Error_participating_organisations_text
-        .participating_organisations_text,
       exact: true,
     });
   }

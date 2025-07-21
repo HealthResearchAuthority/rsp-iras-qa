@@ -405,6 +405,7 @@ Then(
       editReviewBodyPage,
       reviewYourAnswersPage,
       selectAreaOfChangePage,
+      participatingOrganisationsPage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
@@ -449,6 +450,10 @@ Then(
       errorMessageFieldDataset =
         selectAreaOfChangePage.selectAreaOfChangePageTestData[errorMessageFieldAndSummaryDatasetName];
       page = selectAreaOfChangePage;
+    } else if (pageKey == 'Participating_Organisations_Page') {
+      errorMessageFieldDataset =
+        participatingOrganisationsPage.participatingOrganisationsPageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = participatingOrganisationsPage;
     }
     let allSummaryErrorExpectedValues: any;
     let summaryErrorActualValues: any;
@@ -487,6 +492,10 @@ Then(
             const element = await commonItemsPage.clickErrorSummaryLinkMultipleErrorField(val, key, page);
             await expect(element).toBeInViewport();
           }
+        } else if (pageKey == 'Select_Area_Of_Change_Page') {
+          fieldErrorMessagesActualValues = (await commonItemsPage.getMultipleFieldErrorMessages(key, page)).toString();
+        } else if (pageKey == 'Participating_Organisations_Page') {
+          fieldErrorMessagesActualValues = (await commonItemsPage.getMultipleFieldErrorMessages(key, page)).toString();
         } else {
           fieldErrorMessagesActualValues = await commonItemsPage.getFieldErrorMessages(key, page);
           expect(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
