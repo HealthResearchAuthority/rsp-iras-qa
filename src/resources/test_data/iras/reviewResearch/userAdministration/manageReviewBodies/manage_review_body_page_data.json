@@ -17,7 +17,14 @@
     "actions_link": "View/Edit",
     "no_results_heading": "No results found",
     "no_results_guidance_text": "Check your spelling or enter another search term and try again. If no results are found, you can create a new review body record.",
-    "enlarged_page_size": "100"
+    "enlarged_page_size": "100",
+    "country_advanced_filter_label": "Country",
+    "status_advanced_filter_label": "Status",
+    "selected_checkboxes_hint_label": "selected"
+  },
+  "Advanced_Filters_Hint_Labels": {
+    "country_hint_label": "Select all that apply",
+    "status_hint_label": "Select one option"
   },
   "Search_For_Review_Bodies": {
     "Search_Queries": {
@@ -27,7 +34,53 @@
       "Trailing_White_Space_Data": { "search_input_text": "QA Automation " },
       "Existing_QA_Data_One": { "search_input_text": "QA Automation" },
       "Existing_QA_Data_Two": { "search_input_text": "QA Automation Test" },
-      "Existing_QA_Data_Three": { "search_input_text": "ZZ Top" }
+      "Existing_QA_Data_Three": { "search_input_text": "ZZ Top" },
+      "Empty_Search_Data": { "search_input_text": "" }
+    }
+  },
+  "Advanced_Filters": {
+    "Advanced_Filter_One": {
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "status_radio": "Active"
+    },
+    "Advanced_Filter_Two": {
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "status_radio": "Disabled"
+    },
+    "Advanced_Filter_Three": {
+      "country_checkbox": ["England"],
+      "status_radio": "Active"
+    },
+    "Advanced_Filter_Four": {
+      "country_checkbox": ["Northern Ireland"],
+      "status_radio": "Active"
+    },
+    "Advanced_Filter_Five": {
+      "country_checkbox": ["Scotland"],
+      "status_radio": "Active"
+    },
+    "Advanced_Filter_Six": {
+      "country_checkbox": ["Wales"],
+      "status_radio": "Active"
+    },
+    "Advanced_Filter_Seven": {
+      "country_checkbox": ["England", "Northern Ireland"],
+      "status_radio": "Active"
+    },
+    "Advanced_Filter_Eight": {
+      "country_checkbox": ["Northern Ireland", "Scotland", "Wales"],
+      "status_radio": "Active"
+    },
+    "Advanced_Filter_Nine": {
+      "country_checkbox": ["England", "Wales"],
+      "status_radio": "Active"
+    },
+    "Advanced_Filter_Ten": {
+      "country_checkbox": ["Northern Ireland", "Wales"],
+      "status_radio": "Disabled"
+    },
+    "Advanced_Filter_No_Country_Selected": {
+      "country_checkbox": []
     }
   }
 }

@@ -58,16 +58,27 @@ export default class CommonItemsPage {
   readonly tableBodyRows: Locator;
   readonly hidden_next_button: Locator;
   readonly next_button: Locator;
+  readonly pagination_next_link: Locator;
   readonly fieldGroup: Locator;
   readonly errorFieldGroup: Locator;
   readonly search_text: Locator;
   readonly pagination: Locator;
   readonly firstPage: Locator;
+  readonly lastPage: Locator;
   readonly previous_button: Locator;
   readonly currentPage: Locator;
   readonly pagination_results: Locator;
   readonly pagination_items: Locator;
   readonly pageLinks: Locator;
+  readonly advanced_filter_chevron: Locator;
+  readonly advanced_filter_active_filters_label: Locator;
+  readonly no_matching_search_result_header_label: Locator;
+  readonly no_matching_search_result_sub_header_label: Locator;
+  readonly no_matching_search_result_body_one_label: Locator;
+  readonly no_matching_search_result_body_two_label: Locator;
+  readonly no_matching_search_result_body_three_label: Locator;
+  readonly no_matching_search_result_body_four_label: Locator;
+  readonly no_matching_search_result_count_label: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -109,6 +120,7 @@ export default class CommonItemsPage {
     this.bannerSystemAdmin = this.bannerNavBar.getByText(this.linkTextData.Banner.System_Admin, { exact: true });
     this.bannerMyApplications = this.bannerNavBar.getByText(this.linkTextData.Banner.My_Applications, { exact: true });
     this.next_button = this.page.getByRole('link').getByText(this.commonTestData.next_button, { exact: true });
+    this.pagination_next_link = this.page.locator('div[class="govuk-pagination__next"]').getByRole('link');
     this.errorMessageFieldLabel = this.page
       .locator('.field-validation-error')
       .or(this.page.locator('.govuk-error-message'))
@@ -122,6 +134,7 @@ export default class CommonItemsPage {
     this.topMenuBarLinks = this.page.getByTestId('navigation').getByRole('listitem').getByRole('link');
     this.pagination = page.getByRole('navigation', { name: 'Pagination' });
     this.firstPage = this.pagination.getByRole('link', { name: this.commonTestData.first_page, exact: true });
+    this.lastPage = this.pagination.getByRole('listitem').last();
     this.previous_button = this.pagination
       .getByRole('link')
       .getByText(this.commonTestData.previous_button, { exact: true });
@@ -137,6 +150,16 @@ export default class CommonItemsPage {
     this.alert_box_headings = this.alert_box.getByRole('heading');
     this.alert_box_list = this.alert_box.getByRole('list');
     this.alert_box_list_items = this.alert_box.getByRole('listitem');
+    this.advanced_filter_chevron = this.page.getByRole('button', { name: this.commonTestData.advanced_filter_label });
+    this.advanced_filter_active_filters_label = this.page.getByRole('list');
+    this.no_matching_search_result_header_label = this.page.getByRole('heading');
+    this.no_matching_search_result_sub_header_label = this.page.getByRole('paragraph');
+    this.no_matching_search_result_body_one_label =
+      this.no_matching_search_result_body_two_label =
+      this.no_matching_search_result_body_three_label =
+      this.no_matching_search_result_body_four_label =
+        this.page.getByRole('listitem');
+    this.no_matching_search_result_count_label = this.page.getByRole('heading');
   }
 
   //Page Methods
