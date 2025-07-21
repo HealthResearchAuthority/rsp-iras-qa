@@ -122,12 +122,12 @@ Then(
           );
           filterCheckboxValuesExpected = activeCheckboxFiltersMap.get('multiSelectFilter');
           const checkboxValues = filterCheckboxValuesExpected.flat().map((item: string) => item.trim());
-          expectedFilterValues.push(...checkboxValues); // Append to the array
+          expectedFilterValues.push(...checkboxValues);
         } else {
           activeFiltersMap = await searchModificationsPage.getActiveFiltersLabels(dataset, datasetLabels);
           filterValuesExpected = activeFiltersMap.get('singleSelectFilter');
           const singleSelectValues = filterValuesExpected.flat().map((item: string) => item.trim());
-          expectedFilterValues.push(...singleSelectValues); // Append to the array
+          expectedFilterValues.push(...singleSelectValues);
         }
       }
     }

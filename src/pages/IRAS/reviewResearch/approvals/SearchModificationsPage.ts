@@ -255,18 +255,8 @@ export default class SearchModificationsPage {
     });
     this.sponsor_organisation_jsdisabled_search_results_radio_button =
       this.sponsor_organisation_fieldset.getByRole('radio');
-    this.active_filters_list = this.page
-      .getByRole('heading')
-      .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.active_filters_label, {
-        exact: true,
-      })
-      .locator('..')
-      .getByRole('listitem')
-      .getByRole('link')
-      .locator('.search-filter-summary__remove-filter-text');
-    // this.active_filters_list = this.page
-    //   .locator('.search-filter-summary__remove-filters li a')
-    //   .or(this.page.locator('.search-filter-summary__remove-filters li a span'));
+
+    this.active_filters_list = this.page.locator('.search-filter-summary__remove-filter-text');
 
     // this.sponsor_organisation_jsdisabled_result_hint_label = this.sponsor_organisation_fieldset.getByText(
     //   this.searchModificationsPageTestData.Search_Modifications_Page.Sponsor_Organisation_Jsdisabled_Search_Hint_Labels
@@ -418,21 +408,26 @@ export default class SearchModificationsPage {
   }
 
   async removeSelectedFilterValues(removeFilterLabel: string[]): Promise<string[]> {
-    const filterItems = this.active_filters_list;
-    const count = await filterItems.count();
-    expect(count).toBe(removeFilterLabel.length);
-    console.log(removeFilterLabel);
     const removedFilterValues: string[] = [];
-    for (let i = 0; i < count; i++) {
-      const text = (await filterItems.nth(i).innerText()).trim().replace('Remove filter', '').trim();
-      console.log(text);
-      if (removeFilterLabel.includes(text)) {
-        removedFilterValues.push(text);
-        await filterItems.nth(i).locator('..').click({ force: true });
-        await this.page.waitForTimeout(500);
+    for (const label of removeFilterLabel) {
+      let filterFound = true;
+      while (filterFound) {
+        // Re-fetch the list each time to get the latest DOM state
+        const filterItems = this.page.locator('.search-filter-summary__remove-filter-text');
+        const count = await filterItems.count();
+        filterFound = false;
+        for (let i = 0; i < count; i++) {
+          const text = (await filterItems.nth(i).innerText()).trim().replace('Remove filter', '').trim();
+          if (text === label) {
+            removedFilterValues.push(text);
+            await filterItems.nth(i).locator('..').click({ force: true });
+            await this.page.waitForTimeout(500); // Optional: wait for DOM to update
+            filterFound = true;
+            break; // Restart loop to re-fetch updated list
+          }
+        }
       }
     }
-    console.log(removedFilterValues);
     return removedFilterValues;
   }
 

@@ -300,7 +300,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
     ##Scenario 6.1 -Remove filters validation
     # Remove filters>>one by one on clicking 'x'/ all together by clicking 'Clear all filters'
     # The search results update accordingly
-    @RemoveActiveFiltersOneByOne @Test14 @skip
+    @RemoveActiveFiltersOneByOne @Test14
     Scenario Outline: Verify the user can remove the selected filters one by one and the search results update accordingly
         When I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
@@ -322,7 +322,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
             | Advanced_Filters_Nth | Advanced_Filters_Nth_Short_Project_Title_Filter     | Advanced_Filters_Nth_After_Remove_Short_Project_Title_Filter     |
             | Advanced_Filters_Nth | Advanced_Filters_Nth_Sponsor_Organisation_Filter    | Advanced_Filters_Nth_After_Remove_Sponsor_Organisation_Filter    |
 
-    @RemoveAllActiveFiltersOneByOne @Test14 @skip
+    @RemoveAllActiveFiltersOneByOne @Test14
     Scenario Outline: Verify the user can remove all the selected filters one by one and the search results update accordingly
         When I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
@@ -342,7 +342,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
             | Advanced_Filters     | Advanced_Filters_Remove  |
             | Advanced_Filters_Nth | Advanced_Filters_Nth_All |
 
-    @RemoveAllActiveFiltersOneByOne @Test14 @skip
+    @RemoveAllActiveFiltersOneByOne @Test14
     Scenario Outline: Verify the user can remove all the selected filters one by one and the search results update accordingly based on the previously entered IRAS ID
         When I enter '<Valid_Iras_Id>' into the search field
         And I capture the page screenshot
