@@ -17,6 +17,7 @@ Feature: Receive Amendments: Sort modification results after performing a search
         Then I can see the list is sorted by 'ascending' order of the '<Sort_Field>'
         When I click the '<Sort_Button>' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
+        Then I can see the list is sorted by 'descending' order of the '<Sort_Field>'
 
         Examples:
             | Sort_Button         | Sort_Field          |
