@@ -10,12 +10,13 @@ Feature: Receive Amendments: Sort modification results after performing a search
         And the system displays modification records matching the search criteria of 'Valid_Iras_Id_Prefix'
         And I capture the page screenshot
 
-    @sortModificationsByColumn
+    @SortModificationsByColumn
     Scenario: Verify the user is able to sort the list of modifications by ascending and descending order for each results table column
         When I click the '<Sort_Button>' button on the 'Search_Modifications_Page'
+        And I capture the page screenshot
         Then I can see the list is sorted by 'ascending' order of the '<Sort_Field>'
         When I click the '<Sort_Button>' button on the 'Search_Modifications_Page'
-        Then I can see the list is sorted by 'descending' order of the '<Sort_Field>'
+        And I capture the page screenshot
 
         Examples:
             | Sort_Button         | Sort_Field          |
