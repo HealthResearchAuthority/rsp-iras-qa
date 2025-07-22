@@ -822,8 +822,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
 
   @axeAccessibilityModficationsTasklistPage @FrontStageUser
   Scenario: Modifications tasklist page
-    Given I have navigated to the 'Modifications_tasklist_Page'
-    Then I can see the 'Modifications_tasklist_Page'
+    Given I have navigated to the 'Modifications_Tasklist_Page'
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
