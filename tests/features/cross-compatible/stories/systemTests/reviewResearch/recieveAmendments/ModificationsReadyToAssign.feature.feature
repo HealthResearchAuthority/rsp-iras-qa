@@ -9,9 +9,10 @@ Feature: Modifications Tasklist page that displays modifications ready to be ass
     Scenario: Verify the user is able to sort the modifications tasklist by ascending and descending order for each results table column
         When I click the '<Sort_Button>' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
-        Then I can see the list is sorted by 'ascending' order of the '<Sort_Field>'
+        Then I can see the list of modifications received for approval is sorted by 'ascending' order of the '<Sort_Field>'
         When I click the '<Sort_Button>' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
+        Then I can see the list of modifications received for approval is sorted by 'descending' order of the '<Sort_Field>'
 
         Examples:
             | Sort_Button           | Sort_Field            |

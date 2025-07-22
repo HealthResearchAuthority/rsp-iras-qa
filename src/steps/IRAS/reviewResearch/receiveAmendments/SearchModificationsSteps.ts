@@ -36,7 +36,7 @@ Then(
 );
 
 Then(
-  'I can see the list is sorted by {string} order of the {string}',
+  'I can see the list of modifications received for approval is sorted by {string} order of the {string}',
   async ({ searchModificationsPage, commonItemsPage }, sortDirection: string, sortField: string) => {
     let sortedList: string[];
     let columnIndex: number;
