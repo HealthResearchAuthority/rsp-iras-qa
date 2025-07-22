@@ -1,5 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as modificationsReadyToAssignPageData from '../../../../resources/test_data/iras/reviewResearch/receiveAmendments/modifications_ready_to_assign_page_data.json';
+// import { convertDate, getMonthFromString } from '../../../../utils/UtilFunctions';
 
 //Declare Page Objects
 export default class ModificationsReadyToAssignPage {
@@ -81,5 +82,57 @@ export default class ModificationsReadyToAssignPage {
     await expect(this.modification_type_label).toBeVisible();
     await expect(this.date_submitted_label).toBeVisible();
     await expect(this.days_since_submission_label).toBeVisible();
+  }
+
+  async sortDateSubmittedListValues(datesSubmitted: string[], sortDirection: string): Promise<string[]> {
+    const listAsDates: Date[] = [];
+    const sortedListAsStrings: string[] = [];
+    const formattedDatesSubmitted = datesSubmitted.map((id) => {
+      const [day, month, year] = id.split(' ');
+      return [day, month, year];
+    });
+
+    for (const entry of formattedDatesSubmitted.entries()) {
+      const usFormattedEntry = entry[1].reverse();
+      const dateEntryString = `${usFormattedEntry[0]} ${usFormattedEntry[1]} ${usFormattedEntry[2]}`;
+      const dateFormattedEntry = new Date(dateEntryString);
+      listAsDates.push(dateFormattedEntry);
+    }
+
+    if (sortDirection.toLowerCase() == 'descending') {
+      listAsDates.sort((a, b) => b.getTime() - a.getTime());
+    } else {
+      listAsDates.sort((a, b) => a.getTime() - b.getTime());
+    }
+
+    for (const date of listAsDates) {
+      sortedListAsStrings.push(date.toLocaleString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }));
+    }
+    return sortedListAsStrings;
+  }
+
+  async sortDaysSinceSubmittedListValues(daysSinceSubmitted: string[], sortDirection: string): Promise<string[]> {
+    const listAsNums: number[] = [];
+    const sortedListAsStrings: string[] = [];
+    for (const days of daysSinceSubmitted) {
+      const daysAsNum = parseInt(
+        days
+          .replace(this.modificationsReadyToAssignPageData.Modifications_Ready_To_Assign_Page.tasklist_days_suffix, '')
+          .trim()
+      );
+      listAsNums.push(daysAsNum);
+    }
+
+    if (sortDirection.toLowerCase() == 'descending') {
+      listAsNums.sort((a, b) => b - a);
+    } else {
+      listAsNums.sort((a, b) => a - b);
+    }
+
+    for (const nums of listAsNums) {
+      const days = `${nums} ${this.modificationsReadyToAssignPageData.Modifications_Ready_To_Assign_Page.tasklist_days_suffix}`;
+      sortedListAsStrings.push(days);
+    }
+    return sortedListAsStrings;
   }
 }

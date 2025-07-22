@@ -5,7 +5,8 @@
     "page_description": "This page shows all the modifications that are ready for you to assign, where the lead nation is England.",
     "modification_button_label": "Continue to assign modifications",
     "advanced_filter_label": "Advanced filter",
-    "modification_checkbox": ""
+    "modification_checkbox": "",
+    "tasklist_days_suffix": "days"
   },
 
   "Label_Texts": {
