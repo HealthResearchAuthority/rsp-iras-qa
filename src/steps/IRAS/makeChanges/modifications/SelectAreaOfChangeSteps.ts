@@ -1,6 +1,8 @@
 import { createBdd } from 'playwright-bdd';
 import { test, expect } from '../../../../hooks/CustomFixtures';
 import { confirmStringNotNull } from '../../../../utils/UtilFunctions';
+import * as buttonTextData from '../../../../resources/test_data/common/button_text_data.json';
+import * as linkTextData from '../../../../resources/test_data/common/link_text_data.json';
 
 const { Then } = createBdd(test);
 
@@ -71,24 +73,30 @@ Then(
 );
 
 Then(
-  'I validate the modification id is incremented by one for every {int} new modification on select area of change page',
-  async ({ selectAreaOfChangePage, projectDetailsIRASPage, commonItemsPage }, ModificationCount: number) => {
-    const maxModificationCount = ModificationCount;
+  'I validate the modification id is incremented by one for every {string} new modification on select area of change page',
+  async ({ selectAreaOfChangePage, projectDetailsIRASPage, commonItemsPage }, datasetName: string) => {
+    const maxModificationCount = selectAreaOfChangePage.selectAreaOfChangePageTestData[datasetName];
     let expectedModificationId: string;
     let actualModificationId: string;
     const irasIdRunTime = await projectDetailsIRASPage.getUniqueIrasId();
-    for (let i = 1; i <= maxModificationCount; i++) {
+    for (let index = 1; index <= maxModificationCount; index++) {
       actualModificationId = confirmStringNotNull(await selectAreaOfChangePage.modification_id_text.textContent());
-      expectedModificationId = irasIdRunTime + '/' + i;
+      expectedModificationId = irasIdRunTime + '/' + index;
       expect(actualModificationId).toBe(expectedModificationId);
       await commonItemsPage.govUkButton
-        .getByText('Save for later', { exact: true })
-        .or(commonItemsPage.genericButton.getByText('Save for later', { exact: true }))
+        .getByText(buttonTextData.Participating_Organisations_Page.Save_For_Later, { exact: true })
+        .or(
+          commonItemsPage.genericButton.getByText(buttonTextData.Participating_Organisations_Page.Save_For_Later, {
+            exact: true,
+          })
+        )
         .first()
         .click();
-      await commonItemsPage.govUkLink.getByText('Modifications', { exact: true }).click();
-      const j = i + 1;
-      const storeModificationId = irasIdRunTime + '/' + j;
+      await commonItemsPage.govUkLink
+        .getByText(linkTextData.Project_Overview_Page.Modifications_Tile, { exact: true })
+        .click();
+      const newModificationIndex = index + 1;
+      const storeModificationId = irasIdRunTime + '/' + newModificationIndex;
       await selectAreaOfChangePage.setModificationId(storeModificationId);
     }
   }
@@ -96,13 +104,20 @@ Then(
 
 Then(
   'I validate the specific change dropdown options are displayed based on the selected area of change dropdown with {string}',
-  async ({ selectAreaOfChangePage }, datasetName: string) => {
+  async ({ selectAreaOfChangePage, $testInfo }, datasetName: string) => {
     const expectedSpecificChangeDropdownValues =
       selectAreaOfChangePage.selectAreaOfChangePageTestData.Specific_Change_Options[datasetName];
     const actualSpecificChangeDropdownValues =
       await selectAreaOfChangePage.specific_change_dropdown_all_options.evaluateAll((values) =>
         values.map((value) => value.textContent)
       );
+    await $testInfo.attach('Evidence:', {
+      body:
+        'Actual value from UI = ' +
+        actualSpecificChangeDropdownValues +
+        ' and Expected value = ' +
+        expectedSpecificChangeDropdownValues,
+    });
     expect(actualSpecificChangeDropdownValues).toEqual(expectedSpecificChangeDropdownValues);
   }
 );

@@ -51,22 +51,22 @@ Feature: Create Amendment - Create Modifications
     When I click the '<Modifications_Tile_Link>' link on the 'Project_Overview_Page'
     And I can see the select area of change page
     And I select '<Area_Of_Change>' from area of change dropdown and '<Specific_Change>' from specific change dropdown
-    Then I validate the specific change dropdown options are displayed based on the selected area of change dropdown with '<All_Participating_Organisation_Options>'
+    Then I validate the specific change dropdown options are displayed based on the selected area of change dropdown with '<Dropdown_Options_To_Validate >'
 
     Examples:
-      | Area_Of_Change             | Specific_Change | All_Participating_Organisation_Options | Navigation_Link | Modifications_Tile_Link |
-      | Participating_Organisation | Default_Value   | Participating_Organisation             | Back            | Modifications_Tile      |
-      | Default_Value              | Default_Value   | Default_Value                          | Back            | Modifications_Tile      |
+      | Area_Of_Change             | Specific_Change | Dropdown_Options_To_Validate | Modifications_Tile_Link |
+      | Participating_Organisation | Default_Value   | Participating_Organisation   | Modifications_Tile      |
+      | Default_Value              | Default_Value   | Default_Value                | Modifications_Tile      |
 
   @SelectAreaOfChangeModificationIdValidationRegression
   Scenario Outline: Validate the modification id on select area of change page when user creates multiple new modifications
     When I click the '<Modifications_Tile_Link>' link on the 'Project_Overview_Page'
     And I can see the select area of change page
-    Then I validate the modification id is incremented by one for every <Modification_Count> new modification on select area of change page
+    Then I validate the modification id is incremented by one for every '<New_Modification_Count>' new modification on select area of change page
 
     Examples:
-      | Area_Of_Change             | Specific_Change          | Modification_Count | Navigation_Link | Modifications_Tile_Link |
-      | Participating_Organisation | Addition_Of_sites_Option | 10                 | Back            | Modifications_Tile      |
+      | New_Modification_Count | Modifications_Tile_Link |
+      | Modification_Count     | Modifications_Tile      |
 
   @SelectAreaOfChangeSaveLaterRegression
   Scenario Outline: Verify that user can save the modifications progress on select area of change page
@@ -81,12 +81,12 @@ Feature: Create Amendment - Create Modifications
     Then I can see the modification progress saved successful message on project overview page
 
     Examples:
-      | Area_Of_Change             | Specific_Change                                            | Navigation_Link | Modifications_Tile_Link |
-      | Participating_Organisation | Addition_Of_sites_Option                                   | Back            | Modifications_Tile      |
-      | Participating_Organisation | Early_closure_withdrawal_of_sites_Option                   | Back            | Modifications_Tile      |
-      | Participating_Organisation | Addition_Of_Participant_Identification_Centres_Option      | Back            | Modifications_Tile      |
-      | Participating_Organisation | Early_closure_Of_Participant_Identification_Centres_Option | Back            | Modifications_Tile      |
-      | Default_Value              | Default_Value                                              | Back            | Modifications_Tile      |
+      | Area_Of_Change             | Specific_Change                                            | Modifications_Tile_Link |
+      | Participating_Organisation | Addition_Of_sites_Option                                   | Modifications_Tile      |
+      | Participating_Organisation | Early_closure_withdrawal_of_sites_Option                   | Modifications_Tile      |
+      | Participating_Organisation | Addition_Of_Participant_Identification_Centres_Option      | Modifications_Tile      |
+      | Participating_Organisation | Early_closure_Of_Participant_Identification_Centres_Option | Modifications_Tile      |
+      | Default_Value              | Default_Value                                              | Modifications_Tile      |
 
   @SelectAreaOfChangeErrorValidationRegression
   Scenario Outline: Validate the mandatory field error message on select area of change page
@@ -99,9 +99,9 @@ Feature: Create Amendment - Create Modifications
     Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Select_Area_Of_Change_Page'
 
     Examples:
-      | Field_And_Summary_Error_Message        | Area_Of_Change             | Specific_Change | Navigation_Link | Modifications_Tile_Link |
-      | Missing_All_Mandatory_Fields           | Default_Value              | Default_Value   | Back            | Modifications_Tile      |
-      | Missing_Mandatory_Only_Specific_Change | Participating_Organisation | Default_Value   | Back            | Modifications_Tile      |
+      | Field_And_Summary_Error_Message        | Area_Of_Change             | Specific_Change | Modifications_Tile_Link |
+      | Missing_All_Mandatory_Fields           | Default_Value              | Default_Value   | Modifications_Tile      |
+      | Missing_Mandatory_Only_Specific_Change | Participating_Organisation | Default_Value   | Modifications_Tile      |
 
   @ParticipatingOrganisationsRegression
   Scenario Outline: Verify that user can create modifications and validate the field values in search participating organisations page
@@ -124,7 +124,7 @@ Feature: Create Amendment - Create Modifications
       | Participating_Organisation | Early_closure_Of_Participant_Identification_Centres_Option | Valid_Data_All_Fields | Back            | Modifications_Tile      |
 
 
-  @ParticipatingOrganisationsErrorValidation
+  @ParticipatingOrganisationsErrorValidationRegression
   Scenario Outline: Validate the mandatory field error message on participating organisation page
     When I click the '<Modifications_Tile_Link>' link on the 'Project_Overview_Page'
     And I can see the select area of change page
@@ -136,5 +136,5 @@ Feature: Create Amendment - Create Modifications
     Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Participating_Organisations_Page'
 
     Examples:
-      | Field_And_Summary_Error_Message              | Area_Of_Change             | Specific_Change          | Navigation_Link | Modifications_Tile_Link |
-      | Field_Error_participating_organisations_text | Participating_Organisation | Addition_Of_sites_Option | Back            | Modifications_Tile      |
+      | Field_And_Summary_Error_Message              | Area_Of_Change             | Specific_Change          | Modifications_Tile_Link |
+      | Field_Error_participating_organisations_text | Participating_Organisation | Addition_Of_sites_Option | Modifications_Tile      |

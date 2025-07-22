@@ -16,6 +16,7 @@
   "Missing_Mandatory_Only_Specific_Change": {
     "specific_change_dropdown": "Select specific change"
   },
+  "Modification_Count": 10,
   "Area_Of_Change_Options": {
     "Default_Value": "Select area of change",
     "Participating_Organisation": "Participating organisations",
@@ -30,7 +31,7 @@
       "PICs - Early closure or withdrawal of Participant Identification Centres",
       "Addition of sites undertaking the same activities as existing sites"
     ],
-    "Project_Design": ["Select area of change", "Change to planned end date"]
+    "Project_Design": ["Select specific change", "Change to planned end date"]
   },
   "Select_Area_Of_Change": {
     "Default_Value": { "area_of_change_dropdown": "Select area of change" },

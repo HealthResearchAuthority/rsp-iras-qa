@@ -33,7 +33,8 @@ export default class MakeChangeParticipatingOrganisationsPage {
     this.commonTestData = commonTestData;
 
     //Locators
-    this.pageHeading = this.page.locator('.govuk-heading-l');
+    this.pageHeading = this.page.getByRole('heading', { level: 1 });
+
     this.iras_id_row = this.page.getByText(participatingOrganisationsPageTestData.Label_Texts.iras_id_label);
     this.iras_id_text = this.iras_id_row.locator('..').locator('.govuk-summary-list__value');
     this.short_project_title_text_row = this.page.getByText(

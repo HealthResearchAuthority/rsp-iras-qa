@@ -492,12 +492,12 @@ Then(
             const element = await commonItemsPage.clickErrorSummaryLinkMultipleErrorField(val, key, page);
             await expect(element).toBeInViewport();
           }
-        } else if (pageKey == 'Select_Area_Of_Change_Page') {
-          fieldErrorMessagesActualValues = (await commonItemsPage.getMultipleFieldErrorMessages(key, page)).toString();
-        } else if (pageKey == 'Participating_Organisations_Page') {
-          fieldErrorMessagesActualValues = (await commonItemsPage.getMultipleFieldErrorMessages(key, page)).toString();
         } else {
           fieldErrorMessagesActualValues = await commonItemsPage.getFieldErrorMessages(key, page);
+          if (fieldErrorMessagesActualValues.includes('Error: ')) {
+            fieldErrorMessagesActualValues = fieldErrorMessagesActualValues.replace('Error: ', '');
+          }
+
           expect(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
           const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
           await expect(element).toBeInViewport();
