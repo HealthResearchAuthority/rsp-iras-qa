@@ -79,8 +79,8 @@ export default class ManageUsersPage {
     this.actions_column_header_label = this.page.locator(
       '[class$="govuk-table-users"] [class^="govuk-table__header"]:nth-child(6)'
     );
-    this.search_box_label = this.page.locator('label[for="SearchQuery"]');
-    this.search_box = this.page.getByTestId('SearchQuery');
+    this.search_box_label = this.page.locator('label[for="Search.SearchQuery"]');
+    this.search_box = this.page.getByTestId('Search.SearchQuery');
     this.search_button_label = this.page.getByText('Search');
     this.firstNameFromListLabel = this.page.locator('td:nth-child(1)');
     this.next_button = this.page.locator('.govuk-pagination__next a');

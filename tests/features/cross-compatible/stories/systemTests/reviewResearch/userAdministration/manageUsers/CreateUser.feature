@@ -270,7 +270,7 @@ Feature: User Administration: Manage Users - Create user
   # | Valid_Email_Data_Multiple_Sub_Domains |
   # | Valid_Email_Data_Other_Language     |
 
-  @rsp-3122 @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage
+  @rsp-3122 @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage @verifyInvalidDataInputs
   Scenario Outline: Validate error messages are displayed for invalid data in create user profile page
     When I fill the new user profile page using '<Invalid_Data_User_Profile>' for field validation
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
@@ -292,7 +292,7 @@ Feature: User Administration: Manage Users - Create user
       | Incorrect_Format_Invalid_Character_Limit_Telephone_Data   | Incorrect_Format_Invalid_Character_Limit_Telephone_Error        |
       | Incorrect_Format_Invalid_Character_Limit_Email_Data       | Incorrect_Format_Invalid_Character_Limit_Email_Address_Error    |
 
-  @rsp-3122 @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage @skip
+  @rsp-3122 @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage @verifyInvalidDataEmails @skip
   Scenario Outline: Validate error messages are displayed for invalid data in the email address field of create user profile page
     When I fill the new user profile page using '<Invalid_Data_User_Profile>' for field validation
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
@@ -376,7 +376,7 @@ Feature: User Administration: Manage Users - Create user
       | Valid_Data_In_All_Fields_Role_Operations | First_Name | Role_Operations | Missing_Mandatory_Field_Country_Role_Operations         | Missing_Mandatory_Field_Country_Role_Operations_Error         |
       | Valid_Data_In_All_Fields_Role_Operations | Last_Name  | Role_Operations | Missing_Mandatory_Field_Access_Required_Role_Operations | Missing_Mandatory_Field_Access_Required_Role_Operations_Error |
 
-  @rsp-3952 @DuplicateEmailValidation @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage
+  @rsp-3952 @DuplicateEmailValidation @DuplicateEmailExisting @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage
   Scenario Outline: Get existing email addresses from manage users list page and validate error messages are displayed for the duplicate email in create user profile page
     When I click the 'Back' link on the 'Create_User_Profile_Page'
     And I capture the page screenshot
@@ -399,31 +399,7 @@ Feature: User Administration: Manage Users - Create user
       | Email_Address | First    | Duplicate_Email_Role_Not_Operations | Duplicate_Email_Error           |
       | Email_Address | Last     | Duplicate_Email_Role_Operations     | Duplicate_Email_Error           |
 
-  @rsp-3952 @DuplicateEmailValidation @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage
-  Scenario Outline: Validate error messages are displayed for duplicate email in create user profile page
-    When I click the 'Back' link on the 'Create_User_Profile_Page'
-    And I capture the page screenshot
-    Then I can see the 'Manage_Users_Page'
-    When I fill the search input for searching 'users' with '<Search_Query>' as the search query
-    And I capture the page screenshot
-    And I click the 'Search' button on the 'Manage_Users_Page'
-    And I capture the page screenshot
-    Then the system displays user records matching the search criteria
-    And I capture the page screenshot
-    When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
-    And I capture the page screenshot
-    Then I can see the add a new user profile page
-    When I fill the new user profile page using '<Invalid_Data_User_Profile>' for field validation
-    And I click the 'Continue' button on the 'Create_User_Profile_Page'
-    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Create_User_Profile_Page'
-    And I capture the page screenshot
-    Examples:
-      | Search_Query            | Invalid_Data_User_Profile           | Field_And_Summary_Error_Message |
-      | Back_Stage_User_Email   | Duplicate_Email_Role_Not_Operations | Duplicate_Email_Error           |
-      | Front_Stage_User_Email  | Duplicate_Email_Role_Operations     | Duplicate_Email_Error           |
-      | System_Admin_User_Email | Duplicate_Email_Role_Operations     | Duplicate_Email_Error           |
-
-  @rsp-3952 @DuplicateEmailValidation @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage
+  @rsp-3952 @DuplicateEmailValidation @DuplicateEmailNew @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage
   Scenario Outline: Validate error messages are displayed for duplicate email in create user profile page after creating a user
     When I fill the new user profile page using '<Add_User_Profile>'
     And I capture the page screenshot
