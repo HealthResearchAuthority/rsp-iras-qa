@@ -98,5 +98,8 @@
   "Search_Modifications_Page": {
     "Apply_filters": "Apply filters",
     "Search": "Search"
+  },
+  "Modifications_Ready_To_Assign_Page": {
+    "Continue to assign modifications": "Continue to assign modifications"
   }
 }

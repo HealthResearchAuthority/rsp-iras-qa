@@ -111,7 +111,10 @@ export default class CommonItemsPage {
     this.bannerQuestionSet = this.bannerNavBar.getByText(this.linkTextData.Banner.Question_Set, { exact: true });
     this.bannerSystemAdmin = this.bannerNavBar.getByText(this.linkTextData.Banner.System_Admin, { exact: true });
     this.bannerMyApplications = this.bannerNavBar.getByText(this.linkTextData.Banner.My_Applications, { exact: true });
-    this.next_button = this.page.getByRole('link').getByText(this.commonTestData.next_button, { exact: true });
+    this.next_button = this.page
+      .getByRole('link')
+      .getByText(this.commonTestData.next_button, { exact: true })
+      .or(this.page.getByRole('button', { name: this.commonTestData.next_button, exact: true }));
     this.errorMessageFieldLabel = this.page
       .locator('.field-validation-error')
       .or(this.page.locator('.govuk-error-message'))
@@ -124,7 +127,10 @@ export default class CommonItemsPage {
     this.summaryErrorLinks = this.errorMessageSummaryLabel.locator('..').getByRole('listitem').getByRole('link');
     this.topMenuBarLinks = this.page.getByTestId('navigation').getByRole('listitem').getByRole('link');
     this.pagination = page.getByRole('navigation', { name: 'Pagination' });
-    this.firstPage = this.pagination.getByRole('link', { name: this.commonTestData.first_page, exact: true });
+    //this.firstPage = this.pagination.getByRole('link', { name: this.commonTestData.first_page, exact: true });
+    this.firstPage = this.pagination
+      .getByRole('link', { name: this.commonTestData.first_page, exact: true })
+      .or(this.pagination.getByRole('button', { name: this.commonTestData.first_page, exact: true }));
     this.previous_button = this.pagination
       .getByRole('link')
       .getByText(this.commonTestData.previous_button, { exact: true });
@@ -667,12 +673,12 @@ export default class CommonItemsPage {
   }
 
   async getTotalItems() {
-    // const paginationResults = await this.getPaginationResults();
-    // const paginationResultsParts: string[] = paginationResults.split(' results');
-    // const paginationResultsPartsOne: string[] = paginationResultsParts[0].split('Showing ');
-    // const paginationResultsPartsTwo: string[] = paginationResultsPartsOne[1].split(' of ');
-    // const totalItems = parseInt(paginationResultsPartsTwo[1], 10);
-    const totalItems = parseInt(confirmStringNotNull(await this.result_count.textContent()).split(' ')[0], 10);
+    const paginationResults = await this.getPaginationResults();
+    const paginationResultsParts: string[] = paginationResults.split(' results');
+    const paginationResultsPartsOne: string[] = paginationResultsParts[0].split('Showing ');
+    const paginationResultsPartsTwo: string[] = paginationResultsPartsOne[1].split(' of ');
+    const totalItems = parseInt(paginationResultsPartsTwo[1], 10);
+    //const totalItems = parseInt(confirmStringNotNull(await this.result_count.textContent()).split(' ')[0], 10);
     return totalItems;
   }
   async getItemsPerPage() {
@@ -746,7 +752,9 @@ export default class CommonItemsPage {
   }
 
   async clickOnPages(currentPageNumber: number, navigateMethod: string) {
-    const currentPageLink = this.pagination.getByRole('link', { name: `Page ${currentPageNumber}`, exact: true });
+    const currentPageLink = this.pagination
+      .getByRole('link', { name: `Page ${currentPageNumber}`, exact: true })
+      .or(this.pagination.getByRole('button', { name: `Page ${currentPageNumber}`, exact: true }));
     if (navigateMethod === 'clicking on page number') {
       if (await currentPageLink.isVisible()) {
         await currentPageLink.click();

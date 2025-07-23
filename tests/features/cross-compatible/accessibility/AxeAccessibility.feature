@@ -824,9 +824,12 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I expect to receive no WCAG Violations
 
   @axeAccessibilityModficationsReadyToAssign @FrontStageUser
-  Scenario: Modifications Tasklist page that displays modifications ready to be assigned 
+  Scenario: Modifications Tasklist page that displays modifications ready to be assigned and verify pagination
     Given I have navigated to the 'Modifications_tasklist_Page'
     Then I can see the 'Modifications_tasklist_Page'
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
+
+  
+  

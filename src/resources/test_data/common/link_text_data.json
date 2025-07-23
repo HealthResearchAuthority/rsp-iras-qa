@@ -150,5 +150,9 @@
   "Search_Modifications_Page": {
     "Advanced_Filter": "Advanced filter",
     "Clear_All_Filters": "Clear all filters"
+  },
+  "Modifications_Ready_To_Assign_Page": {
+    "Previous": "Previous",
+    "Next": "Next"
   }
 }
