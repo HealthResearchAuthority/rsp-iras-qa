@@ -420,6 +420,8 @@ Then(
       createReviewBodyPage,
       editReviewBodyPage,
       reviewYourAnswersPage,
+      selectAreaOfChangePage,
+      participatingOrganisationsPage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
@@ -460,6 +462,14 @@ Then(
       errorMessageFieldDataset =
         reviewYourAnswersPage.reviewYourAnswersPageTestData[errorMessageFieldAndSummaryDatasetName];
       page = reviewYourAnswersPage;
+    } else if (pageKey == 'Select_Area_Of_Change_Page') {
+      errorMessageFieldDataset =
+        selectAreaOfChangePage.selectAreaOfChangePageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = selectAreaOfChangePage;
+    } else if (pageKey == 'Participating_Organisations_Page') {
+      errorMessageFieldDataset =
+        participatingOrganisationsPage.participatingOrganisationsPageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = participatingOrganisationsPage;
     }
     let allSummaryErrorExpectedValues: any;
     let summaryErrorActualValues: any;
@@ -500,6 +510,10 @@ Then(
           }
         } else {
           fieldErrorMessagesActualValues = await commonItemsPage.getFieldErrorMessages(key, page);
+          if (fieldErrorMessagesActualValues.includes('Error: ')) {
+            fieldErrorMessagesActualValues = fieldErrorMessagesActualValues.replace('Error: ', '');
+          }
+
           expect(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
           const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
           await expect(element).toBeInViewport();
@@ -517,29 +531,24 @@ Then(
 When(
   'I enter {string} into the search field',
   async (
-    { commonItemsPage, reviewBodyProfilePage, createReviewBodyPage, createUserProfilePage, searchModificationsPage },
+    { commonItemsPage, reviewBodyProfilePage, createReviewBodyPage, createUserProfilePage },
     inputType: string
   ) => {
     let searchValue: string;
-    if (inputType.startsWith('Valid_Iras_Id') || inputType.startsWith('Invalid_Iras_Id')) {
-      searchValue = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[inputType];
-      await commonItemsPage.iras_id_search_text.fill(searchValue['iras_id_text']);
-    } else {
-      switch (inputType) {
-        case 'name of the previously used review body':
-          searchValue = await reviewBodyProfilePage.getOrgName();
-          break;
-        case 'name of the new review body':
-          searchValue = await createReviewBodyPage.getUniqueOrgName();
-          break;
-        case 'name of the newly created user':
-          searchValue = await createUserProfilePage.getUniqueEmail();
-          break;
-        default:
-          searchValue = inputType;
-      }
-      await commonItemsPage.search_text.fill(searchValue);
+    switch (inputType) {
+      case 'name of the previously used review body':
+        searchValue = await reviewBodyProfilePage.getOrgName();
+        break;
+      case 'name of the new review body':
+        searchValue = await createReviewBodyPage.getUniqueOrgName();
+        break;
+      case 'name of the newly created user':
+        searchValue = await createUserProfilePage.getUniqueEmail();
+        break;
+      default:
+        searchValue = inputType;
     }
+    await commonItemsPage.search_text.fill(searchValue);
   }
 );
 
@@ -634,6 +643,57 @@ When(
     }
   }
 );
+
+// Then(
+//   'the system displays no results found message if there is no {string} on the system that matches the search criteria',
+//   async (
+//     { commonItemsPage, userListReviewBodyPage, manageUsersPage, manageReviewBodiesPage, searchModificationsPage },
+//     entityType: string
+//   ) => {
+//     const filteredSearchResults = await userListReviewBodyPage.getFilteredSearchResultsBeforeSearch(commonItemsPage);
+//     expect(await commonItemsPage.tableRows.count()).toBe(0);
+//     expect(filteredSearchResults).toEqual([]);
+//     let headingLocator: Locator, guidanceLocator: Locator, expectedHeading: any, expectedGuidance: any;
+//     if (entityType === 'user') {
+//       headingLocator = manageUsersPage.no_results_heading;
+//       guidanceLocator = manageUsersPage.no_results_guidance_text;
+//       expectedHeading = manageUsersPage.manageUsersPageTestData.Manage_Users_Page.no_results_heading;
+//       expectedGuidance = manageUsersPage.manageUsersPageTestData.Manage_Users_Page.no_results_guidance_text;
+//       await expect(headingLocator).toHaveText(expectedHeading);
+//       await expect(guidanceLocator).toHaveText(expectedGuidance);
+//     } else if (entityType === 'review body') {
+//       headingLocator = manageReviewBodiesPage.no_results_heading;
+//       guidanceLocator = manageReviewBodiesPage.no_results_guidance_text;
+//       expectedHeading = manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.no_results_heading;
+//       expectedGuidance =
+//         manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.no_results_guidance_text;
+//       await expect(headingLocator).toHaveText(expectedHeading);
+//       await expect(guidanceLocator).toHaveText(expectedGuidance);
+//     } else if (entityType === 'modification record') {
+//       const expectedResultCount =
+//         searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.result_count_heading;
+//       const actualResultCount = confirmStringNotNull(await searchModificationsPage.result_count.textContent());
+//       expect('0' + expectedResultCount).toBe(actualResultCount);
+//       headingLocator = searchModificationsPage.no_results_heading;
+//       guidanceLocator = searchModificationsPage.no_results_guidance_text;
+//       expectedHeading =
+//         searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.no_results_heading;
+//       expectedGuidance =
+//         searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.no_results_guidance_text;
+//       await expect(headingLocator).toHaveText(expectedHeading);
+//       expect(confirmStringNotNull(await headingLocator.textContent())).toBe(expectedHeading);
+//       await expect(guidanceLocator).toHaveText(expectedGuidance);
+//       expect(confirmStringNotNull(await guidanceLocator.textContent())).toBe(expectedGuidance);
+//       const bulletPoints: string[] = await searchModificationsPage.getNoResultsBulletPoints();
+//       const bulletPointsActual = bulletPoints.flat().join(', ');
+//       const bulletPointsExpected =
+//         searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.no_results_bullet_points
+//           .flat()
+//           .join(', ');
+//       expect(bulletPointsActual).toEqual(bulletPointsExpected);
+//     }
+//   }
+// );
 
 Then(
   'the system displays no results found message if there is no {string} on the system that matches the search criteria',
@@ -738,6 +798,7 @@ Given(
         break;
       case 'Search_Modifications_Page':
         await searchModificationsPage.goto();
+        await searchModificationsPage.assertOnSearchModificationsPage();
         break;
       default:
         throw new Error(`${page} is not a valid option`);

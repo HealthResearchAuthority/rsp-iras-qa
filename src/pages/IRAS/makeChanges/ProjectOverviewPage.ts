@@ -9,6 +9,7 @@ export default class ProjectOverviewPage {
   readonly project_details_hint_label: Locator;
   readonly project_details_link: Locator;
   readonly project_short_title_label: Locator;
+  readonly modification_saved_success_message_text: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -26,6 +27,9 @@ export default class ProjectOverviewPage {
       .getByRole('heading')
       .getByText(this.projectOverviewPageTestData.Project_Overview_Page.project_details_link);
     this.project_short_title_label = this.page.locator('.govuk-caption-l');
+    this.modification_saved_success_message_text = this.page.getByRole('heading', {
+      name: this.projectOverviewPageTestData.Project_Overview_Page.modification_saved_success_message_text,
+    });
   }
 
   //Page Methods
