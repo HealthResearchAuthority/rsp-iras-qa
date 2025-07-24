@@ -343,7 +343,11 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
 
     @RemoveAllActiveFiltersOneByOne @Test14
     Scenario Outline: Verify the user can remove all the selected filters one by one and the search results update accordingly based on the previously entered IRAS ID
+        <<<<<<< HEAD
         When I enter '<Valid_Iras_Id>' into the search field for search modifications page
+        =======
+        When I enter '<Valid_Iras_Id>' into the search field
+        >>>>>>> 93ca5843cd832ac0c14e99144edc66e91e2bff06
         And I capture the page screenshot
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
