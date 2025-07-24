@@ -17,3 +17,10 @@ Then(
     expect(actualProjectTitle).toBe(expectedProjectTitle);
   }
 );
+
+Then(
+  'I can see the modification progress saved successful message on project overview page',
+  async ({ projectOverviewPage }) => {
+    expect(projectOverviewPage.modification_saved_success_message_text).toBeVisible();
+  }
+);
