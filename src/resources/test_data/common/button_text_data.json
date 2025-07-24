@@ -94,5 +94,14 @@
   },
   "Manage_Users_Page": {
     "Search": "Search"
+  },
+  "Search_Modifications_Page": {
+    "Apply_filters": "Apply filters",
+    "Search": "Search",
+    "Modification_Id": "Modification ID",
+    "Short_Project_Title": "Short project title",
+    "Modification_Type": "Modification type",
+    "Chief_Investigator": "Chief Investigator",
+    "Lead_Nation": "Lead Nation"
   }
 }
