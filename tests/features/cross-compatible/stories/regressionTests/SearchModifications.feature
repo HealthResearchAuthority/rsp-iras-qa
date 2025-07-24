@@ -6,7 +6,7 @@ Feature: Receive Amendments: Search Modifications
                 Given I have navigated to the 'Search_Modifications_Page'
 
         @RegressionSortModificationsByColumn @rsp-4090
-        # NOTE: ADD TIJI's FILTER SETU STEPS ONCE MERGED, TO COVER RSP-4305 DEFECT
+        # NOTE: ADD TIJI's FILTER SETUP STEPS ONCE MERGED, TO COVER RSP-4305 DEFECT
         Scenario: Verify the user is able to sort the list of modifications by ascending and descending order for each results table column
                 And I fill the search input for searching 'modifications' with 'Valid_Iras_Id_Prefix' as the search query
                 And I click the 'Search' button on the 'Search_Modifications_Page'

@@ -3,7 +3,7 @@ import * as buttonTextData from '../../resources/test_data/common/button_text_da
 import * as linkTextData from '../../resources/test_data/common/link_text_data.json';
 import * as questionSetData from '../../resources/test_data/common/question_set_data.json';
 import * as commonTestData from '../../resources/test_data/common/common_data.json';
-import fs from 'fs';
+import * as fs from 'fs';
 import path from 'path';
 import ProjectFilterPage from '../IRAS/questionSet/ProjectFilterPage';
 import ProjectDetailsPage from '../IRAS/questionSet/ProjectDetailsPage';
@@ -784,8 +784,8 @@ export default class CommonItemsPage {
       screenshotBuffers.push(buf);
     }
     const images = await Promise.all(screenshotBuffers.map((b) => sharp(b).metadata()));
-    const width = images[0].width!;
-    const heights = images.map((i) => i.height!);
+    const width = images[0].width;
+    const heights = images.map((i) => i.height);
     const totalHeight = heights.reduce((a, b) => a + b, 0);
     const stitchedImage = sharp({
       create: {
