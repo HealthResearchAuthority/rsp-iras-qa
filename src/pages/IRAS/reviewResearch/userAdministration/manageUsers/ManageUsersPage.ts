@@ -46,6 +46,26 @@ export default class ManageUsersPage {
   readonly listCell: Locator;
   private lastLoggedInDateFull: string;
   private lastLoggedInDateTruncated: string;
+  readonly country_checkbox: Locator;
+  readonly status_radio: Locator;
+  readonly country_checkbox_chevron: Locator;
+  readonly status_radio_chevron: Locator;
+  readonly country_hint_label: Locator;
+  readonly country_selected_hint_label: Locator;
+  readonly status_hint_label: Locator;
+  readonly date_last_logged_in_from_day_text: Locator;
+  readonly date_last_logged_in_from_month_dropdown: Locator;
+  readonly date_last_logged_in_from_year_text: Locator;
+  readonly date_last_logged_in_to_day_text: Locator;
+  readonly date_last_logged_in_to_month_dropdown: Locator;
+  readonly date_last_logged_in_to_year_text: Locator;
+  readonly date_last_logged_in_from_day_text_chevron: Locator;
+  readonly date_last_logged_in_to_day_text_chevron: Locator;
+  readonly date_last_logged_in_from_date_fieldset: Locator;
+  readonly date_last_logged_in_to_date_fieldset: Locator;
+  readonly date_last_logged_in_to_date_error: Locator;
+  readonly advanced_filter_chevron: Locator;
+  readonly date_last_logged_in_error_message: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -101,6 +121,118 @@ export default class ManageUsersPage {
         exact: true,
       });
     this.listCell = this.page.getByRole('cell');
+
+    this.advanced_filter_chevron = this.page.getByRole('button', {
+      name: this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.advanced_filter_label,
+    });
+    this.country_checkbox_chevron = this.page
+      .getByRole('heading', { level: 2 })
+      .getByText(
+        this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.country_advanced_filter_label,
+        {
+          exact: true,
+        }
+      );
+    this.status_radio_chevron = this.page
+      .getByRole('heading', { level: 2 })
+      .getByText(
+        this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.status_advanced_filter_label,
+        {
+          exact: true,
+        }
+      );
+    this.country_checkbox = page.getByRole('checkbox');
+    this.status_radio = page.getByRole('radio');
+    this.page.getByRole('checkbox');
+    this.country_selected_hint_label = page.getByTestId('country-hint');
+    this.country_hint_label = page.getByTestId('Search.Country');
+    this.status_hint_label = page.getByTestId('Search.Status');
+
+    this.date_last_logged_in_from_day_text_chevron = this.page
+      .getByRole('heading')
+      .getByText(
+        this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.date_last_logged_in_label,
+        {
+          exact: true,
+        }
+      );
+    this.date_last_logged_in_to_day_text_chevron = this.page
+      .getByRole('heading')
+      .getByText(
+        this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.date_last_logged_in_label,
+        {
+          exact: true,
+        }
+      );
+
+    this.date_last_logged_in_from_date_fieldset = this.page.locator('.govuk-fieldset').locator('.govuk-form-group', {
+      has: this.page.getByText(
+        this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List
+          .date_last_logged_in_from_date_hint_text
+      ),
+    });
+
+    this.date_last_logged_in_from_day_text = this.date_last_logged_in_from_date_fieldset
+      .locator('.govuk-form-group', {
+        has: this.page.getByText(
+          this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.date_last_logged_in_day_label
+        ),
+      })
+      .getByRole('textbox');
+    this.date_last_logged_in_from_month_dropdown = this.date_last_logged_in_from_date_fieldset
+      .locator('.govuk-form-group', {
+        has: this.page.getByText(
+          this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.date_last_logged_in_month_label
+        ),
+      })
+      .getByRole('combobox');
+    this.date_last_logged_in_from_year_text = this.date_last_logged_in_from_date_fieldset
+      .locator('.govuk-form-group', {
+        has: this.page.getByText(
+          this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.date_last_logged_in_year_label
+        ),
+      })
+      .getByRole('textbox');
+    this.date_last_logged_in_to_date_error = this.page
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group')
+      .filter({
+        hasText:
+          this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List
+            .date_last_logged_in_to_date_hint_text,
+      })
+      .locator('.govuk-error-message');
+    this.date_last_logged_in_to_date_fieldset = this.page.locator('.govuk-fieldset').locator('.govuk-form-group', {
+      has: this.page.getByText(
+        this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List
+          .date_last_logged_in_to_date_hint_text
+      ),
+    });
+    this.date_last_logged_in_to_day_text = this.date_last_logged_in_to_date_fieldset
+      .locator('.govuk-form-group', {
+        has: this.page.getByText(
+          this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.date_last_logged_in_day_label
+        ),
+      })
+      .getByRole('textbox');
+    this.date_last_logged_in_to_month_dropdown = this.date_last_logged_in_to_date_fieldset
+      .locator('.govuk-form-group', {
+        has: this.page.getByText(
+          this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.date_last_logged_in_month_label
+        ),
+      })
+      .getByRole('combobox');
+    this.date_last_logged_in_to_year_text = this.date_last_logged_in_to_date_fieldset
+      .locator('.govuk-form-group', {
+        has: this.page.getByText(
+          this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.date_last_logged_in_year_label
+        ),
+      })
+      .getByRole('textbox');
+
+    this.date_last_logged_in_error_message = this.page
+      .locator('.govuk-error-message')
+      .getByText(manageUsersPageTestData.Error_Message_Field_Dataset.Field_Error_Date_Last_Logged_In);
   }
 
   //Getters & Setters for Private Variables

@@ -562,6 +562,30 @@ export async function convertDate(day: string, month: number, year: number): Pro
   return formattedDate.toString();
 }
 
+export async function convertDateShortMonth(day: string, month: string, year: number): Promise<string> {
+  const formattedDay = String(parseInt(day, 10));
+  const formattedMonth = month.charAt(0).toUpperCase() + month.slice(1, 3).toLowerCase();
+  const formattedDate = `${formattedDay} ${formattedMonth} ${year}`;
+  return formattedDate;
+}
+
+export async function validateDateRange(
+  fromDate: string | Date,
+  toDate: string | Date,
+  validationDate: string | Date
+): Promise<boolean> {
+  const from = new Date(fromDate);
+  const to = new Date(toDate);
+  const target = new Date(validationDate);
+  if (isNaN(from.getTime()) || isNaN(to.getTime()) || isNaN(target.getTime())) {
+    throw new Error('Invalid dates provided');
+  }
+  if (from > to) {
+    throw new Error("'fromDate' should be less than or equal to 'toDate'");
+  }
+  return target >= from && target <= to;
+}
+
 export async function returnSingleRandomLocator(resolvesToMultiElements: Locator): Promise<Locator> {
   const noOfElements = await resolvesToMultiElements.count();
   const randomIndex = Math.floor(Math.random() * (noOfElements - 1));

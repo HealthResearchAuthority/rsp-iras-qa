@@ -15,7 +15,24 @@
       "status_column_header_label": "Status",
       "last_logged_in_column_header_label": "Last logged in",
       "actions_column_header_label": "Action",
-      "search_box_label": "Find a user"
+      "search_box_label": "Find a user",
+      "country_advanced_filter_label": "Country",
+      "status_advanced_filter_label": "Status",
+      "selected_checkboxes_hint_label": "selected",
+      "advanced_filter_label": "Advanced filter",
+      "result_count_heading": " results",
+      "date_last_logged_in_label": "Last logged in",
+      "date_last_logged_in_from_date_hint_text": "Enter the date you want to search from",
+      "date_last_logged_in_from_date_help_text": "For example, 28 February 2023",
+      "date_last_logged_in_to_date_hint_text": "Enter the date you want to search to",
+      "date_last_logged_in_to_date_help_text": "For example, 12 October 2024",
+      "date_last_logged_in_day_label": "Day",
+      "date_last_logged_in_month_label": "Month",
+      "date_last_logged_in_year_label": "Year"
+    },
+    "Advanced_Filters_Hint_Labels": {
+      "country_hint_label": "Select all that apply",
+      "status_hint_label": "Select one option"
     },
     "enlarged_page_size": "100",
     "enabled_status": "Active",
@@ -109,7 +126,111 @@
       "Admin_User_Full_Name_Email_Prefix": { "search_input_text": "auto admin future_iras_auto_admin_user" },
       "Admin_User_Full_Name_Full_Email": {
         "search_input_text": "auto admin future_iras_auto_admin_user@test.id.nihr.ac.uk"
-      }
+      },
+      "Empty_Search_Data": { "search_input_text": "" }
+    },
+    "Search_Queries_Advanced_Filter": {
+      "Existing_QA_User_First_Name": { "search_input_text": "System Admin" },
+      "Existing_QA_User_Last_Name": { "search_input_text": "Future IRAS" },
+      "Existing_QA_User_Email": { "search_input_text": "FutureIRAS.SysAdmin" },
+      "Non_Existant_User_Data": { "search_input_text": "ThisShouldNot ReturnAResult" },
+      "Leading_White_Space_User_Data": { "search_input_text": " Atul Patel" },
+      "Leading_And_Trailing_White_Space_User_Data": { "search_input_text": " Atul Patel " },
+      "Trailing_White_Space_User_Data": { "search_input_text": "Atul Patel " },
+      "Back_Stage_User_Email": { "search_input_text": "FutureIRAS.BackStage@hra.nhs.uk" },
+      "Front_Stage_User_Email": { "search_input_text": "futureiras.automation@hra.nhs.uk" },
+      "System_Admin_User_Email": { "search_input_text": "FutureIRAS.SysAdmin@hra.nhs.uk" },
+      "Admin_User_Full_Name_Email_Prefix": { "search_input_text": "auto admin future_iras_auto_admin_user" },
+      "Admin_User_Full_Name_Full_Email": {
+        "search_input_text": "auto admin future_iras_auto_admin_user@test.id.nihr.ac.uk"
+      },
+      "Empty_Search_Data": { "search_input_text": "" }
+    }
+  },
+  "Error_Message_Field_Dataset": {
+    "Field_Error_Date_Last_Logged_In": "'Search to' date must be after 'Search from' date"
+  },
+  "Advanced_Filters": {
+    "Advanced_Filter_One": {
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "status_radio": "Active",
+      "date_last_logged_in_from_day_text": "11",
+      "date_last_logged_in_from_month_dropdown": "April",
+      "date_last_logged_in_from_year_text": "2023",
+      "date_last_logged_in_to_day_text": "22",
+      "date_last_logged_in_to_month_dropdown": "July",
+      "date_last_logged_in_to_year_text": "2025"
+    },
+    "Advanced_Filter_Two": {
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "status_radio": "Disabled",
+      "date_last_logged_in_from_day_text": "11",
+      "date_last_logged_in_from_month_dropdown": "April",
+      "date_last_logged_in_from_year_text": "2023",
+      "date_last_logged_in_to_day_text": "22",
+      "date_last_logged_in_to_month_dropdown": "July",
+      "date_last_logged_in_to_year_text": "2025"
+    },
+    "Advanced_Filter_Three": {
+      "country_checkbox": ["England"],
+      "status_radio": "Active",
+      "date_last_logged_in_from_day_text": "11",
+      "date_last_logged_in_from_month_dropdown": "April",
+      "date_last_logged_in_from_year_text": "2023",
+      "date_last_logged_in_to_day_text": "22",
+      "date_last_logged_in_to_month_dropdown": "July",
+      "date_last_logged_in_to_year_text": "2025"
+    },
+    "Advanced_Filter_Four": {
+      "country_checkbox": ["Northern Ireland"],
+      "status_radio": "Active",
+      "date_last_logged_in_from_day_text": "11",
+      "date_last_logged_in_from_month_dropdown": "April",
+      "date_last_logged_in_from_year_text": "2023",
+      "date_last_logged_in_to_day_text": "",
+      "date_last_logged_in_to_month_dropdown": "Choose month",
+      "date_last_logged_in_to_year_text": ""
+    },
+    "Advanced_Filter_Five": {
+      "country_checkbox": ["Scotland"],
+      "status_radio": "Active",
+      "date_last_logged_in_from_day_text": "",
+      "date_last_logged_in_from_month_dropdown": "Choose month",
+      "date_last_logged_in_from_year_text": "",
+      "date_last_logged_in_to_day_text": "22",
+      "date_last_logged_in_to_month_dropdown": "July",
+      "date_last_logged_in_to_year_text": "2025"
+    },
+    "Advanced_Filter_Six": {
+      "country_checkbox": ["Wales"],
+      "status_radio": "Active"
+    },
+    "Advanced_Filter_Seven": {
+      "country_checkbox": ["England", "Northern Ireland"],
+      "status_radio": "Active"
+    },
+    "Advanced_Filter_Eight": {
+      "country_checkbox": ["Northern Ireland", "Scotland", "Wales"],
+      "status_radio": "Active"
+    },
+    "Advanced_Filter_Nine": {
+      "country_checkbox": ["England", "Wales"],
+      "status_radio": "Active"
+    },
+    "Advanced_Filter_Ten": {
+      "country_checkbox": ["Northern Ireland", "Wales"],
+      "status_radio": "Disabled"
+    },
+    "Advanced_Filter_No_Country_Selected": {
+      "country_checkbox": []
+    },
+    "Advanced_Filter_Last_Logged_In_Invalid_Date": {
+      "date_last_logged_in_from_day_text": "11",
+      "date_last_logged_in_from_month_dropdown": "July",
+      "date_last_logged_in_from_year_text": "2025",
+      "date_last_logged_in_to_day_text": "22",
+      "date_last_logged_in_to_month_dropdown": "January",
+      "date_last_logged_in_to_year_text": "2025"
     }
   }
 }
