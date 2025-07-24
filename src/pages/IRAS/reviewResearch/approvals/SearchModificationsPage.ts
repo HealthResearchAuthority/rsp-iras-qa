@@ -63,6 +63,7 @@ export default class SearchModificationsPage {
   readonly date_modification_submitted_to_date_error: Locator;
   readonly result_count: Locator;
   readonly no_results_bullet_points: Locator;
+  readonly lead_nation_checkbox_hint_label: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -202,6 +203,16 @@ export default class SearchModificationsPage {
       .locator('.govuk-fieldset')
       .locator('.govuk-form-group', {
         has: this.page.getByText(this.searchModificationsPageTestData.Search_Modifications_Page.lead_nation_hint_text),
+      });
+    this.lead_nation_checkbox_hint_label = this.lead_nation_label
+      .locator('..')
+      .locator('..')
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group', {
+        has: this.page.getByText(
+          this.searchModificationsPageTestData.Search_Modifications_Page.Advanced_Filters_Hint_Labels
+            .lead_nation_checkbox_hint_label
+        ),
       });
     this.lead_nation_checkbox = this.lead_nation_fieldset.getByRole('checkbox');
     this.lead_nation_checkbox_chevron = this.page

@@ -35,6 +35,10 @@
     "short_project_title_hint_text": "Enter the name of the short project title",
     "sponsor_organisation_label": "Sponsor organisation",
     "sponsor_organisation_hint_text": "Type the name of the organisation or scroll through the list",
+    "Advanced_Filters_Hint_Labels": {
+      "lead_nation_checkbox_hint_label": "Select all that apply"
+    },
+    "selected_checkboxes_hint_label": "selected",
     "active_filters_label": "Active filters",
     "Field_Error_Sponsor_Organisation": {
       "sponsor_organisation_text": "Please provide 3 or more characters to search sponsor organisation."
@@ -350,6 +354,21 @@
       "sponsor_organisation_text": "COLD GENESYS INC"
     },
     "Advanced_Filters_Lead_Nation": {
+      "lead_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
+    },
+    "Advanced_Filter_No_Lead_Nation_Selected": {
+      "lead_nation_checkbox": []
+    },
+    "Advanced_Filter_One_Lead_Nation_Selected": {
+      "lead_nation_checkbox": ["England"]
+    },
+    "Advanced_Filter_Two_Lead_Nation_Selected": {
+      "lead_nation_checkbox": ["England", "Northern Ireland"]
+    },
+    "Advanced_Filter_Three_Lead_Nation_Selected": {
+      "lead_nation_checkbox": ["England", "Northern Ireland", "Scotland"]
+    },
+    "Advanced_Filter_Four_Lead_Nation_Selected": {
       "lead_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
     }
   },

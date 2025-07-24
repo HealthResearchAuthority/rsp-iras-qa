@@ -21,6 +21,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         And I capture the page screenshot
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
+        And I can see the '<Advanced_Filters_Labels>' ui labels in search modifications page
         And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
         Then I can see the selected filters '<Advanced_Filters>' are displayed under active filters
@@ -29,12 +30,12 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         And I can see the list is sorted by default in the descending order of the 'Modification Id'
         And I capture the page screenshot
         Examples:
-            | Valid_Iras_Id             | Advanced_Filters             |
-            | Valid_Iras_Id_Nth         | Advanced_Filters_Nth         |
-            | Valid_Iras_Id_Twenty      | Advanced_Filters_Twenty      |
-            | Valid_Iras_Id_TwentyOne   | Advanced_Filters_TwentyOne   |
-            | Valid_Iras_Id_TwentyTwo   | Advanced_Filters_TwentyTwo   |
-            | Valid_Iras_Id_TwentyThree | Advanced_Filters_TwentyThree |
+            | Valid_Iras_Id             | Advanced_Filters             | Advanced_Filters_Labels      |
+            | Valid_Iras_Id_Nth         | Advanced_Filters_Nth         | Advanced_Filters_Hint_Labels |
+            | Valid_Iras_Id_Twenty      | Advanced_Filters_Twenty      | Advanced_Filters_Hint_Labels |
+            | Valid_Iras_Id_TwentyOne   | Advanced_Filters_TwentyOne   | Advanced_Filters_Hint_Labels |
+            | Valid_Iras_Id_TwentyTwo   | Advanced_Filters_TwentyTwo   | Advanced_Filters_Hint_Labels |
+            | Valid_Iras_Id_TwentyThree | Advanced_Filters_TwentyThree | Advanced_Filters_Hint_Labels |
 
     # 2. Valid IRAS ID >>Click Search>>Results displayed>> Select Advanced Filters(64 combinations)>> Click Apply Filters>>Results displayed(filtered results)
     ##Scenario 6 -Selected filters validation
@@ -202,17 +203,18 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         And I capture the page screenshot
         And I click the 'Search' button on the 'Search_Modifications_Page'
         Then the system displays no results found message if there is no 'modification record' on the system that matches the search criteria
+        Then I can see the '<No_Results_Found>' ui labels
         And I capture the page screenshot
         Examples:
-            | Invalid_Iras_Id                  |
-            | Invalid_Iras_Id_Letters          |
-            | Invalid_Iras_Id_Symbols          |
-            | Invalid_Iras_Id_Letters_Symbols  |
-            | Invalid_Iras_Id_Leading_Zeros    |
-            | Invalid_Iras_Id_Spaces_Suffix    |
-            | Invalid_Iras_Id_Spaces_Prefix    |
-            | Invalid_Iras_Id_Spaces_Seperator |
-            | Invalid_Iras_Id_Zeros            |
+            | Invalid_Iras_Id                  | No_Results_Found           |
+            | Invalid_Iras_Id_Letters          | No_Matching_Search_Results |
+            | Invalid_Iras_Id_Symbols          | No_Matching_Search_Results |
+            | Invalid_Iras_Id_Letters_Symbols  | No_Matching_Search_Results |
+            | Invalid_Iras_Id_Leading_Zeros    | No_Matching_Search_Results |
+            | Invalid_Iras_Id_Spaces_Suffix    | No_Matching_Search_Results |
+            | Invalid_Iras_Id_Spaces_Prefix    | No_Matching_Search_Results |
+            | Invalid_Iras_Id_Spaces_Seperator | No_Matching_Search_Results |
+            | Invalid_Iras_Id_Zeros            | No_Matching_Search_Results |
 
 
     #   4. Invalid IRAS ID + filters(64 combinations) >>Apply Filters>>No results
@@ -343,11 +345,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
 
     @RemoveAllActiveFiltersOneByOne @Test14
     Scenario Outline: Verify the user can remove all the selected filters one by one and the search results update accordingly based on the previously entered IRAS ID
-        <<<<<<< HEAD
         When I enter '<Valid_Iras_Id>' into the search field for search modifications page
-        =======
-        When I enter '<Valid_Iras_Id>' into the search field
-        >>>>>>> 93ca5843cd832ac0c14e99144edc66e91e2bff06
         And I capture the page screenshot
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
@@ -529,3 +527,18 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         Then I can see the approvals home page
         When I click the 'Back' link on the 'Approvals_Page'
         Then I can see the 'Home_Page'
+
+    @jsEnabled @VerifyHintLabelForSelectedCountryCheckboxAdvancedFilters @Test23
+    Scenario Outline: When javascript enabled verify the hint text for country advanced filters when user select multiple checkboxes
+        And I select advanced filters in the search modifications page using '<Advanced_Filters>'
+        And I capture the page screenshot
+        And I can see the '<Advanced_Filters_Labels>' ui labels in search modifications page
+        And I verify the hint text based on the '<Advanced_Filters>' for search modifications page
+
+        Examples:
+            | Advanced_Filters                           | Advanced_Filters_Labels      |
+            | Advanced_Filter_No_Lead_Nation_Selected    | Advanced_Filters_Hint_Labels |
+            | Advanced_Filter_One_Lead_Nation_Selected   | Advanced_Filters_Hint_Labels |
+            | Advanced_Filter_Two_Lead_Nation_Selected   | Advanced_Filters_Hint_Labels |
+            | Advanced_Filter_Three_Lead_Nation_Selected | Advanced_Filters_Hint_Labels |
+            | Advanced_Filter_Four_Lead_Nation_Selected  | Advanced_Filters_Hint_Labels |
