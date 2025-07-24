@@ -3,6 +3,7 @@
     "page_heading": "Search",
     "page_guidance_text": "Enter the IRAS ID to search for all modifications received, including those submitted for notification only",
     "title": "Search - Approvals - Plan and manage healthcare research",
+    "iras_id_search_box_label": "IRAS ID",
     "search_button_label": "Search",
     "no_results_heading": "There are no matching results",
     "no_results_guidance_text": "Improve your search results by:",
@@ -35,12 +36,89 @@
     "sponsor_organisation_label": "Sponsor organisation",
     "sponsor_organisation_hint_text": "Type the name of the organisation or scroll through the list",
     "active_filters_label": "Active filters",
-    "Invalid_Date_Modification_Submitted_Error": {
-      "date_modification_submitted_to_day_text": "The date should be a valid date and in future"
+    "Field_Error_Sponsor_Organisation": {
+      "sponsor_organisation_text": "Please provide 3 or more characters to search sponsor organisation."
     },
+    "Field_Error_Date_Modification_Submitted": {
+      "date_modification_submitted_to_day_text": "'Search to' date must be after 'Search from' date"
+    },
+    "Suggestion_List_Common_Headers": {
+      "suggestion_header": "Suggestions",
+      "suggestion_footer": "Continue entering to improve suggestions",
+      "continue_entering_suggestion": "Continue entering to get suggestions",
+      "no_suggestion_found": "No suggestions found."
+    },
+    "Sponsor_Organisation_Jsdisabled_Search_Hint_Labels": {
+      "search_hint_header_prefix": "Results for",
+      "search_hint_footer_prefix": "sponsor organisations match your search for",
+      "search_hint_footer": ". Try narrowing down your search if the organisation you are looking for is not listed",
+      "no_suggestion_found": "No suggestions found for"
+    }
+  },
+  "Iras_Id": {
     "Valid_Iras_Id_Nth": {
       "iras_id_text": "9800001"
     },
+
+    "Valid_Iras_Id_Nineteen": {
+      "iras_id_text": "9800020"
+    },
+
+    "Valid_Iras_Id_Twenty": {
+      "iras_id_text": "9800013"
+    },
+
+    "Valid_Iras_Id_TwentyOne": {
+      "iras_id_text": "9800032"
+    },
+
+    "Valid_Iras_Id_TwentyTwo": {
+      "iras_id_text": "9800033"
+    },
+
+    "Valid_Iras_Id_TwentyThree": {
+      "iras_id_text": "9800010"
+    },
+
+    "Valid_Iras_Id_Zeros": {
+      "iras_id_text": "0000"
+    },
+
+    "Invalid_Iras_Id_Letters": {
+      "iras_id_text": "abcdefg"
+    },
+    "Invalid_Iras_Id_Symbols": {
+      "iras_id_text": "!£$%^&*"
+    },
+    "Invalid_Iras_Id_Letters_Symbols": {
+      "iras_id_text": "a!b£c£D%"
+    },
+    "Invalid_Iras_Id_Min_Length": {
+      "iras_id_text": "12"
+    },
+    "Invalid_Iras_Id_Leading_Zeros": {
+      "iras_id_text": "000123"
+    },
+    "Invalid_Iras_Id_Zeros": {
+      "iras_id_text": "000000"
+    },
+    "Invalid_Iras_Id_Spaces": {
+      "iras_id_text": "    "
+    },
+    "Invalid_Iras_Id_Spaces_Suffix": {
+      "iras_id_text": "1234  "
+    },
+    "Invalid_Iras_Id_Spaces_Prefix": {
+      "iras_id_text": " 1234"
+    },
+    "Invalid_Iras_Id_Spaces_Seperator": {
+      "iras_id_text": "12 34"
+    },
+    "Invalid_Iras_Id_Blank": {
+      "iras_id_text": ""
+    }
+  },
+  "Advanced_Filters": {
     "Advanced_Filters_Nth": {
       "chief_investigator_name_text": "Barry White",
       "short_project_title_text": "Project 01",
@@ -245,20 +323,8 @@
       "date_modification_submitted_to_year_text": "2025",
       "lead_nation_checkbox": ["England", "Northern Ireland", "Scotland"]
     },
-
-    "Valid_Iras_Id_Nineteen": {
-      "iras_id_text": "9800020"
-    },
-
-    "Valid_Iras_Id_Twenty": {
-      "iras_id_text": "9800013"
-    },
     "Advanced_Filters_Twenty": {
       "lead_nation_checkbox": ["England", "Scotland", "Wales"]
-    },
-
-    "Valid_Iras_Id_TwentyOne": {
-      "iras_id_text": "9800032"
     },
     "Advanced_Filters_TwentyOne": {
       "date_modification_submitted_from_day_text": "01",
@@ -266,17 +332,9 @@
       "date_modification_submitted_from_year_text": "2024",
       "lead_nation_checkbox": ["Northern Ireland", "Scotland", "Wales"]
     },
-
-    "Valid_Iras_Id_TwentyTwo": {
-      "iras_id_text": "9800033"
-    },
     "Advanced_Filters_TwentyTwo": {
       "chief_investigator_name_text": "Dr. Isabella Fernández-Hernández",
       "lead_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
-    },
-
-    "Valid_Iras_Id_TwentyThree": {
-      "iras_id_text": "9800010"
     },
     "Advanced_Filters_TwentyThree": {
       "chief_investigator_name_text": "Commander Maximilian Thorne-Winchester III",
@@ -288,50 +346,14 @@
       "lead_nation_checkbox": ["Northern Ireland", "Scotland", "Wales"],
       "modification_type_checkbox": ["Minor modifications"]
     },
-    "Valid_Iras_Id_Zeros": {
-      "iras_id_text": "0000"
-    },
-
     "Advanced_Filters_Sponsor_Organisation": {
       "sponsor_organisation_text": "COLD GENESYS INC"
     },
     "Advanced_Filters_Lead_Nation": {
       "lead_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
-    },
-    "Invalid_Iras_Id_Letters": {
-      "iras_id_text": "abcdefg"
-    },
-    "Invalid_Iras_Id_Symbols": {
-      "iras_id_text": "!£$%^&*"
-    },
-    "Invalid_Iras_Id_Letters_Symbols": {
-      "iras_id_text": "a!b£c£D%"
-    },
-    "Invalid_Iras_Id_Min_Length": {
-      "iras_id_text": "12"
-    },
-    "Invalid_Iras_Id_Leading_Zeros": {
-      "iras_id_text": "000123"
-    },
-    "Invalid_Iras_Id_Zeros": {
-      "iras_id_text": "000000"
-    },
-    "Invalid_Iras_Id_Spaces": {
-      "iras_id_text": "    "
-    },
-    "Invalid_Iras_Id_Spaces_Suffix": {
-      "iras_id_text": "1234  "
-    },
-    "Invalid_Iras_Id_Spaces_Prefix": {
-      "iras_id_text": " 1234"
-    },
-    "Invalid_Iras_Id_Spaces_Seperator": {
-      "iras_id_text": "12 34"
-    },
-    "Invalid_Iras_Id_Blank": {
-      "iras_id_text": ""
-    },
-
+    }
+  },
+  "Sponsor_Organisation": {
     "Sponsor_Organisation_Invalid_Data": {
       "sponsor_organisation_text": "test invalid data"
     },
@@ -344,18 +366,7 @@
     "Sponsor_Organisation_Min_Char": {
       "sponsor_organisation_text": "nh"
     },
-    "Suggestion_List_Common_Headers": {
-      "suggestion_header": "Suggestions",
-      "suggestion_footer": "Continue entering to improve suggestions",
-      "continue_entering_suggestion": "Continue entering to get suggestions",
-      "no_suggestion_found": "No suggestions found."
-    },
-    "Sponsor_Organisation_Jsdisabled_Search_Hint_Labels": {
-      "search_hint_header_prefix": "Results for",
-      "search_hint_footer_prefix": "sponsor organisations match your search for",
-      "search_hint_footer": ". Try narrowing down your search if the organisation you are looking for is not listed",
-      "no_suggestion_found": "No suggestions found for"
-    },
+
     "Sponsor_Organisation_Partial_Text_NHS": {
       "sponsor_organisation_text": "nhs"
     },
@@ -397,10 +408,9 @@
     },
     "Sponsor_Organisation_Text_Exactly_Five_Results": {
       "sponsor_organisation_text": "Asi"
-    },
-    "Field_Error_Sponsor_Organisation": {
-      "sponsor_organisation_text": "Please provide 3 or more characters to search sponsor organisation."
-    },
+    }
+  },
+  "Date_Modification_Submitted": {
     "Date_Modification_Submitted_Invalid_Data": {
       "date_modification_submitted_from_day_text": "2",
       "date_modification_submitted_from_month_dropdown": "January",
@@ -408,9 +418,6 @@
       "date_modification_submitted_to_day_text": "20",
       "date_modification_submitted_to_month_dropdown": "March",
       "date_modification_submitted_to_year_text": "2013"
-    },
-    "Field_Error_Date_Modification_Submitted": {
-      "date_modification_submitted_to_day_text": "'Search to' date must be after 'Search from' date"
     }
   }
 }

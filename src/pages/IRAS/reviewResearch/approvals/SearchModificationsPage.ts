@@ -11,6 +11,7 @@ export default class SearchModificationsPage {
   private _modifications_list_after_search: string[];
   readonly page_heading: Locator;
   readonly page_guidance_text: Locator;
+  readonly iras_id_search_text: Locator;
   readonly search_box: Locator;
   readonly search_button_label: Locator;
   readonly next_button: Locator;
@@ -76,6 +77,14 @@ export default class SearchModificationsPage {
     this.page_guidance_text = this.page
       .getByRole('paragraph')
       .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.page_guidance_text);
+    this.iras_id_search_text = this.page.getByLabel(
+      this.searchModificationsPageTestData.Search_Modifications_Page.iras_id_search_box_label,
+      { exact: true }
+    );
+    // this.organisation_name_text = this.page.getByLabel(
+    //   this.createReviewBodyPageData.Create_Review_Body_Page.organisation_name_label,
+    //   { exact: true }
+    // );
     this.search_box_label = this.page.locator('label[for="SearchQuery"]');
     this.search_box = this.page.getByTestId('SearchQuery');
     this.search_button_label = this.page.getByText('Search');
@@ -264,6 +273,9 @@ export default class SearchModificationsPage {
       .getByRole('listitem')
       .getByRole('link')
       .locator('.search-filter-summary__remove-filter-text');
+    // this.active_filters_list = this.page
+    //   .locator('.search-filter-summary__remove-filters li a')
+    //   .or(this.page.locator('.search-filter-summary__remove-filters li a span'));
 
     // this.sponsor_organisation_jsdisabled_result_hint_label = this.sponsor_organisation_fieldset.getByText(
     //   this.searchModificationsPageTestData.Search_Modifications_Page.Sponsor_Organisation_Jsdisabled_Search_Hint_Labels
@@ -313,19 +325,29 @@ export default class SearchModificationsPage {
     await button.click();
   }
 
+  // async clickFilterChevron<PageObject>(dataset: JSON, key: string, page: PageObject) {
+  //   const button = page[key + '_chevron'];
+  //   const fromDate = dataset['date_modification_submitted_from_day_text'];
+  //   if (key !== 'date_modification_submitted_to_day_text') {
+  //     if (button) {
+  //       await button.click();
+  //     }
+  //   } else if (key === 'date_modification_submitted_to_day_text') {
+  //     if (fromDate === '' || fromDate === undefined) {
+  //       if (button) {
+  //         await button.click();
+  //       }
+  //     }
+  //   }
+  // }
+
   async clickFilterChevron<PageObject>(dataset: JSON, key: string, page: PageObject) {
-    const button = page[key + '_chevron'];
+    const button = page[`${key}_chevron`];
     const fromDate = dataset['date_modification_submitted_from_day_text'];
-    if (key !== 'date_modification_submitted_to_day_text') {
-      if (button) {
-        await button.click();
-      }
-    } else if (key === 'date_modification_submitted_to_day_text') {
-      if (fromDate === '' || fromDate === undefined) {
-        if (button) {
-          await button.click();
-        }
-      }
+    const isToDateKey = key === 'date_modification_submitted_to_day_text';
+    const shouldClick = !isToDateKey || (isToDateKey && (fromDate === '' || fromDate === undefined));
+    if (button && shouldClick) {
+      await button.click();
     }
   }
 
@@ -409,24 +431,28 @@ export default class SearchModificationsPage {
     const values: string[] = [];
     for (let i = 0; i < count; i++) {
       const text = await filterItems.nth(i).innerText();
-      values.push(text.trim().replace('Remove filter\n', ''));
+      values.push(text.trim().replace('Remove filter', '').trim());
     }
     return values;
   }
 
-  async removeSelectedFilterValues(removeFilterLabel: string): Promise<string> {
+  async removeSelectedFilterValues(removeFilterLabel: string[]): Promise<string[]> {
     const filterItems = this.active_filters_list;
     const count = await filterItems.count();
-    let removedFilterValue: string = '';
+    expect(count).toBe(removeFilterLabel.length);
+    console.log('removeFilterLabel' + removeFilterLabel);
+    const removedFilterValues: string[] = [];
     for (let i = 0; i < count; i++) {
-      const text = await filterItems.nth(i).innerText();
-      if (text.includes(removeFilterLabel)) {
-        removedFilterValue = text.trim().replace('Remove filter\n', '');
-        await filterItems.nth(i).click();
-        break;
+      const text = (await filterItems.nth(i).innerText()).trim().replace('Remove filter', '').trim();
+      console.log(text);
+      if (removeFilterLabel.includes(text)) {
+        removedFilterValues.push(text);
+        await filterItems.nth(i).locator('..').click({ force: true });
+        await this.page.waitForTimeout(500);
       }
     }
-    return removedFilterValue;
+    console.log('removedFilterValues' + removedFilterValues);
+    return removedFilterValues;
   }
 
   async getNoResultsBulletPoints(): Promise<string[]> {
