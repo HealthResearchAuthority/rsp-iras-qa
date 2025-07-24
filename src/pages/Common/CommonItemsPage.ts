@@ -784,8 +784,8 @@ export default class CommonItemsPage {
       screenshotBuffers.push(buf);
     }
     const images = await Promise.all(screenshotBuffers.map((b) => sharp(b).metadata()));
-    const width = images[0].width!;
-    const heights = images.map((i) => i.height!);
+    const width = images[0].width;
+    const heights = images.map((i) => i.height);
     const totalHeight = heights.reduce((a, b) => a + b, 0);
     const stitchedImage = sharp({
       create: {
