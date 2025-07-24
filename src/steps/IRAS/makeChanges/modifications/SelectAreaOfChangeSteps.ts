@@ -22,12 +22,12 @@ Then(
     const specificChangeDataset =
       selectAreaOfChangePage.selectAreaOfChangePageTestData.Select_Specific_Change[specificChangeDatasetName];
     for (const key in areaOfChangeDataset) {
-      if (Object.prototype.hasOwnProperty.call(areaOfChangeDataset, key)) {
+      if (Object.hasOwn(areaOfChangeDataset, key)) {
         await commonItemsPage.fillUIComponent(areaOfChangeDataset, key, selectAreaOfChangePage);
       }
     }
     for (const key in specificChangeDataset) {
-      if (Object.prototype.hasOwnProperty.call(specificChangeDataset, key)) {
+      if (Object.hasOwn(specificChangeDataset, key)) {
         await commonItemsPage.fillUIComponent(specificChangeDataset, key, selectAreaOfChangePage);
       }
     }
@@ -60,12 +60,12 @@ Then(
     const areaOfChangeDataset = selectAreaOfChangePage.selectAreaOfChangePageTestData[areaOfChangeDatasetName];
     const specificChangeDataset = selectAreaOfChangePage.selectAreaOfChangePageTestData[specificChangeDatasetName];
     for (const key in areaOfChangeDataset) {
-      if (Object.prototype.hasOwnProperty.call(areaOfChangeDataset, key)) {
+      if (Object.hasOwn(areaOfChangeDataset, key)) {
         await commonItemsPage.validateUIComponentValues(areaOfChangeDataset, key, selectAreaOfChangePage);
       }
     }
     for (const key in areaOfChangeDataset) {
-      if (Object.prototype.hasOwnProperty.call(specificChangeDataset, key)) {
+      if (Object.hasOwn(specificChangeDataset, key)) {
         await commonItemsPage.validateUIComponentValues(specificChangeDataset, key, selectAreaOfChangePage);
       }
     }
