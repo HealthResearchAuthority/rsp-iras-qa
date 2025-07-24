@@ -28,6 +28,13 @@ export default class ManageReviewBodiesPage {
   readonly listCell: Locator;
   readonly next_button: Locator;
   readonly tableRows: Locator;
+  readonly country_checkbox: Locator;
+  readonly status_radio: Locator;
+  readonly country_checkbox_chevron: Locator;
+  readonly status_radio_chevron: Locator;
+  readonly country_hint_label: Locator;
+  readonly country_selected_hint_label: Locator;
+  readonly status_hint_label: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -67,6 +74,22 @@ export default class ManageReviewBodiesPage {
     this.listCell = this.page.getByRole('cell');
     this.next_button = this.page.locator('.govuk-pagination__next a');
     this.tableRows = this.page.getByRole('table').getByRole('row');
+    this.country_checkbox_chevron = this.page
+      .getByRole('heading', { level: 2 })
+      .getByText(this.manageReviewBodiesPageData.Manage_Review_Body_Page.country_advanced_filter_label, {
+        exact: true,
+      });
+    this.status_radio_chevron = this.page
+      .getByRole('heading', { level: 2 })
+      .getByText(this.manageReviewBodiesPageData.Manage_Review_Body_Page.status_advanced_filter_label, {
+        exact: true,
+      });
+    this.country_checkbox = page.getByRole('checkbox');
+    this.status_radio = page.getByRole('radio');
+    this.page.getByRole('checkbox');
+    this.country_selected_hint_label = page.getByTestId('country-hint');
+    this.country_hint_label = page.getByTestId('Search.Country');
+    this.status_hint_label = page.getByTestId('Search.Status');
   }
 
   //Getters & Setters for Private Variables
