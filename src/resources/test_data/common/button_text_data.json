@@ -110,5 +110,14 @@
     "Modification_Type": "Modification type",
     "Date_Submitted": "Date submitted",
     "Days_Since_Submission": "Days since submission"
+  },
+  "Participating_Organisations_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later",
+    "Search": "Search"
+  },
+  "Select_Area_Of_Change_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later"
   }
 }

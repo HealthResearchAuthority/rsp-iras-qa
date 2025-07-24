@@ -1,0 +1,13 @@
+{
+  "Label_Texts": {
+    "iras_id_label": "IRAS ID",
+    "short_project_title_label": "Short project title",
+    "modification_id_label": "Modification ID",
+    "organisation_name_textbox_label": "Organisation name",
+    "advanced_filter_label": "Advanced filter",
+    "remove_this_change_label": "Remove this change"
+  },
+  "Field_Error_participating_organisations_text": {
+    "participating_organisations_text": "No participant organisations have been selected. Select at least one participant organisation before clicking 'Save and continue'."
+  }
+}
