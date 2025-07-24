@@ -32,6 +32,7 @@ When(
       manageUsersPage,
       searchAddUserReviewBodyPage,
       myResearchProjectsPage,
+      searchModificationsPage,
     },
     page: string
   ) => {
@@ -68,6 +69,9 @@ When(
         break;
       case 'My_Research_Page':
         await myResearchProjectsPage.assertOnMyResearchProjectsPage();
+        break;
+      case 'Search_Modifications_Page':
+        await searchModificationsPage.assertOnSearchModificationsPage();
         break;
       default:
         throw new Error(`${page} is not a valid option`);
@@ -134,11 +138,30 @@ Then('I see something {string}', async ({ commonItemsPage }, testType: string) =
 
 Then('I click the {string} button on the {string}', async ({ commonItemsPage }, buttonKey: string, pageKey: string) => {
   const buttonValue = commonItemsPage.buttonTextData[pageKey][buttonKey];
-  await commonItemsPage.govUkButton
-    .getByText(buttonValue, { exact: true })
-    .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
-    .first()
-    .click();
+  // This if condition need to be removed for android after the defect fix RSP-4099
+  if (
+    buttonKey == 'Create_Profile' &&
+    pageKey == 'Check_Create_User_Profile_Page' &&
+    process.env.OS_TYPE?.toLowerCase() == 'android' &&
+    process.env.PLATFORM?.toLowerCase() == 'mobile'
+  ) {
+    await commonItemsPage.govUkButton
+      .getByText(buttonValue, { exact: true })
+      .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
+      .first()
+      .focus();
+    await commonItemsPage.govUkButton
+      .getByText(buttonValue, { exact: true })
+      .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
+      .first()
+      .press('Enter');
+  } else {
+    await commonItemsPage.govUkButton
+      .getByText(buttonValue, { exact: true })
+      .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
+      .first()
+      .click();
+  }
   await commonItemsPage.page.waitForLoadState('domcontentloaded');
 });
 
@@ -163,6 +186,15 @@ Given(
       await checkCreateUserProfilePage.back_button.click(); //work around for now >> to click on Back link
     } else if (pageKey === 'Check_Create_Review_Body_Page' && linkKey === 'Back') {
       await checkCreateUserProfilePage.back_button.click(); //work around for now >> to click on Back link
+      // This if condition need to be removed for android after the defect fix RSP-4099
+    } else if (
+      pageKey === 'User_Profile_Page' &&
+      linkKey === 'View_Users_Audit_History' &&
+      process.env.OS_TYPE?.toLowerCase() == 'android' &&
+      process.env.PLATFORM?.toLowerCase() == 'mobile'
+    ) {
+      await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).focus();
+      await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).press('Enter');
     } else if (
       (pageKey === 'Search_Add_User_Review_Body_Page' || pageKey === 'Review_Body_User_List_Page') &&
       linkKey === 'Back_To_Users'
@@ -376,6 +408,8 @@ Then(
       createReviewBodyPage,
       editReviewBodyPage,
       reviewYourAnswersPage,
+      selectAreaOfChangePage,
+      participatingOrganisationsPage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
@@ -416,6 +450,14 @@ Then(
       errorMessageFieldDataset =
         reviewYourAnswersPage.reviewYourAnswersPageTestData[errorMessageFieldAndSummaryDatasetName];
       page = reviewYourAnswersPage;
+    } else if (pageKey == 'Select_Area_Of_Change_Page') {
+      errorMessageFieldDataset =
+        selectAreaOfChangePage.selectAreaOfChangePageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = selectAreaOfChangePage;
+    } else if (pageKey == 'Participating_Organisations_Page') {
+      errorMessageFieldDataset =
+        participatingOrganisationsPage.participatingOrganisationsPageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = participatingOrganisationsPage;
     }
     let allSummaryErrorExpectedValues: any;
     let summaryErrorActualValues: any;
@@ -456,6 +498,10 @@ Then(
           }
         } else {
           fieldErrorMessagesActualValues = await commonItemsPage.getFieldErrorMessages(key, page);
+          if (fieldErrorMessagesActualValues.includes('Error: ')) {
+            fieldErrorMessagesActualValues = fieldErrorMessagesActualValues.replace('Error: ', '');
+          }
+
           expect(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
           const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
           await expect(element).toBeInViewport();
@@ -624,6 +670,7 @@ Given(
       userProfilePage,
       reviewBodyProfilePage,
       myResearchProjectsPage,
+      searchModificationsPage,
     },
     page: string
   ) => {
@@ -660,6 +707,10 @@ Given(
       case 'My_Research_Page':
         await myResearchProjectsPage.goto();
         await myResearchProjectsPage.assertOnMyResearchProjectsPage();
+        break;
+      case 'Search_Modifications_Page':
+        await searchModificationsPage.goto();
+        await searchModificationsPage.assertOnSearchModificationsPage();
         break;
       default:
         throw new Error(`${page} is not a valid option`);
