@@ -36,7 +36,8 @@
     "sponsor_organisation_label": "Sponsor organisation",
     "sponsor_organisation_hint_text": "Type the name of the organisation or scroll through the list",
     "Advanced_Filters_Hint_Labels": {
-      "lead_nation_checkbox_hint_label": "Select all that apply"
+      "lead_nation_checkbox_hint_label": "Select all that apply",
+      "modification_type_checkbox_hint_label": "Select all that apply"
     },
     "selected_checkboxes_hint_label": "selected",
     "active_filters_label": "Active filters",

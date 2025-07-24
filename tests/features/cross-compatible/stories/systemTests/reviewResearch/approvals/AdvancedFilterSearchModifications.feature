@@ -21,7 +21,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         And I capture the page screenshot
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
-        And I can see the '<Advanced_Filters_Labels>' ui labels in search modifications page
+        # And I can see the '<Advanced_Filters_Labels>' ui labels in search modifications page
         And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
         Then I can see the selected filters '<Advanced_Filters>' are displayed under active filters
@@ -30,12 +30,12 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         And I can see the list is sorted by default in the descending order of the 'Modification Id'
         And I capture the page screenshot
         Examples:
-            | Valid_Iras_Id             | Advanced_Filters             | Advanced_Filters_Labels      |
-            | Valid_Iras_Id_Nth         | Advanced_Filters_Nth         | Advanced_Filters_Hint_Labels |
-            | Valid_Iras_Id_Twenty      | Advanced_Filters_Twenty      | Advanced_Filters_Hint_Labels |
-            | Valid_Iras_Id_TwentyOne   | Advanced_Filters_TwentyOne   | Advanced_Filters_Hint_Labels |
-            | Valid_Iras_Id_TwentyTwo   | Advanced_Filters_TwentyTwo   | Advanced_Filters_Hint_Labels |
-            | Valid_Iras_Id_TwentyThree | Advanced_Filters_TwentyThree | Advanced_Filters_Hint_Labels |
+            | Valid_Iras_Id             | Advanced_Filters             |
+            | Valid_Iras_Id_Nth         | Advanced_Filters_Nth         |
+            | Valid_Iras_Id_Twenty      | Advanced_Filters_Twenty      |
+            | Valid_Iras_Id_TwentyOne   | Advanced_Filters_TwentyOne   |
+            | Valid_Iras_Id_TwentyTwo   | Advanced_Filters_TwentyTwo   |
+            | Valid_Iras_Id_TwentyThree | Advanced_Filters_TwentyThree |
 
     # 2. Valid IRAS ID >>Click Search>>Results displayed>> Select Advanced Filters(64 combinations)>> Click Apply Filters>>Results displayed(filtered results)
     ##Scenario 6 -Selected filters validation
@@ -528,13 +528,11 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         When I click the 'Back' link on the 'Approvals_Page'
         Then I can see the 'Home_Page'
 
-    @jsEnabled @VerifyHintLabelForSelectedCountryCheckboxAdvancedFilters @Test23
-    Scenario Outline: When javascript enabled verify the hint text for country advanced filters when user select multiple checkboxes
+    @VerifyHintLabelForSelectedCountryCheckboxAdvancedFilters @Test23
+    Scenario Outline: When javascript enabled verify the hint text for checkboxes
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
         And I can see the '<Advanced_Filters_Labels>' ui labels in search modifications page
-        And I verify the hint text based on the '<Advanced_Filters>' for search modifications page
-
         Examples:
             | Advanced_Filters                           | Advanced_Filters_Labels      |
             | Advanced_Filter_No_Lead_Nation_Selected    | Advanced_Filters_Hint_Labels |
@@ -542,3 +540,12 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
             | Advanced_Filter_Two_Lead_Nation_Selected   | Advanced_Filters_Hint_Labels |
             | Advanced_Filter_Three_Lead_Nation_Selected | Advanced_Filters_Hint_Labels |
             | Advanced_Filter_Four_Lead_Nation_Selected  | Advanced_Filters_Hint_Labels |
+
+    @VerifyHintTextForAdvanceFilters
+    Scenario: Validate hint labels for advanced filters in mange review body page
+        And I select advanced filters in the search modifications page using '<Advanced_Filters>'
+        And I capture the page screenshot
+        And I verify the hint text based on the '<Advanced_Filters>' for search modifications page
+        Examples:
+            | Advanced_Filters     | Advanced_Filters_Labels      |
+            | Advanced_Filters_Nth | Advanced_Filters_Hint_Labels |
