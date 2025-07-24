@@ -117,11 +117,11 @@ Feature: Create Amendment - Create Modifications
     And I validate the ui lables and field values with '<Project_Details_Title>' on participating organisation page
 
     Examples:
-      | Area_Of_Change             | Specific_Change                                            | Project_Details_Title | Navigation_Link | Modifications_Tile_Link |
-      | Participating_Organisation | Addition_Of_sites_Option                                   | Valid_Data_All_Fields | Back            | Modifications_Tile      |
-      | Participating_Organisation | Early_closure_withdrawal_of_sites_Option                   | Valid_Data_All_Fields | Back            | Modifications_Tile      |
-      | Participating_Organisation | Addition_Of_Participant_Identification_Centres_Option      | Valid_Data_All_Fields | Back            | Modifications_Tile      |
-      | Participating_Organisation | Early_closure_Of_Participant_Identification_Centres_Option | Valid_Data_All_Fields | Back            | Modifications_Tile      |
+      | Area_Of_Change             | Specific_Change                                            | Project_Details_Title | Modifications_Tile_Link |
+      | Participating_Organisation | Addition_Of_sites_Option                                   | Valid_Data_All_Fields | Modifications_Tile      |
+      | Participating_Organisation | Early_closure_withdrawal_of_sites_Option                   | Valid_Data_All_Fields | Modifications_Tile      |
+      | Participating_Organisation | Addition_Of_Participant_Identification_Centres_Option      | Valid_Data_All_Fields | Modifications_Tile      |
+      | Participating_Organisation | Early_closure_Of_Participant_Identification_Centres_Option | Valid_Data_All_Fields | Modifications_Tile      |
 
 
   @ParticipatingOrganisationsErrorValidationRegression
