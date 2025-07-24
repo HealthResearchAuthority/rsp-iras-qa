@@ -12,21 +12,11 @@
     "job_title_label": "Job title",
     "role_label": "Role",
     "committee_label": "Committee",
-    "role_checkbox": [
-      "Operations",
-      "Reviewer",
-      "User",
-      "System administrator"
-    ],
+    "role_checkbox": ["Operations", "Reviewer", "User", "System administrator"],
     "country_label": "Country",
     "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
     "access_required_label": "Access required",
-    "access_required_checkbox": [
-      "Study wide review",
-      "Research ethics committee",
-      "CAG",
-      "Technical assurance"
-    ],
+    "access_required_checkbox": ["Study wide review", "Research ethics committee", "CAG", "Technical assurance"],
     "review_body_label": "Review body"
   },
   "Missing_Mandatory_Fields_Role_Not_Operations_Error": {
@@ -88,16 +78,12 @@
   },
   "Create_User_Profile": {
     "email_address_prefix": "QAAutomation",
-    "email_address_unique": "QAAutomation20250716230624153hscrd@health.org",
+    "email_address_unique": "QAAutomation20250717013803455hscrd@health.org",
     "Role_Operations": {
-      "role_checkbox": [
-        "Operations"
-      ]
+      "role_checkbox": ["Operations"]
     },
     "Role_Not_Operations": {
-      "role_checkbox": [
-        "Reviewer"
-      ]
+      "role_checkbox": ["Reviewer"]
     },
     "Label_Texts_Role_Operations": {
       "role_checkbox_label": "Role",
@@ -112,56 +98,25 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Operations",
       "job_title_text": "Sr.Reviewer Role_Operations",
-      "role_checkbox": [
-        "Operations",
-        "System administrator"
-      ],
-      "country_checkbox": [
-        "England",
-        "Northern Ireland",
-        "Scotland",
-        "Wales"
-      ],
-      "access_required_checkbox": [
-        "Study wide review",
-        "Research ethics committee",
-        "CAG",
-        "Technical assurance"
-      ]
+      "role_checkbox": ["Operations", "System administrator"],
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "access_required_checkbox": ["Study wide review", "Research ethics committee", "CAG", "Technical assurance"]
     },
     "Valid_Data_In_All_Mandatory_Fields_Role_Operations": {
       "first_name_text": "QA Automation First Name Test Role_Operations",
       "last_name_text": "Test Last Name Role_Operations",
       "email_address_text": "hscrd@health.org",
-      "role_checkbox": [
-        "Operations"
-      ],
-      "country_checkbox": [
-        "England",
-        "Northern Ireland",
-        "Scotland",
-        "Wales"
-      ],
-      "access_required_checkbox": [
-        "Study wide review",
-        "Research ethics committee",
-        "CAG",
-        "Technical assurance"
-      ]
+      "role_checkbox": ["Operations"],
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "access_required_checkbox": ["Study wide review", "Research ethics committee", "CAG", "Technical assurance"]
     },
     "Valid_Data_In_All_Mandatory_Fields_Role_Operations_Another": {
       "first_name_text": "QA Automation First Name Test Role_Operations_Another",
       "last_name_text": "Test Last Name Role_Operations_Another",
       "email_address_text": "hscrd@health.org",
-      "role_checkbox": [
-        "Operations"
-      ],
-      "country_checkbox": [
-        "England"
-      ],
-      "access_required_checkbox": [
-        "Research ethics committee"
-      ]
+      "role_checkbox": ["Operations"],
+      "country_checkbox": ["England"],
+      "access_required_checkbox": ["Research ethics committee"]
     },
     "Valid_Data_In_All_Fields_Role_Reviewer": {
       "title_text": "Mr",
@@ -171,26 +126,19 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Reviewer",
       "job_title_text": "Sr.Reviewer Role_Reviewer",
-      "role_checkbox": [
-        "Reviewer",
-        "System administrator"
-      ]
+      "role_checkbox": ["Reviewer", "System administrator"]
     },
     "Valid_Data_In_All_Mandatory_Fields_Role_Reviewer": {
       "first_name_text": "QA Automation First Name Test Role_Operations",
       "last_name_text": "Test Last Name Role_Operations",
       "email_address_text": "hscrd@health.org",
-      "role_checkbox": [
-        "Reviewer"
-      ]
+      "role_checkbox": ["Reviewer"]
     },
     "Valid_Data_In_All_Mandatory_Fields_Role_Reviewer_Another": {
       "first_name_text": "QA Automation First Name Test Role_Operations_Another",
       "last_name_text": "Test Last Name Role_Operations_Another",
       "email_address_text": "hscrd@health.org",
-      "role_checkbox": [
-        "Reviewer"
-      ]
+      "role_checkbox": ["Reviewer"]
     },
     "Valid_Data_In_All_Fields_Role_Operations_Another": {
       "title_text": "Mr",
@@ -200,18 +148,9 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Operations_Another",
       "job_title_text": "Sr.Reviewer Role_Operations_Another",
-      "role_checkbox": [
-        "Operations",
-        "User"
-      ],
-      "country_checkbox": [
-        "England",
-        "Scotland"
-      ],
-      "access_required_checkbox": [
-        "Research ethics committee",
-        "CAG"
-      ]
+      "role_checkbox": ["Operations", "User"],
+      "country_checkbox": ["England", "Scotland"],
+      "access_required_checkbox": ["Research ethics committee", "CAG"]
     },
     "Valid_Data_In_All_Fields_Role_Reviewer_Another": {
       "title_text": "Mr",
@@ -221,10 +160,7 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Reviewer_Another",
       "job_title_text": "Sr.Reviewer Role_Reviewer_Another",
-      "role_checkbox": [
-        "Reviewer",
-        "User"
-      ]
+      "role_checkbox": ["Reviewer", "User"]
     },
     "Valid_Data_All_Roles": {
       "title_text": "Mr",
@@ -234,18 +170,9 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_All",
       "job_title_text": "Sr.Reviewer Role_All",
-      "role_checkbox": [
-        "Operations",
-        "Reviewer",
-        "User",
-        "System administrator"
-      ],
-      "country_checkbox": [
-        "Wales"
-      ],
-      "access_required_checkbox": [
-        "Research ethics committee"
-      ]
+      "role_checkbox": ["Operations", "Reviewer", "User", "System administrator"],
+      "country_checkbox": ["Wales"],
+      "access_required_checkbox": ["Research ethics committee"]
     },
     "Valid_Data_No_Roles": {
       "title_text": "Mr",
@@ -399,22 +326,9 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Operations",
       "job_title_text": "Sr.Reviewer Role_Operations",
-      "role_checkbox": [
-        "Operations",
-        "System administrator"
-      ],
-      "country_checkbox": [
-        "England",
-        "Northern Ireland",
-        "Scotland",
-        "Wales"
-      ],
-      "access_required_checkbox": [
-        "Study wide review",
-        "Research ethics committee",
-        "CAG",
-        "Technical assurance"
-      ]
+      "role_checkbox": ["Operations", "System administrator"],
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "access_required_checkbox": ["Study wide review", "Research ethics committee", "CAG", "Technical assurance"]
     },
     "Duplicate_Email_Role_Not_Operations": {
       "title_text": "Mr",
@@ -424,9 +338,7 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Operations",
       "job_title_text": "Sr.Reviewer Role_Operations",
-      "role_checkbox": [
-        "System administrator"
-      ]
+      "role_checkbox": ["System administrator"]
     },
     "Missing_Mandatory_Fields_Role_Not_Operations": {
       "first_name_text": "",
@@ -437,9 +349,7 @@
       "first_name_text": "",
       "last_name_text": "",
       "email_address_text": "",
-      "role_checkbox": [
-        "Operations"
-      ]
+      "role_checkbox": ["Operations"]
     },
     "Missing_Mandatory_Field_First_Name_Role_Not_Operations": {
       "title_text": "Mr",
@@ -449,10 +359,7 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Reviewer",
       "job_title_text": "Sr.Reviewer Role_Reviewer",
-      "role_checkbox": [
-        "Reviewer",
-        "System administrator"
-      ]
+      "role_checkbox": ["Reviewer", "System administrator"]
     },
     "Missing_Mandatory_Field_Last_Name_Role_Not_Operations": {
       "title_text": "Mr",
@@ -462,10 +369,7 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Reviewer",
       "job_title_text": "Sr.Reviewer Role_Reviewer",
-      "role_checkbox": [
-        "Reviewer",
-        "System administrator"
-      ]
+      "role_checkbox": ["Reviewer", "System administrator"]
     },
     "Missing_Mandatory_Field_Email_Address_Role_Not_Operations": {
       "title_text": "Mr",
@@ -475,10 +379,7 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Reviewer",
       "job_title_text": "Sr.Reviewer Role_Reviewer",
-      "role_checkbox": [
-        "Reviewer",
-        "System administrator"
-      ]
+      "role_checkbox": ["Reviewer", "System administrator"]
     },
     "Missing_Mandatory_Field_Country_Role_Operations": {
       "title_text": "Mr",
@@ -488,13 +389,8 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Reviewer",
       "job_title_text": "Sr.Reviewer Role_Reviewer",
-      "role_checkbox": [
-        "Operations"
-      ],
-      "access_required_checkbox": [
-        "Research ethics committee",
-        "CAG"
-      ]
+      "role_checkbox": ["Operations"],
+      "access_required_checkbox": ["Research ethics committee", "CAG"]
     },
     "Missing_Mandatory_Field_Access_Required_Role_Operations": {
       "title_text": "Mr",
@@ -504,13 +400,8 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Reviewer",
       "job_title_text": "Sr.Reviewer Role_Reviewer",
-      "role_checkbox": [
-        "Operations"
-      ],
-      "country_checkbox": [
-        "England",
-        "Scotland"
-      ]
+      "role_checkbox": ["Operations"],
+      "country_checkbox": ["England", "Scotland"]
     },
     "Invalid_Character_Limit": {
       "title_text": "johñ.döeExploring the Intricacies of Advanced Quantum Computing: Unveiling the Potential of Quantum Algorithms, Quantum Cryptography, and Quantum Machine Learning in Revolutionizing Technology and Shaping the Future of Computational Science and Engineering Morethan250chars",

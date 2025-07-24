@@ -46,6 +46,7 @@ export default class ManageUsersPage {
   readonly listCell: Locator;
   private lastLoggedInDateFull: string;
   private lastLoggedInDateTruncated: string;
+  private lastLoggedInHours: number;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -244,6 +245,14 @@ export default class ManageUsersPage {
 
   getLastLoggedInDateTruncated(): string {
     return this.lastLoggedInDateTruncated;
+  }
+
+  setLastLoggedInHours(value: number) {
+    this.lastLoggedInHours = value;
+  }
+
+  getLastLoggedInHours(): number {
+    return this.lastLoggedInHours;
   }
 
   async getUserEmail(inputType: string, createUserProfilePage: CreateUserProfilePage): Promise<string> {

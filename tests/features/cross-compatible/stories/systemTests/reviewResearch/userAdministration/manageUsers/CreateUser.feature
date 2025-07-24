@@ -462,7 +462,7 @@ Feature: User Administration: Manage Users - Create user
       | Add_User_Profile                         | Status_Enabled | Invalid_Data_User_Profile       | Field_And_Summary_Error_Message |
       | Valid_Data_In_All_Fields_Role_Operations | Enabled        | Duplicate_Email_Role_Operations | Duplicate_Email_Error           |
 
-  @rsp-3886 @verifyLastLoggedInDate
+  @rsp-3886 @rsp-4026 @verifyLastLoggedInDate
   Scenario Outline: Verify the last login date of user in homepage and manage users page
     And I fill the new user profile page using '<Add_User_Profile>'
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
@@ -484,8 +484,7 @@ Feature: User Administration: Manage Users - Create user
     And I click the 'Search' button on the 'Manage_Users_Page'
     And I validate the last logged in is displayed as truncated date in manage users page
     And I capture the page screenshot
-    Then I logged out from the system
-    Then I have navigated to the '<Page>' as '<User_System_Admin>'
+    Then I have navigated to the '<Page>'
     And I validate the last logged in is displayed as full date in home page
     And I capture the page screenshot
     Examples:
