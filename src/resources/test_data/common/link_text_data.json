@@ -145,6 +145,11 @@
   "My_Research_Page": {
     "Back": "Back"
   },
+  "Search_Modifications_Page": {
+    "Advanced_Filter": "Advanced filter",
+    "Clear_All_Filters": "Clear all filters",
+    "Back": "Back"
+  },
   "Select_Area_Of_Change_Page": {
     "Back": "Back",
     "Remove_This_Change": "Remove this change"
