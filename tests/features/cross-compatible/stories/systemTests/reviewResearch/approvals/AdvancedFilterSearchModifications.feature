@@ -418,7 +418,8 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
     @SponsorOrganisationValidation @AdvancedFilters @jsEnabled @Test17
     Scenario Outline: Validate the sponsor organisation suggestion list in advanced filters when javascript is enabled
         And I click the 'Advanced_Filter' link on the 'Search_Modifications_Page'
-        And I open advanced filter and each filter one by one by clicking the corresponding filter chevron,if not opened by default using '<Advanced_Filters>'
+        And I expand the chevrons for '<Advanced_Filters>' in search modifications page
+        # And I open advanced filter and each filter one by one by clicking the corresponding filter chevron,if not opened by default using '<Advanced_Filters>'
         And I capture the page screenshot
         When I authorise the rts api using '<RTS_API_Data>'
         Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation
@@ -441,7 +442,8 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
     @SponsorOrganisationValidation @AdvancedFilters @jsDisabled @Test18 @rsp-4118
     Scenario Outline: Validate the sponsor organisation suggestion list in advanced filters when javascript is disabled
         And I click the 'Advanced_Filter' link on the 'Search_Modifications_Page'
-        And I open advanced filter and each filter one by one by clicking the corresponding filter chevron,if not opened by default using '<Advanced_Filters>'
+        And I expand the chevrons for '<Advanced_Filters>' in search modifications page
+        # And I open advanced filter and each filter one by one by clicking the corresponding filter chevron,if not opened by default using '<Advanced_Filters>'
         And I capture the page screenshot
         When I authorise the rts api using '<RTS_API_Data>'
         Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation
@@ -528,24 +530,47 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         When I click the 'Back' link on the 'Approvals_Page'
         Then I can see the 'Home_Page'
 
-    @VerifyHintLabelForSelectedCountryCheckboxAdvancedFilters @Test23
-    Scenario Outline: When javascript enabled verify the hint text for checkboxes
-        And I select advanced filters in the search modifications page using '<Advanced_Filters>'
-        And I capture the page screenshot
-        And I can see the '<Advanced_Filters_Labels>' ui labels in search modifications page
-        Examples:
-            | Advanced_Filters                           | Advanced_Filters_Labels      |
-            | Advanced_Filter_No_Lead_Nation_Selected    | Advanced_Filters_Hint_Labels |
-            | Advanced_Filter_One_Lead_Nation_Selected   | Advanced_Filters_Hint_Labels |
-            | Advanced_Filter_Two_Lead_Nation_Selected   | Advanced_Filters_Hint_Labels |
-            | Advanced_Filter_Three_Lead_Nation_Selected | Advanced_Filters_Hint_Labels |
-            | Advanced_Filter_Four_Lead_Nation_Selected  | Advanced_Filters_Hint_Labels |
-
-    @VerifyHintTextForAdvanceFilters
-    Scenario: Validate hint labels for advanced filters in mange review body page
+    @jsEnabled @VerifyHintLabelForSelectedCheckboxAdvancedFilters @Test23 @TestOnly
+    Scenario: When javascript enabled verify the hint text for advanced filters when user select multiple checkboxes
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
         And I verify the hint text based on the '<Advanced_Filters>' for search modifications page
+        Examples:
+            | Advanced_Filters                               |
+            | Advanced_Filter_No_Lead_Nation_Selected        |
+            | Advanced_Filter_One_Lead_Nation_Selected       |
+            | Advanced_Filter_Two_Lead_Nation_Selected       |
+            | Advanced_Filter_Three_Lead_Nation_Selected     |
+            | Advanced_Filter_Four_Lead_Nation_Selected      |
+            | Advanced_Filter_No_Modification_Type_Selected  |
+            | Advanced_Filter_One_Modification_Type_Selected |
+            | Advanced_Filter_Two_Modification_Type_Selected |
+
+    @jsDisabled @VerifyHintLabelForSelectedCheckboxAdvancedFilters @Test24 @TestOnly
+    Scenario: When javascript disabled verify the hint text for advanced filters when user select multiple checkboxes
+        And I select advanced filters in the search modifications page using '<Advanced_Filters>'
+        And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
+        And I expand the chevrons for '<Advanced_Filters>' in search modifications page
+        And I capture the page screenshot
+        And I verify the hint text based on the '<Advanced_Filters>' for search modifications page
+        Examples:
+            | Advanced_Filters                               |
+            # | Advanced_Filter_No_Lead_Nation_Selected        |
+            | Advanced_Filter_One_Lead_Nation_Selected       |
+            | Advanced_Filter_Two_Lead_Nation_Selected       |
+            | Advanced_Filter_Three_Lead_Nation_Selected     |
+            | Advanced_Filter_Four_Lead_Nation_Selected      |
+            # | Advanced_Filter_No_Modification_Type_Selected  |
+            | Advanced_Filter_One_Modification_Type_Selected |
+            | Advanced_Filter_Two_Modification_Type_Selected |
+
+    @VerifyHintTextForAdvanceFilters @Test25 @TestOnly
+    Scenario: Validate hint labels for advanced filters in search modifications page
+        And I click the 'Advanced_Filter' link on the 'Search_Modifications_Page'
+        And I expand the chevrons for '<Advanced_Filters>' in search modifications page
+        And I capture the page screenshot
+        And I can see the '<Advanced_Filters_Labels>' ui labels in search modifications page
+
         Examples:
             | Advanced_Filters     | Advanced_Filters_Labels      |
             | Advanced_Filters_Nth | Advanced_Filters_Hint_Labels |

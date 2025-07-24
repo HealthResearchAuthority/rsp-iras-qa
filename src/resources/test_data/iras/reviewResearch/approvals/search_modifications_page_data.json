@@ -30,14 +30,16 @@
     "lead_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
     "modification_type_label": "Modification type",
     "modification_type_hint_text": "selected",
-    "modification_type_checkbox": ["Minor modifications", "Modification of an important detail"],
+    "modification_type_checkbox": ["Minor modification", "Modification of an important detail"],
     "short_project_title_label": "Short project title",
     "short_project_title_hint_text": "Enter the name of the short project title",
     "sponsor_organisation_label": "Sponsor organisation",
     "sponsor_organisation_hint_text": "Type the name of the organisation or scroll through the list",
     "Advanced_Filters_Hint_Labels": {
+      "date_modification_submitted_from_date_help_text": "For example, 28 February 2023",
       "lead_nation_checkbox_hint_label": "Select all that apply",
-      "modification_type_checkbox_hint_label": "Select all that apply"
+      "modification_type_checkbox_hint_label": "Select all that apply",
+      "date_modification_submitted_to_date_help_text": "For example, 12 October 2024"
     },
     "selected_checkboxes_hint_label": "selected",
     "active_filters_label": "Active filters",
@@ -135,7 +137,7 @@
       "date_modification_submitted_to_month_dropdown": "January",
       "date_modification_submitted_to_year_text": "2025",
       "lead_nation_checkbox": ["England", "Wales"],
-      "modification_type_checkbox": ["Minor modifications", "Modification of an important detail"]
+      "modification_type_checkbox": ["Minor modification", "Modification of an important detail"]
     },
     "Advanced_Filters_Nth_Chief_Investigator_Name_Filter": {
       "chief_investigator_name_text": "Barry White"
@@ -150,7 +152,7 @@
       "date_modification_submitted_to_month_dropdown": "January",
       "date_modification_submitted_to_year_text": "2025",
       "lead_nation_checkbox": ["England", "Wales"],
-      "modification_type_checkbox": ["Minor modifications", "Modification of an important detail"]
+      "modification_type_checkbox": ["Minor modification", "Modification of an important detail"]
     },
     "Advanced_Filters_Nth_All": {
       "chief_investigator_name_text": "Barry White",
@@ -163,7 +165,7 @@
       "date_modification_submitted_to_month_dropdown": "January",
       "date_modification_submitted_to_year_text": "2025",
       "lead_nation_checkbox": ["England", "Wales"],
-      "modification_type_checkbox": ["Minor modifications", "Modification of an important detail"]
+      "modification_type_checkbox": ["Minor modification", "Modification of an important detail"]
     },
     "Advanced_Filters_Nth_Sponsor_Organisation_Filter": {
       "sponsor_organisation_text": "COLD GENESYS INC"
@@ -178,7 +180,7 @@
       "date_modification_submitted_to_month_dropdown": "January",
       "date_modification_submitted_to_year_text": "2025",
       "lead_nation_checkbox": ["England", "Wales"],
-      "modification_type_checkbox": ["Minor modifications", "Modification of an important detail"]
+      "modification_type_checkbox": ["Minor modification", "Modification of an important detail"]
     },
     "Advanced_Filters_Nth_Date_Modification_Submitted_From_Filter": {
       "date_modification_submitted_from_day_text": "11",
@@ -193,7 +195,7 @@
       "date_modification_submitted_to_month_dropdown": "January",
       "date_modification_submitted_to_year_text": "2025",
       "lead_nation_checkbox": ["England", "Wales"],
-      "modification_type_checkbox": ["Minor modifications", "Modification of an important detail"]
+      "modification_type_checkbox": ["Minor modification", "Modification of an important detail"]
     },
     "Advanced_Filters_Nth_Short_Project_Title_Filter": {
       "short_project_title_text": "Project 01"
@@ -208,7 +210,7 @@
       "date_modification_submitted_to_month_dropdown": "January",
       "date_modification_submitted_to_year_text": "2025",
       "lead_nation_checkbox": ["England", "Wales"],
-      "modification_type_checkbox": ["Minor modifications", "Modification of an important detail"]
+      "modification_type_checkbox": ["Minor modification", "Modification of an important detail"]
     },
     "Advanced_Filters_No_Results_One": {
       "sponsor_organisation_text": "L. MOLTENI & C. DEI FRATELLI ALITTI - SOCIETA' DI ESERCIZIO - S.P.A.",
@@ -228,7 +230,7 @@
       "short_project_title_text": "Short study title 17"
     },
     "Advanced_Filters_Three": {
-      "modification_type_checkbox": ["Minor modifications"]
+      "modification_type_checkbox": ["Minor modification"]
     },
 
     "Advanced_Filters_Four": {
@@ -259,7 +261,7 @@
     "Advanced_Filters_Nine": {
       "sponsor_organisation_text": "Academic Medical Center at the University of Amsterdam (Netherlands)",
       "lead_nation_checkbox": ["England", "Scotland"],
-      "modification_type_checkbox": ["Minor modifications", "Modification of an important detail"]
+      "modification_type_checkbox": ["Minor modification", "Modification of an important detail"]
     },
 
     "Advanced_Filters_Ten": {
@@ -349,7 +351,7 @@
       "date_modification_submitted_from_month_dropdown": "January",
       "date_modification_submitted_from_year_text": "2020",
       "lead_nation_checkbox": ["Northern Ireland", "Scotland", "Wales"],
-      "modification_type_checkbox": ["Minor modifications"]
+      "modification_type_checkbox": ["Minor modification"]
     },
     "Advanced_Filters_Sponsor_Organisation": {
       "sponsor_organisation_text": "COLD GENESYS INC"
@@ -371,6 +373,15 @@
     },
     "Advanced_Filter_Four_Lead_Nation_Selected": {
       "lead_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
+    },
+    "Advanced_Filter_No_Modification_Type_Selected": {
+      "modification_type_checkbox": []
+    },
+    "Advanced_Filter_One_Modification_Type_Selected": {
+      "modification_type_checkbox": ["Minor modification"]
+    },
+    "Advanced_Filter_Two_Modification_Type_Selected": {
+      "modification_type_checkbox": ["Minor modification", "Modification of an important detail"]
     }
   },
   "Sponsor_Organisation": {

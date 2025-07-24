@@ -9,11 +9,6 @@ When(
   async ({ searchModificationsPage }, datasetName: string) => {
     const dataset = searchModificationsPage.searchModificationsPageTestData.Iras_Id[datasetName];
     await searchModificationsPage.iras_id_search_text.fill(dataset['iras_id_text']);
-    //  await commonItemsPage.iras_id_search_text.fill(dataset['iras_id_text']);
-    // if (inputType.startsWith('Valid_Iras_Id') || inputType.startsWith('Invalid_Iras_Id')) {
-    //   searchValue = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[inputType];
-    //   await commonItemsPage.iras_id_search_text.fill(searchValue['iras_id_text']);
-    // }
   }
 );
 
@@ -27,6 +22,12 @@ When(
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
         // I open each filter one by one by clicking the corresponding Filter chevron,if not opened by default (for handling JS Enabled and Disabled)
         await searchModificationsPage.clickFilterChevron(dataset, key, searchModificationsPage);
+        const hintLabel =
+          0 +
+          ' ' +
+          searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page
+            .selected_checkboxes_hint_label;
+        expect(await searchModificationsPage.lead_nation_checkbox_hint_label.textContent()).toBe(hintLabel);
         if (key === 'sponsor_organisation_text') {
           if (
             ($tags.includes('@jsEnabled') || config.projects?.[1].use?.javaScriptEnabled) &&
@@ -61,6 +62,11 @@ Then(
   'I can see the {string} ui labels in search modifications page',
   async ({ searchModificationsPage }, datasetName: string) => {
     const dataset = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[datasetName];
+    const hintLabel =
+      0 +
+      ' ' +
+      searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.selected_checkboxes_hint_label;
+    expect(await searchModificationsPage.lead_nation_checkbox_hint_label.textContent()).toBe(hintLabel);
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
         await expect(searchModificationsPage[key].getByText(dataset[key])).toBeVisible();
@@ -75,7 +81,7 @@ Then(
     const dataset = searchModificationsPage.searchModificationsPageTestData.Advanced_Filters[filterDatasetName];
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        if (key === 'lead_nation_checkbox') {
+        if (key.endsWith('lead_nation_checkbox')) {
           const numberOfCheckboxesSelected = dataset[key].length;
           const hintLabel =
             numberOfCheckboxesSelected +
@@ -90,10 +96,9 @@ Then(
 );
 
 When(
-  'I open advanced filter and each filter one by one by clicking the corresponding filter chevron,if not opened by default using {string}',
+  'I expand the chevrons for {string} in search modifications page',
   async ({ searchModificationsPage }, filterDatasetName: string) => {
     const dataset = searchModificationsPage.searchModificationsPageTestData.Advanced_Filters[filterDatasetName];
-    // await searchModificationsPage.clickAdvancedFilterChevron();
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
         await searchModificationsPage.clickFilterChevron(dataset, key, searchModificationsPage);
