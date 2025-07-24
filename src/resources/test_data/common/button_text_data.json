@@ -104,6 +104,13 @@
     "Chief_Investigator": "Chief Investigator",
     "Lead_Nation": "Lead Nation"
   },
+  "Modifications_Tasklist_Page": {
+    "Modification_Id": "Modification ID",
+    "Short_Project_Title": "Short project title",
+    "Modification_Type": "Modification type",
+    "Date_Submitted": "Date submitted",
+    "Days_Since_Submission": "Days since submission"
+  },
   "Participating_Organisations_Page": {
     "Save_Continue": "Save and continue",
     "Save_For_Later": "Save for later",

@@ -7,7 +7,7 @@ Feature: Receive Amendments: Sort modification results after performing a search
         And I fill the search input for searching 'modifications' with 'Valid_Iras_Id_Prefix' as the search query
         And I click the 'Search' button on the 'Search_Modifications_Page'
         And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
-        And the system displays modification records matching the search criteria of 'Valid_Iras_Id_Prefix'
+        And I can now see a table of search results for modifications received for approval
         And I capture the page screenshot
 
     @SortModificationsByColumn
