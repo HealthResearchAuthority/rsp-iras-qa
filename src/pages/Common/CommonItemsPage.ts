@@ -3,8 +3,7 @@ import * as buttonTextData from '../../resources/test_data/common/button_text_da
 import * as linkTextData from '../../resources/test_data/common/link_text_data.json';
 import * as questionSetData from '../../resources/test_data/common/question_set_data.json';
 import * as commonTestData from '../../resources/test_data/common/common_data.json';
-
-import fs from 'fs';
+import * as fs from 'fs';
 import path from 'path';
 import ProjectFilterPage from '../IRAS/questionSet/ProjectFilterPage';
 import ProjectDetailsPage from '../IRAS/questionSet/ProjectDetailsPage';
@@ -70,6 +69,17 @@ export default class CommonItemsPage {
   readonly pageLinks: Locator;
   readonly advanced_filter_chevron: Locator;
   readonly result_count: Locator;
+  readonly iras_id_search_text: Locator;
+  readonly lastPage: Locator;
+  readonly pagination_next_link: Locator;
+  readonly advanced_filter_active_filters_label: Locator;
+  readonly no_matching_search_result_header_label: Locator;
+  readonly no_matching_search_result_sub_header_label: Locator;
+  readonly no_matching_search_result_body_one_label: Locator;
+  readonly no_matching_search_result_body_two_label: Locator;
+  readonly no_matching_search_result_body_three_label: Locator;
+  readonly no_matching_search_result_body_four_label: Locator;
+  readonly no_matching_search_result_count_label: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -97,8 +107,11 @@ export default class CommonItemsPage {
     this.tableRows = this.page.getByRole('table').getByRole('row');
     this.tableBodyRows = this.page.getByRole('table').locator('tbody').getByRole('row');
     this.hidden_next_button = this.page.locator('[class="govuk-pagination__next"][style="visibility: hidden"]');
-    this.search_text = this.page.locator('#Search_IrasId');
-    //  this.search_text = this.page.locator('#SearchQuery');
+    this.search_text = this.page
+      .getByTestId('SearchQuery')
+      .or(this.page.getByTestId('Search.SearchQuery'))
+      .or(this.page.getByTestId('Search_IrasId'))
+      .first();
     //Banner
     this.bannerNavBar = this.page.getByLabel('Service information');
     this.bannerLoginBtn = this.bannerNavBar.getByText(this.buttonTextData.Banner.Login, { exact: true });
@@ -156,6 +169,16 @@ export default class CommonItemsPage {
       .locator('..')
       .getByRole('heading', { level: 2 })
       .getByText(this.commonTestData.result_count_heading);
+    this.advanced_filter_chevron = this.page.getByRole('button', { name: this.commonTestData.advanced_filter_label });
+    this.advanced_filter_active_filters_label = this.page.getByRole('list');
+    this.no_matching_search_result_header_label = this.page.getByRole('heading');
+    this.no_matching_search_result_sub_header_label = this.page.getByRole('paragraph');
+    this.no_matching_search_result_body_one_label =
+      this.no_matching_search_result_body_two_label =
+      this.no_matching_search_result_body_three_label =
+      this.no_matching_search_result_body_four_label =
+        this.page.getByRole('listitem');
+    this.no_matching_search_result_count_label = this.page.getByRole('heading');
   }
 
   //Page Methods
@@ -825,8 +848,8 @@ export default class CommonItemsPage {
       screenshotBuffers.push(buf);
     }
     const images = await Promise.all(screenshotBuffers.map((b) => sharp(b).metadata()));
-    const width = images[0].width!;
-    const heights = images.map((i) => i.height!);
+    const width = images[0].width;
+    const heights = images.map((i) => i.height);
     const totalHeight = heights.reduce((a, b) => a + b, 0);
     const stitchedImage = sharp({
       create: {

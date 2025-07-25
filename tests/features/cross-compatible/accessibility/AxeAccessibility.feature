@@ -68,7 +68,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     When I click the 'Start' button on the 'Create_Project_Record_Page'
     And I fill the project details iras page with 'Valid_IRAS_ID_Max'
-    When I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
+    When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
     And I fill the key project roles page with 'Valid_Data_All_Fields'
@@ -78,8 +78,8 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityProjectOverviewSaveLater @FrontStageUser
-  Scenario: Project Overview - Save for later page
+  @axeAccessibilityProjectOverviewCreateProject @FrontStageUser
+  Scenario: Project Overview -Create project
     Given I have navigated to the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     When I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -93,13 +93,36 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
+  @axeAccessibilityProjectOverviewModifications @FrontStageUser
+  Scenario: Project Overview - Modifications
+    Given I have navigated to the my research projects page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    When I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    And I fill the key project roles page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    And I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    And I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    When I click the 'Modifications_Tile' link on the 'Project_Overview_Page'
+    And I select 'Participating_Organisation_Option' from area of change dropdown and 'Addition_Of_sites_Option' from specific change dropdown
+    When I click the 'Save_For_Later' button on the 'Select_Area_Of_Change_Page'
+    Then I can see the project overview page
+    Then I can see the participating organisation page
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
   @axeAccessibilityReviewYourAnswers @FrontStageUser
   Scenario: Review your answers
     Given I have navigated to the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     When I click the 'Start' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
-    When I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
+    When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
     And I fill the key project roles page with 'Valid_Data_All_Fields'
@@ -117,7 +140,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     When I click the 'Start' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
-    When I click the 'Save_Continue' button on the 'Project_Details_IRAS_Page'
+    When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
     Then I can see the key project roles page
     And I fill the key project roles page with 'Sponsor_Organisation_Partial_Text_NHS'
@@ -810,6 +833,16 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
+  @axeAccessibilitySearchModificationsPage @FrontStageUser
+  Scenario: Search modifications page
+    Given I have navigated to the 'Search_Modifications_Page'
+    And I fill the search input for searching 'modifications' with 'Valid_Iras_Id_Prefix' as the search query
+    And I click the 'Search' button on the 'Search_Modifications_Page'
+    And the system displays modification records matching the search criteria of 'Valid_Iras_Id_Prefix'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
   @axeAccessibilityAdvanceFilterSearchModifications @FrontStageUser
   Scenario: Search - Approvals - Plan and manage healthcare research
     Given I have navigated to the 'Search_Modifications_Page'
@@ -822,6 +855,50 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
+
+  @axeAccessibilitySelectAreaOfChange @FrontStageUser
+  Scenario: Modifications select area of change
+    Given I have navigated to the my research projects page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    When I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    And I fill the key project roles page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    And I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    And I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    And I click the 'Modifications_Tile' link on the 'Project_Overview_Page'
+    Then I can see the select area of change page
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityParticipatingOrganisation @FrontStageUser
+  Scenario: Modifications search participating organisations
+    Given I have navigated to the my research projects page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    When I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    And I fill the key project roles page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    And I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    And I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    When I click the 'Modifications_Tile' link on the 'Project_Overview_Page'
+    And I select 'Participating_Organisation_Option' from area of change dropdown and 'Addition_Of_sites_Option' from specific change dropdown
+    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+    Then I can see the participating organisation page
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+
 
   @axeAccessibilityModficationsReadyToAssign @FrontStageUser
   Scenario: Modifications Tasklist page that displays modifications ready to be assigned and verify pagination
