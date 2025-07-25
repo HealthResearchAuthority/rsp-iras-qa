@@ -21,7 +21,6 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         And I capture the page screenshot
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
-        # And I can see the '<Advanced_Filters_Labels>' ui labels in search modifications page
         And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
         Then I can see the selected filters '<Advanced_Filters>' are displayed under active filters
@@ -77,13 +76,13 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         Then I can see the selected filters '<Advanced_Filters>' are displayed under active filters
         And the system displays modification records matching the filter criteria of '<Advanced_Filters>'
         And I capture the page screenshot
-        # And I can see the list is sorted by default in the descending order of the 'Modification Id'
-        # And I capture the page screenshot
+        And I can see the list is sorted by default in the descending order of the 'Modification Id'
+        And I capture the page screenshot
         When I enter '<Valid_Iras_Id>' into the search field for search modifications page
         And I capture the page screenshot
         And I click the 'Search' button on the 'Search_Modifications_Page'
         And the system displays modification records matching the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>'
-        # And I can see the list is sorted by default in the descending order of the 'Modification Id'
+        And I can see the list is sorted by default in the descending order of the 'Modification Id'
         And I capture the page screenshot
         Examples:
             | Valid_Iras_Id             | Advanced_Filters             |
@@ -124,8 +123,8 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         Then I can see the selected filters '<Advanced_Filters>' are displayed under active filters
         And the system displays modification records matching the filter criteria of '<Advanced_Filters>'
         And I capture the page screenshot
-        # And I can see the list is sorted by default in the descending order of the 'Modification Id'
-        # And I capture the page screenshot
+        And I can see the list is sorted by default in the descending order of the 'Modification Id'
+        And I capture the page screenshot
         Examples:
             | Advanced_Filters             |
             | Advanced_Filters_Nth         |
@@ -256,7 +255,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         And I capture the page screenshot
         And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
-        Then I can see the selected filters '<Advanced_Filters>' are displayed under active filters
+        Then I can see the selected filters '<Advanced_Filters_No_results>' are displayed under active filters
         And the system displays no results found message if there is no 'modification record' on the system that matches the search criteria
         And I capture the page screenshot
         Examples:
@@ -283,20 +282,17 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
     # THEN I should see a clear validation error message ‘This date you’ve selected is before the search above'
     @DateModificationSubmittedError @Test13
     Scenario Outline: Verify the user can see clear validation error message This date you have selected is before the search above when an end date is earlier than the start date
-        And I select advanced filters in the search modifications page using '<Advanced_Filters>'
+        And I select advanced filters in the search modifications page using '<Date_Modification_Submitted_Invalid_Data>'
         And I capture the page screenshot
         And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
-        Then I can see the selected filters '<Advanced_Filters>' are displayed under active filters
-        And I capture the page screenshot
-        # And I click the 'Advanced_Filter' link on the 'Search_Modifications_Page'
-        And I open advanced filter and each filter one by one by clicking the corresponding filter chevron,if not opened by default using '<Advanced_Filters>'
-        And I capture the page screenshot
-        Then I validate '<Field_Error_Message>' displayed on 'Search_Modifications_Page' in advanced filters
+        Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Search_Modifications_Page' in advanced filters
         And I capture the page screenshot
         Examples:
-            | Advanced_Filters                         | Field_Error_Message                     |
-            | Date_Modification_Submitted_Invalid_Data | Field_Error_Date_Modification_Submitted |
+            | Date_Modification_Submitted_Invalid_Data                | Field_And_Summary_Error_Message                               |
+            | Date_Modification_Submitted_To_date_Before_From_Date    | Date_Modification_Submitted_To_date_Before_From_Date_Error    |
+            | Date_Modification_Submitted_No_Month_Selected_To_Date   | Date_Modification_Submitted_No_Month_Selected_To_Date_Error   |
+            | Date_Modification_Submitted_No_Month_Selected_From_Date | Date_Modification_Submitted_No_Month_Selected_From_Date_Error |
 
     ##Scenario 6.1 -Remove filters validation
     # Remove filters>>one by one on clicking 'x'/ all together by clicking 'Clear all filters'
@@ -419,7 +415,6 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
     Scenario Outline: Validate the sponsor organisation suggestion list in advanced filters when javascript is enabled
         And I click the 'Advanced_Filter' link on the 'Search_Modifications_Page'
         And I expand the chevrons for '<Advanced_Filters>' in search modifications page
-        # And I open advanced filter and each filter one by one by clicking the corresponding filter chevron,if not opened by default using '<Advanced_Filters>'
         And I capture the page screenshot
         When I authorise the rts api using '<RTS_API_Data>'
         Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation
@@ -443,7 +438,6 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
     Scenario Outline: Validate the sponsor organisation suggestion list in advanced filters when javascript is disabled
         And I click the 'Advanced_Filter' link on the 'Search_Modifications_Page'
         And I expand the chevrons for '<Advanced_Filters>' in search modifications page
-        # And I open advanced filter and each filter one by one by clicking the corresponding filter chevron,if not opened by default using '<Advanced_Filters>'
         And I capture the page screenshot
         When I authorise the rts api using '<RTS_API_Data>'
         Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation
@@ -452,19 +446,20 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         And With javascript disabled, I search with invalid '<Sponsor_Organisation_Invalid>' for sponsor organisation search box in advanced filters and validate the search results along with '<Sponsor_Organisation_Jsdisabled_Search_Hint_Labels>'
         And I capture the page screenshot
         And With javascript disabled, I search with invalid min characters '<Sponsor_Organisation_Min>' for sponsor organisation search box in advanced filters
-        Then I validate '<Field_Error_Message>' displayed on 'Search_Modifications_Page' in advanced filters
+        And I expand the chevrons for '<Advanced_Filters>' in search modifications page
+        Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Search_Modifications_Page' in advanced filters
         And I capture the page screenshot
         Examples:
-            | Advanced_Filters                      | Sponsor_Organisation                           | Sponsor_Organisation_Invalid      | Sponsor_Organisation_Min             | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_API_Data         | RTS_Request                                    | Field_Error_Message              |
-            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Partial_Text_NHS          | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS            | Field_Error_Sponsor_Organisation |
-            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_Brackets     | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Brackets       | Field_Error_Sponsor_Organisation |
-            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_Dot_Comma    | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Dot_Comma      | Field_Error_Sponsor_Organisation |
-            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_Slash        | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Slash          | Field_Error_Sponsor_Organisation |
-            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_Hyphen       | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Hyphen         | Field_Error_Sponsor_Organisation |
-            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_Start_Space  | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Start_Space    | Field_Error_Sponsor_Organisation |
-            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_End_Space    | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space     | Field_Error_Sponsor_Organisation |
-            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | Sponsor_Organisation_Text_Exactly_Five_Results | Field_Error_Sponsor_Organisation |
-            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Text_Min_Spaces | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | Sponsor_Organisation_Text_Exactly_Five_Results | Field_Error_Sponsor_Organisation |
+            | Advanced_Filters                      | Sponsor_Organisation                           | Sponsor_Organisation_Invalid      | Sponsor_Organisation_Min             | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_API_Data         | RTS_Request                                    | Field_And_Summary_Error_Message     |
+            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Partial_Text_NHS          | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS            | Sponsor_Organisation_Min_Char_Error |
+            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_Brackets     | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Brackets       | Sponsor_Organisation_Min_Char_Error |
+            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_Dot_Comma    | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Dot_Comma      | Sponsor_Organisation_Min_Char_Error |
+            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_Slash        | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Slash          | Sponsor_Organisation_Min_Char_Error |
+            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_Hyphen       | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Hyphen         | Sponsor_Organisation_Min_Char_Error |
+            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_Start_Space  | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Start_Space    | Sponsor_Organisation_Min_Char_Error |
+            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_End_Space    | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space     | Sponsor_Organisation_Min_Char_Error |
+            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Min_Char_Error |
+            | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Text_Min_Spaces | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Min_Char_Error |
 
     #### Partial validation for all the text boxes>>Iras Id search validation
     @viewListOfModifications @ValidIrasIdAndNoFilters @PartialSearchIrasID @Test19
@@ -530,8 +525,8 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         When I click the 'Back' link on the 'Approvals_Page'
         Then I can see the 'Home_Page'
 
-    @jsEnabled @VerifyHintLabelForSelectedCheckboxAdvancedFilters @Test23 @TestOnly
-    Scenario: When javascript enabled verify the hint text for advanced filters when user select multiple checkboxes
+    @jsEnabled @VerifyHintLabelForSelectedCheckboxAdvancedFilters @Test23
+    Scenario Outline: When javascript enabled verify the hint text for advanced filters when user select multiple checkboxes
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
         And I verify the hint text based on the '<Advanced_Filters>' for search modifications page
@@ -546,8 +541,8 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
             | Advanced_Filter_One_Modification_Type_Selected |
             | Advanced_Filter_Two_Modification_Type_Selected |
 
-    @jsDisabled @VerifyHintLabelForSelectedCheckboxAdvancedFilters @Test24 @TestOnly
-    Scenario: When javascript disabled verify the hint text for advanced filters when user select multiple checkboxes
+    @jsDisabled @VerifyHintLabelForSelectedCheckboxAdvancedFilters @Test24
+    Scenario Outline: When javascript disabled verify the hint text for advanced filters when user select multiple checkboxes
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
         And I expand the chevrons for '<Advanced_Filters>' in search modifications page
@@ -555,17 +550,27 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         And I verify the hint text based on the '<Advanced_Filters>' for search modifications page
         Examples:
             | Advanced_Filters                               |
-            # | Advanced_Filter_No_Lead_Nation_Selected        |
             | Advanced_Filter_One_Lead_Nation_Selected       |
             | Advanced_Filter_Two_Lead_Nation_Selected       |
             | Advanced_Filter_Three_Lead_Nation_Selected     |
             | Advanced_Filter_Four_Lead_Nation_Selected      |
-            # | Advanced_Filter_No_Modification_Type_Selected  |
             | Advanced_Filter_One_Modification_Type_Selected |
             | Advanced_Filter_Two_Modification_Type_Selected |
 
-    @VerifyHintTextForAdvanceFilters @Test25 @TestOnly
-    Scenario: Validate hint labels for advanced filters in search modifications page
+    @jsDisabled @VerifyHintLabelForSelectedCheckboxAdvancedFilters @Test25
+    Scenario Outline: When javascript disabled verify the hint text for advanced filters when user does n't select any checkboxes
+        And I click the 'Advanced_Filter' link on the 'Search_Modifications_Page'
+        And I expand the chevrons for '<Advanced_Filters>' in search modifications page
+        And I capture the page screenshot
+        And I capture the page screenshot
+        And I verify the hint text based on the '<Advanced_Filters>' for search modifications page
+        Examples:
+            | Advanced_Filters                              |
+            | Advanced_Filter_No_Lead_Nation_Selected       |
+            | Advanced_Filter_No_Modification_Type_Selected |
+
+    @VerifyHintTextForAdvanceFilters @Test26
+    Scenario Outline: Validate hint labels for advanced filters in search modifications page
         And I click the 'Advanced_Filter' link on the 'Search_Modifications_Page'
         And I expand the chevrons for '<Advanced_Filters>' in search modifications page
         And I capture the page screenshot

@@ -67,6 +67,9 @@ export default class SearchModificationsPage {
   readonly modification_type_checkbox_hint_label: Locator;
   readonly date_modification_submitted_to_date_help_text: Locator;
   readonly date_modification_submitted_from_date_help_text: Locator;
+  readonly lead_nation_checkbox_selected_hint_label: Locator;
+  readonly modification_type_checkbox_selected_hint_label: Locator;
+  readonly date_modification_submitted_from_date_error: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -154,6 +157,15 @@ export default class SearchModificationsPage {
         ),
       })
       .getByRole('textbox');
+    this.date_modification_submitted_from_date_error = this.page
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group')
+      .filter({
+        hasText:
+          this.searchModificationsPageTestData.Search_Modifications_Page
+            .date_modification_submitted_from_date_hint_text,
+      })
+      .locator('.govuk-error-message');
     this.date_modification_submitted_to_day_text_chevron = this.page
       .getByRole('heading')
       .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.date_modification_submitted_label, {
@@ -210,6 +222,16 @@ export default class SearchModificationsPage {
       .locator('..')
       .locator('.govuk-fieldset')
       .locator('.govuk-form-group')
+      .getByText(
+        this.searchModificationsPageTestData.Search_Modifications_Page.Advanced_Filters_Hint_Labels
+          .lead_nation_checkbox_hint_label,
+        { exact: true }
+      );
+    this.lead_nation_checkbox_selected_hint_label = this.lead_nation_label
+      .locator('..')
+      .locator('..')
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group')
       .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.selected_checkboxes_hint_label);
     this.lead_nation_checkbox = this.lead_nation_fieldset.getByRole('checkbox');
     this.lead_nation_checkbox_chevron = this.page
@@ -236,12 +258,18 @@ export default class SearchModificationsPage {
       .locator('..')
       .locator('..')
       .locator('.govuk-fieldset')
-      .locator('.govuk-form-group', {
-        has: this.page.getByText(
-          this.searchModificationsPageTestData.Search_Modifications_Page.Advanced_Filters_Hint_Labels
-            .modification_type_checkbox_hint_label
-        ),
-      });
+      .locator('.govuk-form-group')
+      .getByText(
+        this.searchModificationsPageTestData.Search_Modifications_Page.Advanced_Filters_Hint_Labels
+          .modification_type_checkbox_hint_label,
+        { exact: true }
+      );
+    this.modification_type_checkbox_selected_hint_label = this.modification_type_label
+      .locator('..')
+      .locator('..')
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group')
+      .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.selected_checkboxes_hint_label);
     this.modification_type_checkbox = this.modification_type_fieldset.getByRole('checkbox');
     this.modification_type_checkbox_chevron = this.page
       .getByRole('heading')
@@ -285,10 +313,6 @@ export default class SearchModificationsPage {
 
     this.active_filters_list = this.page.locator('.search-filter-summary__remove-filter-text');
 
-    // this.sponsor_organisation_jsdisabled_result_hint_label = this.sponsor_organisation_fieldset.getByText(
-    //   this.searchModificationsPageTestData.Search_Modifications_Page.Sponsor_Organisation_Jsdisabled_Search_Hint_Labels
-    //     .search_hint_header_prefix
-    // );
     this.sponsor_organisation_jsdisabled_result_hint_label = this.page.getByTestId(
       'Search.SponsorOrgSearch.SelectedOrganisation-hint'
     );
@@ -444,13 +468,23 @@ export default class SearchModificationsPage {
     return values;
   }
 
+  async getCheckboxHintLabel(): Promise<string> {
+    const hintLabel =
+      0 + ' ' + this.searchModificationsPageTestData.Search_Modifications_Page.selected_checkboxes_hint_label;
+    return hintLabel;
+  }
+
+  async areSearchResultsValid(actualValues: string[], allowedValues: string[]) {
+    const allValid = actualValues.every((value) => allowedValues.includes(value));
+    return allValid;
+  }
+
   async removeSelectedFilterValues(removeFilterLabel: string[]): Promise<string[]> {
     const removedFilterValues: string[] = [];
     for (const label of removeFilterLabel) {
       let filterFound = true;
       while (filterFound) {
-        // Re-fetch the list each time to get the latest DOM state
-        const filterItems = this.page.locator('.search-filter-summary__remove-filter-text');
+        const filterItems = this.active_filters_list;
         const count = await filterItems.count();
         filterFound = false;
         for (let i = 0; i < count; i++) {
@@ -458,14 +492,13 @@ export default class SearchModificationsPage {
           if (text === label) {
             removedFilterValues.push(text);
             await filterItems.nth(i).locator('..').click({ force: true });
-            await this.page.waitForTimeout(500); // Optional: wait for DOM to update
+            await this.page.waitForTimeout(500);
             filterFound = true;
-            break; // Restart loop to re-fetch updated list
+            break;
           }
         }
       }
     }
-    console.log('removedFilterValues' + removedFilterValues);
     return removedFilterValues;
   }
 
@@ -532,5 +565,44 @@ export default class SearchModificationsPage {
       ['leadNationValues', leadNationValues],
     ]);
     return searchResultMap;
+  }
+
+  async sortModificationIdListValues(modificationIds: string[], sortDirection: string): Promise<string[]> {
+    let sortedListAsNums: number[][];
+    const sortedListAsStrings: string[] = [];
+    const formattedModificationIds = modificationIds.map((id) => {
+      const [prefix, suffix] = id.split('/');
+      return [parseInt(prefix), parseInt(suffix)];
+    });
+    if (sortDirection.toLowerCase() == 'ascending') {
+      sortedListAsNums = formattedModificationIds.toSorted((a, b) => {
+        if (a[0] - b[0] == 0) {
+          return a[1] - b[1];
+        } else {
+          return a[0] - b[0];
+        }
+      });
+    } else {
+      sortedListAsNums = formattedModificationIds.toSorted((a, b) => {
+        if (b[0] - a[0] == 0) {
+          return b[1] - a[1];
+        } else {
+          return b[0] - a[0];
+        }
+      });
+    }
+    for (const entry of sortedListAsNums.entries()) {
+      sortedListAsStrings.push(entry[1].toString().replace(',', '/'));
+    }
+    return sortedListAsStrings;
+  }
+
+  async getActualListValues(tableBodyRows: Locator, columnIndex: number): Promise<string[]> {
+    const actualListValues: string[] = [];
+    for (const row of await tableBodyRows.all()) {
+      const actualListValue = confirmStringNotNull(await row.getByRole('cell').nth(columnIndex).textContent());
+      actualListValues.push(actualListValue);
+    }
+    return actualListValues;
   }
 }

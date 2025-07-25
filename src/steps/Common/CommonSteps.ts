@@ -879,9 +879,6 @@ Then(
       const startEndPagesMap = await commonItemsPage.getStartEndPages(currentPage, pageSize, totalItems);
       const start = startEndPagesMap.get('start');
       const end = startEndPagesMap.get('end');
-      // await expect(commonItemsPage.pagination_results).toHaveText(
-      //   `Showing ${start} to ${end} of ${totalItems} results`
-      // );
       const rowCount = await commonItemsPage.getItemsPerPage();
       expect(rowCount - 1).toBe(parseInt(`${end}`, 10) - parseInt(`${start}`, 10) + 1);
       const itemsMap = await commonItemsPage.getPaginationValues();
@@ -891,7 +888,6 @@ Then(
       const visiblePages: any = visiblePagesMap.get('visiblePages');
       const allVisibleItems: any = itemsMap.get('allVisibleItems');
       if (totalPages <= 7) {
-        // expect(visiblePages).toEqual(allVisibleItems);
         expect(visiblePages.map(String)).toEqual(allVisibleItems);
 
         expect(ellipsisIndices.length).toBe(0);

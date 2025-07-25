@@ -43,11 +43,17 @@
     },
     "selected_checkboxes_hint_label": "selected",
     "active_filters_label": "Active filters",
-    "Field_Error_Sponsor_Organisation": {
+    "Sponsor_Organisation_Min_Char_Error": {
       "sponsor_organisation_text": "Please provide 3 or more characters to search sponsor organisation."
     },
-    "Field_Error_Date_Modification_Submitted": {
-      "date_modification_submitted_to_day_text": "'Search to' date must be after 'Search from' date"
+    "Date_Modification_Submitted_To_date_Before_From_Date_Error": {
+      "date_modification_submitted_to_day_text": "The date you’ve selected is before the search above"
+    },
+    "Date_Modification_Submitted_No_Month_Selected_From_Date_Error": {
+      "date_modification_submitted_from_day_text": "'Search from' date must be in the correct format"
+    },
+    "Date_Modification_Submitted_No_Month_Selected_To_Date_Error": {
+      "date_modification_submitted_to_day_text": "'Search to' date must be in the correct format"
     },
     "Suggestion_List_Common_Headers": {
       "suggestion_header": "Suggestions",
@@ -382,6 +388,30 @@
     },
     "Advanced_Filter_Two_Modification_Type_Selected": {
       "modification_type_checkbox": ["Minor modification", "Modification of an important detail"]
+    },
+    "Date_Modification_Submitted_To_date_Before_From_Date": {
+      "date_modification_submitted_from_day_text": "2",
+      "date_modification_submitted_from_month_dropdown": "January",
+      "date_modification_submitted_from_year_text": "2020",
+      "date_modification_submitted_to_day_text": "20",
+      "date_modification_submitted_to_month_dropdown": "March",
+      "date_modification_submitted_to_year_text": "2013"
+    },
+    "Date_Modification_Submitted_No_Month_Selected_From_Date": {
+      "date_modification_submitted_from_day_text": "2",
+      "date_modification_submitted_from_month_dropdown": "Choose month",
+      "date_modification_submitted_from_year_text": "2020",
+      "date_modification_submitted_to_day_text": "20",
+      "date_modification_submitted_to_month_dropdown": "March",
+      "date_modification_submitted_to_year_text": "2013"
+    },
+    "Date_Modification_Submitted_No_Month_Selected_To_Date": {
+      "date_modification_submitted_from_day_text": "2",
+      "date_modification_submitted_from_month_dropdown": "January",
+      "date_modification_submitted_from_year_text": "2020",
+      "date_modification_submitted_to_day_text": "20",
+      "date_modification_submitted_to_month_dropdown": "Choose month",
+      "date_modification_submitted_to_year_text": "2013"
     }
   },
   "Sponsor_Organisation": {
@@ -441,14 +471,9 @@
       "sponsor_organisation_text": "Asi"
     }
   },
-  "Date_Modification_Submitted": {
-    "Date_Modification_Submitted_Invalid_Data": {
-      "date_modification_submitted_from_day_text": "2",
-      "date_modification_submitted_from_month_dropdown": "January",
-      "date_modification_submitted_from_year_text": "2020",
-      "date_modification_submitted_to_day_text": "20",
-      "date_modification_submitted_to_month_dropdown": "March",
-      "date_modification_submitted_to_year_text": "2013"
+  "Search_Queries": {
+    "Valid_Iras_Id_Prefix": {
+      "search_input_text": "98"
     }
   }
 }
