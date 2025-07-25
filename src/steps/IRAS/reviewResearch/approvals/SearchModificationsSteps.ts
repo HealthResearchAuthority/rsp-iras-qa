@@ -464,7 +464,11 @@ Then(
 
 Then(
   'With javascript disabled, I search with valid {string} for sponsor organisation search box in advanced filters and validate the search results along with {string}',
-  async ({ searchModificationsPage, rtsPage }, sponsorOrganisationDatasetName: string, searchHintsDatasetName) => {
+  async (
+    { searchModificationsPage, rtsPage, commonItemsPage },
+    sponsorOrganisationDatasetName: string,
+    searchHintsDatasetName
+  ) => {
     const dataset =
       searchModificationsPage.searchModificationsPageTestData.Sponsor_Organisation[sponsorOrganisationDatasetName];
     const searchHintDataset =
@@ -475,6 +479,11 @@ Then(
       sponsorOrganisationNameListExpected = sponsorOrganisationNameListExpected.slice(0, 5);
     }
     await searchModificationsPage.sponsor_organisation_text.fill(dataset['sponsor_organisation_text']);
+    expect(
+      await searchModificationsPage.sponsor_organisation_jsdisabled_search_button.evaluate(
+        (e: any) => getComputedStyle(e).backgroundColor
+      )
+    ).toBe(commonItemsPage.commonTestData.rgb_green_color);
     await searchModificationsPage.sponsor_organisation_jsdisabled_search_button.click();
     const sponsorOrganisationNameListActualWithSpaces =
       await searchModificationsPage.sponsor_organisation_jsdisabled_search_results_labels.allTextContents();
@@ -596,6 +605,17 @@ Then(
     expect(await searchModificationsPage.no_results_guidance_text.count()).toBe(0);
     expect(await searchModificationsPage.no_results_bullet_points.count()).toBe(0);
     expect(await searchModificationsPage.active_filters_list.count()).toBe(0);
+  }
+);
+
+Then(
+  'the search button appears with a green background in the sponsor Organisation filter',
+  async ({ searchModificationsPage, commonItemsPage }) => {
+    expect(
+      await searchModificationsPage.sponsor_organisation_jsdisabled_search_button.evaluate(
+        (e: any) => getComputedStyle(e).backgroundColor
+      )
+    ).toBe(commonItemsPage.commonTestData.rgb_green_color);
   }
 );
 

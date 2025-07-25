@@ -461,6 +461,25 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
             | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Min_Char_Error |
             | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Text_Min_Spaces | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Min_Char_Error |
 
+    @SponsorOrganisationValidation  @jsDisabled @Test18 @rsp-4167
+    Scenario Outline: "Verify that the search button appears with a green background in the 'Sponsor Organisation' filter section of the advanced filters when JavaScript is disabled
+        And I click the 'Advanced_Filter' link on the 'Search_Modifications_Page'
+        And I expand the chevrons for '<Advanced_Filters>' in search modifications page
+        And the search button appears with a green background in the sponsor Organisation filter
+        And I capture the page screenshot
+        Examples:
+            | Advanced_Filters                      |
+            | Advanced_Filters_Sponsor_Organisation |
+            | Advanced_Filters_Sponsor_Organisation |
+            | Advanced_Filters_Sponsor_Organisation |
+            | Advanced_Filters_Sponsor_Organisation |
+            | Advanced_Filters_Sponsor_Organisation |
+            | Advanced_Filters_Sponsor_Organisation |
+            | Advanced_Filters_Sponsor_Organisation |
+            | Advanced_Filters_Sponsor_Organisation |
+            | Advanced_Filters_Sponsor_Organisation |
+
+
     #### Partial validation for all the text boxes>>Iras Id search validation
     @viewListOfModifications @ValidIrasIdAndNoFilters @PartialSearchIrasID @Test19
     Scenario Outline: Verify the user can view the list of modifications based on the partial iras id entered and the search performed
