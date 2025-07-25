@@ -67,6 +67,19 @@ export default class CommonItemsPage {
   readonly pagination_results: Locator;
   readonly pagination_items: Locator;
   readonly pageLinks: Locator;
+  readonly advanced_filter_chevron: Locator;
+  readonly result_count: Locator;
+  readonly iras_id_search_text: Locator;
+  readonly lastPage: Locator;
+  readonly pagination_next_link: Locator;
+  readonly advanced_filter_active_filters_label: Locator;
+  readonly no_matching_search_result_header_label: Locator;
+  readonly no_matching_search_result_sub_header_label: Locator;
+  readonly no_matching_search_result_body_one_label: Locator;
+  readonly no_matching_search_result_body_two_label: Locator;
+  readonly no_matching_search_result_body_three_label: Locator;
+  readonly no_matching_search_result_body_four_label: Locator;
+  readonly no_matching_search_result_count_label: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -111,7 +124,10 @@ export default class CommonItemsPage {
     this.bannerQuestionSet = this.bannerNavBar.getByText(this.linkTextData.Banner.Question_Set, { exact: true });
     this.bannerSystemAdmin = this.bannerNavBar.getByText(this.linkTextData.Banner.System_Admin, { exact: true });
     this.bannerMyApplications = this.bannerNavBar.getByText(this.linkTextData.Banner.My_Applications, { exact: true });
-    this.next_button = this.page.getByRole('link').getByText(this.commonTestData.next_button, { exact: true });
+    this.next_button = this.page
+      .getByRole('link')
+      .getByText(this.commonTestData.next_button, { exact: true })
+      .or(this.page.getByRole('button', { name: this.commonTestData.next_button, exact: true }));
     this.errorMessageFieldLabel = this.page
       .locator('.field-validation-error')
       .or(this.page.locator('.govuk-error-message'))
@@ -123,11 +139,17 @@ export default class CommonItemsPage {
       });
     this.summaryErrorLinks = this.errorMessageSummaryLabel.locator('..').getByRole('listitem').getByRole('link');
     this.topMenuBarLinks = this.page.getByTestId('navigation').getByRole('listitem').getByRole('link');
-    this.pagination = page.getByRole('navigation', { name: 'Pagination' });
-    this.firstPage = this.pagination.getByRole('link', { name: this.commonTestData.first_page, exact: true });
+    this.pagination = page
+      .getByRole('navigation', { name: 'Pagination' })
+      .or(page.getByRole('button', { name: 'Pagination' }));
+    //this.firstPage = this.pagination.getByRole('link', { name: this.commonTestData.first_page, exact: true });
+    this.firstPage = this.pagination
+      .getByRole('link', { name: this.commonTestData.first_page, exact: true })
+      .or(this.pagination.getByRole('button', { name: this.commonTestData.first_page, exact: true }));
     this.previous_button = this.pagination
       .getByRole('link')
-      .getByText(this.commonTestData.previous_button, { exact: true });
+      .getByText(this.commonTestData.previous_button, { exact: true })
+      .or(this.page.getByRole('button', { name: this.commonTestData.previous_button, exact: true }));
     this.currentPage = this.pagination.locator('a[class$="current"]');
     this.pagination_results = this.page
       .getByRole('navigation', { name: 'Pagination' })
@@ -140,6 +162,23 @@ export default class CommonItemsPage {
     this.alert_box_headings = this.alert_box.getByRole('heading');
     this.alert_box_list = this.alert_box.getByRole('list');
     this.alert_box_list_items = this.alert_box.getByRole('listitem');
+    this.advanced_filter_chevron = this.page.getByRole('button', {
+      name: this.commonTestData.advanced_filter_label,
+    });
+    this.result_count = this.advanced_filter_chevron
+      .locator('..')
+      .getByRole('heading', { level: 2 })
+      .getByText(this.commonTestData.result_count_heading);
+    this.advanced_filter_chevron = this.page.getByRole('button', { name: this.commonTestData.advanced_filter_label });
+    this.advanced_filter_active_filters_label = this.page.getByRole('list');
+    this.no_matching_search_result_header_label = this.page.getByRole('heading');
+    this.no_matching_search_result_sub_header_label = this.page.getByRole('paragraph');
+    this.no_matching_search_result_body_one_label =
+      this.no_matching_search_result_body_two_label =
+      this.no_matching_search_result_body_three_label =
+      this.no_matching_search_result_body_four_label =
+        this.page.getByRole('listitem');
+    this.no_matching_search_result_count_label = this.page.getByRole('heading');
   }
 
   //Page Methods
@@ -622,9 +661,19 @@ export default class CommonItemsPage {
     return false;
   }
 
-  async validateSearchResultsMultipleWordsSearchKey(results: string[], searchTerms: string[]) {
-    const matchesSearchTerm = (text: string) =>
-      searchTerms.some((term) => text.toLowerCase().includes(term.toLowerCase()));
+  // async validateSearchResultsMultipleWordsSearchKey(results: string[], searchTerms: string[]) {
+  //   const matchesSearchTerm = (text: string) =>
+  //     searchTerms.some((term) => text.toLowerCase().includes(term.toLowerCase()));
+  //   const resultsAfterFiltering = confirmArrayNotNull(results).filter(matchesSearchTerm);
+  //   return resultsAfterFiltering;
+  // }
+
+  async validateSearchResultsMultipleWordsSearchKey(
+    results: string[],
+    searchTerms: string[] | string
+  ): Promise<string[]> {
+    const terms = Array.isArray(searchTerms) ? searchTerms : [searchTerms];
+    const matchesSearchTerm = (text: string) => terms.some((term) => text.toLowerCase().includes(term.toLowerCase()));
     const resultsAfterFiltering = confirmArrayNotNull(results).filter(matchesSearchTerm);
     return resultsAfterFiltering;
   }
@@ -649,12 +698,20 @@ export default class CommonItemsPage {
     return pageNumber;
   }
 
+  async getPageNumberForModifications(currentUrl: string) {
+    const parts: string[] = currentUrl.split('?');
+    const pageName: string[] = parts[1].split('&');
+    const pageNumber = parseInt(pageName[2].split('=')[1], 10);
+    return pageNumber;
+  }
+
   async getTotalItems() {
     const paginationResults = await this.getPaginationResults();
     const paginationResultsParts: string[] = paginationResults.split(' results');
     const paginationResultsPartsOne: string[] = paginationResultsParts[0].split('Showing ');
     const paginationResultsPartsTwo: string[] = paginationResultsPartsOne[1].split(' of ');
     const totalItems = parseInt(paginationResultsPartsTwo[1], 10);
+    //const totalItems = parseInt(confirmStringNotNull(await this.result_count.textContent()).split(' ')[0], 10);
     return totalItems;
   }
   async getItemsPerPage() {
@@ -728,7 +785,9 @@ export default class CommonItemsPage {
   }
 
   async clickOnPages(currentPageNumber: number, navigateMethod: string) {
-    const currentPageLink = this.pagination.getByRole('link', { name: `Page ${currentPageNumber}`, exact: true });
+    const currentPageLink = this.pagination
+      .getByRole('link', { name: `Page ${currentPageNumber}`, exact: true })
+      .or(this.pagination.getByRole('button', { name: `Page ${currentPageNumber}`, exact: true }));
     if (navigateMethod === 'clicking on page number') {
       if (await currentPageLink.isVisible()) {
         await currentPageLink.click();
@@ -757,8 +816,13 @@ export default class CommonItemsPage {
     return term.trim().split(/\s+/);
   }
 
-  async filterResults(results: string[], searchTerms: string[]) {
-    return results.filter((result) => searchTerms.every((term) => result.toLowerCase().includes(term.toLowerCase())));
+  // async filterResults(results: string[], searchTerms: string[]) {
+  //   return results.filter((result) => searchTerms.every((term) => result.toLowerCase().includes(term.toLowerCase())));
+  // }
+  async filterResults(results: string[], searchTerms: string[] | string): Promise<string[]> {
+    const terms = Array.isArray(searchTerms) ? searchTerms : [searchTerms];
+
+    return results.filter((result) => terms.every((term) => result.toLowerCase().includes(term.toLowerCase())));
   }
 
   async clearCheckboxes(dataset: any, keys: string[], commonItemsPage: any, createUserProfilePage: any) {

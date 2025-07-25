@@ -112,5 +112,8 @@
   "Select_Area_Of_Change_Page": {
     "Save_Continue": "Save and continue",
     "Save_For_Later": "Save for later"
+  },
+  "Modifications_Ready_To_Assign_Page": {
+    "Continue to assign modifications": "Continue to assign modifications"
   }
 }

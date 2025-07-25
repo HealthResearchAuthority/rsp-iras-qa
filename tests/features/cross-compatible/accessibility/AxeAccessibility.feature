@@ -842,6 +842,20 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityAdvanceFilterSearchModifications @FrontStageUser
+  Scenario: Search - Approvals - Plan and manage healthcare research
+    Given I have navigated to the 'Search_Modifications_Page'
+    Then I can see the 'Search_Modifications_Page'
+    When I enter 'Valid_Iras_Id_Nth' into the search field
+    And I select advanced filters in the search modifications page using 'Advanced_Filters_Nth'
+    And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
+    Then I can see the selected filters 'Advanced_Filters_Nth' are displayed under active filters
+    And the system displays modification records matching the search 'Valid_Iras_Id_Nth' and filter criteria 'Advanced_Filters_Nth'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
   @axeAccessibilitySelectAreaOfChange @FrontStageUser
   Scenario: Modifications select area of change
     Given I have navigated to the my research projects page
@@ -883,3 +897,16 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
+
+
+
+  @axeAccessibilityModficationsReadyToAssign @FrontStageUser
+  Scenario: Modifications Tasklist page that displays modifications ready to be assigned and verify pagination
+    Given I have navigated to the 'Modifications_tasklist_Page'
+    Then I can see the 'Modifications_tasklist_Page'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  
+  

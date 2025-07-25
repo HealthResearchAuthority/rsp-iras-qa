@@ -49,7 +49,9 @@ import AccessDeniedPage from '../pages/IRAS/AccessDeniedPage';
 import RtsPage from '../pages/Common/RtsPage';
 import ParticipatingOrganisationsPage from '../pages/IRAS/makeChanges/modifications/ParticipatingOrganisationsPage';
 import SelectAreaOfChangePage from '../pages/IRAS/makeChanges/modifications/SelectAreaOfChangePage';
-import SearchModificationsPage from '../pages/IRAS/reviewResearch/receiveAmendments/SearchModificationsPage';
+import SearchModificationsPage from '../pages/IRAS/reviewResearch/approvals/SearchModificationsPage';
+import ApprovalsPage from '../pages/IRAS/reviewResearch/approvals/ApprovalsPage';
+import ModificationsReadyToAssignPage from '../pages/IRAS/reviewResearch/receiveAmendments/ModificationsReadyToAssignPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -98,9 +100,11 @@ type CustomFixtures = {
   checkAddUserReviewBodyPage: CheckAddUserReviewBodyPage;
   accessDeniedPage: AccessDeniedPage;
   rtsPage: RtsPage;
+  approvalsPage: ApprovalsPage;
   participatingOrganisationsPage: ParticipatingOrganisationsPage;
   selectAreaOfChangePage: SelectAreaOfChangePage;
   searchModificationsPage: SearchModificationsPage;
+  modificationsReadyToAssignPage: ModificationsReadyToAssignPage;
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -289,16 +293,24 @@ export const test = base.extend<CustomFixtures>({
     await use(new RtsPage(page));
   },
 
-  searchModificationsPage: async ({ page }, use) => {
-    await use(new SearchModificationsPage(page));
-  },
-
   participatingOrganisationsPage: async ({ page }, use) => {
     await use(new ParticipatingOrganisationsPage(page));
   },
 
   selectAreaOfChangePage: async ({ page }, use) => {
     await use(new SelectAreaOfChangePage(page));
+  },
+
+  searchModificationsPage: async ({ page }, use) => {
+    await use(new SearchModificationsPage(page));
+  },
+
+  approvalsPage: async ({ page }, use) => {
+    await use(new ApprovalsPage(page));
+  },
+
+  modificationsReadyToAssignPage: async ({ page }, use) => {
+    await use(new ModificationsReadyToAssignPage(page));
   },
 
   makeAxeBuilder: async ({ page }, use) => {

@@ -158,5 +158,13 @@
     "Back": "Back",
     "Advanced_Filter": "Advanced filter",
     "Remove_This_Change": "Remove this change"
+  },
+  "Approvals_Page": {
+    "Search": "Search",
+    "Back": "Back"
+  },
+  "Modifications_Ready_To_Assign_Page": {
+    "Previous": "Previous",
+    "Next": "Next"
   }
 }
