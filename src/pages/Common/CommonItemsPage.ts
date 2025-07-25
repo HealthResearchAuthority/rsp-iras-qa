@@ -126,14 +126,17 @@ export default class CommonItemsPage {
       });
     this.summaryErrorLinks = this.errorMessageSummaryLabel.locator('..').getByRole('listitem').getByRole('link');
     this.topMenuBarLinks = this.page.getByTestId('navigation').getByRole('listitem').getByRole('link');
-    this.pagination = page.getByRole('navigation', { name: 'Pagination' });
+    this.pagination = page
+      .getByRole('navigation', { name: 'Pagination' })
+      .or(page.getByRole('button', { name: 'Pagination' }));
     //this.firstPage = this.pagination.getByRole('link', { name: this.commonTestData.first_page, exact: true });
     this.firstPage = this.pagination
       .getByRole('link', { name: this.commonTestData.first_page, exact: true })
       .or(this.pagination.getByRole('button', { name: this.commonTestData.first_page, exact: true }));
     this.previous_button = this.pagination
       .getByRole('link')
-      .getByText(this.commonTestData.previous_button, { exact: true });
+      .getByText(this.commonTestData.previous_button, { exact: true })
+      .or(this.page.getByRole('button', { name: this.commonTestData.previous_button, exact: true }));
     this.currentPage = this.pagination.locator('a[class$="current"]');
     this.pagination_results = this.page
       .getByRole('navigation', { name: 'Pagination' })
@@ -669,6 +672,13 @@ export default class CommonItemsPage {
     const parts: string[] = currentUrl.split('?');
     const pageName: string[] = parts[1].split('&');
     const pageNumber = parseInt(pageName[0].split('=')[1], 10);
+    return pageNumber;
+  }
+
+  async getPageNumberForModifications(currentUrl: string) {
+    const parts: string[] = currentUrl.split('?');
+    const pageName: string[] = parts[1].split('&');
+    const pageNumber = parseInt(pageName[2].split('=')[1], 10);
     return pageNumber;
   }
 

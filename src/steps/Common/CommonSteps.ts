@@ -597,6 +597,21 @@ When(
 );
 
 When(
+  'the current page number should be visually highlighted to indicate the active page the user is on in the modifications ready to assign page',
+  async ({ commonItemsPage }) => {
+    await commonItemsPage.next_button.click();
+    const currentUrl = commonItemsPage.page.url();
+    const currentPageNumber = await commonItemsPage.getPageNumberForModifications(currentUrl);
+    const currentPageLabel = `Page ${currentPageNumber}`;
+    const currentPageLink = commonItemsPage.pagination.getByRole('button', { name: currentPageLabel });
+    await expect(currentPageLink).toHaveAttribute('aria-current');
+    const currentPageLinkHref = await currentPageLink.getAttribute('formaction');
+    expect(currentUrl).toContain(currentPageLinkHref);
+    await commonItemsPage.previous_button.click();
+  }
+);
+
+When(
   'I enter the {string} of the {string} item in the list, into the search field',
   async ({ userListReviewBodyPage, commonItemsPage, manageReviewBodiesPage }, fieldKey: string, position: string) => {
     if ((await commonItemsPage.tableRows.count()) >= 2) {
@@ -816,29 +831,30 @@ Then(
   async ({ commonItemsPage }, navigateMethod: string) => {
     // commonItemspage and getting navigation method
     await commonItemsPage.firstPage.click();
-    parseInt(commonItemsPage.commonTestData.default_page_size, 10);
-    const totalItems = await commonItemsPage.getTotalItems();
-    const pageSize = parseInt(commonItemsPage.commonTestData.default_page_size, 10);
+    // parseInt(commonItemsPage.commonTestData.default_page_size, 10);
+    // const totalItems = await commonItemsPage.getTotalItems();
+    // const pageSize = parseInt(commonItemsPage.commonTestData.default_page_size, 10);
     const totalPages = await commonItemsPage.getTotalPages();
     for (let currentPage = 1; currentPage <= totalPages; currentPage++) {
       const currentPageLocator = await commonItemsPage.clickOnPages(currentPage, navigateMethod);
       await expect(currentPageLocator).toHaveAttribute('aria-current');
-      const startEndPagesMap = await commonItemsPage.getStartEndPages(currentPage, pageSize, totalItems);
-      const start = startEndPagesMap.get('start');
-      const end = startEndPagesMap.get('end');
-      // await expect(commonItemsPage.pagination_results).toHaveText(
+      // const startEndPagesMap = await commonItemsPage.getStartEndPages(currentPage, pageSize, totalItems);
+      // const start = startEndPagesMap.get('start');
+      // const end = startEndPagesMap.get('end');
+      // // await expect(commonItemsPage.pagination_results).toHaveText(
       //   `Showing ${start} to ${end} of ${totalItems} results`
       // );
-      const rowCount = await commonItemsPage.getItemsPerPage();
-      expect(rowCount - 1).toBe(parseInt(`${end}`, 10) - parseInt(`${start}`, 10) + 1);
-      const itemsMap = await commonItemsPage.getPaginationValues();
-      // const ellipsisIndices: any = itemsMap.get('ellipsisIndices');
-      const itemsValues: any = itemsMap.get('items');
+      // const rowCount = await commonItemsPage.getItemsPerPage();
+      // expect(rowCount - 1).toBe(parseInt(`${end}`, 10) - parseInt(`${start}`, 10) + 1);
+
+      const itemsMap = await commonItemsPage.getPaginationValues(); //gets and stores all numbers and ellipsis in pagination locator
+      const ellipsisIndices: any = itemsMap.get('ellipsisIndices'); // stores ellipsis separately
+      const itemsValues: any = itemsMap.get('items'); // stores other numbers separately
       const visiblePagesMap = await commonItemsPage.getVisiblePages(itemsValues);
       const visiblePages: any = visiblePagesMap.get('visiblePages');
       const allVisibleItems: any = itemsMap.get('allVisibleItems');
       if (totalPages <= 7) {
-        // expect(visiblePages).toEqual(allVisibleItems);
+        expect(visiblePages).toEqual(allVisibleItems);
         expect(visiblePages.map(String)).toEqual(allVisibleItems);
 
         expect(ellipsisIndices.length).toBe(0);

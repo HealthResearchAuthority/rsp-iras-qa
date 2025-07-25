@@ -1,5 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../hooks/CustomFixtures';
+import { getRandomNumber } from '../../../../utils/UtilFunctions';
 
 const { When, Then } = createBdd(test);
 
