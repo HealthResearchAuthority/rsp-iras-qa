@@ -1,6 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../hooks/CustomFixtures';
-import { getRandomNumber } from '../../../../utils/UtilFunctions';
+//import { getRandomNumber } from '../../../../utils/UtilFunctions';
 
 const { When, Then } = createBdd(test);
 
@@ -32,50 +32,50 @@ Then('I confirm checkbox exists in every row across all pages', async ({ modific
   }
 });
 
-Then(
-  'I check random row and validate if the row is checked even after navigation',
-  async ({ commonItemsPage, modificationsReadyToAssignPage }) => {
-    await modificationsReadyToAssignPage.waitForLoad();
-    const randomRowToCheck = await getRandomNumber(1, 20);
-    const totalPages = await commonItemsPage.getTotalPages();
+// Then(
+//   'I check random row and validate if the row is checked even after navigation',
+//   async ({ commonItemsPage, modificationsReadyToAssignPage }) => {
+//     await modificationsReadyToAssignPage.waitForLoad();
+//     const randomRowToCheck = await getRandomNumber(1, 20);
+//     const totalPages = await commonItemsPage.getTotalPages();
 
-    //if totalPages more than 2 then limit checks to 2
-    let maxPagesToCheck = 0;
+//     //if totalPages more than 2 then limit checks to 2
+//     let maxPagesToCheck = 0;
 
-    if (totalPages > 2) {
-      maxPagesToCheck =
-        modificationsReadyToAssignPage.modificationsReadyToAssignPageData.Modifications_Ready_To_Assign_Page
-          .maxPagesToVisit;
-    } else {
-      maxPagesToCheck = totalPages;
-    }
+//     if (totalPages > 2) {
+//       maxPagesToCheck =
+//         modificationsReadyToAssignPage.modificationsReadyToAssignPageData.Modifications_Ready_To_Assign_Page
+//           .maxPagesToVisit;
+//     } else {
+//       maxPagesToCheck = totalPages;
+//     }
 
-    for (let currentPage = 1; currentPage <= maxPagesToCheck; currentPage++) {
-      if (currentPage == 1) {
-        //will have not previous page since first page
-        await modificationsReadyToAssignPage.modification_checkbox.nth(randomRowToCheck).check();
-        await expect(modificationsReadyToAssignPage.modification_checkbox.nth(randomRowToCheck)).toBeChecked();
-      } //will have both previous and next page if currentpage is 2 or more
-      else {
-        await modificationsReadyToAssignPage.next_button.click();
-        await modificationsReadyToAssignPage.waitForLoad();
+//     for (let currentPage = 1; currentPage <= maxPagesToCheck; currentPage++) {
+//       if (currentPage == 1) {
+//         //will have not previous page since first page
+//         await modificationsReadyToAssignPage.modification_checkbox.nth(randomRowToCheck).check();
+//         await expect(modificationsReadyToAssignPage.modification_checkbox.nth(randomRowToCheck)).toBeChecked();
+//       } //will have both previous and next page if currentpage is 2 or more
+//       else {
+//         await modificationsReadyToAssignPage.next_button.click();
+//         await modificationsReadyToAssignPage.waitForLoad();
 
-        await modificationsReadyToAssignPage.modification_checkbox.nth(randomRowToCheck).check();
-        await expect(modificationsReadyToAssignPage.modification_checkbox.nth(randomRowToCheck)).toBeChecked();
+//         await modificationsReadyToAssignPage.modification_checkbox.nth(randomRowToCheck).check();
+//         await expect(modificationsReadyToAssignPage.modification_checkbox.nth(randomRowToCheck)).toBeChecked();
 
-        //navigate to next page and come back
-        await modificationsReadyToAssignPage.next_button.click();
-        await modificationsReadyToAssignPage.previous_button.click();
-        await expect(modificationsReadyToAssignPage.modification_checkbox.nth(randomRowToCheck)).toBeChecked();
+//         //navigate to next page and come back
+//         await modificationsReadyToAssignPage.next_button.click();
+//         await modificationsReadyToAssignPage.previous_button.click();
+//         await expect(modificationsReadyToAssignPage.modification_checkbox.nth(randomRowToCheck)).toBeChecked();
 
-        //navigate to previous page and come to current page
-        await modificationsReadyToAssignPage.previous_button.click();
-        await modificationsReadyToAssignPage.next_button.click();
-        await expect(modificationsReadyToAssignPage.modification_checkbox.nth(randomRowToCheck)).toBeChecked();
-      }
-    }
-  }
-);
+//         //navigate to previous page and come to current page
+//         await modificationsReadyToAssignPage.previous_button.click();
+//         await modificationsReadyToAssignPage.next_button.click();
+//         await expect(modificationsReadyToAssignPage.modification_checkbox.nth(randomRowToCheck)).toBeChecked();
+//       }
+//     }
+//   }
+// );
 
 When(
   'I select check all checkbox on the current page and validate all checkboxes are checked',

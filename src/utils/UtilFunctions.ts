@@ -584,9 +584,3 @@ export function resolveEnvExpression(template: string): string {
   }
   return value;
 }
-
-export async function getRandomNumber(min: number, max: number): Promise<number> {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
