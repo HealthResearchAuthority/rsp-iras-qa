@@ -6,7 +6,7 @@ Feature: Modifications Tasklist page that displays modifications ready to be ass
         Then I can see the 'Modifications_tasklist_Page'
         And I capture the page screenshot
 
-        @rsp4040
+        @rsp4040 @rsp4309
         Scenario Outline: Verify pagination in Modification Ready to Assign page when user is on the first page and navigate through each page by clicking page number or by clicking next link      
         Then I can see the '<Validation_Text>' ui labels on the modifications ready to assign page
         When I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
@@ -23,7 +23,7 @@ Feature: Modifications Tasklist page that displays modifications ready to be ass
           |Label_Texts       | clicking on page number     |
           |Label_Texts       | clicking on next link       |
 
-        @rsp4040 
+        @rsp4040 @rsp4309
         Scenario Outline: Verify pagination in Modification Ready to Assign page when user is on the last page and navigate through each page by clicking page number or by clicking Previous link    
         Then I can see the '<Validation_Text>' ui labels on the modifications ready to assign page
         When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
