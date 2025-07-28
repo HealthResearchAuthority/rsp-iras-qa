@@ -31,7 +31,6 @@ Feature: Modifications Tasklist page that displays modifications ready to be ass
         And the 'Previous' button will be 'available' to the user
         And the 'Next' button will be 'not available' to the user       
         And I capture the page screenshot
-        #Then I sequentially navigate through each page by '<Navigation_Method>' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges      
         Then I sequentially navigate the last few pages by '<Navigation_Method>' to verify pagination results, surrounding pages, and ellipses for skipped ranges
         And I capture the page screenshot
         Examples:
