@@ -8,19 +8,6 @@ Then('I can see the modifications ready to assign page', async ({ modificationsR
 });
 
 Then(
-  'I can see the {string} ui labels on the modifications ready to assign page',
-  async ({ commonItemsPage, modificationsReadyToAssignPage }, datasetName: string) => {
-    const dataset = modificationsReadyToAssignPage.modificationsReadyToAssignPageData[datasetName];
-    for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        const labelVal = await commonItemsPage.getUiLabel(key, modificationsReadyToAssignPage);
-        expect(labelVal).toBe(dataset[key]);
-      }
-    }
-  }
-);
-
-Then(
   'I can see the tasklist of modifications ready to assign is sorted by {string} order of the {string}',
   async (
     { modificationsReadyToAssignPage, searchModificationsPage, commonItemsPage },

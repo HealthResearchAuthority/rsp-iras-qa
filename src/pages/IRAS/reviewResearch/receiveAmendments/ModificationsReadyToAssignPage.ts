@@ -52,7 +52,7 @@ export default class ModificationsReadyToAssignPage {
     });
 
     for (const entry of formattedDatesSubmitted.entries()) {
-      const usFormattedEntry = entry[1].reverse();
+      const usFormattedEntry = entry[1].toReversed();
       const dateEntryString = `${usFormattedEntry[0]} ${usFormattedEntry[1]} ${usFormattedEntry[2]}`;
       const dateFormattedEntry = new Date(dateEntryString);
       listAsDates.push(dateFormattedEntry);
