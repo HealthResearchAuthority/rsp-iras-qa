@@ -7,7 +7,7 @@ Feature: Receive Amendments: Search Modifications
 
         @RegressionSortModificationsByColumn @rsp-4090
         # NOTE: ADD TIJI's FILTER SETUP STEPS ONCE MERGED, TO COVER RSP-4305 DEFECT
-        Scenario: Verify the user is able to sort the list of modifications by ascending and descending order for each results table column
+        Scenario Outline: Verify the user is able to sort the list of modifications by ascending and descending order for each results table column
                 And I fill the search input for searching 'modifications' with 'Valid_Iras_Id_Prefix' as the search query
                 And I click the 'Search' button on the 'Search_Modifications_Page'
                 And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
@@ -27,3 +27,28 @@ Feature: Receive Amendments: Search Modifications
                         | Modification_Type   | modification type   |
                         | Chief_Investigator  | chief investigator  |
                         | Lead_Nation         | lead nation         |
+
+        @RegressionViewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters
+        Scenario Outline: Verify the user is able to view the list of modifications by entering valid iras id, then clicking on 'Search' button and then selecting advanced filters and clicking the 'Apply filters' button
+                When I enter '<Valid_Iras_Id>' into the search field for search modifications page
+                And I capture the page screenshot
+                And I click the 'Search' button on the 'Search_Modifications_Page'
+                Then the system displays modification records matching the search criteria of '<Valid_Iras_Id>'
+                And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
+                And I capture the page screenshot
+                And I select advanced filters in the search modifications page using '<Advanced_Filters>'
+                And I capture the page screenshot
+                And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                Then I can see the selected filters '<Advanced_Filters>' are displayed under active filters in the search modifications page'
+                And the system displays modification records matching the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>'
+                And I capture the page screenshot
+                And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
+                And I capture the page screenshot
+                Examples:
+                        | Valid_Iras_Id             | Advanced_Filters             |
+                        | Valid_Iras_Id_Nth         | Advanced_Filters_Nth         |
+                        | Valid_Iras_Id_Twenty      | Advanced_Filters_Twenty      |
+                        | Valid_Iras_Id_TwentyOne   | Advanced_Filters_TwentyOne   |
+                        | Valid_Iras_Id_TwentyTwo   | Advanced_Filters_TwentyTwo   |
+                        | Valid_Iras_Id_TwentyThree | Advanced_Filters_TwentyThree |

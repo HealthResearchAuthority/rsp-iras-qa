@@ -310,9 +310,15 @@ export default class SearchModificationsPage {
     });
     this.sponsor_organisation_jsdisabled_search_results_radio_button =
       this.sponsor_organisation_fieldset.getByRole('radio');
-
-    this.active_filters_list = this.page.locator('.search-filter-summary__remove-filter-text');
-
+    this.active_filters_list = this.page
+      .getByRole('heading', {
+        name: this.searchModificationsPageTestData.Search_Modifications_Page.active_filters_label,
+        exact: true,
+      })
+      .locator('..')
+      .getByRole('list')
+      .getByRole('listitem')
+      .getByRole('link');
     this.sponsor_organisation_jsdisabled_result_hint_label = this.page.getByTestId(
       'Search.SponsorOrgSearch.SelectedOrganisation-hint'
     );
@@ -356,22 +362,6 @@ export default class SearchModificationsPage {
     const button = this.advanced_filter_chevron;
     await button.click();
   }
-
-  // async clickFilterChevron<PageObject>(dataset: JSON, key: string, page: PageObject) {
-  //   const button = page[key + '_chevron'];
-  //   const fromDate = dataset['date_modification_submitted_from_day_text'];
-  //   if (key !== 'date_modification_submitted_to_day_text') {
-  //     if (button) {
-  //       await button.click();
-  //     }
-  //   } else if (key === 'date_modification_submitted_to_day_text') {
-  //     if (fromDate === '' || fromDate === undefined) {
-  //       if (button) {
-  //         await button.click();
-  //       }
-  //     }
-  //   }
-  // }
 
   async clickFilterChevron<PageObject>(dataset: JSON, key: string, page: PageObject) {
     const button = page[`${key}_chevron`];

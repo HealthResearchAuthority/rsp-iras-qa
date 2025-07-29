@@ -16,11 +16,9 @@ When(
   'I select advanced filters in the search modifications page using {string}',
   async ({ searchModificationsPage, commonItemsPage, $tags }, filterDatasetName: string) => {
     const dataset = searchModificationsPage.searchModificationsPageTestData.Advanced_Filters[filterDatasetName];
-    // I open the list of filters by clicking the Advanced Filter chevron,if not opened by default
     await searchModificationsPage.clickAdvancedFilterChevron();
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        // I open each filter one by one by clicking the corresponding Filter chevron,if not opened by default
         await searchModificationsPage.clickFilterChevron(dataset, key, searchModificationsPage);
         if (key === 'sponsor_organisation_text') {
           if (
@@ -131,7 +129,7 @@ When(
 );
 
 Then(
-  'I can see the selected filters {string} are displayed under active filters',
+  'I can see the selected filters {string} are displayed under active filters in the search modifications page',
   async ({ searchModificationsPage }, filterDatasetName: string) => {
     const testData = searchModificationsPage.searchModificationsPageTestData;
     const dataset = testData.Advanced_Filters[filterDatasetName];
@@ -166,7 +164,7 @@ Then(
 );
 
 Then(
-  'I remove the {string} from the active filters',
+  'I remove the {string} from the active filters in the search modifications page',
   async ({ searchModificationsPage }, removeFilterDatasetName: string) => {
     let activeCheckboxFiltersMap: { get: (arg0: string) => any };
     let activeFiltersMap: any;
@@ -371,26 +369,6 @@ Then(
       );
       expect(isValid).toBeTruthy();
     }
-  }
-);
-
-Then(
-  'I can see the list is sorted by default in the descending order of the {string}',
-  async ({ searchModificationsPage }, sortField: string) => {
-    let actualList: string[];
-    switch (sortField.toLowerCase()) {
-      case 'modification id':
-        actualList = await searchModificationsPage.getModificationIdListAfterSearch();
-        break;
-      default:
-        throw new Error(`${sortField} is not a valid option`);
-    }
-    const normalizedList = actualList.map((id) => {
-      const [prefix, suffix] = id.split('/');
-      return `${prefix.padStart(10, '0')}/${suffix.padStart(4, '0')}`;
-    });
-    const sortedDescending = [...normalizedList].sort((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
-    expect.soft(normalizedList).toEqual(sortedDescending);
   }
 );
 
@@ -654,3 +632,23 @@ Then(
     expect(actualList).toEqual(sortedList);
   }
 );
+
+// Then(
+//   'I can see the list is sorted by default in the descending order of the {string}',
+//   async ({ searchModificationsPage }, sortField: string) => {
+//     let actualList: string[];
+//     switch (sortField.toLowerCase()) {
+//       case 'modification id':
+//         actualList = await searchModificationsPage.getModificationIdListAfterSearch();
+//         break;
+//       default:
+//         throw new Error(`${sortField} is not a valid option`);
+//     }
+//     const normalizedList = actualList.map((id) => {
+//       const [prefix, suffix] = id.split('/');
+//       return `${prefix.padStart(10, '0')}/${suffix.padStart(4, '0')}`;
+//     });
+//     const sortedDescending = [...normalizedList].sort((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
+//     expect.soft(normalizedList).toEqual(sortedDescending);
+//   }
+// );

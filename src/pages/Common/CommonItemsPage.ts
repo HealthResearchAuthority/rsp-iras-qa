@@ -72,7 +72,6 @@ export default class CommonItemsPage {
   readonly iras_id_search_text: Locator;
   readonly lastPage: Locator;
   readonly pagination_next_link: Locator;
-  readonly advanced_filter_active_filters_label: Locator;
   readonly no_matching_search_result_header_label: Locator;
   readonly no_matching_search_result_sub_header_label: Locator;
   readonly no_matching_search_result_body_one_label: Locator;
@@ -167,7 +166,7 @@ export default class CommonItemsPage {
       .getByRole('heading', { level: 2 })
       .getByText(this.commonTestData.result_count_heading);
     this.advanced_filter_chevron = this.page.getByRole('button', { name: this.commonTestData.advanced_filter_label });
-    this.advanced_filter_active_filters_label = this.page.getByRole('list');
+
     this.no_matching_search_result_header_label = this.page.getByRole('heading');
     this.no_matching_search_result_sub_header_label = this.page.getByRole('paragraph');
     this.no_matching_search_result_body_one_label =
@@ -658,13 +657,6 @@ export default class CommonItemsPage {
     return false;
   }
 
-  // async validateSearchResultsMultipleWordsSearchKey(results: string[], searchTerms: string[]) {
-  //   const matchesSearchTerm = (text: string) =>
-  //     searchTerms.some((term) => text.toLowerCase().includes(term.toLowerCase()));
-  //   const resultsAfterFiltering = confirmArrayNotNull(results).filter(matchesSearchTerm);
-  //   return resultsAfterFiltering;
-  // }
-
   async validateSearchResultsMultipleWordsSearchKey(
     results: string[],
     searchTerms: string[] | string
@@ -696,11 +688,6 @@ export default class CommonItemsPage {
   }
 
   async getTotalItems() {
-    // const paginationResults = await this.getPaginationResults();
-    // const paginationResultsParts: string[] = paginationResults.split(' results');
-    // const paginationResultsPartsOne: string[] = paginationResultsParts[0].split('Showing ');
-    // const paginationResultsPartsTwo: string[] = paginationResultsPartsOne[1].split(' of ');
-    // const totalItems = parseInt(paginationResultsPartsTwo[1], 10);
     const totalItems = parseInt(confirmStringNotNull(await this.result_count.textContent()).split(' ')[0], 10);
     return totalItems;
   }
@@ -804,12 +791,8 @@ export default class CommonItemsPage {
     return term.trim().split(/\s+/);
   }
 
-  // async filterResults(results: string[], searchTerms: string[]) {
-  //   return results.filter((result) => searchTerms.every((term) => result.toLowerCase().includes(term.toLowerCase())));
-  // }
   async filterResults(results: string[], searchTerms: string[] | string): Promise<string[]> {
     const terms = Array.isArray(searchTerms) ? searchTerms : [searchTerms];
-
     return results.filter((result) => terms.every((term) => result.toLowerCase().includes(term.toLowerCase())));
   }
 
