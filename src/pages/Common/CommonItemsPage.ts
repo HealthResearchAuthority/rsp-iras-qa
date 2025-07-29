@@ -79,6 +79,7 @@ export default class CommonItemsPage {
   readonly no_matching_search_result_body_three_label: Locator;
   readonly no_matching_search_result_body_four_label: Locator;
   readonly no_matching_search_result_count_label: Locator;
+  readonly active_filters_list: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -160,6 +161,15 @@ export default class CommonItemsPage {
       this.no_matching_search_result_body_four_label =
         this.page.getByRole('listitem');
     this.no_matching_search_result_count_label = this.page.getByRole('heading');
+    this.active_filters_list = this.page
+      .getByRole('heading', {
+        name: this.commonTestData.active_filters_label,
+        exact: true,
+      })
+      .locator('..')
+      .getByRole('list')
+      .getByRole('listitem')
+      .getByRole('link');
   }
 
   //Page Methods
@@ -821,5 +831,39 @@ export default class CommonItemsPage {
       left: 0,
     }));
     await stitchedImage.composite(composites).toFile(outputFile);
+  }
+
+  async removeSelectedFilterValues(removeFilterLabel: string[]): Promise<string[]> {
+    const removedFilterValues: string[] = [];
+    for (const label of removeFilterLabel) {
+      let filterFound = true;
+      while (filterFound) {
+        const filterItems = this.active_filters_list;
+        const count = await filterItems.count();
+        filterFound = false;
+        for (let i = 0; i < count; i++) {
+          const text = (await filterItems.nth(i).innerText()).trim().replace('Remove filter', '').trim();
+          if (text === label) {
+            removedFilterValues.push(text);
+            await filterItems.nth(i).locator('..').click({ force: true });
+            await this.page.waitForTimeout(500);
+            filterFound = true;
+            break;
+          }
+        }
+      }
+    }
+    return removedFilterValues;
+  }
+
+  async getSelectedFilterValues(): Promise<string[]> {
+    const filterItems = this.active_filters_list;
+    const count = await filterItems.count();
+    const values: string[] = [];
+    for (let i = 0; i < count; i++) {
+      const text = await filterItems.nth(i).innerText();
+      values.push(text.trim().replace('Remove filter', '').trim());
+    }
+    return values;
   }
 }

@@ -164,3 +164,19 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Advanced_Filters    |
             | Advanced_Filter_One |
 
+    @RemoveAllActiveFiltersOneByOne
+    Scenario Outline: Verify the user can remove all the selected filters one by one and the search results update accordingly
+        And I select advanced filters in the manage users page using '<Advanced_Filters>'
+        And I capture the page screenshot
+        And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
+        And I capture the page screenshot
+        Then I can see the selected filters '<Advanced_Filters>' are displayed under active filters for manage users page
+        And I capture the page screenshot
+        And I remove the '<Advanced_Filters_Remove>' from the active filters in the manage users page
+        And I capture the page screenshot
+        Then I can see the selected filters '<Advanced_Filters>' are removed from active filters for manage users page
+
+        Examples:
+            | Advanced_Filters    | Advanced_Filters_Remove  |
+            | Advanced_Filter_One | Advanced_Filters_Nth_All |
+

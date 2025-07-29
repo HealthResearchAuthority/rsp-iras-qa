@@ -428,6 +428,42 @@ Then(
             ': ' +
             dataset[key];
           await expect(commonItemsPage.advanced_filter_active_filters_label.getByText(activeLabel)).not.toBeVisible();
+        } else if (
+          key === 'date_last_logged_in_from_day_text' ||
+          key == 'date_last_logged_in_from_month_dropdown' ||
+          key == 'date_last_logged_in_from_year_text'
+        ) {
+          if (dataset[key] !== '' && dataset[key] !== 'Choose month') {
+            const lastLoggedInFromDateFormatted = await convertDateShortMonth(
+              dataset['date_last_logged_in_from_day_text'],
+              dataset['date_last_logged_in_from_month_dropdown'],
+              dataset['date_last_logged_in_from_year_text']
+            );
+            const activeLabel =
+              manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List
+                .date_last_logged_in_label +
+              ' - from ' +
+              lastLoggedInFromDateFormatted;
+            await expect(commonItemsPage.advanced_filter_active_filters_label.getByText(activeLabel)).not.toBeVisible();
+          }
+        } else if (
+          key === 'date_last_logged_in_to_day_text' ||
+          key == 'date_last_logged_in_to_month_dropdown' ||
+          key == 'date_last_logged_in_to_year_text'
+        ) {
+          if (dataset[key] !== '' && dataset[key] !== 'Choose month') {
+            const lastLoggedInToDateFormatted = await convertDateShortMonth(
+              dataset['date_last_logged_in_to_day_text'],
+              dataset['date_last_logged_in_to_month_dropdown'],
+              dataset['date_last_logged_in_to_year_text']
+            );
+            const activeLabel =
+              manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List
+                .date_last_logged_in_label +
+              ' - to ' +
+              lastLoggedInToDateFormatted;
+            await expect(commonItemsPage.advanced_filter_active_filters_label.getByText(activeLabel)).not.toBeVisible();
+          }
         }
       }
     }
@@ -441,5 +477,51 @@ Then(
       manageUsersPage.manageUsersPageTestData.Error_Message_Field_Dataset[errorMessageFieldDatasetName];
     const fieldErrorMessagesActualValues = await manageUsersPage.date_last_logged_in_error_message.textContent();
     expect(fieldErrorMessagesActualValues).toEqual(fieldErrorMessagesExpected);
+  }
+);
+
+Then(
+  'I remove the {string} from the active filters in the search modifications page',
+  async ({ manageUsersPage, commonItemsPage }, removeFilterDatasetName: string) => {
+    let activeCheckboxFiltersMap: { get: (arg0: string) => any };
+    let activeFiltersMap: any;
+    let filterCheckboxValuesExpected: any;
+    let filterValuesExpected: any;
+    const expectedFilterValues: string[] = [];
+    let removedFilterValues: string[] = [];
+    const dataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[removeFilterDatasetName];
+    const datasetLabels = manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List;
+    const seen = new Set<string>();
+    for (const key in dataset) {
+      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+        if (key.endsWith('_checkbox')) {
+          activeCheckboxFiltersMap = await commonItemsPage.getActiveFiltersCheckboxLabels(dataset, datasetLabels);
+          filterCheckboxValuesExpected = activeCheckboxFiltersMap.get('multiSelectFilter');
+          const checkboxValues = filterCheckboxValuesExpected.flat().map((item: string) => item.trim());
+          checkboxValues.forEach((val: string) => {
+            if (!seen.has(val)) {
+              seen.add(val);
+              expectedFilterValues.push(val);
+            }
+          });
+        } else {
+          activeFiltersMap = await commonItemsPage.getActiveFiltersLabels(dataset, datasetLabels);
+          filterValuesExpected = activeFiltersMap.get('singleSelectFilter');
+          const singleSelectValues = filterValuesExpected.flat().map((item: string) => item.trim());
+          singleSelectValues.forEach((val: string) => {
+            if (!seen.has(val)) {
+              seen.add(val);
+              expectedFilterValues.push(val);
+            }
+          });
+        }
+      }
+    }
+    removedFilterValues = await commonItemsPage.removeSelectedFilterValues(expectedFilterValues);
+    const fieldValActualAfterRemoval: string[] = await commonItemsPage.getSelectedFilterValues();
+    const actualFilterValuesAfterRemoval = fieldValActualAfterRemoval.flat().join(', ');
+    for (let i = 0; i < removedFilterValues.length; i++) {
+      expect(actualFilterValuesAfterRemoval).not.toContain(removedFilterValues[i]);
+    }
   }
 );
