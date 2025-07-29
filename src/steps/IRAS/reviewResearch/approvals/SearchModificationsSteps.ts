@@ -555,23 +555,23 @@ Then(
       if (Object.prototype.hasOwnProperty.call(errorMessageFieldDataset, key)) {
         const expectedMessage = errorMessageFieldDataset[key];
         switch (errorMessageFieldAndSummaryDatasetName) {
-          case 'Field_Error_Date_Modification_Submitted_To_date_Before_From_Date': {
+          case 'Date_Modification_Submitted_To_date_Before_From_Date_Error': {
             const actualMessage = await searchModificationsPage.date_modification_submitted_to_date_error.textContent();
             expect(actualMessage).toEqual(expectedMessage);
             break;
           }
-          case 'Field_Error_Date_Modification_Submitted_No_Month_Selected_From_Date': {
+          case 'Date_Modification_Submitted_No_Month_Selected_From_Date_Error': {
             const actualMessage =
               await searchModificationsPage.date_modification_submitted_from_date_error.textContent();
             expect(actualMessage).toEqual(expectedMessage);
             break;
           }
-          case 'Field_Error_Date_Modification_Submitted_No_Month_Selected_To_Date': {
+          case 'Date_Modification_Submitted_No_Month_Selected_To_Date_Error': {
             const actualMessage = await searchModificationsPage.date_modification_submitted_to_date_error.textContent();
             expect(actualMessage).toEqual(expectedMessage);
             break;
           }
-          case 'Field_Error_Sponsor_Organisation': {
+          case 'Sponsor_Organisation_Min_Char_Error': {
             const actualMessage =
               await searchModificationsPage.sponsor_organisation_jsdisabled_min_error_message.textContent();
             expect(actualMessage).toEqual(expectedMessage);

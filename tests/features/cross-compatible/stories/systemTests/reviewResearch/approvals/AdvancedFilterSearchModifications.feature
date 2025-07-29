@@ -280,7 +280,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
     ### Scenario 4.1 -'Date Modification submitted' error validation
     # WHEN I select an end date in the field that is earlier than the start date,
     # THEN I should see a clear validation error message ‘This date you’ve selected is before the search above'
-    @DateModificationSubmittedError @Test13
+    @DateModificationSubmittedError @Test13 @TestOnly
     Scenario Outline: Verify the user can see clear validation error message This date you have selected is before the search above when an end date is earlier than the start date
         And I select advanced filters in the search modifications page using '<Date_Modification_Submitted_Invalid_Data>'
         And I capture the page screenshot
@@ -411,7 +411,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
     # • The search should begin after entering the first three characters.
     # § If more than three results are returned, only the first three should be displayed initially, with the rest accessible via a vertically scrollable list.
     # § If no results are found, the system must display an appropriate error message to the user.
-    @SponsorOrganisationValidation @AdvancedFilters @jsEnabled @Test17
+    @SponsorOrganisationValidation @AdvancedFilters @jsEnabled @Test17 @TestOnly
     Scenario Outline: Validate the sponsor organisation suggestion list in advanced filters when javascript is enabled
         And I click the 'Advanced_Filter' link on the 'Search_Modifications_Page'
         And I expand the chevrons for '<Advanced_Filters>' in search modifications page
@@ -434,7 +434,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
             | Advanced_Filters_Sponsor_Organisation | Sponsor_Organisation_Text_Partial_End_Space   | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Text_Min_Spaces | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space  |
 
 
-    @SponsorOrganisationValidation @AdvancedFilters @jsDisabled @Test18 @rsp-4118
+    @SponsorOrganisationValidation @AdvancedFilters @jsDisabled @Test18 @rsp-4118 @TestOnly
     Scenario Outline: Validate the sponsor organisation suggestion list in advanced filters when javascript is disabled
         And I click the 'Advanced_Filter' link on the 'Search_Modifications_Page'
         And I expand the chevrons for '<Advanced_Filters>' in search modifications page
