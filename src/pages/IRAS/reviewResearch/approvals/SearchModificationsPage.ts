@@ -1,7 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as linkTextData from '../../../../resources/test_data/common/link_text_data.json';
 import * as searchModificationsPageTestData from '../../../../resources/test_data/iras/reviewResearch/approvals/search_modifications_page_data.json';
-import { confirmArrayNotNull, confirmStringNotNull } from '../../../../utils/UtilFunctions';
+import { confirmStringNotNull } from '../../../../utils/UtilFunctions';
 
 //Declare Page Objects
 export default class SearchModificationsPage {
@@ -16,10 +16,7 @@ export default class SearchModificationsPage {
   readonly search_button_label: Locator;
   readonly next_button: Locator;
   readonly search_box_label: Locator;
-  readonly no_results_heading: Locator;
-  readonly no_results_guidance_text: Locator;
   readonly listCell: Locator;
-  readonly advanced_filter_chevron: Locator;
   readonly chief_investigator_name_text: Locator;
   readonly date_modification_submitted_from_day_text: Locator;
   readonly date_modification_submitted_from_month_dropdown: Locator;
@@ -53,7 +50,6 @@ export default class SearchModificationsPage {
   readonly date_modification_submitted_from_date_fieldset: Locator;
   readonly date_modification_submitted_to_date_fieldset: Locator;
   readonly short_project_title_fieldset: Locator;
-  readonly active_filters_list: Locator;
   readonly sponsor_organisation_fieldset: Locator;
   readonly sponsor_organisation_jsdisabled_result_hint_label: Locator;
   readonly sponsor_organisation_jsdisabled_search_results_labels: Locator;
@@ -61,8 +57,6 @@ export default class SearchModificationsPage {
   readonly sponsor_organisation_jsdisabled_no_suggestions_label: Locator;
   readonly sponsor_organisation_jsdisabled_min_error_message: Locator;
   readonly date_modification_submitted_to_date_error: Locator;
-  readonly result_count: Locator;
-  readonly no_results_bullet_points: Locator;
   readonly lead_nation_checkbox_hint_label: Locator;
   readonly modification_type_checkbox_hint_label: Locator;
   readonly date_modification_submitted_to_date_help_text: Locator;
@@ -92,24 +86,8 @@ export default class SearchModificationsPage {
     this.search_box = this.page.getByTestId('SearchQuery');
     this.search_button_label = this.page.getByText('Search');
     this.next_button = this.page.locator('.govuk-pagination__next a');
-    this.no_results_heading = this.page
-      .getByRole('heading')
-      .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.no_results_heading, { exact: true });
-    this.no_results_guidance_text = this.page
-      .getByRole('paragraph')
-      .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.no_results_guidance_text, {
-        exact: true,
-      });
-    this.no_results_bullet_points = this.no_results_guidance_text.locator('..').getByRole('listitem');
     this.tableRows = this.page.getByRole('table').getByRole('row');
     this.listCell = this.page.getByRole('cell');
-    this.advanced_filter_chevron = this.page.getByRole('button', {
-      name: this.searchModificationsPageTestData.Search_Modifications_Page.advanced_filter_label,
-    });
-    this.result_count = this.advanced_filter_chevron
-      .locator('..')
-      .getByRole('heading', { level: 2 })
-      .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.result_count_heading);
     this.chief_investigator_name_fieldset = this.page.locator('.govuk-fieldset', {
       has: this.page.getByText(
         this.searchModificationsPageTestData.Search_Modifications_Page.chief_investigator_hint_text
@@ -310,15 +288,7 @@ export default class SearchModificationsPage {
     });
     this.sponsor_organisation_jsdisabled_search_results_radio_button =
       this.sponsor_organisation_fieldset.getByRole('radio');
-    this.active_filters_list = this.page
-      .getByRole('heading', {
-        name: this.searchModificationsPageTestData.Search_Modifications_Page.active_filters_label,
-        exact: true,
-      })
-      .locator('..')
-      .getByRole('list')
-      .getByRole('listitem')
-      .getByRole('link');
+
     this.sponsor_organisation_jsdisabled_result_hint_label = this.page.getByTestId(
       'Search.SponsorOrgSearch.SelectedOrganisation-hint'
     );
@@ -356,151 +326,6 @@ export default class SearchModificationsPage {
   async goto() {
     await this.page.goto('approvals/search');
     await this.assertOnSearchModificationsPage();
-  }
-
-  async clickAdvancedFilterChevron() {
-    const button = this.advanced_filter_chevron;
-    await button.click();
-  }
-
-  async clickFilterChevron<PageObject>(dataset: JSON, key: string, page: PageObject) {
-    const button = page[`${key}_chevron`];
-    const fromDate = dataset['date_modification_submitted_from_day_text'];
-    const isToDateKey = key === 'date_modification_submitted_to_day_text';
-    const shouldClick = !isToDateKey || (isToDateKey && (fromDate === '' || fromDate === undefined));
-    if (button && shouldClick) {
-      await button.click();
-    }
-  }
-
-  async getDateString(dataset: JSON, prefix: string) {
-    const day = +dataset[`${prefix}_day_text`];
-    const month = dataset[`${prefix}_month_dropdown`].slice(0, 3);
-    const year = dataset[`${prefix}_year_text`];
-    return day && month && year ? `${day} ${month} ${year}` : null;
-  }
-
-  async getFilterTextCheckbox(filterName: string, dataset: JSON, key: string) {
-    const filterTextsCheckbox: string[] = [];
-    for (const value of dataset[key]) {
-      const filterText = `${filterName} - ${value}`;
-      filterTextsCheckbox.push(filterText);
-    }
-    return filterTextsCheckbox;
-  }
-
-  async getActiveFiltersLabels(dataset: JSON, datasetLabels: any) {
-    let filterName: string = '';
-    const filterText: string[] = [];
-    let activeFiltersMap: any;
-    for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        if (key !== 'lead_nation_checkbox' && key !== 'modification_type_checkbox') {
-          if (key === 'date_modification_submitted_from_day_text') {
-            filterName = datasetLabels['date_modification_submitted_label'];
-            const fromDate = await this.getDateString(dataset, 'date_modification_submitted_from');
-            if (fromDate) {
-              filterText.push(`${filterName} - from ${fromDate}`);
-            }
-          } else if (key === 'date_modification_submitted_to_day_text') {
-            filterName = datasetLabels['date_modification_submitted_label'];
-            const toDate = await this.getDateString(dataset, 'date_modification_submitted_to');
-            if (toDate) {
-              filterText.push(`${filterName} - to ${toDate}`);
-            }
-          } else if (key == 'chief_investigator_name_text') {
-            filterName = datasetLabels['chief_investigator_name_label'];
-            filterText.push(`${filterName} - ${dataset[key]}`);
-          } else if (key == 'short_project_title_text') {
-            filterName = datasetLabels['short_project_title_label'];
-            filterText.push(`${filterName} - ${dataset[key]}`);
-          } else if (key === 'sponsor_organisation_text') {
-            filterName = datasetLabels['sponsor_organisation_label'];
-            filterText.push(`${filterName} - ${dataset[key]}`);
-          }
-          activeFiltersMap = new Map([['singleSelectFilter', confirmArrayNotNull(filterText)]]);
-        }
-      }
-    }
-    return activeFiltersMap;
-  }
-  async getActiveFiltersCheckboxLabels(dataset: JSON, datasetLabels: any) {
-    let filterName: string = '';
-    const filterTextsCheckbox: any[] = [];
-    let activeFiltersMap: any;
-    for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        if (key === 'lead_nation_checkbox' || key === 'modification_type_checkbox') {
-          if (key === 'lead_nation_checkbox') {
-            filterName = datasetLabels['lead_nation_label'];
-            const filterValues = await this.getFilterTextCheckbox(filterName, dataset, key);
-            filterTextsCheckbox.push(filterValues);
-          } else if (key === 'modification_type_checkbox') {
-            filterName = datasetLabels['modification_type_label'];
-            const filterValues = await this.getFilterTextCheckbox(filterName, dataset, key);
-            filterTextsCheckbox.push(filterValues);
-          }
-          activeFiltersMap = new Map([['multiSelectFilter', confirmArrayNotNull(filterTextsCheckbox)]]);
-        }
-      }
-    }
-    return activeFiltersMap;
-  }
-
-  async getSelectedFilterValues(): Promise<string[]> {
-    const filterItems = this.active_filters_list;
-    const count = await filterItems.count();
-    const values: string[] = [];
-    for (let i = 0; i < count; i++) {
-      const text = await filterItems.nth(i).innerText();
-      values.push(text.trim().replace('Remove filter', '').trim());
-    }
-    return values;
-  }
-
-  async getCheckboxHintLabel(): Promise<string> {
-    const hintLabel =
-      0 + ' ' + this.searchModificationsPageTestData.Search_Modifications_Page.selected_checkboxes_hint_label;
-    return hintLabel;
-  }
-
-  async areSearchResultsValid(actualValues: string[], allowedValues: string[]) {
-    const allValid = actualValues.every((value) => allowedValues.includes(value));
-    return allValid;
-  }
-
-  async removeSelectedFilterValues(removeFilterLabel: string[]): Promise<string[]> {
-    const removedFilterValues: string[] = [];
-    for (const label of removeFilterLabel) {
-      let filterFound = true;
-      while (filterFound) {
-        const filterItems = this.active_filters_list;
-        const count = await filterItems.count();
-        filterFound = false;
-        for (let i = 0; i < count; i++) {
-          const text = (await filterItems.nth(i).innerText()).trim().replace('Remove filter', '').trim();
-          if (text === label) {
-            removedFilterValues.push(text);
-            await filterItems.nth(i).locator('..').click({ force: true });
-            await this.page.waitForTimeout(500);
-            filterFound = true;
-            break;
-          }
-        }
-      }
-    }
-    return removedFilterValues;
-  }
-
-  async getNoResultsBulletPoints(): Promise<string[]> {
-    const bulletPoints = this.no_results_bullet_points;
-    const count = await bulletPoints.count();
-    const values: string[] = [];
-    for (let i = 0; i < count; i++) {
-      const text = confirmStringNotNull(await bulletPoints.nth(i).textContent());
-      values.push(text);
-    }
-    return values;
   }
 
   async getAllModificationsTheTable(): Promise<Map<string, string[]>> {
@@ -595,4 +420,23 @@ export default class SearchModificationsPage {
     }
     return actualListValues;
   }
+
+  async clickFilterChevronModifications<PageObject>(dataset: JSON, key: string, page: PageObject) {
+    const button = page[`${key}_chevron`];
+    const fromDate = dataset['date_modification_submitted_from_day_text'];
+    const isToDateKey = key === 'date_modification_submitted_to_day_text';
+    const shouldClick = !isToDateKey || (isToDateKey && (fromDate === '' || fromDate === undefined));
+    if (button && shouldClick) {
+      await button.click();
+    }
+  }
+  //   async clickFilterChevronUsers<PageObject>(dataset: JSON, key: string, page: PageObject) {
+  //   const button = page[`${key}_chevron`];
+  //   const fromDate = dataset['date_last_logged_in_from_day_text'];
+  //   const isToDateKey = key === 'date_last_logged_in_to_day_text';
+  //   const shouldClick = !isToDateKey || (isToDateKey && (fromDate === '' || fromDate === undefined));
+  //   if (button && shouldClick) {
+  //     await button.click();
+  //   }
+  // }
 }

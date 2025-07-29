@@ -16,10 +16,10 @@ When(
   'I select advanced filters in the search modifications page using {string}',
   async ({ searchModificationsPage, commonItemsPage, $tags }, filterDatasetName: string) => {
     const dataset = searchModificationsPage.searchModificationsPageTestData.Advanced_Filters[filterDatasetName];
-    await searchModificationsPage.clickAdvancedFilterChevron();
+    await commonItemsPage.clickAdvancedFilterChevron();
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        await searchModificationsPage.clickFilterChevron(dataset, key, searchModificationsPage);
+        await searchModificationsPage.clickFilterChevronModifications(dataset, key, searchModificationsPage);
         if (key === 'sponsor_organisation_text') {
           if (
             ($tags.includes('@jsEnabled') || config.projects?.[1].use?.javaScriptEnabled) &&
@@ -52,9 +52,9 @@ When(
 
 Then(
   'I can see the {string} ui labels in search modifications page',
-  async ({ searchModificationsPage }, datasetName: string) => {
+  async ({ searchModificationsPage, commonItemsPage }, datasetName: string) => {
     const dataset = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[datasetName];
-    const hintLabel = await searchModificationsPage.getCheckboxHintLabel();
+    const hintLabel = await commonItemsPage.getCheckboxHintLabel();
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
         if (key === 'lead_nation_checkbox') {
@@ -122,7 +122,7 @@ When(
     const dataset = searchModificationsPage.searchModificationsPageTestData.Advanced_Filters[filterDatasetName];
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        await searchModificationsPage.clickFilterChevron(dataset, key, searchModificationsPage);
+        await searchModificationsPage.clickFilterChevronModifications(dataset, key, searchModificationsPage);
       }
     }
   }
@@ -130,7 +130,7 @@ When(
 
 Then(
   'I can see the selected filters {string} are displayed under active filters in the search modifications page',
-  async ({ searchModificationsPage }, filterDatasetName: string) => {
+  async ({ searchModificationsPage, commonItemsPage }, filterDatasetName: string) => {
     const testData = searchModificationsPage.searchModificationsPageTestData;
     const dataset = testData.Advanced_Filters[filterDatasetName];
     const datasetLabels = testData.Search_Modifications_Page;
@@ -139,14 +139,14 @@ Then(
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
         if (key.endsWith('_checkbox')) {
-          const checkboxMap = await searchModificationsPage.getActiveFiltersCheckboxLabels(dataset, datasetLabels);
+          const checkboxMap = await commonItemsPage.getActiveFiltersCheckboxLabels(dataset, datasetLabels);
           expectedMultiSelectValues =
             checkboxMap
               .get('multiSelectFilter')
               ?.flat()
               .map((val: string) => val.trim()) || [];
         } else {
-          const singleSelectMap = await searchModificationsPage.getActiveFiltersLabels(dataset, datasetLabels);
+          const singleSelectMap = await commonItemsPage.getActiveFiltersLabels(dataset, datasetLabels);
           expectedSingleSelectValues =
             singleSelectMap
               .get('singleSelectFilter')
@@ -155,7 +155,7 @@ Then(
         }
       }
     }
-    const actualFilterValues = (await searchModificationsPage.getSelectedFilterValues())
+    const actualFilterValues = (await commonItemsPage.getSelectedFilterValues())
       .flat()
       .map((val: string) => val.trim());
     const expectedFilterValues = [...expectedSingleSelectValues, ...expectedMultiSelectValues];
@@ -165,7 +165,7 @@ Then(
 
 Then(
   'I remove the {string} from the active filters in the search modifications page',
-  async ({ searchModificationsPage }, removeFilterDatasetName: string) => {
+  async ({ searchModificationsPage, commonItemsPage }, removeFilterDatasetName: string) => {
     let activeCheckboxFiltersMap: { get: (arg0: string) => any };
     let activeFiltersMap: any;
     let filterCheckboxValuesExpected: any;
@@ -178,10 +178,7 @@ Then(
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
         if (key.endsWith('_checkbox')) {
-          activeCheckboxFiltersMap = await searchModificationsPage.getActiveFiltersCheckboxLabels(
-            dataset,
-            datasetLabels
-          );
+          activeCheckboxFiltersMap = await commonItemsPage.getActiveFiltersCheckboxLabels(dataset, datasetLabels);
           filterCheckboxValuesExpected = activeCheckboxFiltersMap.get('multiSelectFilter');
           const checkboxValues = filterCheckboxValuesExpected.flat().map((item: string) => item.trim());
           checkboxValues.forEach((val: string) => {
@@ -191,7 +188,7 @@ Then(
             }
           });
         } else {
-          activeFiltersMap = await searchModificationsPage.getActiveFiltersLabels(dataset, datasetLabels);
+          activeFiltersMap = await commonItemsPage.getActiveFiltersLabels(dataset, datasetLabels);
           filterValuesExpected = activeFiltersMap.get('singleSelectFilter');
           const singleSelectValues = filterValuesExpected.flat().map((item: string) => item.trim());
           singleSelectValues.forEach((val: string) => {
@@ -203,8 +200,8 @@ Then(
         }
       }
     }
-    removedFilterValues = await searchModificationsPage.removeSelectedFilterValues(expectedFilterValues);
-    const fieldValActualAfterRemoval: string[] = await searchModificationsPage.getSelectedFilterValues();
+    removedFilterValues = await commonItemsPage.removeSelectedFilterValues(expectedFilterValues);
+    const fieldValActualAfterRemoval: string[] = await commonItemsPage.getSelectedFilterValues();
     const actualFilterValuesAfterRemoval = fieldValActualAfterRemoval.flat().join(', ');
     for (let i = 0; i < removedFilterValues.length; i++) {
       expect(actualFilterValuesAfterRemoval).not.toContain(removedFilterValues[i]);
@@ -223,7 +220,7 @@ Then(
     const modificationsList = await searchModificationsPage.getAllModificationsTheTable();
     const searchResults = confirmArrayNotNull(modificationsList.get('searchResultValues'));
     const expectedCount = testData.Search_Modifications_Page.result_count_heading;
-    const actualCount = confirmStringNotNull(await searchModificationsPage.result_count.textContent());
+    const actualCount = confirmStringNotNull(await commonItemsPage.result_count.textContent());
     expect(searchResults.length + expectedCount).toBe(actualCount);
     // Validate combined search terms
     if (irasId && ciName && projectTitle) {
@@ -264,7 +261,7 @@ Then(
       const modificationTypeListAfterSearch: string[] = confirmArrayNotNull(
         modificationsList.get('modificationTypeValues')
       );
-      const isValid = await searchModificationsPage.areSearchResultsValid(
+      const isValid = await commonItemsPage.areSearchResultsValid(
         modificationTypeListAfterSearch,
         allowedModifications
       );
@@ -274,10 +271,7 @@ Then(
     const allowedLeadNations: string[] = filterDataset['lead_nation_checkbox'];
     if (allowedLeadNations) {
       const leadNationValuesAfterSearch = confirmArrayNotNull(modificationsList.get('leadNationValues'));
-      const isValid = await searchModificationsPage.areSearchResultsValid(
-        leadNationValuesAfterSearch,
-        allowedLeadNations
-      );
+      const isValid = await commonItemsPage.areSearchResultsValid(leadNationValuesAfterSearch, allowedLeadNations);
       expect(isValid).toBeTruthy();
     }
   }
@@ -291,7 +285,7 @@ Then(
     const modificationsList = await searchModificationsPage.getAllModificationsTheTable();
     const searchResults = confirmArrayNotNull(modificationsList.get('searchResultValues'));
     const expectedCount = testData.Search_Modifications_Page.result_count_heading;
-    const actualCount = confirmStringNotNull(await searchModificationsPage.result_count.textContent());
+    const actualCount = confirmStringNotNull(await commonItemsPage.result_count.textContent());
     expect(searchResults.length + expectedCount).toBe(actualCount);
     if (irasId) {
       const filteredResults = await commonItemsPage.filterResults(searchResults, irasId);
@@ -318,7 +312,7 @@ Then(
     const modificationsList = await searchModificationsPage.getAllModificationsTheTable();
     const searchResults = confirmArrayNotNull(modificationsList.get('searchResultValues'));
     const expectedCount = testData.Search_Modifications_Page.result_count_heading;
-    const actualCount = confirmStringNotNull(await searchModificationsPage.result_count.textContent());
+    const actualCount = confirmStringNotNull(await commonItemsPage.result_count.textContent());
     expect(searchResults.length + expectedCount).toBe(actualCount);
     // Combined search term validation
     if (ciName && projectTitle) {
@@ -353,7 +347,7 @@ Then(
       const modificationTypeListAfterSearch: string[] = confirmArrayNotNull(
         modificationsList.get('modificationTypeValues')
       );
-      const isValid = await searchModificationsPage.areSearchResultsValid(
+      const isValid = await commonItemsPage.areSearchResultsValid(
         modificationTypeListAfterSearch,
         allowedModifications
       );
@@ -363,10 +357,7 @@ Then(
     const allowedLeadNations: string[] = filterDataset['lead_nation_checkbox'];
     if (allowedLeadNations) {
       const leadNationValuesAfterSearch = confirmArrayNotNull(modificationsList.get('leadNationValues'));
-      const isValid = await searchModificationsPage.areSearchResultsValid(
-        leadNationValuesAfterSearch,
-        allowedLeadNations
-      );
+      const isValid = await commonItemsPage.areSearchResultsValid(leadNationValuesAfterSearch, allowedLeadNations);
       expect(isValid).toBeTruthy();
     }
   }
@@ -570,19 +561,19 @@ Then(
   async ({ commonItemsPage, searchModificationsPage }) => {
     await expect(searchModificationsPage.page_heading).toBeVisible();
     await expect(searchModificationsPage.page_guidance_text).toBeVisible();
-    await expect(searchModificationsPage.advanced_filter_chevron).toBeVisible();
+    await expect(commonItemsPage.advanced_filter_chevron).toBeVisible();
     expect(await searchModificationsPage.page.title()).toBe(
       searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.title
     );
     expect(await commonItemsPage.tableRows.count()).toBe(0);
     const expectedResultCount =
       searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.result_count_heading;
-    const actualResultCount = confirmStringNotNull(await searchModificationsPage.result_count.textContent());
+    const actualResultCount = confirmStringNotNull(await commonItemsPage.result_count.textContent());
     expect('0' + expectedResultCount).toBe(actualResultCount);
-    expect(await searchModificationsPage.no_results_heading.count()).toBe(0);
-    expect(await searchModificationsPage.no_results_guidance_text.count()).toBe(0);
-    expect(await searchModificationsPage.no_results_bullet_points.count()).toBe(0);
-    expect(await searchModificationsPage.active_filters_list.count()).toBe(0);
+    expect(await commonItemsPage.no_results_heading.count()).toBe(0);
+    expect(await commonItemsPage.no_results_guidance_text.count()).toBe(0);
+    expect(await commonItemsPage.no_results_bullet_points.count()).toBe(0);
+    expect(await commonItemsPage.active_filters_list.count()).toBe(0);
   }
 );
 

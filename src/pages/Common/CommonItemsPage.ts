@@ -79,6 +79,10 @@ export default class CommonItemsPage {
   readonly no_matching_search_result_body_three_label: Locator;
   readonly no_matching_search_result_body_four_label: Locator;
   readonly no_matching_search_result_count_label: Locator;
+  readonly active_filters_list: Locator;
+  readonly no_results_bullet_points: Locator;
+  readonly no_results_guidance_text: Locator;
+  readonly no_results_heading: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -165,8 +169,10 @@ export default class CommonItemsPage {
       .locator('..')
       .getByRole('heading', { level: 2 })
       .getByText(this.commonTestData.result_count_heading);
+    this.no_results_heading = this.page
+      .getByRole('heading')
+      .getByText(this.commonTestData.no_results_heading, { exact: true });
     this.advanced_filter_chevron = this.page.getByRole('button', { name: this.commonTestData.advanced_filter_label });
-
     this.no_matching_search_result_header_label = this.page.getByRole('heading');
     this.no_matching_search_result_sub_header_label = this.page.getByRole('paragraph');
     this.no_matching_search_result_body_one_label =
@@ -175,6 +181,21 @@ export default class CommonItemsPage {
       this.no_matching_search_result_body_four_label =
         this.page.getByRole('listitem');
     this.no_matching_search_result_count_label = this.page.getByRole('heading');
+    this.active_filters_list = this.page
+      .getByRole('heading', {
+        name: this.commonTestData.active_filters_label,
+        exact: true,
+      })
+      .locator('..')
+      .getByRole('list')
+      .getByRole('listitem')
+      .getByRole('link');
+    this.no_results_guidance_text = this.page
+      .getByRole('paragraph')
+      .getByText(this.commonTestData.no_results_guidance_text, {
+        exact: true,
+      });
+    this.no_results_bullet_points = this.no_results_guidance_text.locator('..').getByRole('listitem');
   }
 
   //Page Methods
@@ -836,5 +857,170 @@ export default class CommonItemsPage {
       left: 0,
     }));
     await stitchedImage.composite(composites).toFile(outputFile);
+  }
+
+  async removeSelectedFilterValues(removeFilterLabel: string[]): Promise<string[]> {
+    const removedFilterValues: string[] = [];
+    for (const label of removeFilterLabel) {
+      let filterFound = true;
+      while (filterFound) {
+        const filterItems = this.active_filters_list;
+        const count = await filterItems.count();
+        filterFound = false;
+        for (let i = 0; i < count; i++) {
+          const text = (await filterItems.nth(i).innerText()).trim().replace('Remove filter', '').trim();
+          if (text === label) {
+            removedFilterValues.push(text);
+            await filterItems.nth(i).locator('..').click({ force: true });
+            await this.page.waitForTimeout(500);
+            filterFound = true;
+            break;
+          }
+        }
+      }
+    }
+    return removedFilterValues;
+  }
+
+  async getSelectedFilterValues(): Promise<string[]> {
+    const filterItems = this.active_filters_list;
+    const count = await filterItems.count();
+    const values: string[] = [];
+    for (let i = 0; i < count; i++) {
+      const text = await filterItems.nth(i).innerText();
+      values.push(text.trim().replace('Remove filter', '').trim());
+    }
+    return values;
+  }
+
+  async getFilterTextCheckbox(filterName: string, dataset: JSON, key: string) {
+    const filterTextsCheckbox: string[] = [];
+    for (const value of dataset[key]) {
+      const filterText = `${filterName} - ${value}`;
+      filterTextsCheckbox.push(filterText);
+    }
+    return filterTextsCheckbox;
+  }
+
+  async getActiveFiltersCheckboxLabels(dataset: JSON, datasetLabels: any) {
+    let filterName: string = '';
+    const filterTextsCheckbox: any[] = [];
+    let activeFiltersMap: any;
+    for (const key in dataset) {
+      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+        // if (
+        //   key === 'lead_nation_checkbox' ||
+        //   key === 'modification_type_checkbox' ||
+        //   key === 'country_checkbox' ||
+        //   key === 'participating_nation_checkbox'
+        // ) {
+        if (key.endsWith('_checkbox')) {
+          if (key === 'lead_nation_checkbox') {
+            filterName = datasetLabels['lead_nation_label'];
+            const filterValues = await this.getFilterTextCheckbox(filterName, dataset, key);
+            filterTextsCheckbox.push(filterValues);
+          } else if (key === 'modification_type_checkbox') {
+            filterName = datasetLabels['modification_type_label'];
+            const filterValues = await this.getFilterTextCheckbox(filterName, dataset, key);
+            filterTextsCheckbox.push(filterValues);
+          } else if (key === 'participating_nation_checkbox') {
+            filterName = datasetLabels['participating_nation_label'];
+            const filterValues = await this.getFilterTextCheckbox(filterName, dataset, key);
+            filterTextsCheckbox.push(filterValues);
+          } else if (key === 'country_checkbox') {
+            filterName = datasetLabels['country_advanced_filter_label'];
+            const filterValues = await this.getFilterTextCheckbox(filterName, dataset, key);
+            filterTextsCheckbox.push(filterValues);
+          }
+          activeFiltersMap = new Map([['multiSelectFilter', confirmArrayNotNull(filterTextsCheckbox)]]);
+        }
+      }
+    }
+    return activeFiltersMap;
+  }
+
+  async clickAdvancedFilterChevron() {
+    const button = this.advanced_filter_chevron;
+    await button.click();
+  }
+
+  async getDateString(dataset: JSON, prefix: string) {
+    const day = +dataset[`${prefix}_day_text`];
+    const month = dataset[`${prefix}_month_dropdown`].slice(0, 3);
+    const year = dataset[`${prefix}_year_text`];
+    return day && month && year ? `${day} ${month} ${year}` : null;
+  }
+
+  async getActiveFiltersLabels(dataset: JSON, datasetLabels: any) {
+    let filterName: string = '';
+    const filterText: string[] = [];
+    let activeFiltersMap: any;
+    for (const key in dataset) {
+      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+        // if (key !== 'lead_nation_checkbox' && key !== 'modification_type_checkbox') {
+        if (!key.endsWith('_checkbox')) {
+          if (key === 'date_modification_submitted_from_day_text') {
+            filterName = datasetLabels['date_modification_submitted_label'];
+            const fromDate = await this.getDateString(dataset, 'date_modification_submitted_from');
+            if (fromDate) {
+              filterText.push(`${filterName} - from ${fromDate}`);
+            }
+          } else if (key === 'date_modification_submitted_to_day_text') {
+            filterName = datasetLabels['date_modification_submitted_label'];
+            const toDate = await this.getDateString(dataset, 'date_modification_submitted_to');
+            if (toDate) {
+              filterText.push(`${filterName} - to ${toDate}`);
+            }
+          } else if (key == 'chief_investigator_name_text') {
+            filterName = datasetLabels['chief_investigator_name_label'];
+            filterText.push(`${filterName} - ${dataset[key]}`);
+          } else if (key == 'short_project_title_text') {
+            filterName = datasetLabels['short_project_title_label'];
+            filterText.push(`${filterName} - ${dataset[key]}`);
+          } else if (key === 'sponsor_organisation_text') {
+            filterName = datasetLabels['sponsor_organisation_label'];
+            filterText.push(`${filterName} - ${dataset[key]}`);
+          } else if (key === 'status_radio') {
+            filterName = datasetLabels['status_advanced_filter_label'];
+            filterText.push(`${filterName} - ${dataset[key]}`);
+          } else if (key === 'date_last_logged_in_from_day_text') {
+            filterName = datasetLabels['date_last_logged_in_label'];
+            const fromDate = await this.getDateString(dataset, 'date_last_logged_in_from');
+            if (fromDate) {
+              filterText.push(`${filterName} - from ${fromDate}`);
+            }
+          } else if (key === 'date_last_logged_in_to_day_text') {
+            filterName = datasetLabels['date_last_logged_in_label'];
+            const toDate = await this.getDateString(dataset, 'date_last_logged_in_to');
+            if (toDate) {
+              filterText.push(`${filterName} - to ${toDate}`);
+            }
+          }
+          activeFiltersMap = new Map([['singleSelectFilter', confirmArrayNotNull(filterText)]]);
+        }
+      }
+    }
+    return activeFiltersMap;
+  }
+
+  async getCheckboxHintLabel(): Promise<string> {
+    const hintLabel = 0 + ' ' + this.commonTestData.selected_checkboxes_hint_label;
+    return hintLabel;
+  }
+
+  async areSearchResultsValid(actualValues: string[], allowedValues: string[]) {
+    const allValid = actualValues.every((value) => allowedValues.includes(value));
+    return allValid;
+  }
+
+  async getNoResultsBulletPoints(): Promise<string[]> {
+    const bulletPoints = this.no_results_bullet_points;
+    const count = await bulletPoints.count();
+    const values: string[] = [];
+    for (let i = 0; i < count; i++) {
+      const text = confirmStringNotNull(await bulletPoints.nth(i).textContent());
+      values.push(text);
+    }
+    return values;
   }
 }
