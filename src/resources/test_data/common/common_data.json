@@ -2,6 +2,7 @@
   "error_message_summary_header": "There is a problem",
   "next_button": "Next   page",
   "rgb_red_color": "rgb(212, 53, 28)",
+  "rgb_green_color": "rgb(0, 112, 60)",
   "top_menu_bar_links": ["Home", "Admin", "Question Set", "Logout"],
   "enabled_status": "Active",
   "disabled_status": "Disabled",
@@ -10,8 +11,18 @@
   "previous_button": "Previous   page",
   "heading": "Access Denied",
   "guidance_text": "You do not have access to this resource",
-  "advanced_filter_label": "Advanced filters",
+  "advanced_filter_label": "Advanced filter",
+  "result_count_heading": " results",
+  "selected_checkboxes_hint_label": "selected",
   "active_filters_label": "Active filters",
+  "no_results_heading": "There are no matching results",
+  "no_results_guidance_text": "Improve your search results by:",
+  "no_results_bullet_points": [
+    "removing filters",
+    "double-checking your spelling",
+    "using fewer keywords",
+    "searching for something less specific"
+  ],
   "No_Matching_Search_Results": {
     "no_matching_search_result_header_label": "There are no matching results",
     "no_matching_search_result_sub_header_label": "Improve your search results by:",

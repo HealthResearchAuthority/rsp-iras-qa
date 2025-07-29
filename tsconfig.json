@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "types": ["node"],
+    "lib": ["ES2023", "DOM"],
+    "resolveJsonModule": true,
+    "downlevelIteration": true,
+    "esModuleInterop": true
+  }
+}

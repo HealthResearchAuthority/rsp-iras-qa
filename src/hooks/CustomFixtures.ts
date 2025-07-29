@@ -47,6 +47,10 @@ import SearchAddUserReviewBodyPage from '../pages/IRAS/reviewResearch/userAdmini
 import CheckAddUserReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/CheckAddUserReviewBodyPage';
 import AccessDeniedPage from '../pages/IRAS/AccessDeniedPage';
 import RtsPage from '../pages/Common/RtsPage';
+import ParticipatingOrganisationsPage from '../pages/IRAS/makeChanges/modifications/ParticipatingOrganisationsPage';
+import SelectAreaOfChangePage from '../pages/IRAS/makeChanges/modifications/SelectAreaOfChangePage';
+import SearchModificationsPage from '../pages/IRAS/reviewResearch/approvals/SearchModificationsPage';
+import ApprovalsPage from '../pages/IRAS/reviewResearch/approvals/ApprovalsPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -95,6 +99,10 @@ type CustomFixtures = {
   checkAddUserReviewBodyPage: CheckAddUserReviewBodyPage;
   accessDeniedPage: AccessDeniedPage;
   rtsPage: RtsPage;
+  approvalsPage: ApprovalsPage;
+  participatingOrganisationsPage: ParticipatingOrganisationsPage;
+  selectAreaOfChangePage: SelectAreaOfChangePage;
+  searchModificationsPage: SearchModificationsPage;
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -281,6 +289,22 @@ export const test = base.extend<CustomFixtures>({
 
   rtsPage: async ({ page }, use) => {
     await use(new RtsPage(page));
+  },
+
+  participatingOrganisationsPage: async ({ page }, use) => {
+    await use(new ParticipatingOrganisationsPage(page));
+  },
+
+  selectAreaOfChangePage: async ({ page }, use) => {
+    await use(new SelectAreaOfChangePage(page));
+  },
+
+  searchModificationsPage: async ({ page }, use) => {
+    await use(new SearchModificationsPage(page));
+  },
+
+  approvalsPage: async ({ page }, use) => {
+    await use(new ApprovalsPage(page));
   },
 
   makeAxeBuilder: async ({ page }, use) => {

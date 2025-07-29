@@ -3,8 +3,7 @@ import * as buttonTextData from '../../resources/test_data/common/button_text_da
 import * as linkTextData from '../../resources/test_data/common/link_text_data.json';
 import * as questionSetData from '../../resources/test_data/common/question_set_data.json';
 import * as commonTestData from '../../resources/test_data/common/common_data.json';
-
-import fs from 'fs';
+import * as fs from 'fs';
 import path from 'path';
 import ProjectFilterPage from '../IRAS/questionSet/ProjectFilterPage';
 import ProjectDetailsPage from '../IRAS/questionSet/ProjectDetailsPage';
@@ -71,7 +70,8 @@ export default class CommonItemsPage {
   readonly pagination_items: Locator;
   readonly pageLinks: Locator;
   readonly advanced_filter_chevron: Locator;
-  readonly advanced_filter_active_filters_label: Locator;
+  readonly result_count: Locator;
+  readonly iras_id_search_text: Locator;
   readonly no_matching_search_result_header_label: Locator;
   readonly no_matching_search_result_sub_header_label: Locator;
   readonly no_matching_search_result_body_one_label: Locator;
@@ -80,6 +80,10 @@ export default class CommonItemsPage {
   readonly no_matching_search_result_body_four_label: Locator;
   readonly no_matching_search_result_count_label: Locator;
   readonly active_filters_list: Locator;
+  readonly no_results_bullet_points: Locator;
+  readonly no_results_guidance_text: Locator;
+  readonly no_results_heading: Locator;
+  readonly advanced_filter_active_filters_label: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -107,7 +111,11 @@ export default class CommonItemsPage {
     this.tableRows = this.page.getByRole('table').getByRole('row');
     this.tableBodyRows = this.page.getByRole('table').locator('tbody').getByRole('row');
     this.hidden_next_button = this.page.locator('[class="govuk-pagination__next"][style="visibility: hidden"]');
-    this.search_text = this.page.getByTestId('Search.SearchQuery');
+    this.search_text = this.page
+      .getByTestId('SearchQuery')
+      .or(this.page.getByTestId('Search.SearchQuery'))
+      .or(this.page.getByTestId('Search_IrasId'))
+      .first();
     //Banner
     this.bannerNavBar = this.page.getByLabel('Service information');
     this.bannerLoginBtn = this.bannerNavBar.getByText(this.buttonTextData.Banner.Login, { exact: true });
@@ -134,7 +142,9 @@ export default class CommonItemsPage {
     this.summaryErrorLinks = this.errorMessageSummaryLabel.locator('..').getByRole('listitem').getByRole('link');
     this.topMenuBarLinks = this.page.getByTestId('navigation').getByRole('listitem').getByRole('link');
     this.pagination = page.getByRole('navigation', { name: 'Pagination' });
-    this.firstPage = this.pagination.getByRole('link', { name: this.commonTestData.first_page, exact: true });
+    this.firstPage = this.pagination
+      .getByRole('link', { name: this.commonTestData.first_page, exact: true })
+      .or(this.pagination.getByRole('button', { name: this.commonTestData.first_page, exact: true }));
     this.lastPage = this.pagination.getByRole('listitem').last();
     this.previous_button = this.pagination
       .getByRole('link')
@@ -151,8 +161,17 @@ export default class CommonItemsPage {
     this.alert_box_headings = this.alert_box.getByRole('heading');
     this.alert_box_list = this.alert_box.getByRole('list');
     this.alert_box_list_items = this.alert_box.getByRole('listitem');
+    this.advanced_filter_chevron = this.page.getByRole('button', {
+      name: this.commonTestData.advanced_filter_label,
+    });
+    this.result_count = this.advanced_filter_chevron
+      .locator('..')
+      .getByRole('heading', { level: 2 })
+      .getByText(this.commonTestData.result_count_heading);
+    this.no_results_heading = this.page
+      .getByRole('heading')
+      .getByText(this.commonTestData.no_results_heading, { exact: true });
     this.advanced_filter_chevron = this.page.getByRole('button', { name: this.commonTestData.advanced_filter_label });
-    this.advanced_filter_active_filters_label = this.page.getByRole('list');
     this.no_matching_search_result_header_label = this.page.getByRole('heading');
     this.no_matching_search_result_sub_header_label = this.page.getByRole('paragraph');
     this.no_matching_search_result_body_one_label =
@@ -170,6 +189,31 @@ export default class CommonItemsPage {
       .getByRole('list')
       .getByRole('listitem')
       .getByRole('link');
+    this.no_results_guidance_text = this.page
+      .getByRole('paragraph')
+      .getByText(this.commonTestData.no_results_guidance_text, {
+        exact: true,
+      });
+    this.no_results_bullet_points = this.no_results_guidance_text.locator('..').getByRole('listitem');
+    // this.advanced_filter_chevron = this.page.getByRole('button', { name: this.commonTestData.advanced_filter_label });
+    // this.advanced_filter_active_filters_label = this.page.getByRole('list');
+    // this.no_matching_search_result_header_label = this.page.getByRole('heading');
+    // this.no_matching_search_result_sub_header_label = this.page.getByRole('paragraph');
+    // this.no_matching_search_result_body_one_label =
+    //   this.no_matching_search_result_body_two_label =
+    //   this.no_matching_search_result_body_three_label =
+    //   this.no_matching_search_result_body_four_label =
+    //     this.page.getByRole('listitem');
+    // this.no_matching_search_result_count_label = this.page.getByRole('heading');
+    // this.active_filters_list = this.page
+    //   .getByRole('heading', {
+    //     name: this.commonTestData.active_filters_label,
+    //     exact: true,
+    //   })
+    //   .locator('..')
+    //   .getByRole('list')
+    //   .getByRole('listitem')
+    //   .getByRole('link');
   }
 
   //Page Methods
@@ -652,9 +696,12 @@ export default class CommonItemsPage {
     return false;
   }
 
-  async validateSearchResultsMultipleWordsSearchKey(results: string[], searchTerms: string[]) {
-    const matchesSearchTerm = (text: string) =>
-      searchTerms.some((term) => text.toLowerCase().includes(term.toLowerCase()));
+  async validateSearchResultsMultipleWordsSearchKey(
+    results: string[],
+    searchTerms: string[] | string
+  ): Promise<string[]> {
+    const terms = Array.isArray(searchTerms) ? searchTerms : [searchTerms];
+    const matchesSearchTerm = (text: string) => terms.some((term) => text.toLowerCase().includes(term.toLowerCase()));
     const resultsAfterFiltering = confirmArrayNotNull(results).filter(matchesSearchTerm);
     return resultsAfterFiltering;
   }
@@ -680,11 +727,7 @@ export default class CommonItemsPage {
   }
 
   async getTotalItems() {
-    const paginationResults = await this.getPaginationResults();
-    const paginationResultsParts: string[] = paginationResults.split(' results');
-    const paginationResultsPartsOne: string[] = paginationResultsParts[0].split('Showing ');
-    const paginationResultsPartsTwo: string[] = paginationResultsPartsOne[1].split(' of ');
-    const totalItems = parseInt(paginationResultsPartsTwo[1], 10);
+    const totalItems = parseInt(confirmStringNotNull(await this.result_count.textContent()).split(' ')[0], 10);
     return totalItems;
   }
   async getItemsPerPage() {
@@ -787,8 +830,9 @@ export default class CommonItemsPage {
     return term.trim().split(/\s+/);
   }
 
-  async filterResults(results: string[], searchTerms: string[]) {
-    return results.filter((result) => searchTerms.every((term) => result.toLowerCase().includes(term.toLowerCase())));
+  async filterResults(results: string[], searchTerms: string[] | string): Promise<string[]> {
+    const terms = Array.isArray(searchTerms) ? searchTerms : [searchTerms];
+    return results.filter((result) => terms.every((term) => result.toLowerCase().includes(term.toLowerCase())));
   }
 
   async clearCheckboxes(dataset: any, keys: string[], commonItemsPage: any, createUserProfilePage: any) {
@@ -814,8 +858,8 @@ export default class CommonItemsPage {
       screenshotBuffers.push(buf);
     }
     const images = await Promise.all(screenshotBuffers.map((b) => sharp(b).metadata()));
-    const width = images[0].width!;
-    const heights = images.map((i) => i.height!);
+    const width = images[0].width;
+    const heights = images.map((i) => i.height);
     const totalHeight = heights.reduce((a, b) => a + b, 0);
     const stitchedImage = sharp({
       create: {
@@ -863,6 +907,137 @@ export default class CommonItemsPage {
     for (let i = 0; i < count; i++) {
       const text = await filterItems.nth(i).innerText();
       values.push(text.trim().replace('Remove filter', '').trim());
+    }
+    return values;
+  }
+
+  async getFilterTextCheckbox(filterName: string, dataset: JSON, key: string) {
+    const filterTextsCheckbox: string[] = [];
+    for (const value of dataset[key]) {
+      const filterText = `${filterName} - ${value}`;
+      filterTextsCheckbox.push(filterText);
+    }
+    return filterTextsCheckbox;
+  }
+
+  async getActiveFiltersCheckboxLabels(dataset: JSON, datasetLabels: any) {
+    let filterName: string = '';
+    const filterTextsCheckbox: any[] = [];
+    let activeFiltersMap: any;
+    for (const key in dataset) {
+      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+        // if (
+        //   key === 'lead_nation_checkbox' ||
+        //   key === 'modification_type_checkbox' ||
+        //   key === 'country_checkbox' ||
+        //   key === 'participating_nation_checkbox'
+        // ) {
+        if (key.endsWith('_checkbox')) {
+          if (key === 'lead_nation_checkbox') {
+            filterName = datasetLabels['lead_nation_label'];
+            const filterValues = await this.getFilterTextCheckbox(filterName, dataset, key);
+            filterTextsCheckbox.push(filterValues);
+          } else if (key === 'modification_type_checkbox') {
+            filterName = datasetLabels['modification_type_label'];
+            const filterValues = await this.getFilterTextCheckbox(filterName, dataset, key);
+            filterTextsCheckbox.push(filterValues);
+          } else if (key === 'participating_nation_checkbox') {
+            filterName = datasetLabels['participating_nation_label'];
+            const filterValues = await this.getFilterTextCheckbox(filterName, dataset, key);
+            filterTextsCheckbox.push(filterValues);
+          } else if (key === 'country_checkbox') {
+            filterName = datasetLabels['country_advanced_filter_label'];
+            const filterValues = await this.getFilterTextCheckbox(filterName, dataset, key);
+            filterTextsCheckbox.push(filterValues);
+          }
+          activeFiltersMap = new Map([['multiSelectFilter', confirmArrayNotNull(filterTextsCheckbox)]]);
+        }
+      }
+    }
+    return activeFiltersMap;
+  }
+
+  async clickAdvancedFilterChevron() {
+    const button = this.advanced_filter_chevron;
+    await button.click();
+  }
+
+  async getDateString(dataset: JSON, prefix: string) {
+    const day = +dataset[`${prefix}_day_text`];
+    const month = dataset[`${prefix}_month_dropdown`].slice(0, 3);
+    const year = dataset[`${prefix}_year_text`];
+    return day && month && year ? `${day} ${month} ${year}` : null;
+  }
+
+  async getActiveFiltersLabels(dataset: JSON, datasetLabels: any) {
+    let filterName: string = '';
+    const filterText: string[] = [];
+    let activeFiltersMap: any;
+    for (const key in dataset) {
+      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+        // if (key !== 'lead_nation_checkbox' && key !== 'modification_type_checkbox') {
+        if (!key.endsWith('_checkbox')) {
+          if (key === 'date_modification_submitted_from_day_text') {
+            filterName = datasetLabels['date_modification_submitted_label'];
+            const fromDate = await this.getDateString(dataset, 'date_modification_submitted_from');
+            if (fromDate) {
+              filterText.push(`${filterName} - from ${fromDate}`);
+            }
+          } else if (key === 'date_modification_submitted_to_day_text') {
+            filterName = datasetLabels['date_modification_submitted_label'];
+            const toDate = await this.getDateString(dataset, 'date_modification_submitted_to');
+            if (toDate) {
+              filterText.push(`${filterName} - to ${toDate}`);
+            }
+          } else if (key == 'chief_investigator_name_text') {
+            filterName = datasetLabels['chief_investigator_name_label'];
+            filterText.push(`${filterName} - ${dataset[key]}`);
+          } else if (key == 'short_project_title_text') {
+            filterName = datasetLabels['short_project_title_label'];
+            filterText.push(`${filterName} - ${dataset[key]}`);
+          } else if (key === 'sponsor_organisation_text') {
+            filterName = datasetLabels['sponsor_organisation_label'];
+            filterText.push(`${filterName} - ${dataset[key]}`);
+          } else if (key === 'status_radio') {
+            filterName = datasetLabels['status_advanced_filter_label'];
+            filterText.push(`${filterName} - ${dataset[key]}`);
+          } else if (key === 'date_last_logged_in_from_day_text') {
+            filterName = datasetLabels['date_last_logged_in_label'];
+            const fromDate = await this.getDateString(dataset, 'date_last_logged_in_from');
+            if (fromDate) {
+              filterText.push(`${filterName} - from ${fromDate}`);
+            }
+          } else if (key === 'date_last_logged_in_to_day_text') {
+            filterName = datasetLabels['date_last_logged_in_label'];
+            const toDate = await this.getDateString(dataset, 'date_last_logged_in_to');
+            if (toDate) {
+              filterText.push(`${filterName} - to ${toDate}`);
+            }
+          }
+          activeFiltersMap = new Map([['singleSelectFilter', confirmArrayNotNull(filterText)]]);
+        }
+      }
+    }
+    return activeFiltersMap;
+  }
+
+  async getCheckboxHintLabel(): Promise<string> {
+    const hintLabel = 0 + ' ' + this.commonTestData.selected_checkboxes_hint_label;
+    return hintLabel;
+  }
+
+  async areSearchResultsValid(actualValues: string[], allowedValues: string[]) {
+    const allValid = actualValues.every((value) => allowedValues.includes(value));
+    return allValid;
+  }
+
+  async getNoResultsBulletPoints(): Promise<string[]> {
+    const bulletPoints = this.no_results_bullet_points;
+    const count = await bulletPoints.count();
+    const values: string[] = [];
+    for (let i = 0; i < count; i++) {
+      const text = confirmStringNotNull(await bulletPoints.nth(i).textContent());
+      values.push(text);
     }
     return values;
   }

@@ -6,7 +6,14 @@ import { confirmArrayNotNull } from '../../utils/UtilFunctions';
 When(
   'I fill the search input for searching {string} with {string} as the search query',
   async (
-    { manageReviewBodiesPage, manageUsersPage, userListReviewBodyPage, searchAddUserReviewBodyPage, commonItemsPage },
+    {
+      manageReviewBodiesPage,
+      manageUsersPage,
+      userListReviewBodyPage,
+      searchAddUserReviewBodyPage,
+      searchModificationsPage,
+      commonItemsPage,
+    },
     searchType: string,
     searchQueryName: string
   ) => {
@@ -21,6 +28,8 @@ When(
         searchAddUserReviewBodyPage.searchAddUserReviewBodyPageData.Search_Add_User_Review_Body.Search_Queries[
           searchQueryName
         ];
+    } else if (searchType.toLowerCase() == 'modifications') {
+      searchQueryDataset = searchModificationsPage.searchModificationsPageTestData.Search_Queries[searchQueryName];
     } else if ((await commonItemsPage.tableBodyRows.count()) < 1) {
       throw new Error(`There are no items in list to search`);
     }
