@@ -524,7 +524,6 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         And I click the 'Advanced_Filter' link on the 'Search_Modifications_Page'
         And I expand the chevrons for '<Advanced_Filters>' in search modifications page
         And I capture the page screenshot
-        And I capture the page screenshot
         And I verify the hint text based on the '<Advanced_Filters>' for search modifications page
         Examples:
             | Advanced_Filters                              |

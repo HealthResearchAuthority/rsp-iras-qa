@@ -430,13 +430,4 @@ export default class SearchModificationsPage {
       await button.click();
     }
   }
-  //   async clickFilterChevronUsers<PageObject>(dataset: JSON, key: string, page: PageObject) {
-  //   const button = page[`${key}_chevron`];
-  //   const fromDate = dataset['date_last_logged_in_from_day_text'];
-  //   const isToDateKey = key === 'date_last_logged_in_to_day_text';
-  //   const shouldClick = !isToDateKey || (isToDateKey && (fromDate === '' || fromDate === undefined));
-  //   if (button && shouldClick) {
-  //     await button.click();
-  //   }
-  // }
 }
