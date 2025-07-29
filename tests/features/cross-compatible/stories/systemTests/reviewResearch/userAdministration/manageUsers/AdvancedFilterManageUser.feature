@@ -123,7 +123,7 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Non_Existant_User_Data | Advanced_Filter_One | No_Matching_Search_Results |
 
 
-    @rsp-3556 @jsDisabled @VerifyHintLabelForSelectedCountryCheckboxAdvancedFiltersManageUser
+    @rsp-3556 @jsDisabled @VerifyHintLabelForSelectedCountryCheckboxAdvancedFiltersManageUser @Test
     Scenario: When javascript disabled verify the hint text for country advanced filters when user select multiple checkboxes
         And I select advanced filters in the manage users page using '<Advanced_Filters>'
         And I click the 'Apply_filters' button on the 'Manage_Users_Page'
@@ -139,18 +139,56 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Advanced_Filter_Seven               |
             | Advanced_Filter_Nine                |
 
-    @rsp-3556 @VerifyHintTextForAdvanceFiltersManageUsers
-    Scenario: Validate hint labels for advanced filters in mange review body page
+    @rsp-3556 @VerifyHintTextForAdvanceFiltersManageUsers @Test
+    Scenario: Validate hint labels for advanced filters in mange users page
         And I expand the chevrons for '<Advanced_Filters>' in manage users page
         And I capture the page screenshot
         And I can see the '<Advanced_Filters_Labels>' ui labels in manage users page
-
         Examples:
             | Advanced_Filters    | Advanced_Filters_Labels      |
             | Advanced_Filter_One | Advanced_Filters_Hint_Labels |
 
-    @rsp-3556 @ValidateClearAllFiltersManageManageUser
-    Scenario: Validate clear all filters removes all active filters in mange review body page
+    @jsEnabled @VerifyHintLabelForSelectedCheckboxAdvancedFilters @rsp-4273 @Test
+    Scenario Outline: When javascript enabled verify the hint text for advanced filters when user select multiple checkboxes
+        And I select advanced filters in the manage users page using '<Advanced_Filters>'
+        And I capture the page screenshot
+        And I verify the hint text based on the '<Advanced_Filters>' for manage users page
+        Examples:
+            | Advanced_Filters                    |
+            | Advanced_Filter_No_Country_Selected |
+            | Advanced_Filter_One                 |
+            | Advanced_Filter_Three               |
+            | Advanced_Filter_Seven               |
+            | Advanced_Filter_Nine                |
+
+
+    @jsDisabled @VerifyHintLabelForSelectedCheckboxAdvancedFilters @rsp-4273 @Test
+    Scenario Outline: When javascript disabled verify the hint text for advanced filters when user select multiple checkboxes
+        And I select advanced filters in the manage users page using '<Advanced_Filters>'
+        And I click the 'Apply_filters' button on the 'Manage_Users_Page'
+        And I expand the chevrons for '<Advanced_Filters>' in manage users page
+        And I capture the page screenshot
+        And I verify the hint text based on the '<Advanced_Filters>' for manage users page
+        Examples:
+            | Advanced_Filters                    |
+            | Advanced_Filter_No_Country_Selected |
+            | Advanced_Filter_One                 |
+            | Advanced_Filter_Three               |
+            | Advanced_Filter_Seven               |
+            | Advanced_Filter_Nine                |
+    @jsDisabled @VerifyHintLabelForSelectedCheckboxAdvancedFilters @rsp-4273 @Test
+    Scenario Outline: When javascript disabled verify the hint text for advanced filters when user does n't select any checkboxes
+        And I click the 'Advanced_Filter' link on the 'Manage_Users_Page'
+        And I expand the chevrons for '<Advanced_Filters>' in manage users page
+        And I capture the page screenshot
+        And I verify the hint text based on the '<Advanced_Filters>' for manage users page
+        Examples:
+            | Advanced_Filters                    |
+            | Advanced_Filter_No_Country_Selected |
+
+
+    @rsp-3556 @ValidateClearAllFilters
+    Scenario: Validate clear all filters removes all active filters in mange users page
         And I select advanced filters in the manage users page using '<Advanced_Filters>'
         And I capture the page screenshot
         And I click the 'Apply_filters' button on the 'Manage_Users_Page'
@@ -177,6 +215,7 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
         Then I can see the selected filters '<Advanced_Filters>' are removed from active filters for manage users page
 
         Examples:
-            | Advanced_Filters    | Advanced_Filters_Remove  |
-            | Advanced_Filter_One | Advanced_Filters_Nth_All |
+            | Advanced_Filters    | Advanced_Filters_Remove |
+            | Advanced_Filter_One | Advanced_Filter_One_All |
+            | Advanced_Filter_Two | Advanced_Filter_Two_All |
 

@@ -67,6 +67,8 @@ export default class ManageUsersPage {
   readonly date_last_logged_in_to_date_error: Locator;
   readonly advanced_filter_chevron: Locator;
   readonly date_last_logged_in_error_message: Locator;
+  readonly country_checkbox_selected_hint_label: Locator;
+  readonly country_checkbox_hint_label: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -234,6 +236,22 @@ export default class ManageUsersPage {
     this.date_last_logged_in_error_message = this.page
       .locator('.govuk-error-message')
       .getByText(manageUsersPageTestData.Error_Message_Field_Dataset.Field_Error_Date_Last_Logged_In);
+    this.country_checkbox_selected_hint_label = this.country_checkbox_chevron
+      .locator('..')
+      .locator('..')
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group')
+      .getByText(
+        this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.selected_checkboxes_hint_label
+      );
+    this.country_checkbox_hint_label = this.country_checkbox_chevron
+      .locator('..')
+      .locator('..')
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group')
+      .getByText(this.manageUsersPageTestData.Manage_Users_Page.Advanced_Filters_Hint_Labels.country_hint_label, {
+        exact: true,
+      });
   }
 
   //Getters & Setters for Private Variables
@@ -397,5 +415,15 @@ export default class ManageUsersPage {
     }
 
     return emailAddress;
+  }
+
+  async clickFilterChevronUsers<PageObject>(dataset: JSON, key: string, page: PageObject) {
+    const button = page[`${key}_chevron`];
+    const fromDate = dataset['date_last_logged_in_from_day_text'];
+    const isToDateKey = key === 'date_last_logged_in_to_day_text';
+    const shouldClick = !isToDateKey || (isToDateKey && (fromDate === '' || fromDate === undefined));
+    if (button && shouldClick) {
+      await button.click();
+    }
   }
 }

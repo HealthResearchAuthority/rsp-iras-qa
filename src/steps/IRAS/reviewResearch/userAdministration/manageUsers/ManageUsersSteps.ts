@@ -301,6 +301,24 @@ When(
                   lastLoggedInDateActualOnlyDate
                 );
                 expect(isLastLoggedInDateInValidRange).toBe(true);
+              } else if (filterFromDate !== ' Choose month ' && filterToDate === ' Choose month ') {
+                // filterToDate=Today's date?
+                const lastLoggedInDateActualOnlyDate = lastLoggedInDateActual.substring(0, 11);
+                const isLastLoggedInDateInValidRange = await validateDateRange(
+                  filterFromDate,
+                  filterToDate,
+                  lastLoggedInDateActualOnlyDate
+                );
+                expect(isLastLoggedInDateInValidRange).toBe(true);
+              } else if (filterFromDate === ' Choose month ' && filterToDate !== ' Choose month ') {
+                // filterFromDate=?
+                const lastLoggedInDateActualOnlyDate = lastLoggedInDateActual.substring(0, 11);
+                const isLastLoggedInDateInValidRange = await validateDateRange(
+                  filterFromDate,
+                  filterToDate,
+                  lastLoggedInDateActualOnlyDate
+                );
+                expect(isLastLoggedInDateInValidRange).toBe(true);
               }
             }
           }
@@ -488,7 +506,7 @@ Then(
 );
 
 Then(
-  'I remove the {string} from the active filters in the search modifications page',
+  'I remove the {string} from the active filters in the manage users page',
   async ({ manageUsersPage, commonItemsPage }, removeFilterDatasetName: string) => {
     let activeCheckboxFiltersMap: { get: (arg0: string) => any };
     let activeFiltersMap: any;
@@ -532,3 +550,40 @@ Then(
     }
   }
 );
+
+// When(
+//   'I expand the chevrons for {string} in manage users page',
+//   async ({ manageUsersPage }, filterDatasetName: string) => {
+//     const dataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[filterDatasetName];
+//     for (const key in dataset) {
+//       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+//         await manageUsersPage.clickFilterChevronUsers(dataset, key, manageUsersPage);
+//       }
+//     }
+//   }
+// );
+
+// Then(
+//   'I verify the hint text based on the {string} for manage users page',
+//   async ({ manageUsersPage }, filterDatasetName: string) => {
+//     const dataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[filterDatasetName];
+//     for (const key in dataset) {
+//       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+//         if (key === 'country_checkbox') {
+//           const numberOfCheckboxesSelected = dataset[key].length;
+//           const hintLabel =
+//             numberOfCheckboxesSelected +
+//             ' ' +
+//             manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List
+//               .selected_checkboxes_hint_label;
+//           expect(confirmStringNotNull(await manageUsersPage.country_checkbox_selected_hint_label.textContent())).toBe(
+//             hintLabel
+//           );
+//           expect(confirmStringNotNull(await manageUsersPage.country_checkbox_hint_label.textContent())).toBe(
+//             manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Advanced_Filters_Hint_Labels.country_hint_label
+//           );
+//         }
+//       }
+//     }
+//   }
+// );

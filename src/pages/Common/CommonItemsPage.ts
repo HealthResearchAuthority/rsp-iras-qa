@@ -171,7 +171,6 @@ export default class CommonItemsPage {
     this.no_results_heading = this.page
       .getByRole('heading')
       .getByText(this.commonTestData.no_results_heading, { exact: true });
-    this.advanced_filter_chevron = this.page.getByRole('button', { name: this.commonTestData.advanced_filter_label });
     this.no_matching_search_result_header_label = this.page.getByRole('heading');
     this.no_matching_search_result_sub_header_label = this.page.getByRole('paragraph');
     this.no_matching_search_result_body_one_label =
@@ -195,25 +194,7 @@ export default class CommonItemsPage {
         exact: true,
       });
     this.no_results_bullet_points = this.no_results_guidance_text.locator('..').getByRole('listitem');
-    // this.advanced_filter_chevron = this.page.getByRole('button', { name: this.commonTestData.advanced_filter_label });
-    // this.advanced_filter_active_filters_label = this.page.getByRole('list');
-    // this.no_matching_search_result_header_label = this.page.getByRole('heading');
-    // this.no_matching_search_result_sub_header_label = this.page.getByRole('paragraph');
-    // this.no_matching_search_result_body_one_label =
-    //   this.no_matching_search_result_body_two_label =
-    //   this.no_matching_search_result_body_three_label =
-    //   this.no_matching_search_result_body_four_label =
-    //     this.page.getByRole('listitem');
-    // this.no_matching_search_result_count_label = this.page.getByRole('heading');
-    // this.active_filters_list = this.page
-    //   .getByRole('heading', {
-    //     name: this.commonTestData.active_filters_label,
-    //     exact: true,
-    //   })
-    //   .locator('..')
-    //   .getByRole('list')
-    //   .getByRole('listitem')
-    //   .getByRole('link');
+    this.advanced_filter_active_filters_label = this.page.getByRole('list');
   }
 
   //Page Methods

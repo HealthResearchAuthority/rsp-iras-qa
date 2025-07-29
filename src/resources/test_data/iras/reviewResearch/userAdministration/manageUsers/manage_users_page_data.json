@@ -161,7 +161,27 @@
       "date_last_logged_in_to_month_dropdown": "July",
       "date_last_logged_in_to_year_text": "2025"
     },
+    "Advanced_Filter_One_All": {
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "status_radio": "Active",
+      "date_last_logged_in_from_day_text": "11",
+      "date_last_logged_in_from_month_dropdown": "April",
+      "date_last_logged_in_from_year_text": "2023",
+      "date_last_logged_in_to_day_text": "22",
+      "date_last_logged_in_to_month_dropdown": "July",
+      "date_last_logged_in_to_year_text": "2025"
+    },
     "Advanced_Filter_Two": {
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "status_radio": "Disabled",
+      "date_last_logged_in_from_day_text": "11",
+      "date_last_logged_in_from_month_dropdown": "April",
+      "date_last_logged_in_from_year_text": "2023",
+      "date_last_logged_in_to_day_text": "22",
+      "date_last_logged_in_to_month_dropdown": "July",
+      "date_last_logged_in_to_year_text": "2025"
+    },
+    "Advanced_Filter_Two_All": {
       "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
       "status_radio": "Disabled",
       "date_last_logged_in_from_day_text": "11",
