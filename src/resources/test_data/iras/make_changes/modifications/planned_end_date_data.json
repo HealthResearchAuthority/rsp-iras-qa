@@ -1,0 +1,80 @@
+{
+  "Label_Texts": {
+    "current_planned_end_date_label": "Current planned end date",
+    "planned_project_end_date_hint_label": "For example, 27 March 2029",
+    "planned_project_end_date_day_label": "Day",
+    "planned_project_end_date_month_label": "Month",
+    "planned_project_end_date_year_label": "Year"
+  },
+  "Summary_Error_Message": {
+    "error_message_summary_header": "There is a problem",
+    "planned_project_end_day_text": "The date should be a valid date and in future",
+    "planned_project_end_month_dropdown": "The date should be a valid date and in future",
+    "planned_project_end_year_text": "The date should be a valid date and in future"
+  },
+  "Field_Error_Message": {
+    "planned_project_end_day_text": "The date should be a valid date and in future",
+    "planned_project_end_month_dropdown": "The date should be a valid date and in future",
+    "planned_project_end_year_text": "The date should be a valid date and in future"
+  },
+  "Valid_Data_All_Fields": {
+    "planned_project_end_day_text": "1",
+    "planned_project_end_month_dropdown": "January",
+    "planned_project_end_year_text": "2030"
+  },
+  "Empty_Data_All_Fields": {
+    "planned_project_end_day_text": "",
+    "planned_project_end_month_dropdown": "Choose month",
+    "planned_project_end_year_text": ""
+  },
+  "Invalid_Day_Number": {
+    "planned_project_end_day_text": "32",
+    "planned_project_end_month_dropdown": "December",
+    "planned_project_end_year_text": "2028"
+  },
+  "Invalid_Day_Letters": {
+    "planned_project_end_day_text": "o1",
+    "planned_project_end_month_dropdown": "January",
+    "planned_project_end_year_text": "2028"
+  },
+  "Invalid_Year_Number_1": {
+    "planned_project_end_day_text": "1",
+    "planned_project_end_month_dropdown": "January",
+    "planned_project_end_year_text": "28"
+  },
+  "Invalid_Year_Number_2": {
+    "planned_project_end_day_text": "1",
+    "planned_project_end_month_dropdown": "January",
+    "planned_project_end_year_text": "'28"
+  },
+  "Invalid_Year_Letters": {
+    "planned_project_end_day_text": "1",
+    "planned_project_end_month_dropdown": "January",
+    "planned_project_end_year_text": "'2ooo"
+  },
+  "Invalid_Date_Past": {
+    "planned_project_end_day_text": "1",
+    "planned_project_end_month_dropdown": "January",
+    "planned_project_end_year_text": "'2020"
+  },
+  "Invalid_Date_Today": {
+    "planned_project_end_day_text": "Today_Day",
+    "planned_project_end_month_dropdown": "Today_Month",
+    "planned_project_end_year_text": "'Today_Year"
+  },
+  "Invalid_Date_No_Day": {
+    "planned_project_end_day_text": "",
+    "planned_project_end_month_dropdown": "January",
+    "planned_project_end_year_text": "2028"
+  },
+  "Invalid_Date_No_Month": {
+    "planned_project_end_day_text": "1",
+    "planned_project_end_month_dropdown": "Choose month",
+    "planned_project_end_year_text": "2028"
+  },
+  "Invalid_Date_No_Year": {
+    "planned_project_end_day_text": "1",
+    "planned_project_end_month_dropdown": "January",
+    "planned_project_end_year_text": ""
+  }
+}
