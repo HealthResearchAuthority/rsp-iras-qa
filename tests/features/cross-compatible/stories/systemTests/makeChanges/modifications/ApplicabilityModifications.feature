@@ -11,16 +11,16 @@ Feature: Create Amendment - Create Applicability Modifications
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
     And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    Then I fill the key project roles page with 'Valid_Data_All_Fields'
-    And I capture the page screenshot
-    Then I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
-    Then I fill the research locations page with 'Valid_Data_All_Fields'
-    And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    Then I can see the review your answers page
-    And I capture the page screenshot
-    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    When I click the 'Save_For_Later' button on the 'Project_Details_Title_Page'
+    # Then I fill the key project roles page with 'Valid_Data_All_Fields'
+    # And I capture the page screenshot
+    # Then I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    # Then I fill the research locations page with 'Valid_Data_All_Fields'
+    # And I capture the page screenshot
+    # When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    # Then I can see the review your answers page
+    # And I capture the page screenshot
+    # When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
     Then I can see the project overview page
     When I click the 'Modifications_Tile' link on the 'Project_Overview_Page'
     And I can see the select area of change page
@@ -28,8 +28,8 @@ Feature: Create Amendment - Create Applicability Modifications
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
 
-  @rsp-4097-run @ValidatePlannedEndDateModificationsPageLabels
-  Scenario Outline: Verify the user is able make modifications by entering valid data for planned end date
+  @rsp-4097 @ValidatePlannedEndDateModificationsPageLabels
+  Scenario Outline: Validate the ui labels displayed for planned end date in modifications
     Then I can see the 'Planned_End_Date' page for modifications
     And I capture the page screenshot
     And I validate the project information labels using '<Label_Texts>' dataset displayed on modifications page
@@ -114,3 +114,81 @@ Feature: Create Amendment - Create Applicability Modifications
       | Planned_End_Date      |
       | Valid_Data_All_Fields |
       | Empty_Data_All_Fields |
+
+  @rsp-4103 @ValidateWhichOrganisationModificationsPageLabels
+  Scenario Outline: Validate the ui labels displayed for 'which organisation this change affect' page in modifications
+    Then I can see the 'Planned_End_Date' page for modifications
+    And I capture the page screenshot
+    Then I fill the planned project end date modifications page with '<Planned_End_Date>'
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Modifications_Page'
+    And I capture the page screenshot
+    Then I can see the 'Which_Organisation_Type_Affect' page for modifications
+    And I validate the project information labels using '<Label_Texts>' dataset displayed on modifications page
+    And I validate the ui labels for which organisation this change affect page in modifications
+
+    Examples:
+      | Planned_End_Date      | Label_Texts           |
+      | Valid_Data_All_Fields | Valid_Data_All_Fields |
+
+  @rsp-4103 @ValidateSaveForLaterForOranisationAffectModifications
+  Scenario Outline: Validate save for later functionality for valid or empty data for 'which organisation this change affect' page in modifications
+    Then I can see the 'Planned_End_Date' page for modifications
+    And I capture the page screenshot
+    Then I fill the planned project end date modifications page with '<Planned_End_Date>'
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Modifications_Page'
+    And I capture the page screenshot
+    Then I can see the 'Which_Organisation_Type_Affect' page for modifications
+    And I fill the which organisation this change affect modifications page with '<Organisation_Change_Affect>'
+    And I capture the page screenshot
+    When I click the 'Save_For_Later' button on the 'Modifications_Page'
+    And I can see the project overview page
+    And I capture the page screenshot
+    Then I can see the modification progress saved successful message on project overview page
+
+    Examples:
+      | Planned_End_Date      | Organisation_Change_Affect |
+      | Valid_Data_All_Fields | Valid_Data_All_Fields      |
+      | Valid_Data_All_Fields | Empty_Data_All_Fields      |
+
+  @rsp-4103 @ValidateSaveAndContinueForOrganisationChangeAffectModifications
+  Scenario Outline: Validate save and continue functionality for valid data for 'which organisation this change affect' page in modifications
+    Then I can see the 'Planned_End_Date' page for modifications
+    And I capture the page screenshot
+    Then I fill the planned project end date modifications page with '<Planned_End_Date>'
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Modifications_Page'
+    And I capture the page screenshot
+    Then I can see the 'Which_Organisation_Type_Affect' page for modifications
+    And I fill the which organisation this change affect modifications page with '<Organisation_Change_Affect>'
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Modifications_Page'
+    # Below steps need to be changed to validate the applicability 2 page when RSP-4108 is deployed
+    And I can see the project overview page
+    And I capture the page screenshot
+    Then I can see the modification progress saved successful message on project overview page
+
+    Examples:
+      | Planned_End_Date      | Organisation_Change_Affect |
+      | Valid_Data_All_Fields | Valid_Data_All_Fields      |
+      | Valid_Data_All_Fields | NHS_HSC_Only               |
+      | Valid_Data_All_Fields | Non_NHS_HSC_Only           |
+
+  @rsp-4103 @ValidateErrorForEmptyOrganisationChangeAffectModifications
+  Scenario Outline: Verify the user is able to see error messages when empty data for 'which organisation this change affect' page in modifications
+    Then I can see the 'Planned_End_Date' page for modifications
+    And I capture the page screenshot
+    Then I fill the planned project end date modifications page with '<Planned_End_Date>'
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Modifications_Page'
+    And I capture the page screenshot
+    Then I can see the 'Which_Organisation_Type_Affect' page for modifications
+    And I fill the which organisation this change affect modifications page with '<Organisation_Change_Affect>'
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Modifications_Page'
+    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Which_Organisation_Type_Affect_Page'
+
+    Examples:
+      | Planned_End_Date      | Organisation_Change_Affect | Field_And_Summary_Error_Message |
+      | Valid_Data_All_Fields | Empty_Data_All_Fields      | Mandatory_Field_Error           |

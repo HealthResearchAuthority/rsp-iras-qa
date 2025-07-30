@@ -1,6 +1,6 @@
 {
   "Label_Texts": {
-    "current_planned_end_date_label": "Current planned end date",
+    "current_planned_end_date_label": "Current planned project end date",
     "planned_project_end_date_hint_label": "For example, 27 March 2029",
     "planned_project_end_date_day_label": "Day",
     "planned_project_end_date_month_label": "Month",

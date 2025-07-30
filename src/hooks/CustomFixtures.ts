@@ -52,6 +52,7 @@ import SelectAreaOfChangePage from '../pages/IRAS/makeChanges/modifications/Sele
 import SearchModificationsPage from '../pages/IRAS/reviewResearch/receiveAmendments/SearchModificationsPage';
 import ModificationsCommonPage from '../pages/IRAS/makeChanges/modifications/ModificationsCommonPage';
 import PlannedEndDatePage from '../pages/IRAS/makeChanges/modifications/PlannedEndDatePage';
+import OrganisationChangeAffectPage from '../pages/IRAS/makeChanges/modifications/OrganisationChangeAffectPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -105,6 +106,7 @@ type CustomFixtures = {
   searchModificationsPage: SearchModificationsPage;
   modificationsCommonPage: ModificationsCommonPage;
   plannedEndDatePage: PlannedEndDatePage;
+  organisationChangeAffectPage: OrganisationChangeAffectPage;
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -312,6 +314,11 @@ export const test = base.extend<CustomFixtures>({
   plannedEndDatePage: async ({ page }, use) => {
     await use(new PlannedEndDatePage(page));
   },
+
+  organisationChangeAffectPage: async ({ page }, use) => {
+    await use(new OrganisationChangeAffectPage(page));
+  },
+
   makeAxeBuilder: async ({ page }, use) => {
     const makeAxeBuilder = () => new AxeBuilder({ page });
     await use(makeAxeBuilder);
