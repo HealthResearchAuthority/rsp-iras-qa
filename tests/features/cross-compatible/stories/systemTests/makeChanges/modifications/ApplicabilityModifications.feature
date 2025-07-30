@@ -11,16 +11,16 @@ Feature: Create Amendment - Create Applicability Modifications
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
     And I capture the page screenshot
-    When I click the 'Save_For_Later' button on the 'Project_Details_Title_Page'
-    # Then I fill the key project roles page with 'Valid_Data_All_Fields'
-    # And I capture the page screenshot
-    # Then I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
-    # Then I fill the research locations page with 'Valid_Data_All_Fields'
-    # And I capture the page screenshot
-    # When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    # Then I can see the review your answers page
-    # And I capture the page screenshot
-    # When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    Then I fill the key project roles page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    Then I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    Then I fill the research locations page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
     Then I can see the project overview page
     When I click the 'Modifications_Tile' link on the 'Project_Overview_Page'
     And I can see the select area of change page
