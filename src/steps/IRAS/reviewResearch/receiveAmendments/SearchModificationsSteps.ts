@@ -591,6 +591,14 @@ Then(
 );
 
 Then(
+  'I can now see a table of search results for modifications received for approval',
+  async ({ searchModificationsPage, commonItemsPage }) => {
+    await expect(searchModificationsPage.results_table).toBeVisible();
+    expect(await commonItemsPage.tableBodyRows.count()).toBeGreaterThan(0);
+  }
+);
+
+Then(
   'I can see the list of modifications received for approval is sorted by {string} order of the {string}',
   async ({ searchModificationsPage, commonItemsPage }, sortDirection: string, sortField: string) => {
     let sortedList: string[];

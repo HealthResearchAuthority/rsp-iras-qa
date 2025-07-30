@@ -1,6 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as linkTextData from '../../../../resources/test_data/common/link_text_data.json';
-import * as searchModificationsPageTestData from '../../../../resources/test_data/iras/reviewResearch/approvals/search_modifications_page_data.json';
+import * as searchModificationsPageTestData from '../../../../resources/test_data/iras/reviewResearch/receiveAmendments/search_modifications_page_data.json';
 import { confirmStringNotNull } from '../../../../utils/UtilFunctions';
 
 //Declare Page Objects
