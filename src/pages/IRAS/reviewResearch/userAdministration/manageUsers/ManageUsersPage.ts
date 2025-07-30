@@ -251,7 +251,6 @@ export default class ManageUsersPage {
         const time = convertTwelveHrToTwentyFourHr(times);
         return [year, month, day, time.join(':')];
       }
-      //Add last page sort test steps in all sort stories - expect fail due to defect
       //Add regression
       //Re-run access test on MU Page
     });

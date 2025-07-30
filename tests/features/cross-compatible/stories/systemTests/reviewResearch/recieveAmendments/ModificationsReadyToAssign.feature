@@ -10,9 +10,16 @@ Feature: Modifications Tasklist page that displays modifications ready to be ass
         When I click the '<Sort_Button>' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
         Then I can see the tasklist of modifications ready to assign is sorted by '<Initial_Sort>' order of the '<Sort_Field>'
+        When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
+        And I capture the page screenshot
+        Then I can see the tasklist of modifications ready to assign is sorted by '<Initial_Sort>' order of the '<Sort_Field>'
         When I click the '<Sort_Button>' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
-        Then I can see the tasklist of modifications ready to assign is sorted by '<Secondary_Sort>' order of the '<Sort_Field>'
+        Then I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
+        And I can see the tasklist of modifications ready to assign is sorted by '<Secondary_Sort>' order of the '<Sort_Field>'
+        When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
+        And I capture the page screenshot
+        And I can see the tasklist of modifications ready to assign is sorted by '<Secondary_Sort>' order of the '<Sort_Field>'
 
         Examples:
             | Sort_Button           | Sort_Field            | Initial_Sort | Secondary_Sort |
