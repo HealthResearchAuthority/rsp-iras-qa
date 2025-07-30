@@ -35,6 +35,8 @@ export default class ManageReviewBodiesPage {
   readonly country_hint_label: Locator;
   readonly country_selected_hint_label: Locator;
   readonly status_hint_label: Locator;
+  readonly review_body_search_text: Locator;
+  readonly search_hint_text: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -90,6 +92,15 @@ export default class ManageReviewBodiesPage {
     this.country_selected_hint_label = page.getByTestId('country-hint');
     this.country_hint_label = page.getByTestId('Search.Country');
     this.status_hint_label = page.getByTestId('Search.Status');
+    this.review_body_search_text = this.page.getByLabel(
+      this.manageReviewBodiesPageData.Manage_Review_Body_Page.review_body_search_box_label,
+      {
+        exact: true,
+      }
+    );
+    this.search_hint_text = this.page.getByText(
+      this.manageReviewBodiesPageData.Manage_Review_Body_Page.search_hint_text
+    );
   }
 
   //Getters & Setters for Private Variables
@@ -125,6 +136,7 @@ export default class ManageReviewBodiesPage {
   async assertOnManageReviewBodiesPage() {
     await expect(this.pageHeading).toBeVisible();
     expect(await this.page.title()).toBe(this.manageReviewBodiesPageData.Manage_Review_Body_Page.title);
+    await expect(this.search_hint_text).toBeVisible();
   }
 
   async getRowByOrgName(orgName: string, exactMatch: boolean) {

@@ -137,10 +137,10 @@ Then('I click the view edit link', async ({ manageReviewBodiesPage }) => {
 
 When(
   'I enter {string} into the search field for manage review bodies page',
-  async ({ commonItemsPage, manageReviewBodiesPage }, datasetName: string) => {
+  async ({ manageReviewBodiesPage }, datasetName: string) => {
     const dataset =
       manageReviewBodiesPage.manageReviewBodiesPageData.Search_For_Review_Bodies.Search_Queries[datasetName];
-    await commonItemsPage.search_text.fill(dataset['search_input_text']);
+    await manageReviewBodiesPage.review_body_search_text.fill(dataset['search_input_text']);
   }
 );
 
