@@ -502,6 +502,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
             | Advanced_Filter_No_Modification_Type_Selected  |
             | Advanced_Filter_One_Modification_Type_Selected |
             | Advanced_Filter_Two_Modification_Type_Selected |
+            | Advanced_Filters_Nth                           |
 
     @jsDisabled @VerifyHintLabelForSelectedCheckboxAdvancedFilters @rsp-4167
     Scenario Outline: When javascript disabled verify the hint text for advanced filters when user select multiple checkboxes
@@ -518,6 +519,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
             | Advanced_Filter_Four_Lead_Nation_Selected      |
             | Advanced_Filter_One_Modification_Type_Selected |
             | Advanced_Filter_Two_Modification_Type_Selected |
+            | Advanced_Filters_Nth                           |
 
     @jsDisabled @VerifyHintLabelForSelectedCheckboxAdvancedFilters @rsp-4167
     Scenario Outline: When javascript disabled verify the hint text for advanced filters when user does n't select any checkboxes
