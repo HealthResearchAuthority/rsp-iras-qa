@@ -838,7 +838,15 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Given I have navigated to the 'Search_Modifications_Page'
     And I fill the search input for searching 'modifications' with 'Valid_Iras_Id_Prefix' as the search query
     And I click the 'Search' button on the 'Search_Modifications_Page'
-    And the system displays modification records matching the search criteria of 'Valid_Iras_Id_Prefix'
+    And I can now see a table of search results for modifications received for approval
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+
+  @axeAccessibilityModficationsTasklistPage @FrontStageUser
+  Scenario: Modifications tasklist page
+    Given I have navigated to the 'Modifications_Tasklist_Page'
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations

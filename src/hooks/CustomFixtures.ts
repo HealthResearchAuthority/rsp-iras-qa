@@ -50,6 +50,7 @@ import RtsPage from '../pages/Common/RtsPage';
 import ParticipatingOrganisationsPage from '../pages/IRAS/makeChanges/modifications/ParticipatingOrganisationsPage';
 import SelectAreaOfChangePage from '../pages/IRAS/makeChanges/modifications/SelectAreaOfChangePage';
 import SearchModificationsPage from '../pages/IRAS/reviewResearch/receiveAmendments/SearchModificationsPage';
+import ModificationsReadyToAssignPage from '../pages/IRAS/reviewResearch/receiveAmendments/ModificationsReadyToAssignPage';
 import ModificationsCommonPage from '../pages/IRAS/makeChanges/modifications/ModificationsCommonPage';
 import PlannedEndDatePage from '../pages/IRAS/makeChanges/modifications/PlannedEndDatePage';
 import OrganisationChangeAffectPage from '../pages/IRAS/makeChanges/modifications/OrganisationChangeAffectPage';
@@ -104,6 +105,7 @@ type CustomFixtures = {
   participatingOrganisationsPage: ParticipatingOrganisationsPage;
   selectAreaOfChangePage: SelectAreaOfChangePage;
   searchModificationsPage: SearchModificationsPage;
+  modificationsReadyToAssignPage: ModificationsReadyToAssignPage;
   modificationsCommonPage: ModificationsCommonPage;
   plannedEndDatePage: PlannedEndDatePage;
   organisationChangeAffectPage: OrganisationChangeAffectPage;
@@ -307,6 +309,9 @@ export const test = base.extend<CustomFixtures>({
     await use(new SelectAreaOfChangePage(page));
   },
 
+  modificationsReadyToAssignPage: async ({ page }, use) => {
+    await use(new ModificationsReadyToAssignPage(page));
+  },
   modificationsCommonPage: async ({ page }, use) => {
     await use(new ModificationsCommonPage(page));
   },
