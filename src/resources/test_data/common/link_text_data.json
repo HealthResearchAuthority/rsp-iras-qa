@@ -158,5 +158,9 @@
     "Back": "Back",
     "Advanced_Filter": "Advanced filter",
     "Remove_This_Change": "Remove this change"
+  },
+  "Modifications_Ready_To_Assign_Page": {
+    "Previous": "Previous",
+    "Next": "Next"
   }
 }
