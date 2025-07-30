@@ -74,10 +74,9 @@ When(
       case 'Search_Modifications_Page':
         await searchModificationsPage.assertOnSearchModificationsPage();
         break;
-      case 'Modifications_tasklist_Page':
-        await modificationsReadyToAssignPage.goto();
+      case 'Modifications_Tasklist_Page':
+        await modificationsReadyToAssignPage.assertOnModificationsReadyToAssignPage();
         break;
-
       default:
         throw new Error(`${page} is not a valid option`);
     }
@@ -718,8 +717,9 @@ Given(
         await searchModificationsPage.goto();
         await searchModificationsPage.assertOnSearchModificationsPage();
         break;
-      case 'Modifications_tasklist_Page':
+      case 'Modifications_Tasklist_Page':
         await modificationsReadyToAssignPage.goto();
+        await modificationsReadyToAssignPage.assertOnModificationsReadyToAssignPage();
         break;
       default:
         throw new Error(`${page} is not a valid option`);
