@@ -34,6 +34,7 @@ Feature: Organisation Search and View
     And I can see the list is sorted by default in the alphabetical order of the 'Organisation Name'
     And I capture the page screenshot
     And I see the total number of results in the page
+    #checkbox
   Examples:
       | Area_Of_Change             | Specific_Change                                            |  Modifications_Tile_Link |  Validation_Text  |
       | Participating_Organisation | Addition_Of_sites_Option                                   |  Modifications_Tile      |  Column_Label     |
@@ -52,9 +53,6 @@ Feature: Organisation Search and View
 
 # Each row contains a checkbox 
 
-# The number of results is displayed on the table
-# find total rows excluding the header row.
-# Read what is available in the screen 
-# compare both
+# The number of results is displayed on the table -> done
 
 # The default size of the results displayed - 10 or 20 is not decided yet. -> done

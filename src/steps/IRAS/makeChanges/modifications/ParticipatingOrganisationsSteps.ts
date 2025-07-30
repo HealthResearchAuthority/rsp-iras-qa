@@ -71,9 +71,18 @@ Then(
   }
 );
 
-// Then('I see the total number of results in the page', async ({ commonItemsPage, participatingOrganisationsPage }) => {
-//find total number of rows minus the header row
-// const rowCount = await commonItemsPage.tableRows.count();
-// for (let i=1;i<rowCount;i++){
-// }
-//});
+Then('I see the total number of results in the page', async ({ commonItemsPage, participatingOrganisationsPage }) => {
+  //find total number of rows minus the header row ??.. check this
+
+  const displayedRowCount = await participatingOrganisationsPage.displayed_row_count.textContent();
+  const totalPages = await commonItemsPage.getTotalPages();
+  let totalRowCount = 0;
+  for (let i = 1; i <= totalPages; i++) {
+    totalRowCount = totalRowCount + (await commonItemsPage.tableRows.count());
+    if (i < totalPages) {
+      await commonItemsPage.next_button.isVisible();
+      await commonItemsPage.next_button.click();
+    }
+  }
+  expect(totalRowCount).toBe(displayedRowCount);
+});
