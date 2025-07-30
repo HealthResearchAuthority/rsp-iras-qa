@@ -93,7 +93,12 @@
     "Confirm_Project_Details": "Confirm project details"
   },
   "Manage_Users_Page": {
-    "Search": "Search"
+    "Search": "Search",
+    "First_Name": "First name",
+    "Last_Name": "Last name",
+    "Email_Address": "Email address",
+    "Status": "Status",
+    "Last_Logged_In": "Last logged in"
   },
   "Search_Modifications_Page": {
     "Apply_filters": "Apply filters",

@@ -149,3 +149,39 @@ When(
     }
   }
 );
+
+Then(
+  'I can see the manage users list sorted by {string} order of the {string}',
+  async ({ manageUsersPage, commonItemsPage }, sortDirection: string, sortField: string) => {
+    let sortedList: string[];
+    let columnIndex: number;
+    switch (sortField.toLowerCase()) {
+      case 'first name':
+        columnIndex = 0;
+        break;
+      case 'last name':
+        columnIndex = 1;
+        break;
+      case 'email address':
+        columnIndex = 2;
+        break;
+      case 'status':
+        columnIndex = 3;
+        break;
+      case 'last logged in':
+        columnIndex = 4;
+        break;
+      default:
+        throw new Error(`${sortField} is not a valid option`);
+    }
+    const actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
+    if (sortField.toLowerCase() == 'last logged in') {
+      sortedList = await manageUsersPage.sortLastLoggedInListValues(actualList, sortDirection);
+    } else if (sortDirection.toLowerCase() == 'ascending') {
+      sortedList = [...actualList].toSorted((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
+    } else {
+      sortedList = [...actualList].toSorted((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
+    }
+    expect(actualList).toEqual(sortedList);
+  }
+);
