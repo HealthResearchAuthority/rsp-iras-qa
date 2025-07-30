@@ -1,5 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
-import * as modificationsReadyToAssignPageData from '../../../../resources/test_data/iras/reviewResearch/approvals/modifications_ready_to_assign_page_data.json';
+import * as modificationsReadyToAssignPageData from '../../../../resources/test_data/iras/reviewResearch/receiveAmendments/modifications_ready_to_assign_page_data.json';
 
 //Declare Page Objects
 export default class ModificationsReadyToAssignPage {
