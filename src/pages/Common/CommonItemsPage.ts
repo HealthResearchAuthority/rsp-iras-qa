@@ -802,4 +802,45 @@ export default class CommonItemsPage {
     }));
     await stitchedImage.composite(composites).toFile(outputFile);
   }
+
+  async sortModificationIdListValues(modificationIds: string[], sortDirection: string): Promise<string[]> {
+    let sortedListAsNums: number[][];
+    const sortedListAsStrings: string[] = [];
+    const formattedModificationIds = modificationIds.map((id) => {
+      const [prefix, suffix] = id.split('/');
+      return [parseInt(prefix), parseInt(suffix)];
+    });
+    if (sortDirection.toLowerCase() == 'ascending') {
+      sortedListAsNums = formattedModificationIds.toSorted((a, b) => {
+        if (a[0] - b[0] == 0) {
+          return a[1] - b[1];
+        } else {
+          return a[0] - b[0];
+        }
+      });
+    } else {
+      sortedListAsNums = formattedModificationIds.toSorted((a, b) => {
+        if (b[0] - a[0] == 0) {
+          return b[1] - a[1];
+        } else {
+          return b[0] - a[0];
+        }
+      });
+    }
+    for (const entry of sortedListAsNums.entries()) {
+      sortedListAsStrings.push(entry[1].toString().replace(',', '/'));
+    }
+    return sortedListAsStrings;
+  }
+
+  async getActualListValues(tableBodyRows: Locator, columnIndex: number): Promise<string[]> {
+    const actualListValues: string[] = [];
+    for (const row of await tableBodyRows.all()) {
+      const actualListValue = confirmStringNotNull(await row.getByRole('cell').nth(columnIndex).textContent())
+        .replace(/\s+/g, ' ')
+        .trim();
+      actualListValues.push(actualListValue);
+    }
+    return actualListValues;
+  }
 }
