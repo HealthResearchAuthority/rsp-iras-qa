@@ -151,8 +151,8 @@ When(
 );
 
 Then(
-  'I can see the manage users list sorted by {string} order of the {string}',
-  async ({ manageUsersPage, commonItemsPage }, sortDirection: string, sortField: string) => {
+  'I can see the manage users list sorted by {string} order of the {string} on the {string} page',
+  async ({ manageUsersPage, commonItemsPage }, sortDirection: string, sortField: string, currentPage: string) => {
     let sortedList: string[];
     let columnIndex: number;
     switch (sortField.toLowerCase()) {
@@ -179,8 +179,14 @@ Then(
       sortedList = await manageUsersPage.sortLastLoggedInListValues(actualList, sortDirection);
     } else if (sortDirection.toLowerCase() == 'ascending') {
       sortedList = [...actualList].toSorted((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
+      if (sortField.toLowerCase() == 'status' && currentPage.toLowerCase() == 'first') {
+        expect(actualList).toContain(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enabled_status);
+      }
     } else {
       sortedList = [...actualList].toSorted((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
+      if (sortField.toLowerCase() == 'status' && currentPage.toLowerCase() == 'first') {
+        expect(actualList).toContain(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.disabled_status);
+      }
     }
     expect(actualList).toEqual(sortedList);
   }
