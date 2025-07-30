@@ -12,7 +12,7 @@ Then(
 
 Then(
   'I can see the list of modifications received for approval is sorted by {string} order of the {string}',
-  async ({ searchModificationsPage, commonItemsPage }, sortDirection: string, sortField: string) => {
+  async ({ commonItemsPage }, sortDirection: string, sortField: string) => {
     let sortedList: string[];
     let columnIndex: number;
     switch (sortField.toLowerCase()) {
@@ -34,13 +34,13 @@ Then(
       default:
         throw new Error(`${sortField} is not a valid option`);
     }
-    const actualList = await searchModificationsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
+    const actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
     if (sortField.toLowerCase() == 'modification id') {
-      sortedList = await searchModificationsPage.sortModificationIdListValues(actualList, sortDirection);
+      sortedList = await commonItemsPage.sortModificationIdListValues(actualList, sortDirection);
     } else if (sortDirection.toLowerCase() == 'ascending') {
-      sortedList = [...actualList].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
+      sortedList = [...actualList].toSorted((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
     } else {
-      sortedList = [...actualList].sort((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
+      sortedList = [...actualList].toSorted((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
     }
     expect(actualList).toEqual(sortedList);
   }
