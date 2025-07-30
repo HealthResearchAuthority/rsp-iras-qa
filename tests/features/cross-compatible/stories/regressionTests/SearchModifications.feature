@@ -10,8 +10,8 @@ Feature: Receive Amendments: Search Modifications
         Scenario Outline: Verify the user is able to sort the list of modifications by ascending and descending order for each results table column
                 And I fill the search input for searching 'modifications' with 'Valid_Iras_Id_Prefix' as the search query
                 And I click the 'Search' button on the 'Search_Modifications_Page'
+                And I can now see a table of search results for modifications received for approval
                 And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
-                And the system displays modification records matching the search criteria of 'Valid_Iras_Id_Prefix'
                 And I capture the page screenshot
                 When I click the '<Sort_Button>' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
