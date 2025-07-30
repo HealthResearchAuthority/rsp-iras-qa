@@ -9,5 +9,11 @@
   },
   "Field_Error_participating_organisations_text": {
     "participating_organisations_text": "No participant organisations have been selected. Select at least one participant organisation before clicking 'Save and continue'."
+  },
+  "Column_Label ": {
+    "Name": "Name",
+    "Address": "Address",
+    "Organisation type": "Organisation type",
+    "Country": "Country"
   }
 }

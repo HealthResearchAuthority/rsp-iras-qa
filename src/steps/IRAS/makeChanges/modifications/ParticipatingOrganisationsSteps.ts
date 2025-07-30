@@ -41,7 +41,7 @@ Then(
     expect(actualModificationId).toBe(expectedModificationId);
     // All the below assertion can be removed when the functionality is implemented - now it's UI only function
     expect(participatingOrganisationsPage.remove_this_change_link).toBeVisible();
-    //expect(participatingOrganisationsPage.advanced_filter_link).toBeVisible();
+    expect(participatingOrganisationsPage.advanced_filter_link).toBeVisible();
     expect(participatingOrganisationsPage.participating_organisations_text).toBeVisible();
     expect(participatingOrganisationsPage.participating_organisations_search_button).toBeVisible();
   }
@@ -57,3 +57,23 @@ Then(
     expect(actualModificationId).toBe(expectedModificationId);
   }
 );
+
+Then(
+  'I can see the {string} ui labels on the participating organisation page',
+  async ({ commonItemsPage, participatingOrganisationsPage }, datasetName: string) => {
+    const dataset = participatingOrganisationsPage.participatingOrganisationsPageTestData[datasetName];
+    for (const key in dataset) {
+      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+        const labelVal = await commonItemsPage.getUiLabel(key, participatingOrganisationsPage);
+        expect(labelVal).toBe(dataset[key]);
+      }
+    }
+  }
+);
+
+// Then('I see the total number of results in the page', async ({ commonItemsPage, participatingOrganisationsPage }) => {
+//find total number of rows minus the header row
+// const rowCount = await commonItemsPage.tableRows.count();
+// for (let i=1;i<rowCount;i++){
+// }
+//});

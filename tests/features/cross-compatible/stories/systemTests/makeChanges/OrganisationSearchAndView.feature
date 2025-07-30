@@ -29,30 +29,32 @@ Feature: Organisation Search and View
     Then I can see the participating organisation page
     And I can see the page heading is changed for '<Specific_Change>' on participating organisation page
     And I capture the page screenshot
-    Then I can see the '<Validation_Text>' ui labels on the project details title page
-    #And I validate the ui lables and field values with '<Project_Details_Title>' on participating organisation page
     Then I can see the '<Validation_Text>' ui labels on the participating organisation page
     And the default page size should be ten
     And I can see the list is sorted by default in the alphabetical order of the 'Organisation Name'
     And I capture the page screenshot
+    And I see the total number of results in the page
   Examples:
-      | Area_Of_Change             | Specific_Change                                            | Project_Details_Title | Modifications_Tile_Link |
-      | Participating_Organisation | Addition_Of_sites_Option                                   | Valid_Data_All_Fields | Modifications_Tile      |
-      | Participating_Organisation | Early_closure_withdrawal_of_sites_Option                   | Valid_Data_All_Fields | Modifications_Tile      |
-      | Participating_Organisation | Addition_Of_Participant_Identification_Centres_Option      | Valid_Data_All_Fields | Modifications_Tile      |
-      | Participating_Organisation | Early_closure_Of_Participant_Identification_Centres_Option | Valid_Data_All_Fields | Modifications_Tile      |
+      | Area_Of_Change             | Specific_Change                                            |  Modifications_Tile_Link |  Validation_Text  |
+      | Participating_Organisation | Addition_Of_sites_Option                                   |  Modifications_Tile      |  Column_Label     |
+      | Participating_Organisation | Early_closure_withdrawal_of_sites_Option                   |  Modifications_Tile      |  Column_Label     |
+      | Participating_Organisation | Addition_Of_Participant_Identification_Centres_Option      |  Modifications_Tile      |  Column_Label     |
+      | Participating_Organisation | Early_closure_Of_Participant_Identification_Centres_Option |  Modifications_Tile      |  Column_Label     |
 
 
 # AC1
 
-# Given I navigate to the "Select participating organisations" screen 
+# Given I navigate to the "Select participating organisations" screen -> done
 
 # the screen is loaded with the results by default in Alphabetical order by participating organisation name -> done
 
-# The following organisations columns are displayed - Name, Address, Organisation type, and Country
+# The following organisations columns are displayed - Name, Address, Organisation type, and Country -> done
 
 # Each row contains a checkbox 
 
 # The number of results is displayed on the table
+# find total rows excluding the header row.
+# Read what is available in the screen 
+# compare both
 
 # The default size of the results displayed - 10 or 20 is not decided yet. -> done
