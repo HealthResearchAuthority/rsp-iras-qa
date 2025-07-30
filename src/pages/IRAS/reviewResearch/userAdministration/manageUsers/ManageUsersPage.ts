@@ -71,6 +71,8 @@ export default class ManageUsersPage {
   readonly country_checkbox_selected_hint_label: Locator;
   readonly country_checkbox_hint_label: Locator;
   readonly user_search_text: Locator;
+  readonly date_last_logged_in_from_date_help_text: Locator;
+  readonly date_last_logged_in_to_date_help_text: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -258,6 +260,8 @@ export default class ManageUsersPage {
       .getByText(this.manageUsersPageTestData.Manage_Users_Page.Advanced_Filters_Hint_Labels.country_hint_label, {
         exact: true,
       });
+    this.date_last_logged_in_from_date_help_text = this.page.locator('#Search_FromDate-hint');
+    this.date_last_logged_in_to_date_help_text = this.page.locator('#Search_ToDate-hint');
   }
 
   //Getters & Setters for Private Variables

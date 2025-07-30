@@ -251,6 +251,9 @@ When(
     const searchCriteriaDataset =
       manageUsersPage.manageUsersPageTestData.Search_For_Users.Search_Queries_Advanced_Filter[searchDatasetName];
     const filterDataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[filterDatasetName];
+    const dateLastLoggedinMonthPlaceholder =
+      manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List
+        .date_last_logged_in_month_placeholder;
     // Use below commented code, if needed to check the results till the end of the pagination
     // const lastPage = await removeUnwantedWhitespace(confirmStringNotNull(await commonItemsPage.lastPage.textContent()));
     // for (let i = 1; i < Number(lastPage); i++) {
@@ -291,34 +294,46 @@ When(
               expect(statusActual.toLowerCase().includes(statusExpected.toLowerCase()));
             }
             if (key.includes('date') && lastLoggedInDateActual !== null) {
-              const filterFromDate = `${filterDataset['date_last_logged_in_from_day_text']} ${filterDataset['date_last_logged_in_from_month_dropdown']} ${filterDataset['date_last_logged_in_from_year_text']}`;
-              const filterToDate = `${filterDataset['date_last_logged_in_to_day_text']} ${filterDataset['date_last_logged_in_to_month_dropdown']} ${filterDataset['date_last_logged_in_to_year_text']}`;
-              if (filterFromDate !== ' Choose month ' && filterToDate !== ' Choose month ') {
-                const lastLoggedInDateActualOnlyDate = lastLoggedInDateActual.substring(0, 11);
-                const isLastLoggedInDateInValidRange = await validateDateRange(
-                  filterFromDate,
-                  filterToDate,
-                  lastLoggedInDateActualOnlyDate
-                );
-                expect(isLastLoggedInDateInValidRange).toBe(true);
-              } else if (filterFromDate !== ' Choose month ' && filterToDate === ' Choose month ') {
-                // filterToDate=Today's date?
-                const lastLoggedInDateActualOnlyDate = lastLoggedInDateActual.substring(0, 11);
-                const isLastLoggedInDateInValidRange = await validateDateRange(
-                  filterFromDate,
-                  filterToDate,
-                  lastLoggedInDateActualOnlyDate
-                );
-                expect(isLastLoggedInDateInValidRange).toBe(true);
-              } else if (filterFromDate === ' Choose month ' && filterToDate !== ' Choose month ') {
-                // filterFromDate=?
-                const lastLoggedInDateActualOnlyDate = lastLoggedInDateActual.substring(0, 11);
-                const isLastLoggedInDateInValidRange = await validateDateRange(
-                  filterFromDate,
-                  filterToDate,
-                  lastLoggedInDateActualOnlyDate
-                );
-                expect(isLastLoggedInDateInValidRange).toBe(true);
+              if (key === 'date_last_logged_in_to_day_text' || key === 'date_last_logged_in_from_day_text') {
+                const filterFromDate = `${filterDataset['date_last_logged_in_from_day_text']} ${filterDataset['date_last_logged_in_from_month_dropdown']} ${filterDataset['date_last_logged_in_from_year_text']}`;
+                const filterToDate = `${filterDataset['date_last_logged_in_to_day_text']} ${filterDataset['date_last_logged_in_to_month_dropdown']} ${filterDataset['date_last_logged_in_to_year_text']}`;
+                if (
+                  filterFromDate.trim() !== dateLastLoggedinMonthPlaceholder &&
+                  filterToDate.trim() !== dateLastLoggedinMonthPlaceholder
+                ) {
+                  const lastLoggedInDateActualOnlyDate = lastLoggedInDateActual.substring(0, 11);
+                  const isLastLoggedInDateInValidRange = await validateDateRange(
+                    lastLoggedInDateActualOnlyDate,
+                    dateLastLoggedinMonthPlaceholder,
+                    filterFromDate,
+                    filterToDate
+                  );
+                  expect(isLastLoggedInDateInValidRange).toBe(true);
+                } else if (
+                  filterFromDate.trim() !== dateLastLoggedinMonthPlaceholder &&
+                  filterToDate.trim() === dateLastLoggedinMonthPlaceholder
+                ) {
+                  const lastLoggedInDateActualOnlyDate = lastLoggedInDateActual.substring(0, 11);
+                  const isLastLoggedInDateInValidRange = await validateDateRange(
+                    lastLoggedInDateActualOnlyDate,
+                    dateLastLoggedinMonthPlaceholder,
+                    filterFromDate,
+                    filterToDate
+                  );
+                  expect(isLastLoggedInDateInValidRange).toBe(true);
+                } else if (
+                  filterFromDate.trim() === dateLastLoggedinMonthPlaceholder &&
+                  filterToDate.trim() !== dateLastLoggedinMonthPlaceholder
+                ) {
+                  const lastLoggedInDateActualOnlyDate = lastLoggedInDateActual.substring(0, 11);
+                  const isLastLoggedInDateInValidRange = await validateDateRange(
+                    lastLoggedInDateActualOnlyDate,
+                    dateLastLoggedinMonthPlaceholder,
+                    filterFromDate,
+                    filterToDate
+                  );
+                  expect(isLastLoggedInDateInValidRange).toBe(true);
+                }
               }
             }
           }
@@ -339,6 +354,9 @@ When(
   'I can see the results matching the filter criteria {string} for manage users page',
   async ({ manageUsersPage, commonItemsPage }, filterDatasetName: string) => {
     const filterDataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[filterDatasetName];
+    const dateLastLoggedinMonthPlaceholder =
+      manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List
+        .date_last_logged_in_month_placeholder;
     // Use below commented code, if needed to check the results till the end of the pagination
     // const lastPage = await removeUnwantedWhitespace(confirmStringNotNull(await commonItemsPage.lastPage.textContent()));
     // for (let i = 1; i < Number(lastPage); i++) {
@@ -363,9 +381,10 @@ When(
               if (filterFromDate !== ' Choose month ' && filterToDate !== ' Choose month ') {
                 const lastLoggedInDateActualOnlyDate = lastLoggedInDateActual.substring(0, 11);
                 const isLastLoggedInDateInValidRange = await validateDateRange(
+                  lastLoggedInDateActualOnlyDate,
+                  dateLastLoggedinMonthPlaceholder,
                   filterFromDate,
-                  filterToDate,
-                  lastLoggedInDateActualOnlyDate
+                  filterToDate
                 );
                 expect(isLastLoggedInDateInValidRange).toBe(true);
               }
@@ -403,27 +422,39 @@ Then(
   }
 );
 
-Then(
+// Then(
+//   'I expand the chevrons for {string} in manage users page',
+//   async ({ manageUsersPage }, filterDatasetName: string) => {
+//     const dataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[filterDatasetName];
+//     await manageUsersPage.advanced_filter_chevron.click();
+//     for (const key in dataset) {
+//       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+//         if (key.includes('date')) {
+//           if (!(await manageUsersPage.date_last_logged_in_from_day_text.isVisible())) {
+//             await manageUsersPage.date_last_logged_in_from_day_text_chevron.click();
+//           }
+//         }
+//       } else {
+//         await manageUsersPage[key + '_chevron'].click();
+//       }
+//     }
+//   }
+// );
+
+When(
   'I expand the chevrons for {string} in manage users page',
   async ({ manageUsersPage }, filterDatasetName: string) => {
     const dataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[filterDatasetName];
-    await manageUsersPage.advanced_filter_chevron.click();
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        if (key.includes('date')) {
-          if (!(await manageUsersPage.date_last_logged_in_from_day_text.isVisible())) {
-            await manageUsersPage.date_last_logged_in_from_day_text_chevron.click();
-          }
-        }
-      } else {
-        await manageUsersPage[key + '_chevron'].click();
+        await manageUsersPage.clickFilterChevronUsers(dataset, key, manageUsersPage);
       }
     }
   }
 );
 
 Then('I can see the {string} ui labels in manage users page', async ({ manageUsersPage }, datasetName: string) => {
-  const dataset = manageUsersPage.manageUsersPageTestData[datasetName];
+  const dataset = manageUsersPage.manageUsersPageTestData.Manage_Users_Page[datasetName];
   for (const key in dataset) {
     if (Object.prototype.hasOwnProperty.call(dataset, key)) {
       await expect(manageUsersPage[key].getByText(dataset[key])).toBeVisible();

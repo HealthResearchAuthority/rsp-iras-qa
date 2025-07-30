@@ -185,6 +185,12 @@ Given(
   async ({ commonItemsPage, checkCreateUserProfilePage }, linkKey: string, pageKey: string) => {
     const linkValue = commonItemsPage.linkTextData[pageKey][linkKey];
     const noOfLinksFound = await commonItemsPage.govUkLink.getByText(linkValue).count();
+    const pagesWithAdvancedFilter = new Set([
+      'Search_Modifications_Page',
+      'Manage_Users_Page',
+      'Manage_Review_Bodies_Page',
+    ]);
+
     if (pageKey === 'Progress_Bar') {
       await commonItemsPage.qSetProgressBarStageLink.getByText(linkValue, { exact: true }).click();
     } else if (pageKey === 'Check_Create_User_Profile_Page' && linkKey === 'Back') {
@@ -205,7 +211,7 @@ Given(
       linkKey === 'Back_To_Users'
     ) {
       await commonItemsPage.govUkLink.getByText(linkValue).click();
-    } else if (pageKey === 'Search_Modifications_Page' && linkKey === 'Advanced_Filter') {
+    } else if (pagesWithAdvancedFilter.has(pageKey) && linkKey.startsWith('Advanced_Filter')) {
       await commonItemsPage.clickAdvancedFilterChevron(); //work around for now >> to click on Advanced_Filter link
       // This if condition need to be removed later
     } else if (noOfLinksFound > 1) {

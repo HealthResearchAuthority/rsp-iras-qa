@@ -64,6 +64,7 @@ export default class SearchModificationsPage {
   readonly lead_nation_checkbox_selected_hint_label: Locator;
   readonly modification_type_checkbox_selected_hint_label: Locator;
   readonly date_modification_submitted_from_date_error: Locator;
+  readonly results_table: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -303,6 +304,7 @@ export default class SearchModificationsPage {
         hasText: this.searchModificationsPageTestData.Search_Modifications_Page.sponsor_organisation_hint_text,
       })
       .locator('.govuk-error-message');
+    this.results_table = this.page.getByTestId('modificationsTable');
   }
 
   //Getters & Setters for Private Variables

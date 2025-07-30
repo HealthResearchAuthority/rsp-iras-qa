@@ -21,18 +21,20 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
         And I capture the page screenshot
 
         Examples:
-            | Search_Queries              | Advanced_Filters      |
-            | Existing_QA_User_First_Name | Advanced_Filter_One   |
-            | Existing_QA_User_Last_Name  | Advanced_Filter_Two   |
-            | Existing_QA_User_Email      | Advanced_Filter_Three |
-            | Existing_QA_User_First_Name | Advanced_Filter_Four  |
-            | Existing_QA_User_First_Name | Advanced_Filter_Five  |
-            | Existing_QA_User_First_Name | Advanced_Filter_Six   |
-            | Existing_QA_User_First_Name | Advanced_Filter_Seven |
-            | Existing_QA_User_First_Name | Advanced_Filter_Eight |
-            | Existing_QA_User_First_Name | Advanced_Filter_Nine  |
-            | Existing_QA_User_First_Name | Advanced_Filter_Ten   |
-            | Empty_Search_Data           | Advanced_Filter_One   |
+            | Search_Queries              | Advanced_Filters                              |
+            | Existing_QA_User_First_Name | Advanced_Filter_One                           |
+            | Existing_QA_User_Last_Name  | Advanced_Filter_Two                           |
+            | Existing_QA_User_Email      | Advanced_Filter_Three                         |
+            | Existing_QA_User_First_Name | Advanced_Filter_Four                          |
+            | Existing_QA_User_First_Name | Advanced_Filter_Five                          |
+            | Existing_QA_User_First_Name | Advanced_Filter_Six                           |
+            | Existing_QA_User_First_Name | Advanced_Filter_Seven                         |
+            | Existing_QA_User_First_Name | Advanced_Filter_Eight                         |
+            | Existing_QA_User_First_Name | Advanced_Filter_Nine                          |
+            | Existing_QA_User_First_Name | Advanced_Filter_Ten                           |
+            | Empty_Search_Data           | Advanced_Filter_One                           |
+            | Empty_Search_Data           | Advanced_Filter_Last_Logged_In_From_Date_Only |
+            | Empty_Search_Data           | Advanced_Filter_Last_Logged_In_To_Date_Only   |
 
     @VerifySearchButtonClickAndAdvancedFilterManageUser
     Scenario Outline: Verify the user is able to view the list of users by entering valid first name, then clicking on 'Search' button and then selecting advanced filters and clicking the 'Apply filters' button
@@ -93,8 +95,7 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Advanced_Filters                            | Field_Error_Message             |
             | Advanced_Filter_Last_Logged_In_Invalid_Date | Field_Error_Date_Last_Logged_In |
 
-    # defect need to raised
-    @VerifyNoResultsFoundInvalidSearchAloneManageUser
+    @VerifyNoResultsFoundInvalidSearchAloneManageUser @KNOWN-DEFECT-RSP-4363
     Scenario: Verify the user can see no matching results found message on clicking search button with invalid user name
         When I enter '<Search_Queries>' into the search field for manage users page
         And I capture the page screenshot
@@ -106,8 +107,7 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Search_Queries         | No_Results_Found           |
             | Non_Existant_User_Data | No_Matching_Search_Results |
 
-    # defect need to raised
-    @VerifyNoResultsFoundInvalidSearchAdvancedFiltersManageUser
+    @VerifyNoResultsFoundInvalidSearchAdvancedFiltersManageUser @KNOWN-DEFECT-RSP-4363
     Scenario: Verify the user can see no matching results found message on click on apply filter button with invalid filter/search criteria
         When I enter '<Search_Queries>' into the search field for manage users page
         And I capture the page screenshot
@@ -123,7 +123,7 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Non_Existant_User_Data | Advanced_Filter_One | No_Matching_Search_Results |
 
 
-    @jsDisabled @VerifyHintLabelForSelectedCountryCheckboxAdvancedFiltersManageUser @Test
+    @jsDisabled @VerifyHintLabelForSelectedCountryCheckboxAdvancedFiltersManageUser
     Scenario: When javascript disabled verify the hint text for country advanced filters when user select multiple checkboxes
         And I select advanced filters in the manage users page using '<Advanced_Filters>'
         And I click the 'Apply_filters' button on the 'Manage_Users_Page'
@@ -139,8 +139,9 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Advanced_Filter_Seven               |
             | Advanced_Filter_Nine                |
 
-    @VerifyHintTextForAdvanceFiltersManageUsers @Test
+    @rsp-4273  @VerifyHintTextForAdvanceFiltersManageUsers
     Scenario: Validate hint labels for advanced filters in mange users page
+        And I click the 'Advanced_Filter' link on the 'Manage_Users_Page'
         And I expand the chevrons for '<Advanced_Filters>' in manage users page
         And I capture the page screenshot
         And I can see the '<Advanced_Filters_Labels>' ui labels in manage users page
@@ -148,7 +149,7 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Advanced_Filters    | Advanced_Filters_Labels      |
             | Advanced_Filter_One | Advanced_Filters_Hint_Labels |
 
-    @rsp-4273 @jsEnabled @VerifyHintLabelForSelectedCheckboxAdvancedFilters  @Test
+    @rsp-4273 @jsEnabled @VerifyHintLabelForSelectedCheckboxAdvancedFilters
     Scenario Outline: When javascript enabled verify the hint text for advanced filters when user select multiple checkboxes
         And I select advanced filters in the manage users page using '<Advanced_Filters>'
         And I capture the page screenshot
@@ -162,10 +163,11 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Advanced_Filter_Nine                |
 
 
-    @rsp-4273 @jsDisabled @VerifyHintLabelForSelectedCheckboxAdvancedFilters @Test
+    @rsp-4273 @jsDisabled @VerifyHintLabelForSelectedCheckboxAdvancedFilters
     Scenario Outline: When javascript disabled verify the hint text for advanced filters when user select multiple checkboxes
         And I select advanced filters in the manage users page using '<Advanced_Filters>'
         And I click the 'Apply_filters' button on the 'Manage_Users_Page'
+        And I click the 'Advanced_Filter' link on the 'Manage_Users_Page'
         And I expand the chevrons for '<Advanced_Filters>' in manage users page
         And I capture the page screenshot
         And I verify the hint text based on the '<Advanced_Filters>' for manage users page
@@ -176,17 +178,6 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Advanced_Filter_Three               |
             | Advanced_Filter_Seven               |
             | Advanced_Filter_Nine                |
-
-    @rsp-4273 @jsDisabled @VerifyHintLabelForSelectedCheckboxAdvancedFilters @Test
-    Scenario Outline: When javascript disabled verify the hint text for advanced filters when user does n't select any checkboxes
-        And I click the 'Advanced_Filter' link on the 'Manage_Users_Page'
-        And I expand the chevrons for '<Advanced_Filters>' in manage users page
-        And I capture the page screenshot
-        And I verify the hint text based on the '<Advanced_Filters>' for manage users page
-        Examples:
-            | Advanced_Filters                    |
-            | Advanced_Filter_No_Country_Selected |
-
 
     @ValidateClearAllFilters
     Scenario: Validate clear all filters removes all active filters in mange users page
@@ -200,8 +191,10 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
         Then I can see the selected filters '<Advanced_Filters>' are removed from active filters for manage users page
 
         Examples:
-            | Advanced_Filters    |
-            | Advanced_Filter_One |
+            | Advanced_Filters                              |
+            | Advanced_Filter_One                           |
+            | Advanced_Filter_Last_Logged_In_From_Date_Only |
+            | Advanced_Filter_Last_Logged_In_To_Date_Only   |
 
     @RemoveAllActiveFiltersOneByOne
     Scenario Outline: Verify the user can remove all the selected filters one by one and the search results update accordingly
