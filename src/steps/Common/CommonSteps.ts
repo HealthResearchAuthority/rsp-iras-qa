@@ -38,6 +38,7 @@ When(
       searchAddUserReviewBodyPage,
       myResearchProjectsPage,
       searchModificationsPage,
+      modificationsReadyToAssignPage,
     },
     page: string
   ) => {
@@ -77,6 +78,9 @@ When(
         break;
       case 'Search_Modifications_Page':
         await searchModificationsPage.assertOnSearchModificationsPage();
+        break;
+      case 'Modifications_Tasklist_Page':
+        await modificationsReadyToAssignPage.assertOnModificationsReadyToAssignPage();
         break;
       default:
         throw new Error(`${page} is not a valid option`);
@@ -190,7 +194,6 @@ Given(
       'Manage_Users_Page',
       'Manage_Review_Bodies_Page',
     ]);
-
     if (pageKey === 'Progress_Bar') {
       await commonItemsPage.qSetProgressBarStageLink.getByText(linkValue, { exact: true }).click();
     } else if (pageKey === 'Check_Create_User_Profile_Page' && linkKey === 'Back') {
@@ -645,7 +648,6 @@ When(
     }
   }
 );
-
 Then(
   'the system displays no results found message if there is no {string} on the system that matches the search criteria',
   async (
@@ -710,6 +712,7 @@ Given(
       reviewBodyProfilePage,
       myResearchProjectsPage,
       searchModificationsPage,
+      modificationsReadyToAssignPage,
     },
     page: string
   ) => {
@@ -750,6 +753,10 @@ Given(
       case 'Search_Modifications_Page':
         await searchModificationsPage.goto();
         await searchModificationsPage.assertOnSearchModificationsPage();
+        break;
+      case 'Modifications_Tasklist_Page':
+        await modificationsReadyToAssignPage.goto();
+        await modificationsReadyToAssignPage.assertOnModificationsReadyToAssignPage();
         break;
       default:
         throw new Error(`${page} is not a valid option`);

@@ -52,18 +52,10 @@ When(
 
 Then(
   'I can see the {string} ui labels in search modifications page',
-  async ({ searchModificationsPage, commonItemsPage }, datasetName: string) => {
+  async ({ searchModificationsPage }, datasetName: string) => {
     const dataset = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[datasetName];
-    const hintLabel = await commonItemsPage.getCheckboxHintLabel();
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        if (key === 'lead_nation_checkbox') {
-          expect(await searchModificationsPage.lead_nation_checkbox_selected_hint_label.textContent()).toBe(hintLabel);
-        } else if (key === 'modification_type_checkbox') {
-          expect(await searchModificationsPage.modification_type_checkbox_selected_hint_label.textContent()).toBe(
-            hintLabel
-          );
-        }
         await expect(searchModificationsPage[key].getByText(dataset[key])).toBeVisible();
       }
     }
@@ -109,6 +101,16 @@ Then(
           ).toBe(
             searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page
               .Advanced_Filters_Hint_Labels.modification_type_checkbox_hint_label
+          );
+        } else if (key === 'date_modification_submitted_from_day_text') {
+          expect(await searchModificationsPage.date_modification_submitted_from_date_help_text.textContent()).toBe(
+            searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page
+              .date_modification_submitted_from_date_help_text
+          );
+        } else if (key === 'date_modification_submitted_to_day_text') {
+          expect(await searchModificationsPage.date_modification_submitted_to_date_help_text.textContent()).toBe(
+            searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page
+              .date_modification_submitted_to_date_help_text
           );
         }
       }
