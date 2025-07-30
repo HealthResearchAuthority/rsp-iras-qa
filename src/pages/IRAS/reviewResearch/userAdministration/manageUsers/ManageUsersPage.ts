@@ -1,7 +1,11 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as linkTextData from '../../../../../resources/test_data/common/link_text_data.json';
 import * as manageUsersPageTestData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageUsers/manage_users_page_data.json';
-import { confirmStringNotNull, returnDataFromJSON } from '../../../../../utils/UtilFunctions';
+import {
+  confirmStringNotNull,
+  convertTwelveHrToTwentyFourHr,
+  returnDataFromJSON,
+} from '../../../../../utils/UtilFunctions';
 import CreateUserProfilePage from './CreateUserProfilePage';
 
 //Declare Page Objects
@@ -239,24 +243,14 @@ export default class ManageUsersPage {
     const sortedListAsStrings: string[] = [];
     const datesTimesMap = lastLoggedInVals.map((vals) => {
       if (!vals) {
-        const [day, month, year, arr] = '';
-        return [year, month, day, arr];
-      }
-      const [dates, times] = vals.split('at');
-      const [day, month, year] = dates.split(' ');
-      const arr = times.trim().split(':');
-      const isAM = arr[1].includes('am');
-      if (isAM) {
-        arr[0] = arr[0].padStart(2, '0');
-        arr[1] = arr[1].replace('am', '');
-        if (arr[0] === '12') arr[0] = '00';
+        const [day, month, year, time] = '';
+        return [year, month, day, time];
       } else {
-        arr[0] = (+arr[0] + 12).toString();
-        arr[1] = arr[1].replace('pm', '');
-        if (arr[0] === '24') arr[0] = '12';
+        const [dates, times] = vals.split('at');
+        const [day, month, year] = dates.split(' ');
+        const time = convertTwelveHrToTwentyFourHr(times);
+        return [year, month, day, time.join(':')];
       }
-      return [year, month, day, arr.join(':')];
-      //Add 12hr to 24hr time conversion above to util function
       //Add last page sort test steps in all sort stories - expect fail due to defect
       //Add regression
       //Re-run access test on MU Page
