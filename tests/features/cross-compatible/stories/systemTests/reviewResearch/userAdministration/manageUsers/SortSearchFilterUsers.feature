@@ -28,6 +28,3 @@ Feature: User Administration: Sort, search and filter the manage users list
       | Email_Address  | email address  | ascending    | descending     |
       | Status         | status         | ascending    | descending     |
       | Last_Logged_In | last logged in | ascending    | descending     |
-
-# Run tests + add to sharepoint + update tasks and tickets
-# Re-run access test on MU Page - done add report to Sharepoint
