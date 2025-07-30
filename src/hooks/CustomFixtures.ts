@@ -51,7 +51,7 @@ import ParticipatingOrganisationsPage from '../pages/IRAS/makeChanges/modificati
 import SelectAreaOfChangePage from '../pages/IRAS/makeChanges/modifications/SelectAreaOfChangePage';
 import SearchModificationsPage from '../pages/IRAS/reviewResearch/approvals/SearchModificationsPage';
 import ApprovalsPage from '../pages/IRAS/reviewResearch/approvals/ApprovalsPage';
-import ModificationsReadyToAssignPage from '../pages/IRAS/reviewResearch/receiveAmendments/ModificationsReadyToAssignPage';
+import ModificationsReadyToAssignPage from '../pages/IRAS/reviewResearch/approvals/ModificationsReadyToAssignPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
