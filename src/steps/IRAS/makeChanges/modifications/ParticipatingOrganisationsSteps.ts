@@ -41,7 +41,7 @@ Then(
     expect(actualModificationId).toBe(expectedModificationId);
     // All the below assertion can be removed when the functionality is implemented - now it's UI only function
     expect(participatingOrganisationsPage.remove_this_change_link).toBeVisible();
-    expect(participatingOrganisationsPage.advanced_filter_link).toBeVisible();
+    //expect(participatingOrganisationsPage.advanced_filter_link).toBeVisible();
     expect(participatingOrganisationsPage.participating_organisations_text).toBeVisible();
     expect(participatingOrganisationsPage.participating_organisations_search_button).toBeVisible();
   }

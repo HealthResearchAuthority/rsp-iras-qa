@@ -12,7 +12,7 @@ export default class MakeChangeParticipatingOrganisationsPage {
   readonly linkTextData: typeof linkTextData;
   readonly commonTestData: typeof commonTestData;
   readonly short_project_title_heading: Locator;
-  readonly pageHeading: Locator; // update locator name
+  readonly pageHeading: Locator;
   readonly iras_id_row: Locator;
   readonly iras_id_text: Locator;
   readonly short_project_title_text_row: Locator;
@@ -33,7 +33,8 @@ export default class MakeChangeParticipatingOrganisationsPage {
     this.commonTestData = commonTestData;
 
     //Locators
-    this.pageHeading = this.page.getByRole('heading', { level: 1 });
+    //this.pageHeading = this.page.getByRole('heading', { level: 1 });
+    this.pageHeading = this.page.locator('.govuk-heading-l');
 
     this.iras_id_row = this.page.getByText(participatingOrganisationsPageTestData.Label_Texts.iras_id_label);
     this.iras_id_text = this.iras_id_row.locator('..').locator('.govuk-summary-list__value');

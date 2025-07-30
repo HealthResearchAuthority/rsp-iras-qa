@@ -560,6 +560,12 @@ When('the default page size should be twenty', async ({ commonItemsPage }) => {
   expect(rowCountActual - 1).toBe(rowCountExpected);
 });
 
+When('the default page size should be ten', async ({ commonItemsPage }) => {
+  const rowCountActual = await commonItemsPage.tableRows.count();
+  const rowCountExpected = parseInt(commonItemsPage.commonTestData.default_page_size_modification, 10);
+  expect(rowCountActual - 1).toBe(rowCountExpected);
+});
+
 Then(
   'the {string} button will be {string} to the user',
   async ({ commonItemsPage }, linkLabel: string, availabilityVal: string) => {
