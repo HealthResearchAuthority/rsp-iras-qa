@@ -32,6 +32,7 @@ When(
       manageUsersPage,
       searchAddUserReviewBodyPage,
       myResearchProjectsPage,
+      searchModificationsPage,
       modificationsReadyToAssignPage,
     },
     page: string
@@ -70,7 +71,10 @@ When(
       case 'My_Research_Page':
         await myResearchProjectsPage.assertOnMyResearchProjectsPage();
         break;
-      case 'Modifications_tasklist_Page':
+      case 'Search_Modifications_Page':
+        await searchModificationsPage.assertOnSearchModificationsPage();
+        break;
+      case 'Modifications_Tasklist_Page':
         await modificationsReadyToAssignPage.assertOnModificationsReadyToAssignPage();
         break;
       default:
@@ -408,6 +412,8 @@ Then(
       createReviewBodyPage,
       editReviewBodyPage,
       reviewYourAnswersPage,
+      selectAreaOfChangePage,
+      participatingOrganisationsPage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
@@ -448,6 +454,14 @@ Then(
       errorMessageFieldDataset =
         reviewYourAnswersPage.reviewYourAnswersPageTestData[errorMessageFieldAndSummaryDatasetName];
       page = reviewYourAnswersPage;
+    } else if (pageKey == 'Select_Area_Of_Change_Page') {
+      errorMessageFieldDataset =
+        selectAreaOfChangePage.selectAreaOfChangePageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = selectAreaOfChangePage;
+    } else if (pageKey == 'Participating_Organisations_Page') {
+      errorMessageFieldDataset =
+        participatingOrganisationsPage.participatingOrganisationsPageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = participatingOrganisationsPage;
     }
     let allSummaryErrorExpectedValues: any;
     let summaryErrorActualValues: any;
@@ -488,6 +502,10 @@ Then(
           }
         } else {
           fieldErrorMessagesActualValues = await commonItemsPage.getFieldErrorMessages(key, page);
+          if (fieldErrorMessagesActualValues.includes('Error: ')) {
+            fieldErrorMessagesActualValues = fieldErrorMessagesActualValues.replace('Error: ', '');
+          }
+
           expect(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
           const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
           await expect(element).toBeInViewport();
@@ -656,6 +674,7 @@ Given(
       userProfilePage,
       reviewBodyProfilePage,
       myResearchProjectsPage,
+      searchModificationsPage,
       modificationsReadyToAssignPage,
     },
     page: string
@@ -694,8 +713,13 @@ Given(
         await myResearchProjectsPage.goto();
         await myResearchProjectsPage.assertOnMyResearchProjectsPage();
         break;
-      case 'Modifications_tasklist_Page':
+      case 'Search_Modifications_Page':
+        await searchModificationsPage.goto();
+        await searchModificationsPage.assertOnSearchModificationsPage();
+        break;
+      case 'Modifications_Tasklist_Page':
         await modificationsReadyToAssignPage.goto();
+        await modificationsReadyToAssignPage.assertOnModificationsReadyToAssignPage();
         break;
       default:
         throw new Error(`${page} is not a valid option`);
