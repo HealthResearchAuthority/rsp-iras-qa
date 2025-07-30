@@ -251,8 +251,6 @@ export default class ManageUsersPage {
         const time = convertTwelveHrToTwentyFourHr(times);
         return [year, month, day, time.join(':')];
       }
-      //Add regression
-      //Re-run access test on MU Page
     });
 
     for (const entry of datesTimesMap.entries()) {
