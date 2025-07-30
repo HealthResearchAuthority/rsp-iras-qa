@@ -89,7 +89,7 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
         And I capture the page screenshot
         And I click the 'Apply_filters' button on the 'Manage_Users_Page'
         And I capture the page screenshot
-        Then I validate '<Field_Error_Message>' displayed on 'Manage_Users_Page' in advanced filters
+        Then I validate '<Field_Error_Message>' displayed on advanced filters in manage users page
         And I capture the page screenshot
         Examples:
             | Advanced_Filters                            | Field_Error_Message             |

@@ -527,7 +527,7 @@ Then(
 );
 
 Then(
-  'I validate {string} displayed on {string} in advanced filters',
+  'I validate {string} displayed on advanced filters in manage users page',
   async ({ manageUsersPage }, errorMessageFieldDatasetName: string) => {
     const fieldErrorMessagesExpected =
       manageUsersPage.manageUsersPageTestData.Error_Message_Field_Dataset[errorMessageFieldDatasetName];
