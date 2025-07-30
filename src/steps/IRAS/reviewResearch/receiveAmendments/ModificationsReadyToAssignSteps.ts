@@ -1,35 +1,36 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../hooks/CustomFixtures';
+
 const { Then } = createBdd(test);
 
-Then(
-  'I can now see a table of search results for modifications received for approval',
-  async ({ searchModificationsPage, commonItemsPage }) => {
-    await expect(searchModificationsPage.results_table).toBeVisible();
-    expect(await commonItemsPage.tableBodyRows.count()).toBeGreaterThan(0);
-  }
-);
+Then('I can see the modifications ready to assign page', async ({ modificationsReadyToAssignPage }) => {
+  await modificationsReadyToAssignPage.assertOnModificationsReadyToAssignPage();
+});
 
 Then(
-  'I can see the list of modifications received for approval is sorted by {string} order of the {string}',
-  async ({ searchModificationsPage, commonItemsPage }, sortDirection: string, sortField: string) => {
+  'I can see the tasklist of modifications ready to assign is sorted by {string} order of the {string}',
+  async (
+    { modificationsReadyToAssignPage, searchModificationsPage, commonItemsPage },
+    sortDirection: string,
+    sortField: string
+  ) => {
     let sortedList: string[];
     let columnIndex: number;
     switch (sortField.toLowerCase()) {
       case 'modification id':
-        columnIndex = 0;
-        break;
-      case 'short project title':
         columnIndex = 1;
         break;
-      case 'modification type':
+      case 'short project title':
         columnIndex = 2;
         break;
-      case 'chief investigator':
+      case 'modification type':
         columnIndex = 3;
         break;
-      case 'lead nation':
+      case 'date submitted':
         columnIndex = 4;
+        break;
+      case 'days since submission':
+        columnIndex = 5;
         break;
       default:
         throw new Error(`${sortField} is not a valid option`);
@@ -37,6 +38,10 @@ Then(
     const actualList = await searchModificationsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
     if (sortField.toLowerCase() == 'modification id') {
       sortedList = await searchModificationsPage.sortModificationIdListValues(actualList, sortDirection);
+    } else if (sortField.toLowerCase() == 'date submitted') {
+      sortedList = await modificationsReadyToAssignPage.sortDateSubmittedListValues(actualList, sortDirection);
+    } else if (sortField.toLowerCase() == 'days since submission') {
+      sortedList = await modificationsReadyToAssignPage.sortDaysSinceSubmittedListValues(actualList, sortDirection);
     } else if (sortDirection.toLowerCase() == 'ascending') {
       sortedList = [...actualList].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
     } else {
