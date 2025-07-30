@@ -63,6 +63,16 @@ Then(
           expect(await searchModificationsPage.modification_type_checkbox_selected_hint_label.textContent()).toBe(
             hintLabel
           );
+        } else if (key === 'date_modification_submitted_from_day_text') {
+          expect(await searchModificationsPage.date_modification_submitted_from_date_help_text.textContent()).toBe(
+            searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page
+              .date_modification_submitted_from_date_help_text
+          );
+        } else if (key === 'date_modification_submitted_to_day_text') {
+          expect(await searchModificationsPage.date_modification_submitted_to_date_help_text.textContent()).toBe(
+            searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page
+              .date_modification_submitted_to_date_help_text
+          );
         }
         await expect(searchModificationsPage[key].getByText(dataset[key])).toBeVisible();
       }
