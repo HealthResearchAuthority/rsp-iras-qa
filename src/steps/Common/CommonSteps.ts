@@ -182,11 +182,7 @@ Then('I can see a {string} button on the {string}', async ({ commonItemsPage }, 
 
 Given(
   'I click the {string} link on the {string}',
-  async (
-    { commonItemsPage, checkCreateUserProfilePage, searchModificationsPage },
-    linkKey: string,
-    pageKey: string
-  ) => {
+  async ({ commonItemsPage, checkCreateUserProfilePage }, linkKey: string, pageKey: string) => {
     const linkValue = commonItemsPage.linkTextData[pageKey][linkKey];
     const noOfLinksFound = await commonItemsPage.govUkLink.getByText(linkValue).count();
     if (pageKey === 'Progress_Bar') {
@@ -210,7 +206,7 @@ Given(
     ) {
       await commonItemsPage.govUkLink.getByText(linkValue).click();
     } else if (pageKey === 'Search_Modifications_Page' && linkKey === 'Advanced_Filter') {
-      await searchModificationsPage.clickAdvancedFilterChevron(); //work around for now >> to click on Advanced_Filter link
+      await commonItemsPage.clickAdvancedFilterChevron(); //work around for now >> to click on Advanced_Filter link
       // This if condition need to be removed later
     } else if (noOfLinksFound > 1) {
       await commonItemsPage.govUkLink.getByText(linkValue).first().click();
@@ -644,57 +640,6 @@ When(
   }
 );
 
-// Then(
-//   'the system displays no results found message if there is no {string} on the system that matches the search criteria',
-//   async (
-//     { commonItemsPage, userListReviewBodyPage, manageUsersPage, manageReviewBodiesPage, searchModificationsPage },
-//     entityType: string
-//   ) => {
-//     const filteredSearchResults = await userListReviewBodyPage.getFilteredSearchResultsBeforeSearch(commonItemsPage);
-//     expect(await commonItemsPage.tableRows.count()).toBe(0);
-//     expect(filteredSearchResults).toEqual([]);
-//     let headingLocator: Locator, guidanceLocator: Locator, expectedHeading: any, expectedGuidance: any;
-//     if (entityType === 'user') {
-//       headingLocator = manageUsersPage.no_results_heading;
-//       guidanceLocator = manageUsersPage.no_results_guidance_text;
-//       expectedHeading = manageUsersPage.manageUsersPageTestData.Manage_Users_Page.no_results_heading;
-//       expectedGuidance = manageUsersPage.manageUsersPageTestData.Manage_Users_Page.no_results_guidance_text;
-//       await expect(headingLocator).toHaveText(expectedHeading);
-//       await expect(guidanceLocator).toHaveText(expectedGuidance);
-//     } else if (entityType === 'review body') {
-//       headingLocator = manageReviewBodiesPage.no_results_heading;
-//       guidanceLocator = manageReviewBodiesPage.no_results_guidance_text;
-//       expectedHeading = manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.no_results_heading;
-//       expectedGuidance =
-//         manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.no_results_guidance_text;
-//       await expect(headingLocator).toHaveText(expectedHeading);
-//       await expect(guidanceLocator).toHaveText(expectedGuidance);
-//     } else if (entityType === 'modification record') {
-//       const expectedResultCount =
-//         searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.result_count_heading;
-//       const actualResultCount = confirmStringNotNull(await searchModificationsPage.result_count.textContent());
-//       expect('0' + expectedResultCount).toBe(actualResultCount);
-//       headingLocator = searchModificationsPage.no_results_heading;
-//       guidanceLocator = searchModificationsPage.no_results_guidance_text;
-//       expectedHeading =
-//         searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.no_results_heading;
-//       expectedGuidance =
-//         searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.no_results_guidance_text;
-//       await expect(headingLocator).toHaveText(expectedHeading);
-//       expect(confirmStringNotNull(await headingLocator.textContent())).toBe(expectedHeading);
-//       await expect(guidanceLocator).toHaveText(expectedGuidance);
-//       expect(confirmStringNotNull(await guidanceLocator.textContent())).toBe(expectedGuidance);
-//       const bulletPoints: string[] = await searchModificationsPage.getNoResultsBulletPoints();
-//       const bulletPointsActual = bulletPoints.flat().join(', ');
-//       const bulletPointsExpected =
-//         searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.no_results_bullet_points
-//           .flat()
-//           .join(', ');
-//       expect(bulletPointsActual).toEqual(bulletPointsExpected);
-//     }
-//   }
-// );
-
 Then(
   'the system displays no results found message if there is no {string} on the system that matches the search criteria',
   async (
@@ -723,10 +668,10 @@ Then(
     } else if (entityType === 'modification record') {
       const expectedResultCount =
         searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.result_count_heading;
-      const actualResultCount = confirmStringNotNull(await searchModificationsPage.result_count.textContent());
+      const actualResultCount = confirmStringNotNull(await commonItemsPage.result_count.textContent());
       expect('0' + expectedResultCount).toBe(actualResultCount);
-      headingLocator = searchModificationsPage.no_results_heading;
-      guidanceLocator = searchModificationsPage.no_results_guidance_text;
+      headingLocator = commonItemsPage.no_results_heading;
+      guidanceLocator = commonItemsPage.no_results_guidance_text;
       expectedHeading =
         searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.no_results_heading;
       expectedGuidance =
@@ -735,7 +680,7 @@ Then(
       expect(confirmStringNotNull(await headingLocator.textContent())).toBe(expectedHeading);
       await expect(guidanceLocator).toHaveText(expectedGuidance);
       expect(confirmStringNotNull(await guidanceLocator.textContent())).toBe(expectedGuidance);
-      const bulletPoints: string[] = await searchModificationsPage.getNoResultsBulletPoints();
+      const bulletPoints: string[] = await commonItemsPage.getNoResultsBulletPoints();
       const bulletPointsActual = bulletPoints.flat().join(', ');
       const bulletPointsExpected =
         searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.no_results_bullet_points
@@ -1106,9 +1051,6 @@ Then(
       const startEndPagesMap = await commonItemsPage.getStartEndPages(currentPage, pageSize, totalItems);
       const start = startEndPagesMap.get('start');
       const end = startEndPagesMap.get('end');
-      // await expect(commonItemsPage.pagination_results).toHaveText(
-      //   `Showing ${start} to ${end} of ${totalItems} results`
-      // );
       const rowCount = await commonItemsPage.getItemsPerPage();
       expect(rowCount - 1).toBe(parseInt(`${end}`, 10) - parseInt(`${start}`, 10) + 1);
       const itemsMap = await commonItemsPage.getPaginationValues();
@@ -1118,7 +1060,6 @@ Then(
       const visiblePages: any = visiblePagesMap.get('visiblePages');
       const allVisibleItems: any = itemsMap.get('allVisibleItems');
       if (totalPages <= 7) {
-        // expect(visiblePages).toEqual(allVisibleItems);
         expect(visiblePages.map(String)).toEqual(allVisibleItems);
         expect(ellipsisIndices.length).toBe(0);
       }

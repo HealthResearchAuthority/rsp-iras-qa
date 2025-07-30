@@ -153,10 +153,10 @@ When(
 
 When(
   'I enter {string} into the search field for manage users page',
-  async ({ commonItemsPage, manageUsersPage }, datasetName: string) => {
+  async ({ manageUsersPage }, datasetName: string) => {
     const dataset =
       manageUsersPage.manageUsersPageTestData.Search_For_Users.Search_Queries_Advanced_Filter[datasetName];
-    await commonItemsPage.search_text.fill(dataset['search_input_text']);
+    await manageUsersPage.user_search_text.fill(dataset['search_input_text']);
   }
 );
 
@@ -550,40 +550,3 @@ Then(
     }
   }
 );
-
-// When(
-//   'I expand the chevrons for {string} in manage users page',
-//   async ({ manageUsersPage }, filterDatasetName: string) => {
-//     const dataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[filterDatasetName];
-//     for (const key in dataset) {
-//       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-//         await manageUsersPage.clickFilterChevronUsers(dataset, key, manageUsersPage);
-//       }
-//     }
-//   }
-// );
-
-// Then(
-//   'I verify the hint text based on the {string} for manage users page',
-//   async ({ manageUsersPage }, filterDatasetName: string) => {
-//     const dataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[filterDatasetName];
-//     for (const key in dataset) {
-//       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-//         if (key === 'country_checkbox') {
-//           const numberOfCheckboxesSelected = dataset[key].length;
-//           const hintLabel =
-//             numberOfCheckboxesSelected +
-//             ' ' +
-//             manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List
-//               .selected_checkboxes_hint_label;
-//           expect(confirmStringNotNull(await manageUsersPage.country_checkbox_selected_hint_label.textContent())).toBe(
-//             hintLabel
-//           );
-//           expect(confirmStringNotNull(await manageUsersPage.country_checkbox_hint_label.textContent())).toBe(
-//             manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Advanced_Filters_Hint_Labels.country_hint_label
-//           );
-//         }
-//       }
-//     }
-//   }
-// );

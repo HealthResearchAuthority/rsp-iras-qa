@@ -11,6 +11,7 @@ export default class ManageUsersPage {
   readonly linkTextData: typeof linkTextData;
   private _unique_email: string;
   readonly page_heading: Locator;
+  readonly search_hint_text: Locator;
   readonly back_button: Locator;
   readonly add_new_users_record_link: Locator;
   readonly first_name_column_header: Locator;
@@ -69,6 +70,7 @@ export default class ManageUsersPage {
   readonly date_last_logged_in_error_message: Locator;
   readonly country_checkbox_selected_hint_label: Locator;
   readonly country_checkbox_hint_label: Locator;
+  readonly user_search_text: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -80,6 +82,10 @@ export default class ManageUsersPage {
     this.page_heading = this.page
       .getByRole('heading')
       .getByText(this.manageUsersPageTestData.Manage_Users_Page.page_heading);
+    this.search_hint_text = this.page.getByText(this.manageUsersPageTestData.Manage_Users_Page.search_hint_text);
+    this.user_search_text = this.page.getByLabel(this.manageUsersPageTestData.Manage_Users_Page.user_search_box_label, {
+      exact: true,
+    });
     this.view_edit_link = this.page.getByText('View/Edit').first();
     this.users_list_rows = this.page.locator('table tbody tr');
     this.back_button = this.page.getByText('Back');
@@ -266,6 +272,7 @@ export default class ManageUsersPage {
   async assertOnManageUsersPage() {
     await expect(this.page_heading).toBeVisible();
     expect(await this.page.title()).toBe(this.manageUsersPageTestData.Manage_Users_Page.title);
+    await expect(this.search_hint_text).toBeVisible();
   }
 
   async goto(pageSize?: string, searchQuery?: string) {
