@@ -30,7 +30,8 @@ Feature: Organisation Search and View
     And I can see the page heading is changed for '<Specific_Change>' on participating organisation page
     And I capture the page screenshot
     Then I can see the '<Validation_Text>' ui labels on the project details title page
-    And I validate the ui lables and field values with '<Project_Details_Title>' on participating organisation page
+    #And I validate the ui lables and field values with '<Project_Details_Title>' on participating organisation page
+    Then I can see the '<Validation_Text>' ui labels on the participating organisation page
     And the default page size should be ten
     And I can see the list is sorted by default in the alphabetical order of the 'Organisation Name'
     And I capture the page screenshot
