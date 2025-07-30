@@ -8,7 +8,7 @@ Then(
   async ({ commonItemsPage, plannedEndDatePage }, datasetName: string) => {
     const dataset = plannedEndDatePage.plannedEndDatePageTestData[datasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         await commonItemsPage.fillUIComponent(dataset, key, plannedEndDatePage);
       }
     }
@@ -27,7 +27,7 @@ Then(
     const errorMessageSummaryDataset = plannedEndDatePage.plannedEndDatePageTestData[errorMessageSummaryDatasetName];
     const invalidFieldsDataset = plannedEndDatePage.plannedEndDatePageTestData[invalidFieldsDatasetName];
     for (const key in invalidFieldsDataset) {
-      if (Object.prototype.hasOwnProperty.call(invalidFieldsDataset, key)) {
+      if (Object.hasOwn(invalidFieldsDataset, key)) {
         await commonItemsPage.validateErrorMessage(
           errorMessageFieldDataset,
           errorMessageSummaryDataset,

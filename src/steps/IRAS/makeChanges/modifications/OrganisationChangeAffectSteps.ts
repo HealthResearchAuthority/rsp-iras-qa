@@ -25,7 +25,7 @@ Then(
   async ({ commonItemsPage, organisationChangeAffectPage }, datasetName: string) => {
     const dataset = organisationChangeAffectPage.organisationChangeAffectPageTestData[datasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         await commonItemsPage.fillUIComponent(dataset, key, organisationChangeAffectPage);
       }
     }
