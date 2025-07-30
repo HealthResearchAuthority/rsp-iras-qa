@@ -150,7 +150,7 @@ When(
     const dataset = manageReviewBodiesPage.manageReviewBodiesPageData.Advanced_Filters[filterDatasetName];
     await commonItemsPage.advanced_filter_chevron.click();
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         await manageReviewBodiesPage[key + '_chevron'].click();
         await commonItemsPage.fillUIComponent(dataset, key, manageReviewBodiesPage);
       }
@@ -163,7 +163,7 @@ Then(
   async ({ manageReviewBodiesPage, commonItemsPage }, filterDatasetName: string) => {
     const dataset = manageReviewBodiesPage.manageReviewBodiesPageData.Advanced_Filters[filterDatasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         if (key === 'country_checkbox') {
           for (const filterLabel of dataset[key]) {
             const activeLabel =
@@ -210,7 +210,7 @@ When(
           expect(organisationNameActual.toLowerCase().includes(organisationNameExpected.toLowerCase()));
         }
         for (const key in filterDataset) {
-          if (Object.prototype.hasOwnProperty.call(filterDataset, key)) {
+          if (Object.hasOwn(filterDataset, key)) {
             if (key === 'country_checkbox') {
               const countryFilterLabelsExpected = filterDataset[key];
               expect(
@@ -248,7 +248,7 @@ When(
           await commonItemsPage.tableRows.nth(j).getByRole('cell').nth(2).textContent()
         );
         for (const key in filterDataset) {
-          if (Object.prototype.hasOwnProperty.call(filterDataset, key)) {
+          if (Object.hasOwn(filterDataset, key)) {
             if (key === 'country_checkbox') {
               const countryFilterLabelsExpected = filterDataset[key];
               expect(
@@ -274,7 +274,7 @@ Then(
   async ({ manageReviewBodiesPage }, filterDatasetName: string) => {
     const dataset = manageReviewBodiesPage.manageReviewBodiesPageData.Advanced_Filters[filterDatasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         if (key === 'country_checkbox') {
           const numberOfCheckboxesSelected = dataset[key].length;
           const hintLabel =
@@ -294,7 +294,7 @@ Then(
     const dataset = manageReviewBodiesPage.manageReviewBodiesPageData.Advanced_Filters[filterDatasetName];
     await commonItemsPage.advanced_filter_chevron.click();
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         await manageReviewBodiesPage[key + '_chevron'].click();
       }
     }
@@ -306,7 +306,7 @@ Then(
   async ({ manageReviewBodiesPage }, datasetName: string) => {
     const dataset = manageReviewBodiesPage.manageReviewBodiesPageData[datasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         await expect(manageReviewBodiesPage[key].getByText(dataset[key])).toBeVisible();
       }
     }
@@ -318,7 +318,7 @@ Then(
   async ({ manageReviewBodiesPage, commonItemsPage }, filterDatasetName: string) => {
     const dataset = manageReviewBodiesPage.manageReviewBodiesPageData.Advanced_Filters[filterDatasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         if (key === 'country_checkbox') {
           for (const filterLabel of dataset[key]) {
             const activeLabel =
