@@ -883,3 +883,18 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
+
+  @axeAccessibilitySearchAndAdvancedFilterManageReviewBodies @SysAdminUser @axeAccessibilityManageReviewBodies
+  Scenario: Manage review bodies list page with advanced filter and search
+    Given I have navigated to the 'Manage_Review_Bodies_Page'
+    Then I can see the 'Manage_Review_Bodies_Page'
+    When I enter 'Existing_QA_Data_One' into the search field for manage review bodies page
+    And I select advanced filters in the manage review bodies page using 'Advanced_Filter_One'
+    And I click the 'Apply_filters' button on the 'Manage_Review_Bodies_Page'
+    Then I can see the selected filters 'Advanced_Filter_One' are displayed under active filters for manage review bodies page
+    And I can see the results matching the search 'Existing_QA_Data_One' and filter criteria 'Advanced_Filter_One' for manage review bodies page
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+

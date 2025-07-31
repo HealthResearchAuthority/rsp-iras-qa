@@ -106,7 +106,7 @@ Feature: Review Bodies - Advanced Filter and Search combinations in the Manage r
       | Organisation_Name | Advanced_Filters    | No_Results_Found           |
       | Non_Existant_Data | Advanced_Filter_One | No_Matching_Search_Results |
 
-  @rsp-3547 @jsEnabled @VerifyHintLabelForSelectedCountryCheckboxAdvancedFilters
+  @rsp-3547 @jsEnabled @VerifyHintLabelForSelectedCountryCheckboxAdvancedFilters @rsp-4273
   Scenario: When javascript enabled verify the hint text for country advanced filters when user select multiple checkboxes
     And I select advanced filters in the manage review bodies page using '<Advanced_Filters>'
     And I capture the page screenshot
@@ -120,7 +120,7 @@ Feature: Review Bodies - Advanced Filter and Search combinations in the Manage r
       | Advanced_Filter_Seven               |
       | Advanced_Filter_Nine                |
 
-  @rsp-3547 @jsDisabled @VerifyHintLabelForSelectedCountryCheckboxAdvancedFilters
+  @rsp-3547 @jsDisabled @VerifyHintLabelForSelectedCountryCheckboxAdvancedFilters @rsp-4273
   Scenario: When javascript disabled verify the hint text for country advanced filters when user select multiple checkboxes
     And I select advanced filters in the manage review bodies page using '<Advanced_Filters>'
     And I click the 'Apply_filters' button on the 'Manage_Review_Bodies_Page'
@@ -136,7 +136,7 @@ Feature: Review Bodies - Advanced Filter and Search combinations in the Manage r
       | Advanced_Filter_Seven               |
       | Advanced_Filter_Nine                |
 
-  @rsp-3547 @VerifyHintTextForAdvanceFilters
+  @rsp-3547 @VerifyHintTextForAdvanceFilters @rsp-4273
   Scenario: Validate hint labels for advanced filters in mange review body page
     And I expand the chevrons for '<Advanced_Filters>' in manage review bodies page
     And I capture the page screenshot
