@@ -908,12 +908,6 @@ export default class CommonItemsPage {
     let activeFiltersMap: any;
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        // if (
-        //   key === 'lead_nation_checkbox' ||
-        //   key === 'modification_type_checkbox' ||
-        //   key === 'country_checkbox' ||
-        //   key === 'participating_nation_checkbox'
-        // ) {
         if (key.endsWith('_checkbox')) {
           if (key === 'lead_nation_checkbox') {
             filterName = datasetLabels['lead_nation_label'];
@@ -957,7 +951,6 @@ export default class CommonItemsPage {
     let activeFiltersMap: any;
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        // if (key !== 'lead_nation_checkbox' && key !== 'modification_type_checkbox') {
         if (!key.endsWith('_checkbox')) {
           if (key === 'date_modification_submitted_from_day_text') {
             filterName = datasetLabels['date_modification_submitted_label'];
