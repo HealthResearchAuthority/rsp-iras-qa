@@ -65,6 +65,12 @@ export default class SearchModificationsPage {
   readonly modification_type_checkbox_selected_hint_label: Locator;
   readonly date_modification_submitted_from_date_error: Locator;
   readonly results_table: Locator;
+  readonly participating_nation_label: Locator;
+  readonly participating_nation_fieldset: Locator;
+  readonly participating_nation_checkbox: Locator;
+  readonly participating_nation_checkbox_chevron: Locator;
+  readonly participating_nation_checkbox_hint_label: Locator;
+  readonly participating_nation_checkbox_selected_hint_label: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -218,7 +224,6 @@ export default class SearchModificationsPage {
       .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.lead_nation_label, {
         exact: true,
       });
-
     this.modification_type_label = this.page
       .getByRole('heading', { level: 2 })
       .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.modification_type_label, {
@@ -253,6 +258,42 @@ export default class SearchModificationsPage {
     this.modification_type_checkbox_chevron = this.page
       .getByRole('heading')
       .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.modification_type_label, {
+        exact: true,
+      });
+    this.participating_nation_label = this.page
+      .getByRole('heading', { level: 2 })
+      .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.participating_nation_label, {
+        exact: true,
+      });
+    this.participating_nation_fieldset = this.participating_nation_label
+      .locator('..')
+      .locator('..')
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group', {
+        has: this.page.getByText(
+          this.searchModificationsPageTestData.Search_Modifications_Page.participating_nation_hint_text
+        ),
+      });
+    this.participating_nation_checkbox_hint_label = this.participating_nation_label
+      .locator('..')
+      .locator('..')
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group')
+      .getByText(
+        this.searchModificationsPageTestData.Search_Modifications_Page.Advanced_Filters_Hint_Labels
+          .participating_nation_checkbox_hint_label,
+        { exact: true }
+      );
+    this.participating_nation_checkbox_selected_hint_label = this.participating_nation_label
+      .locator('..')
+      .locator('..')
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group')
+      .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.selected_checkboxes_hint_label);
+    this.participating_nation_checkbox = this.participating_nation_fieldset.getByRole('checkbox');
+    this.participating_nation_checkbox_chevron = this.page
+      .getByRole('heading')
+      .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.participating_nation_label, {
         exact: true,
       });
     this.short_project_title_text_chevron = this.page

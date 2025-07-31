@@ -1,4 +1,4 @@
-@ReceiveAmendments @FrontStageUser @SystemTest @rsp-4011 @rsp-4016
+@ReceiveAmendments @FrontStageUser @SystemTest @rsp-4011 @rsp-4016 @rsp-4289 @KNOWN-DEFECT-RSP-4467
 Feature: Approvals - Advanced Filter and Search combinations in the Search modifications page
 
     Background:
@@ -493,16 +493,21 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         And I capture the page screenshot
         And I verify the hint text based on the '<Advanced_Filters>' for search modifications page
         Examples:
-            | Advanced_Filters                               |
-            | Advanced_Filter_No_Lead_Nation_Selected        |
-            | Advanced_Filter_One_Lead_Nation_Selected       |
-            | Advanced_Filter_Two_Lead_Nation_Selected       |
-            | Advanced_Filter_Three_Lead_Nation_Selected     |
-            | Advanced_Filter_Four_Lead_Nation_Selected      |
-            | Advanced_Filter_No_Modification_Type_Selected  |
-            | Advanced_Filter_One_Modification_Type_Selected |
-            | Advanced_Filter_Two_Modification_Type_Selected |
-            | Advanced_Filters_Nth                           |
+            | Advanced_Filters                                    |
+            | Advanced_Filter_No_Lead_Nation_Selected             |
+            | Advanced_Filter_One_Lead_Nation_Selected            |
+            | Advanced_Filter_Two_Lead_Nation_Selected            |
+            | Advanced_Filter_Three_Lead_Nation_Selected          |
+            | Advanced_Filter_Four_Lead_Nation_Selected           |
+            | Advanced_Filter_No_Modification_Type_Selected       |
+            | Advanced_Filter_One_Modification_Type_Selected      |
+            | Advanced_Filter_Two_Modification_Type_Selected      |
+            | Advanced_Filter_No_Participating_Nation_Selected    |
+            | Advanced_Filter_One_Participating_Nation_Selected   |
+            | Advanced_Filter_Two_Participating_Nation_Selected   |
+            | Advanced_Filter_Three_Participating_Nation_Selected |
+            | Advanced_Filter_Four_Participating_Nation_Selected  |
+            | Advanced_Filters_Nth                                |
 
     @jsDisabled @VerifyHintLabelForSelectedCheckboxAdvancedFilters @rsp-4167
     Scenario Outline: When javascript disabled verify the hint text for advanced filters when user select multiple checkboxes
@@ -512,14 +517,18 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         And I capture the page screenshot
         And I verify the hint text based on the '<Advanced_Filters>' for search modifications page
         Examples:
-            | Advanced_Filters                               |
-            | Advanced_Filter_One_Lead_Nation_Selected       |
-            | Advanced_Filter_Two_Lead_Nation_Selected       |
-            | Advanced_Filter_Three_Lead_Nation_Selected     |
-            | Advanced_Filter_Four_Lead_Nation_Selected      |
-            | Advanced_Filter_One_Modification_Type_Selected |
-            | Advanced_Filter_Two_Modification_Type_Selected |
-            | Advanced_Filters_Nth                           |
+            | Advanced_Filters                                    |
+            | Advanced_Filter_One_Lead_Nation_Selected            |
+            | Advanced_Filter_Two_Lead_Nation_Selected            |
+            | Advanced_Filter_Three_Lead_Nation_Selected          |
+            | Advanced_Filter_Four_Lead_Nation_Selected           |
+            | Advanced_Filter_One_Modification_Type_Selected      |
+            | Advanced_Filter_Two_Modification_Type_Selected      |
+            | Advanced_Filter_One_Participating_Nation_Selected   |
+            | Advanced_Filter_Two_Participating_Nation_Selected   |
+            | Advanced_Filter_Three_Participating_Nation_Selected |
+            | Advanced_Filter_Four_Participating_Nation_Selected  |
+            | Advanced_Filters_Nth                                |
 
     @jsDisabled @VerifyHintLabelForSelectedCheckboxAdvancedFilters @rsp-4167
     Scenario Outline: When javascript disabled verify the hint text for advanced filters when user does n't select any checkboxes
@@ -528,9 +537,10 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         And I capture the page screenshot
         And I verify the hint text based on the '<Advanced_Filters>' for search modifications page
         Examples:
-            | Advanced_Filters                              |
-            | Advanced_Filter_No_Lead_Nation_Selected       |
-            | Advanced_Filter_No_Modification_Type_Selected |
+            | Advanced_Filters                                 |
+            | Advanced_Filter_No_Lead_Nation_Selected          |
+            | Advanced_Filter_No_Modification_Type_Selected    |
+            | Advanced_Filter_No_Participating_Nation_Selected |
 
     @VerifyHintTextForAdvanceFilters @rsp-4167
     Scenario Outline: Validate hint labels for advanced filters in search modifications page
