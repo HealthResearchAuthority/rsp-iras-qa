@@ -87,7 +87,10 @@
     "Search": "Search"
   },
   "Manage_Review_Bodies_Page": {
-    "Search": "Search"
+    "Search": "Search",
+    "Org_Name": "Organisation name",
+    "Country": "Country",
+    "Status": "Status"
   },
   "Review_Your_Answers_Page": {
     "Confirm_Project_Details": "Confirm project details"

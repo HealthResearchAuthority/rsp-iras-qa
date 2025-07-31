@@ -134,3 +134,46 @@ Then('I click the view edit link', async ({ manageReviewBodiesPage }) => {
   const createdReviewBodyRow = await manageReviewBodiesPage.getReviewBodyRow();
   await createdReviewBodyRow.locator(manageReviewBodiesPage.actionsLink).click();
 });
+
+Then(
+  'I can see the manage review bodies list sorted by {string} order of the {string} on the {string} page',
+  async (
+    { manageReviewBodiesPage, commonItemsPage },
+    sortDirection: string,
+    sortField: string,
+    currentPage: string
+  ) => {
+    let sortedList: string[];
+    let columnIndex: number;
+    switch (sortField.toLowerCase()) {
+      case 'organisation name':
+        columnIndex = 0;
+        break;
+      case 'country':
+        columnIndex = 1;
+        break;
+      case 'status':
+        columnIndex = 2;
+        break;
+      default:
+        throw new Error(`${sortField} is not a valid option`);
+    }
+    const actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
+    if (sortDirection.toLowerCase() == 'ascending') {
+      sortedList = [...actualList].toSorted((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
+      if (sortField.toLowerCase() == 'status' && currentPage.toLowerCase() == 'first') {
+        expect(actualList).toContain(
+          manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.enabled_status
+        );
+      }
+    } else {
+      sortedList = [...actualList].toSorted((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
+      if (sortField.toLowerCase() == 'status' && currentPage.toLowerCase() == 'first') {
+        expect(actualList).toContain(
+          manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.disabled_status
+        );
+      }
+    }
+    expect(actualList).toEqual(sortedList);
+  }
+);
