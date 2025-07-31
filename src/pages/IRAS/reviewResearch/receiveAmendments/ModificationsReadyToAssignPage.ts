@@ -46,8 +46,8 @@ export default class ModificationsReadyToAssignPage {
   async sortDateSubmittedListValues(datesSubmitted: string[], sortDirection: string): Promise<string[]> {
     const listAsDates: Date[] = [];
     const sortedListAsStrings: string[] = [];
-    const formattedDatesSubmitted = datesSubmitted.map((id) => {
-      const [day, month, year] = id.split(' ');
+    const formattedDatesSubmitted = datesSubmitted.map((dates) => {
+      const [day, month, year] = dates.split(' ');
       return [day, month, year];
     });
 
