@@ -499,7 +499,6 @@ Then(
   ) => {
     let errorMessageFieldDataset: JSON;
     let page: any;
-    let dateModificationSubmittedToDateError: string;
     if (pageKey === 'Search_Modifications_Page') {
       errorMessageFieldDataset =
         searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[
@@ -511,35 +510,26 @@ Then(
     const allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset);
     const summaryErrorActualValues = await commonItemsPage.getSummaryErrorMessages();
     expect(summaryErrorActualValues).toEqual(allSummaryErrorExpectedValues);
-    if (
-      errorMessageFieldAndSummaryDatasetName === 'Date_Modification_Submitted_To_date_Before_From_Date_Error' ||
-      errorMessageFieldAndSummaryDatasetName === 'Date_Modification_Submitted_No_Month_Selected_To_Date_Error'
-    ) {
-      dateModificationSubmittedToDateError = 'date_modification_submitted_to_date_error';
-    }
     for (const key in errorMessageFieldDataset) {
       if (Object.hasOwn(errorMessageFieldDataset, key)) {
         const expectedMessage = errorMessageFieldDataset[key];
-        switch (errorMessageFieldAndSummaryDatasetName) {
-          case dateModificationSubmittedToDateError: {
-            const actualMessage = await searchModificationsPage.date_modification_submitted_to_date_error.textContent();
-            expect(actualMessage).toEqual(expectedMessage);
-            break;
-          }
-          case 'Date_Modification_Submitted_No_Month_Selected_From_Date_Error': {
-            const actualMessage =
-              await searchModificationsPage.date_modification_submitted_from_date_error.textContent();
-            expect(actualMessage).toEqual(expectedMessage);
-            break;
-          }
-          case 'Sponsor_Organisation_Min_Char_Error': {
-            const actualMessage =
-              await searchModificationsPage.sponsor_organisation_jsdisabled_min_error_message.textContent();
-            expect(actualMessage).toEqual(expectedMessage);
-            break;
-          }
-          default:
-            throw new Error(`Unhandled error message dataset name: ${errorMessageFieldAndSummaryDatasetName}`);
+        if (
+          errorMessageFieldAndSummaryDatasetName === 'Date_Modification_Submitted_To_date_Before_From_Date_Error' ||
+          errorMessageFieldAndSummaryDatasetName === 'Date_Modification_Submitted_No_Month_Selected_To_Date_Error'
+        ) {
+          const actualMessage = await searchModificationsPage.date_modification_submitted_to_date_error.textContent();
+          expect(actualMessage).toEqual(expectedMessage);
+        } else if (
+          errorMessageFieldAndSummaryDatasetName === 'Date_Modification_Submitted_No_Month_Selected_From_Date_Error'
+        ) {
+          const actualMessage = await searchModificationsPage.date_modification_submitted_from_date_error.textContent();
+          expect(actualMessage).toEqual(expectedMessage);
+        } else if (errorMessageFieldAndSummaryDatasetName === 'Sponsor_Organisation_Min_Char_Error') {
+          const actualMessage =
+            await searchModificationsPage.sponsor_organisation_jsdisabled_min_error_message.textContent();
+          expect(actualMessage).toEqual(expectedMessage);
+        } else {
+          throw new Error(`Unhandled error message dataset name: ${errorMessageFieldAndSummaryDatasetName}`);
         }
         const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
         await expect(element).toBeInViewport();
