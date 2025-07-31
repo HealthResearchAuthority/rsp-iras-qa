@@ -17,26 +17,29 @@ When(
   async ({ searchModificationsPage, commonItemsPage, $tags }, filterDatasetName: string) => {
     const dataset = searchModificationsPage.searchModificationsPageTestData.Advanced_Filters[filterDatasetName];
     await commonItemsPage.clickAdvancedFilterChevron();
+    const isJsEnabled =
+      ($tags.includes('@jsEnabled') || config.projects?.[1].use?.javaScriptEnabled) && !$tags.includes('@jsDisabled');
     for (const key in dataset) {
       if (Object.hasOwn(dataset, key)) {
         await searchModificationsPage.clickFilterChevronModifications(dataset, key, searchModificationsPage);
         if (key === 'sponsor_organisation_text') {
-          if (
-            ($tags.includes('@jsEnabled') || config.projects?.[1].use?.javaScriptEnabled) &&
-            !$tags.includes('@jsDisabled')
-          ) {
-            dataset['sponsor_organisation_jsenabled_text'] = dataset['sponsor_organisation_text'];
+          if (isJsEnabled) {
+            dataset['sponsor_organisation_jsenabled_text'] = dataset[key];
             await commonItemsPage.fillUIComponent(
               dataset,
               'sponsor_organisation_jsenabled_text',
               searchModificationsPage
             );
-            if (await searchModificationsPage.sponsor_organisation_suggestion_list_labels.first().isVisible()) {
+            const suggestionVisible = await searchModificationsPage.sponsor_organisation_suggestion_list_labels
+              .first()
+              .isVisible();
+            if (suggestionVisible) {
               await searchModificationsPage.sponsor_organisation_suggestion_list_labels.first().click();
             }
           } else {
             await commonItemsPage.fillUIComponent(dataset, key, searchModificationsPage);
             await searchModificationsPage.sponsor_organisation_jsdisabled_search_button.click();
+
             if (dataset[key] !== '') {
               await searchModificationsPage.sponsor_organisation_jsdisabled_search_results_radio_button.first().click();
             }
@@ -168,50 +171,35 @@ Then(
 Then(
   'I remove the {string} from the active filters in the search modifications page',
   async ({ searchModificationsPage, commonItemsPage }, removeFilterDatasetName: string) => {
-    let activeCheckboxFiltersMap: { get: (arg0: string) => any };
-    let activeFiltersMap: any;
-    let filterCheckboxValuesExpected: any;
-    let filterValuesExpected: any;
-    const expectedFilterValues: string[] = [];
-    let removedFilterValues: string[] = [];
     const dataset = searchModificationsPage.searchModificationsPageTestData.Advanced_Filters[removeFilterDatasetName];
     const datasetLabels = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page;
+    const expectedFilterValues: string[] = [];
     const seen = new Set<string>();
     for (const key in dataset) {
       if (Object.hasOwn(dataset, key)) {
-        if (key.endsWith('_checkbox')) {
-          activeCheckboxFiltersMap = await commonItemsPage.getActiveFiltersCheckboxLabels(dataset, datasetLabels);
-          filterCheckboxValuesExpected = activeCheckboxFiltersMap.get('multiSelectFilter');
-          const checkboxValues = filterCheckboxValuesExpected.flat().map((item: string) => item.trim());
-          checkboxValues.forEach((val: string) => {
-            if (!seen.has(val)) {
-              seen.add(val);
-              expectedFilterValues.push(val);
-            }
-          });
-        } else {
-          activeFiltersMap = await commonItemsPage.getActiveFiltersLabels(dataset, datasetLabels);
-          filterValuesExpected = activeFiltersMap.get('singleSelectFilter');
-          const singleSelectValues = filterValuesExpected.flat().map((item: string) => item.trim());
-          singleSelectValues.forEach((val: string) => {
-            if (!seen.has(val)) {
-              seen.add(val);
-              expectedFilterValues.push(val);
-            }
-          });
+        const isCheckbox = key.endsWith('_checkbox');
+        const activeFiltersMap = isCheckbox
+          ? await commonItemsPage.getActiveFiltersCheckboxLabels(dataset, datasetLabels)
+          : await commonItemsPage.getActiveFiltersLabels(dataset, datasetLabels);
+        const filterValues = activeFiltersMap.get(isCheckbox ? 'multiSelectFilter' : 'singleSelectFilter') || [];
+        const trimmedValues = filterValues.flat().map((val: string) => val.trim());
+        for (const val of trimmedValues) {
+          if (!seen.has(val)) {
+            seen.add(val);
+            expectedFilterValues.push(val);
+          }
         }
       }
     }
-    removedFilterValues = await commonItemsPage.removeSelectedFilterValues(expectedFilterValues);
-    const fieldValActualAfterRemoval: string[] = await commonItemsPage.getSelectedFilterValues();
-    const actualFilterValuesAfterRemoval = fieldValActualAfterRemoval.flat().join(', ');
-    for (let i = 0; i < removedFilterValues.length; i++) {
-      expect(actualFilterValuesAfterRemoval).not.toContain(removedFilterValues[i]);
+    const removedFilterValues = await commonItemsPage.removeSelectedFilterValues(expectedFilterValues);
+    const actualFilterValuesAfterRemoval = (await commonItemsPage.getSelectedFilterValues()).flat().join(', ');
+    for (const removedValue of removedFilterValues) {
+      expect(actualFilterValuesAfterRemoval).not.toContain(removedValue);
     }
   }
 );
 
-// date_modification_submitted and sponsor_organisation can't validate from UI,need to validate with Database
+// date_modification_submitted, participating nation and sponsor_organisation can't validate from UI,need to validate with Database
 Then(
   'the system displays modification records matching the search {string} and filter criteria {string}',
   async ({ commonItemsPage, searchModificationsPage }, irasIdDatasetName: string, filterDatasetName: string) => {
@@ -511,6 +499,7 @@ Then(
   ) => {
     let errorMessageFieldDataset: JSON;
     let page: any;
+    let dateModificationSubmittedToDateError: string;
     if (pageKey === 'Search_Modifications_Page') {
       errorMessageFieldDataset =
         searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[
@@ -522,11 +511,17 @@ Then(
     const allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset);
     const summaryErrorActualValues = await commonItemsPage.getSummaryErrorMessages();
     expect(summaryErrorActualValues).toEqual(allSummaryErrorExpectedValues);
+    if (
+      errorMessageFieldAndSummaryDatasetName === 'Date_Modification_Submitted_To_date_Before_From_Date_Error' ||
+      errorMessageFieldAndSummaryDatasetName === 'Date_Modification_Submitted_No_Month_Selected_To_Date_Error'
+    ) {
+      dateModificationSubmittedToDateError = 'date_modification_submitted_to_date_error';
+    }
     for (const key in errorMessageFieldDataset) {
       if (Object.hasOwn(errorMessageFieldDataset, key)) {
         const expectedMessage = errorMessageFieldDataset[key];
         switch (errorMessageFieldAndSummaryDatasetName) {
-          case 'Date_Modification_Submitted_To_date_Before_From_Date_Error': {
+          case dateModificationSubmittedToDateError: {
             const actualMessage = await searchModificationsPage.date_modification_submitted_to_date_error.textContent();
             expect(actualMessage).toEqual(expectedMessage);
             break;
@@ -534,11 +529,6 @@ Then(
           case 'Date_Modification_Submitted_No_Month_Selected_From_Date_Error': {
             const actualMessage =
               await searchModificationsPage.date_modification_submitted_from_date_error.textContent();
-            expect(actualMessage).toEqual(expectedMessage);
-            break;
-          }
-          case 'Date_Modification_Submitted_No_Month_Selected_To_Date_Error': {
-            const actualMessage = await searchModificationsPage.date_modification_submitted_to_date_error.textContent();
             expect(actualMessage).toEqual(expectedMessage);
             break;
           }
