@@ -907,7 +907,7 @@ export default class CommonItemsPage {
     const filterTextsCheckbox: any[] = [];
     let activeFiltersMap: any;
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         if (key.endsWith('_checkbox')) {
           if (key === 'lead_nation_checkbox') {
             filterName = datasetLabels['lead_nation_label'];
@@ -946,53 +946,55 @@ export default class CommonItemsPage {
   }
 
   async getActiveFiltersLabels(dataset: JSON, datasetLabels: any) {
-    let filterName: string = '';
     const filterText: string[] = [];
-    let activeFiltersMap: any;
-    for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        if (!key.endsWith('_checkbox')) {
-          if (key === 'date_modification_submitted_from_day_text') {
-            filterName = datasetLabels['date_modification_submitted_label'];
-            const fromDate = await this.getDateString(dataset, 'date_modification_submitted_from');
-            if (fromDate) {
-              filterText.push(`${filterName} - from ${fromDate}`);
-            }
-          } else if (key === 'date_modification_submitted_to_day_text') {
-            filterName = datasetLabels['date_modification_submitted_label'];
-            const toDate = await this.getDateString(dataset, 'date_modification_submitted_to');
-            if (toDate) {
-              filterText.push(`${filterName} - to ${toDate}`);
-            }
-          } else if (key == 'chief_investigator_name_text') {
-            filterName = datasetLabels['chief_investigator_name_label'];
-            filterText.push(`${filterName} - ${dataset[key]}`);
-          } else if (key == 'short_project_title_text') {
-            filterName = datasetLabels['short_project_title_label'];
-            filterText.push(`${filterName} - ${dataset[key]}`);
-          } else if (key === 'sponsor_organisation_text') {
-            filterName = datasetLabels['sponsor_organisation_label'];
-            filterText.push(`${filterName} - ${dataset[key]}`);
-          } else if (key === 'status_radio') {
-            filterName = datasetLabels['status_advanced_filter_label'];
-            filterText.push(`${filterName} - ${dataset[key]}`);
-          } else if (key === 'date_last_logged_in_from_day_text') {
-            filterName = datasetLabels['date_last_logged_in_label'];
-            const fromDate = await this.getDateString(dataset, 'date_last_logged_in_from');
-            if (fromDate) {
-              filterText.push(`${filterName} - from ${fromDate}`);
-            }
-          } else if (key === 'date_last_logged_in_to_day_text') {
-            filterName = datasetLabels['date_last_logged_in_label'];
-            const toDate = await this.getDateString(dataset, 'date_last_logged_in_to');
-            if (toDate) {
-              filterText.push(`${filterName} - to ${toDate}`);
-            }
-          }
-          activeFiltersMap = new Map([['singleSelectFilter', confirmArrayNotNull(filterText)]]);
+    const dateKeys = [
+      {
+        key: 'date_modification_submitted_from_day_text',
+        labelKey: 'date_modification_submitted_label',
+        dateKey: 'date_modification_submitted_from',
+        prefix: 'from',
+      },
+      {
+        key: 'date_modification_submitted_to_day_text',
+        labelKey: 'date_modification_submitted_label',
+        dateKey: 'date_modification_submitted_to',
+        prefix: 'to',
+      },
+      {
+        key: 'date_last_logged_in_from_day_text',
+        labelKey: 'date_last_logged_in_label',
+        dateKey: 'date_last_logged_in_from',
+        prefix: 'from',
+      },
+      {
+        key: 'date_last_logged_in_to_day_text',
+        labelKey: 'date_last_logged_in_label',
+        dateKey: 'date_last_logged_in_to',
+        prefix: 'to',
+      },
+    ];
+    const textKeys = [
+      { key: 'chief_investigator_name_text', labelKey: 'chief_investigator_name_label' },
+      { key: 'short_project_title_text', labelKey: 'short_project_title_label' },
+      { key: 'sponsor_organisation_text', labelKey: 'sponsor_organisation_label' },
+      { key: 'status_radio', labelKey: 'status_advanced_filter_label' },
+    ];
+    for (const { key, labelKey, dateKey, prefix } of dateKeys) {
+      if (dataset[key]) {
+        const label = datasetLabels[labelKey];
+        const date = await this.getDateString(dataset, dateKey);
+        if (date) {
+          filterText.push(`${label} - ${prefix} ${date}`);
         }
       }
     }
+    for (const { key, labelKey } of textKeys) {
+      if (dataset[key]) {
+        const label = datasetLabels[labelKey];
+        filterText.push(`${label} - ${dataset[key]}`);
+      }
+    }
+    const activeFiltersMap = new Map([['singleSelectFilter', confirmArrayNotNull(filterText)]]);
     return activeFiltersMap;
   }
 

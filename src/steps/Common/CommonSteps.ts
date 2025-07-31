@@ -848,7 +848,7 @@ Then(
 Then('I can see the {string} ui labels', async ({ commonItemsPage }, datasetName: string) => {
   const dataset = commonItemsPage.commonTestData[datasetName];
   for (const key in dataset) {
-    if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+    if (Object.hasOwn(dataset, key)) {
       await expect(commonItemsPage[key].getByText(dataset[key])).toBeVisible();
     }
   }

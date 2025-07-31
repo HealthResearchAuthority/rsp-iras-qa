@@ -18,7 +18,7 @@ When(
     const dataset = searchModificationsPage.searchModificationsPageTestData.Advanced_Filters[filterDatasetName];
     await commonItemsPage.clickAdvancedFilterChevron();
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         await searchModificationsPage.clickFilterChevronModifications(dataset, key, searchModificationsPage);
         if (key === 'sponsor_organisation_text') {
           if (
@@ -55,7 +55,7 @@ Then(
   async ({ searchModificationsPage }, datasetName: string) => {
     const dataset = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[datasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         await expect(searchModificationsPage[key].getByText(dataset[key])).toBeVisible();
       }
     }
@@ -67,7 +67,7 @@ Then(
   async ({ searchModificationsPage }, filterDatasetName: string) => {
     const dataset = searchModificationsPage.searchModificationsPageTestData.Advanced_Filters[filterDatasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         if (key === 'lead_nation_checkbox') {
           const numberOfCheckboxesSelected = dataset[key].length;
           const hintLabel =
@@ -123,7 +123,7 @@ When(
   async ({ searchModificationsPage }, filterDatasetName: string) => {
     const dataset = searchModificationsPage.searchModificationsPageTestData.Advanced_Filters[filterDatasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         await searchModificationsPage.clickFilterChevronModifications(dataset, key, searchModificationsPage);
       }
     }
@@ -139,7 +139,7 @@ Then(
     let expectedSingleSelectValues: string[] = [];
     let expectedMultiSelectValues: string[] = [];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         if (key.endsWith('_checkbox')) {
           const checkboxMap = await commonItemsPage.getActiveFiltersCheckboxLabels(dataset, datasetLabels);
           expectedMultiSelectValues =
@@ -178,7 +178,7 @@ Then(
     const datasetLabels = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page;
     const seen = new Set<string>();
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         if (key.endsWith('_checkbox')) {
           activeCheckboxFiltersMap = await commonItemsPage.getActiveFiltersCheckboxLabels(dataset, datasetLabels);
           filterCheckboxValuesExpected = activeCheckboxFiltersMap.get('multiSelectFilter');
@@ -523,7 +523,7 @@ Then(
     const summaryErrorActualValues = await commonItemsPage.getSummaryErrorMessages();
     expect(summaryErrorActualValues).toEqual(allSummaryErrorExpectedValues);
     for (const key in errorMessageFieldDataset) {
-      if (Object.prototype.hasOwnProperty.call(errorMessageFieldDataset, key)) {
+      if (Object.hasOwn(errorMessageFieldDataset, key)) {
         const expectedMessage = errorMessageFieldDataset[key];
         switch (errorMessageFieldAndSummaryDatasetName) {
           case 'Date_Modification_Submitted_To_date_Before_From_Date_Error': {
@@ -633,23 +633,3 @@ Then(
     expect.soft(actualList).toEqual(sortedList);
   }
 );
-
-// Then(
-//   'I can see the list is sorted by default in the descending order of the {string}',
-//   async ({ searchModificationsPage }, sortField: string) => {
-//     let actualList: string[];
-//     switch (sortField.toLowerCase()) {
-//       case 'modification id':
-//         actualList = await searchModificationsPage.getModificationIdListAfterSearch();
-//         break;
-//       default:
-//         throw new Error(`${sortField} is not a valid option`);
-//     }
-//     const normalizedList = actualList.map((id) => {
-//       const [prefix, suffix] = id.split('/');
-//       return `${prefix.padStart(10, '0')}/${suffix.padStart(4, '0')}`;
-//     });
-//     const sortedDescending = [...normalizedList].sort((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
-//     expect.soft(normalizedList).toEqual(sortedDescending);
-//   }
-// );
