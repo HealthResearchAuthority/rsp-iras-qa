@@ -11,6 +11,7 @@ export default class ManageUsersPage {
   readonly linkTextData: typeof linkTextData;
   private _unique_email: string;
   readonly page_heading: Locator;
+  readonly search_hint_text: Locator;
   readonly back_button: Locator;
   readonly add_new_users_record_link: Locator;
   readonly first_name_column_header: Locator;
@@ -47,6 +48,31 @@ export default class ManageUsersPage {
   private lastLoggedInDateFull: string;
   private lastLoggedInDateTruncated: string;
   private lastLoggedInHours: number;
+  readonly country_checkbox: Locator;
+  readonly status_radio: Locator;
+  readonly country_checkbox_chevron: Locator;
+  readonly status_radio_chevron: Locator;
+  readonly country_hint_label: Locator;
+  readonly country_selected_hint_label: Locator;
+  readonly status_hint_label: Locator;
+  readonly date_last_logged_in_from_day_text: Locator;
+  readonly date_last_logged_in_from_month_dropdown: Locator;
+  readonly date_last_logged_in_from_year_text: Locator;
+  readonly date_last_logged_in_to_day_text: Locator;
+  readonly date_last_logged_in_to_month_dropdown: Locator;
+  readonly date_last_logged_in_to_year_text: Locator;
+  readonly date_last_logged_in_from_day_text_chevron: Locator;
+  readonly date_last_logged_in_to_day_text_chevron: Locator;
+  readonly date_last_logged_in_from_date_fieldset: Locator;
+  readonly date_last_logged_in_to_date_fieldset: Locator;
+  readonly date_last_logged_in_to_date_error: Locator;
+  readonly advanced_filter_chevron: Locator;
+  readonly date_last_logged_in_error_message: Locator;
+  readonly country_checkbox_selected_hint_label: Locator;
+  readonly country_checkbox_hint_label: Locator;
+  readonly user_search_text: Locator;
+  readonly date_last_logged_in_from_date_help_text: Locator;
+  readonly date_last_logged_in_to_date_help_text: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -58,6 +84,10 @@ export default class ManageUsersPage {
     this.page_heading = this.page
       .getByRole('heading')
       .getByText(this.manageUsersPageTestData.Manage_Users_Page.page_heading);
+    this.search_hint_text = this.page.getByText(this.manageUsersPageTestData.Manage_Users_Page.search_hint_text);
+    this.user_search_text = this.page.getByLabel(this.manageUsersPageTestData.Manage_Users_Page.user_search_box_label, {
+      exact: true,
+    });
     this.view_edit_link = this.page.getByText('View/Edit').first();
     this.users_list_rows = this.page.locator('table tbody tr');
     this.back_button = this.page.getByText('Back');
@@ -102,6 +132,136 @@ export default class ManageUsersPage {
         exact: true,
       });
     this.listCell = this.page.getByRole('cell');
+
+    this.advanced_filter_chevron = this.page.getByRole('button', {
+      name: this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.advanced_filter_label,
+    });
+    this.country_checkbox_chevron = this.page
+      .getByRole('heading', { level: 2 })
+      .getByText(
+        this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.country_advanced_filter_label,
+        {
+          exact: true,
+        }
+      );
+    this.status_radio_chevron = this.page
+      .getByRole('heading', { level: 2 })
+      .getByText(
+        this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.status_advanced_filter_label,
+        {
+          exact: true,
+        }
+      );
+    this.country_checkbox = page.getByRole('checkbox');
+    this.status_radio = page.getByRole('radio');
+    this.page.getByRole('checkbox');
+    this.country_selected_hint_label = page.getByTestId('country-hint');
+    this.country_hint_label = page.getByTestId('Search.Country');
+    this.status_hint_label = page.getByTestId('Search.Status');
+
+    this.date_last_logged_in_from_day_text_chevron = this.page
+      .getByRole('heading')
+      .getByText(
+        this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.date_last_logged_in_label,
+        {
+          exact: true,
+        }
+      );
+    this.date_last_logged_in_to_day_text_chevron = this.page
+      .getByRole('heading')
+      .getByText(
+        this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.date_last_logged_in_label,
+        {
+          exact: true,
+        }
+      );
+
+    this.date_last_logged_in_from_date_fieldset = this.page.locator('.govuk-fieldset').locator('.govuk-form-group', {
+      has: this.page.getByText(
+        this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List
+          .date_last_logged_in_from_date_hint_text
+      ),
+    });
+
+    this.date_last_logged_in_from_day_text = this.date_last_logged_in_from_date_fieldset
+      .locator('.govuk-form-group', {
+        has: this.page.getByText(
+          this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.date_last_logged_in_day_label
+        ),
+      })
+      .getByRole('textbox');
+    this.date_last_logged_in_from_month_dropdown = this.date_last_logged_in_from_date_fieldset
+      .locator('.govuk-form-group', {
+        has: this.page.getByText(
+          this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.date_last_logged_in_month_label
+        ),
+      })
+      .getByRole('combobox');
+    this.date_last_logged_in_from_year_text = this.date_last_logged_in_from_date_fieldset
+      .locator('.govuk-form-group', {
+        has: this.page.getByText(
+          this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.date_last_logged_in_year_label
+        ),
+      })
+      .getByRole('textbox');
+    this.date_last_logged_in_to_date_error = this.page
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group')
+      .filter({
+        hasText:
+          this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List
+            .date_last_logged_in_to_date_hint_text,
+      })
+      .locator('.govuk-error-message');
+    this.date_last_logged_in_to_date_fieldset = this.page.locator('.govuk-fieldset').locator('.govuk-form-group', {
+      has: this.page.getByText(
+        this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List
+          .date_last_logged_in_to_date_hint_text
+      ),
+    });
+    this.date_last_logged_in_to_day_text = this.date_last_logged_in_to_date_fieldset
+      .locator('.govuk-form-group', {
+        has: this.page.getByText(
+          this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.date_last_logged_in_day_label
+        ),
+      })
+      .getByRole('textbox');
+    this.date_last_logged_in_to_month_dropdown = this.date_last_logged_in_to_date_fieldset
+      .locator('.govuk-form-group', {
+        has: this.page.getByText(
+          this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.date_last_logged_in_month_label
+        ),
+      })
+      .getByRole('combobox');
+    this.date_last_logged_in_to_year_text = this.date_last_logged_in_to_date_fieldset
+      .locator('.govuk-form-group', {
+        has: this.page.getByText(
+          this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.date_last_logged_in_year_label
+        ),
+      })
+      .getByRole('textbox');
+
+    this.date_last_logged_in_error_message = this.page
+      .locator('.govuk-error-message')
+      .getByText(manageUsersPageTestData.Error_Message_Field_Dataset.Field_Error_Date_Last_Logged_In);
+    this.country_checkbox_selected_hint_label = this.country_checkbox_chevron
+      .locator('..')
+      .locator('..')
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group')
+      .getByText(
+        this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.selected_checkboxes_hint_label
+      );
+    this.country_checkbox_hint_label = this.country_checkbox_chevron
+      .locator('..')
+      .locator('..')
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group')
+      .getByText(this.manageUsersPageTestData.Manage_Users_Page.Advanced_Filters_Hint_Labels.country_hint_label, {
+        exact: true,
+      });
+    this.date_last_logged_in_from_date_help_text = this.page.locator('#Search_FromDate-hint');
+    this.date_last_logged_in_to_date_help_text = this.page.locator('#Search_ToDate-hint');
   }
 
   //Getters & Setters for Private Variables
@@ -116,6 +276,7 @@ export default class ManageUsersPage {
   async assertOnManageUsersPage() {
     await expect(this.page_heading).toBeVisible();
     expect(await this.page.title()).toBe(this.manageUsersPageTestData.Manage_Users_Page.title);
+    await expect(this.search_hint_text).toBeVisible();
   }
 
   async goto(pageSize?: string, searchQuery?: string) {
@@ -265,5 +426,15 @@ export default class ManageUsersPage {
     }
 
     return emailAddress;
+  }
+
+  async clickFilterChevronUsers<PageObject>(dataset: JSON, key: string, page: PageObject) {
+    const button = page[`${key}_chevron`];
+    const fromDate = dataset['date_last_logged_in_from_day_text'];
+    const isToDateKey = key === 'date_last_logged_in_to_day_text';
+    const shouldClick = !isToDateKey || (isToDateKey && (fromDate === '' || fromDate === undefined));
+    if (button && shouldClick) {
+      await button.click();
+    }
   }
 }

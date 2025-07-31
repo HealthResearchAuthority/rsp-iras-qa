@@ -562,6 +562,83 @@ export async function convertDate(day: string, month: number, year: number): Pro
   return formattedDate.toString();
 }
 
+export async function convertDateShortMonth(day: string, month: string, year: number): Promise<string> {
+  const formattedDay = String(parseInt(day, 10));
+  const formattedMonth = month.charAt(0).toUpperCase() + month.slice(1, 3).toLowerCase();
+  const formattedDate = `${formattedDay} ${formattedMonth} ${year}`;
+  return formattedDate;
+}
+
+// export async function validateDateRange(
+//   validationDate: string | Date,
+//   fromDate?: string | Date,
+//   toDate?: string | Date
+// ): Promise<boolean> {
+//   let from: Date;
+//   let to: Date;
+//   let isLastLoggedInDateInValidRange: boolean;
+//   if (fromDate !== ' Choose month ') {
+//     from = new Date(fromDate);
+//   }
+//   if (toDate !== ' Choose month ') {
+//     to = new Date(toDate);
+//   }
+//   const target = new Date(validationDate);
+//   if (fromDate !== ' Choose month ' && toDate !== ' Choose month ') {
+//     if (isNaN(from.getTime()) || isNaN(to.getTime()) || isNaN(target.getTime())) {
+//       throw new Error('Invalid dates provided');
+//     }
+//     if (from > to) {
+//       throw new Error("'fromDate' should be less than or equal to 'toDate'");
+//     }
+//     isLastLoggedInDateInValidRange = target >= from && target <= to;
+//   } else if (fromDate !== ' Choose month ' && toDate === ' Choose month ') {
+//     if (isNaN(from.getTime()) || isNaN(target.getTime())) {
+//       throw new Error('Invalid dates provided');
+//     }
+//     isLastLoggedInDateInValidRange = target >= from;
+//   } else if (fromDate === ' Choose month ' && toDate !== ' Choose month ') {
+//     if (isNaN(to.getTime()) || isNaN(target.getTime())) {
+//       throw new Error('Invalid dates provided');
+//     }
+//     isLastLoggedInDateInValidRange = target <= to;
+//   }
+//   return isLastLoggedInDateInValidRange;
+// }
+
+export async function validateDateRange(
+  validationDate: string,
+  dateLastLoggedinMonthPlaceholder: string,
+  fromDate?: string,
+  toDate?: string
+): Promise<boolean> {
+  const target = new Date(validationDate);
+  const isValidDate = (date: Date) => !isNaN(date.getTime());
+  const from = fromDate && fromDate.trim() !== dateLastLoggedinMonthPlaceholder ? new Date(fromDate) : undefined;
+  const to = toDate && toDate.trim() !== dateLastLoggedinMonthPlaceholder ? new Date(toDate) : undefined;
+  if (!isValidDate(target)) {
+    throw new Error('Invalid validation date provided');
+  }
+  if (from && !isValidDate(from)) {
+    throw new Error('Invalid fromDate provided');
+  }
+  if (to && !isValidDate(to)) {
+    throw new Error('Invalid toDate provided');
+  }
+  if (from && to && from > to) {
+    throw new Error("'fromDate' should be less than or equal to 'toDate'");
+  }
+  if (from && to) {
+    return target >= from && target <= to;
+  } else if (from) {
+    return target >= from;
+  } else if (to) {
+    return target <= to;
+  }
+  // If both from and to are not provided or are placeholders, consider it invalid
+  return false;
+}
+
 export async function returnSingleRandomLocator(resolvesToMultiElements: Locator): Promise<Locator> {
   const noOfElements = await resolvesToMultiElements.count();
   const randomIndex = Math.floor(Math.random() * (noOfElements - 1));
