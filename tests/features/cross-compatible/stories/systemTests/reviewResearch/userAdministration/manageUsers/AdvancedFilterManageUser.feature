@@ -127,6 +127,7 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
     Scenario: When javascript disabled verify the hint text for country advanced filters when user select multiple checkboxes
         And I select advanced filters in the manage users page using '<Advanced_Filters>'
         And I click the 'Apply_filters' button on the 'Manage_Users_Page'
+        And I click the 'Advanced_Filter' link on the 'Manage_Users_Page'
         And I expand the chevrons for '<Advanced_Filters>' in manage users page
         And I capture the page screenshot
         And I verify the hint text based on the '<Advanced_Filters>' for manage users page

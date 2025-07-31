@@ -906,3 +906,17 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
+  @axeAccessibilitySearchAndAdvancedFilterManageUser @SysAdminUser @axeAccessibilityManageUsers
+  Scenario: Manage Users list page with advanced filter and search
+    Given I have navigated to the 'System_Administration_Page'
+    When I click the 'Manage_Users' link on the 'System_Administration_Page'
+    Then I can see the 'Manage_Users_Page'
+    When I enter 'Existing_QA_User_First_Name' into the search field for manage users page
+    And I select advanced filters in the manage users page using 'Advanced_Filter_One'
+    And I click the 'Apply_filters' button on the 'Manage_Users_Page'
+    Then I can see the selected filters 'Advanced_Filter_One' are displayed under active filters for manage users page
+    And I can see the results matching the search 'Existing_QA_User_First_Name' and filter criteria 'Advanced_Filter_One' for manage users page
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
