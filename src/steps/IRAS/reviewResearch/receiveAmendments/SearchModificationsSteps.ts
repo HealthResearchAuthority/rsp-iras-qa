@@ -161,7 +161,7 @@ Then(
       .flat()
       .map((val: string) => val.trim());
     const expectedFilterValues = [...expectedSingleSelectValues, ...expectedMultiSelectValues];
-    expect(actualFilterValues).toEqual(expectedFilterValues);
+    expect.soft(actualFilterValues).toEqual(expectedFilterValues);
   }
 );
 

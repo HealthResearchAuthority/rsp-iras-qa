@@ -1,4 +1,4 @@
-@ReceiveAmendments @FrontStageUser @SystemTest @rsp-4011 @rsp-4016 @rsp-4289 @KNOWN-DEFECT-RSP-4467
+@ReceiveAmendments @FrontStageUser @SystemTest @rsp-4011 @rsp-4016 @rsp-4289
 Feature: Approvals - Advanced Filter and Search combinations in the Search modifications page
 
     Background:
@@ -9,7 +9,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         Then I can see the 'Search_Modifications_Page'
         And I capture the page screenshot
 
-    @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @rsp-4118
+    @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @rsp-4118 @KNOWN-DEFECT-RSP-4467
     Scenario Outline: Verify the user is able to view the list of modifications by entering a valid IRAS ID, selecting the advanced filters, and clicking the 'Apply filters' button
         When I enter '<Valid_Iras_Id>' into the search field for search modifications page
         And I capture the page screenshot
@@ -30,7 +30,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
             | Valid_Iras_Id_TwentyTwo   | Advanced_Filters_TwentyTwo   |
             | Valid_Iras_Id_TwentyThree | Advanced_Filters_TwentyThree |
 
-    @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters
+    @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @KNOWN-DEFECT-RSP-4467
     Scenario Outline: Verify the user is able to view the list of modifications by entering valid iras id, then clicking on 'Search' button and then selecting advanced filters and clicking the 'Apply filters' button
         When I enter '<Valid_Iras_Id>' into the search field for search modifications page
         And I capture the page screenshot
@@ -55,7 +55,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
             | Valid_Iras_Id_TwentyTwo   | Advanced_Filters_TwentyTwo   |
             | Valid_Iras_Id_TwentyThree | Advanced_Filters_TwentyThree |
 
-    @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters
+    @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @KNOWN-DEFECT-RSP-4467
     Scenario Outline: Verify the user can view the list of modifications by entering valid iras id, then click on search button and then selected advanced filters and click on apply filters button
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
@@ -97,7 +97,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
             | Valid_Iras_Id_TwentyTwo   |
             | Valid_Iras_Id_TwentyThree |
 
-    @viewListOfModifications @NoIrasIdAndAdvancedFilters
+    @viewListOfModifications @NoIrasIdAndAdvancedFilters @KNOWN-DEFECT-RSP-4467
     Scenario Outline: Verify the user can view the list of modifications by selecting advanced filters and click on apply filters button
         When I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
@@ -130,7 +130,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
             | Advanced_Filters_TwentyTwo   |
             | Advanced_Filters_TwentyThree |
 
-    @viewListOfModifications @DateModificationSubmitted @SponsorOrganisation
+    @viewListOfModifications @DateModificationSubmitted @SponsorOrganisation @KNOWN-DEFECT-RSP-4467
     Scenario Outline: Verify the user is able to view the list of modifications filtered by sponsor organisation and modification submitted date
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
@@ -190,7 +190,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
             | Invalid_Iras_Id_Spaces_Seperator | No_Matching_Search_Results |
             | Invalid_Iras_Id_Zeros            | No_Matching_Search_Results |
 
-    @NoResultsFound @InvalidIrasIdAndAdvancedFilters
+    @NoResultsFound @InvalidIrasIdAndAdvancedFilters @KNOWN-DEFECT-RSP-4467
     Scenario Outline: Verify the user can see no matching results found message by entering invalid iras id, then selected advanced filters and click on apply filters button
         When I enter '<Invalid_Iras_Id>' into the search field for search modifications page
         And I capture the page screenshot
@@ -214,7 +214,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
             | Invalid_Iras_Id_Spaces_Seperator | Advanced_Filters_TwentyTwo   |
             | Invalid_Iras_Id_Zeros            | Advanced_Filters_TwentyThree |
 
-    @NoResultsFound @ValidIrasIdAndAdvancedFilters
+    @NoResultsFound @ValidIrasIdAndAdvancedFilters @KNOWN-DEFECT-RSP-4467
     Scenario Outline: Verify the user can see no matching results found message by entering valid iras id, then selected advanced filters and click on apply filters button
         When I enter '<Valid_Iras_Id>' into the search field for search modifications page
         And I capture the page screenshot
@@ -229,7 +229,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
             | Valid_Iras_Id     | Advanced_Filters_No_results |
             | Valid_Iras_Id_Nth | Advanced_Filters_Fifteen    |
 
-    @NoResultsFound
+    @NoResultsFound @KNOWN-DEFECT-RSP-4467
     Scenario Outline: Verify the user can see no matching results found message by selecting advanced filters and click on apply filters button
         And I select advanced filters in the search modifications page using '<Advanced_Filters_No_results>'
         And I capture the page screenshot
@@ -256,7 +256,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
             | Date_Modification_Submitted_No_Month_Selected_To_Date   | Date_Modification_Submitted_No_Month_Selected_To_Date_Error   |
             | Date_Modification_Submitted_No_Month_Selected_From_Date | Date_Modification_Submitted_No_Month_Selected_From_Date_Error |
 
-    @RemoveActiveFiltersOneByOne
+    @RemoveActiveFiltersOneByOne @KNOWN-DEFECT-RSP-4467
     Scenario Outline: Verify the user can remove the selected filters one by one and the search results update accordingly
         When I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
@@ -278,7 +278,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
             | Advanced_Filters_Nth | Advanced_Filters_Nth_Short_Project_Title_Filter     | Advanced_Filters_Nth_After_Remove_Short_Project_Title_Filter     |
             | Advanced_Filters_Nth | Advanced_Filters_Nth_Sponsor_Organisation_Filter    | Advanced_Filters_Nth_After_Remove_Sponsor_Organisation_Filter    |
 
-    @RemoveAllActiveFiltersOneByOne
+    @RemoveAllActiveFiltersOneByOne @KNOWN-DEFECT-RSP-4467
     Scenario Outline: Verify the user can remove all the selected filters one by one and the search results update accordingly
         When I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
@@ -298,7 +298,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
             | Advanced_Filters     | Advanced_Filters_Remove  |
             | Advanced_Filters_Nth | Advanced_Filters_Nth_All |
 
-    @RemoveAllActiveFiltersOneByOne
+    @RemoveAllActiveFiltersOneByOne @KNOWN-DEFECT-RSP-4467
     Scenario Outline: Verify the user can remove all the selected filters one by one and the search results update accordingly based on the previously entered IRAS ID
         When I enter '<Valid_Iras_Id>' into the search field for search modifications page
         And I capture the page screenshot
@@ -319,7 +319,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
             | Valid_Iras_Id     | Advanced_Filters     | Advanced_Filters_Remove  |
             | Valid_Iras_Id_Nth | Advanced_Filters_Nth | Advanced_Filters_Nth_All |
 
-    @RemoveActiveFiltersAllTogether
+    @RemoveActiveFiltersAllTogether @KNOWN-DEFECT-RSP-4467
     Scenario Outline: Verify the user can remove the selected filters alltogether by clicking 'Clear all filters' link and the search results update accordingly
         When I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
@@ -337,7 +337,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
             | Advanced_Filters     |
             | Advanced_Filters_Nth |
 
-    @RemoveActiveFiltersAllTogether
+    @RemoveActiveFiltersAllTogether @KNOWN-DEFECT-RSP-4467
     Scenario Outline: Verify the user can view the list of modifications by entering valid iras id, then selected advanced filters and click on apply filters button
         When I enter '<Valid_Iras_Id>' into the search field for search modifications page
         And I capture the page screenshot
