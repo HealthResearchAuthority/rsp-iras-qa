@@ -1,6 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { test, expect } from '../../../../../hooks/CustomFixtures';
-import { confirmArrayNotNull, confirmStringNotNull } from '../../../../../utils/UtilFunctions';
+import { confirmArrayNotNull } from '../../../../../utils/UtilFunctions';
 const { When, Then } = createBdd(test);
 
 Then(
@@ -150,7 +150,7 @@ When(
     const dataset = manageReviewBodiesPage.manageReviewBodiesPageData.Advanced_Filters[filterDatasetName];
     await commonItemsPage.advanced_filter_chevron.click();
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         await manageReviewBodiesPage[key + '_chevron'].click();
         await commonItemsPage.fillUIComponent(dataset, key, manageReviewBodiesPage);
       }
@@ -163,7 +163,7 @@ Then(
   async ({ manageReviewBodiesPage, commonItemsPage }, filterDatasetName: string) => {
     const dataset = manageReviewBodiesPage.manageReviewBodiesPageData.Advanced_Filters[filterDatasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         if (key === 'country_checkbox') {
           for (const filterLabel of dataset[key]) {
             const activeLabel =
@@ -190,44 +190,7 @@ When(
     const searchCriteriaDataset =
       manageReviewBodiesPage.manageReviewBodiesPageData.Search_For_Review_Bodies.Search_Queries[searchDatasetName];
     const filterDataset = manageReviewBodiesPage.manageReviewBodiesPageData.Advanced_Filters[filterDatasetName];
-    // Use below commented code, if needed to check the results till the end of the pagination
-    // const lastPage = await removeUnwantedWhitespace(confirmStringNotNull(await commonItemsPage.lastPage.textContent()));
-    // for (let i = 1; i < Number(lastPage); i++) {
-    for (let i = 1; i < 4; i++) {
-      const rowCount = await commonItemsPage.tableRows.count();
-      for (let j = 1; j < rowCount; j++) {
-        const organisationNameActual = confirmStringNotNull(
-          await commonItemsPage.tableRows.nth(j).getByRole('cell').nth(0).textContent()
-        );
-        const countryActual = confirmStringNotNull(
-          await commonItemsPage.tableRows.nth(j).getByRole('cell').nth(1).textContent()
-        );
-        const statusActual = confirmStringNotNull(
-          await commonItemsPage.tableRows.nth(j).getByRole('cell').nth(2).textContent()
-        );
-        if (searchCriteriaDataset['search_input_text'] !== '') {
-          const organisationNameExpected = searchCriteriaDataset['search_input_text'];
-          expect(organisationNameActual.toLowerCase().includes(organisationNameExpected.toLowerCase()));
-        }
-        for (const key in filterDataset) {
-          if (Object.prototype.hasOwnProperty.call(filterDataset, key)) {
-            if (key === 'country_checkbox') {
-              const countryFilterLabelsExpected = filterDataset[key];
-              expect(
-                countryFilterLabelsExpected.some((countryLabel) =>
-                  countryActual.toLowerCase().includes(countryLabel.toLowerCase())
-                )
-              ).toBeTruthy();
-            }
-            if (key === 'status_radio') {
-              const statusExpected = filterDataset[key];
-              expect(statusActual.toLowerCase().includes(statusExpected.toLowerCase()));
-            }
-          }
-        }
-      }
-      await commonItemsPage.pagination_next_link.click();
-    }
+    await manageReviewBodiesPage.validateResults(commonItemsPage, searchCriteriaDataset, filterDataset, true);
   }
 );
 
@@ -235,37 +198,7 @@ When(
   'I can see the results matching the filter criteria {string} for manage review bodies page',
   async ({ manageReviewBodiesPage, commonItemsPage }, filterDatasetName: string) => {
     const filterDataset = manageReviewBodiesPage.manageReviewBodiesPageData.Advanced_Filters[filterDatasetName];
-    // Use below commented code, if needed to check the results till the end of the pagination
-    // const lastPage = await removeUnwantedWhitespace(confirmStringNotNull(await commonItemsPage.lastPage.textContent()));
-    // for (let i = 1; i < Number(lastPage); i++) {
-    for (let i = 1; i < 4; i++) {
-      const rowCount = await commonItemsPage.tableRows.count();
-      for (let j = 1; j < rowCount; j++) {
-        const countryActual = confirmStringNotNull(
-          await commonItemsPage.tableRows.nth(j).getByRole('cell').nth(1).textContent()
-        );
-        const statusActual = confirmStringNotNull(
-          await commonItemsPage.tableRows.nth(j).getByRole('cell').nth(2).textContent()
-        );
-        for (const key in filterDataset) {
-          if (Object.prototype.hasOwnProperty.call(filterDataset, key)) {
-            if (key === 'country_checkbox') {
-              const countryFilterLabelsExpected = filterDataset[key];
-              expect(
-                countryFilterLabelsExpected.some((countryLabel) =>
-                  countryActual.toLowerCase().includes(countryLabel.toLowerCase())
-                )
-              ).toBeTruthy();
-            }
-            if (key === 'status_radio') {
-              const statusExpected = filterDataset[key];
-              expect(statusActual.toLowerCase().includes(statusExpected.toLowerCase()));
-            }
-          }
-        }
-      }
-      await commonItemsPage.pagination_next_link.click();
-    }
+    await manageReviewBodiesPage.validateResults(commonItemsPage, {}, filterDataset, false);
   }
 );
 
@@ -274,7 +207,7 @@ Then(
   async ({ manageReviewBodiesPage }, filterDatasetName: string) => {
     const dataset = manageReviewBodiesPage.manageReviewBodiesPageData.Advanced_Filters[filterDatasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         if (key === 'country_checkbox') {
           const numberOfCheckboxesSelected = dataset[key].length;
           const hintLabel =
@@ -294,7 +227,7 @@ Then(
     const dataset = manageReviewBodiesPage.manageReviewBodiesPageData.Advanced_Filters[filterDatasetName];
     await commonItemsPage.advanced_filter_chevron.click();
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         await manageReviewBodiesPage[key + '_chevron'].click();
       }
     }
@@ -306,7 +239,7 @@ Then(
   async ({ manageReviewBodiesPage }, datasetName: string) => {
     const dataset = manageReviewBodiesPage.manageReviewBodiesPageData[datasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         await expect(manageReviewBodiesPage[key].getByText(dataset[key])).toBeVisible();
       }
     }
@@ -318,7 +251,7 @@ Then(
   async ({ manageReviewBodiesPage, commonItemsPage }, filterDatasetName: string) => {
     const dataset = manageReviewBodiesPage.manageReviewBodiesPageData.Advanced_Filters[filterDatasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         if (key === 'country_checkbox') {
           for (const filterLabel of dataset[key]) {
             const activeLabel =
