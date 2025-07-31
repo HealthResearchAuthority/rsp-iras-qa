@@ -74,7 +74,9 @@ Then(
 Then('I see the total number of results in the page', async ({ commonItemsPage, participatingOrganisationsPage }) => {
   //find total number of rows minus the header row ??.. check this
 
-  const displayedRowCount = await participatingOrganisationsPage.displayed_row_count.textContent();
+  const truncated = await participatingOrganisationsPage.displayed_row_count.textContent();
+  const displayedRowCount = truncated?.split(' ')[0].trim();
+
   const totalPages = await commonItemsPage.getTotalPages();
   let totalRowCount = 0;
   for (let i = 1; i <= totalPages; i++) {
@@ -85,4 +87,20 @@ Then('I see the total number of results in the page', async ({ commonItemsPage, 
     }
   }
   expect(totalRowCount).toBe(displayedRowCount);
+});
+
+Then('I confirm checkbox exists in every row across all pages', async ({ commonItemsPage }) => {
+  while (true) {
+    const rows = await commonItemsPage.tableRows;
+    const rowCount = await rows.count();
+    for (let i = 2; i < rowCount; i++) {
+      //check the locator checkbox
+      await modificationsReadyToAssignPage.modification_checkbox.nth(i).isVisible();
+    }
+    const isDisabled = await commonItemsPage.next_button.isDisabled();
+    if (isDisabled !== null) {
+      break;
+    }
+    await commonItemsPage.next_button.click();
+  }
 });

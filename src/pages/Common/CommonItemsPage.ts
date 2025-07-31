@@ -111,7 +111,10 @@ export default class CommonItemsPage {
     this.bannerQuestionSet = this.bannerNavBar.getByText(this.linkTextData.Banner.Question_Set, { exact: true });
     this.bannerSystemAdmin = this.bannerNavBar.getByText(this.linkTextData.Banner.System_Admin, { exact: true });
     this.bannerMyApplications = this.bannerNavBar.getByText(this.linkTextData.Banner.My_Applications, { exact: true });
-    this.next_button = this.page.getByRole('link').getByText(this.commonTestData.next_button, { exact: true });
+    this.next_button = this.page
+      .getByRole('link')
+      .getByText(this.commonTestData.next_button, { exact: true })
+      .or(this.page.getByRole('button', { name: this.commonTestData.next_button, exact: true }));
     this.errorMessageFieldLabel = this.page
       .locator('.field-validation-error')
       .or(this.page.locator('.govuk-error-message'))
@@ -134,7 +137,9 @@ export default class CommonItemsPage {
       .locator('..')
       .getByRole('paragraph');
     this.pagination_items = this.pagination.getByRole('listitem');
-    this.pageLinks = this.pagination.locator('a[aria-label^="Page"]');
+    this.pageLinks = this.pagination
+      .locator('a[aria-label^="Page"]')
+      .or(this.pagination.locator('button[aria-label^="Page"]'));
     //Validation Alert Box
     this.alert_box = this.page.getByRole('alert');
     this.alert_box_headings = this.alert_box.getByRole('heading');

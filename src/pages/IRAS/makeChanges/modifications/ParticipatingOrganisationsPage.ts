@@ -65,7 +65,7 @@ export default class MakeChangeParticipatingOrganisationsPage {
       exact: true,
     });
     //find the locator of the displayed rowcount here
-    this.displayed_row_count = this.page.locator('.govuk-heading-l');
+    this.displayed_row_count = this.page.locator('.search-filter-panel__count');
   }
 
   //Page Methods
