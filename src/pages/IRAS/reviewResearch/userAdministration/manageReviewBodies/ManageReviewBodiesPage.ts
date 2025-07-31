@@ -265,4 +265,58 @@ export default class ManageReviewBodiesPage {
     }
     return reviewBodyName;
   }
+
+  async validateFilters(countryActual: string, statusActual: string, filterDataset: any) {
+    for (const key in filterDataset) {
+      if (Object.hasOwn(filterDataset, key)) {
+        if (key === 'country_checkbox') {
+          const countryFilterLabelsExpected = filterDataset[key];
+          expect(
+            countryFilterLabelsExpected.some((countryLabel: string) =>
+              countryActual.toLowerCase().includes(countryLabel.toLowerCase())
+            )
+          ).toBeTruthy();
+        }
+        if (key === 'status_radio') {
+          const statusExpected = filterDataset[key];
+          expect(statusActual.toLowerCase().includes(statusExpected.toLowerCase()));
+        }
+      }
+    }
+  }
+
+  async getRowDataAdvancedFiltersSearch(row: any) {
+    return {
+      organisationName: confirmStringNotNull(await row.getByRole('cell').nth(0).textContent()),
+      country: confirmStringNotNull(await row.getByRole('cell').nth(1).textContent()),
+      status: confirmStringNotNull(await row.getByRole('cell').nth(2).textContent()),
+    };
+  }
+
+  async validateResults(
+    commonItemsPage: any,
+    searchCriteriaDataset: any,
+    filterDataset: any,
+    validateSearch: boolean = true
+  ) {
+    // Use below commented code, if needed to check the results till the end of the pagination
+    // Loop through pages (currently set to 4)
+    // const lastPage = await removeUnwantedWhitespace(confirmStringNotNull(await commonItemsPage.lastPage.textContent()));
+    // for (let i = 1; i < Number(lastPage); i++) {
+    for (let i = 1; i < 4; i++) {
+      const rowCount = await commonItemsPage.tableRows.count();
+      for (let j = 1; j < rowCount; j++) {
+        const row = commonItemsPage.tableRows.nth(j);
+        const { organisationName, country, status } = await this.getRowDataAdvancedFiltersSearch(row);
+
+        // If search criteria is to be validated, check organisation name
+        if (validateSearch && searchCriteriaDataset['search_input_text'] !== '') {
+          const organisationNameExpected = searchCriteriaDataset['search_input_text'];
+          expect(organisationName.toLowerCase().includes(organisationNameExpected.toLowerCase()));
+        }
+        this.validateFilters(country, status, filterDataset);
+      }
+      await commonItemsPage.pagination_next_link.click();
+    }
+  }
 }
