@@ -51,15 +51,15 @@ Feature: Receive Amendments: Search Modifications
                 And I capture the page screenshot
                 Then I can see the list of modifications received for approval is sorted by 'descending' order of the '<Sort_Field>'
                 Examples:
-                        | Valid_Iras_Id             | Advanced_Filters             |
-                        | Valid_Iras_Id_Nth         | Advanced_Filters_Nth         |
-                        | Valid_Iras_Id_Twenty      | Advanced_Filters_Twenty      |
-                        | Valid_Iras_Id_TwentyOne   | Advanced_Filters_TwentyOne   |
-                        | Valid_Iras_Id_TwentyTwo   | Advanced_Filters_TwentyTwo   |
-                        | Valid_Iras_Id_TwentyThree | Advanced_Filters_TwentyThree |
+                        | Valid_Iras_Id        | Advanced_Filters             | Sort_Button         | Sort_Field          |
+                        | Valid_Iras_Id_Nth    | Advanced_Filters_Lead_Nation | Modification_Id     | modification id     |
+                        | Valid_Iras_Id_Prefix | Advanced_Filters_Twenty      | Short_Project_Title | short project title |
+                        | Valid_Iras_Id_Prefix | Advanced_Filters_TwentyOne   | Modification_Type   | modification type   |
+                        | Valid_Iras_Id_Prefix | Advanced_Filters_TwentyTwo   | Chief_Investigator  | chief investigator  |
+                        | Valid_Iras_Id_Prefix | Advanced_Filters_Lead_Nation | Lead_Nation         | lead nation         |
 
-        @RegressionViewListOfModifications @TestRegression @rsp-4090 @rsp-4011 @rsp-4016 @rsp-4118 @KNOWN-DEFECT-RSP-4305 @KNOWN-DEFECT-RSP-4467
-        Scenario Outline: Verify the user is able to view the list of modifications by entering valid iras id, then clicking on 'Search' button and then selecting advanced filters and clicking the 'Apply filters' button
+        @RegressionViewListOfModifications @rsp-4090 @rsp-4011 @rsp-4016 @rsp-4118 @KNOWN-DEFECT-RSP-4305 @KNOWN-DEFECT-RSP-4467
+        Scenario Outline: Verify that the user can view the list of modifications by performing a search, applying advanced filters, and sorting the results in both ascending and descending order
                 When I enter 'Valid_Iras_Id_Prefix' into the search field for search modifications page
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Search_Modifications_Page'
