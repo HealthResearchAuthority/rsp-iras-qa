@@ -443,7 +443,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
             | Valid_Iras_Id_TwentyTwo   |
             | Valid_Iras_Id_TwentyThree |
 
-    @ViewListOfModifications @Pagination @ViewListOfModificationsPaginationFirstPage @ViewListOfModificationsPaginationPageNumber @ViewListOfModificationsPaginationNextLinkClick
+    @ViewListOfModifications @ViewListOfModificationsPaginationFirstPage @ViewListOfModificationsPaginationPageNumber @ViewListOfModificationsPaginationNextLinkClick
     Scenario Outline: Verify pagination in the list of modifications page when user is on the first page and navigate through each page by clicking page number or by by clicking next link
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
@@ -463,7 +463,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
             | clicking on page number | Valid_Iras_Id_Zeros | Advanced_Filters_Lead_Nation |
             | clicking on next link   | Valid_Iras_Id_Zeros | Advanced_Filters_Lead_Nation |
 
-    @ViewListOfModifications @Pagination @ViewListOfModificationsPaginationLastPage @ViewListOfModificationsPaginationPageNumber @ViewListOfModificationsPaginationPreviousLinkClick
+    @ViewListOfModifications  @ViewListOfModificationsPaginationLastPage @ViewListOfModificationsPaginationPageNumber @ViewListOfModificationsPaginationPreviousLinkClick
     Scenario Outline: Verify pagination in the list of modifications page when user is on the last page and navigate through each page by clicking page number or by by clicking next link
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
