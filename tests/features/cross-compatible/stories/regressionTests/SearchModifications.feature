@@ -19,7 +19,6 @@ Feature: Receive Amendments: Search Modifications
                 When I click the '<Sort_Button>' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then I can see the list of modifications received for approval is sorted by 'descending' order of the '<Sort_Field>'
-
                 Examples:
                         | Sort_Button         | Sort_Field          |
                         | Modification_Id     | modification id     |
@@ -28,7 +27,7 @@ Feature: Receive Amendments: Search Modifications
                         | Chief_Investigator  | chief investigator  |
                         | Lead_Nation         | lead nation         |
 
-        @RegressionViewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters
+        @RegressionViewListOfModifications @rsp-4090 @rsp-4011 @rsp-4016 @rsp-4118 @KNOWN-DEFECT-RSP-4467 @KNOWN-DEFECT-RSP-4305
         Scenario Outline: Verify the user is able to view the list of modifications by entering valid iras id, then clicking on 'Search' button and then selecting advanced filters and clicking the 'Apply filters' button
                 When I enter '<Valid_Iras_Id>' into the search field for search modifications page
                 And I capture the page screenshot
@@ -40,11 +39,17 @@ Feature: Receive Amendments: Search Modifications
                 And I capture the page screenshot
                 And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                Then I can see the selected filters '<Advanced_Filters>' are displayed under active filters in the search modifications page'
+                Then I can see the selected filters '<Advanced_Filters>' are displayed under active filters in the search modifications page
                 And the system displays modification records matching the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>'
                 And I capture the page screenshot
                 And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
                 And I capture the page screenshot
+                When I click the '<Sort_Button>' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                Then I can see the list of modifications received for approval is sorted by 'ascending' order of the '<Sort_Field>'
+                When I click the '<Sort_Button>' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                Then I can see the list of modifications received for approval is sorted by 'descending' order of the '<Sort_Field>'
                 Examples:
                         | Valid_Iras_Id             | Advanced_Filters             |
                         | Valid_Iras_Id_Nth         | Advanced_Filters_Nth         |
@@ -52,3 +57,46 @@ Feature: Receive Amendments: Search Modifications
                         | Valid_Iras_Id_TwentyOne   | Advanced_Filters_TwentyOne   |
                         | Valid_Iras_Id_TwentyTwo   | Advanced_Filters_TwentyTwo   |
                         | Valid_Iras_Id_TwentyThree | Advanced_Filters_TwentyThree |
+
+        @RegressionViewListOfModifications @TestRegression @rsp-4090 @rsp-4011 @rsp-4016 @rsp-4118 @KNOWN-DEFECT-RSP-4305 @KNOWN-DEFECT-RSP-4467
+        Scenario Outline: Verify the user is able to view the list of modifications by entering valid iras id, then clicking on 'Search' button and then selecting advanced filters and clicking the 'Apply filters' button
+                When I enter 'Valid_Iras_Id_Prefix' into the search field for search modifications page
+                And I capture the page screenshot
+                And I click the 'Search' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                And I can now see a table of search results for modifications received for approval
+                And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
+                And I capture the page screenshot
+                When I click the '<Sort_Button>' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                Then I can see the list of modifications received for approval is sorted by 'ascending' order of the '<Sort_Field>'
+                When I click the '<Sort_Button>' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                Then I can see the list of modifications received for approval is sorted by 'descending' order of the '<Sort_Field>'
+                And I select advanced filters in the search modifications page using 'Advanced_Filters_Checkboxes'
+                And I capture the page screenshot
+                And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                Then I can see the selected filters 'Advanced_Filters_Checkboxes' are displayed under active filters in the search modifications page
+                And the system displays modification records matching the search 'Valid_Iras_Id_Prefix' and filter criteria 'Advanced_Filters_Checkboxes'
+                And I capture the page screenshot
+                And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
+                And I capture the page screenshot
+                When I click the '<Sort_Button>' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                Then I can see the list of modifications received for approval is sorted by 'ascending' order of the '<Sort_Field>'
+                When I click the '<Sort_Button>' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                Then I can see the list of modifications received for approval is sorted by 'descending' order of the '<Sort_Field>'
+                Examples:
+                        | Sort_Button         | Sort_Field          |
+                        | Modification_Id     | modification id     |
+                        | Short_Project_Title | short project title |
+                        | Modification_Type   | modification type   |
+                        | Chief_Investigator  | chief investigator  |
+                        | Lead_Nation         | lead nation         |
+
+
+
+
+
