@@ -1,6 +1,7 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../hooks/CustomFixtures';
 import { confirmStringNotNull } from '../../../../utils/UtilFunctions';
+//import config from '../../../../../playwright.config';
 
 const { Then } = createBdd(test);
 
@@ -89,18 +90,57 @@ Then('I see the total number of results in the page', async ({ commonItemsPage, 
   expect(totalRowCount).toBe(displayedRowCount);
 });
 
-Then('I confirm checkbox exists in every row across all pages', async ({ commonItemsPage }) => {
-  while (true) {
-    const rows = await commonItemsPage.tableRows;
-    const rowCount = await rows.count();
-    for (let i = 2; i < rowCount; i++) {
-      //check the locator checkbox
-      await modificationsReadyToAssignPage.modification_checkbox.nth(i).isVisible();
+// Then(
+//   'I confirm checkbox exists in every row across all pages',
+//   async ({ commonItemsPage, participatingOrganisationsPage }) => {
+//     while (true) {
+//       const rows = await commonItemsPage.tableRows;
+//       const rowCount = await rows.count();
+//       for (let i = 2; i < rowCount; i++) {
+//         //check the locator checkbox
+//         await participatingOrganisationsPage.modification_checkbox.nth(i).isVisible();
+//       }
+//       const isDisabled = await commonItemsPage.next_button.isDisabled();
+//       if (isDisabled !== null) {
+//         break;
+//       }
+//       await commonItemsPage.next_button.click();
+//     }
+//   }
+// );
+
+Then(
+  'I confirm checkbox exists in every row across all pages',
+  async ({ commonItemsPage, participatingOrganisationsPage }) => {
+    let hasNextPage = true;
+    while (hasNextPage) {
+      const rows = await commonItemsPage.tableRows;
+      const rowCount = await rows.count();
+      for (let i = 2; i < rowCount; i++) {
+        //check the locator checkbox
+        //await participatingOrganisationsPage.modification_checkbox.nth(i).isVisible();
+        //const checkbox = rows.nth(i).locator(participatingOrganisationsPage.modification_checkbox);
+        await participatingOrganisationsPage.modification_checkbox.nth(i).isVisible();
+        //await expect(participatingOrganisationsPage.modification_checkbox).toBeVisible();
+      }
+      hasNextPage = await commonItemsPage.next_button.isEnabled();
+
+      if (hasNextPage) {
+        await commonItemsPage.next_button.click();
+        await participatingOrganisationsPage.page.waitForLoadState('networkidle');
+      }
     }
-    const isDisabled = await commonItemsPage.next_button.isDisabled();
-    if (isDisabled !== null) {
-      break;
-    }
-    await commonItemsPage.next_button.click();
   }
-});
+);
+
+Then(
+  'I fill the search criteria {string}',
+  async ({ commonItemsPage, participatingOrganisationsPage }, datasetName: string) => {
+    const dataset = participatingOrganisationsPage.participatingOrganisationsPageTestData[datasetName];
+    for (const key in dataset) {
+      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+        await commonItemsPage.fillUIComponent(dataset, key, participatingOrganisationsPage);
+      }
+    }
+  }
+);

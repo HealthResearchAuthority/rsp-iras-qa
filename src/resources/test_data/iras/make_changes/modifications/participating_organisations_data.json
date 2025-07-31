@@ -15,5 +15,11 @@
     "Address": "Address",
     "Organisation type": "Organisation type",
     "Country": "Country"
+  },
+  "Checkbox": {
+    "modification_checkbox": ""
+  },
+  "Valid_Data_Fields": {
+    "search_text": "NHS"
   }
 }

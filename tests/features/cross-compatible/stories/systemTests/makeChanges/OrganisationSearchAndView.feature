@@ -19,7 +19,7 @@ Feature: Organisation Search and View
     Then I can see the project overview page
     And I capture the page screenshot
 
-@rsp-4063 @OrganisationView @def
+@rsp-4063 @OrganisationView
   Scenario Outline: Verify that user can view the participating organisation screen 
     When I click the '<Modifications_Tile_Link>' link on the 'Project_Overview_Page'
     And I can see the select area of change page
@@ -34,29 +34,41 @@ Feature: Organisation Search and View
     And I can see the list is sorted by default in the alphabetical order of the 'Organisation Name'
     And I capture the page screenshot
     #And I see the total number of results in the page
-    And I confirm checkbox exists in every row across all pages
-    
-    
+    #And I confirm checkbox exists in every row across all pages
+        
   Examples:
       | Area_Of_Change             | Specific_Change                                            |  Modifications_Tile_Link |  Validation_Text  |
       | Participating_Organisation | Addition_Of_sites_Option                                   |  Modifications_Tile      |  Column_Label     |
-      # | Participating_Organisation | Early_closure_withdrawal_of_sites_Option                   |  Modifications_Tile      |  Column_Label     |
-      # | Participating_Organisation | Addition_Of_Participant_Identification_Centres_Option      |  Modifications_Tile      |  Column_Label     |
-      # | Participating_Organisation | Early_closure_Of_Participant_Identification_Centres_Option |  Modifications_Tile      |  Column_Label     |
+      | Participating_Organisation | Early_closure_withdrawal_of_sites_Option                   |  Modifications_Tile      |  Column_Label     |
+      | Participating_Organisation | Addition_Of_Participant_Identification_Centres_Option      |  Modifications_Tile      |  Column_Label     |
+      | Participating_Organisation | Early_closure_Of_Participant_Identification_Centres_Option |  Modifications_Tile      |  Column_Label     |
+
+@rsp-4063 @OrganisationSearchView @def
+  Scenario Outline: Verify that user can view the participating organisation screen 
+    When I click the '<Modifications_Tile_Link>' link on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I select '<Area_Of_Change>' from area of change dropdown and '<Specific_Change>' from specific change dropdown
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+    Then I can see the participating organisation page
+    And I fill the search criteria '<Participating_Organisation_Search>'
+    
+ Examples:
+       | Area_Of_Change             | Specific_Change                                            |  Modifications_Tile_Link |  Participating_Organisation_Search  |
+      | Participating_Organisation | Addition_Of_sites_Option                                   |  Modifications_Tile      |  Valid_Data_Fields     |
+      # | Participating_Organisation | Early_closure_withdrawal_of_sites_Option                   |  Modifications_Tile      |  Valid_Data_Fields    |
+      # | Participating_Organisation | Addition_Of_Participant_Identification_Centres_Option      |  Modifications_Tile      |  Valid_Data_Fields     |
+      # | Participating_Organisation | Early_closure_Of_Participant_Identification_Centres_Option |  Modifications_Tile      |  Valid_Data_Fields     |
 
 
+#Given that I have entered 3 or more characters into the search bar
 
+# When I click on the ‘search' button
 
-# AC1
+# Then I see a list of matching results 
 
-# Given I navigate to the "Select participating organisations" screen -> done
+# Search additional
 
-# the screen is loaded with the results by default in Alphabetical order by participating organisation name -> done
+# Specific search (not fuzzy)
 
-# The following organisations columns are displayed - Name, Address, Organisation type, and Country -> done
-
-# Each row contains a checkbox -> done
-
-# The number of results is displayed on the table -> done
-
-# The default size of the results displayed - 10 or 20 is not decided yet. -> done
+# Search against the ‘participating organisation name’
