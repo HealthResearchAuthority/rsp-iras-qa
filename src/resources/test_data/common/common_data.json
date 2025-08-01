@@ -9,5 +9,6 @@
   "default_page_size": "20",
   "previous_button": "Previous   page",
   "heading": "Access Denied",
-  "guidance_text": "You do not have access to this resource"
+  "guidance_text": "You do not have access to this resource",
+  "maxPagesToValidate": 4
 }

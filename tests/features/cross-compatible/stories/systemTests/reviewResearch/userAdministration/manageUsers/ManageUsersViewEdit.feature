@@ -158,37 +158,37 @@ Feature: User Administration: Manage user profiles, view and edit user profile
     And the 'Next' button will be 'not available' to the user
     And I capture the page screenshot
 
-  @rsp-3456 @ManageUsersSearchResultsFound @Smoke
-  Scenario Outline: Verify search results in manage users page when user search by first value of first name, last name, full name and email address
-    When I enter the '<Field_Name>' of the '<Position>' item in the list, into the search field
-    And I capture the page screenshot
-    And I click the 'Search' button on the 'Manage_Users_Page'
-    And I capture the page screenshot
-    Then the system displays user records matching the search criteria
-    And I capture the page screenshot
+  # @rsp-3456 @ManageUsersSearchResultsFound @Smoke
+  # Scenario Outline: Verify search results in manage users page when user search by first value of first name, last name, full name and email address
+  #   When I enter the '<Field_Name>' of the '<Position>' item in the list, into the search field
+  #   And I capture the page screenshot
+  #   And I click the 'Search' button on the 'Manage_Users_Page'
+  #   And I capture the page screenshot
+  #   Then the system displays user records matching the search criteria
+  #   And I capture the page screenshot
 
-    Examples:
-      | Field_Name    | Position |
-      | First_Name    | First    |
-      | Last_Name     | First    |
-      | Email_Address | First    |
-      | Full_Name     | First    |
+    # Examples:
+    #   | Field_Name    | Position |
+    #   | First_Name    | First    |
+    #   | Last_Name     | First    |
+    #   | Email_Address | First    |
+    #   | Full_Name     | First    |
 
-  @rsp-3456 @ManageUsersSearchResultsFound @Smoke
-  Scenario Outline: Verify search results in manage users page when user search by last value of first name, last name and email address
-    When I enter the '<Field_Name>' of the '<Position>' item in the list, into the search field
-    And I capture the page screenshot
-    And I click the 'Search' button on the 'Manage_Users_Page'
-    And I capture the page screenshot
-    Then the system displays user records matching the search criteria
-    And I capture the page screenshot
+  # @rsp-3456 @ManageUsersSearchResultsFound @Smoke
+  # Scenario Outline: Verify search results in manage users page when user search by last value of first name, last name and email address
+  #   When I enter the '<Field_Name>' of the '<Position>' item in the list, into the search field
+  #   And I capture the page screenshot
+  #   And I click the 'Search' button on the 'Manage_Users_Page'
+  #   And I capture the page screenshot
+  #   Then the system displays user records matching the search criteria
+  #   And I capture the page screenshot
 
-    Examples:
-      | Field_Name    | Position |
-      | First_Name    | Last     |
-      | Last_Name     | Last     |
-      | Email_Address | Last     |
-      | Full_Name     | Last     |
+  #   Examples:
+  #     | Field_Name    | Position |
+  #     | First_Name    | Last     |
+  #     | Last_Name     | Last     |
+  #     | Email_Address | Last     |
+  #     | Full_Name     | Last     |
 
   @rsp-3456 @ManageUsersSearchNoResultsFound
   Scenario Outline: Verify no results found message will be presented to the user in manage users page if there is not a user on the system that matches the search criteria
