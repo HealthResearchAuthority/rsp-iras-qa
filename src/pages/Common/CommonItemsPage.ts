@@ -7,6 +7,7 @@ import * as fs from 'fs';
 import path from 'path';
 import ProjectFilterPage from '../IRAS/questionSet/ProjectFilterPage';
 import ProjectDetailsPage from '../IRAS/questionSet/ProjectDetailsPage';
+import ModificationsReadyToAssignPage from '../IRAS/reviewResearch/receiveAmendments/ModificationsReadyToAssignPage';
 import DevicesPage from '../IRAS/questionSet/DevicesPage';
 import TissuePage from '../IRAS/questionSet/TissuePage';
 import StudentPage from '../IRAS/questionSet/StudentPage';
@@ -657,13 +658,6 @@ export default class CommonItemsPage {
     return pageNumber;
   }
 
-  async getPageNumberForModifications(currentUrl: string) {
-    const parts: string[] = currentUrl.split('?');
-    const pageName: string[] = parts[1].split('&');
-    const pageNumber = parseInt(pageName[2].split('=')[1], 10);
-    return pageNumber;
-  }
-
   async getTotalItems() {
     const paginationResults = await this.getPaginationResults();
     const paginationResultsParts: string[] = paginationResults.split(' results');
@@ -711,7 +705,6 @@ export default class CommonItemsPage {
     const allVisibleItems: any[] = [];
     for (let i = 0; i < items.length; i++) {
       const text = items[i].trim();
-      //const text = items[i].trim().replace(/\s+/g, '');
       allVisibleItems.push(text);
       if (text === '⋯') {
         ellipsisIndices.push(i);
@@ -819,5 +812,16 @@ export default class CommonItemsPage {
       left: 0,
     }));
     await stitchedImage.composite(composites).toFile(outputFile);
+  }
+
+  async selectRandomCheckboxes(): Promise<string> {
+    const pageObject = new ModificationsReadyToAssignPage(this.page);
+    const count = await pageObject.modification_checkbox.count();
+    const randomIndex = Math.floor(Math.random() * count);
+    const checkbox = pageObject.modification_checkbox.nth(randomIndex);
+    await checkbox.check();
+    const modificationId = await this.tableRows.locator('td').first().innerText();
+    await checkbox.isChecked();
+    return modificationId;
   }
 }

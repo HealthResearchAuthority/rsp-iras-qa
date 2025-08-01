@@ -6,7 +6,8 @@
     "modification_button_label": "Continue to assign modifications",
     "advanced_filter_label": "Advanced filter",
     "modification_checkbox": "",
-    "tasklist_days_suffix": "days"
+    "tasklist_days_suffix": "days",
+    "maxPagesToVisit": 2
   },
 
   "Label_Texts": {
