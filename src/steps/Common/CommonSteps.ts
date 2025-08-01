@@ -11,7 +11,12 @@ import {
 } from '../../utils/GenerateTestData';
 const { Given, When, Then } = createBdd(test);
 import * as userProfileGeneratedataConfig from '../../resources/test_data/user_administration/testdata_generator/user_profile_generate_data_config.json';
-import { confirmArrayNotNull, getAuthState, getCurrentTimeFormatted } from '../../utils/UtilFunctions';
+import {
+  confirmArrayNotNull,
+  confirmStringNotNull,
+  getAuthState,
+  getCurrentTimeFormatted,
+} from '../../utils/UtilFunctions';
 import { Locator } from 'playwright/test';
 import fs from 'fs';
 
@@ -635,10 +640,12 @@ When(
     }
   }
 );
-
 Then(
   'the system displays no results found message if there is no {string} on the system that matches the search criteria',
-  async ({ commonItemsPage, userListReviewBodyPage, manageUsersPage, manageReviewBodiesPage }, entityType: string) => {
+  async (
+    { commonItemsPage, userListReviewBodyPage, manageUsersPage, manageReviewBodiesPage, searchModificationsPage },
+    entityType: string
+  ) => {
     const filteredSearchResults = await userListReviewBodyPage.getFilteredSearchResultsBeforeSearch(commonItemsPage);
     expect(await commonItemsPage.tableRows.count()).toBe(0);
     expect(filteredSearchResults).toEqual([]);
@@ -648,17 +655,39 @@ Then(
       guidanceLocator = manageUsersPage.no_results_guidance_text;
       expectedHeading = manageUsersPage.manageUsersPageTestData.Manage_Users_Page.no_results_heading;
       expectedGuidance = manageUsersPage.manageUsersPageTestData.Manage_Users_Page.no_results_guidance_text;
+      await expect(headingLocator).toHaveText(expectedHeading);
+      await expect(guidanceLocator).toHaveText(expectedGuidance);
     } else if (entityType === 'review body') {
       headingLocator = manageReviewBodiesPage.no_results_heading;
       guidanceLocator = manageReviewBodiesPage.no_results_guidance_text;
       expectedHeading = manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.no_results_heading;
       expectedGuidance =
         manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.no_results_guidance_text;
-    } else {
-      throw new Error(`Unsupported entity type: ${entityType}`);
+      await expect(headingLocator).toHaveText(expectedHeading);
+      await expect(guidanceLocator).toHaveText(expectedGuidance);
+    } else if (entityType === 'modification record') {
+      const expectedResultCount =
+        searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.result_count_heading;
+      const actualResultCount = confirmStringNotNull(await commonItemsPage.result_count.textContent());
+      expect('0' + expectedResultCount).toBe(actualResultCount);
+      headingLocator = commonItemsPage.no_results_heading;
+      guidanceLocator = commonItemsPage.no_results_guidance_text;
+      expectedHeading =
+        searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.no_results_heading;
+      expectedGuidance =
+        searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.no_results_guidance_text;
+      await expect(headingLocator).toHaveText(expectedHeading);
+      expect(confirmStringNotNull(await headingLocator.textContent())).toBe(expectedHeading);
+      await expect(guidanceLocator).toHaveText(expectedGuidance);
+      expect(confirmStringNotNull(await guidanceLocator.textContent())).toBe(expectedGuidance);
+      const bulletPoints: string[] = await commonItemsPage.getNoResultsBulletPoints();
+      const bulletPointsActual = bulletPoints.flat().join(', ');
+      const bulletPointsExpected =
+        searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.no_results_bullet_points
+          .flat()
+          .join(', ');
+      expect(bulletPointsActual).toEqual(bulletPointsExpected);
     }
-    await expect(headingLocator).toHaveText(expectedHeading);
-    await expect(guidanceLocator).toHaveText(expectedGuidance);
   }
 );
 
@@ -785,3 +814,34 @@ Then(
     expect.soft(actualList).toEqual(sortedList);
   }
 );
+
+Then(
+  'I sequentially navigate through each page by {string} from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges',
+  async ({ commonItemsPage }, navigateMethod: string) => {
+    const totalPages = await commonItemsPage.getTotalPages();
+    await commonItemsPage.firstPage.click();
+    for (let currentPage = 1; currentPage <= totalPages; currentPage++) {
+      await commonItemsPage.validatePagination(currentPage, totalPages, navigateMethod);
+    }
+  }
+);
+
+Then(
+  'I sequentially navigate through each page by {string} from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges',
+  async ({ commonItemsPage }, navigateMethod: string) => {
+    const totalPages = await commonItemsPage.getTotalPages();
+    await commonItemsPage.clickOnPages(totalPages, 'clicking on page number');
+    for (let currentPage = totalPages; currentPage >= 1; currentPage--) {
+      await commonItemsPage.validatePagination(currentPage, totalPages, navigateMethod);
+    }
+  }
+);
+
+Then('I can see the {string} ui labels', async ({ commonItemsPage }, datasetName: string) => {
+  const dataset = commonItemsPage.commonTestData[datasetName];
+  for (const key in dataset) {
+    if (Object.hasOwn(dataset, key)) {
+      await expect(commonItemsPage[key].getByText(dataset[key])).toBeVisible();
+    }
+  }
+});

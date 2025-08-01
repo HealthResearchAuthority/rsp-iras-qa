@@ -158,5 +158,9 @@
     "Back": "Back",
     "Advanced_Filter": "Advanced filter",
     "Remove_This_Change": "Remove this change"
+  },
+  "Approvals_Page": {
+    "Search": "Search",
+    "Back": "Back"
   }
 }
