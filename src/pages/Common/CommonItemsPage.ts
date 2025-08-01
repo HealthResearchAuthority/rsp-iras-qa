@@ -859,9 +859,9 @@ export default class CommonItemsPage {
     await stitchedImage.composite(composites).toFile(outputFile);
   }
 
-  async removeSelectedFilterValues(removeFilterLabel: string[]): Promise<string[]> {
-    const removedFilterValues: string[] = [];
-    for (const label of removeFilterLabel) {
+  async removeSelectedFilterValues(removeFilterLabel: string): Promise<string> {
+    let removedFilterValues: string = '';
+    if (removeFilterLabel) {
       let filterFound = true;
       while (filterFound) {
         const filterItems = this.active_filters_list;
@@ -869,8 +869,8 @@ export default class CommonItemsPage {
         filterFound = false;
         for (let i = 0; i < count; i++) {
           const text = (await filterItems.nth(i).innerText()).trim().replace('Remove filter', '').trim();
-          if (text === label) {
-            removedFilterValues.push(text);
+          if (text === removeFilterLabel) {
+            removedFilterValues = text;
             await filterItems.nth(i).locator('..').click({ force: true });
             await this.page.waitForTimeout(500);
             filterFound = true;
@@ -882,60 +882,45 @@ export default class CommonItemsPage {
     return removedFilterValues;
   }
 
-  async getSelectedFilterValues(): Promise<string[]> {
-    const filterItems = this.active_filters_list;
-    const count = await filterItems.count();
-    const values: string[] = [];
-    for (let i = 0; i < count; i++) {
-      const text = await filterItems.nth(i).innerText();
-      values.push(text.trim().replace('Remove filter', '').trim());
-    }
-    return values;
+  async getActiveFilterLabelCheckbox(
+    filterLabels: object,
+    filterLabel: string,
+    key: string,
+    searchValue: RegExp,
+    replaceValue: string
+  ): Promise<string> {
+    const label = filterLabels[key.replace(searchValue, replaceValue)];
+    return `${label} - ${filterLabel}`;
   }
 
-  async getFilterTextCheckbox(filterName: string, dataset: JSON, key: string) {
-    const filterTextsCheckbox: string[] = [];
-    for (const value of dataset[key]) {
-      const filterText = `${filterName} - ${value}`;
-      filterTextsCheckbox.push(filterText);
-    }
-    return filterTextsCheckbox;
+  async getActiveFilterLabelTextbox(
+    filterLabels: any,
+    filterDataset: JSON,
+    key: string,
+    searchValue: RegExp,
+    replaceValue: string
+  ): Promise<string> {
+    const label = filterLabels[key.replace(searchValue, replaceValue)];
+    return `${label} - ${filterDataset[key]}`;
   }
 
-  async getActiveFiltersCheckboxLabels(dataset: JSON, datasetLabels: any) {
-    let filterName: string = '';
-    const filterTextsCheckbox: any[] = [];
-    let activeFiltersMap: any;
-    for (const key in dataset) {
-      if (Object.hasOwn(dataset, key)) {
-        if (key.endsWith('_checkbox')) {
-          if (key === 'lead_nation_checkbox') {
-            filterName = datasetLabels['lead_nation_label'];
-            const filterValues = await this.getFilterTextCheckbox(filterName, dataset, key);
-            filterTextsCheckbox.push(filterValues);
-          } else if (key === 'modification_type_checkbox') {
-            filterName = datasetLabels['modification_type_label'];
-            const filterValues = await this.getFilterTextCheckbox(filterName, dataset, key);
-            filterTextsCheckbox.push(filterValues);
-          } else if (key === 'participating_nation_checkbox') {
-            filterName = datasetLabels['participating_nation_label'];
-            const filterValues = await this.getFilterTextCheckbox(filterName, dataset, key);
-            filterTextsCheckbox.push(filterValues);
-          } else if (key === 'country_checkbox') {
-            filterName = datasetLabels['country_advanced_filter_label'];
-            const filterValues = await this.getFilterTextCheckbox(filterName, dataset, key);
-            filterTextsCheckbox.push(filterValues);
-          }
-          activeFiltersMap = new Map([['multiSelectFilter', confirmArrayNotNull(filterTextsCheckbox)]]);
-        }
-      }
+  async getActiveFilterLabelDateSubmittedField(
+    filterLabels: any,
+    filterDataset: JSON,
+    key: string,
+    searchValue: RegExp,
+    replaceValue: string
+  ): Promise<string> {
+    let activeFilterLabel: string;
+    const label = filterLabels[key.replace(searchValue, replaceValue)];
+    const dateType = key.includes('_from_') ? 'from' : 'to';
+    const dateKey = key.replace('_day_text', '');
+    const dateValue = await this.getDateString(filterDataset, dateKey);
+    if (dateValue) {
+      activeFilterLabel = `${label} - ${dateType} ${dateValue}`;
     }
-    return activeFiltersMap;
-  }
 
-  async clickAdvancedFilterChevron() {
-    const button = this.advanced_filter_chevron;
-    await button.click();
+    return activeFilterLabel;
   }
 
   async getDateString(dataset: JSON, prefix: string) {
@@ -943,59 +928,6 @@ export default class CommonItemsPage {
     const month = dataset[`${prefix}_month_dropdown`].slice(0, 3);
     const year = dataset[`${prefix}_year_text`];
     return day && month && year ? `${day} ${month} ${year}` : null;
-  }
-
-  async getActiveFiltersLabels(dataset: JSON, datasetLabels: any) {
-    const filterText: string[] = [];
-    const dateKeys = [
-      {
-        key: 'date_modification_submitted_from_day_text',
-        labelKey: 'date_modification_submitted_label',
-        dateKey: 'date_modification_submitted_from',
-        prefix: 'from',
-      },
-      {
-        key: 'date_modification_submitted_to_day_text',
-        labelKey: 'date_modification_submitted_label',
-        dateKey: 'date_modification_submitted_to',
-        prefix: 'to',
-      },
-      {
-        key: 'date_last_logged_in_from_day_text',
-        labelKey: 'date_last_logged_in_label',
-        dateKey: 'date_last_logged_in_from',
-        prefix: 'from',
-      },
-      {
-        key: 'date_last_logged_in_to_day_text',
-        labelKey: 'date_last_logged_in_label',
-        dateKey: 'date_last_logged_in_to',
-        prefix: 'to',
-      },
-    ];
-    const textKeys = [
-      { key: 'chief_investigator_name_text', labelKey: 'chief_investigator_name_label' },
-      { key: 'short_project_title_text', labelKey: 'short_project_title_label' },
-      { key: 'sponsor_organisation_text', labelKey: 'sponsor_organisation_label' },
-      { key: 'status_radio', labelKey: 'status_advanced_filter_label' },
-    ];
-    for (const { key, labelKey, dateKey, prefix } of dateKeys) {
-      if (dataset[key]) {
-        const label = datasetLabels[labelKey];
-        const date = await this.getDateString(dataset, dateKey);
-        if (date) {
-          filterText.push(`${label} - ${prefix} ${date}`);
-        }
-      }
-    }
-    for (const { key, labelKey } of textKeys) {
-      if (dataset[key]) {
-        const label = datasetLabels[labelKey];
-        filterText.push(`${label} - ${dataset[key]}`);
-      }
-    }
-    const activeFiltersMap = new Map([['singleSelectFilter', confirmArrayNotNull(filterText)]]);
-    return activeFiltersMap;
   }
 
   async getCheckboxHintLabel(): Promise<string> {

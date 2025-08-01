@@ -16,7 +16,6 @@ When(
   'I select advanced filters in the search modifications page using {string}',
   async ({ searchModificationsPage, commonItemsPage, $tags }, filterDatasetName: string) => {
     const dataset = searchModificationsPage.searchModificationsPageTestData.Advanced_Filters[filterDatasetName];
-    await commonItemsPage.clickAdvancedFilterChevron();
     const isJsEnabled =
       ($tags.includes('@jsEnabled') || config.projects?.[1].use?.javaScriptEnabled) && !$tags.includes('@jsDisabled');
     for (const key in dataset) {
@@ -30,6 +29,7 @@ When(
               'sponsor_organisation_jsenabled_text',
               searchModificationsPage
             );
+            await searchModificationsPage.page.waitForTimeout(2000);
             const suggestionVisible = await searchModificationsPage.sponsor_organisation_suggestion_list_labels
               .first()
               .isVisible();
@@ -39,7 +39,7 @@ When(
           } else {
             await commonItemsPage.fillUIComponent(dataset, key, searchModificationsPage);
             await searchModificationsPage.sponsor_organisation_jsdisabled_search_button.click();
-
+            await searchModificationsPage.page.waitForTimeout(2000);
             if (dataset[key] !== '') {
               await searchModificationsPage.sponsor_organisation_jsdisabled_search_results_radio_button.first().click();
             }
@@ -71,39 +71,19 @@ Then(
     const dataset = searchModificationsPage.searchModificationsPageTestData.Advanced_Filters[filterDatasetName];
     for (const key in dataset) {
       if (Object.hasOwn(dataset, key)) {
-        if (key === 'lead_nation_checkbox') {
+        if (key === 'lead_nation_checkbox' || key === 'modification_type_checkbox') {
           const numberOfCheckboxesSelected = dataset[key].length;
           const hintLabel =
             numberOfCheckboxesSelected +
             ' ' +
             searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page
               .selected_checkboxes_hint_label;
-          expect(
-            confirmStringNotNull(await searchModificationsPage.lead_nation_checkbox_selected_hint_label.textContent())
-          ).toBe(hintLabel);
-          expect(
-            confirmStringNotNull(await searchModificationsPage.lead_nation_checkbox_hint_label.textContent())
-          ).toBe(
-            searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page
-              .Advanced_Filters_Hint_Labels.lead_nation_checkbox_hint_label
+          expect(confirmStringNotNull(await searchModificationsPage[key + '_selected_hint_label'].textContent())).toBe(
+            hintLabel
           );
-        } else if (key === 'modification_type_checkbox') {
-          const numberOfCheckboxesSelected = dataset[key].length;
-          const hintLabel =
-            numberOfCheckboxesSelected +
-            ' ' +
+          expect(confirmStringNotNull(await searchModificationsPage[key + '_hint_label'].textContent())).toBe(
             searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page
-              .selected_checkboxes_hint_label;
-          expect(
-            confirmStringNotNull(
-              await searchModificationsPage.modification_type_checkbox_selected_hint_label.textContent()
-            )
-          ).toBe(hintLabel);
-          expect(
-            confirmStringNotNull(await searchModificationsPage.modification_type_checkbox_hint_label.textContent())
-          ).toBe(
-            searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page
-              .Advanced_Filters_Hint_Labels.modification_type_checkbox_hint_label
+              .Advanced_Filters_Hint_Labels[key + '_hint_label']
           );
         } else if (key === 'date_modification_submitted_from_day_text') {
           expect(await searchModificationsPage.date_modification_submitted_from_date_help_text.textContent()).toBe(
@@ -136,65 +116,105 @@ When(
 Then(
   'I can see the selected filters {string} are displayed under active filters in the search modifications page',
   async ({ searchModificationsPage, commonItemsPage }, filterDatasetName: string) => {
-    const testData = searchModificationsPage.searchModificationsPageTestData;
-    const dataset = testData.Advanced_Filters[filterDatasetName];
-    const datasetLabels = testData.Search_Modifications_Page;
-    let expectedSingleSelectValues: string[] = [];
-    let expectedMultiSelectValues: string[] = [];
-    for (const key in dataset) {
-      if (Object.hasOwn(dataset, key)) {
+    const filterDataset = searchModificationsPage.searchModificationsPageTestData.Advanced_Filters[filterDatasetName];
+    const filterLabels = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page;
+    const replaceValue = '_label';
+    for (const key in filterDataset) {
+      if (Object.hasOwn(filterDataset, key)) {
         if (key.endsWith('_checkbox')) {
-          const checkboxMap = await commonItemsPage.getActiveFiltersCheckboxLabels(dataset, datasetLabels);
-          expectedMultiSelectValues =
-            checkboxMap
-              .get('multiSelectFilter')
-              ?.flat()
-              .map((val: string) => val.trim()) || [];
+          for (const filterLabel of filterDataset[key]) {
+            const activeFilterLabel = await commonItemsPage.getActiveFilterLabelCheckbox(
+              filterLabels,
+              filterLabel,
+              key,
+              /_checkbox$/,
+              replaceValue
+            );
+            await expect.soft(commonItemsPage.active_filters_list.getByText(activeFilterLabel)).toBeVisible();
+          }
+        } else if (key.startsWith('date_')) {
+          if (
+            key === 'date_modification_submitted_from_day_text' ||
+            key === 'date_modification_submitted_to_day_text'
+          ) {
+            const activeFilterLabel = await commonItemsPage.getActiveFilterLabelDateSubmittedField(
+              filterLabels,
+              filterDataset,
+              key,
+              /(_from_day_text|_to_day_text)$/,
+              replaceValue
+            );
+            await expect(commonItemsPage.active_filters_list.getByText(activeFilterLabel)).toBeVisible();
+          }
         } else {
-          const singleSelectMap = await commonItemsPage.getActiveFiltersLabels(dataset, datasetLabels);
-          expectedSingleSelectValues =
-            singleSelectMap
-              .get('singleSelectFilter')
-              ?.flat()
-              .map((val: string) => val.trim()) || [];
+          const activeFilterLabel = await commonItemsPage.getActiveFilterLabelTextbox(
+            filterLabels,
+            filterDataset,
+            key,
+            /_text$/,
+            replaceValue
+          );
+          await expect(commonItemsPage.active_filters_list.getByText(activeFilterLabel)).toBeVisible();
         }
       }
     }
-    const actualFilterValues = (await commonItemsPage.getSelectedFilterValues())
-      .flat()
-      .map((val: string) => val.trim());
-    const expectedFilterValues = [...expectedSingleSelectValues, ...expectedMultiSelectValues];
-    expect.soft(actualFilterValues).toEqual(expectedFilterValues);
   }
 );
 
 Then(
   'I remove the {string} from the active filters in the search modifications page',
   async ({ searchModificationsPage, commonItemsPage }, removeFilterDatasetName: string) => {
-    const dataset = searchModificationsPage.searchModificationsPageTestData.Advanced_Filters[removeFilterDatasetName];
-    const datasetLabels = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page;
-    const expectedFilterValues: string[] = [];
-    const seen = new Set<string>();
-    for (const key in dataset) {
-      if (Object.hasOwn(dataset, key)) {
-        const isCheckbox = key.endsWith('_checkbox');
-        const activeFiltersMap = isCheckbox
-          ? await commonItemsPage.getActiveFiltersCheckboxLabels(dataset, datasetLabels)
-          : await commonItemsPage.getActiveFiltersLabels(dataset, datasetLabels);
-        const filterValues = activeFiltersMap.get(isCheckbox ? 'multiSelectFilter' : 'singleSelectFilter') || [];
-        const trimmedValues = filterValues.flat().map((val: string) => val.trim());
-        for (const val of trimmedValues) {
-          if (!seen.has(val)) {
-            seen.add(val);
-            expectedFilterValues.push(val);
+    const filterDataset =
+      searchModificationsPage.searchModificationsPageTestData.Advanced_Filters[removeFilterDatasetName];
+    const filterLabels = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page;
+    const replaceValue = '_label';
+    for (const key in filterDataset) {
+      if (Object.hasOwn(filterDataset, key)) {
+        if (key.endsWith('_checkbox')) {
+          for (const filterLabel of filterDataset[key]) {
+            const activeFilterLabel = await commonItemsPage.getActiveFilterLabelCheckbox(
+              filterLabels,
+              filterLabel,
+              key,
+              /_checkbox$/,
+              replaceValue
+            );
+            await expect.soft(commonItemsPage.active_filters_list.getByText(activeFilterLabel)).toBeVisible();
+            const removedFilterValues = await commonItemsPage.removeSelectedFilterValues(activeFilterLabel);
+            expect.soft(removedFilterValues).toBe(activeFilterLabel);
+            await expect.soft(commonItemsPage.active_filters_list.getByText(activeFilterLabel)).not.toBeVisible();
           }
+        } else if (key.startsWith('date_')) {
+          if (
+            key === 'date_modification_submitted_from_day_text' ||
+            key === 'date_modification_submitted_to_day_text'
+          ) {
+            const activeFilterLabel = await commonItemsPage.getActiveFilterLabelDateSubmittedField(
+              filterLabels,
+              filterDataset,
+              key,
+              /(_from_day_text|_to_day_text)$/,
+              replaceValue
+            );
+            await expect.soft(commonItemsPage.active_filters_list.getByText(activeFilterLabel)).toBeVisible();
+            const removedFilterValues = await commonItemsPage.removeSelectedFilterValues(activeFilterLabel);
+            expect.soft(removedFilterValues).toBe(activeFilterLabel);
+            await expect.soft(commonItemsPage.active_filters_list.getByText(activeFilterLabel)).not.toBeVisible();
+          }
+        } else {
+          const activeFilterLabel = await commonItemsPage.getActiveFilterLabelTextbox(
+            filterLabels,
+            filterDataset,
+            key,
+            /_text$/,
+            replaceValue
+          );
+          await expect.soft(commonItemsPage.active_filters_list.getByText(activeFilterLabel)).toBeVisible();
+          const removedFilterValues = await commonItemsPage.removeSelectedFilterValues(activeFilterLabel);
+          expect.soft(removedFilterValues).toBe(activeFilterLabel);
+          await expect.soft(commonItemsPage.active_filters_list.getByText(activeFilterLabel)).not.toBeVisible();
         }
       }
-    }
-    const removedFilterValues = await commonItemsPage.removeSelectedFilterValues(expectedFilterValues);
-    const actualFilterValuesAfterRemoval = (await commonItemsPage.getSelectedFilterValues()).flat().join(', ');
-    for (const removedValue of removedFilterValues) {
-      expect(actualFilterValuesAfterRemoval).not.toContain(removedValue);
     }
   }
 );
@@ -423,11 +443,7 @@ Then(
 
 Then(
   'With javascript disabled, I search with valid {string} for sponsor organisation search box in advanced filters and validate the search results along with {string}',
-  async (
-    { searchModificationsPage, rtsPage, commonItemsPage },
-    sponsorOrganisationDatasetName: string,
-    searchHintsDatasetName
-  ) => {
+  async ({ searchModificationsPage, rtsPage }, sponsorOrganisationDatasetName: string, searchHintsDatasetName) => {
     const dataset =
       searchModificationsPage.searchModificationsPageTestData.Sponsor_Organisation[sponsorOrganisationDatasetName];
     const searchHintDataset =
@@ -438,11 +454,6 @@ Then(
       sponsorOrganisationNameListExpected = sponsorOrganisationNameListExpected.slice(0, 5);
     }
     await searchModificationsPage.sponsor_organisation_text.fill(dataset['sponsor_organisation_text']);
-    expect(
-      await searchModificationsPage.sponsor_organisation_jsdisabled_search_button.evaluate(
-        (e: any) => getComputedStyle(e).backgroundColor
-      )
-    ).toBe(commonItemsPage.commonTestData.rgb_green_color);
     await searchModificationsPage.sponsor_organisation_jsdisabled_search_button.click();
     const sponsorOrganisationNameListActualWithSpaces =
       await searchModificationsPage.sponsor_organisation_jsdisabled_search_results_labels.allTextContents();

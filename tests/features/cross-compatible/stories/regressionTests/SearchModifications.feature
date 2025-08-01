@@ -27,7 +27,7 @@ Feature: Receive Amendments: Search Modifications
                         | Chief_Investigator  | chief investigator  |
                         | Lead_Nation         | lead nation         |
 
-        @RegressionViewListOfModifications @rsp-4090 @rsp-4011 @rsp-4016 @rsp-4118 @KNOWN-DEFECT-RSP-4467 @KNOWN-DEFECT-RSP-4305
+        @RegressionSearchAdvancedFilterModifications @KNOWN-DEFECT-RSP-4467 @KNOWN-DEFECT-RSP-4305
         Scenario Outline: Verify the user is able to view the list of modifications by entering valid iras id, then clicking on 'Search' button and then selecting advanced filters and clicking the 'Apply filters' button
                 When I enter '<Valid_Iras_Id>' into the search field for search modifications page
                 And I capture the page screenshot
@@ -58,7 +58,7 @@ Feature: Receive Amendments: Search Modifications
                         | Valid_Iras_Id_Prefix | Advanced_Filters_TwentyTwo   | Chief_Investigator  | chief investigator  |
                         | Valid_Iras_Id_Prefix | Advanced_Filters_Lead_Nation | Lead_Nation         | lead nation         |
 
-        @RegressionViewListOfModifications @rsp-4090 @rsp-4011 @rsp-4016 @rsp-4118 @KNOWN-DEFECT-RSP-4305 @KNOWN-DEFECT-RSP-4467
+        @RegressionSearchSortAdvancedFilterModifications @KNOWN-DEFECT-RSP-4305 @KNOWN-DEFECT-RSP-4467
         Scenario Outline: Verify that the user can view the list of modifications by performing a search, applying advanced filters, and sorting the results in both ascending and descending order
                 When I enter 'Valid_Iras_Id_Prefix' into the search field for search modifications page
                 And I capture the page screenshot
