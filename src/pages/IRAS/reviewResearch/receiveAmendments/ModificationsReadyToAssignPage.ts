@@ -76,7 +76,6 @@ export default class ModificationsReadyToAssignPage {
     this.modification_checkbox = this.page.getByRole('button', {
       name: this.modificationsReadyToAssignPageData.Modifications_Ready_To_Assign_Page.modification_checkbox,
     });
-    //this.modification_checkbox = this.page.locator('input[type="checkbox"]');
   }
 
   //Page Methods
