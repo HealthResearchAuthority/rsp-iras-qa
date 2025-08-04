@@ -926,12 +926,11 @@ export default class CommonItemsPage {
     key: string,
     filterDataset: any,
     filterLabels: any,
-    commonItemsPage: any,
     replaceValue: string
   ): Promise<string[]> {
     const labels: string[] = [];
     for (const filterLabel of filterDataset[key]) {
-      const activeFilterLabel = await commonItemsPage.getActiveFilterLabelCheckbox(
+      const activeFilterLabel = await this.getActiveFilterLabelCheckbox(
         filterLabels,
         filterLabel,
         key,
@@ -947,11 +946,10 @@ export default class CommonItemsPage {
     key: string,
     filterDataset: any,
     filterLabels: any,
-    commonItemsPage: any,
     replaceValue: string
   ): Promise<string | null> {
     if (key === 'date_modification_submitted_from_day_text' || key === 'date_modification_submitted_to_day_text') {
-      return await commonItemsPage.getActiveFilterLabelDateSubmittedField(
+      return await this.getActiveFilterLabelDateSubmittedField(
         filterLabels,
         filterDataset,
         key,
@@ -966,10 +964,9 @@ export default class CommonItemsPage {
     key: string,
     filterDataset: any,
     filterLabels: any,
-    commonItemsPage: any,
     replaceValue: string
   ): Promise<string> {
-    return await commonItemsPage.getActiveFilterLabelTextbox(filterLabels, filterDataset, key, /_text$/, replaceValue);
+    return await this.getActiveFilterLabelTextbox(filterLabels, filterDataset, key, /_text$/, replaceValue);
   }
 
   async getDateString(dataset: JSON, prefix: string) {
