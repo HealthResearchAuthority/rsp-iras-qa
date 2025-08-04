@@ -122,34 +122,33 @@ Then(
     for (const key in filterDataset) {
       if (Object.hasOwn(filterDataset, key)) {
         if (key.endsWith('_checkbox')) {
-          for (const filterLabel of filterDataset[key]) {
-            const activeFilterLabel = await commonItemsPage.getActiveFilterLabelCheckbox(
-              filterLabels,
-              filterLabel,
-              key,
-              /_checkbox$/,
-              replaceValue
-            );
-            if (actionToPerform === 'I can see the selected filters are displayed under') {
+          const activeFilterLabels = await commonItemsPage.getCheckboxFilterLabels(
+            key,
+            filterDataset,
+            filterLabels,
+            commonItemsPage,
+            replaceValue
+          );
+          if (actionToPerform === 'I can see the selected filters are displayed under') {
+            for (const activeFilterLabel of activeFilterLabels) {
               await expect.soft(commonItemsPage.active_filters_list.getByText(activeFilterLabel)).toBeVisible();
-            } else if (actionToPerform === 'I remove the selected filters from') {
+            }
+          } else if (actionToPerform === 'I remove the selected filters from') {
+            for (const activeFilterLabel of activeFilterLabels) {
               const removedFilterValues = await commonItemsPage.removeSelectedFilterValues(activeFilterLabel);
               expect.soft(removedFilterValues).toBe(activeFilterLabel);
               await expect.soft(commonItemsPage.active_filters_list.getByText(activeFilterLabel)).not.toBeVisible();
             }
           }
         } else if (key.startsWith('date_')) {
-          if (
-            key === 'date_modification_submitted_from_day_text' ||
-            key === 'date_modification_submitted_to_day_text'
-          ) {
-            const activeFilterLabel = await commonItemsPage.getActiveFilterLabelDateSubmittedField(
-              filterLabels,
-              filterDataset,
-              key,
-              /(_from_day_text|_to_day_text)$/,
-              replaceValue
-            );
+          const activeFilterLabel = await commonItemsPage.getDateFilterLabel(
+            key,
+            filterDataset,
+            filterLabels,
+            commonItemsPage,
+            replaceValue
+          );
+          if (activeFilterLabel) {
             if (actionToPerform === 'I can see the selected filters are displayed under') {
               await expect.soft(commonItemsPage.active_filters_list.getByText(activeFilterLabel)).toBeVisible();
             } else if (actionToPerform === 'I remove the selected filters from') {
@@ -159,11 +158,11 @@ Then(
             }
           }
         } else {
-          const activeFilterLabel = await commonItemsPage.getActiveFilterLabelTextbox(
-            filterLabels,
-            filterDataset,
+          const activeFilterLabel = await commonItemsPage.getTextboxFilterLabel(
             key,
-            /_text$/,
+            filterDataset,
+            filterLabels,
+            commonItemsPage,
             replaceValue
           );
           if (actionToPerform === 'I can see the selected filters are displayed under') {

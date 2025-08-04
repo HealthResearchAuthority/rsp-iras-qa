@@ -919,8 +919,57 @@ export default class CommonItemsPage {
     if (dateValue) {
       activeFilterLabel = `${label} - ${dateType} ${dateValue}`;
     }
-
     return activeFilterLabel;
+  }
+
+  async getCheckboxFilterLabels(
+    key: string,
+    filterDataset: any,
+    filterLabels: any,
+    commonItemsPage: any,
+    replaceValue: string
+  ): Promise<string[]> {
+    const labels: string[] = [];
+    for (const filterLabel of filterDataset[key]) {
+      const activeFilterLabel = await commonItemsPage.getActiveFilterLabelCheckbox(
+        filterLabels,
+        filterLabel,
+        key,
+        /_checkbox$/,
+        replaceValue
+      );
+      labels.push(activeFilterLabel);
+    }
+    return labels;
+  }
+
+  async getDateFilterLabel(
+    key: string,
+    filterDataset: any,
+    filterLabels: any,
+    commonItemsPage: any,
+    replaceValue: string
+  ): Promise<string | null> {
+    if (key === 'date_modification_submitted_from_day_text' || key === 'date_modification_submitted_to_day_text') {
+      return await commonItemsPage.getActiveFilterLabelDateSubmittedField(
+        filterLabels,
+        filterDataset,
+        key,
+        /(_from_day_text|_to_day_text)$/,
+        replaceValue
+      );
+    }
+    return null;
+  }
+
+  async getTextboxFilterLabel(
+    key: string,
+    filterDataset: any,
+    filterLabels: any,
+    commonItemsPage: any,
+    replaceValue: string
+  ): Promise<string> {
+    return await commonItemsPage.getActiveFilterLabelTextbox(filterLabels, filterDataset, key, /_text$/, replaceValue);
   }
 
   async getDateString(dataset: JSON, prefix: string) {
