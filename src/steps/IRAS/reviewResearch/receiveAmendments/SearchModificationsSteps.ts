@@ -114,8 +114,8 @@ When(
 );
 
 Then(
-  'I can see the selected filters {string} are displayed under active filters in the search modifications page',
-  async ({ searchModificationsPage, commonItemsPage }, filterDatasetName: string) => {
+  '{string} active filters {string} in the search modifications page',
+  async ({ searchModificationsPage, commonItemsPage }, actionToPerform: string, filterDatasetName: string) => {
     const filterDataset = searchModificationsPage.searchModificationsPageTestData.Advanced_Filters[filterDatasetName];
     const filterLabels = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page;
     const replaceValue = '_label';
@@ -130,86 +130,49 @@ Then(
               /_checkbox$/,
               replaceValue
             );
+            if (actionToPerform === 'I can see the selected filters are displayed under') {
+              await expect.soft(commonItemsPage.active_filters_list.getByText(activeFilterLabel)).toBeVisible();
+            } else if (actionToPerform === 'I remove the selected filters from') {
+              const removedFilterValues = await commonItemsPage.removeSelectedFilterValues(activeFilterLabel);
+              expect.soft(removedFilterValues).toBe(activeFilterLabel);
+              await expect.soft(commonItemsPage.active_filters_list.getByText(activeFilterLabel)).not.toBeVisible();
+            }
+          }
+        } else if (key.startsWith('date_')) {
+          if (
+            key === 'date_modification_submitted_from_day_text' ||
+            key === 'date_modification_submitted_to_day_text'
+          ) {
+            const activeFilterLabel = await commonItemsPage.getActiveFilterLabelDateSubmittedField(
+              filterLabels,
+              filterDataset,
+              key,
+              /(_from_day_text|_to_day_text)$/,
+              replaceValue
+            );
+            if (actionToPerform === 'I can see the selected filters are displayed under') {
+              await expect.soft(commonItemsPage.active_filters_list.getByText(activeFilterLabel)).toBeVisible();
+            } else if (actionToPerform === 'I remove the selected filters from') {
+              const removedFilterValues = await commonItemsPage.removeSelectedFilterValues(activeFilterLabel);
+              expect.soft(removedFilterValues).toBe(activeFilterLabel);
+              await expect.soft(commonItemsPage.active_filters_list.getByText(activeFilterLabel)).not.toBeVisible();
+            }
+          }
+        } else {
+          const activeFilterLabel = await commonItemsPage.getActiveFilterLabelTextbox(
+            filterLabels,
+            filterDataset,
+            key,
+            /_text$/,
+            replaceValue
+          );
+          if (actionToPerform === 'I can see the selected filters are displayed under') {
             await expect.soft(commonItemsPage.active_filters_list.getByText(activeFilterLabel)).toBeVisible();
-          }
-        } else if (key.startsWith('date_')) {
-          if (
-            key === 'date_modification_submitted_from_day_text' ||
-            key === 'date_modification_submitted_to_day_text'
-          ) {
-            const activeFilterLabel = await commonItemsPage.getActiveFilterLabelDateSubmittedField(
-              filterLabels,
-              filterDataset,
-              key,
-              /(_from_day_text|_to_day_text)$/,
-              replaceValue
-            );
-            await expect(commonItemsPage.active_filters_list.getByText(activeFilterLabel)).toBeVisible();
-          }
-        } else {
-          const activeFilterLabel = await commonItemsPage.getActiveFilterLabelTextbox(
-            filterLabels,
-            filterDataset,
-            key,
-            /_text$/,
-            replaceValue
-          );
-          await expect(commonItemsPage.active_filters_list.getByText(activeFilterLabel)).toBeVisible();
-        }
-      }
-    }
-  }
-);
-
-Then(
-  'I remove the {string} from the active filters in the search modifications page',
-  async ({ searchModificationsPage, commonItemsPage }, removeFilterDatasetName: string) => {
-    const filterDataset =
-      searchModificationsPage.searchModificationsPageTestData.Advanced_Filters[removeFilterDatasetName];
-    const filterLabels = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page;
-    const replaceValue = '_label';
-    for (const key in filterDataset) {
-      if (Object.hasOwn(filterDataset, key)) {
-        if (key.endsWith('_checkbox')) {
-          for (const filterLabel of filterDataset[key]) {
-            const activeFilterLabel = await commonItemsPage.getActiveFilterLabelCheckbox(
-              filterLabels,
-              filterLabel,
-              key,
-              /_checkbox$/,
-              replaceValue
-            );
+          } else if (actionToPerform === 'I remove the selected filters from') {
             const removedFilterValues = await commonItemsPage.removeSelectedFilterValues(activeFilterLabel);
             expect.soft(removedFilterValues).toBe(activeFilterLabel);
             await expect.soft(commonItemsPage.active_filters_list.getByText(activeFilterLabel)).not.toBeVisible();
           }
-        } else if (key.startsWith('date_')) {
-          if (
-            key === 'date_modification_submitted_from_day_text' ||
-            key === 'date_modification_submitted_to_day_text'
-          ) {
-            const activeFilterLabel = await commonItemsPage.getActiveFilterLabelDateSubmittedField(
-              filterLabels,
-              filterDataset,
-              key,
-              /(_from_day_text|_to_day_text)$/,
-              replaceValue
-            );
-            const removedFilterValues = await commonItemsPage.removeSelectedFilterValues(activeFilterLabel);
-            expect.soft(removedFilterValues).toBe(activeFilterLabel);
-            await expect.soft(commonItemsPage.active_filters_list.getByText(activeFilterLabel)).not.toBeVisible();
-          }
-        } else {
-          const activeFilterLabel = await commonItemsPage.getActiveFilterLabelTextbox(
-            filterLabels,
-            filterDataset,
-            key,
-            /_text$/,
-            replaceValue
-          );
-          const removedFilterValues = await commonItemsPage.removeSelectedFilterValues(activeFilterLabel);
-          expect.soft(removedFilterValues).toBe(activeFilterLabel);
-          await expect.soft(commonItemsPage.active_filters_list.getByText(activeFilterLabel)).not.toBeVisible();
         }
       }
     }
