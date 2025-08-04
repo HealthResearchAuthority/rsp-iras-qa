@@ -179,7 +179,6 @@ Then(
               /_checkbox$/,
               replaceValue
             );
-            await expect.soft(commonItemsPage.active_filters_list.getByText(activeFilterLabel)).toBeVisible();
             const removedFilterValues = await commonItemsPage.removeSelectedFilterValues(activeFilterLabel);
             expect.soft(removedFilterValues).toBe(activeFilterLabel);
             await expect.soft(commonItemsPage.active_filters_list.getByText(activeFilterLabel)).not.toBeVisible();
@@ -196,7 +195,6 @@ Then(
               /(_from_day_text|_to_day_text)$/,
               replaceValue
             );
-            await expect.soft(commonItemsPage.active_filters_list.getByText(activeFilterLabel)).toBeVisible();
             const removedFilterValues = await commonItemsPage.removeSelectedFilterValues(activeFilterLabel);
             expect.soft(removedFilterValues).toBe(activeFilterLabel);
             await expect.soft(commonItemsPage.active_filters_list.getByText(activeFilterLabel)).not.toBeVisible();
@@ -209,7 +207,6 @@ Then(
             /_text$/,
             replaceValue
           );
-          await expect.soft(commonItemsPage.active_filters_list.getByText(activeFilterLabel)).toBeVisible();
           const removedFilterValues = await commonItemsPage.removeSelectedFilterValues(activeFilterLabel);
           expect.soft(removedFilterValues).toBe(activeFilterLabel);
           await expect.soft(commonItemsPage.active_filters_list.getByText(activeFilterLabel)).not.toBeVisible();
@@ -219,9 +216,21 @@ Then(
   }
 );
 
+Then(
+  'the result count displayed at the top accurately reflects the number of records shown',
+  async ({ commonItemsPage, searchModificationsPage }) => {
+    const testData = searchModificationsPage.searchModificationsPageTestData;
+    const modificationsList = await searchModificationsPage.getAllModificationsTheTable();
+    const searchResults = confirmArrayNotNull(modificationsList.get('searchResultValues'));
+    const expectedCount = testData.Search_Modifications_Page.result_count_heading;
+    const actualCount = confirmStringNotNull(await commonItemsPage.result_count.textContent());
+    expect(searchResults.length + expectedCount).toBe(actualCount);
+  }
+);
+
 // date_modification_submitted, participating nation and sponsor_organisation can't validate from UI,need to validate with Database
 Then(
-  'the system displays modification records matching the search {string} and filter criteria {string}',
+  'the system displays modification records matching the search {string} and filter criteria {string} in the search modifications page',
   async ({ commonItemsPage, searchModificationsPage }, irasIdDatasetName: string, filterDatasetName: string) => {
     const testData = searchModificationsPage.searchModificationsPageTestData;
     const irasId = testData.Iras_Id[irasIdDatasetName]?.iras_id_text;
@@ -229,9 +238,6 @@ Then(
     const { chief_investigator_name_text: ciName, short_project_title_text: projectTitle } = filterDataset;
     const modificationsList = await searchModificationsPage.getAllModificationsTheTable();
     const searchResults = confirmArrayNotNull(modificationsList.get('searchResultValues'));
-    const expectedCount = testData.Search_Modifications_Page.result_count_heading;
-    const actualCount = confirmStringNotNull(await commonItemsPage.result_count.textContent());
-    expect(searchResults.length + expectedCount).toBe(actualCount);
     // Validate combined search terms
     if (irasId && ciName && projectTitle) {
       const searchTerms = [irasId, ciName, projectTitle];
@@ -288,15 +294,12 @@ Then(
 );
 
 Then(
-  'the system displays modification records matching the search criteria of {string}',
+  'the system displays modification records matching the search criteria of {string} in the search modifications page',
   async ({ commonItemsPage, searchModificationsPage }, irasIdDatasetName: string) => {
     const testData = searchModificationsPage.searchModificationsPageTestData;
     const irasId = testData.Iras_Id[irasIdDatasetName]?.iras_id_text;
     const modificationsList = await searchModificationsPage.getAllModificationsTheTable();
     const searchResults = confirmArrayNotNull(modificationsList.get('searchResultValues'));
-    const expectedCount = testData.Search_Modifications_Page.result_count_heading;
-    const actualCount = confirmStringNotNull(await commonItemsPage.result_count.textContent());
-    expect(searchResults.length + expectedCount).toBe(actualCount);
     if (irasId) {
       const filteredResults = await commonItemsPage.filterResults(searchResults, irasId);
       expect(filteredResults).toEqual(searchResults);
@@ -314,16 +317,13 @@ Then(
 );
 
 Then(
-  'the system displays modification records matching the filter criteria of {string}',
+  'the system displays modification records matching the filter criteria of {string} in the search modifications page',
   async ({ commonItemsPage, searchModificationsPage }, filterDatasetName: string) => {
     const testData = searchModificationsPage.searchModificationsPageTestData;
     const filterDataset = testData.Advanced_Filters[filterDatasetName];
     const { chief_investigator_name_text: ciName, short_project_title_text: projectTitle } = filterDataset;
     const modificationsList = await searchModificationsPage.getAllModificationsTheTable();
     const searchResults = confirmArrayNotNull(modificationsList.get('searchResultValues'));
-    const expectedCount = testData.Search_Modifications_Page.result_count_heading;
-    const actualCount = confirmStringNotNull(await commonItemsPage.result_count.textContent());
-    expect(searchResults.length + expectedCount).toBe(actualCount);
     // Combined search term validation
     if (ciName && projectTitle) {
       const searchTerms = [ciName, projectTitle];

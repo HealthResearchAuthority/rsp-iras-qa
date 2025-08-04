@@ -27,20 +27,22 @@ Feature: Receive Amendments: Search Modifications
                         | Chief_Investigator  | chief investigator  |
                         | Lead_Nation         | lead nation         |
 
-        @RegressionSearchAdvancedFilterModifications @KNOWN-DEFECT-RSP-4467 @KNOWN-DEFECT-RSP-4305
+        @RegressionSearchAdvancedFilterModifications @KNOWN-DEFECT-RSP-4467 @KNOWN-DEFECT-RSP-4305 @rsp-4011
         Scenario Outline: Verify the user is able to view the list of modifications by entering valid iras id, then clicking on 'Search' button and then selecting advanced filters and clicking the 'Apply filters' button
                 When I enter '<Valid_Iras_Id>' into the search field for search modifications page
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Search_Modifications_Page'
-                Then the system displays modification records matching the search criteria of '<Valid_Iras_Id>'
+                Then the system displays modification records matching the search criteria of '<Valid_Iras_Id>' in the search modifications page
                 And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
+                And I capture the page screenshot
+                And I click the 'Advanced_Filter' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 And I select advanced filters in the search modifications page using '<Advanced_Filters>'
                 And I capture the page screenshot
                 And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then I can see the selected filters '<Advanced_Filters>' are displayed under active filters in the search modifications page
-                And the system displays modification records matching the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>'
+                And the system displays modification records matching the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>' in the search modifications page
                 And I capture the page screenshot
                 And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
                 And I capture the page screenshot
@@ -58,7 +60,7 @@ Feature: Receive Amendments: Search Modifications
                         | Valid_Iras_Id_Prefix | Advanced_Filters_TwentyTwo   | Chief_Investigator  | chief investigator  |
                         | Valid_Iras_Id_Prefix | Advanced_Filters_Lead_Nation | Lead_Nation         | lead nation         |
 
-        @RegressionSearchSortAdvancedFilterModifications @KNOWN-DEFECT-RSP-4305 @KNOWN-DEFECT-RSP-4467
+        @RegressionSearchSortAdvancedFilterModifications @KNOWN-DEFECT-RSP-4305 @KNOWN-DEFECT-RSP-4467 @rsp-4011
         Scenario Outline: Verify that the user can view the list of modifications by performing a search, applying advanced filters, and sorting the results in both ascending and descending order
                 When I enter 'Valid_Iras_Id_Prefix' into the search field for search modifications page
                 And I capture the page screenshot
@@ -73,12 +75,14 @@ Feature: Receive Amendments: Search Modifications
                 When I click the '<Sort_Button>' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then I can see the list of modifications received for approval is sorted by 'descending' order of the '<Sort_Field>'
+                And I click the 'Advanced_Filter' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
                 And I select advanced filters in the search modifications page using 'Advanced_Filters_Checkboxes'
                 And I capture the page screenshot
                 And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then I can see the selected filters 'Advanced_Filters_Checkboxes' are displayed under active filters in the search modifications page
-                And the system displays modification records matching the search 'Valid_Iras_Id_Prefix' and filter criteria 'Advanced_Filters_Checkboxes'
+                And the system displays modification records matching the search 'Valid_Iras_Id_Prefix' and filter criteria 'Advanced_Filters_Checkboxes' in the search modifications page
                 And I capture the page screenshot
                 And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
                 And I capture the page screenshot
