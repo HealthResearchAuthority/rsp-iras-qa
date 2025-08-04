@@ -14,6 +14,7 @@ export default class SearchModificationsPage {
   readonly next_button: Locator;
   readonly advanced_filter_chevron: Locator;
   readonly result_count: Locator;
+  readonly results_table: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -37,6 +38,7 @@ export default class SearchModificationsPage {
       .locator('..')
       .getByRole('heading', { level: 2 })
       .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.result_count_heading);
+    this.results_table = this.page.getByTestId('modificationsTable');
   }
 
   //Getters & Setters for Private Variables
