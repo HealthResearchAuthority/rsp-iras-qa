@@ -3,6 +3,7 @@ import * as participatingOrganisationsPageTestData from '../../../../resources/t
 import * as buttonTextData from '../../../../resources/test_data/common/button_text_data.json';
 import * as linkTextData from '../../../../resources/test_data/common/link_text_data.json';
 import * as commonTestData from '../../../../resources/test_data/common/common_data.json';
+import { confirmStringNotNull } from '../../../../utils/UtilFunctions';
 
 //Declare Page Objects
 export default class MakeChangeParticipatingOrganisationsPage {
@@ -19,7 +20,7 @@ export default class MakeChangeParticipatingOrganisationsPage {
   readonly short_project_title_text: Locator;
   readonly modification_id_text_row: Locator;
   readonly modification_id_text: Locator;
-  readonly participating_organisations_text: Locator;
+  readonly participating_organisations_search_text: Locator;
   readonly participating_organisations_search_button: Locator;
   readonly advanced_filter_link: Locator;
   readonly remove_this_change_link: Locator;
@@ -27,6 +28,7 @@ export default class MakeChangeParticipatingOrganisationsPage {
   readonly modification_checkbox: Locator;
   readonly search_textbox: Locator;
   readonly search_button: Locator;
+  readonly summary_error_label: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -37,7 +39,6 @@ export default class MakeChangeParticipatingOrganisationsPage {
     this.commonTestData = commonTestData;
 
     //Locators
-    //this.pageHeading = this.page.getByRole('heading', { level: 1 });
     this.pageHeading = this.page.locator('.govuk-heading-l');
 
     this.iras_id_row = this.page.getByText(participatingOrganisationsPageTestData.Label_Texts.iras_id_label);
@@ -52,7 +53,7 @@ export default class MakeChangeParticipatingOrganisationsPage {
       this.participatingOrganisationsPageTestData.Label_Texts.modification_id_label
     );
     this.modification_id_text = this.modification_id_text_row.locator('..').locator('.govuk-summary-list__value');
-    this.participating_organisations_text = this.page.getByTestId('SearchTerm');
+    this.participating_organisations_search_text = this.page.getByTestId('SearchTerm');
 
     // When search function implemented on this page the below locator need to be removed to handle in common functions
     this.participating_organisations_search_button = this.page.getByRole('button', {
@@ -68,16 +69,42 @@ export default class MakeChangeParticipatingOrganisationsPage {
       exact: true,
     });
     this.displayed_row_count = this.page.locator('.search-filter-panel__count');
-    this.modification_checkbox = this.page.locator('.govuk-checkboxes__input child-checkbox');
-    //this.modification_checkbox = this.page.getByRole('button').filter({ hasText: 'selectedOrganisationIds' });
+    this.modification_checkbox = this.page.getByRole('button', {
+      name: this.participatingOrganisationsPageTestData.Checkbox.modification_checkbox,
+    });
     this.search_button = this.page.getByRole('button', {
       name: this.buttonTextData.Participating_Organisations_Page.Search,
       exact: true,
     });
+    this.summary_error_label = this.page.locator('[href*=Search.SearchNameTerm]');
   }
 
   //Page Methods
   async assertOnParticipatingOrganisationsPage() {
     await expect(this.pageHeading).toBeVisible();
+  }
+
+  async validateResults(commonItemsPage: any, searchCriteriaDataset: any, validateSearch: boolean = true) {
+    // Loop through Max_Pages_To_Validate (currently set to 4)
+    for (let i = 1; i < participatingOrganisationsPageTestData.Max_Pages_To_Validate; i++) {
+      const rowCount = await commonItemsPage.tableRows.count();
+      for (let j = 1; j < rowCount; j++) {
+        const row = commonItemsPage.tableRows.nth(j);
+        const { organisationName } = await this.getOrganisationDataSearch(row);
+
+        // If search criteria is to be validated, check organisation name
+        if (validateSearch && searchCriteriaDataset['input_text'] !== '') {
+          const organisationNameExpected = searchCriteriaDataset['input_text'];
+          expect(organisationName.toLowerCase().includes(organisationNameExpected.toLowerCase()));
+        }
+      }
+      await commonItemsPage.next_button.click();
+    }
+  }
+
+  async getOrganisationDataSearch(row: any) {
+    return {
+      organisationName: confirmStringNotNull(await row.getByRole('cell').nth(1).textContent()),
+    };
   }
 }

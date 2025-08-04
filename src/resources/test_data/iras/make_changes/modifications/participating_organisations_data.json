@@ -17,9 +17,19 @@
     "Country": "Country"
   },
   "Checkbox": {
-    "modification_checkbox": ""
+    "modification_checkbox": "selectedOrganisationIds"
   },
-  "Valid_Data_Fields": {
-    "search_text": "NHS"
-  }
+  "Data_Fields": {
+    "Search_Queries": {
+      "Valid_Search_Text_One": { "input_text": "NHS" },
+      "Valid_Search_Text_Two": { "input_text": "VACCINATION CENTRE" },
+      "Invalid_Search_Text_One": { "input_text": "NH" },
+      "Invalid_Search_Text_Two": { "input_text": "a" }
+    }
+  },
+  "Summary_Error_participating_organisations": {
+    "less_than_three_character": "Provide 3 or more characters to search"
+  },
+
+  "Max_Pages_To_Validate": 4
 }

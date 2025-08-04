@@ -1,9 +1,8 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../hooks/CustomFixtures';
 import { confirmStringNotNull } from '../../../../utils/UtilFunctions';
-//import config from '../../../../../playwright.config';
 
-const { Then } = createBdd(test);
+const { When, Then } = createBdd(test);
 
 Then('I can see the participating organisation page', async ({ participatingOrganisationsPage }) => {
   await participatingOrganisationsPage.assertOnParticipatingOrganisationsPage();
@@ -43,7 +42,7 @@ Then(
     // All the below assertion can be removed when the functionality is implemented - now it's UI only function
     expect(participatingOrganisationsPage.remove_this_change_link).toBeVisible();
     expect(participatingOrganisationsPage.advanced_filter_link).toBeVisible();
-    expect(participatingOrganisationsPage.participating_organisations_text).toBeVisible();
+    expect(participatingOrganisationsPage.participating_organisations_search_text).toBeVisible();
     expect(participatingOrganisationsPage.participating_organisations_search_button).toBeVisible();
   }
 );
@@ -72,75 +71,67 @@ Then(
   }
 );
 
-Then('I see the total number of results in the page', async ({ commonItemsPage, participatingOrganisationsPage }) => {
-  //find total number of rows minus the header row ??.. check this
+Then(
+  'I see the total number of results displayed in the participating organisation page',
+  async ({ commonItemsPage, participatingOrganisationsPage }) => {
+    const textDisplayNoOfRows = await participatingOrganisationsPage.displayed_row_count.textContent();
+    const displayedNoOfRows = textDisplayNoOfRows?.split(' ')[0].trim();
+    const expectedTotalPages = Math.ceil(Number(displayedNoOfRows) / 10);
 
-  const truncated = await participatingOrganisationsPage.displayed_row_count.textContent();
-  const displayedRowCount = truncated?.split(' ')[0].trim();
+    const itemsMap = await commonItemsPage.getPaginationValues();
+    const itemsValues: any = itemsMap.get('items');
+    const visiblePagesMap = await commonItemsPage.getVisiblePages(itemsValues);
+    const visiblePages: any = visiblePagesMap.get('visiblePages');
+    const actualtotalPages = visiblePages[visiblePages.length - 1];
 
-  const totalPages = await commonItemsPage.getTotalPages();
-  let totalRowCount = 0;
-  for (let i = 1; i <= totalPages; i++) {
-    totalRowCount = totalRowCount + (await commonItemsPage.tableRows.count());
-    if (i < totalPages) {
-      await commonItemsPage.next_button.isVisible();
-      await commonItemsPage.next_button.click();
+    expect(expectedTotalPages).toBe(actualtotalPages);
+
+    let expectedRowsLastPage = Number(displayedNoOfRows) % 10;
+
+    if (Number(displayedNoOfRows) % 10 === 0) {
+      expectedRowsLastPage = 10;
     }
-  }
-  expect(totalRowCount).toBe(displayedRowCount);
-});
 
-// Then(
-//   'I confirm checkbox exists in every row across all pages',
-//   async ({ commonItemsPage, participatingOrganisationsPage }) => {
-//     while (true) {
-//       const rows = await commonItemsPage.tableRows;
-//       const rowCount = await rows.count();
-//       for (let i = 2; i < rowCount; i++) {
-//         //check the locator checkbox
-//         await participatingOrganisationsPage.modification_checkbox.nth(i).isVisible();
-//       }
-//       const isDisabled = await commonItemsPage.next_button.isDisabled();
-//       if (isDisabled !== null) {
-//         break;
-//       }
-//       await commonItemsPage.next_button.click();
-//     }
-//   }
-// );
+    //click on the last page
+    await commonItemsPage.clickOnPages(actualtotalPages, 'clicking on page number');
+    const actualRows = (await commonItemsPage.tableRows.count()) - 1;
+    expect(expectedRowsLastPage).toBe(actualRows);
+  }
+);
 
 Then(
-  'I confirm checkbox exists in every row across all pages',
+  'I confirm checkbox is displayed in participating organisation page',
   async ({ commonItemsPage, participatingOrganisationsPage }) => {
-    let hasNextPage = true;
-    while (hasNextPage) {
-      const rows = await commonItemsPage.tableRows;
-      const rowCount = await rows.count();
-      for (let i = 2; i < rowCount; i++) {
-        //check the locator checkbox
-        //await participatingOrganisationsPage.modification_checkbox.nth(i).isVisible();
-        //const checkbox = rows.nth(i).locator(participatingOrganisationsPage.modification_checkbox);
+    await commonItemsPage.firstPage.click();
+    const maxPagesToValidate = commonItemsPage.commonTestData.maxPagesToValidate;
+    for (let i = 1; i < maxPagesToValidate; i++) {
+      const rowCount = await commonItemsPage.tableRows.count();
+      for (let j = 1; j < rowCount; j++) {
         await participatingOrganisationsPage.modification_checkbox.nth(i).isVisible();
-        //await expect(participatingOrganisationsPage.modification_checkbox).toBeVisible();
       }
-      hasNextPage = await commonItemsPage.next_button.isEnabled();
-
-      if (hasNextPage) {
-        await commonItemsPage.next_button.click();
-        await participatingOrganisationsPage.page.waitForLoadState('networkidle');
-      }
+      await commonItemsPage.next_button.click();
+      await participatingOrganisationsPage.page.waitForLoadState('networkidle');
     }
   }
 );
 
 Then(
-  'I fill the search criteria {string}',
-  async ({ commonItemsPage, participatingOrganisationsPage }, datasetName: string) => {
-    const dataset = participatingOrganisationsPage.participatingOrganisationsPageTestData[datasetName];
-    for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        await commonItemsPage.fillUIComponent(dataset, key, participatingOrganisationsPage);
-      }
-    }
+  'I enter {string} into the search field in the participating organisation page',
+  async ({ participatingOrganisationsPage }, datasetName: string) => {
+    const dataset =
+      participatingOrganisationsPage.participatingOrganisationsPageTestData.Data_Fields.Search_Queries[datasetName];
+    await participatingOrganisationsPage.participating_organisations_search_text.fill(dataset['input_text']);
+  }
+);
+
+When(
+  'I can see the results matching the search {string} in the participating organisation page',
+  async ({ participatingOrganisationsPage, commonItemsPage }, searchDatasetName: string) => {
+    await commonItemsPage.firstPage.click();
+    const searchCriteriaDataset =
+      participatingOrganisationsPage.participatingOrganisationsPageTestData.Data_Fields.Search_Queries[
+        searchDatasetName
+      ];
+    await participatingOrganisationsPage.validateResults(commonItemsPage, searchCriteriaDataset, true);
   }
 );
