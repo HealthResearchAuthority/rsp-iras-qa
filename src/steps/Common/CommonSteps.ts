@@ -11,12 +11,7 @@ import {
 } from '../../utils/GenerateTestData';
 const { Given, When, Then } = createBdd(test);
 import * as userProfileGeneratedataConfig from '../../resources/test_data/user_administration/testdata_generator/user_profile_generate_data_config.json';
-import {
-  confirmArrayNotNull,
-  confirmStringNotNull,
-  getAuthState,
-  getCurrentTimeFormatted,
-} from '../../utils/UtilFunctions';
+import { confirmArrayNotNull, getAuthState, getCurrentTimeFormatted } from '../../utils/UtilFunctions';
 import { Locator } from 'playwright/test';
 import fs from 'fs';
 
@@ -643,10 +638,7 @@ When(
 
 Then(
   'the system displays no results found message if there is no {string} on the system that matches the search criteria',
-  async (
-    { commonItemsPage, userListReviewBodyPage, manageUsersPage, manageReviewBodiesPage, searchModificationsPage },
-    entityType: string
-  ) => {
+  async ({ commonItemsPage, userListReviewBodyPage, manageUsersPage, manageReviewBodiesPage }, entityType: string) => {
     const filteredSearchResults = await userListReviewBodyPage.getFilteredSearchResultsBeforeSearch(commonItemsPage);
     expect(await commonItemsPage.tableRows.count()).toBe(0);
     expect(filteredSearchResults).toEqual([]);
@@ -666,20 +658,6 @@ Then(
         manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.no_results_guidance_text;
       await expect(headingLocator).toHaveText(expectedHeading);
       await expect(guidanceLocator).toHaveText(expectedGuidance);
-    } else if (entityType === 'modification record') {
-      const pageTestData = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page;
-      const validateTextMatch = async (locator: Locator, expectedText: string) => {
-        await expect(locator).toHaveText(expectedText);
-        expect(confirmStringNotNull(await locator.textContent())).toBe(expectedText);
-      };
-      const expectedResultCount = pageTestData.result_count_heading;
-      const actualResultCount = confirmStringNotNull(await commonItemsPage.result_count.textContent());
-      expect('0' + expectedResultCount).toBe(actualResultCount);
-      await validateTextMatch(commonItemsPage.no_results_heading, pageTestData.no_results_heading);
-      await validateTextMatch(commonItemsPage.no_results_guidance_text, pageTestData.no_results_guidance_text);
-      const bulletPointsActual = (await commonItemsPage.getNoResultsBulletPoints()).flat().join(', ');
-      const bulletPointsExpected = pageTestData.no_results_bullet_points.flat().join(', ');
-      expect(bulletPointsActual).toEqual(bulletPointsExpected);
     }
   }
 );

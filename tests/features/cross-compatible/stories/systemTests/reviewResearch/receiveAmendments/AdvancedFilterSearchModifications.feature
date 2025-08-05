@@ -192,8 +192,8 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         When I enter '<Invalid_Iras_Id>' into the search field for search modifications page
         And I capture the page screenshot
         And I click the 'Search' button on the 'Search_Modifications_Page'
-        Then the system displays no results found message if there is no 'modification record' on the system that matches the search criteria
-        Then I can see the '<No_Results_Found>' ui labels
+        Then the system displays modification records matching the search '<Invalid_Iras_Id>' and filter criteria '' in the search modifications page
+        And I can see the '<No_Results_Found>' ui labels
         And I capture the page screenshot
         Examples:
             | Invalid_Iras_Id                  | No_Results_Found           |
@@ -217,7 +217,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
         Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the search modifications page
-        And the system displays no results found message if there is no 'modification record' on the system that matches the search criteria
+        And the system displays modification records matching the search '<Invalid_Iras_Id>' and filter criteria '<Advanced_Filters>' in the search modifications page
         And I capture the page screenshot
         Examples:
             | Invalid_Iras_Id                  | Advanced_Filters             |
@@ -243,7 +243,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
         Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters_No_results>' in the search modifications page
-        And the system displays no results found message if there is no 'modification record' on the system that matches the search criteria
+        And the system displays modification records matching the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters_No_results>' in the search modifications page
         And I capture the page screenshot
         Examples:
             | Valid_Iras_Id     | Advanced_Filters_No_results |
@@ -258,7 +258,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
         Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters_No_results>' in the search modifications page
-        And the system displays no results found message if there is no 'modification record' on the system that matches the search criteria
+        And the system displays modification records matching the search '' and filter criteria '<Advanced_Filters_No_results>' in the search modifications page
         And I capture the page screenshot
         Examples:
             | Advanced_Filters_No_results     |
