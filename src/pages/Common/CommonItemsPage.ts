@@ -1018,57 +1018,50 @@ export default class CommonItemsPage {
     const assertAllVisibleItems = (expectedItems: string[]) => {
       expect(allVisibleItems).toEqual(expectedItems);
     };
+    const buildExpected = (pages: number[], items: (number | string)[]) => {
+      assertVisiblePages(pages);
+      assertAllVisibleItems(items.map(String));
+    };
     if (totalPages <= 7) {
-      expect(visiblePages.map(String)).toEqual(allVisibleItems);
+      buildExpected(visiblePages, allVisibleItems);
       expect(ellipsisIndices.length).toBe(0);
     } else if (currentPage <= 3) {
       const base = [firstPage];
-      if (currentPage === 1) {
-        assertVisiblePages([firstPage, currentPage + 1, lastPage]);
-        assertAllVisibleItems([`${firstPage}`, `${currentPage + 1}`, '⋯', `${lastPage}`]);
-      } else if (currentPage === 2) {
-        assertVisiblePages([...base, currentPage, currentPage + 1, lastPage]);
-        assertAllVisibleItems([`${firstPage}`, `${currentPage}`, `${currentPage + 1}`, '⋯', `${lastPage}`]);
-      } else {
-        assertVisiblePages([...base, currentPage - 1, currentPage, currentPage + 1, lastPage]);
-        assertAllVisibleItems([
-          `${firstPage}`,
-          `${currentPage - 1}`,
-          `${currentPage}`,
-          `${currentPage + 1}`,
-          '⋯',
-          `${lastPage}`,
-        ]);
+      switch (currentPage) {
+        case 1:
+          buildExpected([firstPage, 2, lastPage], [firstPage, 2, '⋯', lastPage]);
+          break;
+        case 2:
+          buildExpected([...base, 2, 3, lastPage], [firstPage, 2, 3, '⋯', lastPage]);
+          break;
+        default:
+          buildExpected(
+            [...base, currentPage - 1, currentPage, currentPage + 1, lastPage],
+            [firstPage, currentPage - 1, currentPage, currentPage + 1, '⋯', lastPage]
+          );
       }
     } else if (currentPage >= totalPages - 2) {
-      if (currentPage === totalPages - 2) {
-        assertVisiblePages([firstPage, currentPage - 1, currentPage, currentPage + 1, lastPage]);
-        assertAllVisibleItems([
-          `${firstPage}`,
-          '⋯',
-          `${currentPage - 1}`,
-          `${currentPage}`,
-          `${currentPage + 1}`,
-          `${lastPage}`,
-        ]);
-      } else if (currentPage === totalPages - 1) {
-        assertVisiblePages([firstPage, currentPage - 1, currentPage, lastPage]);
-        assertAllVisibleItems([`${firstPage}`, '⋯', `${currentPage - 1}`, `${currentPage}`, `${lastPage}`]);
-      } else {
-        assertVisiblePages([firstPage, currentPage - 1, lastPage]);
-        assertAllVisibleItems([`${firstPage}`, '⋯', `${currentPage - 1}`, `${lastPage}`]);
+      switch (currentPage) {
+        case totalPages - 2:
+          buildExpected(
+            [firstPage, currentPage - 1, currentPage, currentPage + 1, lastPage],
+            [firstPage, '⋯', currentPage - 1, currentPage, currentPage + 1, lastPage]
+          );
+          break;
+        case totalPages - 1:
+          buildExpected(
+            [firstPage, currentPage - 1, currentPage, lastPage],
+            [firstPage, '⋯', currentPage - 1, currentPage, lastPage]
+          );
+          break;
+        default:
+          buildExpected([firstPage, currentPage - 1, lastPage], [firstPage, '⋯', currentPage - 1, lastPage]);
       }
     } else {
-      assertVisiblePages([firstPage, currentPage - 1, currentPage, currentPage + 1, lastPage]);
-      assertAllVisibleItems([
-        `${firstPage}`,
-        '⋯',
-        `${currentPage - 1}`,
-        `${currentPage}`,
-        `${currentPage + 1}`,
-        '⋯',
-        `${lastPage}`,
-      ]);
+      buildExpected(
+        [firstPage, currentPage - 1, currentPage, currentPage + 1, lastPage],
+        [firstPage, '⋯', currentPage - 1, currentPage, currentPage + 1, '⋯', lastPage]
+      );
     }
     // Common assertions
     expect(visiblePages).toContain(currentPage);
