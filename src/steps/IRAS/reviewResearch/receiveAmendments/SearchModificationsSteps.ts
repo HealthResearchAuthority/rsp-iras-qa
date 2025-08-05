@@ -97,26 +97,33 @@ Then(
     const filterDataset = searchModificationsPage.searchModificationsPageTestData.Advanced_Filters[filterDatasetName];
     const filterLabels = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page;
     const replaceValue = '_label';
-    for (const key in filterDataset) {
-      if (Object.hasOwn(filterDataset, key)) {
-        if (key.endsWith('_checkbox')) {
-          const activeFilterLabels = await commonItemsPage.getCheckboxFilterLabels(
-            key,
-            filterDataset,
-            filterLabels,
-            replaceValue
-          );
-          if (actionToPerform === 'I can see the selected filters are displayed under') {
-            for (const activeFilterLabel of activeFilterLabels) {
-              await expect.soft(commonItemsPage.active_filters_list.getByText(activeFilterLabel)).toBeVisible();
-            }
-          } else if (actionToPerform === 'I remove the selected filters from') {
-            for (const activeFilterLabel of activeFilterLabels) {
-              const removedFilterValues = await commonItemsPage.removeSelectedFilterValues(activeFilterLabel);
-              expect.soft(removedFilterValues).toBe(activeFilterLabel);
-              await expect.soft(commonItemsPage.active_filters_list.getByText(activeFilterLabel)).not.toBeVisible();
-            }
-          }
+    const isCheckboxKey = (key: string) => key.endsWith('_checkbox');
+    const isDisplayAction = actionToPerform === 'I can see the selected filters are displayed under';
+    const isRemoveAction = actionToPerform === 'I remove the selected filters from';
+    const handleDisplayAction = async (labels: string[]) => {
+      for (const label of labels) {
+        await expect.soft(commonItemsPage.active_filters_list.getByText(label)).toBeVisible();
+      }
+    };
+    const handleRemoveAction = async (labels: string[]) => {
+      for (const label of labels) {
+        const removedFilterValues = await commonItemsPage.removeSelectedFilterValues(label);
+        expect.soft(removedFilterValues).toBe(label);
+        await expect.soft(commonItemsPage.active_filters_list.getByText(label)).not.toBeVisible();
+      }
+    };
+    for (const key of Object.keys(filterDataset)) {
+      if (isCheckboxKey(key)) {
+        const activeFilterLabels = await commonItemsPage.getCheckboxFilterLabels(
+          key,
+          filterDataset,
+          filterLabels,
+          replaceValue
+        );
+        if (isDisplayAction) {
+          await handleDisplayAction(activeFilterLabels);
+        } else if (isRemoveAction) {
+          await handleRemoveAction(activeFilterLabels);
         }
       }
     }
