@@ -23,26 +23,9 @@ When(
         await searchModificationsPage.clickFilterChevronModifications(dataset, key, searchModificationsPage);
         if (key === 'sponsor_organisation_text') {
           if (isJsEnabled) {
-            dataset['sponsor_organisation_jsenabled_text'] = dataset[key];
-            await commonItemsPage.fillUIComponent(
-              dataset,
-              'sponsor_organisation_jsenabled_text',
-              searchModificationsPage
-            );
-            await searchModificationsPage.page.waitForTimeout(2000);
-            const suggestionVisible = await searchModificationsPage.sponsor_organisation_suggestion_list_labels
-              .first()
-              .isVisible();
-            if (suggestionVisible) {
-              await searchModificationsPage.sponsor_organisation_suggestion_list_labels.first().click();
-            }
+            await searchModificationsPage.selectSponsorOrgJsEnabled(dataset, key, commonItemsPage);
           } else {
-            await commonItemsPage.fillUIComponent(dataset, key, searchModificationsPage);
-            await searchModificationsPage.sponsor_organisation_jsdisabled_search_button.click();
-            await searchModificationsPage.page.waitForTimeout(2000);
-            if (dataset[key] !== '') {
-              await searchModificationsPage.sponsor_organisation_jsdisabled_search_results_radio_button.first().click();
-            }
+            await searchModificationsPage.selectSponsorOrgJsDisabled(dataset, key, commonItemsPage);
           }
           delete dataset['sponsor_organisation_jsenabled_text'];
         } else {
@@ -71,13 +54,8 @@ Then(
     const dataset = searchModificationsPage.searchModificationsPageTestData.Advanced_Filters[filterDatasetName];
     for (const key in dataset) {
       if (Object.hasOwn(dataset, key)) {
-        if (key === 'lead_nation_checkbox' || key === 'modification_type_checkbox') {
-          const numberOfCheckboxesSelected = dataset[key].length;
-          const hintLabel =
-            numberOfCheckboxesSelected +
-            ' ' +
-            searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page
-              .selected_checkboxes_hint_label;
+        if (key.endsWith('_checkbox')) {
+          const hintLabel = await searchModificationsPage.getHintLabel(dataset, key);
           expect(confirmStringNotNull(await searchModificationsPage[key + '_selected_hint_label'].textContent())).toBe(
             hintLabel
           );
@@ -85,12 +63,12 @@ Then(
             searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page
               .Advanced_Filters_Hint_Labels[key + '_hint_label']
           );
-        } else if (key === 'date_modification_submitted_from_day_text') {
+        } else if (key.startsWith('date_') && key.endsWith('_from_day_text')) {
           expect(await searchModificationsPage.date_modification_submitted_from_date_help_text.textContent()).toBe(
             searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page
               .date_modification_submitted_from_date_help_text
           );
-        } else if (key === 'date_modification_submitted_to_day_text') {
+        } else if (key.startsWith('date_') && key.endsWith('_to_day_text')) {
           expect(await searchModificationsPage.date_modification_submitted_to_date_help_text.textContent()).toBe(
             searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page
               .date_modification_submitted_to_date_help_text

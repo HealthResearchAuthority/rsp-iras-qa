@@ -2,6 +2,7 @@ import { expect, Locator, Page } from '@playwright/test';
 import * as linkTextData from '../../../../resources/test_data/common/link_text_data.json';
 import * as searchModificationsPageTestData from '../../../../resources/test_data/iras/reviewResearch/receiveAmendments/search_modifications_page_data.json';
 import { confirmStringNotNull } from '../../../../utils/UtilFunctions';
+import CommonItemsPage from '../../../Common/CommonItemsPage';
 
 //Declare Page Objects
 export default class SearchModificationsPage {
@@ -472,5 +473,33 @@ export default class SearchModificationsPage {
     if (button && shouldClick) {
       await button.click();
     }
+  }
+
+  async selectSponsorOrgJsEnabled(dataset: JSON, key: string, commonItemsPage: CommonItemsPage) {
+    dataset['sponsor_organisation_jsenabled_text'] = dataset[key];
+    await commonItemsPage.fillUIComponent(dataset, 'sponsor_organisation_jsenabled_text', this.page);
+    await this.page.waitForTimeout(2000);
+    const suggestionVisible = await this.sponsor_organisation_suggestion_list_labels.first().isVisible();
+    if (suggestionVisible) {
+      await this.sponsor_organisation_suggestion_list_labels.first().click();
+    }
+  }
+
+  async selectSponsorOrgJsDisabled(dataset: JSON, key: string, commonItemsPage: CommonItemsPage) {
+    await commonItemsPage.fillUIComponent(dataset, key, this.page);
+    await this.sponsor_organisation_jsdisabled_search_button.click();
+    await this.page.waitForTimeout(2000);
+    if (dataset[key] !== '') {
+      await this.sponsor_organisation_jsdisabled_search_results_radio_button.first().click();
+    }
+  }
+
+  async getHintLabel(dataset: JSON, key: string): Promise<string> {
+    const numberOfCheckboxesSelected = dataset[key].length;
+    const hintLabel =
+      numberOfCheckboxesSelected +
+      ' ' +
+      this.searchModificationsPageTestData.Search_Modifications_Page.selected_checkboxes_hint_label;
+    return hintLabel;
   }
 }
