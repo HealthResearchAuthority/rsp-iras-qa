@@ -23,9 +23,19 @@ When(
         await searchModificationsPage.clickFilterChevronModifications(dataset, key, searchModificationsPage);
         if (key === 'sponsor_organisation_text') {
           if (isJsEnabled) {
-            await searchModificationsPage.selectSponsorOrgJsEnabled(dataset, key, commonItemsPage);
+            await searchModificationsPage.selectSponsorOrgJsEnabled(
+              dataset,
+              key,
+              commonItemsPage,
+              searchModificationsPage
+            );
           } else {
-            await searchModificationsPage.selectSponsorOrgJsDisabled(dataset, key, commonItemsPage);
+            await searchModificationsPage.selectSponsorOrgJsDisabled(
+              dataset,
+              key,
+              commonItemsPage,
+              searchModificationsPage
+            );
           }
           delete dataset['sponsor_organisation_jsenabled_text'];
         } else {
@@ -92,98 +102,56 @@ When(
 );
 
 Then(
-  '{string} active filters {string} for checkboxes in the search modifications page',
+  '{string} active filters {string} in the search modifications page',
   async ({ searchModificationsPage, commonItemsPage }, actionToPerform: string, filterDatasetName: string) => {
     const filterDataset = searchModificationsPage.searchModificationsPageTestData.Advanced_Filters[filterDatasetName];
     const filterLabels = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page;
     const replaceValue = '_label';
-    const isCheckboxKey = (key: string) => key.endsWith('_checkbox');
-    const isDisplayAction = actionToPerform === 'I can see the selected filters are displayed under';
-    const isRemoveAction = actionToPerform === 'I remove the selected filters from';
-    const handleDisplayAction = async (labels: string[]) => {
-      for (const label of labels) {
-        await expect.soft(commonItemsPage.active_filters_list.getByText(label)).toBeVisible();
-      }
-    };
-    const handleRemoveAction = async (labels: string[]) => {
-      for (const label of labels) {
-        const removedFilterValues = await commonItemsPage.removeSelectedFilterValues(label);
-        expect.soft(removedFilterValues).toBe(label);
-        await expect.soft(commonItemsPage.active_filters_list.getByText(label)).not.toBeVisible();
-      }
-    };
-    for (const key of Object.keys(filterDataset)) {
-      if (isCheckboxKey(key)) {
-        const activeFilterLabels = await commonItemsPage.getCheckboxFilterLabels(
-          key,
-          filterDataset,
-          filterLabels,
-          replaceValue
-        );
+    const handleActiveFilterValidation = async (
+      key: string,
+      labelFetcher: (key: string) => Promise<string | string[]>,
+      actionToPerform: string,
+      commonItemsPage: any
+    ) => {
+      const isDisplayAction = actionToPerform === 'I can see the selected filters are displayed under';
+      const isRemoveAction = actionToPerform === 'I remove the selected filters from';
+      const labels = await labelFetcher(key);
+      const labelArray = Array.isArray(labels) ? labels : [labels];
+      for (const label of labelArray) {
         if (isDisplayAction) {
-          await handleDisplayAction(activeFilterLabels);
+          await expect.soft(commonItemsPage.active_filters_list.getByText(label)).toBeVisible();
         } else if (isRemoveAction) {
-          await handleRemoveAction(activeFilterLabels);
+          const removed = await commonItemsPage.removeSelectedFilterValues(label);
+          expect.soft(removed).toBe(label);
+          await expect.soft(commonItemsPage.active_filters_list.getByText(label)).not.toBeVisible();
         }
       }
-    }
-  }
-);
-
-Then(
-  '{string} active filters {string} for date fields in the search modifications page',
-  async ({ searchModificationsPage, commonItemsPage }, actionToPerform: string, filterDatasetName: string) => {
-    const filterDataset = searchModificationsPage.searchModificationsPageTestData.Advanced_Filters[filterDatasetName];
-    const filterLabels = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page;
-    const replaceValue = '_label';
-    const isDisplayAction = actionToPerform === 'I can see the selected filters are displayed under';
-    const isRemoveAction = actionToPerform === 'I remove the selected filters from';
-    const handleDisplay = async (label: string) => {
-      await expect.soft(commonItemsPage.active_filters_list.getByText(label)).toBeVisible();
     };
-    const handleRemove = async (label: string) => {
-      const removedFilterValues = await commonItemsPage.removeSelectedFilterValues(label);
-      expect.soft(removedFilterValues).toBe(label);
-      await expect.soft(commonItemsPage.active_filters_list.getByText(label)).not.toBeVisible();
-    };
-    for (const key of Object.keys(filterDataset)) {
-      if (key.startsWith('date_')) {
-        const label = await commonItemsPage.getDateFilterLabel(key, filterDataset, filterLabels, replaceValue);
-        if (label) {
-          if (isDisplayAction) {
-            await handleDisplay(label);
-          } else if (isRemoveAction) {
-            await handleRemove(label);
+    for (const key in filterDataset) {
+      if (Object.hasOwn(filterDataset, key)) {
+        if (key.endsWith('_checkbox')) {
+          await handleActiveFilterValidation(
+            key,
+            async (k) => await commonItemsPage.getCheckboxFilterLabels(k, filterDataset, filterLabels, replaceValue),
+            actionToPerform,
+            commonItemsPage
+          );
+        } else if (key.startsWith('date_')) {
+          if (key.endsWith('_from_day_text') || key.endsWith('_to_day_text')) {
+            await handleActiveFilterValidation(
+              key,
+              async (k) => await commonItemsPage.getDateFilterLabel(k, filterDataset, filterLabels, replaceValue),
+              actionToPerform,
+              commonItemsPage
+            );
           }
-        }
-      }
-    }
-  }
-);
-
-Then(
-  '{string} active filters {string} for text fields in the search modifications page',
-  async ({ searchModificationsPage, commonItemsPage }, actionToPerform: string, filterDatasetName: string) => {
-    const filterDataset = searchModificationsPage.searchModificationsPageTestData.Advanced_Filters[filterDatasetName];
-    const filterLabels = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page;
-    const replaceValue = '_label';
-    const isDisplayAction = actionToPerform === 'I can see the selected filters are displayed under';
-    const isRemoveAction = actionToPerform === 'I remove the selected filters from';
-    const handleDisplay = async (label: string) => {
-      await expect.soft(commonItemsPage.active_filters_list.getByText(label)).toBeVisible();
-    };
-    const handleRemove = async (label: string) => {
-      const removedFilterValue = await commonItemsPage.removeSelectedFilterValues(label);
-      expect.soft(removedFilterValue).toBe(label);
-      await expect.soft(commonItemsPage.active_filters_list.getByText(label)).not.toBeVisible();
-    };
-    for (const key of Object.keys(filterDataset)) {
-      const label = await commonItemsPage.getTextboxFilterLabel(key, filterDataset, filterLabels, replaceValue);
-      if (label) {
-        if (isDisplayAction) {
-          await handleDisplay(label);
-        } else if (isRemoveAction) {
-          await handleRemove(label);
+        } else {
+          await handleActiveFilterValidation(
+            key,
+            async (k) => await commonItemsPage.getTextboxFilterLabel(k, filterDataset, filterLabels, replaceValue),
+            actionToPerform,
+            commonItemsPage
+          );
         }
       }
     }
@@ -193,12 +161,9 @@ Then(
 Then(
   'the result count displayed at the top accurately reflects the number of records shown',
   async ({ commonItemsPage, searchModificationsPage }) => {
-    const testData = searchModificationsPage.searchModificationsPageTestData;
-    const modificationsList = await searchModificationsPage.getAllModificationsTheTable();
-    const searchResults = confirmArrayNotNull(modificationsList.get('searchResultValues'));
-    const expectedResultCountLabel = testData.Search_Modifications_Page.result_count_heading;
-    const actualResultCount = confirmStringNotNull(await commonItemsPage.result_count.textContent());
-    expect(searchResults.length + expectedResultCountLabel).toEqual(actualResultCount);
+    const expectedResultCountLabel = await searchModificationsPage.getExpectedResultsCountLabel();
+    const actualResultCountLabel = await searchModificationsPage.getActualResultsCountLabel(commonItemsPage);
+    expect(expectedResultCountLabel).toEqual(actualResultCountLabel);
   }
 );
 
@@ -499,14 +464,12 @@ Then(
       if (Object.hasOwn(errorMessageFieldDataset, key)) {
         const expectedMessage = errorMessageFieldDataset[key];
         if (
-          errorMessageFieldAndSummaryDatasetName === 'Date_Modification_Submitted_To_date_Before_From_Date_Error' ||
-          errorMessageFieldAndSummaryDatasetName === 'Date_Modification_Submitted_No_Month_Selected_To_Date_Error'
+          errorMessageFieldAndSummaryDatasetName.endsWith('_To_date_Before_From_Date_Error') ||
+          errorMessageFieldAndSummaryDatasetName.endsWith('_No_Month_Selected_To_Date_Error')
         ) {
           const actualMessage = await searchModificationsPage.date_modification_submitted_to_date_error.textContent();
           expect(actualMessage).toEqual(expectedMessage);
-        } else if (
-          errorMessageFieldAndSummaryDatasetName === 'Date_Modification_Submitted_No_Month_Selected_From_Date_Error'
-        ) {
+        } else if (errorMessageFieldAndSummaryDatasetName.endsWith('_No_Month_Selected_From_Date_Error')) {
           const actualMessage = await searchModificationsPage.date_modification_submitted_from_date_error.textContent();
           expect(actualMessage).toEqual(expectedMessage);
         } else if (errorMessageFieldAndSummaryDatasetName === 'Sponsor_Organisation_Min_Char_Error') {
@@ -533,10 +496,9 @@ Then(
       searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.title
     );
     expect(await commonItemsPage.tableRows.count()).toBe(0);
-    const expectedResultCount =
-      searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.result_count_heading;
-    const actualResultCount = confirmStringNotNull(await commonItemsPage.result_count.textContent());
-    expect('0' + expectedResultCount).toBe(actualResultCount);
+    const expectedResultCountLabel = await searchModificationsPage.getExpectedResultsCountLabelNoResults();
+    const actualResultCountLabel = await searchModificationsPage.getActualResultsCountLabel(commonItemsPage);
+    expect(expectedResultCountLabel).toEqual(actualResultCountLabel);
     expect(await commonItemsPage.no_results_heading.count()).toBe(0);
     expect(await commonItemsPage.no_results_guidance_text.count()).toBe(0);
     expect(await commonItemsPage.no_results_bullet_points.count()).toBe(0);

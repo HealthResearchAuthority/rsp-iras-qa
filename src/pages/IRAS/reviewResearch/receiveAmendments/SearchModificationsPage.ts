@@ -1,7 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as linkTextData from '../../../../resources/test_data/common/link_text_data.json';
 import * as searchModificationsPageTestData from '../../../../resources/test_data/iras/reviewResearch/receiveAmendments/search_modifications_page_data.json';
-import { confirmStringNotNull } from '../../../../utils/UtilFunctions';
+import { confirmArrayNotNull, confirmStringNotNull } from '../../../../utils/UtilFunctions';
 import CommonItemsPage from '../../../Common/CommonItemsPage';
 
 //Declare Page Objects
@@ -475,9 +475,14 @@ export default class SearchModificationsPage {
     }
   }
 
-  async selectSponsorOrgJsEnabled(dataset: JSON, key: string, commonItemsPage: CommonItemsPage) {
+  async selectSponsorOrgJsEnabled<PageObject>(
+    dataset: JSON,
+    key: string,
+    commonItemsPage: CommonItemsPage,
+    page: PageObject
+  ) {
     dataset['sponsor_organisation_jsenabled_text'] = dataset[key];
-    await commonItemsPage.fillUIComponent(dataset, 'sponsor_organisation_jsenabled_text', this.page);
+    await commonItemsPage.fillUIComponent(dataset, 'sponsor_organisation_jsenabled_text', page);
     await this.page.waitForTimeout(2000);
     const suggestionVisible = await this.sponsor_organisation_suggestion_list_labels.first().isVisible();
     if (suggestionVisible) {
@@ -485,8 +490,13 @@ export default class SearchModificationsPage {
     }
   }
 
-  async selectSponsorOrgJsDisabled(dataset: JSON, key: string, commonItemsPage: CommonItemsPage) {
-    await commonItemsPage.fillUIComponent(dataset, key, this.page);
+  async selectSponsorOrgJsDisabled<PageObject>(
+    dataset: JSON,
+    key: string,
+    commonItemsPage: CommonItemsPage,
+    page: PageObject
+  ) {
+    await commonItemsPage.fillUIComponent(dataset, key, page);
     await this.sponsor_organisation_jsdisabled_search_button.click();
     await this.page.waitForTimeout(2000);
     if (dataset[key] !== '') {
@@ -501,5 +511,23 @@ export default class SearchModificationsPage {
       ' ' +
       this.searchModificationsPageTestData.Search_Modifications_Page.selected_checkboxes_hint_label;
     return hintLabel;
+  }
+
+  async getActualResultsCountLabel(commonItemsPage: CommonItemsPage) {
+    return confirmStringNotNull(await commonItemsPage.result_count.textContent());
+  }
+
+  async getExpectedResultsCountLabel() {
+    const testData = this.searchModificationsPageTestData;
+    const modificationsList = await this.getAllModificationsTheTable();
+    const searchResults = confirmArrayNotNull(modificationsList.get('searchResultValues'));
+    const expectedResultCountLabel = testData.Search_Modifications_Page.result_count_heading;
+    return searchResults.length + expectedResultCountLabel;
+  }
+
+  async getExpectedResultsCountLabelNoResults() {
+    const expectedResultCountLabel =
+      this.searchModificationsPageTestData.Search_Modifications_Page.result_count_heading;
+    return '0' + expectedResultCountLabel;
   }
 }
