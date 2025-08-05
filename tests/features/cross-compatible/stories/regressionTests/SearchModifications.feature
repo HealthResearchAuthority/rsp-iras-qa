@@ -32,7 +32,7 @@ Feature: Receive Amendments: Search Modifications
                 When I enter '<Valid_Iras_Id>' into the search field for search modifications page
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Search_Modifications_Page'
-                Then the system displays modification records matching the search criteria of '<Valid_Iras_Id>' in the search modifications page
+                And the system displays modification records matching the search '<Valid_Iras_Id>' and filter criteria '' in the search modifications page
                 And the result count displayed at the top accurately reflects the number of records shown
                 And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
                 And I capture the page screenshot

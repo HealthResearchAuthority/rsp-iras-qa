@@ -669,8 +669,8 @@ export default class CommonItemsPage {
     return new Map([['searchResultValues', searchResultValues]]);
   }
 
-  async validateSearchResults(userListAfterSearch: any, searchKey: string) {
-    for (const val of userListAfterSearch) {
+  async validateSearchResults(listAfterSearch: any, searchKey: string) {
+    for (const val of listAfterSearch) {
       if (val.includes(searchKey)) {
         return true;
       }

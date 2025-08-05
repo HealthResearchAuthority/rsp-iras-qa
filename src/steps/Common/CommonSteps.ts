@@ -640,6 +640,7 @@ When(
     }
   }
 );
+
 Then(
   'the system displays no results found message if there is no {string} on the system that matches the search criteria',
   async (
@@ -666,26 +667,18 @@ Then(
       await expect(headingLocator).toHaveText(expectedHeading);
       await expect(guidanceLocator).toHaveText(expectedGuidance);
     } else if (entityType === 'modification record') {
-      const expectedResultCount =
-        searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.result_count_heading;
+      const pageTestData = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page;
+      const validateTextMatch = async (locator: Locator, expectedText: string) => {
+        await expect(locator).toHaveText(expectedText);
+        expect(confirmStringNotNull(await locator.textContent())).toBe(expectedText);
+      };
+      const expectedResultCount = pageTestData.result_count_heading;
       const actualResultCount = confirmStringNotNull(await commonItemsPage.result_count.textContent());
       expect('0' + expectedResultCount).toBe(actualResultCount);
-      headingLocator = commonItemsPage.no_results_heading;
-      guidanceLocator = commonItemsPage.no_results_guidance_text;
-      expectedHeading =
-        searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.no_results_heading;
-      expectedGuidance =
-        searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.no_results_guidance_text;
-      await expect(headingLocator).toHaveText(expectedHeading);
-      expect(confirmStringNotNull(await headingLocator.textContent())).toBe(expectedHeading);
-      await expect(guidanceLocator).toHaveText(expectedGuidance);
-      expect(confirmStringNotNull(await guidanceLocator.textContent())).toBe(expectedGuidance);
-      const bulletPoints: string[] = await commonItemsPage.getNoResultsBulletPoints();
-      const bulletPointsActual = bulletPoints.flat().join(', ');
-      const bulletPointsExpected =
-        searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.no_results_bullet_points
-          .flat()
-          .join(', ');
+      await validateTextMatch(commonItemsPage.no_results_heading, pageTestData.no_results_heading);
+      await validateTextMatch(commonItemsPage.no_results_guidance_text, pageTestData.no_results_guidance_text);
+      const bulletPointsActual = (await commonItemsPage.getNoResultsBulletPoints()).flat().join(', ');
+      const bulletPointsExpected = pageTestData.no_results_bullet_points.flat().join(', ');
       expect(bulletPointsActual).toEqual(bulletPointsExpected);
     }
   }

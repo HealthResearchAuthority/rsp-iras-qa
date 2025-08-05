@@ -2,6 +2,8 @@ import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../hooks/CustomFixtures';
 import { confirmArrayNotNull, confirmStringNotNull, sortArray } from '../../../../utils/UtilFunctions';
 import config from '../../../../../playwright.config';
+import CommonItemsPage from '../../../../pages/Common/CommonItemsPage';
+import { Locator } from 'playwright';
 const { When, Then } = createBdd(test);
 
 When(
@@ -170,144 +172,107 @@ Then(
 // date_modification_submitted, participating nation and sponsor_organisation can't validate from UI,need to validate with Database
 Then(
   'the system displays modification records matching the search {string} and filter criteria {string} in the search modifications page',
-  async ({ commonItemsPage, searchModificationsPage }, irasIdDatasetName: string, filterDatasetName: string) => {
+  async ({ commonItemsPage, searchModificationsPage }, irasIdDatasetName, filterDatasetName) => {
     const testData = searchModificationsPage.searchModificationsPageTestData;
-    const irasId = testData.Iras_Id[irasIdDatasetName]?.iras_id_text;
-    const filterDataset = testData.Advanced_Filters[filterDatasetName];
+    const irasId = testData.Iras_Id?.[irasIdDatasetName]?.iras_id_text;
+    const filterDataset = testData.Advanced_Filters?.[filterDatasetName] || {};
     const { chief_investigator_name_text: ciName, short_project_title_text: projectTitle } = filterDataset;
+
     const modificationsList = await searchModificationsPage.getAllModificationsTheTable();
     const searchResults = confirmArrayNotNull(modificationsList.get('searchResultValues'));
-    // Validate combined search terms
-    if (irasId && ciName && projectTitle) {
-      const searchTerms = [irasId, ciName, projectTitle];
+
+    const modificationIds = confirmArrayNotNull(modificationsList.get('modificationIdValues'));
+    await searchModificationsPage.setModificationIdListAfterSearch(modificationIds);
+
+    const validateCombinedSearchTerms = async (
+      searchResults: string[],
+      searchTerms: string[],
+      commonItemsPage: CommonItemsPage
+    ) => {
       const filteredResults = await commonItemsPage.filterResults(searchResults, searchTerms);
       expect(filteredResults).toEqual(searchResults);
+
       const validatedResults = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
         searchResults,
         searchTerms
       );
       expect(validatedResults).toBeTruthy();
       expect(searchResults).toHaveLength(validatedResults.length);
-    }
-    // Validate IRAS ID
-    const modificationIds = confirmArrayNotNull(modificationsList.get('modificationIdValues'));
-    await searchModificationsPage.setModificationIdListAfterSearch(modificationIds);
-    if (irasId) {
-      const irasIdMatch = commonItemsPage.validateSearchResults(modificationIds, irasId);
-      expect(irasIdMatch).toBeTruthy();
-    }
-    // Validate Short Project Title
-    if (projectTitle) {
-      const projectTitles = confirmArrayNotNull(modificationsList.get('shortProjectTitleValues'));
-      const titleMatch = commonItemsPage.validateSearchResults(projectTitles, projectTitle);
-      expect(titleMatch).toBeTruthy();
-    }
-    // Validate Chief Investigator Name
-    if (ciName) {
-      const ciNames = confirmArrayNotNull(modificationsList.get('chiefInvestigatorNameValues'));
-      const ciSearchTerms = await commonItemsPage.splitSearchTerm(ciName);
-      const ciMatch = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(ciNames, ciSearchTerms);
-      expect(ciMatch).toBeTruthy();
-      expect(ciNames).toHaveLength(ciMatch.length);
-    }
-    // Validate Modification Types
-    const allowedModifications: string[] = filterDataset['modification_type_checkbox'];
-    if (allowedModifications) {
-      const modificationTypeListAfterSearch: string[] = confirmArrayNotNull(
-        modificationsList.get('modificationTypeValues')
-      );
-      const isValid = await commonItemsPage.areSearchResultsValid(
-        modificationTypeListAfterSearch,
-        allowedModifications
-      );
-      expect(isValid).toBeTruthy();
-    }
-    // Validate Lead Nations
-    const allowedLeadNations: string[] = filterDataset['lead_nation_checkbox'];
-    if (allowedLeadNations) {
-      const leadNationValuesAfterSearch = confirmArrayNotNull(modificationsList.get('leadNationValues'));
-      const isValid = await commonItemsPage.areSearchResultsValid(leadNationValuesAfterSearch, allowedLeadNations);
-      expect(isValid).toBeTruthy();
-    }
-  }
-);
+    };
 
-Then(
-  'the system displays modification records matching the search criteria of {string} in the search modifications page',
-  async ({ commonItemsPage, searchModificationsPage }, irasIdDatasetName: string) => {
-    const testData = searchModificationsPage.searchModificationsPageTestData;
-    const irasId = testData.Iras_Id[irasIdDatasetName]?.iras_id_text;
-    const modificationsList = await searchModificationsPage.getAllModificationsTheTable();
-    const searchResults = confirmArrayNotNull(modificationsList.get('searchResultValues'));
-    if (irasId) {
-      const filteredResults = await commonItemsPage.filterResults(searchResults, irasId);
-      expect(filteredResults).toEqual(searchResults);
-      const validatedResults = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(searchResults, irasId);
-      expect(validatedResults).toBeTruthy();
-      expect(searchResults).toHaveLength(validatedResults.length);
-    }
-    const modificationIds = confirmArrayNotNull(modificationsList.get('modificationIdValues'));
-    await searchModificationsPage.setModificationIdListAfterSearch(modificationIds);
-    if (irasId) {
-      const irasIdMatch = await commonItemsPage.validateSearchResults(modificationIds, irasId);
-      expect(irasIdMatch).toBeTruthy();
-    }
-  }
-);
+    const validateSingleFieldMatch = async (
+      modificationsList: Map<string, string[]>,
+      fieldKey: string,
+      searchTerm: string,
+      commonItemsPage: CommonItemsPage
+    ) => {
+      const values = confirmArrayNotNull(modificationsList.get(fieldKey));
+      const match = await commonItemsPage.validateSearchResults(values, searchTerm);
+      expect(match).toBeTruthy();
+    };
 
-Then(
-  'the system displays modification records matching the filter criteria of {string} in the search modifications page',
-  async ({ commonItemsPage, searchModificationsPage }, filterDatasetName: string) => {
-    const testData = searchModificationsPage.searchModificationsPageTestData;
-    const filterDataset = testData.Advanced_Filters[filterDatasetName];
-    const { chief_investigator_name_text: ciName, short_project_title_text: projectTitle } = filterDataset;
-    const modificationsList = await searchModificationsPage.getAllModificationsTheTable();
-    const searchResults = confirmArrayNotNull(modificationsList.get('searchResultValues'));
-    // Combined search term validation
-    if (ciName && projectTitle) {
-      const searchTerms = [ciName, projectTitle];
-      const filteredResults = await commonItemsPage.filterResults(searchResults, searchTerms);
-      expect(filteredResults).toEqual(searchResults);
-      const validatedResults = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
-        searchResults,
-        searchTerms
-      );
-      expect(validatedResults).toBeTruthy();
-      expect(searchResults).toHaveLength(validatedResults.length);
-    }
-    // Individual field validations
-    const modificationIds = confirmArrayNotNull(modificationsList.get('modificationIdValues'));
-    await searchModificationsPage.setModificationIdListAfterSearch(modificationIds);
-    if (projectTitle) {
-      const projectTitles = confirmArrayNotNull(modificationsList.get('shortProjectTitleValues'));
-      const match = commonItemsPage.validateSearchResults(projectTitles, projectTitle);
+    const validateMultiWordFieldMatch = async (
+      modificationsList: Map<string, string[]>,
+      fieldKey: string,
+      searchTerm: string,
+      commonItemsPage: CommonItemsPage
+    ) => {
+      const values = confirmArrayNotNull(modificationsList.get(fieldKey));
+      const terms = await commonItemsPage.splitSearchTerm(searchTerm);
+      const match = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(values, terms);
       expect(match).toBeTruthy();
-    }
-    if (ciName) {
-      const ciNames = confirmArrayNotNull(modificationsList.get('chiefInvestigatorNameValues'));
-      const ciSearchTerms = await commonItemsPage.splitSearchTerm(ciName);
-      const match = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(ciNames, ciSearchTerms);
-      expect(match).toBeTruthy();
-      expect(ciNames).toHaveLength(match.length);
-    }
-    // Validate Modification Types
-    const allowedModifications: string[] = filterDataset['modification_type_checkbox'];
-    if (allowedModifications) {
-      const modificationTypeListAfterSearch: string[] = confirmArrayNotNull(
-        modificationsList.get('modificationTypeValues')
-      );
-      const isValid = await commonItemsPage.areSearchResultsValid(
-        modificationTypeListAfterSearch,
-        allowedModifications
-      );
+      expect(values).toHaveLength(match.length);
+    };
+
+    const validateFilterMatch = async (
+      modificationsList: Map<string, string[]>,
+      fieldKey: string,
+      allowedValues: string[],
+      commonItemsPage: CommonItemsPage
+    ) => {
+      const values = confirmArrayNotNull(modificationsList.get(fieldKey));
+      const isValid = await commonItemsPage.areSearchResultsValid(values, allowedValues);
       expect(isValid).toBeTruthy();
-    }
-    // Validate Lead Nations
-    const allowedLeadNations: string[] = filterDataset['lead_nation_checkbox'];
-    if (allowedLeadNations) {
-      const leadNationValuesAfterSearch = confirmArrayNotNull(modificationsList.get('leadNationValues'));
-      const isValid = await commonItemsPage.areSearchResultsValid(leadNationValuesAfterSearch, allowedLeadNations);
-      expect(isValid).toBeTruthy();
+    };
+    if (searchResults.length !== 0) {
+      // Combined search validation
+      const searchTerms = [irasId, ciName, projectTitle].filter(Boolean);
+      if (searchTerms.length > 1) {
+        await validateCombinedSearchTerms(searchResults, searchTerms, commonItemsPage);
+      }
+      // Individual search field validations
+      if (irasId) {
+        await validateSingleFieldMatch(modificationsList, 'modificationIdValues', irasId, commonItemsPage);
+      }
+      if (projectTitle) {
+        await validateSingleFieldMatch(modificationsList, 'shortProjectTitleValues', projectTitle, commonItemsPage);
+      }
+      if (ciName) {
+        await validateMultiWordFieldMatch(modificationsList, 'chiefInvestigatorNameValues', ciName, commonItemsPage);
+      }
+      // Filter validations
+      const allowedModifications = filterDataset['modification_type_checkbox'];
+      if (allowedModifications) {
+        await validateFilterMatch(modificationsList, 'modificationTypeValues', allowedModifications, commonItemsPage);
+      }
+      const allowedLeadNations = filterDataset['lead_nation_checkbox'];
+      if (allowedLeadNations) {
+        await validateFilterMatch(modificationsList, 'leadNationValues', allowedLeadNations, commonItemsPage);
+      }
+    } else {
+      const pageTestData = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page;
+      const validateTextMatch = async (locator: Locator, expectedText: string) => {
+        await expect(locator).toHaveText(expectedText);
+        expect(confirmStringNotNull(await locator.textContent())).toBe(expectedText);
+      };
+      const expectedResultCount = pageTestData.result_count_heading;
+      const actualResultCount = confirmStringNotNull(await commonItemsPage.result_count.textContent());
+      expect('0' + expectedResultCount).toBe(actualResultCount);
+      await validateTextMatch(commonItemsPage.no_results_heading, pageTestData.no_results_heading);
+      await validateTextMatch(commonItemsPage.no_results_guidance_text, pageTestData.no_results_guidance_text);
+      const bulletPointsActual = (await commonItemsPage.getNoResultsBulletPoints()).flat().join(', ');
+      const bulletPointsExpected = pageTestData.no_results_bullet_points.flat().join(', ');
+      expect(bulletPointsActual).toEqual(bulletPointsExpected);
     }
   }
 );
