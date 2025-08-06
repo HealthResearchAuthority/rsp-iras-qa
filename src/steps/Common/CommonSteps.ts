@@ -829,7 +829,7 @@ Then(
 Then(
   '{string} active filters {string} in the {string}',
   async (
-    { searchModificationsPage, commonItemsPage },
+    { searchModificationsPage, commonItemsPage, manageUsersPage },
     actionToPerform: string,
     filterDatasetName: string,
     pageKey: string
@@ -839,6 +839,9 @@ Then(
     if (pageKey === 'Search_Modifications_Page') {
       filterDataset = searchModificationsPage.searchModificationsPageTestData.Advanced_Filters[filterDatasetName];
       filterLabels = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page;
+    } else if (pageKey === 'Manage_Users_Page') {
+      filterDataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[filterDatasetName];
+      filterLabels = manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List;
     }
     const replaceValue = '_label';
     const handleActiveFilterValidation = async (
@@ -882,7 +885,8 @@ Then(
         } else {
           await handleActiveFilterValidation(
             key,
-            async (k) => await commonItemsPage.getTextboxFilterLabel(k, filterDataset, filterLabels, replaceValue),
+            async (k) =>
+              await commonItemsPage.getTextboxRadioButtonFilterLabel(k, filterDataset, filterLabels, replaceValue),
             actionToPerform,
             commonItemsPage
           );
