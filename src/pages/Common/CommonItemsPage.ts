@@ -80,6 +80,7 @@ export default class CommonItemsPage {
   readonly no_matching_search_result_body_four_label: Locator;
   readonly no_matching_search_result_count_label: Locator;
   readonly active_filters_list: Locator;
+  readonly clear_all_filters_link: Locator;
   readonly no_results_bullet_points: Locator;
   readonly no_results_guidance_text: Locator;
   readonly no_results_heading: Locator;
@@ -190,6 +191,10 @@ export default class CommonItemsPage {
       .getByRole('list')
       .getByRole('listitem')
       .getByRole('link');
+    this.clear_all_filters_link = this.page.getByRole('link', {
+      name: this.commonTestData.clear_all_filters_label,
+      exact: true,
+    });
     this.no_results_guidance_text = this.page
       .getByRole('paragraph')
       .getByText(this.commonTestData.no_results_guidance_text, {

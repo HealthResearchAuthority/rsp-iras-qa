@@ -171,16 +171,14 @@ Then(
 
 // date_modification_submitted, participating nation and sponsor_organisation can't validate from UI,need to validate with Database
 Then(
-  'the system displays modification records matching the search {string} and filter criteria {string} in the search modifications page',
+  'the system displays modification records based on the search {string} and filter criteria {string} or shows no results found message if no matching records exist in the search modifications page',
   async ({ commonItemsPage, searchModificationsPage }, irasIdDatasetName, filterDatasetName) => {
     const testData = searchModificationsPage.searchModificationsPageTestData;
     const irasId = testData.Iras_Id?.[irasIdDatasetName]?.iras_id_text;
     const filterDataset = testData.Advanced_Filters?.[filterDatasetName] || {};
     const { chief_investigator_name_text: ciName, short_project_title_text: projectTitle } = filterDataset;
-
     const modificationsList = await searchModificationsPage.getAllModificationsTheTable();
     const searchResults = confirmArrayNotNull(modificationsList.get('searchResultValues'));
-
     const modificationIds = confirmArrayNotNull(modificationsList.get('modificationIdValues'));
     await searchModificationsPage.setModificationIdListAfterSearch(modificationIds);
 
@@ -468,6 +466,16 @@ Then(
     expect(await commonItemsPage.no_results_guidance_text.count()).toBe(0);
     expect(await commonItemsPage.no_results_bullet_points.count()).toBe(0);
     expect(await commonItemsPage.active_filters_list.count()).toBe(0);
+    expect(await commonItemsPage.clear_all_filters_link.count()).toBe(0);
+  }
+);
+
+Then(
+  'all selected filters displayed under active Filters have been successfully removed',
+  async ({ commonItemsPage }) => {
+    await expect(commonItemsPage.advanced_filter_chevron).toBeVisible();
+    expect(await commonItemsPage.active_filters_list.count()).toBe(0);
+    expect(await commonItemsPage.clear_all_filters_link.count()).toBe(0);
   }
 );
 

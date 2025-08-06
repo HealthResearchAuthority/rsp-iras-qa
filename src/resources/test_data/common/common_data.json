@@ -15,6 +15,7 @@
   "result_count_heading": " results",
   "selected_checkboxes_hint_label": "selected",
   "active_filters_label": "Active filters",
+  "clear_all_filters_label": "Clear all filters",
   "no_results_heading": "There are no matching results",
   "no_results_guidance_text": "Improve your search results by:",
   "no_results_bullet_points": [
