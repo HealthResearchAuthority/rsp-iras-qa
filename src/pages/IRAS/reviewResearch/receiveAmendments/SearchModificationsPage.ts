@@ -1,7 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as linkTextData from '../../../../resources/test_data/common/link_text_data.json';
 import * as searchModificationsPageTestData from '../../../../resources/test_data/iras/reviewResearch/receiveAmendments/search_modifications_page_data.json';
-import { confirmArrayNotNull, confirmStringNotNull } from '../../../../utils/UtilFunctions';
+import { confirmStringNotNull } from '../../../../utils/UtilFunctions';
 import CommonItemsPage from '../../../Common/CommonItemsPage';
 
 //Declare Page Objects
@@ -519,10 +519,9 @@ export default class SearchModificationsPage {
 
   async getExpectedResultsCountLabel() {
     const testData = this.searchModificationsPageTestData;
-    const modificationsList = await this.getAllModificationsTheTable();
-    const searchResults = confirmArrayNotNull(modificationsList.get('searchResultValues'));
+    const modificationsList = await this.getModificationIdListAfterSearch();
     const expectedResultCountLabel = testData.Search_Modifications_Page.result_count_heading;
-    return searchResults.length + expectedResultCountLabel;
+    return modificationsList.length + expectedResultCountLabel;
   }
 
   async getExpectedResultsCountLabelNoResults() {
