@@ -2,7 +2,7 @@ import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../../hooks/CustomFixtures';
 import dateTimeRelatedData from '../../../../../resources/test_data/common/date_time_related_data.json';
 const { When, Then } = createBdd(test);
-import { confirmStringNotNull, convertDateShortMonth, validateDateRange } from '../../../../../utils/UtilFunctions';
+import { confirmStringNotNull, validateDateRange } from '../../../../../utils/UtilFunctions';
 
 When('I update user profile with {string}', async ({ commonItemsPage, editUserProfilePage }, datasetName: string) => {
   const dataset = editUserProfilePage.editUserProfilePageTestData[datasetName];
@@ -181,69 +181,69 @@ When(
   }
 );
 
-Then(
-  'I can see the selected filters {string} are displayed under active filters for manage users page',
-  async ({ manageUsersPage, commonItemsPage }, filterDatasetName: string) => {
-    const dataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[filterDatasetName];
-    for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        if (key === 'country_checkbox') {
-          for (const filterLabel of dataset[key]) {
-            const activeLabel =
-              manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List
-                .country_advanced_filter_label +
-              ' - ' +
-              filterLabel;
-            await expect(commonItemsPage.advanced_filter_active_filters_label.getByText(activeLabel)).toBeVisible();
-          }
-        } else if (key === 'status_radio') {
-          const activeLabel =
-            manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List
-              .status_advanced_filter_label +
-            ' - ' +
-            dataset[key];
-          await expect(commonItemsPage.advanced_filter_active_filters_label.getByText(activeLabel)).toBeVisible();
-        } else if (
-          key === 'date_last_logged_in_from_day_text' ||
-          key == 'date_last_logged_in_from_month_dropdown' ||
-          key == 'date_last_logged_in_from_year_text'
-        ) {
-          if (dataset[key] !== '' && dataset[key] !== 'Choose month') {
-            const lastLoggedInFromDateFormatted = await convertDateShortMonth(
-              dataset['date_last_logged_in_from_day_text'],
-              dataset['date_last_logged_in_from_month_dropdown'],
-              dataset['date_last_logged_in_from_year_text']
-            );
-            const activeLabel =
-              manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List
-                .date_last_logged_in_label +
-              ' - from ' +
-              lastLoggedInFromDateFormatted;
-            await expect(commonItemsPage.advanced_filter_active_filters_label.getByText(activeLabel)).toBeVisible();
-          }
-        } else if (
-          key === 'date_last_logged_in_to_day_text' ||
-          key == 'date_last_logged_in_to_month_dropdown' ||
-          key == 'date_last_logged_in_to_year_text'
-        ) {
-          if (dataset[key] !== '' && dataset[key] !== 'Choose month') {
-            const lastLoggedInToDateFormatted = await convertDateShortMonth(
-              dataset['date_last_logged_in_to_day_text'],
-              dataset['date_last_logged_in_to_month_dropdown'],
-              dataset['date_last_logged_in_to_year_text']
-            );
-            const activeLabel =
-              manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List
-                .date_last_logged_in_label +
-              ' - to ' +
-              lastLoggedInToDateFormatted;
-            await expect(commonItemsPage.advanced_filter_active_filters_label.getByText(activeLabel)).toBeVisible();
-          }
-        }
-      }
-    }
-  }
-);
+// Then(
+//   'I can see the selected filters {string} are displayed under active filters for manage users page',
+//   async ({ manageUsersPage, commonItemsPage }, filterDatasetName: string) => {
+//     const dataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[filterDatasetName];
+//     for (const key in dataset) {
+//       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+//         if (key === 'country_checkbox') {
+//           for (const filterLabel of dataset[key]) {
+//             const activeLabel =
+//               manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List
+//                 .country_advanced_filter_label +
+//               ' - ' +
+//               filterLabel;
+//             await expect(commonItemsPage.advanced_filter_active_filters_label.getByText(activeLabel)).toBeVisible();
+//           }
+//         } else if (key === 'status_radio') {
+//           const activeLabel =
+//             manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List
+//               .status_advanced_filter_label +
+//             ' - ' +
+//             dataset[key];
+//           await expect(commonItemsPage.advanced_filter_active_filters_label.getByText(activeLabel)).toBeVisible();
+//         } else if (
+//           key === 'date_last_logged_in_from_day_text' ||
+//           key == 'date_last_logged_in_from_month_dropdown' ||
+//           key == 'date_last_logged_in_from_year_text'
+//         ) {
+//           if (dataset[key] !== '' && dataset[key] !== 'Choose month') {
+//             const lastLoggedInFromDateFormatted = await convertDateShortMonth(
+//               dataset['date_last_logged_in_from_day_text'],
+//               dataset['date_last_logged_in_from_month_dropdown'],
+//               dataset['date_last_logged_in_from_year_text']
+//             );
+//             const activeLabel =
+//               manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List
+//                 .date_last_logged_in_label +
+//               ' - from ' +
+//               lastLoggedInFromDateFormatted;
+//             await expect(commonItemsPage.advanced_filter_active_filters_label.getByText(activeLabel)).toBeVisible();
+//           }
+//         } else if (
+//           key === 'date_last_logged_in_to_day_text' ||
+//           key == 'date_last_logged_in_to_month_dropdown' ||
+//           key == 'date_last_logged_in_to_year_text'
+//         ) {
+//           if (dataset[key] !== '' && dataset[key] !== 'Choose month') {
+//             const lastLoggedInToDateFormatted = await convertDateShortMonth(
+//               dataset['date_last_logged_in_to_day_text'],
+//               dataset['date_last_logged_in_to_month_dropdown'],
+//               dataset['date_last_logged_in_to_year_text']
+//             );
+//             const activeLabel =
+//               manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List
+//                 .date_last_logged_in_label +
+//               ' - to ' +
+//               lastLoggedInToDateFormatted;
+//             await expect(commonItemsPage.advanced_filter_active_filters_label.getByText(activeLabel)).toBeVisible();
+//           }
+//         }
+//       }
+//     }
+//   }
+// );
 
 When(
   'I can see the results matching the search {string} and filter criteria {string} for manage users page',
@@ -462,69 +462,69 @@ Then('I can see the {string} ui labels in manage users page', async ({ manageUse
   }
 });
 
-Then(
-  'I can see the selected filters {string} are removed from active filters for manage users page',
-  async ({ manageUsersPage, commonItemsPage }, filterDatasetName: string) => {
-    const dataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[filterDatasetName];
-    for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        if (key === 'country_checkbox') {
-          for (const filterLabel of dataset[key]) {
-            const activeLabel =
-              manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List
-                .country_advanced_filter_label +
-              ': ' +
-              filterLabel;
-            await expect(commonItemsPage.advanced_filter_active_filters_label.getByText(activeLabel)).not.toBeVisible();
-          }
-        } else if (key === 'status_radio') {
-          const activeLabel =
-            manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List
-              .status_advanced_filter_label +
-            ': ' +
-            dataset[key];
-          await expect(commonItemsPage.advanced_filter_active_filters_label.getByText(activeLabel)).not.toBeVisible();
-        } else if (
-          key === 'date_last_logged_in_from_day_text' ||
-          key == 'date_last_logged_in_from_month_dropdown' ||
-          key == 'date_last_logged_in_from_year_text'
-        ) {
-          if (dataset[key] !== '' && dataset[key] !== 'Choose month') {
-            const lastLoggedInFromDateFormatted = await convertDateShortMonth(
-              dataset['date_last_logged_in_from_day_text'],
-              dataset['date_last_logged_in_from_month_dropdown'],
-              dataset['date_last_logged_in_from_year_text']
-            );
-            const activeLabel =
-              manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List
-                .date_last_logged_in_label +
-              ' - from ' +
-              lastLoggedInFromDateFormatted;
-            await expect(commonItemsPage.advanced_filter_active_filters_label.getByText(activeLabel)).not.toBeVisible();
-          }
-        } else if (
-          key === 'date_last_logged_in_to_day_text' ||
-          key == 'date_last_logged_in_to_month_dropdown' ||
-          key == 'date_last_logged_in_to_year_text'
-        ) {
-          if (dataset[key] !== '' && dataset[key] !== 'Choose month') {
-            const lastLoggedInToDateFormatted = await convertDateShortMonth(
-              dataset['date_last_logged_in_to_day_text'],
-              dataset['date_last_logged_in_to_month_dropdown'],
-              dataset['date_last_logged_in_to_year_text']
-            );
-            const activeLabel =
-              manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List
-                .date_last_logged_in_label +
-              ' - to ' +
-              lastLoggedInToDateFormatted;
-            await expect(commonItemsPage.advanced_filter_active_filters_label.getByText(activeLabel)).not.toBeVisible();
-          }
-        }
-      }
-    }
-  }
-);
+// Then(
+//   'I can see the selected filters {string} are removed from active filters for manage users page',
+//   async ({ manageUsersPage, commonItemsPage }, filterDatasetName: string) => {
+//     const dataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[filterDatasetName];
+//     for (const key in dataset) {
+//       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+//         if (key === 'country_checkbox') {
+//           for (const filterLabel of dataset[key]) {
+//             const activeLabel =
+//               manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List
+//                 .country_advanced_filter_label +
+//               ': ' +
+//               filterLabel;
+//             await expect(commonItemsPage.advanced_filter_active_filters_label.getByText(activeLabel)).not.toBeVisible();
+//           }
+//         } else if (key === 'status_radio') {
+//           const activeLabel =
+//             manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List
+//               .status_advanced_filter_label +
+//             ': ' +
+//             dataset[key];
+//           await expect(commonItemsPage.advanced_filter_active_filters_label.getByText(activeLabel)).not.toBeVisible();
+//         } else if (
+//           key === 'date_last_logged_in_from_day_text' ||
+//           key == 'date_last_logged_in_from_month_dropdown' ||
+//           key == 'date_last_logged_in_from_year_text'
+//         ) {
+//           if (dataset[key] !== '' && dataset[key] !== 'Choose month') {
+//             const lastLoggedInFromDateFormatted = await convertDateShortMonth(
+//               dataset['date_last_logged_in_from_day_text'],
+//               dataset['date_last_logged_in_from_month_dropdown'],
+//               dataset['date_last_logged_in_from_year_text']
+//             );
+//             const activeLabel =
+//               manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List
+//                 .date_last_logged_in_label +
+//               ' - from ' +
+//               lastLoggedInFromDateFormatted;
+//             await expect(commonItemsPage.advanced_filter_active_filters_label.getByText(activeLabel)).not.toBeVisible();
+//           }
+//         } else if (
+//           key === 'date_last_logged_in_to_day_text' ||
+//           key == 'date_last_logged_in_to_month_dropdown' ||
+//           key == 'date_last_logged_in_to_year_text'
+//         ) {
+//           if (dataset[key] !== '' && dataset[key] !== 'Choose month') {
+//             const lastLoggedInToDateFormatted = await convertDateShortMonth(
+//               dataset['date_last_logged_in_to_day_text'],
+//               dataset['date_last_logged_in_to_month_dropdown'],
+//               dataset['date_last_logged_in_to_year_text']
+//             );
+//             const activeLabel =
+//               manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List
+//                 .date_last_logged_in_label +
+//               ' - to ' +
+//               lastLoggedInToDateFormatted;
+//             await expect(commonItemsPage.advanced_filter_active_filters_label.getByText(activeLabel)).not.toBeVisible();
+//           }
+//         }
+//       }
+//     }
+//   }
+// );
 
 Then(
   'I validate {string} displayed on advanced filters in manage users page',
@@ -536,48 +536,105 @@ Then(
   }
 );
 
+// Then(
+//   'I remove the {string} from the active filters in the manage users page',
+//   async ({ manageUsersPage, commonItemsPage }, removeFilterDatasetName: string) => {
+//     let activeCheckboxFiltersMap: { get: (arg0: string) => any };
+//     let activeFiltersMap: any;
+//     let filterCheckboxValuesExpected: any;
+//     let filterValuesExpected: any;
+//     const expectedFilterValues: string[] = [];
+//     let removedFilterValues: string[] = [];
+//     const dataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[removeFilterDatasetName];
+//     const datasetLabels = manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List;
+//     const seen = new Set<string>();
+//     for (const key in dataset) {
+//       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+//         if (key.endsWith('_checkbox')) {
+//           activeCheckboxFiltersMap = await commonItemsPage.getActiveFilterLabelCheckbox(dataset, datasetLabels);
+//           filterCheckboxValuesExpected = activeCheckboxFiltersMap.get('multiSelectFilter');
+//           const checkboxValues = filterCheckboxValuesExpected.flat().map((item: string) => item.trim());
+//           checkboxValues.forEach((val: string) => {
+//             if (!seen.has(val)) {
+//               seen.add(val);
+//               expectedFilterValues.push(val);
+//             }
+//           });
+//         } else {
+//           activeFiltersMap = await commonItemsPage.getActiveFiltersLabels(dataset, datasetLabels);
+//           filterValuesExpected = activeFiltersMap.get('singleSelectFilter');
+//           const singleSelectValues = filterValuesExpected.flat().map((item: string) => item.trim());
+//           singleSelectValues.forEach((val: string) => {
+//             if (!seen.has(val)) {
+//               seen.add(val);
+//               expectedFilterValues.push(val);
+//             }
+//           });
+//         }
+//       }
+//     }
+//     removedFilterValues = await commonItemsPage.removeSelectedFilterValues(expectedFilterValues);
+//     const fieldValActualAfterRemoval: string[] = await commonItemsPage.getSelectedFilterValues();
+//     const actualFilterValuesAfterRemoval = fieldValActualAfterRemoval.flat().join(', ');
+//     for (let i = 0; i < removedFilterValues.length; i++) {
+//       expect(actualFilterValuesAfterRemoval).not.toContain(removedFilterValues[i]);
+//     }
+//   }
+// );
+
 Then(
-  'I remove the {string} from the active filters in the manage users page',
-  async ({ manageUsersPage, commonItemsPage }, removeFilterDatasetName: string) => {
-    let activeCheckboxFiltersMap: { get: (arg0: string) => any };
-    let activeFiltersMap: any;
-    let filterCheckboxValuesExpected: any;
-    let filterValuesExpected: any;
-    const expectedFilterValues: string[] = [];
-    let removedFilterValues: string[] = [];
-    const dataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[removeFilterDatasetName];
-    const datasetLabels = manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List;
-    const seen = new Set<string>();
-    for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        if (key.endsWith('_checkbox')) {
-          activeCheckboxFiltersMap = await commonItemsPage.getActiveFiltersCheckboxLabels(dataset, datasetLabels);
-          filterCheckboxValuesExpected = activeCheckboxFiltersMap.get('multiSelectFilter');
-          const checkboxValues = filterCheckboxValuesExpected.flat().map((item: string) => item.trim());
-          checkboxValues.forEach((val: string) => {
-            if (!seen.has(val)) {
-              seen.add(val);
-              expectedFilterValues.push(val);
-            }
-          });
-        } else {
-          activeFiltersMap = await commonItemsPage.getActiveFiltersLabels(dataset, datasetLabels);
-          filterValuesExpected = activeFiltersMap.get('singleSelectFilter');
-          const singleSelectValues = filterValuesExpected.flat().map((item: string) => item.trim());
-          singleSelectValues.forEach((val: string) => {
-            if (!seen.has(val)) {
-              seen.add(val);
-              expectedFilterValues.push(val);
-            }
-          });
+  '{string} active filters {string} in the manage users page',
+  async ({ searchModificationsPage, commonItemsPage }, actionToPerform: string, filterDatasetName: string) => {
+    const filterDataset = searchModificationsPage.searchModificationsPageTestData.Advanced_Filters[filterDatasetName];
+    const filterLabels = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page;
+    const replaceValue = '_label';
+    const handleActiveFilterValidation = async (
+      key: string,
+      labelFetcher: (key: string) => Promise<string | string[]>,
+      actionToPerform: string,
+      commonItemsPage: any
+    ) => {
+      const isDisplayAction = actionToPerform === 'I can see the selected filters are displayed under';
+      const isRemoveAction = actionToPerform === 'I remove the selected filters from';
+      const labels = await labelFetcher(key);
+      const labelArray = Array.isArray(labels) ? labels : [labels];
+      for (const label of labelArray) {
+        if (isDisplayAction) {
+          await expect.soft(commonItemsPage.active_filters_list.getByText(label)).toBeVisible();
+        } else if (isRemoveAction) {
+          const removed = await commonItemsPage.removeSelectedFilterValues(label);
+          expect.soft(removed).toBe(label);
+          await expect.soft(commonItemsPage.active_filters_list.getByText(label)).not.toBeVisible();
         }
       }
-    }
-    removedFilterValues = await commonItemsPage.removeSelectedFilterValues(expectedFilterValues);
-    const fieldValActualAfterRemoval: string[] = await commonItemsPage.getSelectedFilterValues();
-    const actualFilterValuesAfterRemoval = fieldValActualAfterRemoval.flat().join(', ');
-    for (let i = 0; i < removedFilterValues.length; i++) {
-      expect(actualFilterValuesAfterRemoval).not.toContain(removedFilterValues[i]);
+    };
+    for (const key in filterDataset) {
+      if (Object.hasOwn(filterDataset, key)) {
+        if (key.endsWith('_checkbox')) {
+          await handleActiveFilterValidation(
+            key,
+            async (k) => await commonItemsPage.getCheckboxFilterLabels(k, filterDataset, filterLabels, replaceValue),
+            actionToPerform,
+            commonItemsPage
+          );
+        } else if (key.startsWith('date_')) {
+          if (key.endsWith('_from_day_text') || key.endsWith('_to_day_text')) {
+            await handleActiveFilterValidation(
+              key,
+              async (k) => await commonItemsPage.getDateFilterLabel(k, filterDataset, filterLabels, replaceValue),
+              actionToPerform,
+              commonItemsPage
+            );
+          }
+        } else {
+          await handleActiveFilterValidation(
+            key,
+            async (k) => await commonItemsPage.getTextboxFilterLabel(k, filterDataset, filterLabels, replaceValue),
+            actionToPerform,
+            commonItemsPage
+          );
+        }
+      }
     }
   }
 );

@@ -14,9 +14,10 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
         And I capture the page screenshot
         And I select advanced filters in the manage users page using '<Advanced_Filters>'
         And I capture the page screenshot
-        And I click the 'Apply_filters' button on the 'Manage_Users_Page'
+        And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
         And I capture the page screenshot
-        Then I can see the selected filters '<Advanced_Filters>' are displayed under active filters for manage users page
+        Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the manage users page
+        # Then I can see the selected filters '<Advanced_Filters>' are displayed under active filters for manage users page
         And I can see the results matching the search '<Search_Queries>' and filter criteria '<Advanced_Filters>' for manage users page
         And I capture the page screenshot
 
@@ -43,9 +44,10 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
         And I click the 'Search' button on the 'Manage_Users_Page'
         And I select advanced filters in the manage users page using '<Advanced_Filters>'
         And I capture the page screenshot
-        And I click the 'Apply_filters' button on the 'Manage_Users_Page'
+        And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
         And I capture the page screenshot
-        Then I can see the selected filters '<Advanced_Filters>' are displayed under active filters for manage users page
+        Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the manage users page
+        # Then I can see the selected filters '<Advanced_Filters>' are displayed under active filters for manage users page
         And I can see the results matching the search '<Search_Queries>' and filter criteria '<Advanced_Filters>' for manage users page
         And I capture the page screenshot
 
@@ -58,9 +60,10 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
     Scenario Outline: Verify the user can view the list of users by selecting advanced filters and click on apply filters button then entering valid first name and click on search button
         And I select advanced filters in the manage users page using '<Advanced_Filters>'
         And I capture the page screenshot
-        And I click the 'Apply_filters' button on the 'Manage_Users_Page'
+        And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
         And I capture the page screenshot
-        Then I can see the selected filters '<Advanced_Filters>' are displayed under active filters for manage users page
+        Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the manage users page
+        # Then I can see the selected filters '<Advanced_Filters>' are displayed under active filters for manage users page
         And I can see the results matching the filter criteria '<Advanced_Filters>' for manage users page
         And I capture the page screenshot
         When I enter '<Search_Queries>' into the search field for manage users page
@@ -87,7 +90,7 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
     Scenario Outline: Verify the user can see validation error message that Search to date must be after Search from date
         And I select advanced filters in the manage users page using '<Advanced_Filters>'
         And I capture the page screenshot
-        And I click the 'Apply_filters' button on the 'Manage_Users_Page'
+        And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
         And I capture the page screenshot
         Then I validate '<Field_Error_Message>' displayed on advanced filters in manage users page
         And I capture the page screenshot
@@ -113,8 +116,9 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
         And I capture the page screenshot
         And I select advanced filters in the manage users page using '<Advanced_Filters>'
         And I capture the page screenshot
-        And I click the 'Apply_filters' button on the 'Manage_Users_Page'
-        Then I can see the selected filters '<Advanced_Filters>' are displayed under active filters for manage users page
+        And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
+        Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the manage users page
+        # Then I can see the selected filters '<Advanced_Filters>' are displayed under active filters for manage users page
         And I capture the page screenshot
         Then I can see the '<No_Results_Found>' ui labels
 
@@ -126,8 +130,8 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
     @jsDisabled @VerifyHintLabelForSelectedCountryCheckboxAdvancedFiltersManageUser
     Scenario: When javascript disabled verify the hint text for country advanced filters when user select multiple checkboxes
         And I select advanced filters in the manage users page using '<Advanced_Filters>'
-        And I click the 'Apply_filters' button on the 'Manage_Users_Page'
-        And I click the 'Advanced_Filter' link on the 'Manage_Users_Page'
+        And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
+        And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
         And I expand the chevrons for '<Advanced_Filters>' in manage users page
         And I capture the page screenshot
         And I verify the hint text based on the '<Advanced_Filters>' for manage users page
@@ -142,7 +146,7 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
 
     @rsp-4273  @VerifyHintTextForAdvanceFiltersManageUsers
     Scenario: Validate hint labels for advanced filters in mange users page
-        And I click the 'Advanced_Filter' link on the 'Manage_Users_Page'
+        And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
         And I expand the chevrons for '<Advanced_Filters>' in manage users page
         And I capture the page screenshot
         And I can see the '<Advanced_Filters_Labels>' ui labels in manage users page
@@ -167,8 +171,8 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
     @rsp-4273 @jsDisabled @VerifyHintLabelForSelectedCheckboxAdvancedFilters
     Scenario Outline: When javascript disabled verify the hint text for advanced filters when user select multiple checkboxes
         And I select advanced filters in the manage users page using '<Advanced_Filters>'
-        And I click the 'Apply_filters' button on the 'Manage_Users_Page'
-        And I click the 'Advanced_Filter' link on the 'Manage_Users_Page'
+        And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
+        And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
         And I expand the chevrons for '<Advanced_Filters>' in manage users page
         And I capture the page screenshot
         And I verify the hint text based on the '<Advanced_Filters>' for manage users page
@@ -184,12 +188,14 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
     Scenario: Validate clear all filters removes all active filters in mange users page
         And I select advanced filters in the manage users page using '<Advanced_Filters>'
         And I capture the page screenshot
-        And I click the 'Apply_filters' button on the 'Manage_Users_Page'
-        Then I can see the selected filters '<Advanced_Filters>' are displayed under active filters for manage users page
+        And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
+        Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the manage users page
+        # Then I can see the selected filters '<Advanced_Filters>' are displayed under active filters for manage users page
         And I capture the page screenshot
         And I click the 'Clear_All_Filters' link on the 'Manage_Users_Page'
         And I capture the page screenshot
-        Then I can see the selected filters '<Advanced_Filters>' are removed from active filters for manage users page
+        And all selected filters displayed under active Filters have been successfully removed
+        # Then I can see the selected filters '<Advanced_Filters>' are removed from active filters for manage users page
 
         Examples:
             | Advanced_Filters                              |
@@ -201,13 +207,16 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
     Scenario Outline: Verify the user can remove all the selected filters one by one and the search results update accordingly
         And I select advanced filters in the manage users page using '<Advanced_Filters>'
         And I capture the page screenshot
-        And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
+        And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
-        Then I can see the selected filters '<Advanced_Filters>' are displayed under active filters for manage users page
+        Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the manage users page
+        # Then I can see the selected filters '<Advanced_Filters>' are displayed under active filters for manage users page
         And I capture the page screenshot
-        And I remove the '<Advanced_Filters_Remove>' from the active filters in the manage users page
+        And 'I remove the selected filters from' active filters '<Advanced_Filters_Remove>' in the search modifications page
+        # And I remove the '<Advanced_Filters_Remove>' from the active filters in the manage users page
         And I capture the page screenshot
-        Then I can see the selected filters '<Advanced_Filters>' are removed from active filters for manage users page
+        And all selected filters displayed under active Filters have been successfully removed
+        # Then I can see the selected filters '<Advanced_Filters>' are removed from active filters for manage users page
 
         Examples:
             | Advanced_Filters    | Advanced_Filters_Remove |
