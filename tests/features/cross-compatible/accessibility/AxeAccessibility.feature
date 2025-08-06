@@ -843,6 +843,20 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
+  @axeAccessibilityAdvanceFilterSearchModifications @FrontStageUser
+  Scenario: Search - Approvals - Plan and manage healthcare research
+    Given I have navigated to the 'Search_Modifications_Page'
+    Then I can see the 'Search_Modifications_Page'
+    When I enter 'Valid_Iras_Id_Nth' into the search field
+    And I select advanced filters in the search modifications page using 'Advanced_Filters_Nth'
+    And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
+    Then 'I can see the selected filters are displayed under' active filters 'Advanced_Filters_Nth' in the search modifications page
+    And the system displays modification records based on the search 'Valid_Iras_Id_Nth' and filter criteria 'Advanced_Filters_Nth' or shows no results found message if no matching records exist in the search modifications page
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+
   @axeAccessibilityModficationsTasklistPage @FrontStageUser
   Scenario: Modifications tasklist page
     Given I have navigated to the 'Modifications_Tasklist_Page'
@@ -891,3 +905,18 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
+
+  @axeAccessibilitySearchAndAdvancedFilterManageUser @SysAdminUser @axeAccessibilityManageUsers
+  Scenario: Manage Users list page with advanced filter and search
+    Given I have navigated to the 'System_Administration_Page'
+    When I click the 'Manage_Users' link on the 'System_Administration_Page'
+    Then I can see the 'Manage_Users_Page'
+    When I enter 'Existing_QA_User_First_Name' into the search field for manage users page
+    And I select advanced filters in the manage users page using 'Advanced_Filter_One'
+    And I click the 'Apply_filters' button on the 'Manage_Users_Page'
+    Then I can see the selected filters 'Advanced_Filter_One' are displayed under active filters for manage users page
+    And I can see the results matching the search 'Existing_QA_User_First_Name' and filter criteria 'Advanced_Filter_One' for manage users page
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
