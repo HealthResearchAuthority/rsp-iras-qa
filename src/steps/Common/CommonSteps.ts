@@ -882,7 +882,8 @@ Then(
         } else {
           await handleActiveFilterValidation(
             key,
-            async (k) => await commonItemsPage.getTextboxFilterLabel(k, filterDataset, filterLabels, replaceValue),
+            async (k) =>
+              await commonItemsPage.getTextboxRadioButtonFilterLabel(k, filterDataset, filterLabels, replaceValue),
             actionToPerform,
             commonItemsPage
           );

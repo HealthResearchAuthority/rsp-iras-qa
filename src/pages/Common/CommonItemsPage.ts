@@ -961,7 +961,7 @@ export default class CommonItemsPage {
     );
   }
 
-  async getTextboxFilterLabel(
+  async getTextboxRadioButtonFilterLabel(
     key: string,
     filterDataset: any,
     filterLabels: any,
