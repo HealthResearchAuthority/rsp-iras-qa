@@ -569,43 +569,6 @@ export async function convertDateShortMonth(day: string, month: string, year: nu
   return formattedDate;
 }
 
-// export async function validateDateRange(
-//   validationDate: string | Date,
-//   fromDate?: string | Date,
-//   toDate?: string | Date
-// ): Promise<boolean> {
-//   let from: Date;
-//   let to: Date;
-//   let isLastLoggedInDateInValidRange: boolean;
-//   if (fromDate !== ' Choose month ') {
-//     from = new Date(fromDate);
-//   }
-//   if (toDate !== ' Choose month ') {
-//     to = new Date(toDate);
-//   }
-//   const target = new Date(validationDate);
-//   if (fromDate !== ' Choose month ' && toDate !== ' Choose month ') {
-//     if (isNaN(from.getTime()) || isNaN(to.getTime()) || isNaN(target.getTime())) {
-//       throw new Error('Invalid dates provided');
-//     }
-//     if (from > to) {
-//       throw new Error("'fromDate' should be less than or equal to 'toDate'");
-//     }
-//     isLastLoggedInDateInValidRange = target >= from && target <= to;
-//   } else if (fromDate !== ' Choose month ' && toDate === ' Choose month ') {
-//     if (isNaN(from.getTime()) || isNaN(target.getTime())) {
-//       throw new Error('Invalid dates provided');
-//     }
-//     isLastLoggedInDateInValidRange = target >= from;
-//   } else if (fromDate === ' Choose month ' && toDate !== ' Choose month ') {
-//     if (isNaN(to.getTime()) || isNaN(target.getTime())) {
-//       throw new Error('Invalid dates provided');
-//     }
-//     isLastLoggedInDateInValidRange = target <= to;
-//   }
-//   return isLastLoggedInDateInValidRange;
-// }
-
 export async function validateDateRange(
   validationDate: string,
   dateLastLoggedinMonthPlaceholder: string,
