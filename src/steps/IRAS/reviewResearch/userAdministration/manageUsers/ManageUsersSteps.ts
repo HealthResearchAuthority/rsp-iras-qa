@@ -536,57 +536,11 @@ Then(
   }
 );
 
-// Then(
-//   'I remove the {string} from the active filters in the manage users page',
-//   async ({ manageUsersPage, commonItemsPage }, removeFilterDatasetName: string) => {
-//     let activeCheckboxFiltersMap: { get: (arg0: string) => any };
-//     let activeFiltersMap: any;
-//     let filterCheckboxValuesExpected: any;
-//     let filterValuesExpected: any;
-//     const expectedFilterValues: string[] = [];
-//     let removedFilterValues: string[] = [];
-//     const dataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[removeFilterDatasetName];
-//     const datasetLabels = manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List;
-//     const seen = new Set<string>();
-//     for (const key in dataset) {
-//       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-//         if (key.endsWith('_checkbox')) {
-//           activeCheckboxFiltersMap = await commonItemsPage.getActiveFilterLabelCheckbox(dataset, datasetLabels);
-//           filterCheckboxValuesExpected = activeCheckboxFiltersMap.get('multiSelectFilter');
-//           const checkboxValues = filterCheckboxValuesExpected.flat().map((item: string) => item.trim());
-//           checkboxValues.forEach((val: string) => {
-//             if (!seen.has(val)) {
-//               seen.add(val);
-//               expectedFilterValues.push(val);
-//             }
-//           });
-//         } else {
-//           activeFiltersMap = await commonItemsPage.getActiveFiltersLabels(dataset, datasetLabels);
-//           filterValuesExpected = activeFiltersMap.get('singleSelectFilter');
-//           const singleSelectValues = filterValuesExpected.flat().map((item: string) => item.trim());
-//           singleSelectValues.forEach((val: string) => {
-//             if (!seen.has(val)) {
-//               seen.add(val);
-//               expectedFilterValues.push(val);
-//             }
-//           });
-//         }
-//       }
-//     }
-//     removedFilterValues = await commonItemsPage.removeSelectedFilterValues(expectedFilterValues);
-//     const fieldValActualAfterRemoval: string[] = await commonItemsPage.getSelectedFilterValues();
-//     const actualFilterValuesAfterRemoval = fieldValActualAfterRemoval.flat().join(', ');
-//     for (let i = 0; i < removedFilterValues.length; i++) {
-//       expect(actualFilterValuesAfterRemoval).not.toContain(removedFilterValues[i]);
-//     }
-//   }
-// );
-
 Then(
   '{string} active filters {string} in the manage users page',
-  async ({ searchModificationsPage, commonItemsPage }, actionToPerform: string, filterDatasetName: string) => {
-    const filterDataset = searchModificationsPage.searchModificationsPageTestData.Advanced_Filters[filterDatasetName];
-    const filterLabels = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page;
+  async ({ manageUsersPage, commonItemsPage }, actionToPerform: string, filterDatasetName: string) => {
+    const filterDataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[filterDatasetName];
+    const filterLabels = manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List;
     const replaceValue = '_label';
     const handleActiveFilterValidation = async (
       key: string,
