@@ -138,20 +138,14 @@ export default class ManageUsersPage {
     });
     this.country_checkbox_chevron = this.page
       .getByRole('heading', { level: 2 })
-      .getByText(
-        this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.country_advanced_filter_label,
-        {
-          exact: true,
-        }
-      );
+      .getByText(this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.country_label, {
+        exact: true,
+      });
     this.status_radio_chevron = this.page
       .getByRole('heading', { level: 2 })
-      .getByText(
-        this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.status_advanced_filter_label,
-        {
-          exact: true,
-        }
-      );
+      .getByText(this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.status_label, {
+        exact: true,
+      });
     this.country_checkbox = page.getByRole('checkbox');
     this.status_radio = page.getByRole('radio');
     this.page.getByRole('checkbox');

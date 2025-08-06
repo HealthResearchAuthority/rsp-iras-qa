@@ -897,7 +897,7 @@ export default class CommonItemsPage {
     return `${label} - ${filterLabel}`;
   }
 
-  async getActiveFilterLabelTextbox(
+  async getActiveFilterLabelTextboxRadioButton(
     filterLabels: any,
     filterDataset: JSON,
     key: string,
@@ -908,7 +908,7 @@ export default class CommonItemsPage {
     return `${label} - ${filterDataset[key]}`;
   }
 
-  async getActiveFilterLabelDateSubmittedField(
+  async getActiveFilterLabelDateField(
     filterLabels: any,
     filterDataset: JSON,
     key: string,
@@ -952,25 +952,28 @@ export default class CommonItemsPage {
     filterLabels: any,
     replaceValue: string
   ): Promise<string | null> {
-    if (key === 'date_modification_submitted_from_day_text' || key === 'date_modification_submitted_to_day_text') {
-      return await this.getActiveFilterLabelDateSubmittedField(
-        filterLabels,
-        filterDataset,
-        key,
-        /(_from_day_text|_to_day_text)$/,
-        replaceValue
-      );
-    }
-    return null;
+    return await this.getActiveFilterLabelDateField(
+      filterLabels,
+      filterDataset,
+      key,
+      /(_from_day_text|_to_day_text)$/,
+      replaceValue
+    );
   }
 
-  async getTextboxFilterLabel(
+  async getTextboxRadioButtonFilterLabel(
     key: string,
     filterDataset: any,
     filterLabels: any,
     replaceValue: string
   ): Promise<string> {
-    return await this.getActiveFilterLabelTextbox(filterLabels, filterDataset, key, /_text$/, replaceValue);
+    return await this.getActiveFilterLabelTextboxRadioButton(
+      filterLabels,
+      filterDataset,
+      key,
+      /(_text|_radio)$/,
+      replaceValue
+    );
   }
 
   async getDateString(dataset: JSON, prefix: string) {

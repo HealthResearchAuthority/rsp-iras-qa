@@ -537,10 +537,14 @@ Then(
 );
 
 Then(
-  '{string} active filters {string} in the manage users page',
-  async ({ manageUsersPage, commonItemsPage }, actionToPerform: string, filterDatasetName: string) => {
-    const filterDataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[filterDatasetName];
-    const filterLabels = manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List;
+  '{string} active filters {string} in the {string}',
+  async ({ manageUsersPage, commonItemsPage }, actionToPerform: string, filterDatasetName: string, pageKey: string) => {
+    let filterDataset: JSON;
+    let filterLabels: object;
+    if (pageKey === 'Manage_Users_Page') {
+      filterDataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[filterDatasetName];
+      filterLabels = manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List;
+    }
     const replaceValue = '_label';
     const handleActiveFilterValidation = async (
       key: string,
@@ -583,7 +587,8 @@ Then(
         } else {
           await handleActiveFilterValidation(
             key,
-            async (k) => await commonItemsPage.getTextboxFilterLabel(k, filterDataset, filterLabels, replaceValue),
+            async (k) =>
+              await commonItemsPage.getTextboxRadioButtonFilterLabel(k, filterDataset, filterLabels, replaceValue),
             actionToPerform,
             commonItemsPage
           );
