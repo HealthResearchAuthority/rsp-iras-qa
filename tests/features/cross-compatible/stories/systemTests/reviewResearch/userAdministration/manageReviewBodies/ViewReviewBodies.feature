@@ -89,7 +89,7 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
             | Review_Body_Name         | Status  |
             | Valid_Data_In_All_Fields | Enabled |
 
-    @rsp-3523 @ManageReviewBodiesPagination @ManageReviewBodiesPaginationFirstPage @ManageReviewBodiesPaginationPageNumber @ManageReviewBodiesPaginationNextLinkClick @TestPagination
+    @rsp-3523 @ManageReviewBodiesPagination @ManageReviewBodiesPaginationFirstPage @ManageReviewBodiesPaginationPageNumber @ManageReviewBodiesPaginationNextLinkClick
     Scenario: Verify pagination in manage review bodies page when user is on the first page and navigate through each page by clicking page number or by by clicking next link
         And I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
         And I capture the page screenshot
@@ -119,7 +119,7 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
             | clicking on page number   |
             | clicking on previous link |
 
-    @rsp-3459 @ManageReviewBodiesSearchResultsFound @Smoke @skip
+    @rsp-3459 @ManageReviewBodiesSearchResultsFound @Smoke
     Scenario Outline: Verify search results in manage review bodies page when user search by first and last organisation names
         When I enter the '<Field_Name>' of the '<Position>' item in the list, into the search field
         And I capture the page screenshot

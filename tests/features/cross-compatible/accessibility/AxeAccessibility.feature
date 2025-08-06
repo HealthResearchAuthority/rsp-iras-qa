@@ -850,8 +850,8 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I enter 'Valid_Iras_Id_Nth' into the search field
     And I select advanced filters in the search modifications page using 'Advanced_Filters_Nth'
     And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
-    Then I can see the selected filters 'Advanced_Filters_Nth' are displayed under active filters in the search modifications page
-    And the system displays modification records matching the search 'Valid_Iras_Id_Nth' and filter criteria 'Advanced_Filters_Nth'
+    Then 'I can see the selected filters are displayed under' active filters 'Advanced_Filters_Nth' in the search modifications page
+    And the system displays modification records based on the search 'Valid_Iras_Id_Nth' and filter criteria 'Advanced_Filters_Nth' or shows no results found message if no matching records exist in the search modifications page
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations

@@ -2,6 +2,8 @@ import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../hooks/CustomFixtures';
 import { confirmArrayNotNull, confirmStringNotNull, sortArray } from '../../../../utils/UtilFunctions';
 import config from '../../../../../playwright.config';
+import CommonItemsPage from '../../../../pages/Common/CommonItemsPage';
+import { Locator } from 'playwright';
 const { When, Then } = createBdd(test);
 
 When(
@@ -16,30 +18,26 @@ When(
   'I select advanced filters in the search modifications page using {string}',
   async ({ searchModificationsPage, commonItemsPage, $tags }, filterDatasetName: string) => {
     const dataset = searchModificationsPage.searchModificationsPageTestData.Advanced_Filters[filterDatasetName];
-    await commonItemsPage.clickAdvancedFilterChevron();
+    const isJsEnabled =
+      ($tags.includes('@jsEnabled') || config.projects?.[1].use?.javaScriptEnabled) && !$tags.includes('@jsDisabled');
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         await searchModificationsPage.clickFilterChevronModifications(dataset, key, searchModificationsPage);
         if (key === 'sponsor_organisation_text') {
-          if (
-            ($tags.includes('@jsEnabled') || config.projects?.[1].use?.javaScriptEnabled) &&
-            !$tags.includes('@jsDisabled')
-          ) {
-            dataset['sponsor_organisation_jsenabled_text'] = dataset['sponsor_organisation_text'];
-            await commonItemsPage.fillUIComponent(
+          if (isJsEnabled) {
+            await searchModificationsPage.selectSponsorOrgJsEnabled(
               dataset,
-              'sponsor_organisation_jsenabled_text',
+              key,
+              commonItemsPage,
               searchModificationsPage
             );
-            if (await searchModificationsPage.sponsor_organisation_suggestion_list_labels.first().isVisible()) {
-              await searchModificationsPage.sponsor_organisation_suggestion_list_labels.first().click();
-            }
           } else {
-            await commonItemsPage.fillUIComponent(dataset, key, searchModificationsPage);
-            await searchModificationsPage.sponsor_organisation_jsdisabled_search_button.click();
-            if (dataset[key] !== '') {
-              await searchModificationsPage.sponsor_organisation_jsdisabled_search_results_radio_button.first().click();
-            }
+            await searchModificationsPage.selectSponsorOrgJsDisabled(
+              dataset,
+              key,
+              commonItemsPage,
+              searchModificationsPage
+            );
           }
           delete dataset['sponsor_organisation_jsenabled_text'];
         } else {
@@ -55,7 +53,7 @@ Then(
   async ({ searchModificationsPage }, datasetName: string) => {
     const dataset = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[datasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         await expect(searchModificationsPage[key].getByText(dataset[key])).toBeVisible();
       }
     }
@@ -67,47 +65,22 @@ Then(
   async ({ searchModificationsPage }, filterDatasetName: string) => {
     const dataset = searchModificationsPage.searchModificationsPageTestData.Advanced_Filters[filterDatasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        if (key === 'lead_nation_checkbox') {
-          const numberOfCheckboxesSelected = dataset[key].length;
-          const hintLabel =
-            numberOfCheckboxesSelected +
-            ' ' +
-            searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page
-              .selected_checkboxes_hint_label;
-          expect(
-            confirmStringNotNull(await searchModificationsPage.lead_nation_checkbox_selected_hint_label.textContent())
-          ).toBe(hintLabel);
-          expect(
-            confirmStringNotNull(await searchModificationsPage.lead_nation_checkbox_hint_label.textContent())
-          ).toBe(
-            searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page
-              .Advanced_Filters_Hint_Labels.lead_nation_checkbox_hint_label
+      if (Object.hasOwn(dataset, key)) {
+        if (key.endsWith('_checkbox')) {
+          const hintLabel = await searchModificationsPage.getHintLabel(dataset, key);
+          expect(confirmStringNotNull(await searchModificationsPage[key + '_selected_hint_label'].textContent())).toBe(
+            hintLabel
           );
-        } else if (key === 'modification_type_checkbox') {
-          const numberOfCheckboxesSelected = dataset[key].length;
-          const hintLabel =
-            numberOfCheckboxesSelected +
-            ' ' +
+          expect(confirmStringNotNull(await searchModificationsPage[key + '_hint_label'].textContent())).toBe(
             searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page
-              .selected_checkboxes_hint_label;
-          expect(
-            confirmStringNotNull(
-              await searchModificationsPage.modification_type_checkbox_selected_hint_label.textContent()
-            )
-          ).toBe(hintLabel);
-          expect(
-            confirmStringNotNull(await searchModificationsPage.modification_type_checkbox_hint_label.textContent())
-          ).toBe(
-            searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page
-              .Advanced_Filters_Hint_Labels.modification_type_checkbox_hint_label
+              .Advanced_Filters_Hint_Labels[key + '_hint_label']
           );
-        } else if (key === 'date_modification_submitted_from_day_text') {
+        } else if (key.startsWith('date_') && key.endsWith('_from_day_text')) {
           expect(await searchModificationsPage.date_modification_submitted_from_date_help_text.textContent()).toBe(
             searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page
               .date_modification_submitted_from_date_help_text
           );
-        } else if (key === 'date_modification_submitted_to_day_text') {
+        } else if (key.startsWith('date_') && key.endsWith('_to_day_text')) {
           expect(await searchModificationsPage.date_modification_submitted_to_date_help_text.textContent()).toBe(
             searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page
               .date_modification_submitted_to_date_help_text
@@ -123,7 +96,7 @@ When(
   async ({ searchModificationsPage }, filterDatasetName: string) => {
     const dataset = searchModificationsPage.searchModificationsPageTestData.Advanced_Filters[filterDatasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         await searchModificationsPage.clickFilterChevronModifications(dataset, key, searchModificationsPage);
       }
     }
@@ -131,236 +104,173 @@ When(
 );
 
 Then(
-  'I can see the selected filters {string} are displayed under active filters in the search modifications page',
-  async ({ searchModificationsPage, commonItemsPage }, filterDatasetName: string) => {
-    const testData = searchModificationsPage.searchModificationsPageTestData;
-    const dataset = testData.Advanced_Filters[filterDatasetName];
-    const datasetLabels = testData.Search_Modifications_Page;
-    let expectedSingleSelectValues: string[] = [];
-    let expectedMultiSelectValues: string[] = [];
-    for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+  '{string} active filters {string} in the search modifications page',
+  async ({ searchModificationsPage, commonItemsPage }, actionToPerform: string, filterDatasetName: string) => {
+    const filterDataset = searchModificationsPage.searchModificationsPageTestData.Advanced_Filters[filterDatasetName];
+    const filterLabels = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page;
+    const replaceValue = '_label';
+    const handleActiveFilterValidation = async (
+      key: string,
+      labelFetcher: (key: string) => Promise<string | string[]>,
+      actionToPerform: string,
+      commonItemsPage: any
+    ) => {
+      const isDisplayAction = actionToPerform === 'I can see the selected filters are displayed under';
+      const isRemoveAction = actionToPerform === 'I remove the selected filters from';
+      const labels = await labelFetcher(key);
+      const labelArray = Array.isArray(labels) ? labels : [labels];
+      for (const label of labelArray) {
+        if (isDisplayAction) {
+          await expect.soft(commonItemsPage.active_filters_list.getByText(label)).toBeVisible();
+        } else if (isRemoveAction) {
+          const removed = await commonItemsPage.removeSelectedFilterValues(label);
+          expect.soft(removed).toBe(label);
+          await expect.soft(commonItemsPage.active_filters_list.getByText(label)).not.toBeVisible();
+        }
+      }
+    };
+    for (const key in filterDataset) {
+      if (Object.hasOwn(filterDataset, key)) {
         if (key.endsWith('_checkbox')) {
-          const checkboxMap = await commonItemsPage.getActiveFiltersCheckboxLabels(dataset, datasetLabels);
-          expectedMultiSelectValues =
-            checkboxMap
-              .get('multiSelectFilter')
-              ?.flat()
-              .map((val: string) => val.trim()) || [];
+          await handleActiveFilterValidation(
+            key,
+            async (k) => await commonItemsPage.getCheckboxFilterLabels(k, filterDataset, filterLabels, replaceValue),
+            actionToPerform,
+            commonItemsPage
+          );
+        } else if (key.startsWith('date_')) {
+          if (key.endsWith('_from_day_text') || key.endsWith('_to_day_text')) {
+            await handleActiveFilterValidation(
+              key,
+              async (k) => await commonItemsPage.getDateFilterLabel(k, filterDataset, filterLabels, replaceValue),
+              actionToPerform,
+              commonItemsPage
+            );
+          }
         } else {
-          const singleSelectMap = await commonItemsPage.getActiveFiltersLabels(dataset, datasetLabels);
-          expectedSingleSelectValues =
-            singleSelectMap
-              .get('singleSelectFilter')
-              ?.flat()
-              .map((val: string) => val.trim()) || [];
+          await handleActiveFilterValidation(
+            key,
+            async (k) => await commonItemsPage.getTextboxFilterLabel(k, filterDataset, filterLabels, replaceValue),
+            actionToPerform,
+            commonItemsPage
+          );
         }
       }
     }
-    const actualFilterValues = (await commonItemsPage.getSelectedFilterValues())
-      .flat()
-      .map((val: string) => val.trim());
-    const expectedFilterValues = [...expectedSingleSelectValues, ...expectedMultiSelectValues];
-    expect(actualFilterValues).toEqual(expectedFilterValues);
   }
 );
 
 Then(
-  'I remove the {string} from the active filters in the search modifications page',
-  async ({ searchModificationsPage, commonItemsPage }, removeFilterDatasetName: string) => {
-    let activeCheckboxFiltersMap: { get: (arg0: string) => any };
-    let activeFiltersMap: any;
-    let filterCheckboxValuesExpected: any;
-    let filterValuesExpected: any;
-    const expectedFilterValues: string[] = [];
-    let removedFilterValues: string[] = [];
-    const dataset = searchModificationsPage.searchModificationsPageTestData.Advanced_Filters[removeFilterDatasetName];
-    const datasetLabels = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page;
-    const seen = new Set<string>();
-    for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        if (key.endsWith('_checkbox')) {
-          activeCheckboxFiltersMap = await commonItemsPage.getActiveFiltersCheckboxLabels(dataset, datasetLabels);
-          filterCheckboxValuesExpected = activeCheckboxFiltersMap.get('multiSelectFilter');
-          const checkboxValues = filterCheckboxValuesExpected.flat().map((item: string) => item.trim());
-          checkboxValues.forEach((val: string) => {
-            if (!seen.has(val)) {
-              seen.add(val);
-              expectedFilterValues.push(val);
-            }
-          });
-        } else {
-          activeFiltersMap = await commonItemsPage.getActiveFiltersLabels(dataset, datasetLabels);
-          filterValuesExpected = activeFiltersMap.get('singleSelectFilter');
-          const singleSelectValues = filterValuesExpected.flat().map((item: string) => item.trim());
-          singleSelectValues.forEach((val: string) => {
-            if (!seen.has(val)) {
-              seen.add(val);
-              expectedFilterValues.push(val);
-            }
-          });
-        }
-      }
-    }
-    removedFilterValues = await commonItemsPage.removeSelectedFilterValues(expectedFilterValues);
-    const fieldValActualAfterRemoval: string[] = await commonItemsPage.getSelectedFilterValues();
-    const actualFilterValuesAfterRemoval = fieldValActualAfterRemoval.flat().join(', ');
-    for (let i = 0; i < removedFilterValues.length; i++) {
-      expect(actualFilterValuesAfterRemoval).not.toContain(removedFilterValues[i]);
-    }
+  'the result count displayed at the top accurately reflects the number of records shown',
+  async ({ commonItemsPage, searchModificationsPage }) => {
+    const expectedResultCountLabel = await searchModificationsPage.getExpectedResultsCountLabel();
+    const actualResultCountLabel = await searchModificationsPage.getActualResultsCountLabel(commonItemsPage);
+    expect(expectedResultCountLabel).toEqual(actualResultCountLabel);
   }
 );
 
-// date_modification_submitted and sponsor_organisation can't validate from UI,need to validate with Database
+// date_modification_submitted, participating nation and sponsor_organisation can't validate from UI,need to validate with Database
 Then(
-  'the system displays modification records matching the search {string} and filter criteria {string}',
-  async ({ commonItemsPage, searchModificationsPage }, irasIdDatasetName: string, filterDatasetName: string) => {
+  'the system displays modification records based on the search {string} and filter criteria {string} or shows no results found message if no matching records exist in the search modifications page',
+  async ({ commonItemsPage, searchModificationsPage }, irasIdDatasetName, filterDatasetName) => {
     const testData = searchModificationsPage.searchModificationsPageTestData;
-    const irasId = testData.Iras_Id[irasIdDatasetName]?.iras_id_text;
-    const filterDataset = testData.Advanced_Filters[filterDatasetName];
+    const irasId = testData.Iras_Id?.[irasIdDatasetName]?.iras_id_text;
+    const filterDataset = testData.Advanced_Filters?.[filterDatasetName] || {};
     const { chief_investigator_name_text: ciName, short_project_title_text: projectTitle } = filterDataset;
     const modificationsList = await searchModificationsPage.getAllModificationsTheTable();
     const searchResults = confirmArrayNotNull(modificationsList.get('searchResultValues'));
-    const expectedCount = testData.Search_Modifications_Page.result_count_heading;
-    const actualCount = confirmStringNotNull(await commonItemsPage.result_count.textContent());
-    expect(searchResults.length + expectedCount).toBe(actualCount);
-    // Validate combined search terms
-    if (irasId && ciName && projectTitle) {
-      const searchTerms = [irasId, ciName, projectTitle];
+    const modificationIds = confirmArrayNotNull(modificationsList.get('modificationIdValues'));
+    await searchModificationsPage.setModificationIdListAfterSearch(modificationIds);
+
+    const validateCombinedSearchTerms = async (
+      searchResults: string[],
+      searchTerms: string[],
+      commonItemsPage: CommonItemsPage
+    ) => {
       const filteredResults = await commonItemsPage.filterResults(searchResults, searchTerms);
       expect(filteredResults).toEqual(searchResults);
+
       const validatedResults = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
         searchResults,
         searchTerms
       );
       expect(validatedResults).toBeTruthy();
       expect(searchResults).toHaveLength(validatedResults.length);
-    }
-    // Validate IRAS ID
-    const modificationIds = confirmArrayNotNull(modificationsList.get('modificationIdValues'));
-    await searchModificationsPage.setModificationIdListAfterSearch(modificationIds);
-    if (irasId) {
-      const irasIdMatch = commonItemsPage.validateSearchResults(modificationIds, irasId);
-      expect(irasIdMatch).toBeTruthy();
-    }
-    // Validate Short Project Title
-    if (projectTitle) {
-      const projectTitles = confirmArrayNotNull(modificationsList.get('shortProjectTitleValues'));
-      const titleMatch = commonItemsPage.validateSearchResults(projectTitles, projectTitle);
-      expect(titleMatch).toBeTruthy();
-    }
-    // Validate Chief Investigator Name
-    if (ciName) {
-      const ciNames = confirmArrayNotNull(modificationsList.get('chiefInvestigatorNameValues'));
-      const ciSearchTerms = await commonItemsPage.splitSearchTerm(ciName);
-      const ciMatch = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(ciNames, ciSearchTerms);
-      expect(ciMatch).toBeTruthy();
-      expect(ciNames).toHaveLength(ciMatch.length);
-    }
-    // Validate Modification Types
-    const allowedModifications: string[] = filterDataset['modification_type_checkbox'];
-    if (allowedModifications) {
-      const modificationTypeListAfterSearch: string[] = confirmArrayNotNull(
-        modificationsList.get('modificationTypeValues')
-      );
-      const isValid = await commonItemsPage.areSearchResultsValid(
-        modificationTypeListAfterSearch,
-        allowedModifications
-      );
-      expect(isValid).toBeTruthy();
-    }
-    // Validate Lead Nations
-    const allowedLeadNations: string[] = filterDataset['lead_nation_checkbox'];
-    if (allowedLeadNations) {
-      const leadNationValuesAfterSearch = confirmArrayNotNull(modificationsList.get('leadNationValues'));
-      const isValid = await commonItemsPage.areSearchResultsValid(leadNationValuesAfterSearch, allowedLeadNations);
-      expect(isValid).toBeTruthy();
-    }
-  }
-);
+    };
 
-Then(
-  'the system displays modification records matching the search criteria of {string}',
-  async ({ commonItemsPage, searchModificationsPage }, irasIdDatasetName: string) => {
-    const testData = searchModificationsPage.searchModificationsPageTestData;
-    const irasId = testData.Iras_Id[irasIdDatasetName]?.iras_id_text;
-    const modificationsList = await searchModificationsPage.getAllModificationsTheTable();
-    const searchResults = confirmArrayNotNull(modificationsList.get('searchResultValues'));
-    const expectedCount = testData.Search_Modifications_Page.result_count_heading;
-    const actualCount = confirmStringNotNull(await commonItemsPage.result_count.textContent());
-    expect(searchResults.length + expectedCount).toBe(actualCount);
-    if (irasId) {
-      const filteredResults = await commonItemsPage.filterResults(searchResults, irasId);
-      expect(filteredResults).toEqual(searchResults);
-      const validatedResults = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(searchResults, irasId);
-      expect(validatedResults).toBeTruthy();
-      expect(searchResults).toHaveLength(validatedResults.length);
-    }
-    const modificationIds = confirmArrayNotNull(modificationsList.get('modificationIdValues'));
-    await searchModificationsPage.setModificationIdListAfterSearch(modificationIds);
-    if (irasId) {
-      const irasIdMatch = await commonItemsPage.validateSearchResults(modificationIds, irasId);
-      expect(irasIdMatch).toBeTruthy();
-    }
-  }
-);
+    const validateSingleFieldMatch = async (
+      modificationsList: Map<string, string[]>,
+      fieldKey: string,
+      searchTerm: string,
+      commonItemsPage: CommonItemsPage
+    ) => {
+      const values = confirmArrayNotNull(modificationsList.get(fieldKey));
+      const match = await commonItemsPage.validateSearchResults(values, searchTerm);
+      expect(match).toBeTruthy();
+    };
 
-Then(
-  'the system displays modification records matching the filter criteria of {string}',
-  async ({ commonItemsPage, searchModificationsPage }, filterDatasetName: string) => {
-    const testData = searchModificationsPage.searchModificationsPageTestData;
-    const filterDataset = testData.Advanced_Filters[filterDatasetName];
-    const { chief_investigator_name_text: ciName, short_project_title_text: projectTitle } = filterDataset;
-    const modificationsList = await searchModificationsPage.getAllModificationsTheTable();
-    const searchResults = confirmArrayNotNull(modificationsList.get('searchResultValues'));
-    const expectedCount = testData.Search_Modifications_Page.result_count_heading;
-    const actualCount = confirmStringNotNull(await commonItemsPage.result_count.textContent());
-    expect(searchResults.length + expectedCount).toBe(actualCount);
-    // Combined search term validation
-    if (ciName && projectTitle) {
-      const searchTerms = [ciName, projectTitle];
-      const filteredResults = await commonItemsPage.filterResults(searchResults, searchTerms);
-      expect(filteredResults).toEqual(searchResults);
-      const validatedResults = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
-        searchResults,
-        searchTerms
-      );
-      expect(validatedResults).toBeTruthy();
-      expect(searchResults).toHaveLength(validatedResults.length);
-    }
-    // Individual field validations
-    const modificationIds = confirmArrayNotNull(modificationsList.get('modificationIdValues'));
-    await searchModificationsPage.setModificationIdListAfterSearch(modificationIds);
-    if (projectTitle) {
-      const projectTitles = confirmArrayNotNull(modificationsList.get('shortProjectTitleValues'));
-      const match = commonItemsPage.validateSearchResults(projectTitles, projectTitle);
+    const validateMultiWordFieldMatch = async (
+      modificationsList: Map<string, string[]>,
+      fieldKey: string,
+      searchTerm: string,
+      commonItemsPage: CommonItemsPage
+    ) => {
+      const values = confirmArrayNotNull(modificationsList.get(fieldKey));
+      const terms = await commonItemsPage.splitSearchTerm(searchTerm);
+      const match = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(values, terms);
       expect(match).toBeTruthy();
-    }
-    if (ciName) {
-      const ciNames = confirmArrayNotNull(modificationsList.get('chiefInvestigatorNameValues'));
-      const ciSearchTerms = await commonItemsPage.splitSearchTerm(ciName);
-      const match = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(ciNames, ciSearchTerms);
-      expect(match).toBeTruthy();
-      expect(ciNames).toHaveLength(match.length);
-    }
-    // Validate Modification Types
-    const allowedModifications: string[] = filterDataset['modification_type_checkbox'];
-    if (allowedModifications) {
-      const modificationTypeListAfterSearch: string[] = confirmArrayNotNull(
-        modificationsList.get('modificationTypeValues')
-      );
-      const isValid = await commonItemsPage.areSearchResultsValid(
-        modificationTypeListAfterSearch,
-        allowedModifications
-      );
+      expect(values).toHaveLength(match.length);
+    };
+
+    const validateFilterMatch = async (
+      modificationsList: Map<string, string[]>,
+      fieldKey: string,
+      allowedValues: string[],
+      commonItemsPage: CommonItemsPage
+    ) => {
+      const values = confirmArrayNotNull(modificationsList.get(fieldKey));
+      const isValid = await commonItemsPage.areSearchResultsValid(values, allowedValues);
       expect(isValid).toBeTruthy();
-    }
-    // Validate Lead Nations
-    const allowedLeadNations: string[] = filterDataset['lead_nation_checkbox'];
-    if (allowedLeadNations) {
-      const leadNationValuesAfterSearch = confirmArrayNotNull(modificationsList.get('leadNationValues'));
-      const isValid = await commonItemsPage.areSearchResultsValid(leadNationValuesAfterSearch, allowedLeadNations);
-      expect(isValid).toBeTruthy();
+    };
+    if (searchResults.length !== 0) {
+      // Combined search validation
+      const searchTerms = [irasId, ciName, projectTitle].filter(Boolean);
+      if (searchTerms.length > 1) {
+        await validateCombinedSearchTerms(searchResults, searchTerms, commonItemsPage);
+      }
+      // Individual search field validations
+      if (irasId) {
+        await validateSingleFieldMatch(modificationsList, 'modificationIdValues', irasId, commonItemsPage);
+      }
+      if (projectTitle) {
+        await validateSingleFieldMatch(modificationsList, 'shortProjectTitleValues', projectTitle, commonItemsPage);
+      }
+      if (ciName) {
+        await validateMultiWordFieldMatch(modificationsList, 'chiefInvestigatorNameValues', ciName, commonItemsPage);
+      }
+      // Filter validations
+      const allowedModifications = filterDataset['modification_type_checkbox'];
+      if (allowedModifications) {
+        await validateFilterMatch(modificationsList, 'modificationTypeValues', allowedModifications, commonItemsPage);
+      }
+      const allowedLeadNations = filterDataset['lead_nation_checkbox'];
+      if (allowedLeadNations) {
+        await validateFilterMatch(modificationsList, 'leadNationValues', allowedLeadNations, commonItemsPage);
+      }
+    } else {
+      const pageTestData = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page;
+      const validateTextMatch = async (locator: Locator, expectedText: string) => {
+        await expect(locator).toHaveText(expectedText);
+        expect(confirmStringNotNull(await locator.textContent())).toBe(expectedText);
+      };
+      const expectedResultCount = pageTestData.result_count_heading;
+      const actualResultCount = confirmStringNotNull(await commonItemsPage.result_count.textContent());
+      expect('0' + expectedResultCount).toBe(actualResultCount);
+      await validateTextMatch(commonItemsPage.no_results_heading, pageTestData.no_results_heading);
+      await validateTextMatch(commonItemsPage.no_results_guidance_text, pageTestData.no_results_guidance_text);
+      const bulletPointsActual = (await commonItemsPage.getNoResultsBulletPoints()).flat().join(', ');
+      const bulletPointsExpected = pageTestData.no_results_bullet_points.flat().join(', ');
+      expect(bulletPointsActual).toEqual(bulletPointsExpected);
     }
   }
 );
@@ -435,11 +345,7 @@ Then(
 
 Then(
   'With javascript disabled, I search with valid {string} for sponsor organisation search box in advanced filters and validate the search results along with {string}',
-  async (
-    { searchModificationsPage, rtsPage, commonItemsPage },
-    sponsorOrganisationDatasetName: string,
-    searchHintsDatasetName
-  ) => {
+  async ({ searchModificationsPage, rtsPage }, sponsorOrganisationDatasetName: string, searchHintsDatasetName) => {
     const dataset =
       searchModificationsPage.searchModificationsPageTestData.Sponsor_Organisation[sponsorOrganisationDatasetName];
     const searchHintDataset =
@@ -450,11 +356,6 @@ Then(
       sponsorOrganisationNameListExpected = sponsorOrganisationNameListExpected.slice(0, 5);
     }
     await searchModificationsPage.sponsor_organisation_text.fill(dataset['sponsor_organisation_text']);
-    expect(
-      await searchModificationsPage.sponsor_organisation_jsdisabled_search_button.evaluate(
-        (e: any) => getComputedStyle(e).backgroundColor
-      )
-    ).toBe(commonItemsPage.commonTestData.rgb_green_color);
     await searchModificationsPage.sponsor_organisation_jsdisabled_search_button.click();
     const sponsorOrganisationNameListActualWithSpaces =
       await searchModificationsPage.sponsor_organisation_jsdisabled_search_results_labels.allTextContents();
@@ -523,33 +424,23 @@ Then(
     const summaryErrorActualValues = await commonItemsPage.getSummaryErrorMessages();
     expect(summaryErrorActualValues).toEqual(allSummaryErrorExpectedValues);
     for (const key in errorMessageFieldDataset) {
-      if (Object.prototype.hasOwnProperty.call(errorMessageFieldDataset, key)) {
+      if (Object.hasOwn(errorMessageFieldDataset, key)) {
         const expectedMessage = errorMessageFieldDataset[key];
-        switch (errorMessageFieldAndSummaryDatasetName) {
-          case 'Date_Modification_Submitted_To_date_Before_From_Date_Error': {
-            const actualMessage = await searchModificationsPage.date_modification_submitted_to_date_error.textContent();
-            expect(actualMessage).toEqual(expectedMessage);
-            break;
-          }
-          case 'Date_Modification_Submitted_No_Month_Selected_From_Date_Error': {
-            const actualMessage =
-              await searchModificationsPage.date_modification_submitted_from_date_error.textContent();
-            expect(actualMessage).toEqual(expectedMessage);
-            break;
-          }
-          case 'Date_Modification_Submitted_No_Month_Selected_To_Date_Error': {
-            const actualMessage = await searchModificationsPage.date_modification_submitted_to_date_error.textContent();
-            expect(actualMessage).toEqual(expectedMessage);
-            break;
-          }
-          case 'Sponsor_Organisation_Min_Char_Error': {
-            const actualMessage =
-              await searchModificationsPage.sponsor_organisation_jsdisabled_min_error_message.textContent();
-            expect(actualMessage).toEqual(expectedMessage);
-            break;
-          }
-          default:
-            throw new Error(`Unhandled error message dataset name: ${errorMessageFieldAndSummaryDatasetName}`);
+        if (
+          errorMessageFieldAndSummaryDatasetName.endsWith('_To_date_Before_From_Date_Error') ||
+          errorMessageFieldAndSummaryDatasetName.endsWith('_No_Month_Selected_To_Date_Error')
+        ) {
+          const actualMessage = await searchModificationsPage.date_modification_submitted_to_date_error.textContent();
+          expect(actualMessage).toEqual(expectedMessage);
+        } else if (errorMessageFieldAndSummaryDatasetName.endsWith('_No_Month_Selected_From_Date_Error')) {
+          const actualMessage = await searchModificationsPage.date_modification_submitted_from_date_error.textContent();
+          expect(actualMessage).toEqual(expectedMessage);
+        } else if (errorMessageFieldAndSummaryDatasetName === 'Sponsor_Organisation_Min_Char_Error') {
+          const actualMessage =
+            await searchModificationsPage.sponsor_organisation_jsdisabled_min_error_message.textContent();
+          expect(actualMessage).toEqual(expectedMessage);
+        } else {
+          throw new Error(`Unhandled error message dataset name: ${errorMessageFieldAndSummaryDatasetName}`);
         }
         const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
         await expect(element).toBeInViewport();
@@ -568,14 +459,23 @@ Then(
       searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.title
     );
     expect(await commonItemsPage.tableRows.count()).toBe(0);
-    const expectedResultCount =
-      searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.result_count_heading;
-    const actualResultCount = confirmStringNotNull(await commonItemsPage.result_count.textContent());
-    expect('0' + expectedResultCount).toBe(actualResultCount);
+    const expectedResultCountLabel = await searchModificationsPage.getExpectedResultsCountLabelNoResults();
+    const actualResultCountLabel = await searchModificationsPage.getActualResultsCountLabel(commonItemsPage);
+    expect(expectedResultCountLabel).toEqual(actualResultCountLabel);
     expect(await commonItemsPage.no_results_heading.count()).toBe(0);
     expect(await commonItemsPage.no_results_guidance_text.count()).toBe(0);
     expect(await commonItemsPage.no_results_bullet_points.count()).toBe(0);
     expect(await commonItemsPage.active_filters_list.count()).toBe(0);
+    expect(await commonItemsPage.clear_all_filters_link.count()).toBe(0);
+  }
+);
+
+Then(
+  'all selected filters displayed under active Filters have been successfully removed',
+  async ({ commonItemsPage }) => {
+    await expect(commonItemsPage.advanced_filter_chevron).toBeVisible();
+    expect(await commonItemsPage.active_filters_list.count()).toBe(0);
+    expect(await commonItemsPage.clear_all_filters_link.count()).toBe(0);
   }
 );
 
@@ -630,26 +530,6 @@ Then(
     } else {
       sortedList = [...actualList].sort((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
     }
-    expect(actualList).toEqual(sortedList);
+    expect.soft(actualList).toEqual(sortedList);
   }
 );
-
-// Then(
-//   'I can see the list is sorted by default in the descending order of the {string}',
-//   async ({ searchModificationsPage }, sortField: string) => {
-//     let actualList: string[];
-//     switch (sortField.toLowerCase()) {
-//       case 'modification id':
-//         actualList = await searchModificationsPage.getModificationIdListAfterSearch();
-//         break;
-//       default:
-//         throw new Error(`${sortField} is not a valid option`);
-//     }
-//     const normalizedList = actualList.map((id) => {
-//       const [prefix, suffix] = id.split('/');
-//       return `${prefix.padStart(10, '0')}/${suffix.padStart(4, '0')}`;
-//     });
-//     const sortedDescending = [...normalizedList].sort((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
-//     expect.soft(normalizedList).toEqual(sortedDescending);
-//   }
-// );

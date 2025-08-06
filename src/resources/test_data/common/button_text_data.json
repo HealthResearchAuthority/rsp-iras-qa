@@ -87,16 +87,18 @@
     "Search": "Search"
   },
   "Manage_Review_Bodies_Page": {
-    "Search": "Search"
+    "Search": "Search",
+    "Advanced_Filters": "Advanced filters"
   },
   "Review_Your_Answers_Page": {
     "Confirm_Project_Details": "Confirm project details"
   },
   "Manage_Users_Page": {
     "Search": "Search",
-    "Apply_filters": "Apply filters"
+    "Advanced_Filters": "Advanced filters"
   },
   "Search_Modifications_Page": {
+    "Advanced_Filter": "Advanced filter",
     "Apply_filters": "Apply filters",
     "Search": "Search",
     "Modification_Id": "Modification ID",
@@ -110,7 +112,8 @@
     "Short_Project_Title": "Short project title",
     "Modification_Type": "Modification type",
     "Date_Submitted": "Date submitted",
-    "Days_Since_Submission": "Days since submission"
+    "Days_Since_Submission": "Days since submission",
+    "Advanced_Filter": "Advanced filter"
   },
   "Participating_Organisations_Page": {
     "Save_Continue": "Save and continue",

@@ -2,6 +2,7 @@ import { expect, Locator, Page } from '@playwright/test';
 import * as linkTextData from '../../../../resources/test_data/common/link_text_data.json';
 import * as searchModificationsPageTestData from '../../../../resources/test_data/iras/reviewResearch/receiveAmendments/search_modifications_page_data.json';
 import { confirmStringNotNull } from '../../../../utils/UtilFunctions';
+import CommonItemsPage from '../../../Common/CommonItemsPage';
 
 //Declare Page Objects
 export default class SearchModificationsPage {
@@ -65,6 +66,12 @@ export default class SearchModificationsPage {
   readonly modification_type_checkbox_selected_hint_label: Locator;
   readonly date_modification_submitted_from_date_error: Locator;
   readonly results_table: Locator;
+  readonly participating_nation_label: Locator;
+  readonly participating_nation_fieldset: Locator;
+  readonly participating_nation_checkbox: Locator;
+  readonly participating_nation_checkbox_chevron: Locator;
+  readonly participating_nation_checkbox_hint_label: Locator;
+  readonly participating_nation_checkbox_selected_hint_label: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -218,7 +225,6 @@ export default class SearchModificationsPage {
       .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.lead_nation_label, {
         exact: true,
       });
-
     this.modification_type_label = this.page
       .getByRole('heading', { level: 2 })
       .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.modification_type_label, {
@@ -253,6 +259,42 @@ export default class SearchModificationsPage {
     this.modification_type_checkbox_chevron = this.page
       .getByRole('heading')
       .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.modification_type_label, {
+        exact: true,
+      });
+    this.participating_nation_label = this.page
+      .getByRole('heading', { level: 2 })
+      .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.participating_nation_label, {
+        exact: true,
+      });
+    this.participating_nation_fieldset = this.participating_nation_label
+      .locator('..')
+      .locator('..')
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group', {
+        has: this.page.getByText(
+          this.searchModificationsPageTestData.Search_Modifications_Page.participating_nation_hint_text
+        ),
+      });
+    this.participating_nation_checkbox_hint_label = this.participating_nation_label
+      .locator('..')
+      .locator('..')
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group')
+      .getByText(
+        this.searchModificationsPageTestData.Search_Modifications_Page.Advanced_Filters_Hint_Labels
+          .participating_nation_checkbox_hint_label,
+        { exact: true }
+      );
+    this.participating_nation_checkbox_selected_hint_label = this.participating_nation_label
+      .locator('..')
+      .locator('..')
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group')
+      .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.selected_checkboxes_hint_label);
+    this.participating_nation_checkbox = this.participating_nation_fieldset.getByRole('checkbox');
+    this.participating_nation_checkbox_chevron = this.page
+      .getByRole('heading')
+      .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.participating_nation_label, {
         exact: true,
       });
     this.short_project_title_text_chevron = this.page
@@ -431,5 +473,60 @@ export default class SearchModificationsPage {
     if (button && shouldClick) {
       await button.click();
     }
+  }
+
+  async selectSponsorOrgJsEnabled<PageObject>(
+    dataset: JSON,
+    key: string,
+    commonItemsPage: CommonItemsPage,
+    page: PageObject
+  ) {
+    dataset['sponsor_organisation_jsenabled_text'] = dataset[key];
+    await commonItemsPage.fillUIComponent(dataset, 'sponsor_organisation_jsenabled_text', page);
+    await this.page.waitForTimeout(2000);
+    const suggestionVisible = await this.sponsor_organisation_suggestion_list_labels.first().isVisible();
+    if (suggestionVisible) {
+      await this.sponsor_organisation_suggestion_list_labels.first().click();
+    }
+  }
+
+  async selectSponsorOrgJsDisabled<PageObject>(
+    dataset: JSON,
+    key: string,
+    commonItemsPage: CommonItemsPage,
+    page: PageObject
+  ) {
+    await commonItemsPage.fillUIComponent(dataset, key, page);
+    await this.sponsor_organisation_jsdisabled_search_button.click();
+    await this.page.waitForTimeout(2000);
+    if (dataset[key] !== '') {
+      await this.sponsor_organisation_jsdisabled_search_results_radio_button.first().click();
+    }
+  }
+
+  async getHintLabel(dataset: JSON, key: string): Promise<string> {
+    const numberOfCheckboxesSelected = dataset[key].length;
+    const hintLabel =
+      numberOfCheckboxesSelected +
+      ' ' +
+      this.searchModificationsPageTestData.Search_Modifications_Page.selected_checkboxes_hint_label;
+    return hintLabel;
+  }
+
+  async getActualResultsCountLabel(commonItemsPage: CommonItemsPage) {
+    return confirmStringNotNull(await commonItemsPage.result_count.textContent());
+  }
+
+  async getExpectedResultsCountLabel() {
+    const testData = this.searchModificationsPageTestData;
+    const modificationsList = await this.getModificationIdListAfterSearch();
+    const expectedResultCountLabel = testData.Search_Modifications_Page.result_count_heading;
+    return modificationsList.length + expectedResultCountLabel;
+  }
+
+  async getExpectedResultsCountLabelNoResults() {
+    const expectedResultCountLabel =
+      this.searchModificationsPageTestData.Search_Modifications_Page.result_count_heading;
+    return '0' + expectedResultCountLabel;
   }
 }

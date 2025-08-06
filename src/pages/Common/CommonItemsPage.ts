@@ -80,6 +80,7 @@ export default class CommonItemsPage {
   readonly no_matching_search_result_body_four_label: Locator;
   readonly no_matching_search_result_count_label: Locator;
   readonly active_filters_list: Locator;
+  readonly clear_all_filters_link: Locator;
   readonly no_results_bullet_points: Locator;
   readonly no_results_guidance_text: Locator;
   readonly no_results_heading: Locator;
@@ -188,6 +189,10 @@ export default class CommonItemsPage {
       .getByRole('list')
       .getByRole('listitem')
       .getByRole('link');
+    this.clear_all_filters_link = this.page.getByRole('link', {
+      name: this.commonTestData.clear_all_filters_label,
+      exact: true,
+    });
     this.no_results_guidance_text = this.page
       .getByRole('paragraph')
       .getByText(this.commonTestData.no_results_guidance_text, {
@@ -668,8 +673,8 @@ export default class CommonItemsPage {
     return new Map([['searchResultValues', searchResultValues]]);
   }
 
-  async validateSearchResults(userListAfterSearch: any, searchKey: string) {
-    for (const val of userListAfterSearch) {
+  async validateSearchResults(listAfterSearch: any, searchKey: string) {
+    for (const val of listAfterSearch) {
       if (val.includes(searchKey)) {
         return true;
       }
@@ -858,9 +863,9 @@ export default class CommonItemsPage {
     await stitchedImage.composite(composites).toFile(outputFile);
   }
 
-  async removeSelectedFilterValues(removeFilterLabel: string[]): Promise<string[]> {
-    const removedFilterValues: string[] = [];
-    for (const label of removeFilterLabel) {
+  async removeSelectedFilterValues(removeFilterLabel: string): Promise<string> {
+    let removedFilterValues: string = '';
+    if (removeFilterLabel) {
       let filterFound = true;
       while (filterFound) {
         const filterItems = this.active_filters_list;
@@ -868,8 +873,8 @@ export default class CommonItemsPage {
         filterFound = false;
         for (let i = 0; i < count; i++) {
           const text = (await filterItems.nth(i).innerText()).trim().replace('Remove filter', '').trim();
-          if (text === label) {
-            removedFilterValues.push(text);
+          if (text === removeFilterLabel) {
+            removedFilterValues = text;
             await filterItems.nth(i).locator('..').click({ force: true });
             await this.page.waitForTimeout(500);
             filterFound = true;
@@ -881,66 +886,91 @@ export default class CommonItemsPage {
     return removedFilterValues;
   }
 
-  async getSelectedFilterValues(): Promise<string[]> {
-    const filterItems = this.active_filters_list;
-    const count = await filterItems.count();
-    const values: string[] = [];
-    for (let i = 0; i < count; i++) {
-      const text = await filterItems.nth(i).innerText();
-      values.push(text.trim().replace('Remove filter', '').trim());
-    }
-    return values;
+  async getActiveFilterLabelCheckbox(
+    filterLabels: object,
+    filterLabel: string,
+    key: string,
+    searchValue: RegExp,
+    replaceValue: string
+  ): Promise<string> {
+    const label = filterLabels[key.replace(searchValue, replaceValue)];
+    return `${label} - ${filterLabel}`;
   }
 
-  async getFilterTextCheckbox(filterName: string, dataset: JSON, key: string) {
-    const filterTextsCheckbox: string[] = [];
-    for (const value of dataset[key]) {
-      const filterText = `${filterName} - ${value}`;
-      filterTextsCheckbox.push(filterText);
-    }
-    return filterTextsCheckbox;
+  async getActiveFilterLabelTextbox(
+    filterLabels: any,
+    filterDataset: JSON,
+    key: string,
+    searchValue: RegExp,
+    replaceValue: string
+  ): Promise<string> {
+    const label = filterLabels[key.replace(searchValue, replaceValue)];
+    return `${label} - ${filterDataset[key]}`;
   }
 
-  async getActiveFiltersCheckboxLabels(dataset: JSON, datasetLabels: any) {
-    let filterName: string = '';
-    const filterTextsCheckbox: any[] = [];
-    let activeFiltersMap: any;
-    for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        // if (
-        //   key === 'lead_nation_checkbox' ||
-        //   key === 'modification_type_checkbox' ||
-        //   key === 'country_checkbox' ||
-        //   key === 'participating_nation_checkbox'
-        // ) {
-        if (key.endsWith('_checkbox')) {
-          if (key === 'lead_nation_checkbox') {
-            filterName = datasetLabels['lead_nation_label'];
-            const filterValues = await this.getFilterTextCheckbox(filterName, dataset, key);
-            filterTextsCheckbox.push(filterValues);
-          } else if (key === 'modification_type_checkbox') {
-            filterName = datasetLabels['modification_type_label'];
-            const filterValues = await this.getFilterTextCheckbox(filterName, dataset, key);
-            filterTextsCheckbox.push(filterValues);
-          } else if (key === 'participating_nation_checkbox') {
-            filterName = datasetLabels['participating_nation_label'];
-            const filterValues = await this.getFilterTextCheckbox(filterName, dataset, key);
-            filterTextsCheckbox.push(filterValues);
-          } else if (key === 'country_checkbox') {
-            filterName = datasetLabels['country_advanced_filter_label'];
-            const filterValues = await this.getFilterTextCheckbox(filterName, dataset, key);
-            filterTextsCheckbox.push(filterValues);
-          }
-          activeFiltersMap = new Map([['multiSelectFilter', confirmArrayNotNull(filterTextsCheckbox)]]);
-        }
-      }
+  async getActiveFilterLabelDateSubmittedField(
+    filterLabels: any,
+    filterDataset: JSON,
+    key: string,
+    searchValue: RegExp,
+    replaceValue: string
+  ): Promise<string> {
+    let activeFilterLabel: string;
+    const label = filterLabels[key.replace(searchValue, replaceValue)];
+    const dateType = key.includes('_from_') ? 'from' : 'to';
+    const dateKey = key.replace('_day_text', '');
+    const dateValue = await this.getDateString(filterDataset, dateKey);
+    if (dateValue) {
+      activeFilterLabel = `${label} - ${dateType} ${dateValue}`;
     }
-    return activeFiltersMap;
+    return activeFilterLabel;
   }
 
-  async clickAdvancedFilterChevron() {
-    const button = this.advanced_filter_chevron;
-    await button.click();
+  async getCheckboxFilterLabels(
+    key: string,
+    filterDataset: any,
+    filterLabels: any,
+    replaceValue: string
+  ): Promise<string[]> {
+    const labels: string[] = [];
+    for (const filterLabel of filterDataset[key]) {
+      const activeFilterLabel = await this.getActiveFilterLabelCheckbox(
+        filterLabels,
+        filterLabel,
+        key,
+        /_checkbox$/,
+        replaceValue
+      );
+      labels.push(activeFilterLabel);
+    }
+    return labels;
+  }
+
+  async getDateFilterLabel(
+    key: string,
+    filterDataset: any,
+    filterLabels: any,
+    replaceValue: string
+  ): Promise<string | null> {
+    if (key === 'date_modification_submitted_from_day_text' || key === 'date_modification_submitted_to_day_text') {
+      return await this.getActiveFilterLabelDateSubmittedField(
+        filterLabels,
+        filterDataset,
+        key,
+        /(_from_day_text|_to_day_text)$/,
+        replaceValue
+      );
+    }
+    return null;
+  }
+
+  async getTextboxFilterLabel(
+    key: string,
+    filterDataset: any,
+    filterLabels: any,
+    replaceValue: string
+  ): Promise<string> {
+    return await this.getActiveFilterLabelTextbox(filterLabels, filterDataset, key, /_text$/, replaceValue);
   }
 
   async getDateString(dataset: JSON, prefix: string) {
@@ -948,58 +978,6 @@ export default class CommonItemsPage {
     const month = dataset[`${prefix}_month_dropdown`].slice(0, 3);
     const year = dataset[`${prefix}_year_text`];
     return day && month && year ? `${day} ${month} ${year}` : null;
-  }
-
-  async getActiveFiltersLabels(dataset: JSON, datasetLabels: any) {
-    let filterName: string = '';
-    const filterText: string[] = [];
-    let activeFiltersMap: any;
-    for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        // if (key !== 'lead_nation_checkbox' && key !== 'modification_type_checkbox') {
-        if (!key.endsWith('_checkbox')) {
-          if (key === 'date_modification_submitted_from_day_text') {
-            filterName = datasetLabels['date_modification_submitted_label'];
-            const fromDate = await this.getDateString(dataset, 'date_modification_submitted_from');
-            if (fromDate) {
-              filterText.push(`${filterName} - from ${fromDate}`);
-            }
-          } else if (key === 'date_modification_submitted_to_day_text') {
-            filterName = datasetLabels['date_modification_submitted_label'];
-            const toDate = await this.getDateString(dataset, 'date_modification_submitted_to');
-            if (toDate) {
-              filterText.push(`${filterName} - to ${toDate}`);
-            }
-          } else if (key == 'chief_investigator_name_text') {
-            filterName = datasetLabels['chief_investigator_name_label'];
-            filterText.push(`${filterName} - ${dataset[key]}`);
-          } else if (key == 'short_project_title_text') {
-            filterName = datasetLabels['short_project_title_label'];
-            filterText.push(`${filterName} - ${dataset[key]}`);
-          } else if (key === 'sponsor_organisation_text') {
-            filterName = datasetLabels['sponsor_organisation_label'];
-            filterText.push(`${filterName} - ${dataset[key]}`);
-          } else if (key === 'status_radio') {
-            filterName = datasetLabels['status_advanced_filter_label'];
-            filterText.push(`${filterName} - ${dataset[key]}`);
-          } else if (key === 'date_last_logged_in_from_day_text') {
-            filterName = datasetLabels['date_last_logged_in_label'];
-            const fromDate = await this.getDateString(dataset, 'date_last_logged_in_from');
-            if (fromDate) {
-              filterText.push(`${filterName} - from ${fromDate}`);
-            }
-          } else if (key === 'date_last_logged_in_to_day_text') {
-            filterName = datasetLabels['date_last_logged_in_label'];
-            const toDate = await this.getDateString(dataset, 'date_last_logged_in_to');
-            if (toDate) {
-              filterText.push(`${filterName} - to ${toDate}`);
-            }
-          }
-          activeFiltersMap = new Map([['singleSelectFilter', confirmArrayNotNull(filterText)]]);
-        }
-      }
-    }
-    return activeFiltersMap;
   }
 
   async getCheckboxHintLabel(): Promise<string> {
@@ -1021,5 +999,85 @@ export default class CommonItemsPage {
       values.push(text);
     }
     return values;
+  }
+
+  async validatePagination(currentPage: any, totalPages: any, navigateMethod: string) {
+    const totalItems = await this.getTotalItems();
+    const pageSize = parseInt(this.commonTestData.default_page_size, 10);
+    const currentPageLocator = await this.clickOnPages(currentPage, navigateMethod);
+    await expect(currentPageLocator).toHaveAttribute('aria-current');
+    const { start, end } = Object.fromEntries(await this.getStartEndPages(currentPage, pageSize, totalItems));
+    const rowCount = await this.getItemsPerPage();
+    expect(rowCount - 1).toBe(end - start + 1);
+    const itemsMap = await this.getPaginationValues();
+    const ellipsisIndices = itemsMap.get('ellipsisIndices');
+    const itemsValues = itemsMap.get('items');
+    const allVisibleItems = itemsMap.get('allVisibleItems');
+    const visiblePages = (await this.getVisiblePages(itemsValues)).get('visiblePages');
+    const firstPage = 1;
+    const lastPage = totalPages;
+    const assertVisiblePages = (expectedPages: number[]) => {
+      expect(visiblePages).toEqual(expectedPages);
+    };
+    const assertAllVisibleItems = (expectedItems: string[]) => {
+      expect(allVisibleItems).toEqual(expectedItems);
+    };
+    const buildExpected = (pages: number[], items: (number | string)[]) => {
+      assertVisiblePages(pages);
+      assertAllVisibleItems(items.map(String));
+    };
+    if (totalPages <= 7) {
+      buildExpected(visiblePages, allVisibleItems);
+      expect(ellipsisIndices.length).toBe(0);
+    } else if (currentPage <= 3) {
+      const base = [firstPage];
+      switch (currentPage) {
+        case 1:
+          buildExpected([firstPage, 2, lastPage], [firstPage, 2, '⋯', lastPage]);
+          break;
+        case 2:
+          buildExpected([...base, 2, 3, lastPage], [firstPage, 2, 3, '⋯', lastPage]);
+          break;
+        default:
+          buildExpected(
+            [...base, currentPage - 1, currentPage, currentPage + 1, lastPage],
+            [firstPage, currentPage - 1, currentPage, currentPage + 1, '⋯', lastPage]
+          );
+      }
+    } else if (currentPage >= totalPages - 2) {
+      switch (currentPage) {
+        case totalPages - 2:
+          buildExpected(
+            [firstPage, currentPage - 1, currentPage, currentPage + 1, lastPage],
+            [firstPage, '⋯', currentPage - 1, currentPage, currentPage + 1, lastPage]
+          );
+          break;
+        case totalPages - 1:
+          buildExpected(
+            [firstPage, currentPage - 1, currentPage, lastPage],
+            [firstPage, '⋯', currentPage - 1, currentPage, lastPage]
+          );
+          break;
+        default:
+          buildExpected([firstPage, currentPage - 1, lastPage], [firstPage, '⋯', currentPage - 1, lastPage]);
+      }
+    } else {
+      buildExpected(
+        [firstPage, currentPage - 1, currentPage, currentPage + 1, lastPage],
+        [firstPage, '⋯', currentPage - 1, currentPage, currentPage + 1, '⋯', lastPage]
+      );
+    }
+    // Common assertions
+    expect(visiblePages).toContain(currentPage);
+    if (currentPage > 1) expect(visiblePages).toContain(currentPage - 1);
+    if (currentPage < totalPages) expect(visiblePages).toContain(currentPage + 1);
+    expect(visiblePages).toContain(firstPage);
+    expect(visiblePages).toContain(lastPage);
+    // Navigation
+    if (navigateMethod === 'clicking on next link') {
+      await this.clickOnNextLink();
+    } else if (navigateMethod === 'clicking on previous link') {
+      await this.clickOnPreviousLink();
+    }
   }
 }
