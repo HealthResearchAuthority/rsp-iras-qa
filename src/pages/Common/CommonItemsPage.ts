@@ -173,7 +173,6 @@ export default class CommonItemsPage {
     this.no_results_heading = this.page
       .getByRole('heading')
       .getByText(this.commonTestData.no_results_heading, { exact: true });
-    this.advanced_filter_chevron = this.page.getByRole('button', { name: this.commonTestData.advanced_filter_label });
     this.no_matching_search_result_header_label = this.page.getByRole('heading');
     this.no_matching_search_result_sub_header_label = this.page.getByRole('paragraph');
     this.no_matching_search_result_body_one_label =
