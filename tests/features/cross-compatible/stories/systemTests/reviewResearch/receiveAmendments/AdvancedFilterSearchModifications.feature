@@ -18,7 +18,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         And I capture the page screenshot
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
-        And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
+        And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
         Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the search modifications page
         And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>' or shows no results found message if no matching records exist in the search modifications page
@@ -47,7 +47,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         And I capture the page screenshot
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
-        And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
+        And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
         Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the search modifications page
         And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>' or shows no results found message if no matching records exist in the search modifications page
@@ -68,7 +68,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         And I click the 'Advanced_Filter' button on the 'Search_Modifications_Page'
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
-        And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
+        And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
         Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the search modifications page
         And the system displays modification records based on the search '' and filter criteria '<Advanced_Filters>' or shows no results found message if no matching records exist in the search modifications page
@@ -115,7 +115,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         And I click the 'Advanced_Filter' button on the 'Search_Modifications_Page'
         When I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
-        And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
+        And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
         Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the search modifications page
         And the system displays modification records based on the search '' and filter criteria '<Advanced_Filters>' or shows no results found message if no matching records exist in the search modifications page
@@ -150,7 +150,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         And I click the 'Advanced_Filter' button on the 'Search_Modifications_Page'
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
-        And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
+        And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
         Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the search modifications page
         And the system displays modification records based on the search '' and filter criteria '<Advanced_Filters>' or shows no results found message if no matching records exist in the search modifications page
@@ -174,7 +174,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
     @NoResultsFound @NoIrasIdAndNoAdvancedFilters
     Scenario: Verify the user can see an empty state that informs me no modifications exist for the search criteria on clicking apply filters button without entering/selecting iras id and filters
         When I click the 'Advanced_Filter' button on the 'Search_Modifications_Page'
-        And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
+        And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
         Then I can see an empty state that informs me no modifications exist for the search criteria
         And I capture the page screenshot
 
@@ -217,7 +217,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         And I capture the page screenshot
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
-        And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
+        And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
         Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the search modifications page
         And the system displays modification records based on the search '<Invalid_Iras_Id>' and filter criteria '<Advanced_Filters>' or shows no results found message if no matching records exist in the search modifications page
@@ -243,7 +243,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         And I capture the page screenshot
         And I select advanced filters in the search modifications page using '<Advanced_Filters_No_results>'
         And I capture the page screenshot
-        And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
+        And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
         Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters_No_results>' in the search modifications page
         And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters_No_results>' or shows no results found message if no matching records exist in the search modifications page
@@ -258,7 +258,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         And I capture the page screenshot
         And I select advanced filters in the search modifications page using '<Advanced_Filters_No_results>'
         And I capture the page screenshot
-        And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
+        And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
         Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters_No_results>' in the search modifications page
         And the system displays modification records based on the search '' and filter criteria '<Advanced_Filters_No_results>' or shows no results found message if no matching records exist in the search modifications page
@@ -273,7 +273,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         And I capture the page screenshot
         And I select advanced filters in the search modifications page using '<Date_Modification_Submitted_Invalid_Data>'
         And I capture the page screenshot
-        And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
+        And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
         Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Search_Modifications_Page' in advanced filters
         And I capture the page screenshot
@@ -289,7 +289,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         And I capture the page screenshot
         When I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
-        And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
+        And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
         Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the search modifications page
         And the system displays modification records based on the search '' and filter criteria '<Advanced_Filters>' or shows no results found message if no matching records exist in the search modifications page
@@ -315,7 +315,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         And I capture the page screenshot
         When I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
-        And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
+        And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
         Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the search modifications page
         And the system displays modification records based on the search '' and filter criteria '<Advanced_Filters>' or shows no results found message if no matching records exist in the search modifications page
@@ -340,7 +340,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         And I capture the page screenshot
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
-        And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
+        And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
         Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the search modifications page
         And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>' or shows no results found message if no matching records exist in the search modifications page
@@ -364,7 +364,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         And I capture the page screenshot
         When I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
-        And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
+        And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
         Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the search modifications page
         And the system displays modification records based on the search '' and filter criteria '<Advanced_Filters>' or shows no results found message if no matching records exist in the search modifications page
@@ -387,7 +387,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         And I capture the page screenshot
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
-        And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
+        And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
         Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the search modifications page
         And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>' or shows no results found message if no matching records exist in the search modifications page
@@ -495,7 +495,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         And I capture the page screenshot
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
-        And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
+        And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
         And I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
         And I capture the page screenshot
@@ -517,7 +517,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         And I capture the page screenshot
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
-        And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
+        And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
         And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
         And I capture the page screenshot
@@ -567,7 +567,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         And I click the 'Advanced_Filter' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
-        And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
+        And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
         And I expand the chevrons for '<Advanced_Filters>' in search modifications page
         And I capture the page screenshot
         And I verify the hint text based on the '<Advanced_Filters>' for search modifications page
