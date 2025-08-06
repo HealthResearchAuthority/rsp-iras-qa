@@ -816,3 +816,78 @@ Then('I can see the {string} ui labels', async ({ commonItemsPage }, datasetName
     }
   }
 });
+
+Then(
+  'all selected filters displayed under active Filters have been successfully removed',
+  async ({ commonItemsPage }) => {
+    await expect(commonItemsPage.advanced_filter_chevron).toBeVisible();
+    expect(await commonItemsPage.active_filters_list.count()).toBe(0);
+    expect(await commonItemsPage.clear_all_filters_link.count()).toBe(0);
+  }
+);
+
+Then(
+  '{string} active filters {string} in the {string}',
+  async (
+    { searchModificationsPage, commonItemsPage },
+    actionToPerform: string,
+    filterDatasetName: string,
+    pageKey: string
+  ) => {
+    let filterDataset: JSON;
+    let filterLabels: object;
+    if (pageKey === 'Search_Modifications_Page') {
+      filterDataset = searchModificationsPage.searchModificationsPageTestData.Advanced_Filters[filterDatasetName];
+      filterLabels = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page;
+    }
+    const replaceValue = '_label';
+    const handleActiveFilterValidation = async (
+      key: string,
+      labelFetcher: (key: string) => Promise<string | string[]>,
+      actionToPerform: string,
+      commonItemsPage: any
+    ) => {
+      const isDisplayAction = actionToPerform === 'I can see the selected filters are displayed under';
+      const isRemoveAction = actionToPerform === 'I remove the selected filters from';
+      const labels = await labelFetcher(key);
+      const labelArray = Array.isArray(labels) ? labels : [labels];
+      for (const label of labelArray) {
+        if (isDisplayAction) {
+          await expect.soft(commonItemsPage.active_filters_list.getByText(label)).toBeVisible();
+        } else if (isRemoveAction) {
+          const removed = await commonItemsPage.removeSelectedFilterValues(label);
+          expect.soft(removed).toBe(label);
+          await expect.soft(commonItemsPage.active_filters_list.getByText(label)).not.toBeVisible();
+        }
+      }
+    };
+    for (const key in filterDataset) {
+      if (Object.hasOwn(filterDataset, key)) {
+        if (key.endsWith('_checkbox')) {
+          await handleActiveFilterValidation(
+            key,
+            async (k) => await commonItemsPage.getCheckboxFilterLabels(k, filterDataset, filterLabels, replaceValue),
+            actionToPerform,
+            commonItemsPage
+          );
+        } else if (key.startsWith('date_')) {
+          if (key.endsWith('_from_day_text') || key.endsWith('_to_day_text')) {
+            await handleActiveFilterValidation(
+              key,
+              async (k) => await commonItemsPage.getDateFilterLabel(k, filterDataset, filterLabels, replaceValue),
+              actionToPerform,
+              commonItemsPage
+            );
+          }
+        } else {
+          await handleActiveFilterValidation(
+            key,
+            async (k) => await commonItemsPage.getTextboxFilterLabel(k, filterDataset, filterLabels, replaceValue),
+            actionToPerform,
+            commonItemsPage
+          );
+        }
+      }
+    }
+  }
+);
