@@ -58,8 +58,8 @@ Feature: Receive Amendments: Search Modifications
                         | Valid_Iras_Id        | Advanced_Filters             | Sort_Button         | Sort_Field          |
                         | Valid_Iras_Id_Nth    | Advanced_Filters_Lead_Nation | Modification_Id     | modification id     |
                         | Valid_Iras_Id_Prefix | Advanced_Filters_Twenty      | Short_Project_Title | short project title |
-                        | Valid_Iras_Id_Prefix | Advanced_Filters_TwentyOne   | Modification_Type   | modification type   |
-                        | Valid_Iras_Id_Prefix | Advanced_Filters_TwentyTwo   | Chief_Investigator  | chief investigator  |
+                        | Valid_Iras_Id_Prefix | Advanced_Filters_Twenty      | Modification_Type   | modification type   |
+                        | Valid_Iras_Id_Prefix | Advanced_Filters_Twenty      | Chief_Investigator  | chief investigator  |
                         | Valid_Iras_Id_Prefix | Advanced_Filters_Lead_Nation | Lead_Nation         | lead nation         |
 
         @RegressionSearchSortAdvancedFilterModifications @KNOWN-DEFECT-RSP-4305 @KNOWN-DEFECT-RSP-4467 @rsp-4011
