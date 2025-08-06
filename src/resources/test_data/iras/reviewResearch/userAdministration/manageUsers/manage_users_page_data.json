@@ -24,7 +24,7 @@
       "advanced_filter_label": "Advanced filter",
       "result_count_heading": " results",
       "date_last_logged_in_label": "Last logged in",
-      "date_last_logged_in_month_placeholder": "Choose month",
+      "date_last_logged_in_month_placeholder": "",
       "date_last_logged_in_from_date_hint_text": "Enter the date you want to search from",
       "date_last_logged_in_from_date_help_text": "For example, 28 February 2023",
       "date_last_logged_in_to_date_hint_text": "Enter the date you want to search to",
@@ -211,17 +211,11 @@
       "status_radio": "Active",
       "date_last_logged_in_from_day_text": "11",
       "date_last_logged_in_from_month_dropdown": "April",
-      "date_last_logged_in_from_year_text": "2023",
-      "date_last_logged_in_to_day_text": "",
-      "date_last_logged_in_to_month_dropdown": "Choose month",
-      "date_last_logged_in_to_year_text": ""
+      "date_last_logged_in_from_year_text": "2023"
     },
     "Advanced_Filter_Five": {
       "country_checkbox": ["Scotland"],
       "status_radio": "Active",
-      "date_last_logged_in_from_day_text": "",
-      "date_last_logged_in_from_month_dropdown": "Choose month",
-      "date_last_logged_in_from_year_text": "",
       "date_last_logged_in_to_day_text": "22",
       "date_last_logged_in_to_month_dropdown": "July",
       "date_last_logged_in_to_year_text": "2025"
@@ -260,15 +254,9 @@
     "Advanced_Filter_Last_Logged_In_From_Date_Only": {
       "date_last_logged_in_from_day_text": "11",
       "date_last_logged_in_from_month_dropdown": "July",
-      "date_last_logged_in_from_year_text": "2025",
-      "date_last_logged_in_to_day_text": "",
-      "date_last_logged_in_to_month_dropdown": "Choose month",
-      "date_last_logged_in_to_year_text": ""
+      "date_last_logged_in_from_year_text": "2025"
     },
     "Advanced_Filter_Last_Logged_In_To_Date_Only": {
-      "date_last_logged_in_from_day_text": "",
-      "date_last_logged_in_from_month_dropdown": "Choose month",
-      "date_last_logged_in_from_year_text": "",
       "date_last_logged_in_to_day_text": "22",
       "date_last_logged_in_to_month_dropdown": "January",
       "date_last_logged_in_to_year_text": "2025"

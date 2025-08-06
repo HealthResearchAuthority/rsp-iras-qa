@@ -181,70 +181,6 @@ When(
   }
 );
 
-// Then(
-//   'I can see the selected filters {string} are displayed under active filters for manage users page',
-//   async ({ manageUsersPage, commonItemsPage }, filterDatasetName: string) => {
-//     const dataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[filterDatasetName];
-//     for (const key in dataset) {
-//       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-//         if (key === 'country_checkbox') {
-//           for (const filterLabel of dataset[key]) {
-//             const activeLabel =
-//               manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List
-//                 .country_advanced_filter_label +
-//               ' - ' +
-//               filterLabel;
-//             await expect(commonItemsPage.advanced_filter_active_filters_label.getByText(activeLabel)).toBeVisible();
-//           }
-//         } else if (key === 'status_radio') {
-//           const activeLabel =
-//             manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List
-//               .status_advanced_filter_label +
-//             ' - ' +
-//             dataset[key];
-//           await expect(commonItemsPage.advanced_filter_active_filters_label.getByText(activeLabel)).toBeVisible();
-//         } else if (
-//           key === 'date_last_logged_in_from_day_text' ||
-//           key == 'date_last_logged_in_from_month_dropdown' ||
-//           key == 'date_last_logged_in_from_year_text'
-//         ) {
-//           if (dataset[key] !== '' && dataset[key] !== 'Choose month') {
-//             const lastLoggedInFromDateFormatted = await convertDateShortMonth(
-//               dataset['date_last_logged_in_from_day_text'],
-//               dataset['date_last_logged_in_from_month_dropdown'],
-//               dataset['date_last_logged_in_from_year_text']
-//             );
-//             const activeLabel =
-//               manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List
-//                 .date_last_logged_in_label +
-//               ' - from ' +
-//               lastLoggedInFromDateFormatted;
-//             await expect(commonItemsPage.advanced_filter_active_filters_label.getByText(activeLabel)).toBeVisible();
-//           }
-//         } else if (
-//           key === 'date_last_logged_in_to_day_text' ||
-//           key == 'date_last_logged_in_to_month_dropdown' ||
-//           key == 'date_last_logged_in_to_year_text'
-//         ) {
-//           if (dataset[key] !== '' && dataset[key] !== 'Choose month') {
-//             const lastLoggedInToDateFormatted = await convertDateShortMonth(
-//               dataset['date_last_logged_in_to_day_text'],
-//               dataset['date_last_logged_in_to_month_dropdown'],
-//               dataset['date_last_logged_in_to_year_text']
-//             );
-//             const activeLabel =
-//               manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List
-//                 .date_last_logged_in_label +
-//               ' - to ' +
-//               lastLoggedInToDateFormatted;
-//             await expect(commonItemsPage.advanced_filter_active_filters_label.getByText(activeLabel)).toBeVisible();
-//           }
-//         }
-//       }
-//     }
-//   }
-// );
-
 When(
   'I can see the results matching the search {string} and filter criteria {string} for manage users page',
   async ({ manageUsersPage, commonItemsPage }, searchDatasetName: string, filterDatasetName: string) => {
@@ -298,8 +234,8 @@ When(
                 const filterFromDate = `${filterDataset['date_last_logged_in_from_day_text']} ${filterDataset['date_last_logged_in_from_month_dropdown']} ${filterDataset['date_last_logged_in_from_year_text']}`;
                 const filterToDate = `${filterDataset['date_last_logged_in_to_day_text']} ${filterDataset['date_last_logged_in_to_month_dropdown']} ${filterDataset['date_last_logged_in_to_year_text']}`;
                 if (
-                  filterFromDate.trim() !== dateLastLoggedinMonthPlaceholder &&
-                  filterToDate.trim() !== dateLastLoggedinMonthPlaceholder
+                  filterFromDate.trim() !== 'undefined undefined undefined' &&
+                  filterToDate.trim() !== 'undefined undefined undefined'
                 ) {
                   const lastLoggedInDateActualOnlyDate = lastLoggedInDateActual.substring(0, 11);
                   const isLastLoggedInDateInValidRange = await validateDateRange(
@@ -357,6 +293,7 @@ When(
     const dateLastLoggedinMonthPlaceholder =
       manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List
         .date_last_logged_in_month_placeholder;
+
     // Use below commented code, if needed to check the results till the end of the pagination
     // const lastPage = await removeUnwantedWhitespace(confirmStringNotNull(await commonItemsPage.lastPage.textContent()));
     // for (let i = 1; i < Number(lastPage); i++) {
@@ -378,7 +315,10 @@ When(
             if (key.includes('date') && lastLoggedInDateActual !== null) {
               const filterFromDate = `${filterDataset['date_last_logged_in_from_day_text']} ${filterDataset['date_last_logged_in_from_month_dropdown']} ${filterDataset['date_last_logged_in_from_year_text']}`;
               const filterToDate = `${filterDataset['date_last_logged_in_to_day_text']} ${filterDataset['date_last_logged_in_to_month_dropdown']} ${filterDataset['date_last_logged_in_to_year_text']}`;
-              if (filterFromDate !== ' Choose month ' && filterToDate !== ' Choose month ') {
+              if (
+                filterFromDate !== 'undefined undefined undefined' &&
+                filterToDate !== 'undefined undefined undefined'
+              ) {
                 const lastLoggedInDateActualOnlyDate = lastLoggedInDateActual.substring(0, 11);
                 const isLastLoggedInDateInValidRange = await validateDateRange(
                   lastLoggedInDateActualOnlyDate,
@@ -422,25 +362,6 @@ Then(
   }
 );
 
-// Then(
-//   'I expand the chevrons for {string} in manage users page',
-//   async ({ manageUsersPage }, filterDatasetName: string) => {
-//     const dataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[filterDatasetName];
-//     await manageUsersPage.advanced_filter_chevron.click();
-//     for (const key in dataset) {
-//       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-//         if (key.includes('date')) {
-//           if (!(await manageUsersPage.date_last_logged_in_from_day_text.isVisible())) {
-//             await manageUsersPage.date_last_logged_in_from_day_text_chevron.click();
-//           }
-//         }
-//       } else {
-//         await manageUsersPage[key + '_chevron'].click();
-//       }
-//     }
-//   }
-// );
-
 When(
   'I expand the chevrons for {string} in manage users page',
   async ({ manageUsersPage }, filterDatasetName: string) => {
@@ -461,70 +382,6 @@ Then('I can see the {string} ui labels in manage users page', async ({ manageUse
     }
   }
 });
-
-// Then(
-//   'I can see the selected filters {string} are removed from active filters for manage users page',
-//   async ({ manageUsersPage, commonItemsPage }, filterDatasetName: string) => {
-//     const dataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[filterDatasetName];
-//     for (const key in dataset) {
-//       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-//         if (key === 'country_checkbox') {
-//           for (const filterLabel of dataset[key]) {
-//             const activeLabel =
-//               manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List
-//                 .country_advanced_filter_label +
-//               ': ' +
-//               filterLabel;
-//             await expect(commonItemsPage.advanced_filter_active_filters_label.getByText(activeLabel)).not.toBeVisible();
-//           }
-//         } else if (key === 'status_radio') {
-//           const activeLabel =
-//             manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List
-//               .status_advanced_filter_label +
-//             ': ' +
-//             dataset[key];
-//           await expect(commonItemsPage.advanced_filter_active_filters_label.getByText(activeLabel)).not.toBeVisible();
-//         } else if (
-//           key === 'date_last_logged_in_from_day_text' ||
-//           key == 'date_last_logged_in_from_month_dropdown' ||
-//           key == 'date_last_logged_in_from_year_text'
-//         ) {
-//           if (dataset[key] !== '' && dataset[key] !== 'Choose month') {
-//             const lastLoggedInFromDateFormatted = await convertDateShortMonth(
-//               dataset['date_last_logged_in_from_day_text'],
-//               dataset['date_last_logged_in_from_month_dropdown'],
-//               dataset['date_last_logged_in_from_year_text']
-//             );
-//             const activeLabel =
-//               manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List
-//                 .date_last_logged_in_label +
-//               ' - from ' +
-//               lastLoggedInFromDateFormatted;
-//             await expect(commonItemsPage.advanced_filter_active_filters_label.getByText(activeLabel)).not.toBeVisible();
-//           }
-//         } else if (
-//           key === 'date_last_logged_in_to_day_text' ||
-//           key == 'date_last_logged_in_to_month_dropdown' ||
-//           key == 'date_last_logged_in_to_year_text'
-//         ) {
-//           if (dataset[key] !== '' && dataset[key] !== 'Choose month') {
-//             const lastLoggedInToDateFormatted = await convertDateShortMonth(
-//               dataset['date_last_logged_in_to_day_text'],
-//               dataset['date_last_logged_in_to_month_dropdown'],
-//               dataset['date_last_logged_in_to_year_text']
-//             );
-//             const activeLabel =
-//               manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List
-//                 .date_last_logged_in_label +
-//               ' - to ' +
-//               lastLoggedInToDateFormatted;
-//             await expect(commonItemsPage.advanced_filter_active_filters_label.getByText(activeLabel)).not.toBeVisible();
-//           }
-//         }
-//       }
-//     }
-//   }
-// );
 
 Then(
   'I validate {string} displayed on advanced filters in manage users page',

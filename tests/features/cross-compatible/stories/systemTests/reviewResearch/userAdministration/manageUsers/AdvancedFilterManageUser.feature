@@ -203,7 +203,7 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Advanced_Filter_Last_Logged_In_From_Date_Only |
             | Advanced_Filter_Last_Logged_In_To_Date_Only   |
 
-    @RemoveAllActiveFiltersOneByOne @TestONly
+    @RemoveAllActiveFiltersOneByOne
     Scenario Outline: Verify the user can remove all the selected filters one by one and the search results update accordingly
         And I select advanced filters in the manage users page using '<Advanced_Filters>'
         And I capture the page screenshot
