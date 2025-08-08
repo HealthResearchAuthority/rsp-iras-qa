@@ -67,6 +67,23 @@ export default class CommonItemsPage {
   readonly pagination_results: Locator;
   readonly pagination_items: Locator;
   readonly pageLinks: Locator;
+  readonly advanced_filter_chevron: Locator;
+  readonly result_count: Locator;
+  readonly iras_id_search_text: Locator;
+  readonly lastPage: Locator;
+  readonly pagination_next_link: Locator;
+  readonly no_matching_search_result_header_label: Locator;
+  readonly no_matching_search_result_sub_header_label: Locator;
+  readonly no_matching_search_result_body_one_label: Locator;
+  readonly no_matching_search_result_body_two_label: Locator;
+  readonly no_matching_search_result_body_three_label: Locator;
+  readonly no_matching_search_result_body_four_label: Locator;
+  readonly no_matching_search_result_count_label: Locator;
+  readonly active_filters_list: Locator;
+  readonly clear_all_filters_link: Locator;
+  readonly no_results_bullet_points: Locator;
+  readonly no_results_guidance_text: Locator;
+  readonly no_results_heading: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -112,6 +129,7 @@ export default class CommonItemsPage {
     this.bannerSystemAdmin = this.bannerNavBar.getByText(this.linkTextData.Banner.System_Admin, { exact: true });
     this.bannerMyApplications = this.bannerNavBar.getByText(this.linkTextData.Banner.My_Applications, { exact: true });
     this.next_button = this.page.getByRole('link').getByText(this.commonTestData.next_button, { exact: true });
+    this.pagination_next_link = this.page.locator('div[class="govuk-pagination__next"]').getByRole('link');
     this.errorMessageFieldLabel = this.page
       .locator('.field-validation-error')
       .or(this.page.locator('.govuk-error-message'))
@@ -125,6 +143,11 @@ export default class CommonItemsPage {
     this.topMenuBarLinks = this.page.getByTestId('navigation').getByRole('listitem').getByRole('link');
     this.pagination = page.getByRole('navigation', { name: 'Pagination' });
     this.firstPage = this.pagination.getByRole('link', { name: this.commonTestData.first_page, exact: true });
+
+    this.firstPage = this.pagination
+      .getByRole('link', { name: this.commonTestData.first_page, exact: true })
+      .or(this.pagination.getByRole('button', { name: this.commonTestData.first_page, exact: true }));
+    this.lastPage = this.pagination.getByRole('listitem').last();
     this.previous_button = this.pagination
       .getByRole('link')
       .getByText(this.commonTestData.previous_button, { exact: true });
@@ -140,6 +163,43 @@ export default class CommonItemsPage {
     this.alert_box_headings = this.alert_box.getByRole('heading');
     this.alert_box_list = this.alert_box.getByRole('list');
     this.alert_box_list_items = this.alert_box.getByRole('listitem');
+    this.advanced_filter_chevron = this.page.getByRole('button', {
+      name: this.commonTestData.advanced_filter_label,
+    });
+    this.result_count = this.advanced_filter_chevron
+      .locator('..')
+      .getByRole('heading', { level: 2 })
+      .getByText(this.commonTestData.result_count_heading);
+    this.no_results_heading = this.page
+      .getByRole('heading')
+      .getByText(this.commonTestData.no_results_heading, { exact: true });
+    this.no_matching_search_result_header_label = this.page.getByRole('heading');
+    this.no_matching_search_result_sub_header_label = this.page.getByRole('paragraph');
+    this.no_matching_search_result_body_one_label =
+      this.no_matching_search_result_body_two_label =
+      this.no_matching_search_result_body_three_label =
+      this.no_matching_search_result_body_four_label =
+        this.page.getByRole('listitem');
+    this.no_matching_search_result_count_label = this.page.getByRole('heading');
+    this.active_filters_list = this.page
+      .getByRole('heading', {
+        name: this.commonTestData.active_filters_label,
+        exact: true,
+      })
+      .locator('..')
+      .getByRole('list')
+      .getByRole('listitem')
+      .getByRole('link');
+    this.clear_all_filters_link = this.page.getByRole('link', {
+      name: this.commonTestData.clear_all_filters_label,
+      exact: true,
+    });
+    this.no_results_guidance_text = this.page
+      .getByRole('paragraph')
+      .getByText(this.commonTestData.no_results_guidance_text, {
+        exact: true,
+      });
+    this.no_results_bullet_points = this.no_results_guidance_text.locator('..').getByRole('listitem');
   }
 
   //Page Methods
@@ -613,8 +673,8 @@ export default class CommonItemsPage {
     return new Map([['searchResultValues', searchResultValues]]);
   }
 
-  async validateSearchResults(userListAfterSearch: any, searchKey: string) {
-    for (const val of userListAfterSearch) {
+  async validateSearchResults(listAfterSearch: any, searchKey: string) {
+    for (const val of listAfterSearch) {
       if (val.includes(searchKey)) {
         return true;
       }
@@ -622,9 +682,12 @@ export default class CommonItemsPage {
     return false;
   }
 
-  async validateSearchResultsMultipleWordsSearchKey(results: string[], searchTerms: string[]) {
-    const matchesSearchTerm = (text: string) =>
-      searchTerms.some((term) => text.toLowerCase().includes(term.toLowerCase()));
+  async validateSearchResultsMultipleWordsSearchKey(
+    results: string[],
+    searchTerms: string[] | string
+  ): Promise<string[]> {
+    const terms = Array.isArray(searchTerms) ? searchTerms : [searchTerms];
+    const matchesSearchTerm = (text: string) => terms.some((term) => text.toLowerCase().includes(term.toLowerCase()));
     const resultsAfterFiltering = confirmArrayNotNull(results).filter(matchesSearchTerm);
     return resultsAfterFiltering;
   }
@@ -650,11 +713,7 @@ export default class CommonItemsPage {
   }
 
   async getTotalItems() {
-    const paginationResults = await this.getPaginationResults();
-    const paginationResultsParts: string[] = paginationResults.split(' results');
-    const paginationResultsPartsOne: string[] = paginationResultsParts[0].split('Showing ');
-    const paginationResultsPartsTwo: string[] = paginationResultsPartsOne[1].split(' of ');
-    const totalItems = parseInt(paginationResultsPartsTwo[1], 10);
+    const totalItems = parseInt(confirmStringNotNull(await this.result_count.textContent()).split(' ')[0], 10);
     return totalItems;
   }
   async getItemsPerPage() {
@@ -757,8 +816,9 @@ export default class CommonItemsPage {
     return term.trim().split(/\s+/);
   }
 
-  async filterResults(results: string[], searchTerms: string[]) {
-    return results.filter((result) => searchTerms.every((term) => result.toLowerCase().includes(term.toLowerCase())));
+  async filterResults(results: string[], searchTerms: string[] | string): Promise<string[]> {
+    const terms = Array.isArray(searchTerms) ? searchTerms : [searchTerms];
+    return results.filter((result) => terms.every((term) => result.toLowerCase().includes(term.toLowerCase())));
   }
 
   async clearCheckboxes(dataset: any, keys: string[], commonItemsPage: any, createUserProfilePage: any) {
@@ -801,5 +861,226 @@ export default class CommonItemsPage {
       left: 0,
     }));
     await stitchedImage.composite(composites).toFile(outputFile);
+  }
+
+  async removeSelectedFilterValues(removeFilterLabel: string): Promise<string> {
+    let removedFilterValues: string = '';
+    if (removeFilterLabel) {
+      let filterFound = true;
+      while (filterFound) {
+        const filterItems = this.active_filters_list;
+        const count = await filterItems.count();
+        filterFound = false;
+        for (let i = 0; i < count; i++) {
+          const text = (await filterItems.nth(i).innerText()).trim().replace('Remove filter', '').trim();
+          if (text === removeFilterLabel) {
+            removedFilterValues = text;
+            await filterItems.nth(i).locator('..').click({ force: true });
+            await this.page.waitForTimeout(500);
+            filterFound = true;
+            break;
+          }
+        }
+      }
+    }
+    return removedFilterValues;
+  }
+
+  async getActiveFilterLabelCheckbox(
+    filterLabels: object,
+    filterLabel: string,
+    key: string,
+    searchValue: RegExp,
+    replaceValue: string
+  ): Promise<string> {
+    const label = filterLabels[key.replace(searchValue, replaceValue)];
+    return `${label} - ${filterLabel}`;
+  }
+
+  async getActiveFilterLabelTextboxRadioButton(
+    filterLabels: any,
+    filterDataset: JSON,
+    key: string,
+    searchValue: RegExp,
+    replaceValue: string
+  ): Promise<string> {
+    const label = filterLabels[key.replace(searchValue, replaceValue)];
+    return `${label} - ${filterDataset[key]}`;
+  }
+
+  async getActiveFilterLabelDateField(
+    filterLabels: any,
+    filterDataset: JSON,
+    key: string,
+    searchValue: RegExp,
+    replaceValue: string
+  ): Promise<string> {
+    let activeFilterLabel: string;
+    const label = filterLabels[key.replace(searchValue, replaceValue)];
+    const dateType = key.includes('_from_') ? 'from' : 'to';
+    const dateKey = key.replace('_day_text', '');
+    const dateValue = await this.getDateString(filterDataset, dateKey);
+    if (dateValue) {
+      activeFilterLabel = `${label} - ${dateType} ${dateValue}`;
+    }
+    return activeFilterLabel;
+  }
+
+  async getCheckboxFilterLabels(
+    key: string,
+    filterDataset: any,
+    filterLabels: any,
+    replaceValue: string
+  ): Promise<string[]> {
+    const labels: string[] = [];
+    for (const filterLabel of filterDataset[key]) {
+      const activeFilterLabel = await this.getActiveFilterLabelCheckbox(
+        filterLabels,
+        filterLabel,
+        key,
+        /_checkbox$/,
+        replaceValue
+      );
+      labels.push(activeFilterLabel);
+    }
+    return labels;
+  }
+
+  async getDateFilterLabel(
+    key: string,
+    filterDataset: any,
+    filterLabels: any,
+    replaceValue: string
+  ): Promise<string | null> {
+    return await this.getActiveFilterLabelDateField(
+      filterLabels,
+      filterDataset,
+      key,
+      /(_from_day_text|_to_day_text)$/,
+      replaceValue
+    );
+  }
+
+  async getTextboxRadioButtonFilterLabel(
+    key: string,
+    filterDataset: any,
+    filterLabels: any,
+    replaceValue: string
+  ): Promise<string> {
+    return await this.getActiveFilterLabelTextboxRadioButton(
+      filterLabels,
+      filterDataset,
+      key,
+      /(_text|_radio)$/,
+      replaceValue
+    );
+  }
+
+  async getDateString(dataset: JSON, prefix: string) {
+    const day = +dataset[`${prefix}_day_text`];
+    const month = dataset[`${prefix}_month_dropdown`].slice(0, 3);
+    const year = dataset[`${prefix}_year_text`];
+    return day && month && year ? `${day} ${month} ${year}` : null;
+  }
+
+  async getCheckboxHintLabel(): Promise<string> {
+    const hintLabel = 0 + ' ' + this.commonTestData.selected_checkboxes_hint_label;
+    return hintLabel;
+  }
+
+  async areSearchResultsValid(actualValues: string[], allowedValues: string[]) {
+    const allValid = actualValues.every((value) => allowedValues.includes(value));
+    return allValid;
+  }
+
+  async getNoResultsBulletPoints(): Promise<string[]> {
+    const bulletPoints = this.no_results_bullet_points;
+    const count = await bulletPoints.count();
+    const values: string[] = [];
+    for (let i = 0; i < count; i++) {
+      const text = confirmStringNotNull(await bulletPoints.nth(i).textContent());
+      values.push(text);
+    }
+    return values;
+  }
+
+  async validatePagination(currentPage: any, totalPages: any, navigateMethod: string) {
+    const totalItems = await this.getTotalItems();
+    const pageSize = parseInt(this.commonTestData.default_page_size, 10);
+    const currentPageLocator = await this.clickOnPages(currentPage, navigateMethod);
+    await expect(currentPageLocator).toHaveAttribute('aria-current');
+    const { start, end } = Object.fromEntries(await this.getStartEndPages(currentPage, pageSize, totalItems));
+    const rowCount = await this.getItemsPerPage();
+    expect(rowCount - 1).toBe(end - start + 1);
+    const itemsMap = await this.getPaginationValues();
+    const ellipsisIndices = itemsMap.get('ellipsisIndices');
+    const itemsValues = itemsMap.get('items');
+    const allVisibleItems = itemsMap.get('allVisibleItems');
+    const visiblePages = (await this.getVisiblePages(itemsValues)).get('visiblePages');
+    const firstPage = 1;
+    const lastPage = totalPages;
+    const assertVisiblePages = (expectedPages: number[]) => {
+      expect(visiblePages).toEqual(expectedPages);
+    };
+    const assertAllVisibleItems = (expectedItems: string[]) => {
+      expect(allVisibleItems).toEqual(expectedItems);
+    };
+    const buildExpected = (pages: number[], items: (number | string)[]) => {
+      assertVisiblePages(pages);
+      assertAllVisibleItems(items.map(String));
+    };
+    if (totalPages <= 7) {
+      buildExpected(visiblePages, allVisibleItems);
+      expect(ellipsisIndices.length).toBe(0);
+    } else if (currentPage <= 3) {
+      const base = [firstPage];
+      switch (currentPage) {
+        case 1:
+          buildExpected([firstPage, 2, lastPage], [firstPage, 2, '⋯', lastPage]);
+          break;
+        case 2:
+          buildExpected([...base, 2, 3, lastPage], [firstPage, 2, 3, '⋯', lastPage]);
+          break;
+        default:
+          buildExpected(
+            [...base, currentPage - 1, currentPage, currentPage + 1, lastPage],
+            [firstPage, currentPage - 1, currentPage, currentPage + 1, '⋯', lastPage]
+          );
+      }
+    } else if (currentPage >= totalPages - 2) {
+      switch (currentPage) {
+        case totalPages - 2:
+          buildExpected(
+            [firstPage, currentPage - 1, currentPage, currentPage + 1, lastPage],
+            [firstPage, '⋯', currentPage - 1, currentPage, currentPage + 1, lastPage]
+          );
+          break;
+        case totalPages - 1:
+          buildExpected(
+            [firstPage, currentPage - 1, currentPage, lastPage],
+            [firstPage, '⋯', currentPage - 1, currentPage, lastPage]
+          );
+          break;
+        default:
+          buildExpected([firstPage, currentPage - 1, lastPage], [firstPage, '⋯', currentPage - 1, lastPage]);
+      }
+    } else {
+      buildExpected(
+        [firstPage, currentPage - 1, currentPage, currentPage + 1, lastPage],
+        [firstPage, '⋯', currentPage - 1, currentPage, currentPage + 1, '⋯', lastPage]
+      );
+    }
+    // Common assertions
+    expect(visiblePages).toContain(currentPage);
+    if (currentPage > 1) expect(visiblePages).toContain(currentPage - 1);
+    if (currentPage < totalPages) expect(visiblePages).toContain(currentPage + 1);
+    expect(visiblePages).toContain(firstPage);
+    expect(visiblePages).toContain(lastPage);
+    // Navigation
+    if (navigateMethod === 'clicking on next link') {
+      await this.clickOnNextLink();
+    } else if (navigateMethod === 'clicking on previous link') {
+      await this.clickOnPreviousLink();
+    }
   }
 }

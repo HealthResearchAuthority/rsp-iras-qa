@@ -29,8 +29,7 @@ When(
           searchQueryName
         ];
     } else if (searchType.toLowerCase() == 'modifications') {
-      searchQueryDataset =
-        searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[searchQueryName];
+      searchQueryDataset = searchModificationsPage.searchModificationsPageTestData.Search_Queries[searchQueryName];
     } else if ((await commonItemsPage.tableBodyRows.count()) < 1) {
       throw new Error(`There are no items in list to search`);
     }
