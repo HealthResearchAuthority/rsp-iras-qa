@@ -132,7 +132,6 @@ Then(
     ) => {
       const filteredResults = await commonItemsPage.filterResults(searchResults, searchTerms);
       expect(filteredResults).toEqual(searchResults);
-
       const validatedResults = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
         searchResults,
         searchTerms
@@ -175,6 +174,7 @@ Then(
       const isValid = await commonItemsPage.areSearchResultsValid(values, allowedValues);
       expect(isValid).toBeTruthy();
     };
+
     if (searchResults.length !== 0) {
       // Combined search validation
       const searchTerms = [irasId, ciName, projectTitle].filter(Boolean);
@@ -343,52 +343,6 @@ Then(
       searchModificationsPage.searchModificationsPageTestData.Sponsor_Organisation[sponsorOrganisationDatasetName];
     await searchModificationsPage.sponsor_organisation_text.fill(dataset['sponsor_organisation_text']);
     await searchModificationsPage.sponsor_organisation_jsdisabled_search_button.click();
-  }
-);
-
-Then(
-  'I validate {string} displayed on {string} in advanced filters',
-  async (
-    { commonItemsPage, searchModificationsPage },
-    errorMessageFieldAndSummaryDatasetName: string,
-    pageKey: string
-  ) => {
-    let errorMessageFieldDataset: JSON;
-    let page: any;
-    if (pageKey === 'Search_Modifications_Page') {
-      errorMessageFieldDataset =
-        searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[
-          errorMessageFieldAndSummaryDatasetName
-        ];
-      page = searchModificationsPage;
-    }
-    await expect(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
-    const allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset);
-    const summaryErrorActualValues = await commonItemsPage.getSummaryErrorMessages();
-    expect(summaryErrorActualValues).toEqual(allSummaryErrorExpectedValues);
-    for (const key in errorMessageFieldDataset) {
-      if (Object.hasOwn(errorMessageFieldDataset, key)) {
-        const expectedMessage = errorMessageFieldDataset[key];
-        if (
-          errorMessageFieldAndSummaryDatasetName.endsWith('_To_date_Before_From_Date_Error') ||
-          errorMessageFieldAndSummaryDatasetName.endsWith('_No_Month_Selected_To_Date_Error')
-        ) {
-          const actualMessage = await searchModificationsPage.date_modification_submitted_to_date_error.textContent();
-          expect(actualMessage).toEqual(expectedMessage);
-        } else if (errorMessageFieldAndSummaryDatasetName.endsWith('_No_Month_Selected_From_Date_Error')) {
-          const actualMessage = await searchModificationsPage.date_modification_submitted_from_date_error.textContent();
-          expect(actualMessage).toEqual(expectedMessage);
-        } else if (errorMessageFieldAndSummaryDatasetName === 'Sponsor_Organisation_Min_Char_Error') {
-          const actualMessage =
-            await searchModificationsPage.sponsor_organisation_jsdisabled_min_error_message.textContent();
-          expect(actualMessage).toEqual(expectedMessage);
-        } else {
-          throw new Error(`Unhandled error message dataset name: ${errorMessageFieldAndSummaryDatasetName}`);
-        }
-        const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
-        await expect(element).toBeInViewport();
-      }
-    }
   }
 );
 
