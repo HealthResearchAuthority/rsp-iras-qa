@@ -1,8 +1,8 @@
 @UserAdministration @ManageUsers @EditViewUsers @SysAdminUser @SystemTest @rsp-2830 @rsp-2828
 Feature: User Administration: Manage user profiles, view and edit user profile
-    As a user
-    I want the ability to edit and view a user profile record
-    So that I can access all the user information and keep user information up to date
+  As a user
+  I want the ability to edit and view a user profile record
+  So that I can access all the user information and keep user information up to date
 
   Background:
     Given I have navigated to the 'Home_Page'
@@ -57,14 +57,14 @@ Feature: User Administration: Manage user profiles, view and edit user profile
     Then I can see the 'Manage_Users_Page'
 
     Examples:
-      | Edit_User_Field    | User_Role  | Status  | Edit_User_Field_Data        | Original_Data                   |
-      | title_text         | Operations | Enabled | User_Title_Text_One         | Original_Title_Text_One         |
-      | first_name_text    | Operations | Enabled | User_First_Name_Text_One    | Original_First_Name_Text_One    |
-      | last_name_text     | Operations | Enabled | User_Last_Name_Text_One     | Original_Last_Name_Text_One     |
-      | telephone_text     | Operations | Enabled | User_Telephone_Text_One     | Original_Telephone_Text_One     |
-      | organisation_text  | Operations | Enabled | User_Organisation_Text_One  | Original_Organisation_Text_One  |
-      | job_title_text     | Operations | Enabled | User_Job_Title_Text_One     | Original_Job_Title_Text_One     |
-      | role_checkbox      | Operations | Enabled | User_Role_Checkbox_One      | Original_Role_Checkbox_One      |
+      | Edit_User_Field   | User_Role  | Status  | Edit_User_Field_Data       | Original_Data                  |
+      | title_text        | Operations | Enabled | User_Title_Text_One        | Original_Title_Text_One        |
+      | first_name_text   | Operations | Enabled | User_First_Name_Text_One   | Original_First_Name_Text_One   |
+      | last_name_text    | Operations | Enabled | User_Last_Name_Text_One    | Original_Last_Name_Text_One    |
+      | telephone_text    | Operations | Enabled | User_Telephone_Text_One    | Original_Telephone_Text_One    |
+      | organisation_text | Operations | Enabled | User_Organisation_Text_One | Original_Organisation_Text_One |
+      | job_title_text    | Operations | Enabled | User_Job_Title_Text_One    | Original_Job_Title_Text_One    |
+      | role_checkbox     | Operations | Enabled | User_Role_Checkbox_One     | Original_Role_Checkbox_One     |
 
   @editUserProfileReviewer @skip
   Scenario Outline: Successful user profile update for user as Reviewer
@@ -84,14 +84,14 @@ Feature: User Administration: Manage user profiles, view and edit user profile
     Then I can see the 'Manage_Users_Page'
 
     Examples:
-      | Edit_User_Field    | User_Role  | Status  | Edit_User_Field_Data        | Original_Data                   |
-      | title_text         | Reviewer   | Enabled | User_Title_Text_Two         | Original_Title_Text_Two         |
-      | first_name_text    | Reviewer   | Enabled | User_First_Name_Text_Two    | Original_First_Name_Text_Two    |
-      | last_name_text     | Reviewer   | Enabled | User_Last_Name_Text_Two     | Original_Last_Name_Text_Two     |
-      | telephone_text     | Reviewer   | Enabled | User_Telephone_Text_Two     | Original_Telephone_Text_Two     |
-      | organisation_text  | Reviewer   | Enabled | User_Organisation_Text_Two  | Original_Organisation_Text_Two  |
-      | job_title_text     | Reviewer   | Enabled | User_Job_Title_Text_Two     | Original_Job_Title_Text_Two     |
-      | role_checkbox      | Operations | Enabled | User_Role_Checkbox_Two      | Original_Role_Checkbox_Two      |
+      | Edit_User_Field   | User_Role  | Status  | Edit_User_Field_Data       | Original_Data                  |
+      | title_text        | Reviewer   | Enabled | User_Title_Text_Two        | Original_Title_Text_Two        |
+      | first_name_text   | Reviewer   | Enabled | User_First_Name_Text_Two   | Original_First_Name_Text_Two   |
+      | last_name_text    | Reviewer   | Enabled | User_Last_Name_Text_Two    | Original_Last_Name_Text_Two    |
+      | telephone_text    | Reviewer   | Enabled | User_Telephone_Text_Two    | Original_Telephone_Text_Two    |
+      | organisation_text | Reviewer   | Enabled | User_Organisation_Text_Two | Original_Organisation_Text_Two |
+      | job_title_text    | Reviewer   | Enabled | User_Job_Title_Text_Two    | Original_Job_Title_Text_Two    |
+      | role_checkbox     | Operations | Enabled | User_Role_Checkbox_Two     | Original_Role_Checkbox_Two     |
 
   @editUserProfileOnlyMandatoryFields @skip
   Scenario Outline: Successful user profile update with only mandatory fields
@@ -111,9 +111,9 @@ Feature: User Administration: Manage user profiles, view and edit user profile
     Then I can see the 'Manage_Users_Page'
 
     Examples:
-      | Edit_User_Field    | User_Role  | Status  | Edit_User_Field_Data          | Original_Data                     |
-      | first_name_text    | Operations | Enabled | User_First_Name_Text_Three    | Original_First_Name_Text_Three    |
-      | last_name_text     | Operations | Enabled | User_Last_Name_Text_Three     | Original_Last_Name_Text_Three     |
+      | Edit_User_Field | User_Role  | Status  | Edit_User_Field_Data       | Original_Data                  |
+      | first_name_text | Operations | Enabled | User_First_Name_Text_Three | Original_First_Name_Text_Three |
+      | last_name_text  | Operations | Enabled | User_Last_Name_Text_Three  | Original_Last_Name_Text_Three  |
 
   @rsp-3122 @VerifyErrorMessagesInvalidData @EditUserProfileVerifyErrorMessagesInvalidData
   Scenario Outline: Validate error messages are displayed for invalid data in edit user profile page
@@ -129,16 +129,16 @@ Feature: User Administration: Manage user profiles, view and edit user profile
     Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Edit_User_Profile_Page'
 
     Examples:
-      | Edit_User_Profile                        | Edit_User_Field   | User_Role  | Status  | Invalid_Data_Edit_User                                    | Field_And_Summary_Error_Message                                 |
-      | Valid_Data_In_All_Fields_Role_Operations | title_text        | Operations | Enabled | Missing_Mandatory_Fields_Role_Not_Operations              | Missing_Mandatory_Fields_Role_Not_Operations_Error              |
-      | Valid_Data_In_All_Fields_Role_Operations | first_name_text   | Operations | Enabled | Missing_Mandatory_Fields_Role_Operations                  | Missing_Mandatory_Fields_Role_Operations_Error                  |
-      | Valid_Data_In_All_Fields_Role_Operations | last_name_text    | Operations | Enabled | Missing_Mandatory_Field_First_Name_Role_Not_Operations    | Missing_Mandatory_Field_First_Name_Role_Not_Operations_Error    |
-      | Valid_Data_In_All_Fields_Role_Operations | telephone_text    | Operations | Enabled | Missing_Mandatory_Field_Last_Name_Role_Not_Operations     | Missing_Mandatory_Field_Last_Name_Role_Not_Operations_Error     |
-      | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | Enabled | Missing_Mandatory_Field_Country_Role_Operations           | Missing_Mandatory_Field_Country_Role_Operations_Error           |
-      | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | Enabled | Missing_Mandatory_Field_Access_Required_Role_Operations   | Missing_Mandatory_Field_Access_Required_Role_Operations_Error   |
-      | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | Enabled | Invalid_Character_Limit                                   | Invalid_Character_Limit_Error                                   |
-      | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | Enabled | Incorrect_Format_Telephone_Data                           | Incorrect_Format_Field_Telephone_Error                          |
-      | Valid_Data_In_All_Fields_Role_Operations | job_title_text    | Operations | Enabled | Incorrect_Format_Invalid_Character_Limit_Telephone_Data   | Incorrect_Format_Invalid_Character_Limit_Telephone_Error        |
+      | Edit_User_Profile                        | Edit_User_Field | User_Role  | Status  | Invalid_Data_Edit_User                                  | Field_And_Summary_Error_Message                               |
+      | Valid_Data_In_All_Fields_Role_Operations | title_text      | Operations | Enabled | Missing_Mandatory_Fields_Role_Not_Operations            | Missing_Mandatory_Fields_Role_Not_Operations_Error            |
+      | Valid_Data_In_All_Fields_Role_Operations | first_name_text | Operations | Enabled | Missing_Mandatory_Fields_Role_Operations                | Missing_Mandatory_Fields_Role_Operations_Error                |
+      | Valid_Data_In_All_Fields_Role_Operations | last_name_text  | Operations | Enabled | Missing_Mandatory_Field_First_Name_Role_Not_Operations  | Missing_Mandatory_Field_First_Name_Role_Not_Operations_Error  |
+      | Valid_Data_In_All_Fields_Role_Operations | telephone_text  | Operations | Enabled | Missing_Mandatory_Field_Last_Name_Role_Not_Operations   | Missing_Mandatory_Field_Last_Name_Role_Not_Operations_Error   |
+      | Valid_Data_In_All_Fields_Role_Operations | job_title_text  | Operations | Enabled | Missing_Mandatory_Field_Country_Role_Operations         | Missing_Mandatory_Field_Country_Role_Operations_Error         |
+      | Valid_Data_In_All_Fields_Role_Operations | job_title_text  | Operations | Enabled | Missing_Mandatory_Field_Access_Required_Role_Operations | Missing_Mandatory_Field_Access_Required_Role_Operations_Error |
+      | Valid_Data_In_All_Fields_Role_Operations | job_title_text  | Operations | Enabled | Invalid_Character_Limit                                 | Invalid_Character_Limit_Error                                 |
+      | Valid_Data_In_All_Fields_Role_Operations | job_title_text  | Operations | Enabled | Incorrect_Format_Telephone_Data                         | Incorrect_Format_Field_Telephone_Error                        |
+      | Valid_Data_In_All_Fields_Role_Operations | job_title_text  | Operations | Enabled | Incorrect_Format_Invalid_Character_Limit_Telephone_Data | Incorrect_Format_Invalid_Character_Limit_Telephone_Error      |
 
   @rsp-3521 @ManageUsersPagination @ManageUsersPaginationFirstPage
   Scenario: Verify pagination in manage users page when user is on the first page
@@ -158,37 +158,37 @@ Feature: User Administration: Manage user profiles, view and edit user profile
     And the 'Next' button will be 'not available' to the user
     And I capture the page screenshot
 
-  # @rsp-3456 @ManageUsersSearchResultsFound @Smoke
-  # Scenario Outline: Verify search results in manage users page when user search by first value of first name, last name, full name and email address
-  #   When I enter the '<Field_Name>' of the '<Position>' item in the list, into the search field
-  #   And I capture the page screenshot
-  #   And I click the 'Search' button on the 'Manage_Users_Page'
-  #   And I capture the page screenshot
-  #   Then the system displays user records matching the search criteria
-  #   And I capture the page screenshot
+  @rsp-3456 @ManageUsersSearchResultsFound @Smoke
+  Scenario Outline: Verify search results in manage users page when user search by first value of first name, last name, full name and email address
+    When I enter the '<Field_Name>' of the '<Position>' item in the list, into the search field
+    And I capture the page screenshot
+    And I click the 'Search' button on the 'Manage_Users_Page'
+    And I capture the page screenshot
+    Then the system displays user records matching the search criteria
+    And I capture the page screenshot
 
-    # Examples:
-    #   | Field_Name    | Position |
-    #   | First_Name    | First    |
-    #   | Last_Name     | First    |
-    #   | Email_Address | First    |
-    #   | Full_Name     | First    |
+    Examples:
+      | Field_Name    | Position |
+      | First_Name    | First    |
+      | Last_Name     | First    |
+      | Email_Address | First    |
+      | Full_Name     | First    |
 
-  # @rsp-3456 @ManageUsersSearchResultsFound @Smoke
-  # Scenario Outline: Verify search results in manage users page when user search by last value of first name, last name and email address
-  #   When I enter the '<Field_Name>' of the '<Position>' item in the list, into the search field
-  #   And I capture the page screenshot
-  #   And I click the 'Search' button on the 'Manage_Users_Page'
-  #   And I capture the page screenshot
-  #   Then the system displays user records matching the search criteria
-  #   And I capture the page screenshot
+  @rsp-3456 @ManageUsersSearchResultsFound @Smoke
+  Scenario Outline: Verify search results in manage users page when user search by last value of first name, last name and email address
+    When I enter the '<Field_Name>' of the '<Position>' item in the list, into the search field
+    And I capture the page screenshot
+    And I click the 'Search' button on the 'Manage_Users_Page'
+    And I capture the page screenshot
+    Then the system displays user records matching the search criteria
+    And I capture the page screenshot
 
-  #   Examples:
-  #     | Field_Name    | Position |
-  #     | First_Name    | Last     |
-  #     | Last_Name     | Last     |
-  #     | Email_Address | Last     |
-  #     | Full_Name     | Last     |
+    Examples:
+      | Field_Name    | Position |
+      | First_Name    | Last     |
+      | Last_Name     | Last     |
+      | Email_Address | Last     |
+      | Full_Name     | Last     |
 
   @rsp-3456 @ManageUsersSearchNoResultsFound
   Scenario Outline: Verify no results found message will be presented to the user in manage users page if there is not a user on the system that matches the search criteria
@@ -217,7 +217,7 @@ Feature: User Administration: Manage user profiles, view and edit user profile
       | Existing_QA_User_First_Name |
       | Existing_QA_User_Last_Name  |
       | Existing_QA_User_Email      |
-    # out of scope for now
+  # out of scope for now
 
   @rsp-3456 @ManageUsersSearchLeadingAndTrailingWhiteSpaces @fail @skip
   Scenario Outline: Verify search results in manage users page when the search keyword contains leading and trailing white spaces

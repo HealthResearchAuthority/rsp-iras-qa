@@ -129,6 +129,7 @@ When(
   async ({ commonItemsPage, modificationsReadyToAssignPage }) => {
     const checkboxes = modificationsReadyToAssignPage.modification_checkbox;
     const checkAll = modificationsReadyToAssignPage.checkall_modification_checkbox;
+    await commonItemsPage.page.waitForLoadState('domcontentloaded');
     await checkAll.click();
     const rowCount = await commonItemsPage.tableRows.count();
     for (let i = 1; i < rowCount; i++) {
@@ -142,6 +143,7 @@ When(
   async ({ commonItemsPage, modificationsReadyToAssignPage }) => {
     const checkboxes = modificationsReadyToAssignPage.modification_checkbox;
     const checkAll = modificationsReadyToAssignPage.checkall_modification_checkbox;
+    await commonItemsPage.page.waitForLoadState('domcontentloaded');
     await checkAll.click();
     const rowCount = await commonItemsPage.tableRows.count();
     for (let i = 2; i < rowCount; i++) {
@@ -171,7 +173,7 @@ When(
     for (let i = 2; i < rowCount; i++) {
       if (checkboxStatus.toLowerCase() === 'unchecked') {
         await expect(checkboxes.nth(i)).not.toBeChecked();
-      } else if (checkboxStatus === 'checked') {
+      } else if (checkboxStatus.toLowerCase() === 'checked') {
         await expect(checkboxes.nth(i)).toBeChecked();
       }
     }
