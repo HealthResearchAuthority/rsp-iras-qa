@@ -461,6 +461,12 @@
       "date_modification_submitted_to_day_text": "20",
       "date_modification_submitted_to_month_dropdown": "Choose month",
       "date_modification_submitted_to_year_text": "2013"
+    },
+    "Advanced_Filters_Automation": {
+      "chief_investigator_name_text": "ci_test",
+      "short_project_title_text": "QA_Automation",
+      "lead_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "modification_type_checkbox": ["Minor modification", "Modification of an important detail"]
     }
   },
   "Sponsor_Organisation": {

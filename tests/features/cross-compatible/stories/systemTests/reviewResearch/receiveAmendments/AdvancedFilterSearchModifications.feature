@@ -14,7 +14,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
     Scenario Outline: Verify the user is able to view the list of modifications by entering a valid IRAS ID, selecting the advanced filters, and clicking the 'Apply filters' button
         When I enter '<Valid_Iras_Id>' into the search field for search modifications page
         And I capture the page screenshot
-        And I click the 'Advanced_Filter' button on the 'Search_Modifications_Page'
+        And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
@@ -33,6 +33,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
             | Valid_Iras_Id_TwentyOne   | Advanced_Filters_TwentyOne   |
             | Valid_Iras_Id_TwentyTwo   | Advanced_Filters_TwentyTwo   |
             | Valid_Iras_Id_TwentyThree | Advanced_Filters_TwentyThree |
+            | Valid_Iras_Id_Prefix      | Advanced_Filters_Automation  |
 
     @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @KNOWN-DEFECT-RSP-4467
     Scenario Outline: Verify the user is able to view the list of modifications by entering valid iras id, then clicking on 'Search' button and then selecting advanced filters and clicking the 'Apply filters' button
@@ -43,7 +44,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
         And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
         And I capture the page screenshot
-        And I click the 'Advanced_Filter' button on the 'Search_Modifications_Page'
+        And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
@@ -65,7 +66,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
 
     @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @KNOWN-DEFECT-RSP-4467
     Scenario Outline: Verify the user can view the list of modifications by entering valid iras id, then click on search button and then selected advanced filters and click on apply filters button
-        And I click the 'Advanced_Filter' button on the 'Search_Modifications_Page'
+        And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
         And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
@@ -112,7 +113,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
 
     @viewListOfModifications @NoIrasIdAndAdvancedFilters @KNOWN-DEFECT-RSP-4467
     Scenario Outline: Verify the user can view the list of modifications by selecting advanced filters and click on apply filters button
-        And I click the 'Advanced_Filter' button on the 'Search_Modifications_Page'
+        And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
         When I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
         And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
@@ -147,7 +148,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
 
     @viewListOfModifications @DateModificationSubmitted @SponsorOrganisation @KNOWN-DEFECT-RSP-4467
     Scenario Outline: Verify the user is able to view the list of modifications filtered by sponsor organisation and modification submitted date
-        And I click the 'Advanced_Filter' button on the 'Search_Modifications_Page'
+        And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
         And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
@@ -173,7 +174,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
 
     @NoResultsFound @NoIrasIdAndNoAdvancedFilters
     Scenario: Verify the user can see an empty state that informs me no modifications exist for the search criteria on clicking apply filters button without entering/selecting iras id and filters
-        When I click the 'Advanced_Filter' button on the 'Search_Modifications_Page'
+        When I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
         And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
         Then I can see an empty state that informs me no modifications exist for the search criteria
         And I capture the page screenshot
@@ -213,7 +214,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
     Scenario Outline: Verify the user can see no matching results found message by entering invalid iras id, then selected advanced filters and click on apply filters button
         When I enter '<Invalid_Iras_Id>' into the search field for search modifications page
         And I capture the page screenshot
-        And I click the 'Advanced_Filter' button on the 'Search_Modifications_Page'
+        And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
@@ -239,7 +240,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
     Scenario Outline: Verify the user can see no matching results found message by entering valid iras id, then selected advanced filters and click on apply filters button
         When I enter '<Valid_Iras_Id>' into the search field for search modifications page
         And I capture the page screenshot
-        And I click the 'Advanced_Filter' button on the 'Search_Modifications_Page'
+        And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
         And I select advanced filters in the search modifications page using '<Advanced_Filters_No_results>'
         And I capture the page screenshot
@@ -254,7 +255,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
 
     @NoResultsFound @KNOWN-DEFECT-RSP-4467
     Scenario Outline: Verify the user can see no matching results found message by selecting advanced filters and click on apply filters button
-        And I click the 'Advanced_Filter' button on the 'Search_Modifications_Page'
+        And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
         And I select advanced filters in the search modifications page using '<Advanced_Filters_No_results>'
         And I capture the page screenshot
@@ -269,7 +270,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
 
     @DateModificationSubmittedError @rsp-4167
     Scenario Outline: Verify the user can see clear validation error message This date you have selected is before the search above when an end date is earlier than the start date
-        And I click the 'Advanced_Filter' button on the 'Search_Modifications_Page'
+        And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
         And I select advanced filters in the search modifications page using '<Date_Modification_Submitted_Invalid_Data>'
         And I capture the page screenshot
@@ -285,7 +286,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
 
     @RemoveActiveFiltersOneByOne @KNOWN-DEFECT-RSP-4467
     Scenario Outline: Verify the user can remove the selected filters one by one and the search results update accordingly
-        And I click the 'Advanced_Filter' button on the 'Search_Modifications_Page'
+        And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
         When I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
@@ -311,7 +312,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
 
     @RemoveAllActiveFiltersOneByOne @KNOWN-DEFECT-RSP-4467
     Scenario Outline: Verify the user can remove all the selected filters one by one and the search results update accordingly
-        And I click the 'Advanced_Filter' button on the 'Search_Modifications_Page'
+        And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
         When I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
@@ -336,7 +337,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
     Scenario Outline: Verify the user can remove all the selected filters one by one and the search results update accordingly based on the previously entered IRAS ID
         When I enter '<Valid_Iras_Id>' into the search field for search modifications page
         And I capture the page screenshot
-        And I click the 'Advanced_Filter' button on the 'Search_Modifications_Page'
+        And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
@@ -360,7 +361,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
 
     @RemoveActiveFiltersAllTogether @KNOWN-DEFECT-RSP-4467
     Scenario Outline: Verify the user can remove the selected filters alltogether by clicking 'Clear all filters' link and the search results update accordingly
-        And I click the 'Advanced_Filter' button on the 'Search_Modifications_Page'
+        And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
         When I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
@@ -383,7 +384,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
     Scenario Outline: Verify the user can view the list of modifications by entering valid iras id, then selected advanced filters and click on apply filters button
         When I enter '<Valid_Iras_Id>' into the search field for search modifications page
         And I capture the page screenshot
-        And I click the 'Advanced_Filter' button on the 'Search_Modifications_Page'
+        And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
@@ -406,7 +407,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
 
     @SponsorOrganisationValidation @AdvancedFilters @jsEnabled
     Scenario Outline: Validate the sponsor organisation suggestion list in advanced filters when javascript is enabled
-        And I click the 'Advanced_Filter' button on the 'Search_Modifications_Page'
+        And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
         And I expand the chevrons for '<Advanced_Filters>' in search modifications page
         And I capture the page screenshot
         When I authorise the rts api using '<RTS_API_Data>'
@@ -428,7 +429,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
 
     @SponsorOrganisationValidation @AdvancedFilters @jsDisabled @rsp-4118
     Scenario Outline: Validate the sponsor organisation suggestion list in advanced filters when javascript is disabled
-        And I click the 'Advanced_Filter' button on the 'Search_Modifications_Page'
+        And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
         And I expand the chevrons for '<Advanced_Filters>' in search modifications page
         And I capture the page screenshot
         When I authorise the rts api using '<RTS_API_Data>'
@@ -455,7 +456,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
 
     @SponsorOrganisationValidation  @jsDisabled @rsp-4167
     Scenario Outline: "Verify that the search button appears with a green background in the 'Sponsor Organisation' filter section of the advanced filters when JavaScript is disabled
-        And I click the 'Advanced_Filter' button on the 'Search_Modifications_Page'
+        And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
         And I expand the chevrons for '<Advanced_Filters>' in search modifications page
         And the search button appears with a green background in the sponsor Organisation filter
         And I capture the page screenshot
@@ -491,7 +492,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
 
     @ViewListOfModifications @ViewListOfModificationsPaginationFirstPage @ViewListOfModificationsPaginationPageNumber @ViewListOfModificationsPaginationNextLinkClick
     Scenario Outline: Verify pagination in the list of modifications page when user is on the first page and navigate through each page by clicking page number or by by clicking next link
-        And I click the 'Advanced_Filter' button on the 'Search_Modifications_Page'
+        And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
@@ -513,7 +514,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
 
     @ViewListOfModifications  @ViewListOfModificationsPaginationLastPage @ViewListOfModificationsPaginationPageNumber @ViewListOfModificationsPaginationPreviousLinkClick
     Scenario Outline: Verify pagination in the list of modifications page when user is on the last page and navigate through each page by clicking page number or by by clicking next link
-        And I click the 'Advanced_Filter' button on the 'Search_Modifications_Page'
+        And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
@@ -540,7 +541,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
 
     @jsEnabled @VerifyHintLabelForSelectedCheckboxAdvancedFilters @rsp-4167
     Scenario Outline: When javascript enabled verify the hint text for advanced filters when user select multiple checkboxes
-        And I click the 'Advanced_Filter' button on the 'Search_Modifications_Page'
+        And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I capture the page screenshot
@@ -564,7 +565,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
 
     @jsDisabled @VerifyHintLabelForSelectedCheckboxAdvancedFilters @rsp-4167
     Scenario Outline: When javascript disabled verify the hint text for advanced filters when user select multiple checkboxes
-        And I click the 'Advanced_Filter' button on the 'Search_Modifications_Page'
+        And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
         And I select advanced filters in the search modifications page using '<Advanced_Filters>'
         And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
@@ -587,7 +588,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
 
     @jsDisabled @VerifyHintLabelForSelectedCheckboxAdvancedFilters @rsp-4167
     Scenario Outline: When javascript disabled verify the hint text for advanced filters when user does n't select any checkboxes
-        And I click the 'Advanced_Filter' button on the 'Search_Modifications_Page'
+        And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
         And I expand the chevrons for '<Advanced_Filters>' in search modifications page
         And I capture the page screenshot
         And I verify the hint text based on the '<Advanced_Filters>' for search modifications page
@@ -599,7 +600,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
 
     @VerifyHintTextForAdvanceFilters @rsp-4167
     Scenario Outline: Validate hint labels for advanced filters in search modifications page
-        And I click the 'Advanced_Filter' button on the 'Search_Modifications_Page'
+        And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
         And I expand the chevrons for '<Advanced_Filters>' in search modifications page
         And I capture the page screenshot
         And I can see the '<Advanced_Filters_Labels>' ui labels in search modifications page
