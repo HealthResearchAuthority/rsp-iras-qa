@@ -5,9 +5,15 @@ import * as myResearchProjectsPageTestData from '../../../resources/test_data/ir
 export default class MyResearchProjectsPage {
   readonly page: Page;
   readonly myResearchProjectsPageTestData: typeof myResearchProjectsPageTestData;
-  readonly pageHeading: Locator;
-  readonly noProjectsAvailableLabel: Locator;
-  readonly btnCreateProjectRecord: Locator;
+  readonly page_heading: Locator;
+  readonly no_projects_available_label: Locator;
+  readonly add_project_record_button_label: Locator;
+  readonly project_search_button_label: Locator;
+  readonly advanced_filter_label: Locator;
+  readonly short_project_title_link: Locator;
+  readonly iras_id_title: Locator;
+  readonly date_added_title: Locator;
+  readonly status_title: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -15,13 +21,20 @@ export default class MyResearchProjectsPage {
     this.myResearchProjectsPageTestData = myResearchProjectsPageTestData;
 
     //Locators
-    this.pageHeading = this.page
+    this.page_heading = this.page
       .getByRole('heading')
       .getByText(this.myResearchProjectsPageTestData.My_Research_Projects_Page.heading, { exact: true });
-    this.noProjectsAvailableLabel = this.page
+    this.no_projects_available_label = this.page
       .locator('p[class="govuk-body"]')
       .getByText(this.myResearchProjectsPageTestData.Label_Texts.no_projects);
-    this.btnCreateProjectRecord = this.page.getByRole('link', { name: 'Create project record' });
+    this.add_project_record_button_label = this.page.getByRole('link', { name: 'Add project' });
+    this.project_search_button_label = this.page.getByRole('button', {
+      name: this.myResearchProjectsPageTestData.My_Research_Projects_Page.search,
+      exact: true,
+    });
+    this.advanced_filter_label = this.page.getByRole('button', {
+      name: this.myResearchProjectsPageTestData.My_Research_Projects_Page.advanced_filter_label,
+    });
   }
 
   //Page Methods

@@ -5,7 +5,7 @@ Feature: User Administration: My Research
     Given I have navigated to the 'Home_Page'
     And I can see the my account home page
 
-  @rsp-3424 @myResearchProjectsPage @Smoke
+  @rsp-3424 @MyResearchProjectsPage @Smoke
   Scenario Outline: Validate the my research page and Navigation back to home page
     Given I have navigated to the 'My_Research_Page'
     Then I can see the 'My_Research_Page'
@@ -16,3 +16,9 @@ Feature: User Administration: My Research
     When I click the 'Home' link on the 'Banner'
     Then I can see the my account home page
     Then I capture the page screenshot
+
+
+  @rsp-2854 @MyResearchProjectsPage
+  Scenario Outline: Validate the my research page with projects
+    Given I have navigated to the 'My_Research_Page'
+    Then I can see the 'My_Research_Page'
