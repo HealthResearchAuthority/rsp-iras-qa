@@ -20,20 +20,20 @@ export default class ModificationsCommonPage {
     this.pageHeading = this.page.getByRole('heading');
     this.pageComponentLabel = this.page.getByRole('heading');
     this.iras_id_label = this.page
-      .locator('dt')
+      .locator('[class$="key"]')
       .getByText(this.modificationsCommonPagePageTestData.Label_Texts.iras_id_label)
       .locator('..')
-      .locator('dd');
+      .locator('[class$="value"]');
     this.short_project_title_label = this.page
-      .locator('dt')
+      .locator('[class$="key"]')
       .getByText(this.modificationsCommonPagePageTestData.Label_Texts.short_project_title_label)
       .locator('..')
-      .locator('dd');
+      .locator('[class$="value"]');
     this.modification_id_label = this.page
-      .locator('dt')
+      .locator('[class$="key"]')
       .getByText(this.modificationsCommonPagePageTestData.Label_Texts.modification_id_label)
       .locator('..')
-      .locator('dd');
+      .locator('[class$="value"]');
   }
 
   //Page Methods

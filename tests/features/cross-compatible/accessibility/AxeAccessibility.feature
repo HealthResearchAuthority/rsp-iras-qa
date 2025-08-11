@@ -843,7 +843,6 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-
   @axeAccessibilityModficationsTasklistPage @FrontStageUser
   Scenario: Modifications tasklist page
     Given I have navigated to the 'Modifications_Tasklist_Page'

@@ -21,17 +21,17 @@ export default class PlannedEndDatePage {
 
     //Locators
     this.planned_project_end_day_text = this.page
-      .getByText(this.plannedEndDatePageTestData.Label_Texts.planned_project_end_date_day_label)
+      .getByText(this.plannedEndDatePageTestData.Label_Texts.new_planned_project_end_date_label)
       .locator('..')
-      .getByTestId('NewPlannedEndDate.Day');
+      .getByText(this.plannedEndDatePageTestData.Label_Texts.planned_project_end_date_day_label);
     this.planned_project_end_month_dropdown = this.page
-      .getByText(this.plannedEndDatePageTestData.Label_Texts.planned_project_end_date_month_label)
+      .getByText(this.plannedEndDatePageTestData.Label_Texts.new_planned_project_end_date_label)
       .locator('..')
       .getByTestId('NewPlannedEndDate.Month');
     this.planned_project_end_year_text = this.page
-      .getByText(this.plannedEndDatePageTestData.Label_Texts.planned_project_end_date_year_label)
+      .getByText(this.plannedEndDatePageTestData.Label_Texts.new_planned_project_end_date_label)
       .locator('..')
-      .getByTestId('NewPlannedEndDate.Year');
+      .getByText(this.plannedEndDatePageTestData.Label_Texts.planned_project_end_date_year_label);
     this.planned_project_end_day_text_summary_error_label =
       this.planned_project_end_month_dropdown_summary_error_label =
       this.planned_project_end_year_text_summary_error_label =
