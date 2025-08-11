@@ -324,8 +324,8 @@ export const test = base.extend<CustomFixtures>({
       storageState = getAuthState('system_admin');
     } else if ($tags.includes('@FrontStageUser')) {
       storageState = getAuthState('frontstage_user');
-    } else if ($tags.includes('@BackStageUser')) {
-      storageState = getAuthState('backstage_user');
+    } else if ($tags.includes('@StudyWideReviewer')) {
+      storageState = getAuthState('studywide_reviewer');
     }
     await use(storageState);
   },

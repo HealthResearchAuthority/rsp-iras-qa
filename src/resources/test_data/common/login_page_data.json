@@ -7,9 +7,9 @@
     "username": "futureiras.automation@hra.nhs.uk",
     "password": "`${process.env.FRONTSTAGE_USER_PASS}`"
   },
-  "Backstage_User": {
+  "Studywide_Reviewer": {
     "username": "FutureIRAS.BackStage@hra.nhs.uk",
-    "password": "`${process.env.BACKSTAGE_USER_PASS}`"
+    "password": "`${process.env.STUDYWIDE_REVIEWER_PASS}`"
   },
   "Login_Page": {
     "header": "This is the TEST Identity Gateway",

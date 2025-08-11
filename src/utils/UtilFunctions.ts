@@ -37,8 +37,8 @@ export function getAuthState(user: string): string {
     case 'frontstage_user':
       authState = 'auth-storage-states/frontStageUser.json';
       break;
-    case 'backstage_user':
-      authState = 'auth-storage-states/backStageUser.json';
+    case 'studywide_reviewer':
+      authState = 'auth-storage-states/studyWideReviewer.json';
       break;
     default:
       throw new Error(`${user} is not a valid option`);

@@ -46,10 +46,10 @@ Feature: My Account Home page
     Then I logged out from the system
     Then I capture the page screenshot
     Examples:
-      | User            | Validation_Text                  |
-      | System_Admin    | Label_Texts_System_Admin_Role    |
-      | Frontstage_User | Label_Texts_Frontstage_User_Role |
-      | Backstage_User  | Label_Texts_Backstage_User_Role  |
+      | User               | Validation_Text                     |
+      | System_Admin       | Label_Texts_System_Admin_Role       |
+      | Frontstage_User    | Label_Texts_Frontstage_User_Role    |
+      | Studywide_Reviewer | Label_Texts_Studywide_Reviewer_Role |
 
   @rsp-3821 @MyAccountHomepage @NoAuth
   Scenario Outline: Validate the access of system administration page and other user role
@@ -58,7 +58,7 @@ Feature: My Account Home page
     Then I logged out from the system
     Then I capture the page screenshot
     Examples:
-      | User            | Page                       |
-      | System_Admin    | System_Administration_Page |
-      | Frontstage_User | Access_Denied_Page         |
-      | Backstage_User  | Access_Denied_Page         |
+      | User               | Page                       |
+      | System_Admin       | System_Administration_Page |
+      | Frontstage_User    | Access_Denied_Page         |
+      | Studywide_Reviewer | Access_Denied_Page         |

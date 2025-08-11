@@ -206,7 +206,7 @@ export default class CommonItemsPage {
   async storeAuthState(user: string) {
     const authSysAdminUserFile = 'auth-storage-states/sysAdminUser.json';
     const authFrontStageUserFile = 'auth-storage-states/frontStageUser.json';
-    const authBackStageUserFile = 'auth-storage-states/backStageUser.json';
+    const authStudyWideReviewerFile = 'auth-storage-states/studyWideReviewer.json';
     switch (user.toLowerCase()) {
       case 'system_admin':
         await this.page.context().storageState({ path: authSysAdminUserFile });
@@ -214,8 +214,8 @@ export default class CommonItemsPage {
       case 'frontstage_user':
         await this.page.context().storageState({ path: authFrontStageUserFile });
         break;
-      case 'backstage_user':
-        await this.page.context().storageState({ path: authBackStageUserFile });
+      case 'studywide_reviewer':
+        await this.page.context().storageState({ path: authStudyWideReviewerFile });
         break;
       default:
         throw new Error(`${user} is not a valid option`);

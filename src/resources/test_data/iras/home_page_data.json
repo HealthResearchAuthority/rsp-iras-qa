@@ -27,7 +27,7 @@
       "Technical Assurance",
       "Technical Assurance reviewers"
     ],
-    "workspaces_links_backstage_user": [
+    "workspaces_links_studywide_reviewer": [
       "Approvals",
       "CAG members",
       "CAT",
@@ -62,7 +62,7 @@
     "technical_assurance_hint_label": "Workspace for Technical Assurance staff to receive and process applications and post approval activity for review.",
     "technical_assurance_reviewers_hint_label": "Workspace for Technical Assurance reviewers to review applications and post approval activity."
   },
-  "Label_Texts_Backstage_User_Role": {
+  "Label_Texts_studywide_reviewer_Role": {
     "approvals_hint_label": "Workspace for approvals service staff to receive and process applications and post approval activity for review.",
     "cag_members_hint_label": "Workspace for members to review applications and post approval activity.",
     "cat_hint_label": "Workspace for CAT staff to receive and process applications and post approval activity for review.",
