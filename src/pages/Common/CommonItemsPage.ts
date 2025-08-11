@@ -84,6 +84,7 @@ export default class CommonItemsPage {
   readonly no_results_bullet_points: Locator;
   readonly no_results_guidance_text: Locator;
   readonly no_results_heading: Locator;
+  readonly apply_filters_button: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -166,10 +167,7 @@ export default class CommonItemsPage {
     this.advanced_filter_chevron = this.page.getByRole('button', {
       name: this.commonTestData.advanced_filter_label,
     });
-    this.result_count = this.advanced_filter_chevron
-      .locator('..')
-      .getByRole('heading', { level: 2 })
-      .getByText(this.commonTestData.result_count_heading);
+    this.result_count = this.advanced_filter_chevron.getByText(this.commonTestData.result_count_heading);
     this.no_results_heading = this.page
       .getByRole('heading')
       .getByText(this.commonTestData.no_results_heading, { exact: true });
@@ -200,6 +198,11 @@ export default class CommonItemsPage {
         exact: true,
       });
     this.no_results_bullet_points = this.no_results_guidance_text.locator('..').getByRole('listitem');
+    this.apply_filters_button = this.page
+      .getByRole('button')
+      .getByText(this.buttonTextData.Search_Modifications_Page.Apply_Filters, {
+        exact: true,
+      });
   }
 
   //Page Methods

@@ -938,3 +938,7 @@ Then(
     }
   }
 );
+
+Then('the advanced filters section should collapse automatically', async ({ commonItemsPage }) => {
+  await expect(commonItemsPage.apply_filters_button).not.toBeVisible();
+});
