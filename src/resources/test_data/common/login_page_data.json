@@ -11,6 +11,14 @@
     "username": "FutureIRAS.BackStage@hra.nhs.uk",
     "password": "`${process.env.STUDYWIDE_REVIEWER_PASS}`"
   },
+  "Team_Manager": {
+    "username": "FutureIRAS.TeamManager@hra.nhs.uk",
+    "password": "`${process.env.TEAM_MANAGER_PASS}`"
+  },
+  "Workflow_Coordinator": {
+    "username": "FutureIRAS.WorkflowCoordinator@hra.nhs.uk",
+    "password": "`${process.env.WORKFLOW_COORDINATOR_PASS}`"
+  },
   "Login_Page": {
     "header": "This is the TEST Identity Gateway",
     "partial_link": "id.nihr.ac.uk/authenticationendpoint/login"

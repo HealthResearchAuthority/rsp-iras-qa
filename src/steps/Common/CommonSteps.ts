@@ -747,7 +747,7 @@ Given(
         await systemAdministrationPage.goto();
         await systemAdministrationPage.assertOnSystemAdministrationPage();
         break;
-      case 'Access_Denied_Page':
+      case 'System_Administration_Access_Denied_Page':
         await systemAdministrationPage.page.context().addCookies(authState.cookies);
         await systemAdministrationPage.goto();
         await accessDeniedPage.assertOnAccessDeniedPage();

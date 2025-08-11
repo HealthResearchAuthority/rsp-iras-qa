@@ -48,6 +48,12 @@ export default class LoginPage {
     } else if (dataset === 'Studywide_Reviewer') {
       secretKey = process.env.STUDYWIDE_REVIEWER_SECRET_KEY;
       authTag = process.env.STUDYWIDE_REVIEWER_AUTH_TAG;
+    } else if (dataset === 'Team_Manager') {
+      secretKey = process.env.TEAM_MANAGER_SECRET_KEY;
+      authTag = process.env.TEAM_MANAGER_AUTH_TAG;
+    } else if (dataset === 'Workflow_Coordinator') {
+      secretKey = process.env.WORKFLOW_COORDINATOR_SECRET_KEY;
+      authTag = process.env.WORKFLOW_COORDINATOR_AUTH_TAG;
     }
     const password = getDecryptedValue(
       resolveEnvExpression(this.loginPageTestData[dataset].password),

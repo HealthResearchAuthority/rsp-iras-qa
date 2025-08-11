@@ -46,19 +46,28 @@ Feature: My Account Home page
     Then I logged out from the system
     Then I capture the page screenshot
     Examples:
-      | User               | Validation_Text                     |
-      | System_Admin       | Label_Texts_System_Admin_Role       |
-      | Frontstage_User    | Label_Texts_Frontstage_User_Role    |
-      | Studywide_Reviewer | Label_Texts_Studywide_Reviewer_Role |
+      | User                 | Validation_Text                       |
+      | System_Admin         | Label_Texts_System_Admin_Role         |
+      | Frontstage_User      | Label_Texts_Frontstage_User_Role      |
+      | Studywide_Reviewer   | Label_Texts_Studywide_Reviewer_Role   |
+      | Team_Manager         | Label_Texts_Team_Manager_Role         |
+      | Workflow_Coordinator | Label_Texts_Workflow_Coordinator_Role |
 
   @rsp-3821 @MyAccountHomepage @NoAuth
-  Scenario Outline: Validate the access of system administration page and other user role
+  Scenario Outline: Validate the access of system administration page and other user role using url navigation
     Given I have navigated to the '<Page>' as '<User>'
     Then I capture the page screenshot
     Then I logged out from the system
     Then I capture the page screenshot
     Examples:
-      | User               | Page                       |
-      | System_Admin       | System_Administration_Page |
-      | Frontstage_User    | Access_Denied_Page         |
-      | Studywide_Reviewer | Access_Denied_Page         |
+      | User                 | Page                                     |
+      | System_Admin         | System_Administration_Page               |
+      | Frontstage_User      | System_Administration_Access_Denied_Page |
+      | Studywide_Reviewer   | System_Administration_Access_Denied_Page |
+      | Team_Manager         | System_Administration_Access_Denied_Page |
+      | Workflow_Coordinator | System_Administration_Access_Denied_Page |
+
+# My Research Page
+# Approvals Page >>Search Modification, Modification Tasklist
+# Member Management Page
+# # Navigation via clicking on the links in My Account Home Page (roles with access to the workspaces)

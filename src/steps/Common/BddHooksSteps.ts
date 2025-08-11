@@ -83,6 +83,8 @@ BeforeScenario(
         '@SysAdminUser': 'system_admin',
         '@FrontStageUser': 'frontstage_user',
         '@StudyWideReviewer': 'studywide_reviewer',
+        '@TeamManager': 'team_manager',
+        '@WorkFlowCoordinator': 'workflow_coordinator',
       };
 
       for (const tag in tagToUserMap) {
