@@ -63,7 +63,7 @@ Feature: Modifications Tasklist page that displays modifications ready to be ass
         And I capture the page screenshot
 
     @ModificationsTasklistSelectAll @rsp-4105 @jsEnabled
-    Scenario: With JSEnabled, Verify if user selects the check all checkbox on the first couple of pages and confirm all checkboxes are checked and retained even after navigation
+    Scenario: With jsEnabled, Verify if user selects the check all checkbox on the first couple of pages and confirm all checkboxes are checked and retained even after navigation
         When I select check all checkbox on the current page and validate all checkboxes are checked
         And I capture the page screenshot
         When I navigate by 'clicking on next link' within the Modifications Ready to assign page
@@ -74,14 +74,14 @@ Feature: Modifications Tasklist page that displays modifications ready to be ass
         And I capture the page screenshot
         And I navigate by 'clicking on next link' within the Modifications Ready to assign page
         And I capture the page screenshot
-        Then I can see a 'Continue to assign modifications' button on the 'Modifications_Ready_To_Assign_Page'
+        Then I can see a 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
 
-    @ModificationsTasklistSelectAll @rsp-4105 @jsDisabled
-    Scenario: With JSdisabled, Verify user selects the check all checkbox on the first couple of pages and confirm all checkboxes are unchecked and retained even after navigation
-        When JSdisabled I select check all checkbox on the current page and validate all checkboxes are unchecked
+    @ModificationsTasklistSelectAll @rsp-4105 @jsDisabled @abc
+    Scenario: With jsDisabled, Verify user selects the check all checkbox on the first couple of pages and confirm all checkboxes are unchecked and retained even after navigation
+        When jsDisabled I select check all checkbox on the current page and validate all checkboxes are unchecked
         And I capture the page screenshot
         And I navigate by 'clicking on next link' within the Modifications Ready to assign page
-        When JSdisabled I select check all checkbox on the current page and validate all checkboxes are unchecked
+        When jsDisabled I select check all checkbox on the current page and validate all checkboxes are unchecked
         And I capture the page screenshot
         And I navigate by 'clicking on previous link' within the Modifications Ready to assign page
         And I confirm all checkboxes are 'unchecked'
@@ -89,7 +89,7 @@ Feature: Modifications Tasklist page that displays modifications ready to be ass
         And I navigate by 'clicking on next link' within the Modifications Ready to assign page
         And I confirm all checkboxes are 'unchecked'
         And I capture the page screenshot
-        Then I can see a 'Continue to assign modifications' button on the 'Modifications_Ready_To_Assign_Page'
+        Then I can see a 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
 
     @ModificationsRandomSelectionAndSort @rsp-4105
     Scenario: Verify user selects few checkboxes on the first page, then applying sort resets all the checkboxes
@@ -100,11 +100,11 @@ Feature: Modifications Tasklist page that displays modifications ready to be ass
         And I capture the page screenshot
         Examples:
             | Sort_Button           |
-            | Modification ID       |
-            | Short project title   |
-            | Modification type     |
-            | Date submitted        |
-            | Days since submission |
+            | Modification_Id       |
+            | Short_Project_Title   |
+            | Modification_Type     |
+            | Date_Submitted        |
+            | Days_Since_Submission |
 
     @ModificationsSelectAllAndSort @rsp-4105
     Scenario: Verify user selects check all on the first page, then applying sort resets all the checkboxes
@@ -115,11 +115,11 @@ Feature: Modifications Tasklist page that displays modifications ready to be ass
         And I capture the page screenshot
         Examples:
             | Sort_Button           |
-            | Modification ID       |
-            | Short project title   |
-            | Modification type     |
-            | Date submitted        |
-            | Days since submission |
+            | Modification_Id       |
+            | Short_Project_Title   |
+            | Modification_Type     |
+            | Date_Submitted        |
+            | Days_Since_Submission |
 
 
 

@@ -139,15 +139,19 @@ When(
 );
 
 When(
-  'JSdisabled I select check all checkbox on the current page and validate all checkboxes are unchecked',
+  'jsDisabled I select check all checkbox on the current page and validate all checkboxes are unchecked',
   async ({ commonItemsPage, modificationsReadyToAssignPage }) => {
-    const checkboxes = modificationsReadyToAssignPage.modification_checkbox;
+    //const checkboxes = modificationsReadyToAssignPage.modification_checkbox;
     const checkAll = modificationsReadyToAssignPage.checkall_modification_checkbox;
     await commonItemsPage.page.waitForLoadState('domcontentloaded');
     await checkAll.click();
-    const rowCount = await commonItemsPage.tableRows.count();
-    for (let i = 2; i < rowCount; i++) {
-      await expect(checkboxes.nth(i)).not.toBeChecked();
+    //const rowCount = await commonItemsPage.tableRows.count();
+    //for (let i = 2; i < rowCount; i++)
+    const allCheckboxes = await commonItemsPage.tableRows.all();
+    for (const checkbox of allCheckboxes.slice(2)) {
+      //await expect(checkboxes.nth(i)).not.toBeChecked();
+      //await expect(checkboxes.nth(row)).not.toBeChecked();
+      await expect(checkbox).not.toBeChecked();
     }
   }
 );

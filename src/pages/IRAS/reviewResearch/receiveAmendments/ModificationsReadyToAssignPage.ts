@@ -22,7 +22,6 @@ export default class ModificationsReadyToAssignPage {
   readonly checkall_modification_checkbox: Locator;
   readonly page_heading: Locator;
   readonly page_description: Locator;
-  readonly modification_button_label: Locator;
   readonly advanced_filter_label: Locator;
   readonly search_button_label: Locator;
   readonly modification_checkbox: Locator;
@@ -31,6 +30,8 @@ export default class ModificationsReadyToAssignPage {
   constructor(page: Page) {
     this.page = page;
     this.modificationsReadyToAssignPageData = modificationsReadyToAssignPageData;
+    this.linkTextData = linkTextData;
+    this.buttonTextData = buttonTextData;
 
     //Locators
     this.modifications_tasklist_link = this.page.locator('.govuk-heading-s govuk-link hra-card-heading__link');
@@ -64,18 +65,22 @@ export default class ModificationsReadyToAssignPage {
     // this.previous_button = this.page.locator('.govuk-pagination__prev');
     this.checkall_modification_checkbox = this.page.locator('input[id="select-all-modifications"]');
     this.page_heading = this.page.getByTestId('title');
-    this.modification_button_label = this.page
-      .getByRole('button')
-      .getByText(this.modificationsReadyToAssignPageData.Modifications_Ready_To_Assign_Page.modification_button_label, {
-        exact: true,
-      });
+    // this.modification_button_label = this.page
+    //   .getByRole('button')
+    //   .getByText(this.modificationsReadyToAssignPageData.Modifications_Ready_To_Assign_Page.modification_button_label, {
+    //     exact: true,
+    //   });
+    // this.modification_button_label = this.page
+    //   .getByRole('button')
+    //   .getByText(this.buttonTextData.Modifications_Tasklist_Page.modification_button_label, {
+    //     exact: true,
+    //   });
     this.advanced_filter_label = this.page.getByRole('button', {
       name: this.modificationsReadyToAssignPageData.Modifications_Ready_To_Assign_Page.advanced_filter_label,
     });
     this.search_button_label = this.page.getByText('Search');
-    this.modification_checkbox = this.page.getByRole('button', {
-      name: this.modificationsReadyToAssignPageData.Modifications_Ready_To_Assign_Page.modification_checkbox,
-    });
+    this.modification_checkbox = this.page.locator('input[type="checkbox"]');
+    //this.checkall_modification_checkbox = this.page.locator('input[id="select-all-modifications"]');
   }
 
   //Page Methods
