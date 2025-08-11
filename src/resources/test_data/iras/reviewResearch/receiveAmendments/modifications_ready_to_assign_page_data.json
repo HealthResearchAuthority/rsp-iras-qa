@@ -6,7 +6,8 @@
     "modification_button_label": "Continue to assign modifications",
     "advanced_filter_label": "Advanced filter",
     "modification_checkbox": "",
-    "tasklist_days_suffix": "days"
+    "tasklist_days_suffix": "days",
+    "filter_headings": ["Date modification submitted", "Days since submission", "Short project title"]
   },
 
   "Label_Texts": {
@@ -15,5 +16,137 @@
     "modification_type_label": "Modification type",
     "date_submitted_label": "Date submitted",
     "days_since_submission_label": "Days since submission"
+  },
+
+  "Filter_Labels": {
+    "day_from_label": "Day",
+    "month_from_label": "Month",
+    "year_from_label": "Year",
+    "day_to_label": "Day",
+    "month_to_label": "Month",
+    "year_to_label": "Year",
+    "short_project_title_label": "Enter the name of the short project title"
+  },
+
+  "Search_Queries": {
+    "Existing_IRAS_ID_Single": { "search_input_text": "9800033" },
+    "Existing_IRAS_ID_Multi": { "search_input_text": "5858567" },
+    "Existing_Partial_IRAS_ID": { "search_input_text": "809" },
+    "Existing_Title_Single": { "short_project_title_text": "short 33" },
+    "Existing_Title_Multi": { "short_project_title_text": "ST-STwentyThree" },
+    "Existing_Title_Partial": { "short_project_title_text": "30" },
+    "Date_Range_Single": {
+      "day_from_text": "15",
+      "month_from_dropdown": "November",
+      "year_from_text": "2024",
+      "day_to_text": "15",
+      "month_to_dropdown": "November",
+      "year_to_text": "2024"
+    },
+    "Date_Range_Multi": {
+      "day_from_text": "1",
+      "month_from_dropdown": "November",
+      "year_from_text": "2024",
+      "day_to_text": "1",
+      "month_to_dropdown": "December",
+      "year_to_text": "2024"
+    },
+    "Date_From_Multi": {
+      "day_from_text": "3",
+      "month_from_dropdown": "July",
+      "year_from_text": "2025"
+    },
+    "Date_To_Single": {
+      "day_to_text": "3",
+      "month_to_dropdown": "January",
+      "year_to_text": "2000"
+    },
+    "Date_To_Multi": {
+      "day_to_text": "6",
+      "month_to_dropdown": "January",
+      "year_to_text": "2000"
+    },
+    "IRAS_ID_Title_Single": { "search_input_text": "9800033", "short_project_title_text": "Short 33" },
+    "Title_Date_Range_Single": {
+      "short_project_title_text": "Project 30",
+      "day_from_text": "11",
+      "month_from_dropdown": "January",
+      "year_from_text": "2026",
+      "day_to_text": "11",
+      "month_to_dropdown": "January",
+      "year_to_text": "2026"
+    },
+    "IRAS_ID_Title_Date_Range_Single": {
+      "search_input_text": "9800001",
+      "short_project_title_text": "Project 01",
+      "day_from_text": "31",
+      "month_from_dropdown": "December",
+      "year_from_text": "2025",
+      "day_to_text": "31",
+      "month_to_dropdown": "December",
+      "year_to_text": "2025"
+    },
+    "IRAS_ID_Title_Multi": { "search_input_text": "9800023", "short_project_title_text": "ST-STwentyThree" },
+    "Title_Date_Range_Multi": {
+      "short_project_title_text": "Project 01",
+      "day_from_text": "11",
+      "month_from_dropdown": "November",
+      "year_from_text": "2024",
+      "day_to_text": "31",
+      "month_to_dropdown": "December",
+      "year_to_text": "2025"
+    },
+    "IRAS_ID_Title_Date_Range_Multi": {
+      "search_input_text": "9800023",
+      "short_project_title_text": "ST-STwentyThree",
+      "day_from_text": "1",
+      "month_from_dropdown": "January",
+      "year_from_text": "2000",
+      "day_to_text": "6",
+      "month_to_dropdown": "January",
+      "year_to_text": "2000"
+    },
+    "Non_Existant_IRAS_ID": { "search_input_text": "98004849" },
+    "Non_Existant_Title": { "short_project_title_text": "Not a Title" },
+    "Non_Existant_Date_Range": {
+      "day_from_text": "28",
+      "month_from_dropdown": "March",
+      "year_from_text": "1990",
+      "day_to_text": "27",
+      "month_to_dropdown": "June",
+      "year_to_text": "1991"
+    },
+    "Invalid_Date_Range_To_Before_From": {
+      "day_from_text": "3",
+      "month_from_dropdown": "July",
+      "year_from_text": "2025",
+      "day_to_text": "3",
+      "month_to_dropdown": "January",
+      "year_to_text": "2000"
+    },
+    "Invalid_Date_From": {
+      "day_from_text": "",
+      "month_from_dropdown": "July",
+      "year_from_text": "2025"
+    },
+    "Invalid_Date_To": {
+      "day_to_text": "3",
+      "month_to_dropdown": "January",
+      "year_to_text": "9"
+    }
+  },
+  "Validation": {
+    "Invalid_Date_Range_To_Before_From_Error": {
+      "day_to_text": "The date you’ve selected is before the search above"
+    },
+    "Invalid_Date_From_Error": {
+      "day_from_text": "'Search from' date must be in the correct format"
+    },
+    "Invalid_Date_To_Error": {
+      "day_to_text": "'Search to' date must be in the correct format"
+    },
+    "No_Modifications_Selected_Summary_Only_Error": {
+      "error_message": "You have not selected a modification to assign. Select at least one modification before you can continue."
+    }
   }
 }

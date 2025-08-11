@@ -12,6 +12,7 @@ When(
       userListReviewBodyPage,
       searchAddUserReviewBodyPage,
       searchModificationsPage,
+      modificationsReadyToAssignPage,
       commonItemsPage,
     },
     searchType: string,
@@ -31,6 +32,9 @@ When(
     } else if (searchType.toLowerCase() == 'modifications') {
       searchQueryDataset =
         searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[searchQueryName];
+    } else if (searchType.toLowerCase() == 'tasklist') {
+      searchQueryDataset =
+        modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Search_Queries[searchQueryName];
     } else if ((await commonItemsPage.tableBodyRows.count()) < 1) {
       throw new Error(`There are no items in list to search`);
     }
@@ -41,7 +45,7 @@ When(
       searchKey = searchQueryDataset['search_input_text'];
     }
     expect(searchKey).toBeTruthy();
-    await userListReviewBodyPage.setSearchKey(searchKey);
+    await userListReviewBodyPage.setSearchKey(searchKey); //change this and getter to common method
     await commonItemsPage.search_text.fill(searchKey);
   }
 );

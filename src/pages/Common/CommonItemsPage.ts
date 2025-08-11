@@ -3,6 +3,7 @@ import * as buttonTextData from '../../resources/test_data/common/button_text_da
 import * as linkTextData from '../../resources/test_data/common/link_text_data.json';
 import * as questionSetData from '../../resources/test_data/common/question_set_data.json';
 import * as commonTestData from '../../resources/test_data/common/common_data.json';
+import * as searchFilterResultsData from '../../resources/test_data/common/search_filter_results_data.json';
 import * as fs from 'fs';
 import path from 'path';
 import ProjectFilterPage from '../IRAS/questionSet/ProjectFilterPage';
@@ -24,6 +25,12 @@ export default class CommonItemsPage {
   readonly linkTextData: typeof linkTextData;
   readonly questionSetData: typeof questionSetData;
   readonly commonTestData: typeof commonTestData;
+  readonly searchFilterResultsData: typeof searchFilterResultsData;
+  private _no_of_results_before_search: number;
+  private _no_of_results_after_search: number;
+  private _short_project_title_filter: string;
+  private _date_submitted_from_filter: string;
+  private _date_submitted_to_filter: string;
   readonly showAllSectionsAccordion: Locator;
   readonly genericButton: Locator;
   readonly govUkButton: Locator;
@@ -67,6 +74,23 @@ export default class CommonItemsPage {
   readonly pagination_results: Locator;
   readonly pagination_items: Locator;
   readonly pageLinks: Locator;
+  readonly search_results_count: Locator;
+  readonly advanced_filter_panel: Locator;
+  readonly advanced_filter_headings: Locator;
+  readonly date_from_filter_group: Locator;
+  readonly date_from_label: Locator;
+  readonly date_from_hint_label: Locator;
+  readonly date_to_filter_group: Locator;
+  readonly date_to_label: Locator;
+  readonly date_to_hint_label: Locator;
+  readonly active_filters_label: Locator;
+  readonly active_filter_list: Locator;
+  readonly active_filter_items: Locator;
+  readonly clear_all_filters_button: Locator;
+  readonly search_no_results_container: Locator;
+  readonly search_no_results_header: Locator;
+  readonly search_no_results_guidance_text: Locator;
+  readonly search_no_results_guidance_points: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -75,6 +99,12 @@ export default class CommonItemsPage {
     this.linkTextData = linkTextData;
     this.questionSetData = questionSetData;
     this.commonTestData = commonTestData;
+    this.searchFilterResultsData = searchFilterResultsData;
+    this._no_of_results_before_search = 0;
+    this._no_of_results_after_search = 0;
+    this._short_project_title_filter = '';
+    this._date_submitted_from_filter = '';
+    this._date_submitted_to_filter = '';
 
     //Locators
     this.showAllSectionsAccordion = page.locator('.govuk-accordion__show-all"');
@@ -140,6 +170,74 @@ export default class CommonItemsPage {
     this.alert_box_headings = this.alert_box.getByRole('heading');
     this.alert_box_list = this.alert_box.getByRole('list');
     this.alert_box_list_items = this.alert_box.getByRole('listitem');
+    //Search Items
+    this.search_results_count = this.page.locator('.search-filter-panel__count');
+    this.advanced_filter_panel = this.page.getByTestId('filter-panel');
+    this.advanced_filter_headings = this.advanced_filter_panel.getByRole('heading');
+    this.date_from_filter_group = this.page.getByTestId('FromDate');
+    this.date_from_label = this.date_from_filter_group.getByText(this.searchFilterResultsData.date_from_label);
+    this.date_from_hint_label = this.date_from_filter_group.getByText(
+      this.searchFilterResultsData.date_from_hint_label
+    );
+    this.date_to_filter_group = this.page.getByTestId('ToDate');
+    this.date_to_label = this.date_to_filter_group.getByText(this.searchFilterResultsData.date_to_label);
+    this.date_to_hint_label = this.date_to_filter_group.getByText(this.searchFilterResultsData.date_to_hint_label);
+    this.active_filters_label = this.page.getByRole('heading').getByText(searchFilterResultsData.active_filters_label);
+    this.active_filter_list = this.page.locator('.search-filter-summary').getByRole('list');
+    this.active_filter_items = this.active_filter_list.getByRole('listitem').locator('span');
+    this.clear_all_filters_button = this.page
+      .getByRole('link')
+      .getByText(searchFilterResultsData.clear_all_filters_button);
+    this.search_no_results_container = this.page.locator('.search-filter-error-border');
+    this.search_no_results_header = this.search_no_results_container
+      .getByRole('heading')
+      .getByText(searchFilterResultsData.search_no_results_header, { exact: true });
+    this.search_no_results_guidance_text = this.search_no_results_container
+      .getByRole('paragraph')
+      .getByText(searchFilterResultsData.search_no_results_guidance_text, { exact: true });
+    this.search_no_results_guidance_points = this.search_no_results_container.getByRole('list');
+  }
+
+  //Getters & Setters for Private Variables
+
+  async getNoOfResultsBeforeSearch(): Promise<number> {
+    return this._no_of_results_before_search;
+  }
+
+  async setNoOfResultsBeforeSearch(value: number): Promise<void> {
+    this._no_of_results_before_search = value;
+  }
+
+  async getNoOfResultsAfterSearch(): Promise<number> {
+    return this._no_of_results_after_search;
+  }
+
+  async setNoOfResultsAfterSearch(value: number): Promise<void> {
+    this._no_of_results_after_search = value;
+  }
+
+  async getShortProjectTitleFilter(): Promise<string> {
+    return this._short_project_title_filter;
+  }
+
+  async setShortProjectTitleFilter(value: string): Promise<void> {
+    this._short_project_title_filter = value;
+  }
+
+  async getDateSubmittedFromFilter(): Promise<string> {
+    return this._date_submitted_from_filter;
+  }
+
+  async setDateSubmittedFromFilter(value: string): Promise<void> {
+    this._date_submitted_from_filter = value;
+  }
+
+  async getDateSubmittedToFilter(): Promise<string> {
+    return this._date_submitted_to_filter;
+  }
+
+  async setDateSubmittedToFilter(value: string): Promise<void> {
+    this._date_submitted_to_filter = value;
   }
 
   //Page Methods
@@ -801,5 +899,9 @@ export default class CommonItemsPage {
       left: 0,
     }));
     await stitchedImage.composite(composites).toFile(outputFile);
+  }
+
+  async extractNumFromSearchResultCount(resultsString: string): Promise<number> {
+    return parseInt(resultsString.replace(searchFilterResultsData.search_results_suffix, '').trim());
   }
 }

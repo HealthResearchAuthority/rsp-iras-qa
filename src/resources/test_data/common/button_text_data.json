@@ -105,11 +105,15 @@
     "Lead_Nation": "Lead Nation"
   },
   "Modifications_Tasklist_Page": {
+    "Apply_Filters": "Apply filters",
+    "Search": "Search",
+    "Advanced_Filters": "Advanced filters",
     "Modification_Id": "Modification ID",
     "Short_Project_Title": "Short project title",
     "Modification_Type": "Modification type",
     "Date_Submitted": "Date submitted",
-    "Days_Since_Submission": "Days since submission"
+    "Days_Since_Submission": "Days since submission",
+    "Continue_To_Assign": "Continue to assign modifications"
   },
   "Participating_Organisations_Page": {
     "Save_Continue": "Save and continue",
