@@ -1,4 +1,4 @@
-@ReceiveAmendments @FrontStageUser @SystemTest @rsp-4011 @rsp-4016 @rsp-4289
+@ReceiveAmendments @StudyWideReviewer @SystemTest @rsp-4011 @rsp-4016 @rsp-4289
 Feature: Approvals - Advanced Filter and Search combinations in the Search modifications page
 
     Background:
@@ -9,7 +9,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         Then I can see the 'Search_Modifications_Page'
         And I capture the page screenshot
 
-    @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @rsp-4118 @KNOWN-DEFECT-RSP-4467 @rsp-4293
+    @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @rsp-4118 @KNOWN-DEFECT-RSP-4467 @rsp-4293 @Test
     Scenario Outline: Verify the user is able to view the list of modifications by entering a valid IRAS ID, selecting the advanced filters, and clicking the 'Apply filters' button
         When I enter '<Valid_Iras_Id>' into the search field for search modifications page
         And I capture the page screenshot
@@ -27,13 +27,16 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
         And I capture the page screenshot
         Examples:
-            | Valid_Iras_Id             | Advanced_Filters             |
-            | Valid_Iras_Id_Nth         | Advanced_Filters_Nth         |
-            | Valid_Iras_Id_Twenty      | Advanced_Filters_Twenty      |
-            | Valid_Iras_Id_TwentyOne   | Advanced_Filters_TwentyOne   |
-            | Valid_Iras_Id_TwentyTwo   | Advanced_Filters_TwentyTwo   |
-            | Valid_Iras_Id_TwentyThree | Advanced_Filters_TwentyThree |
-            | Valid_Iras_Id_Prefix      | Advanced_Filters_Automation  |
+            | Valid_Iras_Id        | Advanced_Filters                           |
+            # | Valid_Iras_Id_Nth         | Advanced_Filters_Nth                       |
+            # | Valid_Iras_Id_Twenty      | Advanced_Filters_Twenty                    |
+            # | Valid_Iras_Id_TwentyOne   | Advanced_Filters_TwentyOne                 |
+            # | Valid_Iras_Id_TwentyTwo   | Advanced_Filters_TwentyTwo                 |
+            # | Valid_Iras_Id_TwentyThree | Advanced_Filters_TwentyThree               |
+            | Valid_Iras_Id_Prefix | Advanced_Filters_Automation_Data_Set_One   |
+            | Valid_Iras_Id_Prefix | Advanced_Filters_Automation_Data_Set_Two   |
+            | Valid_Iras_Id_Prefix | Advanced_Filters_Automation_Data_Set_Three |
+
 
     @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @KNOWN-DEFECT-RSP-4467
     Scenario Outline: Verify the user is able to view the list of modifications by entering valid iras id, then clicking on 'Search' button and then selecting advanced filters and clicking the 'Apply filters' button

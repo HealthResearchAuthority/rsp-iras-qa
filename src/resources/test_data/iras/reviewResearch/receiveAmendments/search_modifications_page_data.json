@@ -17,7 +17,7 @@
     "result_count_heading": " results",
     "chief_investigator_name_label": "Chief Investigator name",
     "chief_investigator_hint_text": "Enter the name of the Chief Investigator",
-    "date_modification_submitted_label": "Date modification submitted",
+    "date_modification_submitted_label": "Date submitted",
     "date_modification_submitted_from_date_hint_text": "Enter the date you want to search from",
     "date_modification_submitted_from_date_help_text": "For example, 28 February 2023",
     "date_modification_submitted_to_date_hint_text": "Enter the date you want to search to",
@@ -462,11 +462,35 @@
       "date_modification_submitted_to_month_dropdown": "Choose month",
       "date_modification_submitted_to_year_text": "2013"
     },
-    "Advanced_Filters_Automation": {
+    "Advanced_Filters_Automation_Data_Set_One": {
       "chief_investigator_name_text": "ci_test",
       "short_project_title_text": "QA_Automation",
       "lead_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
-      "modification_type_checkbox": ["Minor modification", "Modification of an important detail"]
+      "modification_type_checkbox": ["Minor modification", "Modification of an important detail"],
+      "date_modification_submitted_from_day_text": "1",
+      "date_modification_submitted_from_month_dropdown": "January",
+      "date_modification_submitted_from_year_text": "1990",
+      "date_modification_submitted_to_day_text": "2",
+      "date_modification_submitted_to_month_dropdown": "December",
+      "date_modification_submitted_to_year_text": "2030"
+    },
+    "Advanced_Filters_Automation_Data_Set_Two": {
+      "chief_investigator_name_text": "ci_test",
+      "short_project_title_text": "QA_Automation",
+      "lead_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "modification_type_checkbox": ["Minor modification", "Modification of an important detail"],
+      "date_modification_submitted_from_day_text": "1",
+      "date_modification_submitted_from_month_dropdown": "January",
+      "date_modification_submitted_from_year_text": "1990"
+    },
+    "Advanced_Filters_Automation_Data_Set_Three": {
+      "chief_investigator_name_text": "ci_test",
+      "short_project_title_text": "QA_Automation",
+      "lead_nation_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "modification_type_checkbox": ["Minor modification", "Modification of an important detail"],
+      "date_modification_submitted_to_day_text": "2",
+      "date_modification_submitted_to_month_dropdown": "December",
+      "date_modification_submitted_to_year_text": "2030"
     }
   },
   "Sponsor_Organisation": {

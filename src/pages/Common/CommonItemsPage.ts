@@ -926,13 +926,19 @@ export default class CommonItemsPage {
     searchValue: RegExp,
     replaceValue: string
   ): Promise<string> {
-    let activeFilterLabel: string;
-    const label = filterLabels[key.replace(searchValue, replaceValue)];
-    const dateType = key.includes('_from_') ? 'from' : 'to';
-    const dateKey = key.replace('_day_text', '');
-    const dateValue = await this.getDateString(filterDataset, dateKey);
-    if (dateValue) {
-      activeFilterLabel = `${label} - ${dateType} ${dateValue}`;
+    let activeFilterLabel = '';
+    const baseKey = key.replace(/(_from_|_to_).*$/, '');
+    const label = filterLabels[baseKey + replaceValue];
+    const fromKey = `${baseKey}_from_day_text`;
+    const toKey = `${baseKey}_to_day_text`;
+    const fromDateValue = await this.getDateString(filterDataset, fromKey.replace('_day_text', ''));
+    const toDateValue = await this.getDateString(filterDataset, toKey.replace('_day_text', ''));
+    if (fromDateValue && toDateValue) {
+      activeFilterLabel = `${label} - ${fromDateValue} to ${toDateValue}`;
+    } else if (fromDateValue) {
+      activeFilterLabel = `${label} - from ${fromDateValue}`;
+    } else if (toDateValue) {
+      activeFilterLabel = `${label} - to ${toDateValue}`;
     }
     return activeFilterLabel;
   }
@@ -987,10 +993,11 @@ export default class CommonItemsPage {
     );
   }
 
-  async getDateString(dataset: JSON, prefix: string) {
+  async getDateString(dataset: JSON, prefix: string): Promise<string | null> {
     const day = +dataset[`${prefix}_day_text`];
-    const month = dataset[`${prefix}_month_dropdown`].slice(0, 3);
+    const monthRaw = dataset[`${prefix}_month_dropdown`];
     const year = dataset[`${prefix}_year_text`];
+    const month = typeof monthRaw === 'string' ? monthRaw.slice(0, 3) : null;
     return day && month && year ? `${day} ${month} ${year}` : null;
   }
 
