@@ -20,7 +20,18 @@ Then(
 
 Then(
   'I can see the modification progress saved successful message on project overview page',
-  async ({ projectOverviewPage }) => {
-    expect(projectOverviewPage.modification_saved_success_message_text).toBeVisible();
+  async ({ projectOverviewPage, commonItemsPage }) => {
+    await expect(projectOverviewPage.modification_saved_success_message_header_text).toBeVisible();
+    await expect(projectOverviewPage.modification_saved_success_message_text).toBeVisible();
+    expect(
+      await projectOverviewPage.information_alert_banner.evaluate((e: any) =>
+        getComputedStyle(e).getPropertyValue('border-color')
+      )
+    ).toBe(commonItemsPage.commonTestData.rgb_green_color);
+    expect(
+      await projectOverviewPage.information_alert_banner.evaluate((e: any) =>
+        getComputedStyle(e).getPropertyValue('background-color')
+      )
+    ).toBe(commonItemsPage.commonTestData.rgb_green_color);
   }
 );

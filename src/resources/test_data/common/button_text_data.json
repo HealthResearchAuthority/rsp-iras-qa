@@ -21,7 +21,7 @@
     "Proceed_Submit": "Proceed to Submit"
   },
   "My_Research_Projects_Page": {
-    "Create_Project_Record": "Create project record"
+    "Create_Project_Record": "Add project record"
   },
   "Create_Project_Record_Page": {
     "Start": "Start"
@@ -117,6 +117,10 @@
     "Search": "Search"
   },
   "Select_Area_Of_Change_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later"
+  },
+  "Modifications_Page": {
     "Save_Continue": "Save and continue",
     "Save_For_Later": "Save for later"
   }

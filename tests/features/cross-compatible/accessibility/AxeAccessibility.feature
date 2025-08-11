@@ -891,3 +891,58 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityPlannedEndDateModifications @FrontStageUser
+  Scenario: Modifications Planned End Date Page
+    Given I have navigated to the my research projects page
+    And I can see the my research projects page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_For_Later' button on the 'Project_Details_Title_Page'
+    Then I fill the key project roles page with 'Valid_Data_All_Fields'
+    Then I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    Then I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I can see the project overview page
+    When I click the 'Modifications_Tile' link on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I select 'Project_Design' from area of change dropdown and 'Planned_End_Date' from specific change dropdown
+    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+    Then I can see the 'Planned_End_Date' page for modifications
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityWhichOrganisationChangeAffectModifications @FrontStageUser
+  Scenario: Modifications Which organisation change affect page
+    Given I have navigated to the my research projects page
+    And I can see the my research projects page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_For_Later' button on the 'Project_Details_Title_Page'
+    Then I fill the key project roles page with 'Valid_Data_All_Fields'
+    Then I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    Then I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I can see the project overview page
+    When I click the 'Modifications_Tile' link on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I select 'Project_Design' from area of change dropdown and 'Planned_End_Date' from specific change dropdown
+    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+    Then I can see the 'Planned_End_Date' page for modifications
+    Then I fill the planned project end date modifications page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Modifications_Page'
+    Then I can see the 'Which_Organisation_Type_Affect' page for modifications
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
