@@ -839,21 +839,16 @@ Then(
     filterDatasetName: string,
     pageKey: string
   ) => {
+    const isDisplayAction = actionToPerform === 'I can see the selected filters are displayed under';
+    const isRemoveAction = actionToPerform === 'I remove the selected filters from';
+    const replaceValue = '_label';
     let filterDataset: JSON;
     let filterLabels: object;
     if (pageKey === 'Search_Modifications_Page') {
       filterDataset = searchModificationsPage.searchModificationsPageTestData.Advanced_Filters[filterDatasetName];
       filterLabels = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page;
     }
-    const replaceValue = '_label';
-    const handleActiveFilterValidation = async (
-      key: string,
-      labelFetcher: (key: string) => Promise<string | string[]>,
-      actionToPerform: string,
-      commonItemsPage: any
-    ) => {
-      const isDisplayAction = actionToPerform === 'I can see the selected filters are displayed under';
-      const isRemoveAction = actionToPerform === 'I remove the selected filters from';
+    const validateFilter = async (key: string, labelFetcher: (key: string) => Promise<string | string[]>) => {
       const labels = await labelFetcher(key);
       const labelArray = Array.isArray(labels) ? labels : [labels];
       for (const label of labelArray) {
@@ -869,33 +864,18 @@ Then(
     for (const key in filterDataset) {
       if (Object.hasOwn(filterDataset, key)) {
         if (key.endsWith('_checkbox')) {
-          await handleActiveFilterValidation(
-            key,
-            async (k) => await commonItemsPage.getCheckboxFilterLabels(k, filterDataset, filterLabels, replaceValue),
-            actionToPerform,
-            commonItemsPage
+          await validateFilter(key, async (k) =>
+            commonItemsPage.getCheckboxFilterLabels(k, filterDataset, filterLabels, replaceValue)
           );
         } else if (key.startsWith('date_')) {
-          const fromDateValue = await commonItemsPage.getFromDateValue(filterDataset, key);
-          const toDateValue = await commonItemsPage.getToDateValue(filterDataset, key);
-          const shouldValidateFrom = fromDateValue && !toDateValue && key.endsWith('_from_day_text');
-          const shouldValidateTo = !fromDateValue && toDateValue && key.endsWith('_to_day_text');
-          const shouldValidateFromTo = fromDateValue && toDateValue && key.endsWith('_from_day_text');
-          if (shouldValidateFromTo || shouldValidateFrom || shouldValidateTo) {
-            await handleActiveFilterValidation(
-              key,
-              async (k) => await commonItemsPage.getDateFilterLabel(k, filterDataset, filterLabels, replaceValue),
-              actionToPerform,
-              commonItemsPage
+          if (await commonItemsPage.shouldValidateDateFilter(key, filterDataset)) {
+            await validateFilter(key, async (k) =>
+              commonItemsPage.getDateFilterLabel(k, filterDataset, filterLabels, replaceValue)
             );
           }
         } else {
-          await handleActiveFilterValidation(
-            key,
-            async (k) =>
-              await commonItemsPage.getTextboxRadioButtonFilterLabel(k, filterDataset, filterLabels, replaceValue),
-            actionToPerform,
-            commonItemsPage
+          await validateFilter(key, async (k) =>
+            commonItemsPage.getTextboxRadioButtonFilterLabel(k, filterDataset, filterLabels, replaceValue)
           );
         }
       }

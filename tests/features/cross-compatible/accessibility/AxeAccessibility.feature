@@ -1,8 +1,8 @@
 @axeAccessibility @jsEnabled
 Feature: Run Axe Accessibilty Test Tool Against App Pages
 
-  @axeAccessibilityHome @SysAdminUser @FrontStageUser
-  Scenario: Home Page
+  @axeAccessibilityHome @SysAdminUser
+  Scenario: My account home Page of system administrator
     Given I have navigated to the 'Home_Page'
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan

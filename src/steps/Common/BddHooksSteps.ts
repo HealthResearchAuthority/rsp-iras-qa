@@ -62,7 +62,7 @@ BeforeScenario(
       const jsCommonItemsPage = new CommonItemsPage(jsPage);
       const jsHomePage = new HomePage(jsPage);
       const jsLoginPage = new LoginPage(jsPage);
-      const users = ['System_Admin', 'Frontstage_User', 'Studywide_Reviewer'];
+      const users = ['System_Admin', 'Frontstage_User', 'Studywide_Reviewer', 'Team_Manager', 'WorkFlow_Coordinator'];
 
       for (const user of users) {
         await jsContext.clearCookies();

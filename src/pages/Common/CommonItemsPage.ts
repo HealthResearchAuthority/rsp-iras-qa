@@ -954,6 +954,16 @@ export default class CommonItemsPage {
     return activeFilterLabel;
   }
 
+  async shouldValidateDateFilter(key: string, filterDataset: JSON): Promise<boolean> {
+    const fromDateValue = await this.getFromDateValue(filterDataset, key);
+    const toDateValue = await this.getToDateValue(filterDataset, key);
+    return (
+      (fromDateValue && !toDateValue && key.endsWith('_from_day_text')) ||
+      (!fromDateValue && toDateValue && key.endsWith('_to_day_text')) ||
+      (fromDateValue && toDateValue && key.endsWith('_from_day_text'))
+    );
+  }
+
   async getCheckboxFilterLabels(
     key: string,
     filterDataset: any,
