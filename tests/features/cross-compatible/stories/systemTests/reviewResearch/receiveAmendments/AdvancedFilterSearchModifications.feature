@@ -9,7 +9,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         Then I can see the 'Search_Modifications_Page'
         And I capture the page screenshot
 
-    @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @rsp-4118 @KNOWN-DEFECT-RSP-4467 @rsp-4293 @Test
+    @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @rsp-4118 @KNOWN-DEFECT-RSP-4467 @rsp-4293
     Scenario Outline: Verify the user is able to view the list of modifications by entering a valid IRAS ID, selecting the advanced filters, and clicking the 'Apply filters' button
         When I enter '<Valid_Iras_Id>' into the search field for search modifications page
         And I capture the page screenshot
@@ -27,15 +27,15 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
         And I capture the page screenshot
         Examples:
-            | Valid_Iras_Id        | Advanced_Filters                           |
-            # | Valid_Iras_Id_Nth         | Advanced_Filters_Nth                       |
-            # | Valid_Iras_Id_Twenty      | Advanced_Filters_Twenty                    |
-            # | Valid_Iras_Id_TwentyOne   | Advanced_Filters_TwentyOne                 |
-            # | Valid_Iras_Id_TwentyTwo   | Advanced_Filters_TwentyTwo                 |
-            # | Valid_Iras_Id_TwentyThree | Advanced_Filters_TwentyThree               |
-            | Valid_Iras_Id_Prefix | Advanced_Filters_Automation_Data_Set_One   |
-            | Valid_Iras_Id_Prefix | Advanced_Filters_Automation_Data_Set_Two   |
-            | Valid_Iras_Id_Prefix | Advanced_Filters_Automation_Data_Set_Three |
+            | Valid_Iras_Id             | Advanced_Filters                           |
+            | Valid_Iras_Id_Nth         | Advanced_Filters_Nth                       |
+            | Valid_Iras_Id_Twenty      | Advanced_Filters_Twenty                    |
+            | Valid_Iras_Id_TwentyOne   | Advanced_Filters_TwentyOne                 |
+            | Valid_Iras_Id_TwentyTwo   | Advanced_Filters_TwentyTwo                 |
+            | Valid_Iras_Id_TwentyThree | Advanced_Filters_TwentyThree               |
+            | Valid_Iras_Id_Prefix      | Advanced_Filters_Automation_Data_Set_One   |
+            | Valid_Iras_Id_Prefix      | Advanced_Filters_Automation_Data_Set_Two   |
+            | Valid_Iras_Id_Prefix      | Advanced_Filters_Automation_Data_Set_Three |
 
 
     @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @KNOWN-DEFECT-RSP-4467
@@ -335,8 +335,12 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         And I capture the page screenshot
 
         Examples:
-            | Advanced_Filters     | Advanced_Filters_Remove  |
-            | Advanced_Filters_Nth | Advanced_Filters_Nth_All |
+            | Advanced_Filters                           | Advanced_Filters_Remove                    |
+            | Advanced_Filters_Nth                       | Advanced_Filters_Nth_All                   |
+            | Advanced_Filters_Automation_Data_Set_One   | Advanced_Filters_Automation_Data_Set_One   |
+            | Advanced_Filters_Automation_Data_Set_Two   | Advanced_Filters_Automation_Data_Set_Two   |
+            | Advanced_Filters_Automation_Data_Set_Three | Advanced_Filters_Automation_Data_Set_Three |
+
 
     @RemoveAllActiveFiltersOneByOne @KNOWN-DEFECT-RSP-4467
     Scenario Outline: Verify the user can remove all the selected filters one by one and the search results update accordingly based on the previously entered IRAS ID

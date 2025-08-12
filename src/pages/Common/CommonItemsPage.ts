@@ -919,6 +919,20 @@ export default class CommonItemsPage {
     return `${label} - ${filterDataset[key]}`;
   }
 
+  async getFromDateValue(filterDataset: JSON, key: string): Promise<string | null> {
+    const baseKey = key.replace(/(_from_|_to_).*$/, '');
+    const fromKey = `${baseKey}_from_day_text`;
+    const fromDateValue = await this.getDateString(filterDataset, fromKey.replace('_day_text', ''));
+    return fromDateValue;
+  }
+
+  async getToDateValue(filterDataset: JSON, key: string): Promise<string | null> {
+    const baseKey = key.replace(/(_from_|_to_).*$/, '');
+    const toKey = `${baseKey}_to_day_text`;
+    const toDateValue = await this.getDateString(filterDataset, toKey.replace('_day_text', ''));
+    return toDateValue;
+  }
+
   async getActiveFilterLabelDateField(
     filterLabels: any,
     filterDataset: JSON,
@@ -927,12 +941,9 @@ export default class CommonItemsPage {
     replaceValue: string
   ): Promise<string> {
     let activeFilterLabel = '';
-    const baseKey = key.replace(/(_from_|_to_).*$/, '');
-    const label = filterLabels[baseKey + replaceValue];
-    const fromKey = `${baseKey}_from_day_text`;
-    const toKey = `${baseKey}_to_day_text`;
-    const fromDateValue = await this.getDateString(filterDataset, fromKey.replace('_day_text', ''));
-    const toDateValue = await this.getDateString(filterDataset, toKey.replace('_day_text', ''));
+    const fromDateValue = await this.getFromDateValue(filterDataset, key);
+    const toDateValue = await this.getToDateValue(filterDataset, key);
+    const label = filterLabels[key.replace(searchValue, replaceValue)];
     if (fromDateValue && toDateValue) {
       activeFilterLabel = `${label} - ${fromDateValue} to ${toDateValue}`;
     } else if (fromDateValue) {

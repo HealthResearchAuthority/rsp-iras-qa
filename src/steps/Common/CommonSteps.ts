@@ -871,13 +871,35 @@ Then(
             commonItemsPage
           );
         } else if (key.startsWith('date_')) {
-          if (key.endsWith('_from_day_text') || key.endsWith('_to_day_text')) {
-            await handleActiveFilterValidation(
-              key,
-              async (k) => await commonItemsPage.getDateFilterLabel(k, filterDataset, filterLabels, replaceValue),
-              actionToPerform,
-              commonItemsPage
-            );
+          const fromDateValue = await commonItemsPage.getFromDateValue(filterDataset, key);
+          const toDateValue = await commonItemsPage.getToDateValue(filterDataset, key);
+          if (fromDateValue && toDateValue) {
+            if (key.endsWith('_from_day_text')) {
+              await handleActiveFilterValidation(
+                key,
+                async (k) => await commonItemsPage.getDateFilterLabel(k, filterDataset, filterLabels, replaceValue),
+                actionToPerform,
+                commonItemsPage
+              );
+            }
+          } else if (fromDateValue) {
+            if (key.endsWith('_from_day_text')) {
+              await handleActiveFilterValidation(
+                key,
+                async (k) => await commonItemsPage.getDateFilterLabel(k, filterDataset, filterLabels, replaceValue),
+                actionToPerform,
+                commonItemsPage
+              );
+            }
+          } else if (toDateValue) {
+            if (key.endsWith('_to_day_text')) {
+              await handleActiveFilterValidation(
+                key,
+                async (k) => await commonItemsPage.getDateFilterLabel(k, filterDataset, filterLabels, replaceValue),
+                actionToPerform,
+                commonItemsPage
+              );
+            }
           }
         } else {
           await handleActiveFilterValidation(
