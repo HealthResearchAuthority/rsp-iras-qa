@@ -855,14 +855,19 @@ Then('I can see active filters displayed for {string}', async ({ commonItemsPage
   }
   if (searchInput.toLowerCase().includes('date')) {
     //Note that range will have separate if statement after RSP-4353 is delvered
-    if (searchInput.toLowerCase().includes('from') || searchInput.toLowerCase().includes('range')) {
+    if (searchInput.toLowerCase().includes('from')) {
       assertionMade = true;
       const expectedActiveFilterText = `${commonItemsPage.searchFilterResultsData.active_filter_date_submitted_label} ${commonItemsPage.searchFilterResultsData.label_value_separator} ${commonItemsPage.searchFilterResultsData.from_separator} ${await commonItemsPage.getDateSubmittedFromFilter()}`;
       await expect(commonItemsPage.active_filter_items.getByText(expectedActiveFilterText)).toBeVisible();
     }
-    if (searchInput.toLowerCase().includes('to') || searchInput.toLowerCase().includes('range')) {
+    if (searchInput.toLowerCase().includes('to')) {
       assertionMade = true;
       const expectedActiveFilterText = `${commonItemsPage.searchFilterResultsData.active_filter_date_submitted_label} ${commonItemsPage.searchFilterResultsData.label_value_separator} ${commonItemsPage.searchFilterResultsData.to_separator} ${await commonItemsPage.getDateSubmittedToFilter()}`;
+      await expect(commonItemsPage.active_filter_items.getByText(expectedActiveFilterText)).toBeVisible();
+    }
+    if (searchInput.toLowerCase().includes('range')) {
+      assertionMade = true;
+      const expectedActiveFilterText = `${commonItemsPage.searchFilterResultsData.active_filter_date_submitted_label} ${commonItemsPage.searchFilterResultsData.label_value_separator} ${await commonItemsPage.getDateSubmittedFromFilter()} ${commonItemsPage.searchFilterResultsData.to_separator} ${await commonItemsPage.getDateSubmittedToFilter()}`;
       await expect(commonItemsPage.active_filter_items.getByText(expectedActiveFilterText)).toBeVisible();
     }
   }

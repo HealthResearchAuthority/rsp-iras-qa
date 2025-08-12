@@ -63,7 +63,7 @@ Given(
     const modificationIds = await searchModificationsPage.getActualListValues(commonItemsPage.tableBodyRows, 1); //this is in common now, merge with latest when work is in
     const visibleIrasIds = await modificationsReadyToAssignPage.getVisibleIrasIds(modificationIds);
     const shortTitles = await searchModificationsPage.getActualListValues(commonItemsPage.tableBodyRows, 2); //this is in common now, merge with latest when work is in
-    const datesSubmitted = await searchModificationsPage.getActualListValues(commonItemsPage.tableBodyRows, 4); //this is in common now, merge with latest when work is in
+    const datesSubmitted = await searchModificationsPage.getActualListValues(commonItemsPage.tableBodyRows, 3); //this is in common now, merge with latest when work is in
     if (searchInput.toLowerCase().includes('single')) {
       await expect(commonItemsPage.search_results_count).toHaveText(
         commonItemsPage.searchFilterResultsData.search_single_result_count

@@ -7,7 +7,7 @@
     "advanced_filter_label": "Advanced filter",
     "modification_checkbox": "",
     "tasklist_days_suffix": "days",
-    "filter_headings": ["Date modification submitted", "Days since submission", "Short project title"]
+    "filter_headings": ["Date submitted", "Days since submission", "Short project title"]
   },
 
   "Label_Texts": {

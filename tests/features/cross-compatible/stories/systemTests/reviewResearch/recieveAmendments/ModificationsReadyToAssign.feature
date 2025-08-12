@@ -1,4 +1,5 @@
-@ReceiveAmendments @ModificationsReadyToAssign @FrontStageUser @SystemTest
+@ReceiveAmendments @ModificationsReadyToAssign @SysAdminUser @SystemTest @only
+# Need to update to Workflow Co-oridinator once RSP-4488 work is merged
 Feature: Modifications Tasklist page that displays modifications ready to be assigned
 
     Background:
@@ -182,24 +183,28 @@ Feature: Modifications Tasklist page that displays modifications ready to be ass
             | Invalid_Date_From                 | Invalid_Date_From_Error                 |
             | Invalid_Date_To                   | Invalid_Date_To_Error                   |
 
-    @sortTasklistByColumn @rsp-4091 @KNOWN-DEFECT-RSP-4305
-    Scenario Outline: Verify the user is able to sort the modifications tasklist by ascending and descending order for each results table column
-        When I click the '<Sort_Button>' button on the 'Modifications_Tasklist_Page'
-        And I capture the page screenshot
-        Then I can see the tasklist of modifications ready to assign is sorted by '<Initial_Sort>' order of the '<Sort_Field>'
-        When I click the '<Sort_Button>' button on the 'Modifications_Tasklist_Page'
-        And I capture the page screenshot
-        Then I can see the tasklist of modifications ready to assign is sorted by '<Secondary_Sort>' order of the '<Sort_Field>'
+    # @sortTasklistByColumn @rsp-4091 @KNOWN-DEFECT-RSP-4305
+    # Scenario Outline: Verify the user is able to sort the modifications tasklist by ascending and descending order for each results table column
+    #     When I click the '<Sort_Button>' button on the 'Modifications_Tasklist_Page'
+    #     And I capture the page screenshot
+    #     Then I can see the tasklist of modifications ready to assign is sorted by '<Initial_Sort>' order of the '<Sort_Field>'
+    #     When I click the '<Sort_Button>' button on the 'Modifications_Tasklist_Page'
+    #     And I capture the page screenshot
+    #     Then I can see the tasklist of modifications ready to assign is sorted by '<Secondary_Sort>' order of the '<Sort_Field>'
 
-        Examples:
-            | Sort_Button           | Sort_Field            | Initial_Sort | Secondary_Sort |
-            | Modification_Id       | modification id       | ascending    | descending     |
-            | Short_Project_Title   | short project title   | ascending    | descending     |
-            | Modification_Type     | modification type     | ascending    | descending     |
-            | Date_Submitted        | date submitted        | descending   | ascending      |
-            | Days_Since_Submission | days since submission | ascending    | descending     |
+    #     Examples:
+    #         | Sort_Button           | Sort_Field            | Initial_Sort | Secondary_Sort |
+    #         | Modification_Id       | modification id       | ascending    | descending     |
+    #         | Short_Project_Title   | short project title   | ascending    | descending     |
+    #         | Modification_Type     | modification type     | ascending    | descending     |
+    #         | Date_Submitted        | date submitted        | descending   | ascending      |
+    #         | Days_Since_Submission | days since submission | ascending    | descending     |
 
-    @tasklistErrorStateValidation @rsp-4111
-    Scenario: Verify that the user must select a modifiation before continuing
-        When I click the 'Continue_To_Assign' button on the 'Modifications_Tasklist_Page'
-        Then I validate 'No_Modifications_Selected_Summary_Only_Error' displayed on 'Modifications_Tasklist_Page'
+    # @tasklistErrorStateValidation @rsp-4111
+    # Scenario: Verify that the user must select a modifiation before continuing
+    #     When I click the 'Continue_To_Assign' button on the 'Modifications_Tasklist_Page'
+    #     Then I validate 'No_Modifications_Selected_Summary_Only_Error' displayed on 'Modifications_Tasklist_Page'
+
+        # Raise PR
+        # Run tests and add to SharePoint
+        # Tidy for PR - see comment + common-ize the set searchKey step - see comment

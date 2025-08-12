@@ -17,7 +17,7 @@
   "date_to_label": "Enter the date you want to search to",
   "date_to_hint_label": "For example, 12 October 2024",
   "active_filter_short_project_title_label": "Short project title",
-  "active_filter_date_submitted_label": "Date modification submitted",
+  "active_filter_date_submitted_label": "Date submitted",
   "active_filter_days_since_label": "Days since submission",
   "to_separator": "to",
   "from_separator": "from",
