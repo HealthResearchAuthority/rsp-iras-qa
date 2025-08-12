@@ -947,10 +947,10 @@ Then(
           errorMessageFieldAndSummaryDatasetName.endsWith('_To_date_Before_From_Date_Error') ||
           errorMessageFieldAndSummaryDatasetName.endsWith('_No_Month_Selected_To_Date_Error')
         ) {
-          const actualMessage = await searchModificationsPage.date_modification_submitted_to_date_error.textContent();
+          const actualMessage = await searchModificationsPage.date_submitted_to_date_error.textContent();
           expect(actualMessage).toEqual(expectedMessage);
         } else if (errorMessageFieldAndSummaryDatasetName.endsWith('_No_Month_Selected_From_Date_Error')) {
-          const actualMessage = await searchModificationsPage.date_modification_submitted_from_date_error.textContent();
+          const actualMessage = await searchModificationsPage.date_submitted_from_date_error.textContent();
           expect(actualMessage).toEqual(expectedMessage);
         } else if (errorMessageFieldAndSummaryDatasetName === 'Sponsor_Organisation_Min_Char_Error') {
           const actualMessage =

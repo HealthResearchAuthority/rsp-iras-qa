@@ -18,7 +18,7 @@ export default class HomePage {
   readonly approvalsLink: Locator;
   readonly cagMembersLink: Locator;
   readonly catLink: Locator;
-  readonly memeberManagementLink: Locator;
+  readonly memberManagementLink: Locator;
   readonly myResearchLink: Locator;
   readonly recMembersLink: Locator;
   readonly sponsorLink: Locator;
@@ -28,7 +28,7 @@ export default class HomePage {
   readonly approvals_hint_label: Locator;
   readonly cag_members_hint_label: Locator;
   readonly cat_hint_label: Locator;
-  readonly memeber_management_hint_label: Locator;
+  readonly member_management_hint_label: Locator;
   readonly my_research_hint_label: Locator;
   readonly rec_members_hint_label: Locator;
   readonly sponsor_hint_label: Locator;
@@ -62,7 +62,7 @@ export default class HomePage {
     this.approvalsLink = this.page.getByRole('link', { name: 'Approvals', exact: true });
     this.cagMembersLink = this.page.getByRole('link', { name: 'CAG members', exact: true });
     this.catLink = this.page.getByRole('link', { name: 'CAT', exact: true });
-    this.memeberManagementLink = this.page.getByRole('link', { name: 'Member management', exact: true });
+    this.memberManagementLink = this.page.getByRole('link', { name: 'Member management', exact: true });
     this.myResearchLink = this.page.getByRole('link', { name: 'My research', exact: true });
     this.recMembersLink = this.page.getByRole('link', { name: 'REC members', exact: true });
     this.sponsorLink = this.page.getByRole('link', { name: 'Sponsor', exact: true });
@@ -76,7 +76,7 @@ export default class HomePage {
     this.approvals_hint_label = this.getFollowingParagraphElement(this.approvalsLink);
     this.cag_members_hint_label = this.getFollowingParagraphElement(this.cagMembersLink);
     this.cat_hint_label = this.getFollowingParagraphElement(this.catLink);
-    this.memeber_management_hint_label = this.getFollowingParagraphElement(this.memeberManagementLink);
+    this.member_management_hint_label = this.getFollowingParagraphElement(this.memberManagementLink);
     this.my_research_hint_label = this.getFollowingParagraphElement(this.myResearchLink);
     this.rec_members_hint_label = this.getFollowingParagraphElement(this.recMembersLink);
     this.sponsor_hint_label = this.getFollowingParagraphElement(this.sponsorLink);

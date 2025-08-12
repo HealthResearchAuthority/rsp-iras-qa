@@ -76,14 +76,14 @@ Then(
               .Advanced_Filters_Hint_Labels[key + '_hint_label']
           );
         } else if (key.startsWith('date_') && key.endsWith('_from_day_text')) {
-          expect(await searchModificationsPage.date_modification_submitted_from_date_help_text.textContent()).toBe(
+          expect(await searchModificationsPage.date_submitted_from_date_help_text.textContent()).toBe(
             searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page
-              .date_modification_submitted_from_date_help_text
+              .date_submitted_from_date_help_text
           );
         } else if (key.startsWith('date_') && key.endsWith('_to_day_text')) {
-          expect(await searchModificationsPage.date_modification_submitted_to_date_help_text.textContent()).toBe(
+          expect(await searchModificationsPage.date_submitted_to_date_help_text.textContent()).toBe(
             searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page
-              .date_modification_submitted_to_date_help_text
+              .date_submitted_to_date_help_text
           );
         }
       }
@@ -112,7 +112,7 @@ Then(
   }
 );
 
-// date_modification_submitted, participating nation and sponsor_organisation can't validate from UI,need to validate with Database
+// date_submitted, participating nation and sponsor_organisation can't validate from UI,need to validate with Database
 Then(
   'the system displays modification records based on the search {string} and filter criteria {string} or shows no results found message if no matching records exist in the search modifications page',
   async ({ commonItemsPage, searchModificationsPage }, irasIdDatasetName, filterDatasetName) => {
