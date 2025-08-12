@@ -1,7 +1,11 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as linkTextData from '../../../../../resources/test_data/common/link_text_data.json';
 import * as manageUsersPageTestData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageUsers/manage_users_page_data.json';
-import { confirmStringNotNull, returnDataFromJSON } from '../../../../../utils/UtilFunctions';
+import {
+  confirmStringNotNull,
+  convertTwelveHrToTwentyFourHr,
+  returnDataFromJSON,
+} from '../../../../../utils/UtilFunctions';
 import CreateUserProfilePage from './CreateUserProfilePage';
 
 //Declare Page Objects
@@ -102,15 +106,6 @@ export default class ManageUsersPage {
         exact: true,
       });
     this.listCell = this.page.getByRole('cell');
-  }
-
-  //Getters & Setters for Private Variables
-  async getUniqueEmail(): Promise<string> {
-    return this._unique_email;
-  }
-
-  async setUniqueEmail(value: string): Promise<void> {
-    this._unique_email = value;
   }
 
   async assertOnManageUsersPage() {
@@ -231,6 +226,76 @@ export default class ManageUsersPage {
     }
   }
 
+  async getUserEmail(inputType: string, createUserProfilePage: CreateUserProfilePage): Promise<string> {
+    let emailAddress: string;
+
+    if (inputType === 'newly created user') {
+      emailAddress = await createUserProfilePage.getUniqueEmail();
+    } else {
+      emailAddress = inputType;
+    }
+
+    return emailAddress;
+  }
+
+  async sortLastLoggedInListValues(lastLoggedInVals: string[], sortDirection: string): Promise<string[]> {
+    const listAsDates: Date[] = [];
+    const sortedListAsStrings: string[] = [];
+    const datesTimesMap = lastLoggedInVals.map((vals) => {
+      if (!vals) {
+        const [day, month, year, time] = '';
+        return [year, month, day, time];
+      } else {
+        const [dates, times] = vals.split('at');
+        const [day, month, year] = dates.split(' ');
+        const time = convertTwelveHrToTwentyFourHr(times);
+        return [year, month, day, time.join(':')];
+      }
+    });
+
+    for (const entry of datesTimesMap.entries()) {
+      const dateEntryString = `${entry[1][0]} ${entry[1][1]} ${entry[1][2]} ${entry[1][3]}`;
+      const dateFormattedEntry = new Date(dateEntryString);
+      listAsDates.push(dateFormattedEntry);
+    }
+
+    if (sortDirection.toLowerCase() == 'descending') {
+      listAsDates.sort((a, b) => b.getTime() - a.getTime());
+    } else {
+      listAsDates.sort((a, b) => a.getTime() - b.getTime());
+    }
+
+    for (const date of listAsDates) {
+      if (date.toString() == 'Invalid Date') {
+        sortedListAsStrings.push('');
+      } else {
+        sortedListAsStrings.push(
+          date
+            .toLocaleString('en-GB', {
+              day: '2-digit',
+              month: 'short',
+              year: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit',
+              hourCycle: 'h12',
+            })
+            .replace(',', ' at')
+            .replace(/ (?!.* )/, '')
+        );
+      }
+    }
+    return sortedListAsStrings;
+  }
+
+  //Getters & Setters for Private Variables
+  async getUniqueEmail(): Promise<string> {
+    return this._unique_email;
+  }
+
+  async setUniqueEmail(value: string): Promise<void> {
+    this._unique_email = value;
+  }
+
   setLastLoggedInDateFull(value: string) {
     this.lastLoggedInDateFull = value;
   }
@@ -253,17 +318,5 @@ export default class ManageUsersPage {
 
   getLastLoggedInHours(): number {
     return this.lastLoggedInHours;
-  }
-
-  async getUserEmail(inputType: string, createUserProfilePage: CreateUserProfilePage): Promise<string> {
-    let emailAddress: string;
-
-    if (inputType === 'newly created user') {
-      emailAddress = await createUserProfilePage.getUniqueEmail();
-    } else {
-      emailAddress = inputType;
-    }
-
-    return emailAddress;
   }
 }

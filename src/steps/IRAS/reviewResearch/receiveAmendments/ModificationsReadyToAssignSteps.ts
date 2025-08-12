@@ -9,11 +9,7 @@ Then('I can see the modifications ready to assign page', async ({ modificationsR
 
 Then(
   'I can see the tasklist of modifications ready to assign is sorted by {string} order of the {string}',
-  async (
-    { modificationsReadyToAssignPage, searchModificationsPage, commonItemsPage },
-    sortDirection: string,
-    sortField: string
-  ) => {
+  async ({ modificationsReadyToAssignPage, commonItemsPage }, sortDirection: string, sortField: string) => {
     let sortedList: string[];
     let columnIndex: number;
     switch (sortField.toLowerCase()) {
@@ -35,17 +31,17 @@ Then(
       default:
         throw new Error(`${sortField} is not a valid option`);
     }
-    const actualList = await searchModificationsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
+    const actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
     if (sortField.toLowerCase() == 'modification id') {
-      sortedList = await searchModificationsPage.sortModificationIdListValues(actualList, sortDirection);
+      sortedList = await commonItemsPage.sortModificationIdListValues(actualList, sortDirection);
     } else if (sortField.toLowerCase() == 'date submitted') {
       sortedList = await modificationsReadyToAssignPage.sortDateSubmittedListValues(actualList, sortDirection);
     } else if (sortField.toLowerCase() == 'days since submission') {
       sortedList = await modificationsReadyToAssignPage.sortDaysSinceSubmittedListValues(actualList, sortDirection);
     } else if (sortDirection.toLowerCase() == 'ascending') {
-      sortedList = [...actualList].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
+      sortedList = [...actualList].toSorted((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
     } else {
-      sortedList = [...actualList].sort((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
+      sortedList = [...actualList].toSorted((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
     }
     expect(actualList).toEqual(sortedList);
   }

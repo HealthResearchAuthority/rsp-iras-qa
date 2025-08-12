@@ -584,3 +584,18 @@ export function resolveEnvExpression(template: string): string {
   }
   return value;
 }
+
+export function convertTwelveHrToTwentyFourHr(timeValue: string) {
+  const timesArray = timeValue.trim().split(':');
+  const isAM = timesArray[1].includes('am');
+  if (isAM) {
+    timesArray[0] = timesArray[0].padStart(2, '0');
+    timesArray[1] = timesArray[1].replace('am', '');
+    if (timesArray[0] === '12') timesArray[0] = '00';
+  } else {
+    timesArray[0] = (+timesArray[0] + 12).toString();
+    timesArray[1] = timesArray[1].replace('pm', '');
+    if (timesArray[0] === '24') timesArray[0] = '12';
+  }
+  return [timesArray.join(':')];
+}

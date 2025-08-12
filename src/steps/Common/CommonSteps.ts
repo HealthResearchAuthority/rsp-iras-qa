@@ -675,6 +675,7 @@ Given(
       homePage,
       createApplicationPage,
       systemAdministrationPage,
+      manageUsersPage,
       manageReviewBodiesPage,
       userProfilePage,
       reviewBodyProfilePage,
@@ -701,6 +702,10 @@ Given(
       case 'System_Administration_Page':
         await systemAdministrationPage.goto();
         await systemAdministrationPage.assertOnSystemAdministrationPage();
+        break;
+      case 'Manage_Users_Page':
+        await manageUsersPage.goto();
+        await manageUsersPage.assertOnManageUsersPage();
         break;
       case 'Manage_Review_Bodies_Page':
         await manageReviewBodiesPage.goto();
