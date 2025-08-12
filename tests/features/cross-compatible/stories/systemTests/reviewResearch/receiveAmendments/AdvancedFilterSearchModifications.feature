@@ -273,21 +273,21 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
             | Advanced_Filters_No_results     |
             | Advanced_Filters_No_Results_One |
 
-    @DateModificationSubmittedError @rsp-4167
+    @DateSubmittedError @rsp-4167
     Scenario Outline: Verify the user can see clear validation error message This date you have selected is before the search above when an end date is earlier than the start date
         And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
-        And I select advanced filters in the search modifications page using '<Date_Modification_Submitted_Invalid_Data>'
+        And I select advanced filters in the search modifications page using '<Date_Submitted_Invalid_Data>'
         And I capture the page screenshot
         And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
         Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Search_Modifications_Page' in advanced filters
         And I capture the page screenshot
         Examples:
-            | Date_Modification_Submitted_Invalid_Data                | Field_And_Summary_Error_Message                               |
-            | Date_Modification_Submitted_To_date_Before_From_Date    | Date_Modification_Submitted_To_date_Before_From_Date_Error    |
-            | Date_Modification_Submitted_No_Month_Selected_To_Date   | Date_Modification_Submitted_No_Month_Selected_To_Date_Error   |
-            | Date_Modification_Submitted_No_Month_Selected_From_Date | Date_Modification_Submitted_No_Month_Selected_From_Date_Error |
+            | Date_Submitted_Invalid_Data                | Field_And_Summary_Error_Message                  |
+            | Date_Submitted_To_date_Before_From_Date    | Date_Submitted_To_date_Before_From_Date_Error    |
+            | Date_Submitted_No_Month_Selected_To_Date   | Date_Submitted_No_Month_Selected_To_Date_Error   |
+            | Date_Submitted_No_Month_Selected_From_Date | Date_Submitted_No_Month_Selected_From_Date_Error |
 
     @RemoveActiveFiltersOneByOne @KNOWN-DEFECT-RSP-4467
     Scenario Outline: Verify the user can remove the selected filters one by one and the search results update accordingly

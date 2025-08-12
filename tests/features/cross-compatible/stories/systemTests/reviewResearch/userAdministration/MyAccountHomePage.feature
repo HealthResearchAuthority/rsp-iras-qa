@@ -66,8 +66,3 @@ Feature: My Account Home page
       | Studywide_Reviewer   | System_Administration_Access_Denied_Page |
       | Team_Manager         | System_Administration_Access_Denied_Page |
       | Workflow_Coordinator | System_Administration_Access_Denied_Page |
-
-# My Research Page
-# Approvals Page >>Search Modification, Modification Tasklist
-# Member Management Page
-# # Navigation via clicking on the links in My Account Home Page (roles with access to the workspaces)
