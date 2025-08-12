@@ -422,6 +422,7 @@ Then(
       reviewYourAnswersPage,
       selectAreaOfChangePage,
       participatingOrganisationsPage,
+      organisationChangeAffectPage,
       modificationsReadyToAssignPage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
@@ -471,6 +472,10 @@ Then(
       errorMessageFieldDataset =
         participatingOrganisationsPage.participatingOrganisationsPageTestData[errorMessageFieldAndSummaryDatasetName];
       page = participatingOrganisationsPage;
+    } else if (pageKey == 'Which_Organisation_Type_Affect_Page') {
+      errorMessageFieldDataset =
+        organisationChangeAffectPage.organisationChangeAffectPageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = organisationChangeAffectPage;
     } else if (pageKey == 'Modifications_Tasklist_Page') {
       errorMessageFieldDataset =
         modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Validation[
