@@ -888,14 +888,7 @@ Then(
               actionToPerform,
               commonItemsPage
             );
-          } else if (shouldValidateFrom) {
-            await handleActiveFilterValidation(
-              key,
-              async (k) => await commonItemsPage.getDateFilterLabel(k, filterDataset, filterLabels, replaceValue),
-              actionToPerform,
-              commonItemsPage
-            );
-          } else if (shouldValidateTo) {
+          } else if (shouldValidateFrom || shouldValidateTo) {
             await handleActiveFilterValidation(
               key,
               async (k) => await commonItemsPage.getDateFilterLabel(k, filterDataset, filterLabels, replaceValue),
