@@ -881,14 +881,7 @@ Then(
           const shouldValidateFrom = fromDateValue && !toDateValue && key.endsWith('_from_day_text');
           const shouldValidateTo = !fromDateValue && toDateValue && key.endsWith('_to_day_text');
           const shouldValidateFromTo = fromDateValue && toDateValue && key.endsWith('_from_day_text');
-          if (shouldValidateFromTo) {
-            await handleActiveFilterValidation(
-              key,
-              async (k) => await commonItemsPage.getDateFilterLabel(k, filterDataset, filterLabels, replaceValue),
-              actionToPerform,
-              commonItemsPage
-            );
-          } else if (shouldValidateFrom || shouldValidateTo) {
+          if (shouldValidateFromTo || shouldValidateFrom || shouldValidateTo) {
             await handleActiveFilterValidation(
               key,
               async (k) => await commonItemsPage.getDateFilterLabel(k, filterDataset, filterLabels, replaceValue),
