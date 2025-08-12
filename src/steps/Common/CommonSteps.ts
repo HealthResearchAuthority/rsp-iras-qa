@@ -414,6 +414,7 @@ Then(
       reviewYourAnswersPage,
       selectAreaOfChangePage,
       participatingOrganisationsPage,
+      organisationChangeAffectPage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
@@ -462,6 +463,10 @@ Then(
       errorMessageFieldDataset =
         participatingOrganisationsPage.participatingOrganisationsPageTestData[errorMessageFieldAndSummaryDatasetName];
       page = participatingOrganisationsPage;
+    } else if (pageKey == 'Which_Organisation_Type_Affect_Page') {
+      errorMessageFieldDataset =
+        organisationChangeAffectPage.organisationChangeAffectPageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = organisationChangeAffectPage;
     }
     let allSummaryErrorExpectedValues: any;
     let summaryErrorActualValues: any;
