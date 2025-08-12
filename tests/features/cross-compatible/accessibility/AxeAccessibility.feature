@@ -850,7 +850,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityModficationsTasklistPageWithFilters @SysAdminUser @only
+  @axeAccessibilityModficationsTasklistPageWithFilters @FrontStageUser
   Scenario: Modifications tasklist page with active filters
     Given I have navigated to the 'Modifications_Tasklist_Page'
     And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
