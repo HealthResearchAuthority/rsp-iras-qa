@@ -833,7 +833,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilitySearchModificationsPage @FrontStageUser
+  @axeAccessibilitySearchModificationsPage @StudyWideReviewer
   Scenario: Search modifications page
     Given I have navigated to the 'Search_Modifications_Page'
     And I fill the search input for searching 'modifications' with 'Valid_Iras_Id_Prefix' as the search query
@@ -843,7 +843,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityAdvanceFilterSearchModifications @FrontStageUser
+  @axeAccessibilityAdvanceFilterSearchModifications @StudyWideReviewer
   Scenario: Search - Approvals - Plan and manage healthcare research
     Given I have navigated to the 'Search_Modifications_Page'
     Then I can see the 'Search_Modifications_Page'
@@ -856,8 +856,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-
-  @axeAccessibilityModficationsTasklistPage @FrontStageUser
+  @axeAccessibilityModficationsTasklistPage @StudyWideReviewer
   Scenario: Modifications tasklist page
     Given I have navigated to the 'Modifications_Tasklist_Page'
     When I Scan the page with the Axe Accessibilty Tool
