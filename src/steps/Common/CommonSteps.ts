@@ -878,33 +878,30 @@ Then(
         } else if (key.startsWith('date_')) {
           const fromDateValue = await commonItemsPage.getFromDateValue(filterDataset, key);
           const toDateValue = await commonItemsPage.getToDateValue(filterDataset, key);
-          if (fromDateValue && toDateValue) {
-            if (key.endsWith('_from_day_text')) {
-              await handleActiveFilterValidation(
-                key,
-                async (k) => await commonItemsPage.getDateFilterLabel(k, filterDataset, filterLabels, replaceValue),
-                actionToPerform,
-                commonItemsPage
-              );
-            }
-          } else if (fromDateValue) {
-            if (key.endsWith('_from_day_text')) {
-              await handleActiveFilterValidation(
-                key,
-                async (k) => await commonItemsPage.getDateFilterLabel(k, filterDataset, filterLabels, replaceValue),
-                actionToPerform,
-                commonItemsPage
-              );
-            }
-          } else if (toDateValue) {
-            if (key.endsWith('_to_day_text')) {
-              await handleActiveFilterValidation(
-                key,
-                async (k) => await commonItemsPage.getDateFilterLabel(k, filterDataset, filterLabels, replaceValue),
-                actionToPerform,
-                commonItemsPage
-              );
-            }
+          const shouldValidateFrom = fromDateValue && !toDateValue && key.endsWith('_from_day_text');
+          const shouldValidateTo = !fromDateValue && toDateValue && key.endsWith('_to_day_text');
+          const shouldValidateFromTo = fromDateValue && toDateValue && key.endsWith('_from_day_text');
+          if (shouldValidateFromTo) {
+            await handleActiveFilterValidation(
+              key,
+              async (k) => await commonItemsPage.getDateFilterLabel(k, filterDataset, filterLabels, replaceValue),
+              actionToPerform,
+              commonItemsPage
+            );
+          } else if (shouldValidateFrom) {
+            await handleActiveFilterValidation(
+              key,
+              async (k) => await commonItemsPage.getDateFilterLabel(k, filterDataset, filterLabels, replaceValue),
+              actionToPerform,
+              commonItemsPage
+            );
+          } else if (shouldValidateTo) {
+            await handleActiveFilterValidation(
+              key,
+              async (k) => await commonItemsPage.getDateFilterLabel(k, filterDataset, filterLabels, replaceValue),
+              actionToPerform,
+              commonItemsPage
+            );
           }
         } else {
           await handleActiveFilterValidation(
