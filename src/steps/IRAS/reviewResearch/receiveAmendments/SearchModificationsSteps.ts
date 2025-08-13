@@ -106,7 +106,7 @@ When(
 Then(
   'the result count displayed at the top accurately reflects the number of records shown in the search modifications page',
   async ({ commonItemsPage, searchModificationsPage }) => {
-    const expectedResultCountLabel = await searchModificationsPage.getExpectedResultsCountLabel();
+    const expectedResultCountLabel = await searchModificationsPage.getExpectedResultsCountLabel(commonItemsPage);
     const actualResultCountLabel = await searchModificationsPage.getActualResultsCountLabel(commonItemsPage);
     expect(expectedResultCountLabel).toEqual(actualResultCountLabel);
   }
@@ -201,18 +201,20 @@ Then(
         await validateFilterMatch(modificationsList, 'leadNationValues', allowedLeadNations, commonItemsPage);
       }
     } else {
-      const pageTestData = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page;
       const validateTextMatch = async (locator: Locator, expectedText: string) => {
         await expect(locator).toHaveText(expectedText);
         expect(confirmStringNotNull(await locator.textContent())).toBe(expectedText);
       };
-      const expectedResultCount = pageTestData.result_count_heading;
+      const expectedResultCount = commonItemsPage.commonTestData.result_count_heading;
       const actualResultCount = confirmStringNotNull(await commonItemsPage.result_count.textContent());
       expect('0' + expectedResultCount).toBe(actualResultCount);
-      await validateTextMatch(commonItemsPage.no_results_heading, pageTestData.no_results_heading);
-      await validateTextMatch(commonItemsPage.no_results_guidance_text, pageTestData.no_results_guidance_text);
+      await validateTextMatch(commonItemsPage.no_results_heading, commonItemsPage.commonTestData.no_results_heading);
+      await validateTextMatch(
+        commonItemsPage.no_results_guidance_text,
+        commonItemsPage.commonTestData.no_results_guidance_text
+      );
       const bulletPointsActual = (await commonItemsPage.getNoResultsBulletPoints()).flat().join(', ');
-      const bulletPointsExpected = pageTestData.no_results_bullet_points.flat().join(', ');
+      const bulletPointsExpected = commonItemsPage.commonTestData.no_results_bullet_points.flat().join(', ');
       expect(bulletPointsActual).toEqual(bulletPointsExpected);
     }
   }
@@ -356,7 +358,8 @@ Then(
       searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.title
     );
     expect(await commonItemsPage.tableRows.count()).toBe(0);
-    const expectedResultCountLabel = await searchModificationsPage.getExpectedResultsCountLabelNoResults();
+    const expectedResultCountLabel =
+      await searchModificationsPage.getExpectedResultsCountLabelNoResults(commonItemsPage);
     const actualResultCountLabel = await searchModificationsPage.getActualResultsCountLabel(commonItemsPage);
     expect(expectedResultCountLabel).toEqual(actualResultCountLabel);
     expect(await commonItemsPage.no_results_heading.count()).toBe(0);

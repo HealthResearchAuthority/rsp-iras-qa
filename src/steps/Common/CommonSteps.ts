@@ -894,7 +894,7 @@ Then(
     let page: any;
     if (pageKey === 'Search_Modifications_Page') {
       errorMessageFieldDataset =
-        searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[
+        searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.Error_Validation[
           errorMessageFieldAndSummaryDatasetName
         ];
       page = searchModificationsPage;
@@ -907,12 +907,12 @@ Then(
       if (Object.hasOwn(errorMessageFieldDataset, key)) {
         const expectedMessage = errorMessageFieldDataset[key];
         if (
-          errorMessageFieldAndSummaryDatasetName.endsWith('_To_date_Before_From_Date_Error') ||
-          errorMessageFieldAndSummaryDatasetName.endsWith('_No_Month_Selected_To_Date_Error')
+          errorMessageFieldAndSummaryDatasetName === 'Invalid_Date_Range_To_Before_From_Error' ||
+          errorMessageFieldAndSummaryDatasetName === 'Invalid_Date_To_Error'
         ) {
           const actualMessage = await searchModificationsPage.date_submitted_to_date_error.textContent();
           expect(actualMessage).toEqual(expectedMessage);
-        } else if (errorMessageFieldAndSummaryDatasetName.endsWith('_No_Month_Selected_From_Date_Error')) {
+        } else if (errorMessageFieldAndSummaryDatasetName === 'Invalid_Date_From_Error') {
           const actualMessage = await searchModificationsPage.date_submitted_from_date_error.textContent();
           expect(actualMessage).toEqual(expectedMessage);
         } else if (errorMessageFieldAndSummaryDatasetName === 'Sponsor_Organisation_Min_Char_Error') {

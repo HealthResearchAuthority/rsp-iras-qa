@@ -27,15 +27,15 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
         And I capture the page screenshot
         Examples:
-            | Valid_Iras_Id             | Advanced_Filters                           |
-            | Valid_Iras_Id_Nth         | Advanced_Filters_Nth                       |
-            | Valid_Iras_Id_Twenty      | Advanced_Filters_Twenty                    |
-            | Valid_Iras_Id_TwentyOne   | Advanced_Filters_TwentyOne                 |
-            | Valid_Iras_Id_TwentyTwo   | Advanced_Filters_TwentyTwo                 |
-            | Valid_Iras_Id_TwentyThree | Advanced_Filters_TwentyThree               |
-            | Valid_Iras_Id_Prefix      | Advanced_Filters_Automation_Data_Set_One   |
-            | Valid_Iras_Id_Prefix      | Advanced_Filters_Automation_Data_Set_Two   |
-            | Valid_Iras_Id_Prefix      | Advanced_Filters_Automation_Data_Set_Three |
+            | Valid_Iras_Id             | Advanced_Filters                                 |
+            | Valid_Iras_Id_Nth         | Advanced_Filters_Nth                             |
+            | Valid_Iras_Id_Twenty      | Advanced_Filters_Twenty                          |
+            | Valid_Iras_Id_TwentyOne   | Advanced_Filters_TwentyOne                       |
+            | Valid_Iras_Id_TwentyTwo   | Advanced_Filters_TwentyTwo                       |
+            | Valid_Iras_Id_TwentyThree | Advanced_Filters_TwentyThree                     |
+            | Valid_Iras_Id_Prefix      | Advanced_Filters_Automation_No_SpOrg             |
+            | Valid_Iras_Id_Prefix      | Advanced_Filters_Automation_No_SpOrg_No_ToDate   |
+            | Valid_Iras_Id_Prefix      | Advanced_Filters_Automation_No_SpOrg_No_FromDate |
 
 
     @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @KNOWN-DEFECT-RSP-4467
@@ -284,10 +284,20 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Search_Modifications_Page' in advanced filters
         And I capture the page screenshot
         Examples:
-            | Date_Submitted_Invalid_Data                | Field_And_Summary_Error_Message                  |
-            | Date_Submitted_To_date_Before_From_Date    | Date_Submitted_To_date_Before_From_Date_Error    |
-            | Date_Submitted_No_Month_Selected_To_Date   | Date_Submitted_No_Month_Selected_To_Date_Error   |
-            | Date_Submitted_No_Month_Selected_From_Date | Date_Submitted_No_Month_Selected_From_Date_Error |
+            | Date_Submitted_Invalid_Data                  | Field_And_Summary_Error_Message         |
+            | Date_Submitted_To_Date_Before_From_Date      | Invalid_Date_Range_To_Before_From_Error |
+            | Date_Submitted_No_Month_From_Date            | Invalid_Date_From_Error                 |
+            | Date_Submitted_No_Day_From_Date              | Invalid_Date_From_Error                 |
+            | Date_Submitted_No_Year_From_Date             | Invalid_Date_From_Error                 |
+            | Date_Submitted_No_Month_To_Date              | Invalid_Date_To_Error                   |
+            | Date_Submitted_No_Day_To_Date                | Invalid_Date_To_Error                   |
+            | Date_Submitted_No_Year_To_Date               | Invalid_Date_To_Error                   |
+            | Date_Submitted_Invalid_Year_Number_From_Date | Invalid_Date_From_Error                 |
+            | Date_Submitted_Invalid_Year_Number_To_Date   | Invalid_Date_To_Error                   |
+            | Date_Submitted_Invalid_Day_Number_To_Date    | Invalid_Date_To_Error                   |
+            | Date_Submitted_Invalid_Day_Letters_To_Date   | Invalid_Date_To_Error                   |
+            | Date_Submitted_Invalid_Year_Letters_To_Date  | Invalid_Date_To_Error                   |
+
 
     @RemoveActiveFiltersOneByOne @KNOWN-DEFECT-RSP-4467
     Scenario Outline: Verify the user can remove the selected filters one by one and the search results update accordingly
@@ -314,6 +324,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
             | Advanced_Filters_Nth | Advanced_Filters_Nth_Chief_Investigator_Name_Filter | Advanced_Filters_Nth_After_Remove_Chief_Investigator_Name_Filter |
             | Advanced_Filters_Nth | Advanced_Filters_Nth_Short_Project_Title_Filter     | Advanced_Filters_Nth_After_Remove_Short_Project_Title_Filter     |
             | Advanced_Filters_Nth | Advanced_Filters_Nth_Sponsor_Organisation_Filter    | Advanced_Filters_Nth_After_Remove_Sponsor_Organisation_Filter    |
+            | Advanced_Filters_Nth | Advanced_Filters_Nth_Date_Submitted_From_To_Filter  | Advanced_Filters_Nth_After_Remove_Date_Submitted_From_To_Filter  |
 
     @RemoveAllActiveFiltersOneByOne @KNOWN-DEFECT-RSP-4467
     Scenario Outline: Verify the user can remove all the selected filters one by one and the search results update accordingly
@@ -329,17 +340,17 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         And I capture the page screenshot
         And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
         And I capture the page screenshot
-        And 'I remove the selected filters from' active filters '<Advanced_Filters_Remove>' in the 'Search_Modifications_Page'
+        And 'I remove the selected filters from' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
         And I capture the page screenshot
         Then I can see an empty state that informs me no modifications exist for the search criteria
         And I capture the page screenshot
 
         Examples:
-            | Advanced_Filters                           | Advanced_Filters_Remove                    |
-            | Advanced_Filters_Nth                       | Advanced_Filters_Nth_All                   |
-            | Advanced_Filters_Automation_Data_Set_One   | Advanced_Filters_Automation_Data_Set_One   |
-            | Advanced_Filters_Automation_Data_Set_Two   | Advanced_Filters_Automation_Data_Set_Two   |
-            | Advanced_Filters_Automation_Data_Set_Three | Advanced_Filters_Automation_Data_Set_Three |
+            | Advanced_Filters                                 |
+            | Advanced_Filters_Nth                             |
+            | Advanced_Filters_Automation_No_SpOrg             |
+            | Advanced_Filters_Automation_No_SpOrg_No_ToDate   |
+            | Advanced_Filters_Automation_No_SpOrg_No_FromDate |
 
 
     @RemoveAllActiveFiltersOneByOne @KNOWN-DEFECT-RSP-4467
@@ -358,15 +369,15 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         And I capture the page screenshot
         And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
         And I capture the page screenshot
-        And 'I remove the selected filters from' active filters '<Advanced_Filters_Remove>' in the 'Search_Modifications_Page'
+        And 'I remove the selected filters from' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
         And I capture the page screenshot
         And all selected filters displayed under active Filters have been successfully removed
         And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria '' or shows no results found message if no matching records exist in the search modifications page
         And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
         And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
         Examples:
-            | Valid_Iras_Id     | Advanced_Filters     | Advanced_Filters_Remove  |
-            | Valid_Iras_Id_Nth | Advanced_Filters_Nth | Advanced_Filters_Nth_All |
+            | Valid_Iras_Id     | Advanced_Filters     |
+            | Valid_Iras_Id_Nth | Advanced_Filters_Nth |
 
     @RemoveActiveFiltersAllTogether @KNOWN-DEFECT-RSP-4467 @rsp-4293
     Scenario Outline: Verify the user can remove the selected filters alltogether by clicking 'Clear all filters' link and the search results update accordingly

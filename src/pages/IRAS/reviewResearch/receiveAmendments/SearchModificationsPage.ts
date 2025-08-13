@@ -510,16 +510,15 @@ export default class SearchModificationsPage {
     return confirmStringNotNull(await commonItemsPage.result_count.textContent());
   }
 
-  async getExpectedResultsCountLabel() {
-    const testData = this.searchModificationsPageTestData;
+  async getExpectedResultsCountLabel(commonItemsPage: CommonItemsPage) {
+    const testData = commonItemsPage.commonTestData;
     const modificationsList = await this.getModificationIdListAfterSearch();
-    const expectedResultCountLabel = testData.Search_Modifications_Page.result_count_heading;
+    const expectedResultCountLabel = testData.result_count_heading;
     return modificationsList.length + expectedResultCountLabel;
   }
 
-  async getExpectedResultsCountLabelNoResults() {
-    const expectedResultCountLabel =
-      this.searchModificationsPageTestData.Search_Modifications_Page.result_count_heading;
+  async getExpectedResultsCountLabelNoResults(commonItemsPage: CommonItemsPage) {
+    const expectedResultCountLabel = commonItemsPage.commonTestData.result_count_heading;
     return '0' + expectedResultCountLabel;
   }
 }
