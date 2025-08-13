@@ -18,7 +18,7 @@ export default class LoginPage {
     this.loginPageTestData = loginPageTestData;
 
     //Locators
-    this.idgBanner = page.locator('div[class="container-fluid"] h1');
+    this.idgBanner = page.locator('div[class="container-fluid"] h1').first();
     this.usernameInput = page.locator('input[id="usernameUserInput"]');
     this.passwordInput = page.locator('input[id="password"]');
     this.btnNext = page.locator('input[id="NEXT"]');
@@ -45,9 +45,15 @@ export default class LoginPage {
     } else if (dataset === 'Frontstage_User') {
       secretKey = process.env.FRONTSTAGE_USER_SECRET_KEY;
       authTag = process.env.FRONTSTAGE_USER_AUTH_TAG;
-    } else if (dataset === 'Backstage_User') {
-      secretKey = process.env.BACKSTAGE_USER_SECRET_KEY;
-      authTag = process.env.BACKSTAGE_USER_AUTH_TAG;
+    } else if (dataset === 'Studywide_Reviewer') {
+      secretKey = process.env.STUDYWIDE_REVIEWER_SECRET_KEY;
+      authTag = process.env.STUDYWIDE_REVIEWER_AUTH_TAG;
+    } else if (dataset === 'Team_Manager') {
+      secretKey = process.env.TEAM_MANAGER_SECRET_KEY;
+      authTag = process.env.TEAM_MANAGER_AUTH_TAG;
+    } else if (dataset === 'Workflow_Coordinator') {
+      secretKey = process.env.WORKFLOW_COORDINATOR_SECRET_KEY;
+      authTag = process.env.WORKFLOW_COORDINATOR_AUTH_TAG;
     }
     const password = getDecryptedValue(
       resolveEnvExpression(this.loginPageTestData[dataset].password),

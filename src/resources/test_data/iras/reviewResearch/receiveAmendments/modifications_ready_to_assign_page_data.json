@@ -4,7 +4,7 @@
     "page_heading": "Modifications ready to assign",
     "page_description": "This page shows all the modifications that are ready for you to assign, where the lead nation is England.",
     "modification_button_label": "Continue to assign modifications",
-    "advanced_filter_label": "Advanced filter",
+    "advanced_filter_label": "Advanced filters",
     "modification_checkbox": "",
     "tasklist_days_suffix": "days",
     "filter_headings": ["Date submitted", "Days since submission", "Short project title"]

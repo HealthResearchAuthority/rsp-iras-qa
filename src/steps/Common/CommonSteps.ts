@@ -672,17 +672,17 @@ Then(
       guidanceLocator = manageUsersPage.no_results_guidance_text;
       expectedHeading = manageUsersPage.manageUsersPageTestData.Manage_Users_Page.no_results_heading;
       expectedGuidance = manageUsersPage.manageUsersPageTestData.Manage_Users_Page.no_results_guidance_text;
+      await expect(headingLocator).toHaveText(expectedHeading);
+      await expect(guidanceLocator).toHaveText(expectedGuidance);
     } else if (entityType === 'review body') {
       headingLocator = manageReviewBodiesPage.no_results_heading;
       guidanceLocator = manageReviewBodiesPage.no_results_guidance_text;
       expectedHeading = manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.no_results_heading;
       expectedGuidance =
         manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.no_results_guidance_text;
-    } else {
-      throw new Error(`Unsupported entity type: ${entityType}`);
+      await expect(headingLocator).toHaveText(expectedHeading);
+      await expect(guidanceLocator).toHaveText(expectedGuidance);
     }
-    await expect(headingLocator).toHaveText(expectedHeading);
-    await expect(guidanceLocator).toHaveText(expectedGuidance);
   }
 );
 
@@ -777,7 +777,7 @@ Given(
         await systemAdministrationPage.goto();
         await systemAdministrationPage.assertOnSystemAdministrationPage();
         break;
-      case 'Access_Denied_Page':
+      case 'System_Administration_Access_Denied_Page':
         await systemAdministrationPage.page.context().addCookies(authState.cookies);
         await systemAdministrationPage.goto();
         await accessDeniedPage.assertOnAccessDeniedPage();
@@ -815,6 +815,148 @@ Then(
     expect.soft(actualList).toEqual(sortedList);
   }
 );
+
+Then(
+  'I sequentially navigate through each page by {string} from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges',
+  async ({ commonItemsPage }, navigateMethod: string) => {
+    const totalPages = await commonItemsPage.getTotalPages();
+    await commonItemsPage.firstPage.click();
+    for (let currentPage = 1; currentPage <= totalPages; currentPage++) {
+      await commonItemsPage.validatePagination(currentPage, totalPages, navigateMethod);
+    }
+  }
+);
+
+Then(
+  'I sequentially navigate through each page by {string} from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges',
+  async ({ commonItemsPage }, navigateMethod: string) => {
+    const totalPages = await commonItemsPage.getTotalPages();
+    await commonItemsPage.clickOnPages(totalPages, 'clicking on page number');
+    for (let currentPage = totalPages; currentPage >= 1; currentPage--) {
+      await commonItemsPage.validatePagination(currentPage, totalPages, navigateMethod);
+    }
+  }
+);
+
+Then('I can see the {string} ui labels', async ({ commonItemsPage }, datasetName: string) => {
+  const dataset = commonItemsPage.commonTestData[datasetName];
+  for (const key in dataset) {
+    if (Object.hasOwn(dataset, key)) {
+      await expect(commonItemsPage[key].getByText(dataset[key])).toBeVisible();
+    }
+  }
+});
+
+Then(
+  'all selected filters displayed under active Filters have been successfully removed',
+  async ({ commonItemsPage }) => {
+    await expect(commonItemsPage.advanced_filter_chevron).toBeVisible();
+    expect(await commonItemsPage.active_filters_list.count()).toBe(0);
+    expect(await commonItemsPage.clear_all_filters_link.count()).toBe(0);
+  }
+);
+
+Then(
+  '{string} active filters {string} in the {string}',
+  async (
+    { searchModificationsPage, commonItemsPage },
+    actionToPerform: string,
+    filterDatasetName: string,
+    pageKey: string
+  ) => {
+    const isDisplayAction = actionToPerform === 'I can see the selected filters are displayed under';
+    const isRemoveAction = actionToPerform === 'I remove the selected filters from';
+    const replaceValue = '_label';
+    let filterDataset: JSON;
+    let filterLabels: object;
+    if (pageKey === 'Search_Modifications_Page') {
+      filterDataset = searchModificationsPage.searchModificationsPageTestData.Advanced_Filters[filterDatasetName];
+      filterLabels = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page;
+    }
+    const validateFilter = async (key: string, labelFetcher: (key: string) => Promise<string | string[]>) => {
+      const labels = await labelFetcher(key);
+      const labelArray = Array.isArray(labels) ? labels : [labels];
+      for (const label of labelArray) {
+        if (isDisplayAction) {
+          await expect.soft(commonItemsPage.active_filters_list.getByText(label)).toBeVisible();
+        } else if (isRemoveAction) {
+          const removed = await commonItemsPage.removeSelectedFilterValues(label);
+          expect.soft(removed).toBe(label);
+          await expect.soft(commonItemsPage.active_filters_list.getByText(label)).not.toBeVisible();
+        }
+      }
+    };
+    for (const key in filterDataset) {
+      if (Object.hasOwn(filterDataset, key)) {
+        if (key.endsWith('_checkbox')) {
+          await validateFilter(key, async (k) =>
+            commonItemsPage.getCheckboxFilterLabels(k, filterDataset, filterLabels, replaceValue)
+          );
+        } else if (key.startsWith('date_')) {
+          if (await commonItemsPage.shouldValidateDateFilter(key, filterDataset)) {
+            await validateFilter(key, async (k) =>
+              commonItemsPage.getDateFilterLabel(k, filterDataset, filterLabels, replaceValue)
+            );
+          }
+        } else {
+          await validateFilter(key, async (k) =>
+            commonItemsPage.getTextboxRadioButtonFilterLabel(k, filterDataset, filterLabels, replaceValue)
+          );
+        }
+      }
+    }
+  }
+);
+
+Then(
+  'I validate {string} displayed on {string} in advanced filters',
+  async (
+    { commonItemsPage, searchModificationsPage },
+    errorMessageFieldAndSummaryDatasetName: string,
+    pageKey: string
+  ) => {
+    let errorMessageFieldDataset: JSON;
+    let page: any;
+    if (pageKey === 'Search_Modifications_Page') {
+      errorMessageFieldDataset =
+        searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.Error_Validation[
+          errorMessageFieldAndSummaryDatasetName
+        ];
+      page = searchModificationsPage;
+    }
+    await expect(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
+    const allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset);
+    const summaryErrorActualValues = await commonItemsPage.getSummaryErrorMessages();
+    expect(summaryErrorActualValues).toEqual(allSummaryErrorExpectedValues);
+    for (const key in errorMessageFieldDataset) {
+      if (Object.hasOwn(errorMessageFieldDataset, key)) {
+        const expectedMessage = errorMessageFieldDataset[key];
+        if (
+          errorMessageFieldAndSummaryDatasetName === 'Invalid_Date_Range_To_Before_From_Error' ||
+          errorMessageFieldAndSummaryDatasetName === 'Invalid_Date_To_Error'
+        ) {
+          const actualMessage = await searchModificationsPage.date_submitted_to_date_error.textContent();
+          expect(actualMessage).toEqual(expectedMessage);
+        } else if (errorMessageFieldAndSummaryDatasetName === 'Invalid_Date_From_Error') {
+          const actualMessage = await searchModificationsPage.date_submitted_from_date_error.textContent();
+          expect(actualMessage).toEqual(expectedMessage);
+        } else if (errorMessageFieldAndSummaryDatasetName === 'Sponsor_Organisation_Min_Char_Error') {
+          const actualMessage =
+            await searchModificationsPage.sponsor_organisation_jsdisabled_min_error_message.textContent();
+          expect(actualMessage).toEqual(expectedMessage);
+        } else {
+          throw new Error(`Unhandled error message dataset name: ${errorMessageFieldAndSummaryDatasetName}`);
+        }
+        const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
+        await expect(element).toBeInViewport();
+      }
+    }
+  }
+);
+
+Then('the advanced filters section should collapse automatically', async ({ commonItemsPage }) => {
+  await expect(commonItemsPage.apply_filters_button).not.toBeVisible();
+});
 
 Then('the no search results found message is displayed', async ({ commonItemsPage }) => {
   expect(commonItemsPage.tableRows).not.toBeVisible();
