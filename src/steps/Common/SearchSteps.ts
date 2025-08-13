@@ -9,7 +9,6 @@ When(
     {
       manageReviewBodiesPage,
       manageUsersPage,
-      userListReviewBodyPage,
       searchAddUserReviewBodyPage,
       searchModificationsPage,
       modificationsReadyToAssignPage,
@@ -45,7 +44,7 @@ When(
       searchKey = searchQueryDataset['search_input_text'];
     }
     expect(searchKey).toBeTruthy();
-    await userListReviewBodyPage.setSearchKey(searchKey); //change this and getter to common method
+    await commonItemsPage.setSearchKey(searchKey);
     await commonItemsPage.search_text.fill(searchKey);
   }
 );
@@ -53,7 +52,7 @@ When(
 Given(
   'the system displays user records matching the search criteria',
   async ({ userListReviewBodyPage, commonItemsPage }) => {
-    const searchKey = await userListReviewBodyPage.getSearchKey();
+    const searchKey = await commonItemsPage.getSearchKey();
     const searchTerms = await commonItemsPage.splitSearchTerm(searchKey);
     const userList = await commonItemsPage.getAllUsersFromTheTable();
     const userListAfterSearch: string[] = confirmArrayNotNull(userList.get('searchResultValues'));

@@ -637,7 +637,7 @@ When(
         await manageReviewBodiesPage.setOrgName(orgList.get('orgNameValues'));
         searchKey = await manageReviewBodiesPage.getSearchQueryOrgName(position);
       }
-      await userListReviewBodyPage.setSearchKey(searchKey);
+      await commonItemsPage.setSearchKey(searchKey);
       await commonItemsPage.search_text.fill(searchKey);
     } else {
       throw new Error(`There are no items in list to search`);
@@ -652,7 +652,7 @@ When(
       const userListBeforeSearch = await commonItemsPage.getAllUsersFromTheTable();
       const userValues: string[] = confirmArrayNotNull(userListBeforeSearch.get('searchResultValues'));
       await userListReviewBodyPage.setUserListBeforeSearch(userValues);
-      await userListReviewBodyPage.setSearchKey(searchKey);
+      await commonItemsPage.setSearchKey(searchKey);
       await commonItemsPage.search_text.fill(searchKey);
     } else {
       throw new Error(`There are no items in list to search`);

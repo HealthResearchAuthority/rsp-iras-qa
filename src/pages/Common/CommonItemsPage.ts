@@ -26,6 +26,7 @@ export default class CommonItemsPage {
   readonly questionSetData: typeof questionSetData;
   readonly commonTestData: typeof commonTestData;
   readonly searchFilterResultsData: typeof searchFilterResultsData;
+  private _search_key: string;
   private _no_of_results_before_search: number;
   private _no_of_results_after_search: number;
   private _short_project_title_filter: string;
@@ -100,6 +101,7 @@ export default class CommonItemsPage {
     this.questionSetData = questionSetData;
     this.commonTestData = commonTestData;
     this.searchFilterResultsData = searchFilterResultsData;
+    this._search_key = '';
     this._no_of_results_before_search = 0;
     this._no_of_results_after_search = 0;
     this._short_project_title_filter = '';
@@ -199,6 +201,14 @@ export default class CommonItemsPage {
   }
 
   //Getters & Setters for Private Variables
+
+  async getSearchKey(): Promise<string> {
+    return this._search_key;
+  }
+
+  async setSearchKey(value: string): Promise<void> {
+    this._search_key = value;
+  }
 
   async getNoOfResultsBeforeSearch(): Promise<number> {
     return this._no_of_results_before_search;
@@ -903,5 +913,33 @@ export default class CommonItemsPage {
 
   async extractNumFromSearchResultCount(resultsString: string): Promise<number> {
     return parseInt(resultsString.replace(searchFilterResultsData.search_results_suffix, '').trim());
+  }
+
+  async checkDateMultiDateSearchResultValues(
+    dateResultValues: string[],
+    searchInputDataset: any,
+    searchInput: string
+  ): Promise<boolean> {
+    let expectedDateResultFound = false;
+    const fromExpectedDate = new Date(
+      `${searchInputDataset[searchInput].day_from_text} ${searchInputDataset[searchInput].month_from_dropdown} ${searchInputDataset[searchInput].year_from_text}`
+    );
+    const toExpectedDate = new Date(
+      `${searchInputDataset[searchInput].day_to_text} ${searchInputDataset[searchInput].month_to_dropdown} ${searchInputDataset[searchInput].year_to_text}`
+    );
+    for (const date of dateResultValues) {
+      const actualDate = new Date(date);
+      if (searchInput.toLowerCase().includes('to')) {
+        expectedDateResultFound = actualDate <= toExpectedDate;
+      } else if (searchInput.toLowerCase().includes('from')) {
+        expectedDateResultFound = actualDate >= fromExpectedDate;
+      } else {
+        expectedDateResultFound = actualDate >= fromExpectedDate && actualDate <= toExpectedDate;
+      }
+      if (!expectedDateResultFound) {
+        return expectedDateResultFound;
+      }
+    }
+    return expectedDateResultFound;
   }
 }

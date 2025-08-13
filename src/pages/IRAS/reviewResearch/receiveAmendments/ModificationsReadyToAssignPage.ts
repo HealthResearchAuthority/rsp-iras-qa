@@ -172,7 +172,6 @@ export default class ModificationsReadyToAssignPage {
   async checkMultiValuesStartsWith(
     irasIds: string[],
     shortTitles: string[],
-    datesSubmitted: string[],
     searchInputDataset: any,
     searchInput: string
   ): Promise<boolean> {
@@ -190,28 +189,6 @@ export default class ModificationsReadyToAssignPage {
         valuesStartWith = title
           .toLowerCase()
           .startsWith(searchInputDataset[searchInput].short_project_title_text.toLowerCase());
-        if (!valuesStartWith) {
-          return valuesStartWith;
-        }
-      }
-    }
-    if (searchInput.toLowerCase().includes('date')) {
-      //Tidy for PR - separate some to external function?
-      const fromExpectedDate = new Date(
-        `${searchInputDataset[searchInput].day_from_text} ${searchInputDataset[searchInput].month_from_dropdown} ${searchInputDataset[searchInput].year_from_text}`
-      );
-      const toExpectedDate = new Date(
-        `${searchInputDataset[searchInput].day_to_text} ${searchInputDataset[searchInput].month_to_dropdown} ${searchInputDataset[searchInput].year_to_text}`
-      );
-      for (const date of datesSubmitted) {
-        const actualDate = new Date(date);
-        if (searchInput.toLowerCase().includes('to')) {
-          valuesStartWith = actualDate <= toExpectedDate;
-        } else if (searchInput.toLowerCase().includes('from')) {
-          valuesStartWith = actualDate >= fromExpectedDate;
-        } else {
-          valuesStartWith = actualDate >= fromExpectedDate && actualDate <= toExpectedDate;
-        }
         if (!valuesStartWith) {
           return valuesStartWith;
         }

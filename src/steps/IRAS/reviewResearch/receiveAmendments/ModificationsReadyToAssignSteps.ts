@@ -81,15 +81,20 @@ Given(
     } else if (searchInput.toLowerCase().includes('multi')) {
       expect(noOfResults).toBeGreaterThan(1);
       expect(await commonItemsPage.tableBodyRows.count()).toBeGreaterThan(1);
-      expect(
-        await modificationsReadyToAssignPage.checkMultiValuesStartsWith(
-          visibleIrasIds,
-          shortTitles,
-          datesSubmitted,
-          searchInputDataset,
-          searchInput
-        )
-      ).toBeTruthy();
+      if (searchInput.toLowerCase().includes('date')) {
+        expect(
+          commonItemsPage.checkDateMultiDateSearchResultValues(datesSubmitted, searchInputDataset, searchInput)
+        ).toBeTruthy();
+      } else {
+        expect(
+          await modificationsReadyToAssignPage.checkMultiValuesStartsWith(
+            visibleIrasIds,
+            shortTitles,
+            searchInputDataset,
+            searchInput
+          )
+        ).toBeTruthy();
+      }
     } else if (searchInput.toLowerCase().includes('partial')) {
       expect(noOfResults).toBeGreaterThan(1);
       expect(await commonItemsPage.tableBodyRows.count()).toBeGreaterThan(1);
