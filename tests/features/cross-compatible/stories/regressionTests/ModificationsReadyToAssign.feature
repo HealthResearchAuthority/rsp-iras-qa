@@ -1,5 +1,4 @@
-@RegressionModificationsReadyToAssign @StudyWideReviewer @Regression @RegressionReceiveAmendments
-# Need to update to Workflow Co-oridinator once RSP-4488 work is merged
+@RegressionModificationsReadyToAssign @WorkFlowCoordinator @Regression @RegressionReceiveAmendments
 Feature: Modifications Tasklist page that displays modifications ready to be assigned
 
     Background:

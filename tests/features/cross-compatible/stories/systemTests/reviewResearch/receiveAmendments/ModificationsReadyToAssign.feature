@@ -1,12 +1,11 @@
-@ReceiveAmendments @ModificationsReadyToAssign @SysAdminUser @SystemTest
-# Need to update to Workflow Co-oridinator once RSP-4488 work is merged
-Feature: Modifications Tasklist page that displays modifications ready to be assigned
+@ReceiveAmendments @ModificationsReadyToAssign @WorkFlowCoordinator @SystemTest
+Feature: Receive Amendments: Modifications Tasklist page that displays modifications ready to be assigned
 
     Background:
         Given I have navigated to the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
 
-    @searchTasklistByIrasIdWithResults @rsp-4104
+    @searchTasklistByIrasIdWithResults @rsp-4104 @only
     Scenario Outline: Verify the user is able to search the modifications tasklist by the iras ID
         When I fill the search input for searching 'tasklist' with '<Search_Input>' as the search query
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
