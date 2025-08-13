@@ -1,4 +1,4 @@
-@RegressionModificationsReadyToAssign @FrontStageUser @Regression @RegressionReceiveAmendments
+@RegressionModificationsReadyToAssign @StudyWideReviewer @Regression @RegressionReceiveAmendments
 Feature: Modifications Tasklist page that displays modifications ready to be assigned
 
     Background:

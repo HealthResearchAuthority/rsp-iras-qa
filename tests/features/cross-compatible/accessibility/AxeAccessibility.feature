@@ -1,8 +1,8 @@
 @axeAccessibility @jsEnabled
 Feature: Run Axe Accessibilty Test Tool Against App Pages
 
-  @axeAccessibilityHome @SysAdminUser @FrontStageUser
-  Scenario: Home Page
+  @axeAccessibilityHome @SysAdminUser
+  Scenario: My account home Page of system administrator
     Given I have navigated to the 'Home_Page'
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
@@ -833,7 +833,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilitySearchModificationsPage @FrontStageUser
+  @axeAccessibilitySearchModificationsPage @StudyWideReviewer
   Scenario: Search modifications page
     Given I have navigated to the 'Search_Modifications_Page'
     And I fill the search input for searching 'modifications' with 'Valid_Iras_Id_Prefix' as the search query
@@ -843,7 +843,20 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityModficationsTasklistPage @FrontStageUser
+  @axeAccessibilityAdvanceFilterSearchModifications @StudyWideReviewer
+  Scenario: Search - Approvals - Plan and manage healthcare research
+    Given I have navigated to the 'Search_Modifications_Page'
+    Then I can see the 'Search_Modifications_Page'
+    When I enter 'Valid_Iras_Id_Nth' into the search field
+    And I select advanced filters in the search modifications page using 'Advanced_Filters_Nth'
+    And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
+    Then 'I can see the selected filters are displayed under' active filters 'Advanced_Filters_Nth' in the 'Search_Modifications_Page'
+    And the system displays modification records based on the search 'Valid_Iras_Id_Nth' and filter criteria 'Advanced_Filters_Nth' or shows no results found message if no matching records exist in the search modifications page
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityModficationsTasklistPage @StudyWideReviewer
   Scenario: Modifications tasklist page
     Given I have navigated to the 'Modifications_Tasklist_Page'
     When I Scan the page with the Axe Accessibilty Tool
