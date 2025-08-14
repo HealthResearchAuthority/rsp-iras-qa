@@ -13,4 +13,3 @@ Feature: Authenticate Test Users once only, before test run
                   | Studywide_Reviewer   | Home_Page |
                   | Team_Manager         | Home_Page |
                   | Workflow_Coordinator | Home_Page |
-
