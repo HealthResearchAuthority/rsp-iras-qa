@@ -131,6 +131,7 @@ export default class CommonItemsPage {
     this.bannerMyApplications = this.bannerNavBar.getByText(this.linkTextData.Banner.My_Applications, { exact: true });
     this.next_button = this.page.getByRole('link').getByText(this.commonTestData.next_button, { exact: true });
     this.pagination_next_link = this.page.locator('div[class="govuk-pagination__next"]').getByRole('link');
+    this.pagination_next_link = this.page.locator('div[class="govuk-pagination__next"]').getByRole('link');
     this.errorMessageFieldLabel = this.page
       .locator('.field-validation-error')
       .or(this.page.locator('.govuk-error-message'))
