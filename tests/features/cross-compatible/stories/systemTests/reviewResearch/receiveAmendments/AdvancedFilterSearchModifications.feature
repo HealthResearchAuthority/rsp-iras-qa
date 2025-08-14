@@ -200,19 +200,18 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         And I capture the page screenshot
         And I click the 'Search' button on the 'Search_Modifications_Page'
         And the system displays modification records based on the search '<Invalid_Iras_Id>' and filter criteria '' or shows no results found message if no matching records exist in the search modifications page
-        And I can see the '<No_Results_Found>' ui labels
         And the advanced filters section should collapse automatically
         And I capture the page screenshot
         Examples:
-            | Invalid_Iras_Id                  | No_Results_Found           |
-            | Invalid_Iras_Id_Letters          | No_Matching_Search_Results |
-            | Invalid_Iras_Id_Symbols          | No_Matching_Search_Results |
-            | Invalid_Iras_Id_Letters_Symbols  | No_Matching_Search_Results |
-            | Invalid_Iras_Id_Leading_Zeros    | No_Matching_Search_Results |
-            | Invalid_Iras_Id_Spaces_Suffix    | No_Matching_Search_Results |
-            | Invalid_Iras_Id_Spaces_Prefix    | No_Matching_Search_Results |
-            | Invalid_Iras_Id_Spaces_Seperator | No_Matching_Search_Results |
-            | Invalid_Iras_Id_Zeros            | No_Matching_Search_Results |
+            | Invalid_Iras_Id                  |
+            | Invalid_Iras_Id_Letters          |
+            | Invalid_Iras_Id_Symbols          |
+            | Invalid_Iras_Id_Letters_Symbols  |
+            | Invalid_Iras_Id_Leading_Zeros    |
+            | Invalid_Iras_Id_Spaces_Suffix    |
+            | Invalid_Iras_Id_Spaces_Prefix    |
+            | Invalid_Iras_Id_Spaces_Seperator |
+            | Invalid_Iras_Id_Zeros            |
 
     @NoResultsFound @InvalidIrasIdAndAdvancedFilters @KNOWN-DEFECT-RSP-4467
     Scenario Outline: Verify the user can see no matching results found message by entering invalid iras id, then selected advanced filters and click on apply filters button

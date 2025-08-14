@@ -30,8 +30,7 @@
     "organisation_text": "QA Automation HRA",
     "job_title_text": "Sr.Reviewer",
     "role_checkbox": ["Operations"],
-    "country_checkbox": ["England"],
-    "access_required_checkbox": ["Research Ethics Comittee"]
+    "country_checkbox": ["England"]
   },
 
   "Disabled_User_Role_Operations": {
@@ -43,8 +42,7 @@
     "organisation_text": "QA Automation HRA",
     "job_title_text": "Sr.Reviewer",
     "role_checkbox": ["Operations"],
-    "country_checkbox": ["England"],
-    "access_required_checkbox": ["Research Ethics Comittee"]
+    "country_checkbox": ["England"]
   },
   "Active_User_Role_Reviewer": {
     "title_text": "Mr",
@@ -65,8 +63,7 @@
     "organisation_text": "QA Automation HRA Role_Operations",
     "job_title_text": "Sr.Reviewer Role_Operations",
     "role_checkbox": ["Operations", "System administrator"],
-    "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
-    "access_required_checkbox": ["Study wide review", "Research ethics committee", "CAG", "Technical assurance"]
+    "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
   },
   "Disabled_User_Role_Reviewer": {
     "title_text": "Mr",

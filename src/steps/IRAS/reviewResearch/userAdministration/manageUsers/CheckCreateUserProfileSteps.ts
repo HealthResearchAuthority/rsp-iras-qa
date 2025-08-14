@@ -17,7 +17,7 @@ Then(
         if (key === 'email_address_text') {
           const data = await returnDataFromJSON();
           expect(fieldValActual).toBe(data.Create_User_Profile.email_address_unique);
-        } else if (key === 'country_checkbox' || key === 'access_required_checkbox' || key === 'role_checkbox') {
+        } else if (key === 'country_checkbox' || key === 'review_body_checkbox' || key === 'role_checkbox') {
           const fieldValActuals = fieldValActual.split(', ');
           fieldValActuals.forEach((val, index) => {
             expect(val).toBe(dataset[key][index]);

@@ -43,13 +43,13 @@ Feature: User Administration: Edit Manage Users
         And I can see the users audit history with the '<Audit_History>' event as the most recent entry
 
         Examples:
-            | Field_Name    | Edit_User                   | Audit_History          |
-            | Title         | User_Title_Update           | Edit_User_Title        |
-            | First_Name    | User_First_Name_Text_One    | Edit_User_First_Name   |
-            | Last_Name     | User_Last_Name_Text_One     | Edit_User_Last_Name    |
-            | Telephone     | User_Telephone_Text_One     | Edit_User_Telephone    |
-            | Organisation  | User_Organisation_Text_One  | Edit_User_Organisation |
-            | Job_Title     | User_Job_Title_Text_One     | Edit_User_Job_Title    |
+            | Field_Name   | Edit_User                  | Audit_History          |
+            | Title        | User_Title_Update          | Edit_User_Title        |
+            | First_Name   | User_First_Name_Text_One   | Edit_User_First_Name   |
+            | Last_Name    | User_Last_Name_Text_One    | Edit_User_Last_Name    |
+            | Telephone    | User_Telephone_Text_One    | Edit_User_Telephone    |
+            | Organisation | User_Organisation_Text_One | Edit_User_Organisation |
+            | Job_Title    | User_Job_Title_Text_One    | Edit_User_Job_Title    |
 
     @RegressionTestEditOperationUserFields
     Scenario Outline: Verify the user can edit the fields applicable to an operations user, with an audit history log
@@ -125,12 +125,12 @@ Feature: User Administration: Edit Manage Users
         Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Edit_User_Profile_Page'
         And I capture the page screenshot
         Examples:
-            | Edit_User_Profile   | Edit_User_Field          | User_Role  | Status | Invalid_Data_Edit_User                                    | Field_And_Summary_Error_Message                                 |
-            | All_Checkbox_Fields | title_text               | Operations | ACTIVE | Missing_Mandatory_Fields_Role_Not_Operations              | Missing_Mandatory_Fields_Role_Not_Operations_Error              |
-            | All_Checkbox_Fields | first_name_text          | Operations | ACTIVE | Missing_Mandatory_Fields_Role_Operations                  | Missing_Mandatory_Fields_Role_Operations_Error                  |
-            | All_Checkbox_Fields | last_name_text           | Operations | ACTIVE | Missing_Mandatory_Field_First_Name_Role_Not_Operations    | Missing_Mandatory_Field_First_Name_Role_Not_Operations_Error    |
-            | All_Checkbox_Fields | telephone_text           | Operations | ACTIVE | Missing_Mandatory_Field_Last_Name_Role_Not_Operations     | Missing_Mandatory_Field_Last_Name_Role_Not_Operations_Error     |
-            | All_Checkbox_Fields | country_checkbox         | Operations | ACTIVE | Missing_Mandatory_Field_Country_Role_Operations           | Missing_Mandatory_Field_Country_Role_Operations_Error           |
-            | All_Checkbox_Fields | access_required_checkbox | Operations | ACTIVE | Missing_Mandatory_Field_Access_Required_Role_Operations   | Missing_Mandatory_Field_Access_Required_Role_Operations_Error   |
-            | All_Checkbox_Fields | job_title_text           | Operations | ACTIVE | Invalid_Character_Limit                                   | Invalid_Character_Limit_Error                                   |
-            | All_Checkbox_Fields | telephone_text           | Operations | ACTIVE | Incorrect_Format_Telephone_Data                           | Incorrect_Format_Field_Telephone_Error                          |
+            | Edit_User_Profile   | Edit_User_Field  | User_Role  | Status | Invalid_Data_Edit_User                                 | Field_And_Summary_Error_Message                              |
+            | All_Checkbox_Fields | title_text       | Operations | ACTIVE | Missing_Mandatory_Fields_Role_Not_Operations           | Missing_Mandatory_Fields_Role_Not_Operations_Error           |
+            | All_Checkbox_Fields | first_name_text  | Operations | ACTIVE | Missing_Mandatory_Fields_Role_Operations               | Missing_Mandatory_Fields_Role_Operations_Error               |
+            | All_Checkbox_Fields | last_name_text   | Operations | ACTIVE | Missing_Mandatory_Field_First_Name_Role_Not_Operations | Missing_Mandatory_Field_First_Name_Role_Not_Operations_Error |
+            | All_Checkbox_Fields | telephone_text   | Operations | ACTIVE | Missing_Mandatory_Field_Last_Name_Role_Not_Operations  | Missing_Mandatory_Field_Last_Name_Role_Not_Operations_Error  |
+            | All_Checkbox_Fields | country_checkbox | Operations | ACTIVE | Missing_Mandatory_Field_Country_Role_Operations        | Missing_Mandatory_Field_Country_Role_Operations_Error        |
+            # | All_Checkbox_Fields | access_required_checkbox | Operations | ACTIVE | Missing_Mandatory_Field_Access_Required_Role_Operations   | Missing_Mandatory_Field_Access_Required_Role_Operations_Error   |
+            | All_Checkbox_Fields | job_title_text   | Operations | ACTIVE | Invalid_Character_Limit                                | Invalid_Character_Limit_Error                                |
+            | All_Checkbox_Fields | telephone_text   | Operations | ACTIVE | Incorrect_Format_Telephone_Data                        | Incorrect_Format_Field_Telephone_Error                       |

@@ -19,14 +19,17 @@ export default class EditUserProfilePage {
   readonly role_label: Locator;
   readonly role_fieldset: Locator;
   readonly role_checkbox: Locator;
-  readonly committee_dropdown: Locator;
+  // readonly committee_dropdown: Locator;
   readonly country_fieldset: Locator;
   readonly country_checkbox: Locator;
-  readonly access_required_fieldset: Locator;
-  readonly access_required_checkbox: Locator;
+  // readonly access_required_fieldset: Locator;
+  // readonly access_required_checkbox: Locator;
   readonly review_body_dropdown: Locator;
   readonly country_label: Locator;
-  readonly access_required_label: Locator;
+  // readonly access_required_label: Locator;
+  readonly review_body_label: Locator;
+  readonly review_body_fieldset: Locator;
+  readonly review_body_checkbox: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -82,26 +85,25 @@ export default class EditUserProfilePage {
       .getByText(this.editUserProfilePageTestData.Edit_User_Profile_Page.role_label, { exact: true });
     this.role_fieldset = this.page.locator('.govuk-form-group', { has: this.role_label });
     this.role_checkbox = this.role_fieldset.getByRole('checkbox');
-    this.committee_dropdown = this.page.getByLabel(
-      this.editUserProfilePageTestData.Edit_User_Profile_Page.committee_label,
-      { exact: true }
-    );
+    // this.committee_dropdown = this.page.getByLabel(
+    //   this.editUserProfilePageTestData.Edit_User_Profile_Page.committee_label,
+    //   { exact: true }
+    // );
     this.country_label = this.page
       .locator('.govuk-label')
       .getByText(this.editUserProfilePageTestData.Edit_User_Profile_Page.country_label, { exact: true });
     this.country_fieldset = this.page.locator('.govuk-form-group', { has: this.country_label });
     this.country_checkbox = this.country_fieldset.getByRole('checkbox');
-    this.access_required_label = this.page
+    // this.access_required_label = this.page
+    //   .locator('.govuk-label')
+    //   .getByText(this.editUserProfilePageTestData.Edit_User_Profile_Page.access_required_label, { exact: true });
+    // this.access_required_fieldset = this.page.locator('.govuk-form-group', { has: this.access_required_label });
+    // this.access_required_checkbox = this.access_required_fieldset.getByRole('checkbox');
+    this.review_body_label = this.page
       .locator('.govuk-label')
-      .getByText(this.editUserProfilePageTestData.Edit_User_Profile_Page.access_required_label, { exact: true });
-    this.access_required_fieldset = this.page.locator('.govuk-form-group', { has: this.access_required_label });
-    this.access_required_checkbox = this.access_required_fieldset.getByRole('checkbox');
-    this.review_body_dropdown = this.page.getByLabel(
-      this.editUserProfilePageTestData.Edit_User_Profile_Page.review_body_label,
-      {
-        exact: true,
-      }
-    );
+      .getByText(this.editUserProfilePageTestData.Edit_User_Profile_Page.review_body_label, { exact: true });
+    this.review_body_fieldset = this.page.locator('.govuk-form-group', { has: this.review_body_label });
+    this.review_body_checkbox = this.review_body_fieldset.getByRole('checkbox');
   }
 
   async assertOnEditUserProfilePage() {

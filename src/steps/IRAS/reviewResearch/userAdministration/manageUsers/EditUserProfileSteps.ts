@@ -180,7 +180,7 @@ Then(
     if (roleValue.includes('operations') || selectedCheckboxCount > 0) {
       await commonItemsPage.clearCheckboxes(
         dataset,
-        ['country_checkbox', 'access_required_checkbox'],
+        ['country_checkbox', 'review_body_checkbox'],
         commonItemsPage,
         editUserProfilePage
       );

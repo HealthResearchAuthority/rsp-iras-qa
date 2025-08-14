@@ -24,9 +24,9 @@ Then('I can see the user profile page', async ({ userProfilePage }) => {
       confirmStringNotNull(await userProfilePage.country_value.textContent()).split(', ')
     );
   }
-  if (await userProfilePage.access_required_row.isVisible()) {
-    await userProfilePage.setAccessRequired(
-      confirmStringNotNull(await userProfilePage.access_required_value.textContent()).split(', ')
+  if (await userProfilePage.review_body_row.isVisible()) {
+    await userProfilePage.setReviewBody(
+      confirmStringNotNull(await userProfilePage.review_body_value.textContent()).split(', ')
     );
   }
 });

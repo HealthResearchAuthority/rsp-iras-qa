@@ -39,9 +39,9 @@ Feature: User Administration: Create Manage Users
         And I can see the audit history for the newly created '<Add_User_Profile>' user with roles assigned
 
         Examples:
-            | Add_User_Profile                               | Field_Name |
-            | Valid_Data_In_All_Fields_Role_Operations       | Role       |
-            | Valid_Data_In_All_Fields_Role_Reviewer_Another | Role       |
+            | Add_User_Profile                                           | Field_Name |
+            | Valid_Data_In_All_Fields_Role_Operations                   | Role       |
+            | Valid_Data_In_All_Fields_Role_System_Administrator_Another | Role       |
 
     @RegressionTestAddAnotherUser
     Scenario Outline: Verify the user is able to continue adding users via the link provided on the Confirmation screen
@@ -67,8 +67,8 @@ Feature: User Administration: Create Manage Users
         And I capture the page screenshot
 
         Examples:
-            | Add_User_Profile                       | Add_Another_User_Profile                       |
-            | Valid_Data_In_All_Fields_Role_Reviewer | Valid_Data_In_All_Fields_Role_Reviewer_Another |
+            | Add_User_Profile                                   | Add_Another_User_Profile                                   |
+            | Valid_Data_In_All_Fields_Role_System_Administrator | Valid_Data_In_All_Fields_Role_System_Administrator_Another |
 
     @RegressionTestUnassignUserRoles @KNOWN-DEFECT-RSP-3938 @fail
     Scenario Outline: Verify the user can unassign roles from the user profile event, with an audit history log
@@ -172,8 +172,8 @@ Feature: User Administration: Create Manage Users
         And I capture the page screenshot
 
         Examples:
-            | Add_User_Profile                       |
-            | Valid_Data_In_All_Fields_Role_Reviewer |
+            | Add_User_Profile                                   |
+            | Valid_Data_In_All_Fields_Role_System_Administrator |
 
     @RegressionTestCreateUserErrorMessagesInvalidData @KNOWN-DEFECT-Incorrect_Format_Field_Email_Address_Error
     Scenario Outline: Validate relevant error messages are displayed for invalid data entry on the create user profile page
@@ -191,8 +191,8 @@ Feature: User Administration: Create Manage Users
             | Missing_Mandatory_Field_Last_Name_Role_Not_Operations     | Missing_Mandatory_Field_Last_Name_Role_Not_Operations_Error     |
             | Missing_Mandatory_Field_Email_Address_Role_Not_Operations | Missing_Mandatory_Field_Email_Address_Role_Not_Operations_Error |
             | Missing_Mandatory_Field_Country_Role_Operations           | Missing_Mandatory_Field_Country_Role_Operations_Error           |
-            | Missing_Mandatory_Field_Access_Required_Role_Operations   | Missing_Mandatory_Field_Access_Required_Role_Operations_Error   |
+            # | Missing_Mandatory_Field_Access_Required_Role_Operations   | Missing_Mandatory_Field_Access_Required_Role_Operations_Error   |
             | Invalid_Character_Limit                                   | Invalid_Character_Limit_Error                                   |
             | Invalid_Email_Data_Max_Char                               | Invalid_Character_Limit_Field_Email_Address_Error               |
             | Incorrect_Format_Telephone_Data                           | Incorrect_Format_Field_Telephone_Error                          |
-            # | Incorrect_Format_Email                                    | Incorrect_Format_Field_Email_Address_Error                      |
+# | Incorrect_Format_Email                                    | Incorrect_Format_Field_Email_Address_Error                      |
