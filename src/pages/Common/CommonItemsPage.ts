@@ -57,13 +57,11 @@ export default class CommonItemsPage {
   readonly tableBodyRows: Locator;
   readonly hidden_next_button: Locator;
   readonly next_button: Locator;
-  readonly pagination_next_link: Locator;
   readonly fieldGroup: Locator;
   readonly errorFieldGroup: Locator;
   readonly search_text: Locator;
   readonly pagination: Locator;
   readonly firstPage: Locator;
-  readonly lastPage: Locator;
   readonly previous_button: Locator;
   readonly currentPage: Locator;
   readonly pagination_results: Locator;
