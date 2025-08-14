@@ -166,7 +166,7 @@ When(
     const dataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[filterDatasetName];
     await manageUsersPage.advanced_filter_chevron.click();
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         if (key.includes('date')) {
           if (!(await manageUsersPage.date_last_logged_in_from_day_text.isVisible())) {
             await manageUsersPage.date_last_logged_in_from_day_text_chevron.click();
@@ -224,7 +224,7 @@ When(
           }
         }
         for (const key in filterDataset) {
-          if (Object.prototype.hasOwnProperty.call(filterDataset, key)) {
+          if (Object.hasOwn(filterDataset, key)) {
             if (key === 'status_radio') {
               const statusExpected = filterDataset[key];
               expect(statusActual.toLowerCase().includes(statusExpected.toLowerCase()));
@@ -275,7 +275,6 @@ When(
           }
         }
       }
-      //await commonItemsPage.pagination_next_link.click();
       const hasNextPage =
         (await commonItemsPage.pagination_next_link.isVisible()) &&
         !(await commonItemsPage.pagination_next_link.isDisabled());
@@ -307,7 +306,7 @@ When(
           await commonItemsPage.tableRows.nth(rowIndex).getByRole('cell').nth(4).textContent()
         );
         for (const key in filterDataset) {
-          if (Object.prototype.hasOwnProperty.call(filterDataset, key)) {
+          if (Object.hasOwn(filterDataset, key)) {
             if (key === 'status_radio') {
               const statusExpected = filterDataset[key];
               expect(statusActual.toLowerCase().includes(statusExpected.toLowerCase()));
@@ -347,7 +346,7 @@ Then(
   async ({ manageUsersPage }, filterDatasetName: string) => {
     const dataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[filterDatasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         if (key === 'country_checkbox') {
           const numberOfCheckboxesSelected = dataset[key].length;
           const hintLabel =
@@ -367,7 +366,7 @@ When(
   async ({ manageUsersPage }, filterDatasetName: string) => {
     const dataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[filterDatasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         await manageUsersPage.clickFilterChevronUsers(dataset, key, manageUsersPage);
       }
     }
@@ -377,7 +376,7 @@ When(
 Then('I can see the {string} ui labels in manage users page', async ({ manageUsersPage }, datasetName: string) => {
   const dataset = manageUsersPage.manageUsersPageTestData.Manage_Users_Page[datasetName];
   for (const key in dataset) {
-    if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+    if (Object.hasOwn(dataset, key)) {
       await expect(manageUsersPage[key].getByText(dataset[key])).toBeVisible();
     }
   }
