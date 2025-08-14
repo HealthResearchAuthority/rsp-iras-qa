@@ -76,14 +76,14 @@ Then(
               .Advanced_Filters_Hint_Labels[key + '_hint_label']
           );
         } else if (key.startsWith('date_') && key.endsWith('_from_day_text')) {
-          expect(await searchModificationsPage.date_modification_submitted_from_date_help_text.textContent()).toBe(
+          expect(await searchModificationsPage.date_submitted_from_date_help_text.textContent()).toBe(
             searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page
-              .date_modification_submitted_from_date_help_text
+              .date_submitted_from_date_help_text
           );
         } else if (key.startsWith('date_') && key.endsWith('_to_day_text')) {
-          expect(await searchModificationsPage.date_modification_submitted_to_date_help_text.textContent()).toBe(
+          expect(await searchModificationsPage.date_submitted_to_date_help_text.textContent()).toBe(
             searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page
-              .date_modification_submitted_to_date_help_text
+              .date_submitted_to_date_help_text
           );
         }
       }
@@ -106,13 +106,13 @@ When(
 Then(
   'the result count displayed at the top accurately reflects the number of records shown in the search modifications page',
   async ({ commonItemsPage, searchModificationsPage }) => {
-    const expectedResultCountLabel = await searchModificationsPage.getExpectedResultsCountLabel();
+    const expectedResultCountLabel = await searchModificationsPage.getExpectedResultsCountLabel(commonItemsPage);
     const actualResultCountLabel = await searchModificationsPage.getActualResultsCountLabel(commonItemsPage);
     expect(expectedResultCountLabel).toEqual(actualResultCountLabel);
   }
 );
 
-// date_modification_submitted, participating nation and sponsor_organisation can't validate from UI,need to validate with Database
+// date_submitted, participating nation and sponsor_organisation can't validate from UI,need to validate with Database
 Then(
   'the system displays modification records based on the search {string} and filter criteria {string} or shows no results found message if no matching records exist in the search modifications page',
   async ({ commonItemsPage, searchModificationsPage }, irasIdDatasetName, filterDatasetName) => {
@@ -132,7 +132,6 @@ Then(
     ) => {
       const filteredResults = await commonItemsPage.filterResults(searchResults, searchTerms);
       expect(filteredResults).toEqual(searchResults);
-
       const validatedResults = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
         searchResults,
         searchTerms
@@ -175,6 +174,7 @@ Then(
       const isValid = await commonItemsPage.areSearchResultsValid(values, allowedValues);
       expect(isValid).toBeTruthy();
     };
+
     if (searchResults.length !== 0) {
       // Combined search validation
       const searchTerms = [irasId, ciName, projectTitle].filter(Boolean);
@@ -201,18 +201,20 @@ Then(
         await validateFilterMatch(modificationsList, 'leadNationValues', allowedLeadNations, commonItemsPage);
       }
     } else {
-      const pageTestData = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page;
       const validateTextMatch = async (locator: Locator, expectedText: string) => {
         await expect(locator).toHaveText(expectedText);
         expect(confirmStringNotNull(await locator.textContent())).toBe(expectedText);
       };
-      const expectedResultCount = pageTestData.result_count_heading;
+      const expectedResultCount = commonItemsPage.commonTestData.result_count_heading;
       const actualResultCount = confirmStringNotNull(await commonItemsPage.result_count.textContent());
       expect('0' + expectedResultCount).toBe(actualResultCount);
-      await validateTextMatch(commonItemsPage.no_results_heading, pageTestData.no_results_heading);
-      await validateTextMatch(commonItemsPage.no_results_guidance_text, pageTestData.no_results_guidance_text);
+      await validateTextMatch(commonItemsPage.no_results_heading, commonItemsPage.commonTestData.no_results_heading);
+      await validateTextMatch(
+        commonItemsPage.no_results_guidance_text,
+        commonItemsPage.commonTestData.no_results_guidance_text
+      );
       const bulletPointsActual = (await commonItemsPage.getNoResultsBulletPoints()).flat().join(', ');
-      const bulletPointsExpected = pageTestData.no_results_bullet_points.flat().join(', ');
+      const bulletPointsExpected = commonItemsPage.commonTestData.no_results_bullet_points.flat().join(', ');
       expect(bulletPointsActual).toEqual(bulletPointsExpected);
     }
   }
@@ -347,52 +349,6 @@ Then(
 );
 
 Then(
-  'I validate {string} displayed on {string} in advanced filters',
-  async (
-    { commonItemsPage, searchModificationsPage },
-    errorMessageFieldAndSummaryDatasetName: string,
-    pageKey: string
-  ) => {
-    let errorMessageFieldDataset: JSON;
-    let page: any;
-    if (pageKey === 'Search_Modifications_Page') {
-      errorMessageFieldDataset =
-        searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[
-          errorMessageFieldAndSummaryDatasetName
-        ];
-      page = searchModificationsPage;
-    }
-    await expect(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
-    const allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset);
-    const summaryErrorActualValues = await commonItemsPage.getSummaryErrorMessages();
-    expect(summaryErrorActualValues).toEqual(allSummaryErrorExpectedValues);
-    for (const key in errorMessageFieldDataset) {
-      if (Object.hasOwn(errorMessageFieldDataset, key)) {
-        const expectedMessage = errorMessageFieldDataset[key];
-        if (
-          errorMessageFieldAndSummaryDatasetName.endsWith('_To_date_Before_From_Date_Error') ||
-          errorMessageFieldAndSummaryDatasetName.endsWith('_No_Month_Selected_To_Date_Error')
-        ) {
-          const actualMessage = await searchModificationsPage.date_modification_submitted_to_date_error.textContent();
-          expect(actualMessage).toEqual(expectedMessage);
-        } else if (errorMessageFieldAndSummaryDatasetName.endsWith('_No_Month_Selected_From_Date_Error')) {
-          const actualMessage = await searchModificationsPage.date_modification_submitted_from_date_error.textContent();
-          expect(actualMessage).toEqual(expectedMessage);
-        } else if (errorMessageFieldAndSummaryDatasetName === 'Sponsor_Organisation_Min_Char_Error') {
-          const actualMessage =
-            await searchModificationsPage.sponsor_organisation_jsdisabled_min_error_message.textContent();
-          expect(actualMessage).toEqual(expectedMessage);
-        } else {
-          throw new Error(`Unhandled error message dataset name: ${errorMessageFieldAndSummaryDatasetName}`);
-        }
-        const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
-        await expect(element).toBeInViewport();
-      }
-    }
-  }
-);
-
-Then(
   'I can see an empty state that informs me no modifications exist for the search criteria',
   async ({ commonItemsPage, searchModificationsPage }) => {
     await expect(searchModificationsPage.page_heading).toBeVisible();
@@ -402,7 +358,8 @@ Then(
       searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.title
     );
     expect(await commonItemsPage.tableRows.count()).toBe(0);
-    const expectedResultCountLabel = await searchModificationsPage.getExpectedResultsCountLabelNoResults();
+    const expectedResultCountLabel =
+      await searchModificationsPage.getExpectedResultsCountLabelNoResults(commonItemsPage);
     const actualResultCountLabel = await searchModificationsPage.getActualResultsCountLabel(commonItemsPage);
     expect(expectedResultCountLabel).toEqual(actualResultCountLabel);
     expect(await commonItemsPage.no_results_heading.count()).toBe(0);

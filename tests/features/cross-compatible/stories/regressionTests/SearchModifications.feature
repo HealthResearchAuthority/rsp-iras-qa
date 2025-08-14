@@ -1,4 +1,4 @@
-@RegressionSearchModifications @FrontStageUser @Regression @RegressionReceiveAmendments
+@RegressionSearchModifications @StudyWideReviewer @Regression @RegressionReceiveAmendments
 
 Feature: Receive Amendments: Search Modifications
 
@@ -33,18 +33,18 @@ Feature: Receive Amendments: Search Modifications
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Search_Modifications_Page'
                 And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria '' or shows no results found message if no matching records exist in the search modifications page
-                And the result count displayed at the top accurately reflects the number of records shown
+                And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
                 And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
                 And I capture the page screenshot
-                And I click the 'Advanced_Filter' button on the 'Search_Modifications_Page'
+                And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 And I select advanced filters in the search modifications page using '<Advanced_Filters>'
                 And I capture the page screenshot
                 And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the search modifications page
+                Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
                 And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>' or shows no results found message if no matching records exist in the search modifications page
-                And the result count displayed at the top accurately reflects the number of records shown
+                And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
                 And I capture the page screenshot
                 And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
                 And I capture the page screenshot
@@ -77,13 +77,13 @@ Feature: Receive Amendments: Search Modifications
                 When I click the '<Sort_Button>' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then I can see the list of modifications received for approval is sorted by 'descending' order of the '<Sort_Field>'
-                And I click the 'Advanced_Filter' button on the 'Search_Modifications_Page'
+                And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 And I select advanced filters in the search modifications page using 'Advanced_Filters_Checkboxes'
                 And I capture the page screenshot
                 And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                Then 'I can see the selected filters are displayed under' active filters 'Advanced_Filters_Checkboxes' in the search modifications page
+                Then 'I can see the selected filters are displayed under' active filters 'Advanced_Filters_Checkboxes' in the 'Search_Modifications_Page'
                 And the system displays modification records based on the search 'Valid_Iras_Id_Prefix' and filter criteria '<Advanced_Filters_Checkboxes>' or shows no results found message if no matching records exist in the search modifications page
                 And I capture the page screenshot
                 And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'

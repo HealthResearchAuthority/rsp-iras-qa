@@ -1,8 +1,8 @@
 @axeAccessibility @jsEnabled
 Feature: Run Axe Accessibilty Test Tool Against App Pages
 
-  @axeAccessibilityHome @SysAdminUser @FrontStageUser
-  Scenario: Home Page
+  @axeAccessibilityHome @SysAdminUser
+  Scenario: My account home Page of system administrator
     Given I have navigated to the 'Home_Page'
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
@@ -833,7 +833,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilitySearchModificationsPage @FrontStageUser
+  @axeAccessibilitySearchModificationsPage @StudyWideReviewer
   Scenario: Search modifications page
     Given I have navigated to the 'Search_Modifications_Page'
     And I fill the search input for searching 'modifications' with 'Valid_Iras_Id_Prefix' as the search query
@@ -843,21 +843,20 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityAdvanceFilterSearchModifications @FrontStageUser
+  @axeAccessibilityAdvanceFilterSearchModifications @StudyWideReviewer
   Scenario: Search - Approvals - Plan and manage healthcare research
     Given I have navigated to the 'Search_Modifications_Page'
     Then I can see the 'Search_Modifications_Page'
     When I enter 'Valid_Iras_Id_Nth' into the search field
     And I select advanced filters in the search modifications page using 'Advanced_Filters_Nth'
     And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
-    Then 'I can see the selected filters are displayed under' active filters 'Advanced_Filters_Nth' in the search modifications page
+    Then 'I can see the selected filters are displayed under' active filters 'Advanced_Filters_Nth' in the 'Search_Modifications_Page'
     And the system displays modification records based on the search 'Valid_Iras_Id_Nth' and filter criteria 'Advanced_Filters_Nth' or shows no results found message if no matching records exist in the search modifications page
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-
-  @axeAccessibilityModficationsTasklistPage @FrontStageUser
+  @axeAccessibilityModficationsTasklistPage @StudyWideReviewer
   Scenario: Modifications tasklist page
     Given I have navigated to the 'Modifications_Tasklist_Page'
     When I Scan the page with the Axe Accessibilty Tool
@@ -906,17 +905,57 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilitySearchAndAdvancedFilterManageUser @SysAdminUser @axeAccessibilityManageUsers
-  Scenario: Manage Users list page with advanced filter and search
-    Given I have navigated to the 'System_Administration_Page'
-    When I click the 'Manage_Users' link on the 'System_Administration_Page'
-    Then I can see the 'Manage_Users_Page'
-    When I enter 'Existing_QA_User_First_Name' into the search field for manage users page
-    And I select advanced filters in the manage users page using 'Advanced_Filter_One'
-    And I click the 'Apply_filters' button on the 'Manage_Users_Page'
-    Then I can see the selected filters 'Advanced_Filter_One' are displayed under active filters for manage users page
-    And I can see the results matching the search 'Existing_QA_User_First_Name' and filter criteria 'Advanced_Filter_One' for manage users page
+  @axeAccessibilityPlannedEndDateModifications @FrontStageUser
+  Scenario: Modifications Planned End Date Page
+    Given I have navigated to the my research projects page
+    And I can see the my research projects page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_For_Later' button on the 'Project_Details_Title_Page'
+    Then I fill the key project roles page with 'Valid_Data_All_Fields'
+    Then I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    Then I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I can see the project overview page
+    When I click the 'Modifications_Tile' link on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I select 'Project_Design' from area of change dropdown and 'Planned_End_Date' from specific change dropdown
+    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+    Then I can see the 'Planned_End_Date' page for modifications
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
+  @axeAccessibilityWhichOrganisationChangeAffectModifications @FrontStageUser
+  Scenario: Modifications Which organisation change affect page
+    Given I have navigated to the my research projects page
+    And I can see the my research projects page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_For_Later' button on the 'Project_Details_Title_Page'
+    Then I fill the key project roles page with 'Valid_Data_All_Fields'
+    Then I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    Then I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I can see the project overview page
+    When I click the 'Modifications_Tile' link on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I select 'Project_Design' from area of change dropdown and 'Planned_End_Date' from specific change dropdown
+    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+    Then I can see the 'Planned_End_Date' page for modifications
+    Then I fill the planned project end date modifications page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Modifications_Page'
+    Then I can see the 'Which_Organisation_Type_Affect' page for modifications
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations

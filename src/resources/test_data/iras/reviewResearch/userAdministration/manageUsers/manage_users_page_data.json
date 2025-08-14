@@ -2,8 +2,6 @@
   "Manage_Users_Page": {
     "selected_bread_crumbs": "Manage Users",
     "page_heading": "Manage users",
-    "search_hint_text": "Search for the first name, last name or email address",
-    "user_search_box_label": "Find a user",
     "title": "Manage Users - System Administration - Plan and manage healthcare research",
     "add_new_users_record_link": "Add a new user profile record",
     "view_edit_link": "View/Edit",

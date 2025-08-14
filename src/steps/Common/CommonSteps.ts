@@ -414,6 +414,7 @@ Then(
       reviewYourAnswersPage,
       selectAreaOfChangePage,
       participatingOrganisationsPage,
+      organisationChangeAffectPage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
@@ -462,6 +463,10 @@ Then(
       errorMessageFieldDataset =
         participatingOrganisationsPage.participatingOrganisationsPageTestData[errorMessageFieldAndSummaryDatasetName];
       page = participatingOrganisationsPage;
+    } else if (pageKey == 'Which_Organisation_Type_Affect_Page') {
+      errorMessageFieldDataset =
+        organisationChangeAffectPage.organisationChangeAffectPageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = organisationChangeAffectPage;
     }
     let allSummaryErrorExpectedValues: any;
     let summaryErrorActualValues: any;
@@ -747,7 +752,7 @@ Given(
         await systemAdministrationPage.goto();
         await systemAdministrationPage.assertOnSystemAdministrationPage();
         break;
-      case 'Access_Denied_Page':
+      case 'System_Administration_Access_Denied_Page':
         await systemAdministrationPage.page.context().addCookies(authState.cookies);
         await systemAdministrationPage.goto();
         await accessDeniedPage.assertOnAccessDeniedPage();
@@ -829,29 +834,21 @@ Then(
 Then(
   '{string} active filters {string} in the {string}',
   async (
-    { searchModificationsPage, commonItemsPage, manageUsersPage },
+    { searchModificationsPage, commonItemsPage },
     actionToPerform: string,
     filterDatasetName: string,
     pageKey: string
   ) => {
+    const isDisplayAction = actionToPerform === 'I can see the selected filters are displayed under';
+    const isRemoveAction = actionToPerform === 'I remove the selected filters from';
+    const replaceValue = '_label';
     let filterDataset: JSON;
     let filterLabels: object;
     if (pageKey === 'Search_Modifications_Page') {
       filterDataset = searchModificationsPage.searchModificationsPageTestData.Advanced_Filters[filterDatasetName];
       filterLabels = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page;
-    } else if (pageKey === 'Manage_Users_Page') {
-      filterDataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[filterDatasetName];
-      filterLabels = manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List;
     }
-    const replaceValue = '_label';
-    const handleActiveFilterValidation = async (
-      key: string,
-      labelFetcher: (key: string) => Promise<string | string[]>,
-      actionToPerform: string,
-      commonItemsPage: any
-    ) => {
-      const isDisplayAction = actionToPerform === 'I can see the selected filters are displayed under';
-      const isRemoveAction = actionToPerform === 'I remove the selected filters from';
+    const validateFilter = async (key: string, labelFetcher: (key: string) => Promise<string | string[]>) => {
       const labels = await labelFetcher(key);
       const labelArray = Array.isArray(labels) ? labels : [labels];
       for (const label of labelArray) {
@@ -867,31 +864,71 @@ Then(
     for (const key in filterDataset) {
       if (Object.hasOwn(filterDataset, key)) {
         if (key.endsWith('_checkbox')) {
-          await handleActiveFilterValidation(
-            key,
-            async (k) => await commonItemsPage.getCheckboxFilterLabels(k, filterDataset, filterLabels, replaceValue),
-            actionToPerform,
-            commonItemsPage
+          await validateFilter(key, async (k) =>
+            commonItemsPage.getCheckboxFilterLabels(k, filterDataset, filterLabels, replaceValue)
           );
         } else if (key.startsWith('date_')) {
-          if (key.endsWith('_from_day_text') || key.endsWith('_to_day_text')) {
-            await handleActiveFilterValidation(
-              key,
-              async (k) => await commonItemsPage.getDateFilterLabel(k, filterDataset, filterLabels, replaceValue),
-              actionToPerform,
-              commonItemsPage
+          if (await commonItemsPage.shouldValidateDateFilter(key, filterDataset)) {
+            await validateFilter(key, async (k) =>
+              commonItemsPage.getDateFilterLabel(k, filterDataset, filterLabels, replaceValue)
             );
           }
         } else {
-          await handleActiveFilterValidation(
-            key,
-            async (k) =>
-              await commonItemsPage.getTextboxRadioButtonFilterLabel(k, filterDataset, filterLabels, replaceValue),
-            actionToPerform,
-            commonItemsPage
+          await validateFilter(key, async (k) =>
+            commonItemsPage.getTextboxRadioButtonFilterLabel(k, filterDataset, filterLabels, replaceValue)
           );
         }
       }
     }
   }
 );
+
+Then(
+  'I validate {string} displayed on {string} in advanced filters',
+  async (
+    { commonItemsPage, searchModificationsPage },
+    errorMessageFieldAndSummaryDatasetName: string,
+    pageKey: string
+  ) => {
+    let errorMessageFieldDataset: JSON;
+    let page: any;
+    if (pageKey === 'Search_Modifications_Page') {
+      errorMessageFieldDataset =
+        searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.Error_Validation[
+          errorMessageFieldAndSummaryDatasetName
+        ];
+      page = searchModificationsPage;
+    }
+    await expect(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
+    const allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset);
+    const summaryErrorActualValues = await commonItemsPage.getSummaryErrorMessages();
+    expect(summaryErrorActualValues).toEqual(allSummaryErrorExpectedValues);
+    for (const key in errorMessageFieldDataset) {
+      if (Object.hasOwn(errorMessageFieldDataset, key)) {
+        const expectedMessage = errorMessageFieldDataset[key];
+        if (
+          errorMessageFieldAndSummaryDatasetName === 'Invalid_Date_Range_To_Before_From_Error' ||
+          errorMessageFieldAndSummaryDatasetName === 'Invalid_Date_To_Error'
+        ) {
+          const actualMessage = await searchModificationsPage.date_submitted_to_date_error.textContent();
+          expect(actualMessage).toEqual(expectedMessage);
+        } else if (errorMessageFieldAndSummaryDatasetName === 'Invalid_Date_From_Error') {
+          const actualMessage = await searchModificationsPage.date_submitted_from_date_error.textContent();
+          expect(actualMessage).toEqual(expectedMessage);
+        } else if (errorMessageFieldAndSummaryDatasetName === 'Sponsor_Organisation_Min_Char_Error') {
+          const actualMessage =
+            await searchModificationsPage.sponsor_organisation_jsdisabled_min_error_message.textContent();
+          expect(actualMessage).toEqual(expectedMessage);
+        } else {
+          throw new Error(`Unhandled error message dataset name: ${errorMessageFieldAndSummaryDatasetName}`);
+        }
+        const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
+        await expect(element).toBeInViewport();
+      }
+    }
+  }
+);
+
+Then('the advanced filters section should collapse automatically', async ({ commonItemsPage }) => {
+  await expect(commonItemsPage.apply_filters_button).not.toBeVisible();
+});

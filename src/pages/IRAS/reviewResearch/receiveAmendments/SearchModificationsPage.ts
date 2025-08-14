@@ -19,12 +19,12 @@ export default class SearchModificationsPage {
   readonly search_box_label: Locator;
   readonly listCell: Locator;
   readonly chief_investigator_name_text: Locator;
-  readonly date_modification_submitted_from_day_text: Locator;
-  readonly date_modification_submitted_from_month_dropdown: Locator;
-  readonly date_modification_submitted_from_year_text: Locator;
-  readonly date_modification_submitted_to_day_text: Locator;
-  readonly date_modification_submitted_to_month_dropdown: Locator;
-  readonly date_modification_submitted_to_year_text: Locator;
+  readonly date_submitted_from_day_text: Locator;
+  readonly date_submitted_from_month_dropdown: Locator;
+  readonly date_submitted_from_year_text: Locator;
+  readonly date_submitted_to_day_text: Locator;
+  readonly date_submitted_to_month_dropdown: Locator;
+  readonly date_submitted_to_year_text: Locator;
   readonly short_project_title_text: Locator;
   readonly lead_nation_label: Locator;
   readonly lead_nation_fieldset: Locator;
@@ -39,8 +39,8 @@ export default class SearchModificationsPage {
   readonly sponsor_organisation_jsdisabled_search_button: Locator;
   readonly sponsor_organisation_jsdisabled_search_results_radio_button: Locator;
   readonly chief_investigator_name_text_chevron: Locator;
-  readonly date_modification_submitted_from_day_text_chevron: Locator;
-  readonly date_modification_submitted_to_day_text_chevron: Locator;
+  readonly date_submitted_from_day_text_chevron: Locator;
+  readonly date_submitted_to_day_text_chevron: Locator;
   readonly lead_nation_checkbox_chevron: Locator;
   readonly modification_type_checkbox_chevron: Locator;
   readonly short_project_title_text_chevron: Locator;
@@ -48,8 +48,8 @@ export default class SearchModificationsPage {
   readonly tableRows: Locator;
   readonly chief_investigator_name_label: Locator;
   readonly chief_investigator_name_fieldset: Locator;
-  readonly date_modification_submitted_from_date_fieldset: Locator;
-  readonly date_modification_submitted_to_date_fieldset: Locator;
+  readonly date_submitted_from_date_fieldset: Locator;
+  readonly date_submitted_to_date_fieldset: Locator;
   readonly short_project_title_fieldset: Locator;
   readonly sponsor_organisation_fieldset: Locator;
   readonly sponsor_organisation_jsdisabled_result_hint_label: Locator;
@@ -57,14 +57,14 @@ export default class SearchModificationsPage {
   readonly sponsor_organisation_jsdisabled_narrow_down_label: Locator;
   readonly sponsor_organisation_jsdisabled_no_suggestions_label: Locator;
   readonly sponsor_organisation_jsdisabled_min_error_message: Locator;
-  readonly date_modification_submitted_to_date_error: Locator;
+  readonly date_submitted_to_date_error: Locator;
   readonly lead_nation_checkbox_hint_label: Locator;
   readonly modification_type_checkbox_hint_label: Locator;
-  readonly date_modification_submitted_to_date_help_text: Locator;
-  readonly date_modification_submitted_from_date_help_text: Locator;
+  readonly date_submitted_to_date_help_text: Locator;
+  readonly date_submitted_from_date_help_text: Locator;
   readonly lead_nation_checkbox_selected_hint_label: Locator;
   readonly modification_type_checkbox_selected_hint_label: Locator;
-  readonly date_modification_submitted_from_date_error: Locator;
+  readonly date_submitted_from_date_error: Locator;
   readonly results_table: Locator;
   readonly participating_nation_label: Locator;
   readonly participating_nation_fieldset: Locator;
@@ -108,88 +108,81 @@ export default class SearchModificationsPage {
         exact: true,
       });
 
-    this.date_modification_submitted_from_day_text_chevron = this.page
+    this.date_submitted_from_day_text_chevron = this.page
       .getByRole('heading')
-      .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.date_modification_submitted_label, {
+      .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.date_submitted_label, {
         exact: true,
       });
-    this.date_modification_submitted_from_date_fieldset = this.page
-      .locator('.govuk-fieldset')
+    this.date_submitted_from_date_fieldset = this.page.locator('.govuk-fieldset').locator('.govuk-form-group', {
+      has: this.page.getByText(
+        this.searchModificationsPageTestData.Search_Modifications_Page.date_submitted_from_date_hint_text
+      ),
+    });
+    this.date_submitted_from_date_help_text = this.page.locator('#Search_FromDate-hint');
+    this.date_submitted_to_date_help_text = this.page.locator('#Search_ToDate-hint');
+    this.date_submitted_from_day_text = this.date_submitted_from_date_fieldset
       .locator('.govuk-form-group', {
         has: this.page.getByText(
-          this.searchModificationsPageTestData.Search_Modifications_Page.date_modification_submitted_from_date_hint_text
-        ),
-      });
-    this.date_modification_submitted_from_date_help_text = this.page.locator('#Search_FromDate-hint');
-    this.date_modification_submitted_to_date_help_text = this.page.locator('#Search_ToDate-hint');
-    this.date_modification_submitted_from_day_text = this.date_modification_submitted_from_date_fieldset
-      .locator('.govuk-form-group', {
-        has: this.page.getByText(
-          this.searchModificationsPageTestData.Search_Modifications_Page.date_modification_submitted_day_label
+          this.searchModificationsPageTestData.Search_Modifications_Page.date_submitted_day_label
         ),
       })
       .getByRole('textbox');
-    this.date_modification_submitted_from_month_dropdown = this.date_modification_submitted_from_date_fieldset
+    this.date_submitted_from_month_dropdown = this.date_submitted_from_date_fieldset
       .locator('.govuk-form-group', {
         has: this.page.getByText(
-          this.searchModificationsPageTestData.Search_Modifications_Page.date_modification_submitted_month_label
+          this.searchModificationsPageTestData.Search_Modifications_Page.date_submitted_month_label
         ),
       })
       .getByRole('combobox');
-    this.date_modification_submitted_from_year_text = this.date_modification_submitted_from_date_fieldset
+    this.date_submitted_from_year_text = this.date_submitted_from_date_fieldset
       .locator('.govuk-form-group', {
         has: this.page.getByText(
-          this.searchModificationsPageTestData.Search_Modifications_Page.date_modification_submitted_year_label
+          this.searchModificationsPageTestData.Search_Modifications_Page.date_submitted_year_label
         ),
       })
       .getByRole('textbox');
-    this.date_modification_submitted_from_date_error = this.page
+    this.date_submitted_from_date_error = this.page
       .locator('.govuk-fieldset')
       .locator('.govuk-form-group')
       .filter({
-        hasText:
-          this.searchModificationsPageTestData.Search_Modifications_Page
-            .date_modification_submitted_from_date_hint_text,
+        hasText: this.searchModificationsPageTestData.Search_Modifications_Page.date_submitted_from_date_hint_text,
       })
       .locator('.govuk-error-message');
-    this.date_modification_submitted_to_day_text_chevron = this.page
+    this.date_submitted_to_day_text_chevron = this.page
       .getByRole('heading')
-      .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.date_modification_submitted_label, {
+      .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.date_submitted_label, {
         exact: true,
       });
-    this.date_modification_submitted_to_date_error = this.page
+    this.date_submitted_to_date_error = this.page
       .locator('.govuk-fieldset')
       .locator('.govuk-form-group')
       .filter({
-        hasText:
-          this.searchModificationsPageTestData.Search_Modifications_Page.date_modification_submitted_to_date_hint_text,
+        hasText: this.searchModificationsPageTestData.Search_Modifications_Page.date_submitted_to_date_hint_text,
       })
       .locator('.govuk-error-message');
-    this.date_modification_submitted_to_date_fieldset = this.page
-      .locator('.govuk-fieldset')
+    this.date_submitted_to_date_fieldset = this.page.locator('.govuk-fieldset').locator('.govuk-form-group', {
+      has: this.page.getByText(
+        this.searchModificationsPageTestData.Search_Modifications_Page.date_submitted_to_date_hint_text
+      ),
+    });
+    this.date_submitted_to_day_text = this.date_submitted_to_date_fieldset
       .locator('.govuk-form-group', {
         has: this.page.getByText(
-          this.searchModificationsPageTestData.Search_Modifications_Page.date_modification_submitted_to_date_hint_text
-        ),
-      });
-    this.date_modification_submitted_to_day_text = this.date_modification_submitted_to_date_fieldset
-      .locator('.govuk-form-group', {
-        has: this.page.getByText(
-          this.searchModificationsPageTestData.Search_Modifications_Page.date_modification_submitted_day_label
+          this.searchModificationsPageTestData.Search_Modifications_Page.date_submitted_day_label
         ),
       })
       .getByRole('textbox');
-    this.date_modification_submitted_to_month_dropdown = this.date_modification_submitted_to_date_fieldset
+    this.date_submitted_to_month_dropdown = this.date_submitted_to_date_fieldset
       .locator('.govuk-form-group', {
         has: this.page.getByText(
-          this.searchModificationsPageTestData.Search_Modifications_Page.date_modification_submitted_month_label
+          this.searchModificationsPageTestData.Search_Modifications_Page.date_submitted_month_label
         ),
       })
       .getByRole('combobox');
-    this.date_modification_submitted_to_year_text = this.date_modification_submitted_to_date_fieldset
+    this.date_submitted_to_year_text = this.date_submitted_to_date_fieldset
       .locator('.govuk-form-group', {
         has: this.page.getByText(
-          this.searchModificationsPageTestData.Search_Modifications_Page.date_modification_submitted_year_label
+          this.searchModificationsPageTestData.Search_Modifications_Page.date_submitted_year_label
         ),
       })
       .getByRole('textbox');
@@ -467,8 +460,8 @@ export default class SearchModificationsPage {
 
   async clickFilterChevronModifications<PageObject>(dataset: JSON, key: string, page: PageObject) {
     const button = page[`${key}_chevron`];
-    const fromDate = dataset['date_modification_submitted_from_day_text'];
-    const isToDateKey = key === 'date_modification_submitted_to_day_text';
+    const fromDate = dataset['date_submitted_from_day_text'];
+    const isToDateKey = key === 'date_submitted_to_day_text';
     const shouldClick = !isToDateKey || (isToDateKey && (fromDate === '' || fromDate === undefined));
     if (button && shouldClick) {
       await button.click();
@@ -517,16 +510,15 @@ export default class SearchModificationsPage {
     return confirmStringNotNull(await commonItemsPage.result_count.textContent());
   }
 
-  async getExpectedResultsCountLabel() {
-    const testData = this.searchModificationsPageTestData;
+  async getExpectedResultsCountLabel(commonItemsPage: CommonItemsPage) {
+    const testData = commonItemsPage.commonTestData;
     const modificationsList = await this.getModificationIdListAfterSearch();
-    const expectedResultCountLabel = testData.Search_Modifications_Page.result_count_heading;
+    const expectedResultCountLabel = testData.result_count_heading;
     return modificationsList.length + expectedResultCountLabel;
   }
 
-  async getExpectedResultsCountLabelNoResults() {
-    const expectedResultCountLabel =
-      this.searchModificationsPageTestData.Search_Modifications_Page.result_count_heading;
+  async getExpectedResultsCountLabelNoResults(commonItemsPage: CommonItemsPage) {
+    const expectedResultCountLabel = commonItemsPage.commonTestData.result_count_heading;
     return '0' + expectedResultCountLabel;
   }
 }

@@ -62,7 +62,7 @@ BeforeScenario(
       const jsCommonItemsPage = new CommonItemsPage(jsPage);
       const jsHomePage = new HomePage(jsPage);
       const jsLoginPage = new LoginPage(jsPage);
-      const users = ['System_Admin', 'Frontstage_User', 'Backstage_User'];
+      const users = ['System_Admin', 'Frontstage_User', 'Studywide_Reviewer', 'Team_Manager', 'WorkFlow_Coordinator'];
 
       for (const user of users) {
         await jsContext.clearCookies();
@@ -82,7 +82,9 @@ BeforeScenario(
       const tagToUserMap: Record<string, string> = {
         '@SysAdminUser': 'system_admin',
         '@FrontStageUser': 'frontstage_user',
-        '@BackStageUser': 'backstage_user',
+        '@StudyWideReviewer': 'studywide_reviewer',
+        '@TeamManager': 'team_manager',
+        '@WorkFlowCoordinator': 'workflow_coordinator',
       };
 
       for (const tag in tagToUserMap) {

@@ -72,6 +72,8 @@ export default class CommonItemsPage {
   readonly advanced_filter_chevron: Locator;
   readonly result_count: Locator;
   readonly iras_id_search_text: Locator;
+  readonly lastPage: Locator;
+  readonly pagination_next_link: Locator;
   readonly no_matching_search_result_header_label: Locator;
   readonly no_matching_search_result_sub_header_label: Locator;
   readonly no_matching_search_result_body_one_label: Locator;
@@ -84,7 +86,7 @@ export default class CommonItemsPage {
   readonly no_results_bullet_points: Locator;
   readonly no_results_guidance_text: Locator;
   readonly no_results_heading: Locator;
-  readonly advanced_filter_active_filters_label: Locator;
+  readonly apply_filters_button: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -131,6 +133,7 @@ export default class CommonItemsPage {
     this.bannerMyApplications = this.bannerNavBar.getByText(this.linkTextData.Banner.My_Applications, { exact: true });
     this.next_button = this.page.getByRole('link').getByText(this.commonTestData.next_button, { exact: true });
     this.pagination_next_link = this.page.locator('div[class="govuk-pagination__next"]').getByRole('link');
+    this.pagination_next_link = this.page.locator('div[class="govuk-pagination__next"]').getByRole('link');
     this.errorMessageFieldLabel = this.page
       .locator('.field-validation-error')
       .or(this.page.locator('.govuk-error-message'))
@@ -143,6 +146,8 @@ export default class CommonItemsPage {
     this.summaryErrorLinks = this.errorMessageSummaryLabel.locator('..').getByRole('listitem').getByRole('link');
     this.topMenuBarLinks = this.page.getByTestId('navigation').getByRole('listitem').getByRole('link');
     this.pagination = page.getByRole('navigation', { name: 'Pagination' });
+    this.firstPage = this.pagination.getByRole('link', { name: this.commonTestData.first_page, exact: true });
+
     this.firstPage = this.pagination
       .getByRole('link', { name: this.commonTestData.first_page, exact: true })
       .or(this.pagination.getByRole('button', { name: this.commonTestData.first_page, exact: true }));
@@ -165,10 +170,7 @@ export default class CommonItemsPage {
     this.advanced_filter_chevron = this.page.getByRole('button', {
       name: this.commonTestData.advanced_filter_label,
     });
-    this.result_count = this.advanced_filter_chevron
-      .locator('..')
-      .getByRole('heading', { level: 2 })
-      .getByText(this.commonTestData.result_count_heading);
+    this.result_count = this.advanced_filter_chevron.getByText(this.commonTestData.result_count_heading);
     this.no_results_heading = this.page
       .getByRole('heading')
       .getByText(this.commonTestData.no_results_heading, { exact: true });
@@ -199,14 +201,20 @@ export default class CommonItemsPage {
         exact: true,
       });
     this.no_results_bullet_points = this.no_results_guidance_text.locator('..').getByRole('listitem');
-    this.advanced_filter_active_filters_label = this.page.getByRole('list');
+    this.apply_filters_button = this.page
+      .getByRole('button')
+      .getByText(this.buttonTextData.Search_Modifications_Page.Apply_Filters, {
+        exact: true,
+      });
   }
 
   //Page Methods
   async storeAuthState(user: string) {
     const authSysAdminUserFile = 'auth-storage-states/sysAdminUser.json';
     const authFrontStageUserFile = 'auth-storage-states/frontStageUser.json';
-    const authBackStageUserFile = 'auth-storage-states/backStageUser.json';
+    const authStudyWideReviewerFile = 'auth-storage-states/studyWideReviewer.json';
+    const authTeamManagerFile = 'auth-storage-states/teamManager.json';
+    const authWorkFlowCoordinatorFile = 'auth-storage-states/workFlowCoordinator.json';
     switch (user.toLowerCase()) {
       case 'system_admin':
         await this.page.context().storageState({ path: authSysAdminUserFile });
@@ -214,8 +222,14 @@ export default class CommonItemsPage {
       case 'frontstage_user':
         await this.page.context().storageState({ path: authFrontStageUserFile });
         break;
-      case 'backstage_user':
-        await this.page.context().storageState({ path: authBackStageUserFile });
+      case 'studywide_reviewer':
+        await this.page.context().storageState({ path: authStudyWideReviewerFile });
+        break;
+      case 'team_manager':
+        await this.page.context().storageState({ path: authTeamManagerFile });
+        break;
+      case 'workflow_coordinator':
+        await this.page.context().storageState({ path: authWorkFlowCoordinatorFile });
         break;
       default:
         throw new Error(`${user} is not a valid option`);
@@ -908,6 +922,20 @@ export default class CommonItemsPage {
     return `${label} - ${filterDataset[key]}`;
   }
 
+  async getFromDateValue(filterDataset: JSON, key: string): Promise<string | null> {
+    const baseKey = key.replace(/(_from_|_to_).*$/, '');
+    const fromKey = `${baseKey}_from_day_text`;
+    const fromDateValue = await this.getDateString(filterDataset, fromKey.replace('_day_text', ''));
+    return fromDateValue;
+  }
+
+  async getToDateValue(filterDataset: JSON, key: string): Promise<string | null> {
+    const baseKey = key.replace(/(_from_|_to_).*$/, '');
+    const toKey = `${baseKey}_to_day_text`;
+    const toDateValue = await this.getDateString(filterDataset, toKey.replace('_day_text', ''));
+    return toDateValue;
+  }
+
   async getActiveFilterLabelDateField(
     filterLabels: any,
     filterDataset: JSON,
@@ -915,15 +943,28 @@ export default class CommonItemsPage {
     searchValue: RegExp,
     replaceValue: string
   ): Promise<string> {
-    let activeFilterLabel: string;
+    let activeFilterLabel = '';
+    const fromDateValue = await this.getFromDateValue(filterDataset, key);
+    const toDateValue = await this.getToDateValue(filterDataset, key);
     const label = filterLabels[key.replace(searchValue, replaceValue)];
-    const dateType = key.includes('_from_') ? 'from' : 'to';
-    const dateKey = key.replace('_day_text', '');
-    const dateValue = await this.getDateString(filterDataset, dateKey);
-    if (dateValue) {
-      activeFilterLabel = `${label} - ${dateType} ${dateValue}`;
+    if (fromDateValue && toDateValue) {
+      activeFilterLabel = `${label} - ${fromDateValue} to ${toDateValue}`;
+    } else if (fromDateValue) {
+      activeFilterLabel = `${label} - from ${fromDateValue}`;
+    } else if (toDateValue) {
+      activeFilterLabel = `${label} - to ${toDateValue}`;
     }
     return activeFilterLabel;
+  }
+
+  async shouldValidateDateFilter(key: string, filterDataset: JSON): Promise<boolean> {
+    const fromDateValue = await this.getFromDateValue(filterDataset, key);
+    const toDateValue = await this.getToDateValue(filterDataset, key);
+    return (
+      (fromDateValue && !toDateValue && key.endsWith('_from_day_text')) ||
+      (!fromDateValue && toDateValue && key.endsWith('_to_day_text')) ||
+      (fromDateValue && toDateValue && key.endsWith('_from_day_text'))
+    );
   }
 
   async getCheckboxFilterLabels(
@@ -976,10 +1017,11 @@ export default class CommonItemsPage {
     );
   }
 
-  async getDateString(dataset: JSON, prefix: string) {
+  async getDateString(dataset: JSON, prefix: string): Promise<string | null> {
     const day = +dataset[`${prefix}_day_text`];
-    const month = dataset[`${prefix}_month_dropdown`].slice(0, 3);
+    const monthRaw = dataset[`${prefix}_month_dropdown`];
     const year = dataset[`${prefix}_year_text`];
+    const month = typeof monthRaw === 'string' ? monthRaw.slice(0, 3) : null;
     return day && month && year ? `${day} ${month} ${year}` : null;
   }
 
