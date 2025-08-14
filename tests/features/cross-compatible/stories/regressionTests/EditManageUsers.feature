@@ -127,7 +127,7 @@ Feature: User Administration: Edit Manage Users
         Examples:
             | Edit_User_Profile   | Edit_User_Field  | User_Role  | Status | Invalid_Data_Edit_User                                 | Field_And_Summary_Error_Message                              |
             | All_Checkbox_Fields | title_text       | Operations | ACTIVE | Missing_Mandatory_Fields_Role_Not_Operations           | Missing_Mandatory_Fields_Role_Not_Operations_Error           |
-            | All_Checkbox_Fields | first_name_text  | Operations | ACTIVE | Missing_Mandatory_Fields_Role_Operations               | Missing_Mandatory_Fields_Role_Operations_Error               |
+            | All_Checkbox_Fields | first_name_text  | Operations | ACTIVE | Missing_Mandatory_Fields_Role_Team_Manager             | Missing_Mandatory_Fields_Role_Team_Manager_Error             |
             | All_Checkbox_Fields | last_name_text   | Operations | ACTIVE | Missing_Mandatory_Field_First_Name_Role_Not_Operations | Missing_Mandatory_Field_First_Name_Role_Not_Operations_Error |
             | All_Checkbox_Fields | telephone_text   | Operations | ACTIVE | Missing_Mandatory_Field_Last_Name_Role_Not_Operations  | Missing_Mandatory_Field_Last_Name_Role_Not_Operations_Error  |
             | All_Checkbox_Fields | country_checkbox | Operations | ACTIVE | Missing_Mandatory_Field_Country_Role_Operations        | Missing_Mandatory_Field_Country_Role_Operations_Error        |

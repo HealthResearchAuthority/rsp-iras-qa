@@ -55,7 +55,7 @@ When(
 );
 
 Then(
-  'I clear the previously entered values on the add a new user profile page for {string} for role is not selected as operations',
+  'I clear the previously entered values on the add a new user profile page for {string} when the role is selected as applicant or system administrator',
   async ({ createUserProfilePage, commonItemsPage }, datasetName: string) => {
     const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
     for (const key in dataset) {

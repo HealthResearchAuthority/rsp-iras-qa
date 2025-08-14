@@ -40,7 +40,7 @@ Feature: User Administration: Create Manage Users
 
         Examples:
             | Add_User_Profile                                           | Field_Name |
-            | Valid_Data_In_All_Fields_Role_Operations                   | Role       |
+            | Valid_Data_In_All_Fields_Role_Team_Manager                 | Role       |
             | Valid_Data_In_All_Fields_Role_System_Administrator_Another | Role       |
 
     @RegressionTestAddAnotherUser
@@ -151,8 +151,8 @@ Feature: User Administration: Create Manage Users
         And I capture the page screenshot
 
         Examples:
-            | Add_User_Profile                         |
-            | Valid_Data_In_All_Fields_Role_Operations |
+            | Add_User_Profile                           |
+            | Valid_Data_In_All_Fields_Role_Team_Manager |
 
     @RegressionTestCreateUserProfileBackLinks
     Scenario Outline: Verify the user can navigate from 'Check and create user profile' back to system admin page via the 'Back' links
@@ -186,7 +186,7 @@ Feature: User Administration: Create Manage Users
         Examples:
             | Invalid_Data_User_Profile                                 | Field_And_Summary_Error_Message                                 |
             | Missing_Mandatory_Fields_Role_Not_Operations              | Missing_Mandatory_Fields_Role_Not_Operations_Error              |
-            | Missing_Mandatory_Fields_Role_Operations                  | Missing_Mandatory_Fields_Role_Operations_Error                  |
+            | Missing_Mandatory_Fields_Role_Team_Manager                | Missing_Mandatory_Fields_Role_Team_Manager_Error                |
             | Missing_Mandatory_Field_First_Name_Role_Not_Operations    | Missing_Mandatory_Field_First_Name_Role_Not_Operations_Error    |
             | Missing_Mandatory_Field_Last_Name_Role_Not_Operations     | Missing_Mandatory_Field_Last_Name_Role_Not_Operations_Error     |
             | Missing_Mandatory_Field_Email_Address_Role_Not_Operations | Missing_Mandatory_Field_Email_Address_Role_Not_Operations_Error |

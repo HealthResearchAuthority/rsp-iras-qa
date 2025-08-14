@@ -45,8 +45,10 @@ Feature: User Administration: Manage Users - Create user
       | Valid_Data_In_All_Mandatory_Fields_Role_System_Administrator | Label_Texts_Manage_Users_List     | Enabled        |
       | Valid_Data_In_All_Fields_Role_Applicant                      | Label_Texts_Manage_Users_List     | Enabled        |
       | Valid_Data_In_All_Mandatory_Fields_Role_Applicant            | Label_Texts_Manage_Users_List     | Enabled        |
-      | Valid_Data_In_All_Fields_Role_Operations                     | Label_Texts_Manage_Users_List     | Enabled        |
-      | Valid_Data_In_All_Mandatory_Fields_Role_Operations           | Label_Texts_Manage_Users_List     | Enabled        |
+      | Valid_Data_In_All_Fields_Role_Team_Manager                   | Label_Texts_Manage_Users_List     | Enabled        |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager         | Label_Texts_Manage_Users_List     | Enabled        |
+      | Valid_Data_In_All_Fields_Role_Studywide_Reviewer             | Label_Texts_Manage_Users_List     | Enabled        |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer   | Label_Texts_Manage_Users_List     | Enabled        |
 
   @rsp-2827 @rsp-2870 @verifyAddAnotherUser
   Scenario Outline: Verify the user is able to add another user from the Confirmation message screen using the link
@@ -86,12 +88,14 @@ Feature: User Administration: Manage Users - Create user
 
     Examples:
       | Add_User_Profile                                             | Add_Another_User_Profile                                             | Status_Enabled |
-      | Valid_Data_In_All_Fields_Role_Operations                     | Valid_Data_In_All_Fields_Role_Operations_Another                     | Enabled        |
-      | Valid_Data_In_All_Mandatory_Fields_Role_Operations           | Valid_Data_In_All_Mandatory_Fields_Role_Operations_Another           | Enabled        |
+      | Valid_Data_In_All_Fields_Role_Team_Manager                   | Valid_Data_In_All_Fields_Role_Team_Manager_Another                   | Enabled        |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager         | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_Another         | Enabled        |
       | Valid_Data_In_All_Fields_Role_System_Administrator           | Valid_Data_In_All_Fields_Role_System_Administrator_Another           | Enabled        |
       | Valid_Data_In_All_Mandatory_Fields_Role_System_Administrator | Valid_Data_In_All_Mandatory_Fields_Role_System_Administrator_Another | Enabled        |
       | Valid_Data_In_All_Fields_Role_Applicant                      | Valid_Data_In_All_Fields_Role_Applicant_Another                      | Enabled        |
       | Valid_Data_In_All_Mandatory_Fields_Role_Applicant            | Valid_Data_In_All_Mandatory_Fields_Role_Applicant_Another            | Enabled        |
+      | Valid_Data_In_All_Fields_Role_Studywide_Reviewer             | Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Another             | Enabled        |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer   | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer_Another   | Enabled        |
 
   @rsp-2827 @verifyCreateUserProfileBackLink
   Scenario: Verify the user can navigate from 'Add a new user profile' page by clicking 'Back' link
@@ -133,12 +137,14 @@ Feature: User Administration: Manage Users - Create user
 
     Examples:
       | Add_User_Profile                                             | Add_Another_User_Profile                                             | Status_Enabled | Role_Checkbox       |
-      | Valid_Data_In_All_Fields_Role_Operations                     | Valid_Data_In_All_Fields_Role_Operations_Another                     | Enabled        | Role_Operations     |
-      | Valid_Data_In_All_Mandatory_Fields_Role_Operations           | Valid_Data_In_All_Mandatory_Fields_Role_Operations_Another           | Enabled        | Role_Operations     |
+      | Valid_Data_In_All_Fields_Role_Team_Manager                   | Valid_Data_In_All_Fields_Role_Team_Manager_Another                   | Enabled        | Role_Operations     |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager         | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_Another         | Enabled        | Role_Operations     |
       | Valid_Data_In_All_Fields_Role_System_Administrator           | Valid_Data_In_All_Fields_Role_System_Administrator_Another           | Enabled        | Role_Not_Operations |
       | Valid_Data_In_All_Mandatory_Fields_Role_System_Administrator | Valid_Data_In_All_Mandatory_Fields_Role_System_Administrator_Another | Enabled        | Role_Not_Operations |
       | Valid_Data_In_All_Fields_Role_Applicant                      | Valid_Data_In_All_Fields_Role_Applicant_Another                      | Enabled        | Role_Not_Operations |
       | Valid_Data_In_All_Mandatory_Fields_Role_Applicant            | Valid_Data_In_All_Mandatory_Fields_Role_Applicant_Another            | Enabled        | Role_Not_Operations |
+      | Valid_Data_In_All_Fields_Role_Studywide_Reviewer             | Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Another             | Enabled        | Role_Not_Operations |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer   | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer_Another   | Enabled        | Role_Not_Operations |
 
   @rsp-2827 @rsp-4021 @verifyCheckCreateUserProfileChangeLinkRoleOperations @RoleCheckbox
   Scenario Outline: Verify the user can navigate from 'Check and create user profile' page by clicking 'Change' button against all the fields when the role is selected as study-wide reviewer or team manager or workflow co-ordinator
@@ -164,19 +170,23 @@ Feature: User Administration: Manage Users - Create user
     And I capture the page screenshot
 
     Examples:
-      | Add_User_Profile                                   | Field_Name      | Add_Another_User_Profile                                   | Role_Checkbox   |
-      | Valid_Data_In_All_Fields_Role_Operations           | Title           | Valid_Data_In_All_Fields_Role_Operations_Another           | Role_Operations |
-      | Valid_Data_In_All_Fields_Role_Operations           | First_Name      | Valid_Data_In_All_Fields_Role_Operations_Another           | Role_Operations |
-      | Valid_Data_In_All_Fields_Role_Operations           | Last_Name       | Valid_Data_In_All_Fields_Role_Operations_Another           | Role_Operations |
-      | Valid_Data_In_All_Fields_Role_Operations           | Email_Address   | Valid_Data_In_All_Fields_Role_Operations_Another           | Role_Operations |
-      | Valid_Data_In_All_Fields_Role_Operations           | Telephone       | Valid_Data_In_All_Fields_Role_Operations_Another           | Role_Operations |
-      | Valid_Data_In_All_Fields_Role_Operations           | Organisation    | Valid_Data_In_All_Fields_Role_Operations_Another           | Role_Operations |
-      | Valid_Data_In_All_Fields_Role_Operations           | Job_Title       | Valid_Data_In_All_Fields_Role_Operations_Another           | Role_Operations |
-      | Valid_Data_In_All_Fields_Role_Operations           | Role            | Valid_Data_In_All_Fields_Role_Operations_Another           | Role_Operations |
-      | Valid_Data_In_All_Fields_Role_Operations           | Committee       | Valid_Data_In_All_Fields_Role_Operations_Another           | Role_Operations |
-      | Valid_Data_In_All_Fields_Role_Operations           | Country         | Valid_Data_In_All_Fields_Role_Operations_Another           | Role_Operations |
-      | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Access_Required | Valid_Data_In_All_Mandatory_Fields_Role_Operations_Another | Role_Operations |
-      | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Review_Body     | Valid_Data_In_All_Mandatory_Fields_Role_Operations_Another | Role_Operations |
+      | Add_User_Profile                                           | Field_Name    | Add_Another_User_Profile                                           | Role_Checkbox   |
+      | Valid_Data_In_All_Fields_Role_Team_Manager                 | Title         | Valid_Data_In_All_Fields_Role_Team_Manager_Another                 | Role_Operations |
+      | Valid_Data_In_All_Fields_Role_Team_Manager                 | First_Name    | Valid_Data_In_All_Fields_Role_Team_Manager_Another                 | Role_Operations |
+      | Valid_Data_In_All_Fields_Role_Team_Manager                 | Last_Name     | Valid_Data_In_All_Fields_Role_Team_Manager_Another                 | Role_Operations |
+      | Valid_Data_In_All_Fields_Role_Team_Manager                 | Email_Address | Valid_Data_In_All_Fields_Role_Team_Manager_Another                 | Role_Operations |
+      | Valid_Data_In_All_Fields_Role_Team_Manager                 | Telephone     | Valid_Data_In_All_Fields_Role_Team_Manager_Another                 | Role_Operations |
+      | Valid_Data_In_All_Fields_Role_Team_Manager                 | Organisation  | Valid_Data_In_All_Fields_Role_Team_Manager_Another                 | Role_Operations |
+      | Valid_Data_In_All_Fields_Role_Team_Manager                 | Job_Title     | Valid_Data_In_All_Fields_Role_Team_Manager_Another                 | Role_Operations |
+      | Valid_Data_In_All_Fields_Role_Team_Manager                 | Role          | Valid_Data_In_All_Fields_Role_Team_Manager_Another                 | Role_Operations |
+      | Valid_Data_In_All_Fields_Role_Team_Manager                 | Job_Title     | Valid_Data_In_All_Fields_Role_Team_Manager_Another                 | Role_Operations |
+      | Valid_Data_In_All_Fields_Role_Team_Manager                 | Country       | Valid_Data_In_All_Fields_Role_Team_Manager_Another                 | Role_Operations |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager       | Country       | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_Another       | Role_Operations |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager       | Review_Body   | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_Another       | Role_Operations |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer | Review_Body   | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer_Another | Role_Operations |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer | Review_Body   | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer_Another | Role_Operations |
+      | Valid_Data_In_All_Fields_Role_Studywide_Reviewer           | Job_Title     | Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Another           | Role_Operations |
+      | Valid_Data_In_All_Fields_Role_Studywide_Reviewer           | Country       | Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Another           | Role_Operations |
 
   @rsp-2827 @verifyCheckCreateUserProfileChangeLinkRoleNotOperations @RoleCheckbox
   Scenario Outline: Verify the user can navigate from 'Check and create user profile' page by clicking 'Change' button against all the fields when the role is selected as applicant or system administrator
@@ -191,7 +201,7 @@ Feature: User Administration: Manage Users - Create user
     Then I can see the add a new user profile page
     Then I can see previously filled values in the new user profile page for '<Add_User_Profile>' displayed on the add a new user profile page
     And I capture the page screenshot
-    And I clear the previously entered values on the add a new user profile page for '<Add_User_Profile>' for role is not selected as operations
+    And I clear the previously entered values on the add a new user profile page for '<Add_User_Profile>' when the role is selected as applicant or system administrator
     And I capture the page screenshot
     When I fill the new user profile page using '<Add_Another_User_Profile>'
     And I capture the page screenshot
@@ -241,9 +251,9 @@ Feature: User Administration: Manage Users - Create user
 
     Examples:
       | Add_User_Profile                                           | Field_Name | Status_Enabled |
-      | Valid_Data_In_All_Fields_Role_Operations                   | Role       | Enabled        |
+      | Valid_Data_In_All_Fields_Role_Team_Manager                 | Role       | Enabled        |
       | Valid_Data_In_All_Fields_Role_System_Administrator_Another | Role       | Enabled        |
-      | Valid_Data_In_All_Mandatory_Fields_Role_Operations         | Role       | Enabled        |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager       | Role       | Enabled        |
       | Valid_Data_All_Roles                                       | Role       | Enabled        |
       | Valid_Data_No_Roles                                        | Role       | Enabled        |
 
@@ -292,19 +302,21 @@ Feature: User Administration: Manage Users - Create user
     And I capture the page screenshot
 
     Examples:
-      | Invalid_Data_User_Profile                                 | Field_And_Summary_Error_Message                                 |
-      | Missing_Mandatory_Fields_Role_Not_Operations              | Missing_Mandatory_Fields_Role_Not_Operations_Error              |
-      | Missing_Mandatory_Fields_Role_Operations                  | Missing_Mandatory_Fields_Role_Operations_Error                  |
-      | Missing_Mandatory_Field_First_Name_Role_Not_Operations    | Missing_Mandatory_Field_First_Name_Role_Not_Operations_Error    |
-      | Missing_Mandatory_Field_Last_Name_Role_Not_Operations     | Missing_Mandatory_Field_Last_Name_Role_Not_Operations_Error     |
-      | Missing_Mandatory_Field_Email_Address_Role_Not_Operations | Missing_Mandatory_Field_Email_Address_Role_Not_Operations_Error |
-      | Missing_Mandatory_Field_Country_Role_Operations           | Missing_Mandatory_Field_Country_Role_Operations_Error           |
-      # | Missing_Mandatory_Field_Access_Required_Role_Operations   | Missing_Mandatory_Field_Access_Required_Role_Operations_Error   |
-      | Invalid_Character_Limit                                   | Invalid_Character_Limit_Error                                   |
-      | Invalid_Email_Data_Max_Char                               | Invalid_Character_Limit_Field_Email_Address_Error               |
-      | Incorrect_Format_Telephone_Data                           | Incorrect_Format_Field_Telephone_Error                          |
-      | Incorrect_Format_Invalid_Character_Limit_Telephone_Data   | Incorrect_Format_Invalid_Character_Limit_Telephone_Error        |
-      | Incorrect_Format_Invalid_Character_Limit_Email_Data       | Incorrect_Format_Invalid_Character_Limit_Email_Address_Error    |
+      | Invalid_Data_User_Profile                                   | Field_And_Summary_Error_Message                                   |
+      | Missing_Mandatory_Fields_Role_Applicant                     | Missing_Mandatory_Fields_Role_Applicant_Error                     |
+      | Missing_Mandatory_Fields_Role_System_Administrator          | Missing_Mandatory_Fields_Role_System_Administrator_Error          |
+      | Missing_Mandatory_Fields_Role_Team_Manager                  | Missing_Mandatory_Fields_Role_Team_Manager_Error                  |
+      | Missing_Mandatory_Fields_Role_Studywide_Reviewer            | Missing_Mandatory_Fields_Role_Studywide_Reviewer_Error            |
+      # | Missing_Mandatory_Field_First_Name_Role_Not_Operations      | Missing_Mandatory_Field_First_Name_Role_Not_Operations_Error      |
+      # | Missing_Mandatory_Field_Last_Name_Role_Not_Operations       | Missing_Mandatory_Field_Last_Name_Role_Not_Operations_Error       |
+      # | Missing_Mandatory_Field_Email_Address_Role_Not_Operations   | Missing_Mandatory_Field_Email_Address_Role_Not_Operations_Error   |
+      | Missing_Mandatory_Field_Country_Role_Team_Manager           | Missing_Mandatory_Field_Country_Role_Team_Manager_Error           |
+      | Missing_Mandatory_Field_Review_Body_Role_Studywide_Reviewer | Missing_Mandatory_Field_Review_Body_Role_Studywide_Reviewer_Error |
+      | Invalid_Character_Limit                                     | Invalid_Character_Limit_Error                                     |
+      | Invalid_Email_Data_Max_Char                                 | Invalid_Character_Limit_Field_Email_Address_Error                 |
+      | Incorrect_Format_Telephone_Data                             | Incorrect_Format_Field_Telephone_Error                            |
+      | Incorrect_Format_Invalid_Character_Limit_Telephone_Data     | Incorrect_Format_Invalid_Character_Limit_Telephone_Error          |
+      | Incorrect_Format_Invalid_Character_Limit_Email_Data         | Incorrect_Format_Invalid_Character_Limit_Email_Address_Error      |
 
   @rsp-3122 @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage @verifyInvalidDataEmails @skip
   Scenario Outline: Validate error messages are displayed for invalid data in the email address field of create user profile page
@@ -359,10 +371,10 @@ Feature: User Administration: Manage Users - Create user
     And I capture the page screenshot
 
     Examples:
-      | Add_User_Profile                         | Role_Checkbox   | Invalid_Data_User_Profile                       | Field_And_Summary_Error_Message                       |
-      | Valid_Data_In_All_Fields_Role_Operations | Role_Operations | Missing_Mandatory_Fields_Role_Operations        | Missing_Mandatory_Fields_Role_Operations_Error        |
-      | Valid_Data_In_All_Fields_Role_Operations | Role_Operations | Missing_Mandatory_Field_Country_Role_Operations | Missing_Mandatory_Field_Country_Role_Operations_Error |
-  # | Valid_Data_In_All_Fields_Role_Operations | Role_Operations | Missing_Mandatory_Field_Access_Required_Role_Operations | Missing_Mandatory_Field_Access_Required_Role_Operations_Error |
+      | Add_User_Profile                           | Role_Checkbox   | Invalid_Data_User_Profile                                   | Field_And_Summary_Error_Message                                   |
+      | Valid_Data_In_All_Fields_Role_Team_Manager | Role_Operations | Missing_Mandatory_Fields_Role_Team_Manager                  | Missing_Mandatory_Fields_Role_Team_Manager_Error                  |
+      | Valid_Data_In_All_Fields_Role_Team_Manager | Role_Operations | Missing_Mandatory_Field_Country_Role_Team_Manager           | Missing_Mandatory_Field_Country_Role_Team_Manager_Error           |
+      | Valid_Data_In_All_Fields_Role_Team_Manager | Role_Operations | Missing_Mandatory_Field_Review_Body_Role_Studywide_Reviewer | Missing_Mandatory_Field_Review_Body_Role_Studywide_Reviewer_Error |
 
   @rsp-3122 @VerifyErrorMessagesInvalidData @VerifyErrorInvalidDataCreateUserFromCheckCreateUserProfileChangeLink
   Scenario Outline: Validate error messages are displayed for invalid data in create user profile page when the user navigated from 'Check and create user profile' page by clicking 'Change' button against the fields
@@ -385,10 +397,10 @@ Feature: User Administration: Manage Users - Create user
     And I capture the page screenshot
 
     Examples:
-      | Add_User_Profile                         | Field_Name | Role_Checkbox   | Invalid_Data_User_Profile                       | Field_And_Summary_Error_Message                       |
-      | Valid_Data_In_All_Fields_Role_Operations | Title      | Role_Operations | Missing_Mandatory_Fields_Role_Operations        | Missing_Mandatory_Fields_Role_Operations_Error        |
-      | Valid_Data_In_All_Fields_Role_Operations | First_Name | Role_Operations | Missing_Mandatory_Field_Country_Role_Operations | Missing_Mandatory_Field_Country_Role_Operations_Error |
-  # | Valid_Data_In_All_Fields_Role_Operations | Last_Name  | Role_Operations | Missing_Mandatory_Field_Access_Required_Role_Operations | Missing_Mandatory_Field_Access_Required_Role_Operations_Error |
+      | Add_User_Profile                           | Field_Name | Role_Checkbox   | Invalid_Data_User_Profile                       | Field_And_Summary_Error_Message                       |
+      | Valid_Data_In_All_Fields_Role_Team_Manager | Title      | Role_Operations | Missing_Mandatory_Fields_Role_Team_Manager      | Missing_Mandatory_Fields_Role_Team_Manager_Error      |
+      | Valid_Data_In_All_Fields_Role_Team_Manager | First_Name | Role_Operations | Missing_Mandatory_Field_Country_Role_Operations | Missing_Mandatory_Field_Country_Role_Operations_Error |
+  # | Valid_Data_In_All_Fields_Role_Team_Manager | Last_Name  | Role_Operations | Missing_Mandatory_Field_Access_Required_Role_Operations | Missing_Mandatory_Field_Access_Required_Role_Operations_Error |
 
   @rsp-3952 @DuplicateEmailValidation @DuplicateEmailExisting @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage
   Scenario Outline: Get existing email addresses from manage users list page and validate error messages are displayed for the duplicate email in create user profile page
@@ -473,8 +485,8 @@ Feature: User Administration: Manage Users - Create user
     Then I can see the check and create user profile page
     And I capture the page screenshot
     Examples:
-      | Add_User_Profile                         | Status_Enabled | Invalid_Data_User_Profile       | Field_And_Summary_Error_Message |
-      | Valid_Data_In_All_Fields_Role_Operations | Enabled        | Duplicate_Email_Role_Operations | Duplicate_Email_Error           |
+      | Add_User_Profile                           | Status_Enabled | Invalid_Data_User_Profile       | Field_And_Summary_Error_Message |
+      | Valid_Data_In_All_Fields_Role_Team_Manager | Enabled        | Duplicate_Email_Role_Operations | Duplicate_Email_Error           |
 
   @rsp-3886 @rsp-4026 @verifyLastLoggedInDate
   Scenario Outline: Verify the last login date of user in homepage and manage users page

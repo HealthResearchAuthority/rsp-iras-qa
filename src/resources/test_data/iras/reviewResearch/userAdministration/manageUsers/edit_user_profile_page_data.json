@@ -20,7 +20,7 @@
     "first_name_text": "Enter a first name",
     "last_name_text": "Enter a last name"
   },
-  "Missing_Mandatory_Fields_Role_Operations_Error": {
+  "Missing_Mandatory_Fields_Role_Team_Manager_Error": {
     "country_checkbox": "You must provide a country",
     "first_name_text": "Enter a first name",
     "last_name_text": "Enter a last name"
@@ -273,14 +273,12 @@
   },
   "Missing_Mandatory_Fields_Role_Not_Operations": {
     "first_name_text": "",
-    "last_name_text": "",
-    "email_address_text": ""
+    "last_name_text": ""
   },
-  "Missing_Mandatory_Fields_Role_Operations": {
+  "Missing_Mandatory_Fields_Role_Team_Manager": {
     "first_name_text": "",
     "last_name_text": "",
-    "email_address_text": "",
-    "role_checkbox": ["Operations"]
+    "role_checkbox": ["Team manager"]
   },
   "Missing_Mandatory_Field_First_Name_Role_Not_Operations": {
     "first_name_text": "",

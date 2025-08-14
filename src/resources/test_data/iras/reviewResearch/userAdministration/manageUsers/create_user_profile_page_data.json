@@ -16,14 +16,25 @@
     "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
     "review_body_label": "Review body"
   },
-  "Missing_Mandatory_Fields_Role_Not_Operations_Error": {
+  "Missing_Mandatory_Fields_Role_Applicant_Error": {
     "email_address_text": "Enter an email address",
     "first_name_text": "Enter a first name",
     "last_name_text": "Enter a last name"
   },
-  "Missing_Mandatory_Fields_Role_Operations_Error": {
+  "Missing_Mandatory_Fields_Role_System_Administrator_Error": {
+    "email_address_text": "Enter an email address",
+    "first_name_text": "Enter a first name",
+    "last_name_text": "Enter a last name"
+  },
+  "Missing_Mandatory_Fields_Role_Team_Manager_Error": {
     "email_address_text": "Enter an email address",
     "country_checkbox": "You must provide a country",
+    "first_name_text": "Enter a first name",
+    "last_name_text": "Enter a last name"
+  },
+  "Missing_Mandatory_Fields_Role_Studywide_Reviewer_Error": {
+    "email_address_text": "Enter an email address",
+    "review_body_checkbox": "You must provide a review body",
     "first_name_text": "Enter a first name",
     "last_name_text": "Enter a last name"
   },
@@ -36,8 +47,11 @@
   "Missing_Mandatory_Field_Email_Address_Role_Not_Operations_Error": {
     "email_address_text": "Enter an email address"
   },
-  "Missing_Mandatory_Field_Country_Role_Operations_Error": {
+  "Missing_Mandatory_Field_Country_Role_Team_Manager_Error": {
     "country_checkbox": "You must provide a country"
+  },
+  "Missing_Mandatory_Field_Review_Body_Role_Studywide_Reviewer_Error": {
+    "review_body_checkbox": "You must provide a review body"
   },
   "Invalid_Character_Limit_Error": {
     "email_address_text": "Email address must be 250 characters or less",
@@ -82,7 +96,7 @@
       "role_checkbox_label": "Role",
       "country_checkbox_label": "Country"
     },
-    "Valid_Data_In_All_Fields_Role_Operations": {
+    "Valid_Data_In_All_Fields_Role_Team_Manager": {
       "title_text": "Mr",
       "first_name_text": "QA Automation First Name Test Role_Operations",
       "last_name_text": "Test Last Name Role_Operations",
@@ -90,10 +104,10 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Operations",
       "job_title_text": "Sr.Reviewer Role_Operations",
-      "role_checkbox": ["Operations", "System administrator"],
+      "role_checkbox": ["Team manager"],
       "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
     },
-    "Valid_Data_In_All_Fields_Role_Operations_Another": {
+    "Valid_Data_In_All_Fields_Role_Team_Manager_Another": {
       "title_text": "Mr",
       "first_name_text": "QA Automation First Name Test Role_Operations_Another",
       "last_name_text": "Test Last Name Role_Operations_Another",
@@ -101,21 +115,21 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Operations_Another",
       "job_title_text": "Sr.Reviewer Role_Operations_Another",
-      "role_checkbox": ["Operations", "User"],
+      "role_checkbox": ["Team manager"],
       "country_checkbox": ["England", "Scotland"]
     },
-    "Valid_Data_In_All_Mandatory_Fields_Role_Operations": {
+    "Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager": {
       "first_name_text": "QA Automation First Name Test Role_Operations",
       "last_name_text": "Test Last Name Role_Operations",
       "email_address_text": "hscrd@health.org",
-      "role_checkbox": ["Operations"],
+      "role_checkbox": ["Team manager"],
       "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
     },
-    "Valid_Data_In_All_Mandatory_Fields_Role_Operations_Another": {
+    "Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_Another": {
       "first_name_text": "QA Automation First Name Test Role_Operations_Another",
       "last_name_text": "Test Last Name Role_Operations_Another",
       "email_address_text": "hscrd@health.org",
-      "role_checkbox": ["Operations"],
+      "role_checkbox": ["Team manager"],
       "country_checkbox": ["England"]
     },
     "Valid_Data_In_All_Fields_Role_System_Administrator": {
@@ -190,8 +204,15 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_All",
       "job_title_text": "Sr.Reviewer Role_All",
-      "role_checkbox": ["Operations", "Reviewer", "User", "System administrator"],
-      "country_checkbox": ["Wales"]
+      "role_checkbox": [
+        "Applicant",
+        "Study-wide reviewer",
+        "System administrator",
+        "Team manager",
+        "Workflow co-ordinator"
+      ],
+      "country_checkbox": ["Wales"],
+      "review_body_checkbox": ["QA Automation Health Research Authority (HRA)"]
     },
     "Valid_Data_No_Roles": {
       "title_text": "Mr",
@@ -358,16 +379,29 @@
       "job_title_text": "Sr.Reviewer Role_Operations",
       "role_checkbox": ["System administrator"]
     },
-    "Missing_Mandatory_Fields_Role_Not_Operations": {
-      "first_name_text": "",
-      "last_name_text": "",
-      "email_address_text": ""
-    },
-    "Missing_Mandatory_Fields_Role_Operations": {
+    "Missing_Mandatory_Fields_Role_Applicant": {
       "first_name_text": "",
       "last_name_text": "",
       "email_address_text": "",
-      "role_checkbox": ["Operations"]
+      "role_checkbox": ["Applicant"]
+    },
+    "Missing_Mandatory_Fields_Role_System_Administrator": {
+      "first_name_text": "",
+      "last_name_text": "",
+      "email_address_text": "",
+      "role_checkbox": ["System administrator"]
+    },
+    "Missing_Mandatory_Fields_Role_Team_Manager": {
+      "first_name_text": "",
+      "last_name_text": "",
+      "email_address_text": "",
+      "role_checkbox": ["Team manager"]
+    },
+    "Missing_Mandatory_Fields_Role_Studywide_Reviewer": {
+      "first_name_text": "",
+      "last_name_text": "",
+      "email_address_text": "",
+      "role_checkbox": ["Study-wide reviewer"]
     },
     "Missing_Mandatory_Field_First_Name_Role_Not_Operations": {
       "title_text": "Mr",
@@ -399,7 +433,7 @@
       "job_title_text": "Sr.Reviewer Role_Reviewer",
       "role_checkbox": ["Reviewer", "System administrator"]
     },
-    "Missing_Mandatory_Field_Country_Role_Operations": {
+    "Missing_Mandatory_Field_Country_Role_Team_Manager": {
       "title_text": "Mr",
       "first_name_text": "Test First Name Role_Reviewer",
       "last_name_text": "Test Last Name Role_Reviewer",
@@ -407,9 +441,9 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Reviewer",
       "job_title_text": "Sr.Reviewer Role_Reviewer",
-      "role_checkbox": ["Operations"]
+      "role_checkbox": ["Team manager"]
     },
-    "Missing_Mandatory_Field_Access_Required_Role_Operations": {
+    "Missing_Mandatory_Field_Review_Body_Role_Studywide_Reviewer": {
       "title_text": "Mr",
       "first_name_text": "Test First Name Role_Reviewer",
       "last_name_text": "Test Last Name Role_Reviewer",
@@ -417,8 +451,7 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Reviewer",
       "job_title_text": "Sr.Reviewer Role_Reviewer",
-      "role_checkbox": ["Operations"],
-      "country_checkbox": ["England", "Scotland"]
+      "role_checkbox": ["Study-wide reviewer"]
     },
     "Invalid_Character_Limit": {
       "title_text": "johñ.döeExploring the Intricacies of Advanced Quantum Computing: Unveiling the Potential of Quantum Algorithms, Quantum Cryptography, and Quantum Machine Learning in Revolutionizing Technology and Shaping the Future of Computational Science and Engineering Morethan250chars",

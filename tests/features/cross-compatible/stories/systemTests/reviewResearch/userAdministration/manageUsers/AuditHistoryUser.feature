@@ -48,9 +48,9 @@ Feature: User Administration: Manage Users - View audit history for users
 
         Examples:
             | Add_User_Profile                                           | Status_Enabled |
-            | Valid_Data_In_All_Fields_Role_Operations                   | Enabled        |
+            | Valid_Data_In_All_Fields_Role_Team_Manager                 | Enabled        |
             | Valid_Data_In_All_Fields_Role_System_Administrator_Another | Enabled        |
-            | Valid_Data_In_All_Mandatory_Fields_Role_Operations         | Enabled        |
+            | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager       | Enabled        |
 
 
     @VerifyAuditHistoryUserUnassignRole @fail
@@ -87,7 +87,7 @@ Feature: User Administration: Manage Users - View audit history for users
 
         Examples:
             | Add_User_Profile                                           | Field_Name | Edit_User                 | Status_Enabled |
-            | Valid_Data_In_All_Fields_Role_Operations                   | Role       | User_Roles_Checkbox_Empty | Enabled        |
+            | Valid_Data_In_All_Fields_Role_Team_Manager                 | Role       | User_Roles_Checkbox_Empty | Enabled        |
             | Valid_Data_In_All_Fields_Role_System_Administrator_Another | Role       | User_Roles_Checkbox_Empty | Enabled        |
             | Valid_Data_All_Roles                                       | Role       | User_Roles_Checkbox_Empty | Enabled        |
 
@@ -189,9 +189,9 @@ Feature: User Administration: Manage Users - View audit history for users
         And I can see the users audit history with the '<Audit_History>' event as the most recent entry
 
         Examples:
-            | Add_User_Profile                                   | Field_Name | Edit_User                 | Audit_History     | Status_Enabled |
-            | Valid_Data_In_All_Fields_Role_Operations           | Country    | User_Country_Checkbox_One | Edit_User_Country | Enabled        |
-            | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Country    | User_Country_Checkbox_Two | Edit_User_Country | Enabled        |
+            | Add_User_Profile                                     | Field_Name | Edit_User                 | Audit_History     | Status_Enabled |
+            | Valid_Data_In_All_Fields_Role_Team_Manager           | Country    | User_Country_Checkbox_One | Edit_User_Country | Enabled        |
+            | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager | Country    | User_Country_Checkbox_Two | Edit_User_Country | Enabled        |
 
     @VerifyAuditHistoryUserDefaultSort
     Scenario Outline: Verify the users audit history should be sorted with the most recent entry first
