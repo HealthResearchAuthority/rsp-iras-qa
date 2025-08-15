@@ -43,8 +43,9 @@ Feature: User Administration: Manage Review Bodies - Create review body
             | Add_Review_Body         |
             | Review_Body_HCRW_Data   |
             | Review_Body_HSCNI_Data  |
-            | Review_Body_RandD_Data  |
+            | Review_Body_NRSPCC_Data |
             | Review_Body_HRA_Data    |
+            | Review_Body_RandD_Data  |
             | Review_Body_NIPS_Data   |
             | Review_Body_HFEA_Data   |
             | Review_Body_HMPPS_Data  |
@@ -54,7 +55,7 @@ Feature: User Administration: Manage Review Bodies - Create review body
             | Review_Body_MHRA_Data   |
             | Review_Body_CAG_Data    |
             | Review_Body_ARSAC_Data  |
-            | Review_Body_NRS_Data    |
+
 
     @verifyAddAnotherReviewBody
     Scenario Outline: Verify the user is able to add another review body via the link on the Confirmation message screen

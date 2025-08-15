@@ -92,7 +92,7 @@ Then(
   'I clear the previously entered values on the add a new user profile page for {string} for {string}',
   async ({ createUserProfilePage, commonItemsPage }, datasetName: string, datasetValName: string) => {
     const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
-    if (datasetValName === 'Role_Operations') {
+    if (datasetValName === 'Role_TM_SWR_WFC') {
       for (const key in dataset) {
         if (key !== 'country_checkbox' && key !== 'review_body_checkbox') {
           if (Object.prototype.hasOwnProperty.call(dataset, key)) {
@@ -131,5 +131,16 @@ Then(
         }
       }
     }
+  }
+);
+
+Then(
+  'the top menu bar will not have links to {string} or {string}',
+  async ({ commonItemsPage }, usersLink: string, adminLink: string) => {
+    const allTopMenuBarLinksExpectedValues = commonItemsPage.commonTestData.top_menu_bar_links;
+    const allTopMenuBarLinksActualValues = await commonItemsPage.getTopMenuBarLinksNames();
+    expect.soft(allTopMenuBarLinksActualValues).toEqual(allTopMenuBarLinksExpectedValues);
+    expect(allTopMenuBarLinksActualValues).not.toContain(usersLink);
+    expect(allTopMenuBarLinksActualValues).not.toContain(adminLink);
   }
 );
