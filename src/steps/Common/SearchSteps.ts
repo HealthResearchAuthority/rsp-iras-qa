@@ -9,9 +9,9 @@ When(
     {
       manageReviewBodiesPage,
       manageUsersPage,
-      userListReviewBodyPage,
       searchAddUserReviewBodyPage,
       searchModificationsPage,
+      modificationsReadyToAssignPage,
       commonItemsPage,
     },
     searchType: string,
@@ -29,7 +29,11 @@ When(
           searchQueryName
         ];
     } else if (searchType.toLowerCase() == 'modifications') {
-      searchQueryDataset = searchModificationsPage.searchModificationsPageTestData.Search_Queries[searchQueryName];
+      searchQueryDataset =
+        searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[searchQueryName];
+    } else if (searchType.toLowerCase() == 'tasklist') {
+      searchQueryDataset =
+        modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Search_Queries[searchQueryName];
     } else if ((await commonItemsPage.tableBodyRows.count()) < 1) {
       throw new Error(`There are no items in list to search`);
     }
@@ -40,7 +44,7 @@ When(
       searchKey = searchQueryDataset['search_input_text'];
     }
     expect(searchKey).toBeTruthy();
-    await userListReviewBodyPage.setSearchKey(searchKey);
+    await commonItemsPage.setSearchKey(searchKey);
     await commonItemsPage.search_text.fill(searchKey);
   }
 );
@@ -48,7 +52,7 @@ When(
 Given(
   'the system displays user records matching the search criteria',
   async ({ userListReviewBodyPage, commonItemsPage }) => {
-    const searchKey = await userListReviewBodyPage.getSearchKey();
+    const searchKey = await commonItemsPage.getSearchKey();
     const searchTerms = await commonItemsPage.splitSearchTerm(searchKey);
     const userList = await commonItemsPage.getAllUsersFromTheTable();
     const userListAfterSearch: string[] = confirmArrayNotNull(userList.get('searchResultValues'));
