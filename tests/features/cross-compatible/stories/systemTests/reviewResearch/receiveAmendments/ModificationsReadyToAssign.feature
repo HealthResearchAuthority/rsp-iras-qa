@@ -5,7 +5,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         Given I have navigated to the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
 
-    @searchTasklistByIrasIdWithResults @rsp-4104 @only
+    @searchTasklistByIrasIdWithResults @rsp-4104
     Scenario Outline: Verify the user is able to search the modifications tasklist by the iras ID
         When I fill the search input for searching 'tasklist' with '<Search_Input>' as the search query
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
@@ -59,7 +59,30 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
             | Date_To_Single    |
             | Date_To_Multi     |
 
-    @searchFilterComboTasklist @rsp-4104
+    @filterTasklistByDaysSinceSubmission @rsp-4296
+    Scenario Outline: Verify the user is able to filter the modifications tasklist by the days since submission
+        And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
+        And I 'can' see the advanced filters panel
+        And I open each of the modification tasklist filters
+        And I capture the page screenshot
+        And I can see the days since submission filter has the expected hint text
+        When I fill the modifications tasklist search and filter options with '<Days_Filter_Input>'
+        And I capture the page screenshot
+        And I click the 'Apply_Filters' button on the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
+        Then I can now see the modifications ready to assign table contains the expected search results for '<Days_Filter_Input>'
+        And I 'cannot' see the advanced filters panel
+        When I click the 'Date_Submitted' button on the 'Modifications_Tasklist_Page'
+        Then I can now see the modifications ready to assign table contains the expected search results for '<Days_Filter_Input>'
+
+        Examples:
+            | Days_Filter_Input    |
+            | Days_Range_Multi     |
+            | Days_Specific_Single |
+            | Days_From_Multi      |
+            | Days_To_Multi        |
+
+    @searchFilterComboTasklist @rsp-4104 @rsp-4296
     Scenario Outline: Verify the user is able to combine searching and filtering options to narrow modifications displayed on the tasklist
         And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
@@ -80,8 +103,9 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
             | IRAS_ID_Title_Multi             | Search        |
             | Title_Date_Range_Multi          | Apply_Filters |
             | IRAS_ID_Title_Date_Range_Multi  | Search        |
+            | Title_Days_Range_Multi          | Apply_Filters |
 
-    @searchTasklistWithNoResults @rsp-4104
+    @searchTasklistWithNoResults @rsp-4104 @rsp-4296
     Scenario Outline: Verify the tasklist page displays the no results found message, when no records on the system match the search criteria
         And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
@@ -93,12 +117,13 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         Then the no search results found message is displayed
 
         Examples:
-            | Search_Filter_Input     |
-            | Non_Existant_IRAS_ID    |
-            | Non_Existant_Title      |
-            | Non_Existant_Date_Range |
+            | Search_Filter_Input           |
+            | Non_Existant_IRAS_ID          |
+            | Non_Existant_Title            |
+            | Non_Existant_Date_Range       |
+            | Non_Existant_Days_Since_Range |
 
-    @activeFilterPanelTasklist @rsp-4104
+    @activeFilterPanelTasklist @rsp-4104 @rsp-4296
     Scenario Outline: Verify the active filters display as expected
         And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
@@ -117,6 +142,9 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
             | Title_Date_Range_Multi  | Apply_Filters |
             | Date_From_Multi         | Search        |
             | Date_To_Single          | Apply_Filters |
+            | Days_Range_Multi        | Search        |
+            | Days_From_Multi         | Apply_Filters |
+            | Days_To_Multi           | Search        |
 
     @addRemoveFiltersTasklist @rsp-4104
     Scenario: Verify that adding and removing filters narrows and widens the search results appropriately

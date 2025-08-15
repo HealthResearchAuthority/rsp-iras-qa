@@ -7,7 +7,10 @@
     "advanced_filter_label": "Advanced filters",
     "modification_checkbox": "",
     "tasklist_days_suffix": "days",
-    "filter_headings": ["Date submitted", "Days since submission", "Short project title"]
+    "filter_headings": ["Date submitted", "Days since submission", "Short project title"],
+    "days_since_submission_label": "Enter the number of days you want to search from",
+    "days_since_submission_hint_label": "For example, 23 to 45 days",
+    "days_since_suffix": "days"
   },
 
   "Label_Texts": {
@@ -66,6 +69,10 @@
       "month_to_dropdown": "January",
       "year_to_text": "2000"
     },
+    "Days_Range_Multi": { "days_since_submission_from_text": "0", "days_since_submission_to_text": "100" },
+    "Days_Specific_Single": { "days_since_submission_from_text": "", "days_since_submission_to_text": "" },
+    "Days_From_Multi": { "days_since_submission_from_text": "100" },
+    "Days_To_Multi": { "days_since_submission_to_text": "100" },
     "IRAS_ID_Title_Single": { "search_input_text": "9800033", "short_project_title_text": "Short 33" },
     "Title_Date_Range_Single": {
       "short_project_title_text": "Project 30",
@@ -106,8 +113,17 @@
       "month_to_dropdown": "January",
       "year_to_text": "2000"
     },
+    "Title_Days_Range_Multi": {
+      "short_project_title_text": "QA_Automation - This is a short project title",
+      "days_since_submission_from_text": "0",
+      "days_since_submission_to_text": "100"
+    },
     "Non_Existant_IRAS_ID": { "search_input_text": "98004849" },
     "Non_Existant_Title": { "short_project_title_text": "Not a Title" },
+    "Non_Existant_Days_Since_Range": {
+      "days_since_submission_from_text": "100000",
+      "days_since_submission_to_text": "100000"
+    },
     "Non_Existant_Date_Range": {
       "day_from_text": "28",
       "month_from_dropdown": "March",

@@ -64,6 +64,7 @@ Given(
     const visibleIrasIds = await modificationsReadyToAssignPage.getVisibleIrasIds(modificationIds);
     const shortTitles = await searchModificationsPage.getActualListValues(commonItemsPage.tableBodyRows, 2); //this is in common now, merge with latest when work is in
     const datesSubmitted = await searchModificationsPage.getActualListValues(commonItemsPage.tableBodyRows, 3); //this is in common now, merge with latest when work is in
+    const daysSinceSubmission = await searchModificationsPage.getActualListValues(commonItemsPage.tableBodyRows, 4); //this is in common now, merge with latest when work is in
     if (searchInput.toLowerCase().includes('single')) {
       await expect(commonItemsPage.search_results_count).toHaveText(
         commonItemsPage.searchFilterResultsData.search_single_result_count
@@ -73,6 +74,7 @@ Given(
         await modificationsReadyToAssignPage.checkSingleValueEquals(
           visibleIrasIds,
           shortTitles,
+          daysSinceSubmission,
           datesSubmitted,
           searchInputDataset,
           searchInput
@@ -84,6 +86,22 @@ Given(
       if (searchInput.toLowerCase().includes('date')) {
         expect(
           commonItemsPage.checkDateMultiDateSearchResultValues(datesSubmitted, searchInputDataset, searchInput)
+        ).toBeTruthy();
+      } else if (searchInput.toLowerCase().includes('days')) {
+        for (const day of daysSinceSubmission) {
+          expect(
+            day.endsWith(
+              modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Modifications_Ready_To_Assign_Page
+                .days_since_suffix
+            )
+          ).toBeTruthy();
+        }
+        expect(
+          await modificationsReadyToAssignPage.checkDaysSearchResultValues(
+            daysSinceSubmission,
+            searchInputDataset,
+            searchInput
+          )
         ).toBeTruthy();
       } else {
         expect(
@@ -126,8 +144,9 @@ Given(
 
 When(
   'I fill the modifications tasklist search and filter options with {string}',
-  async ({ commonItemsPage, modificationsReadyToAssignPage }, datasetName: string) => {
+  async ({ commonItemsPage, modificationsReadyToAssignPage, searchModificationsPage }, datasetName: string) => {
     const dataset = modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Search_Queries[datasetName];
+    const daysSinceSubmission = await searchModificationsPage.getActualListValues(commonItemsPage.tableBodyRows, 4); //this is in common now, merge with latest when work is in
     for (const key in dataset) {
       if (Object.hasOwn(dataset, key)) {
         await commonItemsPage.fillUIComponent(dataset, key, modificationsReadyToAssignPage);
@@ -135,6 +154,28 @@ When(
     }
     if (datasetName.toLowerCase().includes('title')) {
       await commonItemsPage.setShortProjectTitleFilter(dataset.short_project_title_text);
+    }
+    if (datasetName.toLowerCase().includes('days')) {
+      if (datasetName.toLowerCase().includes('from') || datasetName.toLowerCase().includes('range')) {
+        await modificationsReadyToAssignPage.setDaysSinceSubmissionFromFilter(
+          parseInt(dataset.days_since_submission_from_text)
+        );
+      }
+      if (datasetName.toLowerCase().includes('to') || datasetName.toLowerCase().includes('range')) {
+        await modificationsReadyToAssignPage.setDaysSinceSubmissionToFilter(
+          parseInt(dataset.days_since_submission_to_text)
+        );
+      }
+      if (datasetName.toLowerCase().includes('specific')) {
+        await modificationsReadyToAssignPage.days_since_submission_from_text.fill(
+          parseInt(daysSinceSubmission[0]).toString()
+        );
+        await modificationsReadyToAssignPage.days_since_submission_to_text.fill(
+          parseInt(daysSinceSubmission[0]).toString()
+        );
+        await modificationsReadyToAssignPage.setDaysSinceSubmissionFromFilter(parseInt(daysSinceSubmission[0]));
+        await modificationsReadyToAssignPage.setDaysSinceSubmissionToFilter(parseInt(daysSinceSubmission[0]));
+      }
     }
     if (datasetName.toLowerCase().includes('date')) {
       if (datasetName.toLowerCase().includes('from') || datasetName.toLowerCase().includes('range')) {
@@ -148,5 +189,15 @@ When(
         );
       }
     }
+  }
+);
+
+Given(
+  'I can see the days since submission filter has the expected hint text',
+  async ({ modificationsReadyToAssignPage }) => {
+    await expect(modificationsReadyToAssignPage.days_since_submission_label).toBeVisible();
+    await expect(modificationsReadyToAssignPage.days_since_submission_hint_label).toBeVisible();
+    await expect(modificationsReadyToAssignPage.days_since_submission_to_separator).toBeVisible();
+    await expect(modificationsReadyToAssignPage.days_since_submission_suffix_label).toBeVisible();
   }
 );

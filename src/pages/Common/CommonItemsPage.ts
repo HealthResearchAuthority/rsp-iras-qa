@@ -199,6 +199,7 @@ export default class CommonItemsPage {
     this.advanced_filter_chevron = this.page.getByRole('button', {
       name: this.commonTestData.advanced_filter_label,
     });
+    //review for duplication with search items//
     this.result_count = this.advanced_filter_chevron.getByText(this.commonTestData.result_count_heading);
     this.no_results_heading = this.page
       .getByRole('heading')
@@ -235,6 +236,7 @@ export default class CommonItemsPage {
       .getByText(this.buttonTextData.Search_Modifications_Page.Apply_Filters, {
         exact: true,
       });
+    ///////////
     //Search Items
     this.search_results_count = this.page.locator('.search-filter-panel__count');
     this.advanced_filter_panel = this.page.getByTestId('filter-panel');
@@ -714,6 +716,7 @@ export default class CommonItemsPage {
     return element;
   }
 
+  /////////// MERGED BELOW/////////
   async getUsers(): Promise<Map<string, string[]>> {
     const firstNameValues: string[] = [];
     const lastNameValues: string[] = [];
@@ -1231,6 +1234,7 @@ export default class CommonItemsPage {
     }
   }
 
+  /////////// MERGED ABOVE/////////
   async extractNumFromSearchResultCount(resultsString: string): Promise<number> {
     return parseInt(resultsString.replace(searchFilterResultsData.search_results_suffix, '').trim());
   }

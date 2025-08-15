@@ -837,7 +837,7 @@ Then(
     }
   }
 );
-
+//Check for dupe/can be common//
 Then('I can see the {string} ui labels', async ({ commonItemsPage }, datasetName: string) => {
   const dataset = commonItemsPage.commonTestData[datasetName];
   for (const key in dataset) {
@@ -957,7 +957,7 @@ Then(
 Then('the advanced filters section should collapse automatically', async ({ commonItemsPage }) => {
   await expect(commonItemsPage.apply_filters_button).not.toBeVisible();
 });
-
+//Check for dupe/can be common//
 Then('the no search results found message is displayed', async ({ commonItemsPage }) => {
   expect(commonItemsPage.tableRows).not.toBeVisible();
   await expect(commonItemsPage.search_results_count).toHaveText(
@@ -993,35 +993,49 @@ Then('I {string} see active filters displayed', async ({ commonItemsPage }, visi
   }
 });
 
-Then('I can see active filters displayed for {string}', async ({ commonItemsPage }, searchInput: string) => {
-  let assertionMade = false;
-  if (searchInput.toLowerCase().includes('title')) {
-    assertionMade = true;
-    const expectedActiveFilterText = `${commonItemsPage.searchFilterResultsData.active_filter_short_project_title_label} ${commonItemsPage.searchFilterResultsData.label_value_separator} ${await commonItemsPage.getShortProjectTitleFilter()}`;
-    await expect(commonItemsPage.active_filter_items.getByText(expectedActiveFilterText)).toBeVisible();
-  }
-  if (searchInput.toLowerCase().includes('date')) {
-    //Note that range will have separate if statement after RSP-4353 is delvered
-    if (searchInput.toLowerCase().includes('from')) {
+Then(
+  'I can see active filters displayed for {string}',
+  async ({ commonItemsPage, modificationsReadyToAssignPage }, searchInput: string) => {
+    let assertionMade = false;
+    if (searchInput.toLowerCase().includes('title')) {
       assertionMade = true;
-      const expectedActiveFilterText = `${commonItemsPage.searchFilterResultsData.active_filter_date_submitted_label} ${commonItemsPage.searchFilterResultsData.label_value_separator} ${commonItemsPage.searchFilterResultsData.from_separator} ${await commonItemsPage.getDateSubmittedFromFilter()}`;
+      const expectedActiveFilterText = `${commonItemsPage.searchFilterResultsData.active_filter_short_project_title_label} ${commonItemsPage.searchFilterResultsData.label_value_separator} ${await commonItemsPage.getShortProjectTitleFilter()}`;
       await expect(commonItemsPage.active_filter_items.getByText(expectedActiveFilterText)).toBeVisible();
     }
-    if (searchInput.toLowerCase().includes('to')) {
-      assertionMade = true;
-      const expectedActiveFilterText = `${commonItemsPage.searchFilterResultsData.active_filter_date_submitted_label} ${commonItemsPage.searchFilterResultsData.label_value_separator} ${commonItemsPage.searchFilterResultsData.to_separator} ${await commonItemsPage.getDateSubmittedToFilter()}`;
-      await expect(commonItemsPage.active_filter_items.getByText(expectedActiveFilterText)).toBeVisible();
+    if (searchInput.toLowerCase().includes('date')) {
+      if (searchInput.toLowerCase().includes('from')) {
+        assertionMade = true;
+        const expectedActiveFilterText = `${commonItemsPage.searchFilterResultsData.active_filter_date_submitted_label} ${commonItemsPage.searchFilterResultsData.label_value_separator} ${commonItemsPage.searchFilterResultsData.from_separator} ${await commonItemsPage.getDateSubmittedFromFilter()}`;
+        await expect(commonItemsPage.active_filter_items.getByText(expectedActiveFilterText)).toBeVisible();
+      }
+      if (searchInput.toLowerCase().includes('to')) {
+        assertionMade = true;
+        const expectedActiveFilterText = `${commonItemsPage.searchFilterResultsData.active_filter_date_submitted_label} ${commonItemsPage.searchFilterResultsData.label_value_separator} ${commonItemsPage.searchFilterResultsData.to_separator} ${await commonItemsPage.getDateSubmittedToFilter()}`;
+        await expect(commonItemsPage.active_filter_items.getByText(expectedActiveFilterText)).toBeVisible();
+      }
+      if (searchInput.toLowerCase().includes('range')) {
+        assertionMade = true;
+        const expectedActiveFilterText = `${commonItemsPage.searchFilterResultsData.active_filter_date_submitted_label} ${commonItemsPage.searchFilterResultsData.label_value_separator} ${await commonItemsPage.getDateSubmittedFromFilter()} ${commonItemsPage.searchFilterResultsData.to_separator} ${await commonItemsPage.getDateSubmittedToFilter()}`;
+        await expect(commonItemsPage.active_filter_items.getByText(expectedActiveFilterText)).toBeVisible();
+      }
     }
-    if (searchInput.toLowerCase().includes('range')) {
-      assertionMade = true;
-      const expectedActiveFilterText = `${commonItemsPage.searchFilterResultsData.active_filter_date_submitted_label} ${commonItemsPage.searchFilterResultsData.label_value_separator} ${await commonItemsPage.getDateSubmittedFromFilter()} ${commonItemsPage.searchFilterResultsData.to_separator} ${await commonItemsPage.getDateSubmittedToFilter()}`;
-      await expect(commonItemsPage.active_filter_items.getByText(expectedActiveFilterText)).toBeVisible();
+    if (searchInput.toLowerCase().includes('days')) {
+      if (searchInput.toLowerCase().includes('from') || searchInput.toLowerCase().includes('range')) {
+        assertionMade = true;
+        const expectedActiveFilterText = `${commonItemsPage.searchFilterResultsData.active_filter_days_since_label} ${commonItemsPage.searchFilterResultsData.label_value_separator} ${commonItemsPage.searchFilterResultsData.from_separator} ${await modificationsReadyToAssignPage.getDaysSinceSubmissionFromFilter()}`;
+        await expect(commonItemsPage.active_filter_items.getByText(expectedActiveFilterText)).toBeVisible();
+      }
+      if (searchInput.toLowerCase().includes('to') || searchInput.toLowerCase().includes('range')) {
+        assertionMade = true;
+        const expectedActiveFilterText = `${commonItemsPage.searchFilterResultsData.active_filter_days_since_label} ${commonItemsPage.searchFilterResultsData.label_value_separator} ${commonItemsPage.searchFilterResultsData.to_separator} ${await modificationsReadyToAssignPage.getDaysSinceSubmissionToFilter()}`;
+        await expect(commonItemsPage.active_filter_items.getByText(expectedActiveFilterText)).toBeVisible();
+      }
+    }
+    if (!assertionMade) {
+      throw new Error(`${searchInput} does not contain any assertion identifier`);
     }
   }
-  if (!assertionMade) {
-    throw new Error(`${searchInput} does not contain any assertion identifier`);
-  }
-});
+);
 
 When(
   'the number of search results has {string} from the {string} number',
@@ -1053,8 +1067,8 @@ When('the number of search results has returned to the original number', async (
 });
 
 When('I can see the date from and date to filters have the expected hint text', async ({ commonItemsPage }) => {
-  expect(await commonItemsPage.date_from_label).toBeVisible();
-  expect(await commonItemsPage.date_from_hint_label).toBeVisible();
-  expect(await commonItemsPage.date_to_label).toBeVisible();
-  expect(await commonItemsPage.date_to_hint_label).toBeVisible();
+  await expect(commonItemsPage.date_from_label).toBeVisible();
+  await expect(commonItemsPage.date_from_hint_label).toBeVisible();
+  await expect(commonItemsPage.date_to_label).toBeVisible();
+  await expect(commonItemsPage.date_to_hint_label).toBeVisible();
 });

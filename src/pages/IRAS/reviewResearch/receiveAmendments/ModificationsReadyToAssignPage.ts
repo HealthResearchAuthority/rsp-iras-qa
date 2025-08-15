@@ -1,10 +1,14 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as modificationsReadyToAssignPageTestData from '../../../../resources/test_data/iras/reviewResearch/receiveAmendments/modifications_ready_to_assign_page_data.json';
+import * as searchFilterResultsData from '../../../../resources/test_data/common/search_filter_results_data.json';
 
 //Declare Page Objects
 export default class ModificationsReadyToAssignPage {
   readonly page: Page;
   readonly modificationsReadyToAssignPageTestData: typeof modificationsReadyToAssignPageTestData;
+  readonly searchFilterResultsData: typeof searchFilterResultsData;
+  private _days_since_submission_from_filter: number;
+  private _days_since_submission_to_filter: number;
   readonly page_heading: Locator;
   readonly page_description: Locator;
   readonly modification_button_label: Locator;
@@ -18,6 +22,13 @@ export default class ModificationsReadyToAssignPage {
   readonly day_to_text: Locator;
   readonly month_to_dropdown: Locator;
   readonly year_to_text: Locator;
+  readonly days_since_submission_from_text: Locator;
+  readonly days_since_submission_to_text: Locator;
+  readonly days_since_submission_filter_input: Locator;
+  readonly days_since_submission_label: Locator;
+  readonly days_since_submission_hint_label: Locator;
+  readonly days_since_submission_to_separator: Locator;
+  readonly days_since_submission_suffix_label: Locator;
   readonly short_project_title_text: Locator;
   readonly search_button_label: Locator;
   readonly modification_checkbox: Locator;
@@ -27,6 +38,9 @@ export default class ModificationsReadyToAssignPage {
   constructor(page: Page) {
     this.page = page;
     this.modificationsReadyToAssignPageTestData = modificationsReadyToAssignPageTestData;
+    this.searchFilterResultsData = searchFilterResultsData;
+    this._days_since_submission_from_filter = 0;
+    this._days_since_submission_to_filter = 0;
 
     //Locators
     this.page_heading = this.page.getByTestId('title');
@@ -62,6 +76,25 @@ export default class ModificationsReadyToAssignPage {
     this.year_to_text = this.date_to_filter_input.getByLabel(
       this.modificationsReadyToAssignPageTestData.Filter_Labels.year_to_label
     );
+    this.days_since_submission_from_text = this.page.getByTestId('Search_FromDaysSinceSubmission');
+    this.days_since_submission_to_text = this.page.getByTestId('Search_ToDaysSinceSubmission');
+    this.days_since_submission_filter_input = this.page
+      .locator('.search-filter-section__content')
+      .filter({ has: this.days_since_submission_from_text });
+    this.days_since_submission_label = this.days_since_submission_filter_input.getByText(
+      this.modificationsReadyToAssignPageTestData.Modifications_Ready_To_Assign_Page.days_since_submission_label
+    );
+    this.days_since_submission_hint_label = this.days_since_submission_filter_input.getByText(
+      this.modificationsReadyToAssignPageTestData.Modifications_Ready_To_Assign_Page.days_since_submission_hint_label
+    );
+    this.days_since_submission_to_separator = this.days_since_submission_filter_input.getByText(
+      this.searchFilterResultsData.to_separator,
+      { exact: true }
+    );
+    this.days_since_submission_suffix_label = this.days_since_submission_filter_input.getByText(
+      this.modificationsReadyToAssignPageTestData.Modifications_Ready_To_Assign_Page.days_since_suffix,
+      { exact: true }
+    );
     // this.short_project_title_text = this.page.getByLabel(
     //   this.modificationsReadyToAssignPageTestData.Filter_Labels.short_project_title_label
     // );
@@ -73,11 +106,30 @@ export default class ModificationsReadyToAssignPage {
     this.results_table = this.page.getByTestId('modificationsTasklistTable');
   }
 
+  //Getters & Setters for Private Variables
+
+  async getDaysSinceSubmissionFromFilter(): Promise<number> {
+    return this._days_since_submission_from_filter;
+  }
+
+  async setDaysSinceSubmissionFromFilter(value: number): Promise<void> {
+    this._days_since_submission_from_filter = value;
+  }
+
+  async getDaysSinceSubmissionToFilter(): Promise<number> {
+    return this._days_since_submission_to_filter;
+  }
+
+  async setDaysSinceSubmissionToFilter(value: number): Promise<void> {
+    this._days_since_submission_to_filter = value;
+  }
+
   //Page Methods
 
   async goto() {
     await this.page.goto('modificationstasklist/index');
   }
+
   async assertOnModificationsReadyToAssignPage() {
     await expect(this.page_heading).toBeVisible();
   }
@@ -148,6 +200,7 @@ export default class ModificationsReadyToAssignPage {
   async checkSingleValueEquals(
     irasIds: string[],
     shortTitles: string[],
+    daysSinceSubmission: string[],
     datesSubmitted: string[],
     searchInputDataset: any,
     searchInput: string
@@ -159,6 +212,11 @@ export default class ModificationsReadyToAssignPage {
     if (searchInput.toLowerCase().includes('title')) {
       valuesMatch =
         shortTitles.toString().toLowerCase() == searchInputDataset[searchInput].short_project_title_text.toLowerCase();
+    }
+    if (searchInput.toLowerCase().includes('days')) {
+      const actualDay = daysSinceSubmission.toString();
+      const expectedDay = await this.getDaysSinceSubmissionFromFilter();
+      valuesMatch = parseInt(actualDay) == expectedDay;
     }
     if (searchInput.toLowerCase().includes('date')) {
       const day = searchInputDataset[searchInput].day_to_text.padStart(2, '0');
@@ -223,5 +281,28 @@ export default class ModificationsReadyToAssignPage {
       }
     }
     return valuesContain;
+  }
+
+  async checkDaysSearchResultValues(
+    daysResultValues: string[],
+    searchInputDataset: any,
+    searchInput: string
+  ): Promise<boolean> {
+    let expectedDaysResultFound = false;
+    const fromExpectedDay = parseInt(searchInputDataset[searchInput].days_since_submission_from_text);
+    const toExpectedDay = parseInt(searchInputDataset[searchInput].days_since_submission_to_text);
+    for (const actualDay of daysResultValues) {
+      if (searchInput.toLowerCase().includes('to')) {
+        expectedDaysResultFound = parseInt(actualDay) <= toExpectedDay;
+      } else if (searchInput.toLowerCase().includes('from')) {
+        expectedDaysResultFound = parseInt(actualDay) >= fromExpectedDay;
+      } else {
+        expectedDaysResultFound = parseInt(actualDay) >= fromExpectedDay && parseInt(actualDay) <= toExpectedDay;
+      }
+      if (!expectedDaysResultFound) {
+        return expectedDaysResultFound;
+      }
+    }
+    return expectedDaysResultFound;
   }
 }

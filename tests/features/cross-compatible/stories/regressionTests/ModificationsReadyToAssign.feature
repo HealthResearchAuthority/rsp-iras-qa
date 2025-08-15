@@ -5,13 +5,14 @@ Feature: Modifications Tasklist page that displays modifications ready to be ass
         Given I have navigated to the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
 
-    @RegressionSearchFilterComboTasklist @rsp-4104
+    @RegressionSearchFilterComboTasklist @rsp-4104 @rsp-4296
     Scenario Outline: Verify the user is able to combine searching and filtering options to narrow modifications displayed on the tasklist
         And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
         And I open each of the modification tasklist filters
         And I capture the page screenshot
         And I can see the date from and date to filters have the expected hint text
+        And I can see the days since submission filter has the expected hint text
         When I fill the modifications tasklist search and filter options with '<Search_Filter_Input>'
         And I capture the page screenshot
         And I click the '<Button>' button on the 'Modifications_Tasklist_Page'
@@ -29,6 +30,7 @@ Feature: Modifications Tasklist page that displays modifications ready to be ass
             | IRAS_ID_Title_Multi             | Search        |
             | Title_Date_Range_Multi          | Apply_Filters |
             | IRAS_ID_Title_Date_Range_Multi  | Search        |
+            | Title_Days_Range_Multi          | Apply_Filters |
 
     @RegressionAddRemoveFiltersTasklist @rsp-4104
     Scenario: Verify that adding and removing filters narrows and widens the search results appropriately
