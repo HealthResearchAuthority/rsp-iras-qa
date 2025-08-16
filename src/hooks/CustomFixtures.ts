@@ -51,6 +51,10 @@ import ParticipatingOrganisationsPage from '../pages/IRAS/makeChanges/modificati
 import SelectAreaOfChangePage from '../pages/IRAS/makeChanges/modifications/SelectAreaOfChangePage';
 import SearchModificationsPage from '../pages/IRAS/reviewResearch/receiveAmendments/SearchModificationsPage';
 import ModificationsReadyToAssignPage from '../pages/IRAS/reviewResearch/receiveAmendments/ModificationsReadyToAssignPage';
+import ApprovalsPage from '../pages/IRAS/reviewResearch/approvals/ApprovalsPage';
+import ModificationsCommonPage from '../pages/IRAS/makeChanges/modifications/ModificationsCommonPage';
+import PlannedEndDatePage from '../pages/IRAS/makeChanges/modifications/PlannedEndDatePage';
+import OrganisationChangeAffectPage from '../pages/IRAS/makeChanges/modifications/OrganisationChangeAffectPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -99,10 +103,14 @@ type CustomFixtures = {
   checkAddUserReviewBodyPage: CheckAddUserReviewBodyPage;
   accessDeniedPage: AccessDeniedPage;
   rtsPage: RtsPage;
+  approvalsPage: ApprovalsPage;
   participatingOrganisationsPage: ParticipatingOrganisationsPage;
   selectAreaOfChangePage: SelectAreaOfChangePage;
   searchModificationsPage: SearchModificationsPage;
   modificationsReadyToAssignPage: ModificationsReadyToAssignPage;
+  modificationsCommonPage: ModificationsCommonPage;
+  plannedEndDatePage: PlannedEndDatePage;
+  organisationChangeAffectPage: OrganisationChangeAffectPage;
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -291,10 +299,6 @@ export const test = base.extend<CustomFixtures>({
     await use(new RtsPage(page));
   },
 
-  searchModificationsPage: async ({ page }, use) => {
-    await use(new SearchModificationsPage(page));
-  },
-
   participatingOrganisationsPage: async ({ page }, use) => {
     await use(new ParticipatingOrganisationsPage(page));
   },
@@ -303,8 +307,27 @@ export const test = base.extend<CustomFixtures>({
     await use(new SelectAreaOfChangePage(page));
   },
 
+  searchModificationsPage: async ({ page }, use) => {
+    await use(new SearchModificationsPage(page));
+  },
+
+  approvalsPage: async ({ page }, use) => {
+    await use(new ApprovalsPage(page));
+  },
+
   modificationsReadyToAssignPage: async ({ page }, use) => {
     await use(new ModificationsReadyToAssignPage(page));
+  },
+  modificationsCommonPage: async ({ page }, use) => {
+    await use(new ModificationsCommonPage(page));
+  },
+
+  plannedEndDatePage: async ({ page }, use) => {
+    await use(new PlannedEndDatePage(page));
+  },
+
+  organisationChangeAffectPage: async ({ page }, use) => {
+    await use(new OrganisationChangeAffectPage(page));
   },
 
   makeAxeBuilder: async ({ page }, use) => {
@@ -318,8 +341,12 @@ export const test = base.extend<CustomFixtures>({
       storageState = getAuthState('system_admin');
     } else if ($tags.includes('@FrontStageUser')) {
       storageState = getAuthState('frontstage_user');
-    } else if ($tags.includes('@BackStageUser')) {
-      storageState = getAuthState('backstage_user');
+    } else if ($tags.includes('@StudyWideReviewer')) {
+      storageState = getAuthState('studywide_reviewer');
+    } else if ($tags.includes('@TeamManager')) {
+      storageState = getAuthState('team_manager');
+    } else if ($tags.includes('@WorkFlowCoordinator')) {
+      storageState = getAuthState('workflow_coordinator');
     }
     await use(storageState);
   },

@@ -1,6 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as myResearchProjectsPageTestData from '../../../resources/test_data/iras/make_changes/my_research_projects_data.json';
 import * as buttonTextData from '../../../resources/test_data/common/button_text_data.json';
+import * as buttonTextData from '../../../resources/test_data/common/button_text_data.json';
 
 //Declare Page Objects
 export default class MyResearchProjectsPage {
@@ -24,6 +25,7 @@ export default class MyResearchProjectsPage {
   constructor(page: Page) {
     this.page = page;
     this.myResearchProjectsPageTestData = myResearchProjectsPageTestData;
+    this.buttonTextData = buttonTextData;
 
     //Locators
     this.page_heading = this.page
