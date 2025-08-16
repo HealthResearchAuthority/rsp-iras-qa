@@ -3,8 +3,23 @@
     "heading": "My research",
     "search": "Search",
     "advanced_filter_label": "Advanced filter",
+    "add_project_record_button_label": "Add project"
   },
-  "Label_Texts": {
+
+  "Valid_Iras_Id": { "One": "8634211" },
+
+  "Valid_Iras_Id_Two": {
+    "iras_id_title": "5235198"
+  },
+
+  "No_Projects_Label_Texts": {
     "no_projects": "You don't have any projects available in the new service"
+  },
+
+  "Label_Texts": {
+    "short_project_title_link": "Short project title",
+    "iras_id_title": "IRAS ID",
+    "date_created_title": "Date created",
+    "status_title": "Status"
   }
 }
