@@ -208,7 +208,7 @@ export default class CommonItemsPage {
   //Page Methods
   async storeAuthState(user: string) {
     const authSysAdminUserFile = 'auth-storage-states/sysAdminUser.json';
-    const authFrontStageUserFile = 'auth-storage-states/frontStageUser.json';
+    const authFrontStageUserFile = 'auth-storage-states/applicantUser.json';
     const authStudyWideReviewerFile = 'auth-storage-states/studyWideReviewer.json';
     const authTeamManagerFile = 'auth-storage-states/teamManager.json';
     const authWorkFlowCoordinatorFile = 'auth-storage-states/workFlowCoordinator.json';
@@ -216,7 +216,7 @@ export default class CommonItemsPage {
       case 'system_admin':
         await this.page.context().storageState({ path: authSysAdminUserFile });
         break;
-      case 'frontstage_user':
+      case 'applicant_user':
         await this.page.context().storageState({ path: authFrontStageUserFile });
         break;
       case 'studywide_reviewer':
