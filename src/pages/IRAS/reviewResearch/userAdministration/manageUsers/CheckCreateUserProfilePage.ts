@@ -31,7 +31,7 @@ export default class CheckCreateUserProfilePage {
   readonly country_change_link: Locator;
   // readonly access_required_checkbox: Locator;
   // readonly access_required_change_link: Locator;
-  readonly review_body_dropdown: Locator;
+  readonly review_body_checkbox: Locator;
   readonly review_body_change_link: Locator;
   readonly create_profile_button: Locator;
   readonly back_button: Locator;
@@ -45,9 +45,9 @@ export default class CheckCreateUserProfilePage {
   readonly organisation_row: Locator;
   readonly job_title_row: Locator;
   readonly role_row: Locator;
-  // readonly committee_row: Locator;
+  readonly committee_row: Locator;
   readonly country_row: Locator;
-  // readonly access_required_row: Locator;
+  readonly access_required_row: Locator;
   readonly review_body_row: Locator;
 
   //Initialize Page Objects
@@ -140,13 +140,13 @@ export default class CheckCreateUserProfilePage {
     });
     this.role_change_link = this.role_row.locator(this.row_change_link_locator);
     this.role_checkbox = this.role_row.locator('td', { has: this.row_value_locator });
-    // this.committee_row = this.page.locator('tr', {
-    //   has: this.page
-    //     .getByRole('cell')
-    //     .getByText(this.checkCreateUserProfilePageTestData.Check_Create_User_Profile_Page.committee_label, {
-    //       exact: true,
-    //     }),
-    // });
+    this.committee_row = this.page.locator('tr', {
+      has: this.page
+        .getByRole('cell')
+        .getByText(this.checkCreateUserProfilePageTestData.Check_Create_User_Profile_Page.committee_label, {
+          exact: true,
+        }),
+    });
     // this.committee_change_link = this.committee_row.locator(this.row_change_link_locator);
     // this.committee_dropdown = this.committee_row.locator('td', { has: this.row_value_locator });
     this.country_row = this.page.locator('tr', {
@@ -158,13 +158,13 @@ export default class CheckCreateUserProfilePage {
     });
     this.country_change_link = this.country_row.locator(this.row_change_link_locator);
     this.country_checkbox = this.country_row.locator('td', { has: this.row_value_locator });
-    // this.access_required_row = this.page.locator('tr', {
-    //   has: this.page
-    //     .getByRole('cell')
-    //     .getByText(this.checkCreateUserProfilePageTestData.Check_Create_User_Profile_Page.access_required_label, {
-    //       exact: true,
-    //     }),
-    // });
+    this.access_required_row = this.page.locator('tr', {
+      has: this.page
+        .getByRole('cell')
+        .getByText(this.checkCreateUserProfilePageTestData.Check_Create_User_Profile_Page.access_required_label, {
+          exact: true,
+        }),
+    });
     // this.access_required_change_link = this.access_required_row.locator(this.row_change_link_locator);
     // this.access_required_checkbox = this.access_required_row.locator('td', { has: this.row_value_locator });
     this.review_body_row = this.page.locator('tr', {
@@ -175,7 +175,7 @@ export default class CheckCreateUserProfilePage {
         }),
     });
     this.review_body_change_link = this.review_body_row.locator(this.row_change_link_locator);
-    this.review_body_dropdown = this.review_body_row.locator('td', { has: this.row_value_locator });
+    this.review_body_checkbox = this.review_body_row.locator('td', { has: this.row_value_locator });
     this.create_profile_button = this.page.locator('button[class="govuk-button"]');
     this.back_button = this.page.locator('button.govuk-back-link-button');
   }

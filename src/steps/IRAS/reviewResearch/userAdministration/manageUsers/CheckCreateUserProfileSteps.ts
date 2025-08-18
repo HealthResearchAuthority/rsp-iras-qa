@@ -36,3 +36,25 @@ When(
     checkCreateUserProfilePage.clickOnChangeButtonRoleOperations(fieldKey);
   }
 );
+
+Then(
+  'the {string} should not be available on the check and create user profile page',
+  async ({ checkCreateUserProfilePage }, removedLink: string) => {
+    const labelKey = removedLink.replace(/(_Dropdown|_Checkbox)$/, '_row').toLowerCase();
+    const labelToCheck = checkCreateUserProfilePage[labelKey];
+    if (labelToCheck) {
+      await expect(labelToCheck).not.toBeVisible();
+    }
+  }
+);
+
+Then(
+  'the {string} should be available on the check and create user profile page',
+  async ({ checkCreateUserProfilePage }, removedLink: string) => {
+    const labelKey = removedLink.replace(/(_Dropdown|_Checkbox)$/, '_row').toLowerCase();
+    const labelToCheck = checkCreateUserProfilePage[labelKey];
+    if (labelToCheck) {
+      await expect(labelToCheck).toBeVisible();
+    }
+  }
+);

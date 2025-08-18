@@ -1122,4 +1122,15 @@ export default class CommonItemsPage {
       await this.clickOnPreviousLink();
     }
   }
+
+  async getLabelsFromCheckboxes(locator: Locator): Promise<string[]> {
+    const labels: string[] = [];
+    const count = await locator.count();
+    for (let i = 0; i < count; i++) {
+      const labelLocator = locator.nth(i).locator('..').locator('.govuk-label');
+      const labelText = confirmStringNotNull(await labelLocator.first().textContent());
+      labels.push(labelText);
+    }
+    return labels;
+  }
 }

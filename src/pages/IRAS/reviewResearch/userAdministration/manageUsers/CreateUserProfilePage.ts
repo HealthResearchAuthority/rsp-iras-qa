@@ -10,6 +10,7 @@ export default class CreateUserProfilePage {
   readonly createUserProfilePageTestData: typeof createUserProfilePageTestData;
   readonly buttonTextData: typeof buttonTextData;
   private _unique_email: string;
+  private _review_bodies: string[];
   readonly page_heading: Locator;
   readonly title_text: Locator;
   readonly first_name_text: Locator;
@@ -22,13 +23,14 @@ export default class CreateUserProfilePage {
   readonly role_fieldset: Locator;
   readonly role_checkbox: Locator;
   // readonly committee_dropdown: Locator;
+  readonly committee_label: Locator;
   readonly country_fieldset: Locator;
   readonly country_checkbox: Locator;
   // readonly access_required_fieldset: Locator;
   // readonly access_required_checkbox: Locator;
   readonly review_body_dropdown: Locator;
   readonly country_label: Locator;
-  // readonly access_required_label: Locator;
+  readonly access_required_label: Locator;
   readonly review_body_label: Locator;
   readonly review_body_fieldset: Locator;
   readonly review_body_checkbox: Locator;
@@ -38,6 +40,7 @@ export default class CreateUserProfilePage {
     this.page = page;
     this.createUserProfilePageTestData = createUserProfilePageTestData;
     this._unique_email = '';
+    this._review_bodies = [];
 
     //Locators
     this.page_heading = this.page
@@ -91,14 +94,17 @@ export default class CreateUserProfilePage {
     //   this.createUserProfilePageTestData.Create_User_Profile_Page.committee_label,
     //   { exact: true }
     // );
+    this.committee_label = this.page
+      .locator('.govuk-label')
+      .getByText(this.createUserProfilePageTestData.Create_User_Profile_Page.committee_label, { exact: true });
     this.country_label = this.page
       .locator('.govuk-label')
       .getByText(this.createUserProfilePageTestData.Create_User_Profile_Page.country_label, { exact: true });
     this.country_fieldset = this.page.locator('.govuk-form-group', { has: this.country_label });
     this.country_checkbox = this.country_fieldset.getByRole('checkbox');
-    // this.access_required_label = this.page
-    //   .locator('.govuk-label')
-    //   .getByText(this.createUserProfilePageTestData.Create_User_Profile_Page.access_required_label, { exact: true });
+    this.access_required_label = this.page
+      .locator('.govuk-label')
+      .getByText(this.createUserProfilePageTestData.Create_User_Profile_Page.access_required_label, { exact: true });
     // this.access_required_fieldset = this.page.locator('.govuk-form-group', { has: this.access_required_label });
     // this.access_required_checkbox = this.access_required_fieldset.getByRole('checkbox');
     this.review_body_label = this.page
@@ -115,6 +121,14 @@ export default class CreateUserProfilePage {
 
   async setUniqueEmail(value: string): Promise<void> {
     this._unique_email = value;
+  }
+
+  async getReviewBodies(): Promise<string[]> {
+    return this._review_bodies;
+  }
+
+  async setReviewBodies(value: string[]): Promise<void> {
+    this._review_bodies = value;
   }
 
   async assertOnCreateUserProfilePage() {
@@ -174,4 +188,12 @@ export default class CreateUserProfilePage {
       }
     })();
   }
+
+  // async getReviewBodiesListFromUI(commonItemsPage: CommonItemsPage): Promise<string[]> {
+  //   return commonItemsPage.getLabelsFromCheckboxes(this.review_body_checkbox);
+  // }
+
+  // async getRolesListFromUI(commonItemsPage: CommonItemsPage): Promise<string[]> {
+  //   return commonItemsPage.getLabelsFromCheckboxes(this.role_checkbox);
+  // }
 }

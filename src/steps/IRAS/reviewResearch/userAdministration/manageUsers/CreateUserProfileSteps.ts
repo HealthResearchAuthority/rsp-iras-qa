@@ -135,12 +135,61 @@ Then(
 );
 
 Then(
-  'the top menu bar will not have links to {string} or {string}',
-  async ({ commonItemsPage }, usersLink: string, adminLink: string) => {
-    const allTopMenuBarLinksExpectedValues = commonItemsPage.commonTestData.top_menu_bar_links;
-    const allTopMenuBarLinksActualValues = await commonItemsPage.getTopMenuBarLinksNames();
-    expect.soft(allTopMenuBarLinksActualValues).toEqual(allTopMenuBarLinksExpectedValues);
-    expect(allTopMenuBarLinksActualValues).not.toContain(usersLink);
-    expect(allTopMenuBarLinksActualValues).not.toContain(adminLink);
+  'the {string} should not be available on the add a new user profile page',
+  async ({ createUserProfilePage }, removedLink: string) => {
+    const labelKey = removedLink.replace(/(_Dropdown|_Checkbox)$/, '_label').toLowerCase();
+    const labelToCheck = createUserProfilePage[labelKey];
+    if (labelToCheck) {
+      await expect(labelToCheck).not.toBeVisible();
+    }
+  }
+);
+
+Then(
+  'I retrieve the list of review bodies displayed in the add a new user profile page',
+  async ({ createUserProfilePage, commonItemsPage }) => {
+    // const actualList = await createUserProfilePage.getReviewBodiesListFromUI(commonItemsPage);
+    const actualList = await commonItemsPage.getLabelsFromCheckboxes(createUserProfilePage.review_body_checkbox);
+    await createUserProfilePage.setReviewBodies(actualList);
+  }
+);
+
+Then(
+  'I can see the review body field in the add a new user profile page should contain all currently enabled review bodies from the manage review bodies page',
+  async ({ createUserProfilePage, manageReviewBodiesPage }) => {
+    const actualList = await createUserProfilePage.getReviewBodies();
+    const expectedList = await manageReviewBodiesPage.getOrgNamesListFromUI();
+    expect(actualList).toEqual(expectedList);
+  }
+);
+
+Then(
+  'I can see the role dropdown on the add a new user profile page contains the expected roles in alphabetical order',
+  async ({ createUserProfilePage, commonItemsPage }) => {
+    const expectedList = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile_Page['role_checkbox'];
+    // const actualList = await createUserProfilePage.getRolesListFromUI(commonItemsPage);
+    const actualList = await commonItemsPage.getLabelsFromCheckboxes(createUserProfilePage.role_checkbox);
+    expect(actualList).toEqual(expectedList);
+  }
+);
+
+Then(
+  'I can see the country checkbox on the add a new user profile page contains the expected countries in alphabetical order',
+  async ({ createUserProfilePage, commonItemsPage }) => {
+    const expectedList =
+      createUserProfilePage.createUserProfilePageTestData.Create_User_Profile_Page['country_checkbox'];
+    const actualList = await commonItemsPage.getLabelsFromCheckboxes(createUserProfilePage.country_checkbox);
+    expect(actualList).toEqual(expectedList);
+  }
+);
+
+Then(
+  'the {string} should be available on the add a new user profile page',
+  async ({ createUserProfilePage }, removedLink: string) => {
+    const labelKey = removedLink.replace(/(_Dropdown|_Checkbox)$/, '_label').toLowerCase();
+    const labelToCheck = createUserProfilePage[labelKey];
+    if (labelToCheck) {
+      await expect(labelToCheck).toBeVisible();
+    }
   }
 );

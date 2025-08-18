@@ -13,7 +13,7 @@ Feature: User Administration: Manage Users - Create user
     And I capture the page screenshot
     Then I can see the add a new user profile page
 
-  @rsp-2827 @rsp-2870 @verifyUserCreation @TestOnly
+  @rsp-2827 @rsp-2870 @verifyUserCreation
   Scenario Outline: Verify the user is able to create a new user profile with valid data
     When I fill the new user profile page using '<Add_User_Profile>'
     And I capture the page screenshot
@@ -40,17 +40,17 @@ Feature: User Administration: Manage Users - Create user
     And I capture the page screenshot
 
     Examples:
-      | Add_User_Profile                                   | Validation_Text_Manage_Users_List | Status_Enabled |
-      | Valid_Data_In_All_Fields_Role_System_Administrator | Label_Texts_Manage_Users_List     | Enabled        |
-  # | Valid_Data_In_All_Mandatory_Fields_Role_System_Administrator | Label_Texts_Manage_Users_List     | Enabled        |
-  # | Valid_Data_In_All_Fields_Role_Applicant                      | Label_Texts_Manage_Users_List     | Enabled        |
-  # | Valid_Data_In_All_Mandatory_Fields_Role_Applicant            | Label_Texts_Manage_Users_List     | Enabled        |
-  # | Valid_Data_In_All_Fields_Role_Team_Manager                   | Label_Texts_Manage_Users_List     | Enabled        |
-  # | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager         | Label_Texts_Manage_Users_List     | Enabled        |
-  # | Valid_Data_In_All_Fields_Role_Studywide_Reviewer             | Label_Texts_Manage_Users_List     | Enabled        |
-  # | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer   | Label_Texts_Manage_Users_List     | Enabled        |
-  # | Valid_Data_In_All_Fields_Role_Workflow_Coordinator           | Label_Texts_Manage_Users_List     | Enabled        |
-  # | Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator | Label_Texts_Manage_Users_List     | Enabled        |
+      | Add_User_Profile                                             | Validation_Text_Manage_Users_List | Status_Enabled |
+      | Valid_Data_In_All_Fields_Role_System_Administrator           | Label_Texts_Manage_Users_List     | Enabled        |
+      | Valid_Data_In_All_Mandatory_Fields_Role_System_Administrator | Label_Texts_Manage_Users_List     | Enabled        |
+      | Valid_Data_In_All_Fields_Role_Applicant                      | Label_Texts_Manage_Users_List     | Enabled        |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Applicant            | Label_Texts_Manage_Users_List     | Enabled        |
+      | Valid_Data_In_All_Fields_Role_Team_Manager                   | Label_Texts_Manage_Users_List     | Enabled        |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager         | Label_Texts_Manage_Users_List     | Enabled        |
+      | Valid_Data_In_All_Fields_Role_Studywide_Reviewer             | Label_Texts_Manage_Users_List     | Enabled        |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer   | Label_Texts_Manage_Users_List     | Enabled        |
+      | Valid_Data_In_All_Fields_Role_Workflow_Coordinator           | Label_Texts_Manage_Users_List     | Enabled        |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator | Label_Texts_Manage_Users_List     | Enabled        |
 
   @rsp-2827 @rsp-2870 @verifyAddAnotherUser
   Scenario Outline: Verify the user is able to add another user from the Confirmation message screen using the link
@@ -152,7 +152,7 @@ Feature: User Administration: Manage Users - Create user
       | Valid_Data_In_All_Fields_Role_Workflow_Coordinator           | Valid_Data_In_All_Fields_Role_Workflow_Coordinator_Another           | Enabled        | Role_TM_SWR_WFC                     |
       | Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator | Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator_Another | Enabled        | Role_TM_SWR_WFC                     |
 
-  @rsp-2827 @rsp-4021 @verifyCheckCreateUserProfileChangeLinkRoleOperations @RoleCheckbox
+  @rsp-2827 @rsp-4021 @verifyCheckCreateUserProfileChangeLinkRoleTMSWRWFC @RoleCheckbox @TestOnly
   Scenario Outline: Verify the user can navigate from 'Check and create user profile' page by clicking 'Change' button against all the fields when the role is selected as study-wide reviewer or team manager or workflow co-ordinator
     And I capture the page screenshot
     When I fill the new user profile page using '<Add_User_Profile>'
@@ -197,7 +197,7 @@ Feature: User Administration: Manage Users - Create user
   # | Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Workflow_Coordinator | Review_Body   | Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Workflow_Coordinator_Another | Role_TM_SWR_WFC |
   # Team Manager and System administrator
 
-  @rsp-2827 @verifyCheckCreateUserProfileChangeLinkRoleNotOperations @RoleCheckbox
+  @rsp-2827 @verifyCheckCreateUserProfileChangeLinkRoleApplicantSysAdmin @RoleCheckbox @TestOnly
   Scenario Outline: Verify the user can navigate from 'Check and create user profile' page by clicking 'Change' button against all the fields when the role is selected as applicant or system administrator
     And I capture the page screenshot
     When I fill the new user profile page using '<Add_User_Profile>'
@@ -238,7 +238,7 @@ Feature: User Administration: Manage Users - Create user
       | Valid_Data_In_All_Mandatory_Fields_Role_Applicant            | Job_Title     | Valid_Data_In_All_Mandatory_Fields_Role_Applicant_Another            |
       | Valid_Data_In_All_Mandatory_Fields_Role_Applicant            | Role          | Valid_Data_In_All_Mandatory_Fields_Role_Applicant_Another            |
 
-  @rsp-2827 @rsp-2870 @rsp-3107 @rsp-3108 @verifyCreateUserMultiUserRoles
+  @rsp-2827 @rsp-2870 @rsp-3107 @rsp-3108 @verifyCreateUserMultiUserRoles @TestOnly
   Scenario Outline: Verify the user is able to create a new user profile with multiple roles
     When I fill the new user profile page using '<Add_User_Profile>'
     And I capture the page screenshot
@@ -526,14 +526,173 @@ Feature: User Administration: Manage Users - Create user
       | Add_User_Profile                                   | Status_Enabled | User_Front_Stage | User_System_Admin | Page      | Search_Query           |
       | Valid_Data_In_All_Fields_Role_System_Administrator | Enabled        | Frontstage_User  | System_Admin      | Home_Page | Front_Stage_User_Email |
 
-  @rsp-3886 @rsp-4026 @verifyLastLoggedInDate
-  Scenario Outline: Verify the last login date of user in homepage and manage users page
-
-  @rsp-3519 @ValidateTopMenuBarLinks @SysAdminUser
-  Scenario: Validate the removal of committee dropdown and access required checkbox from the 'Add a new user profile' page
-    Given I have navigated to the 'Home_Page'
-    And the top menu bar will not have links to 'Manage Users' or 'System Admin'
+  @rsp-4390 @ValidateRemovalCommitteeAccessRequired @Test4390
+  Scenario Outline: Validate the removal of committee dropdown and access required checkbox from the 'Add a new user profile' page
+    And the '<Option>' should not be available on the add a new user profile page
     And I capture the page screenshot
-# GIVEN I’m on the Add a new user profile page,
-# WHEN I attempt to select the Committee,
-# THEN the Committee option should no longer be available
+    Examples:
+      | Option                   |
+      | Committee_Dropdown       |
+      | Access_Required_Checkbox |
+
+  @rsp-4390 @ValidateActiveReviewbodies @jsEnabled @Test4390
+  Scenario Outline: Validate the review body field in the 'Add a new user profile' page incorporates all currently enabled review bodies from the Manage review bodies page when the javascript is enabled
+    Then I fill the new user profile page using '<Add_User_Profile>'
+    And I capture the page screenshot
+    And I retrieve the list of review bodies displayed in the add a new user profile page
+    And the '<Option>' should not be available on the add a new user profile page
+    # And I have navigated to the 'Manage_Review_Bodies_Page'
+    # # And I select advanced filters in the manage review bodies page using '<Advanced_Filters>'
+    # And I can see the review body field in the add a new user profile page should contain all currently enabled review bodies from the manage review bodies page
+    And I capture the page screenshot
+    Examples:
+      | Add_User_Profile                                             | Advanced_Filters              | Option           |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer   | Advanced_Filter_Status_Active | Country_Checkbox |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator | Advanced_Filter_Status_Active | Country_Checkbox |
+
+  @rsp-4390 @ValidateActiveReviewbodies @jsDisabled @Test4390
+  Scenario Outline: Validate the review body field in the 'Add a new user profile' page incorporates all currently enabled review bodies from the Manage review bodies page when the javascript is disabled
+    Then I fill the new user profile page using '<Add_User_Profile>'
+    And I capture the page screenshot
+    And I retrieve the list of review bodies displayed in the add a new user profile page
+    And the '<Option>' should be available on the add a new user profile page
+    # And I have navigated to the 'Manage_Review_Bodies_Page'
+    # # And I select advanced filters in the manage review bodies page using '<Advanced_Filters>'
+    # And I can see the review body field in the add a new user profile page should contain all currently enabled review bodies from the manage review bodies page
+    And I capture the page screenshot
+    Examples:
+      | Add_User_Profile                                             | Advanced_Filters              | Option           |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer   | Advanced_Filter_Status_Active | Country_Checkbox |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator | Advanced_Filter_Status_Active | Country_Checkbox |
+
+  @rsp-4390 @ValidateRole @Test4390
+  Scenario: Validate that the role dropdown on the 'Add a new user profile' page contains the expected roles in alphabetical order
+    Then I can see the role dropdown on the add a new user profile page contains the expected roles in alphabetical order
+    And I capture the page screenshot
+
+  @rsp-4390 @ValidateActiveCountriesTeamManager @jsEnabled @Test4390
+  Scenario Outline: Validate the display of country field in the 'Add a new user profile' page when the role is selected as team manager and the javascript is enabled
+    Then I fill the new user profile page using '<Add_User_Profile>'
+    And I capture the page screenshot
+    And I can see the country checkbox on the add a new user profile page contains the expected countries in alphabetical order
+    And the '<Option_One>' should not be available on the add a new user profile page
+    And I click the 'Continue' button on the 'Create_User_Profile_Page'
+    Then I can see the check and create user profile page
+    And I capture the page screenshot
+    And the '<Option_One>' should not be available on the check and create user profile page
+    And the '<Option_Two>' should be available on the check and create user profile page
+    And the '<Option_Three>' should not be available on the check and create user profile page
+    And the '<Option_Four>' should not be available on the check and create user profile page
+    Examples:
+      | Add_User_Profile                                     | Option_One           | Option_Two       | Option_Three       | Option_Four              |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager | Review_Body_Checkbox | Country_Checkbox | Committee_Dropdown | Access_Required_Checkbox |
+
+
+  @rsp-4390 @ValidateActiveCountriesTeamManager @jsDisabled @Test4390
+  Scenario Outline: Validate the display of country field in the 'Add a new user profile' page when the role is selected as team manager and the javascript is disabled
+    Then I fill the new user profile page using '<Add_User_Profile>'
+    And I capture the page screenshot
+    And I can see the country checkbox on the add a new user profile page contains the expected countries in alphabetical order
+    And the '<Option_One>' should be available on the add a new user profile page
+    And I click the 'Continue' button on the 'Create_User_Profile_Page'
+    Then I can see the check and create user profile page
+    And I capture the page screenshot
+    And the '<Option_One>' should not be available on the check and create user profile page
+    And the '<Option_Two>' should be available on the check and create user profile page
+    And the '<Option_Three>' should not be available on the check and create user profile page
+    And the '<Option_Four>' should not be available on the check and create user profile page
+    Examples:
+      | Add_User_Profile                                     | Option_One           | Option_Two       | Option_Three       | Option_Four              |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager | Review_Body_Checkbox | Country_Checkbox | Committee_Dropdown | Access_Required_Checkbox |
+
+  @rsp-4390 @ValidateReviewbodiesCountries @jsEnabled @Test4390
+  Scenario Outline: Validate the display of review body field and country field in the 'Add a new user profile' page when the role is selected as applicant or system admin and the javascript is enabled
+    Then I fill the new user profile page using '<Add_User_Profile>'
+    And I capture the page screenshot
+    And the '<Option_One>' should not be available on the add a new user profile page
+    And the '<Option_Two>' should not be available on the add a new user profile page
+    And I capture the page screenshot
+    And I click the 'Continue' button on the 'Create_User_Profile_Page'
+    Then I can see the check and create user profile page
+    And I capture the page screenshot
+    And the '<Option_One>' should not be available on the check and create user profile page
+    And the '<Option_Two>' should not be available on the check and create user profile page
+    And the '<Option_Three>' should not be available on the check and create user profile page
+    And the '<Option_Four>' should not be available on the check and create user profile page
+    Examples:
+      | Add_User_Profile                                             | Option_One       | Option_Two           | Option_Three       | Option_Four              |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Applicant            | Country_Checkbox | Review_Body_Checkbox | Committee_Dropdown | Access_Required_Checkbox |
+      | Valid_Data_In_All_Mandatory_Fields_Role_System_Administrator | Country_Checkbox | Review_Body_Checkbox | Committee_Dropdown | Access_Required_Checkbox |
+
+  @rsp-4390 @ValidateReviewbodiesCountries @jsDisabled @Test4390
+  Scenario Outline: Validate the display of review body field and country field in the 'Add a new user profile' page when the javascript is disabled
+    Then I fill the new user profile page using '<Add_User_Profile>'
+    And I capture the page screenshot
+    And I retrieve the list of review bodies displayed in the add a new user profile page
+    And the '<Option_One>' should be available on the add a new user profile page
+    And the '<Option_Two>' should be available on the add a new user profile page
+    And I capture the page screenshot
+    And I click the 'Continue' button on the 'Create_User_Profile_Page'
+    Then I can see the check and create user profile page
+    And I capture the page screenshot
+    And the '<Option_One>' should not be available on the check and create user profile page
+    And the '<Option_Two>' should not be available on the check and create user profile page
+    And the '<Option_Three>' should not be available on the check and create user profile page
+    And the '<Option_Four>' should not be available on the check and create user profile page
+    Examples:
+      | Add_User_Profile                                             | Option_One       | Option_Two           | Option_Three       | Option_Four              |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Applicant            | Country_Checkbox | Review_Body_Checkbox | Committee_Dropdown | Access_Required_Checkbox |
+      | Valid_Data_In_All_Mandatory_Fields_Role_System_Administrator | Country_Checkbox | Review_Body_Checkbox | Committee_Dropdown | Access_Required_Checkbox |
+
+  @rsp-4390 @ValidateCountryReviewbodyTeamManagerStudywideReviewer @Test4390
+  Scenario Outline: Validate the display of country and review body in the 'Add a new user profile' page when the role is selected as team manager and study-wide reviewer
+    Then I fill the new user profile page using '<Add_User_Profile>'
+    And I capture the page screenshot
+    And the '<Option_One>' should be available on the add a new user profile page
+    And the '<Option_Two>' should be available on the add a new user profile page
+    And I click the 'Continue' button on the 'Create_User_Profile_Page'
+    Then I can see the check and create user profile page
+    And I capture the page screenshot
+    And the '<Option_One>' should be available on the check and create user profile page
+    And the '<Option_Two>' should be available on the check and create user profile page
+    And the '<Option_Three>' should not be available on the check and create user profile page
+    And the '<Option_Four>' should not be available on the check and create user profile page
+    Examples:
+      | Add_User_Profile                                                        | Option_One       | Option_Two           | Option_Three       | Option_Four              |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_Studywide_Reviewer | Country_Checkbox | Review_Body_Checkbox | Committee_Dropdown | Access_Required_Checkbox |
+
+  @rsp-4390 @ValidateCountryReviewbodyTeamManagerSystemAdmin @jsEnabled @Test4390
+  Scenario Outline: Validate the display of country in the 'Add a new user profile' page when the role is selected as team manager and system administrator and the javascript is enabled
+    Then I fill the new user profile page using '<Add_User_Profile>'
+    And I capture the page screenshot
+    And the '<Option_One>' should be available on the add a new user profile page
+    And the '<Option_Two>' should not be available on the add a new user profile page
+    And I click the 'Continue' button on the 'Create_User_Profile_Page'
+    Then I can see the check and create user profile page
+    And I capture the page screenshot
+    And the '<Option_One>' should be available on the check and create user profile page
+    And the '<Option_Two>' should not be available on the check and create user profile page
+    And the '<Option_Three>' should not be available on the check and create user profile page
+    And the '<Option_Four>' should not be available on the check and create user profile page
+    Examples:
+      | Add_User_Profile                                                          | Option_One       | Option_Two           | Option_Three       | Option_Four              |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_System_Administrator | Country_Checkbox | Review_Body_Checkbox | Committee_Dropdown | Access_Required_Checkbox |
+
+  @rsp-4390 @ValidateCountryReviewbodyTeamManagerSystemAdmin @jsDisabled @Test4390
+  Scenario Outline: Validate the display of country in the 'Add a new user profile' page when the role is selected as team manager and system administrator and the javascript is disabled
+    Then I fill the new user profile page using '<Add_User_Profile>'
+    And I capture the page screenshot
+    And the '<Option_One>' should be available on the add a new user profile page
+    And the '<Option_Two>' should be available on the add a new user profile page
+    And I click the 'Continue' button on the 'Create_User_Profile_Page'
+    Then I can see the check and create user profile page
+    And I capture the page screenshot
+    And the '<Option_One>' should be available on the check and create user profile page
+    And the '<Option_Two>' should not be available on the check and create user profile page
+    And the '<Option_Three>' should not be available on the check and create user profile page
+    And the '<Option_Four>' should not be available on the check and create user profile page
+    Examples:
+      | Add_User_Profile                                                          | Option_One       | Option_Two           | Option_Three       | Option_Four              |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_System_Administrator | Country_Checkbox | Review_Body_Checkbox | Committee_Dropdown | Access_Required_Checkbox |
+
+

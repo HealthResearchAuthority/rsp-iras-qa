@@ -13,6 +13,8 @@
     "job_title_label": "Job title",
     "role_label": "Role",
     "country_label": "Country",
-    "review_body_label": "Review body"
+    "review_body_label": "Review body",
+    "committee_label": "Committee",
+    "access_required_label": "Access required"
   }
 }
