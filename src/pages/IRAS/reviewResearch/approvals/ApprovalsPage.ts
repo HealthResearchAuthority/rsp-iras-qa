@@ -30,7 +30,7 @@ export default class ApprovalsPage {
 
   //Page Methods
   async goto() {
-    await this.page.goto('');
+    await this.page.goto('/approvals');
   }
 
   async assertOnApprovalsPage() {

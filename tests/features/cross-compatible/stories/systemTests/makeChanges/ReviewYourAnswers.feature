@@ -1,4 +1,4 @@
-@FrontStageUser @createProject @createProjectReviewYourAnswers @createAmendment @SystemTest
+@ApplicantUser @createProject @createProjectReviewYourAnswers @createAmendment @SystemTest
 Feature: Create Amendment - Create Project - Review your answers
 
   Background:
