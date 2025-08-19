@@ -42,6 +42,9 @@ Feature: User Administration: Create Manage Users
             | Add_User_Profile                                           | Field_Name |
             | Valid_Data_In_All_Fields_Role_Team_Manager                 | Role       |
             | Valid_Data_In_All_Fields_Role_System_Administrator_Another | Role       |
+    #             GIVEN I’m on the Review body profile page,
+    # WHEN I’m proceeding with the review of the review body’s list of users,
+    # THEN users assigned to the designated review body must be accurately recorded and searchable.
 
     @RegressionTestAddAnotherUser
     Scenario Outline: Verify the user is able to continue adding users via the link provided on the Confirmation screen

@@ -50,8 +50,11 @@ When(
 
 When(
   'I click the change link against {string} on the user profile page',
-  async ({ userProfilePage }, fieldKey: string) => {
-    userProfilePage.clickOnChangeButton(fieldKey);
+  async ({ userProfilePage, commonItemsPage }, fieldKey: string) => {
+    // await userProfilePage.clickOnChangeButton(fieldKey);
+    const changeLink = await commonItemsPage.getChangeLink(fieldKey, userProfilePage);
+    await expect(changeLink).toBeVisible();
+    await changeLink.click();
   }
 );
 

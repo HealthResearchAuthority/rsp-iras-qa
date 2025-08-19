@@ -184,8 +184,4 @@ export default class CheckCreateUserProfilePage {
     await expect(this.page_heading).toBeVisible();
     await expect(this.guidance_text).toBeVisible();
   }
-  async clickOnChangeButtonRoleOperations(fieldKey: string) {
-    const locatorName = fieldKey.toLowerCase() + '_change_link';
-    await this[locatorName].click();
-  }
 }

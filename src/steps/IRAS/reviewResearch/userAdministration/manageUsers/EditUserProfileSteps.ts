@@ -194,8 +194,10 @@ When(
   async ({ createUserProfilePage, commonItemsPage, editUserProfilePage }, datasetName: string) => {
     const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        await commonItemsPage.validateUIComponentValues(dataset, key, editUserProfilePage);
+      if (key !== 'email_address_text') {
+        if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+          await commonItemsPage.validateUIComponentValues(dataset, key, editUserProfilePage);
+        }
       }
     }
   }

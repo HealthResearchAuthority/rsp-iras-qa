@@ -152,7 +152,7 @@ Feature: User Administration: Manage Users - Create user
       | Valid_Data_In_All_Fields_Role_Workflow_Coordinator           | Valid_Data_In_All_Fields_Role_Workflow_Coordinator_Another           | Enabled        | Role_TM_SWR_WFC                     |
       | Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator | Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator_Another | Enabled        | Role_TM_SWR_WFC                     |
 
-  @rsp-2827 @rsp-4021 @verifyCheckCreateUserProfileChangeLinkRoleTMSWRWFC @RoleCheckbox @TestOnly
+  @rsp-2827 @rsp-4021 @verifyCheckCreateUserProfileChangeLinkRoleTMSWRWFC @RoleCheckbox
   Scenario Outline: Verify the user can navigate from 'Check and create user profile' page by clicking 'Change' button against all the fields when the role is selected as study-wide reviewer or team manager or workflow co-ordinator
     And I capture the page screenshot
     When I fill the new user profile page using '<Add_User_Profile>'
@@ -176,28 +176,37 @@ Feature: User Administration: Manage Users - Create user
     And I capture the page screenshot
 
     Examples:
-      | Add_User_Profile                                             | Field_Name    | Add_Another_User_Profile                                             | Role_Checkbox   |
-      | Valid_Data_In_All_Fields_Role_Team_Manager                   | Title         | Valid_Data_In_All_Fields_Role_Team_Manager_Another                   | Role_TM_SWR_WFC |
-      | Valid_Data_In_All_Fields_Role_Team_Manager                   | First_Name    | Valid_Data_In_All_Fields_Role_Team_Manager_Another                   | Role_TM_SWR_WFC |
-      | Valid_Data_In_All_Fields_Role_Workflow_Coordinator           | Last_Name     | Valid_Data_In_All_Fields_Role_Workflow_Coordinator_Another           | Role_TM_SWR_WFC |
-      | Valid_Data_In_All_Fields_Role_Workflow_Coordinator           | Country       | Valid_Data_In_All_Fields_Role_Workflow_Coordinator_Another           | Role_TM_SWR_WFC |
-      | Valid_Data_In_All_Fields_Role_Studywide_Reviewer             | Email_Address | Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Another             | Role_TM_SWR_WFC |
-      | Valid_Data_In_All_Fields_Role_Studywide_Reviewer             | Telephone     | Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Another             | Role_TM_SWR_WFC |
-      | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager         | Organisation  | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_Another         | Role_TM_SWR_WFC |
-      | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager         | Job_Title     | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_Another         | Role_TM_SWR_WFC |
-      | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer   | Role          | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer_Another   | Role_TM_SWR_WFC |
-      | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer   | Review_Body   | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer_Another   | Role_TM_SWR_WFC |
-      | Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator | Role          | Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator_Another | Role_TM_SWR_WFC |
-      | Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator | Review_Body   | Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator_Another | Role_TM_SWR_WFC |
-  # | Valid_Data_In_All_Fields_Role_Team_Manager_Workflow_Coordinator       | Country       | Valid_Data_In_All_Fields_Role_Team_Manager_Workflow_Coordinator_Another       | Role_TM_SWR_WFC |
-  # | Valid_Data_In_All_Fields_Role_Team_Manager_Workflow_Coordinator       | Review_Body   | Valid_Data_In_All_Fields_Role_Team_Manager_Workflow_Coordinator_Another       | Role_TM_SWR_WFC |
-  # | Valid_Data_In_All_Fields_Role_Team_Manager_Studywide_Reviewer         | Country       | Valid_Data_In_All_Fields_Role_Team_Manager_Studywide_Reviewer_Another         | Role_TM_SWR_WFC |
-  # | Valid_Data_In_All_Fields_Role_Team_Manager_Studywide_Reviewer         | Review_Body   | Valid_Data_In_All_Fields_Role_Team_Manager_Studywide_Reviewer_Another         | Role_TM_SWR_WFC |
-  # | Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Workflow_Coordinator | Telephone     | Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Workflow_Coordinator_Another | Role_TM_SWR_WFC |
-  # | Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Workflow_Coordinator | Review_Body   | Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Workflow_Coordinator_Another | Role_TM_SWR_WFC |
-  # Team Manager and System administrator
+      | Add_User_Profile                                                                | Field_Name    | Add_Another_User_Profile                                                                | Role_Checkbox   |
+      | Valid_Data_In_All_Fields_Role_Team_Manager                                      | Title         | Valid_Data_In_All_Fields_Role_Team_Manager_Another                                      | Role_TM_SWR_WFC |
+      | Valid_Data_In_All_Fields_Role_Team_Manager                                      | First_Name    | Valid_Data_In_All_Fields_Role_Team_Manager_Another                                      | Role_TM_SWR_WFC |
+      | Valid_Data_In_All_Fields_Role_Workflow_Coordinator                              | Last_Name     | Valid_Data_In_All_Fields_Role_Workflow_Coordinator_Another                              | Role_TM_SWR_WFC |
+      | Valid_Data_In_All_Fields_Role_Workflow_Coordinator                              | Review_Body   | Valid_Data_In_All_Fields_Role_Workflow_Coordinator_Another                              | Role_TM_SWR_WFC |
+      | Valid_Data_In_All_Fields_Role_Studywide_Reviewer                                | Email_Address | Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Another                                | Role_TM_SWR_WFC |
+      | Valid_Data_In_All_Fields_Role_Studywide_Reviewer                                | Telephone     | Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Another                                | Role_TM_SWR_WFC |
+      | Valid_Data_In_All_Fields_Role_Team_Manager_Workflow_Coordinator                 | Country       | Valid_Data_In_All_Fields_Role_Team_Manager_Workflow_Coordinator_Another                 | Role_TM_SWR_WFC |
+      | Valid_Data_In_All_Fields_Role_Team_Manager_Workflow_Coordinator                 | Review_Body   | Valid_Data_In_All_Fields_Role_Team_Manager_Workflow_Coordinator_Another                 | Role_TM_SWR_WFC |
+      | Valid_Data_In_All_Fields_Role_Team_Manager_Studywide_Reviewer                   | Country       | Valid_Data_In_All_Fields_Role_Team_Manager_Studywide_Reviewer_Another                   | Role_TM_SWR_WFC |
+      | Valid_Data_In_All_Fields_Role_Team_Manager_Studywide_Reviewer                   | Review_Body   | Valid_Data_In_All_Fields_Role_Team_Manager_Studywide_Reviewer_Another                   | Role_TM_SWR_WFC |
+      | Valid_Data_In_All_Fields_Role_Team_Manager_System_Administrator                 | Country       | Valid_Data_In_All_Fields_Role_Team_Manager_System_Administrator_Another                 | Role_TM_SWR_WFC |
+      | Valid_Data_In_All_Fields_Role_Team_Manager_System_Administrator                 | Title         | Valid_Data_In_All_Fields_Role_Team_Manager_System_Administrator_Another                 | Role_TM_SWR_WFC |
+      | Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Workflow_Coordinator           | Telephone     | Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Workflow_Coordinator_Another           | Role_TM_SWR_WFC |
+      | Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Workflow_Coordinator           | Review_Body   | Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Workflow_Coordinator_Another           | Role_TM_SWR_WFC |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager                            | Organisation  | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_Another                            | Role_TM_SWR_WFC |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager                            | Country       | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_Another                            | Role_TM_SWR_WFC |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer                      | Role          | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer_Another                      | Role_TM_SWR_WFC |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer                      | Review_Body   | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer_Another                      | Role_TM_SWR_WFC |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator                    | Role          | Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator_Another                    | Role_TM_SWR_WFC |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator                    | Review_Body   | Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator_Another                    | Role_TM_SWR_WFC |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_Workflow_Coordinator       | Country       | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_Workflow_Coordinator_Another       | Role_TM_SWR_WFC |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_Workflow_Coordinator       | Review_Body   | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_Workflow_Coordinator_Another       | Role_TM_SWR_WFC |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_Studywide_Reviewer         | Country       | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_Studywide_Reviewer_Another         | Role_TM_SWR_WFC |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_Studywide_Reviewer         | Review_Body   | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_Studywide_Reviewer_Another         | Role_TM_SWR_WFC |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_System_Administrator       | Country       | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_System_Administrator_Another       | Role_TM_SWR_WFC |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_System_Administrator       | Title         | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_System_Administrator_Another       | Role_TM_SWR_WFC |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer_Workflow_Coordinator | Telephone     | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer_Workflow_Coordinator_Another | Role_TM_SWR_WFC |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer_Workflow_Coordinator | Review_Body   | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer_Workflow_Coordinator_Another | Role_TM_SWR_WFC |
 
-  @rsp-2827 @verifyCheckCreateUserProfileChangeLinkRoleApplicantSysAdmin @RoleCheckbox @TestOnly
+  @rsp-2827 @verifyCheckCreateUserProfileChangeLinkRoleApplicantSysAdmin @RoleCheckbox
   Scenario Outline: Verify the user can navigate from 'Check and create user profile' page by clicking 'Change' button against all the fields when the role is selected as applicant or system administrator
     And I capture the page screenshot
     When I fill the new user profile page using '<Add_User_Profile>'
@@ -238,7 +247,7 @@ Feature: User Administration: Manage Users - Create user
       | Valid_Data_In_All_Mandatory_Fields_Role_Applicant            | Job_Title     | Valid_Data_In_All_Mandatory_Fields_Role_Applicant_Another            |
       | Valid_Data_In_All_Mandatory_Fields_Role_Applicant            | Role          | Valid_Data_In_All_Mandatory_Fields_Role_Applicant_Another            |
 
-  @rsp-2827 @rsp-2870 @rsp-3107 @rsp-3108 @verifyCreateUserMultiUserRoles @TestOnly
+  @rsp-2827 @rsp-2870 @rsp-3107 @rsp-3108 @verifyCreateUserMultiUserRoles @KNOWN-DEFECT-RSP-4875
   Scenario Outline: Verify the user is able to create a new user profile with multiple roles
     When I fill the new user profile page using '<Add_User_Profile>'
     And I capture the page screenshot
@@ -266,7 +275,7 @@ Feature: User Administration: Manage Users - Create user
       | Valid_Data_All_Roles                                       | Role       | Enabled        |
       | Valid_Data_No_Roles                                        | Role       | Enabled        |
 
-  @rsp-2827 @VerifyNoErrorMessagesValidData @VerifyNoErrorMessagesValidDataCreateUserPage
+  @rsp-2827 @VerifyNoErrorMessagesValidEmailData @VerifyNoErrorMessagesValidDataCreateUserPage @NeedtoTest
   Scenario Outline: Validate user is able to fill the email address field in the create user profile page with valid data
     When I fill the new user profile page using '<Add_User_Profile>'
     And I capture the page screenshot
@@ -303,7 +312,7 @@ Feature: User Administration: Manage Users - Create user
   # | Valid_Email_Data_Multiple_Sub_Domains |
   # | Valid_Email_Data_Other_Language     |
 
-  @rsp-3122 @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage @verifyInvalidDataInputs
+  @rsp-3122 @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage @verifyInvalidDataInputs @TestOnly
   Scenario Outline: Validate error messages are displayed for invalid data in create user profile page
     When I fill the new user profile page using '<Invalid_Data_User_Profile>' for field validation
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
@@ -311,23 +320,25 @@ Feature: User Administration: Manage Users - Create user
     And I capture the page screenshot
 
     Examples:
-      | Invalid_Data_User_Profile                                   | Field_And_Summary_Error_Message                                   |
-      | Missing_Mandatory_Fields_Role_Applicant                     | Missing_Mandatory_Fields_Role_Applicant_Error                     |
-      | Missing_Mandatory_Fields_Role_System_Administrator          | Missing_Mandatory_Fields_Role_System_Administrator_Error          |
-      | Missing_Mandatory_Fields_Role_Team_Manager                  | Missing_Mandatory_Fields_Role_Team_Manager_Error                  |
-      | Missing_Mandatory_Fields_Role_Studywide_Reviewer            | Missing_Mandatory_Fields_Role_Studywide_Reviewer_Error            |
-      # | Missing_Mandatory_Field_First_Name_Role_Not_Operations      | Missing_Mandatory_Field_First_Name_Role_Not_Operations_Error      |
-      # | Missing_Mandatory_Field_Last_Name_Role_Not_Operations       | Missing_Mandatory_Field_Last_Name_Role_Not_Operations_Error       |
-      # | Missing_Mandatory_Field_Email_Address_Role_Not_Operations   | Missing_Mandatory_Field_Email_Address_Role_Not_Operations_Error   |
-      | Missing_Mandatory_Field_Country_Role_Team_Manager           | Missing_Mandatory_Field_Country_Role_Team_Manager_Error           |
-      | Missing_Mandatory_Field_Review_Body_Role_Studywide_Reviewer | Missing_Mandatory_Field_Review_Body_Role_Studywide_Reviewer_Error |
-      | Invalid_Character_Limit                                     | Invalid_Character_Limit_Error                                     |
-      | Invalid_Email_Data_Max_Char                                 | Invalid_Character_Limit_Field_Email_Address_Error                 |
-      | Incorrect_Format_Telephone_Data                             | Incorrect_Format_Field_Telephone_Error                            |
-      | Incorrect_Format_Invalid_Character_Limit_Telephone_Data     | Incorrect_Format_Invalid_Character_Limit_Telephone_Error          |
-      | Incorrect_Format_Invalid_Character_Limit_Email_Data         | Incorrect_Format_Invalid_Character_Limit_Email_Address_Error      |
+      | Invalid_Data_User_Profile                                                 | Field_And_Summary_Error_Message                                                 |
+      | Missing_Mandatory_Fields_Role_Applicant                                   | Missing_Mandatory_Fields_Role_Applicant_Error                                   |
+      | Missing_Mandatory_Fields_Role_System_Administrator                        | Missing_Mandatory_Fields_Role_System_Administrator_Error                        |
+      | Missing_Mandatory_Fields_Role_Team_Manager                                | Missing_Mandatory_Fields_Role_Team_Manager_Error                                |
+      | Missing_Mandatory_Fields_Role_Studywide_Reviewer                          | Missing_Mandatory_Fields_Role_Studywide_Reviewer_Error                          |
+      | Missing_Mandatory_Fields_Role_Workflow_Coordinator                        | Missing_Mandatory_Fields_Role_Workflow_Coordinator_Error                        |
+      | Missing_Mandatory_Field_First_Name_Role_Applicant_System_Administrator    | Missing_Mandatory_Field_First_Name_Role_Applicant_System_Administrator_Error    |
+      | Missing_Mandatory_Field_Last_Name_Role_Applicant_System_Administrator     | Missing_Mandatory_Field_Last_Name_Role_Applicant_System_Administrator_Error     |
+      | Missing_Mandatory_Field_Email_Address_Role_Applicant_System_Administrator | Missing_Mandatory_Field_Email_Address_Role_Applicant_System_Administrator_Error |
+      | Missing_Mandatory_Field_Country_Role_Team_Manager                         | Missing_Mandatory_Field_Country_Role_Team_Manager_Error                         |
+      | Missing_Mandatory_Field_Review_Body_Role_Studywide_Reviewer               | Missing_Mandatory_Field_Review_Body_Role_Studywide_Reviewer_Error               |
+      | Missing_Mandatory_Field_Review_Body_Role_Workflow_Coordinator             | Missing_Mandatory_Field_Review_Body_Role_Workflow_Coordinator_Error             |
+      | Invalid_Character_Limit                                                   | Invalid_Character_Limit_Error                                                   |
+      | Invalid_Email_Data_Max_Char                                               | Invalid_Character_Limit_Field_Email_Address_Error                               |
+      | Incorrect_Format_Telephone_Data                                           | Incorrect_Format_Field_Telephone_Error                                          |
+      | Incorrect_Format_Invalid_Character_Limit_Telephone_Data                   | Incorrect_Format_Invalid_Character_Limit_Telephone_Error                        |
+      | Incorrect_Format_Invalid_Character_Limit_Email_Data                       | Incorrect_Format_Invalid_Character_Limit_Email_Address_Error                    |
 
-  @rsp-3122 @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage @verifyInvalidDataEmails @skip
+  @rsp-3122 @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage @verifyInvalidDataEmails @NeedtoTest
   Scenario Outline: Validate error messages are displayed for invalid data in the email address field of create user profile page
     When I fill the new user profile page using '<Invalid_Data_User_Profile>' for field validation
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
@@ -380,10 +391,12 @@ Feature: User Administration: Manage Users - Create user
     And I capture the page screenshot
 
     Examples:
-      | Add_User_Profile                           | Role_Checkbox   | Invalid_Data_User_Profile                                   | Field_And_Summary_Error_Message                                   |
-      | Valid_Data_In_All_Fields_Role_Team_Manager | Role_TM_SWR_WFC | Missing_Mandatory_Fields_Role_Team_Manager                  | Missing_Mandatory_Fields_Role_Team_Manager_Error                  |
-      | Valid_Data_In_All_Fields_Role_Team_Manager | Role_TM_SWR_WFC | Missing_Mandatory_Field_Country_Role_Team_Manager           | Missing_Mandatory_Field_Country_Role_Team_Manager_Error           |
-      | Valid_Data_In_All_Fields_Role_Team_Manager | Role_TM_SWR_WFC | Missing_Mandatory_Field_Review_Body_Role_Studywide_Reviewer | Missing_Mandatory_Field_Review_Body_Role_Studywide_Reviewer_Error |
+      | Add_User_Profile                                   | Role_Checkbox   | Invalid_Data_User_Profile                                   | Field_And_Summary_Error_Message                                   |
+      | Valid_Data_In_All_Fields_Role_Team_Manager         | Role_TM_SWR_WFC | Missing_Mandatory_Fields_Role_Team_Manager                  | Missing_Mandatory_Fields_Role_Team_Manager_Error                  |
+      | Valid_Data_In_All_Fields_Role_Studywide_Reviewer   | Role_TM_SWR_WFC | Missing_Mandatory_Fields_Role_Studywide_Reviewer            | Missing_Mandatory_Fields_Role_Studywide_Reviewer_Error            |
+      | Valid_Data_In_All_Fields_Role_Workflow_Coordinator | Role_TM_SWR_WFC | Missing_Mandatory_Fields_Role_Workflow_Coordinator          | Missing_Mandatory_Fields_Role_Workflow_Coordinator_Error          |
+      | Valid_Data_In_All_Fields_Role_Team_Manager         | Role_TM_SWR_WFC | Missing_Mandatory_Field_Country_Role_Team_Manager           | Missing_Mandatory_Field_Country_Role_Team_Manager_Error           |
+      | Valid_Data_In_All_Fields_Role_Studywide_Reviewer   | Role_TM_SWR_WFC | Missing_Mandatory_Field_Review_Body_Role_Studywide_Reviewer | Missing_Mandatory_Field_Review_Body_Role_Studywide_Reviewer_Error |
 
   @rsp-3122 @VerifyErrorMessagesInvalidData @VerifyErrorInvalidDataCreateUserFromCheckCreateUserProfileChangeLink
   Scenario Outline: Validate error messages are displayed for invalid data in create user profile page when the user navigated from 'Check and create user profile' page by clicking 'Change' button against the fields
@@ -406,10 +419,12 @@ Feature: User Administration: Manage Users - Create user
     And I capture the page screenshot
 
     Examples:
-      | Add_User_Profile                           | Field_Name | Role_Checkbox   | Invalid_Data_User_Profile                       | Field_And_Summary_Error_Message                       |
-      | Valid_Data_In_All_Fields_Role_Team_Manager | Title      | Role_TM_SWR_WFC | Missing_Mandatory_Fields_Role_Team_Manager      | Missing_Mandatory_Fields_Role_Team_Manager_Error      |
-      | Valid_Data_In_All_Fields_Role_Team_Manager | First_Name | Role_TM_SWR_WFC | Missing_Mandatory_Field_Country_Role_Operations | Missing_Mandatory_Field_Country_Role_Operations_Error |
-  # | Valid_Data_In_All_Fields_Role_Team_Manager | Last_Name  | Role_TM_SWR_WFC | Missing_Mandatory_Field_Access_Required_Role_Operations | Missing_Mandatory_Field_Access_Required_Role_Operations_Error |
+      | Add_User_Profile                                   | Field_Name  | Role_Checkbox   | Invalid_Data_User_Profile                                   | Field_And_Summary_Error_Message                                   |
+      | Valid_Data_In_All_Fields_Role_Team_Manager         | Country     | Role_TM_SWR_WFC | Missing_Mandatory_Fields_Role_Team_Manager                  | Missing_Mandatory_Fields_Role_Team_Manager_Error                  |
+      | Valid_Data_In_All_Fields_Role_Studywide_Reviewer   | Review_Body | Role_TM_SWR_WFC | Missing_Mandatory_Fields_Role_Studywide_Reviewer            | Missing_Mandatory_Fields_Role_Studywide_Reviewer_Error            |
+      | Valid_Data_In_All_Fields_Role_Workflow_Coordinator | Review_Body | Role_TM_SWR_WFC | Missing_Mandatory_Fields_Role_Workflow_Coordinator          | Missing_Mandatory_Fields_Role_Workflow_Coordinator_Error          |
+      | Valid_Data_In_All_Fields_Role_Team_Manager         | First_Name  | Role_TM_SWR_WFC | Missing_Mandatory_Field_Country_Role_Team_Manager           | Missing_Mandatory_Field_Country_Role_Team_Manager_Error           |
+      | Valid_Data_In_All_Fields_Role_Studywide_Reviewer   | Last_Name   | Role_TM_SWR_WFC | Missing_Mandatory_Field_Review_Body_Role_Studywide_Reviewer | Missing_Mandatory_Field_Review_Body_Role_Studywide_Reviewer_Error |
 
   @rsp-3952 @DuplicateEmailValidation @DuplicateEmailExisting @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage
   Scenario Outline: Get existing email addresses from manage users list page and validate error messages are displayed for the duplicate email in create user profile page
@@ -430,9 +445,9 @@ Feature: User Administration: Manage Users - Create user
     Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Create_User_Profile_Page'
     And I capture the page screenshot
     Examples:
-      | Field_Name    | Position | Invalid_Data_User_Profile           | Field_And_Summary_Error_Message |
-      | Email_Address | First    | Duplicate_Email_Role_Not_Operations | Duplicate_Email_Error           |
-      | Email_Address | Last     | Duplicate_Email_Role_Operations     | Duplicate_Email_Error           |
+      | Field_Name    | Position | Invalid_Data_User_Profile                   | Field_And_Summary_Error_Message |
+      | Email_Address | First    | Duplicate_Email_Role_Applicant_System_Admin | Duplicate_Email_Error           |
+      | Email_Address | Last     | Duplicate_Email_Role_SWR_TM_WFC             | Duplicate_Email_Error           |
 
   @rsp-3952 @DuplicateEmailValidation @DuplicateEmailNew @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage
   Scenario Outline: Validate error messages are displayed for duplicate email in create user profile page after creating a user
@@ -495,7 +510,7 @@ Feature: User Administration: Manage Users - Create user
     And I capture the page screenshot
     Examples:
       | Add_User_Profile                           | Status_Enabled | Invalid_Data_User_Profile       | Field_And_Summary_Error_Message |
-      | Valid_Data_In_All_Fields_Role_Team_Manager | Enabled        | Duplicate_Email_Role_Operations | Duplicate_Email_Error           |
+      | Valid_Data_In_All_Fields_Role_Team_Manager | Enabled        | Duplicate_Email_Role_SWR_TM_WFC | Duplicate_Email_Error           |
 
   @rsp-3886 @rsp-4026 @verifyLastLoggedInDate
   Scenario Outline: Verify the last login date of user in homepage and manage users page
@@ -507,7 +522,7 @@ Feature: User Administration: Manage Users - Create user
     And I validate the last logged in is displayed blank for the new user who has not yet logged in to the application
     And I capture the page screenshot
     Then I logged out from the system
-    Then I have navigated to the '<Page>' as '<User_Front_Stage>'
+    Then I have navigated to the '<Page>' as '<User>'
     And I capture the page screenshot
     And I keep note of the current login date
     Then I logged out from the system
@@ -523,8 +538,12 @@ Feature: User Administration: Manage Users - Create user
     And I validate the last logged in is displayed as full date in home page
     And I capture the page screenshot
     Examples:
-      | Add_User_Profile                                   | Status_Enabled | User_Front_Stage | User_System_Admin | Page      | Search_Query           |
-      | Valid_Data_In_All_Fields_Role_System_Administrator | Enabled        | Frontstage_User  | System_Admin      | Home_Page | Front_Stage_User_Email |
+      | Add_User_Profile                                   | Status_Enabled | User                 | User_System_Admin | Page      | Search_Query               |
+      | Valid_Data_In_All_Fields_Role_System_Administrator | Enabled        | Frontstage_User      | System_Admin      | Home_Page | Applicant_User_Email       |
+      | Valid_Data_In_All_Fields_Role_Studywide_Reviewer   | Enabled        | Studywide_Reviewer   | System_Admin      | Home_Page | Studywide_Reviewer_Email   |
+      | Valid_Data_In_All_Fields_Role_Team_Manager         | Enabled        | Team_Manager         | System_Admin      | Home_Page | Team_Manager_Email         |
+      | Valid_Data_In_All_Fields_Role_Workflow_Coordinator | Enabled        | Workflow_Coordinator | System_Admin      | Home_Page | Workflow_Coordinator_Email |
+  # Frontstage_User >> Update Frontstage_User with Applicant_User when Vijay's PR merged with main
 
   @rsp-4390 @ValidateRemovalCommitteeAccessRequired @Test4390
   Scenario Outline: Validate the removal of committee dropdown and access required checkbox from the 'Add a new user profile' page

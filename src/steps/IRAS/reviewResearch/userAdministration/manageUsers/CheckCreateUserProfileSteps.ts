@@ -32,8 +32,11 @@ Then(
 
 When(
   'I click the change link against {string} on the check and create user profile page',
-  async ({ checkCreateUserProfilePage }, fieldKey: string) => {
-    checkCreateUserProfilePage.clickOnChangeButtonRoleOperations(fieldKey);
+  async ({ checkCreateUserProfilePage, commonItemsPage }, fieldKey: string) => {
+    const changeLink = await commonItemsPage.getChangeLink(fieldKey, checkCreateUserProfilePage);
+    await expect(changeLink).toBeVisible();
+    await changeLink.click();
+    // await checkCreateUserProfilePage.clickOnChangeButtonRoleOperations(fieldKey);
   }
 );
 
