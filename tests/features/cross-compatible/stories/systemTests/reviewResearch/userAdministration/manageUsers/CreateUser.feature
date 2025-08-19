@@ -539,11 +539,10 @@ Feature: User Administration: Manage Users - Create user
     And I capture the page screenshot
     Examples:
       | Add_User_Profile                                   | Status_Enabled | User                 | User_System_Admin | Page      | Search_Query               |
-      | Valid_Data_In_All_Fields_Role_System_Administrator | Enabled        | Frontstage_User      | System_Admin      | Home_Page | Applicant_User_Email       |
+      | Valid_Data_In_All_Fields_Role_System_Administrator | Enabled        | Applicant_User       | System_Admin      | Home_Page | Applicant_User_Email       |
       | Valid_Data_In_All_Fields_Role_Studywide_Reviewer   | Enabled        | Studywide_Reviewer   | System_Admin      | Home_Page | Studywide_Reviewer_Email   |
       | Valid_Data_In_All_Fields_Role_Team_Manager         | Enabled        | Team_Manager         | System_Admin      | Home_Page | Team_Manager_Email         |
       | Valid_Data_In_All_Fields_Role_Workflow_Coordinator | Enabled        | Workflow_Coordinator | System_Admin      | Home_Page | Workflow_Coordinator_Email |
-  # Frontstage_User >> Update Frontstage_User with Applicant_User when Vijay's PR merged with main
 
   @rsp-4390 @ValidateRemovalCommitteeAccessRequired @Test4390
   Scenario Outline: Validate the removal of committee dropdown and access required checkbox from the 'Add a new user profile' page
