@@ -489,4 +489,4 @@ Feature: User Administration: Manage Users - Create user
     And I capture the page screenshot
     Examples:
       | Add_User_Profile                       | Status_Enabled | User_Front_Stage | User_System_Admin | Page      | Search_Query           |
-      | Valid_Data_In_All_Fields_Role_Reviewer | Enabled        | Frontstage_User  | System_Admin      | Home_Page | Front_Stage_User_Email |
+      | Valid_Data_In_All_Fields_Role_Reviewer | Enabled        | Applicant_User   | System_Admin      | Home_Page | Front_Stage_User_Email |

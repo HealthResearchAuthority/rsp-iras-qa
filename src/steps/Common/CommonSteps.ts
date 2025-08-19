@@ -681,6 +681,7 @@ Given(
       myResearchProjectsPage,
       searchModificationsPage,
       modificationsReadyToAssignPage,
+      approvalsPage,
     },
     page: string
   ) => {
@@ -726,6 +727,10 @@ Given(
         await modificationsReadyToAssignPage.goto();
         await modificationsReadyToAssignPage.assertOnModificationsReadyToAssignPage();
         break;
+      case 'Approvals_Page':
+        await approvalsPage.goto();
+        await approvalsPage.assertOnApprovalsPage();
+        break;
       default:
         throw new Error(`${page} is not a valid option`);
     }
@@ -735,7 +740,7 @@ Given(
 Given(
   'I have navigated to the {string} as {string}',
   async (
-    { homePage, systemAdministrationPage, accessDeniedPage, myResearchProjectsPage },
+    { homePage, systemAdministrationPage, accessDeniedPage, myResearchProjectsPage, approvalsPage },
     page: string,
     user: string
   ) => {
@@ -755,6 +760,11 @@ Given(
       case 'System_Administration_Access_Denied_Page':
         await systemAdministrationPage.page.context().addCookies(authState.cookies);
         await systemAdministrationPage.goto();
+        await accessDeniedPage.assertOnAccessDeniedPage();
+        break;
+      case 'Approvals_Access_Denied_Page':
+        await approvalsPage.page.context().addCookies(authState.cookies);
+        await approvalsPage.goto();
         await accessDeniedPage.assertOnAccessDeniedPage();
         break;
       case 'My_Research_Page':
