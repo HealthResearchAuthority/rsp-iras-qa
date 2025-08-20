@@ -247,7 +247,7 @@ Feature: User Administration: Manage Users - Create user
       | Valid_Data_In_All_Mandatory_Fields_Role_Applicant            | Job_Title     | Valid_Data_In_All_Mandatory_Fields_Role_Applicant_Another            |
       | Valid_Data_In_All_Mandatory_Fields_Role_Applicant            | Role          | Valid_Data_In_All_Mandatory_Fields_Role_Applicant_Another            |
 
-  @rsp-2827 @rsp-2870 @rsp-3107 @rsp-3108 @verifyCreateUserMultiUserRoles @KNOWN-DEFECT-RSP-4875 @TestOnly
+  @rsp-2827 @rsp-2870 @rsp-3107 @rsp-3108 @verifyCreateUserMultiUserRoles @KNOWN-DEFECT-RSP-4875
   Scenario Outline: Verify the user is able to create a new user profile with multiple roles
     When I fill the new user profile page using '<Add_User_Profile>'
     And I capture the page screenshot
@@ -261,6 +261,12 @@ Feature: User Administration: Manage Users - Create user
     When I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
     And I can see the 'Manage_Users_Page'
     And I capture the page screenshot
+    When I enter '<Search_Queries>' into the search field for manage users page
+    And I capture the page screenshot
+    And I select advanced filters in the manage users page using '<Advanced_Filters>'
+    And I capture the page screenshot
+    And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
+    And I capture the page screenshot
     And I search and click on view edit link for unique '<Add_User_Profile>' user with '<Status_Enabled>' status from the manage user page
     When I can see the user profile page
     Then I can see the '<Add_User_Profile>' user has the correct roles assigned on their profile page
@@ -268,12 +274,14 @@ Feature: User Administration: Manage Users - Create user
     Then I can see that the '<Add_User_Profile>' users data persists on the edit profile page
 
     Examples:
-      | Add_User_Profile                                           | Field_Name | Status_Enabled |
-      | Valid_Data_In_All_Fields_Role_Team_Manager                 | Role       | Enabled        |
-      | Valid_Data_In_All_Fields_Role_System_Administrator_Another | Role       | Enabled        |
-      | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager       | Role       | Enabled        |
-      | Valid_Data_All_Roles                                       | Role       | Enabled        |
-      | Valid_Data_No_Roles                                        | Role       | Enabled        |
+      | Add_User_Profile                                   | Field_Name | Status_Enabled | Advanced_Filters                                        | Search_Queries            |
+      | Valid_Data_In_All_Fields_Role_Team_Manager         | Role       | Enabled        | Advanced_Filter_Role_Team_Manager_Status_Active         | Role_Team_Manager         |
+      | Valid_Data_In_All_Fields_Role_System_Administrator | Role       | Enabled        | Advanced_Filter_Role_System_Administrator_Status_Active | Role_System_Administrator |
+      | Valid_Data_In_All_Fields_Role_Studywide_Reviewer   | Role       | Enabled        | Advanced_Filter_Role_Studywide_Reviewer_Status_Active   | Role_Studywide_Reviewer   |
+      | Valid_Data_In_All_Fields_Role_Workflow_Coordinator | Role       | Enabled        | Advanced_Filter_Role_Workflow_Coordinator_Status_Active | Role_Workflow_Coordinator |
+      | Valid_Data_In_All_Fields_Role_Applicant            | Role       | Enabled        | Advanced_Filter_Role_Applicant_Status_Active            | Role_Applicant            |
+      | Valid_Data_All_Roles                               | Role       | Enabled        | Advanced_Filter_All_Roles_Status_Active                 | Role_All                  |
+      | Valid_Data_No_Roles                                | Role       | Enabled        | Advanced_Filter_No_Roles_Status_Active                  | No_Roles                  |
 
   @rsp-2827 @VerifyNoErrorMessagesValidEmailData @VerifyNoErrorMessagesValidDataCreateUserPage
   Scenario Outline: Validate user is able to fill the email address field in the create user profile page with valid data

@@ -26,6 +26,12 @@ Feature: User Administration: Create Manage Users
         When I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
         And I can see the 'Manage_Users_Page'
         And I capture the page screenshot
+        When I enter '<Search_Queries>' into the search field for manage users page
+        And I capture the page screenshot
+        And I select advanced filters in the manage users page using '<Advanced_Filters_Users>'
+        And I capture the page screenshot
+        And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
+        And I capture the page screenshot
         And I search and click on view edit link for unique '<Add_User_Profile>' user with 'Active' status from the manage user page
         Then I can see the user profile page
         And I can see the '<Add_User_Profile>' user has the correct roles assigned on their profile page
@@ -41,12 +47,13 @@ Feature: User Administration: Create Manage Users
         When I enter '<Organisation_Name>' into the search field
         And I capture the page screenshot
         And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
-        # And I select advanced filters in the manage review bodies page using '<Advanced_Filters>'
-        # And I capture the page screenshot
-        # And I click the 'Apply_filters' button on the 'Manage_Review_Bodies_Page'
-        # And I capture the page screenshot
-        # Then I can see the selected filters '<Advanced_Filters>' are displayed under active filters for manage review bodies page
-        # And I can see the results matching the search '<Organisation_Name>' and filter criteria '<Advanced_Filters>' for manage review bodies page
+        And I click the 'Advanced_Filters' button on the 'Manage_Review_Bodies_Page'
+        And I capture the page screenshot
+        And I select advanced filters in the manage review bodies page using '<Advanced_Filters_Review_Bodies>'
+        And I capture the page screenshot
+        And I click the 'Apply_filters' button on the 'Manage_Review_Bodies_Page'
+        And I capture the page screenshot
+        Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters_Review_Bodies>' in the 'Manage_Review_Bodies_Page'
         And I can see the '<Organisation_Name>' should be present in the list with 'Active' status in the manage review bodies page
         And I capture the page screenshot
         Then I click the view edit link
@@ -63,9 +70,9 @@ Feature: User Administration: Create Manage Users
         Then the system displays search results matching the search criteria
 
         Examples:
-            | Add_User_Profile                                   | Field_Name | Organisation_Name                                                                 | Advanced_Filters                               |
-            | Valid_Data_In_All_Fields_Role_Studywide_Reviewer   | Role       | QA Automation Health Research Authority (HRA)                                     | Advanced_Filter_Country_England_Status_Active  |
-            | Valid_Data_In_All_Fields_Role_Workflow_Coordinator | Role       | QA Automation National Research Service Permissions Coordination Centre (NRS PCC) | Advanced_Filter_Country_Scotland_Status_Active |
+            | Add_User_Profile                                   | Field_Name | Organisation_Name                                                                 | Advanced_Filters_Users                                                     | Search_Queries            | Advanced_Filters_Review_Bodies |
+            | Valid_Data_In_All_Fields_Role_Studywide_Reviewer   | Role       | QA Automation Health Research Authority (HRA)                                     | Advanced_Filter_Review_body_HRA_Role_Studywide_Reviewer_Status_Active      | Role_Studywide_Reviewer   | Advanced_Filter_Eng_Active     |
+            | Valid_Data_In_All_Fields_Role_Workflow_Coordinator | Role       | QA Automation National Research Service Permissions Coordination Centre (NRS PCC) | Advanced_Filter_Review_body_NRSPCC_Role_Workflow_Coordinator_Status_Active | Role_Workflow_Coordinator | Advanced_Filter_Sco_Active     |
 
     @RegressionTestCreateUserEvents
     Scenario Outline: Verify the user is able to create new user profiles with various roles, with an audit history log
@@ -127,7 +134,7 @@ Feature: User Administration: Create Manage Users
             | Add_User_Profile                                   | Add_Another_User_Profile                                   |
             | Valid_Data_In_All_Fields_Role_System_Administrator | Valid_Data_In_All_Fields_Role_System_Administrator_Another |
 
-    @RegressionTestUnassignUserRoles @KNOWN-DEFECT-RSP-3938 @TestOnly
+    @RegressionTestUnassignUserRoles @KNOWN-DEFECT-RSP-3938  @fail
     Scenario Outline: Verify the user can unassign roles from the user profile event, with an audit history log
         When I fill the new user profile page using '<Add_User_Profile>'
         And I capture the page screenshot
@@ -139,6 +146,12 @@ Feature: User Administration: Create Manage Users
         And I capture the page screenshot
         When I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
         Then I can see the 'Manage_Users_Page'
+        And I capture the page screenshot
+        When I enter '<Search_Queries>' into the search field for manage users page
+        And I capture the page screenshot
+        And I select advanced filters in the manage users page using '<Advanced_Filters>'
+        And I capture the page screenshot
+        And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
         And I capture the page screenshot
         When I search and click on view edit link for unique '<Add_User_Profile>' user with 'ACTIVE' status from the manage user page
         Then I can see the user profile page
@@ -158,8 +171,8 @@ Feature: User Administration: Create Manage Users
         Then I can see the '<Add_User_Profile>' user has had their roles unassigned in the audit history
 
         Examples:
-            | Add_User_Profile     | Field_Name | Edit_User                 |
-            | Valid_Data_All_Roles | Role       | User_Roles_Checkbox_Empty |
+            | Add_User_Profile     | Field_Name | Edit_User                 | Advanced_Filters                        | Search_Queries |
+            | Valid_Data_All_Roles | Role       | User_Roles_Checkbox_Empty | Advanced_Filter_All_Roles_Status_Active | Role_All       |
 
     @RegressionTestEnableDisableUserProfile
     Scenario Outline: Verify the user is able to disable, then re-enable a user profile, with an audit history log

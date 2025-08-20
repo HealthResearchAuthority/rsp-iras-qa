@@ -121,7 +121,7 @@ Then(
         expectedOrderedRoles[index] +
         datasetAuditEvent.Unassign_User.event_description_suffix_text;
       expect(confirmArrayNotNull(actualAuditLog.get('timeValues'))[index]).toBe(timeExpected);
-      expect(confirmArrayNotNull(actualAuditLog.get('eventValues'))[index]).toBe(eventDescriptionExpectedValue);
+      expect.soft(confirmArrayNotNull(actualAuditLog.get('eventValues'))[index]).toBe(eventDescriptionExpectedValue);
       expect(confirmArrayNotNull(actualAuditLog.get('adminEmailValues'))[index]).toBe(
         datasetAuditEvent.system_admin_email_text
       );

@@ -14,12 +14,13 @@ When('I update user profile with {string}', async ({ commonItemsPage, editUserPr
 
 When(
   'I can see the newly created user record should be present in the list for {string} with {string} status in the manage user page',
-  async ({ manageUsersPage, createUserProfilePage }, datasetName: string, status: string) => {
+  async ({ manageUsersPage, createUserProfilePage, commonItemsPage }, datasetName: string, status: string) => {
     const foundRecord = await manageUsersPage.getUniqueUserRecord(
       datasetName,
       status,
       createUserProfilePage,
-      manageUsersPage
+      manageUsersPage,
+      commonItemsPage
     );
     expect(foundRecord).toBeDefined();
     expect(foundRecord).toHaveCount(1);
@@ -44,12 +45,13 @@ When(
 
 When(
   'I search and click on view edit link for unique {string} user with {string} status from the manage user page',
-  async ({ manageUsersPage, createUserProfilePage }, datasetName: string, status: string) => {
+  async ({ manageUsersPage, createUserProfilePage, commonItemsPage }, datasetName: string, status: string) => {
     const foundRecord = await manageUsersPage.getUniqueUserRecord(
       datasetName,
       status,
       createUserProfilePage,
-      manageUsersPage
+      manageUsersPage,
+      commonItemsPage
     );
     expect(foundRecord).toBeDefined();
     expect(foundRecord).toHaveCount(1);

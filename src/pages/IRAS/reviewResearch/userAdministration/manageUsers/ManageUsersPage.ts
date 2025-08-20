@@ -3,6 +3,7 @@ import * as linkTextData from '../../../../../resources/test_data/common/link_te
 import * as manageUsersPageTestData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageUsers/manage_users_page_data.json';
 import { confirmStringNotNull, returnDataFromJSON, validateDateRange } from '../../../../../utils/UtilFunctions';
 import CreateUserProfilePage from './CreateUserProfilePage';
+import CommonItemsPage from '../../../../Common/CommonItemsPage';
 
 //Declare Page Objects
 export default class ManageUsersPage {
@@ -77,6 +78,22 @@ export default class ManageUsersPage {
   readonly user_search_text: Locator;
   readonly date_last_logged_in_from_date_help_text: Locator;
   readonly date_last_logged_in_to_date_help_text: Locator;
+  readonly role_checkbox_chevron: Locator;
+  readonly role_label: Locator;
+  readonly role_fieldset: Locator;
+  readonly role_checkbox: Locator;
+  readonly role_selected_hint_label: Locator;
+  readonly role_hint_label: Locator;
+  readonly role_checkbox_selected_hint_label: Locator;
+  readonly role_checkbox_hint_label: Locator;
+  readonly review_body_checkbox_chevron: Locator;
+  readonly review_body_label: Locator;
+  readonly review_body_fieldset: Locator;
+  readonly review_body_checkbox: Locator;
+  readonly review_body_selected_hint_label: Locator;
+  readonly review_body_hint_label: Locator;
+  readonly review_body_checkbox_selected_hint_label: Locator;
+  readonly review_body_checkbox_hint_label: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -152,7 +169,7 @@ export default class ManageUsersPage {
       });
     this.country_label = this.page
       .getByRole('heading', { level: 2 })
-      .getByText(this.manageUsersPageTestData.Manage_Users_Page.Advanced_Filters_Hint_Labels.country_label, {
+      .getByText(this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.country_label, {
         exact: true,
       });
     this.country_fieldset = this.country_label
@@ -167,7 +184,7 @@ export default class ManageUsersPage {
     this.country_checkbox = this.country_fieldset.getByRole('checkbox');
     this.status_label = this.page
       .getByRole('heading', { level: 2 })
-      .getByText(this.manageUsersPageTestData.Manage_Users_Page.Advanced_Filters_Hint_Labels.status_label, {
+      .getByText(this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.status_label, {
         exact: true,
       });
     this.status_fieldset = this.status_label
@@ -305,6 +322,106 @@ export default class ManageUsersPage {
       });
     this.date_last_logged_in_from_date_help_text = this.page.locator('#Search_FromDate-hint');
     this.date_last_logged_in_to_date_help_text = this.page.locator('#Search_ToDate-hint');
+    this.role_checkbox_chevron = this.page
+      .getByRole('heading', { level: 2 })
+      .getByText(this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.role_label, {
+        exact: true,
+      });
+    this.role_label = this.page
+      .getByRole('heading', { level: 2 })
+      .getByText(this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.role_label, {
+        exact: true,
+      });
+    this.role_fieldset = this.role_label
+      .locator('..')
+      .locator('..')
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group', {
+        has: this.page.getByText(
+          this.manageUsersPageTestData.Manage_Users_Page.Advanced_Filters_Hint_Labels.role_hint_label
+        ),
+      });
+    this.role_checkbox = this.role_fieldset.getByRole('checkbox');
+    this.role_selected_hint_label = this.role_label
+      .locator('..')
+      .locator('..')
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group')
+      .getByText(this.manageUsersPageTestData.Manage_Users_Page.Advanced_Filters_Hint_Labels.role_selected_hint_label);
+
+    this.role_hint_label = this.role_label
+      .locator('..')
+      .locator('..')
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group')
+      .getByText(this.manageUsersPageTestData.Manage_Users_Page.Advanced_Filters_Hint_Labels.role_hint_label);
+    this.role_checkbox_selected_hint_label = this.role_checkbox_chevron
+      .locator('..')
+      .locator('..')
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group')
+      .getByText(
+        this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.selected_checkboxes_hint_label
+      );
+    this.role_checkbox_hint_label = this.role_checkbox_chevron
+      .locator('..')
+      .locator('..')
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group')
+      .getByText(this.manageUsersPageTestData.Manage_Users_Page.Advanced_Filters_Hint_Labels.role_hint_label, {
+        exact: true,
+      });
+    this.review_body_checkbox_chevron = this.page
+      .getByRole('heading', { level: 2 })
+      .getByText(this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.review_body_label, {
+        exact: true,
+      });
+    this.review_body_label = this.page
+      .getByRole('heading', { level: 2 })
+      .getByText(this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.review_body_label, {
+        exact: true,
+      });
+    this.review_body_fieldset = this.review_body_label
+      .locator('..')
+      .locator('..')
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group', {
+        has: this.page.getByText(
+          this.manageUsersPageTestData.Manage_Users_Page.Advanced_Filters_Hint_Labels.review_body_hint_label
+        ),
+      });
+    this.review_body_checkbox = this.review_body_fieldset.getByRole('checkbox');
+    this.review_body_selected_hint_label = this.review_body_label
+      .locator('..')
+      .locator('..')
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group')
+      .getByText(
+        this.manageUsersPageTestData.Manage_Users_Page.Advanced_Filters_Hint_Labels.review_body_selected_hint_label
+      );
+
+    this.review_body_hint_label = this.review_body_label
+      .locator('..')
+      .locator('..')
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group')
+      .getByText(this.manageUsersPageTestData.Manage_Users_Page.Advanced_Filters_Hint_Labels.review_body_hint_label);
+    this.review_body_checkbox_selected_hint_label = this.review_body_checkbox_chevron
+      .locator('..')
+      .locator('..')
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group')
+      .getByText(
+        this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.selected_checkboxes_hint_label
+      );
+    this.review_body_checkbox_hint_label = this.review_body_checkbox_chevron
+      .locator('..')
+      .locator('..')
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group')
+      .getByText(this.manageUsersPageTestData.Manage_Users_Page.Advanced_Filters_Hint_Labels.review_body_hint_label, {
+        exact: true,
+      });
   }
 
   //Getters & Setters for Private Variables
@@ -412,7 +529,8 @@ export default class ManageUsersPage {
     datasetName: string,
     status: string,
     createUserProfilePage: CreateUserProfilePage,
-    manageUsersPage: ManageUsersPage
+    manageUsersPage: ManageUsersPage,
+    commonItemsPage: CommonItemsPage
   ) {
     const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
     const userFirstName = dataset.first_name_text;
@@ -420,7 +538,12 @@ export default class ManageUsersPage {
     const data = await returnDataFromJSON();
     const userEmail = data.Create_User_Profile.email_address_unique;
     const userStatus = await manageUsersPage.getUserStatus(status);
-    await manageUsersPage.goto(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size, userEmail);
+    if (!(await commonItemsPage.clear_all_filters_link.isVisible())) {
+      await manageUsersPage.goto(
+        manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size,
+        userEmail
+      );
+    }
     const foundRecord = await manageUsersPage.findUserProfile(userFirstName, userLastName, userEmail, userStatus);
     await manageUsersPage.setUniqueEmail(userEmail);
     return foundRecord;
