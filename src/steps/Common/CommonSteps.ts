@@ -414,6 +414,7 @@ Then(
       reviewYourAnswersPage,
       selectAreaOfChangePage,
       participatingOrganisationsPage,
+      organisationChangeAffectPage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
@@ -462,6 +463,10 @@ Then(
       errorMessageFieldDataset =
         participatingOrganisationsPage.participatingOrganisationsPageTestData[errorMessageFieldAndSummaryDatasetName];
       page = participatingOrganisationsPage;
+    } else if (pageKey == 'Which_Organisation_Type_Affect_Page') {
+      errorMessageFieldDataset =
+        organisationChangeAffectPage.organisationChangeAffectPageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = organisationChangeAffectPage;
     }
     let allSummaryErrorExpectedValues: any;
     let summaryErrorActualValues: any;
@@ -676,6 +681,7 @@ Given(
       myResearchProjectsPage,
       searchModificationsPage,
       modificationsReadyToAssignPage,
+      approvalsPage,
     },
     page: string
   ) => {
@@ -721,6 +727,10 @@ Given(
         await modificationsReadyToAssignPage.goto();
         await modificationsReadyToAssignPage.assertOnModificationsReadyToAssignPage();
         break;
+      case 'Approvals_Page':
+        await approvalsPage.goto();
+        await approvalsPage.assertOnApprovalsPage();
+        break;
       default:
         throw new Error(`${page} is not a valid option`);
     }
@@ -730,7 +740,7 @@ Given(
 Given(
   'I have navigated to the {string} as {string}',
   async (
-    { homePage, systemAdministrationPage, accessDeniedPage, myResearchProjectsPage },
+    { homePage, systemAdministrationPage, accessDeniedPage, myResearchProjectsPage, approvalsPage },
     page: string,
     user: string
   ) => {
@@ -750,6 +760,11 @@ Given(
       case 'System_Administration_Access_Denied_Page':
         await systemAdministrationPage.page.context().addCookies(authState.cookies);
         await systemAdministrationPage.goto();
+        await accessDeniedPage.assertOnAccessDeniedPage();
+        break;
+      case 'Approvals_Access_Denied_Page':
+        await approvalsPage.page.context().addCookies(authState.cookies);
+        await approvalsPage.goto();
         await accessDeniedPage.assertOnAccessDeniedPage();
         break;
       case 'My_Research_Page':
@@ -835,26 +850,24 @@ Then(
 Then(
   '{string} active filters {string} in the {string}',
   async (
-    { searchModificationsPage, commonItemsPage },
+    { searchModificationsPage, manageReviewBodiesPage, commonItemsPage },
     actionToPerform: string,
     filterDatasetName: string,
     pageKey: string
   ) => {
+    const isDisplayAction = actionToPerform === 'I can see the selected filters are displayed under';
+    const isRemoveAction = actionToPerform === 'I remove the selected filters from';
+    const replaceValue = '_label';
     let filterDataset: JSON;
     let filterLabels: object;
     if (pageKey === 'Search_Modifications_Page') {
       filterDataset = searchModificationsPage.searchModificationsPageTestData.Advanced_Filters[filterDatasetName];
       filterLabels = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page;
+    } else if (pageKey === 'Manage_Review_Bodies_Page') {
+      filterDataset = manageReviewBodiesPage.manageReviewBodiesPageData.Advanced_Filters[filterDatasetName];
+      filterLabels = manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page;
     }
-    const replaceValue = '_label';
-    const handleActiveFilterValidation = async (
-      key: string,
-      labelFetcher: (key: string) => Promise<string | string[]>,
-      actionToPerform: string,
-      commonItemsPage: any
-    ) => {
-      const isDisplayAction = actionToPerform === 'I can see the selected filters are displayed under';
-      const isRemoveAction = actionToPerform === 'I remove the selected filters from';
+    const validateFilter = async (key: string, labelFetcher: (key: string) => Promise<string | string[]>) => {
       const labels = await labelFetcher(key);
       const labelArray = Array.isArray(labels) ? labels : [labels];
       for (const label of labelArray) {
@@ -870,28 +883,18 @@ Then(
     for (const key in filterDataset) {
       if (Object.hasOwn(filterDataset, key)) {
         if (key.endsWith('_checkbox')) {
-          await handleActiveFilterValidation(
-            key,
-            async (k) => await commonItemsPage.getCheckboxFilterLabels(k, filterDataset, filterLabels, replaceValue),
-            actionToPerform,
-            commonItemsPage
+          await validateFilter(key, async (k) =>
+            commonItemsPage.getCheckboxFilterLabels(k, filterDataset, filterLabels, replaceValue)
           );
         } else if (key.startsWith('date_')) {
-          if (key.endsWith('_from_day_text') || key.endsWith('_to_day_text')) {
-            await handleActiveFilterValidation(
-              key,
-              async (k) => await commonItemsPage.getDateFilterLabel(k, filterDataset, filterLabels, replaceValue),
-              actionToPerform,
-              commonItemsPage
+          if (await commonItemsPage.shouldValidateDateFilter(key, filterDataset)) {
+            await validateFilter(key, async (k) =>
+              commonItemsPage.getDateFilterLabel(k, filterDataset, filterLabels, replaceValue)
             );
           }
         } else {
-          await handleActiveFilterValidation(
-            key,
-            async (k) =>
-              await commonItemsPage.getTextboxRadioButtonFilterLabel(k, filterDataset, filterLabels, replaceValue),
-            actionToPerform,
-            commonItemsPage
+          await validateFilter(key, async (k) =>
+            commonItemsPage.getTextboxRadioButtonFilterLabel(k, filterDataset, filterLabels, replaceValue)
           );
         }
       }
@@ -910,7 +913,7 @@ Then(
     let page: any;
     if (pageKey === 'Search_Modifications_Page') {
       errorMessageFieldDataset =
-        searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[
+        searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.Error_Validation[
           errorMessageFieldAndSummaryDatasetName
         ];
       page = searchModificationsPage;
@@ -923,13 +926,13 @@ Then(
       if (Object.hasOwn(errorMessageFieldDataset, key)) {
         const expectedMessage = errorMessageFieldDataset[key];
         if (
-          errorMessageFieldAndSummaryDatasetName.endsWith('_To_date_Before_From_Date_Error') ||
-          errorMessageFieldAndSummaryDatasetName.endsWith('_No_Month_Selected_To_Date_Error')
+          errorMessageFieldAndSummaryDatasetName === 'Invalid_Date_Range_To_Before_From_Error' ||
+          errorMessageFieldAndSummaryDatasetName === 'Invalid_Date_To_Error'
         ) {
-          const actualMessage = await searchModificationsPage.date_modification_submitted_to_date_error.textContent();
+          const actualMessage = await searchModificationsPage.date_submitted_to_date_error.textContent();
           expect(actualMessage).toEqual(expectedMessage);
-        } else if (errorMessageFieldAndSummaryDatasetName.endsWith('_No_Month_Selected_From_Date_Error')) {
-          const actualMessage = await searchModificationsPage.date_modification_submitted_from_date_error.textContent();
+        } else if (errorMessageFieldAndSummaryDatasetName === 'Invalid_Date_From_Error') {
+          const actualMessage = await searchModificationsPage.date_submitted_from_date_error.textContent();
           expect(actualMessage).toEqual(expectedMessage);
         } else if (errorMessageFieldAndSummaryDatasetName === 'Sponsor_Organisation_Min_Char_Error') {
           const actualMessage =

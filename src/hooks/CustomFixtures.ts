@@ -52,6 +52,9 @@ import SelectAreaOfChangePage from '../pages/IRAS/makeChanges/modifications/Sele
 import SearchModificationsPage from '../pages/IRAS/reviewResearch/receiveAmendments/SearchModificationsPage';
 import ModificationsReadyToAssignPage from '../pages/IRAS/reviewResearch/receiveAmendments/ModificationsReadyToAssignPage';
 import ApprovalsPage from '../pages/IRAS/reviewResearch/approvals/ApprovalsPage';
+import ModificationsCommonPage from '../pages/IRAS/makeChanges/modifications/ModificationsCommonPage';
+import PlannedEndDatePage from '../pages/IRAS/makeChanges/modifications/PlannedEndDatePage';
+import OrganisationChangeAffectPage from '../pages/IRAS/makeChanges/modifications/OrganisationChangeAffectPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -105,6 +108,9 @@ type CustomFixtures = {
   selectAreaOfChangePage: SelectAreaOfChangePage;
   searchModificationsPage: SearchModificationsPage;
   modificationsReadyToAssignPage: ModificationsReadyToAssignPage;
+  modificationsCommonPage: ModificationsCommonPage;
+  plannedEndDatePage: PlannedEndDatePage;
+  organisationChangeAffectPage: OrganisationChangeAffectPage;
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -312,6 +318,17 @@ export const test = base.extend<CustomFixtures>({
   modificationsReadyToAssignPage: async ({ page }, use) => {
     await use(new ModificationsReadyToAssignPage(page));
   },
+  modificationsCommonPage: async ({ page }, use) => {
+    await use(new ModificationsCommonPage(page));
+  },
+
+  plannedEndDatePage: async ({ page }, use) => {
+    await use(new PlannedEndDatePage(page));
+  },
+
+  organisationChangeAffectPage: async ({ page }, use) => {
+    await use(new OrganisationChangeAffectPage(page));
+  },
 
   makeAxeBuilder: async ({ page }, use) => {
     const makeAxeBuilder = () => new AxeBuilder({ page });
@@ -322,8 +339,8 @@ export const test = base.extend<CustomFixtures>({
   storageState: async ({ $tags, storageState }, use) => {
     if ($tags.includes('@SysAdminUser')) {
       storageState = getAuthState('system_admin');
-    } else if ($tags.includes('@FrontStageUser')) {
-      storageState = getAuthState('frontstage_user');
+    } else if ($tags.includes('@ApplicantUser')) {
+      storageState = getAuthState('applicant_user');
     } else if ($tags.includes('@StudyWideReviewer')) {
       storageState = getAuthState('studywide_reviewer');
     } else if ($tags.includes('@TeamManager')) {

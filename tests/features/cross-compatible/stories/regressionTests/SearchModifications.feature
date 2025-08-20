@@ -1,4 +1,4 @@
-@RegressionSearchModifications @FrontStageUser @Regression @RegressionReceiveAmendments
+@RegressionSearchModifications @StudyWideReviewer @Regression @RegressionReceiveAmendments
 
 Feature: Receive Amendments: Search Modifications
 

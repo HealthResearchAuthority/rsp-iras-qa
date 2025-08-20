@@ -21,7 +21,7 @@
     "Proceed_Submit": "Proceed to Submit"
   },
   "My_Research_Projects_Page": {
-    "Create_Project_Record": "Create project record"
+    "Create_Project_Record": "Add project"
   },
   "Create_Project_Record_Page": {
     "Start": "Start"
@@ -88,14 +88,16 @@
   },
   "Manage_Review_Bodies_Page": {
     "Search": "Search",
-    "Advanced_Filters": "Advanced filters"
+    "Advanced_Filters": "Advanced filters",
+    "Apply_filters": "Apply filters"
   },
   "Review_Your_Answers_Page": {
     "Confirm_Project_Details": "Confirm project details"
   },
   "Manage_Users_Page": {
     "Search": "Search",
-    "Advanced_Filters": "Advanced filters"
+    "Advanced_Filters": "Advanced filters",
+    "Apply_Filters": "Apply filters"
   },
   "Search_Modifications_Page": {
     "Advanced_Filters": "Advanced filters",
@@ -121,6 +123,10 @@
     "Search": "Search"
   },
   "Select_Area_Of_Change_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later"
+  },
+  "Modifications_Page": {
     "Save_Continue": "Save and continue",
     "Save_For_Later": "Save for later"
   }

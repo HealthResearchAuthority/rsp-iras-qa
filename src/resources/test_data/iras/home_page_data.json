@@ -39,7 +39,10 @@
     "technical_assurance_hint_label": "Workspace for Technical Assurance staff to receive and process applications and post approval activity for review.",
     "technical_assurance_reviewers_hint_label": "Workspace for Technical Assurance reviewers to review applications and post approval activity."
   },
-  "Label_Texts_Frontstage_User_Role": {
+  "Label_Texts_Applicant_User_Role": {
+    "my_research_hint_label": "Workspace to view and manage the research I am responsible for."
+  },
+  "Label_Texts_Studywide_Reviewer_Role": {
     "approvals_hint_label": "Workspace for approvals service staff to receive and process applications and post approval activity for review.",
     "cag_members_hint_label": "Workspace for members to review applications and post approval activity.",
     "cat_hint_label": "Workspace for CAT staff to receive and process applications and post approval activity for review.",

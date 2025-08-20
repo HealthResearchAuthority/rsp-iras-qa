@@ -10,6 +10,8 @@ export default class ProjectOverviewPage {
   readonly project_details_link: Locator;
   readonly project_short_title_label: Locator;
   readonly modification_saved_success_message_text: Locator;
+  readonly modification_saved_success_message_header_text: Locator;
+  readonly information_alert_banner: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -27,9 +29,13 @@ export default class ProjectOverviewPage {
       .getByRole('heading')
       .getByText(this.projectOverviewPageTestData.Project_Overview_Page.project_details_link);
     this.project_short_title_label = this.page.locator('.govuk-caption-l');
-    this.modification_saved_success_message_text = this.page.getByRole('heading', {
-      name: this.projectOverviewPageTestData.Project_Overview_Page.modification_saved_success_message_text,
-    });
+    this.information_alert_banner = this.page.getByRole('alert');
+    this.modification_saved_success_message_header_text = this.page
+      .getByTestId('govuk-notification-banner-title')
+      .getByText(this.projectOverviewPageTestData.Project_Overview_Page.modification_saved_success_message_header_text);
+    this.modification_saved_success_message_text = this.page
+      .getByRole('heading')
+      .getByText(this.projectOverviewPageTestData.Project_Overview_Page.modification_saved_success_message_text);
   }
 
   //Page Methods
