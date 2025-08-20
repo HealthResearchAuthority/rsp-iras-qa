@@ -1,6 +1,5 @@
 import { createBdd } from 'playwright-bdd';
 import { test } from '../../../../../hooks/CustomFixtures';
-//import { commonItemsPage } from '../../../../../utils/UtilFunctions';
 
 const { Then } = createBdd(test);
 
@@ -40,7 +39,7 @@ Then(
   async ({ commonItemsPage, affectedOrganisationQuestionsPage }, datasetName: string) => {
     const dataset = affectedOrganisationQuestionsPage.affectedOrganisationQuestionsPageTestData[datasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         await commonItemsPage.validateUIComponentValues(dataset, key, affectedOrganisationQuestionsPage);
       }
     }

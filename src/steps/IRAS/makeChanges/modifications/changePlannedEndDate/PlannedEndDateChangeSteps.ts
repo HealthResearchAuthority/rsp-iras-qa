@@ -76,7 +76,7 @@ Then(
   async ({ commonItemsPage, plannedEndDateChangePage }, datasetName: string) => {
     const dataset = plannedEndDateChangePage.plannedEndDateChangePageTestData[datasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         await commonItemsPage.validateUIComponentValues(dataset, key, plannedEndDateChangePage);
       }
     }

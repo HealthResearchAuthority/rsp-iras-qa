@@ -37,7 +37,7 @@ Then(
   async ({ commonItemsPage, affectedOrganisationSelectionPage }, datasetName: string) => {
     const dataset = affectedOrganisationSelectionPage.affectedOrganisationSelectionPageTestData[datasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         await commonItemsPage.validateUIComponentValues(dataset, key, affectedOrganisationSelectionPage);
       }
     }
