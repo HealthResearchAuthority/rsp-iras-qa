@@ -49,7 +49,9 @@
   "Manage_Users_Page": {
     "Add_New_User_Profile_Record": "Add a new user profile record",
     "Back": "Back",
-    "View_Edit": "View/Edit"
+    "View_Edit": "View/Edit",
+    "Advanced_Filter": "Advanced filters",
+    "Clear_All_Filters": "Clear all filters"
   },
   "Create_User_Profile_Page": {
     "Back": "Back"
@@ -80,7 +82,8 @@
   "Manage_Review_Bodies_Page": {
     "Back": "Back",
     "Add_New_Review_Body_Record": "Add a new review body record",
-    "View_Edit": "View/Edit"
+    "View_Edit": "View/Edit",
+    "Clear_All_Filters": "Clear all filters"
   },
   "System_Administration_Page": {
     "Back": "Back",

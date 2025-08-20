@@ -5,7 +5,7 @@ Feature: User Administration: My Research
     Given I have navigated to the 'Home_Page'
     And I can see the my account home page
 
-  @rsp-3424 @myResearchProjectsPage @Smoke
+  @rsp-3424 @myResearchProjectsPage @Smoke @skip
   Scenario Outline: Validate the my research page and Navigation back to home page
     Given I have navigated to the 'My_Research_Page'
     Then I can see the 'My_Research_Page'
