@@ -161,6 +161,10 @@
   },
   "Approvals_Page": {
     "Search": "Search",
+    "Back": "Back",
+    "Modifications_Tasklist": "Modifications tasklist"
+  },
+  "Modifications_Tasklist_Page": {
     "Back": "Back"
   }
 }

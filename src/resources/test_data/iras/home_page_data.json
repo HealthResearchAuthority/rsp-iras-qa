@@ -9,9 +9,7 @@
       "CAG members",
       "CAT",
       "Member management",
-      "My research",
       "REC members",
-      "Sponsor",
       "System administration",
       "Technical Assurance",
       "Technical Assurance reviewers"
@@ -27,51 +25,16 @@
       "Technical Assurance",
       "Technical Assurance reviewers"
     ],
-    "workspaces_links_studywide_reviewer": [
-      "Approvals",
-      "CAG members",
-      "CAT",
-      "Member management",
-      "My research",
-      "REC members",
-      "Sponsor",
-      "System administration",
-      "Technical Assurance",
-      "Technical Assurance reviewers"
-    ],
-    "workspaces_links_team_manager": [
-      "Approvals",
-      "CAG members",
-      "CAT",
-      "Member management",
-      "My research",
-      "REC members",
-      "Sponsor",
-      "System administration",
-      "Technical Assurance",
-      "Technical Assurance reviewers"
-    ],
-    "workspaces_links_workflow_coordinator": [
-      "Approvals",
-      "CAG members",
-      "CAT",
-      "Member management",
-      "My research",
-      "REC members",
-      "Sponsor",
-      "System administration",
-      "Technical Assurance",
-      "Technical Assurance reviewers"
-    ]
+    "workspaces_links_studywide_reviewer": ["Approvals", "Member management"],
+    "workspaces_links_team_manager": ["Approvals", "Member management"],
+    "workspaces_links_workflow_coordinator": ["Approvals"]
   },
   "Label_Texts_System_Admin_Role": {
     "approvals_hint_label": "Workspace for approvals service staff to receive and process applications and post approval activity for review.",
     "cag_members_hint_label": "Workspace for members to review applications and post approval activity.",
     "cat_hint_label": "Workspace for CAT staff to receive and process applications and post approval activity for review.",
     "memeber_management_hint_label": "Workspace for staff to view and update committee member records.",
-    "my_research_hint_label": "Workspace to view and manage the research I am responsible for.",
     "rec_members_hint_label": "Workspace for members to review applications and post approval activity.",
-    "sponsor_hint_label": "Workspace to view, manage and authorise the research I am responsible for.",
     "system_administration_hint_label": "Workspace for system administrators to view and manage system administration functions.",
     "technical_assurance_hint_label": "Workspace for Technical Assurance staff to receive and process applications and post approval activity for review.",
     "technical_assurance_reviewers_hint_label": "Workspace for Technical Assurance reviewers to review applications and post approval activity."
@@ -89,38 +52,13 @@
   },
   "Label_Texts_Studywide_Reviewer_Role": {
     "approvals_hint_label": "Workspace for approvals service staff to receive and process applications and post approval activity for review.",
-    "cag_members_hint_label": "Workspace for members to review applications and post approval activity.",
-    "cat_hint_label": "Workspace for CAT staff to receive and process applications and post approval activity for review.",
-    "memeber_management_hint_label": "Workspace for staff to view and update committee member records.",
-    "my_research_hint_label": "Workspace to view and manage the research I am responsible for.",
-    "rec_members_hint_label": "Workspace for members to review applications and post approval activity.",
-    "sponsor_hint_label": "Workspace to view, manage and authorise the research I am responsible for.",
-    "system_administration_hint_label": "Workspace for system administrators to view and manage system administration functions.",
-    "technical_assurance_hint_label": "Workspace for Technical Assurance staff to receive and process applications and post approval activity for review.",
-    "technical_assurance_reviewers_hint_label": "Workspace for Technical Assurance reviewers to review applications and post approval activity."
+    "memeber_management_hint_label": "Workspace for staff to view and update committee member records."
   },
   "Label_Texts_Team_Manager_Role": {
     "approvals_hint_label": "Workspace for approvals service staff to receive and process applications and post approval activity for review.",
-    "cag_members_hint_label": "Workspace for members to review applications and post approval activity.",
-    "cat_hint_label": "Workspace for CAT staff to receive and process applications and post approval activity for review.",
-    "memeber_management_hint_label": "Workspace for staff to view and update committee member records.",
-    "my_research_hint_label": "Workspace to view and manage the research I am responsible for.",
-    "rec_members_hint_label": "Workspace for members to review applications and post approval activity.",
-    "sponsor_hint_label": "Workspace to view, manage and authorise the research I am responsible for.",
-    "system_administration_hint_label": "Workspace for system administrators to view and manage system administration functions.",
-    "technical_assurance_hint_label": "Workspace for Technical Assurance staff to receive and process applications and post approval activity for review.",
-    "technical_assurance_reviewers_hint_label": "Workspace for Technical Assurance reviewers to review applications and post approval activity."
+    "memeber_management_hint_label": "Workspace for staff to view and update committee member records."
   },
   "Label_Texts_Workflow_Coordinator_Role": {
-    "approvals_hint_label": "Workspace for approvals service staff to receive and process applications and post approval activity for review.",
-    "cag_members_hint_label": "Workspace for members to review applications and post approval activity.",
-    "cat_hint_label": "Workspace for CAT staff to receive and process applications and post approval activity for review.",
-    "memeber_management_hint_label": "Workspace for staff to view and update committee member records.",
-    "my_research_hint_label": "Workspace to view and manage the research I am responsible for.",
-    "rec_members_hint_label": "Workspace for members to review applications and post approval activity.",
-    "sponsor_hint_label": "Workspace to view, manage and authorise the research I am responsible for.",
-    "system_administration_hint_label": "Workspace for system administrators to view and manage system administration functions.",
-    "technical_assurance_hint_label": "Workspace for Technical Assurance staff to receive and process applications and post approval activity for review.",
-    "technical_assurance_reviewers_hint_label": "Workspace for Technical Assurance reviewers to review applications and post approval activity."
+    "approvals_hint_label": "Workspace for approvals service staff to receive and process applications and post approval activity for review."
   }
 }
