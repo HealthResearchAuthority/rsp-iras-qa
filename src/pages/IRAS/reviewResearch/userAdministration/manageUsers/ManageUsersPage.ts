@@ -522,6 +522,25 @@ export default class ManageUsersPage {
     expect(isLastLoggedInDateInValidRange).toBe(true);
   }
 
+  async validateSearchInput(
+    searchDatasetName: any,
+    searchCriteriaDataset: any,
+    firstName: any,
+    lastName: any,
+    emailAddress: any
+  ) {
+    if (searchDatasetName == 'Existing_QA_User_First_Name') {
+      const firstNameExpected = searchCriteriaDataset['search_input_text'];
+      expect(firstName.toLowerCase().includes(firstNameExpected.toLowerCase()));
+    } else if (searchDatasetName == 'Existing_QA_User_Last_Name') {
+      const lastNameExpected = searchCriteriaDataset['search_input_text'];
+      expect(lastName.toLowerCase().includes(lastNameExpected.toLowerCase()));
+    } else if (searchDatasetName == 'Existing_QA_User_Email') {
+      const emailAddressExpected = searchCriteriaDataset['search_input_text'];
+      expect(emailAddress.toLowerCase().includes(emailAddressExpected.toLowerCase()));
+    }
+  }
+
   async validateResults(
     commonItemsPage: any,
     searchCriteriaDataset: any,
@@ -536,16 +555,7 @@ export default class ManageUsersPage {
         const { firstName, lastName, emailAddress, status, lastLoggedInDate } =
           await this.getRowDataAdvancedFiltersSearch(row);
         if (validateSearch && searchCriteriaDataset['search_input_text'] !== '') {
-          if (searchDatasetName == 'Existing_QA_User_First_Name') {
-            const firstNameExpected = searchCriteriaDataset['search_input_text'];
-            expect(firstName.toLowerCase().includes(firstNameExpected.toLowerCase()));
-          } else if (searchDatasetName == 'Existing_QA_User_Last_Name') {
-            const lastNameExpected = searchCriteriaDataset['search_input_text'];
-            expect(lastName.toLowerCase().includes(lastNameExpected.toLowerCase()));
-          } else if (searchDatasetName == 'Existing_QA_User_Email') {
-            const emailAddressExpected = searchCriteriaDataset['search_input_text'];
-            expect(emailAddress.toLowerCase().includes(emailAddressExpected.toLowerCase()));
-          }
+          this.validateSearchInput(searchDatasetName, searchCriteriaDataset, firstName, lastName, emailAddress);
         }
         this.validateFilters(status, lastLoggedInDate, filterDataset);
       }
