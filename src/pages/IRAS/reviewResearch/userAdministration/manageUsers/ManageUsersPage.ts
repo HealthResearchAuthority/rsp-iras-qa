@@ -1,7 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as linkTextData from '../../../../../resources/test_data/common/link_text_data.json';
 import * as manageUsersPageTestData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageUsers/manage_users_page_data.json';
-import { confirmStringNotNull, returnDataFromJSON } from '../../../../../utils/UtilFunctions';
+import { confirmStringNotNull, returnDataFromJSON, validateDateRange } from '../../../../../utils/UtilFunctions';
 import CreateUserProfilePage from './CreateUserProfilePage';
 
 //Declare Page Objects
@@ -48,7 +48,11 @@ export default class ManageUsersPage {
   private lastLoggedInDateFull: string;
   private lastLoggedInDateTruncated: string;
   private lastLoggedInHours: number;
+  readonly country_label: Locator;
+  readonly country_fieldset: Locator;
   readonly country_checkbox: Locator;
+  readonly status_label: Locator;
+  readonly status_fieldset: Locator;
   readonly status_radio: Locator;
   readonly country_checkbox_chevron: Locator;
   readonly status_radio_chevron: Locator;
@@ -146,13 +150,58 @@ export default class ManageUsersPage {
       .getByText(this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.status_label, {
         exact: true,
       });
-    this.country_checkbox = page.getByRole('checkbox');
-    this.status_radio = page.getByRole('radio');
-    this.page.getByRole('checkbox');
-    this.country_selected_hint_label = page.getByTestId('country-hint');
-    this.country_hint_label = page.getByTestId('Search.Country');
-    this.status_hint_label = page.getByTestId('Search.Status');
+    this.country_label = this.page
+      .getByRole('heading', { level: 2 })
+      .getByText(this.manageUsersPageTestData.Manage_Users_Page.Advanced_Filters_Hint_Labels.country_label, {
+        exact: true,
+      });
+    this.country_fieldset = this.country_label
+      .locator('..')
+      .locator('..')
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group', {
+        has: this.page.getByText(
+          this.manageUsersPageTestData.Manage_Users_Page.Advanced_Filters_Hint_Labels.country_hint_label
+        ),
+      });
+    this.country_checkbox = this.country_fieldset.getByRole('checkbox');
+    this.status_label = this.page
+      .getByRole('heading', { level: 2 })
+      .getByText(this.manageUsersPageTestData.Manage_Users_Page.Advanced_Filters_Hint_Labels.status_label, {
+        exact: true,
+      });
+    this.status_fieldset = this.status_label
+      .locator('..')
+      .locator('..')
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group', {
+        has: this.page.getByText(
+          this.manageUsersPageTestData.Manage_Users_Page.Advanced_Filters_Hint_Labels.status_hint_label
+        ),
+      });
+    this.status_radio = this.status_fieldset.getByRole('radio');
+    this.country_selected_hint_label = this.country_label
+      .locator('..')
+      .locator('..')
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group')
+      .getByText(
+        this.manageUsersPageTestData.Manage_Users_Page.Advanced_Filters_Hint_Labels.country_selected_hint_label
+      );
 
+    this.country_hint_label = this.country_label
+      .locator('..')
+      .locator('..')
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group')
+      .getByText(this.manageUsersPageTestData.Manage_Users_Page.Advanced_Filters_Hint_Labels.country_hint_label);
+
+    this.status_hint_label = this.status_label
+      .locator('..')
+      .locator('..')
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group')
+      .getByText(this.manageUsersPageTestData.Manage_Users_Page.Advanced_Filters_Hint_Labels.status_hint_label);
     this.date_last_logged_in_from_day_text_chevron = this.page
       .getByRole('heading')
       .getByText(
@@ -429,6 +478,83 @@ export default class ManageUsersPage {
     const shouldClick = !isToDateKey || (isToDateKey && (fromDate === '' || fromDate === undefined));
     if (button && shouldClick) {
       await button.click();
+    }
+  }
+
+  async validateFilters(statusActual: string, lastLoggedInDateActual: string, filterDataset: any) {
+    for (const key in filterDataset) {
+      if (Object.hasOwn(filterDataset, key)) {
+        if (key === 'status_radio') {
+          const statusExpected = filterDataset[key];
+          expect(statusActual.toLowerCase().includes(statusExpected.toLowerCase()));
+        }
+        if (
+          key.includes('date_last_logged_in_from_year_text') ||
+          (key.includes('date_last_logged_in_to_year_text') && lastLoggedInDateActual !== null)
+        ) {
+          const filterFromDate = `${filterDataset['date_last_logged_in_from_day_text']} ${filterDataset['date_last_logged_in_from_month_dropdown']} ${filterDataset['date_last_logged_in_from_year_text']}`;
+          const filterToDate = `${filterDataset['date_last_logged_in_to_day_text']} ${filterDataset['date_last_logged_in_to_month_dropdown']} ${filterDataset['date_last_logged_in_to_year_text']}`;
+          if (filterFromDate !== '' && filterToDate !== '') {
+            await this.validateDateFilter(filterFromDate, filterToDate, lastLoggedInDateActual);
+          }
+        }
+      }
+    }
+  }
+
+  async getRowDataAdvancedFiltersSearch(row: any) {
+    return {
+      firstName: confirmStringNotNull(await row.getByRole('cell').nth(0).textContent()),
+      lastName: confirmStringNotNull(await row.getByRole('cell').nth(1).textContent()),
+      emailAddress: confirmStringNotNull(await row.getByRole('cell').nth(2).textContent()),
+      status: confirmStringNotNull(await row.getByRole('cell').nth(3).textContent()),
+      lastLoggedInDate: confirmStringNotNull(await row.getByRole('cell').nth(4).textContent()),
+    };
+  }
+
+  async validateDateFilter(filterFromDate: string, filterToDate: string, lastLoggedInDateActual: string) {
+    const lastLoggedInDateActualOnlyDate = lastLoggedInDateActual.substring(0, 11);
+    const isLastLoggedInDateInValidRange = await validateDateRange(
+      lastLoggedInDateActualOnlyDate,
+      filterFromDate,
+      filterToDate
+    );
+    expect(isLastLoggedInDateInValidRange).toBe(true);
+  }
+
+  async validateResults(
+    commonItemsPage: any,
+    searchCriteriaDataset: any,
+    filterDataset: any,
+    searchDatasetName: any,
+    validateSearch: boolean = true
+  ) {
+    for (let pageIndex = 1; pageIndex < 4; pageIndex++) {
+      const rowCount = await commonItemsPage.tableRows.count();
+      for (let rowIndex = 1; rowIndex < rowCount; rowIndex++) {
+        const row = commonItemsPage.tableRows.nth(rowIndex);
+        const { firstName, lastName, emailAddress, status, lastLoggedInDate } =
+          await this.getRowDataAdvancedFiltersSearch(row);
+        if (validateSearch && searchCriteriaDataset['search_input_text'] !== '') {
+          if (searchDatasetName == 'Existing_QA_User_First_Name') {
+            const firstNameExpected = searchCriteriaDataset['search_input_text'];
+            expect(firstName.toLowerCase().includes(firstNameExpected.toLowerCase()));
+          } else if (searchDatasetName == 'Existing_QA_User_Last_Name') {
+            const lastNameExpected = searchCriteriaDataset['search_input_text'];
+            expect(lastName.toLowerCase().includes(lastNameExpected.toLowerCase()));
+          } else if (searchDatasetName == 'Existing_QA_User_Email') {
+            const emailAddressExpected = searchCriteriaDataset['search_input_text'];
+            expect(emailAddress.toLowerCase().includes(emailAddressExpected.toLowerCase()));
+          }
+        }
+        this.validateFilters(status, lastLoggedInDate, filterDataset);
+      }
+      const hasNextPage =
+        (await commonItemsPage.pagination_next_link.isVisible()) &&
+        !(await commonItemsPage.pagination_next_link.isDisabled());
+      if (hasNextPage) {
+        await commonItemsPage.pagination_next_link.click();
+      }
     }
   }
 }

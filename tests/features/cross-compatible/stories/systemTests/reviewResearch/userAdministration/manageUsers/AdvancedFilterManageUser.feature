@@ -61,7 +61,7 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
         And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
         And I capture the page screenshot
         Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Manage_Users_Page'
-        And I can see the results matching the filter criteria '<Advanced_Filters>' for manage users page
+        And I can see the results matching the search '' and filter criteria '<Advanced_Filters>' for manage users page
         And I capture the page screenshot
         When I enter '<Search_Queries>' into the search field for manage users page
         And I capture the page screenshot

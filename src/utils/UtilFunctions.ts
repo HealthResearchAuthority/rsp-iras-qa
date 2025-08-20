@@ -575,33 +575,15 @@ export async function convertDateShortMonth(day: string, month: string, year: nu
   return formattedDate;
 }
 
-export async function validateDateRange(
-  validationDate: string,
-  dateLastLoggedinMonthPlaceholder: string,
-  fromDate?: string,
-  toDate?: string
-): Promise<boolean> {
+export async function validateDateRange(validationDate: string, fromDate?: string, toDate?: string): Promise<boolean> {
   const target = new Date(validationDate);
-  const isValidDate = (date: Date) => !isNaN(date.getTime());
-  const from = fromDate && fromDate.trim() !== dateLastLoggedinMonthPlaceholder ? new Date(fromDate) : undefined;
-  const to = toDate && toDate.trim() !== dateLastLoggedinMonthPlaceholder ? new Date(toDate) : undefined;
-  if (!isValidDate(target)) {
-    throw new Error('Invalid validation date provided');
-  }
-  if (from && !isValidDate(from)) {
-    throw new Error('Invalid fromDate provided');
-  }
-  if (to && !isValidDate(to)) {
-    throw new Error('Invalid toDate provided');
-  }
-  if (from && to && from > to) {
-    throw new Error("'fromDate' should be less than or equal to 'toDate'");
-  }
-  if (from && to) {
+  const from = new Date(fromDate);
+  const to = new Date(toDate);
+  if (!from.toString().includes('Invalid Date') && !to.toString().includes('Invalid Date')) {
     return target >= from && target <= to;
-  } else if (from) {
+  } else if (!from.toString().includes('Invalid Date')) {
     return target >= from;
-  } else if (to) {
+  } else if (!to.toString().includes('Invalid Date')) {
     return target <= to;
   }
   // If both from and to are not provided or are placeholders, consider it invalid

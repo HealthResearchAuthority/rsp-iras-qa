@@ -2,7 +2,6 @@ import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../../hooks/CustomFixtures';
 import dateTimeRelatedData from '../../../../../resources/test_data/common/date_time_related_data.json';
 const { When, Then } = createBdd(test);
-import { confirmStringNotNull, validateDateRange } from '../../../../../utils/UtilFunctions';
 
 When('I update user profile with {string}', async ({ commonItemsPage, editUserProfilePage }, datasetName: string) => {
   const dataset = editUserProfilePage.editUserProfilePageTestData[datasetName];
@@ -187,156 +186,22 @@ When(
     const searchCriteriaDataset =
       manageUsersPage.manageUsersPageTestData.Search_For_Users.Search_Queries_Advanced_Filter[searchDatasetName];
     const filterDataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[filterDatasetName];
-    const dateLastLoggedinMonthPlaceholder =
-      manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List
-        .date_last_logged_in_month_placeholder;
-    // Use below commented code, if needed to check the results till the end of the pagination
-    // const lastPage = await removeUnwantedWhitespace(confirmStringNotNull(await commonItemsPage.lastPage.textContent()));
-    // for (let i = 1; i < Number(lastPage); i++) {
-    for (let pageIndex = 1; pageIndex < 4; pageIndex++) {
-      const rowCount = await commonItemsPage.tableRows.count();
-      for (let rowIndex = 1; rowIndex < rowCount; rowIndex++) {
-        const firstNameActual = confirmStringNotNull(
-          await commonItemsPage.tableRows.nth(rowIndex).getByRole('cell').nth(0).textContent()
-        );
-        const lastNameActual = confirmStringNotNull(
-          await commonItemsPage.tableRows.nth(rowIndex).getByRole('cell').nth(1).textContent()
-        );
-        const emailAddressActual = confirmStringNotNull(
-          await commonItemsPage.tableRows.nth(rowIndex).getByRole('cell').nth(2).textContent()
-        );
-        const statusActual = confirmStringNotNull(
-          await commonItemsPage.tableRows.nth(rowIndex).getByRole('cell').nth(3).textContent()
-        );
-        const lastLoggedInDateActual = confirmStringNotNull(
-          await commonItemsPage.tableRows.nth(rowIndex).getByRole('cell').nth(4).textContent()
-        );
-        if (searchCriteriaDataset['search_input_text'] !== '') {
-          if (searchDatasetName == 'Existing_QA_User_First_Name') {
-            const firstNameExpected = searchCriteriaDataset['search_input_text'];
-            expect(firstNameActual.toLowerCase().includes(firstNameExpected.toLowerCase()));
-          } else if (searchDatasetName == 'Existing_QA_User_Last_Name') {
-            const lastNameExpected = searchCriteriaDataset['search_input_text'];
-            expect(lastNameActual.toLowerCase().includes(lastNameExpected.toLowerCase()));
-          } else if (searchDatasetName == 'Existing_QA_User_Email') {
-            const emailAddressExpected = searchCriteriaDataset['search_input_text'];
-            expect(emailAddressActual.toLowerCase().includes(emailAddressExpected.toLowerCase()));
-          }
-        }
-        for (const key in filterDataset) {
-          if (Object.hasOwn(filterDataset, key)) {
-            if (key === 'status_radio') {
-              const statusExpected = filterDataset[key];
-              expect(statusActual.toLowerCase().includes(statusExpected.toLowerCase()));
-            }
-            if (key.includes('date') && lastLoggedInDateActual !== null) {
-              if (key === 'date_last_logged_in_to_day_text' || key === 'date_last_logged_in_from_day_text') {
-                const filterFromDate = `${filterDataset['date_last_logged_in_from_day_text']} ${filterDataset['date_last_logged_in_from_month_dropdown']} ${filterDataset['date_last_logged_in_from_year_text']}`;
-                const filterToDate = `${filterDataset['date_last_logged_in_to_day_text']} ${filterDataset['date_last_logged_in_to_month_dropdown']} ${filterDataset['date_last_logged_in_to_year_text']}`;
-                if (
-                  filterFromDate.trim() !== 'undefined undefined undefined' &&
-                  filterToDate.trim() !== 'undefined undefined undefined'
-                ) {
-                  const lastLoggedInDateActualOnlyDate = lastLoggedInDateActual.substring(0, 11);
-                  const isLastLoggedInDateInValidRange = await validateDateRange(
-                    lastLoggedInDateActualOnlyDate,
-                    dateLastLoggedinMonthPlaceholder,
-                    filterFromDate,
-                    filterToDate
-                  );
-                  expect(isLastLoggedInDateInValidRange).toBe(true);
-                } else if (
-                  filterFromDate.trim() !== dateLastLoggedinMonthPlaceholder &&
-                  filterToDate.trim() === dateLastLoggedinMonthPlaceholder
-                ) {
-                  const lastLoggedInDateActualOnlyDate = lastLoggedInDateActual.substring(0, 11);
-                  const isLastLoggedInDateInValidRange = await validateDateRange(
-                    lastLoggedInDateActualOnlyDate,
-                    dateLastLoggedinMonthPlaceholder,
-                    filterFromDate,
-                    filterToDate
-                  );
-                  expect(isLastLoggedInDateInValidRange).toBe(true);
-                } else if (
-                  filterFromDate.trim() === dateLastLoggedinMonthPlaceholder &&
-                  filterToDate.trim() !== dateLastLoggedinMonthPlaceholder
-                ) {
-                  const lastLoggedInDateActualOnlyDate = lastLoggedInDateActual.substring(0, 11);
-                  const isLastLoggedInDateInValidRange = await validateDateRange(
-                    lastLoggedInDateActualOnlyDate,
-                    dateLastLoggedinMonthPlaceholder,
-                    filterFromDate,
-                    filterToDate
-                  );
-                  expect(isLastLoggedInDateInValidRange).toBe(true);
-                }
-              }
-            }
-          }
-        }
-      }
-      const hasNextPage =
-        (await commonItemsPage.pagination_next_link.isVisible()) &&
-        !(await commonItemsPage.pagination_next_link.isDisabled());
-      if (hasNextPage) {
-        await commonItemsPage.pagination_next_link.click();
-      }
-    }
-  }
-);
-
-When(
-  'I can see the results matching the filter criteria {string} for manage users page',
-  async ({ manageUsersPage, commonItemsPage }, filterDatasetName: string) => {
-    const filterDataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[filterDatasetName];
-    const dateLastLoggedinMonthPlaceholder =
-      manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List
-        .date_last_logged_in_month_placeholder;
-
-    // Use below commented code, if needed to check the results till the end of the pagination
-    // const lastPage = await removeUnwantedWhitespace(confirmStringNotNull(await commonItemsPage.lastPage.textContent()));
-    // for (let i = 1; i < Number(lastPage); i++) {
-    for (let pageIndex = 1; pageIndex < 4; pageIndex++) {
-      const rowCount = await commonItemsPage.tableRows.count();
-      for (let rowIndex = 1; rowIndex < rowCount; rowIndex++) {
-        const statusActual = confirmStringNotNull(
-          await commonItemsPage.tableRows.nth(rowIndex).getByRole('cell').nth(3).textContent()
-        );
-        const lastLoggedInDateActual = confirmStringNotNull(
-          await commonItemsPage.tableRows.nth(rowIndex).getByRole('cell').nth(4).textContent()
-        );
-        for (const key in filterDataset) {
-          if (Object.hasOwn(filterDataset, key)) {
-            if (key === 'status_radio') {
-              const statusExpected = filterDataset[key];
-              expect(statusActual.toLowerCase().includes(statusExpected.toLowerCase()));
-            }
-            if (key.includes('date') && lastLoggedInDateActual !== null) {
-              const filterFromDate = `${filterDataset['date_last_logged_in_from_day_text']} ${filterDataset['date_last_logged_in_from_month_dropdown']} ${filterDataset['date_last_logged_in_from_year_text']}`;
-              const filterToDate = `${filterDataset['date_last_logged_in_to_day_text']} ${filterDataset['date_last_logged_in_to_month_dropdown']} ${filterDataset['date_last_logged_in_to_year_text']}`;
-              if (
-                filterFromDate !== 'undefined undefined undefined' &&
-                filterToDate !== 'undefined undefined undefined'
-              ) {
-                const lastLoggedInDateActualOnlyDate = lastLoggedInDateActual.substring(0, 11);
-                const isLastLoggedInDateInValidRange = await validateDateRange(
-                  lastLoggedInDateActualOnlyDate,
-                  dateLastLoggedinMonthPlaceholder,
-                  filterFromDate,
-                  filterToDate
-                );
-                expect(isLastLoggedInDateInValidRange).toBe(true);
-              }
-            }
-          }
-        }
-      }
-      const hasNextPage =
-        (await commonItemsPage.pagination_next_link.isVisible()) &&
-        !(await commonItemsPage.pagination_next_link.isDisabled());
-      if (hasNextPage) {
-        await commonItemsPage.pagination_next_link.click();
-      }
+    if (searchDatasetName !== '') {
+      await manageUsersPage.validateResults(
+        commonItemsPage,
+        searchCriteriaDataset,
+        filterDataset,
+        searchDatasetName,
+        true
+      );
+    } else {
+      await manageUsersPage.validateResults(
+        commonItemsPage,
+        searchCriteriaDataset,
+        filterDataset,
+        searchDatasetName,
+        false
+      );
     }
   }
 );
