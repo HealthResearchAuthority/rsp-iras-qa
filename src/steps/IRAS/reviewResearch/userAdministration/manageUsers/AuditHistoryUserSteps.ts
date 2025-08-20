@@ -42,7 +42,7 @@ Then(
         eventDescriptionExpectedValue =
           userEmail +
           datasetAudit.Assign_User.event_description_prefix_text +
-          rolesInExpectedOrder[index] +
+          rolesInExpectedOrder[index].toLowerCase() +
           datasetAudit.Assign_User.event_description_suffix_text;
       }
       expect(timeValues[index]).toBe(timeExpected);

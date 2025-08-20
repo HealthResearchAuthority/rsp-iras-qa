@@ -14,14 +14,20 @@
     "review_body_label": "Review body",
     "save_button": "Save",
     "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
-    "role_checkbox": ["Operations", "Reviewer", "User", "System administrator"]
+    "role_checkbox": [
+      "Applicant",
+      "Study-wide reviewer",
+      "System administrator",
+      "Team manager",
+      "Workflow co-ordinator"
+    ]
   },
   "Missing_Mandatory_Fields_Role_Not_Operations_Error": {
     "first_name_text": "Enter a first name",
     "last_name_text": "Enter a last name"
   },
   "Missing_Mandatory_Fields_Role_Team_Manager_Error": {
-    "country_checkbox": "You must provide a country",
+    "country_checkbox": "Select at least one country",
     "first_name_text": "Enter a first name",
     "last_name_text": "Enter a last name"
   },
@@ -32,7 +38,7 @@
     "last_name_text": "Enter a last name"
   },
   "Missing_Mandatory_Field_Country_Role_Operations_Error": {
-    "country_checkbox": "You must provide a country"
+    "country_checkbox": "Select at least one country"
   },
   "Invalid_Character_Limit_Error": {
     "title_text": "Title must be 250 characters or less",

@@ -247,7 +247,7 @@ Feature: User Administration: Manage Users - Create user
       | Valid_Data_In_All_Mandatory_Fields_Role_Applicant            | Job_Title     | Valid_Data_In_All_Mandatory_Fields_Role_Applicant_Another            |
       | Valid_Data_In_All_Mandatory_Fields_Role_Applicant            | Role          | Valid_Data_In_All_Mandatory_Fields_Role_Applicant_Another            |
 
-  @rsp-2827 @rsp-2870 @rsp-3107 @rsp-3108 @verifyCreateUserMultiUserRoles @KNOWN-DEFECT-RSP-4875
+  @rsp-2827 @rsp-2870 @rsp-3107 @rsp-3108 @verifyCreateUserMultiUserRoles @KNOWN-DEFECT-RSP-4875 @TestOnly
   Scenario Outline: Verify the user is able to create a new user profile with multiple roles
     When I fill the new user profile page using '<Add_User_Profile>'
     And I capture the page screenshot
@@ -275,7 +275,7 @@ Feature: User Administration: Manage Users - Create user
       | Valid_Data_All_Roles                                       | Role       | Enabled        |
       | Valid_Data_No_Roles                                        | Role       | Enabled        |
 
-  @rsp-2827 @VerifyNoErrorMessagesValidEmailData @VerifyNoErrorMessagesValidDataCreateUserPage @NeedtoTest
+  @rsp-2827 @VerifyNoErrorMessagesValidEmailData @VerifyNoErrorMessagesValidDataCreateUserPage
   Scenario Outline: Validate user is able to fill the email address field in the create user profile page with valid data
     When I fill the new user profile page using '<Add_User_Profile>'
     And I capture the page screenshot
@@ -285,34 +285,31 @@ Feature: User Administration: Manage Users - Create user
     And I capture the page screenshot
 
     Examples:
-      | Add_User_Profile                    |
-      | Valid_Email_Underscore              |
-      | Valid_Email_Data_Hyphen             |
-      | Valid_Email_Data_Plus               |
-      | Valid_Email_Data_Exclamation        |
-      | Valid_Email_Data_Hash               |
-      | Valid_Email_Data_Dollar             |
-      | Valid_Email_Data_Percentage         |
-      | Valid_Email_Data_Ampersand          |
-      | Valid_Email_Data_Single_Quote       |
-      | Valid_Email_Data_Star               |
-      | Valid_Email_Data_Slash              |
-      | Valid_Email_Data_Equal_Symbol       |
-      | Valid_Email_Data_Question_Mark      |
-      | Valid_Email_Data_Cap_Symbol         |
-      | Valid_Email_Data_Right_Single_Quote |
-      | Valid_Email_Data_Curly_Brackets     |
-      | Valid_Email_Data_Pipe_Symbol        |
-      | Valid_Email_Data_Tilde_Symbol       |
-      | Valid_Email_Data_Special_Characters |
-      | Valid_Email_Data_Hyphen_Underscore  |
-      | Valid_Email_Data_Domain             |
-  # | Valid_Email_Data_Unicode              |
-  # | Valid_Email_Data_Multiple_Unicode     |
-  # | Valid_Email_Data_Multiple_Sub_Domains |
-  # | Valid_Email_Data_Other_Language     |
+      | Add_User_Profile                      |
+      | Valid_Email_Data_Dot                  |
+      | Valid_Email_Data_Number               |
+      | Valid_Email_Data_Underscore           |
+      | Valid_Email_Data_Hyphen               |
+      | Valid_Email_Data_Plus                 |
+      | Valid_Email_Data_Exclamation          |
+      | Valid_Email_Data_Hash                 |
+      | Valid_Email_Data_Dollar               |
+      | Valid_Email_Data_Percentage           |
+      | Valid_Email_Data_Ampersand            |
+      | Valid_Email_Data_Single_Quote         |
+      | Valid_Email_Data_Star                 |
+      | Valid_Email_Data_Slash                |
+      | Valid_Email_Data_Equal_Symbol         |
+      | Valid_Email_Data_Question_Mark        |
+      | Valid_Email_Data_Cap_Symbol           |
+      | Valid_Email_Data_Curly_Brackets       |
+      | Valid_Email_Data_Pipe_Symbol          |
+      | Valid_Email_Data_Tilde_Symbol         |
+      | Valid_Email_Data_Special_Characters   |
+      | Valid_Email_Data_Multiple_Sub_Domains |
+      | Valid_Email_Data_Domain               |
 
-  @rsp-3122 @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage @verifyInvalidDataInputs @TestOnly
+  @rsp-3122 @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage @verifyInvalidDataInputs
   Scenario Outline: Validate error messages are displayed for invalid data in create user profile page
     When I fill the new user profile page using '<Invalid_Data_User_Profile>' for field validation
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
@@ -333,12 +330,11 @@ Feature: User Administration: Manage Users - Create user
       | Missing_Mandatory_Field_Review_Body_Role_Studywide_Reviewer               | Missing_Mandatory_Field_Review_Body_Role_Studywide_Reviewer_Error               |
       | Missing_Mandatory_Field_Review_Body_Role_Workflow_Coordinator             | Missing_Mandatory_Field_Review_Body_Role_Workflow_Coordinator_Error             |
       | Invalid_Character_Limit                                                   | Invalid_Character_Limit_Error                                                   |
-      | Invalid_Email_Data_Max_Char                                               | Invalid_Character_Limit_Field_Email_Address_Error                               |
       | Incorrect_Format_Telephone_Data                                           | Incorrect_Format_Field_Telephone_Error                                          |
       | Incorrect_Format_Invalid_Character_Limit_Telephone_Data                   | Incorrect_Format_Invalid_Character_Limit_Telephone_Error                        |
       | Incorrect_Format_Invalid_Character_Limit_Email_Data                       | Incorrect_Format_Invalid_Character_Limit_Email_Address_Error                    |
 
-  @rsp-3122 @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage @verifyInvalidDataEmails @NeedtoTest
+  @rsp-3122 @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage @verifyInvalidDataEmails
   Scenario Outline: Validate error messages are displayed for invalid data in the email address field of create user profile page
     When I fill the new user profile page using '<Invalid_Data_User_Profile>' for field validation
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
@@ -346,32 +342,12 @@ Feature: User Administration: Manage Users - Create user
     And I capture the page screenshot
 
     Examples:
-      | Invalid_Data_User_Profile                          | Field_And_Summary_Error_Message            |
-      | Incorrect_Format_Email                             | Incorrect_Format_Field_Email_Address_Error |
-      | Invalid_Email_Data_Start_With_Dot                  | Incorrect_Format_Field_Email_Address_Error |
-      | Invalid_Email_Data_Double_Dot                      | Incorrect_Format_Field_Email_Address_Error |
-      | Invalid_Email_Data_Space                           | Incorrect_Format_Field_Email_Address_Error |
-      | Invalid_Email_Data_Wrong_AT                        | Incorrect_Format_Field_Email_Address_Error |
-      | Invalid_Email_Data_Less_Greater_Symbols            | Incorrect_Format_Field_Email_Address_Error |
-      | Invalid_Email_Data_Colon                           | Incorrect_Format_Field_Email_Address_Error |
-      | Invalid_Email_Data_Semi_Colon                      | Incorrect_Format_Field_Email_Address_Error |
-      | Invalid_Email_Data_Comma                           | Incorrect_Format_Field_Email_Address_Error |
-      | Invalid_Email_Data_Start_With_Hyphen               | Incorrect_Format_Field_Email_Address_Error |
-      | Invalid_Email_Data_Hyphen_Before_Domain            | Incorrect_Format_Field_Email_Address_Error |
-      | Invalid_Email_Data_Double_Dot_Domain               | Incorrect_Format_Field_Email_Address_Error |
-      | Invalid_Email_Data_Exclamation_Domain              | Incorrect_Format_Field_Email_Address_Error |
-      | Invalid_Email_Data_Unicode                         | Incorrect_Format_Field_Email_Address_Error |
-      | Invalid_Email_Data_Single_Quote_Before_AT          | Incorrect_Format_Field_Email_Address_Error |
-      | Invalid_Email_Data_Domain_Exceed_Max               | Incorrect_Format_Field_Email_Address_Error |
-      | Invalid_Email_Data_Local_Part_Max                  | Incorrect_Format_Field_Email_Address_Error |
-      | Invalid_Email_Data_Consecutive_Dot_Domain          | Incorrect_Format_Field_Email_Address_Error |
-      | Invalid_Email_Data_Consecutive_Dot_SubDomain       | Incorrect_Format_Field_Email_Address_Error |
-      | Invalid_Email_Data_Consecutiv_Dot_Domain_SubDomain | Incorrect_Format_Field_Email_Address_Error |
-      | Invalid_Email_Data_Emoji                           | Incorrect_Format_Field_Email_Address_Error |
-      | Invalid_Email_Data_TLD                             | Incorrect_Format_Field_Email_Address_Error |
-      | Invalid_Email_Data_Missing_AT                      | Incorrect_Format_Field_Email_Address_Error |
-      | Invalid_Email_Data_Reserved_Domain                 | Incorrect_Format_Field_Email_Address_Error |
-      | Invalid_Email_Data_Punycode                        | Incorrect_Format_Field_Email_Address_Error |
+      | Invalid_Data_User_Profile                                 | Field_And_Summary_Error_Message            |
+      | Invalid_Email_Data_Leading_Dot                            | Incorrect_Format_Field_Email_Address_Error |
+      | Invalid_Email_Data_Trailing_Dot                           | Incorrect_Format_Field_Email_Address_Error |
+      | Invalid_Email_Data_Double_Dot                             | Incorrect_Format_Field_Email_Address_Error |
+      | Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour | Incorrect_Format_Field_Email_Address_Error |
+      | Invalid_Email_Data_Reserved_Domain                        | Incorrect_Format_Field_Email_Address_Error |
 
   @rsp-3122 @VerifyErrorMessagesInvalidData @VerifyErrorInvalidDataCreateUserFromCheckCreateUserProfileBackLink
   Scenario Outline: Validation messages are displayed for invalid data entered after the user has navigated back from 'Check and create user profile' page
