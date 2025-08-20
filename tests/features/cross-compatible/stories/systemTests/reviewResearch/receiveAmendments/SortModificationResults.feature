@@ -1,4 +1,4 @@
-@ReceiveAmendments @SortModificationResults @FrontStageUser @SystemTest @rsp-4090
+@ReceiveAmendments @SortModificationResults @ApplicantUser @SystemTest @rsp-4090
 
 Feature: Receive Amendments: Sort modification results after performing a search
 

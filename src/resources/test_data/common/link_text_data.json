@@ -147,7 +147,7 @@
     "Back": "Back"
   },
   "Search_Modifications_Page": {
-    "Advanced_Filter": "Advanced filter",
+    "Advanced_Filters": "Advanced filters",
     "Clear_All_Filters": "Clear all filters",
     "Back": "Back"
   },
@@ -159,5 +159,9 @@
     "Back": "Back",
     "Advanced_Filter": "Advanced filter",
     "Remove_This_Change": "Remove this change"
+  },
+  "Approvals_Page": {
+    "Search": "Search",
+    "Back": "Back"
   }
 }

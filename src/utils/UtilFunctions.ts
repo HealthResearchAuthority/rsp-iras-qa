@@ -34,11 +34,17 @@ export function getAuthState(user: string): string {
     case 'system_admin':
       authState = 'auth-storage-states/sysAdminUser.json';
       break;
-    case 'frontstage_user':
-      authState = 'auth-storage-states/frontStageUser.json';
+    case 'applicant_user':
+      authState = 'auth-storage-states/applicantUser.json';
       break;
-    case 'backstage_user':
-      authState = 'auth-storage-states/backStageUser.json';
+    case 'studywide_reviewer':
+      authState = 'auth-storage-states/studyWideReviewer.json';
+      break;
+    case 'team_manager':
+      authState = 'auth-storage-states/teamManager.json';
+      break;
+    case 'workflow_coordinator':
+      authState = 'auth-storage-states/workFlowCoordinator.json';
       break;
     default:
       throw new Error(`${user} is not a valid option`);
