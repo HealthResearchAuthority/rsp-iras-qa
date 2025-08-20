@@ -62,6 +62,8 @@ export default class CommonItemsPage {
   readonly search_text: Locator;
   readonly pagination: Locator;
   readonly firstPage: Locator;
+  readonly lastPage: Locator;
+  readonly pagination_next_link: Locator;
   readonly previous_button: Locator;
   readonly currentPage: Locator;
   readonly pagination_results: Locator;
@@ -70,8 +72,7 @@ export default class CommonItemsPage {
   readonly advanced_filter_chevron: Locator;
   readonly result_count: Locator;
   readonly iras_id_search_text: Locator;
-  readonly lastPage: Locator;
-  readonly pagination_next_link: Locator;
+  readonly advanced_filter_active_filters_label: Locator;
   readonly no_matching_search_result_header_label: Locator;
   readonly no_matching_search_result_sub_header_label: Locator;
   readonly no_matching_search_result_body_one_label: Locator;
@@ -129,8 +130,10 @@ export default class CommonItemsPage {
     this.bannerQuestionSet = this.bannerNavBar.getByText(this.linkTextData.Banner.Question_Set, { exact: true });
     this.bannerSystemAdmin = this.bannerNavBar.getByText(this.linkTextData.Banner.System_Admin, { exact: true });
     this.bannerMyApplications = this.bannerNavBar.getByText(this.linkTextData.Banner.My_Applications, { exact: true });
-    this.next_button = this.page.getByRole('link').getByText(this.commonTestData.next_button, { exact: true });
-    this.pagination_next_link = this.page.locator('div[class="govuk-pagination__next"]').getByRole('link');
+    this.next_button = this.page
+      .getByRole('link')
+      .getByText(this.commonTestData.next_button, { exact: true })
+      .or(this.page.getByRole('button', { name: this.commonTestData.next_button, exact: true }));
     this.pagination_next_link = this.page.locator('div[class="govuk-pagination__next"]').getByRole('link');
     this.errorMessageFieldLabel = this.page
       .locator('.field-validation-error')
@@ -204,6 +207,7 @@ export default class CommonItemsPage {
       .getByText(this.buttonTextData.Search_Modifications_Page.Apply_Filters, {
         exact: true,
       });
+    this.advanced_filter_active_filters_label = this.page.getByRole('list');
   }
 
   //Page Methods

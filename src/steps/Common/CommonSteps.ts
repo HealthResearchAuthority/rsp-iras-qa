@@ -844,7 +844,7 @@ Then(
 Then(
   '{string} active filters {string} in the {string}',
   async (
-    { searchModificationsPage, commonItemsPage },
+    { searchModificationsPage, manageReviewBodiesPage, commonItemsPage },
     actionToPerform: string,
     filterDatasetName: string,
     pageKey: string
@@ -857,6 +857,9 @@ Then(
     if (pageKey === 'Search_Modifications_Page') {
       filterDataset = searchModificationsPage.searchModificationsPageTestData.Advanced_Filters[filterDatasetName];
       filterLabels = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page;
+    } else if (pageKey === 'Manage_Review_Bodies_Page') {
+      filterDataset = manageReviewBodiesPage.manageReviewBodiesPageData.Advanced_Filters[filterDatasetName];
+      filterLabels = manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page;
     }
     const validateFilter = async (key: string, labelFetcher: (key: string) => Promise<string | string[]>) => {
       const labels = await labelFetcher(key);
