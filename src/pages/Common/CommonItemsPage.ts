@@ -63,6 +63,7 @@ export default class CommonItemsPage {
   readonly pagination: Locator;
   readonly firstPage: Locator;
   readonly lastPage: Locator;
+  readonly pagination_next_link: Locator;
   readonly previous_button: Locator;
   readonly currentPage: Locator;
   readonly pagination_results: Locator;
@@ -133,6 +134,7 @@ export default class CommonItemsPage {
       .getByRole('link')
       .getByText(this.commonTestData.next_button, { exact: true })
       .or(this.page.getByRole('button', { name: this.commonTestData.next_button, exact: true }));
+    this.pagination_next_link = this.page.locator('div[class="govuk-pagination__next"]').getByRole('link');
     this.errorMessageFieldLabel = this.page
       .locator('.field-validation-error')
       .or(this.page.locator('.govuk-error-message'))

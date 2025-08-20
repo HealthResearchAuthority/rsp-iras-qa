@@ -49,7 +49,9 @@
   "Manage_Users_Page": {
     "Add_New_User_Profile_Record": "Add a new user profile record",
     "Back": "Back",
-    "View_Edit": "View/Edit"
+    "View_Edit": "View/Edit",
+    "Advanced_Filter": "Advanced filters",
+    "Clear_All_Filters": "Clear all filters"
   },
   "Create_User_Profile_Page": {
     "Back": "Back"
