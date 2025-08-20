@@ -22,7 +22,8 @@ Feature: Create Amendment - Create Modifications
 
   @rsp-4038 @SelectAreaOfChange
   Scenario Outline: Verify that user can create modifications to change the participating organisations
-    When I click the '<Modifications_Tile_Link>' link on the 'Project_Overview_Page'
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
     And I capture the page screenshot
     And I validate the field values with '<Project_Details_Title>' on select area of change page

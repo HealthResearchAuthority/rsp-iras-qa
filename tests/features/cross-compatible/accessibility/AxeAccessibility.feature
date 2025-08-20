@@ -955,7 +955,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I can see the 'Planned_End_Date' page for modifications
     Then I fill the planned project end date modifications page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Modifications_Page'
-    Then I can see the 'Which_Organisation_Type_Affect' page for modifications
+    Then I can see the 'Affected_Organisation_Selection_Page' page for modifications
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
