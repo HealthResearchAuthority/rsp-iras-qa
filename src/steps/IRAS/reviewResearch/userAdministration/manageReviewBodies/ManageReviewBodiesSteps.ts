@@ -136,49 +136,13 @@ Then('I click the view edit link', async ({ manageReviewBodiesPage }) => {
 });
 
 When(
-  'I enter {string} into the search field for manage review bodies page',
-  async ({ manageReviewBodiesPage }, datasetName: string) => {
-    const dataset =
-      manageReviewBodiesPage.manageReviewBodiesPageData.Search_For_Review_Bodies.Search_Queries[datasetName];
-    await manageReviewBodiesPage.review_body_search_text.fill(dataset['search_input_text']);
-  }
-);
-
-When(
   'I select advanced filters in the manage review bodies page using {string}',
   async ({ manageReviewBodiesPage, commonItemsPage }, filterDatasetName: string) => {
     const dataset = manageReviewBodiesPage.manageReviewBodiesPageData.Advanced_Filters[filterDatasetName];
-    await commonItemsPage.advanced_filter_chevron.click();
     for (const key in dataset) {
       if (Object.hasOwn(dataset, key)) {
         await manageReviewBodiesPage[key + '_chevron'].click();
         await commonItemsPage.fillUIComponent(dataset, key, manageReviewBodiesPage);
-      }
-    }
-  }
-);
-
-Then(
-  'I can see the selected filters {string} are displayed under active filters for manage review bodies page',
-  async ({ manageReviewBodiesPage, commonItemsPage }, filterDatasetName: string) => {
-    const dataset = manageReviewBodiesPage.manageReviewBodiesPageData.Advanced_Filters[filterDatasetName];
-    for (const key in dataset) {
-      if (Object.hasOwn(dataset, key)) {
-        if (key === 'country_checkbox') {
-          for (const filterLabel of dataset[key]) {
-            const activeLabel =
-              manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.country_advanced_filter_label +
-              ': ' +
-              filterLabel;
-            await expect(commonItemsPage.advanced_filter_active_filters_label.getByText(activeLabel)).toBeVisible();
-          }
-        } else if (key === 'status_radio') {
-          const activeLabel =
-            manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.status_advanced_filter_label +
-            ': ' +
-            dataset[key];
-          await expect(commonItemsPage.advanced_filter_active_filters_label.getByText(activeLabel)).toBeVisible();
-        }
       }
     }
   }
@@ -255,15 +219,15 @@ Then(
         if (key === 'country_checkbox') {
           for (const filterLabel of dataset[key]) {
             const activeLabel =
-              manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.country_advanced_filter_label +
-              ': ' +
+              manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.country_label +
+              ' - ' +
               filterLabel;
             await expect(commonItemsPage.advanced_filter_active_filters_label.getByText(activeLabel)).not.toBeVisible();
           }
         } else if (key === 'status_radio') {
           const activeLabel =
-            manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.status_advanced_filter_label +
-            ': ' +
+            manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.status_label +
+            ' - ' +
             dataset[key];
           await expect(commonItemsPage.advanced_filter_active_filters_label.getByText(activeLabel)).not.toBeVisible();
         }

@@ -78,12 +78,12 @@ export default class ManageReviewBodiesPage {
     this.tableRows = this.page.getByRole('table').getByRole('row');
     this.country_checkbox_chevron = this.page
       .getByRole('heading', { level: 2 })
-      .getByText(this.manageReviewBodiesPageData.Manage_Review_Body_Page.country_advanced_filter_label, {
+      .getByText(this.manageReviewBodiesPageData.Manage_Review_Body_Page.country_label, {
         exact: true,
       });
     this.status_radio_chevron = this.page
       .getByRole('heading', { level: 2 })
-      .getByText(this.manageReviewBodiesPageData.Manage_Review_Body_Page.status_advanced_filter_label, {
+      .getByText(this.manageReviewBodiesPageData.Manage_Review_Body_Page.status_label, {
         exact: true,
       });
     this.country_checkbox = page.getByRole('checkbox');
@@ -299,14 +299,11 @@ export default class ManageReviewBodiesPage {
     filterDataset: any,
     validateSearch: boolean = true
   ) {
-    // Use below commented code, if needed to check the results till the end of the pagination
-    // Loop through pages (currently set to 4)
-    // const lastPage = await removeUnwantedWhitespace(confirmStringNotNull(await commonItemsPage.lastPage.textContent()));
-    // for (let i = 1; i < Number(lastPage); i++) {
-    for (let i = 1; i < 4; i++) {
+    for (let pageIndex = 1; pageIndex < 4; pageIndex++) {
       const rowCount = await commonItemsPage.tableRows.count();
-      for (let j = 1; j < rowCount; j++) {
-        const row = commonItemsPage.tableRows.nth(j);
+      expect(rowCount).toBeGreaterThan(0);
+      for (let rowIndex = 1; rowIndex < rowCount; rowIndex++) {
+        const row = commonItemsPage.tableRows.nth(rowIndex);
         const { organisationName, country, status } = await this.getRowDataAdvancedFiltersSearch(row);
 
         // If search criteria is to be validated, check organisation name
@@ -316,7 +313,11 @@ export default class ManageReviewBodiesPage {
         }
         this.validateFilters(country, status, filterDataset);
       }
-      await commonItemsPage.pagination_next_link.click();
+      if (await commonItemsPage.next_button.isVisible()) {
+        await commonItemsPage.next_button.click();
+      } else {
+        break;
+      }
     }
   }
 }

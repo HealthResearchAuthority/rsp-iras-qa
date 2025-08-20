@@ -57,7 +57,6 @@ export default class CommonItemsPage {
   readonly tableBodyRows: Locator;
   readonly hidden_next_button: Locator;
   readonly next_button: Locator;
-  readonly pagination_next_link: Locator;
   readonly fieldGroup: Locator;
   readonly errorFieldGroup: Locator;
   readonly search_text: Locator;
@@ -130,8 +129,10 @@ export default class CommonItemsPage {
     this.bannerQuestionSet = this.bannerNavBar.getByText(this.linkTextData.Banner.Question_Set, { exact: true });
     this.bannerSystemAdmin = this.bannerNavBar.getByText(this.linkTextData.Banner.System_Admin, { exact: true });
     this.bannerMyApplications = this.bannerNavBar.getByText(this.linkTextData.Banner.My_Applications, { exact: true });
-    this.next_button = this.page.getByRole('link').getByText(this.commonTestData.next_button, { exact: true });
-    this.pagination_next_link = this.page.locator('div[class="govuk-pagination__next"]').getByRole('link');
+    this.next_button = this.page
+      .getByRole('link')
+      .getByText(this.commonTestData.next_button, { exact: true })
+      .or(this.page.getByRole('button', { name: this.commonTestData.next_button, exact: true }));
     this.errorMessageFieldLabel = this.page
       .locator('.field-validation-error')
       .or(this.page.locator('.govuk-error-message'))
