@@ -247,7 +247,7 @@ Feature: User Administration: Manage Users - Create user
       | Valid_Data_In_All_Mandatory_Fields_Role_Applicant            | Job_Title     | Valid_Data_In_All_Mandatory_Fields_Role_Applicant_Another            |
       | Valid_Data_In_All_Mandatory_Fields_Role_Applicant            | Role          | Valid_Data_In_All_Mandatory_Fields_Role_Applicant_Another            |
 
-  @rsp-2827 @rsp-2870 @rsp-3107 @rsp-3108 @verifyCreateUserMultiUserRoles @KNOWN-DEFECT-RSP-4875
+  @rsp-2827 @rsp-2870 @rsp-3107 @rsp-3108 @verifyCreateUserMultiUserRoles
   Scenario Outline: Verify the user is able to create a new user profile with multiple roles
     When I fill the new user profile page using '<Add_User_Profile>'
     And I capture the page screenshot

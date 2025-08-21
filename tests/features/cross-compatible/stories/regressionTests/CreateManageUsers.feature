@@ -134,6 +134,7 @@ Feature: User Administration: Create Manage Users
             | Add_User_Profile                                   | Add_Another_User_Profile                                   |
             | Valid_Data_In_All_Fields_Role_System_Administrator | Valid_Data_In_All_Fields_Role_System_Administrator_Another |
 
+    # order and role name is different>> when a role is unassigned(underscore)
     @RegressionTestUnassignUserRoles @KNOWN-DEFECT-RSP-3938  @fail
     Scenario Outline: Verify the user can unassign roles from the user profile event, with an audit history log
         When I fill the new user profile page using '<Add_User_Profile>'
