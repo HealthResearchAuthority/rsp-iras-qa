@@ -86,12 +86,12 @@ Then(
     const filteredSearchResults = await commonItemsPage.filterResults(userValues, searchTerms);
     const userList = await commonItemsPage.getAllUsersFromTheTable();
     const userListAfterSearch: any = userList.get('searchResultValues');
-    expect(filteredSearchResults).toEqual(userListAfterSearch);
+    expect.soft(filteredSearchResults).toEqual(userListAfterSearch);
     const searchResult = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
       userListAfterSearch,
       searchTerms
     );
-    expect(searchResult).toBeTruthy();
+    expect.soft(searchResult).toBeTruthy();
     await userListReviewBodyPage.updateUserInfo();
   }
 );

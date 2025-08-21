@@ -335,6 +335,26 @@
     "Advanced_Filter_Sco_Active": {
       "country_checkbox": ["Scotland"],
       "status_radio": "Active"
+    },
+    "Advanced_Filter_Role_Team_Manager_Status_Disabled": {
+      "role_checkbox": ["Team manager"],
+      "status_radio": "Disabled"
+    },
+    "Advanced_Filter_Role_System_Administrator_Status_Disabled": {
+      "role_checkbox": ["System administrator"],
+      "status_radio": "Disabled"
+    },
+    "Advanced_Filter_Role_Studywide_Reviewer_Status_Disabled": {
+      "role_checkbox": ["Study-wide reviewer"],
+      "status_radio": "Disabled"
+    },
+    "Advanced_Filter_Role_Workflow_Coordinator_Status_Disabled": {
+      "role_checkbox": ["Workflow co-ordinator"],
+      "status_radio": "Disabled"
+    },
+    "Advanced_Filter_Role_Applicant_Status_Disabled": {
+      "role_checkbox": ["Applicant"],
+      "status_radio": "Disabled"
     }
   }
 }

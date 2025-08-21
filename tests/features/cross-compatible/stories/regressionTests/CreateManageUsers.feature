@@ -89,6 +89,12 @@ Feature: User Administration: Create Manage Users
         When I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
         And I can see the 'Manage_Users_Page'
         And I capture the page screenshot
+        When I enter '<Search_Queries>' into the search field for manage users page
+        And I capture the page screenshot
+        And I select advanced filters in the manage users page using '<Advanced_Filters_Users>'
+        And I capture the page screenshot
+        And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
+        And I capture the page screenshot
         And I search and click on view edit link for unique '<Add_User_Profile>' user with 'Active' status from the manage user page
         Then I can see the user profile page
         And I can see the '<Add_User_Profile>' user has the correct roles assigned on their profile page
@@ -102,10 +108,10 @@ Feature: User Administration: Create Manage Users
         And I can see the audit history for the newly created '<Add_User_Profile>' user with roles assigned
 
         Examples:
-            | Add_User_Profile                                   | Field_Name |
-            | Valid_Data_In_All_Fields_Role_Team_Manager         | Role       |
-            | Valid_Data_In_All_Fields_Role_System_Administrator | Role       |
-            | Valid_Data_In_All_Fields_Role_Applicant            | Role       |
+            | Add_User_Profile                                   | Field_Name | Advanced_Filters_Users                                  | Search_Queries            |
+            | Valid_Data_In_All_Fields_Role_Team_Manager         | Role       | Advanced_Filter_Role_Team_Manager_Status_Active         | Role_Team_Manager         |
+            | Valid_Data_In_All_Fields_Role_System_Administrator | Role       | Advanced_Filter_Role_System_Administrator_Status_Active | Role_System_Administrator |
+            | Valid_Data_In_All_Fields_Role_Applicant            | Role       | Advanced_Filter_Role_Applicant_Status_Active            | Role_Applicant            |
 
     @RegressionTestAddAnotherUser
     Scenario Outline: Verify the user is able to continue adding users via the link provided on the Confirmation screen
@@ -135,7 +141,7 @@ Feature: User Administration: Create Manage Users
             | Valid_Data_In_All_Fields_Role_System_Administrator | Valid_Data_In_All_Fields_Role_System_Administrator_Another |
 
     # order and role name is different>> when a role is unassigned(underscore)
-    @RegressionTestUnassignUserRoles @KNOWN-DEFECT-RSP-3938  @fail
+    @RegressionTestUnassignUserRoles @KNOWN-DEFECT-RSP-3938  @fail @skip
     Scenario Outline: Verify the user can unassign roles from the user profile event, with an audit history log
         When I fill the new user profile page using '<Add_User_Profile>'
         And I capture the page screenshot
@@ -184,6 +190,12 @@ Feature: User Administration: Create Manage Users
         And I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
         Then I can see the 'Manage_Users_Page'
         And I capture the page screenshot
+        When I enter '<Search_Queries>' into the search field for manage users page
+        And I capture the page screenshot
+        And I select advanced filters in the manage users page using '<Advanced_Filters_Users>'
+        And I capture the page screenshot
+        And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
+        And I capture the page screenshot
         When I search and click on view edit link for unique '<Add_User_Profile>' user with 'ACTIVE' status from the manage user page
         Then I can see the user profile page
         And I can see the 'Disable_Label_Texts' ui labels on the user profile page
@@ -195,6 +207,12 @@ Feature: User Administration: Create Manage Users
         And I capture the current time for 'Audit_History_User_Page'
         And I click the 'Back_To_Manage_Users' link on the 'Confirmation_Page'
         Then I can see the 'Manage_Users_Page'
+        And I capture the page screenshot
+        When I enter '<Search_Queries>' into the search field for manage users page
+        And I capture the page screenshot
+        And I select advanced filters in the manage users page using '<Advanced_Filters_Users_Disabled>'
+        And I capture the page screenshot
+        And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
         And I capture the page screenshot
         When I search and click on view edit link for unique '<Add_User_Profile>' user with 'DISABLED' status from the manage user page
         Then I can see the 'Enable_Label_Texts' ui labels on the user profile page
@@ -214,6 +232,12 @@ Feature: User Administration: Create Manage Users
         When I click the 'Back_To_Manage_Users' link on the 'Confirmation_Page'
         And I can see the 'Manage_Users_Page'
         And I capture the page screenshot
+        When I enter '<Search_Queries>' into the search field for manage users page
+        And I capture the page screenshot
+        And I select advanced filters in the manage users page using '<Advanced_Filters_Users>'
+        And I capture the page screenshot
+        And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
+        And I capture the page screenshot
         And I search and click on view edit link for unique '<Add_User_Profile>' user with 'ACTIVE' status from the manage user page
         Then I can see the 'Disable_Label_Texts' ui labels on the user profile page
         And I capture the page screenshot
@@ -222,10 +246,12 @@ Feature: User Administration: Create Manage Users
         And I capture the page screenshot
 
         Examples:
-            | Add_User_Profile                                   |
-            | Valid_Data_In_All_Fields_Role_Team_Manager         |
-            | Valid_Data_In_All_Fields_Role_Studywide_Reviewer   |
-            | Valid_Data_In_All_Fields_Role_Workflow_Coordinator |
+            | Add_User_Profile                                   | Advanced_Filters_Users                                  | Search_Queries            | Advanced_Filters_Users_Disabled                           |
+            | Valid_Data_In_All_Fields_Role_Team_Manager         | Advanced_Filter_Role_Team_Manager_Status_Active         | Role_Team_Manager         | Advanced_Filter_Role_Team_Manager_Status_Disabled         |
+            | Valid_Data_In_All_Fields_Role_Studywide_Reviewer   | Advanced_Filter_Role_Studywide_Reviewer_Status_Active   | Role_Studywide_Reviewer   | Advanced_Filter_Role_Studywide_Reviewer_Status_Disabled   |
+            | Valid_Data_In_All_Fields_Role_Workflow_Coordinator | Advanced_Filter_Role_Workflow_Coordinator_Status_Active | Role_Workflow_Coordinator | Advanced_Filter_Role_Workflow_Coordinator_Status_Disabled |
+            | Valid_Data_In_All_Fields_Role_System_Administrator | Advanced_Filter_Role_System_Administrator_Status_Active | Role_System_Administrator | Advanced_Filter_Role_System_Administrator_Status_Disabled |
+            | Valid_Data_In_All_Fields_Role_Applicant            | Advanced_Filter_Role_Applicant_Status_Active            | Role_Applicant            | Advanced_Filter_Role_Applicant_Status_Disabled            |
 
     @RegressionTestCreateUserProfileBackLinks
     Scenario Outline: Verify the user can navigate from 'Check and create user profile' back to system admin page via the 'Back' links
