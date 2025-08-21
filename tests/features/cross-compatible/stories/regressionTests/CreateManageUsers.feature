@@ -12,7 +12,7 @@ Feature: User Administration: Create Manage Users
         And I can see the add a new user profile page
 
     @RegressionTestCreateUserEvents
-    Scenario Outline: Verify the user is able to create new user profiles with various roles, with an audit history log
+    Scenario Outline: Verify the user is able to create new user profiles with various roles like study-wide reviewer or workflow co-ordinator, with an audit history log
         When I fill the new user profile page using '<Add_User_Profile>'
         And I capture the page screenshot
         And I click the 'Continue' button on the 'Create_User_Profile_Page'
@@ -75,7 +75,7 @@ Feature: User Administration: Create Manage Users
             | Valid_Data_In_All_Fields_Role_Workflow_Coordinator | Role       | QA Automation National Research Service Permissions Coordination Centre (NRS PCC) | Advanced_Filter_Review_body_NRSPCC_Role_Workflow_Coordinator_Status_Active | Role_Workflow_Coordinator | Advanced_Filter_Sco_Active     |
 
     @RegressionTestCreateUserEvents
-    Scenario Outline: Verify the user is able to create new user profiles with various roles, with an audit history log
+    Scenario Outline: Verify the user is able to create new user profiles with various roles like applicant or system administrator or team manager, with an audit history log
         When I fill the new user profile page using '<Add_User_Profile>'
         And I capture the page screenshot
         And I click the 'Continue' button on the 'Create_User_Profile_Page'
