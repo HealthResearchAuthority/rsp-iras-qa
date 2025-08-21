@@ -224,58 +224,49 @@
     "Advanced_Filters_One": {
       "sponsor_organisation_text": "Eisai Co.,Ltd."
     },
-
     "Advanced_Filters_Two": {
       "short_project_title_text": "Short study title 17"
     },
     "Advanced_Filters_Three": {
       "modification_type_checkbox": ["Minor modification"]
     },
-
     "Advanced_Filters_Four": {
       "lead_nation_checkbox": ["Scotland"],
       "participating_nation_checkbox": ["Scotland"]
     },
-
     "Advanced_Filters_Five": {
       "sponsor_organisation_text": "Nottingham Trent University",
       "lead_nation_checkbox": ["Northern Ireland"],
       "participating_nation_checkbox": ["Northern Ireland"]
     },
-
     "Advanced_Filters_Six": {
       "short_project_title_text": "Project 31",
       "lead_nation_checkbox": ["England"],
       "participating_nation_checkbox": ["England"]
     },
-
     "Advanced_Filters_Seven": {
       "short_project_title_text": "Study title 04",
       "sponsor_organisation_text": "ASHFORD AND ST PETER'S HOSPITALS NHS FOUNDATION TRUST",
       "lead_nation_checkbox": ["Wales"],
       "participating_nation_checkbox": ["Wales"]
     },
-
     "Advanced_Filters_Eight": {
       "lead_nation_checkbox": ["England", "Northern Ireland"],
       "participating_nation_checkbox": ["England", "Northern Ireland"],
       "modification_type_checkbox": ["Modification of an important detail"]
     },
-
     "Advanced_Filters_Nine": {
       "sponsor_organisation_text": "Academic Medical Center at the University of Amsterdam (Netherlands)",
       "lead_nation_checkbox": ["England", "Scotland"],
       "participating_nation_checkbox": ["England", "Scotland"],
       "modification_type_checkbox": ["Minor modification", "Modification of an important detail"]
     },
-
     "Advanced_Filters_Ten": {
       "short_project_title_text": "Project 13",
       "lead_nation_checkbox": ["England", "Wales"],
       "participating_nation_checkbox": ["England", "Wales"],
       "modification_type_checkbox": ["Modification of an important detail"]
     },
-
     "Advanced_Filters_Eleven": {
       "short_project_title_text": "26 -Study",
       "sponsor_organisation_text": "AKL RESEARCH & DEVELOPMENT LIMITED",
@@ -283,20 +274,17 @@
       "participating_nation_checkbox": ["Northern Ireland", "Scotland"],
       "modification_type_checkbox": ["Modification of an important detail"]
     },
-
     "Advanced_Filters_Tweleve": {
       "date_submitted_to_day_text": "3",
       "date_submitted_to_month_dropdown": "January",
       "date_submitted_to_year_text": "2000"
     },
-
     "Advanced_Filters_Thirteen": {
       "sponsor_organisation_text": "AIREDALE NHS FOUNDATION TRUST",
       "date_submitted_from_day_text": "03",
       "date_submitted_from_month_dropdown": "January",
       "date_submitted_from_year_text": "2000"
     },
-
     "Advanced_Filters_Fourteen": {
       "date_submitted_from_day_text": "11",
       "date_submitted_from_month_dropdown": "April",
@@ -307,7 +295,6 @@
       "lead_nation_checkbox": ["Northern Ireland", "Wales"],
       "participating_nation_checkbox": ["Northern Ireland", "Wales"]
     },
-
     "Advanced_Filters_Fifteen": {
       "sponsor_organisation_text": "L. MOLTENI & C. DEI FRATELLI ALITTI - SOCIETA' DI ESERCIZIO - S.P.A.",
       "date_submitted_from_day_text": "01",
@@ -319,16 +306,13 @@
       "lead_nation_checkbox": ["Scotland", "Wales"],
       "participating_nation_checkbox": ["Scotland", "Wales"]
     },
-
     "Advanced_Filters_Sixteen": {
       "chief_investigator_name_text": "Barry White"
     },
-
     "Advanced_Filters_Seventeen": {
       "chief_investigator_name_text": "Dr. Isabella Fernández-Hernández",
       "lead_nation_checkbox": ["England", "Northern Ireland", "Scotland"]
     },
-
     "Advanced_Filters_Eighteen": {
       "chief_investigator_name_text": "Dr. Isabella Fernández-Hernández",
       "date_submitted_from_day_text": "10",
