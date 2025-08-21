@@ -1,4 +1,4 @@
-@RegressionCreateManageUsers @RegressionManageUsers @SysAdminUser @Regression
+@RegressionCreateManageUsers @RegressionManageUsers @SysAdminUser @Regression @Test4390
 Feature: User Administration: Create Manage Users
 
     Background:

@@ -543,14 +543,20 @@ Feature: User Administration: Manage Users - Create user
     And I capture the page screenshot
     And I retrieve the list of review bodies displayed in the add a new user profile page
     And the '<Option>' should not be available on the add a new user profile page
-    # And I have navigated to the 'Manage_Review_Bodies_Page'
-    # # And I select advanced filters in the manage review bodies page using '<Advanced_Filters>'
-    # And I can see the review body field in the add a new user profile page should contain all currently enabled review bodies from the manage review bodies page
+    And I have navigated to the 'Manage_Review_Bodies_Page'
+    And I capture the page screenshot
+    And I click the 'Advanced_Filters' button on the 'Manage_Review_Bodies_Page'
+    And I capture the page screenshot
+    And I select advanced filters in the manage review bodies page using '<Advanced_Filters>'
+    And I capture the page screenshot
+    And I click the 'Apply_filters' button on the 'Manage_Review_Bodies_Page'
+    And I capture the page screenshot
+    And I can see the review body field in the add a new user profile page should contain all currently enabled review bodies from the manage review bodies page
     And I capture the page screenshot
     Examples:
-      | Add_User_Profile                                             | Advanced_Filters              | Option           |
-      | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer   | Advanced_Filter_Status_Active | Country_Checkbox |
-      | Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator | Advanced_Filter_Status_Active | Country_Checkbox |
+      | Add_User_Profile                                             | Advanced_Filters                     | Option           |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer   | Advanced_Filter_All_Countries_Active | Country_Checkbox |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator | Advanced_Filter_All_Countries_Active | Country_Checkbox |
 
   @rsp-4390 @ValidateActiveReviewbodies @jsDisabled @Test4390
   Scenario Outline: Validate the review body field in the 'Add a new user profile' page incorporates all currently enabled review bodies from the Manage review bodies page when the javascript is disabled
@@ -558,14 +564,20 @@ Feature: User Administration: Manage Users - Create user
     And I capture the page screenshot
     And I retrieve the list of review bodies displayed in the add a new user profile page
     And the '<Option>' should be available on the add a new user profile page
-    # And I have navigated to the 'Manage_Review_Bodies_Page'
-    # # And I select advanced filters in the manage review bodies page using '<Advanced_Filters>'
-    # And I can see the review body field in the add a new user profile page should contain all currently enabled review bodies from the manage review bodies page
+    And I have navigated to the 'Manage_Review_Bodies_Page'
+    And I capture the page screenshot
+    And I click the 'Advanced_Filters' button on the 'Manage_Review_Bodies_Page'
+    And I capture the page screenshot
+    And I select advanced filters in the manage review bodies page using '<Advanced_Filters>'
+    And I capture the page screenshot
+    And I click the 'Apply_filters' button on the 'Manage_Review_Bodies_Page'
+    And I capture the page screenshot
+    And I can see the review body field in the add a new user profile page should contain all currently enabled review bodies from the manage review bodies page
     And I capture the page screenshot
     Examples:
-      | Add_User_Profile                                             | Advanced_Filters              | Option           |
-      | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer   | Advanced_Filter_Status_Active | Country_Checkbox |
-      | Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator | Advanced_Filter_Status_Active | Country_Checkbox |
+      | Add_User_Profile                                             | Advanced_Filters                     | Option           |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer   | Advanced_Filter_All_Countries_Active | Country_Checkbox |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator | Advanced_Filter_All_Countries_Active | Country_Checkbox |
 
   @rsp-4390 @ValidateRole @Test4390
   Scenario: Validate that the role dropdown on the 'Add a new user profile' page contains the expected roles in alphabetical order
