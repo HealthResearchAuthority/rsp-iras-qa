@@ -214,3 +214,42 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Advanced_Filter_One | Advanced_Filter_One_All |
             | Advanced_Filter_Two | Advanced_Filter_Two_All |
 
+# invalid last logged in error
+# active review bodies in the filter
+# apply all filters together (search and advanced filters,search only , advanced filters only)+default sorting
+
+# ***************************************************************
+# Scenario : 1- Validate Review body and Role filters
+
+# GIVEN I am on the Manage users page,
+# WHEN I open the list of filters by clicking the Advanced Filters chevron,
+# THEN I should be able to apply filters by clicking the Apply filters button, using the following fields—each with its appropriate input type:
+
+# Last logged in - date-entry field
+
+# Review body - checkbox + multi-select list - new filter to be developed (enabled review bodies in the system)
+
+# Role - checkbox + multi-select list - new filter to be developed
+
+# Status - radio-button
+
+# AND the search and input functionalities should follow the same behaviour and logic used elsewhere in the system, including case sensitivity and partial matching,
+# AND filters should remain enabled at all times, regardless of whether any have been selected.
+# *********************************************************************
+# Scenario : 2- Validate Review body in the results
+
+# GIVEN I'm searching for users who have been assigned review bodies and have applied filters during my search,
+# WHEN the search has been performed,
+
+# And navigate to user profile page
+# THEN I only see users who have been assigned enabled review bodies.
+# *********************************************************************
+
+# Scenario : 3- Validate Role in the results
+
+# GIVEN I'm searching for users who have been assigned review bodies and have applied filters during my search,
+# WHEN the search has been performed,
+
+# And navigate to user profile page
+# THEN I only see users who have been assigned roles
+# *********************************************************************
