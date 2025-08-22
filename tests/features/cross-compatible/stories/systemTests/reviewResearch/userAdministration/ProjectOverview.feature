@@ -1,4 +1,4 @@
-@ProjectOverview @FrontStageUser @SystemTest
+@ProjectOverview @ApplicantUser @SystemTest
 Feature: User Administration: Project Overview
 
     Background:
