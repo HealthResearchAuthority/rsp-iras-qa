@@ -24,14 +24,5 @@
     "using fewer keywords",
     "searching for something less specific"
   ],
-  "uploaded_documents_counter_label": " files chosen",
-  "No_Matching_Search_Results": {
-    "no_matching_search_result_header_label": "There are no matching results",
-    "no_matching_search_result_sub_header_label": "Improve your search results by:",
-    "no_matching_search_result_body_one_label": "removing filters",
-    "no_matching_search_result_body_two_label": "double-checking your spelling",
-    "no_matching_search_result_body_three_label": "using fewer keywords",
-    "no_matching_search_result_body_four_label": "searching for something less specific",
-    "no_matching_search_result_count_label": "0 results"
-  }
+  "uploaded_documents_counter_label": " files chosen"
 }

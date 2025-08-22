@@ -682,6 +682,7 @@ Given(
       myResearchProjectsPage,
       searchModificationsPage,
       modificationsReadyToAssignPage,
+      approvalsPage,
     },
     page: string
   ) => {
@@ -727,6 +728,10 @@ Given(
         await modificationsReadyToAssignPage.goto();
         await modificationsReadyToAssignPage.assertOnModificationsReadyToAssignPage();
         break;
+      case 'Approvals_Page':
+        await approvalsPage.goto();
+        await approvalsPage.assertOnApprovalsPage();
+        break;
       default:
         throw new Error(`${page} is not a valid option`);
     }
@@ -736,7 +741,7 @@ Given(
 Given(
   'I have navigated to the {string} as {string}',
   async (
-    { homePage, systemAdministrationPage, accessDeniedPage, myResearchProjectsPage },
+    { homePage, systemAdministrationPage, accessDeniedPage, myResearchProjectsPage, approvalsPage },
     page: string,
     user: string
   ) => {
@@ -756,6 +761,11 @@ Given(
       case 'System_Administration_Access_Denied_Page':
         await systemAdministrationPage.page.context().addCookies(authState.cookies);
         await systemAdministrationPage.goto();
+        await accessDeniedPage.assertOnAccessDeniedPage();
+        break;
+      case 'Approvals_Access_Denied_Page':
+        await approvalsPage.page.context().addCookies(authState.cookies);
+        await approvalsPage.goto();
         await accessDeniedPage.assertOnAccessDeniedPage();
         break;
       case 'My_Research_Page':
@@ -835,7 +845,7 @@ Then(
 Then(
   '{string} active filters {string} in the {string}',
   async (
-    { searchModificationsPage, commonItemsPage },
+    { searchModificationsPage, manageReviewBodiesPage, commonItemsPage },
     actionToPerform: string,
     filterDatasetName: string,
     pageKey: string
@@ -848,6 +858,9 @@ Then(
     if (pageKey === 'Search_Modifications_Page') {
       filterDataset = searchModificationsPage.searchModificationsPageTestData.Advanced_Filters[filterDatasetName];
       filterLabels = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page;
+    } else if (pageKey === 'Manage_Review_Bodies_Page') {
+      filterDataset = manageReviewBodiesPage.manageReviewBodiesPageData.Advanced_Filters[filterDatasetName];
+      filterLabels = manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page;
     }
     const validateFilter = async (key: string, labelFetcher: (key: string) => Promise<string | string[]>) => {
       const labels = await labelFetcher(key);

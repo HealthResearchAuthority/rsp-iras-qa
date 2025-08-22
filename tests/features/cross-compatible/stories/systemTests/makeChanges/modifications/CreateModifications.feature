@@ -1,4 +1,4 @@
-@FrontStageUser @createModifications @SystemTest @jsEnabled
+@ApplicantUser @createModifications @SystemTest @jsEnabled
 Feature: Create Amendment - Create Modifications
 
   Background:

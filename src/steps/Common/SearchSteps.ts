@@ -69,3 +69,13 @@ Then('the list displays {string}', async ({ commonItemsPage }, resultsAmount: st
     expect(await commonItemsPage.tableBodyRows.count()).toBeGreaterThan(1);
   }
 });
+
+Then('the search displays no matching results', async ({ commonItemsPage }) => {
+  await expect(commonItemsPage.no_results_heading).toBeVisible();
+  await expect(commonItemsPage.no_results_guidance_text).toBeVisible();
+  const noResultsGuidanceBulletList = await commonItemsPage.no_results_bullet_points.allInnerTexts();
+  await expect(commonItemsPage.no_results_bullet_points).toHaveCount(
+    commonItemsPage.commonTestData.no_results_bullet_points.length
+  );
+  expect(noResultsGuidanceBulletList).toEqual(commonItemsPage.commonTestData.no_results_bullet_points);
+});

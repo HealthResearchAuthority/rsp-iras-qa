@@ -351,8 +351,8 @@ export const test = base.extend<CustomFixtures>({
   storageState: async ({ $tags, storageState }, use) => {
     if ($tags.includes('@SysAdminUser')) {
       storageState = getAuthState('system_admin');
-    } else if ($tags.includes('@FrontStageUser')) {
-      storageState = getAuthState('frontstage_user');
+    } else if ($tags.includes('@ApplicantUser')) {
+      storageState = getAuthState('applicant_user');
     } else if ($tags.includes('@StudyWideReviewer')) {
       storageState = getAuthState('studywide_reviewer');
     } else if ($tags.includes('@TeamManager')) {

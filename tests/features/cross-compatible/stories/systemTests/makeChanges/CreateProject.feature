@@ -1,4 +1,4 @@
-@FrontStageUser @createProject @createAmendment @SystemTest
+@ApplicantUser @createProject @createAmendment @SystemTest
 Feature: Create Amendment - Create Project
 
   Background:
