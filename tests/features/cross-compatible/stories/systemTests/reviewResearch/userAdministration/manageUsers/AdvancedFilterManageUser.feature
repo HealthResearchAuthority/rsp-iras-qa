@@ -242,9 +242,9 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
         And I can see the review body field in the review body checkbox in the advanced filters of manage users page should contain all currently enabled review bodies from the manage review bodies page
         And I capture the page screenshot
         Examples:
-            | Advanced_Filters_Review_Bodies       | Advanced_Filters_Users      |
-            | Advanced_Filter_All_Countries_Active | Advanced_Filter_Review_Body |
-            | Advanced_Filter_All_Countries_Active | Advanced_Filter_Review_Body |
+            | Advanced_Filters_Review_Bodies       | Advanced_Filters_Users                             |
+            | Advanced_Filter_All_Countries_Active | Advanced_Filter_Country_No_Review_Body_HRA_Role_No |
+            | Advanced_Filter_All_Countries_Active | Advanced_Filter_Country_No_Review_Body_HRA_Role_No |
 
     #    Few failures due to data issues- to be re executed once data issues are fixed(review body and country)
     @rsp-4418 @ValidateFilters @Test4418
