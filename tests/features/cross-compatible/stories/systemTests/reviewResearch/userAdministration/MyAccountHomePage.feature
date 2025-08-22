@@ -70,7 +70,7 @@ Feature: My Account Home page
       | Validation_Text                     | Navigation_Link |
       | Label_Texts_Team_Manager_Role       | Back            |
 
-  @rsp-4488 @MyAccountHomepage @WorkFlowCoordinator @Run
+  @rsp-4488 @MyAccountHomepage @WorkFlowCoordinator 
   Scenario Outline: Validate the My Account Home page of workflow coordinator user accessing the approvals page
     Given I have navigated to the 'Home_Page'
     Given I can see project guidance text on the home_page
