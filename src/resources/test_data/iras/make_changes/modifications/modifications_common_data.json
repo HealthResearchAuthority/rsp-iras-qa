@@ -7,11 +7,11 @@
     "remove_this_change_label": "Remove this change"
   },
   "Specific_Change_Pages": {
-    "Planned_End_Date": { 
+    "Planned_End_Date": {
       "page_header": "Change to planned end date",
       "page_component_label": "New planned project end date"
     },
-    "Which_Organisation_Type_Affect": { 
+    "Affected_Organisation_Selection_Page": {
       "page_header": "Change to planned end date",
       "page_component_label": "Which organisation types does this change affect?"
     }
