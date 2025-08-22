@@ -21,7 +21,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityCreateProjectRecord @FrontStageUser
+  @axeAccessibilityCreateProjectRecord @ApplicantUser
   Scenario: Create a project record
     Given I have navigated to the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
@@ -30,7 +30,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityProjectDetailsIRAS @FrontStageUser
+  @axeAccessibilityProjectDetailsIRAS @ApplicantUser
   Scenario: Project Details IRAS ID
     Given I have navigated to the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
@@ -40,7 +40,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityProjectDetailsTitle @FrontStageUser
+  @axeAccessibilityProjectDetailsTitle @ApplicantUser
   Scenario: Project Details - Short project title and Planned end date
     Given I have navigated to the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
@@ -52,7 +52,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityKeyProjectRoles @FrontStageUser
+  @axeAccessibilityKeyProjectRoles @ApplicantUser
   Scenario: Key Project Roles
     Given I have navigated to the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
@@ -66,7 +66,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityResearchLocations @FrontStageUser
+  @axeAccessibilityResearchLocations @ApplicantUser
   Scenario: Research Locations
     Given I have navigated to the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
@@ -82,7 +82,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityProjectOverviewCreateProject @FrontStageUser
+  @axeAccessibilityProjectOverviewCreateProject @ApplicantUser
   Scenario: Project Overview -Create project
     Given I have navigated to the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
@@ -97,7 +97,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityProjectOverviewModifications @FrontStageUser
+  @axeAccessibilityProjectOverviewModifications @ApplicantUser
   Scenario: Project Overview - Modifications
     Given I have navigated to the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
@@ -120,7 +120,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityReviewYourAnswers @FrontStageUser
+  @axeAccessibilityReviewYourAnswers @ApplicantUser
   Scenario: Review your answers
     Given I have navigated to the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
@@ -138,7 +138,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityKeyProjectRolesSponsorOrganisation @FrontStageUser
+  @axeAccessibilityKeyProjectRolesSponsorOrganisation @ApplicantUser
   Scenario: Key Project Roles - Primary Sponsor Organisation Suggestion List
     Given I have navigated to the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
@@ -867,7 +867,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilitySelectAreaOfChange @FrontStageUser
+  @axeAccessibilitySelectAreaOfChange @ApplicantUser
   Scenario: Modifications select area of change
     Given I have navigated to the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
@@ -887,7 +887,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityParticipatingOrganisation @FrontStageUser
+  @axeAccessibilityParticipatingOrganisation @ApplicantUser
   Scenario: Modifications search participating organisations
     Given I have navigated to the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
@@ -909,7 +909,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityPlannedEndDateModifications @FrontStageUser
+  @axeAccessibilityPlannedEndDateModifications @ApplicantUser
   Scenario: Modifications Planned End Date Page
     Given I have navigated to the my research projects page
     And I can see the my research projects page
@@ -935,7 +935,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityWhichOrganisationChangeAffectModifications @FrontStageUser
+  @axeAccessibilityWhichOrganisationChangeAffectModifications @ApplicantUser
   Scenario: Modifications Which organisation change affect page
     Given I have navigated to the my research projects page
     And I can see the my research projects page

@@ -42,9 +42,9 @@ export default class LoginPage {
     if (dataset === 'System_Admin') {
       secretKey = process.env.SYSTEM_ADMIN_SECRET_KEY;
       authTag = process.env.SYSTEM_ADMIN_AUTH_TAG;
-    } else if (dataset === 'Frontstage_User') {
-      secretKey = process.env.FRONTSTAGE_USER_SECRET_KEY;
-      authTag = process.env.FRONTSTAGE_USER_AUTH_TAG;
+    } else if (dataset === 'Applicant_User') {
+      secretKey = process.env.APPLICANT_USER_SECRET_KEY;
+      authTag = process.env.APPLICANT_USER_AUTH_TAG;
     } else if (dataset === 'Studywide_Reviewer') {
       secretKey = process.env.STUDYWIDE_REVIEWER_SECRET_KEY;
       authTag = process.env.STUDYWIDE_REVIEWER_AUTH_TAG;

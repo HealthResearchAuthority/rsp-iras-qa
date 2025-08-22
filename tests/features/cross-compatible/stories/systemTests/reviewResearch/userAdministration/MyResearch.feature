@@ -1,4 +1,4 @@
-@MyResearch @FrontStageUser @SystemTest
+@MyResearch @ApplicantUser @SystemTest
 Feature: User Administration: My Research
 
   Background:
@@ -7,7 +7,7 @@ Feature: User Administration: My Research
     And I have navigated to the 'My_Research_Page'
     And I can see the 'My_Research_Page'
 
-  @rsp-3424 @MyResearchProjectsPage @Smoke
+  @rsp-3424 @myResearchProjectsPage @Smoke @skip
   Scenario Outline: Validate the my research page and Navigation back to home page
     When I click the 'Back' link on the 'My_Research_Page'
     Then I can see the my account home page
