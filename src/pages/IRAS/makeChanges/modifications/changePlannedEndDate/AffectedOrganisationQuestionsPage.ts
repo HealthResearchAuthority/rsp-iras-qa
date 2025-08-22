@@ -6,8 +6,6 @@ import * as linkTextData from '../../../../../resources/test_data/common/link_te
 export default class ChangePlannedEndDateAffectedOrganisationQuestionsPage {
   readonly page: Page;
   readonly affectedOrganisationQuestionsPageTestData: typeof affectedOrganisationQuestionsPageTestData;
-  // readonly which_organisation_affect_hint_label: Locator;
-  // readonly which_organisation_change_affect_checkbox: Locator;
   readonly linkTextData: typeof linkTextData;
   readonly pageHeading: Locator;
   readonly where_organisation_change_affect_nhs_question_label: Locator;

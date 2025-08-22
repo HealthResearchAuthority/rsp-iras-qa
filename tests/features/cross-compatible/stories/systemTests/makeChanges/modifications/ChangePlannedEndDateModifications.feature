@@ -324,22 +324,18 @@ Feature: Create Amendment - Create Modifications Change to planned end date
     And I can see the review changes planned end date page
     And I capture the page screenshot
     Then I validate all field values on review modifications page using '<Planned_End_Date>' , '<Organisation_Change_Affect>' and '<Affected_Org_Questions>'
-
     When I click the 'Back' link on the 'Review_Changes_Planned_End_Date_Page'
     Then I can see the change planned end date affected organisation questions page
     And I capture the page screenshot
     And I can see previously saved values for '<Affected_Org_Questions>' displayed on the affected organisation questions page
-
     When I click the 'Back' link on the 'Affected_Organisation_Questions_Page'
     Then I can see the 'Affected_Organisation_Selection_Page' page for modifications
     And I capture the page screenshot
     And I can see previously saved values for '<Organisation_Change_Affect>' displayed on the affected organisation selection page
-
     When I click the 'Back' link on the 'Affected_Organisation_Selection_Page'
     Then I can see the 'Planned_End_Date' page for modifications
     And I capture the page screenshot
     Then I can see previously saved values for '<Planned_End_Date>' displayed on the change to planned end date page
-
     When I click the 'Back' link on the 'Planned_End_Date_Change_Page'
     Then I can see the select area of change page
     And I capture the page screenshot
@@ -372,14 +368,12 @@ Feature: Create Amendment - Create Modifications Change to planned end date
     And I can see the review changes planned end date page
     And I capture the page screenshot
     Then I validate all field values on review modifications page using '<Planned_End_Date>' , '<Organisation_Change_Affect>' and '<Affected_Org_Questions>'
-
     When I click the change link '<Change_Field>' on review changes planned end date page
     Then I can see the 'Planned_End_Date' page for modifications
     And I capture the page screenshot
     When I click the 'Back' link on the 'Planned_End_Date_Change_Page'
     And I capture the page screenshot
     And I can see the review changes planned end date page
-
     When I click the change link '<Change_Field>' on review changes planned end date page
     Then I can see the 'Planned_End_Date' page for modifications
     And I capture the page screenshot
@@ -413,7 +407,6 @@ Feature: Create Amendment - Create Modifications Change to planned end date
     And I can see the review changes planned end date page
     And I capture the page screenshot
     Then I validate all field values on review modifications page using '<Planned_End_Date>' , '<Organisation_Change_Affect>' and '<Affected_Org_Questions>'
-
     When I click the change link '<Change_Field>' on review changes planned end date page
     Then I can see the 'Affected_Organisation_Selection_Page' page for modifications
     And I fill the which organisation this change affect modifications page with '<Organisation_Change_Affect_Update>'
@@ -451,7 +444,6 @@ Feature: Create Amendment - Create Modifications Change to planned end date
     And I can see the review changes planned end date page
     And I capture the page screenshot
     Then I validate all field values on review modifications page using '<Planned_End_Date>' , '<Organisation_Change_Affect>' and '<Affected_Org_Questions>'
-
     When I click the change link '<Change_Field>' on review changes planned end date page
     Then I can see the change planned end date affected organisation questions page
     And I capture the page screenshot
@@ -463,13 +455,13 @@ Feature: Create Amendment - Create Modifications Change to planned end date
     Then I validate all field values on review modifications page using '<Planned_End_Date>' , '<Organisation_Change_Affect>' and '<Affected_Org_Questions_Change>'
 
     Examples:
-      | Change_Field               | Planned_End_Date      | Organisation_Change_Affect | Affected_Org_Questions | Affected_Org_Questions_Change |
-      | Affected_Nhs_Hsc_Locations | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_All_Fields  | Valid_Data_Optional_Fields    |
-  # | Affected_Nhs_Hsc_Locations       | Valid_Data_All_Fields | NHS_HSC_Only               | Valid_Data_Optional_Fields        | Valid_Data_All_Fields             |
-  # | Portion_Of_Nhs_Hsc_Organisations | Valid_Data_All_Fields | NHS_HSC_Only               | Valid_Data_All_Fields             | Valid_Data_Optional_Fields        |
-  # | Additional_Resource_Implications | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_Optional_Fields        | Valid_Data_All_Fields             |
-  # | Affected_Non_Nhs_Hsc_Locations   | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_Non_Nhs_All_Country    | Valid_Data_Non_Nhs_Single_Country |
-  # | Affected_Non_Nhs_Hsc_Locations   | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_Non_Nhs_Single_Country | Valid_Data_Non_Nhs_All_Country    |
+      | Change_Field                     | Planned_End_Date      | Organisation_Change_Affect | Affected_Org_Questions            | Affected_Org_Questions_Change     |
+      | Affected_Nhs_Hsc_Locations       | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_All_Fields             | Valid_Data_Optional_Fields        |
+      | Affected_Nhs_Hsc_Locations       | Valid_Data_All_Fields | NHS_HSC_Only               | Valid_Data_Optional_Fields        | Valid_Data_All_Fields             |
+      | Portion_Of_Nhs_Hsc_Organisations | Valid_Data_All_Fields | NHS_HSC_Only               | Valid_Data_All_Fields             | Valid_Data_Optional_Fields        |
+      | Additional_Resource_Implications | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_Optional_Fields        | Valid_Data_All_Fields             |
+      | Affected_Non_Nhs_Hsc_Locations   | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_Non_Nhs_All_Country    | Valid_Data_Non_Nhs_Single_Country |
+      | Affected_Non_Nhs_Hsc_Locations   | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_Non_Nhs_Single_Country | Valid_Data_Non_Nhs_All_Country    |
 
 
   @rsp-4171 @changePlannedEndDateValidationsFromReviewChangesPage
@@ -491,7 +483,6 @@ Feature: Create Amendment - Create Modifications Change to planned end date
     And I can see the review changes planned end date page
     And I capture the page screenshot
     Then I validate all field values on review modifications page using '<Planned_End_Date>' , '<Organisation_Change_Affect>' and '<Affected_Org_Questions>'
-
     When I click the change link '<Change_Field>' on review changes planned end date page
     Then I can see the 'Planned_End_Date' page for modifications
     And I capture the page screenshot
@@ -526,7 +517,6 @@ Feature: Create Amendment - Create Modifications Change to planned end date
     And I can see the review changes planned end date page
     And I capture the page screenshot
     Then I validate all field values on review modifications page using '<Planned_End_Date>' , '<Organisation_Change_Affect>' and '<Affected_Org_Questions>'
-
     When I click the change link '<Change_Field>' on review changes planned end date page
     Then I can see the 'Planned_End_Date' page for modifications
     And I capture the page screenshot
