@@ -416,6 +416,7 @@ Then(
       selectAreaOfChangePage,
       participatingOrganisationsPage,
       organisationChangeAffectPage,
+      addDocumentsModificationsPage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
@@ -468,6 +469,10 @@ Then(
       errorMessageFieldDataset =
         organisationChangeAffectPage.organisationChangeAffectPageTestData[errorMessageFieldAndSummaryDatasetName];
       page = organisationChangeAffectPage;
+    } else if (pageKey == 'Add_Document_Modifications_Page') {
+      errorMessageFieldDataset =
+        addDocumentsModificationsPage.addDocumentsModificationsPageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = addDocumentsModificationsPage;
     }
     let allSummaryErrorExpectedValues: any;
     let summaryErrorActualValues: any;
@@ -785,7 +790,7 @@ Given('I logged out from the system', async ({ commonItemsPage }) => {
 
 Then(
   'I can see the list is sorted by default in the alphabetical order of the {string}',
-  async ({ manageUsersPage, manageReviewBodiesPage }, sortField: string) => {
+  async ({ manageUsersPage, manageReviewBodiesPage, reviewUploadedDocumentsModificationsPage }, sortField: string) => {
     let actualList: string[];
     switch (sortField.toLowerCase()) {
       case 'first name':
@@ -793,6 +798,9 @@ Then(
         break;
       case 'organisation name':
         actualList = await manageReviewBodiesPage.getOrgNamesListFromUI();
+        break;
+      case 'uploaded documents':
+        actualList = await reviewUploadedDocumentsModificationsPage.getUploadedDocumentsListFromUI();
         break;
       default:
         throw new Error(`${sortField} is not a valid option`);
@@ -947,7 +955,7 @@ Then('the advanced filters section should collapse automatically', async ({ comm
   await expect(commonItemsPage.apply_filters_button).not.toBeVisible();
 });
 
-Then('I upload {string} documents for modifications', async ({ commonItemsPage }, uploadDocumentsDatasetName) => {
+Then('I upload {string} documents', async ({ commonItemsPage }, uploadDocumentsDatasetName) => {
   const documentPath = commonItemsPage.documentUploadTestData[uploadDocumentsDatasetName];
   await commonItemsPage.upload_files_input.setInputFiles(documentPath);
   if (typeof documentPath === 'string') {

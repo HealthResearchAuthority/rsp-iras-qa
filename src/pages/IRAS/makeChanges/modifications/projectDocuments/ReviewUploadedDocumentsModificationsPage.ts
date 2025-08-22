@@ -1,5 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as reviewUploadedDocumentsModificationsPageTestData from '../../../../../resources/test_data/iras/make_changes/modifications/projectDocuments/review_uploaded_documents_modifications_data.json';
+import { confirmStringNotNull } from '../../../../../utils/UtilFunctions';
 
 //Declare Page Objects
 export default class ReviewUploadedDocumentsModificationsPage {
@@ -51,5 +52,16 @@ export default class ReviewUploadedDocumentsModificationsPage {
         )
       )
       .toBeVisible();
+  }
+
+  async getUploadedDocumentsListFromUI() {
+    const uploadedDocuments: string[] = [];
+    const rowCount = await this.rows.count();
+    for (let i = 1; i < rowCount; i++) {
+      const columns = this.rows.nth(i).getByRole('cell');
+      const uploadedDocument = confirmStringNotNull(await columns.first().textContent());
+      uploadedDocuments.push(uploadedDocument);
+    }
+    return uploadedDocuments;
   }
 }

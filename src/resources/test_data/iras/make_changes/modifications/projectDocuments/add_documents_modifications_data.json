@@ -7,5 +7,8 @@
     "choose_files_button_label": "Choose files",
     "upload_document_component_hint_label": "or drop files",
     "no_files_chosen_label": "No files chosen"
+  },
+  "Field_Error_Upload_Documents_Mandatory": {
+    "upload_files_input": "Please upload at least one document."
   }
 }

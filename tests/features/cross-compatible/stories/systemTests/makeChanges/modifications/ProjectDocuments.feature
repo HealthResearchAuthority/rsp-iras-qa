@@ -35,7 +35,7 @@ Feature: Create Amendment - Project Documents Modifications
     And I capture the page screenshot
     And I validate the project information labels using '<Label_Texts>' dataset displayed on modifications page
     And I validate the ui labels for add documents modifications page
-    Then I upload 'PNG_File' documents for modifications
+    Then I upload 'PNG_File' documents
     When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
     Then I can see the review uploaded documents for '<Specific_Change>' page
     And I capture the page screenshot
@@ -51,28 +51,38 @@ Feature: Create Amendment - Project Documents Modifications
       | Protocol_Non_Substantial_Changes             |
       | Translations_Addition_Of_Translated_Versions |
 
-  @rsp-3876-run @ValidateDocumentUploadAndReviewForModificationsPage
+  @rsp-3876 @ValidateDocumentUploadAndReviewForModificationsPage
   Scenario Outline: Validate the user is able to upload and review documents for modifications
     And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
     Then I can see the add documents for '<Specific_Change>' page
     And I capture the page screenshot
-    Then I upload '<Document_Upload_Files>' documents for modifications
+    Then I upload '<Document_Upload_Files>' documents
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
     Then I can see the review uploaded documents for '<Specific_Change>' page
     And I capture the page screenshot
     And I validate the uploaded '<Document_Upload_Files>' documents are listed along with size and delete option in the review uploaded documents page
+    And I can see the list is sorted by default in the alphabetical order of the 'uploaded documents'
     When I click the 'Add_Another_Document' button on the 'Review_Uploaded_Document_Modifications_Page'
     Then I can see the add documents for '<Specific_Change>' page
     And I capture the page screenshot
-    Then I upload '<Document_Upload_Files_New>' documents for modifications
+    Then I upload '<Document_Upload_Files_New>' documents
     When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
     Then I can see the review uploaded documents for '<Specific_Change>' page
     And I capture the page screenshot
     And I validate the uploaded '<Document_Upload_Files>' documents are listed along with size and delete option in the review uploaded documents page
     And I validate the uploaded '<Document_Upload_Files_New>' documents are listed along with size and delete option in the review uploaded documents page
+    And I can see the list is sorted by default in the alphabetical order of the 'uploaded documents'
+    And I click the 'Back' link on the 'Review_Uploaded_Document_Modifications_Page'
+    Then I can see the add documents for '<Specific_Change>' page
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    Then I validate 'Field_Error_Upload_Documents_Mandatory' displayed on 'Add_Document_Modifications_Page'
+    When I click the 'Save_For_Later' button on the 'Add_Document_Modifications_Page'
+    Then I can see the modification progress saved successful message on project overview page
+    And I capture the page screenshot
 
     Examples:
       | Specific_Change                              | Document_Upload_Files | Document_Upload_Files_New |
@@ -105,6 +115,7 @@ Feature: Create Amendment - Project Documents Modifications
       | Correction_Of_Typographical_Errors           | MSG_File              | GIF_File                  |
       | Correction_Of_Typographical_Errors           | Multiple_Files        | GIF_File                  |
       | Correction_Of_Typographical_Errors           | Multiple_Files        | Multiple_Files            |
+      | Correction_Of_Typographical_Errors           | BMP_File              | Multiple_Files            |
       | CRF_Other_Study_Data_Records                 | Multiple_Files        | GIF_File                  |
       | GDPR_Wording                                 | Multiple_Files        | GIF_File                  |
       | Other_Minor_Change_To_Study_Documents        | Multiple_Files        | GIF_File                  |

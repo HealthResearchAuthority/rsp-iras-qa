@@ -165,5 +165,8 @@
   "Approvals_Page": {
     "Search": "Search",
     "Back": "Back"
+  },
+  "Review_Uploaded_Document_Modifications_Page": {
+    "Back": "Back"
   }
 }

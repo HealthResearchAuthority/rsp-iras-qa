@@ -7,6 +7,7 @@ export default class AddDocumentsModificationsPage {
   readonly addDocumentsModificationsPageTestData: typeof addDocumentsModificationsPageTestData;
   readonly pageHeading: Locator;
   readonly pageLabels: Locator;
+  readonly upload_files_input: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -16,6 +17,7 @@ export default class AddDocumentsModificationsPage {
     //Locators
     this.pageHeading = this.page.getByRole('heading');
     this.pageLabels = this.page.getByRole('paragraph');
+    this.upload_files_input = this.page.getByTestId('Files');
   }
 
   //Page Methods
