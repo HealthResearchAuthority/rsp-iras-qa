@@ -14,6 +14,7 @@ import * as userProfileGeneratedataConfig from '../../resources/test_data/user_a
 import { confirmArrayNotNull, getAuthState, getCurrentTimeFormatted } from '../../utils/UtilFunctions';
 import { Locator } from 'playwright/test';
 import fs from 'fs';
+import path from 'path';
 
 Then('I capture the page screenshot', async () => {});
 
@@ -931,4 +932,19 @@ Then(
 
 Then('the advanced filters section should collapse automatically', async ({ commonItemsPage }) => {
   await expect(commonItemsPage.apply_filters_button).not.toBeVisible();
+});
+
+Then('I upload {string} documents for modifications', async ({ commonItemsPage }, uploadDocumentsDatasetName) => {
+  const documentPath = commonItemsPage.documentUploadTestData[uploadDocumentsDatasetName];
+  await commonItemsPage.upload_files_input.setInputFiles(documentPath);
+  if (typeof documentPath === 'string') {
+    const fileName = path.basename(documentPath);
+    await expect(commonItemsPage.page.getByText(fileName)).toBeVisible();
+  } else {
+    await expect(
+      commonItemsPage.page.getByText(
+        `${documentPath.length}` + commonItemsPage.commonTestData.uploaded_documents_counter_label
+      )
+    ).toBeVisible();
+  }
 });

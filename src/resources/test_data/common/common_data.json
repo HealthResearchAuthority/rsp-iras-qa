@@ -24,6 +24,7 @@
     "using fewer keywords",
     "searching for something less specific"
   ],
+  "uploaded_documents_counter_label": " files chosen",
   "No_Matching_Search_Results": {
     "no_matching_search_result_header_label": "There are no matching results",
     "no_matching_search_result_sub_header_label": "Improve your search results by:",

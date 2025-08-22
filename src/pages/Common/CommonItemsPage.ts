@@ -3,6 +3,7 @@ import * as buttonTextData from '../../resources/test_data/common/button_text_da
 import * as linkTextData from '../../resources/test_data/common/link_text_data.json';
 import * as questionSetData from '../../resources/test_data/common/question_set_data.json';
 import * as commonTestData from '../../resources/test_data/common/common_data.json';
+import * as documentUploadTestData from '../../resources/test_data/common/document_upload_data.json';
 import * as fs from 'fs';
 import path from 'path';
 import ProjectFilterPage from '../IRAS/questionSet/ProjectFilterPage';
@@ -24,6 +25,7 @@ export default class CommonItemsPage {
   readonly linkTextData: typeof linkTextData;
   readonly questionSetData: typeof questionSetData;
   readonly commonTestData: typeof commonTestData;
+  readonly documentUploadTestData: typeof documentUploadTestData;
   readonly showAllSectionsAccordion: Locator;
   readonly genericButton: Locator;
   readonly govUkButton: Locator;
@@ -85,6 +87,7 @@ export default class CommonItemsPage {
   readonly no_results_guidance_text: Locator;
   readonly no_results_heading: Locator;
   readonly apply_filters_button: Locator;
+  readonly upload_files_input: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -93,6 +96,7 @@ export default class CommonItemsPage {
     this.linkTextData = linkTextData;
     this.questionSetData = questionSetData;
     this.commonTestData = commonTestData;
+    this.documentUploadTestData = documentUploadTestData;
 
     //Locators
     this.showAllSectionsAccordion = page.locator('.govuk-accordion__show-all"');
@@ -203,6 +207,7 @@ export default class CommonItemsPage {
       .getByText(this.buttonTextData.Search_Modifications_Page.Apply_Filters, {
         exact: true,
       });
+    this.upload_files_input = this.page.locator('input[type="file"]');
   }
 
   //Page Methods
