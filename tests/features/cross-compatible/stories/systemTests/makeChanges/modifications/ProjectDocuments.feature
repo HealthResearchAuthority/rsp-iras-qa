@@ -33,7 +33,7 @@ Feature: Create Amendment - Project Documents Modifications
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
     Then I can see the add documents for '<Specific_Change>' page
     And I capture the page screenshot
-    And I validate the project information labels using '<Label_Texts>' dataset displayed on modifications page
+    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
     And I validate the ui labels for add documents modifications page
     Then I upload 'PNG_File' documents
     When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
