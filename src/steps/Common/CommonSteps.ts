@@ -862,7 +862,7 @@ Then(
       filterLabels = manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page;
     } else if (pageKey === 'Manage_Users_Page') {
       filterDataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[filterDatasetName];
-      filterLabels = manageUsersPage.manageUsersPageTestData.Manage_Users_Page;
+      filterLabels = manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List;
     }
     const validateFilter = async (key: string, labelFetcher: (key: string) => Promise<string | string[]>) => {
       const labels = await labelFetcher(key);
