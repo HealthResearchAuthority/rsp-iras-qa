@@ -165,7 +165,6 @@ When(
   'I select advanced filters in the manage users page using {string}',
   async ({ manageUsersPage, commonItemsPage }, filterDatasetName: string) => {
     const dataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[filterDatasetName];
-    await manageUsersPage.advanced_filter_chevron.click();
     for (const key in dataset) {
       if (Object.hasOwn(dataset, key)) {
         if (key.includes('date')) {
@@ -258,3 +257,24 @@ Then(
     expect(fieldErrorMessagesActualValues).toEqual(fieldErrorMessagesExpected);
   }
 );
+
+Then(
+  'I retrieve the list of review bodies displayed in the review body checkbox in the advanced filters of manage users page',
+  async ({ manageUsersPage, commonItemsPage }) => {
+    const actualList = await commonItemsPage.getLabelsFromCheckboxes(manageUsersPage.review_body_checkbox);
+    await manageUsersPage.setReviewBodies(actualList);
+  }
+);
+
+Then(
+  'I can see the review body field in the review body checkbox in the advanced filters of manage users page should contain all currently enabled review bodies from the manage review bodies page',
+  async ({ manageUsersPage, manageReviewBodiesPage }) => {
+    const actualList = await manageUsersPage.getReviewBodies();
+    const expectedList = await manageReviewBodiesPage.getOrgNamesListFromUI();
+    expect(actualList).toEqual(expectedList);
+  }
+);
+
+Then('I click the view edit link of the first user in the manage users page', async ({ manageUsersPage }) => {
+  await manageUsersPage.view_edit_link.click();
+});

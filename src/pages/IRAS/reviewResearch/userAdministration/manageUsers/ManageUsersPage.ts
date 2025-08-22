@@ -11,6 +11,7 @@ export default class ManageUsersPage {
   readonly manageUsersPageTestData: typeof manageUsersPageTestData;
   readonly linkTextData: typeof linkTextData;
   private _unique_email: string;
+  private _review_bodies: string[];
   readonly page_heading: Locator;
   readonly search_hint_text: Locator;
   readonly back_button: Locator;
@@ -100,6 +101,7 @@ export default class ManageUsersPage {
     this.page = page;
     this.manageUsersPageTestData = manageUsersPageTestData;
     this._unique_email = '';
+    this._review_bodies = [];
 
     //Locators
     this.page_heading = this.page
@@ -431,6 +433,14 @@ export default class ManageUsersPage {
 
   async setUniqueEmail(value: string): Promise<void> {
     this._unique_email = value;
+  }
+
+  async getReviewBodies(): Promise<string[]> {
+    return this._review_bodies;
+  }
+
+  async setReviewBodies(value: string[]): Promise<void> {
+    this._review_bodies = value;
   }
 
   async assertOnManageUsersPage() {

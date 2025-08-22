@@ -355,6 +355,68 @@
     "Advanced_Filter_Role_Applicant_Status_Disabled": {
       "role_checkbox": ["Applicant"],
       "status_radio": "Disabled"
+    },
+    "Advanced_Filter_Country_No_Review_Body_HRA_Role_No": {
+      "review_body_checkbox": ["QA Automation Health Research Authority (HRA)"]
+    },
+    "Advanced_Filter_Country_No_Review_Body_HSCNI_Role_No": {
+      "review_body_checkbox": ["QA Automation Health and Social Care Northern Ireland (HSCNI)"]
+    },
+    "Advanced_Filter_Country_No_Review_Body_HCRW_Role_No": {
+      "review_body_checkbox": ["QA Automation Health and Care Research Wales (HCRW)"]
+    },
+    "Advanced_Filter_Country_No_Review_Body_NRSPCC_Role_No": {
+      "review_body_checkbox": ["QA Automation National Research Service Permissions Coordination Centre (NRS PCC)"]
+    },
+    "Advanced_Filter_Country_No_Review_Body_No_Role_Applicant": {
+      "role_checkbox": ["Applicant"]
+    },
+    "Advanced_Filter_Country_No_Review_Body_No_Role_Studywide_Reviewer": {
+      "role_checkbox": ["Study-wide reviewer"]
+    },
+    "Advanced_Filter_Country_No_Review_Body_No_Role_System_Admin": {
+      "role_checkbox": ["System administrator"]
+    },
+    "Advanced_Filter_Country_No_Review_Body_No_Role_Workflow_Coordinator": {
+      "role_checkbox": ["Workflow co-ordinator"]
+    },
+    "Advanced_Filter_Country_No_Review_Body_All_Role_All": {
+      "review_body_checkbox": [
+        "QA Automation Health Research Authority (HRA)",
+        "QA Automation Health and Social Care Northern Ireland (HSCNI)",
+        "QA Automation Health and Care Research Wales (HCRW)",
+        "QA Automation National Research Service Permissions Coordination Centre (NRS PCC)"
+      ],
+      "role_checkbox": [
+        "Applicant",
+        "Study-wide reviewer",
+        "System administrator",
+        "Team manager",
+        "Workflow co-ordinator"
+      ]
+    },
+    "Advanced_Filter_Country_All_Review_Body_All_Role_All_Status_Active": {
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "review_body_checkbox": [
+        "QA Automation Health Research Authority (HRA)",
+        "QA Automation Health and Social Care Northern Ireland (HSCNI)",
+        "QA Automation Health and Care Research Wales (HCRW)",
+        "QA Automation National Research Service Permissions Coordination Centre (NRS PCC)"
+      ],
+      "role_checkbox": [
+        "Applicant",
+        "Study-wide reviewer",
+        "System administrator",
+        "Team manager",
+        "Workflow co-ordinator"
+      ],
+      "status_radio": "Active"
+    },
+    "Advanced_Filter_Country_No_Review_Body_No_Role_No_Status_Active_To_Date": {
+      "status_radio": "Active",
+      "date_last_logged_in_from_day_text": "31",
+      "date_last_logged_in_from_month_dropdown": "December",
+      "date_last_logged_in_from_year_text": "1900"
     }
   }
 }
