@@ -17,7 +17,7 @@ Then(
   async ({ commonItemsPage, myResearchProjectsPage }, datasetName: string) => {
     const dataset = myResearchProjectsPage.myResearchProjectsPageTestData[datasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         const labelVal = await commonItemsPage.getUiLabel(key, myResearchProjectsPage);
         expect(labelVal).toBe(dataset[key]);
       }
@@ -28,7 +28,7 @@ Then(
 Then(
   'I can see my research page is sorted by {string} order of the {string}',
   async (
-    { searchModificationsPage, modificationsReadyToAssignPage, commonItemsPage },
+    { searchModificationsPage, modificationsReadyToAssignPage, myResearchProjectsPage, commonItemsPage },
     sortDirection: string,
     sortField: string
   ) => {
@@ -51,10 +51,8 @@ Then(
         throw new Error(`${sortField} is not a valid option`);
     }
     const actualList = await searchModificationsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
-    if (sortField.toLowerCase() == 'modification id') {
-      sortedList = await searchModificationsPage.sortModificationIdListValues(actualList, sortDirection);
-    } else if (sortField.toLowerCase() == 'iras id') {
-      sortedList = await searchModificationsPage.sortModificationIdListValues(actualList, sortDirection);
+    if (sortField.toLowerCase() == 'iras id') {
+      sortedList = await myResearchProjectsPage.sortIrasIdListValues(actualList, sortDirection);
     } else if (sortField.toLowerCase() == 'date created') {
       sortedList = await modificationsReadyToAssignPage.sortDateSubmittedListValues(actualList, sortDirection);
     } else if (sortDirection.toLowerCase() == 'ascending') {
@@ -67,21 +65,14 @@ Then(
 );
 
 Then(
-  'I click the {string} link for {string} on the my research page',
-  async ({ myResearchProjectsPage }, shortProjectTitle: string, irasId: string) => {
-    const foundRecords = await myResearchProjectsPage.findProjectLink(shortProjectTitle, irasId);
+  'I click the {string} link on the my research page',
+  async ({ projectOverviewPage, myResearchProjectsPage }, datasetName: string) => {
+    const dataset = projectOverviewPage.projectOverviewPageTestData[datasetName];
+    const shortProjectTitleData = dataset.short_project_title_text;
+    const irasidData = dataset.iras_ID;
+    const foundRecords = await myResearchProjectsPage.findProjectLink(shortProjectTitleData, irasidData);
     expect(foundRecords).toBeDefined();
     expect(foundRecords).toHaveCount(1);
     await foundRecords.locator(myResearchProjectsPage.titlelink).click();
   }
 );
-
-// Then(
-//   'I can see the short project title on my research page for {string}',
-//   async ({ projectDetailsTitlePage, projectOverviewPage }, datasetName: string) => {
-//     const dataset = projectDetailsTitlePage.projectDetailsTitlePageTestData[datasetName];
-//     const expectedProjectTitle = dataset.short_project_title_text;
-//     const actualProjectTitle = confirmStringNotNull(await projectOverviewPage.project_short_title_label.textContent());
-//     expect(actualProjectTitle).toBe(expectedProjectTitle);
-//   }
-// );

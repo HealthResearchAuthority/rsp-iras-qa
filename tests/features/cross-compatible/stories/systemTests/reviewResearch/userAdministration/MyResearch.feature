@@ -43,7 +43,7 @@ Feature: User Administration: My Research
     Examples:
       | Sort_Button         | Sort_Field          |
       | Short_Project_Title | short project title |
-      # | Iras_Id             | iras id             |
+      | Iras_Id             | iras id             |
       | Date_Created        | date created        |
 
   @rsp-2854 @MyResearchPagination @MyResearchPaginationFirstPage
@@ -62,19 +62,3 @@ Feature: User Administration: My Research
     And the 'Next' button will be 'not available' to the user
     And I capture the page screenshot
 
-  @rsp-1864 @abc
-  Scenario Outline: Verify the user is able to sort the list of projects under my research by ascending and descending order for each table column other than status
-    And I can see the '<Validation_Text>' ui labels on the my research project page
-    And I capture the page screenshot
-    #And I select a 'QA Automation' User to View and Edit which is 'active'
-    #And I can see the user profile page
-    And I click the 'QA_Automation - This is a short project title' link for '<Iras_Id>' on the my research page
-    And I can see the project overview page
-    
-    #And I click the 'QA_Automation' link for '<Iras_Id>' on the my research page
-
-
-    Examples:
-      | Validation_Text | Iras_Id |
-      | Label_Texts     | 8634211 |
-#| Label_Texts     | 5235198 |

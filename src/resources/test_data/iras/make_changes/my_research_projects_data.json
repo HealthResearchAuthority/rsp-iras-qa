@@ -3,13 +3,19 @@
     "heading": "My research",
     "search": "Search",
     "advanced_filter_label": "Advanced filter",
-    "add_project_record_button_label": "Add project"
+    "add_project_record_button_label": "Add project",
+    "next_button": "Next   page",
+    "short_project_title_text": "QA_Automation - This is a short project title"
   },
 
-  "Valid_Iras_Id": { "One": "8634211" },
+  "Valid_Project_Details_Nhs": {
+    "short_project_title_text": "QA_Automation - This is a short project title",
+    "iras_ID": "4795057"
+  },
 
-  "Valid_Iras_Id_Two": {
-    "iras_id_title": "5235198"
+  "Valid_Project_Details_Non_Nhs": {
+    "short_project_title_text": "QA_Automation - This is a short project title",
+    "iras_ID": "4545787"
   },
 
   "No_Projects_Label_Texts": {

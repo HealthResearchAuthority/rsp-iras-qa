@@ -1,7 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as myResearchProjectsPageTestData from '../../../resources/test_data/iras/make_changes/my_research_projects_data.json';
 import * as buttonTextData from '../../../resources/test_data/common/button_text_data.json';
-import * as buttonTextData from '../../../resources/test_data/common/button_text_data.json';
 
 //Declare Page Objects
 export default class MyResearchProjectsPage {
@@ -20,6 +19,7 @@ export default class MyResearchProjectsPage {
   readonly projectListRows: Locator;
   readonly listCell: Locator;
   readonly titlelink: Locator;
+  readonly next_button: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -38,25 +38,13 @@ export default class MyResearchProjectsPage {
     this.add_project_record_button_label = this.page.getByRole('link', {
       name: this.myResearchProjectsPageTestData.My_Research_Projects_Page.add_project_record_button_label,
     });
-    // this.add_project_record_button_label = this.page.getByRole('link', {
-    //   name: this.buttonTextData.My_Research_Projects_Page.Add_project_record,
-    //   exact: true,
-    // });
     this.project_search_button_label = this.page.getByRole('button', {
       name: this.myResearchProjectsPageTestData.My_Research_Projects_Page.search,
       exact: true,
     });
-    // this.project_search_button_label = this.page.getByRole('button', {
-    //   name: this.buttonTextData.My_Research_Projects_Page.Search,
-    //   exact: true,
-    // });
     this.advanced_filter_label = this.page.getByRole('button', {
       name: this.myResearchProjectsPageTestData.My_Research_Projects_Page.advanced_filter_label,
     });
-    // this.advanced_filter_label = this.page.getByRole('button', {
-    //   name: this.buttonTextData.My_Research_Projects_Page.Advanced_filter,
-    //   exact: true,
-    // });
     this.short_project_title_link = this.page.getByRole('button', {
       name: this.myResearchProjectsPageTestData.Label_Texts.short_project_title_link,
       exact: true,
@@ -76,7 +64,11 @@ export default class MyResearchProjectsPage {
     this.projectListRows = this.page.locator('tbody').getByRole('row');
     this.listCell = this.page.getByRole('cell');
     this.titlelink = this.page.getByRole('link', {
-      name: 'QA_Automation - This is a short project title',
+      name: this.myResearchProjectsPageTestData.My_Research_Projects_Page.short_project_title_text,
+      exact: true,
+    });
+    this.next_button = this.page.getByRole('button', {
+      name: this.myResearchProjectsPageTestData.My_Research_Projects_Page.next_button,
       exact: true,
     });
   }
@@ -92,16 +84,50 @@ export default class MyResearchProjectsPage {
   }
 
   async findProjectLink(shortProjectTitle: string, irasId: string) {
-    const rows = await this.projectListRows.all();
+    let hasNextPage = true;
+    while (hasNextPage) {
+      const rows = await this.projectListRows.all();
+      for (const row of rows) {
+        const columns = await row.locator(this.listCell).allInnerTexts();
+        const matchesSearchKey = columns[0].trim().includes(shortProjectTitle);
 
-    for (const row of rows) {
-      const columns = await row.locator(this.listCell).allInnerTexts();
-      const matchesSearchKey = columns[0].trim().includes(shortProjectTitle);
-
-      if (matchesSearchKey && columns[1].trim() === irasId) {
-        return row;
+        if (matchesSearchKey && columns[1].trim() === irasId) {
+          return row;
+        }
       }
-      throw new Error(`No matching record found`);
+      hasNextPage = (await this.next_button.isVisible()) && !(await this.next_button.isDisabled());
+      if (hasNextPage) {
+        await this.next_button.click();
+        await this.page.waitForLoadState('domcontentloaded');
+      }
     }
+    throw new Error(`No matching record found`);
+  }
+
+  async sortIrasIdListValues(irasIds: string[], sortDirection: string): Promise<string[]> {
+    let sortedListAsNums: number[];
+    const sortedListAsStrings: string[] = [];
+    const formattedIrasIds = irasIds.map(Number);
+    if (sortDirection.toLowerCase() == 'ascending') {
+      sortedListAsNums = formattedIrasIds.toSorted((a, b) => {
+        if (a[0] - b[0] == 0) {
+          return a[1] - b[1];
+        } else {
+          return a[0] - b[0];
+        }
+      });
+    } else {
+      sortedListAsNums = formattedIrasIds.toSorted((a, b) => {
+        if (b[0] - a[0] == 0) {
+          return b[1] - a[1];
+        } else {
+          return b[0] - a[0];
+        }
+      });
+    }
+    for (const entry of sortedListAsNums.entries()) {
+      sortedListAsStrings.push(entry[1].toString());
+    }
+    return sortedListAsStrings;
   }
 }
