@@ -39,11 +39,11 @@ export default class ChangePlannedEndDateReviewModificationsPage {
     //Locators
     this.pageHeading = this.page
       .getByRole('heading', { level: 1 })
-      .getByText(reviewChangesPlannedEndDatePageTestData.Review_changes_Page.page_heading_label);
+      .getByText(reviewChangesPlannedEndDatePageTestData.Review_Changes_Page.page_heading_label);
 
     this.sub_heading_specific_change_label = this.page
       .getByRole('heading', { level: 2 })
-      .getByText(reviewChangesPlannedEndDatePageTestData.Label_Texts_Nhs.sub_heading_specific_change_label);
+      .getByText(reviewChangesPlannedEndDatePageTestData.Review_Changes_Page.sub_heading_specific_change_label);
 
     this.new_planned_project_end_date_row = this.page.getByText(
       reviewChangesPlannedEndDatePageTestData.Label_Texts_Nhs.new_planned_project_end_date_label
@@ -112,11 +112,6 @@ export default class ChangePlannedEndDateReviewModificationsPage {
   async assertOnReviewChangesPlannedEndDatePage() {
     await expect(this.pageHeading).toBeVisible();
     await expect(this.sub_heading_specific_change_label).toBeVisible();
-  }
-  async getNonNhsResearchLocations() {
-    return this.page.getByText(
-      reviewChangesPlannedEndDatePageTestData.Label_Texts_Non_Nhs.affected_non_nhs_hsc_locations_label
-    );
   }
 
   async clickChangeLinks(changeLink: string) {

@@ -1,5 +1,5 @@
-@ApplicantUser @createModifications @createApplicabilityModifications @SystemTest @jsEnabled
-Feature: Create Amendment - Create Applicability Modifications
+@ApplicantUser @createModifications @createModificationsPlannedEndDateChange @SystemTest @jsEnabled
+Feature: Create Amendment - Create Modifications Change to planned end date
 
   Background:
     Given I have navigated to the my research projects page
@@ -23,6 +23,7 @@ Feature: Create Amendment - Create Applicability Modifications
     When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
     Then I can see the project overview page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
     And I select 'Project_Design' from area of change dropdown and 'Planned_End_Date' from specific change dropdown
@@ -205,8 +206,9 @@ Feature: Create Amendment - Create Applicability Modifications
     Then I can see the 'Affected_Organisation_Selection_Page' page for modifications
     And I fill the which organisation this change affect modifications page with '<Organisation_Change_Affect>'
     And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Affected_Organisation_Selection_page'
+    When I click the 'Save_Continue' button on the 'Affected_Organisation_Selection_Page'
     Then I can see the change planned end date affected organisation questions page
+    And I capture the page screenshot
     And I validate the project information labels using '<Label_Texts>' dataset displayed on modifications page
     And I validate the ui labels using '<Label_Text_Affected_Org_Questions>' on affected organisation questions page
 
@@ -233,18 +235,18 @@ Feature: Create Amendment - Create Applicability Modifications
     And I capture the page screenshot
     When I click the 'Save_For_Later' button on the 'Affected_Organisation_Questions_Page'
     And I can see the project overview page
-    Then I can see the modification progress saved successful message on project overview page
     And I capture the page screenshot
+    Then I can see the modification progress saved successful message on project overview page
 
     Examples:
-      | Planned_End_Date      | Organisation_Change_Affect | Label_Texts           | Affected_Org_Questions         | Label_Text_Review_Modifications |
-      | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_All_Fields | Valid_Data_All_Fields          | Label_Texts_Nhs                 |
-      | Valid_Data_All_Fields | NHS_HSC_Only               | Valid_Data_All_Fields | Empty_Data_All_Fields          | Label_Texts_Nhs                 |
-      | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_All_Fields | Valid_Data_Non_Nhs_All_Country | Label_Texts_Non_Nhs             |
-      | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_All_Fields | Empty_Data_Non_Nhs             | Label_Texts_Non_Nhs             |
+      | Planned_End_Date      | Organisation_Change_Affect | Affected_Org_Questions         |
+      | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_All_Fields          |
+      | Valid_Data_All_Fields | NHS_HSC_Only               | Empty_Data_All_Fields          |
+      | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_Non_Nhs_All_Country |
+      | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Empty_Data_Non_Nhs             |
 
 
-  @rsp4171 @rsp-4611 @createModificationsToChangePlannedEndDateAndReviewChanges
+  @rsp-4171 @rsp-4611 @createModificationsToChangePlannedEndDateAndReviewChanges
   Scenario Outline: Create modifications for change planned end date and review the modifications details on review changes page
     Then I can see the 'Planned_End_Date' page for modifications
     And I capture the page screenshot
@@ -264,16 +266,18 @@ Feature: Create Amendment - Create Applicability Modifications
     And I capture the page screenshot
     And I validate the project information labels using '<Label_Texts>' dataset displayed on modifications page
     Then I validate all field values on review modifications page using '<Planned_End_Date>' , '<Organisation_Change_Affect>' and '<Affected_Org_Questions>'
-    # Save and continue will be covered in future stories rsp-4271
+    # Save and continue will be covered in future story rsp-4271
 
     Examples:
-      | Planned_End_Date      | Organisation_Change_Affect | Label_Texts           | Affected_Org_Questions         | Label_Text_Review_Modifications |
-      | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_All_Fields | Valid_Data_All_Fields          | Label_Texts_Nhs                 |
-      | Valid_Data_All_Fields | NHS_HSC_Only               | Valid_Data_All_Fields | Valid_Data_Optional_Fields     | Label_Texts_Nhs                 |
-      | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_All_Fields | Valid_Data_Non_Nhs_All_Country | Label_Texts_Non_Nhs             |
+      | Planned_End_Date      | Organisation_Change_Affect | Label_Texts           | Affected_Org_Questions         |
+      | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_All_Fields | Valid_Data_All_Fields          |
+      | Valid_Data_All_Fields | NHS_HSC_Only               | Valid_Data_All_Fields | Valid_Data_Optional_Fields     |
+      | Valid_Data_All_Fields | NHS_HSC_Only               | Valid_Data_All_Fields | Empty_Data_All_Fields          |
+      | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_All_Fields | Valid_Data_Non_Nhs_All_Country |
+      | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_All_Fields | Empty_Data_Non_Nhs             |
 
 
-  @rsp-4171 @saveLaterReviewChangesPage
+  @rsp-4171 @rsp-4611 @saveLaterReviewChangesPage
   Scenario Outline: Verify that modifications progress successfully saved when user saves the record from review changes page
     Then I can see the 'Planned_End_Date' page for modifications
     And I capture the page screenshot
@@ -293,13 +297,13 @@ Feature: Create Amendment - Create Applicability Modifications
     And I capture the page screenshot
     When I click the 'Save_For_Later' button on the 'Review_Changes_Planned_End_Date_Page'
     And I can see the project overview page
-    Then I can see the modification progress saved successful message on project overview page
     And I capture the page screenshot
+    Then I can see the modification progress saved successful message on project overview page
 
     Examples:
-      | Planned_End_Date      | Organisation_Change_Affect | Label_Texts           | Affected_Org_Questions         | Label_Text_Review_Modifications |
-      | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_All_Fields | Valid_Data_All_Fields          | Label_Texts_Nhs                 |
-      | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_All_Fields | Valid_Data_Non_Nhs_All_Country | Label_Texts_Non_Nhs             |
+      | Planned_End_Date      | Organisation_Change_Affect | Affected_Org_Questions         |
+      | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_All_Fields          |
+      | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_Non_Nhs_All_Country |
 
   @rsp-4171 @ChangePlannedEndDateDataPersistenceValidations
   Scenario Outline: Verify that system retains the data on all modifications pages when user navigates back from review changes page
@@ -343,13 +347,13 @@ Feature: Create Amendment - Create Applicability Modifications
 
 
     Examples:
-      | Planned_End_Date      | Organisation_Change_Affect | Label_Texts           | Affected_Org_Questions         | Label_Text_Review_Modifications |
-      | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_All_Fields | Valid_Data_All_Fields          | Label_Texts_Nhs                 |
-      | Valid_Data_All_Fields | NHS_HSC_Only               | Valid_Data_All_Fields | Valid_Data_Optional_Fields     | Label_Texts_Nhs                 |
-      | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_All_Fields | Valid_Data_Non_Nhs_All_Country | Label_Texts_Non_Nhs             |
+      | Planned_End_Date      | Organisation_Change_Affect | Label_Texts           | Affected_Org_Questions         |
+      | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_All_Fields | Valid_Data_All_Fields          |
+      | Valid_Data_All_Fields | NHS_HSC_Only               | Valid_Data_All_Fields | Valid_Data_Optional_Fields     |
+      | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_All_Fields | Valid_Data_Non_Nhs_All_Country |
 
 
-  @modifyPlannedEndDateFromReviewChangesPage
+  @rsp-4171 @modifyPlannedEndDateFromReviewChangesPage
   Scenario Outline: Verify that user can change the planned end date from review modifications page
     Then I can see the 'Planned_End_Date' page for modifications
     And I capture the page screenshot
@@ -371,11 +375,14 @@ Feature: Create Amendment - Create Applicability Modifications
 
     When I click the change link '<Change_Field>' on review changes planned end date page
     Then I can see the 'Planned_End_Date' page for modifications
+    And I capture the page screenshot
     When I click the 'Back' link on the 'Planned_End_Date_Change_Page'
+    And I capture the page screenshot
     And I can see the review changes planned end date page
 
     When I click the change link '<Change_Field>' on review changes planned end date page
     Then I can see the 'Planned_End_Date' page for modifications
+    And I capture the page screenshot
     And I fill the planned project end date modifications page with '<Planned_End_Date_Change>'
     And I capture the page screenshot
     When I click the 'Save_Changes' button on the 'Modifications_Page'
@@ -384,8 +391,8 @@ Feature: Create Amendment - Create Applicability Modifications
     Then I validate all field values on review modifications page using '<Planned_End_Date_Change>' , '<Organisation_Change_Affect>' and '<Affected_Org_Questions>'
 
     Examples:
-      | Change_Field         | Planned_End_Date      | Planned_End_Date_Change      | Organisation_Change_Affect | Label_Texts           | Affected_Org_Questions |
-      | New_Planned_End_Date | Valid_Data_All_Fields | Valid_Data_All_Fields_Change | Valid_Data_All_Fields      | Valid_Data_All_Fields | Valid_Data_All_Fields  |
+      | Change_Field         | Planned_End_Date      | Planned_End_Date_Change      | Organisation_Change_Affect | Affected_Org_Questions |
+      | New_Planned_End_Date | Valid_Data_All_Fields | Valid_Data_All_Fields_Change | Valid_Data_All_Fields      | Valid_Data_All_Fields  |
 
   @rsp-4171 @modifyAffectedOrganisationTypesFromReviewChangesPage
   Scenario Outline: Verify that user can change the affected organisation types from review modifications page
@@ -414,7 +421,7 @@ Feature: Create Amendment - Create Applicability Modifications
     When I click the 'Save_Changes' button on the 'Affected_Organisation_Selection_Page'
     Then I can see the change planned end date affected organisation questions page
     And I fill the affected organisation questions page with '<Affected_Org_Questions_Change>'
-
+    And I capture the page screenshot
     When I click the 'Save_Changes' button on the 'Affected_Organisation_Questions_Page'
     And I can see the review changes planned end date page
     And I capture the page screenshot
@@ -449,20 +456,20 @@ Feature: Create Amendment - Create Applicability Modifications
     Then I can see the change planned end date affected organisation questions page
     And I capture the page screenshot
     And I fill the affected organisation questions page with '<Affected_Org_Questions_Change>'
-
+    And I capture the page screenshot
     When I click the 'Save_Changes' button on the 'Affected_Organisation_Questions_Page'
     And I can see the review changes planned end date page
     And I capture the page screenshot
     Then I validate all field values on review modifications page using '<Planned_End_Date>' , '<Organisation_Change_Affect>' and '<Affected_Org_Questions_Change>'
 
     Examples:
-      | Change_Field                     | Planned_End_Date      | Organisation_Change_Affect | Affected_Org_Questions            | Affected_Org_Questions_Change     |
-      | Affected_Nhs_Hsc_Locations       | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_All_Fields             | Valid_Data_Optional_Fields        |
-      | Affected_Nhs_Hsc_Locations       | Valid_Data_All_Fields | NHS_HSC_Only               | Valid_Data_Optional_Fields        | Valid_Data_All_Fields             |
-      | Portion_Of_Nhs_Hsc_Organisations | Valid_Data_All_Fields | NHS_HSC_Only               | Valid_Data_All_Fields             | Valid_Data_Optional_Fields        |
-      | Additional_Resource_Implications | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_Optional_Fields        | Valid_Data_All_Fields             |
-      | Affected_Non_Nhs_Hsc_Locations   | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_Non_Nhs_All_Country    | Valid_Data_Non_Nhs_Single_Country |
-      | Affected_Non_Nhs_Hsc_Locations   | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_Non_Nhs_Single_Country | Valid_Data_Non_Nhs_All_Country    |
+      | Change_Field               | Planned_End_Date      | Organisation_Change_Affect | Affected_Org_Questions | Affected_Org_Questions_Change |
+      | Affected_Nhs_Hsc_Locations | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_All_Fields  | Valid_Data_Optional_Fields    |
+  # | Affected_Nhs_Hsc_Locations       | Valid_Data_All_Fields | NHS_HSC_Only               | Valid_Data_Optional_Fields        | Valid_Data_All_Fields             |
+  # | Portion_Of_Nhs_Hsc_Organisations | Valid_Data_All_Fields | NHS_HSC_Only               | Valid_Data_All_Fields             | Valid_Data_Optional_Fields        |
+  # | Additional_Resource_Implications | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_Optional_Fields        | Valid_Data_All_Fields             |
+  # | Affected_Non_Nhs_Hsc_Locations   | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_Non_Nhs_All_Country    | Valid_Data_Non_Nhs_Single_Country |
+  # | Affected_Non_Nhs_Hsc_Locations   | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_Non_Nhs_Single_Country | Valid_Data_Non_Nhs_All_Country    |
 
 
   @rsp-4171 @changePlannedEndDateValidationsFromReviewChangesPage
@@ -487,6 +494,7 @@ Feature: Create Amendment - Create Applicability Modifications
 
     When I click the change link '<Change_Field>' on review changes planned end date page
     Then I can see the 'Planned_End_Date' page for modifications
+    And I capture the page screenshot
     And I fill the planned project end date modifications page with '<Planned_End_Date_Change>'
     When I click the 'Save_Changes' button on the 'Modifications_Page'
     And I capture the page screenshot
@@ -521,6 +529,7 @@ Feature: Create Amendment - Create Applicability Modifications
 
     When I click the change link '<Change_Field>' on review changes planned end date page
     Then I can see the 'Planned_End_Date' page for modifications
+    And I capture the page screenshot
     Then I fill todays date in planned project end date for modifications
     When I click the 'Save_Changes' button on the 'Modifications_Page'
     And I capture the page screenshot

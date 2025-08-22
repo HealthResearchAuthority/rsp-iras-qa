@@ -1,6 +1,8 @@
 {
-  "Label_Texts": {
-    "page_heading_label": "Change to planned end date",
+  "Affected_Organisation_Question_Page": {
+    "page_heading_label": "Change to planned end date"
+  },
+  "Label_Texts_Nhs_Hsc": {
     "where_organisation_change_affect_hint_label": "Select all that apply",
     "where_organisation_change_affect_nhs_question_label": "Where are the participating NHS/HSC organisations that will be affected by this change?",
     "will_some_or_all_organisations_be_affected_hint_label": "This answer may affect the categorisation for the change",

@@ -14,7 +14,9 @@ export default class ChangePlannedEndDateAffectedOrganisationQuestionsPage {
   readonly checkbox_fieldset: Locator;
   readonly where_organisation_change_affect_nhs_question_checkbox: Locator;
   readonly where_organisation_change_affect_non_nhs_question_checkbox: Locator;
+  readonly where_organisation_change_affect_hint_label: Locator;
   readonly will_some_or_all_organisations_be_affected_question_label: Locator;
+  readonly will_some_or_all_organisations_be_affected_hint_label: Locator;
   readonly will_some_or_all_organisations_radio_fieldset: Locator;
   readonly will_some_or_all_organisations_be_affected_question_radio: Locator;
   readonly will_nhs_hsc_organisations_require_additional_resources_question_label: Locator;
@@ -31,14 +33,26 @@ export default class ChangePlannedEndDateAffectedOrganisationQuestionsPage {
     //Locators
     this.pageHeading = this.page
       .getByRole('heading', { level: 1 })
-      .getByText(affectedOrganisationQuestionsPageTestData.Label_Texts.page_heading_label);
+      .getByText(affectedOrganisationQuestionsPageTestData.Affected_Organisation_Question_Page.page_heading_label);
 
     this.where_organisation_change_affect_nhs_question_label = this.page
       .locator('.govuk-label')
       .getByText(
-        this.affectedOrganisationQuestionsPageTestData.Label_Texts.where_organisation_change_affect_nhs_question_label
+        this.affectedOrganisationQuestionsPageTestData.Label_Texts_Nhs_Hsc
+          .where_organisation_change_affect_nhs_question_label
+      );
+    this.where_organisation_change_affect_hint_label = this.page
+      .locator('.govuk-hint')
+      .getByText(
+        this.affectedOrganisationQuestionsPageTestData.Label_Texts_Nhs_Hsc.where_organisation_change_affect_hint_label
       );
 
+    this.will_some_or_all_organisations_be_affected_hint_label = this.page
+      .locator('.govuk-hint')
+      .getByText(
+        this.affectedOrganisationQuestionsPageTestData.Label_Texts_Nhs_Hsc
+          .will_some_or_all_organisations_be_affected_hint_label
+      );
     this.where_organisation_change_affect_nhs_question_checkbox = this.page
       .getByTestId('SelectedLocations_checkboxes')
       .getByRole('checkbox');
@@ -50,7 +64,7 @@ export default class ChangePlannedEndDateAffectedOrganisationQuestionsPage {
     this.will_some_or_all_organisations_be_affected_question_label = this.page
       .locator('.govuk-label')
       .getByText(
-        this.affectedOrganisationQuestionsPageTestData.Label_Texts
+        this.affectedOrganisationQuestionsPageTestData.Label_Texts_Nhs_Hsc
           .will_some_or_all_organisations_be_affected_question_label,
         { exact: true }
       );
@@ -63,7 +77,7 @@ export default class ChangePlannedEndDateAffectedOrganisationQuestionsPage {
     this.will_nhs_hsc_organisations_require_additional_resources_question_label = this.page
       .locator('.govuk-label')
       .getByText(
-        this.affectedOrganisationQuestionsPageTestData.Label_Texts
+        this.affectedOrganisationQuestionsPageTestData.Label_Texts_Nhs_Hsc
           .will_nhs_hsc_organisations_require_additional_resources_question_label,
         { exact: true }
       );
