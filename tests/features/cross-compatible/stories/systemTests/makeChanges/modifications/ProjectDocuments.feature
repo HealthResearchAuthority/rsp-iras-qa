@@ -1,4 +1,4 @@
-@FrontStageUser @createModifications @projectDocumentsModifications @SystemTest @jsEnabled
+@ApplicantUser @createModifications @projectDocumentsModifications @SystemTest @jsEnabled
 Feature: Create Amendment - Project Documents Modifications
 
   Background:

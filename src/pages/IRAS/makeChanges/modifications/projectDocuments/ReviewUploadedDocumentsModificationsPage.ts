@@ -20,8 +20,7 @@ export default class ReviewUploadedDocumentsModificationsPage {
     this.pageHeading = this.page.getByRole('heading');
     this.pageLabels = this.page.getByRole('paragraph');
     this.table = this.page.getByRole('table');
-    this.rows = this.table.locator('tr');
-    this.cells = this.page.locator('td');
+    this.rows = this.page.locator('tr');
   }
 
   //Page Methods
