@@ -123,7 +123,6 @@ Feature: Create Amendment - Create Modifications
       | Participating_Organisation | Addition_Of_Participant_Identification_Centres_Option      | Valid_Data_All_Fields | Modifications_Tile      |
       | Participating_Organisation | Early_closure_Of_Participant_Identification_Centres_Option | Valid_Data_All_Fields | Modifications_Tile      |
 
-
   @ParticipatingOrganisationsErrorValidationRegression
   Scenario Outline: Validate the mandatory field error message on participating organisation page
     When I click the '<Modifications_Tile_Link>' link on the 'Project_Overview_Page'
@@ -138,3 +137,40 @@ Feature: Create Amendment - Create Modifications
     Examples:
       | Field_And_Summary_Error_Message              | Area_Of_Change             | Specific_Change          | Modifications_Tile_Link |
       | Field_Error_participating_organisations_text | Participating_Organisation | Addition_Of_sites_Option | Modifications_Tile      |
+
+  @ValidateDocumentUploadAndReviewForModificationsPageRegression
+  Scenario Outline: Validate the user is able to upload and review documents for modifications
+    And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+    Then I can see the add documents for '<Specific_Change>' page
+    And I capture the page screenshot
+    Then I upload '<Document_Upload_Files>' documents
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    Then I can see the review uploaded documents for '<Specific_Change>' page
+    And I capture the page screenshot
+    And I validate the uploaded '<Document_Upload_Files>' documents are listed along with size and delete option in the review uploaded documents page
+    And I can see the list is sorted by default in the alphabetical order of the 'uploaded documents'
+    When I click the 'Add_Another_Document' button on the 'Review_Uploaded_Document_Modifications_Page'
+    Then I can see the add documents for '<Specific_Change>' page
+    And I capture the page screenshot
+    Then I upload '<Document_Upload_Files_New>' documents
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    Then I can see the review uploaded documents for '<Specific_Change>' page
+    And I capture the page screenshot
+    And I validate the uploaded '<Document_Upload_Files>' documents are listed along with size and delete option in the review uploaded documents page
+    And I validate the uploaded '<Document_Upload_Files_New>' documents are listed along with size and delete option in the review uploaded documents page
+    And I can see the list is sorted by default in the alphabetical order of the 'uploaded documents'
+    And I click the 'Back' link on the 'Review_Uploaded_Document_Modifications_Page'
+    Then I can see the add documents for '<Specific_Change>' page
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    Then I validate 'Field_Error_Upload_Documents_Mandatory' displayed on 'Add_Document_Modifications_Page'
+    When I click the 'Save_For_Later' button on the 'Add_Document_Modifications_Page'
+    Then I can see the modification progress saved successful message on project overview page
+    And I capture the page screenshot
+
+    Examples:
+      | Specific_Change                    | Document_Upload_Files | Document_Upload_Files_New |
+      | Correction_Of_Typographical_Errors | Multiple_Files        | Multiple_Files            |
