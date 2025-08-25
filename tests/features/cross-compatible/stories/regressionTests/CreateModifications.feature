@@ -1,4 +1,4 @@
-@FrontStageUser @CreateModificationRegression @Regression @jsEnabled
+@ApplicantUser @CreateModificationRegression @Regression @jsEnabled
 Feature: Create Amendment - Create Modifications
 
   Background:

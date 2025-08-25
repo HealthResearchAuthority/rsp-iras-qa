@@ -21,7 +21,7 @@
     "Proceed_Submit": "Proceed to Submit"
   },
   "My_Research_Projects_Page": {
-    "Create_Project_Record": "Create project record"
+    "Create_Project_Record": "Add project"
   },
   "Create_Project_Record_Page": {
     "Start": "Start"
@@ -87,16 +87,21 @@
     "Search": "Search"
   },
   "Manage_Review_Bodies_Page": {
-    "Search": "Search"
+    "Search": "Search",
+    "Advanced_Filters": "Advanced filters",
+    "Apply_filters": "Apply filters"
   },
   "Review_Your_Answers_Page": {
     "Confirm_Project_Details": "Confirm project details"
   },
   "Manage_Users_Page": {
-    "Search": "Search"
+    "Search": "Search",
+    "Advanced_Filters": "Advanced filters",
+    "Apply_Filters": "Apply filters"
   },
   "Search_Modifications_Page": {
-    "Apply_filters": "Apply filters",
+    "Advanced_Filters": "Advanced filters",
+    "Apply_Filters": "Apply filters",
     "Search": "Search",
     "Modification_Id": "Modification ID",
     "Short_Project_Title": "Short project title",
@@ -110,7 +115,8 @@
     "Modification_Type": "Modification type",
     "Date_Submitted": "Date submitted",
     "Days_Since_Submission": "Days since submission",
-    "Continue_to_assign_modifications": "Continue to assign modifications"
+    "Continue_to_assign_modifications": "Continue to assign modifications",
+    "Advanced_Filters": "Advanced filters"
   },
   "Participating_Organisations_Page": {
     "Save_Continue": "Save and continue",
@@ -118,6 +124,10 @@
     "Search": "Search"
   },
   "Select_Area_Of_Change_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later"
+  },
+  "Modifications_Page": {
     "Save_Continue": "Save and continue",
     "Save_For_Later": "Save for later"
   }

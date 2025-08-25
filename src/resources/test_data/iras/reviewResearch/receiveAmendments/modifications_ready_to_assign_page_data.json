@@ -3,7 +3,8 @@
     "modifications_tasklist_link": "Modifications tasklist",
     "page_heading": "Modifications ready to assign",
     "page_description": "This page shows all the modifications that are ready for you to assign, where the lead nation is England.",
-    "advanced_filter_label": "Advanced filter",
+    "modification_button_label": "Continue to assign modifications",
+    "advanced_filter_label": "Advanced filters",
     "modification_checkbox": "selectedOrganisationIds",
     "tasklist_days_suffix": "days",
     "maxPagesToVisit": 2

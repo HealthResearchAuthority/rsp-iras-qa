@@ -1,4 +1,4 @@
-@ReceiveAmendments @ModificationsReadyToAssign @FrontStageUser @SystemTest
+@ReceiveAmendments @ModificationsReadyToAssign @ApplicantUser @SystemTest
 Feature: Modifications Tasklist page that displays modifications ready to be assigned
 
     Background:
