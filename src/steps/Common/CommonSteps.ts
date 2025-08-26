@@ -482,6 +482,15 @@ Then(
       summaryErrorActualValues = await commonItemsPage.getSummaryErrorMessages();
     }
     expect(summaryErrorActualValues).toEqual(allSummaryErrorExpectedValues);
+    if (pageKey == 'Participating_Organisations_Page') {
+      if (errorMessageFieldAndSummaryDatasetName == 'Provide 3 or more characters to search') {
+        await expect(participatingOrganisationsPage.summary_error_label).toHaveText(
+          participatingOrganisationsPage.participatingOrganisationsPageTestData
+            .Summary_Error_participating_organisations.less_than_three_character
+        );
+      }
+      return; //Added a return, as the above condition is a summary label and doesn't need to enter the field validation.
+    }
     for (const key in errorMessageFieldDataset) {
       if (Object.prototype.hasOwnProperty.call(errorMessageFieldDataset, key)) {
         let fieldErrorMessagesActualValues: any;
@@ -566,6 +575,12 @@ When(
 When('the default page size should be twenty', async ({ commonItemsPage }) => {
   const rowCountActual = await commonItemsPage.tableRows.count();
   const rowCountExpected = parseInt(commonItemsPage.commonTestData.default_page_size, 10);
+  expect(rowCountActual - 1).toBe(rowCountExpected);
+});
+
+When('the default page size should be ten', async ({ commonItemsPage }) => {
+  const rowCountActual = await commonItemsPage.tableRows.count();
+  const rowCountExpected = parseInt(commonItemsPage.commonTestData.default_page_size_modification, 10);
   expect(rowCountActual - 1).toBe(rowCountExpected);
 });
 
