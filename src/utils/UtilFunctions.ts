@@ -34,11 +34,17 @@ export function getAuthState(user: string): string {
     case 'system_admin':
       authState = 'auth-storage-states/sysAdminUser.json';
       break;
-    case 'frontstage_user':
-      authState = 'auth-storage-states/frontStageUser.json';
+    case 'applicant_user':
+      authState = 'auth-storage-states/applicantUser.json';
       break;
-    case 'backstage_user':
-      authState = 'auth-storage-states/backStageUser.json';
+    case 'studywide_reviewer':
+      authState = 'auth-storage-states/studyWideReviewer.json';
+      break;
+    case 'team_manager':
+      authState = 'auth-storage-states/teamManager.json';
+      break;
+    case 'workflow_coordinator':
+      authState = 'auth-storage-states/workFlowCoordinator.json';
       break;
     default:
       throw new Error(`${user} is not a valid option`);
@@ -560,6 +566,28 @@ export async function returnDataFromJSON(filePath?: string): Promise<any> {
 export async function convertDate(day: string, month: number, year: number): Promise<any> {
   const formattedDate = `${day.padStart(2, '0')} ${month} ${year}`;
   return formattedDate.toString();
+}
+
+export async function convertDateShortMonth(day: string, month: string, year: number): Promise<string> {
+  const formattedDay = String(parseInt(day, 10));
+  const formattedMonth = month.charAt(0).toUpperCase() + month.slice(1, 3).toLowerCase();
+  const formattedDate = `${formattedDay} ${formattedMonth} ${year}`;
+  return formattedDate;
+}
+
+export async function validateDateRange(validationDate: string, fromDate?: string, toDate?: string): Promise<boolean> {
+  const target = new Date(validationDate);
+  const from = new Date(fromDate);
+  const to = new Date(toDate);
+  if (!from.toString().includes('Invalid Date') && !to.toString().includes('Invalid Date')) {
+    return target >= from && target <= to;
+  } else if (!from.toString().includes('Invalid Date')) {
+    return target >= from;
+  } else if (!to.toString().includes('Invalid Date')) {
+    return target <= to;
+  }
+  // If both from and to are not provided or are placeholders, consider it invalid
+  return false;
 }
 
 export async function returnSingleRandomLocator(resolvesToMultiElements: Locator): Promise<Locator> {

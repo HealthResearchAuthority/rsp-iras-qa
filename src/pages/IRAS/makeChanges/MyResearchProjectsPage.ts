@@ -1,5 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as myResearchProjectsPageTestData from '../../../resources/test_data/iras/make_changes/my_research_projects_data.json';
+import * as buttonTextData from '../../../resources/test_data/common/button_text_data.json';
 
 //Declare Page Objects
 export default class MyResearchProjectsPage {
@@ -8,11 +9,13 @@ export default class MyResearchProjectsPage {
   readonly pageHeading: Locator;
   readonly noProjectsAvailableLabel: Locator;
   readonly btnCreateProjectRecord: Locator;
+  readonly buttonTextData: typeof buttonTextData;
 
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page;
     this.myResearchProjectsPageTestData = myResearchProjectsPageTestData;
+    this.buttonTextData = buttonTextData;
 
     //Locators
     this.pageHeading = this.page
@@ -21,7 +24,9 @@ export default class MyResearchProjectsPage {
     this.noProjectsAvailableLabel = this.page
       .locator('p[class="govuk-body"]')
       .getByText(this.myResearchProjectsPageTestData.Label_Texts.no_projects);
-    this.btnCreateProjectRecord = this.page.getByRole('link', { name: 'Create project record' });
+    this.btnCreateProjectRecord = this.page.getByRole('link', {
+      name: this.buttonTextData.My_Research_Projects_Page.Create_Project_Record,
+    });
   }
 
   //Page Methods

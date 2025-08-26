@@ -29,8 +29,7 @@ When(
           searchQueryName
         ];
     } else if (searchType.toLowerCase() == 'modifications') {
-      searchQueryDataset =
-        searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[searchQueryName];
+      searchQueryDataset = searchModificationsPage.searchModificationsPageTestData.Search_Queries[searchQueryName];
     } else if ((await commonItemsPage.tableBodyRows.count()) < 1) {
       throw new Error(`There are no items in list to search`);
     }
@@ -69,4 +68,14 @@ Then('the list displays {string}', async ({ commonItemsPage }, resultsAmount: st
   } else {
     expect(await commonItemsPage.tableBodyRows.count()).toBeGreaterThan(1);
   }
+});
+
+Then('the search displays no matching results', async ({ commonItemsPage }) => {
+  await expect(commonItemsPage.no_results_heading).toBeVisible();
+  await expect(commonItemsPage.no_results_guidance_text).toBeVisible();
+  const noResultsGuidanceBulletList = await commonItemsPage.no_results_bullet_points.allInnerTexts();
+  await expect(commonItemsPage.no_results_bullet_points).toHaveCount(
+    commonItemsPage.commonTestData.no_results_bullet_points.length
+  );
+  expect(noResultsGuidanceBulletList).toEqual(commonItemsPage.commonTestData.no_results_bullet_points);
 });
