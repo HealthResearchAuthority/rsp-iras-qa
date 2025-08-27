@@ -483,7 +483,7 @@ Then(
     }
     expect(summaryErrorActualValues).toEqual(allSummaryErrorExpectedValues);
     for (const key in errorMessageFieldDataset) {
-      if (Object.prototype.hasOwnProperty.call(errorMessageFieldDataset, key)) {
+      if (Object.hasOwn(errorMessageFieldDataset, key)) {
         let fieldErrorMessagesActualValues: any;
         if (pageKey == 'Review_Your_Answers_Page') {
           expect(await page[key].getByRole('link').evaluate((e: any) => getComputedStyle(e).color)).toBe(
