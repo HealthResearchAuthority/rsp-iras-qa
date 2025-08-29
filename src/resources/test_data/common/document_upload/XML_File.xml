@@ -1,0 +1,13 @@
+<catalog>
+    <movie id="mv1">
+        <title>Hitcher guide to the galaxy</title>
+        <genre>Humor</genre>
+        text1
+        </movie>
+        <!--Comment1-->
+        <movie id="mv2">
+        <!--Comment2-->
+        <title>Hitcher guide to the galaxy 2</title>
+        <genre>Science fiction</genre>
+    </book>
+</catalog>
