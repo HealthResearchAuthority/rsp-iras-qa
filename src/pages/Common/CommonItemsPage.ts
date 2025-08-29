@@ -351,7 +351,7 @@ export default class CommonItemsPage {
   }
 
   async getQsetPageValidationData(page: string, dataType: string, datasetName: string): Promise<Map<string, any>> {
-    let inputDataset: JSON = {} as JSON;
+    let inputDataset: any;
     switch (page.toLowerCase()) {
       case 'project filter':
         inputDataset = new ProjectFilterPage(this.page).projectFilterPageTestData[dataType][datasetName];
@@ -417,7 +417,7 @@ export default class CommonItemsPage {
       fs.writeFileSync(testDataJSONPath, JSON.stringify(createNewJSONObject(), null, 2));
     } else {
       const readJSONFile = await JSON.parse(fs.readFileSync(testDataJSONPath, 'utf8'));
-      if (Object.prototype.hasOwnProperty.call(readJSONFile, jsonRootParentNode)) {
+      if (Object.hasOwn(readJSONFile, jsonRootParentNode)) {
         const rootParentNodeValues = readJSONFile[jsonRootParentNode];
         rootParentNodeValues[jsonParentNode] = extractedValuesInMemory;
         writeToJSONFile(readJSONFile);
@@ -445,7 +445,7 @@ export default class CommonItemsPage {
     }
     if (!selfHealedLocator) {
       throw new Error(
-        `Self Healing for locator has failed. Automation was not able to find a valid locator from the available list:[ ${locatorList} ]. Add a new valid locator to the list`
+        `Self Healing for locator has failed. Automation was not able to find a valid locator from the available list:[ ${locatorList.toString} ]. Add a new valid locator to the list`
       );
     }
     return selfHealedLocator;

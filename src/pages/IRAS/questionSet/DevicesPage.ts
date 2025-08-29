@@ -95,7 +95,7 @@ export default class DevicesPage {
     expect(await activeStage.textContent()).toBe(this.devicesPageTestData.Devices.page_name);
     await expect(this.devices_section_headings).toHaveCount(expectedSectionHeadingsText.length);
     const actualSectionHeadings = await getTextFromElementArray(await this.devices_section_headings.all());
-    for await (const expectedHeadingText of expectedSectionHeadingsText) {
+    for (const expectedHeadingText of expectedSectionHeadingsText) {
       expect(actualSectionHeadings).toContainEqual(expectedHeadingText);
     }
     expect(await this.page.title()).toBe(this.devicesPageTestData.Devices.title);
