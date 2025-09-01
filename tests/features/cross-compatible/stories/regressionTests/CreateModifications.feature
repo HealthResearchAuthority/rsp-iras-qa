@@ -135,7 +135,6 @@ Feature: Create Amendment - Create Modifications
       | Participating_Organisation | Addition_Of_Participant_Identification_Centres_Option      | Valid_Data_All_Fields | Modifications_Tile      |
       | Participating_Organisation | Early_closure_Of_Participant_Identification_Centres_Option | Valid_Data_All_Fields | Modifications_Tile      |
 
-
   @ParticipatingOrganisationsErrorValidationRegression
   Scenario Outline: Validate the mandatory field error message on participating organisation page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
