@@ -1,5 +1,5 @@
-@ApplicantUser @createModifications @createModificationsPlannedEndDateChange @SystemTest @jsEnabled
-Feature: Create Amendment - Create Modifications Change to planned end date
+@ApplicantUser @CreateModifications @CreateModificationsPlannedEndDateChange @SystemTest @jsEnabled
+Feature: Create Modifications - Change to planned end date
 
   Background:
     Given I have navigated to the my research projects page
@@ -246,7 +246,7 @@ Feature: Create Amendment - Create Modifications Change to planned end date
       | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Empty_Data_Non_Nhs             |
 
 
-  @rsp-4171 @rsp-4611 @createModificationsToChangePlannedEndDateAndReviewChanges
+  @rsp-4171 @rsp-4611 @CreateModificationsToChangePlannedEndDateAndReviewChanges
   Scenario Outline: Create modifications for change planned end date and review the modifications details on review changes page
     Then I can see the 'Planned_End_Date' page for modifications
     And I capture the page screenshot
@@ -277,7 +277,7 @@ Feature: Create Amendment - Create Modifications Change to planned end date
       | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_All_Fields | Empty_Data_Non_Nhs             |
 
 
-  @rsp-4171 @rsp-4611 @saveLaterReviewChangesPage
+  @rsp-4171 @rsp-4611 @SaveLaterReviewChangesPage
   Scenario Outline: Verify that modifications progress successfully saved when user saves the record from review changes page
     Then I can see the 'Planned_End_Date' page for modifications
     And I capture the page screenshot
@@ -349,7 +349,7 @@ Feature: Create Amendment - Create Modifications Change to planned end date
       | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_All_Fields | Valid_Data_Non_Nhs_All_Country |
 
 
-  @rsp-4171 @modifyPlannedEndDateFromReviewChangesPage
+  @rsp-4171 @ModifyPlannedEndDateFromReviewChangesPage
   Scenario Outline: Verify that user can change the planned end date from review modifications page
     Then I can see the 'Planned_End_Date' page for modifications
     And I capture the page screenshot
@@ -388,7 +388,7 @@ Feature: Create Amendment - Create Modifications Change to planned end date
       | Change_Field         | Planned_End_Date      | Planned_End_Date_Change      | Organisation_Change_Affect | Affected_Org_Questions |
       | New_Planned_End_Date | Valid_Data_All_Fields | Valid_Data_All_Fields_Change | Valid_Data_All_Fields      | Valid_Data_All_Fields  |
 
-  @rsp-4171 @modifyAffectedOrganisationTypesFromReviewChangesPage
+  @rsp-4171 @ModifyAffectedOrganisationTypesFromReviewChangesPage
   Scenario Outline: Verify that user can change the affected organisation types from review modifications page
     Then I can see the 'Planned_End_Date' page for modifications
     And I capture the page screenshot
@@ -425,7 +425,7 @@ Feature: Create Amendment - Create Modifications Change to planned end date
       | Affected_Organisation_Types | Valid_Data_All_Fields | Valid_Data_All_Fields_Change | Valid_Data_All_Fields      | NHS_HSC_Only                      | Valid_Data_All_Fields          | Valid_Data_All_Fields         |
       | Affected_Organisation_Types | Valid_Data_All_Fields | Valid_Data_All_Fields_Change | Non_NHS_HSC_Only           | NHS_HSC_Only                      | Valid_Data_Non_Nhs_All_Country | Valid_Data_All_Fields         |
 
-  @rsp-4171 @modifyAffectedOrgQuestionsFromReviewChangesPage
+  @rsp-4171 @ModifyAffectedOrgQuestionsFromReviewChangesPage
   Scenario Outline: Verify that user can change all affected organisation questions from review modifications page
     Then I can see the 'Planned_End_Date' page for modifications
     And I capture the page screenshot
@@ -464,7 +464,7 @@ Feature: Create Amendment - Create Modifications Change to planned end date
       | Affected_Non_Nhs_Hsc_Locations   | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_Non_Nhs_Single_Country | Valid_Data_Non_Nhs_All_Country    |
 
 
-  @rsp-4171 @changePlannedEndDateValidationsFromReviewChangesPage
+  @rsp-4171 @ChangePlannedEndDateValidationsFromReviewChangesPage
   Scenario Outline: Verify that system prevents the user to enter invalid date when modifications details updated from review changes page
     Then I can see the 'Planned_End_Date' page for modifications
     And I capture the page screenshot
@@ -498,7 +498,7 @@ Feature: Create Amendment - Create Modifications Change to planned end date
       | Invalid_Day_Letters     | New_Planned_End_Date | Field_Error_Message | Summary_Error_Message | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_All_Fields  |
       | Invalid_Year_Letters    | New_Planned_End_Date | Field_Error_Message | Summary_Error_Message | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_All_Fields  |
 
-  @rsp-4171 @todayDateErrorValidationsFromReviewChangesPage
+  @rsp-4171 @TodayDateErrorValidationsFromReviewChangesPage
   Scenario Outline: Verify that system prevents the user to enter invalid today date when modifications details updated from review changes page
     Then I can see the 'Planned_End_Date' page for modifications
     And I capture the page screenshot
