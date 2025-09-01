@@ -13,12 +13,8 @@ export default class ModificationsReadyToAssignPage {
   readonly modifications_tasklist_link: Locator;
   readonly short_project_title_label: Locator;
   readonly modification_id_label: Locator;
-  readonly modification_type_label: Locator;
   readonly date_submitted_label: Locator;
   readonly days_since_submission_label: Locator;
-  // readonly tableRows: Locator;
-  // readonly next_button: Locator;
-  // readonly previous_button: Locator;
   readonly checkall_modification_checkbox: Locator;
   readonly page_heading: Locator;
   readonly page_description: Locator;
@@ -45,11 +41,6 @@ export default class ModificationsReadyToAssignPage {
       .getByText(this.modificationsReadyToAssignPageData.Label_Texts.modification_id_label, {
         exact: true,
       });
-    this.modification_type_label = this.page
-      .getByRole('button')
-      .getByText(this.modificationsReadyToAssignPageData.Label_Texts.modification_type_label, {
-        exact: true,
-      });
     this.date_submitted_label = this.page
       .getByRole('button')
       .getByText(this.modificationsReadyToAssignPageData.Label_Texts.date_submitted_label, {
@@ -60,37 +51,23 @@ export default class ModificationsReadyToAssignPage {
       .getByText(this.modificationsReadyToAssignPageData.Label_Texts.days_since_submission_label, {
         exact: true,
       });
-    //   this.tableRows = this.page.locator('.govuk-table__row');
-    // this.next_button = this.page.locator('.govuk-pagination__next');
-    // this.previous_button = this.page.locator('.govuk-pagination__prev');
     this.checkall_modification_checkbox = this.page.locator('input[id="select-all-modifications"]');
     this.page_heading = this.page.getByTestId('title');
-    // this.modification_button_label = this.page
-    //   .getByRole('button')
-    //   .getByText(this.modificationsReadyToAssignPageData.Modifications_Ready_To_Assign_Page.modification_button_label, {
-    //     exact: true,
-    //   });
-    // this.modification_button_label = this.page
-    //   .getByRole('button')
-    //   .getByText(this.buttonTextData.Modifications_Tasklist_Page.modification_button_label, {
-    //     exact: true,
-    //   });
     this.advanced_filter_label = this.page.getByRole('button', {
       name: this.modificationsReadyToAssignPageData.Modifications_Ready_To_Assign_Page.advanced_filter_label,
     });
     this.search_button_label = this.page.getByText('Search');
-    this.modification_checkbox = this.page.locator('input[type="checkbox"]');
-    //this.checkall_modification_checkbox = this.page.locator('input[id="select-all-modifications"]');
+    this.modification_checkbox = this.page.locator('input[name="selectedModificationIds"]');
   }
 
   //Page Methods
-
   async goto() {
     await this.page.goto('modificationstasklist/index');
   }
 
   async assertOnModificationsReadyToAssignPage() {
     await expect(this.page_heading).toBeVisible();
+    await this.page.waitForLoadState('domcontentloaded');
   }
 
   async sortDateSubmittedListValues(datesSubmitted: string[], sortDirection: string): Promise<string[]> {

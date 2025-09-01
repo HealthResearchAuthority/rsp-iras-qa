@@ -56,7 +56,7 @@ Then(
   async ({ commonItemsPage, modificationsReadyToAssignPage }, datasetName: string) => {
     const dataset = modificationsReadyToAssignPage.modificationsReadyToAssignPageData[datasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         const labelVal = await commonItemsPage.getUiLabel(key, modificationsReadyToAssignPage);
         expect(labelVal).toBe(dataset[key]);
       }
@@ -65,19 +65,22 @@ Then(
 );
 
 Then(
-  'I confirm checkbox exists in every row across all pages',
+  'I confirm checkbox exists in every row across pages',
   async ({ commonItemsPage, modificationsReadyToAssignPage }) => {
-    while (true) {
-      const rows = commonItemsPage.tableRows;
-      const rowCount = await rows.count();
-      for (let i = 2; i < rowCount; i++) {
-        await modificationsReadyToAssignPage.modification_checkbox.nth(i).isVisible();
+    //Limiting the checks to 2 pages
+    const maxPagesToCheck =
+      modificationsReadyToAssignPage.modificationsReadyToAssignPageData.Modifications_Ready_To_Assign_Page
+        .maxPagesToVisit;
+    for (let pageIndex = 1; pageIndex <= maxPagesToCheck; pageIndex++) {
+      const checkboxes = await modificationsReadyToAssignPage.modification_checkbox.all();
+      for (const checkbox of checkboxes) {
+        await expect(checkbox).toBeVisible();
       }
-      const isDisabled = await commonItemsPage.next_button.isDisabled();
-      if (isDisabled !== null) {
+      if (await commonItemsPage.next_button.isVisible()) {
+        await commonItemsPage.next_button.click();
+      } else {
         break;
       }
-      await commonItemsPage.next_button.click();
     }
   }
 );
@@ -85,72 +88,45 @@ Then(
 Then(
   'I check random row and validate if the row is checked even after navigation',
   async ({ commonItemsPage, modificationsReadyToAssignPage }) => {
+    await commonItemsPage.firstPage.click();
     const randomRowToCheck = await getRandomNumber(1, 20);
-    const totalPages = await commonItemsPage.getTotalPages();
-
-    //if totalPages more than 2 then limit checks to 2
-    let maxPagesToCheck = 0;
-
-    if (totalPages > 2) {
-      maxPagesToCheck =
-        modificationsReadyToAssignPage.modificationsReadyToAssignPageData.Modifications_Ready_To_Assign_Page
-          .maxPagesToVisit;
-    } else {
-      maxPagesToCheck = totalPages;
-    }
+    const maxPagesToCheck =
+      modificationsReadyToAssignPage.modificationsReadyToAssignPageData.Modifications_Ready_To_Assign_Page
+        .maxPagesToVisit;
 
     for (let currentPage = 1; currentPage <= maxPagesToCheck; currentPage++) {
-      if (currentPage == 1) {
-        //will have not previous page since first page
-        await modificationsReadyToAssignPage.modification_checkbox.nth(randomRowToCheck).check();
-        await expect(modificationsReadyToAssignPage.modification_checkbox.nth(randomRowToCheck)).toBeChecked();
-      } //will have both previous and next page if currentpage is 2 or more
-      else {
-        await commonItemsPage.next_button.click();
-        await modificationsReadyToAssignPage.modification_checkbox.nth(randomRowToCheck).check();
-        await expect(modificationsReadyToAssignPage.modification_checkbox.nth(randomRowToCheck)).toBeChecked();
+      await modificationsReadyToAssignPage.modification_checkbox.nth(randomRowToCheck).check();
+      await commonItemsPage.next_button.click();
+    }
 
-        //navigate to next page and come back
-        await commonItemsPage.next_button.click();
-        await commonItemsPage.previous_button.click();
-        await expect(modificationsReadyToAssignPage.modification_checkbox.nth(randomRowToCheck)).toBeChecked();
+    for (let currentPage = maxPagesToCheck + 1; currentPage >= maxPagesToCheck; currentPage--) {
+      await commonItemsPage.previous_button.click();
 
-        //navigate to previous page and come to current page
-        await commonItemsPage.previous_button.click();
-        await commonItemsPage.next_button.click();
-        await expect(modificationsReadyToAssignPage.modification_checkbox.nth(randomRowToCheck)).toBeChecked();
-      }
+      await expect(modificationsReadyToAssignPage.modification_checkbox.nth(randomRowToCheck)).toBeChecked();
     }
   }
 );
 
-When(
+Then(
   'I select check all checkbox on the current page and validate all checkboxes are checked',
-  async ({ commonItemsPage, modificationsReadyToAssignPage }) => {
-    const checkboxes = modificationsReadyToAssignPage.modification_checkbox;
+  async ({ modificationsReadyToAssignPage }) => {
+    await modificationsReadyToAssignPage.page.waitForLoadState('domcontentloaded');
     const checkAll = modificationsReadyToAssignPage.checkall_modification_checkbox;
-    await commonItemsPage.page.waitForLoadState('domcontentloaded');
     await checkAll.click();
-    const rowCount = await commonItemsPage.tableRows.count();
-    for (let i = 1; i < rowCount; i++) {
-      expect(await checkboxes.nth(i).isChecked());
+    const checkboxes = await modificationsReadyToAssignPage.modification_checkbox.all();
+    for (const checkbox of checkboxes) {
+      await expect(checkbox).toBeChecked();
     }
   }
 );
 
 When(
   'jsDisabled I select check all checkbox on the current page and validate all checkboxes are unchecked',
-  async ({ commonItemsPage, modificationsReadyToAssignPage }) => {
-    //const checkboxes = modificationsReadyToAssignPage.modification_checkbox;
+  async ({ modificationsReadyToAssignPage }) => {
     const checkAll = modificationsReadyToAssignPage.checkall_modification_checkbox;
-    await commonItemsPage.page.waitForLoadState('domcontentloaded');
     await checkAll.click();
-    //const rowCount = await commonItemsPage.tableRows.count();
-    //for (let i = 2; i < rowCount; i++)
-    const allCheckboxes = await commonItemsPage.tableRows.all();
-    for (const checkbox of allCheckboxes.slice(2)) {
-      //await expect(checkboxes.nth(i)).not.toBeChecked();
-      //await expect(checkboxes.nth(row)).not.toBeChecked();
+    const checkboxes = await modificationsReadyToAssignPage.modification_checkbox.all();
+    for (const checkbox of checkboxes) {
       await expect(checkbox).not.toBeChecked();
     }
   }
@@ -169,29 +145,13 @@ When(
   }
 );
 
-When(
-  'I confirm all checkboxes are {string}',
-  async ({ commonItemsPage, modificationsReadyToAssignPage }, checkboxStatus: string) => {
-    const checkboxes = modificationsReadyToAssignPage.modification_checkbox;
-    const rowCount = await commonItemsPage.tableRows.count();
-    for (let i = 2; i < rowCount; i++) {
-      if (checkboxStatus.toLowerCase() === 'unchecked') {
-        await expect(checkboxes.nth(i)).not.toBeChecked();
-      } else if (checkboxStatus.toLowerCase() === 'checked') {
-        await expect(checkboxes.nth(i)).toBeChecked();
-      }
+When('I confirm all checkboxes are {string}', async ({ modificationsReadyToAssignPage }, checkboxStatus: string) => {
+  const checkboxes = await modificationsReadyToAssignPage.modification_checkbox.all();
+  for (const checkbox of checkboxes) {
+    if (checkboxStatus.toLowerCase() === 'unchecked') {
+      await expect(checkbox).not.toBeChecked();
+    } else {
+      await expect(checkbox).toBeChecked();
     }
   }
-);
-
-When(
-  'I navigate to previous page to confirm all checkboxes remain checked',
-  async ({ commonItemsPage, modificationsReadyToAssignPage }) => {
-    await commonItemsPage.previous_button.click();
-    const checkboxes = modificationsReadyToAssignPage.modification_checkbox;
-    const rowCount = await commonItemsPage.tableRows.count();
-    for (let i = 1; i < rowCount; i++) {
-      expect(checkboxes.nth(i)).toBeChecked();
-    }
-  }
-);
+});
