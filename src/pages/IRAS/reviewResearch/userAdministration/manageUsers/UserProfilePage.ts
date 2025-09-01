@@ -228,66 +228,74 @@ export default class UserProfilePage {
     switch (editUserFieldName) {
       case 'title_text':
         // All android specific if conditions need to be removed after the defect fix RSP-4099
-        if (process.env.OS_TYPE?.toLowerCase() == 'android' && process.env.PLATFORM?.toLowerCase() == 'mobile') {
-          await this.title_change_link.focus();
-          await this.title_change_link.press('Enter');
-        } else {
+        // if (process.env.OS_TYPE?.toLowerCase() == 'android' && process.env.PLATFORM?.toLowerCase() == 'mobile') {
+        //   await this.title_change_link.focus();
+        //   await this.title_change_link.press('Enter');
+        // } else
+        {
           await this.title_change_link.click();
         }
         break;
       case 'first_name_text':
-        if (process.env.OS_TYPE?.toLowerCase() == 'android' && process.env.PLATFORM?.toLowerCase() == 'mobile') {
-          await this.first_name_change_link.focus();
-          await this.first_name_change_link.press('Enter');
-        } else {
+        // if (process.env.OS_TYPE?.toLowerCase() == 'android' && process.env.PLATFORM?.toLowerCase() == 'mobile') {
+        //   await this.first_name_change_link.focus();
+        //   await this.first_name_change_link.press('Enter');
+        // } else
+        {
           await this.first_name_change_link.click();
         }
         break;
       case 'last_name_text':
-        if (process.env.OS_TYPE?.toLowerCase() == 'android' && process.env.PLATFORM?.toLowerCase() == 'mobile') {
-          await this.last_name_change_link.focus();
-          await this.last_name_change_link.press('Enter');
-        } else {
+        // if (process.env.OS_TYPE?.toLowerCase() == 'android' && process.env.PLATFORM?.toLowerCase() == 'mobile') {
+        //   await this.last_name_change_link.focus();
+        //   await this.last_name_change_link.press('Enter');
+        // } else
+        {
           await this.last_name_change_link.click();
         }
         break;
       case 'email_address_text':
-        if (process.env.OS_TYPE?.toLowerCase() == 'android' && process.env.PLATFORM?.toLowerCase() == 'mobile') {
-          await this.email_address_change_link.focus();
-          await this.email_address_change_link.press('Enter');
-        } else {
+        // if (process.env.OS_TYPE?.toLowerCase() == 'android' && process.env.PLATFORM?.toLowerCase() == 'mobile') {
+        //   await this.email_address_change_link.focus();
+        //   await this.email_address_change_link.press('Enter');
+        // } else
+        {
           await this.email_address_change_link.click();
         }
         break;
       case 'telephone_text':
-        if (process.env.OS_TYPE?.toLowerCase() == 'android' && process.env.PLATFORM?.toLowerCase() == 'mobile') {
-          await this.telephone_change_link.focus();
-          await this.telephone_change_link.press('Enter');
-        } else {
+        // if (process.env.OS_TYPE?.toLowerCase() == 'android' && process.env.PLATFORM?.toLowerCase() == 'mobile') {
+        //   await this.telephone_change_link.focus();
+        //   await this.telephone_change_link.press('Enter');
+        // } else
+        {
           await this.telephone_change_link.click();
         }
         break;
       case 'organisation_text':
-        if (process.env.OS_TYPE?.toLowerCase() == 'android' && process.env.PLATFORM?.toLowerCase() == 'mobile') {
-          await this.organisation_change_link.focus();
-          await this.organisation_change_link.press('Enter');
-        } else {
+        // if (process.env.OS_TYPE?.toLowerCase() == 'android' && process.env.PLATFORM?.toLowerCase() == 'mobile') {
+        //   await this.organisation_change_link.focus();
+        //   await this.organisation_change_link.press('Enter');
+        // } else
+        {
           await this.organisation_change_link.click();
         }
         break;
       case 'job_title_text':
-        if (process.env.OS_TYPE?.toLowerCase() == 'android' && process.env.PLATFORM?.toLowerCase() == 'mobile') {
-          await this.job_title_change_link.focus();
-          await this.job_title_change_link.press('Enter');
-        } else {
+        // if (process.env.OS_TYPE?.toLowerCase() == 'android' && process.env.PLATFORM?.toLowerCase() == 'mobile') {
+        //   await this.job_title_change_link.focus();
+        //   await this.job_title_change_link.press('Enter');
+        // } else
+        {
           await this.job_title_change_link.click();
         }
         break;
       case 'role_checkbox':
-        if (process.env.OS_TYPE?.toLowerCase() == 'android' && process.env.PLATFORM?.toLowerCase() == 'mobile') {
-          await this.role_change_link.focus();
-          await this.role_change_link.press('Enter');
-        } else {
+        // if (process.env.OS_TYPE?.toLowerCase() == 'android' && process.env.PLATFORM?.toLowerCase() == 'mobile') {
+        //   await this.role_change_link.focus();
+        //   await this.role_change_link.press('Enter');
+        // } else
+        {
           await this.role_change_link.click();
         }
         break;
@@ -307,19 +315,20 @@ export default class UserProfilePage {
       //     break;
       //   }
       case 'country_checkbox':
-        if (userRole.trim().toLocaleLowerCase() != 'operations') {
+        if (userRole.trim().toLocaleLowerCase() != 'Team manager') {
           break;
         } else {
-          if (process.env.OS_TYPE?.toLowerCase() == 'android' && process.env.PLATFORM?.toLowerCase() == 'mobile') {
-            await this.country_change_link.focus();
-            await this.country_change_link.press('Enter');
-          } else {
+          // if (process.env.OS_TYPE?.toLowerCase() == 'android' && process.env.PLATFORM?.toLowerCase() == 'mobile') {
+          //   await this.country_change_link.focus();
+          //   await this.country_change_link.press('Enter');
+          // } else
+          {
             await this.country_change_link.click();
           }
           break;
         }
       case 'review_body':
-        if (userRole.trim().toLocaleLowerCase() != 'operations') {
+        if (userRole.trim().toLocaleLowerCase() != 'Study-wide reviewer') {
           break;
         } else {
           await this.review_body_change_link.click();

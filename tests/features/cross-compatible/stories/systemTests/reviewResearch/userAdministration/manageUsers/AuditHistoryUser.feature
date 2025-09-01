@@ -157,7 +157,7 @@ Feature: User Administration: Manage Users - View audit history for users
             | Job_Title    | User_Job_Title_Text_One    | Edit_User_Job_Title    | Enabled        |
 
     @VerifyAuditHistoryEditOperationUserFields
-    Scenario Outline: Verify the user can view the audit history after editing fields for an operations user
+    Scenario Outline: Verify the user can view the audit history after editing fields for a team manager
         And I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
         And I can see the add a new user profile page
         And I fill the new user profile page using '<Add_User_Profile>'
