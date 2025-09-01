@@ -1,4 +1,4 @@
-@ApplicantUser @createModifications @projectDocumentsModifications @SystemTest @jsEnabled
+@ApplicantUser @CreateModifications @ProjectDocumentsModifications @SystemTest @jsEnabled
 Feature: Create Amendment - Project Documents Modifications
 
   Background:
@@ -78,8 +78,6 @@ Feature: Create Amendment - Project Documents Modifications
     And I click the 'Back' link on the 'Review_Uploaded_Document_Modifications_Page'
     Then I can see the add documents for '<Specific_Change>' page
     And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
-    Then I validate 'Field_Error_Upload_Documents_Mandatory' displayed on 'Add_Document_Modifications_Page'
     When I click the 'Save_For_Later' button on the 'Add_Document_Modifications_Page'
     Then I can see the modification progress saved successful message on project overview page
     And I capture the page screenshot
@@ -122,3 +120,58 @@ Feature: Create Amendment - Project Documents Modifications
       | Post_Trial_Information_For_Participants      | Multiple_Files        | GIF_File                  |
       | Protocol_Non_Substantial_Changes             | Multiple_Files        | GIF_File                  |
       | Translations_Addition_Of_Translated_Versions | Multiple_Files        | GIF_File                  |
+
+  @rsp-3876 @ValidateDocumentUploadModificationsPageErrprMessages
+  Scenario Outline: Validate the user is able to see error messages for invalid actions on upload documents for modifications
+    And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+    Then I can see the add documents for '<Specific_Change>' page
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    Then I validate 'Field_Error_Upload_Documents_Mandatory' displayed on 'Add_Document_Modifications_Page'
+    And I capture the page screenshot
+
+    Examples:
+      | Specific_Change                              |
+      | Correction_Of_Typographical_Errors           |
+      | CRF_Other_Study_Data_Records                 |
+      | GDPR_Wording                                 |
+      | Other_Minor_Change_To_Study_Documents        |
+      | Post_Trial_Information_For_Participants      |
+      | Protocol_Non_Substantial_Changes             |
+      | Translations_Addition_Of_Translated_Versions |
+
+  @rsp-3876 @ValidateBackLinkRetainDocumentsInReviewUploadedDocumentPage
+  Scenario Outline: Validate the user is able to see the previously uploaded documents in eview uploaded documents page after navigating away using back link
+    And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
+    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+    Then I can see the add documents for '<Specific_Change>' page
+    Then I upload 'PNG_File' documents
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    Then I can see the review uploaded documents for '<Specific_Change>' page
+    And I capture the page screenshot
+    And I validate the uploaded 'PNG_File' documents are listed along with size and delete option in the review uploaded documents page
+    And I can see the list is sorted by default in the alphabetical order of the 'uploaded documents'
+    And I click the 'Back' link on the 'Review_Uploaded_Document_Modifications_Page'
+    Then I can see the add documents for '<Specific_Change>' page
+    And I capture the page screenshot
+    Then I upload 'GIF_File' documents
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    Then I can see the review uploaded documents for '<Specific_Change>' page
+    And I capture the page screenshot
+    And I validate the uploaded 'PNG_File' documents are listed along with size and delete option in the review uploaded documents page
+    And I validate the uploaded 'GIF_File' documents are listed along with size and delete option in the review uploaded documents page
+    And I can see the list is sorted by default in the alphabetical order of the 'uploaded documents'
+
+    Examples:
+      | Specific_Change                              |
+      | Correction_Of_Typographical_Errors           |
+      | CRF_Other_Study_Data_Records                 |
+      | GDPR_Wording                                 |
+      | Other_Minor_Change_To_Study_Documents        |
+      | Post_Trial_Information_For_Participants      |
+      | Protocol_Non_Substantial_Changes             |
+      | Translations_Addition_Of_Translated_Versions |
