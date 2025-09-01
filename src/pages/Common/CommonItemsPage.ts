@@ -86,6 +86,7 @@ export default class CommonItemsPage {
   readonly no_results_guidance_text: Locator;
   readonly no_results_heading: Locator;
   readonly apply_filters_button: Locator;
+  readonly search_results_count: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -117,6 +118,7 @@ export default class CommonItemsPage {
       .getByTestId('SearchQuery')
       .or(this.page.getByTestId('Search.SearchQuery'))
       .or(this.page.getByTestId('Search_IrasId'))
+      .or(this.page.getByTestId('Search.SearchNameTerm'))
       .first();
     //Banner
     this.bannerNavBar = this.page.getByLabel('Service information');
@@ -211,6 +213,7 @@ export default class CommonItemsPage {
         exact: true,
       });
     this.advanced_filter_active_filters_label = this.page.getByRole('list');
+    this.search_results_count = this.page.locator('.search-filter-panel__count');
   }
 
   //Page Methods
@@ -1053,9 +1056,14 @@ export default class CommonItemsPage {
     return values;
   }
 
-  async validatePagination(currentPage: any, totalPages: any, navigateMethod: string) {
+  async validatePagination(currentPage: any, totalPages: any, pagename: string, navigateMethod: string) {
     const totalItems = await this.getTotalItems();
-    const pageSize = parseInt(this.commonTestData.default_page_size, 10);
+    let pageSize: number;
+    if (pagename == 'Participating_Organisations_Page') {
+      pageSize = parseInt(this.commonTestData.default_page_size_participating_organisation, 10);
+    } else {
+      pageSize = parseInt(this.commonTestData.default_page_size, 10);
+    }
     const currentPageLocator = await this.clickOnPages(currentPage, navigateMethod);
     await expect(currentPageLocator).toHaveAttribute('aria-current');
     const { start, end } = Object.fromEntries(await this.getStartEndPages(currentPage, pageSize, totalItems));

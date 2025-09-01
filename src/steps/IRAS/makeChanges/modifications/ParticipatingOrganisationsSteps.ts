@@ -63,7 +63,7 @@ Then(
   async ({ commonItemsPage, participatingOrganisationsPage }, datasetName: string) => {
     const dataset = participatingOrganisationsPage.participatingOrganisationsPageTestData[datasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         const labelVal = await commonItemsPage.getUiLabel(key, participatingOrganisationsPage);
         expect(labelVal).toBe(dataset[key]);
       }
@@ -73,25 +73,20 @@ Then(
 
 Then(
   'I see the total number of results displayed in the participating organisation page',
-  async ({ commonItemsPage, participatingOrganisationsPage }) => {
-    const textDisplayNoOfRows = await participatingOrganisationsPage.displayed_row_count.textContent();
-    const displayedNoOfRows = textDisplayNoOfRows?.split(' ')[0].trim();
+  async ({ commonItemsPage }) => {
+    const textDisplayNoOfRows = (await commonItemsPage.search_results_count.textContent()).trim();
+    const displayedNoOfRows = textDisplayNoOfRows?.split(' ')[0];
     const expectedTotalPages = Math.ceil(Number(displayedNoOfRows) / 10);
-
     const itemsMap = await commonItemsPage.getPaginationValues();
     const itemsValues: any = itemsMap.get('items');
     const visiblePagesMap = await commonItemsPage.getVisiblePages(itemsValues);
-    const visiblePages: any = visiblePagesMap.get('visiblePages');
+    const visiblePages: number[] = visiblePagesMap.get('visiblePages');
     const actualtotalPages = visiblePages[visiblePages.length - 1];
-
     expect(expectedTotalPages).toBe(actualtotalPages);
-
     let expectedRowsLastPage = Number(displayedNoOfRows) % 10;
-
     if (Number(displayedNoOfRows) % 10 === 0) {
       expectedRowsLastPage = 10;
     }
-
     //click on the last page
     await commonItemsPage.clickOnPages(actualtotalPages, 'clicking on page number');
     const actualRows = (await commonItemsPage.tableRows.count()) - 1;
@@ -104,23 +99,13 @@ Then(
   async ({ commonItemsPage, participatingOrganisationsPage }) => {
     await commonItemsPage.firstPage.click();
     const maxPagesToValidate = commonItemsPage.commonTestData.maxPagesToValidate;
-    for (let i = 1; i < maxPagesToValidate; i++) {
+    for (let pageIndex = 1; pageIndex < maxPagesToValidate; pageIndex++) {
       const rowCount = await commonItemsPage.tableRows.count();
-      for (let j = 1; j < rowCount; j++) {
-        await participatingOrganisationsPage.modification_checkbox.nth(i).isVisible();
+      for (let rowIndex = 1; rowIndex < rowCount; rowIndex++) {
+        await participatingOrganisationsPage.modification_checkbox.nth(pageIndex).isVisible();
       }
       await commonItemsPage.next_button.click();
-      await participatingOrganisationsPage.page.waitForLoadState('networkidle');
     }
-  }
-);
-
-Then(
-  'I enter {string} into the search field in the participating organisation page',
-  async ({ participatingOrganisationsPage }, datasetName: string) => {
-    const dataset =
-      participatingOrganisationsPage.participatingOrganisationsPageTestData.Data_Fields.Search_Queries[datasetName];
-    await participatingOrganisationsPage.participating_organisations_search_text.fill(dataset['input_text']);
   }
 );
 
@@ -129,9 +114,7 @@ When(
   async ({ participatingOrganisationsPage, commonItemsPage }, searchDatasetName: string) => {
     await commonItemsPage.firstPage.click();
     const searchCriteriaDataset =
-      participatingOrganisationsPage.participatingOrganisationsPageTestData.Data_Fields.Search_Queries[
-        searchDatasetName
-      ];
+      participatingOrganisationsPage.participatingOrganisationsPageTestData.Search_Queries[searchDatasetName];
     await participatingOrganisationsPage.validateResults(commonItemsPage, searchCriteriaDataset, true);
   }
 );

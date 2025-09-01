@@ -522,12 +522,12 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                 And I capture the page screenshot
                 And I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
                 And I capture the page screenshot
-                And the default page size should be twenty
+                And the default page size should be 'twenty'
                 And the 'Next' button will be 'available' to the user
                 And the 'Previous' button will be 'not available' to the user
                 And the current page number should be visually highlighted to indicate the active page the user is on
                 And I capture the page screenshot
-                Then I sequentially navigate through each page by '<Navigation_Method>' from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+                Then I sequentially navigate through each 'Search_Modifications_Page' by '<Navigation_Method>' from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges
                 And I capture the page screenshot
                 Examples:
                         | Navigation_Method       | Valid_Iras_Id       | Advanced_Filters             |
@@ -547,7 +547,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                 And the 'Previous' button will be 'available' to the user
                 And the 'Next' button will be 'not available' to the user
                 And I capture the page screenshot
-                Then I sequentially navigate through each page by '<Navigation_Method>' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+                Then I sequentially navigate through each 'Search_Modifications_Page' by '<Navigation_Method>' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
                 And I capture the page screenshot
                 Examples:
                         | Navigation_Method         | Valid_Iras_Id       | Advanced_Filters             |

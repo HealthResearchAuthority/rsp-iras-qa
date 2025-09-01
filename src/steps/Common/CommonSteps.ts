@@ -482,47 +482,41 @@ Then(
       summaryErrorActualValues = await commonItemsPage.getSummaryErrorMessages();
     }
     expect(summaryErrorActualValues).toEqual(allSummaryErrorExpectedValues);
-    if (pageKey == 'Participating_Organisations_Page') {
-      if (errorMessageFieldAndSummaryDatasetName == 'Provide 3 or more characters to search') {
-        await expect(participatingOrganisationsPage.summary_error_label).toHaveText(
-          participatingOrganisationsPage.participatingOrganisationsPageTestData
-            .Summary_Error_participating_organisations.less_than_three_character
-        );
-      }
-      return; //Added a return, as the above condition is a summary label and doesn't need to enter the field validation.
-    }
-    for (const key in errorMessageFieldDataset) {
-      if (Object.prototype.hasOwnProperty.call(errorMessageFieldDataset, key)) {
-        let fieldErrorMessagesActualValues: any;
-        if (pageKey == 'Review_Your_Answers_Page') {
-          expect(await page[key].getByRole('link').evaluate((e: any) => getComputedStyle(e).color)).toBe(
-            commonItemsPage.commonTestData.rgb_red_color
-          );
-          fieldErrorMessagesActualValues = await reviewYourAnswersPage.getFieldErrorMessages(key, page);
-          expect(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
-          const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
-          await expect(element).toBeInViewport();
-        } else if (
-          errorMessageFieldAndSummaryDatasetName === 'Incorrect_Format_Invalid_Character_Limit_Telephone_Error' ||
-          errorMessageFieldAndSummaryDatasetName === 'Incorrect_Format_Invalid_Character_Limit_Email_Address_Error'
-        ) {
-          fieldErrorMessagesActualValues = (await commonItemsPage.getMultipleFieldErrorMessages(key, page)).toString();
-          const allFieldErrorExpectedValues = Object.values(errorMessageFieldDataset).toString();
-          expect.soft(fieldErrorMessagesActualValues).toEqual(allFieldErrorExpectedValues);
-          const fieldValActuals = summaryErrorActualValues.split(',');
-          for (const val of fieldValActuals) {
-            const element = await commonItemsPage.clickErrorSummaryLinkMultipleErrorField(val, key, page);
+    if (!errorMessageFieldAndSummaryDatasetName.includes('Summary_Only')) {
+      for (const key in errorMessageFieldDataset) {
+        if (Object.hasOwn(errorMessageFieldDataset, key)) {
+          let fieldErrorMessagesActualValues: any;
+          if (pageKey == 'Review_Your_Answers_Page') {
+            expect(await page[key].getByRole('link').evaluate((e: any) => getComputedStyle(e).color)).toBe(
+              commonItemsPage.commonTestData.rgb_red_color
+            );
+            fieldErrorMessagesActualValues = await reviewYourAnswersPage.getFieldErrorMessages(key, page);
+            expect(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
+            const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
+            await expect(element).toBeInViewport();
+          } else if (
+            errorMessageFieldAndSummaryDatasetName === 'Incorrect_Format_Invalid_Character_Limit_Telephone_Error' ||
+            errorMessageFieldAndSummaryDatasetName === 'Incorrect_Format_Invalid_Character_Limit_Email_Address_Error'
+          ) {
+            fieldErrorMessagesActualValues = (
+              await commonItemsPage.getMultipleFieldErrorMessages(key, page)
+            ).toString();
+            const allFieldErrorExpectedValues = Object.values(errorMessageFieldDataset).toString();
+            expect.soft(fieldErrorMessagesActualValues).toEqual(allFieldErrorExpectedValues);
+            const fieldValActuals = summaryErrorActualValues.split(',');
+            for (const val of fieldValActuals) {
+              const element = await commonItemsPage.clickErrorSummaryLinkMultipleErrorField(val, key, page);
+              await expect(element).toBeInViewport();
+            }
+          } else {
+            fieldErrorMessagesActualValues = await commonItemsPage.getFieldErrorMessages(key, page);
+            if (fieldErrorMessagesActualValues.includes('Error: ')) {
+              fieldErrorMessagesActualValues = fieldErrorMessagesActualValues.replace('Error: ', '');
+            }
+            expect(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
+            const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
             await expect(element).toBeInViewport();
           }
-        } else {
-          fieldErrorMessagesActualValues = await commonItemsPage.getFieldErrorMessages(key, page);
-          if (fieldErrorMessagesActualValues.includes('Error: ')) {
-            fieldErrorMessagesActualValues = fieldErrorMessagesActualValues.replace('Error: ', '');
-          }
-
-          expect(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
-          const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
-          await expect(element).toBeInViewport();
         }
       }
     }
@@ -572,15 +566,14 @@ When(
   }
 );
 
-When('the default page size should be twenty', async ({ commonItemsPage }) => {
+When('the default page size should be {string}', async ({ commonItemsPage }, pgeSize: string) => {
   const rowCountActual = await commonItemsPage.tableRows.count();
-  const rowCountExpected = parseInt(commonItemsPage.commonTestData.default_page_size, 10);
-  expect(rowCountActual - 1).toBe(rowCountExpected);
-});
-
-When('the default page size should be ten', async ({ commonItemsPage }) => {
-  const rowCountActual = await commonItemsPage.tableRows.count();
-  const rowCountExpected = parseInt(commonItemsPage.commonTestData.default_page_size_modification, 10);
+  let rowCountExpected: number;
+  if (pgeSize == 'ten') {
+    rowCountExpected = parseInt(commonItemsPage.commonTestData.default_page_size_participating_organisation, 10);
+  } else {
+    rowCountExpected = parseInt(commonItemsPage.commonTestData.default_page_size, 10);
+  }
   expect(rowCountActual - 1).toBe(rowCountExpected);
 });
 
@@ -817,23 +810,37 @@ Then(
 );
 
 Then(
-  'I sequentially navigate through each page by {string} from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges',
-  async ({ commonItemsPage }, navigateMethod: string) => {
+  'I sequentially navigate through each {string} by {string} from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges',
+  async ({ commonItemsPage }, pagename: string, navigateMethod: string) => {
     const totalPages = await commonItemsPage.getTotalPages();
+    //Limiting the max pages to validate to 10
+    let maxPagesToValidate = 0;
+    if (totalPages > commonItemsPage.commonTestData.maxPagesToValidate) {
+      maxPagesToValidate = commonItemsPage.commonTestData.maxPagesToValidate;
+    } else {
+      maxPagesToValidate = totalPages;
+    }
     await commonItemsPage.firstPage.click();
-    for (let currentPage = 1; currentPage <= totalPages; currentPage++) {
-      await commonItemsPage.validatePagination(currentPage, totalPages, navigateMethod);
+    for (let currentPage = 1; currentPage <= maxPagesToValidate; currentPage++) {
+      await commonItemsPage.validatePagination(currentPage, totalPages, pagename, navigateMethod);
     }
   }
 );
 
 Then(
-  'I sequentially navigate through each page by {string} from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges',
-  async ({ commonItemsPage }, navigateMethod: string) => {
+  'I sequentially navigate through each {string} by {string} from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges',
+  async ({ commonItemsPage }, pagename: string, navigateMethod: string) => {
     const totalPages = await commonItemsPage.getTotalPages();
+    //Limiting the max pages to validate to 10
+    let maxPagesToValidate = 0;
+    if (totalPages > commonItemsPage.commonTestData.maxPagesToValidate) {
+      maxPagesToValidate = totalPages - commonItemsPage.commonTestData.maxPagesToValidate;
+    } else {
+      maxPagesToValidate = totalPages;
+    }
     await commonItemsPage.clickOnPages(totalPages, 'clicking on page number');
-    for (let currentPage = totalPages; currentPage >= 1; currentPage--) {
-      await commonItemsPage.validatePagination(currentPage, totalPages, navigateMethod);
+    for (let currentPage = totalPages; currentPage >= maxPagesToValidate; currentPage--) {
+      await commonItemsPage.validatePagination(currentPage, totalPages, pagename, navigateMethod);
     }
   }
 );

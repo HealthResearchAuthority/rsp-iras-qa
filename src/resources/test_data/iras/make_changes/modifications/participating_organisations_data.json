@@ -19,15 +19,13 @@
   "Checkbox": {
     "modification_checkbox": "selectedOrganisationIds"
   },
-  "Data_Fields": {
-    "Search_Queries": {
-      "Valid_Search_Text_One": { "input_text": "NHS" },
-      "Valid_Search_Text_Two": { "input_text": "VACCINATION CENTRE" },
-      "Invalid_Search_Text_One": { "input_text": "NH" },
-      "Invalid_Search_Text_Two": { "input_text": "a" }
-    }
+  "Search_Queries": {
+    "Valid_Search_Text_NHS": { "search_input_text": "NHS" },
+    "Valid_Search_Text_VACC_CENTRE": { "search_input_text": "VACCINATION CENTRE" },
+    "Invalid_Search_Text_Two_Letters": { "search_input_text": "NH" },
+    "Invalid_Search_Text_One_Letter": { "search_input_text": "a" }
   },
-  "Summary_Error_participating_organisations": {
+  "Summary_Only_Error_Participating_Organisations": {
     "less_than_three_character": "Provide 3 or more characters to search"
   },
 

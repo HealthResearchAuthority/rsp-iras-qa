@@ -1,4 +1,4 @@
-@FrontStageUser @ParticipatingOrganisationViewAndSearch @SystemTest @jsEnabled
+@ApplicantUser @ParticipatingOrganisationViewAndSearch @SystemTest @jsEnabled
 Feature: Organisation Search and View
 
   Background:
@@ -15,116 +15,116 @@ Feature: Organisation Search and View
 
   @rsp-4063 @OrganisationView
   Scenario Outline: Verify that user can view the participating organisation screen
-    When I click the '<Modifications_Tile_Link>' link on the 'Project_Overview_Page'
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    When I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
-    And I select '<Area_Of_Change>' from area of change dropdown and '<Specific_Change>' from specific change dropdown
+    And I select 'Participating_Organisation' from area of change dropdown and '<Specific_Change>' from specific change dropdown
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
     Then I can see the participating organisation page
     And I can see the page heading is changed for '<Specific_Change>' on participating organisation page
     And I capture the page screenshot
-    Then I can see the '<Validation_Text>' ui labels on the participating organisation page
-    And the default page size should be ten
+    Then I can see the 'Column_Label' ui labels on the participating organisation page
+    And the default page size should be 'ten'
     And I can see the list is sorted by default in the alphabetical order of the 'Organisation Name'
     And I capture the page screenshot
     And I see the total number of results displayed in the participating organisation page
     And I confirm checkbox is displayed in participating organisation page
 
     Examples:
-      | Area_Of_Change             | Specific_Change                                            | Modifications_Tile_Link | Validation_Text |
-      | Participating_Organisation | Addition_Of_sites_Option                                   | Modifications_Tile      | Column_Label    |
-      | Participating_Organisation | Early_closure_withdrawal_of_sites_Option                   | Modifications_Tile      | Column_Label    |
-      | Participating_Organisation | Addition_Of_Participant_Identification_Centres_Option      | Modifications_Tile      | Column_Label    |
-      | Participating_Organisation | Early_closure_Of_Participant_Identification_Centres_Option | Modifications_Tile      | Column_Label    |
+      | Specific_Change                                            |
+      | Addition_Of_sites_Option                                   |
+      | Early_closure_withdrawal_of_sites_Option                   |
+      | Addition_Of_Participant_Identification_Centres_Option      |
+      | Early_closure_Of_Participant_Identification_Centres_Option |
 
   @rsp-4063 @OrganisationSearch
   Scenario Outline: Verify that user can search on the participating organisation screen
-    When I click the '<Modifications_Tile_Link>' link on the 'Project_Overview_Page'
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    When I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
-    And I select '<Area_Of_Change>' from area of change dropdown and '<Specific_Change>' from specific change dropdown
+    And I select 'Participating_Organisation' from area of change dropdown and '<Specific_Change>' from specific change dropdown
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
     Then I can see the participating organisation page
-    When I enter '<Organisation_Name>' into the search field in the participating organisation page
+    And I fill the search input for searching 'organisations' with '<Organisation_Name>' as the search query
     And I click the 'Search' button on the 'Participating_Organisations_Page'
     And I capture the page screenshot
-    And I see the total number of results displayed in the participating organisation page
     And I can see the results matching the search '<Organisation_Name>' in the participating organisation page
     And I capture the page screenshot
 
     Examples:
-      | Area_Of_Change             | Specific_Change                                            | Modifications_Tile_Link | Organisation_Name     |
-      | Participating_Organisation | Addition_Of_sites_Option                                   | Modifications_Tile      | Valid_Search_Text_One |
-      | Participating_Organisation | Early_closure_withdrawal_of_sites_Option                   | Modifications_Tile      | Valid_Search_Text_One |
-      | Participating_Organisation | Addition_Of_Participant_Identification_Centres_Option      | Modifications_Tile      | Valid_Search_Text_Two |
-      | Participating_Organisation | Early_closure_Of_Participant_Identification_Centres_Option | Modifications_Tile      | Valid_Search_Text_Two |
+      | Specific_Change                                            | Organisation_Name             |
+      | Addition_Of_sites_Option                                   | Valid_Search_Text_NHS         |
+      | Early_closure_withdrawal_of_sites_Option                   | Valid_Search_Text_NHS         |
+      | Addition_Of_Participant_Identification_Centres_Option      | Valid_Search_Text_VACC_CENTRE |
+      | Early_closure_Of_Participant_Identification_Centres_Option | Valid_Search_Text_VACC_CENTRE |
 
   @rsp-4063 @ParticipatingOrganisationsSummaryErrorValidation
   Scenario Outline: Validate the summary error message on participating organisation page
-    When I click the '<Modifications_Tile_Link>' link on the 'Project_Overview_Page'
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    When I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
-    And I select '<Area_Of_Change>' from area of change dropdown and '<Specific_Change>' from specific change dropdown
+    And I select 'Participating_Organisation' from area of change dropdown and '<Specific_Change>' from specific change dropdown
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
     Then I can see the participating organisation page
-    When I enter '<Organisation_Name>' into the search field in the participating organisation page
+    And I fill the search input for searching 'organisations' with '<Organisation_Name>' as the search query
     And I click the 'Search' button on the 'Participating_Organisations_Page'
-    Then I validate '<Summary_Error_Message>' displayed on 'Participating_Organisations_Page'
+    Then I validate 'Summary_Only_Error_Participating_Organisations' displayed on 'Participating_Organisations_Page'
     And I capture the page screenshot
 
     Examples:
-      | Summary_Error_Message                     | Area_Of_Change             | Specific_Change                                            | Modifications_Tile_Link | Organisation_Name       |
-      | Summary_Error_participating_organisations | Participating_Organisation | Addition_Of_sites_Option                                   | Modifications_Tile      | Invalid_Search_Text_One |
-      | Summary_Error_participating_organisations | Participating_Organisation | Early_closure_withdrawal_of_sites_Option                   | Modifications_Tile      | Invalid_Search_Text_One |
-      | Summary_Error_participating_organisations | Participating_Organisation | Addition_Of_Participant_Identification_Centres_Option      | Modifications_Tile      | Invalid_Search_Text_Two |
-      | Summary_Error_participating_organisations | Participating_Organisation | Early_closure_Of_Participant_Identification_Centres_Option | Modifications_Tile      | Invalid_Search_Text_Two |
+      | Specific_Change                                            | Organisation_Name               |
+      | Addition_Of_sites_Option                                   | Invalid_Search_Text_One_Letter  |
+      | Early_closure_withdrawal_of_sites_Option                   | Invalid_Search_Text_One_Letter  |
+      | Addition_Of_Participant_Identification_Centres_Option      | Invalid_Search_Text_Two_Letters |
+      | Early_closure_Of_Participant_Identification_Centres_Option | Invalid_Search_Text_Two_Letters |
 
-
-  @rsp-4063 @ParticipatingOrganisationsPagination
+  @rsp-4063 @ParticipatingOrganisationsPaginationFirst
   Scenario Outline: Validate pagination for first few pages in participating organisation page
-    When I click the '<Modifications_Tile_Link>' link on the 'Project_Overview_Page'
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    When I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
-    And I select '<Area_Of_Change>' from area of change dropdown and '<Specific_Change>' from specific change dropdown
+    And I select 'Participating_Organisation' from area of change dropdown and '<Specific_Change>' from specific change dropdown
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
     Then I can see the participating organisation page
-    Then I can see the '<Validation_Text>' ui labels on the participating organisation page
     When I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
     And I capture the page screenshot
     And the 'Next' button will be 'available' to the user
     And the 'Previous' button will be 'not available' to the user
     And I capture the page screenshot
-    Then I sequentially navigate the first few pages by '<Navigation_Method>' to verify pagination results, surrounding pages, and ellipses for skipped ranges
+    Then I sequentially navigate through each 'Participating_Organisations_Page' by '<Navigation_Method>' from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges
     And I capture the page screenshot
 
     Examples:
-      | Validation_Text | Navigation_Method       | Modifications_Tile_Link | Area_Of_Change             | Specific_Change                                            |
-      | Column_Label    | clicking on page number | Modifications_Tile      | Participating_Organisation | Addition_Of_sites_Option                                   |
-      | Column_Label    | clicking on next link   | Modifications_Tile      | Participating_Organisation | Early_closure_withdrawal_of_sites_Option                   |
-      | Column_Label    | clicking on page number | Modifications_Tile      | Participating_Organisation | Addition_Of_Participant_Identification_Centres_Option      |
-      | Column_Label    | clicking on next link   | Modifications_Tile      | Participating_Organisation | Early_closure_Of_Participant_Identification_Centres_Option |
+      | Navigation_Method       | Specific_Change                                            |
+      | clicking on page number | Addition_Of_sites_Option                                   |
+      | clicking on next link   | Early_closure_withdrawal_of_sites_Option                   |
+      | clicking on page number | Addition_Of_Participant_Identification_Centres_Option      |
+      | clicking on next link   | Early_closure_Of_Participant_Identification_Centres_Option |
 
-
-  @rsp-4063 @ParticipatingOrganisationsPagination
+  @rsp-4063 @ParticipatingOrganisationsPaginationLast
   Scenario Outline: Validate pagination for last few pages in participating organisation page
-    When I click the '<Modifications_Tile_Link>' link on the 'Project_Overview_Page'
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    When I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
-    And I select '<Area_Of_Change>' from area of change dropdown and '<Specific_Change>' from specific change dropdown
+    And I select 'Participating_Organisation' from area of change dropdown and '<Specific_Change>' from specific change dropdown
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
     Then I can see the participating organisation page
-    Then I can see the '<Validation_Text>' ui labels on the participating organisation page
     When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
     And I capture the page screenshot
     And the 'Previous' button will be 'available' to the user
     And the 'Next' button will be 'not available' to the user
     And I capture the page screenshot
-    Then I sequentially navigate the last few pages by '<Navigation_Method>' to verify pagination results, surrounding pages, and ellipses for skipped ranges
+    Then I sequentially navigate through each 'Participating_Organisations_Page' by '<Navigation_Method>' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
     And I capture the page screenshot
 
     Examples:
-      | Validation_Text | Navigation_Method         | Modifications_Tile_Link | Area_Of_Change             | Specific_Change                                            |
-      | Column_Label    | clicking on page number   | Modifications_Tile      | Participating_Organisation | Addition_Of_sites_Option                                   |
-      | Column_Label    | clicking on previous link | Modifications_Tile      | Participating_Organisation | Early_closure_withdrawal_of_sites_Option                   |
-      | Column_Label    | clicking on page number   | Modifications_Tile      | Participating_Organisation | Addition_Of_Participant_Identification_Centres_Option      |
-      | Column_Label    | clicking on previous link | Modifications_Tile      | Participating_Organisation | Early_closure_Of_Participant_Identification_Centres_Option |
+      | Navigation_Method         | Specific_Change                                            |
+      | clicking on page number   | Addition_Of_sites_Option                                   |
+      | clicking on previous link | Early_closure_withdrawal_of_sites_Option                   |
+      | clicking on page number   | Addition_Of_Participant_Identification_Centres_Option      |
+      | clicking on previous link | Early_closure_Of_Participant_Identification_Centres_Option |

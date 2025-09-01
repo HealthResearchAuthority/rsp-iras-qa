@@ -8,7 +8,7 @@
   "disabled_status": "Disabled",
   "first_page": "Page 1",
   "default_page_size": "20",
-  "default_page_size_modification": "10",
+  "default_page_size_participating_organisation": "10",
   "previous_button": "Previous   page",
   "heading": "Access Denied",
   "guidance_text": "You do not have access to this resource",
@@ -25,5 +25,5 @@
     "using fewer keywords",
     "searching for something less specific"
   ],
-  "maxPagesToValidate": 4
+  "maxPagesToValidate": 10
 }

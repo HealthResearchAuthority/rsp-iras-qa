@@ -901,7 +901,6 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I select 'Participating_Organisation' from area of change dropdown and 'Addition_Of_sites_Option' from specific change dropdown
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
     Then I can see the participating organisation page
-    And I see the total number of results displayed in the participating organisation page
     And I confirm checkbox is displayed in participating organisation page
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
