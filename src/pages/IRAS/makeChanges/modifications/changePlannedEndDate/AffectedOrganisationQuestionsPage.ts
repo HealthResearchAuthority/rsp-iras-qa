@@ -3,7 +3,7 @@ import * as affectedOrganisationQuestionsPageTestData from '../../../../../resou
 import * as linkTextData from '../../../../../resources/test_data/common/link_text_data.json';
 
 //Declare Page Objects
-export default class ChangePlannedEndDateAffectedOrganisationQuestionsPage {
+export default class AffectedOrganisationQuestionsPage {
   readonly page: Page;
   readonly affectedOrganisationQuestionsPageTestData: typeof affectedOrganisationQuestionsPageTestData;
   readonly linkTextData: typeof linkTextData;

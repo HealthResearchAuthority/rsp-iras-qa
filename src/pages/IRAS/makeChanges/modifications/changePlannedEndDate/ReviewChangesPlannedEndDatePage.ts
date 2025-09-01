@@ -10,23 +10,18 @@ export default class ChangePlannedEndDateReviewModificationsPage {
   readonly new_planned_project_end_date_row: Locator;
   readonly new_planned_project_end_date_text: Locator;
   readonly new_planned_project_end_date_change_link: Locator;
-
   readonly affected_organisation_types_row: Locator;
   readonly affected_organisation_types_text: Locator;
   readonly affected_organisation_types_change_link: Locator;
-
   readonly affected_nhs_hsc_locations_row: Locator;
   readonly affected_nhs_hsc_locations_text: Locator;
   readonly affected_nhs_hsc_locations_change_link: Locator;
-
   readonly portion_of_nhs_hsc_organisations_affected_row: Locator;
   readonly portion_of_nhs_hsc_organisations_affected_text: Locator;
   readonly portion_of_nhs_hsc_organisations_affected_change_link: Locator;
-
   readonly additional_resource_implications_row: Locator;
   readonly additional_resource_implications_text: Locator;
   readonly additional_resource_implications_change_link: Locator;
-
   readonly affected_non_nhs_hsc_locations_row: Locator;
   readonly affected_non_nhs_hsc_locations_text: Locator;
   readonly affected_non_nhs_hsc_locations_change_link: Locator;
