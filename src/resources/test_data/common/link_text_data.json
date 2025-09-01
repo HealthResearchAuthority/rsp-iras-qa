@@ -118,7 +118,6 @@
   },
   "Project_Overview_Page": {
     "Project_Details": "Project details",
-    "Modifications_Tile": "Modifications",
     "Post_Approval": "Post approval"
   },
   "Review_Body_User_List_Page": {
@@ -158,6 +157,9 @@
     "Back": "Back",
     "Remove_This_Change": "Remove this change"
   },
+  "Planned_End_Date_Change_Page": {
+    "Back": "Back"
+  },
   "Participating_Organisations_Page": {
     "Back": "Back",
     "Advanced_Filter": "Advanced filter",
@@ -165,6 +167,17 @@
   },
   "Approvals_Page": {
     "Search": "Search",
+    "Back": "Back"
+  },
+  "Affected_Organisation_Selection_Page": {
+    "Back": "Back",
+    "Remove_This_Change": "Remove this change"
+  },
+  "Affected_Organisation_Questions_Page": {
+    "Back": "Back",
+    "Remove_This_Change": "Remove this change"
+  },
+  "Review_Changes_Planned_End_Date_Page": {
     "Back": "Back"
   }
 }
