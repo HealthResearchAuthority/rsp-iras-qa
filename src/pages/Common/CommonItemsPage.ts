@@ -1132,4 +1132,16 @@ export default class CommonItemsPage {
       await this.clickOnPreviousLink();
     }
   }
+
+  async uncheckAllCheckboxes(locator: Locator) {
+    const type = await locator.first().getAttribute('type');
+    if (type !== 'checkbox') return;
+    const count = await locator.count();
+    for (let index = 0; index < count; index++) {
+      const checkbox = locator.nth(index);
+      if (await checkbox.isChecked()) {
+        await checkbox.uncheck();
+      }
+    }
+  }
 }

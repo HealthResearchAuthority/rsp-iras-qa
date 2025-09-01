@@ -128,6 +128,21 @@
   },
   "Modifications_Page": {
     "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later",
+    "Save_Changes": "Save changes"
+  },
+  "Affected_Organisation_Selection_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later",
+    "Save_Changes": "Save changes"
+  },
+  "Affected_Organisation_Questions_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later",
+    "Save_Changes": "Save changes"
+  },
+  "Review_Changes_Planned_End_Date_Page": {
+    "Save_Continue": "Save and continue",
     "Save_For_Later": "Save for later"
   },
   "Project_Overview_Page": {

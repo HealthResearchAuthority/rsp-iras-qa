@@ -22,7 +22,9 @@ Feature: Create Amendment - Create Modifications
 
   @SelectAreaOfChangeRegression
   Scenario Outline: Verify that user can create modifications to change the participating organisations
-    When I click the '<Modifications_Tile_Link>' link on the 'Project_Overview_Page'
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
     And I capture the page screenshot
     And I validate the field values with '<Project_Details_Title>' on select area of change page
@@ -48,7 +50,9 @@ Feature: Create Amendment - Create Modifications
 
   @SelectAreaOfChangeDropdownListValidationRegression
   Scenario Outline: Validate the specific change list values are displayed based on the area of change selection
-    When I click the '<Modifications_Tile_Link>' link on the 'Project_Overview_Page'
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
     And I select '<Area_Of_Change>' from area of change dropdown and '<Specific_Change>' from specific change dropdown
     Then I validate the specific change dropdown options are displayed based on the selected area of change dropdown with '<Dropdown_Options_To_Validate >'
@@ -60,7 +64,9 @@ Feature: Create Amendment - Create Modifications
 
   @SelectAreaOfChangeModificationIdValidationRegression
   Scenario Outline: Validate the modification id on select area of change page when user creates multiple new modifications
-    When I click the '<Modifications_Tile_Link>' link on the 'Project_Overview_Page'
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
     Then I validate the modification id is incremented by one for every '<New_Modification_Count>' new modification on select area of change page
 
@@ -70,7 +76,9 @@ Feature: Create Amendment - Create Modifications
 
   @SelectAreaOfChangeSaveLaterRegression
   Scenario Outline: Verify that user can save the modifications progress on select area of change page
-    When I click the '<Modifications_Tile_Link>' link on the 'Project_Overview_Page'
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
     And I capture the page screenshot
     And I select '<Area_Of_Change>' from area of change dropdown and '<Specific_Change>' from specific change dropdown
@@ -90,7 +98,9 @@ Feature: Create Amendment - Create Modifications
 
   @SelectAreaOfChangeErrorValidationRegression
   Scenario Outline: Validate the mandatory field error message on select area of change page
-    When I click the '<Modifications_Tile_Link>' link on the 'Project_Overview_Page'
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
     And I select '<Area_Of_Change>' from area of change dropdown and '<Specific_Change>' from specific change dropdown
     And I capture the page screenshot
@@ -105,7 +115,9 @@ Feature: Create Amendment - Create Modifications
 
   @ParticipatingOrganisationsRegression
   Scenario Outline: Verify that user can create modifications and validate the field values in search participating organisations page
-    When I click the '<Modifications_Tile_Link>' link on the 'Project_Overview_Page'
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
     And I capture the page screenshot
     And I select '<Area_Of_Change>' from area of change dropdown and '<Specific_Change>' from specific change dropdown
@@ -125,7 +137,9 @@ Feature: Create Amendment - Create Modifications
 
   @ParticipatingOrganisationsErrorValidationRegression
   Scenario Outline: Validate the mandatory field error message on participating organisation page
-    When I click the '<Modifications_Tile_Link>' link on the 'Project_Overview_Page'
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
     And I select '<Area_Of_Change>' from area of change dropdown and '<Specific_Change>' from specific change dropdown
     And I capture the page screenshot
