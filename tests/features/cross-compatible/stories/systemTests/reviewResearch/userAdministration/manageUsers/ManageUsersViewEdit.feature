@@ -123,22 +123,25 @@ Feature: User Administration: Manage user profiles, view and edit user profile
     Then I can see the user profile page
     When I click the '<Edit_User_Field>' change link for '<User_Role>' on the user profile page
     Then I can see the edit user profile page
-    And I uncheck the previously selected checkboxes on the edit user profile page for '<Edit_User_Profile>' when the role is selected as operations
+    And I uncheck the previously selected checkboxes on the edit user profile page for '<Edit_User_Profile>' when the role is selected as study-wide reviewer or team manager or workflow co-ordinator
     And I update user profile with '<Invalid_Data_Edit_User>'
     And I click the 'Save' button on the 'Edit_User_Profile_Page'
     Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Edit_User_Profile_Page'
 
     Examples:
-      | Edit_User_Profile                          | Edit_User_Field | User_Role    | Status  | Invalid_Data_Edit_User                                  | Field_And_Summary_Error_Message                              |
-      | Valid_Data_In_All_Fields_Role_Team_Manager | title_text      | Team manager | Enabled | Missing_Mandatory_Fields_Role_Not_Operations            | Missing_Mandatory_Fields_Role_Not_Operations_Error           |
-      | Valid_Data_In_All_Fields_Role_Team_Manager | first_name_text | Team manager | Enabled | Missing_Mandatory_Fields_Role_Team_Manager              | Missing_Mandatory_Fields_Role_Team_Manager_Error             |
-      | Valid_Data_In_All_Fields_Role_Team_Manager | last_name_text  | Team manager | Enabled | Missing_Mandatory_Field_First_Name_Role_Not_Operations  | Missing_Mandatory_Field_First_Name_Role_Not_Operations_Error |
-      | Valid_Data_In_All_Fields_Role_Team_Manager | telephone_text  | Team manager | Enabled | Missing_Mandatory_Field_Last_Name_Role_Not_Operations   | Missing_Mandatory_Field_Last_Name_Role_Not_Operations_Error  |
-      | Valid_Data_In_All_Fields_Role_Team_Manager | job_title_text  | Team manager | Enabled | Missing_Mandatory_Field_Country_Role_Operations         | Missing_Mandatory_Field_Country_Role_Operations_Error        |
-      # | Valid_Data_In_All_Fields_Role_Team_Manager | job_title_text  | Team manager | Enabled | Missing_Mandatory_Field_Access_Required_Role_Operations | Missing_Mandatory_Field_Access_Required_Role_Operations_Error |
-      | Valid_Data_In_All_Fields_Role_Team_Manager | job_title_text  | Team manager | Enabled | Invalid_Character_Limit                                 | Invalid_Character_Limit_Error                                |
-      | Valid_Data_In_All_Fields_Role_Team_Manager | job_title_text  | Team manager | Enabled | Incorrect_Format_Telephone_Data                         | Incorrect_Format_Field_Telephone_Error                       |
-      | Valid_Data_In_All_Fields_Role_Team_Manager | job_title_text  | Team manager | Enabled | Incorrect_Format_Invalid_Character_Limit_Telephone_Data | Incorrect_Format_Invalid_Character_Limit_Telephone_Error     |
+      | Edit_User_Profile                                  | Edit_User_Field | User_Role             | Status  | Invalid_Data_Edit_User                                                    | Field_And_Summary_Error_Message                                                 |
+      | Valid_Data_In_All_Fields_Role_Team_Manager         | title_text      | Team Manager          | Enabled | Missing_Mandatory_Fields_Role_Team_Manager                                | Missing_Mandatory_Fields_Role_Team_Manager_Error                                |
+      | Valid_Data_In_All_Fields_Role_Studywide_Reviewer   | first_name_text | Study-wide reviewer   | Enabled | Missing_Mandatory_Fields_Role_Studywide_Reviewer                          | Missing_Mandatory_Fields_Role_Studywide_Reviewer_Error                          |
+      | Valid_Data_In_All_Fields_Role_Workflow_Coordinator | last_name_text  | workflow co-ordinator | Enabled | Missing_Mandatory_Fields_Role_Workflow_Coordinator                        | Missing_Mandatory_Fields_Role_Workflow_Coordinator_Error                        |
+      | Valid_Data_In_All_Fields_Role_Team_Manager         | telephone_text  | Team Manager          | Enabled | Missing_Mandatory_Field_Country_Role_Team_Manager                         | Missing_Mandatory_Field_Country_Role_Team_Manager_Error                         |
+      | Valid_Data_In_All_Fields_Role_Workflow_Coordinator | telephone_text  | workflow co-ordinator | Enabled | Missing_Mandatory_Field_Review_Body_Role_Workflow_Coordinator             | Missing_Mandatory_Field_Review_Body_Role_Workflow_Coordinator_Error             |
+      | Valid_Data_In_All_Fields_Role_Studywide_Reviewer   | job_title_text  | Study-wide reviewer   | Enabled | Missing_Mandatory_Field_Review_Body_Role_Studywide_Reviewer               | Missing_Mandatory_Field_Review_Body_Role_Studywide_Reviewer_Error               |
+      | Valid_Data_In_All_Fields_Role_Team_Manager         | job_title_text  | Team Manager          | Enabled | Invalid_Character_Limit                                                   | Invalid_Character_Limit_Error                                                   |
+      | Valid_Data_In_All_Fields_Role_Team_Manager         | job_title_text  | Team Manager          | Enabled | Incorrect_Format_Telephone_Data                                           | Incorrect_Format_Field_Telephone_Error                                          |
+      | Valid_Data_In_All_Fields_Role_Team_Manager         | job_title_text  | Team Manager          | Enabled | Incorrect_Format_Invalid_Character_Limit_Telephone_Data                   | Incorrect_Format_Invalid_Character_Limit_Telephone_Error                        |
+      | Valid_Data_In_All_Fields_Role_System_Administrator | job_title_text  | System administrator  | Enabled | Missing_Mandatory_Field_First_Name_Role_Applicant_System_Administrator    | Missing_Mandatory_Field_First_Name_Role_Applicant_System_Administrator_Error    |
+      | Valid_Data_In_All_Fields_Role_System_Administrator | job_title_text  | System administrator  | Enabled | Missing_Mandatory_Field_Last_Name_Role_Applicant_System_Administrator     | Missing_Mandatory_Field_Last_Name_Role_Applicant_System_Administrator_Error     |
+      | Valid_Data_In_All_Fields_Role_System_Administrator | job_title_text  | System administrator  | Enabled | Missing_Mandatory_Field_Email_Address_Role_Applicant_System_Administrator | Missing_Mandatory_Field_Email_Address_Role_Applicant_System_Administrator_Error |
 
   @rsp-3521 @ManageUsersPagination @ManageUsersPaginationFirstPage @ManageUsersPaginationPageNumber @ManageUsersPaginationNextLinkClick
   Scenario Outline: Verify pagination in manage users page when user is on the first page and navigate through each page by clicking page number or by by clicking next link

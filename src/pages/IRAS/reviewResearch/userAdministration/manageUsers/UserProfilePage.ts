@@ -315,7 +315,7 @@ export default class UserProfilePage {
       //     break;
       //   }
       case 'country_checkbox':
-        if (userRole.trim().toLocaleLowerCase() != 'Team manager') {
+        if (!userRole.trim().toLocaleLowerCase().includes('team manager')) {
           break;
         } else {
           // if (process.env.OS_TYPE?.toLowerCase() == 'android' && process.env.PLATFORM?.toLowerCase() == 'mobile') {
@@ -328,7 +328,10 @@ export default class UserProfilePage {
           break;
         }
       case 'review_body':
-        if (userRole.trim().toLocaleLowerCase() != 'Study-wide reviewer') {
+        if (
+          !userRole.trim().toLocaleLowerCase().includes('study-wide reviewer') &&
+          !userRole.trim().toLocaleLowerCase().includes('workflow co-ordinator')
+        ) {
           break;
         } else {
           await this.review_body_change_link.click();

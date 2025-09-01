@@ -169,7 +169,7 @@ When(
 );
 
 Then(
-  'I uncheck the previously selected checkboxes on the edit user profile page for {string} when the role is selected as operations',
+  'I uncheck the previously selected checkboxes on the edit user profile page for {string} when the role is selected as study-wide reviewer or team manager or workflow co-ordinator',
   async ({ userProfilePage, editUserProfilePage, commonItemsPage }, datasetName: string) => {
     const dataset = editUserProfilePage.editUserProfilePageTestData.Edit_User_Profile[datasetName];
     const roleValue = (await userProfilePage.getRole()).join(', ');
@@ -177,7 +177,12 @@ Then(
       await commonItemsPage.fillUIComponent(dataset, 'role_checkbox', editUserProfilePage);
     }
     const selectedCheckboxCount = (await editUserProfilePage.getCheckedCheckboxLabels()).length;
-    if (roleValue.includes('operations') || selectedCheckboxCount > 0) {
+    if (
+      dataset['role_checkbox'].includes('Study-wide reviewer') ||
+      dataset['role_checkbox'].includes('Team manager') ||
+      dataset['role_checkbox'].includes('Workflow co-ordinator') ||
+      selectedCheckboxCount > 0
+    ) {
       await commonItemsPage.clearCheckboxes(
         dataset,
         ['country_checkbox', 'review_body_checkbox'],
@@ -186,6 +191,15 @@ Then(
       );
       await commonItemsPage.clearUIComponent(dataset, 'role_checkbox', editUserProfilePage);
     }
+    // if (roleValue.includes('operations') || selectedCheckboxCount > 0) {
+    //   await commonItemsPage.clearCheckboxes(
+    //     dataset,
+    //     ['country_checkbox', 'review_body_checkbox'],
+    //     commonItemsPage,
+    //     editUserProfilePage
+    //   );
+    //   await commonItemsPage.clearUIComponent(dataset, 'role_checkbox', editUserProfilePage);
+    // }
   }
 );
 
