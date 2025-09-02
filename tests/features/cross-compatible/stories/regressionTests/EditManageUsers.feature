@@ -47,7 +47,6 @@ Feature: User Administration: Edit Manage Users
             | Title         | User_Title_Update           | Edit_User_Title        |
             | First_Name    | User_First_Name_Text_One    | Edit_User_First_Name   |
             | Last_Name     | User_Last_Name_Text_One     | Edit_User_Last_Name    |
-            | Email_Address | User_Email_Address_Text_One | Edit_User_Email        |
             | Telephone     | User_Telephone_Text_One     | Edit_User_Telephone    |
             | Organisation  | User_Organisation_Text_One  | Edit_User_Organisation |
             | Job_Title     | User_Job_Title_Text_One     | Edit_User_Job_Title    |
@@ -112,7 +111,7 @@ Feature: User Administration: Edit Manage Users
         Then I can see the 'System_Administration_Page'
         And I capture the page screenshot
 
-    @RegressionTestEditUserErrorMessagesInvalidData @KNOWN-DEFECT-Incorrect_Format_Field_Email_Address_Error
+    @RegressionTestEditUserErrorMessagesInvalidData
     Scenario Outline: Validate relevant error messages are displayed for invalid data entry on the edit user profile page
         And I search and click on view edit link for existing 'Valid_Data_Role_Operations' user with '<Status>' status from the manage user page
         And I can see the user profile page
@@ -131,10 +130,7 @@ Feature: User Administration: Edit Manage Users
             | All_Checkbox_Fields | first_name_text          | Operations | ACTIVE | Missing_Mandatory_Fields_Role_Operations                  | Missing_Mandatory_Fields_Role_Operations_Error                  |
             | All_Checkbox_Fields | last_name_text           | Operations | ACTIVE | Missing_Mandatory_Field_First_Name_Role_Not_Operations    | Missing_Mandatory_Field_First_Name_Role_Not_Operations_Error    |
             | All_Checkbox_Fields | telephone_text           | Operations | ACTIVE | Missing_Mandatory_Field_Last_Name_Role_Not_Operations     | Missing_Mandatory_Field_Last_Name_Role_Not_Operations_Error     |
-            | All_Checkbox_Fields | organisation_text        | Operations | ACTIVE | Missing_Mandatory_Field_Email_Address_Role_Not_Operations | Missing_Mandatory_Field_Email_Address_Role_Not_Operations_Error |
             | All_Checkbox_Fields | country_checkbox         | Operations | ACTIVE | Missing_Mandatory_Field_Country_Role_Operations           | Missing_Mandatory_Field_Country_Role_Operations_Error           |
             | All_Checkbox_Fields | access_required_checkbox | Operations | ACTIVE | Missing_Mandatory_Field_Access_Required_Role_Operations   | Missing_Mandatory_Field_Access_Required_Role_Operations_Error   |
             | All_Checkbox_Fields | job_title_text           | Operations | ACTIVE | Invalid_Character_Limit                                   | Invalid_Character_Limit_Error                                   |
-            | All_Checkbox_Fields | email_address_text       | Operations | ACTIVE | Invalid_Email_Data_Max_Char                               | Invalid_Character_Limit_Field_Email_Address_Error               |
             | All_Checkbox_Fields | telephone_text           | Operations | ACTIVE | Incorrect_Format_Telephone_Data                           | Incorrect_Format_Field_Telephone_Error                          |
-            # | All_Checkbox_Fields | email_address_text       | Operations | ACTIVE | Incorrect_Format_Email                                    | Incorrect_Format_Field_Email_Address_Error                      |

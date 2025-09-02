@@ -47,6 +47,18 @@ import SearchAddUserReviewBodyPage from '../pages/IRAS/reviewResearch/userAdmini
 import CheckAddUserReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/CheckAddUserReviewBodyPage';
 import AccessDeniedPage from '../pages/IRAS/AccessDeniedPage';
 import RtsPage from '../pages/Common/RtsPage';
+import ParticipatingOrganisationsPage from '../pages/IRAS/makeChanges/modifications/ParticipatingOrganisationsPage';
+import SelectAreaOfChangePage from '../pages/IRAS/makeChanges/modifications/SelectAreaOfChangePage';
+import SearchModificationsPage from '../pages/IRAS/reviewResearch/receiveAmendments/SearchModificationsPage';
+import ModificationsReadyToAssignPage from '../pages/IRAS/reviewResearch/receiveAmendments/ModificationsReadyToAssignPage';
+import ApprovalsPage from '../pages/IRAS/reviewResearch/approvals/ApprovalsPage';
+import ModificationsCommonPage from '../pages/IRAS/makeChanges/modifications/ModificationsCommonPage';
+import PlannedEndDateChangePage from '../pages/IRAS/makeChanges/modifications/changePlannedEndDate/PlannedEndDateChangePage';
+import AffectedOrganisationSelectionPage from '../pages/IRAS/makeChanges/modifications/changePlannedEndDate/AffectedOrganisationSelectionPage';
+import AffectedOrganisationQuestionsPage from '../pages/IRAS/makeChanges/modifications/changePlannedEndDate/AffectedOrganisationQuestionsPage';
+import ReviewChangesPlannedEndDatePage from '../pages/IRAS/makeChanges/modifications/changePlannedEndDate/ReviewChangesPlannedEndDatePage';
+import AddDocumentsModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/AddDocumentsModificationsPage';
+import ReviewUploadedDocumentsModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/ReviewUploadedDocumentsModificationsPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -95,6 +107,18 @@ type CustomFixtures = {
   checkAddUserReviewBodyPage: CheckAddUserReviewBodyPage;
   accessDeniedPage: AccessDeniedPage;
   rtsPage: RtsPage;
+  approvalsPage: ApprovalsPage;
+  participatingOrganisationsPage: ParticipatingOrganisationsPage;
+  selectAreaOfChangePage: SelectAreaOfChangePage;
+  searchModificationsPage: SearchModificationsPage;
+  modificationsReadyToAssignPage: ModificationsReadyToAssignPage;
+  modificationsCommonPage: ModificationsCommonPage;
+  plannedEndDateChangePage: PlannedEndDateChangePage;
+  affectedOrganisationSelectionPage: AffectedOrganisationSelectionPage;
+  affectedOrganisationQuestionsPage: AffectedOrganisationQuestionsPage;
+  reviewChangesPlannedEndDatePage: ReviewChangesPlannedEndDatePage;
+  addDocumentsModificationsPage: AddDocumentsModificationsPage;
+  reviewUploadedDocumentsModificationsPage: ReviewUploadedDocumentsModificationsPage;
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -283,6 +307,53 @@ export const test = base.extend<CustomFixtures>({
     await use(new RtsPage(page));
   },
 
+  participatingOrganisationsPage: async ({ page }, use) => {
+    await use(new ParticipatingOrganisationsPage(page));
+  },
+
+  selectAreaOfChangePage: async ({ page }, use) => {
+    await use(new SelectAreaOfChangePage(page));
+  },
+
+  searchModificationsPage: async ({ page }, use) => {
+    await use(new SearchModificationsPage(page));
+  },
+
+  approvalsPage: async ({ page }, use) => {
+    await use(new ApprovalsPage(page));
+  },
+
+  modificationsReadyToAssignPage: async ({ page }, use) => {
+    await use(new ModificationsReadyToAssignPage(page));
+  },
+  modificationsCommonPage: async ({ page }, use) => {
+    await use(new ModificationsCommonPage(page));
+  },
+
+  plannedEndDateChangePage: async ({ page }, use) => {
+    await use(new PlannedEndDateChangePage(page));
+  },
+
+  affectedOrganisationSelectionPage: async ({ page }, use) => {
+    await use(new AffectedOrganisationSelectionPage(page));
+  },
+
+  affectedOrganisationQuestionsPage: async ({ page }, use) => {
+    await use(new AffectedOrganisationQuestionsPage(page));
+  },
+
+  reviewChangesPlannedEndDatePage: async ({ page }, use) => {
+    await use(new ReviewChangesPlannedEndDatePage(page));
+  },
+
+  addDocumentsModificationsPage: async ({ page }, use) => {
+    await use(new AddDocumentsModificationsPage(page));
+  },
+
+  reviewUploadedDocumentsModificationsPage: async ({ page }, use) => {
+    await use(new ReviewUploadedDocumentsModificationsPage(page));
+  },
+
   makeAxeBuilder: async ({ page }, use) => {
     const makeAxeBuilder = () => new AxeBuilder({ page });
     await use(makeAxeBuilder);
@@ -292,10 +363,14 @@ export const test = base.extend<CustomFixtures>({
   storageState: async ({ $tags, storageState }, use) => {
     if ($tags.includes('@SysAdminUser')) {
       storageState = getAuthState('system_admin');
-    } else if ($tags.includes('@FrontStageUser')) {
-      storageState = getAuthState('frontstage_user');
-    } else if ($tags.includes('@BackStageUser')) {
-      storageState = getAuthState('backstage_user');
+    } else if ($tags.includes('@ApplicantUser')) {
+      storageState = getAuthState('applicant_user');
+    } else if ($tags.includes('@StudyWideReviewer')) {
+      storageState = getAuthState('studywide_reviewer');
+    } else if ($tags.includes('@TeamManager')) {
+      storageState = getAuthState('team_manager');
+    } else if ($tags.includes('@WorkFlowCoordinator')) {
+      storageState = getAuthState('workflow_coordinator');
     }
     await use(storageState);
   },

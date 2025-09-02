@@ -1,5 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../hooks/CustomFixtures';
+import dateTimeRelatedData from '../../resources/test_data/common/date_time_related_data.json';
 
 const { Given, Then } = createBdd(test);
 
@@ -28,8 +29,10 @@ Then(
 Then('I can see the workspaces in my account home page for {string}', async ({ homePage }, user: string) => {
   const expectedLinksMap = {
     System_Admin: homePage.homePageTestData.Home_Page.workspaces_links_system_admin,
-    Frontstage_User: homePage.homePageTestData.Home_Page.workspaces_links_frontstage_user,
-    Backstage_User: homePage.homePageTestData.Home_Page.workspaces_links_backstage_user,
+    Applicant_User: homePage.homePageTestData.Home_Page.workspaces_links_applicant_user,
+    Studywide_Reviewer: homePage.homePageTestData.Home_Page.workspaces_links_studywide_reviewer,
+    Team_Manager: homePage.homePageTestData.Home_Page.workspaces_links_team_manager,
+    Workflow_Coordinator: homePage.homePageTestData.Home_Page.workspaces_links_workflow_coordinator,
   };
   const expectedLinks = expectedLinksMap[user];
   if (!expectedLinks) {
@@ -40,5 +43,10 @@ Then('I can see the workspaces in my account home page for {string}', async ({ h
 });
 
 Then('I validate the last logged in is displayed as full date in home page', async ({ manageUsersPage, homePage }) => {
-  expect(await homePage.lastLoggedIn.textContent()).toContain(manageUsersPage.getLastLoggedInDateFull());
+  expect(homePage.lastLoggedIn).toContainText(`${manageUsersPage.getLastLoggedInDateFull()} ${dateTimeRelatedData.at}`);
+  if (manageUsersPage.getLastLoggedInHours() >= 12) {
+    expect(homePage.lastLoggedIn).toContainText(`${dateTimeRelatedData.afternoon} ${dateTimeRelatedData.uk_time}`);
+  } else {
+    expect(homePage.lastLoggedIn).toContainText(`${dateTimeRelatedData.morning} ${dateTimeRelatedData.uk_time}`);
+  }
 });

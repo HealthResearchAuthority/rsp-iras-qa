@@ -46,14 +46,22 @@ export default class LoginPage {
       secretKey = confirmStringNotNull(process.env.SYSTEM_ADMIN_SECRET_KEY);
       authTag = confirmStringNotNull(process.env.SYSTEM_ADMIN_AUTH_TAG);
       mfaKey = confirmStringNotNull(process.env.SYSTEM_ADMIN_MFA_KEY);
-    } else if (dataset === 'Frontstage_User') {
-      secretKey = confirmStringNotNull(process.env.FRONTSTAGE_USER_SECRET_KEY);
-      authTag = confirmStringNotNull(process.env.FRONTSTAGE_USER_AUTH_TAG);
-      mfaKey = confirmStringNotNull(process.env.FRONTSTAGE_USER_MFA_KEY);
-    } else if (dataset === 'Backstage_User') {
-      secretKey = confirmStringNotNull(process.env.BACKSTAGE_USER_SECRET_KEY);
-      authTag = confirmStringNotNull(process.env.BACKSTAGE_USER_AUTH_TAG);
-      mfaKey = confirmStringNotNull(process.env.BACKSTAGE_USER_MFA_KEY);
+    } else if (dataset === 'Applicant_User') {
+      secretKey = confirmStringNotNull(process.env.APPLICANT_USER_SECRET_KEY);
+      authTag = confirmStringNotNull(process.env.APPLICANT_USER_AUTH_TAG);
+      mfaKey = confirmStringNotNull(process.env.APPLICANT_USER_MFA_KEY);
+    } else if (dataset === 'Studywide_Reviewer') {
+      secretKey = confirmStringNotNull(process.env.STUDYWIDE_REVIEWER_SECRET_KEY);
+      authTag = confirmStringNotNull(process.env.STUDYWIDE_REVIEWER_AUTH_TAG);
+      mfaKey = confirmStringNotNull(process.env.STUDYWIDE_REVIEWER_MFA_KEY);
+    } else if (dataset === 'Team_Manager') {
+      secretKey = confirmStringNotNull(process.env.TEAM_MANAGER_SECRET_KEY);
+      authTag = confirmStringNotNull(process.env.TEAM_MANAGER_AUTH_TAG);
+      mfaKey = confirmStringNotNull(process.env.TEAM_MANAGER_MFA_KEY);
+    } else if (dataset === 'Workflow_Coordinator') {
+      secretKey = confirmStringNotNull(process.env.WORKFLOW_COORDINATOR_SECRET_KEY);
+      authTag = confirmStringNotNull(process.env.WORKFLOW_COORDINATOR_AUTH_TAG);
+      mfaKey = confirmStringNotNull(process.env.WORKFLOW_COORDINATOR_MFA_KEY);
     } else {
       throw new Error(`${dataset} is not a valid option`);
     }

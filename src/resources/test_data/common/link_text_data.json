@@ -31,7 +31,7 @@
     "REC_members": "REC members",
     "Sponsor": "Sponsor",
     "System_Administration": "System administration",
-    "Technical|_Assurance": "Technical Assurance",
+    "Technical_Assurance": "Technical Assurance",
     "Technical_Assurance_reviewers": "Technical Assurance reviewers"
   },
   "Project_Details_IRAS_Page": {
@@ -49,7 +49,9 @@
   "Manage_Users_Page": {
     "Add_New_User_Profile_Record": "Add a new user profile record",
     "Back": "Back",
-    "View_Edit": "View/Edit"
+    "View_Edit": "View/Edit",
+    "Advanced_Filter": "Advanced filters",
+    "Clear_All_Filters": "Clear all filters"
   },
   "Create_User_Profile_Page": {
     "Back": "Back"
@@ -80,7 +82,8 @@
   "Manage_Review_Bodies_Page": {
     "Back": "Back",
     "Add_New_Review_Body_Record": "Add a new review body record",
-    "View_Edit": "View/Edit"
+    "View_Edit": "View/Edit",
+    "Clear_All_Filters": "Clear all filters"
   },
   "System_Administration_Page": {
     "Back": "Back",
@@ -114,7 +117,8 @@
     "Back": "Back"
   },
   "Project_Overview_Page": {
-    "Project_Details": "Project details"
+    "Project_Details": "Project details",
+    "Post_Approval": "Post approval"
   },
   "Review_Body_User_List_Page": {
     "Back_To_Review_Body_Profile": "Back to review body profile",
@@ -142,6 +146,42 @@
     "Back_To_Manage_Review_Bodies": "Back to Manage review bodies"
   },
   "My_Research_Page": {
+    "Back": "Back"
+  },
+  "Search_Modifications_Page": {
+    "Advanced_Filters": "Advanced filters",
+    "Clear_All_Filters": "Clear all filters",
+    "Back": "Back"
+  },
+  "Select_Area_Of_Change_Page": {
+    "Back": "Back",
+    "Remove_This_Change": "Remove this change"
+  },
+  "Planned_End_Date_Change_Page": {
+    "Back": "Back"
+  },
+  "Participating_Organisations_Page": {
+    "Back": "Back",
+    "Advanced_Filter": "Advanced filter",
+    "Remove_This_Change": "Remove this change"
+  },
+  "Approvals_Page": {
+    "Search": "Search",
+    "Back": "Back",
+    "Modifications_Tasklist": "Modifications tasklist"
+  },
+  "Modifications_Tasklist_Page": {
+    "Back": "Back"
+  },
+  "Affected_Organisation_Selection_Page": {
+    "Back": "Back",
+    "Remove_This_Change": "Remove this change"
+  },
+  "Affected_Organisation_Questions_Page": {
+    "Back": "Back",
+    "Remove_This_Change": "Remove this change"
+  },
+  "Review_Changes_Planned_End_Date_Page": {
     "Back": "Back"
   }
 }

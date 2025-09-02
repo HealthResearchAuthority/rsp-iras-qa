@@ -6,7 +6,14 @@ import { confirmArrayNotNull } from '../../utils/UtilFunctions';
 When(
   'I fill the search input for searching {string} with {string} as the search query',
   async (
-    { manageReviewBodiesPage, manageUsersPage, userListReviewBodyPage, searchAddUserReviewBodyPage, commonItemsPage },
+    {
+      manageReviewBodiesPage,
+      manageUsersPage,
+      userListReviewBodyPage,
+      searchAddUserReviewBodyPage,
+      searchModificationsPage,
+      commonItemsPage,
+    },
     searchType: string,
     searchQueryName: string
   ) => {
@@ -21,6 +28,8 @@ When(
         searchAddUserReviewBodyPage.searchAddUserReviewBodyPageData.Search_Add_User_Review_Body.Search_Queries[
           searchQueryName
         ];
+    } else if (searchType.toLowerCase() == 'modifications') {
+      searchQueryDataset = searchModificationsPage.searchModificationsPageTestData.Search_Queries[searchQueryName];
     } else if ((await commonItemsPage.tableBodyRows.count()) < 1) {
       throw new Error(`There are no items in list to search`);
     }
@@ -59,4 +68,14 @@ Then('the list displays {string}', async ({ commonItemsPage }, resultsAmount: st
   } else {
     expect(await commonItemsPage.tableBodyRows.count()).toBeGreaterThan(1);
   }
+});
+
+Then('the search displays no matching results', async ({ commonItemsPage }) => {
+  await expect(commonItemsPage.no_results_heading).toBeVisible();
+  await expect(commonItemsPage.no_results_guidance_text).toBeVisible();
+  const noResultsGuidanceBulletList = await commonItemsPage.no_results_bullet_points.allInnerTexts();
+  await expect(commonItemsPage.no_results_bullet_points).toHaveCount(
+    commonItemsPage.commonTestData.no_results_bullet_points.length
+  );
+  expect(noResultsGuidanceBulletList).toEqual(commonItemsPage.commonTestData.no_results_bullet_points);
 });

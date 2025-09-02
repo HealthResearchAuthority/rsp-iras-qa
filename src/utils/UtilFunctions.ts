@@ -1,6 +1,6 @@
 import { DataTable } from 'playwright-bdd';
 import { Locator, chromium, devices, firefox, webkit } from '@playwright/test';
-import { createDecipheriv, DecipherGCM } from 'crypto';
+import { createDecipheriv, DecipherGCM, randomInt } from 'crypto';
 import { readFile, writeFile } from 'fs/promises';
 import 'dotenv/config';
 import { deviceDSafari, deviceDFirefox, deviceDChrome, deviceDEdge } from '../hooks/GlobalSetup';
@@ -34,11 +34,17 @@ export function getAuthState(user: string): string {
     case 'system_admin':
       authState = 'auth-storage-states/sysAdminUser.json';
       break;
-    case 'frontstage_user':
-      authState = 'auth-storage-states/frontStageUser.json';
+    case 'applicant_user':
+      authState = 'auth-storage-states/applicantUser.json';
       break;
-    case 'backstage_user':
-      authState = 'auth-storage-states/backStageUser.json';
+    case 'studywide_reviewer':
+      authState = 'auth-storage-states/studyWideReviewer.json';
+      break;
+    case 'team_manager':
+      authState = 'auth-storage-states/teamManager.json';
+      break;
+    case 'workflow_coordinator':
+      authState = 'auth-storage-states/workFlowCoordinator.json';
       break;
     default:
       throw new Error(`${user} is not a valid option`);
@@ -517,6 +523,16 @@ export async function generateUniqueValue(keyVal: string, prefix: string): Promi
   return `${domain}${prefix}${timestamp}`;
 }
 
+export async function generatePhoneNumber(): Promise<string> {
+  const prefix = '07';
+  const digitsNeeded = 9;
+  let number = '';
+  for (let i = 0; i < digitsNeeded; i++) {
+    number += Math.floor(Math.random() * 10).toString();
+  }
+  return prefix + number;
+}
+
 export async function removeUnwantedWhitespace(value: string): Promise<string> {
   return value.replaceAll(/\s+/g, ' ').trim();
 }
@@ -552,6 +568,28 @@ export async function convertDate(day: string, month: number, year: number): Pro
   return formattedDate.toString();
 }
 
+export async function convertDateShortMonth(day: string, month: string, year: number): Promise<string> {
+  const formattedDay = String(parseInt(day, 10));
+  const formattedMonth = month.charAt(0).toUpperCase() + month.slice(1, 3).toLowerCase();
+  const formattedDate = `${formattedDay} ${formattedMonth} ${year}`;
+  return formattedDate;
+}
+
+export async function validateDateRange(validationDate: string, fromDate?: string, toDate?: string): Promise<boolean> {
+  const target = new Date(validationDate);
+  const from = new Date(fromDate);
+  const to = new Date(toDate);
+  if (!from.toString().includes('Invalid Date') && !to.toString().includes('Invalid Date')) {
+    return target >= from && target <= to;
+  } else if (!from.toString().includes('Invalid Date')) {
+    return target >= from;
+  } else if (!to.toString().includes('Invalid Date')) {
+    return target <= to;
+  }
+  // If both from and to are not provided or are placeholders, consider it invalid
+  return false;
+}
+
 export async function returnSingleRandomLocator(resolvesToMultiElements: Locator): Promise<Locator> {
   const noOfElements = await resolvesToMultiElements.count();
   const randomIndex = Math.floor(Math.random() * (noOfElements - 1));
@@ -573,4 +611,10 @@ export function resolveEnvExpression(template: string): string {
     throw new Error(`Environment variable "${envVar}" is not defined`);
   }
   return value;
+}
+
+export async function getRandomNumber(min: number, max: number): Promise<number> {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return randomInt(min, max);
 }

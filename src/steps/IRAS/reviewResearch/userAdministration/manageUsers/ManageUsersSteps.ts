@@ -1,5 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../../hooks/CustomFixtures';
+import dateTimeRelatedData from '../../../../../resources/test_data/common/date_time_related_data.json';
 const { When, Then } = createBdd(test);
 
 When('I update user profile with {string}', async ({ commonItemsPage, editUserProfilePage }, datasetName: string) => {
@@ -100,7 +101,7 @@ When(
 When(
   'I validate the last logged in is displayed blank for the new user who has not yet logged in to the application',
   async ({ manageUsersPage }) => {
-    expect(await manageUsersPage.last_logged_in_from_list_label.textContent()).toBe('');
+    expect(manageUsersPage.last_logged_in_from_list_label).toBeEmpty();
   }
 );
 
@@ -118,14 +119,20 @@ When('I keep note of the current login date', async ({ manageUsersPage }) => {
   }).format(today);
   manageUsersPage.setLastLoggedInDateFull(formattedDateFull);
   manageUsersPage.setLastLoggedInDateTruncated(formattedDateTruncated);
+  manageUsersPage.setLastLoggedInHours(today.getHours());
 });
 
 When(
   'I validate the last logged in is displayed as truncated date in manage users page',
   async ({ manageUsersPage }) => {
-    expect(await manageUsersPage.last_logged_in_from_list_label.textContent()).toBe(
-      manageUsersPage.getLastLoggedInDateTruncated()
+    expect(manageUsersPage.last_logged_in_from_list_label).toContainText(
+      `${manageUsersPage.getLastLoggedInDateTruncated()} ${dateTimeRelatedData.at}`
     );
+    if (manageUsersPage.getLastLoggedInHours() >= 12) {
+      expect(manageUsersPage.last_logged_in_from_list_label).toContainText(`${dateTimeRelatedData.afternoon}`);
+    } else {
+      expect(manageUsersPage.last_logged_in_from_list_label).toContainText(`${dateTimeRelatedData.morning}`);
+    }
   }
 );
 
@@ -140,5 +147,112 @@ When(
     } else if (caseValue === 'remove QAAutomation prefix') {
       await createUserProfilePage.setUniqueEmail(email.replace('QAAUTOMATION', ''));
     }
+  }
+);
+
+When(
+  'I enter {string} into the search field for manage users page',
+  async ({ manageUsersPage }, datasetName: string) => {
+    const dataset =
+      manageUsersPage.manageUsersPageTestData.Search_For_Users.Search_Queries_Advanced_Filter[datasetName];
+    await manageUsersPage.user_search_text.fill(dataset['search_input_text']);
+  }
+);
+
+When(
+  'I select advanced filters in the manage users page using {string}',
+  async ({ manageUsersPage, commonItemsPage }, filterDatasetName: string) => {
+    const dataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[filterDatasetName];
+    await manageUsersPage.advanced_filter_chevron.click();
+    for (const key in dataset) {
+      if (Object.hasOwn(dataset, key)) {
+        if (key.includes('date')) {
+          if (!(await manageUsersPage.date_last_logged_in_from_day_text.isVisible())) {
+            await manageUsersPage.date_last_logged_in_from_day_text_chevron.click();
+          }
+          await commonItemsPage.fillUIComponent(dataset, key, manageUsersPage);
+        } else {
+          await manageUsersPage[key + '_chevron'].click();
+          await commonItemsPage.fillUIComponent(dataset, key, manageUsersPage);
+        }
+      }
+    }
+  }
+);
+
+When(
+  'I can see the results matching the search {string} and filter criteria {string} for manage users page',
+  async ({ manageUsersPage, commonItemsPage }, searchDatasetName: string, filterDatasetName: string) => {
+    const searchCriteriaDataset =
+      manageUsersPage.manageUsersPageTestData.Search_For_Users.Search_Queries_Advanced_Filter[searchDatasetName];
+    const filterDataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[filterDatasetName];
+    if (searchDatasetName !== '') {
+      await manageUsersPage.validateResults(
+        commonItemsPage,
+        searchCriteriaDataset,
+        filterDataset,
+        searchDatasetName,
+        true
+      );
+    } else {
+      await manageUsersPage.validateResults(
+        commonItemsPage,
+        searchCriteriaDataset,
+        filterDataset,
+        searchDatasetName,
+        false
+      );
+    }
+  }
+);
+
+Then(
+  'I verify the hint text based on the {string} for manage users page',
+  async ({ manageUsersPage }, filterDatasetName: string) => {
+    const dataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[filterDatasetName];
+    for (const key in dataset) {
+      if (Object.hasOwn(dataset, key)) {
+        if (key === 'country_checkbox') {
+          const numberOfCheckboxesSelected = dataset[key].length;
+          const hintLabel =
+            numberOfCheckboxesSelected +
+            ' ' +
+            manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List
+              .selected_checkboxes_hint_label;
+          expect(await manageUsersPage.country_selected_hint_label.textContent()).toBe(hintLabel);
+        }
+      }
+    }
+  }
+);
+
+When(
+  'I expand the chevrons for {string} in manage users page',
+  async ({ manageUsersPage }, filterDatasetName: string) => {
+    const dataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[filterDatasetName];
+    for (const key in dataset) {
+      if (Object.hasOwn(dataset, key)) {
+        await manageUsersPage.clickFilterChevronUsers(dataset, key, manageUsersPage);
+      }
+    }
+  }
+);
+
+Then('I can see the {string} ui labels in manage users page', async ({ manageUsersPage }, datasetName: string) => {
+  const dataset = manageUsersPage.manageUsersPageTestData.Manage_Users_Page[datasetName];
+  for (const key in dataset) {
+    if (Object.hasOwn(dataset, key)) {
+      await expect(manageUsersPage[key].getByText(dataset[key])).toBeVisible();
+    }
+  }
+});
+
+Then(
+  'I validate {string} displayed on advanced filters in manage users page',
+  async ({ manageUsersPage }, errorMessageFieldDatasetName: string) => {
+    const fieldErrorMessagesExpected =
+      manageUsersPage.manageUsersPageTestData.Error_Message_Field_Dataset[errorMessageFieldDatasetName];
+    const fieldErrorMessagesActualValues = await manageUsersPage.date_last_logged_in_error_message.textContent();
+    expect(fieldErrorMessagesActualValues).toEqual(fieldErrorMessagesExpected);
   }
 );

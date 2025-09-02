@@ -1,0 +1,19 @@
+{
+  "Label_Texts": {
+    "iras_id_label": "IRAS ID",
+    "short_project_title_label": "Short project title",
+    "modification_id_label": "Modification ID",
+    "advanced_filter_label": "Advanced filter",
+    "remove_this_change_label": "Remove this change"
+  },
+  "Specific_Change_Pages": {
+    "Planned_End_Date": {
+      "page_header": "Change to planned end date",
+      "page_component_label": "New planned project end date"
+    },
+    "Affected_Organisation_Selection_Page": {
+      "page_header": "Change to planned end date",
+      "page_component_label": "Which organisation types does this change affect?"
+    }
+  }
+}

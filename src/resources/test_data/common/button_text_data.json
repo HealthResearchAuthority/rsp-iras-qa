@@ -24,7 +24,7 @@
     "Proceed_Submit": "Proceed to Submit"
   },
   "My_Research_Projects_Page": {
-    "Create_Project_Record": "Create project record"
+    "Create_Project_Record": "Add project"
   },
   "Create_Project_Record_Page": {
     "Start": "Start"
@@ -90,12 +90,75 @@
     "Search": "Search"
   },
   "Manage_Review_Bodies_Page": {
-    "Search": "Search"
+    "Search": "Search",
+    "Advanced_Filters": "Advanced filters",
+    "Apply_filters": "Apply filters"
   },
   "Review_Your_Answers_Page": {
     "Confirm_Project_Details": "Confirm project details"
   },
   "Manage_Users_Page": {
+    "Search": "Search",
+    "Advanced_Filters": "Advanced filters",
+    "Apply_Filters": "Apply filters"
+  },
+  "Search_Modifications_Page": {
+    "Advanced_Filters": "Advanced filters",
+    "Apply_Filters": "Apply filters",
+    "Search": "Search",
+    "Modification_Id": "Modification ID",
+    "Short_Project_Title": "Short project title",
+    "Modification_Type": "Modification type",
+    "Chief_Investigator": "Chief Investigator",
+    "Lead_Nation": "Lead Nation"
+  },
+  "Modifications_Tasklist_Page": {
+    "Modification_Id": "Modification ID",
+    "Short_Project_Title": "Short project title",
+    "Modification_Type": "Modification type",
+    "Date_Submitted": "Date submitted",
+    "Days_Since_Submission": "Days since submission",
+    "Continue_to_assign_modifications": "Continue to assign modifications",
+    "Advanced_Filters": "Advanced filters"
+  },
+  "Participating_Organisations_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later",
     "Search": "Search"
+  },
+  "Select_Area_Of_Change_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later"
+  },
+  "Modifications_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later",
+    "Save_Changes": "Save changes"
+  },
+  "Affected_Organisation_Selection_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later",
+    "Save_Changes": "Save changes"
+  },
+  "Affected_Organisation_Questions_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later",
+    "Save_Changes": "Save changes"
+  },
+  "Review_Changes_Planned_End_Date_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later"
+  },
+  "Project_Overview_Page": {
+    "Create_New_Modification": "Create new modification"
+  },
+  "Add_Document_Modifications_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later"
+  },
+  "Review_Uploaded_Document_Modifications_Page": {
+    "Add_Another_Document": "Add another document",
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later"
   }
 }
