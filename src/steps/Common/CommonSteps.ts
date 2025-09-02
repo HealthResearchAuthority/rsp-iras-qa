@@ -143,31 +143,11 @@ Then('I see something {string}', async ({ commonItemsPage }, testType: string) =
 
 Then('I click the {string} button on the {string}', async ({ commonItemsPage }, buttonKey: string, pageKey: string) => {
   const buttonValue = commonItemsPage.buttonTextData[pageKey][buttonKey];
-  // This if condition need to be removed for android after the defect fix RSP-4099
-  // if (
-  //   buttonKey == 'Create_Profile' &&
-  //   pageKey == 'Check_Create_User_Profile_Page' &&
-  //   process.env.OS_TYPE?.toLowerCase() == 'android' &&
-  //   process.env.PLATFORM?.toLowerCase() == 'mobile'
-  // ) {
-  //   await commonItemsPage.govUkButton
-  //     .getByText(buttonValue, { exact: true })
-  //     .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
-  //     .first()
-  //     .focus();
-  //   await commonItemsPage.govUkButton
-  //     .getByText(buttonValue, { exact: true })
-  //     .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
-  //     .first()
-  //     .press('Enter');
-  // } else
-  {
-    await commonItemsPage.govUkButton
-      .getByText(buttonValue, { exact: true })
-      .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
-      .first()
-      .click();
-  }
+  await commonItemsPage.govUkButton
+    .getByText(buttonValue, { exact: true })
+    .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
+    .first()
+    .click();
   await commonItemsPage.page.waitForLoadState('domcontentloaded');
 });
 

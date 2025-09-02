@@ -36,7 +36,6 @@ When(
     const changeLink = await commonItemsPage.getChangeLink(fieldKey, checkCreateUserProfilePage);
     await expect(changeLink).toBeVisible();
     await changeLink.click();
-    // await checkCreateUserProfilePage.clickOnChangeButtonRoleOperations(fieldKey);
   }
 );
 

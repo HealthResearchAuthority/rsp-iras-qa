@@ -152,7 +152,6 @@ Then(
 Then(
   'I retrieve the list of review bodies displayed in the add a new user profile page',
   async ({ createUserProfilePage, commonItemsPage }) => {
-    // const actualList = await createUserProfilePage.getReviewBodiesListFromUI(commonItemsPage);
     const actualList = await commonItemsPage.getLabelsFromCheckboxes(createUserProfilePage.review_body_checkbox);
     await createUserProfilePage.setReviewBodies(actualList);
   }
@@ -171,7 +170,6 @@ Then(
   'I can see the role dropdown on the add a new user profile page contains the expected roles in alphabetical order',
   async ({ createUserProfilePage, commonItemsPage }) => {
     const expectedList = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile_Page['role_checkbox'];
-    // const actualList = await createUserProfilePage.getRolesListFromUI(commonItemsPage);
     const actualList = await commonItemsPage.getLabelsFromCheckboxes(createUserProfilePage.role_checkbox);
     expect(actualList).toEqual(expectedList);
   }
