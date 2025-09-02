@@ -1,4 +1,4 @@
-@RegressionCreateManageUsers @RegressionManageUsers @SysAdminUser @Regression @Test4390
+@RegressionCreateManageUsers @RegressionManageUsers @SysAdminUser @Regression
 Feature: User Administration: Create Manage Users
 
     Background:
@@ -27,6 +27,8 @@ Feature: User Administration: Create Manage Users
         And I can see the 'Manage_Users_Page'
         And I capture the page screenshot
         When I enter '<Search_Queries>' into the search field for manage users page
+        And I capture the page screenshot
+        And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
         And I capture the page screenshot
         And I select advanced filters in the manage users page using '<Advanced_Filters_Users>'
         And I capture the page screenshot
@@ -90,6 +92,8 @@ Feature: User Administration: Create Manage Users
         And I can see the 'Manage_Users_Page'
         And I capture the page screenshot
         When I enter '<Search_Queries>' into the search field for manage users page
+        And I capture the page screenshot
+        And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
         And I capture the page screenshot
         And I select advanced filters in the manage users page using '<Advanced_Filters_Users>'
         And I capture the page screenshot
@@ -156,6 +160,8 @@ Feature: User Administration: Create Manage Users
         And I capture the page screenshot
         When I enter '<Search_Queries>' into the search field for manage users page
         And I capture the page screenshot
+        And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
+        And I capture the page screenshot
         And I select advanced filters in the manage users page using '<Advanced_Filters>'
         And I capture the page screenshot
         And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
@@ -192,6 +198,8 @@ Feature: User Administration: Create Manage Users
         And I capture the page screenshot
         When I enter '<Search_Queries>' into the search field for manage users page
         And I capture the page screenshot
+        And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
+        And I capture the page screenshot
         And I select advanced filters in the manage users page using '<Advanced_Filters_Users>'
         And I capture the page screenshot
         And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
@@ -209,6 +217,8 @@ Feature: User Administration: Create Manage Users
         Then I can see the 'Manage_Users_Page'
         And I capture the page screenshot
         When I enter '<Search_Queries>' into the search field for manage users page
+        And I capture the page screenshot
+        And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
         And I capture the page screenshot
         And I select advanced filters in the manage users page using '<Advanced_Filters_Users_Disabled>'
         And I capture the page screenshot
@@ -233,6 +243,8 @@ Feature: User Administration: Create Manage Users
         And I can see the 'Manage_Users_Page'
         And I capture the page screenshot
         When I enter '<Search_Queries>' into the search field for manage users page
+        And I capture the page screenshot
+        And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
         And I capture the page screenshot
         And I select advanced filters in the manage users page using '<Advanced_Filters_Users>'
         And I capture the page screenshot

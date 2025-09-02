@@ -25,12 +25,8 @@ export default class CheckCreateUserProfilePage {
   readonly job_title_change_link: Locator;
   readonly role_checkbox: Locator;
   readonly role_change_link: Locator;
-  // readonly committee_dropdown: Locator;
-  // readonly committee_change_link: Locator;
   readonly country_checkbox: Locator;
   readonly country_change_link: Locator;
-  // readonly access_required_checkbox: Locator;
-  // readonly access_required_change_link: Locator;
   readonly review_body_checkbox: Locator;
   readonly review_body_change_link: Locator;
   readonly create_profile_button: Locator;
@@ -147,8 +143,6 @@ export default class CheckCreateUserProfilePage {
           exact: true,
         }),
     });
-    // this.committee_change_link = this.committee_row.locator(this.row_change_link_locator);
-    // this.committee_dropdown = this.committee_row.locator('td', { has: this.row_value_locator });
     this.country_row = this.page.locator('tr', {
       has: this.page
         .getByRole('cell')
@@ -165,8 +159,6 @@ export default class CheckCreateUserProfilePage {
           exact: true,
         }),
     });
-    // this.access_required_change_link = this.access_required_row.locator(this.row_change_link_locator);
-    // this.access_required_checkbox = this.access_required_row.locator('td', { has: this.row_value_locator });
     this.review_body_row = this.page.locator('tr', {
       has: this.page
         .getByRole('cell')

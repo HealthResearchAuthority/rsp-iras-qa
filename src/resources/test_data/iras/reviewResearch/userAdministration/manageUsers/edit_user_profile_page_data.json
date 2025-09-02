@@ -28,13 +28,11 @@
     "last_name_text": "Enter a last name"
   },
   "Missing_Mandatory_Fields_Role_Studywide_Reviewer_Error": {
-    "email_address_text": "Enter an email address",
     "first_name_text": "Enter a first name",
     "last_name_text": "Enter a last name",
     "review_body_checkbox": "Select at least one review body"
   },
   "Missing_Mandatory_Fields_Role_Workflow_Coordinator_Error": {
-    "email_address_text": "Enter an email address",
     "first_name_text": "Enter a first name",
     "last_name_text": "Enter a last name",
     "review_body_checkbox": "Select at least one review body"
@@ -44,9 +42,6 @@
   },
   "Missing_Mandatory_Field_Last_Name_Role_Applicant_System_Administrator_Error": {
     "last_name_text": "Enter a last name"
-  },
-  "Missing_Mandatory_Field_Email_Address_Role_Applicant_System_Administrator_Error": {
-    "email_address_text": "Enter an email address"
   },
   "Missing_Mandatory_Field_Country_Role_Team_Manager_Error": {
     "country_checkbox": "Select at least one country"
@@ -117,27 +112,6 @@
       "job_title_text": "Sr.Reviewer",
       "role_checkbox": ["System administrator"]
     },
-    "Edit_User_Valid_Data": {
-      "title_text": "Mr",
-      "first_name_text": "QA Automation First Name Test",
-      "last_name_text": "Test Last Name",
-      "email_address_text": "hscrd@health.org",
-      "telephone_text": "07000000000",
-      "organisation_text": "QA Automation HRA",
-      "job_title_text": "Sr.Reviewer",
-      "role_checkbox": ["Team manager"],
-      "country_checkbox": ["England"]
-    },
-    "Valid_Mandatory_Fields": {
-      "first_name_text": "First Name Test",
-      "last_name_text": "Test Last Name",
-      "email_address_text": "hscrd@health.org"
-    },
-    "Missing_All_Mandatory_Fields": {
-      "first_name_text": "",
-      "last_name_text": "",
-      "email_address_text": ""
-    },
     "All_Checkbox_Fields": {
       "role_checkbox": [
         "Applicant",
@@ -149,29 +123,6 @@
       "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
     }
   },
-  "Label_Texts_Role_Operations": {
-    "title_textbox_label": "Title",
-    "first_name_textbox_label": "First name",
-    "last_name_textbox_label": "Last name",
-    "email_address_textbox_label": "Email address",
-    "telephone_textbox_label": "Telephone",
-    "organisation_textbox_label": "Organisation",
-    "job_title_textbox_label": "Job title",
-    "role_checkbox_label": "Role",
-    "committee_dropdown_label": "Committee",
-    "country_checkbox_label": "Country"
-  },
-
-  "Label_Texts_Role_System_Administrator": {
-    "title_textbox_label": "Title",
-    "first_name_textbox_label": "First name",
-    "last_name_textbox_label": "Last name",
-    "email_address_textbox_label": "Email address",
-    "telephone_textbox_label": "Telephone",
-    "organisation_textbox_label": "Organisation",
-    "job_title_textbox_label": "Job title",
-    "role_checkbox_label": "Role"
-  },
   "Max_Field_Length_Error_Message": {
     "max_field_length_error": "Max 250 characters allowed"
   },
@@ -179,11 +130,6 @@
     "first_name_error": "The FirstName field is required.",
     "last_name_error": "The LastName field is required.",
     "email_address_error": "The Email field is required."
-  },
-  "Empty_UserProfile_Mandatory_Data": {
-    "empty_first_name_text": "",
-    "empty_last_name_text": "",
-    "empty_email_address_text": ""
   },
   "User_Title_Text_One": {
     "title_text": "Miss"
@@ -330,20 +276,17 @@
   "Missing_Mandatory_Fields_Role_Studywide_Reviewer": {
     "first_name_text": "",
     "last_name_text": "",
-    "email_address_text": "",
     "role_checkbox": ["Study-wide reviewer"]
   },
   "Missing_Mandatory_Fields_Role_Workflow_Coordinator": {
     "first_name_text": "",
     "last_name_text": "",
-    "email_address_text": "",
     "role_checkbox": ["Workflow co-ordinator"]
   },
   "Missing_Mandatory_Field_First_Name_Role_Applicant_System_Administrator": {
     "title_text": "Mr",
     "first_name_text": "",
     "last_name_text": "Test Last Name Role_Reviewer",
-    "email_address_text": "hscrd@health.org",
     "telephone_text": "07000000000",
     "organisation_text": "QA Automation HRA Role_Reviewer",
     "job_title_text": "Sr.Reviewer Role_Reviewer",
@@ -353,17 +296,6 @@
     "title_text": "Mr",
     "first_name_text": "Test First Name Role_Reviewer",
     "last_name_text": "",
-    "email_address_text": "hscrd@health.org",
-    "telephone_text": "07000000000",
-    "organisation_text": "QA Automation HRA Role_Reviewer",
-    "job_title_text": "Sr.Reviewer Role_Reviewer",
-    "role_checkbox": ["Applicant", "System administrator"]
-  },
-  "Missing_Mandatory_Field_Email_Address_Role_Applicant_System_Administrator": {
-    "title_text": "Mr",
-    "first_name_text": "Test First Name Role_Reviewer",
-    "last_name_text": "Test Last Name Role_Reviewer",
-    "email_address_text": "",
     "telephone_text": "07000000000",
     "organisation_text": "QA Automation HRA Role_Reviewer",
     "job_title_text": "Sr.Reviewer Role_Reviewer",
@@ -373,7 +305,6 @@
     "title_text": "Mr",
     "first_name_text": "Test First Name Role_Reviewer",
     "last_name_text": "Test Last Name Role_Reviewer",
-    "email_address_text": "hscrd@health.org",
     "telephone_text": "07000000000",
     "organisation_text": "QA Automation HRA Role_Reviewer",
     "job_title_text": "Sr.Reviewer Role_Reviewer",
@@ -383,7 +314,6 @@
     "title_text": "Mr",
     "first_name_text": "Test First Name Role_Reviewer",
     "last_name_text": "Test Last Name Role_Reviewer",
-    "email_address_text": "hscrd@health.org",
     "telephone_text": "07000000000",
     "organisation_text": "QA Automation HRA Role_Reviewer",
     "job_title_text": "Sr.Reviewer Role_Reviewer",
@@ -393,7 +323,6 @@
     "title_text": "Mr",
     "first_name_text": "Test First Name Role_Reviewer",
     "last_name_text": "Test Last Name Role_Reviewer",
-    "email_address_text": "hscrd@health.org",
     "telephone_text": "07000000000",
     "organisation_text": "QA Automation HRA Role_Reviewer",
     "job_title_text": "Sr.Reviewer Role_Reviewer",
@@ -403,7 +332,6 @@
     "title_text": "Exploring the Intricacies of Advanced Quantum Computing: Unveiling the Potential of Quantum Algorithms, Quantum Cryptography, and Quantum Machine Learning in Revolutionizing Technology and Shaping the Future of Computational Science and Engineering Morethan250chars",
     "first_name_text": "AelianaSophiaIsabellaGabriellaAlexandriaSeraphinaValentinaAnastasiaEvangelineArabellaCassandraJulianaEmmanuellaTheodosiaChristabellaMariabellaRosabellaViolettaAngelinaSerenellaElizabellaMarcellinaMirabellaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx Morethan250chars",
     "last_name_text": "AelianaSophiaIsabellaGabriellaAlexandriaSeraphinaValentinaAnastasiaEvangelineArabellaCassandraJulianaEmmanuellaTheodosiaChristabellaMariabellaRosabellaViolettaAngelinaSerenellaElizabellaMarcellinaMirabellaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx Morethan250charss",
-    "email_address_text": "EmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExcee@example.com",
     "telephone_text": "9123456789014",
     "organisation_text": "AelianaSophiaIsabellaGabriellaAlexandriaSeraphinaValentinaAnastasiaEvangelineArabellaCassandraJulianaEmmanuellaTheodosiaChristabellaMariabellaRosabellaViolettaAngelinaSerenellaElizabellaMarcellinaMirabellaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx Morethan250chars",
     "job_title_text": "AelianaSophiaIsabellaGabriellaAlexandriaSeraphinaValentinaAnastasiaEvangelineArabellaCassandraJulianaEmmanuellaTheodosiaChristabellaMariabellaRosabellaViolettaAngelinaSerenellaElizabellaMarcellinaMirabellaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx Morethan250chars"
@@ -411,13 +339,11 @@
   "Incorrect_Format_Telephone_Data": {
     "first_name_text": "First Name Test",
     "last_name_text": "Test Last Name",
-    "email_address_text": "Johndoe2@example.com",
     "telephone_text": "abcd"
   },
   "Incorrect_Format_Invalid_Character_Limit_Telephone_Data": {
     "first_name_text": "First Name Test",
     "last_name_text": "Test Last Name",
-    "email_address_text": "Johndoe2@example.com",
     "telephone_text": "+12345678901"
   }
 }

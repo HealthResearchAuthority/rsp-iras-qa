@@ -27,9 +27,7 @@ export default class UserProfilePage {
   private _new_job_title: string;
   private _countries: string[];
   private _new_countries: string[];
-  // private _access_required: string[];
   private _review_body: string[];
-  // private _new_access_required: string[];
   private _role: string[];
   readonly selected_bread_crumbs: Locator;
   readonly page_heading: Locator;
@@ -60,15 +58,9 @@ export default class UserProfilePage {
   readonly role_row: Locator;
   readonly role_value: Locator;
   readonly role_change_link: Locator;
-  // readonly committee_row: Locator;
-  // readonly committee_value: Locator;
-  // readonly committee_change_link: Locator;
   readonly country_row: Locator;
   readonly country_value: Locator;
   readonly country_change_link: Locator;
-  // readonly access_required_row: Locator;
-  // readonly access_required_value: Locator;
-  // readonly access_required_change_link: Locator;
   readonly review_body_row: Locator;
   readonly review_body_value: Locator;
   readonly review_body_change_link: Locator;
@@ -104,10 +96,10 @@ export default class UserProfilePage {
     this._new_job_title = '';
     this._countries = [];
     this._new_countries = [];
-    // this._access_required = [];
     this._review_body = [];
-    // this._new_access_required = [];
     this._role = [];
+
+    //Locators
     this.page_heading = this.page
       .getByRole('heading')
       .getByText(this.userProfilePageTestData.User_Profile_Page.page_heading_prefix, { exact: false });
@@ -172,13 +164,6 @@ export default class UserProfilePage {
     });
     this.role_value = this.role_row.locator('td', { has: this.row_value_locator });
     this.role_change_link = this.role_row.locator(this.row_change_link_locator);
-    // this.committee_row = this.page.locator('tr', {
-    //   has: this.page.getByRole('cell').getByText(this.userProfilePageTestData.User_Profile_Page.committee_label, {
-    //     exact: true,
-    //   }),
-    // });
-    // this.committee_value = this.committee_row.locator('td', { has: this.row_value_locator });
-    // this.committee_change_link = this.committee_row.locator(this.row_change_link_locator);
     this.country_row = this.page.locator('tr', {
       has: this.page.getByRole('cell').getByText(this.userProfilePageTestData.User_Profile_Page.country_label, {
         exact: true,
@@ -186,13 +171,6 @@ export default class UserProfilePage {
     });
     this.country_value = this.country_row.locator('td', { has: this.row_value_locator });
     this.country_change_link = this.country_row.locator(this.row_change_link_locator);
-    // this.access_required_row = this.page.locator('tr', {
-    //   has: this.page.getByRole('cell').getByText(this.userProfilePageTestData.User_Profile_Page.access_required_label, {
-    //     exact: true,
-    //   }),
-    // });
-    // this.access_required_value = this.access_required_row.locator('td', { has: this.row_value_locator });
-    // this.access_required_change_link = this.access_required_row.locator(this.row_change_link_locator);
     this.review_body_row = this.page.locator('tr', {
       has: this.page.getByRole('cell').getByText(this.userProfilePageTestData.User_Profile_Page.review_body_label, {
         exact: true,
@@ -227,104 +205,34 @@ export default class UserProfilePage {
   async clickOnChangeUserProfileDetails(editUserFieldName: string, userRole: string) {
     switch (editUserFieldName) {
       case 'title_text':
-        // All android specific if conditions need to be removed after the defect fix RSP-4099
-        // if (process.env.OS_TYPE?.toLowerCase() == 'android' && process.env.PLATFORM?.toLowerCase() == 'mobile') {
-        //   await this.title_change_link.focus();
-        //   await this.title_change_link.press('Enter');
-        // } else
-        {
-          await this.title_change_link.click();
-        }
+        await this.title_change_link.click();
         break;
       case 'first_name_text':
-        // if (process.env.OS_TYPE?.toLowerCase() == 'android' && process.env.PLATFORM?.toLowerCase() == 'mobile') {
-        //   await this.first_name_change_link.focus();
-        //   await this.first_name_change_link.press('Enter');
-        // } else
-        {
-          await this.first_name_change_link.click();
-        }
+        await this.first_name_change_link.click();
         break;
       case 'last_name_text':
-        // if (process.env.OS_TYPE?.toLowerCase() == 'android' && process.env.PLATFORM?.toLowerCase() == 'mobile') {
-        //   await this.last_name_change_link.focus();
-        //   await this.last_name_change_link.press('Enter');
-        // } else
-        {
-          await this.last_name_change_link.click();
-        }
+        await this.last_name_change_link.click();
         break;
       case 'email_address_text':
-        // if (process.env.OS_TYPE?.toLowerCase() == 'android' && process.env.PLATFORM?.toLowerCase() == 'mobile') {
-        //   await this.email_address_change_link.focus();
-        //   await this.email_address_change_link.press('Enter');
-        // } else
-        {
-          await this.email_address_change_link.click();
-        }
+        await this.email_address_change_link.click();
         break;
       case 'telephone_text':
-        // if (process.env.OS_TYPE?.toLowerCase() == 'android' && process.env.PLATFORM?.toLowerCase() == 'mobile') {
-        //   await this.telephone_change_link.focus();
-        //   await this.telephone_change_link.press('Enter');
-        // } else
-        {
-          await this.telephone_change_link.click();
-        }
+        await this.telephone_change_link.click();
         break;
       case 'organisation_text':
-        // if (process.env.OS_TYPE?.toLowerCase() == 'android' && process.env.PLATFORM?.toLowerCase() == 'mobile') {
-        //   await this.organisation_change_link.focus();
-        //   await this.organisation_change_link.press('Enter');
-        // } else
-        {
-          await this.organisation_change_link.click();
-        }
+        await this.organisation_change_link.click();
         break;
       case 'job_title_text':
-        // if (process.env.OS_TYPE?.toLowerCase() == 'android' && process.env.PLATFORM?.toLowerCase() == 'mobile') {
-        //   await this.job_title_change_link.focus();
-        //   await this.job_title_change_link.press('Enter');
-        // } else
-        {
-          await this.job_title_change_link.click();
-        }
+        await this.job_title_change_link.click();
         break;
       case 'role_checkbox':
-        // if (process.env.OS_TYPE?.toLowerCase() == 'android' && process.env.PLATFORM?.toLowerCase() == 'mobile') {
-        //   await this.role_change_link.focus();
-        //   await this.role_change_link.press('Enter');
-        // } else
-        {
-          await this.role_change_link.click();
-        }
+        await this.role_change_link.click();
         break;
-      // case 'access_required_checkbox':
-      //   if (process.env.OS_TYPE?.toLowerCase() == 'android' && process.env.PLATFORM?.toLowerCase() == 'mobile') {
-      //     await this.access_required_change_link.focus();
-      //     await this.access_required_change_link.press('Enter');
-      //   } else {
-      //     await this.access_required_change_link.click();
-      //   }
-      //   break;
-      // case 'committee':
-      //   if (userRole.trim().toLocaleLowerCase() != 'operations') {
-      //     break;
-      //   } else {
-      //     await this.committee_change_link.click();
-      //     break;
-      //   }
       case 'country_checkbox':
         if (!userRole.trim().toLocaleLowerCase().includes('team manager')) {
           break;
         } else {
-          // if (process.env.OS_TYPE?.toLowerCase() == 'android' && process.env.PLATFORM?.toLowerCase() == 'mobile') {
-          //   await this.country_change_link.focus();
-          //   await this.country_change_link.press('Enter');
-          // } else
-          {
-            await this.country_change_link.click();
-          }
+          await this.country_change_link.click();
           break;
         }
       case 'review_body':
@@ -516,27 +424,12 @@ export default class UserProfilePage {
     this._new_countries = value;
   }
 
-  // async getAccessRequired(): Promise<string[]> {
-  //   return this._access_required;
-  // }
-
-  // async setAccessRequired(value: string[]): Promise<void> {
-  //   this._access_required = value;
-  // }
   async getReviewBody(): Promise<string[]> {
     return this._review_body;
   }
   async setReviewBody(value: string[]): Promise<void> {
     this._review_body = value;
   }
-
-  // async getNewAccessRequired(): Promise<string[]> {
-  //   return this._new_access_required;
-  // }
-
-  // async setNewAccessRequired(value: string[]): Promise<void> {
-  //   this._new_access_required = value;
-  // }
 
   async getRole(): Promise<string[]> {
     return this._role;

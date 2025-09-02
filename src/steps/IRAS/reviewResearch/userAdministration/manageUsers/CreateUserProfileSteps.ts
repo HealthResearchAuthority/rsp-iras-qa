@@ -22,6 +22,8 @@ When(
           await createUserProfilePage.updateUniqueEmailTestDataJson(filePath, uniqueEmail);
           const locator: Locator = createUserProfilePage[key];
           await locator.fill(uniqueEmail);
+        } else if (key === 'review_body_checkbox') {
+          await commonItemsPage.selectCheckboxReviewBody(dataset, key, createUserProfilePage);
         } else {
           await commonItemsPage.fillUIComponent(dataset, key, createUserProfilePage);
         }
@@ -46,6 +48,8 @@ When(
           if (valueToFill) {
             await locator.fill(valueToFill);
           }
+        } else if (key === 'review_body_checkbox') {
+          await commonItemsPage.selectCheckboxReviewBody(dataset, key, createUserProfilePage);
         } else {
           await commonItemsPage.fillUIComponent(dataset, key, createUserProfilePage);
         }

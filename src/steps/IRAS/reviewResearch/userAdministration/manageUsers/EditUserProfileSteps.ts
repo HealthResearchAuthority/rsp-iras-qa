@@ -183,23 +183,10 @@ Then(
       dataset['role_checkbox'].includes('Workflow co-ordinator') ||
       selectedCheckboxCount > 0
     ) {
-      await commonItemsPage.clearCheckboxes(
-        dataset,
-        ['country_checkbox', 'review_body_checkbox'],
-        commonItemsPage,
-        editUserProfilePage
-      );
+      await commonItemsPage.clearCheckboxes(dataset, ['country_checkbox'], commonItemsPage, editUserProfilePage);
+      await commonItemsPage.clearCheckboxesReviewBody(dataset, 'review_body_checkbox', editUserProfilePage);
       await commonItemsPage.clearUIComponent(dataset, 'role_checkbox', editUserProfilePage);
     }
-    // if (roleValue.includes('operations') || selectedCheckboxCount > 0) {
-    //   await commonItemsPage.clearCheckboxes(
-    //     dataset,
-    //     ['country_checkbox', 'review_body_checkbox'],
-    //     commonItemsPage,
-    //     editUserProfilePage
-    //   );
-    //   await commonItemsPage.clearUIComponent(dataset, 'role_checkbox', editUserProfilePage);
-    // }
   }
 );
 

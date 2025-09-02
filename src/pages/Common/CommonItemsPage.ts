@@ -840,7 +840,7 @@ export default class CommonItemsPage {
   async clearCheckboxes(dataset: any, keys: string[], commonItemsPage: any, createUserProfilePage: any) {
     for (const key of keys) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        await commonItemsPage.clearUIComponent(dataset, key, createUserProfilePage);
+        await this.clearUIComponent(dataset, key, createUserProfilePage);
       }
     }
   }
@@ -1142,5 +1142,31 @@ export default class CommonItemsPage {
   async getChangeLink<PageObject>(fieldKey: string, page: PageObject) {
     const locatorName = fieldKey.toLowerCase() + '_change_link';
     return page[locatorName];
+  }
+
+  async clearCheckboxesReviewBody<PageObject>(dataset: any, key: string, page: PageObject) {
+    const locator: Locator = page[key];
+    for (const key in dataset) {
+      if (Object.hasOwn(dataset, key)) {
+        const count = await locator.count();
+        for (let i = 0; i < count; i++) {
+          const checkbox = locator.nth(i);
+          const isChecked = await checkbox.isChecked();
+          if (isChecked) {
+            await checkbox.uncheck();
+          }
+        }
+      }
+    }
+  }
+
+  async selectCheckboxReviewBody<PageObject>(dataset: any, key: string, page: PageObject) {
+    const locator: Locator = page[key];
+    const typeAttribute = await locator.first().getAttribute('type');
+    if (typeAttribute === 'checkbox') {
+      for (const checkbox of dataset[key]) {
+        await locator.locator('..').getByLabel(checkbox).check();
+      }
+    }
   }
 }

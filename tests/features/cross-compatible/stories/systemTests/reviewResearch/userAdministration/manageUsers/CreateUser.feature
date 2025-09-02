@@ -528,7 +528,7 @@ Feature: User Administration: Manage Users - Create user
       | Valid_Data_In_All_Fields_Role_Team_Manager         | Enabled        | Team_Manager         | System_Admin      | Home_Page | Team_Manager_Email         |
       | Valid_Data_In_All_Fields_Role_Workflow_Coordinator | Enabled        | Workflow_Coordinator | System_Admin      | Home_Page | Workflow_Coordinator_Email |
 
-  @rsp-4390 @ValidateRemovalCommitteeAccessRequired @Test4390
+  @rsp-4390 @ValidateRemovalCommitteeAccessRequired
   Scenario Outline: Validate the removal of committee dropdown and access required checkbox from the 'Add a new user profile' page
     And the '<Option>' should not be available on the add a new user profile page
     And I capture the page screenshot
@@ -537,7 +537,7 @@ Feature: User Administration: Manage Users - Create user
       | Committee_Dropdown       |
       | Access_Required_Checkbox |
 
-  @rsp-4390 @ValidateActiveReviewbodies @jsEnabled @Test4390
+  @rsp-4390 @ValidateActiveReviewbodies @jsEnabled
   Scenario Outline: Validate the review body field in the 'Add a new user profile' page incorporates all currently enabled review bodies from the Manage review bodies page when the javascript is enabled
     Then I fill the new user profile page using '<Add_User_Profile>'
     And I capture the page screenshot
@@ -558,7 +558,7 @@ Feature: User Administration: Manage Users - Create user
       | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer   | Advanced_Filter_All_Countries_Active | Country_Checkbox |
       | Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator | Advanced_Filter_All_Countries_Active | Country_Checkbox |
 
-  @rsp-4390 @ValidateActiveReviewbodies @jsDisabled @Test4390
+  @rsp-4390 @ValidateActiveReviewbodies @jsDisabled
   Scenario Outline: Validate the review body field in the 'Add a new user profile' page incorporates all currently enabled review bodies from the Manage review bodies page when the javascript is disabled
     Then I fill the new user profile page using '<Add_User_Profile>'
     And I capture the page screenshot
@@ -579,12 +579,12 @@ Feature: User Administration: Manage Users - Create user
       | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer   | Advanced_Filter_All_Countries_Active | Country_Checkbox |
       | Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator | Advanced_Filter_All_Countries_Active | Country_Checkbox |
 
-  @rsp-4390 @ValidateRole @Test4390
+  @rsp-4390 @ValidateRole
   Scenario: Validate that the role dropdown on the 'Add a new user profile' page contains the expected roles in alphabetical order
     Then I can see the role dropdown on the add a new user profile page contains the expected roles in alphabetical order
     And I capture the page screenshot
 
-  @rsp-4390 @ValidateActiveCountriesTeamManager @jsEnabled @Test4390
+  @rsp-4390 @ValidateActiveCountriesTeamManager @jsEnabled
   Scenario Outline: Validate the display of country field in the 'Add a new user profile' page when the role is selected as team manager and the javascript is enabled
     Then I fill the new user profile page using '<Add_User_Profile>'
     And I capture the page screenshot
@@ -602,7 +602,7 @@ Feature: User Administration: Manage Users - Create user
       | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager | Review_Body_Checkbox | Country_Checkbox | Committee_Dropdown | Access_Required_Checkbox |
 
 
-  @rsp-4390 @ValidateActiveCountriesTeamManager @jsDisabled @Test4390
+  @rsp-4390 @ValidateActiveCountriesTeamManager @jsDisabled
   Scenario Outline: Validate the display of country field in the 'Add a new user profile' page when the role is selected as team manager and the javascript is disabled
     Then I fill the new user profile page using '<Add_User_Profile>'
     And I capture the page screenshot
@@ -619,7 +619,7 @@ Feature: User Administration: Manage Users - Create user
       | Add_User_Profile                                     | Option_One           | Option_Two       | Option_Three       | Option_Four              |
       | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager | Review_Body_Checkbox | Country_Checkbox | Committee_Dropdown | Access_Required_Checkbox |
 
-  @rsp-4390 @ValidateReviewbodiesCountries @jsEnabled @Test4390
+  @rsp-4390 @ValidateReviewbodiesCountries @jsEnabled
   Scenario Outline: Validate the display of review body field and country field in the 'Add a new user profile' page when the role is selected as applicant or system admin and the javascript is enabled
     Then I fill the new user profile page using '<Add_User_Profile>'
     And I capture the page screenshot
@@ -638,7 +638,7 @@ Feature: User Administration: Manage Users - Create user
       | Valid_Data_In_All_Mandatory_Fields_Role_Applicant            | Country_Checkbox | Review_Body_Checkbox | Committee_Dropdown | Access_Required_Checkbox |
       | Valid_Data_In_All_Mandatory_Fields_Role_System_Administrator | Country_Checkbox | Review_Body_Checkbox | Committee_Dropdown | Access_Required_Checkbox |
 
-  @rsp-4390 @ValidateReviewbodiesCountries @jsDisabled @Test4390
+  @rsp-4390 @ValidateReviewbodiesCountries @jsDisabled
   Scenario Outline: Validate the display of review body field and country field in the 'Add a new user profile' page when the javascript is disabled
     Then I fill the new user profile page using '<Add_User_Profile>'
     And I capture the page screenshot
@@ -658,7 +658,7 @@ Feature: User Administration: Manage Users - Create user
       | Valid_Data_In_All_Mandatory_Fields_Role_Applicant            | Country_Checkbox | Review_Body_Checkbox | Committee_Dropdown | Access_Required_Checkbox |
       | Valid_Data_In_All_Mandatory_Fields_Role_System_Administrator | Country_Checkbox | Review_Body_Checkbox | Committee_Dropdown | Access_Required_Checkbox |
 
-  @rsp-4390 @ValidateCountryReviewbodyTeamManagerStudywideReviewer @Test4390
+  @rsp-4390 @ValidateCountryReviewbodyTeamManagerStudywideReviewer
   Scenario Outline: Validate the display of country and review body in the 'Add a new user profile' page when the role is selected as team manager and study-wide reviewer
     Then I fill the new user profile page using '<Add_User_Profile>'
     And I capture the page screenshot
@@ -675,7 +675,7 @@ Feature: User Administration: Manage Users - Create user
       | Add_User_Profile                                                        | Option_One       | Option_Two           | Option_Three       | Option_Four              |
       | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_Studywide_Reviewer | Country_Checkbox | Review_Body_Checkbox | Committee_Dropdown | Access_Required_Checkbox |
 
-  @rsp-4390 @ValidateCountryReviewbodyTeamManagerSystemAdmin @jsEnabled @Test4390
+  @rsp-4390 @ValidateCountryReviewbodyTeamManagerSystemAdmin @jsEnabled
   Scenario Outline: Validate the display of country in the 'Add a new user profile' page when the role is selected as team manager and system administrator and the javascript is enabled
     Then I fill the new user profile page using '<Add_User_Profile>'
     And I capture the page screenshot
@@ -692,7 +692,7 @@ Feature: User Administration: Manage Users - Create user
       | Add_User_Profile                                                          | Option_One       | Option_Two           | Option_Three       | Option_Four              |
       | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_System_Administrator | Country_Checkbox | Review_Body_Checkbox | Committee_Dropdown | Access_Required_Checkbox |
 
-  @rsp-4390 @ValidateCountryReviewbodyTeamManagerSystemAdmin @jsDisabled @Test4390
+  @rsp-4390 @ValidateCountryReviewbodyTeamManagerSystemAdmin @jsDisabled
   Scenario Outline: Validate the display of country in the 'Add a new user profile' page when the role is selected as team manager and system administrator and the javascript is disabled
     Then I fill the new user profile page using '<Add_User_Profile>'
     And I capture the page screenshot
