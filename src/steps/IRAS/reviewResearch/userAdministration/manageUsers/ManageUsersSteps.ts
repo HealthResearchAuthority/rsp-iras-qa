@@ -172,6 +172,8 @@ When(
             await manageUsersPage.date_last_logged_in_from_day_text_chevron.click();
           }
           await commonItemsPage.fillUIComponent(dataset, key, manageUsersPage);
+        } else if (key === 'review_body_checkbox') {
+          await commonItemsPage.selectCheckboxReviewBody(dataset, key, manageUsersPage);
         } else {
           await manageUsersPage[key + '_chevron'].click();
           await commonItemsPage.fillUIComponent(dataset, key, manageUsersPage);

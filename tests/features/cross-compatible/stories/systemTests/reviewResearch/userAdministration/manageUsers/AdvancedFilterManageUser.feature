@@ -99,7 +99,7 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Advanced_Filters                            | Field_Error_Message             |
             | Advanced_Filter_Last_Logged_In_Invalid_Date | Field_Error_Date_Last_Logged_In |
 
-    @VerifyNoResultsFoundInvalidSearchAloneManageUser @KNOWN-DEFECT-RSP-4363
+    @VerifyNoResultsFoundInvalidSearchAloneManageUser
     Scenario: Verify the user can see no matching results found message on clicking search button with invalid user name
         When I enter '<Search_Queries>' into the search field for manage users page
         And I capture the page screenshot
@@ -111,7 +111,7 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Search_Queries         | No_Results_Found           |
             | Non_Existant_User_Data | No_Matching_Search_Results |
 
-    @VerifyNoResultsFoundInvalidSearchAdvancedFiltersManageUser @KNOWN-DEFECT-RSP-4363
+    @VerifyNoResultsFoundInvalidSearchAdvancedFiltersManageUser
     Scenario: Verify the user can see no matching results found message on click on apply filter button with invalid filter/search criteria
         When I enter '<Search_Queries>' into the search field for manage users page
         And I capture the page screenshot
@@ -188,7 +188,7 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Advanced_Filter_Seven               |
             | Advanced_Filter_Nine                |
 
-    @ValidateClearAllFilters @Test4418
+    @ValidateClearAllFilters
     Scenario: Validate clear all filters removes all active filters in mange users page
         And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
         And I select advanced filters in the manage users page using '<Advanced_Filters>'
@@ -206,7 +206,7 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Advanced_Filter_Last_Logged_In_From_Date_Only |
             | Advanced_Filter_Last_Logged_In_To_Date_Only   |
 
-    @RemoveAllActiveFiltersOneByOne @Test4418
+    @RemoveAllActiveFiltersOneByOne
     Scenario Outline: Verify the user can remove all the selected filters one by one and the search results update accordingly
         And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
         And I select advanced filters in the manage users page using '<Advanced_Filters>'
@@ -224,7 +224,7 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Advanced_Filter_One | Advanced_Filter_One_All |
             | Advanced_Filter_Two | Advanced_Filter_Two_All |
 
-    @rsp-4418 @ValidateActiveReviewbodies @Test4418
+    @rsp-4418 @ValidateActiveReviewbodies
     Scenario Outline: Validate the review body checkbox in the advanced filters of manage users page incorporates all currently enabled review bodies from the manage review bodies page
         And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
         And I capture the page screenshot
@@ -246,8 +246,8 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Advanced_Filter_All_Countries_Active | Advanced_Filter_Country_No_Review_Body_HRA_Role_No |
             | Advanced_Filter_All_Countries_Active | Advanced_Filter_Country_No_Review_Body_HRA_Role_No |
 
-    #    Few failures due to data issues- to be re executed once data issues are fixed(review body and country)
-    @rsp-4418 @ValidateFilters @Test4418
+    # Few failures due to data issues- to be re executed once data issues are fixed(review body and country)
+    @rsp-4418 @ValidateFilters
     Scenario Outline: Verify the user is able to view the list of users by selecting the advanced filters, and clicking the 'Apply filters' button
         And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
         And I select advanced filters in the manage users page using '<Advanced_Filters>'
@@ -277,56 +277,3 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Advanced_Filter_Country_No_Review_Body_No_Role_Workflow_Coordinator     |
             | Advanced_Filter_Country_No_Review_Body_All_Role_All                     |
             | Advanced_Filter_Country_No_Review_Body_No_Role_No_Status_Active_To_Date |
-
-
-
-# invalid last logged in error(like Date submitted in Approvals)-raised in triage
-#  "Invalid_Date_Range_To_Before_From_Error": {
-#         "date_submitted_to_day_text": "The date you’ve selected is before the search above"
-#       },
-#       "Invalid_Date_From_Error": {
-#         "date_submitted_from_day_text": "'Search from' date must be in the correct format"
-#       },
-#       "Invalid_Date_To_Error": {
-#         "date_submitted_to_day_text": "'Search to' date must be in the correct format"
-#       }
-#     }
-
-# active review bodies in the filter
-# apply all filters together (search and advanced filters,search only , advanced filters only)+default sorting
-
-# ***************************************************************
-# Scenario : 1- Validate Review body and Role filters
-
-# GIVEN I am on the Manage users page,
-# WHEN I open the list of filters by clicking the Advanced Filters chevron,
-# THEN I should be able to apply filters by clicking the Apply filters button, using the following fields—each with its appropriate input type:
-
-# Last logged in - date-entry field
-
-# Review body - checkbox + multi-select list - new filter to be developed (enabled review bodies in the system)
-
-# Role - checkbox + multi-select list - new filter to be developed
-
-# Status - radio-button
-
-# AND the search and input functionalities should follow the same behaviour and logic used elsewhere in the system, including case sensitivity and partial matching,
-# AND filters should remain enabled at all times, regardless of whether any have been selected.
-# *********************************************************************
-# Scenario : 2- Validate Review body in the results
-
-# GIVEN I'm searching for users who have been assigned review bodies and have applied filters during my search,
-# WHEN the search has been performed,
-
-# And navigate to user profile page
-# THEN I only see users who have been assigned enabled review bodies.
-# *********************************************************************
-
-# Scenario : 3- Validate Role in the results
-
-# GIVEN I'm searching for users who have been assigned review bodies and have applied filters during my search,
-# WHEN the search has been performed,
-
-# And navigate to user profile page
-# THEN I only see users who have been assigned roles
-# *********************************************************************
