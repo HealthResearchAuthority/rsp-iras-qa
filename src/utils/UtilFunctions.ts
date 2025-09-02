@@ -8,6 +8,7 @@ import fs from 'fs';
 import os from 'os';
 import * as fse from 'fs-extra';
 import path from 'path';
+import crypto from 'crypto';
 
 const pathToCreateUserTestDataJson =
   './src/resources/test_data/iras/reviewResearch/userAdministration/manageUsers/create_user_profile_page_data.json';
@@ -616,5 +617,5 @@ export function resolveEnvExpression(template: string): string {
 export async function getRandomNumber(min: number, max: number): Promise<number> {
   min = Math.ceil(min);
   max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+  return crypto.randomInt(min, max);
 }
