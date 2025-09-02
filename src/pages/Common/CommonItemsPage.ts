@@ -8,7 +8,6 @@ import * as fs from 'fs';
 import path from 'path';
 import ProjectFilterPage from '../IRAS/questionSet/ProjectFilterPage';
 import ProjectDetailsPage from '../IRAS/questionSet/ProjectDetailsPage';
-import ModificationsReadyToAssignPage from '../IRAS/reviewResearch/receiveAmendments/ModificationsReadyToAssignPage';
 import DevicesPage from '../IRAS/questionSet/DevicesPage';
 import TissuePage from '../IRAS/questionSet/TissuePage';
 import StudentPage from '../IRAS/questionSet/StudentPage';
@@ -1057,17 +1056,6 @@ export default class CommonItemsPage {
       values.push(text);
     }
     return values;
-  }
-
-  async selectRandomCheckboxes(): Promise<string> {
-    const pageObject = new ModificationsReadyToAssignPage(this.page);
-    const count = await pageObject.modification_checkbox.count();
-    const randomIndex = Math.floor(Math.random() * count);
-    const checkbox = pageObject.modification_checkbox.nth(randomIndex);
-    await checkbox.check();
-    const modificationId = await this.tableRows.locator('td').first().innerText();
-    await checkbox.isChecked();
-    return modificationId;
   }
 
   async validatePagination(currentPage: any, totalPages: any, navigateMethod: string) {
