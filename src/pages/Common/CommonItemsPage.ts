@@ -1182,7 +1182,7 @@ export default class CommonItemsPage {
     const typeAttribute = await locator.first().getAttribute('type');
     if (typeAttribute === 'checkbox') {
       for (const checkbox of dataset[key]) {
-        await locator.locator('..').getByLabel(checkbox).check();
+        await locator.locator('..').getByLabel(checkbox).first().check();
       }
     }
   }
