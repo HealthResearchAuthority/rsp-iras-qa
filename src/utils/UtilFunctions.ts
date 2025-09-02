@@ -1,6 +1,6 @@
 import { DataTable } from 'playwright-bdd';
 import { Locator, chromium, devices, firefox, webkit } from '@playwright/test';
-import { createDecipheriv, DecipherGCM } from 'crypto';
+import { createDecipheriv, DecipherGCM, randomInt } from 'crypto';
 import { readFile, writeFile } from 'fs/promises';
 import 'dotenv/config';
 import { deviceDSafari, deviceDFirefox, deviceDChrome, deviceDEdge } from '../hooks/GlobalSetup';
@@ -8,7 +8,6 @@ import fs from 'fs';
 import os from 'os';
 import * as fse from 'fs-extra';
 import path from 'path';
-import crypto from 'crypto';
 
 const pathToCreateUserTestDataJson =
   './src/resources/test_data/iras/reviewResearch/userAdministration/manageUsers/create_user_profile_page_data.json';
@@ -617,5 +616,5 @@ export function resolveEnvExpression(template: string): string {
 export async function getRandomNumber(min: number, max: number): Promise<number> {
   min = Math.ceil(min);
   max = Math.floor(max);
-  return crypto.randomInt(min, max);
+  return randomInt(min, max);
 }
