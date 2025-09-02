@@ -1,6 +1,6 @@
 import { DataTable } from 'playwright-bdd';
 import { Locator, chromium, devices, firefox, webkit } from '@playwright/test';
-import { createDecipheriv, DecipherGCM } from 'crypto';
+import { createDecipheriv, DecipherGCM, randomInt } from 'crypto';
 import { readFile, writeFile } from 'fs/promises';
 import 'dotenv/config';
 import { deviceDSafari, deviceDFirefox, deviceDChrome, deviceDEdge } from '../hooks/GlobalSetup';
@@ -611,4 +611,10 @@ export function resolveEnvExpression(template: string): string {
     throw new Error(`Environment variable "${envVar}" is not defined`);
   }
   return value;
+}
+
+export async function getRandomNumber(min: number, max: number): Promise<number> {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return randomInt(min, max);
 }
