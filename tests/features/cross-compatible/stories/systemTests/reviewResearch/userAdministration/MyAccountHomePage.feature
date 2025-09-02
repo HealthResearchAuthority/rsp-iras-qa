@@ -159,13 +159,13 @@ Feature: My Account Home page
      #| Studywide_Reviewer   | Technical_Assurence_Access_Denied_Page          | 
      #| Studywide_Reviewer   | Technical_Assurence_Reviewers_Access_Denied_Page|
       | Team_Manager         | System_Administration_Access_Denied_Page        |
-      | team_manager         | My_Research_Access_Denied_Page                  |
-     #| team_manager         | Sponsor_Access_Denied_Page                      |
-     #| team_manager         | Cag_Members_Access_Denied_Page                  |
-     #| team_manager         | Cat_Access_Denied_Page                          |
-     #| team_manager         | Reg_Members_Access_Denied_Page                  | 
-     #| team_manager         | Technical_Assurence_Access_Denied_Page          | 
-     #| team_manager         | Technical_Assurence_Reviewers_Access_Denied_Page|
+      | Team_Manager         | My_Research_Access_Denied_Page                  |
+     #| Team_Manager         | Sponsor_Access_Denied_Page                      |
+     #| Team_Manager         | Cag_Members_Access_Denied_Page                  |
+     #| Team_Manager         | Cat_Access_Denied_Page                          |
+     #| Team_Manager         | Reg_Members_Access_Denied_Page                  | 
+     #| Team_Manager         | Technical_Assurence_Access_Denied_Page          | 
+     #| Team_Manager         | Technical_Assurence_Reviewers_Access_Denied_Page|
       | Workflow_Coordinator | System_Administration_Access_Denied_Page        |
       | Workflow_Coordinator | My_Research_Access_Denied_Page                  |
      #| Workflow_Coordinator | Sponsor_Access_Denied_Page                      |
@@ -175,6 +175,3 @@ Feature: My Account Home page
      #| Workflow_Coordinator | Technical_Assurence_Access_Denied_Page          | 
      #| Workflow_Coordinator | Technical_Assurence_Reviewers_Access_Denied_Page| 
      #| Workflow_Coordinator | Member_Management_Access_Denied_Page            |
-      
-  
-
