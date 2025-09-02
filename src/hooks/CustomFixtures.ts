@@ -53,8 +53,12 @@ import SearchModificationsPage from '../pages/IRAS/reviewResearch/receiveAmendme
 import ModificationsReadyToAssignPage from '../pages/IRAS/reviewResearch/receiveAmendments/ModificationsReadyToAssignPage';
 import ApprovalsPage from '../pages/IRAS/reviewResearch/approvals/ApprovalsPage';
 import ModificationsCommonPage from '../pages/IRAS/makeChanges/modifications/ModificationsCommonPage';
-import PlannedEndDatePage from '../pages/IRAS/makeChanges/modifications/PlannedEndDatePage';
-import OrganisationChangeAffectPage from '../pages/IRAS/makeChanges/modifications/OrganisationChangeAffectPage';
+import PlannedEndDateChangePage from '../pages/IRAS/makeChanges/modifications/changePlannedEndDate/PlannedEndDateChangePage';
+import AffectedOrganisationSelectionPage from '../pages/IRAS/makeChanges/modifications/changePlannedEndDate/AffectedOrganisationSelectionPage';
+import AffectedOrganisationQuestionsPage from '../pages/IRAS/makeChanges/modifications/changePlannedEndDate/AffectedOrganisationQuestionsPage';
+import ReviewChangesPlannedEndDatePage from '../pages/IRAS/makeChanges/modifications/changePlannedEndDate/ReviewChangesPlannedEndDatePage';
+import AddDocumentsModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/AddDocumentsModificationsPage';
+import ReviewUploadedDocumentsModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/ReviewUploadedDocumentsModificationsPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -109,8 +113,12 @@ type CustomFixtures = {
   searchModificationsPage: SearchModificationsPage;
   modificationsReadyToAssignPage: ModificationsReadyToAssignPage;
   modificationsCommonPage: ModificationsCommonPage;
-  plannedEndDatePage: PlannedEndDatePage;
-  organisationChangeAffectPage: OrganisationChangeAffectPage;
+  plannedEndDateChangePage: PlannedEndDateChangePage;
+  affectedOrganisationSelectionPage: AffectedOrganisationSelectionPage;
+  affectedOrganisationQuestionsPage: AffectedOrganisationQuestionsPage;
+  reviewChangesPlannedEndDatePage: ReviewChangesPlannedEndDatePage;
+  addDocumentsModificationsPage: AddDocumentsModificationsPage;
+  reviewUploadedDocumentsModificationsPage: ReviewUploadedDocumentsModificationsPage;
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -322,12 +330,28 @@ export const test = base.extend<CustomFixtures>({
     await use(new ModificationsCommonPage(page));
   },
 
-  plannedEndDatePage: async ({ page }, use) => {
-    await use(new PlannedEndDatePage(page));
+  plannedEndDateChangePage: async ({ page }, use) => {
+    await use(new PlannedEndDateChangePage(page));
   },
 
-  organisationChangeAffectPage: async ({ page }, use) => {
-    await use(new OrganisationChangeAffectPage(page));
+  affectedOrganisationSelectionPage: async ({ page }, use) => {
+    await use(new AffectedOrganisationSelectionPage(page));
+  },
+
+  affectedOrganisationQuestionsPage: async ({ page }, use) => {
+    await use(new AffectedOrganisationQuestionsPage(page));
+  },
+
+  reviewChangesPlannedEndDatePage: async ({ page }, use) => {
+    await use(new ReviewChangesPlannedEndDatePage(page));
+  },
+
+  addDocumentsModificationsPage: async ({ page }, use) => {
+    await use(new AddDocumentsModificationsPage(page));
+  },
+
+  reviewUploadedDocumentsModificationsPage: async ({ page }, use) => {
+    await use(new ReviewUploadedDocumentsModificationsPage(page));
   },
 
   makeAxeBuilder: async ({ page }, use) => {
