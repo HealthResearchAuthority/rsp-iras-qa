@@ -445,7 +445,7 @@ export default class CommonItemsPage {
     }
     if (!selfHealedLocator) {
       throw new Error(
-        `Self Healing for locator has failed. Automation was not able to find a valid locator from the available list:[ ${locatorList.toString} ]. Add a new valid locator to the list`
+        `Self Healing for locator has failed. Automation was not able to find a valid locator from the available list:[ ${locatorList.toString()} ]. Add a new valid locator to the list`
       );
     }
     return selfHealedLocator;
