@@ -156,7 +156,9 @@ export default class ModificationsReadyToAssignPage {
     }
 
     for (const date of listAsDates) {
-      sortedListAsStrings.push(date.toLocaleString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }));
+      sortedListAsStrings.push(
+        date.toLocaleString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }).replace('Sept', 'Sep')
+      );
     }
     return sortedListAsStrings;
   }

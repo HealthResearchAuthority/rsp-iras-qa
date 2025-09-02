@@ -16,7 +16,6 @@
   "Label_Texts": {
     "short_project_title_label": "Short project title",
     "modification_id_label": "Modification ID",
-    "modification_type_label": "Modification type",
     "date_submitted_label": "Date submitted",
     "days_since_submission_label": "Days since submission"
   },

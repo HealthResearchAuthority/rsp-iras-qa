@@ -23,14 +23,11 @@ Then(
       case 'short project title':
         columnIndex = 2;
         break;
-      case 'modification type':
+      case 'date submitted':
         columnIndex = 3;
         break;
-      case 'date submitted':
-        columnIndex = 4;
-        break;
       case 'days since submission':
-        columnIndex = 5;
+        columnIndex = 4;
         break;
       default:
         throw new Error(`${sortField} is not a valid option`);

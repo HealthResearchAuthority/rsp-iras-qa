@@ -210,7 +210,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
             | Invalid_Date_From                 | Invalid_Date_From_Error                 |
             | Invalid_Date_To                   | Invalid_Date_To_Error                   |
 
-    @sortTasklistByColumn @rsp-4091 @KNOWN-DEFECT-RSP-4305
+    @sortTasklistByColumn @rsp-4091
     Scenario Outline: Verify the user is able to sort the modifications tasklist by ascending and descending order for each results table column
         When I click the '<Sort_Button>' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
@@ -223,7 +223,6 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
             | Sort_Button           | Sort_Field            | Initial_Sort | Secondary_Sort |
             | Modification_Id       | modification id       | ascending    | descending     |
             | Short_Project_Title   | short project title   | ascending    | descending     |
-            | Modification_Type     | modification type     | ascending    | descending     |
             | Date_Submitted        | date submitted        | descending   | ascending      |
             | Days_Since_Submission | days since submission | ascending    | descending     |
 
