@@ -1,0 +1,20 @@
+{
+  "Label_Texts": {
+    "which_organisation_change_affect_hint_label": "Select all that apply"
+  },
+  "Mandatory_Field_Error": {
+    "which_organisation_change_affect_checkbox": "Select at least one organisation type"
+  },
+  "Valid_Data_All_Fields": {
+    "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"]
+  },
+  "NHS_HSC_Only": {
+    "which_organisation_change_affect_checkbox": ["NHS/HSC"]
+  },
+  "Non_NHS_HSC_Only": {
+    "which_organisation_change_affect_checkbox": ["Non-NHS/HSC"]
+  },
+  "Empty_Data_All_Fields": {
+    "which_organisation_change_affect_checkbox": []
+  }
+}
