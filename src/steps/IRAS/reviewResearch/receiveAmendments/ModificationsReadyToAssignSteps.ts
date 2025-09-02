@@ -136,10 +136,8 @@ When(
   'I navigate by {string} within the Modifications Ready to assign page',
   async ({ commonItemsPage }, paginationLink: string) => {
     if (paginationLink.toLowerCase() === 'clicking on next link') {
-      await commonItemsPage.next_button.isEnabled();
       await commonItemsPage.next_button.click();
     } else {
-      await commonItemsPage.previous_button.isEnabled();
       await commonItemsPage.previous_button.click();
     }
   }
