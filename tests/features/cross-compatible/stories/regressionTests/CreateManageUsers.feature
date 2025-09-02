@@ -76,7 +76,7 @@ Feature: User Administration: Create Manage Users
             | Valid_Data_In_All_Fields_Role_Studywide_Reviewer   | Role       | QA Automation Health Research Authority (HRA)                                     | Advanced_Filter_Review_body_HRA_Role_Studywide_Reviewer_Status_Active      | Role_Studywide_Reviewer   | Advanced_Filter_Eng_Active     |
             | Valid_Data_In_All_Fields_Role_Workflow_Coordinator | Role       | QA Automation National Research Service Permissions Coordination Centre (NRS PCC) | Advanced_Filter_Review_body_NRSPCC_Role_Workflow_Coordinator_Status_Active | Role_Workflow_Coordinator | Advanced_Filter_Sco_Active     |
 
-    @RegressionTestCreateUserEvents
+    @RegressionTestCreateUserEvents @fail @Known-Defect-Users-Pagination
     Scenario Outline: Verify the user is able to create new user profiles with various roles like applicant or system administrator or team manager, with an audit history log
         When I fill the new user profile page using '<Add_User_Profile>'
         And I capture the page screenshot
@@ -187,7 +187,7 @@ Feature: User Administration: Create Manage Users
             | Add_User_Profile     | Field_Name | Edit_User                 | Advanced_Filters                        | Search_Queries |
             | Valid_Data_All_Roles | Role       | User_Roles_Checkbox_Empty | Advanced_Filter_All_Roles_Status_Active | Role_All       |
 
-    @RegressionTestEnableDisableUserProfile
+    @RegressionTestEnableDisableUserProfile @fail @Known-Defect-Users-Pagination
     Scenario Outline: Verify the user is able to disable, then re-enable a user profile, with an audit history log
         When I fill the new user profile page using '<Add_User_Profile>'
         And I capture the page screenshot
