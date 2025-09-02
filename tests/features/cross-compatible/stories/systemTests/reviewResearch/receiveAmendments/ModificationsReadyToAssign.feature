@@ -61,8 +61,8 @@ Feature: Modifications Tasklist page that displays modifications ready to be ass
         And I check random row and validate if the row is checked even after navigation
         And I capture the page screenshot
 
-    @ModificationsTasklistSelectAll @rsp-4105 @jsEnabled
-    Scenario: With jsEnabled, Verify if user selects the check all checkbox on the first page and confirm checkboxes are checked and status retained even after navigation
+    @ModificationsTasklistSelectAllWithJs @rsp-4105 @jsEnabled
+    Scenario: With JavaScript enabled, Verify if user selects the check all checkbox on the first page and confirm checkboxes are checked and status retained even after navigation
         When I select check all checkbox on the current page and validate all checkboxes are checked
         And I capture the page screenshot
         When I navigate by 'clicking on next link' within the Modifications Ready to assign page
@@ -71,9 +71,9 @@ Feature: Modifications Tasklist page that displays modifications ready to be ass
         And I capture the page screenshot
         Then I can see a 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
 
-    @ModificationsTasklistSelectAll @rsp-4105 @jsDisabled
-    Scenario: With jsDisabled, Verify user selects the check all checkbox on the first page and confirm checkboxes are unchecked and status retained even after navigation
-        When jsDisabled I select check all checkbox on the current page and validate all checkboxes are unchecked
+    @ModificationsTasklistSelectAllWithoutJs @rsp-4105 @jsDisabled
+    Scenario: With JavaScript disabled, Verify user selects the check all checkbox on the first page and confirm checkboxes are unchecked and status retained even after navigation
+        When JavaScript is disabled I select check all checkbox on the current page and validate all checkboxes are unchecked
         And I capture the page screenshot
         And I navigate by 'clicking on next link' within the Modifications Ready to assign page
         And I navigate by 'clicking on previous link' within the Modifications Ready to assign page

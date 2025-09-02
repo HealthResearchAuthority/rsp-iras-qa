@@ -121,7 +121,7 @@ Then(
 );
 
 When(
-  'jsDisabled I select check all checkbox on the current page and validate all checkboxes are unchecked',
+  'JavaScript is disabled I select check all checkbox on the current page and validate all checkboxes are unchecked',
   async ({ modificationsReadyToAssignPage }) => {
     const checkAll = modificationsReadyToAssignPage.checkall_modification_checkbox;
     await checkAll.click();
