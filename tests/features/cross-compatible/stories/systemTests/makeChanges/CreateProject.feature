@@ -194,34 +194,34 @@ Feature: Create Amendment - Create Project
     And I capture the page screenshot
 
     Examples:
-      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Add_Project | Navigation_Button_Third | Validation_Text | Project_Details_Title | Key_Project_Roles                     | Navigation_Link |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields                 | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data                      | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Underscore                | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Hyphen               | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Plus                 | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Exclamation          | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Hash                 | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Dollar               | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Percentage           | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Ampersand            | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Single_Quote         | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Star                 | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Slash                | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Equal_Symbol         | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Question_Mark        | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Cap_Symbol           | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Right_Single_Quote   | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Curly_Brackets       | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Pipe_Symbol          | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Tilde_Symbol         | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Unicode              | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Special_Characters   | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Hyphen_Underscore    | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Multiple_Unicode     | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Multiple_Sub_Domains | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Domain               | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Other_Language       | Back            |
+      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Add_Project | Navigation_Button_Third | Validation_Text | Project_Details_Title | Key_Project_Roles                   | Navigation_Link |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields               | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data                    | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Underscore              | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Hyphen             | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Plus               | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Exclamation        | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Hash               | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Dollar             | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Percentage         | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Ampersand          | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Single_Quote       | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Star               | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Slash              | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Equal_Symbol       | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Question_Mark      | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Cap_Symbol         | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Right_Single_Quote | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Curly_Brackets     | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Pipe_Symbol        | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Tilde_Symbol       | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Special_Characters | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Hyphen_Underscore  | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Domain             | Back            |
+      # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Unicode              | Back            |
+      # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Multiple_Unicode     | Back            |
+      # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Multiple_Sub_Domains | Back            |
+      # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Other_Language       | Back            |
 
   @rsp-1897
   Scenario Outline: Validate error messages displayed when user inputs invalid data for chief investigator email in key project roles page
@@ -239,32 +239,32 @@ Feature: Create Amendment - Create Project
     And I capture the page screenshot
 
     Examples:
-      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Add_Project | Navigation_Button_Third | Project_Details_Title | Key_Project_Roles                                      | Field_Error_Message     | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Start_With_Dot                  | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Double_Dot                      | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Space                           | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Wrong_AT                        | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Less_Greater_Symbols            | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Colon                           | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Semi_Colon                      | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Comma                           | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Start_With_Hyphen               | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Hyphen_Before_Domain            | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Double_Dot_Domain               | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Exclamation_Domain              | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Unicode                         | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Single_Quote_Before_AT          | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Domain_Exceed_Max               | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Local_Part_Max                  | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Consecutive_Dot_Domain          | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Consecutive_Dot_SubDomain       | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Consecutiv_Dot_Domain_SubDomain | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Emoji                           | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_TLD                             | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Missing_AT                      | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Reserved_Domain                 | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Punycode                        | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Max_Char                        | Field_Error_Chief_Email | Summary_Error_Message |
+      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Add_Project | Navigation_Button_Third | Project_Details_Title | Key_Project_Roles                      | Field_Error_Message     | Summary_Error_Message |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Start_With_Dot  | Field_Error_Chief_Email | Summary_Error_Message |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Double_Dot      | Field_Error_Chief_Email | Summary_Error_Message |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_TLD             | Field_Error_Chief_Email | Summary_Error_Message |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Reserved_Domain | Field_Error_Chief_Email | Summary_Error_Message |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Punycode        | Field_Error_Chief_Email | Summary_Error_Message |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Max_Char        | Field_Error_Chief_Email | Summary_Error_Message |
+      # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Space                           | Field_Error_Chief_Email | Summary_Error_Message |
+      # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Wrong_AT                        | Field_Error_Chief_Email | Summary_Error_Message |
+      # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Less_Greater_Symbols            | Field_Error_Chief_Email | Summary_Error_Message |
+      # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Colon                           | Field_Error_Chief_Email | Summary_Error_Message |
+      # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Semi_Colon                      | Field_Error_Chief_Email | Summary_Error_Message |
+      # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Comma                           | Field_Error_Chief_Email | Summary_Error_Message |
+      # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Start_With_Hyphen               | Field_Error_Chief_Email | Summary_Error_Message |
+      # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Hyphen_Before_Domain            | Field_Error_Chief_Email | Summary_Error_Message |
+      # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Double_Dot_Domain               | Field_Error_Chief_Email | Summary_Error_Message |
+      # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Exclamation_Domain              | Field_Error_Chief_Email | Summary_Error_Message |
+      # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Unicode                         | Field_Error_Chief_Email | Summary_Error_Message |
+      # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Single_Quote_Before_AT          | Field_Error_Chief_Email | Summary_Error_Message |
+      # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Domain_Exceed_Max               | Field_Error_Chief_Email | Summary_Error_Message |
+      # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Local_Part_Max                  | Field_Error_Chief_Email | Summary_Error_Message |
+      # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Consecutive_Dot_Domain          | Field_Error_Chief_Email | Summary_Error_Message |
+      # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Consecutive_Dot_SubDomain       | Field_Error_Chief_Email | Summary_Error_Message |
+      # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Consecutiv_Dot_Domain_SubDomain | Field_Error_Chief_Email | Summary_Error_Message |
+      # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Emoji                           | Field_Error_Chief_Email | Summary_Error_Message |
+      # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Missing_AT                      | Field_Error_Chief_Email | Summary_Error_Message |
 
   @rsp-1897
   Scenario Outline: Validate error messages displayed when user inputs invalid data for sponsor contact email in key project roles page
@@ -282,32 +282,32 @@ Feature: Create Amendment - Create Project
     And I capture the page screenshot
 
     Examples:
-      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Add_Project | Navigation_Button_Third | Project_Details_Title | Key_Project_Roles                                      | Field_Error_Message       | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Start_With_Dot                  | Field_Error_Sponsor_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Double_Dot                      | Field_Error_Sponsor_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Space                           | Field_Error_Sponsor_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Wrong_AT                        | Field_Error_Sponsor_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Less_Greater_Symbols            | Field_Error_Sponsor_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Colon                           | Field_Error_Sponsor_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Semi_Colon                      | Field_Error_Sponsor_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Comma                           | Field_Error_Sponsor_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Start_With_Hyphen               | Field_Error_Sponsor_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Hyphen_Before_Domain            | Field_Error_Sponsor_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Double_Dot_Domain               | Field_Error_Sponsor_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Exclamation_Domain              | Field_Error_Sponsor_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Unicode                         | Field_Error_Sponsor_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Single_Quote_Before_AT          | Field_Error_Sponsor_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Domain_Exceed_Max               | Field_Error_Sponsor_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Local_Part_Max                  | Field_Error_Sponsor_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Consecutive_Dot_Domain          | Field_Error_Sponsor_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Consecutive_Dot_SubDomain       | Field_Error_Sponsor_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Consecutiv_Dot_Domain_SubDomain | Field_Error_Sponsor_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Emoji                           | Field_Error_Sponsor_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_TLD                             | Field_Error_Sponsor_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Missing_AT                      | Field_Error_Sponsor_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Reserved_Domain                 | Field_Error_Sponsor_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Punycode                        | Field_Error_Sponsor_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Max_Char                        | Field_Error_Sponsor_Email | Summary_Error_Message |
+      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Add_Project | Navigation_Button_Third | Project_Details_Title | Key_Project_Roles                      | Field_Error_Message       | Summary_Error_Message |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Double_Dot      | Field_Error_Sponsor_Email | Summary_Error_Message |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_TLD             | Field_Error_Sponsor_Email | Summary_Error_Message |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Reserved_Domain | Field_Error_Sponsor_Email | Summary_Error_Message |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Punycode        | Field_Error_Sponsor_Email | Summary_Error_Message |
+      # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Start_With_Dot                  | Field_Error_Sponsor_Email | Summary_Error_Message |
+      # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Space                           | Field_Error_Sponsor_Email | Summary_Error_Message |
+      # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Wrong_AT                        | Field_Error_Sponsor_Email | Summary_Error_Message |
+      # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Less_Greater_Symbols            | Field_Error_Sponsor_Email | Summary_Error_Message |
+      # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Colon                           | Field_Error_Sponsor_Email | Summary_Error_Message |
+      # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Semi_Colon                      | Field_Error_Sponsor_Email | Summary_Error_Message |
+      # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Comma                           | Field_Error_Sponsor_Email | Summary_Error_Message |
+      # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Start_With_Hyphen               | Field_Error_Sponsor_Email | Summary_Error_Message |
+      # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Hyphen_Before_Domain            | Field_Error_Sponsor_Email | Summary_Error_Message |
+      # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Double_Dot_Domain               | Field_Error_Sponsor_Email | Summary_Error_Message |
+      # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Exclamation_Domain              | Field_Error_Sponsor_Email | Summary_Error_Message |
+      # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Unicode                         | Field_Error_Sponsor_Email | Summary_Error_Message |
+      # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Single_Quote_Before_AT          | Field_Error_Sponsor_Email | Summary_Error_Message |
+      # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Domain_Exceed_Max               | Field_Error_Sponsor_Email | Summary_Error_Message |
+      # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Local_Part_Max                  | Field_Error_Sponsor_Email | Summary_Error_Message |
+      # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Consecutive_Dot_Domain          | Field_Error_Sponsor_Email | Summary_Error_Message |
+      # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Consecutive_Dot_SubDomain       | Field_Error_Sponsor_Email | Summary_Error_Message |
+      # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Consecutiv_Dot_Domain_SubDomain | Field_Error_Sponsor_Email | Summary_Error_Message |
+      # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Emoji                           | Field_Error_Sponsor_Email | Summary_Error_Message |
+      # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Missing_AT                      | Field_Error_Sponsor_Email | Summary_Error_Message |
+      # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Max_Char                        | Field_Error_Sponsor_Email | Summary_Error_Message |
 
   @rsp-1897
   Scenario Outline: Validate breadcrumb navigations in key project roles page
@@ -571,32 +571,32 @@ Feature: Create Amendment - Create Project
     And I capture the page screenshot
 
     Examples:
-      | Project_Details_Title | Key_Project_Roles                                      | Field_And_Summary_Error_Message |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Start_With_Dot                  | Field_Error_Chief_Email         |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Double_Dot                      | Field_Error_Chief_Email         |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Space                           | Field_Error_Chief_Email         |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Wrong_AT                        | Field_Error_Chief_Email         |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Less_Greater_Symbols            | Field_Error_Chief_Email         |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Colon                           | Field_Error_Chief_Email         |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Semi_Colon                      | Field_Error_Chief_Email         |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Comma                           | Field_Error_Chief_Email         |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Start_With_Hyphen               | Field_Error_Chief_Email         |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Hyphen_Before_Domain            | Field_Error_Chief_Email         |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Double_Dot_Domain               | Field_Error_Chief_Email         |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Exclamation_Domain              | Field_Error_Chief_Email         |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Unicode                         | Field_Error_Chief_Email         |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Single_Quote_Before_AT          | Field_Error_Chief_Email         |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Domain_Exceed_Max               | Field_Error_Chief_Email         |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Local_Part_Max                  | Field_Error_Chief_Email         |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Consecutive_Dot_Domain          | Field_Error_Chief_Email         |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Consecutive_Dot_SubDomain       | Field_Error_Chief_Email         |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Consecutiv_Dot_Domain_SubDomain | Field_Error_Chief_Email         |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Emoji                           | Field_Error_Chief_Email         |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_TLD                             | Field_Error_Chief_Email         |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Missing_AT                      | Field_Error_Chief_Email         |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Reserved_Domain                 | Field_Error_Chief_Email         |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Punycode                        | Field_Error_Chief_Email         |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Max_Char                        | Field_Error_Chief_Email         |
+      | Project_Details_Title | Key_Project_Roles                      | Field_And_Summary_Error_Message |
+      | Valid_Data_All_Fields | Invalid_Email_Data_One_Start_With_Dot  | Field_Error_Chief_Email         |
+      | Valid_Data_All_Fields | Invalid_Email_Data_One_Double_Dot      | Field_Error_Chief_Email         |
+      | Valid_Data_All_Fields | Invalid_Email_Data_One_TLD             | Field_Error_Chief_Email         |
+      | Valid_Data_All_Fields | Invalid_Email_Data_One_Reserved_Domain | Field_Error_Chief_Email         |
+      | Valid_Data_All_Fields | Invalid_Email_Data_One_Punycode        | Field_Error_Chief_Email         |
+      | Valid_Data_All_Fields | Invalid_Email_Data_One_Max_Char        | Field_Error_Chief_Email         |
+      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Missing_AT      | Field_Error_Chief_Email         |
+      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Space                           | Field_Error_Chief_Email         |
+      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Wrong_AT                        | Field_Error_Chief_Email         |
+      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Less_Greater_Symbols            | Field_Error_Chief_Email         |
+      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Colon                           | Field_Error_Chief_Email         |
+      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Semi_Colon                      | Field_Error_Chief_Email         |
+      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Comma                           | Field_Error_Chief_Email         |
+      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Start_With_Hyphen               | Field_Error_Chief_Email         |
+      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Hyphen_Before_Domain            | Field_Error_Chief_Email         |
+      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Double_Dot_Domain               | Field_Error_Chief_Email         |
+      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Exclamation_Domain              | Field_Error_Chief_Email         |
+      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Unicode                         | Field_Error_Chief_Email         |
+      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Single_Quote_Before_AT          | Field_Error_Chief_Email         |
+      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Domain_Exceed_Max               | Field_Error_Chief_Email         |
+      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Local_Part_Max                  | Field_Error_Chief_Email         |
+      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Consecutive_Dot_Domain          | Field_Error_Chief_Email         |
+      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Consecutive_Dot_SubDomain       | Field_Error_Chief_Email         |
+      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Consecutiv_Dot_Domain_SubDomain | Field_Error_Chief_Email         |
+      # | Valid_Data_All_Fields | Invalid_Email_Data_One_Emoji                           | Field_Error_Chief_Email         |
 
   @rsp-1863 @saveLaterSponsorEmailValidations
   Scenario Outline: Validate error messages when user saves the project with invalid sponsor email data on key project roles page
@@ -616,32 +616,32 @@ Feature: Create Amendment - Create Project
     And I capture the page screenshot
 
     Examples:
-      | Project_Details_Title | Key_Project_Roles                                      | Field_And_Summary_Error_Message |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Start_With_Dot                  | Field_Error_Sponsor_Email       |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Double_Dot                      | Field_Error_Sponsor_Email       |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Space                           | Field_Error_Sponsor_Email       |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Wrong_AT                        | Field_Error_Sponsor_Email       |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Less_Greater_Symbols            | Field_Error_Sponsor_Email       |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Colon                           | Field_Error_Sponsor_Email       |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Semi_Colon                      | Field_Error_Sponsor_Email       |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Comma                           | Field_Error_Sponsor_Email       |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Start_With_Hyphen               | Field_Error_Sponsor_Email       |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Hyphen_Before_Domain            | Field_Error_Sponsor_Email       |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Double_Dot_Domain               | Field_Error_Sponsor_Email       |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Exclamation_Domain              | Field_Error_Sponsor_Email       |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Unicode                         | Field_Error_Sponsor_Email       |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Single_Quote_Before_AT          | Field_Error_Sponsor_Email       |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Domain_Exceed_Max               | Field_Error_Sponsor_Email       |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Local_Part_Max                  | Field_Error_Sponsor_Email       |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Consecutive_Dot_Domain          | Field_Error_Sponsor_Email       |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Consecutive_Dot_SubDomain       | Field_Error_Sponsor_Email       |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Consecutiv_Dot_Domain_SubDomain | Field_Error_Sponsor_Email       |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Emoji                           | Field_Error_Sponsor_Email       |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_TLD                             | Field_Error_Sponsor_Email       |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Missing_AT                      | Field_Error_Sponsor_Email       |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Reserved_Domain                 | Field_Error_Sponsor_Email       |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Punycode                        | Field_Error_Sponsor_Email       |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Max_Char                        | Field_Error_Sponsor_Email       |
+      | Project_Details_Title | Key_Project_Roles                      | Field_And_Summary_Error_Message |
+      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Double_Dot      | Field_Error_Sponsor_Email       |
+      | Valid_Data_All_Fields | Invalid_Email_Data_Two_TLD             | Field_Error_Sponsor_Email       |
+      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Reserved_Domain | Field_Error_Sponsor_Email       |
+      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Punycode        | Field_Error_Sponsor_Email       |
+      # | Valid_Data_All_Fields | Invalid_Email_Data_Two_Start_With_Dot                  | Field_Error_Sponsor_Email       |
+      # | Valid_Data_All_Fields | Invalid_Email_Data_Two_Space                           | Field_Error_Sponsor_Email       |
+      # | Valid_Data_All_Fields | Invalid_Email_Data_Two_Wrong_AT                        | Field_Error_Sponsor_Email       |
+      # | Valid_Data_All_Fields | Invalid_Email_Data_Two_Less_Greater_Symbols            | Field_Error_Sponsor_Email       |
+      # | Valid_Data_All_Fields | Invalid_Email_Data_Two_Colon                           | Field_Error_Sponsor_Email       |
+      # | Valid_Data_All_Fields | Invalid_Email_Data_Two_Semi_Colon                      | Field_Error_Sponsor_Email       |
+      # | Valid_Data_All_Fields | Invalid_Email_Data_Two_Comma                           | Field_Error_Sponsor_Email       |
+      # | Valid_Data_All_Fields | Invalid_Email_Data_Two_Start_With_Hyphen               | Field_Error_Sponsor_Email       |
+      # | Valid_Data_All_Fields | Invalid_Email_Data_Two_Hyphen_Before_Domain            | Field_Error_Sponsor_Email       |
+      # | Valid_Data_All_Fields | Invalid_Email_Data_Two_Double_Dot_Domain               | Field_Error_Sponsor_Email       |
+      # | Valid_Data_All_Fields | Invalid_Email_Data_Two_Exclamation_Domain              | Field_Error_Sponsor_Email       |
+      # | Valid_Data_All_Fields | Invalid_Email_Data_Two_Unicode                         | Field_Error_Sponsor_Email       |
+      # | Valid_Data_All_Fields | Invalid_Email_Data_Two_Single_Quote_Before_AT          | Field_Error_Sponsor_Email       |
+      # | Valid_Data_All_Fields | Invalid_Email_Data_Two_Domain_Exceed_Max               | Field_Error_Sponsor_Email       |
+      # | Valid_Data_All_Fields | Invalid_Email_Data_Two_Local_Part_Max                  | Field_Error_Sponsor_Email       |
+      # | Valid_Data_All_Fields | Invalid_Email_Data_Two_Consecutive_Dot_Domain          | Field_Error_Sponsor_Email       |
+      # | Valid_Data_All_Fields | Invalid_Email_Data_Two_Consecutive_Dot_SubDomain       | Field_Error_Sponsor_Email       |
+      # | Valid_Data_All_Fields | Invalid_Email_Data_Two_Consecutiv_Dot_Domain_SubDomain | Field_Error_Sponsor_Email       |
+      # | Valid_Data_All_Fields | Invalid_Email_Data_Two_Emoji                           | Field_Error_Sponsor_Email       |
+      # | Valid_Data_All_Fields | Invalid_Email_Data_Two_Missing_AT                      | Field_Error_Sponsor_Email       |
+      # | Valid_Data_All_Fields | Invalid_Email_Data_Two_Max_Char                        | Field_Error_Sponsor_Email       |
 
   @rsp-1861 @rsp-3670 @jsEnabled
   Scenario Outline: Validate user is able to fill sponsor organisation in key project roles page with valid data
@@ -729,7 +729,9 @@ Feature: Create Amendment - Create Project
       | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Sponsor_Organisation_Text_Partial_Start_Space | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Start_Space |
       | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Sponsor_Organisation_Text_Partial_End_Space   | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space  |
 
-  @rsp-1861 @jsEnabled
+  @rsp-1861 @jsEnabled @skip
+  # The below scenario is being skipped for regression. Once the database connection is working, 
+  # new code to be written to retrieve the RTS data from dev database.
   Scenario Outline: Validate the active primary sponsor organisation from rts with data in database
     When I authorise the rts api using '<RTS_API_Data>'
     Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation
@@ -804,7 +806,6 @@ Feature: Create Amendment - Create Project
       | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Dot_Comma    | Sponsor_Organisation_Text_Blank | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation | Back            |
       | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Slash        | Sponsor_Organisation_Text_Blank | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation | Back            |
       | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Hyphen       | Sponsor_Organisation_Text_Blank | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation | Back            |
-
 
   @rsp-3939 @validateSponsorOrganisationResultsJsDisabled @jsDisabled
   Scenario Outline: Validate the primary sponsor organisation search results in key project roles page

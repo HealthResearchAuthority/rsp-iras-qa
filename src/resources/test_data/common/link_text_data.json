@@ -31,7 +31,7 @@
     "REC_members": "REC members",
     "Sponsor": "Sponsor",
     "System_Administration": "System administration",
-    "Technical|_Assurance": "Technical Assurance",
+    "Technical_Assurance": "Technical Assurance",
     "Technical_Assurance_reviewers": "Technical Assurance reviewers"
   },
   "Project_Details_IRAS_Page": {
@@ -119,7 +119,7 @@
   "Project_Overview_Page": {
     "Project_Details": "Project details",
     "Project": "QA_Automation - This is a short project title",
-    "Modifications_Tile": "Modifications",
+    "Post_Approval": "Post approval",
     "Key_Project_Roles": "Key project roles",
     "Research_Locations": "Research locations"
   },
@@ -161,6 +161,9 @@
     "Back": "Back",
     "Remove_This_Change": "Remove this change"
   },
+  "Planned_End_Date_Change_Page": {
+    "Back": "Back"
+  },
   "Participating_Organisations_Page": {
     "Back": "Back",
     "Advanced_Filter": "Advanced filter",
@@ -168,6 +171,21 @@
   },
   "Approvals_Page": {
     "Search": "Search",
+    "Back": "Back",
+    "Modifications_Tasklist": "Modifications tasklist"
+  },
+  "Modifications_Tasklist_Page": {
+    "Back": "Back"
+  },
+  "Affected_Organisation_Selection_Page": {
+    "Back": "Back",
+    "Remove_This_Change": "Remove this change"
+  },
+  "Affected_Organisation_Questions_Page": {
+    "Back": "Back",
+    "Remove_This_Change": "Remove this change"
+  },
+  "Review_Changes_Planned_End_Date_Page": {
     "Back": "Back"
   }
 }

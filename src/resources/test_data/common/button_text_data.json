@@ -120,6 +120,7 @@
     "Modification_Type": "Modification type",
     "Date_Submitted": "Date submitted",
     "Days_Since_Submission": "Days since submission",
+    "Continue_to_assign_modifications": "Continue to assign modifications",
     "Advanced_Filters": "Advanced filters"
   },
   "Participating_Organisations_Page": {
@@ -132,6 +133,33 @@
     "Save_For_Later": "Save for later"
   },
   "Modifications_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later",
+    "Save_Changes": "Save changes"
+  },
+  "Affected_Organisation_Selection_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later",
+    "Save_Changes": "Save changes"
+  },
+  "Affected_Organisation_Questions_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later",
+    "Save_Changes": "Save changes"
+  },
+  "Review_Changes_Planned_End_Date_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later"
+  },
+  "Project_Overview_Page": {
+    "Create_New_Modification": "Create new modification"
+  },
+  "Add_Document_Modifications_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later"
+  },
+  "Review_Uploaded_Document_Modifications_Page": {
+    "Add_Another_Document": "Add another document",
     "Save_Continue": "Save and continue",
     "Save_For_Later": "Save for later"
   }
