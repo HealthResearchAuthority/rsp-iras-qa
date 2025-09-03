@@ -18,7 +18,7 @@ Then(
   async ({ commonItemsPage, homePage }, datasetName: string) => {
     const dataset = homePage.homePageTestData[datasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         const labelValue = await commonItemsPage.getUiLabel(key, homePage);
         expect(labelValue).toBe(dataset[key]);
       }

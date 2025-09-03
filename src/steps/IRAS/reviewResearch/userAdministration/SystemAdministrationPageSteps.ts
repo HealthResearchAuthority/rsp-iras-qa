@@ -12,7 +12,7 @@ Then(
   async ({ commonItemsPage, systemAdministrationPage }, datasetName: string) => {
     const dataset = systemAdministrationPage.systemAdminPageTestData[datasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         const labelValue = await commonItemsPage.getUiLabel(key, systemAdministrationPage);
         expect(labelValue).toBe(dataset[key]);
       }
