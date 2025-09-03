@@ -1,4 +1,4 @@
-@UserAdministration @ViewReviewBodies @SysAdminUser @SystemTest @rsp-2571 @rsp-2569
+@UserAdministration @ManageReviewBodies @ViewReviewBodies @SysAdminUser @SystemTest @rsp-2571 @rsp-2569
 Feature: User Administration: Manage Review Bodies list and view review bodies profile details
 
     Background:
@@ -159,7 +159,7 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
             | Existing_QA_Data_Three |
 
     # out of scope for now
-    @rsp-3459 @ManageReviewBodiesSearchLeadingAndTrailingWhiteSpaces @fail @skip
+    @rsp-3459 @ManageReviewBodiesSearchLeadingAndTrailingWhiteSpaces @skip
     Scenario Outline: Verify search results in manage review bodies page when the search keyword contains leading and trailing white spaces
         When I fill the search input for searching 'review bodies' with '<Search_Query>' as the search query
         And I capture the page screenshot
