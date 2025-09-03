@@ -568,7 +568,7 @@ When(
       pageLocator = commonItemsPage.firstPage;
     } else {
       const totalPages = await commonItemsPage.getTotalPages();
-      pageLocator = await commonItemsPage.clickOnPages(totalPages, 'clicking on page number');
+      pageLocator = await commonItemsPage.clickOnPages(totalPages, 'page number');
     }
     await expect(pageLocator).toHaveAttribute('aria-current', 'page');
   }
@@ -821,7 +821,7 @@ Then(
 );
 
 Then(
-  'I sequentially navigate through each {string} by {string} from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges',
+  'I sequentially navigate through each {string} by clicking on {string} from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges',
   async ({ commonItemsPage }, pagename: string, navigateMethod: string) => {
     const totalPages = await commonItemsPage.getTotalPages();
     //Limiting the max pages to validate to 10
@@ -839,7 +839,7 @@ Then(
 );
 
 Then(
-  'I sequentially navigate through each {string} by {string} from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges',
+  'I sequentially navigate through each {string} by clicking on {string} from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges',
   async ({ commonItemsPage }, pagename: string, navigateMethod: string) => {
     const totalPages = await commonItemsPage.getTotalPages();
     //Limiting the max pages to validate to 10
@@ -849,7 +849,7 @@ Then(
     } else {
       maxPagesToValidate = totalPages;
     }
-    await commonItemsPage.clickOnPages(totalPages, 'clicking on page number');
+    await commonItemsPage.clickOnPages(totalPages, 'page number');
     for (let currentPage = totalPages; currentPage >= maxPagesToValidate; currentPage--) {
       await commonItemsPage.validatePagination(currentPage, totalPages, pagename, navigateMethod);
     }

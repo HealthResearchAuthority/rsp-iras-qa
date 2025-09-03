@@ -817,7 +817,7 @@ export default class CommonItemsPage {
     const currentPageLink = this.pagination
       .getByRole('link', { name: `Page ${currentPageNumber}`, exact: true })
       .or(this.pagination.getByRole('button', { name: `Page ${currentPageNumber}`, exact: true }));
-    if (navigateMethod === 'clicking on page number') {
+    if (navigateMethod === 'page number') {
       if (await currentPageLink.isVisible()) {
         await currentPageLink.click();
         await this.page.waitForLoadState('domcontentloaded');
@@ -1139,9 +1139,9 @@ export default class CommonItemsPage {
     expect(visiblePages).toContain(firstPage);
     expect(visiblePages).toContain(lastPage);
     // Navigation
-    if (navigateMethod === 'clicking on next link') {
+    if (navigateMethod === 'next link') {
       await this.clickOnNextLink();
-    } else if (navigateMethod === 'clicking on previous link') {
+    } else if (navigateMethod === 'previous link') {
       await this.clickOnPreviousLink();
     }
   }

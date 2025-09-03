@@ -88,7 +88,7 @@ Then(
       expectedRowsLastPage = 10;
     }
     //click on the last page
-    await commonItemsPage.clickOnPages(actualtotalPages, 'clicking on page number');
+    await commonItemsPage.clickOnPages(actualtotalPages, 'page number');
     const actualRows = (await commonItemsPage.tableRows.count()) - 1;
     expect(expectedRowsLastPage).toBe(actualRows);
   }

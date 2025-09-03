@@ -108,7 +108,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     And I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
     When I click the 'Modifications_Tile' link on the 'Project_Overview_Page'
-    And I select 'Participating_Organisation_Option' from area of change dropdown and 'Addition_Of_sites_Option' from specific change dropdown
+    And I select 'Participating_Organisation_Option' from area of change dropdown and 'Addition_Of_Sites_Option' from specific change dropdown
     When I click the 'Save_For_Later' button on the 'Select_Area_Of_Change_Page'
     Then I can see the project overview page
     Then I can see the participating organisation page

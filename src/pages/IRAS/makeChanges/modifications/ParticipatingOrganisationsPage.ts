@@ -24,10 +24,7 @@ export default class MakeChangeParticipatingOrganisationsPage {
   readonly participating_organisations_search_button: Locator;
   readonly advanced_filter_link: Locator;
   readonly remove_this_change_link: Locator;
-  readonly displayed_row_count: Locator;
   readonly modification_checkbox: Locator;
-  readonly search_textbox: Locator;
-  readonly search_button: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -66,13 +63,8 @@ export default class MakeChangeParticipatingOrganisationsPage {
       name: this.linkTextData.Participating_Organisations_Page.Remove_This_Change,
       exact: true,
     });
-    this.displayed_row_count = this.page.locator('.search-filter-panel__count');
     this.modification_checkbox = this.page.getByRole('button', {
       name: this.participatingOrganisationsPageTestData.Checkbox.modification_checkbox,
-    });
-    this.search_button = this.page.getByRole('button', {
-      name: this.buttonTextData.Participating_Organisations_Page.Search,
-      exact: true,
     });
   }
 
