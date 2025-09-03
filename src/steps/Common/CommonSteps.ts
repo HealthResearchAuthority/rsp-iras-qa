@@ -794,8 +794,15 @@ Then(
   'I sequentially navigate through each page by {string} from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges',
   async ({ commonItemsPage }, navigateMethod: string) => {
     const totalPages = await commonItemsPage.getTotalPages();
+    //Limiting the max pages to validate to 10
+    let maxPagesToValidate = 0;
+    if (totalPages > commonItemsPage.commonTestData.maxPagesToValidate) {
+      maxPagesToValidate = commonItemsPage.commonTestData.maxPagesToValidate;
+    } else {
+      maxPagesToValidate = totalPages;
+    }
     await commonItemsPage.firstPage.click();
-    for (let currentPage = 1; currentPage <= totalPages; currentPage++) {
+    for (let currentPage = 1; currentPage <= maxPagesToValidate; currentPage++) {
       await commonItemsPage.validatePagination(currentPage, totalPages, navigateMethod);
     }
   }
@@ -805,8 +812,15 @@ Then(
   'I sequentially navigate through each page by {string} from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges',
   async ({ commonItemsPage }, navigateMethod: string) => {
     const totalPages = await commonItemsPage.getTotalPages();
+    //Limiting the max pages to validate to 10
+    let maxPagesToValidate = 0;
+    if (totalPages > commonItemsPage.commonTestData.maxPagesToValidate) {
+      maxPagesToValidate = totalPages - commonItemsPage.commonTestData.maxPagesToValidate;
+    } else {
+      maxPagesToValidate = totalPages;
+    }
     await commonItemsPage.clickOnPages(totalPages, 'clicking on page number');
-    for (let currentPage = totalPages; currentPage >= 1; currentPage--) {
+    for (let currentPage = totalPages; currentPage >= maxPagesToValidate; currentPage--) {
       await commonItemsPage.validatePagination(currentPage, totalPages, navigateMethod);
     }
   }

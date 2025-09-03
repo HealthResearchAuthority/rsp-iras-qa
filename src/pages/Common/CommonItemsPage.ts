@@ -159,14 +159,17 @@ export default class CommonItemsPage {
     this.lastPage = this.pagination.getByRole('listitem').last();
     this.previous_button = this.pagination
       .getByRole('link')
-      .getByText(this.commonTestData.previous_button, { exact: true });
+      .getByText(this.commonTestData.previous_button, { exact: true })
+      .or(this.page.getByRole('button', { name: this.commonTestData.previous_button, exact: true }));
     this.currentPage = this.pagination.locator('a[class$="current"]');
     this.pagination_results = this.page
       .getByRole('navigation', { name: 'Pagination' })
       .locator('..')
       .getByRole('paragraph');
     this.pagination_items = this.pagination.getByRole('listitem');
-    this.pageLinks = this.pagination.locator('a[aria-label^="Page"]');
+    this.pageLinks = this.pagination
+      .locator('a[aria-label^="Page"]')
+      .or(this.pagination.locator('button[aria-label^="Page"]'));
     //Validation Alert Box
     this.alert_box = this.page.getByRole('alert');
     this.alert_box_headings = this.alert_box.getByRole('heading');
@@ -808,7 +811,9 @@ export default class CommonItemsPage {
   }
 
   async clickOnPages(currentPageNumber: number, navigateMethod: string) {
-    const currentPageLink = this.pagination.getByRole('link', { name: `Page ${currentPageNumber}`, exact: true });
+    const currentPageLink = this.pagination
+      .getByRole('link', { name: `Page ${currentPageNumber}`, exact: true })
+      .or(this.pagination.getByRole('button', { name: `Page ${currentPageNumber}`, exact: true }));
     if (navigateMethod === 'clicking on page number') {
       if (await currentPageLink.isVisible()) {
         await currentPageLink.click();
