@@ -232,8 +232,8 @@ Feature: User Administration: Manage user profiles, view and edit user profile
       | Existing_QA_User_First_Name |
       | Existing_QA_User_Last_Name  |
       | Existing_QA_User_Email      |
-  # out of scope for now
 
+  # out of scope for now
   @rsp-3456 @ManageUsersSearchLeadingAndTrailingWhiteSpaces @fail @skip
   Scenario Outline: Verify search results in manage users page when the search keyword contains leading and trailing white spaces
     When I fill the search input for searching 'users' with '<Search_Query>' as the search query
