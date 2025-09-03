@@ -169,7 +169,7 @@ Feature: User Administration: Manage user profiles, view and edit user profile
       | Navigation_Method         |
       | clicking on page number   |
       | clicking on previous link |
-  #@Smoke
+ 
   @rsp-3456 @ManageUsersSearchResultsFound 
   Scenario Outline: Verify search results in manage users page when user search by first value of first name, last name, full name and email address
     When I enter the '<Field_Name>' of the '<Position>' item in the list, into the search field
