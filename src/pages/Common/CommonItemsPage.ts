@@ -1191,4 +1191,37 @@ export default class CommonItemsPage {
       }
     }
   }
+
+  async getLastLoggedInFilterLabel(
+    key: string,
+    filterDataset: any,
+    filterLabels: any,
+    replaceValue: string
+  ): Promise<string | null> {
+    return await this.getActiveFilterLabelLastLoggedInField(
+      filterLabels,
+      filterDataset,
+      key,
+      /(_from_day_text|_to_day_text)$/,
+      replaceValue
+    );
+  }
+
+  async getActiveFilterLabelLastLoggedInField(
+    filterLabels: any,
+    filterDataset: JSON,
+    key: string,
+    searchValue: RegExp,
+    replaceValue: string
+  ): Promise<string> {
+    let activeFilterLabel: string;
+    const label = filterLabels[key.replace(searchValue, replaceValue)];
+    const dateType = key.includes('_from_') ? 'from' : 'to';
+    const dateKey = key.replace('_day_text', '');
+    const dateValue = await this.getDateString(filterDataset, dateKey);
+    if (dateValue) {
+      activeFilterLabel = `${label} - ${dateType} ${dateValue}`;
+    }
+    return activeFilterLabel;
+  }
 }

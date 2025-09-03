@@ -886,10 +886,16 @@ Then(
           await validateFilter(key, async (k) =>
             commonItemsPage.getCheckboxFilterLabels(k, filterDataset, filterLabels, replaceValue)
           );
-        } else if (key.startsWith('date_')) {
+        } else if (key.startsWith('date_submitted')) {
           if (await commonItemsPage.shouldValidateDateFilter(key, filterDataset)) {
             await validateFilter(key, async (k) =>
               commonItemsPage.getDateFilterLabel(k, filterDataset, filterLabels, replaceValue)
+            );
+          }
+        } else if (key.startsWith('date_last_logged_in')) {
+          if (await commonItemsPage.shouldValidateDateFilter(key, filterDataset)) {
+            await validateFilter(key, async (k) =>
+              commonItemsPage.getLastLoggedInFilterLabel(k, filterDataset, filterLabels, replaceValue)
             );
           }
         } else {
