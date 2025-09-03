@@ -127,19 +127,17 @@ When(
 When(
   'I can see the {string} user has the selected review bodies in the filter assigned on their profile page',
   async ({ userProfilePage, manageUsersPage }, datasetName: string) => {
-    if (datasetName.includes('_Review_Body_No')) {
-      if (await userProfilePage.review_body_row.isVisible()) {
-        if (await userProfilePage.review_body_value.isVisible()) {
-          const dataset =
-            manageUsersPage.manageUsersPageTestData.Advanced_Filters[
-              'Advanced_Filter_Country_All_Review_Body_All_Role_All_Status_Active'
-            ];
-          const actualValues = confirmStringNotNull(await userProfilePage.review_body_value.textContent());
-          const expectedValues = dataset.review_body_checkbox.toString().replaceAll(',', ', ');
-          expect(expectedValues).toContain(actualValues);
-        } else {
-          await expect(userProfilePage.review_body_value).not.toBeVisible();
-        }
+    if (datasetName.includes('_Review_Body_No') && (await userProfilePage.review_body_row.isVisible())) {
+      if (await userProfilePage.review_body_value.isVisible()) {
+        const dataset =
+          manageUsersPage.manageUsersPageTestData.Advanced_Filters[
+            'Advanced_Filter_Country_All_Review_Body_All_Role_All_Status_Active'
+          ];
+        const actualValues = confirmStringNotNull(await userProfilePage.review_body_value.textContent());
+        const expectedValues = dataset.review_body_checkbox.toString().replaceAll(',', ', ');
+        expect(expectedValues).toContain(actualValues);
+      } else {
+        await expect(userProfilePage.review_body_value).not.toBeVisible();
       }
     } else {
       const dataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[datasetName];
@@ -154,18 +152,16 @@ When(
   'I can see the {string} user has the selected countries in the filter assigned on their profile page',
   async ({ userProfilePage, manageUsersPage }, datasetName: string) => {
     if (datasetName.includes('_Country_No')) {
-      if (await userProfilePage.country_row.isVisible()) {
-        if (await userProfilePage.country_value.isVisible()) {
-          const dataset =
-            manageUsersPage.manageUsersPageTestData.Advanced_Filters[
-              'Advanced_Filter_Country_All_Review_Body_All_Role_All_Status_Active'
-            ];
-          const actualValues = confirmStringNotNull(await userProfilePage.country_value.textContent());
-          const expectedValues = dataset.country_checkbox.toString().replaceAll(',', ', ');
-          expect(expectedValues).toContain(actualValues);
-        } else {
-          await expect(userProfilePage.country_value).not.toBeVisible();
-        }
+      if ((await userProfilePage.country_row.isVisible()) && (await userProfilePage.country_value.isVisible())) {
+        const dataset =
+          manageUsersPage.manageUsersPageTestData.Advanced_Filters[
+            'Advanced_Filter_Country_All_Review_Body_All_Role_All_Status_Active'
+          ];
+        const actualValues = confirmStringNotNull(await userProfilePage.country_value.textContent());
+        const expectedValues = dataset.country_checkbox.toString().replaceAll(',', ', ');
+        expect(expectedValues).toContain(actualValues);
+      } else {
+        await expect(userProfilePage.country_value).not.toBeVisible();
       }
     } else {
       const dataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[datasetName];

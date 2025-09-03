@@ -184,7 +184,7 @@ Then(
       selectedCheckboxCount > 0
     ) {
       await commonItemsPage.clearCheckboxes(dataset, ['country_checkbox'], commonItemsPage, editUserProfilePage);
-      await commonItemsPage.clearCheckboxesReviewBody(dataset, 'review_body_checkbox', editUserProfilePage);
+      await commonItemsPage.clearCheckboxesUserProfileReviewBody(dataset, editUserProfilePage);
       await commonItemsPage.clearUIComponent(dataset, 'role_checkbox', editUserProfilePage);
     }
   }

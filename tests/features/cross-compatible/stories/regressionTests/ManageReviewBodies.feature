@@ -1,4 +1,4 @@
-@RegressionManageReviewBodies @SysAdminUser @Regression @UserAdministration @RegressionSysAdmin
+@RegressionManageReviewBodies @SysAdminUser @Regression @UserAdministration
 Feature: User Administration: Manage Review Bodies
 
         Background:
