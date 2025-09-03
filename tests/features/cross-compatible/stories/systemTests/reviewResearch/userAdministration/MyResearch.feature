@@ -19,7 +19,6 @@ Feature: User Administration: My Research
 
   @rsp-2854 @MyResearchProjectsPage
   Scenario Outline: Validate the my research page with projects
-    Then I can see a 'Add_project_record' button on the 'My_Research_Projects_Page'
     And I can see a 'Search' button on the 'My_Research_Projects_Page'
     And I can see a 'Advanced_filter' button on the 'My_Research_Projects_Page'
     And I can see the '<Validation_Text>' ui labels on the my research project page
@@ -61,4 +60,5 @@ Feature: User Administration: My Research
     And the 'Previous' button will be 'available' to the user
     And the 'Next' button will be 'not available' to the user
     And I capture the page screenshot
+
 

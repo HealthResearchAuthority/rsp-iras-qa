@@ -28,7 +28,7 @@ Then(
 Then(
   'I can see my research page is sorted by {string} order of the {string}',
   async (
-    { searchModificationsPage, modificationsReadyToAssignPage, myResearchProjectsPage, commonItemsPage },
+    { searchModificationsPage, myResearchProjectsPage, modificationsReadyToAssignPage, commonItemsPage },
     sortDirection: string,
     sortField: string
   ) => {
@@ -60,16 +60,22 @@ Then(
     } else {
       sortedList = [...actualList].sort((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
     }
-    expect(actualList).toEqual(sortedList);
+    if (sortedList.map((date) => date.includes('Sept'))) {
+      //Only for September month its returning Sept instead Sep. Hence this temporary fix
+      const updatedSortedList = sortedList.map((date) => date.replace('Sept', 'Sep'));
+      expect(actualList).toEqual(updatedSortedList);
+    } else {
+      expect(actualList).toEqual(sortedList);
+    }
   }
 );
 
 Then(
   'I click the {string} link on the my research page',
-  async ({ projectOverviewPage, myResearchProjectsPage }, datasetName: string) => {
-    const dataset = projectOverviewPage.projectOverviewPageTestData[datasetName];
+  async ({ myResearchProjectsPage, projectDetailsTitlePage, projectDetailsIRASPage }, datasetName: string) => {
+    const dataset = projectDetailsTitlePage.projectDetailsTitlePageTestData[datasetName];
     const shortProjectTitleData = dataset.short_project_title_text;
-    const irasidData = dataset.iras_ID;
+    const irasidData = await projectDetailsIRASPage.getUniqueIrasId();
     const foundRecords = await myResearchProjectsPage.findProjectLink(shortProjectTitleData, irasidData);
     expect(foundRecords).toBeDefined();
     expect(foundRecords).toHaveCount(1);

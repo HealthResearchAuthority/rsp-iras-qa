@@ -7,21 +7,9 @@
     "next_button": "Next   page",
     "short_project_title_text": "QA_Automation - This is a short project title"
   },
-
-  "Valid_Project_Details_Nhs": {
-    "short_project_title_text": "QA_Automation - This is a short project title",
-    "iras_ID": "4795057"
-  },
-
-  "Valid_Project_Details_Non_Nhs": {
-    "short_project_title_text": "QA_Automation - This is a short project title",
-    "iras_ID": "4545787"
-  },
-
   "No_Projects_Label_Texts": {
     "no_projects": "You don't have any projects available in the new service"
   },
-
   "Label_Texts": {
     "short_project_title_link": "Short project title",
     "iras_id_title": "IRAS ID",

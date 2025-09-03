@@ -20,6 +20,7 @@ export default class MyResearchProjectsPage {
   readonly listCell: Locator;
   readonly titlelink: Locator;
   readonly next_button: Locator;
+  readonly search: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -37,13 +38,6 @@ export default class MyResearchProjectsPage {
 
     this.add_project_record_button_label = this.page.getByRole('link', {
       name: this.myResearchProjectsPageTestData.My_Research_Projects_Page.add_project_record_button_label,
-    });
-    this.project_search_button_label = this.page.getByRole('button', {
-      name: this.myResearchProjectsPageTestData.My_Research_Projects_Page.search,
-      exact: true,
-    });
-    this.advanced_filter_label = this.page.getByRole('button', {
-      name: this.myResearchProjectsPageTestData.My_Research_Projects_Page.advanced_filter_label,
     });
     this.short_project_title_link = this.page.getByRole('button', {
       name: this.myResearchProjectsPageTestData.Label_Texts.short_project_title_link,
@@ -90,7 +84,6 @@ export default class MyResearchProjectsPage {
       for (const row of rows) {
         const columns = await row.locator(this.listCell).allInnerTexts();
         const matchesSearchKey = columns[0].trim().includes(shortProjectTitle);
-
         if (matchesSearchKey && columns[1].trim() === irasId) {
           return row;
         }
@@ -105,29 +98,13 @@ export default class MyResearchProjectsPage {
   }
 
   async sortIrasIdListValues(irasIds: string[], sortDirection: string): Promise<string[]> {
-    let sortedListAsNums: number[];
-    const sortedListAsStrings: string[] = [];
     const formattedIrasIds = irasIds.map(Number);
-    if (sortDirection.toLowerCase() == 'ascending') {
-      sortedListAsNums = formattedIrasIds.toSorted((a, b) => {
-        if (a[0] - b[0] == 0) {
-          return a[1] - b[1];
-        } else {
-          return a[0] - b[0];
-        }
-      });
-    } else {
-      sortedListAsNums = formattedIrasIds.toSorted((a, b) => {
-        if (b[0] - a[0] == 0) {
-          return b[1] - a[1];
-        } else {
-          return b[0] - a[0];
-        }
-      });
+    if (formattedIrasIds.some(isNaN)) {
+      throw new Error('IRAS ID must be a valid number');
     }
-    for (const entry of sortedListAsNums.entries()) {
-      sortedListAsStrings.push(entry[1].toString());
-    }
-    return sortedListAsStrings;
+    const sortedListAsNums = formattedIrasIds.toSorted((a, b) =>
+      sortDirection.toLowerCase() === 'ascending' ? a - b : b - a
+    );
+    return sortedListAsNums.map(String);
   }
 }

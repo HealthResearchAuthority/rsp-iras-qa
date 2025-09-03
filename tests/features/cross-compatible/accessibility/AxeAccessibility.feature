@@ -8,7 +8,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilitymyResearchProjectsPage @FrontStageUser
+  @axeAccessibilitymyResearchProjectsPage @ApplicantUser
   Scenario: My Research Home Page and Project Overview
     Given I have navigated to the 'Home_Page'
     When I click the 'My_research' link on the 'Home_Page'
