@@ -788,6 +788,12 @@ Given(
         await myResearchProjectsPage.goto();
         await myResearchProjectsPage.assertOnMyResearchProjectsPage();
         break;
+      case 'My_Research_Access_Denied_Page':
+        await myResearchProjectsPage.page.context().addCookies(authState.cookies);
+        await myResearchProjectsPage.goto();
+        await accessDeniedPage.assertOnAccessDeniedPage();
+        break;
+
       default:
         throw new Error(`${page} is not a valid option`);
     }
