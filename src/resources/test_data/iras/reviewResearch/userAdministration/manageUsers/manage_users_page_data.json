@@ -42,9 +42,7 @@
       "date_last_logged_in_from_date_help_text": "For example, 28 February 2023",
       "date_last_logged_in_to_date_help_text": "For example, 12 October 2024",
       "role_hint_label": "Select all that apply",
-      "role_selected_hint_label": "selected",
-      "review_body_hint_label": "Select all that apply",
-      "review_body_selected_hint_label": "selected"
+      "review_body_hint_label": "Select all that apply"
     },
     "enlarged_page_size": "100",
     "enabled_status": "Active",

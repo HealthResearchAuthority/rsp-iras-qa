@@ -81,8 +81,6 @@ export default class ManageUsersPage {
   readonly role_checkbox_chevron: Locator;
   readonly role_fieldset: Locator;
   readonly role_checkbox: Locator;
-  readonly role_selected_hint_label: Locator;
-  readonly role_hint_label: Locator;
   readonly role_checkbox_selected_hint_label: Locator;
   readonly role_checkbox_hint_label: Locator;
   readonly review_body_checkbox_chevron: Locator;
@@ -332,19 +330,6 @@ export default class ManageUsersPage {
         ),
       });
     this.role_checkbox = this.role_fieldset.getByRole('checkbox');
-    this.role_selected_hint_label = this.role_checkbox_chevron
-      .locator('..')
-      .locator('..')
-      .locator('.govuk-fieldset')
-      .locator('.govuk-form-group')
-      .getByText(this.manageUsersPageTestData.Manage_Users_Page.Advanced_Filters_Hint_Labels.role_selected_hint_label);
-
-    this.role_hint_label = this.role_checkbox_chevron
-      .locator('..')
-      .locator('..')
-      .locator('.govuk-fieldset')
-      .locator('.govuk-form-group')
-      .getByText(this.manageUsersPageTestData.Manage_Users_Page.Advanced_Filters_Hint_Labels.role_hint_label);
     this.role_checkbox_selected_hint_label = this.role_checkbox_chevron
       .locator('..')
       .locator('..')
@@ -376,21 +361,6 @@ export default class ManageUsersPage {
         ),
       });
     this.review_body_checkbox = this.review_body_fieldset.getByRole('checkbox');
-    this.review_body_selected_hint_label = this.review_body_checkbox_chevron
-      .locator('..')
-      .locator('..')
-      .locator('.govuk-fieldset')
-      .locator('.govuk-form-group')
-      .getByText(
-        this.manageUsersPageTestData.Manage_Users_Page.Advanced_Filters_Hint_Labels.review_body_selected_hint_label
-      );
-
-    this.review_body_hint_label = this.review_body_checkbox_chevron
-      .locator('..')
-      .locator('..')
-      .locator('.govuk-fieldset')
-      .locator('.govuk-form-group')
-      .getByText(this.manageUsersPageTestData.Manage_Users_Page.Advanced_Filters_Hint_Labels.review_body_hint_label);
     this.review_body_checkbox_selected_hint_label = this.review_body_checkbox_chevron
       .locator('..')
       .locator('..')
