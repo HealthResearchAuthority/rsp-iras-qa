@@ -43,16 +43,19 @@ BeforeScenario(
 );
 
 BeforeScenario(
-  { name: 'Check that current auth state has not expired', tags: '@Regression or @SystemTest and not @NoAuth' },
+  {
+    name: 'Check that current auth state has not expired',
+    tags: '@Regression or @SystemTest or @Smoke and not @NoAuth',
+  },
   async function ({ commonItemsPage, homePage, loginPage, $tags }) {
     const isAuthStateValid = async () => {
       const response = await commonItemsPage.page.request.get('', { maxRedirects: 0 });
       const text = await response.text();
-      return text.includes(homePage.homePageTestData.Home_Page.heading);
+      return text.includes(homePage.homePageTestData.Home_Page.hra_card_selector);
     };
 
     const reauthenticateUsers = async () => {
-      const users = ['System_Admin', 'Applicant_User', 'Studywide_Reviewer', 'Team_Manager', 'WorkFlow_Coordinator'];
+      const users = ['System_Admin', 'Applicant_User', 'Studywide_Reviewer', 'Team_Manager', 'Workflow_Coordinator'];
 
       for (const user of users) {
         await commonItemsPage.page.context().clearCookies();
