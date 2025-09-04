@@ -574,10 +574,10 @@ When(
   }
 );
 
-When('the default page size should be {string}', async ({ commonItemsPage }, pgeSize: string) => {
+When('the default page size should be {string}', async ({ commonItemsPage }, pageSize: string) => {
   const rowCountActual = await commonItemsPage.tableRows.count();
   let rowCountExpected: number;
-  if (pgeSize == 'ten') {
+  if (pageSize == 'ten') {
     rowCountExpected = parseInt(commonItemsPage.commonTestData.default_page_size_participating_organisation, 10);
   } else {
     rowCountExpected = parseInt(commonItemsPage.commonTestData.default_page_size, 10);
