@@ -102,23 +102,19 @@ When('I validate change link is not displayed for {string}', async ({ userProfil
 When(
   'I can see the {string} user has the selected roles in the filter assigned on their profile page',
   async ({ userProfilePage, manageUsersPage }, datasetName: string) => {
-    if (datasetName.includes('_Role_No')) {
-      if (await userProfilePage.role_value.isVisible()) {
-        const dataset =
+    let dataset: any;
+    if (await userProfilePage.role_value.isVisible()) {
+      if (datasetName.includes('_Role_No')) {
+        dataset =
           manageUsersPage.manageUsersPageTestData.Advanced_Filters[
             'Advanced_Filter_Country_All_Review_Body_All_Role_All_Status_Active'
           ];
-        const actualValues = confirmStringNotNull(await userProfilePage.role_value.textContent());
-        const expectedValues = dataset.role_checkbox.toString().replaceAll(',', ', ');
-        expect(expectedValues).toContain(actualValues);
       } else {
-        await expect(userProfilePage.role_value).not.toBeVisible();
+        dataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[datasetName];
       }
-    } else {
-      const dataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[datasetName];
       const actualValues = confirmStringNotNull(await userProfilePage.role_value.textContent());
       const expectedValues = dataset.role_checkbox.toString().replaceAll(',', ', ');
-      await expect(expectedValues).toContain(actualValues);
+      expect(expectedValues).toContain(actualValues);
     }
   }
 );

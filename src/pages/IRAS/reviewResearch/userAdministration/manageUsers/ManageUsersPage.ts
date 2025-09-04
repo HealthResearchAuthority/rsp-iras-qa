@@ -86,8 +86,6 @@ export default class ManageUsersPage {
   readonly review_body_checkbox_chevron: Locator;
   readonly review_body_fieldset: Locator;
   readonly review_body_checkbox: Locator;
-  readonly review_body_selected_hint_label: Locator;
-  readonly review_body_hint_label: Locator;
   readonly review_body_checkbox_selected_hint_label: Locator;
   readonly review_body_checkbox_hint_label: Locator;
 

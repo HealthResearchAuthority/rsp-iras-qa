@@ -196,7 +196,7 @@ When(
     const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
     for (const key in dataset) {
       if (key !== 'email_address_text') {
-        if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+        if (Object.hasOwn(dataset, key)) {
           await commonItemsPage.validateUIComponentValues(dataset, key, editUserProfilePage);
         }
       }
