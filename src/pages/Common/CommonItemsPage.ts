@@ -1005,13 +1005,18 @@ export default class CommonItemsPage {
     filterLabels: any,
     replaceValue: string
   ): Promise<string | null> {
-    return await this.getActiveFilterLabelDateField(
-      filterLabels,
-      filterDataset,
-      key,
-      /(_from_day_text|_to_day_text)$/,
-      replaceValue
-    );
+    const dateSuffixRegex = /(_from_day_text|_to_day_text)$/;
+    if (key.startsWith('date_last_logged_in')) {
+      return await this.getActiveFilterLabelLastLoggedInField(
+        filterLabels,
+        filterDataset,
+        key,
+        dateSuffixRegex,
+        replaceValue
+      );
+    } else if (key.startsWith('date_submitted')) {
+      return await this.getActiveFilterLabelDateField(filterLabels, filterDataset, key, dateSuffixRegex, replaceValue);
+    }
   }
 
   async getTextboxRadioButtonFilterLabel(

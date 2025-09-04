@@ -855,18 +855,23 @@ Then(
     const isDisplayAction = actionToPerform === 'I can see the selected filters are displayed under';
     const isRemoveAction = actionToPerform === 'I remove the selected filters from';
     const replaceValue = '_label';
-    let filterDataset: JSON;
-    let filterLabels: object;
-    if (pageKey === 'Search_Modifications_Page') {
-      filterDataset = searchModificationsPage.searchModificationsPageTestData.Advanced_Filters[filterDatasetName];
-      filterLabels = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page;
-    } else if (pageKey === 'Manage_Review_Bodies_Page') {
-      filterDataset = manageReviewBodiesPage.manageReviewBodiesPageData.Advanced_Filters[filterDatasetName];
-      filterLabels = manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page;
-    } else if (pageKey === 'Manage_Users_Page') {
-      filterDataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[filterDatasetName];
-      filterLabels = manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List;
-    }
+    const pageMap = {
+      Search_Modifications_Page: {
+        filterDataset: searchModificationsPage.searchModificationsPageTestData.Advanced_Filters,
+        filterLabels: searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page,
+      },
+      Manage_Review_Bodies_Page: {
+        dataset: manageReviewBodiesPage.manageReviewBodiesPageData.Advanced_Filters,
+        labels: manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page,
+      },
+      Manage_Users_Page: {
+        dataset: manageUsersPage.manageUsersPageTestData.Advanced_Filters,
+        labels: manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List,
+      },
+    };
+    const { dataset, filterLabels } = pageMap[pageKey];
+    const filterDataset = dataset[filterDatasetName];
+
     const validateFilter = async (key: string, labelFetcher: (key: string) => Promise<string | string[]>) => {
       const labels = await labelFetcher(key);
       const labelArray = Array.isArray(labels) ? labels : [labels];
@@ -886,16 +891,10 @@ Then(
           await validateFilter(key, async (k) =>
             commonItemsPage.getCheckboxFilterLabels(k, filterDataset, filterLabels, replaceValue)
           );
-        } else if (key.startsWith('date_submitted')) {
+        } else if (key.startsWith('date_submitted') || key.startsWith('date_last_logged_in')) {
           if (await commonItemsPage.shouldValidateDateFilter(key, filterDataset)) {
             await validateFilter(key, async (k) =>
               commonItemsPage.getDateFilterLabel(k, filterDataset, filterLabels, replaceValue)
-            );
-          }
-        } else if (key.startsWith('date_last_logged_in')) {
-          if (await commonItemsPage.shouldValidateDateFilter(key, filterDataset)) {
-            await validateFilter(key, async (k) =>
-              commonItemsPage.getLastLoggedInFilterLabel(k, filterDataset, filterLabels, replaceValue)
             );
           }
         } else {
