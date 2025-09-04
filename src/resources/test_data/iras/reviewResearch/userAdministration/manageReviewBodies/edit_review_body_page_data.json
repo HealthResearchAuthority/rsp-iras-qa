@@ -375,7 +375,7 @@
       "Email_Format_Error": { "email_address_text": "Enter an email address in the correct format" },
       "Incorrect_Format_Invalid_Character_Limit_Email_Address_Error": {
         "email_address_text": [
-          "Email address must be 250 characters or less",
+          "Email address must be 254 characters or less",
           "Enter an email address in the correct format"
         ]
       },

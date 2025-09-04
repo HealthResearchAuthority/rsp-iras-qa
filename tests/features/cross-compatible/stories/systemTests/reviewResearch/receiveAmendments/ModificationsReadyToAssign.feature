@@ -109,6 +109,3 @@ Feature: Modifications Tasklist page that displays modifications ready to be ass
             | Short_Project_Title   |
             | Date_Submitted        |
             | Days_Since_Submission |
-
-
-
