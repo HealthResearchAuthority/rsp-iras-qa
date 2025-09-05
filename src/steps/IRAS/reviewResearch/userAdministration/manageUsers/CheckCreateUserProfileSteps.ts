@@ -17,7 +17,7 @@ Then(
         if (key === 'email_address_text') {
           const data = await returnDataFromJSON();
           expect(fieldValActual).toBe(data.Create_User_Profile.email_address_unique);
-        } else if (key === 'country_checkbox' || key === 'access_required_checkbox' || key === 'role_checkbox') {
+        } else if (key === 'country_checkbox' || key === 'review_body_checkbox' || key === 'role_checkbox') {
           const fieldValActuals = fieldValActual.split(', ');
           fieldValActuals.forEach((val, index) => {
             expect(val).toBe(dataset[key][index]);
@@ -32,7 +32,22 @@ Then(
 
 When(
   'I click the change link against {string} on the check and create user profile page',
-  async ({ checkCreateUserProfilePage }, fieldKey: string) => {
-    checkCreateUserProfilePage.clickOnChangeButtonRoleOperations(fieldKey);
+  async ({ checkCreateUserProfilePage, commonItemsPage }, fieldKey: string) => {
+    const changeLink = await commonItemsPage.getChangeLink(fieldKey, checkCreateUserProfilePage);
+    await expect(changeLink).toBeVisible();
+    await changeLink.click();
+  }
+);
+
+Then(
+  'the {string} change link should be {string} on the check and create user profile page',
+  async ({ checkCreateUserProfilePage }, changeLink: string, availability: string) => {
+    const labelKey = changeLink.replace(/(_Dropdown|_Checkbox)$/, '_row').toLowerCase();
+    const labelToCheck = checkCreateUserProfilePage[labelKey];
+    if (availability.toLowerCase() == 'available') {
+      await expect(labelToCheck).toBeVisible();
+    } else {
+      await expect(labelToCheck).not.toBeVisible();
+    }
   }
 );

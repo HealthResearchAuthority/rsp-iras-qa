@@ -12,9 +12,9 @@
     "organisation_label": "Organisation",
     "job_title_label": "Job title",
     "role_label": "Role",
-    "committee_label": "Committee",
     "country_label": "Country",
-    "access_required_label": "Access required",
-    "review_body_label": "Review body"
+    "review_body_label": "Review body",
+    "committee_label": "Committee",
+    "access_required_label": "Access required"
   }
 }

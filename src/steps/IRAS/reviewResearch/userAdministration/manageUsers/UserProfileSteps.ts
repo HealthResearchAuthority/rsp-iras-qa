@@ -24,9 +24,9 @@ Then('I can see the user profile page', async ({ userProfilePage }) => {
       confirmStringNotNull(await userProfilePage.country_value.textContent()).split(', ')
     );
   }
-  if (await userProfilePage.access_required_row.isVisible()) {
-    await userProfilePage.setAccessRequired(
-      confirmStringNotNull(await userProfilePage.access_required_value.textContent()).split(', ')
+  if (await userProfilePage.review_body_row.isVisible()) {
+    await userProfilePage.setReviewBody(
+      confirmStringNotNull(await userProfilePage.review_body_value.textContent()).split(', ')
     );
   }
 });
@@ -50,8 +50,9 @@ When(
 
 When(
   'I click the change link against {string} on the user profile page',
-  async ({ userProfilePage }, fieldKey: string) => {
-    userProfilePage.clickOnChangeButton(fieldKey);
+  async ({ userProfilePage, commonItemsPage }, fieldKey: string) => {
+    const changeLink = await commonItemsPage.getChangeLink(fieldKey, userProfilePage);
+    await changeLink.click();
   }
 );
 
@@ -59,7 +60,7 @@ When(
   'I can see that the user profiles last updated field has the current time',
   async ({ userProfilePage, auditHistoryUserPage }) => {
     const abbreviatedValue = await auditHistoryUserPage.getUpdatedTime();
-    const shortMonth = new Date().toLocaleString('en-GB', { month: 'short', timeZone: 'UTC' });
+    const shortMonth = new Date().toLocaleString('en-GB', { month: 'short', timeZone: 'UTC' }).slice(0, 3);
     const longMonth = new Date().toLocaleString('en-GB', { month: 'long', timeZone: 'UTC' });
     const expectedValue = abbreviatedValue.replace(shortMonth, longMonth);
     await expect(userProfilePage.last_updated_value).toHaveText(expectedValue);
@@ -97,3 +98,63 @@ When('I validate change link is not displayed for {string}', async ({ userProfil
   const locatorName = fieldKey.toLowerCase() + '_change_link';
   await expect(userProfilePage[locatorName]).not.toBeVisible();
 });
+
+When(
+  'I can see the {string} user has the selected roles in the filter assigned on their profile page',
+  async ({ userProfilePage, manageUsersPage }, datasetName: string) => {
+    let dataset: any;
+    if (await userProfilePage.role_value.isVisible()) {
+      if (datasetName.includes('_Role_No')) {
+        dataset =
+          manageUsersPage.manageUsersPageTestData.Advanced_Filters[
+            'Advanced_Filter_Country_All_Review_Body_All_Role_All_Status_Active'
+          ];
+      } else {
+        dataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[datasetName];
+      }
+      const actualValues = confirmStringNotNull(await userProfilePage.role_value.textContent());
+      const expectedValues = dataset.role_checkbox.toString().replaceAll(',', ', ');
+      expect(expectedValues).toContain(actualValues);
+    }
+  }
+);
+
+When(
+  'I can see the {string} user has the selected review bodies in the filter assigned on their profile page',
+  async ({ userProfilePage, manageUsersPage }, datasetName: string) => {
+    let dataset: any;
+    if (await userProfilePage.review_body_value.isVisible()) {
+      if (datasetName.includes('_Review_Body_No')) {
+        dataset =
+          manageUsersPage.manageUsersPageTestData.Advanced_Filters[
+            'Advanced_Filter_Country_All_Review_Body_All_Role_All_Status_Active'
+          ];
+      } else {
+        dataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[datasetName];
+      }
+      const actualValues = confirmStringNotNull(await userProfilePage.review_body_value.textContent());
+      const expectedValues = dataset.review_body_checkbox.toString().replaceAll(',', ', ');
+      expect(expectedValues).toContain(actualValues);
+    }
+  }
+);
+
+When(
+  'I can see the {string} user has the selected countries in the filter assigned on their profile page',
+  async ({ userProfilePage, manageUsersPage }, datasetName: string) => {
+    let dataset: any;
+    if (await userProfilePage.country_value.isVisible()) {
+      if (datasetName.includes('_Country_No')) {
+        dataset =
+          manageUsersPage.manageUsersPageTestData.Advanced_Filters[
+            'Advanced_Filter_Country_All_Review_Body_All_Role_All_Status_Active'
+          ];
+      } else {
+        dataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[datasetName];
+      }
+      const actualValues = confirmStringNotNull(await userProfilePage.country_value.textContent());
+      const expectedValues = dataset.country_checkbox.toString().replaceAll(',', ', ');
+      expect(expectedValues).toContain(actualValues);
+    }
+  }
+);

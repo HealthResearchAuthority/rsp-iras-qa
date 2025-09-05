@@ -155,7 +155,7 @@ Feature: User Administration: Manage Review Bodies - Edit review body
             | Invalid_Data_Description_Field                       | Description       | Max_Description_Words_Error                                  |
             | Incorrect_Format_Invalid_Character_Limit_Email_Field | Email_Address     | Incorrect_Format_Invalid_Character_Limit_Email_Address_Error |
 
-    @verifyEditReviewEmailValidationErrors @rsp-3123 @skip
+    @verifyEditReviewEmailValidationErrors @rsp-3123
     Scenario Outline: Verify that Edit review body email field validation prevents invalid email formats
         And I can see the review body profile page
         And I capture the page screenshot
@@ -169,30 +169,47 @@ Feature: User Administration: Manage Review Bodies - Edit review body
         And I capture the page screenshot
 
         Examples:
-            | Edit_Review_Body                                    | Field_Name    | Field_And_Summary_Error_Message |
-            | Invalid_Character_Limit                             | Email_Address | Max_Chars_Email_Address_Error   |
-            | Incorrect_Email_Format                              | Email_Address | Email_Format_Error              |
-            | Invalid_Email_Data_Start_With_Dot                   | Email_Address | Email_Format_Error              |
-            | Invalid_Email_Data_Double_Dot                       | Email_Address | Email_Format_Error              |
-            | Invalid_Email_Data_Space                            | Email_Address | Email_Format_Error              |
-            | Invalid_Email_Data_Wrong_AT                         | Email_Address | Email_Format_Error              |
-            | Invalid_Email_Data_Less_Greater_Symbols             | Email_Address | Email_Format_Error              |
-            | Invalid_Email_Data_Colon                            | Email_Address | Email_Format_Error              |
-            | Invalid_Email_Data_Semi_Colon                       | Email_Address | Email_Format_Error              |
-            | Invalid_Email_Data_Comma                            | Email_Address | Email_Format_Error              |
-            | Invalid_Email_Data_Start_With_Hyphen                | Email_Address | Email_Format_Error              |
-            | Invalid_Email_Data_Hyphen_Before_Domain             | Email_Address | Email_Format_Error              |
-            | Invalid_Email_Data_Double_Dot_Domain                | Email_Address | Email_Format_Error              |
-            | Invalid_Email_Data_Exclamation_Domain               | Email_Address | Email_Format_Error              |
-            | Invalid_Email_Data_Unicode                          | Email_Address | Email_Format_Error              |
-            | Invalid_Email_Data_Single_Quote_Before_AT           | Email_Address | Email_Format_Error              |
-            | Invalid_Email_Data_Domain_Exceed_Max                | Email_Address | Email_Format_Error              |
-            | Invalid_Email_Data_Local_Part_Max                   | Email_Address | Email_Format_Error              |
-            | Invalid_Email_Data_Consecutive_Dot_Domain           | Email_Address | Email_Format_Error              |
-            | Invalid_Email_Data_Consecutive_Dot_SubDomain        | Email_Address | Email_Format_Error              |
-            | Invalid_Email_Data_Consecutive_Dot_Domain_SubDomain | Email_Address | Email_Format_Error              |
-            | Invalid_Email_Data_Emoji                            | Email_Address | Email_Format_Error              |
-            | Invalid_Email_Data_TLD                              | Email_Address | Email_Format_Error              |
-            | Invalid_Email_Data_Missing_AT                       | Email_Address | Email_Format_Error              |
-            | Invalid_Email_Data_Reserved_Domain                  | Email_Address | Email_Format_Error              |
-            | Invalid_Email_Data_Punycode                         | Email_Address | Email_Format_Error              |
+            | Edit_Review_Body                                          | Field_And_Summary_Error_Message | Field_Name    |
+            | Invalid_Email_Data_Leading_Dot                            | Email_Format_Error              | Email_Address |
+            | Invalid_Email_Data_Trailing_Dot                           | Email_Format_Error              | Email_Address |
+            | Invalid_Email_Data_Double_Dot                             | Email_Format_Error              | Email_Address |
+            | Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour | Email_Format_Error              | Email_Address |
+            | Invalid_Email_Data_Reserved_Domain                        | Email_Format_Error              | Email_Address |
+
+    @verifyEditReviewNoErrorMessagesValidEmailData
+    Scenario Outline: Validate user is able to fill the email address field in the edit review body page with valid data
+        And I can see the review body profile page
+        And I capture the page screenshot
+        And I click the change link against '<Field_Name>' on the review body profile page
+        And I can see the edit review body page
+        And I capture the page screenshot
+        When I fill the edit review body page using '<Edit_Review_Body>'
+        And I capture the page screenshot
+        And I click the 'Save' button on the 'Edit_Review_Body_Page'
+        Then I now see the review body profile page with the updated '<Edit_Review_Body>'
+        And I capture the page screenshot
+
+        Examples:
+            | Edit_Review_Body                      | Field_Name    |
+            | Valid_Email_Data_Dot                  | Email_Address |
+            | Valid_Email_Data_Number               | Email_Address |
+            | Valid_Email_Data_Underscore           | Email_Address |
+            | Valid_Email_Data_Hyphen               | Email_Address |
+            | Valid_Email_Data_Plus                 | Email_Address |
+            | Valid_Email_Data_Exclamation          | Email_Address |
+            | Valid_Email_Data_Hash                 | Email_Address |
+            | Valid_Email_Data_Dollar               | Email_Address |
+            | Valid_Email_Data_Percentage           | Email_Address |
+            | Valid_Email_Data_Ampersand            | Email_Address |
+            | Valid_Email_Data_Single_Quote         | Email_Address |
+            | Valid_Email_Data_Star                 | Email_Address |
+            | Valid_Email_Data_Slash                | Email_Address |
+            | Valid_Email_Data_Equal_Symbol         | Email_Address |
+            | Valid_Email_Data_Question_Mark        | Email_Address |
+            | Valid_Email_Data_Cap_Symbol           | Email_Address |
+            | Valid_Email_Data_Curly_Brackets       | Email_Address |
+            | Valid_Email_Data_Pipe_Symbol          | Email_Address |
+            | Valid_Email_Data_Tilde_Symbol         | Email_Address |
+            | Valid_Email_Data_Special_Characters   | Email_Address |
+            | Valid_Email_Data_Multiple_Sub_Domains | Email_Address |
+            | Valid_Email_Data_Domain               | Email_Address |
