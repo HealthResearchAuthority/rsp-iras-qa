@@ -79,7 +79,7 @@ Feature: User Administration: Manage Review Bodies
                         | Add_Review_Body          | Audit_History       | Status_Enabled | Status_Disabled |
                         | Valid_Data_In_All_Fields | Disable_Review_Body | Enabled        | Disabled        |
 
-        @RegressionTestVerifyEnableAndEditReviewBodyAuditHistory
+        @RegressionTestVerifyEnableAndEditReviewBodyAuditHistory @KNOWN-ISSUE-RSP-5003 @KNOWN-DEFECT-RSP-5004 @fail
         Scenario Outline: Verify the user can view the audit history after enabling a review body
                 When I enter 'QA Automation' into the search field
                 And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
