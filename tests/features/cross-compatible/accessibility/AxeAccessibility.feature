@@ -9,10 +9,14 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I expect to receive no WCAG Violations
 
   @axeAccessibilitymyResearchProjectsPage @ApplicantUser
-  Scenario: My Research Home Page
+  Scenario: My Research Home Page and Project Overview
     Given I have navigated to the 'Home_Page'
     When I click the 'My_research' link on the 'Home_Page'
     Then I can see the 'My_Research_Page'
+    And I click the 'Project' link on the 'My_Research_Page'
+    When I click the 'Key_Project_Roles' link on the 'Project_Overview_Page'
+    Then I click the 'Research_Locations' link on the 'Project_Overview_Page'
+    And I can see the project overview page
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
@@ -108,7 +112,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     And I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
     When I click the 'Modifications_Tile' link on the 'Project_Overview_Page'
-    And I select 'Participating_Organisation_Option' from area of change dropdown and 'Addition_Of_sites_Option' from specific change dropdown
+    And I select 'Participating_Organisation_Option' from area of change dropdown and 'Addition_Of_Sites_Option' from specific change dropdown
     When I click the 'Save_For_Later' button on the 'Select_Area_Of_Change_Page'
     Then I can see the project overview page
     Then I can see the participating organisation page
@@ -898,9 +902,10 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     And I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
     When I click the 'Modifications_Tile' link on the 'Project_Overview_Page'
-    And I select 'Participating_Organisation_Option' from area of change dropdown and 'Addition_Of_sites_Option' from specific change dropdown
+    And I select 'Participating_Organisation' from area of change dropdown and 'Addition_Of_sites_Option' from specific change dropdown
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
     Then I can see the participating organisation page
+    And I confirm checkbox is displayed in participating organisation page
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations

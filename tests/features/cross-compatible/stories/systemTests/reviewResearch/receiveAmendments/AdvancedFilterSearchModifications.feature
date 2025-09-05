@@ -521,17 +521,17 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                 And I capture the page screenshot
                 And I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
                 And I capture the page screenshot
-                And the default page size should be twenty
+                And the default page size should be 'twenty'
                 And the 'Next' button will be 'available' to the user
                 And the 'Previous' button will be 'not available' to the user
                 And the current page number should be visually highlighted to indicate the active page the user is on
                 And I capture the page screenshot
-                Then I sequentially navigate through each page by '<Navigation_Method>' from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+                Then I sequentially navigate through each 'Search_Modifications_Page' by clicking on '<Navigation_Method>' from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges
                 And I capture the page screenshot
                 Examples:
-                        | Navigation_Method       | Valid_Iras_Id       | Advanced_Filters             |
-                        | clicking on page number | Valid_Iras_Id_Zeros | Advanced_Filters_Lead_Nation |
-                        | clicking on next link   | Valid_Iras_Id_Zeros | Advanced_Filters_Lead_Nation |
+                        | Navigation_Method | Valid_Iras_Id       | Advanced_Filters             |
+                        | page number       | Valid_Iras_Id_Zeros | Advanced_Filters_Lead_Nation |
+                        | next link         | Valid_Iras_Id_Zeros | Advanced_Filters_Lead_Nation |
 
         @ViewListOfModifications  @ViewListOfModificationsPaginationLastPage @ViewListOfModificationsPaginationPageNumber @ViewListOfModificationsPaginationPreviousLinkClick
         Scenario Outline: Verify pagination in the list of modifications page when user is on the last page and navigate through each page by clicking page number or by by clicking next link
@@ -546,12 +546,12 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                 And the 'Previous' button will be 'available' to the user
                 And the 'Next' button will be 'not available' to the user
                 And I capture the page screenshot
-                Then I sequentially navigate through each page by '<Navigation_Method>' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+                Then I sequentially navigate through each 'Search_Modifications_Page' by clicking on '<Navigation_Method>' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
                 And I capture the page screenshot
                 Examples:
-                        | Navigation_Method         | Valid_Iras_Id       | Advanced_Filters             |
-                        | clicking on page number   | Valid_Iras_Id_Zeros | Advanced_Filters_Lead_Nation |
-                        | clicking on previous link | Valid_Iras_Id_Zeros | Advanced_Filters_Lead_Nation |
+                        | Navigation_Method | Valid_Iras_Id       | Advanced_Filters             |
+                        | page number       | Valid_Iras_Id_Zeros | Advanced_Filters_Lead_Nation |
+                        | previous link     | Valid_Iras_Id_Zeros | Advanced_Filters_Lead_Nation |
 
         @BackLinkNavigation
         Scenario:  Verify the user can navigate from 'Search_Modifications_Page' by clicking 'Back' link
