@@ -43,24 +43,24 @@ export default class LoginPage {
     let authTag: string;
     let mfaKey: string;
     if (dataset === 'System_Admin') {
-      secretKey = confirmStringNotNull(process.env.SYSTEM_ADMIN_SECRET_KEY);
-      authTag = confirmStringNotNull(process.env.SYSTEM_ADMIN_AUTH_TAG);
+      secretKey = process.env.SYSTEM_ADMIN_SECRET_KEY;
+      authTag = process.env.SYSTEM_ADMIN_AUTH_TAG;
       mfaKey = confirmStringNotNull(process.env.SYSTEM_ADMIN_MFA_KEY);
     } else if (dataset === 'Applicant_User') {
-      secretKey = confirmStringNotNull(process.env.APPLICANT_USER_SECRET_KEY);
-      authTag = confirmStringNotNull(process.env.APPLICANT_USER_AUTH_TAG);
+      secretKey = process.env.APPLICANT_USER_SECRET_KEY;
+      authTag = process.env.APPLICANT_USER_AUTH_TAG;
       mfaKey = confirmStringNotNull(process.env.APPLICANT_USER_MFA_KEY);
     } else if (dataset === 'Studywide_Reviewer') {
-      secretKey = confirmStringNotNull(process.env.STUDYWIDE_REVIEWER_SECRET_KEY);
-      authTag = confirmStringNotNull(process.env.STUDYWIDE_REVIEWER_AUTH_TAG);
+      secretKey = process.env.STUDYWIDE_REVIEWER_SECRET_KEY;
+      authTag = process.env.STUDYWIDE_REVIEWER_AUTH_TAG;
       mfaKey = confirmStringNotNull(process.env.STUDYWIDE_REVIEWER_MFA_KEY);
     } else if (dataset === 'Team_Manager') {
-      secretKey = confirmStringNotNull(process.env.TEAM_MANAGER_SECRET_KEY);
-      authTag = confirmStringNotNull(process.env.TEAM_MANAGER_AUTH_TAG);
+      secretKey = process.env.TEAM_MANAGER_SECRET_KEY;
+      authTag = process.env.TEAM_MANAGER_AUTH_TAG;
       mfaKey = confirmStringNotNull(process.env.TEAM_MANAGER_MFA_KEY);
     } else if (dataset === 'Workflow_Coordinator') {
-      secretKey = confirmStringNotNull(process.env.WORKFLOW_COORDINATOR_SECRET_KEY);
-      authTag = confirmStringNotNull(process.env.WORKFLOW_COORDINATOR_AUTH_TAG);
+      secretKey = process.env.WORKFLOW_COORDINATOR_SECRET_KEY;
+      authTag = process.env.WORKFLOW_COORDINATOR_AUTH_TAG;
       mfaKey = confirmStringNotNull(process.env.WORKFLOW_COORDINATOR_MFA_KEY);
     } else {
       throw new Error(`${dataset} is not a valid option`);
