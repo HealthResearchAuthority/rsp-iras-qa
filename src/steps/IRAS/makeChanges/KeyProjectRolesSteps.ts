@@ -73,7 +73,13 @@ Then(
     const dataset = keyProjectRolesPage.keyProjectRolesPageTestData[datasetName];
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        await commonItemsPage.validateUIComponentValues(dataset, key, keyProjectRolesPage);
+        if (key === 'primary_sponsor_organisation_text') {
+          expect(await keyProjectRolesPage.primary_sponsor_organisation_filled_text.getAttribute('value')).toBe(
+            dataset[key]
+          );
+        } else {
+          await commonItemsPage.validateUIComponentValues(dataset, key, keyProjectRolesPage);
+        }
       }
     }
   }

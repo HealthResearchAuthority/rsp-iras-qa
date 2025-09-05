@@ -28,6 +28,7 @@ export default class KeyProjectRolesPage {
   readonly primary_sponsor_organisation_jsdisabled_narrow_down_label: Locator;
   readonly primary_sponsor_organisation_jsdisabled_no_suggestions_label: Locator;
   readonly primary_sponsor_organisation_jsdisabled_min_error_message: Locator;
+  readonly primary_sponsor_organisation_filled_text: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -51,6 +52,7 @@ export default class KeyProjectRolesPage {
     this.primary_sponsor_organisation_text = this.page.getByRole('textbox', {
       name: keyProjectRolesPageTestData.Key_Project_roles_Page.primary_sponsor_organisation_header_label,
     });
+    this.primary_sponsor_organisation_filled_text = this.page.getByTestId('IQA0312_Text');
     this.primary_sponsor_organisation_jsenabled_text = this.page.getByRole('combobox', {
       name: keyProjectRolesPageTestData.Key_Project_roles_Page.primary_sponsor_organisation_header_label,
     });

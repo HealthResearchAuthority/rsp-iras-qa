@@ -166,10 +166,8 @@ Feature: Create Modifications - Change to planned end date
     And I fill the which organisation this change affect modifications page with '<Organisation_Change_Affect>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Modifications_Page'
-    # Below steps need to be changed to validate the applicability 2 page when RSP-4108 is deployed
-    And I can see the project overview page
+    Then I can see the change planned end date affected organisation questions page
     And I capture the page screenshot
-    Then I can see the modification progress saved successful message on project overview page
 
     Examples:
       | Planned_End_Date      | Organisation_Change_Affect |
