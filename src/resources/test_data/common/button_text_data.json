@@ -1,7 +1,10 @@
 {
   "Banner": {
-    "Login": "Sign In",
     "Logout": "Logout"
+  },
+  "Login_Page": {
+    "sign_in_button": "Sign in",
+    "continue_button": "Continue"
   },
   "Home_Page": {
     "New_Application": "Create New Application",
