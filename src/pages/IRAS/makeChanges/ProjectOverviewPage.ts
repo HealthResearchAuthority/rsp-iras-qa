@@ -37,6 +37,7 @@ export default class ProjectOverviewPage {
   readonly participating_nations: Locator;
   readonly nhs_hsc_organisations: Locator;
   readonly lead_nation: Locator;
+  readonly row_value_label: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -124,6 +125,7 @@ export default class ProjectOverviewPage {
     this.nhs_hsc_organisations = this.nhs_hsc_organisations_row.locator('..').locator('.govuk-summary-list__value');
     this.lead_nation_row = this.page.getByText(projectOverviewPageTestData.Project_Overview_Page.lead_nation);
     this.lead_nation = this.lead_nation_row.locator('..').locator('.govuk-summary-list__value');
+    this.row_value_label = this.page.locator('dd');
   }
 
   //Page Methods
