@@ -12,6 +12,7 @@ export default class ProjectOverviewPage {
   readonly modification_saved_success_message_text: Locator;
   readonly modification_saved_success_message_header_text: Locator;
   readonly information_alert_banner: Locator;
+  readonly row_value_label: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -36,6 +37,7 @@ export default class ProjectOverviewPage {
     this.modification_saved_success_message_text = this.page
       .getByRole('heading')
       .getByText(this.projectOverviewPageTestData.Project_Overview_Page.modification_saved_success_message_text);
+    this.row_value_label = this.page.locator('dd');
   }
 
   //Page Methods

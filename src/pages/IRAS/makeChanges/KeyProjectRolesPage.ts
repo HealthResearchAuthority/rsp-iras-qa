@@ -37,11 +37,11 @@ export default class KeyProjectRolesPage {
     //Locators
     this.pageHeading = this.page.getByTestId('title');
     this.chief_investigator_header_label = this.page.getByText(
-      this.keyProjectRolesPageTestData.Label_Texts.chief_investigator_header_label
+      this.keyProjectRolesPageTestData.Key_Project_roles_Page.chief_investigator_header_label
     );
     this.chief_investigator_email_label = this.page.getByTestId('chief-investigator-hint');
     this.sponsor_contact_header_label = this.page.getByText(
-      this.keyProjectRolesPageTestData.Label_Texts.sponsor_contact_header_label
+      this.keyProjectRolesPageTestData.Key_Project_roles_Page.sponsor_contact_header_label
     );
     this.sponsor_contact_email_label = this.page.getByTestId('sponsor-contact-hint');
     this.chief_investigator_email_text = this.page.getByTestId('IQA0311_Text');
@@ -49,11 +49,10 @@ export default class KeyProjectRolesPage {
     this.chief_investigator_email_text_summary_error_label = this.page.locator('a[href="#Questions[0].AnswerText"]');
     this.sponsor_contact_email_text_summary_error_label = this.page.locator('a[href="#Questions[2].AnswerText"]');
     this.primary_sponsor_organisation_text = this.page.getByRole('textbox', {
-      name: keyProjectRolesPageTestData.Label_Texts.primary_sponsor_organisation_header_label,
+      name: keyProjectRolesPageTestData.Key_Project_roles_Page.primary_sponsor_organisation_header_label,
     });
-    this.primary_sponsor_organisation_header_label = this.page.locator('label[for="sponsor_org_search"]');
     this.primary_sponsor_organisation_jsenabled_text = this.page.getByRole('combobox', {
-      name: keyProjectRolesPageTestData.Label_Texts.primary_sponsor_organisation_header_label,
+      name: keyProjectRolesPageTestData.Key_Project_roles_Page.primary_sponsor_organisation_header_label,
     });
     this.primary_sponsor_organisation_jsdisabled_search_button = this.page.getByRole('button', {
       name: buttonTextData.Key_Project_Roles_Page.Search,

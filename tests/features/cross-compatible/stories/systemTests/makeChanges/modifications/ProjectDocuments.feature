@@ -26,7 +26,7 @@ Feature: Create Amendment - Project Documents Modifications
     When I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
 
-  @rsp-3876 @ValidateUploadDocumentsModificationsPageLabels
+  @rsp-3876 @ValidateUploadDocumentsModificationsPageLabels @KNOWN_DEFECT_RSP-4801
   Scenario Outline: Validate the ui labels displayed for upload documents pages in modifications
     And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
     And I capture the page screenshot
@@ -51,7 +51,7 @@ Feature: Create Amendment - Project Documents Modifications
       | Protocol_Non_Substantial_Changes             |
       | Translations_Addition_Of_Translated_Versions |
 
-  @rsp-3876 @ValidateDocumentUploadAndReviewForModificationsPage
+  @rsp-3876 @ValidateDocumentUploadAndReviewForModificationsPage @KNOWN_DEFECT_RSP-4801_4844_4920_4921
   Scenario Outline: Validate the user is able to upload and review documents for modifications
     And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
     And I capture the page screenshot
@@ -121,7 +121,7 @@ Feature: Create Amendment - Project Documents Modifications
       | Protocol_Non_Substantial_Changes             | Multiple_Files        | GIF_File                  |
       | Translations_Addition_Of_Translated_Versions | Multiple_Files        | GIF_File                  |
 
-  @rsp-3876 @ValidateDocumentUploadModificationsPageErrprMessages
+  @rsp-3876 @ValidateDocumentUploadModificationsPageErrprMessages @KNOWN_DEFECT_RSP-4801_4920
   Scenario Outline: Validate the user is able to see error messages for invalid actions on upload documents for modifications
     And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
     And I capture the page screenshot
@@ -142,7 +142,7 @@ Feature: Create Amendment - Project Documents Modifications
       | Protocol_Non_Substantial_Changes             |
       | Translations_Addition_Of_Translated_Versions |
 
-  @rsp-3876 @ValidateBackLinkRetainDocumentsInReviewUploadedDocumentPage
+  @rsp-3876 @ValidateBackLinkRetainDocumentsInReviewUploadedDocumentPage @KNOWN_DEFECT_RSP-4801
   Scenario Outline: Validate the user is able to see the previously uploaded documents in eview uploaded documents page after navigating away using back link
     And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'

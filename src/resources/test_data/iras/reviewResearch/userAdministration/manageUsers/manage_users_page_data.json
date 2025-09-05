@@ -139,6 +139,7 @@
     },
     "Search_Queries_Advanced_Filter": {
       "Existing_QA_User_First_Name": { "search_input_text": "System Admin" },
+      "Existing_QA_Automation_User_First_Name": { "search_input_text": "QA Automation" },
       "Existing_QA_User_Last_Name": { "search_input_text": "Future IRAS" },
       "Existing_QA_User_Email": { "search_input_text": "FutureIRAS.SysAdmin" },
       "Non_Existant_User_Data": { "search_input_text": "ThisShouldNot ReturnAResult" },
@@ -242,6 +243,9 @@
     "Advanced_Filter_Ten": {
       "country_checkbox": ["Northern Ireland", "Wales"],
       "status_radio": "Disabled"
+    },
+    "Advanced_Filter_Status_Active": {
+      "status_radio": "Active"
     },
     "Advanced_Filter_No_Country_Selected": {
       "country_checkbox": []
