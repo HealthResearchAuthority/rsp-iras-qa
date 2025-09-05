@@ -561,7 +561,7 @@ When(
   'I am on the {string} page and it should be visually highlighted to indicate the active page the user is on',
   async ({ commonItemsPage }, position: string) => {
     let pageLocator: Locator;
-    if (position === 'first') {
+    if (position.toLowerCase() === 'first') {
       pageLocator = commonItemsPage.firstPage;
     } else {
       const totalPages = await commonItemsPage.getTotalPages();
