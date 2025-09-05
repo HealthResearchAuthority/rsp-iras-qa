@@ -26,6 +26,14 @@ Then(
               'primary_sponsor_organisation_jsenabled_text',
               keyProjectRolesPage
             );
+            try {
+              await keyProjectRolesPage.primary_sponsor_organisation_suggestion_list_labels
+                .first()
+                .waitFor({ state: 'visible', timeout: 5000 });
+            } catch {
+              /* Element not visible, continue */
+               
+            }
             if (await keyProjectRolesPage.primary_sponsor_organisation_suggestion_list_labels.first().isVisible()) {
               await keyProjectRolesPage.primary_sponsor_organisation_suggestion_list_labels.first().click();
             }

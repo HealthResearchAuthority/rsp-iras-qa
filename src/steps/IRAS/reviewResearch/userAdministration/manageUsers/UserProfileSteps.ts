@@ -59,7 +59,7 @@ When(
   'I can see that the user profiles last updated field has the current time',
   async ({ userProfilePage, auditHistoryUserPage }) => {
     const abbreviatedValue = await auditHistoryUserPage.getUpdatedTime();
-    const shortMonth = new Date().toLocaleString('en-GB', { month: 'short', timeZone: 'UTC' });
+    const shortMonth = new Date().toLocaleString('en-GB', { month: 'short', timeZone: 'UTC' }).slice(0, 3);
     const longMonth = new Date().toLocaleString('en-GB', { month: 'long', timeZone: 'UTC' });
     const expectedValue = abbreviatedValue.replace(shortMonth, longMonth);
     await expect(userProfilePage.last_updated_value).toHaveText(expectedValue);
