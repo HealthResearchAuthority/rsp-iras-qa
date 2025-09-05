@@ -490,38 +490,41 @@ Then(
       summaryErrorActualValues = await commonItemsPage.getSummaryErrorMessages();
     }
     expect(summaryErrorActualValues).toEqual(allSummaryErrorExpectedValues);
-    for (const key in errorMessageFieldDataset) {
-      if (Object.prototype.hasOwnProperty.call(errorMessageFieldDataset, key)) {
-        let fieldErrorMessagesActualValues: any;
-        if (pageKey == 'Review_Your_Answers_Page') {
-          expect(await page[key].getByRole('link').evaluate((e: any) => getComputedStyle(e).color)).toBe(
-            commonItemsPage.commonTestData.rgb_red_color
-          );
-          fieldErrorMessagesActualValues = await reviewYourAnswersPage.getFieldErrorMessages(key, page);
-          expect(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
-          const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
-          await expect(element).toBeInViewport();
-        } else if (
-          errorMessageFieldAndSummaryDatasetName === 'Incorrect_Format_Invalid_Character_Limit_Telephone_Error' ||
-          errorMessageFieldAndSummaryDatasetName === 'Incorrect_Format_Invalid_Character_Limit_Email_Address_Error'
-        ) {
-          fieldErrorMessagesActualValues = (await commonItemsPage.getMultipleFieldErrorMessages(key, page)).toString();
-          const allFieldErrorExpectedValues = Object.values(errorMessageFieldDataset).toString();
-          expect.soft(fieldErrorMessagesActualValues).toEqual(allFieldErrorExpectedValues);
-          const fieldValActuals = summaryErrorActualValues.split(',');
-          for (const val of fieldValActuals) {
-            const element = await commonItemsPage.clickErrorSummaryLinkMultipleErrorField(val, key, page);
+    if (!errorMessageFieldAndSummaryDatasetName.includes('Summary_Only')) {
+      for (const key in errorMessageFieldDataset) {
+        if (Object.hasOwn(errorMessageFieldDataset, key)) {
+          let fieldErrorMessagesActualValues: any;
+          if (pageKey == 'Review_Your_Answers_Page') {
+            expect(await page[key].getByRole('link').evaluate((e: any) => getComputedStyle(e).color)).toBe(
+              commonItemsPage.commonTestData.rgb_red_color
+            );
+            fieldErrorMessagesActualValues = await reviewYourAnswersPage.getFieldErrorMessages(key, page);
+            expect(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
+            const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
+            await expect(element).toBeInViewport();
+          } else if (
+            errorMessageFieldAndSummaryDatasetName === 'Incorrect_Format_Invalid_Character_Limit_Telephone_Error' ||
+            errorMessageFieldAndSummaryDatasetName === 'Incorrect_Format_Invalid_Character_Limit_Email_Address_Error'
+          ) {
+            fieldErrorMessagesActualValues = (
+              await commonItemsPage.getMultipleFieldErrorMessages(key, page)
+            ).toString();
+            const allFieldErrorExpectedValues = Object.values(errorMessageFieldDataset).toString();
+            expect.soft(fieldErrorMessagesActualValues).toEqual(allFieldErrorExpectedValues);
+            const fieldValActuals = summaryErrorActualValues.split(',');
+            for (const val of fieldValActuals) {
+              const element = await commonItemsPage.clickErrorSummaryLinkMultipleErrorField(val, key, page);
+              await expect(element).toBeInViewport();
+            }
+          } else {
+            fieldErrorMessagesActualValues = await commonItemsPage.getFieldErrorMessages(key, page);
+            if (fieldErrorMessagesActualValues.includes('Error: ')) {
+              fieldErrorMessagesActualValues = fieldErrorMessagesActualValues.replace('Error: ', '');
+            }
+            expect(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
+            const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
             await expect(element).toBeInViewport();
           }
-        } else {
-          fieldErrorMessagesActualValues = await commonItemsPage.getFieldErrorMessages(key, page);
-          if (fieldErrorMessagesActualValues.includes('Error: ')) {
-            fieldErrorMessagesActualValues = fieldErrorMessagesActualValues.replace('Error: ', '');
-          }
-
-          expect(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
-          const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
-          await expect(element).toBeInViewport();
         }
       }
     }
@@ -561,19 +564,24 @@ When(
   'I am on the {string} page and it should be visually highlighted to indicate the active page the user is on',
   async ({ commonItemsPage }, position: string) => {
     let pageLocator: Locator;
-    if (position === 'first') {
+    if (position.toLowerCase() === 'first') {
       pageLocator = commonItemsPage.firstPage;
     } else {
       const totalPages = await commonItemsPage.getTotalPages();
-      pageLocator = await commonItemsPage.clickOnPages(totalPages, 'clicking on page number');
+      pageLocator = await commonItemsPage.clickOnPages(totalPages, 'page number');
     }
     await expect(pageLocator).toHaveAttribute('aria-current', 'page');
   }
 );
 
-When('the default page size should be twenty', async ({ commonItemsPage }) => {
+When('the default page size should be {string}', async ({ commonItemsPage }, pageSize: string) => {
   const rowCountActual = await commonItemsPage.tableRows.count();
-  const rowCountExpected = parseInt(commonItemsPage.commonTestData.default_page_size, 10);
+  let rowCountExpected: number;
+  if (pageSize == 'ten') {
+    rowCountExpected = parseInt(commonItemsPage.commonTestData.default_page_size_participating_organisation, 10);
+  } else {
+    rowCountExpected = parseInt(commonItemsPage.commonTestData.default_page_size, 10);
+  }
   expect(rowCountActual - 1).toBe(rowCountExpected);
 });
 
@@ -819,8 +827,8 @@ Then(
 );
 
 Then(
-  'I sequentially navigate through each page by {string} from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges',
-  async ({ commonItemsPage }, navigateMethod: string) => {
+  'I sequentially navigate through each {string} by clicking on {string} from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges',
+  async ({ commonItemsPage }, pagename: string, navigateMethod: string) => {
     const totalPages = await commonItemsPage.getTotalPages();
     //Limiting the max pages to validate to 10
     let maxPagesToValidate = 0;
@@ -831,14 +839,14 @@ Then(
     }
     await commonItemsPage.firstPage.click();
     for (let currentPage = 1; currentPage <= maxPagesToValidate; currentPage++) {
-      await commonItemsPage.validatePagination(currentPage, totalPages, navigateMethod);
+      await commonItemsPage.validatePagination(currentPage, totalPages, pagename, navigateMethod);
     }
   }
 );
 
 Then(
-  'I sequentially navigate through each page by {string} from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges',
-  async ({ commonItemsPage }, navigateMethod: string) => {
+  'I sequentially navigate through each {string} by clicking on {string} from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges',
+  async ({ commonItemsPage }, pagename: string, navigateMethod: string) => {
     const totalPages = await commonItemsPage.getTotalPages();
     //Limiting the max pages to validate to 10
     let maxPagesToValidate = 0;
@@ -847,9 +855,9 @@ Then(
     } else {
       maxPagesToValidate = totalPages;
     }
-    await commonItemsPage.clickOnPages(totalPages, 'clicking on page number');
+    await commonItemsPage.clickOnPages(totalPages, 'page number');
     for (let currentPage = totalPages; currentPage >= maxPagesToValidate; currentPage--) {
-      await commonItemsPage.validatePagination(currentPage, totalPages, navigateMethod);
+      await commonItemsPage.validatePagination(currentPage, totalPages, pagename, navigateMethod);
     }
   }
 );

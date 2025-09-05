@@ -43,10 +43,10 @@ Feature: Create Amendment - Create Modifications
 
     Examples:
       | Area_Of_Change             | Specific_Change                                            | Project_Details_Title | Navigation_Link | Modifications_Tile_Link |
-      | Participating_Organisation | Addition_Of_sites_Option                                   | Valid_Data_All_Fields | Back            | Modifications_Tile      |
-      | Participating_Organisation | Early_closure_withdrawal_of_sites_Option                   | Valid_Data_All_Fields | Back            | Modifications_Tile      |
+      | Participating_Organisation | Addition_Of_Sites_Option                                   | Valid_Data_All_Fields | Back            | Modifications_Tile      |
+      | Participating_Organisation | Early_Closure_Withdrawal_Of_Sites_Option                   | Valid_Data_All_Fields | Back            | Modifications_Tile      |
       | Participating_Organisation | Addition_Of_Participant_Identification_Centres_Option      | Valid_Data_All_Fields | Back            | Modifications_Tile      |
-      | Participating_Organisation | Early_closure_Of_Participant_Identification_Centres_Option | Valid_Data_All_Fields | Back            | Modifications_Tile      |
+      | Participating_Organisation | Early_Closure_Of_Participant_Identification_Centres_Option | Valid_Data_All_Fields | Back            | Modifications_Tile      |
 
   @SelectAreaOfChangeDropdownListValidationRegression
   Scenario Outline: Validate the specific change list values are displayed based on the area of change selection
@@ -90,10 +90,10 @@ Feature: Create Amendment - Create Modifications
 
     Examples:
       | Area_Of_Change             | Specific_Change                                            | Modifications_Tile_Link |
-      | Participating_Organisation | Addition_Of_sites_Option                                   | Modifications_Tile      |
-      | Participating_Organisation | Early_closure_withdrawal_of_sites_Option                   | Modifications_Tile      |
+      | Participating_Organisation | Addition_Of_Sites_Option                                   | Modifications_Tile      |
+      | Participating_Organisation | Early_Closure_Withdrawal_Of_Sites_Option                   | Modifications_Tile      |
       | Participating_Organisation | Addition_Of_Participant_Identification_Centres_Option      | Modifications_Tile      |
-      | Participating_Organisation | Early_closure_Of_Participant_Identification_Centres_Option | Modifications_Tile      |
+      | Participating_Organisation | Early_Closure_Of_Participant_Identification_Centres_Option | Modifications_Tile      |
       | Default_Value              | Default_Value                                              | Modifications_Tile      |
 
   @SelectAreaOfChangeErrorValidationRegression
@@ -130,10 +130,10 @@ Feature: Create Amendment - Create Modifications
 
     Examples:
       | Area_Of_Change             | Specific_Change                                            | Project_Details_Title | Modifications_Tile_Link |
-      | Participating_Organisation | Addition_Of_sites_Option                                   | Valid_Data_All_Fields | Modifications_Tile      |
-      | Participating_Organisation | Early_closure_withdrawal_of_sites_Option                   | Valid_Data_All_Fields | Modifications_Tile      |
+      | Participating_Organisation | Addition_Of_Sites_Option                                   | Valid_Data_All_Fields | Modifications_Tile      |
+      | Participating_Organisation | Early_Closure_Withdrawal_Of_Sites_Option                   | Valid_Data_All_Fields | Modifications_Tile      |
       | Participating_Organisation | Addition_Of_Participant_Identification_Centres_Option      | Valid_Data_All_Fields | Modifications_Tile      |
-      | Participating_Organisation | Early_closure_Of_Participant_Identification_Centres_Option | Valid_Data_All_Fields | Modifications_Tile      |
+      | Participating_Organisation | Early_Closure_Of_Participant_Identification_Centres_Option | Valid_Data_All_Fields | Modifications_Tile      |
 
   @ParticipatingOrganisationsErrorValidationRegression
   Scenario Outline: Validate the mandatory field error message on participating organisation page

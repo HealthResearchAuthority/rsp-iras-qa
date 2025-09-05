@@ -43,16 +43,16 @@
   },
   "Select_Specific_Change": {
     "Default_Value": { "specific_change_dropdown": "Select specific change" },
-    "Addition_Of_sites_Option": {
+    "Addition_Of_Sites_Option": {
       "specific_change_dropdown": "Addition of sites undertaking the same activities as existing sites"
     },
-    "Early_closure_withdrawal_of_sites_Option": {
+    "Early_Closure_Withdrawal_Of_Sites_Option": {
       "specific_change_dropdown": "Early closure or withdrawal of research sites"
     },
     "Addition_Of_Participant_Identification_Centres_Option": {
       "specific_change_dropdown": "PICs - Addition of Participant Identification Centres undertaking the same activities as existing PICs"
     },
-    "Early_closure_Of_Participant_Identification_Centres_Option": {
+    "Early_Closure_Of_Participant_Identification_Centres_Option": {
       "specific_change_dropdown": "PICs - Early closure or withdrawal of Participant Identification Centres"
     },
     "Planned_End_Date": { "specific_change_dropdown": "Change to planned end date" },
