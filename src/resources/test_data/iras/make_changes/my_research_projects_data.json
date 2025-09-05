@@ -1,8 +1,19 @@
 {
   "My_Research_Projects_Page": {
-    "heading": "My research"
+    "heading": "My research",
+    "search": "Search",
+    "advanced_filter_label": "Advanced filter",
+    "add_project_record_button_label": "Add project",
+    "next_button": "Next   page",
+    "short_project_title_text": "QA_Automation - This is a short project title"
+  },
+  "No_Projects_Label_Texts": {
+    "no_projects": "You don't have any projects available in the new service"
   },
   "Label_Texts": {
-    "no_projects": "If your project has not yet been added to this system, you can create a record to manage your project."
+    "short_project_title_link": "Short project title",
+    "iras_id_title": "IRAS ID",
+    "date_created_title": "Date created",
+    "status_title": "Status"
   }
 }
