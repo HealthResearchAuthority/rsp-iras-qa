@@ -93,7 +93,7 @@ export function getTicketReferenceTags(tags: string[]): string[] {
   return tickets;
 }
 
-export function getDecryptedValue(data: string, secretKey?: any, authTag?: string) {
+export function getDecryptedValue(data: string, secretKey?: string, authTag?: string) {
   let value: string = '';
   if (secretKey) {
     const decipher = createDecipheriv('AES-256-GCM', Buffer.from(secretKey), Buffer.alloc(16)) as DecipherGCM;

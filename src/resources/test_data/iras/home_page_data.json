@@ -2,6 +2,7 @@
   "Home_Page": {
     "title": "My account",
     "heading": "My Account homepage",
+    "hra_card_selector": "hra-card-heading__link",
     "guidance_text": "This is your account homepage where you can access your workspaces",
     "workspaceHeading": "My workspaces",
     "workspaces_links_system_admin": [
