@@ -17,7 +17,9 @@
     "research_locations_heading": "Research locations",
     "participating_nations": "Participating nations",
     "nhs_hsc_organisations": "NHS / HSC organisations",
-    "lead_nation": "Lead nation"
+    "lead_nation": "Lead nation",
+    "maxPagesToVisit": 2,
+    "modification_status": "Draft"
   },
   "Valid_Data_All_Fields": {
     "short_project_title_text": "QA_Automation - This is a short project title",
@@ -42,5 +44,16 @@
     "research_locations_title": "Research locations",
     "post_approval_title": "Post approval",
     "project_history_title": "Project history"
+  },
+  "Label_Texts_Post_Approval": {
+    "modification_id": "Modification ID",
+    "modification_type": "Modification type",
+    "review_type": "Review type",
+    "category": "Category",
+    "status": "Status"
+  },
+  "Valid_Data_Fields": {
+    "iras_id_value": "5789415",
+    "short_project_title_text": "QA_Automation - This is a short project title"
   }
 }

@@ -81,7 +81,7 @@ Feature: Organisation Search and View
       | Addition_Of_Participant_Identification_Centres_Option      | Invalid_Search_Text_Two_Letters |
       | Early_Closure_Of_Participant_Identification_Centres_Option | Invalid_Search_Text_Two_Letters |
 
-  @rsp-4063 @ParticipatingOrganisationsPaginationFirst
+  @rsp-4063 @ParticipatingOrganisationsPaginationFirst 
   Scenario Outline: Validate pagination for first few pages in participating organisation page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     When I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
@@ -105,7 +105,7 @@ Feature: Organisation Search and View
       | page number       | Addition_Of_Participant_Identification_Centres_Option      |
       | next link         | Early_Closure_Of_Participant_Identification_Centres_Option |
 
-  @rsp-4063 @ParticipatingOrganisationsPaginationLast 
+  @rsp-4063 @ParticipatingOrganisationsPaginationLast
   Scenario Outline: Validate pagination for last few pages in participating organisation page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     When I click the 'Create_New_Modification' button on the 'Project_Overview_Page'

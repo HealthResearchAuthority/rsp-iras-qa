@@ -1,5 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as projectOverviewPageTestData from '../../../resources/test_data/iras/make_changes/project_overview_page_data.json';
+import { confirmStringNotNull } from '../../../utils/UtilFunctions';
 
 //Declare Page Objects
 export default class ProjectOverviewPage {
@@ -37,6 +38,14 @@ export default class ProjectOverviewPage {
   readonly participating_nations: Locator;
   readonly nhs_hsc_organisations: Locator;
   readonly lead_nation: Locator;
+  readonly modification_id: Locator;
+  readonly modification_type: Locator;
+  readonly review_type: Locator;
+  readonly category: Locator;
+  readonly status: Locator;
+  readonly project_overview_iras_id: Locator;
+  readonly project_overview_short_project_title: Locator;
+  readonly project_overview_iras_id_value: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -44,6 +53,16 @@ export default class ProjectOverviewPage {
     this.projectOverviewPageTestData = projectOverviewPageTestData;
 
     //Locators
+
+    this.project_overview_iras_id = this.page
+      .locator('.govuk-inset-text')
+      .getByText(projectOverviewPageTestData.Project_Overview_Page.project_overview_irasid_header);
+    this.project_overview_iras_id_value = this.page
+      .locator('p[class="govuk-inset-text"]')
+      .getByText('project_overview_iras_id');
+    this.project_overview_short_project_title = this.page
+      .locator('.govuk-inset-text')
+      .getByText(projectOverviewPageTestData.Project_Overview_Page.project_overview_shorttitle_header);
     this.pageHeading = this.page
       .getByRole('heading')
       .getByText(this.projectOverviewPageTestData.Project_Overview_Page.heading);
@@ -124,10 +143,40 @@ export default class ProjectOverviewPage {
     this.nhs_hsc_organisations = this.nhs_hsc_organisations_row.locator('..').locator('.govuk-summary-list__value');
     this.lead_nation_row = this.page.getByText(projectOverviewPageTestData.Project_Overview_Page.lead_nation);
     this.lead_nation = this.lead_nation_row.locator('..').locator('.govuk-summary-list__value');
+    this.modification_id = this.page.getByRole('button', {
+      name: this.projectOverviewPageTestData.Label_Texts_Post_Approval.modification_id,
+      exact: true,
+    });
+    this.category = this.page.getByRole('button', {
+      name: this.projectOverviewPageTestData.Label_Texts_Post_Approval.category,
+      exact: true,
+    });
+    this.modification_type = this.page.getByRole('button', {
+      name: this.projectOverviewPageTestData.Label_Texts_Post_Approval.modification_type,
+      exact: true,
+    });
+    this.review_type = this.page.getByRole('button', {
+      name: this.projectOverviewPageTestData.Label_Texts_Post_Approval.review_type,
+      exact: true,
+    });
+    this.status = this.page.getByRole('button', {
+      name: this.projectOverviewPageTestData.Label_Texts_Post_Approval.status,
+      exact: true,
+    });
   }
 
   //Page Methods
   async assertOnProjectOverviewPage() {
     await expect(this.pageHeading).toBeVisible();
+  }
+
+  async gotoSpecificProjectPage() {
+    await this.page.goto(
+      'https://fd-rsp-applications-automationtest-uks-e7f6hkg3c5edhxex.a03.azurefd.net/projectoverview/postapproval?projectRecordId=20250905085329'
+    );
+  }
+
+  async getStatus(row: any) {
+    return confirmStringNotNull(await row.getByRole('cell').nth(4).textContent());
   }
 }

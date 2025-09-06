@@ -8,6 +8,11 @@ Then('I can see the project overview page', async ({ projectOverviewPage }) => {
   await projectOverviewPage.assertOnProjectOverviewPage();
 });
 
+Then('I navigate to the project overview page of a specific project', async ({ projectOverviewPage }) => {
+  await projectOverviewPage.gotoSpecificProjectPage();
+  await projectOverviewPage.assertOnProjectOverviewPage();
+});
+
 Then(
   'I can see the project details on project overview page for {string}',
   async ({ projectDetailsIRASPage, projectDetailsTitlePage, projectOverviewPage }, datasetName: string) => {
@@ -66,6 +71,72 @@ Then(
   }
 );
 
+// Then(
+//   'I validate the {string} displayed in the project overview page',
+//   async ({ projectOverviewPage }, datasetName: string) => {
+//const projectDataset = projectOverviewPage.projectOverviewPageTestData[datasetName];
+//what row to read the value of iras id = actual
+//what is stored in iras id = expected
+//const actualIrasIdValue = confirmStringNotNull(await projectOverviewPage.project_overview_iras_id.textContent());
+//const actualIrasId = await projectOverviewPage.project_overview_iras_id.textContent();
+// const actualIrasId = await projectOverviewPage.project_overview_iras_id.innerText();
+
+// const value = actualIrasId.trim().replace('IRAS ID:', '').trim();
+// console.log(value);
+
+// Extract the IRAS ID using a regex or string manipulation
+// const match = actualIrasId?.match(/IRAS ID:\s*(\d+)/);
+// const actualIrasIdValue = match ? match[1] : null;
+// console.log('IRAS ID:', actualIrasIdValue);
+
+// const actualIrasIdValue = confirmStringNotNull(
+//   await projectOverviewPage.project_overview_iras_id.getAttribute('project_overview_iras_id')
+// );
+//const expectedIrasIdValue = projectDataset.iras_id_value;
+//const actualProjectTitle = confirmStringNotNull(
+//   await projectOverviewPage.project_overview_short_project_title.textContent()
+// );
+// const expectedProjectTitle = projectDataset.short_project_title_text;
+//expect(actualIrasIdValue).toBe(expectedIrasIdValue);
+//expect(actualProjectTitle).toBe(expectedProjectTitle);
+//   }
+// );
+
+Then(
+  'I can see the status of modifications displayed is {string}',
+  async ({ commonItemsPage, projectOverviewPage }, expectedStatus: string) => {
+    //Limiting the checks to 2 pages
+    expectedStatus = projectOverviewPage.projectOverviewPageTestData.Project_Overview_Page.modification_status;
+    const maxPagesToCheck = projectOverviewPage.projectOverviewPageTestData.Project_Overview_Page.maxPagesToVisit;
+    for (let pageIndex = 1; pageIndex <= maxPagesToCheck; pageIndex++) {
+      const rowCount = await commonItemsPage.tableRows.count();
+      for (let rowIndex = 1; rowIndex < rowCount; rowIndex++) {
+        const row = commonItemsPage.tableRows.nth(rowIndex);
+        const status = await projectOverviewPage.getStatus(row);
+        expect(status).toEqual(expectedStatus);
+      }
+      if (await commonItemsPage.next_button.isVisible()) {
+        await commonItemsPage.next_button.click();
+      } else {
+        break;
+      }
+    }
+  }
+);
+// for (let pageIndex = 1; pageIndex <= maxPagesToCheck; pageIndex++) {
+//   const rowCount = await commonItemsPage.tableRows.count();
+
+//   const statuses = await projectOverviewPage.status_displayed.textContent();
+//   for (const status of statuses) {
+//     await expect(status).toEqual('Draft');
+//   }
+//   if (await commonItemsPage.next_button.isVisible()) {
+//     await commonItemsPage.next_button.click();
+//   } else {
+//     break;
+//   }
+//}
+
 Then(
   'I validate the data displayed {string} in the project details tab of project overview page',
   async ({ projectDetailsIRASPage, projectDetailsTitlePage, projectOverviewPage }, datasetName: string) => {
@@ -122,5 +193,32 @@ Then(
     expect(actualTrimmedParticipatingNations).toContain(expectedParticipatingNations);
     expect(actualNhsHscOrganisations).toBe(expectedNhsHscOrganisations);
     expect(actualLeadNation).toBe(expectedLeadNation);
+  }
+);
+
+Then(
+  'I can see the modifications is sorted by {string} order of the {string}',
+  async ({ searchModificationsPage, commonItemsPage }, sortDirection: string, sortField: string) => {
+    let sortedList: string[];
+    let columnIndex: number;
+    switch (sortField.toLowerCase()) {
+      case 'modification id':
+        columnIndex = 0;
+        break;
+      case 'modification type':
+        columnIndex = 1;
+        break;
+      default:
+        throw new Error(`${sortField} is not a valid option`);
+    }
+    const actualList = await searchModificationsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
+    if (sortField.toLowerCase() == 'modification id') {
+      sortedList = await searchModificationsPage.sortModificationIdListValues(actualList, sortDirection);
+    } else if (sortDirection.toLowerCase() == 'ascending') {
+      sortedList = [...actualList].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
+    } else {
+      sortedList = [...actualList].sort((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
+    }
+    expect(actualList).toEqual(sortedList);
   }
 );
