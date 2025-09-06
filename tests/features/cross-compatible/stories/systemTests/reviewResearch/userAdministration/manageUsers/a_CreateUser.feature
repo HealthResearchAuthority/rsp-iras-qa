@@ -1,4 +1,4 @@
-@UserAdministration @ManageUsers @SysAdminUser @SystemTest @CreateUser
+@UserAdministration @ManageUsers @SysAdminUser @SystemTest @CreateUser @SystemTestUsers
 Feature: User Administration: Manage Users - Create user
 
   Background:
