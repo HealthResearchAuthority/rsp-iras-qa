@@ -145,14 +145,13 @@
     "empty_email_address_text": ""
   },
   "User_Title_Text_One": {
-    "title_text": "Miss",
-    "access_required_checkbox": ["Research ethics committee"]
+    "title_text": "Miss"
   },
   "User_First_Name_Text_One": {
-    "first_name_text": "First Name Updated"
+    "first_name_text": "QA Automation"
   },
   "User_Last_Name_Text_One": {
-    "last_name_text": "Last name updated"
+    "last_name_text": "QA Automation"
   },
   "User_Telephone_Text_One": {
     "telephone_text": "07999999999"
@@ -164,8 +163,7 @@
     "job_title_text": "Sr.Reviewer updated"
   },
   "User_Role_Checkbox_One": {
-    "role_checkbox": ["Operations"],
-    "access_required_checkbox": ["Research ethics committee"]
+    "role_checkbox": ["System administrator"]
   },
   "User_Country_Checkbox_One": {
     "country_checkbox": ["England", "Wales"],

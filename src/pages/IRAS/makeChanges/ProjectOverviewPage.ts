@@ -53,7 +53,7 @@ export default class ProjectOverviewPage {
     this.project_details_heading = this.page
       .getByRole('heading')
       .getByText(this.projectOverviewPageTestData.Project_Overview_Page.project_details_heading);
-    this.project_short_title_label = this.page.locator('.govuk-caption-l');
+    this.project_short_title_label = this.page.locator('div[class="govuk-grid-row"] p').nth(1);
     this.information_alert_banner = this.page.getByRole('alert');
     this.modification_saved_success_message_header_text = this.page
       .getByTestId('govuk-notification-banner-title')

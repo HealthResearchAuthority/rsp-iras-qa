@@ -48,14 +48,14 @@ export default class MakeChangeParticipatingOrganisationsPage {
       this.participatingOrganisationsPageTestData.Label_Texts.modification_id_label
     );
     this.modification_id_text = this.modification_id_text_row.locator('..').locator('.govuk-summary-list__value');
-    this.participating_organisations_search_text = this.page.getByTestId('SearchTerm');
+    this.participating_organisations_search_text = this.page.getByTestId('Search.SearchNameTerm');
 
     // When search function implemented on this page the below locator need to be removed to handle in common functions
     this.participating_organisations_search_button = this.page.getByRole('button', {
       name: this.buttonTextData.Participating_Organisations_Page.Search,
       exact: true,
     });
-    this.advanced_filter_link = this.page.getByRole('link', {
+    this.advanced_filter_link = this.page.getByRole('button', {
       name: this.linkTextData.Participating_Organisations_Page.Advanced_Filter,
       exact: true,
     });
