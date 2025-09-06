@@ -40,23 +40,14 @@ When(
 );
 
 Then(
-  'the {string} should not be available on the check and create user profile page',
-  async ({ checkCreateUserProfilePage }, removedLink: string) => {
-    const labelKey = removedLink.replace(/(_Dropdown|_Checkbox)$/, '_row').toLowerCase();
+  'the {string} change link should be {string} on the check and create user profile page',
+  async ({ checkCreateUserProfilePage }, changeLink: string, availability: string) => {
+    const labelKey = changeLink.replace(/(_Dropdown|_Checkbox)$/, '_row').toLowerCase();
     const labelToCheck = checkCreateUserProfilePage[labelKey];
-    if (labelToCheck) {
-      await expect(labelToCheck).not.toBeVisible();
-    }
-  }
-);
-
-Then(
-  'the {string} should be available on the check and create user profile page',
-  async ({ checkCreateUserProfilePage }, removedLink: string) => {
-    const labelKey = removedLink.replace(/(_Dropdown|_Checkbox)$/, '_row').toLowerCase();
-    const labelToCheck = checkCreateUserProfilePage[labelKey];
-    if (labelToCheck) {
+    if (availability.toLowerCase() == 'available') {
       await expect(labelToCheck).toBeVisible();
+    } else {
+      await expect(labelToCheck).not.toBeVisible();
     }
   }
 );

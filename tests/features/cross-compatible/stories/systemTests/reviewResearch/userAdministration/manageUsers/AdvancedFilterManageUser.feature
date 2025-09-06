@@ -257,7 +257,7 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
         Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Manage_Users_Page'
         And I can see the results matching the search '' and filter criteria '<Advanced_Filters>' for manage users page
         And I capture the page screenshot
-        And I click the view edit link of the first user in the manage users page
+        When I click the 'View_Edit' link on the 'Manage_Users_Page'
         And I can see the user profile page
         And I capture the page screenshot
         And I can see the '<Advanced_Filters>' user has the selected roles in the filter assigned on their profile page

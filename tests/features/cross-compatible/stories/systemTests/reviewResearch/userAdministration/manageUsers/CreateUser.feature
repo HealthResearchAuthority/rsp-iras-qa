@@ -593,10 +593,10 @@ Feature: User Administration: Manage Users - Create user
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
     Then I can see the check and create user profile page
     And I capture the page screenshot
-    And the '<Option_One>' should not be available on the check and create user profile page
-    And the '<Option_Two>' should be available on the check and create user profile page
-    And the '<Option_Three>' should not be available on the check and create user profile page
-    And the '<Option_Four>' should not be available on the check and create user profile page
+    And the '<Option_One>' change link should be 'unavailable' on the check and create user profile page
+    And the '<Option_Two>' change link should be 'available' on the check and create user profile page
+    And the '<Option_Three>' change link should be 'unavailable' on the check and create user profile page
+    And the '<Option_Four>' change link should be 'unavailable' on the check and create user profile page
     Examples:
       | Add_User_Profile                                     | Option_One           | Option_Two       | Option_Three       | Option_Four              |
       | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager | Review_Body_Checkbox | Country_Checkbox | Committee_Dropdown | Access_Required_Checkbox |
@@ -611,10 +611,10 @@ Feature: User Administration: Manage Users - Create user
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
     Then I can see the check and create user profile page
     And I capture the page screenshot
-    And the '<Option_One>' should not be available on the check and create user profile page
-    And the '<Option_Two>' should be available on the check and create user profile page
-    And the '<Option_Three>' should not be available on the check and create user profile page
-    And the '<Option_Four>' should not be available on the check and create user profile page
+    And the '<Option_One>' change link should be 'unavailable' on the check and create user profile page
+    And the '<Option_Two>' change link should be 'available' on the check and create user profile page
+    And the '<Option_Three>' change link should be 'unavailable' on the check and create user profile page
+    And the '<Option_Four>' change link should be 'unavailable' on the check and create user profile page
     Examples:
       | Add_User_Profile                                     | Option_One           | Option_Two       | Option_Three       | Option_Four              |
       | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager | Review_Body_Checkbox | Country_Checkbox | Committee_Dropdown | Access_Required_Checkbox |
@@ -629,10 +629,10 @@ Feature: User Administration: Manage Users - Create user
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
     Then I can see the check and create user profile page
     And I capture the page screenshot
-    And the '<Option_One>' should not be available on the check and create user profile page
-    And the '<Option_Two>' should not be available on the check and create user profile page
-    And the '<Option_Three>' should not be available on the check and create user profile page
-    And the '<Option_Four>' should not be available on the check and create user profile page
+    And the '<Option_One>' change link should be 'unavailable' on the check and create user profile page
+    And the '<Option_Two>' change link should be 'unavailable' on the check and create user profile page
+    And the '<Option_Three>' change link should be 'unavailable' on the check and create user profile page
+    And the '<Option_Four>' change link should be 'unavailable' on the check and create user profile page
     Examples:
       | Add_User_Profile                                             | Option_One       | Option_Two           | Option_Three       | Option_Four              |
       | Valid_Data_In_All_Mandatory_Fields_Role_Applicant            | Country_Checkbox | Review_Body_Checkbox | Committee_Dropdown | Access_Required_Checkbox |
@@ -649,10 +649,10 @@ Feature: User Administration: Manage Users - Create user
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
     Then I can see the check and create user profile page
     And I capture the page screenshot
-    And the '<Option_One>' should not be available on the check and create user profile page
-    And the '<Option_Two>' should not be available on the check and create user profile page
-    And the '<Option_Three>' should not be available on the check and create user profile page
-    And the '<Option_Four>' should not be available on the check and create user profile page
+    And the '<Option_One>' change link should be 'unavailable' on the check and create user profile page
+    And the '<Option_Two>' change link should be 'unavailable' on the check and create user profile page
+    And the '<Option_Three>' change link should be 'unavailable' on the check and create user profile page
+    And the '<Option_Four>' change link should be 'unavailable' on the check and create user profile page
     Examples:
       | Add_User_Profile                                             | Option_One       | Option_Two           | Option_Three       | Option_Four              |
       | Valid_Data_In_All_Mandatory_Fields_Role_Applicant            | Country_Checkbox | Review_Body_Checkbox | Committee_Dropdown | Access_Required_Checkbox |
@@ -667,10 +667,10 @@ Feature: User Administration: Manage Users - Create user
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
     Then I can see the check and create user profile page
     And I capture the page screenshot
-    And the '<Option_One>' should be available on the check and create user profile page
-    And the '<Option_Two>' should be available on the check and create user profile page
-    And the '<Option_Three>' should not be available on the check and create user profile page
-    And the '<Option_Four>' should not be available on the check and create user profile page
+    And the '<Option_One>' change link should be 'available' on the check and create user profile page
+    And the '<Option_Two>' change link should be 'available' on the check and create user profile page
+    And the '<Option_Three>' change link should be 'unavailable' on the check and create user profile page
+    And the '<Option_Four>' change link should be 'unavailable' on the check and create user profile page
     Examples:
       | Add_User_Profile                                                        | Option_One       | Option_Two           | Option_Three       | Option_Four              |
       | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_Studywide_Reviewer | Country_Checkbox | Review_Body_Checkbox | Committee_Dropdown | Access_Required_Checkbox |
@@ -684,10 +684,10 @@ Feature: User Administration: Manage Users - Create user
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
     Then I can see the check and create user profile page
     And I capture the page screenshot
-    And the '<Option_One>' should be available on the check and create user profile page
-    And the '<Option_Two>' should not be available on the check and create user profile page
-    And the '<Option_Three>' should not be available on the check and create user profile page
-    And the '<Option_Four>' should not be available on the check and create user profile page
+    And the '<Option_One>' change link should be 'available' on the check and create user profile page
+    And the '<Option_Two>' change link should be 'unavailable' on the check and create user profile page
+    And the '<Option_Three>' change link should be 'unavailable' on the check and create user profile page
+    And the '<Option_Four>' change link should be 'unavailable' on the check and create user profile page
     Examples:
       | Add_User_Profile                                                          | Option_One       | Option_Two           | Option_Three       | Option_Four              |
       | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_System_Administrator | Country_Checkbox | Review_Body_Checkbox | Committee_Dropdown | Access_Required_Checkbox |
@@ -701,10 +701,10 @@ Feature: User Administration: Manage Users - Create user
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
     Then I can see the check and create user profile page
     And I capture the page screenshot
-    And the '<Option_One>' should be available on the check and create user profile page
-    And the '<Option_Two>' should not be available on the check and create user profile page
-    And the '<Option_Three>' should not be available on the check and create user profile page
-    And the '<Option_Four>' should not be available on the check and create user profile page
+    And the '<Option_One>' change link should be 'available' on the check and create user profile page
+    And the '<Option_Two>' change link should be 'unavailable' on the check and create user profile page
+    And the '<Option_Three>' change link should be 'unavailable' on the check and create user profile page
+    And the '<Option_Four>' change link should be 'unavailable' on the check and create user profile page
     Examples:
       | Add_User_Profile                                                          | Option_One       | Option_Two           | Option_Three       | Option_Four              |
       | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_System_Administrator | Country_Checkbox | Review_Body_Checkbox | Committee_Dropdown | Access_Required_Checkbox |

@@ -72,7 +72,6 @@ export default class ManageUsersPage {
   readonly date_last_logged_in_from_date_fieldset: Locator;
   readonly date_last_logged_in_to_date_fieldset: Locator;
   readonly date_last_logged_in_to_date_error: Locator;
-  readonly advanced_filter_chevron: Locator;
   readonly date_last_logged_in_error_message: Locator;
   readonly country_checkbox_selected_hint_label: Locator;
   readonly country_checkbox_hint_label: Locator;
@@ -80,19 +79,13 @@ export default class ManageUsersPage {
   readonly date_last_logged_in_from_date_help_text: Locator;
   readonly date_last_logged_in_to_date_help_text: Locator;
   readonly role_checkbox_chevron: Locator;
-  readonly role_label: Locator;
   readonly role_fieldset: Locator;
   readonly role_checkbox: Locator;
-  readonly role_selected_hint_label: Locator;
-  readonly role_hint_label: Locator;
   readonly role_checkbox_selected_hint_label: Locator;
   readonly role_checkbox_hint_label: Locator;
   readonly review_body_checkbox_chevron: Locator;
-  readonly review_body_label: Locator;
   readonly review_body_fieldset: Locator;
   readonly review_body_checkbox: Locator;
-  readonly review_body_selected_hint_label: Locator;
-  readonly review_body_hint_label: Locator;
   readonly review_body_checkbox_selected_hint_label: Locator;
   readonly review_body_checkbox_hint_label: Locator;
 
@@ -155,10 +148,6 @@ export default class ManageUsersPage {
         exact: true,
       });
     this.listCell = this.page.getByRole('cell');
-
-    this.advanced_filter_chevron = this.page.getByRole('button', {
-      name: this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.advanced_filter_label,
-    });
     this.country_checkbox_chevron = this.page
       .getByRole('heading', { level: 2 })
       .getByText(this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.country_label, {
@@ -306,22 +295,15 @@ export default class ManageUsersPage {
     this.date_last_logged_in_error_message = this.page
       .locator('.govuk-error-message')
       .getByText(manageUsersPageTestData.Error_Message_Field_Dataset.Field_Error_Date_Last_Logged_In);
-    this.country_checkbox_selected_hint_label = this.country_checkbox_chevron
-      .locator('..')
-      .locator('..')
-      .locator('.govuk-fieldset')
-      .locator('.govuk-form-group')
-      .getByText(
-        this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.selected_checkboxes_hint_label
-      );
-    this.country_checkbox_hint_label = this.country_checkbox_chevron
-      .locator('..')
-      .locator('..')
-      .locator('.govuk-fieldset')
-      .locator('.govuk-form-group')
-      .getByText(this.manageUsersPageTestData.Manage_Users_Page.Advanced_Filters_Hint_Labels.country_hint_label, {
+    this.country_checkbox_selected_hint_label = this.country_fieldset.getByText(
+      this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.selected_checkboxes_hint_label
+    );
+    this.country_checkbox_hint_label = this.country_fieldset.getByText(
+      this.manageUsersPageTestData.Manage_Users_Page.Advanced_Filters_Hint_Labels.country_hint_label,
+      {
         exact: true,
-      });
+      }
+    );
     this.date_last_logged_in_from_date_help_text = this.page.locator('#Search_FromDate-hint');
     this.date_last_logged_in_to_date_help_text = this.page.locator('#Search_ToDate-hint');
     this.role_checkbox_chevron = this.page
@@ -329,12 +311,7 @@ export default class ManageUsersPage {
       .getByText(this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.role_label, {
         exact: true,
       });
-    this.role_label = this.page
-      .getByRole('heading', { level: 2 })
-      .getByText(this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.role_label, {
-        exact: true,
-      });
-    this.role_fieldset = this.role_label
+    this.role_fieldset = this.role_checkbox_chevron
       .locator('..')
       .locator('..')
       .locator('.govuk-fieldset')
@@ -344,46 +321,21 @@ export default class ManageUsersPage {
         ),
       });
     this.role_checkbox = this.role_fieldset.getByRole('checkbox');
-    this.role_selected_hint_label = this.role_label
-      .locator('..')
-      .locator('..')
-      .locator('.govuk-fieldset')
-      .locator('.govuk-form-group')
-      .getByText(this.manageUsersPageTestData.Manage_Users_Page.Advanced_Filters_Hint_Labels.role_selected_hint_label);
-
-    this.role_hint_label = this.role_label
-      .locator('..')
-      .locator('..')
-      .locator('.govuk-fieldset')
-      .locator('.govuk-form-group')
-      .getByText(this.manageUsersPageTestData.Manage_Users_Page.Advanced_Filters_Hint_Labels.role_hint_label);
-    this.role_checkbox_selected_hint_label = this.role_checkbox_chevron
-      .locator('..')
-      .locator('..')
-      .locator('.govuk-fieldset')
-      .locator('.govuk-form-group')
-      .getByText(
-        this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.selected_checkboxes_hint_label
-      );
-    this.role_checkbox_hint_label = this.role_checkbox_chevron
-      .locator('..')
-      .locator('..')
-      .locator('.govuk-fieldset')
-      .locator('.govuk-form-group')
-      .getByText(this.manageUsersPageTestData.Manage_Users_Page.Advanced_Filters_Hint_Labels.role_hint_label, {
+    this.role_checkbox_selected_hint_label = this.role_fieldset.getByText(
+      this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.selected_checkboxes_hint_label
+    );
+    this.role_checkbox_hint_label = this.role_fieldset.getByText(
+      this.manageUsersPageTestData.Manage_Users_Page.Advanced_Filters_Hint_Labels.role_hint_label,
+      {
         exact: true,
-      });
+      }
+    );
     this.review_body_checkbox_chevron = this.page
       .getByRole('heading', { level: 2 })
       .getByText(this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.review_body_label, {
         exact: true,
       });
-    this.review_body_label = this.page
-      .getByRole('heading', { level: 2 })
-      .getByText(this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.review_body_label, {
-        exact: true,
-      });
-    this.review_body_fieldset = this.review_body_label
+    this.review_body_fieldset = this.review_body_checkbox_chevron
       .locator('..')
       .locator('..')
       .locator('.govuk-fieldset')
@@ -393,37 +345,15 @@ export default class ManageUsersPage {
         ),
       });
     this.review_body_checkbox = this.review_body_fieldset.getByRole('checkbox');
-    this.review_body_selected_hint_label = this.review_body_label
-      .locator('..')
-      .locator('..')
-      .locator('.govuk-fieldset')
-      .locator('.govuk-form-group')
-      .getByText(
-        this.manageUsersPageTestData.Manage_Users_Page.Advanced_Filters_Hint_Labels.review_body_selected_hint_label
-      );
-
-    this.review_body_hint_label = this.review_body_label
-      .locator('..')
-      .locator('..')
-      .locator('.govuk-fieldset')
-      .locator('.govuk-form-group')
-      .getByText(this.manageUsersPageTestData.Manage_Users_Page.Advanced_Filters_Hint_Labels.review_body_hint_label);
-    this.review_body_checkbox_selected_hint_label = this.review_body_checkbox_chevron
-      .locator('..')
-      .locator('..')
-      .locator('.govuk-fieldset')
-      .locator('.govuk-form-group')
-      .getByText(
-        this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.selected_checkboxes_hint_label
-      );
-    this.review_body_checkbox_hint_label = this.review_body_checkbox_chevron
-      .locator('..')
-      .locator('..')
-      .locator('.govuk-fieldset')
-      .locator('.govuk-form-group')
-      .getByText(this.manageUsersPageTestData.Manage_Users_Page.Advanced_Filters_Hint_Labels.review_body_hint_label, {
+    this.review_body_checkbox_selected_hint_label = this.review_body_fieldset.getByText(
+      this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.selected_checkboxes_hint_label
+    );
+    this.review_body_checkbox_hint_label = this.review_body_fieldset.getByText(
+      this.manageUsersPageTestData.Manage_Users_Page.Advanced_Filters_Hint_Labels.review_body_hint_label,
+      {
         exact: true,
-      });
+      }
+    );
   }
 
   //Getters & Setters for Private Variables
@@ -548,7 +478,7 @@ export default class ManageUsersPage {
     const data = await returnDataFromJSON();
     const userEmail = data.Create_User_Profile.email_address_unique;
     const userStatus = await manageUsersPage.getUserStatus(status);
-    if (!(await commonItemsPage.clear_all_filters_link.isVisible())) {
+    if (await commonItemsPage.clear_all_filters_link.isHidden()) {
       await manageUsersPage.goto(
         manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size,
         userEmail

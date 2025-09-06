@@ -146,17 +146,17 @@ Feature: User Administration: Manage user profiles, view and edit user profile
   Scenario Outline: Verify pagination in manage users page when user is on the first page and navigate through each page by clicking page number or by by clicking next link
     And I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
     And I capture the page screenshot
-    And the default page size should be twenty
+    And the default page size should be 'twenty'
     And the 'Next' button will be 'available' to the user
     And the 'Previous' button will be 'not available' to the user
     And the current page number should be visually highlighted to indicate the active page the user is on
     And I capture the page screenshot
-    Then I sequentially navigate through each page by '<Navigation_Method>' from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+    Then I sequentially navigate through each 'Manage_Users_Page' by clicking on '<Navigation_Method>' from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges
     And I capture the page screenshot
     Examples:
-      | Navigation_Method       |
-      | clicking on page number |
-      | clicking on next link   |
+      | Navigation_Method |
+      | page number       |
+      | next link         |
 
   @rsp-3521 @ManageUsersPagination @ManageUsersPaginationLastPage @ManageUsersPaginationPageNumber @ManageUsersPaginationPreviousLinkClick
   Scenario Outline: Verify pagination in manage users page when user is on the last page and navigate through each page by clicking page number or by by clicking on previous link
@@ -165,12 +165,12 @@ Feature: User Administration: Manage user profiles, view and edit user profile
     And the 'Previous' button will be 'available' to the user
     And the 'Next' button will be 'not available' to the user
     And I capture the page screenshot
-    Then I sequentially navigate through each page by '<Navigation_Method>' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+    Then I sequentially navigate through each 'Manage_Users_Page' by clicking on '<Navigation_Method>' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
     And I capture the page screenshot
     Examples:
-      | Navigation_Method         |
-      | clicking on page number   |
-      | clicking on previous link |
+      | Navigation_Method |
+      | page number       |
+      | previous link     |
 
   @rsp-3456 @ManageUsersSearchResultsFound
   Scenario Outline: Verify search results in manage users page when user search by first value of first name, last name, full name and email address

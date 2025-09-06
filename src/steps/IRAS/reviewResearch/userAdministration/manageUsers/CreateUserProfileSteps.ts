@@ -23,7 +23,7 @@ When(
           const locator: Locator = createUserProfilePage[key];
           await locator.fill(uniqueEmail);
         } else if (key === 'review_body_checkbox') {
-          await commonItemsPage.selectCheckboxReviewBody(dataset, key, createUserProfilePage);
+          await commonItemsPage.selectCheckboxUserProfileReviewBody(dataset, createUserProfilePage);
         } else {
           await commonItemsPage.fillUIComponent(dataset, key, createUserProfilePage);
         }
@@ -49,7 +49,7 @@ When(
             await locator.fill(valueToFill);
           }
         } else if (key === 'review_body_checkbox') {
-          await commonItemsPage.selectCheckboxReviewBody(dataset, key, createUserProfilePage);
+          await commonItemsPage.selectCheckboxUserProfileReviewBody(dataset, createUserProfilePage);
         } else {
           await commonItemsPage.fillUIComponent(dataset, key, createUserProfilePage);
         }
@@ -145,6 +145,8 @@ Then(
     const labelToCheck = createUserProfilePage[labelKey];
     if (labelToCheck) {
       await expect(labelToCheck).not.toBeVisible();
+    } else {
+      throw new Error(`${labelKey} is not a valid locator on the createUserProfilePage object`);
     }
   }
 );

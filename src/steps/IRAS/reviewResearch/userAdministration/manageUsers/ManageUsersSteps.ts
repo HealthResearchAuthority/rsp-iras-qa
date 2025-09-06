@@ -173,7 +173,7 @@ When(
           }
           await commonItemsPage.fillUIComponent(dataset, key, manageUsersPage);
         } else if (key === 'review_body_checkbox') {
-          await commonItemsPage.selectCheckboxReviewBody(dataset, key, manageUsersPage);
+          await commonItemsPage.selectCheckboxUserProfileReviewBody(dataset, manageUsersPage);
         } else {
           await manageUsersPage[key + '_chevron'].click();
           await commonItemsPage.fillUIComponent(dataset, key, manageUsersPage);
@@ -276,7 +276,3 @@ Then(
     expect(actualList).toEqual(expectedList);
   }
 );
-
-Then('I click the view edit link of the first user in the manage users page', async ({ manageUsersPage }) => {
-  await manageUsersPage.view_edit_link.click();
-});

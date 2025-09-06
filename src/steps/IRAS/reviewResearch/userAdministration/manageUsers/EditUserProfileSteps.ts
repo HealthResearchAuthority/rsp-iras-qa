@@ -170,6 +170,7 @@ When(
 
 Then(
   'I uncheck the previously selected checkboxes on the edit user profile page for {string} when the role is selected as study-wide reviewer or team manager or workflow co-ordinator',
+  'I uncheck the previously selected checkboxes on the edit user profile page for {string} when the role is selected as study-wide reviewer or team manager or workflow co-ordinator',
   async ({ userProfilePage, editUserProfilePage, commonItemsPage }, datasetName: string) => {
     const dataset = editUserProfilePage.editUserProfilePageTestData.Edit_User_Profile[datasetName];
     const roleValue = (await userProfilePage.getRole()).join(', ');
@@ -184,7 +185,7 @@ Then(
       selectedCheckboxCount > 0
     ) {
       await commonItemsPage.clearCheckboxes(dataset, ['country_checkbox'], commonItemsPage, editUserProfilePage);
-      await commonItemsPage.clearCheckboxesReviewBody(dataset, 'review_body_checkbox', editUserProfilePage);
+      await commonItemsPage.clearCheckboxesUserProfileReviewBody(dataset, editUserProfilePage);
       await commonItemsPage.clearUIComponent(dataset, 'role_checkbox', editUserProfilePage);
     }
   }
@@ -196,7 +197,7 @@ When(
     const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
     for (const key in dataset) {
       if (key !== 'email_address_text') {
-        if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+        if (Object.hasOwn(dataset, key)) {
           await commonItemsPage.validateUIComponentValues(dataset, key, editUserProfilePage);
         }
       }
