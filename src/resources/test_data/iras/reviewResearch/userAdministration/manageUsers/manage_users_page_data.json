@@ -34,9 +34,6 @@
       "date_last_logged_in_year_label": "Year",
       "role_label": "Role",
       "review_body_label": "Review body"
-      "date_last_logged_in_year_label": "Year",
-      "role_label": "Role",
-      "review_body_label": "Review body"
     },
     "Advanced_Filters_Hint_Labels": {
       "country_hint_label": "Select all that apply",
