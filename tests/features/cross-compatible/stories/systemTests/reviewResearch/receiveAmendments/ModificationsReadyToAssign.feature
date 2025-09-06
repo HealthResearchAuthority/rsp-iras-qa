@@ -116,13 +116,8 @@ Feature: Modifications Tasklist page that displays modifications ready to be ass
 # Test Case Design - AC’s for Automation:
 
 # Pre-requisite:
-
 # The roles and permissions feature should be implemented to properly display the list of study-wide reviewers.
-
 #  The user is on the Task list page, has selected at least one modification by clicking the checkbox, and clicks the Continue to assign modifications button to proceed to the next page.
-
-# Supporting links:
-# Figma link: Review research -Assign a modification – Figma
 
 # Scenario : 1- Validate the user navigates to ‘Select a study-wide reviewer’ page on clicking Continue to assign modifications button on the task list page
 
@@ -132,10 +127,7 @@ Feature: Modifications Tasklist page that displays modifications ready to be ass
 # AND the proper list of study-wide reviewers should be displayed, the list of SWRs available should be determined by the assign modification (e.g. so if it = England, then it should only display SWRs with the review body HRA and are active),
 # AND I can see all selected modifications on that page, including the following fields: Short project title, Modification ID, and a scrollable list of study-wide reviewers,
 # AND Short project titles should be link buttons.
-
 # AND  the Complete assignment button should be displayed at the bottom of the page,
-
-# The button should be disabled for now, as the record page is not within the scope of this ticket.
 
 # Scenario : 2- Validate the user navigates to the task list page  from the ‘Select a study-wide reviewer’ page on clicking ‘Back’ button on ‘Select a study-wide reviewer’ page
 
@@ -148,9 +140,6 @@ Feature: Modifications Tasklist page that displays modifications ready to be ass
 # Test Case Design - AC’s for Automation:
 
 # Pre-requisite: The user has selected a study-wide reviewer from the list on the previous page and clicked the Complete assignment button.
-
-# Supporting links:
-# Figma link: Review research -Assign a modification – Figma
 
 # Scenario : 1- Validate the user navigates to the final page on clicking ‘Complete assignment’ button
 
