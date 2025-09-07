@@ -50,22 +50,15 @@ Feature: Project Overview
             | Label_Texts              | Valid_Data_All_Fields | Valid_Data_All_Fields    | Label_Texts             | Valid_Data_All_Fields     | Valid_Research_Locations_Details_Nhs     |
             | Label_Texts              | Valid_Data_All_Fields | Data_With_No_NHS_HSC     | Label_Texts             | Valid_Data_All_Fields     | Valid_Research_Locations_Details_Non_Nhs |
 
-    @rsp-4876 @PostApprovalPage @abc
+    @rsp-4876 @PostApprovalPage
     Scenario Outline: Validate the user is able to access the view the post approval details from the project overview page
         When I navigate to the project overview page of a specific project
         And I capture the page screenshot
         When I click the 'Post_Approval' link on the 'Project_Overview_Page'
         And I capture the page screenshot
-        And I can see the '<Validation_Text>' ui labels on the project overview page
-        #page to check the iras id and short project titile in project overview page
-        #And I validate the project information labels using '<Project_Details>' dataset displayed on this page
-        #And I can see the project details on project overview page for '<Project_Details>'
-        #And I validate the '<Specific_Project_Details>' displayed in the project overview page
+        And I validate the 'Valid_Data_Fields' displayed in the project overview page
+        And I can see the 'Label_Texts_Post_Approval' ui labels on the project overview page
         And I can see the status of modifications displayed is 'Draft'
-
-        Examples:
-            | Project_Details       | Validation_Text           | Specific_Project_Details |
-            | Valid_Data_All_Fields | Label_Texts_Post_Approval | Valid_Data_Fields        |
 
     @rsp-4876 @PostApprovalPageSort
     Scenario Outline: Validate the user is able to access the view the post approval details from the project overview page

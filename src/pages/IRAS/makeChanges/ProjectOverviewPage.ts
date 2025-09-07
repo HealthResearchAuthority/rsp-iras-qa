@@ -43,9 +43,7 @@ export default class ProjectOverviewPage {
   readonly review_type: Locator;
   readonly category: Locator;
   readonly status: Locator;
-  readonly project_overview_iras_id: Locator;
-  readonly project_overview_short_project_title: Locator;
-  readonly project_overview_iras_id_value: Locator;
+  readonly project_overview_iras_id_short_project_title: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -54,15 +52,6 @@ export default class ProjectOverviewPage {
 
     //Locators
 
-    this.project_overview_iras_id = this.page
-      .locator('.govuk-inset-text')
-      .getByText(projectOverviewPageTestData.Project_Overview_Page.project_overview_irasid_header);
-    this.project_overview_iras_id_value = this.page
-      .locator('p[class="govuk-inset-text"]')
-      .getByText('project_overview_iras_id');
-    this.project_overview_short_project_title = this.page
-      .locator('.govuk-inset-text')
-      .getByText(projectOverviewPageTestData.Project_Overview_Page.project_overview_shorttitle_header);
     this.pageHeading = this.page
       .getByRole('heading')
       .getByText(this.projectOverviewPageTestData.Project_Overview_Page.heading);
@@ -163,6 +152,7 @@ export default class ProjectOverviewPage {
       name: this.projectOverviewPageTestData.Label_Texts_Post_Approval.status,
       exact: true,
     });
+    this.project_overview_iras_id_short_project_title = this.page.locator('p');
   }
 
   //Page Methods

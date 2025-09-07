@@ -71,36 +71,20 @@ Then(
   }
 );
 
-// Then(
-//   'I validate the {string} displayed in the project overview page',
-//   async ({ projectOverviewPage }, datasetName: string) => {
-//const projectDataset = projectOverviewPage.projectOverviewPageTestData[datasetName];
-//what row to read the value of iras id = actual
-//what is stored in iras id = expected
-//const actualIrasIdValue = confirmStringNotNull(await projectOverviewPage.project_overview_iras_id.textContent());
-//const actualIrasId = await projectOverviewPage.project_overview_iras_id.textContent();
-// const actualIrasId = await projectOverviewPage.project_overview_iras_id.innerText();
-
-// const value = actualIrasId.trim().replace('IRAS ID:', '').trim();
-// console.log(value);
-
-// Extract the IRAS ID using a regex or string manipulation
-// const match = actualIrasId?.match(/IRAS ID:\s*(\d+)/);
-// const actualIrasIdValue = match ? match[1] : null;
-// console.log('IRAS ID:', actualIrasIdValue);
-
-// const actualIrasIdValue = confirmStringNotNull(
-//   await projectOverviewPage.project_overview_iras_id.getAttribute('project_overview_iras_id')
-// );
-//const expectedIrasIdValue = projectDataset.iras_id_value;
-//const actualProjectTitle = confirmStringNotNull(
-//   await projectOverviewPage.project_overview_short_project_title.textContent()
-// );
-// const expectedProjectTitle = projectDataset.short_project_title_text;
-//expect(actualIrasIdValue).toBe(expectedIrasIdValue);
-//expect(actualProjectTitle).toBe(expectedProjectTitle);
-//   }
-// );
+Then(
+  'I validate the {string} displayed in the project overview page',
+  async ({ projectOverviewPage }, datasetName: string) => {
+    const projectDataset = projectOverviewPage.projectOverviewPageTestData[datasetName];
+    const irasIdAndShortProjectTitle =
+      await projectOverviewPage.project_overview_iras_id_short_project_title.allInnerTexts();
+    const actualIrasIdValue = irasIdAndShortProjectTitle[3].trim().replace('IRAS ID:', '').trim();
+    const expectedIrasIdValue = projectDataset.iras_id_value;
+    const actualShortProjectTitle = irasIdAndShortProjectTitle[4].trim().replace('Short project title:', '').trim();
+    const expectedProjectTitle = projectDataset.short_project_title_text;
+    expect(actualIrasIdValue).toBe(expectedIrasIdValue);
+    expect(actualShortProjectTitle).toBe(expectedProjectTitle);
+  }
+);
 
 Then(
   'I can see the status of modifications displayed is {string}',
@@ -123,19 +107,6 @@ Then(
     }
   }
 );
-// for (let pageIndex = 1; pageIndex <= maxPagesToCheck; pageIndex++) {
-//   const rowCount = await commonItemsPage.tableRows.count();
-
-//   const statuses = await projectOverviewPage.status_displayed.textContent();
-//   for (const status of statuses) {
-//     await expect(status).toEqual('Draft');
-//   }
-//   if (await commonItemsPage.next_button.isVisible()) {
-//     await commonItemsPage.next_button.click();
-//   } else {
-//     break;
-//   }
-//}
 
 Then(
   'I validate the data displayed {string} in the project details tab of project overview page',
