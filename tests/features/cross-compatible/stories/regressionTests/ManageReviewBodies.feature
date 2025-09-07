@@ -79,7 +79,7 @@ Feature: User Administration: Manage Review Bodies
                         | Add_Review_Body          | Audit_History       | Status_Enabled | Status_Disabled |
                         | Valid_Data_In_All_Fields | Disable_Review_Body | Enabled        | Disabled        |
 
-        @RegressionTestVerifyEnableAndEditReviewBodyAuditHistory
+        @RegressionTestVerifyEnableAndEditReviewBodyAuditHistory @KNOWN-ISSUE-RSP-5003 @KNOWN-DEFECT-RSP-5004 @fail
         Scenario Outline: Verify the user can view the audit history after enabling a review body
                 When I enter 'QA Automation' into the search field
                 And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
@@ -287,19 +287,17 @@ Feature: User Administration: Manage Review Bodies
                 And I capture the page screenshot
 
                 Examples:
-                        | Add_Review_Body                      | Field_And_Summary_Error_Message         |
-                        | Missing_Data_Organisation_Name_Field | Mandatory_Field_Organisation_Name_Error |
-                        | Missing_Data_Country_Field           | Mandatory_Field_Country_Error           |
-                        | Missing_Data_Email_Address_Field     | Mandatory_Field_Email_Address_Error     |
-                        | Missing_Data_All_Fields              | All_Mandatory_Field_Errors              |
-                        | Missing_Data_All_Mandatory_Fields    | All_Mandatory_Field_Errors              |
-                        | Invalid_Data_Organisation_Name_Field | Max_Chars_Organisation_Name_Error       |
-                        | Invalid_Data_Description_Field       | Max_Description_Words_Error             |
-                        | Invalid_Character_Limit              | Max_Chars_Email_Address_Error           |
-        # | Incorrect_Email_Format               | Email_Format_Error                      |
-        # | Invalid_Email_Data_Double_Dot        | Email_Format_Error                      |
+                        | Add_Review_Body                                      | Field_And_Summary_Error_Message                              |
+                        | Missing_Data_Organisation_Name_Field                 | Mandatory_Field_Organisation_Name_Error                      |
+                        | Missing_Data_Country_Field                           | Mandatory_Field_Country_Error                                |
+                        | Missing_Data_Email_Address_Field                     | Mandatory_Field_Email_Address_Error                          |
+                        | Missing_Data_All_Fields                              | All_Mandatory_Field_Errors                                   |
+                        | Missing_Data_All_Mandatory_Fields                    | All_Mandatory_Field_Errors                                   |
+                        | Invalid_Data_Organisation_Name_Field                 | Max_Chars_Organisation_Name_Error                            |
+                        | Invalid_Data_Description_Field                       | Max_Description_Words_Error                                  |
+                        | Incorrect_Format_Invalid_Character_Limit_Email_Field | Incorrect_Format_Invalid_Character_Limit_Email_Address_Error |
 
-        @RegressionTestUserListReviewBodyNoResultsFoundRemoveUser
+        @RegressionTestUserListReviewBodyNoResultsFoundRemoveUser @fail @KNOWN-DEFECT-RSP-4996
         Scenario Outline: Verify the user can search and remove existing user of the selected review body and navigate to manage users page when no results found in the search for removed user
                 When I enter 'QA Automation' into the search field
                 And I click the 'Search' button on the 'Manage_Review_Bodies_Page'

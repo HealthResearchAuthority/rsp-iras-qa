@@ -11,52 +11,72 @@
     "organisation_label": "Organisation",
     "job_title_label": "Job title",
     "role_label": "Role",
-    "committee_label": "Committee",
-    "role_checkbox": ["Operations", "Reviewer", "User", "System administrator"],
+    "role_checkbox": [
+      "Applicant",
+      "Study-wide reviewer",
+      "System administrator",
+      "Team manager",
+      "Workflow co-ordinator"
+    ],
     "country_label": "Country",
     "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
-    "access_required_label": "Access required",
-    "access_required_checkbox": ["Study wide review", "Research ethics committee", "CAG", "Technical assurance"],
-    "review_body_label": "Review body"
+    "review_body_label": "Review body",
+    "committee_label": "Committee",
+    "access_required_label": "Access required"
   },
-  "Missing_Mandatory_Fields_Role_Not_Operations_Error": {
+  "Missing_Mandatory_Fields_Role_Applicant_Error": {
     "email_address_text": "Enter an email address",
     "first_name_text": "Enter a first name",
     "last_name_text": "Enter a last name"
   },
-  "Missing_Mandatory_Fields_Role_Operations_Error": {
+  "Missing_Mandatory_Fields_Role_System_Administrator_Error": {
     "email_address_text": "Enter an email address",
-    "country_checkbox": "You must provide a country",
+    "first_name_text": "Enter a first name",
+    "last_name_text": "Enter a last name"
+  },
+  "Missing_Mandatory_Fields_Role_Team_Manager_Error": {
+    "email_address_text": "Enter an email address",
+    "country_checkbox": "Select at least one country",
+    "first_name_text": "Enter a first name",
+    "last_name_text": "Enter a last name"
+  },
+  "Missing_Mandatory_Fields_Role_Studywide_Reviewer_Error": {
+    "email_address_text": "Enter an email address",
     "first_name_text": "Enter a first name",
     "last_name_text": "Enter a last name",
-    "access_required_checkbox": "You must provide the access required"
+    "review_body_checkbox": "Select at least one review body"
   },
-  "Missing_Mandatory_Field_First_Name_Role_Not_Operations_Error": {
+  "Missing_Mandatory_Fields_Role_Workflow_Coordinator_Error": {
+    "email_address_text": "Enter an email address",
+    "first_name_text": "Enter a first name",
+    "last_name_text": "Enter a last name",
+    "review_body_checkbox": "Select at least one review body"
+  },
+  "Missing_Mandatory_Field_First_Name_Role_Applicant_System_Administrator_Error": {
     "first_name_text": "Enter a first name"
   },
-  "Missing_Mandatory_Field_Last_Name_Role_Not_Operations_Error": {
+  "Missing_Mandatory_Field_Last_Name_Role_Applicant_System_Administrator_Error": {
     "last_name_text": "Enter a last name"
   },
-  "Missing_Mandatory_Field_Email_Address_Role_Not_Operations_Error": {
+  "Missing_Mandatory_Field_Email_Address_Role_Applicant_System_Administrator_Error": {
     "email_address_text": "Enter an email address"
   },
-  "Missing_Mandatory_Field_Country_Role_Operations_Error": {
-    "country_checkbox": "You must provide a country"
+  "Missing_Mandatory_Field_Country_Role_Team_Manager_Error": {
+    "country_checkbox": "Select at least one country"
   },
-  "Missing_Mandatory_Field_Access_Required_Role_Operations_Error": {
-    "access_required_checkbox": "You must provide the access required"
+  "Missing_Mandatory_Field_Review_Body_Role_Studywide_Reviewer_Error": {
+    "review_body_checkbox": "Select at least one review body"
+  },
+  "Missing_Mandatory_Field_Review_Body_Role_Workflow_Coordinator_Error": {
+    "review_body_checkbox": "Select at least one review body"
   },
   "Invalid_Character_Limit_Error": {
-    "email_address_text": "Email address must be 250 characters or less",
     "title_text": "Title must be 250 characters or less",
     "job_title_text": "Job title must be 250 characters or less",
     "first_name_text": "First name must be 250 characters or less",
     "telephone_text": "Telephone must be 11 digits or less",
     "last_name_text": "Last name must be 250 characters or less",
     "organisation_text": "Organisation must be 250 characters or less"
-  },
-  "Invalid_Character_Limit_Field_Email_Address_Error": {
-    "email_address_text": "Email address must be 250 characters or less"
   },
   "Incorrect_Format_Field_Telephone_Error": {
     "telephone_text": "Telephone must only contain numbers"
@@ -69,7 +89,7 @@
   },
   "Incorrect_Format_Invalid_Character_Limit_Email_Address_Error": {
     "email_address_text": [
-      "Email address must be 250 characters or less",
+      "Email address must be 254 characters or less",
       "Enter an email address in the correct format"
     ]
   },
@@ -78,89 +98,336 @@
   },
   "Create_User_Profile": {
     "email_address_prefix": "QAAutomation",
-    "email_address_unique": "QAAutomation20250717013803455hscrd@health.org",
-    "Role_Operations": {
-      "role_checkbox": ["Operations"]
+    "email_address_unique": "QAAutomation20250902123312683hscrd@health.org",
+    "Role_TM_SWR_WFC": {
+      "role_checkbox": ["Study-wide reviewer", "Team manager", "Workflow co-ordinator"]
     },
-    "Role_Not_Operations": {
-      "role_checkbox": ["Reviewer"]
+    "Role_Applicant_System_Administrator": {
+      "role_checkbox": ["Applicant", "System administrator"]
     },
-    "Label_Texts_Role_Operations": {
-      "role_checkbox_label": "Role",
-      "country_checkbox_label": "Country",
-      "access_required_checkbox_label": "Access required"
-    },
-    "Valid_Data_In_All_Fields_Role_Operations": {
+    "Valid_Data_In_All_Fields_Role_Team_Manager": {
       "title_text": "Mr",
-      "first_name_text": "QA Automation First Name Test Role_Operations",
-      "last_name_text": "Test Last Name Role_Operations",
+      "first_name_text": "QA Automation First Name Test Role_Team_Manager",
+      "last_name_text": "Test Last Name Role_Team_Manager",
       "email_address_text": "hscrd@health.org",
       "telephone_text": "07000000000",
-      "organisation_text": "QA Automation HRA Role_Operations",
-      "job_title_text": "Sr.Reviewer Role_Operations",
-      "role_checkbox": ["Operations", "System administrator"],
+      "organisation_text": "QA Automation HRA Role_Team_Manager",
+      "job_title_text": "Sr.Reviewer Role_Team_Manager",
+      "role_checkbox": ["Team manager"],
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
+    },
+    "Valid_Data_In_All_Fields_Role_Team_Manager_Another": {
+      "title_text": "Mr",
+      "first_name_text": "QA Automation First Name Test Role_Team_Manager_Another",
+      "last_name_text": "Test Last Name Role_Team_Manager_Another",
+      "email_address_text": "hscrd@health.org",
+      "telephone_text": "07000000000",
+      "organisation_text": "QA Automation HRA Role_Team_Manager_Another",
+      "job_title_text": "Sr.Reviewer Role_Team_Manager_Another",
+      "role_checkbox": ["Team manager"],
+      "country_checkbox": ["England", "Scotland"]
+    },
+    "Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager": {
+      "first_name_text": "QA Automation First Name Test Role_Team_Manager",
+      "last_name_text": "Test Last Name Role_Team_Manager",
+      "email_address_text": "hscrd@health.org",
+      "role_checkbox": ["Team manager"],
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
+    },
+    "Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_Another": {
+      "first_name_text": "QA Automation First Name Test Role_Team_Manager_Another",
+      "last_name_text": "Test Last Name Role_Team_Manager_Another",
+      "email_address_text": "hscrd@health.org",
+      "role_checkbox": ["Team manager"],
+      "country_checkbox": ["England"]
+    },
+    "Valid_Data_In_All_Fields_Role_Studywide_Reviewer": {
+      "title_text": "Mr",
+      "first_name_text": "QA Automation First Name Test Role_Studywide_Reviewer",
+      "last_name_text": "Test Last Name Role_Studywide_Reviewer",
+      "email_address_text": "hscrd@health.org",
+      "telephone_text": "07000000000",
+      "organisation_text": "QA Automation HRA Role_Studywide_Reviewer",
+      "job_title_text": "Sr.Reviewer Role_Studywide_Reviewer",
+      "role_checkbox": ["Study-wide reviewer"],
+      "review_body_checkbox": ["QA Automation Health Research Authority (HRA)"]
+    },
+    "Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Another": {
+      "title_text": "Mr",
+      "first_name_text": "QA Automation First Name Test Role_Studywide_Reviewer_Another",
+      "last_name_text": "Test Last Name Role_Studywide_Reviewer_Another",
+      "email_address_text": "hscrd@health.org",
+      "telephone_text": "07000000000",
+      "organisation_text": "QA Automation HRA Role_Studywide_Reviewer_Another",
+      "job_title_text": "Sr.Reviewer Role_Studywide_Reviewer_Another",
+      "role_checkbox": ["Study-wide reviewer"],
+      "review_body_checkbox": ["QA Automation Health and Care Research Wales (HCRW)"]
+    },
+    "Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer": {
+      "first_name_text": "QA Automation First Name Test Role_Studywide_Reviewer",
+      "last_name_text": "Test Last Name Role_Studywide_Reviewer",
+      "email_address_text": "hscrd@health.org",
+      "role_checkbox": ["Study-wide reviewer"],
+      "review_body_checkbox": ["QA Automation Health and Social Care Northern Ireland (HSCNI)"]
+    },
+    "Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer_Another": {
+      "first_name_text": "QA Automation First Name Test Role_Studywide_Reviewer_Another",
+      "last_name_text": "Test Last Name Role_Studywide_Reviewer_Another",
+      "email_address_text": "hscrd@health.org",
+      "role_checkbox": ["Study-wide reviewer"],
+      "review_body_checkbox": ["QA Automation National Research Service Permissions Coordination Centre (NRS PCC)"]
+    },
+    "Valid_Data_In_All_Fields_Role_Workflow_Coordinator": {
+      "title_text": "Mr",
+      "first_name_text": "QA Automation First Name Test Role_Workflow_Coordinator",
+      "last_name_text": "Test Last Name Role_Workflow_Coordinator",
+      "email_address_text": "hscrd@health.org",
+      "telephone_text": "07000000000",
+      "organisation_text": "QA Automation HRA Role_Workflow_Coordinator",
+      "job_title_text": "Sr.Reviewer Role_Workflow_Coordinator",
+      "role_checkbox": ["Workflow co-ordinator"],
+      "review_body_checkbox": ["QA Automation National Research Service Permissions Coordination Centre (NRS PCC)"]
+    },
+    "Valid_Data_In_All_Fields_Role_Workflow_Coordinator_Another": {
+      "title_text": "Mr",
+      "first_name_text": "QA Automation First Name Test Role_Workflow_Coordinator_Another",
+      "last_name_text": "Test Last Name Role_Workflow_Coordinator_Another",
+      "email_address_text": "hscrd@health.org",
+      "telephone_text": "07000000000",
+      "organisation_text": "QA Automation HRA Role_Workflow_Coordinator_Another",
+      "job_title_text": "Sr.Reviewer Role_Workflow_Coordinator_Another",
+      "role_checkbox": ["Workflow co-ordinator"],
+      "review_body_checkbox": ["QA Automation Health Research Authority (HRA)"]
+    },
+    "Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator": {
+      "first_name_text": "QA Automation First Name Test Role_Workflow_Coordinator",
+      "last_name_text": "Test Last Name Role_Workflow_Coordinator",
+      "email_address_text": "hscrd@health.org",
+      "role_checkbox": ["Workflow co-ordinator"],
+      "review_body_checkbox": ["QA Automation Health Research Authority (HRA)"]
+    },
+    "Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator_Another": {
+      "first_name_text": "QA Automation First Name Test Role_Workflow_Coordinator_Another",
+      "last_name_text": "Test Last Name Role_Workflow_Coordinator_Another",
+      "email_address_text": "hscrd@health.org",
+      "role_checkbox": ["Workflow co-ordinator"],
+      "review_body_checkbox": ["QA Automation Health and Social Care Northern Ireland (HSCNI)"]
+    },
+    "Valid_Data_In_All_Fields_Role_System_Administrator": {
+      "title_text": "Mr",
+      "first_name_text": "QA Automation First Name Test Role_System_Administrator",
+      "last_name_text": "Test Last Name Role_System_Administrator",
+      "email_address_text": "hscrd@health.org",
+      "telephone_text": "07000000000",
+      "organisation_text": "QA Automation HRA Role_System_Administrator",
+      "job_title_text": "Sr.Reviewer Role_System_Administrator",
+      "role_checkbox": ["System administrator"]
+    },
+    "Valid_Data_In_All_Fields_Role_System_Administrator_Another": {
+      "title_text": "Mr",
+      "first_name_text": "QA Automation First Name Test Role_System_Administrator_Another",
+      "last_name_text": "Test Last Name Role_System_Administrator_Another",
+      "email_address_text": "hscrd@health.org",
+      "telephone_text": "07000000000",
+      "organisation_text": "QA Automation HRA Role_System_Administrator_Another",
+      "job_title_text": "Sr.Reviewer Role_System_Administrator_Another",
+      "role_checkbox": ["System administrator"]
+    },
+    "Valid_Data_In_All_Mandatory_Fields_Role_System_Administrator": {
+      "first_name_text": "QA Automation First Name Test Role_System_Administrator",
+      "last_name_text": "Test Last Name Role_System_Administrator",
+      "email_address_text": "hscrd@health.org",
+      "role_checkbox": ["System administrator"]
+    },
+    "Valid_Data_In_All_Mandatory_Fields_Role_System_Administrator_Another": {
+      "first_name_text": "QA Automation First Name Test Role_System_Administrator_Another",
+      "last_name_text": "Test Last Name Role_System_Administrator_Another",
+      "email_address_text": "hscrd@health.org",
+      "role_checkbox": ["System administrator"]
+    },
+    "Valid_Data_In_All_Fields_Role_Applicant": {
+      "title_text": "Mr",
+      "first_name_text": "QA Automation First Name Test Role_Applicant",
+      "last_name_text": "Test Last Name Role_Applicant",
+      "email_address_text": "hscrd@health.org",
+      "telephone_text": "07000000000",
+      "organisation_text": "QA Automation HRA Role_Applicant",
+      "job_title_text": "Sr.Reviewer Role_Applicant",
+      "role_checkbox": ["Applicant"]
+    },
+    "Valid_Data_In_All_Fields_Role_Applicant_Another": {
+      "title_text": "Mr",
+      "first_name_text": "QA Automation First Name Test Role_Applicant_Another",
+      "last_name_text": "Test Last Name Role_Applicant_Another",
+      "email_address_text": "hscrd@health.org",
+      "telephone_text": "07000000000",
+      "organisation_text": "QA Automation HRA Role_Applicant_Another",
+      "job_title_text": "Sr.Reviewer Role_Applicant_Another",
+      "role_checkbox": ["Applicant"]
+    },
+    "Valid_Data_In_All_Mandatory_Fields_Role_Applicant": {
+      "first_name_text": "QA Automation First Name Test Role_Applicant",
+      "last_name_text": "Test Last Name Role_Applicant",
+      "email_address_text": "hscrd@health.org",
+      "role_checkbox": ["Applicant"]
+    },
+    "Valid_Data_In_All_Mandatory_Fields_Role_Applicant_Another": {
+      "first_name_text": "QA Automation First Name Test Role_Applicant_Another",
+      "last_name_text": "Test Last Name Role_Applicant_Another",
+      "email_address_text": "hscrd@health.org",
+      "role_checkbox": ["Applicant"]
+    },
+    "Valid_Data_In_All_Fields_Role_Team_Manager_Studywide_Reviewer": {
+      "title_text": "Mr",
+      "first_name_text": "QA Automation First Name Test Role_Team_Manager_Studywide_Reviewer",
+      "last_name_text": "Test Last Name Role_Team_Manager_Studywide_Reviewer",
+      "email_address_text": "hscrd@health.org",
+      "telephone_text": "07000000000",
+      "organisation_text": "QA Automation HRA Role_Team_Manager_Studywide_Reviewer",
+      "job_title_text": "Sr.Reviewer Role_Team_Manager_Studywide_Reviewer",
+      "role_checkbox": ["Study-wide reviewer", "Team manager"],
       "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
-      "access_required_checkbox": ["Study wide review", "Research ethics committee", "CAG", "Technical assurance"]
+      "review_body_checkbox": ["QA Automation Health and Social Care Northern Ireland (HSCNI)"]
     },
-    "Valid_Data_In_All_Mandatory_Fields_Role_Operations": {
-      "first_name_text": "QA Automation First Name Test Role_Operations",
-      "last_name_text": "Test Last Name Role_Operations",
+    "Valid_Data_In_All_Fields_Role_Team_Manager_Studywide_Reviewer_Another": {
+      "title_text": "Mr",
+      "first_name_text": "QA Automation First Name Test Role_Team_Manager_Studywide_Reviewer_Another",
+      "last_name_text": "Test Last Name Role_Team_Manager_Studywide_Reviewer_Another",
       "email_address_text": "hscrd@health.org",
-      "role_checkbox": ["Operations"],
+      "telephone_text": "07000000000",
+      "organisation_text": "QA Automation HRA Role_Team_Manager_Studywide_Reviewer_Another",
+      "job_title_text": "Sr.Reviewer Role_Team_Manager_Studywide_Reviewer_Another",
+      "role_checkbox": ["Study-wide reviewer", "Team manager"],
       "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
-      "access_required_checkbox": ["Study wide review", "Research ethics committee", "CAG", "Technical assurance"]
+      "review_body_checkbox": ["QA Automation Health and Social Care Northern Ireland (HSCNI)"]
     },
-    "Valid_Data_In_All_Mandatory_Fields_Role_Operations_Another": {
-      "first_name_text": "QA Automation First Name Test Role_Operations_Another",
-      "last_name_text": "Test Last Name Role_Operations_Another",
+    "Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_Studywide_Reviewer": {
+      "first_name_text": "QA Automation First Name Test Role_Team_Manager_Studywide_Reviewer",
+      "last_name_text": "Test Last Name Role_Team_Manager_Studywide_Reviewer",
       "email_address_text": "hscrd@health.org",
-      "role_checkbox": ["Operations"],
-      "country_checkbox": ["England"],
-      "access_required_checkbox": ["Research ethics committee"]
+      "role_checkbox": ["Study-wide reviewer", "Team manager"],
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "review_body_checkbox": ["QA Automation Health and Social Care Northern Ireland (HSCNI)"]
     },
-    "Valid_Data_In_All_Fields_Role_Reviewer": {
+    "Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_Studywide_Reviewer_Another": {
+      "first_name_text": "QA Automation First Name Test Role_Team_Manager_Studywide_Reviewer_Another",
+      "last_name_text": "Test Last Name Role_Team_Manager_Studywide_Reviewer_Another",
+      "email_address_text": "hscrd@health.org",
+      "role_checkbox": ["Study-wide reviewer", "Team manager"],
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "review_body_checkbox": ["QA Automation Health and Social Care Northern Ireland (HSCNI)"]
+    },
+    "Valid_Data_In_All_Fields_Role_Team_Manager_Workflow_Coordinator": {
       "title_text": "Mr",
-      "first_name_text": "QA Automation First Name Test Role_Reviewer",
-      "last_name_text": "Test Last Name Role_Reviewer",
+      "first_name_text": "QA Automation First Name Test Role_Team_Manager_Workflow_Coordinator",
+      "last_name_text": "Test Last Name Role_Team_Manager_StRole_Team_Manager_Workflow_Coordinatorudywide_Reviewer",
       "email_address_text": "hscrd@health.org",
       "telephone_text": "07000000000",
-      "organisation_text": "QA Automation HRA Role_Reviewer",
-      "job_title_text": "Sr.Reviewer Role_Reviewer",
-      "role_checkbox": ["Reviewer", "System administrator"]
+      "organisation_text": "QA Automation HRA Role_Team_Manager_Workflow_Coordinator",
+      "job_title_text": "Sr.Reviewer Role_Team_Manager_Workflow_Coordinator",
+      "role_checkbox": ["Team manager", "Workflow co-ordinator"],
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "review_body_checkbox": ["QA Automation Health and Social Care Northern Ireland (HSCNI)"]
     },
-    "Valid_Data_In_All_Mandatory_Fields_Role_Reviewer": {
-      "first_name_text": "QA Automation First Name Test Role_Operations",
-      "last_name_text": "Test Last Name Role_Operations",
-      "email_address_text": "hscrd@health.org",
-      "role_checkbox": ["Reviewer"]
-    },
-    "Valid_Data_In_All_Mandatory_Fields_Role_Reviewer_Another": {
-      "first_name_text": "QA Automation First Name Test Role_Operations_Another",
-      "last_name_text": "Test Last Name Role_Operations_Another",
-      "email_address_text": "hscrd@health.org",
-      "role_checkbox": ["Reviewer"]
-    },
-    "Valid_Data_In_All_Fields_Role_Operations_Another": {
+    "Valid_Data_In_All_Fields_Role_Team_Manager_Workflow_Coordinator_Another": {
       "title_text": "Mr",
-      "first_name_text": "QA Automation First Name Test Role_Operations_Another",
-      "last_name_text": "Test Last Name Role_Operations_Another",
+      "first_name_text": "QA Automation First Name Test Role_Team_Manager_Workflow_Coordinator_Another",
+      "last_name_text": "Test Last Name Role_Team_Manager_Workflow_Coordinator_Another",
       "email_address_text": "hscrd@health.org",
       "telephone_text": "07000000000",
-      "organisation_text": "QA Automation HRA Role_Operations_Another",
-      "job_title_text": "Sr.Reviewer Role_Operations_Another",
-      "role_checkbox": ["Operations", "User"],
-      "country_checkbox": ["England", "Scotland"],
-      "access_required_checkbox": ["Research ethics committee", "CAG"]
+      "organisation_text": "QA Automation HRA Role_Team_Manager_Workflow_Coordinator_Another",
+      "job_title_text": "Sr.Reviewer Role_Team_Manager_Workflow_Coordinator_Another",
+      "role_checkbox": ["Team manager", "Workflow co-ordinator"],
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "review_body_checkbox": ["QA Automation Health and Social Care Northern Ireland (HSCNI)"]
     },
-    "Valid_Data_In_All_Fields_Role_Reviewer_Another": {
+    "Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_Workflow_Coordinator": {
+      "first_name_text": "QA Automation First Name Test Role_Team_Manager_Workflow_Coordinator",
+      "last_name_text": "Test Last Name Role_Team_Manager_Workflow_Coordinator",
+      "email_address_text": "hscrd@health.org",
+      "role_checkbox": ["Team manager", "Workflow co-ordinator"],
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "review_body_checkbox": ["QA Automation Health and Social Care Northern Ireland (HSCNI)"]
+    },
+    "Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_Workflow_Coordinator_Another": {
+      "first_name_text": "QA Automation First Name Test Role_Team_Manager_Workflow_Coordinator_Another",
+      "last_name_text": "Test Last Name Role_Team_Manager_Workflow_Coordinator_Another",
+      "email_address_text": "hscrd@health.org",
+      "role_checkbox": ["Team manager", "Workflow co-ordinator"],
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "review_body_checkbox": ["QA Automation Health and Social Care Northern Ireland (HSCNI)"]
+    },
+    "Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Workflow_Coordinator": {
       "title_text": "Mr",
-      "first_name_text": "QA Automation First Name Test Role_Reviewer_Another",
-      "last_name_text": "Test Last Name Role_Reviewer_Another",
+      "first_name_text": "QA Automation First Name Test Role_Studywide_Reviewer_Workflow_Coordinator",
+      "last_name_text": "Test Last Name Role_Studywide_Reviewer_Workflow_Coordinator",
       "email_address_text": "hscrd@health.org",
       "telephone_text": "07000000000",
-      "organisation_text": "QA Automation HRA Role_Reviewer_Another",
-      "job_title_text": "Sr.Reviewer Role_Reviewer_Another",
-      "role_checkbox": ["Reviewer", "User"]
+      "organisation_text": "QA Automation HRA Role_Studywide_Reviewer_Workflow_Coordinator",
+      "job_title_text": "Sr.Reviewer Role_Studywide_Reviewer_Workflow_Coordinator",
+      "role_checkbox": ["Study-wide reviewer", "Workflow co-ordinator"],
+      "review_body_checkbox": ["QA Automation Health and Social Care Northern Ireland (HSCNI)"]
+    },
+    "Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Workflow_Coordinator_Another": {
+      "title_text": "Mr",
+      "first_name_text": "QA Automation First Name Test Role_Studywide_Reviewer_Workflow_Coordinator_Another",
+      "last_name_text": "Test Last Name Role_Studywide_Reviewer_Workflow_Coordinator_Another",
+      "email_address_text": "hscrd@health.org",
+      "telephone_text": "07000000000",
+      "organisation_text": "QA Automation HRA Role_Studywide_Reviewer_Workflow_Coordinator_Another",
+      "job_title_text": "Sr.Reviewer Role_Studywide_Reviewer_Workflow_Coordinator_Another",
+      "role_checkbox": ["Study-wide reviewer", "Workflow co-ordinator"],
+      "review_body_checkbox": ["QA Automation Health and Social Care Northern Ireland (HSCNI)"]
+    },
+    "Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer_Workflow_Coordinator": {
+      "first_name_text": "QA Automation First Name Test Role_Studywide_Reviewer_Workflow_Coordinator",
+      "last_name_text": "Test Last Name Role_Studywide_Reviewer_Workflow_Coordinator",
+      "email_address_text": "hscrd@health.org",
+      "role_checkbox": ["Study-wide reviewer", "Workflow co-ordinator"],
+      "review_body_checkbox": ["QA Automation Health and Social Care Northern Ireland (HSCNI)"]
+    },
+    "Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer_Workflow_Coordinator_Another": {
+      "first_name_text": "QA Automation First Name Test Role_Studywide_Reviewer_Workflow_Coordinator_Another",
+      "last_name_text": "Test Last Name Role_Studywide_Reviewer_Workflow_Coordinator_Another",
+      "email_address_text": "hscrd@health.org",
+      "role_checkbox": ["Study-wide reviewer", "Workflow co-ordinator"],
+      "review_body_checkbox": ["QA Automation Health and Social Care Northern Ireland (HSCNI)"]
+    },
+    "Valid_Data_In_All_Fields_Role_Team_Manager_System_Administrator": {
+      "title_text": "Mr",
+      "first_name_text": "QA Automation First Name Test Role_Team_Manager_System_Administrator",
+      "last_name_text": "Test Last Name Role_Team_Manager_System_Administrator",
+      "email_address_text": "hscrd@health.org",
+      "telephone_text": "07000000000",
+      "organisation_text": "QA Automation HRA Role_Team_Manager_System_Administrator",
+      "job_title_text": "Sr.Reviewer Role_Team_Manager_System_Administrator",
+      "role_checkbox": ["System administrator", "Team manager"],
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
+    },
+    "Valid_Data_In_All_Fields_Role_Team_Manager_System_Administrator_Another": {
+      "title_text": "Mr",
+      "first_name_text": "QA Automation First Name Test Role_Team_Manager_System_Administrator_Another",
+      "last_name_text": "Test Last Name Role_Team_Manager_System_Administrator_Another",
+      "email_address_text": "hscrd@health.org",
+      "telephone_text": "07000000000",
+      "organisation_text": "QA Automation HRA Role_Team_Manager_System_Administrator_Another",
+      "job_title_text": "Sr.Reviewer Role_Team_Manager_System_Administrator_Another",
+      "role_checkbox": ["System administrator", "Team manager"],
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
+    },
+    "Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_System_Administrator": {
+      "first_name_text": "QA Automation First Name Test Role_Team_Manager_System_Administrator",
+      "last_name_text": "Test Last Name Role_Team_Manager_System_Administrator",
+      "email_address_text": "hscrd@health.org",
+      "role_checkbox": ["System administrator", "Team manager"],
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
+    },
+    "Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_System_Administrator_Another": {
+      "first_name_text": "QA Automation First Name Test Role_Team_Manager_System_Administrator_Another",
+      "last_name_text": "Test Last Name Role_Team_Manager_System_Administrator_Another",
+      "email_address_text": "hscrd@health.org",
+      "role_checkbox": ["System administrator", "Team manager"],
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
     },
     "Valid_Data_All_Roles": {
       "title_text": "Mr",
@@ -170,9 +437,15 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_All",
       "job_title_text": "Sr.Reviewer Role_All",
-      "role_checkbox": ["Operations", "Reviewer", "User", "System administrator"],
+      "role_checkbox": [
+        "Applicant",
+        "Study-wide reviewer",
+        "System administrator",
+        "Team manager",
+        "Workflow co-ordinator"
+      ],
       "country_checkbox": ["Wales"],
-      "access_required_checkbox": ["Research ethics committee"]
+      "review_body_checkbox": ["QA Automation Health and Care Research Wales (HCRW)"]
     },
     "Valid_Data_No_Roles": {
       "title_text": "Mr",
@@ -188,7 +461,17 @@
       "last_name_text": "Test Last Name",
       "email_address_text": "hscrd@health.org"
     },
-    "Valid_Email_Underscore": {
+    "Valid_Email_Data_Dot": {
+      "first_name_text": "First Name Test john.doe",
+      "last_name_text": "Test Last Name john.doe",
+      "email_address_text": "john.doe@example.com"
+    },
+    "Valid_Email_Data_Number": {
+      "first_name_text": "First Name Test Johndoe2",
+      "last_name_text": "Test Last Name Johndoe2",
+      "email_address_text": "Johndoe2@example.com"
+    },
+    "Valid_Email_Data_Underscore": {
       "first_name_text": "First Name Test john_doe",
       "last_name_text": "Test Last Name john_doe",
       "email_address_text": "john_doe@example.com"
@@ -258,11 +541,6 @@
       "last_name_text": "Test Last Name john^caret",
       "email_address_text": "john^caret@example.com"
     },
-    "Valid_Email_Data_Right_Single_Quote": {
-      "first_name_text": "First Name Test john`code",
-      "last_name_text": "Test Last Name john`code",
-      "email_address_text": "john`code@example.com"
-    },
     "Valid_Email_Data_Curly_Brackets": {
       "first_name_text": "First Name Test john{editor}",
       "last_name_text": "Test Last Name john{editor}",
@@ -278,80 +556,74 @@
       "last_name_text": "Test Last Name john~tilde",
       "email_address_text": "john~tilde@example.com"
     },
-    "Valid_Email_Data_Unicode": {
-      "first_name_text": "First Name Test johñ",
-      "last_name_text": "Test Last Name johñ.unicode",
-      "email_address_text": "johñ.unicode@example.com"
-    },
     "Valid_Email_Data_Special_Characters": {
       "first_name_text": "First Name Test john!#$%&'*+-/=?^_`{|}",
       "last_name_text": "Test Last Name +-/=?^_`{|}~doe",
       "email_address_text": "john!#$%&'*+-/=?^_`{|}~doe@example.com"
     },
-    "Valid_Email_Data_Hyphen_Underscore": {
-      "first_name_text": "First Name Test john-",
-      "last_name_text": "Test Last Name _doe",
-      "email_address_text": "john-_doe@example.com"
-    },
-    "Valid_Email_Data_Multiple_Unicode": {
-      "first_name_text": "First Name Test johñ",
-      "last_name_text": "Test Last Name döe",
-      "email_address_text": "johñ.döe@example.com"
-    },
     "Valid_Email_Data_Multiple_Sub_Domains": {
       "first_name_text": "First Name Test",
       "last_name_text": "Test Last Name",
-      "email_address_text": "mail.sub.subsub.sub.example.com"
+      "email_address_text": "john.doe@email.sub.sub.example.com"
     },
     "Valid_Email_Data_Domain": {
       "first_name_text": "First Name Test john.doe",
       "last_name_text": "Test Last Name john.doe",
       "email_address_text": "john.doe@example.photography"
     },
-    "Valid_Email_Data_Other_Language": {
-      "first_name_text": "First Name Test",
-      "last_name_text": "Test Last Name",
-      "email_address_text": "john@example.भारत"
-    },
-    "Valid_Email_Data_Number": {
-      "first_name_text": "First Name Test Johndoe2",
-      "last_name_text": "Test Last Name Johndoe2",
-      "email_address_text": "Johndoe2@example.com"
-    },
-    "Duplicate_Email_Role_Operations": {
+    "Duplicate_Email_Role_SWR_TM_WFC": {
       "title_text": "Mr",
-      "first_name_text": "QA Automation First Name Test Role_Operations",
-      "last_name_text": "Test Last Name Role_Operations",
+      "first_name_text": "QA Automation First Name Test Role_SWR_TM_WFC",
+      "last_name_text": "Test Last Name Role_SWR_TM_WFC",
       "email_address_text": "",
       "telephone_text": "07000000000",
-      "organisation_text": "QA Automation HRA Role_Operations",
-      "job_title_text": "Sr.Reviewer Role_Operations",
-      "role_checkbox": ["Operations", "System administrator"],
+      "organisation_text": "QA Automation HRA Role_SWR_TM_WFC",
+      "job_title_text": "Sr.Reviewer Role_SWR_TM_WFC",
+      "role_checkbox": ["Study-wide reviewer", "Team manager", "Workflow co-ordinator"],
       "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
-      "access_required_checkbox": ["Study wide review", "Research ethics committee", "CAG", "Technical assurance"]
+      "review_body_checkbox": ["QA Automation Health and Social Care Northern Ireland (HSCNI)"]
     },
-    "Duplicate_Email_Role_Not_Operations": {
+    "Duplicate_Email_Role_Applicant_System_Admin": {
       "title_text": "Mr",
-      "first_name_text": "QA Automation First Name Test Role_Operations",
-      "last_name_text": "Test Last Name Role_Operations",
+      "first_name_text": "QA Automation First Name Test Role_Applicant_System_Admin",
+      "last_name_text": "Test Last Name Role_Applicant_System_Admin",
       "email_address_text": "",
       "telephone_text": "07000000000",
-      "organisation_text": "QA Automation HRA Role_Operations",
-      "job_title_text": "Sr.Reviewer Role_Operations",
+      "organisation_text": "QA Automation HRA Role_Applicant_System_Admin",
+      "job_title_text": "Sr.Reviewer Role_Applicant_System_Admin",
+      "role_checkbox": ["Applicant", "System administrator"]
+    },
+    "Missing_Mandatory_Fields_Role_Applicant": {
+      "first_name_text": "",
+      "last_name_text": "",
+      "email_address_text": "",
+      "role_checkbox": ["Applicant"]
+    },
+    "Missing_Mandatory_Fields_Role_System_Administrator": {
+      "first_name_text": "",
+      "last_name_text": "",
+      "email_address_text": "",
       "role_checkbox": ["System administrator"]
     },
-    "Missing_Mandatory_Fields_Role_Not_Operations": {
-      "first_name_text": "",
-      "last_name_text": "",
-      "email_address_text": ""
-    },
-    "Missing_Mandatory_Fields_Role_Operations": {
+    "Missing_Mandatory_Fields_Role_Team_Manager": {
       "first_name_text": "",
       "last_name_text": "",
       "email_address_text": "",
-      "role_checkbox": ["Operations"]
+      "role_checkbox": ["Team manager"]
     },
-    "Missing_Mandatory_Field_First_Name_Role_Not_Operations": {
+    "Missing_Mandatory_Fields_Role_Studywide_Reviewer": {
+      "first_name_text": "",
+      "last_name_text": "",
+      "email_address_text": "",
+      "role_checkbox": ["Study-wide reviewer"]
+    },
+    "Missing_Mandatory_Fields_Role_Workflow_Coordinator": {
+      "first_name_text": "",
+      "last_name_text": "",
+      "email_address_text": "",
+      "role_checkbox": ["Workflow co-ordinator"]
+    },
+    "Missing_Mandatory_Field_First_Name_Role_Applicant_System_Administrator": {
       "title_text": "Mr",
       "first_name_text": "",
       "last_name_text": "Test Last Name Role_Reviewer",
@@ -359,9 +631,9 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Reviewer",
       "job_title_text": "Sr.Reviewer Role_Reviewer",
-      "role_checkbox": ["Reviewer", "System administrator"]
+      "role_checkbox": ["Applicant", "System administrator"]
     },
-    "Missing_Mandatory_Field_Last_Name_Role_Not_Operations": {
+    "Missing_Mandatory_Field_Last_Name_Role_Applicant_System_Administrator": {
       "title_text": "Mr",
       "first_name_text": "Test First Name Role_Reviewer",
       "last_name_text": "",
@@ -369,9 +641,9 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Reviewer",
       "job_title_text": "Sr.Reviewer Role_Reviewer",
-      "role_checkbox": ["Reviewer", "System administrator"]
+      "role_checkbox": ["Applicant", "System administrator"]
     },
-    "Missing_Mandatory_Field_Email_Address_Role_Not_Operations": {
+    "Missing_Mandatory_Field_Email_Address_Role_Applicant_System_Administrator": {
       "title_text": "Mr",
       "first_name_text": "Test First Name Role_Reviewer",
       "last_name_text": "Test Last Name Role_Reviewer",
@@ -379,9 +651,9 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Reviewer",
       "job_title_text": "Sr.Reviewer Role_Reviewer",
-      "role_checkbox": ["Reviewer", "System administrator"]
+      "role_checkbox": ["Applicant", "System administrator"]
     },
-    "Missing_Mandatory_Field_Country_Role_Operations": {
+    "Missing_Mandatory_Field_Country_Role_Team_Manager": {
       "title_text": "Mr",
       "first_name_text": "Test First Name Role_Reviewer",
       "last_name_text": "Test Last Name Role_Reviewer",
@@ -389,10 +661,9 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Reviewer",
       "job_title_text": "Sr.Reviewer Role_Reviewer",
-      "role_checkbox": ["Operations"],
-      "access_required_checkbox": ["Research ethics committee", "CAG"]
+      "role_checkbox": ["Team manager"]
     },
-    "Missing_Mandatory_Field_Access_Required_Role_Operations": {
+    "Missing_Mandatory_Field_Review_Body_Role_Studywide_Reviewer": {
       "title_text": "Mr",
       "first_name_text": "Test First Name Role_Reviewer",
       "last_name_text": "Test Last Name Role_Reviewer",
@@ -400,148 +671,51 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Reviewer",
       "job_title_text": "Sr.Reviewer Role_Reviewer",
-      "role_checkbox": ["Operations"],
-      "country_checkbox": ["England", "Scotland"]
+      "role_checkbox": ["Study-wide reviewer"]
+    },
+    "Missing_Mandatory_Field_Review_Body_Role_Workflow_Coordinator": {
+      "title_text": "Mr",
+      "first_name_text": "Test First Name Role_Reviewer",
+      "last_name_text": "Test Last Name Role_Reviewer",
+      "email_address_text": "hscrd@health.org",
+      "telephone_text": "07000000000",
+      "organisation_text": "QA Automation HRA Role_Reviewer",
+      "job_title_text": "Sr.Reviewer Role_Reviewer",
+      "role_checkbox": ["Workflow co-ordinator"]
     },
     "Invalid_Character_Limit": {
       "title_text": "johñ.döeExploring the Intricacies of Advanced Quantum Computing: Unveiling the Potential of Quantum Algorithms, Quantum Cryptography, and Quantum Machine Learning in Revolutionizing Technology and Shaping the Future of Computational Science and Engineering Morethan250chars",
       "first_name_text": "johñ.döeAelianaSophiaIsabellaGabriellaAlexandriaSeraphinaValentinaAnastasiaEvangelineArabellaCassandraJulianaEmmanuellaTheodosiaChristabellaMariabellaRosabellaViolettaAngelinaSerenellaElizabellaMarcellinaMirabellaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx Morethan250chars",
       "last_name_text": "johñ.döeAelianaSophiaIsabellaGabriellaAlexandriaSeraphinaValentinaAnastasiaEvangelineArabellaCassandraJulianaEmmanuellaTheodosiaChristabellaMariabellaRosabellaViolettaAngelinaSerenellaElizabellaMarcellinaMirabellaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx Morethan250charss",
-      "email_address_text": "EmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExcee@example.com",
+      "email_address_text": "hscrd@health.org",
       "telephone_text": "012345678901",
       "organisation_text": "AelianaSophiaIsabellaGabriellaAlexandriaSeraphinaValentinaAnastasiaEvangelineArabellaCassandraJulianaEmmanuellaTheodosiaChristabellaMariabellaRosabellaViolettaAngelinaSerenellaElizabellaMarcellinaMirabellaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx Morethan250chars",
       "job_title_text": "AelianaSophiaIsabellaGabriellaAlexandriaSeraphinaValentinaAnastasiaEvangelineArabellaCassandraJulianaEmmanuellaTheodosiaChristabellaMariabellaRosabellaViolettaAngelinaSerenellaElizabellaMarcellinaMirabellaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx Morethan250chars"
     },
-    "Incorrect_Format_Email": {
-      "first_name_text": "Test First Name Role_Reviewer",
-      "last_name_text": "Test Last Name Role_Reviewer",
-      "email_address_text": "O(*()*(*()"
-    },
-    "Invalid_Email_Data_Start_With_Dot": {
+    "Invalid_Email_Data_Leading_Dot": {
       "first_name_text": "Test First Name Role_Reviewer",
       "last_name_text": "Test Last Name Role_Reviewer",
       "email_address_text": ".john@example.com"
+    },
+    "Invalid_Email_Data_Trailing_Dot": {
+      "first_name_text": "Test First Name Role_Reviewer",
+      "last_name_text": "Test Last Name Role_Reviewer",
+      "email_address_text": "john.@example.com"
     },
     "Invalid_Email_Data_Double_Dot": {
       "first_name_text": "Test First Name Role_Reviewer",
       "last_name_text": "Test Last Name Role_Reviewer",
       "email_address_text": "john..doe@example.com"
     },
-    "Invalid_Email_Data_Space": {
+    "Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour": {
       "first_name_text": "Test First Name Role_Reviewer",
       "last_name_text": "Test Last Name Role_Reviewer",
-      "email_address_text": "john doe@example.com"
-    },
-    "Invalid_Email_Data_Wrong_AT": {
-      "first_name_text": "Test First Name Role_Reviewer",
-      "last_name_text": "Test Last Name Role_Reviewer",
-      "email_address_text": "john[at]example.",
-      "sponsor_contact_email_text": "john[at]example."
-    },
-    "Invalid_Email_Data_Less_Greater_Symbols": {
-      "first_name_text": "Test First Name Role_Reviewer",
-      "last_name_text": "Test Last Name Role_Reviewer",
-      "email_address_text": "john<doe>@example.com"
-    },
-    "Invalid_Email_Data_Colon": {
-      "first_name_text": "Test First Name Role_Reviewer",
-      "last_name_text": "Test Last Name Role_Reviewer",
-      "email_address_text": "john:doe@example.com"
-    },
-    "Invalid_Email_Data_Semi_Colon": {
-      "first_name_text": "Test First Name Role_Reviewer",
-      "last_name_text": "Test Last Name Role_Reviewer",
-      "email_address_text": "john;doe@example.com"
-    },
-    "Invalid_Email_Data_Comma": {
-      "first_name_text": "Test First Name Role_Reviewer",
-      "last_name_text": "Test Last Name Role_Reviewer",
-      "email_address_text": "john,@example.com"
-    },
-    "Invalid_Email_Data_Start_With_Hyphen": {
-      "first_name_text": "Test First Name Role_Reviewer",
-      "last_name_text": "Test Last Name Role_Reviewer",
-      "email_address_text": "-john@example.com"
-    },
-    "Invalid_Email_Data_Hyphen_Before_Domain": {
-      "first_name_text": "Test First Name Role_Reviewer",
-      "last_name_text": "Test Last Name Role_Reviewer",
-      "email_address_text": "john@example-.com"
-    },
-    "Invalid_Email_Data_Double_Dot_Domain": {
-      "first_name_text": "Test First Name Role_Reviewer",
-      "last_name_text": "Test Last Name Role_Reviewer",
-      "email_address_text": "john.@example..com"
-    },
-    "Invalid_Email_Data_Exclamation_Domain": {
-      "first_name_text": "Test First Name Role_Reviewer",
-      "last_name_text": "Test Last Name Role_Reviewer",
-      "email_address_text": "john!doe@exa!mple.com"
-    },
-    "Invalid_Email_Data_Unicode": {
-      "first_name_text": "Test First Name Role_Reviewer",
-      "last_name_text": "Test Last Name Role_Reviewer",
-      "email_address_text": "johñ@example.com"
-    },
-    "Invalid_Email_Data_Single_Quote_Before_AT": {
-      "first_name_text": "Test First Name Role_Reviewer",
-      "last_name_text": "Test Last Name Role_Reviewer",
-      "email_address_text": "john.doe'@example.com"
-    },
-    "Invalid_Email_Data_Domain_Exceed_Max": {
-      "first_name_text": "Test First Name Role_Reviewer",
-      "last_name_text": "Test Last Name Role_Reviewer",
-      "email_address_text": "averyveryverylongdomainnamewithmanysubdomainsandmorecharacters.com"
-    },
-    "Invalid_Email_Data_Local_Part_Max": {
-      "first_name_text": "Test First Name Role_Reviewer",
-      "last_name_text": "Test Last Name Role_Reviewer",
-      "email_address_text": "averyveryverylongemailaddressthatexceedscharacters@example.com"
-    },
-    "Invalid_Email_Data_Consecutive_Dot_Domain": {
-      "first_name_text": "Test First Name Role_Reviewer",
-      "last_name_text": "Test Last Name Role_Reviewer",
-      "email_address_text": "john@example..com"
-    },
-    "Invalid_Email_Data_Consecutive_Dot_SubDomain": {
-      "first_name_text": "Test First Name Role_Reviewer",
-      "last_name_text": "Test Last Name Role_Reviewer",
-      "email_address_text": "mail..sub.example.com"
-    },
-    "Invalid_Email_Data_Consecutiv_Dot_Domain_SubDomain": {
-      "first_name_text": "Test First Name Role_Reviewer",
-      "last_name_text": "Test Last Name Role_Reviewer",
-      "email_address_text": "john..doe'@example..com"
-    },
-    "Invalid_Email_Data_Emoji": {
-      "first_name_text": "Test First Name Role_Reviewer",
-      "last_name_text": "Test Last Name Role_Reviewer",
-      "email_address_text": "john🙂@example.com"
-    },
-    "Invalid_Email_Data_TLD": {
-      "first_name_text": "Test First Name Role_Reviewer",
-      "last_name_text": "Test Last Name Role_Reviewer",
-      "email_address_text": "john.doe@example.1234"
-    },
-    "Invalid_Email_Data_Missing_AT": {
-      "first_name_text": "Test First Name Role_Reviewer",
-      "last_name_text": "Test Last Name Role_Reviewer",
-      "email_address_text": "john.doeexample.com"
+      "email_address_text": "DomainThatExceeds64CharactersDomainThatExceeds64CharactersDomainT@DomainThatExceeds64Characters.com"
     },
     "Invalid_Email_Data_Reserved_Domain": {
       "first_name_text": "Test First Name Role_Reviewer",
       "last_name_text": "Test Last Name Role_Reviewer",
       "email_address_text": "john.doe@localhost"
-    },
-    "Invalid_Email_Data_Punycode": {
-      "first_name_text": "Test First Name Role_Reviewer",
-      "last_name_text": "Test Last Name Role_Reviewer",
-      "email_address_text": "john@example.xn--mgbh0fb"
-    },
-    "Invalid_Email_Data_Max_Char": {
-      "first_name_text": "Test First Name Role_Reviewer",
-      "last_name_text": "Test Last Name Role_Reviewer",
-      "email_address_text": "EmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExcee@example.com"
     },
     "Incorrect_Format_Telephone_Data": {
       "first_name_text": "First Name Test",
