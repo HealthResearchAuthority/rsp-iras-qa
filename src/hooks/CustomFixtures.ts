@@ -59,6 +59,7 @@ import AffectedOrganisationQuestionsPage from '../pages/IRAS/makeChanges/modific
 import ReviewChangesPlannedEndDatePage from '../pages/IRAS/makeChanges/modifications/changePlannedEndDate/ReviewChangesPlannedEndDatePage';
 import AddDocumentsModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/AddDocumentsModificationsPage';
 import ReviewUploadedDocumentsModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/ReviewUploadedDocumentsModificationsPage';
+import AddDocumentDetailsModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/AddDocumentDetailsModificationsPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -119,6 +120,7 @@ type CustomFixtures = {
   reviewChangesPlannedEndDatePage: ReviewChangesPlannedEndDatePage;
   addDocumentsModificationsPage: AddDocumentsModificationsPage;
   reviewUploadedDocumentsModificationsPage: ReviewUploadedDocumentsModificationsPage;
+  addDocumentDetailsModificationsPage: AddDocumentDetailsModificationsPage;
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -352,6 +354,10 @@ export const test = base.extend<CustomFixtures>({
 
   reviewUploadedDocumentsModificationsPage: async ({ page }, use) => {
     await use(new ReviewUploadedDocumentsModificationsPage(page));
+  },
+
+  addDocumentDetailsModificationsPage: async ({ page }, use) => {
+    await use(new AddDocumentDetailsModificationsPage(page));
   },
 
   makeAxeBuilder: async ({ page }, use) => {
