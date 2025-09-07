@@ -81,12 +81,8 @@ Then(
       dataset['role_checkbox'].includes('Workflow co-ordinator') ||
       selectedCheckboxCount > 0
     ) {
-      await commonItemsPage.clearCheckboxes(
-        dataset,
-        ['country_checkbox', 'review_body_checkbox'],
-        commonItemsPage,
-        createUserProfilePage
-      );
+      await commonItemsPage.clearUIComponent(dataset, 'country_checkbox', createUserProfilePage);
+      await commonItemsPage.clearReviewBodyCheckboxCreateUser(dataset, createUserProfilePage);
       await commonItemsPage.clearUIComponent(dataset, 'role_checkbox', createUserProfilePage);
     }
   }
@@ -116,13 +112,17 @@ Then(
   'I can see previously filled values in the new user profile page for {string} displayed on the add a new user profile page',
   async ({ createUserProfilePage }, datasetName: string) => {
     const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
+    let fieldValActual: string | boolean;
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        const fieldValActual: string | boolean = await createUserProfilePage.getSelectedValuesCreateUser(
-          dataset,
-          key,
-          createUserProfilePage
-        );
+        if (key === 'review_body_checkbox') {
+          fieldValActual = await createUserProfilePage.getSelectedCheckboxCreateUserReviewBody(
+            dataset,
+            createUserProfilePage
+          );
+        } else {
+          fieldValActual = await createUserProfilePage.getSelectedValuesCreateUser(dataset, key, createUserProfilePage);
+        }
         if (typeof fieldValActual == 'string') {
           if (key === 'email_address_text') {
             const data = await returnDataFromJSON();

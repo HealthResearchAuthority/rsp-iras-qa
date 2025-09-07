@@ -170,7 +170,6 @@ When(
 
 Then(
   'I uncheck the previously selected checkboxes on the edit user profile page for {string} when the role is selected as study-wide reviewer or team manager or workflow co-ordinator',
-  'I uncheck the previously selected checkboxes on the edit user profile page for {string} when the role is selected as study-wide reviewer or team manager or workflow co-ordinator',
   async ({ userProfilePage, editUserProfilePage, commonItemsPage }, datasetName: string) => {
     const dataset = editUserProfilePage.editUserProfilePageTestData.Edit_User_Profile[datasetName];
     const roleValue = (await userProfilePage.getRole()).join(', ');
@@ -184,7 +183,7 @@ Then(
       dataset['role_checkbox'].includes('Workflow co-ordinator') ||
       selectedCheckboxCount > 0
     ) {
-      await commonItemsPage.clearCheckboxes(dataset, ['country_checkbox'], commonItemsPage, editUserProfilePage);
+      await commonItemsPage.clearUIComponent(dataset, 'country_checkbox', editUserProfilePage);
       await commonItemsPage.clearCheckboxesUserProfileReviewBody(dataset, editUserProfilePage);
       await commonItemsPage.clearUIComponent(dataset, 'role_checkbox', editUserProfilePage);
     }

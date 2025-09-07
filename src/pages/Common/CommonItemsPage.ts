@@ -847,15 +847,6 @@ export default class CommonItemsPage {
     return results.filter((result) => terms.every((term) => result.toLowerCase().includes(term.toLowerCase())));
   }
 
-  async clearCheckboxes(dataset: any, keys: string[], commonItemsPage: any, createUserProfilePage: any) {
-    for (const key of keys) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        await this.clearUIComponent(dataset, key, createUserProfilePage);
-        await this.clearUIComponent(dataset, key, createUserProfilePage);
-      }
-    }
-  }
-
   async captureLargeSizeScreenshot(page: Page, outputFile: string) {
     const viewportHeight = page.viewportSize()?.height || 800;
     const scrollHeight = await page.evaluate(() => {
@@ -1230,5 +1221,40 @@ export default class CommonItemsPage {
       activeFilterLabel = `${label} - ${dateType} ${dateValue}`;
     }
     return activeFilterLabel;
+  }
+
+  async clearReviewBodyCheckboxCreateUser<PageObject>(dataset: JSON, page: PageObject) {
+    const locator: Locator = page['review_body_checkbox'];
+    const typeAttribute = await locator.first().getAttribute('type');
+    if (typeAttribute === 'checkbox') {
+      for (const checkbox of dataset['review_body_checkbox']) {
+        const checkboxes = await locator.locator('..').getByLabel(checkbox).all();
+        for (const checkbox of checkboxes) {
+          const isChecked = await checkbox.isChecked();
+          if (isChecked) {
+            await checkbox.uncheck();
+          }
+        }
+      }
+    }
+  }
+  async getSelectedCheckboxCreateUserReviewBody<PageObject>(
+    dataset: JSON,
+    page: PageObject
+  ): Promise<string | boolean> {
+    const locator: Locator = page['review_body_checkbox'];
+    const typeAttribute = await locator.first().getAttribute('type');
+    if (typeAttribute === 'checkbox') {
+      for (const checkbox of dataset['review_body_checkbox']) {
+        const checkboxes = await locator.locator('..').getByLabel(checkbox).all();
+        for (const checkbox of checkboxes) {
+          const isChecked = await checkbox.isChecked();
+          if (isChecked) {
+            return true;
+          }
+        }
+      }
+    }
+    return 'No input element found';
   }
 }
