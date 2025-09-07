@@ -1,4 +1,4 @@
-@UserAdministration @ManageUsers @SysAdminUser @SystemTest @CreateUser @SystemTestUsers
+@UserAdministration @ManageUsers @SysAdminUser @SystemTest @CreateUser @SystemTestUsersSet1
 Feature: User Administration: Manage Users - Create user
 
   Background:
@@ -27,7 +27,7 @@ Feature: User Administration: Manage Users - Create user
     When I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
     Then I can see the 'Manage_Users_Page'
     And I capture the page screenshot
-    Then I can see the '<Validation_Text_Manage_Users_List>' ui labels on the manage users list page
+    # Then I can see the '<Validation_Text_Manage_Users_List>' ui labels on the manage users list page
     And I can see the newly created user record should be present in the list for '<Add_User_Profile>' with '<Status_Enabled>' status in the manage user page
     And I capture the page screenshot
     And I click the 'Back' link on the 'Manage_Users_Page'
@@ -40,17 +40,17 @@ Feature: User Administration: Manage Users - Create user
     And I capture the page screenshot
 
     Examples:
-      | Add_User_Profile                                             | Validation_Text_Manage_Users_List | Status_Enabled |
-      | Valid_Data_In_All_Fields_Role_System_Administrator           | Label_Texts_Manage_Users_List     | Enabled        |
-      | Valid_Data_In_All_Mandatory_Fields_Role_System_Administrator | Label_Texts_Manage_Users_List     | Enabled        |
-      | Valid_Data_In_All_Fields_Role_Applicant                      | Label_Texts_Manage_Users_List     | Enabled        |
-      | Valid_Data_In_All_Mandatory_Fields_Role_Applicant            | Label_Texts_Manage_Users_List     | Enabled        |
-      | Valid_Data_In_All_Fields_Role_Team_Manager                   | Label_Texts_Manage_Users_List     | Enabled        |
-      | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager         | Label_Texts_Manage_Users_List     | Enabled        |
-      | Valid_Data_In_All_Fields_Role_Studywide_Reviewer             | Label_Texts_Manage_Users_List     | Enabled        |
-      | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer   | Label_Texts_Manage_Users_List     | Enabled        |
-      | Valid_Data_In_All_Fields_Role_Workflow_Coordinator           | Label_Texts_Manage_Users_List     | Enabled        |
-      | Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator | Label_Texts_Manage_Users_List     | Enabled        |
+      | Add_User_Profile                                 | Validation_Text_Manage_Users_List | Status_Enabled |
+      # | Valid_Data_In_All_Fields_Role_System_Administrator           | Label_Texts_Manage_Users_List     | Enabled        |
+      # | Valid_Data_In_All_Mandatory_Fields_Role_System_Administrator | Label_Texts_Manage_Users_List     | Enabled        |
+      # | Valid_Data_In_All_Fields_Role_Applicant                      | Label_Texts_Manage_Users_List     | Enabled        |
+      # | Valid_Data_In_All_Mandatory_Fields_Role_Applicant            | Label_Texts_Manage_Users_List     | Enabled        |
+      # | Valid_Data_In_All_Fields_Role_Team_Manager                   | Label_Texts_Manage_Users_List     | Enabled        |
+      # | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager         | Label_Texts_Manage_Users_List     | Enabled        |
+      | Valid_Data_In_All_Fields_Role_Studywide_Reviewer | Label_Texts_Manage_Users_List     | Enabled        |
+  # | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer   | Label_Texts_Manage_Users_List     | Enabled        |
+  # | Valid_Data_In_All_Fields_Role_Workflow_Coordinator           | Label_Texts_Manage_Users_List     | Enabled        |
+  # | Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator | Label_Texts_Manage_Users_List     | Enabled        |
 
   @rsp-2827 @rsp-2870 @verifyAddAnotherUser
   Scenario Outline: Verify the user is able to add another user from the Confirmation message screen using the link

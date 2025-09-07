@@ -1,4 +1,4 @@
-@UserAdministration @ManageUsers @SysAdminUser @SystemTest @DisableEnableUser @SystemTestUsers
+@UserAdministration @ManageUsers @SysAdminUser @SystemTest @DisableEnableUser @SystemTestUsersSet2
 Feature: User Administration: Manage Users - Enable / Disable users
 
     Background:
