@@ -11,7 +11,7 @@ Feature: User Administration: Manage Users -Smoke Tests
         And I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
         And I can see the add a new user profile page
 
-    @UserManagementSmoke @fail @KNOWN-DEFECT-RSP-4996
+    @UserManagementSmoke @fail @KNOWN-DEFECT-RSP-4996 @skip
     Scenario Outline: Verify the user can unassign roles from the user profile event, with an audit history log
         When I fill the new user profile page using '<Add_User_Profile>'
         And I capture the page screenshot

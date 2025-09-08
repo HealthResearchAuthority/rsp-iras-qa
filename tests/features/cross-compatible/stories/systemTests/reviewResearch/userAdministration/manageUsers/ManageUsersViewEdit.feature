@@ -153,6 +153,7 @@ Feature: User Administration: Manage user profiles, view and edit user profile
     And I capture the page screenshot
     Then I sequentially navigate through each 'Manage_Users_Page' by clicking on '<Navigation_Method>' from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges
     And I capture the page screenshot
+
     Examples:
       | Navigation_Method |
       | page number       |
@@ -167,6 +168,7 @@ Feature: User Administration: Manage user profiles, view and edit user profile
     And I capture the page screenshot
     Then I sequentially navigate through each 'Manage_Users_Page' by clicking on '<Navigation_Method>' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
     And I capture the page screenshot
+
     Examples:
       | Navigation_Method |
       | page number       |
@@ -272,6 +274,10 @@ Feature: User Administration: Manage user profiles, view and edit user profile
 
   @rsp-4021 @ManageUsersEmailNotEditable
   Scenario Outline: Verify the user is not able to edit the email address
+    When I enter 'Existing_QA_Automation_User_First_Name' into the search field for manage users page
+    And I select advanced filters in the manage users page using 'Advanced_Filter_Status_Active'
+    And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
+    And I capture the page screenshot
     And I select a 'QA Automation' User to View and Edit which is 'active'
     And I can see the user profile page
     And I validate change link is not displayed for '<Field_Name_One>'
