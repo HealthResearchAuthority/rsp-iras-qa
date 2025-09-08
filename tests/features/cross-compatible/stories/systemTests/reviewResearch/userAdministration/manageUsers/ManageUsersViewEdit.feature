@@ -211,7 +211,6 @@ Feature: User Administration: Manage user profiles, view and edit user profile
     And I capture the page screenshot
     And I click the 'Search' button on the 'Manage_Users_Page'
     And I capture the page screenshot
-    # Then the system displays no results found message if there is no 'user' on the system that matches the search criteria
     Then the search displays no matching results
     And I capture the page screenshot
 

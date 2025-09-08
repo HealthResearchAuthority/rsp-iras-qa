@@ -139,7 +139,6 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
         And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
         Then the search displays no matching results
-        # Then the system displays no results found message if there is no 'review body' on the system that matches the search criteria
         And I capture the page screenshot
         Examples:
             | Search_Query      |
