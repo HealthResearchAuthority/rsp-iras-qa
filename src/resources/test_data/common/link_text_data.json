@@ -166,7 +166,7 @@
   },
   "Participating_Organisations_Page": {
     "Back": "Back",
-    "Advanced_Filter": "Advanced filter",
+    "Advanced_Filter": "Advanced filters",
     "Remove_This_Change": "Remove this change"
   },
   "Approvals_Page": {
@@ -186,6 +186,9 @@
     "Remove_This_Change": "Remove this change"
   },
   "Review_Changes_Planned_End_Date_Page": {
+    "Back": "Back"
+  },
+  "Review_Uploaded_Document_Modifications_Page": {
     "Back": "Back"
   }
 }

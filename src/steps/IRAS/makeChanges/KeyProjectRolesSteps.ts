@@ -26,6 +26,13 @@ Then(
               'primary_sponsor_organisation_jsenabled_text',
               keyProjectRolesPage
             );
+            try {
+              await keyProjectRolesPage.primary_sponsor_organisation_suggestion_list_labels
+                .first()
+                .waitFor({ state: 'visible', timeout: 5000 });
+            } catch {
+              /* Element not visible, continue */
+            }
             if (await keyProjectRolesPage.primary_sponsor_organisation_suggestion_list_labels.first().isVisible()) {
               await keyProjectRolesPage.primary_sponsor_organisation_suggestion_list_labels.first().click();
             }
@@ -66,7 +73,13 @@ Then(
     const dataset = keyProjectRolesPage.keyProjectRolesPageTestData[datasetName];
     for (const key in dataset) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        await commonItemsPage.validateUIComponentValues(dataset, key, keyProjectRolesPage);
+        if (key === 'primary_sponsor_organisation_text') {
+          expect(await keyProjectRolesPage.primary_sponsor_organisation_filled_text.getAttribute('value')).toBe(
+            dataset[key]
+          );
+        } else {
+          await commonItemsPage.validateUIComponentValues(dataset, key, keyProjectRolesPage);
+        }
       }
     }
   }
@@ -208,7 +221,7 @@ Then(
     await keyProjectRolesPage.page.waitForTimeout(2000);
     const continueEnteringSuggestionActual = await keyProjectRolesPage.primary_sponsor_organisation_suggestion_listbox
       .first()
-      .getAttribute('data-after-suggestions');
+      .getAttribute('data-before-suggestions');
     const suggestionsHeaderLabelExpected = suggestionHeadersDataset.suggestion_footer;
     expect(continueEnteringSuggestionActual).toEqual(suggestionsHeaderLabelExpected);
   }
