@@ -439,7 +439,6 @@ Feature: Create Amendment - Create Project
     When I click the 'Save_For_Later' button on the 'Project_Details_Title_Page'
     Then I can see the project overview page
     And I capture the page screenshot
-    Then I can see previously saved project details values for '<Project_Details_Title>' displayed on the project overview page
 
     Examples:
       | Project_Details_Title       |

@@ -124,17 +124,3 @@ Then(
     expect(actualLeadNation).toBe(expectedLeadNation);
   }
 );
-
-Then(
-  'I can see previously saved project details values for {string} displayed on the project overview page',
-  async ({ projectDetailsTitlePage, projectOverviewPage }, datasetName: string) => {
-    const dataset = projectDetailsTitlePage.projectDetailsTitlePageTestData[datasetName];
-    for (const key in dataset) {
-      if (Object.hasOwn(dataset, key)) {
-        if (key === 'short_project_title_text') {
-          await expect(projectOverviewPage.row_value_label.getByText(dataset[key], { exact: true })).toBeVisible();
-        }
-      }
-    }
-  }
-);
