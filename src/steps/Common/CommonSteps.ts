@@ -865,8 +865,8 @@ Then(
     const replaceValue = '_label';
     const pageMap = {
       Search_Modifications_Page: {
-        filterDataset: searchModificationsPage.searchModificationsPageTestData.Advanced_Filters,
-        filterLabels: searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page,
+        dataset: searchModificationsPage.searchModificationsPageTestData.Advanced_Filters,
+        labels: searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page,
       },
       Manage_Review_Bodies_Page: {
         dataset: manageReviewBodiesPage.manageReviewBodiesPageData.Advanced_Filters,
@@ -877,7 +877,8 @@ Then(
         labels: manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List,
       },
     };
-    const { dataset, filterLabels } = pageMap[pageKey];
+    const { dataset, labels } = pageMap[pageKey];
+    const filterLabels = labels;
     const filterDataset = dataset[filterDatasetName];
 
     const validateFilter = async (key: string, labelFetcher: (key: string) => Promise<string | string[]>) => {

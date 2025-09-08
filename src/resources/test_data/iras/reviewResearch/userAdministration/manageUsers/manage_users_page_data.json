@@ -315,7 +315,7 @@
       "status_radio": "Active"
     },
     "Advanced_Filter_Review_body_NRSPCC_Role_Workflow_Coordinator_Status_Active": {
-      "review_body_checkbox": ["QA Automation National Research Service Permissions Coordination Centre (NRS PCC)"],
+      "review_body_checkbox": ["QA Automation National Research Service Permissions Coordination Centre (NRSPCC)"],
       "role_checkbox": ["Workflow co-ordinator"],
       "status_radio": "Active"
     },
@@ -368,7 +368,7 @@
       "review_body_checkbox": ["QA Automation Health and Care Research Wales (HCRW)"]
     },
     "Advanced_Filter_Country_No_Review_Body_NRSPCC_Role_No": {
-      "review_body_checkbox": ["QA Automation National Research Service Permissions Coordination Centre (NRS PCC)"]
+      "review_body_checkbox": ["QA Automation National Research Service Permissions Coordination Centre (NRSPCC)"]
     },
     "Advanced_Filter_Country_No_Review_Body_No_Role_Applicant": {
       "role_checkbox": ["Applicant"]
@@ -387,7 +387,7 @@
         "QA Automation Health Research Authority (HRA)",
         "QA Automation Health and Social Care Northern Ireland (HSCNI)",
         "QA Automation Health and Care Research Wales (HCRW)",
-        "QA Automation National Research Service Permissions Coordination Centre (NRS PCC)"
+        "QA Automation National Research Service Permissions Coordination Centre (NRSPCC)"
       ],
       "role_checkbox": [
         "Applicant",
@@ -403,7 +403,7 @@
         "QA Automation Health Research Authority (HRA)",
         "QA Automation Health and Social Care Northern Ireland (HSCNI)",
         "QA Automation Health and Care Research Wales (HCRW)",
-        "QA Automation National Research Service Permissions Coordination Centre (NRS PCC)"
+        "QA Automation National Research Service Permissions Coordination Centre (NRSPCC)"
       ],
       "role_checkbox": [
         "Applicant",

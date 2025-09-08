@@ -847,14 +847,6 @@ export default class CommonItemsPage {
     return results.filter((result) => terms.every((term) => result.toLowerCase().includes(term.toLowerCase())));
   }
 
-  async clearCheckboxes(dataset: any, keys: string[], commonItemsPage: any, createUserProfilePage: any) {
-    for (const key of keys) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        await this.clearUIComponent(dataset, key, createUserProfilePage);
-      }
-    }
-  }
-
   async captureLargeSizeScreenshot(page: Page, outputFile: string) {
     const viewportHeight = page.viewportSize()?.height || 800;
     const scrollHeight = await page.evaluate(() => {
@@ -1176,8 +1168,8 @@ export default class CommonItemsPage {
     return page[locatorName];
   }
 
-  async clearCheckboxesUserProfileReviewBody<PageObject>(dataset: any, page: PageObject) {
-    const locator: Locator = page['review_body_checkbox'];
+  async clearCheckboxesUserProfile<PageObject>(dataset: any, key: string, page: PageObject) {
+    const locator: Locator = page[key];
     const count = await locator.count();
     for (let i = 0; i < count; i++) {
       const checkbox = locator.nth(i);

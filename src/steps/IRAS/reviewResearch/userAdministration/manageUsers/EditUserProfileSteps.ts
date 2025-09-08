@@ -183,21 +183,38 @@ Then(
       dataset['role_checkbox'].includes('Workflow co-ordinator') ||
       selectedCheckboxCount > 0
     ) {
-      await commonItemsPage.clearCheckboxes(dataset, ['country_checkbox'], commonItemsPage, editUserProfilePage);
-      await commonItemsPage.clearCheckboxesUserProfileReviewBody(dataset, editUserProfilePage);
-      await commonItemsPage.clearUIComponent(dataset, 'role_checkbox', editUserProfilePage);
+      await commonItemsPage.clearCheckboxesUserProfile(dataset, 'country_checkbox', editUserProfilePage);
+      await commonItemsPage.clearCheckboxesUserProfile(dataset, 'review_body_checkbox', editUserProfilePage);
+      await commonItemsPage.clearCheckboxesUserProfile(dataset, 'role_checkbox', editUserProfilePage);
     }
   }
 );
 
 When(
   'I can see that the {string} users data persists on the edit profile page',
-  async ({ createUserProfilePage, commonItemsPage, editUserProfilePage }, datasetName: string) => {
+  async ({ createUserProfilePage, editUserProfilePage }, datasetName: string) => {
     const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
+
+    const getFieldValue = async (key: string): Promise<string | boolean> => {
+      if (key === 'review_body_checkbox') {
+        return await createUserProfilePage.getSelectedCheckboxCreateUserReviewBody(dataset, createUserProfilePage);
+      }
+      return await createUserProfilePage.getSelectedValuesCreateUser(dataset, key, editUserProfilePage);
+    };
+
+    const assertFieldValue = (key: string, actual: string | boolean) => {
+      if (typeof actual === 'string') {
+        expect(actual).toBe(dataset[key]);
+      } else if (typeof actual === 'boolean') {
+        expect(actual).toBeTruthy();
+      }
+    };
+
     for (const key in dataset) {
       if (key !== 'email_address_text') {
         if (Object.hasOwn(dataset, key)) {
-          await commonItemsPage.validateUIComponentValues(dataset, key, editUserProfilePage);
+          const fieldValActual = await getFieldValue(key);
+          assertFieldValue(key, fieldValActual);
         }
       }
     }
