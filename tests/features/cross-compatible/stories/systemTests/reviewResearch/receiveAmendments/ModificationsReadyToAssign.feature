@@ -7,8 +7,6 @@ Feature: Modifications Tasklist page that displays modifications ready to be ass
 
     # Date_Submitted,Days_Since_Submission sort is failing
     @SortTasklistByColumn @rsp-4091 @fail
-    # Date_Submitted,Days_Since_Submission sort is failing
-    @SortTasklistByColumn @rsp-4091 @fail
     Scenario: Verify the user is able to sort the modifications tasklist by ascending and descending order for each results table column
         When I click the '<Sort_Button>' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
