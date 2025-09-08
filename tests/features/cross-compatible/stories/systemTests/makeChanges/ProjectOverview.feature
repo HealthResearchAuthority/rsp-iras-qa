@@ -51,6 +51,7 @@ Feature: Project Overview
             | Label_Texts              | Valid_Data_All_Fields | Data_With_No_NHS_HSC     | Label_Texts             | Valid_Data_All_Fields     | Valid_Research_Locations_Details_Non_Nhs |
 
     @rsp-4876 @PostApprovalPage
+    #The project and modifications were created manually and validations are for the specific project
     Scenario Outline: Validate the user is able to access the view the post approval details from the project overview page
         When I navigate to the project overview page of a specific project
         And I capture the page screenshot
@@ -61,6 +62,7 @@ Feature: Project Overview
         And I can see the status of modifications displayed is 'Modification_Status'
 
     @rsp-4876 @PostApprovalPageSort
+    #The project and modifications were created manually and validations are for the specific project
     Scenario Outline: Validate the user is able to access the view the post approval details from the project overview page
         When I navigate to the project overview page of a specific project
         And I capture the page screenshot
@@ -80,6 +82,7 @@ Feature: Project Overview
             | Modification_Type | modification type |
 
     @rsp-4876 @PostApprovalPaginationFirstPage
+    #The project and modifications were created manually and validations are for the specific project
     Scenario: Verify pagination in post approval page when user is on the first page
         When I navigate to the project overview page of a specific project
         And I capture the page screenshot
@@ -99,6 +102,7 @@ Feature: Project Overview
             | next link         |
 
     @rsp-4876 @PostApprovalPaginationLastPage
+    #The project and modifications were created manually and validations are for the specific project
     Scenario: Verify pagination in post approval page when user is on the last page
         When I navigate to the project overview page of a specific project
         And I capture the page screenshot
