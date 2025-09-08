@@ -162,8 +162,8 @@ Then(
 Then(
   'I can see the review body field in the add a new user profile page should contain all currently enabled review bodies from the manage review bodies page',
   async ({ createUserProfilePage, manageReviewBodiesPage }) => {
-    const actualList = await createUserProfilePage.getReviewBodies();
-    const expectedList = await manageReviewBodiesPage.getOrgNamesListFromUI();
+    const actualList = (await createUserProfilePage.getReviewBodies()).sort();
+    const expectedList = (await manageReviewBodiesPage.getOrgNamesListFromUI()).sort();
     expect(actualList).toEqual(expectedList);
   }
 );

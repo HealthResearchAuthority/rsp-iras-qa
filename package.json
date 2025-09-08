@@ -4,7 +4,7 @@
   "description": "Test Automation for the IRAS project, which will provide E2E UI Regression Testing",
   "main": "index.js",
   "scripts": {
-    "testTags": "(npx bddgen --tags \"@authSetup or  @verifyCreateReviewBodyRealData or @verifyUserCreation\") && (npx playwright test)",
+    "testTags": "(npx bddgen --tags \"@authSetup or  @Smoke \") && (npx playwright test)",
     "testDebug": "(npx bddgen) && (npx playwright test --debug)",
     "test": "(npx bddgen) && (npx playwright test)",
     "test-failed": "(npx bddgen) && (npx playwright test --last-failed)",
@@ -19,7 +19,7 @@
   "devDependencies": {
     "@eslint/js": "^9.26.0",
     "@faker-js/faker": "^9.7.0",
-    "@playwright/test": "^1.52.0",
+    "@playwright/test": "^1.55.0",
     "@types/eslint__js": "^9.14.0",
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^22.15.17",
