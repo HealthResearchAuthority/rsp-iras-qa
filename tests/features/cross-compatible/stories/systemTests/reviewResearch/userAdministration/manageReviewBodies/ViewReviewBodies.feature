@@ -1,4 +1,4 @@
-@UserAdministration @ManageReviewBodies @ViewReviewBodies @SysAdminUser @SystemTest @rsp-2571 @rsp-2569 @SystemTestReviewBodies
+@UserAdministration @ManageReviewBodies @ViewReviewBodies @SysAdminUser @SystemTest @rsp-2571 @rsp-2569
 Feature: User Administration: Manage Review Bodies list and view review bodies profile details
 
     Background:

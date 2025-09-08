@@ -1,4 +1,4 @@
-@UserAdministration @ManageReviewBodies @CreateReviewBody @SysAdminUser @SystemTest @rsp-2570 @SystemTestReviewBodies
+@UserAdministration @ManageReviewBodies @CreateReviewBody @SysAdminUser @SystemTest @rsp-2570
 Feature: User Administration: Manage Review Bodies - Create review body
 
     Background:
@@ -45,16 +45,16 @@ Feature: User Administration: Manage Review Bodies - Create review body
             | Review_Body_HSCNI_Data  |
             | Review_Body_NRSPCC_Data |
             | Review_Body_HRA_Data    |
-    # | Review_Body_RandD_Data  |
-    # | Review_Body_NIPS_Data   |
-    # | Review_Body_HFEA_Data   |
-    # | Review_Body_HMPPS_Data  |
-    # | Review_Body_MODREC_Data |
-    # | Review_Body_HTA_Data    |
-    # | Review_Body_SPS_Data    |
-    # | Review_Body_MHRA_Data   |
-    # | Review_Body_CAG_Data    |
-    # | Review_Body_ARSAC_Data  |
+            | Review_Body_RandD_Data  |
+            | Review_Body_NIPS_Data   |
+            | Review_Body_HFEA_Data   |
+            | Review_Body_HMPPS_Data  |
+            | Review_Body_MODREC_Data |
+            | Review_Body_HTA_Data    |
+            | Review_Body_SPS_Data    |
+            | Review_Body_MHRA_Data   |
+            | Review_Body_CAG_Data    |
+            | Review_Body_ARSAC_Data  |
 
 
     @verifyAddAnotherReviewBody

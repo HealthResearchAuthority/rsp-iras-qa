@@ -1,4 +1,4 @@
-@UserAdministration @ManageReviewBodies @SysAdminUser @SystemTest @UserListReviewBody @rsp-3270 @SystemTestReviewBodies
+@UserAdministration @ManageReviewBodies @SysAdminUser @SystemTest @UserListReviewBody @rsp-3270
 Feature: User Administration: Manage Review Bodies - View user list page of the review body, Search for the users and remove user from the review body
 
     Background:

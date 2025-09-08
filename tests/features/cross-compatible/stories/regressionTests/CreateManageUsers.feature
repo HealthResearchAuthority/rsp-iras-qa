@@ -1,4 +1,4 @@
-@RegressionCreateManageUsers @RegressionManageUsers @SysAdminUser @Regression @RegressionSysAdmin
+@RegressionCreateManageUsers @RegressionManageUsers @SysAdminUser @Regression
 Feature: User Administration: Create Manage Users
 
     Background:
