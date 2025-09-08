@@ -113,8 +113,8 @@
       "email_address_text": "qaautoarsac@ukhsa.gov.uk",
       "description_text": "ARSAC advises the licensing authorities on applications from practitioners, employers and researchers who want to use radioactive substances on people. ARSAC works with the Department of Health and Social Care."
     },
-    "Review_Body_NRS_Data": {
-      "organisation_name_text": "QA Automation NHS Research Scotland (NRS)",
+    "Review_Body_NRSPCC_Data": {
+      "organisation_name_text": "QA Automation National Research Service Permissions Coordination Centre (NRS PCC)",
       "country_checkbox": ["Scotland"],
       "email_address_text": "qaautocommunications@nrs.org.uk",
       "description_text": "NHS Research Scotland promotes and supports excellence in clinical and translational research in Scotland so that patients can benefit from new and better treatments. Formed through a partnership of Scottish NHS Boards and the Chief Scientist Office (CSO) of Scottish Government, we work to ensure that NHS Scotland provides the best environment to support clinical research."
@@ -203,16 +203,16 @@
       "email_address_text": "averylongemailaddresscreatedforillustrationpurposesonlyandnotmeanttobeusedinreallifeaverylongemailaddresscreatedforillustrationpurposesonlyandnotmeanttobeusedinreallifeaverylongemailaddresscreatedforillustrationpurposesonlyandnotmeanttobeusedinreallife@exampledomain.com",
       "description_text": ""
     },
-    "Incorrect_Email_Format": {
-      "organisation_name_text": "QA Automation HSC Research and Development",
-      "country_checkbox": ["Wales"],
-      "email_address_text": "O(*()*(*()",
-      "description_text": ""
-    },
-    "Invalid_Email_Data_Start_With_Dot": {
+    "Invalid_Email_Data_Leading_Dot": {
       "organisation_name_text": "QA Automation HSC Research and Development",
       "country_checkbox": ["Wales"],
       "email_address_text": ".john@example.com",
+      "description_text": ""
+    },
+    "Invalid_Email_Data_Trailing_Dot": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "john.@example.com",
       "description_text": ""
     },
     "Invalid_Email_Data_Double_Dot": {
@@ -221,124 +221,10 @@
       "email_address_text": "john..doe@example.com",
       "description_text": ""
     },
-    "Invalid_Email_Data_Space": {
+    "Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour": {
       "organisation_name_text": "QA Automation HSC Research and Development",
       "country_checkbox": ["Wales"],
-      "email_address_text": "john doe@example.com",
-      "description_text": ""
-    },
-    "Invalid_Email_Data_Wrong_AT": {
-      "organisation_name_text": "QA Automation HSC Research and Development",
-      "country_checkbox": ["Wales"],
-      "email_address_text": "john[at]example.",
-      "description_text": ""
-    },
-    "Invalid_Email_Data_Less_Greater_Symbols": {
-      "organisation_name_text": "QA Automation HSC Research and Development",
-      "country_checkbox": ["Wales"],
-      "email_address_text": "john<doe>@example.com",
-      "description_text": ""
-    },
-    "Invalid_Email_Data_Colon": {
-      "organisation_name_text": "QA Automation HSC Research and Development",
-      "country_checkbox": ["Wales"],
-      "email_address_text": "john:doe@example.com",
-      "description_text": ""
-    },
-    "Invalid_Email_Data_Semi_Colon": {
-      "organisation_name_text": "QA Automation HSC Research and Development",
-      "country_checkbox": ["Wales"],
-      "email_address_text": "john;doe@example.com",
-      "description_text": ""
-    },
-    "Invalid_Email_Data_Comma": {
-      "organisation_name_text": "QA Automation HSC Research and Development",
-      "country_checkbox": ["Wales"],
-      "email_address_text": "john,@example.com",
-      "description_text": ""
-    },
-    "Invalid_Email_Data_Start_With_Hyphen": {
-      "organisation_name_text": "QA Automation HSC Research and Development",
-      "country_checkbox": ["Wales"],
-      "email_address_text": "-john@example.com",
-      "description_text": ""
-    },
-    "Invalid_Email_Data_Hyphen_Before_Domain": {
-      "organisation_name_text": "QA Automation HSC Research and Development",
-      "country_checkbox": ["Wales"],
-      "email_address_text": "john@example-.com",
-      "description_text": ""
-    },
-    "Invalid_Email_Data_Double_Dot_Domain": {
-      "organisation_name_text": "QA Automation HSC Research and Development",
-      "country_checkbox": ["Wales"],
-      "email_address_text": "john.@example..com",
-      "description_text": ""
-    },
-    "Invalid_Email_Data_Exclamation_Domain": {
-      "organisation_name_text": "QA Automation HSC Research and Development",
-      "country_checkbox": ["Wales"],
-      "email_address_text": "john!doe@exa!mple.com",
-      "description_text": ""
-    },
-    "Invalid_Email_Data_Unicode": {
-      "organisation_name_text": "QA Automation HSC Research and Development",
-      "country_checkbox": ["Wales"],
-      "email_address_text": "johñ@example.com",
-      "description_text": ""
-    },
-    "Invalid_Email_Data_Single_Quote_Before_AT": {
-      "organisation_name_text": "QA Automation HSC Research and Development",
-      "country_checkbox": ["Wales"],
-      "email_address_text": "john.doe'@example.com",
-      "description_text": ""
-    },
-    "Invalid_Email_Data_Domain_Exceed_Max": {
-      "organisation_name_text": "QA Automation HSC Research and Development",
-      "country_checkbox": ["Wales"],
-      "email_address_text": "averyveryverylongdomainnamewithmanysubdomainsandmorecharacters.com",
-      "description_text": ""
-    },
-    "Invalid_Email_Data_Local_Part_Max": {
-      "organisation_name_text": "QA Automation HSC Research and Development",
-      "country_checkbox": ["Wales"],
-      "email_address_text": "averyveryverylongemailaddressthatexceedscharacters@example.com",
-      "description_text": ""
-    },
-    "Invalid_Email_Data_Consecutive_Dot_Domain": {
-      "organisation_name_text": "QA Automation HSC Research and Development",
-      "country_checkbox": ["Wales"],
-      "email_address_text": "john@example..com",
-      "description_text": ""
-    },
-    "Invalid_Email_Data_Consecutive_Dot_SubDomain": {
-      "organisation_name_text": "QA Automation HSC Research and Development",
-      "country_checkbox": ["Wales"],
-      "email_address_text": "mail..sub.example.com",
-      "description_text": ""
-    },
-    "Invalid_Email_Data_Consecutive_Dot_Domain_SubDomain": {
-      "organisation_name_text": "QA Automation HSC Research and Development",
-      "country_checkbox": ["Wales"],
-      "email_address_text": "john..doe'@example..com",
-      "description_text": ""
-    },
-    "Invalid_Email_Data_Emoji": {
-      "organisation_name_text": "QA Automation HSC Research and Development",
-      "country_checkbox": ["Wales"],
-      "email_address_text": "john🙂@example.com",
-      "description_text": ""
-    },
-    "Invalid_Email_Data_TLD": {
-      "organisation_name_text": "QA Automation HSC Research and Development",
-      "country_checkbox": ["Wales"],
-      "email_address_text": "john.doe@example.1234",
-      "description_text": ""
-    },
-    "Invalid_Email_Data_Missing_AT": {
-      "organisation_name_text": "QA Automation HSC Research and Development",
-      "country_checkbox": ["Wales"],
-      "email_address_text": "john.doeexample.com",
+      "email_address_text": "DomainThatExceeds64CharactersDomainThatExceeds64CharactersDomainT@DomainThatExceeds64Characters.com",
       "description_text": ""
     },
     "Invalid_Email_Data_Reserved_Domain": {
@@ -347,22 +233,142 @@
       "email_address_text": "john.doe@localhost",
       "description_text": ""
     },
-    "Invalid_Email_Data_Punycode": {
-      "organisation_name_text": "QA Automation HSC Research and Development",
-      "country_checkbox": ["Wales"],
-      "email_address_text": "john@example.xn--mgbh0fb",
-      "description_text": ""
-    },
-    "Invalid_Email_Data_Max_Char": {
-      "organisation_name_text": "QA Automation HSC Research and Development",
-      "country_checkbox": ["Wales"],
-      "email_address_text": "EmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExcee@example.com",
-      "description_text": ""
-    },
     "Incorrect_Format_Invalid_Character_Limit_Email_Field": {
       "organisation_name_text": "QA Automation HSC Research and Development",
       "country_checkbox": ["Wales"],
       "email_address_text": "EmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExcee@examplecom",
+      "description_text": ""
+    },
+    "Valid_Email_Data_Dot": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "john.doe@example.com",
+      "description_text": ""
+    },
+    "Valid_Email_Data_Number": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "Johndoe2@example.com",
+      "description_text": ""
+    },
+    "Valid_Email_Data_Underscore": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "john_doe@example.com",
+      "description_text": ""
+    },
+    "Valid_Email_Data_Hyphen": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "john-doe@example.com",
+      "description_text": ""
+    },
+    "Valid_Email_Data_Plus": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "john+newsletter@example.com",
+      "description_text": ""
+    },
+    "Valid_Email_Data_Exclamation": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "john!doe@example.com",
+      "description_text": ""
+    },
+    "Valid_Email_Data_Hash": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "john#profile@example.com",
+      "description_text": ""
+    },
+    "Valid_Email_Data_Dollar": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "john$invoice@example.com",
+      "description_text": ""
+    },
+    "Valid_Email_Data_Percentage": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "john%discount@example.com",
+      "description_text": ""
+    },
+    "Valid_Email_Data_Ampersand": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "john&team@example.com",
+      "description_text": ""
+    },
+    "Valid_Email_Data_Single_Quote": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "john's@example.com",
+      "description_text": ""
+    },
+    "Valid_Email_Data_Star": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "john*star@example.com",
+      "description_text": ""
+    },
+    "Valid_Email_Data_Slash": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "john/everyone@example.com",
+      "description_text": ""
+    },
+    "Valid_Email_Data_Equal_Symbol": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "john=equals@example.com",
+      "description_text": ""
+    },
+    "Valid_Email_Data_Question_Mark": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "john?query@example.com",
+      "description_text": ""
+    },
+    "Valid_Email_Data_Cap_Symbol": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "john^caret@example.com",
+      "description_text": ""
+    },
+    "Valid_Email_Data_Curly_Brackets": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "john{editor}@example.com",
+      "description_text": ""
+    },
+    "Valid_Email_Data_Pipe_Symbol": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "john|vertical@example.com",
+      "description_text": ""
+    },
+    "Valid_Email_Data_Tilde_Symbol": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "john~tilde@example.com",
+      "description_text": ""
+    },
+    "Valid_Email_Data_Special_Characters": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "john!#$%&'*+-/=?^_`{|}~doe@example.com",
+      "description_text": ""
+    },
+    "Valid_Email_Data_Multiple_Sub_Domains": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "john.doe@email.sub.sub.example.com",
+      "description_text": ""
+    },
+    "Valid_Email_Data_Domain": {
+      "organisation_name_text": "QA Automation HSC Research and Development",
+      "country_checkbox": ["Wales"],
+      "email_address_text": "john.doe@example.photography",
       "description_text": ""
     },
     "Validation": {
@@ -377,11 +383,11 @@
         "organisation_name_text": "Organisation name must be 250 characters or less"
       },
       "Mandatory_Field_Email_Address_Error": { "email_address_text": "Enter an email address" },
-      "Max_Chars_Email_Address_Error": { "email_address_text": "Email address must be 250 characters or less" },
+      "Max_Chars_Email_Address_Error": { "email_address_text": "Email address must be 254 characters or less" },
       "Email_Format_Error": { "email_address_text": "Enter an email address in the correct format" },
       "Incorrect_Format_Invalid_Character_Limit_Email_Address_Error": {
         "email_address_text": [
-          "Email address must be 250 characters or less",
+          "Email address must be 254 characters or less",
           "Enter an email address in the correct format"
         ]
       },

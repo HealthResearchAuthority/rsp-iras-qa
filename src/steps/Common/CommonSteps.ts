@@ -143,30 +143,11 @@ Then('I see something {string}', async ({ commonItemsPage }, testType: string) =
 
 Then('I click the {string} button on the {string}', async ({ commonItemsPage }, buttonKey: string, pageKey: string) => {
   const buttonValue = commonItemsPage.buttonTextData[pageKey][buttonKey];
-  // This if condition need to be removed for android after the defect fix RSP-4099
-  if (
-    buttonKey == 'Create_Profile' &&
-    pageKey == 'Check_Create_User_Profile_Page' &&
-    process.env.OS_TYPE?.toLowerCase() == 'android' &&
-    process.env.PLATFORM?.toLowerCase() == 'mobile'
-  ) {
-    await commonItemsPage.govUkButton
-      .getByText(buttonValue, { exact: true })
-      .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
-      .first()
-      .focus();
-    await commonItemsPage.govUkButton
-      .getByText(buttonValue, { exact: true })
-      .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
-      .first()
-      .press('Enter');
-  } else {
-    await commonItemsPage.govUkButton
-      .getByText(buttonValue, { exact: true })
-      .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
-      .first()
-      .click();
-  }
+  await commonItemsPage.govUkButton
+    .getByText(buttonValue, { exact: true })
+    .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
+    .first()
+    .click();
   await commonItemsPage.page.waitForLoadState('domcontentloaded');
 });
 
@@ -191,15 +172,6 @@ Given(
       await checkCreateUserProfilePage.back_button.click(); //work around for now >> to click on Back link
     } else if (pageKey === 'Check_Create_Review_Body_Page' && linkKey === 'Back') {
       await checkCreateUserProfilePage.back_button.click(); //work around for now >> to click on Back link
-      // This if condition need to be removed for android after the defect fix RSP-4099
-    } else if (
-      pageKey === 'User_Profile_Page' &&
-      linkKey === 'View_Users_Audit_History' &&
-      process.env.OS_TYPE?.toLowerCase() == 'android' &&
-      process.env.PLATFORM?.toLowerCase() == 'mobile'
-    ) {
-      await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).focus();
-      await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).press('Enter');
     } else if (
       (pageKey === 'Search_Add_User_Review_Body_Page' || pageKey === 'Review_Body_User_List_Page') &&
       linkKey === 'Back_To_Users'
@@ -883,7 +855,7 @@ Then(
 Then(
   '{string} active filters {string} in the {string}',
   async (
-    { searchModificationsPage, manageReviewBodiesPage, commonItemsPage },
+    { searchModificationsPage, manageReviewBodiesPage, manageUsersPage, commonItemsPage },
     actionToPerform: string,
     filterDatasetName: string,
     pageKey: string
@@ -891,15 +863,23 @@ Then(
     const isDisplayAction = actionToPerform === 'I can see the selected filters are displayed under';
     const isRemoveAction = actionToPerform === 'I remove the selected filters from';
     const replaceValue = '_label';
-    let filterDataset: JSON;
-    let filterLabels: object;
-    if (pageKey === 'Search_Modifications_Page') {
-      filterDataset = searchModificationsPage.searchModificationsPageTestData.Advanced_Filters[filterDatasetName];
-      filterLabels = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page;
-    } else if (pageKey === 'Manage_Review_Bodies_Page') {
-      filterDataset = manageReviewBodiesPage.manageReviewBodiesPageData.Advanced_Filters[filterDatasetName];
-      filterLabels = manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page;
-    }
+    const pageMap = {
+      Search_Modifications_Page: {
+        filterDataset: searchModificationsPage.searchModificationsPageTestData.Advanced_Filters,
+        filterLabels: searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page,
+      },
+      Manage_Review_Bodies_Page: {
+        dataset: manageReviewBodiesPage.manageReviewBodiesPageData.Advanced_Filters,
+        labels: manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page,
+      },
+      Manage_Users_Page: {
+        dataset: manageUsersPage.manageUsersPageTestData.Advanced_Filters,
+        labels: manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List,
+      },
+    };
+    const { dataset, filterLabels } = pageMap[pageKey];
+    const filterDataset = dataset[filterDatasetName];
+
     const validateFilter = async (key: string, labelFetcher: (key: string) => Promise<string | string[]>) => {
       const labels = await labelFetcher(key);
       const labelArray = Array.isArray(labels) ? labels : [labels];
@@ -919,7 +899,7 @@ Then(
           await validateFilter(key, async (k) =>
             commonItemsPage.getCheckboxFilterLabels(k, filterDataset, filterLabels, replaceValue)
           );
-        } else if (key.startsWith('date_')) {
+        } else if (key.startsWith('date_submitted') || key.startsWith('date_last_logged_in')) {
           if (await commonItemsPage.shouldValidateDateFilter(key, filterDataset)) {
             await validateFilter(key, async (k) =>
               commonItemsPage.getDateFilterLabel(k, filterDataset, filterLabels, replaceValue)

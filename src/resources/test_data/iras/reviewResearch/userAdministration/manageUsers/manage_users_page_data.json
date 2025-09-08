@@ -31,7 +31,9 @@
       "date_last_logged_in_to_date_help_text": "For example, 12 October 2024",
       "date_last_logged_in_day_label": "Day",
       "date_last_logged_in_month_label": "Month",
-      "date_last_logged_in_year_label": "Year"
+      "date_last_logged_in_year_label": "Year",
+      "role_label": "Role",
+      "review_body_label": "Review body"
     },
     "Advanced_Filters_Hint_Labels": {
       "country_hint_label": "Select all that apply",
@@ -39,8 +41,8 @@
       "status_hint_label": "Select one option",
       "date_last_logged_in_from_date_help_text": "For example, 28 February 2023",
       "date_last_logged_in_to_date_help_text": "For example, 12 October 2024",
-      "country_label": "Country",
-      "status_label": "Status"
+      "role_hint_label": "Select all that apply",
+      "review_body_hint_label": "Select all that apply"
     },
     "enlarged_page_size": "100",
     "enabled_status": "Active",
@@ -55,8 +57,7 @@
     "organisation_text": "QA Automation HRA",
     "job_title_text": "Sr.Reviewer",
     "role_checkbox": ["Operations"],
-    "country_checkbox": ["England"],
-    "access_required_checkbox": ["Research Ethics Comittee"]
+    "country_checkbox": ["England"]
   },
 
   "Disabled_User_Role_Operations": {
@@ -68,8 +69,7 @@
     "organisation_text": "QA Automation HRA",
     "job_title_text": "Sr.Reviewer",
     "role_checkbox": ["Operations"],
-    "country_checkbox": ["England"],
-    "access_required_checkbox": ["Research Ethics Comittee"]
+    "country_checkbox": ["England"]
   },
   "Active_User_Role_Reviewer": {
     "title_text": "Mr",
@@ -90,8 +90,7 @@
     "organisation_text": "QA Automation HRA Role_Operations",
     "job_title_text": "Sr.Reviewer Role_Operations",
     "role_checkbox": ["Operations", "System administrator"],
-    "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
-    "access_required_checkbox": ["Study wide review", "Research ethics committee", "CAG", "Technical assurance"]
+    "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
   },
   "Disabled_User_Role_Reviewer": {
     "title_text": "Mr",
@@ -128,9 +127,11 @@
       "Leading_White_Space_User_Data": { "search_input_text": " Atul Patel" },
       "Leading_And_Trailing_White_Space_User_Data": { "search_input_text": " Atul Patel " },
       "Trailing_White_Space_User_Data": { "search_input_text": "Atul Patel " },
-      "Back_Stage_User_Email": { "search_input_text": "FutureIRAS.BackStage@hra.nhs.uk" },
-      "Front_Stage_User_Email": { "search_input_text": "futureiras.automation@hra.nhs.uk" },
+      "Studywide_Reviewer_Email": { "search_input_text": "FutureIRAS.BackStage@hra.nhs.uk" },
+      "Applicant_User_Email": { "search_input_text": "futureiras.automation@hra.nhs.uk" },
       "System_Admin_User_Email": { "search_input_text": "FutureIRAS.SysAdmin@hra.nhs.uk" },
+      "Team_Manager_Email": { "search_input_text": "FutureIRAS.TeamManager@hra.nhs.uk" },
+      "Workflow_Coordinator_Email": { "search_input_text": "FutureIRAS.WorkflowCoordinator@hra.nhs.uk" },
       "Admin_User_Full_Name_Email_Prefix": { "search_input_text": "auto admin future_iras_auto_admin_user" },
       "Admin_User_Full_Name_Full_Email": {
         "search_input_text": "auto admin future_iras_auto_admin_user@test.id.nihr.ac.uk"
@@ -153,7 +154,14 @@
       "Admin_User_Full_Name_Full_Email": {
         "search_input_text": "auto admin future_iras_auto_admin_user@test.id.nihr.ac.uk"
       },
-      "Empty_Search_Data": { "search_input_text": "" }
+      "Empty_Search_Data": { "search_input_text": "" },
+      "Role_Team_Manager": { "search_input_text": "Role_Team_Manager" },
+      "Role_System_Administrator": { "search_input_text": "Role_System_Administrator" },
+      "Role_Studywide_Reviewer": { "search_input_text": "Role_Studywide_Reviewer" },
+      "Role_Workflow_Coordinator": { "search_input_text": "Role_Workflow_Coordinator" },
+      "Role_Applicant": { "search_input_text": "Role_Applicant" },
+      "Role_All": { "search_input_text": "Role_All" },
+      "No_Roles": { "search_input_text": "No_Roles" }
     }
   },
   "Error_Message_Field_Dataset": {
@@ -267,6 +275,150 @@
       "date_last_logged_in_to_day_text": "22",
       "date_last_logged_in_to_month_dropdown": "January",
       "date_last_logged_in_to_year_text": "2025"
+    },
+    "Advanced_Filter_Role_Team_Manager_Status_Active": {
+      "role_checkbox": ["Team manager"],
+      "status_radio": "Active"
+    },
+    "Advanced_Filter_Role_System_Administrator_Status_Active": {
+      "role_checkbox": ["System administrator"],
+      "status_radio": "Active"
+    },
+    "Advanced_Filter_Role_Studywide_Reviewer_Status_Active": {
+      "role_checkbox": ["Study-wide reviewer"],
+      "status_radio": "Active"
+    },
+    "Advanced_Filter_Role_Workflow_Coordinator_Status_Active": {
+      "role_checkbox": ["Workflow co-ordinator"],
+      "status_radio": "Active"
+    },
+    "Advanced_Filter_Role_Applicant_Status_Active": {
+      "role_checkbox": ["Applicant"],
+      "status_radio": "Active"
+    },
+    "Advanced_Filter_All_Roles_Status_Active": {
+      "role_checkbox": [
+        "Applicant",
+        "Study-wide reviewer",
+        "System administrator",
+        "Team manager",
+        "Workflow co-ordinator"
+      ],
+      "status_radio": "Active"
+    },
+    "Advanced_Filter_No_Roles_Status_Active": {
+      "status_radio": "Active"
+    },
+    "Advanced_Filter_Review_body_HRA_Role_Studywide_Reviewer_Status_Active": {
+      "review_body_checkbox": ["QA Automation Health Research Authority (HRA)"],
+      "role_checkbox": ["Study-wide reviewer"],
+      "status_radio": "Active"
+    },
+    "Advanced_Filter_Review_body_NRSPCC_Role_Workflow_Coordinator_Status_Active": {
+      "review_body_checkbox": ["QA Automation National Research Service Permissions Coordination Centre (NRS PCC)"],
+      "role_checkbox": ["Workflow co-ordinator"],
+      "status_radio": "Active"
+    },
+    "Advanced_Filter_Review_body_HCRW_All_Roles_Status_Active": {
+      "review_body_checkbox": ["QA Automation Health and Care Research Wales (HCRW)"],
+      "role_checkbox": [
+        "Applicant",
+        "Study-wide reviewer",
+        "System administrator",
+        "Team manager",
+        "Workflow co-ordinator"
+      ],
+      "status_radio": "Active"
+    },
+    "Advanced_Filter_Eng_Active": {
+      "country_checkbox": ["England"],
+      "status_radio": "Active"
+    },
+    "Advanced_Filter_Sco_Active": {
+      "country_checkbox": ["Scotland"],
+      "status_radio": "Active"
+    },
+    "Advanced_Filter_Role_Team_Manager_Status_Disabled": {
+      "role_checkbox": ["Team manager"],
+      "status_radio": "Disabled"
+    },
+    "Advanced_Filter_Role_System_Administrator_Status_Disabled": {
+      "role_checkbox": ["System administrator"],
+      "status_radio": "Disabled"
+    },
+    "Advanced_Filter_Role_Studywide_Reviewer_Status_Disabled": {
+      "role_checkbox": ["Study-wide reviewer"],
+      "status_radio": "Disabled"
+    },
+    "Advanced_Filter_Role_Workflow_Coordinator_Status_Disabled": {
+      "role_checkbox": ["Workflow co-ordinator"],
+      "status_radio": "Disabled"
+    },
+    "Advanced_Filter_Role_Applicant_Status_Disabled": {
+      "role_checkbox": ["Applicant"],
+      "status_radio": "Disabled"
+    },
+    "Advanced_Filter_Country_No_Review_Body_HRA_Role_No": {
+      "review_body_checkbox": ["QA Automation Health Research Authority (HRA)"]
+    },
+    "Advanced_Filter_Country_No_Review_Body_HSCNI_Role_No": {
+      "review_body_checkbox": ["QA Automation Health and Social Care Northern Ireland (HSCNI)"]
+    },
+    "Advanced_Filter_Country_No_Review_Body_HCRW_Role_No": {
+      "review_body_checkbox": ["QA Automation Health and Care Research Wales (HCRW)"]
+    },
+    "Advanced_Filter_Country_No_Review_Body_NRSPCC_Role_No": {
+      "review_body_checkbox": ["QA Automation National Research Service Permissions Coordination Centre (NRS PCC)"]
+    },
+    "Advanced_Filter_Country_No_Review_Body_No_Role_Applicant": {
+      "role_checkbox": ["Applicant"]
+    },
+    "Advanced_Filter_Country_No_Review_Body_No_Role_Studywide_Reviewer": {
+      "role_checkbox": ["Study-wide reviewer"]
+    },
+    "Advanced_Filter_Country_No_Review_Body_No_Role_System_Admin": {
+      "role_checkbox": ["System administrator"]
+    },
+    "Advanced_Filter_Country_No_Review_Body_No_Role_Workflow_Coordinator": {
+      "role_checkbox": ["Workflow co-ordinator"]
+    },
+    "Advanced_Filter_Country_No_Review_Body_All_Role_All": {
+      "review_body_checkbox": [
+        "QA Automation Health Research Authority (HRA)",
+        "QA Automation Health and Social Care Northern Ireland (HSCNI)",
+        "QA Automation Health and Care Research Wales (HCRW)",
+        "QA Automation National Research Service Permissions Coordination Centre (NRS PCC)"
+      ],
+      "role_checkbox": [
+        "Applicant",
+        "Study-wide reviewer",
+        "System administrator",
+        "Team manager",
+        "Workflow co-ordinator"
+      ]
+    },
+    "Advanced_Filter_Country_All_Review_Body_All_Role_All_Status_Active": {
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "review_body_checkbox": [
+        "QA Automation Health Research Authority (HRA)",
+        "QA Automation Health and Social Care Northern Ireland (HSCNI)",
+        "QA Automation Health and Care Research Wales (HCRW)",
+        "QA Automation National Research Service Permissions Coordination Centre (NRS PCC)"
+      ],
+      "role_checkbox": [
+        "Applicant",
+        "Study-wide reviewer",
+        "System administrator",
+        "Team manager",
+        "Workflow co-ordinator"
+      ],
+      "status_radio": "Active"
+    },
+    "Advanced_Filter_Country_No_Review_Body_No_Role_No_Status_Active_To_Date": {
+      "status_radio": "Active",
+      "date_last_logged_in_from_day_text": "31",
+      "date_last_logged_in_from_month_dropdown": "December",
+      "date_last_logged_in_from_year_text": "1900"
     }
   }
 }

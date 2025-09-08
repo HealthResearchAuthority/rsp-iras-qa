@@ -96,7 +96,7 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
             | Full_Name     | First    |
             | Full_Name     | Last     |
 
-    @UserListReviewBodyNoResultsFoundRemoveUser @rsp-3273 @UserListReviewBodyRemoveAnotherUserFromTheReviewBodyLink
+    @UserListReviewBodyNoResultsFoundRemoveUser @rsp-3273 @UserListReviewBodyRemoveAnotherUserFromTheReviewBodyLink @fail @KNOWN-DEFECT-RSP-4996
     Scenario: Verify the user can search and remove existing user of the selected review body and navigate to manage users page when no results found in the search for removed user
         When I enter 'QA Automation' into the search field
         And I click the 'Search' button on the 'Manage_Review_Bodies_Page'

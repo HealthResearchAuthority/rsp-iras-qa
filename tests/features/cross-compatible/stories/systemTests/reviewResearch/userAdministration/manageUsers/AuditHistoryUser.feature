@@ -47,10 +47,10 @@ Feature: User Administration: Manage Users - View audit history for users
         And I can see the audit history for the newly created '<Add_User_Profile>' user with roles assigned
 
         Examples:
-            | Add_User_Profile                                   | Status_Enabled |
-            | Valid_Data_In_All_Fields_Role_Operations           | Enabled        |
-            | Valid_Data_In_All_Fields_Role_Reviewer_Another     | Enabled        |
-            | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Enabled        |
+            | Add_User_Profile                                           | Status_Enabled |
+            | Valid_Data_In_All_Fields_Role_Team_Manager                 | Enabled        |
+            | Valid_Data_In_All_Fields_Role_System_Administrator_Another | Enabled        |
+            | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager       | Enabled        |
 
 
     @VerifyAuditHistoryUserUnassignRole @fail
@@ -86,10 +86,10 @@ Feature: User Administration: Manage Users - View audit history for users
         Then I can see the '<Add_User_Profile>' user has had their roles unassigned in the audit history
 
         Examples:
-            | Add_User_Profile                               | Field_Name | Edit_User                 | Status_Enabled |
-            | Valid_Data_In_All_Fields_Role_Operations       | Role       | User_Roles_Checkbox_Empty | Enabled        |
-            | Valid_Data_In_All_Fields_Role_Reviewer_Another | Role       | User_Roles_Checkbox_Empty | Enabled        |
-            | Valid_Data_All_Roles                           | Role       | User_Roles_Checkbox_Empty | Enabled        |
+            | Add_User_Profile                                           | Field_Name | Edit_User                 | Status_Enabled |
+            | Valid_Data_In_All_Fields_Role_Team_Manager                 | Role       | User_Roles_Checkbox_Empty | Enabled        |
+            | Valid_Data_In_All_Fields_Role_System_Administrator_Another | Role       | User_Roles_Checkbox_Empty | Enabled        |
+            | Valid_Data_All_Roles                                       | Role       | User_Roles_Checkbox_Empty | Enabled        |
 
     @VerifyAuditHistoryEnableDisableUser
     Scenario Outline: Verify the user can view the audit history after changing the status of a user
@@ -152,16 +152,16 @@ Feature: User Administration: Manage Users - View audit history for users
         Then I can see the users audit history with the '<Audit_History>' event as the most recent entry
 
         Examples:
-            | Field_Name    | Edit_User                   | Audit_History          | Status_Enabled |
-            | Title         | User_Title_Update           | Edit_User_Title        | Enabled        |
-            | First_Name    | User_First_Name_Text_One    | Edit_User_First_Name   | Enabled        |
-            | Last_Name     | User_Last_Name_Text_One     | Edit_User_Last_Name    | Enabled        |
-            | Telephone     | User_Telephone_Text_One     | Edit_User_Telephone    | Enabled        |
-            | Organisation  | User_Organisation_Text_One  | Edit_User_Organisation | Enabled        |
-            | Job_Title     | User_Job_Title_Text_One     | Edit_User_Job_Title    | Enabled        |
+            | Field_Name   | Edit_User                  | Audit_History          | Status_Enabled |
+            | Title        | User_Title_Update          | Edit_User_Title        | Enabled        |
+            | First_Name   | User_First_Name_Text_One   | Edit_User_First_Name   | Enabled        |
+            | Last_Name    | User_Last_Name_Text_One    | Edit_User_Last_Name    | Enabled        |
+            | Telephone    | User_Telephone_Text_One    | Edit_User_Telephone    | Enabled        |
+            | Organisation | User_Organisation_Text_One | Edit_User_Organisation | Enabled        |
+            | Job_Title    | User_Job_Title_Text_One    | Edit_User_Job_Title    | Enabled        |
 
     @VerifyAuditHistoryEditOperationUserFields
-    Scenario Outline: Verify the user can view the audit history after editing fields for an operations user
+    Scenario Outline: Verify the user can view the audit history after editing fields for a team manager
         And I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
         And I can see the add a new user profile page
         And I fill the new user profile page using '<Add_User_Profile>'
@@ -193,9 +193,9 @@ Feature: User Administration: Manage Users - View audit history for users
         And I can see the users audit history with the '<Audit_History>' event as the most recent entry
 
         Examples:
-            | Add_User_Profile                                   | Field_Name | Edit_User                 | Audit_History     | Status_Enabled |
-            | Valid_Data_In_All_Fields_Role_Operations           | Country    | User_Country_Checkbox_One | Edit_User_Country | Enabled        |
-            | Valid_Data_In_All_Mandatory_Fields_Role_Operations | Country    | User_Country_Checkbox_Two | Edit_User_Country | Enabled        |
+            | Add_User_Profile                                     | Field_Name | Edit_User                 | Audit_History     | Status_Enabled |
+            | Valid_Data_In_All_Fields_Role_Team_Manager           | Country    | User_Country_Checkbox_One | Edit_User_Country | Enabled        |
+            | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager | Country    | User_Country_Checkbox_Two | Edit_User_Country | Enabled        |
 
     @VerifyAuditHistoryUserDefaultSort
     Scenario Outline: Verify the users audit history should be sorted with the most recent entry first
