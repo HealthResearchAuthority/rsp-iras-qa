@@ -1168,8 +1168,8 @@ export default class CommonItemsPage {
     return page[locatorName];
   }
 
-  async clearCheckboxesUserProfileReviewBody<PageObject>(dataset: any, page: PageObject) {
-    const locator: Locator = page['review_body_checkbox'];
+  async clearCheckboxesUserProfile<PageObject>(dataset: any, key: string, page: PageObject) {
+    const locator: Locator = page[key];
     const count = await locator.count();
     for (let i = 0; i < count; i++) {
       const checkbox = locator.nth(i);
@@ -1223,21 +1223,6 @@ export default class CommonItemsPage {
     return activeFilterLabel;
   }
 
-  async clearReviewBodyCheckboxCreateUser<PageObject>(dataset: JSON, page: PageObject) {
-    const locator: Locator = page['review_body_checkbox'];
-    const typeAttribute = await locator.first().getAttribute('type');
-    if (typeAttribute === 'checkbox') {
-      for (const checkbox of dataset['review_body_checkbox']) {
-        const checkboxes = await locator.locator('..').getByLabel(checkbox).all();
-        for (const checkbox of checkboxes) {
-          const isChecked = await checkbox.isChecked();
-          if (isChecked) {
-            await checkbox.uncheck();
-          }
-        }
-      }
-    }
-  }
   async getSelectedCheckboxCreateUserReviewBody<PageObject>(
     dataset: JSON,
     page: PageObject

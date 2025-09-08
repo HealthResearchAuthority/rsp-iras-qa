@@ -278,6 +278,7 @@ Feature: User Administration: Manage Users - Create user
     And I capture the page screenshot
     When I enter '<Search_Queries>' into the search field for manage users page
     And I capture the page screenshot
+    And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
     And I select advanced filters in the manage users page using '<Advanced_Filters>'
     And I capture the page screenshot
     And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
