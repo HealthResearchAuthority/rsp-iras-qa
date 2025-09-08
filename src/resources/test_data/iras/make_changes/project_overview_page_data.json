@@ -18,8 +18,10 @@
     "participating_nations": "Participating nations",
     "nhs_hsc_organisations": "NHS / HSC organisations",
     "lead_nation": "Lead nation",
-    "maxPagesToVisit": 2,
-    "modification_status": "Draft"
+    "maxPagesToVisit": 2
+  },
+  "Modification_Status": {
+    "draft_status": "Draft"
   },
   "Valid_Data_All_Fields": {
     "short_project_title_text": "QA_Automation - This is a short project title",

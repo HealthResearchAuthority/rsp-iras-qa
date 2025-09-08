@@ -88,16 +88,17 @@ Then(
 
 Then(
   'I can see the status of modifications displayed is {string}',
-  async ({ commonItemsPage, projectOverviewPage }, expectedStatus: string) => {
+  async ({ commonItemsPage, projectOverviewPage }, datasetName: string) => {
     //Limiting the checks to 2 pages
-    expectedStatus = projectOverviewPage.projectOverviewPageTestData.Project_Overview_Page.modification_status;
+    const dataset = projectOverviewPage.projectOverviewPageTestData[datasetName];
+    const expectedStatus = dataset.draft_status;
     const maxPagesToCheck = projectOverviewPage.projectOverviewPageTestData.Project_Overview_Page.maxPagesToVisit;
     for (let pageIndex = 1; pageIndex <= maxPagesToCheck; pageIndex++) {
       const rowCount = await commonItemsPage.tableRows.count();
       for (let rowIndex = 1; rowIndex < rowCount; rowIndex++) {
         const row = commonItemsPage.tableRows.nth(rowIndex);
-        const status = await projectOverviewPage.getStatus(row);
-        expect(status).toEqual(expectedStatus);
+        const actualStatus = await projectOverviewPage.getStatus(row);
+        expect(actualStatus).toEqual(expectedStatus);
       }
       if (await commonItemsPage.next_button.isVisible()) {
         await commonItemsPage.next_button.click();

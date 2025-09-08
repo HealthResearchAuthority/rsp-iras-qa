@@ -58,7 +58,7 @@ Feature: Project Overview
         And I capture the page screenshot
         And I validate the 'Valid_Data_Fields' displayed in the project overview page
         And I can see the 'Label_Texts_Post_Approval' ui labels on the project overview page
-        And I can see the status of modifications displayed is 'Draft'
+        And I can see the status of modifications displayed is 'Modification_Status'
 
     @rsp-4876 @PostApprovalPageSort
     Scenario Outline: Validate the user is able to access the view the post approval details from the project overview page
