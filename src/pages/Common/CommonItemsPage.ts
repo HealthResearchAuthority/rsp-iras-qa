@@ -850,7 +850,7 @@ export default class CommonItemsPage {
   async clearCheckboxes(dataset: any, keys: string[], commonItemsPage: any, createUserProfilePage: any) {
     for (const key of keys) {
       if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        await commonItemsPage.clearUIComponent(dataset, key, createUserProfilePage);
+        await this.clearUIComponent(dataset, key, createUserProfilePage);
       }
     }
   }
@@ -1005,13 +1005,18 @@ export default class CommonItemsPage {
     filterLabels: any,
     replaceValue: string
   ): Promise<string | null> {
-    return await this.getActiveFilterLabelDateField(
-      filterLabels,
-      filterDataset,
-      key,
-      /(_from_day_text|_to_day_text)$/,
-      replaceValue
-    );
+    const dateSuffixRegex = /(_from_day_text|_to_day_text)$/;
+    if (key.startsWith('date_last_logged_in')) {
+      return await this.getActiveFilterLabelLastLoggedInField(
+        filterLabels,
+        filterDataset,
+        key,
+        dateSuffixRegex,
+        replaceValue
+      );
+    } else if (key.startsWith('date_submitted')) {
+      return await this.getActiveFilterLabelDateField(filterLabels, filterDataset, key, dateSuffixRegex, replaceValue);
+    }
   }
 
   async getTextboxRadioButtonFilterLabel(
@@ -1153,5 +1158,76 @@ export default class CommonItemsPage {
         await checkbox.uncheck();
       }
     }
+  }
+
+  async getLabelsFromCheckboxes(locator: Locator): Promise<string[]> {
+    const labels: string[] = [];
+    const count = await locator.count();
+    for (let i = 0; i < count; i++) {
+      const labelLocator = locator.nth(i).locator('..').locator('.govuk-label');
+      const labelText = confirmStringNotNull(await labelLocator.first().textContent());
+      labels.push(labelText);
+    }
+    return labels;
+  }
+
+  async getChangeLink<PageObject>(fieldKey: string, page: PageObject) {
+    const locatorName = fieldKey.toLowerCase() + '_change_link';
+    return page[locatorName];
+  }
+
+  async clearCheckboxesUserProfileReviewBody<PageObject>(dataset: any, page: PageObject) {
+    const locator: Locator = page['review_body_checkbox'];
+    const count = await locator.count();
+    for (let i = 0; i < count; i++) {
+      const checkbox = locator.nth(i);
+      const isChecked = await checkbox.isChecked();
+      if (isChecked) {
+        await checkbox.uncheck();
+      }
+    }
+  }
+
+  async selectCheckboxUserProfileReviewBody<PageObject>(dataset: any, page: PageObject) {
+    const locator: Locator = page['review_body_checkbox'];
+    const typeAttribute = await locator.first().getAttribute('type');
+    if (typeAttribute === 'checkbox') {
+      for (const checkbox of dataset['review_body_checkbox']) {
+        await locator.locator('..').getByLabel(checkbox).first().check();
+      }
+    }
+  }
+
+  async getLastLoggedInFilterLabel(
+    key: string,
+    filterDataset: any,
+    filterLabels: any,
+    replaceValue: string
+  ): Promise<string | null> {
+    return await this.getActiveFilterLabelLastLoggedInField(
+      filterLabels,
+      filterDataset,
+      key,
+      /(_from_day_text|_to_day_text)$/,
+      replaceValue
+    );
+  }
+
+  async getActiveFilterLabelLastLoggedInField(
+    filterLabels: any,
+    filterDataset: JSON,
+    key: string,
+    searchValue: RegExp,
+    replaceValue: string
+  ): Promise<string> {
+    let activeFilterLabel: string;
+    const label = filterLabels[key.replace(searchValue, replaceValue)];
+    const dateType = key.includes('_from_') ? 'from' : 'to';
+    const dateKey = key.replace('_day_text', '');
+    const dateValue = await this.getDateString(filterDataset, dateKey);
+    if (dateValue) {
+      activeFilterLabel = `${label} - ${dateType} ${dateValue}`;
+    }
+    return activeFilterLabel;
   }
 }

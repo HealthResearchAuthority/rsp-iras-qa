@@ -28,7 +28,7 @@ Feature: User Administration: Manage Review Bodies - Create review body
             | Valid_Data_In_All_Fields           | enabled |
             | Valid_Data_In_All_Mandatory_Fields | enabled |
 
-    @verifyCreateReviewBodyRealData
+    @verifyCreateReviewBodyRealData @skip
     Scenario Outline: Verify the user is able to create a new review body with real data
         When I fill the new review body page using '<Add_Review_Body>'
         And I capture the page screenshot
@@ -43,8 +43,9 @@ Feature: User Administration: Manage Review Bodies - Create review body
             | Add_Review_Body         |
             | Review_Body_HCRW_Data   |
             | Review_Body_HSCNI_Data  |
-            | Review_Body_RandD_Data  |
+            | Review_Body_NRSPCC_Data |
             | Review_Body_HRA_Data    |
+            | Review_Body_RandD_Data  |
             | Review_Body_NIPS_Data   |
             | Review_Body_HFEA_Data   |
             | Review_Body_HMPPS_Data  |
@@ -54,7 +55,7 @@ Feature: User Administration: Manage Review Bodies - Create review body
             | Review_Body_MHRA_Data   |
             | Review_Body_CAG_Data    |
             | Review_Body_ARSAC_Data  |
-            | Review_Body_NRS_Data    |
+
 
     @verifyAddAnotherReviewBody
     Scenario Outline: Verify the user is able to add another review body via the link on the Confirmation message screen
@@ -167,7 +168,7 @@ Feature: User Administration: Manage Review Bodies - Create review body
             | Invalid_Data_Description_Field                       | Max_Description_Words_Error                                  |
             | Incorrect_Format_Invalid_Character_Limit_Email_Field | Incorrect_Format_Invalid_Character_Limit_Email_Address_Error |
 
-    @verifyEmailValidationErrors @rsp-3123 @skip
+    @verifyEmailValidationErrors @rsp-3123
     Scenario Outline: Verify that email field validation prevents invalid email formats
         When I fill the new review body page using '<Add_Review_Body>'
         And I capture the page screenshot
@@ -176,30 +177,42 @@ Feature: User Administration: Manage Review Bodies - Create review body
         And I capture the page screenshot
 
         Examples:
-            | Add_Review_Body                                     | Field_And_Summary_Error_Message |
-            | Invalid_Character_Limit                             | Max_Chars_Email_Address_Error   |
-            | Incorrect_Email_Format                              | Email_Format_Error              |
-            | Invalid_Email_Data_Start_With_Dot                   | Email_Format_Error              |
-            | Invalid_Email_Data_Double_Dot                       | Email_Format_Error              |
-            | Invalid_Email_Data_Space                            | Email_Format_Error              |
-            | Invalid_Email_Data_Wrong_AT                         | Email_Format_Error              |
-            | Invalid_Email_Data_Less_Greater_Symbols             | Email_Format_Error              |
-            | Invalid_Email_Data_Colon                            | Email_Format_Error              |
-            | Invalid_Email_Data_Semi_Colon                       | Email_Format_Error              |
-            | Invalid_Email_Data_Comma                            | Email_Format_Error              |
-            | Invalid_Email_Data_Start_With_Hyphen                | Email_Format_Error              |
-            | Invalid_Email_Data_Hyphen_Before_Domain             | Email_Format_Error              |
-            | Invalid_Email_Data_Double_Dot_Domain                | Email_Format_Error              |
-            | Invalid_Email_Data_Exclamation_Domain               | Email_Format_Error              |
-            | Invalid_Email_Data_Unicode                          | Email_Format_Error              |
-            | Invalid_Email_Data_Single_Quote_Before_AT           | Email_Format_Error              |
-            | Invalid_Email_Data_Domain_Exceed_Max                | Email_Format_Error              |
-            | Invalid_Email_Data_Local_Part_Max                   | Email_Format_Error              |
-            | Invalid_Email_Data_Consecutive_Dot_Domain           | Email_Format_Error              |
-            | Invalid_Email_Data_Consecutive_Dot_SubDomain        | Email_Format_Error              |
-            | Invalid_Email_Data_Consecutive_Dot_Domain_SubDomain | Email_Format_Error              |
-            | Invalid_Email_Data_Emoji                            | Email_Format_Error              |
-            | Invalid_Email_Data_TLD                              | Email_Format_Error              |
-            | Invalid_Email_Data_Missing_AT                       | Email_Format_Error              |
-            | Invalid_Email_Data_Reserved_Domain                  | Email_Format_Error              |
-            | Invalid_Email_Data_Punycode                         | Email_Format_Error              |
+            | Add_Review_Body                                           | Field_And_Summary_Error_Message |
+            | Invalid_Email_Data_Leading_Dot                            | Email_Format_Error              |
+            | Invalid_Email_Data_Trailing_Dot                           | Email_Format_Error              |
+            | Invalid_Email_Data_Double_Dot                             | Email_Format_Error              |
+            | Invalid_Email_Data_Local_Part_Exceeds_Max_Limit_SixtyFour | Email_Format_Error              |
+            | Invalid_Email_Data_Reserved_Domain                        | Email_Format_Error              |
+
+    @VerifyNoErrorMessagesValidEmailData
+    Scenario Outline: Validate user is able to fill the email address field in the create review body page with valid data
+        When I fill the new review body page using '<Add_Review_Body>'
+        And I capture the page screenshot
+        And I click the 'Continue' button on the 'Create_Review_Body_Page'
+        Then I can see the check and create review body page for '<Add_Review_Body>'
+        And I capture the page screenshot
+
+        Examples:
+            | Add_Review_Body                       |
+            | Valid_Email_Data_Dot                  |
+            | Valid_Email_Data_Number               |
+            | Valid_Email_Data_Underscore           |
+            | Valid_Email_Data_Hyphen               |
+            | Valid_Email_Data_Plus                 |
+            | Valid_Email_Data_Exclamation          |
+            | Valid_Email_Data_Hash                 |
+            | Valid_Email_Data_Dollar               |
+            | Valid_Email_Data_Percentage           |
+            | Valid_Email_Data_Ampersand            |
+            | Valid_Email_Data_Single_Quote         |
+            | Valid_Email_Data_Star                 |
+            | Valid_Email_Data_Slash                |
+            | Valid_Email_Data_Equal_Symbol         |
+            | Valid_Email_Data_Question_Mark        |
+            | Valid_Email_Data_Cap_Symbol           |
+            | Valid_Email_Data_Curly_Brackets       |
+            | Valid_Email_Data_Pipe_Symbol          |
+            | Valid_Email_Data_Tilde_Symbol         |
+            | Valid_Email_Data_Special_Characters   |
+            | Valid_Email_Data_Multiple_Sub_Domains |
+            | Valid_Email_Data_Domain               |

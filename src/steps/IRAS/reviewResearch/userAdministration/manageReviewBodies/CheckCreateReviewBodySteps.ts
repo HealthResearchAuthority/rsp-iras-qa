@@ -29,7 +29,9 @@ Then(
 
 When(
   'I click the change link against {string} on the check review body page',
-  async ({ checkCreateReviewBodyPage }, fieldKey: string) => {
-    checkCreateReviewBodyPage.clickOnChangeButton(fieldKey);
+  async ({ checkCreateReviewBodyPage, commonItemsPage }, fieldKey: string) => {
+    const changeLink = await commonItemsPage.getChangeLink(fieldKey, checkCreateReviewBodyPage);
+    await expect(changeLink).toBeVisible();
+    await changeLink.click();
   }
 );
