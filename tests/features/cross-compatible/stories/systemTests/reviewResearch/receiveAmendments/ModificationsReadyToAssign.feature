@@ -109,3 +109,50 @@ Feature: Modifications Tasklist page that displays modifications ready to be ass
             | Short_Project_Title   |
             | Date_Submitted        |
             | Days_Since_Submission |
+
+    @AssignModification
+    Scenario Outline: Validate the user navigates to 'Select a study-wide reviewer' page on clicking 'Continue to assign modifications' button on the task list page
+        When I enter '<Valid_Iras_Id>' into the search field in the modifications ready to assign page
+        And I click the 'Search' button on the 'Modifications_Tasklist_Page'
+        # Then I can now see the modifications ready to assign table contains the expected search results for '<Search_Input>'
+        When I select a modification by clicking the checkbox in the modifications ready to assign page
+        And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
+        Then I can see the 'Search_Modifications_Page'
+        Then I can see the 'Select_Study_Wide_Reviewer_Page'
+        # And I can see all selected modifications on that page
+        # And I can see the proper list of study-wide reviewers
+        And I click the 'Complete_Assignment' button on the 'Select_Study_Wide_Reviewer_Page'
+        Examples:
+            | Valid_Iras_Id                       |
+            | Valid_Iras_Id_Ln_England_Pn_England |
+
+
+# https://nihr.atlassian.net/browse/RSP-4076
+# Test Case Design - AC’s for Automation:
+# Pre-requisite:
+# The roles and permissions feature should be implemented to properly display the list of study-wide reviewers.
+#  The user is on the Task list page, has selected at least one modification by clicking the checkbox, and clicks the Continue to assign modifications button to proceed to the next page.
+# Scenario : 1- Validate the user navigates to ‘Select a study-wide reviewer’ page on clicking Continue to assign modifications button on the task list page
+# GIVEN I am on the Task list page,
+# WHEN I select a modification by clicking the checkbox and then click the Continue to assign modifications button,
+# THEN I am taken to the next page to select a study-wide reviewer,
+# AND the proper list of study-wide reviewers should be displayed, the list of SWRs available should be determined by the assign modification (e.g. so if it = England, then it should only display SWRs with the review body HRA and are active),
+# AND I can see all selected modifications on that page, including the following fields: Short project title, Modification ID, and a scrollable list of study-wide reviewers,
+# AND Short project titles should be link buttons.
+# AND  the Complete assignment button should be displayed at the bottom of the page,
+# Scenario : 2- Validate the user navigates to the task list page  from the ‘Select a study-wide reviewer’ page on clicking ‘Back’ button on ‘Select a study-wide reviewer’ page
+# GIVEN I am on the page to select a study-wide reviewer,
+# WHEN I click the Back button at the top left of the page,
+# THEN I am redirected back to the Tasklist page,
+# AND my previously selected modifications and reviewer remain preserved.
+# https://nihr.atlassian.net/browse/RSP-4849
+# Test Case Design - AC’s for Automation:
+# Pre-requisite: The user has selected a study-wide reviewer from the list on the previous page and clicked the Complete assignment button.
+# Scenario : 1- Validate the user navigates to the final page on clicking ‘Complete assignment’ button
+# GIVEN I've selected a reviewer from the list,
+# WHEN I click the Complete assignment button and proceed to the final page.
+# THEN I see a success message with a description of what happens next, along with the Back to Tasklist button on the final page.
+# Scenario : 2-Validate the user navigates to the tasklist page on clicking ‘Back to Tasklist' button
+# GIVEN I am on the final page,
+# WHEN I click the Back to Tasklist button beneath the text,
+# THEN clicking the button should navigate me to the Tasklist page.

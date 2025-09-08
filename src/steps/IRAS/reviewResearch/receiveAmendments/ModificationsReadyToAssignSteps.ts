@@ -153,3 +153,18 @@ When('I confirm all checkboxes are {string}', async ({ modificationsReadyToAssig
     }
   }
 });
+
+When(
+  'I enter {string} into the search field in the modifications ready to assign page',
+  async ({ modificationsReadyToAssignPage }, datasetName: string) => {
+    const dataset = modificationsReadyToAssignPage.modificationsReadyToAssignPageData.Iras_Id[datasetName];
+    await modificationsReadyToAssignPage.iras_id_search_text.fill(dataset['iras_id_text']);
+  }
+);
+
+When(
+  'I select a modification by clicking the checkbox in the modifications ready to assign page',
+  async ({ modificationsReadyToAssignPage }) => {
+    await modificationsReadyToAssignPage.modification_checkbox.nth(0).check();
+  }
+);

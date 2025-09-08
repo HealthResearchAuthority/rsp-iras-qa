@@ -78,6 +78,9 @@ When(
       case 'Modifications_Tasklist_Page':
         await modificationsReadyToAssignPage.assertOnModificationsReadyToAssignPage();
         break;
+      case 'Select_Study_Wide_Reviewer_Page':
+        await selectStudywideReviewerPage.assertOnModificationsReadyToAssignPage();
+        break;
       default:
         throw new Error(`${page} is not a valid option`);
     }

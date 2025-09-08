@@ -7,7 +7,8 @@
     "advanced_filter_label": "Advanced filters",
     "modification_checkbox": "selectedOrganisationIds",
     "tasklist_days_suffix": "days",
-    "maxPagesToVisit": 2
+    "maxPagesToVisit": 2,
+    "iras_id_search_box_label": "IRAS ID"
   },
 
   "Label_Texts": {
@@ -15,5 +16,10 @@
     "modification_id_label": "Modification ID",
     "date_submitted_label": "Date submitted",
     "days_since_submission_label": "Days since submission"
+  },
+  "Iras_Id": {
+    "Valid_Iras_Id_Ln_England_Pn_England": {
+      "iras_id_text": "1234587"
+    }
   }
 }

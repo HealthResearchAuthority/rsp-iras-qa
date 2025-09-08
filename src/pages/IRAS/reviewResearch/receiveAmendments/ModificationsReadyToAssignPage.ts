@@ -21,6 +21,7 @@ export default class ModificationsReadyToAssignPage {
   readonly advanced_filter_label: Locator;
   readonly search_button_label: Locator;
   readonly modification_checkbox: Locator;
+  readonly iras_id_search_text: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -58,6 +59,10 @@ export default class ModificationsReadyToAssignPage {
     });
     this.search_button_label = this.page.getByText('Search');
     this.modification_checkbox = this.page.locator('input[name="selectedModificationIds"]');
+    this.iras_id_search_text = this.page.getByLabel(
+      this.modificationsReadyToAssignPageData.Modifications_Ready_To_Assign_Page.iras_id_search_box_label,
+      { exact: true }
+    );
   }
 
   //Page Methods
