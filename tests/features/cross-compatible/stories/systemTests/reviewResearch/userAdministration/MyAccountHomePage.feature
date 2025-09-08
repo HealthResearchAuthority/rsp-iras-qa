@@ -137,7 +137,7 @@ Feature: My Account Home page
       | Team_Manager         | Label_Texts_Team_Manager_Role         |
       | Workflow_Coordinator | Label_Texts_Workflow_Coordinator_Role |
 
-  @rsp-3821 @rsp-4486 @MyAccountHomepage @rsp-4424 @rsp-4423 @rsp-4422 @rsp4488 @ApplicantUser
+  @rsp-3821 @rsp-4486 @MyAccountHomepage @rsp-4424 @rsp-4423 @rsp-4422 @rsp-4488 @ApplicantUser
   Scenario Outline: Validate the access of user role using url navigation
     Given I have navigated to the '<Page>' as '<User>'
     Then I capture the page screenshot

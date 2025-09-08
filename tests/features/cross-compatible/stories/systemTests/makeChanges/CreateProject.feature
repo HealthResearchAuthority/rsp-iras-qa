@@ -163,12 +163,6 @@ Feature: Create Amendment - Create Project
     Then I can see the review your answers page
     When I click the '<Navigation_Button_Fourth>' button on the 'Review_Your_Answers_Page'
     Then I can see the project overview page
-    # The below steps can be re-used if user allowed go back to project creation flow
-    # When I click the '<Navigation_Link_Second>' link on the 'Project_Overview_Page'
-    # And I can see the project details title page
-    # And I capture the page screenshot
-    # And I click the '<Navigation_Link>' link on the 'Project_Details_Title_Page'
-    # Then I can see the project overview page
 
     Examples:
       | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Add_Project | Navigation_Button_Third | Navigation_Button_Fourth | Navigation_Link | Navigation_Link_Second | Project_Details_Title | Key_Project_Roles     | Research_Locations    | Change_Link_Field |
@@ -453,11 +447,11 @@ Feature: Create Amendment - Create Project
     # Then I can see previously saved values for '<Project_Details_Title>' displayed on the project details title page
 
     Examples:
-      | Project_Details_Title |
-      | Valid_Data_All_Fields |
-  # | Valid_Data_All_Empty_Fields |
-  # | Valid_Data_Only_Title_Field |
-  # | Valid_Data_Only_Date_Fields |
+      | Project_Details_Title       |
+      | Valid_Data_All_Fields       |
+      | Valid_Data_All_Empty_Fields |
+      | Valid_Data_Only_Title_Field |
+      | Valid_Data_Only_Date_Fields |
 
   @rsp-1863 @saveLaterProjectRoles
   Scenario Outline: Verify product details are saved when user saves the record on create project - key project roles page
