@@ -150,7 +150,6 @@ export default class ManageReviewBodiesPage {
     let hasNextPage = true;
     //adding this for loop instead of while loop to limit navigation till first 3 pages only,to reduce time and reduce fakiness
     for (let i = 0; i < 4; i++) {
-      // while (hasNextPage) {
       const rowCount = await this.orgListRows.count();
       for (let i = 1; i < rowCount; i++) {
         const columns = this.orgListRows.nth(i).getByRole('cell');

@@ -112,27 +112,31 @@ Then(
   'I can see previously filled values in the new user profile page for {string} displayed on the add a new user profile page',
   async ({ createUserProfilePage }, datasetName: string) => {
     const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
-    let fieldValActual: string | boolean;
-    for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        if (key === 'review_body_checkbox') {
-          fieldValActual = await createUserProfilePage.getSelectedCheckboxCreateUserReviewBody(
-            dataset,
-            createUserProfilePage
-          );
+
+    const getFieldValue = async (key: string): Promise<string | boolean> => {
+      if (key === 'review_body_checkbox') {
+        return await createUserProfilePage.getSelectedCheckboxCreateUserReviewBody(dataset, createUserProfilePage);
+      }
+      return await createUserProfilePage.getSelectedValuesCreateUser(dataset, key, createUserProfilePage);
+    };
+
+    const assertFieldValue = async (key: string, actual: string | boolean) => {
+      if (typeof actual === 'string') {
+        if (key === 'email_address_text') {
+          const data = await returnDataFromJSON();
+          expect(actual).toBe(data.Create_User_Profile.email_address_unique);
         } else {
-          fieldValActual = await createUserProfilePage.getSelectedValuesCreateUser(dataset, key, createUserProfilePage);
+          expect(actual).toBe(dataset[key]);
         }
-        if (typeof fieldValActual == 'string') {
-          if (key === 'email_address_text') {
-            const data = await returnDataFromJSON();
-            expect(fieldValActual).toBe(data.Create_User_Profile.email_address_unique);
-          } else {
-            expect(fieldValActual).toBe(dataset[key]);
-          }
-        } else if (typeof fieldValActual == 'boolean') {
-          expect(fieldValActual).toBeTruthy();
-        }
+      } else if (typeof actual === 'boolean') {
+        expect(actual).toBeTruthy();
+      }
+    };
+
+    for (const key in dataset) {
+      if (Object.hasOwn(dataset, key)) {
+        const fieldValActual = await getFieldValue(key);
+        await assertFieldValue(key, fieldValActual);
       }
     }
   }

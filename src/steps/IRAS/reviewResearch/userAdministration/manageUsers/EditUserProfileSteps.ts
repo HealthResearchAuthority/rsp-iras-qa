@@ -194,23 +194,27 @@ When(
   'I can see that the {string} users data persists on the edit profile page',
   async ({ createUserProfilePage, editUserProfilePage }, datasetName: string) => {
     const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
-    let fieldValActual: string | boolean;
+
+    const getFieldValue = async (key: string): Promise<string | boolean> => {
+      if (key === 'review_body_checkbox') {
+        return await createUserProfilePage.getSelectedCheckboxCreateUserReviewBody(dataset, createUserProfilePage);
+      }
+      return await createUserProfilePage.getSelectedValuesCreateUser(dataset, key, editUserProfilePage);
+    };
+
+    const assertFieldValue = (key: string, actual: string | boolean) => {
+      if (typeof actual === 'string') {
+        expect(actual).toBe(dataset[key]);
+      } else if (typeof actual === 'boolean') {
+        expect(actual).toBeTruthy();
+      }
+    };
+
     for (const key in dataset) {
       if (key !== 'email_address_text') {
         if (Object.hasOwn(dataset, key)) {
-          if (key === 'review_body_checkbox') {
-            fieldValActual = await createUserProfilePage.getSelectedCheckboxCreateUserReviewBody(
-              dataset,
-              createUserProfilePage
-            );
-          } else {
-            fieldValActual = await createUserProfilePage.getSelectedValuesCreateUser(dataset, key, editUserProfilePage);
-          }
-          if (typeof fieldValActual == 'string') {
-            expect(fieldValActual).toBe(dataset[key]);
-          } else if (typeof fieldValActual == 'boolean') {
-            expect(fieldValActual).toBeTruthy();
-          }
+          const fieldValActual = await getFieldValue(key);
+          assertFieldValue(key, fieldValActual);
         }
       }
     }
