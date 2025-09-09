@@ -3,16 +3,23 @@
     "username": "FutureIRAS.SysAdmin@hra.nhs.uk",
     "password": "`${process.env.SYSTEM_ADMIN_PASS}`"
   },
-  "Frontstage_User": {
+  "Applicant_User": {
     "username": "futureiras.automation@hra.nhs.uk",
-    "password": "`${process.env.FRONTSTAGE_USER_PASS}`"
+    "password": "`${process.env.APPLICANT_USER_PASS}`"
   },
-  "Backstage_User": {
+  "Studywide_Reviewer": {
     "username": "FutureIRAS.BackStage@hra.nhs.uk",
-    "password": "`${process.env.BACKSTAGE_USER_PASS}`"
+    "password": "`${process.env.STUDYWIDE_REVIEWER_PASS}`"
+  },
+  "Team_Manager": {
+    "username": "FutureIRAS.TeamManager@hra.nhs.uk",
+    "password": "`${process.env.TEAM_MANAGER_PASS}`"
+  },
+  "Workflow_Coordinator": {
+    "username": "FutureIRAS.WorkflowCoordinator@hra.nhs.uk",
+    "password": "`${process.env.WORKFLOW_COORDINATOR_PASS}`"
   },
   "Login_Page": {
-    "header": "This is the TEST Identity Gateway",
-    "partial_link": "id.nihr.ac.uk/authenticationendpoint/login"
+    "header": "Create your GOV.UK One Login or sign in"
   }
 }

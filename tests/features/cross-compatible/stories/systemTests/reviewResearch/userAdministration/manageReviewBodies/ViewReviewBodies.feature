@@ -1,4 +1,4 @@
-@UserAdministration @ViewReviewBodies @SysAdminUser @SystemTest @rsp-2571 @rsp-2569
+@UserAdministration @ManageReviewBodies @ViewReviewBodies @SysAdminUser @SystemTest
 Feature: User Administration: Manage Review Bodies list and view review bodies profile details
 
     Background:
@@ -6,7 +6,7 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
         And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
         Then I can see the 'Manage_Review_Bodies_Page'
 
-    @viewListOfReviewBodies
+    @viewListOfReviewBodies @rsp-2569
     Scenario Outline: Verify the user is able to view list of review bodies in alphabetical order of Organisation Name
         And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
         Then I can see the 'Create_Review_Body_Page'
@@ -33,14 +33,14 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
             | Add_Review_Body          | Status  |
             | Valid_Data_In_All_Fields | Enabled |
 
-    @verifyManageReviewBodiesPageBackButtonFlow
+    @verifyManageReviewBodiesPageBackButtonFlow @rsp-2569
     Scenario: Verify the user can navigate from 'Manage review bodies' page by clicking 'Back' button
         And I click the 'Back' link on the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
         Then I can see the 'System_Administration_Page'
 
 
-    @viewEnabledDisabledReviewBodies
+    @viewEnabledDisabledReviewBodies @rsp-2571
     Scenario Outline: Verify that user is able to view active and disabled review bodies
         When I enter 'QA Automation' into the search field
         And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
@@ -59,7 +59,7 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
             | Valid_Data_In_All_Fields_Disabled | Disabled |
 
 
-    @viewNewReviewBody
+    @viewNewReviewBody @rsp-2571
     Scenario Outline: Verify that user is able to view review body details with blank last updated date for the new record
         And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
         Then I can see the 'Create_Review_Body_Page'
@@ -89,25 +89,37 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
             | Review_Body_Name         | Status  |
             | Valid_Data_In_All_Fields | Enabled |
 
-    @rsp-3523 @ManageReviewBodiesPagination @ManageReviewBodiesPaginationFirstPage
-    Scenario: Verify pagination in manage review bodies page when user is on the first page
+    @rsp-3523 @ManageReviewBodiesPagination @ManageReviewBodiesPaginationFirstPage @ManageReviewBodiesPaginationPageNumber @ManageReviewBodiesPaginationNextLinkClick
+    Scenario: Verify pagination in manage review bodies page when user is on the first page and navigate through each page by clicking page number or by by clicking next link
         And I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
         And I capture the page screenshot
-        And the default page size should be twenty
+        And the default page size should be 'twenty'
         And the 'Next' button will be 'available' to the user
         And the 'Previous' button will be 'not available' to the user
         And the current page number should be visually highlighted to indicate the active page the user is on
         And I capture the page screenshot
+        Then I sequentially navigate through each 'Manage_Review_Bodies_Page' by clicking on '<Navigation_Method>' from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+        And I capture the page screenshot
+        Examples:
+            | Navigation_Method |
+            | page number       |
+            | next link         |
 
-    @rsp-3523 @ManageReviewBodiesPagination @ManageReviewBodiesPaginationLastPage
-    Scenario: Verify pagination in manage review bodies page when user is on the last page
+    @rsp-3523 @ManageReviewBodiesPagination @ManageReviewBodiesPaginationLastPage @ManageReviewBodiesPaginationPageNumber @ManageReviewBodiesPaginationPreviousLinkClick
+    Scenario: Verify pagination in manage review bodies page when user is on the last page and navigate through each page by clicking page number or by by clicking on previous link
         And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
         And I capture the page screenshot
         And the 'Previous' button will be 'available' to the user
         And the 'Next' button will be 'not available' to the user
         And I capture the page screenshot
+        Then I sequentially navigate through each 'Manage_Review_Bodies_Page' by clicking on '<Navigation_Method>' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+        And I capture the page screenshot
+        Examples:
+            | Navigation_Method |
+            | page number       |
+            | previous link     |
 
-    @rsp-3459 @ManageReviewBodiesSearchResultsFound @Smoke @skip
+    @rsp-3459 @ManageReviewBodiesSearchResultsFound
     Scenario Outline: Verify search results in manage review bodies page when user search by first and last organisation names
         When I enter the '<Field_Name>' of the '<Position>' item in the list, into the search field
         And I capture the page screenshot
@@ -126,7 +138,7 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
         And I capture the page screenshot
         And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
-        Then the system displays no results found message if there is no 'review body' on the system that matches the search criteria
+        Then the search displays no matching results
         And I capture the page screenshot
         Examples:
             | Search_Query      |
@@ -147,7 +159,7 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
             | Existing_QA_Data_Three |
 
     # out of scope for now
-    @rsp-3459 @ManageReviewBodiesSearchLeadingAndTrailingWhiteSpaces @fail @skip
+    @rsp-3459 @ManageReviewBodiesSearchLeadingAndTrailingWhiteSpaces @skip
     Scenario Outline: Verify search results in manage review bodies page when the search keyword contains leading and trailing white spaces
         When I fill the search input for searching 'review bodies' with '<Search_Query>' as the search query
         And I capture the page screenshot

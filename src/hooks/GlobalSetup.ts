@@ -1,5 +1,5 @@
 async function globalSetup() {
-  process.env.BASE_URL = 'https://irasportal-automationtest.azurewebsites.net/';
+  process.env.BASE_URL = 'https://fd-rsp-applications-automationtest-uks-e7f6hkg3c5edhxex.a03.azurefd.net/';
 }
 export default globalSetup;
 export const deviceDSafari = 'Desktop Safari';

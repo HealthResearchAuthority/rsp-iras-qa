@@ -1,4 +1,4 @@
-@UserAdministration @ManageReviewBodies @SysAdminUser @SystemTest @AuditHistoryReviewBody @rsp-2927
+@UserAdministration @ManageReviewBodies @SysAdminUser @SystemTest @AuditHistoryReviewBody @rsp-2927  @KNOWN-ISSUE-RSP-5003 @KNOWN-DEFECT-RSP-5004 @fail
 Feature: User Administration: Manage Review Bodies - View audit history for review body
 
     Background:
@@ -167,7 +167,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
             | Field_Name    | Edit_Review_Body         | Audit_History                  | Status_Enabled |
             | Email_Address | Valid_Data_Email_Another | Edit_Review_Body_Email_Address | Enabled        |
 
-    @VerifyAuditHistoryEditReviewBodyDescription @fail
+    @VerifyAuditHistoryEditReviewBodyDescription
     Scenario Outline: Verify the user can view the audit history after editing description of a review body
         And I select a 'QA Automation' review Body to View and Edit which is '<Status_Enabled>'
         And I can see the review body profile page

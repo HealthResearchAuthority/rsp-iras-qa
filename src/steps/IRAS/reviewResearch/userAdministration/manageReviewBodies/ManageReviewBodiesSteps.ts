@@ -177,3 +177,104 @@ Then(
     expect(actualList).toEqual(sortedList);
   }
 );
+
+When(
+  'I select advanced filters in the manage review bodies page using {string}',
+  async ({ manageReviewBodiesPage, commonItemsPage }, filterDatasetName: string) => {
+    const dataset = manageReviewBodiesPage.manageReviewBodiesPageData.Advanced_Filters[filterDatasetName];
+    for (const key in dataset) {
+      if (Object.hasOwn(dataset, key)) {
+        await manageReviewBodiesPage[key + '_chevron'].click();
+        await commonItemsPage.fillUIComponent(dataset, key, manageReviewBodiesPage);
+      }
+    }
+  }
+);
+
+When(
+  'I can see the results matching the search {string} and filter criteria {string} for manage review bodies page',
+  async ({ manageReviewBodiesPage, commonItemsPage }, searchDatasetName: string, filterDatasetName: string) => {
+    const searchCriteriaDataset =
+      manageReviewBodiesPage.manageReviewBodiesPageData.Search_For_Review_Bodies.Search_Queries[searchDatasetName];
+    const filterDataset = manageReviewBodiesPage.manageReviewBodiesPageData.Advanced_Filters[filterDatasetName];
+    await manageReviewBodiesPage.validateResults(commonItemsPage, searchCriteriaDataset, filterDataset, true);
+  }
+);
+
+When(
+  'I can see the results matching the filter criteria {string} for manage review bodies page',
+  async ({ manageReviewBodiesPage, commonItemsPage }, filterDatasetName: string) => {
+    const filterDataset = manageReviewBodiesPage.manageReviewBodiesPageData.Advanced_Filters[filterDatasetName];
+    await manageReviewBodiesPage.validateResults(commonItemsPage, {}, filterDataset, false);
+  }
+);
+
+Then(
+  'I verify the hint text based on the {string} for manage review bodies page',
+  async ({ manageReviewBodiesPage }, filterDatasetName: string) => {
+    const dataset = manageReviewBodiesPage.manageReviewBodiesPageData.Advanced_Filters[filterDatasetName];
+    for (const key in dataset) {
+      if (Object.hasOwn(dataset, key)) {
+        if (key === 'country_checkbox') {
+          const numberOfCheckboxesSelected = dataset[key].length;
+          const hintLabel =
+            numberOfCheckboxesSelected +
+            ' ' +
+            manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.selected_checkboxes_hint_label;
+          expect(await manageReviewBodiesPage.country_selected_hint_label.textContent()).toBe(hintLabel);
+        }
+      }
+    }
+  }
+);
+
+Then(
+  'I expand the chevrons for {string} in manage review bodies page',
+  async ({ manageReviewBodiesPage, commonItemsPage }, filterDatasetName: string) => {
+    const dataset = manageReviewBodiesPage.manageReviewBodiesPageData.Advanced_Filters[filterDatasetName];
+    await commonItemsPage.advanced_filter_chevron.click();
+    for (const key in dataset) {
+      if (Object.hasOwn(dataset, key)) {
+        await manageReviewBodiesPage[key + '_chevron'].click();
+      }
+    }
+  }
+);
+
+Then(
+  'I can see the {string} ui labels in manage review bodies page',
+  async ({ manageReviewBodiesPage }, datasetName: string) => {
+    const dataset = manageReviewBodiesPage.manageReviewBodiesPageData[datasetName];
+    for (const key in dataset) {
+      if (Object.hasOwn(dataset, key)) {
+        await expect(manageReviewBodiesPage[key].getByText(dataset[key])).toBeVisible();
+      }
+    }
+  }
+);
+
+Then(
+  'I can see the selected filters {string} are removed from active filters for manage review bodies page',
+  async ({ manageReviewBodiesPage, commonItemsPage }, filterDatasetName: string) => {
+    const dataset = manageReviewBodiesPage.manageReviewBodiesPageData.Advanced_Filters[filterDatasetName];
+    for (const key in dataset) {
+      if (Object.hasOwn(dataset, key)) {
+        if (key === 'country_checkbox') {
+          for (const filterLabel of dataset[key]) {
+            const activeLabel =
+              manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.country_label +
+              ' - ' +
+              filterLabel;
+            await expect(commonItemsPage.advanced_filter_active_filters_label.getByText(activeLabel)).not.toBeVisible();
+          }
+        } else if (key === 'status_radio') {
+          const activeLabel =
+            manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.status_label +
+            ' - ' +
+            dataset[key];
+          await expect(commonItemsPage.advanced_filter_active_filters_label.getByText(activeLabel)).not.toBeVisible();
+        }
+      }
+    }
+  }
+);

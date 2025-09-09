@@ -1,7 +1,10 @@
 {
   "Banner": {
-    "Login": "Sign In",
     "Logout": "Logout"
+  },
+  "Login_Page": {
+    "sign_in_button": "Sign in",
+    "continue_button": "Continue"
   },
   "Home_Page": {
     "New_Application": "Create New Application",
@@ -21,7 +24,12 @@
     "Proceed_Submit": "Proceed to Submit"
   },
   "My_Research_Projects_Page": {
-    "Create_Project_Record": "Add project record"
+    "Create_Project_Record": "Add project",
+    "Search": "Search",
+    "Advanced_filter": "Advanced filter",
+    "Short_Project_Title": "Short project title",
+    "Iras_Id": "IRAS ID",
+    "Date_Created": "Date created"
   },
   "Create_Project_Record_Page": {
     "Start": "Start"
@@ -88,6 +96,8 @@
   },
   "Manage_Review_Bodies_Page": {
     "Search": "Search",
+    "Advanced_Filters": "Advanced filters",
+    "Apply_filters": "Apply filters",
     "Org_Name": "Organisation name",
     "Country": "Country",
     "Status": "Status"
@@ -97,6 +107,8 @@
   },
   "Manage_Users_Page": {
     "Search": "Search",
+    "Advanced_Filters": "Advanced filters",
+    "Apply_Filters": "Apply filters",
     "First_Name": "First name",
     "Last_Name": "Last name",
     "Email_Address": "Email address",
@@ -104,7 +116,8 @@
     "Last_Logged_In": "Last logged in"
   },
   "Search_Modifications_Page": {
-    "Apply_filters": "Apply filters",
+    "Advanced_Filters": "Advanced filters",
+    "Apply_Filters": "Apply filters",
     "Search": "Search",
     "Modification_Id": "Modification ID",
     "Short_Project_Title": "Short project title",
@@ -117,7 +130,9 @@
     "Short_Project_Title": "Short project title",
     "Modification_Type": "Modification type",
     "Date_Submitted": "Date submitted",
-    "Days_Since_Submission": "Days since submission"
+    "Days_Since_Submission": "Days since submission",
+    "Continue_to_assign_modifications": "Continue to assign modifications",
+    "Advanced_Filters": "Advanced filters"
   },
   "Participating_Organisations_Page": {
     "Save_Continue": "Save and continue",
@@ -130,6 +145,36 @@
   },
   "Modifications_Page": {
     "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later",
+    "Save_Changes": "Save changes"
+  },
+  "Affected_Organisation_Selection_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later",
+    "Save_Changes": "Save changes"
+  },
+  "Affected_Organisation_Questions_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later",
+    "Save_Changes": "Save changes"
+  },
+  "Review_Changes_Planned_End_Date_Page": {
+    "Save_Continue": "Save and continue",
     "Save_For_Later": "Save for later"
+  },
+  "Project_Overview_Page": {
+    "Create_New_Modification": "Create new modification"
+  },
+  "Add_Document_Modifications_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later"
+  },
+  "Review_Uploaded_Document_Modifications_Page": {
+    "Add_Another_Document": "Add another document",
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later"
+  },
+  "Project_Overview_Page": {
+    "Create_New_Modification": "Create new modification"
   }
 }

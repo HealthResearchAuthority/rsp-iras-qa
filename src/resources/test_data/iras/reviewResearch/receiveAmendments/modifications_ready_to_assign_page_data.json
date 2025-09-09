@@ -4,15 +4,15 @@
     "page_heading": "Modifications ready to assign",
     "page_description": "This page shows all the modifications that are ready for you to assign, where the lead nation is England.",
     "modification_button_label": "Continue to assign modifications",
-    "advanced_filter_label": "Advanced filter",
-    "modification_checkbox": "",
-    "tasklist_days_suffix": "days"
+    "advanced_filter_label": "Advanced filters",
+    "modification_checkbox": "selectedOrganisationIds",
+    "tasklist_days_suffix": "days",
+    "maxPagesToVisit": 2
   },
 
   "Label_Texts": {
     "short_project_title_label": "Short project title",
     "modification_id_label": "Modification ID",
-    "modification_type_label": "Modification type",
     "date_submitted_label": "Date submitted",
     "days_since_submission_label": "Days since submission"
   }

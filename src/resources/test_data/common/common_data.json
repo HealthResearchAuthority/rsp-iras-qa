@@ -8,7 +8,23 @@
   "disabled_status": "Disabled",
   "first_page": "Page 1",
   "default_page_size": "20",
+  "default_page_size_participating_organisation": "10",
   "previous_button": "Previous   page",
   "heading": "Access Denied",
-  "guidance_text": "You do not have access to this resource"
+  "guidance_text": "You do not have access to this resource",
+  "advanced_filter_label": "Advanced filters",
+  "result_count_heading": " results",
+  "selected_checkboxes_hint_label": "selected",
+  "active_filters_label": "Active filters",
+  "clear_all_filters_label": "Clear all filters",
+  "no_results_heading": "There are no matching results",
+  "no_results_guidance_text": "Improve your search results by:",
+  "no_results_bullet_points": [
+    "removing filters",
+    "double-checking your spelling",
+    "using fewer keywords",
+    "searching for something less specific"
+  ],
+  "uploaded_documents_counter_label": " files chosen",
+  "maxPagesToValidate": 10
 }
