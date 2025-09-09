@@ -162,9 +162,31 @@ When(
   }
 );
 
+// When(
+//   'I select modifications with ids as {string} by clicking the checkbox in the modifications ready to assign page',
+//   async ({ modificationsReadyToAssignPage }, datasetName: string) => {
+//     const dataset = modificationsReadyToAssignPage.modificationsReadyToAssignPageData.Modification_Id[datasetName];
+//     for (const key in dataset) {
+//       if (Object.hasOwn(dataset, key)) {
+//         for (const modificationId of dataset[key]) {
+//           const modificationCheckbox = modificationsReadyToAssignPage.modification_checkbox.filter({
+//             has: modificationsReadyToAssignPage.page.locator('[id="`${modificationId}`"]'),
+//           });
+//           await modificationCheckbox.check();
+//         }
+//       }
+//     }
+//   }
+// );
+
 When(
-  'I select a modification by clicking the checkbox in the modifications ready to assign page',
-  async ({ modificationsReadyToAssignPage }) => {
-    await modificationsReadyToAssignPage.modification_checkbox.nth(0).check();
+  'I select a study wide reviewer in the select a reviewer page using {string}',
+  async ({ modificationsReadyToAssignPage, commonItemsPage }, datasetName: string) => {
+    const dataset = modificationsReadyToAssignPage.modificationsReadyToAssignPageData.Study_Wide_Reviewer[datasetName];
+    for (const key in dataset) {
+      if (Object.hasOwn(dataset, key)) {
+        await commonItemsPage.fillUIComponent(dataset, key, modificationsReadyToAssignPage);
+      }
+    }
   }
 );

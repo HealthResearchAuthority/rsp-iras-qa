@@ -21,5 +21,15 @@
     "Valid_Iras_Id_Ln_England_Pn_England": {
       "iras_id_text": "1234587"
     }
+  },
+  "Modification_Id": {
+    "Modification_Id_Ln_England_Pn_England": {
+      "modification_id_checkbox": ["1234587/1"]
+    }
+  },
+  "Study_Wide_Reviewer": {
+    "Study_Wide_Reviewer_HRA_England": {
+      "study_wide_reviewer_dropdown": "Study-wide reviewer HRA England"
+    }
   }
 }

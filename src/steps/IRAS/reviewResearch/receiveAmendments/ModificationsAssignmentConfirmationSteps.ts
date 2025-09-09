@@ -7,15 +7,16 @@ const { Then } = createBdd(test);
 
 Then(
   'I can see the modifications assignment confirmation page for {string}',
-  async ({ createUserProfileConfirmationPage, createUserProfilePage }, datasetName: string) => {
-    const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
-    await createUserProfileConfirmationPage.assertOnCreateUserProfileConfirmationPage();
+  async ({ modificationsAssignmentConfirmationPage, modificationsReadyToAssignPage }, datasetName: string) => {
+    const dataset = modificationsReadyToAssignPage.modificationsReadyToAssignPageData.Study_Wide_Reviewer[datasetName];
+    // const dataset =
+    //   modificationsAssignmentConfirmationPage.modificationsAssignmentConfirmationPageTestData
+    //     .Modifications_Assignment_Confirmation_Page;
+    await modificationsAssignmentConfirmationPage.assertOnModificationsAssignmentConfirmationPage();
     const expectedConsent =
-      dataset.first_name_text +
-      ' ' +
-      dataset.last_name_text +
+      dataset.study_wide_reviewer_dropdown +
       modificationsAssignmentConfirmationPageTestData.Modifications_Assignment_Confirmation_Page.consent;
-    const valConsentUI: string | null = await createUserProfileConfirmationPage.consentVal.textContent();
+    const valConsentUI: string | null = await modificationsAssignmentConfirmationPage.consentVal.textContent();
     const actualConsent = await removeUnwantedWhitespace(confirmStringNotNull(valConsentUI));
     expect(actualConsent).toBe(expectedConsent);
   }
