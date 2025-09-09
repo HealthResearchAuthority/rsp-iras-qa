@@ -1,5 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../../hooks/CustomFixtures';
+import { confirmArrayNotNull } from '../../../../../utils/UtilFunctions';
 const { Given, When, Then } = createBdd(test);
 
 When(
@@ -85,12 +86,12 @@ Then(
     const filteredSearchResults = await commonItemsPage.filterResults(userValues, searchTerms);
     const userList = await commonItemsPage.getAllUsersFromTheTable();
     const userListAfterSearch: any = userList.get('searchResultValues');
-    expect(filteredSearchResults).toEqual(userListAfterSearch);
+    expect.soft(filteredSearchResults).toEqual(userListAfterSearch);
     const searchResult = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
       userListAfterSearch,
       searchTerms
     );
-    expect(searchResult).toBeTruthy();
+    expect.soft(searchResult).toBeTruthy();
     await userListReviewBodyPage.updateUserInfo();
   }
 );
@@ -162,5 +163,19 @@ Given(
     await expect(userListReviewBodyPage.status_value_first_row).toHaveText(
       await searchAddUserReviewBodyPage.getUserStatus()
     );
+  }
+);
+
+When(
+  'I capture the name of the newly added user in the user list page of the review body',
+  async ({ createUserProfilePage, userListReviewBodyPage, commonItemsPage }) => {
+    if ((await commonItemsPage.tableBodyRows.count()) >= 1) {
+      const userListBeforeSearch = await commonItemsPage.getAllUsersFromTheTable();
+      const userValues: string[] = confirmArrayNotNull(userListBeforeSearch.get('searchResultValues'));
+      await userListReviewBodyPage.setUserListBeforeSearch(userValues);
+      await userListReviewBodyPage.setSearchKey(await createUserProfilePage.getUniqueEmail());
+    } else {
+      throw new Error(`There are no items in list to search`);
+    }
   }
 );

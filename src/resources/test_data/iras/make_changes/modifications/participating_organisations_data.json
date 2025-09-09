@@ -4,10 +4,30 @@
     "short_project_title_label": "Short project title",
     "modification_id_label": "Modification ID",
     "organisation_name_textbox_label": "Organisation name",
-    "advanced_filter_label": "Advanced filter",
+    "advanced_filter_label": "Advanced filters",
     "remove_this_change_label": "Remove this change"
   },
   "Field_Error_participating_organisations_text": {
     "participating_organisations_text": "No participant organisations have been selected. Select at least one participant organisation before clicking 'Save and continue'."
-  }
+  },
+  "Column_Label ": {
+    "Name": "Name",
+    "Address": "Address",
+    "Organisation type": "Organisation type",
+    "Country": "Country"
+  },
+  "Checkbox": {
+    "modification_checkbox": "selectedOrganisationIds"
+  },
+  "Search_Queries": {
+    "Valid_Search_Text_NHS": { "search_input_text": "NHS" },
+    "Valid_Search_Text_VACC_CENTRE": { "search_input_text": "VACCINATION CENTRE" },
+    "Invalid_Search_Text_Two_Letters": { "search_input_text": "NH" },
+    "Invalid_Search_Text_One_Letter": { "search_input_text": "a" }
+  },
+  "Summary_Only_Error_Participating_Organisations": {
+    "less_than_three_character": "Provide 3 or more characters to search"
+  },
+
+  "Max_Pages_To_Validate": 4
 }

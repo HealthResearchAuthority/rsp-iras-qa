@@ -1,6 +1,6 @@
 import { DataTable } from 'playwright-bdd';
 import { Locator, chromium, devices, firefox, webkit } from '@playwright/test';
-import { createDecipheriv, DecipherGCM } from 'crypto';
+import { createDecipheriv, DecipherGCM, randomInt } from 'crypto';
 import { readFile, writeFile } from 'fs/promises';
 import 'dotenv/config';
 import { deviceDSafari, deviceDFirefox, deviceDChrome, deviceDEdge } from '../hooks/GlobalSetup';
@@ -34,8 +34,8 @@ export function getAuthState(user: string): string {
     case 'system_admin':
       authState = 'auth-storage-states/sysAdminUser.json';
       break;
-    case 'frontstage_user':
-      authState = 'auth-storage-states/frontStageUser.json';
+    case 'applicant_user':
+      authState = 'auth-storage-states/applicantUser.json';
       break;
     case 'studywide_reviewer':
       authState = 'auth-storage-states/studyWideReviewer.json';
@@ -93,7 +93,7 @@ export function getTicketReferenceTags(tags: string[]): string[] {
   return tickets;
 }
 
-export function getDecryptedValue(data: string, secretKey?: any, authTag?: string) {
+export function getDecryptedValue(data: string, secretKey?: string, authTag?: string) {
   let value: string = '';
   if (secretKey) {
     const decipher = createDecipheriv('AES-256-GCM', Buffer.from(secretKey), Buffer.alloc(16)) as DecipherGCM;
@@ -545,7 +545,7 @@ export async function generateTimeStampedValue(keyVal: string, separator: string
 export async function getCurrentTimeFormatted(): Promise<string> {
   const date = new Date();
   const utcDay = date.getUTCDate().toString().padStart(2, '0');
-  const utcMonth = date.toLocaleString('en-GB', { month: 'short', timeZone: 'UTC' });
+  const utcMonth = date.toLocaleString('en-GB', { month: 'short', timeZone: 'UTC' }).slice(0, 3);
   const utcYear = date.getUTCFullYear();
   const utcHours = date.getUTCHours().toString().padStart(2, '0');
   const utcMinutes = date.getUTCMinutes().toString().padStart(2, '0');
@@ -566,6 +566,28 @@ export async function returnDataFromJSON(filePath?: string): Promise<any> {
 export async function convertDate(day: string, month: number, year: number): Promise<any> {
   const formattedDate = `${day.padStart(2, '0')} ${month} ${year}`;
   return formattedDate.toString();
+}
+
+export async function convertDateShortMonth(day: string, month: string, year: number): Promise<string> {
+  const formattedDay = String(parseInt(day, 10));
+  const formattedMonth = month.charAt(0).toUpperCase() + month.slice(1, 3).toLowerCase();
+  const formattedDate = `${formattedDay} ${formattedMonth} ${year}`;
+  return formattedDate;
+}
+
+export async function validateDateRange(validationDate: string, fromDate?: string, toDate?: string): Promise<boolean> {
+  const target = new Date(validationDate);
+  const from = new Date(fromDate);
+  const to = new Date(toDate);
+  if (!from.toString().includes('Invalid Date') && !to.toString().includes('Invalid Date')) {
+    return target >= from && target <= to;
+  } else if (!from.toString().includes('Invalid Date')) {
+    return target >= from;
+  } else if (!to.toString().includes('Invalid Date')) {
+    return target <= to;
+  }
+  // If both from and to are not provided or are placeholders, consider it invalid
+  return false;
 }
 
 export async function returnSingleRandomLocator(resolvesToMultiElements: Locator): Promise<Locator> {
@@ -589,4 +611,10 @@ export function resolveEnvExpression(template: string): string {
     throw new Error(`Environment variable "${envVar}" is not defined`);
   }
   return value;
+}
+
+export async function getRandomNumber(min: number, max: number): Promise<number> {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return randomInt(min, max);
 }

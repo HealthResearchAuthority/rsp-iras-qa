@@ -100,9 +100,4 @@ export default class CheckCreateReviewBodyPage {
     await expect(this.guidance_text).toBeVisible();
     await expect(this.sub_heading).toBeVisible();
   }
-
-  async clickOnChangeButton(fieldKey: string) {
-    const locatorName = fieldKey.toLowerCase() + '_change_link';
-    await this[locatorName].click();
-  }
 }

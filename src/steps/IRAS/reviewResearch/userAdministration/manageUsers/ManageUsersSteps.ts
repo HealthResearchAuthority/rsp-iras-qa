@@ -14,12 +14,13 @@ When('I update user profile with {string}', async ({ commonItemsPage, editUserPr
 
 When(
   'I can see the newly created user record should be present in the list for {string} with {string} status in the manage user page',
-  async ({ manageUsersPage, createUserProfilePage }, datasetName: string, status: string) => {
+  async ({ manageUsersPage, createUserProfilePage, commonItemsPage }, datasetName: string, status: string) => {
     const foundRecord = await manageUsersPage.getUniqueUserRecord(
       datasetName,
       status,
       createUserProfilePage,
-      manageUsersPage
+      manageUsersPage,
+      commonItemsPage
     );
     expect(foundRecord).toBeDefined();
     expect(foundRecord).toHaveCount(1);
@@ -44,12 +45,13 @@ When(
 
 When(
   'I search and click on view edit link for unique {string} user with {string} status from the manage user page',
-  async ({ manageUsersPage, createUserProfilePage }, datasetName: string, status: string) => {
+  async ({ manageUsersPage, createUserProfilePage, commonItemsPage }, datasetName: string, status: string) => {
     const foundRecord = await manageUsersPage.getUniqueUserRecord(
       datasetName,
       status,
       createUserProfilePage,
-      manageUsersPage
+      manageUsersPage,
+      commonItemsPage
     );
     expect(foundRecord).toBeDefined();
     expect(foundRecord).toHaveCount(1);
@@ -147,5 +149,130 @@ When(
     } else if (caseValue === 'remove QAAutomation prefix') {
       await createUserProfilePage.setUniqueEmail(email.replace('QAAUTOMATION', ''));
     }
+  }
+);
+
+When(
+  'I enter {string} into the search field for manage users page',
+  async ({ manageUsersPage }, datasetName: string) => {
+    const dataset =
+      manageUsersPage.manageUsersPageTestData.Search_For_Users.Search_Queries_Advanced_Filter[datasetName];
+    await manageUsersPage.user_search_text.fill(dataset['search_input_text']);
+  }
+);
+
+When(
+  'I select advanced filters in the manage users page using {string}',
+  async ({ manageUsersPage, commonItemsPage }, filterDatasetName: string) => {
+    const dataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[filterDatasetName];
+    for (const key in dataset) {
+      if (Object.hasOwn(dataset, key)) {
+        if (key.includes('date')) {
+          if (!(await manageUsersPage.date_last_logged_in_from_day_text.isVisible())) {
+            await manageUsersPage.date_last_logged_in_from_day_text_chevron.click();
+          }
+          await commonItemsPage.fillUIComponent(dataset, key, manageUsersPage);
+        } else if (key === 'review_body_checkbox') {
+          await commonItemsPage.selectCheckboxUserProfileReviewBody(dataset, manageUsersPage);
+        } else {
+          await manageUsersPage[key + '_chevron'].click();
+          await commonItemsPage.fillUIComponent(dataset, key, manageUsersPage);
+        }
+      }
+    }
+  }
+);
+
+When(
+  'I can see the results matching the search {string} and filter criteria {string} for manage users page',
+  async ({ manageUsersPage, commonItemsPage }, searchDatasetName: string, filterDatasetName: string) => {
+    const searchCriteriaDataset =
+      manageUsersPage.manageUsersPageTestData.Search_For_Users.Search_Queries_Advanced_Filter[searchDatasetName];
+    const filterDataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[filterDatasetName];
+    if (searchDatasetName !== '') {
+      await manageUsersPage.validateResults(
+        commonItemsPage,
+        searchCriteriaDataset,
+        filterDataset,
+        searchDatasetName,
+        true
+      );
+    } else {
+      await manageUsersPage.validateResults(
+        commonItemsPage,
+        searchCriteriaDataset,
+        filterDataset,
+        searchDatasetName,
+        false
+      );
+    }
+  }
+);
+
+Then(
+  'I verify the hint text based on the {string} for manage users page',
+  async ({ manageUsersPage }, filterDatasetName: string) => {
+    const dataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[filterDatasetName];
+    for (const key in dataset) {
+      if (Object.hasOwn(dataset, key)) {
+        if (key === 'country_checkbox') {
+          const numberOfCheckboxesSelected = dataset[key].length;
+          const hintLabel =
+            numberOfCheckboxesSelected +
+            ' ' +
+            manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List
+              .selected_checkboxes_hint_label;
+          expect(await manageUsersPage.country_selected_hint_label.textContent()).toBe(hintLabel);
+        }
+      }
+    }
+  }
+);
+
+When(
+  'I expand the chevrons for {string} in manage users page',
+  async ({ manageUsersPage }, filterDatasetName: string) => {
+    const dataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[filterDatasetName];
+    for (const key in dataset) {
+      if (Object.hasOwn(dataset, key)) {
+        await manageUsersPage.clickFilterChevronUsers(dataset, key, manageUsersPage);
+      }
+    }
+  }
+);
+
+Then('I can see the {string} ui labels in manage users page', async ({ manageUsersPage }, datasetName: string) => {
+  const dataset = manageUsersPage.manageUsersPageTestData.Manage_Users_Page[datasetName];
+  for (const key in dataset) {
+    if (Object.hasOwn(dataset, key)) {
+      await expect(manageUsersPage[key].getByText(dataset[key])).toBeVisible();
+    }
+  }
+});
+
+Then(
+  'I validate {string} displayed on advanced filters in manage users page',
+  async ({ manageUsersPage }, errorMessageFieldDatasetName: string) => {
+    const fieldErrorMessagesExpected =
+      manageUsersPage.manageUsersPageTestData.Error_Message_Field_Dataset[errorMessageFieldDatasetName];
+    const fieldErrorMessagesActualValues = await manageUsersPage.date_last_logged_in_error_message.textContent();
+    expect(fieldErrorMessagesActualValues).toEqual(fieldErrorMessagesExpected);
+  }
+);
+
+Then(
+  'I retrieve the list of review bodies displayed in the review body checkbox in the advanced filters of manage users page',
+  async ({ manageUsersPage, commonItemsPage }) => {
+    const actualList = await commonItemsPage.getLabelsFromCheckboxes(manageUsersPage.review_body_checkbox);
+    await manageUsersPage.setReviewBodies(actualList);
+  }
+);
+
+Then(
+  'I can see the review body field in the review body checkbox in the advanced filters of manage users page should contain all currently enabled review bodies from the manage review bodies page',
+  async ({ manageUsersPage, manageReviewBodiesPage }) => {
+    const actualList = await manageUsersPage.getReviewBodies();
+    const expectedList = await manageReviewBodiesPage.getOrgNamesListFromUI();
+    expect(actualList).toEqual(expectedList);
   }
 );

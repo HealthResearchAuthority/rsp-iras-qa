@@ -28,6 +28,15 @@ export default class ManageReviewBodiesPage {
   readonly listCell: Locator;
   readonly next_button: Locator;
   readonly tableRows: Locator;
+  readonly country_checkbox: Locator;
+  readonly status_radio: Locator;
+  readonly country_checkbox_chevron: Locator;
+  readonly status_radio_chevron: Locator;
+  readonly country_hint_label: Locator;
+  readonly country_selected_hint_label: Locator;
+  readonly status_hint_label: Locator;
+  readonly review_body_search_text: Locator;
+  readonly search_hint_text: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -67,6 +76,31 @@ export default class ManageReviewBodiesPage {
     this.listCell = this.page.getByRole('cell');
     this.next_button = this.page.locator('.govuk-pagination__next a');
     this.tableRows = this.page.getByRole('table').getByRole('row');
+    this.country_checkbox_chevron = this.page
+      .getByRole('heading', { level: 2 })
+      .getByText(this.manageReviewBodiesPageData.Manage_Review_Body_Page.country_label, {
+        exact: true,
+      });
+    this.status_radio_chevron = this.page
+      .getByRole('heading', { level: 2 })
+      .getByText(this.manageReviewBodiesPageData.Manage_Review_Body_Page.status_label, {
+        exact: true,
+      });
+    this.country_checkbox = page.getByRole('checkbox');
+    this.status_radio = page.getByRole('radio');
+    this.page.getByRole('checkbox');
+    this.country_selected_hint_label = page.getByTestId('country-hint');
+    this.country_hint_label = page.getByTestId('Search.Country');
+    this.status_hint_label = page.getByTestId('Search.Status');
+    this.review_body_search_text = this.page.getByLabel(
+      this.manageReviewBodiesPageData.Manage_Review_Body_Page.review_body_search_box_label,
+      {
+        exact: true,
+      }
+    );
+    this.search_hint_text = this.page.getByText(
+      this.manageReviewBodiesPageData.Manage_Review_Body_Page.search_hint_text
+    );
   }
 
   //Getters & Setters for Private Variables
@@ -102,6 +136,7 @@ export default class ManageReviewBodiesPage {
   async assertOnManageReviewBodiesPage() {
     await expect(this.pageHeading).toBeVisible();
     expect(await this.page.title()).toBe(this.manageReviewBodiesPageData.Manage_Review_Body_Page.title);
+    await expect(this.search_hint_text).toBeVisible();
   }
 
   async getRowByOrgName(orgName: string, exactMatch: boolean) {
@@ -112,11 +147,20 @@ export default class ManageReviewBodiesPage {
 
   async getOrgNamesListFromUI() {
     const orgNames: string[] = [];
-    const rowCount = await this.orgListRows.count();
-    for (let i = 1; i < rowCount; i++) {
-      const columns = this.orgListRows.nth(i).getByRole('cell');
-      const orgValue = confirmStringNotNull(await columns.first().textContent());
-      orgNames.push(orgValue);
+    let hasNextPage = true;
+    //adding this for loop instead of while loop to limit navigation till first 3 pages only,to reduce time and reduce fakiness
+    for (let i = 0; i < 4; i++) {
+      const rowCount = await this.orgListRows.count();
+      for (let i = 1; i < rowCount; i++) {
+        const columns = this.orgListRows.nth(i).getByRole('cell');
+        const orgValue = confirmStringNotNull(await columns.first().textContent());
+        orgNames.push(orgValue);
+      }
+      hasNextPage = (await this.next_button.isVisible()) && !(await this.next_button.isDisabled());
+      if (hasNextPage) {
+        await this.next_button.click();
+        await this.page.waitForLoadState('domcontentloaded');
+      }
     }
     return orgNames;
   }
@@ -229,5 +273,60 @@ export default class ManageReviewBodiesPage {
         reviewBodyName = inputType;
     }
     return reviewBodyName;
+  }
+
+  async validateFilters(countryActual: string, statusActual: string, filterDataset: any) {
+    for (const key in filterDataset) {
+      if (Object.hasOwn(filterDataset, key)) {
+        if (key === 'country_checkbox') {
+          const countryFilterLabelsExpected = filterDataset[key];
+          expect(
+            countryFilterLabelsExpected.some((countryLabel: string) =>
+              countryActual.toLowerCase().includes(countryLabel.toLowerCase())
+            )
+          ).toBeTruthy();
+        }
+        if (key === 'status_radio') {
+          const statusExpected = filterDataset[key];
+          expect(statusActual.toLowerCase().includes(statusExpected.toLowerCase()));
+        }
+      }
+    }
+  }
+
+  async getRowDataAdvancedFiltersSearch(row: any) {
+    return {
+      organisationName: confirmStringNotNull(await row.getByRole('cell').nth(0).textContent()),
+      country: confirmStringNotNull(await row.getByRole('cell').nth(1).textContent()),
+      status: confirmStringNotNull(await row.getByRole('cell').nth(2).textContent()),
+    };
+  }
+
+  async validateResults(
+    commonItemsPage: any,
+    searchCriteriaDataset: any,
+    filterDataset: any,
+    validateSearch: boolean = true
+  ) {
+    for (let pageIndex = 1; pageIndex < 4; pageIndex++) {
+      const rowCount = await commonItemsPage.tableRows.count();
+      expect(rowCount).toBeGreaterThan(0);
+      for (let rowIndex = 1; rowIndex < rowCount; rowIndex++) {
+        const row = commonItemsPage.tableRows.nth(rowIndex);
+        const { organisationName, country, status } = await this.getRowDataAdvancedFiltersSearch(row);
+
+        // If search criteria is to be validated, check organisation name
+        if (validateSearch && searchCriteriaDataset['search_input_text'] !== '') {
+          const organisationNameExpected = searchCriteriaDataset['search_input_text'];
+          expect(organisationName.toLowerCase().includes(organisationNameExpected.toLowerCase()));
+        }
+        this.validateFilters(country, status, filterDataset);
+      }
+      if (await commonItemsPage.next_button.isVisible()) {
+        await commonItemsPage.next_button.click();
+      } else {
+        break;
+      }
+    }
   }
 }

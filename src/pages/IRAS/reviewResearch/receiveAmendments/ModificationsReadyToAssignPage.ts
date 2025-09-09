@@ -1,5 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as modificationsReadyToAssignPageTestData from '../../../../resources/test_data/iras/reviewResearch/receiveAmendments/modifications_ready_to_assign_page_data.json';
+import * as buttonTextData from '../../../../resources/test_data/common/button_text_data.json';
+import * as linkTextData from '../../../../resources/test_data/common/link_text_data.json';
 import * as searchFilterResultsData from '../../../../resources/test_data/common/search_filter_results_data.json';
 
 //Declare Page Objects
@@ -9,6 +11,14 @@ export default class ModificationsReadyToAssignPage {
   readonly searchFilterResultsData: typeof searchFilterResultsData;
   private _days_since_submission_from_filter: number;
   private _days_since_submission_to_filter: number;
+  readonly buttonTextData: typeof buttonTextData;
+  readonly linkTextData: typeof linkTextData;
+  readonly modifications_tasklist_link: Locator;
+  readonly short_project_title_label: Locator;
+  readonly modification_id_label: Locator;
+  readonly date_submitted_label: Locator;
+  readonly days_since_submission_label: Locator;
+  readonly checkall_modification_checkbox: Locator;
   readonly page_heading: Locator;
   readonly page_description: Locator;
   readonly modification_button_label: Locator;
@@ -41,18 +51,34 @@ export default class ModificationsReadyToAssignPage {
     this.searchFilterResultsData = searchFilterResultsData;
     this._days_since_submission_from_filter = 0;
     this._days_since_submission_to_filter = 0;
+    this.linkTextData = linkTextData;
+    this.buttonTextData = buttonTextData;
 
     //Locators
-    this.page_heading = this.page.getByTestId('title');
-    this.modification_button_label = this.page
+    this.modifications_tasklist_link = this.page.locator('.govuk-heading-s govuk-link hra-card-heading__link');
+    this.short_project_title_label = this.page
       .getByRole('button')
-      .getByText(
-        this.modificationsReadyToAssignPageTestData.Modifications_Ready_To_Assign_Page.modification_button_label,
-        {
-          exact: true,
-        }
-      );
+      .getByText(this.modificationsReadyToAssignPageData.Label_Texts.short_project_title_label, {
+        exact: true,
+      });
+    this.modification_id_label = this.page
+      .getByRole('button')
+      .getByText(this.modificationsReadyToAssignPageData.Label_Texts.modification_id_label, {
+        exact: true,
+      });
+    this.date_submitted_label = this.page
+      .getByRole('button')
+      .getByText(this.modificationsReadyToAssignPageData.Label_Texts.date_submitted_label, {
+        exact: true,
+      });
+    this.days_since_submission_label = this.page
+      .getByRole('button')
+      .getByText(this.modificationsReadyToAssignPageTestData.Label_Texts.days_since_submission_label, {
+        exact: true,
+      });
     this.search_input_text = this.page.getByTestId('Search_IrasId');
+    this.checkall_modification_checkbox = this.page.locator('input[id="select-all-modifications"]');
+    this.page_heading = this.page.getByTestId('title');
     this.advanced_filter_label = this.page.getByRole('button', {
       name: this.modificationsReadyToAssignPageTestData.Modifications_Ready_To_Assign_Page.advanced_filter_label,
     });
@@ -100,6 +126,7 @@ export default class ModificationsReadyToAssignPage {
     // );
     this.short_project_title_text = this.page.locator('input[name="Search.ShortProjectTitle"]'); //workaround use above after fix
     this.search_button_label = this.page.getByText('Search');
+    // this.modification_checkbox = this.page.locator('input[name="selectedModificationIds"]'); //Check which is better
     this.modification_checkbox = this.page.getByRole('button', {
       name: this.modificationsReadyToAssignPageTestData.Modifications_Ready_To_Assign_Page.modification_checkbox,
     });
@@ -125,13 +152,13 @@ export default class ModificationsReadyToAssignPage {
   }
 
   //Page Methods
-
   async goto() {
     await this.page.goto('modificationstasklist/index');
   }
 
   async assertOnModificationsReadyToAssignPage() {
     await expect(this.page_heading).toBeVisible();
+    await this.page.waitForLoadState('domcontentloaded');
   }
 
   async sortDateSubmittedListValues(datesSubmitted: string[], sortDirection: string): Promise<string[]> {

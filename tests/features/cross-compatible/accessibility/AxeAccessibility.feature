@@ -8,16 +8,20 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilitymyResearchProjectsPage @FrontStageUser
-  Scenario: My Research Home Page
+  @axeAccessibilitymyResearchProjectsPage @ApplicantUser
+  Scenario: My Research Home Page and Project Overview
     Given I have navigated to the 'Home_Page'
     When I click the 'My_research' link on the 'Home_Page'
     Then I can see the 'My_Research_Page'
+    And I click the 'Project' link on the 'My_Research_Page'
+    When I click the 'Key_Project_Roles' link on the 'Project_Overview_Page'
+    Then I click the 'Research_Locations' link on the 'Project_Overview_Page'
+    And I can see the project overview page
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityCreateProjectRecord @FrontStageUser
+  @axeAccessibilityCreateProjectRecord @ApplicantUser
   Scenario: Create a project record
     Given I have navigated to the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
@@ -26,7 +30,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityProjectDetailsIRAS @FrontStageUser
+  @axeAccessibilityProjectDetailsIRAS @ApplicantUser
   Scenario: Project Details IRAS ID
     Given I have navigated to the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
@@ -36,7 +40,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityProjectDetailsTitle @FrontStageUser
+  @axeAccessibilityProjectDetailsTitle @ApplicantUser
   Scenario: Project Details - Short project title and Planned end date
     Given I have navigated to the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
@@ -48,7 +52,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityKeyProjectRoles @FrontStageUser
+  @axeAccessibilityKeyProjectRoles @ApplicantUser
   Scenario: Key Project Roles
     Given I have navigated to the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
@@ -62,7 +66,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityResearchLocations @FrontStageUser
+  @axeAccessibilityResearchLocations @ApplicantUser
   Scenario: Research Locations
     Given I have navigated to the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
@@ -78,7 +82,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityProjectOverviewCreateProject @FrontStageUser
+  @axeAccessibilityProjectOverviewCreateProject @ApplicantUser
   Scenario: Project Overview -Create project
     Given I have navigated to the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
@@ -93,7 +97,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityProjectOverviewModifications @FrontStageUser
+  @axeAccessibilityProjectOverviewModifications @ApplicantUser
   Scenario: Project Overview - Modifications
     Given I have navigated to the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
@@ -108,7 +112,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     And I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
     When I click the 'Modifications_Tile' link on the 'Project_Overview_Page'
-    And I select 'Participating_Organisation_Option' from area of change dropdown and 'Addition_Of_sites_Option' from specific change dropdown
+    And I select 'Participating_Organisation_Option' from area of change dropdown and 'Addition_Of_Sites_Option' from specific change dropdown
     When I click the 'Save_For_Later' button on the 'Select_Area_Of_Change_Page'
     Then I can see the project overview page
     Then I can see the participating organisation page
@@ -116,7 +120,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityReviewYourAnswers @FrontStageUser
+  @axeAccessibilityReviewYourAnswers @ApplicantUser
   Scenario: Review your answers
     Given I have navigated to the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
@@ -134,7 +138,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityKeyProjectRolesSponsorOrganisation @FrontStageUser
+  @axeAccessibilityKeyProjectRolesSponsorOrganisation @ApplicantUser
   Scenario: Key Project Roles - Primary Sponsor Organisation Suggestion List
     Given I have navigated to the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
@@ -184,7 +188,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I can see the 'Manage_Users_Page'
     When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
     Then I can see the add a new user profile page
-    When I fill the new user profile page using 'Valid_Data_In_All_Fields_Role_Operations'
+    When I fill the new user profile page using 'Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Workflow_Coordinator'
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
     Then I can see the check and create user profile page
     When I Scan the page with the Axe Accessibilty Tool
@@ -198,11 +202,11 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I can see the 'Manage_Users_Page'
     When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
     Then I can see the add a new user profile page
-    When I fill the new user profile page using 'Valid_Data_In_All_Fields_Role_Operations'
+    When I fill the new user profile page using 'Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Workflow_Coordinator'
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
     Then I can see the check and create user profile page
     And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
-    Then I can see the create user profile confirmation page for 'Valid_Data_In_All_Fields_Role_Operations'
+    Then I can see the create user profile confirmation page for 'Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Workflow_Coordinator'
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
@@ -236,12 +240,12 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Given I have navigated to the 'System_Administration_Page'
     And I click the 'Manage_Users' link on the 'System_Administration_Page'
     And I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
-    And I fill the new user profile page using 'Valid_Data_In_All_Fields_Role_Operations'
+    And I fill the new user profile page using 'Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Workflow_Coordinator'
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
     And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
     And I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
     And I can see the 'Manage_Users_Page'
-    And I search and click on view edit link for unique 'Valid_Data_In_All_Fields_Role_Operations' user with 'Enabled' status from the manage user page
+    And I search and click on view edit link for unique 'Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Workflow_Coordinator' user with 'Enabled' status from the manage user page
     And I can see the user profile page
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
@@ -252,12 +256,12 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Given I have navigated to the 'System_Administration_Page'
     And I click the 'Manage_Users' link on the 'System_Administration_Page'
     And I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
-    And I fill the new user profile page using 'Valid_Data_In_All_Fields_Role_Operations'
+    And I fill the new user profile page using 'Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Workflow_Coordinator'
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
     And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
     And I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
     And I can see the 'Manage_Users_Page'
-    And I search and click on view edit link for unique 'Valid_Data_In_All_Fields_Role_Operations' user with 'Enabled' status from the manage user page
+    And I search and click on view edit link for unique 'Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Workflow_Coordinator' user with 'Enabled' status from the manage user page
     And I click the 'Disable_User_Record' button on the 'User_Profile_Page'
     And I can see a 'Confirm' button on the 'Confirmation_Page'
     When I Scan the page with the Axe Accessibilty Tool
@@ -269,12 +273,12 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Given I have navigated to the 'System_Administration_Page'
     And I click the 'Manage_Users' link on the 'System_Administration_Page'
     And I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
-    And I fill the new user profile page using 'Valid_Data_In_All_Fields_Role_Operations'
+    And I fill the new user profile page using 'Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Workflow_Coordinator'
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
     And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
     And I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
     And I can see the 'Manage_Users_Page'
-    And I search and click on view edit link for unique 'Valid_Data_In_All_Fields_Role_Operations' user with 'Enabled' status from the manage user page
+    And I search and click on view edit link for unique 'Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Workflow_Coordinator' user with 'Enabled' status from the manage user page
     And I click the 'Disable_User_Record' button on the 'User_Profile_Page'
     And I click the 'Confirm' button on the 'Confirmation_Page'
     And I can see a 'Back_To_Manage_Users' link on the 'Confirmation_Page'
@@ -287,17 +291,17 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Given I have navigated to the 'System_Administration_Page'
     And I click the 'Manage_Users' link on the 'System_Administration_Page'
     And I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
-    And I fill the new user profile page using 'Valid_Data_In_All_Fields_Role_Operations'
+    And I fill the new user profile page using 'Valid_Data_In_All_Fields_Role_Team_Manager_System_Administrator'
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
     And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
     And I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
     And I can see the 'Manage_Users_Page'
-    And I search and click on view edit link for unique 'Valid_Data_In_All_Fields_Role_Operations' user with 'Enabled' status from the manage user page
+    And I search and click on view edit link for unique 'Valid_Data_In_All_Fields_Role_Team_Manager_System_Administrator' user with 'Enabled' status from the manage user page
     And I click the 'Disable_User_Record' button on the 'User_Profile_Page'
     And I click the 'Confirm' button on the 'Confirmation_Page'
     And I click the 'Back_To_Manage_Users' link on the 'Confirmation_Page'
     And I can see the 'Manage_Users_Page'
-    And I search and click on view edit link for unique 'Valid_Data_In_All_Fields_Role_Operations' user with 'Disabled' status from the manage user page
+    And I search and click on view edit link for unique 'Valid_Data_In_All_Fields_Role_Team_Manager_System_Administrator' user with 'Disabled' status from the manage user page
     And I can see the user profile page
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
@@ -308,17 +312,17 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Given I have navigated to the 'System_Administration_Page'
     And I click the 'Manage_Users' link on the 'System_Administration_Page'
     And I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
-    And I fill the new user profile page using 'Valid_Data_In_All_Fields_Role_Operations'
+    And I fill the new user profile page using 'Valid_Data_In_All_Fields_Role_Team_Manager_System_Administrator'
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
     And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
     And I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
     And I can see the 'Manage_Users_Page'
-    And I search and click on view edit link for unique 'Valid_Data_In_All_Fields_Role_Operations' user with 'Enabled' status from the manage user page
+    And I search and click on view edit link for unique 'Valid_Data_In_All_Fields_Role_Team_Manager_System_Administrator' user with 'Enabled' status from the manage user page
     And I click the 'Disable_User_Record' button on the 'User_Profile_Page'
     And I click the 'Confirm' button on the 'Confirmation_Page'
     And I click the 'Back_To_Manage_Users' link on the 'Confirmation_Page'
     And I can see the 'Manage_Users_Page'
-    And I search and click on view edit link for unique 'Valid_Data_In_All_Fields_Role_Operations' user with 'Disabled' status from the manage user page
+    And I search and click on view edit link for unique 'Valid_Data_In_All_Fields_Role_Team_Manager_System_Administrator' user with 'Disabled' status from the manage user page
     And I click the 'Enable_User_Record' button on the 'User_Profile_Page'
     And I can see a 'Confirm' button on the 'Confirmation_Page'
     When I Scan the page with the Axe Accessibilty Tool
@@ -330,17 +334,17 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Given I have navigated to the 'System_Administration_Page'
     And I click the 'Manage_Users' link on the 'System_Administration_Page'
     And I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
-    And I fill the new user profile page using 'Valid_Data_In_All_Fields_Role_Operations'
+    And I fill the new user profile page using 'Valid_Data_In_All_Fields_Role_Team_Manager_System_Administrator'
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
     And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
     And I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
     And I can see the 'Manage_Users_Page'
-    And I search and click on view edit link for unique 'Valid_Data_In_All_Fields_Role_Operations' user with 'Enabled' status from the manage user page
+    And I search and click on view edit link for unique 'Valid_Data_In_All_Fields_Role_Team_Manager_System_Administrator' user with 'Enabled' status from the manage user page
     And I click the 'Disable_User_Record' button on the 'User_Profile_Page'
     And I click the 'Confirm' button on the 'Confirmation_Page'
     And I click the 'Back_To_Manage_Users' link on the 'Confirmation_Page'
     And I can see the 'Manage_Users_Page'
-    And I search and click on view edit link for unique 'Valid_Data_In_All_Fields_Role_Operations' user with 'Disabled' status from the manage user page
+    And I search and click on view edit link for unique 'Valid_Data_In_All_Fields_Role_Team_Manager_System_Administrator' user with 'Disabled' status from the manage user page
     And I click the 'Enable_User_Record' button on the 'User_Profile_Page'
     And I click the 'Confirm' button on the 'Confirmation_Page'
     And I can see a 'Back_To_Manage_Users' link on the 'Confirmation_Page'
@@ -863,7 +867,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityModficationsTasklistPageWithFilters @FrontStageUser
+  @axeAccessibilityModficationsTasklistPageWithFilters @ApplicantUser
   Scenario: Modifications tasklist page with active filters
     Given I have navigated to the 'Modifications_Tasklist_Page'
     And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
@@ -875,7 +879,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilitySelectAreaOfChange @FrontStageUser
+  @axeAccessibilitySelectAreaOfChange @ApplicantUser
   Scenario: Modifications select area of change
     Given I have navigated to the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
@@ -895,7 +899,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityParticipatingOrganisation @FrontStageUser
+  @axeAccessibilityParticipatingOrganisation @ApplicantUser
   Scenario: Modifications search participating organisations
     Given I have navigated to the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
@@ -910,14 +914,15 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     And I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
     When I click the 'Modifications_Tile' link on the 'Project_Overview_Page'
-    And I select 'Participating_Organisation_Option' from area of change dropdown and 'Addition_Of_sites_Option' from specific change dropdown
+    And I select 'Participating_Organisation' from area of change dropdown and 'Addition_Of_sites_Option' from specific change dropdown
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
     Then I can see the participating organisation page
+    And I confirm checkbox is displayed in participating organisation page
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityPlannedEndDateModifications @FrontStageUser
+  @axeAccessibilityPlannedEndDateModifications @ApplicantUser
   Scenario: Modifications Planned End Date Page
     Given I have navigated to the my research projects page
     And I can see the my research projects page
@@ -943,7 +948,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityWhichOrganisationChangeAffectModifications @FrontStageUser
+  @axeAccessibilityWhichOrganisationChangeAffectModifications @ApplicantUser
   Scenario: Modifications Which organisation change affect page
     Given I have navigated to the my research projects page
     And I can see the my research projects page
@@ -967,7 +972,176 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I can see the 'Planned_End_Date' page for modifications
     Then I fill the planned project end date modifications page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Modifications_Page'
-    Then I can see the 'Which_Organisation_Type_Affect' page for modifications
+    Then I can see the 'Affected_Organisation_Selection_Page' page for modifications
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityAffectedOrganisationNhsHscQuestionsPage @ApplicantUser
+  Scenario: Modifications affected organisations nhs hsc questions page
+    Given I have navigated to the my research projects page
+    And I can see the my research projects page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    Then I fill the key project roles page with 'Valid_Data_All_Fields'
+    Then I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    Then I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I select 'Project_Design' from area of change dropdown and 'Planned_End_Date' from specific change dropdown
+    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+    Then I fill the planned project end date modifications page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Modifications_Page'
+    Then I can see the 'Affected_Organisation_Selection_Page' page for modifications
+    And I fill the which organisation this change affect modifications page with 'NHS_HSC_Only'
+    When I click the 'Save_Continue' button on the 'Affected_Organisation_Selection_Page'
+    Then I can see the change planned end date affected organisation questions page
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityAffectedOrganisationNonNhsHscQuestionsPage @ApplicantUser
+  Scenario: Modifications affected organisations non nhs hsc questions page
+    Given I have navigated to the my research projects page
+    And I can see the my research projects page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    Then I fill the key project roles page with 'Valid_Data_All_Fields'
+    Then I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    Then I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I select 'Project_Design' from area of change dropdown and 'Planned_End_Date' from specific change dropdown
+    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+    Then I fill the planned project end date modifications page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Modifications_Page'
+    Then I can see the 'Affected_Organisation_Selection_Page' page for modifications
+    And I fill the which organisation this change affect modifications page with 'Non_NHS_HSC_Only'
+    When I click the 'Save_Continue' button on the 'Affected_Organisation_Selection_Page'
+    Then I can see the change planned end date affected organisation questions page
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityReviewChangesPlannedEndDateChange @ApplicantUser
+  Scenario: Change to planned end date review modifications page
+    Given I have navigated to the my research projects page
+    And I can see the my research projects page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    Then I fill the key project roles page with 'Valid_Data_All_Fields'
+    Then I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    Then I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I select 'Project_Design' from area of change dropdown and 'Planned_End_Date' from specific change dropdown
+    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+    Then I fill the planned project end date modifications page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Modifications_Page'
+    Then I can see the 'Affected_Organisation_Selection_Page' page for modifications
+    And I fill the which organisation this change affect modifications page with 'NHS_HSC_Only'
+    When I click the 'Save_Continue' button on the 'Affected_Organisation_Selection_Page'
+    Then I can see the change planned end date affected organisation questions page
+    And I fill the affected organisation questions page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Affected_Organisation_Questions_Page'
+    And I can see the review changes planned end date page
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityProjectOverviewPostApprovalPage @ApplicantUser
+  Scenario: Project overview post approvals page
+    Given I have navigated to the my research projects page
+    And I can see the my research projects page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    Then I fill the key project roles page with 'Valid_Data_All_Fields'
+    Then I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    Then I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityProjectDocumentsAddDocumentModificationsPage @ApplicantUser
+  Scenario: Modifications add document page
+    Given I have navigated to the my research projects page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    Then I fill the key project roles page with 'Valid_Data_All_Fields'
+    Then I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    Then I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    When I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I select 'Project_Documents' from area of change dropdown and 'Correction_Of_Typographical_Errors' from specific change dropdown
+    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+    Then I can see the add documents for 'Correction_Of_Typographical_Errors' page
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityProjectDocumentsReviewDocumentModificationsPage @ApplicantUser
+  Scenario: Modifications review document page
+    Given I have navigated to the my research projects page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    Then I fill the key project roles page with 'Valid_Data_All_Fields'
+    Then I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    Then I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    When I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I select 'Project_Documents' from area of change dropdown and 'Correction_Of_Typographical_Errors' from specific change dropdown
+    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+    Then I upload 'PNG_File' documents
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    Then I can see the review uploaded documents for 'Correction_Of_Typographical_Errors' page
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations

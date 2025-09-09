@@ -2,6 +2,7 @@
   "Home_Page": {
     "title": "My account",
     "heading": "My Account homepage",
+    "hra_card_selector": "hra-card-heading__link",
     "guidance_text": "This is your account homepage where you can access your workspaces",
     "workspaceHeading": "My workspaces",
     "workspaces_links_system_admin": [
@@ -14,7 +15,7 @@
       "Technical Assurance",
       "Technical Assurance reviewers"
     ],
-    "workspaces_links_frontstage_user": ["My research"],
+    "workspaces_links_applicant_user": ["My research"],
     "workspaces_links_studywide_reviewer": ["Approvals", "Member management"],
     "workspaces_links_team_manager": ["Approvals", "Member management"],
     "workspaces_links_workflow_coordinator": ["Approvals"]
@@ -29,7 +30,7 @@
     "technical_assurance_hint_label": "Workspace for Technical Assurance staff to receive and process applications and post approval activity for review.",
     "technical_assurance_reviewers_hint_label": "Workspace for Technical Assurance reviewers to review applications and post approval activity."
   },
-  "Label_Texts_Frontstage_User_Role": {
+  "Label_Texts_Applicant_User_Role": {
     "my_research_hint_label": "Workspace to view and manage the research I am responsible for."
   },
   "Label_Texts_Studywide_Reviewer_Role": {
