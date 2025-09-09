@@ -35,6 +35,7 @@ When(
       myResearchProjectsPage,
       searchModificationsPage,
       modificationsReadyToAssignPage,
+      selectStudyWideReviewerPage,
     },
     page: string
   ) => {
@@ -79,7 +80,7 @@ When(
         await modificationsReadyToAssignPage.assertOnModificationsReadyToAssignPage();
         break;
       case 'Select_Study_Wide_Reviewer_Page':
-        await selectStudywideReviewerPage.assertOnModificationsReadyToAssignPage();
+        await selectStudyWideReviewerPage.assertOnSelectStudyWideReviewerPage();
         break;
       default:
         throw new Error(`${page} is not a valid option`);
