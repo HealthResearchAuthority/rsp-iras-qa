@@ -9,12 +9,13 @@ import {
   generateTestDataTelephone,
   writeGeneratedTestDataToJSON,
 } from '../../utils/GenerateTestData';
-const { Given, When, Then } = createBdd(test);
 import * as userProfileGeneratedataConfig from '../../resources/test_data/user_administration/testdata_generator/user_profile_generate_data_config.json';
 import { confirmArrayNotNull, getAuthState, getCurrentTimeFormatted } from '../../utils/UtilFunctions';
 import { Locator } from 'playwright/test';
 import fs from 'fs';
 import path from 'path';
+
+const { Given, When, Then } = createBdd(test);
 
 Then('I capture the page screenshot', async () => {});
 
@@ -22,6 +23,7 @@ When(
   'I can see the {string}',
   async (
     {
+      commonItemsPage,
       loginPage,
       homePage,
       createApplicationPage,
@@ -77,6 +79,11 @@ When(
         break;
       case 'Modifications_Tasklist_Page':
         await modificationsReadyToAssignPage.assertOnModificationsReadyToAssignPage();
+        await commonItemsPage.setNoOfResultsBeforeSearch(
+          await commonItemsPage.extractNumFromSearchResultCount(
+            await commonItemsPage.search_results_count.textContent()
+          )
+        );
         break;
       default:
         throw new Error(`${page} is not a valid option`);
@@ -389,6 +396,7 @@ Then(
       participatingOrganisationsPage,
       affectedOrganisationSelectionPage,
       addDocumentsModificationsPage,
+      modificationsReadyToAssignPage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
@@ -447,6 +455,12 @@ Then(
       errorMessageFieldDataset =
         addDocumentsModificationsPage.addDocumentsModificationsPageTestData[errorMessageFieldAndSummaryDatasetName];
       page = addDocumentsModificationsPage;
+    } else if (pageKey == 'Modifications_Tasklist_Page') {
+      errorMessageFieldDataset =
+        modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Validation[
+          errorMessageFieldAndSummaryDatasetName
+        ];
+      page = modificationsReadyToAssignPage;
     }
     let allSummaryErrorExpectedValues: any;
     let summaryErrorActualValues: any;
@@ -606,7 +620,7 @@ When(
         await manageReviewBodiesPage.setOrgName(orgList.get('orgNameValues'));
         searchKey = await manageReviewBodiesPage.getSearchQueryOrgName(position);
       }
-      await userListReviewBodyPage.setSearchKey(searchKey);
+      await commonItemsPage.setSearchKey(searchKey);
       await commonItemsPage.search_text.fill(searchKey);
     } else {
       throw new Error(`There are no items in list to search`);
@@ -621,7 +635,7 @@ When(
       const userListBeforeSearch = await commonItemsPage.getAllUsersFromTheTable();
       const userValues: string[] = confirmArrayNotNull(userListBeforeSearch.get('searchResultValues'));
       await userListReviewBodyPage.setUserListBeforeSearch(userValues);
-      await userListReviewBodyPage.setSearchKey(searchKey);
+      await commonItemsPage.setSearchKey(searchKey);
       await commonItemsPage.search_text.fill(searchKey);
     } else {
       throw new Error(`There are no items in list to search`);
@@ -659,6 +673,7 @@ Given(
   'I have navigated to the {string}',
   async (
     {
+      commonItemsPage,
       loginPage,
       homePage,
       createApplicationPage,
@@ -719,6 +734,11 @@ Given(
       case 'Modifications_Tasklist_Page':
         await modificationsReadyToAssignPage.goto();
         await modificationsReadyToAssignPage.assertOnModificationsReadyToAssignPage();
+        await commonItemsPage.setNoOfResultsBeforeSearch(
+          await commonItemsPage.extractNumFromSearchResultCount(
+            await commonItemsPage.search_results_count.textContent()
+          )
+        );
         break;
       case 'Approvals_Page':
         await approvalsPage.goto();
@@ -838,7 +858,7 @@ Then(
     }
   }
 );
-
+//Check for dupe/can be common//
 Then('I can see the {string} ui labels', async ({ commonItemsPage }, datasetName: string) => {
   const dataset = commonItemsPage.commonTestData[datasetName];
   for (const key in dataset) {
@@ -984,4 +1004,119 @@ Then('I upload {string} documents', async ({ commonItemsPage }, uploadDocumentsD
       )
     ).toBeVisible();
   }
+});
+//Check for dupe/can be common//
+Then('the no search results found message is displayed', async ({ commonItemsPage }) => {
+  expect(commonItemsPage.tableRows).not.toBeVisible();
+  await expect(commonItemsPage.search_results_count).toHaveText(
+    commonItemsPage.searchFilterResultsData.search_no_results_count
+  );
+  await expect(commonItemsPage.search_no_results_container).toBeVisible();
+  await expect(commonItemsPage.search_no_results_header).toBeVisible();
+  await expect(commonItemsPage.search_no_results_guidance_text).toBeVisible();
+  await expect(commonItemsPage.search_no_results_guidance_points).toBeVisible();
+  const actualBulletPoints = commonItemsPage.search_no_results_guidance_points.getByRole('listitem');
+  await expect(actualBulletPoints).toHaveText(
+    commonItemsPage.searchFilterResultsData.search_no_results_guidance_points
+  );
+});
+
+Then('I {string} see the advanced filters panel', async ({ commonItemsPage }, visibility: string) => {
+  if (visibility.toLowerCase() == 'cannot') {
+    await expect(commonItemsPage.advanced_filter_panel).not.toBeVisible();
+  } else {
+    await expect(commonItemsPage.advanced_filter_panel).toBeVisible();
+  }
+});
+
+Then('I {string} see active filters displayed', async ({ commonItemsPage }, visibility: string) => {
+  if (visibility.toLowerCase() == 'cannot') {
+    await expect(commonItemsPage.active_filters_label).not.toBeVisible();
+    await expect(commonItemsPage.active_filter_list).not.toBeVisible();
+    await expect(commonItemsPage.clear_all_filters_button).not.toBeVisible();
+  } else {
+    await expect(commonItemsPage.active_filters_label).toBeVisible();
+    await expect(commonItemsPage.active_filter_list).toBeVisible();
+    await expect(commonItemsPage.clear_all_filters_button).toBeVisible();
+  }
+});
+
+Then(
+  'I can see active filters displayed for {string}',
+  async ({ commonItemsPage, modificationsReadyToAssignPage }, searchInput: string) => {
+    let assertionMade = false;
+    if (searchInput.toLowerCase().includes('title')) {
+      assertionMade = true;
+      const expectedActiveFilterText = `${commonItemsPage.searchFilterResultsData.active_filter_short_project_title_label} ${commonItemsPage.searchFilterResultsData.label_value_separator} ${await commonItemsPage.getShortProjectTitleFilter()}`;
+      await expect(commonItemsPage.active_filter_items.getByText(expectedActiveFilterText)).toBeVisible();
+    }
+    if (searchInput.toLowerCase().includes('date')) {
+      if (searchInput.toLowerCase().includes('from')) {
+        assertionMade = true;
+        const expectedActiveFilterText = `${commonItemsPage.searchFilterResultsData.active_filter_date_submitted_label} ${commonItemsPage.searchFilterResultsData.label_value_separator} ${commonItemsPage.searchFilterResultsData.from_separator} ${await commonItemsPage.getDateSubmittedFromFilter()}`;
+        await expect(commonItemsPage.active_filter_items.getByText(expectedActiveFilterText)).toBeVisible();
+      }
+      if (searchInput.toLowerCase().includes('to')) {
+        assertionMade = true;
+        const expectedActiveFilterText = `${commonItemsPage.searchFilterResultsData.active_filter_date_submitted_label} ${commonItemsPage.searchFilterResultsData.label_value_separator} ${commonItemsPage.searchFilterResultsData.to_separator} ${await commonItemsPage.getDateSubmittedToFilter()}`;
+        await expect(commonItemsPage.active_filter_items.getByText(expectedActiveFilterText)).toBeVisible();
+      }
+      if (searchInput.toLowerCase().includes('range')) {
+        assertionMade = true;
+        const expectedActiveFilterText = `${commonItemsPage.searchFilterResultsData.active_filter_date_submitted_label} ${commonItemsPage.searchFilterResultsData.label_value_separator} ${await commonItemsPage.getDateSubmittedFromFilter()} ${commonItemsPage.searchFilterResultsData.to_separator} ${await commonItemsPage.getDateSubmittedToFilter()}`;
+        await expect(commonItemsPage.active_filter_items.getByText(expectedActiveFilterText)).toBeVisible();
+      }
+    }
+    if (searchInput.toLowerCase().includes('days')) {
+      if (searchInput.toLowerCase().includes('from') || searchInput.toLowerCase().includes('range')) {
+        assertionMade = true;
+        const expectedActiveFilterText = `${commonItemsPage.searchFilterResultsData.active_filter_days_since_label} ${commonItemsPage.searchFilterResultsData.label_value_separator} ${commonItemsPage.searchFilterResultsData.from_separator} ${await modificationsReadyToAssignPage.getDaysSinceSubmissionFromFilter()}`;
+        await expect(commonItemsPage.active_filter_items.getByText(expectedActiveFilterText)).toBeVisible();
+      }
+      if (searchInput.toLowerCase().includes('to') || searchInput.toLowerCase().includes('range')) {
+        assertionMade = true;
+        const expectedActiveFilterText = `${commonItemsPage.searchFilterResultsData.active_filter_days_since_label} ${commonItemsPage.searchFilterResultsData.label_value_separator} ${commonItemsPage.searchFilterResultsData.to_separator} ${await modificationsReadyToAssignPage.getDaysSinceSubmissionToFilter()}`;
+        await expect(commonItemsPage.active_filter_items.getByText(expectedActiveFilterText)).toBeVisible();
+      }
+    }
+    if (!assertionMade) {
+      throw new Error(`${searchInput} does not contain any assertion identifier`);
+    }
+  }
+);
+
+When(
+  'the number of search results has {string} from the {string} number',
+  async ({ commonItemsPage }, comparator: string, baselineInput: string) => {
+    const currentNoOfResults = await commonItemsPage.extractNumFromSearchResultCount(
+      await commonItemsPage.search_results_count.textContent()
+    );
+    let baselineValue: number;
+    if (baselineInput.toLowerCase() == 'original') {
+      baselineValue = await commonItemsPage.getNoOfResultsBeforeSearch();
+    } else {
+      baselineValue = await commonItemsPage.getNoOfResultsAfterSearch();
+    }
+    if (comparator.toLowerCase() == 'decreased') {
+      expect(currentNoOfResults).toBeLessThan(baselineValue);
+    } else {
+      expect(currentNoOfResults).toBeGreaterThan(baselineValue);
+    }
+    await commonItemsPage.setNoOfResultsAfterSearch(currentNoOfResults);
+  }
+);
+
+When('the number of search results has returned to the original number', async ({ commonItemsPage }) => {
+  const currentNoOfResults = await commonItemsPage.extractNumFromSearchResultCount(
+    await commonItemsPage.search_results_count.textContent()
+  );
+  const originalValue = await commonItemsPage.getNoOfResultsBeforeSearch();
+  expect(currentNoOfResults).toEqual(originalValue);
+});
+
+When('I can see the date from and date to filters have the expected hint text', async ({ commonItemsPage }) => {
+  await expect(commonItemsPage.date_from_label).toBeVisible();
+  await expect(commonItemsPage.date_from_hint_label).toBeVisible();
+  await expect(commonItemsPage.date_to_label).toBeVisible();
+  await expect(commonItemsPage.date_to_hint_label).toBeVisible();
 });

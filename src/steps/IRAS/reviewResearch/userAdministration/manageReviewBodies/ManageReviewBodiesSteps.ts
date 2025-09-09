@@ -114,21 +114,18 @@ When(
   }
 );
 
-Then(
-  'the system displays review bodies matching the search criteria',
-  async ({ userListReviewBodyPage, commonItemsPage }) => {
-    const searchKey = await userListReviewBodyPage.getSearchKey();
-    const searchTerms = await commonItemsPage.splitSearchTerm(searchKey);
-    const orgList = await commonItemsPage.getAllOrgNamesFromTheTable();
-    const orgListAfterSearch: string[] = confirmArrayNotNull(orgList.get('searchResultValues'));
-    const searchResult = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
-      orgListAfterSearch,
-      searchTerms
-    );
-    expect(searchResult).toBeTruthy();
-    expect(orgListAfterSearch).toEqual(searchResult);
-  }
-);
+Then('the system displays review bodies matching the search criteria', async ({ commonItemsPage }) => {
+  const searchKey = await commonItemsPage.getSearchKey();
+  const searchTerms = await commonItemsPage.splitSearchTerm(searchKey);
+  const orgList = await commonItemsPage.getAllOrgNamesFromTheTable();
+  const orgListAfterSearch: string[] = confirmArrayNotNull(orgList.get('searchResultValues'));
+  const searchResult = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
+    orgListAfterSearch,
+    searchTerms
+  );
+  expect(searchResult).toBeTruthy();
+  expect(orgListAfterSearch).toEqual(searchResult);
+});
 
 Then('I click the view edit link', async ({ manageReviewBodiesPage }) => {
   const createdReviewBodyRow = await manageReviewBodiesPage.getReviewBodyRow();
