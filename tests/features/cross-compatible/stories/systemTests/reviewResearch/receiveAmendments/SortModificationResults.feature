@@ -10,7 +10,7 @@ Feature: Receive Amendments: Sort modification results after performing a search
         And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
         And I capture the page screenshot
 
-    @SortModificationsByColumn @fail @KNOWN-DEFECT-RSP-4305 @KNOWN-DEFECT-RSP-4313
+    @SortModificationsByColumn @fail
     Scenario: Verify the user is able to sort the list of modifications by ascending and descending order for each results table column
         When I click the '<Sort_Button>' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
