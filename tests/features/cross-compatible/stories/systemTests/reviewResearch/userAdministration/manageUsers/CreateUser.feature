@@ -1,4 +1,4 @@
-@UserAdministration @ManageUsers @SysAdminUser @SystemTest @CreateUser
+@UserAdministration @ManageUsers @SysAdminUser @SystemTest @CreateUser @STSysAdmin
 Feature: User Administration: Manage Users - Create user
 
   Background:
@@ -13,7 +13,7 @@ Feature: User Administration: Manage Users - Create user
     And I capture the page screenshot
     Then I can see the add a new user profile page
 
-  @rsp-2827 @rsp-2870 @verifyUserCreation
+  @rsp-2827 @rsp-2870 @verifyUserCreation @testFailed
   Scenario Outline: Verify the user is able to create a new user profile with valid data
     When I fill the new user profile page using '<Add_User_Profile>'
     And I capture the page screenshot
@@ -57,7 +57,7 @@ Feature: User Administration: Manage Users - Create user
       | Valid_Data_In_All_Fields_Role_Workflow_Coordinator           | Label_Texts_Manage_Users_List     | Enabled        | Advanced_Filter_Role_Workflow_Coordinator_Status_Active |
       | Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator | Label_Texts_Manage_Users_List     | Enabled        | Advanced_Filter_Role_Workflow_Coordinator_Status_Active |
 
-  @rsp-2827 @rsp-2870 @verifyAddAnotherUser
+  @rsp-2827 @rsp-2870 @verifyAddAnotherUser @testFailed
   Scenario Outline: Verify the user is able to add another user from the Confirmation message screen using the link
     When I fill the new user profile page using '<Add_User_Profile>'
     And I capture the page screenshot
@@ -117,7 +117,7 @@ Feature: User Administration: Manage Users - Create user
     And I capture the page screenshot
     Then I can see the 'Manage_Users_Page'
 
-  @rsp-2827 @verifyCheckCreateUserProfileBackLink
+  @rsp-2827 @verifyCheckCreateUserProfileBackLink @testFailed
   Scenario Outline: Verify the user can navigate from 'Check and create user profile' page to add a new user profile page by clicking 'Back' link
     When I fill the new user profile page using '<Add_User_Profile>'
     And I capture the page screenshot
@@ -167,7 +167,7 @@ Feature: User Administration: Manage Users - Create user
       | Valid_Data_In_All_Fields_Role_Workflow_Coordinator           | Valid_Data_In_All_Fields_Role_Workflow_Coordinator_Another           | Enabled        | Role_TM_SWR_WFC                     | Advanced_Filter_Role_Workflow_Coordinator_Status_Active |
       | Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator | Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator_Another | Enabled        | Role_TM_SWR_WFC                     | Advanced_Filter_Role_Workflow_Coordinator_Status_Active |
 
-  @rsp-2827 @rsp-4021 @verifyCheckCreateUserProfileChangeLinkRoleTMSWRWFC @RoleCheckbox
+  @rsp-2827 @rsp-4021 @verifyCheckCreateUserProfileChangeLinkRoleTMSWRWFC @RoleCheckbox @testFailed
   Scenario Outline: Verify the user can navigate from 'Check and create user profile' page by clicking 'Change' button against all the fields when the role is selected as study-wide reviewer or team manager or workflow co-ordinator
     And I capture the page screenshot
     When I fill the new user profile page using '<Add_User_Profile>'
@@ -262,7 +262,7 @@ Feature: User Administration: Manage Users - Create user
       | Valid_Data_In_All_Mandatory_Fields_Role_Applicant            | Job_Title     | Valid_Data_In_All_Mandatory_Fields_Role_Applicant_Another            |
       | Valid_Data_In_All_Mandatory_Fields_Role_Applicant            | Role          | Valid_Data_In_All_Mandatory_Fields_Role_Applicant_Another            |
 
-  @rsp-2827 @rsp-2870 @rsp-3107 @rsp-3108 @verifyCreateUserMultiUserRoles
+  @rsp-2827 @rsp-2870 @rsp-3107 @rsp-3108 @verifyCreateUserMultiUserRoles @testFailed
   Scenario Outline: Verify the user is able to create a new user profile with multiple roles
     When I fill the new user profile page using '<Add_User_Profile>'
     And I capture the page screenshot
@@ -449,7 +449,7 @@ Feature: User Administration: Manage Users - Create user
       | Email_Address | First    | Duplicate_Email_Role_Applicant_System_Admin | Duplicate_Email_Error           |
       | Email_Address | Last     | Duplicate_Email_Role_SWR_TM_WFC             | Duplicate_Email_Error           |
 
-  @rsp-3952 @DuplicateEmailValidation @DuplicateEmailNew @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage
+  @rsp-3952 @DuplicateEmailValidation @DuplicateEmailNew @VerifyErrorMessagesInvalidData @VerifyErrorMessagesInvalidDataCreateUserPage @testFailed
   Scenario Outline: Validate error messages are displayed for duplicate email in create user profile page after creating a user
     When I fill the new user profile page using '<Add_User_Profile>'
     And I capture the page screenshot
@@ -512,7 +512,7 @@ Feature: User Administration: Manage Users - Create user
       | Add_User_Profile                           | Status_Enabled | Invalid_Data_User_Profile       | Field_And_Summary_Error_Message |
       | Valid_Data_In_All_Fields_Role_Team_Manager | Enabled        | Duplicate_Email_Role_SWR_TM_WFC | Duplicate_Email_Error           |
 
-  @rsp-3886 @rsp-4026 @verifyLastLoggedInDate
+  @rsp-3886 @rsp-4026 @verifyLastLoggedInDate @testFailed
   Scenario Outline: Verify the last login date of user in homepage and manage users page
     And I fill the new user profile page using '<Add_User_Profile>'
     And I click the 'Continue' button on the 'Create_User_Profile_Page'
