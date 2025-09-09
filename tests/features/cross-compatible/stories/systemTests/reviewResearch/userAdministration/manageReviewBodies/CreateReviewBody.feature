@@ -1,4 +1,4 @@
-@UserAdministration @ManageReviewBodies @CreateReviewBody @SysAdminUser @SystemTest @rsp-2570
+@UserAdministration @ManageReviewBodies @CreateReviewBody @SysAdminUser @SystemTest @rsp-2570 @STSysAdmin
 Feature: User Administration: Manage Review Bodies - Create review body
 
     Background:

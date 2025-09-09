@@ -1,4 +1,4 @@
-@UserAdministration @ManageUsers @SysAdminUser @SystemTest @AuditHistoryUser @rsp-2928
+@UserAdministration @ManageUsers @SysAdminUser @SystemTest @AuditHistoryUser @rsp-2928 @STSysAdmin
 Feature: User Administration: Manage Users - View audit history for users
 
     Background:
@@ -117,6 +117,7 @@ Feature: User Administration: Manage Users - View audit history for users
     @rsp-4021 @VerifyAuditHistoryEditCommonUserFields
     Scenario Outline: Verify the user can view the audit history after editing common user profile fields
         When I enter 'Existing_QA_Automation_User_First_Name' into the search field for manage users page
+        And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
         And I select advanced filters in the manage users page using 'Advanced_Filter_Status_Active'
         And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
         And I capture the page screenshot

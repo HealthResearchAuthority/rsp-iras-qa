@@ -1,4 +1,4 @@
-@AdvancedFilterManageUser @SysAdminUser @SystemTest @rsp-3556
+@UserAdministration @ManageUsers @AdvancedFilterManageUser @SysAdminUser @SystemTest @rsp-3556 @STSysAdmin
 Feature: users - Advanced Filter and Search combinations in the Manage users page
 
     Background:

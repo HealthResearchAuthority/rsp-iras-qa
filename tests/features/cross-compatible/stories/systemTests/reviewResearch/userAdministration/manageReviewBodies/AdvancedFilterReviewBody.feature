@@ -1,4 +1,4 @@
-@UserAdministration @ManageReviewBodies @AdvancedFilterReviewBody @SysAdminUser @SystemTest
+@UserAdministration @ManageReviewBodies @AdvancedFilterReviewBody @SysAdminUser @SystemTest @STSysAdmin
 Feature: Review Bodies - Advanced Filter and Search combinations in the Manage review bodies page
 
   Background:

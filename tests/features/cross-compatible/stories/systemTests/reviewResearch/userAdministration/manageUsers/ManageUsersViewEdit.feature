@@ -1,4 +1,4 @@
-@UserAdministration @ManageUsers @EditViewUsers @SysAdminUser @SystemTest
+@UserAdministration @ManageUsers @EditViewUsers @SysAdminUser @SystemTest @STSysAdmin
 Feature: User Administration: Manage user profiles, view and edit user profile
   As a user
   I want the ability to edit and view a user profile record
@@ -244,6 +244,7 @@ Feature: User Administration: Manage user profiles, view and edit user profile
   @rsp-4021 @ManageUsersEmailNotEditable
   Scenario Outline: Verify the user is not able to edit the email address
     When I enter 'Existing_QA_Automation_User_First_Name' into the search field for manage users page
+    And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
     And I select advanced filters in the manage users page using 'Advanced_Filter_Status_Active'
     And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
     And I capture the page screenshot
