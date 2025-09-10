@@ -630,3 +630,27 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                 Examples:
                         | Advanced_Filters     | Advanced_Filters_Labels      |
                         | Advanced_Filters_Nth | Advanced_Filters_Hint_Labels |
+
+        @rsp-4381
+        Scenario Outline: verify that all active filters are automatically cleared when the user navigates away from the current page in search modification page 
+                And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                And I select advanced filters in the search modifications page using '<Advanced_Filters>'
+                And I capture the page screenshot
+                And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                Then I sequentially navigate through each page by '<Navigation_Method>' from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+                And I capture the page screenshot
+                Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                When I click the 'Back' link on the 'Search_Modifications_Page'
+                Then I can see the approvals home page
+                And I click the 'Search' link on the 'Approvals_Page'
+                Then I can see the 'Search_Modifications_Page'
+                Then I can see an empty state that informs me no modifications exist for the search criteria
+                And I capture the page screenshot
+              
+                Examples:
+                        | Navigation_Method       | Advanced_Filters                                  |
+                        | clicking on page number | Advanced_Filter_Three_Lead_Nation_Selected        |
+                        | clicking on next link   | Advanced_Filter_Two_Participating_Nation_Selected |

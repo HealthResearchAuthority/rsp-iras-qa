@@ -210,3 +210,81 @@ Feature: Review Bodies - Advanced Filter and Search combinations in the Manage r
     Examples:
       | Advanced_Filters                     |
       | Advanced_Filter_All_Countries_Active |
+
+  @rsp-4381 
+  Scenario: verify that all active filters are automatically cleared when the user navigates away from the current page in mange review body page
+    And I click the 'Advanced_Filters' button on the 'Manage_Review_Bodies_Page'
+    And I select advanced filters in the manage review bodies page using '<Advanced_Filters>'
+    And I capture the page screenshot
+    And I click the 'Apply_filters' button on the 'Manage_Review_Bodies_Page'
+    Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Manage_Review_Bodies_Page'
+    And I capture the page screenshot
+    And I click the 'Back' link on the 'Manage_Review_Bodies_Page'
+    And I capture the page screenshot
+    Then I can see the 'System_Administration_Page'
+    And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
+    Then I can see the 'Manage_Review_Bodies_Page'
+    Then I can see the selected filters '<Advanced_Filters>' are removed from active filters for manage review bodies page
+    And I capture the page screenshot
+
+    Examples:
+      | Advanced_Filters                     |
+      | Advanced_Filter_All_Countries_Active |
+
+    @rsp-4381 
+    Scenario Outline: Verify that the active filter remains applied after creating a new review body with valid data
+        And I click the 'Advanced_Filters' button on the 'Manage_Review_Bodies_Page'
+        And I select advanced filters in the manage review bodies page using '<Advanced_Filters>'
+        And I capture the page screenshot
+        And I click the 'Apply_filters' button on the 'Manage_Review_Bodies_Page'
+        Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Manage_Review_Bodies_Page'
+        And I capture the page screenshot
+        And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
+        Then I can see the 'Create_Review_Body_Page'
+        When I fill the new review body page using '<Add_Review_Body>'
+        And I capture the page screenshot
+        And I click the 'Continue' button on the 'Create_Review_Body_Page'
+        Then I can see the check and create review body page for '<Add_Review_Body>'
+        And I capture the page screenshot
+        When I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
+        Then I can see the create Review body confirmation page for '<Add_Review_Body>'
+        And I capture the page screenshot
+        When I have navigated to the 'Manage_Review_Bodies_Page'
+        Then I can see the 'Manage_Review_Bodies_Page'
+        Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Manage_Review_Bodies_Page'
+        And I capture the page screenshot
+
+        Examples:
+            | Add_Review_Body           | Status  | Advanced_Filters                     |
+            | Valid_Data_In_All_Fields  | enabled | Advanced_Filter_All_Countries_Active |
+
+    @rsp-4381 
+    Scenario Outline: Verify that the active filter remains applied after edit the review body and save their changes
+        And I click the 'Advanced_Filters' button on the 'Manage_Review_Bodies_Page'
+        And I select advanced filters in the manage review bodies page using '<Advanced_Filters>'
+        And I capture the page screenshot
+        And I click the 'Apply_filters' button on the 'Manage_Review_Bodies_Page'
+        Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Manage_Review_Bodies_Page'
+        And I capture the page screenshot
+        When I enter 'QA Automation' into the search field
+        And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
+        And I select a 'QA Automation' review Body to View and Edit which is 'Enabled'
+        And I can see the review body profile page
+        And I capture the page screenshot
+        And I click the change link against '<Field_Name>' on the review body profile page
+        And I can see the edit review body page
+        And I capture the page screenshot
+        When I fill the edit review body page using '<Edit_Review_Body>'
+        And I capture the page screenshot
+        And I click the 'Save' button on the 'Edit_Review_Body_Page'
+        Then I now see the review body profile page with the updated '<Edit_Review_Body>'
+        And I capture the page screenshot
+        When I have navigated to the 'Manage_Review_Bodies_Page'
+        Then I can see the 'Manage_Review_Bodies_Page'
+        And I capture the page screenshot
+        Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Manage_Review_Bodies_Page'
+        And I capture the page screenshot
+
+        Examples:
+            | Edit_Review_Body         | Field_Name        | Advanced_Filters                     |
+            | Valid_Data_In_All_Fields | Organisation_Name | Advanced_Filter_All_Countries_Active |
