@@ -49,8 +49,10 @@ Then(
 
 When(
   'I click the change link against {string} on the review body profile page',
-  async ({ reviewBodyProfilePage }, fieldKey: string) => {
-    reviewBodyProfilePage.clickOnChangeButton(fieldKey);
+  async ({ reviewBodyProfilePage, commonItemsPage }, fieldKey: string) => {
+    const changeLink = await commonItemsPage.getChangeLink(fieldKey, reviewBodyProfilePage);
+    await expect(changeLink).toBeVisible();
+    await changeLink.click();
   }
 );
 

@@ -32,8 +32,8 @@ Feature: User Administration: Manage Users - Enable / Disable users
         And I capture the page screenshot
 
         Examples:
-            | Add_User_Profile                         | Disable_Label_Texts | Disable_User_Profile_Labels | Status_Enabled | Status_Disabled |
-            | Valid_Data_In_All_Fields_Role_Operations | Disable_Label_Texts | Disable_User_Profile_Labels | Enabled        | Disabled        |
+            | Add_User_Profile                           | Disable_Label_Texts | Disable_User_Profile_Labels | Status_Enabled | Status_Disabled |
+            | Valid_Data_In_All_Fields_Role_Team_Manager | Disable_Label_Texts | Disable_User_Profile_Labels | Enabled        | Disabled        |
 
     @rsp-2829 @BreadcrumbDisableUser
     Scenario Outline: Validate breadcrumb navigations in disable user profile confirmation page
@@ -50,8 +50,8 @@ Feature: User Administration: Manage Users - Enable / Disable users
         And I capture the page screenshot
 
         Examples:
-            | Add_User_Profile                         | Navigation_Link | Status_Enabled |
-            | Valid_Data_In_All_Fields_Role_Operations | Back            | Enabled        |
+            | Add_User_Profile                           | Navigation_Link | Status_Enabled |
+            | Valid_Data_In_All_Fields_Role_Team_Manager | Back            | Enabled        |
 
     @rsp-2930 @EnableUserProfile
     Scenario Outline: Verify the user is able to enable a disabled a user profile
@@ -80,8 +80,8 @@ Feature: User Administration: Manage Users - Enable / Disable users
         And I capture the page screenshot
 
         Examples:
-            | Add_User_Profile                         | Enable_Label_Texts | Enable_User_Profile_Labels | Status_Enabled | Status_Disabled |
-            | Valid_Data_In_All_Fields_Role_Operations | Enable_Label_Texts | Enable_User_Profile_Labels | Enabled        | Disabled        |
+            | Add_User_Profile                           | Enable_Label_Texts | Enable_User_Profile_Labels | Status_Enabled | Status_Disabled |
+            | Valid_Data_In_All_Fields_Role_Team_Manager | Enable_Label_Texts | Enable_User_Profile_Labels | Enabled        | Disabled        |
 
     @rsp-2930 @BreadcrumbEnableUser
     Scenario Outline: Validate breadcrumb navigations in enable user profile confirmation page
@@ -103,5 +103,5 @@ Feature: User Administration: Manage Users - Enable / Disable users
         And I capture the page screenshot
 
         Examples:
-            | Add_User_Profile                         | Navigation_Link | Status_Enabled | Status_Disabled |
-            | Valid_Data_In_All_Fields_Role_Operations | Back            | Enabled        | Disabled        |
+            | Add_User_Profile                           | Navigation_Link | Status_Enabled | Status_Disabled |
+            | Valid_Data_In_All_Fields_Role_Team_Manager | Back            | Enabled        | Disabled        |

@@ -93,7 +93,7 @@ export function getTicketReferenceTags(tags: string[]): string[] {
   return tickets;
 }
 
-export function getDecryptedValue(data: string, secretKey?: any, authTag?: string) {
+export function getDecryptedValue(data: string, secretKey?: string, authTag?: string) {
   let value: string = '';
   if (secretKey) {
     const decipher = createDecipheriv('AES-256-GCM', Buffer.from(secretKey), Buffer.alloc(16)) as DecipherGCM;
@@ -545,7 +545,7 @@ export async function generateTimeStampedValue(keyVal: string, separator: string
 export async function getCurrentTimeFormatted(): Promise<string> {
   const date = new Date();
   const utcDay = date.getUTCDate().toString().padStart(2, '0');
-  const utcMonth = date.toLocaleString('en-GB', { month: 'short', timeZone: 'UTC' });
+  const utcMonth = date.toLocaleString('en-GB', { month: 'short', timeZone: 'UTC' }).slice(0, 3);
   const utcYear = date.getUTCFullYear();
   const utcHours = date.getUTCHours().toString().padStart(2, '0');
   const utcMinutes = date.getUTCMinutes().toString().padStart(2, '0');
