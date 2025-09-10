@@ -10,6 +10,7 @@ export default class SelectStudyWideReviewerPage {
   readonly buttonTextData: typeof buttonTextData;
   readonly linkTextData: typeof linkTextData;
   readonly page_heading: Locator;
+  readonly study_wide_reviewer_dropdown: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -22,6 +23,14 @@ export default class SelectStudyWideReviewerPage {
     this.page_heading = this.page
       .getByRole('heading')
       .getByText(this.selectStudywideReviewerPageData.Select_Study_Wide_Reviewer_Page.page_heading);
+
+    this.study_wide_reviewer_dropdown = this.page
+      .locator('.govuk-form-group', {
+        has: this.page.getByLabel(
+          this.selectStudywideReviewerPageData.Select_Study_Wide_Reviewer_Page.study_wide_reviewer_dropdown_label
+        ),
+      })
+      .getByRole('combobox');
   }
 
   //Page Methods

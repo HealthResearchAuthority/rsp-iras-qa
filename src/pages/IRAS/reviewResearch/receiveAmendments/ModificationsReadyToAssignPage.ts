@@ -7,6 +7,7 @@ import * as linkTextData from '../../../../resources/test_data/common/link_text_
 export default class ModificationsReadyToAssignPage {
   readonly page: Page;
   readonly modificationsReadyToAssignPageData: typeof modificationsReadyToAssignPageData;
+  private _modification_record: string[];
 
   readonly buttonTextData: typeof buttonTextData;
   readonly linkTextData: typeof linkTextData;
@@ -29,6 +30,7 @@ export default class ModificationsReadyToAssignPage {
     this.modificationsReadyToAssignPageData = modificationsReadyToAssignPageData;
     this.linkTextData = linkTextData;
     this.buttonTextData = buttonTextData;
+    this._modification_record = [];
 
     //Locators
     this.modifications_tasklist_link = this.page.locator('.govuk-heading-s govuk-link hra-card-heading__link');
@@ -63,6 +65,16 @@ export default class ModificationsReadyToAssignPage {
       this.modificationsReadyToAssignPageData.Modifications_Ready_To_Assign_Page.iras_id_search_box_label,
       { exact: true }
     );
+  }
+
+  //Getters & Setters for Private Variables
+
+  async getSelectedModifications(): Promise<string[]> {
+    return this._modification_record;
+  }
+
+  async setSelectedModifications(value: string[]): Promise<void> {
+    this._modification_record = value;
   }
 
   //Page Methods

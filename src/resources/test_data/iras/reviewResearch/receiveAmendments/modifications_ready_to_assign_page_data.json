@@ -23,13 +23,17 @@
     }
   },
   "Modification_Id": {
-    "Modification_Id_Ln_England_Pn_England": {
+    "Modification_Id_Ln_England_Pn_England_One": {
       "modification_id_checkbox": ["1234587/1"]
-    }
-  },
-  "Study_Wide_Reviewer": {
-    "Study_Wide_Reviewer_HRA_England": {
-      "study_wide_reviewer_dropdown": "Study-wide reviewer HRA England"
+    },
+    "Modification_Id_Ln_England_Pn_England_Two": {
+      "modification_id_checkbox": ["1234587/2"]
+    },
+    "Modification_Id_Ln_England_Pn_England_Three_Four": {
+      "modification_id_checkbox": ["1234587/3", "1234587/4"]
+    },
+    "Modification_Id_Ln_England_Pn_England_Five_Six": {
+      "modification_id_checkbox": ["1234587/5", "1234587/6"]
     }
   }
 }

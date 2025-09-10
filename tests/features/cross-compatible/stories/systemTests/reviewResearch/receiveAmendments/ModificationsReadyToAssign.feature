@@ -125,25 +125,27 @@ Feature: Modifications Tasklist page that displays modifications ready to be ass
         Then I can see the 'Modifications_Tasklist_Page'
         When I enter '<Valid_Iras_Id>' into the search field in the modifications ready to assign page
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
-        # Then I can see previously assigned modification is no longer displayed in the modifications ready to assign table for '<Search_Input>'
+        Then I can see previously assigned modification is no longer displayed in the modifications ready to assign table for '<Modification_Id>'
         Examples:
-            | Valid_Iras_Id                       | Study_Wide_Reviewer             | Modification_Id                       |
-            | Valid_Iras_Id_Ln_England_Pn_England | Study_Wide_Reviewer_HRA_England | Modification_Id_Ln_England_Pn_England |
+            | Valid_Iras_Id                       | Study_Wide_Reviewer             | Modification_Id                                  |
+            | Valid_Iras_Id_Ln_England_Pn_England | Study_Wide_Reviewer_HRA_England | Modification_Id_Ln_England_Pn_England_One        |
+            | Valid_Iras_Id_Ln_England_Pn_England | Study_Wide_Reviewer_HRA_England | Modification_Id_Ln_England_Pn_England_Two        |
+            | Valid_Iras_Id_Ln_England_Pn_England | Study_Wide_Reviewer_HRA_England | Modification_Id_Ln_England_Pn_England_Three_Four |
 
     @ModificationsList @rsp-4076 @rsp-4849
-    Scenario Outline: Validate whether the proper list of modifications are displayed based on the 'Select a reviewer' page
+    Scenario Outline: Validate whether all the selected modifications are displayed based on the 'Select a reviewer' page
         When I enter '<Valid_Iras_Id>' into the search field in the modifications ready to assign page
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
         # Then I can now see the modifications ready to assign table contains the expected search results for '<Search_Input>'
         When I select modifications with ids as '<Modification_Id>' by clicking the checkbox in the modifications ready to assign page
         And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
         Then I can see the 'Select_Study_Wide_Reviewer_Page'
-        # And I can see all selected modifications on that page, including the following fields: Short project title, Modification ID
+        And I can see all the selected modifications on that page including details such as the short project title and the modification id
         And I capture the page screenshot
 
         Examples:
-            | Valid_Iras_Id                       | Study_Wide_Reviewer             | Modification_Id                       |
-            | Valid_Iras_Id_Ln_England_Pn_England | Study_Wide_Reviewer_HRA_England | Modification_Id_Ln_England_Pn_England |
+            | Valid_Iras_Id                       | Study_Wide_Reviewer             | Modification_Id                                |
+            | Valid_Iras_Id_Ln_England_Pn_England | Study_Wide_Reviewer_HRA_England | Modification_Id_Ln_England_Pn_England_Five_Six |
 
     @StudyWideReviewerList @rsp-4076 @rsp-4849
     Scenario Outline: Validate whether the proper list of study-wide reviewers are displayed based on the lead nation of the selected modification and the corresponding review body
@@ -171,7 +173,7 @@ Feature: Modifications Tasklist page that displays modifications ready to be ass
         Then I can see the 'Select_Study_Wide_Reviewer_Page'
         When I click the 'Back' button on the 'Select_Study_Wide_Reviewer_Page'
         Then I can see the 'Modifications_Tasklist_Page'
-        # And I can see previously selected modifications checkboxes are retained
+        And I can see previously selected modifications checkboxes are retained for '<Modification_Id>'
         And I capture the page screenshot
 
         Examples:

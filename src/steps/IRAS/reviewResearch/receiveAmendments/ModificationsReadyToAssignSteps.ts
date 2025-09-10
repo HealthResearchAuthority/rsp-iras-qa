@@ -162,31 +162,60 @@ When(
   }
 );
 
-// When(
-//   'I select modifications with ids as {string} by clicking the checkbox in the modifications ready to assign page',
-//   async ({ modificationsReadyToAssignPage }, datasetName: string) => {
-//     const dataset = modificationsReadyToAssignPage.modificationsReadyToAssignPageData.Modification_Id[datasetName];
-//     for (const key in dataset) {
-//       if (Object.hasOwn(dataset, key)) {
-//         for (const modificationId of dataset[key]) {
-//           const modificationCheckbox = modificationsReadyToAssignPage.modification_checkbox.filter({
-//             has: modificationsReadyToAssignPage.page.locator('[id="`${modificationId}`"]'),
-//           });
-//           await modificationCheckbox.check();
-//         }
-//       }
-//     }
-//   }
-// );
-
 When(
-  'I select a study wide reviewer in the select a reviewer page using {string}',
-  async ({ modificationsReadyToAssignPage, commonItemsPage }, datasetName: string) => {
-    const dataset = modificationsReadyToAssignPage.modificationsReadyToAssignPageData.Study_Wide_Reviewer[datasetName];
+  'I select modifications with ids as {string} by clicking the checkbox in the modifications ready to assign page',
+  async ({ modificationsReadyToAssignPage }, datasetName: string) => {
+    const dataset = modificationsReadyToAssignPage.modificationsReadyToAssignPageData.Modification_Id[datasetName];
+    const modificationRecord: string[] = [];
     for (const key in dataset) {
       if (Object.hasOwn(dataset, key)) {
-        await commonItemsPage.fillUIComponent(dataset, key, modificationsReadyToAssignPage);
+        for (const modificationId of dataset[key]) {
+          await modificationsReadyToAssignPage.page.getByTestId(`${modificationId}`).check();
+          const shortProjectTitle = await modificationsReadyToAssignPage.page
+            .getByTestId(`${modificationId}`)
+            .locator('../../..')
+            .getByRole('strong')
+            .textContent();
+          modificationRecord.push(modificationId + ':' + shortProjectTitle);
+        }
       }
     }
+    await modificationsReadyToAssignPage.setSelectedModifications(modificationRecord);
+  }
+);
+
+When(
+  'I can see previously assigned modification is no longer displayed in the modifications ready to assign table for {string}',
+  async ({ modificationsReadyToAssignPage }, datasetName: string) => {
+    const dataset = modificationsReadyToAssignPage.modificationsReadyToAssignPageData.Modification_Id[datasetName];
+    for (const key in dataset) {
+      if (Object.hasOwn(dataset, key)) {
+        for (const modificationId of dataset[key]) {
+          await expect(modificationsReadyToAssignPage.page.getByTestId(`${modificationId}`)).not.toBeVisible();
+        }
+      }
+    }
+  }
+);
+
+When(
+  'I can see previously selected modifications checkboxes are retained for {string}',
+  async ({ modificationsReadyToAssignPage }, datasetName: string) => {
+    const dataset = modificationsReadyToAssignPage.modificationsReadyToAssignPageData.Modification_Id[datasetName];
+    const modificationRecord: string[] = [];
+    for (const key in dataset) {
+      if (Object.hasOwn(dataset, key)) {
+        for (const modificationId of dataset[key]) {
+          await modificationsReadyToAssignPage.page.getByTestId(`${modificationId}`).check();
+          const shortProjectTitle = await modificationsReadyToAssignPage.page
+            .getByTestId(`${modificationId}`)
+            .locator('../../..')
+            .getByRole('strong')
+            .textContent();
+          modificationRecord.push(modificationId + ':' + shortProjectTitle);
+        }
+      }
+    }
+    // await expect(modificationsReadyToAssignPage.modification_checkbox.nth(randomRowToCheck)).toBeChecked();
   }
 );

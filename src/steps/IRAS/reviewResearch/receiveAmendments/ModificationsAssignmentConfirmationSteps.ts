@@ -7,8 +7,8 @@ const { Then } = createBdd(test);
 
 Then(
   'I can see the modifications assignment confirmation page for {string}',
-  async ({ modificationsAssignmentConfirmationPage, modificationsReadyToAssignPage }, datasetName: string) => {
-    const dataset = modificationsReadyToAssignPage.modificationsReadyToAssignPageData.Study_Wide_Reviewer[datasetName];
+  async ({ modificationsAssignmentConfirmationPage, selectStudyWideReviewerPage }, datasetName: string) => {
+    const dataset = selectStudyWideReviewerPage.selectStudywideReviewerPageData.Study_Wide_Reviewer[datasetName];
     // const dataset =
     //   modificationsAssignmentConfirmationPage.modificationsAssignmentConfirmationPageTestData
     //     .Modifications_Assignment_Confirmation_Page;
