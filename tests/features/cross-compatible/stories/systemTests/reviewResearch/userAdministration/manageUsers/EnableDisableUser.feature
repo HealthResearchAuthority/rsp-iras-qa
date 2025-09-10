@@ -18,7 +18,7 @@ Feature: User Administration: Manage Users - Enable / Disable users
         And I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
         And I can see the 'Manage_Users_Page'
         And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
-        And I select advanced filters in the manage users page using '<Advanced_Filters_Users>'
+        And I select advanced filters in the manage users page using '<Advanced_Filters_Users_Active>'
         And I capture the page screenshot
         And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
         And I capture the page screenshot
@@ -35,7 +35,7 @@ Feature: User Administration: Manage Users - Enable / Disable users
         And I can see the 'Manage_Users_Page'
         And I capture the page screenshot
         And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
-        And I select advanced filters in the manage users page using '<Advanced_Filters_Users>'
+        And I select advanced filters in the manage users page using '<Advanced_Filters_Users_Disabled>'
         And I capture the page screenshot
         And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
         And I capture the page screenshot
@@ -43,8 +43,8 @@ Feature: User Administration: Manage Users - Enable / Disable users
         And I capture the page screenshot
 
         Examples:
-            | Add_User_Profile                           | Disable_Label_Texts | Disable_User_Profile_Labels | Status_Enabled | Status_Disabled | Advanced_Filters_Users                          |
-            | Valid_Data_In_All_Fields_Role_Team_Manager | Disable_Label_Texts | Disable_User_Profile_Labels | Enabled        | Disabled        | Advanced_Filter_Role_Team_Manager_Status_Active |
+            | Add_User_Profile                           | Disable_Label_Texts | Disable_User_Profile_Labels | Status_Enabled | Status_Disabled | Advanced_Filters_Users_Active                   | Advanced_Filters_Users_Disabled                   |
+            | Valid_Data_In_All_Fields_Role_Team_Manager | Disable_Label_Texts | Disable_User_Profile_Labels | Enabled        | Disabled        | Advanced_Filter_Role_Team_Manager_Status_Active | Advanced_Filter_Role_Team_Manager_Status_Disabled |
 
     @rsp-2829 @BreadcrumbDisableUser
     Scenario Outline: Validate breadcrumb navigations in disable user profile confirmation page

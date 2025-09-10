@@ -106,7 +106,7 @@
   },
   "Create_User_Profile": {
     "email_address_prefix": "QAAutomation",
-    "email_address_unique": "QAAutomation20250909093844834hscrd@health.org",
+    "email_address_unique": "QAAutomation20250910113339553hscrd@health.org",
     "Role_TM_SWR_WFC": {
       "role_checkbox": [
         "Study-wide reviewer",
@@ -191,7 +191,7 @@
         "Study-wide reviewer"
       ],
       "review_body_checkbox": [
-        "QA Automation Health Research Authority (HRA)"
+        "Health Research Authority (HRA)"
       ]
     },
     "Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Another": {
@@ -206,7 +206,7 @@
         "Study-wide reviewer"
       ],
       "review_body_checkbox": [
-        "QA Automation Health and Care Research Wales (HCRW)"
+        "Health and Care Research Wales (HCRW)"
       ]
     },
     "Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer": {
@@ -217,7 +217,7 @@
         "Study-wide reviewer"
       ],
       "review_body_checkbox": [
-        "QA Automation Health and Social Care Northern Ireland (HSCNI)"
+        "Health and Social Care Northern Ireland (HSCNI)"
       ]
     },
     "Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer_Another": {
@@ -228,7 +228,7 @@
         "Study-wide reviewer"
       ],
       "review_body_checkbox": [
-        "QA Automation National Research Service Permissions Coordination Centre (NRSPCC)"
+        "National Research Service Permissions Coordination Centre (NRSPCC)"
       ]
     },
     "Valid_Data_In_All_Fields_Role_Workflow_Coordinator": {
@@ -243,7 +243,7 @@
         "Workflow co-ordinator"
       ],
       "review_body_checkbox": [
-        "QA Automation National Research Service Permissions Coordination Centre (NRSPCC)"
+        "National Research Service Permissions Coordination Centre (NRSPCC)"
       ]
     },
     "Valid_Data_In_All_Fields_Role_Workflow_Coordinator_Another": {
@@ -258,7 +258,7 @@
         "Workflow co-ordinator"
       ],
       "review_body_checkbox": [
-        "QA Automation Health Research Authority (HRA)"
+        "Health Research Authority (HRA)"
       ]
     },
     "Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator": {
@@ -269,7 +269,7 @@
         "Workflow co-ordinator"
       ],
       "review_body_checkbox": [
-        "QA Automation Health Research Authority (HRA)"
+        "Health Research Authority (HRA)"
       ]
     },
     "Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator_Another": {
@@ -280,7 +280,7 @@
         "Workflow co-ordinator"
       ],
       "review_body_checkbox": [
-        "QA Automation Health and Social Care Northern Ireland (HSCNI)"
+        "Health and Social Care Northern Ireland (HSCNI)"
       ]
     },
     "Valid_Data_In_All_Fields_Role_System_Administrator": {
@@ -382,7 +382,7 @@
         "Wales"
       ],
       "review_body_checkbox": [
-        "QA Automation Health and Social Care Northern Ireland (HSCNI)"
+        "Health and Social Care Northern Ireland (HSCNI)"
       ]
     },
     "Valid_Data_In_All_Fields_Role_Team_Manager_Studywide_Reviewer_Another": {
@@ -404,7 +404,7 @@
         "Wales"
       ],
       "review_body_checkbox": [
-        "QA Automation Health and Social Care Northern Ireland (HSCNI)"
+        "Health and Social Care Northern Ireland (HSCNI)"
       ]
     },
     "Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_Studywide_Reviewer": {
@@ -422,7 +422,7 @@
         "Wales"
       ],
       "review_body_checkbox": [
-        "QA Automation Health and Social Care Northern Ireland (HSCNI)"
+        "Health and Social Care Northern Ireland (HSCNI)"
       ]
     },
     "Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_Studywide_Reviewer_Another": {
@@ -440,7 +440,7 @@
         "Wales"
       ],
       "review_body_checkbox": [
-        "QA Automation Health and Social Care Northern Ireland (HSCNI)"
+        "Health and Social Care Northern Ireland (HSCNI)"
       ]
     },
     "Valid_Data_In_All_Fields_Role_Team_Manager_Workflow_Coordinator": {
@@ -462,7 +462,7 @@
         "Wales"
       ],
       "review_body_checkbox": [
-        "QA Automation Health and Social Care Northern Ireland (HSCNI)"
+        "Health and Social Care Northern Ireland (HSCNI)"
       ]
     },
     "Valid_Data_In_All_Fields_Role_Team_Manager_Workflow_Coordinator_Another": {
@@ -484,7 +484,7 @@
         "Wales"
       ],
       "review_body_checkbox": [
-        "QA Automation Health and Social Care Northern Ireland (HSCNI)"
+        "Health and Social Care Northern Ireland (HSCNI)"
       ]
     },
     "Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_Workflow_Coordinator": {
@@ -502,7 +502,7 @@
         "Wales"
       ],
       "review_body_checkbox": [
-        "QA Automation Health and Social Care Northern Ireland (HSCNI)"
+        "Health and Social Care Northern Ireland (HSCNI)"
       ]
     },
     "Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_Workflow_Coordinator_Another": {
@@ -520,7 +520,7 @@
         "Wales"
       ],
       "review_body_checkbox": [
-        "QA Automation Health and Social Care Northern Ireland (HSCNI)"
+        "Health and Social Care Northern Ireland (HSCNI)"
       ]
     },
     "Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Workflow_Coordinator": {
@@ -536,7 +536,7 @@
         "Workflow co-ordinator"
       ],
       "review_body_checkbox": [
-        "QA Automation Health and Social Care Northern Ireland (HSCNI)"
+        "Health and Social Care Northern Ireland (HSCNI)"
       ]
     },
     "Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Workflow_Coordinator_Another": {
@@ -552,7 +552,7 @@
         "Workflow co-ordinator"
       ],
       "review_body_checkbox": [
-        "QA Automation Health and Social Care Northern Ireland (HSCNI)"
+        "Health and Social Care Northern Ireland (HSCNI)"
       ]
     },
     "Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer_Workflow_Coordinator": {
@@ -564,7 +564,7 @@
         "Workflow co-ordinator"
       ],
       "review_body_checkbox": [
-        "QA Automation Health and Social Care Northern Ireland (HSCNI)"
+        "Health and Social Care Northern Ireland (HSCNI)"
       ]
     },
     "Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer_Workflow_Coordinator_Another": {
@@ -576,7 +576,7 @@
         "Workflow co-ordinator"
       ],
       "review_body_checkbox": [
-        "QA Automation Health and Social Care Northern Ireland (HSCNI)"
+        "Health and Social Care Northern Ireland (HSCNI)"
       ]
     },
     "Valid_Data_In_All_Fields_Role_Team_Manager_System_Administrator": {
@@ -666,7 +666,7 @@
         "Wales"
       ],
       "review_body_checkbox": [
-        "QA Automation Health and Care Research Wales (HCRW)"
+        "Health and Care Research Wales (HCRW)"
       ]
     },
     "Valid_Data_No_Roles": {
@@ -813,7 +813,7 @@
         "Wales"
       ],
       "review_body_checkbox": [
-        "QA Automation Health and Social Care Northern Ireland (HSCNI)"
+        "Health and Social Care Northern Ireland (HSCNI)"
       ]
     },
     "Duplicate_Email_Role_Applicant_System_Admin": {

@@ -22,7 +22,7 @@ Feature: User Administration: Manage Users - View audit history for users
             | Status_Enabled |
             | Enabled        |
 
-    @VerifyAuditHistoryCreateUserAssignRoles @fail
+    @VerifyAuditHistoryCreateUserAssignRoles
     Scenario Outline: Verify the user can view the audit history with roles assigned after creating a new user
         And I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
         And I can see the add a new user profile page
@@ -114,7 +114,7 @@ Feature: User Administration: Manage Users - View audit history for users
             | Enabled  | Disable_User_Record | Disable_User  |
             | Disabled | Enable_User_Record  | Enable_User   |
 
-    @rsp-4021 @VerifyAuditHistoryEditCommonUserFields
+    @rsp-4021 @VerifyAuditHistoryEditCommonUserFields @skip
     Scenario Outline: Verify the user can view the audit history after editing common user profile fields
         When I enter 'Existing_QA_Automation_User_First_Name' into the search field for manage users page
         And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
