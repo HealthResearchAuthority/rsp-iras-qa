@@ -511,7 +511,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                         | Valid_Iras_Id_TwentyTwo   |
                         | Valid_Iras_Id_TwentyThree |
 
-        @ViewListOfModifications @ViewListOfModificationsPaginationFirstPage @ViewListOfModificationsPaginationPageNumber @ViewListOfModificationsPaginationNextLinkClick
+        @ViewListOfModifications @ViewListOfModificationsPaginationFirstPage @ViewListOfModificationsPaginationPageNumber @ViewListOfModificationsPaginationNextLinkClick 
         Scenario Outline: Verify pagination in the list of modifications page when user is on the first page and navigate through each page by clicking page number or by by clicking next link
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -533,7 +533,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                         | page number       | Valid_Iras_Id_Zeros | Advanced_Filters_Lead_Nation |
                         | next link         | Valid_Iras_Id_Zeros | Advanced_Filters_Lead_Nation |
 
-        @ViewListOfModifications  @ViewListOfModificationsPaginationLastPage @ViewListOfModificationsPaginationPageNumber @ViewListOfModificationsPaginationPreviousLinkClick
+        @ViewListOfModifications  @ViewListOfModificationsPaginationLastPage @ViewListOfModificationsPaginationPageNumber @ViewListOfModificationsPaginationPreviousLinkClick 
         Scenario Outline: Verify pagination in the list of modifications page when user is on the last page and navigate through each page by clicking page number or by by clicking next link
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -630,7 +630,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                         | Advanced_Filters     | Advanced_Filters_Labels      |
                         | Advanced_Filters_Nth | Advanced_Filters_Hint_Labels |
 
-        @rsp-4381
+        @rsp-4381 @testOnly 
         Scenario Outline: verify that all active filters are automatically cleared when the user navigates away from the current page in search modification page 
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -638,7 +638,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                 And I capture the page screenshot
                 And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                Then I sequentially navigate through each page by '<Navigation_Method>' from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+                Then I sequentially navigate through each 'Search_Modifications_Page' by clicking on '<Navigation_Method>' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
                 And I capture the page screenshot
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -650,6 +650,6 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                 And I capture the page screenshot
               
                 Examples:
-                        | Navigation_Method       | Advanced_Filters                                  |
-                        | clicking on page number | Advanced_Filter_Three_Lead_Nation_Selected        |
-                        | clicking on next link   | Advanced_Filter_Two_Participating_Nation_Selected |
+                        | Navigation_Method | Advanced_Filters             |
+                        | page number       | Advanced_Filters_Lead_Nation |
+                        | previous link     | Advanced_Filters_Lead_Nation |
