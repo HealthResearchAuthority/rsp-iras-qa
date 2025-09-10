@@ -88,6 +88,7 @@ export default class CommonItemsPage {
   readonly no_results_heading: Locator;
   readonly apply_filters_button: Locator;
   readonly upload_files_input: Locator;
+  readonly search_results_count: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -120,6 +121,7 @@ export default class CommonItemsPage {
       .getByTestId('SearchQuery')
       .or(this.page.getByTestId('Search.SearchQuery'))
       .or(this.page.getByTestId('Search_IrasId'))
+      .or(this.page.getByTestId('Search.SearchNameTerm'))
       .first();
     //Banner
     this.bannerNavBar = this.page.getByLabel('Service information');
@@ -148,13 +150,12 @@ export default class CommonItemsPage {
       });
     this.summaryErrorLinks = this.errorMessageSummaryLabel.locator('..').getByRole('listitem').getByRole('link');
     this.topMenuBarLinks = this.page.getByTestId('navigation').getByRole('listitem').getByRole('link');
-    this.pagination = page.getByRole('navigation', { name: 'Pagination' });
-    this.firstPage = this.pagination.getByRole('link', { name: this.commonTestData.first_page, exact: true });
-
+    this.pagination = page
+      .getByRole('navigation', { name: 'Pagination' })
+      .or(page.getByRole('button', { name: 'Pagination' }));
     this.firstPage = this.pagination
       .getByRole('link', { name: this.commonTestData.first_page, exact: true })
       .or(this.pagination.getByRole('button', { name: this.commonTestData.first_page, exact: true }));
-    this.lastPage = this.pagination.getByRole('listitem').last();
     this.previous_button = this.pagination
       .getByRole('link')
       .getByText(this.commonTestData.previous_button, { exact: true })
@@ -214,6 +215,7 @@ export default class CommonItemsPage {
       });
     this.advanced_filter_active_filters_label = this.page.getByRole('list');
     this.upload_files_input = this.page.locator('input[type="file"]');
+    this.search_results_count = this.page.locator('.search-filter-panel__count');
   }
 
   //Page Methods
@@ -812,7 +814,7 @@ export default class CommonItemsPage {
     const currentPageLink = this.pagination
       .getByRole('link', { name: `Page ${currentPageNumber}`, exact: true })
       .or(this.pagination.getByRole('button', { name: `Page ${currentPageNumber}`, exact: true }));
-    if (navigateMethod === 'clicking on page number') {
+    if (navigateMethod === 'page number') {
       if (await currentPageLink.isVisible()) {
         await currentPageLink.click();
         await this.page.waitForLoadState('domcontentloaded');
@@ -843,14 +845,6 @@ export default class CommonItemsPage {
   async filterResults(results: string[], searchTerms: string[] | string): Promise<string[]> {
     const terms = Array.isArray(searchTerms) ? searchTerms : [searchTerms];
     return results.filter((result) => terms.every((term) => result.toLowerCase().includes(term.toLowerCase())));
-  }
-
-  async clearCheckboxes(dataset: any, keys: string[], commonItemsPage: any, createUserProfilePage: any) {
-    for (const key of keys) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        await commonItemsPage.clearUIComponent(dataset, key, createUserProfilePage);
-      }
-    }
   }
 
   async captureLargeSizeScreenshot(page: Page, outputFile: string) {
@@ -1003,13 +997,18 @@ export default class CommonItemsPage {
     filterLabels: any,
     replaceValue: string
   ): Promise<string | null> {
-    return await this.getActiveFilterLabelDateField(
-      filterLabels,
-      filterDataset,
-      key,
-      /(_from_day_text|_to_day_text)$/,
-      replaceValue
-    );
+    const dateSuffixRegex = /(_from_day_text|_to_day_text)$/;
+    if (key.startsWith('date_last_logged_in')) {
+      return await this.getActiveFilterLabelLastLoggedInField(
+        filterLabels,
+        filterDataset,
+        key,
+        dateSuffixRegex,
+        replaceValue
+      );
+    } else if (key.startsWith('date_submitted')) {
+      return await this.getActiveFilterLabelDateField(filterLabels, filterDataset, key, dateSuffixRegex, replaceValue);
+    }
   }
 
   async getTextboxRadioButtonFilterLabel(
@@ -1056,9 +1055,14 @@ export default class CommonItemsPage {
     return values;
   }
 
-  async validatePagination(currentPage: any, totalPages: any, navigateMethod: string) {
+  async validatePagination(currentPage: any, totalPages: any, pagename: string, navigateMethod: string) {
     const totalItems = await this.getTotalItems();
-    const pageSize = parseInt(this.commonTestData.default_page_size, 10);
+    let pageSize: number;
+    if (pagename == 'Participating_Organisations_Page') {
+      pageSize = parseInt(this.commonTestData.default_page_size_participating_organisation, 10);
+    } else {
+      pageSize = parseInt(this.commonTestData.default_page_size, 10);
+    }
     const currentPageLocator = await this.clickOnPages(currentPage, navigateMethod);
     await expect(currentPageLocator).toHaveAttribute('aria-current');
     const { start, end } = Object.fromEntries(await this.getStartEndPages(currentPage, pageSize, totalItems));
@@ -1129,9 +1133,9 @@ export default class CommonItemsPage {
     expect(visiblePages).toContain(firstPage);
     expect(visiblePages).toContain(lastPage);
     // Navigation
-    if (navigateMethod === 'clicking on next link') {
+    if (navigateMethod === 'next link') {
       await this.clickOnNextLink();
-    } else if (navigateMethod === 'clicking on previous link') {
+    } else if (navigateMethod === 'previous link') {
       await this.clickOnPreviousLink();
     }
   }
@@ -1146,5 +1150,76 @@ export default class CommonItemsPage {
         await checkbox.uncheck();
       }
     }
+  }
+
+  async getLabelsFromCheckboxes(locator: Locator): Promise<string[]> {
+    const labels: string[] = [];
+    const count = await locator.count();
+    for (let i = 0; i < count; i++) {
+      const labelLocator = locator.nth(i).locator('..').locator('.govuk-label');
+      const labelText = confirmStringNotNull(await labelLocator.first().textContent());
+      labels.push(labelText);
+    }
+    return labels;
+  }
+
+  async getChangeLink<PageObject>(fieldKey: string, page: PageObject) {
+    const locatorName = fieldKey.toLowerCase() + '_change_link';
+    return page[locatorName];
+  }
+
+  async clearCheckboxesUserProfile<PageObject>(dataset: any, key: string, page: PageObject) {
+    const locator: Locator = page[key];
+    const count = await locator.count();
+    for (let i = 0; i < count; i++) {
+      const checkbox = locator.nth(i);
+      const isChecked = await checkbox.isChecked();
+      if (isChecked) {
+        await checkbox.uncheck();
+      }
+    }
+  }
+
+  async selectCheckboxUserProfileReviewBody<PageObject>(dataset: any, page: PageObject) {
+    const locator: Locator = page['review_body_checkbox'];
+    const typeAttribute = await locator.first().getAttribute('type');
+    if (typeAttribute === 'checkbox') {
+      for (const checkbox of dataset['review_body_checkbox']) {
+        await locator.locator('..').getByLabel(checkbox).first().check();
+      }
+    }
+  }
+
+  async getLastLoggedInFilterLabel(
+    key: string,
+    filterDataset: any,
+    filterLabels: any,
+    replaceValue: string
+  ): Promise<string | null> {
+    return await this.getActiveFilterLabelLastLoggedInField(
+      filterLabels,
+      filterDataset,
+      key,
+      /(_from_day_text|_to_day_text)$/,
+      replaceValue
+    );
+  }
+
+  async getActiveFilterLabelLastLoggedInField(
+    filterLabels: any,
+    filterDataset: JSON,
+    key: string,
+    searchValue: RegExp,
+    replaceValue: string
+  ): Promise<string> {
+    let activeFilterLabel: string;
+    const label = filterLabels[key.replace(searchValue, replaceValue)];
+    const dateType = key.includes('_from_') ? 'from' : 'to';
+    const dateKey = key.replace('_day_text', '');
+    const dateValue = await this.getDateString(filterDataset, dateKey);
+    if (dateValue) {
+      activeFilterLabel = `${label} - ${dateType} ${dateValue}`;
+    }
+    return activeFilterLabel;
   }
 }

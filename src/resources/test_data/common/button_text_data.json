@@ -24,7 +24,12 @@
     "Proceed_Submit": "Proceed to Submit"
   },
   "My_Research_Projects_Page": {
-    "Create_Project_Record": "Add project"
+    "Create_Project_Record": "Add project",
+    "Search": "Search",
+    "Advanced_filter": "Advanced filter",
+    "Short_Project_Title": "Short project title",
+    "Iras_Id": "IRAS ID",
+    "Date_Created": "Date created"
   },
   "Create_Project_Record_Page": {
     "Start": "Start"
@@ -160,5 +165,8 @@
     "Add_Another_Document": "Add another document",
     "Save_Continue": "Save and continue",
     "Save_For_Later": "Save for later"
+  },
+  "Project_Overview_Page": {
+    "Create_New_Modification": "Create new modification"
   }
 }

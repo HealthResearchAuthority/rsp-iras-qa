@@ -14,12 +14,13 @@ When('I update user profile with {string}', async ({ commonItemsPage, editUserPr
 
 When(
   'I can see the newly created user record should be present in the list for {string} with {string} status in the manage user page',
-  async ({ manageUsersPage, createUserProfilePage }, datasetName: string, status: string) => {
+  async ({ manageUsersPage, createUserProfilePage, commonItemsPage }, datasetName: string, status: string) => {
     const foundRecord = await manageUsersPage.getUniqueUserRecord(
       datasetName,
       status,
       createUserProfilePage,
-      manageUsersPage
+      manageUsersPage,
+      commonItemsPage
     );
     expect(foundRecord).toBeDefined();
     expect(foundRecord).toHaveCount(1);
@@ -44,12 +45,13 @@ When(
 
 When(
   'I search and click on view edit link for unique {string} user with {string} status from the manage user page',
-  async ({ manageUsersPage, createUserProfilePage }, datasetName: string, status: string) => {
+  async ({ manageUsersPage, createUserProfilePage, commonItemsPage }, datasetName: string, status: string) => {
     const foundRecord = await manageUsersPage.getUniqueUserRecord(
       datasetName,
       status,
       createUserProfilePage,
-      manageUsersPage
+      manageUsersPage,
+      commonItemsPage
     );
     expect(foundRecord).toBeDefined();
     expect(foundRecord).toHaveCount(1);
@@ -163,7 +165,6 @@ When(
   'I select advanced filters in the manage users page using {string}',
   async ({ manageUsersPage, commonItemsPage }, filterDatasetName: string) => {
     const dataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[filterDatasetName];
-    await manageUsersPage.advanced_filter_chevron.click();
     for (const key in dataset) {
       if (Object.hasOwn(dataset, key)) {
         if (key.includes('date')) {
@@ -171,6 +172,8 @@ When(
             await manageUsersPage.date_last_logged_in_from_day_text_chevron.click();
           }
           await commonItemsPage.fillUIComponent(dataset, key, manageUsersPage);
+        } else if (key === 'review_body_checkbox') {
+          await commonItemsPage.selectCheckboxUserProfileReviewBody(dataset, manageUsersPage);
         } else {
           await manageUsersPage[key + '_chevron'].click();
           await commonItemsPage.fillUIComponent(dataset, key, manageUsersPage);
@@ -254,5 +257,22 @@ Then(
       manageUsersPage.manageUsersPageTestData.Error_Message_Field_Dataset[errorMessageFieldDatasetName];
     const fieldErrorMessagesActualValues = await manageUsersPage.date_last_logged_in_error_message.textContent();
     expect(fieldErrorMessagesActualValues).toEqual(fieldErrorMessagesExpected);
+  }
+);
+
+Then(
+  'I retrieve the list of review bodies displayed in the review body checkbox in the advanced filters of manage users page',
+  async ({ manageUsersPage, commonItemsPage }) => {
+    const actualList = await commonItemsPage.getLabelsFromCheckboxes(manageUsersPage.review_body_checkbox);
+    await manageUsersPage.setReviewBodies(actualList);
+  }
+);
+
+Then(
+  'I can see the review body field in the review body checkbox in the advanced filters of manage users page should contain all currently enabled review bodies from the manage review bodies page',
+  async ({ manageUsersPage, manageReviewBodiesPage }) => {
+    const actualList = await manageUsersPage.getReviewBodies();
+    const expectedList = await manageReviewBodiesPage.getOrgNamesListFromUI();
+    expect(actualList).toEqual(expectedList);
   }
 );

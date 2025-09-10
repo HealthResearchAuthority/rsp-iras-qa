@@ -50,7 +50,7 @@
     "Add_New_User_Profile_Record": "Add a new user profile record",
     "Back": "Back",
     "View_Edit": "View/Edit",
-    "Advanced_Filter": "Advanced filters",
+    "Advanced_Filters": "Advanced filters",
     "Clear_All_Filters": "Clear all filters"
   },
   "Create_User_Profile_Page": {
@@ -118,7 +118,10 @@
   },
   "Project_Overview_Page": {
     "Project_Details": "Project details",
-    "Post_Approval": "Post approval"
+    "Project": "QA_Automation - This is a short project title",
+    "Post_Approval": "Post approval",
+    "Key_Project_Roles": "Key project roles",
+    "Research_Locations": "Research locations"
   },
   "Review_Body_User_List_Page": {
     "Back_To_Review_Body_Profile": "Back to review body profile",
@@ -146,7 +149,8 @@
     "Back_To_Manage_Review_Bodies": "Back to Manage review bodies"
   },
   "My_Research_Page": {
-    "Back": "Back"
+    "Back": "Back",
+    "Project": "QA_Automation - This is a short project title"
   },
   "Search_Modifications_Page": {
     "Advanced_Filters": "Advanced filters",
@@ -162,7 +166,7 @@
   },
   "Participating_Organisations_Page": {
     "Back": "Back",
-    "Advanced_Filter": "Advanced filter",
+    "Advanced_Filter": "Advanced filters",
     "Remove_This_Change": "Remove this change"
   },
   "Approvals_Page": {
@@ -182,6 +186,9 @@
     "Remove_This_Change": "Remove this change"
   },
   "Review_Changes_Planned_End_Date_Page": {
+    "Back": "Back"
+  },
+  "Review_Uploaded_Document_Modifications_Page": {
     "Back": "Back"
   }
 }
