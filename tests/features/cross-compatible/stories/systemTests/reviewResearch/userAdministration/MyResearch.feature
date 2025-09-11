@@ -8,7 +8,7 @@ Feature: User Administration: My Research
     And I can see the 'My_Research_Page'
 
   @rsp-3424 @myResearchProjectsPage @Smoke @skip
-  Scenario Outline: Validate the my research page and Navigation back to home page
+  Scenario: Validate the my research page and Navigation back to home page
     When I click the 'Back' link on the 'My_Research_Page'
     Then I can see the my account home page
     Then I capture the page screenshot
