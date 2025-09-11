@@ -1,4 +1,4 @@
-@UserAdministration @ManageReviewBodies @SysAdminUser @SystemTest @AuditHistoryReviewBody @rsp-2927 @STSysAdmin
+@UserAdministration @ManageReviewBodies @SysAdminUser @SystemTest @AuditHistoryReviewBody @rsp-2927
 Feature: User Administration: Manage Review Bodies - View audit history for review body
     # @KNOWN-ISSUE-RSP-5003 @KNOWN-DEFECT-RSP-5004 @fail
     Background:

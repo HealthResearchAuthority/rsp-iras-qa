@@ -1,4 +1,4 @@
-@UserAdministration @ManageUsers @SysAdminUser @SystemTest @AuditHistoryUser @rsp-2928 @STSysAdmin
+@UserAdministration @ManageUsers @SysAdminUser @SystemTest @AuditHistoryUser @rsp-2928
 Feature: User Administration: Manage Users - View audit history for users
 
     Background:
