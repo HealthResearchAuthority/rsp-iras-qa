@@ -5,7 +5,7 @@ Feature: User Administration: Manage Review Bodies - Sort, search and filter the
         Given I have navigated to the 'Manage_Review_Bodies_Page'
         And I can see the manage review bodies list sorted by 'ascending' order of the 'organisation name' on the 'first' page
 
-    @sortReviewBodyListByColumn @RSP-3546 @fail @KNOWN_DEFECT-Country-FIX-TBD
+    @sortReviewBodyListByColumn @RSP-3546
     Scenario Outline: Verify the user is able to sort the manage review bodies list by ascending and descending order for each table column
         When I click the '<Sort_Button>' button on the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot

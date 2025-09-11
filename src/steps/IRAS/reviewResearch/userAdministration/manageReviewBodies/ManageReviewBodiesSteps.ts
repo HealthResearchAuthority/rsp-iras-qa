@@ -155,7 +155,19 @@ Then(
       default:
         throw new Error(`${sortField} is not a valid option`);
     }
-    const actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
+    let actualList: string[] = [];
+    if (sortField.toLowerCase() == 'country') {
+      const originalList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
+      for (const country of originalList) {
+        if (country.includes(',')) {
+          actualList.push(country.slice(0, country.indexOf(',')));
+        } else {
+          actualList.push(country);
+        }
+      }
+    } else {
+      actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
+    }
     if (sortDirection.toLowerCase() == 'ascending') {
       sortedList = [...actualList].toSorted((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
       if (sortField.toLowerCase() == 'status' && currentPage.toLowerCase() == 'first') {
