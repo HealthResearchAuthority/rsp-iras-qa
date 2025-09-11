@@ -56,7 +56,6 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
             | Date_Range_Single |
             | Date_Range_Multi  |
             | Date_From_Multi   |
-            | Date_To_Single    |
             | Date_To_Multi     |
 
     @filterTasklistByDaysSinceSubmission @rsp-4296 @UPDATE-AFTER-RSP-4808
@@ -141,7 +140,6 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
             | Title_Date_Range_Single | Search        |
             | Title_Date_Range_Multi  | Apply_Filters |
             | Date_From_Multi         | Search        |
-            | Date_To_Single          | Apply_Filters |
             | Days_Range_Multi        | Search        |
             | Days_From_Multi         | Apply_Filters |
             | Days_To_Multi           | Search        |

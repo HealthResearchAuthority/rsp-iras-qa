@@ -152,18 +152,18 @@ When('I confirm all checkboxes are {string}', async ({ modificationsReadyToAssig
 
 Given(
   'I can now see the modifications ready to assign table contains the expected search results for {string}',
-  async ({ modificationsReadyToAssignPage, commonItemsPage, searchModificationsPage }, searchInput: string) => {
+  async ({ modificationsReadyToAssignPage, commonItemsPage }, searchInput: string) => {
     const searchInputDataset = modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Search_Queries;
     await expect(modificationsReadyToAssignPage.results_table).toBeVisible();
     expect(await commonItemsPage.tableBodyRows.count()).toBeGreaterThan(0);
     const noOfResults = await commonItemsPage.extractNumFromSearchResultCount(
       await commonItemsPage.search_results_count.textContent()
     );
-    const modificationIds = await searchModificationsPage.getActualListValues(commonItemsPage.tableBodyRows, 1); //this is in common now, merge with latest when work is in
+    const modificationIds = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, 1);
     const visibleIrasIds = await modificationsReadyToAssignPage.getVisibleIrasIds(modificationIds);
-    const shortTitles = await searchModificationsPage.getActualListValues(commonItemsPage.tableBodyRows, 2); //this is in common now, merge with latest when work is in
-    const datesSubmitted = await searchModificationsPage.getActualListValues(commonItemsPage.tableBodyRows, 3); //this is in common now, merge with latest when work is in
-    const daysSinceSubmission = await searchModificationsPage.getActualListValues(commonItemsPage.tableBodyRows, 4); //this is in common now, merge with latest when work is in
+    const shortTitles = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, 2);
+    const datesSubmitted = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, 3);
+    const daysSinceSubmission = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, 4);
     if (searchInput.toLowerCase().includes('single')) {
       await expect(commonItemsPage.search_results_count).toHaveText(
         commonItemsPage.searchFilterResultsData.search_single_result_count
@@ -252,9 +252,9 @@ Given(
 
 When(
   'I fill the modifications tasklist search and filter options with {string}',
-  async ({ commonItemsPage, modificationsReadyToAssignPage, searchModificationsPage }, datasetName: string) => {
+  async ({ commonItemsPage, modificationsReadyToAssignPage }, datasetName: string) => {
     const dataset = modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Search_Queries[datasetName];
-    const daysSinceSubmission = await searchModificationsPage.getActualListValues(commonItemsPage.tableBodyRows, 4); //this is in common now, merge with latest when work is in
+    const daysSinceSubmission = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, 4);
     for (const key in dataset) {
       if (Object.hasOwn(dataset, key)) {
         await commonItemsPage.fillUIComponent(dataset, key, modificationsReadyToAssignPage);

@@ -448,15 +448,6 @@ export default class SearchModificationsPage {
     return sortedListAsStrings;
   }
 
-  async getActualListValues(tableBodyRows: Locator, columnIndex: number): Promise<string[]> {
-    const actualListValues: string[] = [];
-    for (const row of await tableBodyRows.all()) {
-      const actualListValue = confirmStringNotNull(await row.getByRole('cell').nth(columnIndex).textContent());
-      actualListValues.push(actualListValue);
-    }
-    return actualListValues;
-  }
-
   async clickFilterChevronModifications<PageObject>(dataset: JSON, key: string, page: PageObject) {
     const button = page[`${key}_chevron`];
     const fromDate = dataset['date_submitted_from_day_text'];

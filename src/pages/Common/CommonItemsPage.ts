@@ -726,7 +726,6 @@ export default class CommonItemsPage {
     return element;
   }
 
-  /////////// MERGED BELOW/////////
   async getUsers(): Promise<Map<string, string[]>> {
     const firstNameValues: string[] = [];
     const lastNameValues: string[] = [];
@@ -1331,7 +1330,6 @@ export default class CommonItemsPage {
     return activeFilterLabel;
   }
 
-  /////////// MERGED ABOVE/////////
   async extractNumFromSearchResultCount(resultsString: string): Promise<number> {
     return parseInt(resultsString.replace(searchFilterResultsData.search_results_suffix, '').trim());
   }

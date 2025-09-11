@@ -1,5 +1,5 @@
 @RegressionModificationsReadyToAssign @WorkFlowCoordinator @Regression @RegressionReceiveAmendments
-Feature: Modifications Tasklist page that displays modifications ready to be assigned
+Feature: Receive Amendments: Modifications Tasklist page that displays modifications ready to be assigned
 
     Background:
         Given I have navigated to the 'Modifications_Tasklist_Page'
