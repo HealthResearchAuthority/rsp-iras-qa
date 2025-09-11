@@ -1,11 +1,11 @@
 @RegressionManageUsersSortSearchFilter @RegressionManageUsers @SysAdminUser @Regression
-Feature: User Administration: Sort, search and filter the manage users list
+Feature: User Administration: Manage Users- Sort, search and filter the manage users list
 
   Background:
     Given I have navigated to the 'Manage_Users_Page'
     And I can see the manage users list sorted by 'ascending' order of the 'first name' on the 'first' page
 
-  @regressionSortUserListByColumn @fail @RSP-3553
+  @regressionSortUserListByColumn @RSP-3553
   Scenario Outline: Verify the user is able to sort the manage users list by ascending and descending order for each table column
     When I click the '<Sort_Button>' button on the 'Manage_Users_Page'
     And I capture the page screenshot

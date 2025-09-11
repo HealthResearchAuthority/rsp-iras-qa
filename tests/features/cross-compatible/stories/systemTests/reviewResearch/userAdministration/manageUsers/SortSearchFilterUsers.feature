@@ -5,7 +5,7 @@ Feature: User Administration: Manage Users - Sort, search and filter the manage 
     Given I have navigated to the 'Manage_Users_Page'
     And I can see the manage users list sorted by 'ascending' order of the 'first name' on the 'first' page
 
-  @sortUserListByColumn @fail @RSP-3553
+  @sortUserListByColumn @RSP-3553
   Scenario Outline: Verify the user is able to sort the manage users list by ascending and descending order for each table column
     When I click the '<Sort_Button>' button on the 'Manage_Users_Page'
     And I capture the page screenshot

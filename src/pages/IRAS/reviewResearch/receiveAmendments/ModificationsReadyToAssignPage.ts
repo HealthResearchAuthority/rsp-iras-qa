@@ -14,10 +14,10 @@ export default class ModificationsReadyToAssignPage {
   readonly buttonTextData: typeof buttonTextData;
   readonly linkTextData: typeof linkTextData;
   readonly modifications_tasklist_link: Locator;
-  readonly short_project_title_label: Locator;
-  readonly modification_id_label: Locator;
-  readonly date_submitted_label: Locator;
-  readonly days_since_submission_label: Locator;
+  readonly short_project_title_column_label: Locator;
+  readonly modification_id_column_label: Locator;
+  readonly date_submitted_column_label: Locator;
+  readonly days_since_submission_column_label: Locator;
   readonly checkall_modification_checkbox: Locator;
   readonly page_heading: Locator;
   readonly page_description: Locator;
@@ -56,24 +56,24 @@ export default class ModificationsReadyToAssignPage {
 
     //Locators
     this.modifications_tasklist_link = this.page.locator('.govuk-heading-s govuk-link hra-card-heading__link');
-    this.short_project_title_label = this.page
+    this.short_project_title_column_label = this.page
       .getByRole('button')
-      .getByText(this.modificationsReadyToAssignPageData.Label_Texts.short_project_title_label, {
+      .getByText(this.modificationsReadyToAssignPageTestData.Column_Label_Texts.short_project_title_column_label, {
         exact: true,
       });
-    this.modification_id_label = this.page
+    this.modification_id_column_label = this.page
       .getByRole('button')
-      .getByText(this.modificationsReadyToAssignPageData.Label_Texts.modification_id_label, {
+      .getByText(this.modificationsReadyToAssignPageTestData.Column_Label_Texts.modification_id_column_label, {
         exact: true,
       });
-    this.date_submitted_label = this.page
+    this.date_submitted_column_label = this.page
       .getByRole('button')
-      .getByText(this.modificationsReadyToAssignPageData.Label_Texts.date_submitted_label, {
+      .getByText(this.modificationsReadyToAssignPageTestData.Column_Label_Texts.date_submitted_column_label, {
         exact: true,
       });
-    this.days_since_submission_label = this.page
+    this.days_since_submission_column_label = this.page
       .getByRole('button')
-      .getByText(this.modificationsReadyToAssignPageTestData.Label_Texts.days_since_submission_label, {
+      .getByText(this.modificationsReadyToAssignPageTestData.Column_Label_Texts.days_since_submission_column_label, {
         exact: true,
       });
     this.search_input_text = this.page.getByTestId('Search_IrasId');

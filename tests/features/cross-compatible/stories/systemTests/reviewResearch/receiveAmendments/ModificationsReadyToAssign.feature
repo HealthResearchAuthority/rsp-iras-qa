@@ -245,17 +245,17 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         Then I can see the '<Validation_Text>' ui labels on the modifications ready to assign page
         When I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
         And I capture the page screenshot
-        And the default page size should be twenty
+        And the default page size should be 'twenty'
         And the 'Next' button will be 'available' to the user
         And the 'Previous' button will be 'not available' to the user
         And I capture the page screenshot
-        Then I sequentially navigate through each page by '<Navigation_Method>' from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+        Then I sequentially navigate through each 'Modifications_Tasklist_Page' by clicking on '<Navigation_Method>' from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges
         And I capture the page screenshot
 
         Examples:
-            | Validation_Text | Navigation_Method       |
-            | Label_Texts     | clicking on page number |
-            | Label_Texts     | clicking on next link   |
+            | Validation_Text | Navigation_Method |
+            | Label_Texts     | page number       |
+            | Label_Texts     | next link         |
 
     @ModificationsTasklistPaginationLast @rsp-4040 @rsp-4309
     Scenario Outline: Verify pagination in Modification Ready to Assign page when user is on the last page and navigate through each page by clicking page number or by clicking Previous link
@@ -265,13 +265,13 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         And the 'Previous' button will be 'available' to the user
         And the 'Next' button will be 'not available' to the user
         And I capture the page screenshot
-        Then I sequentially navigate through each page by '<Navigation_Method>' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+        Then I sequentially navigate through each 'Modifications_Tasklist_Page' by clicking on '<Navigation_Method>' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
         And I capture the page screenshot
 
         Examples:
-            | Validation_Text | Navigation_Method         |
-            | Label_Texts     | clicking on page number   |
-            | Label_Texts     | clicking on previous link |
+            | Validation_Text | Navigation_Method |
+            | Label_Texts     | page number       |
+            | Label_Texts     | previous link     |
 
     @ModificationsTasklistRandomSelection @rsp-4105 @KNOWN-DEFECT-RSP-4971
     Scenario: Verify checkboxes are visible and accessible and also the modification records can be selected across pages

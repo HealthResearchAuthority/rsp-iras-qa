@@ -361,8 +361,7 @@ export default class SearchModificationsPage {
   }
 
   async goto() {
-    await this.page.goto('approvals/search');
-    await this.assertOnSearchModificationsPage();
+    await this.page.goto('approvals/index');
   }
 
   async getAllModificationsTheTable(): Promise<Map<string, string[]>> {

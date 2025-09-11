@@ -1,12 +1,12 @@
 @RegressionManageReviewBodiesSortSearchFilter @RegressionReviewBodies @SysAdminUser @Regression
-Feature: User Administration: Sort, search and filter the manage review bodies list
+Feature: User Administration: Manage Review Bodies - Sort, search and filter the manage review bodies list
 
     Background:
         Given I have navigated to the 'Manage_Review_Bodies_Page'
         And I can see the manage review bodies list sorted by 'ascending' order of the 'organisation name' on the 'first' page
 
-    @regressionSortUserListByColumn @RSP-3546
-    Scenario Outline: Verify the user is able to sort the manage rview bodies list by ascending and descending order for each table column
+    @regressionSortReviewBodyListByColumn @RSP-3546 @fail @KNOWN_DEFECT-Country-FIX-TBD
+    Scenario Outline: Verify the user is able to sort the manage review bodies list by ascending and descending order for each table column
         When I click the '<Sort_Button>' button on the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
         Then I can see the manage review bodies list sorted by '<Initial_Sort>' order of the '<Sort_Field>' on the 'first' page

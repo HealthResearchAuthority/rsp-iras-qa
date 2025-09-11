@@ -14,11 +14,11 @@
     "days_since_suffix": "days"
   },
 
-  "Label_Texts": {
-    "short_project_title_label": "Short project title",
-    "modification_id_label": "Modification ID",
-    "date_submitted_label": "Date submitted",
-    "days_since_submission_label": "Days since submission"
+  "Column_Label_Texts": {
+    "short_project_title_column_label": "Short project title",
+    "modification_id_column_label": "Modification ID",
+    "date_submitted_column_label": "Date submitted",
+    "days_since_submission_column_label": "Days since submission"
   },
 
   "Filter_Labels": {

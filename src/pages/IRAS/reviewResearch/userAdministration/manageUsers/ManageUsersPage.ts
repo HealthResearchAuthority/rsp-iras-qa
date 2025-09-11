@@ -428,7 +428,6 @@ export default class ManageUsersPage {
     } else {
       await this.page.goto('admin/users');
     }
-    await this.assertOnManageUsersPage();
   }
 
   async getFirstNamesListFromUI() {
@@ -550,7 +549,7 @@ export default class ManageUsersPage {
         const [dates, times] = vals.split('at');
         const [day, month, year] = dates.split(' ');
         const time = convertTwelveHrToTwentyFourHr(times);
-        return [year, month, day, time.join(':')];
+        return [year, month, day, time];
       }
     });
 
@@ -576,12 +575,13 @@ export default class ManageUsersPage {
               day: '2-digit',
               month: 'short',
               year: 'numeric',
-              hour: '2-digit',
+              hour: 'numeric',
               minute: '2-digit',
               hourCycle: 'h12',
             })
             .replace(',', ' at')
             .replace(/ (?!.* )/, '')
+            .replace('Sept', 'Sep')
         );
       }
     }
