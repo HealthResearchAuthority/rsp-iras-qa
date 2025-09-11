@@ -1,6 +1,6 @@
 @UserAdministration @ManageReviewBodies @SysAdminUser @SystemTest @AuditHistoryReviewBody @rsp-2927
 Feature: User Administration: Manage Review Bodies - View audit history for review body
-    # @KNOWN-ISSUE-RSP-5003 @KNOWN-DEFECT-RSP-5004 @fail
+
     Background:
         Given I have navigated to the 'System_Administration_Page'
         And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
