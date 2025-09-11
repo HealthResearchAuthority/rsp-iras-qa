@@ -185,12 +185,21 @@ Given(
         ).toBeTruthy();
       } else if (searchInput.toLowerCase().includes('days')) {
         for (const day of daysSinceSubmission) {
-          expect(
-            day.endsWith(
-              modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Modifications_Ready_To_Assign_Page
-                .days_since_suffix
-            )
-          ).toBeTruthy();
+          if (parseInt(day) == 1) {
+            expect(
+              day.endsWith(
+                modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Modifications_Ready_To_Assign_Page
+                  .day_since_suffix
+              )
+            ).toBeTruthy();
+          } else {
+            expect(
+              day.endsWith(
+                modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Modifications_Ready_To_Assign_Page
+                  .days_since_suffix
+              )
+            ).toBeTruthy();
+          }
         }
         expect(
           await modificationsReadyToAssignPage.checkDaysSearchResultValues(

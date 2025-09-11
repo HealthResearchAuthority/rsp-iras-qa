@@ -59,7 +59,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
             | Date_To_Single    |
             | Date_To_Multi     |
 
-    @filterTasklistByDaysSinceSubmission @rsp-4296
+    @filterTasklistByDaysSinceSubmission @rsp-4296 @UPDATE-AFTER-RSP-4808
     Scenario Outline: Verify the user is able to filter the modifications tasklist by the days since submission
         And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
@@ -76,11 +76,11 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         Then I can now see the modifications ready to assign table contains the expected search results for '<Days_Filter_Input>'
 
         Examples:
-            | Days_Filter_Input    |
-            | Days_Range_Multi     |
-            | Days_Specific_Single |
-            | Days_From_Multi      |
-            | Days_To_Multi        |
+            | Days_Filter_Input |
+            | Days_Range_Multi  |
+            # | Days_Specific_Single | REQUIRES DATA SETUP
+            | Days_From_Multi   |
+            | Days_To_Multi     |
 
     @searchFilterComboTasklist @rsp-4104 @rsp-4296
     Scenario Outline: Verify the user is able to combine searching and filtering options to narrow modifications displayed on the tasklist
