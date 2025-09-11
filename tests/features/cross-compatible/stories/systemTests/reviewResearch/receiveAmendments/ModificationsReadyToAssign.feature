@@ -1,4 +1,4 @@
-@ReceiveAmendments @ModificationsReadyToAssign @WorkFlowCoordinator @SystemTest
+@WorkFlowCoordinator @ReceiveAmendments @ModificationsReadyToAssign @SystemTest
 Feature: Modifications Tasklist page that displays modifications ready to be assigned
 
     Background:
@@ -114,31 +114,60 @@ Feature: Modifications Tasklist page that displays modifications ready to be ass
     Scenario Outline: Validate the workflow co-ordinator can assign a study-wide reviewer to a modification from the modifications ready to assign page
         When I enter '<Valid_Iras_Id>' into the search field in the modifications ready to assign page
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
         # Then I can now see the modifications ready to assign table contains the expected search results for '<Search_Input>'
         When I select modifications with ids as '<Modification_Id>' by clicking the checkbox in the modifications ready to assign page
+        And I capture the page screenshot
         And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
         Then I can see the 'Select_Study_Wide_Reviewer_Page'
         And I select a study wide reviewer in the select a reviewer page using '<Study_Wide_Reviewer>'
+        And I capture the page screenshot
         And I click the 'Complete_Assignment' button on the 'Select_Study_Wide_Reviewer_Page'
+        And I capture the page screenshot
         Then I can see the modifications assignment confirmation page for '<Study_Wide_Reviewer>'
+        And I capture the page screenshot
         And  I click the 'Back_To_Tasklist' link on the 'Modifications_Assignment_Confirmation_Page'
+        And I capture the page screenshot
         Then I can see the 'Modifications_Tasklist_Page'
         When I enter '<Valid_Iras_Id>' into the search field in the modifications ready to assign page
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
         Then I can see previously assigned modification is no longer displayed in the modifications ready to assign table for '<Modification_Id>'
+
         Examples:
             | Valid_Iras_Id                       | Study_Wide_Reviewer             | Modification_Id                                  |
-            | Valid_Iras_Id_Ln_England_Pn_England | Study_Wide_Reviewer_HRA_England | Modification_Id_Ln_England_Pn_England_One        |
-            | Valid_Iras_Id_Ln_England_Pn_England | Study_Wide_Reviewer_HRA_England | Modification_Id_Ln_England_Pn_England_Two        |
+            # | Valid_Iras_Id_Ln_England_Pn_England | Study_Wide_Reviewer_HRA_England | Modification_Id_Ln_England_Pn_England_One        |
+            # | Valid_Iras_Id_Ln_England_Pn_England | Study_Wide_Reviewer_HRA_England | Modification_Id_Ln_England_Pn_England_Two        |
             | Valid_Iras_Id_Ln_England_Pn_England | Study_Wide_Reviewer_HRA_England | Modification_Id_Ln_England_Pn_England_Three_Four |
+
+    # @SWRTasklist @rsp-4076 @rsp-4849 @NoAuth
+    @StudyWideReviewer @SWRTasklist @rsp-4076 @rsp-4849 @fail @KNOWN-DEFECT-RSP-XXXX
+    Scenario Outline: Validate the SWR Tasklist page after the workflow co-ordinator assigns a study-wide reviewer to a modification from the modifications ready to assign page
+        # Then I logged out from the system
+        # Then I capture the page screenshot
+        # Given I have navigated to the 'SWR_My_Tasklist_Page' as 'Studywide_Reviewer'
+        Given I have navigated to the 'SWR_My_Tasklist_Page'
+        Then I capture the page screenshot
+        When I enter '<Valid_Iras_Id>' into the search field in the modifications ready to assign page
+        And I click the 'Search' button on the 'SWR_My_Tasklist_Page'
+        And I capture the page screenshot
+        Then I can see the modifications assigned from WFC to SWR are now visible in my task list for '<Modification_Id>'
+
+        Examples:
+            | Valid_Iras_Id                       | Modification_Id                                                    |
+            | Valid_Iras_Id_Ln_England_Pn_England | Modification_Id_Ln_England_Pn_England_All_Assigned_From_WFC_To_SWR |
 
     @ModificationsList @rsp-4076 @rsp-4849
     Scenario Outline: Validate whether all the selected modifications are displayed based on the 'Select a reviewer' page
         When I enter '<Valid_Iras_Id>' into the search field in the modifications ready to assign page
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
         # Then I can now see the modifications ready to assign table contains the expected search results for '<Search_Input>'
         When I select modifications with ids as '<Modification_Id>' by clicking the checkbox in the modifications ready to assign page
+        And I capture the page screenshot
         And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
         Then I can see the 'Select_Study_Wide_Reviewer_Page'
         And I can see all the selected modifications on that page including details such as the short project title and the modification id
         And I capture the page screenshot
@@ -147,38 +176,55 @@ Feature: Modifications Tasklist page that displays modifications ready to be ass
             | Valid_Iras_Id                       | Study_Wide_Reviewer             | Modification_Id                                |
             | Valid_Iras_Id_Ln_England_Pn_England | Study_Wide_Reviewer_HRA_England | Modification_Id_Ln_England_Pn_England_Five_Six |
 
-    @StudyWideReviewerList @rsp-4076 @rsp-4849
+    @SysAdminUser @StudyWideReviewerList @rsp-4076 @rsp-4849
     Scenario Outline: Validate whether the proper list of study-wide reviewers are displayed based on the lead nation of the selected modification and the corresponding review body
+        Given I have navigated to the 'Manage_Users_Page'
+        And I capture the page screenshot
+        And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
+        And I capture the page screenshot
+        And I select advanced filters in the manage users page using '<Advanced_Filters_Users>'
+        And I capture the page screenshot
+        And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
+        And I capture the page screenshot
+        And I retrieve the list of review bodies displayed in the add a new user profile page
+        Given I have navigated to the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
         When I enter '<Valid_Iras_Id>' into the search field in the modifications ready to assign page
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
         # Then I can now see the modifications ready to assign table contains the expected search results for '<Search_Input>'
         When I select modifications with ids as '<Modification_Id>' by clicking the checkbox in the modifications ready to assign page
+        And I capture the page screenshot
         And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
         Then I can see the 'Select_Study_Wide_Reviewer_Page'
-        # And I can see all selected modifications on that page
         # And I can see the proper list of study-wide reviewers displayed based on the lead nation of the selected modification and the corresponding review body
         And I capture the page screenshot
 
         Examples:
-            | Valid_Iras_Id                       | Study_Wide_Reviewer             | Modification_Id                       |
-            | Valid_Iras_Id_Ln_England_Pn_England | Study_Wide_Reviewer_HRA_England | Modification_Id_Ln_England_Pn_England |
+            | Valid_Iras_Id                       | Study_Wide_Reviewer             | Modification_Id                       | Advanced_Filters_Users                                                |
+            | Valid_Iras_Id_Ln_England_Pn_England | Study_Wide_Reviewer_HRA_England | Modification_Id_Ln_England_Pn_England | Advanced_Filter_Review_body_HRA_Role_Studywide_Reviewer_Status_Active |
 
-    @BackLinkNavigation @RetainSelectedCheckboxes @rsp-4076 @rsp-4849
+    @BackLinkNavigation @RetainSelectedCheckboxes @rsp-4076 @rsp-4849 @KNOWN-DEFECT-RSP-5011  @fail
     Scenario Outline: Validate the workflow co-ordinator navigates to the modifications task list page from the 'Select a reviewer' page on clicking 'Back' button on 'Select a reviewer' page
         When I enter '<Valid_Iras_Id>' into the search field in the modifications ready to assign page
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
         # Then I can now see the modifications ready to assign table contains the expected search results for '<Search_Input>'
         When I select modifications with ids as '<Modification_Id>' by clicking the checkbox in the modifications ready to assign page
+        And I capture the page screenshot
         And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
         Then I can see the 'Select_Study_Wide_Reviewer_Page'
-        When I click the 'Back' button on the 'Select_Study_Wide_Reviewer_Page'
+        When I click the 'Back' link on the 'Select_Study_Wide_Reviewer_Page'
+        And I capture the page screenshot
         Then I can see the 'Modifications_Tasklist_Page'
         And I can see previously selected modifications checkboxes are retained for '<Modification_Id>'
         And I capture the page screenshot
 
         Examples:
-            | Validation_Text | Modification_Id                       |
-            | Label_Texts     | Modification_Id_Ln_England_Pn_England |
+            | Valid_Iras_Id                       | Modification_Id                                |
+            | Valid_Iras_Id_Ln_England_Pn_England | Modification_Id_Ln_England_Pn_England_Five_Six |
 
 # Validate - Retaining of filters- Bakkiya
 

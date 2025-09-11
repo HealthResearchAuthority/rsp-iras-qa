@@ -202,20 +202,12 @@ When(
   'I can see previously selected modifications checkboxes are retained for {string}',
   async ({ modificationsReadyToAssignPage }, datasetName: string) => {
     const dataset = modificationsReadyToAssignPage.modificationsReadyToAssignPageData.Modification_Id[datasetName];
-    const modificationRecord: string[] = [];
     for (const key in dataset) {
       if (Object.hasOwn(dataset, key)) {
         for (const modificationId of dataset[key]) {
-          await modificationsReadyToAssignPage.page.getByTestId(`${modificationId}`).check();
-          const shortProjectTitle = await modificationsReadyToAssignPage.page
-            .getByTestId(`${modificationId}`)
-            .locator('../../..')
-            .getByRole('strong')
-            .textContent();
-          modificationRecord.push(modificationId + ':' + shortProjectTitle);
+          await expect.soft(modificationsReadyToAssignPage.page.getByTestId(`${modificationId}`)).toBeChecked();
         }
       }
     }
-    // await expect(modificationsReadyToAssignPage.modification_checkbox.nth(randomRowToCheck)).toBeChecked();
   }
 );

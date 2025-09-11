@@ -276,3 +276,11 @@ Then(
     expect(actualList).toEqual(expectedList);
   }
 );
+
+Then(
+  'I retrieve the list of users displayed in the manage users page',
+  async ({ manageUsersPage, commonItemsPage }) => {
+    const actualList = await commonItemsPage.getLabelsFromCheckboxes(manageUsersPage.review_body_checkbox);
+    await manageUsersPage.setReviewBodies(actualList);
+  }
+);
