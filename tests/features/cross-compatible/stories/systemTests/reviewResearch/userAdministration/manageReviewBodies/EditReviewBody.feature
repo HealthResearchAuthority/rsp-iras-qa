@@ -1,4 +1,4 @@
-@UserAdministration @ManageReviewBodies @EditReviewBody @SysAdminUser @SystemTest @rsp-2572 @STSysAdmin
+@UserAdministration @ManageReviewBodies @EditReviewBody @SysAdminUser @SystemTest @rsp-2572
 Feature: User Administration: Manage Review Bodies - Edit review body
 
     Background:

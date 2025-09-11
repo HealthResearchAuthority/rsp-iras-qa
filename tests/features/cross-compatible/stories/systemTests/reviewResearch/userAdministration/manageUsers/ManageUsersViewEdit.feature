@@ -1,4 +1,4 @@
-@UserAdministration @ManageUsers @EditViewUsers @SysAdminUser @SystemTest @STSysAdmin
+@UserAdministration @ManageUsers @EditViewUsers @SysAdminUser @SystemTest
 Feature: User Administration: Manage user profiles, view and edit user profile
   As a user
   I want the ability to edit and view a user profile record

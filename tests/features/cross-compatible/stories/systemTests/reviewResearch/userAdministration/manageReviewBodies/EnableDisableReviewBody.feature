@@ -1,4 +1,4 @@
-@UserAdministration @ManageReviewBodies @SysAdminUser @SystemTest @DisableEnableReviewBody @STSysAdmin
+@UserAdministration @ManageReviewBodies @SysAdminUser @SystemTest @DisableEnableReviewBody
 Feature: User Administration: Manage Review Bodies - Enable / Disable Review Bodies
 
   Background:
