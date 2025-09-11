@@ -13,7 +13,7 @@ When(
   async ({ createUserProfilePage, commonItemsPage }, datasetName: string) => {
     const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         if (key === 'email_address_text') {
           const prefix = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile.email_address_prefix;
           const uniqueEmail = await generateUniqueEmail(dataset[key], prefix);
@@ -38,7 +38,7 @@ When(
     const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
     const isDuplicateEmail = datasetName.startsWith('Duplicate_Email_');
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         if (isDuplicateEmail && key === 'email_address_text') {
           const locator = createUserProfilePage[key];
           const [email] = await userListReviewBodyPage.getUserEmail();
@@ -63,7 +63,7 @@ Then(
   async ({ createUserProfilePage, commonItemsPage }, datasetName: string) => {
     const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         await commonItemsPage.clearUIComponent(dataset, key, createUserProfilePage);
       }
     }
@@ -95,7 +95,7 @@ Then(
     if (datasetValName === 'Role_TM_SWR_WFC') {
       for (const key in dataset) {
         if (key !== 'country_checkbox' && key !== 'review_body_checkbox') {
-          if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+          if (Object.hasOwn(dataset, key)) {
             await commonItemsPage.clearUIComponent(dataset, key, createUserProfilePage);
           }
         }
