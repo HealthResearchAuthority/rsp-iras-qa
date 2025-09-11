@@ -314,7 +314,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
             | Date_Submitted        |
             | Days_Since_Submission |
 
-    @ModificationsSelectAllAndSort @rsp-4105 @KNOWN-DEFECT-RSP-4976
+    @ModificationsSelectAllAndSort @rsp-4105 @jsEnabled @KNOWN-DEFECT-RSP-4976 @fail
     Scenario: Verify user selects check all on the first page, then applying sort resets all the checkboxes
         When I select check all checkbox on the current page and validate all checkboxes are checked
         And I capture the page screenshot

@@ -77,7 +77,7 @@ export default class ModificationsReadyToAssignPage {
         exact: true,
       });
     this.search_input_text = this.page.getByTestId('Search_IrasId');
-    this.checkall_modification_checkbox = this.page.locator('input[id="select-all-modifications"]');
+    this.checkall_modification_checkbox = this.page.getByTestId('select-all-modifications');
     this.page_heading = this.page.getByTestId('title');
     this.advanced_filter_label = this.page.getByRole('button', {
       name: this.modificationsReadyToAssignPageTestData.Modifications_Ready_To_Assign_Page.advanced_filter_label,
@@ -126,10 +126,7 @@ export default class ModificationsReadyToAssignPage {
     // );
     this.short_project_title_text = this.page.locator('input[name="Search.ShortProjectTitle"]'); //workaround use above after fix
     this.search_button_label = this.page.getByText('Search');
-    // this.modification_checkbox = this.page.locator('input[name="selectedModificationIds"]'); //Check which is better
-    this.modification_checkbox = this.page.getByRole('button', {
-      name: this.modificationsReadyToAssignPageTestData.Modifications_Ready_To_Assign_Page.modification_checkbox,
-    });
+    this.modification_checkbox = this.page.locator('input[name="selectedModificationIds"][type="checkbox"]');
     this.results_table = this.page.getByTestId('modificationsTasklistTable');
   }
 

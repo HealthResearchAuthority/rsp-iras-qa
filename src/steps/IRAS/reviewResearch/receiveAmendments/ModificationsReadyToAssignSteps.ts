@@ -66,6 +66,7 @@ Then(
         .maxPagesToVisit;
     for (let pageIndex = 1; pageIndex <= maxPagesToCheck; pageIndex++) {
       const checkboxes = await modificationsReadyToAssignPage.modification_checkbox.all();
+      expect(checkboxes.length).toBeGreaterThan(0);
       for (const checkbox of checkboxes) {
         await expect(checkbox).toBeVisible();
       }
@@ -94,7 +95,6 @@ Then(
 
     for (let currentPage = maxPagesToCheck + 1; currentPage >= maxPagesToCheck; currentPage--) {
       await commonItemsPage.previous_button.click();
-
       await expect(modificationsReadyToAssignPage.modification_checkbox.nth(randomRowToCheck)).toBeChecked();
     }
   }
@@ -107,6 +107,7 @@ Then(
     const checkAll = modificationsReadyToAssignPage.checkall_modification_checkbox;
     await checkAll.click();
     const checkboxes = await modificationsReadyToAssignPage.modification_checkbox.all();
+    expect(checkboxes.length).toBeGreaterThan(0);
     for (const checkbox of checkboxes) {
       await expect(checkbox).toBeChecked();
     }
@@ -119,6 +120,7 @@ When(
     const checkAll = modificationsReadyToAssignPage.checkall_modification_checkbox;
     await checkAll.click();
     const checkboxes = await modificationsReadyToAssignPage.modification_checkbox.all();
+    expect(checkboxes.length).toBeGreaterThan(0);
     for (const checkbox of checkboxes) {
       await expect(checkbox).not.toBeChecked();
     }
@@ -138,6 +140,7 @@ When(
 
 When('I confirm all checkboxes are {string}', async ({ modificationsReadyToAssignPage }, checkboxStatus: string) => {
   const checkboxes = await modificationsReadyToAssignPage.modification_checkbox.all();
+  expect(checkboxes.length).toBeGreaterThan(0);
   for (const checkbox of checkboxes) {
     if (checkboxStatus.toLowerCase() === 'unchecked') {
       await expect(checkbox).not.toBeChecked();
