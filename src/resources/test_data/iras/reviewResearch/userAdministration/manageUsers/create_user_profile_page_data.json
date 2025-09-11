@@ -19,12 +19,7 @@
       "Workflow co-ordinator"
     ],
     "country_label": "Country",
-    "country_checkbox": [
-      "England",
-      "Northern Ireland",
-      "Scotland",
-      "Wales"
-    ],
+    "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
     "review_body_label": "Review body",
     "committee_label": "Committee",
     "access_required_label": "Access required"
@@ -90,10 +85,7 @@
     "email_address_text": "Enter an email address in the correct format"
   },
   "Incorrect_Format_Invalid_Character_Limit_Telephone_Error": {
-    "telephone_text": [
-      "Telephone must be 11 digits or less",
-      "Telephone must only contain numbers"
-    ]
+    "telephone_text": ["Telephone must be 11 digits or less", "Telephone must only contain numbers"]
   },
   "Incorrect_Format_Invalid_Character_Limit_Email_Address_Error": {
     "email_address_text": [
@@ -106,19 +98,12 @@
   },
   "Create_User_Profile": {
     "email_address_prefix": "QAAutomation",
-    "email_address_unique": "QAAutomation20250908145453999john|vertical@example.com",
+    "email_address_unique": "QAAutomation20250910154448190hscrd@health.org",
     "Role_TM_SWR_WFC": {
-      "role_checkbox": [
-        "Study-wide reviewer",
-        "Team manager",
-        "Workflow co-ordinator"
-      ]
+      "role_checkbox": ["Study-wide reviewer", "Team manager", "Workflow co-ordinator"]
     },
     "Role_Applicant_System_Administrator": {
-      "role_checkbox": [
-        "Applicant",
-        "System administrator"
-      ]
+      "role_checkbox": ["Applicant", "System administrator"]
     },
     "Valid_Data_In_All_Fields_Role_Team_Manager": {
       "title_text": "Mr",
@@ -128,15 +113,8 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Team_Manager",
       "job_title_text": "Sr.Reviewer Role_Team_Manager",
-      "role_checkbox": [
-        "Team manager"
-      ],
-      "country_checkbox": [
-        "England",
-        "Northern Ireland",
-        "Scotland",
-        "Wales"
-      ]
+      "role_checkbox": ["Team manager"],
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
     },
     "Valid_Data_In_All_Fields_Role_Team_Manager_Another": {
       "title_text": "Mr",
@@ -146,38 +124,22 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Team_Manager_Another",
       "job_title_text": "Sr.Reviewer Role_Team_Manager_Another",
-      "role_checkbox": [
-        "Team manager"
-      ],
-      "country_checkbox": [
-        "England",
-        "Scotland"
-      ]
+      "role_checkbox": ["Team manager"],
+      "country_checkbox": ["England", "Scotland"]
     },
     "Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager": {
       "first_name_text": "QA Automation First Name Test Role_Team_Manager",
       "last_name_text": "Test Last Name Role_Team_Manager",
       "email_address_text": "hscrd@health.org",
-      "role_checkbox": [
-        "Team manager"
-      ],
-      "country_checkbox": [
-        "England",
-        "Northern Ireland",
-        "Scotland",
-        "Wales"
-      ]
+      "role_checkbox": ["Team manager"],
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
     },
     "Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_Another": {
       "first_name_text": "QA Automation First Name Test Role_Team_Manager_Another",
       "last_name_text": "Test Last Name Role_Team_Manager_Another",
       "email_address_text": "hscrd@health.org",
-      "role_checkbox": [
-        "Team manager"
-      ],
-      "country_checkbox": [
-        "England"
-      ]
+      "role_checkbox": ["Team manager"],
+      "country_checkbox": ["England"]
     },
     "Valid_Data_In_All_Fields_Role_Studywide_Reviewer": {
       "title_text": "Mr",
@@ -187,12 +149,8 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Studywide_Reviewer",
       "job_title_text": "Sr.Reviewer Role_Studywide_Reviewer",
-      "role_checkbox": [
-        "Study-wide reviewer"
-      ],
-      "review_body_checkbox": [
-        "QA Automation Health Research Authority (HRA)"
-      ]
+      "role_checkbox": ["Study-wide reviewer"],
+      "review_body_checkbox": ["Health Research Authority (HRA)"]
     },
     "Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Another": {
       "title_text": "Mr",
@@ -202,34 +160,22 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Studywide_Reviewer_Another",
       "job_title_text": "Sr.Reviewer Role_Studywide_Reviewer_Another",
-      "role_checkbox": [
-        "Study-wide reviewer"
-      ],
-      "review_body_checkbox": [
-        "QA Automation Health and Care Research Wales (HCRW)"
-      ]
+      "role_checkbox": ["Study-wide reviewer"],
+      "review_body_checkbox": ["Health and Care Research Wales (HCRW)"]
     },
     "Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer": {
       "first_name_text": "QA Automation First Name Test Role_Studywide_Reviewer",
       "last_name_text": "Test Last Name Role_Studywide_Reviewer",
       "email_address_text": "hscrd@health.org",
-      "role_checkbox": [
-        "Study-wide reviewer"
-      ],
-      "review_body_checkbox": [
-        "QA Automation Health and Social Care Northern Ireland (HSCNI)"
-      ]
+      "role_checkbox": ["Study-wide reviewer"],
+      "review_body_checkbox": ["Health and Social Care Northern Ireland (HSCNI)"]
     },
     "Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer_Another": {
       "first_name_text": "QA Automation First Name Test Role_Studywide_Reviewer_Another",
       "last_name_text": "Test Last Name Role_Studywide_Reviewer_Another",
       "email_address_text": "hscrd@health.org",
-      "role_checkbox": [
-        "Study-wide reviewer"
-      ],
-      "review_body_checkbox": [
-        "QA Automation National Research Service Permissions Coordination Centre (NRSPCC)"
-      ]
+      "role_checkbox": ["Study-wide reviewer"],
+      "review_body_checkbox": ["National Research Service Permissions Coordination Centre (NRSPCC)"]
     },
     "Valid_Data_In_All_Fields_Role_Workflow_Coordinator": {
       "title_text": "Mr",
@@ -239,12 +185,8 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Workflow_Coordinator",
       "job_title_text": "Sr.Reviewer Role_Workflow_Coordinator",
-      "role_checkbox": [
-        "Workflow co-ordinator"
-      ],
-      "review_body_checkbox": [
-        "QA Automation National Research Service Permissions Coordination Centre (NRSPCC)"
-      ]
+      "role_checkbox": ["Workflow co-ordinator"],
+      "review_body_checkbox": ["National Research Service Permissions Coordination Centre (NRSPCC)"]
     },
     "Valid_Data_In_All_Fields_Role_Workflow_Coordinator_Another": {
       "title_text": "Mr",
@@ -254,34 +196,22 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Workflow_Coordinator_Another",
       "job_title_text": "Sr.Reviewer Role_Workflow_Coordinator_Another",
-      "role_checkbox": [
-        "Workflow co-ordinator"
-      ],
-      "review_body_checkbox": [
-        "QA Automation Health Research Authority (HRA)"
-      ]
+      "role_checkbox": ["Workflow co-ordinator"],
+      "review_body_checkbox": ["Health Research Authority (HRA)"]
     },
     "Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator": {
       "first_name_text": "QA Automation First Name Test Role_Workflow_Coordinator",
       "last_name_text": "Test Last Name Role_Workflow_Coordinator",
       "email_address_text": "hscrd@health.org",
-      "role_checkbox": [
-        "Workflow co-ordinator"
-      ],
-      "review_body_checkbox": [
-        "QA Automation Health Research Authority (HRA)"
-      ]
+      "role_checkbox": ["Workflow co-ordinator"],
+      "review_body_checkbox": ["Health Research Authority (HRA)"]
     },
     "Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator_Another": {
       "first_name_text": "QA Automation First Name Test Role_Workflow_Coordinator_Another",
       "last_name_text": "Test Last Name Role_Workflow_Coordinator_Another",
       "email_address_text": "hscrd@health.org",
-      "role_checkbox": [
-        "Workflow co-ordinator"
-      ],
-      "review_body_checkbox": [
-        "QA Automation Health and Social Care Northern Ireland (HSCNI)"
-      ]
+      "role_checkbox": ["Workflow co-ordinator"],
+      "review_body_checkbox": ["Health and Social Care Northern Ireland (HSCNI)"]
     },
     "Valid_Data_In_All_Fields_Role_System_Administrator": {
       "title_text": "Mr",
@@ -291,9 +221,7 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_System_Administrator",
       "job_title_text": "Sr.Reviewer Role_System_Administrator",
-      "role_checkbox": [
-        "System administrator"
-      ]
+      "role_checkbox": ["System administrator"]
     },
     "Valid_Data_In_All_Fields_Role_System_Administrator_Another": {
       "title_text": "Mr",
@@ -303,25 +231,19 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_System_Administrator_Another",
       "job_title_text": "Sr.Reviewer Role_System_Administrator_Another",
-      "role_checkbox": [
-        "System administrator"
-      ]
+      "role_checkbox": ["System administrator"]
     },
     "Valid_Data_In_All_Mandatory_Fields_Role_System_Administrator": {
       "first_name_text": "QA Automation First Name Test Role_System_Administrator",
       "last_name_text": "Test Last Name Role_System_Administrator",
       "email_address_text": "hscrd@health.org",
-      "role_checkbox": [
-        "System administrator"
-      ]
+      "role_checkbox": ["System administrator"]
     },
     "Valid_Data_In_All_Mandatory_Fields_Role_System_Administrator_Another": {
       "first_name_text": "QA Automation First Name Test Role_System_Administrator_Another",
       "last_name_text": "Test Last Name Role_System_Administrator_Another",
       "email_address_text": "hscrd@health.org",
-      "role_checkbox": [
-        "System administrator"
-      ]
+      "role_checkbox": ["System administrator"]
     },
     "Valid_Data_In_All_Fields_Role_Applicant": {
       "title_text": "Mr",
@@ -331,9 +253,7 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Applicant",
       "job_title_text": "Sr.Reviewer Role_Applicant",
-      "role_checkbox": [
-        "Applicant"
-      ]
+      "role_checkbox": ["Applicant"]
     },
     "Valid_Data_In_All_Fields_Role_Applicant_Another": {
       "title_text": "Mr",
@@ -343,25 +263,19 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Applicant_Another",
       "job_title_text": "Sr.Reviewer Role_Applicant_Another",
-      "role_checkbox": [
-        "Applicant"
-      ]
+      "role_checkbox": ["Applicant"]
     },
     "Valid_Data_In_All_Mandatory_Fields_Role_Applicant": {
       "first_name_text": "QA Automation First Name Test Role_Applicant",
       "last_name_text": "Test Last Name Role_Applicant",
       "email_address_text": "hscrd@health.org",
-      "role_checkbox": [
-        "Applicant"
-      ]
+      "role_checkbox": ["Applicant"]
     },
     "Valid_Data_In_All_Mandatory_Fields_Role_Applicant_Another": {
       "first_name_text": "QA Automation First Name Test Role_Applicant_Another",
       "last_name_text": "Test Last Name Role_Applicant_Another",
       "email_address_text": "hscrd@health.org",
-      "role_checkbox": [
-        "Applicant"
-      ]
+      "role_checkbox": ["Applicant"]
     },
     "Valid_Data_In_All_Fields_Role_Team_Manager_Studywide_Reviewer": {
       "title_text": "Mr",
@@ -371,19 +285,9 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Team_Manager_Studywide_Reviewer",
       "job_title_text": "Sr.Reviewer Role_Team_Manager_Studywide_Reviewer",
-      "role_checkbox": [
-        "Study-wide reviewer",
-        "Team manager"
-      ],
-      "country_checkbox": [
-        "England",
-        "Northern Ireland",
-        "Scotland",
-        "Wales"
-      ],
-      "review_body_checkbox": [
-        "QA Automation Health and Social Care Northern Ireland (HSCNI)"
-      ]
+      "role_checkbox": ["Study-wide reviewer", "Team manager"],
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "review_body_checkbox": ["Health and Social Care Northern Ireland (HSCNI)"]
     },
     "Valid_Data_In_All_Fields_Role_Team_Manager_Studywide_Reviewer_Another": {
       "title_text": "Mr",
@@ -393,55 +297,25 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Team_Manager_Studywide_Reviewer_Another",
       "job_title_text": "Sr.Reviewer Role_Team_Manager_Studywide_Reviewer_Another",
-      "role_checkbox": [
-        "Study-wide reviewer",
-        "Team manager"
-      ],
-      "country_checkbox": [
-        "England",
-        "Northern Ireland",
-        "Scotland",
-        "Wales"
-      ],
-      "review_body_checkbox": [
-        "QA Automation Health and Social Care Northern Ireland (HSCNI)"
-      ]
+      "role_checkbox": ["Study-wide reviewer", "Team manager"],
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "review_body_checkbox": ["Health and Social Care Northern Ireland (HSCNI)"]
     },
     "Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_Studywide_Reviewer": {
       "first_name_text": "QA Automation First Name Test Role_Team_Manager_Studywide_Reviewer",
       "last_name_text": "Test Last Name Role_Team_Manager_Studywide_Reviewer",
       "email_address_text": "hscrd@health.org",
-      "role_checkbox": [
-        "Study-wide reviewer",
-        "Team manager"
-      ],
-      "country_checkbox": [
-        "England",
-        "Northern Ireland",
-        "Scotland",
-        "Wales"
-      ],
-      "review_body_checkbox": [
-        "QA Automation Health and Social Care Northern Ireland (HSCNI)"
-      ]
+      "role_checkbox": ["Study-wide reviewer", "Team manager"],
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "review_body_checkbox": ["Health and Social Care Northern Ireland (HSCNI)"]
     },
     "Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_Studywide_Reviewer_Another": {
       "first_name_text": "QA Automation First Name Test Role_Team_Manager_Studywide_Reviewer_Another",
       "last_name_text": "Test Last Name Role_Team_Manager_Studywide_Reviewer_Another",
       "email_address_text": "hscrd@health.org",
-      "role_checkbox": [
-        "Study-wide reviewer",
-        "Team manager"
-      ],
-      "country_checkbox": [
-        "England",
-        "Northern Ireland",
-        "Scotland",
-        "Wales"
-      ],
-      "review_body_checkbox": [
-        "QA Automation Health and Social Care Northern Ireland (HSCNI)"
-      ]
+      "role_checkbox": ["Study-wide reviewer", "Team manager"],
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "review_body_checkbox": ["Health and Social Care Northern Ireland (HSCNI)"]
     },
     "Valid_Data_In_All_Fields_Role_Team_Manager_Workflow_Coordinator": {
       "title_text": "Mr",
@@ -451,19 +325,9 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Team_Manager_Workflow_Coordinator",
       "job_title_text": "Sr.Reviewer Role_Team_Manager_Workflow_Coordinator",
-      "role_checkbox": [
-        "Team manager",
-        "Workflow co-ordinator"
-      ],
-      "country_checkbox": [
-        "England",
-        "Northern Ireland",
-        "Scotland",
-        "Wales"
-      ],
-      "review_body_checkbox": [
-        "QA Automation Health and Social Care Northern Ireland (HSCNI)"
-      ]
+      "role_checkbox": ["Team manager", "Workflow co-ordinator"],
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "review_body_checkbox": ["Health and Social Care Northern Ireland (HSCNI)"]
     },
     "Valid_Data_In_All_Fields_Role_Team_Manager_Workflow_Coordinator_Another": {
       "title_text": "Mr",
@@ -473,55 +337,25 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Team_Manager_Workflow_Coordinator_Another",
       "job_title_text": "Sr.Reviewer Role_Team_Manager_Workflow_Coordinator_Another",
-      "role_checkbox": [
-        "Team manager",
-        "Workflow co-ordinator"
-      ],
-      "country_checkbox": [
-        "England",
-        "Northern Ireland",
-        "Scotland",
-        "Wales"
-      ],
-      "review_body_checkbox": [
-        "QA Automation Health and Social Care Northern Ireland (HSCNI)"
-      ]
+      "role_checkbox": ["Team manager", "Workflow co-ordinator"],
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "review_body_checkbox": ["Health and Social Care Northern Ireland (HSCNI)"]
     },
     "Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_Workflow_Coordinator": {
       "first_name_text": "QA Automation First Name Test Role_Team_Manager_Workflow_Coordinator",
       "last_name_text": "Test Last Name Role_Team_Manager_Workflow_Coordinator",
       "email_address_text": "hscrd@health.org",
-      "role_checkbox": [
-        "Team manager",
-        "Workflow co-ordinator"
-      ],
-      "country_checkbox": [
-        "England",
-        "Northern Ireland",
-        "Scotland",
-        "Wales"
-      ],
-      "review_body_checkbox": [
-        "QA Automation Health and Social Care Northern Ireland (HSCNI)"
-      ]
+      "role_checkbox": ["Team manager", "Workflow co-ordinator"],
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "review_body_checkbox": ["Health and Social Care Northern Ireland (HSCNI)"]
     },
     "Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_Workflow_Coordinator_Another": {
       "first_name_text": "QA Automation First Name Test Role_Team_Manager_Workflow_Coordinator_Another",
       "last_name_text": "Test Last Name Role_Team_Manager_Workflow_Coordinator_Another",
       "email_address_text": "hscrd@health.org",
-      "role_checkbox": [
-        "Team manager",
-        "Workflow co-ordinator"
-      ],
-      "country_checkbox": [
-        "England",
-        "Northern Ireland",
-        "Scotland",
-        "Wales"
-      ],
-      "review_body_checkbox": [
-        "QA Automation Health and Social Care Northern Ireland (HSCNI)"
-      ]
+      "role_checkbox": ["Team manager", "Workflow co-ordinator"],
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "review_body_checkbox": ["Health and Social Care Northern Ireland (HSCNI)"]
     },
     "Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Workflow_Coordinator": {
       "title_text": "Mr",
@@ -531,13 +365,8 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Studywide_Reviewer_Workflow_Coordinator",
       "job_title_text": "Sr.Reviewer Role_Studywide_Reviewer_Workflow_Coordinator",
-      "role_checkbox": [
-        "Study-wide reviewer",
-        "Workflow co-ordinator"
-      ],
-      "review_body_checkbox": [
-        "QA Automation Health and Social Care Northern Ireland (HSCNI)"
-      ]
+      "role_checkbox": ["Study-wide reviewer", "Workflow co-ordinator"],
+      "review_body_checkbox": ["Health and Social Care Northern Ireland (HSCNI)"]
     },
     "Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Workflow_Coordinator_Another": {
       "title_text": "Mr",
@@ -547,37 +376,22 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Studywide_Reviewer_Workflow_Coordinator_Another",
       "job_title_text": "Sr.Reviewer Role_Studywide_Reviewer_Workflow_Coordinator_Another",
-      "role_checkbox": [
-        "Study-wide reviewer",
-        "Workflow co-ordinator"
-      ],
-      "review_body_checkbox": [
-        "QA Automation Health and Social Care Northern Ireland (HSCNI)"
-      ]
+      "role_checkbox": ["Study-wide reviewer", "Workflow co-ordinator"],
+      "review_body_checkbox": ["Health and Social Care Northern Ireland (HSCNI)"]
     },
     "Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer_Workflow_Coordinator": {
       "first_name_text": "QA Automation First Name Test Role_Studywide_Reviewer_Workflow_Coordinator",
       "last_name_text": "Test Last Name Role_Studywide_Reviewer_Workflow_Coordinator",
       "email_address_text": "hscrd@health.org",
-      "role_checkbox": [
-        "Study-wide reviewer",
-        "Workflow co-ordinator"
-      ],
-      "review_body_checkbox": [
-        "QA Automation Health and Social Care Northern Ireland (HSCNI)"
-      ]
+      "role_checkbox": ["Study-wide reviewer", "Workflow co-ordinator"],
+      "review_body_checkbox": ["Health and Social Care Northern Ireland (HSCNI)"]
     },
     "Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer_Workflow_Coordinator_Another": {
       "first_name_text": "QA Automation First Name Test Role_Studywide_Reviewer_Workflow_Coordinator_Another",
       "last_name_text": "Test Last Name Role_Studywide_Reviewer_Workflow_Coordinator_Another",
       "email_address_text": "hscrd@health.org",
-      "role_checkbox": [
-        "Study-wide reviewer",
-        "Workflow co-ordinator"
-      ],
-      "review_body_checkbox": [
-        "QA Automation Health and Social Care Northern Ireland (HSCNI)"
-      ]
+      "role_checkbox": ["Study-wide reviewer", "Workflow co-ordinator"],
+      "review_body_checkbox": ["Health and Social Care Northern Ireland (HSCNI)"]
     },
     "Valid_Data_In_All_Fields_Role_Team_Manager_System_Administrator": {
       "title_text": "Mr",
@@ -587,16 +401,8 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Team_Manager_System_Administrator",
       "job_title_text": "Sr.Reviewer Role_Team_Manager_System_Administrator",
-      "role_checkbox": [
-        "System administrator",
-        "Team manager"
-      ],
-      "country_checkbox": [
-        "England",
-        "Northern Ireland",
-        "Scotland",
-        "Wales"
-      ]
+      "role_checkbox": ["System administrator", "Team manager"],
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
     },
     "Valid_Data_In_All_Fields_Role_Team_Manager_System_Administrator_Another": {
       "title_text": "Mr",
@@ -606,46 +412,22 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Team_Manager_System_Administrator_Another",
       "job_title_text": "Sr.Reviewer Role_Team_Manager_System_Administrator_Another",
-      "role_checkbox": [
-        "System administrator",
-        "Team manager"
-      ],
-      "country_checkbox": [
-        "England",
-        "Northern Ireland",
-        "Scotland",
-        "Wales"
-      ]
+      "role_checkbox": ["System administrator", "Team manager"],
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
     },
     "Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_System_Administrator": {
       "first_name_text": "QA Automation First Name Test Role_Team_Manager_System_Administrator",
       "last_name_text": "Test Last Name Role_Team_Manager_System_Administrator",
       "email_address_text": "hscrd@health.org",
-      "role_checkbox": [
-        "System administrator",
-        "Team manager"
-      ],
-      "country_checkbox": [
-        "England",
-        "Northern Ireland",
-        "Scotland",
-        "Wales"
-      ]
+      "role_checkbox": ["System administrator", "Team manager"],
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
     },
     "Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_System_Administrator_Another": {
       "first_name_text": "QA Automation First Name Test Role_Team_Manager_System_Administrator_Another",
       "last_name_text": "Test Last Name Role_Team_Manager_System_Administrator_Another",
       "email_address_text": "hscrd@health.org",
-      "role_checkbox": [
-        "System administrator",
-        "Team manager"
-      ],
-      "country_checkbox": [
-        "England",
-        "Northern Ireland",
-        "Scotland",
-        "Wales"
-      ]
+      "role_checkbox": ["System administrator", "Team manager"],
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
     },
     "Valid_Data_All_Roles": {
       "title_text": "Mr",
@@ -662,12 +444,8 @@
         "Team manager",
         "Workflow co-ordinator"
       ],
-      "country_checkbox": [
-        "Wales"
-      ],
-      "review_body_checkbox": [
-        "QA Automation Health and Care Research Wales (HCRW)"
-      ]
+      "country_checkbox": ["Wales"],
+      "review_body_checkbox": ["Health and Care Research Wales (HCRW)"]
     },
     "Valid_Data_No_Roles": {
       "title_text": "Mr",
@@ -801,20 +579,9 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_SWR_TM_WFC",
       "job_title_text": "Sr.Reviewer Role_SWR_TM_WFC",
-      "role_checkbox": [
-        "Study-wide reviewer",
-        "Team manager",
-        "Workflow co-ordinator"
-      ],
-      "country_checkbox": [
-        "England",
-        "Northern Ireland",
-        "Scotland",
-        "Wales"
-      ],
-      "review_body_checkbox": [
-        "QA Automation Health and Social Care Northern Ireland (HSCNI)"
-      ]
+      "role_checkbox": ["Study-wide reviewer", "Team manager", "Workflow co-ordinator"],
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "review_body_checkbox": ["Health and Social Care Northern Ireland (HSCNI)"]
     },
     "Duplicate_Email_Role_Applicant_System_Admin": {
       "title_text": "Mr",
@@ -824,50 +591,37 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Applicant_System_Admin",
       "job_title_text": "Sr.Reviewer Role_Applicant_System_Admin",
-      "role_checkbox": [
-        "Applicant",
-        "System administrator"
-      ]
+      "role_checkbox": ["Applicant", "System administrator"]
     },
     "Missing_Mandatory_Fields_Role_Applicant": {
       "first_name_text": "",
       "last_name_text": "",
       "email_address_text": "",
-      "role_checkbox": [
-        "Applicant"
-      ]
+      "role_checkbox": ["Applicant"]
     },
     "Missing_Mandatory_Fields_Role_System_Administrator": {
       "first_name_text": "",
       "last_name_text": "",
       "email_address_text": "",
-      "role_checkbox": [
-        "System administrator"
-      ]
+      "role_checkbox": ["System administrator"]
     },
     "Missing_Mandatory_Fields_Role_Team_Manager": {
       "first_name_text": "",
       "last_name_text": "",
       "email_address_text": "",
-      "role_checkbox": [
-        "Team manager"
-      ]
+      "role_checkbox": ["Team manager"]
     },
     "Missing_Mandatory_Fields_Role_Studywide_Reviewer": {
       "first_name_text": "",
       "last_name_text": "",
       "email_address_text": "",
-      "role_checkbox": [
-        "Study-wide reviewer"
-      ]
+      "role_checkbox": ["Study-wide reviewer"]
     },
     "Missing_Mandatory_Fields_Role_Workflow_Coordinator": {
       "first_name_text": "",
       "last_name_text": "",
       "email_address_text": "",
-      "role_checkbox": [
-        "Workflow co-ordinator"
-      ]
+      "role_checkbox": ["Workflow co-ordinator"]
     },
     "Missing_Mandatory_Field_First_Name_Role_Applicant_System_Administrator": {
       "title_text": "Mr",
@@ -877,10 +631,7 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Reviewer",
       "job_title_text": "Sr.Reviewer Role_Reviewer",
-      "role_checkbox": [
-        "Applicant",
-        "System administrator"
-      ]
+      "role_checkbox": ["Applicant", "System administrator"]
     },
     "Missing_Mandatory_Field_Last_Name_Role_Applicant_System_Administrator": {
       "title_text": "Mr",
@@ -890,10 +641,7 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Reviewer",
       "job_title_text": "Sr.Reviewer Role_Reviewer",
-      "role_checkbox": [
-        "Applicant",
-        "System administrator"
-      ]
+      "role_checkbox": ["Applicant", "System administrator"]
     },
     "Missing_Mandatory_Field_Email_Address_Role_Applicant_System_Administrator": {
       "title_text": "Mr",
@@ -903,10 +651,7 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Reviewer",
       "job_title_text": "Sr.Reviewer Role_Reviewer",
-      "role_checkbox": [
-        "Applicant",
-        "System administrator"
-      ]
+      "role_checkbox": ["Applicant", "System administrator"]
     },
     "Missing_Mandatory_Field_Country_Role_Team_Manager": {
       "title_text": "Mr",
@@ -916,9 +661,7 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Reviewer",
       "job_title_text": "Sr.Reviewer Role_Reviewer",
-      "role_checkbox": [
-        "Team manager"
-      ]
+      "role_checkbox": ["Team manager"]
     },
     "Missing_Mandatory_Field_Review_Body_Role_Studywide_Reviewer": {
       "title_text": "Mr",
@@ -928,9 +671,7 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Reviewer",
       "job_title_text": "Sr.Reviewer Role_Reviewer",
-      "role_checkbox": [
-        "Study-wide reviewer"
-      ]
+      "role_checkbox": ["Study-wide reviewer"]
     },
     "Missing_Mandatory_Field_Review_Body_Role_Workflow_Coordinator": {
       "title_text": "Mr",
@@ -940,9 +681,7 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Reviewer",
       "job_title_text": "Sr.Reviewer Role_Reviewer",
-      "role_checkbox": [
-        "Workflow co-ordinator"
-      ]
+      "role_checkbox": ["Workflow co-ordinator"]
     },
     "Invalid_Character_Limit": {
       "title_text": "johñ.döeExploring the Intricacies of Advanced Quantum Computing: Unveiling the Potential of Quantum Algorithms, Quantum Cryptography, and Quantum Machine Learning in Revolutionizing Technology and Shaping the Future of Computational Science and Engineering Morethan250chars",

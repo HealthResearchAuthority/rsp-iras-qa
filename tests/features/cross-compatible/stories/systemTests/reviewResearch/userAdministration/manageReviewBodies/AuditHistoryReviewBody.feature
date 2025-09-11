@@ -192,7 +192,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
             | Field_Name  | Edit_Review_Body               | Audit_History                | Status_Enabled |
             | Description | Valid_Data_Description_Another | Edit_Review_Body_Description | Enabled        |
 
-    @VerifyAuditHistoryEditReviewBodyAllFields
+    @VerifyAuditHistoryEditReviewBodyAllFields @KNOWN-ISSUE-RSP-5003 @KNOWN-DEFECT-RSP-5004 @fail
     Scenario Outline: Verify the user can view the audit history after editing all the fields of a review body
         And I select a 'QA Automation' review Body to View and Edit which is '<Status_Enabled>'
         And I can see the review body profile page
