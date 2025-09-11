@@ -320,3 +320,41 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
             | Short_Project_Title   |
             | Date_Submitted        |
             | Days_Since_Submission |
+
+    @rsp-4381  @testOnly
+    Scenario Outline: verify that all active filters are automatically cleared when the user navigates away from the current page in modification tasklist page 
+        And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
+        And I 'can' see the advanced filters panel
+        And I open each of the modification tasklist filters
+        And I capture the page screenshot
+        When I fill the modifications tasklist search and filter options with 'Date_From_Multi'
+        And I capture the page screenshot
+        And I click the 'Apply_Filters' button on the 'Modifications_Tasklist_Page'
+        And I 'can' see active filters displayed
+        And I capture the page screenshot
+        Then I can see the '<Validation_Text>' ui labels on the modifications ready to assign page
+        When I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
+        And I capture the page screenshot
+        And the default page size should be twenty
+        And the 'Next' button will be 'available' to the user
+        And the 'Previous' button will be 'not available' to the user
+        And I capture the page screenshot
+        Then I sequentially navigate through each page by '<Navigation_Method>' from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+        And I capture the page screenshot
+        And I 'can' see active filters displayed
+        And I capture the page screenshot
+        When I click the 'Back' link on the 'Modifications_Tasklist_Page'
+        Then I can see the approvals home page
+        Given I have navigated to the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
+        Then I can see the 'Modifications_Tasklist_Page'
+        And I 'cannot' see the advanced filters panel
+        And I capture the page screenshot
+      
+        Examples:
+            | Validation_Text | Navigation_Method       |
+            | Label_Texts     | clicking on page number |
+            | Label_Texts     | clicking on next link   |
+
+        
+        

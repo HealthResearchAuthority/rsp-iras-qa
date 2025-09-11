@@ -58,17 +58,17 @@ export default class ModificationsReadyToAssignPage {
     this.modifications_tasklist_link = this.page.locator('.govuk-heading-s govuk-link hra-card-heading__link');
     this.short_project_title_label = this.page
       .getByRole('button')
-      .getByText(this.modificationsReadyToAssignPageData.Label_Texts.short_project_title_label, {
+      .getByText(this.modificationsReadyToAssignPageTestData.Label_Texts.short_project_title_label, {
         exact: true,
       });
     this.modification_id_label = this.page
       .getByRole('button')
-      .getByText(this.modificationsReadyToAssignPageData.Label_Texts.modification_id_label, {
+      .getByText(this.modificationsReadyToAssignPageTestData.Label_Texts.modification_id_label, {
         exact: true,
       });
     this.date_submitted_label = this.page
       .getByRole('button')
-      .getByText(this.modificationsReadyToAssignPageData.Label_Texts.date_submitted_label, {
+      .getByText(this.modificationsReadyToAssignPageTestData.Label_Texts.date_submitted_label, {
         exact: true,
       });
     this.days_since_submission_label = this.page

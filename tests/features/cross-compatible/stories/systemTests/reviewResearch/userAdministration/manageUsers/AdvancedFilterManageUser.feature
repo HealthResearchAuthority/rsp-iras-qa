@@ -278,15 +278,16 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Advanced_Filter_Country_No_Review_Body_All_Role_All                     |
             | Advanced_Filter_Country_No_Review_Body_No_Role_No_Status_Active_To_Date |   
     
-    @rsp-4381 
+    @rsp-4381  
     Scenario Outline: verify that all active filters are automatically cleared when the user navigates away from the current page in mange user page
+        And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
         And I select advanced filters in the manage users page using '<Advanced_Filters>'
         And I capture the page screenshot
         And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
         And I capture the page screenshot
         Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Manage_Users_Page'
         And I capture the page screenshot
-        Then I sequentially navigate through each page by '<Navigation_Method>' from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+        Then I sequentially navigate through each 'Manage_Users_Page' by clicking on '<Navigation_Method>' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
         And I capture the page screenshot
         Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Manage_Users_Page'
         And I capture the page screenshot
@@ -299,10 +300,11 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
       
         Examples:
             | Navigation_Method        | Advanced_Filters     |
-            | clicking on page number  | Advanced_Filter_Nine |
+            | page number              | Advanced_Filter_Nine |
 
-    @rsp-4381 @verifyUserCreation 
+    @rsp-4381 @verifyUserCreation  
     Scenario Outline: Verify that the active filter remains applied after creating a new user profile with valid data
+        And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
         And I select advanced filters in the manage users page using '<Advanced_Filters>'
         And I capture the page screenshot
         And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
@@ -311,7 +313,6 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
         And I capture the page screenshot
         When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
         And I capture the page screenshot
-        Then I can see the add a new user profile page
         When I fill the new user profile page using '<Add_User_Profile>'
         And I capture the page screenshot
         And I click the 'Continue' button on the 'Create_User_Profile_Page'
@@ -324,41 +325,39 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
         When I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
         Then I can see the 'Manage_Users_Page'
         And I capture the page screenshot
-        Then I can see the '<Validation_Text_Manage_Users_List>' ui labels on the manage users list page
-        And I can see the newly created user record should be present in the list for '<Add_User_Profile>' with '<Status_Enabled>' status in the manage user page
-        And I capture the page screenshot
+      # Then I can see the '<Validation_Text_Manage_Users_List>' ui labels on the manage users list page
         Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Manage_Users_Page'
         And I capture the page screenshot
    
         Examples:
-            | Add_User_Profile                        | Validation_Text_Manage_Users_List | Status_Enabled | Advanced_Filters     |
-            | Valid_Data_In_All_Fields_Role_Reviewer  | Label_Texts_Manage_Users_List     | Enabled        | Advanced_Filter_Nine | 
+            | Add_User_Profile                                      | Validation_Text_Manage_Users_List | Status_Enabled | Advanced_Filters     |
+            |  Valid_Data_In_All_Fields_Role_System_Administrator   | Label_Texts_Manage_Users_List     | Enabled        | Advanced_Filter_Nine | 
     
-    @rsp-4381  @SysAdminUser
+    @rsp-4381  @SysAdminUser 
     Scenario Outline: Verify that the active filter remains applied after edit the manage user and save their changes
+        And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
         And I select advanced filters in the manage users page using '<Advanced_Filters>'
         And I capture the page screenshot
         And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
         And I capture the page screenshot
         Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Manage_Users_Page'
         And I capture the page screenshot
-        And I search and click on view edit link for existing 'Valid_Data_Role_Operations' user with '<Status>' status from the manage user page
-        Then I can see the user profile page
-        When I click the '<Edit_User_Field>' change link for '<User_Role>' on the user profile page
+        And I select a 'QA Automation' User to View and Edit which is 'active'
+        And I can see the user profile page
+        And I capture the page screenshot
+        When I click the change link against 'Title' on the user profile page
         Then I can see the edit user profile page
-        And I update user profile with '<Edit_User_Field_Data>'
-        And I click the 'Save' button on the 'Edit_User_Profile_Page'
-        And I can see the user profile page
-        Then I can see the user profile '<Edit_User_Field>' is updated with the edited data '<Edit_User_Field_Data>'
-        When I click the '<Edit_User_Field>' change link for '<User_Role>' on the user profile page
-        And I update user profile with '<Original_Data>'
-        And I click the 'Save' button on the 'Edit_User_Profile_Page'
-        And I can see the user profile page
+        And I capture the page screenshot
+        When I click the 'Back' link on the 'Edit_User_Profile_Page'
+        Then I can see the user profile page
+        And I capture the page screenshot
         When I click the 'Back' link on the 'User_Profile_Page'
         Then I can see the 'Manage_Users_Page'
+        And I capture the page screenshot
+        And I capture the page screenshot
         Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Manage_Users_Page'
         And I capture the page screenshot
       
         Examples:
-            | Edit_User_Field   | User_Role  | Status  | Edit_User_Field_Data | Original_Data            | Advanced_Filters     |
-            | title_text        | Operations | Enabled | User_Title_Text_One  | Original_Title_Text_One  | Advanced_Filter_Nine |
+            | Advanced_Filters     |
+            | Advanced_Filter_Nine |

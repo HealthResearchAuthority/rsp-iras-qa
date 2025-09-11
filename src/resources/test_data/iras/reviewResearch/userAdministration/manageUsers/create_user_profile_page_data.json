@@ -106,7 +106,7 @@
   },
   "Create_User_Profile": {
     "email_address_prefix": "QAAutomation",
-    "email_address_unique": "QAAutomation20250908145453999john|vertical@example.com",
+    "email_address_unique": "QAAutomation20250911154307931hscrd@health.org",
     "Role_TM_SWR_WFC": {
       "role_checkbox": [
         "Study-wide reviewer",
