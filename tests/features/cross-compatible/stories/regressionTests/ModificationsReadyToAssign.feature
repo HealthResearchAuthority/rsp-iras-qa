@@ -138,6 +138,6 @@ Feature: Modifications Tasklist page that displays modifications ready to be ass
             | Invalid_Date_To                   | Invalid_Date_To_Error                   |
 
     @RegressionTasklistErrorStateValidation @rsp-4111
-    Scenario: Verify that the user must select a modifiation before continuing
-        When I click the 'Continue_To_Assign' button on the 'Modifications_Tasklist_Page'
+    Scenario: Verify that the user must select a modification before continuing
+        When I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
         Then I validate 'No_Modifications_Selected_Summary_Only_Error' displayed on 'Modifications_Tasklist_Page'
