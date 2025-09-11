@@ -675,6 +675,7 @@ Given(
       modificationsReadyToAssignPage,
       approvalsPage,
       myTaskListPage,
+      manageUsersPage,
     },
     page: string
   ) => {
@@ -727,6 +728,10 @@ Given(
       case 'SWR_My_Tasklist_Page':
         await myTaskListPage.goto();
         await myTaskListPage.assertOnMyTaskListPage();
+        break;
+      case 'Manage_Users_Page':
+        await manageUsersPage.goto();
+        await manageUsersPage.assertOnManageUsersPage();
         break;
       default:
         throw new Error(`${page} is not a valid option`);

@@ -180,13 +180,28 @@ Feature: Modifications Tasklist page that displays modifications ready to be ass
     Scenario Outline: Validate whether the proper list of study-wide reviewers are displayed based on the lead nation of the selected modification and the corresponding review body
         Given I have navigated to the 'Manage_Users_Page'
         And I capture the page screenshot
-        And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
+        When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
         And I capture the page screenshot
+        Then I can see the add a new user profile page
+        When I fill the new user profile page using '<User_Profile>'
+        And I capture the page screenshot
+        And I click the 'Continue' button on the 'Create_User_Profile_Page'
+        Then I can see the check and create user profile page
+        And I capture the page screenshot
+        Then I can see previously filled values in the new user profile page for '<User_Profile>' displayed on the check and create user profile page
+        And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
+        Then I can see the create user profile confirmation page for '<User_Profile>'
+        And I capture the page screenshot
+        When I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
+        Then I can see the 'Manage_Users_Page'
+        And I capture the page screenshot
+        And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
         And I select advanced filters in the manage users page using '<Advanced_Filters_Users>'
         And I capture the page screenshot
         And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
         And I capture the page screenshot
-        And I retrieve the list of review bodies displayed in the add a new user profile page
+        And I can see the newly created user record should be present in the list for '<User_Profile>' with '<Status_Enabled>' status in the manage user page
+        And I capture the page screenshot
         Given I have navigated to the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
         When I enter '<Valid_Iras_Id>' into the search field in the modifications ready to assign page
@@ -198,12 +213,17 @@ Feature: Modifications Tasklist page that displays modifications ready to be ass
         And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
         Then I can see the 'Select_Study_Wide_Reviewer_Page'
-        # And I can see the proper list of study-wide reviewers displayed based on the lead nation of the selected modification and the corresponding review body
+        And I can see newly created study-wide reviewer '<User_Profile>' of '<Lead_Nation>' is '<Availability>' in the dropdown based on the lead nation of the selected modification and the review body
+        # other countries >>review bodies>>swrs users >>not available
+        # disable user of england>> not available
         And I capture the page screenshot
 
         Examples:
-            | Valid_Iras_Id                       | Study_Wide_Reviewer             | Modification_Id                       | Advanced_Filters_Users                                                |
-            | Valid_Iras_Id_Ln_England_Pn_England | Study_Wide_Reviewer_HRA_England | Modification_Id_Ln_England_Pn_England | Advanced_Filter_Review_body_HRA_Role_Studywide_Reviewer_Status_Active |
+            | User_Profile                                                       | Valid_Iras_Id                       | Modification_Id                                | Advanced_Filters_Users                                | Lead_Nation      | Availability  |
+            | Valid_Data_In_All_Fields_Role_Studywide_Reviewer                   | Valid_Iras_Id_Ln_England_Pn_England | Modification_Id_Ln_England_Pn_England_Five_Six | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | England          | Available     |
+            | Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Another           | Valid_Iras_Id_Ln_England_Pn_England | Modification_Id_Ln_England_Pn_England_Five_Six | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | Wales            | Not Available |
+            | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer         | Valid_Iras_Id_Ln_England_Pn_England | Modification_Id_Ln_England_Pn_England_Five_Six | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | Northern Ireland | Not Available |
+            | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer_Another | Valid_Iras_Id_Ln_England_Pn_England | Modification_Id_Ln_England_Pn_England_Five_Six | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | Scotland         | Not Available |
 
     @BackLinkNavigation @RetainSelectedCheckboxes @rsp-4076 @rsp-4849 @KNOWN-DEFECT-RSP-5011  @fail
     Scenario Outline: Validate the workflow co-ordinator navigates to the modifications task list page from the 'Select a reviewer' page on clicking 'Back' button on 'Select a reviewer' page
