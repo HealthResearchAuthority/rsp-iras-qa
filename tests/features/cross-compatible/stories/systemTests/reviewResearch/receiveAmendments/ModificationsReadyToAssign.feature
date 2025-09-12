@@ -321,7 +321,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
             | Date_Submitted        |
             | Days_Since_Submission |
 
-    @rsp-4381  
+    @rsp-4381  @KNOWN-DEFECT-RSP-5045 @fail
     Scenario Outline: verify that all active filters are automatically cleared when the user navigates away from the current page in modification tasklist page 
         And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
@@ -332,7 +332,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         And I click the 'Apply_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see active filters displayed
         And I capture the page screenshot
-        #Then I can see the '<Validation_Text>' ui labels on the modifications ready to assign page
+        Then I can see the '<Validation_Text>' ui labels on the modifications ready to assign page
         When I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
         And I capture the page screenshot
         And the 'Next' button will be 'available' to the user
