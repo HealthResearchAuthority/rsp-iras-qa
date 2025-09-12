@@ -29,7 +29,7 @@ Then(
     const irasIdRunTime = await projectDetailsIRASPage.getUniqueIrasId();
     expect(confirmStringNotNull(await reviewYourAnswersPage.iras_id_text.textContent())).toBe(irasIdRunTime);
     for (const key in datasetProjectTitle) {
-      if (Object.prototype.hasOwnProperty.call(datasetProjectTitle, key)) {
+      if (Object.hasOwn(datasetProjectTitle, key)) {
         if (
           key == 'planned_project_end_day_text' ||
           key == 'planned_project_end_month_dropdown' ||
@@ -53,7 +53,7 @@ Then(
     }
 
     for (const key in datasetResearchLoctions) {
-      if (Object.prototype.hasOwnProperty.call(datasetResearchLoctions, key)) {
+      if (Object.hasOwn(datasetResearchLoctions, key)) {
         await commonItemsPage.validateUIComponentValues(datasetResearchLoctions, key, reviewYourAnswersPage);
       }
     }
@@ -65,7 +65,7 @@ Then(
   async ({ commonItemsPage, reviewYourAnswersPage }, datasetName: string) => {
     const dataset = reviewYourAnswersPage.reviewYourAnswersPageTestData[datasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         await commonItemsPage.validateUIComponentValues(dataset, key, reviewYourAnswersPage);
       }
     }

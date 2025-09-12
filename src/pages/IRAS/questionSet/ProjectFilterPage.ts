@@ -95,7 +95,7 @@ export default class ProjectFilterPage {
     expect(await activeStage.textContent()).toBe(this.projectFilterPageTestData.Project_Filter.page_name);
     await expect(this.project_filter_section_headings).toHaveCount(expectedSectionHeadingsText.length);
     const actualSectionHeadings = await getTextFromElementArray(await this.project_filter_section_headings.all());
-    for await (const expectedHeadingText of expectedSectionHeadingsText) {
+    for (const expectedHeadingText of expectedSectionHeadingsText) {
       expect(actualSectionHeadings).toContainEqual(expectedHeadingText);
     }
     expect(await this.page.title()).toBe(this.projectFilterPageTestData.Project_Filter.title);
