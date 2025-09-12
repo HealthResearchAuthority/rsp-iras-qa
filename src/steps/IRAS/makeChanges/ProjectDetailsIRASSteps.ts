@@ -13,7 +13,7 @@ Then(
   async ({ commonItemsPage, projectDetailsIRASPage }, datasetName: string) => {
     const dataset = projectDetailsIRASPage.projectDetailsIRASPageTestData[datasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         const labelVal = await commonItemsPage.getUiLabel(key, projectDetailsIRASPage);
         expect(labelVal).toBe(dataset[key]);
       }
@@ -26,7 +26,7 @@ Then(
   async ({ commonItemsPage, projectDetailsIRASPage }, datasetName: string) => {
     const dataset = projectDetailsIRASPage.projectDetailsIRASPageTestData[datasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         if (['Valid_IRAS_ID_Max', 'Valid_IRAS_ID_Min', 'Invalid_IRAS_ID_Min_Length'].includes(datasetName)) {
           dataset[key] = generateIrasId(datasetName);
         }
@@ -52,7 +52,7 @@ Then(
   async ({ commonItemsPage, projectDetailsIRASPage }, datasetName: string) => {
     const dataset = projectDetailsIRASPage.projectDetailsIRASPageTestData[datasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         await commonItemsPage.validateUIComponentValues(dataset, key, projectDetailsIRASPage);
       }
     }

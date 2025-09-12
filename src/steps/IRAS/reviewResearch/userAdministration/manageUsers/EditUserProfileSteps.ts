@@ -18,7 +18,7 @@ Then(
   async ({ commonItemsPage, editUserProfilePage }, datasetName: string) => {
     const dataset = editUserProfilePage.editUserProfilePageTestData[datasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         const labelVal = await commonItemsPage.getUiLabel(key, editUserProfilePage);
         expect(labelVal).toBe(dataset[key]);
       }
@@ -46,7 +46,7 @@ When(
       if (keyIndex == 1) {
         keyValue = dataset[key];
       }
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         if (key === 'email_address_text') {
           const prefix = editUserProfilePage.editUserProfilePageTestData.Edit_User_Profile.email_address_prefix;
           uniqueEmail = await generateUniqueEmail(dataset[key], prefix);
