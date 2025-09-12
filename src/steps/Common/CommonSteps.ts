@@ -26,6 +26,7 @@ When(
       commonItemsPage,
       loginPage,
       homePage,
+      siginInPage,
       createApplicationPage,
       proceedApplicationPage,
       systemAdministrationPage,
@@ -46,6 +47,9 @@ When(
         break;
       case 'Home_Page':
         await homePage.assertOnHomePage();
+        break;
+      case 'Sign_In_Page':
+        await siginInPage.assertOnSignInPage();
         break;
       case 'Create_Application_Page':
         await createApplicationPage.assertOnCreateApplicationPage();
@@ -677,6 +681,7 @@ Given(
       commonItemsPage,
       loginPage,
       homePage,
+      siginInPage,
       createApplicationPage,
       systemAdministrationPage,
       manageUsersPage,
@@ -693,7 +698,8 @@ Given(
     switch (page) {
       case 'Login_Page':
         await homePage.goto();
-        await homePage.loginBtn.click();
+        await siginInPage.assertOnSignInPage();
+        await siginInPage.loginBtn.click();
         await loginPage.assertOnLoginPage();
         break;
       case 'Home_Page':
