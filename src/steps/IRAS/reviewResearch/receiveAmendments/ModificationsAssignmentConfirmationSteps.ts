@@ -9,9 +9,6 @@ Then(
   'I can see the modifications assignment confirmation page for {string}',
   async ({ modificationsAssignmentConfirmationPage, selectStudyWideReviewerPage }, datasetName: string) => {
     const dataset = selectStudyWideReviewerPage.selectStudywideReviewerPageData.Study_Wide_Reviewer[datasetName];
-    // const dataset =
-    //   modificationsAssignmentConfirmationPage.modificationsAssignmentConfirmationPageTestData
-    //     .Modifications_Assignment_Confirmation_Page;
     await modificationsAssignmentConfirmationPage.assertOnModificationsAssignmentConfirmationPage();
     const expectedConsent =
       dataset.study_wide_reviewer_dropdown +
