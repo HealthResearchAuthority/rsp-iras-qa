@@ -126,6 +126,10 @@
     "Continue_to_assign_modifications": "Continue to assign modifications",
     "Advanced_Filters": "Advanced filters"
   },
+  "Post_Approval_Page": {
+    "Modification_Id": "Modification ID",
+    "Modification_Type": "Modification type"
+  },
   "Participating_Organisations_Page": {
     "Save_Continue": "Save and continue",
     "Save_For_Later": "Save for later",
@@ -165,8 +169,5 @@
     "Add_Another_Document": "Add another document",
     "Save_Continue": "Save and continue",
     "Save_For_Later": "Save for later"
-  },
-  "Project_Overview_Page": {
-    "Create_New_Modification": "Create new modification"
   }
 }

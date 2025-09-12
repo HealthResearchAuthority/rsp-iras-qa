@@ -1082,6 +1082,15 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
     Then I can see the project overview page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityProjectOverviewPostApprovalPageSpecificProject @ApplicantUser
+  Scenario: Project overview post approvals page for a specific project
+    When I navigate to the project overview page of a specific project
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
