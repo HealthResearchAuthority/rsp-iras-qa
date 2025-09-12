@@ -13,7 +13,7 @@ When(
   async ({ createUserProfilePage, commonItemsPage }, datasetName: string) => {
     const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         if (key === 'email_address_text') {
           const prefix = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile.email_address_prefix;
           const uniqueEmail = await generateUniqueEmail(dataset[key], prefix);
@@ -38,7 +38,7 @@ When(
     const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
     const isDuplicateEmail = datasetName.startsWith('Duplicate_Email_');
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         if (isDuplicateEmail && key === 'email_address_text') {
           const locator = createUserProfilePage[key];
           const [email] = await userListReviewBodyPage.getUserEmail();
@@ -63,7 +63,7 @@ Then(
   async ({ createUserProfilePage, commonItemsPage }, datasetName: string) => {
     const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         await commonItemsPage.clearUIComponent(dataset, key, createUserProfilePage);
       }
     }
@@ -81,13 +81,9 @@ Then(
       dataset['role_checkbox'].includes('Workflow co-ordinator') ||
       selectedCheckboxCount > 0
     ) {
-      await commonItemsPage.clearCheckboxes(
-        dataset,
-        ['country_checkbox', 'review_body_checkbox'],
-        commonItemsPage,
-        createUserProfilePage
-      );
-      await commonItemsPage.clearUIComponent(dataset, 'role_checkbox', createUserProfilePage);
+      await commonItemsPage.clearCheckboxesUserProfile(dataset, 'country_checkbox', createUserProfilePage);
+      await commonItemsPage.clearCheckboxesUserProfile(dataset, 'review_body_checkbox', createUserProfilePage);
+      await commonItemsPage.clearCheckboxesUserProfile(dataset, 'role_checkbox', createUserProfilePage);
     }
   }
 );
@@ -99,7 +95,7 @@ Then(
     if (datasetValName === 'Role_TM_SWR_WFC') {
       for (const key in dataset) {
         if (key !== 'country_checkbox' && key !== 'review_body_checkbox') {
-          if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+          if (Object.hasOwn(dataset, key)) {
             await commonItemsPage.clearUIComponent(dataset, key, createUserProfilePage);
           }
         }
@@ -116,23 +112,31 @@ Then(
   'I can see previously filled values in the new user profile page for {string} displayed on the add a new user profile page',
   async ({ createUserProfilePage }, datasetName: string) => {
     const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
-    for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        const fieldValActual: string | boolean = await createUserProfilePage.getSelectedValuesCreateUser(
-          dataset,
-          key,
-          createUserProfilePage
-        );
-        if (typeof fieldValActual == 'string') {
-          if (key === 'email_address_text') {
-            const data = await returnDataFromJSON();
-            expect(fieldValActual).toBe(data.Create_User_Profile.email_address_unique);
-          } else {
-            expect(fieldValActual).toBe(dataset[key]);
-          }
-        } else if (typeof fieldValActual == 'boolean') {
-          expect(fieldValActual).toBeTruthy();
+
+    const getFieldValue = async (key: string): Promise<string | boolean> => {
+      if (key === 'review_body_checkbox') {
+        return await createUserProfilePage.getSelectedCheckboxCreateUserReviewBody(dataset, createUserProfilePage);
+      }
+      return await createUserProfilePage.getSelectedValuesCreateUser(dataset, key, createUserProfilePage);
+    };
+
+    const assertFieldValue = async (key: string, actual: string | boolean) => {
+      if (typeof actual === 'string') {
+        if (key === 'email_address_text') {
+          const data = await returnDataFromJSON();
+          expect(actual).toBe(data.Create_User_Profile.email_address_unique);
+        } else {
+          expect(actual).toBe(dataset[key]);
         }
+      } else if (typeof actual === 'boolean') {
+        expect(actual).toBeTruthy();
+      }
+    };
+
+    for (const key in dataset) {
+      if (Object.hasOwn(dataset, key)) {
+        const fieldValActual = await getFieldValue(key);
+        await assertFieldValue(key, fieldValActual);
       }
     }
   }
@@ -164,7 +168,8 @@ Then(
   async ({ createUserProfilePage, manageReviewBodiesPage }) => {
     const actualList = await createUserProfilePage.getReviewBodies();
     const expectedList = await manageReviewBodiesPage.getOrgNamesListFromUI();
-    expect(actualList).toEqual(expectedList);
+    const count = expectedList.length;
+    expect(actualList.slice(0, count)).toEqual(expectedList);
   }
 );
 

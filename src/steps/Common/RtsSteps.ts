@@ -73,7 +73,11 @@ Then(
       offset;
     await rtsPage.page.goto(newApplicationURL);
     const rtsDataFromApplication = confirmStringNotNull(await rtsPage.jsonDataPreLabel.textContent());
-    const rtsDataFromApplicationJSONActual = await sortArray(JSON.parse(rtsDataFromApplication));
+    const rtsDataFromApplicationJSON = JSON.parse(rtsDataFromApplication);
+    const rtsOrganisationNamesFromApplication = rtsDataFromApplicationJSON.organisations
+      .map((item: any) => item.name)
+      .filter((name: string) => Boolean(name) && name.toLowerCase().includes(organisationName.toLowerCase()));
+    const rtsDataFromApplicationJSONActual = await sortArray(rtsOrganisationNamesFromApplication);
     const rtsResponseDataExpected = await sortArray(rtsPage.rtsResponseList);
     expect(rtsDataFromApplicationJSONActual).toEqual(rtsResponseDataExpected);
   }

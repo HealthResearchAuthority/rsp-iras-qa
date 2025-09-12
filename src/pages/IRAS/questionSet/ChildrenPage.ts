@@ -54,7 +54,7 @@ export default class ChildrenPage {
     expect(await activeStage.textContent()).toBe(this.childrenPageTestData.Children.page_name);
     await expect(this.children_section_headings).toHaveCount(expectedSectionHeadingsText.length);
     const actualSectionHeadings = await getTextFromElementArray(await this.children_section_headings.all());
-    for await (const expectedHeadingText of expectedSectionHeadingsText) {
+    for (const expectedHeadingText of expectedSectionHeadingsText) {
       expect(actualSectionHeadings).toContainEqual(expectedHeadingText);
     }
     expect(await this.page.title()).toBe(this.childrenPageTestData.Children.title);

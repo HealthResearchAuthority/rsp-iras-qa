@@ -63,7 +63,7 @@ When(
     const shortMonth = new Date().toLocaleString('en-GB', { month: 'short', timeZone: 'UTC' }).slice(0, 3);
     const longMonth = new Date().toLocaleString('en-GB', { month: 'long', timeZone: 'UTC' });
     const expectedValue = abbreviatedValue.replace(shortMonth, longMonth);
-    await expect(userProfilePage.last_updated_value).toHaveText(expectedValue);
+    await expect(userProfilePage.last_updated_value).toHaveText(confirmStringNotNull(expectedValue));
   }
 );
 
@@ -86,7 +86,7 @@ Then(
   async ({ commonItemsPage, userProfilePage }, datasetName: string) => {
     const dataset = userProfilePage.userProfilePageTestData[datasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         const labelVal = await commonItemsPage.getUiLabel(key, userProfilePage);
         expect(labelVal).toBe(dataset[key]);
       }

@@ -1,4 +1,4 @@
-@UserAdministration @ManageReviewBodies @ViewReviewBodies @SysAdminUser @SystemTest @rsp-2571 @rsp-2569
+@UserAdministration @ManageReviewBodies @ViewReviewBodies @SysAdminUser @SystemTest
 Feature: User Administration: Manage Review Bodies list and view review bodies profile details
 
     Background:
@@ -6,7 +6,7 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
         And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
         Then I can see the 'Manage_Review_Bodies_Page'
 
-    @viewListOfReviewBodies
+    @viewListOfReviewBodies @rsp-2569
     Scenario Outline: Verify the user is able to view list of review bodies in alphabetical order of Organisation Name
         And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
         Then I can see the 'Create_Review_Body_Page'
@@ -33,14 +33,14 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
             | Add_Review_Body          | Status  |
             | Valid_Data_In_All_Fields | Enabled |
 
-    @verifyManageReviewBodiesPageBackButtonFlow
+    @verifyManageReviewBodiesPageBackButtonFlow @rsp-2569
     Scenario: Verify the user can navigate from 'Manage review bodies' page by clicking 'Back' button
         And I click the 'Back' link on the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
         Then I can see the 'System_Administration_Page'
 
 
-    @viewEnabledDisabledReviewBodies
+    @viewEnabledDisabledReviewBodies @rsp-2571
     Scenario Outline: Verify that user is able to view active and disabled review bodies
         When I enter 'QA Automation' into the search field
         And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
@@ -59,7 +59,7 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
             | Valid_Data_In_All_Fields_Disabled | Disabled |
 
 
-    @viewNewReviewBody
+    @viewNewReviewBody @rsp-2571
     Scenario Outline: Verify that user is able to view review body details with blank last updated date for the new record
         And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
         Then I can see the 'Create_Review_Body_Page'
@@ -138,7 +138,7 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
         And I capture the page screenshot
         And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
-        Then the system displays no results found message if there is no 'review body' on the system that matches the search criteria
+        Then the search displays no matching results
         And I capture the page screenshot
         Examples:
             | Search_Query      |
