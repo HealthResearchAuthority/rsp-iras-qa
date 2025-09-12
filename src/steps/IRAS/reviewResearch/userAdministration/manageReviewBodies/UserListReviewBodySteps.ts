@@ -69,7 +69,7 @@ When(
       const userListBeforeSearch = await commonItemsPage.getAllUsersFromTheTable();
       const userValues: any = userListBeforeSearch.get('searchResultValues');
       await userListReviewBodyPage.setUserListBeforeSearch(userValues);
-      await userListReviewBodyPage.setSearchKey(searchKey);
+      await commonItemsPage.setSearchKey(searchKey);
       commonItemsPage.search_text.fill(searchKey);
     } else {
       throw new Error(`There are no items in list to search`);
@@ -81,7 +81,7 @@ Then(
   'the system displays search results matching the search criteria',
   async ({ userListReviewBodyPage, commonItemsPage }) => {
     const userValues = await userListReviewBodyPage.getUserListBeforeSearch();
-    const searchKey = await userListReviewBodyPage.getSearchKey();
+    const searchKey = await commonItemsPage.getSearchKey();
     const searchTerms = await commonItemsPage.splitSearchTerm(searchKey);
     const filteredSearchResults = await commonItemsPage.filterResults(userValues, searchTerms);
     const userList = await commonItemsPage.getAllUsersFromTheTable();
@@ -98,9 +98,9 @@ Then(
 
 When(
   'I enter an input into the search field to search for the removed user of the review body',
-  async ({ userListReviewBodyPage, commonItemsPage, checkRemoveUserReviewBodyPage }) => {
+  async ({ commonItemsPage, checkRemoveUserReviewBodyPage }) => {
     const searchKey = await checkRemoveUserReviewBodyPage.getEmail();
-    await userListReviewBodyPage.setSearchKey(searchKey);
+    await commonItemsPage.setSearchKey(searchKey);
     await commonItemsPage.search_text.fill(searchKey);
   }
 );

@@ -4,6 +4,7 @@ import { getAuthState } from '../utils/UtilFunctions';
 import CommonItemsPage from '../pages/Common/CommonItemsPage';
 import LoginPage from '../pages/Common/LoginPage';
 import HomePage from '../pages/IRAS/HomePage';
+import SignInPage from '../pages/IRAS/SignInPage';
 import ProjectFilterPage from '../pages/IRAS/questionSet/ProjectFilterPage';
 import ProjectDetailsPage from '../pages/IRAS/questionSet/ProjectDetailsPage';
 import StudentPage from '../pages/IRAS/questionSet/StudentPage';
@@ -64,6 +65,7 @@ type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
   loginPage: LoginPage;
   homePage: HomePage;
+  siginInPage: SignInPage;
   projectFilterPage: ProjectFilterPage;
   projectDetailsPage: ProjectDetailsPage;
   studentPage: StudentPage;
@@ -137,6 +139,10 @@ export const test = base.extend<CustomFixtures>({
 
   homePage: async ({ page }, use) => {
     await use(new HomePage(page));
+  },
+
+  siginInPage: async ({ page }, use) => {
+    await use(new SignInPage(page));
   },
 
   projectFilterPage: async ({ page }, use) => {

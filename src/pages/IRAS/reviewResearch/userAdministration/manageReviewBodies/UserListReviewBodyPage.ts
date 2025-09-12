@@ -7,7 +7,6 @@ import CommonItemsPage from '../../../../Common/CommonItemsPage';
 export default class UserListReviewBodyPage {
   readonly page: Page;
   readonly userListReviewBodyPageTestData: typeof userListReviewBodyPageTestData;
-  private _search_key: string;
   private _user_list_before_search: string[];
   private _user_email: string[];
   private _user_fname: string[];
@@ -41,7 +40,6 @@ export default class UserListReviewBodyPage {
   constructor(page: Page) {
     this.page = page;
     this.userListReviewBodyPageTestData = userListReviewBodyPageTestData;
-    this._search_key = '';
     this._user_list_before_search = [];
     this._user_email = [];
     this._user_fname = [];
@@ -137,14 +135,6 @@ export default class UserListReviewBodyPage {
   }
 
   //Getters & Setters for Private Variables
-
-  async getSearchKey(): Promise<string> {
-    return this._search_key;
-  }
-
-  async setSearchKey(value: string): Promise<void> {
-    this._search_key = value;
-  }
 
   async getUserListBeforeSearch(): Promise<string[]> {
     return this._user_list_before_search;
@@ -324,7 +314,7 @@ export default class UserListReviewBodyPage {
 
   async getFilteredSearchResultsBeforeSearch(commonItemsPage: CommonItemsPage) {
     const userValues = await this.getUserListBeforeSearch();
-    const searchKey = await this.getSearchKey();
+    const searchKey = await commonItemsPage.getSearchKey();
     const searchTerms = await commonItemsPage.splitSearchTerm(searchKey);
     const filteredSearchResults = await commonItemsPage.filterResults(userValues, searchTerms);
     return filteredSearchResults;
