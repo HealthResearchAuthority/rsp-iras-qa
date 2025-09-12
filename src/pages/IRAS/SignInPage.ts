@@ -50,6 +50,6 @@ export default class SignInPage {
     await expect(this.getStartedSubHeading).toBeVisible();
     await expect(this.signInHeading).toBeVisible();
     await expect(this.serviceHelpHeading).toBeVisible();
-    expect(this.page.title).toBe(this.signInPageTestData.Sign_In_Page.title);
+    expect(await this.page.title()).toBe(this.signInPageTestData.Sign_In_Page.title);
   }
 }
