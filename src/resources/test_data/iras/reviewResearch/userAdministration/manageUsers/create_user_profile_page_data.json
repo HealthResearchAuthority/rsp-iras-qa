@@ -106,7 +106,7 @@
   },
   "Create_User_Profile": {
     "email_address_prefix": "QAAutomation",
-    "email_address_unique": "QAAutomation20250911182553120hscrd@health.org",
+    "email_address_unique": "QAAutomation20250912083733219hscrd@health.org",
     "Role_TM_SWR_WFC": {
       "role_checkbox": [
         "Study-wide reviewer",
@@ -187,6 +187,21 @@
       "telephone_text": "07000000000",
       "organisation_text": "QA Automation HRA Role_Studywide_Reviewer HRA",
       "job_title_text": "Sr.Reviewer Role_Studywide_Reviewer HRA",
+      "role_checkbox": [
+        "Study-wide reviewer"
+      ],
+      "review_body_checkbox": [
+        "Health Research Authority (HRA)"
+      ]
+    },
+    "Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Disabled": {
+      "title_text": "Mr",
+      "first_name_text": "QA Automation First Name Test Role_Studywide_Reviewer HRA Disabled",
+      "last_name_text": "Test Last Name Role_Studywide_Reviewer HRA Disabled",
+      "email_address_text": "hscrd@health.org",
+      "telephone_text": "07000000000",
+      "organisation_text": "QA Automation HRA Role_Studywide_Reviewer HRA Disabled",
+      "job_title_text": "Sr.Reviewer Role_Studywide_Reviewer HRA Disabled",
       "role_checkbox": [
         "Study-wide reviewer"
       ],
