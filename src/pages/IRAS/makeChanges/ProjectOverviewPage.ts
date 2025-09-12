@@ -44,7 +44,6 @@ export default class ProjectOverviewPage {
   readonly review_type: Locator;
   readonly category: Locator;
   readonly status: Locator;
-  readonly project_overview_iras_id_short_project_title: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -154,7 +153,6 @@ export default class ProjectOverviewPage {
       name: this.projectOverviewPageTestData.Label_Texts_Post_Approval.status,
       exact: true,
     });
-    this.project_overview_iras_id_short_project_title = this.page.locator('p');
   }
 
   //Page Methods
@@ -163,9 +161,7 @@ export default class ProjectOverviewPage {
   }
 
   async gotoSpecificProjectPage() {
-    await this.page.goto(
-      'https://fd-rsp-applications-automationtest-uks-e7f6hkg3c5edhxex.a03.azurefd.net/projectoverview/postapproval?projectRecordId=20250905085329'
-    );
+    await this.page.goto(this.projectOverviewPageTestData.Modification_URL.URL);
   }
 
   async getStatus(row: any) {

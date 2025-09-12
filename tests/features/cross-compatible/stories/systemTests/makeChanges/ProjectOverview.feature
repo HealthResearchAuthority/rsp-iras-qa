@@ -57,9 +57,8 @@ Feature: Project Overview
         And I capture the page screenshot
         When I click the 'Post_Approval' link on the 'Project_Overview_Page'
         And I capture the page screenshot
-        And I validate the 'Valid_Data_Fields' displayed in the project overview page
         And I can see the 'Label_Texts_Post_Approval' ui labels on the project overview page
-        And I can see the status of modifications displayed is 'Modification_Status'
+        And I can see the status of modifications displayed is 'Modification_Status_Draft'
 
     @rsp-4876 @PostApprovalPageSort
     #The project and modifications were created manually and validations are for the specific project

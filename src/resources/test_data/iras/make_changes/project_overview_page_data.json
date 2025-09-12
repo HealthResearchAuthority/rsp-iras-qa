@@ -20,8 +20,11 @@
     "lead_nation": "Lead nation",
     "maxPagesToVisit": 2
   },
-  "Modification_Status": {
-    "draft_status": "Draft"
+  "Modification_URL": {
+    "URL": "https://fd-rsp-applications-automationtest-uks-e7f6hkg3c5edhxex.a03.azurefd.net/projectoverview/postapproval?projectRecordId=20250905085329"
+  },
+  "Modification_Status_Draft": {
+    "status": "Draft"
   },
   "Valid_Data_All_Fields": {
     "short_project_title_text": "QA_Automation - This is a short project title",
@@ -53,9 +56,5 @@
     "review_type": "Review type",
     "category": "Category",
     "status": "Status"
-  },
-  "Valid_Data_Fields": {
-    "iras_id_value": "5789415",
-    "short_project_title_text": "QA_Automation - This is a short project title"
   }
 }

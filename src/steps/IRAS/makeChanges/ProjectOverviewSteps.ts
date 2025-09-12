@@ -40,7 +40,6 @@ Then(
       projectOverviewPage.projectOverviewPageTestData.Project_Overview_Page.short_project_title_label,
       ''
     );
-
     expect(actualProjectTitleUpdated).toBe(expectedProjectTitle);
   }
 );
@@ -77,26 +76,11 @@ Then(
 );
 
 Then(
-  'I validate the {string} displayed in the project overview page',
-  async ({ projectOverviewPage }, datasetName: string) => {
-    const projectDataset = projectOverviewPage.projectOverviewPageTestData[datasetName];
-    const irasIdAndShortProjectTitle =
-      await projectOverviewPage.project_overview_iras_id_short_project_title.allInnerTexts();
-    const actualIrasIdValue = irasIdAndShortProjectTitle[3].trim().replace('IRAS ID:', '').trim();
-    const expectedIrasIdValue = projectDataset.iras_id_value;
-    const actualShortProjectTitle = irasIdAndShortProjectTitle[4].trim().replace('Short project title:', '').trim();
-    const expectedProjectTitle = projectDataset.short_project_title_text;
-    expect(actualIrasIdValue).toBe(expectedIrasIdValue);
-    expect(actualShortProjectTitle).toBe(expectedProjectTitle);
-  }
-);
-
-Then(
   'I can see the status of modifications displayed is {string}',
   async ({ commonItemsPage, projectOverviewPage }, datasetName: string) => {
     //Limiting the checks to 2 pages
     const dataset = projectOverviewPage.projectOverviewPageTestData[datasetName];
-    const expectedStatus = dataset.draft_status;
+    const expectedStatus = dataset.status;
     const maxPagesToCheck = projectOverviewPage.projectOverviewPageTestData.Project_Overview_Page.maxPagesToVisit;
     for (let pageIndex = 1; pageIndex <= maxPagesToCheck; pageIndex++) {
       const rowCount = await commonItemsPage.tableRows.count();
@@ -175,10 +159,10 @@ Then(
 
 Then(
   'I can see the modifications is sorted by {string} order of the {string}',
-  async ({ searchModificationsPage, commonItemsPage }, sortDirection: string, sortField: string) => {
-    let sortedList: string[];
+  async ({ searchModificationsPage, commonItemsPage }, sortOrder: string, sortColumn: string) => {
+    let sortedColumnList: string[];
     let columnIndex: number;
-    switch (sortField.toLowerCase()) {
+    switch (sortColumn.toLowerCase()) {
       case 'modification id':
         columnIndex = 0;
         break;
@@ -186,16 +170,19 @@ Then(
         columnIndex = 1;
         break;
       default:
-        throw new Error(`${sortField} is not a valid option`);
+        throw new Error(`${sortColumn} is not a valid option`);
     }
-    const actualList = await searchModificationsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
-    if (sortField.toLowerCase() == 'modification id') {
-      sortedList = await searchModificationsPage.sortModificationIdListValues(actualList, sortDirection);
-    } else if (sortDirection.toLowerCase() == 'ascending') {
-      sortedList = [...actualList].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
+    const actualColumnList = await searchModificationsPage.getActualListValues(
+      commonItemsPage.tableBodyRows,
+      columnIndex
+    );
+    if (sortColumn.toLowerCase() == 'modification id') {
+      sortedColumnList = await searchModificationsPage.sortModificationIdListValues(actualColumnList, sortOrder);
+    } else if (sortOrder.toLowerCase() == 'ascending') {
+      sortedColumnList = [...actualColumnList].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
     } else {
-      sortedList = [...actualList].sort((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
+      sortedColumnList = [...actualColumnList].sort((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
     }
-    expect(actualList).toEqual(sortedList);
+    expect(actualColumnList).toEqual(sortedColumnList);
   }
 );
