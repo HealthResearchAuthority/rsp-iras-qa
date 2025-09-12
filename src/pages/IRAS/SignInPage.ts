@@ -40,9 +40,6 @@ export default class SignInPage {
   }
 
   //Page Methods
-  async goto() {
-    await this.page.goto('');
-  }
 
   async assertOnSignInPage() {
     await expect(this.pageHeading).toBeVisible();

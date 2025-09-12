@@ -706,6 +706,10 @@ Given(
         await homePage.goto();
         await homePage.assertOnHomePage();
         break;
+      case 'Sign_In_Page':
+        await homePage.goto();
+        await siginInPage.assertOnSignInPage();
+        break;
       case 'Create_Application_Page':
         await createApplicationPage.goto();
         await createApplicationPage.assertOnCreateApplicationPage();
