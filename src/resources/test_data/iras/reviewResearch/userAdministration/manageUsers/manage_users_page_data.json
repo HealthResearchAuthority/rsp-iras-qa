@@ -320,7 +320,7 @@
       "status_radio": "Active"
     },
     "Advanced_Filter_Review_body_HCRW_All_Roles_Status_Active": {
-      "review_body_checkbox": ["QA Automation Health and Care Research Wales (HCRW)"],
+      "review_body_checkbox": ["Health and Care Research Wales (HCRW)"],
       "role_checkbox": [
         "Applicant",
         "Study-wide reviewer",
@@ -365,7 +365,7 @@
       "review_body_checkbox": ["QA Automation Health and Social Care Northern Ireland (HSCNI)"]
     },
     "Advanced_Filter_Country_No_Review_Body_HCRW_Role_No": {
-      "review_body_checkbox": ["QA Automation Health and Care Research Wales (HCRW)"]
+      "review_body_checkbox": ["Health and Care Research Wales (HCRW)"]
     },
     "Advanced_Filter_Country_No_Review_Body_NRSPCC_Role_No": {
       "review_body_checkbox": ["QA Automation National Research Service Permissions Coordination Centre (NRSPCC)"]
@@ -384,10 +384,10 @@
     },
     "Advanced_Filter_Country_No_Review_Body_All_Role_All": {
       "review_body_checkbox": [
-        "QA Automation Health Research Authority (HRA)",
-        "QA Automation Health and Social Care Northern Ireland (HSCNI)",
-        "QA Automation Health and Care Research Wales (HCRW)",
-        "QA Automation National Research Service Permissions Coordination Centre (NRSPCC)"
+        "Health Research Authority (HRA)",
+        "Health and Social Care Northern Ireland (HSCNI)",
+        "Health and Care Research Wales (HCRW)",
+        "National Research Service Permissions Coordination Centre (NRSPCC)"
       ],
       "role_checkbox": [
         "Applicant",
@@ -400,10 +400,10 @@
     "Advanced_Filter_Country_All_Review_Body_All_Role_All_Status_Active": {
       "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
       "review_body_checkbox": [
-        "QA Automation Health Research Authority (HRA)",
-        "QA Automation Health and Social Care Northern Ireland (HSCNI)",
-        "QA Automation Health and Care Research Wales (HCRW)",
-        "QA Automation National Research Service Permissions Coordination Centre (NRSPCC)"
+        "Health Research Authority (HRA)",
+        "Health and Social Care Northern Ireland (HSCNI)",
+        "Health and Care Research Wales (HCRW)",
+        "National Research Service Permissions Coordination Centre (NRSPCC)"
       ],
       "role_checkbox": [
         "Applicant",

@@ -106,7 +106,7 @@
   },
   "Create_User_Profile": {
     "email_address_prefix": "QAAutomation",
-    "email_address_unique": "QAAutomation20250908145453999john|vertical@example.com",
+    "email_address_unique": "QAAutomation20250912102830664hscrd@health.org",
     "Role_TM_SWR_WFC": {
       "role_checkbox": [
         "Study-wide reviewer",
@@ -206,7 +206,7 @@
         "Study-wide reviewer"
       ],
       "review_body_checkbox": [
-        "QA Automation Health and Care Research Wales (HCRW)"
+        "Health and Care Research Wales (HCRW)"
       ]
     },
     "Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer": {
@@ -666,7 +666,7 @@
         "Wales"
       ],
       "review_body_checkbox": [
-        "QA Automation Health and Care Research Wales (HCRW)"
+        "Health and Care Research Wales (HCRW)"
       ]
     },
     "Valid_Data_No_Roles": {
