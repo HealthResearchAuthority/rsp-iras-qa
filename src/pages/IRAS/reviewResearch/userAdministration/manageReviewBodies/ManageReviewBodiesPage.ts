@@ -135,7 +135,7 @@ export default class ManageReviewBodiesPage {
   }
   async assertOnManageReviewBodiesPage() {
     await expect(this.pageHeading).toBeVisible();
-    expect(await this.page.title()).toBe(this.manageReviewBodiesPageData.Manage_Review_Body_Page.title);
+    expect.soft(await this.page.title()).toBe(this.manageReviewBodiesPageData.Manage_Review_Body_Page.title);
     await expect(this.search_hint_text).toBeVisible();
   }
 

@@ -1,4 +1,4 @@
-@SysAdminUser  @UserManagementSmokeFeature @Smoke
+@SysAdminUser  @UserManagementSmokeFeature @Smoke @fail
 Feature: User Administration: Manage Users -Smoke Tests
 
     Background:

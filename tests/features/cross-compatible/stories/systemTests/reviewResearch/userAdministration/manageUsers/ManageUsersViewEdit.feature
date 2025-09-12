@@ -204,21 +204,21 @@ Feature: User Administration: Manage user profiles, view and edit user profile
       | Existing_QA_User_Last_Name  |
       | Existing_QA_User_Email      |
 
-  # out of scope for now
-  @rsp-3456 @ManageUsersSearchLeadingAndTrailingWhiteSpaces @fail @skip
-  Scenario Outline: Verify search results in manage users page when the search keyword contains leading and trailing white spaces
-    When I fill the search input for searching 'users' with '<Search_Query>' as the search query
-    And I capture the page screenshot
-    And I click the 'Search' button on the 'Manage_Users_Page'
-    And I capture the page screenshot
-    Then the system displays user records matching the search criteria
-    And I capture the page screenshot
+  # out of scope for now-since the search box does not support special characters,it may be added in future
+  # @rsp-3456 @ManageUsersSearchLeadingAndTrailingWhiteSpaces
+  # Scenario Outline: Verify search results in manage users page when the search keyword contains leading and trailing white spaces
+  #   When I fill the search input for searching 'users' with '<Search_Query>' as the search query
+  #   And I capture the page screenshot
+  #   And I click the 'Search' button on the 'Manage_Users_Page'
+  #   And I capture the page screenshot
+  #   Then the system displays user records matching the search criteria
+  #   And I capture the page screenshot
 
-    Examples:
-      | Search_Query                               |
-      | Leading_White_Space_User_Data              |
-      | Leading_And_Trailing_White_Space_User_Data |
-      | Trailing_White_Space_User_Data             |
+  #   Examples:
+  #     | Search_Query                               |
+  #     | Leading_White_Space_User_Data              |
+  #     | Leading_And_Trailing_White_Space_User_Data |
+  #     | Trailing_White_Space_User_Data             |
 
   @rsp-3890 @ManageUsersSearchMultiTerms @fail @skip
   Scenario Outline: Verify the user search utilises AND logic to produce accurate search results

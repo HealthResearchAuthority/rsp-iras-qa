@@ -173,6 +173,7 @@ When(
           }
           await commonItemsPage.fillUIComponent(dataset, key, manageUsersPage);
         } else if (key === 'review_body_checkbox') {
+          await manageUsersPage[key + '_chevron'].click();
           await commonItemsPage.selectCheckboxUserProfileReviewBody(dataset, manageUsersPage);
         } else {
           await manageUsersPage[key + '_chevron'].click();
