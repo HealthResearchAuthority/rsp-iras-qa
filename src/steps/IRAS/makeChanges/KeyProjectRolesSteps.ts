@@ -14,7 +14,7 @@ Then(
   async ({ commonItemsPage, keyProjectRolesPage, $tags }, datasetName: string) => {
     const dataset = keyProjectRolesPage.keyProjectRolesPageTestData[datasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         if (key === 'primary_sponsor_organisation_text') {
           if (
             ($tags.includes('@jsEnabled') || config.projects?.[1].use?.javaScriptEnabled) &&
@@ -59,7 +59,7 @@ Then(
   async ({ commonItemsPage, keyProjectRolesPage }, datasetName: string) => {
     const dataset = keyProjectRolesPage.keyProjectRolesPageTestData[datasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         const labelVal = await commonItemsPage.getUiLabel(key, keyProjectRolesPage);
         expect(labelVal).toBe(dataset[key]);
       }
@@ -72,7 +72,7 @@ Then(
   async ({ commonItemsPage, keyProjectRolesPage }, datasetName: string) => {
     const dataset = keyProjectRolesPage.keyProjectRolesPageTestData[datasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         if (key === 'primary_sponsor_organisation_text') {
           expect(await keyProjectRolesPage.primary_sponsor_organisation_filled_text.getAttribute('value')).toBe(
             dataset[key]
@@ -97,7 +97,7 @@ Then(
     const errorMessageSummaryDataset = keyProjectRolesPage.keyProjectRolesPageTestData[errorMessageSummaryDatasetName];
     const invalidFieldsDataset = keyProjectRolesPage.keyProjectRolesPageTestData[invalidFieldsDatasetName];
     for (const key in invalidFieldsDataset) {
-      if (Object.prototype.hasOwnProperty.call(invalidFieldsDataset, key)) {
+      if (Object.hasOwn(invalidFieldsDataset, key)) {
         await commonItemsPage.validateErrorMessage(
           errorMessageFieldDataset,
           errorMessageSummaryDataset,

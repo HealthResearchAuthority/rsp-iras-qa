@@ -553,7 +553,7 @@ Feature: User Administration: Manage Users - Create user
       | Committee_Dropdown       |
       | Access_Required_Checkbox |
 
-  @rsp-4390 @ValidateActiveReviewbodies @jsEnabled @fail
+  @rsp-4390 @ValidateActiveReviewbodies @jsEnabled
   Scenario Outline: Validate the review body field in the 'Add a new user profile' page incorporates all currently enabled review bodies from the Manage review bodies page when the javascript is enabled
     Then I fill the new user profile page using '<Add_User_Profile>'
     And I capture the page screenshot
@@ -574,7 +574,7 @@ Feature: User Administration: Manage Users - Create user
       | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer   | Advanced_Filter_All_Countries_Active | Country_Checkbox |
       | Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator | Advanced_Filter_All_Countries_Active | Country_Checkbox |
 
-  @rsp-4390 @ValidateActiveReviewbodies @jsDisabled @fail
+  @rsp-4390 @ValidateActiveReviewbodies @jsDisabled
   Scenario Outline: Validate the review body field in the 'Add a new user profile' page incorporates all currently enabled review bodies from the Manage review bodies page when the javascript is disabled
     Then I fill the new user profile page using '<Add_User_Profile>'
     And I capture the page screenshot

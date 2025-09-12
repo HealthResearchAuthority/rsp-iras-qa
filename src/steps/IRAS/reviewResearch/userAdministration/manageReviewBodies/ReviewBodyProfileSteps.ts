@@ -158,7 +158,7 @@ Then(
   async ({ commonItemsPage, reviewBodyProfilePage }, datasetName: string) => {
     const dataset = reviewBodyProfilePage.reviewBodyProfilePageData[datasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         const labelVal = await commonItemsPage.getUiLabel(key, reviewBodyProfilePage);
         expect.soft(labelVal).toBe(dataset[key]);
       }

@@ -6,7 +6,7 @@ const { When, Then } = createBdd(test);
 When('I update user profile with {string}', async ({ commonItemsPage, editUserProfilePage }, datasetName: string) => {
   const dataset = editUserProfilePage.editUserProfilePageTestData[datasetName];
   for (const key in dataset) {
-    if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+    if (Object.hasOwn(dataset, key)) {
       await commonItemsPage.fillUIComponent(dataset, key, editUserProfilePage);
     }
   }
@@ -64,7 +64,7 @@ Then(
   async ({ commonItemsPage, manageUsersPage }, datasetName: string) => {
     const dataset = manageUsersPage.manageUsersPageTestData.Manage_Users_Page[datasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         const labelVal = await commonItemsPage.getUiLabel(key, manageUsersPage);
         expect(labelVal).toBe(dataset[key]);
       }
