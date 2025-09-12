@@ -35,6 +35,7 @@ When(
       myResearchProjectsPage,
       searchModificationsPage,
       modificationsReadyToAssignPage,
+      selectStudyWideReviewerPage,
     },
     page: string
   ) => {
@@ -77,6 +78,9 @@ When(
         break;
       case 'Modifications_Tasklist_Page':
         await modificationsReadyToAssignPage.assertOnModificationsReadyToAssignPage();
+        break;
+      case 'Select_Study_Wide_Reviewer_Page':
+        await selectStudyWideReviewerPage.assertOnSelectStudyWideReviewerPage();
         break;
       default:
         throw new Error(`${page} is not a valid option`);
@@ -670,6 +674,8 @@ Given(
       searchModificationsPage,
       modificationsReadyToAssignPage,
       approvalsPage,
+      myTaskListPage,
+      manageUsersPage,
     },
     page: string
   ) => {
@@ -719,6 +725,14 @@ Given(
         await approvalsPage.goto();
         await approvalsPage.assertOnApprovalsPage();
         break;
+      case 'SWR_My_Tasklist_Page':
+        await myTaskListPage.goto();
+        await myTaskListPage.assertOnMyTaskListPage();
+        break;
+      case 'Manage_Users_Page':
+        await manageUsersPage.goto();
+        await manageUsersPage.assertOnManageUsersPage();
+        break;
       default:
         throw new Error(`${page} is not a valid option`);
     }
@@ -728,7 +742,7 @@ Given(
 Given(
   'I have navigated to the {string} as {string}',
   async (
-    { homePage, systemAdministrationPage, accessDeniedPage, myResearchProjectsPage, approvalsPage },
+    { homePage, systemAdministrationPage, accessDeniedPage, myResearchProjectsPage, approvalsPage, myTaskListPage },
     page: string,
     user: string
   ) => {
@@ -765,7 +779,10 @@ Given(
         await myResearchProjectsPage.goto();
         await accessDeniedPage.assertOnAccessDeniedPage();
         break;
-
+      case 'SWR_My_Tasklist_Page':
+        await myTaskListPage.goto();
+        await myTaskListPage.assertOnMyTaskListPage();
+        break;
       default:
         throw new Error(`${page} is not a valid option`);
     }

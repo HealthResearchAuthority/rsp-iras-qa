@@ -7,7 +7,8 @@
     "advanced_filter_label": "Advanced filters",
     "modification_checkbox": "selectedOrganisationIds",
     "tasklist_days_suffix": "days",
-    "maxPagesToVisit": 2
+    "maxPagesToVisit": 2,
+    "iras_id_search_box_label": "IRAS ID"
   },
 
   "Label_Texts": {
@@ -15,5 +16,27 @@
     "modification_id_label": "Modification ID",
     "date_submitted_label": "Date submitted",
     "days_since_submission_label": "Days since submission"
+  },
+  "Iras_Id": {
+    "Valid_Iras_Id_Ln_England_Pn_England": {
+      "iras_id_text": "1234587"
+    }
+  },
+  "Modification_Id": {
+    "Modification_Id_Ln_England_Pn_England_One": {
+      "modification_id_checkbox": ["1234587/19"]
+    },
+    "Modification_Id_Ln_England_Pn_England_Two": {
+      "modification_id_checkbox": ["1234587/2"]
+    },
+    "Modification_Id_Ln_England_Pn_England_Three_Four": {
+      "modification_id_checkbox": ["1234587/3", "1234587/4"]
+    },
+    "Modification_Id_Ln_England_Pn_England_Five_Six": {
+      "modification_id_checkbox": ["1234587/5", "1234587/6"]
+    },
+    "Modification_Id_Ln_England_Pn_England_All_Assigned_From_WFC_To_SWR": {
+      "modification_id_checkbox": ["1234587/1", "1234587/2", "1234587/3", "1234587/4"]
+    }
   }
 }
