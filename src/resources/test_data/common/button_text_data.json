@@ -118,6 +118,9 @@
     "Lead_Nation": "Lead Nation"
   },
   "Modifications_Tasklist_Page": {
+    "Apply_Filters": "Apply filters",
+    "Search": "Search",
+    "Advanced_Filters": "Advanced filters",
     "Modification_Id": "Modification ID",
     "Short_Project_Title": "Short project title",
     "Modification_Type": "Modification type",

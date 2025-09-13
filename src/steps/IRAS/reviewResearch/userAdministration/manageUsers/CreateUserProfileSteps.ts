@@ -42,7 +42,7 @@ When(
         if (isDuplicateEmail && key === 'email_address_text') {
           const locator = createUserProfilePage[key];
           const [email] = await userListReviewBodyPage.getUserEmail();
-          const searchKey = await userListReviewBodyPage.getSearchKey();
+          const searchKey = await commonItemsPage.getSearchKey();
           const uniqueEmail = await createUserProfilePage.getUniqueEmail();
           const valueToFill = email || searchKey || uniqueEmail;
           if (valueToFill) {

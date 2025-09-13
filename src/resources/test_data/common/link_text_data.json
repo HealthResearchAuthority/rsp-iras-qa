@@ -157,6 +157,11 @@
     "Clear_All_Filters": "Clear all filters",
     "Back": "Back"
   },
+  "Modifications_Tasklist_Page": {
+    "Date_Submitted_Filter_Panel": "Date submitted",
+    "Short_Project_Title_Filter_Panel": "Short project title",
+    "Clear_All_Filters": "Clear all filters"
+  },
   "Select_Area_Of_Change_Page": {
     "Back": "Back",
     "Remove_This_Change": "Remove this change"

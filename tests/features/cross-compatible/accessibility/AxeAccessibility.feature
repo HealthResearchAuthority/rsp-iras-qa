@@ -867,6 +867,18 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
+  @axeAccessibilityModficationsTasklistPageWithFilters @ApplicantUser
+  Scenario: Modifications tasklist page with active filters
+    Given I have navigated to the 'Modifications_Tasklist_Page'
+    And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
+    And I 'can' see the advanced filters panel
+    And I open each of the modification tasklist filters
+    When I fill the modifications tasklist search and filter options with 'Title_Date_Range_Single'
+    And I click the 'Apply_Filters' button on the 'Modifications_Tasklist_Page'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
   @axeAccessibilitySelectAreaOfChange @ApplicantUser
   Scenario: Modifications select area of change
     Given I have navigated to the my research projects page
