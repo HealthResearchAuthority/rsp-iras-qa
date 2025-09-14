@@ -9,9 +9,9 @@ When(
     {
       manageReviewBodiesPage,
       manageUsersPage,
-      userListReviewBodyPage,
       searchAddUserReviewBodyPage,
       searchModificationsPage,
+      modificationsReadyToAssignPage,
       commonItemsPage,
       participatingOrganisationsPage,
     },
@@ -31,6 +31,9 @@ When(
         ];
     } else if (searchType.toLowerCase() == 'modifications') {
       searchQueryDataset = searchModificationsPage.searchModificationsPageTestData.Search_Queries[searchQueryName];
+    } else if (searchType.toLowerCase() == 'tasklist') {
+      searchQueryDataset =
+        modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Search_Queries[searchQueryName];
     } else if (searchType.toLowerCase() == 'organisations') {
       searchQueryDataset =
         participatingOrganisationsPage.participatingOrganisationsPageTestData.Search_Queries[searchQueryName];
@@ -44,7 +47,7 @@ When(
       searchKey = searchQueryDataset['search_input_text'];
     }
     expect(searchKey).toBeTruthy();
-    await userListReviewBodyPage.setSearchKey(searchKey);
+    await commonItemsPage.setSearchKey(searchKey);
     await commonItemsPage.search_text.fill(searchKey);
   }
 );
@@ -52,7 +55,7 @@ When(
 Given(
   'the system displays user records matching the search criteria',
   async ({ userListReviewBodyPage, commonItemsPage }) => {
-    const searchKey = await userListReviewBodyPage.getSearchKey();
+    const searchKey = await commonItemsPage.getSearchKey();
     const searchTerms = await commonItemsPage.splitSearchTerm(searchKey);
     const userList = await commonItemsPage.getAllUsersFromTheTable();
     const userListAfterSearch: string[] = confirmArrayNotNull(userList.get('searchResultValues'));
