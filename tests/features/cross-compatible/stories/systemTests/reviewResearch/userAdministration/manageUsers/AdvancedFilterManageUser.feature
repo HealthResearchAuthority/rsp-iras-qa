@@ -85,20 +85,30 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Existing_QA_User_First_Name | Advanced_Filter_Eight |
             | Existing_QA_User_First_Name | Advanced_Filter_Nine  |
             | Existing_QA_User_First_Name | Advanced_Filter_Ten   |
-
     @ValidateLastLoggedInInvalidDateErrorMessageManageUser
-    Scenario Outline: Verify the user can see validation error message that Search to date must be after Search from date
+    Scenario Outline: Verify the user can see validation error message that Search to date must be after Search from date in manage user page
         And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
-        And I select advanced filters in the manage users page using '<Advanced_Filters>'
+        And I select advanced filters in the manage users page using '<Date_Submitted_Invalid_Data>'
         And I capture the page screenshot
         And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
         And I capture the page screenshot
-        Then I validate '<Field_Error_Message>' displayed on advanced filters in manage users page
+        Then I validate '<Field_ErroField_And_Summary_Error_Message>' displayed on advanced filters in 'Manage_Users_Page'
         And I capture the page screenshot
         Examples:
-            | Advanced_Filters                            | Field_Error_Message             |
-            | Advanced_Filter_Last_Logged_In_Invalid_Date | Field_Error_Date_Last_Logged_In |
-
+            | Date_Submitted_Invalid_Data                  | Field_ErroField_And_Summary_Error_Message |
+            | Last_Logged_In_To_Date_Before_From_Date      | Invalid_Date_Range_To_Before_From_Error   |
+            | Last_Logged_In_No_Month_From_Date            | Invalid_Date_From_Error                   | 
+            | Last_Logged_In_No_Day_From_Date              | Invalid_Date_From_Error                   |     
+            | Last_Logged_In_No_Year_From_Date             | Invalid_Date_From_Error                   |
+            | Last_Logged_In_No_Month_To_Date              | Invalid_Date_To_Error                     |
+            | Last_Logged_In_No_Day_To_Date                | Invalid_Date_To_Error                     |
+            | Last_Logged_In_No_Year_To_Date               | Invalid_Date_To_Error                     | 
+            | Last_Logged_In_Invalid_Year_Number_From_Date | Invalid_Date_From_Error                   | 
+            | Last_Logged_In_Invalid_Year_Number_To_Date   | Invalid_Date_To_Error                     |  
+            | Last_Logged_In_Invalid_Day_Number_To_Date    | Invalid_Date_To_Error                     | 
+            | Last_Logged_In_Invalid_Day_Letters_To_Date   | Invalid_Date_To_Error                     |    
+            | Last_Logged_In_Invalid_Year_Letters_To_Date  | Invalid_Date_To_Error                     |
+   
     @VerifyNoResultsFoundInvalidSearchAloneManageUser
     Scenario: Verify the user can see no matching results found message on clicking search button with invalid user name
         When I enter '<Search_Queries>' into the search field for manage users page
@@ -277,3 +287,71 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Advanced_Filter_Country_No_Review_Body_No_Role_Workflow_Coordinator     |
             | Advanced_Filter_Country_No_Review_Body_All_Role_All                     |
             | Advanced_Filter_Country_No_Review_Body_No_Role_No_Status_Active_To_Date |
+
+@testOnly
+    Scenario Outline: Verify the user is able to create new user profiles with various roles like study-wide reviewer or workflow co-ordinator, with an audit history log
+        And I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
+        And I can see the add a new user profile page
+        When I fill the new user profile page using '<Add_User_Profile>'
+        And I capture the page screenshot
+        And I click the 'Continue' button on the 'Create_User_Profile_Page'
+        Then I can see the check and create user profile page
+        And I capture the page screenshot
+        And I can see previously filled values in the new user profile page for '<Add_User_Profile>' displayed on the check and create user profile page
+        When I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
+        Then I can see the create user profile confirmation page for '<Add_User_Profile>'
+        And I capture the current time for 'Audit_History_User_Page'
+        And I capture the page screenshot
+        When I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
+        And I can see the 'Manage_Users_Page'
+        And I capture the page screenshot
+        When I enter '<Search_Queries>' into the search field for manage users page
+        And I capture the page screenshot
+        And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
+        And I capture the page screenshot
+        And I select advanced filters in the manage users page using '<Advanced_Filters_Users>'
+        And I capture the page screenshot
+        And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
+        And I capture the page screenshot
+        And I search and click on view edit link for unique '<Add_User_Profile>' user with 'Active' status from the manage user page
+        Then I can see the user profile page
+        And I can see the '<Add_User_Profile>' user has the correct roles assigned on their profile page
+        When I click the change link against '<Field_Name>' on the user profile page
+        Then I can see that the '<Add_User_Profile>' users data persists on the edit profile page
+        And I capture the page screenshot
+        And I click the 'Back' link on the 'Edit_User_Profile_Page'
+        When I click the 'View_Users_Audit_History' link on the 'User_Profile_Page'
+        Then I can see the audit history page of the selected '<Add_User_Profile>' user
+        And I capture the page screenshot
+        And I can see the audit history for the newly created '<Add_User_Profile>' user with roles assigned
+        And I have navigated to the 'Manage_Review_Bodies_Page'
+        When I enter '<Organisation_Name>' into the search field
+        And I capture the page screenshot
+        And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
+        And I click the 'Advanced_Filters' button on the 'Manage_Review_Bodies_Page'
+        And I capture the page screenshot
+        And I select advanced filters in the manage review bodies page using '<Advanced_Filters_Review_Bodies>'
+        And I capture the page screenshot
+        And I click the 'Apply_filters' button on the 'Manage_Review_Bodies_Page'
+        And I capture the page screenshot
+        Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters_Review_Bodies>' in the 'Manage_Review_Bodies_Page'
+        And I can see the '<Organisation_Name>' should be present in the list with 'Active' status in the manage review bodies page
+        And I capture the page screenshot
+        Then I click the view edit link
+        And I capture the page screenshot
+        And I can see the review body profile page
+        And I capture the page screenshot
+        And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
+        And I capture the page screenshot
+        Then I can see the user list page of the review body
+        And I capture the name of the newly added user in the user list page of the review body
+        When I enter 'name of the newly created user' into the search field
+        And I click the 'Search' button on the 'Review_Body_User_List_Page'
+        And I capture the page screenshot
+        Then the system displays search results matching the search criteria
+
+        Examples:
+            | Add_User_Profile                                   | Field_Name | Organisation_Name                                                                | Advanced_Filters_Users                                                     | Search_Queries            | Advanced_Filters_Review_Bodies |
+            | Valid_Data_In_All_Fields_Role_Studywide_Reviewer   | Role       | QA Automation Health Research Authority (HRA)                                    | Advanced_Filter_Review_body_HRA_Role_Studywide_Reviewer_Status_Active      | Role_Studywide_Reviewer   | Advanced_Filter_Eng_Active     |
+           # | Valid_Data_In_All_Fields_Role_Workflow_Coordinator | Role       | QA Automation National Research Service Permissions Coordination Centre (NRSPCC) | Advanced_Filter_Review_body_NRSPCC_Role_Workflow_Coordinator_Status_Active | Role_Workflow_Coordinator | Advanced_Filter_Sco_Active     |
+

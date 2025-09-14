@@ -251,12 +251,80 @@ Then('I can see the {string} ui labels in manage users page', async ({ manageUse
 });
 
 Then(
-  'I validate {string} displayed on advanced filters in manage users page',
-  async ({ manageUsersPage }, errorMessageFieldDatasetName: string) => {
-    const fieldErrorMessagesExpected =
-      manageUsersPage.manageUsersPageTestData.Error_Message_Field_Dataset[errorMessageFieldDatasetName];
-    const fieldErrorMessagesActualValues = await manageUsersPage.date_last_logged_in_error_message.textContent();
-    expect(fieldErrorMessagesActualValues).toEqual(fieldErrorMessagesExpected);
+  'I validate {string} displayed on advanced filters in {string}',
+  async ({ commonItemsPage, manageUsersPage }, errorMessageFieldAndSummaryDatasetName: string, pageKey: string) => {
+    let errorMessageFieldDataset: any;
+    if (pageKey === 'Manage_Users_Page') {
+      errorMessageFieldDataset =
+        manageUsersPage.manageUsersPageTestData.Error_Validation[errorMessageFieldAndSummaryDatasetName];
+    }
+    await expect(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
+    const allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset);
+    const summaryErrorActualValues = await commonItemsPage.getSummaryErrorMessages();
+    expect(summaryErrorActualValues).toEqual(allSummaryErrorExpectedValues);
+    for (const key in errorMessageFieldDataset) {
+      if (Object.hasOwn(errorMessageFieldDataset, key)) {
+        const expectedMessage = errorMessageFieldDataset[key];
+        if (
+          errorMessageFieldAndSummaryDatasetName === 'Invalid_Date_Range_To_Before_From_Error' ||
+          errorMessageFieldAndSummaryDatasetName === 'Invalid_Date_To_Error'
+        ) {
+          const actualMessage = await manageUsersPage.date_last_logged_in_to_date_error_message.textContent();
+          expect(actualMessage).toEqual(expectedMessage);
+        } else if (errorMessageFieldAndSummaryDatasetName === 'Invalid_Date_From_Error') {
+          const actualMessage = await manageUsersPage.date_last_logged_in_from_date_error_message.textContent();
+          expect(actualMessage).toEqual(expectedMessage);
+        } else {
+          throw new Error(`Unhandled error message dataset name: ${errorMessageFieldAndSummaryDatasetName}`);
+        }
+      }
+    }
+  }
+);
+
+Then(
+  'I validate {string} displayed on {string} in advanced filters',
+  async (
+    { commonItemsPage, searchModificationsPage },
+    errorMessageFieldAndSummaryDatasetName: string,
+    pageKey: string
+  ) => {
+    let errorMessageFieldDataset: JSON;
+    let page: any;
+    if (pageKey === 'Search_Modifications_Page') {
+      errorMessageFieldDataset =
+        searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.Error_Validation[
+          errorMessageFieldAndSummaryDatasetName
+        ];
+      page = searchModificationsPage;
+    }
+    await expect(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
+    const allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset);
+    const summaryErrorActualValues = await commonItemsPage.getSummaryErrorMessages();
+    expect(summaryErrorActualValues).toEqual(allSummaryErrorExpectedValues);
+    for (const key in errorMessageFieldDataset) {
+      if (Object.hasOwn(errorMessageFieldDataset, key)) {
+        const expectedMessage = errorMessageFieldDataset[key];
+        if (
+          errorMessageFieldAndSummaryDatasetName === 'Invalid_Date_Range_To_Before_From_Error' ||
+          errorMessageFieldAndSummaryDatasetName === 'Invalid_Date_To_Error'
+        ) {
+          const actualMessage = await searchModificationsPage.date_submitted_to_date_error.textContent();
+          expect(actualMessage).toEqual(expectedMessage);
+        } else if (errorMessageFieldAndSummaryDatasetName === 'Invalid_Date_From_Error') {
+          const actualMessage = await searchModificationsPage.date_submitted_from_date_error.textContent();
+          expect(actualMessage).toEqual(expectedMessage);
+        } else if (errorMessageFieldAndSummaryDatasetName === 'Sponsor_Organisation_Min_Char_Error') {
+          const actualMessage =
+            await searchModificationsPage.sponsor_organisation_jsdisabled_min_error_message.textContent();
+          expect(actualMessage).toEqual(expectedMessage);
+        } else {
+          throw new Error(`Unhandled error message dataset name: ${errorMessageFieldAndSummaryDatasetName}`);
+        }
+        const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
+        await expect(element).toBeInViewport();
+      }
+    }
   }
 );
 

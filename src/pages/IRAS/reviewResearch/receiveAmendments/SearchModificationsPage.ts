@@ -355,9 +355,9 @@ export default class SearchModificationsPage {
   //Page Methods
 
   async assertOnSearchModificationsPage() {
-    await expect(this.page_heading).toBeVisible();
-    await expect(this.page_guidance_text).toBeVisible();
-    expect(await this.page.title()).toBe(this.searchModificationsPageTestData.Search_Modifications_Page.title);
+    await expect.soft(this.page_heading).toBeVisible();
+    await expect.soft(this.page_guidance_text).toBeVisible();
+    expect.soft(await this.page.title()).toBe(this.searchModificationsPageTestData.Search_Modifications_Page.title);
   }
 
   async goto() {
