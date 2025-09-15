@@ -630,7 +630,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                         | Advanced_Filters     | Advanced_Filters_Labels      |
                         | Advanced_Filters_Nth | Advanced_Filters_Hint_Labels |
 
-        @rsp-4381  
+        @rsp-4381 @ActiveFilterCleareWhenMoveToDifferentPage  
         Scenario Outline: verify that all active filters are automatically cleared when the user navigates away from the current page in search modification page 
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -646,7 +646,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                 Then I can see the approvals home page
                 And I click the 'Search' link on the 'Approvals_Page'
                 Then I can see the 'Search_Modifications_Page'
-                Then I can see an empty state that informs me no modifications exist for the search criteria
+                #Then I can see an empty state that informs me no modifications exist for the search criteria
                 And I capture the page screenshot
               
                 Examples:

@@ -321,7 +321,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
             | Date_Submitted        |
             | Days_Since_Submission |
 
-    @rsp-4381  @KNOWN-DEFECT-RSP-5045 @fail
+    @rsp-4381  @KNOWN-DEFECT-RSP-5045 @fail @ActiveFilterCleareWhenMoveToDifferentPage
     Scenario Outline: verify that all active filters are automatically cleared when the user navigates away from the current page in modification tasklist page 
         And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel

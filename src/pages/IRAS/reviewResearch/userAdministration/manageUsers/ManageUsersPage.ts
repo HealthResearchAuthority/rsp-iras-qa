@@ -374,9 +374,9 @@ export default class ManageUsersPage {
   }
 
   async assertOnManageUsersPage() {
-    await expect(this.page_heading).toBeVisible();
-    expect(await this.page.title()).toBe(this.manageUsersPageTestData.Manage_Users_Page.title);
-    await expect(this.search_hint_text).toBeVisible();
+    await expect.soft(this.page_heading).toBeVisible();
+    expect.soft(await this.page.title()).toBe(this.manageUsersPageTestData.Manage_Users_Page.title);
+    await expect.soft(this.search_hint_text).toBeVisible();
   }
 
   async goto(pageSize?: string, searchQuery?: string) {

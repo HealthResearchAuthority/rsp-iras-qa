@@ -134,9 +134,9 @@ export default class ManageReviewBodiesPage {
     await this.assertOnManageReviewBodiesPage();
   }
   async assertOnManageReviewBodiesPage() {
-    await expect(this.pageHeading).toBeVisible();
-    expect(await this.page.title()).toBe(this.manageReviewBodiesPageData.Manage_Review_Body_Page.title);
-    await expect(this.search_hint_text).toBeVisible();
+    await expect.soft(this.pageHeading).toBeVisible();
+    expect.soft(await this.page.title()).toBe(this.manageReviewBodiesPageData.Manage_Review_Body_Page.title);
+    await expect.soft(this.search_hint_text).toBeVisible();
   }
 
   async getRowByOrgName(orgName: string, exactMatch: boolean) {

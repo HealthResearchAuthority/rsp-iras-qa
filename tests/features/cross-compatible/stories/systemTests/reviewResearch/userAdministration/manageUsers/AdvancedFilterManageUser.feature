@@ -278,7 +278,7 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Advanced_Filter_Country_No_Review_Body_All_Role_All                     |
             | Advanced_Filter_Country_No_Review_Body_No_Role_No_Status_Active_To_Date |   
     
-    @rsp-4381 
+    @rsp-4381 @ActiveFilterCleareWhenMoveToDifferentPage 
     Scenario Outline: verify that all active filters are automatically cleared when the user navigates away from the current page in mange user page
         And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
         And I select advanced filters in the manage users page using '<Advanced_Filters>'
@@ -302,7 +302,7 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Navigation_Method        | Advanced_Filters     |
             | page number              | Advanced_Filter_Nine |
 
-    @rsp-4381 @verifyUserCreation  
+    @rsp-4381 @ActiveFilterRemainAppliedAfterCreateNewUserProfile 
     Scenario Outline: Verify that the active filter remains applied after creating a new user profile with valid data
         And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
         And I select advanced filters in the manage users page using '<Advanced_Filters>'
@@ -333,7 +333,7 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Add_User_Profile                                      | Validation_Text_Manage_Users_List | Status_Enabled | Advanced_Filters     |
             |  Valid_Data_In_All_Fields_Role_System_Administrator   | Label_Texts_Manage_Users_List     | Enabled        | Advanced_Filter_Nine | 
     
-    @rsp-4381    
+    @rsp-4381 @ActiveFilterRemainAppliedAfterEditTheManageUser @testOnly  
     Scenario Outline: Verify that the active filter remains applied after edit the manage user and save their changes
         And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
         And I select advanced filters in the manage users page using '<Advanced_Filters>'
