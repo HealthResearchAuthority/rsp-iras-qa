@@ -138,6 +138,17 @@
     "Days_Since_Submission": "Days since submission",
     "Continue_to_assign_modifications": "Continue to assign modifications"
   },
+  "My_Modifications_Tasklist_Page": {
+    "Apply_Filters": "Apply filters",
+    "Search": "Search",
+    "Advanced_Filters": "Advanced filters",
+    "Modification_Id": "Modification ID",
+    "Short_Project_Title": "Short project title",
+    "Modification_Type": "Modification type",
+    "Date_Submitted": "Date submitted",
+    "Days_Since_Submission": "Days since submission",
+    "Status": "Status"
+  },
   "Participating_Organisations_Page": {
     "Save_Continue": "Save and continue",
     "Save_For_Later": "Save for later",

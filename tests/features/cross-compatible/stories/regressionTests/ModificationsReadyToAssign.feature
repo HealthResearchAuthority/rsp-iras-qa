@@ -13,11 +13,11 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         And I capture the page screenshot
         And I can see the date from and date to filters have the expected hint text
         And I can see the days since submission filter has the expected hint text
-        When I fill the modifications tasklist search and filter options with '<Search_Filter_Input>'
+        When I fill the 'assign' modifications tasklist search and filter options with '<Search_Filter_Input>'
         And I capture the page screenshot
         And I click the '<Button>' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
-        Then I can now see the modifications ready to assign table contains the expected search results for '<Search_Filter_Input>'
+        Then I can now see the table of modifications 'ready to assign' contains the expected search results for '<Search_Filter_Input>'
         And I 'cannot' see the advanced filters panel
         And I 'can' see active filters displayed
         And I can see active filters displayed for '<Search_Filter_Input>'
@@ -38,7 +38,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         And I 'can' see the advanced filters panel
         And I open each of the modification tasklist filters
         And I capture the page screenshot
-        When I fill the modifications tasklist search and filter options with 'Date_From_Multi'
+        When I fill the 'assign' modifications tasklist search and filter options with 'Date_From_Multi'
         And I capture the page screenshot
         And I click the 'Apply_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see active filters displayed
@@ -47,7 +47,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
         And I open each of the modification tasklist filters
-        When I fill the modifications tasklist search and filter options with 'Existing_Title_Partial'
+        When I fill the 'assign' modifications tasklist search and filter options with 'Existing_Title_Partial'
         And I capture the page screenshot
         And I click the 'Apply_Filters' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
@@ -66,7 +66,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         And I 'can' see the advanced filters panel
         And I open each of the modification tasklist filters
         And I capture the page screenshot
-        When I fill the modifications tasklist search and filter options with 'Title_Date_Range_Multi'
+        When I fill the 'assign' modifications tasklist search and filter options with 'Title_Date_Range_Multi'
         And I capture the page screenshot
         And I click the 'Apply_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see active filters displayed
@@ -82,17 +82,17 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
     Scenario Outline: Verify the user is able to sort the modifications tasklist by ascending and descending order for each results table column
         When I click the '<Sort_Button>' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
-        Then I can see the tasklist of modifications ready to assign is sorted by '<Initial_Sort>' order of the '<Sort_Field>'
+        Then I can see the tasklist of modifications 'ready to assign' is sorted by '<Initial_Sort>' order of the '<Sort_Field>'
         When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
         And I capture the page screenshot
-        Then I can see the tasklist of modifications ready to assign is sorted by '<Initial_Sort>' order of the '<Sort_Field>'
+        Then I can see the tasklist of modifications 'ready to assign' is sorted by '<Initial_Sort>' order of the '<Sort_Field>'
         When I click the '<Sort_Button>' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
         Then I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
-        And I can see the tasklist of modifications ready to assign is sorted by '<Secondary_Sort>' order of the '<Sort_Field>'
+        And I can see the tasklist of modifications 'ready to assign' is sorted by '<Secondary_Sort>' order of the '<Sort_Field>'
         When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
         And I capture the page screenshot
-        And I can see the tasklist of modifications ready to assign is sorted by '<Secondary_Sort>' order of the '<Sort_Field>'
+        And I can see the tasklist of modifications 'ready to assign' is sorted by '<Secondary_Sort>' order of the '<Sort_Field>'
 
         Examples:
             | Sort_Button           | Sort_Field            | Initial_Sort | Secondary_Sort |
@@ -106,7 +106,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
         And I open each of the modification tasklist filters
-        When I fill the modifications tasklist search and filter options with '<Search_Filter_Input>'
+        When I fill the 'assign' modifications tasklist search and filter options with '<Search_Filter_Input>'
         And I capture the page screenshot
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
@@ -124,7 +124,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         And I 'can' see the advanced filters panel
         And I open each of the modification tasklist filters
         And I capture the page screenshot
-        When I fill the modifications tasklist search and filter options with '<Date_Filter_Input>'
+        When I fill the 'assign' modifications tasklist search and filter options with '<Date_Filter_Input>'
         And I capture the page screenshot
         And I click the 'Apply_Filters' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot

@@ -38,6 +38,7 @@ When(
       myResearchProjectsPage,
       searchModificationsPage,
       modificationsReadyToAssignPage,
+      myModificationsTasklistPage,
     },
     page: string
   ) => {
@@ -83,6 +84,14 @@ When(
         break;
       case 'Modifications_Tasklist_Page':
         await modificationsReadyToAssignPage.assertOnModificationsReadyToAssignPage();
+        await commonItemsPage.setNoOfResultsBeforeSearch(
+          await commonItemsPage.extractNumFromSearchResultCount(
+            await commonItemsPage.search_results_count.textContent()
+          )
+        );
+        break;
+      case 'My_Modifications_Tasklist_Page':
+        await myModificationsTasklistPage.assertOnMyModificationsTasklistPage();
         await commonItemsPage.setNoOfResultsBeforeSearch(
           await commonItemsPage.extractNumFromSearchResultCount(
             await commonItemsPage.search_results_count.textContent()
@@ -402,6 +411,7 @@ Then(
       affectedOrganisationSelectionPage,
       addDocumentsModificationsPage,
       modificationsReadyToAssignPage,
+      myModificationsTasklistPage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
@@ -466,6 +476,12 @@ Then(
           errorMessageFieldAndSummaryDatasetName
         ];
       page = modificationsReadyToAssignPage;
+    } else if (pageKey == 'My_Modifications_Tasklist_Page') {
+      errorMessageFieldDataset =
+        myModificationsTasklistPage.myModificationsTasklistPageTestData.Validation[
+          errorMessageFieldAndSummaryDatasetName
+        ];
+      page = myModificationsTasklistPage;
     }
     let allSummaryErrorExpectedValues: any;
     let summaryErrorActualValues: any;
@@ -692,6 +708,7 @@ Given(
       searchModificationsPage,
       modificationsReadyToAssignPage,
       approvalsPage,
+      myModificationsTasklistPage,
     },
     page: string
   ) => {
@@ -754,6 +771,15 @@ Given(
       case 'Approvals_Page':
         await approvalsPage.goto();
         await approvalsPage.assertOnApprovalsPage();
+        break;
+      case 'My_Modifications_Tasklist_Page':
+        await myModificationsTasklistPage.goto();
+        await myModificationsTasklistPage.assertOnMyModificationsTasklistPage();
+        await commonItemsPage.setNoOfResultsBeforeSearch(
+          await commonItemsPage.extractNumFromSearchResultCount(
+            await commonItemsPage.search_results_count.textContent()
+          )
+        );
         break;
       default:
         throw new Error(`${page} is not a valid option`);
@@ -1054,7 +1080,7 @@ Then('I {string} see active filters displayed', async ({ commonItemsPage }, visi
 
 Then(
   'I can see active filters displayed for {string}',
-  async ({ commonItemsPage, modificationsReadyToAssignPage }, searchInput: string) => {
+  async ({ commonItemsPage, modificationsReceivedCommonPage }, searchInput: string) => {
     let assertionMade = false;
     if (searchInput.toLowerCase().includes('title')) {
       assertionMade = true;
@@ -1081,12 +1107,12 @@ Then(
     if (searchInput.toLowerCase().includes('days')) {
       if (searchInput.toLowerCase().includes('from') || searchInput.toLowerCase().includes('range')) {
         assertionMade = true;
-        const expectedActiveFilterText = `${commonItemsPage.searchFilterResultsData.active_filter_days_since_label} ${commonItemsPage.searchFilterResultsData.label_value_separator} ${commonItemsPage.searchFilterResultsData.from_separator} ${await modificationsReadyToAssignPage.getDaysSinceSubmissionFromFilter()}`;
+        const expectedActiveFilterText = `${commonItemsPage.searchFilterResultsData.active_filter_days_since_label} ${commonItemsPage.searchFilterResultsData.label_value_separator} ${commonItemsPage.searchFilterResultsData.from_separator} ${await modificationsReceivedCommonPage.getDaysSinceSubmissionFromFilter()}`;
         await expect(commonItemsPage.active_filter_items.getByText(expectedActiveFilterText)).toBeVisible();
       }
       if (searchInput.toLowerCase().includes('to') || searchInput.toLowerCase().includes('range')) {
         assertionMade = true;
-        const expectedActiveFilterText = `${commonItemsPage.searchFilterResultsData.active_filter_days_since_label} ${commonItemsPage.searchFilterResultsData.label_value_separator} ${commonItemsPage.searchFilterResultsData.to_separator} ${await modificationsReadyToAssignPage.getDaysSinceSubmissionToFilter()}`;
+        const expectedActiveFilterText = `${commonItemsPage.searchFilterResultsData.active_filter_days_since_label} ${commonItemsPage.searchFilterResultsData.label_value_separator} ${commonItemsPage.searchFilterResultsData.to_separator} ${await modificationsReceivedCommonPage.getDaysSinceSubmissionToFilter()}`;
         await expect(commonItemsPage.active_filter_items.getByText(expectedActiveFilterText)).toBeVisible();
       }
     }
@@ -1131,3 +1157,24 @@ When('I can see the date from and date to filters have the expected hint text', 
   await expect(commonItemsPage.date_to_label).toBeVisible();
   await expect(commonItemsPage.date_to_hint_label).toBeVisible();
 });
+
+Then(
+  'Each of the short project titles displayed on the {string} are links',
+  async ({ commonItemsPage }, page: string) => {
+    let columnIndex: number;
+    switch (page) {
+      case 'My_Modifications_Tasklist_Page':
+        columnIndex = 1;
+        break;
+      case 'Modifications_Tasklist_Page':
+        columnIndex = 2;
+        break;
+      default:
+        throw new Error(`${page} is not a valid option`);
+    }
+    for (const row of await commonItemsPage.tableBodyRows.all()) {
+      const shortTitleTextLink = row.getByRole('cell').nth(columnIndex).getByRole('link');
+      expect(shortTitleTextLink).toBeVisible();
+    }
+  }
+);

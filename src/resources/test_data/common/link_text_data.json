@@ -163,6 +163,12 @@
     "Short_Project_Title_Filter_Panel": "Short project title",
     "Clear_All_Filters": "Clear all filters"
   },
+  "My_Modifications_Tasklist_Page": {
+    "Back": "Back",
+    "Date_Submitted_Filter_Panel": "Date submitted",
+    "Short_Project_Title_Filter_Panel": "Short project title",
+    "Clear_All_Filters": "Clear all filters"
+  },
   "Select_Area_Of_Change_Page": {
     "Back": "Back",
     "Remove_This_Change": "Remove this change"
@@ -178,7 +184,8 @@
   "Approvals_Page": {
     "Search": "Search",
     "Back": "Back",
-    "Modifications_Tasklist": "Modifications tasklist"
+    "Modifications_Tasklist": "Modifications tasklist",
+    "My_Tasklist": "My t-list"
   },
   "Affected_Organisation_Selection_Page": {
     "Back": "Back",

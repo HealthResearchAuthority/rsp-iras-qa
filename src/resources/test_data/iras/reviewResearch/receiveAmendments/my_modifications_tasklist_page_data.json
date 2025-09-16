@@ -1,20 +1,19 @@
 {
-  "Modifications_Ready_To_Assign_Page": {
-    "title": "Modifications ready to assign - Modifications - Approvals - System Administration - Health research UK",
-    "modifications_tasklist_link": "Modifications tasklist",
-    "page_heading": "Modifications ready to assign",
-    "page_description": "This page shows all the modifications that are ready for you to assign, where the lead nation is England.",
-    "modification_button_label": "Continue to assign modifications",
+  "My_Modifications_Tasklist_Page": {
+    "title": "My changes to review - Modifications - Approvals - System Administration - Health research UK",
+    "page_heading": "My tasklist",
+    "page_description": "This page shows all the modifications that are ready for you to review.",
     "advanced_filter_label": "Advanced filters",
     "maxPagesToVisit": 2,
     "days_since_suffix": "days"
   },
 
-  "Column_Label_Texts": {
+  "Column": {
     "short_project_title_column_label": "Short project title",
     "modification_id_column_label": "Modification ID",
     "date_submitted_column_label": "Date submitted",
-    "days_since_submission_column_label": "Days since submission"
+    "days_since_submission_column_label": "Days since submission",
+    "status_column_label": "Status"
   },
 
   "Filter_Labels": {
@@ -28,84 +27,84 @@
   },
 
   "Search_Queries": {
-    "Existing_IRAS_ID_Single": { "search_input_text": "9800033" },
-    "Existing_IRAS_ID_Multi": { "search_input_text": "5858567" },
-    "Existing_Partial_IRAS_ID": { "search_input_text": "809" },
-    "Existing_Title_Single": { "short_project_title_text": "short 33" },
-    "Existing_Title_Multi": { "short_project_title_text": "Check" },
-    "Existing_Title_Partial": { "short_project_title_text": "30" },
+    "Existing_IRAS_ID_Single": { "search_input_text": "520397" },
+    "Existing_IRAS_ID_Multi": { "search_input_text": "916481" },
+    "Existing_Partial_IRAS_ID": { "search_input_text": "458" },
+    "Existing_Title_Single": { "short_project_title_text": "Eight 11.08" },
+    "Existing_Title_Multi": { "short_project_title_text": "Five 11.08" },
+    "Existing_Title_Partial": { "short_project_title_text": "This is a short" },
     "Date_Range_Single": {
-      "day_from_text": "15",
-      "month_from_dropdown": "November",
-      "year_from_text": "2024",
-      "day_to_text": "15",
-      "month_to_dropdown": "November",
-      "year_to_text": "2024"
+      "day_from_text": "30",
+      "month_from_dropdown": "July",
+      "year_from_text": "2025",
+      "day_to_text": "30",
+      "month_to_dropdown": "July",
+      "year_to_text": "2025"
     },
     "Date_Range_Multi": {
       "day_from_text": "1",
-      "month_from_dropdown": "November",
-      "year_from_text": "2024",
-      "day_to_text": "1",
-      "month_to_dropdown": "December",
-      "year_to_text": "2024"
+      "month_from_dropdown": "July",
+      "year_from_text": "2025",
+      "day_to_text": "9",
+      "month_to_dropdown": "September",
+      "year_to_text": "2025"
     },
     "Date_From_Multi": {
-      "day_from_text": "3",
-      "month_from_dropdown": "July",
+      "day_from_text": "10",
+      "month_from_dropdown": "September",
       "year_from_text": "2025"
     },
     "Date_To_Multi": {
-      "day_to_text": "1",
-      "month_to_dropdown": "January",
-      "year_to_text": "2001"
+      "day_to_text": "12",
+      "month_to_dropdown": "August",
+      "year_to_text": "2025"
     },
     "Days_Range_Multi": { "days_since_submission_from_text": "0", "days_since_submission_to_text": "100" },
     "Days_Specific_Single": { "days_since_submission_from_text": "", "days_since_submission_to_text": "" },
     "Days_From_Multi": { "days_since_submission_from_text": "100" },
     "Days_To_Multi": { "days_since_submission_to_text": "100" },
-    "IRAS_ID_Title_Single": { "search_input_text": "9800033", "short_project_title_text": "Short 33" },
+    "IRAS_ID_Title_Single": { "search_input_text": "7465363", "short_project_title_text": "Five 30.07" },
     "Title_Date_Range_Single": {
-      "short_project_title_text": "Project 30",
+      "short_project_title_text": "Eight 11.08",
       "day_from_text": "11",
-      "month_from_dropdown": "January",
-      "year_from_text": "2026",
+      "month_from_dropdown": "August",
+      "year_from_text": "2025",
       "day_to_text": "11",
-      "month_to_dropdown": "January",
-      "year_to_text": "2026"
+      "month_to_dropdown": "August",
+      "year_to_text": "2025"
     },
     "IRAS_ID_Title_Date_Range_Single": {
-      "search_input_text": "9800001",
-      "short_project_title_text": "Project 01",
-      "day_from_text": "31",
-      "month_from_dropdown": "December",
+      "search_input_text": "7465363",
+      "short_project_title_text": "Five 30.07",
+      "day_from_text": "30",
+      "month_from_dropdown": "July",
       "year_from_text": "2025",
-      "day_to_text": "31",
-      "month_to_dropdown": "December",
+      "day_to_text": "30",
+      "month_to_dropdown": "July",
       "year_to_text": "2025"
     },
-    "IRAS_ID_Title_Multi": { "search_input_text": "2035678", "short_project_title_text": "Check" },
+    "IRAS_ID_Title_Multi": { "search_input_text": "6483766", "short_project_title_text": "Short project title" },
     "Title_Date_Range_Multi": {
-      "short_project_title_text": "Project 01",
-      "day_from_text": "11",
-      "month_from_dropdown": "November",
-      "year_from_text": "2024",
-      "day_to_text": "31",
-      "month_to_dropdown": "December",
-      "year_to_text": "2025"
+      "short_project_title_text": "This is a short",
+      "day_from_text": "1",
+      "month_from_dropdown": "January",
+      "year_from_text": "2001",
+      "day_to_text": "2",
+      "month_to_dropdown": "January",
+      "year_to_text": "2001"
     },
     "IRAS_ID_Title_Date_Range_Multi": {
-      "search_input_text": "2035678",
-      "short_project_title_text": "Check",
-      "day_from_text": "1",
-      "month_from_dropdown": "September",
+      "search_input_text": "916481",
+      "short_project_title_text": "Five 11.08",
+      "day_from_text": "11",
+      "month_from_dropdown": "August",
       "year_from_text": "2025",
-      "day_to_text": "3",
-      "month_to_dropdown": "September",
+      "day_to_text": "12",
+      "month_to_dropdown": "August",
       "year_to_text": "2025"
     },
     "Title_Days_Range_Multi": {
-      "short_project_title_text": "QA_Automation - This is a short project title",
+      "short_project_title_text": "QA Automation Lead nation:",
       "days_since_submission_from_text": "0",
       "days_since_submission_to_text": "100"
     },
@@ -140,6 +139,12 @@
       "day_to_text": "3",
       "month_to_dropdown": "January",
       "year_to_text": "9"
+    },
+    "Invalid_Date_From_Days_From": {
+      "day_from_text": "3",
+      "month_from_dropdown": "January",
+      "year_from_text": "2009",
+      "days_since_submission_from_text": "10"
     }
   },
   "Validation": {
@@ -152,8 +157,8 @@
     "Invalid_Date_To_Error": {
       "day_to_text": "'Search to' date must be in the correct format"
     },
-    "No_Modifications_Selected_Summary_Only_Error": {
-      "error_message": "Select at least one modification"
+    "Date_Days_Simultaneous_Summary_Only_Error": {
+      "error_message": "'Date submitted' and 'Days since submission' filters can't be applied at the same time - remove one to continue."
     }
   }
 }

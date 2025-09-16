@@ -12,6 +12,7 @@ When(
       searchAddUserReviewBodyPage,
       searchModificationsPage,
       modificationsReadyToAssignPage,
+      myModificationsTasklistPage,
       commonItemsPage,
       participatingOrganisationsPage,
     },
@@ -34,6 +35,9 @@ When(
     } else if (searchType.toLowerCase() == 'tasklist') {
       searchQueryDataset =
         modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Search_Queries[searchQueryName];
+    } else if (searchType.toLowerCase() == 'my tasklist') {
+      searchQueryDataset =
+        myModificationsTasklistPage.myModificationsTasklistPageTestData.Search_Queries[searchQueryName];
     } else if (searchType.toLowerCase() == 'organisations') {
       searchQueryDataset =
         participatingOrganisationsPage.participatingOrganisationsPageTestData.Search_Queries[searchQueryName];
