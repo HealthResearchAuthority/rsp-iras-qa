@@ -62,7 +62,7 @@ Feature: Create Amendment - Create Modifications
       | Participating_Organisation | Default_Value   | Participating_Organisation   | Modifications_Tile      |
       | Default_Value              | Default_Value   | Default_Value                | Modifications_Tile      |
 
-  @SelectAreaOfChangeModificationIdValidationRegression @KNOWN_DEFECT-RSP-4997
+  @SelectAreaOfChangeModificationIdValidationRegression
   Scenario Outline: Validate the modification id on select area of change page when user creates multiple new modifications
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I capture the page screenshot
@@ -74,7 +74,7 @@ Feature: Create Amendment - Create Modifications
       | New_Modification_Count | Modifications_Tile_Link |
       | Modification_Count     | Modifications_Tile      |
 
-  @SelectAreaOfChangeSaveLaterRegression @KNOWN_DEFECT-RSP-4997
+  @SelectAreaOfChangeSaveLaterRegression @KNOWN_DEFECT_RSP-5075
   Scenario Outline: Verify that user can save the modifications progress on select area of change page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I capture the page screenshot
@@ -96,7 +96,7 @@ Feature: Create Amendment - Create Modifications
       | Participating_Organisation | Early_Closure_Of_Participant_Identification_Centres_Option | Modifications_Tile      |
       | Default_Value              | Default_Value                                              | Modifications_Tile      |
 
-  @SelectAreaOfChangeErrorValidationRegression
+  @SelectAreaOfChangeErrorValidationRegression @KNOW_DEFECT_RSP-5075
   Scenario Outline: Validate the mandatory field error message on select area of change page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I capture the page screenshot
@@ -135,19 +135,20 @@ Feature: Create Amendment - Create Modifications
       | Participating_Organisation | Addition_Of_Participant_Identification_Centres_Option      | Valid_Data_All_Fields | Modifications_Tile      |
       | Participating_Organisation | Early_Closure_Of_Participant_Identification_Centres_Option | Valid_Data_All_Fields | Modifications_Tile      |
 
-  @ParticipatingOrganisationsErrorValidationRegression @KNOWN_DEFECT-RSP-5007
-  Scenario Outline: Validate the mandatory field error message on participating organisation page
-    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I capture the page screenshot
-    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I can see the select area of change page
-    And I select '<Area_Of_Change>' from area of change dropdown and '<Specific_Change>' from specific change dropdown
-    And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Participating_Organisations_Page'
-    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Participating_Organisations_Page'
+# The KNOWN_DEFECT-RSP-5007 will be fixed with the new user story RSP-4136 so this scenario can be re-used later
+# @ParticipatingOrganisationsErrorValidationRegression @KNOWN_DEFECT-RSP-5007
+# Scenario Outline: Validate the mandatory field error message on participating organisation page
+#   When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+#   And I capture the page screenshot
+#   And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+#   And I can see the select area of change page
+#   And I select '<Area_Of_Change>' from area of change dropdown and '<Specific_Change>' from specific change dropdown
+#   And I capture the page screenshot
+#   When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+#   And I capture the page screenshot
+#   And I click the 'Save_Continue' button on the 'Participating_Organisations_Page'
+#   Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Participating_Organisations_Page'
 
-    Examples:
-      | Field_And_Summary_Error_Message              | Area_Of_Change             | Specific_Change          | Modifications_Tile_Link |
-      | Field_Error_participating_organisations_text | Participating_Organisation | Addition_Of_Sites_Option | Modifications_Tile      |
+#   Examples:
+#     | Field_And_Summary_Error_Message              | Area_Of_Change             | Specific_Change          | Modifications_Tile_Link |
+#     | Field_Error_participating_organisations_text | Participating_Organisation | Addition_Of_Sites_Option | Modifications_Tile      |

@@ -361,7 +361,7 @@ export default class SearchModificationsPage {
   }
 
   async goto() {
-    await this.page.goto('approvals/search');
+    await this.page.goto('approvals/index');
     await this.assertOnSearchModificationsPage();
   }
 

@@ -30,7 +30,7 @@ Feature: Create Modifications - Change to planned end date regression
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
 
-  @ChangePlannedEndDateRegression @KNOWN-DEFECT-RSP-4795
+  @ChangePlannedEndDateRegression
   Scenario Outline: Verify that system retains the data on all modifications pages when user navigates back from review changes page
     Then I can see the 'Planned_End_Date' page for modifications
     And I capture the page screenshot
@@ -72,7 +72,7 @@ Feature: Create Modifications - Change to planned end date regression
       | Valid_Data_All_Fields | NHS_HSC_Only               | Valid_Data_All_Fields | Valid_Data_Optional_Fields     |
       | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_All_Fields | Valid_Data_Non_Nhs_All_Country |
 
-  @ModifyPlannedEndDateFromReviewChangesPageRegression @KNOWN-DEFECT-RSP-4795
+  @ModifyPlannedEndDateFromReviewChangesPageRegression
   Scenario Outline: Verify that user can change the planned end date from review modifications page
     Then I can see the 'Planned_End_Date' page for modifications
     And I capture the page screenshot
@@ -111,7 +111,7 @@ Feature: Create Modifications - Change to planned end date regression
       | Change_Field         | Planned_End_Date      | Planned_End_Date_Change      | Organisation_Change_Affect | Affected_Org_Questions |
       | New_Planned_End_Date | Valid_Data_All_Fields | Valid_Data_All_Fields_Change | Valid_Data_All_Fields      | Valid_Data_All_Fields  |
 
-  @ModifyAffectedOrgQuestionsFromReviewChangesPageRegression @KNOWN-DEFECT-RSP-4795
+  @ModifyAffectedOrgQuestionsFromReviewChangesPageRegression
   Scenario Outline: Verify that user can change all affected organisation questions from review modifications page
     Then I can see the 'Planned_End_Date' page for modifications
     And I capture the page screenshot
@@ -149,7 +149,7 @@ Feature: Create Modifications - Change to planned end date regression
       | Affected_Non_Nhs_Hsc_Locations   | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_Non_Nhs_All_Country    | Valid_Data_Non_Nhs_Single_Country |
       | Affected_Non_Nhs_Hsc_Locations   | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_Non_Nhs_Single_Country | Valid_Data_Non_Nhs_All_Country    |
 
-  @ChangePlannedEndDateValidationsFromReviewChangesPageRegression @KNOWN-DEFECT-RSP-4795
+  @ChangePlannedEndDateValidationsFromReviewChangesPageRegression
   Scenario Outline: Verify that system prevents the user to enter invalid date when modifications details updated from review changes page
     Then I can see the 'Planned_End_Date' page for modifications
     And I capture the page screenshot
@@ -183,7 +183,7 @@ Feature: Create Modifications - Change to planned end date regression
       | Invalid_Day_Letters     | New_Planned_End_Date | Field_Error_Message | Summary_Error_Message | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_All_Fields  |
       | Invalid_Year_Letters    | New_Planned_End_Date | Field_Error_Message | Summary_Error_Message | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_All_Fields  |
 
-  @TodayDateErrorValidationsFromReviewChangesPageRegression @KNOWN-DEFECT-RSP-4795
+  @TodayDateErrorValidationsFromReviewChangesPageRegression
   Scenario Outline: Verify that system prevents the user to enter invalid today date when modifications details updated from review changes page
     Then I can see the 'Planned_End_Date' page for modifications
     And I capture the page screenshot
