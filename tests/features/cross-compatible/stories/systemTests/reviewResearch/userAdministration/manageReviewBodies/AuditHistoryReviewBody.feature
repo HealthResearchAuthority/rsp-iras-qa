@@ -167,7 +167,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
             | Field_Name    | Edit_Review_Body         | Audit_History                  | Status_Enabled |
             | Email_Address | Valid_Data_Email_Another | Edit_Review_Body_Email_Address | Enabled        |
 
-    @VerifyAuditHistoryEditReviewBodyDescription @fail
+    @VerifyAuditHistoryEditReviewBodyDescription
     Scenario Outline: Verify the user can view the audit history after editing description of a review body
         And I select a 'QA Automation' review Body to View and Edit which is '<Status_Enabled>'
         And I can see the review body profile page
@@ -192,7 +192,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
             | Field_Name  | Edit_Review_Body               | Audit_History                | Status_Enabled |
             | Description | Valid_Data_Description_Another | Edit_Review_Body_Description | Enabled        |
 
-    @VerifyAuditHistoryEditReviewBodyAllFields @KNOWN-ISSUE-RSP-5003 @fail
+    @VerifyAuditHistoryEditReviewBodyAllFields @KNOWN-ISSUE-RSP-5003 @KNOWN-DEFECT-RSP-5004 @fail
     Scenario Outline: Verify the user can view the audit history after editing all the fields of a review body
         And I select a 'QA Automation' review Body to View and Edit which is '<Status_Enabled>'
         And I can see the review body profile page
@@ -219,7 +219,7 @@ Feature: User Administration: Manage Review Bodies - View audit history for revi
             | Organisation_Name | Country        | Email_Address    | Description     | Valid_Data_Edit_All_Fields | Edit_Review_Body_All_Fields | Enabled        |
 
 
-    @VerifyAuditHistoryDefaultSort @KNOWN-DEFECT-RSP-5004
+    @VerifyAuditHistoryDefaultSort
     Scenario: Verify the default sort of the audit history should be the most recent entry first based on date and time
         And I select a 'QA Automation' review Body to View and Edit which is 'Enabled'
         And I can see the review body profile page

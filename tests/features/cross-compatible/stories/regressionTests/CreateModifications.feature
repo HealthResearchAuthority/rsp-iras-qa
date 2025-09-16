@@ -62,7 +62,7 @@ Feature: Create Amendment - Create Modifications
       | Participating_Organisation | Default_Value   | Participating_Organisation   | Modifications_Tile      |
       | Default_Value              | Default_Value   | Default_Value                | Modifications_Tile      |
 
-  @SelectAreaOfChangeModificationIdValidationRegression
+  @SelectAreaOfChangeModificationIdValidationRegression @KNOWN_DEFECT-RSP-4997
   Scenario Outline: Validate the modification id on select area of change page when user creates multiple new modifications
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I capture the page screenshot

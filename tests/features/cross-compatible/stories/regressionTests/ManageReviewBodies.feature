@@ -297,7 +297,7 @@ Feature: User Administration: Manage Review Bodies
                         | Invalid_Data_Description_Field                       | Max_Description_Words_Error                                  |
                         | Incorrect_Format_Invalid_Character_Limit_Email_Field | Incorrect_Format_Invalid_Character_Limit_Email_Address_Error |
 
-        @RegressionTestUserListReviewBodyNoResultsFoundRemoveUser @fail @KNOWN-DEFECT-RSP-4996
+        @RegressionTestUserListReviewBodyNoResultsFoundRemoveUser
         Scenario Outline: Verify the user can search and remove existing user of the selected review body and navigate to manage users page when no results found in the search for removed user
                 When I enter 'QA Automation' into the search field
                 And I click the 'Search' button on the 'Manage_Review_Bodies_Page'

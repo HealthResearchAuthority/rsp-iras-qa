@@ -12,7 +12,7 @@ Then(
   async ({ commonItemsPage, projectDetailsTitlePage }, datasetName: string) => {
     const dataset = projectDetailsTitlePage.projectDetailsTitlePageTestData[datasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         const labelVal = await commonItemsPage.getUiLabel(key, projectDetailsTitlePage);
         expect(labelVal).toBe(dataset[key]);
       }
@@ -25,7 +25,7 @@ Then(
   async ({ commonItemsPage, projectDetailsTitlePage }, datasetName: string) => {
     const dataset = projectDetailsTitlePage.projectDetailsTitlePageTestData[datasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         await commonItemsPage.fillUIComponent(dataset, key, projectDetailsTitlePage);
       }
     }
@@ -49,7 +49,7 @@ Then(
   async ({ commonItemsPage, projectDetailsTitlePage }, datasetName: string) => {
     const dataset = projectDetailsTitlePage.projectDetailsTitlePageTestData[datasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         await commonItemsPage.validateUIComponentValues(dataset, key, projectDetailsTitlePage);
       }
     }
@@ -70,7 +70,7 @@ Then(
       projectDetailsTitlePage.projectDetailsTitlePageTestData[errorMessageSummaryDatasetName];
     const invalidFieldsDataset = projectDetailsTitlePage.projectDetailsTitlePageTestData[invalidFieldsDatasetName];
     for (const key in invalidFieldsDataset) {
-      if (Object.prototype.hasOwnProperty.call(invalidFieldsDataset, key)) {
+      if (Object.hasOwn(invalidFieldsDataset, key)) {
         await commonItemsPage.validateErrorMessage(
           errorMessageFieldDataset,
           errorMessageSummaryDataset,

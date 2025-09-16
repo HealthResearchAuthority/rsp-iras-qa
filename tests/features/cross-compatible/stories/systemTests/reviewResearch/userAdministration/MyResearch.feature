@@ -8,7 +8,7 @@ Feature: User Administration: My Research
     And I can see the 'My_Research_Page'
 
   @rsp-3424 @myResearchProjectsPage @Smoke @skip
-  Scenario Outline: Validate the my research page and Navigation back to home page
+  Scenario: Validate the my research page and Navigation back to home page
     When I click the 'Back' link on the 'My_Research_Page'
     Then I can see the my account home page
     Then I capture the page screenshot
@@ -23,7 +23,7 @@ Feature: User Administration: My Research
     And I can see a 'Advanced_filter' button on the 'My_Research_Projects_Page'
     And I can see the '<Validation_Text>' ui labels on the my research project page
     And I capture the page screenshot
-    And the default page size should be twenty
+    And the default page size should be 'twenty'
     Then I can see my research page is sorted by 'descending' order of the 'date created'
 
     Examples:

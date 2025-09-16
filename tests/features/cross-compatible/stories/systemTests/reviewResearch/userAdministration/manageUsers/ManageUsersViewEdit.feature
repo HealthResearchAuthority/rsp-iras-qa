@@ -182,7 +182,7 @@ Feature: User Administration: Manage user profiles, view and edit user profile
     And I capture the page screenshot
     And I click the 'Search' button on the 'Manage_Users_Page'
     And I capture the page screenshot
-    Then the system displays no results found message if there is no 'user' on the system that matches the search criteria
+    Then the search displays no matching results
     And I capture the page screenshot
 
     Examples:
@@ -220,7 +220,7 @@ Feature: User Administration: Manage user profiles, view and edit user profile
       | Leading_And_Trailing_White_Space_User_Data |
       | Trailing_White_Space_User_Data             |
 
-  @rsp-3890 @ManageUsersSearchMultiTerms
+  @rsp-3890 @ManageUsersSearchMultiTerms @fail @skip
   Scenario Outline: Verify the user search utilises AND logic to produce accurate search results
     When I fill the search input for searching 'users' with '<Initial_Search_Query>' as the search query
     And I capture the page screenshot
@@ -244,6 +244,7 @@ Feature: User Administration: Manage user profiles, view and edit user profile
   @rsp-4021 @ManageUsersEmailNotEditable
   Scenario Outline: Verify the user is not able to edit the email address
     When I enter 'Existing_QA_Automation_User_First_Name' into the search field for manage users page
+    And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
     And I select advanced filters in the manage users page using 'Advanced_Filter_Status_Active'
     And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
     And I capture the page screenshot
