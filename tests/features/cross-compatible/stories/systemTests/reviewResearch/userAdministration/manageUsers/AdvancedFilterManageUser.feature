@@ -206,7 +206,7 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Advanced_Filter_Last_Logged_In_From_Date_Only                                       |
             | Advanced_Filter_Last_Logged_In_To_Date_Only                                         |
 
-    @RemoveAllActiveFiltersOneByOne  @BlankScreen @fail
+    @RemoveAllActiveFiltersOneByOne  @iBossSecurityIssue @fail
     Scenario Outline: Verify the user can remove all the selected filters one by one and the search results update accordingly
         And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
         And I select advanced filters in the manage users page using '<Advanced_Filters>'
