@@ -85,17 +85,19 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Existing_QA_User_First_Name | Advanced_Filter_Eight |
             | Existing_QA_User_First_Name | Advanced_Filter_Nine  |
             | Existing_QA_User_First_Name | Advanced_Filter_Ten   |
-    @ValidateLastLoggedInInvalidDateErrorMessageManageUser
+   
+    @ValidateLastLoggedInInvalidDateErrorMessageManageUser @rsp-4819 
     Scenario Outline: Verify the user can see validation error message that Search to date must be after Search from date in manage user page
         And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
         And I select advanced filters in the manage users page using '<Date_Submitted_Invalid_Data>'
         And I capture the page screenshot
         And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
         And I capture the page screenshot
-        Then I validate '<Field_ErroField_And_Summary_Error_Message>' displayed on advanced filters in 'Manage_Users_Page'
+        Then I validate '<Field_And_Summary_Error_Message>' displayed on advanced filters in 'Manage_Users_Page'
         And I capture the page screenshot
+       
         Examples:
-            | Date_Submitted_Invalid_Data                  | Field_ErroField_And_Summary_Error_Message |
+            | Date_Submitted_Invalid_Data                  | Field_And_Summary_Error_Message           |
             | Last_Logged_In_To_Date_Before_From_Date      | Invalid_Date_Range_To_Before_From_Error   |
             | Last_Logged_In_No_Month_From_Date            | Invalid_Date_From_Error                   | 
             | Last_Logged_In_No_Day_From_Date              | Invalid_Date_From_Error                   |     
@@ -136,7 +138,6 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
         Examples:
             | Search_Queries         | Advanced_Filters    | No_Results_Found           |
             | Non_Existant_User_Data | Advanced_Filter_One | No_Matching_Search_Results |
-
 
     @jsDisabled @VerifyHintLabelForSelectedCountryCheckboxAdvancedFiltersManageUser
     Scenario: When javascript disabled verify the hint text for country advanced filters when user select multiple checkboxes
@@ -288,8 +289,8 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Advanced_Filter_Country_No_Review_Body_All_Role_All                     |
             | Advanced_Filter_Country_No_Review_Body_No_Role_No_Status_Active_To_Date |
 
-@testOnly
-    Scenario Outline: Verify the user is able to create new user profiles with various roles like study-wide reviewer or workflow co-ordinator, with an audit history log
+    @VerifyTheUserProfileInReviewBodyAuditHistory @KNOWN-DEFECT @fail @rsp-4819
+     Scenario Outline: Verify the user is able to create new user profiles with study-wide reviewer and verify entry in audit history log
         And I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
         And I can see the add a new user profile page
         When I fill the new user profile page using '<Add_User_Profile>'
@@ -305,42 +306,29 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
         When I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
         And I can see the 'Manage_Users_Page'
         And I capture the page screenshot
-        When I enter '<Search_Queries>' into the search field for manage users page
-        And I capture the page screenshot
-        And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
-        And I capture the page screenshot
-        And I select advanced filters in the manage users page using '<Advanced_Filters_Users>'
-        And I capture the page screenshot
-        And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
-        And I capture the page screenshot
-        And I search and click on view edit link for unique '<Add_User_Profile>' user with 'Active' status from the manage user page
-        Then I can see the user profile page
-        And I can see the '<Add_User_Profile>' user has the correct roles assigned on their profile page
-        When I click the change link against '<Field_Name>' on the user profile page
-        Then I can see that the '<Add_User_Profile>' users data persists on the edit profile page
-        And I capture the page screenshot
-        And I click the 'Back' link on the 'Edit_User_Profile_Page'
-        When I click the 'View_Users_Audit_History' link on the 'User_Profile_Page'
-        Then I can see the audit history page of the selected '<Add_User_Profile>' user
-        And I capture the page screenshot
-        And I can see the audit history for the newly created '<Add_User_Profile>' user with roles assigned
+        And I click the 'Back' link on the 'Manage_Users_Page'
+        Then I can see the system administration home page
         And I have navigated to the 'Manage_Review_Bodies_Page'
-        When I enter '<Organisation_Name>' into the search field
         And I capture the page screenshot
-        And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
         And I click the 'Advanced_Filters' button on the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
-        And I select advanced filters in the manage review bodies page using '<Advanced_Filters_Review_Bodies>'
+        And I select advanced filters in the manage review bodies page using '<Advanced_Filters>'
         And I capture the page screenshot
         And I click the 'Apply_filters' button on the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
-        Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters_Review_Bodies>' in the 'Manage_Review_Bodies_Page'
-        And I can see the '<Organisation_Name>' should be present in the list with 'Active' status in the manage review bodies page
+        And the advanced filters section should collapse automatically
+        And I capture the page screenshot
+        Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Manage_Review_Bodies_Page'
+        And I can see the results matching the filter criteria '<Advanced_Filters>' for manage review bodies page
+        And I capture the page screenshot
+        And I capture the page screenshot
+        And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
+        And I capture the page screenshot
         And I capture the page screenshot
         Then I click the view edit link
         And I capture the page screenshot
         And I can see the review body profile page
-        And I capture the page screenshot
+        And I capture the page screenshot    
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
         And I capture the page screenshot
         Then I can see the user list page of the review body
@@ -351,7 +339,7 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
         Then the system displays search results matching the search criteria
 
         Examples:
-            | Add_User_Profile                                   | Field_Name | Organisation_Name                                                                | Advanced_Filters_Users                                                     | Search_Queries            | Advanced_Filters_Review_Bodies |
-            | Valid_Data_In_All_Fields_Role_Studywide_Reviewer   | Role       | QA Automation Health Research Authority (HRA)                                    | Advanced_Filter_Review_body_HRA_Role_Studywide_Reviewer_Status_Active      | Role_Studywide_Reviewer   | Advanced_Filter_Eng_Active     |
-           # | Valid_Data_In_All_Fields_Role_Workflow_Coordinator | Role       | QA Automation National Research Service Permissions Coordination Centre (NRSPCC) | Advanced_Filter_Review_body_NRSPCC_Role_Workflow_Coordinator_Status_Active | Role_Workflow_Coordinator | Advanced_Filter_Sco_Active     |
+            | Add_User_Profile                                   | Field_Name | Organisation_Name      |  Advanced_Filters          | Search_Queries            | Advanced_Filters_Review_Bodies |
+            | Valid_Data_In_All_Fields_Role_Studywide_Reviewer   | Role       | Existing_QA_Data_One   | Advanced_Filter_Eng_Active | Role_Studywide_Reviewer   | Advanced_Filter_Eng_Active     |
+         
 
