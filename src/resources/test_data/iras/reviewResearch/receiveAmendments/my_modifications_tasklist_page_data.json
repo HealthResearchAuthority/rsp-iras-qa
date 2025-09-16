@@ -85,7 +85,7 @@
     },
     "IRAS_ID_Title_Multi": { "search_input_text": "6483766", "short_project_title_text": "Short project title" },
     "Title_Date_Range_Multi": {
-      "short_project_title_text": "This is a short",
+      "short_project_title_text": "QA_Automation - This",
       "day_from_text": "1",
       "month_from_dropdown": "January",
       "year_from_text": "2001",
