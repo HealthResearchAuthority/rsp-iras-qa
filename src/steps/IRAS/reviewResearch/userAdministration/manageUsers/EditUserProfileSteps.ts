@@ -32,11 +32,7 @@ When(
     const dataset = editUserProfilePage.editUserProfilePageTestData[datasetName];
     let keyIndex = 1;
     let keyValue: any;
-    let uniqueEmail: any;
-    let uniqueTitle: any;
-    let uniqueJobTitle: any;
-    let uniqueTelephoneNumber: any;
-
+    const uniqueValues: Record<string, string> = {};
     if (fieldName.toLowerCase() == 'country' || fieldName.toLowerCase() == 'role') {
       const datasetNameClear: string = 'Edit_User_Profile_Page';
       const clearDataset = editUserProfilePage.editUserProfilePageTestData[datasetNameClear];
@@ -47,52 +43,58 @@ When(
         keyValue = dataset[key];
       }
       if (Object.hasOwn(dataset, key)) {
-        if (key === 'email_address_text') {
-          const prefix = editUserProfilePage.editUserProfilePageTestData.Edit_User_Profile.email_address_prefix;
-          uniqueEmail = await generateUniqueEmail(dataset[key], prefix);
-          const locator: Locator = editUserProfilePage[key];
-          await locator.fill(uniqueEmail);
-        } else if (key == 'title_text') {
-          const prefix = dataset.title_text;
-          uniqueTitle = await generateUniqueValue('', prefix);
-          const locator: Locator = editUserProfilePage[key];
-          await locator.fill(uniqueTitle);
-        } else if (key == 'job_title_text') {
-          const prefix = dataset.job_title_text;
-          uniqueJobTitle = await generateUniqueValue('', prefix);
-          const locator: Locator = editUserProfilePage[key];
-          await locator.fill(uniqueJobTitle);
-        } else if (key == 'telephone_text') {
-          uniqueTelephoneNumber = await generatePhoneNumber();
-          const locator: Locator = editUserProfilePage[key];
-          await locator.fill(uniqueTelephoneNumber);
-        } else {
-          await commonItemsPage.fillUIComponent(dataset, key, editUserProfilePage);
+        const locator: Locator = editUserProfilePage[key];
+
+        switch (key) {
+          case 'email_address_text':
+            uniqueValues.email = await generateUniqueEmail(
+              dataset[key],
+              editUserProfilePage.editUserProfilePageTestData.Edit_User_Profile.email_address_prefix
+            );
+            await locator.fill(uniqueValues.email);
+            break;
+
+          case 'title_text':
+          case 'first_name_text':
+          case 'last_name_text':
+          case 'organisation_text':
+          case 'job_title_text':
+            uniqueValues[key] = await generateUniqueValue('', dataset[key]);
+            await locator.fill(uniqueValues[key]);
+            break;
+
+          case 'telephone_text':
+            uniqueValues.telephone = await generatePhoneNumber();
+            await locator.fill(uniqueValues.telephone);
+            break;
+
+          default:
+            await commonItemsPage.fillUIComponent(dataset, key, editUserProfilePage);
         }
       }
       keyIndex++;
     }
     switch (fieldName.toLowerCase()) {
       case 'title':
-        await userProfilePage.setNewTitle(uniqueTitle);
+        await userProfilePage.setNewTitle(uniqueValues['title_text']);
         break;
       case 'first_name':
-        await userProfilePage.setNewFirstName(keyValue);
+        await userProfilePage.setNewFirstName(uniqueValues['first_name_text']);
         break;
       case 'last_name':
-        await userProfilePage.setNewLastName(keyValue);
+        await userProfilePage.setNewLastName(uniqueValues['last_name_text']);
         break;
       case 'email_address':
-        await userProfilePage.setNewEmail(uniqueEmail);
+        await userProfilePage.setNewEmail(uniqueValues.email);
         break;
       case 'telephone':
-        await userProfilePage.setNewTelephone(uniqueTelephoneNumber);
+        await userProfilePage.setNewTelephone(uniqueValues.telephone);
         break;
       case 'organisation':
-        await userProfilePage.setNewOrganisation(keyValue);
+        await userProfilePage.setNewOrganisation(uniqueValues['organisation_text']);
         break;
       case 'job_title':
-        await userProfilePage.setNewJobTitle(uniqueJobTitle);
+        await userProfilePage.setNewJobTitle(uniqueValues['job_title_text']);
         break;
       case 'country':
         await userProfilePage.setNewCountries(keyValue);
