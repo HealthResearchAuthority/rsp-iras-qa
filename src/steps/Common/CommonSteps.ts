@@ -887,7 +887,7 @@ Then(
       for (const label of labelArray) {
         if (isDisplayAction) {
           await expect.soft(commonItemsPage.active_filters_list.getByText(label)).toBeVisible();
-        } else if (isRemoveAction == true) {
+        } else if (isRemoveAction) {
           const removed = await commonItemsPage.removeSelectedFilterValues(label);
           expect.soft(removed).toBe(label);
           await expect.soft(commonItemsPage.active_filters_list.getByText(label)).not.toBeVisible();
