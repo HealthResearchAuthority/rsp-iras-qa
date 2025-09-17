@@ -277,3 +277,29 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Advanced_Filter_Country_No_Review_Body_No_Role_Workflow_Coordinator     |
             | Advanced_Filter_Country_No_Review_Body_All_Role_All                     |
             | Advanced_Filter_Country_No_Review_Body_No_Role_No_Status_Active_To_Date |
+
+    @ValidateLastLoggedInInvalidDateErrorMessageManageUser @rsp-4819 
+    Scenario Outline: Verify the user can see validation error message that Search to date must be after Search from date in manage user page
+        And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
+        And I select advanced filters in the manage users page using '<Date_Submitted_Invalid_Data>'
+        And I capture the page screenshot
+        And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
+        And I capture the page screenshot
+        Then I validate '<Field_And_Summary_Error_Message>' displayed on advanced filters in 'Manage_Users_Page'
+        And I capture the page screenshot
+       
+        Examples:
+            | Date_Submitted_Invalid_Data                  | Field_And_Summary_Error_Message           |
+            | Last_Logged_In_To_Date_Before_From_Date      | Invalid_Date_Range_To_Before_From_Error   |
+            | Last_Logged_In_No_Month_From_Date            | Invalid_Date_From_Error                   | 
+            | Last_Logged_In_No_Day_From_Date              | Invalid_Date_From_Error                   |     
+            | Last_Logged_In_No_Year_From_Date             | Invalid_Date_From_Error                   |
+            | Last_Logged_In_No_Month_To_Date              | Invalid_Date_To_Error                     |
+            | Last_Logged_In_No_Day_To_Date                | Invalid_Date_To_Error                     |
+            | Last_Logged_In_No_Year_To_Date               | Invalid_Date_To_Error                     | 
+            | Last_Logged_In_Invalid_Year_Number_From_Date | Invalid_Date_From_Error                   | 
+            | Last_Logged_In_Invalid_Year_Number_To_Date   | Invalid_Date_To_Error                     |  
+            | Last_Logged_In_Invalid_Day_Number_To_Date    | Invalid_Date_To_Error                     | 
+            | Last_Logged_In_Invalid_Day_Letters_To_Date   | Invalid_Date_To_Error                     |    
+            | Last_Logged_In_Invalid_Year_Letters_To_Date  | Invalid_Date_To_Error                     |
+   

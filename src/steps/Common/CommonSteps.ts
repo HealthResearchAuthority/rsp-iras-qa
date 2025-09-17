@@ -389,6 +389,7 @@ Then(
       participatingOrganisationsPage,
       affectedOrganisationSelectionPage,
       addDocumentsModificationsPage,
+      modificationsReadyToAssignPage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
@@ -447,13 +448,20 @@ Then(
       errorMessageFieldDataset =
         addDocumentsModificationsPage.addDocumentsModificationsPageTestData[errorMessageFieldAndSummaryDatasetName];
       page = addDocumentsModificationsPage;
+    } else if (pageKey == 'Modifications_Tasklist_Page') {
+      errorMessageFieldDataset =
+        modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Validation[
+          errorMessageFieldAndSummaryDatasetName
+        ];
+      page = modificationsReadyToAssignPage;
     }
     let allSummaryErrorExpectedValues: any;
     let summaryErrorActualValues: any;
     await expect(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
     if (
       errorMessageFieldAndSummaryDatasetName === 'Incorrect_Format_Invalid_Character_Limit_Telephone_Error' ||
-      errorMessageFieldAndSummaryDatasetName === 'Incorrect_Format_Invalid_Character_Limit_Email_Address_Error'
+      errorMessageFieldAndSummaryDatasetName === 'Incorrect_Format_Invalid_Character_Limit_Email_Address_Error' ||
+      errorMessageFieldAndSummaryDatasetName === 'Both_Filters_Not_Selected_Same_Time_Summary_Only_Error'
     ) {
       allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset).toString();
       summaryErrorActualValues = (await commonItemsPage.getSummaryErrorMessages()).toString();

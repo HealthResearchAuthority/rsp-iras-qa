@@ -15,5 +15,22 @@
     "modification_id_label": "Modification ID",
     "date_submitted_label": "Date submitted",
     "days_since_submission_label": "Days since submission"
+  },
+  "Validation": {
+    "Invalid_Date_Range_To_Before_From_Error": {
+      "day_to_text": "The date you’ve selected is before the search above"
+    },
+    "Invalid_Date_From_Error": {
+      "day_from_text": "'Search from' date must be in the correct format"
+    },
+    "Invalid_Date_To_Error": {
+      "day_to_text": "'Search to' date must be in the correct format"
+    },
+    "No_Modifications_Selected_Summary_Only_Error": {
+      "error_message": "You have not selected a modification to assign. Select at least one modification before you can continue."
+    },
+    "Both_Filters_Not_Selected_Same_Time_Summary_Only_Error": {
+      "error_message": "'Date submitted' and 'Days since submission' filters can't be applied at the same time - remove one to continue."
+    }
   }
 }

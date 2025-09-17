@@ -27,7 +27,7 @@ Feature: My Account Home page
     When I click the 'Back' link on the 'Approvals_Page'
     Then I can see the 'Home_Page'
 
-  @rsp-4422 @MyAccountHomepage @StudyWideReviewer
+   @rsp-4422 @MyAccountHomepage @StudyWideReviewer @rsp-4819 @KNOWN-DEFECT @testOnly
   Scenario: Validate the My Account Home page of studywide reviewer user accessing the approvals page
     Given I have navigated to the 'Home_Page'
     Given I can see project guidance text on the home_page
@@ -46,6 +46,11 @@ Feature: My Account Home page
     Then I can see the 'Search_Modifications_Page'
     Then I capture the page screenshot
     When I click the 'Back' link on the 'Search_Modifications_Page'
+    Then I can see the approvals home page
+    And I click the 'Modifications_Tasklist' link on the 'Approvals_Page'
+    Then I can see the 'Modifications_Tasklist_Page'
+    Then I capture the page screenshot
+    When I click the 'Back' link on the 'Modifications_Tasklist_Page'
     Then I can see the approvals home page
     When I click the 'Back' link on the 'Approvals_Page'
     Then I can see the 'Home_Page'

@@ -164,8 +164,16 @@
       "No_Roles": { "search_input_text": "No_Roles" }
     }
   },
-  "Error_Message_Field_Dataset": {
-    "Field_Error_Date_Last_Logged_In": "'Search to' date must be after 'Search from' date"
+  "Error_Validation": {
+    "Invalid_Date_Range_To_Before_From_Error": {
+      "date_last_logged_in_to_day_text": "'Search to' date must be after 'Search from' date"
+    },
+    "Invalid_Date_From_Error": {
+      "date_last_logged_in_from_day_text": "'Search from' date must be in the correct format"
+    },
+    "Invalid_Date_To_Error": {
+      "date_last_logged_in_to_day_text": "'Search to' date must be in the correct format"
+    }
   },
   "Advanced_Filters": {
     "Advanced_Filter_One": {
@@ -258,13 +266,68 @@
     "Advanced_Filter_No_Country_Selected": {
       "country_checkbox": []
     },
-    "Advanced_Filter_Last_Logged_In_Invalid_Date": {
+    "Last_Logged_In_To_Date_Before_From_Date": {
       "date_last_logged_in_from_day_text": "11",
       "date_last_logged_in_from_month_dropdown": "July",
       "date_last_logged_in_from_year_text": "2025",
       "date_last_logged_in_to_day_text": "22",
       "date_last_logged_in_to_month_dropdown": "January",
       "date_last_logged_in_to_year_text": "2025"
+    },
+    "Last_Logged_In_No_Month_From_Date": {
+      "date_last_logged_in_from_day_text": "2",
+      "date_last_logged_in_from_month_dropdown": "Choose month",
+      "date_last_logged_in_from_year_text": "2020"
+    },
+    "Last_Logged_In_No_Day_From_Date": {
+      "date_last_logged_in_from_day_text": "",
+      "date_last_logged_in_from_month_dropdown": "July",
+      "date_last_logged_in_from_year_text": "2025"
+    },
+    "Last_Logged_In_No_Year_From_Date": {
+      "date_last_logged_in_from_day_text": "10",
+      "date_last_logged_in_from_month_dropdown": "July",
+      "date_last_logged_in_from_year_text": ""
+    },
+    "Last_Logged_In_No_Month_To_Date": {
+      "date_last_logged_in_to_day_text": "20",
+      "date_last_logged_in_to_month_dropdown": "Choose month",
+      "date_last_logged_in_to_year_text": "2013"
+    },
+    "Last_Logged_In_No_Day_To_Date": {
+      "date_last_logged_in_to_day_text": "",
+      "date_last_logged_in_to_month_dropdown": "January",
+      "date_last_logged_in_to_year_text": "2025"
+    },
+    "Last_Logged_In_No_Year_To_Date": {
+      "date_last_logged_in_to_day_text": "23",
+      "date_last_logged_in_to_month_dropdown": "January",
+      "date_last_logged_in_to_year_text": ""
+    },
+    "Last_Logged_In_Invalid_Year_Number_From_Date": {
+      "date_last_logged_in_from_day_text": "10",
+      "date_last_logged_in_from_month_dropdown": "July",
+      "date_last_logged_in_from_year_text": "8"
+    },
+    "Last_Logged_In_Invalid_Year_Number_To_Date": {
+      "date_last_logged_in_to_day_text": "3",
+      "date_last_logged_in_to_month_dropdown": "January",
+      "date_last_logged_in_to_year_text": "9"
+    },
+    "Last_Logged_In_Invalid_Day_Number_To_Date": {
+      "date_last_logged_in_to_day_text": "32",
+      "date_last_logged_in_to_month_dropdown": "December",
+      "date_last_logged_in_to_year_text": "2028"
+    },
+    "Last_Logged_In_Invalid_Day_Letters_To_Date": {
+      "date_last_logged_in_to_day_text": "o1",
+      "date_last_logged_in_to_month_dropdown": "January",
+      "date_last_logged_in_to_year_text": "2028"
+    },
+    "Last_Logged_In_Invalid_Year_Letters_To_Date": {
+      "date_last_logged_in_to_day_text": "1",
+      "date_last_logged_in_to_month_dropdown": "January",
+      "date_last_logged_in_to_year_text": "'2ooo"
     },
     "Advanced_Filter_Last_Logged_In_From_Date_Only": {
       "date_last_logged_in_from_day_text": "11",
