@@ -139,25 +139,7 @@ Feature: Create Amendment - Create Modifications
       | Participating_Organisation | Addition_Of_Participant_Identification_Centres_Option      | Valid_Data_All_Fields | Modifications_Tile      |
       | Participating_Organisation | Early_Closure_Of_Participant_Identification_Centres_Option | Valid_Data_All_Fields | Modifications_Tile      |
 
-  @rsp-4039 @ParticipatingOrganisationsModificationIdValidation @KNOWN_DEFECT-RSP-4997
-  Scenario Outline: Validate the modification id on participating organisation page when user creates multiple new modifications
-    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I capture the page screenshot
-    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I can see the select area of change page
-    Then I validate the modification id is incremented by one for every '<New_Modification_Count>' new modification on select area of change page
-    And I select '<Area_Of_Change>' from area of change dropdown and '<Specific_Change>' from specific change dropdown
-    And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    Then I can see the participating organisation page
-    And I capture the page screenshot
-    Then I validate the modification id on participating organisation page when user creates multiple new modifications
-
-    Examples:
-      | Area_Of_Change             | Specific_Change          | New_Modification_Count | Modifications_Tile_Link |
-      | Participating_Organisation | Addition_Of_sites_Option | Modification_Count     | Modifications_Tile      |
-
-  @rsp-4039 @ParticipatingOrganisationSaveLater @KNOWN_DEFECT-RSP-5009
+  @rsp-4039 @ParticipatingOrganisationSaveLater
   Scenario Outline: Verify that user can save the modifications progress on search participating organisations page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I capture the page screenshot
@@ -181,7 +163,8 @@ Feature: Create Amendment - Create Modifications
       | Participating_Organisation | Addition_Of_Participant_Identification_Centres_Option      | Modifications_Tile      |
       | Participating_Organisation | Early_Closure_Of_Participant_Identification_Centres_Option | Modifications_Tile      |
 
-  @rsp-4039 @ParticipatingOrganisationsErrorValidation @KNOWN_DEFECT-RSP-5007
+  # The KNOWN_DEFECT-RSP-5007 will be fixed with the new user story RSP-4136 so this scenario can be re-used later
+  @rsp-4039 @ParticipatingOrganisationsErrorValidation @KNOWN_DEFECT-RSP-5007 @skip
   Scenario Outline: Validate the mandatory field error message on participating organisation page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I capture the page screenshot

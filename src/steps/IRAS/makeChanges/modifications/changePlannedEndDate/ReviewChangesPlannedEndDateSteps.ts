@@ -51,7 +51,7 @@ Then(
     );
     expect(actualNewPlannedEndDate).toBe(expectedNewPlannedEndDate);
     expect(actualAffectedOrgType).toBe(
-      datasetAffectedOrgSelection.which_organisation_change_affect_checkbox.toString().replaceAll(',', ', ')
+      datasetAffectedOrgSelection.which_organisation_change_affect_checkbox.toString().replaceAll(',', '')
     );
     if (datasetNameAffectedOrgSelection !== 'Non_NHS_HSC_Only') {
       validateNhsFields();
@@ -74,7 +74,7 @@ Then(
       const expectedNhsAffectedLocations =
         datasetAffectedOrgQuestions.where_organisation_change_affect_nhs_question_checkbox
           .toString()
-          .replaceAll(',', ', ');
+          .replaceAll(',', '');
       expect(actualNhsAffectedLocations).toBe(expectedNhsAffectedLocations);
       expect(actualPortionOfAffected).toBe(
         datasetAffectedOrgQuestions.will_some_or_all_organisations_be_affected_question_radio
@@ -91,7 +91,7 @@ Then(
       expect(actualNonNhsAffectedLocations).toBe(
         datasetAffectedOrgQuestions.where_organisation_change_affect_non_nhs_question_checkbox
           .toString()
-          .replaceAll(',', ', ')
+          .replaceAll(',', '')
       );
     }
   }
