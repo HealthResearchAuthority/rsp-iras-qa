@@ -75,9 +75,6 @@ When(
       case 'last_name':
         await userProfilePage.setNewLastName(uniqueValues['last_name_text']);
         break;
-      case 'email_address':
-        await userProfilePage.setNewEmail(uniqueValues.email);
-        break;
       case 'telephone':
         await userProfilePage.setNewTelephone(uniqueValues.telephone);
         break;
