@@ -660,32 +660,6 @@ When(
   }
 );
 
-Then(
-  'the system displays no results found message if there is no {string} on the system that matches the search criteria',
-  async ({ commonItemsPage, userListReviewBodyPage, manageUsersPage, manageReviewBodiesPage }, entityType: string) => {
-    const filteredSearchResults = await userListReviewBodyPage.getFilteredSearchResultsBeforeSearch(commonItemsPage);
-    expect(await commonItemsPage.tableRows.count()).toBe(0);
-    expect(filteredSearchResults).toEqual([]);
-    let headingLocator: Locator, guidanceLocator: Locator, expectedHeading: any, expectedGuidance: any;
-    if (entityType === 'user') {
-      headingLocator = manageUsersPage.no_results_heading;
-      guidanceLocator = manageUsersPage.no_results_guidance_text;
-      expectedHeading = manageUsersPage.manageUsersPageTestData.Manage_Users_Page.no_results_heading;
-      expectedGuidance = manageUsersPage.manageUsersPageTestData.Manage_Users_Page.no_results_guidance_text;
-      await expect(headingLocator).toHaveText(expectedHeading);
-      await expect(guidanceLocator).toHaveText(expectedGuidance);
-    } else if (entityType === 'review body') {
-      headingLocator = manageReviewBodiesPage.no_results_heading;
-      guidanceLocator = manageReviewBodiesPage.no_results_guidance_text;
-      expectedHeading = manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.no_results_heading;
-      expectedGuidance =
-        manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.no_results_guidance_text;
-      await expect(headingLocator).toHaveText(expectedHeading);
-      await expect(guidanceLocator).toHaveText(expectedGuidance);
-    }
-  }
-);
-
 Given(
   'I have navigated to the {string}',
   async (
@@ -885,15 +859,6 @@ Then(
     }
   }
 );
-//Check for dupe/can be common//
-Then('I can see the {string} ui labels', async ({ commonItemsPage }, datasetName: string) => {
-  const dataset = commonItemsPage.commonTestData[datasetName];
-  for (const key in dataset) {
-    if (Object.hasOwn(dataset, key)) {
-      await expect(commonItemsPage[key].getByText(dataset[key])).toBeVisible();
-    }
-  }
-});
 
 Then(
   'all selected filters displayed under active Filters have been successfully removed',
