@@ -79,22 +79,24 @@ Then(
     let expectedModificationId: string;
     let actualModificationId: string;
     const irasIdRunTime = await projectDetailsIRASPage.getUniqueIrasId();
+    const buttonValue = commonItemsPage.buttonTextData.Project_Overview_Page.Create_New_Modification;
     for (let index = 1; index <= maxModificationCount; index++) {
       actualModificationId = confirmStringNotNull(await selectAreaOfChangePage.modification_id_text.textContent());
       expectedModificationId = irasIdRunTime + '/' + index;
       expect(actualModificationId).toBe(expectedModificationId);
       await commonItemsPage.govUkButton
-        .getByText(buttonTextData.Participating_Organisations_Page.Save_For_Later, { exact: true })
-        .or(
-          commonItemsPage.genericButton.getByText(buttonTextData.Participating_Organisations_Page.Save_For_Later, {
-            exact: true,
-          })
-        )
+        .getByText(buttonTextData.Select_Area_Of_Change_Page.Save_For_Later, { exact: true })
         .first()
         .click();
       await commonItemsPage.govUkLink
-        .getByText(linkTextData.Project_Overview_Page.Modifications_Tile, { exact: true })
+        .getByText(linkTextData.Project_Overview_Page.Post_Approval, { exact: true })
         .click();
+      await commonItemsPage.govUkButton
+        .getByText(buttonValue, { exact: true })
+        .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
+        .first()
+        .click();
+      await commonItemsPage.page.waitForLoadState('domcontentloaded');
       const newModificationIndex = index + 1;
       const storeModificationId = irasIdRunTime + '/' + newModificationIndex;
       await selectAreaOfChangePage.setModificationId(storeModificationId);

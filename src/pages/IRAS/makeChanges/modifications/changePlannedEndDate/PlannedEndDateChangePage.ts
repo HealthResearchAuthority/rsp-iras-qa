@@ -27,7 +27,7 @@ export default class PlannedEndDateChangePage {
     this.planned_project_end_month_dropdown = this.page
       .getByText(this.plannedEndDateChangePageTestData.Label_Texts.new_planned_project_end_date_label)
       .locator('..')
-      .getByTestId('NewPlannedEndDate.Month');
+      .getByTestId('Questions[0].Month');
     this.planned_project_end_year_text = this.page
       .getByText(this.plannedEndDateChangePageTestData.Label_Texts.new_planned_project_end_date_label)
       .locator('..')
