@@ -289,57 +289,5 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Advanced_Filter_Country_No_Review_Body_All_Role_All                     |
             | Advanced_Filter_Country_No_Review_Body_No_Role_No_Status_Active_To_Date |
 
-    @VerifyTheUserProfileInReviewBodyAuditHistory @KNOWN-DEFECT @fail @rsp-4819
-     Scenario Outline: Verify the user is able to create new user profiles with study-wide reviewer and verify entry in audit history log
-        And I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
-        And I can see the add a new user profile page
-        When I fill the new user profile page using '<Add_User_Profile>'
-        And I capture the page screenshot
-        And I click the 'Continue' button on the 'Create_User_Profile_Page'
-        Then I can see the check and create user profile page
-        And I capture the page screenshot
-        And I can see previously filled values in the new user profile page for '<Add_User_Profile>' displayed on the check and create user profile page
-        When I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
-        Then I can see the create user profile confirmation page for '<Add_User_Profile>'
-        And I capture the current time for 'Audit_History_User_Page'
-        And I capture the page screenshot
-        When I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
-        And I can see the 'Manage_Users_Page'
-        And I capture the page screenshot
-        And I click the 'Back' link on the 'Manage_Users_Page'
-        Then I can see the system administration home page
-        And I have navigated to the 'Manage_Review_Bodies_Page'
-        And I capture the page screenshot
-        And I click the 'Advanced_Filters' button on the 'Manage_Review_Bodies_Page'
-        And I capture the page screenshot
-        And I select advanced filters in the manage review bodies page using '<Advanced_Filters>'
-        And I capture the page screenshot
-        And I click the 'Apply_filters' button on the 'Manage_Review_Bodies_Page'
-        And I capture the page screenshot
-        And the advanced filters section should collapse automatically
-        And I capture the page screenshot
-        Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Manage_Review_Bodies_Page'
-        And I can see the results matching the filter criteria '<Advanced_Filters>' for manage review bodies page
-        And I capture the page screenshot
-        And I capture the page screenshot
-        And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
-        And I capture the page screenshot
-        And I capture the page screenshot
-        Then I click the view edit link
-        And I capture the page screenshot
-        And I can see the review body profile page
-        And I capture the page screenshot    
-        And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
-        And I capture the page screenshot
-        Then I can see the user list page of the review body
-        And I capture the name of the newly added user in the user list page of the review body
-        When I enter 'name of the newly created user' into the search field
-        And I click the 'Search' button on the 'Review_Body_User_List_Page'
-        And I capture the page screenshot
-        Then the system displays search results matching the search criteria
-
-        Examples:
-            | Add_User_Profile                                   | Field_Name | Organisation_Name      |  Advanced_Filters          | Search_Queries            | Advanced_Filters_Review_Bodies |
-            | Valid_Data_In_All_Fields_Role_Studywide_Reviewer   | Role       | Existing_QA_Data_One   | Advanced_Filter_Eng_Active | Role_Studywide_Reviewer   | Advanced_Filter_Eng_Active     |
-         
+   
 

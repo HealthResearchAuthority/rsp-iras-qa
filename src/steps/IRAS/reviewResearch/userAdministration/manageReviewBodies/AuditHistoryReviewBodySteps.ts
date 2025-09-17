@@ -58,10 +58,12 @@ Then(
     const adminEmailValues: any = auditLog.get('adminEmailValues');
     expect(timeValues[rowIndex]).toBe(timeExpected);
     expect(eventValues[rowIndex]).toBe(eventDescriptionExpectedValue);
-    expect(adminEmailValues[rowIndex]).toBe(
-      auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page
-        .system_admin_email_text
-    );
+    expect
+      .soft(adminEmailValues[rowIndex])
+      .toBe(
+        auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page
+          .system_admin_email_text
+      );
   }
 );
 
