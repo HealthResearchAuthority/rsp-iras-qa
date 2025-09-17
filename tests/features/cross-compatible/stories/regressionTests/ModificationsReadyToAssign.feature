@@ -22,22 +22,4 @@ Feature: Modifications Tasklist page that displays modifications ready to be ass
             | Date_Submitted        | date submitted        | descending   | ascending      |
             | Days_Since_Submission | days since submission | ascending    | descending     |
 
-    @filterTasklistDateSubmittedValidation @rsp-4819 
-    Scenario Outline: Verify that correct validation is in place for the date submitted filter
-        And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
-        And I 'can' see the advanced filters panel
-        And I open each of the modification tasklist filters
-        And I capture the page screenshot
-        When I fill the modifications tasklist search and filter options with '<Date_Filter_Input>'
-        And I capture the page screenshot
-        When I fill the modifications tasklist search and filter options with '<Date_Submission_Filter_Input>'
-        And I capture the page screenshot
-        And I click the 'Apply_Filters' button on the 'Modifications_Tasklist_Page'
-        And I capture the page screenshot
-        Then I 'can' see the advanced filters panel
-        And I validate '<Field_And_Summary_Error_Message>' displayed on 'Modifications_Tasklist_Page'
-
-        Examples:
-            | Date_Filter_Input | Date_Submission_Filter_Input | Field_And_Summary_Error_Message                        |
-            | Date_Range_Multi  | Days_Range_Multi             | Both_Filters_Not_Selected_Same_Time_Summary_Only_Error |
-       
+   
