@@ -392,35 +392,35 @@ Then(
 Then(
   'I can see the list of modifications received for approval is sorted by {string} order of the {string}',
   async ({ commonItemsPage }, sortDirection: string, sortField: string) => {
-    let sortedList: string[];
-    let columnIndex: number;
+    let sortedModsList: string[];
+    let searchColumnIndex: number;
     switch (sortField.toLowerCase()) {
       case 'modification id':
-        columnIndex = 0;
+        searchColumnIndex = 0;
         break;
       case 'short project title':
-        columnIndex = 1;
+        searchColumnIndex = 1;
         break;
       case 'modification type':
-        columnIndex = 2;
+        searchColumnIndex = 2;
         break;
       case 'chief investigator':
-        columnIndex = 3;
+        searchColumnIndex = 3;
         break;
       case 'lead nation':
-        columnIndex = 4;
+        searchColumnIndex = 4;
         break;
       default:
         throw new Error(`${sortField} is not a valid option`);
     }
-    const actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
+    const actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, searchColumnIndex);
     if (sortField.toLowerCase() == 'modification id') {
-      sortedList = await commonItemsPage.sortModificationIdListValues(actualList, sortDirection);
+      sortedModsList = await commonItemsPage.sortModificationIdListValues(actualList, sortDirection);
     } else if (sortDirection.toLowerCase() == 'ascending') {
-      sortedList = [...actualList].toSorted((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
+      sortedModsList = [...actualList].toSorted((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
     } else {
-      sortedList = [...actualList].toSorted((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
+      sortedModsList = [...actualList].toSorted((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
     }
-    expect.soft(actualList).toEqual(sortedList);
+    expect.soft(actualList).toEqual(sortedModsList);
   }
 );

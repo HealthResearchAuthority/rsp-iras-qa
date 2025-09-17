@@ -1,7 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as modificationsReadyToAssignPageTestData from '../../../../resources/test_data/iras/reviewResearch/receiveAmendments/modifications_ready_to_assign_page_data.json';
-import * as buttonTextData from '../../../../resources/test_data/common/button_text_data.json';
-import * as linkTextData from '../../../../resources/test_data/common/link_text_data.json';
 import * as searchFilterResultsData from '../../../../resources/test_data/common/search_filter_results_data.json';
 
 //Declare Page Objects
@@ -9,8 +7,6 @@ export default class ModificationsReadyToAssignPage {
   readonly page: Page;
   readonly modificationsReadyToAssignPageTestData: typeof modificationsReadyToAssignPageTestData;
   readonly searchFilterResultsData: typeof searchFilterResultsData;
-  readonly buttonTextData: typeof buttonTextData;
-  readonly linkTextData: typeof linkTextData;
   readonly modifications_tasklist_link: Locator;
   readonly short_project_title_column_label: Locator;
   readonly modification_id_column_label: Locator;
@@ -42,8 +38,6 @@ export default class ModificationsReadyToAssignPage {
     this.page = page;
     this.modificationsReadyToAssignPageTestData = modificationsReadyToAssignPageTestData;
     this.searchFilterResultsData = searchFilterResultsData;
-    this.linkTextData = linkTextData;
-    this.buttonTextData = buttonTextData;
 
     //Locators
     this.modifications_tasklist_link = this.page.locator('.govuk-heading-s govuk-link hra-card-heading__link');

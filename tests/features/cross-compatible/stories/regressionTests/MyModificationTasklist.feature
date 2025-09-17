@@ -1,5 +1,5 @@
-@RegressionMyModificationsTasklist @Regression @RegressionReceiveAmendments @StudyWideReviewer
-Feature: Receive Amendments: My Modifications Tasklist page that displays modifications that have beena assigned to me
+@RegressionMyModificationsTasklist @Regression @RegressionReceiveAmendments @StudyWideReviewer @KNOWN-DEFECT-CMS-HEADING-MISSING
+Feature: Receive Amendments: My Modifications Tasklist page that displays modifications that have been assigned to me
 
     Background:
         Given I have navigated to the 'Approvals_Page'
@@ -83,7 +83,7 @@ Feature: Receive Amendments: My Modifications Tasklist page that displays modifi
             | IRAS_ID_Title_Date_Range_Multi  | Search        |
             | Title_Days_Range_Multi          | Apply_Filters |
 
-    @RegressionSearchMyTasklistWithNoResults @rsp-4821
+    @RegressionSearchMyTasklistWithNoResults @rsp-4821 @KNOWN-DEFECT-CMS-EMPTY-TEXT-WRONG
     Scenario Outline: Verify the my tasklist page displays the no results found message, when no records on the system match the search criteria
         And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel

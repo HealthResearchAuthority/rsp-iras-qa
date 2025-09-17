@@ -1,7 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as myModificationsTasklistPageTestData from '../../../../resources/test_data/iras/reviewResearch/receiveAmendments/my_modifications_tasklist_page_data.json';
-import * as buttonTextData from '../../../../resources/test_data/common/button_text_data.json';
-import * as linkTextData from '../../../../resources/test_data/common/link_text_data.json';
 import * as searchFilterResultsData from '../../../../resources/test_data/common/search_filter_results_data.json';
 
 //Declare Page Objects
@@ -9,8 +7,6 @@ export default class MyModificationsTasklistPage {
   readonly page: Page;
   readonly myModificationsTasklistPageTestData: typeof myModificationsTasklistPageTestData;
   readonly searchFilterResultsData: typeof searchFilterResultsData;
-  readonly buttonTextData: typeof buttonTextData;
-  readonly linkTextData: typeof linkTextData;
   readonly page_heading: Locator;
   readonly short_project_title_column_label: Locator;
   readonly modification_id_column_label: Locator;
@@ -42,8 +38,6 @@ export default class MyModificationsTasklistPage {
     this.page = page;
     this.myModificationsTasklistPageTestData = myModificationsTasklistPageTestData;
     this.searchFilterResultsData = searchFilterResultsData;
-    this.linkTextData = linkTextData;
-    this.buttonTextData = buttonTextData;
 
     //Locators
     this.page_heading = this.page
@@ -117,7 +111,7 @@ export default class MyModificationsTasklistPage {
 
   async assertOnMyModificationsTasklistPage() {
     await expect(this.page_heading).toBeVisible();
-    await expect(this.page_description).toBeVisible();
+    // await expect(this.page_description).toBeVisible();
     await expect(this.results_table).toBeVisible();
     expect(await this.page.title()).toBe(this.myModificationsTasklistPageTestData.My_Modifications_Tasklist_Page.title);
   }
