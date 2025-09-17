@@ -173,7 +173,7 @@ When(
       const userListBeforeSearch = await commonItemsPage.getAllUsersFromTheTable();
       const userValues: string[] = confirmArrayNotNull(userListBeforeSearch.get('searchResultValues'));
       await userListReviewBodyPage.setUserListBeforeSearch(userValues);
-      await userListReviewBodyPage.setSearchKey(await createUserProfilePage.getUniqueEmail());
+      await commonItemsPage.setSearchKey(await createUserProfilePage.getUniqueEmail());
     } else {
       throw new Error(`There are no items in list to search`);
     }
