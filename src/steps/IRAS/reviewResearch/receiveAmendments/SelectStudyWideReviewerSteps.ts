@@ -49,7 +49,6 @@ Then(
       const text = await option.textContent();
       dropdownValues.push(text);
     }
-    // Normalize dropdown values to remove duplicates and trim whitespace
     const normalizedValues = dropdownValues.map((v) => v.trim());
     const uniqueDropdownValues = [...new Set(normalizedValues)];
 

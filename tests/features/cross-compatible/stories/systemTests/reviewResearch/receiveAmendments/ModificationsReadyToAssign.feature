@@ -115,7 +115,6 @@ Feature: Modifications Tasklist page that displays modifications ready to be ass
         When I enter '<Valid_Iras_Id>' into the search field in the modifications ready to assign page
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
-        # Then I can now see the modifications ready to assign table contains the expected search results for '<Search_Input>'
         When I select modifications with ids as '<Modification_Id>' by clicking the checkbox in the modifications ready to assign page
         And I capture the page screenshot
         And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
@@ -134,20 +133,18 @@ Feature: Modifications Tasklist page that displays modifications ready to be ass
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
         Then I can see previously assigned modification is no longer displayed in the modifications ready to assign table for '<Modification_Id>'
+        And I capture the page screenshot
 
         Examples:
-            | Valid_Iras_Id                       | Study_Wide_Reviewer             | Modification_Id                           |
-            | Valid_Iras_Id_Ln_England_Pn_England | Study_Wide_Reviewer_HRA_England | Modification_Id_Ln_England_Pn_England_One |
-    # | Valid_Iras_Id_Ln_England_Pn_England | Study_Wide_Reviewer_HRA_England | Modification_Id_Ln_England_Pn_England_Two        |
-    # | Valid_Iras_Id_Ln_England_Pn_England | Study_Wide_Reviewer_HRA_England | Modification_Id_Ln_England_Pn_England_Three_Four |
+            | Valid_Iras_Id                       | Study_Wide_Reviewer             | Modification_Id                                  |
+            | Valid_Iras_Id_Ln_England_Pn_England | Study_Wide_Reviewer_HRA_England | Modification_Id_Ln_England_Pn_England_One        |
+            | Valid_Iras_Id_Ln_England_Pn_England | Study_Wide_Reviewer_HRA_England | Modification_Id_Ln_England_Pn_England_Two        |
+            | Valid_Iras_Id_Ln_England_Pn_England | Study_Wide_Reviewer_HRA_England | Modification_Id_Ln_England_Pn_England_Three_Four |
 
-    # @NoAuth
+
     # UI issues:- Page heading is not matching/Guidance text is missing
     @StudyWideReviewer @SWRTasklist @rsp-4076 @rsp-4849 @fail @KNOWN-DEFECT-RSP-XXXX
     Scenario Outline: Validate the SWR Tasklist page after the workflow co-ordinator assigns a study-wide reviewer to a modification from the modifications ready to assign page
-        # Then I logged out from the system
-        # Then I capture the page screenshot
-        # Given I have navigated to the 'SWR_My_Tasklist_Page' as 'Studywide_Reviewer'
         Given I have navigated to the 'SWR_My_Tasklist_Page'
         Then I capture the page screenshot
         When I enter '<Valid_Iras_Id>' into the search field in the modifications ready to assign page
@@ -164,7 +161,6 @@ Feature: Modifications Tasklist page that displays modifications ready to be ass
         When I enter '<Valid_Iras_Id>' into the search field in the modifications ready to assign page
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
-        # Then I can now see the modifications ready to assign table contains the expected search results for '<Search_Input>'
         When I select modifications with ids as '<Modification_Id>' by clicking the checkbox in the modifications ready to assign page
         And I capture the page screenshot
         And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
@@ -208,7 +204,6 @@ Feature: Modifications Tasklist page that displays modifications ready to be ass
         When I enter '<Valid_Iras_Id>' into the search field in the modifications ready to assign page
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
-        # Then I can now see the modifications ready to assign table contains the expected search results for '<Search_Input>'
         When I select modifications with ids as '<Modification_Id>' by clicking the checkbox in the modifications ready to assign page
         And I capture the page screenshot
         And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
@@ -271,7 +266,6 @@ Feature: Modifications Tasklist page that displays modifications ready to be ass
         When I enter '<Valid_Iras_Id>' into the search field in the modifications ready to assign page
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
-        # Then I can now see the modifications ready to assign table contains the expected search results for '<Search_Input>'
         When I select modifications with ids as '<Modification_Id>' by clicking the checkbox in the modifications ready to assign page
         And I capture the page screenshot
         And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
@@ -289,7 +283,6 @@ Feature: Modifications Tasklist page that displays modifications ready to be ass
         When I enter '<Valid_Iras_Id>' into the search field in the modifications ready to assign page
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
-        # Then I can now see the modifications ready to assign table contains the expected search results for '<Search_Input>'
         When I select modifications with ids as '<Modification_Id>' by clicking the checkbox in the modifications ready to assign page
         And I capture the page screenshot
         And I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
