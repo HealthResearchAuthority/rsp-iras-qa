@@ -33,7 +33,7 @@ Feature: Receive Amendments: Search Modifications
                         | Chief_Investigator  | chief investigator  |
                         | Lead_Nation         | lead nation         |
 
-        @RegressionSearchAdvancedFilterModifications @KNOWN-DEFECT-RSP-4467 @rsp-4011
+        @RegressionSearchAdvancedFilterModifications @rsp-4011
         Scenario Outline: Verify the user is able to view the list of modifications by entering valid iras id, then clicking on 'Search' button and then selecting advanced filters and clicking the 'Apply filters' button
                 When I enter '<Valid_Iras_Id>' into the search field for search modifications page
                 And I capture the page screenshot
@@ -69,13 +69,13 @@ Feature: Receive Amendments: Search Modifications
                 Then I can see the list of modifications received for approval is sorted by 'descending' order of the '<Sort_Field>'
                 Examples:
                         | Valid_Iras_Id        | Advanced_Filters             | Sort_Button         | Sort_Field          |
-                        | Valid_Iras_Id_Nth    | Advanced_Filters_Lead_Nation | Modification_Id     | modification id     |
+                        | Valid_Iras_Id_Prefix | Advanced_Filters_Lead_Nation | Modification_Id     | modification id     |
                         | Valid_Iras_Id_Prefix | Advanced_Filters_Twenty      | Short_Project_Title | short project title |
                         | Valid_Iras_Id_Prefix | Advanced_Filters_Twenty      | Modification_Type   | modification type   |
                         | Valid_Iras_Id_Prefix | Advanced_Filters_Twenty      | Chief_Investigator  | chief investigator  |
                         | Valid_Iras_Id_Prefix | Advanced_Filters_Lead_Nation | Lead_Nation         | lead nation         |
 
-        @RegressionSearchSortAdvancedFilterModifications  @KNOWN-DEFECT-RSP-4467 @rsp-4011
+        @RegressionSearchSortAdvancedFilterModifications @rsp-4011
         Scenario Outline: Verify that the user can view the list of modifications by performing a search, applying advanced filters, and sorting the results in both ascending and descending order
                 When I enter 'Valid_Iras_Id_Prefix' into the search field for search modifications page
                 And I capture the page screenshot
