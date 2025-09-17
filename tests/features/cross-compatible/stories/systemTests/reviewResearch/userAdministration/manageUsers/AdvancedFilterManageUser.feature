@@ -277,3 +277,86 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Advanced_Filter_Country_No_Review_Body_No_Role_Workflow_Coordinator     |
             | Advanced_Filter_Country_No_Review_Body_All_Role_All                     |
             | Advanced_Filter_Country_No_Review_Body_No_Role_No_Status_Active_To_Date |
+
+    @rsp-4381 @ActiveFilterCleareWhenMoveToDifferentPage 
+    Scenario Outline: verify that all active filters are automatically cleared when the user navigates away from the current page in mange user page
+        And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
+        And I select advanced filters in the manage users page using '<Advanced_Filters>'
+        And I capture the page screenshot
+        And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
+        And I capture the page screenshot
+        Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Manage_Users_Page'
+        And I capture the page screenshot
+        Then I sequentially navigate through each 'Manage_Users_Page' by clicking on '<Navigation_Method>' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+        And I capture the page screenshot
+        Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Manage_Users_Page'
+        And I capture the page screenshot
+        When I click the 'Back' link on the 'Manage_Users_Page'
+        Then I can see the 'System_Administration_Page'
+        When I click the 'Manage_Users' link on the 'System_Administration_Page'
+        Then I can see the 'Manage_Users_Page'
+        And all selected filters displayed under active Filters have been successfully removed
+        And I capture the page screenshot
+      
+        Examples:
+            | Navigation_Method        | Advanced_Filters     |
+            | page number              | Advanced_Filter_Nine |
+
+    @rsp-4381 @ActiveFilterRemainAppliedAfterCreateNewUserProfile 
+    Scenario Outline: Verify that the active filter remains applied after creating a new user profile with valid data
+        And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
+        And I select advanced filters in the manage users page using '<Advanced_Filters>'
+        And I capture the page screenshot
+        And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
+        And I capture the page screenshot
+        Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Manage_Users_Page'
+        And I capture the page screenshot
+        When I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
+        And I capture the page screenshot
+        When I fill the new user profile page using '<Add_User_Profile>'
+        And I capture the page screenshot
+        And I click the 'Continue' button on the 'Create_User_Profile_Page'
+        Then I can see the check and create user profile page
+        And I capture the page screenshot
+        Then I can see previously filled values in the new user profile page for '<Add_User_Profile>' displayed on the check and create user profile page
+        And I click the 'Create_Profile' button on the 'Check_Create_User_Profile_Page'
+        Then I can see the create user profile confirmation page for '<Add_User_Profile>'
+        And I capture the page screenshot
+        When I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
+        Then I can see the 'Manage_Users_Page'
+        And I capture the page screenshot
+        Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Manage_Users_Page'
+        And I capture the page screenshot
+   
+        Examples:
+            | Add_User_Profile                                      | Validation_Text_Manage_Users_List | Status_Enabled | Advanced_Filters     |
+            |  Valid_Data_In_All_Fields_Role_System_Administrator   | Label_Texts_Manage_Users_List     | Enabled        | Advanced_Filter_Nine | 
+    
+    @rsp-4381 @ActiveFilterRemainAppliedAfterEditTheManageUser
+    Scenario Outline: Verify that the active filter remains applied after edit the manage user and save their changes
+        And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
+        And I select advanced filters in the manage users page using '<Advanced_Filters>'
+        And I capture the page screenshot
+        And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
+        And I capture the page screenshot
+        Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Manage_Users_Page'
+        And I capture the page screenshot
+        And I select a 'QA Automation' User to View and Edit which is 'active'
+        And I can see the user profile page
+        And I capture the page screenshot
+        When I click the change link against 'Title' on the user profile page
+        Then I can see the edit user profile page
+        And I capture the page screenshot
+        When I click the 'Back' link on the 'Edit_User_Profile_Page'
+        Then I can see the user profile page
+        And I capture the page screenshot
+        When I click the 'Back' link on the 'User_Profile_Page'
+        Then I can see the 'Manage_Users_Page'
+        And I capture the page screenshot
+        And I capture the page screenshot
+        Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Manage_Users_Page'
+        And I capture the page screenshot
+      
+        Examples:
+            | Advanced_Filters     |
+            | Advanced_Filter_Nine |
