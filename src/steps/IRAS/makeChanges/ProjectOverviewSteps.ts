@@ -31,7 +31,9 @@ Then(
     const dataset = projectDetailsTitlePage.projectDetailsTitlePageTestData[datasetName];
     const expectedProjectTitle = dataset.short_project_title_text;
     const actualProjectTitle = confirmStringNotNull(await projectOverviewPage.project_short_title_label.textContent());
-    const actualProjectTitleUpdated = actualProjectTitle.slice(21);
+    const actualProjectTitleUpdated = actualProjectTitle
+      .replace(projectOverviewPage.projectOverviewPageTestData.Project_Overview_Page.short_project_title_label, '')
+      .trim();
     expect(actualProjectTitleUpdated).toBe(expectedProjectTitle);
   }
 );

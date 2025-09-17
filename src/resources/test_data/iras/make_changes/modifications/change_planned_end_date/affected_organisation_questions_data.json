@@ -10,7 +10,7 @@
     "will_nhs_hsc_organisations_require_additional_resources_question_label": "Will participating NHS/HSC organisations require additional resources to implement this change?"
   },
   "Label_Texts_Non_Nhs_Hsc": {
-    "where_organisation_change_affect_non_nhs_question_label": "Where are the participating non-NHS/HSC organisations that will be affected by this change?",
+    "where_organisation_change_affect_non_nhs_question_label": "Where are the participating non-NHS/HSC organisation that will be affected by this change?",
     "where_organisation_change_affect_hint_label": "Select all that apply"
   },
   "Valid_Data_All_Fields": {
