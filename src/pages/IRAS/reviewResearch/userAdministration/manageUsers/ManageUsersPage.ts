@@ -72,7 +72,8 @@ export default class ManageUsersPage {
   readonly date_last_logged_in_from_date_fieldset: Locator;
   readonly date_last_logged_in_to_date_fieldset: Locator;
   readonly date_last_logged_in_to_date_error: Locator;
-  readonly date_last_logged_in_error_message: Locator;
+  readonly date_last_logged_in_to_date_error_message: Locator;
+  readonly date_last_logged_in_from_date_error_message: Locator;
   readonly country_checkbox_selected_hint_label: Locator;
   readonly country_checkbox_hint_label: Locator;
   readonly user_search_text: Locator;
@@ -291,10 +292,24 @@ export default class ManageUsersPage {
         ),
       })
       .getByRole('textbox');
-
-    this.date_last_logged_in_error_message = this.page
-      .locator('.govuk-error-message')
-      .getByText(manageUsersPageTestData.Error_Message_Field_Dataset.Field_Error_Date_Last_Logged_In);
+    this.date_last_logged_in_to_date_error_message = this.page
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group')
+      .filter({
+        hasText:
+          this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List
+            .date_last_logged_in_to_date_hint_text,
+      })
+      .locator('.govuk-error-message');
+    this.date_last_logged_in_from_date_error_message = this.page
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group')
+      .filter({
+        hasText:
+          this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List
+            .date_last_logged_in_from_date_hint_text,
+      })
+      .locator('.govuk-error-message');
     this.country_checkbox_selected_hint_label = this.country_fieldset.getByText(
       this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.selected_checkboxes_hint_label
     );
@@ -374,9 +389,9 @@ export default class ManageUsersPage {
   }
 
   async assertOnManageUsersPage() {
-    await expect(this.page_heading).toBeVisible();
+    await expect.soft(this.page_heading).toBeVisible();
     expect.soft(await this.page.title()).toBe(this.manageUsersPageTestData.Manage_Users_Page.title);
-    await expect(this.search_hint_text).toBeVisible();
+    await expect.soft(this.search_hint_text).toBeVisible();
   }
 
   async goto(pageSize?: string, searchQuery?: string) {
