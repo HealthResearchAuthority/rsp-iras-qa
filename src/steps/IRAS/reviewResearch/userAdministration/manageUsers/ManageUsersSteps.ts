@@ -161,6 +161,38 @@ When(
   }
 );
 
+Then(
+  'I validate {string} displayed on advanced filters in {string}',
+  async ({ commonItemsPage, manageUsersPage }, errorMessageFieldAndSummaryDatasetName: string, pageKey: string) => {
+    let errorMessageFieldDataset: any;
+    if (pageKey === 'Manage_Users_Page') {
+      errorMessageFieldDataset =
+        manageUsersPage.manageUsersPageTestData.Error_Validation[errorMessageFieldAndSummaryDatasetName];
+    }
+    await expect(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
+    const allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset);
+    const summaryErrorActualValues = await commonItemsPage.getSummaryErrorMessages();
+    expect(summaryErrorActualValues).toEqual(allSummaryErrorExpectedValues);
+    for (const key in errorMessageFieldDataset) {
+      if (Object.hasOwn(errorMessageFieldDataset, key)) {
+        const expectedMessage = errorMessageFieldDataset[key];
+        if (
+          errorMessageFieldAndSummaryDatasetName === 'Invalid_Date_Range_To_Before_From_Error' ||
+          errorMessageFieldAndSummaryDatasetName === 'Invalid_Date_To_Error'
+        ) {
+          const actualMessage = await manageUsersPage.date_last_logged_in_to_date_error_message.textContent();
+          expect(actualMessage).toEqual(expectedMessage);
+        } else if (errorMessageFieldAndSummaryDatasetName === 'Invalid_Date_From_Error') {
+          const actualMessage = await manageUsersPage.date_last_logged_in_from_date_error_message.textContent();
+          expect(actualMessage).toEqual(expectedMessage);
+        } else {
+          throw new Error(`Unhandled error message dataset name: ${errorMessageFieldAndSummaryDatasetName}`);
+        }
+      }
+    }
+  }
+);
+
 When(
   'I select advanced filters in the manage users page using {string}',
   async ({ manageUsersPage, commonItemsPage }, filterDatasetName: string) => {
