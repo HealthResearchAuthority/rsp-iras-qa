@@ -21,5 +21,4 @@ Feature: Modifications Tasklist page that displays modifications ready to be ass
             | Short_Project_Title   | short project title   | ascending    | descending     |
             | Date_Submitted        | date submitted        | descending   | ascending      |
             | Days_Since_Submission | days since submission | ascending    | descending     |
-
-   
+ 
