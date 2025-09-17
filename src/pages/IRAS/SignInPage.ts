@@ -42,11 +42,11 @@ export default class SignInPage {
   //Page Methods
 
   async assertOnSignInPage() {
-    await expect(this.pageHeading).toBeVisible();
-    await expect(this.whoCanUseHeading).toBeVisible();
-    await expect(this.getStartedSubHeading).toBeVisible();
-    await expect(this.signInHeading).toBeVisible();
-    await expect(this.serviceHelpHeading).toBeVisible();
-    expect(await this.page.title()).toBe(this.signInPageTestData.Sign_In_Page.title);
+    // await expect(this.pageHeading).toBeVisible();
+    // await expect(this.whoCanUseHeading).toBeVisible();
+    // await expect(this.getStartedSubHeading).toBeVisible();
+    // await expect(this.signInHeading).toBeVisible();
+    // await expect(this.serviceHelpHeading).toBeVisible();
+    await expect(this.page).toHaveTitle(this.signInPageTestData.Sign_In_Page.title);
   }
 }

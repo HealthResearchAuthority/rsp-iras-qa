@@ -855,7 +855,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I expect to receive no WCAG Violations
 
   @axeAccessibilityAdvanceFilterSearchModifications @StudyWideReviewer
-  Scenario: Search - Approvals - Plan and manage healthcare research
+  Scenario: Search modifications page with active filters
     Given I have navigated to the 'Search_Modifications_Page'
     Then I can see the 'Search_Modifications_Page'
     When I enter 'Valid_Iras_Id_Nth' into the search field
