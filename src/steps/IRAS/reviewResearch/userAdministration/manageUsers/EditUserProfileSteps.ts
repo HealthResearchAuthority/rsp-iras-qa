@@ -1,6 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { test, expect } from '../../../../../hooks/CustomFixtures';
-import { generateUniqueEmail, generateUniqueValue, generatePhoneNumber } from '../../../../../utils/UtilFunctions';
+import { generateUniqueValue, generatePhoneNumber } from '../../../../../utils/UtilFunctions';
 import { Locator } from 'playwright/test';
 
 const { Then, When } = createBdd(test);
@@ -44,16 +44,7 @@ When(
       }
       if (Object.hasOwn(dataset, key)) {
         const locator: Locator = editUserProfilePage[key];
-
         switch (key) {
-          case 'email_address_text':
-            uniqueValues.email = await generateUniqueEmail(
-              dataset[key],
-              editUserProfilePage.editUserProfilePageTestData.Edit_User_Profile.email_address_prefix
-            );
-            await locator.fill(uniqueValues.email);
-            break;
-
           case 'title_text':
           case 'first_name_text':
           case 'last_name_text':
