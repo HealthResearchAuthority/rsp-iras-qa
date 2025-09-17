@@ -268,7 +268,6 @@ Feature: Create Amendment - Create Project - Regression Tests
       | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Data_With_No_NHS_HSC |
 
   @CreateProjectRTSRegression @jsEnabled
-  # The below scenario is being skipped for regression. Once the database connection is working,
   # new code to be written to retrieve the RTS data from dev database.
   Scenario Outline: Validate the active primary sponsor organisation from rts with data in database
     When I authorise the rts api using '<RTS_API_Data>'

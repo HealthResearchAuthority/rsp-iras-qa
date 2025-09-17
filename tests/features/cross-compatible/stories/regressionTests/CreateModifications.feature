@@ -135,20 +135,20 @@ Feature: Create Amendment - Create Modifications
       | Participating_Organisation | Addition_Of_Participant_Identification_Centres_Option      | Valid_Data_All_Fields | Modifications_Tile      |
       | Participating_Organisation | Early_Closure_Of_Participant_Identification_Centres_Option | Valid_Data_All_Fields | Modifications_Tile      |
 
-# The KNOWN_DEFECT-RSP-5007 will be fixed with the new user story RSP-4136 so this scenario can be re-used later
-# @ParticipatingOrganisationsErrorValidationRegression @KNOWN_DEFECT-RSP-5007
-# Scenario Outline: Validate the mandatory field error message on participating organisation page
-#   When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-#   And I capture the page screenshot
-#   And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-#   And I can see the select area of change page
-#   And I select '<Area_Of_Change>' from area of change dropdown and '<Specific_Change>' from specific change dropdown
-#   And I capture the page screenshot
-#   When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-#   And I capture the page screenshot
-#   And I click the 'Save_Continue' button on the 'Participating_Organisations_Page'
-#   Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Participating_Organisations_Page'
+  # The KNOWN_DEFECT-RSP-5007 will be fixed with the new user story RSP-4136 so this scenario can be re-used later
+  @ParticipatingOrganisationsErrorValidationRegression @KNOWN_DEFECT-RSP-5007 @skip
+  Scenario Outline: Validate the mandatory field error message on participating organisation page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I select '<Area_Of_Change>' from area of change dropdown and '<Specific_Change>' from specific change dropdown
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Participating_Organisations_Page'
+    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Participating_Organisations_Page'
 
-#   Examples:
-#     | Field_And_Summary_Error_Message              | Area_Of_Change             | Specific_Change          | Modifications_Tile_Link |
-#     | Field_Error_participating_organisations_text | Participating_Organisation | Addition_Of_Sites_Option | Modifications_Tile      |
+    Examples:
+      | Field_And_Summary_Error_Message              | Area_Of_Change             | Specific_Change          | Modifications_Tile_Link |
+      | Field_Error_participating_organisations_text | Participating_Organisation | Addition_Of_Sites_Option | Modifications_Tile      |
