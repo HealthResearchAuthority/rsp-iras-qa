@@ -52,15 +52,15 @@ export default class AffectedOrganisationQuestionsPage {
           .will_some_or_all_organisations_be_affected_hint_label
       );
     this.where_organisation_change_affect_nhs_question_checkbox = this.page
-      .getByTestId('SelectedLocations_checkboxes')
+      .getByTestId('Questions[0].Answers_checkboxes')
       .getByRole('checkbox');
 
     this.where_organisation_change_affect_non_nhs_question_checkbox = this.page
-      .getByTestId('SelectedLocations_checkboxes')
+      .getByTestId('Questions[3].Answers_checkboxes')
       .getByRole('checkbox');
 
     this.will_some_or_all_organisations_be_affected_question_label = this.page
-      .locator('.govuk-label')
+      .locator('.govuk-fieldset__legend--s')
       .getByText(
         this.affectedOrganisationQuestionsPageTestData.Label_Texts_Nhs_Hsc
           .will_some_or_all_organisations_be_affected_question_label,
@@ -73,7 +73,7 @@ export default class AffectedOrganisationQuestionsPage {
       this.will_some_or_all_organisations_radio_fieldset.getByRole('radio');
 
     this.will_nhs_hsc_organisations_require_additional_resources_question_label = this.page
-      .locator('.govuk-label')
+      .locator('.govuk-fieldset__legend--s')
       .getByText(
         this.affectedOrganisationQuestionsPageTestData.Label_Texts_Nhs_Hsc
           .will_nhs_hsc_organisations_require_additional_resources_question_label,
@@ -98,6 +98,6 @@ export default class AffectedOrganisationQuestionsPage {
   async assertOnAffectedOrganisationQuestionsPage() {
     await expect(this.pageHeading).toBeVisible();
     const currentUrl = this.page.url();
-    expect(currentUrl).toContain('projectmodification/affectingorganisations');
+    expect(currentUrl).toContain('affecting-organisations');
   }
 }

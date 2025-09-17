@@ -74,7 +74,7 @@ Feature: Create Amendment - Create Modifications
       | New_Modification_Count | Modifications_Tile_Link |
       | Modification_Count     | Modifications_Tile      |
 
-  @SelectAreaOfChangeSaveLaterRegression @KNOWN_DEFECT-RSP-4997
+  @SelectAreaOfChangeSaveLaterRegression @KNOWN_DEFECT_RSP-5075
   Scenario Outline: Verify that user can save the modifications progress on select area of change page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I capture the page screenshot
@@ -96,7 +96,7 @@ Feature: Create Amendment - Create Modifications
       | Participating_Organisation | Early_Closure_Of_Participant_Identification_Centres_Option | Modifications_Tile      |
       | Default_Value              | Default_Value                                              | Modifications_Tile      |
 
-  @SelectAreaOfChangeErrorValidationRegression
+  @SelectAreaOfChangeErrorValidationRegression @KNOW_DEFECT_RSP-5075
   Scenario Outline: Validate the mandatory field error message on select area of change page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I capture the page screenshot
@@ -135,7 +135,8 @@ Feature: Create Amendment - Create Modifications
       | Participating_Organisation | Addition_Of_Participant_Identification_Centres_Option      | Valid_Data_All_Fields | Modifications_Tile      |
       | Participating_Organisation | Early_Closure_Of_Participant_Identification_Centres_Option | Valid_Data_All_Fields | Modifications_Tile      |
 
-  @ParticipatingOrganisationsErrorValidationRegression @KNOWN_DEFECT-RSP-5007
+  # The KNOWN_DEFECT-RSP-5007 will be fixed with the new user story RSP-4136 so this scenario can be re-used later
+  @ParticipatingOrganisationsErrorValidationRegression @KNOWN_DEFECT-RSP-5007 @skip
   Scenario Outline: Validate the mandatory field error message on participating organisation page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I capture the page screenshot
