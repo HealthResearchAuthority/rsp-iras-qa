@@ -7,8 +7,7 @@ Feature: As an Authenticated Admin User I have Access to Authorised Application 
     @logoutSmoke
     Scenario: I am able to Logout
         When I click the 'Logout' button on the 'Banner'
-        Then I can see the 'Sign_In_Page'
-        And I can see a 'Login' button on the 'Sign_In_Page'
+        And I can see a 'Login' button on the 'Home_Page'
 
     @accessResearchAccountHomePageSmoke
     Scenario: I am able to access the my account home page

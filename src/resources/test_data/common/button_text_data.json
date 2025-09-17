@@ -6,11 +6,9 @@
     "sign_in_button": "Sign in",
     "continue_button": "Continue"
   },
-  "Sign_In_Page": {
-    "Login": "Sign In"
-  },
   "Home_Page": {
     "New_Application": "Create New Application",
+    "Login": "Sign In",
     "Create_Project_Record": "Create project record"
   },
   "Create_Application_Page": {
