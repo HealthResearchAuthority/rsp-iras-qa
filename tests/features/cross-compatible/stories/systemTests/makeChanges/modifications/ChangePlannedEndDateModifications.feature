@@ -133,7 +133,7 @@ Feature: Create Modifications - Change to planned end date
       | Planned_End_Date      | Label_Texts           |
       | Valid_Data_All_Fields | Valid_Data_All_Fields |
 
-  @rsp-4103 @ValidateSaveForLaterForOranisationAffectModifications @KNOWN_DEFECT_RSP-4997
+  @rsp-4103 @ValidateSaveForLaterForOranisationAffectModifications
   Scenario Outline: Validate save for later functionality for valid or empty data for 'which organisation this change affect' page in modifications
     Then I can see the 'Planned_End_Date' page for modifications
     And I capture the page screenshot

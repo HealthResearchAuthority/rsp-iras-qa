@@ -357,11 +357,12 @@ export default class SearchModificationsPage {
   async assertOnSearchModificationsPage() {
     await expect(this.page_heading).toBeVisible();
     await expect(this.page_guidance_text).toBeVisible();
-    expect(await this.page.title()).toBe(this.searchModificationsPageTestData.Search_Modifications_Page.title);
+    expect.soft(await this.page.title()).toBe(this.searchModificationsPageTestData.Search_Modifications_Page.title);
   }
 
   async goto() {
     await this.page.goto('approvals/index');
+    await this.assertOnSearchModificationsPage();
   }
 
   async getAllModificationsTheTable(): Promise<Map<string, string[]>> {

@@ -322,7 +322,7 @@ export default class ManageUsersPage {
       .locator('.govuk-fieldset')
       .locator('.govuk-form-group', {
         has: this.page.getByText(
-          this.manageUsersPageTestData.Manage_Users_Page.Advanced_Filters_Hint_Labels.role_hint_label
+          this.manageUsersPageTestData.Manage_Users_Page.Advanced_Filters_Hint_Labels.role_checkbox_hint_label
         ),
       });
     this.role_checkbox = this.role_fieldset.getByRole('checkbox');
@@ -330,7 +330,7 @@ export default class ManageUsersPage {
       this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.selected_checkboxes_hint_label
     );
     this.role_checkbox_hint_label = this.role_fieldset.getByText(
-      this.manageUsersPageTestData.Manage_Users_Page.Advanced_Filters_Hint_Labels.role_hint_label,
+      this.manageUsersPageTestData.Manage_Users_Page.Advanced_Filters_Hint_Labels.role_checkbox_hint_label,
       {
         exact: true,
       }
@@ -346,7 +346,7 @@ export default class ManageUsersPage {
       .locator('.govuk-fieldset')
       .locator('.govuk-form-group', {
         has: this.page.getByText(
-          this.manageUsersPageTestData.Manage_Users_Page.Advanced_Filters_Hint_Labels.review_body_hint_label
+          this.manageUsersPageTestData.Manage_Users_Page.Advanced_Filters_Hint_Labels.review_body_checkbox_hint_label
         ),
       });
     this.review_body_checkbox = this.review_body_fieldset.getByRole('checkbox');
@@ -354,7 +354,7 @@ export default class ManageUsersPage {
       this.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List.selected_checkboxes_hint_label
     );
     this.review_body_checkbox_hint_label = this.review_body_fieldset.getByText(
-      this.manageUsersPageTestData.Manage_Users_Page.Advanced_Filters_Hint_Labels.review_body_hint_label,
+      this.manageUsersPageTestData.Manage_Users_Page.Advanced_Filters_Hint_Labels.review_body_checkbox_hint_label,
       {
         exact: true,
       }
@@ -415,8 +415,8 @@ export default class ManageUsersPage {
   }
 
   async assertOnManageUsersPage() {
-    await expect(this.page_heading).toBeVisible();
-    expect(await this.page.title()).toBe(this.manageUsersPageTestData.Manage_Users_Page.title);
+    await expect.soft(this.page_heading).toBeVisible();
+    expect.soft(await this.page.title()).toBe(this.manageUsersPageTestData.Manage_Users_Page.title);
     await expect(this.search_hint_text).toBeVisible();
   }
 

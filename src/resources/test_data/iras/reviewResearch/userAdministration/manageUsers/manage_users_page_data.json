@@ -41,83 +41,16 @@
       "status_hint_label": "Select one option",
       "date_last_logged_in_from_date_help_text": "For example, 28 February 2023",
       "date_last_logged_in_to_date_help_text": "For example, 12 October 2024",
-      "role_hint_label": "Select all that apply",
-      "review_body_hint_label": "Select all that apply"
+      "role_checkbox_hint_label": "Select all that apply",
+      "role_checkbox_selected_hint_label": "selected",
+      "review_body_checkbox_hint_label": "Select all that apply",
+      "review_body_checkbox_selected_hint_label": "selected"
     },
     "enlarged_page_size": "100",
     "enabled_status": "Active",
     "disabled_status": "Disabled"
   },
-  "Active_User_Role_Operations": {
-    "title_text": "Mr",
-    "first_name_text": "QA Automation First Name Test",
-    "last_name_text": "Test Last Name",
-    "email_address_text": "QAAutomation20250327174507168hscrd@health.org",
-    "telephone_text": "07000000000",
-    "organisation_text": "QA Automation HRA",
-    "job_title_text": "Sr.Reviewer",
-    "role_checkbox": ["Operations"],
-    "country_checkbox": ["England"]
-  },
 
-  "Disabled_User_Role_Operations": {
-    "title_text": "Mr",
-    "first_name_text": "QA Automation First Name Test",
-    "last_name_text": "Last Name Test",
-    "email_address_text": "QAAutomation20250320211341018hscrd@health.org",
-    "telephone_text": "07000000000",
-    "organisation_text": "QA Automation HRA",
-    "job_title_text": "Sr.Reviewer",
-    "role_checkbox": ["Operations"],
-    "country_checkbox": ["England"]
-  },
-  "Active_User_Role_Reviewer": {
-    "title_text": "Mr",
-    "first_name_text": "QA Automation First Name Test",
-    "last_name_text": "Test Last Name",
-    "email_address_text": "QAAutomation2hscrd@health.org",
-    "telephone_text": "07000000000",
-    "organisation_text": "QA Automation HRA",
-    "job_title_text": "Sr.Reviewer",
-    "role_checkbox": ["reviewer"]
-  },
-  "Valid_Data_Role_Operations": {
-    "title_text": "Mr",
-    "first_name_text": "QA Automation First Name Test Role_Operations",
-    "last_name_text": "Test Last Name Role_Operations",
-    "email_address_text": "QAAutomation20250610105501008hscrd@health.org",
-    "telephone_text": "07000000000",
-    "organisation_text": "QA Automation HRA Role_Operations",
-    "job_title_text": "Sr.Reviewer Role_Operations",
-    "role_checkbox": ["Operations", "System administrator"],
-    "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
-  },
-  "Disabled_User_Role_Reviewer": {
-    "title_text": "Mr",
-    "first_name_text": "QA Automation First Name Test",
-    "last_name_text": "Test Last Name",
-    "email_address_text": "QAAutomation20250320153825980hscrd@health.org",
-    "telephone_text": "07000000000",
-    "organisation_text": "HRA",
-    "job_title_text": "Reviewer",
-    "role_checkbox": ["reviewer"]
-  },
-
-  "Valid_Data_In_All_Fields_Role_Reviewer": {
-    "title_text": "Mr",
-    "first_name_text": "QA Automation First Name Test",
-    "last_name_text": "Test Last Name",
-    "email_address_text": "QAAutomationhscrd@health.org",
-    "telephone_text": "07000000000",
-    "organisation_text": "QA Automation HRA",
-    "job_title_text": "Sr.Reviewer",
-    "role_checkbox": ["reviewer"]
-  },
-  "Edit_User_Only_Mandatory_Fields_Data": {
-    "first_name_text": "QA Automation First Name Test",
-    "last_name_text": "Test Last Name",
-    "email_address_text": "QAAutomation20250327115050148hscrd@health.org"
-  },
   "Search_For_Users": {
     "Search_Queries": {
       "Existing_QA_User_First_Name": { "search_input_text": "QA Automation First Name Test" },
@@ -168,7 +101,7 @@
     "Field_Error_Date_Last_Logged_In": "'Search to' date must be after 'Search from' date"
   },
   "Advanced_Filters": {
-    "Advanced_Filter_One": {
+    "Advanced_Filter_Country_All_Status_Active_From_date_To_Date_Role_All_Reviewbody_All": {
       "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
       "status_radio": "Active",
       "date_last_logged_in_from_day_text": "11",
@@ -176,7 +109,20 @@
       "date_last_logged_in_from_year_text": "2023",
       "date_last_logged_in_to_day_text": "22",
       "date_last_logged_in_to_month_dropdown": "July",
-      "date_last_logged_in_to_year_text": "2025"
+      "date_last_logged_in_to_year_text": "2030",
+      "review_body_checkbox": [
+        "Health Research Authority (HRA)",
+        "Health and Social Care Northern Ireland (HSCNI)",
+        "Health and Care Research Wales (HCRW)",
+        "National Research Service Permissions Coordination Centre (NRSPCC)"
+      ],
+      "role_checkbox": [
+        "Applicant",
+        "Study-wide reviewer",
+        "System administrator",
+        "Team manager",
+        "Workflow co-ordinator"
+      ]
     },
     "Advanced_Filter_One_All": {
       "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
@@ -310,12 +256,12 @@
       "status_radio": "Active"
     },
     "Advanced_Filter_Review_body_HRA_Role_Studywide_Reviewer_Status_Active": {
-      "review_body_checkbox": ["QA Automation Health Research Authority (HRA)"],
+      "review_body_checkbox": ["Health Research Authority (HRA)"],
       "role_checkbox": ["Study-wide reviewer"],
       "status_radio": "Active"
     },
     "Advanced_Filter_Review_body_NRSPCC_Role_Workflow_Coordinator_Status_Active": {
-      "review_body_checkbox": ["QA Automation National Research Service Permissions Coordination Centre (NRSPCC)"],
+      "review_body_checkbox": ["National Research Service Permissions Coordination Centre (NRSPCC)"],
       "role_checkbox": ["Workflow co-ordinator"],
       "status_radio": "Active"
     },
@@ -359,16 +305,16 @@
       "status_radio": "Disabled"
     },
     "Advanced_Filter_Country_No_Review_Body_HRA_Role_No": {
-      "review_body_checkbox": ["QA Automation Health Research Authority (HRA)"]
+      "review_body_checkbox": ["Health Research Authority (HRA)"]
     },
     "Advanced_Filter_Country_No_Review_Body_HSCNI_Role_No": {
-      "review_body_checkbox": ["QA Automation Health and Social Care Northern Ireland (HSCNI)"]
+      "review_body_checkbox": ["Health and Social Care Northern Ireland (HSCNI)"]
     },
     "Advanced_Filter_Country_No_Review_Body_HCRW_Role_No": {
       "review_body_checkbox": ["Health and Care Research Wales (HCRW)"]
     },
     "Advanced_Filter_Country_No_Review_Body_NRSPCC_Role_No": {
-      "review_body_checkbox": ["QA Automation National Research Service Permissions Coordination Centre (NRSPCC)"]
+      "review_body_checkbox": ["National Research Service Permissions Coordination Centre (NRSPCC)"]
     },
     "Advanced_Filter_Country_No_Review_Body_No_Role_Applicant": {
       "role_checkbox": ["Applicant"]
