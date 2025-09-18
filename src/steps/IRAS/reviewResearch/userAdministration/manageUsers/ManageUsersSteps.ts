@@ -114,11 +114,15 @@ When('I keep note of the current login date', async ({ manageUsersPage }) => {
     month: 'long',
     year: 'numeric',
   }).format(today);
-  const formattedDateTruncated = new Intl.DateTimeFormat('en-GB', {
+  const formattedDateTruncatedParts = new Intl.DateTimeFormat('en-GB', {
     day: 'numeric',
     month: 'short',
     year: 'numeric',
-  }).format(today);
+  }).formatToParts(today);
+  const day = formattedDateTruncatedParts.find((p) => p.type === 'day')?.value;
+  const month = formattedDateTruncatedParts.find((p) => p.type === 'month')?.value;
+  const year = formattedDateTruncatedParts.find((p) => p.type === 'year')?.value;
+  const formattedDateTruncated = `${day} ${month?.slice(0, 3)} ${year}`;
   manageUsersPage.setLastLoggedInDateFull(formattedDateFull);
   manageUsersPage.setLastLoggedInDateTruncated(formattedDateTruncated);
   manageUsersPage.setLastLoggedInHours(today.getHours());
@@ -127,9 +131,9 @@ When('I keep note of the current login date', async ({ manageUsersPage }) => {
 When(
   'I validate the last logged in is displayed as truncated date in manage users page',
   async ({ manageUsersPage }) => {
-    expect(manageUsersPage.last_logged_in_from_list_label).toContainText(
-      `${manageUsersPage.getLastLoggedInDateTruncated()} ${dateTimeRelatedData.at}`
-    );
+    expect
+      .soft(manageUsersPage.last_logged_in_from_list_label)
+      .toContainText(`${manageUsersPage.getLastLoggedInDateTruncated()} ${dateTimeRelatedData.at}`);
     if (manageUsersPage.getLastLoggedInHours() >= 12) {
       expect(manageUsersPage.last_logged_in_from_list_label).toContainText(`${dateTimeRelatedData.afternoon}`);
     } else {
@@ -173,6 +177,7 @@ When(
           }
           await commonItemsPage.fillUIComponent(dataset, key, manageUsersPage);
         } else if (key === 'review_body_checkbox') {
+          await manageUsersPage[key + '_chevron'].click();
           await commonItemsPage.selectCheckboxUserProfileReviewBody(dataset, manageUsersPage);
         } else {
           await manageUsersPage[key + '_chevron'].click();
