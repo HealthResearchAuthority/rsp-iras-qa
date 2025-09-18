@@ -1,7 +1,7 @@
 {
   "Project_Overview_Page": {
     "heading": "Project overview",
-    "short_project_title_label": "Short project title: ",
+    "short_project_title_label": "Short project title:",
     "project_details_heading": "Project details",
     "project_details_hint_label": "View and edit key information about this project.",
     "modification_saved_success_message_header_text": "Success",
