@@ -82,18 +82,9 @@ export default class CommonItemsPage {
   readonly result_count: Locator;
   readonly iras_id_search_text: Locator;
   readonly advanced_filter_active_filters_label: Locator;
-  readonly no_matching_search_result_header_label: Locator;
-  readonly no_matching_search_result_sub_header_label: Locator;
-  readonly no_matching_search_result_body_one_label: Locator;
-  readonly no_matching_search_result_body_two_label: Locator;
-  readonly no_matching_search_result_body_three_label: Locator;
-  readonly no_matching_search_result_body_four_label: Locator;
   readonly no_matching_search_result_count_label: Locator;
   readonly active_filters_list: Locator;
   readonly clear_all_filters_link: Locator;
-  readonly no_results_bullet_points: Locator;
-  readonly no_results_guidance_text: Locator;
-  readonly no_results_heading: Locator;
   readonly apply_filters_button: Locator;
   readonly upload_files_input: Locator;
   readonly search_results_count: Locator;
@@ -210,16 +201,6 @@ export default class CommonItemsPage {
     });
     //review for duplication with search items//
     this.result_count = this.advanced_filter_chevron.getByText(this.commonTestData.result_count_heading);
-    this.no_results_heading = this.page
-      .getByRole('heading')
-      .getByText(this.commonTestData.no_results_heading, { exact: true });
-    this.no_matching_search_result_header_label = this.page.getByRole('heading');
-    this.no_matching_search_result_sub_header_label = this.page.getByRole('paragraph');
-    this.no_matching_search_result_body_one_label =
-      this.no_matching_search_result_body_two_label =
-      this.no_matching_search_result_body_three_label =
-      this.no_matching_search_result_body_four_label =
-        this.page.getByRole('listitem');
     this.no_matching_search_result_count_label = this.page.getByRole('heading');
     this.active_filters_list = this.page
       .getByRole('heading', {
@@ -234,12 +215,6 @@ export default class CommonItemsPage {
       name: this.commonTestData.clear_all_filters_label,
       exact: true,
     });
-    this.no_results_guidance_text = this.page
-      .getByRole('paragraph')
-      .getByText(this.commonTestData.no_results_guidance_text, {
-        exact: true,
-      });
-    this.no_results_bullet_points = this.no_results_guidance_text.locator('..').getByRole('listitem');
     this.apply_filters_button = this.page
       .getByRole('button')
       .getByText(this.buttonTextData.Search_Modifications_Page.Apply_Filters, {
@@ -1149,17 +1124,6 @@ export default class CommonItemsPage {
   async areSearchResultsValid(actualValues: string[], allowedValues: string[]) {
     const allValid = actualValues.every((value) => allowedValues.includes(value));
     return allValid;
-  }
-
-  async getNoResultsBulletPoints(): Promise<string[]> {
-    const bulletPoints = this.no_results_bullet_points;
-    const count = await bulletPoints.count();
-    const values: string[] = [];
-    for (let i = 0; i < count; i++) {
-      const text = confirmStringNotNull(await bulletPoints.nth(i).textContent());
-      values.push(text);
-    }
-    return values;
   }
 
   async validatePagination(currentPage: any, totalPages: any, pagename: string, navigateMethod: string) {
