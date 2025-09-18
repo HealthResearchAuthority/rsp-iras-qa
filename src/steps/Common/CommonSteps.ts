@@ -827,11 +827,11 @@ Then(
   async ({ commonItemsPage }, pagename: string, navigateMethod: string) => {
     const totalPages = await commonItemsPage.getTotalPages();
     //Limiting the max pages to validate to 10
-    let ValidatePageUntil = 0;
+    let validatePageUntil = 0;
     if (totalPages > commonItemsPage.commonTestData.maxPagesToValidate) {
-      ValidatePageUntil = totalPages - commonItemsPage.commonTestData.maxPagesToValidate;
+      validatePageUntil = totalPages - commonItemsPage.commonTestData.maxPagesToValidate;
     } else {
-      ValidatePageUntil = totalPages;
+      validatePageUntil = totalPages;
     }
     let totalItems: number;
     if (pagename == 'My_Research_Projects_Page' || pagename === 'Post_Approval_Page') {
@@ -840,7 +840,7 @@ Then(
       totalItems = await commonItemsPage.getTotalItems();
     }
     await commonItemsPage.clickOnPages(totalPages, navigateMethod);
-    for (let currentPage = totalPages; currentPage >= ValidatePageUntil; currentPage--) {
+    for (let currentPage = totalPages; currentPage >= validatePageUntil; currentPage--) {
       await commonItemsPage.validatePagination(currentPage, totalPages, totalItems, pagename, navigateMethod);
     }
   }
