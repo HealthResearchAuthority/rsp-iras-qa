@@ -112,3 +112,61 @@ When('I confirm all checkboxes are {string}', async ({ modificationsReadyToAssig
     }
   }
 });
+
+When(
+  'I enter {string} into the search field in the modifications ready to assign page',
+  async ({ modificationsReadyToAssignPage }, datasetName: string) => {
+    const dataset = modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Iras_Id[datasetName];
+    await modificationsReadyToAssignPage.iras_id_search_text.fill(dataset['iras_id_text']);
+  }
+);
+
+When(
+  'I select modifications with ids as {string} by clicking the checkbox in the modifications ready to assign page',
+  async ({ modificationsReadyToAssignPage }, datasetName: string) => {
+    const dataset = modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Modification_Id[datasetName];
+    const modificationRecord: string[] = [];
+    for (const key in dataset) {
+      if (Object.hasOwn(dataset, key)) {
+        for (const modificationId of dataset[key]) {
+          await modificationsReadyToAssignPage.page.getByTestId(`${modificationId}`).check();
+          const shortProjectTitle = await modificationsReadyToAssignPage.page
+            .getByTestId(`${modificationId}`)
+            .locator('../../..')
+            .getByRole('strong')
+            .textContent();
+          modificationRecord.push(modificationId + ':' + shortProjectTitle);
+        }
+      }
+    }
+    await modificationsReadyToAssignPage.setSelectedModifications(modificationRecord);
+  }
+);
+
+When(
+  'I can see previously assigned modification is no longer displayed in the modifications ready to assign table for {string}',
+  async ({ modificationsReadyToAssignPage }, datasetName: string) => {
+    const dataset = modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Modification_Id[datasetName];
+    for (const key in dataset) {
+      if (Object.hasOwn(dataset, key)) {
+        for (const modificationId of dataset[key]) {
+          await expect(modificationsReadyToAssignPage.page.getByTestId(`${modificationId}`)).not.toBeVisible();
+        }
+      }
+    }
+  }
+);
+
+When(
+  'I can see previously selected modifications checkboxes are retained for {string}',
+  async ({ modificationsReadyToAssignPage }, datasetName: string) => {
+    const dataset = modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Modification_Id[datasetName];
+    for (const key in dataset) {
+      if (Object.hasOwn(dataset, key)) {
+        for (const modificationId of dataset[key]) {
+          await expect.soft(modificationsReadyToAssignPage.page.getByTestId(`${modificationId}`)).toBeChecked();
+        }
+      }
+    }
+  }
+);

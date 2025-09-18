@@ -7,6 +7,7 @@ export default class ModificationsReadyToAssignPage {
   readonly page: Page;
   readonly modificationsReadyToAssignPageTestData: typeof modificationsReadyToAssignPageTestData;
   readonly searchFilterResultsData: typeof searchFilterResultsData;
+  private _modification_record: string[];
   readonly modifications_tasklist_link: Locator;
   readonly short_project_title_column_label: Locator;
   readonly modification_id_column_label: Locator;
@@ -32,12 +33,14 @@ export default class ModificationsReadyToAssignPage {
   readonly search_button_label: Locator;
   readonly modification_checkbox: Locator;
   readonly results_table: Locator;
+  readonly iras_id_search_text: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page;
     this.modificationsReadyToAssignPageTestData = modificationsReadyToAssignPageTestData;
     this.searchFilterResultsData = searchFilterResultsData;
+    this._modification_record = [];
 
     //Locators
     this.modifications_tasklist_link = this.page.locator('.govuk-heading-s govuk-link hra-card-heading__link');
@@ -96,6 +99,20 @@ export default class ModificationsReadyToAssignPage {
     this.search_button_label = this.page.getByText('Search');
     this.modification_checkbox = this.page.locator('input[name="selectedModificationIds"][type="checkbox"]');
     this.results_table = this.page.getByTestId('modificationsTasklistTable');
+    this.iras_id_search_text = this.page.getByLabel(
+      this.modificationsReadyToAssignPageTestData.Modifications_Ready_To_Assign_Page.iras_id_search_box_label,
+      { exact: true }
+    );
+  }
+
+  //Getters & Setters for Private Variables
+
+  async getSelectedModifications(): Promise<string[]> {
+    return this._modification_record;
+  }
+
+  async setSelectedModifications(value: string[]): Promise<void> {
+    this._modification_record = value;
   }
 
   //Page Methods

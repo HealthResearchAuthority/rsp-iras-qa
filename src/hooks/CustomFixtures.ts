@@ -59,8 +59,10 @@ import AffectedOrganisationQuestionsPage from '../pages/IRAS/makeChanges/modific
 import ReviewChangesPlannedEndDatePage from '../pages/IRAS/makeChanges/modifications/changePlannedEndDate/ReviewChangesPlannedEndDatePage';
 import AddDocumentsModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/AddDocumentsModificationsPage';
 import ReviewUploadedDocumentsModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/ReviewUploadedDocumentsModificationsPage';
-import MyModificationsTasklistPage from '../pages/IRAS/reviewResearch/receiveAmendments/MyModificationsTasklistPage';
 import ModificationsReceivedCommonPage from '../pages/IRAS/reviewResearch/receiveAmendments/ModificationsReceivedCommonPage';
+import SelectStudyWideReviewerPage from '../pages/IRAS/reviewResearch/receiveAmendments/SelectStudyWideReviewerPage';
+import ModificationsAssignmentConfirmationPage from '../pages/IRAS/reviewResearch/receiveAmendments/ModificationsAssignmentConfirmationPage';
+import MyModificationsTasklistPage from '../pages/IRAS/reviewResearch/receiveAmendments/MyModificationsTasklistPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -121,6 +123,8 @@ type CustomFixtures = {
   reviewChangesPlannedEndDatePage: ReviewChangesPlannedEndDatePage;
   addDocumentsModificationsPage: AddDocumentsModificationsPage;
   reviewUploadedDocumentsModificationsPage: ReviewUploadedDocumentsModificationsPage;
+  selectStudyWideReviewerPage: SelectStudyWideReviewerPage;
+  modificationsAssignmentConfirmationPage: ModificationsAssignmentConfirmationPage;
   myModificationsTasklistPage: MyModificationsTasklistPage;
   modificationsReceivedCommonPage: ModificationsReceivedCommonPage;
   makeAxeBuilder: () => AxeBuilder;
@@ -356,6 +360,13 @@ export const test = base.extend<CustomFixtures>({
 
   reviewUploadedDocumentsModificationsPage: async ({ page }, use) => {
     await use(new ReviewUploadedDocumentsModificationsPage(page));
+  },
+
+  selectStudyWideReviewerPage: async ({ page }, use) => {
+    await use(new SelectStudyWideReviewerPage(page));
+  },
+  modificationsAssignmentConfirmationPage: async ({ page }, use) => {
+    await use(new ModificationsAssignmentConfirmationPage(page));
   },
 
   myModificationsTasklistPage: async ({ page }, use) => {

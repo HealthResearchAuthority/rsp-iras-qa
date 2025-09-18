@@ -200,5 +200,11 @@
   },
   "Review_Uploaded_Document_Modifications_Page": {
     "Back": "Back"
+  },
+  "Modifications_Assignment_Confirmation_Page": {
+    "Back_To_Tasklist": "Back to Tasklist"
+  },
+  "Select_Study_Wide_Reviewer_Page": {
+    "Back": "Back"
   }
 }

@@ -37,6 +37,7 @@ When(
       myResearchProjectsPage,
       searchModificationsPage,
       modificationsReadyToAssignPage,
+      selectStudyWideReviewerPage,
       myModificationsTasklistPage,
     },
     page: string
@@ -93,6 +94,9 @@ When(
             await commonItemsPage.search_results_count.textContent()
           )
         );
+        break;
+      case 'Select_Study_Wide_Reviewer_Page':
+        await selectStudyWideReviewerPage.assertOnSelectStudyWideReviewerPage();
         break;
       default:
         throw new Error(`${page} is not a valid option`);
@@ -739,11 +743,6 @@ Given(
       case 'My_Modifications_Tasklist_Page':
         await myModificationsTasklistPage.goto();
         await myModificationsTasklistPage.assertOnMyModificationsTasklistPage();
-        await commonItemsPage.setNoOfResultsBeforeSearch(
-          await commonItemsPage.extractNumFromSearchResultCount(
-            await commonItemsPage.search_results_count.textContent()
-          )
-        );
         break;
       default:
         throw new Error(`${page} is not a valid option`);
@@ -754,7 +753,14 @@ Given(
 Given(
   'I have navigated to the {string} as {string}',
   async (
-    { homePage, systemAdministrationPage, accessDeniedPage, myResearchProjectsPage, approvalsPage },
+    {
+      homePage,
+      systemAdministrationPage,
+      accessDeniedPage,
+      myResearchProjectsPage,
+      approvalsPage,
+      myModificationsTasklistPage,
+    },
     page: string,
     user: string
   ) => {
@@ -791,7 +797,10 @@ Given(
         await myResearchProjectsPage.goto();
         await accessDeniedPage.assertOnAccessDeniedPage();
         break;
-
+      case 'My_Modifications_Tasklist_Page':
+        await myModificationsTasklistPage.goto();
+        await myModificationsTasklistPage.assertOnMyModificationsTasklistPage();
+        break;
       default:
         throw new Error(`${page} is not a valid option`);
     }
