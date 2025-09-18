@@ -674,7 +674,7 @@ Given(
       searchModificationsPage,
       modificationsReadyToAssignPage,
       approvalsPage,
-      myTaskListPage,
+      myModificationsTasklistPage,
       manageUsersPage,
     },
     page: string
@@ -726,8 +726,8 @@ Given(
         await approvalsPage.assertOnApprovalsPage();
         break;
       case 'SWR_My_Tasklist_Page':
-        await myTaskListPage.goto();
-        await myTaskListPage.assertOnMyTaskListPage();
+        await myModificationsTasklistPage.goto();
+        await myModificationsTasklistPage.assertOnMyModificationsTasklistPage();
         break;
       case 'Manage_Users_Page':
         await manageUsersPage.goto();
@@ -742,7 +742,14 @@ Given(
 Given(
   'I have navigated to the {string} as {string}',
   async (
-    { homePage, systemAdministrationPage, accessDeniedPage, myResearchProjectsPage, approvalsPage, myTaskListPage },
+    {
+      homePage,
+      systemAdministrationPage,
+      accessDeniedPage,
+      myResearchProjectsPage,
+      approvalsPage,
+      myModificationsTasklistPage,
+    },
     page: string,
     user: string
   ) => {
@@ -780,8 +787,8 @@ Given(
         await accessDeniedPage.assertOnAccessDeniedPage();
         break;
       case 'SWR_My_Tasklist_Page':
-        await myTaskListPage.goto();
-        await myTaskListPage.assertOnMyTaskListPage();
+        await myModificationsTasklistPage.goto();
+        await myModificationsTasklistPage.assertOnMyModificationsTasklistPage();
         break;
       default:
         throw new Error(`${page} is not a valid option`);

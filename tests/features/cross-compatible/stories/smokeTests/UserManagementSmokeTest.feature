@@ -1,4 +1,4 @@
-@SysAdminUser  @UserManagementSmokeFeature @Smoke @fail
+@SysAdminUser  @UserManagementSmokeFeature @Smoke
 Feature: User Administration: Manage Users -Smoke Tests
     # Mange Users - Page title is different
     Background:
