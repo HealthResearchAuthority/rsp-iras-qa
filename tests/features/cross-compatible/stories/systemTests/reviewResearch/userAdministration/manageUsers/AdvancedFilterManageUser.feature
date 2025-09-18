@@ -189,7 +189,7 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
         And I capture the page screenshot
         And I click the 'Clear_All_Filters' link on the 'Manage_Users_Page'
         And I capture the page screenshot
-        And all selected filters displayed under active Filters have been successfully removed
+        And I 'cannot' see active filters displayed
 
         Examples:
             | Advanced_Filters                                                                    |
@@ -208,7 +208,7 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
         And I capture the page screenshot
         And 'I remove the selected filters from' active filters '<Advanced_Filters_Remove>' in the 'Manage_Users_Page'
         And I capture the page screenshot
-        And all selected filters displayed under active Filters have been successfully removed
+        And I 'cannot' see active filters displayed
 
         Examples:
             | Advanced_Filters                                                                    | Advanced_Filters_Remove                                                             |

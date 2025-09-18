@@ -468,7 +468,7 @@ export default class SearchModificationsPage {
   }
 
   async getActualResultsCountLabel(commonItemsPage: CommonItemsPage) {
-    return confirmStringNotNull(await commonItemsPage.result_count.textContent());
+    return confirmStringNotNull(await commonItemsPage.search_results_count.textContent());
   }
 
   async getExpectedResultsCountLabel(commonItemsPage: CommonItemsPage) {

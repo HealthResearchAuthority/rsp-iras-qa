@@ -22,7 +22,6 @@
       "status_label": "Status",
       "selected_checkboxes_hint_label": "selected",
       "advanced_filter_label": "Advanced filter",
-      "result_count_heading": " results",
       "date_last_logged_in_label": "Last logged in",
       "date_last_logged_in_month_placeholder": "",
       "date_last_logged_in_from_date_hint_text": "Enter the date you want to search from",

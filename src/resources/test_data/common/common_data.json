@@ -16,7 +16,6 @@
   "result_count_heading": " results",
   "selected_checkboxes_hint_label": "selected",
   "active_filters_label": "Active filters",
-  "clear_all_filters_label": "Clear all filters",
   "uploaded_documents_counter_label": " files chosen",
   "maxPagesToValidate": 10
 }

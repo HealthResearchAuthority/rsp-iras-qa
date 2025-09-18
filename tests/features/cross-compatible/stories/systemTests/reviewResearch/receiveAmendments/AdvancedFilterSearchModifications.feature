@@ -19,7 +19,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                 And I capture the page screenshot
                 And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                And the advanced filters section should collapse automatically
+                And I 'cannot' see the advanced filters panel
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
                 And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>'
                 And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
@@ -240,7 +240,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                 And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters_No_Results>' in the 'Search_Modifications_Page'
-                And the advanced filters section should collapse automatically
+                And I 'cannot' see the advanced filters panel
                 Then the no search results found message is displayed
                 And I capture the page screenshot
                 Examples:
@@ -360,7 +360,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                 And I capture the page screenshot
                 And 'I remove the selected filters from' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                And all selected filters displayed under active Filters have been successfully removed
+                And I 'cannot' see active filters displayed
                 And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria ''
                 And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
                 And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
@@ -385,13 +385,13 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                 And I click the 'Clear_All_Filters' link on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then The search modifications page returns to its original empty state with no results displayed
-                And the advanced filters section should collapse automatically
+                And I 'cannot' see the advanced filters panel
 
                 Examples:
                         | Advanced_Filters     |
                         | Advanced_Filters_Nth |
 
-        @RemoveActiveFiltersAllTogether
+        @RemoveActiveFiltersAlTogether
         Scenario Outline: Verify the user can view the list of modifications by entering valid iras id, then selected advanced filters and click on apply filters button
                 When I enter '<Valid_Iras_Id>' into the search field for search modifications page
                 And I capture the page screenshot
@@ -409,7 +409,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                 And I capture the page screenshot
                 And I click the 'Clear_All_Filters' link on the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                And all selected filters displayed under active Filters have been successfully removed
+                And I 'cannot' see active filters displayed
                 And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria ''
                 And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
                 Examples:

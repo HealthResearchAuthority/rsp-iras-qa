@@ -861,15 +861,6 @@ Then(
 );
 
 Then(
-  'all selected filters displayed under active Filters have been successfully removed',
-  async ({ commonItemsPage }) => {
-    await expect(commonItemsPage.advanced_filter_chevron).toBeVisible();
-    expect(await commonItemsPage.active_filters_list.count()).toBe(0);
-    expect(await commonItemsPage.clear_all_filters_link.count()).toBe(0);
-  }
-);
-
-Then(
   '{string} active filters {string} in the {string}',
   async (
     { searchModificationsPage, manageReviewBodiesPage, manageUsersPage, commonItemsPage },
@@ -903,11 +894,11 @@ Then(
       const labelArray = Array.isArray(labels) ? labels : [labels];
       for (const label of labelArray) {
         if (isDisplayAction) {
-          await expect.soft(commonItemsPage.active_filters_list.getByText(label)).toBeVisible();
+          await expect.soft(commonItemsPage.active_filter_items.getByText(label)).toBeVisible();
         } else if (isRemoveAction) {
           const removed = await commonItemsPage.removeSelectedFilterValues(label);
           expect.soft(removed).toBe(label);
-          await expect.soft(commonItemsPage.active_filters_list.getByText(label)).not.toBeVisible();
+          await expect.soft(commonItemsPage.active_filter_items.getByText(label)).not.toBeVisible();
         }
       }
     };
@@ -979,10 +970,6 @@ Then(
   }
 );
 
-Then('the advanced filters section should collapse automatically', async ({ commonItemsPage }) => {
-  await expect(commonItemsPage.apply_filters_button).not.toBeVisible();
-});
-
 Then('I upload {string} documents', async ({ commonItemsPage }, uploadDocumentsDatasetName) => {
   const documentPath = commonItemsPage.documentUploadTestData[uploadDocumentsDatasetName];
   await commonItemsPage.upload_files_input.setInputFiles(documentPath);
@@ -997,7 +984,7 @@ Then('I upload {string} documents', async ({ commonItemsPage }, uploadDocumentsD
     ).toBeVisible();
   }
 });
-//Check for dupe/can be common//
+
 Then('the no search results found message is displayed', async ({ commonItemsPage }) => {
   expect(commonItemsPage.tableRows).not.toBeVisible();
   await expect(commonItemsPage.search_results_count).toHaveText(
@@ -1025,11 +1012,11 @@ Then('I {string} see active filters displayed', async ({ commonItemsPage }, visi
   if (visibility.toLowerCase() == 'cannot') {
     await expect(commonItemsPage.active_filters_label).not.toBeVisible();
     await expect(commonItemsPage.active_filter_list).not.toBeVisible();
-    await expect(commonItemsPage.clear_all_filters_button).not.toBeVisible();
+    await expect(commonItemsPage.clear_all_filters_link).not.toBeVisible();
   } else {
     await expect(commonItemsPage.active_filters_label).toBeVisible();
     await expect(commonItemsPage.active_filter_list).toBeVisible();
-    await expect(commonItemsPage.clear_all_filters_button).toBeVisible();
+    await expect(commonItemsPage.clear_all_filters_link).toBeVisible();
   }
 });
 

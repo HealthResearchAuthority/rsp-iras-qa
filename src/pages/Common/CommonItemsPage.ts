@@ -82,10 +82,6 @@ export default class CommonItemsPage {
   readonly result_count: Locator;
   readonly iras_id_search_text: Locator;
   readonly advanced_filter_active_filters_label: Locator;
-  readonly no_matching_search_result_count_label: Locator;
-  readonly active_filters_list: Locator;
-  readonly clear_all_filters_link: Locator;
-  readonly apply_filters_button: Locator;
   readonly upload_files_input: Locator;
   readonly search_results_count: Locator;
   readonly advanced_filter_panel: Locator;
@@ -99,7 +95,7 @@ export default class CommonItemsPage {
   readonly active_filters_label: Locator;
   readonly active_filter_list: Locator;
   readonly active_filter_items: Locator;
-  readonly clear_all_filters_button: Locator;
+  readonly clear_all_filters_link: Locator;
   readonly search_no_results_container: Locator;
   readonly search_no_results_header: Locator;
   readonly search_no_results_guidance_text: Locator;
@@ -196,33 +192,12 @@ export default class CommonItemsPage {
     this.alert_box_headings = this.alert_box.getByRole('heading');
     this.alert_box_list = this.alert_box.getByRole('list');
     this.alert_box_list_items = this.alert_box.getByRole('listitem');
+    this.upload_files_input = this.page.locator('input[type="file"]');
+    //Search Items
     this.advanced_filter_chevron = this.page.getByRole('button', {
       name: this.commonTestData.advanced_filter_label,
     });
-    //review for duplication with search items//
-    this.result_count = this.advanced_filter_chevron.getByText(this.commonTestData.result_count_heading);
-    this.no_matching_search_result_count_label = this.page.getByRole('heading');
-    this.active_filters_list = this.page
-      .getByRole('heading', {
-        name: this.commonTestData.active_filters_label,
-        exact: true,
-      })
-      .locator('..')
-      .getByRole('list')
-      .getByRole('listitem')
-      .getByRole('link');
-    this.clear_all_filters_link = this.page.getByRole('link', {
-      name: this.commonTestData.clear_all_filters_label,
-      exact: true,
-    });
-    this.apply_filters_button = this.page
-      .getByRole('button')
-      .getByText(this.buttonTextData.Search_Modifications_Page.Apply_Filters, {
-        exact: true,
-      });
     this.advanced_filter_active_filters_label = this.page.getByRole('list');
-    this.upload_files_input = this.page.locator('input[type="file"]');
-    //Search Items
     this.search_results_count = this.page.locator('.search-filter-panel__count');
     this.advanced_filter_panel = this.page.getByTestId('filter-panel');
     this.advanced_filter_headings = this.advanced_filter_panel.getByRole('heading');
@@ -237,9 +212,9 @@ export default class CommonItemsPage {
     this.active_filters_label = this.page.getByRole('heading').getByText(searchFilterResultsData.active_filters_label);
     this.active_filter_list = this.page.locator('.search-filter-summary').getByRole('list');
     this.active_filter_items = this.active_filter_list.getByRole('listitem').locator('span');
-    this.clear_all_filters_button = this.page
+    this.clear_all_filters_link = this.page
       .getByRole('link')
-      .getByText(searchFilterResultsData.clear_all_filters_button);
+      .getByText(searchFilterResultsData.clear_all_filters_label);
     this.search_no_results_container = this.page.locator('.search-filter-error-border');
     this.search_no_results_header = this.search_no_results_container
       .getByRole('heading')
@@ -968,7 +943,7 @@ export default class CommonItemsPage {
     if (removeFilterLabel) {
       let filterFound = true;
       while (filterFound) {
-        const filterItems = this.active_filters_list;
+        const filterItems = this.active_filter_list;
         const count = await filterItems.count();
         filterFound = false;
         for (let i = 0; i < count; i++) {
