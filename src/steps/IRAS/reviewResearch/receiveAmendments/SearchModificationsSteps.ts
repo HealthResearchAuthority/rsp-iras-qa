@@ -3,7 +3,6 @@ import { expect, test } from '../../../../hooks/CustomFixtures';
 import { confirmArrayNotNull, confirmStringNotNull, sortArray } from '../../../../utils/UtilFunctions';
 import config from '../../../../../playwright.config';
 import CommonItemsPage from '../../../../pages/Common/CommonItemsPage';
-import { Locator } from 'playwright';
 const { When, Then } = createBdd(test);
 
 When(
@@ -114,7 +113,7 @@ Then(
 
 // date_submitted, participating nation and sponsor_organisation can't validate from UI,need to validate with Database
 Then(
-  'the system displays modification records based on the search {string} and filter criteria {string} or shows no results found message if no matching records exist in the search modifications page',
+  'the system displays modification records based on the search {string} and filter criteria {string}',
   async ({ commonItemsPage, searchModificationsPage }, irasIdDatasetName, filterDatasetName) => {
     const testData = searchModificationsPage.searchModificationsPageTestData;
     const irasId = testData.Iras_Id?.[irasIdDatasetName]?.iras_id_text;
@@ -201,21 +200,7 @@ Then(
         await validateFilterMatch(modificationsList, 'leadNationValues', allowedLeadNations, commonItemsPage);
       }
     } else {
-      const validateTextMatch = async (locator: Locator, expectedText: string) => {
-        await expect(locator).toHaveText(expectedText);
-        expect(confirmStringNotNull(await locator.textContent())).toBe(expectedText);
-      };
-      const expectedResultCount = commonItemsPage.commonTestData.result_count_heading;
-      const actualResultCount = confirmStringNotNull(await commonItemsPage.result_count.textContent());
-      expect('0' + expectedResultCount).toBe(actualResultCount);
-      await validateTextMatch(commonItemsPage.no_results_heading, commonItemsPage.commonTestData.no_results_heading);
-      await validateTextMatch(
-        commonItemsPage.no_results_guidance_text,
-        commonItemsPage.commonTestData.no_results_guidance_text
-      );
-      const bulletPointsActual = (await commonItemsPage.getNoResultsBulletPoints()).flat().join(', ');
-      const bulletPointsExpected = commonItemsPage.commonTestData.no_results_bullet_points.flat().join(', ');
-      expect(bulletPointsActual).toEqual(bulletPointsExpected);
+      throw new Error(`Expected Search Results but No Search Results are Displayed`);
     }
   }
 );
@@ -349,24 +334,13 @@ Then(
 );
 
 Then(
-  'I can see an empty state that informs me no modifications exist for the search criteria',
+  'The search modifications page returns to its original empty state with no results displayed',
   async ({ commonItemsPage, searchModificationsPage }) => {
     await expect(searchModificationsPage.page_heading).toBeVisible();
     await expect(searchModificationsPage.page_guidance_text).toBeVisible();
     await expect(commonItemsPage.advanced_filter_chevron).toBeVisible();
-    expect(await searchModificationsPage.page.title()).toBe(
-      searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page.title
-    );
-    expect(await commonItemsPage.tableRows.count()).toBe(0);
-    const expectedResultCountLabel =
-      await searchModificationsPage.getExpectedResultsCountLabelNoResults(commonItemsPage);
-    const actualResultCountLabel = await searchModificationsPage.getActualResultsCountLabel(commonItemsPage);
-    expect(expectedResultCountLabel).toEqual(actualResultCountLabel);
-    expect(await commonItemsPage.no_results_heading.count()).toBe(0);
-    expect(await commonItemsPage.no_results_guidance_text.count()).toBe(0);
-    expect(await commonItemsPage.no_results_bullet_points.count()).toBe(0);
-    expect(await commonItemsPage.active_filters_list.count()).toBe(0);
-    expect(await commonItemsPage.clear_all_filters_link.count()).toBe(0);
+    await expect(searchModificationsPage.results_table).not.toBeVisible();
+    await expect(commonItemsPage.search_no_results_container).not.toBeVisible();
   }
 );
 
@@ -391,36 +365,36 @@ Then(
 
 Then(
   'I can see the list of modifications received for approval is sorted by {string} order of the {string}',
-  async ({ searchModificationsPage, commonItemsPage }, sortDirection: string, sortField: string) => {
-    let sortedList: string[];
-    let columnIndex: number;
+  async ({ commonItemsPage }, sortDirection: string, sortField: string) => {
+    let sortedModsList: string[];
+    let searchColumnIndex: number;
     switch (sortField.toLowerCase()) {
       case 'modification id':
-        columnIndex = 0;
+        searchColumnIndex = 0;
         break;
       case 'short project title':
-        columnIndex = 1;
+        searchColumnIndex = 1;
         break;
       case 'modification type':
-        columnIndex = 2;
+        searchColumnIndex = 2;
         break;
       case 'chief investigator':
-        columnIndex = 3;
+        searchColumnIndex = 3;
         break;
       case 'lead nation':
-        columnIndex = 4;
+        searchColumnIndex = 4;
         break;
       default:
         throw new Error(`${sortField} is not a valid option`);
     }
-    const actualList = await searchModificationsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
+    const actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, searchColumnIndex);
     if (sortField.toLowerCase() == 'modification id') {
-      sortedList = await searchModificationsPage.sortModificationIdListValues(actualList, sortDirection);
+      sortedModsList = await commonItemsPage.sortModificationIdListValues(actualList, sortDirection);
     } else if (sortDirection.toLowerCase() == 'ascending') {
-      sortedList = [...actualList].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
+      sortedModsList = [...actualList].toSorted((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
     } else {
-      sortedList = [...actualList].sort((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
+      sortedModsList = [...actualList].toSorted((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
     }
-    expect.soft(actualList).toEqual(sortedList);
+    expect.soft(actualList).toEqual(sortedModsList);
   }
 );

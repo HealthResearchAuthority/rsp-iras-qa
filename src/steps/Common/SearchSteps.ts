@@ -9,9 +9,10 @@ When(
     {
       manageReviewBodiesPage,
       manageUsersPage,
-      userListReviewBodyPage,
       searchAddUserReviewBodyPage,
       searchModificationsPage,
+      modificationsReadyToAssignPage,
+      myModificationsTasklistPage,
       commonItemsPage,
       participatingOrganisationsPage,
     },
@@ -31,6 +32,12 @@ When(
         ];
     } else if (searchType.toLowerCase() == 'modifications') {
       searchQueryDataset = searchModificationsPage.searchModificationsPageTestData.Search_Queries[searchQueryName];
+    } else if (searchType.toLowerCase() == 'tasklist') {
+      searchQueryDataset =
+        modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Search_Queries[searchQueryName];
+    } else if (searchType.toLowerCase() == 'my tasklist') {
+      searchQueryDataset =
+        myModificationsTasklistPage.myModificationsTasklistPageTestData.Search_Queries[searchQueryName];
     } else if (searchType.toLowerCase() == 'organisations') {
       searchQueryDataset =
         participatingOrganisationsPage.participatingOrganisationsPageTestData.Search_Queries[searchQueryName];
@@ -44,7 +51,7 @@ When(
       searchKey = searchQueryDataset['search_input_text'];
     }
     expect(searchKey).toBeTruthy();
-    await userListReviewBodyPage.setSearchKey(searchKey);
+    await commonItemsPage.setSearchKey(searchKey);
     await commonItemsPage.search_text.fill(searchKey);
   }
 );
@@ -52,7 +59,7 @@ When(
 Given(
   'the system displays user records matching the search criteria',
   async ({ userListReviewBodyPage, commonItemsPage }) => {
-    const searchKey = await userListReviewBodyPage.getSearchKey();
+    const searchKey = await commonItemsPage.getSearchKey();
     const searchTerms = await commonItemsPage.splitSearchTerm(searchKey);
     const userList = await commonItemsPage.getAllUsersFromTheTable();
     const userListAfterSearch: string[] = confirmArrayNotNull(userList.get('searchResultValues'));
@@ -72,14 +79,4 @@ Then('the list displays {string}', async ({ commonItemsPage }, resultsAmount: st
   } else {
     expect(await commonItemsPage.tableBodyRows.count()).toBeGreaterThan(1);
   }
-});
-
-Then('the search displays no matching results', async ({ commonItemsPage }) => {
-  await expect(commonItemsPage.no_results_heading).toBeVisible();
-  await expect(commonItemsPage.no_results_guidance_text).toBeVisible();
-  const noResultsGuidanceBulletList = await commonItemsPage.no_results_bullet_points.allInnerTexts();
-  await expect(commonItemsPage.no_results_bullet_points).toHaveCount(
-    commonItemsPage.commonTestData.no_results_bullet_points.length
-  );
-  expect(noResultsGuidanceBulletList).toEqual(commonItemsPage.commonTestData.no_results_bullet_points);
 });

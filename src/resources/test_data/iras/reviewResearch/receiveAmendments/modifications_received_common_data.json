@@ -1,0 +1,9 @@
+{
+  "Tasklist_Page": {
+    "filter_headings": ["Date submitted", "Days since submission", "Short project title"],
+    "days_since_submission_label": "Enter the number of days you want to search from",
+    "days_since_submission_hint_label": "For example, 23 to 45 days",
+    "days_since_suffix": "days",
+    "day_since_suffix": "day"
+  }
+}

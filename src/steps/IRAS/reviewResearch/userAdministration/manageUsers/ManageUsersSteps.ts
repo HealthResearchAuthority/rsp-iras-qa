@@ -156,6 +156,48 @@ When(
   }
 );
 
+Then(
+  'I can see the manage users list sorted by {string} order of the {string} on the {string} page',
+  async ({ manageUsersPage, commonItemsPage }, sortDirection: string, sortField: string, currentPage: string) => {
+    let sortedUserList: string[];
+    let userColumnIndex: number;
+    switch (sortField.toLowerCase()) {
+      case 'first name':
+        userColumnIndex = 0;
+        break;
+      case 'last name':
+        userColumnIndex = 1;
+        break;
+      case 'email address':
+        userColumnIndex = 2;
+        break;
+      case 'status':
+        userColumnIndex = 3;
+        break;
+      case 'last logged in':
+        userColumnIndex = 4;
+        break;
+      default:
+        throw new Error(`${sortField} is not a valid option`);
+    }
+    const actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, userColumnIndex);
+    if (sortField.toLowerCase() == 'last logged in') {
+      sortedUserList = await manageUsersPage.sortLastLoggedInListValues(actualList, sortDirection);
+    } else if (sortDirection.toLowerCase() == 'ascending') {
+      sortedUserList = [...actualList].toSorted((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
+      if (sortField.toLowerCase() == 'status' && currentPage.toLowerCase() == 'first') {
+        expect(actualList).toContain(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enabled_status);
+      }
+    } else {
+      sortedUserList = [...actualList].toSorted((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
+      if (sortField.toLowerCase() == 'status' && currentPage.toLowerCase() == 'first') {
+        expect(actualList).toContain(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.disabled_status);
+      }
+    }
+    expect(actualList).toEqual(sortedUserList);
+  }
+);
+
 When(
   'I enter {string} into the search field for manage users page',
   async ({ manageUsersPage }, datasetName: string) => {

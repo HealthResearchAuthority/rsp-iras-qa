@@ -105,7 +105,7 @@ Feature: Organisation Search and View
       | page number       | Addition_Of_Participant_Identification_Centres_Option      |
       | next link         | Early_Closure_Of_Participant_Identification_Centres_Option |
 
-  @rsp-4063 @ParticipatingOrganisationsPaginationLast 
+  @rsp-4063 @ParticipatingOrganisationsPaginationLast
   Scenario Outline: Validate pagination for last few pages in participating organisation page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     When I click the 'Create_New_Modification' button on the 'Project_Overview_Page'

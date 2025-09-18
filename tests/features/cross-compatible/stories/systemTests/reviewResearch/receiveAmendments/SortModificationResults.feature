@@ -1,5 +1,4 @@
 @ReceiveAmendments @SortModificationResults @StudyWideReviewer @SystemTest @rsp-4090
-
 Feature: Receive Amendments: Sort modification results after performing a search
 
     Background:
@@ -11,11 +10,18 @@ Feature: Receive Amendments: Sort modification results after performing a search
         And I capture the page screenshot
 
     @SortModificationsByColumn
-    Scenario: Verify the user is able to sort the list of modifications by ascending and descending order for each results table column
+    Scenario Outline: Verify the user is able to sort the list of modifications by ascending and descending order for each results table column
         When I click the '<Sort_Button>' button on the 'Search_Modifications_Page'
         And I capture the page screenshot
         Then I can see the list of modifications received for approval is sorted by 'ascending' order of the '<Sort_Field>'
+        When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
+        And I capture the page screenshot
+        Then I can see the list of modifications received for approval is sorted by 'ascending' order of the '<Sort_Field>'
         When I click the '<Sort_Button>' button on the 'Search_Modifications_Page'
+        And I capture the page screenshot
+        Then I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
+        And I can see the list of modifications received for approval is sorted by 'descending' order of the '<Sort_Field>'
+        When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
         And I capture the page screenshot
         Then I can see the list of modifications received for approval is sorted by 'descending' order of the '<Sort_Field>'
 

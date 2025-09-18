@@ -848,14 +848,14 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I expect to receive no WCAG Violations
 
   @axeAccessibilityAdvanceFilterSearchModifications @StudyWideReviewer
-  Scenario: Search - Approvals - Plan and manage healthcare research
+  Scenario: Search modifications page with active filters
     Given I have navigated to the 'Search_Modifications_Page'
     Then I can see the 'Search_Modifications_Page'
     When I enter 'Valid_Iras_Id_Nth' into the search field
     And I select advanced filters in the search modifications page using 'Advanced_Filters_Nth'
     And I click the 'Apply_filters' button on the 'Search_Modifications_Page'
     Then 'I can see the selected filters are displayed under' active filters 'Advanced_Filters_Nth' in the 'Search_Modifications_Page'
-    And the system displays modification records based on the search 'Valid_Iras_Id_Nth' and filter criteria 'Advanced_Filters_Nth' or shows no results found message if no matching records exist in the search modifications page
+    And the system displays modification records based on the search 'Valid_Iras_Id_Nth' and filter criteria 'Advanced_Filters_Nth'
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
@@ -863,6 +863,40 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
   @axeAccessibilityModificationsTasklistPage @WorkFlowCoordinator
   Scenario: Modifications tasklist page
     Given I have navigated to the 'Modifications_Tasklist_Page'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityModficationsTasklistPageWithFilters @WorkFlowCoordinator
+  Scenario: Modifications tasklist page with active filters
+    Given I have navigated to the 'Modifications_Tasklist_Page'
+    And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
+    And I 'can' see the advanced filters panel
+    And I open each of the modification tasklist filters
+    When I fill the 'assign' modifications tasklist search and filter options with 'Title_Date_Range_Single'
+    And I click the 'Apply_Filters' button on the 'Modifications_Tasklist_Page'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilitMyModficationsTasklistPage @StudyWideReviewer
+  Scenario: My Modifications tasklist page
+    Given I have navigated to the 'My_Modifications_Tasklist_Page'
+    And I click the 'Advanced_Filters' button on the 'My_Modifications_Tasklist_Page'
+    And I 'can' see the advanced filters panel
+    And I open each of the modification tasklist filters
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityMyModficationsTasklistPageWithFilters @StudyWideReviewer
+  Scenario: My Modifications tasklist page with active filters
+    Given I have navigated to the 'My_Modifications_Tasklist_Page'
+    And I click the 'Advanced_Filters' button on the 'My_Modifications_Tasklist_Page'
+    And I 'can' see the advanced filters panel
+    And I open each of the modification tasklist filters
+    When I fill the 'my' modifications tasklist search and filter options with 'Title_Date_Range_Single'
+    And I click the 'Apply_Filters' button on the 'My_Modifications_Tasklist_Page'
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
