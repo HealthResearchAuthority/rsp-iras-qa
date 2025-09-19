@@ -59,7 +59,7 @@ export default class ChangePlannedEndDateReviewModificationsPage {
       .locator('.govuk-summary-list__value');
 
     this.affected_organisation_types_change_link = this.affected_organisation_types_row.locator('..').getByRole('link');
-
+    //This affected_nhs_hsc_locations_label label is incorrect due to CMS changes , once all CMS changes are fixed this label will be updated in data file
     this.affected_nhs_hsc_locations_row = this.page.getByText(
       reviewChangesPlannedEndDatePageTestData.Label_Texts_Nhs.affected_nhs_hsc_locations_label
     );
