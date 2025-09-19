@@ -1,4 +1,4 @@
-@UserAdministration @ManageUsers @EditViewUsers @SysAdminUser @SystemTest
+@UserAdministration @ManageUsers @EditViewUsers @SysAdminUser @SystemTest @STSysAdmin
 Feature: User Administration: Manage user profiles, view and edit user profile
   As a user
   I want the ability to edit and view a user profile record
@@ -220,7 +220,8 @@ Feature: User Administration: Manage user profiles, view and edit user profile
   #     | Leading_And_Trailing_White_Space_User_Data |
   #     | Trailing_White_Space_User_Data             |
 
-  @rsp-3890 @ManageUsersSearchMultiTerms @fail @skip
+  #  check with Chris on this test case
+  @rsp-3890 @ManageUsersSearchMultiTerms @fail
   Scenario Outline: Verify the user search utilises AND logic to produce accurate search results
     When I fill the search input for searching 'users' with '<Initial_Search_Query>' as the search query
     And I capture the page screenshot
