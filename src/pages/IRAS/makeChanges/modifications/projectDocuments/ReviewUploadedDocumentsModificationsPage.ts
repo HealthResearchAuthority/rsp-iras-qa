@@ -30,9 +30,11 @@ export default class ReviewUploadedDocumentsModificationsPage {
       this.reviewUploadedDocumentsModificationsPageTestData.Review_Uploaded_Documents_Modifications_Page.heading +
       ' ' +
       specificChangeTitleLabel.toLowerCase();
-    await expect(this.page).toHaveTitle(
-      this.reviewUploadedDocumentsModificationsPageTestData.Review_Uploaded_Documents_Modifications_Page.page_title
-    );
+    await expect
+      .soft(this.page)
+      .toHaveTitle(
+        this.reviewUploadedDocumentsModificationsPageTestData.Review_Uploaded_Documents_Modifications_Page.page_title
+      );
     await expect.soft(this.pageHeading.getByText(expectedPageTitle, { exact: true })).toBeVisible();
     await expect
       .soft(

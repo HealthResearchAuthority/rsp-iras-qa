@@ -5,7 +5,7 @@ Feature: Create Amendment - Create Project - Smoke Tests
     Given I have navigated to the my research projects page
     And I can see the my research projects page
 
-  @CreateProjectSmoke @KNOWN-DEFECT-RSP-5137 @skip
+  @CreateProjectSmoke
   Scenario: Validate user is able to create a project
     And I can see the my research projects page
     And I capture the page screenshot
