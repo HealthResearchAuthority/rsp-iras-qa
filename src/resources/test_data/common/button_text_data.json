@@ -124,7 +124,13 @@
     "Date_Submitted": "Date submitted",
     "Days_Since_Submission": "Days since submission",
     "Continue_to_assign_modifications": "Continue to assign modifications",
-    "Advanced_Filters": "Advanced filters"
+    "Advanced_Filters": "Advanced filters",
+    "Search": "Search",
+    "Apply_Filters": "Apply filters"
+  },
+  "Post_Approval_Page": {
+    "Modification_Id": "Modification ID",
+    "Modification_Type": "Modification type"
   },
   "Participating_Organisations_Page": {
     "Save_Continue": "Save and continue",
@@ -165,6 +171,12 @@
     "Add_Another_Document": "Add another document",
     "Save_Continue": "Save and continue",
     "Save_For_Later": "Save for later"
+  },
+  "Select_Study_Wide_Reviewer_Page": {
+    "Complete_Assignment": "Complete assignment"
+  },
+  "SWR_My_Tasklist_Page": {
+    "Search": "Search"
   },
   "Modifications_Details_Page": {
     "Add_Another_Change": "Add another change to this modification",

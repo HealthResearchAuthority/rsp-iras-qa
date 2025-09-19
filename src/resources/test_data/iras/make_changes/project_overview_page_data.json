@@ -1,7 +1,7 @@
 {
   "Project_Overview_Page": {
     "heading": "Project overview",
-    "short_project_title_label": "Add it in page the remove this",
+    "short_project_title_label": "Short project title:",
     "project_details_heading": "Project details",
     "project_details_hint_label": "View and edit key information about this project.",
     "modification_saved_success_message_header_text": "Success",
@@ -17,7 +17,14 @@
     "research_locations_heading": "Research locations",
     "participating_nations": "Participating nations",
     "nhs_hsc_organisations": "NHS / HSC organisations",
-    "lead_nation": "Lead nation"
+    "lead_nation": "Lead nation",
+    "maxPagesToVisit": 2
+  },
+  "Modification_URL": {
+    "URL": "https://fd-rsp-applications-automationtest-uks-e7f6hkg3c5edhxex.a03.azurefd.net/projectoverview/postapproval?projectRecordId=20250905085329"
+  },
+  "Modification_Status_Draft": {
+    "status": "Draft"
   },
   "Valid_Data_All_Fields": {
     "short_project_title_text": "QA_Automation - This is a short project title",
@@ -42,5 +49,12 @@
     "research_locations_title": "Research locations",
     "post_approval_title": "Post approval",
     "project_history_title": "Project history"
+  },
+  "Label_Texts_Post_Approval": {
+    "modification_id": "Modification ID",
+    "modification_type": "Modification type",
+    "review_type": "Review type",
+    "category": "Category",
+    "status": "Status"
   }
 }

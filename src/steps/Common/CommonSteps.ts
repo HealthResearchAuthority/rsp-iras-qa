@@ -35,6 +35,7 @@ When(
       myResearchProjectsPage,
       searchModificationsPage,
       modificationsReadyToAssignPage,
+      selectStudyWideReviewerPage,
     },
     page: string
   ) => {
@@ -77,6 +78,9 @@ When(
         break;
       case 'Modifications_Tasklist_Page':
         await modificationsReadyToAssignPage.assertOnModificationsReadyToAssignPage();
+        break;
+      case 'Select_Study_Wide_Reviewer_Page':
+        await selectStudyWideReviewerPage.assertOnSelectStudyWideReviewerPage();
         break;
       default:
         throw new Error(`${page} is not a valid option`);
@@ -670,6 +674,8 @@ Given(
       searchModificationsPage,
       modificationsReadyToAssignPage,
       approvalsPage,
+      myModificationsTasklistPage,
+      manageUsersPage,
     },
     page: string
   ) => {
@@ -719,6 +725,14 @@ Given(
         await approvalsPage.goto();
         await approvalsPage.assertOnApprovalsPage();
         break;
+      case 'SWR_My_Tasklist_Page':
+        await myModificationsTasklistPage.goto();
+        await myModificationsTasklistPage.assertOnMyModificationsTasklistPage();
+        break;
+      case 'Manage_Users_Page':
+        await manageUsersPage.goto();
+        await manageUsersPage.assertOnManageUsersPage();
+        break;
       default:
         throw new Error(`${page} is not a valid option`);
     }
@@ -728,7 +742,14 @@ Given(
 Given(
   'I have navigated to the {string} as {string}',
   async (
-    { homePage, systemAdministrationPage, accessDeniedPage, myResearchProjectsPage, approvalsPage },
+    {
+      homePage,
+      systemAdministrationPage,
+      accessDeniedPage,
+      myResearchProjectsPage,
+      approvalsPage,
+      myModificationsTasklistPage,
+    },
     page: string,
     user: string
   ) => {
@@ -765,7 +786,10 @@ Given(
         await myResearchProjectsPage.goto();
         await accessDeniedPage.assertOnAccessDeniedPage();
         break;
-
+      case 'SWR_My_Tasklist_Page':
+        await myModificationsTasklistPage.goto();
+        await myModificationsTasklistPage.assertOnMyModificationsTasklistPage();
+        break;
       default:
         throw new Error(`${page} is not a valid option`);
     }
@@ -809,9 +833,15 @@ Then(
     } else {
       maxPagesToValidate = totalPages;
     }
+    let totalItems: number;
+    if (pagename === 'My_Research_Projects_Page' || pagename === 'Post_Approval_Page') {
+      totalItems = await commonItemsPage.getTotalItemsNavigatingToLastPage(pagename);
+    } else {
+      totalItems = await commonItemsPage.getTotalItems();
+    }
     await commonItemsPage.firstPage.click();
     for (let currentPage = 1; currentPage <= maxPagesToValidate; currentPage++) {
-      await commonItemsPage.validatePagination(currentPage, totalPages, pagename, navigateMethod);
+      await commonItemsPage.validatePagination(currentPage, totalPages, totalItems, pagename, navigateMethod);
     }
   }
 );
@@ -821,15 +851,21 @@ Then(
   async ({ commonItemsPage }, pagename: string, navigateMethod: string) => {
     const totalPages = await commonItemsPage.getTotalPages();
     //Limiting the max pages to validate to 10
-    let maxPagesToValidate = 0;
+    let validatePageUntil = 0;
     if (totalPages > commonItemsPage.commonTestData.maxPagesToValidate) {
-      maxPagesToValidate = totalPages - commonItemsPage.commonTestData.maxPagesToValidate;
+      validatePageUntil = totalPages - commonItemsPage.commonTestData.maxPagesToValidate;
     } else {
-      maxPagesToValidate = totalPages;
+      validatePageUntil = totalPages;
     }
-    await commonItemsPage.clickOnPages(totalPages, 'page number');
-    for (let currentPage = totalPages; currentPage >= maxPagesToValidate; currentPage--) {
-      await commonItemsPage.validatePagination(currentPage, totalPages, pagename, navigateMethod);
+    let totalItems: number;
+    if (pagename == 'My_Research_Projects_Page' || pagename === 'Post_Approval_Page') {
+      totalItems = await commonItemsPage.getTotalItemsNavigatingToLastPage(pagename);
+    } else {
+      totalItems = await commonItemsPage.getTotalItems();
+    }
+    await commonItemsPage.clickOnPages(totalPages, navigateMethod);
+    for (let currentPage = totalPages; currentPage >= validatePageUntil; currentPage--) {
+      await commonItemsPage.validatePagination(currentPage, totalPages, totalItems, pagename, navigateMethod);
     }
   }
 );
@@ -865,8 +901,8 @@ Then(
     const replaceValue = '_label';
     const pageMap = {
       Search_Modifications_Page: {
-        filterDataset: searchModificationsPage.searchModificationsPageTestData.Advanced_Filters,
-        filterLabels: searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page,
+        dataset: searchModificationsPage.searchModificationsPageTestData.Advanced_Filters,
+        labels: searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page,
       },
       Manage_Review_Bodies_Page: {
         dataset: manageReviewBodiesPage.manageReviewBodiesPageData.Advanced_Filters,
@@ -877,7 +913,8 @@ Then(
         labels: manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List,
       },
     };
-    const { dataset, filterLabels } = pageMap[pageKey];
+    const { dataset, labels } = pageMap[pageKey];
+    const filterLabels = labels;
     const filterDataset = dataset[filterDatasetName];
 
     const validateFilter = async (key: string, labelFetcher: (key: string) => Promise<string | string[]>) => {

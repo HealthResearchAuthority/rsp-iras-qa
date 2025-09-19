@@ -1,4 +1,4 @@
-@UserAdministration @ManageUsers @EditViewUsers @SysAdminUser @SystemTest @rsp-2830 @rsp-2828
+@UserAdministration @ManageUsers @EditViewUsers @SysAdminUser @SystemTest
 Feature: User Administration: Manage user profiles, view and edit user profile
   As a user
   I want the ability to edit and view a user profile record
@@ -11,109 +11,78 @@ Feature: User Administration: Manage user profiles, view and edit user profile
     When I click the 'Manage_Users' link on the 'System_Administration_Page'
     Then I can see the 'Manage_Users_Page'
 
-  @viewUserProfileRoleOperations @skip
-  Scenario Outline: View User profile details for the user with role as Operations
-    And I search and click on view edit link for existing '<View_User_Profile>' user with '<Status>' status from the manage user page
+  @rsp-2830 @viewActiveAndDisabledUserProfile
+  Scenario Outline: View User profile details for an active and disabled user
+    When I enter 'QA Automation' into the search field
+    And I capture the page screenshot
+    And I click the 'Search' button on the 'Manage_Users_Page'
+    And I capture the page screenshot
+    And I select a 'QA Automation' User to View and Edit which is '<Status>'
     Then I can see the user profile page
+    And I capture the page screenshot
     And I click the 'Back' link on the 'User_Profile_Page'
     Then I can see the 'Manage_Users_Page'
+    And I capture the page screenshot
     And I click the 'Back' link on the 'Manage_Users_Page'
     Then I have navigated to the 'Home_Page'
+    And I capture the page screenshot
 
     Examples:
-      | View_User_Profile             | Status   |
-      | Active_User_Role_Operations   | ACTIVE   |
-      | Disabled_User_Role_Operations | DISABLED |
+      | Status   |
+      | ACTIVE   |
+      | DISABLED |
 
-  @viewUserProfileRoleReviewer @skip
-  Scenario Outline: View User profile details for the user with role as reviewer
-    And I search and click on view edit link for existing '<View_User_Profile>' user with '<Status>' status from the manage user page
+  @rsp-2828 @editUserProfileDetails
+  Scenario Outline: Verify that user can edit the user profile details
+    When I enter 'QA Automation' into the search field
+    And I capture the page screenshot
+    And I click the 'Search' button on the 'Manage_Users_Page'
+    And I capture the page screenshot
+    And I select a 'QA Automation' User to View and Edit which is '<Status>'
     Then I can see the user profile page
-    And I click the 'Back' link on the 'User_Profile_Page'
-    Then I can see the 'Manage_Users_Page'
-    And I click the 'Back' link on the 'Manage_Users_Page'
-    Then I have navigated to the 'Home_Page'
-
-    Examples:
-      | View_User_Profile           | Status   |
-      | Active_User_Role_Reviewer   | ACTIVE   |
-      | Disabled_User_Role_Reviewer | DISABLED |
-
-  @editUserProfileOperations @skip
-  Scenario Outline: Successful user profile update for user role as Operations
-    And I search and click on view edit link for existing 'Valid_Data_Role_Operations' user with '<Status>' status from the manage user page
-    Then I can see the user profile page
+    And I capture the page screenshot
     When I click the '<Edit_User_Field>' change link for '<User_Role>' on the user profile page
     Then I can see the edit user profile page
+    And I capture the page screenshot
     And I update user profile with '<Edit_User_Field_Data>'
+    And I capture the page screenshot
     And I click the 'Save' button on the 'Edit_User_Profile_Page'
     And I can see the user profile page
+    And I capture the page screenshot
     Then I can see the user profile '<Edit_User_Field>' is updated with the edited data '<Edit_User_Field_Data>'
-    When I click the '<Edit_User_Field>' change link for '<User_Role>' on the user profile page
-    And I update user profile with '<Original_Data>'
-    And I click the 'Save' button on the 'Edit_User_Profile_Page'
-    And I can see the user profile page
-    When I click the 'Back' link on the 'User_Profile_Page'
-    Then I can see the 'Manage_Users_Page'
 
     Examples:
-      | Edit_User_Field   | User_Role  | Status  | Edit_User_Field_Data       | Original_Data                  |
-      | title_text        | Operations | Enabled | User_Title_Text_One        | Original_Title_Text_One        |
-      | first_name_text   | Operations | Enabled | User_First_Name_Text_One   | Original_First_Name_Text_One   |
-      | last_name_text    | Operations | Enabled | User_Last_Name_Text_One    | Original_Last_Name_Text_One    |
-      | telephone_text    | Operations | Enabled | User_Telephone_Text_One    | Original_Telephone_Text_One    |
-      | organisation_text | Operations | Enabled | User_Organisation_Text_One | Original_Organisation_Text_One |
-      | job_title_text    | Operations | Enabled | User_Job_Title_Text_One    | Original_Job_Title_Text_One    |
-      | role_checkbox     | Operations | Enabled | User_Role_Checkbox_One     | Original_Role_Checkbox_One     |
+      | Edit_User_Field   | User_Role  | Status  | Edit_User_Field_Data       |
+      | title_text        | Operations | Enabled | User_Title_Text_One        |
+      | first_name_text   | Operations | Enabled | User_First_Name_Text_One   |
+      | last_name_text    | Operations | Enabled | User_Last_Name_Text_One    |
+      | telephone_text    | Operations | Enabled | User_Telephone_Text_One    |
+      | organisation_text | Operations | Enabled | User_Organisation_Text_One |
+      | job_title_text    | Operations | Enabled | User_Job_Title_Text_One    |
+      | role_checkbox     | Operations | Enabled | User_Role_Checkbox_One     |
 
-  @editUserProfileReviewer @skip
-  Scenario Outline: Successful user profile update for user as Reviewer
-    And I search and click on view edit link for existing 'Active_User_Role_Reviewer' user with '<Status>' status from the manage user page
-    Then I can see the user profile page
-    When I click the '<Edit_User_Field>' change link for '<User_Role>' on the user profile page
-    Then I can see the edit user profile page
-    And I update user profile with '<Edit_User_Field_Data>'
-    And I click the 'Save' button on the 'Edit_User_Profile_Page'
-    And I can see the user profile page
-    Then I can see the user profile '<Edit_User_Field>' is updated with the edited data '<Edit_User_Field_Data>'
-    When I click the '<Edit_User_Field>' change link for '<User_Role>' on the user profile page
-    And I update user profile with '<Original_Data>'
-    And I click the 'Save' button on the 'Edit_User_Profile_Page'
-    And I can see the user profile page
-    When I click the 'Back' link on the 'User_Profile_Page'
-    Then I can see the 'Manage_Users_Page'
-
-    Examples:
-      | Edit_User_Field   | User_Role  | Status  | Edit_User_Field_Data       | Original_Data                  |
-      | title_text        | Reviewer   | Enabled | User_Title_Text_Two        | Original_Title_Text_Two        |
-      | first_name_text   | Reviewer   | Enabled | User_First_Name_Text_Two   | Original_First_Name_Text_Two   |
-      | last_name_text    | Reviewer   | Enabled | User_Last_Name_Text_Two    | Original_Last_Name_Text_Two    |
-      | telephone_text    | Reviewer   | Enabled | User_Telephone_Text_Two    | Original_Telephone_Text_Two    |
-      | organisation_text | Reviewer   | Enabled | User_Organisation_Text_Two | Original_Organisation_Text_Two |
-      | job_title_text    | Reviewer   | Enabled | User_Job_Title_Text_Two    | Original_Job_Title_Text_Two    |
-      | role_checkbox     | Operations | Enabled | User_Role_Checkbox_Two     | Original_Role_Checkbox_Two     |
-
-  @editUserProfileOnlyMandatoryFields @skip
+  @rsp-2828 @editUserProfileOnlyMandatoryFields
   Scenario Outline: Successful user profile update with only mandatory fields
-    And I search and click on view edit link for existing 'Edit_User_Only_Mandatory_Fields_Data' user with '<Status>' status from the manage user page
+    When I enter 'QA Automation' into the search field
+    And I click the 'Search' button on the 'Manage_Users_Page'
+    And I capture the page screenshot
+    And I select a 'QA Automation' User to View and Edit which is '<Status>'
     Then I can see the user profile page
+    And I capture the page screenshot
     When I click the '<Edit_User_Field>' change link for '<User_Role>' on the user profile page
     Then I can see the edit user profile page
+    And I capture the page screenshot
     And I update user profile with '<Edit_User_Field_Data>'
     And I click the 'Save' button on the 'Edit_User_Profile_Page'
+    And I capture the page screenshot
     And I can see the user profile page
     Then I can see the user profile '<Edit_User_Field>' is updated with the edited data '<Edit_User_Field_Data>'
-    When I click the '<Edit_User_Field>' change link for '<User_Role>' on the user profile page
-    And I update user profile with '<Original_Data>'
-    And I click the 'Save' button on the 'Edit_User_Profile_Page'
-    And I can see the user profile page
-    When I click the 'Back' link on the 'User_Profile_Page'
-    Then I can see the 'Manage_Users_Page'
+    And I capture the page screenshot
 
     Examples:
-      | Edit_User_Field | User_Role  | Status  | Edit_User_Field_Data       | Original_Data                  |
-      | first_name_text | Operations | Enabled | User_First_Name_Text_Three | Original_First_Name_Text_Three |
-      | last_name_text  | Operations | Enabled | User_Last_Name_Text_Three  | Original_Last_Name_Text_Three  |
+      | Edit_User_Field | User_Role  | Status  | Edit_User_Field_Data     |
+      | first_name_text | Operations | Enabled | User_First_Name_Text_One |
+      | last_name_text  | Operations | Enabled | User_Last_Name_Text_One  |
 
   @rsp-3122 @VerifyErrorMessagesInvalidData @EditUserProfileVerifyErrorMessagesInvalidData
   Scenario Outline: Validate error messages are displayed for invalid data in edit user profile page
@@ -213,7 +182,7 @@ Feature: User Administration: Manage user profiles, view and edit user profile
     And I capture the page screenshot
     And I click the 'Search' button on the 'Manage_Users_Page'
     And I capture the page screenshot
-    Then the system displays no results found message if there is no 'user' on the system that matches the search criteria
+    Then the search displays no matching results
     And I capture the page screenshot
 
     Examples:
@@ -235,23 +204,23 @@ Feature: User Administration: Manage user profiles, view and edit user profile
       | Existing_QA_User_Last_Name  |
       | Existing_QA_User_Email      |
 
-  # out of scope for now
-  @rsp-3456 @ManageUsersSearchLeadingAndTrailingWhiteSpaces @fail @skip
-  Scenario Outline: Verify search results in manage users page when the search keyword contains leading and trailing white spaces
-    When I fill the search input for searching 'users' with '<Search_Query>' as the search query
-    And I capture the page screenshot
-    And I click the 'Search' button on the 'Manage_Users_Page'
-    And I capture the page screenshot
-    Then the system displays user records matching the search criteria
-    And I capture the page screenshot
+  # out of scope for now-since the search box does not support special characters,it may be added in future
+  # @rsp-3456 @ManageUsersSearchLeadingAndTrailingWhiteSpaces
+  # Scenario Outline: Verify search results in manage users page when the search keyword contains leading and trailing white spaces
+  #   When I fill the search input for searching 'users' with '<Search_Query>' as the search query
+  #   And I capture the page screenshot
+  #   And I click the 'Search' button on the 'Manage_Users_Page'
+  #   And I capture the page screenshot
+  #   Then the system displays user records matching the search criteria
+  #   And I capture the page screenshot
 
-    Examples:
-      | Search_Query                               |
-      | Leading_White_Space_User_Data              |
-      | Leading_And_Trailing_White_Space_User_Data |
-      | Trailing_White_Space_User_Data             |
+  #   Examples:
+  #     | Search_Query                               |
+  #     | Leading_White_Space_User_Data              |
+  #     | Leading_And_Trailing_White_Space_User_Data |
+  #     | Trailing_White_Space_User_Data             |
 
-  @rsp-3890 @ManageUsersSearchMultiTerms
+  @rsp-3890 @ManageUsersSearchMultiTerms @fail @skip
   Scenario Outline: Verify the user search utilises AND logic to produce accurate search results
     When I fill the search input for searching 'users' with '<Initial_Search_Query>' as the search query
     And I capture the page screenshot
@@ -275,6 +244,7 @@ Feature: User Administration: Manage user profiles, view and edit user profile
   @rsp-4021 @ManageUsersEmailNotEditable
   Scenario Outline: Verify the user is not able to edit the email address
     When I enter 'Existing_QA_Automation_User_First_Name' into the search field for manage users page
+    And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
     And I select advanced filters in the manage users page using 'Advanced_Filter_Status_Active'
     And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
     And I capture the page screenshot

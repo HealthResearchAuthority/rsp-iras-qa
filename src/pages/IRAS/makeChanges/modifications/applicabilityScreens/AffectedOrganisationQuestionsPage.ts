@@ -57,25 +57,29 @@ export default class AffectedOrganisationQuestionsPage {
       .getByRole('checkbox');
 
     this.where_organisation_change_affect_non_nhs_question_checkbox = this.page
-      .getByTestId('Questions[0].Answers_checkboxes')
+      .getByTestId('Questions[3].Answers_checkboxes')
       .getByRole('checkbox');
 
-    this.will_some_or_all_organisations_be_affected_question_label = this.page.getByText(
-      this.affectedOrganisationQuestionsPageTestData.Label_Texts_Nhs_Hsc
-        .will_some_or_all_organisations_be_affected_question_label,
-      { exact: true }
-    );
+    this.will_some_or_all_organisations_be_affected_question_label = this.page
+      .locator('.govuk-fieldset__legend--s')
+      .getByText(
+        this.affectedOrganisationQuestionsPageTestData.Label_Texts_Nhs_Hsc
+          .will_some_or_all_organisations_be_affected_question_label,
+        { exact: true }
+      );
     this.will_some_or_all_organisations_radio_fieldset = this.page.locator('.govuk-form-group', {
       has: this.will_some_or_all_organisations_be_affected_question_label,
     });
     this.will_some_or_all_organisations_be_affected_question_radio =
       this.will_some_or_all_organisations_radio_fieldset.getByRole('radio');
 
-    this.will_nhs_hsc_organisations_require_additional_resources_question_label = this.page.getByText(
-      this.affectedOrganisationQuestionsPageTestData.Label_Texts_Nhs_Hsc
-        .will_nhs_hsc_organisations_require_additional_resources_question_label,
-      { exact: true }
-    );
+    this.will_nhs_hsc_organisations_require_additional_resources_question_label = this.page
+      .locator('.govuk-fieldset__legend--s')
+      .getByText(
+        this.affectedOrganisationQuestionsPageTestData.Label_Texts_Nhs_Hsc
+          .will_nhs_hsc_organisations_require_additional_resources_question_label,
+        { exact: true }
+      );
     this.will_nhs_hsc_organisations_require_additional_resources_question_radio_fieldset = this.page.locator(
       '.govuk-form-group',
       {
@@ -95,7 +99,7 @@ export default class AffectedOrganisationQuestionsPage {
   async assertOnAffectedOrganisationQuestionsPage() {
     await expect(this.pageHeading).toBeVisible();
     const currentUrl = this.page.url();
-    expect(currentUrl).toContain('projectmodification/affectingorganisations');
+    expect(currentUrl).toContain('affecting-organisations');
   }
 
   async fillAffectedOrganisationQuestions(dataset: any) {

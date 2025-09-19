@@ -50,7 +50,7 @@
     "Add_New_User_Profile_Record": "Add a new user profile record",
     "Back": "Back",
     "View_Edit": "View/Edit",
-    "Advanced_Filter": "Advanced filters",
+    "Advanced_Filters": "Advanced filters",
     "Clear_All_Filters": "Clear all filters"
   },
   "Create_User_Profile_Page": {
@@ -166,7 +166,7 @@
   },
   "Participating_Organisations_Page": {
     "Back": "Back",
-    "Advanced_Filter": "Advanced filter",
+    "Advanced_Filter": "Advanced filters",
     "Remove_This_Change": "Remove this change"
   },
   "Approvals_Page": {
@@ -189,6 +189,12 @@
     "Back": "Back"
   },
   "Review_Uploaded_Document_Modifications_Page": {
+    "Back": "Back"
+  },
+  "Modifications_Assignment_Confirmation_Page": {
+    "Back_To_Tasklist": "Back to Tasklist"
+  },
+  "Select_Study_Wide_Reviewer_Page": {
     "Back": "Back"
   }
 }

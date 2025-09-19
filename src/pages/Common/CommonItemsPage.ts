@@ -359,7 +359,7 @@ export default class CommonItemsPage {
   }
 
   async getQsetPageValidationData(page: string, dataType: string, datasetName: string): Promise<Map<string, any>> {
-    let inputDataset: JSON = {} as JSON;
+    let inputDataset: any;
     switch (page.toLowerCase()) {
       case 'project filter':
         inputDataset = new ProjectFilterPage(this.page).projectFilterPageTestData[dataType][datasetName];
@@ -425,7 +425,7 @@ export default class CommonItemsPage {
       fs.writeFileSync(testDataJSONPath, JSON.stringify(createNewJSONObject(), null, 2));
     } else {
       const readJSONFile = await JSON.parse(fs.readFileSync(testDataJSONPath, 'utf8'));
-      if (Object.prototype.hasOwnProperty.call(readJSONFile, jsonRootParentNode)) {
+      if (Object.hasOwn(readJSONFile, jsonRootParentNode)) {
         const rootParentNodeValues = readJSONFile[jsonRootParentNode];
         rootParentNodeValues[jsonParentNode] = extractedValuesInMemory;
         writeToJSONFile(readJSONFile);
@@ -453,7 +453,7 @@ export default class CommonItemsPage {
     }
     if (!selfHealedLocator) {
       throw new Error(
-        `Self Healing for locator has failed. Automation was not able to find a valid locator from the available list:[ ${locatorList} ]. Add a new valid locator to the list`
+        `Self Healing for locator has failed. Automation was not able to find a valid locator from the available list:[ ${locatorList.toString()} ]. Add a new valid locator to the list`
       );
     }
     return selfHealedLocator;
@@ -736,10 +736,34 @@ export default class CommonItemsPage {
     return pageNumber;
   }
 
+  async getLastPageNumber() {
+    const itemsMap = await this.getPaginationValues();
+    const itemsValues: any = itemsMap.get('items');
+    const visiblePagesMap = await this.getVisiblePages(itemsValues);
+    const visiblePages: number[] = visiblePagesMap.get('visiblePages');
+    const lastPageNumber = visiblePages[visiblePages.length - 1];
+    return lastPageNumber;
+  }
+
   async getTotalItems() {
     const totalItems = parseInt(confirmStringNotNull(await this.result_count.textContent()).split(' ')[0], 10);
     return totalItems;
   }
+
+  async getTotalItemsNavigatingToLastPage(pagename: string) {
+    let pageSize: number;
+    if (pagename == 'Participating_Organisations_Page') {
+      pageSize = parseInt(this.commonTestData.default_page_size_participating_organisation, 10);
+    } else {
+      pageSize = parseInt(this.commonTestData.default_page_size, 10);
+    }
+    const lastPageNumber = await this.getLastPageNumber();
+    await this.clickOnPages(lastPageNumber, 'page number');
+    const totalLastPageItems = (await this.tableRows.count()) - 1;
+    const totalItems = ((await this.getTotalPages()) - 1) * pageSize + totalLastPageItems;
+    return totalItems;
+  }
+
   async getItemsPerPage() {
     const rowCount = await this.tableRows.count();
     return rowCount;
@@ -845,14 +869,6 @@ export default class CommonItemsPage {
   async filterResults(results: string[], searchTerms: string[] | string): Promise<string[]> {
     const terms = Array.isArray(searchTerms) ? searchTerms : [searchTerms];
     return results.filter((result) => terms.every((term) => result.toLowerCase().includes(term.toLowerCase())));
-  }
-
-  async clearCheckboxes(dataset: any, keys: string[], commonItemsPage: any, createUserProfilePage: any) {
-    for (const key of keys) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        await this.clearUIComponent(dataset, key, createUserProfilePage);
-      }
-    }
   }
 
   async captureLargeSizeScreenshot(page: Page, outputFile: string) {
@@ -1063,8 +1079,13 @@ export default class CommonItemsPage {
     return values;
   }
 
-  async validatePagination(currentPage: any, totalPages: any, pagename: string, navigateMethod: string) {
-    const totalItems = await this.getTotalItems();
+  async validatePagination(
+    currentPage: any,
+    totalPages: any,
+    totalItems: number,
+    pagename: string,
+    navigateMethod: string
+  ) {
     let pageSize: number;
     if (pagename == 'Participating_Organisations_Page') {
       pageSize = parseInt(this.commonTestData.default_page_size_participating_organisation, 10);
@@ -1176,8 +1197,8 @@ export default class CommonItemsPage {
     return page[locatorName];
   }
 
-  async clearCheckboxesUserProfileReviewBody<PageObject>(dataset: any, page: PageObject) {
-    const locator: Locator = page['review_body_checkbox'];
+  async clearCheckboxesUserProfile<PageObject>(dataset: any, key: string, page: PageObject) {
+    const locator: Locator = page[key];
     const count = await locator.count();
     for (let i = 0; i < count; i++) {
       const checkbox = locator.nth(i);

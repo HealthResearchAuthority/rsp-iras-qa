@@ -100,7 +100,7 @@
       "organisation_text": "QA Automation HRA Role_Workflow_Coordinator",
       "job_title_text": "Sr.Reviewer Role_Workflow_Coordinator",
       "role_checkbox": ["Workflow co-ordinator"],
-      "review_body_checkbox": ["QA Automation National Research Service Permissions Coordination Centre (NRS PCC)"]
+      "review_body_checkbox": ["QA Automation National Research Service Permissions Coordination Centre (NRSPCC)"]
     },
     "Valid_Data_In_All_Fields_Role_System_Administrator": {
       "title_text": "Mr",
@@ -135,22 +135,22 @@
     "title_text": "Miss"
   },
   "User_First_Name_Text_One": {
-    "first_name_text": "First Name Updated"
+    "first_name_text": "QA Automation First Name"
   },
   "User_Last_Name_Text_One": {
-    "last_name_text": "Last name updated"
+    "last_name_text": "QA Automation Last Name"
   },
   "User_Telephone_Text_One": {
     "telephone_text": "07999999999"
   },
   "User_Organisation_Text_One": {
-    "organisation_text": "Automation HRA"
+    "organisation_text": "Automation HRA Organisation"
   },
   "User_Job_Title_Text_One": {
     "job_title_text": "Sr.Reviewer updated"
   },
   "User_Role_Checkbox_One": {
-    "role_checkbox": ["Team manager"]
+    "role_checkbox": ["System administrator"]
   },
   "User_Country_Checkbox_One": {
     "country_checkbox": ["England", "Wales"]

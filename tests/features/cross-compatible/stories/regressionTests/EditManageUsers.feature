@@ -1,4 +1,4 @@
-@RegressionEditManageUsers @RegressionManageUsers @SysAdminUser @Regression @RegressionSysAdmin
+@RegressionEditManageUsers @RegressionManageUsers @SysAdminUser @Regression
 Feature: User Administration: Edit Manage Users
 
     Background:
@@ -9,7 +9,7 @@ Feature: User Administration: Edit Manage Users
         And I can see the 'Manage_Users_Page'
         And I capture the page screenshot
 
-    @RegressionTestEditCommonUserFields @fail @KNOWN-DEFECT-RSP-4996
+    @RegressionTestEditCommonUserFields
     Scenario Outline: Verify the user can edit each of the common user profile fields, with an audit history log
         And I select a 'QA Automation' User to View and Edit which is 'active'
         And I can see the user profile page
@@ -51,7 +51,7 @@ Feature: User Administration: Edit Manage Users
             | Organisation | User_Organisation_Text_One | Edit_User_Organisation |
             | Job_Title    | User_Job_Title_Text_One    | Edit_User_Job_Title    |
 
-    @RegressionTestEditOperationUserFields @fail @KNOWN-DEFECT-RSP-4996
+    @RegressionTestEditOperationUserFields
     Scenario Outline: Verify the user can edit the fields applicable to a team manager, with an audit history log
         And I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
         And I can see the add a new user profile page
@@ -87,7 +87,7 @@ Feature: User Administration: Edit Manage Users
             | Field_Name | Edit_User                 | Audit_History     |
             | Country    | User_Country_Checkbox_One | Edit_User_Country |
 
-    @RegressionTestEditUserProfileBackLinks @fail @KNOWN-DEFECT-RSP-4996
+    @RegressionTestEditUserProfileBackLinks
     Scenario: Verify the user can navigate from audit and edit user pages of the user back to system admin page via the 'Back' links
         And I select a 'QA Automation' User to View and Edit which is 'active'
         And I can see the user profile page
