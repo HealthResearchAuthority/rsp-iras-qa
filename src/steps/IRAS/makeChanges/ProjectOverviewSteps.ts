@@ -8,6 +8,11 @@ Then('I can see the project overview page', async ({ projectOverviewPage }) => {
   await projectOverviewPage.assertOnProjectOverviewPage();
 });
 
+Then('I navigate to the project overview page of a specific project', async ({ projectOverviewPage }) => {
+  await projectOverviewPage.gotoSpecificProjectPage();
+  await projectOverviewPage.assertOnProjectOverviewPage();
+});
+
 Then(
   'I can see the project details on project overview page for {string}',
   async ({ projectDetailsIRASPage, projectDetailsTitlePage, projectOverviewPage }, datasetName: string) => {
@@ -70,6 +75,29 @@ Then(
 );
 
 Then(
+  'I can see the status of modifications displayed is {string}',
+  async ({ commonItemsPage, projectOverviewPage }, datasetName: string) => {
+    //Limiting the checks to 2 pages
+    const dataset = projectOverviewPage.projectOverviewPageTestData[datasetName];
+    const expectedStatus = dataset.status;
+    const maxPagesToCheck = projectOverviewPage.projectOverviewPageTestData.Project_Overview_Page.maxPagesToVisit;
+    for (let pageIndex = 1; pageIndex <= maxPagesToCheck; pageIndex++) {
+      const rowCount = await commonItemsPage.tableRows.count();
+      for (let rowIndex = 1; rowIndex < rowCount; rowIndex++) {
+        const row = commonItemsPage.tableRows.nth(rowIndex);
+        const actualStatus = await projectOverviewPage.getStatus(row);
+        expect(actualStatus).toEqual(expectedStatus);
+      }
+      if (await commonItemsPage.next_button.isVisible()) {
+        await commonItemsPage.next_button.click();
+      } else {
+        break;
+      }
+    }
+  }
+);
+
+Then(
   'I validate the data displayed {string} in the project details tab of project overview page',
   async ({ projectDetailsIRASPage, projectDetailsTitlePage, projectOverviewPage }, datasetName: string) => {
     await expect(projectOverviewPage.project_details_heading).toBeVisible();
@@ -125,5 +153,35 @@ Then(
     expect(actualTrimmedParticipatingNations).toContain(expectedParticipatingNations);
     expect(actualNhsHscOrganisations).toBe(expectedNhsHscOrganisations);
     expect(actualLeadNation).toBe(expectedLeadNation);
+  }
+);
+
+Then(
+  'I can see the modifications is sorted by {string} order of the {string}',
+  async ({ searchModificationsPage, commonItemsPage }, sortOrder: string, sortColumn: string) => {
+    let sortedColumnList: string[];
+    let columnIndex: number;
+    switch (sortColumn.toLowerCase()) {
+      case 'modification id':
+        columnIndex = 0;
+        break;
+      case 'modification type':
+        columnIndex = 1;
+        break;
+      default:
+        throw new Error(`${sortColumn} is not a valid option`);
+    }
+    const actualColumnList = await searchModificationsPage.getActualListValues(
+      commonItemsPage.tableBodyRows,
+      columnIndex
+    );
+    if (sortColumn.toLowerCase() == 'modification id') {
+      sortedColumnList = await searchModificationsPage.sortModificationIdListValues(actualColumnList, sortOrder);
+    } else if (sortOrder.toLowerCase() == 'ascending') {
+      sortedColumnList = [...actualColumnList].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
+    } else {
+      sortedColumnList = [...actualColumnList].sort((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
+    }
+    expect(actualColumnList).toEqual(sortedColumnList);
   }
 );

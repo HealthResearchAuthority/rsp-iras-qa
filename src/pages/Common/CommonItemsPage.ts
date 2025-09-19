@@ -740,10 +740,34 @@ export default class CommonItemsPage {
     return pageNumber;
   }
 
+  async getLastPageNumber() {
+    const itemsMap = await this.getPaginationValues();
+    const itemsValues: any = itemsMap.get('items');
+    const visiblePagesMap = await this.getVisiblePages(itemsValues);
+    const visiblePages: number[] = visiblePagesMap.get('visiblePages');
+    const lastPageNumber = visiblePages[visiblePages.length - 1];
+    return lastPageNumber;
+  }
+
   async getTotalItems() {
     const totalItems = parseInt(confirmStringNotNull(await this.result_count.textContent()).split(' ')[0], 10);
     return totalItems;
   }
+
+  async getTotalItemsNavigatingToLastPage(pagename: string) {
+    let pageSize: number;
+    if (pagename == 'Participating_Organisations_Page') {
+      pageSize = parseInt(this.commonTestData.default_page_size_participating_organisation, 10);
+    } else {
+      pageSize = parseInt(this.commonTestData.default_page_size, 10);
+    }
+    const lastPageNumber = await this.getLastPageNumber();
+    await this.clickOnPages(lastPageNumber, 'page number');
+    const totalLastPageItems = (await this.tableRows.count()) - 1;
+    const totalItems = ((await this.getTotalPages()) - 1) * pageSize + totalLastPageItems;
+    return totalItems;
+  }
+
   async getItemsPerPage() {
     const rowCount = await this.tableRows.count();
     return rowCount;
@@ -1059,8 +1083,13 @@ export default class CommonItemsPage {
     return values;
   }
 
-  async validatePagination(currentPage: any, totalPages: any, pagename: string, navigateMethod: string) {
-    const totalItems = await this.getTotalItems();
+  async validatePagination(
+    currentPage: any,
+    totalPages: any,
+    totalItems: number,
+    pagename: string,
+    navigateMethod: string
+  ) {
     let pageSize: number;
     if (pagename == 'Participating_Organisations_Page') {
       pageSize = parseInt(this.commonTestData.default_page_size_participating_organisation, 10);

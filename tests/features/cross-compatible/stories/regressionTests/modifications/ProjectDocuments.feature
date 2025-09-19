@@ -19,6 +19,10 @@ Feature: Create Modifications - Project Documents Modifications Regression
     And I capture the page screenshot
     When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
     Then I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
 
   @ValidateDocumentUploadAndReviewForModificationsPageRegression
   Scenario Outline: Validate the user is able to upload and review documents for modifications

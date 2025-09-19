@@ -835,9 +835,15 @@ Then(
     } else {
       maxPagesToValidate = totalPages;
     }
+    let totalItems: number;
+    if (pagename === 'My_Research_Projects_Page' || pagename === 'Post_Approval_Page') {
+      totalItems = await commonItemsPage.getTotalItemsNavigatingToLastPage(pagename);
+    } else {
+      totalItems = await commonItemsPage.getTotalItems();
+    }
     await commonItemsPage.firstPage.click();
     for (let currentPage = 1; currentPage <= maxPagesToValidate; currentPage++) {
-      await commonItemsPage.validatePagination(currentPage, totalPages, pagename, navigateMethod);
+      await commonItemsPage.validatePagination(currentPage, totalPages, totalItems, pagename, navigateMethod);
     }
   }
 );
@@ -847,15 +853,21 @@ Then(
   async ({ commonItemsPage }, pagename: string, navigateMethod: string) => {
     const totalPages = await commonItemsPage.getTotalPages();
     //Limiting the max pages to validate to 10
-    let maxPagesToValidate = 0;
+    let validatePageUntil = 0;
     if (totalPages > commonItemsPage.commonTestData.maxPagesToValidate) {
-      maxPagesToValidate = totalPages - commonItemsPage.commonTestData.maxPagesToValidate;
+      validatePageUntil = totalPages - commonItemsPage.commonTestData.maxPagesToValidate;
     } else {
-      maxPagesToValidate = totalPages;
+      validatePageUntil = totalPages;
     }
-    await commonItemsPage.clickOnPages(totalPages, 'page number');
-    for (let currentPage = totalPages; currentPage >= maxPagesToValidate; currentPage--) {
-      await commonItemsPage.validatePagination(currentPage, totalPages, pagename, navigateMethod);
+    let totalItems: number;
+    if (pagename == 'My_Research_Projects_Page' || pagename === 'Post_Approval_Page') {
+      totalItems = await commonItemsPage.getTotalItemsNavigatingToLastPage(pagename);
+    } else {
+      totalItems = await commonItemsPage.getTotalItems();
+    }
+    await commonItemsPage.clickOnPages(totalPages, navigateMethod);
+    for (let currentPage = totalPages; currentPage >= validatePageUntil; currentPage--) {
+      await commonItemsPage.validatePagination(currentPage, totalPages, totalItems, pagename, navigateMethod);
     }
   }
 );
