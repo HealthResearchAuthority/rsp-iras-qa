@@ -166,7 +166,9 @@
     "Save_Continue": "Save and continue",
     "Save_For_Later": "Save for later"
   },
-  "Project_Overview_Page": {
-    "Create_New_Modification": "Create new modification"
+  "Modifications_Details_Page": {
+    "Add_Another_Change": "Add another change to this modification",
+    "Save_Continue_Review": "Save and continue to review",
+    "Save_For_Later": "Save for later"
   }
 }

@@ -31,3 +31,32 @@ Then(
     expect(modificationIDActual).toBe(modificationIDExpected);
   }
 );
+
+Then(
+  'I create {string} for the created modification',
+  async ({ commonItemsPage, modificationsCommonPage, selectAreaOfChangePage }, datasetName) => {
+    const changesDataset = modificationsCommonPage.modificationsCommonPagePageTestData[datasetName];
+    for (const changeName of Object.keys(changesDataset)) {
+      const changeDataset = modificationsCommonPage.modificationsCommonPagePageTestData[datasetName][changeName];
+      await selectAreaOfChangePage.selectAreaOfChangeInModificationsPage(changeDataset);
+      await modificationsCommonPage.createChangeModification(changeName, changeDataset);
+      await commonItemsPage.clickButton('Modifications_Details_Page', 'Add_Another_Change');
+    }
+  }
+);
+
+Then(
+  'I keep note of the individual and overall ranking of changes created using {string}',
+  async ({ modificationsCommonPage }, datasetName) => {
+    const changesDataset = modificationsCommonPage.modificationsCommonPagePageTestData[datasetName];
+    for (const changeName of Object.keys(changesDataset)) {
+      const changeDataset = modificationsCommonPage.modificationsCommonPagePageTestData[datasetName][changeName];
+      if (!('which_organisation_change_affect_checkbox' in changeDataset)) {
+        modificationsCommonPage.calculateAndStoreRankingForChangesForNonApplicability(changeName);
+      } else {
+        modificationsCommonPage.calculateAndStoreRankingForChangesForApplicability(changeName, changeDataset);
+      }
+      modificationsCommonPage.calculateAndStoreOverallRanking();
+    }
+  }
+);

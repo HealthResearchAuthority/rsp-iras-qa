@@ -197,3 +197,20 @@ Feature: Create Amendment - Create Modifications
     Examples:
       | Field_And_Summary_Error_Message              | Area_Of_Change             | Specific_Change          | Modifications_Tile_Link |
       | Field_Error_participating_organisations_text | Participating_Organisation | Addition_Of_Sites_Option | Modifications_Tile      |
+
+  @rsp-4386 @ValidateRankingOfModification
+  Scenario Outline: Verify overall ranking of changes displayed on modifications details page for different area of change and specific change options
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I capture the page screenshot
+    And I create '<Changes>' for the created modification
+    And I keep note of the individual and overall ranking of changes created using '<Changes>'
+    And I capture the page screenshot
+    # And I validate the overall ranking of changes displayed for '<Changes>'
+    # And I validate the individual ranking of changes displayed for '<Changes>'
+
+    Examples:
+      | Changes              |
+      | Multiple_Changes_One |

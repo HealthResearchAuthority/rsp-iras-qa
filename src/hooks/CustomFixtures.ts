@@ -53,9 +53,9 @@ import SearchModificationsPage from '../pages/IRAS/reviewResearch/receiveAmendme
 import ModificationsReadyToAssignPage from '../pages/IRAS/reviewResearch/receiveAmendments/ModificationsReadyToAssignPage';
 import ApprovalsPage from '../pages/IRAS/reviewResearch/approvals/ApprovalsPage';
 import ModificationsCommonPage from '../pages/IRAS/makeChanges/modifications/ModificationsCommonPage';
-import PlannedEndDateChangePage from '../pages/IRAS/makeChanges/modifications/changePlannedEndDate/PlannedEndDateChangePage';
-import AffectedOrganisationSelectionPage from '../pages/IRAS/makeChanges/modifications/changePlannedEndDate/AffectedOrganisationSelectionPage';
-import AffectedOrganisationQuestionsPage from '../pages/IRAS/makeChanges/modifications/changePlannedEndDate/AffectedOrganisationQuestionsPage';
+import PlannedEndDateChangePage from '../pages/IRAS/makeChanges/modifications/PlannedEndDateChangePage';
+import AffectedOrganisationSelectionPage from '../pages/IRAS/makeChanges/modifications/applicabilityScreens/AffectedOrganisationSelectionPage';
+import AffectedOrganisationQuestionsPage from '../pages/IRAS/makeChanges/modifications/applicabilityScreens/AffectedOrganisationQuestionsPage';
 import ReviewChangesPlannedEndDatePage from '../pages/IRAS/makeChanges/modifications/changePlannedEndDate/ReviewChangesPlannedEndDatePage';
 import AddDocumentsModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/AddDocumentsModificationsPage';
 import ReviewUploadedDocumentsModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/ReviewUploadedDocumentsModificationsPage';
