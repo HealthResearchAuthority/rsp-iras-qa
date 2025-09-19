@@ -21,7 +21,7 @@ Feature: Modifications Tasklist page that displays modifications ready to be ass
 
     # Date_Submitted,Days_Since_Submission sort is failing
     @RegressionSortTasklistByColumn @fail
-    Scenario: Verify the user is able to sort the modifications tasklist by ascending and descending order for each results table column
+    Scenario: Verify the user is able to sort the modifications tasklist by ascending and descending order for each results table column (Date Submitted,Days Since Submission)
         When I click the '<Sort_Button>' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
         Then I can see the tasklist of modifications ready to assign is sorted by '<Initial_Sort>' order of the '<Sort_Field>'
