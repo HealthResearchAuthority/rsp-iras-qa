@@ -583,7 +583,9 @@ When(
     const currentUrl = commonItemsPage.page.url();
     const currentPageNumber = await commonItemsPage.getPageNumber(currentUrl);
     const currentPageLabel = `Page ${currentPageNumber}`;
-    const currentPageLink = commonItemsPage.pagination.getByRole('link', { name: currentPageLabel });
+    const currentPageLink = commonItemsPage.pagination
+      .getByRole('link', { name: currentPageLabel, exact: true })
+      .first();
     await expect(currentPageLink).toHaveAttribute('aria-current');
     const currentPageLinkHref = await currentPageLink.getAttribute('href');
     expect(currentUrl).toContain(currentPageLinkHref);

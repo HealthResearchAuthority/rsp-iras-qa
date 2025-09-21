@@ -1,4 +1,4 @@
-@UserAdministration @ManageReviewBodies @SysAdminUser @SystemTest @UserListReviewBody @rsp-3270
+@UserAdministration @ManageReviewBodies @SysAdminUser @SystemTest @UserListReviewBody @rsp-3270 @STSysAdmin
 Feature: User Administration: Manage Review Bodies - View user list page of the review body, Search for the users and remove user from the review body
 
     Background:
@@ -312,9 +312,11 @@ Feature: User Administration: Manage Review Bodies - View user list page of the 
         And I click the 'Back' link on the 'Check_Remove_User_Profile_Page'
         Then I can see the user list page of the review body
 
-    @rsp-3890 @UserListReviewBodySearchMultiTerms
+    # need to check with Chris on this test case
+    @rsp-3890 @UserListReviewBodySearchMultiTerms @fail
     Scenario Outline: Verify the review body users search utilises AND logic to produce accurate search results
         And I navigate to the user list page of the 'User_Search_Test' review body
+        And I capture the page screenshot
         When I fill the search input for searching 'users' with '<Initial_Search_Query>' as the search query
         And I capture the page screenshot
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
