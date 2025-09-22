@@ -144,7 +144,7 @@ Given(
       }
       if (searchInput.toLowerCase().includes('days')) {
         for (const day of daysSinceSubmission) {
-          if (parseInt(day) == 1) {
+          if (Number.parseInt(day) == 1) {
             expect(
               day.endsWith(
                 modificationsReceivedCommonPage.modificationsReceivedCommonPagePageTestData.Tasklist_Page
@@ -229,23 +229,23 @@ When(
     if (datasetName.toLowerCase().includes('days')) {
       if (datasetName.toLowerCase().includes('from') || datasetName.toLowerCase().includes('range')) {
         await modificationsReceivedCommonPage.setDaysSinceSubmissionFromFilter(
-          parseInt(dataset.days_since_submission_from_text)
+          Number.parseInt(dataset.days_since_submission_from_text)
         );
       }
       if (datasetName.toLowerCase().includes('to') || datasetName.toLowerCase().includes('range')) {
         await modificationsReceivedCommonPage.setDaysSinceSubmissionToFilter(
-          parseInt(dataset.days_since_submission_to_text)
+          Number.parseInt(dataset.days_since_submission_to_text)
         );
       }
       if (datasetName.toLowerCase().includes('specific')) {
         await modificationsReadyToAssignPage.days_since_submission_from_text.fill(
-          parseInt(daysSinceSubmission[0]).toString()
+          Number.parseInt(daysSinceSubmission[0]).toString()
         );
         await modificationsReadyToAssignPage.days_since_submission_to_text.fill(
-          parseInt(daysSinceSubmission[0]).toString()
+          Number.parseInt(daysSinceSubmission[0]).toString()
         );
-        await modificationsReceivedCommonPage.setDaysSinceSubmissionFromFilter(parseInt(daysSinceSubmission[0]));
-        await modificationsReceivedCommonPage.setDaysSinceSubmissionToFilter(parseInt(daysSinceSubmission[0]));
+        await modificationsReceivedCommonPage.setDaysSinceSubmissionFromFilter(Number.parseInt(daysSinceSubmission[0]));
+        await modificationsReceivedCommonPage.setDaysSinceSubmissionToFilter(Number.parseInt(daysSinceSubmission[0]));
       }
     }
     if (datasetName.toLowerCase().includes('date')) {
