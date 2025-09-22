@@ -6,6 +6,7 @@ export default class ConfirmationPage {
   readonly page: Page;
   readonly confirmationPageTestData: typeof confirmationPageTestData;
   readonly confirmation_header_label: Locator;
+  readonly confirmation_header_common_label: Locator;
   readonly confirmation_body_label: Locator;
 
   //Initialize Page Objects
@@ -21,6 +22,7 @@ export default class ConfirmationPage {
       .or(this.page.getByRole('heading', { name: confirmationPageTestData.enable_disable_confirmation_header_label }))
       .or(this.page.getByRole('heading', { name: confirmationPageTestData.disable_success_confirmation_header_label }))
       .or(this.page.getByRole('heading', { name: confirmationPageTestData.enable_success_confirmation_header_label }));
+    this.confirmation_header_common_label = this.page.getByRole('heading');
     this.confirmation_body_label = this.page.getByRole('paragraph').first();
   }
 

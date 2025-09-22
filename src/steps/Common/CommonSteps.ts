@@ -393,6 +393,7 @@ Then(
       participatingOrganisationsPage,
       affectedOrganisationSelectionPage,
       addDocumentsModificationsPage,
+      sponsorReferencePage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
@@ -451,6 +452,10 @@ Then(
       errorMessageFieldDataset =
         addDocumentsModificationsPage.addDocumentsModificationsPageTestData[errorMessageFieldAndSummaryDatasetName];
       page = addDocumentsModificationsPage;
+    } else if (pageKey == 'Sponsor_Reference_Page') {
+      errorMessageFieldDataset =
+        sponsorReferencePage.sponsorReferencePageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = sponsorReferencePage;
     }
     let allSummaryErrorExpectedValues: any;
     let summaryErrorActualValues: any;

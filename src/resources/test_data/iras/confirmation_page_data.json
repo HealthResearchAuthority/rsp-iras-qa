@@ -35,6 +35,12 @@
     "page_heading": "User has been successfully added",
     "page_guidance_text": " has been sent an email confirming that they have been added to "
   },
+  "Project_Record_Created_Labels": {
+    "page_heading": "Project record created",
+    "page_heading_prefix": "For",
+    "page_heading_body_prefix": "IRAS ID:",
+    "confirmation_body": "Your project is now available to manage."
+  },
   "add_remove_user_review_Body_confirmation_success_header_label": "User has been successfully",
   "enable_disable_confirmation_header_label": "Confirm that you want to",
   "disable_success_confirmation_header_label": "successfully disabled",

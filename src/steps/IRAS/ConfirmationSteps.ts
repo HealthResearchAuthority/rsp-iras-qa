@@ -227,3 +227,31 @@ Given(
     );
   }
 );
+
+Then(
+  'I validate {string} labels displayed in confirmation page for poject created using the {string} details',
+  async (
+    { confirmationPage, projectDetailsTitlePage, projectDetailsIRASPage },
+    validationLabelsDatasetName,
+    projectDetailsTitlePageDatasetName: string
+  ) => {
+    const projectDetailsTitlePageDataset =
+      projectDetailsTitlePage.projectDetailsTitlePageTestData[projectDetailsTitlePageDatasetName];
+    const validationLabelsDataset = confirmationPage.confirmationPageTestData[validationLabelsDatasetName];
+    await expect(
+      confirmationPage.confirmation_header_common_label.getByText(validationLabelsDatasetName.page_heading)
+    ).toBeVisible();
+    const expectedConfirmationHeader =
+      validationLabelsDatasetName.page_heading_prefix +
+      ' ' +
+      projectDetailsTitlePageDataset.short_project_title_text +
+      ', ' +
+      validationLabelsDatasetName.page_heading_body_prefix +
+      ' ' +
+      projectDetailsIRASPage.getUniqueIrasId();
+    await expect(confirmationPage.confirmation_header_common_label.getByText(expectedConfirmationHeader)).toBeVisible();
+    await expect(
+      confirmationPage.confirmation_body_label.getByText(validationLabelsDataset.confirmation_body)
+    ).toBeVisible();
+  }
+);

@@ -615,8 +615,8 @@ Feature: Create Amendment - Create Project - Review your answers
   # | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | sponsor_contact   | Invalid_Email_Data_Two_Missing_AT                      | Field_Error_Sponsor_Email       |
   # | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | sponsor_contact   | Invalid_Email_Data_Two_Max_Char                        | Field_Error_Sponsor_Email       |
 
-  @rsp-1867 @rsp-3819 @ValidateConfirmProjectFlow
-  Scenario Outline: Validate user is able to see the project overview page when user submit the review answer page with all mandatory fields entered correctly
+  @rsp-1867 @rsp-3819 @rsp-4880 @ValidateConfirmProjectFlow
+  Scenario Outline: Validate user is able to see the project success confirmation screen and then the project overview page when user submit the review answer page with all mandatory fields entered correctly
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
@@ -634,6 +634,8 @@ Feature: Create Amendment - Create Project - Review your answers
     Then I can see the review your answers page
     And I capture the page screenshot
     When I click the '<Navigation_Button_Fourth>' button on the 'Review_Your_Answers_Page'
+    Then I validate 'Project_Record_Created_Labels' labels displayed in confirmation page for poject created using the '<Project_Details_Title>' details
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
     Then I can see the project overview page
     And I capture the page screenshot
 
