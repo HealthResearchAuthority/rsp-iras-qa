@@ -52,6 +52,13 @@ Feature: User Administration: My Research
     And the 'Next' button will be 'available' to the user
     And the 'Previous' button will be 'not available' to the user
     And I capture the page screenshot
+    Then I sequentially navigate through each 'My_Research_Projects_Page' by clicking on '<Navigation_Method>' from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+    And I capture the page screenshot
+
+    Examples:
+      | Navigation_Method |
+      | page number       |
+      | next link         |
 
   @rsp-2854 @MyResearchPagination @MyResearchPaginationLastPage
   Scenario: Verify pagination in my research page when user is on the last page
@@ -60,5 +67,13 @@ Feature: User Administration: My Research
     And the 'Previous' button will be 'available' to the user
     And the 'Next' button will be 'not available' to the user
     And I capture the page screenshot
+    Then I sequentially navigate through each 'My_Research_Projects_Page' by clicking on '<Navigation_Method>' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+    And I capture the page screenshot
+
+    Examples:
+      | Navigation_Method |
+      | page number       |
+      | previous link     |
+
 
 

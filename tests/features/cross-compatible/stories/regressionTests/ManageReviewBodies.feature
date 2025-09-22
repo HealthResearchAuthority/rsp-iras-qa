@@ -1,4 +1,4 @@
-@RegressionManageReviewBodies @SysAdminUser @Regression @UserAdministration
+@RegressionManageReviewBodies @SysAdminUser @Regression @UserAdministration @BackStage
 Feature: User Administration: Manage Review Bodies
 
         Background:
@@ -6,7 +6,7 @@ Feature: User Administration: Manage Review Bodies
                 And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
                 Then I can see the 'Manage_Review_Bodies_Page'
 
-        @RegressionTestVerifyCreateAndDisableReviewBodyAuditHistory
+        @RegressionTestVerifyCreateAndDisableReviewBodyAuditHistory @KNOWN-ISSUE-RSP-5003 @KNOWN-DEFECT-RSP-5004 @fail
         Scenario Outline: Verify the user can view the audit history after disabling a newly created review body and the the user list page
                 # create review body from manage review body page
                 And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'

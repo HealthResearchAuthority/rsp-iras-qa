@@ -9,7 +9,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                 Then I can see the 'Search_Modifications_Page'
                 And I capture the page screenshot
 
-        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @rsp-4118 @KNOWN-DEFECT-RSP-4467 @rsp-4293
+        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @rsp-4118  @rsp-4293
         Scenario Outline: Verify the user is able to view the list of modifications by entering a valid IRAS ID, selecting the advanced filters, and clicking the 'Apply filters' button
                 When I enter '<Valid_Iras_Id>' into the search field for search modifications page
                 And I capture the page screenshot
@@ -19,9 +19,9 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                 And I capture the page screenshot
                 And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                And the advanced filters section should collapse automatically
+                And I 'cannot' see the advanced filters panel
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
-                And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>' or shows no results found message if no matching records exist in the search modifications page
+                And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>'
                 And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
                 And I capture the page screenshot
                 And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
@@ -38,12 +38,12 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                         | Valid_Iras_Id_Prefix      | Advanced_Filters_Automation_No_SpOrg_No_FromDate |
 
 
-        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @KNOWN-DEFECT-RSP-4467
+        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters
         Scenario Outline: Verify the user is able to view the list of modifications by entering valid iras id, then clicking on 'Search' button and then selecting advanced filters and clicking the 'Apply filters' button
                 When I enter '<Valid_Iras_Id>' into the search field for search modifications page
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Search_Modifications_Page'
-                And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria '' or shows no results found message if no matching records exist in the search modifications page
+                And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria ''
                 And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
                 And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
                 And I capture the page screenshot
@@ -54,7 +54,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                 And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
-                And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>' or shows no results found message if no matching records exist in the search modifications page
+                And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>'
                 And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
                 And I capture the page screenshot
                 And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
@@ -67,7 +67,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                         | Valid_Iras_Id_TwentyTwo   | Advanced_Filters_TwentyTwo   |
                         | Valid_Iras_Id_TwentyThree | Advanced_Filters_TwentyThree |
 
-        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @KNOWN-DEFECT-RSP-4467
+        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters
         Scenario Outline: Verify the user can view the list of modifications by entering valid iras id, then click on search button and then selected advanced filters and click on apply filters button
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I select advanced filters in the search modifications page using '<Advanced_Filters>'
@@ -75,7 +75,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                 And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
-                And the system displays modification records based on the search '' and filter criteria '<Advanced_Filters>' or shows no results found message if no matching records exist in the search modifications page
+                And the system displays modification records based on the search '' and filter criteria '<Advanced_Filters>'
                 And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
                 And I capture the page screenshot
                 And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
@@ -83,7 +83,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                 When I enter '<Valid_Iras_Id>' into the search field for search modifications page
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Search_Modifications_Page'
-                And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>' or shows no results found message if no matching records exist in the search modifications page
+                And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>'
                 And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
                 And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
                 And I capture the page screenshot
@@ -101,7 +101,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria '' or shows no results found message if no matching records exist in the search modifications page
+                And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria ''
                 And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
                 And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
                 And I capture the page screenshot
@@ -114,7 +114,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                         | Valid_Iras_Id_TwentyTwo   |
                         | Valid_Iras_Id_TwentyThree |
 
-        @viewListOfModifications @NoIrasIdAndAdvancedFilters @KNOWN-DEFECT-RSP-4467
+        @viewListOfModifications @NoIrasIdAndAdvancedFilters
         Scenario Outline: Verify the user can view the list of modifications by selecting advanced filters and click on apply filters button
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 When I select advanced filters in the search modifications page using '<Advanced_Filters>'
@@ -122,7 +122,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                 And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
-                And the system displays modification records based on the search '' and filter criteria '<Advanced_Filters>' or shows no results found message if no matching records exist in the search modifications page
+                And the system displays modification records based on the search '' and filter criteria '<Advanced_Filters>'
                 And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
                 And I capture the page screenshot
                 And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
@@ -149,7 +149,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                         | Advanced_Filters_TwentyTwo   |
                         | Advanced_Filters_TwentyThree |
 
-        @viewListOfModifications @DateModificationSubmitted @SponsorOrganisation @KNOWN-DEFECT-RSP-4467
+        @viewListOfModifications @DateModificationSubmitted @SponsorOrganisation
         Scenario Outline: Verify the user is able to view the list of modifications filtered by sponsor organisation and modification submitted date
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I select advanced filters in the search modifications page using '<Advanced_Filters>'
@@ -157,7 +157,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                 And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
-                And the system displays modification records based on the search '' and filter criteria '<Advanced_Filters>' or shows no results found message if no matching records exist in the search modifications page
+                And the system displays modification records based on the search '' and filter criteria '<Advanced_Filters>'
                 And I capture the page screenshot
                 And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
                 And I capture the page screenshot
@@ -172,38 +172,28 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
         @NoResultsFound @NoIrasIdAndNoAdvancedFilters
         Scenario: Verify the user can see an empty state that informs me no modifications exist for the search criteria on clicking search button without entering/selecting iras id and filters
                 When I click the 'Search' button on the 'Search_Modifications_Page'
-                Then I can see an empty state that informs me no modifications exist for the search criteria
+                Then the no search results found message is displayed
                 And I capture the page screenshot
 
         @NoResultsFound @NoIrasIdAndNoAdvancedFilters
         Scenario: Verify the user can see an empty state that informs me no modifications exist for the search criteria on clicking apply filters button without entering/selecting iras id and filters
                 When I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
-                Then I can see an empty state that informs me no modifications exist for the search criteria
+                Then the no search results found message is displayed
                 And I capture the page screenshot
-
-        @NoResultsFound @InvalidIrasIdAndNoAdvancedFilters
-        Scenario Outline: Verify the user can see an empty state that informs me no modifications exist for the search criteria on clicking search button after entering invalid iras id
-                When I enter '<Invalid_Iras_Id>' into the search field for search modifications page
-                And I capture the page screenshot
-                And I click the 'Search' button on the 'Search_Modifications_Page'
-                Then I can see an empty state that informs me no modifications exist for the search criteria
-                And I capture the page screenshot
-                Examples:
-                        | Invalid_Iras_Id        |
-                        | Invalid_Iras_Id_Spaces |
-                        | Invalid_Iras_Id_Blank  |
 
         @NoResultsFound @InvalidIrasIdAndNoAdvancedFilters @rsp-4293
+        # Add no results check to regression
         Scenario Outline: Verify the user can see no matching results found message on clicking search button after entering invalid iras id
                 When I enter '<Invalid_Iras_Id>' into the search field for search modifications page
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Search_Modifications_Page'
-                And the system displays modification records based on the search '<Invalid_Iras_Id>' and filter criteria '' or shows no results found message if no matching records exist in the search modifications page
-                And the advanced filters section should collapse automatically
+                Then the no search results found message is displayed
                 And I capture the page screenshot
                 Examples:
                         | Invalid_Iras_Id                  |
+                        | Invalid_Iras_Id_Spaces           |
+                        | Invalid_Iras_Id_Blank            |
                         | Invalid_Iras_Id_Letters          |
                         | Invalid_Iras_Id_Symbols          |
                         | Invalid_Iras_Id_Letters_Symbols  |
@@ -213,7 +203,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                         | Invalid_Iras_Id_Spaces_Seperator |
                         | Invalid_Iras_Id_Zeros            |
 
-        @NoResultsFound @InvalidIrasIdAndAdvancedFilters @KNOWN-DEFECT-RSP-4467
+        @NoResultsFound @InvalidIrasIdAndAdvancedFilters
         Scenario Outline: Verify the user can see no matching results found message by entering invalid iras id, then selected advanced filters and click on apply filters button
                 When I enter '<Invalid_Iras_Id>' into the search field for search modifications page
                 And I capture the page screenshot
@@ -224,7 +214,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                 And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
-                And the system displays modification records based on the search '<Invalid_Iras_Id>' and filter criteria '<Advanced_Filters>' or shows no results found message if no matching records exist in the search modifications page
+                And the no search results found message is displayed
                 And I capture the page screenshot
                 Examples:
                         | Invalid_Iras_Id                  | Advanced_Filters             |
@@ -239,37 +229,37 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                         | Invalid_Iras_Id_Spaces_Seperator | Advanced_Filters_TwentyTwo   |
                         | Invalid_Iras_Id_Zeros            | Advanced_Filters_TwentyThree |
 
-        @NoResultsFound @ValidIrasIdAndAdvancedFilters @KNOWN-DEFECT-RSP-4467 @rsp-4293
+        @NoResultsFound @ValidIrasIdAndAdvancedFilters @rsp-4293
         Scenario Outline: Verify the user can see no matching results found message by entering valid iras id, then selected advanced filters and click on apply filters button
                 When I enter '<Valid_Iras_Id>' into the search field for search modifications page
                 And I capture the page screenshot
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                And I select advanced filters in the search modifications page using '<Advanced_Filters_No_results>'
+                And I select advanced filters in the search modifications page using '<Advanced_Filters_No_Results>'
                 And I capture the page screenshot
                 And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters_No_results>' in the 'Search_Modifications_Page'
-                And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters_No_results>' or shows no results found message if no matching records exist in the search modifications page
-                And the advanced filters section should collapse automatically
+                Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters_No_Results>' in the 'Search_Modifications_Page'
+                And I 'cannot' see the advanced filters panel
+                Then the no search results found message is displayed
                 And I capture the page screenshot
                 Examples:
-                        | Valid_Iras_Id     | Advanced_Filters_No_results |
+                        | Valid_Iras_Id     | Advanced_Filters_No_Results |
                         | Valid_Iras_Id_Nth | Advanced_Filters_Fifteen    |
 
-        @NoResultsFound @KNOWN-DEFECT-RSP-4467
+        @NoResultsFound @InvalidAdvancedFilters
         Scenario Outline: Verify the user can see no matching results found message by selecting advanced filters and click on apply filters button
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                And I select advanced filters in the search modifications page using '<Advanced_Filters_No_results>'
+                And I select advanced filters in the search modifications page using '<Advanced_Filters_No_Results>'
                 And I capture the page screenshot
                 And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters_No_results>' in the 'Search_Modifications_Page'
-                And the system displays modification records based on the search '' and filter criteria '<Advanced_Filters_No_results>' or shows no results found message if no matching records exist in the search modifications page
+                Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters_No_Results>' in the 'Search_Modifications_Page'
+                Then the no search results found message is displayed
                 And I capture the page screenshot
                 Examples:
-                        | Advanced_Filters_No_results     |
+                        | Advanced_Filters_No_Results     |
                         | Advanced_Filters_No_Results_One |
 
         @DateSubmittedError @rsp-4167
@@ -298,7 +288,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                         | Date_Submitted_Invalid_Year_Letters_To_Date  | Invalid_Date_To_Error                   |
 
 
-        @RemoveActiveFiltersOneByOne @KNOWN-DEFECT-RSP-4467
+        @RemoveActiveFiltersOneByOne
         Scenario Outline: Verify the user can remove the selected filters one by one and the search results update accordingly
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -307,7 +297,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                 And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
-                And the system displays modification records based on the search '' and filter criteria '<Advanced_Filters>' or shows no results found message if no matching records exist in the search modifications page
+                And the system displays modification records based on the search '' and filter criteria '<Advanced_Filters>'
                 And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
                 And I capture the page screenshot
                 And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
@@ -315,7 +305,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                 And 'I remove the selected filters from' active filters '<Advanced_Filters_Remove>' in the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters_After_Remove>' in the 'Search_Modifications_Page'
-                And the system displays modification records based on the search '' and filter criteria '<Advanced_Filters_After_Remove>' or shows no results found message if no matching records exist in the search modifications page
+                And the system displays modification records based on the search '' and filter criteria '<Advanced_Filters_After_Remove>'
                 And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
 
                 Examples:
@@ -325,7 +315,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                         | Advanced_Filters_Nth | Advanced_Filters_Nth_Sponsor_Organisation_Filter    | Advanced_Filters_Nth_After_Remove_Sponsor_Organisation_Filter    |
                         | Advanced_Filters_Nth | Advanced_Filters_Nth_Date_Submitted_From_To_Filter  | Advanced_Filters_Nth_After_Remove_Date_Submitted_From_To_Filter  |
 
-        @RemoveAllActiveFiltersOneByOne @KNOWN-DEFECT-RSP-4467
+        @RemoveAllActiveFiltersOneByOne
         Scenario Outline: Verify the user can remove all the selected filters one by one and the search results update accordingly
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -334,14 +324,14 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                 And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
-                And the system displays modification records based on the search '' and filter criteria '<Advanced_Filters>' or shows no results found message if no matching records exist in the search modifications page
+                And the system displays modification records based on the search '' and filter criteria '<Advanced_Filters>'
                 And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
                 And I capture the page screenshot
                 And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
                 And I capture the page screenshot
                 And 'I remove the selected filters from' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                Then I can see an empty state that informs me no modifications exist for the search criteria
+                Then The search modifications page returns to its original empty state with no results displayed
                 And I capture the page screenshot
 
                 Examples:
@@ -352,7 +342,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                         | Advanced_Filters_Automation_No_SpOrg_No_FromDate |
 
 
-        @RemoveAllActiveFiltersOneByOne @KNOWN-DEFECT-RSP-4467
+        @RemoveAllActiveFiltersOneByOne
         Scenario Outline: Verify the user can remove all the selected filters one by one and the search results update accordingly based on the previously entered IRAS ID
                 When I enter '<Valid_Iras_Id>' into the search field for search modifications page
                 And I capture the page screenshot
@@ -363,23 +353,23 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                 And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
-                And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>' or shows no results found message if no matching records exist in the search modifications page
+                And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>'
                 And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
                 And I capture the page screenshot
                 And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
                 And I capture the page screenshot
                 And 'I remove the selected filters from' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                And all selected filters displayed under active Filters have been successfully removed
-                And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria '' or shows no results found message if no matching records exist in the search modifications page
+                And I 'cannot' see active filters displayed
+                And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria ''
                 And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
                 And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
                 Examples:
                         | Valid_Iras_Id     | Advanced_Filters     |
                         | Valid_Iras_Id_Nth | Advanced_Filters_Nth |
 
-        @RemoveActiveFiltersAllTogether @KNOWN-DEFECT-RSP-4467 @rsp-4293
-        Scenario Outline: Verify the user can remove the selected filters alltogether by clicking 'Clear all filters' link and the search results update accordingly
+        @RemoveActiveFiltersAltogether @rsp-4293
+        Scenario Outline: Verify the user can remove the selected filters altogether by clicking 'Clear all filters' link and the search results update accordingly
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 When I select advanced filters in the search modifications page using '<Advanced_Filters>'
@@ -387,21 +377,21 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                 And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
-                And the system displays modification records based on the search '' and filter criteria '<Advanced_Filters>' or shows no results found message if no matching records exist in the search modifications page
+                And the system displays modification records based on the search '' and filter criteria '<Advanced_Filters>'
                 And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
                 And I capture the page screenshot
                 And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
                 And I capture the page screenshot
                 And I click the 'Clear_All_Filters' link on the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                Then I can see an empty state that informs me no modifications exist for the search criteria
-                And the advanced filters section should collapse automatically
+                Then The search modifications page returns to its original empty state with no results displayed
+                And I 'cannot' see the advanced filters panel
 
                 Examples:
                         | Advanced_Filters     |
                         | Advanced_Filters_Nth |
 
-        @RemoveActiveFiltersAllTogether @KNOWN-DEFECT-RSP-4467
+        @RemoveActiveFiltersAlTogether
         Scenario Outline: Verify the user can view the list of modifications by entering valid iras id, then selected advanced filters and click on apply filters button
                 When I enter '<Valid_Iras_Id>' into the search field for search modifications page
                 And I capture the page screenshot
@@ -412,15 +402,15 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                 And I click the 'Apply_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
-                And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>' or shows no results found message if no matching records exist in the search modifications page
+                And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>'
                 And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
                 And I capture the page screenshot
                 And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
                 And I capture the page screenshot
                 And I click the 'Clear_All_Filters' link on the 'Search_Modifications_Page'
                 And I capture the page screenshot
-                And all selected filters displayed under active Filters have been successfully removed
-                And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria '' or shows no results found message if no matching records exist in the search modifications page
+                And I 'cannot' see active filters displayed
+                And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria ''
                 And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
                 Examples:
                         | Valid_Iras_Id     | Advanced_Filters     |
@@ -498,7 +488,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                 When I enter '<Valid_Iras_Id>' into the search field for search modifications page
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Search_Modifications_Page'
-                And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria '' or shows no results found message if no matching records exist in the search modifications page
+                And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria ''
                 And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
                 And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
                 And I capture the page screenshot
