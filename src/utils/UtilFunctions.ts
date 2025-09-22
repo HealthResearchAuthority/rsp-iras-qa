@@ -497,7 +497,7 @@ function extractWcagStandard(wcagTag: string): string {
 
 function extractWcagGuideline(wcagTag: string): number {
   const wcagGuidelineRegex = new RegExp(/\d+/);
-  const wcagTagGuideline = parseInt(confirmStringNotNull(wcagGuidelineRegex.exec(wcagTag)?.toString()));
+  const wcagTagGuideline = Number.parseInt(confirmStringNotNull(wcagGuidelineRegex.exec(wcagTag)?.toString()));
   return wcagTagGuideline;
 }
 
@@ -569,7 +569,7 @@ export async function convertDate(day: string, month: number, year: number): Pro
 }
 
 export async function convertDateShortMonth(day: string, month: string, year: number): Promise<string> {
-  const formattedDay = String(parseInt(day, 10));
+  const formattedDay = String(Number.parseInt(day, 10));
   const formattedMonth = month.charAt(0).toUpperCase() + month.slice(1, 3).toLowerCase();
   const formattedDate = `${formattedDay} ${formattedMonth} ${year}`;
   return formattedDate;

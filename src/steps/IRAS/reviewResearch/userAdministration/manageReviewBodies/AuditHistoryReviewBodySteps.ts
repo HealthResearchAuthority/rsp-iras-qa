@@ -36,7 +36,7 @@ Then(
       auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page[datasetValName];
     const auditLog = await commonItemsPage.getAuditLog();
     const timeExpected = await auditHistoryReviewBodyPage.getUpdatedTime();
-    const rowIndex = parseInt(
+    const rowIndex = Number.parseInt(
       auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.first_row_index,
       10
     );
@@ -84,7 +84,7 @@ Then(
       auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page[datasetName];
     const auditLog = await commonItemsPage.getAuditLog();
     const timeExpected = await auditHistoryReviewBodyPage.getUpdatedTime();
-    const rowIndex = parseInt(
+    const rowIndex = Number.parseInt(
       auditHistoryReviewBodyPage.auditHistoryReviewBodyPageTestData.Review_Body_Audit_History_Page.first_row_index,
       10
     );
@@ -154,10 +154,10 @@ Then(
       (await reviewBodyProfilePage.getCountries()).join(', '),
       (await reviewBodyProfilePage.getNewCountries()).join(', ')
     );
-    const organisationIndex = parseInt(dataset.organisation_index, 10);
-    const emailIndex = parseInt(dataset.email_index, 10);
-    const descriptionIndex = parseInt(dataset.description_index, 10);
-    const countryIndex = parseInt(dataset.country_index, 10);
+    const organisationIndex = Number.parseInt(dataset.organisation_index, 10);
+    const emailIndex = Number.parseInt(dataset.email_index, 10);
+    const descriptionIndex = Number.parseInt(dataset.description_index, 10);
+    const countryIndex = Number.parseInt(dataset.country_index, 10);
     const timeValues: any = auditLog.get('timeValues');
     const eventValues: any = auditLog.get('eventValues');
     const adminEmailValues: any = auditLog.get('adminEmailValues');

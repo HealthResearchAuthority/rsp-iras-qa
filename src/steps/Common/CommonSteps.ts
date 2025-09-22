@@ -585,9 +585,9 @@ When('the default page size should be {string}', async ({ commonItemsPage }, pag
   const rowCountActual = await commonItemsPage.tableRows.count();
   let rowCountExpected: number;
   if (pageSize == 'ten') {
-    rowCountExpected = parseInt(commonItemsPage.commonTestData.default_page_size_participating_organisation, 10);
+    rowCountExpected = Number.parseInt(commonItemsPage.commonTestData.default_page_size_participating_organisation, 10);
   } else {
-    rowCountExpected = parseInt(commonItemsPage.commonTestData.default_page_size, 10);
+    rowCountExpected = Number.parseInt(commonItemsPage.commonTestData.default_page_size, 10);
   }
   expect(rowCountActual - 1).toBe(rowCountExpected);
 });

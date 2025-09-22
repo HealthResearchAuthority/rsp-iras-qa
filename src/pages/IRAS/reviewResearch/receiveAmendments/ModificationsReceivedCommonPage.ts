@@ -96,7 +96,7 @@ export default class ModificationsReceivedCommonPage {
     const listAsNums: number[] = [];
     const sortedListAsStrings: string[] = [];
     for (const days of daysSinceSubmitted) {
-      const daysAsNum = parseInt(
+      const daysAsNum = Number.parseInt(
         days.replace(this.modificationsReceivedCommonPagePageTestData.Tasklist_Page.days_since_suffix, '').trim()
       );
       listAsNums.push(daysAsNum);
@@ -142,7 +142,7 @@ export default class ModificationsReceivedCommonPage {
     if (searchInput.toLowerCase().includes('days')) {
       const actualDay = daysSinceSubmission.toString();
       const expectedDay = await this.getDaysSinceSubmissionFromFilter();
-      valuesMatch = parseInt(actualDay) == expectedDay;
+      valuesMatch = Number.parseInt(actualDay) == expectedDay;
     }
     if (searchInput.toLowerCase().includes('date')) {
       const day = searchInputDataset[searchInput].day_to_text.padStart(2, '0');
@@ -215,15 +215,16 @@ export default class ModificationsReceivedCommonPage {
     searchInput: string
   ): Promise<boolean> {
     let expectedDaysResultFound = false;
-    const fromExpectedDay = parseInt(searchInputDataset[searchInput].days_since_submission_from_text);
-    const toExpectedDay = parseInt(searchInputDataset[searchInput].days_since_submission_to_text);
+    const fromExpectedDay = Number.parseInt(searchInputDataset[searchInput].days_since_submission_from_text);
+    const toExpectedDay = Number.parseInt(searchInputDataset[searchInput].days_since_submission_to_text);
     for (const actualDay of daysResultValues) {
       if (searchInput.toLowerCase().includes('to')) {
-        expectedDaysResultFound = parseInt(actualDay) <= toExpectedDay;
+        expectedDaysResultFound = Number.parseInt(actualDay) <= toExpectedDay;
       } else if (searchInput.toLowerCase().includes('from')) {
-        expectedDaysResultFound = parseInt(actualDay) >= fromExpectedDay;
+        expectedDaysResultFound = Number.parseInt(actualDay) >= fromExpectedDay;
       } else {
-        expectedDaysResultFound = parseInt(actualDay) >= fromExpectedDay && parseInt(actualDay) <= toExpectedDay;
+        expectedDaysResultFound =
+          Number.parseInt(actualDay) >= fromExpectedDay && Number.parseInt(actualDay) <= toExpectedDay;
       }
       if (!expectedDaysResultFound) {
         return expectedDaysResultFound;
