@@ -208,7 +208,6 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
             | Invalid_Date_From                 | Invalid_Date_From_Error                 |
             | Invalid_Date_To                   | Invalid_Date_To_Error                   |
 
-    # Date_Submitted,Days_Since_Submission sort is failing
     @SortTasklistByColumn @rsp-4091 @fail
     Scenario Outline: Verify the user is able to sort the modifications tasklist by ascending and descending order for each results table column
         When I click the '<Sort_Button>' button on the 'Modifications_Tasklist_Page'
@@ -326,7 +325,9 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
             | Date_Submitted        |
             | Days_Since_Submission |
 
-    @WFCAssignModificationSWR @rsp-4076 @rsp-4849
+    # Need to integrate with modification creation process to have a fresh dataset for assignment
+    # Test data currently has some modifications already assigned to SWR so cannot run repeatedly
+    @WFCAssignModificationSWR @rsp-4076 @rsp-4849 @skip
     Scenario Outline: Validate the workflow co-ordinator can assign a study-wide reviewer to a modification from the modifications ready to assign page
         When I enter '<Valid_Iras_Id>' into the search field in the modifications ready to assign page
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
@@ -356,7 +357,6 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
             | Valid_Iras_Id_Ln_England_Pn_England | Study_Wide_Reviewer_HRA_England | Modification_Id_Ln_England_Pn_England_One        |
             | Valid_Iras_Id_Ln_England_Pn_England | Study_Wide_Reviewer_HRA_England | Modification_Id_Ln_England_Pn_England_Two        |
             | Valid_Iras_Id_Ln_England_Pn_England | Study_Wide_Reviewer_HRA_England | Modification_Id_Ln_England_Pn_England_Three_Four |
-
 
     # UI issues:- Page heading is not matching/Guidance text is missing
     @StudyWideReviewer @SWRTasklist @rsp-4076 @rsp-4849 @fail @KNOWN-DEFECT-RSP-XXXX
