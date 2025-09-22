@@ -397,7 +397,7 @@ export function generateInvalidDataConditionBlankPrefix(regex: RegExp, testdata:
 }
 
 export function removeAtSymbol(input: string): string {
-  return input.replace(/@/g, '');
+  return input.replaceAll(/@/g, '');
 }
 export function removeDomainpart(input: string) {
   const localpart = input.split('@')[0];

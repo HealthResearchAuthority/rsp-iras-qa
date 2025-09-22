@@ -10,7 +10,7 @@ AfterStep(async ({ page, $step, $testInfo, commonItemsPage }) => {
     `${process.env.STEP_SCREENSHOT?.toLowerCase()}` === 'yes' ||
     `${$step.title}` === 'I capture the page screenshot'
   ) {
-    const fileName = new Date().toISOString().replace(/[-:.TZ]/g, '') + '.png';
+    const fileName = new Date().toISOString().replaceAll(/[-:.TZ]/g, '') + '.png';
     const screenshotDir = './test-reports/' + getReportFolderName() + '/cucumber/html/screenshots';
     const screenshotPath = path.join(screenshotDir, fileName);
     try {
@@ -22,7 +22,7 @@ AfterStep(async ({ page, $step, $testInfo, commonItemsPage }) => {
         console.error(error);
       }
     }
-    const relativePath = path.join('../screenshots/', fileName).replace(/\\/g, '/');
+    const relativePath = path.join('../screenshots/', fileName).replaceAll(/\\/g, '/');
     const htmlPreview = `
       <a href="${relativePath}" target="_blank">
         <img src="${relativePath}" alt="screenshot" style="max-height:1000px;border:1px solid #ccc;" />
@@ -37,7 +37,7 @@ BeforeScenario(
   async function ({ $tags, $testInfo }) {
     const tickets = getTicketReferenceTags($tags);
     if (tickets.length > 0) {
-      $testInfo.attach('Ticket Reference:', { body: tickets.toString().replace(/,/g, '') });
+      $testInfo.attach('Ticket Reference:', { body: tickets.toString().replaceAll(/,/g, '') });
     }
   }
 );
