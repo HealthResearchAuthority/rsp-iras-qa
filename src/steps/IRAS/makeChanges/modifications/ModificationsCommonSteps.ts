@@ -51,10 +51,10 @@ Then(
     const changesDataset = modificationsCommonPage.modificationsCommonPagePageTestData[datasetName];
     for (const changeName of Object.keys(changesDataset)) {
       const changeDataset = modificationsCommonPage.modificationsCommonPagePageTestData[datasetName][changeName];
-      if (!('which_organisation_change_affect_checkbox' in changeDataset)) {
-        modificationsCommonPage.calculateAndStoreRankingForChangesForNonApplicability(changeName);
-      } else {
+      if ('which_organisation_change_affect_checkbox' in changeDataset) {
         modificationsCommonPage.calculateAndStoreRankingForChangesForApplicability(changeName, changeDataset);
+      } else {
+        modificationsCommonPage.calculateAndStoreRankingForChangesForNonApplicability(changeName);
       }
       modificationsCommonPage.calculateAndStoreOverallRanking();
     }
