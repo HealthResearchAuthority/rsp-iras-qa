@@ -12,8 +12,8 @@ import {
 import * as userProfileGeneratedataConfig from '../../resources/test_data/user_administration/testdata_generator/user_profile_generate_data_config.json';
 import { confirmArrayNotNull, getAuthState, getCurrentTimeFormatted } from '../../utils/UtilFunctions';
 import { Locator } from 'playwright/test';
-import fs from 'fs';
-import path from 'path';
+import * as fs from 'node:fs';
+import path from 'node:path';
 
 const { Given, When, Then } = createBdd(test);
 
@@ -310,9 +310,9 @@ Then(
     const { pageObject, dataName } = await commonItemsPage.getQsetPageObjectDataName(pageName);
     for (const row of data.hashes()) {
       const sectionInputsUsed = await commonItemsPage.getQsetPageValidationData(pageName, row.Section, row.Dataset);
-      sectionInputsUsed.forEach((value: any, key: string) => {
+      for (const [key, value] of sectionInputsUsed) {
         combinedInputsUsed.set(key, value);
-      });
+      }
     }
 
     for (const key in pageObject[dataName].All_Mandatory_Validations) {

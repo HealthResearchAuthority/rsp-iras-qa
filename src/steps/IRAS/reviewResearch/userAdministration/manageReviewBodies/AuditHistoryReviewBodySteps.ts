@@ -174,7 +174,8 @@ Then(
         .system_admin_email_text
     );
     expect(timeValues[descriptionIndex]).toBe(timeExpected);
-    if ((await reviewBodyProfilePage.getDescription()) !== '') {
+    const description = await reviewBodyProfilePage.getDescription();
+    if (description) {
       expect(eventValues[descriptionIndex]).toBe(descriptionEventDescriptionExpectedValue);
     } else {
       const descriptionEventDescriptionExpectedValue =

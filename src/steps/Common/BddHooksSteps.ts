@@ -1,8 +1,8 @@
 import { createBdd } from 'playwright-bdd';
 import { test } from '../../hooks/CustomFixtures';
 import { getAuthState, getReportFolderName, getTicketReferenceTags } from '../../utils/UtilFunctions';
-import fs from 'fs';
-import path from 'path';
+import * as fs from 'node:fs';
+import path from 'node:path';
 const { AfterStep, BeforeScenario } = createBdd(test);
 
 AfterStep(async ({ page, $step, $testInfo, commonItemsPage }) => {

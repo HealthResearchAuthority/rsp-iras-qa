@@ -1,8 +1,8 @@
 import { createBdd } from 'playwright-bdd';
 import { test } from '../../../../../hooks/CustomFixtures';
 import { expect } from '@playwright/test';
-import fs from 'fs';
-import path from 'path';
+import * as fs from 'node:fs';
+import path from 'node:path';
 
 const { Then } = createBdd(test);
 
