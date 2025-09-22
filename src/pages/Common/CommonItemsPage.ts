@@ -723,10 +723,8 @@ export default class CommonItemsPage {
     const searchResultValues: string[] = [];
     await this.page.waitForLoadState('domcontentloaded');
     await this.page.waitForTimeout(3000);
-    // let dataFound = false;
-    // while (!dataFound) {
-    //adding this for loop instead of while loop to limit navigation till first 3 pages only,to reduce time and reduce fakiness
-    for (let i = 0; i < 4; i++) {
+    let dataFound = false;
+    while (!dataFound) {
       const rowCount = await this.tableRows.count();
       for (let i = 1; i < rowCount; i++) {
         const columns = this.tableRows.nth(i).getByRole('cell');
@@ -738,10 +736,9 @@ export default class CommonItemsPage {
       if ((await this.next_button.isVisible()) && !(await this.next_button.isDisabled())) {
         await this.next_button.click();
         await this.page.waitForLoadState('domcontentloaded');
+      } else {
+        dataFound = true;
       }
-      // else {
-      //   dataFound = true;
-      // }
     }
     const searchResultMap = new Map([['searchResultValues', searchResultValues]]);
     return searchResultMap;
