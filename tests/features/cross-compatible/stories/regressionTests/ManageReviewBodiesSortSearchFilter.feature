@@ -1,4 +1,4 @@
-@RegressionManageReviewBodiesSortSearchFilter @RegressionReviewBodies @SysAdminUser @Regression
+@RegressionManageReviewBodiesSortSearchFilter @RegressionReviewBodies @SysAdminUser @Regression @BackStage
 Feature: User Administration: Manage Review Bodies - Sort, search and filter the manage review bodies list
 
     Background:
