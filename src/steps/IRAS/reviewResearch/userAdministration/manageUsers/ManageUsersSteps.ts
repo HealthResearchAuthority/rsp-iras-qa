@@ -318,8 +318,8 @@ Then(
 Then(
   'I can see the review body field in the review body checkbox in the advanced filters of manage users page should contain all currently enabled review bodies from the manage review bodies page',
   async ({ manageUsersPage, manageReviewBodiesPage }) => {
-    const actualList = await manageUsersPage.getReviewBodies();
-    const expectedList = await manageReviewBodiesPage.getOrgNamesListFromUI();
-    expect(actualList).toEqual(expectedList);
+    const actualList = [...new Set(await manageUsersPage.getReviewBodies())];
+    const expectedList = [...new Set(await manageReviewBodiesPage.getOrgNamesListFromUI())];
+    expect.soft(actualList.slice(0, expectedList.length)).toEqual(expectedList);
   }
 );

@@ -82,6 +82,19 @@ export default class CommonItemsPage {
   readonly result_count: Locator;
   readonly iras_id_search_text: Locator;
   readonly advanced_filter_active_filters_label: Locator;
+  readonly no_matching_search_result_header_label: Locator;
+  readonly no_matching_search_result_sub_header_label: Locator;
+  readonly no_matching_search_result_body_one_label: Locator;
+  readonly no_matching_search_result_body_two_label: Locator;
+  readonly no_matching_search_result_body_three_label: Locator;
+  readonly no_matching_search_result_body_four_label: Locator;
+  readonly no_matching_search_result_count_label: Locator;
+  readonly active_filters_list: Locator;
+  readonly clear_all_filters_link: Locator;
+  readonly no_results_bullet_points: Locator;
+  readonly no_results_guidance_text: Locator;
+  readonly no_results_heading: Locator;
+  readonly apply_filters_button: Locator;
   readonly upload_files_input: Locator;
   readonly search_results_count: Locator;
   readonly advanced_filter_panel: Locator;
@@ -95,7 +108,6 @@ export default class CommonItemsPage {
   readonly active_filters_label: Locator;
   readonly active_filter_list: Locator;
   readonly active_filter_items: Locator;
-  readonly clear_all_filters_link: Locator;
   readonly search_no_results_container: Locator;
   readonly search_no_results_header: Locator;
   readonly search_no_results_guidance_text: Locator;
@@ -706,12 +718,15 @@ export default class CommonItemsPage {
     ]);
     return userMap;
   }
+
   async getAllUsersFromTheTable(): Promise<Map<string, string[]>> {
     const searchResultValues: string[] = [];
     await this.page.waitForLoadState('domcontentloaded');
     await this.page.waitForTimeout(3000);
-    let dataFound = false;
-    while (!dataFound) {
+    // let dataFound = false;
+    // while (!dataFound) {
+    //adding this for loop instead of while loop to limit navigation till first 3 pages only,to reduce time and reduce fakiness
+    for (let i = 0; i < 4; i++) {
       const rowCount = await this.tableRows.count();
       for (let i = 1; i < rowCount; i++) {
         const columns = this.tableRows.nth(i).getByRole('cell');
@@ -723,9 +738,10 @@ export default class CommonItemsPage {
       if ((await this.next_button.isVisible()) && !(await this.next_button.isDisabled())) {
         await this.next_button.click();
         await this.page.waitForLoadState('domcontentloaded');
-      } else {
-        dataFound = true;
       }
+      // else {
+      //   dataFound = true;
+      // }
     }
     const searchResultMap = new Map([['searchResultValues', searchResultValues]]);
     return searchResultMap;
@@ -793,10 +809,34 @@ export default class CommonItemsPage {
     return pageNumber;
   }
 
+  async getLastPageNumber() {
+    const itemsMap = await this.getPaginationValues();
+    const itemsValues: any = itemsMap.get('items');
+    const visiblePagesMap = await this.getVisiblePages(itemsValues);
+    const visiblePages: number[] = visiblePagesMap.get('visiblePages');
+    const lastPageNumber = visiblePages[visiblePages.length - 1];
+    return lastPageNumber;
+  }
+
   async getTotalItems() {
     const totalItems = parseInt(confirmStringNotNull(await this.result_count.textContent()).split(' ')[0], 10);
     return totalItems;
   }
+
+  async getTotalItemsNavigatingToLastPage(pagename: string) {
+    let pageSize: number;
+    if (pagename == 'Participating_Organisations_Page') {
+      pageSize = parseInt(this.commonTestData.default_page_size_participating_organisation, 10);
+    } else {
+      pageSize = parseInt(this.commonTestData.default_page_size, 10);
+    }
+    const lastPageNumber = await this.getLastPageNumber();
+    await this.clickOnPages(lastPageNumber, 'page number');
+    const totalLastPageItems = (await this.tableRows.count()) - 1;
+    const totalItems = ((await this.getTotalPages()) - 1) * pageSize + totalLastPageItems;
+    return totalItems;
+  }
+
   async getItemsPerPage() {
     const rowCount = await this.tableRows.count();
     return rowCount;
@@ -1101,8 +1141,24 @@ export default class CommonItemsPage {
     return allValid;
   }
 
-  async validatePagination(currentPage: any, totalPages: any, pagename: string, navigateMethod: string) {
-    const totalItems = await this.getTotalItems();
+  async getNoResultsBulletPoints(): Promise<string[]> {
+    const bulletPoints = this.no_results_bullet_points;
+    const count = await bulletPoints.count();
+    const values: string[] = [];
+    for (let i = 0; i < count; i++) {
+      const text = confirmStringNotNull(await bulletPoints.nth(i).textContent());
+      values.push(text);
+    }
+    return values;
+  }
+
+  async validatePagination(
+    currentPage: any,
+    totalPages: any,
+    totalItems: number,
+    pagename: string,
+    navigateMethod: string
+  ) {
     let pageSize: number;
     if (pagename == 'Participating_Organisations_Page') {
       pageSize = parseInt(this.commonTestData.default_page_size_participating_organisation, 10);

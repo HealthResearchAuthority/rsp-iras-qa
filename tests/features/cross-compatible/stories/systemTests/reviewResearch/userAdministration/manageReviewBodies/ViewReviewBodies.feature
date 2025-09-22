@@ -1,4 +1,4 @@
-@UserAdministration @ManageReviewBodies @ViewReviewBodies @SysAdminUser @SystemTest
+@UserAdministration @ManageReviewBodies @ViewReviewBodies @SysAdminUser @SystemTest @STSysAdmin
 Feature: User Administration: Manage Review Bodies list and view review bodies profile details
 
     Background:

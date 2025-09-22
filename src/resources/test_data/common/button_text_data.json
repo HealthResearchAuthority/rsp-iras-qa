@@ -147,6 +147,10 @@
     "Days_Since_Submission": "Days since submission",
     "Status": "Status"
   },
+  "Post_Approval_Page": {
+    "Modification_Id": "Modification ID",
+    "Modification_Type": "Modification type"
+  },
   "Participating_Organisations_Page": {
     "Save_Continue": "Save and continue",
     "Save_For_Later": "Save for later",

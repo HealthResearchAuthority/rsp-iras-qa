@@ -1,4 +1,4 @@
-@RegressionModificationsReadyToAssign @WorkFlowCoordinator @Regression @RegressionReceiveAmendments
+@RegressionModificationsReadyToAssign @WorkFlowCoordinator @Regression @RegressionReceiveAmendments @BackStage
 Feature: Receive Amendments: Modifications Tasklist page that displays modifications ready to be assigned
 
     Background:
@@ -77,7 +77,6 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         Then the number of search results has returned to the original number
         And I 'cannot' see active filters displayed
 
-    # Date_Submitted,Days_Since_Submission sort is failing
     @RegressionSortTasklistByColumn @rsp-4091 @fail
     Scenario Outline: Verify the user is able to sort the modifications tasklist by ascending and descending order for each results table column
         When I click the '<Sort_Button>' button on the 'Modifications_Tasklist_Page'

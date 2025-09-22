@@ -614,7 +614,9 @@ When(
     const currentUrl = commonItemsPage.page.url();
     const currentPageNumber = await commonItemsPage.getPageNumber(currentUrl);
     const currentPageLabel = `Page ${currentPageNumber}`;
-    const currentPageLink = commonItemsPage.pagination.getByRole('link', { name: currentPageLabel });
+    const currentPageLink = commonItemsPage.pagination
+      .getByRole('link', { name: currentPageLabel, exact: true })
+      .first();
     await expect(currentPageLink).toHaveAttribute('aria-current');
     const currentPageLinkHref = await currentPageLink.getAttribute('href');
     expect(currentUrl).toContain(currentPageLinkHref);
@@ -844,9 +846,15 @@ Then(
     } else {
       maxPagesToValidate = totalPages;
     }
+    let totalItems: number;
+    if (pagename === 'My_Research_Projects_Page' || pagename === 'Post_Approval_Page') {
+      totalItems = await commonItemsPage.getTotalItemsNavigatingToLastPage(pagename);
+    } else {
+      totalItems = await commonItemsPage.getTotalItems();
+    }
     await commonItemsPage.firstPage.click();
     for (let currentPage = 1; currentPage <= maxPagesToValidate; currentPage++) {
-      await commonItemsPage.validatePagination(currentPage, totalPages, pagename, navigateMethod);
+      await commonItemsPage.validatePagination(currentPage, totalPages, totalItems, pagename, navigateMethod);
     }
   }
 );
@@ -856,15 +864,21 @@ Then(
   async ({ commonItemsPage }, pagename: string, navigateMethod: string) => {
     const totalPages = await commonItemsPage.getTotalPages();
     //Limiting the max pages to validate to 10
-    let maxPagesToValidate = 0;
+    let validatePageUntil = 0;
     if (totalPages > commonItemsPage.commonTestData.maxPagesToValidate) {
-      maxPagesToValidate = totalPages - commonItemsPage.commonTestData.maxPagesToValidate;
+      validatePageUntil = totalPages - commonItemsPage.commonTestData.maxPagesToValidate;
     } else {
-      maxPagesToValidate = totalPages;
+      validatePageUntil = totalPages;
     }
-    await commonItemsPage.clickOnPages(totalPages, 'page number');
-    for (let currentPage = totalPages; currentPage >= maxPagesToValidate; currentPage--) {
-      await commonItemsPage.validatePagination(currentPage, totalPages, pagename, navigateMethod);
+    let totalItems: number;
+    if (pagename == 'My_Research_Projects_Page' || pagename === 'Post_Approval_Page') {
+      totalItems = await commonItemsPage.getTotalItemsNavigatingToLastPage(pagename);
+    } else {
+      totalItems = await commonItemsPage.getTotalItems();
+    }
+    await commonItemsPage.clickOnPages(totalPages, navigateMethod);
+    for (let currentPage = totalPages; currentPage >= validatePageUntil; currentPage--) {
+      await commonItemsPage.validatePagination(currentPage, totalPages, totalItems, pagename, navigateMethod);
     }
   }
 );
