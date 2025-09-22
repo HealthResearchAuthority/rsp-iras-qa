@@ -46,18 +46,22 @@ Then(
 Then(
   'I can see the modification progress saved successful message on project overview page',
   async ({ projectOverviewPage, commonItemsPage }) => {
-    await expect(projectOverviewPage.modification_saved_success_message_header_text).toBeVisible();
-    await expect(projectOverviewPage.modification_saved_success_message_text).toBeVisible();
-    expect(
-      await projectOverviewPage.information_alert_banner.evaluate((e: any) =>
-        getComputedStyle(e).getPropertyValue('border-color')
+    await expect.soft(projectOverviewPage.modification_saved_success_message_header_text).toBeVisible();
+    await expect.soft(projectOverviewPage.modification_saved_success_message_text).toBeVisible();
+    expect
+      .soft(
+        await projectOverviewPage.information_alert_banner.evaluate((e: any) =>
+          getComputedStyle(e).getPropertyValue('border-color')
+        )
       )
-    ).toBe(commonItemsPage.commonTestData.rgb_green_color);
-    expect(
-      await projectOverviewPage.information_alert_banner.evaluate((e: any) =>
-        getComputedStyle(e).getPropertyValue('background-color')
+      .toBe(commonItemsPage.commonTestData.rgb_green_color);
+    expect
+      .soft(
+        await projectOverviewPage.information_alert_banner.evaluate((e: any) =>
+          getComputedStyle(e).getPropertyValue('background-color')
+        )
       )
-    ).toBe(commonItemsPage.commonTestData.rgb_green_color);
+      .toBe(commonItemsPage.commonTestData.rgb_green_color);
   }
 );
 
@@ -158,7 +162,7 @@ Then(
 
 Then(
   'I can see the modifications is sorted by {string} order of the {string}',
-  async ({ searchModificationsPage, commonItemsPage }, sortOrder: string, sortColumn: string) => {
+  async ({ commonItemsPage }, sortOrder: string, sortColumn: string) => {
     let sortedColumnList: string[];
     let columnIndex: number;
     switch (sortColumn.toLowerCase()) {
@@ -171,12 +175,9 @@ Then(
       default:
         throw new Error(`${sortColumn} is not a valid option`);
     }
-    const actualColumnList = await searchModificationsPage.getActualListValues(
-      commonItemsPage.tableBodyRows,
-      columnIndex
-    );
+    const actualColumnList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
     if (sortColumn.toLowerCase() == 'modification id') {
-      sortedColumnList = await searchModificationsPage.sortModificationIdListValues(actualColumnList, sortOrder);
+      sortedColumnList = await commonItemsPage.sortModificationIdListValues(actualColumnList, sortOrder);
     } else if (sortOrder.toLowerCase() == 'ascending') {
       sortedColumnList = [...actualColumnList].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
     } else {

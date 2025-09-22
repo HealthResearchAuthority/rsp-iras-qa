@@ -1026,9 +1026,9 @@ Then('the no search results found message is displayed', async ({ commonItemsPag
 
 Then('I {string} see the advanced filters panel', async ({ commonItemsPage }, visibility: string) => {
   if (visibility.toLowerCase() == 'cannot') {
-    await expect(commonItemsPage.advanced_filter_panel).not.toBeVisible();
+    await expect.soft(commonItemsPage.advanced_filter_panel).not.toBeVisible();
   } else {
-    await expect(commonItemsPage.advanced_filter_panel).toBeVisible();
+    await expect.soft(commonItemsPage.advanced_filter_panel).toBeVisible();
   }
 });
 

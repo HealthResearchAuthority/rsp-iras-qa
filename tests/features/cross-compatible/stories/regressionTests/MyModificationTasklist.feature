@@ -101,7 +101,7 @@ Feature: Receive Amendments: My Modifications Tasklist page that displays modifi
             | Non_Existant_Date_Range       |
             | Non_Existant_Days_Since_Range |
 
-    @RegressionAddRemoveFiltersMyTasklist @rsp-4821 @fail @KNOWN-DEFECT-RSP-5066
+    @RegressionAddRemoveFiltersMyTasklist @rsp-4821 @KNOWN-DEFECT-RSP-5066
     Scenario: Verify that adding and removing filters narrows and widens the search results appropriately on my tasklist
         And I click the 'Advanced_Filters' button on the 'My_Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel

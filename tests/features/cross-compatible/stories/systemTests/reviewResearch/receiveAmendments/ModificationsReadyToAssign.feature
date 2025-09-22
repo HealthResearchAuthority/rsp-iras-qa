@@ -311,7 +311,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
             | Date_Submitted        |
             | Days_Since_Submission |
 
-    @ModificationsSelectAllAndSort @rsp-4105 @jsEnabled @KNOWN-DEFECT-RSP-4976 @fail
+    @ModificationsSelectAllAndSort @rsp-4105 @jsEnabled @KNOWN-DEFECT-RSP-4976
     Scenario: Verify user selects check all on the first page, then applying sort resets all the checkboxes
         When I select check all checkbox on the current page and validate all checkboxes are checked
         And I capture the page screenshot
@@ -359,7 +359,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
             | Valid_Iras_Id_Ln_England_Pn_England | Study_Wide_Reviewer_HRA_England | Modification_Id_Ln_England_Pn_England_Three_Four |
 
     # UI issues:- Page heading is not matching/Guidance text is missing
-    @StudyWideReviewer @SWRTasklist @rsp-4076 @rsp-4849 @fail @KNOWN-DEFECT-RSP-XXXX
+    @StudyWideReviewer @SWRTasklist @rsp-4076 @rsp-4849 @KNOWN-DEFECT-RSP-XXXX
     Scenario Outline: Validate the SWR Tasklist page after the workflow co-ordinator assigns a study-wide reviewer to a modification from the modifications ready to assign page
         Given I have navigated to the 'My_Modifications_Tasklist_Page'
         Then I capture the page screenshot
@@ -494,7 +494,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
             | User_Profile                                              | Valid_Iras_Id                       | Modification_Id                                | Advanced_Filters_Users                                | Lead_Nation | Availability  |
             | Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Disabled | Valid_Iras_Id_Ln_England_Pn_England | Modification_Id_Ln_England_Pn_England_Five_Six | Advanced_Filter_Role_Studywide_Reviewer_Status_Active | England     | Not Available |
 
-    @BackLinkNavigation @RetainSelectedCheckboxes @rsp-4076 @rsp-4849 @KNOWN-DEFECT-RSP-5011  @fail
+    @BackLinkNavigation @RetainSelectedCheckboxes @rsp-4076 @rsp-4849 @KNOWN-DEFECT-RSP-5011
     Scenario Outline: Validate the workflow co-ordinator navigates to the modifications task list page from the 'Select a reviewer' page on clicking 'Back' button on 'Select a reviewer' page
         When I enter '<Valid_Iras_Id>' into the search field in the modifications ready to assign page
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
