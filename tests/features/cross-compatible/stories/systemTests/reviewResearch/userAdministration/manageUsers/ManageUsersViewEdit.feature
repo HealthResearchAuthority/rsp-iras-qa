@@ -182,7 +182,7 @@ Feature: User Administration: Manage user profiles, view and edit user profile
     And I capture the page screenshot
     And I click the 'Search' button on the 'Manage_Users_Page'
     And I capture the page screenshot
-    Then the search displays no matching results
+    Then the no search results found message is displayed
     And I capture the page screenshot
 
     Examples:

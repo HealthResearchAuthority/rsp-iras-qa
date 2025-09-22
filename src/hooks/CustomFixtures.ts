@@ -59,6 +59,7 @@ import AffectedOrganisationQuestionsPage from '../pages/IRAS/makeChanges/modific
 import ReviewChangesPlannedEndDatePage from '../pages/IRAS/makeChanges/modifications/changePlannedEndDate/ReviewChangesPlannedEndDatePage';
 import AddDocumentsModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/AddDocumentsModificationsPage';
 import ReviewUploadedDocumentsModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/ReviewUploadedDocumentsModificationsPage';
+import ModificationsReceivedCommonPage from '../pages/IRAS/reviewResearch/receiveAmendments/ModificationsReceivedCommonPage';
 import SelectStudyWideReviewerPage from '../pages/IRAS/reviewResearch/receiveAmendments/SelectStudyWideReviewerPage';
 import ModificationsAssignmentConfirmationPage from '../pages/IRAS/reviewResearch/receiveAmendments/ModificationsAssignmentConfirmationPage';
 import MyModificationsTasklistPage from '../pages/IRAS/reviewResearch/receiveAmendments/MyModificationsTasklistPage';
@@ -126,6 +127,7 @@ type CustomFixtures = {
   selectStudyWideReviewerPage: SelectStudyWideReviewerPage;
   modificationsAssignmentConfirmationPage: ModificationsAssignmentConfirmationPage;
   myModificationsTasklistPage: MyModificationsTasklistPage;
+  modificationsReceivedCommonPage: ModificationsReceivedCommonPage;
   sponsorReferencePage: SponsorReferencePage;
   makeAxeBuilder: () => AxeBuilder;
 };
@@ -371,6 +373,10 @@ export const test = base.extend<CustomFixtures>({
 
   myModificationsTasklistPage: async ({ page }, use) => {
     await use(new MyModificationsTasklistPage(page));
+  },
+
+  modificationsReceivedCommonPage: async ({ page }, use) => {
+    await use(new ModificationsReceivedCommonPage(page));
   },
 
   sponsorReferencePage: async ({ page }, use) => {

@@ -1,8 +1,8 @@
 import { createBdd } from 'playwright-bdd';
 import { test } from '../../../../../hooks/CustomFixtures';
 import { expect } from '@playwright/test';
-import fs from 'fs';
-import path from 'path';
+import * as fs from 'node:fs';
+import path from 'node:path';
 
 const { Then } = createBdd(test);
 
@@ -24,7 +24,7 @@ Then(
     const documentPath = commonItemsPage.documentUploadTestData[uploadDocumentsDatasetName];
     const fileArray = Array.isArray(documentPath) ? documentPath : [documentPath];
     for (const filePath of fileArray) {
-      const fileSize = parseFloat((fs.statSync(filePath).size / (1024 * 1024)).toFixed(2)).toString();
+      const fileSize = Number.parseFloat((fs.statSync(filePath).size / (1024 * 1024)).toFixed(2)).toString();
       const fileName = path.basename(filePath);
       const expectedDocumentRow = reviewUploadedDocumentsModificationsPage.table
         .locator(reviewUploadedDocumentsModificationsPage.rows, { hasText: `${fileName}` })

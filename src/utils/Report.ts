@@ -2,8 +2,8 @@ import report from 'multiple-cucumber-html-reporter';
 import 'dotenv/config';
 import { Reporter } from 'playwright/types/testReporter';
 import type { FullResult } from '@playwright/test/reporter';
-import fs from 'fs';
-import path from 'path';
+import * as fs from 'node:fs';
+import path from 'node:path';
 import {
   deviceTypeVal,
   getBrowserType,

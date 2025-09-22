@@ -1,8 +1,8 @@
 import * as userProfileGeneratedataConfig from '../resources/test_data/user_administration/testdata_generator/user_profile_generate_data_config.json';
 import RandExp from 'randexp';
 import { faker } from '@faker-js/faker';
-import path from 'path';
-import fs from 'fs';
+import path from 'node:path';
+import * as fs from 'node:fs';
 
 let forenamePattern_valid: RegExp;
 let surnamePattern_valid: RegExp;
@@ -397,7 +397,7 @@ export function generateInvalidDataConditionBlankPrefix(regex: RegExp, testdata:
 }
 
 export function removeAtSymbol(input: string): string {
-  return input.replace(/@/g, '');
+  return input.replaceAll(/@/g, '');
 }
 export function removeDomainpart(input: string) {
   const localpart = input.split('@')[0];

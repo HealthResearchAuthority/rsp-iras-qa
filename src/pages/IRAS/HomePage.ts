@@ -54,11 +54,9 @@ export default class HomePage {
     this.myWorkspacesHeading = this.page
       .getByRole('heading')
       .getByText(this.homePageTestData.Home_Page.workspaceHeading);
-
     this.loginBtn = this.page
       .locator('.gem-c-button')
       .and(this.page.getByText(this.buttonTextData.Home_Page.Login, { exact: true }));
-
     this.approvalsLink = this.page.getByRole('link', { name: 'Approvals', exact: true });
     this.cagMembersLink = this.page.getByRole('link', { name: 'CAG members', exact: true });
     this.catLink = this.page.getByRole('link', { name: 'CAT', exact: true });

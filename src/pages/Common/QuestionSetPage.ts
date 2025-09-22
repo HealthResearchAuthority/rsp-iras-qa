@@ -1,7 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as excel from 'exceljs';
 import * as qsetExcelJSONConfigTestData from '../../resources/test_data/iras/question_set/qset_excel_json_config_data.json';
-import fs from 'fs';
+import * as fs from 'node:fs';
 import ProjectFilterPage from '../IRAS/questionSet/ProjectFilterPage';
 import ProjectDetailsPage from '../IRAS/questionSet/ProjectDetailsPage';
 import StudentPage from '../IRAS/questionSet/StudentPage';

@@ -28,7 +28,7 @@ Then(
 Then(
   'I can see my research page is sorted by {string} order of the {string}',
   async (
-    { searchModificationsPage, myResearchProjectsPage, modificationsReadyToAssignPage, commonItemsPage },
+    { myResearchProjectsPage, modificationsReceivedCommonPage, commonItemsPage },
     sortDirection: string,
     sortField: string
   ) => {
@@ -50,11 +50,11 @@ Then(
       default:
         throw new Error(`${sortField} is not a valid option`);
     }
-    const actualList = await searchModificationsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
+    const actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
     if (sortField.toLowerCase() == 'iras id') {
       sortedList = await myResearchProjectsPage.sortIrasIdListValues(actualList, sortDirection);
     } else if (sortField.toLowerCase() == 'date created') {
-      sortedList = await modificationsReadyToAssignPage.sortDateSubmittedListValues(actualList, sortDirection);
+      sortedList = await modificationsReceivedCommonPage.sortDateSubmittedListValues(actualList, sortDirection);
     } else if (sortDirection.toLowerCase() == 'ascending') {
       sortedList = [...actualList].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
     } else {

@@ -131,7 +131,6 @@ export default class ManageReviewBodiesPage {
     } else {
       await this.page.goto('reviewbody/view');
     }
-    await this.assertOnManageReviewBodiesPage();
   }
   async assertOnManageReviewBodiesPage() {
     await expect(this.pageHeading).toBeVisible();
