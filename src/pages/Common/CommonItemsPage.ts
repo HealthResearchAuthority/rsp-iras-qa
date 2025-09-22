@@ -4,6 +4,7 @@ import * as linkTextData from '../../resources/test_data/common/link_text_data.j
 import * as questionSetData from '../../resources/test_data/common/question_set_data.json';
 import * as commonTestData from '../../resources/test_data/common/common_data.json';
 import * as documentUploadTestData from '../../resources/test_data/common/document_upload_data.json';
+import * as searchFilterResultsData from '../../resources/test_data/common/search_filter_results_data.json';
 import * as fs from 'fs';
 import path from 'path';
 import ProjectFilterPage from '../IRAS/questionSet/ProjectFilterPage';
@@ -26,6 +27,13 @@ export default class CommonItemsPage {
   readonly questionSetData: typeof questionSetData;
   readonly commonTestData: typeof commonTestData;
   readonly documentUploadTestData: typeof documentUploadTestData;
+  readonly searchFilterResultsData: typeof searchFilterResultsData;
+  private _search_key: string;
+  private _no_of_results_before_search: number;
+  private _no_of_results_after_search: number;
+  private _short_project_title_filter: string;
+  private _date_submitted_from_filter: string;
+  private _date_submitted_to_filter: string;
   readonly showAllSectionsAccordion: Locator;
   readonly genericButton: Locator;
   readonly govUkButton: Locator;
@@ -89,6 +97,21 @@ export default class CommonItemsPage {
   readonly apply_filters_button: Locator;
   readonly upload_files_input: Locator;
   readonly search_results_count: Locator;
+  readonly advanced_filter_panel: Locator;
+  readonly advanced_filter_headings: Locator;
+  readonly date_from_filter_group: Locator;
+  readonly date_from_label: Locator;
+  readonly date_from_hint_label: Locator;
+  readonly date_to_filter_group: Locator;
+  readonly date_to_label: Locator;
+  readonly date_to_hint_label: Locator;
+  readonly active_filters_label: Locator;
+  readonly active_filter_list: Locator;
+  readonly active_filter_items: Locator;
+  readonly search_no_results_container: Locator;
+  readonly search_no_results_header: Locator;
+  readonly search_no_results_guidance_text: Locator;
+  readonly search_no_results_guidance_points: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -98,6 +121,13 @@ export default class CommonItemsPage {
     this.questionSetData = questionSetData;
     this.commonTestData = commonTestData;
     this.documentUploadTestData = documentUploadTestData;
+    this.searchFilterResultsData = searchFilterResultsData;
+    this._search_key = '';
+    this._no_of_results_before_search = 0;
+    this._no_of_results_after_search = 0;
+    this._short_project_title_filter = '';
+    this._date_submitted_from_filter = '';
+    this._date_submitted_to_filter = '';
 
     //Locators
     this.showAllSectionsAccordion = page.locator('.govuk-accordion__show-all"');
@@ -174,48 +204,87 @@ export default class CommonItemsPage {
     this.alert_box_headings = this.alert_box.getByRole('heading');
     this.alert_box_list = this.alert_box.getByRole('list');
     this.alert_box_list_items = this.alert_box.getByRole('listitem');
+    this.upload_files_input = this.page.locator('input[type="file"]');
+    //Search Items
     this.advanced_filter_chevron = this.page.getByRole('button', {
       name: this.commonTestData.advanced_filter_label,
     });
-    this.result_count = this.advanced_filter_chevron.getByText(this.commonTestData.result_count_heading);
-    this.no_results_heading = this.page
-      .getByRole('heading')
-      .getByText(this.commonTestData.no_results_heading, { exact: true });
-    this.no_matching_search_result_header_label = this.page.getByRole('heading');
-    this.no_matching_search_result_sub_header_label = this.page.getByRole('paragraph');
-    this.no_matching_search_result_body_one_label =
-      this.no_matching_search_result_body_two_label =
-      this.no_matching_search_result_body_three_label =
-      this.no_matching_search_result_body_four_label =
-        this.page.getByRole('listitem');
-    this.no_matching_search_result_count_label = this.page.getByRole('heading');
-    this.active_filters_list = this.page
-      .getByRole('heading', {
-        name: this.commonTestData.active_filters_label,
-        exact: true,
-      })
-      .locator('..')
-      .getByRole('list')
-      .getByRole('listitem')
-      .getByRole('link');
-    this.clear_all_filters_link = this.page.getByRole('link', {
-      name: this.commonTestData.clear_all_filters_label,
-      exact: true,
-    });
-    this.no_results_guidance_text = this.page
-      .getByRole('paragraph')
-      .getByText(this.commonTestData.no_results_guidance_text, {
-        exact: true,
-      });
-    this.no_results_bullet_points = this.no_results_guidance_text.locator('..').getByRole('listitem');
-    this.apply_filters_button = this.page
-      .getByRole('button')
-      .getByText(this.buttonTextData.Search_Modifications_Page.Apply_Filters, {
-        exact: true,
-      });
     this.advanced_filter_active_filters_label = this.page.getByRole('list');
-    this.upload_files_input = this.page.locator('input[type="file"]');
     this.search_results_count = this.page.locator('.search-filter-panel__count');
+    this.advanced_filter_panel = this.page.getByTestId('filter-panel');
+    this.advanced_filter_headings = this.advanced_filter_panel.getByRole('heading');
+    this.date_from_filter_group = this.page.getByTestId('FromDate');
+    this.date_from_label = this.date_from_filter_group.getByText(this.searchFilterResultsData.date_from_label);
+    this.date_from_hint_label = this.date_from_filter_group.getByText(
+      this.searchFilterResultsData.date_from_hint_label
+    );
+    this.date_to_filter_group = this.page.getByTestId('ToDate');
+    this.date_to_label = this.date_to_filter_group.getByText(this.searchFilterResultsData.date_to_label);
+    this.date_to_hint_label = this.date_to_filter_group.getByText(this.searchFilterResultsData.date_to_hint_label);
+    this.active_filters_label = this.page.getByRole('heading').getByText(searchFilterResultsData.active_filters_label);
+    this.active_filter_list = this.page.locator('.search-filter-summary').getByRole('list');
+    this.active_filter_items = this.active_filter_list.getByRole('listitem').locator('span');
+    this.clear_all_filters_link = this.page
+      .getByRole('link')
+      .getByText(searchFilterResultsData.clear_all_filters_label);
+    this.search_no_results_container = this.page.locator('.search-filter-error-border');
+    this.search_no_results_header = this.search_no_results_container
+      .getByRole('heading')
+      .getByText(searchFilterResultsData.search_no_results_header, { exact: true });
+    this.search_no_results_guidance_text = this.search_no_results_container
+      .getByRole('paragraph')
+      .getByText(searchFilterResultsData.search_no_results_guidance_text, { exact: true });
+    this.search_no_results_guidance_points = this.search_no_results_container.getByRole('list');
+  }
+
+  //Getters & Setters for Private Variables
+
+  async getSearchKey(): Promise<string> {
+    return this._search_key;
+  }
+
+  async setSearchKey(value: string): Promise<void> {
+    this._search_key = value;
+  }
+
+  async getNoOfResultsBeforeSearch(): Promise<number> {
+    return this._no_of_results_before_search;
+  }
+
+  async setNoOfResultsBeforeSearch(value: number): Promise<void> {
+    this._no_of_results_before_search = value;
+  }
+
+  async getNoOfResultsAfterSearch(): Promise<number> {
+    return this._no_of_results_after_search;
+  }
+
+  async setNoOfResultsAfterSearch(value: number): Promise<void> {
+    this._no_of_results_after_search = value;
+  }
+
+  async getShortProjectTitleFilter(): Promise<string> {
+    return this._short_project_title_filter;
+  }
+
+  async setShortProjectTitleFilter(value: string): Promise<void> {
+    this._short_project_title_filter = value;
+  }
+
+  async getDateSubmittedFromFilter(): Promise<string> {
+    return this._date_submitted_from_filter;
+  }
+
+  async setDateSubmittedFromFilter(value: string): Promise<void> {
+    this._date_submitted_from_filter = value;
+  }
+
+  async getDateSubmittedToFilter(): Promise<string> {
+    return this._date_submitted_to_filter;
+  }
+
+  async setDateSubmittedToFilter(value: string): Promise<void> {
+    this._date_submitted_to_filter = value;
   }
 
   //Page Methods
@@ -914,7 +983,7 @@ export default class CommonItemsPage {
     if (removeFilterLabel) {
       let filterFound = true;
       while (filterFound) {
-        const filterItems = this.active_filters_list;
+        const filterItems = this.active_filter_list;
         const count = await filterItems.count();
         filterFound = false;
         for (let i = 0; i < count; i++) {
@@ -1254,6 +1323,79 @@ export default class CommonItemsPage {
       activeFilterLabel = `${label} - ${dateType} ${dateValue}`;
     }
     return activeFilterLabel;
+  }
+
+  async extractNumFromSearchResultCount(resultsString: string): Promise<number> {
+    return parseInt(resultsString.replace(searchFilterResultsData.search_results_suffix, '').trim());
+  }
+
+  async checkDateMultiDateSearchResultValues(
+    dateResultValues: string[],
+    searchInputDataset: any,
+    searchInput: string
+  ): Promise<boolean> {
+    let expectedDateResultFound = false;
+    const fromExpectedDate = new Date(
+      `${searchInputDataset[searchInput].day_from_text} ${searchInputDataset[searchInput].month_from_dropdown} ${searchInputDataset[searchInput].year_from_text}`
+    );
+    const toExpectedDate = new Date(
+      `${searchInputDataset[searchInput].day_to_text} ${searchInputDataset[searchInput].month_to_dropdown} ${searchInputDataset[searchInput].year_to_text}`
+    );
+    for (const date of dateResultValues) {
+      const actualDate = new Date(date);
+      if (searchInput.toLowerCase().includes('to')) {
+        expectedDateResultFound = actualDate <= toExpectedDate;
+      } else if (searchInput.toLowerCase().includes('from')) {
+        expectedDateResultFound = actualDate >= fromExpectedDate;
+      } else {
+        expectedDateResultFound = actualDate >= fromExpectedDate && actualDate <= toExpectedDate;
+      }
+      if (!expectedDateResultFound) {
+        return expectedDateResultFound;
+      }
+    }
+    return expectedDateResultFound;
+  }
+
+  async sortModificationIdListValues(modificationIds: string[], sortDirection: string): Promise<string[]> {
+    let sortedListAsNums: number[][];
+    const sortedListAsStrings: string[] = [];
+    const formattedModificationIds = modificationIds.map((id) => {
+      const [prefix, suffix] = id.split('/');
+      return [parseInt(prefix), parseInt(suffix)];
+    });
+    if (sortDirection.toLowerCase() == 'ascending') {
+      sortedListAsNums = formattedModificationIds.toSorted((a, b) => {
+        if (a[0] - b[0] == 0) {
+          return a[1] - b[1];
+        } else {
+          return a[0] - b[0];
+        }
+      });
+    } else {
+      sortedListAsNums = formattedModificationIds.toSorted((a, b) => {
+        if (b[0] - a[0] == 0) {
+          return b[1] - a[1];
+        } else {
+          return b[0] - a[0];
+        }
+      });
+    }
+    for (const entry of sortedListAsNums.entries()) {
+      sortedListAsStrings.push(entry[1].toString().replace(',', '/'));
+    }
+    return sortedListAsStrings;
+  }
+
+  async getActualListValues(tableBodyRows: Locator, columnIndex: number): Promise<string[]> {
+    const actualListValues: string[] = [];
+    for (const row of await tableBodyRows.all()) {
+      const actualListValue = confirmStringNotNull(await row.getByRole('cell').nth(columnIndex).textContent())
+        .replace(/\s+/g, ' ')
+        .trim();
+      actualListValues.push(actualListValue);
+    }
+    return actualListValues;
   }
 
   async clickButton(page: string, buttonName: string) {

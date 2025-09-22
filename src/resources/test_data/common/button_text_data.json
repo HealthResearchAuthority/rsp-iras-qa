@@ -97,7 +97,10 @@
   "Manage_Review_Bodies_Page": {
     "Search": "Search",
     "Advanced_Filters": "Advanced filters",
-    "Apply_filters": "Apply filters"
+    "Apply_filters": "Apply filters",
+    "Org_Name": "Organisation name",
+    "Country": "Country",
+    "Status": "Status"
   },
   "Review_Your_Answers_Page": {
     "Confirm_Project_Details": "Confirm project details"
@@ -105,7 +108,12 @@
   "Manage_Users_Page": {
     "Search": "Search",
     "Advanced_Filters": "Advanced filters",
-    "Apply_Filters": "Apply filters"
+    "Apply_Filters": "Apply filters",
+    "First_Name": "First name",
+    "Last_Name": "Last name",
+    "Email_Address": "Email address",
+    "Status": "Status",
+    "Last_Logged_In": "Last logged in"
   },
   "Search_Modifications_Page": {
     "Advanced_Filters": "Advanced filters",
@@ -118,15 +126,26 @@
     "Lead_Nation": "Lead Nation"
   },
   "Modifications_Tasklist_Page": {
+    "Apply_Filters": "Apply filters",
+    "Search": "Search",
+    "Advanced_Filters": "Advanced filters",
     "Modification_Id": "Modification ID",
     "Short_Project_Title": "Short project title",
     "Modification_Type": "Modification type",
     "Date_Submitted": "Date submitted",
     "Days_Since_Submission": "Days since submission",
-    "Continue_to_assign_modifications": "Continue to assign modifications",
-    "Advanced_Filters": "Advanced filters",
+    "Continue_to_assign_modifications": "Continue to assign modifications"
+  },
+  "My_Modifications_Tasklist_Page": {
+    "Apply_Filters": "Apply filters",
     "Search": "Search",
-    "Apply_Filters": "Apply filters"
+    "Advanced_Filters": "Advanced filters",
+    "Modification_Id": "Modification ID",
+    "Short_Project_Title": "Short project title",
+    "Modification_Type": "Modification type",
+    "Date_Submitted": "Date submitted",
+    "Days_Since_Submission": "Days since submission",
+    "Status": "Status"
   },
   "Post_Approval_Page": {
     "Modification_Id": "Modification ID",
@@ -174,9 +193,6 @@
   },
   "Select_Study_Wide_Reviewer_Page": {
     "Complete_Assignment": "Complete assignment"
-  },
-  "SWR_My_Tasklist_Page": {
-    "Search": "Search"
   },
   "Modifications_Details_Page": {
     "Add_Another_Change": "Add another change to this modification",
