@@ -26,27 +26,187 @@ Feature: Create Amendment - Project Documents Edit and Save
         When I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
         And I can see the select area of change page
 
-    @rsp-3889 @abc
-    Scenario Outline: Validate the ui labels displayed for upload documents pages in modifications
+    @rsp-3889 @AddDetailsToUploadedDocumentsIncompleteStatus @IncompleteStatusSaveAndContinue
+    Scenario Outline: Verify the user is able to enter details for uploaded documents with Incomplete status and review the information
         And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
         When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-        #Then I can see the add documents for '<Specific_Change>' page
-        Then I upload 'PNG_File' documents
+        Then I can see the add documents for '<Specific_Change>' page
+        And I upload '<Document_Upload_Files>' documents
+        And I capture the page screenshot
         When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
-        #Then I can see the review uploaded documents for '<Specific_Change>' page
-
-        #When I click the 'Save_Continue' button on the 'Documents_Added_Modifications_Page'
-        # And I can see the add document details for '<Specific_Change>' page
-        # And I capture the page screenshot
-        # And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
-        # And I validate the ui labels for add document details modifications page
+        Then I can see the review uploaded documents for '<Specific_Change>' page
+        And I capture the page screenshot
+        And I validate the uploaded '<Document_Upload_Files>' documents are listed along with size and delete option in the review uploaded documents page
+        When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+        When I can see the add document details for '<Specific_Change>' page
+        And I capture the page screenshot
+        And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+        And I validate the file names and the status of each document is 'Document_Status_Incomplete' in add document details page
+        And I capture the page screenshot
+        And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' in the add document details for specific document page
+        And I capture the page screenshot
+        And I validate the file names and the status of each document is 'Document_Status_Complete' in add document details page
+        When I click the 'Save_Continue' button on the 'Add_Document_Details_Modifications_Page'
+        And I capture the page screenshot
+        And I can see the review your document information page
+        And I capture the page screenshot
+        Then I validate the field values 'Valid_Data_Fields' displayed in the review your document information page
+        And I capture the page screenshot
+        When I click the 'Save_Continue' button on the 'Review_Your_Document_Infomation_Modifications_Page'
+        And I can see the modification progress saved successful message on project overview page
+        And I can see the project overview page
+        And I capture the page screenshot
 
         Examples:
-            | Specific_Change                    |
-            | Correction_Of_Typographical_Errors |
-# | CRF_Other_Study_Data_Records                 |
-# | GDPR_Wording                                 |
-# | Other_Minor_Change_To_Study_Documents        |
-# | Post_Trial_Information_For_Participants      |
-# | Protocol_Non_Substantial_Changes             |
-# | Translations_Addition_Of_Translated_Versions |
+            | Specific_Change                              | Document_Upload_Files |
+            | Correction_Of_Typographical_Errors           | Multiple_Files_Three  |
+            | CRF_Other_Study_Data_Records                 | Multiple_Files_Three  |
+            | GDPR_Wording                                 | Multiple_Files_Three  |
+            | Other_Minor_Change_To_Study_Documents        | Multiple_Files_Three  |
+            | Post_Trial_Information_For_Participants      | Multiple_Files_Three  |
+            | Protocol_Non_Substantial_Changes             | Multiple_Files_Three  |
+            | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three  |
+
+
+    @rsp-3889 @AddDetailsToUploadedDocumentsCompletedStatus @CompletedStatusSaveAndContinue
+    Scenario Outline: Verify the user is able to enter details for uploaded documents with Incomplete status and review the information
+        And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
+        When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+        Then I can see the add documents for '<Specific_Change>' page
+        And I upload '<Document_Upload_Files>' documents
+        And I capture the page screenshot
+        When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+        Then I can see the review uploaded documents for '<Specific_Change>' page
+        And I capture the page screenshot
+        And I validate the uploaded '<Document_Upload_Files>' documents are listed along with size and delete option in the review uploaded documents page
+        When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+        When I can see the add document details for '<Specific_Change>' page
+        And I capture the page screenshot
+        And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+        And I validate the file names and the status of each document is 'Document_Status_Incomplete' in add document details page
+        And I capture the page screenshot
+        And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' in the add document details for specific document page
+        And I capture the page screenshot
+        And I validate the file names and the status of each document is 'Document_Status_Complete' in add document details page
+        And I click on the document link with status 'Document_Status_Complete' and enter 'Valid_Data_Fields' in the add document details for specific document page
+        When I click the 'Save_Continue' button on the 'Add_Document_Details_Modifications_Page'
+        And I capture the page screenshot
+        And I can see the review your document information page
+        And I capture the page screenshot
+        Then I validate the field values 'Valid_Data_Fields' displayed in the review your document information page
+        And I capture the page screenshot
+        When I click the 'Save_Continue' button on the 'Review_Your_Document_Infomation_Modifications_Page'
+        And I can see the modification progress saved successful message on project overview page
+        And I can see the project overview page
+        And I capture the page screenshot
+
+        Examples:
+            | Specific_Change                              | Document_Upload_Files |
+            | Correction_Of_Typographical_Errors           | Multiple_Files_Three  |
+            | CRF_Other_Study_Data_Records                 | Multiple_Files_Three  |
+            | GDPR_Wording                                 | Multiple_Files_Three  |
+            | Other_Minor_Change_To_Study_Documents        | Multiple_Files_Three  |
+            | Post_Trial_Information_For_Participants      | Multiple_Files_Three  |
+            | Protocol_Non_Substantial_Changes             | Multiple_Files_Three  |
+            | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three  |
+
+    @rsp-3889 @SaveAndContinueAfterMakingChanges
+    Scenario Outline: Verify the user is able to enter details for uploaded documents with Incomplete status and review the information
+        And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
+        When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+        Then I can see the add documents for '<Specific_Change>' page
+        And I upload '<Document_Upload_Files>' documents
+        And I capture the page screenshot
+        When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+        Then I can see the review uploaded documents for '<Specific_Change>' page
+        And I capture the page screenshot
+        And I validate the uploaded '<Document_Upload_Files>' documents are listed along with size and delete option in the review uploaded documents page
+        When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+        When I can see the add document details for '<Specific_Change>' page
+        And I capture the page screenshot
+        And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+        And I validate the status of each document is 'Document_Status_Incomplete' in add document details page
+        And I capture the page screenshot
+        And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' for the uploaded '<Document_Upload_Files>' in the add document details for specific document page
+        And I capture the page screenshot
+        And I validate the status of each document is 'Document_Status_Complete' in add document details page
+        When I click the 'Save_Continue' button on the 'Add_Document_Details_Modifications_Page'
+        And I capture the page screenshot
+        And I can see the review your document information page
+        And I capture the page screenshot
+        Then I validate the field values 'Valid_Data_Fields' displayed in the review your document information page
+        And I click on the document type change link next to each document and enter new 'New_Valid_Document_Type' in the add document details for the uploaded documents
+        And I capture the page screenshot
+        And I click on the document version change link next to each document and enter new 'New_Valid_Document_Version' in the add document details for the uploaded documents
+        And I capture the page screenshot
+        And I click on the document date change link next to each document and enter new 'New_Valid_Document_Date' and validate if 'New_Full_Valid_Document_Date' is displayed in the add document details for the uploaded documents
+        And I capture the page screenshot
+        And I click on the document previously approved option change link next to each document and enter new 'New_Valid_Document_Previously_Approved_Value' in the add document details for the uploaded documents
+        And I capture the page screenshot
+        When I click the 'Save_Continue' button on the 'Review_Your_Document_Infomation_Modifications_Page'
+        And I can see the modification progress saved successful message on project overview page
+        And I can see the project overview page
+        And I capture the page screenshot
+
+        Examples:
+            | Specific_Change                              | Document_Upload_Files |
+            | Correction_Of_Typographical_Errors           | Multiple_Files_Three  |
+            | CRF_Other_Study_Data_Records                 | PNG_File              |
+            | GDPR_Wording                                 | PNG_File              |
+            | Other_Minor_Change_To_Study_Documents        | PNG_File              |
+            | Post_Trial_Information_For_Participants      | PNG_File              |
+            | Protocol_Non_Substantial_Changes             | PNG_File              |
+            | Translations_Addition_Of_Translated_Versions | PNG_File              |
+
+    @rsp-3889 @SaveAndContinueWithoutMakingChanges
+    Scenario Outline: Verify the user is able to enter details for uploaded documents with Incomplete status and review the information
+        And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
+        When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+        Then I can see the add documents for '<Specific_Change>' page
+        And I upload '<Document_Upload_Files>' documents
+        And I capture the page screenshot
+        When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+        Then I can see the review uploaded documents for '<Specific_Change>' page
+        And I capture the page screenshot
+        And I validate the uploaded '<Document_Upload_Files>' documents are listed along with size and delete option in the review uploaded documents page
+        When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+        When I can see the add document details for '<Specific_Change>' page
+        And I capture the page screenshot
+        And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+        And I validate the status of each document is 'Document_Status_Incomplete' in add document details page
+        And I capture the page screenshot
+        And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' for the uploaded '<Document_Upload_Files>' in the add document details for specific document page
+        And I capture the page screenshot
+        And I validate the status of each document is 'Document_Status_Complete' in add document details page
+        When I click the 'Save_Continue' button on the 'Add_Document_Details_Modifications_Page'
+        And I capture the page screenshot
+        And I can see the review your document information page
+        And I capture the page screenshot
+        Then I validate the field values 'Valid_Data_Fields' displayed in the review your document information page
+        And I capture the page screenshot
+        And I click on the change link next to 'document_type' in the add document details for specific document page
+        And I capture the page screenshot
+        Then I validate the field values 'Valid_Data_Fields' displayed in the review your document information page
+        And I capture the page screenshot
+        # And I click on the document version change link next to each document and enter new 'New_Valid_Document_Version' in the add document details for the uploaded documents
+        # And I capture the page screenshot
+        # And I click on the document date change link next to each document and enter new 'New_Valid_Document_Date' and validate if 'New_Full_Valid_Document_Date' is displayed in the add document details for the uploaded documents
+        # And I capture the page screenshot
+        # And I click on the document previously approved option change link next to each document and enter new 'New_Valid_Document_Previously_Approved_Value' in the add document details for the uploaded documents
+        # And I capture the page screenshot
+        # When I click the 'Save_Continue' button on the 'Review_Your_Document_Infomation_Modifications_Page'
+        # And I can see the modification progress saved successful message on project overview page
+        # And I can see the project overview page
+        # And I capture the page screenshot
+
+        Examples:
+            | Specific_Change                              | Document_Upload_Files |
+            | Correction_Of_Typographical_Errors           | Multiple_Files_Three  |
+            | CRF_Other_Study_Data_Records                 | PNG_File              |
+            | GDPR_Wording                                 | PNG_File              |
+            | Other_Minor_Change_To_Study_Documents        | PNG_File              |
+            | Post_Trial_Information_For_Participants      | PNG_File              |
+            | Protocol_Non_Substantial_Changes             | PNG_File              |
+            | Translations_Addition_Of_Translated_Versions | PNG_File              |
+
+

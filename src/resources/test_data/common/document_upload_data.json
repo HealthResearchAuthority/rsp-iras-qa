@@ -54,5 +54,10 @@
     "src/resources/test_data/common/document_upload/VCF_File.vcf",
     "src/resources/test_data/common/document_upload/EML_File.eml",
     "src/resources/test_data/common/document_upload/MSG_File.msg"
+  ],
+  "Multiple_Files_Three": [
+    "src/resources/test_data/common/document_upload/JPG_File.jpg",
+    "src/resources/test_data/common/document_upload/GIF_File.gif",
+    "src/resources/test_data/common/document_upload/DOC_File.doc"
   ]
 }

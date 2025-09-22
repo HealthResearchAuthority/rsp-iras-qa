@@ -60,6 +60,8 @@ import ReviewChangesPlannedEndDatePage from '../pages/IRAS/makeChanges/modificat
 import AddDocumentsModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/AddDocumentsModificationsPage';
 import ReviewUploadedDocumentsModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/ReviewUploadedDocumentsModificationsPage';
 import AddDocumentDetailsModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/AddDocumentDetailsModificationsPage';
+import AddDocumentDetailsForSpecificDocumentModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/AddDocumentDetailsForSpecificDocumentModificationsPage';
+import ReviewYourDocumentInformationModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/ReviewYourDocumentInfomationModificationsPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -121,6 +123,8 @@ type CustomFixtures = {
   addDocumentsModificationsPage: AddDocumentsModificationsPage;
   reviewUploadedDocumentsModificationsPage: ReviewUploadedDocumentsModificationsPage;
   addDocumentDetailsModificationsPage: AddDocumentDetailsModificationsPage;
+  addDocumentDetailsForSpecificDocumentModificationsPage: AddDocumentDetailsForSpecificDocumentModificationsPage;
+  reviewYourDocumentInformationModificationsPage: ReviewYourDocumentInformationModificationsPage;
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -358,6 +362,14 @@ export const test = base.extend<CustomFixtures>({
 
   addDocumentDetailsModificationsPage: async ({ page }, use) => {
     await use(new AddDocumentDetailsModificationsPage(page));
+  },
+
+  addDocumentDetailsForSpecificDocumentModificationsPage: async ({ page }, use) => {
+    await use(new AddDocumentDetailsForSpecificDocumentModificationsPage(page));
+  },
+
+  reviewYourDocumentInformationModificationsPage: async ({ page }, use) => {
+    await use(new ReviewYourDocumentInformationModificationsPage(page));
   },
 
   makeAxeBuilder: async ({ page }, use) => {

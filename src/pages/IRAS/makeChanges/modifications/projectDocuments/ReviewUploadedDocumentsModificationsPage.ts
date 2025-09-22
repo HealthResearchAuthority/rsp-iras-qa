@@ -26,14 +26,22 @@ export default class ReviewUploadedDocumentsModificationsPage {
 
   //Page Methods
   async assertOnReviewUploadedDocumentsModificationsPage(specificChangeTitleLabel: string) {
-    const expectedPageTitle =
+    const expectedPageHeading =
       this.reviewUploadedDocumentsModificationsPageTestData.Review_Uploaded_Documents_Modifications_Page.heading +
       ' ' +
       specificChangeTitleLabel.toLowerCase();
-    await expect(this.page).toHaveTitle(
-      this.reviewUploadedDocumentsModificationsPageTestData.Review_Uploaded_Documents_Modifications_Page.page_title
-    );
-    await expect.soft(this.pageHeading.getByText(expectedPageTitle, { exact: true })).toBeVisible();
+    await expect.soft(this.pageHeading.getByText(expectedPageHeading, { exact: true })).toBeVisible();
+
+    const expectedPageTitle =
+      this.reviewUploadedDocumentsModificationsPageTestData.Review_Uploaded_Documents_Modifications_Page
+        .page_title_first_part +
+      ' ' +
+      specificChangeTitleLabel.toLowerCase() +
+      ' ' +
+      this.reviewUploadedDocumentsModificationsPageTestData.Review_Uploaded_Documents_Modifications_Page
+        .page_title_second_part;
+    expect.soft(await this.page.title()).toBe(expectedPageTitle);
+
     await expect
       .soft(
         this.pageHeading.getByText(
@@ -43,6 +51,7 @@ export default class ReviewUploadedDocumentsModificationsPage {
         )
       )
       .toBeVisible();
+
     await expect
       .soft(
         this.pageLabels.getByText(
