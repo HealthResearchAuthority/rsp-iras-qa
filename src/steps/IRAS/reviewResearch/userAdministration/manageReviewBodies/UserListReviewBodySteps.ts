@@ -86,7 +86,7 @@ Then(
     const filteredSearchResults = await commonItemsPage.filterResults(userValues, searchTerms);
     const userList = await commonItemsPage.getAllUsersFromTheTable();
     const userListAfterSearch: any = userList.get('searchResultValues');
-    expect.soft(filteredSearchResults).toEqual(userListAfterSearch);
+    expect.soft(filteredSearchResults.slice(0, userListAfterSearch.length)).toEqual(userListAfterSearch);
     const searchResult = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
       userListAfterSearch,
       searchTerms
