@@ -5,8 +5,8 @@ import * as questionSetData from '../../resources/test_data/common/question_set_
 import * as commonTestData from '../../resources/test_data/common/common_data.json';
 import * as documentUploadTestData from '../../resources/test_data/common/document_upload_data.json';
 import * as searchFilterResultsData from '../../resources/test_data/common/search_filter_results_data.json';
-import * as fs from 'fs';
-import path from 'path';
+import * as fs from 'node:fs';
+import path from 'node:path';
 import ProjectFilterPage from '../IRAS/questionSet/ProjectFilterPage';
 import ProjectDetailsPage from '../IRAS/questionSet/ProjectDetailsPage';
 import DevicesPage from '../IRAS/questionSet/DevicesPage';
@@ -723,10 +723,8 @@ export default class CommonItemsPage {
     const searchResultValues: string[] = [];
     await this.page.waitForLoadState('domcontentloaded');
     await this.page.waitForTimeout(3000);
-    // let dataFound = false;
-    // while (!dataFound) {
-    //adding this for loop instead of while loop to limit navigation till first 3 pages only,to reduce time and reduce fakiness
-    for (let i = 0; i < 4; i++) {
+    let dataFound = false;
+    while (!dataFound) {
       const rowCount = await this.tableRows.count();
       for (let i = 1; i < rowCount; i++) {
         const columns = this.tableRows.nth(i).getByRole('cell');
@@ -738,10 +736,9 @@ export default class CommonItemsPage {
       if ((await this.next_button.isVisible()) && !(await this.next_button.isDisabled())) {
         await this.next_button.click();
         await this.page.waitForLoadState('domcontentloaded');
+      } else {
+        dataFound = true;
       }
-      // else {
-      //   dataFound = true;
-      // }
     }
     const searchResultMap = new Map([['searchResultValues', searchResultValues]]);
     return searchResultMap;
@@ -805,7 +802,7 @@ export default class CommonItemsPage {
   async getPageNumber(currentUrl: string) {
     const parts: string[] = currentUrl.split('?');
     const pageName: string[] = parts[1].split('&');
-    const pageNumber = parseInt(pageName[0].split('=')[1], 10);
+    const pageNumber = Number.parseInt(pageName[0].split('=')[1], 10);
     return pageNumber;
   }
 
@@ -814,21 +811,21 @@ export default class CommonItemsPage {
     const itemsValues: any = itemsMap.get('items');
     const visiblePagesMap = await this.getVisiblePages(itemsValues);
     const visiblePages: number[] = visiblePagesMap.get('visiblePages');
-    const lastPageNumber = visiblePages[visiblePages.length - 1];
+    const lastPageNumber = visiblePages.at(-1);
     return lastPageNumber;
   }
 
   async getTotalItems() {
-    const totalItems = parseInt(confirmStringNotNull(await this.result_count.textContent()).split(' ')[0], 10);
+    const totalItems = Number.parseInt(confirmStringNotNull(await this.result_count.textContent()).split(' ')[0], 10);
     return totalItems;
   }
 
   async getTotalItemsNavigatingToLastPage(pagename: string) {
     let pageSize: number;
     if (pagename == 'Participating_Organisations_Page') {
-      pageSize = parseInt(this.commonTestData.default_page_size_participating_organisation, 10);
+      pageSize = Number.parseInt(this.commonTestData.default_page_size_participating_organisation, 10);
     } else {
-      pageSize = parseInt(this.commonTestData.default_page_size, 10);
+      pageSize = Number.parseInt(this.commonTestData.default_page_size, 10);
     }
     const lastPageNumber = await this.getLastPageNumber();
     await this.clickOnPages(lastPageNumber, 'page number');
@@ -928,7 +925,7 @@ export default class CommonItemsPage {
       const label = await this.pageLinks.nth(i).getAttribute('aria-label');
       const match = regex.exec(label ?? '');
       if (match) {
-        const num = parseInt(match[1], 10);
+        const num = Number.parseInt(match[1], 10);
         if (num > maxPage) maxPage = num;
       }
     }
@@ -1161,9 +1158,9 @@ export default class CommonItemsPage {
   ) {
     let pageSize: number;
     if (pagename == 'Participating_Organisations_Page') {
-      pageSize = parseInt(this.commonTestData.default_page_size_participating_organisation, 10);
+      pageSize = Number.parseInt(this.commonTestData.default_page_size_participating_organisation, 10);
     } else {
-      pageSize = parseInt(this.commonTestData.default_page_size, 10);
+      pageSize = Number.parseInt(this.commonTestData.default_page_size, 10);
     }
     const currentPageLocator = await this.clickOnPages(currentPage, navigateMethod);
     await expect(currentPageLocator).toHaveAttribute('aria-current');
@@ -1326,7 +1323,7 @@ export default class CommonItemsPage {
   }
 
   async extractNumFromSearchResultCount(resultsString: string): Promise<number> {
-    return parseInt(resultsString.replace(searchFilterResultsData.search_results_suffix, '').trim());
+    return Number.parseInt(resultsString.replace(searchFilterResultsData.search_results_suffix, '').trim());
   }
 
   async checkDateMultiDateSearchResultValues(
@@ -1362,7 +1359,7 @@ export default class CommonItemsPage {
     const sortedListAsStrings: string[] = [];
     const formattedModificationIds = modificationIds.map((id) => {
       const [prefix, suffix] = id.split('/');
-      return [parseInt(prefix), parseInt(suffix)];
+      return [Number.parseInt(prefix), Number.parseInt(suffix)];
     });
     if (sortDirection.toLowerCase() == 'ascending') {
       sortedListAsNums = formattedModificationIds.toSorted((a, b) => {
@@ -1391,7 +1388,7 @@ export default class CommonItemsPage {
     const actualListValues: string[] = [];
     for (const row of await tableBodyRows.all()) {
       const actualListValue = confirmStringNotNull(await row.getByRole('cell').nth(columnIndex).textContent())
-        .replace(/\s+/g, ' ')
+        .replaceAll(/\s+/g, ' ')
         .trim();
       actualListValues.push(actualListValue);
     }

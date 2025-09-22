@@ -1,4 +1,4 @@
-@RegressionMyModificationsTasklist @Regression @RegressionReceiveAmendments @StudyWideReviewer @KNOWN-DEFECT-CMS-HEADING-MISSING
+@RegressionMyModificationsTasklist @Regression @RegressionReceiveAmendments @StudyWideReviewer @KNOWN-DEFECT-CMS-HEADING-MISSING @BackStage
 Feature: Receive Amendments: My Modifications Tasklist page that displays modifications that have been assigned to me
 
     Background:

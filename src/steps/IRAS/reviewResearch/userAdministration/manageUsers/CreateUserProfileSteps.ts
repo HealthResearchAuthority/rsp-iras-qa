@@ -1,6 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../../hooks/CustomFixtures';
-import path from 'path';
+import path from 'node:path';
 import { Locator } from 'playwright/test';
 import { generateUniqueEmail, returnDataFromJSON } from '../../../../../utils/UtilFunctions';
 const pathToTestDataJson =
