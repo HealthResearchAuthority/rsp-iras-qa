@@ -95,7 +95,7 @@ export default class ModificationsCommonPage {
         this.modificationsCommonPagePageTestData.Ranking_Modification_Type[key].some((item: string) =>
           changeName.toLowerCase().includes(item.toLowerCase())
         )
-      )!
+      )
     ];
     const category = {
       'n/a': this.modificationsCommonPagePageTestData.Label_Texts.category_n_a,
@@ -105,7 +105,7 @@ export default class ModificationsCommonPage {
         this.modificationsCommonPagePageTestData.Ranking_Category[key].some((item: string) =>
           changeName.toLowerCase().includes(item.toLowerCase())
         )
-      )!
+      )
     ];
     const reviewType = {
       Review_Required: this.modificationsCommonPagePageTestData.Label_Texts.review_type_review_required,
@@ -115,7 +115,7 @@ export default class ModificationsCommonPage {
         this.modificationsCommonPagePageTestData.Ranking_Review_Type[key].some((item: string) =>
           changeName.toLowerCase().includes(item.toLowerCase())
         )
-      )!
+      )
     ];
     this.setrankingForChanges(changeName, modificationType, category, reviewType);
   }
@@ -131,7 +131,7 @@ export default class ModificationsCommonPage {
         this.modificationsCommonPagePageTestData.Ranking_Modification_Type[key].some((item: string) =>
           changeName.toLowerCase().includes(item.toLowerCase())
         )
-      )!
+      )
     ];
     let category: string | undefined;
     const affectsNonNhsOnly =
@@ -163,7 +163,7 @@ export default class ModificationsCommonPage {
         this.modificationsCommonPagePageTestData.Ranking_Review_Type[key].some((item: string) =>
           changeName.toLowerCase().includes(item.toLowerCase())
         )
-      )!
+      )
     ];
     this.setrankingForChanges(changeName, modificationType, category, reviewType);
   }
@@ -200,7 +200,7 @@ export default class ModificationsCommonPage {
       this.modificationsCommonPagePageTestData.Label_Texts.category_c,
       this.modificationsCommonPagePageTestData.Label_Texts.category_n_a,
     ];
-    const category = categoryOrder.find((c) => values.some((r) => r.category === c))!;
+    const category = categoryOrder.find((c) => values.some((r) => r.category === c));
     this.setOverallRanking(modificationType, category, reviewType);
   }
 }
