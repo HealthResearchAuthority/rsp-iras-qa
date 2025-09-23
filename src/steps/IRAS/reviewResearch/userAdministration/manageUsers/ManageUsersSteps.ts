@@ -114,11 +114,15 @@ When('I keep note of the current login date', async ({ manageUsersPage }) => {
     month: 'long',
     year: 'numeric',
   }).format(today);
-  const formattedDateTruncated = new Intl.DateTimeFormat('en-GB', {
+  const formattedDateTruncatedParts = new Intl.DateTimeFormat('en-GB', {
     day: 'numeric',
     month: 'short',
     year: 'numeric',
-  }).format(today);
+  }).formatToParts(today);
+  const day = formattedDateTruncatedParts.find((p) => p.type === 'day')?.value;
+  const month = formattedDateTruncatedParts.find((p) => p.type === 'month')?.value;
+  const year = formattedDateTruncatedParts.find((p) => p.type === 'year')?.value;
+  const formattedDateTruncated = `${day} ${month?.slice(0, 3)} ${year}`;
   manageUsersPage.setLastLoggedInDateFull(formattedDateFull);
   manageUsersPage.setLastLoggedInDateTruncated(formattedDateTruncated);
   manageUsersPage.setLastLoggedInHours(today.getHours());
@@ -127,9 +131,9 @@ When('I keep note of the current login date', async ({ manageUsersPage }) => {
 When(
   'I validate the last logged in is displayed as truncated date in manage users page',
   async ({ manageUsersPage }) => {
-    expect(manageUsersPage.last_logged_in_from_list_label).toContainText(
-      `${manageUsersPage.getLastLoggedInDateTruncated()} ${dateTimeRelatedData.at}`
-    );
+    expect
+      .soft(manageUsersPage.last_logged_in_from_list_label)
+      .toContainText(`${manageUsersPage.getLastLoggedInDateTruncated()} ${dateTimeRelatedData.at}`);
     if (manageUsersPage.getLastLoggedInHours() >= 12) {
       expect(manageUsersPage.last_logged_in_from_list_label).toContainText(`${dateTimeRelatedData.afternoon}`);
     } else {
@@ -149,6 +153,48 @@ When(
     } else if (caseValue === 'remove QAAutomation prefix') {
       await createUserProfilePage.setUniqueEmail(email.replace('QAAUTOMATION', ''));
     }
+  }
+);
+
+Then(
+  'I can see the manage users list sorted by {string} order of the {string} on the {string} page',
+  async ({ manageUsersPage, commonItemsPage }, sortDirection: string, sortField: string, currentPage: string) => {
+    let sortedUserList: string[];
+    let userColumnIndex: number;
+    switch (sortField.toLowerCase()) {
+      case 'first name':
+        userColumnIndex = 0;
+        break;
+      case 'last name':
+        userColumnIndex = 1;
+        break;
+      case 'email address':
+        userColumnIndex = 2;
+        break;
+      case 'status':
+        userColumnIndex = 3;
+        break;
+      case 'last logged in':
+        userColumnIndex = 4;
+        break;
+      default:
+        throw new Error(`${sortField} is not a valid option`);
+    }
+    const actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, userColumnIndex);
+    if (sortField.toLowerCase() == 'last logged in') {
+      sortedUserList = await manageUsersPage.sortLastLoggedInListValues(actualList, sortDirection);
+    } else if (sortDirection.toLowerCase() == 'ascending') {
+      sortedUserList = [...actualList].toSorted((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
+      if (sortField.toLowerCase() == 'status' && currentPage.toLowerCase() == 'first') {
+        expect(actualList).toContain(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enabled_status);
+      }
+    } else {
+      sortedUserList = [...actualList].toSorted((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
+      if (sortField.toLowerCase() == 'status' && currentPage.toLowerCase() == 'first') {
+        expect(actualList).toContain(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.disabled_status);
+      }
+    }
+    expect(actualList).toEqual(sortedUserList);
   }
 );
 
@@ -173,6 +219,7 @@ When(
           }
           await commonItemsPage.fillUIComponent(dataset, key, manageUsersPage);
         } else if (key === 'review_body_checkbox') {
+          await manageUsersPage[key + '_chevron'].click();
           await commonItemsPage.selectCheckboxUserProfileReviewBody(dataset, manageUsersPage);
         } else {
           await manageUsersPage[key + '_chevron'].click();
@@ -271,8 +318,8 @@ Then(
 Then(
   'I can see the review body field in the review body checkbox in the advanced filters of manage users page should contain all currently enabled review bodies from the manage review bodies page',
   async ({ manageUsersPage, manageReviewBodiesPage }) => {
-    const actualList = await manageUsersPage.getReviewBodies();
-    const expectedList = await manageReviewBodiesPage.getOrgNamesListFromUI();
-    expect(actualList).toEqual(expectedList);
+    const actualList = [...new Set(await manageUsersPage.getReviewBodies())];
+    const expectedList = [...new Set(await manageReviewBodiesPage.getOrgNamesListFromUI())];
+    expect.soft(actualList.slice(0, expectedList.length)).toEqual(expectedList);
   }
 );

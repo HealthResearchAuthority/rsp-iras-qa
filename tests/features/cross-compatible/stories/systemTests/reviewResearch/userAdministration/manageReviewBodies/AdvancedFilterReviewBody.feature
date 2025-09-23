@@ -1,4 +1,4 @@
-@UserAdministration @ManageReviewBodies @AdvancedFilterReviewBody @SysAdminUser @SystemTest
+@UserAdministration @ManageReviewBodies @AdvancedFilterReviewBody @SysAdminUser @SystemTest @STSysAdmin
 Feature: Review Bodies - Advanced Filter and Search combinations in the Manage review bodies page
 
   Background:
@@ -16,7 +16,7 @@ Feature: Review Bodies - Advanced Filter and Search combinations in the Manage r
     And I capture the page screenshot
     And I click the 'Apply_filters' button on the 'Manage_Review_Bodies_Page'
     And I capture the page screenshot
-    And the advanced filters section should collapse automatically
+    And I 'cannot' see the advanced filters panel
     And I capture the page screenshot
     Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Manage_Review_Bodies_Page'
     And I can see the results matching the search '<Organisation_Name>' and filter criteria '<Advanced_Filters>' for manage review bodies page
@@ -43,7 +43,7 @@ Feature: Review Bodies - Advanced Filter and Search combinations in the Manage r
     And I capture the page screenshot
     And I click the 'Apply_filters' button on the 'Manage_Review_Bodies_Page'
     And I capture the page screenshot
-    And the advanced filters section should collapse automatically
+    And I 'cannot' see the advanced filters panel
     And I capture the page screenshot
     Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Manage_Review_Bodies_Page'
     And I can see the results matching the search '<Organisation_Name>' and filter criteria '<Advanced_Filters>' for manage review bodies page
@@ -64,7 +64,7 @@ Feature: Review Bodies - Advanced Filter and Search combinations in the Manage r
     And I capture the page screenshot
     And I click the 'Apply_filters' button on the 'Manage_Review_Bodies_Page'
     And I capture the page screenshot
-    And the advanced filters section should collapse automatically
+    And I 'cannot' see the advanced filters panel
     And I capture the page screenshot
     Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Manage_Review_Bodies_Page'
     And I can see the results matching the search '<Organisation_Name>' and filter criteria '<Advanced_Filters>' for manage review bodies page
@@ -81,7 +81,7 @@ Feature: Review Bodies - Advanced Filter and Search combinations in the Manage r
     And I capture the page screenshot
     And I click the 'Apply_filters' button on the 'Manage_Review_Bodies_Page'
     And I capture the page screenshot
-    And the advanced filters section should collapse automatically
+    And I 'cannot' see the advanced filters panel
     And I capture the page screenshot
     Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Manage_Review_Bodies_Page'
     And I can see the results matching the filter criteria '<Advanced_Filters>' for manage review bodies page
@@ -111,7 +111,7 @@ Feature: Review Bodies - Advanced Filter and Search combinations in the Manage r
     And I capture the page screenshot
     And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
     And I capture the page screenshot
-    Then the search displays no matching results
+    Then the no search results found message is displayed
 
     Examples:
       | Organisation_Name |
@@ -126,10 +126,10 @@ Feature: Review Bodies - Advanced Filter and Search combinations in the Manage r
     And I capture the page screenshot
     And I click the 'Apply_filters' button on the 'Manage_Review_Bodies_Page'
     And I capture the page screenshot
-    And the advanced filters section should collapse automatically
+    And I 'cannot' see the advanced filters panel
     Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Manage_Review_Bodies_Page'
     And I capture the page screenshot
-    Then the search displays no matching results
+    Then the no search results found message is displayed
 
     Examples:
       | Organisation_Name | Advanced_Filters                     |
@@ -156,7 +156,7 @@ Feature: Review Bodies - Advanced Filter and Search combinations in the Manage r
     And I select advanced filters in the manage review bodies page using '<Advanced_Filters>'
     And I click the 'Apply_filters' button on the 'Manage_Review_Bodies_Page'
     And I capture the page screenshot
-    And the advanced filters section should collapse automatically
+    And I 'cannot' see the advanced filters panel
     And I expand the chevrons for '<Advanced_Filters>' in manage review bodies page
     And I capture the page screenshot
     And I verify the hint text based on the '<Advanced_Filters>' for manage review bodies page
@@ -202,7 +202,7 @@ Feature: Review Bodies - Advanced Filter and Search combinations in the Manage r
     And I capture the page screenshot
     And I click the 'Apply_filters' button on the 'Manage_Review_Bodies_Page'
     And I capture the page screenshot
-    And the advanced filters section should collapse automatically
+    And I 'cannot' see the advanced filters panel
     Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Manage_Review_Bodies_Page'
     And I capture the page screenshot
     Then 'I remove the selected filters from' active filters '<Advanced_Filters>' in the 'Manage_Review_Bodies_Page'

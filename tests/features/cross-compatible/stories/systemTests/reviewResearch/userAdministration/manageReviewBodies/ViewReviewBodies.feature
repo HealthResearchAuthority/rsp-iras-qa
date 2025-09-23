@@ -1,4 +1,4 @@
-@UserAdministration @ManageReviewBodies @ViewReviewBodies @SysAdminUser @SystemTest
+@UserAdministration @ManageReviewBodies @ViewReviewBodies @SysAdminUser @SystemTest @STSysAdmin
 Feature: User Administration: Manage Review Bodies list and view review bodies profile details
 
     Background:
@@ -138,7 +138,7 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
         And I capture the page screenshot
         And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
-        Then the search displays no matching results
+        Then the no search results found message is displayed
         And I capture the page screenshot
         Examples:
             | Search_Query      |
@@ -158,17 +158,17 @@ Feature: User Administration: Manage Review Bodies list and view review bodies p
             | Existing_QA_Data_Two   |
             | Existing_QA_Data_Three |
 
-    # out of scope for now
-    @rsp-3459 @ManageReviewBodiesSearchLeadingAndTrailingWhiteSpaces @skip
-    Scenario Outline: Verify search results in manage review bodies page when the search keyword contains leading and trailing white spaces
-        When I fill the search input for searching 'review bodies' with '<Search_Query>' as the search query
-        And I capture the page screenshot
-        And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
-        And I capture the page screenshot
-        Then the system displays review bodies matching the search criteria
-        And I capture the page screenshot
-        Examples:
-            | Search_Query                          |
-            | Leading_White_Space_Data              |
-            | Leading_And_Trailing_White_Space_Data |
-            | Trailing_White_Space_Data             |
+# out of scope for now-since the search box does not support special characters,it may be added in future
+# @rsp-3459 @ManageReviewBodiesSearchLeadingAndTrailingWhiteSpaces
+# Scenario Outline: Verify search results in manage review bodies page when the search keyword contains leading and trailing white spaces
+#     When I fill the search input for searching 'review bodies' with '<Search_Query>' as the search query
+#     And I capture the page screenshot
+#     And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
+#     And I capture the page screenshot
+#     Then the system displays review bodies matching the search criteria
+#     And I capture the page screenshot
+#     Examples:
+#         | Search_Query                          |
+#         | Leading_White_Space_Data              |
+#         | Leading_And_Trailing_White_Space_Data |
+#         | Trailing_White_Space_Data             |

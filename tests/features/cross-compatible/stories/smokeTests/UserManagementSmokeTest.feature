@@ -1,6 +1,6 @@
 @SysAdminUser  @UserManagementSmokeFeature @Smoke
 Feature: User Administration: Manage Users -Smoke Tests
-
+    # Mange Users - Page title is different
     Background:
         Given I have navigated to the 'Home_Page'
         And I click the 'System_Administration' link on the 'Home_Page'

@@ -27,7 +27,7 @@ export default class PlannedEndDateChangePage {
     this.planned_project_end_month_dropdown = this.page
       .getByText(this.plannedEndDateChangePageTestData.Label_Texts.new_planned_project_end_date_label)
       .locator('..')
-      .getByTestId('NewPlannedEndDate.Month');
+      .getByTestId('Questions[0].Month');
     this.planned_project_end_year_text = this.page
       .getByText(this.plannedEndDateChangePageTestData.Label_Texts.new_planned_project_end_date_label)
       .locator('..')
@@ -35,7 +35,7 @@ export default class PlannedEndDateChangePage {
     this.planned_project_end_day_text_summary_error_label =
       this.planned_project_end_month_dropdown_summary_error_label =
       this.planned_project_end_year_text_summary_error_label =
-        this.page.locator('a[href="#NewPlannedEndDate.Date"]');
+        this.page.locator('a[href="#Questions[0].AnswerText"]');
     this.current_planned_end_date_label = this.page
       .getByText(this.plannedEndDateChangePageTestData.Label_Texts.current_planned_end_date_label)
       .locator('..');

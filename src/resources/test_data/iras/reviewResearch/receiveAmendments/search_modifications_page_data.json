@@ -2,7 +2,7 @@
   "Search_Modifications_Page": {
     "page_heading": "Search",
     "page_guidance_text": "Enter the IRAS ID to search for all modifications received, including those submitted for notification only",
-    "title": "Search - Approvals - Plan and manage healthcare research",
+    "title": "Search - Approvals - Health research UK",
     "iras_id_search_box_label": "IRAS ID",
     "search_button_label": "Search",
     "chief_investigator_name_label": "Chief Investigator name",
@@ -67,7 +67,7 @@
   },
   "Iras_Id": {
     "Valid_Iras_Id_Nth": {
-      "iras_id_text": "9800001"
+      "iras_id_text": "1234587"
     },
     "Valid_Iras_Id_Prefix": {
       "iras_id_text": "98"
@@ -133,15 +133,15 @@
   },
   "Advanced_Filters": {
     "Advanced_Filters_Nth": {
-      "chief_investigator_name_text": "Barry White",
-      "short_project_title_text": "Project 01",
-      "sponsor_organisation_text": "COLD GENESYS INC",
-      "date_submitted_from_day_text": "11",
-      "date_submitted_from_month_dropdown": "April",
-      "date_submitted_from_year_text": "2023",
-      "date_submitted_to_day_text": "02",
-      "date_submitted_to_month_dropdown": "January",
-      "date_submitted_to_year_text": "2025",
+      "chief_investigator_name_text": "ci@hra.nhs.uk",
+      "short_project_title_text": "QA Automation",
+      "sponsor_organisation_text": "AIREDALE NHS FOUNDATION TRUST",
+      "date_submitted_from_day_text": "01",
+      "date_submitted_from_month_dropdown": "January",
+      "date_submitted_from_year_text": "1900",
+      "date_submitted_to_day_text": "31",
+      "date_submitted_to_month_dropdown": "December",
+      "date_submitted_to_year_text": "2050",
       "lead_nation_checkbox": ["England", "Wales"],
       "participating_nation_checkbox": ["England", "Wales"],
       "modification_type_checkbox": ["Minor modification", "Modification of an important detail"]
@@ -222,7 +222,7 @@
       "participating_nation_checkbox": ["England", "Wales"]
     },
     "Advanced_Filters_One": {
-      "sponsor_organisation_text": "Eisai Co.,Ltd."
+      "sponsor_organisation_text": "AIREDALE NHS FOUNDATION TRUST"
     },
     "Advanced_Filters_Two": {
       "short_project_title_text": "Short study title 17"

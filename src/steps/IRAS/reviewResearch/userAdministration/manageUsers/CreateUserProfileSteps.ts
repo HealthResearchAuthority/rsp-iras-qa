@@ -1,6 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../../hooks/CustomFixtures';
-import path from 'path';
+import path from 'node:path';
 import { Locator } from 'playwright/test';
 import { generateUniqueEmail, returnDataFromJSON } from '../../../../../utils/UtilFunctions';
 const pathToTestDataJson =
@@ -42,7 +42,7 @@ When(
         if (isDuplicateEmail && key === 'email_address_text') {
           const locator = createUserProfilePage[key];
           const [email] = await userListReviewBodyPage.getUserEmail();
-          const searchKey = await userListReviewBodyPage.getSearchKey();
+          const searchKey = await commonItemsPage.getSearchKey();
           const uniqueEmail = await createUserProfilePage.getUniqueEmail();
           const valueToFill = email || searchKey || uniqueEmail;
           if (valueToFill) {

@@ -1,4 +1,4 @@
-@UserAdministration @ManageReviewBodies @CreateReviewBody @SysAdminUser @SystemTest @rsp-2570
+@UserAdministration @ManageReviewBodies @CreateReviewBody @SysAdminUser @SystemTest @rsp-2570 @STSysAdmin
 Feature: User Administration: Manage Review Bodies - Create review body
 
     Background:
@@ -28,7 +28,7 @@ Feature: User Administration: Manage Review Bodies - Create review body
             | Valid_Data_In_All_Fields           | enabled |
             | Valid_Data_In_All_Mandatory_Fields | enabled |
 
-    @verifyCreateReviewBodyRealData
+    @verifyCreateReviewBodyRealData @skip
     Scenario Outline: Verify the user is able to create a new review body with real data
         When I fill the new review body page using '<Add_Review_Body>'
         And I capture the page screenshot

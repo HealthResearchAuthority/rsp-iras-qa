@@ -8,6 +8,11 @@ Then('I can see the project overview page', async ({ projectOverviewPage }) => {
   await projectOverviewPage.assertOnProjectOverviewPage();
 });
 
+Then('I navigate to the project overview page of a specific project', async ({ projectOverviewPage }) => {
+  await projectOverviewPage.gotoSpecificProjectPage();
+  await projectOverviewPage.assertOnProjectOverviewPage();
+});
+
 Then(
   'I can see the project details on project overview page for {string}',
   async ({ projectDetailsIRASPage, projectDetailsTitlePage, projectOverviewPage }, datasetName: string) => {
@@ -31,11 +36,9 @@ Then(
     const dataset = projectDetailsTitlePage.projectDetailsTitlePageTestData[datasetName];
     const expectedProjectTitle = dataset.short_project_title_text;
     const actualProjectTitle = confirmStringNotNull(await projectOverviewPage.project_short_title_label.textContent());
-    const actualProjectTitleUpdated = actualProjectTitle.replace(
-      projectOverviewPage.projectOverviewPageTestData.Project_Overview_Page.short_project_title_label,
-      ''
-    );
-
+    const actualProjectTitleUpdated = actualProjectTitle
+      .replace(projectOverviewPage.projectOverviewPageTestData.Project_Overview_Page.short_project_title_label, '')
+      .trim();
     expect(actualProjectTitleUpdated).toBe(expectedProjectTitle);
   }
 );
@@ -43,18 +46,22 @@ Then(
 Then(
   'I can see the modification progress saved successful message on project overview page',
   async ({ projectOverviewPage, commonItemsPage }) => {
-    await expect(projectOverviewPage.modification_saved_success_message_header_text).toBeVisible();
-    await expect(projectOverviewPage.modification_saved_success_message_text).toBeVisible();
-    expect(
-      await projectOverviewPage.information_alert_banner.evaluate((e: any) =>
-        getComputedStyle(e).getPropertyValue('border-color')
+    await expect.soft(projectOverviewPage.modification_saved_success_message_header_text).toBeVisible();
+    await expect.soft(projectOverviewPage.modification_saved_success_message_text).toBeVisible();
+    expect
+      .soft(
+        await projectOverviewPage.information_alert_banner.evaluate((e: any) =>
+          getComputedStyle(e).getPropertyValue('border-color')
+        )
       )
-    ).toBe(commonItemsPage.commonTestData.rgb_green_color);
-    expect(
-      await projectOverviewPage.information_alert_banner.evaluate((e: any) =>
-        getComputedStyle(e).getPropertyValue('background-color')
+      .toBe(commonItemsPage.commonTestData.rgb_green_color);
+    expect
+      .soft(
+        await projectOverviewPage.information_alert_banner.evaluate((e: any) =>
+          getComputedStyle(e).getPropertyValue('background-color')
+        )
       )
-    ).toBe(commonItemsPage.commonTestData.rgb_green_color);
+      .toBe(commonItemsPage.commonTestData.rgb_green_color);
   }
 );
 
@@ -66,6 +73,29 @@ Then(
       if (Object.hasOwn(dataset, key)) {
         const labelVal = await commonItemsPage.getUiLabel(key, projectOverviewPage);
         expect(labelVal).toBe(dataset[key]);
+      }
+    }
+  }
+);
+
+Then(
+  'I can see the status of modifications displayed is {string}',
+  async ({ commonItemsPage, projectOverviewPage }, datasetName: string) => {
+    //Limiting the checks to 2 pages
+    const dataset = projectOverviewPage.projectOverviewPageTestData[datasetName];
+    const expectedStatus = dataset.status;
+    const maxPagesToCheck = projectOverviewPage.projectOverviewPageTestData.Project_Overview_Page.maxPagesToVisit;
+    for (let pageIndex = 1; pageIndex <= maxPagesToCheck; pageIndex++) {
+      const rowCount = await commonItemsPage.tableRows.count();
+      for (let rowIndex = 1; rowIndex < rowCount; rowIndex++) {
+        const row = commonItemsPage.tableRows.nth(rowIndex);
+        const actualStatus = await projectOverviewPage.getStatus(row);
+        expect(actualStatus).toEqual(expectedStatus);
+      }
+      if (await commonItemsPage.next_button.isVisible()) {
+        await commonItemsPage.next_button.click();
+      } else {
+        break;
       }
     }
   }
@@ -127,5 +157,32 @@ Then(
     expect(actualTrimmedParticipatingNations).toContain(expectedParticipatingNations);
     expect(actualNhsHscOrganisations).toBe(expectedNhsHscOrganisations);
     expect(actualLeadNation).toBe(expectedLeadNation);
+  }
+);
+
+Then(
+  'I can see the modifications is sorted by {string} order of the {string}',
+  async ({ commonItemsPage }, sortOrder: string, sortColumn: string) => {
+    let sortedColumnList: string[];
+    let columnIndex: number;
+    switch (sortColumn.toLowerCase()) {
+      case 'modification id':
+        columnIndex = 0;
+        break;
+      case 'modification type':
+        columnIndex = 1;
+        break;
+      default:
+        throw new Error(`${sortColumn} is not a valid option`);
+    }
+    const actualColumnList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
+    if (sortColumn.toLowerCase() == 'modification id') {
+      sortedColumnList = await commonItemsPage.sortModificationIdListValues(actualColumnList, sortOrder);
+    } else if (sortOrder.toLowerCase() == 'ascending') {
+      sortedColumnList = [...actualColumnList].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
+    } else {
+      sortedColumnList = [...actualColumnList].sort((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
+    }
+    expect(actualColumnList).toEqual(sortedColumnList);
   }
 );
