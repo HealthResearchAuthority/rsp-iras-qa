@@ -1,5 +1,6 @@
 import { Locator, Page } from '@playwright/test';
-import * as affectedOrganisationSelectionPageTestData from '../../../../../resources/test_data/iras/make_changes/modifications/change_planned_end_date/affected_organisation_selection_data.json';
+import * as affectedOrganisationSelectionPageTestData from '../../../../../resources/test_data/iras/make_changes/modifications/applicabilityScreens/affected_organisation_selection_data.json';
+import CommonItemsPage from '../../../../Common/CommonItemsPage';
 
 //Declare Page Objects
 export default class AffectedOrganisationSelectionPage {
@@ -24,4 +25,15 @@ export default class AffectedOrganisationSelectionPage {
     );
   }
   //Page Methods
+  async fillAffectedOrganisation(dataset: any) {
+    const commonItemsPage = new CommonItemsPage(this.page);
+    for (const key in dataset) {
+      if (Object.hasOwn(dataset, key)) {
+        if (key === 'which_organisation_change_affect_checkbox') {
+          await commonItemsPage.fillUIComponent(dataset, key, this);
+        }
+      }
+    }
+    await commonItemsPage.clickButton('Modifications_Page', 'Save_Continue');
+  }
 }
