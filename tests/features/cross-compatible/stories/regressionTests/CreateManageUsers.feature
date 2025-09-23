@@ -11,7 +11,7 @@ Feature: User Administration: Create Manage Users
         And I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
         And I can see the add a new user profile page
 
-    @RegressionTestCreateUserEvents @KNOWN-DEFECT-RSP-5032
+    @RegressionTestCreateUserEvents
     Scenario Outline: Verify the user is able to create new user profiles with various roles like study-wide reviewer or workflow co-ordinator, with an audit history log
         When I fill the new user profile page using '<Add_User_Profile>'
         And I capture the page screenshot
@@ -72,9 +72,9 @@ Feature: User Administration: Create Manage Users
         Then the system displays search results matching the search criteria
 
         Examples:
-            | Add_User_Profile                                   | Field_Name | Organisation_Name                                                                | Advanced_Filters_Users                                                     | Search_Queries            | Advanced_Filters_Review_Bodies |
-            | Valid_Data_In_All_Fields_Role_Studywide_Reviewer   | Role       | QA Automation Health Research Authority (HRA)                                    | Advanced_Filter_Review_body_HRA_Role_Studywide_Reviewer_Status_Active      | Role_Studywide_Reviewer   | Advanced_Filter_Eng_Active     |
-            | Valid_Data_In_All_Fields_Role_Workflow_Coordinator | Role       | QA Automation National Research Service Permissions Coordination Centre (NRSPCC) | Advanced_Filter_Review_body_NRSPCC_Role_Workflow_Coordinator_Status_Active | Role_Workflow_Coordinator | Advanced_Filter_Sco_Active     |
+            | Add_User_Profile                                   | Field_Name | Organisation_Name                                                  | Advanced_Filters_Users                                                     | Search_Queries            | Advanced_Filters_Review_Bodies |
+            | Valid_Data_In_All_Fields_Role_Studywide_Reviewer   | Role       | Health Research Authority (HRA)                                    | Advanced_Filter_Review_body_HRA_Role_Studywide_Reviewer_Status_Active      | Role_Studywide_Reviewer   | Advanced_Filter_Eng_Active     |
+            | Valid_Data_In_All_Fields_Role_Workflow_Coordinator | Role       | National Research Service Permissions Coordination Centre (NRSPCC) | Advanced_Filter_Review_body_NRSPCC_Role_Workflow_Coordinator_Status_Active | Role_Workflow_Coordinator | Advanced_Filter_Sco_Active     |
 
     @RegressionTestCreateUserEvents
     Scenario Outline: Verify the user is able to create new user profiles with various roles like applicant or system administrator or team manager, with an audit history log
