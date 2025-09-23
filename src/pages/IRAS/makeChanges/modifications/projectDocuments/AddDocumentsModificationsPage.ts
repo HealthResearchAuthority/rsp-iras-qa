@@ -21,22 +21,40 @@ export default class AddDocumentsModificationsPage {
   }
 
   //Page Methods
+  // async assertOnAddDocumentsModificationsPage(specificChangeTitleLabel: string) {
+  //   const expectedPageTitle =
+  //     this.addDocumentsModificationsPageTestData.Add_Documents_Modifications_Page.heading +
+  //     ' ' +
+  //     specificChangeTitleLabel.toLowerCase();
+  //   await expect
+  //     .soft(this.page)
+  //     .toHaveTitle(this.addDocumentsModificationsPageTestData.Add_Documents_Modifications_Page.page_title);
+  //   await expect.soft(this.pageHeading.getByText(expectedPageTitle, { exact: true })).toBeVisible();
+  //   await expect
+  //     .soft(
+  //       this.pageLabels.getByText(
+  //         this.addDocumentsModificationsPageTestData.Add_Documents_Modifications_Page.hint_label,
+  //         { exact: true }
+  //       )
+  //     )
+  //     .toBeVisible();
+  // }
   async assertOnAddDocumentsModificationsPage(specificChangeTitleLabel: string) {
-    const expectedPageTitle =
+    const expectedPageHeading =
       this.addDocumentsModificationsPageTestData.Add_Documents_Modifications_Page.heading +
       ' ' +
       specificChangeTitleLabel.toLowerCase();
-    await expect
-      .soft(this.page)
-      .toHaveTitle(this.addDocumentsModificationsPageTestData.Add_Documents_Modifications_Page.page_title);
-    await expect.soft(this.pageHeading.getByText(expectedPageTitle, { exact: true })).toBeVisible();
-    await expect
-      .soft(
-        this.pageLabels.getByText(
-          this.addDocumentsModificationsPageTestData.Add_Documents_Modifications_Page.hint_label,
-          { exact: true }
-        )
-      )
-      .toBeVisible();
+    await expect.soft(this.pageHeading.getByText(expectedPageHeading, { exact: true })).toBeVisible();
+
+    const expectedPageTitle =
+      this.addDocumentsModificationsPageTestData.Add_Documents_Modifications_Page.page_title_first_part +
+      ' ' +
+      specificChangeTitleLabel.toLowerCase() +
+      ' ' +
+      this.addDocumentsModificationsPageTestData.Add_Documents_Modifications_Page.page_title_second_part;
+    expect.soft(await this.page.title()).toBe(expectedPageTitle);
+
+    const expectedLabel = this.addDocumentsModificationsPageTestData.Add_Documents_Modifications_Page.hint_label;
+    await expect.soft(this.pageLabels.getByText(expectedLabel, { exact: true })).toBeVisible();
   }
 }

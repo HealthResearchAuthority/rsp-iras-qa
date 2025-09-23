@@ -1,0 +1,57 @@
+{
+  "Add_Document_Details_Modifications_Page": {
+    "page_title_first_part": "Add document details for",
+    "page_title_second_part": "- Health research UK",
+    "heading": "Add document details for",
+    "hint_label": "Some of the documents you've added need additional details.",
+    "document_status": "Incomplete"
+  },
+  "Document_Status_Incomplete": {
+    "status": "Incomplete"
+  },
+  "Document_Status_Complete": {
+    "status": "Completed"
+  },
+  "Add_Document_Details_For_Specific_Document_Modifications_Page": {
+    "page_title_first_part": "Add document details for",
+    "page_title_second_part": "- Health research UK",
+    "heading": "Add document details for",
+    "save_and_continue": "Save and continue",
+    "save_changes": "Save changes",
+    "delete_label": "Delete"
+  },
+  "Valid_Data_Fields": {
+    "document_type_dropdown": "Protocol / Clinical Investigation Plan",
+    "sponsor_document_version_text": "1.1",
+    "sponsor_document_day_text": "10",
+    "sponsor_document_month_dropdown": "January",
+    "sponsor_document_year_text": "2030",
+    "document_previously_approved_radio": "Yes"
+  },
+  "New_Valid_Document_Date": {
+    "sponsor_document_day_text": "12",
+    "sponsor_document_month_dropdown": "March",
+    "sponsor_document_year_text": "2032"
+  },
+  "New_Valid_Document_Type": {
+    "document_type_dropdown": "Protocol / Clinical Investigation Plan"
+  },
+  "New_Valid_Document_Version": {
+    "sponsor_document_version_text": "1.2"
+  },
+  "New_Valid_Document_Day": {
+    "sponsor_document_day_text": "20"
+  },
+  "New_Valid_Document_Month": {
+    "sponsor_document_month_dropdown": "March"
+  },
+  "New_Valid_Document_Year": {
+    "sponsor_document_year_text": "2027"
+  },
+  "New_Full_Valid_Document_Date": {
+    "sponsor_document_date_text": "12 March 2032"
+  },
+  "New_Valid_Document_Previously_Approved_Value": {
+    "document_previously_approved_radio": "No"
+  }
+}

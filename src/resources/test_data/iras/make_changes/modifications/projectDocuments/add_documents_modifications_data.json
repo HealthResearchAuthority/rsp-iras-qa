@@ -1,8 +1,11 @@
 {
   "Add_Documents_Modifications_Page": {
+    "page_title": "Add documents - Plan and manage healthcare research",
     "page_title": "Add documents - Health research UK",
+    "page_title_first_part": "Add documents for",
+    "page_title_second_part": "- Health research UK",
     "heading": "Add documents for",
-    "hint_label": "Upload your documents here. You’ll add document details in the next step. Documents must be a XXX or XXX and smaller than XXXMB.",
+    "hint_label": "Upload your documents here. You’ll add document details in the next step. \nDocuments must be a XXX or XXX and smaller than XXXMB.",
     "upload_document_header": "Upload document",
     "choose_files_button_label": "Choose files",
     "upload_document_component_hint_label": "or drop files",

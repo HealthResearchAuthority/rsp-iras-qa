@@ -1,6 +1,9 @@
 {
   "Review_Uploaded_Documents_Modifications_Page": {
+    "page_title": "Review uploaded documents - Plan and manage healthcare research",
     "page_title": "Review uploaded documents - Health research UK",
+    "page_title_first_part": "Documents added for",
+    "page_title_second_part": "- Health research UK",
     "heading": "Documents added for",
     "add_document_detail_next_step_header": "Now add your document details",
     "add_document_detail_next_step_hint_label": "Some of the documents you've added need additional details which you'll add in the next step.",
