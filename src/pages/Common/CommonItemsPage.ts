@@ -1431,4 +1431,13 @@ export default class CommonItemsPage {
     }
     return actualListValues;
   }
+
+  async clickButton(page: string, buttonName: string) {
+    const buttonLabel = this.buttonTextData[page][buttonName];
+    await this.govUkButton
+      .getByText(buttonLabel, { exact: true })
+      .or(this.genericButton.getByText(buttonLabel, { exact: true }))
+      .first()
+      .click();
+  }
 }

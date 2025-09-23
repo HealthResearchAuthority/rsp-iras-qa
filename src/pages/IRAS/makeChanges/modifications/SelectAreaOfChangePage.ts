@@ -2,6 +2,7 @@ import { expect, Locator, Page } from '@playwright/test';
 import * as selectAreaOfChangePageTestData from '../../../../resources/test_data/iras/make_changes/modifications/select_area_of_change_data.json';
 import * as buttonTextData from '../../../../resources/test_data/common/button_text_data.json';
 import * as linkTextData from '../../../../resources/test_data/common/link_text_data.json';
+import CommonItemsPage from '../../../Common/CommonItemsPage';
 
 //Declare Page Objects
 export default class ModificationsSelectAreaOfChangePage {
@@ -72,5 +73,22 @@ export default class ModificationsSelectAreaOfChangePage {
 
   async getModificationId() {
     return this._modification_id;
+  }
+
+  async selectAreaOfChangeInModificationsPage(dataset: any) {
+    const commonItemsPage = new CommonItemsPage(this.page);
+    for (const key in dataset) {
+      if (Object.hasOwn(dataset, key)) {
+        if (key === 'area_of_change_dropdown' || key === 'specific_change_dropdown') {
+          await commonItemsPage.fillUIComponent(dataset, key, this);
+        }
+      }
+    }
+    const saveAndContinueButton = commonItemsPage.buttonTextData['Select_Area_Of_Change_Page']['Save_Continue'];
+    await commonItemsPage.govUkButton
+      .getByText(saveAndContinueButton, { exact: true })
+      .or(commonItemsPage.genericButton.getByText(saveAndContinueButton, { exact: true }))
+      .first()
+      .click();
   }
 }

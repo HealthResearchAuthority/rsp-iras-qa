@@ -1,6 +1,7 @@
 import { Locator, Page, expect } from '@playwright/test';
-import * as affectedOrganisationQuestionsPageTestData from '../../../../../resources/test_data/iras/make_changes/modifications/change_planned_end_date/affected_organisation_questions_data.json';
+import * as affectedOrganisationQuestionsPageTestData from '../../../../../resources/test_data/iras/make_changes/modifications/applicabilityScreens/affected_organisation_questions_data.json';
 import * as linkTextData from '../../../../../resources/test_data/common/link_text_data.json';
+import CommonItemsPage from '../../../../Common/CommonItemsPage';
 
 //Declare Page Objects
 export default class AffectedOrganisationQuestionsPage {
@@ -99,5 +100,22 @@ export default class AffectedOrganisationQuestionsPage {
     await expect(this.pageHeading).toBeVisible();
     const currentUrl = this.page.url();
     expect(currentUrl).toContain('affecting-organisations');
+  }
+
+  async fillAffectedOrganisationQuestions(dataset: any) {
+    const commonItemsPage = new CommonItemsPage(this.page);
+    for (const key in dataset) {
+      if (Object.hasOwn(dataset, key)) {
+        if (
+          key === 'where_organisation_change_affect_nhs_question_checkbox' ||
+          key === 'where_organisation_change_affect_non_nhs_question_checkbox' ||
+          key === 'will_some_or_all_organisations_be_affected_question_radio' ||
+          key === 'will_nhs_hsc_organisations_require_additional_resources_question_radio'
+        ) {
+          await commonItemsPage.fillUIComponent(dataset, key, this);
+        }
+      }
+    }
+    await commonItemsPage.clickButton('Modifications_Page', 'Save_Continue');
   }
 }

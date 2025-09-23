@@ -14,7 +14,7 @@ Then(
     );
     await expect(
       affectedOrganisationSelectionPage.page.getByText(
-        modificationsCommonPage.modificationsCommonPagePageTestData.Label_Texts.remove_this_change_label
+        modificationsCommonPage.modificationsCommonPageTestData.Label_Texts.remove_this_change_label
       )
     ).toBeVisible();
   }
