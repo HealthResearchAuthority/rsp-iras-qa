@@ -763,6 +763,7 @@ export default class CommonItemsPage {
     let dataFound = false;
     while (!dataFound) {
       const rowCount = await this.tableRows.count();
+      // since first row is header, starting from 1;
       for (let i = 1; i < rowCount; i++) {
         const columns = this.tableRows.nth(i).getByRole('cell');
         const firstName = confirmStringNotNull(await columns.nth(0).textContent());
@@ -773,6 +774,7 @@ export default class CommonItemsPage {
       if ((await this.next_button.isVisible()) && !(await this.next_button.isDisabled())) {
         await this.next_button.click();
         await this.page.waitForLoadState('domcontentloaded');
+        await this.page.waitForTimeout(1000);
       } else {
         dataFound = true;
       }
