@@ -51,7 +51,7 @@ Feature: Create Amendment - Project Documents Modifications
       | Protocol_Non_Substantial_Changes             |
       | Translations_Addition_Of_Translated_Versions |
 
-  @rsp-3876 @ValidateDocumentUploadAndReviewForModificationsPage @KNOWN_DEFECT_RSP-4801_4844_4920_4921
+  @rsp-3876 @4684 @ValidateDocumentUploadAndReviewForModificationsPage @KNOWN_DEFECT_RSP-4801_4844_4920_4921
   Scenario Outline: Validate the user is able to upload and review documents for modifications
     And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
     And I capture the page screenshot
@@ -120,6 +120,54 @@ Feature: Create Amendment - Project Documents Modifications
       | Post_Trial_Information_For_Participants      | Multiple_Files        | GIF_File                  |
       | Protocol_Non_Substantial_Changes             | Multiple_Files        | GIF_File                  |
       | Translations_Addition_Of_Translated_Versions | Multiple_Files        | GIF_File                  |
+
+  # The acceptable video files are: .mp4, .mov, .avi, .mkv, .wmv, .mpeg/.mpg, .webm
+  # All files must have a max limit of 100MB>>validate this (positive and negative flows )
+  # single video file
+  # multiple video files
+
+  @4684 @ValidateDocumentUploadAndReviewForModificationsPage @KNOWN_DEFECT_RSP-4801_4844_4920_4921
+  Scenario Outline: Validate the user is able to upload and review documents for modifications
+    And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+    Then I can see the add documents for '<Specific_Change>' page
+    And I capture the page screenshot
+    Then I upload '<Document_Upload_Files>' documents
+    And I capture the page screenshot
+    # When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    # Then I can see an error message with instructions on how to proceed: 'The selected file must be a [list of video file types]’.
+
+    Examples:
+      | Specific_Change                    | Document_Upload_Files_Invalid |
+      | Correction_Of_Typographical_Errors | PNG_File                      |
+      | Correction_Of_Typographical_Errors | GIF_File                      |
+      | Correction_Of_Typographical_Errors | BMP_File                      |
+      | Correction_Of_Typographical_Errors | SVG_File                      |
+      | Correction_Of_Typographical_Errors | JPG_File                      |
+      | Correction_Of_Typographical_Errors | JPEG_File                     |
+      | Correction_Of_Typographical_Errors | DOC_File                      |
+      | Correction_Of_Typographical_Errors | DOCX_File                     |
+      | Correction_Of_Typographical_Errors | DOT_File                      |
+      | Correction_Of_Typographical_Errors | DOTX_File                     |
+      | Correction_Of_Typographical_Errors | XLS_File                      |
+      | Correction_Of_Typographical_Errors | XLSX_File                     |
+
+
+  # The acceptable video files are: .mp4, .mov, .avi, .mkv, .wmv, .mpeg/.mpg, .webm
+  # All files must have a max limit of 100MB
+
+  # invalid video file type .flv – Flash Video (used by Adobe Flash Player; now largely obsolete)
+  # .f4v – Flash MP4 video format (similar to .flv but based on MP4)
+  # .3gp / .3g2 – Mobile video formats used on older phones
+  # .mts / .m2ts – AVCHD format used by digital camcorders
+  # .vob – DVD Video Object file (used in DVD media)
+  # .ogv / .ogg – Ogg video format (open-source, used in some web applications)
+  # .rm / .rmvb – RealMedia formats (used by RealPlayer; now outdated)
+  # .divx / .xvid – Video formats based on MPEG-4 Part 2 (used for high-quality compression)
+  # .mxf – Material Exchange Format (used in professional video production)
+  # .asf – Advanced Systems Format (used by Windows Media)
+  # .ts – Transport Stream (used for broadcasting and streaming)
 
   @rsp-3876 @ValidateDocumentUploadModificationsPageErrprMessages @KNOWN_DEFECT_RSP-4801_4920
   Scenario Outline: Validate the user is able to see error messages for invalid actions on upload documents for modifications

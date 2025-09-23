@@ -60,3 +60,25 @@ Then(
     }
   }
 );
+
+Then(
+  'I modify the current changes with {string} for the created modification',
+  async ({ commonItemsPage, modificationsCommonPage, selectAreaOfChangePage }, datasetName) => {
+    const changesDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName];
+    for (const changeName of Object.keys(changesDataset)) {
+      // Click Change link agaist every changeName
+      //validate the review changes page for the changeName
+      const changeDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName][changeName];
+      await selectAreaOfChangePage.selectAreaOfChangeInModificationsPage(changeDataset);
+      await modificationsCommonPage.createChangeModification(changeName, changeDataset);
+      await commonItemsPage.clickButton('Modifications_Details_Page', 'Add_Another_Change');
+    }
+  }
+);
+
+//  And I can see the review changes planned end date page
+//     And I capture the page screenshot
+//     Then I validate all field values on review modifications page using '<Planned_End_Date>' , '<Organisation_Change_Affect>' and '<Affected_Org_Questions>'
+//     When I click the change link '<Change_Field>' on review changes planned end date page
+//     Then I can see the 'Planned_End_Date' page for modifications
+//     And I capture the page screenshot

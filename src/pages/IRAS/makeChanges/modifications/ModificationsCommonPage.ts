@@ -62,6 +62,7 @@ export default class ModificationsCommonPage {
       await new CommonItemsPage(this.page).clickButton('Modifications_Page', 'Save_Continue');
       return;
     }
+    // else if (changeName.toLowerCase().includes('project_documents'))
     throw new Error(`${changeName} is not a valid option`);
   }
 
