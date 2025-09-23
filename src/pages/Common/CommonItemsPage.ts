@@ -209,7 +209,44 @@ export default class CommonItemsPage {
     this.advanced_filter_chevron = this.page.getByRole('button', {
       name: this.commonTestData.advanced_filter_label,
     });
+    this.result_count = this.advanced_filter_chevron.getByText(this.commonTestData.result_count_heading);
+    this.no_results_heading = this.page
+      .getByRole('heading')
+      .getByText(this.commonTestData.no_results_heading, { exact: true });
+    this.no_matching_search_result_header_label = this.page.getByRole('heading');
+    this.no_matching_search_result_sub_header_label = this.page.getByRole('paragraph');
+    this.no_matching_search_result_body_one_label =
+      this.no_matching_search_result_body_two_label =
+      this.no_matching_search_result_body_three_label =
+      this.no_matching_search_result_body_four_label =
+        this.page.getByRole('listitem');
+    this.no_matching_search_result_count_label = this.page.getByRole('heading');
+    this.active_filters_list = this.page
+      .getByRole('heading', {
+        name: this.commonTestData.active_filters_label,
+        exact: true,
+      })
+      .locator('..')
+      .getByRole('list')
+      .getByRole('listitem')
+      .getByRole('link');
+    this.clear_all_filters_link = this.page.getByRole('link', {
+      name: this.commonTestData.clear_all_filters_label,
+      exact: true,
+    });
+    this.no_results_guidance_text = this.page
+      .getByRole('paragraph')
+      .getByText(this.commonTestData.no_results_guidance_text, {
+        exact: true,
+      });
+    this.no_results_bullet_points = this.no_results_guidance_text.locator('..').getByRole('listitem');
+    this.apply_filters_button = this.page
+      .getByRole('button')
+      .getByText(this.buttonTextData.Search_Modifications_Page.Apply_Filters, {
+        exact: true,
+      });
     this.advanced_filter_active_filters_label = this.page.getByRole('list');
+    this.upload_files_input = this.page.locator('input[type="file"]');
     this.search_results_count = this.page.locator('.search-filter-panel__count');
     this.advanced_filter_panel = this.page.getByTestId('filter-panel');
     this.advanced_filter_headings = this.advanced_filter_panel.getByRole('heading');

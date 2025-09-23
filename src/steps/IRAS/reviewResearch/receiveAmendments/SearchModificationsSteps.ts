@@ -53,7 +53,7 @@ Then(
     const dataset = searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[datasetName];
     for (const key in dataset) {
       if (Object.hasOwn(dataset, key)) {
-        await expect(searchModificationsPage[key].getByText(dataset[key])).toBeVisible();
+        await expect.soft(searchModificationsPage[key].getByText(dataset[key])).toBeVisible();
       }
     }
   }
@@ -67,23 +67,29 @@ Then(
       if (Object.hasOwn(dataset, key)) {
         if (key.endsWith('_checkbox')) {
           const hintLabel = await searchModificationsPage.getHintLabel(dataset, key);
-          expect(confirmStringNotNull(await searchModificationsPage[key + '_selected_hint_label'].textContent())).toBe(
-            hintLabel
-          );
-          expect(confirmStringNotNull(await searchModificationsPage[key + '_hint_label'].textContent())).toBe(
-            searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page
-              .Advanced_Filters_Hint_Labels[key + '_hint_label']
-          );
+          expect
+            .soft(confirmStringNotNull(await searchModificationsPage[key + '_selected_hint_label'].textContent()))
+            .toBe(hintLabel);
+          expect
+            .soft(confirmStringNotNull(await searchModificationsPage[key + '_hint_label'].textContent()))
+            .toBe(
+              searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page
+                .Advanced_Filters_Hint_Labels[key + '_hint_label']
+            );
         } else if (key.startsWith('date_') && key.endsWith('_from_day_text')) {
-          expect(await searchModificationsPage.date_submitted_from_date_help_text.textContent()).toBe(
-            searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page
-              .date_submitted_from_date_help_text
-          );
+          expect
+            .soft(await searchModificationsPage.date_submitted_from_date_help_text.textContent())
+            .toBe(
+              searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page
+                .date_submitted_from_date_help_text
+            );
         } else if (key.startsWith('date_') && key.endsWith('_to_day_text')) {
-          expect(await searchModificationsPage.date_submitted_to_date_help_text.textContent()).toBe(
-            searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page
-              .date_submitted_to_date_help_text
-          );
+          expect
+            .soft(await searchModificationsPage.date_submitted_to_date_help_text.textContent())
+            .toBe(
+              searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page
+                .date_submitted_to_date_help_text
+            );
         }
       }
     }
@@ -107,7 +113,7 @@ Then(
   async ({ commonItemsPage, searchModificationsPage }) => {
     const expectedResultCountLabel = await searchModificationsPage.getExpectedResultsCountLabel(commonItemsPage);
     const actualResultCountLabel = await searchModificationsPage.getActualResultsCountLabel(commonItemsPage);
-    expect(expectedResultCountLabel).toEqual(actualResultCountLabel);
+    expect.soft(expectedResultCountLabel).toEqual(actualResultCountLabel);
   }
 );
 
@@ -130,13 +136,13 @@ Then(
       commonItemsPage: CommonItemsPage
     ) => {
       const filteredResults = await commonItemsPage.filterResults(searchResults, searchTerms);
-      expect(filteredResults).toEqual(searchResults);
+      expect.soft(filteredResults).toEqual(searchResults);
       const validatedResults = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
         searchResults,
         searchTerms
       );
-      expect(validatedResults).toBeTruthy();
-      expect(searchResults).toHaveLength(validatedResults.length);
+      expect.soft(validatedResults).toBeTruthy();
+      expect.soft(searchResults).toHaveLength(validatedResults.length);
     };
 
     const validateSingleFieldMatch = async (
@@ -147,7 +153,7 @@ Then(
     ) => {
       const values = confirmArrayNotNull(modificationsList.get(fieldKey));
       const match = await commonItemsPage.validateSearchResults(values, searchTerm);
-      expect(match).toBeTruthy();
+      expect.soft(match).toBeTruthy();
     };
 
     const validateMultiWordFieldMatch = async (
@@ -159,8 +165,8 @@ Then(
       const values = confirmArrayNotNull(modificationsList.get(fieldKey));
       const terms = await commonItemsPage.splitSearchTerm(searchTerm);
       const match = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(values, terms);
-      expect(match).toBeTruthy();
-      expect(values).toHaveLength(match.length);
+      expect.soft(match).toBeTruthy();
+      expect.soft(values).toHaveLength(match.length);
     };
 
     const validateFilterMatch = async (
@@ -171,7 +177,7 @@ Then(
     ) => {
       const values = confirmArrayNotNull(modificationsList.get(fieldKey));
       const isValid = await commonItemsPage.areSearchResultsValid(values, allowedValues);
-      expect(isValid).toBeTruthy();
+      expect.soft(isValid).toBeTruthy();
     };
 
     if (searchResults.length !== 0) {
@@ -225,17 +231,17 @@ Then(
     await searchModificationsPage.page.waitForTimeout(2000);
     const sponsorOrganisationNameListActual =
       await searchModificationsPage.sponsor_organisation_suggestion_list_labels.allTextContents();
-    expect(sponsorOrganisationNameListActual).toEqual(sponsorOrganisationNameListExpected);
+    expect.soft(sponsorOrganisationNameListActual).toEqual(sponsorOrganisationNameListExpected);
     const suggestionsHeaderLabelActual = await searchModificationsPage.sponsor_organisation_suggestion_listbox
       .first()
       .getAttribute('data-before-suggestions');
     const suggestionsHeaderLabelExpected = suggestionHeadersDatasetName.suggestion_header;
-    expect(suggestionsHeaderLabelActual).toEqual(suggestionsHeaderLabelExpected);
+    expect.soft(suggestionsHeaderLabelActual).toEqual(suggestionsHeaderLabelExpected);
     const suggestionsFooterLabelActual = await searchModificationsPage.sponsor_organisation_suggestion_listbox
       .first()
       .getAttribute('data-after-suggestions');
     const suggestionsFooterLabelExpected = suggestionHeadersDatasetName.suggestion_footer;
-    expect(suggestionsFooterLabelActual).toEqual(suggestionsFooterLabelExpected);
+    expect.soft(suggestionsFooterLabelActual).toEqual(suggestionsFooterLabelExpected);
   }
 );
 
@@ -252,7 +258,7 @@ Then(
       .first()
       .textContent();
     const suggestionsHeaderLabelExpected = suggestionHeadersDatasetName.no_suggestion_found;
-    expect(noResultFoundSuggestionActual).toEqual(suggestionsHeaderLabelExpected);
+    expect.soft(noResultFoundSuggestionActual).toEqual(suggestionsHeaderLabelExpected);
   }
 );
 
@@ -269,7 +275,7 @@ Then(
       .first()
       .getAttribute('data-before-suggestions');
     const suggestionsHeaderLabelExpected = suggestionHeadersDatasetName.suggestion_footer;
-    expect(continueEnteringSuggestionActual).toEqual(suggestionsHeaderLabelExpected);
+    expect.soft(continueEnteringSuggestionActual).toEqual(suggestionsHeaderLabelExpected);
   }
 );
 
@@ -290,12 +296,12 @@ Then(
     const sponsorOrganisationNameListActualWithSpaces =
       await searchModificationsPage.sponsor_organisation_jsdisabled_search_results_labels.allTextContents();
     const sponsorOrganisationNameListActual = sponsorOrganisationNameListActualWithSpaces.map((str) => str.trim());
-    expect(sponsorOrganisationNameListActual).toEqual(sponsorOrganisationNameListExpected);
+    expect.soft(sponsorOrganisationNameListActual).toEqual(sponsorOrganisationNameListExpected);
     const searchResultHeaderHintLabelActual = confirmStringNotNull(
       await searchModificationsPage.sponsor_organisation_jsdisabled_result_hint_label.textContent()
     ).trim();
     const searchResultHeaderHintLabelExpected = `${searchHintDataset.search_hint_header_prefix} '${dataset['sponsor_organisation_text']}'`;
-    expect(searchResultHeaderHintLabelActual).toEqual(searchResultHeaderHintLabelExpected);
+    expect.soft(searchResultHeaderHintLabelActual).toEqual(searchResultHeaderHintLabelExpected);
     if (totalMatchingSponsorOrganisations > 5) {
       const searchResultFooterHintLabelActual = confirmStringNotNull(
         await searchModificationsPage.sponsor_organisation_jsdisabled_narrow_down_label.textContent()
@@ -319,7 +325,7 @@ Then(
       await searchModificationsPage.sponsor_organisation_jsdisabled_no_suggestions_label.textContent()
     ).trim();
     const noResultFoundLabelExpected = `${searchHintDataset.no_suggestion_found} ${dataset['sponsor_organisation_text']}`;
-    expect(noResultFoundLabelActual).toEqual(noResultFoundLabelExpected);
+    expect.soft(noResultFoundLabelActual).toEqual(noResultFoundLabelExpected);
   }
 );
 
@@ -336,30 +342,32 @@ Then(
 Then(
   'The search modifications page returns to its original empty state with no results displayed',
   async ({ commonItemsPage, searchModificationsPage }) => {
-    await expect(searchModificationsPage.page_heading).toBeVisible();
-    await expect(searchModificationsPage.page_guidance_text).toBeVisible();
-    await expect(commonItemsPage.advanced_filter_chevron).toBeVisible();
-    await expect(searchModificationsPage.results_table).not.toBeVisible();
-    await expect(commonItemsPage.search_no_results_container).not.toBeVisible();
+    await expect.soft(searchModificationsPage.page_heading).toBeVisible();
+    await expect.soft(searchModificationsPage.page_guidance_text).toBeVisible();
+    await expect.soft(commonItemsPage.advanced_filter_chevron).toBeVisible();
+    await expect.soft(searchModificationsPage.results_table).not.toBeVisible();
+    await expect.soft(commonItemsPage.search_no_results_container).not.toBeVisible();
   }
 );
 
 Then(
   'the search button appears with a green background in the sponsor Organisation filter',
   async ({ searchModificationsPage, commonItemsPage }) => {
-    expect(
-      await searchModificationsPage.sponsor_organisation_jsdisabled_search_button.evaluate(
-        (e: any) => getComputedStyle(e).backgroundColor
+    expect
+      .soft(
+        await searchModificationsPage.sponsor_organisation_jsdisabled_search_button.evaluate(
+          (e: any) => getComputedStyle(e).backgroundColor
+        )
       )
-    ).toBe(commonItemsPage.commonTestData.rgb_green_color);
+      .toBe(commonItemsPage.commonTestData.rgb_green_color);
   }
 );
 
 Then(
   'I can now see a table of search results for modifications received for approval',
   async ({ searchModificationsPage, commonItemsPage }) => {
-    await expect(searchModificationsPage.results_table).toBeVisible();
-    expect(await commonItemsPage.tableBodyRows.count()).toBeGreaterThan(0);
+    await expect.soft(searchModificationsPage.results_table).toBeVisible();
+    expect.soft(await commonItemsPage.tableBodyRows.count()).toBeGreaterThan(0);
   }
 );
 

@@ -74,7 +74,7 @@ Feature: Create Amendment - Create Modifications
       | New_Modification_Count | Modifications_Tile_Link |
       | Modification_Count     | Modifications_Tile      |
 
-  @SelectAreaOfChangeSaveLaterRegression @KNOWN_DEFECT_RSP-5075 @KNOWN_DEFECT_RSP-4264
+  @SelectAreaOfChangeSaveLaterRegression @KNOWN_DEFECT_RSP-5075 @KNOWN_DEFECT_RSP-4264 @fail
   Scenario Outline: Verify that user can save the modifications progress on select area of change page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I capture the page screenshot

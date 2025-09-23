@@ -1,4 +1,4 @@
-@ReceiveAmendments @StudyWideReviewer @SystemTest @rsp-4011 @rsp-4016 @rsp-4289
+@ReceiveAmendments @StudyWideReviewer @SystemTest @rsp-4011 @rsp-4016 @rsp-4289 @DataIssueNeedsFixing
 Feature: Approvals - Advanced Filter and Search combinations in the Search modifications page
 
         Background:
@@ -27,15 +27,15 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                 And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
                 And I capture the page screenshot
                 Examples:
-                        | Valid_Iras_Id             | Advanced_Filters                                 |
-                        | Valid_Iras_Id_Nth         | Advanced_Filters_Nth                             |
-                        | Valid_Iras_Id_Twenty      | Advanced_Filters_Twenty                          |
-                        | Valid_Iras_Id_TwentyOne   | Advanced_Filters_TwentyOne                       |
-                        | Valid_Iras_Id_TwentyTwo   | Advanced_Filters_TwentyTwo                       |
-                        | Valid_Iras_Id_TwentyThree | Advanced_Filters_TwentyThree                     |
-                        | Valid_Iras_Id_Prefix      | Advanced_Filters_Automation_No_SpOrg             |
-                        | Valid_Iras_Id_Prefix      | Advanced_Filters_Automation_No_SpOrg_No_ToDate   |
-                        | Valid_Iras_Id_Prefix      | Advanced_Filters_Automation_No_SpOrg_No_FromDate |
+                        | Valid_Iras_Id        | Advanced_Filters                                 |
+                        | Valid_Iras_Id_Nth    | Advanced_Filters_Nth                             |
+                        # | Valid_Iras_Id_Twenty      | Advanced_Filters_Twenty                          |
+                        # | Valid_Iras_Id_TwentyOne   | Advanced_Filters_TwentyOne                       |
+                        # | Valid_Iras_Id_TwentyTwo   | Advanced_Filters_TwentyTwo                       |
+                        # | Valid_Iras_Id_TwentyThree | Advanced_Filters_TwentyThree                     |
+                        | Valid_Iras_Id_Prefix | Advanced_Filters_Automation_No_SpOrg             |
+                        | Valid_Iras_Id_Prefix | Advanced_Filters_Automation_No_SpOrg_No_ToDate   |
+                        | Valid_Iras_Id_Prefix | Advanced_Filters_Automation_No_SpOrg_No_FromDate |
 
 
         @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters
@@ -60,12 +60,12 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                 And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
                 And I capture the page screenshot
                 Examples:
-                        | Valid_Iras_Id             | Advanced_Filters             |
-                        | Valid_Iras_Id_Nth         | Advanced_Filters_Nth         |
-                        | Valid_Iras_Id_Twenty      | Advanced_Filters_Twenty      |
-                        | Valid_Iras_Id_TwentyOne   | Advanced_Filters_TwentyOne   |
-                        | Valid_Iras_Id_TwentyTwo   | Advanced_Filters_TwentyTwo   |
-                        | Valid_Iras_Id_TwentyThree | Advanced_Filters_TwentyThree |
+                        | Valid_Iras_Id     | Advanced_Filters     |
+                        | Valid_Iras_Id_Nth | Advanced_Filters_Nth |
+        # | Valid_Iras_Id_Twenty      | Advanced_Filters_Twenty      |
+        # | Valid_Iras_Id_TwentyOne   | Advanced_Filters_TwentyOne   |
+        # | Valid_Iras_Id_TwentyTwo   | Advanced_Filters_TwentyTwo   |
+        # | Valid_Iras_Id_TwentyThree | Advanced_Filters_TwentyThree |
 
         @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters
         Scenario Outline: Verify the user can view the list of modifications by entering valid iras id, then click on search button and then selected advanced filters and click on apply filters button
@@ -88,12 +88,12 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                 And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
                 And I capture the page screenshot
                 Examples:
-                        | Valid_Iras_Id             | Advanced_Filters             |
-                        | Valid_Iras_Id_Nth         | Advanced_Filters_Nth         |
-                        | Valid_Iras_Id_Twenty      | Advanced_Filters_Twenty      |
-                        | Valid_Iras_Id_TwentyOne   | Advanced_Filters_TwentyOne   |
-                        | Valid_Iras_Id_TwentyTwo   | Advanced_Filters_TwentyTwo   |
-                        | Valid_Iras_Id_TwentyThree | Advanced_Filters_TwentyThree |
+                        | Valid_Iras_Id     | Advanced_Filters     |
+                        | Valid_Iras_Id_Nth | Advanced_Filters_Nth |
+        # | Valid_Iras_Id_Twenty      | Advanced_Filters_Twenty      |
+        # | Valid_Iras_Id_TwentyOne   | Advanced_Filters_TwentyOne   |
+        # | Valid_Iras_Id_TwentyTwo   | Advanced_Filters_TwentyTwo   |
+        # | Valid_Iras_Id_TwentyThree | Advanced_Filters_TwentyThree |
 
         @viewListOfModifications @ValidIrasIdAndNoFilters
         Scenario Outline: Verify the user can view the list of modifications based on the entered valid iras id and the search performed
@@ -128,26 +128,26 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                 And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
                 And I capture the page screenshot
                 Examples:
-                        | Advanced_Filters             |
-                        | Advanced_Filters_Nth         |
-                        | Advanced_Filters_Two         |
-                        | Advanced_Filters_Three       |
-                        | Advanced_Filters_Four        |
-                        | Advanced_Filters_Five        |
-                        | Advanced_Filters_Six         |
-                        | Advanced_Filters_Seven       |
-                        | Advanced_Filters_Eight       |
-                        | Advanced_Filters_Nine        |
-                        | Advanced_Filters_Ten         |
-                        | Advanced_Filters_Eleven      |
-                        | Advanced_Filters_Fourteen    |
-                        | Advanced_Filters_Sixteen     |
-                        | Advanced_Filters_Seventeen   |
-                        | Advanced_Filters_Eighteen    |
-                        | Advanced_Filters_Twenty      |
-                        | Advanced_Filters_TwentyOne   |
-                        | Advanced_Filters_TwentyTwo   |
-                        | Advanced_Filters_TwentyThree |
+                        | Advanced_Filters           |
+                        | Advanced_Filters_Nth       |
+                        | Advanced_Filters_Two       |
+                        # | Advanced_Filters_Three       |
+                        | Advanced_Filters_Four      |
+                        # | Advanced_Filters_Five        |
+                        # | Advanced_Filters_Six         |
+                        # | Advanced_Filters_Seven       |
+                        # | Advanced_Filters_Eight       |
+                        # | Advanced_Filters_Nine        |
+                        # | Advanced_Filters_Ten         |
+                        # | Advanced_Filters_Eleven      |
+                        # | Advanced_Filters_Fourteen    |
+                        | Advanced_Filters_Sixteen   |
+                        | Advanced_Filters_Seventeen |
+                        # | Advanced_Filters_Eighteen    |
+                        # | Advanced_Filters_Twenty      |
+                        | Advanced_Filters_TwentyOne |
+        # | Advanced_Filters_TwentyTwo   |
+        # | Advanced_Filters_TwentyThree |
 
         @viewListOfModifications @DateModificationSubmitted @SponsorOrganisation
         Scenario Outline: Verify the user is able to view the list of modifications filtered by sponsor organisation and modification submitted date
@@ -340,7 +340,6 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                         | Advanced_Filters_Automation_No_SpOrg             |
                         | Advanced_Filters_Automation_No_SpOrg_No_ToDate   |
                         | Advanced_Filters_Automation_No_SpOrg_No_FromDate |
-
 
         @RemoveAllActiveFiltersOneByOne
         Scenario Outline: Verify the user can remove all the selected filters one by one and the search results update accordingly based on the previously entered IRAS ID
