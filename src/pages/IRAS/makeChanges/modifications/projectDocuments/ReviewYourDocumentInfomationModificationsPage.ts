@@ -1,5 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
-import * as reviewYourDocumentInfomationModificationsPageTestData from '../../../../../resources/test_data/iras/make_changes/modifications/change_planned_end_date/review_your_document_information_modifications_data.json';
+import * as reviewYourDocumentInfomationModificationsPageTestData from '../../../../../resources/test_data/iras/make_changes/modifications/projectDocuments/review_your_document_Information_modifications_data.json';
 import { confirmStringNotNull } from '../../../../../utils/UtilFunctions';
 import * as linkTextData from '../../../../../resources/test_data/common/link_text_data.json';
 
