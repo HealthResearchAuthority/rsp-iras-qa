@@ -31,9 +31,9 @@ export default class AddDocumentDetailsModificationsPage {
     this.rows = this.page.locator('tr');
     this.document_type_dropdown = this.page.getByTestId('Questions[0].SelectedOption');
     this.sponsor_document_version_text = this.page.getByTestId('IQA0601_Text');
-    this.sponsor_document_day_text = this.page.getByTestId('Questions[2].Day');
-    this.sponsor_document_month_dropdown = this.page.getByTestId('Questions[2].Month');
-    this.sponsor_document_year_text = this.page.getByTestId('Questions[2].Year');
+    this.sponsor_document_day_text = this.page.getByTestId('Questions[3].Day');
+    this.sponsor_document_month_dropdown = this.page.getByTestId('Questions[3].Month');
+    this.sponsor_document_year_text = this.page.getByTestId('Questions[3].Year');
     this.document_previously_approved_radio = this.page.locator('.govuk-radios__input');
     this.save_and_continue = this.page
       .getByRole('button')
