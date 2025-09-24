@@ -217,7 +217,7 @@ Feature: Create Amendment - Create Modifications
       | Changes                           |
       | Multiple_Changes_Planned_End_Date |
 
-@rsp-4364 @ValidateSponsorReferenceModifications
+  @rsp-4364 @ValidateSponsorReferenceModifications
   Scenario Outline: Verify user is able to fill sponsor reference details for the modification
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I capture the page screenshot
@@ -235,8 +235,8 @@ Feature: Create Amendment - Create Modifications
     Then I validate sponsor details are displayed with '<Sponsor_Reference_Page>'
 
     Examples:
-      | Changes                 | Sponsor_Reference_Page |
-      | Change_Planned_End_Date | Valid_Data_All_Fields  |
+      | Changes              | Sponsor_Reference_Page |
+      | Multiple_Changes_One | Valid_Data_All_Fields  |
 
   @rsp-4364 @ValidateSaveForLaterSponsorReferenceModifications
   Scenario Outline: Verify the save for later functionality for sponsor reference modifications page

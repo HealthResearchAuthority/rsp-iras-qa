@@ -72,6 +72,10 @@ Then(
             .Review_Uploaded_Documents_Modifications_Page.delete_label,
         })
         .click();
+      // Add code to validate the confirmation popup for delete document
+      // await expect(confirmationPage.confirmation_header_common_label.getByText(confirmation header)).toBeVisible();
+      // confirmationPage.confirmation_body_label.getByText(fileName)
+      // Click on delete confirmation button
       if (fileCount > 1) {
         const documentFoundCount = await expectedDocumentRow.count();
         expect(documentFoundCount).toBe(0);

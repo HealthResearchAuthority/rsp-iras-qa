@@ -60,5 +60,32 @@
       "which_organisation_change_affect_checkbox": ["Non-NHS/HSC"],
       "where_organisation_change_affect_non_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
     }
+  },
+  "Multiple_Changes_One": {
+    "Planned_End_Date_NHS_All_Yes":{
+      "area_of_change_dropdown": "Project design",
+      "specific_change_dropdown": "Change to planned end date",
+      "planned_project_end_day_text": "1",
+      "planned_project_end_month_dropdown": "January",
+      "planned_project_end_year_text": "2030",
+      "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
+      "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "will_some_or_all_organisations_be_affected_question_radio": "All",
+      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "Yes"
+    },
+    "Project_Documents_Typographical":{
+      "area_of_change_dropdown": "Project documents",
+      "specific_change_dropdown": "Correction of typographical errors",
+      "PNG_File": "src/resources/test_data/common/document_upload/PNG_File.png",
+      "Document_type_textbox": "",
+      "Document_title_textbox": "Test Document Title"
+    },
+    "Project_Documents_CRF/Other":{
+      "area_of_change_dropdown": "Project documents",
+      "specific_change_dropdown": "CRF/other study data records - Changes in the documentation used by the research team for recording study dat",
+      "PNG_File": "src/resources/test_data/common/document_upload/PNG_File.png",
+      "Document_type_textbox": "",
+      "Document_title_textbox": "Test Document Title"
+    }
   }
 }
