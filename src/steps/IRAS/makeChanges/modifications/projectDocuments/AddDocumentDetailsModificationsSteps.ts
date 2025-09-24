@@ -52,7 +52,6 @@ Then(
       if (displayedStatusesList[i] === status) {
         const documentName = displayedDocumentsList[i];
         await addDocumentDetailsModificationsPage.documentlink.getByText(documentName, { exact: true }).first().click();
-
         //Assertion to verify Add document details for specific document page
         await addDocumentDetailsForSpecificDocumentModificationsPage.assertOnAddDocumentsDetailsForSpecificModificationsPage(
           documentName
@@ -61,10 +60,16 @@ Then(
         const fileArray = Array.isArray(documentPath) ? documentPath : [documentPath];
         const trimmedDocumentName = documentName.replace('Add details for ', '').trim();
         const filePath = fileArray.find((path: string) => path.includes(trimmedDocumentName));
-        const fileSize = parseFloat((fs.statSync(filePath).size / 1024).toFixed(2)).toString();
+        const stats = fs.statSync(filePath);
+        let fileSize;
+        if (stats.size < 1024 * 1024) {
+          fileSize = parseFloat((stats.size / 1024).toFixed(2)).toString() + ' KB';
+        } else {
+          fileSize = parseFloat((stats.size / (1024 * 1024)).toFixed(2)).toString() + ' MB';
+        }
         const expectedDocumentRow = addDocumentDetailsForSpecificDocumentModificationsPage.table
-          .locator(addDocumentDetailsForSpecificDocumentModificationsPage.rows, { hasText: `${documentName}` })
-          .filter({ hasText: `${fileSize} KB` })
+          .locator(addDocumentDetailsForSpecificDocumentModificationsPage.rows, { hasText: `${trimmedDocumentName}` })
+          .filter({ hasText: fileSize })
           .filter({
             hasText:
               addDocumentDetailsForSpecificDocumentModificationsPage
@@ -72,7 +77,7 @@ Then(
                 .Add_Document_Details_For_Specific_Document_Modifications_Page.delete_label,
           });
         const documentFoundCount = await expectedDocumentRow.count();
-        expect(documentFoundCount).toBeGreaterThanOrEqual(0);
+        expect.soft(documentFoundCount).toBeGreaterThan(0);
       }
       //Enter document details
       for (const key in dataset) {

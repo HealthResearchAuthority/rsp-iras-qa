@@ -118,23 +118,4 @@ export default class AddDocumentDetailsModificationsPage {
     const noOfDocuments = await allDocumentsInformation.count();
     return noOfDocuments;
   }
-
-  async clickChangeLink(changeLink: string) {
-    switch (changeLink.trim().toLowerCase()) {
-      case 'document_type':
-        await this.document_type_change_link.click();
-        break;
-      case 'document_version':
-        await this.sponsor_document_version_change_link.click();
-        break;
-      case 'document_date':
-        await this.sponsor_document_date_change_link.click();
-        break;
-      case 'previously_approved':
-        await this.document_previously_approved_change_link.click();
-        break;
-      default:
-        throw new Error(`${changeLink} is not a valid option`);
-    }
-  }
 }

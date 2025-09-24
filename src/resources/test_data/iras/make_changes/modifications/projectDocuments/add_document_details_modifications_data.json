@@ -28,6 +28,14 @@
     "sponsor_document_year_text": "2030",
     "document_previously_approved_radio": "Yes"
   },
+  "New_Valid_Data_Fields": {
+    "document_type_dropdown": "Protocol / Clinical Investigation Plan",
+    "sponsor_document_version_text": "1.5",
+    "sponsor_document_day_text": "20",
+    "sponsor_document_month_dropdown": "January",
+    "sponsor_document_year_text": "2020",
+    "document_previously_approved_radio": "Yes"
+  },
   "New_Valid_Document_Date": {
     "sponsor_document_day_text": "12",
     "sponsor_document_month_dropdown": "March",
@@ -38,15 +46,6 @@
   },
   "New_Valid_Document_Version": {
     "sponsor_document_version_text": "1.2"
-  },
-  "New_Valid_Document_Day": {
-    "sponsor_document_day_text": "20"
-  },
-  "New_Valid_Document_Month": {
-    "sponsor_document_month_dropdown": "March"
-  },
-  "New_Valid_Document_Year": {
-    "sponsor_document_year_text": "2027"
   },
   "New_Full_Valid_Document_Date": {
     "sponsor_document_date_text": "12 March 2032"

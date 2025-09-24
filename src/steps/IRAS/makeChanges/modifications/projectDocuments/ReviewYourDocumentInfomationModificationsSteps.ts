@@ -1,8 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../../hooks/CustomFixtures';
 import { convertDate } from '../../../../../utils/UtilFunctions';
-//import { confirmStringNotNull, convertDate } from '../../../../../utils/UtilFunctions';
-//import { expect } from '@playwright/test';
 
 const { Then } = createBdd(test);
 
@@ -42,9 +40,9 @@ Then(
               dataset.sponsor_document_month_dropdown,
               dataset.sponsor_document_year_text
             );
-            expect(await reviewYourDocumentInformationModificationsPage.getSponsorDocumentDate()).toBe(
-              sponsorDateFormatted
-            );
+            expect
+              .soft(await reviewYourDocumentInformationModificationsPage.getSponsorDocumentDate())
+              .toBe(sponsorDateFormatted);
           } else {
             await commonItemsPage.validateUIComponentValues(
               dataset,
@@ -59,21 +57,41 @@ Then(
 );
 
 Then(
-  'I click on the change link next to {string} in the add document details for specific document page',
+  'I click on the {string} change link next to each document and click on save changes without making any change in the add document details for the uploaded documents page',
   async (
-    { addDocumentDetailsForSpecificDocumentModificationsPage, reviewYourDocumentInformationModificationsPage },
+    {
+      addDocumentDetailsForSpecificDocumentModificationsPage,
+      reviewYourDocumentInformationModificationsPage,
+      commonItemsPage,
+    },
     changeLink: string
   ) => {
     const noOfDocuments = await reviewYourDocumentInformationModificationsPage.getNumberOfDocuments();
     for (let i = 0; i < noOfDocuments; i++) {
-      await reviewYourDocumentInformationModificationsPage.clickChangeLink(changeLink);
+      switch (changeLink.trim().toLowerCase()) {
+        case 'document_type':
+          await reviewYourDocumentInformationModificationsPage.document_type_change_link.nth(i).click();
+          break;
+        case 'document_version':
+          await reviewYourDocumentInformationModificationsPage.sponsor_document_version_change_link.nth(i).click();
+          break;
+        case 'document_date':
+          await reviewYourDocumentInformationModificationsPage.sponsor_document_date_change_link.nth(i).click();
+          break;
+        case 'previously_approved':
+          await commonItemsPage.page.waitForTimeout(500);
+          await reviewYourDocumentInformationModificationsPage.document_previously_approved_change_link.nth(i).click();
+          break;
+        default:
+          throw new Error(`${changeLink} is not a valid option`);
+      }
       await addDocumentDetailsForSpecificDocumentModificationsPage.save_changes.click();
     }
   }
 );
 
 Then(
-  'I click on the document type change link next to each document and enter new {string} in the add document details for the uploaded documents',
+  'I click on the document type change link next to each document and enter new {string} in the add document details for the uploaded documents page',
   async (
     {
       addDocumentDetailsForSpecificDocumentModificationsPage,
@@ -86,7 +104,6 @@ Then(
       addDocumentDetailsForSpecificDocumentModificationsPage
         .addDocumentDetailsForSpecificDocumentModificationsPageTestData[datasetName];
     const noOfDocuments = await reviewYourDocumentInformationModificationsPage.getNumberOfDocuments();
-
     for (let i = 0; i < noOfDocuments; i++) {
       await reviewYourDocumentInformationModificationsPage.document_type_change_link.nth(i).click();
       for (const key in newDocumentType) {
@@ -102,14 +119,14 @@ Then(
       const newActualDocumentType = (
         await reviewYourDocumentInformationModificationsPage.document_type_dropdown.textContent()
       ).trim();
-      const updatedExpectedDocumentType = newDocumentType.document_type_dropdown;
-      expect(newActualDocumentType).toBe(updatedExpectedDocumentType);
+      const updatedExpectedDocumentType = await newDocumentType.document_type_dropdown;
+      expect.soft(newActualDocumentType).toBe(updatedExpectedDocumentType);
     }
   }
 );
 
 Then(
-  'I click on the document version change link next to each document and enter new {string} in the add document details for the uploaded documents',
+  'I click on the document version change link next to each document and enter new {string} in the add document details for the uploaded documents page',
   async (
     {
       addDocumentDetailsForSpecificDocumentModificationsPage,
@@ -122,7 +139,6 @@ Then(
       addDocumentDetailsForSpecificDocumentModificationsPage
         .addDocumentDetailsForSpecificDocumentModificationsPageTestData[datasetName];
     const noOfDocuments = await reviewYourDocumentInformationModificationsPage.getNumberOfDocuments();
-
     for (let i = 0; i < noOfDocuments; i++) {
       await reviewYourDocumentInformationModificationsPage.sponsor_document_version_change_link.nth(i).click();
       for (const key in newDocumentVersion) {
@@ -138,14 +154,14 @@ Then(
       const newActualDocumentVersion = (
         await reviewYourDocumentInformationModificationsPage.sponsor_document_version_text.textContent()
       ).trim();
-      const updatedExpectedDocumentVersion = newDocumentVersion.sponsor_document_version_text;
-      expect(newActualDocumentVersion).toBe(updatedExpectedDocumentVersion);
+      const updatedExpectedDocumentVersion = await newDocumentVersion.sponsor_document_version_text;
+      expect.soft(newActualDocumentVersion).toBe(updatedExpectedDocumentVersion);
     }
   }
 );
 
 Then(
-  'I click on the document previously approved option change link next to each document and enter new {string} in the add document details for the uploaded documents',
+  'I click on the document previously approved option change link next to each document and enter new {string} in the add document details for the uploaded documents page',
   async (
     {
       addDocumentDetailsForSpecificDocumentModificationsPage,
@@ -173,14 +189,16 @@ Then(
       const previouslyApprovedValueinUI = (
         await reviewYourDocumentInformationModificationsPage.document_previously_approved_radio.textContent()
       ).trim();
-      const expectedPreviouslyApprovedValue = newDocumentPreviouslyApprovedValue.document_previously_approved_radio;
-      expect(previouslyApprovedValueinUI).toBe(expectedPreviouslyApprovedValue);
+      await commonItemsPage.page.waitForTimeout(500);
+      const expectedPreviouslyApprovedValue =
+        await newDocumentPreviouslyApprovedValue.document_previously_approved_radio;
+      expect.soft(previouslyApprovedValueinUI).toBe(expectedPreviouslyApprovedValue);
     }
   }
 );
 
 Then(
-  'I click on the document date change link next to each document and enter new {string} and validate if {string} is displayed in the add document details for the uploaded documents',
+  'I click on the document date change link next to each document and enter new {string} and validate if {string} is displayed in the add document details for the uploaded documents page',
   async (
     {
       addDocumentDetailsForSpecificDocumentModificationsPage,
@@ -212,8 +230,8 @@ Then(
       const actualDocumentDate = (
         await reviewYourDocumentInformationModificationsPage.sponsor_document_date_text.textContent()
       ).trim();
-      const expectedDocumentDate = updatedDocumentDate.sponsor_document_date_text;
-      expect(actualDocumentDate).toBe(expectedDocumentDate);
+      const expectedDocumentDate = await updatedDocumentDate.sponsor_document_date_text;
+      expect.soft(actualDocumentDate).toBe(expectedDocumentDate);
     }
   }
 );
