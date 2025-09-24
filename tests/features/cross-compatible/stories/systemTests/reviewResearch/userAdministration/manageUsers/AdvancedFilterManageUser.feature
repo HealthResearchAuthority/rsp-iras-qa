@@ -289,8 +289,8 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
             | Advanced_Filter_Country_No_Review_Body_No_Role_Studywide_Reviewer   |
             | Advanced_Filter_Country_No_Review_Body_No_Role_Workflow_Coordinator |
 
-    @rsp-4381 @ActiveFilterCleareWhenMoveToDifferentPage 
-    Scenario Outline: verify that all active filters are automatically cleared when the user navigates away from the current page in mange user page
+    @rsp-4381 @AdvancedFiltersPersistOnPaginationWhenClearOnOutsidePageNavigation
+    Scenario Outline: Verify active filters persist during pagination and are automatically cleared when navigating away from mange user page
         And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
         And I select advanced filters in the manage users page using '<Advanced_Filters>'
         And I capture the page screenshot
@@ -363,7 +363,6 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
         And I capture the page screenshot
         When I click the 'Back' link on the 'User_Profile_Page'
         Then I can see the 'Manage_Users_Page'
-        And I capture the page screenshot
         And I capture the page screenshot
         Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Manage_Users_Page'
         And I capture the page screenshot

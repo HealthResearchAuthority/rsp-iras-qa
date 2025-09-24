@@ -325,13 +325,13 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
             | Date_Submitted        |
             | Days_Since_Submission |
 
-    @rsp-4381  @KNOWN-DEFECT-RSP-5045 @fail @ActiveFilterCleareWhenMoveToDifferentPage
-    Scenario Outline: verify that all active filters are automatically cleared when the user navigates away from the current page in modification tasklist page 
+    @rsp-4381  @KNOWN-DEFECT-RSP-5045 @AdvancedFiltersPersistOnPaginationWhenClearOnOutsidePageNavigation
+    Scenario Outline: Verify active filters persist during pagination and are automatically cleared when navigating away from modification tasklist page 
         And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
         And I open each of the modification tasklist filters
         And I capture the page screenshot
-        When I fill the modifications tasklist search and filter options with 'Date_From_Multi'
+        When I fill the 'my' modifications tasklist search and filter options with 'Date_From_Multi'
         And I capture the page screenshot
         And I click the 'Apply_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see active filters displayed
@@ -355,9 +355,9 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         And I capture the page screenshot
       
         Examples:
-            | Validation_Text | Navigation_Method       |
-            | Label_Texts     | clicking on page number |
-            | Label_Texts     | clicking on next link   |
+            | Validation_Text | Navigation_Method |
+            | Label_Texts     | page number       |
+            | Label_Texts     | next link         |
 
     # Need to integrate with modification creation process to have a fresh dataset for assignment
     # Test data currently has some modifications already assigned to SWR so cannot run repeatedly

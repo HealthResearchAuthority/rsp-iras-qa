@@ -211,8 +211,8 @@ Feature: Review Bodies - Advanced Filter and Search combinations in the Manage r
       | Advanced_Filters                     |
       | Advanced_Filter_All_Countries_Active |
 
-  @rsp-4381 @ActiveFilterCleareWhenMoveToDifferentPage 
-  Scenario: verify that all active filters are automatically cleared when the user navigates away from the current page in mange review body page
+  @rsp-4381 @AdvancedFiltersPersistOnPaginationWhenClearOnOutsidePageNavigation
+  Scenario: Verify active filters persist during pagination and are automatically cleared when navigating away from mange review body page
     And I click the 'Advanced_Filters' button on the 'Manage_Review_Bodies_Page'
     And I select advanced filters in the manage review bodies page using '<Advanced_Filters>'
     And I capture the page screenshot
