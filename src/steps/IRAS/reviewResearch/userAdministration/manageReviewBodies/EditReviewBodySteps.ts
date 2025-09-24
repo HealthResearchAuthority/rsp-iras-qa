@@ -29,7 +29,7 @@ When(
     const clearDataset = editReviewBodyPage.editReviewBodyPageData[datasetNameClear];
     await commonItemsPage.clearUIComponent(clearDataset, 'country_checkbox', editReviewBodyPage);
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         if (
           (datasetName.startsWith('Valid_') || datasetName.startsWith('Review_')) &&
           key == 'organisation_name_text'
@@ -51,7 +51,7 @@ When(
   async ({ editReviewBodyPage, commonItemsPage }, datasetName: string, fieldName: string) => {
     const dataset = editReviewBodyPage.editReviewBodyPageData.Edit_Review_Body[datasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         if (fieldName == 'Organisation_Name') {
           const orgNameLocator: Locator = editReviewBodyPage[key];
           const uniqueOrgNameValue = await generateTimeStampedValue(dataset[key], ' ');

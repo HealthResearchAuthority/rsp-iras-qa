@@ -36,85 +36,85 @@
       "description_text": ""
     },
     "Review_Body_HCRW_Data": {
-      "organisation_name_text": "QA Automation Health and Care Research Wales (HCRW)",
+      "organisation_name_text": "Health and Care Research Wales (HCRW)",
       "country_checkbox": ["Wales"],
       "email_address_text": "qaautohealthandcareresearch@wales.nhs.uk",
       "description_text": "Health and Care Research Wales promotes health and social care research in Wales to help improve and save lives."
     },
     "Review_Body_HSCNI_Data": {
-      "organisation_name_text": "QA Automation Health and Social Care Northern Ireland (HSCNI)",
+      "organisation_name_text": "Health and Social Care Northern Ireland (HSCNI)",
       "country_checkbox": ["Northern Ireland"],
       "email_address_text": "qaautomade.up@northerntrust.hscni.net",
       "description_text": "Health and Social Care is the publicly funded healthcare system in Northern Ireland. Although having been created separately to the National Health Service, it is nonetheless considered a part of the overall national health service in the United Kingdom."
     },
     "Review_Body_RandD_Data": {
-      "organisation_name_text": "QA Automation NHS/HSC Research & Development offices (R&D)",
+      "organisation_name_text": "NHS/HSC Research & Development offices (R&D)",
       "country_checkbox": ["England", "Wales"],
       "email_address_text": "qaautoinfo@rdforum.org.uk",
       "description_text": "The R&D department or office is responsible for the research management, support and leadership of all aspects of research across the Trust and performs a variety of roles and functions to drive and deliver clinical research in a supportive and safe environment."
     },
     "Review_Body_HRA_Data": {
-      "organisation_name_text": "QA Automation Health Research Authority (HRA)",
+      "organisation_name_text": "Health Research Authority (HRA)",
       "country_checkbox": ["England"],
       "email_address_text": "qaautohealthresearchauthority@hra.nhs.uk",
       "description_text": "The Health Research Authority (HRA) protects and promotes the interests of patients and the public in health research. HRA is an executive non-departmental public body, sponsored by the Department of Health and Social Care."
     },
     "Review_Body_NIPS_Data": {
-      "organisation_name_text": "QA Automation Northern Ireland Prison Service (NIPS)",
+      "organisation_name_text": "Northern Ireland Prison Service (NIPS)",
       "country_checkbox": ["Northern Ireland"],
       "email_address_text": "qaautoNI.PrisonService@justice-ni.gov.uk",
       "description_text": "The overall aim of the Northern Ireland Prison Service is to improve public safety by reducing the risk of re-offending through the management and rehabilitation of offenders in custody. Its main statutory duties are set out in the Prison Act (Northern Ireland) 1953."
     },
     "Review_Body_HFEA_Data": {
-      "organisation_name_text": "QA Automation Human Fertilisation and Embryology Authority (HFEA)",
+      "organisation_name_text": "Human Fertilisation and Embryology Authority (HFEA)",
       "country_checkbox": ["England"],
       "email_address_text": "qaautoenquiriesteam@hfea.gov.uk",
       "description_text": "The Human Fertilisation and Embryology Authority (HFEA) oversees the use of gametes and embryos in fertility treatment and research. It licenses fertility clinics and centres carrying out in vitro fertilisation (IVF), other assisted conception procedures and human embryo research."
     },
     "Review_Body_HMPPS_Data": {
-      "organisation_name_text": "QA Automation His Majesty’s Prison and Probation Service (HMPPS)",
+      "organisation_name_text": "His Majesty’s Prison and Probation Service (HMPPS)",
       "country_checkbox": ["England"],
       "email_address_text": "qaautoHMPPSPublicEnquiries@justice.gov.uk",
       "description_text": "We carry out sentences given by the courts, in custody and the community, and rehabilitate people in our care through education and employment."
     },
     "Review_Body_MODREC_Data": {
-      "organisation_name_text": "QA Automation Ministry of Defence Research Ethics Committee (MODREC)",
+      "organisation_name_text": "Ministry of Defence Research Ethics Committee (MODREC)",
       "country_checkbox": ["England"],
       "email_address_text": "qaautoDST-MODRECTeam@mod.gov.uk",
       "description_text": "The Ministry of Defence Research Ethics Committee (MODREC) ensures that all research involving human participants either undertaken, funded or sponsored by MOD meets nationally and internationally accepted ethical standards."
     },
     "Review_Body_HTA_Data": {
-      "organisation_name_text": "QA Automation Human Tissue Authority (HTA)",
+      "organisation_name_text": "Human Tissue Authority (HTA)",
       "country_checkbox": ["England"],
       "email_address_text": "qaautoenquiries@hta.gov.uk",
       "description_text": "The regulator of human tissue and organs, a non-departmental public body of the Department of Health and Social Care"
     },
     "Review_Body_SPS_Data": {
-      "organisation_name_text": "QA Automation Scottish Prison Service (SPS)",
+      "organisation_name_text": "Scottish Prison Service (SPS)",
       "country_checkbox": ["Scotland"],
       "email_address_text": "qaautospsnews@prisons.gov.scot",
       "description_text": "The Scottish Prison Service (SPS) is an Executive Agency of the Scottish Government. There are seventeen operational prisons located across Scotland: sixteen directly operated by SPS and one operated by a private sector operator under contract to SPS"
     },
     "Review_Body_MHRA_Data": {
-      "organisation_name_text": "QA Automation Medicines and Healthcare products Regulatory Agency (MHRA) Medicines",
+      "organisation_name_text": "Medicines and Healthcare products Regulatory Agency (MHRA) Medicines",
       "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
       "email_address_text": "qaautoinfo@mhra.gov.uk",
       "description_text": "The Medicines and Healthcare products Regulatory Agency regulates medicines, medical devices and blood components for transfusion in the UK. MHRA is an executive agency, sponsored by the Department of Health and Social Care."
     },
     "Review_Body_CAG_Data": {
-      "organisation_name_text": "QA Automation Confidentiality Advisory Group (CAG)",
+      "organisation_name_text": "Confidentiality Advisory Group (CAG)",
       "country_checkbox": ["England"],
       "email_address_text": "qaautocag@hra.nhs.uk",
       "description_text": "The Confidentiality Advisory Group (CAG) is an independent body which provides expert advice on the use of confidential patient information. This includes providing advice to us, the Health Research Authority (HRA) for research uses. It also provides advice to the Secretary of State for Health for non-research uses. The key purpose of CAG is to protect and promote the interests of patients and the public, while at the same time facilitating appropriate use of confidential patient information for purposes beyond direct patient care."
     },
     "Review_Body_ARSAC_Data": {
-      "organisation_name_text": "QA Automation Administration of Radioactive Substances Advisory Committee (ARSAC)",
+      "organisation_name_text": "Administration of Radioactive Substances Advisory Committee (ARSAC)",
       "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
       "email_address_text": "qaautoarsac@ukhsa.gov.uk",
       "description_text": "ARSAC advises the licensing authorities on applications from practitioners, employers and researchers who want to use radioactive substances on people. ARSAC works with the Department of Health and Social Care."
     },
     "Review_Body_NRSPCC_Data": {
-      "organisation_name_text": "QA Automation National Research Service Permissions Coordination Centre (NRS PCC)",
+      "organisation_name_text": "National Research Service Permissions Coordination Centre (NRSPCC)",
       "country_checkbox": ["Scotland"],
       "email_address_text": "qaautocommunications@nrs.org.uk",
       "description_text": "NHS Research Scotland promotes and supports excellence in clinical and translational research in Scotland so that patients can benefit from new and better treatments. Formed through a partnership of Scottish NHS Boards and the Chief Scientist Office (CSO) of Scottish Government, we work to ensure that NHS Scotland provides the best environment to support clinical research."

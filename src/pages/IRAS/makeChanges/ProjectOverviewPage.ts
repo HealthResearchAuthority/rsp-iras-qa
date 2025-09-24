@@ -1,5 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as projectOverviewPageTestData from '../../../resources/test_data/iras/make_changes/project_overview_page_data.json';
+import { confirmStringNotNull } from '../../../utils/UtilFunctions';
 
 //Declare Page Objects
 export default class ProjectOverviewPage {
@@ -37,6 +38,12 @@ export default class ProjectOverviewPage {
   readonly participating_nations: Locator;
   readonly nhs_hsc_organisations: Locator;
   readonly lead_nation: Locator;
+  readonly row_value_label: Locator;
+  readonly modification_id: Locator;
+  readonly modification_type: Locator;
+  readonly review_type: Locator;
+  readonly category: Locator;
+  readonly status: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -44,6 +51,7 @@ export default class ProjectOverviewPage {
     this.projectOverviewPageTestData = projectOverviewPageTestData;
 
     //Locators
+
     this.pageHeading = this.page
       .getByRole('heading')
       .getByText(this.projectOverviewPageTestData.Project_Overview_Page.heading);
@@ -53,7 +61,7 @@ export default class ProjectOverviewPage {
     this.project_details_heading = this.page
       .getByRole('heading')
       .getByText(this.projectOverviewPageTestData.Project_Overview_Page.project_details_heading);
-    this.project_short_title_label = this.page.locator('.govuk-caption-l');
+    this.project_short_title_label = this.page.locator('div[class="govuk-grid-row"] p').nth(1);
     this.information_alert_banner = this.page.getByRole('alert');
     this.modification_saved_success_message_header_text = this.page
       .getByTestId('govuk-notification-banner-title')
@@ -124,10 +132,39 @@ export default class ProjectOverviewPage {
     this.nhs_hsc_organisations = this.nhs_hsc_organisations_row.locator('..').locator('.govuk-summary-list__value');
     this.lead_nation_row = this.page.getByText(projectOverviewPageTestData.Project_Overview_Page.lead_nation);
     this.lead_nation = this.lead_nation_row.locator('..').locator('.govuk-summary-list__value');
+    this.row_value_label = this.page.locator('dd');
+    this.modification_id = this.page.getByRole('button', {
+      name: this.projectOverviewPageTestData.Label_Texts_Post_Approval.modification_id,
+      exact: true,
+    });
+    this.category = this.page.getByRole('button', {
+      name: this.projectOverviewPageTestData.Label_Texts_Post_Approval.category,
+      exact: true,
+    });
+    this.modification_type = this.page.getByRole('button', {
+      name: this.projectOverviewPageTestData.Label_Texts_Post_Approval.modification_type,
+      exact: true,
+    });
+    this.review_type = this.page.getByRole('button', {
+      name: this.projectOverviewPageTestData.Label_Texts_Post_Approval.review_type,
+      exact: true,
+    });
+    this.status = this.page.getByRole('button', {
+      name: this.projectOverviewPageTestData.Label_Texts_Post_Approval.status,
+      exact: true,
+    });
   }
 
   //Page Methods
   async assertOnProjectOverviewPage() {
     await expect(this.pageHeading).toBeVisible();
+  }
+
+  async gotoSpecificProjectPage() {
+    await this.page.goto(this.projectOverviewPageTestData.Modification_URL.URL);
+  }
+
+  async getStatus(row: any) {
+    return confirmStringNotNull(await row.getByRole('cell').nth(4).textContent());
   }
 }

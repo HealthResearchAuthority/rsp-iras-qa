@@ -1,6 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { test, expect } from '../../../../../hooks/CustomFixtures';
-import { generateUniqueEmail, generateUniqueValue, generatePhoneNumber } from '../../../../../utils/UtilFunctions';
+import { generateUniqueValue, generatePhoneNumber } from '../../../../../utils/UtilFunctions';
 import { Locator } from 'playwright/test';
 
 const { Then, When } = createBdd(test);
@@ -18,7 +18,7 @@ Then(
   async ({ commonItemsPage, editUserProfilePage }, datasetName: string) => {
     const dataset = editUserProfilePage.editUserProfilePageTestData[datasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         const labelVal = await commonItemsPage.getUiLabel(key, editUserProfilePage);
         expect(labelVal).toBe(dataset[key]);
       }
@@ -32,11 +32,7 @@ When(
     const dataset = editUserProfilePage.editUserProfilePageTestData[datasetName];
     let keyIndex = 1;
     let keyValue: any;
-    let uniqueEmail: any;
-    let uniqueTitle: any;
-    let uniqueJobTitle: any;
-    let uniqueTelephoneNumber: any;
-
+    const uniqueValues: Record<string, string> = {};
     if (fieldName.toLowerCase() == 'country' || fieldName.toLowerCase() == 'role') {
       const datasetNameClear: string = 'Edit_User_Profile_Page';
       const clearDataset = editUserProfilePage.editUserProfilePageTestData[datasetNameClear];
@@ -46,53 +42,47 @@ When(
       if (keyIndex == 1) {
         keyValue = dataset[key];
       }
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
-        if (key === 'email_address_text') {
-          const prefix = editUserProfilePage.editUserProfilePageTestData.Edit_User_Profile.email_address_prefix;
-          uniqueEmail = await generateUniqueEmail(dataset[key], prefix);
-          const locator: Locator = editUserProfilePage[key];
-          await locator.fill(uniqueEmail);
-        } else if (key == 'title_text') {
-          const prefix = dataset.title_text;
-          uniqueTitle = await generateUniqueValue('', prefix);
-          const locator: Locator = editUserProfilePage[key];
-          await locator.fill(uniqueTitle);
-        } else if (key == 'job_title_text') {
-          const prefix = dataset.job_title_text;
-          uniqueJobTitle = await generateUniqueValue('', prefix);
-          const locator: Locator = editUserProfilePage[key];
-          await locator.fill(uniqueJobTitle);
-        } else if (key == 'telephone_text') {
-          uniqueTelephoneNumber = await generatePhoneNumber();
-          const locator: Locator = editUserProfilePage[key];
-          await locator.fill(uniqueTelephoneNumber);
-        } else {
-          await commonItemsPage.fillUIComponent(dataset, key, editUserProfilePage);
+      if (Object.hasOwn(dataset, key)) {
+        const locator: Locator = editUserProfilePage[key];
+        switch (key) {
+          case 'title_text':
+          case 'first_name_text':
+          case 'last_name_text':
+          case 'organisation_text':
+          case 'job_title_text':
+            uniqueValues[key] = await generateUniqueValue('', dataset[key]);
+            await locator.fill(uniqueValues[key]);
+            break;
+
+          case 'telephone_text':
+            uniqueValues.telephone = await generatePhoneNumber();
+            await locator.fill(uniqueValues.telephone);
+            break;
+
+          default:
+            await commonItemsPage.fillUIComponent(dataset, key, editUserProfilePage);
         }
       }
       keyIndex++;
     }
     switch (fieldName.toLowerCase()) {
       case 'title':
-        await userProfilePage.setNewTitle(uniqueTitle);
+        await userProfilePage.setNewTitle(uniqueValues['title_text']);
         break;
       case 'first_name':
-        await userProfilePage.setNewFirstName(keyValue);
+        await userProfilePage.setNewFirstName(uniqueValues['first_name_text']);
         break;
       case 'last_name':
-        await userProfilePage.setNewLastName(keyValue);
-        break;
-      case 'email_address':
-        await userProfilePage.setNewEmail(uniqueEmail);
+        await userProfilePage.setNewLastName(uniqueValues['last_name_text']);
         break;
       case 'telephone':
-        await userProfilePage.setNewTelephone(uniqueTelephoneNumber);
+        await userProfilePage.setNewTelephone(uniqueValues.telephone);
         break;
       case 'organisation':
-        await userProfilePage.setNewOrganisation(keyValue);
+        await userProfilePage.setNewOrganisation(uniqueValues['organisation_text']);
         break;
       case 'job_title':
-        await userProfilePage.setNewJobTitle(uniqueJobTitle);
+        await userProfilePage.setNewJobTitle(uniqueValues['job_title_text']);
         break;
       case 'country':
         await userProfilePage.setNewCountries(keyValue);
@@ -183,21 +173,38 @@ Then(
       dataset['role_checkbox'].includes('Workflow co-ordinator') ||
       selectedCheckboxCount > 0
     ) {
-      await commonItemsPage.clearCheckboxes(dataset, ['country_checkbox'], commonItemsPage, editUserProfilePage);
-      await commonItemsPage.clearCheckboxesUserProfileReviewBody(dataset, editUserProfilePage);
-      await commonItemsPage.clearUIComponent(dataset, 'role_checkbox', editUserProfilePage);
+      await commonItemsPage.clearCheckboxesUserProfile(dataset, 'country_checkbox', editUserProfilePage);
+      await commonItemsPage.clearCheckboxesUserProfile(dataset, 'review_body_checkbox', editUserProfilePage);
+      await commonItemsPage.clearCheckboxesUserProfile(dataset, 'role_checkbox', editUserProfilePage);
     }
   }
 );
 
 When(
   'I can see that the {string} users data persists on the edit profile page',
-  async ({ createUserProfilePage, commonItemsPage, editUserProfilePage }, datasetName: string) => {
+  async ({ createUserProfilePage, editUserProfilePage }, datasetName: string) => {
     const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
+
+    const getFieldValue = async (key: string): Promise<string | boolean> => {
+      if (key === 'review_body_checkbox') {
+        return await createUserProfilePage.getSelectedCheckboxCreateUserReviewBody(dataset, createUserProfilePage);
+      }
+      return await createUserProfilePage.getSelectedValuesCreateUser(dataset, key, editUserProfilePage);
+    };
+
+    const assertFieldValue = (key: string, actual: string | boolean) => {
+      if (typeof actual === 'string') {
+        expect(actual).toBe(dataset[key]);
+      } else if (typeof actual === 'boolean') {
+        expect(actual).toBeTruthy();
+      }
+    };
+
     for (const key in dataset) {
       if (key !== 'email_address_text') {
         if (Object.hasOwn(dataset, key)) {
-          await commonItemsPage.validateUIComponentValues(dataset, key, editUserProfilePage);
+          const fieldValActual = await getFieldValue(key);
+          assertFieldValue(key, fieldValActual);
         }
       }
     }

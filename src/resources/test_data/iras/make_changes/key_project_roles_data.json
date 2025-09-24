@@ -1,12 +1,12 @@
 {
   "Key_Project_roles_Page": {
-    "heading": "Key project roles"
+    "heading": "Key project roles",
+    "chief_investigator_header_label": "Chief Investigator",
+    "primary_sponsor_organisation_header_label": "Primary sponsor organisation",
+    "sponsor_contact_header_label": "Sponsor contact"
   },
   "Label_Texts": {
-    "chief_investigator_header_label": "Chief Investigator",
     "chief_investigator_email_label": "Email",
-    "primary_sponsor_organisation_header_label": "Primary sponsor organisation",
-    "sponsor_contact_header_label": "Sponsor contact",
     "sponsor_contact_email_label": "Email"
   },
   "Summary_Error_Message": {

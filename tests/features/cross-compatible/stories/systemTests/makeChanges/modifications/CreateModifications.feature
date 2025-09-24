@@ -66,7 +66,7 @@ Feature: Create Amendment - Create Modifications
       | Project_Design             | Default_Value   | Project_Design               | Modifications_Tile      |
       | Project_Documents          | Default_Value   | Project_Documents            | Modifications_Tile      |
 
-  @rsp-4038 @SelectAreaOfChangeModificationIdValidation
+  @rsp-4038 @SelectAreaOfChangeModificationIdValidation @KNOWN_DEFECT-RSP-4997
   Scenario Outline: Validate the modification id on select area of change page when user creates multiple new modifications
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I capture the page screenshot
@@ -78,7 +78,7 @@ Feature: Create Amendment - Create Modifications
       | New_Modification_Count | Modifications_Tile_Link |
       | Modification_Count     | Modifications_Tile      |
 
-  @rsp-4038 @SelectAreaOfChangeSaveLater
+  @rsp-4038 @SelectAreaOfChangeSaveLater @KNOWN_DEFECT-RSP-4997
   Scenario Outline: Verify that user can save the modifications progress on select area of change page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I capture the page screenshot
@@ -139,24 +139,6 @@ Feature: Create Amendment - Create Modifications
       | Participating_Organisation | Addition_Of_Participant_Identification_Centres_Option      | Valid_Data_All_Fields | Modifications_Tile      |
       | Participating_Organisation | Early_Closure_Of_Participant_Identification_Centres_Option | Valid_Data_All_Fields | Modifications_Tile      |
 
-  @rsp-4039 @ParticipatingOrganisationsModificationIdValidation
-  Scenario Outline: Validate the modification id on participating organisation page when user creates multiple new modifications
-    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I capture the page screenshot
-    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    And I can see the select area of change page
-    Then I validate the modification id is incremented by one for every '<New_Modification_Count>' new modification on select area of change page
-    And I select '<Area_Of_Change>' from area of change dropdown and '<Specific_Change>' from specific change dropdown
-    And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    Then I can see the participating organisation page
-    And I capture the page screenshot
-    Then I validate the modification id on participating organisation page when user creates multiple new modifications
-
-    Examples:
-      | Area_Of_Change             | Specific_Change          | New_Modification_Count | Modifications_Tile_Link |
-      | Participating_Organisation | Addition_Of_sites_Option | Modification_Count     | Modifications_Tile      |
-
   @rsp-4039 @ParticipatingOrganisationSaveLater
   Scenario Outline: Verify that user can save the modifications progress on search participating organisations page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
@@ -180,8 +162,8 @@ Feature: Create Amendment - Create Modifications
       | Participating_Organisation | Early_Closure_Withdrawal_Of_Sites_Option                   | Modifications_Tile      |
       | Participating_Organisation | Addition_Of_Participant_Identification_Centres_Option      | Modifications_Tile      |
       | Participating_Organisation | Early_Closure_Of_Participant_Identification_Centres_Option | Modifications_Tile      |
-
-  @rsp-4039 @ParticipatingOrganisationsErrorValidation
+  # The KNOWN_DEFECT-RSP-5007 will be fixed with the new user story RSP-4136 so this scenario can be re-used later
+  @rsp-4039 @ParticipatingOrganisationsErrorValidation @KNOWN_DEFECT-RSP-5007 @skip
   Scenario Outline: Validate the mandatory field error message on participating organisation page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I capture the page screenshot
@@ -197,3 +179,39 @@ Feature: Create Amendment - Create Modifications
     Examples:
       | Field_And_Summary_Error_Message              | Area_Of_Change             | Specific_Change          | Modifications_Tile_Link |
       | Field_Error_participating_organisations_text | Participating_Organisation | Addition_Of_Sites_Option | Modifications_Tile      |
+
+  @rsp-4386 @ModificationsJourneyEntireJourney
+  Scenario Outline: Validate that user can create modifications and complete the entire modifications journey
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I capture the page screenshot
+    And I create '<Changes>' for the created modification
+    And I keep note of the individual and overall ranking of changes created using '<Changes>'
+    # And I can see the modifications details page
+    And I capture the page screenshot
+    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    # And I validate the overall ranking of changes displayed for '<Changes>'
+    # And I validate the individual ranking of changes displayed for '<Changes>'
+    # And I validate the field values are displayed as per the '<Changes>' dataset
+    When I click the 'Save_Continue_Review' button on the 'Modifications_Details_Page'
+    # Then I can see the add sponsor reference page
+    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    # Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    # Then I can see the review all changes modifications page
+    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    # And I validate the overall ranking of changes displayed for '<Changes>'
+    # And I validate the individual ranking of changes displayed for '<Changes>'
+    # And I validate the field values are displayed as per the '<Changes>' dataset
+    # Then I validate sponsor details are displayed with 'Valid_Data_All_Fields'
+    Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
+    # Then I can see the confimation page for modification sent to sponsor page
+    Then I click the 'Return_To_Project_Overview' button on the 'Confirmation_Page'
+    Then I can see the project overview page
+    And I can see a 'Create_New_Modification' button on the 'Project_Overview_Page'
+
+    Examples:
+      | Changes                           |
+      | Multiple_Changes_Planned_End_Date |

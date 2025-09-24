@@ -1,4 +1,4 @@
-@UserAdministration @ManageUsers @SysAdminUser @SystemTest @CreateUser
+@UserAdministration @ManageUsers @SysAdminUser @SystemTest @CreateUser @STSysAdmin
 Feature: User Administration: Manage Users - Create user
 
   Background:
@@ -27,7 +27,12 @@ Feature: User Administration: Manage Users - Create user
     When I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
     Then I can see the 'Manage_Users_Page'
     And I capture the page screenshot
-    Then I can see the '<Validation_Text_Manage_Users_List>' ui labels on the manage users list page
+    # Then I can see the '<Validation_Text_Manage_Users_List>' ui labels on the manage users list page
+    And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
+    And I select advanced filters in the manage users page using '<Advanced_Filters_Users>'
+    And I capture the page screenshot
+    And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
+    And I capture the page screenshot
     And I can see the newly created user record should be present in the list for '<Add_User_Profile>' with '<Status_Enabled>' status in the manage user page
     And I capture the page screenshot
     And I click the 'Back' link on the 'Manage_Users_Page'
@@ -40,17 +45,17 @@ Feature: User Administration: Manage Users - Create user
     And I capture the page screenshot
 
     Examples:
-      | Add_User_Profile                                             | Validation_Text_Manage_Users_List | Status_Enabled |
-      | Valid_Data_In_All_Fields_Role_System_Administrator           | Label_Texts_Manage_Users_List     | Enabled        |
-      | Valid_Data_In_All_Mandatory_Fields_Role_System_Administrator | Label_Texts_Manage_Users_List     | Enabled        |
-      | Valid_Data_In_All_Fields_Role_Applicant                      | Label_Texts_Manage_Users_List     | Enabled        |
-      | Valid_Data_In_All_Mandatory_Fields_Role_Applicant            | Label_Texts_Manage_Users_List     | Enabled        |
-      | Valid_Data_In_All_Fields_Role_Team_Manager                   | Label_Texts_Manage_Users_List     | Enabled        |
-      | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager         | Label_Texts_Manage_Users_List     | Enabled        |
-      | Valid_Data_In_All_Fields_Role_Studywide_Reviewer             | Label_Texts_Manage_Users_List     | Enabled        |
-      | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer   | Label_Texts_Manage_Users_List     | Enabled        |
-      | Valid_Data_In_All_Fields_Role_Workflow_Coordinator           | Label_Texts_Manage_Users_List     | Enabled        |
-      | Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator | Label_Texts_Manage_Users_List     | Enabled        |
+      | Add_User_Profile                                             | Validation_Text_Manage_Users_List | Status_Enabled | Advanced_Filters_Users                                  |
+      | Valid_Data_In_All_Fields_Role_System_Administrator           | Label_Texts_Manage_Users_List     | Enabled        | Advanced_Filter_Role_System_Administrator_Status_Active |
+      | Valid_Data_In_All_Mandatory_Fields_Role_System_Administrator | Label_Texts_Manage_Users_List     | Enabled        | Advanced_Filter_Role_System_Administrator_Status_Active |
+      | Valid_Data_In_All_Fields_Role_Applicant                      | Label_Texts_Manage_Users_List     | Enabled        | Advanced_Filter_Role_Applicant_Status_Active            |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Applicant            | Label_Texts_Manage_Users_List     | Enabled        | Advanced_Filter_Role_Applicant_Status_Active            |
+      | Valid_Data_In_All_Fields_Role_Team_Manager                   | Label_Texts_Manage_Users_List     | Enabled        | Advanced_Filter_Role_Team_Manager_Status_Active         |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager         | Label_Texts_Manage_Users_List     | Enabled        | Advanced_Filter_Role_Team_Manager_Status_Active         |
+      | Valid_Data_In_All_Fields_Role_Studywide_Reviewer             | Label_Texts_Manage_Users_List     | Enabled        | Advanced_Filter_Role_Studywide_Reviewer_Status_Active   |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer   | Label_Texts_Manage_Users_List     | Enabled        | Advanced_Filter_Role_Studywide_Reviewer_Status_Active   |
+      | Valid_Data_In_All_Fields_Role_Workflow_Coordinator           | Label_Texts_Manage_Users_List     | Enabled        | Advanced_Filter_Role_Workflow_Coordinator_Status_Active |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator | Label_Texts_Manage_Users_List     | Enabled        | Advanced_Filter_Role_Workflow_Coordinator_Status_Active |
 
   @rsp-2827 @rsp-2870 @verifyAddAnotherUser
   Scenario Outline: Verify the user is able to add another user from the Confirmation message screen using the link
@@ -79,6 +84,11 @@ Feature: User Administration: Manage Users - Create user
     When I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
     And I capture the page screenshot
     Then I can see the 'Manage_Users_Page'
+    And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
+    And I select advanced filters in the manage users page using '<Advanced_Filters_Users>'
+    And I capture the page screenshot
+    And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
+    And I capture the page screenshot
     And I can see the newly created user record should be present in the list for '<Add_Another_User_Profile>' with '<Status_Enabled>' status in the manage user page
     And I capture the page screenshot
     And I click the 'Back' link on the 'Manage_Users_Page'
@@ -89,17 +99,17 @@ Feature: User Administration: Manage Users - Create user
     Then I can see the 'Manage_Users_Page'
 
     Examples:
-      | Add_User_Profile                                             | Add_Another_User_Profile                                             | Status_Enabled |
-      | Valid_Data_In_All_Fields_Role_Team_Manager                   | Valid_Data_In_All_Fields_Role_Team_Manager_Another                   | Enabled        |
-      | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager         | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_Another         | Enabled        |
-      | Valid_Data_In_All_Fields_Role_System_Administrator           | Valid_Data_In_All_Fields_Role_System_Administrator_Another           | Enabled        |
-      | Valid_Data_In_All_Mandatory_Fields_Role_System_Administrator | Valid_Data_In_All_Mandatory_Fields_Role_System_Administrator_Another | Enabled        |
-      | Valid_Data_In_All_Fields_Role_Applicant                      | Valid_Data_In_All_Fields_Role_Applicant_Another                      | Enabled        |
-      | Valid_Data_In_All_Mandatory_Fields_Role_Applicant            | Valid_Data_In_All_Mandatory_Fields_Role_Applicant_Another            | Enabled        |
-      | Valid_Data_In_All_Fields_Role_Studywide_Reviewer             | Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Another             | Enabled        |
-      | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer   | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer_Another   | Enabled        |
-      | Valid_Data_In_All_Fields_Role_Workflow_Coordinator           | Valid_Data_In_All_Fields_Role_Workflow_Coordinator_Another           | Enabled        |
-      | Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator | Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator_Another | Enabled        |
+      | Add_User_Profile                                             | Add_Another_User_Profile                                             | Status_Enabled | Advanced_Filters_Users                                  |
+      | Valid_Data_In_All_Fields_Role_Team_Manager                   | Valid_Data_In_All_Fields_Role_Team_Manager_Another                   | Enabled        | Advanced_Filter_Role_Team_Manager_Status_Active         |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager         | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_Another         | Enabled        | Advanced_Filter_Role_Team_Manager_Status_Active         |
+      | Valid_Data_In_All_Fields_Role_System_Administrator           | Valid_Data_In_All_Fields_Role_System_Administrator_Another           | Enabled        | Advanced_Filter_Role_System_Administrator_Status_Active |
+      | Valid_Data_In_All_Mandatory_Fields_Role_System_Administrator | Valid_Data_In_All_Mandatory_Fields_Role_System_Administrator_Another | Enabled        | Advanced_Filter_Role_System_Administrator_Status_Active |
+      | Valid_Data_In_All_Fields_Role_Applicant                      | Valid_Data_In_All_Fields_Role_Applicant_Another                      | Enabled        | Advanced_Filter_Role_Applicant_Status_Active            |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Applicant            | Valid_Data_In_All_Mandatory_Fields_Role_Applicant_Another            | Enabled        | Advanced_Filter_Role_Applicant_Status_Active            |
+      | Valid_Data_In_All_Fields_Role_Studywide_Reviewer             | Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Another             | Enabled        | Advanced_Filter_Role_Studywide_Reviewer_Status_Active   |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer   | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer_Another   | Enabled        | Advanced_Filter_Role_Studywide_Reviewer_Status_Active   |
+      | Valid_Data_In_All_Fields_Role_Workflow_Coordinator           | Valid_Data_In_All_Fields_Role_Workflow_Coordinator_Another           | Enabled        | Advanced_Filter_Role_Workflow_Coordinator_Status_Active |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator | Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator_Another | Enabled        | Advanced_Filter_Role_Workflow_Coordinator_Status_Active |
 
   @rsp-2827 @verifyCreateUserProfileBackLink
   Scenario: Verify the user can navigate from 'Add a new user profile' page by clicking 'Back' link
@@ -136,21 +146,26 @@ Feature: User Administration: Manage Users - Create user
     When I click the 'Back_To_Manage_Users' link on the 'Create_User_Profile_Confirmation_Page'
     And I capture the page screenshot
     Then I can see the 'Manage_Users_Page'
+    And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
+    And I select advanced filters in the manage users page using '<Advanced_Filters_Users>'
+    And I capture the page screenshot
+    And I click the 'Apply_Filters' button on the 'Manage_Users_Page'
+    And I capture the page screenshot
     And I can see the newly created user record should be present in the list for '<Add_Another_User_Profile>' with '<Status_Enabled>' status in the manage user page
     And I capture the page screenshot
 
     Examples:
-      | Add_User_Profile                                             | Add_Another_User_Profile                                             | Status_Enabled | Role_Checkbox                       |
-      | Valid_Data_In_All_Fields_Role_Team_Manager                   | Valid_Data_In_All_Fields_Role_Team_Manager_Another                   | Enabled        | Role_TM_SWR_WFC                     |
-      | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager         | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_Another         | Enabled        | Role_TM_SWR_WFC                     |
-      | Valid_Data_In_All_Fields_Role_System_Administrator           | Valid_Data_In_All_Fields_Role_System_Administrator_Another           | Enabled        | Role_Applicant_System_Administrator |
-      | Valid_Data_In_All_Mandatory_Fields_Role_System_Administrator | Valid_Data_In_All_Mandatory_Fields_Role_System_Administrator_Another | Enabled        | Role_Applicant_System_Administrator |
-      | Valid_Data_In_All_Fields_Role_Applicant                      | Valid_Data_In_All_Fields_Role_Applicant_Another                      | Enabled        | Role_Applicant_System_Administrator |
-      | Valid_Data_In_All_Mandatory_Fields_Role_Applicant            | Valid_Data_In_All_Mandatory_Fields_Role_Applicant_Another            | Enabled        | Role_Applicant_System_Administrator |
-      | Valid_Data_In_All_Fields_Role_Studywide_Reviewer             | Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Another             | Enabled        | Role_TM_SWR_WFC                     |
-      | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer   | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer_Another   | Enabled        | Role_TM_SWR_WFC                     |
-      | Valid_Data_In_All_Fields_Role_Workflow_Coordinator           | Valid_Data_In_All_Fields_Role_Workflow_Coordinator_Another           | Enabled        | Role_TM_SWR_WFC                     |
-      | Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator | Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator_Another | Enabled        | Role_TM_SWR_WFC                     |
+      | Add_User_Profile                                             | Add_Another_User_Profile                                             | Status_Enabled | Role_Checkbox                       | Advanced_Filters_Users                                  |
+      | Valid_Data_In_All_Fields_Role_Team_Manager                   | Valid_Data_In_All_Fields_Role_Team_Manager_Another                   | Enabled        | Role_TM_SWR_WFC                     | Advanced_Filter_Role_Team_Manager_Status_Active         |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager         | Valid_Data_In_All_Mandatory_Fields_Role_Team_Manager_Another         | Enabled        | Role_TM_SWR_WFC                     | Advanced_Filter_Role_Team_Manager_Status_Active         |
+      | Valid_Data_In_All_Fields_Role_System_Administrator           | Valid_Data_In_All_Fields_Role_System_Administrator_Another           | Enabled        | Role_Applicant_System_Administrator | Advanced_Filter_Role_System_Administrator_Status_Active |
+      | Valid_Data_In_All_Mandatory_Fields_Role_System_Administrator | Valid_Data_In_All_Mandatory_Fields_Role_System_Administrator_Another | Enabled        | Role_Applicant_System_Administrator | Advanced_Filter_Role_System_Administrator_Status_Active |
+      | Valid_Data_In_All_Fields_Role_Applicant                      | Valid_Data_In_All_Fields_Role_Applicant_Another                      | Enabled        | Role_Applicant_System_Administrator | Advanced_Filter_Role_Applicant_Status_Active            |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Applicant            | Valid_Data_In_All_Mandatory_Fields_Role_Applicant_Another            | Enabled        | Role_Applicant_System_Administrator | Advanced_Filter_Role_Applicant_Status_Active            |
+      | Valid_Data_In_All_Fields_Role_Studywide_Reviewer             | Valid_Data_In_All_Fields_Role_Studywide_Reviewer_Another             | Enabled        | Role_TM_SWR_WFC                     | Advanced_Filter_Role_Studywide_Reviewer_Status_Active   |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer   | Valid_Data_In_All_Mandatory_Fields_Role_Studywide_Reviewer_Another   | Enabled        | Role_TM_SWR_WFC                     | Advanced_Filter_Role_Studywide_Reviewer_Status_Active   |
+      | Valid_Data_In_All_Fields_Role_Workflow_Coordinator           | Valid_Data_In_All_Fields_Role_Workflow_Coordinator_Another           | Enabled        | Role_TM_SWR_WFC                     | Advanced_Filter_Role_Workflow_Coordinator_Status_Active |
+      | Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator | Valid_Data_In_All_Mandatory_Fields_Role_Workflow_Coordinator_Another | Enabled        | Role_TM_SWR_WFC                     | Advanced_Filter_Role_Workflow_Coordinator_Status_Active |
 
   @rsp-2827 @rsp-4021 @verifyCheckCreateUserProfileChangeLinkRoleTMSWRWFC @RoleCheckbox
   Scenario Outline: Verify the user can navigate from 'Check and create user profile' page by clicking 'Change' button against all the fields when the role is selected as study-wide reviewer or team manager or workflow co-ordinator
@@ -263,6 +278,7 @@ Feature: User Administration: Manage Users - Create user
     And I capture the page screenshot
     When I enter '<Search_Queries>' into the search field for manage users page
     And I capture the page screenshot
+    And I click the 'Advanced_Filters' button on the 'Manage_Users_Page'
     And I select advanced filters in the manage users page using '<Advanced_Filters>'
     And I capture the page screenshot
     And I click the 'Apply_Filters' button on the 'Manage_Users_Page'

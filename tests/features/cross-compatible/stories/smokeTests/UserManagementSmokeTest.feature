@@ -1,6 +1,6 @@
 @SysAdminUser  @UserManagementSmokeFeature @Smoke
 Feature: User Administration: Manage Users -Smoke Tests
-
+    # Mange Users - Page title is different
     Background:
         Given I have navigated to the 'Home_Page'
         And I click the 'System_Administration' link on the 'Home_Page'
@@ -11,7 +11,7 @@ Feature: User Administration: Manage Users -Smoke Tests
         And I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
         And I can see the add a new user profile page
 
-    @UserManagementSmoke @fail @KNOWN-DEFECT-RSP-4996
+    @UserManagementSmoke
     Scenario Outline: Verify the user can unassign roles from the user profile event, with an audit history log
         When I fill the new user profile page using '<Add_User_Profile>'
         And I capture the page screenshot
