@@ -11,12 +11,16 @@ export default class AddDocumentDetailsModificationsPage {
   readonly rows: Locator;
   readonly document_type_dropdown: Locator;
   readonly sponsor_document_version_text: Locator;
+  readonly sponsor_document_date_fieldset: Locator;
   readonly sponsor_document_day_text: Locator;
   readonly sponsor_document_month_dropdown: Locator;
   readonly sponsor_document_year_text: Locator;
+  readonly document_previously_approved_fieldset: Locator;
   readonly document_previously_approved_radio: Locator;
   readonly save_and_continue: Locator;
   readonly save_changes: Locator;
+  readonly back_link: Locator;
+  readonly sub_document_type_dropdown: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -29,12 +33,76 @@ export default class AddDocumentDetailsModificationsPage {
     this.pageLabels = this.page.getByRole('paragraph');
     this.table = this.page.getByRole('table');
     this.rows = this.page.locator('tr');
-    this.document_type_dropdown = this.page.getByTestId('Questions[0].SelectedOption');
-    this.sponsor_document_version_text = this.page.getByTestId('IQA0601_Text');
-    this.sponsor_document_day_text = this.page.getByTestId('Questions[2].Day');
-    this.sponsor_document_month_dropdown = this.page.getByTestId('Questions[2].Month');
-    this.sponsor_document_year_text = this.page.getByTestId('Questions[2].Year');
-    this.document_previously_approved_radio = this.page.locator('.govuk-radios__input');
+    this.document_type_dropdown = this.page.getByRole('combobox', {
+      name: this.addDocumentDetailsForSpecificDocumentModificationsPageTestData
+        .Add_Document_Details_For_Specific_Document_Modifications_Page.document_type_dropdown_label,
+    });
+    // this.sponsor_document_version_text = this.page.getByTestId('IQA0601_Text');
+    this.sponsor_document_version_text = this.page.getByLabel(
+      this.addDocumentDetailsForSpecificDocumentModificationsPageTestData
+        .Add_Document_Details_For_Specific_Document_Modifications_Page.sponsor_document_version_label,
+      {
+        exact: true,
+      }
+    );
+    this.sponsor_document_date_fieldset = this.page.locator('.govuk-fieldset').locator('.govuk-form-group', {
+      has: this.page.getByText(
+        this.addDocumentDetailsForSpecificDocumentModificationsPageTestData
+          .Add_Document_Details_For_Specific_Document_Modifications_Page.sponsor_document_date_label
+      ),
+    });
+    // this.sponsor_document_day_text = this.page.getByTestId('Questions[2].Day');
+    this.sponsor_document_day_text = this.sponsor_document_date_fieldset
+      .locator('.govuk-form-group', {
+        has: this.page.getByText(
+          this.addDocumentDetailsForSpecificDocumentModificationsPageTestData
+            .Add_Document_Details_For_Specific_Document_Modifications_Page.sponsor_document_date_day_label
+        ),
+      })
+      .getByRole('textbox');
+    // this.date_submitted_from_day_text = this.date_submitted_from_date_fieldset
+    //   .locator('.govuk-form-group', {
+    //     has: this.page.getByText(
+    //       this.searchModificationsPageTestData.Search_Modifications_Page.date_submitted_day_label
+    //     ),
+    //   })
+    //   .getByRole('textbox');
+    // this.sponsor_document_month_dropdown = this.page.getByTestId('Questions[2].Month');
+    this.sponsor_document_month_dropdown = this.sponsor_document_date_fieldset
+      .locator('.govuk-form-group', {
+        has: this.page.getByText(
+          this.addDocumentDetailsForSpecificDocumentModificationsPageTestData
+            .Add_Document_Details_For_Specific_Document_Modifications_Page.sponsor_document_date_month_label
+        ),
+      })
+      .getByRole('combobox');
+    // this.sponsor_document_year_text = this.page.getByTestId('Questions[2].Year');
+    this.sponsor_document_year_text = this.sponsor_document_date_fieldset
+      .locator('.govuk-form-group', {
+        has: this.page.getByText(
+          this.addDocumentDetailsForSpecificDocumentModificationsPageTestData
+            .Add_Document_Details_For_Specific_Document_Modifications_Page.sponsor_document_date_year_label
+        ),
+      })
+      .getByRole('textbox');
+    // this.sponsor_document_day_text = this.page.getByTestId('Questions[2].Day');
+    // this.sponsor_document_month_dropdown = this.page.getByTestId('Questions[2].Month');
+    // this.sponsor_document_year_text = this.page.getByTestId('Questions[2].Year');
+    this.document_previously_approved_fieldset = this.page.locator('.govuk-fieldset').filter({
+      has: this.page.getByText(
+        this.addDocumentDetailsForSpecificDocumentModificationsPageTestData
+          .Add_Document_Details_For_Specific_Document_Modifications_Page.document_previously_approved_hint_text
+      ),
+    });
+    // locator('.govuk-form-group', {
+    //   has: this.page.getByText(
+    //     this.addDocumentDetailsForSpecificDocumentModificationsPageTestData
+    //       .Add_Document_Details_For_Specific_Document_Modifications_Page.document_previously_approved_hint_text
+    //   ),
+    // });
+    // this.document_previously_approved_radio = this.document_previously_approved_fieldset.getByRole('radio');
+    // this.document_previously_approved_radio = this.page.locator('.govuk-radios__input');
+    this.document_previously_approved_radio = this.page.getByTestId('IQA0603_OPT0004');
     this.save_and_continue = this.page
       .getByRole('button')
       .getByText(
@@ -53,6 +121,16 @@ export default class AddDocumentDetailsModificationsPage {
           exact: true,
         }
       );
+    this.back_link = this.page
+      .getByRole('link')
+      .getByText(
+        this.addDocumentDetailsForSpecificDocumentModificationsPageTestData
+          .Add_Document_Details_For_Specific_Document_Modifications_Page.back_link
+      );
+    this.sub_document_type_dropdown = this.page.getByRole('combobox', {
+      name: this.addDocumentDetailsForSpecificDocumentModificationsPageTestData
+        .Add_Document_Details_For_Specific_Document_Modifications_Page.sub_document_type_label,
+    });
   }
 
   //Page Methods

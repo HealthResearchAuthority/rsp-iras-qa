@@ -21,6 +21,9 @@ Feature: Create Amendment - Project Documents Edit and Save
         Then I can see the review your answers page
         And I capture the page screenshot
         When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+        And I capture the page screenshot
+        And I click the 'View_Project_Overview' link on the 'Project_Created_Confirmation_Page'
+        And I capture the page screenshot
         Then I can see the project overview page
         When I click the 'Post_Approval' link on the 'Project_Overview_Page'
         When I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
@@ -225,37 +228,20 @@ Feature: Create Amendment - Project Documents Edit and Save
         And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
         And I validate the status of each document is 'Document_Status_Incomplete' in add document details page
         And I capture the page screenshot
-        And I click on the document link with status 'Document_Status_Incomplete'
-        # And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' for the uploaded '<Document_Upload_Files>' in the add document details for specific document page
-        # And I capture the page screenshot
-        # And I validate the status of each document is 'Document_Status_Complete' in add document details page
-        # When I click the 'Save_Continue' button on the 'Add_Document_Details_Modifications_Page'
-        # And I capture the page screenshot
-        # And I can see the review your document information page
-        # And I capture the page screenshot
-        # Then I validate the field values 'Valid_Data_Fields' displayed in the review your document information page
-        # And I click on the document type change link next to each document and enter new 'New_Valid_Document_Type' in the add document details for the uploaded documents
-        # And I capture the page screenshot
-        # And I click on the document version change link next to each document and enter new 'New_Valid_Document_Version' in the add document details for the uploaded documents
-        # And I capture the page screenshot
-        # And I click on the document date change link next to each document and enter new 'New_Valid_Document_Date' and validate if 'New_Full_Valid_Document_Date' is displayed in the add document details for the uploaded documents
-        # And I capture the page screenshot
-        # And I click on the document previously approved option change link next to each document and enter new 'New_Valid_Document_Previously_Approved_Value' in the add document details for the uploaded documents
-        # And I capture the page screenshot
-        # When I click the 'Save_Continue' button on the 'Review_Your_Document_Infomation_Modifications_Page'
-        # And I can see the modification progress saved successful message on project overview page
-        # And I can see the project overview page
-        # And I capture the page screenshot
+        And I click on the document link with status 'Document_Status_Incomplete' and I can see the document type drop down list shows only the document types for '<Document_Types_Dropdown_List_For_Study_Type>'
+        And I capture the page screenshot
+        And I click on the document link with status 'Document_Status_Incomplete' and I select document types for '<Document_Types_Optional>'
+        # Then I can see the document type drop down list shows only the document types for '<Document_Types_Dropdown_List_For_Study_Type>'
 
         Examples:
-            | Specific_Change                              | Document_Upload_Files |
-            | Correction_Of_Typographical_Errors           | Multiple_Files_Three  |
-            | CRF_Other_Study_Data_Records                 | PNG_File              |
-            | GDPR_Wording                                 | PNG_File              |
-            | Other_Minor_Change_To_Study_Documents        | PNG_File              |
-            | Post_Trial_Information_For_Participants      | PNG_File              |
-            | Protocol_Non_Substantial_Changes             | PNG_File              |
-            | Translations_Addition_Of_Translated_Versions | PNG_File              |
+            | Specific_Change                    | Document_Upload_Files | Document_Types_Dropdown_List_For_Study_Type | Document_Types_Optional                            | Document_Types_Mandatory                            |
+            | Correction_Of_Typographical_Errors | Multiple_Files_Three  | Non_REC_Study_Types                         | Non_REC_Study_Types_Optional_Document_Version_Date | Non_REC_Study_Types_Mandatory_Document_Version_Date |
+# | CRF_Other_Study_Data_Records                 | PNG_File              |||
+# | GDPR_Wording                                 | PNG_File              |||
+# | Other_Minor_Change_To_Study_Documents        | PNG_File              |||
+# | Post_Trial_Information_For_Participants      | PNG_File              |||
+# | Protocol_Non_Substantial_Changes             | PNG_File              |||
+# | Translations_Addition_Of_Translated_Versions | PNG_File              |||
 
 #         Scenario 1: Verify that the applicant can choose a document type for my study
 
