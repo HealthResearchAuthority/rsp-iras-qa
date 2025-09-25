@@ -88,6 +88,16 @@
       "Miscellaneous"
     ]
   },
+  "Valid_Data_Fields_Optional_Version_Date": {
+    "document_previously_approved_radio": "Yes"
+  },
+  "Valid_Data_Fields_Mandatory_Version_Date": {
+    "sponsor_document_version_text": "1.5",
+    "sponsor_document_day_text": "20",
+    "sponsor_document_month_dropdown": "January",
+    "sponsor_document_year_text": "2020",
+    "document_previously_approved_radio": "Yes"
+  },
   "Non_REC_Study_Types_Optional_Document_Version_Date": {
     "document_type_dropdown_values": [
       "Evidence of insurance or indemnity",

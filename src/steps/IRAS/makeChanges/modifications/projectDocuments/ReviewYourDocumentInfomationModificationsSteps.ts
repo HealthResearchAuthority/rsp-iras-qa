@@ -255,7 +255,11 @@ Then(
     let allSummaryErrorExpectedValues: any;
     let summaryErrorActualValues: any;
     await expect(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
-    if (errorMessageFieldAndSummaryDatasetName === 'Missing_Mandatory_Question_Previously_Approved_Error') {
+    if (
+      errorMessageFieldAndSummaryDatasetName === 'Missing_Mandatory_Question_Previously_Approved_Error' ||
+      errorMessageFieldAndSummaryDatasetName ===
+        'Missing_Mandatory_Question_Previously_Approved_Document_Version_Date_Error'
+    ) {
       allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset).toString();
       summaryErrorActualValues = (await commonItemsPage.getSummaryErrorMessages()).toString();
     } else {
@@ -263,20 +267,15 @@ Then(
       summaryErrorActualValues = await commonItemsPage.getSummaryErrorMessages();
     }
     expect.soft(summaryErrorActualValues).toEqual(allSummaryErrorExpectedValues);
-    if (!errorMessageFieldAndSummaryDatasetName.includes('Summary_Only')) {
-      for (const key in errorMessageFieldDataset) {
-        if (Object.hasOwn(errorMessageFieldDataset, key)) {
-          let fieldErrorMessagesActualValues: any;
-          {
-            fieldErrorMessagesActualValues =
-              await reviewYourDocumentInformationModificationsPage.getFieldErrorMessagesReview(key, page);
-            if (fieldErrorMessagesActualValues.includes('Error: ')) {
-              fieldErrorMessagesActualValues = fieldErrorMessagesActualValues.replace('Error: ', '');
-            }
-            expect.soft(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
-            const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
-            await expect(element).toBeInViewport();
-          }
+    for (const key in errorMessageFieldDataset) {
+      if (Object.hasOwn(errorMessageFieldDataset, key)) {
+        let fieldErrorMessagesActualValues: any;
+        {
+          fieldErrorMessagesActualValues =
+            await reviewYourDocumentInformationModificationsPage.getFieldErrorMessagesReviewInformation(key, page);
+          expect.soft(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
+          const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
+          await expect(element).toBeInViewport();
         }
       }
     }

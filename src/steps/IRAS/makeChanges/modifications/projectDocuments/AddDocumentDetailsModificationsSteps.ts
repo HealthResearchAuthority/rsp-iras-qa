@@ -104,7 +104,6 @@ Then(
         .allTextContents()
     ).filter((option) => option.trim() !== 'Please select...');
     expect.soft(documentTypeDropdownValuesActual).toStrictEqual(documentTypeDropdownValuesExpected);
-    // await addDocumentDetailsForSpecificDocumentModificationsPage.back_link.click();
   }
 );
 
@@ -198,25 +197,22 @@ Then(
     if (typeAttribute === 'radio') {
       await locatorVal.check();
     }
-    // await addDocumentDetailsForSpecificDocumentModificationsPage.page.getByTestId('IQA0603_OPT0004').check();
   }
 );
 
-// Then(
-//   'I can see the document type drop down list shows only the document types for {string}',
-//   async ({ addDocumentDetailsForSpecificDocumentModificationsPage }, documentTypedatasetName: string) => {
-//     const dataset =
-//       addDocumentDetailsForSpecificDocumentModificationsPage
-//         .addDocumentDetailsForSpecificDocumentModificationsPageTestData[documentTypedatasetName];
-//     const documentTypeDropdownValuesExpected = dataset['document_type_dropdown_values'];
-//     const documentTypeDropdownValuesActual = (
-//       await addDocumentDetailsForSpecificDocumentModificationsPage.document_type_dropdown
-//         .locator('option')
-//         .allTextContents()
-//     ).filter((option) => option.trim() !== 'Please select...');
-//     expect.soft(documentTypeDropdownValuesActual).toStrictEqual(documentTypeDropdownValuesExpected);
-//   }
-// );
+Then(
+  'I enter document details for the uploaded documents using {string} in the add document details for specific document page',
+  async ({ addDocumentDetailsForSpecificDocumentModificationsPage, commonItemsPage }, datasetName: string) => {
+    const dataset =
+      addDocumentDetailsForSpecificDocumentModificationsPage
+        .addDocumentDetailsForSpecificDocumentModificationsPageTestData[datasetName];
+    for (const key in dataset) {
+      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+        await commonItemsPage.fillUIComponent(dataset, key, addDocumentDetailsForSpecificDocumentModificationsPage);
+      }
+    }
+  }
+);
 
 // // Optional ‘document date’ and ‘document version’
 

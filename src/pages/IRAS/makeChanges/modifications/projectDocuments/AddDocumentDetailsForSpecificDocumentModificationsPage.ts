@@ -17,8 +17,6 @@ export default class AddDocumentDetailsModificationsPage {
   readonly sponsor_document_year_text: Locator;
   readonly document_previously_approved_fieldset: Locator;
   readonly document_previously_approved_radio: Locator;
-  readonly document_previously_approved_yes_radio: Locator;
-  readonly document_previously_approved_no_radio: Locator;
   readonly save_and_continue: Locator;
   readonly save_changes: Locator;
   readonly back_link: Locator;
@@ -40,21 +38,20 @@ export default class AddDocumentDetailsModificationsPage {
       name: this.addDocumentDetailsForSpecificDocumentModificationsPageTestData
         .Add_Document_Details_For_Specific_Document_Modifications_Page.document_type_dropdown_label,
     });
-    // this.sponsor_document_version_text = this.page.getByTestId('IQA0601_Text');
-    this.sponsor_document_version_text = this.page.getByLabel(
-      this.addDocumentDetailsForSpecificDocumentModificationsPageTestData
-        .Add_Document_Details_For_Specific_Document_Modifications_Page.sponsor_document_version_label,
-      {
-        exact: true,
-      }
-    );
-    this.sponsor_document_date_fieldset = this.page.locator('.govuk-fieldset').locator('.govuk-form-group', {
+    this.sponsor_document_version_text = this.page
+      .locator('.govuk-form-group', {
+        has: this.page.getByText(
+          this.addDocumentDetailsForSpecificDocumentModificationsPageTestData
+            .Add_Document_Details_For_Specific_Document_Modifications_Page.sponsor_document_version_label
+        ),
+      })
+      .getByRole('textbox');
+    this.sponsor_document_date_fieldset = this.page.locator('.govuk-form-group', {
       has: this.page.getByText(
         this.addDocumentDetailsForSpecificDocumentModificationsPageTestData
           .Add_Document_Details_For_Specific_Document_Modifications_Page.sponsor_document_date_label
       ),
     });
-    // this.sponsor_document_day_text = this.page.getByTestId('Questions[2].Day');
     this.sponsor_document_day_text = this.sponsor_document_date_fieldset
       .locator('.govuk-form-group', {
         has: this.page.getByText(
@@ -63,14 +60,6 @@ export default class AddDocumentDetailsModificationsPage {
         ),
       })
       .getByRole('textbox');
-    // this.date_submitted_from_day_text = this.date_submitted_from_date_fieldset
-    //   .locator('.govuk-form-group', {
-    //     has: this.page.getByText(
-    //       this.searchModificationsPageTestData.Search_Modifications_Page.date_submitted_day_label
-    //     ),
-    //   })
-    //   .getByRole('textbox');
-    // this.sponsor_document_month_dropdown = this.page.getByTestId('Questions[2].Month');
     this.sponsor_document_month_dropdown = this.sponsor_document_date_fieldset
       .locator('.govuk-form-group', {
         has: this.page.getByText(
@@ -79,7 +68,6 @@ export default class AddDocumentDetailsModificationsPage {
         ),
       })
       .getByRole('combobox');
-    // this.sponsor_document_year_text = this.page.getByTestId('Questions[2].Year');
     this.sponsor_document_year_text = this.sponsor_document_date_fieldset
       .locator('.govuk-form-group', {
         has: this.page.getByText(
@@ -88,10 +76,7 @@ export default class AddDocumentDetailsModificationsPage {
         ),
       })
       .getByRole('textbox');
-    // this.sponsor_document_day_text = this.page.getByTestId('Questions[2].Day');
-    // this.sponsor_document_month_dropdown = this.page.getByTestId('Questions[2].Month');
-    // this.sponsor_document_year_text = this.page.getByTestId('Questions[2].Year');
-    this.document_previously_approved_fieldset = this.page.locator('.govuk-fieldset', {
+    this.document_previously_approved_fieldset = this.page.locator('.govuk-form-group', {
       has: this.page.getByText(
         this.addDocumentDetailsForSpecificDocumentModificationsPageTestData
           .Add_Document_Details_For_Specific_Document_Modifications_Page.document_previously_approved_hint_text
@@ -101,11 +86,7 @@ export default class AddDocumentDetailsModificationsPage {
       this.addDocumentDetailsForSpecificDocumentModificationsPageTestData
         .Add_Document_Details_For_Specific_Document_Modifications_Page.document_previously_approved_hint_text
     );
-    // this.document_previously_approved_radio = this.document_previously_approved_fieldset.getByRole('radio');
-    this.document_previously_approved_yes_radio = this.page.getByRole('radio', { name: 'Yes' });
-    this.document_previously_approved_no_radio = this.page.getByRole('radio', { name: 'No' });
-    // this.document_previously_approved_radio = this.page.locator('.govuk-radios__input');
-    // this.document_previously_approved_radio = this.page.getByTestId('IQA0603_OPT0004');
+    this.document_previously_approved_radio = this.document_previously_approved_fieldset.getByRole('radio');
     this.save_and_continue = this.page
       .getByRole('button')
       .getByText(

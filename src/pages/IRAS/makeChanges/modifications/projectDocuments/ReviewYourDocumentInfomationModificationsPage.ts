@@ -31,7 +31,6 @@ export default class AddDocumentDetailsModificationsPage {
   readonly document_previously_approved_radio: Locator;
   readonly document_previously_approved_change_link: Locator;
   readonly document_information: Locator;
-  readonly errorMessageFieldLabel: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -61,7 +60,7 @@ export default class AddDocumentDetailsModificationsPage {
     this.sponsor_document_version_row = this.list_row.filter({
       has: this.page.getByText(
         this.reviewYourDocumentInfomationModificationsPageTestData.Review_Your_Document_Information
-          .document_version_label
+          .sponsor_document_version_label
       ),
     });
     this.sponsor_document_version_text = this.sponsor_document_version_row.getByRole('definition').first();
@@ -70,7 +69,8 @@ export default class AddDocumentDetailsModificationsPage {
     );
     this.sponsor_document_date_row = this.list_row.filter({
       has: this.page.getByText(
-        this.reviewYourDocumentInfomationModificationsPageTestData.Review_Your_Document_Information.document_date_label
+        this.reviewYourDocumentInfomationModificationsPageTestData.Review_Your_Document_Information
+          .sponsor_document_date_label
       ),
     });
     this.sponsor_document_date_text = this.sponsor_document_date_row.getByRole('definition').first();
@@ -80,7 +80,7 @@ export default class AddDocumentDetailsModificationsPage {
     this.document_previously_approved_row = this.list_row.filter({
       has: this.page.getByText(
         this.reviewYourDocumentInfomationModificationsPageTestData.Review_Your_Document_Information
-          .previously_approved_label
+          .document_previously_approved_label
       ),
     });
     this.document_previously_approved_radio = this.document_previously_approved_row.getByRole('definition').first();
@@ -88,7 +88,6 @@ export default class AddDocumentDetailsModificationsPage {
       this.linkTextData.Review_Your_Answers_Page.Change
     );
     this.document_information = this.page.locator('[class*="govuk-summary-list govuk"]');
-    this.errorMessageFieldLabel = this.page.locator('.govuk-error-summary__list').first();
   }
 
   //Page Methods
@@ -121,16 +120,15 @@ export default class AddDocumentDetailsModificationsPage {
     return noOfDocuments;
   }
 
-  async getFieldErrorMessagesReview<PageObject>(key: string, page: PageObject) {
-    let fieldErrorMessage: string;
-    const element = await page[key].first();
-    const typeAttribute = await element.getAttribute('type');
-    if (typeAttribute === 'checkbox') {
-      key = key.replace('checkbox', 'label');
-      fieldErrorMessage = confirmStringNotNull(await element.locator(this.errorMessageFieldLabel).textContent());
-    } else {
-      fieldErrorMessage = confirmStringNotNull(await element.locator(this.errorMessageFieldLabel).textContent());
-    }
+  async getFieldErrorMessagesReviewInformation<PageObject>(key: string, page: PageObject) {
+    const element = await page[key];
+    const label = key.replace(/(_row)$/, '_label').toLowerCase();
+    const fieldErrorMessage = confirmStringNotNull(await element.getByRole('link').textContent())
+      .replaceAll(
+        this.reviewYourDocumentInfomationModificationsPageTestData.Review_Your_Document_Information[`${label}`],
+        ''
+      )
+      .trim();
     return fieldErrorMessage;
   }
 }
