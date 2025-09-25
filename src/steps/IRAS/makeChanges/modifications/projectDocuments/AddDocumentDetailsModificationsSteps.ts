@@ -148,7 +148,7 @@ Then(
       await locator.selectOption(documentTypeName);
     }
     await expect
-      .soft(addDocumentDetailsForSpecificDocumentModificationsPage.document_previously_approved_radio)
+      .soft(addDocumentDetailsForSpecificDocumentModificationsPage.document_previously_approved_hint_text)
       .toBeVisible();
     if (documentVersionDate === 'optional') {
       await expect
@@ -184,33 +184,22 @@ Then(
         .soft(addDocumentDetailsForSpecificDocumentModificationsPage.sponsor_document_year_text)
         .toBeVisible();
     }
-    // const locatorVal: Locator =
-    //   addDocumentDetailsForSpecificDocumentModificationsPage.document_previously_approved_radio;
-    // const typeAttribute = await locatorVal.first().getAttribute('type');
-    // if (typeAttribute === 'radio') {
-    // await locatorVal.nth(0).isEnabled();
-    // await locatorVal.nth(0).check();
-    await addDocumentDetailsForSpecificDocumentModificationsPage.page.getByTestId('IQA0603_OPT0004').check();
-    // await locatorVal.getByLabel('Yes').isVisible();
-    // await locatorVal.getByLabel('Yes').click();
-    // await locatorVal.getByRole('radio', { name: 'Yes' }).check();
-    // }
-    // await addDocumentDetailsForSpecificDocumentModificationsPage.document_previously_approved_radio
-    //   .nth(0)
-    //   .click();
-    await addDocumentDetailsForSpecificDocumentModificationsPage.save_and_continue.click();
-    await addDocumentDetailsForSpecificDocumentModificationsPage.save_and_continue.click();
-    await addDocumentDetailsForSpecificDocumentModificationsPage.save_and_continue.click();
   }
-  // }
-  // await commonItemsPage.fillUIComponent(
-  //   dataset,
-  //   'document_type_dropdown',
-  //   addDocumentDetailsForSpecificDocumentModificationsPage
-  // );
-  // }
-  // await addDocumentDetailsForSpecificDocumentModificationsPage.back_link.click();
-  // }
+);
+
+Then(
+  'I select {string} for the previous version of the document approved question',
+  async ({ addDocumentDetailsForSpecificDocumentModificationsPage }, radioButtonValue: string) => {
+    const locatorVal: Locator =
+      addDocumentDetailsForSpecificDocumentModificationsPage[
+        `document_previously_approved_+${radioButtonValue}+_radio`
+      ];
+    const typeAttribute = await locatorVal.first().getAttribute('type');
+    if (typeAttribute === 'radio') {
+      await locatorVal.check();
+    }
+    // await addDocumentDetailsForSpecificDocumentModificationsPage.page.getByTestId('IQA0603_OPT0004').check();
+  }
 );
 
 // Then(

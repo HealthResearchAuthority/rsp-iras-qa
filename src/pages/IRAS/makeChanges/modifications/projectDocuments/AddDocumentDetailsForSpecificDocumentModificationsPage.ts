@@ -17,10 +17,13 @@ export default class AddDocumentDetailsModificationsPage {
   readonly sponsor_document_year_text: Locator;
   readonly document_previously_approved_fieldset: Locator;
   readonly document_previously_approved_radio: Locator;
+  readonly document_previously_approved_yes_radio: Locator;
+  readonly document_previously_approved_no_radio: Locator;
   readonly save_and_continue: Locator;
   readonly save_changes: Locator;
   readonly back_link: Locator;
   readonly sub_document_type_dropdown: Locator;
+  readonly document_previously_approved_hint_text: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -88,21 +91,21 @@ export default class AddDocumentDetailsModificationsPage {
     // this.sponsor_document_day_text = this.page.getByTestId('Questions[2].Day');
     // this.sponsor_document_month_dropdown = this.page.getByTestId('Questions[2].Month');
     // this.sponsor_document_year_text = this.page.getByTestId('Questions[2].Year');
-    this.document_previously_approved_fieldset = this.page.locator('.govuk-fieldset').filter({
+    this.document_previously_approved_fieldset = this.page.locator('.govuk-fieldset', {
       has: this.page.getByText(
         this.addDocumentDetailsForSpecificDocumentModificationsPageTestData
           .Add_Document_Details_For_Specific_Document_Modifications_Page.document_previously_approved_hint_text
       ),
     });
-    // locator('.govuk-form-group', {
-    //   has: this.page.getByText(
-    //     this.addDocumentDetailsForSpecificDocumentModificationsPageTestData
-    //       .Add_Document_Details_For_Specific_Document_Modifications_Page.document_previously_approved_hint_text
-    //   ),
-    // });
+    this.document_previously_approved_hint_text = this.page.getByText(
+      this.addDocumentDetailsForSpecificDocumentModificationsPageTestData
+        .Add_Document_Details_For_Specific_Document_Modifications_Page.document_previously_approved_hint_text
+    );
     // this.document_previously_approved_radio = this.document_previously_approved_fieldset.getByRole('radio');
+    this.document_previously_approved_yes_radio = this.page.getByRole('radio', { name: 'Yes' });
+    this.document_previously_approved_no_radio = this.page.getByRole('radio', { name: 'No' });
     // this.document_previously_approved_radio = this.page.locator('.govuk-radios__input');
-    this.document_previously_approved_radio = this.page.getByTestId('IQA0603_OPT0004');
+    // this.document_previously_approved_radio = this.page.getByTestId('IQA0603_OPT0004');
     this.save_and_continue = this.page
       .getByRole('button')
       .getByText(

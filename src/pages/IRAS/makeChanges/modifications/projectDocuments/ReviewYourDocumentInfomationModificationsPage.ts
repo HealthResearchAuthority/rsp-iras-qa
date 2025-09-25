@@ -31,6 +31,7 @@ export default class AddDocumentDetailsModificationsPage {
   readonly document_previously_approved_radio: Locator;
   readonly document_previously_approved_change_link: Locator;
   readonly document_information: Locator;
+  readonly errorMessageFieldLabel: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -87,6 +88,7 @@ export default class AddDocumentDetailsModificationsPage {
       this.linkTextData.Review_Your_Answers_Page.Change
     );
     this.document_information = this.page.locator('[class*="govuk-summary-list govuk"]');
+    this.errorMessageFieldLabel = this.page.locator('.govuk-error-summary__list').first();
   }
 
   //Page Methods
@@ -117,5 +119,18 @@ export default class AddDocumentDetailsModificationsPage {
     const allDocumentsInformation = this.document_information;
     const noOfDocuments = await allDocumentsInformation.count();
     return noOfDocuments;
+  }
+
+  async getFieldErrorMessagesReview<PageObject>(key: string, page: PageObject) {
+    let fieldErrorMessage: string;
+    const element = await page[key].first();
+    const typeAttribute = await element.getAttribute('type');
+    if (typeAttribute === 'checkbox') {
+      key = key.replace('checkbox', 'label');
+      fieldErrorMessage = confirmStringNotNull(await element.locator(this.errorMessageFieldLabel).textContent());
+    } else {
+      fieldErrorMessage = confirmStringNotNull(await element.locator(this.errorMessageFieldLabel).textContent());
+    }
+    return fieldErrorMessage;
   }
 }
