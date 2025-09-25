@@ -92,47 +92,24 @@ Then(
 );
 
 Then(
-  'I click on the document link with status {string} and I can see the document type drop down list shows only the document types for {string}',
-  async (
-    { addDocumentDetailsForSpecificDocumentModificationsPage, addDocumentDetailsModificationsPage },
-    docStatusDataset: string,
-    documentTypedatasetName: string
-  ) => {
-    const statusDataset =
-      addDocumentDetailsModificationsPage.addDocumentDetailsModificationsPageTestData[docStatusDataset];
-    const status = statusDataset.status;
+  'I can see the document type drop down list shows only the document types for {string}',
+  async ({ addDocumentDetailsForSpecificDocumentModificationsPage }, documentTypedatasetName: string) => {
     const dataset =
       addDocumentDetailsForSpecificDocumentModificationsPage
         .addDocumentDetailsForSpecificDocumentModificationsPageTestData[documentTypedatasetName];
     const documentTypeDropdownValuesExpected = dataset['document_type_dropdown_values'];
-    const displayedDocumentsListMap =
-      await addDocumentDetailsModificationsPage.getDisplayedDocumentsListAndStatusFromUI(true);
-    const displayedDocumentsList: string[] = displayedDocumentsListMap.get('displayedDocuments');
-    const displayedStatusesList: string[] = displayedDocumentsListMap.get('displayedStatuses');
-    // Click on each document link
-    for (let i = 0; i < 1; i++) {
-      // for (let i = 0; i < displayedDocumentsList.length; i++) {
-      if (displayedStatusesList[i] === status) {
-        const documentName = displayedDocumentsList[i];
-        await addDocumentDetailsModificationsPage.documentlink.getByText(documentName, { exact: true }).first().click();
-        //Assertion to verify Add document details for specific document page
-        await addDocumentDetailsForSpecificDocumentModificationsPage.assertOnAddDocumentsDetailsForSpecificModificationsPage(
-          documentName
-        );
-        const documentTypeDropdownValuesActual = (
-          await addDocumentDetailsForSpecificDocumentModificationsPage.document_type_dropdown
-            .locator('option')
-            .allTextContents()
-        ).filter((option) => option.trim() !== 'Please select...');
-        expect.soft(documentTypeDropdownValuesActual).toStrictEqual(documentTypeDropdownValuesExpected);
-      }
-      await addDocumentDetailsForSpecificDocumentModificationsPage.back_link.click();
-    }
+    const documentTypeDropdownValuesActual = (
+      await addDocumentDetailsForSpecificDocumentModificationsPage.document_type_dropdown
+        .locator('option')
+        .allTextContents()
+    ).filter((option) => option.trim() !== 'Please select...');
+    expect.soft(documentTypeDropdownValuesActual).toStrictEqual(documentTypeDropdownValuesExpected);
+    // await addDocumentDetailsForSpecificDocumentModificationsPage.back_link.click();
   }
 );
 
 Then(
-  'I click on the document link with status {string}',
+  'I click on the document link with status {string} and I can see the add document details for specific document page',
   async (
     { addDocumentDetailsForSpecificDocumentModificationsPage, addDocumentDetailsModificationsPage },
     docStatusDataset: string
@@ -160,112 +137,80 @@ Then(
 );
 
 Then(
-  'I click on the document link with status {string} and I select document types for {string}',
+  'I select document type {string} for which document version and date are {string} and I can see mandatory fields are displayed based on the selected document type',
   async (
-    { addDocumentDetailsForSpecificDocumentModificationsPage, addDocumentDetailsModificationsPage },
-    docStatusDataset: string,
-    documentTypedatasetName: string
+    { addDocumentDetailsForSpecificDocumentModificationsPage },
+    documentTypeName: string,
+    documentVersionDate: string
   ) => {
-    const statusDataset =
-      addDocumentDetailsModificationsPage.addDocumentDetailsModificationsPageTestData[docStatusDataset];
-    const status = statusDataset.status;
-    const dataset =
-      addDocumentDetailsForSpecificDocumentModificationsPage
-        .addDocumentDetailsForSpecificDocumentModificationsPageTestData[documentTypedatasetName];
-    const documentTypeDropdownValues = dataset['document_type_dropdown_values'];
-    const displayedDocumentsListMap =
-      await addDocumentDetailsModificationsPage.getDisplayedDocumentsListAndStatusFromUI(true);
-    const displayedDocumentsList: string[] = displayedDocumentsListMap.get('displayedDocuments');
-    const displayedStatusesList: string[] = displayedDocumentsListMap.get('displayedStatuses');
-    // Click on each document link
-    for (let i = 0; i < 1; i++) {
-      // for (let i = 0; i < displayedDocumentsList.length; i++) {
-      if (displayedStatusesList[i] === status) {
-        const documentName = displayedDocumentsList[i];
-        await addDocumentDetailsModificationsPage.documentlink.getByText(documentName, { exact: true }).first().click();
-        //Assertion to verify Add document details for specific document page
-        await addDocumentDetailsForSpecificDocumentModificationsPage.assertOnAddDocumentsDetailsForSpecificModificationsPage(
-          documentName
-        );
-        //Enter document details
-        for (const val of documentTypeDropdownValues) {
-          const locator: Locator = addDocumentDetailsForSpecificDocumentModificationsPage.document_type_dropdown;
-          if (confirmStringNotNull(await locator.getAttribute('class')).includes('govuk-select')) {
-            await expect(locator).toBeVisible();
-            await expect(locator).toBeEnabled();
-            await locator.selectOption(val);
-          }
-          await expect
-            .soft(addDocumentDetailsForSpecificDocumentModificationsPage.document_previously_approved_radio)
-            .toBeVisible();
-          if (documentTypedatasetName.includes('Optional')) {
-            await expect
-              .soft(addDocumentDetailsForSpecificDocumentModificationsPage.sponsor_document_version_text)
-              .toBeHidden();
-            await expect
-              .soft(addDocumentDetailsForSpecificDocumentModificationsPage.sponsor_document_day_text)
-              .toBeHidden();
-            await expect
-              .soft(addDocumentDetailsForSpecificDocumentModificationsPage.sponsor_document_month_dropdown)
-              .toBeHidden();
-            await expect
-              .soft(addDocumentDetailsForSpecificDocumentModificationsPage.sponsor_document_year_text)
-              .toBeHidden();
-            if (val === 'Curriculum vitae (CV) /suitability of researcher') {
-              await expect
-                .soft(addDocumentDetailsForSpecificDocumentModificationsPage.sub_document_type_dropdown)
-                .toBeVisible();
-              const locator: Locator =
-                addDocumentDetailsForSpecificDocumentModificationsPage.sub_document_type_dropdown;
-              if (confirmStringNotNull(await locator.getAttribute('class')).includes('govuk-select')) {
-                await locator.selectOption('Academic Supervisor');
-              }
-            } else {
-              await expect
-                .soft(addDocumentDetailsForSpecificDocumentModificationsPage.sub_document_type_dropdown)
-                .toBeHidden();
-            }
-          } else if (documentTypedatasetName.includes('Mandatory')) {
-            await expect
-              .soft(addDocumentDetailsForSpecificDocumentModificationsPage.sponsor_document_version_text)
-              .toBeVisible();
-            await expect
-              .soft(addDocumentDetailsForSpecificDocumentModificationsPage.sponsor_document_day_text)
-              .toBeVisible();
-            await expect
-              .soft(addDocumentDetailsForSpecificDocumentModificationsPage.sponsor_document_month_dropdown)
-              .toBeVisible();
-            await expect
-              .soft(addDocumentDetailsForSpecificDocumentModificationsPage.sponsor_document_year_text)
-              .toBeVisible();
-          }
-          // const locatorVal: Locator =
-          //   addDocumentDetailsForSpecificDocumentModificationsPage.document_previously_approved_radio;
-          // const typeAttribute = await locatorVal.first().getAttribute('type');
-          // if (typeAttribute === 'radio') {
-          // await locatorVal.nth(0).isEnabled();
-          // await locatorVal.nth(0).check();
-          await addDocumentDetailsForSpecificDocumentModificationsPage.page.getByTestId('IQA0603_OPT0004').check();
-          // await locatorVal.getByLabel('Yes').isVisible();
-          // await locatorVal.getByLabel('Yes').click();
-          // await locatorVal.getByRole('radio', { name: 'Yes' }).check();
-          // }
-          // await addDocumentDetailsForSpecificDocumentModificationsPage.document_previously_approved_radio
-          //   .nth(0)
-          //   .click();
-          await addDocumentDetailsForSpecificDocumentModificationsPage.save_and_continue.click();
-          await addDocumentDetailsForSpecificDocumentModificationsPage.save_and_continue.click();
-          await addDocumentDetailsForSpecificDocumentModificationsPage.save_and_continue.click();
-        }
-      }
-      // await commonItemsPage.fillUIComponent(
-      //   dataset,
-      //   'document_type_dropdown',
-      //   addDocumentDetailsForSpecificDocumentModificationsPage
-      // );
+    const locator: Locator = addDocumentDetailsForSpecificDocumentModificationsPage.document_type_dropdown;
+    if (confirmStringNotNull(await locator.getAttribute('class')).includes('govuk-select')) {
+      await locator.selectOption(documentTypeName);
     }
-    // await addDocumentDetailsForSpecificDocumentModificationsPage.back_link.click();
+    await expect
+      .soft(addDocumentDetailsForSpecificDocumentModificationsPage.document_previously_approved_radio)
+      .toBeVisible();
+    if (documentVersionDate === 'optional') {
+      await expect
+        .soft(addDocumentDetailsForSpecificDocumentModificationsPage.sponsor_document_version_text)
+        .toBeHidden();
+      await expect.soft(addDocumentDetailsForSpecificDocumentModificationsPage.sponsor_document_day_text).toBeHidden();
+      await expect
+        .soft(addDocumentDetailsForSpecificDocumentModificationsPage.sponsor_document_month_dropdown)
+        .toBeHidden();
+      await expect.soft(addDocumentDetailsForSpecificDocumentModificationsPage.sponsor_document_year_text).toBeHidden();
+      if (documentTypeName === 'Curriculum vitae (CV) /suitability of researcher') {
+        await expect
+          .soft(addDocumentDetailsForSpecificDocumentModificationsPage.sub_document_type_dropdown)
+          .toBeVisible();
+        const locator: Locator = addDocumentDetailsForSpecificDocumentModificationsPage.sub_document_type_dropdown;
+        if (confirmStringNotNull(await locator.getAttribute('class')).includes('govuk-select')) {
+          await locator.selectOption('Academic Supervisor');
+        }
+      } else {
+        await expect
+          .soft(addDocumentDetailsForSpecificDocumentModificationsPage.sub_document_type_dropdown)
+          .toBeHidden();
+      }
+    } else if (documentVersionDate === 'mandatory') {
+      await expect
+        .soft(addDocumentDetailsForSpecificDocumentModificationsPage.sponsor_document_version_text)
+        .toBeVisible();
+      await expect.soft(addDocumentDetailsForSpecificDocumentModificationsPage.sponsor_document_day_text).toBeVisible();
+      await expect
+        .soft(addDocumentDetailsForSpecificDocumentModificationsPage.sponsor_document_month_dropdown)
+        .toBeVisible();
+      await expect
+        .soft(addDocumentDetailsForSpecificDocumentModificationsPage.sponsor_document_year_text)
+        .toBeVisible();
+    }
+    // const locatorVal: Locator =
+    //   addDocumentDetailsForSpecificDocumentModificationsPage.document_previously_approved_radio;
+    // const typeAttribute = await locatorVal.first().getAttribute('type');
+    // if (typeAttribute === 'radio') {
+    // await locatorVal.nth(0).isEnabled();
+    // await locatorVal.nth(0).check();
+    await addDocumentDetailsForSpecificDocumentModificationsPage.page.getByTestId('IQA0603_OPT0004').check();
+    // await locatorVal.getByLabel('Yes').isVisible();
+    // await locatorVal.getByLabel('Yes').click();
+    // await locatorVal.getByRole('radio', { name: 'Yes' }).check();
+    // }
+    // await addDocumentDetailsForSpecificDocumentModificationsPage.document_previously_approved_radio
+    //   .nth(0)
+    //   .click();
+    await addDocumentDetailsForSpecificDocumentModificationsPage.save_and_continue.click();
+    await addDocumentDetailsForSpecificDocumentModificationsPage.save_and_continue.click();
+    await addDocumentDetailsForSpecificDocumentModificationsPage.save_and_continue.click();
   }
+  // }
+  // await commonItemsPage.fillUIComponent(
+  //   dataset,
+  //   'document_type_dropdown',
+  //   addDocumentDetailsForSpecificDocumentModificationsPage
+  // );
+  // }
+  // await addDocumentDetailsForSpecificDocumentModificationsPage.back_link.click();
+  // }
 );
 
 // Then(

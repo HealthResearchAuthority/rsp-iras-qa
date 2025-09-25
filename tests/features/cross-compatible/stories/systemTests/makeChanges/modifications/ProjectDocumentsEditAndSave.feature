@@ -211,7 +211,7 @@ Feature: Create Amendment - Project Documents Edit and Save
             | Protocol_Non_Substantial_Changes             | Multiple_Files_Three  |
             | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three  |
 
-    @rsp-4314 @ValidateDocumentTypesOptionalMandatoryFields
+    @rsp-4314 @ValidateDocumentTypeDropDownList
     Scenario Outline: Verify the user is able to enter details for uploaded documents with Incomplete status and review the information
         And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
         When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
@@ -226,22 +226,30 @@ Feature: Create Amendment - Project Documents Edit and Save
         When I can see the add document details for '<Specific_Change>' page
         And I capture the page screenshot
         And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
-        And I validate the status of each document is 'Document_Status_Incomplete' in add document details page
+        # And I validate the status of each document is 'Document_Status_Incomplete' in add document details page
+        And I click on the document link with status 'Document_Status_Incomplete' and I can see the add document details for specific document page
+        And I can see the document type drop down list shows only the document types for '<Document_Types_Dropdown_List_For_Study_Type>'
         And I capture the page screenshot
-        And I click on the document link with status 'Document_Status_Incomplete' and I can see the document type drop down list shows only the document types for '<Document_Types_Dropdown_List_For_Study_Type>'
+        And I select document type '<Document_Types_Optional>' for which document version and date are '<Version_Date>' and I can see mandatory fields are displayed based on the selected document type
         And I capture the page screenshot
-        And I click on the document link with status 'Document_Status_Incomplete' and I select document types for '<Document_Types_Optional>'
-        # Then I can see the document type drop down list shows only the document types for '<Document_Types_Dropdown_List_For_Study_Type>'
 
         Examples:
-            | Specific_Change                    | Document_Upload_Files | Document_Types_Dropdown_List_For_Study_Type | Document_Types_Optional                            | Document_Types_Mandatory                            |
-            | Correction_Of_Typographical_Errors | Multiple_Files_Three  | Non_REC_Study_Types                         | Non_REC_Study_Types_Optional_Document_Version_Date | Non_REC_Study_Types_Mandatory_Document_Version_Date |
-# | CRF_Other_Study_Data_Records                 | PNG_File              |||
-# | GDPR_Wording                                 | PNG_File              |||
-# | Other_Minor_Change_To_Study_Documents        | PNG_File              |||
-# | Post_Trial_Information_For_Participants      | PNG_File              |||
-# | Protocol_Non_Substantial_Changes             | PNG_File              |||
-# | Translations_Addition_Of_Translated_Versions | PNG_File              |||
+            | Specific_Change                              | Document_Upload_Files | Document_Types_Dropdown_List_For_Study_Type | Document_Types_Optional                         | Version_Date |
+            # | Correction_Of_Typographical_Errors           | PNG_File              | Non_REC_Study_Types                         | Evidence of insurance or indemnity                                                                            | optional     |
+            # | CRF_Other_Study_Data_Records                 | PNG_File              | Non_REC_Study_Types                         | Participant facing materials -other                                                                           | optional     |
+            # | GDPR_Wording                                 | PNG_File              | Non_REC_Study_Types                         | Questionnaire - validated                                                                                     | optional     |
+            # | Other_Minor_Change_To_Study_Documents        | PNG_File              | Non_REC_Study_Types                         | Curriculum vitae (CV) /suitability of researcher                                                              | optional     |
+            # | Post_Trial_Information_For_Participants      | PNG_File              | Non_REC_Study_Types                         | Student research criteria eligibility declaration                                                             | optional     |
+            # | Protocol_Non_Substantial_Changes             | PNG_File              | Non_REC_Study_Types                         | Dear investigator letter                                                                                      | optional     |
+            | Translations_Addition_Of_Translated_Versions | PNG_File              | Non_REC_Study_Types                         | Funder\'s letter/outcome of funding panel       | optional     |
+            | Correction_Of_Typographical_Errors           | Multiple_Files_Three  | Non_REC_Study_Types                         | Statistician\'s letter                          | optional     |
+            | CRF_Other_Study_Data_Records                 | PNG_File              | Non_REC_Study_Types                         | Referee\'s  or other scientific critique report | optional     |
+# | GDPR_Wording                                 | PNG_File              | Non_REC_Study_Types                         | Sponsor - Site Agreement                                                                                      | optional     |
+# | Other_Minor_Change_To_Study_Documents        | PNG_File              | Non_REC_Study_Types                         | Schedule of Events or Schedule of Events cost attribution template (SoECAT)                                   | optional     |
+# | Post_Trial_Information_For_Participants      | PNG_File              | Non_REC_Study_Types                         | Data flow diagram or documents demonstrating conformity with data protection and confidentiality requirements | optional     |
+# | Protocol_Non_Substantial_Changes             | PNG_File              | Non_REC_Study_Types                         | Miscellaneous                                                                                                 | optional     |
+
+
 
 #         Scenario 1: Verify that the applicant can choose a document type for my study
 
