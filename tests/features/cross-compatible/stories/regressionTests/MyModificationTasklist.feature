@@ -58,7 +58,7 @@ Feature: Receive Amendments: My Modifications Tasklist page that displays modifi
             | Date_Submitted        | date submitted        | descending   | ascending      |
             | Days_Since_Submission | days since submission | ascending    | descending     |
 
-    @RegressionSearchFilterComboMyTasklist @rsp-4821 @KNOWN-DEFECT-RSP-5066
+    @RegressionSearchFilterComboMyTasklist @rsp-4821
     Scenario Outline: Verify the user is able to combine searching and filtering options to narrow modifications displayed on my tasklist
         And I click the 'Advanced_Filters' button on the 'My_Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
@@ -83,7 +83,7 @@ Feature: Receive Amendments: My Modifications Tasklist page that displays modifi
             | IRAS_ID_Title_Date_Range_Multi  | Search        |
             | Title_Days_Range_Multi          | Apply_Filters |
 
-    @RegressionSearchMyTasklistWithNoResults @rsp-4821 @KNOWN-DEFECT-CMS-EMPTY-TEXT-WRONG
+    @RegressionSearchMyTasklistWithNoResults @rsp-4821 @KNOWN-DEFECT-CMS-EMPTY-TEXT-WRONG @fail
     Scenario Outline: Verify the my tasklist page displays the no results found message, when no records on the system match the search criteria
         And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
@@ -101,7 +101,7 @@ Feature: Receive Amendments: My Modifications Tasklist page that displays modifi
             | Non_Existant_Date_Range       |
             | Non_Existant_Days_Since_Range |
 
-    @RegressionAddRemoveFiltersMyTasklist @rsp-4821 @KNOWN-DEFECT-RSP-5066
+    @RegressionAddRemoveFiltersMyTasklist @rsp-4821
     Scenario: Verify that adding and removing filters narrows and widens the search results appropriately on my tasklist
         And I click the 'Advanced_Filters' button on the 'My_Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel

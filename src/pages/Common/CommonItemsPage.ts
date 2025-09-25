@@ -81,7 +81,6 @@ export default class CommonItemsPage {
   readonly advanced_filter_chevron: Locator;
   readonly result_count: Locator;
   readonly iras_id_search_text: Locator;
-  readonly advanced_filter_active_filters_label: Locator;
   readonly no_matching_search_result_header_label: Locator;
   readonly no_matching_search_result_sub_header_label: Locator;
   readonly no_matching_search_result_body_one_label: Locator;
@@ -89,7 +88,6 @@ export default class CommonItemsPage {
   readonly no_matching_search_result_body_three_label: Locator;
   readonly no_matching_search_result_body_four_label: Locator;
   readonly no_matching_search_result_count_label: Locator;
-  readonly active_filters_list: Locator;
   readonly clear_all_filters_link: Locator;
   readonly no_results_bullet_points: Locator;
   readonly no_results_guidance_text: Locator;
@@ -221,15 +219,6 @@ export default class CommonItemsPage {
       this.no_matching_search_result_body_four_label =
         this.page.getByRole('listitem');
     this.no_matching_search_result_count_label = this.page.getByRole('heading');
-    this.active_filters_list = this.page
-      .getByRole('heading', {
-        name: this.commonTestData.active_filters_label,
-        exact: true,
-      })
-      .locator('..')
-      .getByRole('list')
-      .getByRole('listitem')
-      .getByRole('link');
     this.clear_all_filters_link = this.page.getByRole('link', {
       name: this.commonTestData.clear_all_filters_label,
       exact: true,
@@ -245,7 +234,6 @@ export default class CommonItemsPage {
       .getByText(this.buttonTextData.Search_Modifications_Page.Apply_Filters, {
         exact: true,
       });
-    this.advanced_filter_active_filters_label = this.page.getByRole('list');
     this.upload_files_input = this.page.locator('input[type="file"]');
     this.search_results_count = this.page.locator('.search-filter-panel__count');
     this.advanced_filter_panel = this.page.getByTestId('filter-panel');
