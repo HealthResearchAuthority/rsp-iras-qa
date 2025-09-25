@@ -37,5 +37,6 @@ Feature: Create Amendment - Create Project - Smoke Tests
     And I capture the page screenshot
     Then I can validate the field values of 'Valid_Data_All_Fields' page 'Valid_Data_All_Fields' page and 'Valid_Data_All_Fields' page
     When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    And I click the 'View_Project_Overview' link on the 'Project_Overview_Page'
     Then I can see the project overview page
     And I capture the page screenshot
