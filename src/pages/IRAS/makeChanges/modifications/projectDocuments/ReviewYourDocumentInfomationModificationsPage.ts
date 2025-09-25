@@ -31,6 +31,7 @@ export default class AddDocumentDetailsModificationsPage {
   readonly document_previously_approved_radio: Locator;
   readonly document_previously_approved_change_link: Locator;
   readonly document_information: Locator;
+  readonly document_type_guidance_text: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -53,7 +54,14 @@ export default class AddDocumentDetailsModificationsPage {
         this.reviewYourDocumentInfomationModificationsPageTestData.Review_Your_Document_Information.document_type_label
       ),
     });
+    this.document_type_guidance_text = this.list_row.locator('.govuk-summary-list__value').filter({
+      has: this.page.getByText(
+        this.reviewYourDocumentInfomationModificationsPageTestData.Review_Your_Document_Information
+          .document_type_guidance_text
+      ),
+    });
     this.document_type_dropdown = this.document_type_row.getByRole('definition').first();
+    this.document_type = this.document_type_row.locator('..').locator('.govuk-summary-list__value');
     this.document_type_change_link = this.document_type_row.getByText(
       this.linkTextData.Review_Your_Answers_Page.Change
     );
@@ -105,7 +113,9 @@ export default class AddDocumentDetailsModificationsPage {
 
     const expectedHintLabelText =
       this.reviewYourDocumentInfomationModificationsPageTestData.Review_Your_Document_Information.hint_label_text;
-    await expect.soft(this.pageLabels.getByText(expectedHintLabelText, { exact: true })).toBeVisible();
+    await expect
+      .soft(this.page.locator('.govuk-body').getByText(expectedHintLabelText.trim(), { exact: true }))
+      .toBeVisible();
   }
 
   async getSponsorDocumentDate() {

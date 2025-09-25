@@ -3,9 +3,10 @@
     "page_title": "Review your document information - Health research UK",
     "heading": "Review your document information",
     "hint_label_heading": "Confirm document details",
-    "hint_label_text": "When youve checked that all the document details are correct, select Save and continue",
+    "hint_label_text": "When you’ve checked that all the document details are correct, select Save and continue",
     "document_name_label": "Document",
     "document_type_label": "Document type",
+    "document_type_guidance_text": "Enter document type",
     "document_version_label": "Document version",
     "document_date_label": "Document date",
     "previously_approved_label": "Previously approved?"

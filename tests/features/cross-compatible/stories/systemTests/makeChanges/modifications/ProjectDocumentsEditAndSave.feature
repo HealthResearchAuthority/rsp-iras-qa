@@ -21,6 +21,7 @@ Feature: Create Amendment - Project Documents Edit and Save
         Then I can see the review your answers page
         And I capture the page screenshot
         When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+        When I click the 'View_Project_Overview' link on the 'Project_Overview_Page'
         Then I can see the project overview page
         When I click the 'Post_Approval' link on the 'Project_Overview_Page'
         When I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
@@ -208,4 +209,60 @@ Feature: Create Amendment - Project Documents Edit and Save
             | Protocol_Non_Substantial_Changes             | Multiple_Files_Three  |
             | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three  |
 
+    @rsp-4539 @SaveForLaterWithoutSelectingDocumentType @KNOWN-DEFECT-RSP-5091
+    Scenario Outline: Verify the user is able to enter details for uploaded documents with incomplete status and review your information page
+        And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
+        When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+        Then I can see the add documents for '<Specific_Change>' page
+        And I upload '<Document_Upload_Files>' documents
+        When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+        Then I can see the review uploaded documents for '<Specific_Change>' page
+        When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+        #When I can see the add document details for '<Specific_Change>' page
+        When I click the 'Save_Continue' button on the 'Add_Document_Details_Modifications_Page'
+        And I can see the review your document information page
+        And I can see document type guidance text next to each document type
+        When I click the 'Save_For_Later' button on the 'Review_Your_Document_Infomation_Modifications_Page'
+        And I can see the modification progress saved successful message on project overview page
+        And I can see the project overview page
+        And I capture the page screenshot
+
+        Examples:
+            | Specific_Change                              | Document_Upload_Files |
+            | Correction_Of_Typographical_Errors           | Multiple_Files_Three  |
+            | CRF_Other_Study_Data_Records                 | Multiple_Files_Three  |
+            | GDPR_Wording                                 | Multiple_Files_Three  |
+            | Other_Minor_Change_To_Study_Documents        | Multiple_Files_Three  |
+            | Post_Trial_Information_For_Participants      | Multiple_Files_Three  |
+            | Protocol_Non_Substantial_Changes             | Multiple_Files_Three  |
+            | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three  |
+
+    @rsp-4539 @SaveForLaterSelectingOnlyDocumentType @KNOWN-DEFECT-RSP-5091
+    Scenario Outline: Verify the user is able to enter details for uploaded documents with incomplete status and review your information page
+        And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
+        When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+        Then I can see the add documents for '<Specific_Change>' page
+        And I upload '<Document_Upload_Files>' documents
+        When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+        Then I can see the review uploaded documents for '<Specific_Change>' page
+        When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+        #When I can see the add document details for '<Specific_Change>' page
+        When I click the 'Save_Continue' button on the 'Add_Document_Details_Modifications_Page'
+        And I can see the review your document information page
+        And I can see document type guidance text next to each document type
+        And I select a document type 'New_Valid_Document_Type' and validate the changes in review your information page
+        When I click the 'Save_For_Later' button on the 'Review_Your_Document_Infomation_Modifications_Page'
+        And I can see the modification progress saved successful message on project overview page
+        And I can see the project overview page
+        And I capture the page screenshot
+
+        Examples:
+            | Specific_Change                              | Document_Upload_Files |
+            | Correction_Of_Typographical_Errors           | Multiple_Files_Three  |
+            | CRF_Other_Study_Data_Records                 | Multiple_Files_Three  |
+            | GDPR_Wording                                 | Multiple_Files_Three  |
+            | Other_Minor_Change_To_Study_Documents        | Multiple_Files_Three  |
+            | Post_Trial_Information_For_Participants      | Multiple_Files_Three  |
+            | Protocol_Non_Substantial_Changes             | Multiple_Files_Three  |
+            | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three  |
 
