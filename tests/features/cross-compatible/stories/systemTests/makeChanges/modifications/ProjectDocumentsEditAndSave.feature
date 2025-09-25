@@ -210,7 +210,7 @@ Feature: Create Amendment - Project Documents Edit and Save
             | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three  |
 
     @rsp-4539 @SaveForLaterWithoutSelectingDocumentType @KNOWN-DEFECT-RSP-5091
-    Scenario Outline: Verify the user is able to enter details for uploaded documents with incomplete status and review your information page
+    Scenario Outline: Verify the user is able to save for later without selecting document type in the review your information page
         And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
         When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
         Then I can see the add documents for '<Specific_Change>' page
@@ -218,12 +218,15 @@ Feature: Create Amendment - Project Documents Edit and Save
         When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
         Then I can see the review uploaded documents for '<Specific_Change>' page
         When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
-        #When I can see the add document details for '<Specific_Change>' page
+        When I can see the add document details for '<Specific_Change>' page
         When I click the 'Save_Continue' button on the 'Add_Document_Details_Modifications_Page'
         And I can see the review your document information page
         And I can see document type guidance text next to each document type
+        And I capture the page screenshot
         When I click the 'Save_For_Later' button on the 'Review_Your_Document_Infomation_Modifications_Page'
+        And I capture the page screenshot
         And I can see the modification progress saved successful message on project overview page
+        And I capture the page screenshot
         And I can see the project overview page
         And I capture the page screenshot
 
@@ -238,7 +241,7 @@ Feature: Create Amendment - Project Documents Edit and Save
             | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three  |
 
     @rsp-4539 @SaveForLaterSelectingOnlyDocumentType @KNOWN-DEFECT-RSP-5091
-    Scenario Outline: Verify the user is able to enter details for uploaded documents with incomplete status and review your information page
+    Scenario Outline: Verify the user is able to save for later after selecting only document type in the review your information page
         And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
         When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
         Then I can see the add documents for '<Specific_Change>' page
@@ -246,13 +249,16 @@ Feature: Create Amendment - Project Documents Edit and Save
         When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
         Then I can see the review uploaded documents for '<Specific_Change>' page
         When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
-        #When I can see the add document details for '<Specific_Change>' page
+        When I can see the add document details for '<Specific_Change>' page
         When I click the 'Save_Continue' button on the 'Add_Document_Details_Modifications_Page'
         And I can see the review your document information page
         And I can see document type guidance text next to each document type
+        And I capture the page screenshot
         And I select a document type 'New_Valid_Document_Type' and validate the changes in review your information page
+        And I capture the page screenshot
         When I click the 'Save_For_Later' button on the 'Review_Your_Document_Infomation_Modifications_Page'
         And I can see the modification progress saved successful message on project overview page
+        And I capture the page screenshot
         And I can see the project overview page
         And I capture the page screenshot
 
@@ -265,4 +271,3 @@ Feature: Create Amendment - Project Documents Edit and Save
             | Post_Trial_Information_For_Participants      | Multiple_Files_Three  |
             | Protocol_Non_Substantial_Changes             | Multiple_Files_Three  |
             | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three  |
-
