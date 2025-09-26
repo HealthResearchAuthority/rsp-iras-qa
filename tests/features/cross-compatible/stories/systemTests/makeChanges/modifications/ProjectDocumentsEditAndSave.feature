@@ -211,7 +211,7 @@ Feature: Create Amendment - Project Documents Edit and Save
             | Protocol_Non_Substantial_Changes             | Multiple_Files_Three  |
             | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three  |
 
-    @rsp-4314 @ValidateDocumentTypeDropDownList @ValidateNonRECStudyTypeOptionalDocumentVersionDate @test
+    @rsp-4314 @ValidateDocumentTypeDropDownList @ValidateNonRECStudyTypeOptionalDocumentVersionDate
     Scenario Outline: Verify that the user can enter details using document types applicable to Non-REC study types, where document version and date are optional, for documents uploaded with an Incomplete status, and review the entered information
         And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
         When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
@@ -231,8 +231,7 @@ Feature: Create Amendment - Project Documents Edit and Save
         And I capture the page screenshot
         And I select document type '<Document_Types_Optional>' for which document version and date are '<Version_Date>' and I can see mandatory fields are displayed based on the selected document type
         And I capture the page screenshot
-        And I enter document details for the uploaded documents using 'Valid_Data_Fields_Optional_Version_Date' in the add document details for specific document page
-        # And I select 'Yes' for the previous version of the document approved question
+        And I enter document details for the uploaded documents using '<Document_Details_Info_Optional>' in the add document details for specific document page
         And I capture the page screenshot
         When I click the 'Save_Continue' button on the 'Add_Document_Details_For_Specific_Document_Modifications_Page'
         And I capture the page screenshot
@@ -248,22 +247,22 @@ Feature: Create Amendment - Project Documents Edit and Save
         And I capture the page screenshot
 
         Examples:
-            | Specific_Change                              | Document_Upload_Files | Document_Types_Dropdown_List_For_Study_Type | Document_Types_Optional                                                                                       | Version_Date |
-            | Correction_Of_Typographical_Errors           | PNG_File              | Non_REC_Study_Types                         | Evidence of insurance or indemnity                                                                            | optional     |
-            | CRF_Other_Study_Data_Records                 | PNG_File              | Non_REC_Study_Types                         | Participant facing materials -other                                                                           | optional     |
-            | GDPR_Wording                                 | PNG_File              | Non_REC_Study_Types                         | Questionnaire - validated                                                                                     | optional     |
-            | Other_Minor_Change_To_Study_Documents        | PNG_File              | Non_REC_Study_Types                         | Curriculum vitae (CV) /suitability of researcher                                                              | optional     |
-            | Post_Trial_Information_For_Participants      | PNG_File              | Non_REC_Study_Types                         | Student research criteria eligibility declaration                                                             | optional     |
-            | Protocol_Non_Substantial_Changes             | PNG_File              | Non_REC_Study_Types                         | Dear investigator letter                                                                                      | optional     |
-            | Translations_Addition_Of_Translated_Versions | PNG_File              | Non_REC_Study_Types                         | Funder\'s letter/outcome of funding panel                                                                     | optional     |
-            | Correction_Of_Typographical_Errors           | PNG_File              | Non_REC_Study_Types                         | Statistician\'s letter                                                                                        | optional     |
-            # | CRF_Other_Study_Data_Records                 | PNG_File              | Non_REC_Study_Types                         | Referee\'s  or other scientific critique report                                                               | optional     |
-            | GDPR_Wording                                 | PNG_File              | Non_REC_Study_Types                         | Sponsor - Site Agreement                                                                                      | optional     |
-            | Other_Minor_Change_To_Study_Documents        | PNG_File              | Non_REC_Study_Types                         | Schedule of Events or Schedule of Events cost attribution template (SoECAT)                                   | optional     |
-            | Post_Trial_Information_For_Participants      | PNG_File              | Non_REC_Study_Types                         | Data flow diagram or documents demonstrating conformity with data protection and confidentiality requirements | optional     |
-            | Protocol_Non_Substantial_Changes             | PNG_File              | Non_REC_Study_Types                         | Miscellaneous                                                                                                 | optional     |
+            | Specific_Change                              | Document_Upload_Files | Document_Types_Dropdown_List_For_Study_Type | Document_Types_Optional                                                                                       | Version_Date | Document_Details_Info_Optional          |
+            | Correction_Of_Typographical_Errors           | PNG_File              | Non_REC_Study_Types                         | Evidence of insurance or indemnity                                                                            | optional     | Valid_Data_Fields_Optional_Version_Date |
+            | CRF_Other_Study_Data_Records                 | PNG_File              | Non_REC_Study_Types                         | Participant facing materials -other                                                                           | optional     | Valid_Data_Fields_Optional_Version_Date |
+            | GDPR_Wording                                 | PNG_File              | Non_REC_Study_Types                         | Questionnaire - validated                                                                                     | optional     | Valid_Data_Fields_Optional_Version_Date |
+            | Other_Minor_Change_To_Study_Documents        | PNG_File              | Non_REC_Study_Types                         | Curriculum vitae (CV) /suitability of researcher                                                              | optional     | Valid_Data_Fields_Optional_Version_Date |
+            | Post_Trial_Information_For_Participants      | PNG_File              | Non_REC_Study_Types                         | Student research criteria eligibility declaration                                                             | optional     | Valid_Data_Fields_Optional_Version_Date |
+            | Protocol_Non_Substantial_Changes             | PNG_File              | Non_REC_Study_Types                         | Dear investigator letter                                                                                      | optional     | Valid_Data_Fields_Optional_Version_Date |
+            | Translations_Addition_Of_Translated_Versions | PNG_File              | Non_REC_Study_Types                         | Funder\'s letter/outcome of funding panel                                                                     | optional     | Valid_Data_Fields_Optional_Version_Date |
+            | Correction_Of_Typographical_Errors           | PNG_File              | Non_REC_Study_Types                         | Statistician\'s letter                                                                                        | optional     | Valid_Data_Fields_Optional_Version_Date |
+            | CRF_Other_Study_Data_Records                 | PNG_File              | Non_REC_Study_Types                         | Referee\'s or other scientific critique report                                                                | optional     | Valid_Data_Fields_Optional_Version_Date |
+            | GDPR_Wording                                 | PNG_File              | Non_REC_Study_Types                         | Sponsor - Site Agreement                                                                                      | optional     | Valid_Data_Fields_Optional_Version_Date |
+            | Other_Minor_Change_To_Study_Documents        | PNG_File              | Non_REC_Study_Types                         | Schedule of Events or Schedule of Events cost attribution template (SoECAT)                                   | optional     | Valid_Data_Fields_Optional_Version_Date |
+            | Post_Trial_Information_For_Participants      | PNG_File              | Non_REC_Study_Types                         | Data flow diagram or documents demonstrating conformity with data protection and confidentiality requirements | optional     | Valid_Data_Fields_Optional_Version_Date |
+            | Protocol_Non_Substantial_Changes             | PNG_File              | Non_REC_Study_Types                         | Miscellaneous                                                                                                 | optional     | Valid_Data_Fields_Optional_Version_Date |
 
-    @rsp-4314 @ValidateErrorNonRECStudyTypeOptionalDocumentVersionDate @test
+    @rsp-4314 @ValidateErrorNonRECStudyTypeOptionalDocumentVersionDate
     Scenario Outline: Verify that the user sees appropriate error messages on the review document information page when mandatory details are missing, using document types applicable to Non-REC study types where document version and date are optional, for documents uploaded with an Incomplete status
         And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
         When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
@@ -305,13 +304,107 @@ Feature: Create Amendment - Project Documents Edit and Save
             | Protocol_Non_Substantial_Changes             | PNG_File              | Non_REC_Study_Types                         | Dear investigator letter                                                                                      | optional     | Missing_Mandatory_Question_Previously_Approved_Error |
             | Translations_Addition_Of_Translated_Versions | PNG_File              | Non_REC_Study_Types                         | Funder\'s letter/outcome of funding panel                                                                     | optional     | Missing_Mandatory_Question_Previously_Approved_Error |
             | Correction_Of_Typographical_Errors           | PNG_File              | Non_REC_Study_Types                         | Statistician\'s letter                                                                                        | optional     | Missing_Mandatory_Question_Previously_Approved_Error |
-            # | CRF_Other_Study_Data_Records                 | PNG_File              | Non_REC_Study_Types                         | Referee\'s  or other scientific critique report                                                               | optional     | Missing_Mandatory_Question_Previously_Approved_Error |
+            | CRF_Other_Study_Data_Records                 | PNG_File              | Non_REC_Study_Types                         | Referee\'s or other scientific critique report                                                                | optional     | Missing_Mandatory_Question_Previously_Approved_Error |
             | GDPR_Wording                                 | PNG_File              | Non_REC_Study_Types                         | Sponsor - Site Agreement                                                                                      | optional     | Missing_Mandatory_Question_Previously_Approved_Error |
             | Other_Minor_Change_To_Study_Documents        | PNG_File              | Non_REC_Study_Types                         | Schedule of Events or Schedule of Events cost attribution template (SoECAT)                                   | optional     | Missing_Mandatory_Question_Previously_Approved_Error |
             | Post_Trial_Information_For_Participants      | PNG_File              | Non_REC_Study_Types                         | Data flow diagram or documents demonstrating conformity with data protection and confidentiality requirements | optional     | Missing_Mandatory_Question_Previously_Approved_Error |
             | Protocol_Non_Substantial_Changes             | PNG_File              | Non_REC_Study_Types                         | Miscellaneous                                                                                                 | optional     | Missing_Mandatory_Question_Previously_Approved_Error |
 
-    @rsp-4314 @ValidateDocumentTypeDropDownList @ValidateNonRECStudyTypeMandatoryDocumentVersionDate @test
+    @rsp-4314 @ValidateErrorNonRECStudyTypeMissingMandatoryFields
+    Scenario Outline: Verify that the user sees appropriate error messages on the review document information page when mandatory details are missing for documents uploaded with an Incomplete status
+        And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
+        When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+        Then I can see the add documents for '<Specific_Change>' page
+        And I upload '<Document_Upload_Files>' documents
+        And I capture the page screenshot
+        When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+        Then I can see the review uploaded documents for '<Specific_Change>' page
+        And I capture the page screenshot
+        And I validate the uploaded '<Document_Upload_Files>' documents are listed along with size and delete option in the review uploaded documents page
+        When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+        When I can see the add document details for '<Specific_Change>' page
+        And I capture the page screenshot
+        And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+        And I click on the document link with status 'Document_Status_Incomplete' and I can see the add document details for specific document page
+        And I capture the page screenshot
+        And I can see the document type drop down list shows only the document types for '<Document_Types_Dropdown_List_For_Study_Type>'
+        And I capture the page screenshot
+        When I click the 'Save_Continue' button on the 'Add_Document_Details_For_Specific_Document_Modifications_Page'
+        And I capture the page screenshot
+        And I validate the status of each document is 'Document_Status_Incomplete' in add document details page
+        When I click the 'Save_Continue' button on the 'Add_Document_Details_Modifications_Page'
+        And I capture the page screenshot
+        And I can see the review your document information page
+        Then I validate the field values 'Valid_Data_All_Fields' displayed in the review your document information page
+        When I click the 'Save_Continue' button on the 'Review_Your_Document_Infomation_Modifications_Page'
+        And I capture the page screenshot
+        Then I validate the error '<Field_And_Summary_Error_Message>' displayed on 'Review_Your_Document_Infomation_Modifications_Page'
+        And I capture the page screenshot
+        And I click the error displayed on 'Review_Your_Document_Infomation_Modifications_Page'
+        And I capture the page screenshot
+        And I enter document details for the uploaded documents using '<Document_Details_Info>' in the add document details for specific document page
+        And I capture the page screenshot
+        When I click the 'Save_Changes' button on the 'Add_Document_Details_For_Specific_Document_Modifications_Page'
+        And I capture the page screenshot
+        When I click the 'Save_Continue' button on the 'Review_Your_Document_Infomation_Modifications_Page'
+        And I capture the page screenshot
+        And I can see the modification progress saved successful message on project overview page
+        And I can see the project overview page
+        And I capture the page screenshot
+
+        Examples:
+            | Specific_Change                    | Document_Upload_Files | Document_Types_Dropdown_List_For_Study_Type | Field_And_Summary_Error_Message | Document_Details_Info                        |
+            | Correction_Of_Typographical_Errors | PNG_File              | Non_REC_Study_Types                         | Missing_Mandatory_Fields_Error  | Mandatory_Data_Fields_Optional_Version_Date  |
+            | Correction_Of_Typographical_Errors | PNG_File              | Non_REC_Study_Types                         | Missing_Mandatory_Fields_Error  | Mandatory_Data_Fields_Mandatory_Version_Date |
+
+    @rsp-4314 @ValidateErrorNonRECStudyTypeMissingMandatoryFields
+    Scenario Outline: Verify that the user sees appropriate error messages on the review document information page when mandatory details are missing for documents uploaded with an Incomplete status-alternate flow
+        And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
+        When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+        Then I can see the add documents for '<Specific_Change>' page
+        And I upload '<Document_Upload_Files>' documents
+        And I capture the page screenshot
+        When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+        Then I can see the review uploaded documents for '<Specific_Change>' page
+        And I capture the page screenshot
+        And I validate the uploaded '<Document_Upload_Files>' documents are listed along with size and delete option in the review uploaded documents page
+        When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+        When I can see the add document details for '<Specific_Change>' page
+        And I capture the page screenshot
+        And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+        And I click on the document link with status 'Document_Status_Incomplete' and I can see the add document details for specific document page
+        And I capture the page screenshot
+        And I can see the document type drop down list shows only the document types for '<Document_Types_Dropdown_List_For_Study_Type>'
+        And I capture the page screenshot
+        When I click the 'Save_Continue' button on the 'Add_Document_Details_For_Specific_Document_Modifications_Page'
+        And I capture the page screenshot
+        And I validate the status of each document is 'Document_Status_Incomplete' in add document details page
+        When I click the 'Save_Continue' button on the 'Add_Document_Details_Modifications_Page'
+        And I capture the page screenshot
+        And I can see the review your document information page
+        Then I validate the field values 'Valid_Data_All_Fields' displayed in the review your document information page
+        When I click the 'Save_Continue' button on the 'Review_Your_Document_Infomation_Modifications_Page'
+        And I capture the page screenshot
+        Then I validate the error '<Field_And_Summary_Error_Message>' displayed on 'Review_Your_Document_Infomation_Modifications_Page'
+        And I capture the page screenshot
+        And I click the error displayed on 'Review_Your_Document_Infomation_Modifications_Page'
+        And I capture the page screenshot
+        And I enter document details for the uploaded documents using '<Document_Details_Info>' in the add document details for specific document page
+        And I capture the page screenshot
+        When I click the 'Save_Changes' button on the 'Add_Document_Details_For_Specific_Document_Modifications_Page'
+        And I capture the page screenshot
+        When I click the 'Save_Continue' button on the 'Review_Your_Document_Infomation_Modifications_Page'
+        And I capture the page screenshot
+        Then I validate the error '<Field_And_Summary_Error_Message_Another>' displayed on 'Review_Your_Document_Infomation_Modifications_Page'
+        And I capture the page screenshot
+
+        Examples:
+            | Specific_Change                    | Document_Upload_Files | Document_Types_Dropdown_List_For_Study_Type | Field_And_Summary_Error_Message | Document_Details_Info                                | Field_And_Summary_Error_Message_Another              |
+            | Correction_Of_Typographical_Errors | PNG_File              | Non_REC_Study_Types                         | Missing_Mandatory_Fields_Error  | Missing_Mandatory_Data_Fields_Optional_Version_Date  | Missing_Mandatory_Question_Previously_Approved_Error |
+            | Correction_Of_Typographical_Errors | PNG_File              | Non_REC_Study_Types                         | Missing_Mandatory_Fields_Error  | Missing_Mandatory_Data_Fields_Mandatory_Version_Date | Missing_Mandatory_Question_Previously_Approved_Error |
+
+
+    @rsp-4314 @ValidateDocumentTypeDropDownList @ValidateNonRECStudyTypeMandatoryDocumentVersionDate
     Scenario Outline: Verify that the user can enter details using document types applicable to Non-REC study types, where document version and date are mandatory, for documents uploaded with an Incomplete status, and review the entered information
         And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
         When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
@@ -356,9 +449,9 @@ Feature: Create Amendment - Project Documents Edit and Save
             | Post_Trial_Information_For_Participants      | PNG_File              | Non_REC_Study_Types                         | Recruitment materials - other                      | mandatory    |
             | Protocol_Non_Substantial_Changes             | PNG_File              | Non_REC_Study_Types                         | Interviews or focus group topic guides             | mandatory    |
             | Translations_Addition_Of_Translated_Versions | PNG_File              | Non_REC_Study_Types                         | Questionnaire - non-validated                      | mandatory    |
-    # | Correction_Of_Typographical_Errors           | PNG_File              | Non_REC_Study_Types                         | Participant Diary (sample)                         | mandatory    |
+            | Correction_Of_Typographical_Errors           | PNG_File              | Non_REC_Study_Types                         | Participant diary (sample)                         | mandatory    |
 
-    @rsp-4314 @ValidateErrorNonRECStudyTypeMandatoryDocumentVersionDate @test
+    @rsp-4314 @ValidateErrorNonRECStudyTypeMandatoryDocumentVersionDate
     Scenario Outline: Verify that the user sees appropriate error messages on the review document information page when mandatory details are missing, using document types applicable to Non-REC study types where document version and date are mandatory, for documents uploaded with an Incomplete status
         And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
         When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
@@ -398,55 +491,49 @@ Feature: Create Amendment - Project Documents Edit and Save
             | Post_Trial_Information_For_Participants      | PNG_File              | Non_REC_Study_Types                         | Recruitment materials - other                      | mandatory    | Missing_Mandatory_Question_Previously_Approved_Document_Version_Date_Error |
             | Protocol_Non_Substantial_Changes             | PNG_File              | Non_REC_Study_Types                         | Interviews or focus group topic guides             | mandatory    | Missing_Mandatory_Question_Previously_Approved_Document_Version_Date_Error |
             | Translations_Addition_Of_Translated_Versions | PNG_File              | Non_REC_Study_Types                         | Questionnaire - non-validated                      | mandatory    | Missing_Mandatory_Question_Previously_Approved_Document_Version_Date_Error |
-            | Correction_Of_Typographical_Errors           | PNG_File              | Non_REC_Study_Types                         | Participant Diary (sample)                         | mandatory    | Missing_Mandatory_Question_Previously_Approved_Document_Version_Date_Error |
+            | Correction_Of_Typographical_Errors           | PNG_File              | Non_REC_Study_Types                         | Participant diary (sample)                         | mandatory    | Missing_Mandatory_Question_Previously_Approved_Document_Version_Date_Error |
 
+    @rsp-4314 @ValidateErrorNonRECStudyTypeMandatoryDocumentVersionOrDate
+    Scenario Outline: Verify that the user sees appropriate error messages on the review document information page when few mandatory details are missing, using document types applicable to Non-REC study types where document version and date are mandatory, for documents uploaded with an Incomplete status
+        And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
+        When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+        Then I can see the add documents for '<Specific_Change>' page
+        And I upload '<Document_Upload_Files>' documents
+        And I capture the page screenshot
+        When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+        Then I can see the review uploaded documents for '<Specific_Change>' page
+        And I capture the page screenshot
+        And I validate the uploaded '<Document_Upload_Files>' documents are listed along with size and delete option in the review uploaded documents page
+        When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+        When I can see the add document details for '<Specific_Change>' page
+        And I capture the page screenshot
+        And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+        And I click on the document link with status 'Document_Status_Incomplete' and I can see the add document details for specific document page
+        And I can see the document type drop down list shows only the document types for '<Document_Types_Dropdown_List_For_Study_Type>'
+        And I capture the page screenshot
+        And I select document type '<Document_Types_Mandatory>' for which document version and date are '<Version_Date>' and I can see mandatory fields are displayed based on the selected document type
+        And I capture the page screenshot
+        And I enter document details for the uploaded documents using '<Valid_Data_Fields_Mandatory_Version_Or_Date>' in the add document details for specific document page
+        And I capture the page screenshot
+        When I click the 'Save_Continue' button on the 'Add_Document_Details_For_Specific_Document_Modifications_Page'
+        And I capture the page screenshot
+        And I validate the status of each document is 'Document_Status_Incomplete' in add document details page
+        When I click the 'Save_Continue' button on the 'Add_Document_Details_Modifications_Page'
+        And I capture the page screenshot
+        And I can see the review your document information page
+        Then I validate the field values 'Valid_Data_All_Fields' displayed in the review your document information page
+        When I click the 'Save_Continue' button on the 'Review_Your_Document_Infomation_Modifications_Page'
+        And I capture the page screenshot
+        Then I validate the error '<Field_And_Summary_Error_Message>' displayed on 'Review_Your_Document_Infomation_Modifications_Page'
 
-
-
-
-
-
-
-#         Scenario 1: Verify that the applicant can choose a document type for my study
-
-#         Given that I am on screen title Add documents details for {first document in the list}
-
-#         When I click on click on document types
-
-#         Then  am able to choose a document type from a drop down list
-
-#         And the drop down list shows only the document type for my study type  - see excel sheet data  in notes. The document type names can be found in column D.  Only document types that have “1 “shown in column X should be included for non-REC studies.
-
-#         And date and version numbers are mandatory for only those document types identified as mandatory in column F in the excel data sheet. For all other document types identified as applicable for non-REC studies, they will be optional fields.
-
-#         Scenario 2 : Verify that the applicant can see validation for filling out mandatory document types
-
-#         Given that I have selected a document type from a drop down list where version numbers and date are mandatory to be entered (as shown in column F in the excel sheet.
-
-#         AND I have either:
-
-#         not entered a ‘document date'
-
-#         not entered a ‘document version’
-
-#         or not entered both ‘document date’ and ‘document version’
-
-#         AND I click on ‘Save and continue’ on the document details
-
-#         AND I am redirected to the ‘Add document details for {specific area of change}’ page
-
-#         And I click on the ‘Save and continue’ on the ‘Add document details for {specific area of change}’ page
-
-#         And I am redirected to the 'Review your document information' page
-
-#         When I click on the ‘Save and continue’ button on the  'Review your document information' page
-
-# THEN I can see the following error messages depending on which field is missing:
-
-# ‘Enter a document date’ error validation message IF I have not entered a ‘document date’
-
-# ‘Enter a document version’ error validation message IF I have not entered a ‘document version’
-
-# ‘Enter a document date’ and a separate ‘Enter document version’ error validation message IF I have not entered either of the 'Document date and ‘document version’ fields
-
+        Examples:
+            | Specific_Change                              | Document_Upload_Files | Document_Types_Dropdown_List_For_Study_Type | Document_Types_Mandatory                           | Version_Date | Field_And_Summary_Error_Message                   | Valid_Data_Fields_Mandatory_Version_Or_Date |
+            | Correction_Of_Typographical_Errors           | PNG_File              | Non_REC_Study_Types                         | Protocol / Clinical Investigation Plan             | mandatory    | Missing_Mandatory_Question_Document_Version_Error | Valid_Data_Fields_Mandatory_Version         |
+            | CRF_Other_Study_Data_Records                 | PNG_File              | Non_REC_Study_Types                         | Participant information sheet (PIS)                | mandatory    | Missing_Mandatory_Question_Document_Version_Error | Valid_Data_Fields_Mandatory_Version         |
+            | GDPR_Wording                                 | PNG_File              | Non_REC_Study_Types                         | Consent form                                       | mandatory    | Missing_Mandatory_Question_Document_Version_Error | Valid_Data_Fields_Mandatory_Version         |
+            | Other_Minor_Change_To_Study_Documents        | PNG_File              | Non_REC_Study_Types                         | Recruitment - Invitation to potential participants | mandatory    | Missing_Mandatory_Question_Document_Version_Error | Valid_Data_Fields_Mandatory_Version         |
+            | Post_Trial_Information_For_Participants      | PNG_File              | Non_REC_Study_Types                         | Recruitment materials - other                      | mandatory    | Missing_Mandatory_Question_Document_Version_Error | Valid_Data_Fields_Mandatory_Version         |
+            | Protocol_Non_Substantial_Changes             | PNG_File              | Non_REC_Study_Types                         | Interviews or focus group topic guides             | mandatory    | Missing_Mandatory_Question_Document_Date_Error    | Valid_Data_Fields_Mandatory_Date            |
+            | Translations_Addition_Of_Translated_Versions | PNG_File              | Non_REC_Study_Types                         | Questionnaire - non-validated                      | mandatory    | Missing_Mandatory_Question_Document_Date_Error    | Valid_Data_Fields_Mandatory_Date            |
+            | Correction_Of_Typographical_Errors           | PNG_File              | Non_REC_Study_Types                         | Participant diary (sample)                         | mandatory    | Missing_Mandatory_Question_Document_Date_Error    | Valid_Data_Fields_Mandatory_Date            |
 

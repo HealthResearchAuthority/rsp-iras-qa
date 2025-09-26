@@ -8,6 +8,7 @@ export default class AddDocumentDetailsModificationsPage {
   readonly page: Page;
   readonly reviewYourDocumentInfomationModificationsPageTestData: typeof reviewYourDocumentInfomationModificationsPageTestData;
   readonly linkTextData: typeof linkTextData;
+  private _error_field: string;
   readonly pageHeading: Locator;
   readonly pageLabels: Locator;
   readonly list_row: Locator;
@@ -37,6 +38,7 @@ export default class AddDocumentDetailsModificationsPage {
     this.page = page;
     this.reviewYourDocumentInfomationModificationsPageTestData = reviewYourDocumentInfomationModificationsPageTestData;
     this.linkTextData = linkTextData;
+    this._error_field = '';
 
     //Locators
     this.pageHeading = this.page.getByRole('heading');
@@ -90,6 +92,14 @@ export default class AddDocumentDetailsModificationsPage {
     this.document_information = this.page.locator('[class*="govuk-summary-list govuk"]');
   }
 
+  //Getters & Setters for Private Variables
+  async getFieldErrorMessage(): Promise<string> {
+    return this._error_field;
+  }
+
+  async setFieldErrorMessage(value: string): Promise<void> {
+    this._error_field = value;
+  }
   //Page Methods
   async assertOnReviewYourDocumentsInformationModificationsPage() {
     const expectedPageHeading =

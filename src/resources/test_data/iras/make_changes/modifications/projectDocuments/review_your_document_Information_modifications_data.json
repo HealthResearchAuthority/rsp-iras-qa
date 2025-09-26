@@ -17,5 +17,15 @@
     "sponsor_document_version_row": "Enter document version",
     "sponsor_document_date_row": "Enter document date",
     "document_previously_approved_row": "Enter previously approved?"
+  },
+  "Missing_Mandatory_Fields_Error": {
+    "document_type_row": "Enter document type",
+    "document_previously_approved_row": "Enter previously approved?"
+  },
+  "Missing_Mandatory_Question_Document_Version_Error": {
+    "sponsor_document_version_row": "Enter document version"
+  },
+  "Missing_Mandatory_Question_Document_Date_Error": {
+    "sponsor_document_date_row": "Enter document date"
   }
 }

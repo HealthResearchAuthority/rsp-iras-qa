@@ -276,8 +276,24 @@ Then(
           expect.soft(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
           const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
           await expect(element).toBeInViewport();
+          await reviewYourDocumentInformationModificationsPage.setFieldErrorMessage(fieldErrorMessagesActualValues);
         }
       }
     }
+  }
+);
+
+Then(
+  'I click the error displayed on {string}',
+  async ({ reviewYourDocumentInformationModificationsPage }, pageKey: string) => {
+    let page: any;
+    if (pageKey === 'Review_Your_Document_Infomation_Modifications_Page') {
+      page = reviewYourDocumentInformationModificationsPage;
+    }
+    const fieldErrorMessage = await page.getFieldErrorMessage();
+    await reviewYourDocumentInformationModificationsPage.page
+      .getByRole('link', { name: fieldErrorMessage })
+      .nth(1)
+      .click();
   }
 );

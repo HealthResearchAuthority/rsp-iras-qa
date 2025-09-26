@@ -98,12 +98,25 @@ Then(
       addDocumentDetailsForSpecificDocumentModificationsPage
         .addDocumentDetailsForSpecificDocumentModificationsPageTestData[documentTypedatasetName];
     const documentTypeDropdownValuesExpected = dataset['document_type_dropdown_values'];
+    // const documentTypeDropdownValuesActual = (
+    //   await addDocumentDetailsForSpecificDocumentModificationsPage.document_type_dropdown
+    //     .locator('option')
+    //     .allTextContents()
+    // ).filter((option) => option.trim() !== 'Please select...');
     const documentTypeDropdownValuesActual = (
       await addDocumentDetailsForSpecificDocumentModificationsPage.document_type_dropdown
         .locator('option')
         .allTextContents()
-    ).filter((option) => option.trim() !== 'Please select...');
-    expect.soft(documentTypeDropdownValuesActual).toStrictEqual(documentTypeDropdownValuesExpected);
+    )
+      .map((option) => option.trim())
+      .filter((option) => option !== 'Please select...');
+
+    expect.soft(documentTypeDropdownValuesActual).toEqual(documentTypeDropdownValuesExpected);
+    // check the document types are sorted in alphabetical order
+    // const sortedList = [...documentTypeDropdownValuesActual].sort((a, b) =>
+    //   a.localeCompare(b, 'en', { sensitivity: 'base' })
+    // );
+    // expect.soft(documentTypeDropdownValuesActual).toEqual(sortedList);
   }
 );
 

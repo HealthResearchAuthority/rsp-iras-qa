@@ -75,7 +75,7 @@
       "Interviews or focus group topic guides",
       "Questionnaire - non-validated",
       "Questionnaire - validated",
-      "Participant Diary (sample)",
+      "Participant diary (sample)",
       "Curriculum vitae (CV) /suitability of researcher",
       "Student research criteria eligibility declaration",
       "Dear investigator letter",
@@ -89,6 +89,38 @@
     ]
   },
   "Valid_Data_Fields_Optional_Version_Date": {
+    "document_previously_approved_radio": "Yes"
+  },
+  "Mandatory_Data_Fields_Optional_Version_Date": {
+    "document_type_dropdown": "Evidence of insurance or indemnity",
+    "document_previously_approved_radio": "Yes"
+  },
+  "Missing_Mandatory_Data_Fields_Optional_Version_Date": {
+    "document_type_dropdown": "Evidence of insurance or indemnity"
+  },
+  "Mandatory_Data_Fields_Mandatory_Version_Date": {
+    "document_type_dropdown": "Protocol / Clinical Investigation Plan",
+    "sponsor_document_version_text": "1.5",
+    "sponsor_document_day_text": "20",
+    "sponsor_document_month_dropdown": "January",
+    "sponsor_document_year_text": "2020",
+    "document_previously_approved_radio": "Yes"
+  },
+  "Missing_Mandatory_Data_Fields_Mandatory_Version_Date": {
+    "document_type_dropdown": "Protocol / Clinical Investigation Plan",
+    "sponsor_document_version_text": "1.5",
+    "sponsor_document_day_text": "20",
+    "sponsor_document_month_dropdown": "January",
+    "sponsor_document_year_text": "2020"
+  },
+  "Valid_Data_Fields_Mandatory_Version": {
+    "sponsor_document_day_text": "20",
+    "sponsor_document_month_dropdown": "January",
+    "sponsor_document_year_text": "2020",
+    "document_previously_approved_radio": "Yes"
+  },
+  "Valid_Data_Fields_Mandatory_Date": {
+    "sponsor_document_version_text": "1.5",
     "document_previously_approved_radio": "Yes"
   },
   "Valid_Data_Fields_Mandatory_Version_Date": {
@@ -108,7 +140,7 @@
       "Dear investigator letter",
       "Funder's letter/outcome of funding panel",
       "Statistician's letter",
-      "Referee's  or other scientific critique report",
+      "Referee's or other scientific critique report",
       "Sponsor - Site Agreement",
       "Schedule of Events or Schedule of Events cost attribution template (SoECAT)",
       "Data flow diagram or documents demonstrating conformity with data protection and confidentiality requirements",
