@@ -9,7 +9,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                 Then I can see the 'Search_Modifications_Page'
                 And I capture the page screenshot
         # I 'cannot' see the advanced filters panel-fail for Advanced_Filters_Nth
-        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @rsp-4118  @rsp-4293
+        @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @rsp-4118  @rsp-4293 @filterPanelIssueSponsorOrg @KnownIssue
         Scenario Outline: Verify the user is able to view the list of modifications by entering a valid IRAS ID, selecting the advanced filters, and clicking the 'Apply filters' button
                 When I enter '<Valid_Iras_Id>' into the search field for search modifications page
                 And I capture the page screenshot
