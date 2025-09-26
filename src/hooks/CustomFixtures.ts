@@ -63,6 +63,7 @@ import ModificationsReceivedCommonPage from '../pages/IRAS/reviewResearch/receiv
 import SelectStudyWideReviewerPage from '../pages/IRAS/reviewResearch/receiveAmendments/SelectStudyWideReviewerPage';
 import ModificationsAssignmentConfirmationPage from '../pages/IRAS/reviewResearch/receiveAmendments/ModificationsAssignmentConfirmationPage';
 import MyModificationsTasklistPage from '../pages/IRAS/reviewResearch/receiveAmendments/MyModificationsTasklistPage';
+import SponsorReferencePage from '../pages/IRAS/makeChanges/modifications/SponsorReferencePage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -127,6 +128,7 @@ type CustomFixtures = {
   modificationsAssignmentConfirmationPage: ModificationsAssignmentConfirmationPage;
   myModificationsTasklistPage: MyModificationsTasklistPage;
   modificationsReceivedCommonPage: ModificationsReceivedCommonPage;
+  sponsorReferencePage: SponsorReferencePage;
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -375,6 +377,10 @@ export const test = base.extend<CustomFixtures>({
 
   modificationsReceivedCommonPage: async ({ page }, use) => {
     await use(new ModificationsReceivedCommonPage(page));
+  },
+
+  sponsorReferencePage: async ({ page }, use) => {
+    await use(new SponsorReferencePage(page));
   },
 
   makeAxeBuilder: async ({ page }, use) => {
