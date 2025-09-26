@@ -274,14 +274,14 @@ Then(
               manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.country_label +
               ' - ' +
               filterLabel;
-            await expect(commonItemsPage.advanced_filter_active_filters_label.getByText(activeLabel)).not.toBeVisible();
+            await expect(commonItemsPage.active_filter_list.getByText(activeLabel)).not.toBeVisible();
           }
         } else if (key === 'status_radio') {
           const activeLabel =
             manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.status_label +
             ' - ' +
             dataset[key];
-          await expect(commonItemsPage.advanced_filter_active_filters_label.getByText(activeLabel)).not.toBeVisible();
+          await expect(commonItemsPage.active_filter_list.getByText(activeLabel)).not.toBeVisible();
         }
       }
     }
