@@ -122,7 +122,8 @@
     "Project": "QA_Automation - This is a short project title",
     "Post_Approval": "Post approval",
     "Key_Project_Roles": "Key project roles",
-    "Research_Locations": "Research locations"
+    "Research_Locations": "Research locations",
+    "View_Project_Overview": "View project overview"
   },
   "Review_Body_User_List_Page": {
     "Back_To_Review_Body_Profile": "Back to review body profile",
