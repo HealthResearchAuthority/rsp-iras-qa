@@ -615,7 +615,34 @@ Feature: Create Amendment - Create Project - Review your answers
   # | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | sponsor_contact   | Invalid_Email_Data_Two_Missing_AT                      | Field_Error_Sponsor_Email       |
   # | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | sponsor_contact   | Invalid_Email_Data_Two_Max_Char                        | Field_Error_Sponsor_Email       |
 
-   @rsp-1867 @rsp-3819
+  @rsp-1867 @rsp-3819 @ValidateConfirmProjectFlow
+  Scenario Outline: Validate user is able to see the project overview page when user submit the review answer page with all mandatory fields entered correctly
+    And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
+    And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I fill the project details title page with '<Project_Details_Title>'
+    And I capture the page screenshot
+    And I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
+    And I fill the key project roles page with '<Key_Project_Roles>'
+    And I capture the page screenshot
+    And I click the '<Navigation_Button_Third>' button on the 'Key_Project_Roles_Page'
+    And I fill the research locations page with '<Research_Locations>'
+    And I capture the page screenshot
+    When I click the '<Navigation_Button_Third>' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    When I click the '<Navigation_Button_Fourth>' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
+    And I capture the page screenshot
+
+    Examples:
+      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Third | Navigation_Button_Fourth | Project_Details_Title | Key_Project_Roles     | Research_Locations    |
+      | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields |
+
+  @rsp-1867 @rsp-3819
   Scenario Outline: Validate user is able to see the error messages when user submit the review answer page when all mandatory fields are not entered correctly
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
@@ -650,7 +677,7 @@ Feature: Create Amendment - Create Project - Review your answers
       | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields              | Valid_Data_Only_is_nhs_hsc_organisation     | Field_Error_Message_Except_NHS_HSC_Org_As_Yes      |
       | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields              | Valid_Data_is_nhs_hsc_organisation          | Field_Error_Message_Except_NHS_HSC_Org_Lead_Nation |
 
- @rsp-1867 @rsp-3819 @rsp-4880 @ValidateConfirmProjectPage @testOnly
+  @rsp-1867 @rsp-3819 @rsp-4880 @ValidateConfirmProjectPage 
   Scenario Outline: Validate user is able to see the project success confirmation screen and then the project overview page when user submit the review answer page with all mandatory fields entered correctly
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
