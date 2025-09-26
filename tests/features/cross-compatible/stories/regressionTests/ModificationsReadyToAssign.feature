@@ -101,7 +101,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
             | Days_Since_Submission | days since submission | ascending    | descending     |
 
 
-    @RegressionSearchTasklistWithNoResults @rsp-4104 @fail @KNOWN-DEFECT-RSP-5208
+    @RegressionSearchTasklistWithNoResults @rsp-4104
     Scenario Outline: Verify the tasklist page displays the no results found message, when no records on the system match the search criteria
         And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
