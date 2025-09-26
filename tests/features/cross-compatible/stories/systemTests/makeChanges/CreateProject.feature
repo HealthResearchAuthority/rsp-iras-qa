@@ -162,6 +162,7 @@ Feature: Create Amendment - Create Project
     And I click the '<Navigation_Link>' link on the 'Project_Details_Title_Page'
     Then I can see the review your answers page
     When I click the '<Navigation_Button_Fourth>' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
     Then I can see the project overview page
 
     Examples:
