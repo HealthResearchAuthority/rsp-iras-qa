@@ -1189,7 +1189,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I expect to receive no WCAG Violations
 
   @axeAccessibilityProjectDocumentsReviewDocumentModificationsPage @ApplicantUser
-  Scenario: Modifications review document page
+  Scenario: Modifications project documents review page
     Given I have navigated to the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -1209,6 +1209,12 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I upload 'PNG_File' documents
     When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
     Then I can see the review uploaded documents for 'Correction_Of_Typographical_Errors' page
+    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+    When I can see the add document details for 'Correction_Of_Typographical_Errors' page
+    And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' for the uploaded 'PNG_File' in the add document details for specific document page
+    When I click the 'Save_Continue' button on the 'Add_Document_Details_For_Specific_Document_Modifications_Page'
+    When I click the 'Save_Continue' button on the 'Add_Document_Details_Modifications_Page'
+    And I can see the review your document information page
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
