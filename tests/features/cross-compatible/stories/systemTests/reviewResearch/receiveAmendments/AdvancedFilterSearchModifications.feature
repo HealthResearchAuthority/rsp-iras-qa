@@ -8,7 +8,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                 And I click the 'Search' link on the 'Approvals_Page'
                 Then I can see the 'Search_Modifications_Page'
                 And I capture the page screenshot
-
+        # I 'cannot' see the advanced filters panel-fail for Advanced_Filters_Nth
         @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @rsp-4118  @rsp-4293
         Scenario Outline: Verify the user is able to view the list of modifications by entering a valid IRAS ID, selecting the advanced filters, and clicking the 'Apply filters' button
                 When I enter '<Valid_Iras_Id>' into the search field for search modifications page
@@ -229,6 +229,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                         | Invalid_Iras_Id_Spaces_Seperator | Advanced_Filters_TwentyTwo   |
                         | Invalid_Iras_Id_Zeros            | Advanced_Filters_TwentyThree |
 
+        # I 'cannot' see the advanced filters panel-fail for Advanced_Filters_Fifteen(sponsor)
         @NoResultsFound @ValidIrasIdAndAdvancedFilters @rsp-4293 @Question
         Scenario Outline: Verify the user can see no matching results found message by entering valid iras id, then selected advanced filters and click on apply filters button
                 When I enter '<Valid_Iras_Id>' into the search field for search modifications page
@@ -288,7 +289,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                         | Date_Submitted_Invalid_Year_Letters_To_Date  | Invalid_Date_To_Error                   |
 
 
-        @RemoveActiveFiltersOneByOne @DataIssueNeedsFixing
+        @RemoveActiveFiltersOneByOne
         Scenario Outline: Verify the user can remove the selected filters one by one and the search results update accordingly
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -315,7 +316,8 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                         | Advanced_Filters_Nth | Advanced_Filters_Nth_Sponsor_Organisation_Filter    | Advanced_Filters_Nth_After_Remove_Sponsor_Organisation_Filter    |
                         | Advanced_Filters_Nth | Advanced_Filters_Nth_Date_Submitted_From_To_Filter  | Advanced_Filters_Nth_After_Remove_Date_Submitted_From_To_Filter  |
 
-        @RemoveAllActiveFiltersOneByOne @DataIssueNeedsFixing
+        # 'I remove the selected filters from' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'-defect
+        @RemoveAllActiveFiltersOneByOne @Defect @fail
         Scenario Outline: Verify the user can remove all the selected filters one by one and the search results update accordingly
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -341,7 +343,9 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                         | Advanced_Filters_Automation_No_SpOrg_No_ToDate   |
                         | Advanced_Filters_Automation_No_SpOrg_No_FromDate |
 
-        @RemoveAllActiveFiltersOneByOne @DataIssueNeedsFixing
+        # 'I remove the selected filters from' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'-defect
+        # I 'cannot' see active filters displayed-sponsor is selected -defect
+        @RemoveAllActiveFiltersOneByOne @Defect @fail
         Scenario Outline: Verify the user can remove all the selected filters one by one and the search results update accordingly based on the previously entered IRAS ID
                 When I enter '<Valid_Iras_Id>' into the search field for search modifications page
                 And I capture the page screenshot
@@ -367,7 +371,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                         | Valid_Iras_Id     | Advanced_Filters     |
                         | Valid_Iras_Id_Nth | Advanced_Filters_Nth |
 
-        @RemoveActiveFiltersAltogether @rsp-4293 @DataIssueNeedsFixing
+        @RemoveActiveFiltersAltogether @rsp-4293
         Scenario Outline: Verify the user can remove the selected filters altogether by clicking 'Clear all filters' link and the search results update accordingly
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot
@@ -390,7 +394,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                         | Advanced_Filters     |
                         | Advanced_Filters_Nth |
 
-        @RemoveActiveFiltersAlTogether @DataIssueNeedsFixing
+        @RemoveActiveFiltersAlTogether
         Scenario Outline: Verify the user can view the list of modifications by entering valid iras id, then selected advanced filters and click on apply filters button
                 When I enter '<Valid_Iras_Id>' into the search field for search modifications page
                 And I capture the page screenshot
