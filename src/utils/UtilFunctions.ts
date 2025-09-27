@@ -46,6 +46,15 @@ export function getAuthState(user: string): string {
     case 'workflow_coordinator':
       authState = 'auth-storage-states/workFlowCoordinator.json';
       break;
+    case 'workflow_coordinator_ni':
+      authState = 'auth-storage-states/workFlowCoordinatorNi.json';
+      break;
+    case 'workflow_coordinator_s':
+      authState = 'auth-storage-states/workFlowCoordinatorS.json';
+      break;
+    case 'workflow_coordinator_w':
+      authState = 'auth-storage-states/workFlowCoordinatorW.json';
+      break;
     default:
       throw new Error(`${user} is not a valid option`);
   }

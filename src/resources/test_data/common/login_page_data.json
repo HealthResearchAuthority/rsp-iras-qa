@@ -19,6 +19,18 @@
     "username": "FutureIRAS.WorkflowCoordinator@hra.nhs.uk",
     "password": "`${process.env.WORKFLOW_COORDINATOR_PASS}`"
   },
+  "Workflow_Coordinator_NI": {
+    "username": "FutureIRAS.WorkflowCoordinator_NI@hra.nhs.uk",
+    "password": "`${process.env.WORKFLOW_COORDINATOR_NI_PASS}`"
+  },
+  "Workflow_Coordinator_S": {
+    "username": "FutureIRASWorkflowCoordinators@hra.nhs.uk",
+    "password": "`${process.env.WORKFLOW_COORDINATOR_S_PASS}`"
+  },
+  "Workflow_Coordinator_W": {
+    "username": "FutureIRAS.WorkflowCoordinator_W@hra.nhs.uk",
+    "password": "`${process.env.WORKFLOW_COORDINATOR_W_PASS}`"
+  },
   "Login_Page": {
     "header": "Create your GOV.UK One Login or sign in"
   }

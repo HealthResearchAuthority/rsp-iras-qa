@@ -39,32 +39,12 @@ export default class LoginPage {
   //passwords & mfaKey to be set in AzureDevops Pipeline, add encrypted values to .env when running locally
   async loginWithUserCreds(dataset: string) {
     const username = this.loginPageTestData[dataset].username;
-    let secretKey: string;
-    let authTag: string;
-    let mfaKey: string;
-    if (dataset === 'System_Admin') {
-      secretKey = process.env.SYSTEM_ADMIN_SECRET_KEY;
-      authTag = process.env.SYSTEM_ADMIN_AUTH_TAG;
-      mfaKey = confirmStringNotNull(process.env.SYSTEM_ADMIN_MFA_KEY);
-    } else if (dataset === 'Applicant_User') {
-      secretKey = process.env.APPLICANT_USER_SECRET_KEY;
-      authTag = process.env.APPLICANT_USER_AUTH_TAG;
-      mfaKey = confirmStringNotNull(process.env.APPLICANT_USER_MFA_KEY);
-    } else if (dataset === 'Studywide_Reviewer') {
-      secretKey = process.env.STUDYWIDE_REVIEWER_SECRET_KEY;
-      authTag = process.env.STUDYWIDE_REVIEWER_AUTH_TAG;
-      mfaKey = confirmStringNotNull(process.env.STUDYWIDE_REVIEWER_MFA_KEY);
-    } else if (dataset === 'Team_Manager') {
-      secretKey = process.env.TEAM_MANAGER_SECRET_KEY;
-      authTag = process.env.TEAM_MANAGER_AUTH_TAG;
-      mfaKey = confirmStringNotNull(process.env.TEAM_MANAGER_MFA_KEY);
-    } else if (dataset === 'Workflow_Coordinator') {
-      secretKey = process.env.WORKFLOW_COORDINATOR_SECRET_KEY;
-      authTag = process.env.WORKFLOW_COORDINATOR_AUTH_TAG;
-      mfaKey = confirmStringNotNull(process.env.WORKFLOW_COORDINATOR_MFA_KEY);
-    } else {
-      throw new Error(`${dataset} is not a valid option`);
-    }
+    const userSecret = dataset + '_SECRET_KEY';
+    const userAuth = dataset + '_AUTH_TAG';
+    const userMfa = dataset + '_MFA_KEY';
+    const secretKey = process.env[userSecret];
+    const authTag = process.env[userAuth];
+    const mfaKey = confirmStringNotNull(process.env[userMfa]);
     const password = getDecryptedValue(
       resolveEnvExpression(this.loginPageTestData[dataset].password),
       secretKey,
