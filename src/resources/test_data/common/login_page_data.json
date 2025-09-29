@@ -11,6 +11,18 @@
     "username": "FutureIRAS.BackStage@hra.nhs.uk",
     "password": "`${process.env.STUDYWIDE_REVIEWER_PASS}`"
   },
+  "Studywide_Reviewer_NI": {
+    "username": "FutureIRASBackStageNI@hra.nhs.uk",
+    "password": "`${process.env.STUDYWIDE_REVIEWER_NI_PASS}`"
+  },
+  "Studywide_Reviewer_S": {
+    "username": "FutureIRASBackStageS@hra.nhs.uk",
+    "password": "`${process.env.STUDYWIDE_REVIEWER_S_PASS}`"
+  },
+  "Studywide_Reviewer_W": {
+    "username": "FutureIRASBackStageW@hra.nhs.uk",
+    "password": "`${process.env.STUDYWIDE_REVIEWER_W_PASS}`"
+  },
   "Team_Manager": {
     "username": "FutureIRAS.TeamManager@hra.nhs.uk",
     "password": "`${process.env.TEAM_MANAGER_PASS}`"
