@@ -92,6 +92,7 @@ Feature: Create Amendment - Create Project - Regression Tests
     And I capture the page screenshot
     # Validate project overview page
     When I click the '<Navigation_Button_Fourth>' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
     Then I can see the project overview page
     And I capture the page screenshot
 
