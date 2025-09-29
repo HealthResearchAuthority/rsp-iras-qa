@@ -390,10 +390,22 @@ export const test = base.extend<CustomFixtures>({
       storageState = getAuthState('applicant_user');
     } else if ($tags.includes('@StudyWideReviewer')) {
       storageState = getAuthState('studywide_reviewer');
+    } else if ($tags.includes('@StudyWideReviewerNI')) {
+      storageState = getAuthState('studywide_reviewer_ni');
+    } else if ($tags.includes('@StudyWideReviewerSco')) {
+      storageState = getAuthState('studywide_reviewer_s');
+    } else if ($tags.includes('@StudyWideReviewerWal')) {
+      storageState = getAuthState('studywide_reviewer_w');
     } else if ($tags.includes('@TeamManager')) {
       storageState = getAuthState('team_manager');
     } else if ($tags.includes('@WorkFlowCoordinator')) {
       storageState = getAuthState('workflow_coordinator');
+    } else if ($tags.includes('@WorkFlowCoordinatorNI')) {
+      storageState = getAuthState('workflow_coordinator_ni');
+    } else if ($tags.includes('@WorkFlowCoordinatorSco')) {
+      storageState = getAuthState('workflow_coordinator_s');
+    } else if ($tags.includes('@WorkFlowCoordinatorWal')) {
+      storageState = getAuthState('workflow_coordinator_w');
     }
     await use(storageState);
   },

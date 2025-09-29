@@ -40,6 +40,15 @@ export function getAuthState(user: string): string {
     case 'studywide_reviewer':
       authState = 'auth-storage-states/studyWideReviewer.json';
       break;
+    case 'studywide_reviewer_ni':
+      authState = 'auth-storage-states/studyWideReviewerNi.json';
+      break;
+    case 'studywide_reviewer_s':
+      authState = 'auth-storage-states/studyWideReviewerS.json';
+      break;
+    case 'studywide_reviewer_w':
+      authState = 'auth-storage-states/studyWideReviewerW.json';
+      break;
     case 'team_manager':
       authState = 'auth-storage-states/teamManager.json';
       break;

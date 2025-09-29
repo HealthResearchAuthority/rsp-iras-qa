@@ -317,6 +317,9 @@ export default class CommonItemsPage {
     const authSysAdminUserFile = 'auth-storage-states/sysAdminUser.json';
     const authApplicantUserFile = 'auth-storage-states/applicantUser.json';
     const authStudyWideReviewerFile = 'auth-storage-states/studyWideReviewer.json';
+    const authStudyWideReviewerFileNi = 'auth-storage-states/studyWideReviewerNi.json';
+    const authStudyWideReviewerFileS = 'auth-storage-states/studyWideReviewerS.json';
+    const authStudyWideReviewerFileW = 'auth-storage-states/studyWideReviewerW.json';
     const authTeamManagerFile = 'auth-storage-states/teamManager.json';
     const authWorkFlowCoordinatorFile = 'auth-storage-states/workFlowCoordinator.json';
     const authWorkFlowCoordinatorFileNi = 'auth-storage-states/workFlowCoordinatorNi.json';
@@ -332,6 +335,15 @@ export default class CommonItemsPage {
         break;
       case 'studywide_reviewer':
         await this.page.context().storageState({ path: authStudyWideReviewerFile });
+        break;
+      case 'studywide_reviewer_ni':
+        await this.page.context().storageState({ path: authStudyWideReviewerFileNi });
+        break;
+      case 'studywide_reviewer_s':
+        await this.page.context().storageState({ path: authStudyWideReviewerFileS });
+        break;
+      case 'studywide_reviewer_w':
+        await this.page.context().storageState({ path: authStudyWideReviewerFileW });
         break;
       case 'team_manager':
         await this.page.context().storageState({ path: authTeamManagerFile });
