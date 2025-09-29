@@ -79,6 +79,18 @@ Then(
 );
 
 Then(
+  'I validate the ui labels using {string} on the project documents page',
+  async ({ projectOverviewPage, commonItemsPage }, datasetName) => {
+    const dataset = projectOverviewPage.projectOverviewPageTestData[datasetName];
+    for (const key in dataset) {
+      if (Object.hasOwn(dataset, key)) {
+        await commonItemsPage.validateUIComponentValues(dataset, key, projectOverviewPage);
+      }
+    }
+  }
+);
+
+Then(
   'I can see the status of modifications displayed is {string}',
   async ({ commonItemsPage, projectOverviewPage }, datasetName: string) => {
     //Limiting the checks to 2 pages
@@ -184,5 +196,13 @@ Then(
       sortedColumnList = [...actualColumnList].sort((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
     }
     expect(actualColumnList).toEqual(sortedColumnList);
+  }
+);
+
+Then(
+  'I can now see a table of search results for project documents page',
+  async ({ projectOverviewPage, commonItemsPage }) => {
+    await expect.soft(projectOverviewPage.results_count_project_documents).toBeVisible();
+    expect.soft(await commonItemsPage.tableBodyRows.count()).toBeGreaterThan(0);
   }
 );

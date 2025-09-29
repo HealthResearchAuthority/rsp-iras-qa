@@ -151,6 +151,13 @@
     "Modification_Id": "Modification ID",
     "Modification_Type": "Modification type"
   },
+  "Project_Documents_Page": {
+    "document_type_project_documents": "Document type",
+    "document_name_project_documents": "Document name",
+    "version_project_documents": "Version",
+    "document_date_project_documents": "Document date",
+    "modification_id_project_documents": "Modification ID"
+  },
   "Participating_Organisations_Page": {
     "Save_Continue": "Save and continue",
     "Save_For_Later": "Save for later",
