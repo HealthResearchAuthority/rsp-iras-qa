@@ -77,7 +77,8 @@
     "Back_To_Manage_Users": "Back to Manage users",
     "Back_To_Manage_Review_Bodies": "Back to Manage review bodies",
     "Remove_Another_User_From_The_Review_Body": "Remove another user from the review body",
-    "Add_Another_User_To_The_Review_Body": " Add another user to review body"
+    "Add_Another_User_To_The_Review_Body": " Add another user to review body",
+    "View_Project_Overview": "View project overview"
   },
   "Manage_Review_Bodies_Page": {
     "Back": "Back",
