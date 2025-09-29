@@ -6,6 +6,8 @@ export default class ConfirmationPage {
   readonly page: Page;
   readonly confirmationPageTestData: typeof confirmationPageTestData;
   readonly confirmation_header_label: Locator;
+  readonly success_message_header_label: Locator;
+  readonly success_message_body_text: Locator;
   readonly confirmation_body_label: Locator;
 
   //Initialize Page Objects
@@ -21,6 +23,12 @@ export default class ConfirmationPage {
       .or(this.page.getByRole('heading', { name: confirmationPageTestData.enable_disable_confirmation_header_label }))
       .or(this.page.getByRole('heading', { name: confirmationPageTestData.disable_success_confirmation_header_label }))
       .or(this.page.getByRole('heading', { name: confirmationPageTestData.enable_success_confirmation_header_label }));
+
+    this.success_message_header_label = this.page.getByRole('heading', {
+      name: confirmationPageTestData.Project_Record_Created_Labels.page_heading,
+    });
+    this.success_message_body_text = this.page.locator('.govuk-panel__body');
+
     this.confirmation_body_label = this.page.getByRole('paragraph').first();
   }
 

@@ -18,6 +18,7 @@ Feature: Create Modifications - Project Documents Modifications Regression
     Then I can see the review your answers page
     And I capture the page screenshot
     When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
     Then I can see the project overview page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I capture the page screenshot
