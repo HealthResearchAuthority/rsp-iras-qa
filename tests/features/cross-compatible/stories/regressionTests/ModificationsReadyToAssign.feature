@@ -1,12 +1,10 @@
 @RegressionModificationsReadyToAssign @WorkFlowCoordinator @Regression @RegressionReceiveAmendments @BackStage
 Feature: Receive Amendments: Modifications Tasklist page that displays modifications ready to be assigned
 
-    Background:
-        Given I have navigated to the 'Modifications_Tasklist_Page'
-        And I capture the page screenshot
-
     @RegressionSearchFilterComboTasklist @rsp-4104 @rsp-4296
     Scenario Outline: Verify the user is able to combine searching and filtering options to narrow modifications displayed on the tasklist
+        Given I have navigated to the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
         And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
         And I open each of the modification tasklist filters
@@ -34,6 +32,8 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
 
     @RegressionAddRemoveFiltersTasklist @rsp-4104
     Scenario: Verify that adding and removing filters narrows and widens the search results appropriately
+        Given I have navigated to the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
         And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
         And I open each of the modification tasklist filters
@@ -62,6 +62,8 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
 
     @RegressionClearAllFiltersTasklist @rsp-4104
     Scenario: Verify that the clear all filters option returns the tasklist to its original state
+        Given I have navigated to the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
         And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
         And I open each of the modification tasklist filters
@@ -77,8 +79,11 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         Then the number of search results has returned to the original number
         And I 'cannot' see active filters displayed
 
-    @RegressionSortTasklistByColumn @rsp-4091 @fail @KNOWN-DEFECT-RSP-5217
-    Scenario Outline: Verify the user is able to sort the modifications tasklist by ascending and descending order for each results table column
+    @RegressionLeadNationSortTasklistByColumn @rsp-4091 @rsp-4201 @fail @KNOWN-DEFECT-RSP-5217
+    Scenario Outline: Verify lead nation and that the user can sort the modifications tasklist by ascending and descending order for each column
+        Given I have navigated to the 'Modifications_Tasklist_Page' as '<User>'
+        And I capture the page screenshot
+        Then the country linked to the review body of the '<User>' appears as the lead nation in the page description
         When I click the '<Sort_Button>' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
         Then I can see the tasklist of modifications 'ready to assign' is sorted by '<Initial_Sort>' order of the '<Sort_Field>'
@@ -94,15 +99,16 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         And I can see the tasklist of modifications 'ready to assign' is sorted by '<Secondary_Sort>' order of the '<Sort_Field>'
 
         Examples:
-            | Sort_Button           | Sort_Field            | Initial_Sort | Secondary_Sort |
-            | Modification_Id       | modification id       | ascending    | descending     |
-            | Short_Project_Title   | short project title   | ascending    | descending     |
-            | Date_Submitted        | date submitted        | descending   | ascending      |
-            | Days_Since_Submission | days since submission | ascending    | descending     |
-
+            | User                    | Sort_Button           | Sort_Field            | Initial_Sort | Secondary_Sort |
+            | Workflow_Coordinator    | Modification_Id       | modification id       | ascending    | descending     |
+            | Workflow_Coordinator_NI | Short_Project_Title   | short project title   | ascending    | descending     |
+            | Workflow_Coordinator_S  | Date_Submitted        | date submitted        | descending   | ascending      |
+            | Workflow_Coordinator_W  | Days_Since_Submission | days since submission | ascending    | descending     |
 
     @RegressionSearchTasklistWithNoResults @rsp-4104
     Scenario Outline: Verify the tasklist page displays the no results found message, when no records on the system match the search criteria
+        Given I have navigated to the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
         And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
         And I open each of the modification tasklist filters
@@ -120,6 +126,8 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
 
     @RegressionFilterTasklistDateSubmittedValidation @rsp-4104
     Scenario Outline: Verify that correct validation is in place for the date submitted filter
+        Given I have navigated to the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
         And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
         And I open each of the modification tasklist filters
@@ -139,5 +147,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
 
     @RegressionTasklistErrorStateValidation @rsp-4111
     Scenario: Verify that the user must select a modification before continuing
+        Given I have navigated to the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
         When I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
         Then I validate 'No_Modifications_Selected_Summary_Only_Error' displayed on 'Modifications_Tasklist_Page'
