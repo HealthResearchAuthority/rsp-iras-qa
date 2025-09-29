@@ -359,7 +359,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
             | Valid_Iras_Id_Ln_England_Pn_England | Study_Wide_Reviewer_HRA_England | Modification_Id_Ln_England_Pn_England_Three_Four |
 
     # UI issues:- Page heading is not matching/Guidance text is missing
-    @StudyWideReviewer @SWRTasklist @rsp-4076 @rsp-4849 @KNOWN-DEFECT-RSP-XXXX
+    @StudyWideReviewer @SWRTasklist @rsp-4076 @rsp-4849 @KNOWN-DEFECT-RSP-5212
     Scenario Outline: Validate the SWR Tasklist page after the workflow co-ordinator assigns a study-wide reviewer to a modification from the modifications ready to assign page
         Given I have navigated to the 'My_Modifications_Tasklist_Page'
         Then I capture the page screenshot

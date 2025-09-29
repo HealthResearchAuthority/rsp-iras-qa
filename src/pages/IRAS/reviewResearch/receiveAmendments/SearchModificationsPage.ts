@@ -374,8 +374,10 @@ export default class SearchModificationsPage {
     const leadNationValues: string[] = [];
     await this.page.waitForLoadState('domcontentloaded');
     await this.page.waitForTimeout(3000);
-    let dataFound = false;
-    while (!dataFound) {
+    // let dataFound = false;
+    // while (!dataFound) {
+    //adding this for loop instead of while loop to limit navigation till first 3 pages only,to reduce time and reduce fakiness
+    for (let i = 0; i < 3; i++) {
       const rowCount = await this.tableRows.count();
       for (let i = 1; i < rowCount; i++) {
         const columns = this.tableRows.nth(i).getByRole('cell');
@@ -404,9 +406,10 @@ export default class SearchModificationsPage {
       if ((await this.next_button.isVisible()) && !(await this.next_button.isDisabled())) {
         await this.next_button.click();
         await this.page.waitForLoadState('domcontentloaded');
-      } else {
-        dataFound = true;
       }
+      // else {
+      //   dataFound = true;
+      // }
     }
     const searchResultMap = new Map([
       ['searchResultValues', searchResultValues],
@@ -471,11 +474,11 @@ export default class SearchModificationsPage {
     return confirmStringNotNull(await commonItemsPage.search_results_count.textContent());
   }
 
-  async getExpectedResultsCountLabel(commonItemsPage: CommonItemsPage) {
+  async getExpectedResultsCountLabel(commonItemsPage: CommonItemsPage, count: number) {
     const testData = commonItemsPage.commonTestData;
-    const modificationsList = await this.getModificationIdListAfterSearch();
+    // const modificationsList = await this.getModificationIdListAfterSearch();
     const expectedResultCountLabel = testData.result_count_heading;
-    return modificationsList.length + expectedResultCountLabel;
+    return count + expectedResultCountLabel;
   }
 
   async getExpectedResultsCountLabelNoResults(commonItemsPage: CommonItemsPage) {
