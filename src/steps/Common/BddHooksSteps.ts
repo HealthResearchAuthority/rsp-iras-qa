@@ -70,11 +70,17 @@ BeforeScenario(
 
     const getReauthenticatedCookies = () => {
       const tagToUserMap: Record<string, string> = {
-        '@SysAdminUser': 'system_admin',
-        '@ApplicantUser': 'applicant_user',
-        '@StudyWideReviewer': 'studywide_reviewer',
-        '@TeamManager': 'team_manager',
-        '@WorkFlowCoordinator': 'workflow_coordinator',
+        '@SysAdminUser': 'sysAdminUser', //copy map for new users + update existing to fit new format
+        '@ApplicantUser': 'applicantUser',
+        '@StudyWideReviewer': 'studyWideReviewer',
+        '@StudyWideReviewerNI': 'studyWideReviewerNi',
+        '@StudyWideReviewerSco': 'studyWideReviewerS',
+        '@StudyWideReviewerWal': 'studyWideReviewerW',
+        '@TeamManager': 'teamManager',
+        '@WorkFlowCoordinator': 'workFlowCoordinator',
+        '@WorkFlowCoordinatorNI': 'workFlowCoordinatorNi',
+        '@WorkFlowCoordinatorSco': 'workFlowCoordinatorS',
+        '@WorkFlowCoordinatorWal': 'workFlowCoordinatorW',
       };
 
       for (const tag in tagToUserMap) {
