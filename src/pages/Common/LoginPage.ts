@@ -1,7 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as loginPageTestData from '../../resources/test_data/common/login_page_data.json';
 import * as buttonTextData from '../../resources/test_data/common/button_text_data.json';
-import { confirmStringNotNull, getDecryptedValue, resolveEnvExpression } from '../../utils/UtilFunctions';
+import { getDecryptedValue, resolveEnvExpression } from '../../utils/UtilFunctions';
 import { generateToken } from '../../utils/GenerateMFA';
 
 //Declare Page Objects
@@ -41,10 +41,9 @@ export default class LoginPage {
     const username = this.loginPageTestData[dataset].username;
     const userSecret = dataset + '_SECRET_KEY';
     const userAuth = dataset + '_AUTH_TAG';
-    const userMfa = dataset + '_MFA_KEY';
     const secretKey = process.env[userSecret];
     const authTag = process.env[userAuth];
-    const mfaKey = confirmStringNotNull(process.env[userMfa]);
+    const mfaKey = resolveEnvExpression(this.loginPageTestData[dataset].mfa);
     const password = getDecryptedValue(
       resolveEnvExpression(this.loginPageTestData[dataset].password),
       secretKey,
