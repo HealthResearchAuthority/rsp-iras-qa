@@ -1,6 +1,7 @@
 import { test as base } from 'playwright-bdd';
 import AxeBuilder from '@axe-core/playwright';
 import { getAuthState } from '../utils/UtilFunctions';
+import * as loginPageTestData from '../resources/test_data/common/login_page_data.json';
 import CommonItemsPage from '../pages/Common/CommonItemsPage';
 import LoginPage from '../pages/Common/LoginPage';
 import HomePage from '../pages/IRAS/HomePage';
@@ -383,29 +384,29 @@ export const test = base.extend<CustomFixtures>({
   },
 
   //Set the Storage State based on User Tag from Feature File
-  storageState: async ({ $tags, storageState, loginPage }, use) => {
+  storageState: async ({ $tags, storageState }, use) => {
     if ($tags.includes('@SysAdminUser')) {
-      storageState = getAuthState(loginPage.loginPageTestData.System_Admin.authPath);
+      storageState = getAuthState(loginPageTestData.System_Admin.authPath);
     } else if ($tags.includes('@ApplicantUser')) {
-      storageState = getAuthState(loginPage.loginPageTestData.Applicant_User.authPath);
+      storageState = getAuthState(loginPageTestData.Applicant_User.authPath);
     } else if ($tags.includes('@StudyWideReviewer')) {
-      storageState = getAuthState(loginPage.loginPageTestData.Studywide_Reviewer.authPath);
+      storageState = getAuthState(loginPageTestData.Studywide_Reviewer.authPath);
     } else if ($tags.includes('@StudyWideReviewerNI')) {
-      storageState = getAuthState(loginPage.loginPageTestData.Studywide_Reviewer_NI.authPath);
+      storageState = getAuthState(loginPageTestData.Studywide_Reviewer_NI.authPath);
     } else if ($tags.includes('@StudyWideReviewerSco')) {
-      storageState = getAuthState(loginPage.loginPageTestData.Studywide_Reviewer_S.authPath);
+      storageState = getAuthState(loginPageTestData.Studywide_Reviewer_S.authPath);
     } else if ($tags.includes('@StudyWideReviewerWal')) {
-      storageState = getAuthState(loginPage.loginPageTestData.Studywide_Reviewer_W.authPath);
+      storageState = getAuthState(loginPageTestData.Studywide_Reviewer_W.authPath);
     } else if ($tags.includes('@TeamManager')) {
-      storageState = getAuthState(loginPage.loginPageTestData.Team_Manager.authPath);
+      storageState = getAuthState(loginPageTestData.Team_Manager.authPath);
     } else if ($tags.includes('@WorkFlowCoordinator')) {
-      storageState = getAuthState(loginPage.loginPageTestData.Workflow_Coordinator.authPath);
+      storageState = getAuthState(loginPageTestData.Workflow_Coordinator.authPath);
     } else if ($tags.includes('@WorkFlowCoordinatorNI')) {
-      storageState = getAuthState(loginPage.loginPageTestData.Workflow_Coordinator_NI.authPath);
+      storageState = getAuthState(loginPageTestData.Workflow_Coordinator_NI.authPath);
     } else if ($tags.includes('@WorkFlowCoordinatorSco')) {
-      storageState = getAuthState(loginPage.loginPageTestData.Workflow_Coordinator_S.authPath);
+      storageState = getAuthState(loginPageTestData.Workflow_Coordinator_S.authPath);
     } else if ($tags.includes('@WorkFlowCoordinatorWal')) {
-      storageState = getAuthState(loginPage.loginPageTestData.Workflow_Coordinator_W.authPath);
+      storageState = getAuthState(loginPageTestData.Workflow_Coordinator_W.authPath);
     }
     await use(storageState);
   },
