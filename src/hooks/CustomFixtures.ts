@@ -64,6 +64,9 @@ import ModificationsReceivedCommonPage from '../pages/IRAS/reviewResearch/receiv
 import SelectStudyWideReviewerPage from '../pages/IRAS/reviewResearch/receiveAmendments/SelectStudyWideReviewerPage';
 import ModificationsAssignmentConfirmationPage from '../pages/IRAS/reviewResearch/receiveAmendments/ModificationsAssignmentConfirmationPage';
 import MyModificationsTasklistPage from '../pages/IRAS/reviewResearch/receiveAmendments/MyModificationsTasklistPage';
+import AddDocumentDetailsModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/AddDocumentDetailsModificationsPage';
+import AddDocumentDetailsForSpecificDocumentModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/AddDocumentDetailsForSpecificDocumentModificationsPage';
+import ReviewYourDocumentInformationModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/ReviewYourDocumentInfomationModificationsPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -128,6 +131,9 @@ type CustomFixtures = {
   modificationsAssignmentConfirmationPage: ModificationsAssignmentConfirmationPage;
   myModificationsTasklistPage: MyModificationsTasklistPage;
   modificationsReceivedCommonPage: ModificationsReceivedCommonPage;
+  addDocumentDetailsModificationsPage: AddDocumentDetailsModificationsPage;
+  addDocumentDetailsForSpecificDocumentModificationsPage: AddDocumentDetailsForSpecificDocumentModificationsPage;
+  reviewYourDocumentInformationModificationsPage: ReviewYourDocumentInformationModificationsPage;
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -376,6 +382,18 @@ export const test = base.extend<CustomFixtures>({
 
   modificationsReceivedCommonPage: async ({ page }, use) => {
     await use(new ModificationsReceivedCommonPage(page));
+  },
+
+  addDocumentDetailsModificationsPage: async ({ page }, use) => {
+    await use(new AddDocumentDetailsModificationsPage(page));
+  },
+
+  addDocumentDetailsForSpecificDocumentModificationsPage: async ({ page }, use) => {
+    await use(new AddDocumentDetailsForSpecificDocumentModificationsPage(page));
+  },
+
+  reviewYourDocumentInformationModificationsPage: async ({ page }, use) => {
+    await use(new ReviewYourDocumentInformationModificationsPage(page));
   },
 
   makeAxeBuilder: async ({ page }, use) => {
