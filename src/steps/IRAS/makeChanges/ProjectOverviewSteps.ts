@@ -206,3 +206,71 @@ Then(
     expect.soft(await commonItemsPage.tableBodyRows.count()).toBeGreaterThan(0);
   }
 );
+
+Then('I click the {string} button on the project documents page', async ({ projectOverviewPage }, button: string) => {
+  switch (button.trim().toLowerCase()) {
+    case 'document_type':
+      await projectOverviewPage.document_type_project_documents.click();
+      break;
+    case 'document_name':
+      await projectOverviewPage.document_name_project_documents.click();
+      break;
+    case 'document_version':
+      await projectOverviewPage.version_project_documents.click();
+      break;
+    case 'document_date':
+      await projectOverviewPage.document_date_project_documents.click();
+      break;
+    case 'modification_id':
+      await projectOverviewPage.modification_id_project_documents.click();
+      break;
+    default:
+      throw new Error(`${button} is not a valid option`);
+  }
+});
+
+Then(
+  'I can see the documents is sorted by {string} order of the {string}',
+  async ({ commonItemsPage }, sortOrder: string, sortColumn: string) => {
+    let sortedDocumentsList: string[];
+    let columnIndex: number;
+    switch (sortColumn.toLowerCase()) {
+      case 'document type':
+        columnIndex = 0;
+        break;
+      case 'document name':
+        columnIndex = 1;
+        break;
+      case 'version':
+        columnIndex = 2;
+        break;
+      case 'document date':
+        columnIndex = 3;
+        break;
+      case 'modification id':
+        columnIndex = 5;
+        break;
+      default:
+        throw new Error(`${sortColumn} is not a valid option`);
+    }
+    const actualDocumentsList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
+    if (sortColumn.toLowerCase() == 'modification id') {
+      sortedDocumentsList = await commonItemsPage.sortModificationIdListValues(actualDocumentsList, sortOrder);
+    } else if (sortOrder.toLowerCase() == 'ascending') {
+      sortedDocumentsList = [...actualDocumentsList].sort((a, b) => {
+        if (a === null && b === null) return 0;
+        if (a === null) return 1;
+        if (b === null) return -1;
+        a.localeCompare(b, 'en', { sensitivity: 'base' });
+      });
+    } else {
+      sortedDocumentsList = [...actualDocumentsList].sort((a, b) => {
+        if (a === null && b === null) return 0;
+        if (a === null) return 1;
+        if (b === null) return -1;
+        b.localeCompare(a, 'en', { sensitivity: 'base' });
+      });
+    }
+    expect(actualDocumentsList).toEqual(sortedDocumentsList);
+  }
+);

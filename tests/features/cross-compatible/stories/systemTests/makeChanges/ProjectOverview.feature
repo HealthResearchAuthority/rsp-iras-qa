@@ -131,7 +131,7 @@ Feature: Project Overview
         And I capture the page screenshot
         And I validate the ui labels using 'Label_Texts_Project_Documents' on the project documents page
 
-    @rsp-4545 @ProjectDocumentsPageSort @abc
+    @rsp-4545 @ProjectDocumentsPageSort
     #Documents were uploaded manually to the project id 5789415 and validations are for the specific project
     Scenario Outline: Validate the user is able to sort the project documents page fields
         When I navigate to the project overview page of a specific project
@@ -139,21 +139,20 @@ Feature: Project Overview
         When I click the 'Project_Documents' link on the 'Project_Overview_Page'
         And the default page size should be 'twenty'
         And I capture the page screenshot
-        When I click the '<Sort_Button>' button on the 'Project_Documents_Page'
-        #Then I can see the modifications is sorted by 'ascending' order of the '<Sort_Field>'
-        # And I capture the page screenshot
-        # When I click the '<Sort_Button>' button on the 'Post_Approval_Page'
-        # Then I can see the modifications is sorted by 'descending' order of the '<Sort_Field>'
-        # And I capture the page screenshot
-
+        When I click the '<Sort_Button>' button on the project documents page
+        Then I can see the documents is sorted by 'descending' order of the '<Sort_Field>'
+        And I capture the page screenshot
+        When I click the '<Sort_Button>' button on the project documents page
+        Then I can see the documents is sorted by 'ascending' order of the '<Sort_Field>'
+        And I capture the page screenshot
 
         Examples:
-            | Sort_Button                     |
-            # | document_type_project_documents |
-            | document_name_project_documents |
-    # | version_project_documents         |
-    # | document_date_project_documents   |
-    # | modification_id_project_documents |
+            | Sort_Button      | Sort_Field      |
+            | document_type    | document type   |
+            | document_name    | document name   |
+            | document_version | version         |
+            | document_date    | document date   |
+            | modification_id  | modification id |
 
     @rsp-4545 @ProjectDocumentsPaginationFirstPage
     #Documents were uploaded manually to the project id 5789415 and validations are for the specific project
