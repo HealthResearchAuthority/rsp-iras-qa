@@ -10,7 +10,6 @@
   },
   "Valid_Data_All_Fields": {
     "nations_participating_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
-    "nations_participating_1_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
     "is_nhs_hsc_organisation_radio": "Yes",
     "lead_nation_radio": "England"
   },

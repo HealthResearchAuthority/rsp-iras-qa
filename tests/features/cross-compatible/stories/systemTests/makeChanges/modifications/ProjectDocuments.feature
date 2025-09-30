@@ -84,7 +84,7 @@ Feature: Create Amendment - Project Documents Modifications
     And I capture the page screenshot
 
     Examples:
-      | Specific_Change              | Document_Upload_Files | Document_Upload_Files_New |
+      | Specific_Change                              | Document_Upload_Files | Document_Upload_Files_New  |
       # | Correction_Of_Typographical_Errors           | PNG_File              | GIF_File                  |
       # | Correction_Of_Typographical_Errors           | GIF_File              | PNG_File                  |
       # | Correction_Of_Typographical_Errors           | BMP_File              | GIF_File                  |
@@ -121,17 +121,46 @@ Feature: Create Amendment - Project Documents Modifications
       # | Post_Trial_Information_For_Participants      | Multiple_Files        | GIF_File                  |
       # | Protocol_Non_Substantial_Changes             | Multiple_Files        | GIF_File                  |
       # | Translations_Addition_Of_Translated_Versions | Multiple_Files        | GIF_File                  |
-      | CRF_Other_Study_Data_Records | MP4_Video_File        | Multiple_Files            |
-      | CRF_Other_Study_Data_Records | MP4_Video_File        | Multiple_Files_Video      |
+      | CRF_Other_Study_Data_Records                 | MP4_File              | AVI_File                   |
+      | GDPR_Wording                                 | BMP_File              | Multiple_Files_Video_Valid |
+      | Other_Minor_Change_To_Study_Documents        | AVI_File              | MP4_File                   |
+      | Post_Trial_Information_For_Participants      | MOV_File              | MKV_File                   |
+      | Protocol_Non_Substantial_Changes             | MKV_File              | MOV_File                   |
+      | Translations_Addition_Of_Translated_Versions | MPG_File              | MPEG_File                  |
+      | CRF_Other_Study_Data_Records                 | MPEG_File             | MPG_File                   |
+      | GDPR_Wording                                 | WMV_File              | WEBM_File                  |
+      | Other_Minor_Change_To_Study_Documents        | WEBM_File             | WMV_File                   |
 
-  # The acceptable video files are: .mp4, .mov, .avi, .mkv, .wmv, .mpeg/.mpg, .webm
-  # All files must have a max limit of 100MB>>validate this (positive and negative flows )
-  # single video file
-  # multiple video files
-  # Invalid_Video_File
+  @4684 @ValidateDocumentUploadAndReviewForModificationsPage @KNOWN_DEFECT_RSP-4801_4844_4920_4921 @Test
+  Scenario Outline: Verify that a relevant error message is shown when the user attempts to upload a video file that has already been uploaded
+    And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+    Then I can see the add documents for '<Specific_Change>' page
+    And I capture the page screenshot
+    Then I upload '<Document_Upload_Files>' documents
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    Then I can see the review uploaded documents for '<Specific_Change>' page
+    And I capture the page screenshot
+    And I validate the uploaded '<Document_Upload_Files>' documents are listed along with size and delete option in the review uploaded documents page
+    And I can see the list is sorted by default in the alphabetical order of the 'uploaded documents'
+    When I click the 'Add_Another_Document' button on the 'Review_Uploaded_Document_Modifications_Page'
+    Then I can see the add documents for '<Specific_Change>' page
+    And I capture the page screenshot
+    Then I upload '<Document_Upload_Files_New>' documents
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    Then I validate 'Duplicate_File_Upload_Error' displayed on 'Add_Document_Modifications_Page' while uploading documents
+    And I capture the page screenshot
 
-  @4684 @ValidateDocumentUploadAndReviewForModificationsPage @KNOWN_DEFECT_RSP-4801_4844_4920_4921
-  Scenario Outline: Validate the user is able to upload and review documents for modifications
+    Examples:
+      | Specific_Change                    | Document_Upload_Files      | Document_Upload_Files_New  |
+      | CRF_Other_Study_Data_Records       | MP4_File                   | MP4_File                   |
+      | Correction_Of_Typographical_Errors | Multiple_Files_Video_Valid | Multiple_Files_Video_Valid |
+
+
+  @4684 @ValidateDocumentUploadAndReviewForModificationsPage @KNOWN_DEFECT_RSP-4801_4844_4920_4921 @Test
+  Scenario Outline: Verify that an appropriate error message is displayed when the user uploads a video file with an invalid format
     And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
@@ -139,29 +168,22 @@ Feature: Create Amendment - Project Documents Modifications
     And I capture the page screenshot
     Then I upload '<Document_Upload_Files_Invalid>' documents
     And I capture the page screenshot
-    # When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
-    # Then I can see an error message with instructions on how to proceed: 'The selected file must be a [list of video file types]’.
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    Then I validate 'Invalid_Format_Video_File_Error' displayed on 'Add_Document_Modifications_Page' while uploading documents
+    And I capture the page screenshot
 
     Examples:
-      | Specific_Change                    | Document_Upload_Files_Invalid |
-      | Correction_Of_Typographical_Errors | Invalid_Video_File            |
-
-  # File 35 flv.flv must be a permitted file type
-
-  # The acceptable video files are: .mp4, .mov, .avi, .mkv, .wmv, .mpeg/.mpg, .webm
-  # All files must have a max limit of 100MB
-
-  # invalid video file type .flv – Flash Video (used by Adobe Flash Player; now largely obsolete)
-  # .f4v – Flash MP4 video format (similar to .flv but based on MP4)
-  # .3gp / .3g2 – Mobile video formats used on older phones
-  # .mts / .m2ts – AVCHD format used by digital camcorders
-  # .vob – DVD Video Object file (used in DVD media)
-  # .ogv / .ogg – Ogg video format (open-source, used in some web applications)
-  # .rm / .rmvb – RealMedia formats (used by RealPlayer; now outdated)
-  # .divx / .xvid – Video formats based on MPEG-4 Part 2 (used for high-quality compression)
-  # .mxf – Material Exchange Format (used in professional video production)
-  # .asf – Advanced Systems Format (used by Windows Media)
-  # .ts – Transport Stream (used for broadcasting and streaming)
+      | Specific_Change                              | Document_Upload_Files_Invalid |
+      | Correction_Of_Typographical_Errors           | Multiple_Files_Video_Invalid  |
+      | CRF_Other_Study_Data_Records                 | ASF_File                      |
+      | GDPR_Wording                                 | FLAC_File                     |
+      | Other_Minor_Change_To_Study_Documents        | MP3_File                      |
+      | Post_Trial_Information_For_Participants      | MPEG1_File                    |
+      | Protocol_Non_Substantial_Changes             | OGG_File                      |
+      | Translations_Addition_Of_Translated_Versions | PS_File                       |
+      | CRF_Other_Study_Data_Records                 | RAW_File                      |
+      | GDPR_Wording                                 | TS_File                       |
+      | Correction_Of_Typographical_Errors           | WAV_File                      |
 
   @rsp-3876 @ValidateDocumentUploadModificationsPageErrprMessages @KNOWN_DEFECT_RSP-4801_4920
   Scenario Outline: Validate the user is able to see error messages for invalid actions on upload documents for modifications

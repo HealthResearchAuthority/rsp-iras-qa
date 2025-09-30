@@ -110,6 +110,7 @@ export default class CommonItemsPage {
   readonly search_no_results_header: Locator;
   readonly search_no_results_guidance_text: Locator;
   readonly search_no_results_guidance_points: Locator;
+  readonly errorMessageFieldLabelList: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -260,6 +261,9 @@ export default class CommonItemsPage {
       .getByRole('paragraph')
       .getByText(searchFilterResultsData.search_no_results_guidance_text, { exact: true });
     this.search_no_results_guidance_points = this.search_no_results_container.getByRole('list');
+    this.errorMessageFieldLabelList = this.page
+      .locator('.field-validation-error')
+      .or(this.page.locator('.govuk-error-message'));
   }
 
   //Getters & Setters for Private Variables
@@ -1429,5 +1433,26 @@ export default class CommonItemsPage {
       .or(this.genericButton.getByText(buttonLabel, { exact: true }))
       .first()
       .click();
+  }
+
+  async clickErrorSummaryLinkSpecific<PageObject>(key: string, page: PageObject, errorMsg: string) {
+    const element: Locator = await page[key].first();
+    await this.summaryErrorLinks.locator('..').getByRole('link', { name: errorMsg, exact: true }).click();
+    await this.page.waitForTimeout(500); //added to prevent instability when looping through multiple summary links
+    return element;
+  }
+
+  async getFieldErrorMessagesList<PageObject>(key: string, page: PageObject) {
+    const fieldErrorMessage: string[] = [];
+    const element = await page[key].first();
+    const errorMessagesLocator = this.errorFieldGroup.filter({ has: element }).locator(this.errorMessageFieldLabelList);
+    const errorCount = await errorMessagesLocator.count();
+    for (let i = 0; i < errorCount; i++) {
+      const errorText = await errorMessagesLocator.nth(i).textContent();
+      if (errorText) {
+        fieldErrorMessage.push(errorText.trim());
+      }
+    }
+    return fieldErrorMessage;
   }
 }
