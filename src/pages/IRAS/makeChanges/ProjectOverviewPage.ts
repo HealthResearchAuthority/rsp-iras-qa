@@ -1,11 +1,13 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as projectOverviewPageTestData from '../../../resources/test_data/iras/make_changes/project_overview_page_data.json';
 import { confirmStringNotNull } from '../../../utils/UtilFunctions';
+import * as linkTextData from '../../../resources/test_data/common/link_text_data.json';
 
 //Declare Page Objects
 export default class ProjectOverviewPage {
   readonly page: Page;
   readonly projectOverviewPageTestData: typeof projectOverviewPageTestData;
+  readonly linkTextData: typeof linkTextData;
   readonly pageHeading: Locator;
   readonly project_details_hint_label: Locator;
   readonly project_details_heading: Locator;
@@ -44,6 +46,7 @@ export default class ProjectOverviewPage {
   readonly review_type: Locator;
   readonly category: Locator;
   readonly status: Locator;
+  readonly view_project_overview_link: Locator;
   readonly document_type_project_documents: Locator;
   readonly document_name_project_documents: Locator;
   readonly version_project_documents: Locator;
@@ -60,6 +63,7 @@ export default class ProjectOverviewPage {
   constructor(page: Page) {
     this.page = page;
     this.projectOverviewPageTestData = projectOverviewPageTestData;
+    this.linkTextData = linkTextData;
 
     //Locators
 
@@ -164,6 +168,9 @@ export default class ProjectOverviewPage {
       name: this.projectOverviewPageTestData.Label_Texts_Post_Approval.status,
       exact: true,
     });
+    this.view_project_overview_link = this.page
+      .locator('.govuk-body')
+      .getByText(this.linkTextData.Project_Overview_Page.View_Project_Overview);
     this.document_type_project_documents = this.page.getByRole('button', {
       name: this.projectOverviewPageTestData.Label_Texts_Project_Documents.document_type_project_documents.trim(),
     });
