@@ -5,7 +5,6 @@ import * as questionSetData from '../../resources/test_data/common/question_set_
 import * as commonTestData from '../../resources/test_data/common/common_data.json';
 import * as documentUploadTestData from '../../resources/test_data/common/document_upload_data.json';
 import * as searchFilterResultsData from '../../resources/test_data/common/search_filter_results_data.json';
-import * as loginPageTestData from '../../resources/test_data/common/login_page_data.json';
 import * as fs from 'node:fs';
 import path from 'node:path';
 import ProjectFilterPage from '../IRAS/questionSet/ProjectFilterPage';
@@ -315,68 +314,8 @@ export default class CommonItemsPage {
 
   //Page Methods
   async storeAuthState(user: string) {
-    const basePath = 'auth-storage-states/';
-    const fileType = '.json';
-
-    switch (user.toLowerCase()) {
-      case 'system_admin':
-        await this.page
-          .context()
-          .storageState({ path: `${basePath}${loginPageTestData.System_Admin.authPath}${fileType}` });
-        break;
-      case 'applicant_user':
-        await this.page
-          .context()
-          .storageState({ path: `${basePath}${loginPageTestData.Applicant_User.authPath}${fileType}` });
-        break;
-      case 'studywide_reviewer':
-        await this.page
-          .context()
-          .storageState({ path: `${basePath}${loginPageTestData.Studywide_Reviewer.authPath}${fileType}` });
-        break;
-      case 'studywide_reviewer_ni':
-        await this.page
-          .context()
-          .storageState({ path: `${basePath}${loginPageTestData.Studywide_Reviewer_NI.authPath}${fileType}` });
-        break;
-      case 'studywide_reviewer_s':
-        await this.page
-          .context()
-          .storageState({ path: `${basePath}${loginPageTestData.Studywide_Reviewer_S.authPath}${fileType}` });
-        break;
-      case 'studywide_reviewer_w':
-        await this.page
-          .context()
-          .storageState({ path: `${basePath}${loginPageTestData.Studywide_Reviewer_W.authPath}${fileType}` });
-        break;
-      case 'team_manager':
-        await this.page
-          .context()
-          .storageState({ path: `${basePath}${loginPageTestData.Team_Manager.authPath}${fileType}` });
-        break;
-      case 'workflow_coordinator':
-        await this.page
-          .context()
-          .storageState({ path: `${basePath}${loginPageTestData.Workflow_Coordinator.authPath}${fileType}` });
-        break;
-      case 'workflow_coordinator_ni':
-        await this.page
-          .context()
-          .storageState({ path: `${basePath}${loginPageTestData.Workflow_Coordinator_NI.authPath}${fileType}` });
-        break;
-      case 'workflow_coordinator_s':
-        await this.page
-          .context()
-          .storageState({ path: `${basePath}${loginPageTestData.Workflow_Coordinator_S.authPath}${fileType}` });
-        break;
-      case 'workflow_coordinator_w':
-        await this.page
-          .context()
-          .storageState({ path: `${basePath}${loginPageTestData.Workflow_Coordinator_W.authPath}${fileType}` });
-        break;
-      default:
-        throw new Error(`${user} is not a valid option`);
-    }
+    const userPath = confirmStringNotNull(user.toLowerCase());
+    await this.page.context().storageState({ path: `auth-storage-states/${userPath}.json` });
   }
 
   async isAccordionExpanded(accordion: Locator): Promise<string | null> {

@@ -55,7 +55,19 @@ BeforeScenario(
     };
 
     const reauthenticateUsers = async () => {
-      const users = ['System_Admin', 'Applicant_User', 'Studywide_Reviewer', 'Team_Manager', 'Workflow_Coordinator'];
+      const users = [
+        'System_Admin',
+        'Applicant_User',
+        'Studywide_Reviewer',
+        'Studywide_Reviewer_NI',
+        'Studywide_Reviewer_S',
+        'Studywide_Reviewer_W',
+        'Team_Manager',
+        'Workflow_Coordinator',
+        'Workflow_Coordinator_NI',
+        'Workflow_Coordinator_S',
+        'Workflow_Coordinator_W',
+      ];
 
       for (const user of users) {
         await commonItemsPage.page.context().clearCookies();
@@ -70,17 +82,17 @@ BeforeScenario(
 
     const getReauthenticatedCookies = () => {
       const tagToUserMap: Record<string, string> = {
-        '@SysAdminUser': 'sysAdminUser', //copy map for new users + update existing to fit new format
-        '@ApplicantUser': 'applicantUser',
-        '@StudyWideReviewer': 'studyWideReviewer',
-        '@StudyWideReviewerNI': 'studyWideReviewerNi',
-        '@StudyWideReviewerSco': 'studyWideReviewerS',
-        '@StudyWideReviewerWal': 'studyWideReviewerW',
-        '@TeamManager': 'teamManager',
-        '@WorkFlowCoordinator': 'workFlowCoordinator',
-        '@WorkFlowCoordinatorNI': 'workFlowCoordinatorNi',
-        '@WorkFlowCoordinatorSco': 'workFlowCoordinatorS',
-        '@WorkFlowCoordinatorWal': 'workFlowCoordinatorW',
+        '@SysAdminUser': 'system_admin',
+        '@ApplicantUser': 'applicant_user',
+        '@StudyWideReviewer': 'studywide_reviewer',
+        '@StudyWideReviewerNI': 'studywide_reviewer_ni',
+        '@StudyWideReviewerSco': 'studywide_reviewer_s',
+        '@StudyWideReviewerWal': 'studywide_reviewer_w',
+        '@TeamManager': 'team_manager',
+        '@WorkFlowCoordinator': 'workflow_coordinator',
+        '@WorkFlowCoordinatorNI': 'workflow_coordinator_ni',
+        '@WorkFlowCoordinatorSco': 'workflow_coordinator_s',
+        '@WorkFlowCoordinatorWal': 'workflow_coordinator_w',
       };
 
       for (const tag in tagToUserMap) {

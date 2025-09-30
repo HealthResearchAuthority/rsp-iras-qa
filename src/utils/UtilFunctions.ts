@@ -29,7 +29,7 @@ const deviceScaleFactoriPad = 2;
 const deviceScaleFactorAndroid = 3.5;
 
 export function getAuthState(user: string): string {
-  const authState: string = `auth-storage-states/${user}.json`;
+  const authState: string = `auth-storage-states/${user.toLowerCase()}.json`;
   return authState;
 }
 
