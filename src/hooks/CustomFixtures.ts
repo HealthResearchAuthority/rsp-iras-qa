@@ -384,29 +384,31 @@ export const test = base.extend<CustomFixtures>({
 
   //Set the Storage State based on User Tag from Feature File
   storageState: async ({ $tags, storageState }, use) => {
+    let user: string = '';
     if ($tags.includes('@SysAdminUser')) {
-      storageState = getAuthState('system_admin');
+      user = 'system_admin';
     } else if ($tags.includes('@ApplicantUser')) {
-      storageState = getAuthState('applicant_user');
+      user = 'applicant_user';
     } else if ($tags.includes('@StudyWideReviewer')) {
-      storageState = getAuthState('studywide_reviewer');
+      user = 'studywide_reviewer';
     } else if ($tags.includes('@StudyWideReviewerNI')) {
-      storageState = getAuthState('studywide_reviewer_ni');
+      user = 'studywide_reviewer_ni';
     } else if ($tags.includes('@StudyWideReviewerSco')) {
-      storageState = getAuthState('studywide_reviewer_s');
+      user = 'studywide_reviewer_s';
     } else if ($tags.includes('@StudyWideReviewerWal')) {
-      storageState = getAuthState('studywide_reviewer_w');
+      user = 'studywide_reviewer_w';
     } else if ($tags.includes('@TeamManager')) {
-      storageState = getAuthState('team_manager');
+      user = 'team_manager';
     } else if ($tags.includes('@WorkFlowCoordinator')) {
-      storageState = getAuthState('workflow_coordinator');
+      user = 'workflow_coordinator';
     } else if ($tags.includes('@WorkFlowCoordinatorNI')) {
-      storageState = getAuthState('workflow_coordinator_ni');
+      user = 'workflow_coordinator_ni';
     } else if ($tags.includes('@WorkFlowCoordinatorSco')) {
-      storageState = getAuthState('workflow_coordinator_s');
+      user = 'workflow_coordinator_s';
     } else if ($tags.includes('@WorkFlowCoordinatorWal')) {
-      storageState = getAuthState('workflow_coordinator_w');
+      user = 'workflow_coordinator_w';
     }
+    storageState = getAuthState(user);
     await use(storageState);
   },
 
