@@ -408,7 +408,9 @@ export const test = base.extend<CustomFixtures>({
     } else if ($tags.includes('@WorkFlowCoordinatorWal')) {
       user = 'workflow_coordinator_w';
     }
-    storageState = getAuthState(user);
+    if (user) {
+      storageState = getAuthState(user);
+    }
     await use(storageState);
   },
 
