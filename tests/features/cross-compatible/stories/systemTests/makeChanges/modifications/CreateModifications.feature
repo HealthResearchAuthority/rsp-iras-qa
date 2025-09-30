@@ -277,11 +277,11 @@ Feature: Create Amendment - Create Modifications
       | Change_Planned_End_Date | Max_Character_Sponsor_Summary_Fields | Max_Character_Field_Error       |
       | Change_Planned_End_Date | Invalid_Day_Number                   | Invalid_Date_Field_Error        |
       | Change_Planned_End_Date | Invalid_Day_Letters                  | Invalid_Date_Field_Error        |
-      | Change_Planned_End_Date | Invalid_Day_Letters                  | Invalid_Date_Field_Error        |
-      | Change_Planned_End_Date | Invalid_Day_Letters                  | Invalid_Date_Field_Error        |
-      | Change_Planned_End_Date | Invalid_Day_Letters                  | Invalid_Date_Field_Error        |
-      | Change_Planned_End_Date | Invalid_Day_Letters                  | Invalid_Date_Field_Error        |
-      | Change_Planned_End_Date | Invalid_Day_Letters                  | Invalid_Date_Field_Error        |
-      | Change_Planned_End_Date | Invalid_Day_Letters                  | Invalid_Date_Field_Error        |
-      | Change_Planned_End_Date | Invalid_Day_Letters                  | Invalid_Date_Field_Error        |
-      | Change_Planned_End_Date | Invalid_Day_Letters                  | Invalid_Date_Field_Error        |
+      | Change_Planned_End_Date | Invalid_Year_Number_1                | Invalid_Date_Field_Error        |
+      | Change_Planned_End_Date | Invalid_Year_Number_2                | Invalid_Date_Field_Error        |
+      | Change_Planned_End_Date | Invalid_Year_Letters                 | Invalid_Date_Field_Error        |
+      | Change_Planned_End_Date | Invalid_Date_Past                    | Invalid_Date_Field_Error        |
+      | Change_Planned_End_Date | Invalid_Date_No_Day                  | Invalid_Date_Field_Error        |
+      | Change_Planned_End_Date | Invalid_Date_No_Month                | Invalid_Date_Field_Error        |
+      | Change_Planned_End_Date | Invalid_Date_No_Year                 | Invalid_Date_Field_Error        |
+     
