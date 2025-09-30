@@ -11,6 +11,9 @@ Feature: Authenticate Test Users once only, before test run
       | System_Admin            | Home_Page |
       | Applicant_User          | Home_Page |
       | Studywide_Reviewer      | Home_Page |
+      | Studywide_Reviewer_NI   | Home_Page |
+      | Studywide_Reviewer_S    | Home_Page |
+      | Studywide_Reviewer_W    | Home_Page |
       | Team_Manager            | Home_Page |
       | Workflow_Coordinator    | Home_Page |
       | Workflow_Coordinator_NI | Home_Page |

@@ -237,7 +237,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
             | Invalid_Date_From                 | Invalid_Date_From_Error                 |
             | Invalid_Date_To                   | Invalid_Date_To_Error                   |
 
-    @SortTasklistByColumn @rsp-4091 @fail @KNOWN-DEFECT-RSP-5217
+    @SortTasklistByColumn @rsp-4091
     Scenario Outline: Verify the user is able to sort the modifications tasklist by ascending and descending order for each results table column
         Given I have navigated to the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
@@ -407,7 +407,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
             | Valid_Iras_Id_Ln_England_Pn_England | Study_Wide_Reviewer_HRA_England | Modification_Id_Ln_England_Pn_England_Three_Four |
 
     # UI issues:- Page heading is not matching/Guidance text is missing
-    @StudyWideReviewer @SWRTasklist @rsp-4076 @rsp-4849 @KNOWN-DEFECT-RSP-XXXX
+    @StudyWideReviewer @SWRTasklist @rsp-4076 @rsp-4849 @KNOWN-DEFECT-RSP-5212
     Scenario Outline: Validate the SWR Tasklist page after the workflow co-ordinator assigns a study-wide reviewer to a modification from the modifications ready to assign page
         Given I have navigated to the 'My_Modifications_Tasklist_Page'
         Then I capture the page screenshot
