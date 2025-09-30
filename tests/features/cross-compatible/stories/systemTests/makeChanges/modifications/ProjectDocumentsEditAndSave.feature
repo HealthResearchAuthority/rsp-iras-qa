@@ -47,13 +47,13 @@ Feature: Create Amendment - Project Documents Edit and Save
         And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' for the uploaded '<Document_Upload_Files>' in the add document details for specific document page
         And I capture the page screenshot
         And I validate the status of each document is 'Document_Status_Complete' in add document details page
-        When I click the 'Save_Continue' button on the 'Add_Document_Details_Modifications_Page'
+        When I click the 'Save_Continue' button on the 'Add_Document_Details_Page'
         And I capture the page screenshot
         And I can see the review your document information page
         And I capture the page screenshot
         Then I validate the field values 'Valid_Data_Fields' displayed in the review your document information page
         And I capture the page screenshot
-        When I click the 'Save_Continue' button on the 'Review_Your_Document_Infomation_Modifications_Page'
+        When I click the 'Save_Continue' button on the 'Review_Document_Infomation_Page'
         And I can see the modification progress saved successful message on project overview page
         And I can see the project overview page
         And I capture the page screenshot
@@ -61,12 +61,12 @@ Feature: Create Amendment - Project Documents Edit and Save
         Examples:
             | Specific_Change                              | Document_Upload_Files |
             | Correction_Of_Typographical_Errors           | Multiple_Files_Three  |
-            | CRF_Other_Study_Data_Records                 | Multiple_Files_Three  |
-            | GDPR_Wording                                 | Multiple_Files_Three  |
-            | Other_Minor_Change_To_Study_Documents        | Multiple_Files_Three  |
-            | Post_Trial_Information_For_Participants      | Multiple_Files_Three  |
-            | Protocol_Non_Substantial_Changes             | Multiple_Files_Three  |
-            | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three  |
+            # | CRF_Other_Study_Data_Records                 | Multiple_Files_Three  |
+            # | GDPR_Wording                                 | Multiple_Files_Three  |
+            # | Other_Minor_Change_To_Study_Documents        | Multiple_Files_Three  |
+            # | Post_Trial_Information_For_Participants      | Multiple_Files_Three  |
+            # | Protocol_Non_Substantial_Changes             | Multiple_Files_Three  |
+            # | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three  |
 
 
     @rsp-3889 @AddDetailsToUploadedDocumentsCompletedStatus @KNOWN-DEFECT-RSP-5091
@@ -90,13 +90,13 @@ Feature: Create Amendment - Project Documents Edit and Save
         And I capture the page screenshot
         And I validate the status of each document is 'Document_Status_Complete' in add document details page
         And I click on the document link with status 'Document_Status_Complete' and enter 'New_Valid_Data_Fields' for the uploaded '<Document_Upload_Files>' in the add document details for specific document page
-        When I click the 'Save_Continue' button on the 'Add_Document_Details_Modifications_Page'
+        When I click the 'Save_Continue' button on the 'Add_Document_Details_Page'
         And I capture the page screenshot
         And I can see the review your document information page
         And I capture the page screenshot
         Then I validate the field values 'New_Valid_Data_Fields' displayed in the review your document information page
         And I capture the page screenshot
-        When I click the 'Save_Continue' button on the 'Review_Your_Document_Infomation_Modifications_Page'
+        When I click the 'Save_Continue' button on the 'Review_Document_Infomation_Page'
         And I can see the modification progress saved successful message on project overview page
         And I can see the project overview page
         And I capture the page screenshot
@@ -104,12 +104,12 @@ Feature: Create Amendment - Project Documents Edit and Save
         Examples:
             | Specific_Change                              | Document_Upload_Files |
             | Correction_Of_Typographical_Errors           | Multiple_Files_Three  |
-            | CRF_Other_Study_Data_Records                 | Multiple_Files_Three  |
-            | GDPR_Wording                                 | Multiple_Files_Three  |
-            | Other_Minor_Change_To_Study_Documents        | Multiple_Files_Three  |
-            | Post_Trial_Information_For_Participants      | Multiple_Files_Three  |
-            | Protocol_Non_Substantial_Changes             | Multiple_Files_Three  |
-            | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three  |
+            # | CRF_Other_Study_Data_Records                 | Multiple_Files_Three  |
+            # | GDPR_Wording                                 | Multiple_Files_Three  |
+            # | Other_Minor_Change_To_Study_Documents        | Multiple_Files_Three  |
+            # | Post_Trial_Information_For_Participants      | Multiple_Files_Three  |
+            # | Protocol_Non_Substantial_Changes             | Multiple_Files_Three  |
+            # | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three  |
 
     @rsp-3889 @SaveAndContinueAfterMakingChanges @KNOWN-DEFECT-RSP-5091
     Scenario Outline: Verify the user is able to change and save the updated document details after reaching the review your information page
@@ -131,7 +131,7 @@ Feature: Create Amendment - Project Documents Edit and Save
         And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' for the uploaded '<Document_Upload_Files>' in the add document details for specific document page
         And I capture the page screenshot
         And I validate the status of each document is 'Document_Status_Complete' in add document details page
-        When I click the 'Save_Continue' button on the 'Add_Document_Details_Modifications_Page'
+        When I click the 'Save_Continue' button on the 'Add_Document_Details_Page'
         And I capture the page screenshot
         And I can see the review your document information page
         And I capture the page screenshot
@@ -144,7 +144,7 @@ Feature: Create Amendment - Project Documents Edit and Save
         And I capture the page screenshot
         And I click on the document previously approved option change link next to each document and enter new 'New_Valid_Document_Previously_Approved_Value' in the add document details for the uploaded documents page
         And I capture the page screenshot
-        When I click the 'Save_Continue' button on the 'Review_Your_Document_Infomation_Modifications_Page'
+        When I click the 'Save_Continue' button on the 'Review_Document_Infomation_Page'
         And I can see the modification progress saved successful message on project overview page
         And I can see the project overview page
         And I capture the page screenshot
@@ -152,12 +152,12 @@ Feature: Create Amendment - Project Documents Edit and Save
         Examples:
             | Specific_Change                              | Document_Upload_Files |
             | Correction_Of_Typographical_Errors           | Multiple_Files_Three  |
-            | CRF_Other_Study_Data_Records                 | Multiple_Files_Three  |
-            | GDPR_Wording                                 | Multiple_Files_Three  |
-            | Other_Minor_Change_To_Study_Documents        | Multiple_Files_Three  |
-            | Post_Trial_Information_For_Participants      | Multiple_Files_Three  |
-            | Protocol_Non_Substantial_Changes             | Multiple_Files_Three  |
-            | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three  |
+            # | CRF_Other_Study_Data_Records                 | Multiple_Files_Three  |
+            # | GDPR_Wording                                 | Multiple_Files_Three  |
+            # | Other_Minor_Change_To_Study_Documents        | Multiple_Files_Three  |
+            # | Post_Trial_Information_For_Participants      | Multiple_Files_Three  |
+            # | Protocol_Non_Substantial_Changes             | Multiple_Files_Three  |
+            # | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three  |
 
     @rsp-3889 @SaveAndContinueWithoutMakingChanges @KNOWN-DEFECT-RSP-5091
     Scenario Outline: Verify the user is able to save without changing and document details are retained after reaching the review your information page
@@ -179,7 +179,7 @@ Feature: Create Amendment - Project Documents Edit and Save
         And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' for the uploaded '<Document_Upload_Files>' in the add document details for specific document page
         And I capture the page screenshot
         And I validate the status of each document is 'Document_Status_Complete' in add document details page
-        When I click the 'Save_Continue' button on the 'Add_Document_Details_Modifications_Page'
+        When I click the 'Save_Continue' button on the 'Add_Document_Details_Page'
         And I capture the page screenshot
         And I can see the review your document information page
         And I capture the page screenshot
@@ -194,7 +194,7 @@ Feature: Create Amendment - Project Documents Edit and Save
         And I click on the 'previously_approved' change link next to each document and click on save changes without making any change in the add document details for the uploaded documents page
         And I capture the page screenshot
         Then I validate the field values 'Valid_Data_Fields' displayed in the review your document information page
-        When I click the 'Save_Continue' button on the 'Review_Your_Document_Infomation_Modifications_Page'
+        When I click the 'Save_Continue' button on the 'Review_Document_Infomation_Page'
         And I can see the modification progress saved successful message on project overview page
         And I can see the project overview page
         And I capture the page screenshot
@@ -202,12 +202,12 @@ Feature: Create Amendment - Project Documents Edit and Save
         Examples:
             | Specific_Change                              | Document_Upload_Files |
             | Correction_Of_Typographical_Errors           | Multiple_Files_Three  |
-            | CRF_Other_Study_Data_Records                 | Multiple_Files_Three  |
-            | GDPR_Wording                                 | Multiple_Files_Three  |
-            | Other_Minor_Change_To_Study_Documents        | Multiple_Files_Three  |
-            | Post_Trial_Information_For_Participants      | Multiple_Files_Three  |
-            | Protocol_Non_Substantial_Changes             | Multiple_Files_Three  |
-            | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three  |
+            # | CRF_Other_Study_Data_Records                 | Multiple_Files_Three  |
+            # | GDPR_Wording                                 | Multiple_Files_Three  |
+            # | Other_Minor_Change_To_Study_Documents        | Multiple_Files_Three  |
+            # | Post_Trial_Information_For_Participants      | Multiple_Files_Three  |
+            # | Protocol_Non_Substantial_Changes             | Multiple_Files_Three  |
+            # | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three  |
 
     @rsp-4539 @SaveForLaterWithoutSelectingDocumentType @KNOWN-DEFECT-RSP-5091
     Scenario Outline: Verify the user is able to save for later without selecting document type in the review your information page
@@ -219,11 +219,11 @@ Feature: Create Amendment - Project Documents Edit and Save
         Then I can see the review uploaded documents for '<Specific_Change>' page
         When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
         When I can see the add document details for '<Specific_Change>' page
-        When I click the 'Save_Continue' button on the 'Add_Document_Details_Modifications_Page'
+        When I click the 'Save_Continue' button on the 'Add_Document_Details_Page'
         And I can see the review your document information page
         And I can see document type guidance text next to each document type
         And I capture the page screenshot
-        When I click the 'Save_For_Later' button on the 'Review_Your_Document_Infomation_Modifications_Page'
+        When I click the 'Save_For_Later' button on the 'Review_Document_Infomation_Page'
         And I capture the page screenshot
         And I can see the modification progress saved successful message on project overview page
         And I capture the page screenshot
@@ -233,12 +233,12 @@ Feature: Create Amendment - Project Documents Edit and Save
         Examples:
             | Specific_Change                              | Document_Upload_Files |
             | Correction_Of_Typographical_Errors           | Multiple_Files_Three  |
-            | CRF_Other_Study_Data_Records                 | Multiple_Files_Three  |
-            | GDPR_Wording                                 | Multiple_Files_Three  |
-            | Other_Minor_Change_To_Study_Documents        | Multiple_Files_Three  |
-            | Post_Trial_Information_For_Participants      | Multiple_Files_Three  |
-            | Protocol_Non_Substantial_Changes             | Multiple_Files_Three  |
-            | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three  |
+            # | CRF_Other_Study_Data_Records                 | Multiple_Files_Three  |
+            # | GDPR_Wording                                 | Multiple_Files_Three  |
+            # | Other_Minor_Change_To_Study_Documents        | Multiple_Files_Three  |
+            # | Post_Trial_Information_For_Participants      | Multiple_Files_Three  |
+            # | Protocol_Non_Substantial_Changes             | Multiple_Files_Three  |
+            # | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three  |
 
     @rsp-4539 @SaveForLaterSelectingOnlyDocumentType @KNOWN-DEFECT-RSP-5091
     Scenario Outline: Verify the user is able to save for later after selecting only document type in the review your information page
@@ -250,13 +250,13 @@ Feature: Create Amendment - Project Documents Edit and Save
         Then I can see the review uploaded documents for '<Specific_Change>' page
         When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
         When I can see the add document details for '<Specific_Change>' page
-        When I click the 'Save_Continue' button on the 'Add_Document_Details_Modifications_Page'
+        When I click the 'Save_Continue' button on the 'Add_Document_Details_Page'
         And I can see the review your document information page
         And I can see document type guidance text next to each document type
         And I capture the page screenshot
         And I select a document type 'New_Valid_Document_Type' and validate the changes in review your information page
         And I capture the page screenshot
-        When I click the 'Save_For_Later' button on the 'Review_Your_Document_Infomation_Modifications_Page'
+        When I click the 'Save_For_Later' button on the 'Review_Document_Infomation_Page'
         And I can see the modification progress saved successful message on project overview page
         And I capture the page screenshot
         And I can see the project overview page

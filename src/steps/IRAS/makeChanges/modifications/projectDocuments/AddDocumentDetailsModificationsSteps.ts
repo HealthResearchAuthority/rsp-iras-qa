@@ -47,12 +47,10 @@ Then(
       await addDocumentDetailsModificationsPage.getDisplayedDocumentsListAndStatusFromUI(true);
     const displayedDocumentsList: string[] = displayedDocumentsListMap.get('displayedDocuments');
     const displayedStatusesList: string[] = displayedDocumentsListMap.get('displayedStatuses');
-    // Click on each document link
     for (let i = 0; i < displayedDocumentsList.length; i++) {
       if (displayedStatusesList[i] === status) {
         const documentName = displayedDocumentsList[i];
         await addDocumentDetailsModificationsPage.documentlink.getByText(documentName, { exact: true }).first().click();
-        //Assertion to verify Add document details for specific document page
         await addDocumentDetailsForSpecificDocumentModificationsPage.assertOnAddDocumentsDetailsForSpecificModificationsPage(
           documentName
         );
@@ -79,7 +77,6 @@ Then(
         const documentFoundCount = await expectedDocumentRow.count();
         expect.soft(documentFoundCount).toBeGreaterThan(0);
       }
-      //Enter document details
       for (const key in dataset) {
         if (Object.hasOwn(dataset, key)) {
           await commonItemsPage.fillUIComponent(dataset, key, addDocumentDetailsForSpecificDocumentModificationsPage);

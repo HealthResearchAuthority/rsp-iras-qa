@@ -199,16 +199,11 @@
     "Save_Continue_Review": "Save and continue to review",
     "Save_For_Later": "Save for later"
   },
-  "Add_Document_Details_Modifications_Page": {
+  "Add_Document_Details_Page": {
     "Save_Continue": "Save and continue",
     "Save_For_Later": "Save for later"
   },
-  "Add_Document_Details_For_Specific_Document_Modifications_Page": {
-    "Save_Continue": "Save and continue",
-    "Save_For_Later": "Save for later",
-    "Save_Changes": "Save changes"
-  },
-  "Review_Your_Document_Infomation_Modifications_Page": {
+  "Review_Document_Infomation_Page": {
     "Save_Continue": "Save and continue",
     "Save_For_Later": "Save for later",
     "Change_Details": "Change"
