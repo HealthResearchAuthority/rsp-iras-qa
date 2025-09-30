@@ -25,8 +25,8 @@ Then(
     const actualIrasId = irasId[2];
     const shortProjectTitle = projectDetails[3].trim();
     const actualshortProjectTitle = shortProjectTitle.replace('Short project title: ', '');
-    expect(actualshortProjectTitle).toBe(expectedProjectTitle);
-    expect(actualIrasId).toBe(expectedIrasId);
+    expect.soft(actualshortProjectTitle).toBe(expectedProjectTitle);
+    expect.soft(actualIrasId).toBe(expectedIrasId);
   }
 );
 
@@ -39,7 +39,7 @@ Then(
     const actualProjectTitleUpdated = actualProjectTitle
       .replace(projectOverviewPage.projectOverviewPageTestData.Project_Overview_Page.short_project_title_label, '')
       .trim();
-    expect(actualProjectTitleUpdated).toBe(expectedProjectTitle);
+    expect.soft(actualProjectTitleUpdated).toBe(expectedProjectTitle);
   }
 );
 
@@ -72,7 +72,7 @@ Then(
     for (const key in dataset) {
       if (Object.hasOwn(dataset, key)) {
         const labelVal = await commonItemsPage.getUiLabel(key, projectOverviewPage);
-        expect(labelVal).toBe(dataset[key]);
+        expect.soft(labelVal).toBe(dataset[key]);
       }
     }
   }
@@ -102,7 +102,7 @@ Then(
       for (let rowIndex = 1; rowIndex < rowCount; rowIndex++) {
         const row = commonItemsPage.tableRows.nth(rowIndex);
         const actualStatus = await projectOverviewPage.getStatus(row);
-        expect(actualStatus).toEqual(expectedStatus);
+        expect.soft(actualStatus).toEqual(expectedStatus);
       }
       if (await commonItemsPage.next_button.isVisible()) {
         await commonItemsPage.next_button.click();
@@ -124,8 +124,8 @@ Then(
       await projectOverviewPage.project_details_short_project_title.textContent()
     );
     const actualIrasId = confirmStringNotNull(await projectOverviewPage.project_details_irasid.textContent());
-    expect(actualProjectTitle).toBe(expectedProjectTitle);
-    expect(actualIrasId).toBe(expectedIrasId);
+    expect.soft(actualProjectTitle).toBe(expectedProjectTitle);
+    expect.soft(actualIrasId).toBe(expectedIrasId);
   }
 );
 
@@ -142,9 +142,9 @@ Then(
       await projectOverviewPage.primary_sponsor_organisation.textContent()
     );
     const actualSponsorContact = confirmStringNotNull(await projectOverviewPage.sponsor_contact.textContent());
-    expect(actualChiefInvestigator).toBe(expectedChiefInvestigator);
-    expect(actualPrimarySponsorOrganisation).toBe(expectedPrimarySponsorOrganisation);
-    expect(actualSponsorContact).toBe(expectedSponsorContact);
+    expect.soft(actualChiefInvestigator).toBe(expectedChiefInvestigator);
+    expect.soft(actualPrimarySponsorOrganisation).toBe(expectedPrimarySponsorOrganisation);
+    expect.soft(actualSponsorContact).toBe(expectedSponsorContact);
   }
 );
 
@@ -166,9 +166,9 @@ Then(
       await projectOverviewPage.nhs_hsc_organisations.textContent()
     );
     const actualLeadNation = confirmStringNotNull(await projectOverviewPage.lead_nation.textContent());
-    expect(actualTrimmedParticipatingNations).toContain(expectedParticipatingNations);
-    expect(actualNhsHscOrganisations).toBe(expectedNhsHscOrganisations);
-    expect(actualLeadNation).toBe(expectedLeadNation);
+    expect.soft(actualTrimmedParticipatingNations).toContain(expectedParticipatingNations);
+    expect.soft(actualNhsHscOrganisations).toBe(expectedNhsHscOrganisations);
+    expect.soft(actualLeadNation).toBe(expectedLeadNation);
   }
 );
 
@@ -195,7 +195,7 @@ Then(
     } else {
       sortedColumnList = [...actualColumnList].sort((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
     }
-    expect(actualColumnList).toEqual(sortedColumnList);
+    expect.soft(actualColumnList).toEqual(sortedColumnList);
   }
 );
 
@@ -271,6 +271,6 @@ Then(
         b.localeCompare(a, 'en', { sensitivity: 'base' });
       });
     }
-    expect(actualDocumentsList).toEqual(sortedDocumentsList);
+    expect.soft(actualDocumentsList).toEqual(sortedDocumentsList);
   }
 );
