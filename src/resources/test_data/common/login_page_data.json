@@ -2,57 +2,68 @@
   "System_Admin": {
     "username": "FutureIRAS.SysAdmin@hra.nhs.uk",
     "password": "`${process.env.SYSTEM_ADMIN_PASS}`",
-    "mfa": "`${process.env.SYSTEM_ADMIN_MFA_KEY}`"
+    "mfa": "`${process.env.SYSTEM_ADMIN_MFA_KEY}`",
+    "authPath": "sysAdminUser"
   },
   "Applicant_User": {
     "username": "futureiras.automation@hra.nhs.uk",
     "password": "`${process.env.APPLICANT_USER_PASS}`",
-    "mfa": "`${process.env.APPLICANT_USER_MFA_KEY}`"
+    "mfa": "`${process.env.APPLICANT_USER_MFA_KEY}`",
+    "authPath": "applicantUser"
   },
   "Studywide_Reviewer": {
     "username": "FutureIRAS.BackStage@hra.nhs.uk",
     "password": "`${process.env.STUDYWIDE_REVIEWER_PASS}`",
-    "mfa": "`${process.env.STUDYWIDE_REVIEWER_MFA_KEY}`"
+    "mfa": "`${process.env.STUDYWIDE_REVIEWER_MFA_KEY}`",
+    "authPath": "studyWideReviewer"
   },
   "Studywide_Reviewer_NI": {
     "username": "FutureIRASBackStageNI@hra.nhs.uk",
     "password": "`${process.env.STUDYWIDE_REVIEWER_NI_PASS}`",
-    "mfa": "`${process.env.STUDYWIDE_REVIEWER_NI_MFA_KEY}`"
+    "mfa": "`${process.env.STUDYWIDE_REVIEWER_NI_MFA_KEY}`",
+    "authPath": "studyWideReviewerNi"
   },
   "Studywide_Reviewer_S": {
     "username": "FutureIRASBackStageS@hra.nhs.uk",
     "password": "`${process.env.STUDYWIDE_REVIEWER_S_PASS}`",
-    "mfa": "`${process.env.STUDYWIDE_REVIEWER_S_MFA_KEY}`"
+    "mfa": "`${process.env.STUDYWIDE_REVIEWER_S_MFA_KEY}`",
+    "authPath": "studyWideReviewerS"
   },
   "Studywide_Reviewer_W": {
     "username": "FutureIRASBackStageW@hra.nhs.uk",
     "password": "`${process.env.STUDYWIDE_REVIEWER_W_PASS}`",
-    "mfa": "`${process.env.STUDYWIDE_REVIEWER_W_MFA_KEY}`"
+    "mfa": "`${process.env.STUDYWIDE_REVIEWER_W_MFA_KEY}`",
+    "authPath": "studyWideReviewerW"
   },
   "Team_Manager": {
     "username": "FutureIRAS.TeamManager@hra.nhs.uk",
     "password": "`${process.env.TEAM_MANAGER_PASS}`",
-    "mfa": "`${process.env.TEAM_MANAGER_MFA_KEY}`"
+    "mfa": "`${process.env.TEAM_MANAGER_MFA_KEY}`",
+    "authPath": "teamManager"
   },
   "Workflow_Coordinator": {
     "username": "FutureIRAS.WorkflowCoordinator@hra.nhs.uk",
     "password": "`${process.env.WORKFLOW_COORDINATOR_PASS}`",
-    "mfa": "`${process.env.WORKFLOW_COORDINATOR_MFA_KEY}`"
+    "mfa": "`${process.env.WORKFLOW_COORDINATOR_MFA_KEY}`",
+    "authPath": "workFlowCoordinator"
   },
   "Workflow_Coordinator_NI": {
     "username": "FutureIRAS.WorkflowCoordinator_NI@hra.nhs.uk",
     "password": "`${process.env.WORKFLOW_COORDINATOR_NI_PASS}`",
-    "mfa": "`${process.env.WORKFLOW_COORDINATOR_NI_MFA_KEY}`"
+    "mfa": "`${process.env.WORKFLOW_COORDINATOR_NI_MFA_KEY}`",
+    "authPath": "workFlowCoordinatorNi"
   },
   "Workflow_Coordinator_S": {
     "username": "FutureIRASWorkflowCoordinators@hra.nhs.uk",
     "password": "`${process.env.WORKFLOW_COORDINATOR_S_PASS}`",
-    "mfa": "`${process.env.WORKFLOW_COORDINATOR_S_MFA_KEY}`"
+    "mfa": "`${process.env.WORKFLOW_COORDINATOR_S_MFA_KEY}`",
+    "authPath": "workFlowCoordinatorS"
   },
   "Workflow_Coordinator_W": {
     "username": "FutureIRAS.WorkflowCoordinator_W@hra.nhs.uk",
     "password": "`${process.env.WORKFLOW_COORDINATOR_W_PASS}`",
-    "mfa": "`${process.env.WORKFLOW_COORDINATOR_W_MFA_KEY}`"
+    "mfa": "`${process.env.WORKFLOW_COORDINATOR_W_MFA_KEY}`",
+    "authPath": "workFlowCoordinatorW"
   },
   "Login_Page": {
     "header": "Create your GOV.UK One Login or sign in"

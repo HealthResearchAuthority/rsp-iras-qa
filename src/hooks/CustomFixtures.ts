@@ -383,33 +383,29 @@ export const test = base.extend<CustomFixtures>({
   },
 
   //Set the Storage State based on User Tag from Feature File
-  storageState: async ({ $tags, storageState }, use) => {
-    let user: string = '';
+  storageState: async ({ $tags, storageState, loginPage }, use) => {
     if ($tags.includes('@SysAdminUser')) {
-      user = 'system_admin';
+      storageState = getAuthState(loginPage.loginPageTestData.System_Admin.authPath);
     } else if ($tags.includes('@ApplicantUser')) {
-      user = 'applicant_user';
+      storageState = getAuthState(loginPage.loginPageTestData.Applicant_User.authPath);
     } else if ($tags.includes('@StudyWideReviewer')) {
-      user = 'studywide_reviewer';
+      storageState = getAuthState(loginPage.loginPageTestData.Studywide_Reviewer.authPath);
     } else if ($tags.includes('@StudyWideReviewerNI')) {
-      user = 'studywide_reviewer_ni';
+      storageState = getAuthState(loginPage.loginPageTestData.Studywide_Reviewer_NI.authPath);
     } else if ($tags.includes('@StudyWideReviewerSco')) {
-      user = 'studywide_reviewer_s';
+      storageState = getAuthState(loginPage.loginPageTestData.Studywide_Reviewer_S.authPath);
     } else if ($tags.includes('@StudyWideReviewerWal')) {
-      user = 'studywide_reviewer_w';
+      storageState = getAuthState(loginPage.loginPageTestData.Studywide_Reviewer_W.authPath);
     } else if ($tags.includes('@TeamManager')) {
-      user = 'team_manager';
+      storageState = getAuthState(loginPage.loginPageTestData.Team_Manager.authPath);
     } else if ($tags.includes('@WorkFlowCoordinator')) {
-      user = 'workflow_coordinator';
+      storageState = getAuthState(loginPage.loginPageTestData.Workflow_Coordinator.authPath);
     } else if ($tags.includes('@WorkFlowCoordinatorNI')) {
-      user = 'workflow_coordinator_ni';
+      storageState = getAuthState(loginPage.loginPageTestData.Workflow_Coordinator_NI.authPath);
     } else if ($tags.includes('@WorkFlowCoordinatorSco')) {
-      user = 'workflow_coordinator_s';
+      storageState = getAuthState(loginPage.loginPageTestData.Workflow_Coordinator_S.authPath);
     } else if ($tags.includes('@WorkFlowCoordinatorWal')) {
-      user = 'workflow_coordinator_w';
-    }
-    if (user) {
-      storageState = getAuthState(user);
+      storageState = getAuthState(loginPage.loginPageTestData.Workflow_Coordinator_W.authPath);
     }
     await use(storageState);
   },

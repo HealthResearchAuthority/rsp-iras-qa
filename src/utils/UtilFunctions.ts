@@ -29,44 +29,7 @@ const deviceScaleFactoriPad = 2;
 const deviceScaleFactorAndroid = 3.5;
 
 export function getAuthState(user: string): string {
-  let authState: string;
-  switch (user.toLowerCase()) {
-    case 'system_admin':
-      authState = 'auth-storage-states/sysAdminUser.json';
-      break;
-    case 'applicant_user':
-      authState = 'auth-storage-states/applicantUser.json';
-      break;
-    case 'studywide_reviewer':
-      authState = 'auth-storage-states/studyWideReviewer.json';
-      break;
-    case 'studywide_reviewer_ni':
-      authState = 'auth-storage-states/studyWideReviewerNi.json';
-      break;
-    case 'studywide_reviewer_s':
-      authState = 'auth-storage-states/studyWideReviewerS.json';
-      break;
-    case 'studywide_reviewer_w':
-      authState = 'auth-storage-states/studyWideReviewerW.json';
-      break;
-    case 'team_manager':
-      authState = 'auth-storage-states/teamManager.json';
-      break;
-    case 'workflow_coordinator':
-      authState = 'auth-storage-states/workFlowCoordinator.json';
-      break;
-    case 'workflow_coordinator_ni':
-      authState = 'auth-storage-states/workFlowCoordinatorNi.json';
-      break;
-    case 'workflow_coordinator_s':
-      authState = 'auth-storage-states/workFlowCoordinatorS.json';
-      break;
-    case 'workflow_coordinator_w':
-      authState = 'auth-storage-states/workFlowCoordinatorW.json';
-      break;
-    default:
-      throw new Error(`${user} is not a valid option`);
-  }
+  const authState: string = `auth-storage-states/${user}.json`;
   return authState;
 }
 
