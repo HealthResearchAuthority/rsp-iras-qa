@@ -61,12 +61,12 @@ Feature: Create Amendment - Project Documents Edit and Save
         Examples:
             | Specific_Change                              | Document_Upload_Files |
             | Correction_Of_Typographical_Errors           | Multiple_Files_Three  |
-            # | CRF_Other_Study_Data_Records                 | Multiple_Files_Three  |
-            # | GDPR_Wording                                 | Multiple_Files_Three  |
-            # | Other_Minor_Change_To_Study_Documents        | Multiple_Files_Three  |
-            # | Post_Trial_Information_For_Participants      | Multiple_Files_Three  |
-            # | Protocol_Non_Substantial_Changes             | Multiple_Files_Three  |
-            # | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three  |
+            | CRF_Other_Study_Data_Records                 | Multiple_Files_Three  |
+            | GDPR_Wording                                 | Multiple_Files_Three  |
+            | Other_Minor_Change_To_Study_Documents        | Multiple_Files_Three  |
+            | Post_Trial_Information_For_Participants      | Multiple_Files_Three  |
+            | Protocol_Non_Substantial_Changes             | Multiple_Files_Three  |
+            | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three  |
 
 
     @rsp-3889 @AddDetailsToUploadedDocumentsCompletedStatus @KNOWN-DEFECT-RSP-5091
@@ -104,12 +104,12 @@ Feature: Create Amendment - Project Documents Edit and Save
         Examples:
             | Specific_Change                              | Document_Upload_Files |
             | Correction_Of_Typographical_Errors           | Multiple_Files_Three  |
-            # | CRF_Other_Study_Data_Records                 | Multiple_Files_Three  |
-            # | GDPR_Wording                                 | Multiple_Files_Three  |
-            # | Other_Minor_Change_To_Study_Documents        | Multiple_Files_Three  |
-            # | Post_Trial_Information_For_Participants      | Multiple_Files_Three  |
-            # | Protocol_Non_Substantial_Changes             | Multiple_Files_Three  |
-            # | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three  |
+            | CRF_Other_Study_Data_Records                 | Multiple_Files_Three  |
+            | GDPR_Wording                                 | Multiple_Files_Three  |
+            | Other_Minor_Change_To_Study_Documents        | Multiple_Files_Three  |
+            | Post_Trial_Information_For_Participants      | Multiple_Files_Three  |
+            | Protocol_Non_Substantial_Changes             | Multiple_Files_Three  |
+            | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three  |
 
     @rsp-3889 @SaveAndContinueAfterMakingChanges @KNOWN-DEFECT-RSP-5091
     Scenario Outline: Verify the user is able to change and save the updated document details after reaching the review your information page
@@ -152,12 +152,12 @@ Feature: Create Amendment - Project Documents Edit and Save
         Examples:
             | Specific_Change                              | Document_Upload_Files |
             | Correction_Of_Typographical_Errors           | Multiple_Files_Three  |
-            # | CRF_Other_Study_Data_Records                 | Multiple_Files_Three  |
-            # | GDPR_Wording                                 | Multiple_Files_Three  |
-            # | Other_Minor_Change_To_Study_Documents        | Multiple_Files_Three  |
-            # | Post_Trial_Information_For_Participants      | Multiple_Files_Three  |
-            # | Protocol_Non_Substantial_Changes             | Multiple_Files_Three  |
-            # | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three  |
+            | CRF_Other_Study_Data_Records                 | Multiple_Files_Three  |
+            | GDPR_Wording                                 | Multiple_Files_Three  |
+            | Other_Minor_Change_To_Study_Documents        | Multiple_Files_Three  |
+            | Post_Trial_Information_For_Participants      | Multiple_Files_Three  |
+            | Protocol_Non_Substantial_Changes             | Multiple_Files_Three  |
+            | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three  |
 
     @rsp-3889 @SaveAndContinueWithoutMakingChanges @KNOWN-DEFECT-RSP-5091
     Scenario Outline: Verify the user is able to save without changing and document details are retained after reaching the review your information page
@@ -202,12 +202,12 @@ Feature: Create Amendment - Project Documents Edit and Save
         Examples:
             | Specific_Change                              | Document_Upload_Files |
             | Correction_Of_Typographical_Errors           | Multiple_Files_Three  |
-            # | CRF_Other_Study_Data_Records                 | Multiple_Files_Three  |
-            # | GDPR_Wording                                 | Multiple_Files_Three  |
-            # | Other_Minor_Change_To_Study_Documents        | Multiple_Files_Three  |
-            # | Post_Trial_Information_For_Participants      | Multiple_Files_Three  |
-            # | Protocol_Non_Substantial_Changes             | Multiple_Files_Three  |
-            # | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three  |
+            | CRF_Other_Study_Data_Records                 | Multiple_Files_Three  |
+            | GDPR_Wording                                 | Multiple_Files_Three  |
+            | Other_Minor_Change_To_Study_Documents        | Multiple_Files_Three  |
+            | Post_Trial_Information_For_Participants      | Multiple_Files_Three  |
+            | Protocol_Non_Substantial_Changes             | Multiple_Files_Three  |
+            | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three  |
 
     @rsp-4539 @SaveForLaterWithoutSelectingDocumentType @KNOWN-DEFECT-RSP-5091
     Scenario Outline: Verify the user is able to save for later without selecting document type in the review your information page
@@ -233,12 +233,12 @@ Feature: Create Amendment - Project Documents Edit and Save
         Examples:
             | Specific_Change                              | Document_Upload_Files |
             | Correction_Of_Typographical_Errors           | Multiple_Files_Three  |
-            # | CRF_Other_Study_Data_Records                 | Multiple_Files_Three  |
-            # | GDPR_Wording                                 | Multiple_Files_Three  |
-            # | Other_Minor_Change_To_Study_Documents        | Multiple_Files_Three  |
-            # | Post_Trial_Information_For_Participants      | Multiple_Files_Three  |
-            # | Protocol_Non_Substantial_Changes             | Multiple_Files_Three  |
-            # | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three  |
+            | CRF_Other_Study_Data_Records                 | Multiple_Files_Three  |
+            | GDPR_Wording                                 | Multiple_Files_Three  |
+            | Other_Minor_Change_To_Study_Documents        | Multiple_Files_Three  |
+            | Post_Trial_Information_For_Participants      | Multiple_Files_Three  |
+            | Protocol_Non_Substantial_Changes             | Multiple_Files_Three  |
+            | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three  |
 
     @rsp-4539 @SaveForLaterSelectingOnlyDocumentType @KNOWN-DEFECT-RSP-5091
     Scenario Outline: Verify the user is able to save for later after selecting only document type in the review your information page
