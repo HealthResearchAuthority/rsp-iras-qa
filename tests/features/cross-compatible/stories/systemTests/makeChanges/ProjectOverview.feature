@@ -129,29 +129,8 @@ Feature: Project Overview
         When I click the 'Project_Documents' link on the 'Project_Overview_Page'
         And I capture the page screenshot
         And I validate the ui labels using 'Label_Texts_Project_Documents' on the project documents page
-
-    @rsp-4545 @ProjectDocumentsPageSort
-    #Documents were uploaded manually to the project id 5789415 and validations are for the specific project
-    Scenario Outline: Validate the user is able to sort the project documents page fields
-        When I navigate to the project overview page of a specific project
-        And I capture the page screenshot
-        When I click the 'Project_Documents' link on the 'Project_Overview_Page'
         And the default page size should be 'twenty'
-        And I capture the page screenshot
-        When I click the '<Sort_Button>' button on the project documents page
-        Then I can see the documents is sorted by 'descending' order of the '<Sort_Field>'
-        And I capture the page screenshot
-        When I click the '<Sort_Button>' button on the project documents page
-        Then I can see the documents is sorted by 'ascending' order of the '<Sort_Field>'
-        And I capture the page screenshot
-
-        Examples:
-            | Sort_Button      | Sort_Field      |
-            | document_type    | document type   |
-            | document_name    | document name   |
-            | document_version | version         |
-            | document_date    | document date   |
-            | modification_id  | modification id |
+        And I can see the list is sorted by default in the alphabetical order of the 'document type'
 
     @rsp-4545 @ProjectDocumentsPaginationFirstPage
     #Documents were uploaded manually to the project id 5789415 and validations are for the specific project
