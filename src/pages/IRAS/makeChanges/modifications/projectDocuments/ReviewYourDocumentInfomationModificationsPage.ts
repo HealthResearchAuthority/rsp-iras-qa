@@ -4,7 +4,7 @@ import { confirmStringNotNull } from '../../../../../utils/UtilFunctions';
 import * as linkTextData from '../../../../../resources/test_data/common/link_text_data.json';
 
 //Declare Page Objects
-export default class AddDocumentDetailsModificationsPage {
+export default class ReviewYourDocumentInfomationModificationsPage {
   readonly page: Page;
   readonly reviewYourDocumentInfomationModificationsPageTestData: typeof reviewYourDocumentInfomationModificationsPageTestData;
   readonly linkTextData: typeof linkTextData;
