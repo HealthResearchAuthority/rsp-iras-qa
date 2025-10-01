@@ -12,6 +12,57 @@ Then(
 );
 
 Then(
+  'I can see document type guidance text next to each document type',
+  async ({ reviewYourDocumentInformationModificationsPage }) => {
+    const noOfDocuments = await reviewYourDocumentInformationModificationsPage.getNumberOfDocuments();
+    for (let i = 0; i < noOfDocuments; i++) {
+      const expectedDocumentTypeGuidanceText =
+        reviewYourDocumentInformationModificationsPage.reviewYourDocumentInfomationModificationsPageTestData
+          .Review_Your_Document_Information.document_type_guidance_text;
+      const actualDocumentTypeGuidanceText =
+        await reviewYourDocumentInformationModificationsPage.document_type_guidance_text.nth(i).textContent();
+      const trimmedDocumentTypeGuidanceText = actualDocumentTypeGuidanceText.replace('Document type', '').trim();
+      expect(trimmedDocumentTypeGuidanceText).toBe(expectedDocumentTypeGuidanceText);
+    }
+  }
+);
+
+Then(
+  'I select a document type {string} and validate the changes in review your information page',
+  async (
+    {
+      addDocumentDetailsForSpecificDocumentModificationsPage,
+      reviewYourDocumentInformationModificationsPage,
+      commonItemsPage,
+    },
+    datasetName: string
+  ) => {
+    const newDocumentType =
+      addDocumentDetailsForSpecificDocumentModificationsPage
+        .addDocumentDetailsForSpecificDocumentModificationsPageTestData[datasetName];
+    const noOfDocuments = await reviewYourDocumentInformationModificationsPage.getNumberOfDocuments();
+    for (let i = 0; i < noOfDocuments; i++) {
+      await reviewYourDocumentInformationModificationsPage.document_type_guidance_text.nth(0).click();
+      for (const key in newDocumentType) {
+        if (Object.hasOwn(newDocumentType, key)) {
+          await commonItemsPage.fillUIComponent(
+            newDocumentType,
+            key,
+            addDocumentDetailsForSpecificDocumentModificationsPage
+          );
+        }
+      }
+      await addDocumentDetailsForSpecificDocumentModificationsPage.save_changes.click();
+      const newActualDocumentType = (
+        await reviewYourDocumentInformationModificationsPage.document_type_dropdown.textContent()
+      ).trim();
+      const updatedExpectedDocumentType = await newDocumentType.document_type_dropdown;
+      expect.soft(newActualDocumentType).toBe(updatedExpectedDocumentType);
+    }
+  }
+);
+
+Then(
   'I validate the field values {string} displayed in the review your document information page',
   async (
     { commonItemsPage, reviewYourDocumentInformationModificationsPage, addDocumentDetailsModificationsPage },
@@ -29,7 +80,7 @@ Then(
         .textContent();
       expect(trimmedDocumentName).toBe(actualDocumentName);
       for (const key in dataset) {
-        if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+        if (Object.hasOwn(dataset, key)) {
           if (
             key == 'sponsor_document_day_text' ||
             key == 'sponsor_document_month_dropdown' ||
@@ -107,7 +158,7 @@ Then(
     for (let i = 0; i < noOfDocuments; i++) {
       await reviewYourDocumentInformationModificationsPage.document_type_change_link.nth(i).click();
       for (const key in newDocumentType) {
-        if (Object.prototype.hasOwnProperty.call(newDocumentType, key)) {
+        if (Object.hasOwn(newDocumentType, key)) {
           await commonItemsPage.fillUIComponent(
             newDocumentType,
             key,
@@ -142,7 +193,7 @@ Then(
     for (let i = 0; i < noOfDocuments; i++) {
       await reviewYourDocumentInformationModificationsPage.sponsor_document_version_change_link.nth(i).click();
       for (const key in newDocumentVersion) {
-        if (Object.prototype.hasOwnProperty.call(newDocumentVersion, key)) {
+        if (Object.hasOwn(newDocumentVersion, key)) {
           await commonItemsPage.fillUIComponent(
             newDocumentVersion,
             key,
@@ -177,7 +228,7 @@ Then(
     for (let i = 0; i < noOfDocuments; i++) {
       await reviewYourDocumentInformationModificationsPage.document_previously_approved_change_link.nth(i).click();
       for (const key in newDocumentPreviouslyApprovedValue) {
-        if (Object.prototype.hasOwnProperty.call(newDocumentPreviouslyApprovedValue, key)) {
+        if (Object.hasOwn(newDocumentPreviouslyApprovedValue, key)) {
           await commonItemsPage.fillUIComponent(
             newDocumentPreviouslyApprovedValue,
             key,
@@ -218,7 +269,7 @@ Then(
     for (let i = 0; i < noOfDocuments; i++) {
       await reviewYourDocumentInformationModificationsPage.sponsor_document_date_change_link.nth(i).click();
       for (const key in newDocumentDate) {
-        if (Object.prototype.hasOwnProperty.call(newDocumentDate, key)) {
+        if (Object.hasOwn(newDocumentDate, key)) {
           await commonItemsPage.fillUIComponent(
             newDocumentDate,
             key,
@@ -282,7 +333,6 @@ Then(
     }
   }
 );
-
 Then(
   'I click the error displayed on {string}',
   async ({ reviewYourDocumentInformationModificationsPage }, pageKey: string) => {

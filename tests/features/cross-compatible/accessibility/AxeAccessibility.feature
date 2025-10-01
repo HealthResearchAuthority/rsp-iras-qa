@@ -1190,6 +1190,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
 
   @axeAccessibilityProjectDocumentsReviewDocumentModificationsPage @ApplicantUser
   Scenario: Modifications project documents review page
+  Scenario: Modifications project documents review page
     Given I have navigated to the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -1248,7 +1249,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-@axeAccessibilityProjectConfirmationPage @ApplicantUser
+  @axeAccessibilityProjectConfirmationPage @ApplicantUser
   Scenario: Create Project confirmation page
     Given I have navigated to the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'

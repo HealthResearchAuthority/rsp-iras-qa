@@ -27,9 +27,9 @@ Then(
       const stats = fs.statSync(filePath);
       let fileSize;
       if (stats.size < 1024 * 1024) {
-        fileSize = parseFloat((stats.size / 1024).toFixed(2)).toString() + ' KB';
+        fileSize = Number.parseFloat((stats.size / 1024).toFixed(2)).toString() + ' KB';
       } else {
-        fileSize = parseFloat((stats.size / (1024 * 1024)).toFixed(2)).toString() + ' MB';
+        fileSize = Number.parseFloat((stats.size / (1024 * 1024)).toFixed(2)).toString() + ' MB';
       }
       const fileName = path.basename(filePath);
       const expectedDocumentRow = reviewUploadedDocumentsModificationsPage.table

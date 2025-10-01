@@ -318,30 +318,8 @@ export default class CommonItemsPage {
 
   //Page Methods
   async storeAuthState(user: string) {
-    const authSysAdminUserFile = 'auth-storage-states/sysAdminUser.json';
-    const authApplicantUserFile = 'auth-storage-states/applicantUser.json';
-    const authStudyWideReviewerFile = 'auth-storage-states/studyWideReviewer.json';
-    const authTeamManagerFile = 'auth-storage-states/teamManager.json';
-    const authWorkFlowCoordinatorFile = 'auth-storage-states/workFlowCoordinator.json';
-    switch (user.toLowerCase()) {
-      case 'system_admin':
-        await this.page.context().storageState({ path: authSysAdminUserFile });
-        break;
-      case 'applicant_user':
-        await this.page.context().storageState({ path: authApplicantUserFile });
-        break;
-      case 'studywide_reviewer':
-        await this.page.context().storageState({ path: authStudyWideReviewerFile });
-        break;
-      case 'team_manager':
-        await this.page.context().storageState({ path: authTeamManagerFile });
-        break;
-      case 'workflow_coordinator':
-        await this.page.context().storageState({ path: authWorkFlowCoordinatorFile });
-        break;
-      default:
-        throw new Error(`${user} is not a valid option`);
-    }
+    const userPath = confirmStringNotNull(user.toLowerCase());
+    await this.page.context().storageState({ path: `auth-storage-states/${userPath}.json` });
   }
 
   async isAccordionExpanded(accordion: Locator): Promise<string | null> {

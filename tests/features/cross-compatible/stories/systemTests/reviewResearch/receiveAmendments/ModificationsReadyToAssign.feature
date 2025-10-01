@@ -1,12 +1,23 @@
 @ReceiveAmendments @ModificationsReadyToAssign @WorkFlowCoordinator @SystemTest
 Feature: Receive Amendments: Modifications Tasklist page that displays modifications ready to be assigned
 
-    Background:
-        Given I have navigated to the 'Modifications_Tasklist_Page'
+    @viewTasklistByLeadNation @rsp-4201 @Complete-After-DB-Connection
+    Scenario Outline: Verify the user is able to view a list of modifications for a specific lead nation
+        Given I have navigated to the 'Modifications_Tasklist_Page' as '<User>'
         And I capture the page screenshot
+        Then the country linked to the review body of the '<User>' appears as the lead nation in the page description
+        # And I see only modifications where the lead nation is the country linked to the review body of the '<User>'
+        Examples:
+            | User                    |
+            | Workflow_Coordinator    |
+            | Workflow_Coordinator_NI |
+            | Workflow_Coordinator_S  |
+            | Workflow_Coordinator_W  |
 
     @searchTasklistByIrasIdWithResults @rsp-4104
     Scenario Outline: Verify the user is able to search the modifications tasklist by the iras ID
+        Given I have navigated to the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
         When I fill the search input for searching 'tasklist' with '<Search_Input>' as the search query
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
@@ -20,6 +31,8 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
 
     @filterTasklistByShortTitle @rsp-4104
     Scenario Outline: Verify the user is able to filter the modifications tasklist by the short project title
+        Given I have navigated to the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
         And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
         And I open each of the modification tasklist filters
@@ -39,6 +52,8 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
 
     @filterTasklistByDateSubmitted @rsp-4104
     Scenario Outline: Verify the user is able to filter the modifications tasklist by the date submitted
+        Given I have navigated to the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
         And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
         And I open each of the modification tasklist filters
@@ -60,6 +75,8 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
 
     @filterTasklistByDaysSinceSubmission @rsp-4296 @UPDATE-AFTER-RSP-4808
     Scenario Outline: Verify the user is able to filter the modifications tasklist by the days since submission
+        Given I have navigated to the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
         And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
         And I open each of the modification tasklist filters
@@ -83,6 +100,8 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
 
     @searchFilterComboTasklist @rsp-4104 @rsp-4296
     Scenario Outline: Verify the user is able to combine searching and filtering options to narrow modifications displayed on the tasklist
+        Given I have navigated to the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
         And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
         And I open each of the modification tasklist filters
@@ -106,6 +125,8 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
 
     @searchTasklistWithNoResults @rsp-4104 @rsp-4296
     Scenario Outline: Verify the tasklist page displays the no results found message, when no records on the system match the search criteria
+        Given I have navigated to the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
         And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
         And I open each of the modification tasklist filters
@@ -124,6 +145,8 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
 
     @activeFilterPanelTasklist @rsp-4104 @rsp-4296
     Scenario Outline: Verify the active filters display as expected
+        Given I have navigated to the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
         And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
         And I open each of the modification tasklist filters
@@ -146,6 +169,8 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
 
     @addRemoveFiltersTasklist @rsp-4104
     Scenario: Verify that adding and removing filters narrows and widens the search results appropriately
+        Given I have navigated to the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
         And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
         And I open each of the modification tasklist filters
@@ -174,6 +199,8 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
 
     @clearAllFiltersTasklist @rsp-4104
     Scenario: Verify that the clear all filters option returns the tasklist to its original state
+        Given I have navigated to the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
         And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
         And I open each of the modification tasklist filters
@@ -191,6 +218,8 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
 
     @filterTasklistDateSubmittedValidation @rsp-4104
     Scenario Outline: Verify that correct validation is in place for the date submitted filter
+        Given I have navigated to the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
         And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
         And I open each of the modification tasklist filters
@@ -208,8 +237,10 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
             | Invalid_Date_From                 | Invalid_Date_From_Error                 |
             | Invalid_Date_To                   | Invalid_Date_To_Error                   |
 
-    @SortTasklistByColumn @rsp-4091 @fail
+    @SortTasklistByColumn @rsp-4091
     Scenario Outline: Verify the user is able to sort the modifications tasklist by ascending and descending order for each results table column
+        Given I have navigated to the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
         When I click the '<Sort_Button>' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
         Then I can see the tasklist of modifications 'ready to assign' is sorted by '<Initial_Sort>' order of the '<Sort_Field>'
@@ -233,12 +264,15 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
 
     @tasklistErrorStateValidation @rsp-4111
     Scenario: Verify that the user must select a modifiation before continuing
+        Given I have navigated to the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
         When I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
         Then I validate 'No_Modifications_Selected_Summary_Only_Error' displayed on 'Modifications_Tasklist_Page'
 
-
     @ModificationsTasklistPaginationFirst @rsp-4040 @rsp-4309
     Scenario Outline: Verify pagination in Modification Ready to Assign page when user is on the first page and navigate through each page by clicking page number or by clicking next link
+        Given I have navigated to the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
         Then I can see the '<Validation_Text>' ui labels on the modifications ready to assign page
         When I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
         And I capture the page screenshot
@@ -256,6 +290,8 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
 
     @ModificationsTasklistPaginationLast @rsp-4040 @rsp-4309
     Scenario Outline: Verify pagination in Modification Ready to Assign page when user is on the last page and navigate through each page by clicking page number or by clicking Previous link
+        Given I have navigated to the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
         Then I can see the '<Validation_Text>' ui labels on the modifications ready to assign page
         When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
         And I capture the page screenshot
@@ -272,6 +308,8 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
 
     @ModificationsTasklistRandomSelection @rsp-4105 @KNOWN-DEFECT-RSP-4971
     Scenario: Verify checkboxes are visible and accessible and also the modification records can be selected across pages
+        Given I have navigated to the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
         When I confirm checkbox exists in every row across pages
         And I capture the page screenshot
         And I check random row and validate if the row is checked even after navigation
@@ -279,6 +317,8 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
 
     @ModificationsTasklistSelectAllWithJs @rsp-4105 @jsEnabled
     Scenario: With JavaScript enabled, Verify if user selects the check all checkbox on the first page and confirm checkboxes are checked and status retained even after navigation
+        Given I have navigated to the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
         When I select check all checkbox on the current page and validate all checkboxes are checked
         And I capture the page screenshot
         When I navigate by 'clicking on next link' within the Modifications Ready to assign page
@@ -289,6 +329,8 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
 
     @ModificationsTasklistSelectAllWithoutJs @rsp-4105 @jsDisabled
     Scenario: With JavaScript disabled, Verify user selects the check all checkbox on the first page and confirm checkboxes are unchecked and status retained even after navigation
+        Given I have navigated to the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
         When JavaScript is disabled I select check all checkbox on the current page and validate all checkboxes are unchecked
         And I capture the page screenshot
         And I navigate by 'clicking on next link' within the Modifications Ready to assign page
@@ -299,6 +341,8 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
 
     @ModificationsRandomSelectionAndSort @rsp-4105
     Scenario: Verify user selects few checkboxes on the first page, then applying sort resets all the checkboxes
+        Given I have navigated to the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
         When I check random row and validate if the row is checked even after navigation
         And I capture the page screenshot
         When I click the '<Sort_Button>' button on the 'Modifications_Tasklist_Page'
@@ -313,6 +357,8 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
 
     @ModificationsSelectAllAndSort @rsp-4105 @jsEnabled @KNOWN-DEFECT-RSP-4976
     Scenario: Verify user selects check all on the first page, then applying sort resets all the checkboxes
+        Given I have navigated to the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
         When I select check all checkbox on the current page and validate all checkboxes are checked
         And I capture the page screenshot
         When I click the '<Sort_Button>' button on the 'Modifications_Tasklist_Page'
@@ -329,6 +375,8 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
     # Test data currently has some modifications already assigned to SWR so cannot run repeatedly
     @WFCAssignModificationSWR @rsp-4076 @rsp-4849 @skip
     Scenario Outline: Validate the workflow co-ordinator can assign a study-wide reviewer to a modification from the modifications ready to assign page
+        Given I have navigated to the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
         When I enter '<Valid_Iras_Id>' into the search field in the modifications ready to assign page
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
@@ -359,7 +407,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
             | Valid_Iras_Id_Ln_England_Pn_England | Study_Wide_Reviewer_HRA_England | Modification_Id_Ln_England_Pn_England_Three_Four |
 
     # UI issues:- Page heading is not matching/Guidance text is missing
-    @StudyWideReviewer @SWRTasklist @rsp-4076 @rsp-4849 @KNOWN-DEFECT-RSP-XXXX
+    @StudyWideReviewer @SWRTasklist @rsp-4076 @rsp-4849 @KNOWN-DEFECT-RSP-5212
     Scenario Outline: Validate the SWR Tasklist page after the workflow co-ordinator assigns a study-wide reviewer to a modification from the modifications ready to assign page
         Given I have navigated to the 'My_Modifications_Tasklist_Page'
         Then I capture the page screenshot
@@ -374,6 +422,8 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
 
     @ModificationsList @rsp-4076 @rsp-4849
     Scenario Outline: Validate whether all the selected modifications are displayed based on the 'Select a reviewer' page
+        Given I have navigated to the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
         When I enter '<Valid_Iras_Id>' into the search field in the modifications ready to assign page
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
@@ -496,6 +546,8 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
 
     @BackLinkNavigation @RetainSelectedCheckboxes @rsp-4076 @rsp-4849 @KNOWN-DEFECT-RSP-5011
     Scenario Outline: Validate the workflow co-ordinator navigates to the modifications task list page from the 'Select a reviewer' page on clicking 'Back' button on 'Select a reviewer' page
+        Given I have navigated to the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
         When I enter '<Valid_Iras_Id>' into the search field in the modifications ready to assign page
         And I click the 'Search' button on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot

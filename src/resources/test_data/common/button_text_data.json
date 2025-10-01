@@ -218,5 +218,14 @@
   },
   "Review_All_Changes_Page": {
     "Send_Modification_To_Sponsor": "Send modification to sponsor"
+  },
+  "Add_Document_Details_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later"
+  },
+  "Review_Document_Infomation_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later",
+    "Change_Details": "Change"
   }
 }

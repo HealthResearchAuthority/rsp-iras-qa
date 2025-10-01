@@ -26,6 +26,7 @@
   "VCF_File": "src/resources/test_data/common/document_upload/VCF_File.vcf",
   "EML_File": "src/resources/test_data/common/document_upload/EML_File.eml",
   "MSG_File": "src/resources/test_data/common/document_upload/MSG_File.msg",
+  "New_CSV_File": "src/resources/test_data/common/document_upload/New_CSV_File.csv",
   "MP4_File": "src/resources/test_data/common/document_upload/MP4_File.mp4",
   "AVI_File": "src/resources/test_data/common/document_upload/AVI_File.avi",
   "MKV_File": "src/resources/test_data/common/document_upload/MKV_File.mkv",

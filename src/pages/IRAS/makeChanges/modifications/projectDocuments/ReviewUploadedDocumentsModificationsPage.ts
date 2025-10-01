@@ -69,18 +69,18 @@ export default class ReviewUploadedDocumentsModificationsPage {
     const expectedPageHeading =
       this.reviewUploadedDocumentsModificationsPageTestData.Review_Uploaded_Documents_Modifications_Page.heading +
       ' ' +
-      specificChangeTitleLabel;
-    await expect.soft(this.pageHeading.getByText(expectedPageHeading)).toBeVisible();
+      specificChangeTitleLabel.toLowerCase();
+    await expect.soft(this.pageHeading.getByText(expectedPageHeading, { exact: true })).toBeVisible();
 
-    // const expectedPageTitle =
-    //   this.reviewUploadedDocumentsModificationsPageTestData.Review_Uploaded_Documents_Modifications_Page
-    //     .page_title_first_part +
-    //   ' ' +
-    //   specificChangeTitleLabel +
-    //   ' ' +
-    //   this.reviewUploadedDocumentsModificationsPageTestData.Review_Uploaded_Documents_Modifications_Page
-    //     .page_title_second_part;
-    // expect.soft(await this.page.title()).toBe(expectedPageTitle);
+    const expectedPageTitle =
+      this.reviewUploadedDocumentsModificationsPageTestData.Review_Uploaded_Documents_Modifications_Page
+        .page_title_first_part +
+      ' ' +
+      specificChangeTitleLabel.toLowerCase() +
+      ' ' +
+      this.reviewUploadedDocumentsModificationsPageTestData.Review_Uploaded_Documents_Modifications_Page
+        .page_title_second_part;
+    expect.soft(await this.page.title()).toBe(expectedPageTitle);
 
     await expect
       .soft(
