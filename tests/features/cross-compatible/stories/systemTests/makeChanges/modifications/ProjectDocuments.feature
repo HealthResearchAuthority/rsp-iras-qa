@@ -52,7 +52,7 @@ Feature: Create Amendment - Project Documents Modifications
       | Protocol_Non_Substantial_Changes             |
       | Translations_Addition_Of_Translated_Versions |
 
-  @rsp-3876 @4684 @ValidateDocumentUploadAndReviewForModificationsPage @KNOWN_DEFECT_RSP-4801_4844_4920_4921 @Test
+  @rsp-3876 @4684 @ValidateDocumentUploadAndReviewForModificationsPage @KNOWN_DEFECT_RSP-4801_4844_4920_4921
   Scenario Outline: Validate the user is able to upload and review documents for modifications
     And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
     And I capture the page screenshot
@@ -131,7 +131,7 @@ Feature: Create Amendment - Project Documents Modifications
       | GDPR_Wording                                 | WMV_File              | WEBM_File                  |
       | Other_Minor_Change_To_Study_Documents        | WEBM_File             | WMV_File                   |
 
-  @4684 @ValidateDocumentUploadAndReviewForModificationsPage @KNOWN_DEFECT_RSP-4801_4844_4920_4921 @Test
+  @4684 @ValidateDocumentUploadAndReviewForModificationsPage @KNOWN_DEFECT_RSP-4801_4844_4920_4921
   Scenario Outline: Verify that a relevant error message is shown when the user attempts to upload a video file that has already been uploaded
     And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
     And I capture the page screenshot
@@ -159,7 +159,7 @@ Feature: Create Amendment - Project Documents Modifications
       | Correction_Of_Typographical_Errors | Multiple_Files_Video_Valid | Multiple_Files_Video_Valid |
 
 
-  @4684 @ValidateDocumentUploadAndReviewForModificationsPage @KNOWN_DEFECT_RSP-4801_4844_4920_4921 @Test
+  @4684 @ValidateDocumentUploadAndReviewForModificationsPage @KNOWN_DEFECT_RSP-4801_4844_4920_4921
   Scenario Outline: Verify that an appropriate error message is displayed when the user uploads a video file with an invalid format
     And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
     And I capture the page screenshot
@@ -184,6 +184,9 @@ Feature: Create Amendment - Project Documents Modifications
       | CRF_Other_Study_Data_Records                 | RAW_File                      |
       | GDPR_Wording                                 | TS_File                       |
       | Correction_Of_Typographical_Errors           | WAV_File                      |
+
+  # cover error validation when exceeding 100MB
+  # cover error validation - list of files containing few duplicate files, few incorrect format files,few exceeding size limit
 
   @rsp-3876 @ValidateDocumentUploadModificationsPageErrprMessages @KNOWN_DEFECT_RSP-4801_4920
   Scenario Outline: Validate the user is able to see error messages for invalid actions on upload documents for modifications

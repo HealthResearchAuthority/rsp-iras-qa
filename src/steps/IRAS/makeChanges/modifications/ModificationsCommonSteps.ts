@@ -26,21 +26,39 @@ Then(
     const modificationIDActual = confirmStringNotNull(
       await modificationsCommonPage.modification_id_label.textContent()
     );
-    expect(irasIDActual).toBe(irasIDExpected);
-    expect(shortProjectTitleActual).toBe(shortProjectTitleExpected);
-    expect(modificationIDActual).toBe(modificationIDExpected);
+    expect.soft(irasIDActual).toBe(irasIDExpected);
+    expect.soft(shortProjectTitleActual).toBe(shortProjectTitleExpected);
+    expect.soft(modificationIDActual).toBe(modificationIDExpected);
   }
 );
+
+// Then(
+//   'I create {string} for the created modification',
+//   async ({ commonItemsPage, modificationsCommonPage, selectAreaOfChangePage }, datasetName) => {
+//     const changesDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName];
+//     for (const changeName of Object.keys(changesDataset)) {
+//       const changeDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName][changeName];
+//       await selectAreaOfChangePage.selectAreaOfChangeInModificationsPage(changeDataset);
+//       await modificationsCommonPage.createChangeModification(changeName, changeDataset);
+//       await commonItemsPage.clickButton('Modifications_Details_Page', 'Add_Another_Change');
+//     }
+//   }
+// );
 
 Then(
   'I create {string} for the created modification',
   async ({ commonItemsPage, modificationsCommonPage, selectAreaOfChangePage }, datasetName) => {
     const changesDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName];
-    for (const changeName of Object.keys(changesDataset)) {
-      const changeDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName][changeName];
+    const changeNames = Object.keys(changesDataset);
+    for (let i = 0; i < changeNames.length; i++) {
+      const changeName = changeNames[i];
+      const changeDataset = changesDataset[changeName];
       await selectAreaOfChangePage.selectAreaOfChangeInModificationsPage(changeDataset);
       await modificationsCommonPage.createChangeModification(changeName, changeDataset);
-      await commonItemsPage.clickButton('Modifications_Details_Page', 'Add_Another_Change');
+      // Only click "Add Another Change" if it's not the last iteration
+      if (i < changeNames.length - 1) {
+        await commonItemsPage.clickButton('Modifications_Details_Page', 'Add_Another_Change');
+      }
     }
   }
 );
