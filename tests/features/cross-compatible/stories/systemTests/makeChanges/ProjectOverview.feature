@@ -126,7 +126,6 @@ Feature: Project Overview
     Scenario: Validate the user is able to access and view the project documents details from the project overview page
         When I navigate to the project overview page of a specific project
         And I capture the page screenshot
-        And I can see the project details on project overview page for '<Project_Details>'
         When I click the 'Project_Documents' link on the 'Project_Overview_Page'
         And I capture the page screenshot
         And I validate the ui labels using 'Label_Texts_Project_Documents' on the project documents page

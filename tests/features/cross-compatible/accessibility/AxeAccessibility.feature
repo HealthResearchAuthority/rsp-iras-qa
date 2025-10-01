@@ -1165,6 +1165,14 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
+  @axeAccessibilityProjectOverviewProjectDocumentsSpecificProject @ApplicantUser
+  Scenario: Project overview project documents page for a specific project
+    When I navigate to the project overview page of a specific project
+    When I click the 'Project_Documents' link on the 'Project_Overview_Page'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
   @axeAccessibilityProjectDocumentsAddDocumentModificationsPage @ApplicantUser
   Scenario: Modifications add document page
     Given I have navigated to the my research projects page
@@ -1219,7 +1227,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-@axeAccessibilityProjectConfirmationPage @ApplicantUser
+  @axeAccessibilityProjectConfirmationPage @ApplicantUser
   Scenario: Create Project confirmation page
     Given I have navigated to the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
