@@ -30,6 +30,7 @@ Then(
     expect.soft(irasIDActual).toBe(irasIDExpected);
     expect.soft(shortProjectTitleActual).toBe(shortProjectTitleExpected);
     expect.soft(modificationIDActual).toBe(modificationIDExpected);
+    await modificationsCommonPage.setModificationID(modificationIDExpected);
   }
 );
 

@@ -1198,7 +1198,8 @@ Then(
       errorMessageFieldAndSummaryDatasetName === 'Invalid_Format_Video_File_Error'
     ) {
       const fieldNamesList = await reviewUploadedDocumentsModificationsPage.getUploadedFileName();
-      if (fieldNamesList.includes(',')) {
+      const fieldNamesListValues = Object.values(fieldNamesList);
+      if (fieldNamesListValues.length > 1) {
         for (const val of fieldNamesList) {
           fileName = path.basename(val);
           const allSummaryErrorExpectedValue = `${fileName}` + Object.values(errorMessageFieldDataset);
@@ -1226,8 +1227,9 @@ Then(
             errorMessageFieldAndSummaryDatasetName === 'Duplicate_File_Upload_Error' ||
             errorMessageFieldAndSummaryDatasetName === 'Invalid_Format_Video_File_Error'
           ) {
-            const fieldNamesList: string[] = await reviewUploadedDocumentsModificationsPage.getUploadedFileName();
-            if (fieldNamesList.includes(',')) {
+            const fieldNamesList = await reviewUploadedDocumentsModificationsPage.getUploadedFileName();
+            const fieldNamesListValues = Object.values(fieldNamesList);
+            if (fieldNamesListValues.length > 1) {
               for (const val of fieldNamesList) {
                 fileName = path.basename(val);
                 const allfieldErrorMessagesExpectedValue = `${fileName}` + Object.values(errorMessageFieldDataset);
@@ -1242,7 +1244,6 @@ Then(
               fieldErrorMessagesActualValues = await commonItemsPage.getFieldErrorMessagesList(key, page);
               expect(fieldErrorMessagesActualValues).toEqual(allfieldErrorMessagesExpectedValues);
             } else {
-              // for (const val of fieldNamesList) {
               fileName = path.basename(fieldNamesList.toString());
               const allfieldErrorMessagesExpectedValue = `${fileName}` + Object.values(errorMessageFieldDataset);
               allfieldErrorMessagesExpectedValues.push(allfieldErrorMessagesExpectedValue);
@@ -1252,7 +1253,6 @@ Then(
                 allfieldErrorMessagesExpectedValue
               );
               await expect(element).toBeInViewport();
-              // }
               fieldErrorMessagesActualValues = await commonItemsPage.getFieldErrorMessages(key, page);
               expect([fieldErrorMessagesActualValues]).toEqual(allfieldErrorMessagesExpectedValues);
             }

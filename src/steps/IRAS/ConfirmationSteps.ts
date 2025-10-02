@@ -259,11 +259,16 @@ Then(
     const validationLabelsDataset = confirmationPage.confirmationPageTestData[validationLabelsDatasetName];
     const expectedSuccessHeader = validationLabelsDataset.page_heading;
     const guidanceText = confirmationPage.confirmationPageTestData[validationLabelsDatasetName].page_guidance_text;
+    const whatHappensNextLabel =
+      confirmationPage.confirmationPageTestData[validationLabelsDatasetName].what_happens_next_label;
     expect
       .soft(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim())
       .toBe(expectedSuccessHeader);
     expect
       .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim())
       .toBe(guidanceText);
+    expect
+      .soft(confirmStringNotNull(await confirmationPage.what_happens_next_label.textContent()).trim())
+      .toBe(whatHappensNextLabel);
   }
 );

@@ -181,7 +181,7 @@ Feature: Create Amendment - Create Modifications
       | Field_And_Summary_Error_Message              | Area_Of_Change             | Specific_Change          | Modifications_Tile_Link |
       | Field_Error_participating_organisations_text | Participating_Organisation | Addition_Of_Sites_Option | Modifications_Tile      |
 
-  @rsp-4386 @4389 @4391 @ModificationsJourneyEntireJourney @ReturnToProjectOverviewFromModificationSentToSponsorConfirmation @Test
+  @rsp-4386 @4389 @4391 @ModificationsJourneyEntireJourney @ReturnToProjectOverviewFromModificationSentToSponsorConfirmation @KNOWN_DEFECT_RSP-5184 @Test
   Scenario Outline: Validate that user can create modifications and complete the entire modifications journey till send modification to sponsor confirmation page and return to project overview page from there
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I capture the page screenshot
@@ -215,6 +215,11 @@ Feature: Create Amendment - Create Modifications
     Then I click the 'Return_To_Project_Overview' button on the 'Confirmation_Page'
     And I capture the page screenshot
     Then I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    # status update from draft to In sponsor review
+    #click on modification
+    # review all changes -read only
 
     Examples:
       | Changes                           |
@@ -317,7 +322,7 @@ Feature: Create Amendment - Create Modifications
       | Changes                           | New_Changes                              |
       | Multiple_Changes_Planned_End_Date | Multiple_Changes_Planned_End_Date_Change |
 
-  # Multiple_Changes_Planned_End_Date + project documents
+  # Multiple_Changes_Planned_End_Date + project documents+particpant organsiation
 
   # back link navigation from Review_All_Changes_Page and confimation page for modification sent to sponsor page
 

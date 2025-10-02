@@ -43,6 +43,7 @@
   },
   "Modification_Sent_To_Sponsor_Labels": {
     "page_heading": "Modification sent to sponsor",
+    "what_happens_next_label": "What happens next",
     "page_guidance_text": "You've sent your modification to the sponsor. They'll either accept the changes and submit it, or contact you for more information."
   },
   "add_remove_user_review_Body_confirmation_success_header_label": "User has been successfully",

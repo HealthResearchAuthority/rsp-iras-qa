@@ -131,7 +131,7 @@ Feature: Create Amendment - Project Documents Modifications
       | GDPR_Wording                                 | WMV_File              | WEBM_File                  |
       | Other_Minor_Change_To_Study_Documents        | WEBM_File             | WMV_File                   |
 
-  @4684 @ValidateDocumentUploadAndReviewForModificationsPage @KNOWN_DEFECT_RSP-4801_4844_4920_4921
+  @4684 @ValidateDocumentUploadAndReviewForModificationsPage @KNOWN_DEFECT_RSP-4801_4844_4920_4921 @TestOnly
   Scenario Outline: Verify that a relevant error message is shown when the user attempts to upload a video file that has already been uploaded
     And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
     And I capture the page screenshot
@@ -186,7 +186,7 @@ Feature: Create Amendment - Project Documents Modifications
       | Correction_Of_Typographical_Errors           | WAV_File                      |
 
   # cover error validation when exceeding 100MB
-  # cover error validation - list of files containing few duplicate files, few incorrect format files,few exceeding size limit
+  # cover error validation - list of files containing few duplicate files, few incorrect format files,few exceeding size limit(mix of valid and invalid files)
 
   @rsp-3876 @ValidateDocumentUploadModificationsPageErrprMessages @KNOWN_DEFECT_RSP-4801_4920
   Scenario Outline: Validate the user is able to see error messages for invalid actions on upload documents for modifications

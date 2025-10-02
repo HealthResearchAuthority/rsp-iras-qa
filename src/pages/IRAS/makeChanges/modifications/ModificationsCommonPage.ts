@@ -9,6 +9,7 @@ import CommonItemsPage from '../../../Common/CommonItemsPage';
 export default class ModificationsCommonPage {
   readonly page: Page;
   readonly modificationsCommonPageTestData: typeof modificationsCommonPageTestData;
+  private _modification_id: string;
   readonly pageHeading: Locator;
   readonly pageComponentLabel: Locator;
   readonly iras_id_label: Locator;
@@ -25,6 +26,7 @@ export default class ModificationsCommonPage {
   constructor(page: Page) {
     this.page = page;
     this.modificationsCommonPageTestData = modificationsCommonPageTestData;
+    this._modification_id = '';
 
     //Locators
     this.pageHeading = this.page.getByRole('heading');
@@ -44,6 +46,15 @@ export default class ModificationsCommonPage {
       .getByText(this.modificationsCommonPageTestData.Label_Texts.modification_id_label)
       .locator('..')
       .locator('[class$="value"]');
+  }
+
+  //Getters & Setters for Private Variables
+  async setModificationID(value: string): Promise<void> {
+    this._modification_id = value;
+  }
+
+  async getModificationID(): Promise<string> {
+    return this._modification_id;
   }
 
   //Page Methods
