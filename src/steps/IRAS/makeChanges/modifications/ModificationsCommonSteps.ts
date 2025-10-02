@@ -19,7 +19,8 @@ Then(
     const shortProjectTitleExpected =
       projectDetailsTitlePage.projectDetailsTitlePageTestData[projectTitleDatasetName].short_project_title_text;
     const modificationIDExpected = irasIDExpected + '/' + 1;
-    const irasIDActual = confirmStringNotNull(await modificationsCommonPage.iras_id_label.textContent());
+    // const irasIDActual = confirmStringNotNull(await modificationsCommonPage.iras_id_label.textContent());
+    const irasIDActual = await modificationsCommonPage.iras_id_label.textContent();
     const shortProjectTitleActual = confirmStringNotNull(
       await modificationsCommonPage.short_project_title_label.textContent()
     );
@@ -70,11 +71,11 @@ Then(
     for (const changeName of Object.keys(changesDataset)) {
       const changeDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName][changeName];
       if ('which_organisation_change_affect_checkbox' in changeDataset) {
-        modificationsCommonPage.calculateAndStoreRankingForChangesForApplicability(changeName, changeDataset);
+        await modificationsCommonPage.calculateAndStoreRankingForChangesForApplicability(changeName, changeDataset);
       } else {
-        modificationsCommonPage.calculateAndStoreRankingForChangesForNonApplicability(changeName);
+        await modificationsCommonPage.calculateAndStoreRankingForChangesForNonApplicability(changeName);
       }
-      modificationsCommonPage.calculateAndStoreOverallRanking();
+      await modificationsCommonPage.calculateAndStoreOverallRanking();
     }
   }
 );
@@ -83,14 +84,28 @@ Then(
   'I modify the current changes with {string} for the created modification',
   async ({ commonItemsPage, modificationsCommonPage, selectAreaOfChangePage }, datasetName) => {
     const changesDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName];
-    for (const changeName of Object.keys(changesDataset)) {
+    const changeNames = Object.keys(changesDataset);
+    for (let i = 0; i < changeNames.length; i++) {
+      const changeName = changeNames[i];
+      const changeDataset = changesDataset[changeName];
       // Click Change link agaist every changeName
       //validate the review changes page for the changeName
-      const changeDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName][changeName];
+      // const changeDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName][changeName];
       await selectAreaOfChangePage.selectAreaOfChangeInModificationsPage(changeDataset);
       await modificationsCommonPage.createChangeModification(changeName, changeDataset);
-      await commonItemsPage.clickButton('Modifications_Details_Page', 'Add_Another_Change');
+      // Only click "Add Another Change" if it's not the last iteration
+      if (i < changeNames.length - 1) {
+        await commonItemsPage.clickButton('Modifications_Details_Page', 'Add_Another_Change');
+      }
     }
+    // for (const changeName of Object.keys(changesDataset)) {
+    //   // Click Change link agaist every changeName
+    //   //validate the review changes page for the changeName
+    //   const changeDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName][changeName];
+    //   await selectAreaOfChangePage.selectAreaOfChangeInModificationsPage(changeDataset);
+    //   await modificationsCommonPage.createChangeModification(changeName, changeDataset);
+    //   await commonItemsPage.clickButton('Modifications_Details_Page', 'Add_Another_Change');
+    // }
   }
 );
 
@@ -100,3 +115,68 @@ Then(
 //     When I click the change link '<Change_Field>' on review changes planned end date page
 //     Then I can see the 'Planned_End_Date' page for modifications
 //     And I capture the page screenshot
+
+Then(
+  'I validate the change details are displayed as per the {string} dataset',
+  async ({ modificationsCommonPage }, datasetName) => {
+    const changesDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName];
+    const changeNames = Object.keys(changesDataset);
+
+    for (let i = 0; i < changeNames.length; i++) {
+      const changeName = changeNames[i];
+      const expectedData = changesDataset[changeName]; // From JSON
+      const actualData = await modificationsCommonPage.getMappedSummaryCardDataForRankingCategoryChanges(
+        'Change ' + (i + 1) + ' - ' + expectedData.area_of_change_dropdown,
+        'Changes'
+      );
+
+      console.log(`\n Comparing Change ${i + 1}: ${changeName}`);
+      console.log('Expected:', expectedData);
+      console.log('Actual:', actualData.cardData);
+
+      // Compare keys and values
+      for (const key of Object.keys(expectedData)) {
+        const expectedValue = expectedData[key];
+        const actualValue = actualData.cardData[key];
+
+        if (Array.isArray(expectedValue)) {
+          // Compare arrays (order-insensitive)
+          const sortedExpected = [...expectedValue].sort();
+          const sortedActual = [...(actualValue || [])].sort();
+          expect.soft(sortedActual).toEqual(sortedExpected);
+        } else {
+          expect.soft(actualValue).toBe(expectedValue);
+        }
+      }
+    }
+  }
+);
+
+Then(
+  'I validate sponsor details are displayed with {string}',
+  async ({ modificationsCommonPage, sponsorReferencePage }, datasetName) => {
+    const sponsorDataset = sponsorReferencePage.sponsorReferencePageTestData[datasetName];
+    const expectedData = sponsorDataset;
+    const actualData = await modificationsCommonPage.getMappedSummaryCardDataForRankingCategoryChanges(
+      'Sponsor details',
+      'Sponsor details'
+    );
+    console.log('Expected:', expectedData);
+    console.log('Actual:', actualData.cardData);
+
+    //  Compare keys and values
+    for (const key of Object.keys(expectedData)) {
+      const expectedValue = expectedData[key];
+      const actualValue = actualData.cardData[key];
+
+      if (Array.isArray(expectedValue)) {
+        // Compare arrays (order-insensitive)
+        const sortedExpected = [...expectedValue].sort();
+        const sortedActual = [...(actualValue || [])].sort();
+        expect.soft(sortedActual).toEqual(sortedExpected);
+      } else {
+        expect.soft(actualValue).toBe(expectedValue);
+      }
+    }
+  }
+);

@@ -8,6 +8,7 @@ export default class SponsorReferencePage {
   readonly pageHeading: Locator;
   readonly sponsor_modification_reference_textbox: Locator;
   readonly sponsor_summary_textbox: Locator;
+  readonly sponsor_modification_date_formgroup: Locator;
   readonly sponsor_modification_date_day_textbox: Locator;
   readonly sponsor_modification_date_month_dropdown: Locator;
   readonly sponsor_modification_date_year_textbox: Locator;
@@ -21,36 +22,46 @@ export default class SponsorReferencePage {
     this.pageHeading = this.page.getByRole('heading', {
       name: sponsorReferencePageTestData.Sponsor_Reference_Page.heading,
     });
-    this.sponsor_modification_reference_textbox = this.page.getByLabel(
-      this.sponsorReferencePageTestData.Sponsor_Reference_Page.sponsor_modification_reference_label,
-      {
-        exact: true,
-      }
-    );
-    this.sponsor_modification_date_day_textbox = this.page.getByLabel(
-      this.sponsorReferencePageTestData.Sponsor_Reference_Page.sponsor_modification_date_day_label,
-      {
-        exact: true,
-      }
-    );
-    this.sponsor_modification_date_month_dropdown = this.page.getByLabel(
-      this.sponsorReferencePageTestData.Sponsor_Reference_Page.sponsor_modification_date_month_label,
-      {
-        exact: true,
-      }
-    );
-    this.sponsor_modification_date_year_textbox = this.page.getByLabel(
-      this.sponsorReferencePageTestData.Sponsor_Reference_Page.sponsor_modification_date_year_label,
-      {
-        exact: true,
-      }
-    );
-    this.sponsor_summary_textbox = this.page.getByLabel(
-      this.sponsorReferencePageTestData.Sponsor_Reference_Page.sponsor_summary_label,
-      {
-        exact: true,
-      }
-    );
+    this.sponsor_modification_reference_textbox = this.page
+      .locator('.govuk-form-group')
+      .locator('.govuk-form-group', {
+        has: this.page.getByText(
+          this.sponsorReferencePageTestData.Sponsor_Reference_Page.sponsor_modification_reference_label
+        ),
+      })
+      .getByRole('textbox');
+    this.sponsor_modification_date_formgroup = this.page.locator('.govuk-form-group').locator('.govuk-form-group', {
+      has: this.page.getByText(
+        this.sponsorReferencePageTestData.Sponsor_Reference_Page.sponsor_modification_reference_date_label
+      ),
+    });
+    this.sponsor_modification_date_day_textbox = this.sponsor_modification_date_formgroup
+      .locator('.govuk-form-group', {
+        has: this.page.getByText(
+          this.sponsorReferencePageTestData.Sponsor_Reference_Page.sponsor_modification_date_day_label
+        ),
+      })
+      .getByRole('textbox');
+    this.sponsor_modification_date_month_dropdown = this.sponsor_modification_date_formgroup
+      .locator('.govuk-form-group', {
+        has: this.page.getByText(
+          this.sponsorReferencePageTestData.Sponsor_Reference_Page.sponsor_modification_date_month_label
+        ),
+      })
+      .getByRole('combobox');
+    this.sponsor_modification_date_year_textbox = this.sponsor_modification_date_formgroup
+      .locator('.govuk-form-group', {
+        has: this.page.getByText(
+          this.sponsorReferencePageTestData.Sponsor_Reference_Page.sponsor_modification_date_year_label
+        ),
+      })
+      .getByRole('textbox');
+    this.sponsor_summary_textbox = this.page
+      .locator('.govuk-form-group')
+      .locator('.govuk-form-group', {
+        has: this.page.getByText(this.sponsorReferencePageTestData.Sponsor_Reference_Page.sponsor_summary_label),
+      })
+      .getByRole('textbox');
   }
 
   //Page Methods

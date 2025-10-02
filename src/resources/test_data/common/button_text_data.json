@@ -64,7 +64,8 @@
     "Enable_User_Record": "Enable user record"
   },
   "Confirmation_Page": {
-    "Confirm": "Confirm"
+    "Confirm": "Confirm",
+    "Return_To_Project_Overview": "Return to project overview"
   },
   "Create_Review_Body_Page": {
     "Continue": "Continue"

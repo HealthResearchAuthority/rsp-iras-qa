@@ -203,4 +203,114 @@ export default class ModificationsCommonPage {
     const category = categoryOrder.find((c) => values.some((r) => r.category === c));
     this.setOverallRanking(modificationType, category, reviewType);
   }
+
+  async getMappedSummaryCardDataForRankingCategoryChanges(cardTitle: string, CardHeading: string) {
+    await this.page.waitForLoadState('domcontentloaded');
+    const cardLocator = this.page
+      .getByRole('heading', {
+        name: CardHeading,
+      })
+      .locator('..')
+      .locator('.govuk-summary-card')
+      .filter({
+        has: this.page.locator('.govuk-summary-card__title', { hasText: cardTitle }),
+      });
+
+    // Ensure page is loaded
+    await this.page.waitForLoadState('domcontentloaded');
+
+    // Wait for card to appear
+    await expect(cardLocator).toBeVisible({ timeout: 5000 });
+
+    // Wait for the card to be visible
+    await cardLocator.waitFor({ state: 'visible' });
+
+    const rows = cardLocator.locator('.govuk-summary-list__row');
+    await expect.soft(rows.first()).toBeVisible();
+    const rowCount = await rows.count();
+
+    const cardData: Record<string, any> = {};
+    const modificationInfo: Record<string, string> = {}; //  Separate record for individual change ranking and category
+    if (cardTitle.includes('Change')) {
+      cardData['area_of_change_dropdown'] = 'Project design';
+      cardData['specific_change_dropdown'] = 'Change to planned end date';
+    }
+
+    for (let i = 0; i < rowCount; i++) {
+      await this.page.waitForLoadState('domcontentloaded');
+      const row = rows.nth(i);
+      const key = await row.locator('.govuk-summary-list__key').innerText();
+      const value = await row.locator('.govuk-summary-list__value').innerText();
+      const cleanedKey = key.trim();
+      const cleanedValue = value.trim().replace(/\s+/g, ' ');
+
+      switch (cleanedKey) {
+        case 'Change to planned end date': {
+          const [day, month, year] = cleanedValue.split(' ');
+          cardData['planned_project_end_day_text'] = day;
+          cardData['planned_project_end_month_dropdown'] = month;
+          cardData['planned_project_end_year_text'] = year;
+          break;
+        }
+        case 'Which organisation types does this change affect?': {
+          cardData['which_organisation_change_affect_checkbox'] = cleanedValue
+            .split(/,|&lt;br\/&gt;/)
+            .map((v) => v.trim());
+          break;
+        }
+        case 'Where are the participating NHS/HSC organisations that will be affected by this change?': {
+          cardData['where_organisation_change_affect_nhs_question_checkbox'] = cleanedValue
+            .split(/&lt;br\/&gt;/)
+            .map((v) => v.trim());
+          break;
+        }
+        case 'Where are the participating non-NHS/HSC organisations that will be affected by this change?': {
+          cardData['where_organisation_change_affect_non_nhs_question_checkbox'] = cleanedValue
+            .split(/&lt;br\/&gt;/)
+            .map((v) => v.trim());
+          break;
+        }
+        case 'Will some or all of the participating organisations be affected?': {
+          cardData['will_some_or_all_organisations_be_affected_question_radio'] = cleanedValue;
+          break;
+        }
+        case 'Will participating NHS/HSC organisations require additional resources to implement this change?': {
+          cardData['will_nhs_hsc_organisations_require_additional_resources_question_radio'] = cleanedValue;
+          break;
+        }
+        case 'Sponsor modification reference': {
+          cardData['sponsor_modification_reference_textbox'] = cleanedValue;
+          break;
+        }
+        case 'Sponsor modification date': {
+          const [day, month, year] = cleanedValue.split(' ');
+          cardData['sponsor_modification_date_day_textbox'] = day;
+          cardData['sponsor_modification_date_month_textbox'] = month;
+          cardData['sponsor_modification_date_year_textbox'] = year;
+          break;
+        }
+        case 'Sponsor modification summary': {
+          cardData['sponsor_summary_textbox'] = cleanedValue;
+          break;
+        }
+        case 'Modification type': {
+          modificationInfo['modification_type'] = cleanedValue;
+          break;
+        }
+        case 'Category': {
+          modificationInfo['category'] = cleanedValue.replace(/&gt;/g, '>');
+          break;
+        }
+        case 'Review type': {
+          modificationInfo['review_type'] = cleanedValue;
+          break;
+        }
+        default: {
+          cardData[cleanedKey.toLowerCase().replace(/ /g, '_')] = cleanedValue;
+        }
+      }
+    }
+
+    return { cardData, modificationInfo }; //  Return both separately
+  }
 }
