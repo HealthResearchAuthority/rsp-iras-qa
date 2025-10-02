@@ -217,8 +217,9 @@ Feature: Create Amendment - Create Modifications
     Then I can see the project overview page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I capture the page screenshot
-    # status update from draft to In sponsor review
-    #click on modification
+    And I validate the modification record details displayed on post approvals page
+    And I click on the modification id hyperlink in the post approvals page
+    Then I can see the review all changes page
     # review all changes -read only
 
     Examples:

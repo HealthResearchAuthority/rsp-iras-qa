@@ -216,6 +216,7 @@
     "View_Project_Overview": "View project overview"
   },
   "Review_All_Changes_Page": {
-    "Delete_Modification": "Delete modification"
+    "Delete_Modification": "Delete modification",
+    "Change": "Change"
   }
 }

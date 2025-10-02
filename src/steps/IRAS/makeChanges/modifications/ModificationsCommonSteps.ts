@@ -20,16 +20,20 @@ Then(
       projectDetailsTitlePage.projectDetailsTitlePageTestData[projectTitleDatasetName].short_project_title_text;
     const modificationIDExpected = irasIDExpected + '/' + 1;
     // const irasIDActual = confirmStringNotNull(await modificationsCommonPage.iras_id_label.textContent());
-    const irasIDActual = await modificationsCommonPage.iras_id_label.textContent();
+    const irasIDActual = await modificationsCommonPage.iras_id_value.textContent();
     const shortProjectTitleActual = confirmStringNotNull(
-      await modificationsCommonPage.short_project_title_label.textContent()
+      await modificationsCommonPage.short_project_title_value.textContent()
     );
     const modificationIDActual = confirmStringNotNull(
-      await modificationsCommonPage.modification_id_label.textContent()
+      await modificationsCommonPage.modification_id_value.textContent()
     );
+    const statusActual = confirmStringNotNull(await modificationsCommonPage.status_value.textContent());
     expect.soft(irasIDActual).toBe(irasIDExpected);
     expect.soft(shortProjectTitleActual).toBe(shortProjectTitleExpected);
     expect.soft(modificationIDActual).toBe(modificationIDExpected);
+    expect
+      .soft(statusActual)
+      .toBe(modificationsCommonPage.modificationsCommonPageTestData.Label_Texts.draft_status_value);
     await modificationsCommonPage.setModificationID(modificationIDExpected);
   }
 );
@@ -181,3 +185,24 @@ Then(
     }
   }
 );
+
+Then(
+  'I validate the modification record details displayed on post approvals page',
+  async ({ modificationsCommonPage }) => {
+    const modificationIDExpected = await modificationsCommonPage.getModificationID();
+    const modificationRecord = await modificationsCommonPage.getModificationPostApprovalPage();
+    const modificationIDActual = modificationRecord.get('modificationIdValue');
+    expect.soft(modificationIDActual).toBe(modificationIDExpected);
+    const statusActual = modificationRecord.get('statusValue');
+    expect.soft(statusActual).toBe('In sponsor review');
+    const submittedDateActual = modificationRecord.get('submittedDateValue');
+    const submittedDateExpected = await modificationsCommonPage.getFormattedDate();
+    console.log(submittedDateExpected); // Example: 02 Oct 2025
+    expect.soft(submittedDateActual).toBe(submittedDateExpected);
+  }
+);
+
+Then('I click on the modification id hyperlink in the post approvals page', async ({ modificationsCommonPage }) => {
+  await modificationsCommonPage.modification_id_link.click();
+  await modificationsCommonPage.page.waitForLoadState('domcontentloaded');
+});

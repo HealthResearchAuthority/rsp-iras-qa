@@ -84,7 +84,7 @@ Feature: Create Amendment - Project Documents Modifications
     And I capture the page screenshot
 
     Examples:
-      | Specific_Change                              | Document_Upload_Files | Document_Upload_Files_New  |
+      | Specific_Change                    | Document_Upload_Files | Document_Upload_Files_New  |
       # | Correction_Of_Typographical_Errors           | PNG_File              | GIF_File                  |
       # | Correction_Of_Typographical_Errors           | GIF_File              | PNG_File                  |
       # | Correction_Of_Typographical_Errors           | BMP_File              | GIF_File                  |
@@ -121,17 +121,17 @@ Feature: Create Amendment - Project Documents Modifications
       # | Post_Trial_Information_For_Participants      | Multiple_Files        | GIF_File                  |
       # | Protocol_Non_Substantial_Changes             | Multiple_Files        | GIF_File                  |
       # | Translations_Addition_Of_Translated_Versions | Multiple_Files        | GIF_File                  |
-      | CRF_Other_Study_Data_Records                 | MP4_File              | AVI_File                   |
-      | GDPR_Wording                                 | BMP_File              | Multiple_Files_Video_Valid |
-      | Other_Minor_Change_To_Study_Documents        | AVI_File              | MP4_File                   |
-      | Post_Trial_Information_For_Participants      | MOV_File              | MKV_File                   |
-      | Protocol_Non_Substantial_Changes             | MKV_File              | MOV_File                   |
-      | Translations_Addition_Of_Translated_Versions | MPG_File              | MPEG_File                  |
-      | CRF_Other_Study_Data_Records                 | MPEG_File             | MPG_File                   |
-      | GDPR_Wording                                 | WMV_File              | WEBM_File                  |
-      | Other_Minor_Change_To_Study_Documents        | WEBM_File             | WMV_File                   |
+      | Correction_Of_Typographical_Errors | MP4_File              | AVI_File                   |
+      | Correction_Of_Typographical_Errors | BMP_File              | Multiple_Files_Video_Valid |
+      | Correction_Of_Typographical_Errors | AVI_File              | MP4_File                   |
+      | Correction_Of_Typographical_Errors | MOV_File              | MKV_File                   |
+      | Correction_Of_Typographical_Errors | MKV_File              | MOV_File                   |
+      | Correction_Of_Typographical_Errors | MPG_File              | MPEG_File                  |
+      | Correction_Of_Typographical_Errors | MPEG_File             | MPG_File                   |
+      | Correction_Of_Typographical_Errors | WMV_File              | WEBM_File                  |
+      | Correction_Of_Typographical_Errors | WEBM_File             | WMV_File                   |
 
-  @4684 @ValidateDocumentUploadAndReviewForModificationsPage @KNOWN_DEFECT_RSP-4801_4844_4920_4921 @TestOnly
+  @4684 @ValidateDocumentUploadAndReviewForModificationsPage @KNOWN_DEFECT_RSP-4801_4844_4920_4921
   Scenario Outline: Verify that a relevant error message is shown when the user attempts to upload a video file that has already been uploaded
     And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
     And I capture the page screenshot
@@ -155,7 +155,7 @@ Feature: Create Amendment - Project Documents Modifications
 
     Examples:
       | Specific_Change                    | Document_Upload_Files      | Document_Upload_Files_New  |
-      | CRF_Other_Study_Data_Records       | MP4_File                   | MP4_File                   |
+      | Correction_Of_Typographical_Errors | MP4_File                   | MP4_File                   |
       | Correction_Of_Typographical_Errors | Multiple_Files_Video_Valid | Multiple_Files_Video_Valid |
 
 
@@ -185,8 +185,8 @@ Feature: Create Amendment - Project Documents Modifications
       | GDPR_Wording                                 | TS_File                       |
       | Correction_Of_Typographical_Errors           | WAV_File                      |
 
-  # cover error validation when exceeding 100MB
-  # cover error validation - list of files containing few duplicate files, few incorrect format files,few exceeding size limit(mix of valid and invalid files)
+  # cover error validation when exceeding 100MB - via manual execution only
+  # cover error validation - list of files containing few duplicate files, few incorrect format files(mix of valid and invalid files)-via automation - clarication
 
   @rsp-3876 @ValidateDocumentUploadModificationsPageErrprMessages @KNOWN_DEFECT_RSP-4801_4920
   Scenario Outline: Validate the user is able to see error messages for invalid actions on upload documents for modifications

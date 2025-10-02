@@ -3,6 +3,8 @@
     "iras_id_label": "IRAS ID",
     "short_project_title_label": "Short project title",
     "modification_id_label": "Modification ID",
+    "status_label": "Status",
+    "draft_status_value": "Draft",
     "advanced_filter_label": "Advanced filter",
     "remove_this_change_label": "Remove this change",
     "Save_Continue_Button": "Save and continue",

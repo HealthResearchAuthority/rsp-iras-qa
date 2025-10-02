@@ -4,6 +4,7 @@ import PlannedEndDateChangePage from './PlannedEndDateChangePage';
 import AffectedOrganisationSelectionPage from './applicabilityScreens/AffectedOrganisationSelectionPage';
 import AffectedOrganisationQuestionsPage from './applicabilityScreens/AffectedOrganisationQuestionsPage';
 import CommonItemsPage from '../../../Common/CommonItemsPage';
+import { confirmStringNotNull } from '../../../../utils/UtilFunctions';
 
 //Declare Page Objects
 export default class ModificationsCommonPage {
@@ -12,9 +13,13 @@ export default class ModificationsCommonPage {
   private _modification_id: string;
   readonly pageHeading: Locator;
   readonly pageComponentLabel: Locator;
-  readonly iras_id_label: Locator;
-  readonly short_project_title_label: Locator;
-  readonly modification_id_label: Locator;
+  readonly iras_id_value: Locator;
+  readonly short_project_title_value: Locator;
+  readonly modification_id_value: Locator;
+  readonly status_value: Locator;
+  readonly tableRows: Locator;
+  readonly modification_id_link: Locator;
+
   private rankingForChanges: Record<string, { modificationType: string; category: string; reviewType: string }[]> = {};
   private overallRankingForChanges: { modificationType: string; category: string; reviewType: string } = {
     modificationType: '',
@@ -31,21 +36,47 @@ export default class ModificationsCommonPage {
     //Locators
     this.pageHeading = this.page.getByRole('heading');
     this.pageComponentLabel = this.page.getByRole('heading');
-    this.iras_id_label = this.page
-      .locator('[class$="key"]')
-      .getByText(this.modificationsCommonPageTestData.Label_Texts.iras_id_label)
+    this.iras_id_value = this.page
+      .getByRole('term', {
+        name: modificationsCommonPageTestData.Label_Texts.iras_id_label,
+      })
       .locator('..')
-      .locator('[class$="value"]');
-    this.short_project_title_label = this.page
-      .locator('[class$="key"]')
-      .getByText(this.modificationsCommonPageTestData.Label_Texts.short_project_title_label)
+      .getByRole('definition');
+    // this.iras_id_label = this.page
+    //   .locator('[class$="key"]')
+    //   .getByText(this.modificationsCommonPageTestData.Label_Texts.iras_id_label)
+    //   .locator('..')
+    //   .locator('[class$="value"]');
+    this.short_project_title_value = this.page
+      .getByRole('term', {
+        name: modificationsCommonPageTestData.Label_Texts.short_project_title_label,
+      })
       .locator('..')
-      .locator('[class$="value"]');
-    this.modification_id_label = this.page
-      .locator('[class$="key"]')
-      .getByText(this.modificationsCommonPageTestData.Label_Texts.modification_id_label)
+      .getByRole('definition');
+    // this.short_project_title_label = this.page
+    //   .locator('[class$="key"]')
+    //   .getByText(this.modificationsCommonPageTestData.Label_Texts.short_project_title_label)
+    //   .locator('..')
+    //   .locator('[class$="value"]');
+    this.modification_id_value = this.page
+      .getByRole('term', {
+        name: modificationsCommonPageTestData.Label_Texts.modification_id_label,
+      })
       .locator('..')
-      .locator('[class$="value"]');
+      .getByRole('definition');
+    // this.modification_id_label = this.page
+    //   .locator('[class$="key"]')
+    //   .getByText(this.modificationsCommonPageTestData.Label_Texts.modification_id_label)
+    //   .locator('..')
+    //   .locator('[class$="value"]');
+    this.status_value = this.page
+      .getByRole('term', {
+        name: modificationsCommonPageTestData.Label_Texts.status_label,
+      })
+      .locator('..')
+      .getByRole('definition');
+    this.tableRows = this.page.getByRole('table').getByRole('row');
+    this.modification_id_link = this.tableRows.nth(1).getByRole('cell').nth(0);
   }
 
   //Getters & Setters for Private Variables
@@ -323,5 +354,36 @@ export default class ModificationsCommonPage {
     }
 
     return { cardData, modificationInfo }; //  Return both separately
+  }
+
+  async getModificationPostApprovalPage(): Promise<Map<string, string[]>> {
+    const modificationIdValue: string[] = [];
+    const submittedDateValue: string[] = [];
+    const statusValue: string[] = [];
+    for (let i = 1; i < 2; i++) {
+      const columns = this.tableRows.nth(i).getByRole('cell');
+      const modificationId = confirmStringNotNull(await columns.nth(0).textContent());
+      modificationIdValue.push(modificationId);
+      const submittedDate = confirmStringNotNull(await columns.nth(4).textContent());
+      submittedDateValue.push(submittedDate);
+      const status = confirmStringNotNull(await columns.nth(5).textContent());
+      statusValue.push(status);
+    }
+    const modificationMap = new Map([
+      ['modificationIdValue', modificationIdValue],
+      ['submittedDateValue', submittedDateValue],
+      ['statusValue', statusValue],
+    ]);
+    return modificationMap;
+  }
+  async getFormattedDate(): Promise<string> {
+    const today = new Date();
+    const options: Intl.DateTimeFormatOptions = {
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric',
+    };
+    const formattedDate = today.toLocaleDateString('en-GB', options);
+    return formattedDate;
   }
 }
