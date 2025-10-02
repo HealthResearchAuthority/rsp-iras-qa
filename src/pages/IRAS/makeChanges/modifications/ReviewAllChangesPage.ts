@@ -37,9 +37,6 @@ export default class ReviewAllChangesPage {
     this.now_send_to_sponsor_heading = this.page.getByRole('heading', {
       name: reviewAllChangesPageTestData.Review_All_Changes_Page.now_send_to_sponsor_heading,
     });
-    // this.now_send_to_sponsor_hint_label = this.page.getByRole('paragraph', {
-    //   name: reviewAllChangesPageTestData.Review_All_Changes_Page.now_send_to_sponsor_hint_label,
-    // });
     this.now_send_to_sponsor_hint_label = this.page
       .getByRole('paragraph')
       .getByText(this.reviewAllChangesPageTestData.Review_All_Changes_Page.now_send_to_sponsor_hint_label);

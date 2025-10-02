@@ -260,22 +260,25 @@ export default class ModificationsCommonPage {
 
     // Ensure page is loaded
     await this.page.waitForLoadState('domcontentloaded');
-
     // Wait for card to appear
     await expect(cardLocator).toBeVisible({ timeout: 5000 });
-
     // Wait for the card to be visible
     await cardLocator.waitFor({ state: 'visible' });
+
+    const cardTitleValue = await cardLocator.locator('.govuk-summary-card__title').textContent();
+    const areaOfChangeValue = cardTitleValue?.split('-')[1].trim();
 
     const rows = cardLocator.locator('.govuk-summary-list__row');
     await expect.soft(rows.first()).toBeVisible();
     const rowCount = await rows.count();
 
+    const specificChangeValue = await rows.nth(0).locator('.govuk-summary-list__key').innerText();
+
     const cardData: Record<string, any> = {};
     const modificationInfo: Record<string, string> = {}; //  Separate record for individual change ranking and category
     if (cardTitle.includes('Change')) {
-      cardData['area_of_change_dropdown'] = 'Project design';
-      cardData['specific_change_dropdown'] = 'Change to planned end date';
+      cardData['area_of_change_dropdown'] = areaOfChangeValue;
+      cardData['specific_change_dropdown'] = specificChangeValue;
     }
 
     for (let i = 0; i < rowCount; i++) {

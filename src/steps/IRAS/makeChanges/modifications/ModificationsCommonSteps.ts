@@ -125,7 +125,7 @@ Then(
   'I validate the change details are displayed as per the {string} dataset',
   async ({ modificationsCommonPage }, datasetName) => {
     const changesDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName];
-    const changeNames = Object.keys(changesDataset);
+    const changeNames = Object.keys(changesDataset).reverse(); // Reverse the order of keys
 
     for (let i = 0; i < changeNames.length; i++) {
       const changeName = changeNames[i];
@@ -139,8 +139,10 @@ Then(
       console.log('Expected:', expectedData);
       console.log('Actual:', actualData.cardData);
 
-      // Compare keys and values
-      for (const key of Object.keys(expectedData)) {
+      // Compare keys and values in reverse order
+      const keys = Object.keys(expectedData).reverse(); // Reverse the order of keys
+
+      for (const key of keys) {
         const expectedValue = expectedData[key];
         const actualValue = actualData.cardData[key];
 
