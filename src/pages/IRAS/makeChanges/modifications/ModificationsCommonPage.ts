@@ -36,45 +36,50 @@ export default class ModificationsCommonPage {
     //Locators
     this.pageHeading = this.page.getByRole('heading');
     this.pageComponentLabel = this.page.getByRole('heading');
+    // this.iras_id_value = this.page
+    //   .getByRole('term', {
+    //     name: modificationsCommonPageTestData.Label_Texts.iras_id_label,
+    //   })
+    //   .locator('..')
+    //   .getByRole('definition');
     this.iras_id_value = this.page
-      .getByRole('term', {
-        name: modificationsCommonPageTestData.Label_Texts.iras_id_label,
-      })
+      .locator('[class$="key"]')
+      .getByText(this.modificationsCommonPageTestData.Label_Texts.iras_id_label)
       .locator('..')
-      .getByRole('definition');
-    // this.iras_id_label = this.page
-    //   .locator('[class$="key"]')
-    //   .getByText(this.modificationsCommonPageTestData.Label_Texts.iras_id_label)
+      .locator('[class$="value"]');
+    // this.short_project_title_value = this.page
+    //   .getByRole('term', {
+    //     name: modificationsCommonPageTestData.Label_Texts.short_project_title_label,
+    //   })
     //   .locator('..')
-    //   .locator('[class$="value"]');
+    //   .getByRole('definition');
     this.short_project_title_value = this.page
-      .getByRole('term', {
-        name: modificationsCommonPageTestData.Label_Texts.short_project_title_label,
-      })
+      .locator('[class$="key"]')
+      .getByText(this.modificationsCommonPageTestData.Label_Texts.short_project_title_label)
       .locator('..')
-      .getByRole('definition');
-    // this.short_project_title_label = this.page
-    //   .locator('[class$="key"]')
-    //   .getByText(this.modificationsCommonPageTestData.Label_Texts.short_project_title_label)
+      .locator('[class$="value"]');
+    // this.modification_id_value = this.page
+    //   .getByRole('term', {
+    //     name: modificationsCommonPageTestData.Label_Texts.modification_id_label,
+    //   })
     //   .locator('..')
-    //   .locator('[class$="value"]');
+    //   .getByRole('definition');
     this.modification_id_value = this.page
-      .getByRole('term', {
-        name: modificationsCommonPageTestData.Label_Texts.modification_id_label,
-      })
+      .locator('[class$="key"]')
+      .getByText(this.modificationsCommonPageTestData.Label_Texts.modification_id_label)
       .locator('..')
-      .getByRole('definition');
-    // this.modification_id_label = this.page
-    //   .locator('[class$="key"]')
-    //   .getByText(this.modificationsCommonPageTestData.Label_Texts.modification_id_label)
+      .locator('[class$="value"]');
+    // this.status_value = this.page
+    //   .getByRole('term', {
+    //     name: modificationsCommonPageTestData.Label_Texts.status_label,
+    //   })
     //   .locator('..')
-    //   .locator('[class$="value"]');
+    //   .getByRole('definition');
     this.status_value = this.page
-      .getByRole('term', {
-        name: modificationsCommonPageTestData.Label_Texts.status_label,
-      })
+      .locator('[class$="key"]')
+      .getByText(this.modificationsCommonPageTestData.Label_Texts.status_label)
       .locator('..')
-      .getByRole('definition');
+      .locator('[class$="value"]');
     this.tableRows = this.page.getByRole('table').getByRole('row');
     this.modification_id_link = this.tableRows.nth(1).getByRole('cell').nth(0);
   }
@@ -265,9 +270,6 @@ export default class ModificationsCommonPage {
     // Wait for the card to be visible
     await cardLocator.waitFor({ state: 'visible' });
 
-    const cardTitleValue = await cardLocator.locator('.govuk-summary-card__title').textContent();
-    const areaOfChangeValue = cardTitleValue?.split('-')[1].trim();
-
     const rows = cardLocator.locator('.govuk-summary-list__row');
     await expect.soft(rows.first()).toBeVisible();
     const rowCount = await rows.count();
@@ -277,6 +279,8 @@ export default class ModificationsCommonPage {
     const cardData: Record<string, any> = {};
     const modificationInfo: Record<string, string> = {}; //  Separate record for individual change ranking and category
     if (cardTitle.includes('Change')) {
+      const cardTitleValue = await cardLocator.locator('.govuk-summary-card__title').textContent();
+      const areaOfChangeValue = cardTitleValue?.split('-')[1].trim();
       cardData['area_of_change_dropdown'] = areaOfChangeValue;
       cardData['specific_change_dropdown'] = specificChangeValue;
     }

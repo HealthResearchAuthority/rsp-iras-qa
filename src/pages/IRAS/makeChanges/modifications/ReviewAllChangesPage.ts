@@ -21,19 +21,25 @@ export default class ReviewAllChangesPage {
     //Locators
     this.page_heading = this.page.getByRole('heading', {
       name: reviewAllChangesPageTestData.Review_All_Changes_Page.page_heading,
+      exact: true,
     });
     this.overall_modification_ranking_heading = this.page.getByRole('heading', {
       name: reviewAllChangesPageTestData.Review_All_Changes_Page.overall_modification_ranking_heading,
+      exact: true,
     });
     this.overall_modification_ranking_subheading = this.page.getByRole('heading', {
       name: reviewAllChangesPageTestData.Review_All_Changes_Page.overall_modification_ranking_subheading,
     });
     this.changes_heading = this.page.getByRole('heading', {
       name: reviewAllChangesPageTestData.Review_All_Changes_Page.changes_heading,
+      exact: true,
     });
-    this.sponsor_details_heading = this.page.getByRole('heading', {
-      name: reviewAllChangesPageTestData.Review_All_Changes_Page.sponsor_details_heading,
-    });
+    this.sponsor_details_heading = this.page
+      .getByRole('heading', {
+        name: reviewAllChangesPageTestData.Review_All_Changes_Page.sponsor_details_heading,
+        exact: true,
+      })
+      .first();
     this.now_send_to_sponsor_heading = this.page.getByRole('heading', {
       name: reviewAllChangesPageTestData.Review_All_Changes_Page.now_send_to_sponsor_heading,
     });
@@ -46,10 +52,7 @@ export default class ReviewAllChangesPage {
   async assertOnReviewAllChangesPage() {
     await expect.soft(this.page_heading).toBeVisible();
     await expect.soft(this.overall_modification_ranking_heading).toBeVisible();
-    // await expect.soft(this.overall_modification_ranking_subheading).toBeVisible();
-    // await expect.soft(this.changes_heading).toBeVisible();
-    // await expect.soft(this.sponsor_details_heading).toBeVisible();
-    await expect.soft(this.now_send_to_sponsor_heading).toBeVisible();
-    await expect.soft(this.now_send_to_sponsor_hint_label).toBeVisible();
+    await expect.soft(this.changes_heading).toBeVisible();
+    await expect.soft(this.sponsor_details_heading).toBeVisible();
   }
 }

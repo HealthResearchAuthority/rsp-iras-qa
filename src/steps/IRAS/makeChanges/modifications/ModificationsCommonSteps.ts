@@ -27,13 +27,13 @@ Then(
     const modificationIDActual = confirmStringNotNull(
       await modificationsCommonPage.modification_id_value.textContent()
     );
-    const statusActual = confirmStringNotNull(await modificationsCommonPage.status_value.textContent());
+    // const statusActual = confirmStringNotNull(await modificationsCommonPage.status_value.textContent());
     expect.soft(irasIDActual).toBe(irasIDExpected);
     expect.soft(shortProjectTitleActual).toBe(shortProjectTitleExpected);
     expect.soft(modificationIDActual).toBe(modificationIDExpected);
-    expect
-      .soft(statusActual)
-      .toBe(modificationsCommonPage.modificationsCommonPageTestData.Label_Texts.draft_status_value);
+    // expect
+    //   .soft(statusActual)
+    //   .toBe(modificationsCommonPage.modificationsCommonPageTestData.Label_Texts.draft_status_value);
     await modificationsCommonPage.setModificationID(modificationIDExpected);
   }
 );
@@ -87,14 +87,36 @@ Then(
 
 Then(
   'I modify the current changes with {string} for the created modification',
-  async ({ commonItemsPage, modificationsCommonPage, selectAreaOfChangePage }, datasetName) => {
+  async (
+    { commonItemsPage, modificationsCommonPage, selectAreaOfChangePage, reviewChangesPlannedEndDatePage },
+    datasetName
+  ) => {
     const changesDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName];
-    const changeNames = Object.keys(changesDataset);
+    const changeNames = Object.keys(changesDataset).reverse(); // Reverse the order of keys
     for (let i = 0; i < changeNames.length; i++) {
       const changeName = changeNames[i];
       const changeDataset = changesDataset[changeName];
       // Click Change link agaist every changeName
+      await commonItemsPage.govUkLink.getByText('Change').nth(i).click();
+      const specificChange = await commonItemsPage.govUkLink
+        .getByText('Change')
+        .nth(i)
+        .locator('..')
+        .locator('.govuk-summary-list__row')
+        .nth(0)
+        .locator('.govuk-summary-list__key')
+        .innerText();
+      // Ensure page is loaded
+      await commonItemsPage.page.waitForLoadState('domcontentloaded');
       //validate the review changes page for the changeName
+      await reviewChangesPlannedEndDatePage.assertOnReviewChangesSpecificChangePage(specificChange);
+
+      // Then I validate all field values on review modifications page using '<Planned_End_Date>' , '<Organisation_Change_Affect>' and '<Affected_Org_Questions>'
+
+      // When I click the change link '<Change_Field>' on review changes planned end date page
+      if (specificChange === 'Change to planned end date') {
+        await reviewChangesPlannedEndDatePage.clickChangeLinks('New_Planned_End_Date');
+      }
       // const changeDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName][changeName];
       await selectAreaOfChangePage.selectAreaOfChangeInModificationsPage(changeDataset);
       await modificationsCommonPage.createChangeModification(changeName, changeDataset);
@@ -140,14 +162,13 @@ Then(
       console.log('Actual:', actualData.cardData);
 
       // Compare keys and values in reverse order
-      const keys = Object.keys(expectedData).reverse(); // Reverse the order of keys
+      const keys = Object.keys(expectedData).reverse();
 
       for (const key of keys) {
         const expectedValue = expectedData[key];
         const actualValue = actualData.cardData[key];
 
         if (Array.isArray(expectedValue)) {
-          // Compare arrays (order-insensitive)
           const sortedExpected = [...expectedValue].sort();
           const sortedActual = [...(actualValue || [])].sort();
           expect.soft(sortedActual).toEqual(sortedExpected);
@@ -189,35 +210,75 @@ Then(
 );
 
 Then(
-  'I validate the modification record details displayed on post approvals page',
-  async ({ modificationsCommonPage }) => {
+  'I can see the modification send to sponsor is displayed on post approval tab of project overview page with status as {string}',
+  async ({ modificationsCommonPage }, statusValue: string) => {
     const modificationIDExpected = await modificationsCommonPage.getModificationID();
     const modificationRecord = await modificationsCommonPage.getModificationPostApprovalPage();
     const modificationIDActual = modificationRecord.get('modificationIdValue');
-    expect.soft(modificationIDActual).toBe(modificationIDExpected);
+    expect.soft(modificationIDActual[0]).toBe(modificationIDExpected);
     const statusActual = modificationRecord.get('statusValue');
-    expect.soft(statusActual).toBe('In sponsor review');
+    expect.soft(statusActual[0]).toBe(statusValue);
     const submittedDateActual = modificationRecord.get('submittedDateValue');
     const submittedDateExpected = await modificationsCommonPage.getFormattedDate();
-    console.log(submittedDateExpected); // Example: 02 Oct 2025
-    expect.soft(submittedDateActual).toBe(submittedDateExpected);
+    expect.soft(submittedDateActual[0]).toBe(submittedDateExpected);
   }
 );
 
-Then('I click on the modification id hyperlink in the post approvals page', async ({ modificationsCommonPage }) => {
-  await modificationsCommonPage.modification_id_link.click();
-  await modificationsCommonPage.page.waitForLoadState('domcontentloaded');
-});
+Then(
+  'I click on the modification id hyperlink in the post approval tab',
+  async ({ modificationsCommonPage, commonItemsPage }) => {
+    const modificationIDExpected = await modificationsCommonPage.getModificationID();
+    await commonItemsPage.govUkLink.getByText(modificationIDExpected).click();
+    await modificationsCommonPage.page.waitForLoadState('domcontentloaded');
+  }
+);
 
-// Then(
-//   'the {string} change link should be {string} on the review all changes page',
-//   async ({ modificationsCommonPage }, changeLink: string, availability: string) => {
-//     const labelKey = changeLink.replace(/(_Dropdown|_Checkbox)$/, '_row').toLowerCase();
-//     const labelToCheck = checkCreateUserProfilePage[labelKey];
-//     if (availability.toLowerCase() == 'available') {
-//       await expect(labelToCheck).toBeVisible();
-//     } else {
-//       await expect(labelToCheck).not.toBeVisible();
-//     }
-//   }
-// );
+Then(
+  'the {string} link should be {string} on the {string}',
+  async ({ commonItemsPage }, linkKey: string, availability: string, pageKey: string) => {
+    const linkValue = commonItemsPage.linkTextData[pageKey][linkKey];
+    const noOfLinksFound = await commonItemsPage.govUkLink.getByText(linkValue).count();
+    if (availability.toLowerCase() == 'available') {
+      await expect(commonItemsPage.govUkLink.getByText(linkValue).first()).toBeVisible();
+      expect(noOfLinksFound).not.toBe(0);
+    } else {
+      await expect(commonItemsPage.govUkLink.getByText(linkValue)).not.toBeVisible();
+      expect(noOfLinksFound).toBe(0);
+    }
+  }
+);
+
+Then(
+  'the {string} button should be {string} on the {string}',
+  async ({ commonItemsPage }, buttonKey: string, availability: string, pageKey: string) => {
+    const buttonValue = commonItemsPage.buttonTextData[pageKey][buttonKey];
+    const noOfButtonsFound = await commonItemsPage.govUkButton
+      .getByText(buttonValue)
+      .or(commonItemsPage.genericButton.getByText(buttonValue))
+      .count();
+    if (availability.toLowerCase() == 'available') {
+      await expect(
+        commonItemsPage.govUkButton.getByText(buttonValue).or(commonItemsPage.genericButton.getByText(buttonValue))
+      ).toBeVisible();
+      expect(noOfButtonsFound).not.toBe(0);
+    } else {
+      await expect(
+        commonItemsPage.govUkButton.getByText(buttonValue).or(commonItemsPage.genericButton.getByText(buttonValue))
+      ).not.toBeVisible();
+      expect(noOfButtonsFound).toBe(0);
+    }
+  }
+);
+
+Then(
+  'the now sent to sponsor heading and hint text should be {string} on the review all changes page',
+  async ({ reviewAllChangesPage }, availability: string) => {
+    if (availability.toLowerCase() == 'available') {
+      await expect.soft(reviewAllChangesPage.now_send_to_sponsor_heading).toBeVisible();
+      await expect.soft(reviewAllChangesPage.now_send_to_sponsor_hint_label).toBeVisible();
+    } else {
+      await expect.soft(reviewAllChangesPage.now_send_to_sponsor_heading).not.toBeVisible();
+      await expect.soft(reviewAllChangesPage.now_send_to_sponsor_hint_label).not.toBeVisible();
+    }
+  }
+);

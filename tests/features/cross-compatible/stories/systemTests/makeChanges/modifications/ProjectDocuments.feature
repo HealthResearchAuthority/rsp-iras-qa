@@ -134,7 +134,7 @@ Feature: Create Amendment - Project Documents Modifications
       | Correction_Of_Typographical_Errors | WMV_File              | WEBM_File                  |
       | Correction_Of_Typographical_Errors | WEBM_File             | WMV_File                   |
 
-  @4684 @ValidateDocumentUploadAndReviewForModificationsPage @KNOWN_DEFECT_RSP-4801_4844_4920_4921 @TestOnly
+  @4684 @ValidateDocumentUploadAndReviewForModificationsPage @KNOWN_DEFECT_RSP-4801_4844_4920_4921
   Scenario Outline: Verify that a relevant error message is shown when the user attempts to upload a video file that has already been uploaded
     And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
     And I capture the page screenshot
@@ -162,7 +162,7 @@ Feature: Create Amendment - Project Documents Modifications
       | Correction_Of_Typographical_Errors | Multiple_Files_Video_Valid | Multiple_Files_Video_Valid | multiple invalid |
 
 
-  @4684 @ValidateDocumentUploadAndReviewForModificationsPage @KNOWN_DEFECT_RSP-4801_4844_4920_4921 @TestOnly
+  @4684 @ValidateDocumentUploadAndReviewForModificationsPage @KNOWN_DEFECT_RSP-4801_4844_4920_4921
   Scenario Outline: Verify that an appropriate error message is displayed when the user uploads a video file with an invalid format
     And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
     And I capture the page screenshot
@@ -189,7 +189,7 @@ Feature: Create Amendment - Project Documents Modifications
       | Correction_Of_Typographical_Errors | WAV_File                      | single invalid   |
 
   # cover error validation when exceeding 100MB - via manual execution only
-  # cover error validation - list of files containing few duplicate files, few incorrect format files(mix of valid and invalid files)-via automation - clarication
+  # cover error validation - list of files containing few duplicate files, few incorrect format files(mix of valid and invalid files)-via automation
 
   @rsp-3876 @ValidateDocumentUploadModificationsPageErrprMessages @KNOWN_DEFECT_RSP-4801_4920
   Scenario Outline: Validate the user is able to see error messages for invalid actions on upload documents for modifications
