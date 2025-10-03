@@ -208,3 +208,16 @@ Then('I click on the modification id hyperlink in the post approvals page', asyn
   await modificationsCommonPage.modification_id_link.click();
   await modificationsCommonPage.page.waitForLoadState('domcontentloaded');
 });
+
+// Then(
+//   'the {string} change link should be {string} on the review all changes page',
+//   async ({ modificationsCommonPage }, changeLink: string, availability: string) => {
+//     const labelKey = changeLink.replace(/(_Dropdown|_Checkbox)$/, '_row').toLowerCase();
+//     const labelToCheck = checkCreateUserProfilePage[labelKey];
+//     if (availability.toLowerCase() == 'available') {
+//       await expect(labelToCheck).toBeVisible();
+//     } else {
+//       await expect(labelToCheck).not.toBeVisible();
+//     }
+//   }
+// );

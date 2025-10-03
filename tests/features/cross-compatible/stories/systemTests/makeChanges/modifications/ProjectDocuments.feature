@@ -18,6 +18,9 @@ Feature: Create Amendment - Project Documents Modifications
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
     When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
@@ -131,7 +134,7 @@ Feature: Create Amendment - Project Documents Modifications
       | Correction_Of_Typographical_Errors | WMV_File              | WEBM_File                  |
       | Correction_Of_Typographical_Errors | WEBM_File             | WMV_File                   |
 
-  @4684 @ValidateDocumentUploadAndReviewForModificationsPage @KNOWN_DEFECT_RSP-4801_4844_4920_4921
+  @4684 @ValidateDocumentUploadAndReviewForModificationsPage @KNOWN_DEFECT_RSP-4801_4844_4920_4921 @TestOnly
   Scenario Outline: Verify that a relevant error message is shown when the user attempts to upload a video file that has already been uploaded
     And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
     And I capture the page screenshot
@@ -150,16 +153,16 @@ Feature: Create Amendment - Project Documents Modifications
     And I capture the page screenshot
     Then I upload '<Document_Upload_Files_New>' documents
     When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
-    Then I validate 'Duplicate_File_Upload_Error' displayed on 'Add_Document_Modifications_Page' while uploading documents
+    Then I validate 'Duplicate_File_Upload_Error' displayed on 'Add_Document_Modifications_Page' while uploading '<Upload_Type>' documents
     And I capture the page screenshot
 
     Examples:
-      | Specific_Change                    | Document_Upload_Files      | Document_Upload_Files_New  |
-      | Correction_Of_Typographical_Errors | MP4_File                   | MP4_File                   |
-      | Correction_Of_Typographical_Errors | Multiple_Files_Video_Valid | Multiple_Files_Video_Valid |
+      | Specific_Change                    | Document_Upload_Files      | Document_Upload_Files_New  | Upload_Type      |
+      | Correction_Of_Typographical_Errors | MP4_File                   | MP4_File                   | single invalid   |
+      | Correction_Of_Typographical_Errors | Multiple_Files_Video_Valid | Multiple_Files_Video_Valid | multiple invalid |
 
 
-  @4684 @ValidateDocumentUploadAndReviewForModificationsPage @KNOWN_DEFECT_RSP-4801_4844_4920_4921
+  @4684 @ValidateDocumentUploadAndReviewForModificationsPage @KNOWN_DEFECT_RSP-4801_4844_4920_4921 @TestOnly
   Scenario Outline: Verify that an appropriate error message is displayed when the user uploads a video file with an invalid format
     And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
     And I capture the page screenshot
@@ -169,21 +172,21 @@ Feature: Create Amendment - Project Documents Modifications
     Then I upload '<Document_Upload_Files_Invalid>' documents
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
-    Then I validate 'Invalid_Format_Video_File_Error' displayed on 'Add_Document_Modifications_Page' while uploading documents
+    Then I validate 'Invalid_Format_Video_File_Error' displayed on 'Add_Document_Modifications_Page' while uploading '<Upload_Type>' documents
     And I capture the page screenshot
 
     Examples:
-      | Specific_Change                              | Document_Upload_Files_Invalid |
-      | Correction_Of_Typographical_Errors           | Multiple_Files_Video_Invalid  |
-      | CRF_Other_Study_Data_Records                 | ASF_File                      |
-      | GDPR_Wording                                 | FLAC_File                     |
-      | Other_Minor_Change_To_Study_Documents        | MP3_File                      |
-      | Post_Trial_Information_For_Participants      | MPEG1_File                    |
-      | Protocol_Non_Substantial_Changes             | OGG_File                      |
-      | Translations_Addition_Of_Translated_Versions | PS_File                       |
-      | CRF_Other_Study_Data_Records                 | RAW_File                      |
-      | GDPR_Wording                                 | TS_File                       |
-      | Correction_Of_Typographical_Errors           | WAV_File                      |
+      | Specific_Change                    | Document_Upload_Files_Invalid | Upload_Type      |
+      | Correction_Of_Typographical_Errors | Multiple_Files_Video_Invalid  | multiple invalid |
+      | Correction_Of_Typographical_Errors | ASF_File                      | single invalid   |
+      | Correction_Of_Typographical_Errors | FLAC_File                     | single invalid   |
+      | Correction_Of_Typographical_Errors | MP3_File                      | single invalid   |
+      | Correction_Of_Typographical_Errors | MPEG1_File                    | single invalid   |
+      | Correction_Of_Typographical_Errors | OGG_File                      | single invalid   |
+      | Correction_Of_Typographical_Errors | PS_File                       | single invalid   |
+      | Correction_Of_Typographical_Errors | RAW_File                      | single invalid   |
+      | Correction_Of_Typographical_Errors | TS_File                       | single invalid   |
+      | Correction_Of_Typographical_Errors | WAV_File                      | single invalid   |
 
   # cover error validation when exceeding 100MB - via manual execution only
   # cover error validation - list of files containing few duplicate files, few incorrect format files(mix of valid and invalid files)-via automation - clarication

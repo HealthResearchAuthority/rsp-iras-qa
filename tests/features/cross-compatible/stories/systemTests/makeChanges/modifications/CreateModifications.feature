@@ -166,6 +166,7 @@ Feature: Create Amendment - Create Modifications
       | Participating_Organisation | Early_Closure_Withdrawal_Of_Sites_Option                   | Modifications_Tile      |
       | Participating_Organisation | Addition_Of_Participant_Identification_Centres_Option      | Modifications_Tile      |
       | Participating_Organisation | Early_Closure_Of_Participant_Identification_Centres_Option | Modifications_Tile      |
+
   # The KNOWN_DEFECT-RSP-5007 will be fixed with the new user story RSP-4136 so this scenario can be re-used later
   @rsp-4039 @ParticipatingOrganisationsErrorValidation @KNOWN_DEFECT-RSP-5007 @skip
   Scenario Outline: Validate the mandatory field error message on participating organisation page
@@ -223,6 +224,7 @@ Feature: Create Amendment - Create Modifications
     And I validate the modification record details displayed on post approvals page
     And I click on the modification id hyperlink in the post approvals page
     Then I can see the review all changes page
+    # And the '<Option_Two>' change link should be 'unavailable' on the check and create user profile page
     # review all changes -read only
 
     Examples:

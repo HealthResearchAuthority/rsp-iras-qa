@@ -1176,11 +1176,12 @@ Then(
 );
 
 Then(
-  'I validate {string} displayed on {string} while uploading documents',
+  'I validate {string} displayed on {string} while uploading {string} documents',
   async (
     { commonItemsPage, addDocumentsModificationsPage, reviewUploadedDocumentsModificationsPage },
     errorMessageFieldAndSummaryDatasetName: string,
-    pageKey: string
+    pageKey: string,
+    uploadType: string
   ) => {
     let errorMessageFieldDataset: any;
     let page: any;
@@ -1199,8 +1200,7 @@ Then(
       errorMessageFieldAndSummaryDatasetName === 'Invalid_Format_Video_File_Error'
     ) {
       const fieldNamesList = await reviewUploadedDocumentsModificationsPage.getUploadedFileName();
-      const fieldNamesListValues = Object.values(fieldNamesList);
-      if (fieldNamesListValues.length > 1) {
+      if (uploadType === 'multiple invalid') {
         for (const val of fieldNamesList) {
           fileName = path.basename(val);
           const allSummaryErrorExpectedValue = `${fileName}` + Object.values(errorMessageFieldDataset);
@@ -1229,8 +1229,7 @@ Then(
             errorMessageFieldAndSummaryDatasetName === 'Invalid_Format_Video_File_Error'
           ) {
             const fieldNamesList = await reviewUploadedDocumentsModificationsPage.getUploadedFileName();
-            const fieldNamesListValues = Object.values(fieldNamesList);
-            if (fieldNamesListValues.length > 1) {
+            if (uploadType === 'multiple invalid') {
               for (const val of fieldNamesList) {
                 fileName = path.basename(val);
                 const allfieldErrorMessagesExpectedValue = `${fileName}` + Object.values(errorMessageFieldDataset);
