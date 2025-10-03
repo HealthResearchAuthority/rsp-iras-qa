@@ -1,6 +1,7 @@
 import { test as base } from 'playwright-bdd';
 import AxeBuilder from '@axe-core/playwright';
 import { getAuthState } from '../utils/UtilFunctions';
+import * as loginPageTestData from '../resources/test_data/common/login_page_data.json';
 import CommonItemsPage from '../pages/Common/CommonItemsPage';
 import LoginPage from '../pages/Common/LoginPage';
 import HomePage from '../pages/IRAS/HomePage';
@@ -63,6 +64,9 @@ import ModificationsReceivedCommonPage from '../pages/IRAS/reviewResearch/receiv
 import SelectStudyWideReviewerPage from '../pages/IRAS/reviewResearch/receiveAmendments/SelectStudyWideReviewerPage';
 import ModificationsAssignmentConfirmationPage from '../pages/IRAS/reviewResearch/receiveAmendments/ModificationsAssignmentConfirmationPage';
 import MyModificationsTasklistPage from '../pages/IRAS/reviewResearch/receiveAmendments/MyModificationsTasklistPage';
+import AddDocumentDetailsModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/AddDocumentDetailsModificationsPage';
+import AddDocumentDetailsForSpecificDocumentModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/AddDocumentDetailsForSpecificDocumentModificationsPage';
+import ReviewYourDocumentInformationModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/ReviewYourDocumentInfomationModificationsPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -127,6 +131,9 @@ type CustomFixtures = {
   modificationsAssignmentConfirmationPage: ModificationsAssignmentConfirmationPage;
   myModificationsTasklistPage: MyModificationsTasklistPage;
   modificationsReceivedCommonPage: ModificationsReceivedCommonPage;
+  addDocumentDetailsModificationsPage: AddDocumentDetailsModificationsPage;
+  addDocumentDetailsForSpecificDocumentModificationsPage: AddDocumentDetailsForSpecificDocumentModificationsPage;
+  reviewYourDocumentInformationModificationsPage: ReviewYourDocumentInformationModificationsPage;
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -377,6 +384,18 @@ export const test = base.extend<CustomFixtures>({
     await use(new ModificationsReceivedCommonPage(page));
   },
 
+  addDocumentDetailsModificationsPage: async ({ page }, use) => {
+    await use(new AddDocumentDetailsModificationsPage(page));
+  },
+
+  addDocumentDetailsForSpecificDocumentModificationsPage: async ({ page }, use) => {
+    await use(new AddDocumentDetailsForSpecificDocumentModificationsPage(page));
+  },
+
+  reviewYourDocumentInformationModificationsPage: async ({ page }, use) => {
+    await use(new ReviewYourDocumentInformationModificationsPage(page));
+  },
+
   makeAxeBuilder: async ({ page }, use) => {
     const makeAxeBuilder = () => new AxeBuilder({ page });
     await use(makeAxeBuilder);
@@ -385,15 +404,27 @@ export const test = base.extend<CustomFixtures>({
   //Set the Storage State based on User Tag from Feature File
   storageState: async ({ $tags, storageState }, use) => {
     if ($tags.includes('@SysAdminUser')) {
-      storageState = getAuthState('system_admin');
+      storageState = getAuthState(loginPageTestData.System_Admin.authPath);
     } else if ($tags.includes('@ApplicantUser')) {
-      storageState = getAuthState('applicant_user');
+      storageState = getAuthState(loginPageTestData.Applicant_User.authPath);
     } else if ($tags.includes('@StudyWideReviewer')) {
-      storageState = getAuthState('studywide_reviewer');
+      storageState = getAuthState(loginPageTestData.Studywide_Reviewer.authPath);
+    } else if ($tags.includes('@StudyWideReviewerNI')) {
+      storageState = getAuthState(loginPageTestData.Studywide_Reviewer_NI.authPath);
+    } else if ($tags.includes('@StudyWideReviewerSco')) {
+      storageState = getAuthState(loginPageTestData.Studywide_Reviewer_S.authPath);
+    } else if ($tags.includes('@StudyWideReviewerWal')) {
+      storageState = getAuthState(loginPageTestData.Studywide_Reviewer_W.authPath);
     } else if ($tags.includes('@TeamManager')) {
-      storageState = getAuthState('team_manager');
+      storageState = getAuthState(loginPageTestData.Team_Manager.authPath);
     } else if ($tags.includes('@WorkFlowCoordinator')) {
-      storageState = getAuthState('workflow_coordinator');
+      storageState = getAuthState(loginPageTestData.Workflow_Coordinator.authPath);
+    } else if ($tags.includes('@WorkFlowCoordinatorNI')) {
+      storageState = getAuthState(loginPageTestData.Workflow_Coordinator_NI.authPath);
+    } else if ($tags.includes('@WorkFlowCoordinatorSco')) {
+      storageState = getAuthState(loginPageTestData.Workflow_Coordinator_S.authPath);
+    } else if ($tags.includes('@WorkFlowCoordinatorWal')) {
+      storageState = getAuthState(loginPageTestData.Workflow_Coordinator_W.authPath);
     }
     await use(storageState);
   },

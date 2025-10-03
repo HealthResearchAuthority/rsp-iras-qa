@@ -170,3 +170,25 @@ When(
     }
   }
 );
+
+Then(
+  'the country linked to the review body of the {string} appears as the lead nation in the page description',
+  async ({ modificationsReadyToAssignPage }, user: string) => {
+    const expectedLeadNation =
+      modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Workflow_Coordinator_Nations[user] + '.';
+    const actualPageDescription = await modificationsReadyToAssignPage.page_description
+      .textContent()
+      .then((description: string) => description.trim());
+    expect(actualPageDescription.endsWith(expectedLeadNation)).toBeTruthy();
+  }
+);
+
+Then(
+  'I see only modifications where the lead nation is the country linked to the review body of the {string}',
+  async ({ modificationsReadyToAssignPage }, user: string) => {
+    // PLACEHOLDER FOR FUTURE UPDATE AFTER DB ENABLER
+    const expectedLeadNation =
+      modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Workflow_Coordinator_Nations[user];
+    console.log(expectedLeadNation);
+  }
+);

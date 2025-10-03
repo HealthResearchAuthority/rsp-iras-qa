@@ -764,6 +764,7 @@ Given(
       myResearchProjectsPage,
       approvalsPage,
       myModificationsTasklistPage,
+      modificationsReadyToAssignPage,
     },
     page: string,
     user: string
@@ -804,6 +805,11 @@ Given(
       case 'My_Modifications_Tasklist_Page':
         await myModificationsTasklistPage.goto();
         await myModificationsTasklistPage.assertOnMyModificationsTasklistPage();
+        break;
+      case 'Modifications_Tasklist_Page':
+        await modificationsReadyToAssignPage.page.context().addCookies(authState.cookies);
+        await modificationsReadyToAssignPage.goto();
+        await modificationsReadyToAssignPage.assertOnModificationsReadyToAssignPage();
         break;
       default:
         throw new Error(`${page} is not a valid option`);
