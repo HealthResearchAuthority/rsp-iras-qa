@@ -6,6 +6,7 @@ import { confirmStringNotNull } from '../../../../../utils/UtilFunctions';
 export default class ReviewUploadedDocumentsModificationsPage {
   readonly page: Page;
   readonly reviewUploadedDocumentsModificationsPageTestData: typeof reviewUploadedDocumentsModificationsPageTestData;
+  private _file_names: string[];
   readonly pageHeading: Locator;
   readonly pageLabels: Locator;
   readonly table: Locator;
@@ -16,6 +17,7 @@ export default class ReviewUploadedDocumentsModificationsPage {
   constructor(page: Page) {
     this.page = page;
     this.reviewUploadedDocumentsModificationsPageTestData = reviewUploadedDocumentsModificationsPageTestData;
+    this._file_names = [];
 
     //Locators
     this.pageHeading = this.page.getByRole('heading');
@@ -23,8 +25,46 @@ export default class ReviewUploadedDocumentsModificationsPage {
     this.table = this.page.getByRole('table');
     this.rows = this.page.locator('tr');
   }
+  //Getters & Setters for Private Variables
 
+  async getUploadedFileName(): Promise<string[]> {
+    return this._file_names;
+  }
+
+  async setUploadedFileName(value: string[]): Promise<void> {
+    this._file_names = value;
+  }
   //Page Methods
+  // async assertOnReviewUploadedDocumentsModificationsPage(specificChangeTitleLabel: string) {
+  //   const expectedPageTitle =
+  //     this.reviewUploadedDocumentsModificationsPageTestData.Review_Uploaded_Documents_Modifications_Page.heading +
+  //     ' ' +
+  //     specificChangeTitleLabel.toLowerCase();
+  //   await expect
+  //     .soft(this.page)
+  //     .toHaveTitle(
+  //       this.reviewUploadedDocumentsModificationsPageTestData.Review_Uploaded_Documents_Modifications_Page.page_title
+  //     );
+  //   await expect.soft(this.pageHeading.getByText(expectedPageTitle, { exact: true })).toBeVisible();
+  //   await expect
+  //     .soft(
+  //       this.pageHeading.getByText(
+  //         this.reviewUploadedDocumentsModificationsPageTestData.Review_Uploaded_Documents_Modifications_Page
+  //           .add_document_detail_next_step_header,
+  //         { exact: true }
+  //       )
+  //     )
+  //     .toBeVisible();
+  //   await expect
+  //     .soft(
+  //       this.pageLabels.getByText(
+  //         this.reviewUploadedDocumentsModificationsPageTestData.Review_Uploaded_Documents_Modifications_Page
+  //           .add_document_detail_next_step_hint_label,
+  //         { exact: true }
+  //       )
+  //     )
+  //     .toBeVisible();
+  // }
   async assertOnReviewUploadedDocumentsModificationsPage(specificChangeTitleLabel: string) {
     const expectedPageHeading =
       this.reviewUploadedDocumentsModificationsPageTestData.Review_Uploaded_Documents_Modifications_Page.heading +

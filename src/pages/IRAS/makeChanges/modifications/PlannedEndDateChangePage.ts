@@ -44,7 +44,7 @@ export default class PlannedEndDateChangePage {
   }
 
   //Page Methods
-  async fillPlannedProjectEndDateModificationsPage(dataset: any) {
+  async fillPlannedProjectEndDateModificationsPage(dataset: any, action: string) {
     const commonItemsPage = new CommonItemsPage(this.page);
     for (const key in dataset) {
       if (Object.hasOwn(dataset, key)) {
@@ -57,6 +57,10 @@ export default class PlannedEndDateChangePage {
         }
       }
     }
-    await commonItemsPage.clickButton('Modifications_Page', 'Save_Continue');
+    if (action === 'create') {
+      await commonItemsPage.clickButton('Modifications_Page', 'Save_Continue');
+    } else {
+      await commonItemsPage.clickButton('Review_Changes_Planned_End_Date_Page', 'Save_Changes');
+    }
   }
 }

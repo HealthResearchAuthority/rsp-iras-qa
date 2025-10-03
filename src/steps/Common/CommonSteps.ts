@@ -163,11 +163,22 @@ Then('I see something {string}', async ({ commonItemsPage }, testType: string) =
 
 Then('I click the {string} button on the {string}', async ({ commonItemsPage }, buttonKey: string, pageKey: string) => {
   const buttonValue = commonItemsPage.buttonTextData[pageKey][buttonKey];
-  await commonItemsPage.govUkButton
-    .getByText(buttonValue, { exact: true })
-    .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
-    .first()
-    .click();
+  if (
+    (pageKey === 'Review_All_Changes_Page' && buttonKey === 'Send_Modification_To_Sponsor') ||
+    (pageKey === 'Confirmation_Page' && buttonKey === 'Return_To_Project_Overview')
+  ) {
+    await commonItemsPage.govUkButton
+      .getByText(buttonValue)
+      .or(commonItemsPage.genericButton.getByText(buttonValue))
+      .first()
+      .click();
+  } else {
+    await commonItemsPage.govUkButton
+      .getByText(buttonValue, { exact: true })
+      .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
+      .first()
+      .click();
+  }
   await commonItemsPage.page.waitForLoadState('domcontentloaded');
 });
 
@@ -413,6 +424,7 @@ Then(
       addDocumentsModificationsPage,
       modificationsReadyToAssignPage,
       myModificationsTasklistPage,
+      sponsorReferencePage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
@@ -483,6 +495,10 @@ Then(
           errorMessageFieldAndSummaryDatasetName
         ];
       page = myModificationsTasklistPage;
+    } else if (pageKey == 'Sponsor_Reference_Page') {
+      errorMessageFieldDataset =
+        sponsorReferencePage.sponsorReferencePageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = sponsorReferencePage;
     }
     let allSummaryErrorExpectedValues: any;
     let summaryErrorActualValues: any;
@@ -497,7 +513,7 @@ Then(
       allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset);
       summaryErrorActualValues = await commonItemsPage.getSummaryErrorMessages();
     }
-    expect(summaryErrorActualValues).toEqual(allSummaryErrorExpectedValues);
+    expect.soft(summaryErrorActualValues).toEqual(allSummaryErrorExpectedValues);
     if (!errorMessageFieldAndSummaryDatasetName.includes('Summary_Only')) {
       for (const key in errorMessageFieldDataset) {
         if (Object.hasOwn(errorMessageFieldDataset, key)) {
@@ -1001,20 +1017,27 @@ Then(
   }
 );
 
-Then('I upload {string} documents', async ({ commonItemsPage }, uploadDocumentsDatasetName) => {
-  const documentPath = commonItemsPage.documentUploadTestData[uploadDocumentsDatasetName];
-  await commonItemsPage.upload_files_input.setInputFiles(documentPath);
-  if (typeof documentPath === 'string') {
-    const fileName = path.basename(documentPath);
-    await expect(commonItemsPage.page.getByText(fileName)).toBeVisible();
-  } else {
-    await expect(
-      commonItemsPage.page.getByText(
-        `${documentPath.length}` + commonItemsPage.commonTestData.uploaded_documents_counter_label
-      )
-    ).toBeVisible();
+Then(
+  'I upload {string} documents',
+  async ({ commonItemsPage, reviewUploadedDocumentsModificationsPage }, uploadDocumentsDatasetName) => {
+    const documentPath = commonItemsPage.documentUploadTestData[uploadDocumentsDatasetName];
+    await commonItemsPage.upload_files_input.setInputFiles(documentPath);
+    if (typeof documentPath === 'string') {
+      const fileName = path.basename(documentPath);
+      await expect(commonItemsPage.page.getByText(fileName)).toBeVisible();
+    } else {
+      await expect(
+        commonItemsPage.page.getByText(
+          `${documentPath.length}` + commonItemsPage.commonTestData.uploaded_documents_counter_label
+        )
+      ).toBeVisible();
+    }
+    const filePaths = await reviewUploadedDocumentsModificationsPage.getUploadedFileName();
+    if (filePaths.length == 0) {
+      await reviewUploadedDocumentsModificationsPage.setUploadedFileName(documentPath);
+    }
   }
-});
+);
 
 Then('the no search results found message is displayed', async ({ commonItemsPage }) => {
   expect(commonItemsPage.tableRows).not.toBeVisible();
@@ -1148,6 +1171,99 @@ Then(
     for (const row of await commonItemsPage.tableBodyRows.all()) {
       const shortTitleTextLink = row.getByRole('cell').nth(columnIndex).getByRole('link');
       expect(shortTitleTextLink).toBeVisible();
+    }
+  }
+);
+
+Then(
+  'I validate {string} displayed on {string} while uploading {string} documents',
+  async (
+    { commonItemsPage, addDocumentsModificationsPage, reviewUploadedDocumentsModificationsPage },
+    errorMessageFieldAndSummaryDatasetName: string,
+    pageKey: string,
+    uploadType: string
+  ) => {
+    let errorMessageFieldDataset: any;
+    let page: any;
+    if (pageKey == 'Add_Document_Modifications_Page') {
+      errorMessageFieldDataset =
+        addDocumentsModificationsPage.addDocumentsModificationsPageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = addDocumentsModificationsPage;
+    }
+    let allSummaryErrorExpectedValues: string[] = [];
+    const allfieldErrorMessagesExpectedValues: string[] = [];
+    let summaryErrorActualValues: any;
+    let fileName: string;
+    await expect(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
+    if (
+      errorMessageFieldAndSummaryDatasetName === 'Duplicate_File_Upload_Error' ||
+      errorMessageFieldAndSummaryDatasetName === 'Invalid_Format_Video_File_Error'
+    ) {
+      const fieldNamesList = await reviewUploadedDocumentsModificationsPage.getUploadedFileName();
+      if (uploadType === 'multiple invalid') {
+        for (const val of fieldNamesList) {
+          fileName = path.basename(val);
+          const allSummaryErrorExpectedValue = `${fileName}` + Object.values(errorMessageFieldDataset);
+          allSummaryErrorExpectedValues.push(allSummaryErrorExpectedValue);
+        }
+        summaryErrorActualValues = await commonItemsPage.getSummaryErrorMessages();
+        expect.soft(summaryErrorActualValues).toEqual(allSummaryErrorExpectedValues);
+      } else {
+        fileName = path.basename(fieldNamesList.toString());
+        const allSummaryErrorExpectedValue = `${fileName}` + Object.values(errorMessageFieldDataset);
+        allSummaryErrorExpectedValues.push(allSummaryErrorExpectedValue);
+        summaryErrorActualValues = await commonItemsPage.getSummaryErrorMessages();
+        expect.soft(summaryErrorActualValues).toEqual(allSummaryErrorExpectedValues);
+      }
+    } else {
+      allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset);
+      summaryErrorActualValues = await commonItemsPage.getSummaryErrorMessages();
+      expect.soft(summaryErrorActualValues).toEqual(allSummaryErrorExpectedValues);
+    }
+    if (!errorMessageFieldAndSummaryDatasetName.includes('Summary_Only')) {
+      for (const key in errorMessageFieldDataset) {
+        if (Object.hasOwn(errorMessageFieldDataset, key)) {
+          let fieldErrorMessagesActualValues: any;
+          if (
+            errorMessageFieldAndSummaryDatasetName === 'Duplicate_File_Upload_Error' ||
+            errorMessageFieldAndSummaryDatasetName === 'Invalid_Format_Video_File_Error'
+          ) {
+            const fieldNamesList = await reviewUploadedDocumentsModificationsPage.getUploadedFileName();
+            if (uploadType === 'multiple invalid') {
+              for (const val of fieldNamesList) {
+                fileName = path.basename(val);
+                const allfieldErrorMessagesExpectedValue = `${fileName}` + Object.values(errorMessageFieldDataset);
+                allfieldErrorMessagesExpectedValues.push(allfieldErrorMessagesExpectedValue);
+                const element = await commonItemsPage.clickErrorSummaryLinkSpecific(
+                  key,
+                  page,
+                  allfieldErrorMessagesExpectedValue
+                );
+                await expect(element).toBeInViewport();
+              }
+              fieldErrorMessagesActualValues = await commonItemsPage.getFieldErrorMessagesList(key, page);
+              expect(fieldErrorMessagesActualValues).toEqual(allfieldErrorMessagesExpectedValues);
+            } else {
+              fileName = path.basename(fieldNamesList.toString());
+              const allfieldErrorMessagesExpectedValue = `${fileName}` + Object.values(errorMessageFieldDataset);
+              allfieldErrorMessagesExpectedValues.push(allfieldErrorMessagesExpectedValue);
+              const element = await commonItemsPage.clickErrorSummaryLinkSpecific(
+                key,
+                page,
+                allfieldErrorMessagesExpectedValue
+              );
+              await expect(element).toBeInViewport();
+              fieldErrorMessagesActualValues = await commonItemsPage.getFieldErrorMessages(key, page);
+              expect([fieldErrorMessagesActualValues]).toEqual(allfieldErrorMessagesExpectedValues);
+            }
+          } else {
+            fieldErrorMessagesActualValues = await commonItemsPage.getFieldErrorMessages(key, page);
+            expect(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
+            const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
+            await expect(element).toBeInViewport();
+          }
+        }
+      }
     }
   }
 );

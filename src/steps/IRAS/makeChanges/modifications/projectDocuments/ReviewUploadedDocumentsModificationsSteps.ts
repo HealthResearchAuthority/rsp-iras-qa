@@ -43,5 +43,6 @@ Then(
       const documentFoundCount = await expectedDocumentRow.count();
       expect.soft(documentFoundCount).toBeGreaterThan(0);
     }
+    await reviewUploadedDocumentsModificationsPage.setUploadedFileName(fileArray);
   }
 );

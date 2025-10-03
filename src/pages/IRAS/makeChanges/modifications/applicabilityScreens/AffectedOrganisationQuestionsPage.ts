@@ -102,7 +102,7 @@ export default class AffectedOrganisationQuestionsPage {
     expect(currentUrl).toContain('affecting-organisations');
   }
 
-  async fillAffectedOrganisationQuestions(dataset: any) {
+  async fillAffectedOrganisationQuestions(dataset: any, action: string) {
     const commonItemsPage = new CommonItemsPage(this.page);
     for (const key in dataset) {
       if (Object.hasOwn(dataset, key)) {
@@ -116,6 +116,10 @@ export default class AffectedOrganisationQuestionsPage {
         }
       }
     }
-    await commonItemsPage.clickButton('Modifications_Page', 'Save_Continue');
+    if (action === 'create') {
+      await commonItemsPage.clickButton('Modifications_Page', 'Save_Continue');
+    } else {
+      await commonItemsPage.clickButton('Affected_Organisation_Questions_Page', 'Save_Changes');
+    }
   }
 }
