@@ -211,5 +211,17 @@
   },
   "Select_Study_Wide_Reviewer_Page": {
     "Back": "Back"
+  },
+  "Modification_Details_Page": {
+    "Back": "Back",
+    "Change": "Change",
+    "Remove": "Remove",
+    "Delete_Modification": "Delete modification"
+  },
+  "Modification_Unfinished_Error_Page": {
+    "Back": "Back"
+  },
+  "Create_Project_Confirmation_Page": {
+    "View_Project_Overview": "View project overview"
   }
 }

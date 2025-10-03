@@ -26,9 +26,9 @@ Then(
     const modificationIDActual = confirmStringNotNull(
       await modificationsCommonPage.modification_id_label.textContent()
     );
-    expect(irasIDActual).toBe(irasIDExpected);
-    expect(shortProjectTitleActual).toBe(shortProjectTitleExpected);
-    expect(modificationIDActual).toBe(modificationIDExpected);
+    expect.soft(irasIDActual).toBe(irasIDExpected);
+    expect.soft(shortProjectTitleActual).toBe(shortProjectTitleExpected);
+    expect.soft(modificationIDActual).toBe(modificationIDExpected);
   }
 );
 
@@ -36,11 +36,16 @@ Then(
   'I create {string} for the created modification',
   async ({ commonItemsPage, modificationsCommonPage, selectAreaOfChangePage }, datasetName) => {
     const changesDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName];
-    for (const changeName of Object.keys(changesDataset)) {
-      const changeDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName][changeName];
+    const changeNames = Object.keys(changesDataset);
+    for (let index = 0; index < changeNames.length; index++) {
+      const changeName = changeNames[index];
+      const changeDataset = changesDataset[changeName];
       await selectAreaOfChangePage.selectAreaOfChangeInModificationsPage(changeDataset);
       await modificationsCommonPage.createChangeModification(changeName, changeDataset);
-      await commonItemsPage.clickButton('Modifications_Details_Page', 'Add_Another_Change');
+      // Skip click on last iteration
+      if (index < changeNames.length - 1) {
+        await commonItemsPage.clickButton('Modification_Details_Page', 'Add_Another_Change');
+      }
     }
   }
 );
