@@ -241,7 +241,7 @@ Feature: Create Amendment - Create Modifications
       | Changes                           |
       | Multiple_Changes_Planned_End_Date |
 
-  @rsp-4386 @4389 @4391 @ModificationsJourneyEntireJourney @SaveForLaterFromReviewAllChangesPage @KNOWN_DEFECT_RSP-5324
+  @rsp-4386 @4389 @4391 @ModificationsJourneyEntireJourney @SaveForLaterFromReviewAllChangesPage @KNOWN_DEFECT_RSP-5324 @KNOWN_DEFECT_RSP-5184 @KNOWN_DEFECT_RSP-5317
   Scenario Outline: Validate that user can create modifications and complete the entire modifications journey till review all changes page and save for later from there
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I capture the page screenshot
@@ -278,7 +278,7 @@ Feature: Create Amendment - Create Modifications
       | Changes                           |
       | Multiple_Changes_Planned_End_Date |
 
-  @rsp-4386 @4389 @4391 @ModificationsJourneyEntireJourney @ModifyCurrentChangesInReviewAllChangesPage @Test
+  @rsp-4386 @4389 @4391 @ModificationsJourneyEntireJourney @ModifyCurrentChangesInReviewAllChangesPage @KNOWN_DEFECT_RSP-5184 @KNOWN_DEFECT_RSP-5317
   Scenario Outline: Validate that user can create modification with multiple changes and modify current changes in review all changes page by clicking change link link from there
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I capture the page screenshot
