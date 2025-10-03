@@ -1,40 +1,45 @@
 {
-  "Key_Project_roles_Page": {
-    "heading": "Key project roles",
+  "Chief_Investigator_Page": {
+    "heading": "Chief investigator",
     "chief_investigator_header_label": "Chief Investigator",
     "primary_sponsor_organisation_header_label": "Primary sponsor organisation",
     "sponsor_contact_header_label": "Sponsor contact"
   },
   "Label_Texts": {
     "chief_investigator_email_label": "Email",
-    "sponsor_contact_email_label": "Email"
+    "chief_investigator_first_name_label": "First name",
+    "chief_investigator_last_name_label": "Last name"
   },
   "Summary_Error_Message": {
     "error_message_summary_header": "There is a problem",
-    "chief_investigator_email_text": "Enter an email address in the correct format",
-    "sponsor_contact_email_text": "Enter an email address in the correct format"
+    "chief_investigator_email_text": "Enter an email address in the correct format"
   },
   "Field_Error_Chief_Email": {
     "chief_investigator_email_text": "Enter an email address in the correct format"
-  },
-  "Field_Error_Sponsor_Email": {
-    "sponsor_contact_email_text": "Enter an email address in the correct format"
   },
   "Field_Error_Primary_Sponsor_Organisation": {
     "primary_sponsor_organisation_text": "Please provide 3 or more characters to search sponsor organisation."
   },
   "Valid_Data_All_Fields": {
-    "chief_investigator_email_text": "ci_test@test.com",
-    "primary_sponsor_organisation_text": "CHESTERFIELD ROYAL HOSPITAL NHS FOUNDATION TRUST",
-    "sponsor_contact_email_text": "sc_test@test.com"
+    "chief_investigator_first_name_text": "Chief Investigator First name",
+    "chief_investigator_last_name_text": "Chief Investigator Last name",
+    "chief_investigator_email_text": "ci_test@test.com"
+  },
+  "Valid_Data_All_Fields_Change": {
+    "chief_investigator_first_name_text": "Chief Investigator First name changed",
+    "chief_investigator_last_name_text": "Chief Investigator Last name changed",
+    "chief_investigator_email_text": "ci_test@test.com"
+  },
+  "Valid_Data_All_Fields_Blank": {
+    "chief_investigator_first_name_text": "",
+    "chief_investigator_last_name_text": "",
+    "chief_investigator_email_text": ""
   },
   "Valid_Data_All_Fields_Two": {
-    "chief_investigator_email_text": "ci_testTwo@test.com",
-    "sponsor_contact_email_text": "sc_testTwo@test.com"
+    "chief_investigator_email_text": "ci_testTwo@test.com"
   },
   "Valid_Data_All_Empty_Fields": {
-    "chief_investigator_email_text": "",
-    "sponsor_contact_email_text": ""
+    "chief_investigator_email_text": ""
   },
   "Valid_Data_Only_Investigator_Email_Field": {
     "chief_investigator_email_text": "ci_test@test.com"
@@ -49,113 +54,86 @@
     "sponsor_contact_email_text": "sc_test@test.com"
   },
   "Valid_Email_Data": {
-    "chief_investigator_email_text": "john.doe@example.com",
-    "sponsor_contact_email_text": "john.doe@example.com"
+    "chief_investigator_email_text": "john.doe@example.com"
   },
   "Valid_Email_Underscore": {
-    "chief_investigator_email_text": "john_doe@example.com",
-    "sponsor_contact_email_text": "john_doe@example.com"
+    "chief_investigator_email_text": "john_doe@example.com"
   },
   "Valid_Email_Data_Hyphen": {
-    "chief_investigator_email_text": "john-doe@example.com",
-    "sponsor_contact_email_text": "john-doe@example.com"
+    "chief_investigator_email_text": "john-doe@example.com"
   },
   "Valid_Email_Data_Plus": {
-    "chief_investigator_email_text": "john+newsletter@example.com",
-    "sponsor_contact_email_text": "john+newsletter@example.com"
+    "chief_investigator_email_text": "john+newsletter@example.com"
   },
   "Valid_Email_Data_Exclamation": {
-    "chief_investigator_email_text": "john!doe@example.com",
-    "sponsor_contact_email_text": "john!doe@example.com"
+    "chief_investigator_email_text": "john!doe@example.com"
   },
   "Valid_Email_Data_Hash": {
-    "chief_investigator_email_text": "john#profile@example.com",
-    "sponsor_contact_email_text": "john#profile@example.com"
+    "chief_investigator_email_text": "john#profile@example.com"
   },
   "Valid_Email_Data_Dollar": {
-    "chief_investigator_email_text": "john$invoice@example.com",
-    "sponsor_contact_email_text": "john$invoice@example.com"
+    "chief_investigator_email_text": "john$invoice@example.com"
   },
   "Valid_Email_Data_Percentage": {
-    "chief_investigator_email_text": "john%discount@example.com",
-    "sponsor_contact_email_text": "john%discount@example.com"
+    "chief_investigator_email_text": "john%discount@example.com"
   },
   "Valid_Email_Data_Ampersand": {
-    "chief_investigator_email_text": "john&team@example.com",
-    "sponsor_contact_email_text": "john&team@example.com"
+    "chief_investigator_email_text": "john&team@example.com"
   },
   "Valid_Email_Data_Single_Quote": {
-    "chief_investigator_email_text": "john's@example.com",
-    "sponsor_contact_email_text": "john's@example.com"
+    "chief_investigator_email_text": "john's@example.com"
   },
   "Valid_Email_Data_Star": {
-    "chief_investigator_email_text": "john*star@example.com",
-    "sponsor_contact_email_text": "john*star@example.com"
+    "chief_investigator_email_text": "john*star@example.com"
   },
   "Valid_Email_Data_Slash": {
-    "chief_investigator_email_text": "john/everyone@example.com",
-    "sponsor_contact_email_text": "john/everyone@example.com"
+    "chief_investigator_email_text": "john/everyone@example.com"
   },
   "Valid_Email_Data_Equal_Symbol": {
-    "chief_investigator_email_text": "john=equals@example.com",
-    "sponsor_contact_email_text": "john=equals@example.com"
+    "chief_investigator_email_text": "john=equals@example.com"
   },
   "Valid_Email_Data_Question_Mark": {
-    "chief_investigator_email_text": "john?query@example.com",
-    "sponsor_contact_email_text": "john?query@example.com"
+    "chief_investigator_email_text": "john?query@example.com"
   },
   "Valid_Email_Data_Cap_Symbol": {
-    "chief_investigator_email_text": "john^caret@example.com",
-    "sponsor_contact_email_text": "john^caret@example.com"
+    "chief_investigator_email_text": "john^caret@example.com"
   },
   "Valid_Email_Data_Right_Single_Quote": {
-    "chief_investigator_email_text": "john`code@example.com",
-    "sponsor_contact_email_text": "john`code@example.com"
+    "chief_investigator_email_text": "john`code@example.com"
   },
   "Valid_Email_Data_Curly_Brackets": {
-    "chief_investigator_email_text": "john{editor}@example.com",
-    "sponsor_contact_email_text": "john{editor}@example.com"
+    "chief_investigator_email_text": "john{editor}@example.com"
   },
   "Valid_Email_Data_Pipe_Symbol": {
-    "chief_investigator_email_text": "john|vertical@example.com",
-    "sponsor_contact_email_text": "john|vertical@example.com"
+    "chief_investigator_email_text": "john|vertical@example.com"
   },
   "Valid_Email_Data_Tilde_Symbol": {
-    "chief_investigator_email_text": "john~tilde@example.com",
-    "sponsor_contact_email_text": "john~tilde@example.com"
+    "chief_investigator_email_text": "john~tilde@example.com"
   },
   "Valid_Email_Data_Unicode": {
-    "chief_investigator_email_text": "johñ.unicode@example.com",
-    "sponsor_contact_email_text": "johñ.unicode@example.com"
+    "chief_investigator_email_text": "johñ.unicode@example.com"
   },
   "Valid_Email_Data_Special_Characters": {
     "chief_investigator_email_text": "john!#$%&'*+-/=?^_`{|}~doe@example.com",
-    "primary_sponsor_organisation_text": "CHESTERFIELD ROYAL HOSPITAL NHS FOUNDATION TRUST",
-    "sponsor_contact_email_text": "john!#$%&'*+-/=?^_`{|}~doe@example.com"
+    "primary_sponsor_organisation_text": "CHESTERFIELD ROYAL HOSPITAL NHS FOUNDATION TRUST"
   },
   "Valid_Email_Data_Hyphen_Underscore": {
-    "chief_investigator_email_text": "john-_doe@example.com",
-    "sponsor_contact_email_text": "john-_doe@example.com"
+    "chief_investigator_email_text": "john-_doe@example.com"
   },
   "Valid_Email_Data_Multiple_Unicode": {
-    "chief_investigator_email_text": "johñ.döe@example.com",
-    "sponsor_contact_email_text": "johñ.döe@example.com"
+    "chief_investigator_email_text": "johñ.döe@example.com"
   },
   "Valid_Email_Data_Multiple_Sub_Domains": {
-    "chief_investigator_email_text": "mail.sub.subsub.sub.example.com",
-    "sponsor_contact_email_text": "mail.sub.subsub.sub.example.com"
+    "chief_investigator_email_text": "mail.sub.subsub.sub.example.com"
   },
   "Valid_Email_Data_Domain": {
-    "chief_investigator_email_text": "john.doe@example.photography",
-    "sponsor_contact_email_text": "john.doe@example.photography"
+    "chief_investigator_email_text": "john.doe@example.photography"
   },
   "Valid_Email_Data_Other_Language": {
-    "chief_investigator_email_text": "john@example.भारत",
-    "sponsor_contact_email_text": "john@example.भारत"
+    "chief_investigator_email_text": "john@example.भारत"
   },
   "Valid_Email_Data_Number": {
-    "chief_investigator_email_text": "Johndoe2@example.com",
-    "sponsor_contact_email_text": "Johndoe2@example.com"
+    "chief_investigator_email_text": "Johndoe2@example.com"
   },
   "Sponsor_Organisation_Partial_Text_NHS": {
     "primary_sponsor_organisation_text": "nhs"
