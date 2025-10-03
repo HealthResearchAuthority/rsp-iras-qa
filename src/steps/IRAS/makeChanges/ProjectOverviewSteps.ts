@@ -8,10 +8,13 @@ Then('I can see the project overview page', async ({ projectOverviewPage }) => {
   await projectOverviewPage.assertOnProjectOverviewPage();
 });
 
-Then('I navigate to the project overview page of a specific project', async ({ projectOverviewPage }) => {
-  await projectOverviewPage.gotoSpecificProjectPage();
-  await projectOverviewPage.assertOnProjectOverviewPage();
-});
+Then(
+  'I navigate to the project overview page of the {string} project',
+  async ({ projectOverviewPage }, projectName: string) => {
+    await projectOverviewPage.gotoSpecificProjectPage(projectName);
+    await projectOverviewPage.assertOnProjectOverviewPage();
+  }
+);
 
 Then(
   'I can see the project details on project overview page for {string}',

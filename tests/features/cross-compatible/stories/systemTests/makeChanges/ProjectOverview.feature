@@ -54,7 +54,7 @@ Feature: Project Overview
     @rsp-4876 @PostApprovalPage
     #The project and modifications were created manually and validations are for the specific project
     Scenario Outline: Validate the user is able to access the view the post approval details from the project overview page
-        When I navigate to the project overview page of a specific project
+        When I navigate to the project overview page of the 'Test_Project' project
         And I capture the page screenshot
         When I click the 'Post_Approval' link on the 'Project_Overview_Page'
         And I capture the page screenshot
@@ -64,7 +64,7 @@ Feature: Project Overview
     @rsp-4876 @PostApprovalPageSort
     #The project and modifications were created manually and validations are for the specific project
     Scenario Outline: Validate the user is able to access the view the post approval details from the project overview page
-        When I navigate to the project overview page of a specific project
+        When I navigate to the project overview page of the 'Test_Project' project
         And I capture the page screenshot
         When I click the 'Post_Approval' link on the 'Project_Overview_Page'
         And the default page size should be 'twenty'
@@ -84,7 +84,7 @@ Feature: Project Overview
     @rsp-4876 @PostApprovalPaginationFirstPage
     #The project and modifications were created manually and validations are for the specific project
     Scenario: Verify pagination in post approval page when user is on the first page
-        When I navigate to the project overview page of a specific project
+        When I navigate to the project overview page of the 'Test_Project' project
         And I capture the page screenshot
         When I click the 'Post_Approval' link on the 'Project_Overview_Page'
         And I capture the page screenshot
@@ -104,7 +104,7 @@ Feature: Project Overview
     @rsp-4876 @PostApprovalPaginationLastPage
     #The project and modifications were created manually and validations are for the specific project
     Scenario: Verify pagination in post approval page when user is on the last page
-        When I navigate to the project overview page of a specific project
+        When I navigate to the project overview page of the 'Test_Project' project
         And I capture the page screenshot
         When I click the 'Post_Approval' link on the 'Project_Overview_Page'
         And I capture the page screenshot

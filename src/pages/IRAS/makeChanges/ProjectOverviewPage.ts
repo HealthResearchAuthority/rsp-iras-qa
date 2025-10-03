@@ -160,8 +160,8 @@ export default class ProjectOverviewPage {
     await expect(this.pageHeading).toBeVisible();
   }
 
-  async gotoSpecificProjectPage() {
-    await this.page.goto(this.projectOverviewPageTestData.Modification_URL.URL);
+  async gotoSpecificProjectPage(projectName: string) {
+    await this.page.goto(this.projectOverviewPageTestData.Project_URL[projectName]);
   }
 
   async getStatus(row: any) {

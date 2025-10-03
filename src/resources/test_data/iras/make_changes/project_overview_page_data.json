@@ -20,8 +20,10 @@
     "lead_nation": "Lead nation",
     "maxPagesToVisit": 2
   },
-  "Modification_URL": {
-    "URL": "https://fd-rsp-applications-automationtest-uks-e7f6hkg3c5edhxex.a03.azurefd.net/projectoverview/postapproval?projectRecordId=20250905085329"
+  "Project_URL": {
+    "Test_Project": "projectoverview/projectdetails?projectRecordId=20250905085329",
+    "Kilmarnock_Cancer_Research": "projectoverview/projectdetails?projectRecordId=20250930093915",
+    "Swansea_ACL_Trials": "projectoverview/projectdetails?projectRecordId=20251003104402"
   },
   "Modification_Status_Draft": {
     "status": "Draft"

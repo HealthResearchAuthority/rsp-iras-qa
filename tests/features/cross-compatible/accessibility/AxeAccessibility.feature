@@ -1159,7 +1159,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
 
   @axeAccessibilityProjectOverviewPostApprovalPageSpecificProject @ApplicantUser
   Scenario: Project overview post approvals page for a specific project
-    When I navigate to the project overview page of a specific project
+    When I navigate to the project overview page of the 'Test_Project' project
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
@@ -1213,7 +1213,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-@axeAccessibilityProjectConfirmationPage @ApplicantUser
+  @axeAccessibilityProjectConfirmationPage @ApplicantUser
   Scenario: Create Project confirmation page
     Given I have navigated to the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
