@@ -6,7 +6,7 @@ import MyModificationsTasklistPage from '../../../../pages/IRAS/reviewResearch/r
 const { Given, When, Then } = createBdd(test);
 
 Then(
-  'I can see the tasklist of modifications {string} is sorted by {string} order of the {string}',
+  'I can see the tasklist on the {string} is sorted by {string} order of the {string}',
   async (
     { modificationsReceivedCommonPage, commonItemsPage },
     pageType: string,
@@ -14,39 +14,7 @@ Then(
     sortField: string
   ) => {
     let sortedList: string[];
-    let columnIndex: number;
-    switch (sortField.toLowerCase()) {
-      case 'modification id':
-        if (pageType.toLowerCase() == 'ready to assign') {
-          columnIndex = 1;
-        } else {
-          columnIndex = 0;
-        }
-        break;
-      case 'short project title':
-        if (pageType.toLowerCase() == 'ready to assign') {
-          columnIndex = 2;
-        } else {
-          columnIndex = 1;
-        }
-        break;
-      case 'date submitted':
-        if (pageType.toLowerCase() == 'ready to assign') {
-          columnIndex = 3;
-        } else {
-          columnIndex = 2;
-        }
-        break;
-      case 'days since submission':
-        if (pageType.toLowerCase() == 'ready to assign') {
-          columnIndex = 4;
-        } else {
-          columnIndex = 3;
-        }
-        break;
-      default:
-        throw new Error(`${sortField} is not a valid option`);
-    }
+    const columnIndex = await modificationsReceivedCommonPage.getModificationColumnIndex(pageType, sortField);
     const actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
     if (sortField.toLowerCase() == 'modification id') {
       sortedList = await commonItemsPage.sortModificationIdListValues(actualList, sortDirection);

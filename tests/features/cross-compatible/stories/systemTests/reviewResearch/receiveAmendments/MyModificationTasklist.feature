@@ -39,9 +39,15 @@ Feature: Receive Amendments: My Modifications Tasklist page that displays modifi
             | page number       |
             | previous link     |
 
-    @MyModificationsTasklistTitleLinksBackNav @rsp-4820
-    Scenario: Verify back navigation and that all the short project titles displayed in my tasklist are links
-        Then Each of the short project titles displayed on the 'My_Modifications_Tasklist_Page' are links
+    @MyModificationsTasklistTitleLinksBackNav @rsp-4820 @rsp-5046
+    Scenario: Verify back and short project title link navigation for my tasklist
+        And Each 'short project title' displayed on the 'My_Modifications_Tasklist_Page' is a link
+        When I click a 'short project title' on the 'My_Modifications_Tasklist_Page'
+        And I capture the page screenshot
+        Then I can see the project overview page
+        When I click the 'Back' link on the 'Project_Overview_Page'
+        And I capture the page screenshot
+        And I can see the 'My_Modifications_Tasklist_Page'
         When I click the 'Back' link on the 'My_Modifications_Tasklist_Page'
         And I capture the page screenshot
         Then I can see the approvals home page
@@ -50,17 +56,17 @@ Feature: Receive Amendments: My Modifications Tasklist page that displays modifi
     Scenario Outline: Verify the user is able to sort the my modifications tasklist by ascending and descending order for each table column
         When I click the '<Sort_Button>' button on the 'My_Modifications_Tasklist_Page'
         And I capture the page screenshot
-        Then I can see the tasklist of modifications 'assigned to me' is sorted by '<Initial_Sort>' order of the '<Sort_Field>'
+        And I can see the tasklist on the 'My_Modifications_Tasklist_Page' is sorted by '<Initial_Sort>' order of the '<Sort_Field>'
         When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
         And I capture the page screenshot
-        Then I can see the tasklist of modifications 'assigned to me' is sorted by '<Initial_Sort>' order of the '<Sort_Field>'
+        And I can see the tasklist on the 'My_Modifications_Tasklist_Page' is sorted by '<Initial_Sort>' order of the '<Sort_Field>'
         When I click the '<Sort_Button>' button on the 'My_Modifications_Tasklist_Page'
         And I capture the page screenshot
         Then I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
-        And I can see the tasklist of modifications 'assigned to me' is sorted by '<Secondary_Sort>' order of the '<Sort_Field>'
+        And I can see the tasklist on the 'My_Modifications_Tasklist_Page' is sorted by '<Secondary_Sort>' order of the '<Sort_Field>'
         When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
         And I capture the page screenshot
-        And I can see the tasklist of modifications 'assigned to me' is sorted by '<Secondary_Sort>' order of the '<Sort_Field>'
+        And I can see the tasklist on the 'My_Modifications_Tasklist_Page' is sorted by '<Secondary_Sort>' order of the '<Sort_Field>'
 
         Examples:
             | Sort_Button           | Sort_Field            | Initial_Sort | Secondary_Sort |
