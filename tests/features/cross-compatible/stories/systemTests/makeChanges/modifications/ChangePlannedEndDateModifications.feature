@@ -248,7 +248,7 @@ Feature: Create Modifications - Change to planned end date
       | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Empty_Data_Non_Nhs             |
 
 
-  @rsp-4171 @rsp-4611 @CreateModificationsToChangePlannedEndDateAndReviewChanges @KNOWN-DEFECT-RSP-4795 @run
+  @rsp-4171 @rsp-4611 @CreateModificationsToChangePlannedEndDateAndReviewChanges @KNOWN-DEFECT-RSP-4795
   Scenario Outline: Create modifications for change planned end date and review the modifications details on review changes page
     Then I can see the 'Planned_End_Date' page for modifications
     And I capture the page screenshot

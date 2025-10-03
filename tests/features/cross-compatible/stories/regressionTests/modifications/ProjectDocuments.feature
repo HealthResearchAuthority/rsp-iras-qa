@@ -29,7 +29,7 @@ Feature: Create Modifications - Project Documents Modifications Regression
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
 
-  @ValidateDocumentUploadAndReviewForModificationsPageRegression @run
+  @ValidateDocumentUploadAndReviewForModificationsPageRegression
   Scenario Outline: Validate the user is able to upload and review documents for modifications
     And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
     And I capture the page screenshot

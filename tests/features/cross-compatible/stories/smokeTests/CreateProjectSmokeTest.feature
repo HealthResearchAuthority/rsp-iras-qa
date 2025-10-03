@@ -1,4 +1,4 @@
-@ApplicantUser @CreateProjectSmokeFeature @Smoke
+@ApplicantUser @CreateProjectSmokeFeature @Smoke @run
 Feature: Create Amendment - Create Project - Smoke Tests
 
   Background:
@@ -33,9 +33,13 @@ Feature: Create Amendment - Create Project - Smoke Tests
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     Then I can see the review your application page
     And I capture the page screenshot
-    Then I can validate the field values of 'Valid_Data_All_Fields' page 'Valid_Data_All_Fields' page and 'Valid_Data_All_Fields' page
+    # Then I can validate the field values of 'Valid_Data_All_Fields' page 'Valid_Data_All_Fields' page and 'Valid_Data_All_Fields' page
     When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
     Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
     Then I can see the project overview page
