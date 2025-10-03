@@ -576,6 +576,7 @@ When(
       pageLocator = commonItemsPage.firstPage;
     } else {
       const totalPages = await commonItemsPage.getTotalPages();
+      commonItemsPage.setNumberofTotalPages(totalPages);
       pageLocator = await commonItemsPage.clickOnPages(totalPages, 'page number');
     }
     await expect(pageLocator).toHaveAttribute('aria-current', 'page');
