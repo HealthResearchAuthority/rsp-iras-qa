@@ -200,7 +200,7 @@
   "Select_Study_Wide_Reviewer_Page": {
     "Complete_Assignment": "Complete assignment"
   },
-  "Modifications_Details_Page": {
+  "Modification_Details_Page": {
     "Add_Another_Change": "Add another change to this modification",
     "Save_Continue_Review": "Save and continue to review",
     "Save_For_Later": "Save for later"
@@ -213,5 +213,11 @@
     "Save_Continue": "Save and continue",
     "Save_For_Later": "Save for later",
     "Change_Details": "Change"
+  },
+  "Modification_Unfinished_Error_Page": {
+    "Return_To_Modification_Details": "Return to modification details"
+  },
+  "Confirm_Remove_Modification_Page": {
+    "Remove_Change": "Remove change"
   }
 }

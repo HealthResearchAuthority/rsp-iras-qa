@@ -1,0 +1,39 @@
+{
+  "Modification_Details_Page": {
+    "heading": "Modification details",
+    "iras_id_label": "IRAS ID",
+    "short_project_title_label": "Short project title",
+    "modification_id_label": "Modification ID",
+    "status_label": "Status",
+    "overall_modification_type_label": "Modification type",
+    "overall_category_label": "Category",
+    "overall_review_type_label": "Review type",
+    "individual_modification_type_label": "Modification type",
+    "individual_category_label": "Category",
+    "individual_review_type_label": "Review type",
+    "change_ready_for_submission_status_label": "Change ready for submission",
+    "change_Unfinished_status_label": "Unfinished"
+  },
+  "Modification_Unfinished_Error_Page": {
+    "heading": "You cannot proceed with ‘Unfinished’ changes",
+    "modification_unfinished_hint_label": "All changes must have the status 'ready for submission' before you can continue. For any changes with the status 'Unfinished', either select Change to enter missing information, or select Remove if that change is no longer needed."
+  },
+  "Remove_Modifications_Page": {
+    "heading": "Are you sure you want to remove Change to planned end date?",
+    "remove_modification_success_message": "Change to planned end date has been successfully removed"
+  },
+  "Modification_Details_Label_Texts": {
+    "overall_modification_ranking_label": "Overall modification ranking",
+    "overall_ranking_sub_heading_label": "Ranking",
+    "changes_sub_heading_label": "Changes",
+    "add_summary_heading_label": "Add summary and review modification before sending to sponsor",
+    "add_summary_sub_label": "You'll have the option to add a brief summary and edit your modification before sending it to the sponsor on the next page."
+  },
+  "Missing_All_Mandatory_Fields": {
+    "area_of_change_dropdown": "Select area of change",
+    "specific_change_dropdown": "Select specific change"
+  },
+  "Missing_Mandatory_Only_Specific_Change": {
+    "specific_change_dropdown": "Select specific change"
+  }
+}
