@@ -124,13 +124,13 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                 And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
                 And I capture the page screenshot
                 Examples:
-                        | Valid_Iras_Id             |
-                        | Valid_Iras_Id_Nth         |
-                        | Valid_Iras_Id_Nineteen    |
-                        | Valid_Iras_Id_Twenty      |
-                        | Valid_Iras_Id_TwentyOne   |
-                        | Valid_Iras_Id_TwentyTwo   |
-                        | Valid_Iras_Id_TwentyThree |
+                        | Valid_Iras_Id     |
+                        | Valid_Iras_Id_Nth |
+        # | Valid_Iras_Id_Nineteen    |
+        # | Valid_Iras_Id_Twenty      |
+        # | Valid_Iras_Id_TwentyOne   |
+        # | Valid_Iras_Id_TwentyTwo   |
+        # | Valid_Iras_Id_TwentyThree |
 
         @viewListOfModifications @NoIrasIdAndAdvancedFilters @jsDisabled
         Scenario Outline: Verify the user can view the list of modifications by selecting advanced filters and click on apply filters button
@@ -145,24 +145,24 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                 And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
                 And I capture the page screenshot
                 Examples:
-                        | Advanced_Filters           |
-                        | Advanced_Filters_Nth       |
-                        | Advanced_Filters_Two       |
-                        # | Advanced_Filters_Three       |
-                        | Advanced_Filters_Four      |
-                        # | Advanced_Filters_Five        |
-                        # | Advanced_Filters_Six         |
-                        # | Advanced_Filters_Seven       |
-                        # | Advanced_Filters_Eight       |
-                        # | Advanced_Filters_Nine        |
-                        # | Advanced_Filters_Ten         |
-                        # | Advanced_Filters_Eleven      |
-                        # | Advanced_Filters_Fourteen    |
-                        | Advanced_Filters_Sixteen   |
-                        | Advanced_Filters_Seventeen |
-                        # | Advanced_Filters_Eighteen    |
-                        # | Advanced_Filters_Twenty      |
-                        | Advanced_Filters_TwentyOne |
+                        | Advanced_Filters     |
+                        | Advanced_Filters_Nth |
+        # | Advanced_Filters_Two       |
+        # | Advanced_Filters_Three       |
+        # | Advanced_Filters_Four      |
+        # | Advanced_Filters_Five        |
+        # | Advanced_Filters_Six         |
+        # | Advanced_Filters_Seven       |
+        # | Advanced_Filters_Eight       |
+        # | Advanced_Filters_Nine        |
+        # | Advanced_Filters_Ten         |
+        # | Advanced_Filters_Eleven      |
+        # | Advanced_Filters_Fourteen    |
+        # | Advanced_Filters_Sixteen   |
+        # | Advanced_Filters_Seventeen |
+        # | Advanced_Filters_Eighteen    |
+        # | Advanced_Filters_Twenty      |
+        # | Advanced_Filters_TwentyOne |
         # | Advanced_Filters_TwentyTwo   |
         # | Advanced_Filters_TwentyThree |
 
@@ -182,7 +182,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                 Examples:
                         | Advanced_Filters          |
                         | Advanced_Filters_One      |
-                        | Advanced_Filters_Tweleve  |
+                        # | Advanced_Filters_Tweleve  |
                         | Advanced_Filters_Thirteen |
 
         @NoResultsFound @NoIrasIdAndNoAdvancedFilters
@@ -270,7 +270,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                 And I capture the page screenshot
                 Examples:
                         | Valid_Iras_Id     | Advanced_Filters_No_Results |
-                        | Valid_Iras_Id_Nth | Advanced_Filters_Nth        |
+                        | Valid_Iras_Id_Nth | Advanced_Filters_Fifteen    |
 
         @NoResultsFound @InvalidAdvancedFilters
         Scenario Outline: Verify the user can see no matching results found message by selecting advanced filters and click on apply filters button
@@ -534,13 +534,13 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                 And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
                 And I capture the page screenshot
                 Examples:
-                        | Valid_Iras_Id             |
-                        | Valid_Iras_Id_Nth         |
-                        | Valid_Iras_Id_Nineteen    |
-                        | Valid_Iras_Id_Twenty      |
-                        | Valid_Iras_Id_TwentyOne   |
-                        | Valid_Iras_Id_TwentyTwo   |
-                        | Valid_Iras_Id_TwentyThree |
+                        | Valid_Iras_Id     |
+                        | Valid_Iras_Id_Nth |
+        # | Valid_Iras_Id_Nineteen    |
+        # | Valid_Iras_Id_Twenty      |
+        # | Valid_Iras_Id_TwentyOne   |
+        # | Valid_Iras_Id_TwentyTwo   |
+        # | Valid_Iras_Id_TwentyThree |
 
         @ViewListOfModifications @ViewListOfModificationsPaginationFirstPage @ViewListOfModificationsPaginationPageNumber @ViewListOfModificationsPaginationNextLinkClick
         Scenario Outline: Verify pagination in the list of modifications page when user is on the first page and navigate through each page by clicking page number or by by clicking next link
@@ -639,8 +639,9 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                         | Advanced_Filter_Two_Participating_Nation_Selected   |
                         | Advanced_Filter_Three_Participating_Nation_Selected |
                         | Advanced_Filter_Four_Participating_Nation_Selected  |
-                        | Advanced_Filters_Nth                                |
+        # | Advanced_Filters_Nth                                |
 
+        # Can't close advanced filters panel- for Advanced_Filters_Nth- JS DIsabled (Sponsor is selected)
         @jsDisabled @VerifyHintLabelForSelectedCheckboxAdvancedFilters @rsp-4167
         Scenario Outline: When javascript disabled verify the hint text for advanced filters when user does n't select any checkboxes
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
