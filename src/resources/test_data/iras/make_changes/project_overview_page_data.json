@@ -44,13 +44,29 @@
     "nhs_hsc_organisations": "No",
     "lead_nation": ""
   },
-  "Label_Texts": {
-    "project_details_title": "Project details",
-    "project_documents_title": "Project documents",
-    "key_project_roles_title": "Key project roles",
-    "research_locations_title": "Research locations",
-    "post_approval_title": "Post approval",
-    "project_history_title": "Project history"
+  "Kilmarnock_Cancer_Research": {
+    "status": "Submitted",
+    "Project_Details": {
+      "iras_id": "98931",
+      "short_project_title_text": "Kilmarnock Cancer Research"
+    },
+    "Project_Team": {
+      "chief_investigator_email_text": "chris.test@bmail.com",
+      "primary_sponsor_organisation_text": "FIFE",
+      "sponsor_contact_email_text": "chris.sponsor@bmail.com"
+    }
+  },
+  "Swansea_ACL_Trials": {
+    "status": "Submitted",
+    "Project_Details": {
+      "iras_id": "46782",
+      "short_project_title_text": "Swansea ACL Trials"
+    },
+    "Project_Team": {
+      "chief_investigator_email_text": "david.bishop@bmail.com",
+      "primary_sponsor_organisation_text": "Swansea University",
+      "sponsor_contact_email_text": ""
+    }
   },
   "Label_Texts_Post_Approval": {
     "modification_id": "Modification ID",
@@ -58,5 +74,14 @@
     "review_type": "Review type",
     "category": "Category",
     "status": "Status"
+  },
+  "Project_Details_Tab": {
+    "iras_id_label": "IRAS ID",
+    "short_project_title_label": "Short project title"
+  },
+  "Project_Team_Tab": {
+    "chief_investigator_label": "Chief Investigator",
+    "primary_sponsor_org_label": "Primary sponsor organisation",
+    "sponsor_contact_label": "Sponsor contact"
   }
 }

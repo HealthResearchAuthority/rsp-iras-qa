@@ -677,7 +677,7 @@ Feature: Create Amendment - Create Project - Review your answers
       | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields              | Valid_Data_Only_is_nhs_hsc_organisation     | Field_Error_Message_Except_NHS_HSC_Org_As_Yes      |
       | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields              | Valid_Data_is_nhs_hsc_organisation          | Field_Error_Message_Except_NHS_HSC_Org_Lead_Nation |
 
-  @rsp-1867 @rsp-3819 @rsp-4880 @ValidateConfirmProjectPage 
+  @rsp-1867 @rsp-3819 @rsp-4880 @ValidateConfirmProjectPage
   Scenario Outline: Validate user is able to see the project success confirmation screen and then the project overview page when user submit the review answer page with all mandatory fields entered correctly
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
@@ -701,8 +701,8 @@ Feature: Create Amendment - Create Project - Review your answers
     Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
     Then I can see the project overview page
     And I capture the page screenshot
-    And I can see the project details on project overview page for '<Project_Details_Title>'
-   
+    And I can see the 'created' project details on project overview page for '<Project_Details_Title>'
+
     Examples:
       | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Third | Navigation_Button_Fourth | Project_Details_Title | Key_Project_Roles     | Research_Locations    |
       | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields |

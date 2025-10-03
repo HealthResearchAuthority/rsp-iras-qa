@@ -7,6 +7,7 @@ export default class ProjectOverviewPage {
   readonly page: Page;
   readonly projectOverviewPageTestData: typeof projectOverviewPageTestData;
   readonly pageHeading: Locator;
+  readonly projectStatusTag: Locator;
   readonly project_details_hint_label: Locator;
   readonly project_details_heading: Locator;
   readonly project_short_title_label: Locator;
@@ -14,23 +15,7 @@ export default class ProjectOverviewPage {
   readonly modification_saved_success_message_header_text: Locator;
   readonly information_alert_banner: Locator;
   readonly project_overview_heading: Locator;
-  readonly project_details_title: Locator;
-  readonly project_documents_title: Locator;
-  readonly key_project_roles_title: Locator;
-  readonly research_locations_title: Locator;
-  readonly post_approval_title: Locator;
-  readonly project_history_title: Locator;
-  readonly project_details_irasid_row: Locator;
-  readonly project_details_irasid: Locator;
-  readonly project_details_short_project_title_row: Locator;
-  readonly project_details_short_project_title: Locator;
   readonly key_project_roles_heading: Locator;
-  readonly chief_investigator_row: Locator;
-  readonly chief_investigator: Locator;
-  readonly primary_sponsor_organisation_row: Locator;
-  readonly primary_sponsor_organisation: Locator;
-  readonly sponsor_contact_row: Locator;
-  readonly sponsor_contact: Locator;
   readonly research_locations_heading: Locator;
   readonly participating_nations_row: Locator;
   readonly nhs_hsc_organisations_row: Locator;
@@ -45,6 +30,17 @@ export default class ProjectOverviewPage {
   readonly category: Locator;
   readonly status: Locator;
 
+  readonly project_details_tab_iras_id_label: Locator;
+  readonly project_details_tab_iras_id: Locator;
+  readonly project_details_tab_short_project_title_label: Locator;
+  readonly project_details_tab_short_project_title: Locator;
+  readonly project_team_tab_chief_investigator_label: Locator;
+  readonly project_team_tab_chief_investigator: Locator;
+  readonly project_team_tab_primary_sponsor_org_label: Locator;
+  readonly project_team_tab_primary_sponsor_org: Locator;
+  readonly project_team_tab_sponsor_contact_label: Locator;
+  readonly project_team_tab_sponsor_contact: Locator;
+
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page;
@@ -55,6 +51,7 @@ export default class ProjectOverviewPage {
     this.pageHeading = this.page
       .getByRole('heading')
       .getByText(this.projectOverviewPageTestData.Project_Overview_Page.heading);
+    this.projectStatusTag = this.page.locator('.govuk-tag');
     this.project_details_hint_label = this.page
       .getByRole('heading')
       .getByText(this.projectOverviewPageTestData.Project_Overview_Page.project_details_hint_label);
@@ -70,58 +67,12 @@ export default class ProjectOverviewPage {
       .getByRole('heading')
       .getByText(this.projectOverviewPageTestData.Project_Overview_Page.modification_saved_success_message_text);
     this.project_overview_heading = this.page.locator('.govuk-inset-text');
-    this.project_details_title = this.page.getByRole('link', {
-      name: this.projectOverviewPageTestData.Label_Texts.project_details_title,
-      exact: true,
-    });
-    this.project_documents_title = this.page.getByRole('link', {
-      name: this.projectOverviewPageTestData.Label_Texts.project_documents_title,
-      exact: true,
-    });
-    this.key_project_roles_title = this.page.getByRole('link', {
-      name: this.projectOverviewPageTestData.Label_Texts.key_project_roles_title,
-      exact: true,
-    });
-    this.research_locations_title = this.page.getByRole('link', {
-      name: this.projectOverviewPageTestData.Label_Texts.research_locations_title,
-      exact: true,
-    });
-    this.post_approval_title = this.page.getByRole('link', {
-      name: this.projectOverviewPageTestData.Label_Texts.post_approval_title,
-      exact: true,
-    });
-    this.project_history_title = this.page.getByRole('link', {
-      name: this.projectOverviewPageTestData.Label_Texts.project_history_title,
-      exact: true,
-    });
-    this.project_details_irasid_row = this.page.getByText(
-      projectOverviewPageTestData.Project_Overview_Page.project_details_irasid
-    );
-    this.project_details_irasid = this.project_details_irasid_row.locator('..').locator('.govuk-summary-list__value');
-    this.project_details_short_project_title_row = this.page.getByText(
-      projectOverviewPageTestData.Project_Overview_Page.project_details_short_project_title
-    );
-    this.project_details_short_project_title = this.project_details_short_project_title_row
-      .locator('..')
-      .locator('.govuk-summary-list__value');
     this.key_project_roles_heading = this.page
       .getByRole('heading')
       .getByText(this.projectOverviewPageTestData.Project_Overview_Page.key_project_roles_heading);
     this.research_locations_heading = this.page
       .getByRole('heading')
       .getByText(this.projectOverviewPageTestData.Project_Overview_Page.research_locations_heading);
-    this.chief_investigator_row = this.page.getByText(
-      projectOverviewPageTestData.Project_Overview_Page.chief_investigator
-    );
-    this.chief_investigator = this.chief_investigator_row.locator('..').locator('.govuk-summary-list__value');
-    this.primary_sponsor_organisation_row = this.page.getByText(
-      projectOverviewPageTestData.Project_Overview_Page.primary_sponsor_organisation
-    );
-    this.primary_sponsor_organisation = this.primary_sponsor_organisation_row
-      .locator('..')
-      .locator('.govuk-summary-list__value');
-    this.sponsor_contact_row = this.page.getByText(projectOverviewPageTestData.Project_Overview_Page.sponsor_contact);
-    this.sponsor_contact = this.sponsor_contact_row.locator('..').locator('.govuk-summary-list__value');
     this.participating_nations_row = this.page.getByText(
       projectOverviewPageTestData.Project_Overview_Page.participating_nations
     );
@@ -153,6 +104,38 @@ export default class ProjectOverviewPage {
       name: this.projectOverviewPageTestData.Label_Texts_Post_Approval.status,
       exact: true,
     });
+
+    //tab locators
+    this.project_details_tab_iras_id_label = this.page
+      .locator('.govuk-summary-list__key')
+      .getByText(this.projectOverviewPageTestData.Project_Details_Tab.iras_id_label, { exact: true });
+    this.project_details_tab_iras_id = this.project_details_tab_iras_id_label
+      .locator('..')
+      .locator('.govuk-summary-list__value');
+    this.project_details_tab_short_project_title_label = this.page
+      .locator('.govuk-summary-list__key')
+      .getByText(this.projectOverviewPageTestData.Project_Details_Tab.short_project_title_label, { exact: true });
+    this.project_details_tab_short_project_title = this.project_details_tab_short_project_title_label
+      .locator('..')
+      .locator('.govuk-summary-list__value');
+    this.project_team_tab_chief_investigator_label = this.page
+      .locator('.govuk-summary-list__key')
+      .getByText(this.projectOverviewPageTestData.Project_Team_Tab.chief_investigator_label, { exact: true });
+    this.project_team_tab_chief_investigator = this.project_team_tab_chief_investigator_label
+      .locator('..')
+      .locator('.govuk-summary-list__value');
+    this.project_team_tab_primary_sponsor_org_label = this.page
+      .locator('.govuk-summary-list__key')
+      .getByText(this.projectOverviewPageTestData.Project_Team_Tab.primary_sponsor_org_label, { exact: true });
+    this.project_team_tab_primary_sponsor_org = this.project_team_tab_primary_sponsor_org_label
+      .locator('..')
+      .locator('.govuk-summary-list__value');
+    this.project_team_tab_sponsor_contact_label = this.page
+      .locator('.govuk-summary-list__key')
+      .getByText(this.projectOverviewPageTestData.Project_Team_Tab.sponsor_contact_label, { exact: true });
+    this.project_team_tab_sponsor_contact = this.project_team_tab_sponsor_contact_label
+      .locator('..')
+      .locator('.govuk-summary-list__value');
   }
 
   //Page Methods

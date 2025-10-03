@@ -17,11 +17,22 @@ Then(
 );
 
 Then(
-  'I can see the project details on project overview page for {string}',
-  async ({ projectDetailsIRASPage, projectDetailsTitlePage, projectOverviewPage }, datasetName: string) => {
-    const dataset = projectDetailsTitlePage.projectDetailsTitlePageTestData[datasetName];
+  'I can see the {string} project details on project overview page for {string}',
+  async (
+    { projectDetailsIRASPage, projectDetailsTitlePage, projectOverviewPage },
+    projectType: string,
+    datasetName: string
+  ) => {
+    let dataset: any;
+    let expectedIrasId: string;
+    if (projectType.toLowerCase() == 'existing') {
+      dataset = projectOverviewPage.projectOverviewPageTestData[datasetName].Project_Details;
+      expectedIrasId = dataset.iras_id;
+    } else {
+      dataset = projectDetailsTitlePage.projectDetailsTitlePageTestData[datasetName];
+      expectedIrasId = await projectDetailsIRASPage.getUniqueIrasId();
+    }
     const expectedProjectTitle = dataset.short_project_title_text;
-    const expectedIrasId = await projectDetailsIRASPage.getUniqueIrasId();
     const projectTitle = confirmStringNotNull(await projectOverviewPage.project_overview_heading.textContent());
     const projectDetails = projectTitle.split('\n');
     const irasId = projectDetails[0].split(' ');
@@ -105,34 +116,54 @@ Then(
 );
 
 Then(
-  'I validate the data displayed {string} in the project details tab of project overview page',
-  async ({ projectDetailsIRASPage, projectDetailsTitlePage, projectOverviewPage }, datasetName: string) => {
+  'I validate the {string} data for {string} is displayed in the project details tab of project overview page',
+  async (
+    { projectDetailsIRASPage, projectDetailsTitlePage, projectOverviewPage },
+    projectType: string,
+    datasetName: string
+  ) => {
+    let dataset: any;
+    let expectedIrasId: string;
     await expect(projectOverviewPage.project_details_heading).toBeVisible();
-    const dataset = projectDetailsTitlePage.projectDetailsTitlePageTestData[datasetName];
+    if (projectType.toLowerCase() == 'existing') {
+      dataset = projectOverviewPage.projectOverviewPageTestData[datasetName].Project_Details;
+      expectedIrasId = dataset.iras_id;
+    } else {
+      dataset = projectDetailsTitlePage.projectDetailsTitlePageTestData[datasetName];
+      expectedIrasId = await projectDetailsIRASPage.getUniqueIrasId();
+    }
     const expectedProjectTitle = dataset.short_project_title_text;
-    const expectedIrasId = await projectDetailsIRASPage.getUniqueIrasId();
     const actualProjectTitle = confirmStringNotNull(
-      await projectOverviewPage.project_details_short_project_title.textContent()
+      await projectOverviewPage.project_details_tab_short_project_title.textContent()
     );
-    const actualIrasId = confirmStringNotNull(await projectOverviewPage.project_details_irasid.textContent());
+    const actualIrasId = confirmStringNotNull(await projectOverviewPage.project_details_tab_iras_id.textContent());
     expect(actualProjectTitle).toBe(expectedProjectTitle);
     expect(actualIrasId).toBe(expectedIrasId);
   }
 );
 
 Then(
-  'I can see the {string} in the key project roles tab of project overview page',
-  async ({ projectOverviewPage, keyProjectRolesPage }, datasetName: string) => {
+  'I validate the {string} data for {string} is displayed in the project team tab of project overview page',
+  async ({ projectOverviewPage, keyProjectRolesPage }, projectType: string, datasetName: string) => {
+    let dataset: any;
     await expect(projectOverviewPage.key_project_roles_heading).toBeVisible();
-    const dataset = keyProjectRolesPage.keyProjectRolesPageTestData[datasetName];
+    if (projectType.toLowerCase() == 'existing') {
+      dataset = projectOverviewPage.projectOverviewPageTestData[datasetName].Project_Team;
+    } else {
+      dataset = keyProjectRolesPage.keyProjectRolesPageTestData[datasetName];
+    }
     const expectedChiefInvestigator = dataset.chief_investigator_email_text;
     const expectedPrimarySponsorOrganisation = dataset.primary_sponsor_organisation_text;
     const expectedSponsorContact = dataset.sponsor_contact_email_text;
-    const actualChiefInvestigator = confirmStringNotNull(await projectOverviewPage.chief_investigator.textContent());
-    const actualPrimarySponsorOrganisation = confirmStringNotNull(
-      await projectOverviewPage.primary_sponsor_organisation.textContent()
+    const actualChiefInvestigator = confirmStringNotNull(
+      await projectOverviewPage.project_team_tab_chief_investigator.textContent()
     );
-    const actualSponsorContact = confirmStringNotNull(await projectOverviewPage.sponsor_contact.textContent());
+    const actualPrimarySponsorOrganisation = confirmStringNotNull(
+      await projectOverviewPage.project_team_tab_primary_sponsor_org.textContent()
+    );
+    const actualSponsorContact = confirmStringNotNull(
+      await projectOverviewPage.project_team_tab_sponsor_contact.textContent()
+    );
     expect(actualChiefInvestigator).toBe(expectedChiefInvestigator);
     expect(actualPrimarySponsorOrganisation).toBe(expectedPrimarySponsorOrganisation);
     expect(actualSponsorContact).toBe(expectedSponsorContact);
@@ -187,5 +218,15 @@ Then(
       sortedColumnList = [...actualColumnList].sort((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
     }
     expect(actualColumnList).toEqual(sortedColumnList);
+  }
+);
+
+Then(
+  'I can see the project status for {string} displayed on the project overview page',
+  async ({ projectOverviewPage }, projectName: string) => {
+    await expect(projectOverviewPage.projectStatusTag).toBeVisible();
+    expect(await projectOverviewPage.projectStatusTag.textContent()).toBe(
+      projectOverviewPage.projectOverviewPageTestData[projectName].status
+    );
   }
 );
