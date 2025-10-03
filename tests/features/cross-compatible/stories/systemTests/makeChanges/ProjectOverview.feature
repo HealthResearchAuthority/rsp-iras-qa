@@ -52,8 +52,8 @@ Feature: Project Overview
             | Label_Texts              | Valid_Data_All_Fields | Data_With_No_NHS_HSC     | Label_Texts             | Valid_Data_All_Fields     | Valid_Research_Locations_Details_Non_Nhs |
 
     @rsp-4876 @PostApprovalPage
-    #The project and modifications were created manually and validations are for the specific project
-    Scenario Outline: Validate the user is able to access the view the post approval details from the project overview page
+    #The project 5789415 and modifications were created manually and validations are for the specific project
+    Scenario: Validate the user is able to access the view the post approval details from the project overview page
         When I navigate to the project overview page of a specific project
         And I capture the page screenshot
         When I click the 'Post_Approval' link on the 'Project_Overview_Page'
@@ -62,8 +62,8 @@ Feature: Project Overview
         And I can see the status of modifications displayed is 'Modification_Status_Draft'
 
     @rsp-4876 @PostApprovalPageSort
-    #The project and modifications were created manually and validations are for the specific project
-    Scenario Outline: Validate the user is able to access the view the post approval details from the project overview page
+    #The project 5789415 and modifications were created manually and validations are for the specific project
+    Scenario Outline: Validate the user is able to sort the post approval fields
         When I navigate to the project overview page of a specific project
         And I capture the page screenshot
         When I click the 'Post_Approval' link on the 'Project_Overview_Page'
@@ -82,8 +82,8 @@ Feature: Project Overview
             | Modification_Type | modification type |
 
     @rsp-4876 @PostApprovalPaginationFirstPage
-    #The project and modifications were created manually and validations are for the specific project
-    Scenario: Verify pagination in post approval page when user is on the first page
+    #The project 5789415 and modifications were created manually and validations are for the specific project
+    Scenario Outline: Verify pagination in post approval page when user is on the first page
         When I navigate to the project overview page of a specific project
         And I capture the page screenshot
         When I click the 'Post_Approval' link on the 'Project_Overview_Page'
@@ -102,8 +102,8 @@ Feature: Project Overview
             | next link         |
 
     @rsp-4876 @PostApprovalPaginationLastPage
-    #The project and modifications were created manually and validations are for the specific project
-    Scenario: Verify pagination in post approval page when user is on the last page
+    #The project 5789415 and modifications were created manually and validations are for the specific project
+    Scenario Outline: Verify pagination in post approval page when user is on the last page
         When I navigate to the project overview page of a specific project
         And I capture the page screenshot
         When I click the 'Post_Approval' link on the 'Project_Overview_Page'
@@ -121,3 +121,55 @@ Feature: Project Overview
             | page number       |
             | previous link     |
 
+    @rsp-4545 @ProjectDocumentsPage
+    #Documents were uploaded manually to the project id 5789415 and validations are for the specific project
+    Scenario: Validate the user is able to access and view the project documents details from the project overview page
+        When I navigate to the project overview page of a specific project
+        And I capture the page screenshot
+        When I click the 'Project_Documents' link on the 'Project_Overview_Page'
+        And I capture the page screenshot
+        And I validate the ui labels using 'Label_Texts_Project_Documents' on the project documents page
+        And the default page size should be 'twenty'
+        And I can see the list is sorted by default in the alphabetical order of the 'document type'
+
+    @rsp-4545 @ProjectDocumentsPaginationFirstPage
+    #Documents were uploaded manually to the project id 5789415 and validations are for the specific project
+    Scenario Outline: Verify pagination in project documents page when user is on the first page
+        When I navigate to the project overview page of a specific project
+        And I capture the page screenshot
+        When I click the 'Project_Documents' link on the 'Project_Overview_Page'
+        And I capture the page screenshot
+        And I can now see a table of search results for project documents page
+        And I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
+        And I capture the page screenshot
+        And the 'Next' button will be 'available' to the user
+        And the 'Previous' button will be 'not available' to the user
+        And I capture the page screenshot
+        Then I sequentially navigate through each 'Project_Documents_Page' by clicking on '<Navigation_Method>' from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+        And I capture the page screenshot
+
+        Examples:
+            | Navigation_Method |
+            | page number       |
+            | next link         |
+
+    @rsp-4545 @ProjectDocumentsPaginationLastPage
+    #Documents were uploaded manually to the project id 5789415 and validations are for the specific project
+    Scenario Outline: Verify pagination in project documents page when user is on the last page
+        When I navigate to the project overview page of a specific project
+        And I capture the page screenshot
+        When I click the 'Project_Documents' link on the 'Project_Overview_Page'
+        And I capture the page screenshot
+        And I can now see a table of search results for project documents page
+        And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
+        And I capture the page screenshot
+        And the 'Previous' button will be 'available' to the user
+        And the 'Next' button will be 'not available' to the user
+        And I capture the page screenshot
+        Then I sequentially navigate through each 'Project_Documents_Page' by clicking on '<Navigation_Method>' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+        And I capture the page screenshot
+
+        Examples:
+            | Navigation_Method |
+            | page number       |
+            | previous link     |
