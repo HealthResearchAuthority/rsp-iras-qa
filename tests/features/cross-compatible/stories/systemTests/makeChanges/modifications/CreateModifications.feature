@@ -309,25 +309,18 @@ Feature: Create Amendment - Create Modifications
     And I modify the current changes with '<New_Changes>' for the created modification
     And I capture the page screenshot
     # And I keep note of the individual and overall ranking of changes created using '<New_Changes>'
-    # And I can see the modifications details page
-    And I capture the page screenshot
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
-    # And I validate the overall ranking of changes displayed for '<New_Changes>'
-    # And I validate the individual ranking of changes displayed for '<New_Changes>'
-    # And I validate the field values are displayed as per the '<New_Changes>' dataset
-    When I click the 'Save_Continue_Review' button on the 'Modifications_Details_Page'
-    And I capture the page screenshot
-    Then I can see the add sponsor reference page
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
-    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
-    And I capture the page screenshot
     Then I can see the review all changes page
     And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
     # And I validate the overall ranking of changes displayed for '<New_Changes>'
     # And I validate the individual ranking of changes displayed for '<New_Changes>'
     And I validate the change details are displayed as per the '<New_Changes>' dataset
     Then I validate sponsor details are displayed with 'Valid_Data_All_Fields'
+    And I modify the current sponsor details with 'Valid_Data_All_Fields_Changes' for the created modification
+    And I capture the page screenshot
+    # And I keep note of the individual and overall ranking of changes created using '<New_Changes>'
+    Then I can see the review all changes page
+    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    Then I validate sponsor details are displayed with 'Valid_Data_All_Fields_Changes'
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
     And I capture the page screenshot
     Then I validate 'Modification_Sent_To_Sponsor_Labels' labels displayed in the success confirmation page when the modification has been sent to sponsor
@@ -354,7 +347,6 @@ Feature: Create Amendment - Create Modifications
       | Multiple_Changes_Planned_End_Date | Multiple_Changes_Planned_End_Date_Change |
 
   # Multiple_Changes_Planned_End_Date + project documents+particpant organsiation
-
   # back link navigation from Review_All_Changes_Page and confimation page for modification sent to sponsor page
 
   @rsp-4364 @ValidateSponsorReferenceModifications

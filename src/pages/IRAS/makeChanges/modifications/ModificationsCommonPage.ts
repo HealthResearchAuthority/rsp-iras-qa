@@ -103,9 +103,9 @@ export default class ModificationsCommonPage {
 
   async createChangeModification(changeName: string, dataset: any) {
     if (changeName.toLowerCase().includes('planned_end_date')) {
-      await new PlannedEndDateChangePage(this.page).fillPlannedProjectEndDateModificationsPage(dataset);
-      await new AffectedOrganisationSelectionPage(this.page).fillAffectedOrganisation(dataset);
-      await new AffectedOrganisationQuestionsPage(this.page).fillAffectedOrganisationQuestions(dataset);
+      await new PlannedEndDateChangePage(this.page).fillPlannedProjectEndDateModificationsPage(dataset, 'create');
+      await new AffectedOrganisationSelectionPage(this.page).fillAffectedOrganisation(dataset, 'create');
+      await new AffectedOrganisationQuestionsPage(this.page).fillAffectedOrganisationQuestions(dataset, 'create');
       await new CommonItemsPage(this.page).clickButton('Modifications_Page', 'Save_Continue');
       return;
     }

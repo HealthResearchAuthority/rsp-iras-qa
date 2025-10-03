@@ -38,19 +38,6 @@ Then(
   }
 );
 
-// Then(
-//   'I create {string} for the created modification',
-//   async ({ commonItemsPage, modificationsCommonPage, selectAreaOfChangePage }, datasetName) => {
-//     const changesDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName];
-//     for (const changeName of Object.keys(changesDataset)) {
-//       const changeDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName][changeName];
-//       await selectAreaOfChangePage.selectAreaOfChangeInModificationsPage(changeDataset);
-//       await modificationsCommonPage.createChangeModification(changeName, changeDataset);
-//       await commonItemsPage.clickButton('Modifications_Details_Page', 'Add_Another_Change');
-//     }
-//   }
-// );
-
 Then(
   'I create {string} for the created modification',
   async ({ commonItemsPage, modificationsCommonPage, selectAreaOfChangePage }, datasetName) => {
@@ -88,53 +75,77 @@ Then(
 Then(
   'I modify the current changes with {string} for the created modification',
   async (
-    { commonItemsPage, modificationsCommonPage, selectAreaOfChangePage, reviewChangesPlannedEndDatePage },
+    {
+      commonItemsPage,
+      modificationsCommonPage,
+      reviewChangesPlannedEndDatePage,
+      plannedEndDateChangePage,
+      affectedOrganisationSelectionPage,
+      affectedOrganisationQuestionsPage,
+    },
     datasetName
   ) => {
     const changesDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName];
-    const changeNames = Object.keys(changesDataset).reverse(); // Reverse the order of keys
+    const changeNames = Object.keys(changesDataset).reverse(); // Reversed the order of keys
     for (let i = 0; i < changeNames.length; i++) {
       const changeName = changeNames[i];
       const changeDataset = changesDataset[changeName];
-      // Click Change link agaist every changeName
-      await commonItemsPage.govUkLink.getByText('Change').nth(i).click();
       const specificChange = await commonItemsPage.govUkLink
         .getByText('Change')
         .nth(i)
+        .locator('..')
+        .locator('..')
+        .locator('..')
         .locator('..')
         .locator('.govuk-summary-list__row')
         .nth(0)
         .locator('.govuk-summary-list__key')
         .innerText();
+      // Click Change link agaist every changeName
+      await commonItemsPage.govUkLink.getByText('Change').nth(i).click();
       // Ensure page is loaded
       await commonItemsPage.page.waitForLoadState('domcontentloaded');
-      //validate the review changes page for the changeName
+      //validate the review changes page for the specific change
       await reviewChangesPlannedEndDatePage.assertOnReviewChangesSpecificChangePage(specificChange);
-
-      // Then I validate all field values on review modifications page using '<Planned_End_Date>' , '<Organisation_Change_Affect>' and '<Affected_Org_Questions>'
-
       // When I click the change link '<Change_Field>' on review changes planned end date page
       if (specificChange === 'Change to planned end date') {
-        await reviewChangesPlannedEndDatePage.clickChangeLinks('New_Planned_End_Date');
+        if (await reviewChangesPlannedEndDatePage.new_planned_project_end_date_change_link.isVisible()) {
+          await reviewChangesPlannedEndDatePage.clickChangeLinks('New_Planned_End_Date');
+          await plannedEndDateChangePage.fillPlannedProjectEndDateModificationsPage(changeDataset, 'edit');
+        }
+        if (await reviewChangesPlannedEndDatePage.affected_organisation_types_change_link.isVisible()) {
+          await reviewChangesPlannedEndDatePage.clickChangeLinks('affected_organisation_types');
+          await commonItemsPage.clearCheckboxes(
+            'which_organisation_change_affect_checkbox',
+            affectedOrganisationSelectionPage
+          );
+          await affectedOrganisationSelectionPage.fillAffectedOrganisation(changeDataset, 'edit');
+          await commonItemsPage.clearCheckboxes(
+            'where_organisation_change_affect_nhs_question_checkbox',
+            affectedOrganisationQuestionsPage
+          );
+          await commonItemsPage.clearCheckboxes(
+            'where_organisation_change_affect_non_nhs_question_checkbox',
+            affectedOrganisationQuestionsPage
+          );
+          await affectedOrganisationQuestionsPage.fillAffectedOrganisationQuestions(changeDataset, 'edit');
+        }
       }
-      // const changeDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName][changeName];
-      await selectAreaOfChangePage.selectAreaOfChangeInModificationsPage(changeDataset);
-      await modificationsCommonPage.createChangeModification(changeName, changeDataset);
-      // Only click "Add Another Change" if it's not the last iteration
-      if (i < changeNames.length - 1) {
-        await commonItemsPage.clickButton('Modifications_Details_Page', 'Add_Another_Change');
-      }
+      await commonItemsPage.clickButton('Review_Changes_Planned_End_Date_Page', 'Save_Continue');
+      await commonItemsPage.clickButton('Modifications_Details_Page', 'Save_Continue_Review');
+      await commonItemsPage.clickButton('Sponsor_Reference_Page', 'Save_Continue_Review');
     }
-    // for (const changeName of Object.keys(changesDataset)) {
-    //   // Click Change link agaist every changeName
-    //   //validate the review changes page for the changeName
-    //   const changeDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName][changeName];
-    //   await selectAreaOfChangePage.selectAreaOfChangeInModificationsPage(changeDataset);
-    //   await modificationsCommonPage.createChangeModification(changeName, changeDataset);
-    //   await commonItemsPage.clickButton('Modifications_Details_Page', 'Add_Another_Change');
-    // }
   }
 );
+
+// for (const changeName of Object.keys(changesDataset)) {
+//   // Click Change link agaist every changeName
+//   //validate the review changes page for the changeName
+//   const changeDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName][changeName];
+//   await selectAreaOfChangePage.selectAreaOfChangeInModificationsPage(changeDataset);
+//   await modificationsCommonPage.createChangeModification(changeName, changeDataset);
+//   await commonItemsPage.clickButton('Modifications_Details_Page', 'Add_Another_Change');
+// }
 
 //  And I can see the review changes planned end date page
 //     And I capture the page screenshot
@@ -144,11 +155,31 @@ Then(
 //     And I capture the page screenshot
 
 Then(
+  'I modify the current sponsor details with {string} for the created modification',
+  async ({ commonItemsPage, sponsorReferencePage, reviewAllChangesPage }, datasetName: string) => {
+    const dataset = sponsorReferencePage.sponsorReferencePageTestData[datasetName];
+    await reviewAllChangesPage.page
+      .getByRole('heading', {
+        name: 'Sponsor details',
+      })
+      .nth(1)
+      .locator('..')
+      .getByText('Change')
+      .click();
+    for (const key in dataset) {
+      if (Object.hasOwn(dataset, key)) {
+        await commonItemsPage.fillUIComponent(dataset, key, sponsorReferencePage);
+      }
+    }
+    await commonItemsPage.clickButton('Sponsor_Reference_Page', 'Save_Continue_Review');
+  }
+);
+
+Then(
   'I validate the change details are displayed as per the {string} dataset',
   async ({ modificationsCommonPage }, datasetName) => {
     const changesDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName];
     const changeNames = Object.keys(changesDataset).reverse(); // Reverse the order of keys
-
     for (let i = 0; i < changeNames.length; i++) {
       const changeName = changeNames[i];
       const expectedData = changesDataset[changeName]; // From JSON
@@ -157,17 +188,15 @@ Then(
         'Changes'
       );
 
-      console.log(`\n Comparing Change ${i + 1}: ${changeName}`);
-      console.log('Expected:', expectedData);
-      console.log('Actual:', actualData.cardData);
+      // console.log(`\n Comparing Change ${i + 1}: ${changeName}`);
+      // console.log('Expected:', expectedData);
+      // console.log('Actual:', actualData.cardData);
 
       // Compare keys and values in reverse order
       const keys = Object.keys(expectedData).reverse();
-
       for (const key of keys) {
         const expectedValue = expectedData[key];
         const actualValue = actualData.cardData[key];
-
         if (Array.isArray(expectedValue)) {
           const sortedExpected = [...expectedValue].sort();
           const sortedActual = [...(actualValue || [])].sort();
@@ -189,8 +218,8 @@ Then(
       'Sponsor details',
       'Sponsor details'
     );
-    console.log('Expected:', expectedData);
-    console.log('Actual:', actualData.cardData);
+    // console.log('Expected:', expectedData);
+    // console.log('Actual:', actualData.cardData);
 
     //  Compare keys and values
     for (const key of Object.keys(expectedData)) {
