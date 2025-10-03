@@ -413,6 +413,7 @@ Then(
       addDocumentsModificationsPage,
       modificationsReadyToAssignPage,
       myModificationsTasklistPage,
+      sponsorReferencePage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
@@ -483,6 +484,10 @@ Then(
           errorMessageFieldAndSummaryDatasetName
         ];
       page = myModificationsTasklistPage;
+    } else if (pageKey == 'Sponsor_Reference_Page') {
+      errorMessageFieldDataset =
+        sponsorReferencePage.sponsorReferencePageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = sponsorReferencePage;
     }
     let allSummaryErrorExpectedValues: any;
     let summaryErrorActualValues: any;
