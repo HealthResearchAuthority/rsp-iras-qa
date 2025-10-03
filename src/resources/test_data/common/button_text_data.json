@@ -47,7 +47,13 @@
     "Save_For_Later": "Save for later",
     "Save_Changes": "Save changes"
   },
-  "Key_Project_Roles_Page": {
+  "Chief_Investigator_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later",
+    "Save_Changes": "Save changes",
+    "Search": "Search"
+  },
+  "Project_Identifiers_Page": {
     "Save_Continue": "Save and continue",
     "Save_For_Later": "Save for later",
     "Save_Changes": "Save changes",
