@@ -22,7 +22,8 @@ import CreateProjectRecordPage from '../pages/IRAS/makeChanges/CreateProjectReco
 import ProjectDetailsIRASPage from '../pages/IRAS/makeChanges/ProjectDetailsIRASPage';
 import ProjectDetailsTitlePage from '../pages/IRAS/makeChanges/ProjectDetailsTitlePage';
 import ReseachLocationsPage from '../pages/IRAS/makeChanges/ResearchLocationsPage';
-import KeyProjectRolesPage from '../pages/IRAS/makeChanges/KeyProjectRolesPage';
+import ChiefInvestigatorPage from '../pages/IRAS/makeChanges/ChiefInvestigatorPage';
+import ProjectIdentifiersPage from '../pages/IRAS/makeChanges/ProjectIdentifiersPage';
 import ReviewYourApplicationPage from '../pages/IRAS/makeChanges/ReviewYourApplicationPage';
 import ManageReviewBodiesPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/ManageReviewBodiesPage';
 import CreateReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/CreateReviewBodyPage';
@@ -90,7 +91,8 @@ type CustomFixtures = {
   projectDetailsIRASPage: ProjectDetailsIRASPage;
   projectDetailsTitlePage: ProjectDetailsTitlePage;
   reseachLocationsPage: ReseachLocationsPage;
-  keyProjectRolesPage: KeyProjectRolesPage;
+  chiefInvestigatorPage: ChiefInvestigatorPage;
+  projectIdentifiersPage: ProjectIdentifiersPage;
   reviewYourApplicationPage: ReviewYourApplicationPage;
   projectOverviewPage: ProjectOverviewPage;
   reviewYourAnswersPage: ReviewYourAnswersPage;
@@ -220,8 +222,12 @@ export const test = base.extend<CustomFixtures>({
     await use(new ReseachLocationsPage(page));
   },
 
-  keyProjectRolesPage: async ({ page }, use) => {
-    await use(new KeyProjectRolesPage(page));
+  chiefInvestigatorPage: async ({ page }, use) => {
+    await use(new ChiefInvestigatorPage(page));
+  },
+
+  projectIdentifiersPage: async ({ page }, use) => {
+    await use(new ProjectIdentifiersPage(page));
   },
 
   reviewYourApplicationPage: async ({ page }, use) => {

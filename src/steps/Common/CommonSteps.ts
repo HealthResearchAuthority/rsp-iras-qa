@@ -403,7 +403,7 @@ Then(
       editUserProfilePage,
       projectDetailsIRASPage,
       projectDetailsTitlePage,
-      keyProjectRolesPage,
+      chiefInvestigatorPage,
       createReviewBodyPage,
       editReviewBodyPage,
       reviewYourAnswersPage,
@@ -436,10 +436,10 @@ Then(
       errorMessageFieldDataset =
         projectDetailsTitlePage.projectDetailsTitlePageTestData[errorMessageFieldAndSummaryDatasetName];
       page = projectDetailsTitlePage;
-    } else if (pageKey == 'Key_Project_Roles_Page') {
+    } else if (pageKey == 'Chief_Investigator_Page') {
       errorMessageFieldDataset =
-        keyProjectRolesPage.keyProjectRolesPageTestData[errorMessageFieldAndSummaryDatasetName];
-      page = keyProjectRolesPage;
+        chiefInvestigatorPage.chiefInvestigatorPageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = chiefInvestigatorPage;
     } else if (pageKey == 'Create_Review_Body_Page') {
       errorMessageFieldDataset =
         createReviewBodyPage.createReviewBodyPageData.Create_Review_Body.Validation[
@@ -581,6 +581,7 @@ When(
       pageLocator = commonItemsPage.firstPage;
     } else {
       const totalPages = await commonItemsPage.getTotalPages();
+      commonItemsPage.setNumberofTotalPages(totalPages);
       pageLocator = await commonItemsPage.clickOnPages(totalPages, 'page number');
     }
     await expect(pageLocator).toHaveAttribute('aria-current', 'page');

@@ -16,9 +16,9 @@ Feature: Create Amendment - Create Project - Review your answers
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    And I fill the key project roles page with '<Key_Project_Roles>'
+    And I fill the chief investigator page with '<Key_Project_Roles>'
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    And I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
     And I fill the research locations page with '<Research_Locations>'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -41,9 +41,9 @@ Feature: Create Amendment - Create Project - Review your answers
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    And I fill the key project roles page with '<Key_Project_Roles>'
+    And I fill the chief investigator page with '<Key_Project_Roles>'
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    And I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
     And I fill the research locations page with '<Research_Locations>'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -76,9 +76,9 @@ Feature: Create Amendment - Create Project - Review your answers
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    And I fill the key project roles page with '<Key_Project_Roles>'
+    And I fill the chief investigator page with '<Key_Project_Roles>'
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    And I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
     And I fill the research locations page with '<Research_Locations>'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -86,10 +86,10 @@ Feature: Create Amendment - Create Project - Review your answers
     And I capture the page screenshot
     Then I can validate the field values of '<Project_Details_Title>' page '<Key_Project_Roles>' page and '<Research_Locations>' page
     And I click the change link '<Change_Link_Field>' on review your answers page
-    Then I can see the key project roles page
-    And I fill the key project roles page with '<Key_Project_Roles_Change>'
+    Then I can see the chief investigator page
+    And I fill the chief investigator page with '<Key_Project_Roles_Change>'
     And I capture the page screenshot
-    When I click the 'Save_Changes' button on the 'Key_Project_Roles_Page'
+    When I click the 'Save_Changes' button on the 'Chief_Investigator_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
     Then I can validate the field values of '<Project_Details_Title>' page '<Key_Project_Roles_Change>' page and '<Research_Locations>' page
@@ -111,9 +111,9 @@ Feature: Create Amendment - Create Project - Review your answers
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    And I fill the key project roles page with '<Key_Project_Roles>'
+    And I fill the chief investigator page with '<Key_Project_Roles>'
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    And I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
     And I fill the research locations page with '<Research_Locations>'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -147,9 +147,9 @@ Feature: Create Amendment - Create Project - Review your answers
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    And I fill the key project roles page with '<Key_Project_Roles>'
+    And I fill the chief investigator page with '<Key_Project_Roles>'
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    And I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
     And I fill the research locations page with '<Research_Locations>'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -182,9 +182,9 @@ Feature: Create Amendment - Create Project - Review your answers
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    And I fill the key project roles page with '<Key_Project_Roles>'
+    And I fill the chief investigator page with '<Key_Project_Roles>'
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    And I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
     And I fill the research locations page with '<Research_Locations>'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -192,10 +192,10 @@ Feature: Create Amendment - Create Project - Review your answers
     And I capture the page screenshot
     Then I can see enter link for all the incomplete fields '<Review_Answers>'
     And I click the enter link '<Enter_Link_Field>' on review your answers page
-    Then I can see the key project roles page
-    And I fill the key project roles page with '<Key_Project_Roles_Enter>'
+    Then I can see the chief investigator page
+    And I fill the chief investigator page with '<Key_Project_Roles_Enter>'
     And I capture the page screenshot
-    When I click the 'Save_Changes' button on the 'Key_Project_Roles_Page'
+    When I click the 'Save_Changes' button on the 'Chief_Investigator_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
     Then I can validate the field values of '<Project_Details_Title>' page '<Key_Project_Roles_Enter>' page and '<Research_Locations>' page
@@ -217,9 +217,9 @@ Feature: Create Amendment - Create Project - Review your answers
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    And I fill the key project roles page with '<Key_Project_Roles>'
+    And I fill the chief investigator page with '<Key_Project_Roles>'
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    And I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
     And I fill the research locations page with '<Research_Locations>'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -253,9 +253,9 @@ Feature: Create Amendment - Create Project - Review your answers
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    And I fill the key project roles page with '<Key_Project_Roles>'
+    And I fill the chief investigator page with '<Key_Project_Roles>'
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    And I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
     And I fill the research locations page with '<Research_Locations>'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -279,7 +279,7 @@ Feature: Create Amendment - Create Project - Review your answers
       | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_Title     |
 
   @rsp-2837 @reviewAnswersNavigationKeyRoles
-  Scenario Outline: Verify back navigation on key project roles page from review your answers page
+  Scenario Outline: Verify back navigation on chief investigator page from review your answers page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
     Then I can see the project details iras page
@@ -289,18 +289,18 @@ Feature: Create Amendment - Create Project - Review your answers
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    And I fill the key project roles page with '<Key_Project_Roles>'
+    And I fill the chief investigator page with '<Key_Project_Roles>'
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    And I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
     And I fill the research locations page with '<Research_Locations>'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Research_Locations_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
     And I click the change link '<Change_Link_Field>' on review your answers page
-    Then I can see the key project roles page
+    Then I can see the chief investigator page
     And I capture the page screenshot
-    When I click the 'Back' link on the 'Key_Project_Roles_Page'
+    When I click the 'Back' link on the 'Chief_Investigator_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
 
@@ -319,9 +319,9 @@ Feature: Create Amendment - Create Project - Review your answers
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    And I fill the key project roles page with '<Key_Project_Roles>'
+    And I fill the chief investigator page with '<Key_Project_Roles>'
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    And I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
     And I fill the research locations page with '<Research_Locations>'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -362,9 +362,9 @@ Feature: Create Amendment - Create Project - Review your answers
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    And I fill the key project roles page with '<Key_Project_Roles>'
+    And I fill the chief investigator page with '<Key_Project_Roles>'
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    And I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
     And I fill the research locations page with '<Research_Locations>'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -372,12 +372,12 @@ Feature: Create Amendment - Create Project - Review your answers
     And I capture the page screenshot
     Then I can see enter link for all the incomplete fields '<Review_Answers>'
     And I click the enter link '<Enter_Link_Field>' on review your answers page
-    Then I can see the key project roles page
-    And I fill the key project roles page with '<Key_Project_Roles_Enter>'
+    Then I can see the chief investigator page
+    And I fill the chief investigator page with '<Key_Project_Roles_Enter>'
     And I capture the page screenshot
-    When I click the 'Save_Changes' button on the 'Key_Project_Roles_Page'
+    When I click the 'Save_Changes' button on the 'Chief_Investigator_Page'
     And I capture the page screenshot
-    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Key_Project_Roles_Page'
+    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Chief_Investigator_Page'
 
     Examples:
       | Project_Details_Title        | Key_Project_Roles           | Research_Locations          | Enter_Link_Field   | Review_Answers             | Key_Project_Roles_Enter                | Field_And_Summary_Error_Message |
@@ -418,9 +418,9 @@ Feature: Create Amendment - Create Project - Review your answers
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    And I fill the key project roles page with '<Key_Project_Roles>'
+    And I fill the chief investigator page with '<Key_Project_Roles>'
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    And I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
     And I fill the research locations page with '<Research_Locations>'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -428,12 +428,12 @@ Feature: Create Amendment - Create Project - Review your answers
     And I capture the page screenshot
     Then I can see enter link for all the incomplete fields '<Review_Answers>'
     And I click the enter link '<Enter_Link_Field>' on review your answers page
-    Then I can see the key project roles page
-    And I fill the key project roles page with '<Key_Project_Roles_Enter>'
+    Then I can see the chief investigator page
+    And I fill the chief investigator page with '<Key_Project_Roles_Enter>'
     And I capture the page screenshot
-    When I click the 'Save_Changes' button on the 'Key_Project_Roles_Page'
+    When I click the 'Save_Changes' button on the 'Chief_Investigator_Page'
     And I capture the page screenshot
-    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Key_Project_Roles_Page'
+    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Chief_Investigator_Page'
 
     Examples:
       | Project_Details_Title        | Key_Project_Roles           | Research_Locations          | Enter_Link_Field | Review_Answers             | Key_Project_Roles_Enter                | Field_And_Summary_Error_Message |
@@ -474,9 +474,9 @@ Feature: Create Amendment - Create Project - Review your answers
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    And I fill the key project roles page with '<Key_Project_Roles>'
+    And I fill the chief investigator page with '<Key_Project_Roles>'
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    And I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
     And I fill the research locations page with '<Research_Locations>'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -516,21 +516,21 @@ Feature: Create Amendment - Create Project - Review your answers
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    And I fill the key project roles page with '<Key_Project_Roles>'
+    And I fill the chief investigator page with '<Key_Project_Roles>'
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    And I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
     And I fill the research locations page with '<Research_Locations>'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Research_Locations_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
     And I click the change link '<Change_Link_Field>' on review your answers page
-    Then I can see the key project roles page
-    And I fill the key project roles page with '<Key_Project_Roles_Enter>'
+    Then I can see the chief investigator page
+    And I fill the chief investigator page with '<Key_Project_Roles_Enter>'
     And I capture the page screenshot
-    When I click the 'Save_Changes' button on the 'Key_Project_Roles_Page'
+    When I click the 'Save_Changes' button on the 'Chief_Investigator_Page'
     And I capture the page screenshot
-    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Key_Project_Roles_Page'
+    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Chief_Investigator_Page'
 
     Examples:
       | Project_Details_Title | Key_Project_Roles     | Research_Locations    | Change_Link_Field  | Key_Project_Roles_Enter                | Field_And_Summary_Error_Message |
@@ -571,21 +571,21 @@ Feature: Create Amendment - Create Project - Review your answers
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    And I fill the key project roles page with '<Key_Project_Roles>'
+    And I fill the chief investigator page with '<Key_Project_Roles>'
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    And I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
     And I fill the research locations page with '<Research_Locations>'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Research_Locations_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
     And I click the change link '<Change_Link_Field>' on review your answers page
-    Then I can see the key project roles page
-    And I fill the key project roles page with '<Key_Project_Roles_Enter>'
+    Then I can see the chief investigator page
+    And I fill the chief investigator page with '<Key_Project_Roles_Enter>'
     And I capture the page screenshot
-    When I click the 'Save_Changes' button on the 'Key_Project_Roles_Page'
+    When I click the 'Save_Changes' button on the 'Chief_Investigator_Page'
     And I capture the page screenshot
-    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Key_Project_Roles_Page'
+    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Chief_Investigator_Page'
 
     Examples:
       | Project_Details_Title | Key_Project_Roles     | Research_Locations    | Change_Link_Field | Key_Project_Roles_Enter                | Field_And_Summary_Error_Message |
@@ -625,9 +625,9 @@ Feature: Create Amendment - Create Project - Review your answers
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
-    And I fill the key project roles page with '<Key_Project_Roles>'
+    And I fill the chief investigator page with '<Key_Project_Roles>'
     And I capture the page screenshot
-    And I click the '<Navigation_Button_Third>' button on the 'Key_Project_Roles_Page'
+    And I click the '<Navigation_Button_Third>' button on the 'Chief_Investigator_Page'
     And I fill the research locations page with '<Research_Locations>'
     And I capture the page screenshot
     When I click the '<Navigation_Button_Third>' button on the 'Research_Locations_Page'
@@ -653,9 +653,9 @@ Feature: Create Amendment - Create Project - Review your answers
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
-    And I fill the key project roles page with '<Key_Project_Roles>'
+    And I fill the chief investigator page with '<Key_Project_Roles>'
     And I capture the page screenshot
-    And I click the '<Navigation_Button_Third>' button on the 'Key_Project_Roles_Page'
+    And I click the '<Navigation_Button_Third>' button on the 'Chief_Investigator_Page'
     And I fill the research locations page with '<Research_Locations>'
     And I capture the page screenshot
     When I click the '<Navigation_Button_Third>' button on the 'Research_Locations_Page'
@@ -677,7 +677,7 @@ Feature: Create Amendment - Create Project - Review your answers
       | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields              | Valid_Data_Only_is_nhs_hsc_organisation     | Field_Error_Message_Except_NHS_HSC_Org_As_Yes      |
       | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_All_Empty_Fields | Valid_Data_All_Empty_Fields              | Valid_Data_is_nhs_hsc_organisation          | Field_Error_Message_Except_NHS_HSC_Org_Lead_Nation |
 
-  @rsp-1867 @rsp-3819 @rsp-4880 @ValidateConfirmProjectPage 
+  @rsp-1867 @rsp-3819 @rsp-4880 @ValidateConfirmProjectPage
   Scenario Outline: Validate user is able to see the project success confirmation screen and then the project overview page when user submit the review answer page with all mandatory fields entered correctly
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
@@ -687,9 +687,9 @@ Feature: Create Amendment - Create Project - Review your answers
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
-    And I fill the key project roles page with '<Key_Project_Roles>'
+    And I fill the chief investigator page with '<Key_Project_Roles>'
     And I capture the page screenshot
-    And I click the '<Navigation_Button_Third>' button on the 'Key_Project_Roles_Page'
+    And I click the '<Navigation_Button_Third>' button on the 'Chief_Investigator_Page'
     And I fill the research locations page with '<Research_Locations>'
     And I capture the page screenshot
     When I click the '<Navigation_Button_Third>' button on the 'Research_Locations_Page'
@@ -702,7 +702,7 @@ Feature: Create Amendment - Create Project - Review your answers
     Then I can see the project overview page
     And I capture the page screenshot
     And I can see the project details on project overview page for '<Project_Details_Title>'
-   
+
     Examples:
       | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Third | Navigation_Button_Fourth | Project_Details_Title | Key_Project_Roles     | Research_Locations    |
       | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields |

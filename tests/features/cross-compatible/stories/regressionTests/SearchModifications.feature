@@ -39,6 +39,7 @@ Feature: Receive Amendments: Search Modifications
                 And I capture the page screenshot
                 And I click the 'Search' button on the 'Search_Modifications_Page'
                 And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria ''
+                And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
                 And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
                 And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
                 And I capture the page screenshot
@@ -50,6 +51,7 @@ Feature: Receive Amendments: Search Modifications
                 And I capture the page screenshot
                 Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Search_Modifications_Page'
                 And the system displays modification records based on the search '<Valid_Iras_Id>' and filter criteria '<Advanced_Filters>'
+                And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
                 And the result count displayed at the top accurately reflects the number of records shown in the search modifications page
                 And I capture the page screenshot
                 And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'

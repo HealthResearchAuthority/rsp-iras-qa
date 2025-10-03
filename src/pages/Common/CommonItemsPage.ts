@@ -34,6 +34,7 @@ export default class CommonItemsPage {
   private _short_project_title_filter: string;
   private _date_submitted_from_filter: string;
   private _date_submitted_to_filter: string;
+  private _no_of_total_pages: number;
   readonly showAllSectionsAccordion: Locator;
   readonly genericButton: Locator;
   readonly govUkButton: Locator;
@@ -110,6 +111,7 @@ export default class CommonItemsPage {
   readonly search_no_results_header: Locator;
   readonly search_no_results_guidance_text: Locator;
   readonly search_no_results_guidance_points: Locator;
+  readonly active_filters_list_to_remove: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -126,6 +128,7 @@ export default class CommonItemsPage {
     this._short_project_title_filter = '';
     this._date_submitted_from_filter = '';
     this._date_submitted_to_filter = '';
+    this._no_of_total_pages = 0;
 
     //Locators
     this.showAllSectionsAccordion = page.locator('.govuk-accordion__show-all"');
@@ -248,6 +251,15 @@ export default class CommonItemsPage {
     this.date_to_hint_label = this.date_to_filter_group.getByText(this.searchFilterResultsData.date_to_hint_label);
     this.active_filters_label = this.page.getByRole('heading').getByText(searchFilterResultsData.active_filters_label);
     this.active_filter_list = this.page.locator('.search-filter-summary').getByRole('list');
+    this.active_filters_list_to_remove = this.page
+      .getByRole('heading', {
+        name: this.commonTestData.active_filters_label,
+        exact: true,
+      })
+      .locator('..')
+      .getByRole('list')
+      .getByRole('listitem')
+      .getByRole('link');
     this.active_filter_items = this.active_filter_list.getByRole('listitem').locator('span');
     this.clear_all_filters_link = this.page
       .getByRole('link')
@@ -310,6 +322,14 @@ export default class CommonItemsPage {
 
   async setDateSubmittedToFilter(value: string): Promise<void> {
     this._date_submitted_to_filter = value;
+  }
+
+  async getNumberofTotalPages(): Promise<number> {
+    return this._no_of_total_pages;
+  }
+
+  async setNumberofTotalPages(value: number): Promise<void> {
+    this._no_of_total_pages = value;
   }
 
   //Page Methods
@@ -985,7 +1005,7 @@ export default class CommonItemsPage {
     if (removeFilterLabel) {
       let filterFound = true;
       while (filterFound) {
-        const filterItems = this.active_filter_list;
+        const filterItems = this.active_filters_list_to_remove;
         const count = await filterItems.count();
         filterFound = false;
         for (let i = 0; i < count; i++) {

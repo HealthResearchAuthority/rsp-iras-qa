@@ -119,9 +119,9 @@ Then(
 
 Then(
   'I can see the {string} in the key project roles tab of project overview page',
-  async ({ projectOverviewPage, keyProjectRolesPage }, datasetName: string) => {
+  async ({ projectOverviewPage, chiefInvestigatorPage }, datasetName: string) => {
     await expect(projectOverviewPage.key_project_roles_heading).toBeVisible();
-    const dataset = keyProjectRolesPage.keyProjectRolesPageTestData[datasetName];
+    const dataset = chiefInvestigatorPage.chiefInvestigatorPageTestData[datasetName];
     const expectedChiefInvestigator = dataset.chief_investigator_email_text;
     const expectedPrimarySponsorOrganisation = dataset.primary_sponsor_organisation_text;
     const expectedSponsorContact = dataset.sponsor_contact_email_text;

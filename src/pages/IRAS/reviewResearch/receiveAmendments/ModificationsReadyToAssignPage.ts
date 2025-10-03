@@ -125,8 +125,8 @@ export default class ModificationsReadyToAssignPage {
 
   async assertOnModificationsReadyToAssignPage() {
     await expect(this.page_heading).toBeVisible();
-    expect(await this.page.title()).toBe(
-      this.modificationsReadyToAssignPageTestData.Modifications_Ready_To_Assign_Page.title
-    );
+    expect
+      .soft(await this.page.title())
+      .toBe(this.modificationsReadyToAssignPageTestData.Modifications_Ready_To_Assign_Page.title);
   }
 }
