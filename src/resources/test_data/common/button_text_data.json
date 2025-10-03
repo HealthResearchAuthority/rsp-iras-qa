@@ -207,5 +207,9 @@
     "Save_Continue": "Save and continue",
     "Save_For_Later": "Save for later",
     "Change_Details": "Change"
+  },
+  "Sponsor_Reference_Page": {
+    "Save_Continue_Review": "Save and continue to review",
+    "Save_For_Later": "Save for later"
   }
 }

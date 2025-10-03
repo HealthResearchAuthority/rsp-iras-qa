@@ -1,0 +1,90 @@
+{
+  "Sponsor_Reference_Page": {
+    "heading": "Add sponsor reference, date and brief summary of changes",
+    "sponsor_modification_reference_label": "Sponsor modification reference (optional)",
+    "sponsor_modification_date_day_label": "Day",
+    "sponsor_modification_date_month_label": "Month",
+    "sponsor_modification_date_year_label": "Year",
+    "sponsor_summary_label": "Briefly summarise in lay language the main changes proposed in this modification"
+  },
+  "Label_Texts": {
+    "sponsor_modification_date_label": "Sponsor modification date (optional)",
+    "sponsor_modification_date_hint_label": "For example, 27 March 2029",
+    "characters_remaining_label": "You have 3200 characters remaining"
+  },
+  "Missing_Mandatory_Fields_Error": {
+    "sponsor_summary_textbox": "Enter brief summary"
+  },
+  "Max_Character_Field_Error": {
+    "sponsor_summary_textbox": "Sponsor mummary must be less than 3200 characters"
+  },
+  "Invalid_Date_Field_Error": {
+    "sponsor_modification_date_day_textbox": "Sponsor modification date must be today or in the past"
+  },
+  "Valid_Data_All_Fields": {
+    "sponsor_modification_reference_textbox": "Sponsor Reference Text",
+    "sponsor_modification_date_day_textbox": "01",
+    "sponsor_modification_date_month_textbox": "January",
+    "sponsor_modification_date_year_textbox": "2024",
+    "sponsor_summary_textbox": "This is a test summary for the sponsor reference modification page. This summary is intended to provide a brief overview of the changes being proposed in this modification. The purpose of this summary is to ensure that all stakeholders are informed about the nature of the modifications and can provide feedback or approval as necessary."
+  },
+  "Missing_Mandatory_Field": {
+    "sponsor_modification_reference_textbox": "Sponsor Reference Text",
+    "sponsor_modification_date_day_textbox": "01",
+    "sponsor_modification_date_month_textbox": "January",
+    "sponsor_modification_date_year_textbox": "2024"
+  },
+  "Max_Character_Sponsor_Summary_Fields": {
+    "sponsor_summary_textbox": "add more than 3200 letters"
+  },
+  "Invalid_Day_Number": {
+    "sponsor_modification_date_day_textbox": "32",
+    "sponsor_modification_date_month_textbox": "December",
+    "sponsor_modification_date_year_textbox": "2028"
+  },
+  "Invalid_Day_Letters": {
+    "sponsor_modification_date_day_textbox": "o1",
+    "sponsor_modification_date_month_textbox": "January",
+    "sponsor_modification_date_year_textbox": "2028"
+  },
+  "Invalid_Year_Number_1": {
+    "sponsor_modification_date_day_textbox": "1",
+    "sponsor_modification_date_month_textbox": "January",
+    "sponsor_modification_date_year_textbox": "28"
+  },
+  "Invalid_Year_Number_2": {
+    "sponsor_modification_date_day_textbox": "1",
+    "sponsor_modification_date_month_textbox": "January",
+    "sponsor_modification_date_year_textbox": "'28"
+  },
+  "Invalid_Year_Letters": {
+    "sponsor_modification_date_day_textbox": "1",
+    "sponsor_modification_date_month_textbox": "January",
+    "sponsor_modification_date_year_textbox": "'2ooo"
+  },
+  "Invalid_Date_Past": {
+    "sponsor_modification_date_day_textbox": "1",
+    "sponsor_modification_date_month_textbox": "January",
+    "sponsor_modification_date_year_textbox": "'2020"
+  },
+  "Invalid_Date_Today": {
+    "sponsor_modification_date_day_textbox": "Today_Day",
+    "sponsor_modification_date_month_textbox": "Today_Month",
+    "sponsor_modification_date_year_textbox": "'Today_Year"
+  },
+  "Invalid_Date_No_Day": {
+    "sponsor_modification_date_day_textbox": "",
+    "sponsor_modification_date_month_textbox": "January",
+    "sponsor_modification_date_year_textbox": "2028"
+  },
+  "Invalid_Date_No_Month": {
+    "sponsor_modification_date_day_textbox": "1",
+    "sponsor_modification_date_month_textbox": "Choose month",
+    "sponsor_modification_date_year_textbox": "2028"
+  },
+  "Invalid_Date_No_Year": {
+    "sponsor_modification_date_day_textbox": "1",
+    "sponsor_modification_date_month_textbox": "January",
+    "sponsor_modification_date_year_textbox": ""
+  }
+}

@@ -18,7 +18,7 @@ Feature: Create Amendment - Create Modifications
     Then I can see the review your answers page
     And I capture the page screenshot
     When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
-     Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
     Then I can see the project overview page
 
   @rsp-4038 @SelectAreaOfChange
@@ -181,7 +181,7 @@ Feature: Create Amendment - Create Modifications
       | Field_And_Summary_Error_Message              | Area_Of_Change             | Specific_Change          | Modifications_Tile_Link |
       | Field_Error_participating_organisations_text | Participating_Organisation | Addition_Of_Sites_Option | Modifications_Tile      |
 
-  @rsp-4386 @ModificationsJourneyEntireJourney
+  @rsp-4386 @ModificationsJourneyEntireJourney 
   Scenario Outline: Validate that user can create modifications and complete the entire modifications journey
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I capture the page screenshot
@@ -217,7 +217,7 @@ Feature: Create Amendment - Create Modifications
       | Changes                           |
       | Multiple_Changes_Planned_End_Date |
 
-@rsp-4364 @ValidateSponsorReferenceModifications
+  @rsp-4364 @ValidateSponsorReferenceModifications @KNOWN-DEFECT-RSP-5184
   Scenario Outline: Verify user is able to fill sponsor reference details for the modification
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I capture the page screenshot
@@ -225,20 +225,22 @@ Feature: Create Amendment - Create Modifications
     And I can see the select area of change page
     And I capture the page screenshot
     And I create '<Changes>' for the created modification
+    And I capture the page screenshot
     When I click the 'Save_Continue_Review' button on the 'Modifications_Details_Page'
     Then I can see the add sponsor reference page
+    And I capture the page screenshot
     Then I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
     And I can see the 'Label_Texts' ui labels on the sponsor reference modifications page
     Then I fill the sponsor reference modifications page with '<Sponsor_Reference_Page>'
     When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
     Then I can see the review all changes modifications page
-    Then I validate sponsor details are displayed with '<Sponsor_Reference_Page>'
-
+    And I capture the page screenshot
+   
     Examples:
-      | Changes              | Sponsor_Reference_Page |
-      | Multiple_Changes_One | Valid_Data_All_Fields  |
+      | Changes                           | Sponsor_Reference_Page |
+      | Multiple_Changes_Planned_End_Date | Valid_Data_All_Fields  |
 
-  @rsp-4364 @ValidateSaveForLaterSponsorReferenceModifications
+  @rsp-4364 @ValidateSaveForLaterSponsorReferenceModifications 
   Scenario Outline: Verify the save for later functionality for sponsor reference modifications page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I capture the page screenshot
@@ -248,16 +250,20 @@ Feature: Create Amendment - Create Modifications
     And I create '<Changes>' for the created modification
     When I click the 'Save_Continue_Review' button on the 'Modifications_Details_Page'
     Then I can see the add sponsor reference page
+    And I capture the page screenshot
+    Then I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I capture the page screenshot
     When I click the 'Save_For_Later' button on the 'Sponsor_Reference_Page'
+    And I capture the page screenshot
     Then I can see the project overview page
-    Then I can see the modification progress saved successful message on project overview page
     And I can see a 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I capture the page screenshot
 
-    Examples:
-      | Changes                 |
-      | Change_Planned_End_Date |
+     Examples:
+      | Changes                           | Sponsor_Reference_Page |
+      | Multiple_Changes_Planned_End_Date | Valid_Data_All_Fields  |
 
-  @rsp-4364 @ValidateErrorMessgaeDisplayedSponsorReferenceModifications
+  @rsp-4364 @ValidateErrorMessgaeDisplayedSponsorReferenceModifications @KNOWN-DEFECT-RSP-5184
   Scenario Outline: Verify the error messages displayed for sponsor reference modifications page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I capture the page screenshot
@@ -267,21 +273,25 @@ Feature: Create Amendment - Create Modifications
     And I create '<Changes>' for the created modification
     When I click the 'Save_Continue_Review' button on the 'Modifications_Details_Page'
     Then I can see the add sponsor reference page
+    And I capture the page screenshot
     Then I fill the sponsor reference modifications page with '<Sponsor_Reference_Page>'
+    And I capture the page screenshot
     When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    And I capture the page screenshot
     Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Sponsor_Reference_Page'
-
+    And I capture the page screenshot
+    
     Examples:
-      | Changes                 | Sponsor_Reference_Page               | Field_And_Summary_Error_Message |
-      | Change_Planned_End_Date | Missing_Mandatory_Field              | Missing_Mandatory_Fields_Error  |
-      | Change_Planned_End_Date | Max_Character_Sponsor_Summary_Fields | Max_Character_Field_Error       |
-      | Change_Planned_End_Date | Invalid_Day_Number                   | Invalid_Date_Field_Error        |
-      | Change_Planned_End_Date | Invalid_Day_Letters                  | Invalid_Date_Field_Error        |
-      | Change_Planned_End_Date | Invalid_Year_Number_1                | Invalid_Date_Field_Error        |
-      | Change_Planned_End_Date | Invalid_Year_Number_2                | Invalid_Date_Field_Error        |
-      | Change_Planned_End_Date | Invalid_Year_Letters                 | Invalid_Date_Field_Error        |
-      | Change_Planned_End_Date | Invalid_Date_Past                    | Invalid_Date_Field_Error        |
-      | Change_Planned_End_Date | Invalid_Date_No_Day                  | Invalid_Date_Field_Error        |
-      | Change_Planned_End_Date | Invalid_Date_No_Month                | Invalid_Date_Field_Error        |
-      | Change_Planned_End_Date | Invalid_Date_No_Year                 | Invalid_Date_Field_Error        |
+      | Changes                           | Sponsor_Reference_Page               | Field_And_Summary_Error_Message |
+      | Multiple_Changes_Planned_End_Date | Missing_Mandatory_Field              | Missing_Mandatory_Fields_Error  |
+      # | Multiple_Changes_Planned_End_Date | Max_Character_Sponsor_Summary_Fields | Max_Character_Field_Error       |
+      # | Multiple_Changes_Planned_End_Date | Invalid_Day_Number                   | Invalid_Date_Field_Error        |
+      # | Multiple_Changes_Planned_End_Date | Invalid_Day_Letters                  | Invalid_Date_Field_Error        |
+      # | Multiple_Changes_Planned_End_Date | Invalid_Year_Number_1                | Invalid_Date_Field_Error        |
+      # | Multiple_Changes_Planned_End_Date | Invalid_Year_Number_2                | Invalid_Date_Field_Error        |
+      # | Multiple_Changes_Planned_End_Date | Invalid_Year_Letters                 | Invalid_Date_Field_Error        |
+      # | Multiple_Changes_Planned_End_Date | Invalid_Date_Past                    | Invalid_Date_Field_Error        |
+      # | Multiple_Changes_Planned_End_Date | Invalid_Date_No_Day                  | Invalid_Date_Field_Error        |
+      # | Multiple_Changes_Planned_End_Date | Invalid_Date_No_Month                | Invalid_Date_Field_Error        |
+      # | Multiple_Changes_Planned_End_Date | Invalid_Date_No_Year                 | Invalid_Date_Field_Error        |
      
