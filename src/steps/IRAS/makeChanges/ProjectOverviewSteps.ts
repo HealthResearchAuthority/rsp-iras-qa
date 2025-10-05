@@ -144,13 +144,13 @@ Then(
 
 Then(
   'I validate the {string} data for {string} is displayed in the project team tab of project overview page',
-  async ({ projectOverviewPage, keyProjectRolesPage }, projectType: string, datasetName: string) => {
+  async ({ projectOverviewPage, chiefInvestigatorPage }, projectType: string, datasetName: string) => {
     let dataset: any;
     await expect(projectOverviewPage.key_project_roles_heading).toBeVisible();
     if (projectType.toLowerCase() == 'existing') {
       dataset = projectOverviewPage.projectOverviewPageTestData[datasetName].Project_Team;
     } else {
-      dataset = keyProjectRolesPage.keyProjectRolesPageTestData[datasetName];
+      dataset = chiefInvestigatorPage.chiefInvestigatorPageTestData[datasetName];
     }
     const expectedChiefInvestigator = dataset.chief_investigator_email_text;
     const expectedPrimarySponsorOrganisation = dataset.primary_sponsor_organisation_text;

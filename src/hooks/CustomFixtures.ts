@@ -22,7 +22,8 @@ import CreateProjectRecordPage from '../pages/IRAS/makeChanges/CreateProjectReco
 import ProjectDetailsIRASPage from '../pages/IRAS/makeChanges/ProjectDetailsIRASPage';
 import ProjectDetailsTitlePage from '../pages/IRAS/makeChanges/ProjectDetailsTitlePage';
 import ReseachLocationsPage from '../pages/IRAS/makeChanges/ResearchLocationsPage';
-import KeyProjectRolesPage from '../pages/IRAS/makeChanges/KeyProjectRolesPage';
+import ChiefInvestigatorPage from '../pages/IRAS/makeChanges/ChiefInvestigatorPage';
+import ProjectIdentifiersPage from '../pages/IRAS/makeChanges/ProjectIdentifiersPage';
 import ReviewYourApplicationPage from '../pages/IRAS/makeChanges/ReviewYourApplicationPage';
 import ManageReviewBodiesPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/ManageReviewBodiesPage';
 import CreateReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/CreateReviewBodyPage';
@@ -64,6 +65,9 @@ import ModificationsReceivedCommonPage from '../pages/IRAS/reviewResearch/receiv
 import SelectStudyWideReviewerPage from '../pages/IRAS/reviewResearch/receiveAmendments/SelectStudyWideReviewerPage';
 import ModificationsAssignmentConfirmationPage from '../pages/IRAS/reviewResearch/receiveAmendments/ModificationsAssignmentConfirmationPage';
 import MyModificationsTasklistPage from '../pages/IRAS/reviewResearch/receiveAmendments/MyModificationsTasklistPage';
+import AddDocumentDetailsModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/AddDocumentDetailsModificationsPage';
+import AddDocumentDetailsForSpecificDocumentModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/AddDocumentDetailsForSpecificDocumentModificationsPage';
+import ReviewYourDocumentInformationModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/ReviewYourDocumentInfomationModificationsPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -86,7 +90,8 @@ type CustomFixtures = {
   projectDetailsIRASPage: ProjectDetailsIRASPage;
   projectDetailsTitlePage: ProjectDetailsTitlePage;
   reseachLocationsPage: ReseachLocationsPage;
-  keyProjectRolesPage: KeyProjectRolesPage;
+  chiefInvestigatorPage: ChiefInvestigatorPage;
+  projectIdentifiersPage: ProjectIdentifiersPage;
   reviewYourApplicationPage: ReviewYourApplicationPage;
   projectOverviewPage: ProjectOverviewPage;
   reviewYourAnswersPage: ReviewYourAnswersPage;
@@ -128,6 +133,9 @@ type CustomFixtures = {
   modificationsAssignmentConfirmationPage: ModificationsAssignmentConfirmationPage;
   myModificationsTasklistPage: MyModificationsTasklistPage;
   modificationsReceivedCommonPage: ModificationsReceivedCommonPage;
+  addDocumentDetailsModificationsPage: AddDocumentDetailsModificationsPage;
+  addDocumentDetailsForSpecificDocumentModificationsPage: AddDocumentDetailsForSpecificDocumentModificationsPage;
+  reviewYourDocumentInformationModificationsPage: ReviewYourDocumentInformationModificationsPage;
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -212,8 +220,12 @@ export const test = base.extend<CustomFixtures>({
     await use(new ReseachLocationsPage(page));
   },
 
-  keyProjectRolesPage: async ({ page }, use) => {
-    await use(new KeyProjectRolesPage(page));
+  chiefInvestigatorPage: async ({ page }, use) => {
+    await use(new ChiefInvestigatorPage(page));
+  },
+
+  projectIdentifiersPage: async ({ page }, use) => {
+    await use(new ProjectIdentifiersPage(page));
   },
 
   reviewYourApplicationPage: async ({ page }, use) => {
@@ -376,6 +388,18 @@ export const test = base.extend<CustomFixtures>({
 
   modificationsReceivedCommonPage: async ({ page }, use) => {
     await use(new ModificationsReceivedCommonPage(page));
+  },
+
+  addDocumentDetailsModificationsPage: async ({ page }, use) => {
+    await use(new AddDocumentDetailsModificationsPage(page));
+  },
+
+  addDocumentDetailsForSpecificDocumentModificationsPage: async ({ page }, use) => {
+    await use(new AddDocumentDetailsForSpecificDocumentModificationsPage(page));
+  },
+
+  reviewYourDocumentInformationModificationsPage: async ({ page }, use) => {
+    await use(new ReviewYourDocumentInformationModificationsPage(page));
   },
 
   makeAxeBuilder: async ({ page }, use) => {

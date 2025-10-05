@@ -16,7 +16,7 @@ Then(
       reviewYourAnswersPage,
       projectDetailsIRASPage,
       projectDetailsTitlePage,
-      keyProjectRolesPage,
+      chiefInvestigatorPage,
       reseachLocationsPage,
     },
     datasetNameProjectTitle: string,
@@ -24,7 +24,7 @@ Then(
     datasetNameResearchLocations: string
   ) => {
     const datasetProjectTitle = projectDetailsTitlePage.projectDetailsTitlePageTestData[datasetNameProjectTitle];
-    const datasetKeyRoles = keyProjectRolesPage.keyProjectRolesPageTestData[datasetNameKeyRoles];
+    const datasetKeyRoles = chiefInvestigatorPage.chiefInvestigatorPageTestData[datasetNameKeyRoles];
     const datasetResearchLoctions = reseachLocationsPage.researchLocationsPageTestData[datasetNameResearchLocations];
     const irasIdRunTime = await projectDetailsIRASPage.getUniqueIrasId();
     expect(confirmStringNotNull(await reviewYourAnswersPage.iras_id_text.textContent())).toBe(irasIdRunTime);

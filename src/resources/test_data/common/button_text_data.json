@@ -47,7 +47,13 @@
     "Save_For_Later": "Save for later",
     "Save_Changes": "Save changes"
   },
-  "Key_Project_Roles_Page": {
+  "Chief_Investigator_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later",
+    "Save_Changes": "Save changes",
+    "Search": "Search"
+  },
+  "Project_Identifiers_Page": {
     "Save_Continue": "Save and continue",
     "Save_For_Later": "Save for later",
     "Save_Changes": "Save changes",
@@ -198,5 +204,14 @@
     "Add_Another_Change": "Add another change to this modification",
     "Save_Continue_Review": "Save and continue to review",
     "Save_For_Later": "Save for later"
+  },
+  "Add_Document_Details_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later"
+  },
+  "Review_Document_Infomation_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later",
+    "Change_Details": "Change"
   }
 }

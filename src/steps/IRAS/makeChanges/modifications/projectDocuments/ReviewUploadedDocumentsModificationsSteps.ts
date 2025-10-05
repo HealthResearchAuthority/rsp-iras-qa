@@ -24,18 +24,24 @@ Then(
     const documentPath = commonItemsPage.documentUploadTestData[uploadDocumentsDatasetName];
     const fileArray = Array.isArray(documentPath) ? documentPath : [documentPath];
     for (const filePath of fileArray) {
-      const fileSize = Number.parseFloat((fs.statSync(filePath).size / (1024 * 1024)).toFixed(2)).toString();
+      const stats = fs.statSync(filePath);
+      let fileSize;
+      if (stats.size < 1024 * 1024) {
+        fileSize = Number.parseFloat((stats.size / 1024).toFixed(2)).toString() + ' KB';
+      } else {
+        fileSize = Number.parseFloat((stats.size / (1024 * 1024)).toFixed(2)).toString() + ' MB';
+      }
       const fileName = path.basename(filePath);
       const expectedDocumentRow = reviewUploadedDocumentsModificationsPage.table
         .locator(reviewUploadedDocumentsModificationsPage.rows, { hasText: `${fileName}` })
-        .filter({ hasText: `${fileSize} MB` })
+        .filter({ hasText: fileSize })
         .filter({
           hasText:
             reviewUploadedDocumentsModificationsPage.reviewUploadedDocumentsModificationsPageTestData
               .Review_Uploaded_Documents_Modifications_Page.delete_label,
         });
       const documentFoundCount = await expectedDocumentRow.count();
-      expect(documentFoundCount).toBeGreaterThan(0);
+      expect.soft(documentFoundCount).toBeGreaterThan(0);
     }
   }
 );

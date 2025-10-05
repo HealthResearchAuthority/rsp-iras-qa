@@ -40,7 +40,7 @@
   "Project_Details_Title_Page": {
     "Back": "Back"
   },
-  "Key_Project_Roles_Page": {
+  "Chief_Investigator_Page": {
     "Back": "Back"
   },
   "Research_Locations_Page": {
@@ -138,6 +138,9 @@
   },
   "Review_Your_Answers_Page": {
     "Back": "Back",
+    "Change": "Change"
+  },
+  "Review_Your_Information_Page": {
     "Change": "Change"
   },
   "Search_Add_User_Review_Body_Page": {
