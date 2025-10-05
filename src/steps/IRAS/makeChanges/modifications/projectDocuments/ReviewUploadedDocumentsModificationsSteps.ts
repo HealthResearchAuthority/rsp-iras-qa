@@ -46,3 +46,63 @@ Then(
     await reviewUploadedDocumentsModificationsPage.setUploadedFileName(fileArray);
   }
 );
+
+Then(
+  'I get the list of files upload and separate valid and invalid files',
+  async ({ addDocumentsModificationsPage, reviewUploadedDocumentsModificationsPage }) => {
+    const allUploadedFiles = await reviewUploadedDocumentsModificationsPage.getUploadedFileName();
+    const validFileExtensions =
+      await addDocumentsModificationsPage.addDocumentsModificationsPageTestData.Add_Documents_Modifications_Page
+        .valid_file_extensions;
+    const validFiles: string[] = [];
+    const invalidFiles: string[] = [];
+    for (const file of allUploadedFiles) {
+      const fileExtn = path.extname(file);
+      if (validFileExtensions.includes(fileExtn)) {
+        validFileExtensions.push(file);
+      } else {
+        invalidFiles.push(file);
+      }
+    }
+    await reviewUploadedDocumentsModificationsPage.setValidFileName(validFiles);
+    await reviewUploadedDocumentsModificationsPage.setInValidFileName(invalidFiles);
+  }
+);
+
+Then(
+  'I validate if any duplicate files in the new document upload {string}',
+  async ({ commonItemsPage, reviewUploadedDocumentsModificationsPage }, newUploadDocumentsDatasetName: string) => {
+    const newDocumentUpload = commonItemsPage.documentUploadTestData[newUploadDocumentsDatasetName];
+
+    const duplicateFiles: string[] = [];
+
+    const oldDocumentUpload = await reviewUploadedDocumentsModificationsPage.getUploadedFileName();
+    const oldfileArray = Array.isArray(oldDocumentUpload) ? oldDocumentUpload : [oldDocumentUpload];
+
+    const newDocumentUploadFileNameOnly: string[] = [];
+
+    for (const newfile of newDocumentUpload) {
+      newDocumentUploadFileNameOnly.push(path.basename(newfile));
+    }
+    //const fileName = path.basename(oldDocumentUpload.toString());
+
+    //const hasMultipleFiles: boolean = Array.isArray(oldDocumentUpload);
+
+    // if (hasMultipleFiles === false) {
+    //   if (newDocumentUpload.includes(oldDocumentUpload)) {
+    //     duplicateFiles.push(oldDocumentUpload[0]);
+    //     const length = duplicateFiles.length;
+    //   }
+    // } else {
+    for (const file of oldfileArray) {
+      const fileName = path.basename(file);
+      //const newfileName = path.basename(newDocumentUpload);
+      if (newDocumentUploadFileNameOnly.includes(fileName)) {
+        duplicateFiles.push(fileName);
+        //const length = duplicateFiles.length;
+      }
+    }
+    //}
+    await reviewUploadedDocumentsModificationsPage.setDuplicateFileName(duplicateFiles);
+  }
+);

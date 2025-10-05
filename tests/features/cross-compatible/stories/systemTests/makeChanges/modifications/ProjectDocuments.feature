@@ -87,55 +87,55 @@ Feature: Create Amendment - Project Documents Modifications
     And I capture the page screenshot
 
     Examples:
-      | Specific_Change                    | Document_Upload_Files | Document_Upload_Files_New  |
-      # | Correction_Of_Typographical_Errors           | PNG_File              | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | GIF_File              | PNG_File                  |
-      # | Correction_Of_Typographical_Errors           | BMP_File              | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | SVG_File              | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | JPG_File              | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | JPEG_File             | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | DOC_File              | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | DOCX_File             | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | DOT_File              | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | DOTX_File             | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | XLS_File              | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | XLSX_File             | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | PDF_File              | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | TXT_File              | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | CSV_File              | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | PPT_File              | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | PPTX_File             | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | RTF_File              | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | ODT_File              | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | OFD_File              | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | XPS_File              | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | XML_File              | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | HTML_File             | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | HTM_File              | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | VCF_File              | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | EML_File              | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | MSG_File              | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | Multiple_Files        | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | Multiple_Files        | Multiple_Files            |
-      # | Correction_Of_Typographical_Errors           | BMP_File              | Multiple_Files            |
-      # | CRF_Other_Study_Data_Records                 | Multiple_Files        | GIF_File                  |
-      # | GDPR_Wording                                 | Multiple_Files        | GIF_File                  |
-      # | Other_Minor_Change_To_Study_Documents        | Multiple_Files        | GIF_File                  |
-      # | Post_Trial_Information_For_Participants      | Multiple_Files        | GIF_File                  |
-      # | Protocol_Non_Substantial_Changes             | Multiple_Files        | GIF_File                  |
-      # | Translations_Addition_Of_Translated_Versions | Multiple_Files        | GIF_File                  |
-      | Correction_Of_Typographical_Errors | MP4_File              | AVI_File                   |
-      | Correction_Of_Typographical_Errors | BMP_File              | Multiple_Files_Video_Valid |
-      | Correction_Of_Typographical_Errors | AVI_File              | MP4_File                   |
-      | Correction_Of_Typographical_Errors | MOV_File              | MKV_File                   |
-      | Correction_Of_Typographical_Errors | MKV_File              | MOV_File                   |
-      | Correction_Of_Typographical_Errors | MPG_File              | MPEG_File                  |
-      | Correction_Of_Typographical_Errors | MPEG_File             | MPG_File                   |
-      | Correction_Of_Typographical_Errors | WMV_File              | WEBM_File                  |
-      | Correction_Of_Typographical_Errors | WEBM_File             | WMV_File                   |
+      | Specific_Change                              | Document_Upload_Files | Document_Upload_Files_New  |
+      | Correction_Of_Typographical_Errors           | PNG_File              | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | GIF_File              | PNG_File                   |
+      | Correction_Of_Typographical_Errors           | BMP_File              | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | SVG_File              | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | JPG_File              | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | JPEG_File             | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | DOC_File              | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | DOCX_File             | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | DOT_File              | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | DOTX_File             | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | XLS_File              | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | XLSX_File             | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | PDF_File              | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | TXT_File              | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | CSV_File              | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | PPT_File              | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | PPTX_File             | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | RTF_File              | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | ODT_File              | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | OFD_File              | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | XPS_File              | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | XML_File              | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | HTML_File             | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | HTM_File              | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | VCF_File              | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | EML_File              | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | MSG_File              | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | Multiple_Files        | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | Multiple_Files        | Multiple_Files             |
+      | Correction_Of_Typographical_Errors           | BMP_File              | Multiple_Files             |
+      | CRF_Other_Study_Data_Records                 | Multiple_Files        | GIF_File                   |
+      | GDPR_Wording                                 | Multiple_Files        | GIF_File                   |
+      | Other_Minor_Change_To_Study_Documents        | Multiple_Files        | GIF_File                   |
+      | Post_Trial_Information_For_Participants      | Multiple_Files        | GIF_File                   |
+      | Protocol_Non_Substantial_Changes             | Multiple_Files        | GIF_File                   |
+      | Translations_Addition_Of_Translated_Versions | Multiple_Files        | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | MP4_File              | AVI_File                   |
+      | Correction_Of_Typographical_Errors           | BMP_File              | Multiple_Files_Video_Valid |
+      | Correction_Of_Typographical_Errors           | AVI_File              | MP4_File                   |
+      | Correction_Of_Typographical_Errors           | MOV_File              | MKV_File                   |
+      | Correction_Of_Typographical_Errors           | MKV_File              | MOV_File                   |
+      | Correction_Of_Typographical_Errors           | MPG_File              | MPEG_File                  |
+      | Correction_Of_Typographical_Errors           | MPEG_File             | MPG_File                   |
+      | Correction_Of_Typographical_Errors           | WMV_File              | WEBM_File                  |
+      | Correction_Of_Typographical_Errors           | WEBM_File             | WMV_File                   |
 
-  @4684 @ValidateDocumentUploadAndReviewForModificationsPage @KNOWN_DEFECT_RSP-4801_4844_4920_4921 @TestOnly
-  Scenario Outline: Verify that a relevant error message is shown when the user attempts to upload a video file that has already been uploaded
+  @3877 @ValidateDocumentUploadDuplicateFileErrorMessage @KNOWN_DEFECT_RSP-4801_4844_4920_4921
+  Scenario Outline: Verify that a relevant error message is shown when the user attempts to uploads a file that has already been uploaded
     And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
@@ -157,13 +157,13 @@ Feature: Create Amendment - Project Documents Modifications
     And I capture the page screenshot
 
     Examples:
-      | Specific_Change                    | Document_Upload_Files      | Document_Upload_Files_New  | Upload_Type      |
-      | Correction_Of_Typographical_Errors | MP4_File                   | MP4_File                   | single invalid   |
-      | Correction_Of_Typographical_Errors | Multiple_Files_Video_Valid | Multiple_Files_Video_Valid | multiple invalid |
+      | Specific_Change                    | Document_Upload_Files | Document_Upload_Files_New | Upload_Type      |
+      | Correction_Of_Typographical_Errors | PNG_File              | PNG_File                  | single invalid   |
+      | Correction_Of_Typographical_Errors | Multiple_Files_Three  | Multiple_Files_Three      | multiple invalid |
 
 
-  @4684 @ValidateDocumentUploadAndReviewForModificationsPage @KNOWN_DEFECT_RSP-4801_4844_4920_4921 @TestOnly
-  Scenario Outline: Verify that an appropriate error message is displayed when the user uploads a video file with an invalid format
+  @3877 @ValidateDocumentUploadInvalidFileErrorMessage @KNOWN_DEFECT_RSP-4801_4844_4920_4921
+  Scenario Outline: Verify that an appropriate error message is displayed when the user uploads a file with an invalid format
     And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
@@ -176,17 +176,41 @@ Feature: Create Amendment - Project Documents Modifications
     And I capture the page screenshot
 
     Examples:
-      | Specific_Change                    | Document_Upload_Files_Invalid | Upload_Type      |
-      | Correction_Of_Typographical_Errors | Multiple_Files_Video_Invalid  | multiple invalid |
-      | Correction_Of_Typographical_Errors | ASF_File                      | single invalid   |
-      | Correction_Of_Typographical_Errors | FLAC_File                     | single invalid   |
-      | Correction_Of_Typographical_Errors | MP3_File                      | single invalid   |
-      | Correction_Of_Typographical_Errors | MPEG1_File                    | single invalid   |
-      | Correction_Of_Typographical_Errors | OGG_File                      | single invalid   |
-      | Correction_Of_Typographical_Errors | PS_File                       | single invalid   |
-      | Correction_Of_Typographical_Errors | RAW_File                      | single invalid   |
-      | Correction_Of_Typographical_Errors | TS_File                       | single invalid   |
-      | Correction_Of_Typographical_Errors | WAV_File                      | single invalid   |
+      | Specific_Change                    | Document_Upload_Files_Invalid    | Upload_Type      |
+      | Correction_Of_Typographical_Errors | Multiple_Invalid_Files_Non_Video | multiple invalid |
+      | Correction_Of_Typographical_Errors | JSON_File                        | single invalid   |
+
+  #mixture of valid and invalid files
+  @3877 @ValidateDocumentUploadInvalidDuplicateErrorMessage @KNOWN_DEFECT_RSP-4801_4844_4920_4921
+  Scenario Outline: Verify that a relevant error message is shown when the user attempts to upload a video file that has already been uploaded
+    And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+    Then I can see the add documents for '<Specific_Change>' page
+    And I capture the page screenshot
+    Then I upload '<Document_Upload_Files>' documents
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    And I get the list of files upload and separate valid and invalid files
+    Then I validate 'Invalid_Format_Video_File_Error' displayed on 'Add_Document_Modifications_Page' while uploading '<Upload_Type>' documents
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    Then I can see the review uploaded documents for '<Specific_Change>' page
+    And I capture the page screenshot
+    #And I validate only the valid files are uploaded successfully
+    When I click the 'Add_Another_Document' button on the 'Review_Uploaded_Document_Modifications_Page'
+    Then I can see the add documents for '<Specific_Change>' page
+    And I capture the page screenshot
+    Then I upload '<Document_Upload_Files_New>' documents
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    Then I validate 'Duplicate_File_Upload_Error' displayed on 'Add_Document_Modifications_Page' while uploading '<Upload_Type>' documents
+    And I capture the page screenshot
+
+    Examples:
+      | Specific_Change                    | Document_Upload_Files                    | Document_Upload_Files_New | Upload_Type                      |
+      | Correction_Of_Typographical_Errors | Multiple_Invalid_Files_Non_Video_Dataset | Multiple_Files_Three      | multiple upload multiple invalid |
+      | Correction_Of_Typographical_Errors | Single_Invalid_File_Non_Video_Dataset    | PNG_File                  | multiple upload single invalid   |
+
+
 
   # cover error validation when exceeding 100MB - via manual execution only
   # cover error validation - list of files containing few duplicate files, few incorrect format files(mix of valid and invalid files)-via automation - clarication
@@ -245,3 +269,39 @@ Feature: Create Amendment - Project Documents Modifications
       | Post_Trial_Information_For_Participants      |
       | Protocol_Non_Substantial_Changes             |
       | Translations_Addition_Of_Translated_Versions |
+
+  @3877 @ValidateDocumentUploadInvalidDuplicateErrorMessage @KNOWN_DEFECT_RSP-4801_4844_4920_4921 @abc
+  Scenario Outline: Verify that a relevant error message is shown when the user attempts to upload a video file that has already been uploaded
+    And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+    Then I can see the add documents for '<Specific_Change>' page
+    And I capture the page screenshot
+    Then I upload '<Document_Upload_Files>' documents
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    And I get the list of files upload and separate valid and invalid files
+    #Then I can see the review uploaded documents for '<Specific_Change>' page
+    And I capture the page screenshot
+    When I click the 'Add_Another_Document' button on the 'Review_Uploaded_Document_Modifications_Page'
+    Then I can see the add documents for '<Specific_Change>' page
+    And I capture the page screenshot
+    Then I upload '<Document_Upload_Files_New>' documents
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    #Then I can see the review uploaded documents for '<Specific_Change>' page
+    And I capture the page screenshot
+    And I validate if any duplicate files in the new document upload '<Document_Upload_Files_New>'
+    #And I validate only the valid files are uploaded successfully
+    Then I new validate 'Duplicate_File_Upload_Error' displayed on 'Add_Document_Modifications_Page' while uploading '<Upload_Type>' documents
+    Then I new validate 'Invalid_Format_Video_File_Error' displayed on 'Add_Document_Modifications_Page' while uploading '<Upload_Type>' documents
+
+    Examples:
+      | Specific_Change                    | Document_Upload_Files | Document_Upload_Files_New                     | Upload_Type                        |
+      | Correction_Of_Typographical_Errors | PNG_File              | Single_Invalid_Valid_Duplicate_File_Non_Video | single_valid_invalid_and_duplicate |
+#| Correction_Of_Typographical_Errors | Multiple_Files_Three  | Multiple_Invalid_Valid_Duplicate_Files_Non_Video | multiple_valid_invalid_and_duplicate |
+
+# Examples:
+#   | Specific_Change                    | Document_Upload_Files                    | Document_Upload_Files_New | Upload_Type                      |
+#   | Correction_Of_Typographical_Errors | Multiple_Invalid_Files_Non_Video_Dataset | Multiple_Files_Three      | multiple upload multiple invalid |
+#   | Correction_Of_Typographical_Errors | Single_Invalid_File_Non_Video_Dataset    | PNG_File                  | multiple upload single invalid   |
+

@@ -1199,8 +1199,27 @@ Then(
       errorMessageFieldAndSummaryDatasetName === 'Duplicate_File_Upload_Error' ||
       errorMessageFieldAndSummaryDatasetName === 'Invalid_Format_Video_File_Error'
     ) {
-      const fieldNamesList = await reviewUploadedDocumentsModificationsPage.getUploadedFileName();
-      if (uploadType === 'multiple invalid') {
+      //const fieldNamesList = await reviewUploadedDocumentsModificationsPage.getUploadedFileName();
+      //let fieldNamesList: string[];
+      let fieldNamesList;
+      if (uploadType == 'multiple upload multiple invalid' || uploadType == 'multiple upload single invalid') {
+        fieldNamesList = await reviewUploadedDocumentsModificationsPage.getInValidFileName();
+      } else {
+        fieldNamesList = await reviewUploadedDocumentsModificationsPage.getUploadedFileName();
+      }
+
+      // let checkType;
+      // //work out whether fieldNamesList contains one invalid file or multiple invalid file
+      // if ((uploadType === 'multiple valid invalid' && fieldNamesList.length > 1) || uploadType === 'multiple invalid') {
+      //   checkType = 'multiple';
+      // } else {
+      //   checkType = 'single';
+      // }
+      //set CheckType - based on above and based on upload type
+      //replace uploadType on the conditions with CheckType
+
+      //if (checkType === 'multiple') {
+      if (uploadType === 'multiple invalid' || uploadType == 'multiple upload multiple invalid') {
         for (const val of fieldNamesList) {
           fileName = path.basename(val);
           const allSummaryErrorExpectedValue = `${fileName}` + Object.values(errorMessageFieldDataset);
@@ -1228,8 +1247,146 @@ Then(
             errorMessageFieldAndSummaryDatasetName === 'Duplicate_File_Upload_Error' ||
             errorMessageFieldAndSummaryDatasetName === 'Invalid_Format_Video_File_Error'
           ) {
-            const fieldNamesList = await reviewUploadedDocumentsModificationsPage.getUploadedFileName();
-            if (uploadType === 'multiple invalid') {
+            //const fieldNamesList = await reviewUploadedDocumentsModificationsPage.getUploadedFileName();
+            let fieldNamesList;
+            if (uploadType == 'multiple upload multiple invalid' || uploadType == 'multiple upload single invalid') {
+              fieldNamesList = await reviewUploadedDocumentsModificationsPage.getInValidFileName();
+            } else {
+              fieldNamesList = await reviewUploadedDocumentsModificationsPage.getUploadedFileName();
+            }
+            // let checkType;
+            // if (fieldNamesList.length > 1) {
+            //   checkType = 'multiple';
+            // } else {
+            //   checkType = 'single';
+            // }
+            if (uploadType === 'multiple invalid' || uploadType == 'multiple upload multiple invalid') {
+              //if (checkType === 'multiple') {
+              for (const val of fieldNamesList) {
+                fileName = path.basename(val);
+                const allfieldErrorMessagesExpectedValue = `${fileName}` + Object.values(errorMessageFieldDataset);
+                allfieldErrorMessagesExpectedValues.push(allfieldErrorMessagesExpectedValue);
+                const element = await commonItemsPage.clickErrorSummaryLinkSpecific(
+                  key,
+                  page,
+                  allfieldErrorMessagesExpectedValue
+                );
+                await expect(element).toBeInViewport();
+              }
+              fieldErrorMessagesActualValues = await commonItemsPage.getFieldErrorMessagesList(key, page);
+              expect(fieldErrorMessagesActualValues).toEqual(allfieldErrorMessagesExpectedValues);
+            } else {
+              fileName = path.basename(fieldNamesList.toString());
+              const allfieldErrorMessagesExpectedValue = `${fileName}` + Object.values(errorMessageFieldDataset);
+              allfieldErrorMessagesExpectedValues.push(allfieldErrorMessagesExpectedValue);
+              const element = await commonItemsPage.clickErrorSummaryLinkSpecific(
+                key,
+                page,
+                allfieldErrorMessagesExpectedValue
+              );
+              await expect(element).toBeInViewport();
+              fieldErrorMessagesActualValues = await commonItemsPage.getFieldErrorMessages(key, page);
+              expect([fieldErrorMessagesActualValues]).toEqual(allfieldErrorMessagesExpectedValues);
+            }
+          } else {
+            fieldErrorMessagesActualValues = await commonItemsPage.getFieldErrorMessages(key, page);
+            expect(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
+            const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
+            await expect(element).toBeInViewport();
+          }
+        }
+      }
+    }
+  }
+);
+
+Then(
+  'I new validate {string} displayed on {string} while uploading {string} documents',
+  async (
+    { commonItemsPage, addDocumentsModificationsPage, reviewUploadedDocumentsModificationsPage },
+    errorMessageFieldAndSummaryDatasetName: string,
+    pageKey: string,
+    uploadType: string
+  ) => {
+    let errorMessageFieldDataset: any;
+    let page: any;
+    if (pageKey == 'Add_Document_Modifications_Page') {
+      errorMessageFieldDataset =
+        addDocumentsModificationsPage.addDocumentsModificationsPageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = addDocumentsModificationsPage;
+    }
+    let allSummaryErrorExpectedValues: string[] = [];
+    const allfieldErrorMessagesExpectedValues: string[] = [];
+    let summaryErrorActualValues: any;
+    let fileName: string;
+    await expect(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
+    if (
+      errorMessageFieldAndSummaryDatasetName === 'Duplicate_File_Upload_Error' ||
+      errorMessageFieldAndSummaryDatasetName === 'Invalid_Format_Video_File_Error'
+    ) {
+      //const fieldNamesList = await reviewUploadedDocumentsModificationsPage.getUploadedFileName();
+      //let fieldNamesList: string[];
+      let fieldNamesList;
+      if (uploadType == 'multiple upload multiple invalid' || uploadType == 'multiple upload single invalid') {
+        fieldNamesList = await reviewUploadedDocumentsModificationsPage.getInValidFileName();
+      } else {
+        fieldNamesList = await reviewUploadedDocumentsModificationsPage.getUploadedFileName();
+      }
+
+      // let checkType;
+      // //work out whether fieldNamesList contains one invalid file or multiple invalid file
+      // if ((uploadType === 'multiple valid invalid' && fieldNamesList.length > 1) || uploadType === 'multiple invalid') {
+      //   checkType = 'multiple';
+      // } else {
+      //   checkType = 'single';
+      // }
+      //set CheckType - based on above and based on upload type
+      //replace uploadType on the conditions with CheckType
+
+      //if (checkType === 'multiple') {
+      if (uploadType === 'multiple invalid' || uploadType == 'multiple upload multiple invalid') {
+        for (const val of fieldNamesList) {
+          fileName = path.basename(val);
+          const allSummaryErrorExpectedValue = `${fileName}` + Object.values(errorMessageFieldDataset);
+          allSummaryErrorExpectedValues.push(allSummaryErrorExpectedValue);
+        }
+        summaryErrorActualValues = await commonItemsPage.getSummaryErrorMessages();
+        expect.soft(summaryErrorActualValues).toEqual(allSummaryErrorExpectedValues);
+      } else {
+        fileName = path.basename(fieldNamesList.toString());
+        const allSummaryErrorExpectedValue = `${fileName}` + Object.values(errorMessageFieldDataset);
+        allSummaryErrorExpectedValues.push(allSummaryErrorExpectedValue);
+        summaryErrorActualValues = await commonItemsPage.getSummaryErrorMessages();
+        expect.soft(summaryErrorActualValues).toEqual(allSummaryErrorExpectedValues);
+      }
+    } else {
+      allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset);
+      summaryErrorActualValues = await commonItemsPage.getSummaryErrorMessages();
+      expect.soft(summaryErrorActualValues).toEqual(allSummaryErrorExpectedValues);
+    }
+    if (!errorMessageFieldAndSummaryDatasetName.includes('Summary_Only')) {
+      for (const key in errorMessageFieldDataset) {
+        if (Object.hasOwn(errorMessageFieldDataset, key)) {
+          let fieldErrorMessagesActualValues: any;
+          if (
+            errorMessageFieldAndSummaryDatasetName === 'Duplicate_File_Upload_Error' ||
+            errorMessageFieldAndSummaryDatasetName === 'Invalid_Format_Video_File_Error'
+          ) {
+            //const fieldNamesList = await reviewUploadedDocumentsModificationsPage.getUploadedFileName();
+            let fieldNamesList;
+            if (uploadType == 'multiple upload multiple invalid' || uploadType == 'multiple upload single invalid') {
+              fieldNamesList = await reviewUploadedDocumentsModificationsPage.getInValidFileName();
+            } else {
+              fieldNamesList = await reviewUploadedDocumentsModificationsPage.getUploadedFileName();
+            }
+            // let checkType;
+            // if (fieldNamesList.length > 1) {
+            //   checkType = 'multiple';
+            // } else {
+            //   checkType = 'single';
+            // }
+            if (uploadType === 'multiple invalid' || uploadType == 'multiple upload multiple invalid') {
+              //if (checkType === 'multiple') {
               for (const val of fieldNamesList) {
                 fileName = path.basename(val);
                 const allfieldErrorMessagesExpectedValue = `${fileName}` + Object.values(errorMessageFieldDataset);

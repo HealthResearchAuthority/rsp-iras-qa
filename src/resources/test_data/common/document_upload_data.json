@@ -44,6 +44,11 @@
   "RAW_File": "src/resources/test_data/common/document_upload/invalid_video_files/RAW_File.raw",
   "TS_File": "src/resources/test_data/common/document_upload/invalid_video_files/TS_File.ts",
   "WAV_File": "src/resources/test_data/common/document_upload/invalid_video_files/WAV_File.wav",
+  "JSON_File": "src/resources/test_data/common/document_upload/invalid_non_video_files/JSON_File.json",
+  "7ZIP_File": "src/resources/test_data/common/document_upload/invalid_non_video_files/7ZIP_File.7z",
+  "JQUERY_File": "src/resources/test_data/common/document_upload/invalid_non_video_files/JQUERY_File.js",
+  "TAR_File": "src/resources/test_data/common/document_upload/invalid_non_video_files/TAR_File.tar",
+  "ZIP_File": "src/resources/test_data/common/document_upload/invalid_non_video_files/ZIP_File.zip",
   "Multiple_Files": [
     "src/resources/test_data/common/document_upload/PNG_File.png",
     "src/resources/test_data/common/document_upload/GIF_File.gif",
@@ -86,6 +91,13 @@
     "src/resources/test_data/common/document_upload/GIF_File.gif",
     "src/resources/test_data/common/document_upload/DOC_File.doc"
   ],
+  "Multiple_Invalid_Files_Non_Video": [
+    "src/resources/test_data/common/document_upload/invalid_non_video_files/JSON_File.json",
+    "src/resources/test_data/common/document_upload/invalid_non_video_files/7ZIP_File.7z",
+    "src/resources/test_data/common/document_upload/invalid_non_video_files/JQUERY_File.js",
+    "src/resources/test_data/common/document_upload/invalid_non_video_files/TAR_File.tar",
+    "src/resources/test_data/common/document_upload/invalid_non_video_files/ZIP_File.zip"
+  ],
   "Multiple_Files_Video_Valid": [
     "src/resources/test_data/common/document_upload/MP4_File.mp4",
     "src/resources/test_data/common/document_upload/AVI_File.avi",
@@ -106,5 +118,36 @@
     "src/resources/test_data/common/document_upload/invalid_video_files/RAW_File.raw",
     "src/resources/test_data/common/document_upload/invalid_video_files/TS_File.ts",
     "src/resources/test_data/common/document_upload/invalid_video_files/WAV_File.wav"
+  ],
+  "Multiple_Invalid_Files_Non_Video_Dataset": [
+    "src/resources/test_data/common/document_upload/PNG_File.png",
+    "src/resources/test_data/common/document_upload/GIF_File.gif",
+    "src/resources/test_data/common/document_upload/DOC_File.doc",
+    "src/resources/test_data/common/document_upload/invalid_non_video_files/JSON_File.json",
+    "src/resources/test_data/common/document_upload/invalid_non_video_files/7ZIP_File.7z",
+    "src/resources/test_data/common/document_upload/invalid_non_video_files/JQUERY_File.js"
+  ],
+  "Single_Invalid_File_Non_Video_Dataset": [
+    "src/resources/test_data/common/document_upload/PNG_File.png",
+    "src/resources/test_data/common/document_upload/GIF_File.gif",
+    "src/resources/test_data/common/document_upload/DOC_File.doc",
+    "src/resources/test_data/common/document_upload/SVG_File.svg",
+    "src/resources/test_data/common/document_upload/DOT_File.dot",
+    "src/resources/test_data/common/document_upload/invalid_non_video_files/JSON_File.json"
+  ],
+  "Multiple_Invalid_Valid_Duplicate_Files_Non_Video": [
+    "src/resources/test_data/common/document_upload/PNG_File.png",
+    "src/resources/test_data/common/document_upload/GIF_File.gif",
+    "src/resources/test_data/common/document_upload/DOC_File.doc",
+    "src/resources/test_data/common/document_upload/invalid_non_video_files/JSON_File.json",
+    "src/resources/test_data/common/document_upload/invalid_non_video_files/7ZIP_File.7z",
+    "src/resources/test_data/common/document_upload/invalid_non_video_files/JQUERY_File.js",
+    "src/resources/test_data/common/document_upload/SVG_File.svg",
+    "src/resources/test_data/common/document_upload/DOT_File.dot"
+  ],
+  "Single_Invalid_Valid_Duplicate_File_Non_Video": [
+    "src/resources/test_data/common/document_upload/PNG_File.png",
+    "src/resources/test_data/common/document_upload/invalid_non_video_files/JSON_File.json",
+    "src/resources/test_data/common/document_upload/SVG_File.svg"
   ]
 }
