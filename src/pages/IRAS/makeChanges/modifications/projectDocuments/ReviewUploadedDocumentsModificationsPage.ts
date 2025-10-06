@@ -36,7 +36,6 @@ export default class ReviewUploadedDocumentsModificationsPage {
   }
 
   //Page Methods
-
   async assertOnReviewUploadedDocumentsModificationsPage(specificChangeTitleLabel: string) {
     const expectedPageHeading =
       this.reviewUploadedDocumentsModificationsPageTestData.Review_Uploaded_Documents_Modifications_Page.heading +

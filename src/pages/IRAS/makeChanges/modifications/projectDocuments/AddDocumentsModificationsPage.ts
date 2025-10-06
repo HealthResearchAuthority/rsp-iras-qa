@@ -21,7 +21,6 @@ export default class AddDocumentsModificationsPage {
   }
 
   //Page Methods
-
   async assertOnAddDocumentsModificationsPage(specificChangeTitleLabel: string) {
     const expectedPageHeading =
       this.addDocumentsModificationsPageTestData.Add_Documents_Modifications_Page.heading +

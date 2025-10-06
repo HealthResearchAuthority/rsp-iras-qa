@@ -613,3 +613,14 @@ export async function getRandomNumber(min: number, max: number): Promise<number>
   max = Math.floor(max);
   return randomInt(min, max);
 }
+
+export async function getFormattedDate(): Promise<string> {
+  const today = new Date();
+  const options: Intl.DateTimeFormatOptions = {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+  };
+  const formattedDate = today.toLocaleDateString('en-GB', options);
+  return formattedDate;
+}

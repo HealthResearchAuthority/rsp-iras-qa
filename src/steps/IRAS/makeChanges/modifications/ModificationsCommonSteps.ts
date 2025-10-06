@@ -1,6 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../hooks/CustomFixtures';
-import { confirmStringNotNull } from '../../../../utils/UtilFunctions';
+import { confirmStringNotNull, getFormattedDate } from '../../../../utils/UtilFunctions';
 
 const { Then } = createBdd(test);
 
@@ -230,7 +230,7 @@ Then(
     const statusActual = modificationRecord.get('statusValue');
     expect.soft(statusActual[0]).toBe(statusValue);
     const submittedDateActual = modificationRecord.get('submittedDateValue');
-    const submittedDateExpected = await modificationsCommonPage.getFormattedDate();
+    const submittedDateExpected = await getFormattedDate();
     expect.soft(submittedDateActual[0]).toBe(submittedDateExpected);
   }
 );
