@@ -40,6 +40,7 @@ export default class ModificationsDetailsPage {
   }
 
   async assertOnRemoveModificationsPage() {
+    expect.soft(this.removeModificationPageHeading).toBeVisible();
     const currentUrl = this.page.url();
     expect.soft(currentUrl).toContain('confirmremovechange?');
   }

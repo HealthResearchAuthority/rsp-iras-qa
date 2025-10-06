@@ -59,6 +59,7 @@ Feature: Create Amendment - Modification Details
     And I capture the page screenshot
     When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
     Then I can see the modification unfinished error page
+    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
     And I capture the page screenshot
     When I click the 'Return_To_Modification_Details' button on the 'Modification_Unfinished_Error_Page'
     Then I can see the modifications details page
@@ -81,6 +82,7 @@ Feature: Create Amendment - Modification Details
     And I capture the page screenshot
     When I click the 'Remove' link on the 'Modification_Details_Page'
     Then I can see the confirm remove modifications page
+    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
     And I capture the page screenshot
     And I click the 'Remove_Change' button on the 'Confirm_Remove_Modification_Page'
     And I capture the page screenshot
@@ -92,7 +94,7 @@ Feature: Create Amendment - Modification Details
       | Changes                                           |
       | Changes_Planned_End_Date_Unfinished_Modifications |
 
-  @rsp-4271 @UpdateDetailsFromModificationsDetailsPage
+  @rsp-4271 @UpdateDetailsFromModificationsDetailsPage @KNOWN_DEFECT_RSP-5275
   Scenario Outline: Verify that user can update the details from modification details page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I capture the page screenshot

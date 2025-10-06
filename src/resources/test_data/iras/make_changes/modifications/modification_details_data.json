@@ -28,12 +28,5 @@
     "changes_sub_heading_label": "Changes",
     "add_summary_heading_label": "Add summary and review modification before sending to sponsor",
     "add_summary_sub_label": "You'll have the option to add a brief summary and edit your modification before sending it to the sponsor on the next page."
-  },
-  "Missing_All_Mandatory_Fields": {
-    "area_of_change_dropdown": "Select area of change",
-    "specific_change_dropdown": "Select specific change"
-  },
-  "Missing_Mandatory_Only_Specific_Change": {
-    "specific_change_dropdown": "Select specific change"
   }
 }
