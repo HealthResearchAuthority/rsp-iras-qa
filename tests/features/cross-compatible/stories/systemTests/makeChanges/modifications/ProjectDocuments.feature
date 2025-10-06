@@ -159,8 +159,7 @@ Feature: Create Amendment - Project Documents Modifications
     Examples:
       | Specific_Change                    | Document_Upload_Files | Document_Upload_Files_New | Upload_Type      |
       | Correction_Of_Typographical_Errors | PNG_File              | PNG_File                  | single invalid   |
-      | Correction_Of_Typographical_Errors | Multiple_Files_Three  | Multiple_Files_Three      | multiple invalid |
-
+      | Protocol_Non_Substantial_Changes   | Multiple_Files_Three  | Multiple_Files_Three      | multiple invalid |
 
   @3877 @ValidateDocumentUploadInvalidFileErrorMessage @KNOWN_DEFECT_RSP-4801_4844_4920_4921
   Scenario Outline: Verify that an appropriate error message is displayed when the user uploads a file with an invalid format
@@ -178,9 +177,8 @@ Feature: Create Amendment - Project Documents Modifications
     Examples:
       | Specific_Change                    | Document_Upload_Files_Invalid    | Upload_Type      |
       | Correction_Of_Typographical_Errors | Multiple_Invalid_Files_Non_Video | multiple invalid |
-      | Correction_Of_Typographical_Errors | JSON_File                        | single invalid   |
+      | Protocol_Non_Substantial_Changes   | JSON_File                        | single invalid   |
 
-  #mixture of valid and invalid files
   @3877 @ValidateDocumentUploadInvalidDuplicateErrorMessage @KNOWN_DEFECT_RSP-4801_4844_4920_4921
   Scenario Outline: Verify that a relevant error message is shown when the user attempts to upload a video file that has already been uploaded
     And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
@@ -191,29 +189,16 @@ Feature: Create Amendment - Project Documents Modifications
     Then I upload '<Document_Upload_Files>' documents
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
-    And I get the list of files upload and separate valid and invalid files
+    And I get the list of files uploaded and separate valid and invalid files
     Then I validate 'Invalid_Format_Video_File_Error' displayed on 'Add_Document_Modifications_Page' while uploading '<Upload_Type>' documents
     When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
     Then I can see the review uploaded documents for '<Specific_Change>' page
-    And I capture the page screenshot
-    #And I validate only the valid files are uploaded successfully
-    When I click the 'Add_Another_Document' button on the 'Review_Uploaded_Document_Modifications_Page'
-    Then I can see the add documents for '<Specific_Change>' page
-    And I capture the page screenshot
-    Then I upload '<Document_Upload_Files_New>' documents
-    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
-    Then I validate 'Duplicate_File_Upload_Error' displayed on 'Add_Document_Modifications_Page' while uploading '<Upload_Type>' documents
     And I capture the page screenshot
 
     Examples:
       | Specific_Change                    | Document_Upload_Files                    | Document_Upload_Files_New | Upload_Type                      |
       | Correction_Of_Typographical_Errors | Multiple_Invalid_Files_Non_Video_Dataset | Multiple_Files_Three      | multiple upload multiple invalid |
-      | Correction_Of_Typographical_Errors | Single_Invalid_File_Non_Video_Dataset    | PNG_File                  | multiple upload single invalid   |
-
-
-
-  # cover error validation when exceeding 100MB - via manual execution only
-  # cover error validation - list of files containing few duplicate files, few incorrect format files(mix of valid and invalid files)-via automation - clarication
+      | Protocol_Non_Substantial_Changes   | Single_Invalid_File_Non_Video_Dataset    | PNG_File                  | multiple upload single invalid   |
 
   @rsp-3876 @ValidateDocumentUploadModificationsPageErrprMessages @KNOWN_DEFECT_RSP-4801_4920
   Scenario Outline: Validate the user is able to see error messages for invalid actions on upload documents for modifications
@@ -269,39 +254,3 @@ Feature: Create Amendment - Project Documents Modifications
       | Post_Trial_Information_For_Participants      |
       | Protocol_Non_Substantial_Changes             |
       | Translations_Addition_Of_Translated_Versions |
-
-  @3877 @ValidateDocumentUploadInvalidDuplicateErrorMessage @KNOWN_DEFECT_RSP-4801_4844_4920_4921 @abc
-  Scenario Outline: Verify that a relevant error message is shown when the user attempts to upload a video file that has already been uploaded
-    And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
-    And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    Then I can see the add documents for '<Specific_Change>' page
-    And I capture the page screenshot
-    Then I upload '<Document_Upload_Files>' documents
-    And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
-    And I get the list of files upload and separate valid and invalid files
-    #Then I can see the review uploaded documents for '<Specific_Change>' page
-    And I capture the page screenshot
-    When I click the 'Add_Another_Document' button on the 'Review_Uploaded_Document_Modifications_Page'
-    Then I can see the add documents for '<Specific_Change>' page
-    And I capture the page screenshot
-    Then I upload '<Document_Upload_Files_New>' documents
-    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
-    #Then I can see the review uploaded documents for '<Specific_Change>' page
-    And I capture the page screenshot
-    And I validate if any duplicate files in the new document upload '<Document_Upload_Files_New>'
-    #And I validate only the valid files are uploaded successfully
-    Then I new validate 'Duplicate_File_Upload_Error' displayed on 'Add_Document_Modifications_Page' while uploading '<Upload_Type>' documents
-    Then I new validate 'Invalid_Format_Video_File_Error' displayed on 'Add_Document_Modifications_Page' while uploading '<Upload_Type>' documents
-
-    Examples:
-      | Specific_Change                    | Document_Upload_Files | Document_Upload_Files_New                     | Upload_Type                        |
-      | Correction_Of_Typographical_Errors | PNG_File              | Single_Invalid_Valid_Duplicate_File_Non_Video | single_valid_invalid_and_duplicate |
-#| Correction_Of_Typographical_Errors | Multiple_Files_Three  | Multiple_Invalid_Valid_Duplicate_Files_Non_Video | multiple_valid_invalid_and_duplicate |
-
-# Examples:
-#   | Specific_Change                    | Document_Upload_Files                    | Document_Upload_Files_New | Upload_Type                      |
-#   | Correction_Of_Typographical_Errors | Multiple_Invalid_Files_Non_Video_Dataset | Multiple_Files_Three      | multiple upload multiple invalid |
-#   | Correction_Of_Typographical_Errors | Single_Invalid_File_Non_Video_Dataset    | PNG_File                  | multiple upload single invalid   |
-
