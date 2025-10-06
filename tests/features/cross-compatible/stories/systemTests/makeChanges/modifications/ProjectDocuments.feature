@@ -87,52 +87,52 @@ Feature: Create Amendment - Project Documents Modifications
     And I capture the page screenshot
 
     Examples:
-      | Specific_Change                    | Document_Upload_Files | Document_Upload_Files_New  |
-      # | Correction_Of_Typographical_Errors           | PNG_File              | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | GIF_File              | PNG_File                  |
-      # | Correction_Of_Typographical_Errors           | BMP_File              | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | SVG_File              | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | JPG_File              | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | JPEG_File             | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | DOC_File              | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | DOCX_File             | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | DOT_File              | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | DOTX_File             | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | XLS_File              | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | XLSX_File             | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | PDF_File              | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | TXT_File              | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | CSV_File              | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | PPT_File              | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | PPTX_File             | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | RTF_File              | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | ODT_File              | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | OFD_File              | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | XPS_File              | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | XML_File              | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | HTML_File             | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | HTM_File              | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | VCF_File              | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | EML_File              | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | MSG_File              | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | Multiple_Files        | GIF_File                  |
-      # | Correction_Of_Typographical_Errors           | Multiple_Files        | Multiple_Files            |
-      # | Correction_Of_Typographical_Errors           | BMP_File              | Multiple_Files            |
-      # | CRF_Other_Study_Data_Records                 | Multiple_Files        | GIF_File                  |
-      # | GDPR_Wording                                 | Multiple_Files        | GIF_File                  |
-      # | Other_Minor_Change_To_Study_Documents        | Multiple_Files        | GIF_File                  |
-      # | Post_Trial_Information_For_Participants      | Multiple_Files        | GIF_File                  |
-      # | Protocol_Non_Substantial_Changes             | Multiple_Files        | GIF_File                  |
-      # | Translations_Addition_Of_Translated_Versions | Multiple_Files        | GIF_File                  |
-      | Correction_Of_Typographical_Errors | MP4_File              | AVI_File                   |
-      | Correction_Of_Typographical_Errors | BMP_File              | Multiple_Files_Video_Valid |
-      | Correction_Of_Typographical_Errors | AVI_File              | MP4_File                   |
-      | Correction_Of_Typographical_Errors | MOV_File              | MKV_File                   |
-      | Correction_Of_Typographical_Errors | MKV_File              | MOV_File                   |
-      | Correction_Of_Typographical_Errors | MPG_File              | MPEG_File                  |
-      | Correction_Of_Typographical_Errors | MPEG_File             | MPG_File                   |
-      | Correction_Of_Typographical_Errors | WMV_File              | WEBM_File                  |
-      | Correction_Of_Typographical_Errors | WEBM_File             | WMV_File                   |
+      | Specific_Change                              | Document_Upload_Files | Document_Upload_Files_New  |
+      | Correction_Of_Typographical_Errors           | PNG_File              | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | GIF_File              | PNG_File                   |
+      | Correction_Of_Typographical_Errors           | BMP_File              | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | SVG_File              | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | JPG_File              | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | JPEG_File             | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | DOC_File              | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | DOCX_File             | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | DOT_File              | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | DOTX_File             | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | XLS_File              | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | XLSX_File             | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | PDF_File              | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | TXT_File              | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | CSV_File              | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | PPT_File              | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | PPTX_File             | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | RTF_File              | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | ODT_File              | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | OFD_File              | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | XPS_File              | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | XML_File              | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | HTML_File             | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | HTM_File              | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | VCF_File              | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | EML_File              | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | MSG_File              | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | Multiple_Files        | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | Multiple_Files        | Multiple_Files             |
+      | Correction_Of_Typographical_Errors           | BMP_File              | Multiple_Files             |
+      | CRF_Other_Study_Data_Records                 | Multiple_Files        | GIF_File                   |
+      | GDPR_Wording                                 | Multiple_Files        | GIF_File                   |
+      | Other_Minor_Change_To_Study_Documents        | Multiple_Files        | GIF_File                   |
+      | Post_Trial_Information_For_Participants      | Multiple_Files        | GIF_File                   |
+      | Protocol_Non_Substantial_Changes             | Multiple_Files        | GIF_File                   |
+      | Translations_Addition_Of_Translated_Versions | Multiple_Files        | GIF_File                   |
+      | Correction_Of_Typographical_Errors           | MP4_File              | AVI_File                   |
+      | Correction_Of_Typographical_Errors           | BMP_File              | Multiple_Files_Video_Valid |
+      | Correction_Of_Typographical_Errors           | AVI_File              | MP4_File                   |
+      | Correction_Of_Typographical_Errors           | MOV_File              | MKV_File                   |
+      | Correction_Of_Typographical_Errors           | MKV_File              | MOV_File                   |
+      | Correction_Of_Typographical_Errors           | MPG_File              | MPEG_File                  |
+      | Correction_Of_Typographical_Errors           | MPEG_File             | MPG_File                   |
+      | Correction_Of_Typographical_Errors           | WMV_File              | WEBM_File                  |
+      | Correction_Of_Typographical_Errors           | WEBM_File             | WMV_File                   |
 
   @4684 @ValidateDocumentUploadAndReviewForModificationsPage @KNOWN_DEFECT_RSP-4801_4844_4920_4921
   Scenario Outline: Verify that a relevant error message is shown when the user attempts to upload a video file that has already been uploaded
