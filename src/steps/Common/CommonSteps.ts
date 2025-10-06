@@ -849,6 +849,7 @@ Then(
         actualList = await manageReviewBodiesPage.getOrgNamesListFromUI();
         break;
       case 'uploaded documents':
+      case 'document type':
         actualList = await reviewUploadedDocumentsModificationsPage.getUploadedDocumentsListFromUI();
         break;
       default:
