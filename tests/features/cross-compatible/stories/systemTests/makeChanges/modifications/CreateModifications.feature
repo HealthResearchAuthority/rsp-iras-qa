@@ -349,15 +349,6 @@ Feature: Create Amendment - Create Modifications
   # Multiple_Changes_Planned_End_Date + project documents+particpant organsiation
   # back link navigation from Review_All_Changes_Page and confimation page for modification sent to sponsor page-
 
-  #   // for (const changeName of Object.keys(changesDataset)) {
-  # //   // Click Change link agaist every changeName
-  # //   //validate the review changes page for the changeName
-  # //   const changeDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName][changeName];
-  # //   await selectAreaOfChangePage.selectAreaOfChangeInModificationsPage(changeDataset);
-  # //   await modificationsCommonPage.createChangeModification(changeName, changeDataset);
-  # //   await commonItemsPage.clickButton('Modifications_Details_Page', 'Add_Another_Change');
-  # // }
-
   # //  And I can see the review changes planned end date page
   # //     And I capture the page screenshot
   # //     Then I validate all field values on review modifications page using '<Planned_End_Date>' , '<Organisation_Change_Affect>' and '<Affected_Org_Questions>'

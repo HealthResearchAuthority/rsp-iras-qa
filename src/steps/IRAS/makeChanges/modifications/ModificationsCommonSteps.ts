@@ -160,16 +160,31 @@ Then(
   }
 );
 
+const validateCardData = (expectedData: any, actualData: any) => {
+  const compareArrays = (expected: any[], actual: any[]) => {
+    if (expected.length !== actual.length) return false;
+    return expected.every((val, index) => val === actual[index]);
+  };
+
+  for (const key of Object.keys(expectedData)) {
+    const expectedValue = expectedData[key];
+    const actualValue = actualData[key];
+
+    if (Array.isArray(expectedValue)) {
+      const sortedExpected = [...expectedValue].sort((a, b) => expectedValue.indexOf(a) - expectedValue.indexOf(b));
+      const sortedActual = [...(actualValue || [])].sort((a, b) => expectedValue.indexOf(a) - expectedValue.indexOf(b));
+      expect.soft(compareArrays(sortedActual, sortedExpected)).toBe(true);
+    } else {
+      expect.soft(actualValue).toBe(expectedValue);
+    }
+  }
+};
+
 Then(
   'I validate the change details are displayed as per the {string} dataset',
-  async ({ modificationsCommonPage }, datasetName) => {
+  async ({ modificationsCommonPage, reviewAllChangesPage }, datasetName) => {
     const changesDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName];
-    const changeNames = Object.keys(changesDataset).reverse(); // Reverse the order of keys
-
-    const compareArrays = (a: any[], b: any[]) => {
-      if (a.length !== b.length) return false;
-      return a.every((val, index) => val === b[index]);
-    };
+    const changeNames = Object.keys(changesDataset).reverse();
 
     for (let i = 0; i < changeNames.length; i++) {
       const changeName = changeNames[i];
@@ -178,64 +193,30 @@ Then(
       const cardTitle = `Change ${i + 1} - ${expectedData.area_of_change_dropdown}`;
       const actualData = await modificationsCommonPage.getMappedSummaryCardDataForRankingCategoryChanges(
         cardTitle,
-        'Changes'
+        reviewAllChangesPage.reviewAllChangesPageTestData.Review_All_Changes_Page.changes_heading
       );
 
-      // console.log(`\n Comparing Change ${i + 1}: ${changeName}`);
-      // console.log('Expected:', expectedData);
-      // console.log('Actual:', actualData.cardData);
+      console.log(`\n Comparing Change ${i + 1}: ${changeName}`);
+      console.log('Expected:', expectedData);
+      console.log('Actual:', actualData.cardData);
 
-      // Compare keys and values in reverse order
-      const keys = Object.keys(expectedData).reverse();
-      for (const key of keys) {
-        const expectedValue = expectedData[key];
-        const actualValue = actualData.cardData[key];
-
-        if (Array.isArray(expectedValue)) {
-          const sortedExpected = [...expectedValue].sort((a, b) => expectedValue.indexOf(a) - expectedValue.indexOf(b));
-          const sortedActual = [...(actualValue || [])].sort(
-            (a, b) => expectedValue.indexOf(a) - expectedValue.indexOf(b)
-          );
-          expect.soft(compareArrays(sortedActual, sortedExpected)).toBe(true);
-        } else {
-          expect.soft(actualValue).toBe(expectedValue);
-        }
-      }
+      validateCardData(expectedData, actualData.cardData);
     }
   }
 );
 
 Then(
   'I validate sponsor details are displayed with {string}',
-  async ({ modificationsCommonPage, sponsorReferencePage }, datasetName) => {
+  async ({ modificationsCommonPage, sponsorReferencePage, reviewAllChangesPage }, datasetName) => {
     const expectedData = sponsorReferencePage.sponsorReferencePageTestData[datasetName];
     const actualData = await modificationsCommonPage.getMappedSummaryCardDataForRankingCategoryChanges(
-      'Sponsor details',
-      'Sponsor details'
+      reviewAllChangesPage.reviewAllChangesPageTestData.Review_All_Changes_Page.sponsor_details_heading,
+      reviewAllChangesPage.reviewAllChangesPageTestData.Review_All_Changes_Page.sponsor_details_heading
     );
-    // console.log('Expected:', expectedData);
-    // console.log('Actual:', actualData.cardData);
+    console.log('Expected:', expectedData);
+    console.log('Actual:', actualData.cardData);
 
-    const compareArrays = (expected: any[], actual: any[]) => {
-      if (expected.length !== actual.length) return false;
-      return expected.every((val, index) => val === actual[index]);
-    };
-
-    //  Compare keys and values
-    for (const key of Object.keys(expectedData)) {
-      const expectedValue = expectedData[key];
-      const actualValue = actualData.cardData[key];
-
-      if (Array.isArray(expectedValue)) {
-        const sortedExpected = [...expectedValue].sort((a, b) => expectedValue.indexOf(a) - expectedValue.indexOf(b));
-        const sortedActual = [...(actualValue || [])].sort(
-          (a, b) => expectedValue.indexOf(a) - expectedValue.indexOf(b)
-        );
-        expect.soft(compareArrays(sortedActual, sortedExpected)).toBe(true);
-      } else {
-        expect.soft(actualValue).toBe(expectedValue);
-      }
-    }
+    validateCardData(Object.keys(expectedData), actualData.cardData);
   }
 );
 
