@@ -1179,20 +1179,13 @@ Then(
   'I validate {string} displayed on {string} while uploading {string} documents',
   async (
     { commonItemsPage, addDocumentsModificationsPage, reviewUploadedDocumentsModificationsPage },
-    errorMessageFieldAndSummaryDatasetName: string,
+    errorKey: string,
     pageKey: string,
     uploadType: string
   ) => {
-    const isDuplicateOrInvalidFormat =
-      errorMessageFieldAndSummaryDatasetName === 'Duplicate_File_Upload_Error' ||
-      errorMessageFieldAndSummaryDatasetName === 'Invalid_Format_Video_File_Error';
-
-    const errorMessageFieldDataset =
-      pageKey === 'Add_Document_Modifications_Page'
-        ? addDocumentsModificationsPage.addDocumentsModificationsPageTestData[errorMessageFieldAndSummaryDatasetName]
-        : null;
-
+    const isSpecialError = ['Duplicate_File_Upload_Error', 'Invalid_Format_Video_File_Error'].includes(errorKey);
     const page = pageKey === 'Add_Document_Modifications_Page' ? addDocumentsModificationsPage : null;
+    const errorDataset = page?.addDocumentsModificationsPageTestData?.[errorKey];
 
     await expect(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
 
@@ -1201,26 +1194,32 @@ Then(
       return uploadType === 'multiple invalid' ? names : [names.toString()];
     };
 
-    const buildErrorMessages = async (dataset: any, prefixFiles: string[]) => {
-      return prefixFiles.map((file) => `${path.basename(file)}${Object.values(dataset)}`);
+    const formatErrorMessages = async (dataset: any, files: string[]) => {
+      return files.map(
+        (file) =>
+          `${path.basename(file)}${Object.values(dataset)
+            .map((val) => (typeof val === 'object' ? JSON.stringify(val) : val))
+            .join(', ')}`
+      );
     };
 
-    const summaryErrorExpectedValues = isDuplicateOrInvalidFormat
-      ? await buildErrorMessages(errorMessageFieldDataset, await getFileNames())
-      : Object.values(errorMessageFieldDataset);
+    const expectedSummaryErrors = isSpecialError
+      ? await formatErrorMessages(errorDataset, await getFileNames())
+      : Object.values(errorDataset);
 
-    const summaryErrorActualValues = await commonItemsPage.getSummaryErrorMessages();
-    expect.soft(summaryErrorActualValues).toEqual(summaryErrorExpectedValues);
+    const actualSummaryErrors = await commonItemsPage.getSummaryErrorMessages();
+    expect.soft(actualSummaryErrors).toEqual(expectedSummaryErrors);
 
-    if (!errorMessageFieldAndSummaryDatasetName.includes('Summary_Only')) {
-      for (const key of Object.keys(errorMessageFieldDataset)) {
-        const expectedValue = errorMessageFieldDataset[key];
-
-        if (Object.hasOwn(errorMessageFieldDataset, key)) {
-          if (isDuplicateOrInvalidFormat) {
+    if (!errorKey.includes('Summary_Only')) {
+      for (const [key, expectedValue] of Object.entries(errorDataset)) {
+        if (Object.hasOwn(errorDataset, key)) {
+          if (isSpecialError) {
             const fileNames = await getFileNames();
             const expectedMessages = fileNames.map(
-              (file) => `${path.basename(file)}${Object.values(errorMessageFieldDataset)}`
+              (file) =>
+                `${path.basename(file)}${Object.values(errorDataset)
+                  .map((val) => (typeof val === 'object' ? JSON.stringify(val) : val))
+                  .join(', ')}`
             );
 
             for (const message of expectedMessages) {
@@ -1238,7 +1237,7 @@ Then(
             const actualMessages = await commonItemsPage.getFieldErrorMessages(key, page);
             expect(actualMessages).toEqual(expectedValue);
 
-            const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
+            const element = await commonItemsPage.clickErrorSummaryLink(errorDataset, key, page);
             await expect(element).toBeInViewport();
           }
         }

@@ -323,7 +323,7 @@ export default class ModificationsCommonPage {
           break;
         }
         case 'Category': {
-          modificationInfo['category'] = cleanedValue.replaceAll(/&gt;/g, '>');
+          modificationInfo['category'] = cleanedValue;
           break;
         }
         case 'Review type': {
@@ -331,7 +331,7 @@ export default class ModificationsCommonPage {
           break;
         }
         default: {
-          cardData[cleanedKey.toLowerCase().replaceAll(/ /g, '_')] = cleanedValue;
+          cardData[cleanedKey.toLowerCase().replaceAll(' ', '_')] = cleanedValue;
         }
       }
     }

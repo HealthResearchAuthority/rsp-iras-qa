@@ -289,49 +289,47 @@ Then(
 
 Then(
   'I validate the error {string} displayed on {string}',
-  async (
-    { commonItemsPage, reviewYourDocumentInformationModificationsPage },
-    errorMessageFieldAndSummaryDatasetName: string,
-    pageKey: string
-  ) => {
-    const isSpecialCase =
-      errorMessageFieldAndSummaryDatasetName === 'Missing_Mandatory_Question_Previously_Approved_Error' ||
-      errorMessageFieldAndSummaryDatasetName ===
-        'Missing_Mandatory_Question_Previously_Approved_Document_Version_Date_Error';
+  async ({ commonItemsPage, reviewYourDocumentInformationModificationsPage }, errorKey: string, pageKey: string) => {
+    const specialErrors = [
+      'Missing_Mandatory_Question_Previously_Approved_Error',
+      'Missing_Mandatory_Question_Previously_Approved_Document_Version_Date_Error',
+    ];
+
+    const isSpecialCase = specialErrors.includes(errorKey);
 
     const page =
       pageKey === 'Review_Your_Document_Infomation_Modifications_Page'
         ? reviewYourDocumentInformationModificationsPage
         : null;
 
-    const errorMessageFieldDataset =
-      page?.reviewYourDocumentInfomationModificationsPageTestData?.[errorMessageFieldAndSummaryDatasetName];
+    const errorDataset = page?.reviewYourDocumentInfomationModificationsPageTestData?.[errorKey];
 
-    if (!errorMessageFieldDataset || !page) {
-      throw new Error(`Invalid pageKey or dataset name: ${pageKey}, ${errorMessageFieldAndSummaryDatasetName}`);
+    if (!errorDataset || !page) {
+      throw new Error(`Invalid pageKey or dataset name: ${pageKey}, ${errorKey}`);
     }
 
     await expect(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
 
-    const summaryErrorExpectedValues = isSpecialCase
-      ? Object.values(errorMessageFieldDataset).toString()
-      : Object.values(errorMessageFieldDataset);
+    const stringifyValues = (values: any[]) =>
+      values.map((val) => (typeof val === 'object' ? JSON.stringify(val) : val)).join(', ');
 
-    const summaryErrorActualValues = isSpecialCase
-      ? (await commonItemsPage.getSummaryErrorMessages()).toString()
+    const expectedSummaryErrors = isSpecialCase
+      ? stringifyValues(Object.values(errorDataset))
+      : Object.values(errorDataset);
+
+    const actualSummaryErrors = isSpecialCase
+      ? stringifyValues(await commonItemsPage.getSummaryErrorMessages())
       : await commonItemsPage.getSummaryErrorMessages();
 
-    expect.soft(summaryErrorActualValues).toEqual(summaryErrorExpectedValues);
+    expect.soft(actualSummaryErrors).toEqual(expectedSummaryErrors);
 
-    for (const key of Object.keys(errorMessageFieldDataset)) {
-      const expectedFieldError = errorMessageFieldDataset[key];
-
+    for (const [key, expectedFieldError] of Object.entries(errorDataset)) {
       const actualFieldError =
         await reviewYourDocumentInformationModificationsPage.getFieldErrorMessagesReviewInformation(key, page);
 
       expect.soft(actualFieldError).toEqual(expectedFieldError);
 
-      const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
+      const element = await commonItemsPage.clickErrorSummaryLink(errorDataset, key, page);
       await expect(element).toBeInViewport();
 
       await reviewYourDocumentInformationModificationsPage.setFieldErrorMessage(actualFieldError);
