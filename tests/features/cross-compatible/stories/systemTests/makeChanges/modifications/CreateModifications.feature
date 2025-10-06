@@ -346,16 +346,13 @@ Feature: Create Amendment - Create Modifications
       | Changes                           | New_Changes                              |
       | Multiple_Changes_Planned_End_Date | Multiple_Changes_Planned_End_Date_Change |
 
-  # Multiple_Changes_Planned_End_Date + project documents+particpant organsiation
+  # Multiple_Changes_Planned_End_Date + project documents+particpant organisation
   # back link navigation from Review_All_Changes_Page and confimation page for modification sent to sponsor page-
 
-  # //  And I can see the review changes planned end date page
-  # //     And I capture the page screenshot
-  # //     Then I validate all field values on review modifications page using '<Planned_End_Date>' , '<Organisation_Change_Affect>' and '<Affected_Org_Questions>'
-  # //     When I click the change link '<Change_Field>' on review changes planned end date page
-  # //     Then I can see the 'Planned_End_Date' page for modifications
-  # //     And I capture the page screenshot
-
+  # And I can see the review changes planned end date page
+  # Then I validate all field values on review modifications page using '<Planned_End_Date>' , '<Organisation_Change_Affect>' and '<Affected_Org_Questions>'
+  # When I click the change link '<Change_Field>' on review changes planned end date page
+  # Then I can see the 'Planned_End_Date' page for modifications
 
   @rsp-4364 @ValidateSponsorReferenceModifications
   Scenario Outline: Verify user is able to fill sponsor reference details for the modification

@@ -1199,16 +1199,18 @@ Then(
       return uploadType === 'multiple invalid' ? names : [names.toString()];
     };
 
-    const stringifyValues = (dataset: any): string =>
-      Object.values(dataset)
-        .map((val) => {
-          try {
-            return typeof val === 'object' ? JSON.stringify(val) : String(val);
-          } catch {
-            return '[Unstringifiable Object]';
-          }
-        })
-        .join(', ');
+    const safeStringify = (val: any): string => {
+      if (val === null || val === undefined) return String(val);
+      if (typeof val === 'object') {
+        try {
+          return JSON.stringify(val);
+        } catch {
+          return '[Unstringifiable Object]';
+        }
+      }
+      return String(val);
+    };
+    const stringifyValues = (dataset: any): string => Object.values(dataset).map(safeStringify).join(', ');
 
     const buildExpectedMessages = async (dataset: any, files: string[]): Promise<string[]> =>
       files.map((file) => `${path.basename(file)}${stringifyValues(dataset)}`);
