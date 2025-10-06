@@ -171,23 +171,25 @@ Then(
 );
 
 Then(
-  'I can see the {string} in the research locations tab of project overview page',
+  'I validate the data for {string} is displayed in the research locations tab of project overview page',
   async ({ projectOverviewPage }, datasetName: string) => {
     await expect(projectOverviewPage.research_locations_heading).toBeVisible();
-    const dataset = projectOverviewPage.projectOverviewPageTestData[datasetName];
+    const dataset = projectOverviewPage.projectOverviewPageTestData[datasetName].Research_Locations;
     const expectedParticipatingNations = dataset.participating_nations;
     const expectedNhsHscOrganisations = dataset.nhs_hsc_organisations;
     const expectedLeadNation = dataset.lead_nation;
     const actualParticipatingNations = confirmStringNotNull(
-      await projectOverviewPage.participating_nations.textContent()
+      await projectOverviewPage.research_locations_tab_participating_nations.textContent()
     );
     const actualTrimmedParticipatingNations = await removeUnwantedWhitespace(
       confirmStringNotNull(actualParticipatingNations)
     );
     const actualNhsHscOrganisations = confirmStringNotNull(
-      await projectOverviewPage.nhs_hsc_organisations.textContent()
+      await projectOverviewPage.research_locations_tab_nhs_hsc_organisations.textContent()
     );
-    const actualLeadNation = confirmStringNotNull(await projectOverviewPage.lead_nation.textContent());
+    const actualLeadNation = confirmStringNotNull(
+      await projectOverviewPage.research_locations_tab_lead_nation.textContent()
+    );
     expect(actualTrimmedParticipatingNations).toContain(expectedParticipatingNations);
     expect(actualNhsHscOrganisations).toBe(expectedNhsHscOrganisations);
     expect(actualLeadNation).toBe(expectedLeadNation);

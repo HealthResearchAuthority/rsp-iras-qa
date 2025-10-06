@@ -15,6 +15,7 @@
     "primary_sponsor_organisation": "Primary sponsor organisation",
     "sponsor_contact": "Sponsor contact",
     "research_locations_heading": "Research locations",
+    "post_approvals_heading": "Post approvals",
     "participating_nations": "Participating nations",
     "nhs_hsc_organisations": "NHS / HSC organisations",
     "lead_nation": "Lead nation",
@@ -35,14 +36,18 @@
     "planned_project_end_year_text": "2030"
   },
   "Valid_Research_Locations_Details_Nhs": {
-    "participating_nations": "England Northern Ireland Scotland Wales",
-    "nhs_hsc_organisations": "Yes",
-    "lead_nation": "England"
+    "Research_Locations": {
+      "participating_nations": "England Northern Ireland Scotland Wales",
+      "nhs_hsc_organisations": "Yes",
+      "lead_nation": "England"
+    }
   },
   "Valid_Research_Locations_Details_Non_Nhs": {
-    "participating_nations": "Northern Ireland Scotland Wales",
-    "nhs_hsc_organisations": "No",
-    "lead_nation": ""
+    "Research_Locations": {
+      "participating_nations": "Northern Ireland Scotland Wales",
+      "nhs_hsc_organisations": "No",
+      "lead_nation": ""
+    }
   },
   "Kilmarnock_Cancer_Research": {
     "status": "Submitted",
@@ -54,6 +59,11 @@
       "chief_investigator_email_text": "chris.test@bmail.com",
       "primary_sponsor_organisation_text": "FIFE",
       "sponsor_contact_email_text": "chris.sponsor@bmail.com"
+    },
+    "Research_Locations": {
+      "participating_nations": "Scotland",
+      "nhs_hsc_organisations": "Yes",
+      "lead_nation": "Scotland"
     }
   },
   "Swansea_ACL_Trials": {
@@ -66,14 +76,12 @@
       "chief_investigator_email_text": "david.bishop@bmail.com",
       "primary_sponsor_organisation_text": "Swansea University",
       "sponsor_contact_email_text": ""
+    },
+    "Research_Locations": {
+      "participating_nations": "Wales",
+      "nhs_hsc_organisations": "Yes",
+      "lead_nation": "Wales"
     }
-  },
-  "Label_Texts_Post_Approval": {
-    "modification_id": "Modification ID",
-    "modification_type": "Modification type",
-    "review_type": "Review type",
-    "category": "Category",
-    "status": "Status"
   },
   "Project_Details_Tab": {
     "iras_id_label": "IRAS ID",
@@ -83,5 +91,18 @@
     "chief_investigator_label": "Chief Investigator",
     "primary_sponsor_org_label": "Primary sponsor organisation",
     "sponsor_contact_label": "Sponsor contact"
+  },
+  "Research_Locations_Tab": {
+    "participating_nations_label": "Participating nations",
+    "nhs_hsc_organisations_label": "NHS / HSC organisations",
+    "lead_nation_label": "Lead nation"
+  },
+  "Post_Approval_Tab": {
+    "post_approvals_tab_modification_id": "Modification ID",
+    "post_approvals_tab_modification_type": "Modification type",
+    "post_approvals_tab_review_type": "Review type",
+    "post_approvals_tab_category": "Category",
+    "post_approvals_tab_date_submitted": "Date submitted",
+    "post_approvals_tab_status": "Status"
   }
 }

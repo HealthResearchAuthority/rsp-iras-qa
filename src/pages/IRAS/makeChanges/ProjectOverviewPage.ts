@@ -19,20 +19,10 @@ export default class ProjectOverviewPage {
   readonly project_overview_heading: Locator;
   readonly key_project_roles_heading: Locator;
   readonly research_locations_heading: Locator;
-  readonly participating_nations_row: Locator;
-  readonly nhs_hsc_organisations_row: Locator;
-  readonly lead_nation_row: Locator;
-  readonly participating_nations: Locator;
-  readonly nhs_hsc_organisations: Locator;
-  readonly lead_nation: Locator;
-  readonly row_value_label: Locator;
-  readonly modification_id: Locator;
-  readonly modification_type: Locator;
-  readonly review_type: Locator;
-  readonly category: Locator;
-  readonly status: Locator;
+  readonly post_approvals_heading: Locator;
   readonly view_project_overview_link: Locator;
-
+  readonly tab_row_label: Locator;
+  readonly tab_row_value: Locator;
   readonly project_details_tab_iras_id_label: Locator;
   readonly project_details_tab_iras_id: Locator;
   readonly project_details_tab_short_project_title_label: Locator;
@@ -43,6 +33,18 @@ export default class ProjectOverviewPage {
   readonly project_team_tab_primary_sponsor_org: Locator;
   readonly project_team_tab_sponsor_contact_label: Locator;
   readonly project_team_tab_sponsor_contact: Locator;
+  readonly research_locations_tab_participating_nations_label: Locator;
+  readonly research_locations_tab_participating_nations: Locator;
+  readonly research_locations_tab_nhs_hsc_organisations_label: Locator;
+  readonly research_locations_tab_nhs_hsc_organisations: Locator;
+  readonly research_locations_tab_lead_nation_label: Locator;
+  readonly research_locations_tab_lead_nation: Locator;
+  readonly post_approvals_tab_modification_id: Locator;
+  readonly post_approvals_tab_modification_type: Locator;
+  readonly post_approvals_tab_review_type: Locator;
+  readonly post_approvals_tab_category: Locator;
+  readonly post_approvals_tab_date_submitted: Locator;
+  readonly post_approvals_tab_status: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -77,72 +79,94 @@ export default class ProjectOverviewPage {
     this.research_locations_heading = this.page
       .getByRole('heading')
       .getByText(this.projectOverviewPageTestData.Project_Overview_Page.research_locations_heading);
-    this.participating_nations_row = this.page.getByText(
-      projectOverviewPageTestData.Project_Overview_Page.participating_nations
-    );
-    this.participating_nations = this.participating_nations_row.locator('..').locator('.govuk-summary-list__value');
-    this.nhs_hsc_organisations_row = this.page.getByText(
-      projectOverviewPageTestData.Project_Overview_Page.nhs_hsc_organisations
-    );
-    this.nhs_hsc_organisations = this.nhs_hsc_organisations_row.locator('..').locator('.govuk-summary-list__value');
-    this.lead_nation_row = this.page.getByText(projectOverviewPageTestData.Project_Overview_Page.lead_nation);
-    this.lead_nation = this.lead_nation_row.locator('..').locator('.govuk-summary-list__value');
-    this.row_value_label = this.page.locator('dd');
-    this.modification_id = this.page.getByRole('button', {
-      name: this.projectOverviewPageTestData.Label_Texts_Post_Approval.modification_id,
-      exact: true,
-    });
-    this.category = this.page.getByRole('button', {
-      name: this.projectOverviewPageTestData.Label_Texts_Post_Approval.category,
-      exact: true,
-    });
-    this.modification_type = this.page.getByRole('button', {
-      name: this.projectOverviewPageTestData.Label_Texts_Post_Approval.modification_type,
-      exact: true,
-    });
-    this.review_type = this.page.getByRole('button', {
-      name: this.projectOverviewPageTestData.Label_Texts_Post_Approval.review_type,
-      exact: true,
-    });
-    this.status = this.page.getByRole('button', {
-      name: this.projectOverviewPageTestData.Label_Texts_Post_Approval.status,
-      exact: true,
-    });
+    this.post_approvals_heading = this.page
+      .getByRole('heading')
+      .getByText(this.projectOverviewPageTestData.Project_Overview_Page.research_locations_heading);
     this.view_project_overview_link = this.page
       .locator('.govuk-body')
       .getByText(this.linkTextData.Project_Overview_Page.View_Project_Overview);
 
     //tab locators
-    this.project_details_tab_iras_id_label = this.page
-      .locator('.govuk-summary-list__key')
-      .getByText(this.projectOverviewPageTestData.Project_Details_Tab.iras_id_label, { exact: true });
-    this.project_details_tab_iras_id = this.project_details_tab_iras_id_label
-      .locator('..')
-      .locator('.govuk-summary-list__value');
-    this.project_details_tab_short_project_title_label = this.page
-      .locator('.govuk-summary-list__key')
-      .getByText(this.projectOverviewPageTestData.Project_Details_Tab.short_project_title_label, { exact: true });
+    this.tab_row_label = this.page.locator('.govuk-summary-list__key');
+    this.tab_row_value = this.page.locator('.govuk-summary-list__value');
+    this.project_details_tab_iras_id_label = this.tab_row_label.getByText(
+      this.projectOverviewPageTestData.Project_Details_Tab.iras_id_label,
+      { exact: true }
+    );
+    this.project_details_tab_iras_id = this.project_details_tab_iras_id_label.locator('..').locator(this.tab_row_value);
+    this.project_details_tab_short_project_title_label = this.tab_row_label.getByText(
+      this.projectOverviewPageTestData.Project_Details_Tab.short_project_title_label,
+      { exact: true }
+    );
     this.project_details_tab_short_project_title = this.project_details_tab_short_project_title_label
       .locator('..')
-      .locator('.govuk-summary-list__value');
-    this.project_team_tab_chief_investigator_label = this.page
-      .locator('.govuk-summary-list__key')
-      .getByText(this.projectOverviewPageTestData.Project_Team_Tab.chief_investigator_label, { exact: true });
+      .locator(this.tab_row_value);
+    this.project_team_tab_chief_investigator_label = this.tab_row_label.getByText(
+      this.projectOverviewPageTestData.Project_Team_Tab.chief_investigator_label,
+      { exact: true }
+    );
     this.project_team_tab_chief_investigator = this.project_team_tab_chief_investigator_label
       .locator('..')
-      .locator('.govuk-summary-list__value');
-    this.project_team_tab_primary_sponsor_org_label = this.page
-      .locator('.govuk-summary-list__key')
-      .getByText(this.projectOverviewPageTestData.Project_Team_Tab.primary_sponsor_org_label, { exact: true });
+      .locator(this.tab_row_value);
+    this.project_team_tab_primary_sponsor_org_label = this.tab_row_label.getByText(
+      this.projectOverviewPageTestData.Project_Team_Tab.primary_sponsor_org_label,
+      { exact: true }
+    );
     this.project_team_tab_primary_sponsor_org = this.project_team_tab_primary_sponsor_org_label
       .locator('..')
-      .locator('.govuk-summary-list__value');
-    this.project_team_tab_sponsor_contact_label = this.page
-      .locator('.govuk-summary-list__key')
-      .getByText(this.projectOverviewPageTestData.Project_Team_Tab.sponsor_contact_label, { exact: true });
+      .locator(this.tab_row_value);
+    this.project_team_tab_sponsor_contact_label = this.tab_row_label.getByText(
+      this.projectOverviewPageTestData.Project_Team_Tab.sponsor_contact_label,
+      { exact: true }
+    );
     this.project_team_tab_sponsor_contact = this.project_team_tab_sponsor_contact_label
       .locator('..')
-      .locator('.govuk-summary-list__value');
+      .locator(this.tab_row_value);
+    this.research_locations_tab_participating_nations_label = this.tab_row_label.getByText(
+      this.projectOverviewPageTestData.Research_Locations_Tab.participating_nations_label,
+      { exact: true }
+    );
+    this.research_locations_tab_participating_nations = this.research_locations_tab_participating_nations_label
+      .locator('..')
+      .locator(this.tab_row_value);
+    this.research_locations_tab_nhs_hsc_organisations_label = this.tab_row_label.getByText(
+      this.projectOverviewPageTestData.Research_Locations_Tab.nhs_hsc_organisations_label,
+      { exact: true }
+    );
+    this.research_locations_tab_nhs_hsc_organisations = this.research_locations_tab_nhs_hsc_organisations_label
+      .locator('..')
+      .locator(this.tab_row_value);
+    this.research_locations_tab_lead_nation_label = this.tab_row_label.getByText(
+      this.projectOverviewPageTestData.Research_Locations_Tab.lead_nation_label,
+      { exact: true }
+    );
+    this.research_locations_tab_lead_nation = this.research_locations_tab_lead_nation_label
+      .locator('..')
+      .locator(this.tab_row_value);
+    this.post_approvals_tab_modification_id = this.page.getByRole('button', {
+      name: this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_tab_modification_id,
+      exact: true,
+    });
+    this.post_approvals_tab_modification_type = this.page.getByRole('button', {
+      name: this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_tab_modification_type,
+      exact: true,
+    });
+    this.post_approvals_tab_review_type = this.page.getByRole('button', {
+      name: this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_tab_review_type,
+      exact: true,
+    });
+    this.post_approvals_tab_category = this.page.getByRole('button', {
+      name: this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_tab_category,
+      exact: true,
+    });
+    this.post_approvals_tab_date_submitted = this.page.getByRole('button', {
+      name: this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_tab_date_submitted,
+      exact: true,
+    });
+    this.post_approvals_tab_status = this.page.getByRole('button', {
+      name: this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_tab_status,
+      exact: true,
+    });
   }
 
   //Page Methods

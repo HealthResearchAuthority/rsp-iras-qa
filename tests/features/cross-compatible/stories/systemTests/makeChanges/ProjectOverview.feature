@@ -43,7 +43,7 @@ Feature: Project Overview
         And I validate the 'created' data for '<Project_Team_Details>' is displayed in the project team tab of project overview page
         And I capture the page screenshot
         Then I click the 'Research_Locations' link on the 'Project_Overview_Page'
-        And I can see the '<Research_Locations_Details>' in the research locations tab of project overview page
+        And I validate the data for '<Research_Locations_Details>' is displayed in the research locations tab of project overview page
         And I capture the page screenshot
 
         Examples:
@@ -58,7 +58,7 @@ Feature: Project Overview
         And I capture the page screenshot
         When I click the 'Post_Approval' link on the 'Project_Overview_Page'
         And I capture the page screenshot
-        And I can see the 'Label_Texts_Post_Approval' ui labels on the project overview page
+        And I can see the 'Post_Approval_Tab' ui labels on the project overview page
         And I can see the status of modifications displayed is 'Modification_Status_Draft'
 
     @rsp-4876 @PostApprovalPageSort
@@ -121,7 +121,7 @@ Feature: Project Overview
             | page number       |
             | previous link     |
 
-    @ProjectOverviewTabs @rsp-4876 @rsp-5050 @KNOWN-DEFECT-RSP-5322 @only
+    @ProjectOverviewTabs @rsp-4876 @rsp-5050 @KNOWN-DEFECT-RSP-5322
     Scenario Outline: Validate the expected data is available and displayed on the project overview page
         And I navigate to the project overview page of the '<Project_Name>' project
         And I capture the page screenshot
@@ -132,7 +132,13 @@ Feature: Project Overview
         Then I validate the 'existing' data for '<Project_Name>' is displayed in the project details tab of project overview page
         When I click the 'Project_Team' link on the 'Project_Overview_Page'
         And I capture the page screenshot
-        And I validate the 'existing' data for '<Project_Name>' is displayed in the project team tab of project overview page
+        Then I validate the 'existing' data for '<Project_Name>' is displayed in the project team tab of project overview page
+        When I click the 'Research_Locations' link on the 'Project_Overview_Page'
+        And I capture the page screenshot
+        Then I validate the data for '<Project_Name>' is displayed in the research locations tab of project overview page
+        When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+        And I capture the page screenshot
+        Then I can see the 'Post_Approval_Tab' ui labels on the project overview page
         Examples:
             | Project_Name               |
             | Kilmarnock_Cancer_Research |
