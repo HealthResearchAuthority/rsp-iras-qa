@@ -121,7 +121,7 @@ Feature: Project Overview
             | page number       |
             | previous link     |
 
-    @ProjectOverviewTabs @rsp-4876 @rsp-5050 @KNOWN-DEFECT-RSP-5322
+    @ProjectOverviewTabs @rsp-4876 @rsp-5047 @rsp-5048 @rsp-5049 @rsp-5050 @KNOWN-DEFECT-RSP-5322
     Scenario Outline: Validate the expected data is available and displayed on the project overview page
         And I navigate to the project overview page of the '<Project_Name>' project
         And I capture the page screenshot
