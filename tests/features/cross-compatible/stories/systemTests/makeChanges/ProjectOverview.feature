@@ -15,9 +15,9 @@ Feature: Project Overview
         And I fill the project details title page with 'Valid_Data_All_Fields'
         And I capture the page screenshot
         When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-        Then I fill the key project roles page with 'Valid_Data_All_Fields'
+        Then I fill the chief investigator page with 'Valid_Data_All_Fields'
         And I capture the page screenshot
-        Then I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+        Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
         Then I fill the research locations page with '<Research_Project_Details>'
         And I capture the page screenshot
         When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -40,7 +40,7 @@ Feature: Project Overview
         And I validate the data displayed '<Project_Details>' in the project details tab of project overview page
         And I capture the page screenshot
         When I click the 'Key_Project_Roles' link on the 'Project_Overview_Page'
-        And I can see the '<Key_Project_Roles_Details>' in the key project roles tab of project overview page
+        And I can see the '<Key_Project_Roles_Details>' in the chief investigator tab of project overview page
         And I capture the page screenshot
         Then I click the 'Research_Locations' link on the 'Project_Overview_Page'
         And I can see the '<Research_Locations_Details>' in the research locations tab of project overview page

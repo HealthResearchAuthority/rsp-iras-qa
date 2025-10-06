@@ -147,65 +147,65 @@
       "modification_type_checkbox": ["Minor modification", "Modification of an important detail"]
     },
     "Advanced_Filters_Nth_Chief_Investigator_Name_Filter": {
-      "chief_investigator_name_text": "Barry White"
+      "chief_investigator_name_text": "ci@hra.nhs.uk"
     },
     "Advanced_Filters_Nth_After_Remove_Chief_Investigator_Name_Filter": {
-      "short_project_title_text": "Project 01",
-      "sponsor_organisation_text": "COLD GENESYS INC",
-      "date_submitted_from_day_text": "11",
-      "date_submitted_from_month_dropdown": "April",
-      "date_submitted_from_year_text": "2023",
-      "date_submitted_to_day_text": "02",
-      "date_submitted_to_month_dropdown": "January",
-      "date_submitted_to_year_text": "2025",
+      "short_project_title_text": "QA Automation",
+      "sponsor_organisation_text": "AIREDALE NHS FOUNDATION TRUST",
+      "date_submitted_from_day_text": "01",
+      "date_submitted_from_month_dropdown": "January",
+      "date_submitted_from_year_text": "1900",
+      "date_submitted_to_day_text": "31",
+      "date_submitted_to_month_dropdown": "December",
+      "date_submitted_to_year_text": "2050",
       "lead_nation_checkbox": ["England", "Wales"],
       "participating_nation_checkbox": ["England", "Wales"],
       "modification_type_checkbox": ["Minor modification", "Modification of an important detail"]
     },
     "Advanced_Filters_Nth_Sponsor_Organisation_Filter": {
-      "sponsor_organisation_text": "COLD GENESYS INC"
+      "sponsor_organisation_text": "AIREDALE NHS FOUNDATION TRUST"
     },
     "Advanced_Filters_Nth_After_Remove_Sponsor_Organisation_Filter": {
-      "chief_investigator_name_text": "Barry White",
-      "short_project_title_text": "Project 01",
-      "date_submitted_from_day_text": "11",
-      "date_submitted_from_month_dropdown": "April",
-      "date_submitted_from_year_text": "2023",
-      "date_submitted_to_day_text": "02",
-      "date_submitted_to_month_dropdown": "January",
-      "date_submitted_to_year_text": "2025",
+      "chief_investigator_name_text": "ci@hra.nhs.uk",
+      "short_project_title_text": "QA Automation",
+      "date_submitted_from_day_text": "01",
+      "date_submitted_from_month_dropdown": "January",
+      "date_submitted_from_year_text": "1900",
+      "date_submitted_to_day_text": "31",
+      "date_submitted_to_month_dropdown": "December",
+      "date_submitted_to_year_text": "2050",
       "lead_nation_checkbox": ["England", "Wales"],
       "participating_nation_checkbox": ["England", "Wales"],
       "modification_type_checkbox": ["Minor modification", "Modification of an important detail"]
     },
     "Advanced_Filters_Nth_Date_Submitted_From_To_Filter": {
-      "date_submitted_from_day_text": "11",
-      "date_submitted_from_month_dropdown": "April",
-      "date_submitted_from_year_text": "2023",
-      "date_submitted_to_day_text": "02",
-      "date_submitted_to_month_dropdown": "January",
-      "date_submitted_to_year_text": "2025"
+      "date_submitted_from_day_text": "01",
+      "date_submitted_from_month_dropdown": "January",
+      "date_submitted_from_year_text": "1900",
+      "date_submitted_to_day_text": "31",
+      "date_submitted_to_month_dropdown": "December",
+      "date_submitted_to_year_text": "2050"
     },
     "Advanced_Filters_Nth_After_Remove_Date_Submitted_From_To_Filter": {
-      "chief_investigator_name_text": "Barry White",
-      "short_project_title_text": "Project 01",
-      "sponsor_organisation_text": "COLD GENESYS INC",
+      "chief_investigator_name_text": "ci@hra.nhs.uk",
+      "short_project_title_text": "QA Automation",
+      "sponsor_organisation_text": "AIREDALE NHS FOUNDATION TRUST",
       "lead_nation_checkbox": ["England", "Wales"],
       "participating_nation_checkbox": ["England", "Wales"],
       "modification_type_checkbox": ["Minor modification", "Modification of an important detail"]
     },
     "Advanced_Filters_Nth_Short_Project_Title_Filter": {
-      "short_project_title_text": "Project 01"
+      "short_project_title_text": "QA Automation"
     },
     "Advanced_Filters_Nth_After_Remove_Short_Project_Title_Filter": {
-      "chief_investigator_name_text": "Barry White",
-      "sponsor_organisation_text": "COLD GENESYS INC",
-      "date_submitted_from_day_text": "11",
-      "date_submitted_from_month_dropdown": "April",
-      "date_submitted_from_year_text": "2023",
-      "date_submitted_to_day_text": "02",
-      "date_submitted_to_month_dropdown": "January",
-      "date_submitted_to_year_text": "2025",
+      "chief_investigator_name_text": "ci@hra.nhs.uk",
+      "sponsor_organisation_text": "AIREDALE NHS FOUNDATION TRUST",
+      "date_submitted_from_day_text": "01",
+      "date_submitted_from_month_dropdown": "January",
+      "date_submitted_from_year_text": "1900",
+      "date_submitted_to_day_text": "31",
+      "date_submitted_to_month_dropdown": "December",
+      "date_submitted_to_year_text": "2050",
       "lead_nation_checkbox": ["England", "Wales"],
       "participating_nation_checkbox": ["England", "Wales"],
       "modification_type_checkbox": ["Minor modification", "Modification of an important detail"]

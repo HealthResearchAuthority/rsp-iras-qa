@@ -40,7 +40,7 @@
   "Project_Details_Title_Page": {
     "Back": "Back"
   },
-  "Key_Project_Roles_Page": {
+  "Chief_Investigator_Page": {
     "Back": "Back"
   },
   "Research_Locations_Page": {
@@ -121,7 +121,7 @@
     "Project_Details": "Project details",
     "Project": "QA_Automation - This is a short project title",
     "Post_Approval": "Post approval",
-    "Key_Project_Roles": "Key project roles",
+    "Key_Project_Roles": "Chief investigator",
     "Research_Locations": "Research locations",
     "View_Project_Overview": "View project overview",
     "Project_Documents":"Project documents"
