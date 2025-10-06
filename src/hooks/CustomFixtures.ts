@@ -65,6 +65,7 @@ import ModificationsReceivedCommonPage from '../pages/IRAS/reviewResearch/receiv
 import SelectStudyWideReviewerPage from '../pages/IRAS/reviewResearch/receiveAmendments/SelectStudyWideReviewerPage';
 import ModificationsAssignmentConfirmationPage from '../pages/IRAS/reviewResearch/receiveAmendments/ModificationsAssignmentConfirmationPage';
 import MyModificationsTasklistPage from '../pages/IRAS/reviewResearch/receiveAmendments/MyModificationsTasklistPage';
+import SponsorReferencePage from '../pages/IRAS/makeChanges/modifications/SponsorReferencePage';
 import AddDocumentDetailsModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/AddDocumentDetailsModificationsPage';
 import AddDocumentDetailsForSpecificDocumentModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/AddDocumentDetailsForSpecificDocumentModificationsPage';
 import ReviewYourDocumentInformationModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/ReviewYourDocumentInfomationModificationsPage';
@@ -133,6 +134,7 @@ type CustomFixtures = {
   modificationsAssignmentConfirmationPage: ModificationsAssignmentConfirmationPage;
   myModificationsTasklistPage: MyModificationsTasklistPage;
   modificationsReceivedCommonPage: ModificationsReceivedCommonPage;
+  sponsorReferencePage: SponsorReferencePage;
   addDocumentDetailsModificationsPage: AddDocumentDetailsModificationsPage;
   addDocumentDetailsForSpecificDocumentModificationsPage: AddDocumentDetailsForSpecificDocumentModificationsPage;
   reviewYourDocumentInformationModificationsPage: ReviewYourDocumentInformationModificationsPage;
@@ -388,6 +390,10 @@ export const test = base.extend<CustomFixtures>({
 
   modificationsReceivedCommonPage: async ({ page }, use) => {
     await use(new ModificationsReceivedCommonPage(page));
+  },
+
+  sponsorReferencePage: async ({ page }, use) => {
+    await use(new SponsorReferencePage(page));
   },
 
   addDocumentDetailsModificationsPage: async ({ page }, use) => {
