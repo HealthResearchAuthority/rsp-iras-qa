@@ -19,7 +19,6 @@ Then(
     const shortProjectTitleExpected =
       projectDetailsTitlePage.projectDetailsTitlePageTestData[projectTitleDatasetName].short_project_title_text;
     const modificationIDExpected = irasIDExpected + '/' + 1;
-    // const irasIDActual = confirmStringNotNull(await modificationsCommonPage.iras_id_label.textContent());
     const irasIDActual = await modificationsCommonPage.iras_id_value.textContent();
     const shortProjectTitleActual = confirmStringNotNull(
       await modificationsCommonPage.short_project_title_value.textContent()
@@ -27,13 +26,15 @@ Then(
     const modificationIDActual = confirmStringNotNull(
       await modificationsCommonPage.modification_id_value.textContent()
     );
-    // const statusActual = confirmStringNotNull(await modificationsCommonPage.status_value.textContent());
+    if (await modificationsCommonPage.status_value.isVisible()) {
+      const statusActual = confirmStringNotNull(await modificationsCommonPage.status_value.textContent());
+      expect
+        .soft(statusActual)
+        .toBe(modificationsCommonPage.modificationsCommonPageTestData.Label_Texts.draft_status_value);
+    }
     expect.soft(irasIDActual).toBe(irasIDExpected);
     expect.soft(shortProjectTitleActual).toBe(shortProjectTitleExpected);
     expect.soft(modificationIDActual).toBe(modificationIDExpected);
-    // expect
-    //   .soft(statusActual)
-    //   .toBe(modificationsCommonPage.modificationsCommonPageTestData.Label_Texts.draft_status_value);
     await modificationsCommonPage.setModificationID(modificationIDExpected);
   }
 );
@@ -138,22 +139,6 @@ Then(
   }
 );
 
-// for (const changeName of Object.keys(changesDataset)) {
-//   // Click Change link agaist every changeName
-//   //validate the review changes page for the changeName
-//   const changeDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName][changeName];
-//   await selectAreaOfChangePage.selectAreaOfChangeInModificationsPage(changeDataset);
-//   await modificationsCommonPage.createChangeModification(changeName, changeDataset);
-//   await commonItemsPage.clickButton('Modifications_Details_Page', 'Add_Another_Change');
-// }
-
-//  And I can see the review changes planned end date page
-//     And I capture the page screenshot
-//     Then I validate all field values on review modifications page using '<Planned_End_Date>' , '<Organisation_Change_Affect>' and '<Affected_Org_Questions>'
-//     When I click the change link '<Change_Field>' on review changes planned end date page
-//     Then I can see the 'Planned_End_Date' page for modifications
-//     And I capture the page screenshot
-
 Then(
   'I modify the current sponsor details with {string} for the created modification',
   async ({ commonItemsPage, sponsorReferencePage, reviewAllChangesPage }, datasetName: string) => {
@@ -180,11 +165,19 @@ Then(
   async ({ modificationsCommonPage }, datasetName) => {
     const changesDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName];
     const changeNames = Object.keys(changesDataset).reverse(); // Reverse the order of keys
+
+    const compareArrays = (a: any[], b: any[]) => {
+      if (a.length !== b.length) return false;
+      return a.every((val, index) => val === b[index]);
+    };
+
     for (let i = 0; i < changeNames.length; i++) {
       const changeName = changeNames[i];
-      const expectedData = changesDataset[changeName]; // From JSON
+      const expectedData = changesDataset[changeName];
+
+      const cardTitle = `Change ${i + 1} - ${expectedData.area_of_change_dropdown}`;
       const actualData = await modificationsCommonPage.getMappedSummaryCardDataForRankingCategoryChanges(
-        'Change ' + (i + 1) + ' - ' + expectedData.area_of_change_dropdown,
+        cardTitle,
         'Changes'
       );
 
@@ -197,10 +190,13 @@ Then(
       for (const key of keys) {
         const expectedValue = expectedData[key];
         const actualValue = actualData.cardData[key];
+
         if (Array.isArray(expectedValue)) {
-          const sortedExpected = [...expectedValue].sort();
-          const sortedActual = [...(actualValue || [])].sort();
-          expect.soft(sortedActual).toEqual(sortedExpected);
+          const sortedExpected = [...expectedValue].sort((a, b) => expectedValue.indexOf(a) - expectedValue.indexOf(b));
+          const sortedActual = [...(actualValue || [])].sort(
+            (a, b) => expectedValue.indexOf(a) - expectedValue.indexOf(b)
+          );
+          expect.soft(compareArrays(sortedActual, sortedExpected)).toBe(true);
         } else {
           expect.soft(actualValue).toBe(expectedValue);
         }
@@ -212,8 +208,7 @@ Then(
 Then(
   'I validate sponsor details are displayed with {string}',
   async ({ modificationsCommonPage, sponsorReferencePage }, datasetName) => {
-    const sponsorDataset = sponsorReferencePage.sponsorReferencePageTestData[datasetName];
-    const expectedData = sponsorDataset;
+    const expectedData = sponsorReferencePage.sponsorReferencePageTestData[datasetName];
     const actualData = await modificationsCommonPage.getMappedSummaryCardDataForRankingCategoryChanges(
       'Sponsor details',
       'Sponsor details'
@@ -221,16 +216,22 @@ Then(
     // console.log('Expected:', expectedData);
     // console.log('Actual:', actualData.cardData);
 
+    const compareArrays = (expected: any[], actual: any[]) => {
+      if (expected.length !== actual.length) return false;
+      return expected.every((val, index) => val === actual[index]);
+    };
+
     //  Compare keys and values
     for (const key of Object.keys(expectedData)) {
       const expectedValue = expectedData[key];
       const actualValue = actualData.cardData[key];
 
       if (Array.isArray(expectedValue)) {
-        // Compare arrays (order-insensitive)
-        const sortedExpected = [...expectedValue].sort();
-        const sortedActual = [...(actualValue || [])].sort();
-        expect.soft(sortedActual).toEqual(sortedExpected);
+        const sortedExpected = [...expectedValue].sort((a, b) => expectedValue.indexOf(a) - expectedValue.indexOf(b));
+        const sortedActual = [...(actualValue || [])].sort(
+          (a, b) => expectedValue.indexOf(a) - expectedValue.indexOf(b)
+        );
+        expect.soft(compareArrays(sortedActual, sortedExpected)).toBe(true);
       } else {
         expect.soft(actualValue).toBe(expectedValue);
       }

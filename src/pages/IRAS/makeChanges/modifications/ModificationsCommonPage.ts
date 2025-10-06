@@ -36,45 +36,21 @@ export default class ModificationsCommonPage {
     //Locators
     this.pageHeading = this.page.getByRole('heading');
     this.pageComponentLabel = this.page.getByRole('heading');
-    // this.iras_id_value = this.page
-    //   .getByRole('term', {
-    //     name: modificationsCommonPageTestData.Label_Texts.iras_id_label,
-    //   })
-    //   .locator('..')
-    //   .getByRole('definition');
     this.iras_id_value = this.page
       .locator('[class$="key"]')
       .getByText(this.modificationsCommonPageTestData.Label_Texts.iras_id_label)
       .locator('..')
       .locator('[class$="value"]');
-    // this.short_project_title_value = this.page
-    //   .getByRole('term', {
-    //     name: modificationsCommonPageTestData.Label_Texts.short_project_title_label,
-    //   })
-    //   .locator('..')
-    //   .getByRole('definition');
     this.short_project_title_value = this.page
       .locator('[class$="key"]')
       .getByText(this.modificationsCommonPageTestData.Label_Texts.short_project_title_label)
       .locator('..')
       .locator('[class$="value"]');
-    // this.modification_id_value = this.page
-    //   .getByRole('term', {
-    //     name: modificationsCommonPageTestData.Label_Texts.modification_id_label,
-    //   })
-    //   .locator('..')
-    //   .getByRole('definition');
     this.modification_id_value = this.page
       .locator('[class$="key"]')
       .getByText(this.modificationsCommonPageTestData.Label_Texts.modification_id_label)
       .locator('..')
       .locator('[class$="value"]');
-    // this.status_value = this.page
-    //   .getByRole('term', {
-    //     name: modificationsCommonPageTestData.Label_Texts.status_label,
-    //   })
-    //   .locator('..')
-    //   .getByRole('definition');
     this.status_value = this.page
       .locator('[class$="key"]')
       .getByText(this.modificationsCommonPageTestData.Label_Texts.status_label)
@@ -291,7 +267,7 @@ export default class ModificationsCommonPage {
       const key = await row.locator('.govuk-summary-list__key').innerText();
       const value = await row.locator('.govuk-summary-list__value').innerText();
       const cleanedKey = key.trim();
-      const cleanedValue = value.trim().replace(/\s+/g, ' ');
+      const cleanedValue = value.trim().replaceAll(/\s+/g, ' ');
 
       switch (cleanedKey) {
         case 'Change to planned end date': {
@@ -347,7 +323,7 @@ export default class ModificationsCommonPage {
           break;
         }
         case 'Category': {
-          modificationInfo['category'] = cleanedValue.replace(/&gt;/g, '>');
+          modificationInfo['category'] = cleanedValue.replaceAll(/&gt;/g, '>');
           break;
         }
         case 'Review type': {
@@ -355,7 +331,7 @@ export default class ModificationsCommonPage {
           break;
         }
         default: {
-          cardData[cleanedKey.toLowerCase().replace(/ /g, '_')] = cleanedValue;
+          cardData[cleanedKey.toLowerCase().replaceAll(/ /g, '_')] = cleanedValue;
         }
       }
     }

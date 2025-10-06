@@ -1,7 +1,7 @@
 import { createBdd } from 'playwright-bdd';
 import { test } from '../../../../../hooks/CustomFixtures';
 import { expect, Locator } from '@playwright/test';
-import fs from 'fs';
+import fs from 'node:fs';
 import { confirmStringNotNull } from '../../../../../utils/UtilFunctions';
 
 const { Then } = createBdd(test);
@@ -64,9 +64,9 @@ Then(
         const stats = fs.statSync(filePath);
         let fileSize;
         if (stats.size < 1024 * 1024) {
-          fileSize = parseFloat((stats.size / 1024).toFixed(2)).toString() + ' KB';
+          fileSize = Number.parseFloat((stats.size / 1024).toFixed(2)).toString() + ' KB';
         } else {
-          fileSize = parseFloat((stats.size / (1024 * 1024)).toFixed(2)).toString() + ' MB';
+          fileSize = Number.parseFloat((stats.size / (1024 * 1024)).toFixed(2)).toString() + ' MB';
         }
         const expectedDocumentRow = addDocumentDetailsForSpecificDocumentModificationsPage.table
           .locator(addDocumentDetailsForSpecificDocumentModificationsPage.rows, { hasText: `${trimmedDocumentName}` })
@@ -82,7 +82,7 @@ Then(
       }
       //Enter document details
       for (const key in dataset) {
-        if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+        if (Object.hasOwn(dataset, key)) {
           await commonItemsPage.fillUIComponent(dataset, key, addDocumentDetailsForSpecificDocumentModificationsPage);
         }
       }
@@ -208,8 +208,9 @@ Then(
     const dataset =
       addDocumentDetailsForSpecificDocumentModificationsPage
         .addDocumentDetailsForSpecificDocumentModificationsPageTestData[datasetName];
-    for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+
+    for (const key of Object.keys(dataset)) {
+      if (Object.hasOwn(dataset, key)) {
         await commonItemsPage.fillUIComponent(dataset, key, addDocumentDetailsForSpecificDocumentModificationsPage);
       }
     }

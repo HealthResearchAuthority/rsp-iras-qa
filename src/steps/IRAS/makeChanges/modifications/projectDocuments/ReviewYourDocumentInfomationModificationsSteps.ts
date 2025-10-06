@@ -294,45 +294,51 @@ Then(
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
   ) => {
-    let errorMessageFieldDataset: any;
-    let page: any;
-    if (pageKey === 'Review_Your_Document_Infomation_Modifications_Page') {
-      errorMessageFieldDataset =
-        reviewYourDocumentInformationModificationsPage.reviewYourDocumentInfomationModificationsPageTestData[
-          errorMessageFieldAndSummaryDatasetName
-        ];
-      page = reviewYourDocumentInformationModificationsPage;
-    }
-    let allSummaryErrorExpectedValues: any;
-    let summaryErrorActualValues: any;
-    await expect(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
-    if (
+    const isSpecialCase =
       errorMessageFieldAndSummaryDatasetName === 'Missing_Mandatory_Question_Previously_Approved_Error' ||
       errorMessageFieldAndSummaryDatasetName ===
-        'Missing_Mandatory_Question_Previously_Approved_Document_Version_Date_Error'
-    ) {
-      allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset).toString();
-      summaryErrorActualValues = (await commonItemsPage.getSummaryErrorMessages()).toString();
-    } else {
-      allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset);
-      summaryErrorActualValues = await commonItemsPage.getSummaryErrorMessages();
+        'Missing_Mandatory_Question_Previously_Approved_Document_Version_Date_Error';
+
+    const page =
+      pageKey === 'Review_Your_Document_Infomation_Modifications_Page'
+        ? reviewYourDocumentInformationModificationsPage
+        : null;
+
+    const errorMessageFieldDataset =
+      page?.reviewYourDocumentInfomationModificationsPageTestData?.[errorMessageFieldAndSummaryDatasetName];
+
+    if (!errorMessageFieldDataset || !page) {
+      throw new Error(`Invalid pageKey or dataset name: ${pageKey}, ${errorMessageFieldAndSummaryDatasetName}`);
     }
-    expect.soft(summaryErrorActualValues).toEqual(allSummaryErrorExpectedValues);
-    for (const key in errorMessageFieldDataset) {
-      if (Object.hasOwn(errorMessageFieldDataset, key)) {
-        let fieldErrorMessagesActualValues: any;
-        {
-          fieldErrorMessagesActualValues =
-            await reviewYourDocumentInformationModificationsPage.getFieldErrorMessagesReviewInformation(key, page);
-          expect.soft(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
-          const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
-          await expect(element).toBeInViewport();
-          await reviewYourDocumentInformationModificationsPage.setFieldErrorMessage(fieldErrorMessagesActualValues);
-        }
-      }
+
+    await expect(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
+
+    const summaryErrorExpectedValues = isSpecialCase
+      ? Object.values(errorMessageFieldDataset).toString()
+      : Object.values(errorMessageFieldDataset);
+
+    const summaryErrorActualValues = isSpecialCase
+      ? (await commonItemsPage.getSummaryErrorMessages()).toString()
+      : await commonItemsPage.getSummaryErrorMessages();
+
+    expect.soft(summaryErrorActualValues).toEqual(summaryErrorExpectedValues);
+
+    for (const key of Object.keys(errorMessageFieldDataset)) {
+      const expectedFieldError = errorMessageFieldDataset[key];
+
+      const actualFieldError =
+        await reviewYourDocumentInformationModificationsPage.getFieldErrorMessagesReviewInformation(key, page);
+
+      expect.soft(actualFieldError).toEqual(expectedFieldError);
+
+      const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
+      await expect(element).toBeInViewport();
+
+      await reviewYourDocumentInformationModificationsPage.setFieldErrorMessage(actualFieldError);
     }
   }
 );
+
 Then(
   'I click the error displayed on {string}',
   async ({ reviewYourDocumentInformationModificationsPage }, pageKey: string) => {
