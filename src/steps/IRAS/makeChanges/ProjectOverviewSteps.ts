@@ -146,7 +146,7 @@ Then(
   'I validate the {string} data for {string} is displayed in the project team tab of project overview page',
   async ({ projectOverviewPage, chiefInvestigatorPage }, projectType: string, datasetName: string) => {
     let dataset: any;
-    await expect(projectOverviewPage.key_project_roles_heading).toBeVisible();
+    await expect(projectOverviewPage.project_team_heading).toBeVisible();
     if (projectType.toLowerCase() == 'existing') {
       dataset = projectOverviewPage.projectOverviewPageTestData[datasetName].Project_Team;
     } else {

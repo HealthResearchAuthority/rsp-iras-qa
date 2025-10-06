@@ -1,11 +1,11 @@
 @ProjectOverview @ApplicantUser @SystemTest
-Feature: Project Overview
+Feature: Create Amendment - Project Overview
 
     Background:
         Given I have navigated to the my research projects page
         And I can see the my research projects page
 
-    @rsp-1864 @ProjectOverviewPage @onlyTest
+    @rsp-1864 @ProjectOverviewPage @Fix-Needed-New-Flow-Screens
     Scenario Outline: Verify user is able to click on the project link on my research page and able to navigate to project overview page
         And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
         And I click the 'Start' button on the 'Create_Project_Record_Page'

@@ -12,12 +12,12 @@ export default class ProjectOverviewPage {
   readonly projectStatusTag: Locator;
   readonly project_details_hint_label: Locator;
   readonly project_details_heading: Locator;
-  readonly project_short_title_label: Locator;
+  readonly project_short_title_label: Locator; //see what this is exactly
   readonly modification_saved_success_message_text: Locator;
   readonly modification_saved_success_message_header_text: Locator;
   readonly information_alert_banner: Locator;
   readonly project_overview_heading: Locator;
-  readonly key_project_roles_heading: Locator;
+  readonly project_team_heading: Locator;
   readonly research_locations_heading: Locator;
   readonly post_approvals_heading: Locator;
   readonly view_project_overview_link: Locator;
@@ -73,9 +73,9 @@ export default class ProjectOverviewPage {
       .getByRole('heading')
       .getByText(this.projectOverviewPageTestData.Project_Overview_Page.modification_saved_success_message_text);
     this.project_overview_heading = this.page.locator('.govuk-inset-text');
-    this.key_project_roles_heading = this.page
+    this.project_team_heading = this.page
       .getByRole('heading')
-      .getByText(this.projectOverviewPageTestData.Project_Overview_Page.key_project_roles_heading);
+      .getByText(this.projectOverviewPageTestData.Project_Overview_Page.project_team_heading);
     this.research_locations_heading = this.page
       .getByRole('heading')
       .getByText(this.projectOverviewPageTestData.Project_Overview_Page.research_locations_heading);
