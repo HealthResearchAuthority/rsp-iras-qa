@@ -701,7 +701,7 @@ Feature: Create Amendment - Create Project - Review your answers
     Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
     Then I can see the project overview page
     And I capture the page screenshot
-    And I can see the project details on project overview page for '<Project_Details_Title>'
+    And I can see the 'created' project details on project overview page for '<Project_Details_Title>'
 
     Examples:
       | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Third | Navigation_Button_Fourth | Project_Details_Title | Key_Project_Roles     | Research_Locations    |
