@@ -13,7 +13,6 @@ export default class ResearchLocationsPage {
   readonly nations_participating_hint_label: Locator;
   readonly is_nhs_hsc_organisation_label: Locator;
   readonly lead_nation_label: Locator;
-  // readonly nations_participating_1_checkbox: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -23,7 +22,6 @@ export default class ResearchLocationsPage {
     //Locators
     this.pageHeading = this.page.getByTestId('title');
     this.nations_participating_checkbox = this.page.locator('input[id^="Questions[0]"]:not([type="hidden"])');
-    // this.nations_participating_1_checkbox = this.page.locator('input[id^="Questions[1]"]');
     this.is_nhs_hsc_organisation_radio = this.page.getByTestId(/^IQA0004/);
     this.lead_nation_radio = this.page.getByTestId(/^IQA0005/);
     this.nations_participating_label = this.page.getByTestId('Questions[0]_Answers').locator('govuk-fieldset-legend');
