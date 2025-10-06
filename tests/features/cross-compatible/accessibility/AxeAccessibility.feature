@@ -14,7 +14,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I click the 'My_research' link on the 'Home_Page'
     Then I can see the 'My_Research_Page'
     And I click the 'Project' link on the 'My_Research_Page'
-    When I click the 'Key_Project_Roles' link on the 'Project_Overview_Page'
+    When I click the 'Project_Team' link on the 'Project_Overview_Page'
     Then I click the 'Research_Locations' link on the 'Project_Overview_Page'
     And I can see the project overview page
     When I Scan the page with the Axe Accessibilty Tool

@@ -1,4 +1,4 @@
-@RegressionMyModificationsTasklist @Regression @RegressionReceiveAmendments @StudyWideReviewer @KNOWN-DEFECT-RSP-5212 @BackStage
+@RegressionMyModificationsTasklist @Regression @RegressionReceiveAmendments @StudyWideReviewer @BackStage
 Feature: Receive Amendments: My Modifications Tasklist page that displays modifications that have been assigned to me
 
     Background:
@@ -88,7 +88,7 @@ Feature: Receive Amendments: My Modifications Tasklist page that displays modifi
             | IRAS_ID_Title_Date_Range_Multi  | Search        |
             | Title_Days_Range_Multi          | Apply_Filters |
 
-    @RegressionSearchMyTasklistWithNoResults @rsp-4821 @KNOWN-DEFECT-RSP-5212 @fail
+    @RegressionSearchMyTasklistWithNoResults @rsp-4821
     Scenario Outline: Verify the my tasklist page displays the no results found message, when no records on the system match the search criteria
         And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
