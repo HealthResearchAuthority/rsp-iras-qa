@@ -213,5 +213,11 @@
     "Save_Continue": "Save and continue",
     "Save_For_Later": "Save for later",
     "Change_Details": "Change"
+  },
+  "Delete_Documents_Confirmation_Page": {
+    "Delete_Documents": "Delete documents"
+  },
+  "Delete_Document_Confirmation_Page": {
+    "Delete_Document": "Delete document"
   }
 }

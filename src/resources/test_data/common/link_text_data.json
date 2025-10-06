@@ -211,5 +211,14 @@
   },
   "Select_Study_Wide_Reviewer_Page": {
     "Back": "Back"
+  },
+  "Documents_Added_For_Change_Page": {
+    "Delete_All": "Delete all"
+  },
+  "Add_Documents_Details": {
+    "Delete": "Delete"
+  },
+  "Delete_Document_Confirmation_Page": {
+    "Cancel": "Cancel"
   }
 }

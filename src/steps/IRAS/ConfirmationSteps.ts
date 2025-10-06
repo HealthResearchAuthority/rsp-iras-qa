@@ -8,6 +8,14 @@ When('I am on the confirmation screen', async ({ confirmationPage }) => {
   await confirmationPage.assertOnConfirmationPage();
 });
 
+Then('I can see the delete documents confirmation page', async ({ confirmationPage }) => {
+  await confirmationPage.assertOnDeleteDocumentsConfirmationPage();
+});
+
+Then('I can see the delete document confirmation page', async ({ confirmationPage }) => {
+  await confirmationPage.assertOnDeleteDocumentConfirmationPage();
+});
+
 Then(
   'I validate {string} labels displayed in disable user profile confirmation page using the {string} details',
   async ({ confirmationPage, createUserProfilePage }, validationLabelsDatasetName, userDetailsdatasetName: string) => {

@@ -18,6 +18,9 @@ Feature: Create Amendment - Project Documents Modifications
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
     When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
@@ -26,7 +29,7 @@ Feature: Create Amendment - Project Documents Modifications
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     When I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
-
+ 
   @rsp-3876 @ValidateUploadDocumentsModificationsPageLabels @KNOWN_DEFECT_RSP-4801
   Scenario Outline: Validate the ui labels displayed for upload documents pages in modifications
     And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
@@ -176,3 +179,109 @@ Feature: Create Amendment - Project Documents Modifications
       | Post_Trial_Information_For_Participants      |
       | Protocol_Non_Substantial_Changes             |
       | Translations_Addition_Of_Translated_Versions |
+
+  @rsp-3888 @DeleteAllDocumentsModification 
+  Scenario Outline: Validate the user is able to delete all documents after uploading
+    And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+    Then I can see the add documents for '<Specific_Change>' page
+    And I capture the page screenshot
+    Then I upload '<Document_Upload_Files>' documents
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    Then I can see the review uploaded documents for '<Specific_Change>' page
+    And I capture the page screenshot
+    And I validate the uploaded '<Document_Upload_Files>' documents are listed along with size and delete option in the review uploaded documents page
+    And I capture the page screenshot
+    And I click the 'Delete_All' link on the 'Documents_Added_For_Change_Page'
+    Then I can see the delete documents confirmation page 
+    And I capture the page screenshot
+    Then I validate delete documents confirmation page '<Document_Upload_Files>' 
+    And I click the 'Delete_Documents' button on the 'Delete_Documents_Confirmation_Page'
+    And I capture the page screenshot
+    Then I can see the add documents for '<Specific_Change>' page
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    Then I validate 'Field_Error_Upload_Documents_Mandatory' displayed on 'Add_Document_Modifications_Page'
+    And I capture the page screenshot
+
+    Examples:
+      | Specific_Change                              | Document_Upload_Files|
+      | Correction_Of_Typographical_Errors           | Multiple_Files_Three |
+      | CRF_Other_Study_Data_Records                 | Multiple_Files_Three |
+      | GDPR_Wording                                 | Multiple_Files_Three |
+      | Other_Minor_Change_To_Study_Documents        | Multiple_Files_Three |
+      | Post_Trial_Information_For_Participants      | Multiple_Files_Three |
+      | Protocol_Non_Substantial_Changes             | Multiple_Files_Three |
+      | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three |
+
+  @rsp-3888 @DeleteDocumentsOneByOneInModification 
+  Scenario Outline: Validate the user is able to delete documents one by one from documents added for page
+    And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+    Then I can see the add documents for '<Specific_Change>' page
+    And I capture the page screenshot
+    Then I upload '<Document_Upload_Files>' documents
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    Then I can see the review uploaded documents for '<Specific_Change>' page
+    And I capture the page screenshot
+    And I validate the uploaded '<Document_Upload_Files>' documents are listed along with size and delete option in the review uploaded documents page
+    And I delete the documents one by one from the documents added page of '<Specific_Change>' modifications in reference to the uploaded '<Document_Upload_Files>' documents
+    And I capture the page screenshot
+    Then I can see the add documents for '<Specific_Change>' page
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    And I capture the page screenshot
+    Then I validate 'Field_Error_Upload_Documents_Mandatory' displayed on 'Add_Document_Modifications_Page'
+    And I capture the page screenshot
+
+    Examples:
+      | Specific_Change                              | Document_Upload_Files|
+      | Correction_Of_Typographical_Errors           | Multiple_Files_Three |
+      | CRF_Other_Study_Data_Records                 | Multiple_Files_Three |
+      | GDPR_Wording                                 | Multiple_Files_Three |
+      | Other_Minor_Change_To_Study_Documents        | Multiple_Files_Three |
+      | Post_Trial_Information_For_Participants      | Multiple_Files_Three |
+      | Protocol_Non_Substantial_Changes             | Multiple_Files_Three |
+      | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three |
+
+  @rsp-3888 @DeleteDocumentsOneByOneFromAddDocumentDetailsModification
+  Scenario Outline: Validate the user is able to delete documents from add document details page
+    And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+    Then I can see the add documents for '<Specific_Change>' page
+    And I capture the page screenshot
+    Then I upload '<Document_Upload_Files>' documents
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    Then I can see the review uploaded documents for '<Specific_Change>' page
+    And I capture the page screenshot
+    And I validate the uploaded '<Document_Upload_Files>' documents are listed along with size and delete option in the review uploaded documents page
+    And I capture the page screenshot
+    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the status of each document is 'Document_Status_Incomplete' in add document details page
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+    When I can see the add document details for '<Specific_Change>' page
+    And I capture the page screenshot
+    And I click on the document link with status 'Document_Status_Incomplete' and delete the uploaded document '<Document_Upload_Files>' in the add document details for specific document page
+    Then I can see the add documents for '<Specific_Change>' page
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    Then I validate 'Field_Error_Upload_Documents_Mandatory' displayed on 'Add_Document_Modifications_Page'
+    And I capture the page screenshot
+
+    Examples:
+      | Specific_Change                              | Document_Upload_Files|
+      | Correction_Of_Typographical_Errors           | Multiple_Files_Three |
+      | CRF_Other_Study_Data_Records                 | Multiple_Files_Three |
+      | GDPR_Wording                                 | Multiple_Files_Three |
+      | Other_Minor_Change_To_Study_Documents        | Multiple_Files_Three |
+      | Post_Trial_Information_For_Participants      | Multiple_Files_Three |
+      | Protocol_Non_Substantial_Changes             | Multiple_Files_Three |
+      | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three |
+
+
+
+
