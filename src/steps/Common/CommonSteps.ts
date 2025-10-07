@@ -1184,7 +1184,7 @@ Then(
     pageKey: string,
     uploadType: string
   ) => {
-    const isSpecialError = ['Duplicate_File_Upload_Error', 'Invalid_Format_Video_File_Error'].includes(errorKey);
+    const isSpecialError = ['Duplicate_File_Upload_Error', 'Invalid_Format_File_Error'].includes(errorKey);
     const page = pageKey === 'Add_Document_Modifications_Page' ? addDocumentsModificationsPage : null;
     const errorDataset = page?.addDocumentsModificationsPageTestData?.[errorKey];
 
@@ -1195,8 +1195,15 @@ Then(
     await expect(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
 
     const getFileNames = async (): Promise<string[]> => {
-      const names = await reviewUploadedDocumentsModificationsPage.getUploadedFileName();
-      return uploadType === 'multiple invalid' ? names : [names.toString()];
+      if (uploadType == 'multiple upload multiple invalid' || uploadType == 'multiple upload single invalid') {
+        const names = await reviewUploadedDocumentsModificationsPage.getInValidFileName();
+        return uploadType === 'multiple upload multiple invalid' || uploadType == 'multiple upload single invalid'
+          ? names
+          : [names.toString()];
+      } else {
+        const names = await reviewUploadedDocumentsModificationsPage.getUploadedFileName();
+        return uploadType === 'multiple invalid' ? names : [names.toString()];
+      }
     };
 
     const safeStringify = (val: any): string => {
@@ -1237,7 +1244,7 @@ Then(
         }
 
         const actualMessages =
-          uploadType === 'multiple invalid'
+          uploadType === 'multiple invalid' || uploadType == 'multiple upload multiple invalid'
             ? await commonItemsPage.getFieldErrorMessagesList(key, page)
             : [await commonItemsPage.getFieldErrorMessages(key, page)];
 
