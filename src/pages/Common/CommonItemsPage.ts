@@ -1296,18 +1296,6 @@ export default class CommonItemsPage {
     return page[locatorName];
   }
 
-  async clearCheckboxesUserProfile<PageObject>(dataset: any, key: string, page: PageObject) {
-    const locator: Locator = page[key];
-    const count = await locator.count();
-    for (let i = 0; i < count; i++) {
-      const checkbox = locator.nth(i);
-      const isChecked = await checkbox.isChecked();
-      if (isChecked) {
-        await checkbox.uncheck();
-      }
-    }
-  }
-
   async selectCheckboxUserProfileReviewBody<PageObject>(dataset: any, page: PageObject) {
     const locator: Locator = page['review_body_checkbox'];
     const typeAttribute = await locator.first().getAttribute('type');
@@ -1452,5 +1440,17 @@ export default class CommonItemsPage {
       }
     }
     return fieldErrorMessage;
+  }
+
+  async clearCheckboxes<PageObject>(key: string, page: PageObject) {
+    const locator: Locator = page[key];
+    const count = await locator.count();
+    for (let i = 0; i < count; i++) {
+      const checkbox = locator.nth(i);
+      const isChecked = await checkbox.isChecked();
+      if (isChecked) {
+        await checkbox.uncheck();
+      }
+    }
   }
 }

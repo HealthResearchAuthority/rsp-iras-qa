@@ -289,50 +289,54 @@ Then(
 
 Then(
   'I validate the error {string} displayed on {string}',
-  async (
-    { commonItemsPage, reviewYourDocumentInformationModificationsPage },
-    errorMessageFieldAndSummaryDatasetName: string,
-    pageKey: string
-  ) => {
-    let errorMessageFieldDataset: any;
-    let page: any;
-    if (pageKey === 'Review_Your_Document_Infomation_Modifications_Page') {
-      errorMessageFieldDataset =
-        reviewYourDocumentInformationModificationsPage.reviewYourDocumentInfomationModificationsPageTestData[
-          errorMessageFieldAndSummaryDatasetName
-        ];
-      page = reviewYourDocumentInformationModificationsPage;
+  async ({ commonItemsPage, reviewYourDocumentInformationModificationsPage }, errorKey: string, pageKey: string) => {
+    const specialErrors = [
+      'Missing_Mandatory_Question_Previously_Approved_Error',
+      'Missing_Mandatory_Question_Previously_Approved_Document_Version_Date_Error',
+    ];
+
+    const isSpecialCase = specialErrors.includes(errorKey);
+
+    const page =
+      pageKey === 'Review_Your_Document_Infomation_Modifications_Page'
+        ? reviewYourDocumentInformationModificationsPage
+        : null;
+
+    const errorDataset = page?.reviewYourDocumentInfomationModificationsPageTestData?.[errorKey];
+
+    if (!errorDataset || !page) {
+      throw new Error(`Invalid pageKey or dataset name: ${pageKey}, ${errorKey}`);
     }
-    let allSummaryErrorExpectedValues: any;
-    let summaryErrorActualValues: any;
+
     await expect(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
-    if (
-      errorMessageFieldAndSummaryDatasetName === 'Missing_Mandatory_Question_Previously_Approved_Error' ||
-      errorMessageFieldAndSummaryDatasetName ===
-        'Missing_Mandatory_Question_Previously_Approved_Document_Version_Date_Error'
-    ) {
-      allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset).toString();
-      summaryErrorActualValues = (await commonItemsPage.getSummaryErrorMessages()).toString();
-    } else {
-      allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset);
-      summaryErrorActualValues = await commonItemsPage.getSummaryErrorMessages();
-    }
-    expect.soft(summaryErrorActualValues).toEqual(allSummaryErrorExpectedValues);
-    for (const key in errorMessageFieldDataset) {
-      if (Object.hasOwn(errorMessageFieldDataset, key)) {
-        let fieldErrorMessagesActualValues: any;
-        {
-          fieldErrorMessagesActualValues =
-            await reviewYourDocumentInformationModificationsPage.getFieldErrorMessagesReviewInformation(key, page);
-          expect.soft(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
-          const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
-          await expect(element).toBeInViewport();
-          await reviewYourDocumentInformationModificationsPage.setFieldErrorMessage(fieldErrorMessagesActualValues);
-        }
-      }
+
+    const stringifyValues = (values: any[]) =>
+      values.map((val) => (typeof val === 'object' ? JSON.stringify(val) : val)).join(', ');
+
+    const expectedSummaryErrors = isSpecialCase
+      ? stringifyValues(Object.values(errorDataset))
+      : Object.values(errorDataset);
+
+    const actualSummaryErrors = isSpecialCase
+      ? stringifyValues(await commonItemsPage.getSummaryErrorMessages())
+      : await commonItemsPage.getSummaryErrorMessages();
+
+    expect.soft(actualSummaryErrors).toEqual(expectedSummaryErrors);
+
+    for (const [key, expectedFieldError] of Object.entries(errorDataset)) {
+      const actualFieldError =
+        await reviewYourDocumentInformationModificationsPage.getFieldErrorMessagesReviewInformation(key, page);
+
+      expect.soft(actualFieldError).toEqual(expectedFieldError);
+
+      const element = await commonItemsPage.clickErrorSummaryLink(errorDataset, key, page);
+      await expect(element).toBeInViewport();
+
+      await reviewYourDocumentInformationModificationsPage.setFieldErrorMessage(actualFieldError);
     }
   }
 );
+
 Then(
   'I click the error displayed on {string}',
   async ({ reviewYourDocumentInformationModificationsPage }, pageKey: string) => {

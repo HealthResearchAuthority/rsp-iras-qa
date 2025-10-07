@@ -37,44 +37,25 @@ export default class ModificationsCommonPage {
     this.pageHeading = this.page.getByRole('heading');
     this.pageComponentLabel = this.page.getByRole('heading');
     this.iras_id_value = this.page
-      .getByRole('term', {
-        name: modificationsCommonPageTestData.Label_Texts.iras_id_label,
-      })
+      .locator('[class$="key"]')
+      .getByText(this.modificationsCommonPageTestData.Label_Texts.iras_id_label)
       .locator('..')
-      .getByRole('definition');
-    // this.iras_id_label = this.page
-    //   .locator('[class$="key"]')
-    //   .getByText(this.modificationsCommonPageTestData.Label_Texts.iras_id_label)
-    //   .locator('..')
-    //   .locator('[class$="value"]');
+      .locator('[class$="value"]');
     this.short_project_title_value = this.page
-      .getByRole('term', {
-        name: modificationsCommonPageTestData.Label_Texts.short_project_title_label,
-      })
+      .locator('[class$="key"]')
+      .getByText(this.modificationsCommonPageTestData.Label_Texts.short_project_title_label)
       .locator('..')
-      .getByRole('definition');
-    // this.short_project_title_label = this.page
-    //   .locator('[class$="key"]')
-    //   .getByText(this.modificationsCommonPageTestData.Label_Texts.short_project_title_label)
-    //   .locator('..')
-    //   .locator('[class$="value"]');
+      .locator('[class$="value"]');
     this.modification_id_value = this.page
-      .getByRole('term', {
-        name: modificationsCommonPageTestData.Label_Texts.modification_id_label,
-      })
+      .locator('[class$="key"]')
+      .getByText(this.modificationsCommonPageTestData.Label_Texts.modification_id_label)
       .locator('..')
-      .getByRole('definition');
-    // this.modification_id_label = this.page
-    //   .locator('[class$="key"]')
-    //   .getByText(this.modificationsCommonPageTestData.Label_Texts.modification_id_label)
-    //   .locator('..')
-    //   .locator('[class$="value"]');
+      .locator('[class$="value"]');
     this.status_value = this.page
-      .getByRole('term', {
-        name: modificationsCommonPageTestData.Label_Texts.status_label,
-      })
+      .locator('[class$="key"]')
+      .getByText(this.modificationsCommonPageTestData.Label_Texts.status_label)
       .locator('..')
-      .getByRole('definition');
+      .locator('[class$="value"]');
     this.tableRows = this.page.getByRole('table').getByRole('row');
     this.modification_id_link = this.tableRows.nth(1).getByRole('cell').nth(0);
   }
@@ -98,9 +79,9 @@ export default class ModificationsCommonPage {
 
   async createChangeModification(changeName: string, dataset: any) {
     if (changeName.toLowerCase().includes('planned_end_date')) {
-      await new PlannedEndDateChangePage(this.page).fillPlannedProjectEndDateModificationsPage(dataset);
-      await new AffectedOrganisationSelectionPage(this.page).fillAffectedOrganisation(dataset);
-      await new AffectedOrganisationQuestionsPage(this.page).fillAffectedOrganisationQuestions(dataset);
+      await new PlannedEndDateChangePage(this.page).fillPlannedProjectEndDateModificationsPage(dataset, 'create');
+      await new AffectedOrganisationSelectionPage(this.page).fillAffectedOrganisation(dataset, 'create');
+      await new AffectedOrganisationQuestionsPage(this.page).fillAffectedOrganisationQuestions(dataset, 'create');
       await new CommonItemsPage(this.page).clickButton('Modifications_Page', 'Save_Continue');
       return;
     }
@@ -257,26 +238,20 @@ export default class ModificationsCommonPage {
       .filter({
         has: this.page.locator('.govuk-summary-card__title', { hasText: cardTitle }),
       });
-
-    // Ensure page is loaded
     await this.page.waitForLoadState('domcontentloaded');
-    // Wait for card to appear
     await expect(cardLocator).toBeVisible({ timeout: 5000 });
-    // Wait for the card to be visible
     await cardLocator.waitFor({ state: 'visible' });
-
-    const cardTitleValue = await cardLocator.locator('.govuk-summary-card__title').textContent();
-    const areaOfChangeValue = cardTitleValue?.split('-')[1].trim();
-
     const rows = cardLocator.locator('.govuk-summary-list__row');
     await expect.soft(rows.first()).toBeVisible();
     const rowCount = await rows.count();
-
     const specificChangeValue = await rows.nth(0).locator('.govuk-summary-list__key').innerText();
 
     const cardData: Record<string, any> = {};
     const modificationInfo: Record<string, string> = {}; //  Separate record for individual change ranking and category
+
     if (cardTitle.includes('Change')) {
+      const cardTitleValue = await cardLocator.locator('.govuk-summary-card__title').textContent();
+      const areaOfChangeValue = cardTitleValue?.split('-')[1].trim();
       cardData['area_of_change_dropdown'] = areaOfChangeValue;
       cardData['specific_change_dropdown'] = specificChangeValue;
     }
@@ -287,7 +262,7 @@ export default class ModificationsCommonPage {
       const key = await row.locator('.govuk-summary-list__key').innerText();
       const value = await row.locator('.govuk-summary-list__value').innerText();
       const cleanedKey = key.trim();
-      const cleanedValue = value.trim().replace(/\s+/g, ' ');
+      const cleanedValue = value.trim().replaceAll(/\s+/g, ' ');
 
       switch (cleanedKey) {
         case 'Change to planned end date': {
@@ -343,7 +318,7 @@ export default class ModificationsCommonPage {
           break;
         }
         case 'Category': {
-          modificationInfo['category'] = cleanedValue.replace(/&gt;/g, '>');
+          modificationInfo['category'] = cleanedValue;
           break;
         }
         case 'Review type': {
@@ -351,11 +326,10 @@ export default class ModificationsCommonPage {
           break;
         }
         default: {
-          cardData[cleanedKey.toLowerCase().replace(/ /g, '_')] = cleanedValue;
+          cardData[cleanedKey.toLowerCase().replaceAll(' ', '_')] = cleanedValue;
         }
       }
     }
-
     return { cardData, modificationInfo }; //  Return both separately
   }
 
@@ -378,15 +352,5 @@ export default class ModificationsCommonPage {
       ['statusValue', statusValue],
     ]);
     return modificationMap;
-  }
-  async getFormattedDate(): Promise<string> {
-    const today = new Date();
-    const options: Intl.DateTimeFormatOptions = {
-      day: '2-digit',
-      month: 'short',
-      year: 'numeric',
-    };
-    const formattedDate = today.toLocaleDateString('en-GB', options);
-    return formattedDate;
   }
 }

@@ -54,36 +54,6 @@ export default class ReviewUploadedDocumentsModificationsPage {
   }
 
   //Page Methods
-  // async assertOnReviewUploadedDocumentsModificationsPage(specificChangeTitleLabel: string) {
-  //   const expectedPageTitle =
-  //     this.reviewUploadedDocumentsModificationsPageTestData.Review_Uploaded_Documents_Modifications_Page.heading +
-  //     ' ' +
-  //     specificChangeTitleLabel.toLowerCase();
-  //   await expect
-  //     .soft(this.page)
-  //     .toHaveTitle(
-  //       this.reviewUploadedDocumentsModificationsPageTestData.Review_Uploaded_Documents_Modifications_Page.page_title
-  //     );
-  //   await expect.soft(this.pageHeading.getByText(expectedPageTitle, { exact: true })).toBeVisible();
-  //   await expect
-  //     .soft(
-  //       this.pageHeading.getByText(
-  //         this.reviewUploadedDocumentsModificationsPageTestData.Review_Uploaded_Documents_Modifications_Page
-  //           .add_document_detail_next_step_header,
-  //         { exact: true }
-  //       )
-  //     )
-  //     .toBeVisible();
-  //   await expect
-  //     .soft(
-  //       this.pageLabels.getByText(
-  //         this.reviewUploadedDocumentsModificationsPageTestData.Review_Uploaded_Documents_Modifications_Page
-  //           .add_document_detail_next_step_hint_label,
-  //         { exact: true }
-  //       )
-  //     )
-  //     .toBeVisible();
-  // }
   async assertOnReviewUploadedDocumentsModificationsPage(specificChangeTitleLabel: string) {
     const expectedPageHeading =
       this.reviewUploadedDocumentsModificationsPageTestData.Review_Uploaded_Documents_Modifications_Page.heading +

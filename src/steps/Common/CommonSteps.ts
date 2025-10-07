@@ -1180,100 +1180,74 @@ Then(
   'I validate {string} displayed on {string} while uploading {string} documents',
   async (
     { commonItemsPage, addDocumentsModificationsPage, reviewUploadedDocumentsModificationsPage },
-    errorMessageFieldAndSummaryDatasetName: string,
+    errorKey: string,
     pageKey: string,
     uploadType: string
   ) => {
-    let errorMessageFieldDataset: any;
-    let page: any;
-    if (pageKey == 'Add_Document_Modifications_Page') {
-      errorMessageFieldDataset =
-        addDocumentsModificationsPage.addDocumentsModificationsPageTestData[errorMessageFieldAndSummaryDatasetName];
-      page = addDocumentsModificationsPage;
+    const isSpecialError = ['Duplicate_File_Upload_Error', 'Invalid_Format_Video_File_Error'].includes(errorKey);
+    const page = pageKey === 'Add_Document_Modifications_Page' ? addDocumentsModificationsPage : null;
+    const errorDataset = page?.addDocumentsModificationsPageTestData?.[errorKey];
+
+    if (!errorDataset || !page) {
+      throw new Error(`Invalid pageKey or dataset name: ${pageKey}, ${errorKey}`);
     }
-    let allSummaryErrorExpectedValues: string[] = [];
-    const allfieldErrorMessagesExpectedValues: string[] = [];
-    let summaryErrorActualValues: any;
-    let fileName: string;
+
     await expect(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
-    if (
-      errorMessageFieldAndSummaryDatasetName === 'Duplicate_File_Upload_Error' ||
-      errorMessageFieldAndSummaryDatasetName === 'Invalid_Format_Video_File_Error'
-    ) {
-      let fieldNamesList: any;
-      if (uploadType == 'multiple upload multiple invalid' || uploadType == 'multiple upload single invalid') {
-        fieldNamesList = await reviewUploadedDocumentsModificationsPage.getInValidFileName();
-      } else {
-        fieldNamesList = await reviewUploadedDocumentsModificationsPage.getUploadedFileName();
-      }
-      if (uploadType === 'multiple invalid' || uploadType == 'multiple upload multiple invalid') {
-        for (const val of fieldNamesList) {
-          fileName = path.basename(val);
-          const allSummaryErrorExpectedValue = `${fileName}` + Object.values(errorMessageFieldDataset);
-          allSummaryErrorExpectedValues.push(allSummaryErrorExpectedValue);
+
+    const getFileNames = async (): Promise<string[]> => {
+      const names = await reviewUploadedDocumentsModificationsPage.getUploadedFileName();
+      return uploadType === 'multiple invalid' ? names : [names.toString()];
+    };
+
+    const safeStringify = (val: any): string => {
+      if (val === null || val === undefined) return String(val);
+      if (typeof val === 'object') {
+        try {
+          return JSON.stringify(val);
+        } catch {
+          return '[Unstringifiable Object]';
         }
-        summaryErrorActualValues = await commonItemsPage.getSummaryErrorMessages();
-        expect.soft(summaryErrorActualValues).toEqual(allSummaryErrorExpectedValues);
-      } else {
-        fileName = path.basename(fieldNamesList.toString());
-        const allSummaryErrorExpectedValue = `${fileName}` + Object.values(errorMessageFieldDataset);
-        allSummaryErrorExpectedValues.push(allSummaryErrorExpectedValue);
-        summaryErrorActualValues = await commonItemsPage.getSummaryErrorMessages();
-        expect.soft(summaryErrorActualValues).toEqual(allSummaryErrorExpectedValues);
       }
-    } else {
-      allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset);
-      summaryErrorActualValues = await commonItemsPage.getSummaryErrorMessages();
-      expect.soft(summaryErrorActualValues).toEqual(allSummaryErrorExpectedValues);
-    }
-    if (!errorMessageFieldAndSummaryDatasetName.includes('Summary_Only')) {
-      for (const key in errorMessageFieldDataset) {
-        if (Object.hasOwn(errorMessageFieldDataset, key)) {
-          let fieldErrorMessagesActualValues: any;
-          if (
-            errorMessageFieldAndSummaryDatasetName === 'Duplicate_File_Upload_Error' ||
-            errorMessageFieldAndSummaryDatasetName === 'Invalid_Format_Video_File_Error'
-          ) {
-            let fieldNamesList: any;
-            if (uploadType == 'multiple upload multiple invalid' || uploadType == 'multiple upload single invalid') {
-              fieldNamesList = await reviewUploadedDocumentsModificationsPage.getInValidFileName();
-            } else {
-              fieldNamesList = await reviewUploadedDocumentsModificationsPage.getUploadedFileName();
-            }
-            if (uploadType === 'multiple invalid' || uploadType == 'multiple upload multiple invalid') {
-              for (const val of fieldNamesList) {
-                fileName = path.basename(val);
-                const allfieldErrorMessagesExpectedValue = `${fileName}` + Object.values(errorMessageFieldDataset);
-                allfieldErrorMessagesExpectedValues.push(allfieldErrorMessagesExpectedValue);
-                const element = await commonItemsPage.clickErrorSummaryLinkSpecific(
-                  key,
-                  page,
-                  allfieldErrorMessagesExpectedValue
-                );
-                await expect(element).toBeInViewport();
-              }
-              fieldErrorMessagesActualValues = await commonItemsPage.getFieldErrorMessagesList(key, page);
-              expect(fieldErrorMessagesActualValues).toEqual(allfieldErrorMessagesExpectedValues);
-            } else {
-              fileName = path.basename(fieldNamesList.toString());
-              const allfieldErrorMessagesExpectedValue = `${fileName}` + Object.values(errorMessageFieldDataset);
-              allfieldErrorMessagesExpectedValues.push(allfieldErrorMessagesExpectedValue);
-              const element = await commonItemsPage.clickErrorSummaryLinkSpecific(
-                key,
-                page,
-                allfieldErrorMessagesExpectedValue
-              );
-              await expect(element).toBeInViewport();
-              fieldErrorMessagesActualValues = await commonItemsPage.getFieldErrorMessages(key, page);
-              expect([fieldErrorMessagesActualValues]).toEqual(allfieldErrorMessagesExpectedValues);
-            }
-          } else {
-            fieldErrorMessagesActualValues = await commonItemsPage.getFieldErrorMessages(key, page);
-            expect(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
-            const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
-            await expect(element).toBeInViewport();
-          }
+      return String(val);
+    };
+    const stringifyValues = (dataset: any): string => Object.values(dataset).map(safeStringify).join(', ');
+
+    const buildExpectedMessages = async (dataset: any, files: string[]): Promise<string[]> =>
+      files.map((file) => `${path.basename(file)}${stringifyValues(dataset)}`);
+
+    const expectedSummaryErrors = isSpecialError
+      ? await buildExpectedMessages(errorDataset, await getFileNames())
+      : Object.values(errorDataset);
+
+    const actualSummaryErrors = await commonItemsPage.getSummaryErrorMessages();
+    expect.soft(actualSummaryErrors).toEqual(expectedSummaryErrors);
+
+    if (errorKey.includes('Summary_Only')) return;
+
+    for (const [key, expectedValue] of Object.entries(errorDataset)) {
+      if (!Object.hasOwn(errorDataset, key)) continue;
+
+      if (isSpecialError) {
+        const fileNames = await getFileNames();
+        const expectedMessages = await buildExpectedMessages(errorDataset, fileNames);
+
+        for (const message of expectedMessages) {
+          const element = await commonItemsPage.clickErrorSummaryLinkSpecific(key, page, message);
+          await expect(element).toBeInViewport();
         }
+
+        const actualMessages =
+          uploadType === 'multiple invalid'
+            ? await commonItemsPage.getFieldErrorMessagesList(key, page)
+            : [await commonItemsPage.getFieldErrorMessages(key, page)];
+
+        expect(actualMessages).toEqual(expectedMessages);
+      } else {
+        const actualMessages = await commonItemsPage.getFieldErrorMessages(key, page);
+        expect(actualMessages).toEqual(expectedValue);
+
+        const element = await commonItemsPage.clickErrorSummaryLink(errorDataset, key, page);
+        await expect(element).toBeInViewport();
       }
     }
   }

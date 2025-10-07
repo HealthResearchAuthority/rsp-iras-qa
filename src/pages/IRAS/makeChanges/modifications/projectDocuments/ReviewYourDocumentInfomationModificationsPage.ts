@@ -62,7 +62,6 @@ export default class ReviewYourDocumentInfomationModificationsPage {
           .document_type_guidance_text
       ),
     });
-
     this.document_type_dropdown = this.document_type_row.getByRole('definition').first();
     this.document_type = this.document_type_row.locator('..').locator('.govuk-summary-list__value');
     this.document_type_change_link = this.document_type_row.getByText(

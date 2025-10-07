@@ -21,24 +21,6 @@ export default class AddDocumentsModificationsPage {
   }
 
   //Page Methods
-  // async assertOnAddDocumentsModificationsPage(specificChangeTitleLabel: string) {
-  //   const expectedPageTitle =
-  //     this.addDocumentsModificationsPageTestData.Add_Documents_Modifications_Page.heading +
-  //     ' ' +
-  //     specificChangeTitleLabel.toLowerCase();
-  //   await expect
-  //     .soft(this.page)
-  //     .toHaveTitle(this.addDocumentsModificationsPageTestData.Add_Documents_Modifications_Page.page_title);
-  //   await expect.soft(this.pageHeading.getByText(expectedPageTitle, { exact: true })).toBeVisible();
-  //   await expect
-  //     .soft(
-  //       this.pageLabels.getByText(
-  //         this.addDocumentsModificationsPageTestData.Add_Documents_Modifications_Page.hint_label,
-  //         { exact: true }
-  //       )
-  //     )
-  //     .toBeVisible();
-  // }
   async assertOnAddDocumentsModificationsPage(specificChangeTitleLabel: string) {
     const expectedPageHeading =
       this.addDocumentsModificationsPageTestData.Add_Documents_Modifications_Page.heading +
