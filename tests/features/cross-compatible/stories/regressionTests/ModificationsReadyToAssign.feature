@@ -152,7 +152,7 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         When I click the 'Continue_to_assign_modifications' button on the 'Modifications_Tasklist_Page'
         Then I validate 'No_Modifications_Selected_Summary_Only_Error' displayed on 'Modifications_Tasklist_Page'
 
-    @RegressionModificationsTasklistPaginationNavigation @rsp-4040 @rsp-5046
+    @RegressionModificationsTasklistPaginationNavigation @rsp-4040 @rsp-5046 @rsp-5031
     Scenario Outline: Verify title links, pagination and navigation for the Modifications Tasklist page
         Given I have navigated to the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
@@ -176,7 +176,14 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         Then I can see the project overview page
         When I click the 'Back' link on the 'Project_Overview_Page'
         And I capture the page screenshot
-        And I can see the 'Modifications_Tasklist_Page'
+        Then I can see the 'Modifications_Tasklist_Page'
+        And Each 'modification id' displayed on the 'Modifications_Tasklist_Page' is a link
+        When I click a 'modification id' on the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
+        Then I can see the review all changes modifications page
+        When I click the 'Back' link on the 'Review_All_Changes_Page'
+        And I capture the page screenshot
+        Then I can see the 'Modifications_Tasklist_Page'
         When I click the 'Back' link on the 'Modifications_Tasklist_Page'
         And I capture the page screenshot
         Then I can see the approvals home page

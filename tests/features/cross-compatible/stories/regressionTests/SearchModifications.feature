@@ -139,7 +139,7 @@ Feature: Receive Amendments: Search Modifications
                         | Invalid_Iras_Id         | Advanced_Filters        |
                         | Invalid_Iras_Id_Letters | Advanced_Filters_Eleven |
 
-        @RegressionSearchModificationsTitleBackLinksNav @rsp-5046
+        @RegressionSearchModificationsTitleBackLinksNav @rsp-5046 @rsp-5031
         Scenario: Verify back and short project title link navigation for search modifications tasklist
                 And I fill the search input for searching 'modifications' with 'Valid_Full_Iras_Id' as the search query
                 And I click the 'Search' button on the 'Search_Modifications_Page'
@@ -150,7 +150,18 @@ Feature: Receive Amendments: Search Modifications
                 Then I can see the project overview page
                 When I click the 'Back' link on the 'Project_Overview_Page'
                 And I capture the page screenshot
-                And I can see the 'Search_Modifications_Page'
+                Then I can see the 'Search_Modifications_Page'
+                When I fill the search input for searching 'modifications' with 'Valid_Full_Iras_Id' as the search query
+                And I click the 'Search' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                And I can now see a table of search results for modifications received for approval
+                Then Each 'modification id' displayed on the 'Search_Modifications_Page' is a link
+                When I click a 'modification id' on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                Then I can see the review all changes modifications page
+                When I click the 'Back' link on the 'Review_All_Changes_Page'
+                And I capture the page screenshot
+                Then I can see the 'Search_Modifications_Page'
                 When I click the 'Back' link on the 'Search_Modifications_Page'
                 Then I can see the approvals home page
                 When I click the 'Back' link on the 'Approvals_Page'

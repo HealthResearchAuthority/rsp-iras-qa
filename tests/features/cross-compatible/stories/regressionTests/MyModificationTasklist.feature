@@ -7,7 +7,7 @@ Feature: Receive Amendments: My Modifications Tasklist page that displays modifi
         And I capture the page screenshot
         And I can see the 'My_Modifications_Tasklist_Page'
 
-    @RegressionMyModificationsTasklistPaginationNavigation @rsp-4820
+    @RegressionMyModificationsTasklistPaginationNavigation @rsp-4820 @rsp-5046 @rsp-5031
     Scenario Outline: Verify column labels, title links, pagination and navigation for the My Modifications tasklist
         Then I can see the 'Column' ui labels on the my modifications tasklist page
         And Each 'short project title' displayed on the 'My_Modifications_Tasklist_Page' is a link
@@ -31,6 +31,13 @@ Feature: Receive Amendments: My Modifications Tasklist page that displays modifi
         When I click the 'Back' link on the 'Project_Overview_Page'
         And I capture the page screenshot
         And I can see the 'My_Modifications_Tasklist_Page'
+        Then Each 'modification id' displayed on the 'My_Modifications_Tasklist_Page' is a link
+        When I click a 'modification id' on the 'My_Modifications_Tasklist_Page'
+        And I capture the page screenshot
+        Then I can see the review all changes modifications page
+        When I click the 'Back' link on the 'Review_All_Changes_Page'
+        And I capture the page screenshot
+        Then I can see the 'My_Modifications_Tasklist_Page'
         When I click the 'Back' link on the 'My_Modifications_Tasklist_Page'
         And I capture the page screenshot
         Then I can see the approvals home page

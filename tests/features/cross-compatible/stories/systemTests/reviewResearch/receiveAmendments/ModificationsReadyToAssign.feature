@@ -328,7 +328,14 @@ Feature: Receive Amendments: Modifications Tasklist page that displays modificat
         Then I can see the project overview page
         When I click the 'Back' link on the 'Project_Overview_Page'
         And I capture the page screenshot
-        And I can see the 'Modifications_Tasklist_Page'
+        Then I can see the 'Modifications_Tasklist_Page'
+        And Each 'modification id' displayed on the 'Modifications_Tasklist_Page' is a link
+        When I click a 'modification id' on the 'Modifications_Tasklist_Page'
+        And I capture the page screenshot
+        Then I can see the review all changes modifications page
+        When I click the 'Back' link on the 'Review_All_Changes_Page'
+        And I capture the page screenshot
+        Then I can see the 'Modifications_Tasklist_Page'
 
     @ModificationsTasklistRandomSelection @rsp-4105 @KNOWN-DEFECT-RSP-4971
     Scenario: Verify checkboxes are visible and accessible and also the modification records can be selected across pages
