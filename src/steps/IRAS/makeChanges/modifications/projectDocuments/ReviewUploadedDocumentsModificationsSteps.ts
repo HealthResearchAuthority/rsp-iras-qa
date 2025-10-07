@@ -53,7 +53,7 @@ Then(
     const allUploadedFiles = await reviewUploadedDocumentsModificationsPage.getUploadedFileName();
     const allUploadedArray = Array.isArray(allUploadedFiles) ? allUploadedFiles : [allUploadedFiles];
     const validFileExtensions =
-      await addDocumentsModificationsPage.addDocumentsModificationsPageTestData.Add_Documents_Modifications_Page
+      addDocumentsModificationsPage.addDocumentsModificationsPageTestData.Add_Documents_Modifications_Page
         .valid_file_extensions;
     const validFiles: string[] = [];
     const invalidFiles: string[] = [];

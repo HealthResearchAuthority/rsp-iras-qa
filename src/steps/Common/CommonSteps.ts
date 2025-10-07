@@ -1188,10 +1188,6 @@ Then(
     const page = pageKey === 'Add_Document_Modifications_Page' ? addDocumentsModificationsPage : null;
     const errorDataset = page?.addDocumentsModificationsPageTestData?.[errorKey];
 
-    if (!errorDataset || !page) {
-      throw new Error(`Invalid pageKey or dataset name: ${pageKey}, ${errorKey}`);
-    }
-
     await expect(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
 
     const getFileNames = async (): Promise<string[]> => {
