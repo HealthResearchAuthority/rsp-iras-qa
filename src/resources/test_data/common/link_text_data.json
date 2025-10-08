@@ -40,7 +40,7 @@
   "Project_Details_Title_Page": {
     "Back": "Back"
   },
-  "Key_Project_Roles_Page": {
+  "Chief_Investigator_Page": {
     "Back": "Back"
   },
   "Research_Locations_Page": {
@@ -77,7 +77,8 @@
     "Back_To_Manage_Users": "Back to Manage users",
     "Back_To_Manage_Review_Bodies": "Back to Manage review bodies",
     "Remove_Another_User_From_The_Review_Body": "Remove another user from the review body",
-    "Add_Another_User_To_The_Review_Body": " Add another user to review body"
+    "Add_Another_User_To_The_Review_Body": " Add another user to review body",
+    "View_Project_Overview": "View project overview"
   },
   "Manage_Review_Bodies_Page": {
     "Back": "Back",
@@ -120,8 +121,10 @@
     "Project_Details": "Project details",
     "Project": "QA_Automation - This is a short project title",
     "Post_Approval": "Post approval",
-    "Key_Project_Roles": "Key project roles",
-    "Research_Locations": "Research locations"
+    "Key_Project_Roles": "Chief investigator",
+    "Research_Locations": "Research locations",
+    "View_Project_Overview": "View project overview",
+    "Project_Documents":"Project documents"
   },
   "Review_Body_User_List_Page": {
     "Back_To_Review_Body_Profile": "Back to review body profile",
@@ -135,6 +138,9 @@
   },
   "Review_Your_Answers_Page": {
     "Back": "Back",
+    "Change": "Change"
+  },
+  "Review_Your_Information_Page": {
     "Change": "Change"
   },
   "Search_Add_User_Review_Body_Page": {
@@ -185,7 +191,7 @@
     "Search": "Search",
     "Back": "Back",
     "Modifications_Tasklist": "Modifications tasklist",
-    "My_Tasklist": "My t-list"
+    "My_Tasklist": "My tasklist"
   },
   "Affected_Organisation_Selection_Page": {
     "Back": "Back",

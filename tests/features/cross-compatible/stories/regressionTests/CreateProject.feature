@@ -35,33 +35,33 @@ Feature: Create Amendment - Create Project - Regression Tests
     Then I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
-    Then I can see the key project roles page
+    Then I can see the chief investigator page
     And I capture the page screenshot
-    # Back button validation on Key_Project_Roles_Page
-    When I click the '<Navigation_Link>' link on the 'Key_Project_Roles_Page'
+    # Back button validation on Chief_Investigator_Page
+    When I click the '<Navigation_Link>' link on the 'Chief_Investigator_Page'
     Then I can see the project details title page
     And I capture the page screenshot
     # Validate previously filled values persist on screen navigation for Project_Details_Title_Page
     Then I can see previously saved values for '<Project_Details_Title>' displayed on the project details title page
     And I capture the page screenshot
     When I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
-    Then I can see the key project roles page
-    # Validate labels in Key_Project_Roles_Page
-    Then I can see the '<Validation_Text>' ui labels on the key project roles page
+    Then I can see the chief investigator page
+    # Validate labels in Chief_Investigator_Page
+    Then I can see the '<Validation_Text>' ui labels on the chief investigator page
     And I capture the page screenshot
-    Then I fill the key project roles page with '<Key_Project_Roles>'
+    Then I fill the chief investigator page with '<Chief_Investigator>'
     And I capture the page screenshot
-    Then I click the '<Navigation_Button_Third>' button on the 'Key_Project_Roles_Page'
+    Then I click the '<Navigation_Button_Third>' button on the 'Chief_Investigator_Page'
     Then I can see the research locations page
     And I capture the page screenshot
     # Back button validation on Research_Locations_Page
     When I click the '<Navigation_Link>' link on the 'Research_Locations_Page'
-    Then I can see the key project roles page
+    Then I can see the chief investigator page
     And I capture the page screenshot
-    # Validate previously filled values persist on screen navigation for Key_Project_Roles_Page
-    Then I can see previously saved values for '<Key_Project_Roles>' displayed on the key project roles page
+    # Validate previously filled values persist on screen navigation for Chief_Investigator_Page
+    Then I can see previously saved values for '<Chief_Investigator>' displayed on the chief investigator page
     And I capture the page screenshot
-    Then I click the '<Navigation_Button_Third>' button on the 'Key_Project_Roles_Page'
+    Then I click the '<Navigation_Button_Third>' button on the 'Chief_Investigator_Page'
     Then I can see the research locations page
     And I capture the page screenshot
     # Validate labels in Research_Locations_Page
@@ -70,35 +70,39 @@ Feature: Create Amendment - Create Project - Regression Tests
     Then I fill the research locations page with '<Research_Locations>'
     And I capture the page screenshot
     When I click the '<Navigation_Button_Third>' button on the 'Research_Locations_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with '<Project_Identifiers>'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     Then I can see the review your application page
     When I navigate 'back'
-    Then I can see the research locations page
+    Then I can see the project identifiers page
     # Validate previously filled values persist on screen navigation for Research_Locations_Page
-    Then I can see previously saved values for '<Research_Locations>' displayed on the research locations page
+    Then I can see previously saved values for '<Project_Identifiers>' displayed on the project identifiers page
     And I capture the page screenshot
-    When I click the '<Navigation_Button_Third>' button on the 'Research_Locations_Page'
+    When I click the '<Navigation_Button_Third>' button on the 'Project_Identifiers_Page'
     # Validate saved values in different pages is displayed in review answers page
     Then I can see the review your application page
-    Then I can validate the field values of '<Project_Details_Title>' page '<Key_Project_Roles>' page and '<Research_Locations>' page
+    Then I can validate the field values of '<Project_Details_Title>' page '<Project_Identifiers>' page and '<Research_Locations>' page
     # Validate change link functionality in review answers page
     And I click the change link '<Change_Link_Field>' on review your answers page
-    Then I can see the key project roles page
-    And I fill the key project roles page with '<Key_Project_Roles_Change>'
+    Then I can see the chief investigator page
+    Then I fill the chief investigator page with '<Chief_Investigator>'
     And I capture the page screenshot
-    When I click the 'Save_Changes' button on the 'Key_Project_Roles_Page'
+    When I click the 'Save_Changes' button on the 'Chief_Investigator_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
-    Then I can validate the field values of '<Project_Details_Title>' page '<Key_Project_Roles_Change>' page and '<Research_Locations>' page
+    Then I can validate the field values of '<Project_Details_Title>' page '<Project_Identifiers_Change>' page and '<Research_Locations>' page
     And I capture the page screenshot
     # Validate project overview page
     When I click the '<Navigation_Button_Fourth>' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
     Then I can see the project overview page
     And I capture the page screenshot
 
     Examples:
-      | Validation_Text | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Third | Navigation_Button_Fourth | Navigation_Button_Add_Project | Navigation_Link | Project_Details_Title      | Key_Project_Roles                   | Research_Locations                     | Change_Link_Field  | Key_Project_Roles_Change                     |
-      | Label_Texts     | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Add_Project                   | Back            | Valid_Data_All_Fields      | Valid_Data_All_Fields               | Data_With_No_NHS_HSC                   | chief_investigator | Valid_Data_Only_Investigator_Email_Field_Two |
-      | Label_Texts     | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Add_Project                   | Back            | Valid_Data_All_Fields_VERA | Valid_Email_Data_Special_Characters | Data_With_Lead_Nation_Northern_Ireland | sponsor_contact    | Valid_Data_Only_Sponsor_Email_Field_Two      |
+      | Validation_Text | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Third | Navigation_Button_Fourth | Navigation_Button_Add_Project | Navigation_Link | Project_Details_Title | Project_Identifiers   | Chief_Investigator    | Research_Locations   | Change_Link_Field  | Project_Identifiers_Change                   |
+      | Label_Texts     | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Add_Project                   | Back            | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Data_With_No_NHS_HSC | chief_investigator | Valid_Data_Only_Investigator_Email_Field_Two |
+  # | Label_Texts     | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Add_Project                   | Back            | Valid_Data_All_Fields_VERA | Valid_Email_Data_Special_Characters | Valid_Email_Data_Special_Characters | Data_With_Lead_Nation_Northern_Ireland | sponsor_contact    | Valid_Data_Only_Sponsor_Email_Field_Two      |
 
   @ErrorMessageInvalidIRASIDRegression
   Scenario Outline: Validate error messages displayed when user amend the project using invalid iras id
@@ -145,18 +149,18 @@ Feature: Create Amendment - Create Project - Regression Tests
       | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Invalid_Date_No_Year                        | Field_Error_Message_Planned_Project_End_Year |
 
   @ErrorMessageInvalidChiefEmailKeyProjectRolesRegression
-  Scenario Outline: Validate error messages displayed when user inputs invalid data in chief investigator email on key project roles page
+  Scenario Outline: Validate error messages displayed when user inputs invalid data in chief investigator email on chief investigator page
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
-    And I can see the key project roles page
-    Then I fill the key project roles page with '<Key_Project_Roles>'
+    And I can see the chief investigator page
+    Then I fill the chief investigator page with '<Key_Project_Roles>'
     And I capture the page screenshot
-    Then I click the '<Navigation_Button_Third>' button on the 'Key_Project_Roles_Page'
-    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Key_Project_Roles_Page'
+    Then I click the '<Navigation_Button_Third>' button on the 'Chief_Investigator_Page'
+    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Chief_Investigator_Page'
     And I capture the page screenshot
 
     Examples:
@@ -187,48 +191,6 @@ Feature: Create Amendment - Create Project - Regression Tests
   # | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Valid_Data_All_Fields | Invalid_Email_Data_One_Missing_AT                      | Field_Error_Chief_Email         |
   # | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Valid_Data_All_Fields | Invalid_Email_Data_One_Max_Char                        | Field_Error_Chief_Email         |
 
-  @ErrorMessageInvalidSponsorEmailKeyProjectRolesRegression
-  Scenario Outline: Validate error messages displayed when user inputs invalid data in sponsor email on key project roles page
-    And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
-    And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
-    And I fill the unique iras id in project details iras page
-    And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
-    And I fill the project details title page with '<Project_Details_Title>'
-    And I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
-    And I can see the key project roles page
-    Then I fill the key project roles page with '<Key_Project_Roles>'
-    And I capture the page screenshot
-    Then I click the '<Navigation_Button_Third>' button on the 'Key_Project_Roles_Page'
-    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Key_Project_Roles_Page'
-    And I capture the page screenshot
-
-    Examples:
-      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Third | Navigation_Button_Add_Project | Project_Details_Title | Key_Project_Roles                      | Field_And_Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Valid_Data_All_Fields | Invalid_Email_Data_Two_Double_Dot      | Field_Error_Sponsor_Email       |
-      | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Valid_Data_All_Fields | Invalid_Email_Data_Two_TLD             | Field_Error_Sponsor_Email       |
-      | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Valid_Data_All_Fields | Invalid_Email_Data_Two_Reserved_Domain | Field_Error_Sponsor_Email       |
-      | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Valid_Data_All_Fields | Invalid_Email_Data_Two_Punycode        | Field_Error_Sponsor_Email       |
-  # | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Valid_Data_All_Fields | Invalid_Email_Data_Two_Space                           | Field_Error_Sponsor_Email       |
-  # | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Valid_Data_All_Fields | Invalid_Email_Data_Two_Wrong_AT                        | Field_Error_Sponsor_Email       |
-  # | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Valid_Data_All_Fields | Invalid_Email_Data_Two_Less_Greater_Symbols            | Field_Error_Sponsor_Email       |
-  # | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Valid_Data_All_Fields | Invalid_Email_Data_Two_Colon                           | Field_Error_Sponsor_Email       |
-  # | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Valid_Data_All_Fields | Invalid_Email_Data_Two_Semi_Colon                      | Field_Error_Sponsor_Email       |
-  # | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Valid_Data_All_Fields | Invalid_Email_Data_Two_Comma                           | Field_Error_Sponsor_Email       |
-  # | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Valid_Data_All_Fields | Invalid_Email_Data_Two_Double_Dot_Domain               | Field_Error_Sponsor_Email       |
-  # | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Valid_Data_All_Fields | Invalid_Email_Data_Two_Exclamation_Domain              | Field_Error_Sponsor_Email       |
-  # | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Valid_Data_All_Fields | Invalid_Email_Data_Two_Domain_Exceed_Max               | Field_Error_Sponsor_Email       |
-  # | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Valid_Data_All_Fields | Invalid_Email_Data_Two_Consecutive_Dot_Domain          | Field_Error_Sponsor_Email       |
-  # | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Valid_Data_All_Fields | Invalid_Email_Data_Two_Consecutive_Dot_SubDomain       | Field_Error_Sponsor_Email       |
-  # | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Valid_Data_All_Fields | Invalid_Email_Data_Two_Consecutiv_Dot_Domain_SubDomain | Field_Error_Sponsor_Email       |
-  # | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Valid_Data_All_Fields | Invalid_Email_Data_Two_Emoji                           | Field_Error_Sponsor_Email       |
-  # | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Valid_Data_All_Fields | Invalid_Email_Data_Two_Missing_AT                      | Field_Error_Sponsor_Email       |
-  # | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Valid_Data_All_Fields | Invalid_Email_Data_Two_Start_With_Dot                  | Field_Error_Sponsor_Email         |
-  # | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Valid_Data_All_Fields | Invalid_Email_Data_Two_Start_With_Hyphen               | Field_Error_Sponsor_Email         |
-  # | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Valid_Data_All_Fields | Invalid_Email_Data_Two_Hyphen_Before_Domain            | Field_Error_Sponsor_Email         |
-  # | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Valid_Data_All_Fields | Invalid_Email_Data_Two_Unicode                         | Field_Error_Sponsor_Email         |
-  # | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Valid_Data_All_Fields | Invalid_Email_Data_Two_Single_Quote_Before_AT          | Field_Error_Sponsor_Email         |
-  # | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Valid_Data_All_Fields | Invalid_Email_Data_Two_Local_Part_Max                  | Field_Error_Sponsor_Email         |
-  # | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Valid_Data_All_Fields | Invalid_Email_Data_Two_Max_Char                        | Field_Error_Sponsor_Email         |
 
   @CreateProjectJSEnabledRegression @jsEnabled
   Scenario Outline: Validate lead nation radio option when javascript is enabled
@@ -238,8 +200,8 @@ Feature: Create Amendment - Create Project - Regression Tests
     And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
-    And I fill the key project roles page with '<Key_Project_Roles>'
-    When I click the '<Navigation_Button_Third>' button on the 'Key_Project_Roles_Page'
+    And I fill the chief investigator page with '<Key_Project_Roles>'
+    When I click the '<Navigation_Button_Third>' button on the 'Chief_Investigator_Page'
     Then I can see the research locations page
     Then I fill the research locations page with '<Research_Locations>'
     Then I validate lead nation radio option for '<Research_Locations>'
@@ -257,8 +219,8 @@ Feature: Create Amendment - Create Project - Regression Tests
     And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
-    And I fill the key project roles page with '<Key_Project_Roles>'
-    When I click the '<Navigation_Button_Third>' button on the 'Key_Project_Roles_Page'
+    And I fill the chief investigator page with '<Key_Project_Roles>'
+    When I click the '<Navigation_Button_Third>' button on the 'Chief_Investigator_Page'
     Then I can see the research locations page
     Then I fill the research locations page with '<Research_Locations>'
     Then I validate lead nation radio option when javascript disabled

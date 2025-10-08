@@ -34,6 +34,7 @@ export default class CommonItemsPage {
   private _short_project_title_filter: string;
   private _date_submitted_from_filter: string;
   private _date_submitted_to_filter: string;
+  private _no_of_total_pages: number;
   readonly showAllSectionsAccordion: Locator;
   readonly genericButton: Locator;
   readonly govUkButton: Locator;
@@ -81,7 +82,6 @@ export default class CommonItemsPage {
   readonly advanced_filter_chevron: Locator;
   readonly result_count: Locator;
   readonly iras_id_search_text: Locator;
-  readonly advanced_filter_active_filters_label: Locator;
   readonly no_matching_search_result_header_label: Locator;
   readonly no_matching_search_result_sub_header_label: Locator;
   readonly no_matching_search_result_body_one_label: Locator;
@@ -89,7 +89,6 @@ export default class CommonItemsPage {
   readonly no_matching_search_result_body_three_label: Locator;
   readonly no_matching_search_result_body_four_label: Locator;
   readonly no_matching_search_result_count_label: Locator;
-  readonly active_filters_list: Locator;
   readonly clear_all_filters_link: Locator;
   readonly no_results_bullet_points: Locator;
   readonly no_results_guidance_text: Locator;
@@ -112,6 +111,7 @@ export default class CommonItemsPage {
   readonly search_no_results_header: Locator;
   readonly search_no_results_guidance_text: Locator;
   readonly search_no_results_guidance_points: Locator;
+  readonly active_filters_list_to_remove: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -128,6 +128,7 @@ export default class CommonItemsPage {
     this._short_project_title_filter = '';
     this._date_submitted_from_filter = '';
     this._date_submitted_to_filter = '';
+    this._no_of_total_pages = 0;
 
     //Locators
     this.showAllSectionsAccordion = page.locator('.govuk-accordion__show-all"');
@@ -221,15 +222,6 @@ export default class CommonItemsPage {
       this.no_matching_search_result_body_four_label =
         this.page.getByRole('listitem');
     this.no_matching_search_result_count_label = this.page.getByRole('heading');
-    this.active_filters_list = this.page
-      .getByRole('heading', {
-        name: this.commonTestData.active_filters_label,
-        exact: true,
-      })
-      .locator('..')
-      .getByRole('list')
-      .getByRole('listitem')
-      .getByRole('link');
     this.clear_all_filters_link = this.page.getByRole('link', {
       name: this.commonTestData.clear_all_filters_label,
       exact: true,
@@ -245,7 +237,6 @@ export default class CommonItemsPage {
       .getByText(this.buttonTextData.Search_Modifications_Page.Apply_Filters, {
         exact: true,
       });
-    this.advanced_filter_active_filters_label = this.page.getByRole('list');
     this.upload_files_input = this.page.locator('input[type="file"]');
     this.search_results_count = this.page.locator('.search-filter-panel__count');
     this.advanced_filter_panel = this.page.getByTestId('filter-panel');
@@ -260,6 +251,15 @@ export default class CommonItemsPage {
     this.date_to_hint_label = this.date_to_filter_group.getByText(this.searchFilterResultsData.date_to_hint_label);
     this.active_filters_label = this.page.getByRole('heading').getByText(searchFilterResultsData.active_filters_label);
     this.active_filter_list = this.page.locator('.search-filter-summary').getByRole('list');
+    this.active_filters_list_to_remove = this.page
+      .getByRole('heading', {
+        name: this.commonTestData.active_filters_label,
+        exact: true,
+      })
+      .locator('..')
+      .getByRole('list')
+      .getByRole('listitem')
+      .getByRole('link');
     this.active_filter_items = this.active_filter_list.getByRole('listitem').locator('span');
     this.clear_all_filters_link = this.page
       .getByRole('link')
@@ -324,32 +324,18 @@ export default class CommonItemsPage {
     this._date_submitted_to_filter = value;
   }
 
+  async getNumberofTotalPages(): Promise<number> {
+    return this._no_of_total_pages;
+  }
+
+  async setNumberofTotalPages(value: number): Promise<void> {
+    this._no_of_total_pages = value;
+  }
+
   //Page Methods
   async storeAuthState(user: string) {
-    const authSysAdminUserFile = 'auth-storage-states/sysAdminUser.json';
-    const authApplicantUserFile = 'auth-storage-states/applicantUser.json';
-    const authStudyWideReviewerFile = 'auth-storage-states/studyWideReviewer.json';
-    const authTeamManagerFile = 'auth-storage-states/teamManager.json';
-    const authWorkFlowCoordinatorFile = 'auth-storage-states/workFlowCoordinator.json';
-    switch (user.toLowerCase()) {
-      case 'system_admin':
-        await this.page.context().storageState({ path: authSysAdminUserFile });
-        break;
-      case 'applicant_user':
-        await this.page.context().storageState({ path: authApplicantUserFile });
-        break;
-      case 'studywide_reviewer':
-        await this.page.context().storageState({ path: authStudyWideReviewerFile });
-        break;
-      case 'team_manager':
-        await this.page.context().storageState({ path: authTeamManagerFile });
-        break;
-      case 'workflow_coordinator':
-        await this.page.context().storageState({ path: authWorkFlowCoordinatorFile });
-        break;
-      default:
-        throw new Error(`${user} is not a valid option`);
-    }
+    const userPath = confirmStringNotNull(user.toLowerCase());
+    await this.page.context().storageState({ path: `auth-storage-states/${userPath}.json` });
   }
 
   async isAccordionExpanded(accordion: Locator): Promise<string | null> {
@@ -763,6 +749,7 @@ export default class CommonItemsPage {
     let dataFound = false;
     while (!dataFound) {
       const rowCount = await this.tableRows.count();
+      // since first row is header, starting from 1;
       for (let i = 1; i < rowCount; i++) {
         const columns = this.tableRows.nth(i).getByRole('cell');
         const firstName = confirmStringNotNull(await columns.nth(0).textContent());
@@ -773,6 +760,7 @@ export default class CommonItemsPage {
       if ((await this.next_button.isVisible()) && !(await this.next_button.isDisabled())) {
         await this.next_button.click();
         await this.page.waitForLoadState('domcontentloaded');
+        await this.page.waitForTimeout(1000);
       } else {
         dataFound = true;
       }
@@ -1017,7 +1005,7 @@ export default class CommonItemsPage {
     if (removeFilterLabel) {
       let filterFound = true;
       while (filterFound) {
-        const filterItems = this.active_filter_list;
+        const filterItems = this.active_filters_list_to_remove;
         const count = await filterItems.count();
         filterFound = false;
         for (let i = 0; i < count; i++) {
@@ -1430,5 +1418,14 @@ export default class CommonItemsPage {
       actualListValues.push(actualListValue);
     }
     return actualListValues;
+  }
+
+  async clickButton(page: string, buttonName: string) {
+    const buttonLabel = this.buttonTextData[page][buttonName];
+    await this.govUkButton
+      .getByText(buttonLabel, { exact: true })
+      .or(this.genericButton.getByText(buttonLabel, { exact: true }))
+      .first()
+      .click();
   }
 }

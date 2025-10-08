@@ -11,13 +11,17 @@ Feature: Create Amendment - Create Modifications
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    Then I fill the key project roles page with 'Valid_Data_All_Fields'
-    Then I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    Then I fill the chief investigator page with 'Valid_Data_All_Fields'
+    Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
     When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
     Then I can see the project overview page
 
   @rsp-4038 @SelectAreaOfChange
@@ -162,7 +166,6 @@ Feature: Create Amendment - Create Modifications
       | Participating_Organisation | Early_Closure_Withdrawal_Of_Sites_Option                   | Modifications_Tile      |
       | Participating_Organisation | Addition_Of_Participant_Identification_Centres_Option      | Modifications_Tile      |
       | Participating_Organisation | Early_Closure_Of_Participant_Identification_Centres_Option | Modifications_Tile      |
-
   # The KNOWN_DEFECT-RSP-5007 will be fixed with the new user story RSP-4136 so this scenario can be re-used later
   @rsp-4039 @ParticipatingOrganisationsErrorValidation @KNOWN_DEFECT-RSP-5007 @skip
   Scenario Outline: Validate the mandatory field error message on participating organisation page
@@ -180,3 +183,39 @@ Feature: Create Amendment - Create Modifications
     Examples:
       | Field_And_Summary_Error_Message              | Area_Of_Change             | Specific_Change          | Modifications_Tile_Link |
       | Field_Error_participating_organisations_text | Participating_Organisation | Addition_Of_Sites_Option | Modifications_Tile      |
+
+  @rsp-4386 @ModificationsJourneyEntireJourney
+  Scenario Outline: Validate that user can create modifications and complete the entire modifications journey
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I capture the page screenshot
+    And I create '<Changes>' for the created modification
+    And I keep note of the individual and overall ranking of changes created using '<Changes>'
+    # And I can see the modifications details page
+    And I capture the page screenshot
+    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    # And I validate the overall ranking of changes displayed for '<Changes>'
+    # And I validate the individual ranking of changes displayed for '<Changes>'
+    # And I validate the field values are displayed as per the '<Changes>' dataset
+    When I click the 'Save_Continue_Review' button on the 'Modifications_Details_Page'
+    # Then I can see the add sponsor reference page
+    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    # Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    # Then I can see the review all changes modifications page
+    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    # And I validate the overall ranking of changes displayed for '<Changes>'
+    # And I validate the individual ranking of changes displayed for '<Changes>'
+    # And I validate the field values are displayed as per the '<Changes>' dataset
+    # Then I validate sponsor details are displayed with 'Valid_Data_All_Fields'
+    Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
+    # Then I can see the confimation page for modification sent to sponsor page
+    Then I click the 'Return_To_Project_Overview' button on the 'Confirmation_Page'
+    Then I can see the project overview page
+    And I can see a 'Create_New_Modification' button on the 'Project_Overview_Page'
+
+    Examples:
+      | Changes                           |
+      | Multiple_Changes_Planned_End_Date |

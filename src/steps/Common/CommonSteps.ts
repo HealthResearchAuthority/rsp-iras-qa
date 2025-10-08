@@ -192,10 +192,11 @@ Given(
       await checkCreateUserProfilePage.back_button.click(); //work around for now >> to click on Back link
     } else if (pageKey === 'Check_Create_Review_Body_Page' && linkKey === 'Back') {
       await checkCreateUserProfilePage.back_button.click(); //work around for now >> to click on Back link
+    } else if (linkKey.includes('_Filter_Panel')) {
+      await commonItemsPage.active_filter_list.locator(commonItemsPage.govUkLink.getByText(linkValue)).click();
     } else if (
-      ((pageKey === 'Search_Add_User_Review_Body_Page' || pageKey === 'Review_Body_User_List_Page') &&
-        linkKey === 'Back_To_Users') ||
-      linkKey.includes('_Filter_Panel')
+      (pageKey === 'Search_Add_User_Review_Body_Page' || pageKey === 'Review_Body_User_List_Page') &&
+      linkKey === 'Back_To_Users'
     ) {
       await commonItemsPage.govUkLink.getByText(linkValue).click();
     } else if (noOfLinksFound > 1) {
@@ -402,7 +403,7 @@ Then(
       editUserProfilePage,
       projectDetailsIRASPage,
       projectDetailsTitlePage,
-      keyProjectRolesPage,
+      chiefInvestigatorPage,
       createReviewBodyPage,
       editReviewBodyPage,
       reviewYourAnswersPage,
@@ -434,10 +435,10 @@ Then(
       errorMessageFieldDataset =
         projectDetailsTitlePage.projectDetailsTitlePageTestData[errorMessageFieldAndSummaryDatasetName];
       page = projectDetailsTitlePage;
-    } else if (pageKey == 'Key_Project_Roles_Page') {
+    } else if (pageKey == 'Chief_Investigator_Page') {
       errorMessageFieldDataset =
-        keyProjectRolesPage.keyProjectRolesPageTestData[errorMessageFieldAndSummaryDatasetName];
-      page = keyProjectRolesPage;
+        chiefInvestigatorPage.chiefInvestigatorPageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = chiefInvestigatorPage;
     } else if (pageKey == 'Create_Review_Body_Page') {
       errorMessageFieldDataset =
         createReviewBodyPage.createReviewBodyPageData.Create_Review_Body.Validation[
@@ -575,6 +576,7 @@ When(
       pageLocator = commonItemsPage.firstPage;
     } else {
       const totalPages = await commonItemsPage.getTotalPages();
+      commonItemsPage.setNumberofTotalPages(totalPages);
       pageLocator = await commonItemsPage.clickOnPages(totalPages, 'page number');
     }
     await expect(pageLocator).toHaveAttribute('aria-current', 'page');
@@ -762,6 +764,7 @@ Given(
       myResearchProjectsPage,
       approvalsPage,
       myModificationsTasklistPage,
+      modificationsReadyToAssignPage,
     },
     page: string,
     user: string
@@ -803,6 +806,11 @@ Given(
         await myModificationsTasklistPage.goto();
         await myModificationsTasklistPage.assertOnMyModificationsTasklistPage();
         break;
+      case 'Modifications_Tasklist_Page':
+        await modificationsReadyToAssignPage.page.context().addCookies(authState.cookies);
+        await modificationsReadyToAssignPage.goto();
+        await modificationsReadyToAssignPage.assertOnModificationsReadyToAssignPage();
+        break;
       default:
         throw new Error(`${page} is not a valid option`);
     }
@@ -825,6 +833,7 @@ Then(
         actualList = await manageReviewBodiesPage.getOrgNamesListFromUI();
         break;
       case 'uploaded documents':
+      case 'document type':
         actualList = await reviewUploadedDocumentsModificationsPage.getUploadedDocumentsListFromUI();
         break;
       default:

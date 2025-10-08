@@ -26,6 +26,7 @@
   "VCF_File": "src/resources/test_data/common/document_upload/VCF_File.vcf",
   "EML_File": "src/resources/test_data/common/document_upload/EML_File.eml",
   "MSG_File": "src/resources/test_data/common/document_upload/MSG_File.msg",
+  "New_CSV_File": "src/resources/test_data/common/document_upload/New_CSV_File.csv",
   "Multiple_Files": [
     "src/resources/test_data/common/document_upload/PNG_File.png",
     "src/resources/test_data/common/document_upload/GIF_File.gif",
@@ -54,5 +55,10 @@
     "src/resources/test_data/common/document_upload/VCF_File.vcf",
     "src/resources/test_data/common/document_upload/EML_File.eml",
     "src/resources/test_data/common/document_upload/MSG_File.msg"
+  ],
+  "Multiple_Files_Three": [
+    "src/resources/test_data/common/document_upload/PNG_File.png",
+    "src/resources/test_data/common/document_upload/GIF_File.gif",
+    "src/resources/test_data/common/document_upload/DOC_File.doc"
   ]
 }

@@ -1,4 +1,4 @@
-@ReceiveAmendments @MyModificationsTasklist @SystemTest @StudyWideReviewer @KNOWN-DEFECT-CMS-HEADING-MISSING
+@ReceiveAmendments @MyModificationsTasklist @SystemTest @StudyWideReviewer @KNOWN-DEFECT-RSP-5212
 Feature: Receive Amendments: My Modifications Tasklist page that displays modifications that have been assigned to me
 
     Background:
@@ -101,7 +101,7 @@ Feature: Receive Amendments: My Modifications Tasklist page that displays modifi
             | Existing_Title_Multi   |
             | Existing_Title_Partial |
 
-    @filterMyTasklistByDateSubmitted @rsp-4821 @KNOWN-DEFECT-RSP-5066
+    @filterMyTasklistByDateSubmitted @rsp-4821
     Scenario Outline: Verify the user is able to filter the my modifications tasklist by the date submitted
         And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
@@ -145,7 +145,7 @@ Feature: Receive Amendments: My Modifications Tasklist page that displays modifi
             | Days_From_Multi   |
             | Days_To_Multi     |
 
-    @searchFilterComboMyTasklist @rsp-4821 @KNOWN-DEFECT-RSP-5066
+    @searchFilterComboMyTasklist @rsp-4821
     Scenario Outline: Verify the user is able to combine searching and filtering options to narrow modifications displayed on my tasklist
         And I click the 'Advanced_Filters' button on the 'My_Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
@@ -168,7 +168,7 @@ Feature: Receive Amendments: My Modifications Tasklist page that displays modifi
             | IRAS_ID_Title_Date_Range_Multi  | Search        |
             | Title_Days_Range_Multi          | Apply_Filters |
 
-    @searchMyTasklistWithNoResults @rsp-4821 @KNOWN-DEFECT-CMS-NO-RESULTS-WRONG
+    @searchMyTasklistWithNoResults @rsp-4821 @KNOWN-DEFECT-RSP-5212
     Scenario Outline: Verify the my tasklist page displays the no results found message, when no records on the system match the search criteria
         And I click the 'Advanced_Filters' button on the 'Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel
@@ -208,7 +208,7 @@ Feature: Receive Amendments: My Modifications Tasklist page that displays modifi
             | Days_From_Multi         | Apply_Filters |
             | Days_To_Multi           | Search        |
 
-    @addRemoveFiltersMyTasklist @rsp-4821 @KNOWN-DEFECT-RSP-5066
+    @addRemoveFiltersMyTasklist @rsp-4821
     Scenario: Verify that adding and removing filters narrows and widens the search results appropriately on my tasklist
         And I click the 'Advanced_Filters' button on the 'My_Modifications_Tasklist_Page'
         And I 'can' see the advanced filters panel

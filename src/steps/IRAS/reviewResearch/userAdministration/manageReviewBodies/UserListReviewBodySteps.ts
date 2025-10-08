@@ -170,6 +170,9 @@ When(
   'I capture the name of the newly added user in the user list page of the review body',
   async ({ createUserProfilePage, userListReviewBodyPage, commonItemsPage }) => {
     if ((await commonItemsPage.tableBodyRows.count()) >= 1) {
+      if (await commonItemsPage.firstPage.isVisible()) {
+        await commonItemsPage.firstPage.click();
+      }
       const userListBeforeSearch = await commonItemsPage.getAllUsersFromTheTable();
       const userValues: string[] = confirmArrayNotNull(userListBeforeSearch.get('searchResultValues'));
       await userListReviewBodyPage.setUserListBeforeSearch(userValues);

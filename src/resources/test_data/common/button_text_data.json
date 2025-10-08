@@ -47,7 +47,13 @@
     "Save_For_Later": "Save for later",
     "Save_Changes": "Save changes"
   },
-  "Key_Project_Roles_Page": {
+  "Chief_Investigator_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later",
+    "Save_Changes": "Save changes",
+    "Search": "Search"
+  },
+  "Project_Identifiers_Page": {
     "Save_Continue": "Save and continue",
     "Save_For_Later": "Save for later",
     "Save_Changes": "Save changes",
@@ -151,6 +157,13 @@
     "Modification_Id": "Modification ID",
     "Modification_Type": "Modification type"
   },
+  "Project_Documents_Page": {
+    "document_type_project_documents": "Document type",
+    "document_name_project_documents": "Document name",
+    "version_project_documents": "Version",
+    "document_date_project_documents": "Document date",
+    "modification_id_project_documents": "Modification ID"
+  },
   "Participating_Organisations_Page": {
     "Save_Continue": "Save and continue",
     "Save_For_Later": "Save for later",
@@ -193,5 +206,19 @@
   },
   "Select_Study_Wide_Reviewer_Page": {
     "Complete_Assignment": "Complete assignment"
+  },
+  "Modifications_Details_Page": {
+    "Add_Another_Change": "Add another change to this modification",
+    "Save_Continue_Review": "Save and continue to review",
+    "Save_For_Later": "Save for later"
+  },
+  "Add_Document_Details_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later"
+  },
+  "Review_Document_Infomation_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later",
+    "Change_Details": "Change"
   }
 }
