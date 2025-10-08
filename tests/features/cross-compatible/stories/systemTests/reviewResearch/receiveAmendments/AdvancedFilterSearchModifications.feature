@@ -681,7 +681,7 @@ Feature: Approvals - Advanced Filter and Search combinations in the Search modif
                 Then I can see the approvals home page
                 And I click the 'Search' link on the 'Approvals_Page'
                 Then I can see the 'Search_Modifications_Page'
-                And all selected filters displayed under active Filters have been successfully removed
+                And I 'cannot' see active filters displayed
                 And I capture the page screenshot
               
                 Examples:

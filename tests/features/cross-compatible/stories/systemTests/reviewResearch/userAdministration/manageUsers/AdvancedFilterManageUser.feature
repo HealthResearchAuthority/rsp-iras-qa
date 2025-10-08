@@ -306,7 +306,7 @@ Feature: users - Advanced Filter and Search combinations in the Manage users pag
         Then I can see the 'System_Administration_Page'
         When I click the 'Manage_Users' link on the 'System_Administration_Page'
         Then I can see the 'Manage_Users_Page'
-        And all selected filters displayed under active Filters have been successfully removed
+        And I 'cannot' see active filters displayed
         And I capture the page screenshot
       
         Examples:
