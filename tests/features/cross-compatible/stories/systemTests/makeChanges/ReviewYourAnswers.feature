@@ -697,7 +697,7 @@ Feature: Create Amendment - Create Project - Review your answers
     And I capture the page screenshot
     When I click the '<Navigation_Button_Fourth>' button on the 'Review_Your_Answers_Page'
     And I capture the page screenshot
-    Then I validate 'Project_Record_Created_Labels' labels displayed in confirmation page for poject created using the '<Project_Details_Title>' details
+    Then I validate 'Project_Record_Created_Labels' labels displayed in confirmation page for project created using the '<Project_Details_Title>' details
     Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
     Then I can see the project overview page
     And I capture the page screenshot

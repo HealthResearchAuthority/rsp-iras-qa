@@ -37,6 +37,7 @@ export default class HomePage {
   readonly technical_assurance_reviewers_hint_label: Locator;
   readonly workspaceLinks: Locator;
   readonly lastLoggedIn: Locator;
+  readonly startNowBtn: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -54,9 +55,10 @@ export default class HomePage {
     this.myWorkspacesHeading = this.page
       .getByRole('heading')
       .getByText(this.homePageTestData.Home_Page.workspaceHeading);
-    this.loginBtn = this.page
+    this.startNowBtn = this.page
       .locator('.gem-c-button')
-      .and(this.page.getByText(this.buttonTextData.Home_Page.Login, { exact: true }));
+      .and(this.page.getByText(this.buttonTextData.Home_Page.Start_Now, { exact: true }));
+    this.loginBtn = this.page.locator('.govuk-button').and(this.page.getByText(this.buttonTextData.Home_Page.Login));
     this.approvalsLink = this.page.getByRole('link', { name: 'Approvals', exact: true });
     this.cagMembersLink = this.page.getByRole('link', { name: 'CAG members', exact: true });
     this.catLink = this.page.getByRole('link', { name: 'CAT', exact: true });

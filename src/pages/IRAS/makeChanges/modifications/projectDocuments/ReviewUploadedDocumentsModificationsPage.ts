@@ -6,6 +6,7 @@ import { confirmStringNotNull } from '../../../../../utils/UtilFunctions';
 export default class ReviewUploadedDocumentsModificationsPage {
   readonly page: Page;
   readonly reviewUploadedDocumentsModificationsPageTestData: typeof reviewUploadedDocumentsModificationsPageTestData;
+  private _file_names: string[];
   readonly pageHeading: Locator;
   readonly pageLabels: Locator;
   readonly table: Locator;
@@ -16,12 +17,22 @@ export default class ReviewUploadedDocumentsModificationsPage {
   constructor(page: Page) {
     this.page = page;
     this.reviewUploadedDocumentsModificationsPageTestData = reviewUploadedDocumentsModificationsPageTestData;
+    this._file_names = [];
 
     //Locators
     this.pageHeading = this.page.getByRole('heading');
     this.pageLabels = this.page.getByRole('paragraph');
     this.table = this.page.getByRole('table');
     this.rows = this.page.locator('tr');
+  }
+  //Getters & Setters for Private Variables
+
+  async getUploadedFileName(): Promise<string[]> {
+    return this._file_names;
+  }
+
+  async setUploadedFileName(value: string[]): Promise<void> {
+    this._file_names = value;
   }
 
   //Page Methods

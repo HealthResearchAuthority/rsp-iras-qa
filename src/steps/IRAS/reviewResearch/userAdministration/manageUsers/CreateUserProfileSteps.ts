@@ -81,9 +81,9 @@ Then(
       dataset['role_checkbox'].includes('Workflow co-ordinator') ||
       selectedCheckboxCount > 0
     ) {
-      await commonItemsPage.clearCheckboxesUserProfile(dataset, 'country_checkbox', createUserProfilePage);
-      await commonItemsPage.clearCheckboxesUserProfile(dataset, 'review_body_checkbox', createUserProfilePage);
-      await commonItemsPage.clearCheckboxesUserProfile(dataset, 'role_checkbox', createUserProfilePage);
+      await commonItemsPage.clearCheckboxes('country_checkbox', createUserProfilePage);
+      await commonItemsPage.clearCheckboxes('review_body_checkbox', createUserProfilePage);
+      await commonItemsPage.clearCheckboxes('role_checkbox', createUserProfilePage);
     }
   }
 );

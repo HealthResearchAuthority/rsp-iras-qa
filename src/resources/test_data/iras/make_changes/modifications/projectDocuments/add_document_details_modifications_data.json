@@ -1,5 +1,6 @@
 {
   "Add_Document_Details_Modifications_Page": {
+    "page_title": "Add document details for - Health research UK",
     "page_title_first_part": "Add document details for",
     "page_title_second_part": "- Health research UK",
     "heading": "Add document details for",
@@ -18,7 +19,16 @@
     "heading": "Add document details for",
     "save_and_continue": "Save and continue",
     "save_changes": "Save changes",
-    "delete_label": "Delete"
+    "delete_label": "Delete",
+    "document_type_dropdown_label": "Document type",
+    "back_link": "Back",
+    "document_previously_approved_hint_text": "Has a previous version of this document been approved?",
+    "sponsor_document_version_label": "Sponsor document version",
+    "sponsor_document_date_label": "Sponsor document date",
+    "sponsor_document_date_day_label": "Day",
+    "sponsor_document_date_month_label": "Month",
+    "sponsor_document_date_year_label": "Year",
+    "sub_document_type_label": "Sub document type"
   },
   "Valid_Data_Fields": {
     "document_type_dropdown": "Protocol / Clinical Investigation Plan",
@@ -52,5 +62,96 @@
   },
   "New_Valid_Document_Previously_Approved_Value": {
     "document_previously_approved_radio": "No"
+  },
+  "Non_REC_Study_Types": {
+    "document_type_dropdown_values": [
+      "Protocol / Clinical Investigation Plan",
+      "Evidence of insurance or indemnity",
+      "Participant information sheet (PIS)",
+      "Participant facing materials -other",
+      "Consent form",
+      "Recruitment - Invitation to potential participants",
+      "Recruitment materials - other",
+      "Interviews or focus group topic guides",
+      "Questionnaire - non-validated",
+      "Questionnaire - validated",
+      "Participant diary (sample)",
+      "Curriculum vitae (CV) /suitability of researcher",
+      "Student research criteria eligibility declaration",
+      "Dear investigator letter",
+      "Funder's letter/outcome of funding panel",
+      "Statistician's letter",
+      "Referee's  or other scientific critique report",
+      "Sponsor - Site Agreement",
+      "Schedule of Events or Schedule of Events cost attribution template (SoECAT)",
+      "Data flow diagram or documents demonstrating conformity with data protection and confidentiality requirements",
+      "Miscellaneous"
+    ]
+  },
+  "Document_Types": {
+    "Protocol_Clinical_Investigation_Plan": "Protocol / Clinical Investigation Plan",
+    "Evidence_Of_Insurance_Or_Indemnity": "Evidence of insurance or indemnity",
+    "Participant_Information_Sheet_PIS": "Participant information sheet (PIS)",
+    "Participant_Facing_Material_Other": "Participant facing materials -other",
+    "Consent_form": "Consent form",
+    "Recruitment_Invitation_To_Potential_Participants": "Recruitment - Invitation to potential participants",
+    "Recruitment_Materials_Other": "Recruitment materials - other",
+    "Interviews_Or_Focus_Group_Topic_Guides": "Interviews or focus group topic guides",
+    "Questionnaire_Non_Validated": "Questionnaire - non-validated",
+    "Questionnaire_Validated": "Questionnaire - validated",
+    "Participant_Diary_Sample": "Participant diary (sample)",
+    "Curriculum_Vitae_CV_Suitability_Of_Researcher": "Curriculum vitae (CV) /suitability of researcher",
+    "Student_Research_Criteria_Eligibility_Declaration": "Student research criteria eligibility declaration",
+    "Dear_Investigator_Letter": "Dear investigator letter",
+    "Funder_Letters_Outcome_Of_Funding_Panel": "Funder's letter/outcome of funding panel",
+    "Statisticians_Letter": "Statistician's letter",
+    "Referees_Or_Other_Scientific_Critique_Report": "Referee's or other scientific critique report",
+    "Sponsor_Site_Agreement": "Sponsor - Site Agreement",
+    "Schedule_Of_Events_Or_Schedule_Of_Events_Cost_Attribution_Template_SoECAT": "Schedule of Events or Schedule of Events cost attribution template (SoECAT)",
+    "Data_Flow_Diagram_Or_Documents_Demonstrating_Conformity_With_Data_Protection_And_Confidentiality_Requirements": "Data flow diagram or documents demonstrating conformity with data protection and confidentiality requirements",
+    "Miscellaneous": "Miscellaneous"
+  },
+
+  "Valid_Data_Fields_Optional_Version_Date": {
+    "document_previously_approved_radio": "Yes"
+  },
+  "Mandatory_Data_Fields_Optional_Version_Date": {
+    "document_type_dropdown": "Evidence of insurance or indemnity",
+    "document_previously_approved_radio": "Yes"
+  },
+  "Missing_Mandatory_Data_Fields_Optional_Version_Date": {
+    "document_type_dropdown": "Evidence of insurance or indemnity"
+  },
+  "Mandatory_Data_Fields_Mandatory_Version_Date": {
+    "document_type_dropdown": "Protocol / Clinical Investigation Plan",
+    "sponsor_document_version_text": "1.5",
+    "sponsor_document_day_text": "20",
+    "sponsor_document_month_dropdown": "January",
+    "sponsor_document_year_text": "2020",
+    "document_previously_approved_radio": "Yes"
+  },
+  "Missing_Mandatory_Data_Fields_Mandatory_Version_Date": {
+    "document_type_dropdown": "Protocol / Clinical Investigation Plan",
+    "sponsor_document_version_text": "1.5",
+    "sponsor_document_day_text": "20",
+    "sponsor_document_month_dropdown": "January",
+    "sponsor_document_year_text": "2020"
+  },
+  "Valid_Data_Fields_Mandatory_Version": {
+    "sponsor_document_day_text": "20",
+    "sponsor_document_month_dropdown": "January",
+    "sponsor_document_year_text": "2020",
+    "document_previously_approved_radio": "Yes"
+  },
+  "Valid_Data_Fields_Mandatory_Date": {
+    "sponsor_document_version_text": "1.5",
+    "document_previously_approved_radio": "Yes"
+  },
+  "Valid_Data_Fields_Mandatory_Version_Date": {
+    "sponsor_document_version_text": "1.5",
+    "sponsor_document_day_text": "20",
+    "sponsor_document_month_dropdown": "January",
+    "sponsor_document_year_text": "2020",
+    "document_previously_approved_radio": "Yes"
   }
 }
