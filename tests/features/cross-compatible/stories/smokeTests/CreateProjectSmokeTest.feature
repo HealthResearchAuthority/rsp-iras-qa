@@ -1,4 +1,4 @@
-@ApplicantUser @CreateProjectSmokeFeature @Smoke @run
+@ApplicantUser @CreateProjectSmokeFeature @Smoke
 Feature: Create Amendment - Create Project - Smoke Tests
 
   Background:
@@ -18,6 +18,10 @@ Feature: Create Amendment - Create Project - Smoke Tests
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    Then I can see the project identifiers page
+    And I fill the project identifiers page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     Then I can see the project details title page
     And I capture the page screenshot
     Then I fill the project details title page with 'Valid_Data_All_Fields'
@@ -33,10 +37,6 @@ Feature: Create Amendment - Create Project - Smoke Tests
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    Then I can see the project identifiers page
-    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
-    And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     Then I can see the review your application page
     And I capture the page screenshot
     # Then I can validate the field values of 'Valid_Data_All_Fields' page 'Valid_Data_All_Fields' page and 'Valid_Data_All_Fields' page
