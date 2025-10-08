@@ -141,9 +141,12 @@ Then(
   'I select document type {string} for which document version and date are {string} and I can see mandatory fields are displayed based on the selected document type',
   async (
     { addDocumentDetailsForSpecificDocumentModificationsPage },
-    documentTypeName: string,
+    documentTypeDatasetName: string,
     documentVersionDate: string
   ) => {
+    const documentTypeName =
+      addDocumentDetailsForSpecificDocumentModificationsPage
+        .addDocumentDetailsForSpecificDocumentModificationsPageTestData.Document_Types[documentTypeDatasetName];
     const locator: Locator = addDocumentDetailsForSpecificDocumentModificationsPage.document_type_dropdown;
     if (confirmStringNotNull(await locator.getAttribute('class')).includes('govuk-select')) {
       await locator.selectOption(documentTypeName);

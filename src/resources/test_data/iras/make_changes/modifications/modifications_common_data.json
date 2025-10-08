@@ -18,6 +18,24 @@
     "review_type_review_required": "Review required",
     "review_type_no_review_required": "No review required"
   },
+  "Modification_Change_Question_Label_Texts": {
+    "planned_project_end_date_label": "Change to planned end date",
+    "affected_organisation_types_label": "Affected organisation types",
+    "affected_nhs_hsc_locations_label": "Affected NHS/HSC organisation locations",
+    "portion_of_nhs_hsc_organisations_affected_label": "Portion of NHS/HSC organisations affected",
+    "additional_resource_implications_label": "Additional resource implications",
+    "affected_non_nhs_hsc_locations_label": "Affected non-NHS/HSC locations"
+  },
+  "Modification_Sponsor_Details_Label_Texts": {
+    "sponsor_reference_label": "Sponsor reference (optional)",
+    "sponsor_date_label": "Date (optional)",
+    "sponsor_summary_label": "Brief summary of changes"
+  },
+  "Modification_Ranking_Label_Texts": {
+    "modification_type_label": "Modification type",
+    "category_label": "Category",
+    "review_type_label": "Review type"
+  },
   "Specific_Change_Pages": {
     "Planned_End_Date": {
       "page_header": "Change to planned end date",

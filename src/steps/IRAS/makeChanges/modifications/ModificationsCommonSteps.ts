@@ -145,7 +145,7 @@ Then(
     const dataset = sponsorReferencePage.sponsorReferencePageTestData[datasetName];
     await reviewAllChangesPage.page
       .getByRole('heading', {
-        name: 'Sponsor details',
+        name: reviewAllChangesPage.reviewAllChangesPageTestData.Review_All_Changes_Page.sponsor_details_heading,
       })
       .nth(1)
       .locator('..')
@@ -165,11 +165,9 @@ const validateCardData = (expectedData: any, actualData: any) => {
     if (expected.length !== actual.length) return false;
     return expected.every((val, index) => val === actual[index]);
   };
-
   for (const key of Object.keys(expectedData)) {
     const expectedValue = expectedData[key];
     const actualValue = actualData[key];
-
     if (Array.isArray(expectedValue)) {
       const sortedExpected = [...expectedValue].sort((a, b) => expectedValue.indexOf(a) - expectedValue.indexOf(b));
       const sortedActual = [...(actualValue || [])].sort((a, b) => expectedValue.indexOf(a) - expectedValue.indexOf(b));
@@ -185,21 +183,14 @@ Then(
   async ({ modificationsCommonPage, reviewAllChangesPage }, datasetName) => {
     const changesDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName];
     const changeNames = Object.keys(changesDataset).reverse();
-
     for (let i = 0; i < changeNames.length; i++) {
       const changeName = changeNames[i];
       const expectedData = changesDataset[changeName];
-
       const cardTitle = `Change ${i + 1} - ${expectedData.area_of_change_dropdown}`;
       const actualData = await modificationsCommonPage.getMappedSummaryCardDataForRankingCategoryChanges(
         cardTitle,
         reviewAllChangesPage.reviewAllChangesPageTestData.Review_All_Changes_Page.changes_heading
       );
-
-      console.log(`\n Comparing Change ${i + 1}: ${changeName}`);
-      console.log('Expected:', expectedData);
-      console.log('Actual:', actualData.cardData);
-
       validateCardData(expectedData, actualData.cardData);
     }
   }
@@ -213,9 +204,6 @@ Then(
       reviewAllChangesPage.reviewAllChangesPageTestData.Review_All_Changes_Page.sponsor_details_heading,
       reviewAllChangesPage.reviewAllChangesPageTestData.Review_All_Changes_Page.sponsor_details_heading
     );
-    console.log('Expected:', expectedData);
-    console.log('Actual:', actualData.cardData);
-
     validateCardData(Object.keys(expectedData), actualData.cardData);
   }
 );
