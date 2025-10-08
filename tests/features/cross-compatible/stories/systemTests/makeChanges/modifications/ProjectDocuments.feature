@@ -9,6 +9,9 @@ Feature: Create Amendment - Project Documents Modifications
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
@@ -18,9 +21,6 @@ Feature: Create Amendment - Project Documents Modifications
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    Then I can see the project identifiers page
-    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
     When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
@@ -246,7 +246,7 @@ Feature: Create Amendment - Project Documents Modifications
       | Protocol_Non_Substantial_Changes             | Multiple_Files_Three |
       | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three |
 
-  @rsp-3888 @DeleteDocumentsOneByOneFromAddDocumentDetailsModification
+  @rsp-3888 @DeleteDocumentsOneByOneFromAddDocumentDetailsModification 
   Scenario Outline: Validate the user is able to delete documents from add document details page
     And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
     And I capture the page screenshot
@@ -266,7 +266,7 @@ Feature: Create Amendment - Project Documents Modifications
     When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
     When I can see the add document details for '<Specific_Change>' page
     And I capture the page screenshot
-    And I click on the document link with status 'Document_Status_Incomplete' and delete the uploaded document '<Document_Upload_Files>' in the add document details for specific document page
+    And I click on the document link with status 'Document_Status_Incomplete' and delete the uploaded document in the add document details for specific document page
     Then I can see the add documents for '<Specific_Change>' page
     When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
     Then I validate 'Field_Error_Upload_Documents_Mandatory' displayed on 'Add_Document_Modifications_Page'

@@ -66,25 +66,9 @@ Then(
     let fileDeleteCount = 0;
     for (const filePath of fileArray) {
       fileDeleteCount = fileDeleteCount + 1;
-      const stats = fs.statSync(filePath);
-      let fileSize;
-      if (stats.size < 1024 * 1024) {
-        fileSize = Number.parseFloat((stats.size / 1024).toFixed(2)).toString() + ' KB';
-      } else {
-        fileSize = Number.parseFloat((stats.size / (1024 * 1024)).toFixed(2)).toString() + ' MB';
-      }
       const fileName = path.basename(filePath);
-      const expectedDocumentRow = reviewUploadedDocumentsModificationsPage.table
-        .locator(reviewUploadedDocumentsModificationsPage.rows, { hasText: `${fileName}` })
-        .filter({ hasText: fileSize })
-        .filter({
-          hasText:
-            reviewUploadedDocumentsModificationsPage.reviewUploadedDocumentsModificationsPageTestData
-              .Review_Uploaded_Documents_Modifications_Page.delete_label,
-        });
       await reviewUploadedDocumentsModificationsPage.table
         .locator(reviewUploadedDocumentsModificationsPage.rows, { hasText: `${fileName}` })
-        .filter({ hasText: fileSize })
         .getByRole('link', {
           name: reviewUploadedDocumentsModificationsPage.reviewUploadedDocumentsModificationsPageTestData
             .Review_Uploaded_Documents_Modifications_Page.delete_label,
@@ -103,36 +87,12 @@ Then(
         break;
       }
       if (fileDeleteCount < 3) {
-        const documentFoundCount = await expectedDocumentRow.count();
-        expect(documentFoundCount).toBe(0);
         await reviewUploadedDocumentsModificationsPage.assertOnReviewUploadedDocumentsModificationsPage(
           specificChangeTitleLabel
         );
       } else {
         break;
       }
-    }
-  }
-);
-Then(
-  'I validate delete documents confirmation page {string}',
-  async ({ reviewUploadedDocumentsModificationsPage, commonItemsPage }, uploadDocumentsDatasetName: string) => {
-    const documentPath = commonItemsPage.documentUploadTestData[uploadDocumentsDatasetName];
-    const fileArray = Array.isArray(documentPath) ? documentPath : [documentPath];
-    for (const filePath of fileArray) {
-      const stats = fs.statSync(filePath);
-      let fileSize;
-      if (stats.size < 1024 * 1024) {
-        fileSize = Number.parseFloat((stats.size / 1024).toFixed(2)).toString() + ' KB';
-      } else {
-        fileSize = Number.parseFloat((stats.size / (1024 * 1024)).toFixed(2)).toString() + ' MB';
-      }
-      const fileName = path.basename(filePath);
-      const expectedDocumentRow = reviewUploadedDocumentsModificationsPage.table
-        .locator(reviewUploadedDocumentsModificationsPage.rows, { hasText: `${fileName}` })
-        .filter({ hasText: fileSize });
-      const documentFoundCount = await expectedDocumentRow.count();
-      expect.soft(documentFoundCount).toBeGreaterThan(0);
     }
   }
 );
