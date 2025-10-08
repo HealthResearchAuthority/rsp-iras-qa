@@ -70,7 +70,7 @@ Feature: Create Amendment - Modification Details
       | Changes_Planned_End_Date_Unfinished_Modifications |
 
   @rsp-4271 @rsp-5188 @ModificationsDetailsRemoveAllChanges
-  Scenario Outline: Validate that user can remove all modifications from modification details page
+  Scenario Outline: Validate that user can remove all changes from modification details page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I capture the page screenshot
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
@@ -87,7 +87,7 @@ Feature: Create Amendment - Modification Details
     And I click the 'Remove_Change' button on the 'Confirm_Remove_Modification_Page'
     And I capture the page screenshot
     And I can see the modifications details page
-    Then I can see the modification successfully removed green banner message on modification details page
+    Then I can see the modification successfully removed message on modification details page
     And I capture the page screenshot
 
     Examples:

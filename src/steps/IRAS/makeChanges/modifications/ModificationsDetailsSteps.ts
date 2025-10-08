@@ -1,5 +1,5 @@
 import { createBdd } from 'playwright-bdd';
-import { test } from '../../../../hooks/CustomFixtures';
+import { test, expect } from '../../../../hooks/CustomFixtures';
 
 const { Then } = createBdd(test);
 
@@ -16,9 +16,9 @@ Then('I can see the modification unfinished error page', async ({ modificationsD
 });
 
 Then(
-  'I can see the modification successfully removed green banner message on modification details page',
+  'I can see the modification successfully removed message on modification details page',
   async ({ modificationsDetailsPage }) => {
-    await modificationsDetailsPage.removeModificationSuccessMessageText.isVisible();
+    await expect.soft(modificationsDetailsPage.removeModificationSuccessMessageText).toBeVisible();
   }
 );
 

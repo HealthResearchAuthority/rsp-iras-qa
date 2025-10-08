@@ -40,9 +40,9 @@ export default class ModificationsDetailsPage {
   }
 
   async assertOnRemoveModificationsPage() {
-    expect.soft(this.removeModificationPageHeading).toBeVisible();
+    await expect.soft(this.removeModificationPageHeading).toBeVisible();
     const currentUrl = this.page.url();
-    expect.soft(currentUrl).toContain('confirmremovechange?');
+    await expect.soft(currentUrl).toContain('confirmremovechange?');
   }
   async assertOnModificationUnfinishedErrorPage() {
     await expect.soft(this.modificationUnfinishedErrorPageHeading).toBeVisible();

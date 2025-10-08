@@ -199,7 +199,7 @@ Feature: Create Amendment - Create Modifications
     # And I validate the overall ranking of changes displayed for '<Changes>'
     # And I validate the individual ranking of changes displayed for '<Changes>'
     # And I validate the field values are displayed as per the '<Changes>' dataset
-    When I click the 'Save_Continue_Review' button on the 'Modifications_Details_Page'
+    When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
     # Then I can see the add sponsor reference page
     And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
     # Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
