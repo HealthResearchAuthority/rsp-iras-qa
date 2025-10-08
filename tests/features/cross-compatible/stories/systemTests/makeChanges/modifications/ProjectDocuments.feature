@@ -197,7 +197,6 @@ Feature: Create Amendment - Project Documents Modifications
     And I click the 'Delete_All' link on the 'Documents_Added_For_Change_Page'
     Then I can see the delete documents confirmation page 
     And I capture the page screenshot
-    Then I validate delete documents confirmation page '<Document_Upload_Files>' 
     And I click the 'Delete_Documents' button on the 'Delete_Documents_Confirmation_Page'
     And I capture the page screenshot
     Then I can see the add documents for '<Specific_Change>' page

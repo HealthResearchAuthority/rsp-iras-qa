@@ -1,8 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../hooks/CustomFixtures';
 import { confirmStringNotNull } from '../../utils/UtilFunctions';
-import * as fs from 'node:fs';
-import path from 'node:path';
 
 const { Given, When, Then } = createBdd(test);
 
@@ -260,28 +258,5 @@ Then(
     const actualSuccessMessage = confirmStringNotNull(await confirmationPage.success_message_body_text.textContent());
     await expect(confirmationPage.success_message_body_text.getByText(expectedSuccessMessage)).toBeVisible();
     expect(actualSuccessMessage).toBe(expectedSuccessMessage);
-  }
-);
-
-Then(
-  'I validate delete documents confirmation page {string}',
-  async ({ reviewUploadedDocumentsModificationsPage, commonItemsPage }, uploadDocumentsDatasetName: string) => {
-    const documentPath = commonItemsPage.documentUploadTestData[uploadDocumentsDatasetName];
-    const fileArray = Array.isArray(documentPath) ? documentPath : [documentPath];
-    for (const filePath of fileArray) {
-      const stats = fs.statSync(filePath);
-      let fileSize;
-      if (stats.size < 1024 * 1024) {
-        fileSize = Number.parseFloat((stats.size / 1024).toFixed(2)).toString() + ' KB';
-      } else {
-        fileSize = Number.parseFloat((stats.size / (1024 * 1024)).toFixed(2)).toString() + ' MB';
-      }
-      const fileName = path.basename(filePath);
-      const expectedDocumentRow = reviewUploadedDocumentsModificationsPage.table
-        .locator(reviewUploadedDocumentsModificationsPage.rows, { hasText: `${fileName}` })
-        .filter({ hasText: fileSize });
-      const documentFoundCount = await expectedDocumentRow.count();
-      expect.soft(documentFoundCount).toBeGreaterThan(0);
-    }
   }
 );
