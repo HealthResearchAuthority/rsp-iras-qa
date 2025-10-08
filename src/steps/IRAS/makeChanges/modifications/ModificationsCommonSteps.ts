@@ -36,15 +36,20 @@ Then(
   'I create {string} for the created modification',
   async ({ commonItemsPage, modificationsCommonPage, selectAreaOfChangePage }, datasetName) => {
     const changesDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName];
+    let datasetCount = 0;
     for (const changeName of Object.keys(changesDataset)) {
+      datasetCount = datasetCount + 1;
       const changeDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName][changeName];
       await selectAreaOfChangePage.selectAreaOfChangeInModificationsPage(changeDataset);
       await modificationsCommonPage.createChangeModification(changeName, changeDataset);
-      await commonItemsPage.clickButton('Modifications_Details_Page', 'Add_Another_Change');
+      if (datasetCount < 2) {
+        await commonItemsPage.clickButton('Modifications_Details_Page', 'Add_Another_Change');
+      } else {
+        break;
+      }
     }
   }
 );
-
 Then(
   'I keep note of the individual and overall ranking of changes created using {string}',
   async ({ modificationsCommonPage }, datasetName) => {

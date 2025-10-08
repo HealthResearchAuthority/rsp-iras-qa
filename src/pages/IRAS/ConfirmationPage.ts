@@ -9,7 +9,7 @@ export default class ConfirmationPage {
   readonly success_message_header_label: Locator;
   readonly success_message_body_text: Locator;
   readonly confirmation_body_label: Locator;
-
+  readonly delete_modification_page_heading: Locator;
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page;
@@ -28,8 +28,8 @@ export default class ConfirmationPage {
       name: confirmationPageTestData.Project_Record_Created_Labels.page_heading,
     });
     this.success_message_body_text = this.page.locator('.govuk-panel__body');
-
     this.confirmation_body_label = this.page.getByRole('paragraph').first();
+    this.delete_modification_page_heading = this.page.locator('.govuk-heading-l');
   }
 
   async assertOnConfirmationPage() {

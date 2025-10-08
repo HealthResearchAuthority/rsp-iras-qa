@@ -252,3 +252,33 @@ Then(
     expect(actualSuccessMessage).toBe(expectedSuccessMessage);
   }
 );
+
+Then(
+  'I validate all field {string} value on delete modification confirmation screeen',
+  async (
+    { modificationsCommonPage, projectDetailsIRASPage, projectDetailsTitlePage, confirmationPage },
+    projectTitleDatasetName: string
+  ) => {
+    const irasIDExpected = await projectDetailsIRASPage.getUniqueIrasId();
+    const shortProjectTitleExpected =
+      projectDetailsTitlePage.projectDetailsTitlePageTestData[projectTitleDatasetName].short_project_title_text;
+    const modificationIDExpected = irasIDExpected + '/' + 1;
+    const irasIDActual = confirmStringNotNull(await modificationsCommonPage.iras_id_label.textContent());
+    const shortProjectTitleActual = confirmStringNotNull(
+      await modificationsCommonPage.short_project_title_label.textContent()
+    );
+    const modificationIDActual = confirmStringNotNull(
+      await modificationsCommonPage.modification_id_label.textContent()
+    );
+    const expectedHeadingText =
+      confirmationPage.confirmationPageTestData.Delete_Modification_Confirmation_Labels
+        .delete_modification_page_heading + modificationIDExpected;
+    const actualHeadingText = confirmStringNotNull(
+      await confirmationPage.delete_modification_page_heading.textContent()
+    );
+    expect(irasIDActual).toBe(irasIDExpected);
+    expect(shortProjectTitleActual).toBe(shortProjectTitleExpected);
+    expect(modificationIDActual).toBe(modificationIDExpected);
+    expect(expectedHeadingText).toBe(actualHeadingText);
+  }
+);

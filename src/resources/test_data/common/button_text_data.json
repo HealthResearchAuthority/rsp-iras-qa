@@ -178,6 +178,9 @@
     "Save_For_Later": "Save for later",
     "Save_Changes": "Save changes"
   },
+  "Delete_Modifications_Confirm_Page": {
+    "delete_modification": "Delete modification"
+  },
   "Affected_Organisation_Selection_Page": {
     "Save_Continue": "Save and continue",
     "Save_For_Later": "Save for later",
