@@ -82,16 +82,16 @@ Feature: Create Amendment - Create Project - Regression Tests
     When I click the '<Navigation_Button_Third>' button on the 'Project_Identifiers_Page'
     # Validate saved values in different pages is displayed in review answers page
     Then I can see the review your application page
-    Then I can validate the field values of '<Project_Details_Title>' page '<Project_Identifiers>' page and '<Research_Locations>' page
+    Then I can validate the field values of '<Project_Details_Title>' page '<Chief_Investigator>' page '<Research_Locations>' and '<Project_Identifiers>' page
     # Validate change link functionality in review answers page
     And I click the change link '<Change_Link_Field>' on review your answers page
     Then I can see the chief investigator page
-    Then I fill the chief investigator page with '<Chief_Investigator>'
+    Then I fill the chief investigator page with '<Chief_Investigator_Change>'
     And I capture the page screenshot
     When I click the 'Save_Changes' button on the 'Chief_Investigator_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
-    Then I can validate the field values of '<Project_Details_Title>' page '<Project_Identifiers_Change>' page and '<Research_Locations>' page
+    Then I can validate the field values of '<Project_Details_Title>' page '<Chief_Investigator_Change>' page '<Research_Locations>' and '<Project_Identifiers>' page
     And I capture the page screenshot
     # Validate project overview page
     When I click the '<Navigation_Button_Fourth>' button on the 'Review_Your_Answers_Page'
@@ -100,8 +100,8 @@ Feature: Create Amendment - Create Project - Regression Tests
     And I capture the page screenshot
 
     Examples:
-      | Validation_Text | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Third | Navigation_Button_Fourth | Navigation_Button_Add_Project | Navigation_Link | Project_Details_Title | Project_Identifiers   | Chief_Investigator    | Research_Locations   | Change_Link_Field  | Project_Identifiers_Change                   |
-      | Label_Texts     | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Add_Project                   | Back            | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Data_With_No_NHS_HSC | chief_investigator | Valid_Data_Only_Investigator_Email_Field_Two |
+      | Validation_Text | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Third | Navigation_Button_Fourth | Navigation_Button_Add_Project | Navigation_Link | Project_Details_Title | Project_Identifiers   | Chief_Investigator    | Chief_Investigator_Change    | Research_Locations   | Change_Link_Field        | Project_Identifiers_Change                   |
+      | Label_Texts     | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Add_Project                   | Back            | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields_Change | Data_With_No_NHS_HSC | chief_investigator_email | Valid_Data_Only_Investigator_Email_Field_Two |
   # | Label_Texts     | Create_Project_Record   | Start                    | Save_Continue           | Confirm_Project_Details  | Add_Project                   | Back            | Valid_Data_All_Fields_VERA | Valid_Email_Data_Special_Characters | Valid_Email_Data_Special_Characters | Data_With_Lead_Nation_Northern_Ireland | sponsor_contact    | Valid_Data_Only_Sponsor_Email_Field_Two      |
 
   @ErrorMessageInvalidIRASIDRegression
@@ -148,7 +148,7 @@ Feature: Create Amendment - Create Project - Regression Tests
       | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Invalid_Date_No_Month                       | Field_Error_Message_Planned_Project_End_Day  |
       | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Invalid_Date_No_Year                        | Field_Error_Message_Planned_Project_End_Year |
 
-  @ErrorMessageInvalidChiefEmailKeyProjectRolesRegression
+  @ErrorMessageInvalidChiefEmailRegression @KNOWN_DEFECT_RSP-5319
   Scenario Outline: Validate error messages displayed when user inputs invalid data in chief investigator email on chief investigator page
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
@@ -157,14 +157,14 @@ Feature: Create Amendment - Create Project - Regression Tests
     And I fill the project details title page with '<Project_Details_Title>'
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
     And I can see the chief investigator page
-    Then I fill the chief investigator page with '<Key_Project_Roles>'
+    Then I fill the chief investigator page with '<Chief_Investigator>'
     And I capture the page screenshot
     Then I click the '<Navigation_Button_Third>' button on the 'Chief_Investigator_Page'
     Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Chief_Investigator_Page'
     And I capture the page screenshot
 
     Examples:
-      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Third | Navigation_Button_Add_Project | Project_Details_Title | Key_Project_Roles                      | Field_And_Summary_Error_Message |
+      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Third | Navigation_Button_Add_Project | Project_Details_Title | Chief_Investigator                     | Field_And_Summary_Error_Message |
       | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Valid_Data_All_Fields | Invalid_Email_Data_One_Double_Dot      | Field_Error_Chief_Email         |
       | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Valid_Data_All_Fields | Invalid_Email_Data_One_TLD             | Field_Error_Chief_Email         |
       | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Valid_Data_All_Fields | Invalid_Email_Data_One_Reserved_Domain | Field_Error_Chief_Email         |
@@ -200,14 +200,14 @@ Feature: Create Amendment - Create Project - Regression Tests
     And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
-    And I fill the chief investigator page with '<Key_Project_Roles>'
+    And I fill the chief investigator page with '<Chief_Investigator>'
     When I click the '<Navigation_Button_Third>' button on the 'Chief_Investigator_Page'
     Then I can see the research locations page
     Then I fill the research locations page with '<Research_Locations>'
     Then I validate lead nation radio option for '<Research_Locations>'
 
     Examples:
-      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Third | Navigation_Button_Add_Project | Validation_Text | Project_Details_Title | Key_Project_Roles     | Research_Locations    |
+      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Third | Navigation_Button_Add_Project | Validation_Text | Project_Details_Title | Chief_Investigator    | Research_Locations    |
       | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields |
       | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Data_With_No_NHS_HSC  |
 
@@ -219,14 +219,14 @@ Feature: Create Amendment - Create Project - Regression Tests
     And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
-    And I fill the chief investigator page with '<Key_Project_Roles>'
+    And I fill the chief investigator page with '<Chief_Investigator>'
     When I click the '<Navigation_Button_Third>' button on the 'Chief_Investigator_Page'
     Then I can see the research locations page
     Then I fill the research locations page with '<Research_Locations>'
     Then I validate lead nation radio option when javascript disabled
 
     Examples:
-      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Third | Navigation_Button_Add_Project | Validation_Text | Project_Details_Title | Key_Project_Roles     | Research_Locations   |
+      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Third | Navigation_Button_Add_Project | Validation_Text | Project_Details_Title | Chief_Investigator    | Research_Locations   |
       | Create_Project_Record   | Start                    | Save_Continue           | Add_Project                   | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Data_With_No_NHS_HSC |
 
   @CreateProjectRTSRegression @jsEnabled

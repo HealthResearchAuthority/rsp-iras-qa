@@ -70,6 +70,7 @@ import AddDocumentDetailsModificationsPage from '../pages/IRAS/makeChanges/modif
 import AddDocumentDetailsForSpecificDocumentModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/AddDocumentDetailsForSpecificDocumentModificationsPage';
 import ReviewYourDocumentInformationModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/ReviewYourDocumentInfomationModificationsPage';
 import ReviewAllChangesPage from '../pages/IRAS/makeChanges/modifications/ReviewAllChangesPage';
+import ProjectOverviewUnfinishedProjectsPage from '../pages/IRAS/makeChanges/ProjectOverviewUnfinishedProjectsPage';
 import ModificationsDetailsPage from '../pages/IRAS/makeChanges/modifications/ModificationsDetailsPage';
 
 type CustomFixtures = {
@@ -142,6 +143,7 @@ type CustomFixtures = {
   reviewYourDocumentInformationModificationsPage: ReviewYourDocumentInformationModificationsPage;
   reviewAllChangesPage: ReviewAllChangesPage;
   modificationsDetailsPage: ModificationsDetailsPage;
+  projectOverviewUnfinishedProjectsPage: ProjectOverviewUnfinishedProjectsPage;
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -392,6 +394,10 @@ export const test = base.extend<CustomFixtures>({
     await use(new MyModificationsTasklistPage(page));
   },
 
+  projectOverviewUnfinishedProjectsPage: async ({ page }, use) => {
+    await use(new ProjectOverviewUnfinishedProjectsPage(page));
+  },
+
   modificationsReceivedCommonPage: async ({ page }, use) => {
     await use(new ModificationsReceivedCommonPage(page));
   },
@@ -421,7 +427,6 @@ export const test = base.extend<CustomFixtures>({
     const makeAxeBuilder = () => new AxeBuilder({ page });
     await use(makeAxeBuilder);
   },
-
   //Set the Storage State based on User Tag from Feature File
   storageState: async ({ $tags, storageState }, use) => {
     if ($tags.includes('@SysAdminUser')) {

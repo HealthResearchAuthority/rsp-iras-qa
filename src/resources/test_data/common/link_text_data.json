@@ -231,5 +231,8 @@
   },
   "Create_Project_Confirmation_Page": {
     "View_Project_Overview": "View project overview"
+  },
+  "Project_Overview_Unfinished_Projects_Page": {
+    "Back": "Back"
   }
 }
