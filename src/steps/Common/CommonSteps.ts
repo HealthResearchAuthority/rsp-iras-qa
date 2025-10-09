@@ -39,6 +39,7 @@ When(
       modificationsReadyToAssignPage,
       selectStudyWideReviewerPage,
       myModificationsTasklistPage,
+      accessDeniedPage,
     },
     page: string
   ) => {
@@ -97,6 +98,9 @@ When(
         break;
       case 'Select_Study_Wide_Reviewer_Page':
         await selectStudyWideReviewerPage.assertOnSelectStudyWideReviewerPage();
+        break;
+      case 'Access_Denied_Page':
+        await accessDeniedPage.assertOnAccessDeniedPage();
         break;
       default:
         throw new Error(`${page} is not a valid option`);
