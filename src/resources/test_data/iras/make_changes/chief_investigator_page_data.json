@@ -58,12 +58,6 @@
   "Valid_Data_Only_Investigator_Email_Field_Two": {
     "chief_investigator_email_text": "ci_testTwo@test.com"
   },
-  "Valid_Data_Only_Sponsor_Email_Field": {
-    "sponsor_contact_email_text": "sc_test@test.com"
-  },
-  "Valid_Data_Only_Sponsor_Email_Field_Two": {
-    "sponsor_contact_email_text": "sc_test@test.com"
-  },
   "Valid_Email_Data": {
     "chief_investigator_email_text": "john.doe@example.com"
   },
