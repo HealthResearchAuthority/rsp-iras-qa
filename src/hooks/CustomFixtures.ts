@@ -70,6 +70,8 @@ import AddDocumentDetailsModificationsPage from '../pages/IRAS/makeChanges/modif
 import AddDocumentDetailsForSpecificDocumentModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/AddDocumentDetailsForSpecificDocumentModificationsPage';
 import ReviewYourDocumentInformationModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/ReviewYourDocumentInfomationModificationsPage';
 import ReviewAllChangesPage from '../pages/IRAS/makeChanges/modifications/ReviewAllChangesPage';
+import ManageSponsorOrganisationsPage from '../pages/IRAS/reviewResearch/userAdministration/manageSponsorOrgs/ManageSponsorOrganisationsPage';
+import SetupNewSponsorOrganisationPage from '../pages/IRAS/reviewResearch/userAdministration/manageSponsorOrgs/SetupNewSponsorOrganisationPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -140,6 +142,8 @@ type CustomFixtures = {
   addDocumentDetailsForSpecificDocumentModificationsPage: AddDocumentDetailsForSpecificDocumentModificationsPage;
   reviewYourDocumentInformationModificationsPage: ReviewYourDocumentInformationModificationsPage;
   reviewAllChangesPage: ReviewAllChangesPage;
+  manageSponsorOrganisationPage: ManageSponsorOrganisationsPage;
+  setupNewSponsorOrganisationPage: SetupNewSponsorOrganisationPage;
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -411,6 +415,14 @@ export const test = base.extend<CustomFixtures>({
   },
   reviewAllChangesPage: async ({ page }, use) => {
     await use(new ReviewAllChangesPage(page));
+  },
+
+  manageSponsorOrganisationPage: async ({ page }, use) => {
+    await use(new ManageSponsorOrganisationsPage(page));
+  },
+
+  setupNewSponsorOrganisationPage: async ({ page }, use) => {
+    await use(new SetupNewSponsorOrganisationPage(page));
   },
 
   makeAxeBuilder: async ({ page }, use) => {

@@ -1,0 +1,17 @@
+{
+  "Setup_New_Sponsor_Organisation_Page": {
+    "back_button": "Back",
+    "title": "Set up a new sponsor organisation - Manage sponsor organisations - System administration - Health research UK",
+    "page_heading": "Set up a new sponsor organisation",
+    "select_a_sponsor_organisation_label": "Select a sponsor organisation",
+    "select_a_sponsor_organisation_hint_text": "Start to type an organisation or select from suggestions"
+  },
+  "Setup_New_Sponsor_Organisation": {
+    "Valid_Data_All_Fields": {
+      "sponsor_organisation_text": "CHESTERFIELD ROYAL HOSPITAL NHS FOUNDATION TRUST"
+    }
+  },
+  "Duplicate_Sponsor_Organisation_Setup_Error": {
+    "sponsor_organisation_text": "A sponsor organisation with this name already exists"
+  }
+}

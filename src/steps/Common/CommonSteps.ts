@@ -39,6 +39,8 @@ When(
       modificationsReadyToAssignPage,
       selectStudyWideReviewerPage,
       myModificationsTasklistPage,
+      manageSponsorOrganisationPage,
+      setupNewSponsorOrganisationPage,
     },
     page: string
   ) => {
@@ -97,6 +99,12 @@ When(
         break;
       case 'Select_Study_Wide_Reviewer_Page':
         await selectStudyWideReviewerPage.assertOnSelectStudyWideReviewerPage();
+        break;
+      case 'Manage_Sponsor_Organisations_Page':
+        await manageSponsorOrganisationPage.assertOnManageSponsorOrganisationsPage();
+        break;
+      case 'Setup_New_Sponsor_Organisation_Page':
+        await setupNewSponsorOrganisationPage.assertOnSetupNewSponsorOrganisationsPage();
         break;
       default:
         throw new Error(`${page} is not a valid option`);

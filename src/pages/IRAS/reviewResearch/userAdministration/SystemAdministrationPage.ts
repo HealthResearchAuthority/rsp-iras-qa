@@ -15,6 +15,7 @@ export default class SystemAdministrationPage {
   readonly manageUsersLink: Locator;
   readonly manage_review_bodies_hint_label: Locator;
   readonly manage_users_hint_label: Locator;
+  readonly manage_sponsor_organisations_hint_label: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -37,8 +38,18 @@ export default class SystemAdministrationPage {
     this.manageUsersLink = this.mainPageContent.getByText(this.linkTextData.System_Administration_Page.Manage_Users, {
       exact: true,
     });
-    this.manage_review_bodies_hint_label = this.manageReviewbodiesLink.locator('..').getByRole('paragraph');
-    this.manage_users_hint_label = this.manageUsersLink.locator('..').getByRole('paragraph');
+    this.manage_review_bodies_hint_label = this.manageReviewbodiesLink
+      .locator('..')
+      .getByRole('paragraph')
+      .getByText(this.systemAdminPageTestData.Label_Texts.manage_review_bodies_hint_label);
+    this.manage_users_hint_label = this.manageUsersLink
+      .locator('..')
+      .getByRole('paragraph')
+      .getByText(this.systemAdminPageTestData.Label_Texts.manage_users_hint_label);
+    this.manage_sponsor_organisations_hint_label = this.manageUsersLink
+      .locator('..')
+      .getByRole('paragraph')
+      .getByText(this.systemAdminPageTestData.Label_Texts.manage_sponsor_organisations_hint_label);
   }
 
   //Page Methods
@@ -47,6 +58,10 @@ export default class SystemAdministrationPage {
   }
 
   async assertOnSystemAdministrationPage() {
-    await expect(this.pageHeading).toBeVisible();
+    await expect.soft(this.pageHeading).toBeVisible();
+    expect.soft(await this.page.title()).toBe(this.systemAdminPageTestData.System_Admin_Page.title); // Temporarily commented out due to title mismatch
+    await expect.soft(this.manage_review_bodies_hint_label).toBeVisible();
+    await expect.soft(this.manage_users_hint_label).toBeVisible();
+    await expect.soft(this.manage_sponsor_organisations_hint_label).toBeVisible();
   }
 }

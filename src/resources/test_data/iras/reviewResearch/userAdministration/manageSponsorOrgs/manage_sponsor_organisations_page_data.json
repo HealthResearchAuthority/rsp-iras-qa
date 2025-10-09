@@ -1,0 +1,83 @@
+{
+  "Manage_Sponsor_Organisations_Page": {
+    "heading": "Manage sponsor organisations",
+    "title": "Manage sponsor organisations - System Administration - Health research UK",
+    "Setup_New_Sponsor_Organisation": "Set up a new sponsor organisation",
+    "organisation_name_column_header": "Organisation name",
+    "country_column_header": "Country",
+    "status_column_header": "Status",
+    "actions_column_header": "Actions",
+    "find_sponsor_org_title": "Find an organisation",
+    "search_button": "Search",
+    "search_box": "",
+    "enabled_status": "Active",
+    "disabled_status": "Disabled",
+    "actions_link": "View/Edit",
+    "selected_checkboxes_hint_label": "selected",
+    "search_hint_text": "Search for an organisation name",
+    "sponsor_organisation_search_box_label": "Find an organisation",
+    "country_label": "Country",
+    "status_label": "Status"
+  },
+  "Advanced_Filters_Hint_Labels": {
+    "country_hint_label": "Select all that apply",
+    "status_hint_label": "Select one option"
+  },
+  "Search_For_Sponsor_Organisations": {
+    "Search_Queries": {
+      "Non_Existant_Data": { "search_input_text": "ThisShouldNot ReturnAResult" },
+      "Leading_White_Space_Data": { "search_input_text": " QA Automation" },
+      "Leading_And_Trailing_White_Space_Data": { "search_input_text": " QA Automation " },
+      "Trailing_White_Space_Data": { "search_input_text": "QA Automation " },
+      "Existing_QA_Data_One": { "search_input_text": "QA Automation" },
+      "Existing_QA_Data_Two": { "search_input_text": "QA Automation Test" },
+      "Existing_QA_Data_Three": { "search_input_text": "ZZ Top" },
+      "Empty_Search_Data": { "search_input_text": "" }
+    }
+  },
+  "Advanced_Filters": {
+    "Advanced_Filter_All_Countries_Active": {
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "status_radio": "Active"
+    },
+    "Advanced_Filter_All_Countries_Disabled": {
+      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "status_radio": "Disabled"
+    },
+    "Advanced_Filter_Eng_Active": {
+      "country_checkbox": ["England"],
+      "status_radio": "Active"
+    },
+    "Advanced_Filter_NI_Active": {
+      "country_checkbox": ["Northern Ireland"],
+      "status_radio": "Active"
+    },
+    "Advanced_Filter_Sco_Active": {
+      "country_checkbox": ["Scotland"],
+      "status_radio": "Active"
+    },
+    "Advanced_Filter_Wal_Active": {
+      "country_checkbox": ["Wales"],
+      "status_radio": "Active"
+    },
+    "Advanced_Filter_Eng_NI_Active": {
+      "country_checkbox": ["England", "Northern Ireland"],
+      "status_radio": "Active"
+    },
+    "Advanced_Filter_NI_Sco_Wal_Active": {
+      "country_checkbox": ["Northern Ireland", "Scotland", "Wales"],
+      "status_radio": "Active"
+    },
+    "Advanced_Filter_Eng_Wal_Active": {
+      "country_checkbox": ["England", "Wales"],
+      "status_radio": "Active"
+    },
+    "Advanced_Filter_NI_Wal_Disabled": {
+      "country_checkbox": ["Northern Ireland", "Wales"],
+      "status_radio": "Disabled"
+    },
+    "Advanced_Filter_No_Country_Selected": {
+      "country_checkbox": []
+    }
+  }
+}

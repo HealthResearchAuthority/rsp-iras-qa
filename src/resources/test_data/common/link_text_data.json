@@ -89,7 +89,8 @@
   "System_Administration_Page": {
     "Back": "Back",
     "Manage_Review_Bodies": "Manage review bodies",
-    "Manage_Users": "Manage users"
+    "Manage_Users": "Manage users",
+    "Manage_Sponsor_Organisations": "Manage sponsor organisations"
   },
   "Create_Review_Body_Page": {
     "Back": "Back"
@@ -124,7 +125,7 @@
     "Key_Project_Roles": "Chief investigator",
     "Research_Locations": "Research locations",
     "View_Project_Overview": "View project overview",
-    "Project_Documents":"Project documents"
+    "Project_Documents": "Project documents"
   },
   "Review_Body_User_List_Page": {
     "Back_To_Review_Body_Profile": "Back to review body profile",
@@ -219,5 +220,15 @@
   "Review_All_Changes_Page": {
     "Delete_Modification": "Delete modification",
     "Change": "Change"
+  },
+  "Manage_Sponsor_Organisations_Page": {
+    "Back": "Back",
+    "Setup_New_Sponsor_Organisation": "Set up a new sponsor organisation",
+    "View_Edit": "View/Edit",
+    "Advanced_Filters": "Advanced filters",
+    "Clear_All_Filters": "Clear all filters"
+  },
+  "Setup_New_Sponsor_Organisation_Page": {
+    "Back": "Back"
   }
 }

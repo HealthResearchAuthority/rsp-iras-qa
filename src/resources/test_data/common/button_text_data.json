@@ -244,5 +244,16 @@
     "Save_Continue": "Save and continue",
     "Save_For_Later": "Save for later",
     "Change_Details": "Change"
+  },
+  "Manage_Sponsor_Organisations_Page": {
+    "Search": "Search",
+    "Advanced_Filters": "Advanced filters",
+    "Apply_filters": "Apply filters",
+    "Org_Name": "Organisation name",
+    "Country": "Country",
+    "Status": "Status"
+  },
+  "Setup_New_Sponsor_Organisation_Page": {
+    "Save_Continue": "Save and continue"
   }
 }
