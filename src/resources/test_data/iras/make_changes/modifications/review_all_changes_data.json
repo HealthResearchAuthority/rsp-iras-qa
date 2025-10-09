@@ -1,0 +1,11 @@
+{
+  "Review_All_Changes_Page": {
+    "page_heading": "Review all changes",
+    "overall_modification_ranking_heading": "Overall modification ranking",
+    "overall_modification_ranking_subheading": "Ranking",
+    "changes_heading": "Changes",
+    "sponsor_details_heading": "Sponsor details",
+    "now_send_to_sponsor_heading": "Now send to sponsor",
+    "now_send_to_sponsor_hint_label": "By sending this modification you are confirming that, to the best of your knowledge, the details you are providing are correct."
+  }
+}

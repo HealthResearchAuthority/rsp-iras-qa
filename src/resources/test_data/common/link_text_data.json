@@ -123,7 +123,8 @@
     "Post_Approval": "Post approval",
     "Key_Project_Roles": "Chief investigator",
     "Research_Locations": "Research locations",
-    "View_Project_Overview": "View project overview"
+    "View_Project_Overview": "View project overview",
+    "Project_Documents": "Project documents"
   },
   "Review_Body_User_List_Page": {
     "Back_To_Review_Body_Profile": "Back to review body profile",
@@ -212,7 +213,14 @@
   "Select_Study_Wide_Reviewer_Page": {
     "Back": "Back"
   },
-   "Project_Overview_Unfinished_Projects_Page": {
+  "Project_Created_Confirmation_Page": {
+    "View_Project_Overview": "View project overview"
+  },
+  "Review_All_Changes_Page": {
+    "Delete_Modification": "Delete modification",
+    "Change": "Change"
+  },
+  "Project_Overview_Unfinished_Projects_Page": {
     "Back": "Back"
   }
 }

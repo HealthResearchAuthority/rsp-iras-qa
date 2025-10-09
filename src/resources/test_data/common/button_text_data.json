@@ -8,6 +8,7 @@
   },
   "Home_Page": {
     "New_Application": "Create New Application",
+    "Start_Now": "Start now",
     "Login": "Sign In",
     "Create_Project_Record": "Create project record"
   },
@@ -70,7 +71,8 @@
     "Enable_User_Record": "Enable user record"
   },
   "Confirmation_Page": {
-    "Confirm": "Confirm"
+    "Confirm": "Confirm",
+    "Return_To_Project_Overview": "Return to project overview"
   },
   "Create_Review_Body_Page": {
     "Continue": "Continue"
@@ -158,6 +160,13 @@
     "Modification_Id": "Modification ID",
     "Modification_Type": "Modification type"
   },
+  "Project_Documents_Page": {
+    "document_type_project_documents": "Document type",
+    "document_name_project_documents": "Document name",
+    "version_project_documents": "Version",
+    "document_date_project_documents": "Document date",
+    "modification_id_project_documents": "Modification ID"
+  },
   "Participating_Organisations_Page": {
     "Save_Continue": "Save and continue",
     "Save_For_Later": "Save for later",
@@ -184,7 +193,8 @@
   },
   "Review_Changes_Planned_End_Date_Page": {
     "Save_Continue": "Save and continue",
-    "Save_For_Later": "Save for later"
+    "Save_For_Later": "Save for later",
+    "Save_Changes": "Save changes"
   },
   "Project_Overview_Page": {
     "Create_New_Modification": "Create new modification"
@@ -201,9 +211,30 @@
   "Select_Study_Wide_Reviewer_Page": {
     "Complete_Assignment": "Complete assignment"
   },
+  "Add_Document_Details_Modifications_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later"
+  },
+  "Add_Document_Details_For_Specific_Document_Modifications_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later",
+    "Save_Changes": "Save changes"
+  },
+  "Review_Your_Document_Infomation_Modifications_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later",
+    "Change_Details": "Change"
+  },
   "Modifications_Details_Page": {
     "Add_Another_Change": "Add another change to this modification",
     "Save_Continue_Review": "Save and continue to review",
+    "Save_For_Later": "Save for later"
+  },
+  "Sponsor_Reference_Page": {
+    "Save_Continue_Review": "Save and continue to review"
+  },
+  "Review_All_Changes_Page": {
+    "Send_Modification_To_Sponsor": "Send modification to sponsor",
     "Save_For_Later": "Save for later"
   },
   "Add_Document_Details_Page": {

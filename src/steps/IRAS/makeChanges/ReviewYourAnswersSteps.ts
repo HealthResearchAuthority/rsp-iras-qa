@@ -51,7 +51,7 @@ Then(
       }
     }
     for (const key in datasetChiefInvestigator) {
-      if (Object.prototype.hasOwnProperty.call(datasetChiefInvestigator, key)) {
+      if (Object.hasOwn(datasetChiefInvestigator, key)) {
         await commonItemsPage.validateUIComponentValues(datasetChiefInvestigator, key, reviewYourAnswersPage);
       }
     }
