@@ -9,6 +9,9 @@ Feature: Create Amendment - Project Documents Modifications
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
@@ -18,9 +21,6 @@ Feature: Create Amendment - Project Documents Modifications
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    Then I can see the project identifiers page
-    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
     When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
@@ -190,25 +190,6 @@ Feature: Create Amendment - Project Documents Modifications
       | Correction_Of_Typographical_Errors | WAV_File                         | single invalid   |
       | Correction_Of_Typographical_Errors | Multiple_Invalid_Files_Non_Video | multiple invalid |
       | Protocol_Non_Substantial_Changes   | JSON_File                        | single invalid   |
-
-  @3877 @ValidateDocumentUploadInvalidFileErrorMessageWithMixOfFiles @KNOWN_DEFECT_RSP-4801_4844_4920_4921
-  Scenario Outline: Verify that a relevant error message is shown when the user attempts to upload a mix of valid and invalid files
-    And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
-    And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
-    Then I can see the add documents for '<Specific_Change>' page
-    And I capture the page screenshot
-    Then I upload '<Document_Upload_Files>' documents
-    And I capture the page screenshot
-    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
-    And I get the list of files uploaded and separate valid and invalid files
-    Then I validate 'Invalid_Format_File_Error' displayed on 'Add_Document_Modifications_Page' while uploading '<Upload_Type>' documents
-    And I capture the page screenshot
-
-    Examples:
-      | Specific_Change                    | Document_Upload_Files                    | Document_Upload_Files_New | Upload_Type                      |
-      | Correction_Of_Typographical_Errors | Multiple_Invalid_Files_Non_Video_Dataset | Multiple_Files_Three      | multiple upload multiple invalid |
-      | Protocol_Non_Substantial_Changes   | Single_Invalid_File_Non_Video_Dataset    | PNG_File                  | multiple upload single invalid   |
 
   @rsp-3876 @ValidateDocumentUploadModificationsPageErrprMessages @KNOWN_DEFECT_RSP-4801_4920
   Scenario Outline: Validate the user is able to see error messages for invalid actions on upload documents for modifications

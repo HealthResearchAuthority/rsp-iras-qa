@@ -1191,15 +1191,8 @@ Then(
     await expect(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
 
     const getFileNames = async (): Promise<string[]> => {
-      if (uploadType == 'multiple upload multiple invalid' || uploadType == 'multiple upload single invalid') {
-        const names = await reviewUploadedDocumentsModificationsPage.getInValidFileName();
-        return uploadType === 'multiple upload multiple invalid' || uploadType == 'multiple upload single invalid'
-          ? names
-          : [names.toString()];
-      } else {
-        const names = await reviewUploadedDocumentsModificationsPage.getUploadedFileName();
-        return uploadType === 'multiple invalid' ? names : [names.toString()];
-      }
+      const names = await reviewUploadedDocumentsModificationsPage.getUploadedFileName();
+      return uploadType === 'multiple invalid' ? names : [names.toString()];
     };
 
     const safeStringify = (val: any): string => {
@@ -1240,7 +1233,7 @@ Then(
         }
 
         const actualMessages =
-          uploadType === 'multiple invalid' || uploadType == 'multiple upload multiple invalid'
+          uploadType === 'multiple invalid'
             ? await commonItemsPage.getFieldErrorMessagesList(key, page)
             : [await commonItemsPage.getFieldErrorMessages(key, page)];
 

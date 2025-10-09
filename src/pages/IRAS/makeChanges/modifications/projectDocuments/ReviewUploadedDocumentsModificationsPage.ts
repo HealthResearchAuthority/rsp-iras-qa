@@ -7,8 +7,6 @@ export default class ReviewUploadedDocumentsModificationsPage {
   readonly page: Page;
   readonly reviewUploadedDocumentsModificationsPageTestData: typeof reviewUploadedDocumentsModificationsPageTestData;
   private _file_names: string[];
-  private _valid_files: string[];
-  private _invalid_files: string[];
   readonly pageHeading: Locator;
   readonly pageLabels: Locator;
   readonly table: Locator;
@@ -20,8 +18,6 @@ export default class ReviewUploadedDocumentsModificationsPage {
     this.page = page;
     this.reviewUploadedDocumentsModificationsPageTestData = reviewUploadedDocumentsModificationsPageTestData;
     this._file_names = [];
-    this._valid_files = [];
-    this._invalid_files = [];
 
     //Locators
     this.pageHeading = this.page.getByRole('heading');
@@ -36,21 +32,6 @@ export default class ReviewUploadedDocumentsModificationsPage {
   }
   async setUploadedFileName(value: string[]): Promise<void> {
     this._file_names = value;
-  }
-
-  async getValidFileName(): Promise<string[]> {
-    return this._valid_files;
-  }
-  async setValidFileName(value: string[]): Promise<void> {
-    this._valid_files = value;
-  }
-
-  async getInValidFileName(): Promise<string[]> {
-    return this._invalid_files;
-  }
-
-  async setInValidFileName(value: string[]): Promise<void> {
-    this._invalid_files = value;
   }
 
   //Page Methods

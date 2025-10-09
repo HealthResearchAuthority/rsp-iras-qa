@@ -46,26 +46,3 @@ Then(
     await reviewUploadedDocumentsModificationsPage.setUploadedFileName(fileArray);
   }
 );
-
-Then(
-  'I get the list of files uploaded and separate valid and invalid files',
-  async ({ addDocumentsModificationsPage, reviewUploadedDocumentsModificationsPage }) => {
-    const allUploadedFiles = await reviewUploadedDocumentsModificationsPage.getUploadedFileName();
-    const allUploadedArray = Array.isArray(allUploadedFiles) ? allUploadedFiles : [allUploadedFiles];
-    const validFileExtensions =
-      addDocumentsModificationsPage.addDocumentsModificationsPageTestData.Add_Documents_Modifications_Page
-        .valid_file_extensions;
-    const validFiles: string[] = [];
-    const invalidFiles: string[] = [];
-    for (const file of allUploadedArray) {
-      const fileExtn = path.extname(file);
-      if (validFileExtensions.includes(fileExtn)) {
-        validFiles.push(file);
-      } else {
-        invalidFiles.push(file);
-      }
-    }
-    await reviewUploadedDocumentsModificationsPage.setValidFileName(validFiles);
-    await reviewUploadedDocumentsModificationsPage.setInValidFileName(invalidFiles);
-  }
-);
