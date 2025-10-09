@@ -273,6 +273,10 @@ Feature: Create Amendment - Create Modifications
     And I capture the page screenshot
     Then I can see the project overview page
     Then I can see the modification progress saved successful message on project overview page
+    And I can see the 'Label_Texts_Post_Approval' ui labels on the project overview page
+    And I capture the page screenshot
+    #And I can see post approval tab of project overview page
+    And I can see the modification send to sponsor is displayed on post approval tab of project overview page with status as 'Draft'
 
     Examples:
       | Changes                           |

@@ -708,7 +708,7 @@ Given(
     switch (page) {
       case 'Login_Page':
         await homePage.goto();
-        await homePage.loginBtn.click();
+        await homePage.startNowBtn.click();
         await loginPage.assertOnLoginPage();
         break;
       case 'Home_Page':

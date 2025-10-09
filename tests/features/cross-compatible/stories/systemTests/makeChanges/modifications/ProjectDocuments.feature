@@ -157,9 +157,11 @@ Feature: Create Amendment - Project Documents Modifications
     And I capture the page screenshot
 
     Examples:
-      | Specific_Change                    | Document_Upload_Files | Document_Upload_Files_New | Upload_Type      |
-      | Correction_Of_Typographical_Errors | PNG_File              | PNG_File                  | single invalid   |
-      | Protocol_Non_Substantial_Changes   | Multiple_Files_Three  | Multiple_Files_Three      | multiple invalid |
+      | Specific_Change                    | Document_Upload_Files      | Document_Upload_Files_New  | Upload_Type      |
+      | Correction_Of_Typographical_Errors | MP4_File                   | MP4_File                   | single invalid   |
+      | Correction_Of_Typographical_Errors | Multiple_Files_Video_Valid | Multiple_Files_Video_Valid | multiple invalid |
+      | Correction_Of_Typographical_Errors | PNG_File                   | PNG_File                   | single invalid   |
+      | Protocol_Non_Substantial_Changes   | Multiple_Files_Three       | Multiple_Files_Three       | multiple invalid |
 
   @4684 @3877 @ValidateDocumentUploadInvalidFileErrorMessage @KNOWN_DEFECT_RSP-4801_4844_4920_4921
   Scenario Outline: Verify that an appropriate error message is displayed when the user uploads a video or non video file with an invalid format
@@ -207,7 +209,6 @@ Feature: Create Amendment - Project Documents Modifications
       | Specific_Change                    | Document_Upload_Files                    | Document_Upload_Files_New | Upload_Type                      |
       | Correction_Of_Typographical_Errors | Multiple_Invalid_Files_Non_Video_Dataset | Multiple_Files_Three      | multiple upload multiple invalid |
       | Protocol_Non_Substantial_Changes   | Single_Invalid_File_Non_Video_Dataset    | PNG_File                  | multiple upload single invalid   |
-
 
   @rsp-3876 @ValidateDocumentUploadModificationsPageErrprMessages @KNOWN_DEFECT_RSP-4801_4920
   Scenario Outline: Validate the user is able to see error messages for invalid actions on upload documents for modifications

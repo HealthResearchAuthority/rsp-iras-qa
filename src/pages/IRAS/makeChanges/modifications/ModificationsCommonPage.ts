@@ -18,7 +18,6 @@ export default class ModificationsCommonPage {
   readonly modification_id_value: Locator;
   readonly status_value: Locator;
   readonly tableRows: Locator;
-  readonly modification_id_link: Locator;
 
   private rankingForChanges: Record<string, { modificationType: string; category: string; reviewType: string }[]> = {};
   private overallRankingForChanges: { modificationType: string; category: string; reviewType: string } = {
@@ -57,7 +56,6 @@ export default class ModificationsCommonPage {
       .locator('..')
       .locator('[class$="value"]');
     this.tableRows = this.page.getByRole('table').getByRole('row');
-    this.modification_id_link = this.tableRows.nth(1).getByRole('cell').nth(0);
   }
 
   //Getters & Setters for Private Variables
@@ -256,96 +254,93 @@ export default class ModificationsCommonPage {
       cardData['specific_change_dropdown'] = specificChangeValue;
     }
 
-    for (let i = 0; i < rowCount; i++) {
+    for (let cardRowIndex = 0; cardRowIndex < rowCount; cardRowIndex++) {
       await this.page.waitForLoadState('domcontentloaded');
-      const row = rows.nth(i);
+      const row = rows.nth(cardRowIndex);
       const key = await row.locator('.govuk-summary-list__key').innerText();
       const value = await row.locator('.govuk-summary-list__value').innerText();
       const cleanedKey = key.trim();
-      const cleanedValue = value.trim().replaceAll(/\s+/g, ' ');
+      const cleanedValue = confirmStringNotNull(value);
 
       switch (cleanedKey) {
-        case 'Change to planned end date': {
+        case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts
+          .planned_project_end_date_label: {
           const [day, month, year] = cleanedValue.split(' ');
           cardData['planned_project_end_day_text'] = day;
           cardData['planned_project_end_month_dropdown'] = month;
           cardData['planned_project_end_year_text'] = year;
           break;
         }
-        case 'Which organisation types does this change affect?': {
-          cardData['which_organisation_change_affect_checkbox'] = cleanedValue
-            .split(/,|&lt;br\/&gt;/)
-            .map((v) => v.trim());
+        case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts
+          .affected_organisation_types_label: {
+          cardData['which_organisation_change_affect_checkbox'] = cleanedValue;
           break;
         }
-        case 'Where are the participating NHS/HSC organisations that will be affected by this change?': {
-          cardData['where_organisation_change_affect_nhs_question_checkbox'] = cleanedValue
-            .split(/&lt;br\/&gt;/)
-            .map((v) => v.trim());
+        case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts
+          .affected_nhs_hsc_locations_label: {
+          cardData['where_organisation_change_affect_nhs_question_checkbox'] = cleanedValue;
+
           break;
         }
-        case 'Where are the participating non-NHS/HSC organisations that will be affected by this change?': {
-          cardData['where_organisation_change_affect_non_nhs_question_checkbox'] = cleanedValue
-            .split(/&lt;br\/&gt;/)
-            .map((v) => v.trim());
+        case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts
+          .affected_non_nhs_hsc_locations_label: {
+          cardData['where_organisation_change_affect_non_nhs_question_checkbox'] = cleanedValue;
+
           break;
         }
-        case 'Will some or all of the participating organisations be affected?': {
+        case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts
+          .portion_of_nhs_hsc_organisations_affected_label: {
           cardData['will_some_or_all_organisations_be_affected_question_radio'] = cleanedValue;
           break;
         }
-        case 'Will participating NHS/HSC organisations require additional resources to implement this change?': {
+        case this.modificationsCommonPageTestData.Modification_Change_Question_Label_Texts
+          .additional_resource_implications_label: {
           cardData['will_nhs_hsc_organisations_require_additional_resources_question_radio'] = cleanedValue;
           break;
         }
-        case 'Sponsor modification reference': {
+        case this.modificationsCommonPageTestData.Modification_Sponsor_Details_Label_Texts.sponsor_reference_label: {
           cardData['sponsor_modification_reference_textbox'] = cleanedValue;
           break;
         }
-        case 'Sponsor modification date': {
+        case this.modificationsCommonPageTestData.Modification_Sponsor_Details_Label_Texts.sponsor_date_label: {
           const [day, month, year] = cleanedValue.split(' ');
           cardData['sponsor_modification_date_day_textbox'] = day;
           cardData['sponsor_modification_date_month_textbox'] = month;
           cardData['sponsor_modification_date_year_textbox'] = year;
           break;
         }
-        case 'Sponsor modification summary': {
+        case this.modificationsCommonPageTestData.Modification_Sponsor_Details_Label_Texts.sponsor_summary_label: {
           cardData['sponsor_summary_textbox'] = cleanedValue;
           break;
         }
-        case 'Modification type': {
+        case this.modificationsCommonPageTestData.Modification_Ranking_Label_Texts.modification_type_label: {
           modificationInfo['modification_type'] = cleanedValue;
           break;
         }
-        case 'Category': {
+        case this.modificationsCommonPageTestData.Modification_Ranking_Label_Texts.category_label: {
           modificationInfo['category'] = cleanedValue;
           break;
         }
-        case 'Review type': {
+        case this.modificationsCommonPageTestData.Modification_Ranking_Label_Texts.review_type_label: {
           modificationInfo['review_type'] = cleanedValue;
           break;
         }
-        default: {
-          cardData[cleanedKey.toLowerCase().replaceAll(' ', '_')] = cleanedValue;
-        }
       }
     }
-    return { cardData, modificationInfo }; //  Return both separately
+    return { cardData, modificationInfo }; //  Return both separately (change data and ranking info)
   }
 
   async getModificationPostApprovalPage(): Promise<Map<string, string[]>> {
     const modificationIdValue: string[] = [];
     const submittedDateValue: string[] = [];
     const statusValue: string[] = [];
-    for (let i = 1; i < 2; i++) {
-      const columns = this.tableRows.nth(i).getByRole('cell');
-      const modificationId = confirmStringNotNull(await columns.nth(0).textContent());
-      modificationIdValue.push(modificationId);
-      const submittedDate = confirmStringNotNull(await columns.nth(4).textContent());
-      submittedDateValue.push(submittedDate);
-      const status = confirmStringNotNull(await columns.nth(5).textContent());
-      statusValue.push(status);
-    }
+    const columns = this.tableRows.nth(1).getByRole('cell');
+    const modificationId = confirmStringNotNull(await columns.nth(0).textContent());
+    modificationIdValue.push(modificationId);
+    const submittedDate = confirmStringNotNull(await columns.nth(4).textContent());
+    submittedDateValue.push(submittedDate);
+    const status = confirmStringNotNull(await columns.nth(5).textContent());
+    statusValue.push(status);
     const modificationMap = new Map([
       ['modificationIdValue', modificationIdValue],
       ['submittedDateValue', submittedDateValue],
