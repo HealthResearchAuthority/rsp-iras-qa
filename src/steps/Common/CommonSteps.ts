@@ -413,6 +413,7 @@ Then(
       addDocumentsModificationsPage,
       modificationsReadyToAssignPage,
       myModificationsTasklistPage,
+      projectIdentifiersPage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
@@ -439,6 +440,10 @@ Then(
       errorMessageFieldDataset =
         chiefInvestigatorPage.chiefInvestigatorPageTestData[errorMessageFieldAndSummaryDatasetName];
       page = chiefInvestigatorPage;
+    } else if (pageKey == 'Project_Identifiers_Page') {
+      errorMessageFieldDataset =
+        projectIdentifiersPage.projectIdentifiersPageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = projectIdentifiersPage;
     } else if (pageKey == 'Create_Review_Body_Page') {
       errorMessageFieldDataset =
         createReviewBodyPage.createReviewBodyPageData.Create_Review_Body.Validation[

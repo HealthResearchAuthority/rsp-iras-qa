@@ -109,7 +109,8 @@
     "Status": "Status"
   },
   "Review_Your_Answers_Page": {
-    "Confirm_Project_Details": "Confirm project details"
+    "Confirm_Project_Details": "Confirm project details",
+    "Save_For_Later": "Save for later"
   },
   "Manage_Users_Page": {
     "Search": "Search",
@@ -213,5 +214,9 @@
     "Save_Continue": "Save and continue",
     "Save_For_Later": "Save for later",
     "Change_Details": "Change"
+  },
+  "Project_Overview_Unfinished_Projects_Page": {
+    "Edit_Project_Record": "Edit project record",
+    "Delete_Project": "Delete project"
   }
 }
