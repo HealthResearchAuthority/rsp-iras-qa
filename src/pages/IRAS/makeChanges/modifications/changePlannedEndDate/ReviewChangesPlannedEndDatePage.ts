@@ -108,6 +108,10 @@ export default class ChangePlannedEndDateReviewModificationsPage {
     await expect(this.pageHeading).toBeVisible();
     await expect(this.sub_heading_specific_change_label).toBeVisible();
   }
+  async assertOnReviewChangesSpecificChangePage(specificChange: string) {
+    await expect.soft(this.pageHeading).toBeVisible();
+    await expect.soft(this.page.getByRole('heading', { level: 2 }).getByText(specificChange)).toBeVisible();
+  }
 
   async clickChangeLinks(changeLink: string) {
     switch (changeLink.trim().toLowerCase()) {

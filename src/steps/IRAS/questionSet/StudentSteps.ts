@@ -8,7 +8,7 @@ Then(
   async ({ studentPage, commonItemsPage }, sectionName: string, datasetName: string) => {
     const dataset = studentPage.studentPageTestData[sectionName][datasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         await commonItemsPage.fillUIComponent(dataset, key, studentPage);
       }
     }

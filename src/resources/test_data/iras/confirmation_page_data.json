@@ -41,6 +41,11 @@
     "page_heading_body_prefix": "IRAS ID:",
     "confirmation_body": "Your project is now available to manage."
   },
+  "Modification_Sent_To_Sponsor_Labels": {
+    "page_heading": "Modification sent to sponsor",
+    "what_happens_next_label": "What happens next",
+    "page_guidance_text": "You've sent your modification to the sponsor. They'll either accept the changes and submit it, or contact you for more information."
+  },
   "add_remove_user_review_Body_confirmation_success_header_label": "User has been successfully",
   "enable_disable_confirmation_header_label": "Confirm that you want to",
   "disable_success_confirmation_header_label": "successfully disabled",

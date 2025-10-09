@@ -47,7 +47,7 @@ Then(
       }
     }
     for (const key in datasetKeyRoles) {
-      if (Object.prototype.hasOwnProperty.call(datasetKeyRoles, key)) {
+      if (Object.hasOwn(datasetKeyRoles, key)) {
         await commonItemsPage.validateUIComponentValues(datasetKeyRoles, key, reviewYourAnswersPage);
       }
     }

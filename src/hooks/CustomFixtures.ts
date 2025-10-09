@@ -65,9 +65,11 @@ import ModificationsReceivedCommonPage from '../pages/IRAS/reviewResearch/receiv
 import SelectStudyWideReviewerPage from '../pages/IRAS/reviewResearch/receiveAmendments/SelectStudyWideReviewerPage';
 import ModificationsAssignmentConfirmationPage from '../pages/IRAS/reviewResearch/receiveAmendments/ModificationsAssignmentConfirmationPage';
 import MyModificationsTasklistPage from '../pages/IRAS/reviewResearch/receiveAmendments/MyModificationsTasklistPage';
+import SponsorReferencePage from '../pages/IRAS/makeChanges/modifications/SponsorReferencePage';
 import AddDocumentDetailsModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/AddDocumentDetailsModificationsPage';
 import AddDocumentDetailsForSpecificDocumentModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/AddDocumentDetailsForSpecificDocumentModificationsPage';
 import ReviewYourDocumentInformationModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/ReviewYourDocumentInfomationModificationsPage';
+import ReviewAllChangesPage from '../pages/IRAS/makeChanges/modifications/ReviewAllChangesPage';
 import ModificationsDetailsPage from '../pages/IRAS/makeChanges/modifications/ModificationsDetailsPage';
 
 type CustomFixtures = {
@@ -134,9 +136,11 @@ type CustomFixtures = {
   modificationsAssignmentConfirmationPage: ModificationsAssignmentConfirmationPage;
   myModificationsTasklistPage: MyModificationsTasklistPage;
   modificationsReceivedCommonPage: ModificationsReceivedCommonPage;
+  sponsorReferencePage: SponsorReferencePage;
   addDocumentDetailsModificationsPage: AddDocumentDetailsModificationsPage;
   addDocumentDetailsForSpecificDocumentModificationsPage: AddDocumentDetailsForSpecificDocumentModificationsPage;
   reviewYourDocumentInformationModificationsPage: ReviewYourDocumentInformationModificationsPage;
+  reviewAllChangesPage: ReviewAllChangesPage;
   modificationsDetailsPage: ModificationsDetailsPage;
   makeAxeBuilder: () => AxeBuilder;
 };
@@ -392,6 +396,10 @@ export const test = base.extend<CustomFixtures>({
     await use(new ModificationsReceivedCommonPage(page));
   },
 
+  sponsorReferencePage: async ({ page }, use) => {
+    await use(new SponsorReferencePage(page));
+  },
+
   addDocumentDetailsModificationsPage: async ({ page }, use) => {
     await use(new AddDocumentDetailsModificationsPage(page));
   },
@@ -402,6 +410,9 @@ export const test = base.extend<CustomFixtures>({
 
   reviewYourDocumentInformationModificationsPage: async ({ page }, use) => {
     await use(new ReviewYourDocumentInformationModificationsPage(page));
+  },
+  reviewAllChangesPage: async ({ page }, use) => {
+    await use(new ReviewAllChangesPage(page));
   },
   modificationsDetailsPage: async ({ page }, use) => {
     await use(new ModificationsDetailsPage(page));
