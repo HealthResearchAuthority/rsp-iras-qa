@@ -2,7 +2,7 @@ import { expect, Locator, Page } from '@playwright/test';
 import * as projectOverviewUnfinishedProjectsPageTestData from '../../../resources/test_data/iras/make_changes/project_overview_unfinished_projects_page_data.json';
 
 //Declare Page Objects
-export default class ProjectOverviewPage {
+export default class ProjectOverviewUnfinishedProjectsPage {
   readonly page: Page;
   readonly projectOverviewUnfinishedProjectsPageTestData: typeof projectOverviewUnfinishedProjectsPageTestData;
   readonly pageHeading: Locator;

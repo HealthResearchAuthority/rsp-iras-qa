@@ -104,6 +104,23 @@ Feature: Create Amendment - Create Modifications
       | Participating_Organisation | Early_closure_Of_Participant_Identification_Centres_Option | Modifications_Tile      |
       | Default_Value              | Default_Value                                              | Modifications_Tile      |
 
+  @rsp-4038 @SelectAreaOfChangeErrorValidation
+  Scenario Outline: Validate the mandatory field error message on select area of change page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I select '<Area_Of_Change>' from area of change dropdown and '<Specific_Change>' from specific change dropdown
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+    And I capture the page screenshot
+    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Select_Area_Of_Change_Page'
+
+    Examples:
+      | Field_And_Summary_Error_Message        | Area_Of_Change             | Specific_Change | Modifications_Tile_Link |
+      | Missing_All_Mandatory_Fields           | Default_Value              | Default_Value   | Modifications_Tile      |
+      | Missing_Mandatory_Only_Specific_Change | Participating_Organisation | Default_Value   | Modifications_Tile      |
+
   @rsp-4039 @ParticipatingOrganisations
   Scenario Outline: Verify that user can create modifications and validate the field values in search participating organisations page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
