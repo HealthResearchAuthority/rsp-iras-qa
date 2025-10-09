@@ -45,6 +45,17 @@ export default class ProjectOverviewPage {
   readonly post_approvals_tab_category: Locator;
   readonly post_approvals_tab_date_submitted: Locator;
   readonly post_approvals_tab_status: Locator;
+  readonly document_type_project_documents: Locator;
+  readonly document_name_project_documents: Locator;
+  readonly version_project_documents: Locator;
+  readonly document_date_project_documents: Locator;
+  readonly status_project_documents: Locator;
+  readonly modification_id_project_documents: Locator;
+  readonly action_project_documents: Locator;
+  readonly action_header: Locator;
+  readonly advanced_filters_project_documents: Locator;
+  readonly search_project_documents: Locator;
+  readonly results_count_project_documents: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -167,11 +178,49 @@ export default class ProjectOverviewPage {
       name: this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_tab_status,
       exact: true,
     });
+    this.view_project_overview_link = this.page
+      .locator('.govuk-body')
+      .getByText(this.linkTextData.Project_Overview_Page.View_Project_Overview);
+    this.document_type_project_documents = this.page.getByRole('button', {
+      name: this.projectOverviewPageTestData.Label_Texts_Project_Documents.document_type_project_documents.trim(),
+    });
+    this.document_name_project_documents = this.page.getByRole('button', {
+      name: this.projectOverviewPageTestData.Label_Texts_Project_Documents.document_name_project_documents.trim(),
+      exact: true,
+    });
+    this.version_project_documents = this.page.getByRole('button', {
+      name: this.projectOverviewPageTestData.Label_Texts_Project_Documents.version_project_documents,
+      exact: true,
+    });
+    this.document_date_project_documents = this.page.getByRole('button', {
+      name: this.projectOverviewPageTestData.Label_Texts_Project_Documents.document_date_project_documents.trim(),
+      exact: true,
+    });
+    this.status_project_documents = this.page.getByRole('button', {
+      name: this.projectOverviewPageTestData.Label_Texts_Project_Documents.status_project_documents,
+      exact: true,
+    });
+    this.modification_id_project_documents = this.page.getByRole('button', {
+      name: this.projectOverviewPageTestData.Label_Texts_Project_Documents.modification_id_project_documents.trim(),
+      exact: true,
+    });
+    this.action_header = this.page.locator('th');
+    this.action_project_documents = this.action_header.getByText(
+      this.projectOverviewPageTestData.Label_Texts_Project_Documents.action_project_documents
+    );
+    this.search_project_documents = this.page.getByRole('button', {
+      name: this.projectOverviewPageTestData.Label_Texts_Project_Documents.search_project_documents.trim(),
+      exact: true,
+    });
+    this.advanced_filters_project_documents = this.page
+      .locator('.search-filter-panel__button-inner')
+      .getByText(this.projectOverviewPageTestData.Label_Texts_Project_Documents.advanced_filters_project_documents);
+    this.results_count_project_documents = this.page.locator('.search-filter-panel__count');
   }
 
   //Page Methods
   async assertOnProjectOverviewPage() {
-    await expect(this.pageHeading).toBeVisible();
+    await expect.soft(this.pageHeading).toBeVisible();
   }
 
   async gotoSpecificProjectPage(projectName: string) {

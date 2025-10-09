@@ -104,5 +104,16 @@
     "post_approvals_tab_category": "Category",
     "post_approvals_tab_date_submitted": "Date submitted",
     "post_approvals_tab_status": "Status"
+  },
+  "Label_Texts_Project_Documents": {
+    "document_type_project_documents": "Document type",
+    "document_name_project_documents": "Document name",
+    "version_project_documents": "Version",
+    "document_date_project_documents": "Document date",
+    "status_project_documents": "Status",
+    "modification_id_project_documents": "Modification ID",
+    "action_project_documents": "Action",
+    "search_project_documents": "Search",
+    "advanced_filters_project_documents": "Advanced filters"
   }
 }
