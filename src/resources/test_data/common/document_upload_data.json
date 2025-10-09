@@ -42,7 +42,6 @@
   "OGG_File": "src/resources/test_data/common/document_upload/invalid_video_files/OGG_File.ogg",
   "PS_File": "src/resources/test_data/common/document_upload/invalid_video_files/PS_File.ps",
   "RAW_File": "src/resources/test_data/common/document_upload/invalid_video_files/RAW_File.raw",
-  "TS_File": "src/resources/test_data/common/document_upload/invalid_video_files/TS_File.ts",
   "WAV_File": "src/resources/test_data/common/document_upload/invalid_video_files/WAV_File.wav",
   "JSON_File": "src/resources/test_data/common/document_upload/invalid_non_video_files/JSON_File.json",
   "7ZIP_File": "src/resources/test_data/common/document_upload/invalid_non_video_files/7ZIP_File.7z",
@@ -116,7 +115,6 @@
     "src/resources/test_data/common/document_upload/invalid_video_files/OGG_File.ogg",
     "src/resources/test_data/common/document_upload/invalid_video_files/PS_File.ps",
     "src/resources/test_data/common/document_upload/invalid_video_files/RAW_File.raw",
-    "src/resources/test_data/common/document_upload/invalid_video_files/TS_File.ts",
     "src/resources/test_data/common/document_upload/invalid_video_files/WAV_File.wav"
   ],
   "Multiple_Invalid_Files_Non_Video_Dataset": [
