@@ -70,6 +70,8 @@ import AddDocumentDetailsModificationsPage from '../pages/IRAS/makeChanges/modif
 import AddDocumentDetailsForSpecificDocumentModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/AddDocumentDetailsForSpecificDocumentModificationsPage';
 import ReviewYourDocumentInformationModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/ReviewYourDocumentInfomationModificationsPage';
 import ReviewAllChangesPage from '../pages/IRAS/makeChanges/modifications/ReviewAllChangesPage';
+import ProjectOverviewUnfinishedProjectsPage from '../pages/IRAS/makeChanges/ProjectOverviewUnfinishedProjectsPage';
+import ModificationsDetailsPage from '../pages/IRAS/makeChanges/modifications/ModificationsDetailsPage';
 import ManageSponsorOrganisationsPage from '../pages/IRAS/reviewResearch/userAdministration/manageSponsorOrgs/ManageSponsorOrganisationsPage';
 import SetupNewSponsorOrganisationPage from '../pages/IRAS/reviewResearch/userAdministration/manageSponsorOrgs/SetupNewSponsorOrganisationPage';
 import CheckSetupSponsorOrganisationPage from '../pages/IRAS/reviewResearch/userAdministration/manageSponsorOrgs/CheckSetupSponsorOrganisationPage';
@@ -144,6 +146,8 @@ type CustomFixtures = {
   addDocumentDetailsForSpecificDocumentModificationsPage: AddDocumentDetailsForSpecificDocumentModificationsPage;
   reviewYourDocumentInformationModificationsPage: ReviewYourDocumentInformationModificationsPage;
   reviewAllChangesPage: ReviewAllChangesPage;
+  modificationsDetailsPage: ModificationsDetailsPage;
+  projectOverviewUnfinishedProjectsPage: ProjectOverviewUnfinishedProjectsPage;
   manageSponsorOrganisationPage: ManageSponsorOrganisationsPage;
   setupNewSponsorOrganisationPage: SetupNewSponsorOrganisationPage;
   checkSetupSponsorOrganisationPage: CheckSetupSponsorOrganisationPage;
@@ -398,6 +402,10 @@ export const test = base.extend<CustomFixtures>({
     await use(new MyModificationsTasklistPage(page));
   },
 
+  projectOverviewUnfinishedProjectsPage: async ({ page }, use) => {
+    await use(new ProjectOverviewUnfinishedProjectsPage(page));
+  },
+
   modificationsReceivedCommonPage: async ({ page }, use) => {
     await use(new ModificationsReceivedCommonPage(page));
   },
@@ -420,7 +428,9 @@ export const test = base.extend<CustomFixtures>({
   reviewAllChangesPage: async ({ page }, use) => {
     await use(new ReviewAllChangesPage(page));
   },
-
+  modificationsDetailsPage: async ({ page }, use) => {
+    await use(new ModificationsDetailsPage(page));
+  },
   manageSponsorOrganisationPage: async ({ page }, use) => {
     await use(new ManageSponsorOrganisationsPage(page));
   },
@@ -441,7 +451,6 @@ export const test = base.extend<CustomFixtures>({
     const makeAxeBuilder = () => new AxeBuilder({ page });
     await use(makeAxeBuilder);
   },
-
   //Set the Storage State based on User Tag from Feature File
   storageState: async ({ $tags, storageState }, use) => {
     if ($tags.includes('@SysAdminUser')) {

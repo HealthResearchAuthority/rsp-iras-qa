@@ -433,6 +433,7 @@ Then(
       modificationsReadyToAssignPage,
       myModificationsTasklistPage,
       sponsorReferencePage,
+      projectIdentifiersPage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
@@ -459,6 +460,10 @@ Then(
       errorMessageFieldDataset =
         chiefInvestigatorPage.chiefInvestigatorPageTestData[errorMessageFieldAndSummaryDatasetName];
       page = chiefInvestigatorPage;
+    } else if (pageKey == 'Project_Identifiers_Page') {
+      errorMessageFieldDataset =
+        projectIdentifiersPage.projectIdentifiersPageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = projectIdentifiersPage;
     } else if (pageKey == 'Create_Review_Body_Page') {
       errorMessageFieldDataset =
         createReviewBodyPage.createReviewBodyPageData.Create_Review_Body.Validation[
@@ -1201,13 +1206,9 @@ Then(
     pageKey: string,
     uploadType: string
   ) => {
-    const isSpecialError = ['Duplicate_File_Upload_Error', 'Invalid_Format_Video_File_Error'].includes(errorKey);
+    const isSpecialError = ['Duplicate_File_Upload_Error', 'Invalid_Format_File_Error'].includes(errorKey);
     const page = pageKey === 'Add_Document_Modifications_Page' ? addDocumentsModificationsPage : null;
     const errorDataset = page?.addDocumentsModificationsPageTestData?.[errorKey];
-
-    if (!errorDataset || !page) {
-      throw new Error(`Invalid pageKey or dataset name: ${pageKey}, ${errorKey}`);
-    }
 
     await expect(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
 

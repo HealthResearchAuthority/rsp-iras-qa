@@ -9,6 +9,9 @@ Feature: Create Amendment - Project Documents Modifications
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
@@ -18,9 +21,6 @@ Feature: Create Amendment - Project Documents Modifications
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    Then I can see the project identifiers page
-    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
     When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
@@ -134,8 +134,8 @@ Feature: Create Amendment - Project Documents Modifications
       | Correction_Of_Typographical_Errors           | WMV_File              | WEBM_File                  |
       | Correction_Of_Typographical_Errors           | WEBM_File             | WMV_File                   |
 
-  @4684 @ValidateDocumentUploadAndReviewForModificationsPage @KNOWN_DEFECT_RSP-4801_4844_4920_4921
-  Scenario Outline: Verify that a relevant error message is shown when the user attempts to upload a video file that has already been uploaded
+  @4684 @3877 @ValidateDocumentUploadDuplicateFileErrorMessage @KNOWN_DEFECT_RSP-4801_4844_4920_4921
+  Scenario Outline: Verify that a relevant error message is shown when the user attempts to upload a video or non video file that has already been uploaded
     And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
@@ -160,10 +160,11 @@ Feature: Create Amendment - Project Documents Modifications
       | Specific_Change                    | Document_Upload_Files      | Document_Upload_Files_New  | Upload_Type      |
       | Correction_Of_Typographical_Errors | MP4_File                   | MP4_File                   | single invalid   |
       | Correction_Of_Typographical_Errors | Multiple_Files_Video_Valid | Multiple_Files_Video_Valid | multiple invalid |
+      | Correction_Of_Typographical_Errors | PNG_File                   | PNG_File                   | single invalid   |
+      | Protocol_Non_Substantial_Changes   | Multiple_Files_Three       | Multiple_Files_Three       | multiple invalid |
 
-
-  @4684 @ValidateDocumentUploadAndReviewForModificationsPage @KNOWN_DEFECT_RSP-4801_4844_4920_4921
-  Scenario Outline: Verify that an appropriate error message is displayed when the user uploads a video file with an invalid format
+  @4684 @3877 @ValidateDocumentUploadInvalidFileErrorMessage @KNOWN_DEFECT_RSP-4801_4844_4920_4921
+  Scenario Outline: Verify that an appropriate error message is displayed when the user uploads a video or non video file with an invalid format
     And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
@@ -172,24 +173,23 @@ Feature: Create Amendment - Project Documents Modifications
     Then I upload '<Document_Upload_Files_Invalid>' documents
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
-    Then I validate 'Invalid_Format_Video_File_Error' displayed on 'Add_Document_Modifications_Page' while uploading '<Upload_Type>' documents
+    Then I validate 'Invalid_Format_File_Error' displayed on 'Add_Document_Modifications_Page' while uploading '<Upload_Type>' documents
     And I capture the page screenshot
 
     Examples:
-      | Specific_Change                    | Document_Upload_Files_Invalid | Upload_Type      |
-      | Correction_Of_Typographical_Errors | Multiple_Files_Video_Invalid  | multiple invalid |
-      | Correction_Of_Typographical_Errors | ASF_File                      | single invalid   |
-      | Correction_Of_Typographical_Errors | FLAC_File                     | single invalid   |
-      | Correction_Of_Typographical_Errors | MP3_File                      | single invalid   |
-      | Correction_Of_Typographical_Errors | MPEG1_File                    | single invalid   |
-      | Correction_Of_Typographical_Errors | OGG_File                      | single invalid   |
-      | Correction_Of_Typographical_Errors | PS_File                       | single invalid   |
-      | Correction_Of_Typographical_Errors | RAW_File                      | single invalid   |
-      | Correction_Of_Typographical_Errors | TS_File                       | single invalid   |
-      | Correction_Of_Typographical_Errors | WAV_File                      | single invalid   |
-
-  # cover error validation when exceeding 100MB - via manual execution only
-  # cover error validation - list of files containing few duplicate files, few incorrect format files(mix of valid and invalid files)-via automation
+      | Specific_Change                    | Document_Upload_Files_Invalid    | Upload_Type      |
+      | Correction_Of_Typographical_Errors | Multiple_Files_Video_Invalid     | multiple invalid |
+      | Correction_Of_Typographical_Errors | ASF_File                         | single invalid   |
+      | Correction_Of_Typographical_Errors | FLAC_File                        | single invalid   |
+      | Correction_Of_Typographical_Errors | MP3_File                         | single invalid   |
+      | Correction_Of_Typographical_Errors | MPEG1_File                       | single invalid   |
+      | Correction_Of_Typographical_Errors | OGG_File                         | single invalid   |
+      | Correction_Of_Typographical_Errors | PS_File                          | single invalid   |
+      | Correction_Of_Typographical_Errors | RAW_File                         | single invalid   |
+      #| Correction_Of_Typographical_Errors | TS_File                          | single invalid   |
+      | Correction_Of_Typographical_Errors | WAV_File                         | single invalid   |
+      | Correction_Of_Typographical_Errors | Multiple_Invalid_Files_Non_Video | multiple invalid |
+      | Protocol_Non_Substantial_Changes   | JSON_File                        | single invalid   |
 
   @rsp-3876 @ValidateDocumentUploadModificationsPageErrprMessages @KNOWN_DEFECT_RSP-4801_4920
   Scenario Outline: Validate the user is able to see error messages for invalid actions on upload documents for modifications

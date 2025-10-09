@@ -30,7 +30,6 @@ export default class ReviewUploadedDocumentsModificationsPage {
   async getUploadedFileName(): Promise<string[]> {
     return this._file_names;
   }
-
   async setUploadedFileName(value: string[]): Promise<void> {
     this._file_names = value;
   }
