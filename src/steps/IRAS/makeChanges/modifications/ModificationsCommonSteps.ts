@@ -51,7 +51,7 @@ Then(
       await modificationsCommonPage.createChangeModification(changeName, changeDataset);
       // Only click "Add Another Change" if it's not the last iteration
       if (changeIndex < changeNames.length - 1) {
-        await commonItemsPage.clickButton('Modifications_Details_Page', 'Add_Another_Change');
+        await commonItemsPage.clickButton('Modification_Details_Page', 'Add_Another_Change');
       }
     }
   }

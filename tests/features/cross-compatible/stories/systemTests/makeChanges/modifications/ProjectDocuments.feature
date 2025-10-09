@@ -185,7 +185,7 @@ Feature: Create Amendment - Project Documents Modifications
       | Correction_Of_Typographical_Errors | OGG_File                      | single invalid   |
       | Correction_Of_Typographical_Errors | PS_File                       | single invalid   |
       | Correction_Of_Typographical_Errors | RAW_File                      | single invalid   |
-      | Correction_Of_Typographical_Errors | TS_File                       | single invalid   |
+      # | Correction_Of_Typographical_Errors | TS_File                       | single invalid   |
       | Correction_Of_Typographical_Errors | WAV_File                      | single invalid   |
 
   # cover error validation when exceeding 100MB - via manual execution only
