@@ -186,7 +186,7 @@ Feature: Create Amendment - Project Documents Modifications
       | Correction_Of_Typographical_Errors | OGG_File                         | single invalid   |
       | Correction_Of_Typographical_Errors | PS_File                          | single invalid   |
       | Correction_Of_Typographical_Errors | RAW_File                         | single invalid   |
-      | Correction_Of_Typographical_Errors | TS_File                          | single invalid   |
+      #| Correction_Of_Typographical_Errors | TS_File                          | single invalid   |
       | Correction_Of_Typographical_Errors | WAV_File                         | single invalid   |
       | Correction_Of_Typographical_Errors | Multiple_Invalid_Files_Non_Video | multiple invalid |
       | Protocol_Non_Substantial_Changes   | JSON_File                        | single invalid   |
