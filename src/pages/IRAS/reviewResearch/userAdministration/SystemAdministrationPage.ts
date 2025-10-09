@@ -16,6 +16,7 @@ export default class SystemAdministrationPage {
   readonly manage_review_bodies_hint_label: Locator;
   readonly manage_users_hint_label: Locator;
   readonly manage_sponsor_organisations_hint_label: Locator;
+  readonly manageSponsorOrganisationsLink: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -38,6 +39,12 @@ export default class SystemAdministrationPage {
     this.manageUsersLink = this.mainPageContent.getByText(this.linkTextData.System_Administration_Page.Manage_Users, {
       exact: true,
     });
+    this.manageSponsorOrganisationsLink = this.mainPageContent.getByText(
+      this.linkTextData.System_Administration_Page.Manage_Sponsor_Organisations,
+      {
+        exact: true,
+      }
+    );
     this.manage_review_bodies_hint_label = this.manageReviewbodiesLink
       .locator('..')
       .getByRole('paragraph')
@@ -46,7 +53,7 @@ export default class SystemAdministrationPage {
       .locator('..')
       .getByRole('paragraph')
       .getByText(this.systemAdminPageTestData.Label_Texts.manage_users_hint_label);
-    this.manage_sponsor_organisations_hint_label = this.manageUsersLink
+    this.manage_sponsor_organisations_hint_label = this.manageSponsorOrganisationsLink
       .locator('..')
       .getByRole('paragraph')
       .getByText(this.systemAdminPageTestData.Label_Texts.manage_sponsor_organisations_hint_label);

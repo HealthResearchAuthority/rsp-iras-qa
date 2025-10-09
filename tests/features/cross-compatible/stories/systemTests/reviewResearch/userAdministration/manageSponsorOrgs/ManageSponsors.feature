@@ -7,8 +7,7 @@ Feature: User Administration: Manage Sponsor Organisations
         Then I can see the 'Manage_Sponsor_Organisations_Page'
 
     @ViewListOfSponsorOrgs @rsp-5229
-    Scenario Outline: Verify the user can view the audit history after disabling a newly created review body and the the user list page
-        # Add a sponsor organisation from manage sponsor organisation page
+    Scenario Outline: Verify the user can add a sponsor organisation from manage sponsor organisation page
         And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
         Then I can see the 'Setup_New_Sponsor_Organisation_Page'
         And I capture the page screenshot
@@ -16,30 +15,22 @@ Feature: User Administration: Manage Sponsor Organisations
         And I capture the page screenshot
         And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
         And I capture the page screenshot
-        # Then I can see the check and set up a sponsor organisation profile page for '<Setup_New_Sponsor_Organisation>'
-        Then I can see the check and create review body page for '<Add_Review_Body>'
-        When I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
-        Then I can see the create Review body confirmation page for '<Add_Review_Body>'
+        And I can see the check and set up a sponsor organisation profile page for '<Setup_New_Sponsor_Organisation>'
+        When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
+        Then I can see the 'Manage_Sponsor_Organisations_Page'
+        Then I can see the sponsor organisation added successful message on manage sponsor organisation page
         And I capture the page screenshot
-        # navigate to add review body page from confirmation page by clicking 'add another review body' link
-        When I click the 'Add_Another_Review_Body' link on the 'Create_Review_Body_Confirmation_Page'
-        And I capture the page screenshot
-        Then I can see the 'Create_Review_Body_Page'
-        # back link navigation from add a review body page
-        And I click the 'Back' link on the 'Create_Review_Body_Page'
-        And I capture the page screenshot
-        Then I can see the 'Manage_Review_Bodies_Page'
-        # alphabetical sorting in manage review body page
+        # alphabetical sorting in Manage_Sponsor_Organisations_Page'
         And I can see the list is sorted by default in the alphabetical order of the 'Organisation Name'
         And I capture the page screenshot
         # find the newly created review body in the list with 'active' status
-        When I enter 'name of the new review body' into the search field
-        And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
-        And I can see the 'newly created review body' should be present in the list with '<Status_Enabled>' status in the manage review bodies page
+        When I enter 'name of the newly added sponsor organisation' into the search field
+        And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+        And I can see the 'newly added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
         And I capture the page screenshot
         Then I click the view edit link
         And I capture the page screenshot
-        And I can see the review body profile page
+        And I can see the sponsor organisation profile page
         # validate review body profile page with the created review body
         And I now see the review body profile page with the created '<Add_Review_Body>'
         And I capture the page screenshot
@@ -79,6 +70,25 @@ Feature: User Administration: Manage Sponsor Organisations
         Examples:
             | Setup_New_Sponsor_Organisation | Audit_History       | Status_Enabled | Status_Disabled |
             | Valid_Data_In_All_Fields       | Disable_Review_Body | Enabled        | Disabled        |
+
+    @verifyManageSponsorOrgsPageBackButtonFlow @rsp-2569
+    Scenario: Verify the user can navigate from 'Manage sponsor organisations' page by clicking 'Back' button
+        And I click the 'Back' link on the 'Manage_Sponsor_Organisations_Page'
+        And I capture the page screenshot
+        Then I can see the 'System_Administration_Page'
+
+    #   When I click the 'Cancel' button on the 'Check_Setup_Sponsor_Organisation_Page'
+
+    #  Duplicate sponsort org error message validation to be added later
+
+    # sponsor org search- JS enabled and disabled scenarios to be added later-search results, no results found and blank search scenarios
+
+    # no results found scenario to be added later for manage sponsor orgs page
+
+    # disable sponsor org and enable sponsor org scenarios to be added later
+
+    # sort on click of column headers to be added later (default sort is alphabetical order of org name - ascending and on click of org name header - descending and ascending)
+    # search- sceanrios to be added later (search with org name, search with part of org name, search with case variations of org name, search with leading and trailing spaces of org name, search with special characters in org name, search with numeric characters in org name)
 
     @RegressionTestVerifyEnableAndEditReviewBodyAuditHistory @KNOWN-ISSUE-RSP-5003 @KNOWN-DEFECT-RSP-5004
     Scenario Outline: Verify the user can view the audit history after enabling a review body

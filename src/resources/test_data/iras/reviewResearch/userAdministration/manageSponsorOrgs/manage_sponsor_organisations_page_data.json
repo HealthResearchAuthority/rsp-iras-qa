@@ -17,7 +17,9 @@
     "search_hint_text": "Search for an organisation name",
     "sponsor_organisation_search_box_label": "Find an organisation",
     "country_label": "Country",
-    "status_label": "Status"
+    "status_label": "Status",
+    "sponsor_organisation_added_success_message_header_text": "Success",
+    "sponsor_organisation_added_success_message_text": "You have successfully added a new sponsor organisation"
   },
   "Advanced_Filters_Hint_Labels": {
     "country_hint_label": "Select all that apply",

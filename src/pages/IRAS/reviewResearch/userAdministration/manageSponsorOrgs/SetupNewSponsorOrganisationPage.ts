@@ -8,6 +8,7 @@ export default class SetupNewSponsorOrganisationPage {
   readonly setupNewSponsorOrganisationPageTestData: typeof setupNewSponsorOrganisationPageTestData;
   private _org_name: string[];
   private _row_val: Locator;
+  private _unique_org_name: string;
   readonly linkTextData: typeof linkTextData;
   readonly pageHeading: Locator;
   readonly select_a_sponsor_organisation_label: Locator;
@@ -19,6 +20,7 @@ export default class SetupNewSponsorOrganisationPage {
     this.setupNewSponsorOrganisationPageTestData = setupNewSponsorOrganisationPageTestData;
     this.linkTextData = linkTextData;
     this._org_name = [];
+    this._unique_org_name = '';
 
     //Locators
     this.pageHeading = this.page
@@ -54,6 +56,14 @@ export default class SetupNewSponsorOrganisationPage {
 
   async setReviewBodyRow(value: Locator): Promise<void> {
     this._row_val = value;
+  }
+
+  async getUniqueOrgName(): Promise<string> {
+    return this._unique_org_name;
+  }
+
+  async setUniqueOrgName(value: string): Promise<void> {
+    this._unique_org_name = value;
   }
 
   //Page Methods

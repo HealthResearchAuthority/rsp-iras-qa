@@ -1,6 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as manageSponsorOrganisationsPageTestData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageSponsorOrgs/manage_sponsor_organisations_page_data.json';
 import * as linkTextData from '../../../../../resources/test_data/common/link_text_data.json';
+import SetupNewSponsorOrganisationPage from './SetupNewSponsorOrganisationPage';
 
 //Declare Page Objects
 export default class ManageSponsorOrganisationsPage {
@@ -33,6 +34,9 @@ export default class ManageSponsorOrganisationsPage {
   readonly status_hint_label: Locator;
   readonly review_body_search_text: Locator;
   readonly search_hint_text: Locator;
+  readonly sponsor_organisation_added_success_message_header_text: Locator;
+  readonly sponsor_organisation_added_success_message_text: Locator;
+  readonly information_alert_banner: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -92,6 +96,19 @@ export default class ManageSponsorOrganisationsPage {
     this.search_hint_text = this.page.getByText(
       this.manageSponsorOrganisationsPageTestData.Manage_Sponsor_Organisations_Page.search_hint_text
     );
+    this.sponsor_organisation_added_success_message_header_text = this.page
+      .getByTestId('govuk-notification-banner-title')
+      .getByText(
+        this.manageSponsorOrganisationsPageTestData.Manage_Sponsor_Organisations_Page
+          .sponsor_organisation_added_success_message_header_text
+      );
+    this.sponsor_organisation_added_success_message_text = this.page
+      .getByRole('heading')
+      .getByText(
+        this.manageSponsorOrganisationsPageTestData.Manage_Sponsor_Organisations_Page
+          .sponsor_organisation_added_success_message_text
+      );
+    this.information_alert_banner = this.page.getByRole('alert');
   }
 
   //Getters & Setters for Private Variables
@@ -123,5 +140,76 @@ export default class ManageSponsorOrganisationsPage {
       .soft(await this.page.title())
       .toBe(this.manageSponsorOrganisationsPageTestData.Manage_Sponsor_Organisations_Page.title); // Temporarily commented out due to title mismatch
     await expect(this.search_hint_text).toBeVisible();
+  }
+
+  async getSponsorStatus(status: string) {
+    if (status.toLowerCase() == 'disabled') {
+      return this.manageSponsorOrganisationsPageTestData.Manage_Sponsor_Organisations_Page.disabled_status;
+    } else {
+      return this.manageSponsorOrganisationsPageTestData.Manage_Sponsor_Organisations_Page.enabled_status;
+    }
+  }
+
+  async getSponsorOrgName(
+    inputType: string,
+    setupNewSponsorOrganisationPage: SetupNewSponsorOrganisationPage
+  ): Promise<string> {
+    let sponsorOrgName: string;
+    switch (inputType) {
+      // case 'previously added sponsor organisation':
+      //   sponsorOrgName = await this.getOrgName();
+      //   break;
+      case 'newly added sponsor organisation':
+        sponsorOrgName = await setupNewSponsorOrganisationPage.getUniqueOrgName();
+        break;
+      default:
+        sponsorOrgName = inputType;
+    }
+    return sponsorOrgName;
+  }
+
+  async findSponsorOrg(sponsorOrgName: string, sponsorOrgStatus?: string) {
+    let hasNextPage = true;
+    while (hasNextPage) {
+      const rows = await this.listRows.all();
+      for (const row of rows) {
+        const match = await this.isMatchingRow(row, sponsorOrgName, sponsorOrgStatus);
+        if (match) {
+          return row;
+        }
+      }
+      hasNextPage = await this.shouldGoToNextPage();
+      if (hasNextPage) {
+        await this.goToNextPage();
+      }
+    }
+    throw new Error(`No matching record found`);
+  }
+  async isMatchingRow(row: any, sponsorOrgName: string, sponsorOrgStatus?: string): Promise<boolean> {
+    if (sponsorOrgName === 'QA Automation') {
+      const columns = await row.locator(this.listCell).allTextContents();
+      return columns[0].trim().includes(sponsorOrgName) && columns[2].trim() === sponsorOrgStatus;
+    } else {
+      const searchRecord = await this.buildSearchRecord(sponsorOrgName, sponsorOrgStatus);
+      const fullRowData = await this.getRowData(row, sponsorOrgStatus);
+      return fullRowData === searchRecord;
+    }
+  }
+
+  async shouldGoToNextPage(): Promise<boolean> {
+    return (await this.next_button.isVisible()) && !(await this.next_button.isDisabled());
+  }
+
+  async goToNextPage(): Promise<void> {
+    await this.next_button.click();
+    await this.page.waitForLoadState('domcontentloaded');
+  }
+  async buildSearchRecord(name: string, status?: string): Promise<string> {
+    return typeof status !== 'undefined' ? `${name}|${status}` : name;
+  }
+  async getRowData(row: any, status?: string): Promise<string> {
+    const columns = await row.locator(this.listCell).allTextContents();
+    const selected = typeof status !== 'undefined' ? [columns[0], columns[2]] : [columns[0]];
+    return selected.map((col) => col.trim()).join('|');
   }
 }

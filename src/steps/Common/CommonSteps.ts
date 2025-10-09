@@ -571,7 +571,13 @@ Then(
 When(
   'I enter {string} into the search field',
   async (
-    { commonItemsPage, reviewBodyProfilePage, createReviewBodyPage, createUserProfilePage },
+    {
+      commonItemsPage,
+      reviewBodyProfilePage,
+      createReviewBodyPage,
+      createUserProfilePage,
+      setupNewSponsorOrganisationPage,
+    },
     inputType: string
   ) => {
     let searchValue: string;
@@ -581,6 +587,9 @@ When(
         break;
       case 'name of the new review body':
         searchValue = await createReviewBodyPage.getUniqueOrgName();
+        break;
+      case 'name of the newly added sponsor organisation':
+        searchValue = await setupNewSponsorOrganisationPage.getUniqueOrgName();
         break;
       case 'name of the newly created user':
         searchValue = await createUserProfilePage.getUniqueEmail();

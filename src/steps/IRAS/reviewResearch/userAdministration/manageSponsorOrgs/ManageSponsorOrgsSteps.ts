@@ -1,25 +1,50 @@
 import { createBdd } from 'playwright-bdd';
 import { test, expect } from '../../../../../hooks/CustomFixtures';
-const { Then } = createBdd(test);
+const { When, Then } = createBdd(test);
+
+When(
+  'I can see the {string} should be present in the list with {string} status in the manage sponsor organisation page',
+  async (
+    { manageSponsorOrganisationPage, manageReviewBodiesPage, setupNewSponsorOrganisationPage },
+    inputType: string,
+    status: string
+  ) => {
+    const sponsorOrgStatus = await manageSponsorOrganisationPage.getSponsorStatus(status);
+    const sponsorOrgName = await manageSponsorOrganisationPage.getSponsorOrgName(
+      inputType,
+      setupNewSponsorOrganisationPage
+    );
+    // await manageReviewBodiesPage.goto(
+    //   manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.enlarged_page_size,
+    //   reviewBodyName
+    // );
+    const foundRecords = await manageSponsorOrganisationPage.findSponsorOrg(sponsorOrgName, sponsorOrgStatus);
+    expect(foundRecords).toBeDefined();
+    expect(foundRecords).toHaveCount(1);
+    await manageReviewBodiesPage.setReviewBodyRow(foundRecords);
+  }
+);
 
 Then(
-  'I can see the review body for {string} is present in the list with {string} status',
-  async ({ manageReviewBodiesPage, createReviewBodyPage }, datasetName: string, status: string) => {
-    const reviewBodyStatus = await manageReviewBodiesPage.getReviewBodyStatus(status);
-    const dataset = createReviewBodyPage.createReviewBodyPageData.Create_Review_Body[datasetName];
-    const expectedCountryValue: string = dataset.country_checkbox.toString();
-    const reviewBodyName = await createReviewBodyPage.getUniqueOrgName();
-    await manageReviewBodiesPage.goto(
-      manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.enlarged_page_size,
-      reviewBodyName
-    );
-    const createdReviewBodyRow = await manageReviewBodiesPage.findReviewBody(reviewBodyName, reviewBodyStatus);
-    const createdReviewBodyCountry = createdReviewBodyRow.locator('td', {
-      hasText: expectedCountryValue.replaceAll(',', ', '),
-      hasNotText: 'QA',
-    });
-    expect(createdReviewBodyRow).toHaveCount(1);
-    await expect(createdReviewBodyCountry).toBeVisible();
-    await manageReviewBodiesPage.setReviewBodyRow(createdReviewBodyRow);
+  'I can see the sponsor organisation added successful message on manage sponsor organisation page',
+  async ({ manageSponsorOrganisationPage, commonItemsPage }) => {
+    await expect
+      .soft(manageSponsorOrganisationPage.sponsor_organisation_added_success_message_header_text)
+      .toBeVisible();
+    await expect.soft(manageSponsorOrganisationPage.sponsor_organisation_added_success_message_text).toBeVisible();
+    expect
+      .soft(
+        await manageSponsorOrganisationPage.information_alert_banner.evaluate((e: any) =>
+          getComputedStyle(e).getPropertyValue('border-color')
+        )
+      )
+      .toBe(commonItemsPage.commonTestData.rgb_green_color);
+    expect
+      .soft(
+        await manageSponsorOrganisationPage.information_alert_banner.evaluate((e: any) =>
+          getComputedStyle(e).getPropertyValue('background-color')
+        )
+      )
+      .toBe(commonItemsPage.commonTestData.rgb_green_color);
   }
 );

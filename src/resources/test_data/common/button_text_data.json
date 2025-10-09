@@ -255,5 +255,13 @@
   },
   "Setup_New_Sponsor_Organisation_Page": {
     "Save_Continue": "Save and continue"
+  },
+  "Check_Setup_Sponsor_Organisation_Page": {
+    "Save_Profile": "Save profile",
+    "Cancel": "Cancel"
+  },
+  "Sponsor_Organisation_Profile_Page": {
+    "Disable_Review_Body": "Disable sponsor organisation",
+    "Enable_Review_Body": "Enable sponsor organisation"
   }
 }
