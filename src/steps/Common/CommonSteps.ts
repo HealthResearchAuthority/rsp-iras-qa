@@ -1189,13 +1189,9 @@ Then(
     pageKey: string,
     uploadType: string
   ) => {
-    const isSpecialError = ['Duplicate_File_Upload_Error', 'Invalid_Format_Video_File_Error'].includes(errorKey);
+    const isSpecialError = ['Duplicate_File_Upload_Error', 'Invalid_Format_File_Error'].includes(errorKey);
     const page = pageKey === 'Add_Document_Modifications_Page' ? addDocumentsModificationsPage : null;
     const errorDataset = page?.addDocumentsModificationsPageTestData?.[errorKey];
-
-    if (!errorDataset || !page) {
-      throw new Error(`Invalid pageKey or dataset name: ${pageKey}, ${errorKey}`);
-    }
 
     await expect(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
 

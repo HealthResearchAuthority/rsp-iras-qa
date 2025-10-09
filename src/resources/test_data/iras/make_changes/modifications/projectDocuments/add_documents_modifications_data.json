@@ -13,7 +13,7 @@
   "Field_Error_Upload_Documents_Mandatory": {
     "upload_files_input": "Please upload at least one document"
   },
-  "Invalid_Format_Video_File_Error": {
+  "Invalid_Format_File_Error": {
     "upload_files_input": " must be a permitted file type"
   },
   "Duplicate_File_Upload_Error": {
