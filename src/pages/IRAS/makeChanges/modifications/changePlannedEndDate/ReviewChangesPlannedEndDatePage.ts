@@ -1,5 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
-import * as reviewChangesPlannedEndDatePageTestData from '../../../../../resources/test_data/iras/make_changes/modifications/change_planned_end_date/review_changes_planned_end_date_data.json';
+import * as reviewChangesPlannedEndDatePageTestData from '../../../../../resources/test_data/iras/make_changes/modifications/changePlannedEndDate/review_changes_planned_end_date_data.json';
 
 //Declare Page Objects
 export default class ChangePlannedEndDateReviewModificationsPage {

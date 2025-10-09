@@ -71,6 +71,8 @@ import AddDocumentDetailsForSpecificDocumentModificationsPage from '../pages/IRA
 import ReviewYourDocumentInformationModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/ReviewYourDocumentInfomationModificationsPage';
 import ReviewAllChangesPage from '../pages/IRAS/makeChanges/modifications/ReviewAllChangesPage';
 import ProjectOverviewUnfinishedProjectsPage from '../pages/IRAS/makeChanges/ProjectOverviewUnfinishedProjectsPage';
+import ModificationsDetailsPage from '../pages/IRAS/makeChanges/modifications/ModificationsDetailsPage';
+
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
   loginPage: LoginPage;
@@ -140,6 +142,7 @@ type CustomFixtures = {
   addDocumentDetailsForSpecificDocumentModificationsPage: AddDocumentDetailsForSpecificDocumentModificationsPage;
   reviewYourDocumentInformationModificationsPage: ReviewYourDocumentInformationModificationsPage;
   reviewAllChangesPage: ReviewAllChangesPage;
+  modificationsDetailsPage: ModificationsDetailsPage;
   projectOverviewUnfinishedProjectsPage: ProjectOverviewUnfinishedProjectsPage;
   makeAxeBuilder: () => AxeBuilder;
 };
@@ -417,7 +420,9 @@ export const test = base.extend<CustomFixtures>({
   reviewAllChangesPage: async ({ page }, use) => {
     await use(new ReviewAllChangesPage(page));
   },
-
+  modificationsDetailsPage: async ({ page }, use) => {
+    await use(new ModificationsDetailsPage(page));
+  },
   makeAxeBuilder: async ({ page }, use) => {
     const makeAxeBuilder = () => new AxeBuilder({ page });
     await use(makeAxeBuilder);
