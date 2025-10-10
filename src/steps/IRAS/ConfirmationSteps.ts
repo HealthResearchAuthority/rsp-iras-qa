@@ -263,12 +263,12 @@ Then(
     const shortProjectTitleExpected =
       projectDetailsTitlePage.projectDetailsTitlePageTestData[projectTitleDatasetName].short_project_title_text;
     const modificationIDExpected = irasIDExpected + '/' + 1;
-    const irasIDActual = confirmStringNotNull(await modificationsCommonPage.iras_id_label.textContent());
+    const irasIDActual = confirmStringNotNull(await modificationsCommonPage.iras_id_value.textContent());
     const shortProjectTitleActual = confirmStringNotNull(
-      await modificationsCommonPage.short_project_title_label.textContent()
+      await modificationsCommonPage.short_project_title_value.textContent()
     );
     const modificationIDActual = confirmStringNotNull(
-      await modificationsCommonPage.modification_id_label.textContent()
+      await modificationsCommonPage.modification_id_value.textContent()
     );
     const expectedHeadingText =
       confirmationPage.confirmationPageTestData.Delete_Modification_Confirmation_Labels
