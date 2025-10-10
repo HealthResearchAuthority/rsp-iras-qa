@@ -1,0 +1,20 @@
+{
+  "Modification_Details_Page": {
+    "heading": "Modification details",
+    "status_label": "Status",
+    "change_ready_for_submission_status_label": "Change ready for submission",
+    "change_Unfinished_status_label": "Unfinished"
+  },
+  "Modification_Unfinished_Error_Page": {
+    "heading": "You cannot proceed with ‘Unfinished’ changes",
+    "modification_unfinished_hint_label": "All changes must have the status 'ready for submission' before you can continue. For any changes with the status 'Unfinished', either select Change to enter missing information, or select Remove if that change is no longer needed."
+  },
+  "Remove_Modifications_Page": {
+    "heading": "Are you sure you want to remove Change to planned end date?",
+    "remove_modification_success_message": "Change to planned end date has been successfully removed"
+  },
+  "Modification_Details_Label_Texts": {
+    "add_summary_heading_label": "Add summary and review modification before sending to sponsor",
+    "add_summary_sub_label": "You'll have the option to add a brief summary and edit your modification before sending it to the sponsor on the next page."
+  }
+}

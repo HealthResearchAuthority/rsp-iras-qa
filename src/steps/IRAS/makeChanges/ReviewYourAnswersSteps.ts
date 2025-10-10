@@ -9,7 +9,7 @@ Then('I can see the review your answers page', async ({ reviewYourAnswersPage })
 });
 
 Then(
-  'I can validate the field values of {string} page {string} page and {string} page',
+  'I can validate the field values of {string} page {string} page {string} and {string} page',
   async (
     {
       commonItemsPage,
@@ -18,14 +18,18 @@ Then(
       projectDetailsTitlePage,
       chiefInvestigatorPage,
       reseachLocationsPage,
+      projectIdentifiersPage,
     },
     datasetNameProjectTitle: string,
-    datasetNameKeyRoles: string,
-    datasetNameResearchLocations: string
+    datasetNameChiefInvestigator: string,
+    datasetNameResearchLocations: string,
+    datasetNameProjectIdentifier: string
   ) => {
     const datasetProjectTitle = projectDetailsTitlePage.projectDetailsTitlePageTestData[datasetNameProjectTitle];
-    const datasetKeyRoles = chiefInvestigatorPage.chiefInvestigatorPageTestData[datasetNameKeyRoles];
+    const datasetChiefInvestigator = chiefInvestigatorPage.chiefInvestigatorPageTestData[datasetNameChiefInvestigator];
     const datasetResearchLoctions = reseachLocationsPage.researchLocationsPageTestData[datasetNameResearchLocations];
+    const datasetProjectIdentifier =
+      projectIdentifiersPage.projectIdentifiersPageTestData[datasetNameProjectIdentifier];
     const irasIdRunTime = await projectDetailsIRASPage.getUniqueIrasId();
     expect(confirmStringNotNull(await reviewYourAnswersPage.iras_id_text.textContent())).toBe(irasIdRunTime);
     for (const key in datasetProjectTitle) {
@@ -46,15 +50,21 @@ Then(
         }
       }
     }
-    for (const key in datasetKeyRoles) {
-      if (Object.prototype.hasOwnProperty.call(datasetKeyRoles, key)) {
-        await commonItemsPage.validateUIComponentValues(datasetKeyRoles, key, reviewYourAnswersPage);
+    for (const key in datasetChiefInvestigator) {
+      if (Object.hasOwn(datasetChiefInvestigator, key)) {
+        await commonItemsPage.validateUIComponentValues(datasetChiefInvestigator, key, reviewYourAnswersPage);
       }
     }
 
     for (const key in datasetResearchLoctions) {
       if (Object.hasOwn(datasetResearchLoctions, key)) {
         await commonItemsPage.validateUIComponentValues(datasetResearchLoctions, key, reviewYourAnswersPage);
+      }
+    }
+
+    for (const key in datasetProjectIdentifier) {
+      if (Object.hasOwn(datasetProjectIdentifier, key)) {
+        await commonItemsPage.validateUIComponentValues(datasetProjectIdentifier, key, reviewYourAnswersPage);
       }
     }
   }

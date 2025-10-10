@@ -25,7 +25,7 @@ export default class AffectedOrganisationSelectionPage {
     );
   }
   //Page Methods
-  async fillAffectedOrganisation(dataset: any) {
+  async fillAffectedOrganisation(dataset: any, action: string) {
     const commonItemsPage = new CommonItemsPage(this.page);
     for (const key in dataset) {
       if (Object.hasOwn(dataset, key)) {
@@ -34,6 +34,10 @@ export default class AffectedOrganisationSelectionPage {
         }
       }
     }
-    await commonItemsPage.clickButton('Modifications_Page', 'Save_Continue');
+    if (action === 'create') {
+      await commonItemsPage.clickButton('Modifications_Page', 'Save_Continue');
+    } else {
+      await commonItemsPage.clickButton('Affected_Organisation_Selection_Page', 'Save_Changes');
+    }
   }
 }

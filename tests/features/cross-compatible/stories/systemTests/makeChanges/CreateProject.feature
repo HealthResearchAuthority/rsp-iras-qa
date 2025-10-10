@@ -152,7 +152,7 @@ Feature: Create Amendment - Create Project
     And I capture the page screenshot
     Then I fill the project details title page with '<Project_Details_Title>'
     When I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
-    Then I fill the chief investigator page with '<Key_Project_Roles>'
+    Then I fill the chief investigator page with '<Chief_Investigator>'
     Then I click the '<Navigation_Button_Third>' button on the 'Chief_Investigator_Page'
     Then I fill the research locations page with '<Research_Locations>'
     When I click the '<Navigation_Button_Third>' button on the 'Research_Locations_Page'
@@ -169,10 +169,10 @@ Feature: Create Amendment - Create Project
     Then I can see the project overview page
 
     Examples:
-      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Add_Project | Navigation_Button_Third | Navigation_Button_Fourth | Navigation_Link | Project_Details_Title | Key_Project_Roles     | Research_Locations    | Change_Link_Field |
+      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Add_Project | Navigation_Button_Third | Navigation_Button_Fourth | Navigation_Link | Project_Details_Title | Chief_Investigator    | Research_Locations    | Change_Link_Field |
       | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Confirm_Project_Details  | Back            | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_Title     |
 
-  @rsp-1897
+  @rsp-1897 @rsp-4209
   Scenario Outline: Validate user is able to fill chief investigator page with valid data
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
@@ -189,7 +189,7 @@ Feature: Create Amendment - Create Project
     Then I can see the research locations page
     When I click the '<Navigation_Link>' link on the 'Research_Locations_Page'
     Then I can see the chief investigator page
-    Then I can see previously saved values for '<Key_Project_Roles>' displayed on the chief investigator page
+    Then I can see previously saved values for '<Chief_Investigator>' displayed on the chief investigator page
     And I capture the page screenshot
 
     Examples:
@@ -222,8 +222,8 @@ Feature: Create Amendment - Create Project
   # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Multiple_Sub_Domains | Back            |
   # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Other_Language       | Back            |
 
-  @rsp-1897
-  Scenario Outline: Validate error messages displayed when user inputs invalid data for chief investigator email in chief investigator page
+  @rsp-1897 @rsp-4209 @KNOWN_DEFECT_RSP-5319
+  Scenario Outline: Validate error messages displayed when user inputs invalid data in chief investigator page
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
@@ -234,17 +234,18 @@ Feature: Create Amendment - Create Project
     Then I fill the chief investigator page with '<Chief_Investigator>'
     And I capture the page screenshot
     Then I click the '<Navigation_Button_Third>' button on the 'Chief_Investigator_Page'
-    Then I validate '<Field_Error_Message>' and '<Summary_Error_Message>' displayed on chief investigator page for '<Key_Project_Roles>'
+    Then I validate '<Field_Error_Message>' and '<Summary_Error_Message>' displayed on chief investigator page for '<Chief_Investigator>'
     And I capture the page screenshot
 
     Examples:
-      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Add_Project | Navigation_Button_Third | Project_Details_Title | Chief_Investigator                     | Field_Error_Message     | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Start_With_Dot  | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Double_Dot      | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_TLD             | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Reserved_Domain | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Punycode        | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Max_Char        | Field_Error_Chief_Email | Summary_Error_Message |
+      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Add_Project | Navigation_Button_Third | Project_Details_Title | Chief_Investigator                     | Field_Error_Message                        | Summary_Error_Message                                |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Data_Max_Character_Limit       | Field_Error_Max_Character_Limit_All_Fields | Summary_Error_Message_Max_Character_Limit_All_Fields |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Start_With_Dot  | Field_Error_Chief_Email                    | Summary_Error_Message                                |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Double_Dot      | Field_Error_Chief_Email                    | Summary_Error_Message                                |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_TLD             | Field_Error_Chief_Email                    | Summary_Error_Message                                |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Reserved_Domain | Field_Error_Chief_Email                    | Summary_Error_Message                                |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Punycode        | Field_Error_Chief_Email                    | Summary_Error_Message                                |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Max_Char        | Field_Error_Chief_Email                    | Summary_Error_Message                                |
   # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Space                           | Field_Error_Chief_Email | Summary_Error_Message |
   # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Wrong_AT                        | Field_Error_Chief_Email | Summary_Error_Message |
   # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Less_Greater_Symbols            | Field_Error_Chief_Email | Summary_Error_Message |
@@ -265,7 +266,7 @@ Feature: Create Amendment - Create Project
   # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Emoji                           | Field_Error_Chief_Email | Summary_Error_Message |
   # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Missing_AT                      | Field_Error_Chief_Email | Summary_Error_Message |
 
-  @rsp-1897
+  @rsp-1897 @rsp-4209
   Scenario Outline: Validate breadcrumb navigations in chief investigator page
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
@@ -392,7 +393,7 @@ Feature: Create Amendment - Create Project
       | Field_And_Summary_Error_Message       |
       | Field_Error_Message_Iras_Id_Duplicate |
 
-  @rsp-1863 @rsp-3819 @saveLaterProjectTitle
+  @rsp-1863 @rsp-3819 @rsp-4874 @saveLaterProjectTitle
   Scenario Outline: Verify product details are saved when user saves the record on create project - Project details page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -404,14 +405,12 @@ Feature: Create Amendment - Create Project
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_For_Later' button on the 'Project_Details_Title_Page'
-    Then I can see the project overview page
+    Then I can see the project overview for unfinished projects page
     And I capture the page screenshot
-    And I can see the short project title on project overview page for '<Project_Details_Title>'
-    # The below steps can be re-used if user allowed go back to project creation flow
-    # When I click the 'Project_Details' link on the 'Project_Overview_Page'
-    # And I can see the project details title page
-    # And I capture the page screenshot
-    # Then I can see previously saved values for '<Project_Details_Title>' displayed on the project details title page
+    And I can validate the ui fields on project overview unfinished projects page with '<Project_Details_Title>'
+    And I click the 'Edit_Project_Record' button on the 'Project_Overview_Unfinished_Projects_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
 
     Examples:
       | Project_Details_Title       |
@@ -420,7 +419,7 @@ Feature: Create Amendment - Create Project
       | Valid_Data_Only_Title_Field |
       | Valid_Data_Only_Date_Fields |
 
-  @rsp-1863 @saveLaterProjectRoles
+  @rsp-1863 @rsp-4874  @rsp-4209 @saveLaterProjectRoles
   Scenario Outline: Verify product details are saved when user saves the record on create project - chief investigator page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -434,26 +433,20 @@ Feature: Create Amendment - Create Project
     And I fill the chief investigator page with '<Chief_Investigator>'
     And I capture the page screenshot
     When I click the 'Save_For_Later' button on the 'Chief_Investigator_Page'
-    Then I can see the project overview page
+    Then I can see the project overview for unfinished projects page
     And I capture the page screenshot
-    # The below steps can be re-used if user allowed go back to project creation flow
-    # And I can see the short project title on project overview page for '<Project_Details_Title>'
-    # When I click the 'Project_Details' link on the 'Project_Overview_Page'
-    # Then I can see the project details title page
-    # And I capture the page screenshot
-    # And I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    # And I can see the chief investigator page
-    # And I capture the page screenshot
-    # Then I can see previously saved values for '<Key_Project_Roles>' displayed on the chief investigator page
+    And I can validate the ui fields on project overview unfinished projects page with '<Project_Details_Title>'
+    And I click the 'Edit_Project_Record' button on the 'Project_Overview_Unfinished_Projects_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
 
     Examples:
       | Project_Details_Title | Chief_Investigator                       |
       | Valid_Data_All_Fields | Valid_Data_All_Fields                    |
       | Valid_Data_All_Fields | Valid_Data_All_Empty_Fields              |
       | Valid_Data_All_Fields | Valid_Data_Only_Investigator_Email_Field |
-      | Valid_Data_All_Fields | Valid_Data_Only_Sponsor_Email_Field      |
 
-  @rsp-1863 @saveLaterProjectLocations
+  @rsp-1863 @rsp-4874 @saveLaterProjectLocations
   Scenario Outline: Verify product details are saved when user saves the record on create project - research locations page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -470,26 +463,28 @@ Feature: Create Amendment - Create Project
     And I fill the research locations page with '<Research_Locations>'
     And I capture the page screenshot
     And I click the 'Save_For_Later' button on the 'Research_Locations_Page'
-    Then I can see the project overview page
+    Then I can see the project overview for unfinished projects page
     And I capture the page screenshot
-    # The below steps can be re-used if user allowed go back to project creation flow
-    # And I can see the short project title on project overview page for '<Project_Details_Title>'
-    # When I click the 'Project_Details' link on the 'Project_Overview_Page'
-    # Then I can see the project details title page
-    # And I capture the page screenshot
-    # And I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    # And I can see the chief investigator page
-    # And I capture the page screenshot
-    # And I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
-    # And I capture the page screenshot
-    # Then I can see previously saved values for '<Research_Locations>' displayed on the research locations page
+    And I can validate the ui fields on project overview unfinished projects page with '<Project_Details_Title>'
+    And I click the 'Edit_Project_Record' button on the 'Project_Overview_Unfinished_Projects_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    And I click the 'Save_For_Later' button on the 'Review_Your_Answers_Page'
+    Then I can see the project overview for unfinished projects page
+    And I capture the page screenshot
+    And I click the 'Back' link on the 'Project_Overview_Unfinished_Projects_Page'
+    Then I can see the my research projects page
+    And I capture the page screenshot
+    And I click the '<Project_Details>' link on the my research page
+    Then I can see the project overview for unfinished projects page
+    And I capture the page screenshot
 
     Examples:
-      | Project_Details_Title | Chief_Investigator    | Research_Locations                       |
-      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields                    |
-      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Empty_Fields              |
-      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_Only_Investigator_Email_Field |
-      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_Only_Sponsor_Email_Field      |
+      | Project_Details_Title | Chief_Investigator    | Research_Locations                       | Project_Details       |
+      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields                    | Valid_Data_All_Fields |
+      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Empty_Fields              | Valid_Data_All_Fields |
+      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_Only_Investigator_Email_Field | Valid_Data_All_Fields |
+      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_Only_Sponsor_Email_Field      | Valid_Data_All_Fields |
 
   @rsp-1863 @rsp-3819 @saveLaterProjTitleValidations
   Scenario Outline: Validate error messages when user saves the project with invalid data on project title page
@@ -518,7 +513,7 @@ Feature: Create Amendment - Create Project
       | Invalid_Date_No_Month                       | Date_Month_Field_Error_Message  |
       | Invalid_Date_No_Year                        | Date_Year_Field_Error_Message   |
 
-  @rsp-1863 @saveLaterChiefInvEmailValidations
+  @rsp-1863 @rsp-4209 @saveLaterChiefInvEmailValidations @KNOWN_DEFECT_RSP-5319
   Scenario Outline: Validate error messages when user saves the project with invalid Chief Investigator email data on chief investigator page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -563,7 +558,7 @@ Feature: Create Amendment - Create Project
   # | Valid_Data_All_Fields | Invalid_Email_Data_One_Consecutiv_Dot_Domain_SubDomain | Field_Error_Chief_Email         |
   # | Valid_Data_All_Fields | Invalid_Email_Data_One_Emoji                           | Field_Error_Chief_Email         |
 
-  @rsp-1861 @rsp-3670 @jsEnabled
+  @rsp-1861 @rsp-3670 @rsp-4200 @jsEnabled
   Scenario Outline: Validate user is able to fill sponsor organisation in project identifiers page with valid data
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
@@ -590,7 +585,7 @@ Feature: Create Amendment - Create Project
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
-    Then I can validate the field values of '<Project_Details_Title>' page '<Project_Identifiers>' page and '<Research_Locations>' page
+    Then I can validate the field values of '<Project_Details_Title>' page '<Chief_Investigator>' page '<Research_Locations>' and '<Project_Identifiers>' page
     And I click the change link '<Change_Link_Field>' on review your answers page
     Then I can see the project identifiers page
     Then I can see previously saved values for '<Project_Identifiers>' displayed on the project identifiers page
@@ -600,7 +595,7 @@ Feature: Create Amendment - Create Project
     When I click the 'Save_Changes' button on the 'Project_Identifiers_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
-    Then I can validate the field values of '<Project_Details_Title>' page '<Project_Identifiers_Change>' page and '<Research_Locations>' page
+    Then I can validate the field values of '<Project_Details_Title>' page '<Chief_Investigator>' page '<Research_Locations>' and '<Project_Identifiers_Change>' page
     And I click the change link '<Change_Link_Field>' on review your answers page
     Then I can see the project identifiers page
     Then I can see previously saved values for '<Project_Identifiers_Change>' displayed on the project identifiers page
@@ -610,7 +605,7 @@ Feature: Create Amendment - Create Project
     When I click the 'Save_Changes' button on the 'Project_Identifiers_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
-    Then I can validate the field values of '<Project_Details_Title>' page '<Project_Identifiers_Change_Blank>' page and '<Research_Locations>' page
+    Then I can validate the field values of '<Project_Details_Title>' page '<Chief_Investigator>' page '<Research_Locations>' and '<Project_Identifiers_Change_Blank>' page
     And I click the enter link '<Enter_Link_Field>' on review your answers page
     Then I can see the project identifiers page
     Then I can see previously saved values for '<Project_Identifiers_Change_Blank>' displayed on the project identifiers page
@@ -625,7 +620,7 @@ Feature: Create Amendment - Create Project
       | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Slash        | Sponsor_Organisation_Text_Blank  | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation | Back            |
       | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Hyphen       | Sponsor_Organisation_Text_Blank  | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation | Back            |
 
-  @rsp-1861 @rsp-3670 @jsEnabled
+  @rsp-1861 @rsp-3670 @rsp-4200 @jsEnabled
   Scenario Outline: Validate the primary sponsor organisation suggestion list in project identifiers page
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
@@ -674,7 +669,7 @@ Feature: Create Amendment - Create Project
       | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Start_Space |
       | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space  |
 
-  @rsp-3939 @searchSelectSponsorOrgJsDisabled @jsDisabled
+  @rsp-3939 @rsp-4200 @searchSelectSponsorOrgJsDisabled @jsDisabled
   Scenario Outline: Validate user is able to search and select sponsor organisation in project identifiers page with valid data
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
@@ -701,7 +696,7 @@ Feature: Create Amendment - Create Project
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
-    Then I can validate the field values of '<Project_Details_Title>' page '<Chief_Investigator>' page and '<Research_Locations>' page
+    Then I can validate the field values of '<Project_Details_Title>' page '<Chief_Investigator>' page '<Research_Locations>' and '<Project_Identifiers>' page
     And I click the change link '<Change_Link_Field>' on review your answers page
     Then I can see the project identifiers page
     Then I can see previously saved values for '<Project_Identifiers>' displayed on the project identifiers page
@@ -711,7 +706,7 @@ Feature: Create Amendment - Create Project
     When I click the 'Save_Changes' button on the 'Project_Identifiers_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
-    Then I can validate the field values of '<Project_Details_Title>' page '<Project_Identifiers_Change>' page and '<Research_Locations>' page
+    Then I can validate the field values of '<Project_Details_Title>' page '<Chief_Investigator>' page '<Research_Locations>' and '<Project_Identifiers_Change>' page
     And I click the change link '<Change_Link_Field>' on review your answers page
     Then I can see the project identifiers page
     Then I can see previously saved values for '<Project_Identifiers_Change>' displayed on the project identifiers page
@@ -721,14 +716,14 @@ Feature: Create Amendment - Create Project
     When I click the 'Save_Changes' button on the 'Project_Identifiers_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
-    Then I can validate the field values of '<Project_Details_Title>' page '<Project_Identifiers_Change_Blank>' page and '<Research_Locations>' page
+    Then I can validate the field values of '<Project_Details_Title>' page '<Chief_Investigator>' page '<Research_Locations>' and '<Project_Identifiers_Change_Blank>' page
     And I click the enter link '<Enter_Link_Field>' on review your answers page
     Then I can see the project identifiers page
     Then I can see previously saved values for '<Project_Identifiers_Change_Blank>' displayed on the project identifiers page
     And I capture the page screenshot
 
     Examples:
-      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Add_Project | Navigation_Button_Third | Validation_Text | Project_Details_Title | Key_Project_Roles     | Chief_Investigator    | Project_Identifiers   | Project_Identifiers_Change             | Project_Identifiers_Change_Blank | Research_Locations    | Change_Link_Field            | Enter_Link_Field             | Navigation_Link |
+      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Add_Project | Navigation_Button_Third | Validation_Text | Project_Details_Title | Chief_Investigator    | Chief_Investigator    | Project_Identifiers   | Project_Identifiers_Change             | Project_Identifiers_Change_Blank | Research_Locations    | Change_Link_Field            | Enter_Link_Field             | Navigation_Link |
       | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Full_Text_Aalborg | Sponsor_Organisation_Text_Blank  | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation | Back            |
       | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Brackets     | Sponsor_Organisation_Text_Blank  | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation | Back            |
       | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Amp          | Sponsor_Organisation_Text_Blank  | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation | Back            |
@@ -736,7 +731,7 @@ Feature: Create Amendment - Create Project
       | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Slash        | Sponsor_Organisation_Text_Blank  | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation | Back            |
       | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Hyphen       | Sponsor_Organisation_Text_Blank  | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation | Back            |
 
-  @rsp-3939 @validateSponsorOrganisationResultsJsDisabled @jsDisabled
+  @rsp-3939 @rsp-4200 @validateSponsorOrganisationResultsJsDisabled @jsDisabled
   Scenario Outline: Validate the primary sponsor organisation search results in project identifiers page
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
@@ -757,7 +752,7 @@ Feature: Create Amendment - Create Project
     And With JS disabled, I search with invalid '<Sponsor_Organisation_Invalid>' for primary sponsor organisation search box and validate the search results along with '<Sponsor_Organisation_Jsdisabled_Search_Hint_Labels>'
     And I capture the page screenshot
     And With JS disabled, I search with invalid min characters '<Sponsor_Organisation_Min>' for primary sponsor organisation search box
-    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Chief_Investigator_Page'
+    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Project_Identifiers_Page'
     And I capture the page screenshot
 
     Examples:

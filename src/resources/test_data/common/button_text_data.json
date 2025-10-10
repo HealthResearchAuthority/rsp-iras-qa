@@ -8,6 +8,7 @@
   },
   "Home_Page": {
     "New_Application": "Create New Application",
+    "Start_Now": "Start now",
     "Login": "Sign In",
     "Create_Project_Record": "Create project record"
   },
@@ -70,7 +71,8 @@
     "Enable_User_Record": "Enable user record"
   },
   "Confirmation_Page": {
-    "Confirm": "Confirm"
+    "Confirm": "Confirm",
+    "Return_To_Project_Overview": "Return to project overview"
   },
   "Create_Review_Body_Page": {
     "Continue": "Continue"
@@ -109,7 +111,8 @@
     "Status": "Status"
   },
   "Review_Your_Answers_Page": {
-    "Confirm_Project_Details": "Confirm project details"
+    "Confirm_Project_Details": "Confirm project details",
+    "Save_For_Later": "Save for later"
   },
   "Manage_Users_Page": {
     "Search": "Search",
@@ -190,7 +193,8 @@
   },
   "Review_Changes_Planned_End_Date_Page": {
     "Save_Continue": "Save and continue",
-    "Save_For_Later": "Save for later"
+    "Save_For_Later": "Save for later",
+    "Save_Changes": "Save changes"
   },
   "Project_Overview_Page": {
     "Create_New_Modification": "Create new modification"
@@ -207,9 +211,30 @@
   "Select_Study_Wide_Reviewer_Page": {
     "Complete_Assignment": "Complete assignment"
   },
-  "Modifications_Details_Page": {
+  "Add_Document_Details_Modifications_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later"
+  },
+  "Add_Document_Details_For_Specific_Document_Modifications_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later",
+    "Save_Changes": "Save changes"
+  },
+  "Review_Your_Document_Infomation_Modifications_Page": {
+    "Save_Continue": "Save and continue",
+    "Save_For_Later": "Save for later",
+    "Change_Details": "Change"
+  },
+  "Modification_Details_Page": {
     "Add_Another_Change": "Add another change to this modification",
     "Save_Continue_Review": "Save and continue to review",
+    "Save_For_Later": "Save for later"
+  },
+  "Sponsor_Reference_Page": {
+    "Save_Continue_Review": "Save and continue to review"
+  },
+  "Review_All_Changes_Page": {
+    "Send_Modification_To_Sponsor": "Send modification to sponsor",
     "Save_For_Later": "Save for later"
   },
   "Add_Document_Details_Page": {
@@ -220,5 +245,15 @@
     "Save_Continue": "Save and continue",
     "Save_For_Later": "Save for later",
     "Change_Details": "Change"
+  },
+  "Modification_Unfinished_Error_Page": {
+    "Return_To_Modification_Details": "Return to modification details"
+  },
+  "Confirm_Remove_Modification_Page": {
+    "Remove_Change": "Remove change"
+  },
+  "Project_Overview_Unfinished_Projects_Page": {
+    "Edit_Project_Record": "Edit project record",
+    "Delete_Project": "Delete project"
   }
 }

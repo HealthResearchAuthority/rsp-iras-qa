@@ -1,9 +1,10 @@
 {
   "Add_Documents_Modifications_Page": {
+    "page_title": "Add documents - Health research UK",
     "page_title_first_part": "Add documents for",
     "page_title_second_part": "- Health research UK",
     "heading": "Add documents for",
-    "hint_label": "Upload your documents here. You’ll add document details in the next step. \nDocuments must be less than 100MB and one of these file types: mp4, mov, avi, mkv, wmv, mpeg, mpg, webm, png, gif, bmp, svg, jpg, jpeg, doc, docx, dot, dotx, pdf, rtf, odt, ofd, xps, xls, xlsx, csv, ppt, pptx, txt, xml, html, htm, vcf, eml, msg",
+    "hint_label": "Upload your documents here. You’ll add document details in the next step.\nDocuments must be less than 100MB and one of these file types: mp4, mov, avi, mkv, wmv, mpeg, mpg, webm, png, gif, bmp, svg, jpg, jpeg, doc, docx, dot, dotx, pdf, rtf, odt, ofd, xps, xls, xlsx, csv, ppt, pptx, txt, xml, html, htm, vcf, eml, msg",
     "upload_document_header": "Upload document",
     "choose_files_button_label": "Choose files",
     "upload_document_component_hint_label": "or drop files",
@@ -11,5 +12,11 @@
   },
   "Field_Error_Upload_Documents_Mandatory": {
     "upload_files_input": "Please upload at least one document"
+  },
+  "Invalid_Format_File_Error": {
+    "upload_files_input": " must be a permitted file type"
+  },
+  "Duplicate_File_Upload_Error": {
+    "upload_files_input": " has already been uploaded"
   }
 }
