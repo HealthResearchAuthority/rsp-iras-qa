@@ -6,8 +6,77 @@
     "select_a_sponsor_organisation_hint_text": "Start to type an organisation or select from suggestions"
   },
   "Setup_New_Sponsor_Organisation": {
-    "Valid_Data_All_Fields": {
+    "Sponsor_Organisation_One": {
       "sponsor_organisation_text": "CHESTERFIELD ROYAL HOSPITAL NHS FOUNDATION TRUST"
+    },
+    "Sponsor_Organisation_Two": {
+      "sponsor_organisation_text": "AIREDALE NHS FOUNDATION TRUST"
+    },
+    "Sponsor_Organisation_Three": {
+      "sponsor_organisation_text": "ALDER HEY CHILDREN'S NHS FOUNDATION TRUST"
+    },
+    "Sponsor_Organisation_Four": {
+      "sponsor_organisation_text": "ASHFORD AND ST PETER'S HOSPITALS NHS FOUNDATION TRUST"
+    },
+    "Sponsor_Organisation_Five": {
+      "sponsor_organisation_text": "BARKING, HAVERING AND REDBRIDGE UNIVERSITY HOSPITALS NHS TRUST"
+    },
+    "Sponsor_Organisation_Six": {
+      "sponsor_organisation_text": "AVON AND WILTSHIRE MENTAL HEALTH PARTNERSHIP NHS TRUST"
+    },
+    "Sponsor_Organisation_Seven": {
+      "sponsor_organisation_text": "BIRMINGHAM AND SOLIHULL MENTAL HEALTH NHS FOUNDATION TRUST"
+    },
+    "Sponsor_Organisation_Eight": {
+      "sponsor_organisation_text": "BLACKPOOL TEACHING HOSPITALS NHS FOUNDATION TRUST"
+    },
+    "Sponsor_Organisation_Nine": {
+      "sponsor_organisation_text": "BOLTON NHS FOUNDATION TRUST"
+    },
+    "Sponsor_Organisation_Ten": {
+      "sponsor_organisation_text": "BRADFORD TEACHING HOSPITALS NHS FOUNDATION TRUST"
+    },
+    "Sponsor_Organisation_Eleven": {
+      "sponsor_organisation_text": "BARNET, ENFIELD AND HARINGEY MENTAL HEALTH NHS TRUST"
+    },
+    "Sponsor_Organisation_Twelve": {
+      "sponsor_organisation_text": "CAMBRIDGE UNIVERSITY HOSPITALS NHS FOUNDATION TRUST"
+    },
+    "Sponsor_Organisation_Thirteen": {
+      "sponsor_organisation_text": "CENTRAL AND NORTH WEST LONDON NHS FOUNDATION TRUST"
+    },
+    "Sponsor_Organisation_Fourteen": {
+      "sponsor_organisation_text": "CHELSEA AND WESTMINSTER HOSPITAL NHS FOUNDATION TRUST"
+    },
+    "Sponsor_Organisation_Fifteen": {
+      "sponsor_organisation_text": "COUNTESS OF CHESTER HOSPITAL NHS FOUNDATION TRUST"
+    },
+    "Sponsor_Organisation_Sixteen": {
+      "sponsor_organisation_text": "DONCASTER AND BASSETLAW TEACHING HOSPITALS NHS FOUNDATION TRUST"
+    },
+    "Sponsor_Organisation_Seventeen": {
+      "sponsor_organisation_text": "4TECH CARDIO IRELAND LIMITED"
+    },
+    "Sponsor_Organisation_Eighteen": {
+      "sponsor_organisation_text": "Biochemics Inc"
+    },
+    "Sponsor_Organisation_Nineteen": {
+      "sponsor_organisation_text": "Ministry of Defence - Defence Science Technology Laboratory"
+    },
+    "Sponsor_Organisation_Twenty": {
+      "sponsor_organisation_text": "Edinburgh Napier University"
+    },
+    "Sponsor_Organisation_TwentyOne": {
+      "sponsor_organisation_text": "BIRMINGHAM COMMUNITY HEALTHCARE NHS FOUNDATION TRUST"
+    },
+    "Sponsor_Organisation_TwentyTwo": {
+      "sponsor_organisation_text": "Academic Medical Center at the University of Amsterdam (Netherlands)"
+    },
+    "Sponsor_Organisation_TwentyThree": {
+      "sponsor_organisation_text": "OXFORD HEALTH NHS FOUNDATION TRUST"
+    },
+    "Sponsor_Organisation_TwentyFour": {
+      "sponsor_organisation_text": "KETTERING GENERAL HOSPITAL NHS FOUNDATION TRUST"
     }
   },
   "Duplicate_Sponsor_Organisation_Setup_Error": {

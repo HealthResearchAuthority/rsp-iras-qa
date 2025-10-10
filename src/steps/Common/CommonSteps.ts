@@ -1270,3 +1270,16 @@ Then(
     }
   }
 );
+
+Then(
+  'I click the view edit link of the {string}',
+  async ({ manageReviewBodiesPage, manageSponsorOrganisationPage }, recordType: string) => {
+    if (recordType === 'newly created review body') {
+      const createdReviewBodyRow = await manageReviewBodiesPage.getReviewBodyRow();
+      await createdReviewBodyRow.locator(manageReviewBodiesPage.actionsLink).click();
+    } else if (recordType === 'newly added sponsor organisation') {
+      const createdSponsorOrgRow = await manageSponsorOrganisationPage.getSponsorOrgRow();
+      await createdSponsorOrgRow.locator(manageSponsorOrganisationPage.actionsLink).click();
+    }
+  }
+);

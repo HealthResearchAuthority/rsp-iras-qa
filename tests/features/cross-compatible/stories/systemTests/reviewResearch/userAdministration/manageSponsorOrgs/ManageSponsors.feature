@@ -6,7 +6,106 @@ Feature: User Administration: Manage Sponsor Organisations
         And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
         Then I can see the 'Manage_Sponsor_Organisations_Page'
 
-    @ViewListOfSponsorOrgs @rsp-5229
+    @ViewListOfSponsorOrgs @rsp-5229 @rsp-5230
+    Scenario Outline: Verify the user can add a sponsor organisation from manage sponsor organisation page and view the list of sponsor organisation in alphabetical order of organisation name
+        And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
+        Then I can see the 'Setup_New_Sponsor_Organisation_Page'
+        And I capture the page screenshot
+        When I select a sponsor organisation in the set up a new sponsor organisation page using '<Setup_New_Sponsor_Organisation>'
+        And I capture the page screenshot
+        And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
+        And I capture the page screenshot
+        And I can see the check and set up a sponsor organisation profile page for '<Setup_New_Sponsor_Organisation>'
+        When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
+        Then I can see the 'Manage_Sponsor_Organisations_Page'
+        Then I can see the sponsor organisation added successful message on manage sponsor organisation page
+        And I capture the page screenshot
+        And I can see the list is sorted by default in the alphabetical order of the 'Organisation Name'
+        And I capture the page screenshot
+        When I enter 'name of the newly added sponsor organisation' into the search field
+        And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+        And I can see the 'newly added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
+        And I capture the page screenshot
+        Examples:
+            | Setup_New_Sponsor_Organisation    | Status_Enabled |
+            | Sponsor_Organisation_Chesterfield | Enabled        |
+
+    @verifyManageSponsorOrgsPageBackButtonFlow @rsp-5229
+    Scenario: Verify the user can navigate from 'Manage sponsor organisations' page by clicking 'Back' button
+        And I click the 'Back' link on the 'Manage_Sponsor_Organisations_Page'
+        And I capture the page screenshot
+        Then I can see the 'System_Administration_Page'
+
+    @rsp-5229 @ManageSponsorOrgsPagination @ManageSponsorOrgsPaginationFirstPage @ManageSponsorOrgsPaginationPageNumber @ManageSponsorOrgsPaginationNextLinkClick
+    Scenario: Verify pagination in manage sponsor organisation page when user is on the first page and navigate through each page by clicking page number or by by clicking next link
+        And I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
+        And I capture the page screenshot
+        And the default page size should be 'twenty'
+        And the 'Next' button will be 'available' to the user
+        And the 'Previous' button will be 'not available' to the user
+        And the current page number should be visually highlighted to indicate the active page the user is on
+        And I capture the page screenshot
+        Then I sequentially navigate through each 'Manage_Sponsor_Organisations_Page' by clicking on '<Navigation_Method>' from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+        And I capture the page screenshot
+        Examples:
+            | Navigation_Method |
+            | page number       |
+            | next link         |
+
+    @rsp-5229 @ManageSponsorOrgsPagination @ManageSponsorOrgsPaginationLastPage @ManageSponsorOrgsPaginationPageNumber @ManageSponsorOrgsPaginationPreviousLinkClick
+    Scenario: Verify pagination in manage sponsor organisation page when user is on the last page and navigate through each page by clicking page number or by by clicking on previous link
+        And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
+        And I capture the page screenshot
+        And the 'Previous' button will be 'available' to the user
+        And the 'Next' button will be 'not available' to the user
+        And I capture the page screenshot
+        Then I sequentially navigate through each 'Manage_Sponsor_Organisations_Page' by clicking on '<Navigation_Method>' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
+        And I capture the page screenshot
+        Examples:
+            | Navigation_Method |
+            | page number       |
+            | previous link     |
+
+    @rsp-5229 @ManageSponsorOrgsSearchResultsFound
+    Scenario Outline: Verify search results in manage sponsor organisation page when user search by first and last organisation names
+        When I enter the '<Field_Name>' of the '<Position>' item in the list, into the search field
+        And I capture the page screenshot
+        And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+        And I capture the page screenshot
+        Then the system displays review bodies matching the search criteria
+        And I capture the page screenshot
+        Examples:
+            | Field_Name        | Position |
+            | Organisation_Name | First    |
+            | Organisation_Name | Last     |
+
+    @rsp-5229 @ManageSponsorOrgsSearchNoResultsFound
+    Scenario Outline: Verify no results found message will be presented to the user in manage sponsor organisation page if there is no sponsor organisation on the system that matches the search criteria
+        When I fill the search input for searching 'sponsor organisations' with '<Search_Query>' as the search query
+        And I capture the page screenshot
+        And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+        And I capture the page screenshot
+        Then the no search results found message is displayed
+        And I capture the page screenshot
+        Examples:
+            | Search_Query      |
+            | Non_Existant_Data |
+
+    @rsp-5229 @ManageSponsorOrgsSearchResultsFound
+    Scenario Outline: Verify results are displayed when the user searches with existing sponsor organisation details
+        When I fill the search input for searching 'sponsor organisations' with '<Search_Query>' as the search query
+        And I capture the page screenshot
+        And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+        And I capture the page screenshot
+        Then the system displays review bodies matching the search criteria
+        And I capture the page screenshot
+        Examples:
+            | Search_Query           |
+            | Existing_QA_Data_One   |
+            | Existing_QA_Data_Two   |
+            | Existing_QA_Data_Three |
+
+    @ViewListOfSponsorOrgs @rsp-5229 @rsp-5230
     Scenario Outline: Verify the user can add a sponsor organisation from manage sponsor organisation page
         And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
         Then I can see the 'Setup_New_Sponsor_Organisation_Page'
@@ -20,15 +119,13 @@ Feature: User Administration: Manage Sponsor Organisations
         Then I can see the 'Manage_Sponsor_Organisations_Page'
         Then I can see the sponsor organisation added successful message on manage sponsor organisation page
         And I capture the page screenshot
-        # alphabetical sorting in Manage_Sponsor_Organisations_Page'
         And I can see the list is sorted by default in the alphabetical order of the 'Organisation Name'
         And I capture the page screenshot
-        # find the newly created review body in the list with 'active' status
         When I enter 'name of the newly added sponsor organisation' into the search field
         And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
         And I can see the 'newly added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
         And I capture the page screenshot
-        Then I click the view edit link
+        Then I click the view edit link of the newly added sponsor organisation
         And I capture the page screenshot
         And I can see the sponsor organisation profile page
         # validate review body profile page with the created review body
@@ -68,14 +165,10 @@ Feature: User Administration: Manage Sponsor Organisations
         Then the system displays no results found message in the user list page of the review body
 
         Examples:
-            | Setup_New_Sponsor_Organisation | Audit_History       | Status_Enabled | Status_Disabled |
-            | Valid_Data_In_All_Fields       | Disable_Review_Body | Enabled        | Disabled        |
+            | Setup_New_Sponsor_Organisation    | Audit_History       | Status_Enabled | Status_Disabled |
+            | Sponsor_Organisation_Chesterfield | Disable_Review_Body | Enabled        | Disabled        |
 
-    @verifyManageSponsorOrgsPageBackButtonFlow @rsp-2569
-    Scenario: Verify the user can navigate from 'Manage sponsor organisations' page by clicking 'Back' button
-        And I click the 'Back' link on the 'Manage_Sponsor_Organisations_Page'
-        And I capture the page screenshot
-        Then I can see the 'System_Administration_Page'
+
 
     #   When I click the 'Cancel' button on the 'Check_Setup_Sponsor_Organisation_Page'
 

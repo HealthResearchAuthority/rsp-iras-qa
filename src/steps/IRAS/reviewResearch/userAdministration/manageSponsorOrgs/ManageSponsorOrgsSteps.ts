@@ -4,11 +4,7 @@ const { When, Then } = createBdd(test);
 
 When(
   'I can see the {string} should be present in the list with {string} status in the manage sponsor organisation page',
-  async (
-    { manageSponsorOrganisationPage, manageReviewBodiesPage, setupNewSponsorOrganisationPage },
-    inputType: string,
-    status: string
-  ) => {
+  async ({ manageSponsorOrganisationPage, setupNewSponsorOrganisationPage }, inputType: string, status: string) => {
     const sponsorOrgStatus = await manageSponsorOrganisationPage.getSponsorStatus(status);
     const sponsorOrgName = await manageSponsorOrganisationPage.getSponsorOrgName(
       inputType,
@@ -21,7 +17,7 @@ When(
     const foundRecords = await manageSponsorOrganisationPage.findSponsorOrg(sponsorOrgName, sponsorOrgStatus);
     expect(foundRecords).toBeDefined();
     expect(foundRecords).toHaveCount(1);
-    await manageReviewBodiesPage.setReviewBodyRow(foundRecords);
+    await manageSponsorOrganisationPage.setSponsorOrgRow(foundRecords);
   }
 );
 

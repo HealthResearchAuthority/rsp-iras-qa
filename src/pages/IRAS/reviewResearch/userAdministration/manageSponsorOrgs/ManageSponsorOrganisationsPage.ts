@@ -121,11 +121,11 @@ export default class ManageSponsorOrganisationsPage {
     this._org_name = value;
   }
 
-  async getReviewBodyRow(): Promise<Locator> {
+  async getSponsorOrgRow(): Promise<Locator> {
     return this._row_val;
   }
 
-  async setReviewBodyRow(value: Locator): Promise<void> {
+  async setSponsorOrgRow(value: Locator): Promise<void> {
     this._row_val = value;
   }
 
