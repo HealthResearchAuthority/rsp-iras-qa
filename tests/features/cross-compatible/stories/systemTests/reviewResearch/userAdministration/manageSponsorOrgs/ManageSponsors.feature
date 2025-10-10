@@ -79,9 +79,22 @@ Feature: User Administration: Manage Sponsor Organisations
 
     #   When I click the 'Cancel' button on the 'Check_Setup_Sponsor_Organisation_Page'
 
-    #  Duplicate sponsort org error message validation to be added later
+    #
 
     # sponsor org search- JS enabled and disabled scenarios to be added later-search results, no results found and blank search scenarios
+
+    # Validate sponsor organisation search- when JavaScript is enabled
+
+    # Scenario 1:- User types less than minimum 3 characters
+    # Scenario 2:- User types 3 or more characters
+    # Scenario 3:- User searches for a sponsor organisation which doesn't exists-This sponsor organisation does not exist
+    # Scenario 4:- User searches for a sponsor organisation which has already been set up and exists in the system,-A sponsor organisation with this name already exists
+    # Scenario 4:- User types leading and trailing spaces with minimum 3 characters
+    # Scenario 5:- User types special characters
+    # Scenario 6:- User types numeric characters
+    # Scenario 7:- User types a combination of alphanumeric and special characters
+
+    # Validate sponsor organisation search- when JavaScript is disabled
 
     # no results found scenario to be added later for manage sponsor orgs page
 
