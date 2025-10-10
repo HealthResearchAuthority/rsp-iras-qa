@@ -111,7 +111,13 @@ When(
 Then(
   'the result count displayed at the top accurately reflects the number of records shown in the search modifications page',
   async ({ commonItemsPage, searchModificationsPage }) => {
-    const expectedResultCountLabel = await searchModificationsPage.getExpectedResultsCountLabel(commonItemsPage);
+    const rowCount = await searchModificationsPage.tableRows.count();
+    const totalPagesCount = await commonItemsPage.getNumberofTotalPages();
+    const expectedResultCount = (totalPagesCount - 1) * 20 + (rowCount - 1);
+    const expectedResultCountLabel = await searchModificationsPage.getExpectedResultsCountLabel(
+      commonItemsPage,
+      expectedResultCount
+    );
     const actualResultCountLabel = await searchModificationsPage.getActualResultsCountLabel(commonItemsPage);
     expect.soft(expectedResultCountLabel).toEqual(actualResultCountLabel);
   }

@@ -29,26 +29,7 @@ const deviceScaleFactoriPad = 2;
 const deviceScaleFactorAndroid = 3.5;
 
 export function getAuthState(user: string): string {
-  let authState: string;
-  switch (user.toLowerCase()) {
-    case 'system_admin':
-      authState = 'auth-storage-states/sysAdminUser.json';
-      break;
-    case 'applicant_user':
-      authState = 'auth-storage-states/applicantUser.json';
-      break;
-    case 'studywide_reviewer':
-      authState = 'auth-storage-states/studyWideReviewer.json';
-      break;
-    case 'team_manager':
-      authState = 'auth-storage-states/teamManager.json';
-      break;
-    case 'workflow_coordinator':
-      authState = 'auth-storage-states/workFlowCoordinator.json';
-      break;
-    default:
-      throw new Error(`${user} is not a valid option`);
-  }
+  const authState: string = `auth-storage-states/${user.toLowerCase()}.json`;
   return authState;
 }
 
@@ -631,4 +612,15 @@ export async function getRandomNumber(min: number, max: number): Promise<number>
   min = Math.ceil(min);
   max = Math.floor(max);
   return randomInt(min, max);
+}
+
+export async function getFormattedDate(): Promise<string> {
+  const today = new Date();
+  const options: Intl.DateTimeFormatOptions = {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+  };
+  const formattedDate = today.toLocaleDateString('en-GB', options);
+  return formattedDate;
 }

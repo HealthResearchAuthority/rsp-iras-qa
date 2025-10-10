@@ -1,6 +1,7 @@
 import { test as base } from 'playwright-bdd';
 import AxeBuilder from '@axe-core/playwright';
 import { getAuthState } from '../utils/UtilFunctions';
+import * as loginPageTestData from '../resources/test_data/common/login_page_data.json';
 import CommonItemsPage from '../pages/Common/CommonItemsPage';
 import LoginPage from '../pages/Common/LoginPage';
 import HomePage from '../pages/IRAS/HomePage';
@@ -21,7 +22,8 @@ import CreateProjectRecordPage from '../pages/IRAS/makeChanges/CreateProjectReco
 import ProjectDetailsIRASPage from '../pages/IRAS/makeChanges/ProjectDetailsIRASPage';
 import ProjectDetailsTitlePage from '../pages/IRAS/makeChanges/ProjectDetailsTitlePage';
 import ReseachLocationsPage from '../pages/IRAS/makeChanges/ResearchLocationsPage';
-import KeyProjectRolesPage from '../pages/IRAS/makeChanges/KeyProjectRolesPage';
+import ChiefInvestigatorPage from '../pages/IRAS/makeChanges/ChiefInvestigatorPage';
+import ProjectIdentifiersPage from '../pages/IRAS/makeChanges/ProjectIdentifiersPage';
 import ReviewYourApplicationPage from '../pages/IRAS/makeChanges/ReviewYourApplicationPage';
 import ManageReviewBodiesPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/ManageReviewBodiesPage';
 import CreateReviewBodyPage from '../pages/IRAS/reviewResearch/userAdministration/manageReviewBodies/CreateReviewBodyPage';
@@ -53,9 +55,9 @@ import SearchModificationsPage from '../pages/IRAS/reviewResearch/receiveAmendme
 import ModificationsReadyToAssignPage from '../pages/IRAS/reviewResearch/receiveAmendments/ModificationsReadyToAssignPage';
 import ApprovalsPage from '../pages/IRAS/reviewResearch/approvals/ApprovalsPage';
 import ModificationsCommonPage from '../pages/IRAS/makeChanges/modifications/ModificationsCommonPage';
-import PlannedEndDateChangePage from '../pages/IRAS/makeChanges/modifications/changePlannedEndDate/PlannedEndDateChangePage';
-import AffectedOrganisationSelectionPage from '../pages/IRAS/makeChanges/modifications/changePlannedEndDate/AffectedOrganisationSelectionPage';
-import AffectedOrganisationQuestionsPage from '../pages/IRAS/makeChanges/modifications/changePlannedEndDate/AffectedOrganisationQuestionsPage';
+import PlannedEndDateChangePage from '../pages/IRAS/makeChanges/modifications/PlannedEndDateChangePage';
+import AffectedOrganisationSelectionPage from '../pages/IRAS/makeChanges/modifications/applicabilityScreens/AffectedOrganisationSelectionPage';
+import AffectedOrganisationQuestionsPage from '../pages/IRAS/makeChanges/modifications/applicabilityScreens/AffectedOrganisationQuestionsPage';
 import ReviewChangesPlannedEndDatePage from '../pages/IRAS/makeChanges/modifications/changePlannedEndDate/ReviewChangesPlannedEndDatePage';
 import AddDocumentsModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/AddDocumentsModificationsPage';
 import ReviewUploadedDocumentsModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/ReviewUploadedDocumentsModificationsPage';
@@ -63,6 +65,13 @@ import ModificationsReceivedCommonPage from '../pages/IRAS/reviewResearch/receiv
 import SelectStudyWideReviewerPage from '../pages/IRAS/reviewResearch/receiveAmendments/SelectStudyWideReviewerPage';
 import ModificationsAssignmentConfirmationPage from '../pages/IRAS/reviewResearch/receiveAmendments/ModificationsAssignmentConfirmationPage';
 import MyModificationsTasklistPage from '../pages/IRAS/reviewResearch/receiveAmendments/MyModificationsTasklistPage';
+import SponsorReferencePage from '../pages/IRAS/makeChanges/modifications/SponsorReferencePage';
+import AddDocumentDetailsModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/AddDocumentDetailsModificationsPage';
+import AddDocumentDetailsForSpecificDocumentModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/AddDocumentDetailsForSpecificDocumentModificationsPage';
+import ReviewYourDocumentInformationModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/ReviewYourDocumentInfomationModificationsPage';
+import ReviewAllChangesPage from '../pages/IRAS/makeChanges/modifications/ReviewAllChangesPage';
+import ProjectOverviewUnfinishedProjectsPage from '../pages/IRAS/makeChanges/ProjectOverviewUnfinishedProjectsPage';
+import ModificationsDetailsPage from '../pages/IRAS/makeChanges/modifications/ModificationsDetailsPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -85,7 +94,8 @@ type CustomFixtures = {
   projectDetailsIRASPage: ProjectDetailsIRASPage;
   projectDetailsTitlePage: ProjectDetailsTitlePage;
   reseachLocationsPage: ReseachLocationsPage;
-  keyProjectRolesPage: KeyProjectRolesPage;
+  chiefInvestigatorPage: ChiefInvestigatorPage;
+  projectIdentifiersPage: ProjectIdentifiersPage;
   reviewYourApplicationPage: ReviewYourApplicationPage;
   projectOverviewPage: ProjectOverviewPage;
   reviewYourAnswersPage: ReviewYourAnswersPage;
@@ -127,6 +137,13 @@ type CustomFixtures = {
   modificationsAssignmentConfirmationPage: ModificationsAssignmentConfirmationPage;
   myModificationsTasklistPage: MyModificationsTasklistPage;
   modificationsReceivedCommonPage: ModificationsReceivedCommonPage;
+  sponsorReferencePage: SponsorReferencePage;
+  addDocumentDetailsModificationsPage: AddDocumentDetailsModificationsPage;
+  addDocumentDetailsForSpecificDocumentModificationsPage: AddDocumentDetailsForSpecificDocumentModificationsPage;
+  reviewYourDocumentInformationModificationsPage: ReviewYourDocumentInformationModificationsPage;
+  reviewAllChangesPage: ReviewAllChangesPage;
+  modificationsDetailsPage: ModificationsDetailsPage;
+  projectOverviewUnfinishedProjectsPage: ProjectOverviewUnfinishedProjectsPage;
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -211,8 +228,12 @@ export const test = base.extend<CustomFixtures>({
     await use(new ReseachLocationsPage(page));
   },
 
-  keyProjectRolesPage: async ({ page }, use) => {
-    await use(new KeyProjectRolesPage(page));
+  chiefInvestigatorPage: async ({ page }, use) => {
+    await use(new ChiefInvestigatorPage(page));
+  },
+
+  projectIdentifiersPage: async ({ page }, use) => {
+    await use(new ProjectIdentifiersPage(page));
   },
 
   reviewYourApplicationPage: async ({ page }, use) => {
@@ -373,27 +394,63 @@ export const test = base.extend<CustomFixtures>({
     await use(new MyModificationsTasklistPage(page));
   },
 
+  projectOverviewUnfinishedProjectsPage: async ({ page }, use) => {
+    await use(new ProjectOverviewUnfinishedProjectsPage(page));
+  },
+
   modificationsReceivedCommonPage: async ({ page }, use) => {
     await use(new ModificationsReceivedCommonPage(page));
   },
 
+  sponsorReferencePage: async ({ page }, use) => {
+    await use(new SponsorReferencePage(page));
+  },
+
+  addDocumentDetailsModificationsPage: async ({ page }, use) => {
+    await use(new AddDocumentDetailsModificationsPage(page));
+  },
+
+  addDocumentDetailsForSpecificDocumentModificationsPage: async ({ page }, use) => {
+    await use(new AddDocumentDetailsForSpecificDocumentModificationsPage(page));
+  },
+
+  reviewYourDocumentInformationModificationsPage: async ({ page }, use) => {
+    await use(new ReviewYourDocumentInformationModificationsPage(page));
+  },
+  reviewAllChangesPage: async ({ page }, use) => {
+    await use(new ReviewAllChangesPage(page));
+  },
+  modificationsDetailsPage: async ({ page }, use) => {
+    await use(new ModificationsDetailsPage(page));
+  },
   makeAxeBuilder: async ({ page }, use) => {
     const makeAxeBuilder = () => new AxeBuilder({ page });
     await use(makeAxeBuilder);
   },
-
   //Set the Storage State based on User Tag from Feature File
   storageState: async ({ $tags, storageState }, use) => {
     if ($tags.includes('@SysAdminUser')) {
-      storageState = getAuthState('system_admin');
+      storageState = getAuthState(loginPageTestData.System_Admin.authPath);
     } else if ($tags.includes('@ApplicantUser')) {
-      storageState = getAuthState('applicant_user');
+      storageState = getAuthState(loginPageTestData.Applicant_User.authPath);
     } else if ($tags.includes('@StudyWideReviewer')) {
-      storageState = getAuthState('studywide_reviewer');
+      storageState = getAuthState(loginPageTestData.Studywide_Reviewer.authPath);
+    } else if ($tags.includes('@StudyWideReviewerNI')) {
+      storageState = getAuthState(loginPageTestData.Studywide_Reviewer_NI.authPath);
+    } else if ($tags.includes('@StudyWideReviewerSco')) {
+      storageState = getAuthState(loginPageTestData.Studywide_Reviewer_S.authPath);
+    } else if ($tags.includes('@StudyWideReviewerWal')) {
+      storageState = getAuthState(loginPageTestData.Studywide_Reviewer_W.authPath);
     } else if ($tags.includes('@TeamManager')) {
-      storageState = getAuthState('team_manager');
+      storageState = getAuthState(loginPageTestData.Team_Manager.authPath);
     } else if ($tags.includes('@WorkFlowCoordinator')) {
-      storageState = getAuthState('workflow_coordinator');
+      storageState = getAuthState(loginPageTestData.Workflow_Coordinator.authPath);
+    } else if ($tags.includes('@WorkFlowCoordinatorNI')) {
+      storageState = getAuthState(loginPageTestData.Workflow_Coordinator_NI.authPath);
+    } else if ($tags.includes('@WorkFlowCoordinatorSco')) {
+      storageState = getAuthState(loginPageTestData.Workflow_Coordinator_S.authPath);
+    } else if ($tags.includes('@WorkFlowCoordinatorWal')) {
+      storageState = getAuthState(loginPageTestData.Workflow_Coordinator_W.authPath);
     }
     await use(storageState);
   },

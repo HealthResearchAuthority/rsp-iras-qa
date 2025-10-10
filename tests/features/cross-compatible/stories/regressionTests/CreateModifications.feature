@@ -11,13 +11,18 @@ Feature: Create Amendment - Create Modifications
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    Then I fill the key project roles page with 'Valid_Data_All_Fields'
-    Then I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    Then I fill the chief investigator page with 'Valid_Data_All_Fields'
+    Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
     When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
     Then I can see the project overview page
 
   @SelectAreaOfChangeRegression
@@ -84,6 +89,7 @@ Feature: Create Amendment - Create Modifications
     And I select '<Area_Of_Change>' from area of change dropdown and '<Specific_Change>' from specific change dropdown
     And I capture the page screenshot
     When I click the 'Save_For_Later' button on the 'Select_Area_Of_Change_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
     Then I can see the project overview page
     And I capture the page screenshot
     Then I can see the modification progress saved successful message on project overview page

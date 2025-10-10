@@ -52,8 +52,8 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilityKeyProjectRoles @ApplicantUser
-  Scenario: Key Project Roles
+  @axeAccessibilityChiefInvestigator @ApplicantUser
+  Scenario: Chief investigator
     Given I have navigated to the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     When I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -61,7 +61,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    Then I can see the key project roles page
+    Then I can see the chief investigator page
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
@@ -75,8 +75,8 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    And I fill the key project roles page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    And I fill the chief investigator page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
     Then I can see the research locations page
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
@@ -106,8 +106,8 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    And I fill the key project roles page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    And I fill the chief investigator page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
     And I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     And I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
@@ -129,8 +129,8 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    And I fill the key project roles page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    And I fill the chief investigator page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
     And I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     Then I can see the review your answers page
@@ -139,15 +139,15 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I expect to receive no WCAG Violations
 
   @axeAccessibilityKeyProjectRolesSponsorOrganisation @ApplicantUser
-  Scenario: Key Project Roles - Primary Sponsor Organisation Suggestion List
+  Scenario: Chief investigator - Primary Sponsor Organisation Suggestion List
     Given I have navigated to the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     When I click the 'Start' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    Then I can see the key project roles page
-    And I fill the key project roles page with 'Sponsor_Organisation_Partial_Text_NHS'
+    Then I can see the chief investigator page
+    And I fill the chief investigator page with 'Sponsor_Organisation_Partial_Text_NHS'
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
@@ -946,8 +946,8 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    And I fill the key project roles page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    And I fill the chief investigator page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
     And I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     And I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
@@ -966,8 +966,8 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    And I fill the key project roles page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    And I fill the chief investigator page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
     And I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     And I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
@@ -990,8 +990,8 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
     When I click the 'Save_For_Later' button on the 'Project_Details_Title_Page'
-    Then I fill the key project roles page with 'Valid_Data_All_Fields'
-    Then I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    Then I fill the chief investigator page with 'Valid_Data_All_Fields'
+    Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     Then I can see the review your answers page
@@ -1016,8 +1016,8 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
     When I click the 'Save_For_Later' button on the 'Project_Details_Title_Page'
-    Then I fill the key project roles page with 'Valid_Data_All_Fields'
-    Then I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    Then I fill the chief investigator page with 'Valid_Data_All_Fields'
+    Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     Then I can see the review your answers page
@@ -1045,8 +1045,8 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    Then I fill the key project roles page with 'Valid_Data_All_Fields'
-    Then I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    Then I fill the chief investigator page with 'Valid_Data_All_Fields'
+    Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     Then I can see the review your answers page
@@ -1077,8 +1077,8 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    Then I fill the key project roles page with 'Valid_Data_All_Fields'
-    Then I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    Then I fill the chief investigator page with 'Valid_Data_All_Fields'
+    Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     Then I can see the review your answers page
@@ -1109,8 +1109,8 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    Then I fill the key project roles page with 'Valid_Data_All_Fields'
-    Then I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    Then I fill the chief investigator page with 'Valid_Data_All_Fields'
+    Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     Then I can see the review your answers page
@@ -1144,8 +1144,8 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    Then I fill the key project roles page with 'Valid_Data_All_Fields'
-    Then I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    Then I fill the chief investigator page with 'Valid_Data_All_Fields'
+    Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     Then I can see the review your answers page
@@ -1165,6 +1165,14 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
+  @axeAccessibilityProjectOverviewProjectDocumentsSpecificProject @ApplicantUser
+  Scenario: Project overview project documents page for a specific project
+    When I navigate to the project overview page of a specific project
+    When I click the 'Project_Documents' link on the 'Project_Overview_Page'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
   @axeAccessibilityProjectDocumentsAddDocumentModificationsPage @ApplicantUser
   Scenario: Modifications add document page
     Given I have navigated to the my research projects page
@@ -1174,11 +1182,18 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    Then I fill the key project roles page with 'Valid_Data_All_Fields'
-    Then I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    Then I fill the chief investigator page with 'Valid_Data_All_Fields'
+    Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
     When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     When I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I select 'Project_Documents' from area of change dropdown and 'Correction_Of_Typographical_Errors' from specific change dropdown
@@ -1189,7 +1204,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I expect to receive no WCAG Violations
 
   @axeAccessibilityProjectDocumentsReviewDocumentModificationsPage @ApplicantUser
-  Scenario: Modifications review document page
+  Scenario: Modifications project documents review page
     Given I have navigated to the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -1197,11 +1212,18 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    Then I fill the key project roles page with 'Valid_Data_All_Fields'
-    Then I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    Then I fill the chief investigator page with 'Valid_Data_All_Fields'
+    Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
     When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     When I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I select 'Project_Documents' from area of change dropdown and 'Correction_Of_Typographical_Errors' from specific change dropdown
@@ -1209,6 +1231,190 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I upload 'PNG_File' documents
     When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
     Then I can see the review uploaded documents for 'Correction_Of_Typographical_Errors' page
+    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+    When I can see the add document details for 'Correction_Of_Typographical_Errors' page
+    And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' for the uploaded 'PNG_File' in the add document details for specific document page
+    When I click the 'Save_Continue' button on the 'Add_Document_Details_For_Specific_Document_Modifications_Page'
+    When I click the 'Save_Continue' button on the 'Add_Document_Details_Modifications_Page'
+    And I can see the review your document information page
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityAddDocumentDetailsForSpecificDocumentPage @ApplicantUser
+  Scenario: Add document details for specific document page
+    Given I have navigated to the my research projects page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    Then I fill the chief investigator page with 'Valid_Data_All_Fields'
+    Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
+    Then I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    When I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I select 'Project_Documents' from area of change dropdown and 'Correction_Of_Typographical_Errors' from specific change dropdown
+    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+    And I upload 'PNG_File' documents
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    Then I can see the review uploaded documents for 'Correction_Of_Typographical_Errors' page
+    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+    When I can see the add document details for 'Correction_Of_Typographical_Errors' page
+    And I click on the document link with status 'Document_Status_Incomplete' and I can see the add document details for specific document page
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityProjectConfirmationPage @ApplicantUser
+  Scenario: Create Project confirmation page
+    Given I have navigated to the my research projects page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    When I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    And I fill the chief investigator page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
+    And I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    And I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityReviewAllChangesPage @ApplicantUser
+  Scenario: Review all changes page
+    Given I have navigated to the my research projects page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    Then I fill the chief investigator page with 'Valid_Data_All_Fields'
+    Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
+    Then I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I create 'Multiple_Changes_Planned_End_Date' for the created modification
+    When I click the 'Save_Continue_Review' button on the 'Modifications_Details_Page'
+    Then I can see the add sponsor reference page
+    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    Then I can see the review all changes page
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityModificationSentToSponsorConfirmationPage @ApplicantUser
+  Scenario: Modification sent to sponsor confirmation page
+    Given I have navigated to the my research projects page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    Then I fill the chief investigator page with 'Valid_Data_All_Fields'
+    Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
+    Then I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I create 'Multiple_Changes_Planned_End_Date' for the created modification
+    When I click the 'Save_Continue_Review' button on the 'Modifications_Details_Page'
+    Then I can see the add sponsor reference page
+    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    Then I can see the review all changes page
+    Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityModificationDetailsPage @ApplicantUser
+  Scenario: Create modification - modification details page
+    Given I have navigated to the my research projects page
+    And I can see the my research projects page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    Then I fill the chief investigator page with 'Valid_Data_All_Fields'
+    Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
+    Then I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    And I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    Then I can see the review your answers page
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I select 'Project_Design' from area of change dropdown and 'Planned_End_Date' from specific change dropdown
+    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+    Then I fill the planned project end date modifications page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Modifications_Page'
+    Then I can see the 'Affected_Organisation_Selection_Page' page for modifications
+    And I fill the which organisation this change affect modifications page with 'NHS_HSC_Only'
+    When I click the 'Save_Continue' button on the 'Affected_Organisation_Selection_Page'
+    Then I can see the change planned end date affected organisation questions page
+    And I fill the affected organisation questions page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Affected_Organisation_Questions_Page'
+    And I can see the review changes planned end date page
+    When I click the 'Save_Continue' button on the 'Review_Changes_Planned_End_Date_Page'
+    And I can see the modifications details page
+    And I capture the page screenshot
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+  @axeAccessibilityProjectOverviewUnfinishedPojectsPage @ApplicantUser
+  Scenario: Project overview unfinished projects -Create project
+    Given I have navigated to the my research projects page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    When I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    Then I can see the project details title page
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_For_Later' button on the 'Project_Details_Title_Page'
+    Then I can see the project overview for unfinished projects page
+    And I capture the page screenshot
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations

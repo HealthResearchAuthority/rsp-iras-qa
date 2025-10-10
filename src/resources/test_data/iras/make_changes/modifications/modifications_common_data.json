@@ -3,8 +3,38 @@
     "iras_id_label": "IRAS ID",
     "short_project_title_label": "Short project title",
     "modification_id_label": "Modification ID",
+    "status_label": "Status",
+    "draft_status_value": "Draft",
     "advanced_filter_label": "Advanced filter",
-    "remove_this_change_label": "Remove this change"
+    "remove_this_change_label": "Remove this change",
+    "Save_Continue_Button": "Save and continue",
+    "modification_type_substantial": "Substantial",
+    "modification_type_modification_of_important_detail": "Modification of important detail",
+    "modification_type_minor_modification": "Minor modification",
+    "category_n_a": "N/A",
+    "category_a": "A",
+    "category_b": "B",
+    "category_c": "C",
+    "review_type_review_required": "Review required",
+    "review_type_no_review_required": "No review required"
+  },
+  "Modification_Change_Question_Label_Texts": {
+    "planned_project_end_date_label": "Change to planned end date",
+    "affected_organisation_types_label": "Affected organisation types",
+    "affected_nhs_hsc_locations_label": "Affected NHS/HSC organisation locations",
+    "portion_of_nhs_hsc_organisations_affected_label": "Portion of NHS/HSC organisations affected",
+    "additional_resource_implications_label": "Additional resource implications",
+    "affected_non_nhs_hsc_locations_label": "Affected non-NHS/HSC locations"
+  },
+  "Modification_Sponsor_Details_Label_Texts": {
+    "sponsor_reference_label": "Sponsor reference (optional)",
+    "sponsor_date_label": "Date (optional)",
+    "sponsor_summary_label": "Brief summary of changes"
+  },
+  "Modification_Ranking_Label_Texts": {
+    "modification_type_label": "Modification type",
+    "category_label": "Category",
+    "review_type_label": "Review type"
   },
   "Specific_Change_Pages": {
     "Planned_End_Date": {
@@ -14,6 +44,85 @@
     "Affected_Organisation_Selection_Page": {
       "page_header": "Change to planned end date",
       "page_component_label": "Which organisation types does this change affect?"
+    }
+  },
+  "Ranking_Review_Type": {
+    "Review_Required": [],
+    "No_Review_Required": ["planned_end_date"]
+  },
+  "Ranking_Modification_Type": {
+    "substantial": [],
+    "modification_of_important_detail": ["planned_end_date"],
+    "minor_modification": []
+  },
+  "Ranking_Category": {
+    "n/a": ["correction_of_typographical_errors"],
+    "c": []
+  },
+  "Multiple_Changes_Planned_End_Date": {
+    "Planned_End_Date_NHS_All_Yes_All_Countries": {
+      "area_of_change_dropdown": "Project design",
+      "specific_change_dropdown": "Change to planned end date",
+      "planned_project_end_day_text": "01",
+      "planned_project_end_month_dropdown": "January",
+      "planned_project_end_year_text": "2030",
+      "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
+      "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "will_some_or_all_organisations_be_affected_question_radio": "All",
+      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "Yes"
+    },
+    "Planned_End_Date_NHS_Some_No_Eng": {
+      "area_of_change_dropdown": "Project design",
+      "specific_change_dropdown": "Change to planned end date",
+      "planned_project_end_day_text": "21",
+      "planned_project_end_month_dropdown": "February",
+      "planned_project_end_year_text": "2054",
+      "which_organisation_change_affect_checkbox": ["NHS/HSC"],
+      "where_organisation_change_affect_nhs_question_checkbox": ["England"],
+      "will_some_or_all_organisations_be_affected_question_radio": "Some",
+      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "No"
+    },
+    "Planned_End_Date_Non_NHS_All_Countries": {
+      "area_of_change_dropdown": "Project design",
+      "specific_change_dropdown": "Change to planned end date",
+      "planned_project_end_day_text": "01",
+      "planned_project_end_month_dropdown": "February",
+      "planned_project_end_year_text": "2030",
+      "which_organisation_change_affect_checkbox": ["Non-NHS/HSC"],
+      "where_organisation_change_affect_non_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
+    }
+  },
+  "Multiple_Changes_Planned_End_Date_Change": {
+    "Planned_End_Date_NHS_All_Yes_NI_W": {
+      "area_of_change_dropdown": "Project design",
+      "specific_change_dropdown": "Change to planned end date",
+      "planned_project_end_day_text": "23",
+      "planned_project_end_month_dropdown": "April",
+      "planned_project_end_year_text": "2058",
+      "which_organisation_change_affect_checkbox": ["NHS/HSC"],
+      "where_organisation_change_affect_nhs_question_checkbox": ["Northern Ireland", "Wales"],
+      "will_some_or_all_organisations_be_affected_question_radio": "Some",
+      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "No"
+    },
+    "Planned_End_Date_NHS_Some_No_Sc": {
+      "area_of_change_dropdown": "Project design",
+      "specific_change_dropdown": "Change to planned end date",
+      "planned_project_end_day_text": "21",
+      "planned_project_end_month_dropdown": "February",
+      "planned_project_end_year_text": "2054",
+      "which_organisation_change_affect_checkbox": ["NHS/HSC"],
+      "where_organisation_change_affect_nhs_question_checkbox": ["Scotland"],
+      "will_some_or_all_organisations_be_affected_question_radio": "Some",
+      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "No"
+    },
+    "Planned_End_Date_Non_NHS_Eng": {
+      "area_of_change_dropdown": "Project design",
+      "specific_change_dropdown": "Change to planned end date",
+      "planned_project_end_day_text": "31",
+      "planned_project_end_month_dropdown": "August",
+      "planned_project_end_year_text": "2036",
+      "which_organisation_change_affect_checkbox": ["Non-NHS/HSC"],
+      "where_organisation_change_affect_non_nhs_question_checkbox": ["England"]
     }
   }
 }

@@ -67,6 +67,9 @@ export default class ModificationsReadyToAssignPage {
     this.search_input_text = this.page.getByTestId('Search_IrasId');
     this.checkall_modification_checkbox = this.page.getByTestId('select-all-modifications');
     this.page_heading = this.page.getByTestId('title');
+    this.page_description = this.page
+      .getByRole('paragraph')
+      .getByText(this.modificationsReadyToAssignPageTestData.Modifications_Ready_To_Assign_Page.page_description);
     this.advanced_filter_label = this.page.getByRole('button', {
       name: this.modificationsReadyToAssignPageTestData.Modifications_Ready_To_Assign_Page.advanced_filter_label,
     });
@@ -122,8 +125,8 @@ export default class ModificationsReadyToAssignPage {
 
   async assertOnModificationsReadyToAssignPage() {
     await expect(this.page_heading).toBeVisible();
-    expect(await this.page.title()).toBe(
-      this.modificationsReadyToAssignPageTestData.Modifications_Ready_To_Assign_Page.title
-    );
+    expect
+      .soft(await this.page.title())
+      .toBe(this.modificationsReadyToAssignPageTestData.Modifications_Ready_To_Assign_Page.title);
   }
 }
