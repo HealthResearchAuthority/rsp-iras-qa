@@ -12,7 +12,7 @@ Then(
     const expectedCountryValues: string = dataset.country_checkbox.toString();
 
     await checkSetupSponsorOrganisationPage.assertOnCheckSetupSponsorOrganisationPage();
-    if (datasetName.startsWith('Valid_')) {
+    if (datasetName.startsWith('Sponsor_Organisation_')) {
       await expect(checkSetupSponsorOrganisationPage.organisation_name_value).toHaveText(
         await setupNewSponsorOrganisationPage.getUniqueOrgName()
       );

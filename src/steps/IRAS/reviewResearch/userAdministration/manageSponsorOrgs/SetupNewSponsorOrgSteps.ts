@@ -23,19 +23,19 @@ When(
               dataset,
               key,
               commonItemsPage,
-              searchModificationsPage
+              setupNewSponsorOrganisationPage
             );
           } else {
-            await searchModificationsPage.selectSponsorOrgJsDisabled(
+            await setupNewSponsorOrganisationPage.selectSponsorOrgJsDisabled(
               dataset,
               key,
               commonItemsPage,
-              searchModificationsPage
+              setupNewSponsorOrganisationPage
             );
           }
           delete dataset['sponsor_organisation_jsenabled_text'];
         } else {
-          await commonItemsPage.fillUIComponent(dataset, key, searchModificationsPage);
+          await commonItemsPage.fillUIComponent(dataset, key, setupNewSponsorOrganisationPage);
         }
       }
     }

@@ -77,6 +77,9 @@
     },
     "Sponsor_Organisation_TwentyFour": {
       "sponsor_organisation_text": "KETTERING GENERAL HOSPITAL NHS FOUNDATION TRUST"
+    },
+    "Sponsor_Organisation_TwentyFive": {
+      "sponsor_organisation_text": "LONDON NORTH WEST UNIVERSITY HEALTHCARE NHS TRUST"
     }
   },
   "Duplicate_Sponsor_Organisation_Setup_Error": {

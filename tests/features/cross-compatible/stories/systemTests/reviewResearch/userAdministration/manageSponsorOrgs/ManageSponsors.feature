@@ -6,7 +6,7 @@ Feature: User Administration: Manage Sponsor Organisations
         And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
         Then I can see the 'Manage_Sponsor_Organisations_Page'
 
-    @ViewListOfSponsorOrgs @rsp-5229 @rsp-5230
+    @ViewListOfSponsorOrgs @rsp-5229 @rsp-5230  @jsEnabled @Test
     Scenario Outline: Verify the user can add a sponsor organisation from manage sponsor organisation page and view the list of sponsor organisation in alphabetical order of organisation name
         And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
         Then I can see the 'Setup_New_Sponsor_Organisation_Page'
@@ -27,14 +27,53 @@ Feature: User Administration: Manage Sponsor Organisations
         And I can see the 'newly added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
         And I capture the page screenshot
         Examples:
-            | Setup_New_Sponsor_Organisation    | Status_Enabled |
-            | Sponsor_Organisation_Chesterfield | Enabled        |
+            | Setup_New_Sponsor_Organisation | Status_Enabled |
+            | Sponsor_Organisation_One       | Enabled        |
+    # | Sponsor_Organisation_Two         | Enabled        |
+    # | Sponsor_Organisation_Three       | Enabled        |
+    # | Sponsor_Organisation_Four        | Enabled        |
+    # | Sponsor_Organisation_Five        | Enabled        |
+    # | Sponsor_Organisation_Six         | Enabled        |
+    # | Sponsor_Organisation_Seven       | Enabled        |
+    # | Sponsor_Organisation_Eight       | Enabled        |
+    # | Sponsor_Organisation_Nine        | Enabled        |
+    # | Sponsor_Organisation_Ten         | Enabled        |
+    # | Sponsor_Organisation_Eleven      | Enabled        |
+    # | Sponsor_Organisation_Twelve      | Enabled        |
+    # | Sponsor_Organisation_Thirteen    | Enabled        |
+    # | Sponsor_Organisation_Fourteen    | Enabled        |
+    # | Sponsor_Organisation_Fifteen     | Enabled        |
+    # | Sponsor_Organisation_Sixteen     | Enabled        |
+    # | Sponsor_Organisation_Seventeen   | Enabled        |
+    # | Sponsor_Organisation_Eighteen    | Enabled        |
+    # | Sponsor_Organisation_Nineteen    | Enabled        |
+    # | Sponsor_Organisation_Twenty      | Enabled        |
+    # | Sponsor_Organisation_TwentyOne   | Enabled        |
+    # | Sponsor_Organisation_TwentyTwo   | Enabled        |
+    # | Sponsor_Organisation_TwentyThree | Enabled        |
+    # | Sponsor_Organisation_TwentyFour  | Enabled        |
 
     @verifyManageSponsorOrgsPageBackButtonFlow @rsp-5229
     Scenario: Verify the user can navigate from 'Manage sponsor organisations' page by clicking 'Back' button
         And I click the 'Back' link on the 'Manage_Sponsor_Organisations_Page'
         And I capture the page screenshot
         Then I can see the 'System_Administration_Page'
+
+    @CancelFromCheckSetupSponsorOrg @rsp-5229 @rsp-5230
+    Scenario Outline: Verify the user can cancel from check and set up a sponsor organisation profile page and navigate back to setup a new sponsor organisation page
+        And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
+        Then I can see the 'Setup_New_Sponsor_Organisation_Page'
+        And I capture the page screenshot
+        When I select a sponsor organisation in the set up a new sponsor organisation page using '<Setup_New_Sponsor_Organisation>'
+        And I capture the page screenshot
+        And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
+        And I capture the page screenshot
+        And I can see the check and set up a sponsor organisation profile page for '<Setup_New_Sponsor_Organisation>'
+        When I click the 'Cancel' button on the 'Check_Setup_Sponsor_Organisation_Page'
+        Then I can see the 'Setup_New_Sponsor_Organisation_Page'
+        Examples:
+            | Setup_New_Sponsor_Organisation  | Status_Enabled |
+            | Sponsor_Organisation_TwentyFive | Enabled        |
 
     @rsp-5229 @ManageSponsorOrgsPagination @ManageSponsorOrgsPaginationFirstPage @ManageSponsorOrgsPaginationPageNumber @ManageSponsorOrgsPaginationNextLinkClick
     Scenario: Verify pagination in manage sponsor organisation page when user is on the first page and navigate through each page by clicking page number or by by clicking next link
@@ -105,7 +144,7 @@ Feature: User Administration: Manage Sponsor Organisations
             | Existing_QA_Data_Two   |
             | Existing_QA_Data_Three |
 
-    @ViewListOfSponsorOrgs @rsp-5229 @rsp-5230
+    @EndToEndFlow @rsp-5229 @rsp-5230
     Scenario Outline: Verify the user can add a sponsor organisation from manage sponsor organisation page
         And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
         Then I can see the 'Setup_New_Sponsor_Organisation_Page'
