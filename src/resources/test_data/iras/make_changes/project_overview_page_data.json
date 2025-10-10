@@ -105,7 +105,7 @@
     "post_approvals_tab_date_submitted": "Date submitted",
     "post_approvals_tab_status": "Status"
   },
-  "Label_Texts_Project_Documents": {
+  "Project_Documents_Tab": {
     "document_type_project_documents": "Document type",
     "document_name_project_documents": "Document name",
     "version_project_documents": "Version",

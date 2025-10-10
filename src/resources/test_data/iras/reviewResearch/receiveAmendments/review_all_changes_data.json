@@ -2,6 +2,8 @@
   "Review_All_Changes_Page": {
     "heading": "Review all changes",
     "title": "Review all changes - Health research UK",
+    "now_send_to_sponsor_heading": "Now send to sponsor",
+    "now_send_to_sponsor_hint_label": "By sending this modification you are confirming that, to the best of your knowledge, the details you are providing are correct.",
     "Summary": {
       "iras_id_label": "IRAS ID",
       "short_project_title_label": "Short project title",

@@ -1,6 +1,7 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../hooks/CustomFixtures';
 import { confirmStringNotNull, removeUnwantedWhitespace } from '../../../utils/UtilFunctions';
+import { Locator } from '@playwright/test';
 
 const { Then } = createBdd(test);
 
@@ -81,24 +82,12 @@ Then(
 
 Then(
   'I can see the {string} ui labels on the project overview page',
-  async ({ commonItemsPage, projectOverviewPage }, datasetName: string) => {
+  async ({ projectOverviewPage }, datasetName: string) => {
     const dataset = projectOverviewPage.projectOverviewPageTestData[datasetName];
     for (const key in dataset) {
       if (Object.hasOwn(dataset, key)) {
-        const labelVal = await commonItemsPage.getUiLabel(key, projectOverviewPage);
-        expect.soft(labelVal).toBe(dataset[key]);
-      }
-    }
-  }
-);
-
-Then(
-  'I validate the ui labels using {string} on the project documents page',
-  async ({ projectOverviewPage, commonItemsPage }, datasetName) => {
-    const dataset = projectOverviewPage.projectOverviewPageTestData[datasetName];
-    for (const key in dataset) {
-      if (Object.hasOwn(dataset, key)) {
-        await commonItemsPage.validateUIComponentValues(dataset, key, projectOverviewPage);
+        const locator: Locator = projectOverviewPage[key];
+        await expect(locator).toBeVisible();
       }
     }
   }

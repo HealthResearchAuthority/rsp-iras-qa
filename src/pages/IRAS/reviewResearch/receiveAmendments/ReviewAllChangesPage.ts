@@ -24,14 +24,6 @@ export default class ReviewAllChangesPage {
   readonly ranking_category: Locator;
   readonly ranking_review_type_label: Locator;
   readonly ranking_review_type: Locator;
-  readonly sponsor_details_heading: Locator;
-  readonly sponsor_details_section_card: Locator;
-  readonly sponsor_reference_label: Locator;
-  readonly sponsor_reference: Locator;
-  readonly sponsor_date_label: Locator;
-  readonly sponsor_date: Locator;
-  readonly sponsor_summary_of_changes_label: Locator;
-  readonly sponsor_summary_of_changes: Locator;
   readonly changes_heading: Locator;
   readonly changes_section_card: Locator;
   readonly changes_section_card_heading: Locator;
@@ -51,6 +43,16 @@ export default class ReviewAllChangesPage {
   readonly changes_category: Locator;
   readonly changes_review_type_label: Locator;
   readonly changes_review_type: Locator;
+  readonly sponsor_details_heading: Locator;
+  readonly sponsor_details_section_card: Locator;
+  readonly sponsor_reference_label: Locator;
+  readonly sponsor_reference: Locator;
+  readonly sponsor_date_label: Locator;
+  readonly sponsor_date: Locator;
+  readonly sponsor_summary_of_changes_label: Locator;
+  readonly sponsor_summary_of_changes: Locator;
+  readonly now_send_to_sponsor_heading: Locator;
+  readonly now_send_to_sponsor_hint_label: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -235,6 +237,12 @@ export default class ReviewAllChangesPage {
       )
     );
     this.sponsor_summary_of_changes = this.sponsor_summary_of_changes_label.locator('..').locator(this.row_value);
+    this.now_send_to_sponsor_heading = this.page.getByRole('heading', {
+      name: reviewAllChangesPageTestData.Review_All_Changes_Page.now_send_to_sponsor_heading,
+    });
+    this.now_send_to_sponsor_hint_label = this.page
+      .getByRole('paragraph')
+      .getByText(this.reviewAllChangesPageTestData.Review_All_Changes_Page.now_send_to_sponsor_hint_label);
   }
 
   //Page Methods

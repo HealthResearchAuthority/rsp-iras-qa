@@ -68,7 +68,7 @@ export default class ProjectOverviewPage {
     this.pageHeading = this.page
       .getByRole('heading')
       .getByText(this.projectOverviewPageTestData.Project_Overview_Page.heading);
-    this.projectStatusTag = this.page.locator('.govuk-tag');
+    this.projectStatusTag = this.page.locator('.govuk-grid-row').locator('.govuk-tag');
     this.project_details_hint_label = this.page
       .getByRole('heading')
       .getByText(this.projectOverviewPageTestData.Project_Overview_Page.project_details_hint_label);
@@ -182,39 +182,39 @@ export default class ProjectOverviewPage {
       .locator('.govuk-body')
       .getByText(this.linkTextData.Project_Overview_Page.View_Project_Overview);
     this.document_type_project_documents = this.page.getByRole('button', {
-      name: this.projectOverviewPageTestData.Label_Texts_Project_Documents.document_type_project_documents.trim(),
+      name: this.projectOverviewPageTestData.Project_Documents_Tab.document_type_project_documents.trim(),
     });
     this.document_name_project_documents = this.page.getByRole('button', {
-      name: this.projectOverviewPageTestData.Label_Texts_Project_Documents.document_name_project_documents.trim(),
+      name: this.projectOverviewPageTestData.Project_Documents_Tab.document_name_project_documents.trim(),
       exact: true,
     });
     this.version_project_documents = this.page.getByRole('button', {
-      name: this.projectOverviewPageTestData.Label_Texts_Project_Documents.version_project_documents,
+      name: this.projectOverviewPageTestData.Project_Documents_Tab.version_project_documents,
       exact: true,
     });
     this.document_date_project_documents = this.page.getByRole('button', {
-      name: this.projectOverviewPageTestData.Label_Texts_Project_Documents.document_date_project_documents.trim(),
+      name: this.projectOverviewPageTestData.Project_Documents_Tab.document_date_project_documents.trim(),
       exact: true,
     });
     this.status_project_documents = this.page.getByRole('button', {
-      name: this.projectOverviewPageTestData.Label_Texts_Project_Documents.status_project_documents,
+      name: this.projectOverviewPageTestData.Project_Documents_Tab.status_project_documents,
       exact: true,
     });
     this.modification_id_project_documents = this.page.getByRole('button', {
-      name: this.projectOverviewPageTestData.Label_Texts_Project_Documents.modification_id_project_documents.trim(),
+      name: this.projectOverviewPageTestData.Project_Documents_Tab.modification_id_project_documents.trim(),
       exact: true,
     });
     this.action_header = this.page.locator('th');
     this.action_project_documents = this.action_header.getByText(
-      this.projectOverviewPageTestData.Label_Texts_Project_Documents.action_project_documents
+      this.projectOverviewPageTestData.Project_Documents_Tab.action_project_documents
     );
     this.search_project_documents = this.page.getByRole('button', {
-      name: this.projectOverviewPageTestData.Label_Texts_Project_Documents.search_project_documents.trim(),
+      name: this.projectOverviewPageTestData.Project_Documents_Tab.search_project_documents.trim(),
       exact: true,
     });
     this.advanced_filters_project_documents = this.page
       .locator('.search-filter-panel__button-inner')
-      .getByText(this.projectOverviewPageTestData.Label_Texts_Project_Documents.advanced_filters_project_documents);
+      .getByText(this.projectOverviewPageTestData.Project_Documents_Tab.advanced_filters_project_documents);
     this.results_count_project_documents = this.page.locator('.search-filter-panel__count');
   }
 
@@ -228,6 +228,6 @@ export default class ProjectOverviewPage {
   }
 
   async getStatus(row: any) {
-    return confirmStringNotNull(await row.getByRole('cell').nth(4).textContent());
+    return confirmStringNotNull(await row.getByRole('cell').nth(5).textContent());
   }
 }
