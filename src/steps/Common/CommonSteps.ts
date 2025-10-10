@@ -39,6 +39,8 @@ When(
       modificationsReadyToAssignPage,
       selectStudyWideReviewerPage,
       myModificationsTasklistPage,
+      manageSponsorOrganisationPage,
+      setupNewSponsorOrganisationPage,
     },
     page: string
   ) => {
@@ -97,6 +99,12 @@ When(
         break;
       case 'Select_Study_Wide_Reviewer_Page':
         await selectStudyWideReviewerPage.assertOnSelectStudyWideReviewerPage();
+        break;
+      case 'Manage_Sponsor_Organisations_Page':
+        await manageSponsorOrganisationPage.assertOnManageSponsorOrganisationsPage();
+        break;
+      case 'Setup_New_Sponsor_Organisation_Page':
+        await setupNewSponsorOrganisationPage.assertOnSetupNewSponsorOrganisationsPage();
         break;
       default:
         throw new Error(`${page} is not a valid option`);
@@ -568,7 +576,13 @@ Then(
 When(
   'I enter {string} into the search field',
   async (
-    { commonItemsPage, reviewBodyProfilePage, createReviewBodyPage, createUserProfilePage },
+    {
+      commonItemsPage,
+      reviewBodyProfilePage,
+      createReviewBodyPage,
+      createUserProfilePage,
+      setupNewSponsorOrganisationPage,
+    },
     inputType: string
   ) => {
     let searchValue: string;
@@ -578,6 +592,9 @@ When(
         break;
       case 'name of the new review body':
         searchValue = await createReviewBodyPage.getUniqueOrgName();
+        break;
+      case 'name of the newly added sponsor organisation':
+        searchValue = await setupNewSponsorOrganisationPage.getUniqueOrgName();
         break;
       case 'name of the newly created user':
         searchValue = await createUserProfilePage.getUniqueEmail();
@@ -1250,6 +1267,19 @@ Then(
         const element = await commonItemsPage.clickErrorSummaryLink(errorDataset, key, page);
         await expect(element).toBeInViewport();
       }
+    }
+  }
+);
+
+Then(
+  'I click the view edit link of the {string}',
+  async ({ manageReviewBodiesPage, manageSponsorOrganisationPage }, recordType: string) => {
+    if (recordType === 'newly created review body') {
+      const createdReviewBodyRow = await manageReviewBodiesPage.getReviewBodyRow();
+      await createdReviewBodyRow.locator(manageReviewBodiesPage.actionsLink).click();
+    } else if (recordType === 'newly added sponsor organisation') {
+      const createdSponsorOrgRow = await manageSponsorOrganisationPage.getSponsorOrgRow();
+      await createdSponsorOrgRow.locator(manageSponsorOrganisationPage.actionsLink).click();
     }
   }
 );
