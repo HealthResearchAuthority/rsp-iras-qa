@@ -12,7 +12,7 @@ export default class ProjectOverviewPage {
   readonly projectStatusTag: Locator;
   readonly project_details_hint_label: Locator;
   readonly project_details_heading: Locator;
-  readonly project_short_title_label: Locator; //see what this is exactly
+  readonly project_short_title_label: Locator;
   readonly modification_saved_success_message_text: Locator;
   readonly modification_saved_success_message_header_text: Locator;
   readonly information_alert_banner: Locator;
