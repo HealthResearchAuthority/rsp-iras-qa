@@ -166,6 +166,7 @@ Feature: Create Amendment - Create Modifications
       | Participating_Organisation | Early_Closure_Withdrawal_Of_Sites_Option                   | Modifications_Tile      |
       | Participating_Organisation | Addition_Of_Participant_Identification_Centres_Option      | Modifications_Tile      |
       | Participating_Organisation | Early_Closure_Of_Participant_Identification_Centres_Option | Modifications_Tile      |
+
   # The KNOWN_DEFECT-RSP-5007 will be fixed with the new user story RSP-4136 so this scenario can be re-used later
   @rsp-4039 @ParticipatingOrganisationsErrorValidation @KNOWN_DEFECT-RSP-5007 @skip
   Scenario Outline: Validate the mandatory field error message on participating organisation page
@@ -184,15 +185,15 @@ Feature: Create Amendment - Create Modifications
       | Field_And_Summary_Error_Message              | Area_Of_Change             | Specific_Change          | Modifications_Tile_Link |
       | Field_Error_participating_organisations_text | Participating_Organisation | Addition_Of_Sites_Option | Modifications_Tile      |
 
-  @rsp-4386 @ModificationsJourneyEntireJourney
-  Scenario Outline: Validate that user can create modifications and complete the entire modifications journey
+  @rsp-4386 @4389 @4391 @ModificationsJourneyEntireJourney @ReturnToProjectOverviewFromModificationSentToSponsorConfirmation @KNOWN_DEFECT_RSP-5184 @KNOWN_DEFECT_RSP-5317
+  Scenario Outline: Validate that user can create modifications and complete the entire modifications journey till send modification to sponsor confirmation page and return to project overview page from there
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I capture the page screenshot
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
     And I capture the page screenshot
     And I create '<Changes>' for the created modification
-    And I keep note of the individual and overall ranking of changes created using '<Changes>'
+    # And I keep note of the individual and overall ranking of changes created using '<Changes>'
     # And I can see the modifications details page
     And I capture the page screenshot
     And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
@@ -200,25 +201,288 @@ Feature: Create Amendment - Create Modifications
     # And I validate the individual ranking of changes displayed for '<Changes>'
     # And I validate the field values are displayed as per the '<Changes>' dataset
     When I click the 'Save_Continue_Review' button on the 'Modifications_Details_Page'
-    # Then I can see the add sponsor reference page
+    And I capture the page screenshot
+    Then I can see the add sponsor reference page
     And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
-    # Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
+    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
-    # Then I can see the review all changes modifications page
+    And I capture the page screenshot
+    Then I can see the review all changes page
+    And the 'Change' link should be 'available' on the 'Review_All_Changes_Page'
+    And the 'Delete_Modification' link should be 'available' on the 'Review_All_Changes_Page'
+    And the now sent to sponsor heading and hint text should be 'available' on the review all changes page
     And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
     # And I validate the overall ranking of changes displayed for '<Changes>'
     # And I validate the individual ranking of changes displayed for '<Changes>'
-    # And I validate the field values are displayed as per the '<Changes>' dataset
-    # Then I validate sponsor details are displayed with 'Valid_Data_All_Fields'
+    And I validate the change details are displayed as per the '<Changes>' dataset
+    Then I validate sponsor details are displayed with 'Valid_Data_All_Fields'
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
-    # Then I can see the confimation page for modification sent to sponsor page
+    And I capture the page screenshot
+    Then I validate 'Modification_Sent_To_Sponsor_Labels' labels displayed in the success confirmation page when the modification has been sent to sponsor
     Then I click the 'Return_To_Project_Overview' button on the 'Confirmation_Page'
+    And I capture the page screenshot
+    # work around due to @KNOWN_DEFECT_RSP-5317
     Then I can see the project overview page
-    And I can see a 'Create_New_Modification' button on the 'Project_Overview_Page'
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I can see the 'Label_Texts_Post_Approval' ui labels on the project overview page
+    And I capture the page screenshot
+    #And I can see post approval tab of project overview page
+    And I can see the modification send to sponsor is displayed on post approval tab of project overview page with status as 'In sponsor review'
+    And I click on the modification id hyperlink in the post approval tab
+    And I capture the page screenshot
+    Then I can see the review all changes page
+    And the 'Change' link should be 'unavailable' on the 'Review_All_Changes_Page'
+    And the 'Delete_Modification' link should be 'unavailable' on the 'Review_All_Changes_Page'
+    And the 'Send_Modification_To_Sponsor' button should be 'unavailable' on the 'Review_All_Changes_Page'
+    And the 'Save_For_Later' button should be 'unavailable' on the 'Review_All_Changes_Page'
+    And the now sent to sponsor heading and hint text should be 'unavailable' on the review all changes page
 
     Examples:
       | Changes                           |
       | Multiple_Changes_Planned_End_Date |
+
+  @rsp-4386 @4389 @4391 @ModificationsJourneyEntireJourney @SaveForLaterFromReviewAllChangesPage @KNOWN_DEFECT_RSP-5324 @KNOWN_DEFECT_RSP-5184 @KNOWN_DEFECT_RSP-5317
+  Scenario Outline: Validate that user can create modifications and complete the entire modifications journey till review all changes page and save for later from there
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I capture the page screenshot
+    And I create '<Changes>' for the created modification
+    # And I keep note of the individual and overall ranking of changes created using '<Changes>'
+    # And I can see the modifications details page
+    And I capture the page screenshot
+    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    # And I validate the overall ranking of changes displayed for '<Changes>'
+    # And I validate the individual ranking of changes displayed for '<Changes>'
+    # And I validate the field values are displayed as per the '<Changes>' dataset
+    When I click the 'Save_Continue_Review' button on the 'Modifications_Details_Page'
+    And I capture the page screenshot
+    Then I can see the add sponsor reference page
+    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    And I capture the page screenshot
+    Then I can see the review all changes page
+    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    # And I validate the overall ranking of changes displayed for '<Changes>'
+    # And I validate the individual ranking of changes displayed for '<Changes>'
+    And I validate the change details are displayed as per the '<Changes>' dataset
+    Then I validate sponsor details are displayed with 'Valid_Data_All_Fields'
+    Then I click the 'Save_For_Later' button on the 'Review_All_Changes_Page'
+    And I capture the page screenshot
+    Then I can see the project overview page
+    Then I can see the modification progress saved successful message on project overview page
+    And I can see the 'Label_Texts_Post_Approval' ui labels on the project overview page
+    And I capture the page screenshot
+    #And I can see post approval tab of project overview page
+    And I can see the modification send to sponsor is displayed on post approval tab of project overview page with status as 'Draft'
+
+    Examples:
+      | Changes                           |
+      | Multiple_Changes_Planned_End_Date |
+
+  @rsp-4386 @4389 @4391 @ModificationsJourneyEntireJourney @ModifyCurrentChangesInReviewAllChangesPage @KNOWN_DEFECT_RSP-5184 @KNOWN_DEFECT_RSP-5317
+  Scenario Outline: Validate that user can create modification with multiple changes and modify current changes in review all changes page by clicking change link link from there
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I capture the page screenshot
+    And I create '<Changes>' for the created modification
+    # And I keep note of the individual and overall ranking of changes created using '<Changes>'
+    # And I can see the modifications details page
+    And I capture the page screenshot
+    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    # And I validate the overall ranking of changes displayed for '<Changes>'
+    # And I validate the individual ranking of changes displayed for '<Changes>'
+    # And I validate the field values are displayed as per the '<Changes>' dataset
+    When I click the 'Save_Continue_Review' button on the 'Modifications_Details_Page'
+    And I capture the page screenshot
+    Then I can see the add sponsor reference page
+    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    And I capture the page screenshot
+    Then I can see the review all changes page
+    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    # And I validate the overall ranking of changes displayed for '<Changes>'
+    # And I validate the individual ranking of changes displayed for '<Changes>'
+    And I validate the change details are displayed as per the '<Changes>' dataset
+    Then I validate sponsor details are displayed with 'Valid_Data_All_Fields'
+    And I modify the current changes with '<New_Changes>' for the created modification
+    And I capture the page screenshot
+    # And I keep note of the individual and overall ranking of changes created using '<New_Changes>'
+    Then I can see the review all changes page
+    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    # And I validate the overall ranking of changes displayed for '<New_Changes>'
+    # And I validate the individual ranking of changes displayed for '<New_Changes>'
+    And I validate the change details are displayed as per the '<New_Changes>' dataset
+    Then I validate sponsor details are displayed with 'Valid_Data_All_Fields'
+    And I modify the current sponsor details with 'Valid_Data_All_Fields_Changes' for the created modification
+    And I capture the page screenshot
+    # And I keep note of the individual and overall ranking of changes created using '<New_Changes>'
+    Then I can see the review all changes page
+    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    Then I validate sponsor details are displayed with 'Valid_Data_All_Fields_Changes'
+    Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
+    And I capture the page screenshot
+    Then I validate 'Modification_Sent_To_Sponsor_Labels' labels displayed in the success confirmation page when the modification has been sent to sponsor
+    Then I click the 'Return_To_Project_Overview' button on the 'Confirmation_Page'
+    And I capture the page screenshot
+    # work around due to @KNOWN_DEFECT_RSP-5317
+    Then I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I can see the 'Label_Texts_Post_Approval' ui labels on the project overview page
+    And I capture the page screenshot
+    #And I can see post approval tab of project overview page
+    And I can see the modification send to sponsor is displayed on post approval tab of project overview page with status as 'In sponsor review'
+    And I click on the modification id hyperlink in the post approval tab
+    And I capture the page screenshot
+    Then I can see the review all changes page
+    And the 'Change' link should be 'unavailable' on the 'Review_All_Changes_Page'
+    And the 'Delete_Modification' link should be 'unavailable' on the 'Review_All_Changes_Page'
+    And the 'Send_Modification_To_Sponsor' button should be 'unavailable' on the 'Review_All_Changes_Page'
+    And the 'Save_For_Later' button should be 'unavailable' on the 'Review_All_Changes_Page'
+    And the now sent to sponsor heading and hint text should be 'unavailable' on the review all changes page
+
+    Examples:
+      | Changes                           | New_Changes                              |
+      | Multiple_Changes_Planned_End_Date | Multiple_Changes_Planned_End_Date_Change |
+
+  # Multiple_Changes_Planned_End_Date + project documents+particpant organisation
+  # back link navigation from Review_All_Changes_Page and confimation page for modification sent to sponsor page-
+
+  # And I can see the review changes planned end date page
+  # Then I validate all field values on review modifications page using '<Planned_End_Date>' , '<Organisation_Change_Affect>' and '<Affected_Org_Questions>'
+  # When I click the change link '<Change_Field>' on review changes planned end date page
+  # Then I can see the 'Planned_End_Date' page for modifications
+
+  @rsp-4364 @ValidateSponsorReferenceModifications
+  Scenario Outline: Verify user is able to fill sponsor reference details for the modification
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I capture the page screenshot
+    And I create '<Changes>' for the created modification
+    When I click the 'Save_Continue_Review' button on the 'Modifications_Details_Page'
+    Then I can see the add sponsor reference page
+    Then I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I can see the 'Label_Texts' ui labels on the sponsor reference modifications page
+    Then I fill the sponsor reference modifications page with '<Sponsor_Reference_Page>'
+    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    # Then I can see the review all changes modifications page
+    # Then I validate sponsor details are displayed with '<Sponsor_Reference_Page>'
+
+    Examples:
+      | Changes              | Sponsor_Reference_Page |
+      | Multiple_Changes_One | Valid_Data_All_Fields  |
+
+  @rsp-4364 @ValidateSaveForLaterSponsorReferenceModifications
+  Scenario Outline: Verify the save for later functionality for sponsor reference modifications page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I capture the page screenshot
+    And I create '<Changes>' for the created modification
+    When I click the 'Save_Continue_Review' button on the 'Modifications_Details_Page'
+    Then I can see the add sponsor reference page
+    When I click the 'Save_For_Later' button on the 'Sponsor_Reference_Page'
+    Then I can see the project overview page
+    Then I can see the modification progress saved successful message on project overview page
+    And I can see a 'Create_New_Modification' button on the 'Project_Overview_Page'
+
+    Examples:
+      | Changes                 |
+      | Change_Planned_End_Date |
+
+  @rsp-4364 @ValidateErrorMessgaeDisplayedSponsorReferenceModifications
+  Scenario Outline: Verify the error messages displayed for sponsor reference modifications page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I capture the page screenshot
+    And I create '<Changes>' for the created modification
+    When I click the 'Save_Continue_Review' button on the 'Modifications_Details_Page'
+    Then I can see the add sponsor reference page
+    Then I fill the sponsor reference modifications page with '<Sponsor_Reference_Page>'
+    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Sponsor_Reference_Page'
+
+    Examples:
+      | Changes                           |
+      | Multiple_Changes_Planned_End_Date |
+
+  @rsp-4364 @ValidateSponsorReferenceModifications
+  Scenario Outline: Verify user is able to fill sponsor reference details for the modification
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I capture the page screenshot
+    And I create '<Changes>' for the created modification
+    When I click the 'Save_Continue_Review' button on the 'Modifications_Details_Page'
+    Then I can see the add sponsor reference page
+    Then I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I can see the 'Label_Texts' ui labels on the sponsor reference modifications page
+    Then I fill the sponsor reference modifications page with '<Sponsor_Reference_Page>'
+    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    # Then I can see the review all changes modifications page
+    # Then I validate sponsor details are displayed with '<Sponsor_Reference_Page>'
+
+    Examples:
+      | Changes              | Sponsor_Reference_Page |
+      | Multiple_Changes_One | Valid_Data_All_Fields  |
+
+  @rsp-4364 @ValidateSaveForLaterSponsorReferenceModifications
+  Scenario Outline: Verify the save for later functionality for sponsor reference modifications page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I capture the page screenshot
+    And I create '<Changes>' for the created modification
+    When I click the 'Save_Continue_Review' button on the 'Modifications_Details_Page'
+    Then I can see the add sponsor reference page
+    When I click the 'Save_For_Later' button on the 'Sponsor_Reference_Page'
+    Then I can see the project overview page
+    Then I can see the modification progress saved successful message on project overview page
+    And I can see a 'Create_New_Modification' button on the 'Project_Overview_Page'
+
+    Examples:
+      | Changes                 |
+      | Change_Planned_End_Date |
+
+  @rsp-4364 @ValidateErrorMessgaeDisplayedSponsorReferenceModifications
+  Scenario Outline: Verify the error messages displayed for sponsor reference modifications page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I capture the page screenshot
+    And I create '<Changes>' for the created modification
+    When I click the 'Save_Continue_Review' button on the 'Modifications_Details_Page'
+    Then I can see the add sponsor reference page
+    Then I fill the sponsor reference modifications page with '<Sponsor_Reference_Page>'
+    When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Sponsor_Reference_Page'
+
+    Examples:
+      | Changes                 | Sponsor_Reference_Page               | Field_And_Summary_Error_Message |
+      | Change_Planned_End_Date | Missing_Mandatory_Field              | Missing_Mandatory_Fields_Error  |
+      | Change_Planned_End_Date | Max_Character_Sponsor_Summary_Fields | Max_Character_Field_Error       |
+      | Change_Planned_End_Date | Invalid_Day_Number                   | Invalid_Date_Field_Error        |
+      | Change_Planned_End_Date | Invalid_Day_Letters                  | Invalid_Date_Field_Error        |
+      | Change_Planned_End_Date | Invalid_Year_Number_1                | Invalid_Date_Field_Error        |
+      | Change_Planned_End_Date | Invalid_Year_Number_2                | Invalid_Date_Field_Error        |
+      | Change_Planned_End_Date | Invalid_Year_Letters                 | Invalid_Date_Field_Error        |
+      | Change_Planned_End_Date | Invalid_Date_Past                    | Invalid_Date_Field_Error        |
+      | Change_Planned_End_Date | Invalid_Date_No_Day                  | Invalid_Date_Field_Error        |
+      | Change_Planned_End_Date | Invalid_Date_No_Month                | Invalid_Date_Field_Error        |
+      | Change_Planned_End_Date | Invalid_Date_No_Year                 | Invalid_Date_Field_Error        |
 
   @rsp-4392 @VerifyUserAbleToDeleteTheModificationDetails
   Scenario Outline: Verify user is able to delete the modification details

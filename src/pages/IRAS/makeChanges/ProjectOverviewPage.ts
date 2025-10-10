@@ -214,7 +214,7 @@ export default class ProjectOverviewPage {
 
   //Page Methods
   async assertOnProjectOverviewPage() {
-    await expect(this.pageHeading).toBeVisible();
+    await expect.soft(this.pageHeading).toBeVisible();
   }
 
   async gotoSpecificProjectPage() {

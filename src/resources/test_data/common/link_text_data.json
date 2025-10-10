@@ -213,6 +213,28 @@
   "Select_Study_Wide_Reviewer_Page": {
     "Back": "Back"
   },
+  "Project_Created_Confirmation_Page": {
+    "View_Project_Overview": "View project overview"
+  },
+  "Review_All_Changes_Page": {
+    "Delete_Modification": "Delete modification",
+    "Change": "Change"
+  },
+  "Modification_Details_Page": {
+    "Back": "Back",
+    "Change": "Change",
+    "Remove": "Remove",
+    "Delete_Modification": "Delete modification"
+  },
+  "Modification_Unfinished_Error_Page": {
+    "Back": "Back"
+  },
+  "Create_Project_Confirmation_Page": {
+    "View_Project_Overview": "View project overview"
+  },
+  "Project_Overview_Unfinished_Projects_Page": {
+    "Back": "Back"
+  },
   "Modifications_Details_Page": {
     "Delete_Modification": "Delete modification"
   }

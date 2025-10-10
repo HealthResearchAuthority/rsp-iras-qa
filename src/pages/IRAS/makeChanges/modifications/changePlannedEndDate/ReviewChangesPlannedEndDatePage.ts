@@ -1,5 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
-import * as reviewChangesPlannedEndDatePageTestData from '../../../../../resources/test_data/iras/make_changes/modifications/change_planned_end_date/review_changes_planned_end_date_data.json';
+import * as reviewChangesPlannedEndDatePageTestData from '../../../../../resources/test_data/iras/make_changes/modifications/changePlannedEndDate/review_changes_planned_end_date_data.json';
 
 //Declare Page Objects
 export default class ChangePlannedEndDateReviewModificationsPage {
@@ -107,6 +107,10 @@ export default class ChangePlannedEndDateReviewModificationsPage {
   async assertOnReviewChangesPlannedEndDatePage() {
     await expect(this.pageHeading).toBeVisible();
     await expect(this.sub_heading_specific_change_label).toBeVisible();
+  }
+  async assertOnReviewChangesSpecificChangePage(specificChange: string) {
+    await expect.soft(this.pageHeading).toBeVisible();
+    await expect.soft(this.page.getByRole('heading', { level: 2 }).getByText(specificChange)).toBeVisible();
   }
 
   async clickChangeLinks(changeLink: string) {
