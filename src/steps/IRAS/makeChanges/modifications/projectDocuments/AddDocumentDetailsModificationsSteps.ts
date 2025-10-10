@@ -4,9 +4,9 @@ import { expect, Locator } from '@playwright/test';
 import fs from 'node:fs';
 import { confirmStringNotNull } from '../../../../../utils/UtilFunctions';
 
-const { Then } = createBdd(test);
+const { Then, When } = createBdd(test);
 
-Then(
+When(
   'I can see the add document details for {string} page',
   async ({ selectAreaOfChangePage, addDocumentDetailsModificationsPage }, specificChangeDatsetName: string) => {
     const dataset =
@@ -87,6 +87,29 @@ Then(
         }
       }
       await addDocumentDetailsForSpecificDocumentModificationsPage.save_and_continue.click();
+    }
+  }
+);
+Then(
+  'I click on the document link with status {string} and delete the uploaded document in the add document details for specific document page',
+  async ({ commonItemsPage, confirmationPage, addDocumentDetailsModificationsPage }, docStatusDataset: string) => {
+    const statusDataset =
+      addDocumentDetailsModificationsPage.addDocumentDetailsModificationsPageTestData[docStatusDataset];
+    const status = statusDataset.status;
+    const displayedDocumentsListMap =
+      await addDocumentDetailsModificationsPage.getDisplayedDocumentsListAndStatusFromUI(true);
+    const displayedDocumentsList: string[] = displayedDocumentsListMap.get('displayedDocuments');
+    const displayedStatusesList: string[] = displayedDocumentsListMap.get('displayedStatuses');
+    for (let i = 0; i < displayedDocumentsList.length; i++) {
+      if (displayedStatusesList[i] === status) {
+        const documentName = displayedDocumentsList[i];
+        await addDocumentDetailsModificationsPage.documentlink.getByText(documentName, { exact: true }).first().click();
+      }
+      await addDocumentDetailsModificationsPage.documentlink.getByText('Delete', { exact: true }).first().click();
+      await confirmationPage.assertOnDeleteDocumentConfirmationPage();
+      const pageKey = 'Delete_Document_Confirmation_Page';
+      const buttonKey = 'Delete_Document';
+      await commonItemsPage.clickButton(pageKey, buttonKey);
     }
   }
 );
