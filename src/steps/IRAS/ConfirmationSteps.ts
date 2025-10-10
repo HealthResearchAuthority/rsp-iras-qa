@@ -237,7 +237,7 @@ Given(
 );
 
 Then(
-  'I validate {string} labels displayed in confirmation page for poject created using the {string} details',
+  'I validate {string} labels displayed in confirmation page for project created using the {string} details',
   async (
     { confirmationPage, projectDetailsTitlePage, projectDetailsIRASPage },
     validationLabelsDatasetName,
@@ -258,5 +258,25 @@ Then(
     const actualSuccessMessage = confirmStringNotNull(await confirmationPage.success_message_body_text.textContent());
     await expect(confirmationPage.success_message_body_text.getByText(expectedSuccessMessage)).toBeVisible();
     expect(actualSuccessMessage).toBe(expectedSuccessMessage);
+  }
+);
+
+Then(
+  'I validate {string} labels displayed in the success confirmation page when the modification has been sent to sponsor',
+  async ({ confirmationPage }, validationLabelsDatasetName) => {
+    const validationLabelsDataset = confirmationPage.confirmationPageTestData[validationLabelsDatasetName];
+    const expectedSuccessHeader = validationLabelsDataset.page_heading;
+    const guidanceText = confirmationPage.confirmationPageTestData[validationLabelsDatasetName].page_guidance_text;
+    const whatHappensNextLabel =
+      confirmationPage.confirmationPageTestData[validationLabelsDatasetName].what_happens_next_label;
+    expect
+      .soft(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim())
+      .toBe(expectedSuccessHeader);
+    expect
+      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim())
+      .toBe(guidanceText);
+    expect
+      .soft(confirmStringNotNull(await confirmationPage.what_happens_next_label.textContent()).trim())
+      .toBe(whatHappensNextLabel);
   }
 );

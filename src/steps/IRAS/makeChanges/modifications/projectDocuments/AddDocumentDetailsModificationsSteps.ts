@@ -1,7 +1,8 @@
 import { createBdd } from 'playwright-bdd';
 import { test } from '../../../../../hooks/CustomFixtures';
-import { expect } from '@playwright/test';
+import { expect, Locator } from '@playwright/test';
 import fs from 'node:fs';
+import { confirmStringNotNull } from '../../../../../utils/UtilFunctions';
 
 const { Then, When } = createBdd(test);
 
@@ -47,10 +48,12 @@ Then(
       await addDocumentDetailsModificationsPage.getDisplayedDocumentsListAndStatusFromUI(true);
     const displayedDocumentsList: string[] = displayedDocumentsListMap.get('displayedDocuments');
     const displayedStatusesList: string[] = displayedDocumentsListMap.get('displayedStatuses');
+    // Click on each document link
     for (let i = 0; i < displayedDocumentsList.length; i++) {
       if (displayedStatusesList[i] === status) {
         const documentName = displayedDocumentsList[i];
         await addDocumentDetailsModificationsPage.documentlink.getByText(documentName, { exact: true }).first().click();
+        //Assertion to verify Add document details for specific document page
         await addDocumentDetailsForSpecificDocumentModificationsPage.assertOnAddDocumentsDetailsForSpecificModificationsPage(
           documentName
         );
@@ -59,7 +62,7 @@ Then(
         const trimmedDocumentName = documentName.replace('Add details for ', '').trim();
         const filePath = fileArray.find((path: string) => path.includes(trimmedDocumentName));
         const stats = fs.statSync(filePath);
-        let fileSize: any;
+        let fileSize;
         if (stats.size < 1024 * 1024) {
           fileSize = Number.parseFloat((stats.size / 1024).toFixed(2)).toString() + ' KB';
         } else {
@@ -77,6 +80,7 @@ Then(
         const documentFoundCount = await expectedDocumentRow.count();
         expect.soft(documentFoundCount).toBeGreaterThan(0);
       }
+      //Enter document details
       for (const key in dataset) {
         if (Object.hasOwn(dataset, key)) {
           await commonItemsPage.fillUIComponent(dataset, key, addDocumentDetailsForSpecificDocumentModificationsPage);
@@ -106,6 +110,135 @@ Then(
       const pageKey = 'Delete_Document_Confirmation_Page';
       const buttonKey = 'Delete_Document';
       await commonItemsPage.clickButton(pageKey, buttonKey);
+    }
+  }
+);
+
+Then(
+  'I can see the document type drop down list shows only the document types for {string}',
+  async ({ addDocumentDetailsForSpecificDocumentModificationsPage }, documentTypedatasetName: string) => {
+    const dataset =
+      addDocumentDetailsForSpecificDocumentModificationsPage
+        .addDocumentDetailsForSpecificDocumentModificationsPageTestData[documentTypedatasetName];
+    const documentTypeDropdownValuesExpected = dataset['document_type_dropdown_values'];
+    const documentTypeDropdownValuesActual = (
+      await addDocumentDetailsForSpecificDocumentModificationsPage.document_type_dropdown
+        .locator('option')
+        .allTextContents()
+    ).filter((option) => option.trim() !== 'Please select...');
+    expect.soft(documentTypeDropdownValuesActual).toEqual(documentTypeDropdownValuesExpected);
+    // check the document types are sorted in alphabetical order
+    const sortedList = [...documentTypeDropdownValuesActual].sort((a, b) =>
+      a.localeCompare(b, 'en', { sensitivity: 'base' })
+    );
+    expect.soft(documentTypeDropdownValuesActual).toEqual(sortedList);
+  }
+);
+
+Then(
+  'I click on the document link with status {string} and I can see the add document details for specific document page',
+  async (
+    { addDocumentDetailsForSpecificDocumentModificationsPage, addDocumentDetailsModificationsPage },
+    docStatusDataset: string
+  ) => {
+    const statusDataset =
+      addDocumentDetailsModificationsPage.addDocumentDetailsModificationsPageTestData[docStatusDataset];
+    const status = statusDataset.status;
+    const displayedDocumentsListMap =
+      await addDocumentDetailsModificationsPage.getDisplayedDocumentsListAndStatusFromUI(true);
+    const displayedDocumentsList: string[] = displayedDocumentsListMap.get('displayedDocuments');
+    const displayedStatusesList: string[] = displayedDocumentsListMap.get('displayedStatuses');
+    for (let i = 0; i < 1; i++) {
+      if (displayedStatusesList[i] === status) {
+        const documentName = displayedDocumentsList[i];
+        await addDocumentDetailsModificationsPage.documentlink.getByText(documentName, { exact: true }).first().click();
+        await addDocumentDetailsForSpecificDocumentModificationsPage.assertOnAddDocumentsDetailsForSpecificModificationsPage(
+          documentName
+        );
+      }
+    }
+  }
+);
+
+Then(
+  'I select document type {string} for which document version and date are {string} and I can see mandatory fields are displayed based on the selected document type',
+  async (
+    { addDocumentDetailsForSpecificDocumentModificationsPage },
+    documentTypeDatasetName: string,
+    documentVersionDate: string
+  ) => {
+    const documentTypeName =
+      addDocumentDetailsForSpecificDocumentModificationsPage
+        .addDocumentDetailsForSpecificDocumentModificationsPageTestData.Document_Types[documentTypeDatasetName];
+    const locator: Locator = addDocumentDetailsForSpecificDocumentModificationsPage.document_type_dropdown;
+    if (confirmStringNotNull(await locator.getAttribute('class')).includes('govuk-select')) {
+      await locator.selectOption(documentTypeName);
+    }
+    await expect
+      .soft(addDocumentDetailsForSpecificDocumentModificationsPage.document_previously_approved_hint_text)
+      .toBeVisible();
+    if (documentVersionDate === 'optional') {
+      await expect
+        .soft(addDocumentDetailsForSpecificDocumentModificationsPage.sponsor_document_version_text)
+        .toBeHidden();
+      await expect.soft(addDocumentDetailsForSpecificDocumentModificationsPage.sponsor_document_day_text).toBeHidden();
+      await expect
+        .soft(addDocumentDetailsForSpecificDocumentModificationsPage.sponsor_document_month_dropdown)
+        .toBeHidden();
+      await expect.soft(addDocumentDetailsForSpecificDocumentModificationsPage.sponsor_document_year_text).toBeHidden();
+      if (documentTypeName === 'Curriculum vitae (CV) /suitability of researcher') {
+        await expect
+          .soft(addDocumentDetailsForSpecificDocumentModificationsPage.sub_document_type_dropdown)
+          .toBeVisible();
+        const locator: Locator = addDocumentDetailsForSpecificDocumentModificationsPage.sub_document_type_dropdown;
+        if (confirmStringNotNull(await locator.getAttribute('class')).includes('govuk-select')) {
+          await locator.selectOption('Academic Supervisor');
+        }
+      } else {
+        await expect
+          .soft(addDocumentDetailsForSpecificDocumentModificationsPage.sub_document_type_dropdown)
+          .toBeHidden();
+      }
+    } else if (documentVersionDate === 'mandatory') {
+      await expect
+        .soft(addDocumentDetailsForSpecificDocumentModificationsPage.sponsor_document_version_text)
+        .toBeVisible();
+      await expect.soft(addDocumentDetailsForSpecificDocumentModificationsPage.sponsor_document_day_text).toBeVisible();
+      await expect
+        .soft(addDocumentDetailsForSpecificDocumentModificationsPage.sponsor_document_month_dropdown)
+        .toBeVisible();
+      await expect
+        .soft(addDocumentDetailsForSpecificDocumentModificationsPage.sponsor_document_year_text)
+        .toBeVisible();
+    }
+  }
+);
+
+Then(
+  'I select {string} for the previous version of the document approved question',
+  async ({ addDocumentDetailsForSpecificDocumentModificationsPage }, radioButtonValue: string) => {
+    const locatorVal: Locator =
+      addDocumentDetailsForSpecificDocumentModificationsPage[
+        `document_previously_approved_+${radioButtonValue}+_radio`
+      ];
+    const typeAttribute = await locatorVal.first().getAttribute('type');
+    if (typeAttribute === 'radio') {
+      await locatorVal.check();
+    }
+  }
+);
+
+Then(
+  'I enter document details for the uploaded documents using {string} in the add document details for specific document page',
+  async ({ addDocumentDetailsForSpecificDocumentModificationsPage, commonItemsPage }, datasetName: string) => {
+    const dataset =
+      addDocumentDetailsForSpecificDocumentModificationsPage
+        .addDocumentDetailsForSpecificDocumentModificationsPageTestData[datasetName];
+
+    for (const key of Object.keys(dataset)) {
+      if (Object.hasOwn(dataset, key)) {
+        await commonItemsPage.fillUIComponent(dataset, key, addDocumentDetailsForSpecificDocumentModificationsPage);
+      }
     }
   }
 );

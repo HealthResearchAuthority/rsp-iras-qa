@@ -286,3 +286,68 @@ Then(
     }
   }
 );
+
+Then(
+  'I validate the error {string} displayed on {string}',
+  async ({ commonItemsPage, reviewYourDocumentInformationModificationsPage }, errorKey: string, pageKey: string) => {
+    const specialErrors = [
+      'Missing_Mandatory_Question_Previously_Approved_Error',
+      'Missing_Mandatory_Question_Previously_Approved_Document_Version_Date_Error',
+    ];
+
+    const isSpecialCase = specialErrors.includes(errorKey);
+
+    const page =
+      pageKey === 'Review_Your_Document_Infomation_Modifications_Page'
+        ? reviewYourDocumentInformationModificationsPage
+        : null;
+
+    const errorDataset = page?.reviewYourDocumentInfomationModificationsPageTestData?.[errorKey];
+
+    if (!errorDataset || !page) {
+      throw new Error(`Invalid pageKey or dataset name: ${pageKey}, ${errorKey}`);
+    }
+
+    await expect(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
+
+    const stringifyValues = (values: any[]) =>
+      values.map((val) => (typeof val === 'object' ? JSON.stringify(val) : val)).join(', ');
+
+    const expectedSummaryErrors = isSpecialCase
+      ? stringifyValues(Object.values(errorDataset))
+      : Object.values(errorDataset);
+
+    const actualSummaryErrors = isSpecialCase
+      ? stringifyValues(await commonItemsPage.getSummaryErrorMessages())
+      : await commonItemsPage.getSummaryErrorMessages();
+
+    expect.soft(actualSummaryErrors).toEqual(expectedSummaryErrors);
+
+    for (const [key, expectedFieldError] of Object.entries(errorDataset)) {
+      const actualFieldError =
+        await reviewYourDocumentInformationModificationsPage.getFieldErrorMessagesReviewInformation(key, page);
+
+      expect.soft(actualFieldError).toEqual(expectedFieldError);
+
+      const element = await commonItemsPage.clickErrorSummaryLink(errorDataset, key, page);
+      await expect(element).toBeInViewport();
+
+      await reviewYourDocumentInformationModificationsPage.setFieldErrorMessage(actualFieldError);
+    }
+  }
+);
+
+Then(
+  'I click the error displayed on {string}',
+  async ({ reviewYourDocumentInformationModificationsPage }, pageKey: string) => {
+    let page: any;
+    if (pageKey === 'Review_Your_Document_Infomation_Modifications_Page') {
+      page = reviewYourDocumentInformationModificationsPage;
+    }
+    const fieldErrorMessage = await page.getFieldErrorMessage();
+    await reviewYourDocumentInformationModificationsPage.page
+      .getByRole('link', { name: fieldErrorMessage })
+      .nth(1)
+      .click();
+  }
+);

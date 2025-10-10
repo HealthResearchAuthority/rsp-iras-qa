@@ -11,6 +11,7 @@ export default class ConfirmationPage {
   readonly confirmation_body_label: Locator;
   readonly delete_documents_page_heading: Locator;
   readonly delete_document_page_heading: Locator;
+  readonly what_happens_next_label: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -24,7 +25,12 @@ export default class ConfirmationPage {
       })
       .or(this.page.getByRole('heading', { name: confirmationPageTestData.enable_disable_confirmation_header_label }))
       .or(this.page.getByRole('heading', { name: confirmationPageTestData.disable_success_confirmation_header_label }))
-      .or(this.page.getByRole('heading', { name: confirmationPageTestData.enable_success_confirmation_header_label }));
+      .or(this.page.getByRole('heading', { name: confirmationPageTestData.enable_success_confirmation_header_label }))
+      .or(
+        this.page.getByRole('heading', {
+          name: confirmationPageTestData.Modification_Sent_To_Sponsor_Labels.page_heading,
+        })
+      );
 
     this.success_message_header_label = this.page.getByRole('heading', {
       name: confirmationPageTestData.Project_Record_Created_Labels.page_heading,
@@ -48,10 +54,13 @@ export default class ConfirmationPage {
 
   async assertOnDeleteDocumentConfirmationPage() {
     await expect(this.delete_document_page_heading).toBeVisible();
+    this.what_happens_next_label = this.page.getByRole('heading', {
+      name: confirmationPageTestData.Modification_Sent_To_Sponsor_Labels.what_happens_next_label,
+    });
   }
 
   async assertOnConfirmationPage() {
-    await expect(this.confirmation_header_label).toBeVisible();
-    await expect(this.confirmation_body_label).toBeVisible();
+    await expect.soft(this.confirmation_header_label).toBeVisible();
+    await expect.soft(this.confirmation_body_label).toBeVisible();
   }
 }

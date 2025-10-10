@@ -4,10 +4,11 @@ import { confirmStringNotNull } from '../../../../../utils/UtilFunctions';
 import * as linkTextData from '../../../../../resources/test_data/common/link_text_data.json';
 
 //Declare Page Objects
-export default class AddDocumentDetailsModificationsPage {
+export default class ReviewYourDocumentInfomationModificationsPage {
   readonly page: Page;
   readonly reviewYourDocumentInfomationModificationsPageTestData: typeof reviewYourDocumentInfomationModificationsPageTestData;
   readonly linkTextData: typeof linkTextData;
+  private _error_field: string;
   readonly pageHeading: Locator;
   readonly pageLabels: Locator;
   readonly list_row: Locator;
@@ -38,6 +39,7 @@ export default class AddDocumentDetailsModificationsPage {
     this.page = page;
     this.reviewYourDocumentInfomationModificationsPageTestData = reviewYourDocumentInfomationModificationsPageTestData;
     this.linkTextData = linkTextData;
+    this._error_field = '';
 
     //Locators
     this.pageHeading = this.page.getByRole('heading');
@@ -65,10 +67,13 @@ export default class AddDocumentDetailsModificationsPage {
     this.document_type_change_link = this.document_type_row.getByText(
       this.linkTextData.Review_Your_Answers_Page.Change
     );
+    this.document_type_change_link = this.document_type_row.getByText(
+      this.linkTextData.Review_Your_Answers_Page.Change
+    );
     this.sponsor_document_version_row = this.list_row.filter({
       has: this.page.getByText(
         this.reviewYourDocumentInfomationModificationsPageTestData.Review_Your_Document_Information
-          .document_version_label
+          .sponsor_document_version_label
       ),
     });
     this.sponsor_document_version_text = this.sponsor_document_version_row.getByRole('definition').first();
@@ -77,7 +82,8 @@ export default class AddDocumentDetailsModificationsPage {
     );
     this.sponsor_document_date_row = this.list_row.filter({
       has: this.page.getByText(
-        this.reviewYourDocumentInfomationModificationsPageTestData.Review_Your_Document_Information.document_date_label
+        this.reviewYourDocumentInfomationModificationsPageTestData.Review_Your_Document_Information
+          .sponsor_document_date_label
       ),
     });
     this.sponsor_document_date_text = this.sponsor_document_date_row.getByRole('definition').first();
@@ -87,7 +93,7 @@ export default class AddDocumentDetailsModificationsPage {
     this.document_previously_approved_row = this.list_row.filter({
       has: this.page.getByText(
         this.reviewYourDocumentInfomationModificationsPageTestData.Review_Your_Document_Information
-          .previously_approved_label
+          .document_previously_approved_label
       ),
     });
     this.document_previously_approved_radio = this.document_previously_approved_row.getByRole('definition').first();
@@ -97,6 +103,14 @@ export default class AddDocumentDetailsModificationsPage {
     this.document_information = this.page.locator('[class*="govuk-summary-list govuk"]');
   }
 
+  //Getters & Setters for Private Variables
+  async getFieldErrorMessage(): Promise<string> {
+    return this._error_field;
+  }
+
+  async setFieldErrorMessage(value: string): Promise<void> {
+    this._error_field = value;
+  }
   //Page Methods
   async assertOnReviewYourDocumentsInformationModificationsPage() {
     const expectedPageHeading =
@@ -113,9 +127,7 @@ export default class AddDocumentDetailsModificationsPage {
 
     const expectedHintLabelText =
       this.reviewYourDocumentInfomationModificationsPageTestData.Review_Your_Document_Information.hint_label_text;
-    await expect
-      .soft(this.page.locator('.govuk-body').getByText(expectedHintLabelText.trim(), { exact: true }))
-      .toBeVisible();
+    await expect.soft(this.pageLabels.getByText(expectedHintLabelText, { exact: true })).toBeVisible();
   }
 
   async getSponsorDocumentDate() {
@@ -127,5 +139,17 @@ export default class AddDocumentDetailsModificationsPage {
     const allDocumentsInformation = this.document_information;
     const noOfDocuments = await allDocumentsInformation.count();
     return noOfDocuments;
+  }
+
+  async getFieldErrorMessagesReviewInformation<PageObject>(key: string, page: PageObject) {
+    const element = await page[key];
+    const label = key.replace(/(_row)$/, '_label').toLowerCase();
+    const fieldErrorMessage = confirmStringNotNull(await element.getByRole('link').textContent())
+      .replaceAll(
+        this.reviewYourDocumentInfomationModificationsPageTestData.Review_Your_Document_Information[`${label}`],
+        ''
+      )
+      .trim();
+    return fieldErrorMessage;
   }
 }
