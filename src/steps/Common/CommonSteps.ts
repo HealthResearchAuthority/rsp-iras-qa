@@ -211,7 +211,7 @@ Given(
     ) {
       await commonItemsPage.govUkLink.getByText(linkValue).click();
     } else if (noOfLinksFound > 1) {
-      await commonItemsPage.govUkLink.getByText(linkValue).first().click();
+      await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).first().click();
     } else {
       await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
     }
