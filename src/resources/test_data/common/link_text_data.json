@@ -20,7 +20,8 @@
     "Manage_Users": "Manage Users",
     "Question_Set": "Question Set",
     "System_Admin": "System Admin",
-    "My_Applications": "My Applications"
+    "My_Applications": "My Applications",
+    "Logout": "Logout"
   },
   "Home_Page": {
     "Approvals": "Approvals",
@@ -212,9 +213,6 @@
     "Back_To_Tasklist": "Back to Tasklist"
   },
   "Select_Study_Wide_Reviewer_Page": {
-    "Back": "Back"
-  },
-  "Review_All_Changes_Page": {
     "Back": "Back"
   },
   "Review_All_Changes_Page": {
