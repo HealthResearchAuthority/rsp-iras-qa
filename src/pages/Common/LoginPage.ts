@@ -33,7 +33,7 @@ export default class LoginPage {
 
   //Page Methods
   async assertOnLoginPage() {
-    await expect(this.pageHeading).toBeVisible();
+    await expect.soft(this.pageHeading).toBeVisible();
   }
 
   //passwords & mfaKey to be set in AzureDevops Pipeline, add encrypted values to .env when running locally

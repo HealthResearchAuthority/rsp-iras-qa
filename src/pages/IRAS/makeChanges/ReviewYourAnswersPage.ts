@@ -20,14 +20,18 @@ export default class ReviewYourAnswersPage {
   readonly planned_project_end_date_text: Locator;
   readonly planned_project_end_date_change_link: Locator;
   readonly planned_project_end_date_enter_link: Locator;
+  readonly chief_investigator_first_name_row: Locator;
+  readonly chief_investigator_first_name_text: Locator;
+  readonly chief_investigator_first_name_change_link: Locator;
+  readonly chief_investigator_first_name_enter_link: Locator;
+  readonly chief_investigator_last_name_row: Locator;
+  readonly chief_investigator_last_name_text: Locator;
+  readonly chief_investigator_last_name_change_link: Locator;
+  readonly chief_investigator_last_name_enter_link: Locator;
   readonly chief_investigator_email_row: Locator;
   readonly chief_investigator_email_text: Locator;
   readonly chief_investigator_email_change_link: Locator;
   readonly chief_investigator_email_enter_link: Locator;
-  readonly sponsor_contact_email_row: Locator;
-  readonly sponsor_contact_email_text: Locator;
-  readonly sponsor_contact_email_change_link: Locator;
-  readonly sponsor_contact_email_enter_link: Locator;
   readonly nations_participating_row: Locator;
   readonly nations_participating_checkbox: Locator;
   readonly nations_participating_change_link: Locator;
@@ -81,6 +85,31 @@ export default class ReviewYourAnswersPage {
     this.planned_project_end_date_enter_link = this.planned_project_end_date_text.getByText(
       this.reviewYourAnswersPageTestData.Review_Your_Answers_Page.project_end_date_enter_link
     );
+    this.chief_investigator_first_name_row = this.list_row.filter({
+      has: this.page.getByText(
+        this.reviewYourAnswersPageTestData.Review_Your_Answers_Page.chief_investigator_first_name_label
+      ),
+    });
+    this.chief_investigator_first_name_text = this.chief_investigator_first_name_row.getByRole('definition').first();
+    this.chief_investigator_first_name_change_link = this.chief_investigator_first_name_row.getByText(
+      this.linkTextData.Review_Your_Answers_Page.Change
+    );
+    this.chief_investigator_first_name_enter_link = this.chief_investigator_first_name_row.getByText(
+      this.reviewYourAnswersPageTestData.Review_Your_Answers_Page.chief_investigator_first_name_enter_link
+    );
+    this.chief_investigator_last_name_row = this.list_row.filter({
+      has: this.page.getByText(
+        this.reviewYourAnswersPageTestData.Review_Your_Answers_Page.chief_investigator_last_name_label
+      ),
+    });
+    this.chief_investigator_last_name_text = this.chief_investigator_last_name_row.getByRole('definition').first();
+    this.chief_investigator_last_name_change_link = this.chief_investigator_last_name_row.getByText(
+      this.linkTextData.Review_Your_Answers_Page.Change
+    );
+    this.chief_investigator_last_name_enter_link = this.chief_investigator_last_name_row.getByText(
+      this.reviewYourAnswersPageTestData.Review_Your_Answers_Page.chief_investigator_first_name_enter_link
+    );
+
     this.chief_investigator_email_row = this.list_row.filter({
       has: this.page.getByText(
         this.reviewYourAnswersPageTestData.Review_Your_Answers_Page.chief_investigator_email_label
@@ -92,16 +121,6 @@ export default class ReviewYourAnswersPage {
     );
     this.chief_investigator_email_enter_link = this.chief_investigator_email_text.getByText(
       this.reviewYourAnswersPageTestData.Review_Your_Answers_Page.chief_investigator_email_enter_link
-    );
-    this.sponsor_contact_email_row = this.list_row.filter({
-      has: this.page.getByText(this.reviewYourAnswersPageTestData.Review_Your_Answers_Page.sponsor_contact_email_label),
-    });
-    this.sponsor_contact_email_text = this.sponsor_contact_email_row.getByRole('definition').first();
-    this.sponsor_contact_email_change_link = this.sponsor_contact_email_row.getByText(
-      this.linkTextData.Review_Your_Answers_Page.Change
-    );
-    this.sponsor_contact_email_enter_link = this.sponsor_contact_email_text.getByText(
-      this.reviewYourAnswersPageTestData.Review_Your_Answers_Page.sponsor_contact_email_enter_link
     );
     this.nations_participating_row = this.list_row.filter({
       has: this.page.getByText(this.reviewYourAnswersPageTestData.Review_Your_Answers_Page.participating_nations_label),
@@ -165,14 +184,17 @@ export default class ReviewYourAnswersPage {
       case 'project_end_date':
         await this.planned_project_end_date_change_link.click();
         break;
-      case 'chief_investigator':
+      case 'chief_investigator_email':
         await this.chief_investigator_email_change_link.click();
+        break;
+      case 'chief_investigator_first_name':
+        await this.chief_investigator_first_name_change_link.click();
+        break;
+      case 'chief_investigator_last_name':
+        await this.chief_investigator_last_name_change_link.click();
         break;
       case 'primary_sponsor_organisation':
         await this.primary_sponsor_organisation_change_link.click();
-        break;
-      case 'sponsor_contact':
-        await this.sponsor_contact_email_change_link.click();
         break;
       case 'nations_participating':
         await this.nations_participating_change_link.click();
@@ -196,14 +218,17 @@ export default class ReviewYourAnswersPage {
       case 'project_end_date':
         await this.planned_project_end_date_enter_link.click();
         break;
-      case 'chief_investigator':
+      case 'chief_investigator_email':
         await this.chief_investigator_email_enter_link.click();
+        break;
+      case 'chief_investigator_first_name':
+        await this.chief_investigator_first_name_enter_link.click();
+        break;
+      case 'chief_investigator_last_name':
+        await this.chief_investigator_last_name_enter_link.click();
         break;
       case 'primary_sponsor_organisation':
         await this.primary_sponsor_orgainisation_enter_link.click();
-        break;
-      case 'sponsor_contact':
-        await this.sponsor_contact_email_enter_link.click();
         break;
       case 'nations_participating':
         await this.nations_participating_enter_link.click();

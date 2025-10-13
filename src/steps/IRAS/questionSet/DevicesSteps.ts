@@ -8,7 +8,7 @@ Then(
   async ({ devicesPage, commonItemsPage }, sectionName: string, datasetName: string) => {
     const dataset = devicesPage.devicesPageTestData[sectionName][datasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         await commonItemsPage.fillUIComponent(dataset, key, devicesPage);
       }
     }
