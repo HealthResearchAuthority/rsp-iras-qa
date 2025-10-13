@@ -1,5 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../../hooks/CustomFixtures';
+import { confirmArrayNotNull } from '../../../../../utils/UtilFunctions';
 const { Given, When, Then } = createBdd(test);
 
 When(
@@ -68,7 +69,7 @@ When(
       const userListBeforeSearch = await commonItemsPage.getAllUsersFromTheTable();
       const userValues: any = userListBeforeSearch.get('searchResultValues');
       await userListReviewBodyPage.setUserListBeforeSearch(userValues);
-      await userListReviewBodyPage.setSearchKey(searchKey);
+      await commonItemsPage.setSearchKey(searchKey);
       commonItemsPage.search_text.fill(searchKey);
     } else {
       throw new Error(`There are no items in list to search`);
@@ -80,26 +81,26 @@ Then(
   'the system displays search results matching the search criteria',
   async ({ userListReviewBodyPage, commonItemsPage }) => {
     const userValues = await userListReviewBodyPage.getUserListBeforeSearch();
-    const searchKey = await userListReviewBodyPage.getSearchKey();
+    const searchKey = await commonItemsPage.getSearchKey();
     const searchTerms = await commonItemsPage.splitSearchTerm(searchKey);
     const filteredSearchResults = await commonItemsPage.filterResults(userValues, searchTerms);
     const userList = await commonItemsPage.getAllUsersFromTheTable();
     const userListAfterSearch: any = userList.get('searchResultValues');
-    expect(filteredSearchResults).toEqual(userListAfterSearch);
+    expect.soft(filteredSearchResults).toEqual(userListAfterSearch);
     const searchResult = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
       userListAfterSearch,
       searchTerms
     );
-    expect(searchResult).toBeTruthy();
+    expect.soft(searchResult).toBeTruthy();
     await userListReviewBodyPage.updateUserInfo();
   }
 );
 
 When(
   'I enter an input into the search field to search for the removed user of the review body',
-  async ({ userListReviewBodyPage, commonItemsPage, checkRemoveUserReviewBodyPage }) => {
+  async ({ commonItemsPage, checkRemoveUserReviewBodyPage }) => {
     const searchKey = await checkRemoveUserReviewBodyPage.getEmail();
-    await userListReviewBodyPage.setSearchKey(searchKey);
+    await commonItemsPage.setSearchKey(searchKey);
     await commonItemsPage.search_text.fill(searchKey);
   }
 );
@@ -162,5 +163,22 @@ Given(
     await expect(userListReviewBodyPage.status_value_first_row).toHaveText(
       await searchAddUserReviewBodyPage.getUserStatus()
     );
+  }
+);
+
+When(
+  'I capture the name of the newly added user in the user list page of the review body',
+  async ({ createUserProfilePage, userListReviewBodyPage, commonItemsPage }) => {
+    if ((await commonItemsPage.tableBodyRows.count()) >= 1) {
+      if (await commonItemsPage.firstPage.isVisible()) {
+        await commonItemsPage.firstPage.click();
+      }
+      const userListBeforeSearch = await commonItemsPage.getAllUsersFromTheTable();
+      const userValues: string[] = confirmArrayNotNull(userListBeforeSearch.get('searchResultValues'));
+      await userListReviewBodyPage.setUserListBeforeSearch(userValues);
+      await commonItemsPage.setSearchKey(await createUserProfilePage.getUniqueEmail());
+    } else {
+      throw new Error(`There are no items in list to search`);
+    }
   }
 );

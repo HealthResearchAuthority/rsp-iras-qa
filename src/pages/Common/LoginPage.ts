@@ -1,62 +1,61 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as loginPageTestData from '../../resources/test_data/common/login_page_data.json';
+import * as buttonTextData from '../../resources/test_data/common/button_text_data.json';
 import { getDecryptedValue, resolveEnvExpression } from '../../utils/UtilFunctions';
+import { generateToken } from '../../utils/GenerateMFA';
 
 //Declare Page Objects
 export default class LoginPage {
   readonly page: Page;
   readonly loginPageTestData: typeof loginPageTestData;
-  readonly idgBanner: Locator;
+  readonly buttonTextData: typeof buttonTextData;
+  readonly pageHeading: Locator;
+  readonly btnSignIn: Locator;
   readonly usernameInput: Locator;
   readonly passwordInput: Locator;
-  readonly btnNext: Locator;
+  readonly mfaCodeInput: Locator;
   readonly btnContinue: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page;
     this.loginPageTestData = loginPageTestData;
+    this.buttonTextData = buttonTextData;
 
     //Locators
-    this.idgBanner = page.locator('div[class="container-fluid"] h1');
-    this.usernameInput = page.locator('input[id="usernameUserInput"]');
-    this.passwordInput = page.locator('input[id="password"]');
-    this.btnNext = page.locator('input[id="NEXT"]');
-    this.btnContinue = page.locator('button[type="submit"]');
+    this.pageHeading = this.page.getByRole('heading').getByText(this.loginPageTestData.Login_Page.header);
+    this.btnSignIn = this.page.getByRole('button').getByText(this.buttonTextData.Login_Page.sign_in_button);
+    this.usernameInput = page.getByTestId('email');
+    this.passwordInput = page.getByTestId('password');
+    this.mfaCodeInput = page.getByTestId('code');
+    this.btnContinue = this.page.getByRole('button').getByText(this.buttonTextData.Login_Page.continue_button);
   }
 
   //Page Methods
   async assertOnLoginPage() {
-    const headerToValidate = this.loginPageTestData.Login_Page.header;
-    const partialLinkToValidate = this.loginPageTestData.Login_Page.partial_link;
-    await expect(this.idgBanner).toBeVisible();
-    await expect(this.idgBanner).toHaveText(headerToValidate);
-    expect(this.page.url()).toContain(partialLinkToValidate);
+    await expect.soft(this.pageHeading).toBeVisible();
   }
 
-  //passwords to be set in AzureDevops Pipeline, add encrypted values to .env when running locally
+  //passwords & mfaKey to be set in AzureDevops Pipeline, add encrypted values to .env when running locally
   async loginWithUserCreds(dataset: string) {
     const username = this.loginPageTestData[dataset].username;
-    let secretKey: any;
-    let authTag: any;
-    if (dataset === 'System_Admin') {
-      secretKey = process.env.SYSTEM_ADMIN_SECRET_KEY;
-      authTag = process.env.SYSTEM_ADMIN_AUTH_TAG;
-    } else if (dataset === 'Frontstage_User') {
-      secretKey = process.env.FRONTSTAGE_USER_SECRET_KEY;
-      authTag = process.env.FRONTSTAGE_USER_AUTH_TAG;
-    } else if (dataset === 'Backstage_User') {
-      secretKey = process.env.BACKSTAGE_USER_SECRET_KEY;
-      authTag = process.env.BACKSTAGE_USER_AUTH_TAG;
-    }
+    const userSecret = dataset + '_SECRET_KEY';
+    const userAuth = dataset + '_AUTH_TAG';
+    const secretKey = process.env[userSecret];
+    const authTag = process.env[userAuth];
+    const mfaKey = resolveEnvExpression(this.loginPageTestData[dataset].mfa);
     const password = getDecryptedValue(
       resolveEnvExpression(this.loginPageTestData[dataset].password),
       secretKey,
       authTag
     );
+    await this.btnSignIn.click();
     await this.usernameInput.fill(username);
-    await this.btnNext.click();
+    await this.btnContinue.click();
     await this.passwordInput.fill(password);
+    await this.btnContinue.click();
+    const oneTimeMfaCode = generateToken(mfaKey);
+    await this.mfaCodeInput.fill(oneTimeMfaCode);
     await this.btnContinue.click();
   }
 }

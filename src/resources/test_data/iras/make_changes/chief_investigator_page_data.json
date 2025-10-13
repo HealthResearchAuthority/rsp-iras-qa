@@ -1,0 +1,214 @@
+{
+  "Chief_Investigator_Page": {
+    "heading": "Chief investigator",
+    "chief_investigator_header_label": "Chief Investigator"
+  },
+  "Label_Texts": {
+    "chief_investigator_email_label": "Email",
+    "chief_investigator_first_name_label": "First name",
+    "chief_investigator_last_name_label": "Last name"
+  },
+  "Summary_Error_Message": {
+    "error_message_summary_header": "There is a problem",
+    "chief_investigator_email_text": "Enter an email address in the correct format"
+  },
+  "Summary_Error_Message_Max_Character_Limit_All_Fields": {
+    "error_message_summary_header": "There is a problem",
+    "chief_investigator_first_name_text": "First name must be 250 characters or less",
+    "chief_investigator_last_name_text": " Last name must be 250 characters or less",
+    "chief_investigator_email_text": "Email must be 250 characters or less"
+  },
+  "Field_Error_Chief_Email": {
+    "chief_investigator_email_text": "Enter an email address in the correct format"
+  },
+  "Valid_Data_All_Fields": {
+    "chief_investigator_first_name_text": "Chief Investigator First name",
+    "chief_investigator_last_name_text": "Chief Investigator Last name",
+    "chief_investigator_email_text": "ci_test@test.com"
+  },
+  "Valid_Data_All_Fields_Change": {
+    "chief_investigator_first_name_text": "Chief Investigator First name changed",
+    "chief_investigator_last_name_text": "Chief Investigator Last name changed",
+    "chief_investigator_email_text": "ci_test@test.com"
+  },
+  "Valid_Data_All_Fields_Blank": {
+    "chief_investigator_first_name_text": "",
+    "chief_investigator_last_name_text": "",
+    "chief_investigator_email_text": ""
+  },
+  "Invalid_Data_Max_Character_Limit": {
+    "chief_investigator_first_name_text": "AelianaSophiaIsabellaGabriellaAlexandriaSeraphinaValentinaAnastasiaEvangelineArabellaCassandraJulianaEmmanuellaTheodosiaChristabellaMariabellaRosabellaViolettaAngelinaSerenellaElizabellaMarcellinaMirabellaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx Morethan250chars",
+    "chief_investigator_last_name_text": "LastNameMaxAelianaSophiaIsabellaGabriellaAlexandriaSeraphinaValentinaAnastasiaEvangelineArabellaCassandraJulianaEmmanuellaTheodosiaChristabellaMariabellaRosabellaViolettaAngelinaSerenellaElizabellaMarcellinaMirabellaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx Morethan250chars",
+    "chief_investigator_email_text": "EmailAelianaSophiaIsabellaGabriellaAlexandriaSeraphinaValentinaAnastasiaEvangelineArabellaCassandraJulianaEmmanuellaTheodosiaChristabellaMariabellaRosabellaViolettaAngelinaSerenellaElizabellaMarcellinaMirabellaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx Morethan250chars@text.com"
+  },
+  "Field_Error_Max_Character_Limit_All_Fields": {
+    "chief_investigator_first_name_text": "First name must be 250 characters or less",
+    "chief_investigator_last_name_text": " Last name must be 250 characters or less",
+    "chief_investigator_email_text": "Email must be 250 characters or less"
+  },
+  "Valid_Data_All_Fields_Two": {
+    "chief_investigator_email_text": "ci_testTwo@test.com"
+  },
+  "Valid_Data_All_Empty_Fields": {
+    "chief_investigator_email_text": ""
+  },
+  "Valid_Data_Only_Investigator_Email_Field": {
+    "chief_investigator_email_text": "ci_test@test.com"
+  },
+  "Valid_Data_Only_Investigator_Email_Field_Two": {
+    "chief_investigator_email_text": "ci_testTwo@test.com"
+  },
+  "Valid_Email_Data": {
+    "chief_investigator_email_text": "john.doe@example.com"
+  },
+  "Valid_Email_Underscore": {
+    "chief_investigator_email_text": "john_doe@example.com"
+  },
+  "Valid_Email_Data_Hyphen": {
+    "chief_investigator_email_text": "john-doe@example.com"
+  },
+  "Valid_Email_Data_Plus": {
+    "chief_investigator_email_text": "john+newsletter@example.com"
+  },
+  "Valid_Email_Data_Exclamation": {
+    "chief_investigator_email_text": "john!doe@example.com"
+  },
+  "Valid_Email_Data_Hash": {
+    "chief_investigator_email_text": "john#profile@example.com"
+  },
+  "Valid_Email_Data_Dollar": {
+    "chief_investigator_email_text": "john$invoice@example.com"
+  },
+  "Valid_Email_Data_Percentage": {
+    "chief_investigator_email_text": "john%discount@example.com"
+  },
+  "Valid_Email_Data_Ampersand": {
+    "chief_investigator_email_text": "john&team@example.com"
+  },
+  "Valid_Email_Data_Single_Quote": {
+    "chief_investigator_email_text": "john's@example.com"
+  },
+  "Valid_Email_Data_Star": {
+    "chief_investigator_email_text": "john*star@example.com"
+  },
+  "Valid_Email_Data_Slash": {
+    "chief_investigator_email_text": "john/everyone@example.com"
+  },
+  "Valid_Email_Data_Equal_Symbol": {
+    "chief_investigator_email_text": "john=equals@example.com"
+  },
+  "Valid_Email_Data_Question_Mark": {
+    "chief_investigator_email_text": "john?query@example.com"
+  },
+  "Valid_Email_Data_Cap_Symbol": {
+    "chief_investigator_email_text": "john^caret@example.com"
+  },
+  "Valid_Email_Data_Right_Single_Quote": {
+    "chief_investigator_email_text": "john`code@example.com"
+  },
+  "Valid_Email_Data_Curly_Brackets": {
+    "chief_investigator_email_text": "john{editor}@example.com"
+  },
+  "Valid_Email_Data_Pipe_Symbol": {
+    "chief_investigator_email_text": "john|vertical@example.com"
+  },
+  "Valid_Email_Data_Tilde_Symbol": {
+    "chief_investigator_email_text": "john~tilde@example.com"
+  },
+  "Valid_Email_Data_Unicode": {
+    "chief_investigator_email_text": "johñ.unicode@example.com"
+  },
+  "Valid_Email_Data_Hyphen_Underscore": {
+    "chief_investigator_email_text": "john-_doe@example.com"
+  },
+  "Valid_Email_Data_Multiple_Unicode": {
+    "chief_investigator_email_text": "johñ.döe@example.com"
+  },
+  "Valid_Email_Data_Multiple_Sub_Domains": {
+    "chief_investigator_email_text": "mail.sub.subsub.sub.example.com"
+  },
+  "Valid_Email_Data_Domain": {
+    "chief_investigator_email_text": "john.doe@example.photography"
+  },
+  "Valid_Email_Data_Other_Language": {
+    "chief_investigator_email_text": "john@example.भारत"
+  },
+  "Valid_Email_Data_Number": {
+    "chief_investigator_email_text": "Johndoe2@example.com"
+  },
+  "Invalid_Email_Data_One_Start_With_Dot": {
+    "chief_investigator_email_text": ".john@example.com"
+  },
+  "Invalid_Email_Data_One_Double_Dot": {
+    "chief_investigator_email_text": "john..doe@example.com"
+  },
+  "Invalid_Email_Data_One_Space": {
+    "chief_investigator_email_text": "john doe@example.com"
+  },
+  "Invalid_Email_Data_One_Wrong_AT": {
+    "chief_investigator_email_text": "john[at]example."
+  },
+  "Invalid_Email_Data_One_Less_Greater_Symbols": {
+    "chief_investigator_email_text": "john<doe>@example.com"
+  },
+  "Invalid_Email_Data_One_Colon": {
+    "chief_investigator_email_text": "john:doe@example.com"
+  },
+  "Invalid_Email_Data_One_Semi_Colon": {
+    "chief_investigator_email_text": "john;doe@example.com"
+  },
+  "Invalid_Email_Data_One_Comma": {
+    "chief_investigator_email_text": "john,@example.com"
+  },
+  "Invalid_Email_Data_One_Start_With_Hyphen": {
+    "chief_investigator_email_text": "-john@example.com"
+  },
+  "Invalid_Email_Data_One_Hyphen_Before_Domain": {
+    "chief_investigator_email_text": "john@example-.com"
+  },
+  "Invalid_Email_Data_One_Double_Dot_Domain": {
+    "chief_investigator_email_text": "john.@example..com"
+  },
+  "Invalid_Email_Data_One_Exclamation_Domain": {
+    "chief_investigator_email_text": "john!doe@exa!mple.com"
+  },
+  "Invalid_Email_Data_One_Unicode": {
+    "chief_investigator_email_text": "johñ@example.com"
+  },
+  "Invalid_Email_Data_One_Single_Quote_Before_AT": {
+    "chief_investigator_email_text": "john.doe'@example.com"
+  },
+  "Invalid_Email_Data_One_Domain_Exceed_Max": {
+    "chief_investigator_email_text": "averyveryverylongdomainnamewithmanysubdomainsandmorecharacters.com"
+  },
+  "Invalid_Email_Data_One_Local_Part_Max": {
+    "chief_investigator_email_text": "averyveryverylongemailaddressthatexceedscharacters@example.com"
+  },
+  "Invalid_Email_Data_One_Consecutive_Dot_Domain": {
+    "chief_investigator_email_text": "john@example..com"
+  },
+  "Invalid_Email_Data_One_Consecutive_Dot_SubDomain": {
+    "chief_investigator_email_text": "mail..sub.example.com"
+  },
+  "Invalid_Email_Data_One_Consecutiv_Dot_Domain_SubDomain": {
+    "chief_investigator_email_text": "john..doe'@example..com"
+  },
+  "Invalid_Email_Data_One_Emoji": {
+    "chief_investigator_email_text": "john🙂@example.com"
+  },
+  "Invalid_Email_Data_One_TLD": {
+    "chief_investigator_email_text": "john.doe@example.1234"
+  },
+  "Invalid_Email_Data_One_Missing_AT": {
+    "chief_investigator_email_text": "john.doeexample.com"
+  },
+  "Invalid_Email_Data_One_Reserved_Domain": {
+    "chief_investigator_email_text": "john.doe@localhost"
+  },
+  "Invalid_Email_Data_One_Punycode": {
+    "chief_investigator_email_text": "john@example.xn--mgbh0fb"
+  },
+  "Invalid_Email_Data_One_Max_Char": {
+    "chief_investigator_email_text": "EmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExcee@example.com"
+  }
+}

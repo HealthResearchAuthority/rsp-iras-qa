@@ -12,7 +12,7 @@ Then(
   async ({ commonItemsPage, reseachLocationsPage }, datasetName: string) => {
     const dataset = reseachLocationsPage.researchLocationsPageTestData[datasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         await commonItemsPage.fillUIComponent(dataset, key, reseachLocationsPage);
       }
     }
@@ -24,7 +24,7 @@ Then(
   async ({ commonItemsPage, reseachLocationsPage }, datasetName: string) => {
     const dataset = reseachLocationsPage.researchLocationsPageTestData[datasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         const labelVal = await commonItemsPage.getUiLabel(key, reseachLocationsPage);
         expect(labelVal).toBe(dataset[key]);
       }
@@ -37,7 +37,7 @@ Then(
   async ({ commonItemsPage, reseachLocationsPage }, datasetName: string) => {
     const dataset = reseachLocationsPage.researchLocationsPageTestData[datasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         await commonItemsPage.validateUIComponentValues(dataset, key, reseachLocationsPage);
       }
     }

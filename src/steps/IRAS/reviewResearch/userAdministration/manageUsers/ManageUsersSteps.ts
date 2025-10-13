@@ -1,11 +1,12 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../../hooks/CustomFixtures';
+import dateTimeRelatedData from '../../../../../resources/test_data/common/date_time_related_data.json';
 const { When, Then } = createBdd(test);
 
 When('I update user profile with {string}', async ({ commonItemsPage, editUserProfilePage }, datasetName: string) => {
   const dataset = editUserProfilePage.editUserProfilePageTestData[datasetName];
   for (const key in dataset) {
-    if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+    if (Object.hasOwn(dataset, key)) {
       await commonItemsPage.fillUIComponent(dataset, key, editUserProfilePage);
     }
   }
@@ -13,12 +14,13 @@ When('I update user profile with {string}', async ({ commonItemsPage, editUserPr
 
 When(
   'I can see the newly created user record should be present in the list for {string} with {string} status in the manage user page',
-  async ({ manageUsersPage, createUserProfilePage }, datasetName: string, status: string) => {
+  async ({ manageUsersPage, createUserProfilePage, commonItemsPage }, datasetName: string, status: string) => {
     const foundRecord = await manageUsersPage.getUniqueUserRecord(
       datasetName,
       status,
       createUserProfilePage,
-      manageUsersPage
+      manageUsersPage,
+      commonItemsPage
     );
     expect(foundRecord).toBeDefined();
     expect(foundRecord).toHaveCount(1);
@@ -43,12 +45,13 @@ When(
 
 When(
   'I search and click on view edit link for unique {string} user with {string} status from the manage user page',
-  async ({ manageUsersPage, createUserProfilePage }, datasetName: string, status: string) => {
+  async ({ manageUsersPage, createUserProfilePage, commonItemsPage }, datasetName: string, status: string) => {
     const foundRecord = await manageUsersPage.getUniqueUserRecord(
       datasetName,
       status,
       createUserProfilePage,
-      manageUsersPage
+      manageUsersPage,
+      commonItemsPage
     );
     expect(foundRecord).toBeDefined();
     expect(foundRecord).toHaveCount(1);
@@ -61,7 +64,7 @@ Then(
   async ({ commonItemsPage, manageUsersPage }, datasetName: string) => {
     const dataset = manageUsersPage.manageUsersPageTestData.Manage_Users_Page[datasetName];
     for (const key in dataset) {
-      if (Object.prototype.hasOwnProperty.call(dataset, key)) {
+      if (Object.hasOwn(dataset, key)) {
         const labelVal = await commonItemsPage.getUiLabel(key, manageUsersPage);
         expect(labelVal).toBe(dataset[key]);
       }
@@ -100,7 +103,7 @@ When(
 When(
   'I validate the last logged in is displayed blank for the new user who has not yet logged in to the application',
   async ({ manageUsersPage }) => {
-    expect(await manageUsersPage.last_logged_in_from_list_label.textContent()).toBe('');
+    expect(manageUsersPage.last_logged_in_from_list_label).toBeEmpty();
   }
 );
 
@@ -111,21 +114,31 @@ When('I keep note of the current login date', async ({ manageUsersPage }) => {
     month: 'long',
     year: 'numeric',
   }).format(today);
-  const formattedDateTruncated = new Intl.DateTimeFormat('en-GB', {
+  const formattedDateTruncatedParts = new Intl.DateTimeFormat('en-GB', {
     day: 'numeric',
     month: 'short',
     year: 'numeric',
-  }).format(today);
+  }).formatToParts(today);
+  const day = formattedDateTruncatedParts.find((p) => p.type === 'day')?.value;
+  const month = formattedDateTruncatedParts.find((p) => p.type === 'month')?.value;
+  const year = formattedDateTruncatedParts.find((p) => p.type === 'year')?.value;
+  const formattedDateTruncated = `${day} ${month?.slice(0, 3)} ${year}`;
   manageUsersPage.setLastLoggedInDateFull(formattedDateFull);
   manageUsersPage.setLastLoggedInDateTruncated(formattedDateTruncated);
+  manageUsersPage.setLastLoggedInHours(today.getHours());
 });
 
 When(
   'I validate the last logged in is displayed as truncated date in manage users page',
   async ({ manageUsersPage }) => {
-    expect(await manageUsersPage.last_logged_in_from_list_label.textContent()).toBe(
-      manageUsersPage.getLastLoggedInDateTruncated()
-    );
+    expect
+      .soft(manageUsersPage.last_logged_in_from_list_label)
+      .toContainText(`${manageUsersPage.getLastLoggedInDateTruncated()} ${dateTimeRelatedData.at}`);
+    if (manageUsersPage.getLastLoggedInHours() >= 12) {
+      expect(manageUsersPage.last_logged_in_from_list_label).toContainText(`${dateTimeRelatedData.afternoon}`);
+    } else {
+      expect(manageUsersPage.last_logged_in_from_list_label).toContainText(`${dateTimeRelatedData.morning}`);
+    }
   }
 );
 
@@ -140,5 +153,173 @@ When(
     } else if (caseValue === 'remove QAAutomation prefix') {
       await createUserProfilePage.setUniqueEmail(email.replace('QAAUTOMATION', ''));
     }
+  }
+);
+
+Then(
+  'I can see the manage users list sorted by {string} order of the {string} on the {string} page',
+  async ({ manageUsersPage, commonItemsPage }, sortDirection: string, sortField: string, currentPage: string) => {
+    let sortedUserList: string[];
+    let userColumnIndex: number;
+    switch (sortField.toLowerCase()) {
+      case 'first name':
+        userColumnIndex = 0;
+        break;
+      case 'last name':
+        userColumnIndex = 1;
+        break;
+      case 'email address':
+        userColumnIndex = 2;
+        break;
+      case 'status':
+        userColumnIndex = 3;
+        break;
+      case 'last logged in':
+        userColumnIndex = 4;
+        break;
+      default:
+        throw new Error(`${sortField} is not a valid option`);
+    }
+    const actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, userColumnIndex);
+    if (sortField.toLowerCase() == 'last logged in') {
+      sortedUserList = await manageUsersPage.sortLastLoggedInListValues(actualList, sortDirection);
+    } else if (sortDirection.toLowerCase() == 'ascending') {
+      sortedUserList = [...actualList].toSorted((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
+      if (sortField.toLowerCase() == 'status' && currentPage.toLowerCase() == 'first') {
+        expect(actualList).toContain(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enabled_status);
+      }
+    } else {
+      sortedUserList = [...actualList].toSorted((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
+      if (sortField.toLowerCase() == 'status' && currentPage.toLowerCase() == 'first') {
+        expect(actualList).toContain(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.disabled_status);
+      }
+    }
+    expect(actualList).toEqual(sortedUserList);
+  }
+);
+
+When(
+  'I enter {string} into the search field for manage users page',
+  async ({ manageUsersPage }, datasetName: string) => {
+    const dataset =
+      manageUsersPage.manageUsersPageTestData.Search_For_Users.Search_Queries_Advanced_Filter[datasetName];
+    await manageUsersPage.user_search_text.fill(dataset['search_input_text']);
+  }
+);
+
+When(
+  'I select advanced filters in the manage users page using {string}',
+  async ({ manageUsersPage, commonItemsPage }, filterDatasetName: string) => {
+    const dataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[filterDatasetName];
+    for (const key in dataset) {
+      if (Object.hasOwn(dataset, key)) {
+        if (key.includes('date')) {
+          if (!(await manageUsersPage.date_last_logged_in_from_day_text.isVisible())) {
+            await manageUsersPage.date_last_logged_in_from_day_text_chevron.click();
+          }
+          await commonItemsPage.fillUIComponent(dataset, key, manageUsersPage);
+        } else if (key === 'review_body_checkbox') {
+          await manageUsersPage[key + '_chevron'].click();
+          await commonItemsPage.selectCheckboxUserProfileReviewBody(dataset, manageUsersPage);
+        } else {
+          await manageUsersPage[key + '_chevron'].click();
+          await commonItemsPage.fillUIComponent(dataset, key, manageUsersPage);
+        }
+      }
+    }
+  }
+);
+
+When(
+  'I can see the results matching the search {string} and filter criteria {string} for manage users page',
+  async ({ manageUsersPage, commonItemsPage }, searchDatasetName: string, filterDatasetName: string) => {
+    const searchCriteriaDataset =
+      manageUsersPage.manageUsersPageTestData.Search_For_Users.Search_Queries_Advanced_Filter[searchDatasetName];
+    const filterDataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[filterDatasetName];
+    if (searchDatasetName !== '') {
+      await manageUsersPage.validateResults(
+        commonItemsPage,
+        searchCriteriaDataset,
+        filterDataset,
+        searchDatasetName,
+        true
+      );
+    } else {
+      await manageUsersPage.validateResults(
+        commonItemsPage,
+        searchCriteriaDataset,
+        filterDataset,
+        searchDatasetName,
+        false
+      );
+    }
+  }
+);
+
+Then(
+  'I verify the hint text based on the {string} for manage users page',
+  async ({ manageUsersPage }, filterDatasetName: string) => {
+    const dataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[filterDatasetName];
+    for (const key in dataset) {
+      if (Object.hasOwn(dataset, key)) {
+        if (key === 'country_checkbox') {
+          const numberOfCheckboxesSelected = dataset[key].length;
+          const hintLabel =
+            numberOfCheckboxesSelected +
+            ' ' +
+            manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List
+              .selected_checkboxes_hint_label;
+          expect(await manageUsersPage.country_selected_hint_label.textContent()).toBe(hintLabel);
+        }
+      }
+    }
+  }
+);
+
+When(
+  'I expand the chevrons for {string} in manage users page',
+  async ({ manageUsersPage }, filterDatasetName: string) => {
+    const dataset = manageUsersPage.manageUsersPageTestData.Advanced_Filters[filterDatasetName];
+    for (const key in dataset) {
+      if (Object.hasOwn(dataset, key)) {
+        await manageUsersPage.clickFilterChevronUsers(dataset, key, manageUsersPage);
+      }
+    }
+  }
+);
+
+Then('I can see the {string} ui labels in manage users page', async ({ manageUsersPage }, datasetName: string) => {
+  const dataset = manageUsersPage.manageUsersPageTestData.Manage_Users_Page[datasetName];
+  for (const key in dataset) {
+    if (Object.hasOwn(dataset, key)) {
+      await expect(manageUsersPage[key].getByText(dataset[key])).toBeVisible();
+    }
+  }
+});
+
+Then(
+  'I validate {string} displayed on advanced filters in manage users page',
+  async ({ manageUsersPage }, errorMessageFieldDatasetName: string) => {
+    const fieldErrorMessagesExpected =
+      manageUsersPage.manageUsersPageTestData.Error_Message_Field_Dataset[errorMessageFieldDatasetName];
+    const fieldErrorMessagesActualValues = await manageUsersPage.date_last_logged_in_error_message.textContent();
+    expect(fieldErrorMessagesActualValues).toEqual(fieldErrorMessagesExpected);
+  }
+);
+
+Then(
+  'I retrieve the list of review bodies displayed in the review body checkbox in the advanced filters of manage users page',
+  async ({ manageUsersPage, commonItemsPage }) => {
+    const actualList = await commonItemsPage.getLabelsFromCheckboxes(manageUsersPage.review_body_checkbox);
+    await manageUsersPage.setReviewBodies(actualList);
+  }
+);
+
+Then(
+  'I can see the review body field in the review body checkbox in the advanced filters of manage users page should contain all currently enabled review bodies from the manage review bodies page',
+  async ({ manageUsersPage, manageReviewBodiesPage }) => {
+    const actualList = [...new Set(await manageUsersPage.getReviewBodies())];
+    const expectedList = [...new Set(await manageReviewBodiesPage.getOrgNamesListFromUI())];
+    expect.soft(actualList.slice(0, expectedList.length)).toEqual(expectedList);
   }
 );

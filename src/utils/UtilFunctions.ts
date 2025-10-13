@@ -1,13 +1,13 @@
 import { DataTable } from 'playwright-bdd';
 import { Locator, chromium, devices, firefox, webkit } from '@playwright/test';
-import { createDecipheriv, DecipherGCM } from 'crypto';
-import { readFile, writeFile } from 'fs/promises';
+import { createDecipheriv, DecipherGCM, randomInt } from 'node:crypto';
+import { readFile, writeFile } from 'node:fs/promises';
 import 'dotenv/config';
 import { deviceDSafari, deviceDFirefox, deviceDChrome, deviceDEdge } from '../hooks/GlobalSetup';
-import fs from 'fs';
-import os from 'os';
+import * as fs from 'node:fs';
+import os from 'node:os';
 import * as fse from 'fs-extra';
-import path from 'path';
+import path from 'node:path';
 
 const pathToCreateUserTestDataJson =
   './src/resources/test_data/iras/reviewResearch/userAdministration/manageUsers/create_user_profile_page_data.json';
@@ -29,36 +29,22 @@ const deviceScaleFactoriPad = 2;
 const deviceScaleFactorAndroid = 3.5;
 
 export function getAuthState(user: string): string {
-  let authState: string;
-  switch (user.toLowerCase()) {
-    case 'system_admin':
-      authState = 'auth-storage-states/sysAdminUser.json';
-      break;
-    case 'frontstage_user':
-      authState = 'auth-storage-states/frontStageUser.json';
-      break;
-    case 'backstage_user':
-      authState = 'auth-storage-states/backStageUser.json';
-      break;
-    default:
-      throw new Error(`${user} is not a valid option`);
-  }
+  const authState: string = `auth-storage-states/${user.toLowerCase()}.json`;
   return authState;
 }
 
 export function confirmStringNotNull(inputString: string | null | undefined): string {
-  if (inputString != null) {
-    return inputString.trim();
-  } else {
-    throw new Error(`The input string is null`);
+  if (inputString == null) {
+    throw new Error('The input string is null');
   }
+  return inputString.trim();
 }
 
 export function confirmArrayNotNull<ArrayType>(inputArr: ArrayType[] | null | undefined): ArrayType[] {
   if (Array.isArray(inputArr)) {
     return inputArr;
   } else {
-    throw new Error(`The input array is null`);
+    throw new TypeError('The input array is null or undefined');
   }
 }
 
@@ -87,7 +73,7 @@ export function getTicketReferenceTags(tags: string[]): string[] {
   return tickets;
 }
 
-export function getDecryptedValue(data: string, secretKey?: any, authTag?: string) {
+export function getDecryptedValue(data: string, secretKey?: string, authTag?: string) {
   let value: string = '';
   if (secretKey) {
     const decipher = createDecipheriv('AES-256-GCM', Buffer.from(secretKey), Buffer.alloc(16)) as DecipherGCM;
@@ -218,37 +204,42 @@ export function getBrowser(deviceType: string): any {
 export function getBrowserType(deviceType: string): string {
   const browser = getBrowser(deviceType);
   let browserName: string;
-  if (`${process.env.BROWSER?.toLowerCase()}` == 'microsoft edge') {
+  const envBrowser = process.env.BROWSER?.toLowerCase();
+  if (envBrowser === 'microsoft edge') {
     browserName = 'Microsoft Edge';
-  } else if (`${process.env.BROWSER?.toLowerCase()}` == 'google chrome') {
+  } else if (envBrowser === 'google chrome') {
     browserName = 'Google Chrome';
   } else {
-    browserName = JSON.parse(JSON.stringify(browser)).defaultBrowserType;
+    browserName = structuredClone(browser).defaultBrowserType;
   }
+
   return browserName;
 }
 
 export async function getBrowserVersionDevices(deviceType: string): Promise<string | undefined> {
   const browser = getBrowser(deviceType);
+  const browserType = structuredClone(browser).defaultBrowserType;
+  const platform = process.env.PLATFORM?.toLowerCase();
+  const browserEnv = process.env.BROWSER?.toLowerCase();
   let version: string | undefined;
-  const browserType = `${JSON.parse(JSON.stringify(browser)).defaultBrowserType}`;
-  if (browserType == 'chromium') {
-    if (`${process.env.PLATFORM?.toLowerCase()}` == 'desktop') {
-      if (`${process.env.BROWSER?.toLowerCase()}` == 'chromium') {
+  if (browserType === 'chromium') {
+    if (platform === 'desktop') {
+      if (browserEnv === 'chromium') {
         version = await getAllBrowserVersion('chromium');
-      } else if (`${process.env.BROWSER?.toLowerCase()}` == 'microsoft edge') {
+      } else if (browserEnv === 'microsoft edge') {
         version = await getAllBrowserVersion('microsoft edge');
-      } else if (`${process.env.BROWSER?.toLowerCase()}` == 'google chrome') {
+      } else if (browserEnv === 'google chrome') {
         version = await getAllBrowserVersion('google chrome');
       }
     } else {
       version = await getAllBrowserVersion('chromium');
     }
-  } else if (browserType == 'webkit') {
+  } else if (browserType === 'webkit') {
     version = await getAllBrowserVersion('webkit');
-  } else if (browserType == 'firefox') {
+  } else if (browserType === 'firefox') {
     version = await getAllBrowserVersion('firefox');
   }
+
   return version;
 }
 
@@ -491,7 +482,7 @@ function extractWcagStandard(wcagTag: string): string {
 
 function extractWcagGuideline(wcagTag: string): number {
   const wcagGuidelineRegex = new RegExp(/\d+/);
-  const wcagTagGuideline = parseInt(confirmStringNotNull(wcagGuidelineRegex.exec(wcagTag)?.toString()));
+  const wcagTagGuideline = Number.parseInt(confirmStringNotNull(wcagGuidelineRegex.exec(wcagTag)?.toString()));
   return wcagTagGuideline;
 }
 
@@ -506,13 +497,13 @@ function standardAcheived(doubleViolation: number, tripleViolation: number) {
 }
 
 export async function generateUniqueEmail(keyVal: string, prefix: string): Promise<string> {
-  const timestamp = new Date().toISOString().replace(/[-:.TZ]/g, '');
+  const timestamp = new Date().toISOString().replaceAll(/[-:.TZ]/g, '');
   const domain = keyVal;
   return `${prefix}${timestamp}${domain}`;
 }
 
 export async function generateUniqueValue(keyVal: string, prefix: string): Promise<string> {
-  const timestamp = new Date().toISOString().replace(/[-:.TZ]/g, '');
+  const timestamp = new Date().toISOString().replaceAll(/[-:.TZ]/g, '');
   const domain = keyVal;
   return `${domain}${prefix}${timestamp}`;
 }
@@ -532,14 +523,14 @@ export async function removeUnwantedWhitespace(value: string): Promise<string> {
 }
 
 export async function generateTimeStampedValue(keyVal: string, separator: string): Promise<string> {
-  const timestamp = new Date().toISOString().replace(/[-:.TZ]/g, '');
+  const timestamp = new Date().toISOString().replaceAll(/[-:.TZ]/g, '');
   return `${keyVal}${separator}${timestamp}`;
 }
 
 export async function getCurrentTimeFormatted(): Promise<string> {
   const date = new Date();
   const utcDay = date.getUTCDate().toString().padStart(2, '0');
-  const utcMonth = date.toLocaleString('en-GB', { month: 'short', timeZone: 'UTC' });
+  const utcMonth = date.toLocaleString('en-GB', { month: 'short', timeZone: 'UTC' }).slice(0, 3);
   const utcYear = date.getUTCFullYear();
   const utcHours = date.getUTCHours().toString().padStart(2, '0');
   const utcMinutes = date.getUTCMinutes().toString().padStart(2, '0');
@@ -548,18 +539,35 @@ export async function getCurrentTimeFormatted(): Promise<string> {
 }
 
 export async function returnDataFromJSON(filePath?: string): Promise<any> {
-  if (typeof filePath !== 'undefined') {
-    const definedPath = path.resolve(filePath);
-    return await fse.readJson(definedPath);
-  } else {
-    const createUserPath = path.resolve(pathToCreateUserTestDataJson);
-    return await fse.readJson(createUserPath);
-  }
+  const resolvedPath = filePath ? path.resolve(filePath) : path.resolve(pathToCreateUserTestDataJson);
+  return await fse.readJson(resolvedPath);
 }
 
 export async function convertDate(day: string, month: number, year: number): Promise<any> {
   const formattedDate = `${day.padStart(2, '0')} ${month} ${year}`;
   return formattedDate.toString();
+}
+
+export async function convertDateShortMonth(day: string, month: string, year: number): Promise<string> {
+  const formattedDay = String(Number.parseInt(day, 10));
+  const formattedMonth = month.charAt(0).toUpperCase() + month.slice(1, 3).toLowerCase();
+  const formattedDate = `${formattedDay} ${formattedMonth} ${year}`;
+  return formattedDate;
+}
+
+export async function validateDateRange(validationDate: string, fromDate?: string, toDate?: string): Promise<boolean> {
+  const target = new Date(validationDate);
+  const from = new Date(fromDate);
+  const to = new Date(toDate);
+  if (!from.toString().includes('Invalid Date') && !to.toString().includes('Invalid Date')) {
+    return target >= from && target <= to;
+  } else if (!from.toString().includes('Invalid Date')) {
+    return target >= from;
+  } else if (!to.toString().includes('Invalid Date')) {
+    return target <= to;
+  }
+  // If both from and to are not provided or are placeholders, consider it invalid
+  return false;
 }
 
 export async function returnSingleRandomLocator(resolvesToMultiElements: Locator): Promise<Locator> {
@@ -583,4 +591,36 @@ export function resolveEnvExpression(template: string): string {
     throw new Error(`Environment variable "${envVar}" is not defined`);
   }
   return value;
+}
+
+export function convertTwelveHrToTwentyFourHr(timeValue: string) {
+  const timesArray = timeValue.trim().split(':');
+  const isAM = timesArray[1].includes('am');
+  if (isAM) {
+    timesArray[0] = timesArray[0].padStart(2, '0');
+    timesArray[1] = timesArray[1].replace('am', '');
+    if (timesArray[0] === '12') timesArray[0] = '00';
+  } else {
+    timesArray[0] = (+timesArray[0] + 12).toString();
+    timesArray[1] = timesArray[1].replace('pm', '');
+    if (timesArray[0] === '24') timesArray[0] = '12';
+  }
+  return [timesArray.join(':')];
+}
+
+export async function getRandomNumber(min: number, max: number): Promise<number> {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return randomInt(min, max);
+}
+
+export async function getFormattedDate(): Promise<string> {
+  const today = new Date();
+  const options: Intl.DateTimeFormatOptions = {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+  };
+  const formattedDate = today.toLocaleDateString('en-GB', options);
+  return formattedDate;
 }

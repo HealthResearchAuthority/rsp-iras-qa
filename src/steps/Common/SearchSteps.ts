@@ -6,7 +6,16 @@ import { confirmArrayNotNull } from '../../utils/UtilFunctions';
 When(
   'I fill the search input for searching {string} with {string} as the search query',
   async (
-    { manageReviewBodiesPage, manageUsersPage, userListReviewBodyPage, searchAddUserReviewBodyPage, commonItemsPage },
+    {
+      manageReviewBodiesPage,
+      manageUsersPage,
+      searchAddUserReviewBodyPage,
+      searchModificationsPage,
+      modificationsReadyToAssignPage,
+      myModificationsTasklistPage,
+      commonItemsPage,
+      participatingOrganisationsPage,
+    },
     searchType: string,
     searchQueryName: string
   ) => {
@@ -21,6 +30,17 @@ When(
         searchAddUserReviewBodyPage.searchAddUserReviewBodyPageData.Search_Add_User_Review_Body.Search_Queries[
           searchQueryName
         ];
+    } else if (searchType.toLowerCase() == 'modifications') {
+      searchQueryDataset = searchModificationsPage.searchModificationsPageTestData.Search_Queries[searchQueryName];
+    } else if (searchType.toLowerCase() == 'tasklist') {
+      searchQueryDataset =
+        modificationsReadyToAssignPage.modificationsReadyToAssignPageTestData.Search_Queries[searchQueryName];
+    } else if (searchType.toLowerCase() == 'my tasklist') {
+      searchQueryDataset =
+        myModificationsTasklistPage.myModificationsTasklistPageTestData.Search_Queries[searchQueryName];
+    } else if (searchType.toLowerCase() == 'organisations') {
+      searchQueryDataset =
+        participatingOrganisationsPage.participatingOrganisationsPageTestData.Search_Queries[searchQueryName];
     } else if ((await commonItemsPage.tableBodyRows.count()) < 1) {
       throw new Error(`There are no items in list to search`);
     }
@@ -31,7 +51,7 @@ When(
       searchKey = searchQueryDataset['search_input_text'];
     }
     expect(searchKey).toBeTruthy();
-    await userListReviewBodyPage.setSearchKey(searchKey);
+    await commonItemsPage.setSearchKey(searchKey);
     await commonItemsPage.search_text.fill(searchKey);
   }
 );
@@ -39,7 +59,7 @@ When(
 Given(
   'the system displays user records matching the search criteria',
   async ({ userListReviewBodyPage, commonItemsPage }) => {
-    const searchKey = await userListReviewBodyPage.getSearchKey();
+    const searchKey = await commonItemsPage.getSearchKey();
     const searchTerms = await commonItemsPage.splitSearchTerm(searchKey);
     const userList = await commonItemsPage.getAllUsersFromTheTable();
     const userListAfterSearch: string[] = confirmArrayNotNull(userList.get('searchResultValues'));

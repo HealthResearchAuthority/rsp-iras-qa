@@ -178,19 +178,6 @@ export default class ReviewBodyProfilePage {
     await this.page.goto(`reviewbody/view/${reviewBodyId}`);
   }
 
-  async clickOnChangeButton(fieldKey: string) {
-    const locatorName = fieldKey.toLowerCase() + '_change_link';
-    // This if condition need to be removed for android after the defect fix RSP-4099
-    if (process.env.OS_TYPE?.toLowerCase() == 'android' && process.env.PLATFORM?.toLowerCase() == 'mobile') {
-      await this[locatorName].focus();
-      await this[locatorName].press('Enter');
-    } else {
-      await this[locatorName].scrollIntoViewIfNeeded(); // This line need to be removed after the defect fix RSP-4099
-      await expect(this[locatorName]).toBeInViewport();
-      await this[locatorName].click();
-    }
-  }
-
   //Getters & Setters for Private Variables
   async getOrgName(): Promise<string> {
     return this._org_name;

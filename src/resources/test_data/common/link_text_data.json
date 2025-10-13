@@ -31,7 +31,7 @@
     "REC_members": "REC members",
     "Sponsor": "Sponsor",
     "System_Administration": "System administration",
-    "Technical|_Assurance": "Technical Assurance",
+    "Technical_Assurance": "Technical Assurance",
     "Technical_Assurance_reviewers": "Technical Assurance reviewers"
   },
   "Project_Details_IRAS_Page": {
@@ -40,7 +40,7 @@
   "Project_Details_Title_Page": {
     "Back": "Back"
   },
-  "Key_Project_Roles_Page": {
+  "Chief_Investigator_Page": {
     "Back": "Back"
   },
   "Research_Locations_Page": {
@@ -49,7 +49,9 @@
   "Manage_Users_Page": {
     "Add_New_User_Profile_Record": "Add a new user profile record",
     "Back": "Back",
-    "View_Edit": "View/Edit"
+    "View_Edit": "View/Edit",
+    "Advanced_Filters": "Advanced filters",
+    "Clear_All_Filters": "Clear all filters"
   },
   "Create_User_Profile_Page": {
     "Back": "Back"
@@ -75,12 +77,14 @@
     "Back_To_Manage_Users": "Back to Manage users",
     "Back_To_Manage_Review_Bodies": "Back to Manage review bodies",
     "Remove_Another_User_From_The_Review_Body": "Remove another user from the review body",
-    "Add_Another_User_To_The_Review_Body": " Add another user to review body"
+    "Add_Another_User_To_The_Review_Body": " Add another user to review body",
+    "View_Project_Overview": "View project overview"
   },
   "Manage_Review_Bodies_Page": {
     "Back": "Back",
     "Add_New_Review_Body_Record": "Add a new review body record",
-    "View_Edit": "View/Edit"
+    "View_Edit": "View/Edit",
+    "Clear_All_Filters": "Clear all filters"
   },
   "System_Administration_Page": {
     "Back": "Back",
@@ -114,7 +118,13 @@
     "Back": "Back"
   },
   "Project_Overview_Page": {
-    "Project_Details": "Project details"
+    "Project_Details": "Project details",
+    "Project": "QA_Automation - This is a short project title",
+    "Post_Approval": "Post approval",
+    "Key_Project_Roles": "Chief investigator",
+    "Research_Locations": "Research locations",
+    "View_Project_Overview": "View project overview",
+    "Project_Documents": "Project documents"
   },
   "Review_Body_User_List_Page": {
     "Back_To_Review_Body_Profile": "Back to review body profile",
@@ -130,6 +140,9 @@
     "Back": "Back",
     "Change": "Change"
   },
+  "Review_Your_Information_Page": {
+    "Change": "Change"
+  },
   "Search_Add_User_Review_Body_Page": {
     "Back": "Back",
     "Back_To_Users": "Back to Users for ",
@@ -142,6 +155,84 @@
     "Back_To_Manage_Review_Bodies": "Back to Manage review bodies"
   },
   "My_Research_Page": {
+    "Back": "Back",
+    "Project": "QA_Automation - This is a short project title"
+  },
+  "Search_Modifications_Page": {
+    "Advanced_Filters": "Advanced filters",
+    "Clear_All_Filters": "Clear all filters",
+    "Back": "Back"
+  },
+  "Modifications_Tasklist_Page": {
+    "Back": "Back",
+    "Date_Submitted_Filter_Panel": "Date submitted",
+    "Short_Project_Title_Filter_Panel": "Short project title",
+    "Clear_All_Filters": "Clear all filters"
+  },
+  "My_Modifications_Tasklist_Page": {
+    "Back": "Back",
+    "Date_Submitted_Filter_Panel": "Date submitted",
+    "Short_Project_Title_Filter_Panel": "Short project title",
+    "Clear_All_Filters": "Clear all filters"
+  },
+  "Select_Area_Of_Change_Page": {
+    "Back": "Back",
+    "Remove_This_Change": "Remove this change"
+  },
+  "Planned_End_Date_Change_Page": {
+    "Back": "Back"
+  },
+  "Participating_Organisations_Page": {
+    "Back": "Back",
+    "Advanced_Filter": "Advanced filters",
+    "Remove_This_Change": "Remove this change"
+  },
+  "Approvals_Page": {
+    "Search": "Search",
+    "Back": "Back",
+    "Modifications_Tasklist": "Modifications tasklist",
+    "My_Tasklist": "My tasklist"
+  },
+  "Affected_Organisation_Selection_Page": {
+    "Back": "Back",
+    "Remove_This_Change": "Remove this change"
+  },
+  "Affected_Organisation_Questions_Page": {
+    "Back": "Back",
+    "Remove_This_Change": "Remove this change"
+  },
+  "Review_Changes_Planned_End_Date_Page": {
+    "Back": "Back"
+  },
+  "Review_Uploaded_Document_Modifications_Page": {
+    "Back": "Back"
+  },
+  "Modifications_Assignment_Confirmation_Page": {
+    "Back_To_Tasklist": "Back to Tasklist"
+  },
+  "Select_Study_Wide_Reviewer_Page": {
+    "Back": "Back"
+  },
+  "Project_Created_Confirmation_Page": {
+    "View_Project_Overview": "View project overview"
+  },
+  "Review_All_Changes_Page": {
+    "Delete_Modification": "Delete modification",
+    "Change": "Change"
+  },
+  "Modification_Details_Page": {
+    "Back": "Back",
+    "Change": "Change",
+    "Remove": "Remove",
+    "Delete_Modification": "Delete modification"
+  },
+  "Modification_Unfinished_Error_Page": {
+    "Back": "Back"
+  },
+  "Create_Project_Confirmation_Page": {
+    "View_Project_Overview": "View project overview"
+  },
+  "Project_Overview_Unfinished_Projects_Page": {
     "Back": "Back"
   }
 }

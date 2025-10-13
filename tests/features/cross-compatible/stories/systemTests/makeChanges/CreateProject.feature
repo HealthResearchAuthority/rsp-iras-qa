@@ -1,4 +1,4 @@
-@FrontStageUser @createProject @createAmendment @SystemTest
+@ApplicantUser @createProject @createAmendment @SystemTest
 Feature: Create Amendment - Create Project
 
   Background:
@@ -76,9 +76,9 @@ Feature: Create Amendment - Create Project
     Then I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
-    Then I can see the key project roles page
+    Then I can see the chief investigator page
     And I capture the page screenshot
-    When I click the '<Navigation_Link>' link on the 'Key_Project_Roles_Page'
+    When I click the '<Navigation_Link>' link on the 'Chief_Investigator_Page'
     Then I can see previously saved values for '<Project_Details_Title>' displayed on the project details title page
     And I capture the page screenshot
 
@@ -152,174 +152,131 @@ Feature: Create Amendment - Create Project
     And I capture the page screenshot
     Then I fill the project details title page with '<Project_Details_Title>'
     When I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
-    Then I fill the key project roles page with '<Key_Project_Roles>'
-    Then I click the '<Navigation_Button_Third>' button on the 'Key_Project_Roles_Page'
+    Then I fill the chief investigator page with '<Chief_Investigator>'
+    Then I click the '<Navigation_Button_Third>' button on the 'Chief_Investigator_Page'
     Then I fill the research locations page with '<Research_Locations>'
     When I click the '<Navigation_Button_Third>' button on the 'Research_Locations_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     Then I can see the review your answers page
     And I click the change link '<Change_Link_Field>' on review your answers page
     And I capture the page screenshot
     And I click the '<Navigation_Link>' link on the 'Project_Details_Title_Page'
     Then I can see the review your answers page
     When I click the '<Navigation_Button_Fourth>' button on the 'Review_Your_Answers_Page'
-    Then I can see the project overview page
-    When I click the '<Navigation_Link_Second>' link on the 'Project_Overview_Page'
-    And I can see the project details title page
-    And I capture the page screenshot
-    And I click the '<Navigation_Link>' link on the 'Project_Details_Title_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
     Then I can see the project overview page
 
     Examples:
-      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Add_Project | Navigation_Button_Third | Navigation_Button_Fourth | Navigation_Link | Navigation_Link_Second | Project_Details_Title | Key_Project_Roles     | Research_Locations    | Change_Link_Field |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Confirm_Project_Details  | Back            | Project_Details        | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_Title     |
+      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Add_Project | Navigation_Button_Third | Navigation_Button_Fourth | Navigation_Link | Project_Details_Title | Chief_Investigator    | Research_Locations    | Change_Link_Field |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Confirm_Project_Details  | Back            | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Project_Title     |
 
-  @rsp-1897
-  Scenario Outline: Validate user is able to fill key project roles page with valid data
+  @rsp-1897 @rsp-4209
+  Scenario Outline: Validate user is able to fill chief investigator page with valid data
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     When I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
-    Then I can see the key project roles page
-    Then I can see the '<Validation_Text>' ui labels on the key project roles page
+    Then I can see the chief investigator page
+    Then I can see the '<Validation_Text>' ui labels on the chief investigator page
     And I capture the page screenshot
-    Then I fill the key project roles page with '<Key_Project_Roles>'
+    Then I fill the chief investigator page with '<Chief_Investigator>'
     And I capture the page screenshot
-    Then I click the '<Navigation_Button_Third>' button on the 'Key_Project_Roles_Page'
+    Then I click the '<Navigation_Button_Third>' button on the 'Chief_Investigator_Page'
     Then I can see the research locations page
     When I click the '<Navigation_Link>' link on the 'Research_Locations_Page'
-    Then I can see the key project roles page
-    Then I can see previously saved values for '<Key_Project_Roles>' displayed on the key project roles page
+    Then I can see the chief investigator page
+    Then I can see previously saved values for '<Chief_Investigator>' displayed on the chief investigator page
     And I capture the page screenshot
 
     Examples:
-      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Add_Project | Navigation_Button_Third | Validation_Text | Project_Details_Title | Key_Project_Roles                     | Navigation_Link |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields                 | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data                      | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Underscore                | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Hyphen               | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Plus                 | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Exclamation          | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Hash                 | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Dollar               | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Percentage           | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Ampersand            | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Single_Quote         | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Star                 | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Slash                | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Equal_Symbol         | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Question_Mark        | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Cap_Symbol           | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Right_Single_Quote   | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Curly_Brackets       | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Pipe_Symbol          | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Tilde_Symbol         | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Unicode              | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Special_Characters   | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Hyphen_Underscore    | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Multiple_Unicode     | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Multiple_Sub_Domains | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Domain               | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Other_Language       | Back            |
+      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Add_Project | Navigation_Button_Third | Validation_Text | Project_Details_Title | Chief_Investigator                  | Navigation_Link |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields               | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data                    | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Underscore              | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Hyphen             | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Plus               | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Exclamation        | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Hash               | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Dollar             | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Percentage         | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Ampersand          | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Single_Quote       | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Star               | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Slash              | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Equal_Symbol       | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Question_Mark      | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Cap_Symbol         | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Right_Single_Quote | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Curly_Brackets     | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Pipe_Symbol        | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Tilde_Symbol       | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Special_Characters | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Hyphen_Underscore  | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Domain             | Back            |
+  # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Unicode              | Back            |
+  # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Multiple_Unicode     | Back            |
+  # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Multiple_Sub_Domains | Back            |
+  # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Email_Data_Other_Language       | Back            |
 
-  @rsp-1897
-  Scenario Outline: Validate error messages displayed when user inputs invalid data for chief investigator email in key project roles page
+  @rsp-1897 @rsp-4209 @KNOWN_DEFECT_RSP-5319
+  Scenario Outline: Validate error messages displayed when user inputs invalid data in chief investigator page
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
-    And I can see the key project roles page
-    Then I fill the key project roles page with '<Key_Project_Roles>'
+    And I can see the chief investigator page
+    Then I fill the chief investigator page with '<Chief_Investigator>'
     And I capture the page screenshot
-    Then I click the '<Navigation_Button_Third>' button on the 'Key_Project_Roles_Page'
-    Then I validate '<Field_Error_Message>' and '<Summary_Error_Message>' displayed on key project roles page for '<Key_Project_Roles>'
+    Then I click the '<Navigation_Button_Third>' button on the 'Chief_Investigator_Page'
+    Then I validate '<Field_Error_Message>' and '<Summary_Error_Message>' displayed on chief investigator page for '<Chief_Investigator>'
     And I capture the page screenshot
 
     Examples:
-      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Add_Project | Navigation_Button_Third | Project_Details_Title | Key_Project_Roles                                      | Field_Error_Message     | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Start_With_Dot                  | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Double_Dot                      | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Space                           | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Wrong_AT                        | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Less_Greater_Symbols            | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Colon                           | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Semi_Colon                      | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Comma                           | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Start_With_Hyphen               | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Hyphen_Before_Domain            | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Double_Dot_Domain               | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Exclamation_Domain              | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Unicode                         | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Single_Quote_Before_AT          | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Domain_Exceed_Max               | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Local_Part_Max                  | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Consecutive_Dot_Domain          | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Consecutive_Dot_SubDomain       | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Consecutiv_Dot_Domain_SubDomain | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Emoji                           | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_TLD                             | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Missing_AT                      | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Reserved_Domain                 | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Punycode                        | Field_Error_Chief_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Max_Char                        | Field_Error_Chief_Email | Summary_Error_Message |
+      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Add_Project | Navigation_Button_Third | Project_Details_Title | Chief_Investigator                     | Field_Error_Message                        | Summary_Error_Message                                |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Data_Max_Character_Limit       | Field_Error_Max_Character_Limit_All_Fields | Summary_Error_Message_Max_Character_Limit_All_Fields |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Start_With_Dot  | Field_Error_Chief_Email                    | Summary_Error_Message                                |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Double_Dot      | Field_Error_Chief_Email                    | Summary_Error_Message                                |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_TLD             | Field_Error_Chief_Email                    | Summary_Error_Message                                |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Reserved_Domain | Field_Error_Chief_Email                    | Summary_Error_Message                                |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Punycode        | Field_Error_Chief_Email                    | Summary_Error_Message                                |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Max_Char        | Field_Error_Chief_Email                    | Summary_Error_Message                                |
+  # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Space                           | Field_Error_Chief_Email | Summary_Error_Message |
+  # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Wrong_AT                        | Field_Error_Chief_Email | Summary_Error_Message |
+  # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Less_Greater_Symbols            | Field_Error_Chief_Email | Summary_Error_Message |
+  # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Colon                           | Field_Error_Chief_Email | Summary_Error_Message |
+  # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Semi_Colon                      | Field_Error_Chief_Email | Summary_Error_Message |
+  # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Comma                           | Field_Error_Chief_Email | Summary_Error_Message |
+  # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Start_With_Hyphen               | Field_Error_Chief_Email | Summary_Error_Message |
+  # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Hyphen_Before_Domain            | Field_Error_Chief_Email | Summary_Error_Message |
+  # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Double_Dot_Domain               | Field_Error_Chief_Email | Summary_Error_Message |
+  # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Exclamation_Domain              | Field_Error_Chief_Email | Summary_Error_Message |
+  # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Unicode                         | Field_Error_Chief_Email | Summary_Error_Message |
+  # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Single_Quote_Before_AT          | Field_Error_Chief_Email | Summary_Error_Message |
+  # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Domain_Exceed_Max               | Field_Error_Chief_Email | Summary_Error_Message |
+  # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Local_Part_Max                  | Field_Error_Chief_Email | Summary_Error_Message |
+  # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Consecutive_Dot_Domain          | Field_Error_Chief_Email | Summary_Error_Message |
+  # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Consecutive_Dot_SubDomain       | Field_Error_Chief_Email | Summary_Error_Message |
+  # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Consecutiv_Dot_Domain_SubDomain | Field_Error_Chief_Email | Summary_Error_Message |
+  # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Emoji                           | Field_Error_Chief_Email | Summary_Error_Message |
+  # | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_One_Missing_AT                      | Field_Error_Chief_Email | Summary_Error_Message |
 
-  @rsp-1897
-  Scenario Outline: Validate error messages displayed when user inputs invalid data for sponsor contact email in key project roles page
+  @rsp-1897 @rsp-4209
+  Scenario Outline: Validate breadcrumb navigations in chief investigator page
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
-    And I can see the key project roles page
-    Then I fill the key project roles page with '<Key_Project_Roles>'
+    And I can see the chief investigator page
     And I capture the page screenshot
-    Then I click the '<Navigation_Button_Third>' button on the 'Key_Project_Roles_Page'
-    Then I validate '<Field_Error_Message>' and '<Summary_Error_Message>' displayed on key project roles page for '<Key_Project_Roles>'
-    And I capture the page screenshot
-
-    Examples:
-      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Add_Project | Navigation_Button_Third | Project_Details_Title | Key_Project_Roles                                      | Field_Error_Message       | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Start_With_Dot                  | Field_Error_Sponsor_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Double_Dot                      | Field_Error_Sponsor_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Space                           | Field_Error_Sponsor_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Wrong_AT                        | Field_Error_Sponsor_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Less_Greater_Symbols            | Field_Error_Sponsor_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Colon                           | Field_Error_Sponsor_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Semi_Colon                      | Field_Error_Sponsor_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Comma                           | Field_Error_Sponsor_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Start_With_Hyphen               | Field_Error_Sponsor_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Hyphen_Before_Domain            | Field_Error_Sponsor_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Double_Dot_Domain               | Field_Error_Sponsor_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Exclamation_Domain              | Field_Error_Sponsor_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Unicode                         | Field_Error_Sponsor_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Single_Quote_Before_AT          | Field_Error_Sponsor_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Domain_Exceed_Max               | Field_Error_Sponsor_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Local_Part_Max                  | Field_Error_Sponsor_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Consecutive_Dot_Domain          | Field_Error_Sponsor_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Consecutive_Dot_SubDomain       | Field_Error_Sponsor_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Consecutiv_Dot_Domain_SubDomain | Field_Error_Sponsor_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Emoji                           | Field_Error_Sponsor_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_TLD                             | Field_Error_Sponsor_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Missing_AT                      | Field_Error_Sponsor_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Reserved_Domain                 | Field_Error_Sponsor_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Punycode                        | Field_Error_Sponsor_Email | Summary_Error_Message |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Invalid_Email_Data_Two_Max_Char                        | Field_Error_Sponsor_Email | Summary_Error_Message |
-
-  @rsp-1897
-  Scenario Outline: Validate breadcrumb navigations in key project roles page
-    And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
-    And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
-    And I fill the unique iras id in project details iras page
-    And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
-    And I fill the project details title page with '<Project_Details_Title>'
-    And I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
-    And I can see the key project roles page
-    And I capture the page screenshot
-    When I click the '<Navigation_Link>' link on the 'Key_Project_Roles_Page'
+    When I click the '<Navigation_Link>' link on the 'Chief_Investigator_Page'
     Then I can see the project details title page
     And I capture the page screenshot
 
@@ -335,19 +292,25 @@ Feature: Create Amendment - Create Project
     And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
-    And I fill the key project roles page with '<Key_Project_Roles>'
-    When I click the '<Navigation_Button_Third>' button on the 'Key_Project_Roles_Page'
+    And I fill the chief investigator page with '<Chief_Investigator>'
+    When I click the '<Navigation_Button_Third>' button on the 'Chief_Investigator_Page'
     Then I can see the research locations page
     Then I can see the '<Validation_Text>' ui labels on the research locations page
     Then I fill the research locations page with '<Research_Locations>'
     When I click the '<Navigation_Button_Third>' button on the 'Research_Locations_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     Then I can see the review your application page
+    And I capture the page screenshot
     When I navigate 'back'
-    Then I can see the research locations page
+    Then I can see the project identifiers page
+    When I navigate 'back'
     Then I can see previously saved values for '<Research_Locations>' displayed on the research locations page
 
     Examples:
-      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Add_Project | Navigation_Button_Third | Validation_Text | Project_Details_Title | Key_Project_Roles     | Research_Locations                     |
+      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Add_Project | Navigation_Button_Third | Validation_Text | Project_Details_Title | Chief_Investigator    | Research_Locations                     |
       | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields                  |
       | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Data_With_No_NHS_HSC                   |
       | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Data_With_Lead_Nation_Northern_Ireland |
@@ -362,14 +325,14 @@ Feature: Create Amendment - Create Project
     And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
-    And I fill the key project roles page with '<Key_Project_Roles>'
-    When I click the '<Navigation_Button_Third>' button on the 'Key_Project_Roles_Page'
+    And I fill the chief investigator page with '<Chief_Investigator>'
+    When I click the '<Navigation_Button_Third>' button on the 'Chief_Investigator_Page'
     Then I can see the research locations page
     Then I fill the research locations page with '<Research_Locations>'
     Then I validate lead nation radio option for '<Research_Locations>'
 
     Examples:
-      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Add_Project | Navigation_Button_Third | Validation_Text | Project_Details_Title | Key_Project_Roles     | Research_Locations    |
+      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Add_Project | Navigation_Button_Third | Validation_Text | Project_Details_Title | Chief_Investigator    | Research_Locations    |
       | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields |
       | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Data_With_No_NHS_HSC  |
 
@@ -381,14 +344,14 @@ Feature: Create Amendment - Create Project
     And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
-    And I fill the key project roles page with '<Key_Project_Roles>'
-    When I click the '<Navigation_Button_Third>' button on the 'Key_Project_Roles_Page'
+    And I fill the chief investigator page with '<Chief_Investigator>'
+    When I click the '<Navigation_Button_Third>' button on the 'Chief_Investigator_Page'
     Then I can see the research locations page
     Then I fill the research locations page with '<Research_Locations>'
     Then I validate lead nation radio option when javascript disabled
 
     Examples:
-      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Add_Project | Navigation_Button_Third | Validation_Text | Project_Details_Title | Key_Project_Roles     | Research_Locations   |
+      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Add_Project | Navigation_Button_Third | Validation_Text | Project_Details_Title | Chief_Investigator    | Research_Locations   |
       | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Data_With_No_NHS_HSC |
 
   @rsp-1901
@@ -399,14 +362,14 @@ Feature: Create Amendment - Create Project
     And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     And I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
-    And I fill the key project roles page with '<Key_Project_Roles>'
-    And I click the '<Navigation_Button_Third>' button on the 'Key_Project_Roles_Page'
+    And I fill the chief investigator page with '<Chief_Investigator>'
+    And I click the '<Navigation_Button_Third>' button on the 'Chief_Investigator_Page'
     And I can see the research locations page
     When I click the '<Navigation_Link>' link on the 'Research_Locations_Page'
-    Then I can see the key project roles page
+    Then I can see the chief investigator page
 
     Examples:
-      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Add_Project | Navigation_Button_Third | Project_Details_Title | Key_Project_Roles     | Navigation_Link |
+      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Add_Project | Navigation_Button_Third | Project_Details_Title | Chief_Investigator    | Navigation_Link |
       | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Valid_Data_All_Fields | Back            |
 
   @rsp-1860 @duplicateIrasIdValidation
@@ -430,7 +393,7 @@ Feature: Create Amendment - Create Project
       | Field_And_Summary_Error_Message       |
       | Field_Error_Message_Iras_Id_Duplicate |
 
-  @rsp-1863 @rsp-3819 @saveLaterProjectTitle
+  @rsp-1863 @rsp-3819 @rsp-4874 @saveLaterProjectTitle
   Scenario Outline: Verify product details are saved when user saves the record on create project - Project details page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -442,13 +405,12 @@ Feature: Create Amendment - Create Project
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_For_Later' button on the 'Project_Details_Title_Page'
-    Then I can see the project overview page
+    Then I can see the project overview for unfinished projects page
     And I capture the page screenshot
-    And I can see the short project title on project overview page for '<Project_Details_Title>'
-    When I click the 'Project_Details' link on the 'Project_Overview_Page'
-    And I can see the project details title page
+    And I can validate the ui fields on project overview unfinished projects page with '<Project_Details_Title>'
+    And I click the 'Edit_Project_Record' button on the 'Project_Overview_Unfinished_Projects_Page'
+    Then I can see the review your answers page
     And I capture the page screenshot
-    Then I can see previously saved values for '<Project_Details_Title>' displayed on the project details title page
 
     Examples:
       | Project_Details_Title       |
@@ -457,8 +419,8 @@ Feature: Create Amendment - Create Project
       | Valid_Data_Only_Title_Field |
       | Valid_Data_Only_Date_Fields |
 
-  @rsp-1863 @saveLaterProjectRoles
-  Scenario Outline: Verify product details are saved when user saves the record on create project - key project roles page
+  @rsp-1863 @rsp-4874  @rsp-4209 @saveLaterProjectRoles
+  Scenario Outline: Verify product details are saved when user saves the record on create project - chief investigator page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
     Then I can see the project details iras page
@@ -468,28 +430,23 @@ Feature: Create Amendment - Create Project
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    And I fill the key project roles page with '<Key_Project_Roles>'
+    And I fill the chief investigator page with '<Chief_Investigator>'
     And I capture the page screenshot
-    When I click the 'Save_For_Later' button on the 'Key_Project_Roles_Page'
-    Then I can see the project overview page
+    When I click the 'Save_For_Later' button on the 'Chief_Investigator_Page'
+    Then I can see the project overview for unfinished projects page
     And I capture the page screenshot
-    And I can see the short project title on project overview page for '<Project_Details_Title>'
-    When I click the 'Project_Details' link on the 'Project_Overview_Page'
-    Then I can see the project details title page
+    And I can validate the ui fields on project overview unfinished projects page with '<Project_Details_Title>'
+    And I click the 'Edit_Project_Record' button on the 'Project_Overview_Unfinished_Projects_Page'
+    Then I can see the review your answers page
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    And I can see the key project roles page
-    And I capture the page screenshot
-    Then I can see previously saved values for '<Key_Project_Roles>' displayed on the key project roles page
 
     Examples:
-      | Project_Details_Title | Key_Project_Roles                        |
+      | Project_Details_Title | Chief_Investigator                       |
       | Valid_Data_All_Fields | Valid_Data_All_Fields                    |
       | Valid_Data_All_Fields | Valid_Data_All_Empty_Fields              |
       | Valid_Data_All_Fields | Valid_Data_Only_Investigator_Email_Field |
-      | Valid_Data_All_Fields | Valid_Data_Only_Sponsor_Email_Field      |
 
-  @rsp-1863 @saveLaterProjectLocations
+  @rsp-1863 @rsp-4874 @saveLaterProjectLocations
   Scenario Outline: Verify product details are saved when user saves the record on create project - research locations page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -500,31 +457,34 @@ Feature: Create Amendment - Create Project
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    And I fill the key project roles page with '<Key_Project_Roles>'
+    And I fill the chief investigator page with '<Chief_Investigator>'
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    And I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
     And I fill the research locations page with '<Research_Locations>'
     And I capture the page screenshot
     And I click the 'Save_For_Later' button on the 'Research_Locations_Page'
-    Then I can see the project overview page
+    Then I can see the project overview for unfinished projects page
     And I capture the page screenshot
-    And I can see the short project title on project overview page for '<Project_Details_Title>'
-    When I click the 'Project_Details' link on the 'Project_Overview_Page'
-    Then I can see the project details title page
+    And I can validate the ui fields on project overview unfinished projects page with '<Project_Details_Title>'
+    And I click the 'Edit_Project_Record' button on the 'Project_Overview_Unfinished_Projects_Page'
+    Then I can see the review your answers page
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    And I can see the key project roles page
+    And I click the 'Save_For_Later' button on the 'Review_Your_Answers_Page'
+    Then I can see the project overview for unfinished projects page
     And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Key_Project_Roles_Page'
+    And I click the 'Back' link on the 'Project_Overview_Unfinished_Projects_Page'
+    Then I can see the my research projects page
     And I capture the page screenshot
-    Then I can see previously saved values for '<Research_Locations>' displayed on the research locations page
+    And I click the '<Project_Details>' link on the my research page
+    Then I can see the project overview for unfinished projects page
+    And I capture the page screenshot
 
     Examples:
-      | Project_Details_Title | Key_Project_Roles     | Research_Locations                       |
-      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields                    |
-      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Empty_Fields              |
-      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_Only_Investigator_Email_Field |
-      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_Only_Sponsor_Email_Field      |
+      | Project_Details_Title | Chief_Investigator    | Research_Locations                       | Project_Details       |
+      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields                    | Valid_Data_All_Fields |
+      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Empty_Fields              | Valid_Data_All_Fields |
+      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_Only_Investigator_Email_Field | Valid_Data_All_Fields |
+      | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_Only_Sponsor_Email_Field      | Valid_Data_All_Fields |
 
   @rsp-1863 @rsp-3819 @saveLaterProjTitleValidations
   Scenario Outline: Validate error messages when user saves the project with invalid data on project title page
@@ -553,8 +513,8 @@ Feature: Create Amendment - Create Project
       | Invalid_Date_No_Month                       | Date_Month_Field_Error_Message  |
       | Invalid_Date_No_Year                        | Date_Year_Field_Error_Message   |
 
-  @rsp-1863 @saveLaterChiefInvEmailValidations
-  Scenario Outline: Validate error messages when user saves the project with invalid Chief Investigator email data on key project roles page
+  @rsp-1863 @rsp-4209 @saveLaterChiefInvEmailValidations @KNOWN_DEFECT_RSP-5319
+  Scenario Outline: Validate error messages when user saves the project with invalid Chief Investigator email data on chief investigator page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
@@ -563,154 +523,117 @@ Feature: Create Amendment - Create Project
     And I fill the project details title page with '<Project_Details_Title>'
     And I capture the page screenshot
     And I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    And I can see the key project roles page
-    Then I fill the key project roles page with '<Key_Project_Roles>'
+    And I can see the chief investigator page
+    Then I fill the chief investigator page with '<Chief_Investigator>'
     And I capture the page screenshot
-    And I click the 'Save_For_Later' button on the 'Key_Project_Roles_Page'
-    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Key_Project_Roles_Page'
-    And I capture the page screenshot
-
-    Examples:
-      | Project_Details_Title | Key_Project_Roles                                      | Field_And_Summary_Error_Message |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Start_With_Dot                  | Field_Error_Chief_Email         |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Double_Dot                      | Field_Error_Chief_Email         |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Space                           | Field_Error_Chief_Email         |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Wrong_AT                        | Field_Error_Chief_Email         |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Less_Greater_Symbols            | Field_Error_Chief_Email         |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Colon                           | Field_Error_Chief_Email         |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Semi_Colon                      | Field_Error_Chief_Email         |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Comma                           | Field_Error_Chief_Email         |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Start_With_Hyphen               | Field_Error_Chief_Email         |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Hyphen_Before_Domain            | Field_Error_Chief_Email         |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Double_Dot_Domain               | Field_Error_Chief_Email         |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Exclamation_Domain              | Field_Error_Chief_Email         |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Unicode                         | Field_Error_Chief_Email         |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Single_Quote_Before_AT          | Field_Error_Chief_Email         |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Domain_Exceed_Max               | Field_Error_Chief_Email         |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Local_Part_Max                  | Field_Error_Chief_Email         |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Consecutive_Dot_Domain          | Field_Error_Chief_Email         |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Consecutive_Dot_SubDomain       | Field_Error_Chief_Email         |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Consecutiv_Dot_Domain_SubDomain | Field_Error_Chief_Email         |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Emoji                           | Field_Error_Chief_Email         |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_TLD                             | Field_Error_Chief_Email         |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Missing_AT                      | Field_Error_Chief_Email         |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Reserved_Domain                 | Field_Error_Chief_Email         |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Punycode                        | Field_Error_Chief_Email         |
-      | Valid_Data_All_Fields | Invalid_Email_Data_One_Max_Char                        | Field_Error_Chief_Email         |
-
-  @rsp-1863 @saveLaterSponsorEmailValidations
-  Scenario Outline: Validate error messages when user saves the project with invalid sponsor email data on key project roles page
-    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
-    And I click the 'Start' button on the 'Create_Project_Record_Page'
-    And I fill the unique iras id in project details iras page
-    And I capture the page screenshot
-    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
-    And I fill the project details title page with '<Project_Details_Title>'
-    And I capture the page screenshot
-    And I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-    And I can see the key project roles page
-    Then I fill the key project roles page with '<Key_Project_Roles>'
-    And I capture the page screenshot
-    And I click the 'Save_For_Later' button on the 'Key_Project_Roles_Page'
-    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Key_Project_Roles_Page'
+    And I click the 'Save_For_Later' button on the 'Chief_Investigator_Page'
+    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Chief_Investigator_Page'
     And I capture the page screenshot
 
     Examples:
-      | Project_Details_Title | Key_Project_Roles                                      | Field_And_Summary_Error_Message |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Start_With_Dot                  | Field_Error_Sponsor_Email       |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Double_Dot                      | Field_Error_Sponsor_Email       |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Space                           | Field_Error_Sponsor_Email       |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Wrong_AT                        | Field_Error_Sponsor_Email       |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Less_Greater_Symbols            | Field_Error_Sponsor_Email       |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Colon                           | Field_Error_Sponsor_Email       |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Semi_Colon                      | Field_Error_Sponsor_Email       |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Comma                           | Field_Error_Sponsor_Email       |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Start_With_Hyphen               | Field_Error_Sponsor_Email       |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Hyphen_Before_Domain            | Field_Error_Sponsor_Email       |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Double_Dot_Domain               | Field_Error_Sponsor_Email       |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Exclamation_Domain              | Field_Error_Sponsor_Email       |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Unicode                         | Field_Error_Sponsor_Email       |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Single_Quote_Before_AT          | Field_Error_Sponsor_Email       |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Domain_Exceed_Max               | Field_Error_Sponsor_Email       |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Local_Part_Max                  | Field_Error_Sponsor_Email       |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Consecutive_Dot_Domain          | Field_Error_Sponsor_Email       |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Consecutive_Dot_SubDomain       | Field_Error_Sponsor_Email       |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Consecutiv_Dot_Domain_SubDomain | Field_Error_Sponsor_Email       |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Emoji                           | Field_Error_Sponsor_Email       |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_TLD                             | Field_Error_Sponsor_Email       |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Missing_AT                      | Field_Error_Sponsor_Email       |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Reserved_Domain                 | Field_Error_Sponsor_Email       |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Punycode                        | Field_Error_Sponsor_Email       |
-      | Valid_Data_All_Fields | Invalid_Email_Data_Two_Max_Char                        | Field_Error_Sponsor_Email       |
+      | Project_Details_Title | Chief_Investigator                     | Field_And_Summary_Error_Message |
+      | Valid_Data_All_Fields | Invalid_Email_Data_One_Start_With_Dot  | Field_Error_Chief_Email         |
+      | Valid_Data_All_Fields | Invalid_Email_Data_One_Double_Dot      | Field_Error_Chief_Email         |
+      | Valid_Data_All_Fields | Invalid_Email_Data_One_TLD             | Field_Error_Chief_Email         |
+      | Valid_Data_All_Fields | Invalid_Email_Data_One_Reserved_Domain | Field_Error_Chief_Email         |
+      | Valid_Data_All_Fields | Invalid_Email_Data_One_Punycode        | Field_Error_Chief_Email         |
+      | Valid_Data_All_Fields | Invalid_Email_Data_One_Max_Char        | Field_Error_Chief_Email         |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Missing_AT      | Field_Error_Chief_Email         |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Space                           | Field_Error_Chief_Email         |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Wrong_AT                        | Field_Error_Chief_Email         |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Less_Greater_Symbols            | Field_Error_Chief_Email         |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Colon                           | Field_Error_Chief_Email         |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Semi_Colon                      | Field_Error_Chief_Email         |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Comma                           | Field_Error_Chief_Email         |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Start_With_Hyphen               | Field_Error_Chief_Email         |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Hyphen_Before_Domain            | Field_Error_Chief_Email         |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Double_Dot_Domain               | Field_Error_Chief_Email         |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Exclamation_Domain              | Field_Error_Chief_Email         |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Unicode                         | Field_Error_Chief_Email         |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Single_Quote_Before_AT          | Field_Error_Chief_Email         |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Domain_Exceed_Max               | Field_Error_Chief_Email         |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Local_Part_Max                  | Field_Error_Chief_Email         |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Consecutive_Dot_Domain          | Field_Error_Chief_Email         |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Consecutive_Dot_SubDomain       | Field_Error_Chief_Email         |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Consecutiv_Dot_Domain_SubDomain | Field_Error_Chief_Email         |
+  # | Valid_Data_All_Fields | Invalid_Email_Data_One_Emoji                           | Field_Error_Chief_Email         |
 
-  @rsp-1861 @rsp-3670 @jsEnabled
-  Scenario Outline: Validate user is able to fill sponsor organisation in key project roles page with valid data
+  @rsp-1861 @rsp-3670 @rsp-4200 @jsEnabled
+  Scenario Outline: Validate user is able to fill sponsor organisation in project identifiers page with valid data
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     When I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
-    Then I can see the key project roles page
+    Then I can see the chief investigator page
     And I capture the page screenshot
-    Then I can see the '<Validation_Text>' ui labels on the key project roles page
-    Then I fill the key project roles page with '<Key_Project_Roles>'
+    Then I can see the '<Validation_Text>' ui labels on the chief investigator page
+    Then I fill the chief investigator page with '<Chief_Investigator>'
     And I capture the page screenshot
-    Then I click the '<Navigation_Button_Third>' button on the 'Key_Project_Roles_Page'
+    Then I click the '<Navigation_Button_Third>' button on the 'Chief_Investigator_Page'
     Then I can see the research locations page
     When I click the '<Navigation_Link>' link on the 'Research_Locations_Page'
-    Then I can see the key project roles page
-    Then I can see previously saved values for '<Key_Project_Roles>' displayed on the key project roles page
+    Then I can see the chief investigator page
+    Then I can see previously saved values for '<Chief_Investigator>' displayed on the chief investigator page
     And I capture the page screenshot
-    Then I click the '<Navigation_Button_Third>' button on the 'Research_Locations_Page'
+    Then I click the '<Navigation_Button_Third>' button on the 'Chief_Investigator_Page'
     Then I fill the research locations page with '<Research_Locations>'
     When I click the '<Navigation_Button_Third>' button on the 'Research_Locations_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with '<Project_Identifiers>'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
-    Then I can validate the field values of '<Project_Details_Title>' page '<Key_Project_Roles>' page and '<Research_Locations>' page
+    Then I can validate the field values of '<Project_Details_Title>' page '<Chief_Investigator>' page '<Research_Locations>' and '<Project_Identifiers>' page
     And I click the change link '<Change_Link_Field>' on review your answers page
-    Then I can see the key project roles page
-    Then I can see previously saved values for '<Key_Project_Roles>' displayed on the key project roles page
+    Then I can see the project identifiers page
+    Then I can see previously saved values for '<Project_Identifiers>' displayed on the project identifiers page
     And I capture the page screenshot
-    And I fill the key project roles page with '<Key_Project_Roles_Change>'
+    And I fill the project identifiers page with '<Project_Identifiers_Change>'
     And I capture the page screenshot
-    When I click the 'Save_Changes' button on the 'Key_Project_Roles_Page'
+    When I click the 'Save_Changes' button on the 'Project_Identifiers_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
-    Then I can validate the field values of '<Project_Details_Title>' page '<Key_Project_Roles_Change>' page and '<Research_Locations>' page
+    Then I can validate the field values of '<Project_Details_Title>' page '<Chief_Investigator>' page '<Research_Locations>' and '<Project_Identifiers_Change>' page
     And I click the change link '<Change_Link_Field>' on review your answers page
-    Then I can see the key project roles page
-    Then I can see previously saved values for '<Key_Project_Roles_Change>' displayed on the key project roles page
+    Then I can see the project identifiers page
+    Then I can see previously saved values for '<Project_Identifiers_Change>' displayed on the project identifiers page
     And I capture the page screenshot
-    And I fill the key project roles page with '<Key_Project_Roles_Change_Blank>'
+    And I fill the project identifiers page with '<Project_Identifiers_Change_Blank>'
     And I capture the page screenshot
-    When I click the 'Save_Changes' button on the 'Key_Project_Roles_Page'
+    When I click the 'Save_Changes' button on the 'Project_Identifiers_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
-    Then I can validate the field values of '<Project_Details_Title>' page '<Key_Project_Roles_Change_Blank>' page and '<Research_Locations>' page
+    Then I can validate the field values of '<Project_Details_Title>' page '<Chief_Investigator>' page '<Research_Locations>' and '<Project_Identifiers_Change_Blank>' page
     And I click the enter link '<Enter_Link_Field>' on review your answers page
-    Then I can see the key project roles page
-    Then I can see previously saved values for '<Key_Project_Roles_Change_Blank>' displayed on the key project roles page
+    Then I can see the project identifiers page
+    Then I can see previously saved values for '<Project_Identifiers_Change_Blank>' displayed on the project identifiers page
     And I capture the page screenshot
 
     Examples:
-      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Add_Project | Navigation_Button_Third | Validation_Text | Project_Details_Title | Key_Project_Roles     | Key_Project_Roles_Change               | Key_Project_Roles_Change_Blank  | Research_Locations    | Change_Link_Field            | Enter_Link_Field             | Navigation_Link |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Full_Text_Aalborg | Sponsor_Organisation_Text_Blank | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Brackets     | Sponsor_Organisation_Text_Blank | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Amp          | Sponsor_Organisation_Text_Blank | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Dot_Comma    | Sponsor_Organisation_Text_Blank | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Slash        | Sponsor_Organisation_Text_Blank | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Hyphen       | Sponsor_Organisation_Text_Blank | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation | Back            |
+      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Add_Project | Navigation_Button_Third | Validation_Text | Project_Details_Title | Chief_Investigator    | Project_Identifiers   | Project_Identifiers_Change             | Project_Identifiers_Change_Blank | Research_Locations    | Change_Link_Field            | Enter_Link_Field             | Navigation_Link |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Full_Text_Aalborg | Sponsor_Organisation_Text_Blank  | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Brackets     | Sponsor_Organisation_Text_Blank  | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Amp          | Sponsor_Organisation_Text_Blank  | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Dot_Comma    | Sponsor_Organisation_Text_Blank  | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Slash        | Sponsor_Organisation_Text_Blank  | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Hyphen       | Sponsor_Organisation_Text_Blank  | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation | Back            |
 
-  @rsp-1861 @rsp-3670 @jsEnabled
-  Scenario Outline: Validate the primary sponsor organisation suggestion list in key project roles page
+  @rsp-1861 @rsp-3670 @rsp-4200 @jsEnabled
+  Scenario Outline: Validate the primary sponsor organisation suggestion list in project identifiers page
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     When I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
-    Then I can see the key project roles page
+    Then I can see the chief investigator page
+    Then I fill the chief investigator page with '<Chief_Investigator>'
+    Then I click the '<Navigation_Button_Third>' button on the 'Chief_Investigator_Page'
+    Then I fill the research locations page with '<Research_Locations>'
+    When I click the '<Navigation_Button_Third>' button on the 'Research_Locations_Page'
+    Then I can see the project identifiers page
     And I capture the page screenshot
     When I authorise the rts api using '<RTS_API_Data>'
     Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation
@@ -720,14 +643,14 @@ Feature: Create Amendment - Create Project
     And I capture the page screenshot
 
     Examples:
-      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Add_Project | Navigation_Button_Third | Project_Details_Title | Sponsor_Organisation                          | Sponsor_Organisation_Invalid      | Sponsor_Organisation_Min      | Suggestion_List_Headers        | RTS_API_Data         | RTS_Request                                 |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Sponsor_Organisation_Partial_Text_NHS         | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS         |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Sponsor_Organisation_Text_Partial_Brackets    | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Brackets    |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Sponsor_Organisation_Text_Partial_Dot_Comma   | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Dot_Comma   |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Sponsor_Organisation_Text_Partial_Slash       | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Slash       |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Sponsor_Organisation_Text_Partial_Hyphen      | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Hyphen      |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Sponsor_Organisation_Text_Partial_Start_Space | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Start_Space |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Sponsor_Organisation_Text_Partial_End_Space   | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space  |
+      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Add_Project | Navigation_Button_Third | Project_Details_Title | Chief_Investigator    | Research_Locations    | Sponsor_Organisation                          | Sponsor_Organisation_Invalid      | Sponsor_Organisation_Min      | Suggestion_List_Headers        | RTS_API_Data         | RTS_Request                                 |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Partial_Text_NHS         | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS         |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Partial_Brackets    | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Brackets    |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Partial_Dot_Comma   | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Dot_Comma   |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Partial_Slash       | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Slash       |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Partial_Hyphen      | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Hyphen      |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Partial_Start_Space | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Start_Space |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Partial_End_Space   | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space  |
 
   @rsp-1861 @jsEnabled
   Scenario Outline: Validate the active primary sponsor organisation from rts with data in database
@@ -746,8 +669,8 @@ Feature: Create Amendment - Create Project
       | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Start_Space |
       | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space  |
 
-  @rsp-3939 @searchSelectSponsorOrgJsDisabled @jsDisabled
-  Scenario Outline: Validate user is able to search and select sponsor organisation in key project roles page with valid data
+  @rsp-3939 @rsp-4200 @searchSelectSponsorOrgJsDisabled @jsDisabled
+  Scenario Outline: Validate user is able to search and select sponsor organisation in project identifiers page with valid data
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
@@ -755,59 +678,61 @@ Feature: Create Amendment - Create Project
     And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     When I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
-    Then I can see the key project roles page
-    Then I can see the '<Validation_Text>' ui labels on the key project roles page
-    Then I fill the key project roles page with '<Key_Project_Roles>'
+    Then I can see the chief investigator page
+    Then I can see the '<Validation_Text>' ui labels on the chief investigator page
+    Then I fill the chief investigator page with '<Chief_Investigator>'
     And I capture the page screenshot
-    Then I click the '<Navigation_Button_Third>' button on the 'Key_Project_Roles_Page'
+    Then I click the '<Navigation_Button_Third>' button on the 'Chief_Investigator_Page'
     Then I can see the research locations page
     When I click the '<Navigation_Link>' link on the 'Research_Locations_Page'
-    Then I can see the key project roles page
-    Then I can see previously saved values for '<Key_Project_Roles>' displayed on the key project roles page
+    Then I can see the chief investigator page
+    Then I can see previously saved values for '<Chief_Investigator>' displayed on the chief investigator page
     And I capture the page screenshot
     Then I click the '<Navigation_Button_Third>' button on the 'Research_Locations_Page'
     Then I fill the research locations page with '<Research_Locations>'
     When I click the '<Navigation_Button_Third>' button on the 'Research_Locations_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with '<Project_Identifiers>'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
-    Then I can validate the field values of '<Project_Details_Title>' page '<Key_Project_Roles>' page and '<Research_Locations>' page
+    Then I can validate the field values of '<Project_Details_Title>' page '<Chief_Investigator>' page '<Research_Locations>' and '<Project_Identifiers>' page
     And I click the change link '<Change_Link_Field>' on review your answers page
-    Then I can see the key project roles page
-    Then I can see previously saved values for '<Key_Project_Roles>' displayed on the key project roles page
+    Then I can see the project identifiers page
+    Then I can see previously saved values for '<Project_Identifiers>' displayed on the project identifiers page
     And I capture the page screenshot
-    And I fill the key project roles page with '<Key_Project_Roles_Change>'
+    Then I fill the project identifiers page with '<Project_Identifiers_Change>'
     And I capture the page screenshot
-    When I click the 'Save_Changes' button on the 'Key_Project_Roles_Page'
+    When I click the 'Save_Changes' button on the 'Project_Identifiers_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
-    Then I can validate the field values of '<Project_Details_Title>' page '<Key_Project_Roles_Change>' page and '<Research_Locations>' page
+    Then I can validate the field values of '<Project_Details_Title>' page '<Chief_Investigator>' page '<Research_Locations>' and '<Project_Identifiers_Change>' page
     And I click the change link '<Change_Link_Field>' on review your answers page
-    Then I can see the key project roles page
-    Then I can see previously saved values for '<Key_Project_Roles_Change>' displayed on the key project roles page
+    Then I can see the project identifiers page
+    Then I can see previously saved values for '<Project_Identifiers_Change>' displayed on the project identifiers page
     And I capture the page screenshot
-    And I fill the key project roles page with '<Key_Project_Roles_Change_Blank>'
+    Then I fill the project identifiers page with '<Project_Identifiers_Change_Blank>'
     And I capture the page screenshot
-    When I click the 'Save_Changes' button on the 'Key_Project_Roles_Page'
+    When I click the 'Save_Changes' button on the 'Project_Identifiers_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
-    Then I can validate the field values of '<Project_Details_Title>' page '<Key_Project_Roles_Change_Blank>' page and '<Research_Locations>' page
+    Then I can validate the field values of '<Project_Details_Title>' page '<Chief_Investigator>' page '<Research_Locations>' and '<Project_Identifiers_Change_Blank>' page
     And I click the enter link '<Enter_Link_Field>' on review your answers page
-    Then I can see the key project roles page
-    Then I can see previously saved values for '<Key_Project_Roles_Change_Blank>' displayed on the key project roles page
+    Then I can see the project identifiers page
+    Then I can see previously saved values for '<Project_Identifiers_Change_Blank>' displayed on the project identifiers page
     And I capture the page screenshot
 
     Examples:
-      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Add_Project | Navigation_Button_Third | Validation_Text | Project_Details_Title | Key_Project_Roles     | Key_Project_Roles_Change               | Key_Project_Roles_Change_Blank  | Research_Locations    | Change_Link_Field            | Enter_Link_Field             | Navigation_Link |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Full_Text_Aalborg | Sponsor_Organisation_Text_Blank | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Brackets     | Sponsor_Organisation_Text_Blank | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Amp          | Sponsor_Organisation_Text_Blank | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Dot_Comma    | Sponsor_Organisation_Text_Blank | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Slash        | Sponsor_Organisation_Text_Blank | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation | Back            |
-      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Hyphen       | Sponsor_Organisation_Text_Blank | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation | Back            |
+      | Navigation_Button_First | Navigation_Button_Second | Navigation_Button_Add_Project | Navigation_Button_Third | Validation_Text | Project_Details_Title | Chief_Investigator    | Chief_Investigator    | Project_Identifiers   | Project_Identifiers_Change             | Project_Identifiers_Change_Blank | Research_Locations    | Change_Link_Field            | Enter_Link_Field             | Navigation_Link |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Full_Text_Aalborg | Sponsor_Organisation_Text_Blank  | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Brackets     | Sponsor_Organisation_Text_Blank  | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Amp          | Sponsor_Organisation_Text_Blank  | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Dot_Comma    | Sponsor_Organisation_Text_Blank  | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Slash        | Sponsor_Organisation_Text_Blank  | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation | Back            |
+      | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Label_Texts     | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Valid_Data_All_Fields | Sponsor_Organisation_Text_Hyphen       | Sponsor_Organisation_Text_Blank  | Valid_Data_All_Fields | primary_sponsor_organisation | primary_sponsor_organisation | Back            |
 
-
-  @rsp-3939 @validateSponsorOrganisationResultsJsDisabled @jsDisabled
-  Scenario Outline: Validate the primary sponsor organisation search results in key project roles page
+  @rsp-3939 @rsp-4200 @validateSponsorOrganisationResultsJsDisabled @jsDisabled
+  Scenario Outline: Validate the primary sponsor organisation search results in project identifiers page
     And I click the '<Navigation_Button_First>' button on the 'My_Research_Projects_Page'
     And I click the '<Navigation_Button_Second>' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
@@ -815,8 +740,11 @@ Feature: Create Amendment - Create Project
     And I click the '<Navigation_Button_Add_Project>' button on the 'Project_Details_IRAS_Page'
     And I fill the project details title page with '<Project_Details_Title>'
     When I click the '<Navigation_Button_Third>' button on the 'Project_Details_Title_Page'
-    Then I can see the key project roles page
-    And I capture the page screenshot
+    Then I fill the chief investigator page with '<Chief_Investigator>'
+    Then I click the '<Navigation_Button_Third>' button on the 'Chief_Investigator_Page'
+    Then I fill the research locations page with '<Research_Locations>'
+    When I click the '<Navigation_Button_Third>' button on the 'Research_Locations_Page'
+    Then I can see the project identifiers page
     When I authorise the rts api using '<RTS_API_Data>'
     Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation
     And With JS disabled, I search with valid '<Sponsor_Organisation>' for primary sponsor organisation search box and validate the search results along with '<Sponsor_Organisation_Jsdisabled_Search_Hint_Labels>'
@@ -824,7 +752,7 @@ Feature: Create Amendment - Create Project
     And With JS disabled, I search with invalid '<Sponsor_Organisation_Invalid>' for primary sponsor organisation search box and validate the search results along with '<Sponsor_Organisation_Jsdisabled_Search_Hint_Labels>'
     And I capture the page screenshot
     And With JS disabled, I search with invalid min characters '<Sponsor_Organisation_Min>' for primary sponsor organisation search box
-    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Key_Project_Roles_Page'
+    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Project_Identifiers_Page'
     And I capture the page screenshot
 
     Examples:
