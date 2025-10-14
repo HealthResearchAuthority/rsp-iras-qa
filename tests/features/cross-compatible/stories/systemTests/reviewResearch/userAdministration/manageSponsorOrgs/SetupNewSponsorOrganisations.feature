@@ -8,7 +8,7 @@ Feature: User Administration: Manage Sponsor Organisations
 
     # @jsEnabled,@jsDisabled
 
-    @ViewListOfSponsorOrgs @rsp-5229 @rsp-5230 @jsEnabled @KNOWN_DEFECT-RSP-5453 @KNOWN_DEFECT-RSP-5454
+    @ViewListOfSponsorOrgs @rsp-5229 @rsp-5230 @jsDisabled @KNOWN_DEFECT-RSP-5453 @KNOWN_DEFECT-RSP-5454
     Scenario Outline: Verify the user can add a sponsor organisation from manage sponsor organisation page and view the list of sponsor organisation in alphabetical order of organisation name
         And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
         Then I can see the 'Setup_New_Sponsor_Organisation_Page'
@@ -55,7 +55,31 @@ Feature: User Administration: Manage Sponsor Organisations
     # | Sponsor_Organisation_TwentyThree | Enabled        |
     # | Sponsor_Organisation_TwentyFour  | Enabled        |
 
+    @rsp-5230 @ErrorValidationDuplicateSponsorOrg @KNOWN_DEFECT-RSP-5453
+    Scenario Outline: Verify appropriate error message is displayed when user tries to add a duplicate sponsor organisation from set up a new sponsor organisation page
+        When I enter the '<Field_Name>' of the '<Position>' item in the list, into the search field
+        And I capture the page screenshot
+        And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+        And I capture the page screenshot
+        Then the system displays 'sponsor organisations' matching the search criteria
+        And I capture the page screenshot
+        And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
+        Then I can see the 'Setup_New_Sponsor_Organisation_Page'
+        And I capture the page screenshot
+        When I select a sponsor organisation in the set up a new sponsor organisation page using 'existing sponsor organisation'
+        And I capture the page screenshot
+        And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
+        And I capture the page screenshot
+        Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Setup_New_Sponsor_Organisation_Page'
+        And I capture the page screenshot
+        Examples:
+            | Field_Name        | Position | Field_And_Summary_Error_Message            |
+            | Organisation_Name | First    | Duplicate_Sponsor_Organisation_Setup_Error |
+            | Organisation_Name | Last     | Duplicate_Sponsor_Organisation_Setup_Error |
 
+    # duplicate sponsor org- error message to be added later
+    # last update date validation to be added later
+    # Sponsor selection drop down- validate JS enabled and disabled scenarios to be added later
 
 
 

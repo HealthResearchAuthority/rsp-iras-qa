@@ -427,7 +427,7 @@ export default class CommonItemsPage {
     console.log(testType + ' test action');
   }
 
-  async fillUIComponent<PageObject>(dataset: JSON, key: string, page: PageObject) {
+  async fillUIComponent<PageObject>(dataset: JSON | Record<string, any>, key: string, page: PageObject) {
     const locator: Locator = page[key];
     const typeAttribute = await locator.first().getAttribute('type');
     if (typeAttribute === 'radio') {
@@ -1503,7 +1503,7 @@ export default class CommonItemsPage {
     }
   }
 
-  async selectSponsorOrgJsEnabled<PageObject>(dataset: JSON, key: string, page: PageObject) {
+  async selectSponsorOrgJsEnabled<PageObject>(dataset: JSON | Record<string, any>, key: string, page: PageObject) {
     dataset['sponsor_organisation_jsenabled_text'] = dataset[key];
     await this.fillUIComponent(dataset, 'sponsor_organisation_jsenabled_text', page);
     await this.page.waitForTimeout(2000);

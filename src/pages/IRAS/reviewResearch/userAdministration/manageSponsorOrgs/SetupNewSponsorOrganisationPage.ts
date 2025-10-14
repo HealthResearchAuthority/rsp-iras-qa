@@ -86,7 +86,7 @@ export default class SetupNewSponsorOrganisationPage {
     await expect.soft(this.select_a_sponsor_organisation_label).toBeVisible();
     // await expect.soft(this.select_a_sponsor_organisation_hint_text).toBeVisible();
   }
-  async selectSponsorOrgJsDisabled(dataset: JSON, key: string, commonItemsPage: CommonItemsPage) {
+  async selectSponsorOrgJsDisabled(dataset: JSON | Record<string, any>, key: string, commonItemsPage: CommonItemsPage) {
     await commonItemsPage.fillUIComponent(dataset, key, commonItemsPage);
     await commonItemsPage.govUkButton.getByText('Search').click();
     // await this.sponsor_organisation_jsdisabled_search_button.click();

@@ -437,6 +437,7 @@ Then(
       myModificationsTasklistPage,
       sponsorReferencePage,
       projectIdentifiersPage,
+      setupNewSponsorOrganisationPage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
@@ -515,6 +516,10 @@ Then(
       errorMessageFieldDataset =
         sponsorReferencePage.sponsorReferencePageTestData[errorMessageFieldAndSummaryDatasetName];
       page = sponsorReferencePage;
+    } else if (pageKey === 'Setup_New_Sponsor_Organisation_Page') {
+      errorMessageFieldDataset =
+        setupNewSponsorOrganisationPage.setupNewSponsorOrganisationPageTestData[errorMessageFieldAndSummaryDatasetName];
+      page = setupNewSponsorOrganisationPage;
     }
     let allSummaryErrorExpectedValues: any;
     let summaryErrorActualValues: any;
