@@ -210,8 +210,10 @@ Given(
       linkKey === 'Back_To_Users'
     ) {
       await commonItemsPage.govUkLink.getByText(linkValue).click();
-    } else if (noOfLinksFound > 1) {
+    } else if (linkKey === 'Back') {
       await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).first().click();
+    } else if (noOfLinksFound > 1) {
+      await commonItemsPage.govUkLink.getByText(linkValue).first().click();
     } else {
       await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
     }
