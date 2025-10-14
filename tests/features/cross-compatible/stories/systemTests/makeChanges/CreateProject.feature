@@ -765,3 +765,119 @@ Feature: Create Amendment - Create Project
       | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Label_Texts     | Sponsor_Organisation_Text_Partial_Start_Space  | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Start_Space    | Field_Error_Primary_Sponsor_Organisation |
       | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Label_Texts     | Sponsor_Organisation_Text_Partial_End_Space    | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space     | Field_Error_Primary_Sponsor_Organisation |
       | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Label_Texts     | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | Sponsor_Organisation_Text_Exactly_Five_Results | Field_Error_Primary_Sponsor_Organisation |
+
+
+  @rsp-5340 @validateProjectRecordFromInDraftToActiveStatus
+  Scenario: Validate project status transition from in draft to active in the my research page and project overview page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    Then I can see the project identifiers page
+    And I capture the page screenshot
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_For_Later' button on the 'Project_Identifiers_Page'
+    And I can see the project overview for unfinished projects page
+    Then I can see the project status as 'Project_Status_Draft' on the project overview for unfinished project page
+    And I capture the page screenshot
+    And I validate the iras id displayed on the project overview unfinished projects page
+    And I click the 'Back' link on the 'Project_Overview_Unfinished_Projects_Page'
+    And I have navigated to the my research projects page
+    Then I can see the my research projects page
+    Then I can see the project status as 'Project_Status_Draft' on the my research page
+    And I capture the page screenshot
+    And I click on the respective 'Valid_Project_Title' on the my research page
+    And I capture the page screenshot
+    And I click the 'Edit_Project_Record' button on the 'Project_Overview_Unfinished_Projects_Page'
+    Then I can see the review your answers page
+    And I click the enter link 'Project_Title' on review your answers page
+    Then I can see the project details title page
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    When I click the 'Save_Changes' button on the 'Project_Details_Title_Page'
+    Then I can see the review your answers page
+    And I click the enter link 'chief_investigator_email' on review your answers page
+    Then I can see the chief investigator page
+    And I fill the chief investigator page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    When I click the 'Save_Changes' button on the 'Chief_Investigator_Page'
+    Then I can see the review your answers page
+    And I click the enter link 'nations_participating' on review your answers page
+    Then I can see the research locations page
+    And I fill the research locations page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    When I click the 'Save_Changes' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    And I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
+    Then I can see the project status as 'Project_Status_Active' on the project overview page
+    And I capture the page screenshot
+
+  @rsp-5340 @validateActiveProjectCanCreateModification @jsEnabled
+  Scenario Outline: Validate project status with active status can create modification
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    When I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    And I fill the chief investigator page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
+    And I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    And I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
+    Then I can see the project status as 'Project_Status_Active' on the project overview page
+    And I capture the page screenshot
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I select 'Participating_Organisation' from area of change dropdown and 'Addition_Of_Sites_Option' from specific change dropdown
+    When I click the 'Save_For_Later' button on the 'Select_Area_Of_Change_Page'
+    And I can see the modification progress saved successful message on project overview page
+    And I can see the project overview page
+    And I capture the page screenshot
+
+  @rsp-5340 @validateProjectRecordInDraftStatusRetains
+  Scenario: Validate project status in draft is retained if partial project information is saved
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    Then I can see the project identifiers page
+    And I capture the page screenshot
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_For_Later' button on the 'Project_Identifiers_Page'
+    And I can see the project overview for unfinished projects page
+    Then I can see the project status as 'Project_Status_Draft' on the project overview for unfinished project page
+    And I capture the page screenshot
+    And I validate the iras id displayed on the project overview unfinished projects page
+    And I click the 'Back' link on the 'Project_Overview_Unfinished_Projects_Page'
+    And I have navigated to the my research projects page
+    Then I can see the my research projects page
+    Then I can see the project status as 'Project_Status_Draft' on the my research page
+    And I capture the page screenshot
+    And I click on the respective 'Valid_Project_Title' on the my research page
+    And I capture the page screenshot
+    And I click the 'Edit_Project_Record' button on the 'Project_Overview_Unfinished_Projects_Page'
+    Then I can see the review your answers page
+    And I click the enter link 'Project_Title' on review your answers page
+    Then I can see the project details title page
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    When I click the 'Save_Changes' button on the 'Project_Details_Title_Page'
+    Then I can see the review your answers page
+    And I click the 'Save_For_Later' button on the 'Review_Your_Answers_Page'
+    Then I can see the project status as 'Project_Status_Draft' on the project overview for unfinished project page
+    And I capture the page screenshot
+    And I click the 'Back' link on the 'Project_Overview_Unfinished_Projects_Page'
+    And I have navigated to the my research projects page
+    Then I can see the my research projects page
+    Then I can see the project status as 'Project_Status_Draft' on the my research page
+    And I capture the page screenshot

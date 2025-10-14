@@ -1,5 +1,11 @@
 {
   "Create_Project_Record_Page": {
     "heading": "Create a project record"
+  },
+  "Project_Status_Draft": {
+    "status": "In draft"
+  },
+  "Project_Status_Active": {
+    "status": "Active"
   }
 }
