@@ -37,14 +37,14 @@ export default class SetupNewSponsorOrganisationPage {
     //   this.setupNewSponsorOrganisationPageTestData.Setup_New_Sponsor_Organisation_Page
     //     .select_a_sponsor_organisation_hint_text
     // );
-    this.sponsor_organisation_jsenabled_text = this.page.getByRole('combobox', {
-      name: this.setupNewSponsorOrganisationPageTestData.Setup_New_Sponsor_Organisation_Page
-        .select_a_sponsor_organisation_hint_text,
-    });
-    this.sponsor_organisation_text = this.page.getByRole('textbox', {
-      name: this.setupNewSponsorOrganisationPageTestData.Setup_New_Sponsor_Organisation_Page
-        .select_a_sponsor_organisation_hint_text,
-    });
+    // this.sponsor_organisation_jsenabled_text = this.page.getByRole('combobox', {
+    //   name: this.setupNewSponsorOrganisationPageTestData.Setup_New_Sponsor_Organisation_Page
+    //     .select_a_sponsor_organisation_hint_text,
+    // });
+    // this.sponsor_organisation_text = this.page.getByRole('textbox', {
+    //   name: this.setupNewSponsorOrganisationPageTestData.Setup_New_Sponsor_Organisation_Page
+    //     .select_a_sponsor_organisation_hint_text,
+    // });
   }
 
   //Getters & Setters for Private Variables
@@ -86,13 +86,8 @@ export default class SetupNewSponsorOrganisationPage {
     await expect.soft(this.select_a_sponsor_organisation_label).toBeVisible();
     // await expect.soft(this.select_a_sponsor_organisation_hint_text).toBeVisible();
   }
-  async selectSponsorOrgJsDisabled<PageObject>(
-    dataset: JSON,
-    key: string,
-    commonItemsPage: CommonItemsPage,
-    page: PageObject
-  ) {
-    await commonItemsPage.fillUIComponent(dataset, key, page);
+  async selectSponsorOrgJsDisabled(dataset: JSON, key: string, commonItemsPage: CommonItemsPage) {
+    await commonItemsPage.fillUIComponent(dataset, key, commonItemsPage);
     await commonItemsPage.govUkButton.getByText('Search').click();
     // await this.sponsor_organisation_jsdisabled_search_button.click();
     await this.page.waitForTimeout(2000);

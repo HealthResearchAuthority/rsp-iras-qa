@@ -5,6 +5,8 @@ import * as questionSetData from '../../resources/test_data/common/question_set_
 import * as commonTestData from '../../resources/test_data/common/common_data.json';
 import * as documentUploadTestData from '../../resources/test_data/common/document_upload_data.json';
 import * as searchFilterResultsData from '../../resources/test_data/common/search_filter_results_data.json';
+import * as searchModificationsPageTestData from '../../resources/test_data/iras/reviewResearch/receiveAmendments/search_modifications_page_data.json';
+import * as setupNewSponsorOrganisationPageTestData from '../../resources/test_data/iras/reviewResearch/userAdministration/manageSponsorOrgs/setup_new_sponsor_organisation_page_data.json';
 import * as fs from 'node:fs';
 import path from 'node:path';
 import ProjectFilterPage from '../IRAS/questionSet/ProjectFilterPage';
@@ -28,6 +30,8 @@ export default class CommonItemsPage {
   readonly commonTestData: typeof commonTestData;
   readonly documentUploadTestData: typeof documentUploadTestData;
   readonly searchFilterResultsData: typeof searchFilterResultsData;
+  readonly searchModificationsPageTestData: typeof searchModificationsPageTestData;
+  readonly setupNewSponsorOrganisationPageTestData: typeof setupNewSponsorOrganisationPageTestData;
   private _search_key: string;
   private _no_of_results_before_search: number;
   private _no_of_results_after_search: number;
@@ -113,6 +117,13 @@ export default class CommonItemsPage {
   readonly search_no_results_guidance_points: Locator;
   readonly active_filters_list_to_remove: Locator;
   readonly errorMessageFieldLabelList: Locator;
+  readonly sponsor_organisation_fieldset: Locator;
+  readonly sponsor_organisation_jsenabled_text: Locator;
+  readonly sponsor_organisation_suggestion_list_labels: Locator;
+  readonly sponsor_organisation_suggestion_listbox: Locator;
+  readonly sponsor_organisation_text: Locator;
+  readonly sponsor_organisation_jsdisabled_search_button: Locator;
+  readonly sponsor_organisation_jsdisabled_search_results_radio_button: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -123,6 +134,8 @@ export default class CommonItemsPage {
     this.commonTestData = commonTestData;
     this.documentUploadTestData = documentUploadTestData;
     this.searchFilterResultsData = searchFilterResultsData;
+    this.searchModificationsPageTestData = searchModificationsPageTestData;
+    this.setupNewSponsorOrganisationPageTestData = setupNewSponsorOrganisationPageTestData;
     this._search_key = '';
     this._no_of_results_before_search = 0;
     this._no_of_results_after_search = 0;
@@ -276,6 +289,42 @@ export default class CommonItemsPage {
     this.errorMessageFieldLabelList = this.page
       .locator('.field-validation-error')
       .or(this.page.locator('.govuk-error-message'));
+    this.sponsor_organisation_fieldset = this.page.locator('.govuk-fieldset', {
+      has: this.page.getByText(
+        this.searchModificationsPageTestData.Search_Modifications_Page.sponsor_organisation_hint_text
+      ),
+    });
+    this.sponsor_organisation_jsenabled_text = this.sponsor_organisation_fieldset.getByRole('combobox').or(
+      this.page.getByRole('combobox', {
+        name: this.setupNewSponsorOrganisationPageTestData.Setup_New_Sponsor_Organisation_Page
+          .select_a_sponsor_organisation_hint_text,
+      })
+    );
+    this.sponsor_organisation_suggestion_list_labels = this.sponsor_organisation_jsenabled_text
+      .locator('..')
+      .getByRole('option');
+    this.sponsor_organisation_suggestion_listbox = this.sponsor_organisation_jsenabled_text
+      .locator('..')
+      .getByRole('listbox');
+    this.sponsor_organisation_text = this.sponsor_organisation_fieldset.getByRole('textbox').or(
+      this.page.getByRole('textbox', {
+        name: this.setupNewSponsorOrganisationPageTestData.Setup_New_Sponsor_Organisation_Page
+          .select_a_sponsor_organisation_hint_text,
+      })
+    );
+    this.sponsor_organisation_jsdisabled_search_button = this.sponsor_organisation_fieldset.getByRole('button', {
+      name: 'Search',
+    });
+    this.sponsor_organisation_jsdisabled_search_results_radio_button =
+      this.sponsor_organisation_fieldset.getByRole('radio');
+    // this.sponsor_organisation_jsenabled_text = this.page.getByRole('combobox', {
+    //   name: this.setupNewSponsorOrganisationPageTestData.Setup_New_Sponsor_Organisation_Page
+    //     .select_a_sponsor_organisation_hint_text,
+    // });
+    // this.sponsor_organisation_text = this.page.getByRole('textbox', {
+    //   name: this.setupNewSponsorOrganisationPageTestData.Setup_New_Sponsor_Organisation_Page
+    //     .select_a_sponsor_organisation_hint_text,
+    // });
   }
 
   //Getters & Setters for Private Variables
@@ -1451,6 +1500,16 @@ export default class CommonItemsPage {
       if (isChecked) {
         await checkbox.uncheck();
       }
+    }
+  }
+
+  async selectSponsorOrgJsEnabled<PageObject>(dataset: JSON, key: string, page: PageObject) {
+    dataset['sponsor_organisation_jsenabled_text'] = dataset[key];
+    await this.fillUIComponent(dataset, 'sponsor_organisation_jsenabled_text', page);
+    await this.page.waitForTimeout(2000);
+    const suggestionVisible = await this.sponsor_organisation_suggestion_list_labels.first().isVisible();
+    if (suggestionVisible) {
+      await this.sponsor_organisation_suggestion_list_labels.first().click();
     }
   }
 }

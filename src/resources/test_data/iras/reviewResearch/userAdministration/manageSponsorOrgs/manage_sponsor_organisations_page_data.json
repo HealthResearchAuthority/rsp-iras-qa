@@ -21,65 +21,16 @@
     "sponsor_organisation_added_success_message_header_text": "Success",
     "sponsor_organisation_added_success_message_text": "You have successfully added a new sponsor organisation"
   },
-  "Advanced_Filters_Hint_Labels": {
-    "country_hint_label": "Select all that apply",
-    "status_hint_label": "Select one option"
-  },
   "Search_For_Sponsor_Organisations": {
     "Search_Queries": {
       "Non_Existant_Data": { "search_input_text": "ThisShouldNot ReturnAResult" },
-      "Leading_White_Space_Data": { "search_input_text": " QA Automation" },
-      "Leading_And_Trailing_White_Space_Data": { "search_input_text": " QA Automation " },
-      "Trailing_White_Space_Data": { "search_input_text": "QA Automation " },
-      "Existing_QA_Data_One": { "search_input_text": "QA Automation" },
-      "Existing_QA_Data_Two": { "search_input_text": "QA Automation Test" },
-      "Existing_QA_Data_Three": { "search_input_text": "ZZ Top" },
+      "Leading_White_Space_Data": { "search_input_text": " CHESTERFIELD ROYAL HOSPITAL" },
+      "Leading_And_Trailing_White_Space_Data": { "search_input_text": " CHESTERFIELD ROYAL HOSPITAL " },
+      "Trailing_White_Space_Data": { "search_input_text": "CHESTERFIELD ROYAL HOSPITAL " },
+      "Existing_QA_Data_One": { "search_input_text": "CHESTERFIELD ROYAL HOSPITAL NHS FOUNDATION TRUST" },
+      "Existing_QA_Data_Two": { "search_input_text": "AIREDALE NHS FOUNDATION TRUST" },
+      "Existing_QA_Data_Three": { "search_input_text": "ALDER HEY CHILDREN'S NHS FOUNDATION TRUST" },
       "Empty_Search_Data": { "search_input_text": "" }
-    }
-  },
-  "Advanced_Filters": {
-    "Advanced_Filter_All_Countries_Active": {
-      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
-      "status_radio": "Active"
-    },
-    "Advanced_Filter_All_Countries_Disabled": {
-      "country_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
-      "status_radio": "Disabled"
-    },
-    "Advanced_Filter_Eng_Active": {
-      "country_checkbox": ["England"],
-      "status_radio": "Active"
-    },
-    "Advanced_Filter_NI_Active": {
-      "country_checkbox": ["Northern Ireland"],
-      "status_radio": "Active"
-    },
-    "Advanced_Filter_Sco_Active": {
-      "country_checkbox": ["Scotland"],
-      "status_radio": "Active"
-    },
-    "Advanced_Filter_Wal_Active": {
-      "country_checkbox": ["Wales"],
-      "status_radio": "Active"
-    },
-    "Advanced_Filter_Eng_NI_Active": {
-      "country_checkbox": ["England", "Northern Ireland"],
-      "status_radio": "Active"
-    },
-    "Advanced_Filter_NI_Sco_Wal_Active": {
-      "country_checkbox": ["Northern Ireland", "Scotland", "Wales"],
-      "status_radio": "Active"
-    },
-    "Advanced_Filter_Eng_Wal_Active": {
-      "country_checkbox": ["England", "Wales"],
-      "status_radio": "Active"
-    },
-    "Advanced_Filter_NI_Wal_Disabled": {
-      "country_checkbox": ["Northern Ireland", "Wales"],
-      "status_radio": "Disabled"
-    },
-    "Advanced_Filter_No_Country_Selected": {
-      "country_checkbox": []
     }
   }
 }

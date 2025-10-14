@@ -9,6 +9,8 @@ export default class CheckSetupSponsorOrganisationPage {
   readonly checkSetupSponsorOrganisationProfilePageData: typeof checkSetupSponsorOrganisationProfilePageData;
   readonly buttonTextData: typeof buttonTextData;
   readonly linkTextData: typeof linkTextData;
+  private _org_name: string;
+  private _countries: string[];
   readonly page_heading: Locator;
   readonly guidance_text: Locator;
   readonly row_value_locator: Locator;
@@ -23,6 +25,8 @@ export default class CheckSetupSponsorOrganisationPage {
     this.checkSetupSponsorOrganisationProfilePageData = checkSetupSponsorOrganisationProfilePageData;
     this.buttonTextData = buttonTextData;
     this.linkTextData = linkTextData;
+    this._org_name = '';
+    this._countries = [];
 
     //Locators
     this.page_heading = this.page
@@ -63,9 +67,26 @@ export default class CheckSetupSponsorOrganisationPage {
     this.country_value = this.country_row.locator('td', { has: this.row_value_locator });
   }
 
+  //Getters & Setters for Private Variables
+  async getOrgName(): Promise<string> {
+    return this._org_name;
+  }
+
+  async setOrgName(value: string): Promise<void> {
+    this._org_name = value;
+  }
+
+  async getCountries(): Promise<string[]> {
+    return this._countries;
+  }
+
+  async setCountries(value: string[]): Promise<void> {
+    this._countries = value;
+  }
+
   //Page Methods
   async goto() {
-    await this.page.goto('reviewbody/confirm-changes');
+    await this.page.goto('');
   }
 
   async assertOnCheckSetupSponsorOrganisationPage() {

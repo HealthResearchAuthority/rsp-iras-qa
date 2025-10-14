@@ -173,7 +173,8 @@ Then('I click the {string} button on the {string}', async ({ commonItemsPage }, 
   const buttonValue = commonItemsPage.buttonTextData[pageKey][buttonKey];
   if (
     (pageKey === 'Review_All_Changes_Page' && buttonKey === 'Send_Modification_To_Sponsor') ||
-    (pageKey === 'Confirmation_Page' && buttonKey === 'Return_To_Project_Overview')
+    (pageKey === 'Confirmation_Page' && buttonKey === 'Return_To_Project_Overview') ||
+    (pageKey === 'Setup_New_Sponsor_Organisation_Page' && buttonKey === 'Save_Continue')
   ) {
     await commonItemsPage.govUkButton
       .getByText(buttonValue)
@@ -218,6 +219,8 @@ Given(
       linkKey === 'Back_To_Users'
     ) {
       await commonItemsPage.govUkLink.getByText(linkValue).click();
+    } else if (linkKey === 'Back') {
+      await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).first().click();
     } else if (noOfLinksFound > 1) {
       await commonItemsPage.govUkLink.getByText(linkValue).first().click();
     } else {
@@ -581,7 +584,7 @@ When(
       reviewBodyProfilePage,
       createReviewBodyPage,
       createUserProfilePage,
-      setupNewSponsorOrganisationPage,
+      checkSetupSponsorOrganisationPage,
     },
     inputType: string
   ) => {
@@ -594,7 +597,7 @@ When(
         searchValue = await createReviewBodyPage.getUniqueOrgName();
         break;
       case 'name of the newly added sponsor organisation':
-        searchValue = await setupNewSponsorOrganisationPage.getUniqueOrgName();
+        searchValue = await checkSetupSponsorOrganisationPage.getOrgName();
         break;
       case 'name of the newly created user':
         searchValue = await createUserProfilePage.getUniqueEmail();
@@ -724,6 +727,7 @@ Given(
       modificationsReadyToAssignPage,
       approvalsPage,
       myModificationsTasklistPage,
+      manageSponsorOrganisationPage,
     },
     page: string
   ) => {
@@ -785,6 +789,10 @@ Given(
       case 'My_Modifications_Tasklist_Page':
         await myModificationsTasklistPage.goto();
         await myModificationsTasklistPage.assertOnMyModificationsTasklistPage();
+        break;
+      case 'Manage_Sponsor_Organisations_Page':
+        await manageSponsorOrganisationPage.goto();
+        await manageSponsorOrganisationPage.assertOnManageSponsorOrganisationsPage();
         break;
       default:
         throw new Error(`${page} is not a valid option`);
@@ -1280,6 +1288,85 @@ Then(
     } else if (recordType === 'newly added sponsor organisation') {
       const createdSponsorOrgRow = await manageSponsorOrganisationPage.getSponsorOrgRow();
       await createdSponsorOrgRow.locator(manageSponsorOrganisationPage.actionsLink).click();
+    }
+  }
+);
+
+Then(
+  'I can see the {string} list sorted by {string} order of the {string} on the {string} page',
+  async (
+    { manageReviewBodiesPage, commonItemsPage },
+    sortListType: string,
+    sortDirection: string,
+    sortField: string,
+    currentPage: string
+  ) => {
+    let sortedList: string[];
+    let columnIndex: number;
+    if (
+      sortListType.toLowerCase() === 'manage sponsor organisations' ||
+      sortListType.toLowerCase() === 'manage review bodies'
+    ) {
+      switch (sortField.toLowerCase()) {
+        case 'organisation name':
+          columnIndex = 0;
+          break;
+        case 'country':
+          columnIndex = 1;
+          break;
+        case 'status':
+          columnIndex = 2;
+          break;
+        default:
+          throw new Error(`${sortField} is not a valid option`);
+      }
+      let actualList: string[] = [];
+      if (sortField.toLowerCase() == 'country') {
+        const originalList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
+        for (const country of originalList) {
+          if (country.includes(',')) {
+            actualList.push(country.slice(0, country.indexOf(',')));
+          } else {
+            actualList.push(country);
+          }
+        }
+      } else {
+        actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
+      }
+      if (sortDirection.toLowerCase() == 'ascending') {
+        sortedList = [...actualList].toSorted((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
+        if (sortField.toLowerCase() == 'status' && currentPage.toLowerCase() == 'first') {
+          expect(actualList).toContain(
+            manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.enabled_status
+          );
+        }
+      } else {
+        sortedList = [...actualList].toSorted((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
+        if (sortField.toLowerCase() == 'status' && currentPage.toLowerCase() == 'first') {
+          expect(actualList).toContain(
+            manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.disabled_status
+          );
+        }
+      }
+      expect.soft(actualList).toEqual(sortedList);
+    }
+  }
+);
+
+Then(
+  'the system displays {string} matching the search criteria',
+  async ({ commonItemsPage }, searchListType: string) => {
+    if (searchListType.toLowerCase() === 'sponsor organisations' || searchListType.toLowerCase() === 'review bodies') {
+      const searchKey = await commonItemsPage.getSearchKey();
+      const searchTerms = await commonItemsPage.splitSearchTerm(searchKey);
+      const orgList = await commonItemsPage.getAllOrgNamesFromTheTable();
+      const orgListAfterSearch: string[] = confirmArrayNotNull(orgList.get('searchResultValues'));
+      const searchResult = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
+        orgListAfterSearch,
+        searchTerms
+      );
+      expect.soft(searchResult).toBeTruthy();
+      expect.soft(orgListAfterSearch).toEqual(searchResult);
     }
   }
 );

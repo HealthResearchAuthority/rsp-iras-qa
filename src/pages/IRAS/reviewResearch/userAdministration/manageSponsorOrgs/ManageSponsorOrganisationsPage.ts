@@ -1,7 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as manageSponsorOrganisationsPageTestData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageSponsorOrgs/manage_sponsor_organisations_page_data.json';
 import * as linkTextData from '../../../../../resources/test_data/common/link_text_data.json';
-import SetupNewSponsorOrganisationPage from './SetupNewSponsorOrganisationPage';
+import CheckSetupSponsorOrganisationPage from './CheckSetupSponsorOrganisationPage';
 
 //Declare Page Objects
 export default class ManageSponsorOrganisationsPage {
@@ -152,7 +152,7 @@ export default class ManageSponsorOrganisationsPage {
 
   async getSponsorOrgName(
     inputType: string,
-    setupNewSponsorOrganisationPage: SetupNewSponsorOrganisationPage
+    checkSetupSponsorOrganisationPage: CheckSetupSponsorOrganisationPage
   ): Promise<string> {
     let sponsorOrgName: string;
     switch (inputType) {
@@ -160,7 +160,7 @@ export default class ManageSponsorOrganisationsPage {
       //   sponsorOrgName = await this.getOrgName();
       //   break;
       case 'newly added sponsor organisation':
-        sponsorOrgName = await setupNewSponsorOrganisationPage.getUniqueOrgName();
+        sponsorOrgName = await checkSetupSponsorOrganisationPage.getOrgName();
         break;
       default:
         sponsorOrgName = inputType;

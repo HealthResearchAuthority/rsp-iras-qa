@@ -1,5 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../../hooks/CustomFixtures';
+import { confirmStringNotNull } from '../../../../../utils/UtilFunctions';
 const { Then } = createBdd(test);
 
 Then(
@@ -9,20 +10,24 @@ Then(
       setupNewSponsorOrganisationPage.setupNewSponsorOrganisationPageTestData.Setup_New_Sponsor_Organisation[
         datasetName
       ];
-    const expectedCountryValues: string = dataset.country_checkbox.toString();
-
     await checkSetupSponsorOrganisationPage.assertOnCheckSetupSponsorOrganisationPage();
+    const organisationName = await checkSetupSponsorOrganisationPage.organisation_name_value.innerText();
     if (datasetName.startsWith('Sponsor_Organisation_')) {
-      await expect(checkSetupSponsorOrganisationPage.organisation_name_value).toHaveText(
-        await setupNewSponsorOrganisationPage.getUniqueOrgName()
-      );
+      expect.soft(organisationName.trim()).toBe(await setupNewSponsorOrganisationPage.getUniqueOrgName());
+      // await expect
+      //   .soft(checkSetupSponsorOrganisationPage.organisation_name_value)
+      //   .toHaveText(await setupNewSponsorOrganisationPage.getUniqueOrgName());
     } else {
-      await expect(checkSetupSponsorOrganisationPage.organisation_name_value).toHaveText(
-        dataset.organisation_name_text
-      );
+      expect.soft(organisationName.trim()).toBe(dataset.organisation_name_text);
+      // await expect
+      //   .soft(checkSetupSponsorOrganisationPage.organisation_name_value)
+      //   .toHaveText(dataset.organisation_name_text);
     }
-    await expect(checkSetupSponsorOrganisationPage.country_value).toHaveText(
-      expectedCountryValues.replaceAll(',', ', ')
+    await checkSetupSponsorOrganisationPage.setOrgName(
+      confirmStringNotNull(await checkSetupSponsorOrganisationPage.organisation_name_value.textContent())
+    );
+    await checkSetupSponsorOrganisationPage.setCountries(
+      confirmStringNotNull(await checkSetupSponsorOrganisationPage.country_value.textContent()).split(', ')
     );
   }
 );

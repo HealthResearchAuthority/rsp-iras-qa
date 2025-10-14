@@ -5,10 +5,7 @@ import config from '../../../../../../playwright.config';
 
 When(
   'I select a sponsor organisation in the set up a new sponsor organisation page using {string}',
-  async (
-    { setupNewSponsorOrganisationPage, searchModificationsPage, commonItemsPage, $tags },
-    filterDatasetName: string
-  ) => {
+  async ({ setupNewSponsorOrganisationPage, commonItemsPage, $tags }, filterDatasetName: string) => {
     const dataset =
       setupNewSponsorOrganisationPage.setupNewSponsorOrganisationPageTestData.Setup_New_Sponsor_Organisation[
         filterDatasetName
@@ -19,19 +16,9 @@ When(
       if (Object.hasOwn(dataset, key)) {
         if (key === 'sponsor_organisation_text') {
           if (isJsEnabled) {
-            await searchModificationsPage.selectSponsorOrgJsEnabled(
-              dataset,
-              key,
-              commonItemsPage,
-              setupNewSponsorOrganisationPage
-            );
+            await commonItemsPage.selectSponsorOrgJsEnabled(dataset, key, commonItemsPage);
           } else {
-            await setupNewSponsorOrganisationPage.selectSponsorOrgJsDisabled(
-              dataset,
-              key,
-              commonItemsPage,
-              setupNewSponsorOrganisationPage
-            );
+            await setupNewSponsorOrganisationPage.selectSponsorOrgJsDisabled(dataset, key, commonItemsPage);
           }
           delete dataset['sponsor_organisation_jsenabled_text'];
         } else {

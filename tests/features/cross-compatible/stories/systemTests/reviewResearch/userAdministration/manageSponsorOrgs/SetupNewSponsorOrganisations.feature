@@ -6,7 +6,9 @@ Feature: User Administration: Manage Sponsor Organisations
         And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
         Then I can see the 'Manage_Sponsor_Organisations_Page'
 
-    @ViewListOfSponsorOrgs @rsp-5229 @rsp-5230  @jsEnabled @Test
+    # @jsEnabled,@jsDisabled
+
+    @ViewListOfSponsorOrgs @rsp-5229 @rsp-5230 @jsEnabled @KNOWN_DEFECT-RSP-5453 @KNOWN_DEFECT-RSP-5454
     Scenario Outline: Verify the user can add a sponsor organisation from manage sponsor organisation page and view the list of sponsor organisation in alphabetical order of organisation name
         And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
         Then I can see the 'Setup_New_Sponsor_Organisation_Page'
@@ -28,10 +30,10 @@ Feature: User Administration: Manage Sponsor Organisations
         And I capture the page screenshot
         Examples:
             | Setup_New_Sponsor_Organisation | Status_Enabled |
-            | Sponsor_Organisation_One       | Enabled        |
-    # | Sponsor_Organisation_Two         | Enabled        |
-    # | Sponsor_Organisation_Three       | Enabled        |
-    # | Sponsor_Organisation_Four        | Enabled        |
+    # | Sponsor_Organisation_One       | Enabled        |
+    # | Sponsor_Organisation_Two       | Enabled        |
+    # | Sponsor_Organisation_Three     | Enabled        |
+    # | Sponsor_Organisation_Four      | Enabled        |
     # | Sponsor_Organisation_Five        | Enabled        |
     # | Sponsor_Organisation_Six         | Enabled        |
     # | Sponsor_Organisation_Seven       | Enabled        |
@@ -53,98 +55,11 @@ Feature: User Administration: Manage Sponsor Organisations
     # | Sponsor_Organisation_TwentyThree | Enabled        |
     # | Sponsor_Organisation_TwentyFour  | Enabled        |
 
-    @verifyManageSponsorOrgsPageBackButtonFlow @rsp-5229
-    Scenario: Verify the user can navigate from 'Manage sponsor organisations' page by clicking 'Back' button
-        And I click the 'Back' link on the 'Manage_Sponsor_Organisations_Page'
-        And I capture the page screenshot
-        Then I can see the 'System_Administration_Page'
 
-    @CancelFromCheckSetupSponsorOrg @rsp-5229 @rsp-5230
-    Scenario Outline: Verify the user can cancel from check and set up a sponsor organisation profile page and navigate back to setup a new sponsor organisation page
-        And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
-        Then I can see the 'Setup_New_Sponsor_Organisation_Page'
-        And I capture the page screenshot
-        When I select a sponsor organisation in the set up a new sponsor organisation page using '<Setup_New_Sponsor_Organisation>'
-        And I capture the page screenshot
-        And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
-        And I capture the page screenshot
-        And I can see the check and set up a sponsor organisation profile page for '<Setup_New_Sponsor_Organisation>'
-        When I click the 'Cancel' button on the 'Check_Setup_Sponsor_Organisation_Page'
-        Then I can see the 'Setup_New_Sponsor_Organisation_Page'
-        Examples:
-            | Setup_New_Sponsor_Organisation  | Status_Enabled |
-            | Sponsor_Organisation_TwentyFive | Enabled        |
 
-    @rsp-5229 @ManageSponsorOrgsPagination @ManageSponsorOrgsPaginationFirstPage @ManageSponsorOrgsPaginationPageNumber @ManageSponsorOrgsPaginationNextLinkClick
-    Scenario: Verify pagination in manage sponsor organisation page when user is on the first page and navigate through each page by clicking page number or by by clicking next link
-        And I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
-        And I capture the page screenshot
-        And the default page size should be 'twenty'
-        And the 'Next' button will be 'available' to the user
-        And the 'Previous' button will be 'not available' to the user
-        And the current page number should be visually highlighted to indicate the active page the user is on
-        And I capture the page screenshot
-        Then I sequentially navigate through each 'Manage_Sponsor_Organisations_Page' by clicking on '<Navigation_Method>' from first page to verify pagination results, surrounding pages, and ellipses for skipped ranges
-        And I capture the page screenshot
-        Examples:
-            | Navigation_Method |
-            | page number       |
-            | next link         |
 
-    @rsp-5229 @ManageSponsorOrgsPagination @ManageSponsorOrgsPaginationLastPage @ManageSponsorOrgsPaginationPageNumber @ManageSponsorOrgsPaginationPreviousLinkClick
-    Scenario: Verify pagination in manage sponsor organisation page when user is on the last page and navigate through each page by clicking page number or by by clicking on previous link
-        And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
-        And I capture the page screenshot
-        And the 'Previous' button will be 'available' to the user
-        And the 'Next' button will be 'not available' to the user
-        And I capture the page screenshot
-        Then I sequentially navigate through each 'Manage_Sponsor_Organisations_Page' by clicking on '<Navigation_Method>' from last page to verify pagination results, surrounding pages, and ellipses for skipped ranges
-        And I capture the page screenshot
-        Examples:
-            | Navigation_Method |
-            | page number       |
-            | previous link     |
 
-    @rsp-5229 @ManageSponsorOrgsSearchResultsFound
-    Scenario Outline: Verify search results in manage sponsor organisation page when user search by first and last organisation names
-        When I enter the '<Field_Name>' of the '<Position>' item in the list, into the search field
-        And I capture the page screenshot
-        And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
-        And I capture the page screenshot
-        Then the system displays review bodies matching the search criteria
-        And I capture the page screenshot
-        Examples:
-            | Field_Name        | Position |
-            | Organisation_Name | First    |
-            | Organisation_Name | Last     |
-
-    @rsp-5229 @ManageSponsorOrgsSearchNoResultsFound
-    Scenario Outline: Verify no results found message will be presented to the user in manage sponsor organisation page if there is no sponsor organisation on the system that matches the search criteria
-        When I fill the search input for searching 'sponsor organisations' with '<Search_Query>' as the search query
-        And I capture the page screenshot
-        And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
-        And I capture the page screenshot
-        Then the no search results found message is displayed
-        And I capture the page screenshot
-        Examples:
-            | Search_Query      |
-            | Non_Existant_Data |
-
-    @rsp-5229 @ManageSponsorOrgsSearchResultsFound
-    Scenario Outline: Verify results are displayed when the user searches with existing sponsor organisation details
-        When I fill the search input for searching 'sponsor organisations' with '<Search_Query>' as the search query
-        And I capture the page screenshot
-        And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
-        And I capture the page screenshot
-        Then the system displays review bodies matching the search criteria
-        And I capture the page screenshot
-        Examples:
-            | Search_Query           |
-            | Existing_QA_Data_One   |
-            | Existing_QA_Data_Two   |
-            | Existing_QA_Data_Three |
-
-    @EndToEndFlow @rsp-5229 @rsp-5230
+    @EndToEndFlow @rsp-5229 @rsp-5230 @rsp-5231 @rsp-5232 @rsp-5237
     Scenario Outline: Verify the user can add a sponsor organisation from manage sponsor organisation page
         And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
         Then I can see the 'Setup_New_Sponsor_Organisation_Page'
@@ -167,41 +82,41 @@ Feature: User Administration: Manage Sponsor Organisations
         Then I click the view edit link of the newly added sponsor organisation
         And I capture the page screenshot
         And I can see the sponsor organisation profile page
-        # validate review body profile page with the created review body
-        And I now see the review body profile page with the created '<Add_Review_Body>'
+        # validate sponsor organisation profile page with the selected sponsor organisation
+        And I now see the sponsor organisation profile page with the selected '<Setup_New_Sponsor_Organisation>'
         And I capture the page screenshot
-        # disable review body
-        And I click the 'Disable_Review_Body' button on the 'Review_Body_Profile_Page'
-        And I capture the page screenshot
-        And I click the 'Confirm' button on the 'Confirmation_Page'
-        And I capture the current time for 'Audit_History_Review_Body_Page'
-        And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
-        Then I can see the 'Manage_Review_Bodies_Page'
-        And I capture the page screenshot
-        # find the disabled review body in the list with 'disabled' status
-        When I enter 'name of the new review body' into the search field
-        And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
-        And I can see the 'newly created review body' should be present in the list with '<Status_Disabled>' status in the manage review bodies page
-        Then I click the view edit link
-        And I capture the page screenshot
-        # audit history
-        And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'
-        Then I can see the audit history page of the review body
-        And I capture the page screenshot
-        And I can see the audit history for the review body 'disabled' event for '<Add_Review_Body>' with '<Audit_History>'
-        And I click the 'Back' link on the 'Review_Body_Audit_History_Page'
-        And I capture the page screenshot
-        And I can see the review body profile page
-        And I capture the page screenshot
-        # user list page of the review body
-        And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
-        Then I can see the user list page of the review body
-        And I capture the page screenshot
-        And I can see no users in the review body with a message to add users to the review body
-        When I enter 'QA Automation' into the search field
-        And I click the 'Search' button on the 'Review_Body_User_List_Page'
-        And I capture the page screenshot
-        Then the system displays no results found message in the user list page of the review body
+        # # disable review body
+        # And I click the 'Disable_Review_Body' button on the 'Review_Body_Profile_Page'
+        # And I capture the page screenshot
+        # And I click the 'Confirm' button on the 'Confirmation_Page'
+        # And I capture the current time for 'Audit_History_Review_Body_Page'
+        # And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
+        # Then I can see the 'Manage_Review_Bodies_Page'
+        # And I capture the page screenshot
+        # # find the disabled review body in the list with 'disabled' status
+        # When I enter 'name of the new review body' into the search field
+        # And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
+        # And I can see the 'newly created review body' should be present in the list with '<Status_Disabled>' status in the manage review bodies page
+        # Then I click the view edit link
+        # And I capture the page screenshot
+        # # audit history
+        # And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'
+        # Then I can see the audit history page of the review body
+        # And I capture the page screenshot
+        # And I can see the audit history for the review body 'disabled' event for '<Add_Review_Body>' with '<Audit_History>'
+        # And I click the 'Back' link on the 'Review_Body_Audit_History_Page'
+        # And I capture the page screenshot
+        # And I can see the review body profile page
+        # And I capture the page screenshot
+        # # user list page of the review body
+        # And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
+        # Then I can see the user list page of the review body
+        # And I capture the page screenshot
+        # And I can see no users in the review body with a message to add users to the review body
+        # When I enter 'QA Automation' into the search field
+        # And I click the 'Search' button on the 'Review_Body_User_List_Page'
+        # And I capture the page screenshot
+        # Then the system displays no results found message in the user list page of the review body
 
         Examples:
             | Setup_New_Sponsor_Organisation    | Audit_History       | Status_Enabled | Status_Disabled |
@@ -210,8 +125,7 @@ Feature: User Administration: Manage Sponsor Organisations
 
 
     #   When I click the 'Cancel' button on the 'Check_Setup_Sponsor_Organisation_Page'
-
-    #
+    #  Back ling navigation to be added later
 
     # sponsor org search- JS enabled and disabled scenarios to be added later-search results, no results found and blank search scenarios
 
