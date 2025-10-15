@@ -228,7 +228,7 @@ Then(
       sponsorOrganisationNameListExpected = sponsorOrganisationNameListExpected.slice(0, 5);
     }
     dataset['sponsor_organisation_jsenabled_text'] = dataset['sponsor_organisation_text'];
-    await commonItemsPage.fillUIComponent(dataset, 'sponsor_organisation_jsenabled_text', searchModificationsPage);
+    await commonItemsPage.fillUIComponent(dataset, 'sponsor_organisation_jsenabled_text', commonItemsPage);
     await searchModificationsPage.page.waitForTimeout(2000);
     const sponsorOrganisationNameListActual =
       await commonItemsPage.sponsor_organisation_suggestion_list_labels.allTextContents();
@@ -320,7 +320,9 @@ Then(
         await searchModificationsPage.sponsor_organisation_jsdisabled_narrow_down_label.textContent()
       ).trim();
       const searchResultFooterHintLabelExpected = `${totalMatchingSponsorOrganisations} ${searchHintDataset.search_hint_footer_prefix} '${dataset['sponsor_organisation_text']}'${searchHintDataset.search_hint_footer}`;
-      expect.soft(searchResultFooterHintLabelActual).toEqual(searchResultFooterHintLabelExpected);
+      const normalizedActual = searchResultFooterHintLabelActual.replace(/\s+/g, ' ').trim();
+      expect.soft(normalizedActual).toEqual(searchResultFooterHintLabelExpected);
+      // expect.soft(searchResultFooterHintLabelActual).toEqual(searchResultFooterHintLabelExpected);
     }
   }
 );

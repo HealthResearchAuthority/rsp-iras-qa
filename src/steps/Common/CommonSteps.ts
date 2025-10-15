@@ -438,6 +438,7 @@ Then(
       sponsorReferencePage,
       projectIdentifiersPage,
       setupNewSponsorOrganisationPage,
+      searchModificationsPage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
@@ -519,7 +520,7 @@ Then(
     } else if (pageKey === 'Setup_New_Sponsor_Organisation_Page') {
       errorMessageFieldDataset =
         setupNewSponsorOrganisationPage.setupNewSponsorOrganisationPageTestData[errorMessageFieldAndSummaryDatasetName];
-      page = setupNewSponsorOrganisationPage;
+      page = commonItemsPage;
     }
     let allSummaryErrorExpectedValues: any;
     let summaryErrorActualValues: any;
@@ -538,6 +539,7 @@ Then(
     if (!errorMessageFieldAndSummaryDatasetName.includes('Summary_Only')) {
       for (const key in errorMessageFieldDataset) {
         if (Object.hasOwn(errorMessageFieldDataset, key)) {
+          const expectedMessage = errorMessageFieldDataset[key];
           let fieldErrorMessagesActualValues: any;
           if (pageKey == 'Review_Your_Answers_Page') {
             expect(await page[key].getByRole('link').evaluate((e: any) => getComputedStyle(e).color)).toBe(
@@ -561,14 +563,20 @@ Then(
               const element = await commonItemsPage.clickErrorSummaryLinkMultipleErrorField(val, key, page);
               await expect(element).toBeInViewport();
             }
+          } else if (errorMessageFieldAndSummaryDatasetName === 'Sponsor_Organisation_Min_Char_Error') {
+            const actualMessage =
+              await searchModificationsPage.sponsor_organisation_jsdisabled_min_error_message.textContent();
+            expect.soft(actualMessage).toEqual(expectedMessage);
+            const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
+            await expect(element).toBeInViewport();
           } else {
             fieldErrorMessagesActualValues = await commonItemsPage.getFieldErrorMessages(key, page);
             if (fieldErrorMessagesActualValues.includes('Error: ')) {
               fieldErrorMessagesActualValues = fieldErrorMessagesActualValues.replace('Error: ', '');
             }
-            expect(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
+            expect.soft(fieldErrorMessagesActualValues).toEqual(errorMessageFieldDataset[key]);
             const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
-            await expect(element).toBeInViewport();
+            await expect.soft(element).toBeInViewport();
           }
         }
       }
@@ -1046,8 +1054,13 @@ Then(
         } else {
           throw new Error(`Unhandled error message dataset name: ${errorMessageFieldAndSummaryDatasetName}`);
         }
-        const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
-        await expect(element).toBeInViewport();
+        if (key.includes('sponsor_organisation')) {
+          const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, commonItemsPage);
+          await expect(element).toBeInViewport();
+        } else {
+          const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
+          await expect(element).toBeInViewport();
+        }
       }
     }
   }

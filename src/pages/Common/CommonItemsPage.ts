@@ -1507,9 +1507,10 @@ export default class CommonItemsPage {
     dataset['sponsor_organisation_jsenabled_text'] = dataset[key];
     await this.fillUIComponent(dataset, 'sponsor_organisation_jsenabled_text', page);
     await this.page.waitForTimeout(2000);
-    const suggestionVisible = await this.sponsor_organisation_suggestion_list_labels.first().isVisible();
-    if (suggestionVisible) {
-      await this.sponsor_organisation_suggestion_list_labels.first().click();
-    }
+    await this.page.keyboard.press('Tab');
+    // const suggestionVisible = await this.sponsor_organisation_suggestion_list_labels.first().isVisible();
+    // if (suggestionVisible) {
+    //   await this.sponsor_organisation_suggestion_list_labels.first().click();
+    // }
   }
 }

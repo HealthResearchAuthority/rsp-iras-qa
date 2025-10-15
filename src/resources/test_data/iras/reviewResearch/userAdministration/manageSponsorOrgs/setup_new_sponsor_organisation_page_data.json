@@ -82,7 +82,13 @@
       "sponsor_organisation_text": "LONDON NORTH WEST UNIVERSITY HEALTHCARE NHS TRUST"
     }
   },
-  "Duplicate_Sponsor_Organisation_Setup_Error": {
+  "JavaScript_Disabled_Duplicate_Sponsor_Organisation_Setup_Error": {
     "sponsor_organisation_text": "A sponsor organisation with this name already exists"
+  },
+  "JavaScript_Enabled_Duplicate_Sponsor_Organisation_Setup_Error": {
+    "sponsor_organisation_jsenabled_text": "A sponsor organisation with this name already exists"
+  },
+  "Sponsor_Organisation_Min_Char_Error": {
+    "sponsor_organisation_text": "Please provide 3 or more characters to search sponsor organisation."
   }
 }
