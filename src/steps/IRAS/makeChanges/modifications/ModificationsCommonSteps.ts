@@ -58,6 +58,21 @@ Then(
 );
 
 Then(
+  'I create {string} and click on save for later on the select area of change page',
+  async ({ selectAreaOfChangePage, modificationsCommonPage, commonItemsPage }, dataset: string) => {
+    const modificationsDataset = modificationsCommonPage.modificationsCommonPageTestData[dataset];
+    const modificationDataValues = Object.keys(modificationsDataset);
+    for (let index = 0; index < modificationDataValues.length; index++) {
+      const modificationName = modificationDataValues[index];
+      const modificationDataset = modificationsDataset[modificationName];
+      const buttonValue = commonItemsPage.buttonTextData.Project_Overview_Page.Create_New_Modification;
+      await commonItemsPage.govUkButton.getByText(confirmStringNotNull(buttonValue)).click();
+      await selectAreaOfChangePage.selectAreaOfChangeAndSpecificChange(modificationDataset);
+    }
+  }
+);
+
+Then(
   'I keep note of the individual and overall ranking of changes created using {string}',
   async ({ modificationsCommonPage }, datasetName) => {
     const changesDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName];

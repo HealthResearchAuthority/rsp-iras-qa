@@ -124,5 +124,15 @@
       "which_organisation_change_affect_checkbox": ["Non-NHS/HSC"],
       "where_organisation_change_affect_non_nhs_question_checkbox": ["England"]
     }
+  },
+  "Multiple_Modifications": {
+    "Modification_One": {
+      "area_of_change_dropdown": "Participating organisations",
+      "specific_change_dropdown": "Early closure or withdrawal of research sites"
+    },
+    "Modification_Two": {
+      "area_of_change_dropdown": "Project design",
+      "specific_change_dropdown": "Change to planned end date"
+    }
   }
 }
