@@ -1,4 +1,4 @@
-@UserAdministration @ManageReviewBodies @SortSearchFilterReviewBodies @SysAdminUser @SystemTest
+@SysAdminUser @SystemTest @UserAdministration @ManageSponsorOrgs @SortSearchSponsorOrgs @BackStage
 Feature: User Administration: Manage Review Bodies - Sort, search and filter the review body list
 
     Background:

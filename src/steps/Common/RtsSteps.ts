@@ -82,3 +82,64 @@ Then(
     expect(rtsDataFromApplicationJSONActual).toEqual(rtsResponseDataExpected);
   }
 );
+
+Then(
+  'I make a request to the rts api using {string} dataset for sponsor organisation {string} and  retrive country',
+  async ({ request, rtsPage, setupNewSponsorOrganisationPage }, datasetName: string, sponsorDatasetName: string) => {
+    const dataset = rtsPage.rtsPageTestData[datasetName];
+    const sponsorDataset =
+      setupNewSponsorOrganisationPage.setupNewSponsorOrganisationPageTestData.Setup_New_Sponsor_Organisation[
+        sponsorDatasetName
+      ];
+    const rtsBaseUrl: string = dataset.rts_base_url;
+    // const organisationName = dataset.organisation_name;
+    const organisationName = sponsorDataset['sponsor_organisation_text'];
+    const active = dataset.active;
+    const role = dataset.role;
+    const count = dataset.count;
+    const offset = dataset.offset;
+
+    for (let offsetCount = 0; offsetCount <= offset; ) {
+      const requestHeader =
+        `${rtsBaseUrl}organization?` +
+        `name:contains=${organisationName}` +
+        `&NihrRoleIdentifier=${role}` +
+        `&_count=${count}` +
+        `&_offset=${offsetCount}`;
+
+      const requestResponse = await rtsPage.executeRTSRequest(request, dataset, rtsPage.bearerToken, requestHeader);
+
+      await expect(requestResponse).toBeOK();
+      const receivedJson = await requestResponse.json();
+
+      if (typeof receivedJson.entry !== 'undefined') {
+        receivedJson.entry.forEach((element) => {
+          const organisationRoles = element.resource.extension;
+          for (const organisationRole of organisationRoles) {
+            if (typeof organisationRole.extension !== 'undefined') {
+              const extensions = organisationRole.extension;
+              if (
+                extensions[0].valueString === role &&
+                extensions[3].valueString === 'Active' &&
+                element.resource.active === active
+              ) {
+                const name = element.resource.name;
+                const country = element.resource.address?.[0]?.country || 'Unknown';
+                rtsPage.rtsResponseListRecord.push({ name, country });
+              }
+            }
+          }
+        });
+      } else {
+        break;
+      }
+
+      offsetCount += 1000;
+    }
+    console.log(rtsPage.rtsResponseListRecord);
+    //
+    // const lastRtsRecord = rtsPage.rtsResponseListRecord[
+    //     rtsPage.rtsResponseListRecord.length - 1
+    //   ];
+  }
+);

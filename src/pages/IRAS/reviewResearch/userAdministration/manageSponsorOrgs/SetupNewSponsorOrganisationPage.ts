@@ -33,18 +33,6 @@ export default class SetupNewSponsorOrganisationPage {
       this.setupNewSponsorOrganisationPageTestData.Setup_New_Sponsor_Organisation_Page
         .select_a_sponsor_organisation_label
     );
-    // this.select_a_sponsor_organisation_hint_text = this.page.getByText(
-    //   this.setupNewSponsorOrganisationPageTestData.Setup_New_Sponsor_Organisation_Page
-    //     .select_a_sponsor_organisation_hint_text
-    // );
-    // this.sponsor_organisation_jsenabled_text = this.page.getByRole('combobox', {
-    //   name: this.setupNewSponsorOrganisationPageTestData.Setup_New_Sponsor_Organisation_Page
-    //     .select_a_sponsor_organisation_hint_text,
-    // });
-    // this.sponsor_organisation_text = this.page.getByRole('textbox', {
-    //   name: this.setupNewSponsorOrganisationPageTestData.Setup_New_Sponsor_Organisation_Page
-    //     .select_a_sponsor_organisation_hint_text,
-    // });
   }
 
   //Getters & Setters for Private Variables
@@ -82,20 +70,15 @@ export default class SetupNewSponsorOrganisationPage {
     await expect(this.pageHeading).toBeVisible();
     expect
       .soft(await this.page.title())
-      .toBe(this.setupNewSponsorOrganisationPageTestData.Setup_New_Sponsor_Organisation_Page.title); // Temporarily commented out due to title mismatch
+      .toBe(this.setupNewSponsorOrganisationPageTestData.Setup_New_Sponsor_Organisation_Page.title);
     await expect.soft(this.select_a_sponsor_organisation_label).toBeVisible();
-    // await expect.soft(this.select_a_sponsor_organisation_hint_text).toBeVisible();
   }
   async selectSponsorOrgJsDisabled(dataset: JSON | Record<string, any>, key: string, commonItemsPage: CommonItemsPage) {
     await commonItemsPage.fillUIComponent(dataset, key, commonItemsPage);
     await commonItemsPage.govUkButton.getByText('Search').click();
-    // await this.sponsor_organisation_jsdisabled_search_button.click();
     await this.page.waitForTimeout(2000);
     if (dataset[key] !== '') {
       await this.page.getByRole('radio').first().click();
-      // this.sponsor_organisation_jsdisabled_search_results_radio_button =
-      // this.sponsor_organisation_fieldset.getByRole('radio');
-      // await this.sponsor_organisation_jsdisabled_search_results_radio_button.first().click();
     }
   }
 }

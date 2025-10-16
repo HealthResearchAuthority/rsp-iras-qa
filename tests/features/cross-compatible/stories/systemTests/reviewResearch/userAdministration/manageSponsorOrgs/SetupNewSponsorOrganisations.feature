@@ -10,6 +10,8 @@ Feature: User Administration: Manage Sponsor Organisations
 
     @ViewListOfSponsorOrgs @rsp-5229 @rsp-5230 @jsDisabled @KNOWN_DEFECT-RSP-5453 @KNOWN_DEFECT-RSP-5454 @skip
     Scenario Outline: Verify the user can add a sponsor organisation from manage sponsor organisation page and view the list of sponsor organisation in alphabetical order of organisation name
+        When I authorise the rts api using '<RTS_API_Data>'
+        Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation '<Setup_New_Sponsor_Organisation>' and  retrive country
         And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
         Then I can see the 'Setup_New_Sponsor_Organisation_Page'
         And I capture the page screenshot
@@ -17,7 +19,7 @@ Feature: User Administration: Manage Sponsor Organisations
         And I capture the page screenshot
         And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
         And I capture the page screenshot
-        And I can see the check and set up a sponsor organisation profile page for '<Setup_New_Sponsor_Organisation>'
+        And I can see the check and set up a sponsor organisation profile page with details matching the rts response received
         When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
         Then I can see the 'Manage_Sponsor_Organisations_Page'
         Then I can see the sponsor organisation added successful message on manage sponsor organisation page
@@ -29,31 +31,41 @@ Feature: User Administration: Manage Sponsor Organisations
         And I can see the 'newly added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
         And I capture the page screenshot
         Examples:
-            | Setup_New_Sponsor_Organisation   | Status_Enabled |
-            | Sponsor_Organisation_One         | Enabled        |
-            | Sponsor_Organisation_Two         | Enabled        |
-            | Sponsor_Organisation_Three       | Enabled        |
-            | Sponsor_Organisation_Four        | Enabled        |
-            | Sponsor_Organisation_Five        | Enabled        |
-            | Sponsor_Organisation_Six         | Enabled        |
-            | Sponsor_Organisation_Seven       | Enabled        |
-            | Sponsor_Organisation_Eight       | Enabled        |
-            | Sponsor_Organisation_Nine        | Enabled        |
-            | Sponsor_Organisation_Ten         | Enabled        |
-            | Sponsor_Organisation_Eleven      | Enabled        |
-            | Sponsor_Organisation_Twelve      | Enabled        |
-            | Sponsor_Organisation_Thirteen    | Enabled        |
-            | Sponsor_Organisation_Fourteen    | Enabled        |
-            | Sponsor_Organisation_Fifteen     | Enabled        |
-            | Sponsor_Organisation_Sixteen     | Enabled        |
-            | Sponsor_Organisation_Seventeen   | Enabled        |
-            | Sponsor_Organisation_Eighteen    | Enabled        |
-            | Sponsor_Organisation_Nineteen    | Enabled        |
-            | Sponsor_Organisation_Twenty      | Enabled        |
-            | Sponsor_Organisation_TwentyOne   | Enabled        |
-            | Sponsor_Organisation_TwentyTwo   | Enabled        |
-            | Sponsor_Organisation_TwentyThree | Enabled        |
-            | Sponsor_Organisation_TwentyFour  | Enabled        |
+            | Setup_New_Sponsor_Organisation   | Status_Enabled | RTS_API_Data         | RTS_Request                         |
+            # | Sponsor_Organisation_One       | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            # | Sponsor_Organisation_Two         | Enabled        |RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            # | Sponsor_Organisation_Three       | Enabled        |RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            # | Sponsor_Organisation_Four        | Enabled        |RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            # | Sponsor_Organisation_Five        | Enabled        |RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            # | Sponsor_Organisation_Six         | Enabled        |RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            # | Sponsor_Organisation_Seven       | Enabled        |RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            # | Sponsor_Organisation_Eight       | Enabled        |RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            # | Sponsor_Organisation_Nine        | Enabled        |RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            # | Sponsor_Organisation_Ten         | Enabled        |RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            # | Sponsor_Organisation_Eleven      | Enabled        |RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            # | Sponsor_Organisation_Twelve      | Enabled        |RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            # | Sponsor_Organisation_Thirteen    | Enabled        |RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            # | Sponsor_Organisation_Fourteen    | Enabled        |RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            # | Sponsor_Organisation_Fifteen     | Enabled        |RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            # | Sponsor_Organisation_Sixteen     | Enabled        |RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            # | Sponsor_Organisation_Seventeen   | Enabled        |RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            # | Sponsor_Organisation_Eighteen    | Enabled        |RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            # | Sponsor_Organisation_Nineteen    | Enabled        |RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            # | Sponsor_Organisation_Twenty      | Enabled        |RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            # | Sponsor_Organisation_TwentyOne   | Enabled        |RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            # | Sponsor_Organisation_TwentyTwo   | Enabled        |RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            # | Sponsor_Organisation_TwentyThree | Enabled        |RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            # | Sponsor_Organisation_TwentyFour  | Enabled        |RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            | Sponsor_Organisation_TwentyFive  | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            | Sponsor_Organisation_TwentySix   | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            | Sponsor_Organisation_TwentySeven | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            | Sponsor_Organisation_TwentyEight | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            | Sponsor_Organisation_TwentyNine  | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            | Sponsor_Organisation_Thirty      | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            | Sponsor_Organisation_ThirtyOne   | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            | Sponsor_Organisation_ThirtyTwo   | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+
+
 
     @rsp-5230 @ErrorValidationDuplicateSponsorOrg @KNOWN_DEFECT-RSP-5453 @jsEnabled
     Scenario Outline: Verify appropriate error message is displayed when user tries to add a duplicate sponsor organisation from set up a new sponsor organisation page when JavaScript is enabled
@@ -102,9 +114,9 @@ Feature: User Administration: Manage Sponsor Organisations
 
     # last update date validation to be added later
 
-    # when the JavaScript is enabled, the sponsor organisation suggestion box is not visible in playwright emulation
+    # when the JavaScript is enabled, the sponsor organisation suggestion box is not visible due to @KNOWN-DEFECT-RSP-5486
     # hence marking the scenarios as @fail and will be fixed in future
-    @rsp-5230 @SponsorOrganisationValidation @jsEnabled @fail @RTS
+    @rsp-5230 @SponsorOrganisationValidation @jsEnabled @KNOWN-DEFECT-RSP-5486 @KNOWN-DEFECT-RSP-5483 @RTS @fail
     Scenario Outline: Validate the sponsor organisation suggestion list in advanced filters when javascript is enabled
         And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
         Then I can see the 'Setup_New_Sponsor_Organisation_Page'
@@ -128,7 +140,7 @@ Feature: User Administration: Manage Sponsor Organisations
             | Sponsor_Organisation_Text_Partial_End_Space   | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space  |
             | Sponsor_Organisation_Text_Partial_End_Space   | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Text_Min_Spaces | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space  |
 
-    @rsp-523 @SponsorOrganisationValidation @jsDisabled @RTS @Test
+    @rsp-5237 @SponsorOrganisationValidation @jsDisabled @KNOWN-DEFECT-RSP-5483 @RTS
     Scenario Outline: Validate the sponsor organisation suggestion list in advanced filters when javascript is disabled
         And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
         Then I can see the 'Setup_New_Sponsor_Organisation_Page'
@@ -141,7 +153,6 @@ Feature: User Administration: Manage Sponsor Organisations
         And I capture the page screenshot
         And With javascript disabled, I search with invalid min characters '<Sponsor_Organisation_Min>' for sponsor organisation search box in advanced filters
         Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Setup_New_Sponsor_Organisation_Page'
-        # Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Search_Modifications_Page' in advanced filters
         And I capture the page screenshot
         Examples:
             | Sponsor_Organisation                           | Sponsor_Organisation_Invalid      | Sponsor_Organisation_Min             | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_API_Data         | RTS_Request                                    | Field_And_Summary_Error_Message     |
@@ -150,16 +161,34 @@ Feature: User Administration: Manage Sponsor Organisations
             | Sponsor_Organisation_Text_Partial_Dot_Comma    | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Dot_Comma      | Sponsor_Organisation_Min_Char_Error |
             | Sponsor_Organisation_Text_Partial_Slash        | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Slash          | Sponsor_Organisation_Min_Char_Error |
             | Sponsor_Organisation_Text_Partial_Hyphen       | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Hyphen         | Sponsor_Organisation_Min_Char_Error |
-            | Sponsor_Organisation_Text_Partial_Start_Space  | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Start_Space    | Sponsor_Organisation_Min_Char_Error |
-            | Sponsor_Organisation_Text_Partial_End_Space    | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space     | Sponsor_Organisation_Min_Char_Error |
+            # | Sponsor_Organisation_Text_Partial_Start_Space  | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Start_Space    | Sponsor_Organisation_Min_Char_Error |
+            # | Sponsor_Organisation_Text_Partial_End_Space    | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space     | Sponsor_Organisation_Min_Char_Error |
             | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Min_Char_Error |
             | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Text_Min_Spaces | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Min_Char_Error |
 
-
-
+    @rsp-5232 @ExistingSPonsorOrgSearchAndView
+    Scenario Outline: Validate the user can search and view the previously added sponsor organisation from manage sponsor organisation page
+        When I enter the '<Field_Name>' of the '<Position>' item in the list, into the search field
+        And I capture the page screenshot
+        And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+        And I capture the page screenshot
+        Then the system displays 'sponsor organisations' matching the search criteria
+        And I can see the 'previously added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
+        And I capture the page screenshot
+        Then I click the view edit link of the 'previously added sponsor organisation'
+        And I capture the page screenshot
+        And I can see the sponsor organisation profile page
+        # And I now see the sponsor organisation profile page with the selected '<Setup_New_Sponsor_Organisation>'
+        And I capture the page screenshot
+        Examples:
+            | Field_Name        | Position | Status_Enabled |
+            | Organisation_Name | First    | Enabled        |
+            | Organisation_Name | Last     | Enabled        |
 
     @EndToEndFlow @rsp-5229 @rsp-5230 @rsp-5231 @rsp-5232 @rsp-5237
     Scenario Outline: Verify the user can add a sponsor organisation from manage sponsor organisation page
+        When I authorise the rts api using '<RTS_API_Data>'
+        Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation '<Setup_New_Sponsor_Organisation>' and  retrive country
         And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
         Then I can see the 'Setup_New_Sponsor_Organisation_Page'
         And I capture the page screenshot
@@ -167,7 +196,7 @@ Feature: User Administration: Manage Sponsor Organisations
         And I capture the page screenshot
         And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
         And I capture the page screenshot
-        And I can see the check and set up a sponsor organisation profile page for '<Setup_New_Sponsor_Organisation>'
+        And I can see the check and set up a sponsor organisation profile page with details matching the rts response received
         When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
         Then I can see the 'Manage_Sponsor_Organisations_Page'
         Then I can see the sponsor organisation added successful message on manage sponsor organisation page
@@ -178,7 +207,7 @@ Feature: User Administration: Manage Sponsor Organisations
         And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
         And I can see the 'newly added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
         And I capture the page screenshot
-        Then I click the view edit link of the newly added sponsor organisation
+        Then I click the view edit link of the 'newly added sponsor organisation'
         And I capture the page screenshot
         And I can see the sponsor organisation profile page
         # validate sponsor organisation profile page with the selected sponsor organisation
@@ -218,8 +247,8 @@ Feature: User Administration: Manage Sponsor Organisations
         # Then the system displays no results found message in the user list page of the review body
 
         Examples:
-            | Setup_New_Sponsor_Organisation    | Audit_History       | Status_Enabled | Status_Disabled |
-            | Sponsor_Organisation_Chesterfield | Disable_Review_Body | Enabled        | Disabled        |
+            | Setup_New_Sponsor_Organisation    | Audit_History       | Status_Enabled | Status_Disabled | RTS_API_Data         | RTS_Request                         |
+            | Sponsor_Organisation_Chesterfield | Disable_Review_Body | Enabled        | Disabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
 
 
 

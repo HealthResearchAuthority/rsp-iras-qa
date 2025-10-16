@@ -27,7 +27,7 @@ When(
       setupNewSponsorOrganisationPage.setupNewSponsorOrganisationPageTestData.Setup_New_Sponsor_Organisation[
         datasetName
       ];
-    const expectedCountryValues: string = checkSetupSponsorOrganisationPage.getCountries.toString();
+    const expectedCountryValue = await checkSetupSponsorOrganisationPage.getCountry();
     await sponsorOrganisationProfilePage.assertOnSponsorOrganisationProfilePage();
     if (datasetName.startsWith('Sponsor_Organisation_')) {
       await expect(sponsorOrganisationProfilePage.organisation_name_value).toHaveText(
@@ -41,6 +41,6 @@ When(
       await expect(sponsorOrganisationProfilePage.organisation_name_value).toHaveText(dataset.organisation_name_text);
       await expect(sponsorOrganisationProfilePage.page_heading).toHaveText(dataset.organisation_name_text);
     }
-    await expect(sponsorOrganisationProfilePage.country_value).toHaveText(expectedCountryValues.replaceAll(',', ', '));
+    await expect(sponsorOrganisationProfilePage.country_value).toHaveText(expectedCountryValue);
   }
 );

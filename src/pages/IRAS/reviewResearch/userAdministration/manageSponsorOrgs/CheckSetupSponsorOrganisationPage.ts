@@ -10,7 +10,7 @@ export default class CheckSetupSponsorOrganisationPage {
   readonly buttonTextData: typeof buttonTextData;
   readonly linkTextData: typeof linkTextData;
   private _org_name: string;
-  private _countries: string[];
+  private _country: string;
   readonly page_heading: Locator;
   readonly guidance_text: Locator;
   readonly row_value_locator: Locator;
@@ -26,7 +26,7 @@ export default class CheckSetupSponsorOrganisationPage {
     this.buttonTextData = buttonTextData;
     this.linkTextData = linkTextData;
     this._org_name = '';
-    this._countries = [];
+    this._country = '';
 
     //Locators
     this.page_heading = this.page
@@ -76,12 +76,12 @@ export default class CheckSetupSponsorOrganisationPage {
     this._org_name = value;
   }
 
-  async getCountries(): Promise<string[]> {
-    return this._countries;
+  async getCountry(): Promise<string> {
+    return this._country;
   }
 
-  async setCountries(value: string[]): Promise<void> {
-    this._countries = value;
+  async setCountry(value: string): Promise<void> {
+    this._country = value;
   }
 
   //Page Methods

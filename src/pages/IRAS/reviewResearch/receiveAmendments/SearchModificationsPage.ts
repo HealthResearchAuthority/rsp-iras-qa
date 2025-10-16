@@ -299,8 +299,8 @@ export default class SearchModificationsPage {
       .getByText(this.searchModificationsPageTestData.Search_Modifications_Page.sponsor_organisation_label, {
         exact: true,
       });
-    this.sponsor_organisation_jsdisabled_result_hint_label = this.page.getByTestId(
-      'Search.SponsorOrgSearch.SelectedOrganisation-hint'
+    this.sponsor_organisation_jsdisabled_result_hint_label = this.page.locator(
+      '[id$="SponsorOrgSearch.SelectedOrganisation-hint"]'
     );
     this.sponsor_organisation_jsdisabled_narrow_down_label = this.page.locator('.govuk-inset-text');
     this.sponsor_organisation_jsdisabled_search_results_labels = this.page
@@ -312,7 +312,8 @@ export default class SearchModificationsPage {
       .filter({
         hasText: this.searchModificationsPageTestData.Search_Modifications_Page.sponsor_organisation_hint_text,
       })
-      .locator('.govuk-error-message');
+      .locator('.govuk-error-message')
+      .or(this.page.locator('.field-validation-error'));
     this.results_table = this.page.getByTestId('modificationsTable');
   }
 

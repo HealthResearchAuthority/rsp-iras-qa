@@ -4,16 +4,17 @@ const { When, Then } = createBdd(test);
 
 When(
   'I can see the {string} should be present in the list with {string} status in the manage sponsor organisation page',
-  async ({ manageSponsorOrganisationPage, checkSetupSponsorOrganisationPage }, inputType: string, status: string) => {
+  async (
+    { manageSponsorOrganisationPage, checkSetupSponsorOrganisationPage, commonItemsPage },
+    inputType: string,
+    status: string
+  ) => {
     const sponsorOrgStatus = await manageSponsorOrganisationPage.getSponsorStatus(status);
     const sponsorOrgName = await manageSponsorOrganisationPage.getSponsorOrgName(
       inputType,
-      checkSetupSponsorOrganisationPage
+      checkSetupSponsorOrganisationPage,
+      commonItemsPage
     );
-    // await manageReviewBodiesPage.goto(
-    //   manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.enlarged_page_size,
-    //   reviewBodyName
-    // );
     const foundRecords = await manageSponsorOrganisationPage.findSponsorOrg(sponsorOrgName, sponsorOrgStatus);
     expect(foundRecords).toBeDefined();
     expect(foundRecords).toHaveCount(1);

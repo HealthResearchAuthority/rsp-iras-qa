@@ -312,9 +312,11 @@ export default class CommonItemsPage {
           .select_a_sponsor_organisation_hint_text,
       })
     );
-    this.sponsor_organisation_jsdisabled_search_button = this.sponsor_organisation_fieldset.getByRole('button', {
-      name: 'Search',
-    });
+    this.sponsor_organisation_jsdisabled_search_button = this.sponsor_organisation_fieldset
+      .getByRole('button', {
+        name: 'Search',
+      })
+      .or(this.govUkButton.getByText('Search'));
     this.sponsor_organisation_jsdisabled_search_results_radio_button =
       this.sponsor_organisation_fieldset.getByRole('radio');
     // this.sponsor_organisation_jsenabled_text = this.page.getByRole('combobox', {
@@ -1502,7 +1504,7 @@ export default class CommonItemsPage {
       }
     }
   }
-
+  // due to @KNOWN-DEFECT-RSP-5486 this method is not selecting the value from suggestion list
   async selectSponsorOrgJsEnabled<PageObject>(dataset: JSON | Record<string, any>, key: string, page: PageObject) {
     dataset['sponsor_organisation_jsenabled_text'] = dataset[key];
     await this.fillUIComponent(dataset, 'sponsor_organisation_jsenabled_text', page);
