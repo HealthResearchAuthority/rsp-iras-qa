@@ -40,7 +40,7 @@ Feature: Project Overview
         And I validate the data displayed '<Project_Details>' in the project details tab of project overview page
         And I capture the page screenshot
         When I click the 'Key_Project_Roles' link on the 'Project_Overview_Page'
-        And I can see the '<Key_Project_Roles_Details>' in the chief investigator tab of project overview page
+        And I can see the '<Key_Project_Roles_Details>' in the key project roles tab of project overview page
         And I capture the page screenshot
         Then I click the 'Research_Locations' link on the 'Project_Overview_Page'
         And I can see the '<Research_Locations_Details>' in the research locations tab of project overview page

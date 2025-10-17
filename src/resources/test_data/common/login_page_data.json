@@ -65,6 +65,10 @@
     "mfa": "`${process.env.WORKFLOW_COORDINATOR_W_MFA_KEY}`",
     "authPath": "workflow_coordinator_w"
   },
+  "DB_User": {
+    "username": "testhrasysadmin",
+    "password": "`${process.env.DB_USER_PASS}`"
+  },
   "Login_Page": {
     "header": "Create your GOV.UK One Login or sign in"
   }
