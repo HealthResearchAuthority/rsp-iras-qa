@@ -28,6 +28,7 @@ When(
         datasetName
       ];
     const expectedCountryValue = await checkSetupSponsorOrganisationPage.getCountry();
+    await expect(sponsorOrganisationProfilePage.country_value).toHaveText(expectedCountryValue);
     await sponsorOrganisationProfilePage.assertOnSponsorOrganisationProfilePage();
     if (datasetName.startsWith('Sponsor_Organisation_')) {
       await expect(sponsorOrganisationProfilePage.organisation_name_value).toHaveText(
@@ -41,6 +42,7 @@ When(
       await expect(sponsorOrganisationProfilePage.organisation_name_value).toHaveText(dataset.organisation_name_text);
       await expect(sponsorOrganisationProfilePage.page_heading).toHaveText(dataset.organisation_name_text);
     }
-    await expect(sponsorOrganisationProfilePage.country_value).toHaveText(expectedCountryValue);
+    const expectedLastUpdatedValue = await sponsorOrganisationProfilePage.getLastUpdatedDate();
+    await expect(sponsorOrganisationProfilePage.last_updated_value).toHaveText(expectedLastUpdatedValue);
   }
 );

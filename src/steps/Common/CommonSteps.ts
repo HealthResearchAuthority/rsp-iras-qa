@@ -401,7 +401,7 @@ Then(
 
 Then(
   'I capture the current time for {string}',
-  async ({ auditHistoryReviewBodyPage, auditHistoryUserPage }, page: string) => {
+  async ({ auditHistoryReviewBodyPage, auditHistoryUserPage, sponsorOrganisationProfilePage }, page: string) => {
     const currentTime = await getCurrentTimeFormatted();
     switch (page) {
       case 'Audit_History_Review_Body_Page':
@@ -409,6 +409,9 @@ Then(
         break;
       case 'Audit_History_User_Page':
         await auditHistoryUserPage.setUpdatedTime(currentTime);
+        break;
+      case 'Sponsor_Organisation_Profile_Page':
+        await sponsorOrganisationProfilePage.setUpdatedTime(currentTime);
         break;
       default:
         throw new Error(`${page} is not a valid option`);

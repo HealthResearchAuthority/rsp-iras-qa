@@ -8,7 +8,7 @@ Feature: User Administration: Manage Sponsor Organisations
 
     # @jsEnabled,@jsDisabled
 
-    @ViewListOfSponsorOrgs @rsp-5229 @rsp-5230 @jsDisabled @KNOWN_DEFECT-RSP-5453 @KNOWN_DEFECT-RSP-5454 @skip
+    @ViewListOfSponsorOrgs @rsp-5229 @rsp-5230 @KNOWN_DEFECT-RSP-5453 @KNOWN_DEFECT-RSP-5454
     Scenario Outline: Verify the user can add a sponsor organisation from manage sponsor organisation page and view the list of sponsor organisation in alphabetical order of organisation name
         When I authorise the rts api using '<RTS_API_Data>'
         Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation '<Setup_New_Sponsor_Organisation>' and  retrive country
@@ -21,6 +21,7 @@ Feature: User Administration: Manage Sponsor Organisations
         And I capture the page screenshot
         And I can see the check and set up a sponsor organisation profile page with details matching the rts response received
         When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
+        And I capture the current time for 'Sponsor_Organisation_Profile_Page'
         Then I can see the 'Manage_Sponsor_Organisations_Page'
         Then I can see the sponsor organisation added successful message on manage sponsor organisation page
         And I capture the page screenshot
@@ -30,8 +31,15 @@ Feature: User Administration: Manage Sponsor Organisations
         And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
         And I can see the 'newly added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
         And I capture the page screenshot
+        And I capture the page screenshot
+        Then I click the view edit link of the 'newly added sponsor organisation'
+        And I capture the page screenshot
+        And I can see the sponsor organisation profile page
+        # validate sponsor organisation profile page with the selected sponsor organisation
+        And I now see the sponsor organisation profile page with the selected '<Setup_New_Sponsor_Organisation>'
+        And I capture the page screenshot
         Examples:
-            | Setup_New_Sponsor_Organisation   | Status_Enabled | RTS_API_Data         | RTS_Request                         |
+            | Setup_New_Sponsor_Organisation  | Status_Enabled | RTS_API_Data         | RTS_Request                         |
             # | Sponsor_Organisation_One       | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
             # | Sponsor_Organisation_Two         | Enabled        |RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
             # | Sponsor_Organisation_Three       | Enabled        |RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
@@ -56,14 +64,14 @@ Feature: User Administration: Manage Sponsor Organisations
             # | Sponsor_Organisation_TwentyTwo   | Enabled        |RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
             # | Sponsor_Organisation_TwentyThree | Enabled        |RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
             # | Sponsor_Organisation_TwentyFour  | Enabled        |RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
-            | Sponsor_Organisation_TwentyFive  | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
-            | Sponsor_Organisation_TwentySix   | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
-            | Sponsor_Organisation_TwentySeven | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
-            | Sponsor_Organisation_TwentyEight | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
-            | Sponsor_Organisation_TwentyNine  | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
-            | Sponsor_Organisation_Thirty      | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
-            | Sponsor_Organisation_ThirtyOne   | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
-            | Sponsor_Organisation_ThirtyTwo   | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            | Sponsor_Organisation_TwentyFive | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+    # | Sponsor_Organisation_TwentySix   | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+    # | Sponsor_Organisation_TwentySeven | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+    # | Sponsor_Organisation_TwentyEight | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+    # | Sponsor_Organisation_TwentyNine  | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+    # | Sponsor_Organisation_Thirty      | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+    # | Sponsor_Organisation_ThirtyOne   | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+    # | Sponsor_Organisation_ThirtyTwo   | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
 
 
 
@@ -198,6 +206,7 @@ Feature: User Administration: Manage Sponsor Organisations
         And I capture the page screenshot
         And I can see the check and set up a sponsor organisation profile page with details matching the rts response received
         When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
+        And I capture the current time for 'Sponsor_Organisation_Profile_Page'
         Then I can see the 'Manage_Sponsor_Organisations_Page'
         Then I can see the sponsor organisation added successful message on manage sponsor organisation page
         And I capture the page screenshot

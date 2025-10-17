@@ -18,6 +18,7 @@ export default class SponsorOrganisationProfilePage {
   private _new_email_address: string;
   private _new_description: string;
   private _last_updated_date: string;
+  private _updated_time: string;
   private _review_body_id: string;
   readonly back_link: Locator;
   readonly page_heading: Locator;
@@ -64,6 +65,7 @@ export default class SponsorOrganisationProfilePage {
     this._new_description = '';
     this._last_updated_date = '';
     this._review_body_id = '';
+    this._updated_time = '';
 
     //Locators
     this.page_heading = this.page
@@ -232,6 +234,14 @@ export default class SponsorOrganisationProfilePage {
 
   async setReviewBodyId(value: string): Promise<void> {
     this._review_body_id = value;
+  }
+
+  async getUpdatedTime(): Promise<string> {
+    return this._updated_time;
+  }
+
+  async setUpdatedTime(value: string): Promise<void> {
+    this._updated_time = value;
   }
 
   //Page Methods
