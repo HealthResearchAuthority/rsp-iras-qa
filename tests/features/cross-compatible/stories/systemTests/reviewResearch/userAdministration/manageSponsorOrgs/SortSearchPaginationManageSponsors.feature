@@ -1,11 +1,11 @@
-@SysAdminUser @SystemTest @UserAdministration @ManageSponsorOrgs @SortSearchSponsorOrgs @BackStage
-Feature: User Administration: Manage Review Bodies - Sort, search and filter the review body list
+@SysAdminUser @SystemTest @UserAdministration @ManageSponsorOrgs @SortSearchSponsorOrgs @BackStage @Test
+Feature: User Administration: Manage Sponsor Organisations- Sort, search and pagination of sponsor organisations list
 
     Background:
         Given I have navigated to the 'Manage_Sponsor_Organisations_Page'
         And I can see the 'manage sponsor organisations' list sorted by 'ascending' order of the 'organisation name' on the 'first' page
 
-    @sortSponsorOrgListByColumn @rsp-5229 @KNOWN_DEFECT-RSP-5453 @KNOWN_DEFECT-RSP-5454
+    @sortSponsorOrgListByColumn @rsp-5229
     Scenario Outline: Verify the user is able to sort the manage sponsor organisations list by ascending and descending order for each table column
         When I click the '<Sort_Button>' button on the 'Manage_Sponsor_Organisations_Page'
         And I capture the page screenshot

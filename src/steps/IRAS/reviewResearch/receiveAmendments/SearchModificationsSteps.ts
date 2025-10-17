@@ -213,7 +213,7 @@ Then(
 );
 
 Then(
-  'I type valid {string} for sponsor organisation suggestion box in advanced filters and validate the suggestion list along with {string}',
+  'I type valid {string} for sponsor organisation suggestion box and validate the suggestion list along with {string}',
   async (
     { searchModificationsPage, rtsPage, commonItemsPage },
     sponsorOrganisationDatasetName: string,
@@ -247,7 +247,7 @@ Then(
 );
 
 Then(
-  'I type invalid {string} for sponsor organisation suggestion box in advanced filters and validate the suggestion list along with {string}',
+  'I type invalid {string} for sponsor organisation suggestion box and validate the suggestion list along with {string}',
   async (
     { searchModificationsPage, commonItemsPage },
     sponsorOrganisationDatasetName: string,
@@ -268,7 +268,7 @@ Then(
 );
 
 Then(
-  'I type min characters {string} for sponsor organisation suggestion box in advanced filters and validate the suggestion list along with {string}',
+  'I type min characters {string} for sponsor organisation suggestion box and validate the suggestion list along with {string}',
   async (
     { searchModificationsPage, commonItemsPage },
     sponsorOrganisationDatasetName: string,
@@ -289,7 +289,7 @@ Then(
 );
 
 Then(
-  'With javascript disabled, I search with valid {string} for sponsor organisation search box in advanced filters and validate the search results along with {string}',
+  'With javascript disabled, I search with valid {string} for sponsor organisation search box and validate the search results along with {string}',
   async (
     { searchModificationsPage, commonItemsPage, rtsPage },
     sponsorOrganisationDatasetName: string,
@@ -328,7 +328,7 @@ Then(
 );
 
 Then(
-  'With javascript disabled, I search with invalid {string} for sponsor organisation search box in advanced filters and validate the search results along with {string}',
+  'With javascript disabled, I search with invalid {string} for sponsor organisation search box and validate the search results along with {string}',
   async (
     { searchModificationsPage, commonItemsPage },
     sponsorOrganisationDatasetName: string,
@@ -349,7 +349,7 @@ Then(
 );
 
 Then(
-  'With javascript disabled, I search with invalid min characters {string} for sponsor organisation search box in advanced filters',
+  'With javascript disabled, I search with invalid min characters {string} for sponsor organisation search box',
   async ({ searchModificationsPage, commonItemsPage }, sponsorOrganisationDatasetName: string) => {
     const dataset =
       searchModificationsPage.searchModificationsPageTestData.Sponsor_Organisation[sponsorOrganisationDatasetName];

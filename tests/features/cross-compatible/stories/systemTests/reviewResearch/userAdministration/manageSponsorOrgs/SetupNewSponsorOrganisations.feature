@@ -8,7 +8,7 @@ Feature: User Administration: Manage Sponsor Organisations
 
     # @jsEnabled,@jsDisabled
 
-    @ViewListOfSponsorOrgs @rsp-5229 @rsp-5230 @KNOWN_DEFECT-RSP-5453 @KNOWN_DEFECT-RSP-5454
+    @ViewListOfSponsorOrgs @rsp-5229 @rsp-5230 @rsp-5232 @rsp-5237 @Test
     Scenario Outline: Verify the user can add a sponsor organisation from manage sponsor organisation page and view the list of sponsor organisation in alphabetical order of organisation name
         When I authorise the rts api using '<RTS_API_Data>'
         Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation '<Setup_New_Sponsor_Organisation>' and  retrive country
@@ -64,18 +64,18 @@ Feature: User Administration: Manage Sponsor Organisations
             # | Sponsor_Organisation_TwentyTwo   | Enabled        |RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
             # | Sponsor_Organisation_TwentyThree | Enabled        |RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
             # | Sponsor_Organisation_TwentyFour  | Enabled        |RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
-            | Sponsor_Organisation_TwentyFive | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
-    # | Sponsor_Organisation_TwentySix   | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
-    # | Sponsor_Organisation_TwentySeven | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
-    # | Sponsor_Organisation_TwentyEight | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
-    # | Sponsor_Organisation_TwentyNine  | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            # | Sponsor_Organisation_TwentyFive | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            # | Sponsor_Organisation_TwentySix | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            # | Sponsor_Organisation_TwentySeven | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            # | Sponsor_Organisation_TwentyEight | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            | Sponsor_Organisation_TwentyNine | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
     # | Sponsor_Organisation_Thirty      | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
     # | Sponsor_Organisation_ThirtyOne   | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
     # | Sponsor_Organisation_ThirtyTwo   | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
 
 
 
-    @rsp-5230 @ErrorValidationDuplicateSponsorOrg @KNOWN_DEFECT-RSP-5453 @jsEnabled
+    @rsp-5230 @ErrorValidationDuplicateSponsorOrg @jsEnabled @Test
     Scenario Outline: Verify appropriate error message is displayed when user tries to add a duplicate sponsor organisation from set up a new sponsor organisation page when JavaScript is enabled
         When I enter the '<Field_Name>' of the '<Position>' item in the list, into the search field
         And I capture the page screenshot
@@ -97,7 +97,7 @@ Feature: User Administration: Manage Sponsor Organisations
             | Organisation_Name | First    | JavaScript_Enabled_Duplicate_Sponsor_Organisation_Setup_Error |
             | Organisation_Name | Last     | JavaScript_Enabled_Duplicate_Sponsor_Organisation_Setup_Error |
 
-    @rsp-5237 @ErrorValidationDuplicateSponsorOrg @KNOWN_DEFECT-RSP-5453 @KNOWN_DEFECT-RSP-5473 @jsDisabled
+    @rsp-5237 @ErrorValidationDuplicateSponsorOrg @KNOWN_DEFECT-RSP-5473 @jsDisabled @Test
     Scenario Outline: Verify appropriate error message is displayed when user tries to add a duplicate sponsor organisation from set up a new sponsor organisation page when JavaScript is disabled
         When I enter the '<Field_Name>' of the '<Position>' item in the list, into the search field
         And I capture the page screenshot
@@ -124,18 +124,18 @@ Feature: User Administration: Manage Sponsor Organisations
 
     # when the JavaScript is enabled, the sponsor organisation suggestion box is not visible due to @KNOWN-DEFECT-RSP-5486
     # hence marking the scenarios as @fail and will be fixed in future
-    @rsp-5230 @SponsorOrganisationValidation @jsEnabled @KNOWN-DEFECT-RSP-5486 @KNOWN-DEFECT-RSP-5483 @RTS @fail
-    Scenario Outline: Validate the sponsor organisation suggestion list in advanced filters when javascript is enabled
+    @rsp-5230 @SponsorOrganisationValidation @jsEnabled @RTS @Test
+    Scenario Outline: Validate the sponsor organisation suggestion list when javascript is enabled
         And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
         Then I can see the 'Setup_New_Sponsor_Organisation_Page'
         And I capture the page screenshot
         When I authorise the rts api using '<RTS_API_Data>'
         Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation
-        And I type valid '<Sponsor_Organisation>' for sponsor organisation suggestion box in advanced filters and validate the suggestion list along with '<Suggestion_List_Headers>'
+        And I type valid '<Sponsor_Organisation>' for sponsor organisation suggestion box and validate the suggestion list along with '<Suggestion_List_Headers>'
         And I capture the page screenshot
-        And I type invalid '<Sponsor_Organisation_Invalid>' for sponsor organisation suggestion box in advanced filters and validate the suggestion list along with '<Suggestion_List_Headers>'
+        And I type invalid '<Sponsor_Organisation_Invalid>' for sponsor organisation suggestion box and validate the suggestion list along with '<Suggestion_List_Headers>'
         And I capture the page screenshot
-        And I type min characters '<Sponsor_Organisation_Min>' for sponsor organisation suggestion box in advanced filters and validate the suggestion list along with '<Suggestion_List_Headers>'
+        And I type min characters '<Sponsor_Organisation_Min>' for sponsor organisation suggestion box and validate the suggestion list along with '<Suggestion_List_Headers>'
         And I capture the page screenshot
         Examples:
             | Sponsor_Organisation                          | Sponsor_Organisation_Invalid      | Sponsor_Organisation_Min             | Suggestion_List_Headers        | RTS_API_Data         | RTS_Request                                 |
@@ -148,18 +148,18 @@ Feature: User Administration: Manage Sponsor Organisations
             | Sponsor_Organisation_Text_Partial_End_Space   | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space  |
             | Sponsor_Organisation_Text_Partial_End_Space   | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Text_Min_Spaces | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space  |
 
-    @rsp-5237 @SponsorOrganisationValidation @jsDisabled @KNOWN-DEFECT-RSP-5483 @RTS
+    @rsp-5237 @SponsorOrganisationValidation @jsDisabled @RTS @Test @fail @KNOWN-DEFECT-FieldErrorMissing
     Scenario Outline: Validate the sponsor organisation suggestion list in advanced filters when javascript is disabled
         And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
         Then I can see the 'Setup_New_Sponsor_Organisation_Page'
         And I capture the page screenshot
         When I authorise the rts api using '<RTS_API_Data>'
         Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation
-        And With javascript disabled, I search with valid '<Sponsor_Organisation>' for sponsor organisation search box in advanced filters and validate the search results along with '<Sponsor_Organisation_Jsdisabled_Search_Hint_Labels>'
+        And With javascript disabled, I search with valid '<Sponsor_Organisation>' for sponsor organisation search box and validate the search results along with '<Sponsor_Organisation_Jsdisabled_Search_Hint_Labels>'
         And I capture the page screenshot
-        And With javascript disabled, I search with invalid '<Sponsor_Organisation_Invalid>' for sponsor organisation search box in advanced filters and validate the search results along with '<Sponsor_Organisation_Jsdisabled_Search_Hint_Labels>'
+        And With javascript disabled, I search with invalid '<Sponsor_Organisation_Invalid>' for sponsor organisation search box and validate the search results along with '<Sponsor_Organisation_Jsdisabled_Search_Hint_Labels>'
         And I capture the page screenshot
-        And With javascript disabled, I search with invalid min characters '<Sponsor_Organisation_Min>' for sponsor organisation search box in advanced filters
+        And With javascript disabled, I search with invalid min characters '<Sponsor_Organisation_Min>' for sponsor organisation search box
         Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Setup_New_Sponsor_Organisation_Page'
         And I capture the page screenshot
         Examples:
@@ -174,7 +174,7 @@ Feature: User Administration: Manage Sponsor Organisations
             | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Min_Char_Error |
             | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Text_Min_Spaces | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Min_Char_Error |
 
-    @rsp-5232 @ExistingSPonsorOrgSearchAndView
+    @rsp-5232 @ExistingSPonsorOrgSearchAndView @Test
     Scenario Outline: Validate the user can search and view the previously added sponsor organisation from manage sponsor organisation page
         When I enter the '<Field_Name>' of the '<Position>' item in the list, into the search field
         And I capture the page screenshot

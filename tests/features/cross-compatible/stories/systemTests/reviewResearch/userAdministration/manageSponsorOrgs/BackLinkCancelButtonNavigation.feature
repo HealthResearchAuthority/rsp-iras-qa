@@ -1,5 +1,5 @@
-@SysAdminUser @SystemTest @UserAdministration @ManageSponsorOrgs @BackStage
-Feature: User Administration: Manage Sponsor Organisations
+@SysAdminUser @SystemTest @UserAdministration @ManageSponsorOrgs @BackStage @Test
+Feature: User Administration: Manage Sponsor Organisations- Back Link and Cancel Button Navigation
 
     Background:
         Given I have navigated to the 'System_Administration_Page'
@@ -61,3 +61,25 @@ Feature: User Administration: Manage Sponsor Organisations
         Examples:
             | Setup_New_Sponsor_Organisation   | Status_Enabled | RTS_API_Data         | RTS_Request                         |
             | Sponsor_Organisation_ThirtyThree | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+
+    @rsp-5232  @VerifyBackButtonFlowFromSponsorOrgProfilePage
+    Scenario Outline: Validate the user can search and view the previously added sponsor organisation from manage sponsor organisation page
+        When I enter the '<Field_Name>' of the '<Position>' item in the list, into the search field
+        And I capture the page screenshot
+        And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+        And I capture the page screenshot
+        Then the system displays 'sponsor organisations' matching the search criteria
+        And I can see the 'previously added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
+        And I capture the page screenshot
+        Then I click the view edit link of the 'previously added sponsor organisation'
+        And I capture the page screenshot
+        And I can see the sponsor organisation profile page
+        And I capture the page screenshot
+        And I click the 'Back' link on the 'Sponsor_Organisation_Profile_Page'
+        And I capture the page screenshot
+        Then I can see the 'Manage_Sponsor_Organisations_Page'
+
+        Examples:
+            | Field_Name        | Position | Status_Enabled |
+            | Organisation_Name | First    | Enabled        |
+            | Organisation_Name | Last     | Enabled        |

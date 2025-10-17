@@ -32,12 +32,19 @@ When(
     await sponsorOrganisationProfilePage.assertOnSponsorOrganisationProfilePage();
     if (datasetName.startsWith('Sponsor_Organisation_')) {
       await expect(sponsorOrganisationProfilePage.organisation_name_value).toHaveText(
-        await setupNewSponsorOrganisationPage.getUniqueOrgName()
+        await checkSetupSponsorOrganisationPage.getOrgName()
       );
       await expect(sponsorOrganisationProfilePage.page_heading).toHaveText(
         sponsorOrganisationProfilePage.sponsorOrgProfilePageTestData.Sponsor_Organisation_Profile_Page
-          .heading_prefix_label + (await setupNewSponsorOrganisationPage.getUniqueOrgName())
+          .heading_prefix_label + (await checkSetupSponsorOrganisationPage.getOrgName())
       );
+      // await expect(sponsorOrganisationProfilePage.organisation_name_value).toHaveText(
+      //   await setupNewSponsorOrganisationPage.getUniqueOrgName()
+      // );
+      // await expect(sponsorOrganisationProfilePage.page_heading).toHaveText(
+      //   sponsorOrganisationProfilePage.sponsorOrgProfilePageTestData.Sponsor_Organisation_Profile_Page
+      //     .heading_prefix_label + (await setupNewSponsorOrganisationPage.getUniqueOrgName())
+      // );
     } else {
       await expect(sponsorOrganisationProfilePage.organisation_name_value).toHaveText(dataset.organisation_name_text);
       await expect(sponsorOrganisationProfilePage.page_heading).toHaveText(dataset.organisation_name_text);
