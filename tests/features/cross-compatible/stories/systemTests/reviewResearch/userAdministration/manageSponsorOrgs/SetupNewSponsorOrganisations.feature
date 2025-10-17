@@ -39,7 +39,7 @@ Feature: User Administration: Manage Sponsor Organisations
         And I now see the sponsor organisation profile page with the selected '<Setup_New_Sponsor_Organisation>'
         And I capture the page screenshot
         Examples:
-            | Setup_New_Sponsor_Organisation  | Status_Enabled | RTS_API_Data         | RTS_Request                         |
+            | Setup_New_Sponsor_Organisation | Status_Enabled | RTS_API_Data         | RTS_Request                         |
             # | Sponsor_Organisation_One       | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
             # | Sponsor_Organisation_Two         | Enabled        |RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
             # | Sponsor_Organisation_Three       | Enabled        |RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
@@ -68,10 +68,20 @@ Feature: User Administration: Manage Sponsor Organisations
             # | Sponsor_Organisation_TwentySix | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
             # | Sponsor_Organisation_TwentySeven | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
             # | Sponsor_Organisation_TwentyEight | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
-            | Sponsor_Organisation_TwentyNine | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
-    # | Sponsor_Organisation_Thirty      | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            # | Sponsor_Organisation_TwentyNine | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            | Sponsor_Organisation_Thirty    | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
     # | Sponsor_Organisation_ThirtyOne   | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
     # | Sponsor_Organisation_ThirtyTwo   | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+    # | Sponsor_Organisation_ThirtyThree | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+    # | Sponsor_Organisation_ThirtyFour  | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+    # | Sponsor_Organisation_ThirtyFive | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+    # | Sponsor_Organisation_ThirtySix | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+    # | Sponsor_Organisation_ThirtySeven | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+    # | Sponsor_Organisation_ThirtyEight | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+    # | Sponsor_Organisation_ThirtyNine | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+    # | Sponsor_Organisation_Forty      | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+
+
 
 
 
