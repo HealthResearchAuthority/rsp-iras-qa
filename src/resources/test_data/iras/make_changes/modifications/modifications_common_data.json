@@ -4,7 +4,7 @@
     "short_project_title_label": "Short project title",
     "modification_id_label": "Modification ID",
     "status_label": "Status",
-    "draft_status_value": "Draft",
+    "draft_status_value": "In draft",
     "advanced_filter_label": "Advanced filter",
     "remove_this_change_label": "Remove this change",
     "Save_Continue_Button": "Save and continue",
@@ -133,6 +133,38 @@
     "Modification_Two": {
       "area_of_change_dropdown": "Project design",
       "specific_change_dropdown": "Change to planned end date"
+    },
+    "Modification_Three": {
+      "area_of_change_dropdown": "Participating organisations",
+      "specific_change_dropdown": "PICs - Addition of Participant Identification Centres undertaking the same activities as existing PICs"
+    },
+    "Modification_Four": {
+      "area_of_change_dropdown": "Participating organisations",
+      "specific_change_dropdown": "PICs - Early closure or withdrawal of Participant Identification Centres"
+    },
+    "Modification_Five": {
+      "area_of_change_dropdown": "Participating organisations",
+      "specific_change_dropdown": "Addition of sites undertaking the same activities as existing sites"
+    }
+  },
+  "Modification_Status_Indraft_Blank_Submitted_Date": {
+    "status": "In draft",
+    "submited_date": ""
+  },
+  "Modification_Status_Approved": {
+    "status": "Approved"
+  },
+  "Change_To_Planned_End_Date": {
+    "Planned_End_Date_NHS_All_Yes_NI_W": {
+      "area_of_change_dropdown": "Project design",
+      "specific_change_dropdown": "Change to planned end date",
+      "planned_project_end_day_text": "23",
+      "planned_project_end_month_dropdown": "April",
+      "planned_project_end_year_text": "2058",
+      "which_organisation_change_affect_checkbox": ["NHS/HSC"],
+      "where_organisation_change_affect_nhs_question_checkbox": ["Northern Ireland", "Wales"],
+      "will_some_or_all_organisations_be_affected_question_radio": "Some",
+      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "No"
     }
   }
 }
