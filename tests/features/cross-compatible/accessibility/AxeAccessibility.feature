@@ -125,7 +125,9 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     And I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
-    When I click the 'Modifications_Tile' link on the 'Project_Overview_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I select 'Participating_Organisation_Option' from area of change dropdown and 'Addition_Of_Sites_Option' from specific change dropdown
     When I click the 'Save_For_Later' button on the 'Select_Area_Of_Change_Page'
     Then I can see the project overview page
@@ -967,7 +969,9 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     And I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
-    And I click the 'Modifications_Tile' link on the 'Project_Overview_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     Then I can see the select area of change page
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
@@ -980,6 +984,8 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I click the 'Start' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
     And I fill the chief investigator page with 'Valid_Data_All_Fields'
@@ -987,11 +993,12 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     And I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
-    When I click the 'Modifications_Tile' link on the 'Project_Overview_Page'
-    And I select 'Participating_Organisation' from area of change dropdown and 'Addition_Of_sites_Option' from specific change dropdown
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I select 'Participating_Organisation' from area of change dropdown and 'Addition_Of_Sites_Option' from specific change dropdown
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
     Then I can see the participating organisation page
-    And I confirm checkbox is displayed in participating organisation page
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
@@ -1012,8 +1019,9 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     Then I can see the review your answers page
     When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
-    Then I can see the project overview page
-    When I click the 'Modifications_Tile' link on the 'Project_Overview_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
     And I select 'Project_Design' from area of change dropdown and 'Planned_End_Date' from specific change dropdown
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
@@ -1038,8 +1046,9 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     Then I can see the review your answers page
     When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
-    Then I can see the project overview page
-    When I click the 'Modifications_Tile' link on the 'Project_Overview_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
     And I select 'Project_Design' from area of change dropdown and 'Planned_End_Date' from specific change dropdown
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
@@ -1067,6 +1076,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     Then I can see the review your answers page
     When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
     Then I can see the project overview page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
@@ -1099,6 +1109,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     Then I can see the review your answers page
     When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
     Then I can see the project overview page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
@@ -1131,6 +1142,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     Then I can see the review your answers page
     When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
     Then I can see the project overview page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
@@ -1166,9 +1178,9 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     Then I can see the review your answers page
     When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
     Then I can see the project overview page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
