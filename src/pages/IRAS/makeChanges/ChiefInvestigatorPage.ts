@@ -30,9 +30,9 @@ export default class ChiefInvestigatorPage {
     this.chief_investigator_first_name_label = this.page.locator('[aria-describedby="first-name-hint"]');
     this.chief_investigator_last_name_label = this.page.locator('[aria-describedby="last-name-hint"]');
     this.chief_investigator_email_label = this.page.locator('[aria-describedby="email-hint"]');
-    this.chief_investigator_first_name_text = this.page.getByTestId('IQA0401_Text');
-    this.chief_investigator_last_name_text = this.page.getByTestId('IQA0402_Text');
-    this.chief_investigator_email_text = this.page.getByTestId('IQA0403_Text');
+    this.chief_investigator_first_name_text = this.page.getByTestId('IQA0309_Text');
+    this.chief_investigator_last_name_text = this.page.getByTestId('IQA0310_Text');
+    this.chief_investigator_email_text = this.page.getByTestId('IQA0311_Text');
   }
 
   //Page Methods
