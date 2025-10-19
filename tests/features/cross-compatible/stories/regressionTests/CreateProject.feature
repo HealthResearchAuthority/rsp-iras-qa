@@ -253,6 +253,7 @@ Feature: Create Amendment - Create Project - Regression Tests
     And I click the 'Start' button on the 'Create_Project_Record_Page'
     Then I can see the project details iras page
     And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
     Then I fill the project identifiers page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
@@ -272,6 +273,18 @@ Feature: Create Amendment - Create Project - Regression Tests
     And I can see the project delete success message on my research page
     And I capture the page screenshot
     And I validate deleted project does not exist in the my research projects list
+    And I capture the page screenshot
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    Then I can see the project details iras page
+    And I fill the existing iras id in project details iras page
+    And I capture the page screenshot
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I can see the project identifiers page
+    And I capture the page screenshot
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    And I can see the project details title page
     And I capture the page screenshot
 
     Examples:

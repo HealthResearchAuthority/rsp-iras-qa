@@ -244,7 +244,7 @@ Then(
       .click();
     await commonItemsPage.verifyDetailsExpanded('open', commonItemsPage.details_component);
     const cantFindOrganisationDetailsBody = (await commonItemsPage.details_component.textContent())
-      .replace(/\s+/g, ' ')
+      .replaceAll(/\s+/g, ' ')
       .trim();
     expect(cantFindOrganisationDetailsBody).toContain(
       projectIdentifiersPage.projectIdentifiersPageTestData.Project_Identifiers_Page
