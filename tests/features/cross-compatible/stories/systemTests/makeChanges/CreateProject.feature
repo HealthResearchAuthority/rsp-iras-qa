@@ -771,3 +771,35 @@ Feature: Create Amendment - Create Project
     Then I can see the project identifiers page
     And I validate the guidance content displayed on project identifiers page
     And I capture the page screenshot
+
+  @rsp-1866 @DeleteProjectRecord
+  Scenario Outline: Verify that user is able to delete the created project record
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    Then I can see the project details iras page
+    And I fill the unique iras id in project details iras page
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    And I fill the project details title page with '<Project_Details_Title>'
+    When I click the 'Save_For_Later' button on the 'Project_Details_Title_Page'
+    Then I can see the project overview for unfinished projects page
+    And I capture the page screenshot
+    And I click the 'Delete_Project' button on the 'Project_Overview_Unfinished_Projects_Page'
+    And I can see the delete project confirmation page based on '<Project_Details_Title>' entered for short project title
+    And I capture the page screenshot
+    When I click the 'Keep_Project' button on the 'Confirmation_Page'
+    Then I can see the project overview for unfinished projects page
+    And I capture the page screenshot
+    And I click the 'Delete_Project' button on the 'Project_Overview_Unfinished_Projects_Page'
+    When I click the 'Delete_Project' button on the 'Confirmation_Page'
+    And I can see the my research projects page
+    And I can see the project delete success message on my research page
+    And I capture the page screenshot
+    And I validate deleted project does not exist in the my research projects list
+    And I capture the page screenshot
+
+    Examples:
+      | Project_Details_Title        |
+      | Valid_Data_All_Fields        |
+      | Valid_Data_Title_Empty_Field |
