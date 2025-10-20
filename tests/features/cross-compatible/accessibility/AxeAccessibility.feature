@@ -66,13 +66,27 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
+  @axeAccessibilityProjectIdentifier @ApplicantUser
+  Scenario: Project Identifiers
+    Given I have navigated to the my research projects page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    When I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I can see the project identifiers page
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
   @axeAccessibilityResearchLocations @ApplicantUser
   Scenario: Research Locations
     Given I have navigated to the my research projects page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     When I click the 'Start' button on the 'Create_Project_Record_Page'
-    And I fill the project details iras page with 'Valid_IRAS_ID_Max'
+    And I fill the unique iras id in project details iras page
     When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
     And I fill the chief investigator page with 'Valid_Data_All_Fields'
@@ -127,6 +141,8 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I click the 'Start' button on the 'Create_Project_Record_Page'
     And I fill the unique iras id in project details iras page
     When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
     And I fill the chief investigator page with 'Valid_Data_All_Fields'
@@ -1376,6 +1392,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
+
   @axeAccessibilityProjectOverviewUnfinishedPojectsPage @ApplicantUser
   Scenario: Project overview unfinished projects -Create project
     Given I have navigated to the my research projects page
