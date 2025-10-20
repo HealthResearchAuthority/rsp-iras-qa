@@ -5,13 +5,17 @@ Feature: Create Amendment - Project Overview
         Given I have navigated to the my research projects page
         And I can see the my research projects page
 
-    @rsp-1864 @ProjectOverviewPage @Fix-Needed-New-Flow-Screens
+    @rsp-1864 @ProjectOverviewPage
     Scenario Outline: Verify user is able to click on the project link on my research page and able to navigate to project overview page
         And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
         And I click the 'Start' button on the 'Create_Project_Record_Page'
         And I fill the unique iras id in project details iras page
         And I capture the page screenshot
         And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+        Then I can see the project identifiers page
+        Then I fill the project identifiers page with '<Project_Identifiers>'
+        And I capture the page screenshot
+        When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
         And I fill the project details title page with 'Valid_Data_All_Fields'
         And I capture the page screenshot
         When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
