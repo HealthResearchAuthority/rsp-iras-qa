@@ -89,7 +89,8 @@
   "System_Administration_Page": {
     "Back": "Back",
     "Manage_Review_Bodies": "Manage review bodies",
-    "Manage_Users": "Manage users"
+    "Manage_Users": "Manage users",
+    "Manage_Sponsor_Organisations": "Manage sponsor organisations"
   },
   "Create_Review_Body_Page": {
     "Back": "Back"
@@ -233,6 +234,22 @@
     "View_Project_Overview": "View project overview"
   },
   "Project_Overview_Unfinished_Projects_Page": {
+    "Back": "Back"
+  },
+  "Manage_Sponsor_Organisations_Page": {
+    "Back": "Back",
+    "Setup_New_Sponsor_Organisation": "Set up a new sponsor organisation",
+    "View_Edit": "View/Edit",
+    "Advanced_Filters": "Advanced filters",
+    "Clear_All_Filters": "Clear all filters"
+  },
+  "Setup_New_Sponsor_Organisation_Page": {
+    "Back": "Back"
+  },
+  "Check_Setup_Sponsor_Organisation_Page": {
+    "Back": "Back"
+  },
+  "Sponsor_Organisation_Profile_Page": {
     "Back": "Back"
   }
 }

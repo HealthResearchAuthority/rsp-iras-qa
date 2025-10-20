@@ -8,6 +8,7 @@ export default class RtsPage {
   readonly jsonDataPreLabel: Locator;
   bearerToken: string;
   rtsResponseList: string[] = [];
+  rtsResponseListRecord: { name: string; country: string }[] = [];
 
   //Initialize Page Objects
   constructor(page: Page) {

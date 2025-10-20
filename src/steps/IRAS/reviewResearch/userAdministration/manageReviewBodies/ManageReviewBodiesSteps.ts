@@ -1,6 +1,5 @@
 import { createBdd } from 'playwright-bdd';
 import { test, expect } from '../../../../../hooks/CustomFixtures';
-import { confirmArrayNotNull } from '../../../../../utils/UtilFunctions';
 const { When, Then } = createBdd(test);
 
 Then(
@@ -114,78 +113,10 @@ When(
   }
 );
 
-Then('the system displays review bodies matching the search criteria', async ({ commonItemsPage }) => {
-  const searchKey = await commonItemsPage.getSearchKey();
-  const searchTerms = await commonItemsPage.splitSearchTerm(searchKey);
-  const orgList = await commonItemsPage.getAllOrgNamesFromTheTable();
-  const orgListAfterSearch: string[] = confirmArrayNotNull(orgList.get('searchResultValues'));
-  const searchResult = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
-    orgListAfterSearch,
-    searchTerms
-  );
-  expect(searchResult).toBeTruthy();
-  expect(orgListAfterSearch).toEqual(searchResult);
-});
-
 Then('I click the view edit link', async ({ manageReviewBodiesPage }) => {
   const createdReviewBodyRow = await manageReviewBodiesPage.getReviewBodyRow();
   await createdReviewBodyRow.locator(manageReviewBodiesPage.actionsLink).click();
 });
-
-Then(
-  'I can see the manage review bodies list sorted by {string} order of the {string} on the {string} page',
-  async (
-    { manageReviewBodiesPage, commonItemsPage },
-    sortDirection: string,
-    sortField: string,
-    currentPage: string
-  ) => {
-    let sortedList: string[];
-    let columnIndex: number;
-    switch (sortField.toLowerCase()) {
-      case 'organisation name':
-        columnIndex = 0;
-        break;
-      case 'country':
-        columnIndex = 1;
-        break;
-      case 'status':
-        columnIndex = 2;
-        break;
-      default:
-        throw new Error(`${sortField} is not a valid option`);
-    }
-    let actualList: string[] = [];
-    if (sortField.toLowerCase() == 'country') {
-      const originalList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
-      for (const country of originalList) {
-        if (country.includes(',')) {
-          actualList.push(country.slice(0, country.indexOf(',')));
-        } else {
-          actualList.push(country);
-        }
-      }
-    } else {
-      actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
-    }
-    if (sortDirection.toLowerCase() == 'ascending') {
-      sortedList = [...actualList].toSorted((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
-      if (sortField.toLowerCase() == 'status' && currentPage.toLowerCase() == 'first') {
-        expect(actualList).toContain(
-          manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.enabled_status
-        );
-      }
-    } else {
-      sortedList = [...actualList].toSorted((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
-      if (sortField.toLowerCase() == 'status' && currentPage.toLowerCase() == 'first') {
-        expect(actualList).toContain(
-          manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.disabled_status
-        );
-      }
-    }
-    expect(actualList).toEqual(sortedList);
-  }
-);
 
 When(
   'I select advanced filters in the manage review bodies page using {string}',

@@ -72,6 +72,10 @@ import ReviewYourDocumentInformationModificationsPage from '../pages/IRAS/makeCh
 import ReviewAllChangesPage from '../pages/IRAS/makeChanges/modifications/ReviewAllChangesPage';
 import ProjectOverviewUnfinishedProjectsPage from '../pages/IRAS/makeChanges/ProjectOverviewUnfinishedProjectsPage';
 import ModificationsDetailsPage from '../pages/IRAS/makeChanges/modifications/ModificationsDetailsPage';
+import ManageSponsorOrganisationsPage from '../pages/IRAS/reviewResearch/userAdministration/manageSponsorOrgs/ManageSponsorOrganisationsPage';
+import SetupNewSponsorOrganisationPage from '../pages/IRAS/reviewResearch/userAdministration/manageSponsorOrgs/SetupNewSponsorOrganisationPage';
+import CheckSetupSponsorOrganisationPage from '../pages/IRAS/reviewResearch/userAdministration/manageSponsorOrgs/CheckSetupSponsorOrganisationPage';
+import SponsorOrganisationProfilePage from '../pages/IRAS/reviewResearch/userAdministration/manageSponsorOrgs/SponsorOrganisationProfilePage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -144,6 +148,10 @@ type CustomFixtures = {
   reviewAllChangesPage: ReviewAllChangesPage;
   modificationsDetailsPage: ModificationsDetailsPage;
   projectOverviewUnfinishedProjectsPage: ProjectOverviewUnfinishedProjectsPage;
+  manageSponsorOrganisationPage: ManageSponsorOrganisationsPage;
+  setupNewSponsorOrganisationPage: SetupNewSponsorOrganisationPage;
+  checkSetupSponsorOrganisationPage: CheckSetupSponsorOrganisationPage;
+  sponsorOrganisationProfilePage: SponsorOrganisationProfilePage;
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -423,6 +431,22 @@ export const test = base.extend<CustomFixtures>({
   modificationsDetailsPage: async ({ page }, use) => {
     await use(new ModificationsDetailsPage(page));
   },
+  manageSponsorOrganisationPage: async ({ page }, use) => {
+    await use(new ManageSponsorOrganisationsPage(page));
+  },
+
+  setupNewSponsorOrganisationPage: async ({ page }, use) => {
+    await use(new SetupNewSponsorOrganisationPage(page));
+  },
+
+  checkSetupSponsorOrganisationPage: async ({ page }, use) => {
+    await use(new CheckSetupSponsorOrganisationPage(page));
+  },
+
+  sponsorOrganisationProfilePage: async ({ page }, use) => {
+    await use(new SponsorOrganisationProfilePage(page));
+  },
+
   makeAxeBuilder: async ({ page }, use) => {
     const makeAxeBuilder = () => new AxeBuilder({ page });
     await use(makeAxeBuilder);
