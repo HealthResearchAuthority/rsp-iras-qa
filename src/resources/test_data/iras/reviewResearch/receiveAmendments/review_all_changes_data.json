@@ -1,0 +1,119 @@
+{
+  "Review_All_Changes_Page": {
+    "heading": "Review all changes",
+    "title": "Review all changes - Health research UK",
+    "now_send_to_sponsor_heading": "Now send to sponsor",
+    "now_send_to_sponsor_hint_label": "By sending this modification you are confirming that, to the best of your knowledge, the details you are providing are correct.",
+    "Summary": {
+      "iras_id_label": "IRAS ID",
+      "short_project_title_label": "Short project title",
+      "modification_id_label": "Modification ID",
+      "status_label": "Status"
+    },
+    "modification_ranking_heading": "Overall modification ranking",
+    "modification_ranking_card_heading": "Ranking",
+    "Ranking": {
+      "ranking_modification_type_label": "Modification Type",
+      "ranking_category_label": "Category",
+      "ranking_review_type_label": "Review Type"
+    },
+    "changes_heading": "Changes",
+    "changes_card_heading": "Change",
+    "Changes": {
+      "planned_end_date_label": "Change to planned end date",
+      "which_org_type_affected_label": "Which organisation types does this change affect?",
+      "where_org_affected_label": "Where are the participating NHS/HSC organisations that will be affected by this change?",
+      "will_org_affected_label": "Will some or all of the participating organisations be affected?",
+      "will_require_resources_label": "Will participating NHS/HSC organisations require additional resources to implement this change?",
+      "changes_modification_type_label": "Modification type",
+      "changes_category_label": "Category",
+      "changes_review_type_label": "Review type"
+    },
+    "sponsor_details_heading": "Sponsor details",
+    "sponsor_details_card_heading": "Sponsor details",
+    "Sponsor": {
+      "sponsor_reference_label": "Sponsor reference (optional)",
+      "sponsor_date_label": "Date (optional)",
+      "sponsor_summary_of_changes_label": "Brief summary of changes"
+    }
+  },
+  "Modification_Url": {
+    "Hibernian_Social_Study": "projectRecordId=20250930093817&irasId=41157&shortTitle=Hibernian%20Social%20Study&projectModificationId=19DD45F6-6843-471C-B505-24C1BAF4D0FE",
+    "Swansea_ACL_Trials": "projectRecordId=20251003104402&irasId=46782&shortTitle=Swansea%20ACL%20Trials&projectModificationId=C8FE0861-63A9-470E-A255-E579832B698A"
+  },
+  "Modification_Details": {
+    "Hibernian_Social_Study": {
+      "Summary": {
+        "iras_id": "41157",
+        "short_project_title": "Hibernian Social Study",
+        "modification_id": "41157/1",
+        "status": "In sponsor review"
+      },
+      "Ranking": {
+        "ranking_modification_type": "Modification of an Important Detail",
+        "ranking_category": "A",
+        "ranking_review_type": "No review required"
+      },
+      "Changes": [
+        {
+          "change_title": "Project design",
+          "planned_end_date": "25 April 2029",
+          "which_org_type_affected": "NHS/HSC",
+          "where_org_affected": "Scotland",
+          "will_org_affected": "Some",
+          "will_require_resources": "No",
+          "changes_modification_type": "Modification of an Important Detail",
+          "changes_category": "C",
+          "changes_review_type": "No review required"
+        },
+        {
+          "change_title": "Project design",
+          "planned_end_date": "22 April 2029",
+          "which_org_type_affected": "NHS/HSC",
+          "where_org_affected": "Scotland",
+          "will_org_affected": "All",
+          "will_require_resources": "Yes",
+          "changes_modification_type": "Modification of an Important Detail",
+          "changes_category": "A",
+          "changes_review_type": "No review required"
+        }
+      ],
+      "Sponsor": {
+        "sponsor_reference": "chris.leech@bmail.com",
+        "sponsor_date": "",
+        "sponsor_summary_of_changes": "Extension to the original deadline"
+      }
+    },
+    "Swansea_ACL_Trials": {
+      "Summary": {
+        "iras_id": "46782",
+        "short_project_title": "Swansea ACL Trials",
+        "modification_id": "46782/1",
+        "status": "In sponsor review"
+      },
+      "Ranking": {
+        "ranking_modification_type": "Modification of an Important Detail",
+        "ranking_category": "A",
+        "ranking_review_type": "No review required"
+      },
+      "Changes": [
+        {
+          "change_title": "Project design",
+          "planned_end_date": "17 June 2026",
+          "which_org_type_affected": "NHS/HSC",
+          "where_org_affected": "Wales",
+          "will_org_affected": "All",
+          "will_require_resources": "Yes",
+          "changes_modification_type": "Modification of an Important Detail",
+          "changes_category": "A",
+          "changes_review_type": "No review required"
+        }
+      ],
+      "Sponsor": {
+        "sponsor_reference": "chris.leech@bmail.com",
+        "sponsor_date": "",
+        "sponsor_summary_of_changes": "Extend Deadline"
+      }
+    }
+  }
+}
