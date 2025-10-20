@@ -8,7 +8,7 @@ Feature: User Administration: Manage Sponsor Organisations
 
     # @jsEnabled,@jsDisabled
 
-    @ViewListOfSponsorOrgs @rsp-5229 @rsp-5230 @rsp-5232 @rsp-5237 @Test
+    @ViewListOfSponsorOrgs @rsp-5229 @rsp-5230 @rsp-5232 @rsp-5237 @Test @TestOnly
     Scenario Outline: Verify the user can add a sponsor organisation from manage sponsor organisation page and view the list of sponsor organisation in alphabetical order of organisation name
         When I authorise the rts api using '<RTS_API_Data>'
         Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation '<Setup_New_Sponsor_Organisation>' and  retrive country
@@ -39,7 +39,7 @@ Feature: User Administration: Manage Sponsor Organisations
         And I now see the sponsor organisation profile page with the selected '<Setup_New_Sponsor_Organisation>'
         And I capture the page screenshot
         Examples:
-            | Setup_New_Sponsor_Organisation | Status_Enabled | RTS_API_Data         | RTS_Request                         |
+            | Setup_New_Sponsor_Organisation  | Status_Enabled | RTS_API_Data         | RTS_Request                         |
             # | Sponsor_Organisation_One       | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
             # | Sponsor_Organisation_Two         | Enabled        |RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
             # | Sponsor_Organisation_Three       | Enabled        |RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
@@ -69,11 +69,11 @@ Feature: User Administration: Manage Sponsor Organisations
             # | Sponsor_Organisation_TwentySeven | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
             # | Sponsor_Organisation_TwentyEight | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
             # | Sponsor_Organisation_TwentyNine | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
-            | Sponsor_Organisation_Thirty    | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
-    # | Sponsor_Organisation_ThirtyOne   | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
-    # | Sponsor_Organisation_ThirtyTwo   | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
-    # | Sponsor_Organisation_ThirtyThree | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
-    # | Sponsor_Organisation_ThirtyFour  | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            # | Sponsor_Organisation_Thirty    | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            # | Sponsor_Organisation_ThirtyOne   | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            # | Sponsor_Organisation_ThirtyTwo | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            # | Sponsor_Organisation_ThirtyThree | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            | Sponsor_Organisation_ThirtyFour | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
     # | Sponsor_Organisation_ThirtyFive | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
     # | Sponsor_Organisation_ThirtySix | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
     # | Sponsor_Organisation_ThirtySeven | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
@@ -159,7 +159,7 @@ Feature: User Administration: Manage Sponsor Organisations
             | Sponsor_Organisation_Text_Partial_End_Space   | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Text_Min_Spaces | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space  |
 
     @rsp-5237 @SponsorOrganisationValidation @jsDisabled @RTS @Test @fail @KNOWN-DEFECT-FieldErrorMissing
-    Scenario Outline: Validate the sponsor organisation suggestion list in advanced filters when javascript is disabled
+    Scenario Outline: Validate the sponsor organisation suggestion list when javascript is disabled
         And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
         Then I can see the 'Setup_New_Sponsor_Organisation_Page'
         And I capture the page screenshot

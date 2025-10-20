@@ -1403,6 +1403,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
+
   @axeAccessibilityProjectOverviewUnfinishedPojectsPage @ApplicantUser
   Scenario: Project overview unfinished projects -Create project
     Given I have navigated to the my research projects page
@@ -1415,6 +1416,59 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I click the 'Save_For_Later' button on the 'Project_Details_Title_Page'
     Then I can see the project overview for unfinished projects page
     And I capture the page screenshot
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityManageSponsorOrgPage @SysAdminUser
+  Scenario: Manage sponsor organisation page of system administrator
+    Given I have navigated to the 'Home_Page'
+    When I click the 'System_Administration' link on the 'Home_Page'
+    And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
+    Then I can see the 'Manage_Sponsor_Organisations_Page'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilitySetupNewSponsorOrgPage @SysAdminUser
+  Scenario: Set up a new sponsor organisation page of system administrator
+    Given I have navigated to the 'Home_Page'
+    When I click the 'System_Administration' link on the 'Home_Page'
+    And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
+    Then I can see the 'Manage_Sponsor_Organisations_Page'
+    And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
+    Then I can see the 'Setup_New_Sponsor_Organisation_Page'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityCheckSetupSponsorOrgPage @SysAdminUser
+  Scenario: Check setup sponsor organisation page of system administrator
+    Given I have navigated to the 'Home_Page'
+    When I click the 'System_Administration' link on the 'Home_Page'
+    And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
+    Then I can see the 'Manage_Sponsor_Organisations_Page'
+    And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
+    Then I can see the 'Setup_New_Sponsor_Organisation_Page'
+    When I select a sponsor organisation in the set up a new sponsor organisation page using 'BUCKINGHAMSHIRE HEALTHCARE NHS TRUST'
+    And I capture the page screenshot
+    And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilitySponsorOrgProfilePage @SysAdminUser
+  Scenario: Sponsor organisation profile page of system administrator
+    Given I have navigated to the 'Home_Page'
+    When I click the 'System_Administration' link on the 'Home_Page'
+    And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
+    Then I can see the 'Manage_Sponsor_Organisations_Page'
+    When I enter the 'Organisation_Name' of the 'First' item in the list, into the search field
+    And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+    Then the system displays 'sponsor organisations' matching the search criteria
+    And I can see the 'previously added sponsor organisation' should be present in the list with 'Enabled' status in the manage sponsor organisation page
+    Then I click the view edit link of the 'previously added sponsor organisation'
+    And I can see the sponsor organisation profile page
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
