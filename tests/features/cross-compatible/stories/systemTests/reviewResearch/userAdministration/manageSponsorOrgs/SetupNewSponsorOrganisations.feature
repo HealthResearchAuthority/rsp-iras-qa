@@ -8,7 +8,7 @@ Feature: User Administration: Manage Sponsor Organisations
 
     # @jsEnabled,@jsDisabled
 
-    @ViewListOfSponsorOrgs @rsp-5229 @rsp-5230 @rsp-5232 @rsp-5237 @Test @TestOnly
+    @ViewListOfSponsorOrgs @rsp-5229 @rsp-5230 @rsp-5232 @rsp-5237
     Scenario Outline: Verify the user can add a sponsor organisation from manage sponsor organisation page and view the list of sponsor organisation in alphabetical order of organisation name
         When I authorise the rts api using '<RTS_API_Data>'
         Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation '<Setup_New_Sponsor_Organisation>' and  retrive country
@@ -82,10 +82,7 @@ Feature: User Administration: Manage Sponsor Organisations
     # | Sponsor_Organisation_Forty      | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
 
 
-
-
-
-    @rsp-5230 @ErrorValidationDuplicateSponsorOrg @jsEnabled @Test
+    @rsp-5230 @ErrorValidationDuplicateSponsorOrg @jsEnabled
     Scenario Outline: Verify appropriate error message is displayed when user tries to add a duplicate sponsor organisation from set up a new sponsor organisation page when JavaScript is enabled
         When I enter the '<Field_Name>' of the '<Position>' item in the list, into the search field
         And I capture the page screenshot
@@ -107,7 +104,7 @@ Feature: User Administration: Manage Sponsor Organisations
             | Organisation_Name | First    | JavaScript_Enabled_Duplicate_Sponsor_Organisation_Setup_Error |
             | Organisation_Name | Last     | JavaScript_Enabled_Duplicate_Sponsor_Organisation_Setup_Error |
 
-    @rsp-5237 @ErrorValidationDuplicateSponsorOrg @KNOWN_DEFECT-RSP-5473 @jsDisabled @Test
+    @rsp-5237 @ErrorValidationDuplicateSponsorOrg @KNOWN_DEFECT-RSP-5473 @jsDisabled
     Scenario Outline: Verify appropriate error message is displayed when user tries to add a duplicate sponsor organisation from set up a new sponsor organisation page when JavaScript is disabled
         When I enter the '<Field_Name>' of the '<Position>' item in the list, into the search field
         And I capture the page screenshot
@@ -132,9 +129,7 @@ Feature: User Administration: Manage Sponsor Organisations
 
     # last update date validation to be added later
 
-    # when the JavaScript is enabled, the sponsor organisation suggestion box is not visible due to @KNOWN-DEFECT-RSP-5486
-    # hence marking the scenarios as @fail and will be fixed in future
-    @rsp-5230 @SponsorOrganisationValidation @jsEnabled @RTS @Test
+    @rsp-5230 @SponsorOrganisationValidation @jsEnabled @RTS
     Scenario Outline: Validate the sponsor organisation suggestion list when javascript is enabled
         And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
         Then I can see the 'Setup_New_Sponsor_Organisation_Page'
@@ -158,7 +153,7 @@ Feature: User Administration: Manage Sponsor Organisations
             | Sponsor_Organisation_Text_Partial_End_Space   | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space  |
             | Sponsor_Organisation_Text_Partial_End_Space   | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Text_Min_Spaces | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space  |
 
-    @rsp-5237 @SponsorOrganisationValidation @jsDisabled @RTS @Test @fail @KNOWN-DEFECT-FieldErrorMissing
+    @rsp-5237 @SponsorOrganisationValidation @jsDisabled @RTS @KNOWN_DEFECT-RSP-5473
     Scenario Outline: Validate the sponsor organisation suggestion list when javascript is disabled
         And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
         Then I can see the 'Setup_New_Sponsor_Organisation_Page'
@@ -179,12 +174,12 @@ Feature: User Administration: Manage Sponsor Organisations
             | Sponsor_Organisation_Text_Partial_Dot_Comma    | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Dot_Comma      | Sponsor_Organisation_Min_Char_Error |
             | Sponsor_Organisation_Text_Partial_Slash        | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Slash          | Sponsor_Organisation_Min_Char_Error |
             | Sponsor_Organisation_Text_Partial_Hyphen       | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Hyphen         | Sponsor_Organisation_Min_Char_Error |
-            # | Sponsor_Organisation_Text_Partial_Start_Space  | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Start_Space    | Sponsor_Organisation_Min_Char_Error |
-            # | Sponsor_Organisation_Text_Partial_End_Space    | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space     | Sponsor_Organisation_Min_Char_Error |
+            | Sponsor_Organisation_Text_Partial_Start_Space  | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Start_Space    | Sponsor_Organisation_Min_Char_Error |
+            | Sponsor_Organisation_Text_Partial_End_Space    | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space     | Sponsor_Organisation_Min_Char_Error |
             | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Min_Char_Error |
             | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Text_Min_Spaces | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Min_Char_Error |
 
-    @rsp-5232 @ExistingSPonsorOrgSearchAndView @Test
+    @rsp-5232 @ExistingSPonsorOrgSearchAndView
     Scenario Outline: Validate the user can search and view the previously added sponsor organisation from manage sponsor organisation page
         When I enter the '<Field_Name>' of the '<Position>' item in the list, into the search field
         And I capture the page screenshot
@@ -196,7 +191,6 @@ Feature: User Administration: Manage Sponsor Organisations
         Then I click the view edit link of the 'previously added sponsor organisation'
         And I capture the page screenshot
         And I can see the sponsor organisation profile page
-        # And I now see the sponsor organisation profile page with the selected '<Setup_New_Sponsor_Organisation>'
         And I capture the page screenshot
         Examples:
             | Field_Name        | Position | Status_Enabled |
@@ -455,47 +449,7 @@ Feature: User Administration: Manage Sponsor Organisations
             | Valid_Data_In_All_Fields | Organisation_Name | Country        | Email_Address    | Description     | Valid_Data_In_All_Fields_Another | Enabled        | Disabled        |
 
 
-    @RegressionTestVerifyValidReviewBodyCharacterLimits
-    Scenario Outline: Field validation passes with minimum and maximum characters in organisation name and description
-        And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
-        Then I can see the 'Create_Review_Body_Page'
-        And I capture the page screenshot
-        When I fill the new review body page using '<Add_Review_Body>'
-        And I capture the page screenshot
-        And I click the 'Continue' button on the 'Create_Review_Body_Page'
-        Then I can see the check and create review body page for '<Add_Review_Body>'
-        And I capture the page screenshot
 
-        Examples:
-            | Add_Review_Body                              |
-            | Organisation_Name_Field_Min_Data             |
-            | Organisation_Name_Field_Max_Data             |
-            | Organisation_Name_Field_between_Min_Max_Data |
-            | Description_Field_Min_Data                   |
-            | Description_Field_Max_Data                   |
-            | Description_Field_between_Min_Max_Data       |
-
-    @RegressionTestVerifyValidationErrors
-    Scenario Outline: When min/max character field validation fails correct error messages display
-        And I click the 'Add_New_Review_Body_Record' link on the 'Manage_Review_Bodies_Page'
-        Then I can see the 'Create_Review_Body_Page'
-        And I capture the page screenshot
-        When I fill the new review body page using '<Add_Review_Body>'
-        And I capture the page screenshot
-        And I click the 'Continue' button on the 'Create_Review_Body_Page'
-        Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Create_Review_Body_Page'
-        And I capture the page screenshot
-
-        Examples:
-            | Add_Review_Body                                      | Field_And_Summary_Error_Message                              |
-            | Missing_Data_Organisation_Name_Field                 | Mandatory_Field_Organisation_Name_Error                      |
-            | Missing_Data_Country_Field                           | Mandatory_Field_Country_Error                                |
-            | Missing_Data_Email_Address_Field                     | Mandatory_Field_Email_Address_Error                          |
-            | Missing_Data_All_Fields                              | All_Mandatory_Field_Errors                                   |
-            | Missing_Data_All_Mandatory_Fields                    | All_Mandatory_Field_Errors                                   |
-            | Invalid_Data_Organisation_Name_Field                 | Max_Chars_Organisation_Name_Error                            |
-            | Invalid_Data_Description_Field                       | Max_Description_Words_Error                                  |
-            | Incorrect_Format_Invalid_Character_Limit_Email_Field | Incorrect_Format_Invalid_Character_Limit_Email_Address_Error |
 
     @RegressionTestUserListReviewBodyNoResultsFoundRemoveUser
     Scenario Outline: Verify the user can search and remove existing user of the selected review body and navigate to manage users page when no results found in the search for removed user
