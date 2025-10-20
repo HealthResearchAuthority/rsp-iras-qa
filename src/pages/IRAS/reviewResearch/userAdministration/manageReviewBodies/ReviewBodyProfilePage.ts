@@ -3,6 +3,7 @@ import * as reviewBodyProfilePageData from '../../../../../resources/test_data/i
 import * as reviewBodySqlData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageReviewBodies/review_body_sql_data.json';
 import * as buttonTextData from '../../../../../resources/test_data/common/button_text_data.json';
 import * as linkTextData from '../../../../../resources/test_data/common/link_text_data.json';
+import * as dbConfigData from '../../../../../resources/test_data/common/database/db_config_data.json';
 import { connect } from '../../../../../utils/DbConfig';
 import { IResult } from 'mssql';
 
@@ -285,7 +286,7 @@ export default class ReviewBodyProfilePage {
   // SQL STATEMENTS //
   async sqlGetSingleRandomReviewBodyByStatus(status: string): Promise<void> {
     const isActive = this.reviewBodySqlData[status];
-    const sqlConnection = await connect();
+    const sqlConnection = await connect(dbConfigData.Application_Service);
     const queryResult = await sqlConnection.query(
       `SELECT TOP 1 * FROM RegulatoryBodies WHERE IsActive = ${isActive} ORDER BY NEWID()`
     );
@@ -298,7 +299,7 @@ export default class ReviewBodyProfilePage {
     const nIRevBody = this.reviewBodySqlData.Non_Test_Review_Bodies.Northern_Ireland;
     const scoRevBody = this.reviewBodySqlData.Non_Test_Review_Bodies.Scotland;
     const walRevBody = this.reviewBodySqlData.Non_Test_Review_Bodies.Wales;
-    const sqlConnection = await connect();
+    const sqlConnection = await connect(dbConfigData.Application_Service);
     const queryResult = await sqlConnection.query(
       `SELECT TOP 1 * FROM RegulatoryBodies WHERE IsActive = ${isActive} 
       AND RegulatoryBodyName ${inOperator} ('${engRevBody}', '${nIRevBody}', 
