@@ -6,12 +6,14 @@ export default class SponsorReferencePage {
   readonly page: Page;
   readonly sponsorReferencePageTestData: typeof sponsorReferencePageTestData;
   readonly pageHeading: Locator;
+  readonly reviewAllChangesHeading: Locator;
   readonly sponsor_modification_reference_textbox: Locator;
   readonly sponsor_summary_textbox: Locator;
   readonly sponsor_modification_date_formgroup: Locator;
   readonly sponsor_modification_date_day_textbox: Locator;
   readonly sponsor_modification_date_month_dropdown: Locator;
   readonly sponsor_modification_date_year_textbox: Locator;
+  readonly sponsor_modification_date_hint_label: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -62,10 +64,14 @@ export default class SponsorReferencePage {
         has: this.page.getByText(this.sponsorReferencePageTestData.Sponsor_Reference_Page.sponsor_summary_label),
       })
       .getByRole('textbox');
+    this.sponsor_modification_date_hint_label = this.page.locator('//*[@id="Questions[1]_AnswerText-hint"]/p');
   }
 
   //Page Methods
   async assertOnSponsorReferencePage() {
     await expect(this.pageHeading).toBeVisible();
+  }
+  async assertOnReviewAllChangesPage() {
+    await expect(this.reviewAllChangesHeading).toBeVisible();
   }
 }
