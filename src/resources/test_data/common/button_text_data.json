@@ -255,5 +255,10 @@
   "Project_Overview_Unfinished_Projects_Page": {
     "Edit_Project_Record": "Edit project record",
     "Delete_Project": "Delete project"
+  },
+  "My_Research_Page": {
+    "Search": "Search",
+    "Advanced_Filters": "Advanced filters",
+    "Apply_Filters": "Apply filters"
   }
 }

@@ -1418,3 +1418,12 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
+
+  @axeAccessibilitymyResearchPage @ApplicantUser
+  Scenario: My Research search and advanced filters page
+    Given I have navigated to the 'Home_Page'
+    When I click the 'My_research' link on the 'Home_Page'
+    Then I can see the 'My_Research_Page'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
