@@ -51,7 +51,7 @@ export default class ProjectDetailsIRASPage {
   }
 
   async getValidIRASFromLegacySharepoint(): Promise<string> {
-    const sharePointDriveId = `${process.env.SHAREPOINT_DRIVE_ID}`;
+    const sharePointDriveId = `${process.env.sharepoint_drive_id}`;
     const csvFilePath = this.projectDetailsIRASPageTestData.Project_Details_IRAS_Page.legacy_iras_lookup_file_path;
     const maxRetries = new CommonItemsPage(this.page).commonTestData.sharepoint_max_retries;
     const client = await getSharpointGraphClient();

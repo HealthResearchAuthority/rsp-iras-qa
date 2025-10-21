@@ -628,9 +628,9 @@ export async function getFormattedDate(): Promise<string> {
 }
 
 export async function getSharpointGraphClient(): Promise<Client> {
-  const tenantId = `${process.env.SHAREPOINT_TENANT_ID}`;
-  const clientId = `${process.env.SHAREPOINT_CLIENT_ID}`;
-  const clientSecret = `${process.env.SHAREPOINT_CLIENT_SECRET}`;
+  const tenantId = `${process.env.tenantId}`;
+  const clientId = `${process.env.clientId}`;
+  const clientSecret = `${process.env.clientSecret}`;
   const credential = new ClientSecretCredential(tenantId, clientId, clientSecret);
   const token = await credential.getToken('https://graph.microsoft.com/.default');
   const client = Client.init({
