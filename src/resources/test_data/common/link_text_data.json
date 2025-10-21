@@ -15,12 +15,8 @@
   },
   "Banner": {
     "Home": "Home",
-    "Review_Applications": "Review Applications",
-    "Admin": "Admin",
-    "Manage_Users": "Manage Users",
-    "Question_Set": "Question Set",
-    "System_Admin": "System Admin",
-    "My_Applications": "My Applications",
+    "Profile_Settings": "Profile and settings",
+    "Help_Support": "Help and support",
     "Logout": "Logout"
   },
   "Home_Page": {
@@ -237,5 +233,7 @@
   },
   "Project_Overview_Unfinished_Projects_Page": {
     "Back": "Back"
-  }
+  },
+  "Profile_Settings_Page": { "One_Login_Account": "One Login account", "Change": "Change" },
+  "Edit_Your_Profile_Page": { "One_Login_Account": "One Login account" }
 }

@@ -37,9 +37,11 @@ When(
       myResearchProjectsPage,
       searchModificationsPage,
       modificationsReadyToAssignPage,
-      selectStudyWideReviewerPage,
       myModificationsTasklistPage,
+      selectStudyWideReviewerPage,
       accessDeniedPage,
+      profileSettingsPage,
+      editYourProfilePage,
     },
     page: string
   ) => {
@@ -101,6 +103,12 @@ When(
         break;
       case 'Access_Denied_Page':
         await accessDeniedPage.assertOnAccessDeniedPage();
+        break;
+      case 'Profile_Settings_Page':
+        await profileSettingsPage.assertOnProfileSettingsPage();
+        break;
+      case 'Edit_Your_Profile_Page':
+        await editYourProfilePage.assertOnEditProfilePage();
         break;
       default:
         throw new Error(`${page} is not a valid option`);
@@ -713,6 +721,8 @@ Given(
       modificationsReadyToAssignPage,
       approvalsPage,
       myModificationsTasklistPage,
+      profileSettingsPage,
+      editYourProfilePage,
     },
     page: string
   ) => {
@@ -774,6 +784,14 @@ Given(
       case 'My_Modifications_Tasklist_Page':
         await myModificationsTasklistPage.goto();
         await myModificationsTasklistPage.assertOnMyModificationsTasklistPage();
+        break;
+      case 'Profile_Settings_Page':
+        await profileSettingsPage.goto();
+        await profileSettingsPage.assertOnProfileSettingsPage();
+        break;
+      case 'Edit_Your_Profile_Page':
+        await editYourProfilePage.goto();
+        await editYourProfilePage.assertOnEditProfilePage();
         break;
       default:
         throw new Error(`${page} is not a valid option`);
