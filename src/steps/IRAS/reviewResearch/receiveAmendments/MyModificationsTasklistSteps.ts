@@ -23,7 +23,7 @@ Then(
       if (Object.hasOwn(dataset, key)) {
         for (const modificationId of dataset[key]) {
           await expect(
-            modificationsReadyToAssignPage.page.getByRole('cell').getByText(`${modificationId}`)
+            modificationsReadyToAssignPage.page.getByRole('cell').getByText(`${modificationId}`, { exact: true })
           ).toBeVisible();
         }
       }

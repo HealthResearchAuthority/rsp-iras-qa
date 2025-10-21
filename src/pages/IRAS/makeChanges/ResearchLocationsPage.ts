@@ -13,6 +13,7 @@ export default class ResearchLocationsPage {
   readonly nations_participating_hint_label: Locator;
   readonly is_nhs_hsc_organisation_label: Locator;
   readonly lead_nation_label: Locator;
+  readonly details_component: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -33,6 +34,7 @@ export default class ResearchLocationsPage {
       'div[id="Questions[1].SelectedOption"] govuk-fieldset-legend'
     );
     this.lead_nation_label = this.page.locator('div[id="Questions[2].SelectedOption"] govuk-fieldset-legend');
+    this.details_component = this.page.locator('.govuk-details');
   }
 
   //Page Methods
