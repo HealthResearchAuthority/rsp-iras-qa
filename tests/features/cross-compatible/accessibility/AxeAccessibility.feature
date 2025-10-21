@@ -604,7 +604,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I click the 'View_Edit' link on the 'Manage_Review_Bodies_Page'
     And I can see the review body profile page
     And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
-    Then I can see the user list page of the review body
+    Then I can see the user list page of the 'review body'
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
@@ -619,7 +619,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I select a 'QA Automation' review Body to View and Edit which is 'Enabled'
     And I can see the review body profile page
     And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
-    Then I can see the user list page of the review body
+    Then I can see the user list page of the 'review body'
     And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
     When I enter 'QA Automation' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
@@ -627,7 +627,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
     And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
     And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
-    Then I can see the user list page of the review body
+    Then I can see the user list page of the 'review body'
     And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
     When I enter 'QA Automation' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
@@ -635,7 +635,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
     And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
     And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
-    Then I can see the user list page of the review body
+    Then I can see the user list page of the 'review body'
     When I enter the 'Email_Address' of the 'last' user shown on the current 'review body' users list, into the search field
     And I click the 'Search' button on the 'Review_Body_User_List_Page'
     Then the system displays search results matching the search criteria
@@ -653,7 +653,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I select a 'QA Automation' review Body to View and Edit which is 'Enabled'
     And I can see the review body profile page
     And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
-    Then I can see the user list page of the review body
+    Then I can see the user list page of the 'review body'
     And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
     When I enter 'QA Automation' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
@@ -661,7 +661,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
     And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
     And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
-    Then I can see the user list page of the review body
+    Then I can see the user list page of the 'review body'
     And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
     When I enter 'QA Automation' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
@@ -669,7 +669,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
     And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
     And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
-    Then I can see the user list page of the review body
+    Then I can see the user list page of the 'review body'
     When I enter the 'Email_Address' of the 'last' user shown on the current 'review body' users list, into the search field
     And I click the 'Search' button on the 'Review_Body_User_List_Page'
     Then the system displays search results matching the search criteria
@@ -689,7 +689,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I select a 'QA Automation' review Body to View and Edit which is 'Enabled'
     And I can see the review body profile page
     And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
-    Then I can see the user list page of the review body
+    Then I can see the user list page of the 'review body'
     And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
     When I enter 'QA Automation' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
@@ -697,7 +697,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
     And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
     And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
-    Then I can see the user list page of the review body
+    Then I can see the user list page of the 'review body'
     And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
     When I enter 'QA Automation' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
@@ -705,7 +705,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
     And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
     And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
-    Then I can see the user list page of the review body
+    Then I can see the user list page of the 'review body'
     When I enter the 'Email_Address' of the 'last' user shown on the current 'review body' users list, into the search field
     And I click the 'Search' button on the 'Review_Body_User_List_Page'
     Then the system displays search results matching the search criteria
@@ -727,7 +727,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I select a 'QA Automation' review Body to View and Edit which is 'Enabled'
     And I can see the review body profile page
     And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
-    Then I can see the user list page of the review body
+    Then I can see the user list page of the 'review body'
     And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
     When I enter 'QA Automation' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
@@ -735,7 +735,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
     And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
     And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
-    Then I can see the user list page of the review body
+    Then I can see the user list page of the 'review body'
     And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
     When I enter 'QA Automation' into the search field
     And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
@@ -743,7 +743,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
     And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
     And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
-    Then I can see the user list page of the review body
+    Then I can see the user list page of the 'review body'
     When I enter the 'Email_Address' of the 'last' user shown on the current 'review body' users list, into the search field
     And I click the 'Search' button on the 'Review_Body_User_List_Page'
     Then the system displays search results matching the search criteria
@@ -752,7 +752,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I click the 'Remove_User_Profile' button on the 'Check_Remove_User_Profile_Page'
     And I validate 'Remove_User_From_Review_Body_Labels' labels displayed in the success confirmation page when the user removed from the review body
     And I click the 'Remove_Another_User_From_The_Review_Body' link on the 'Confirmation_Page'
-    Then I can see the user list page of the review body
+    Then I can see the user list page of the 'review body'
     And I enter an input into the search field to search for the removed user of the review body
     And I click the 'Search' button on the 'Review_Body_User_List_Page'
     Then the system displays no results found message in the user list page of the review body
@@ -768,7 +768,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I select a 'QA Automation' review Body to View and Edit which is 'Enabled'
     And I can see the review body profile page
     And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
-    And I can see the user list page of the review body
+    And I can see the user list page of the 'review body'
     And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
     And I can see the search for user to add to review body page
     And I fill the search input for searching 'adding users' with 'Existing_QA_User_First_Name' as the search query
@@ -787,7 +787,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I select a 'QA Automation' review Body to View and Edit which is 'Enabled'
     And I can see the review body profile page
     And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
-    And I can see the user list page of the review body
+    And I can see the user list page of the 'review body'
     And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
     And I can see the search for user to add to review body page
     And I fill the search input for searching 'adding users' with 'Non_Existant_User_Data' as the search query
@@ -805,7 +805,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I select a 'QA Automation' review Body to View and Edit which is 'Enabled'
     And I can see the review body profile page
     And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
-    And I can see the user list page of the review body
+    And I can see the user list page of the 'review body'
     And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
     And I can see the search for user to add to review body page
     And I fill the search input for searching 'adding users' with 'Existing_QA_User_First_Name' as the search query
@@ -824,7 +824,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I select a 'QA Automation' review Body to View and Edit which is 'Enabled'
     And I can see the review body profile page
     And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
-    And I can see the user list page of the review body
+    And I can see the user list page of the 'review body'
     And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
     And I can see the search for user to add to review body page
     And I fill the search input for searching 'adding users' with 'Existing_QA_User_First_Name' as the search query

@@ -76,6 +76,7 @@ import ManageSponsorOrganisationsPage from '../pages/IRAS/reviewResearch/userAdm
 import SetupNewSponsorOrganisationPage from '../pages/IRAS/reviewResearch/userAdministration/manageSponsorOrgs/SetupNewSponsorOrganisationPage';
 import CheckSetupSponsorOrganisationPage from '../pages/IRAS/reviewResearch/userAdministration/manageSponsorOrgs/CheckSetupSponsorOrganisationPage';
 import SponsorOrganisationProfilePage from '../pages/IRAS/reviewResearch/userAdministration/manageSponsorOrgs/SponsorOrganisationProfilePage';
+import UserListSponsorOrganisationPage from '../pages/IRAS/reviewResearch/userAdministration/manageSponsorOrgs/UserListSponsorOrganisationPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -152,6 +153,7 @@ type CustomFixtures = {
   setupNewSponsorOrganisationPage: SetupNewSponsorOrganisationPage;
   checkSetupSponsorOrganisationPage: CheckSetupSponsorOrganisationPage;
   sponsorOrganisationProfilePage: SponsorOrganisationProfilePage;
+  userListSponsorOrganisationPage: UserListSponsorOrganisationPage;
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -445,6 +447,10 @@ export const test = base.extend<CustomFixtures>({
 
   sponsorOrganisationProfilePage: async ({ page }, use) => {
     await use(new SponsorOrganisationProfilePage(page));
+  },
+
+  userListSponsorOrganisationPage: async ({ page }, use) => {
+    await use(new UserListSponsorOrganisationPage(page));
   },
 
   makeAxeBuilder: async ({ page }, use) => {

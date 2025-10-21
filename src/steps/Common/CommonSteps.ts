@@ -1417,3 +1417,72 @@ When(
     }
   }
 );
+
+Then(
+  'I can see the user list page of the {string}',
+  async (
+    {
+      userListReviewBodyPage,
+      reviewBodyProfilePage,
+      sponsorOrganisationProfilePage,
+      userListSponsorOrganisationPage,
+      commonItemsPage,
+    },
+    orgType: string
+  ) => {
+    if (orgType === 'review body') {
+      await userListReviewBodyPage.assertOnUserListReviewBodyPage();
+      const organisationName = await reviewBodyProfilePage.getOrgName();
+      await expect(userListReviewBodyPage.page_heading).toHaveText(
+        userListReviewBodyPage.userListReviewBodyPageTestData.Review_Body_User_List_Page.page_heading + organisationName
+      );
+    } else if (orgType === 'sponsor organisation') {
+      await userListSponsorOrganisationPage.assertOnUserListSponsorOrgPage();
+      const organisationName = await sponsorOrganisationProfilePage.getOrgName();
+      await expect(userListSponsorOrganisationPage.page_heading).toHaveText(
+        userListSponsorOrganisationPage.userListSponsorOrgPageTestData.Sponsor_Organisation_User_List_Page
+          .page_heading + organisationName
+      );
+    }
+    if ((await userListReviewBodyPage.userListTableRows.count()) >= 2) {
+      const userList = await commonItemsPage.getUsers();
+      const emailAddress: any = userList.get('emailAddressValues');
+      await userListReviewBodyPage.setUserEmail(emailAddress);
+      const firstName: any = userList.get('firstNameValues');
+      await userListReviewBodyPage.setUserFirstName(firstName);
+      const lastName: any = userList.get('lastNameValues');
+      await userListReviewBodyPage.setUserLastName(lastName);
+      await userListReviewBodyPage.setFirstName(firstName[0]);
+      await userListReviewBodyPage.setLastName(lastName[0]);
+      await userListReviewBodyPage.setEmail(emailAddress[0]);
+    }
+  }
+);
+
+Then(
+  'I can see no users in the {string} with a message to add users to the {string}',
+  async ({ userListReviewBodyPage }, orgTypeValOne: string, orgTypeValTwo: string) => {
+    if (
+      (orgTypeValOne && orgTypeValTwo) === 'review body' ||
+      (orgTypeValOne && orgTypeValTwo) === 'sponsor organisation'
+    ) {
+      expect(await userListReviewBodyPage.userListTableRows.count()).toBe(0);
+    }
+  }
+);
+
+Then(
+  'I can see the user list of the selected {string} is sorted by default in the alphabetical order of the {string}',
+  async ({ userListReviewBodyPage }, orgType: string, sortField: string) => {
+    let firstNameValues: any;
+    if (orgType === 'review body' || orgType === 'sponsor organisation') {
+      if (sortField.toLowerCase() === 'first name') {
+        firstNameValues = await userListReviewBodyPage.getUserFirstName();
+      } else {
+        throw new Error(`${sortField} is not a valid option`);
+      }
+      const sortedList = [...firstNameValues].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
+      expect(firstNameValues).toEqual(sortedList);
+    }
+  }
+);

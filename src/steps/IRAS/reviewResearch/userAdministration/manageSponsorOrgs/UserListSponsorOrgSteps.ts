@@ -3,6 +3,32 @@ import { expect, test } from '../../../../../hooks/CustomFixtures';
 import { confirmArrayNotNull } from '../../../../../utils/UtilFunctions';
 const { Given, When, Then } = createBdd(test);
 
+Then(
+  'I can see the user added successful message on sponsor organisation user list page',
+  async ({ userListSponsorOrganisationPage, commonItemsPage }) => {
+    await expect
+      .soft(userListSponsorOrganisationPage.user_added_to_sponsor_organisation_success_message_header_text)
+      .toBeVisible();
+    await expect
+      .soft(userListSponsorOrganisationPage.user_added_to_sponsor_organisation__success_message_text)
+      .toBeVisible();
+    expect
+      .soft(
+        await userListSponsorOrganisationPage.information_alert_banner.evaluate((e: any) =>
+          getComputedStyle(e).getPropertyValue('border-color')
+        )
+      )
+      .toBe(commonItemsPage.commonTestData.rgb_green_color);
+    expect
+      .soft(
+        await userListSponsorOrganisationPage.information_alert_banner.evaluate((e: any) =>
+          getComputedStyle(e).getPropertyValue('background-color')
+        )
+      )
+      .toBe(commonItemsPage.commonTestData.rgb_green_color);
+  }
+);
+
 When(
   'I navigate to the user list page of the {string} review body',
   async ({ userListReviewBodyPage }, revBodyName: string) => {

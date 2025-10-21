@@ -250,6 +250,15 @@
     "Back": "Back"
   },
   "Sponsor_Organisation_Profile_Page": {
-    "Back": "Back"
-  }
+    "Back": "Back",
+    "View_This_Sponsor_Org_List_Of_Users": "View this sponsor organisation's list of users"
+  },
+  "Sponsor_Org_User_List_Page": {
+    "Add_A_New_User_Profile_Record": "Add a new user profile record"
+  },
+  "Search_Add_User_Sponsor_Org_Page": {
+    "Back": "Back",
+    "Add_User": "Add user"
+  },
+  "Check_Add_User_Sponsor_Org_Page": { "Back": "Back" }
 }

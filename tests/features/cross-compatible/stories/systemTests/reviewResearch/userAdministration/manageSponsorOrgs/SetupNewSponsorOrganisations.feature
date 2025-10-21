@@ -251,9 +251,9 @@ Feature: User Administration: Manage Sponsor Organisations
         # And I capture the page screenshot
         # # user list page of the review body
         # And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
-        # Then I can see the user list page of the review body
+        # Then I can see the user list page of the 'review body'
         # And I capture the page screenshot
-        # And I can see no users in the review body with a message to add users to the review body
+        # And I can see no users in the 'review body' with a message to add users to the 'review body'
         # When I enter 'QA Automation' into the search field
         # And I click the 'Search' button on the 'Review_Body_User_List_Page'
         # And I capture the page screenshot
@@ -373,7 +373,7 @@ Feature: User Administration: Manage Sponsor Organisations
         And I can see the review body profile page
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
         And I capture the page screenshot
-        Then I can see the user list page of the review body
+        Then I can see the user list page of the 'review body'
         And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
         When I enter 'QA Automation' into the search field
         And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
@@ -381,9 +381,9 @@ Feature: User Administration: Manage Sponsor Organisations
         And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
         And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
         And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
-        Then I can see the user list page of the review body
+        Then I can see the user list page of the 'review body'
         And I capture the page screenshot
-        And I can see the user list of the selected review body is sorted by default in the alphabetical order of the 'First Name'
+        And I can see the user list of the selected 'review body' is sorted by default in the alphabetical order of the 'First Name'
 
         Examples:
             | Field_Name_Two | Field_Name_Three | Field_Name_Four | Navigation_Link | Status_Enabled | Status_Disabled |
@@ -460,7 +460,7 @@ Feature: User Administration: Manage Sponsor Organisations
         And I can see the review body profile page
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
         And I capture the page screenshot
-        Then I can see the user list page of the review body
+        Then I can see the user list page of the 'review body'
         And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
         When I enter 'QA Automation' into the search field
         And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
@@ -468,8 +468,8 @@ Feature: User Administration: Manage Sponsor Organisations
         And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
         And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
         And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
-        Then I can see the user list page of the review body
-        When I enter the 'Email_Address' of the 'last' user shown on the current review body users list, into the search field
+        Then I can see the user list page of the 'review body'
+        When I enter the 'Email_Address' of the 'last' user shown on the current 'review body' users list, into the search field
         And I capture the page screenshot
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
@@ -505,7 +505,7 @@ Feature: User Administration: Manage Sponsor Organisations
         And I can see the review body profile page
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
         And I capture the page screenshot
-        Then I can see the user list page of the review body
+        Then I can see the user list page of the 'review body'
         And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
         When I enter 'QA Automation' into the search field
         And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
@@ -513,8 +513,8 @@ Feature: User Administration: Manage Sponsor Organisations
         And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
         And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
         And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
-        Then I can see the user list page of the review body
-        When I enter the 'Email_Address' of the 'last' user shown on the current review body users list, into the search field
+        Then I can see the user list page of the 'review body'
+        When I enter the 'Email_Address' of the 'last' user shown on the current 'review body' users list, into the search field
         And I capture the page screenshot
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
@@ -527,8 +527,8 @@ Feature: User Administration: Manage Sponsor Organisations
         And I validate 'Remove_User_From_Review_Body_Labels' labels displayed in the success confirmation page when the user removed from the review body
         And I click the 'Remove_Another_User_From_The_Review_Body' link on the 'Confirmation_Page'
         And I capture the page screenshot
-        Then I can see the user list page of the review body
-        When I enter the 'Email_Address' of the 'last' user shown on the current review body users list, into the search field
+        Then I can see the user list page of the 'review body'
+        When I enter the 'Email_Address' of the 'last' user shown on the current 'review body' users list, into the search field
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then the system displays search results matching the search criteria
@@ -560,7 +560,7 @@ Feature: User Administration: Manage Sponsor Organisations
         And I can see the review body profile page
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
         And I capture the page screenshot
-        Then I can see the user list page of the review body
+        Then I can see the user list page of the 'review body'
         And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
         When I enter 'QA Automation' into the search field
         And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
@@ -568,7 +568,7 @@ Feature: User Administration: Manage Sponsor Organisations
         And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
         And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
         And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
-        When I enter the 'Email_Address' of the 'last' user shown on the current review body users list, into the search field
+        When I enter the 'Email_Address' of the 'last' user shown on the current 'review body' users list, into the search field
         And I capture the page screenshot
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
@@ -587,7 +587,7 @@ Feature: User Administration: Manage Sponsor Organisations
         Then the system displays no results found message in the user list page of the review body
         When I click the 'Back_To_Users' link on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
-        Then I can see the user list page of the review body
+        Then I can see the user list page of the 'review body'
         Examples:
             | Status_Enabled | Status_Disabled |
             | Enabled        | Disabled        |
@@ -602,7 +602,7 @@ Feature: User Administration: Manage Sponsor Organisations
         And I can see the review body profile page
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
         And I capture the page screenshot
-        Then I can see the user list page of the review body
+        Then I can see the user list page of the 'review body'
         And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
         When I enter 'QA Automation' into the search field
         And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
@@ -610,7 +610,7 @@ Feature: User Administration: Manage Sponsor Organisations
         And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
         And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
         And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
-        When I enter the 'Email_Address' of the 'last' user shown on the current review body users list, into the search field
+        When I enter the 'Email_Address' of the 'last' user shown on the current 'review body' users list, into the search field
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then the system displays search results matching the search criteria
@@ -636,7 +636,7 @@ Feature: User Administration: Manage Sponsor Organisations
         And I can see the review body profile page
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
         And I capture the page screenshot
-        Then I can see the user list page of the review body
+        Then I can see the user list page of the 'review body'
         And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
         When I enter 'QA Automation' into the search field
         And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
@@ -644,7 +644,7 @@ Feature: User Administration: Manage Sponsor Organisations
         And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
         And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
         And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
-        When I enter the 'Email_Address' of the 'last' user shown on the current review body users list, into the search field
+        When I enter the 'Email_Address' of the 'last' user shown on the current 'review body' users list, into the search field
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then the system displays search results matching the search criteria
@@ -652,7 +652,7 @@ Feature: User Administration: Manage Sponsor Organisations
         And I capture the page screenshot
         Then I can see the check and remove user profile page
         And I click the 'Back' link on the 'Check_Remove_User_Profile_Page'
-        Then I can see the user list page of the review body
+        Then I can see the user list page of the 'review body'
         Examples:
             | Status_Enabled | Status_Disabled |
             | Enabled        | Disabled        |
@@ -666,7 +666,7 @@ Feature: User Administration: Manage Sponsor Organisations
         And I can see the review body profile page
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
         And I capture the page screenshot
-        Then I can see the user list page of the review body
+        Then I can see the user list page of the 'review body'
         And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
         When I enter 'QA Automation' into the search field
         And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
@@ -674,14 +674,14 @@ Feature: User Administration: Manage Sponsor Organisations
         And I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
         And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
         And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
-        Then I can see the user list page of the review body
+        Then I can see the user list page of the 'review body'
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         When I click the 'Remove' link on the 'Review_Body_User_List_Page'
         And I capture the page screenshot
         Then I can see the check and remove user profile page
         And I click the 'Back' link on the 'Check_Remove_User_Profile_Page'
-        Then I can see the user list page of the review body
+        Then I can see the user list page of the 'review body'
         Examples:
             | Status_Enabled | Status_Disabled |
             | Enabled        | Disabled        |

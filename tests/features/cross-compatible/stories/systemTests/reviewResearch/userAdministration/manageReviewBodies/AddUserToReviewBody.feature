@@ -6,7 +6,7 @@ Feature: User Administration: Manage Review Bodies - Add user to review body
         And I select a 'QA Automation' review Body to View and Edit which is 'Enabled'
         And I can see the review body profile page
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
-        And I can see the user list page of the review body
+        And I can see the user list page of the 'review body'
         And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
         And I can see the search for user to add to review body page
         And I capture the page screenshot
@@ -120,7 +120,7 @@ Feature: User Administration: Manage Review Bodies - Add user to review body
         And I have navigated to the 'Review_Body_Profile_Page'
         And I capture the page screenshot
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
-        And I can see the user list page of the review body
+        And I can see the user list page of the 'review body'
         And I capture the page screenshot
         When I fill the search input for searching 'review body users' with 'the newly added users email' as the search query
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
