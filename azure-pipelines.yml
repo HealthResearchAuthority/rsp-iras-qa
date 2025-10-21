@@ -15,8 +15,7 @@ schedules:
         - main
     always: true
 
-pool:
-  vmImage: 'manageddevopspool'
+pool: 'manageddevopspool'
 
 parameters:
   - name: platform
