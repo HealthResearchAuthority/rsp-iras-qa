@@ -2,10 +2,10 @@ import { expect, Locator, Page } from '@playwright/test';
 import * as projectDetailsIRASPageTestData from '../../../resources/test_data/iras/make_changes/project_details_iras_data.json';
 import { getSharpointGraphClient } from '../../../utils/UtilFunctions';
 import { format as csvFormat } from '@fast-csv/format';
-import { Readable, Transform } from 'stream';
-import { pipeline } from 'stream/promises';
+import { Readable, Transform } from 'node:stream';
+import { pipeline } from 'node:stream/promises';
 import csvParser from 'csv-parser';
-import { TextDecoder } from 'util';
+import { TextDecoder } from 'node:util';
 import CommonItemsPage from '../../Common/CommonItemsPage';
 //Declare Page Objects
 export default class ProjectDetailsIRASPage {
@@ -102,10 +102,10 @@ export default class ProjectDetailsIRASPage {
           .api(`/drives/${sharePointDriveId}/root:/${csvFilePath}:/content`)
           .header('If-Match', etag)
           .put(uploadBuffer);
-        if (!currentIRASID) {
-          throw new Error();
-        } else {
+        if (currentIRASID) {
           foundIRASID = currentIRASID;
+        } else {
+          throw new Error('No IRAS ID found');
         }
         break;
       } catch (err: any) {
