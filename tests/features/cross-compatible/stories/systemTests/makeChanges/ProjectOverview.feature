@@ -1,5 +1,5 @@
 @ProjectOverview @ApplicantUser @SystemTest
-Feature: Project Overview
+Feature: Create Amendment - Project Overview
 
     Background:
         Given I have navigated to the my research projects page
@@ -12,6 +12,10 @@ Feature: Project Overview
         And I fill the unique iras id in project details iras page
         And I capture the page screenshot
         And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+        Then I can see the project identifiers page
+        Then I fill the project identifiers page with '<Project_Identifiers>'
+        And I capture the page screenshot
+        When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
         And I fill the project details title page with 'Valid_Data_All_Fields'
         And I capture the page screenshot
         When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
@@ -35,36 +39,49 @@ Feature: Project Overview
         And I click the '<Project_Details>' link on the my research page
         And I can see the project overview page
         And I capture the page screenshot
-        And I can see the project details on project overview page for '<Project_Details>'
+        And I can see the 'created' project details on project overview page for '<Project_Details>'
         And I can see the '<Validation_Text_Project>' ui labels on the project overview page
-        And I validate the data displayed '<Project_Details>' in the project details tab of project overview page
+        And I validate the 'created' data for '<Project_Details>' is displayed in the project details tab of project overview page
         And I capture the page screenshot
-        When I click the 'Key_Project_Roles' link on the 'Project_Overview_Page'
-        And I can see the '<Key_Project_Roles_Details>' in the key project roles tab of project overview page
+        When I click the 'Project_Team' link on the 'Project_Overview_Page'
+        And I validate the 'created' data for '<Project_Team_Details>' is displayed in the project team tab of project overview page
         And I capture the page screenshot
         Then I click the 'Research_Locations' link on the 'Project_Overview_Page'
-        And I can see the '<Research_Locations_Details>' in the research locations tab of project overview page
+        And I validate the data for '<Research_Locations_Details>' is displayed in the research locations tab of project overview page
         And I capture the page screenshot
 
         Examples:
-            | Validation_Text_Research | Project_Details       | Research_Project_Details | Validation_Text_Project | Key_Project_Roles_Details | Research_Locations_Details               |
-            | Label_Texts              | Valid_Data_All_Fields | Valid_Data_All_Fields    | Label_Texts             | Valid_Data_All_Fields     | Valid_Research_Locations_Details_Nhs     |
-            | Label_Texts              | Valid_Data_All_Fields | Data_With_No_NHS_HSC     | Label_Texts             | Valid_Data_All_Fields     | Valid_Research_Locations_Details_Non_Nhs |
+            | Validation_Text_Research | Project_Details       | Research_Project_Details | Validation_Text_Project | Project_Team_Details  | Research_Locations_Details               |
+            | Label_Texts              | Valid_Data_All_Fields | Valid_Data_All_Fields    | Label_Texts             | Valid_Data_All_Fields | Valid_Research_Locations_Details_Nhs     |
+            | Label_Texts              | Valid_Data_All_Fields | Data_With_No_NHS_HSC     | Label_Texts             | Valid_Data_All_Fields | Valid_Research_Locations_Details_Non_Nhs |
 
-    @rsp-4876 @PostApprovalPage
-    #The project 5789415 and modifications were created manually and validations are for the specific project
-    Scenario: Validate the user is able to access the view the post approval details from the project overview page
-        When I navigate to the project overview page of a specific project
+    @ProjectOverviewTabs @rsp-4876 @rsp-5047 @rsp-5048 @rsp-5049 @rsp-5050 @KNOWN-DEFECT-RSP-5322
+    Scenario Outline: Validate the expected data is available and displayed on the project overview page
+        And I navigate to the project overview page of the '<Project_Name>' project
         And I capture the page screenshot
+        And I can see the 'existing' project details on project overview page for '<Project_Name>'
+        And I can see the project status for '<Project_Name>' displayed on the project overview page
+        When I click the 'Project_Details' link on the 'Project_Overview_Page'
+        And I capture the page screenshot
+        Then I validate the 'existing' data for '<Project_Name>' is displayed in the project details tab of project overview page
+        When I click the 'Project_Team' link on the 'Project_Overview_Page'
+        And I capture the page screenshot
+        Then I validate the 'existing' data for '<Project_Name>' is displayed in the project team tab of project overview page
+        When I click the 'Research_Locations' link on the 'Project_Overview_Page'
+        And I capture the page screenshot
+        Then I validate the data for '<Project_Name>' is displayed in the research locations tab of project overview page
         When I click the 'Post_Approval' link on the 'Project_Overview_Page'
         And I capture the page screenshot
-        And I can see the 'Label_Texts_Post_Approval' ui labels on the project overview page
-        And I can see the status of modifications displayed is 'Modification_Status_Draft'
+        Then I can see the 'Post_Approval_Tab' ui labels on the project overview page
+        Examples:
+            | Project_Name               |
+            | Kilmarnock_Cancer_Research |
+            | Swansea_ACL_Trials         |
 
-    @rsp-4876 @PostApprovalPageSort
+    @rsp-4876 @PostApprovalPageSort @KNOW-DEFECT-RSP-TBD-MOD-ID-SORT
     #The project 5789415 and modifications were created manually and validations are for the specific project
     Scenario Outline: Validate the user is able to sort the post approval fields
-        When I navigate to the project overview page of a specific project
+        When I navigate to the project overview page of the 'Test_Project' project
         And I capture the page screenshot
         When I click the 'Post_Approval' link on the 'Project_Overview_Page'
         And the default page size should be 'twenty'
@@ -84,7 +101,7 @@ Feature: Project Overview
     @rsp-4876 @PostApprovalPaginationFirstPage
     #The project 5789415 and modifications were created manually and validations are for the specific project
     Scenario Outline: Verify pagination in post approval page when user is on the first page
-        When I navigate to the project overview page of a specific project
+        When I navigate to the project overview page of the 'Test_Project' project
         And I capture the page screenshot
         When I click the 'Post_Approval' link on the 'Project_Overview_Page'
         And I capture the page screenshot
@@ -104,7 +121,7 @@ Feature: Project Overview
     @rsp-4876 @PostApprovalPaginationLastPage
     #The project 5789415 and modifications were created manually and validations are for the specific project
     Scenario Outline: Verify pagination in post approval page when user is on the last page
-        When I navigate to the project overview page of a specific project
+        When I navigate to the project overview page of the 'Test_Project' project
         And I capture the page screenshot
         When I click the 'Post_Approval' link on the 'Project_Overview_Page'
         And I capture the page screenshot
@@ -121,21 +138,21 @@ Feature: Project Overview
             | page number       |
             | previous link     |
 
-    @rsp-4545 @ProjectDocumentsPage
     #Documents were uploaded manually to the project id 5789415 and validations are for the specific project
+    @rsp-4545 @ProjectDocumentsTab
     Scenario: Validate the user is able to access and view the project documents details from the project overview page
-        When I navigate to the project overview page of a specific project
+        When I navigate to the project overview page of the 'Test_Project' project
         And I capture the page screenshot
         When I click the 'Project_Documents' link on the 'Project_Overview_Page'
         And I capture the page screenshot
-        And I validate the ui labels using 'Label_Texts_Project_Documents' on the project documents page
+        And I can see the 'Project_Documents_Tab' ui labels on the project overview page
         And the default page size should be 'twenty'
         And I can see the list is sorted by default in the alphabetical order of the 'document type'
 
     @rsp-4545 @ProjectDocumentsPaginationFirstPage
     #Documents were uploaded manually to the project id 5789415 and validations are for the specific project
     Scenario Outline: Verify pagination in project documents page when user is on the first page
-        When I navigate to the project overview page of a specific project
+        When I navigate to the project overview page of the 'Test_Project' project
         And I capture the page screenshot
         When I click the 'Project_Documents' link on the 'Project_Overview_Page'
         And I capture the page screenshot
@@ -156,7 +173,7 @@ Feature: Project Overview
     @rsp-4545 @ProjectDocumentsPaginationLastPage
     #Documents were uploaded manually to the project id 5789415 and validations are for the specific project
     Scenario Outline: Verify pagination in project documents page when user is on the last page
-        When I navigate to the project overview page of a specific project
+        When I navigate to the project overview page of the 'Test_Project' project
         And I capture the page screenshot
         When I click the 'Project_Documents' link on the 'Project_Overview_Page'
         And I capture the page screenshot
