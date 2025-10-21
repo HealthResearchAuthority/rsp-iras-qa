@@ -1408,3 +1408,17 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityProfileSettingsPage @ApplicantUser
+  Scenario: Profile settings page
+    Given I have navigated to the 'Profile_Settings_Page'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityEditYourProfilePage @ApplicantUser
+  Scenario: Edit your profile page
+    Given I have navigated to the 'Edit_Your_Profile_Page'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations

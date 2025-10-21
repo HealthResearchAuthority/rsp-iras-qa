@@ -1,0 +1,32 @@
+{
+  "Edit_Your_Profile_Page": {
+    "page_heading": "Edit your profile",
+    "one_login_header": "One Login details",
+    "profile_details_header": "Profile details",
+    "make_change_header": "Making a change to your One Login details",
+    "make_change_prefix": "Log in through your",
+    "make_change_suffix": "if you want to edit/update your email address and telephone number",
+    "email_address_label": "Email address",
+    "telephone_label": "Telephone",
+    "title_label": "Title",
+    "first_name_label": "First name",
+    "last_name_label": "Last name",
+    "job_title_label": "Job title",
+    "organisation_label": "Organisation"
+  },
+  "Users": {
+    "Applicant_User": {
+      "One_Login_Details": {
+        "email_address_value": "futureiras.automation@hra.nhs.uk",
+        "telephone_value": "07000000000"
+      },
+      "Profile_Details": {
+        "title_value": "Mr",
+        "first_name_value": "Applicant User",
+        "last_name_value": "Applicant",
+        "job_title_value": "User/Researcher",
+        "organisation_value": "HRA"
+      }
+    }
+  }
+}
