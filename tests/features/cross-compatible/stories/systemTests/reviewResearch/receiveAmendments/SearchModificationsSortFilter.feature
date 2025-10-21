@@ -1,17 +1,42 @@
-@ReceiveAmendments @StudyWideReviewer @SystemTest @rsp-4011 @rsp-4016 @rsp-4289
-Feature: Approvals - Advanced Filter and Search combinations in the Search modifications page
+@ReceiveAmendments @SearchModificationsSortFilter @StudyWideReviewer @SystemTest @rsp-4011 @rsp-4016 @rsp-4289 @DataIssueNeedsFixing
+Feature: Receive Amendments: Filter, Search and Sort the Search modifications page
 
         Background:
-                Given I have navigated to the 'Home_Page'
-                When I click the 'Approvals' link on the 'Home_Page'
-                Then I can see the approvals home page
-                And I click the 'Search' link on the 'Approvals_Page'
-                Then I can see the 'Search_Modifications_Page'
+                Given I have navigated to the 'Search_Modifications_Page'
                 And I capture the page screenshot
 
         # Known Issues :-
         # I 'cannot' see the advanced filters panel-fail for Advanced_Filters_Nth- JS DIsabled (Sponsor is selected)
         # When JS Enabled >> Sponsor org is taking too long to display data >>JS DIsabled only for Sponsor selection -Advanced_Filters_Nth
+
+        @SortModificationsByColumn @rsp-4090
+        Scenario Outline: Verify the user is able to sort the list of modifications by ascending and descending order for each results table column
+                And I fill the search input for searching 'modifications' with 'Valid_Iras_Id_Prefix' as the search query
+                And I click the 'Search' button on the 'Search_Modifications_Page'
+                And I can now see a table of search results for modifications received for approval
+                And I can see the list of modifications received for approval is sorted by 'descending' order of the 'modification id'
+                And I capture the page screenshot
+                When I click the '<Sort_Button>' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                Then I can see the list of modifications received for approval is sorted by 'ascending' order of the '<Sort_Field>'
+                When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
+                And I capture the page screenshot
+                Then I can see the list of modifications received for approval is sorted by 'ascending' order of the '<Sort_Field>'
+                When I click the '<Sort_Button>' button on the 'Search_Modifications_Page'
+                And I capture the page screenshot
+                Then I am on the 'first' page and it should be visually highlighted to indicate the active page the user is on
+                And I can see the list of modifications received for approval is sorted by 'descending' order of the '<Sort_Field>'
+                When I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
+                And I capture the page screenshot
+                Then I can see the list of modifications received for approval is sorted by 'descending' order of the '<Sort_Field>'
+
+                Examples:
+                        | Sort_Button         | Sort_Field          |
+                        | Modification_Id     | modification id     |
+                        | Short_Project_Title | short project title |
+                        | Modification_Type   | modification type   |
+                        | Chief_Investigator  | chief investigator  |
+                        | Lead_Nation         | lead nation         |
 
         @viewListOfModifications @ValidIrasIdAndAdvancedFilters @DefaultSorting @ActiveFilters @rsp-4118  @rsp-4293
         Scenario Outline: Verify the user is able to view the list of modifications by entering a valid IRAS ID, selecting the advanced filters, and clicking the 'Apply filters' button
