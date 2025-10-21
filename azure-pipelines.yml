@@ -16,7 +16,7 @@ schedules:
     always: true
 
 pool:
-  vmImage: 'Ubuntu-latest'
+  vmImage: 'manageddevopspool'
 
 parameters:
   - name: platform
