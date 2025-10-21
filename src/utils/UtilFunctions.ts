@@ -8,6 +8,8 @@ import * as fs from 'node:fs';
 import os from 'node:os';
 import * as fse from 'fs-extra';
 import path from 'node:path';
+import { Client } from '@microsoft/microsoft-graph-client';
+import { ClientSecretCredential } from '@azure/identity';
 
 const pathToCreateUserTestDataJson =
   './src/resources/test_data/iras/reviewResearch/userAdministration/manageUsers/create_user_profile_page_data.json';
@@ -623,4 +625,17 @@ export async function getFormattedDate(): Promise<string> {
   };
   const formattedDate = today.toLocaleDateString('en-GB', options);
   return formattedDate;
+}
+
+export async function getSharpointGraphClient(): Promise<Client> {
+  const tenantId = `${process.env.SHAREPOINT_TENANT_ID}`;
+  const clientId = `${process.env.SHAREPOINT_CLIENT_ID}`;
+  const clientSecret = `${process.env.SHAREPOINT_CLIENT_SECRET}`;
+  const credential = new ClientSecretCredential(tenantId, clientId, clientSecret);
+  const token = await credential.getToken('https://graph.microsoft.com/.default');
+  const client = Client.init({
+    defaultVersion: 'v1.0',
+    authProvider: (done) => done(null, token?.token ?? ''),
+  });
+  return client;
 }

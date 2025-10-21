@@ -1,5 +1,12 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as projectDetailsIRASPageTestData from '../../../resources/test_data/iras/make_changes/project_details_iras_data.json';
+import { getSharpointGraphClient } from '../../../utils/UtilFunctions';
+import { format as csvFormat } from '@fast-csv/format';
+import { Readable, Transform } from 'stream';
+import { pipeline } from 'stream/promises';
+import csvParser from 'csv-parser';
+import { TextDecoder } from 'util';
+import CommonItemsPage from '../../Common/CommonItemsPage';
 //Declare Page Objects
 export default class ProjectDetailsIRASPage {
   readonly page: Page;
@@ -41,5 +48,81 @@ export default class ProjectDetailsIRASPage {
 
   async getUniqueIrasId(): Promise<string> {
     return this._unique_iras_id;
+  }
+
+  async getValidIRASFromLegacySharepoint(): Promise<string> {
+    const sharePointDriveId = `${process.env.SHAREPOINT_DRIVE_ID}`;
+    const csvFilePath = this.projectDetailsIRASPageTestData.Project_Details_IRAS_Page.legacy_iras_lookup_file_path;
+    const maxRetries = new CommonItemsPage(this.page).commonTestData.sharepoint_max_retries;
+    const client = await getSharpointGraphClient();
+    let attempt = 0;
+    let foundIRASID: string | null = null;
+    while (attempt <= maxRetries) {
+      let currentIRASID: string | null = null;
+      try {
+        const fileMeta: any = await client.api(`/drives/${sharePointDriveId}/root:/${csvFilePath}:/`).get();
+        const etag = fileMeta['@odata.etag'] || fileMeta.eTag;
+        const downloadUrl = fileMeta['@microsoft.graph.downloadUrl'];
+        const response = await fetch(downloadUrl);
+        const nodeStream = Readable.fromWeb(
+          response.body as unknown as import('stream/web').ReadableStream<Uint8Array>
+        );
+        const decoder = new TextDecoder('utf-8');
+        const decodeStream = new Transform({
+          readableObjectMode: false,
+          transform(chunk, _encoding, callback) {
+            callback(null, decoder.decode(chunk, { stream: true }));
+          },
+          flush(callback) {
+            callback(null, decoder.decode());
+          },
+        });
+        const readStream = nodeStream.pipe(decodeStream);
+        const csvFormatter = csvFormat({ headers: true });
+        const outputBufferChunks: Buffer[] = [];
+        csvFormatter.on('data', (chunk) => {
+          outputBufferChunks.push(Buffer.from(chunk));
+        });
+        await pipeline(
+          readStream,
+          csvParser(),
+          async function* (source) {
+            for await (const row of source) {
+              if (!currentIRASID && row.Status?.trim().toLowerCase() !== 'used') {
+                currentIRASID = row.IRAS_ID;
+                row.Status = 'Used';
+              }
+              yield row;
+            }
+          },
+          csvFormatter
+        );
+        const uploadBuffer = Buffer.concat(outputBufferChunks);
+        await client
+          .api(`/drives/${sharePointDriveId}/root:/${csvFilePath}:/content`)
+          .header('If-Match', etag)
+          .put(uploadBuffer);
+        if (!currentIRASID) {
+          throw new Error();
+        } else {
+          foundIRASID = currentIRASID;
+        }
+        break;
+      } catch (err: any) {
+        if (err.statusCode === 412) {
+          attempt++;
+          if (attempt > maxRetries) {
+            throw new Error(
+              'Max retries reached due to concurrent updates in sharepoint. Not able to fetch the IRAS ID'
+            );
+          }
+          await new Promise((res) => setTimeout(res, 2000));
+          continue;
+        } else {
+          throw new Error('No IRAS ID found in the legacy lookup list in sharepoint');
+        }
+      }
+    }
+    return foundIRASID;
   }
 }
