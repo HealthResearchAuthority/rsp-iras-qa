@@ -636,7 +636,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
     And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
     Then I can see the user list page of the review body
-    When I enter the 'Email_Address' of the 'last' user shown on the current review body users list, into the search field
+    When I enter the 'Email_Address' of the 'last' user shown on the current 'review body' users list, into the search field
     And I click the 'Search' button on the 'Review_Body_User_List_Page'
     Then the system displays search results matching the search criteria
     When I Scan the page with the Axe Accessibilty Tool
@@ -670,7 +670,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
     And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
     Then I can see the user list page of the review body
-    When I enter the 'Email_Address' of the 'last' user shown on the current review body users list, into the search field
+    When I enter the 'Email_Address' of the 'last' user shown on the current 'review body' users list, into the search field
     And I click the 'Search' button on the 'Review_Body_User_List_Page'
     Then the system displays search results matching the search criteria
     When I click the 'Remove' link on the 'Review_Body_User_List_Page'
@@ -706,7 +706,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
     And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
     Then I can see the user list page of the review body
-    When I enter the 'Email_Address' of the 'last' user shown on the current review body users list, into the search field
+    When I enter the 'Email_Address' of the 'last' user shown on the current 'review body' users list, into the search field
     And I click the 'Search' button on the 'Review_Body_User_List_Page'
     Then the system displays search results matching the search criteria
     When I click the 'Remove' link on the 'Review_Body_User_List_Page'
@@ -744,7 +744,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
     And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
     Then I can see the user list page of the review body
-    When I enter the 'Email_Address' of the 'last' user shown on the current review body users list, into the search field
+    When I enter the 'Email_Address' of the 'last' user shown on the current 'review body' users list, into the search field
     And I click the 'Search' button on the 'Review_Body_User_List_Page'
     Then the system displays search results matching the search criteria
     When I click the 'Remove' link on the 'Review_Body_User_List_Page'

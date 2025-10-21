@@ -70,3 +70,46 @@ Feature: User Administration: Manage Sponsor Organisations - View user list page
         And I capture the page screenshot
         # And I can see the user list of the selected review body is sorted by default in the alphabetical order of the 'First Name'
         And I can see the user list of the selected sponsor organisation is sorted by default in the alphabetical order of the 'First Name'
+
+    @UserListSponsorOrgSearchResultsFound @UserListSponsorOrgBackToSponsorOrgProfileLink
+    Scenario Outline: Verify the user can search for the users in the user list page of selected sponsor organisation and navigate back to sponsor organisation profile page
+        When I enter 'QA Automation' into the search field
+        And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+        And I capture the page screenshot
+        Then the system displays 'sponsor organisations' matching the search criteria
+        And I can see the 'previously added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
+        And I capture the page screenshot
+        Then I click the view edit link of the 'previously added sponsor organisation'
+        And I capture the page screenshot
+        And I can see the sponsor organisation profile page
+        And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
+        And I capture the page screenshot
+        Then I can see the user list page of the sponsor organisation
+        And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
+        When I enter 'QA Automation' into the search field
+        And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+        When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+        And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+        Then I can see the user added successful message on sponsor organisation user list page
+        Then I can see the user list page of the sponsor organisation
+        And I capture the page screenshot
+        # And I click the 'Add_Another_User_To_The_Review_Body' link on the 'Confirmation_Page'
+        # And I click the 'Back' link on the 'Search_Add_User_Review_Body_Page'
+        When I enter the '<Field_Name>' of the '<Position>' user shown on the current 'sponsor organisation' users list, into the search field
+        And I capture the page screenshot
+        And I click the 'Search' button on the 'Review_Body_User_List_Page'
+        And I capture the page screenshot
+        Then the system displays search results matching the search criteria
+        When I click the 'Back_To_Review_Body_Profile' link on the 'Review_Body_User_List_Page'
+        Then I can see the review body profile page
+
+        Examples:
+            | Field_Name    | Position |
+            | First_Name    | First    |
+            | Last_Name     | First    |
+            | Email_Address | First    |
+            | First_Name    | Last     |
+            | Last_Name     | Last     |
+            | Email_Address | Last     |
+            | Full_Name     | First    |
+            | Full_Name     | Last     |

@@ -1394,3 +1394,26 @@ Then(
     }
   }
 );
+
+When(
+  'I enter the {string} of the {string} user shown on the current {string} users list, into the search field',
+  async ({ userListReviewBodyPage, commonItemsPage }, fieldKey: string, position: string, orgType: string) => {
+    if (orgType === 'review body' || orgType === 'sponsor organisation') {
+      if ((await userListReviewBodyPage.userListTableRows.count()) >= 2) {
+        let searchKey: string = '';
+        if (fieldKey === 'First_Name' || fieldKey === 'Last_Name' || fieldKey === 'Email_Address') {
+          searchKey = await userListReviewBodyPage.getSearchQueryFNameLNameEmail(position, fieldKey);
+        } else if (fieldKey === 'Full_Name') {
+          searchKey = await userListReviewBodyPage.getSearchQueryFullName(position);
+        }
+        const userListBeforeSearch = await commonItemsPage.getAllUsersFromTheTable();
+        const userValues: any = userListBeforeSearch.get('searchResultValues');
+        await userListReviewBodyPage.setUserListBeforeSearch(userValues);
+        await commonItemsPage.setSearchKey(searchKey);
+        commonItemsPage.search_text.fill(searchKey);
+      } else {
+        throw new Error(`There are no items in list to search`);
+      }
+    }
+  }
+);
