@@ -6,7 +6,7 @@ Feature: User Administration: Manage Sponsor Organisations - View user list page
         And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
         Then I can see the 'Manage_Sponsor_Organisations_Page'
 
-    @VerifyUserListNewSetupSponsorOrg @UserListSponsorOrgNoUsers
+    @VerifyUserListNewSetupSponsorOrg @UserListSponsorOrgNoUsers @KNOWN_DEFECT-RSP-5531 @TestOnly
     Scenario Outline: Verify the user can view the user list page of the newly setup sponsor organisation with no users
         When I authorise the rts api using '<RTS_API_Data>'
         Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation '<Setup_New_Sponsor_Organisation>' and  retrive country
@@ -23,8 +23,8 @@ Feature: User Administration: Manage Sponsor Organisations - View user list page
         Then I can see the 'Manage_Sponsor_Organisations_Page'
         Then I can see the sponsor organisation added successful message on manage sponsor organisation page
         And I capture the page screenshot
-        # And I can see the list is sorted by default in the alphabetical order of the 'Organisation Name'
-        # And I capture the page screenshot
+        And I can see the list is sorted by default in the alphabetical order of the 'Organisation Name'
+        And I capture the page screenshot
         When I enter 'name of the newly added sponsor organisation' into the search field
         And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
         And I can see the 'newly added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
@@ -34,19 +34,17 @@ Feature: User Administration: Manage Sponsor Organisations - View user list page
         And I can see the sponsor organisation profile page
         And I now see the sponsor organisation profile page with the selected '<Setup_New_Sponsor_Organisation>'
         And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
-        # Then I can see the user list page of the 'review body'
         Then I can see the user list page of the 'sponsor organisation'
         And I capture the page screenshot
-        # And I can see no users in the 'review body' with a message to add users to the 'review body'
         And I can see no users in the 'sponsor organisation' with a message to add users to the 'sponsor organisation'
         When I enter 'QA Automation' into the search field
         And I click the 'Search' button on the 'Sponsor_Org_User_List_Page'
         And I capture the page screenshot
-        # Then the system displays no results found message in the user list page of the review body
-        # Then the system displays no results found message in the user list page of the sponsor organisation
+        Then the no search results found message is displayed
+        And I capture the page screenshot
         Examples:
-            | Setup_New_Sponsor_Organisation  | Status_Enabled | RTS_API_Data         | RTS_Request                         |
-            | Sponsor_Organisation_ThirtyNine | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            | Setup_New_Sponsor_Organisation   | Status_Enabled | RTS_API_Data         | RTS_Request                         |
+            | Sponsor_Organisation_ThirtySeven | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
 
     @UserListSponsorOrgDefaultSort
     Scenario: Verify the user can view the user list page of any selected sponsor organisation and it is sorted by default in the alphabetical order of the 'First Name'
@@ -117,3 +115,25 @@ Feature: User Administration: Manage Sponsor Organisations - View user list page
             | Email_Address | Last     |
             | Full_Name     | First    |
             | Full_Name     | Last     |
+
+    @rsp-3890 @UserListReviewBodySearchMultiTerms @fail
+    Scenario Outline: Verify the review body users search utilises AND logic to produce accurate search results
+        And I navigate to the user list page of the 'User_Search_Test' review body
+        And I capture the page screenshot
+        When I fill the search input for searching 'users' with '<Initial_Search_Query>' as the search query
+        And I capture the page screenshot
+        And I click the 'Search' button on the 'Review_Body_User_List_Page'
+        And I capture the page screenshot
+        Then the system displays user records matching the search criteria
+        And the list displays 'multiple user records'
+        And I capture the page screenshot
+        When I fill the search input for searching 'users' with '<Second_Search_Query>' as the search query
+        And I capture the page screenshot
+        And I click the 'Search' button on the 'Review_Body_User_List_Page'
+        And I capture the page screenshot
+        Then the system displays user records matching the search criteria
+        And the list displays 'a single user record'
+        And I capture the page screenshot
+        Examples:
+            | Initial_Search_Query              | Second_Search_Query             |
+            | Admin_User_Full_Name_Email_Prefix | Admin_User_Full_Name_Full_Email |

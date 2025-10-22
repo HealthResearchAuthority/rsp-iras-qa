@@ -278,5 +278,10 @@
   "Search_Add_User_Sponsor_Org_Page": {
     "Search": "Search"
   },
-  "Check_Add_User_Sponsor_Org_Page": { "Add_User": "Add user" }
+  "Check_Add_User_Sponsor_Org_Page": {
+    "Add_User": "Add user"
+  },
+  "Sponsor_Org_User_List_Page": {
+    "Search": "Search"
+  }
 }
