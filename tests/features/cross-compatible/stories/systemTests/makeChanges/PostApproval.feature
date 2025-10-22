@@ -70,37 +70,3 @@ Feature: Post Approval Page
         And I create 'Change_To_Planned_End_Date' modification with 'Sponsor_reference_Details' and click on 'Submit_To_Regulator'
         Then I validate submitted date field value for 'Modification_Status_Approved' modifications and confirm 'Approved' status
         And I capture the page screenshot
-
-
-#Scenario 1 - Search and matching results display
-# search using modification id
-# matching results display
-
-#Scenario 2 - Search and no results
-# search using modification id
-# no matching records and display page as per figma
-
-#Scenario 3 - Label validation in advanced filters
-# All 5 options must be displayed
-
-#Scenario 4 - Advanced filters must work 
-#All filters to work in and logic
-
-#Scenario 5 - Advanced filters and Search
-#Is this a valid scenario ?
-
-#Error 1 - Submitted date range To field earlier than the start date
-#Error displayed The date you’ve selected is before the search above
-
-#Error 2 - Incorrect date submitted format
-#Error displayed Search from' date must be in the correct format’/ ‘Search to' date must be in the correct format
-
-#Submitted date - Only From date without a To date
-#Should take to date as current date as To date and display results
-
-#Submitted date - From date with future To date
-#Should take to date as current date as To date and display results
-
-#Clearing individual and clear all filters button
-# After search results are displayed, user should be able to click x button to clear individual filters or clear all filters
-
