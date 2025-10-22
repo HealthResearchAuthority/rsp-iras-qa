@@ -9,6 +9,10 @@ Then('I can see the {string} page for modifications', async ({ modificationsComm
   await modificationsCommonPage.assertOnModificationsPage(dataset);
 });
 
+Then('I can see the review all changes page', async ({ reviewAllChangesPage }) => {
+  await reviewAllChangesPage.assertOnReviewAllChangesPage();
+});
+
 Then(
   'I can see the modification page matching with the specific change using {string} dataset',
   async ({ modificationsCommonPage }, datasetName) => {
