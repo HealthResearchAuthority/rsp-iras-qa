@@ -56,7 +56,6 @@ export default class ProjectOverviewPage {
   readonly advanced_filters_project_documents: Locator;
   readonly search_project_documents: Locator;
   readonly results_count_project_documents: Locator;
-  readonly project_status: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -217,7 +216,6 @@ export default class ProjectOverviewPage {
       .locator('.search-filter-panel__button-inner')
       .getByText(this.projectOverviewPageTestData.Project_Documents_Tab.advanced_filters_project_documents);
     this.results_count_project_documents = this.page.locator('.search-filter-panel__count');
-    this.project_status = this.page.locator('.govuk-tag--blue');
   }
 
   //Page Methods
