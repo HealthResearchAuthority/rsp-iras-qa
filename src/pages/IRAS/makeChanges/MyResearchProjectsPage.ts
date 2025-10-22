@@ -114,28 +114,28 @@ export default class MyResearchProjectsPage {
     return sortedListAsNums.map(String);
   }
 
-  async getProjectDetails(expectedIrasId: string): Promise<Map<string, string[]>> {
+  async getProjectDetails(expectedIrasId: string): Promise<Map<string, string>> {
     let projectMap: any;
-    const displayedIrasId: string[] = [];
-    const displayedStatusValue: string[] = [];
-    const displayedProjectValue: string[] = [];
+    let displayedIrasId = '';
+    let displayedStatusValue = '';
+    let displayedProjectValue = '';
     const rows = await this.projectListRows.all();
     for (const row of rows) {
       const columns = await row.locator(this.listCell).allInnerTexts();
       if (columns[1] === expectedIrasId) {
         const irasId = confirmStringNotNull(columns[1]);
-        displayedIrasId.push(irasId);
+        displayedIrasId = irasId;
         const status = confirmStringNotNull(columns[3]);
-        displayedStatusValue.push(status);
+        displayedStatusValue = status;
         const project = confirmStringNotNull(columns[0]);
-        displayedProjectValue.push(project);
+        displayedProjectValue = project;
         projectMap = new Map([
           ['displayedStatusValue', displayedStatusValue],
           ['displayedProjectValue', displayedProjectValue],
           ['displayedIrasId', displayedIrasId],
         ]);
       }
-      if (displayedIrasId.length > 0) {
+      if (displayedIrasId) {
         return projectMap;
       }
     }
