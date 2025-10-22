@@ -236,7 +236,7 @@ export default class ModificationsCommonPage {
         reviewType: actualReviewType,
       });
     }
-    const reversedChangeNames = changeNames.reverse();
+    const reversedChangeNames = changeNames.toReversed();
     const overall = this.overallRankingForChanges;
     const firstActual = actualValuesArray[0];
 
@@ -280,7 +280,7 @@ export default class ModificationsCommonPage {
     }> = [];
     const relevantCards = [];
     const totalCards = await changeCards.count();
-    const reversedChangeNames = changeNames.reverse();
+    const reversedChangeNames = changeNames.toReversed();
     expect.soft(this.overall_modification_ranking_sub_heading).toBeVisible();
     expect.soft(this.ranking_sub_heading).toBeVisible();
     expect.soft(this.changes_sub_heading).toBeVisible();
