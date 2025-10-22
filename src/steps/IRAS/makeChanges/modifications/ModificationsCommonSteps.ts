@@ -58,21 +58,6 @@ Then(
 );
 
 Then(
-  'I create {string} and click on save for later on the select area of change page',
-  async ({ selectAreaOfChangePage, modificationsCommonPage, commonItemsPage }, dataset: string) => {
-    const modificationsDataset = modificationsCommonPage.modificationsCommonPageTestData[dataset];
-    const modificationDataValues = Object.keys(modificationsDataset);
-    for (let index = 0; index < modificationDataValues.length; index++) {
-      const modificationName = modificationDataValues[index];
-      const modificationDataset = modificationsDataset[modificationName];
-      const buttonValue = commonItemsPage.buttonTextData.Project_Overview_Page.Create_New_Modification;
-      await commonItemsPage.govUkButton.getByText(confirmStringNotNull(buttonValue)).click();
-      await selectAreaOfChangePage.selectAreaOfChangeAndSpecificChange(modificationDataset);
-    }
-  }
-);
-
-Then(
   'I keep note of the individual and overall ranking of changes created using {string}',
   async ({ modificationsCommonPage }, datasetName) => {
     const changesDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName];
@@ -302,18 +287,57 @@ Then(
   async ({ modificationsCommonPage }, statusDataset: string) => {
     const dataset = modificationsCommonPage.modificationsCommonPageTestData[statusDataset];
     const expectedStatus = dataset.status;
-    //let expectedSubmittedDate = dataset.submited_date;
+    let expectedSubmittedDate = dataset.submited_date;
     const expectedModificationID = await modificationsCommonPage.getModificationID();
     const modificationRecord = await modificationsCommonPage.getModificationPostApprovalPage();
     const modificationIDActual = modificationRecord.get('modificationIdValue');
     expect.soft(modificationIDActual[0]).toBe(expectedModificationID);
     const statusActual = modificationRecord.get('statusValue');
     expect.soft(statusActual[0]).toBe(expectedStatus);
-    //const actualDateSubmitted = modificationRecord.get('submittedDateValue');
-    // if (expectedSubmittedDate !== '') {
-    //expectedSubmittedDate = await getFormattedDate();
-    // }
-    // expect.soft(actualDateSubmitted[0]).toBe(expectedSubmittedDate);
+    const actualDateSubmitted = modificationRecord.get('submittedDateValue');
+    if (expectedSubmittedDate !== '') {
+      expectedSubmittedDate = await getFormattedDate();
+    }
+    expect.soft(actualDateSubmitted[0]).toBe(expectedSubmittedDate);
+  }
+);
+
+Then(
+  'I validate submitted date field value for {string} modifications and confirm {string} status',
+  async ({ modificationsCommonPage }, statusDataset: string, statusToCheck: string) => {
+    const dataset = modificationsCommonPage.modificationsCommonPageTestData[statusDataset];
+    const expectedStatus = dataset.status;
+    let expectedSubmittedDate: string;
+    if (statusDataset == 'Modification_Status_Indraft') {
+      expectedSubmittedDate = dataset.submited_date;
+    } else {
+      expectedSubmittedDate = await getFormattedDate();
+    }
+    let modificationMap: any;
+    const displayedModificationIdValue: string[] = [];
+    const displayedSubmittedDateValue: string[] = [];
+    const displayedStatusValue: string[] = [];
+    const rows = await modificationsCommonPage.modificationRows.all();
+    for (const row of rows) {
+      const columns = await row.locator(modificationsCommonPage.listCell).allInnerTexts();
+      const status = confirmStringNotNull(columns[5] ?? '');
+      if (status == statusToCheck) {
+        displayedStatusValue.push(status);
+        const modificationId = confirmStringNotNull(columns[0]);
+        displayedModificationIdValue.push(modificationId);
+        const submittedDate = confirmStringNotNull(columns[4] ?? '');
+        displayedSubmittedDateValue.push(submittedDate);
+        modificationMap = new Map([
+          ['displayedStatusValue', displayedStatusValue],
+          ['displayedSubmittedDateValue', displayedSubmittedDateValue],
+          ['displayedModificationIdValue', displayedModificationIdValue],
+        ]);
+        const actualStatus = modificationMap.get('displayedStatusValue');
+        const actualDateSubmitted = modificationMap.get('displayedSubmittedDateValue');
+        expect.soft(actualStatus[0]).toBe(expectedStatus);
+        expect.soft(actualDateSubmitted[0]).toBe(expectedSubmittedDate);
+      }
+    }
   }
 );
 
@@ -324,5 +348,53 @@ Then(
     const expectedStatus = dataset.status;
     const actualStatus = confirmStringNotNull(await modificationsCommonPage.status_value.textContent());
     expect.soft(actualStatus).toBe(expectedStatus);
+  }
+);
+
+Then(
+  'I create {string} and click on save for later on the select area of change page',
+  async ({ selectAreaOfChangePage, modificationsCommonPage, commonItemsPage }, dataset: string) => {
+    const modificationsDataset = modificationsCommonPage.modificationsCommonPageTestData[dataset];
+    const modificationDataValues = Object.keys(modificationsDataset);
+    for (let index = 0; index < modificationDataValues.length; index++) {
+      const modificationName = modificationDataValues[index];
+      const modificationDataset = modificationsDataset[modificationName];
+      const buttonValue = commonItemsPage.buttonTextData.Project_Overview_Page.Create_New_Modification;
+      await commonItemsPage.govUkButton.getByText(confirmStringNotNull(buttonValue)).click();
+      await selectAreaOfChangePage.selectAreaOfChangeAndSaveLater(modificationDataset);
+    }
+  }
+);
+
+Then(
+  'I create {string} modification with {string} and click on {string}',
+  async (
+    { commonItemsPage, sponsorReferencePage, modificationsCommonPage, selectAreaOfChangePage },
+    modificationDatasetName: string,
+    sponsorDatasetName: string,
+    buttonValue: string
+  ) => {
+    const modificationsDataset = modificationsCommonPage.modificationsCommonPageTestData[modificationDatasetName];
+    const sponsorDataset = modificationsCommonPage.modificationsCommonPageTestData[sponsorDatasetName];
+    const modificationDataValues = Object.keys(modificationsDataset);
+    for (let index = 0; index < modificationDataValues.length; index++) {
+      const modificationName = modificationDataValues[index];
+      const modificationDataset = modificationsDataset[modificationName];
+      await commonItemsPage.clickButton('Project_Overview_Page', 'Create_New_Modification');
+      await selectAreaOfChangePage.selectAreaOfChangeInModificationsPage(modificationDataset);
+      await modificationsCommonPage.createChangeModification(modificationName, modificationDataset);
+      await commonItemsPage.clickButton('Modification_Details_Page', 'Save_Continue_Review');
+      for (const key in sponsorDataset) {
+        if (Object.hasOwn(sponsorDataset, key)) {
+          await commonItemsPage.fillUIComponent(sponsorDataset, key, sponsorReferencePage);
+        }
+      }
+      await commonItemsPage.clickButton('Sponsor_Reference_Page', 'Save_Continue_Review');
+      await commonItemsPage.clickButton('Review_All_Changes_Page', 'Send_Modification_To_Sponsor');
+      if (buttonValue == 'Submit_To_Regulator') {
+        await commonItemsPage.clickButton('Modification_Sent_To_Sponsor_Page', 'Submit_To_Regulator');
+        await commonItemsPage.clickLink('Project_Overview_Page', 'Post_Approval');
+      }
+    }
   }
 );

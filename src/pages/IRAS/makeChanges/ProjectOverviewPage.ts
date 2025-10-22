@@ -45,6 +45,7 @@ export default class ProjectOverviewPage {
   readonly modification_type: Locator;
   readonly review_type: Locator;
   readonly category: Locator;
+  readonly date_submitted: Locator;
   readonly status: Locator;
   readonly view_project_overview_link: Locator;
   readonly document_type_project_documents: Locator;
@@ -162,6 +163,10 @@ export default class ProjectOverviewPage {
     });
     this.review_type = this.page.getByRole('button', {
       name: this.projectOverviewPageTestData.Label_Texts_Post_Approval.review_type,
+      exact: true,
+    });
+    this.date_submitted = this.page.getByRole('button', {
+      name: this.projectOverviewPageTestData.Label_Texts_Post_Approval.date_submitted,
       exact: true,
     });
     this.status = this.page.getByRole('button', {

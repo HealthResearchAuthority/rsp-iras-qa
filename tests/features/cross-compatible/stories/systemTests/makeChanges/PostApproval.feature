@@ -1,5 +1,5 @@
 @PostApprovalPage @ApplicantUser @SystemTest @jsEnabled
-Feature: Project Overview
+Feature: Post Approval Page
 
     Background:
         Given I have navigated to the my research projects page
@@ -20,37 +20,10 @@ Feature: Project Overview
         And I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
         Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
         Then I can see the project overview page
-        #Modification creation
         When I click the 'Post_Approval' link on the 'Project_Overview_Page'
         And I capture the page screenshot
-    #loop this for 5 times
-    #And I create 'Multiple_Modifications' and click on save for later on the select area of change page
-    # create 5 modifications for approved status
 
-    # Examples:
-    #     | Modifications          |
-    #     | Multiple_Modifications |
-
-    # @ValidateModificationStatusInDraftSaveForLater
-    # Scenario Outline: Validate indraft modifications
-    #     And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
-    #     And I can see the select area of change page
-    #     And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
-    #     And I select '<Area_Of_Change>' from area of change dropdown and '<Specific_Change>' from specific change dropdown
-    #     When I click the 'Save_For_Later' button on the 'Select_Area_Of_Change_Page'
-    #     # Then I can see the participating organisation page
-    #     # And I click the 'Save_For_Later' button on the 'Participating_Organisations_Page'
-    #     Then I can see the project overview page
-    #     Then I can see the modification status as 'Modification_Status_Indraft_Blank_Submitted_Date' on the post approval page
-
-    #     Examples:
-    #         | Area_Of_Change             | Specific_Change                                            |
-    #         | Participating_Organisation | Addition_Of_Sites_Option                                   |
-    #         | Participating_Organisation | Early_Closure_Withdrawal_Of_Sites_Option                   |
-    #         | Participating_Organisation | Addition_Of_Participant_Identification_Centres_Option      |
-    #         | Participating_Organisation | Early_Closure_Of_Participant_Identification_Centres_Option |
-
-    @rsp-4893 @ValidateNonReviewableModificationStatusesInDraftAndApproved @abc
+    @rsp-4893 @ValidateNonReviewableModificationStatusesInDraftAndApproved
     Scenario Outline: Validate modification status transition from in draft to approved for non reviewable modification
         And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
         And I can see the select area of change page
@@ -60,7 +33,7 @@ Feature: Project Overview
         Then I can see the project overview page
         And I capture the page screenshot
         Then I can see the modification progress saved successful message on project overview page
-        Then I can see the modification status as 'Modification_Status_Indraft_Blank_Submitted_Date' on the post approval page
+        Then I can see the modification status as 'Modification_Status_Indraft' on the post approval page
         And I click on the modification id hyperlink in the post approval tab
         And I can see the modifications details page
         And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
@@ -84,3 +57,50 @@ Feature: Project Overview
         Examples:
             | Changes                    |
             | Change_To_Planned_End_Date |
+
+    @rsp-4977 @ValidateSubmissionDatePostApprovalPage
+    Scenario Outline: Validate submitted date and status field values for non reviewable modifications
+        And I can see the 'Label_Texts_Post_Approval' ui labels on the project overview page
+        And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
+        Then I validate submitted date field value for 'Modification_Status_Indraft' modifications and confirm 'In draft' status
+        And I capture the page screenshot
+        And I create 'Change_To_Planned_End_Date' modification with 'Sponsor_reference_Details' and click on 'Submit_To_Regulator'
+        And I create 'Change_To_Planned_End_Date' modification with 'Sponsor_reference_Details' and click on 'Submit_To_Regulator'
+        And I create 'Change_To_Planned_End_Date' modification with 'Sponsor_reference_Details' and click on 'Submit_To_Regulator'
+        And I create 'Change_To_Planned_End_Date' modification with 'Sponsor_reference_Details' and click on 'Submit_To_Regulator'
+        Then I validate submitted date field value for 'Modification_Status_Approved' modifications and confirm 'Approved' status
+        And I capture the page screenshot
+
+
+#Scenario 1 - Search and matching results display
+# search using modification id
+# matching results display
+
+#Scenario 2 - Search and no results
+# search using modification id
+# no matching records and display page as per figma
+
+#Scenario 3 - Label validation in advanced filters
+# All 5 options must be displayed
+
+#Scenario 4 - Advanced filters must work 
+#All filters to work in and logic
+
+#Scenario 5 - Advanced filters and Search
+#Is this a valid scenario ?
+
+#Error 1 - Submitted date range To field earlier than the start date
+#Error displayed The date you’ve selected is before the search above
+
+#Error 2 - Incorrect date submitted format
+#Error displayed Search from' date must be in the correct format’/ ‘Search to' date must be in the correct format
+
+#Submitted date - Only From date without a To date
+#Should take to date as current date as To date and display results
+
+#Submitted date - From date with future To date
+#Should take to date as current date as To date and display results
+
+#Clearing individual and clear all filters button
+# After search results are displayed, user should be able to click x button to clear individual filters or clear all filters
+

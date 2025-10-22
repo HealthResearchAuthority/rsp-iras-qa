@@ -125,7 +125,7 @@
       "where_organisation_change_affect_non_nhs_question_checkbox": ["England"]
     }
   },
-  "Multiple_Modifications": {
+  "Multiple_Modifications_In_Draft": {
     "Modification_One": {
       "area_of_change_dropdown": "Participating organisations",
       "specific_change_dropdown": "Early closure or withdrawal of research sites"
@@ -147,7 +147,7 @@
       "specific_change_dropdown": "Addition of sites undertaking the same activities as existing sites"
     }
   },
-  "Modification_Status_Indraft_Blank_Submitted_Date": {
+  "Modification_Status_Indraft": {
     "status": "In draft",
     "submited_date": ""
   },
@@ -166,5 +166,12 @@
       "will_some_or_all_organisations_be_affected_question_radio": "Some",
       "will_nhs_hsc_organisations_require_additional_resources_question_radio": "No"
     }
+  },
+  "Sponsor_reference_Details": {
+    "sponsor_modification_reference_textbox": "Sponsor Reference Text",
+    "sponsor_modification_date_day_textbox": "01",
+    "sponsor_modification_date_month_dropdown": "January",
+    "sponsor_modification_date_year_textbox": "2030",
+    "sponsor_summary_textbox": "This is a test"
   }
 }

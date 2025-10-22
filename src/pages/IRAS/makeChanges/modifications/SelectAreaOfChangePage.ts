@@ -92,7 +92,7 @@ export default class ModificationsSelectAreaOfChangePage {
       .click();
   }
 
-  async selectAreaOfChangeAndSpecificChange(dataset: any) {
+  async selectAreaOfChangeAndSaveLater(dataset: any) {
     const commonItemsPage = new CommonItemsPage(this.page);
     for (const key in dataset) {
       if (Object.hasOwn(dataset, key)) {

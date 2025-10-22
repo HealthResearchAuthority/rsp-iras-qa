@@ -55,6 +55,7 @@
     "modification_type": "Modification type",
     "review_type": "Review type",
     "category": "Category",
+    "date_submitted":"Date submitted",
     "status": "Status"
   },
   "Label_Texts_Project_Documents": {
