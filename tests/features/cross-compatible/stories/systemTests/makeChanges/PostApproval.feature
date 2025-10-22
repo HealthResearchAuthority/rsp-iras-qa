@@ -41,7 +41,7 @@ Feature: Post Approval Page
         Then I can see the add sponsor reference page
         Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
         When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
-        Then I can see the review all changes page
+        Then I can see the review all changes modifications page
         And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
         Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
         Then I click the 'Submit_To_Regulator' button on the 'Modification_Sent_To_Sponsor_Page'
@@ -50,7 +50,7 @@ Feature: Post Approval Page
         And I capture the page screenshot
         Then I can see the modification status as 'Modification_Status_Approved' on the post approval page
         And I click on the modification id hyperlink in the post approval tab
-        Then I can see the review all changes page
+        Then I can see the review all changes modifications page
         And I validate the status 'Modification_Status_Approved' is displayed on modifications page
         And I capture the page screenshot
 
