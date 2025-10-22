@@ -8,7 +8,8 @@
     "affected_organisation_types_label": "Affected organisation types",
     "affected_nhs_hsc_locations_label": "Affected NHS/HSC organisation locations",
     "portion_of_nhs_hsc_organisations_affected_label": "Portion of NHS/HSC organisations affected",
-    "additional_resource_implications_label": "Additional resource implications"
+    "additional_resource_implications_label": "Additional resource implications",
+    "details_describing_this_change_label": "Details describing this change"
   },
   "Label_Texts_Non_Nhs": {
     "new_planned_project_end_date_label": "New planned project end date",
