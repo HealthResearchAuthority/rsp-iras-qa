@@ -1,5 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../hooks/CustomFixtures';
+import config from '../../../../playwright.config';
 
 const { Then } = createBdd(test);
 
@@ -57,3 +58,45 @@ Then('I validate lead nation radio option for {string}', async ({ reseachLocatio
 Then('I validate lead nation radio option when javascript disabled', async ({ reseachLocationsPage }) => {
   await expect(reseachLocationsPage.lead_nation_radio.first()).toBeVisible();
 });
+
+Then(
+  'I validate the guidance content displayed based on the data entered using {string} dataset on the research locations page',
+  async ({ commonItemsPage, reseachLocationsPage, $tags }, datasetName: string) => {
+    const dataset = reseachLocationsPage.researchLocationsPageTestData[datasetName];
+    if (
+      dataset.is_nhs_hsc_organisation_radio.toLowerCase() === 'yes' ||
+      $tags.includes('@jsDisabled') ||
+      !config.projects?.[1].use?.javaScriptEnabled
+    ) {
+      await commonItemsPage.verifyDetailsExpanded('closed', reseachLocationsPage.details_component);
+      await reseachLocationsPage.details_component
+        .getByText(
+          reseachLocationsPage.researchLocationsPageTestData.Research_Locations_Page.guidance_header_lead_nation
+        )
+        .click();
+      await commonItemsPage.verifyDetailsExpanded('open', reseachLocationsPage.details_component);
+      await expect(
+        reseachLocationsPage.details_component.getByText(
+          reseachLocationsPage.researchLocationsPageTestData.Research_Locations_Page.guidance_body_lead_nation
+        )
+      ).toBeVisible();
+      await reseachLocationsPage.details_component
+        .getByText(
+          reseachLocationsPage.researchLocationsPageTestData.Research_Locations_Page.guidance_header_lead_nation
+        )
+        .click();
+      await commonItemsPage.verifyDetailsExpanded('closed', reseachLocationsPage.details_component);
+      await reseachLocationsPage.details_component
+        .getByText(
+          reseachLocationsPage.researchLocationsPageTestData.Research_Locations_Page.guidance_header_lead_nation
+        )
+        .click();
+    } else {
+      await expect(
+        reseachLocationsPage.details_component.getByText(
+          reseachLocationsPage.researchLocationsPageTestData.Research_Locations_Page.guidance_header_lead_nation
+        )
+      ).toBeHidden();
+    }
+  }
+);

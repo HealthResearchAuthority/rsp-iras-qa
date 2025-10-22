@@ -68,6 +68,7 @@ Feature: Create Amendment - Create Project - Regression Tests
     Then I can see the '<Validation_Text>' ui labels on the research locations page
     And I capture the page screenshot
     Then I fill the research locations page with '<Research_Locations>'
+    And I validate the guidance content displayed based on the data entered using '<Research_Locations>' dataset on the research locations page
     And I capture the page screenshot
     When I click the '<Navigation_Button_Third>' button on the 'Research_Locations_Page'
     Then I can see the project identifiers page
