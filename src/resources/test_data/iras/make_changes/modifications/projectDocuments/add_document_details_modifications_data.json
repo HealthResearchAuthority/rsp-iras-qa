@@ -34,8 +34,8 @@
     "document_type_dropdown": "Protocol / Clinical Investigation Plan",
     "sponsor_document_version_text": "1.1",
     "sponsor_document_day_text": "10",
-    "sponsor_document_month_dropdown": "January",
-    "sponsor_document_year_text": "2030",
+    "sponsor_document_month_dropdown": "October",
+    "sponsor_document_year_text": "2025",
     "document_previously_approved_radio": "Yes"
   },
   "New_Valid_Data_Fields": {
@@ -153,5 +153,99 @@
     "sponsor_document_month_dropdown": "January",
     "sponsor_document_year_text": "2020",
     "document_previously_approved_radio": "Yes"
+  },
+  "Invalid_Day_Number": {
+    "sponsor_document_day_text": "32",
+    "sponsor_document_month_dropdown": "December",
+    "sponsor_document_year_text": "2028"
+  },
+  "Invalid_Day_Letters": {
+    "sponsor_document_day_text": "o1",
+    "sponsor_document_month_dropdown": "January",
+    "sponsor_document_year_text": "2028"
+  },
+  "Invalid_Year_Number_1": {
+    "sponsor_document_day_text": "1",
+    "sponsor_document_month_dropdown": "January",
+    "sponsor_document_year_text": "28"
+  },
+  "Invalid_Year_Number_2": {
+    "sponsor_document_day_text": "1",
+    "sponsor_document_month_dropdown": "January",
+    "sponsor_document_year_text": "'28"
+  },
+  "Invalid_Year_Letters": {
+    "sponsor_document_day_text": "1",
+    "sponsor_document_month_dropdown": "January",
+    "sponsor_document_year_text": "'2ooo"
+  },
+  "Invalid_Date_Future": {
+    "sponsor_document_day_text": "1",
+    "sponsor_document_month_dropdown": "January",
+    "sponsor_document_year_text": "'2030"
+  },
+  "Invalid_Date_No_Day": {
+    "sponsor_document_day_text": "",
+    "sponsor_document_month_dropdown": "January",
+    "sponsor_document_year_text": "2028"
+  },
+  "Invalid_Date_No_Month": {
+    "sponsor_document_day_text": "1",
+    "sponsor_document_month_dropdown": "Choose month",
+    "sponsor_document_year_text": "2028"
+  },
+  "Invalid_Date_No_Year": {
+    "sponsor_document_day_text": "1",
+    "sponsor_document_month_dropdown": "January",
+    "sponsor_document_year_text": ""
+  },
+  "Invalid_Date_No_Day_No_Month": {
+    "sponsor_document_day_text": "",
+    "sponsor_document_month_dropdown": "",
+    "sponsor_document_year_text": "2028"
+  },
+  "Invalid_Date_No_Day_No_Year": {
+    "sponsor_document_day_text": "",
+    "sponsor_document_month_dropdown": "January",
+    "sponsor_document_year_text": ""
+  },
+  "Invalid_Date_No_Month_No_Year": {
+    "sponsor_document_day_text": "1",
+    "sponsor_document_month_dropdown": "",
+    "sponsor_document_year_text": ""
+  },
+  "Invalid_Date_No_Date_No_Month_No_Year": {
+    "sponsor_document_day_text": "",
+    "sponsor_document_month_dropdown": "",
+    "sponsor_document_year_text": ""
+  },
+  "Error_Validation": {
+    "No_Sponsor_Document_Date_Error": {
+      "sponsor_document_date_summary_text": "Enter a sponsor document date"
+    },
+    "No_Sponsor_Document_Date_Day_Error": {
+      "sponsor_document_day_text": "Date must include a day"
+    },
+    "No_Sponsor_Document_Date_Month_Error": {
+      "sponsor_document_day_text": "Date must include a month"
+    },
+    "No_Sponsor_Document_Date_Year_Error": {
+      "sponsor_document_day_text": "Date must include a year"
+    },
+    "No_Sponsor_Document_Date_Month_Year_Error": {
+      "sponsor_document_day_text": "Date must include a month and year"
+    },
+    "No_Sponsor_Document_Date_Day_Month_Error": {
+      "sponsor_document_day_text": "Date must include a day and month"
+    },
+    "No_Sponsor_Document_Date_Day_Year_Error": {
+      "sponsor_document_day_text": "Date must include a day and year"
+    },
+    "Invalid_Sponsor_Document_Date_Error": {
+      "sponsor_document_day_text": "Enter a date in the correct format"
+    },
+    "Invalid_Sponsor_Document_Future_Date_Error": {
+      "sponsor_document_day_text": "Date must be today or a past date"
+    }
   }
 }
