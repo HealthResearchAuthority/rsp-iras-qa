@@ -880,9 +880,9 @@ export default class CommonItemsPage {
   }
 
   async getPageNumber(currentUrl: string) {
-    const parts: string[] = currentUrl.split('?');
-    const pageName: string[] = parts[1].split('&');
-    const pageNumber = Number.parseInt(pageName[0].split('=')[1], 10);
+    const parts: string[] = currentUrl.split('pageNumber=');
+    const pageName: string[] = parts[1].split('&pageSize');
+    const pageNumber = Number.parseInt(pageName[0]);
     return pageNumber;
   }
 

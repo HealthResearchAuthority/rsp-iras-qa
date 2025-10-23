@@ -1,13 +1,11 @@
 {
   "Sponsor_Organisation_User_List_Page": {
-    "page_heading": "Users for ",
+    "title": "Users for sponsor organisation - Manage sponsor organisations - System administration - Plan and manage health and care research",
+    "heading_prefix_label": "Users for ",
     "guidance_text": "Search for an existing user to add to this sponsor organisation",
-    "no_results_heading": "No results found",
-    "no_results_guidance_text": "Check your spelling or enter another search term and try again. If no results are found, go to Manage users where you can check if a user profile exists and create one if needed.",
     "search_box_label": "Find a user",
     "search_box_hint_text": "You can search by first name, last name or email address",
     "search_button": "Search",
-    "back_to_users_link": "Back to Users for ",
     "Column_Header_Labels": {
       "first_name_label": "First name",
       "last_name_label": "Last name",
@@ -19,7 +17,17 @@
     "user_added_to_sponsor_organisation_success_message_header_text": "Success",
     "user_added_to_sponsor_organisation__success_message_text": "User added to this organisation"
   },
-  "Review_Body_Ids": {
-    "User_Search_Test": "c81d6a77-bcf1-407c-8295-104ddf4227b1"
+  "Search_For_Users_In_Sponsor_Organisations": {
+    "Search_Queries": {
+      "Existing_QA_User_First_Name": { "search_input_text": "QA Automation First Name Test" },
+      "Existing_QA_User_Last_Name": { "search_input_text": "Test Last Name" },
+      "Existing_QA_User_Email": { "search_input_text": "QAAutomation2025" },
+      "Non_Existant_User_Data": { "search_input_text": "ThisShouldNot ReturnAResult" },
+      "Leading_White_Space_User_Data": { "search_input_text": " Atul Patel" },
+      "Leading_And_Trailing_White_Space_User_Data": { "search_input_text": " Atul Patel " },
+      "Trailing_White_Space_User_Data": { "search_input_text": "Atul Patel " },
+      "Studywide_Reviewer_Email": { "search_input_text": "FutureIRAS.BackStage@hra.nhs.uk" },
+      "Applicant_User_Email": { "search_input_text": "futureiras.automation@hra.nhs.uk" }
+    }
   }
 }

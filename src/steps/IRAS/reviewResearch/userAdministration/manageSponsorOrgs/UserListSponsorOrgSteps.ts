@@ -38,25 +38,6 @@ When(
   }
 );
 
-Then(
-  'the system displays search results matching the search criteria',
-  async ({ userListReviewBodyPage, commonItemsPage }) => {
-    const userValues = await userListReviewBodyPage.getUserListBeforeSearch();
-    const searchKey = await commonItemsPage.getSearchKey();
-    const searchTerms = await commonItemsPage.splitSearchTerm(searchKey);
-    const filteredSearchResults = await commonItemsPage.filterResults(userValues, searchTerms);
-    const userList = await commonItemsPage.getAllUsersFromTheTable();
-    const userListAfterSearch: any = userList.get('searchResultValues');
-    expect.soft(filteredSearchResults).toEqual(userListAfterSearch);
-    const searchResult = await commonItemsPage.validateSearchResultsMultipleWordsSearchKey(
-      userListAfterSearch,
-      searchTerms
-    );
-    expect.soft(searchResult).toBeTruthy();
-    await userListReviewBodyPage.updateUserInfo();
-  }
-);
-
 When(
   'I enter an input into the search field to search for the removed user of the review body',
   async ({ commonItemsPage, checkRemoveUserReviewBodyPage }) => {

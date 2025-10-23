@@ -6,7 +6,8 @@ Feature: User Administration: Manage Sponsor Organisations - View user list page
         And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
         Then I can see the 'Manage_Sponsor_Organisations_Page'
 
-    @VerifyUserListNewSetupSponsorOrg @UserListSponsorOrgNoUsers @KNOWN_DEFECT-RSP-5531 @TestOnly
+    # Then the no search results found message is displayed -- failing due to @KNOWN_DEFECT-RSP-5531
+    @rsp-5233 @VerifyUserListNewSetupSponsorOrg @UserListSponsorOrgNoUsers @KNOWN_DEFECT-RSP-5531
     Scenario Outline: Verify the user can view the user list page of the newly setup sponsor organisation with no users
         When I authorise the rts api using '<RTS_API_Data>'
         Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation '<Setup_New_Sponsor_Organisation>' and  retrive country
@@ -46,7 +47,7 @@ Feature: User Administration: Manage Sponsor Organisations - View user list page
             | Setup_New_Sponsor_Organisation   | Status_Enabled | RTS_API_Data         | RTS_Request                         |
             | Sponsor_Organisation_ThirtySeven | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
 
-    @UserListSponsorOrgDefaultSort
+    @rsp-5233 @UserListSponsorOrgDefaultSort
     Scenario: Verify the user can view the user list page of any selected sponsor organisation and it is sorted by default in the alphabetical order of the 'First Name'
         When I enter '3-D Matrix,Ltd.' into the search field
         And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
@@ -75,13 +76,13 @@ Feature: User Administration: Manage Sponsor Organisations - View user list page
         And I capture the page screenshot
         And I can see the user list of the selected 'sponsor organisation' is sorted by default in the alphabetical order of the 'First Name'
 
-    @UserListSponsorOrgSearchResultsFound @UserListSponsorOrgBackToSponsorOrgProfileLink
+    @rsp-5233 @UserListSponsorOrgSearchResultsFound @UserListSponsorOrgBackToSponsorOrgProfileLink
     Scenario Outline: Verify the user can search for the users in the user list page of selected sponsor organisation and navigate back to sponsor organisation profile page
-        When I enter 'QA Automation' into the search field
+        When I enter '3-D Matrix,Ltd.' into the search field
         And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
         And I capture the page screenshot
         Then the system displays 'sponsor organisations' matching the search criteria
-        And I can see the 'previously added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
+        And I can see the '3-D Matrix,Ltd.' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
         And I capture the page screenshot
         Then I click the view edit link of the 'previously added sponsor organisation'
         And I capture the page screenshot
@@ -99,11 +100,11 @@ Feature: User Administration: Manage Sponsor Organisations - View user list page
         And I capture the page screenshot
         When I enter the '<Field_Name>' of the '<Position>' user shown on the current 'sponsor organisation' users list, into the search field
         And I capture the page screenshot
-        And I click the 'Search' button on the 'Review_Body_User_List_Page'
+        And I click the 'Search' button on the 'Sponsor_Org_User_List_Page'
         And I capture the page screenshot
         Then the system displays search results matching the search criteria
-        When I click the 'Back_To_Review_Body_Profile' link on the 'Review_Body_User_List_Page'
-        Then I can see the review body profile page
+        When I click the 'Back_To_Sponsor_Organisation_Profile' link on the 'Sponsor_Org_User_List_Page'
+        And I can see the sponsor organisation profile page
 
         Examples:
             | Field_Name    | Position |
@@ -116,24 +117,64 @@ Feature: User Administration: Manage Sponsor Organisations - View user list page
             | Full_Name     | First    |
             | Full_Name     | Last     |
 
-    @rsp-3890 @UserListReviewBodySearchMultiTerms @fail
-    Scenario Outline: Verify the review body users search utilises AND logic to produce accurate search results
-        And I navigate to the user list page of the 'User_Search_Test' review body
+    # Then the no search results found message is displayed -- failing due to @KNOWN_DEFECT-RSP-5531
+    @rsp-5233 @UserListSponsorOrgSearchNoResultsFound @KNOWN_DEFECT-RSP-5531
+    Scenario Outline: Verify no results found message will be presented to the user in manage sponsor organisation page if there is no sponsor organisation on the system that matches the search criteria
+        When I enter '3-D Matrix,Ltd.' into the search field
+        And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
         And I capture the page screenshot
-        When I fill the search input for searching 'users' with '<Initial_Search_Query>' as the search query
+        Then the system displays 'sponsor organisations' matching the search criteria
+        And I can see the '3-D Matrix,Ltd.' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
         And I capture the page screenshot
-        And I click the 'Search' button on the 'Review_Body_User_List_Page'
+        Then I click the view edit link of the 'previously added sponsor organisation'
         And I capture the page screenshot
-        Then the system displays user records matching the search criteria
-        And the list displays 'multiple user records'
+        And I can see the sponsor organisation profile page
+        And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
         And I capture the page screenshot
-        When I fill the search input for searching 'users' with '<Second_Search_Query>' as the search query
+        Then I can see the user list page of the 'sponsor organisation'
+        When I fill the search input for searching 'users in sponsor organisations' with '<Search_Query>' as the search query
         And I capture the page screenshot
-        And I click the 'Search' button on the 'Review_Body_User_List_Page'
+        And I click the 'Search' button on the 'Sponsor_Org_User_List_Page'
         And I capture the page screenshot
-        Then the system displays user records matching the search criteria
-        And the list displays 'a single user record'
+        Then the no search results found message is displayed
         And I capture the page screenshot
         Examples:
-            | Initial_Search_Query              | Second_Search_Query             |
-            | Admin_User_Full_Name_Email_Prefix | Admin_User_Full_Name_Full_Email |
+            | Search_Query           |
+            | Non_Existant_User_Data |
+
+#   @rsp-3456 @ManageUsersSearchAndPagination
+#   Scenario Outline: Verify search results and pagination in manage users page when user searches and navigate through each page
+#     When I fill the search input for searching 'users' with '<Search_Query>' as the search query
+#     And I capture the page screenshot
+#     And I click the 'Search' button on the 'Manage_Users_Page'
+#     And I capture the page screenshot
+#     Then the system displays user records matching the search criteria
+#     And I capture the page screenshot
+
+#     Examples:
+#       | Search_Query                |
+#       | Existing_QA_User_First_Name |
+#       | Existing_QA_User_Last_Name  |
+#       | Existing_QA_User_Email      |
+
+# @rsp-3890 @UserListReviewBodySearchMultiTerms @fail
+# Scenario Outline: Verify the review body users search utilises AND logic to produce accurate search results
+#     And I navigate to the user list page of the 'User_Search_Test' review body
+#     And I capture the page screenshot
+#     When I fill the search input for searching 'users' with '<Initial_Search_Query>' as the search query
+#     And I capture the page screenshot
+#     And I click the 'Search' button on the 'Review_Body_User_List_Page'
+#     And I capture the page screenshot
+#     Then the system displays user records matching the search criteria
+#     And the list displays 'multiple user records'
+#     And I capture the page screenshot
+#     When I fill the search input for searching 'users' with '<Second_Search_Query>' as the search query
+#     And I capture the page screenshot
+#     And I click the 'Search' button on the 'Review_Body_User_List_Page'
+#     And I capture the page screenshot
+#     Then the system displays user records matching the search criteria
+#     And the list displays 'a single user record'
+#     And I capture the page screenshot
+#     Examples:
+#         | Initial_Search_Query              | Second_Search_Query             |
+#         | Admin_User_Full_Name_Email_Prefix | Admin_User_Full_Name_Full_Email |

@@ -676,9 +676,9 @@ When(
     const currentPageLink = commonItemsPage.pagination
       .getByRole('link', { name: currentPageLabel, exact: true })
       .first();
-    await expect(currentPageLink).toHaveAttribute('aria-current');
+    await expect.soft(currentPageLink).toHaveAttribute('aria-current');
     const currentPageLinkHref = await currentPageLink.getAttribute('href');
-    expect(currentUrl).toContain(currentPageLinkHref);
+    expect.soft(currentUrl).toContain(currentPageLinkHref);
     await commonItemsPage.previous_button.click();
   }
 );
@@ -918,7 +918,11 @@ Then(
       maxPagesToValidate = totalPages;
     }
     let totalItems: number;
-    if (pagename === 'My_Research_Projects_Page' || pagename === 'Post_Approval_Page') {
+    if (
+      pagename === 'My_Research_Projects_Page' ||
+      pagename === 'Post_Approval_Page' ||
+      pagename === 'Sponsor_Org_User_List_Page'
+    ) {
       totalItems = await commonItemsPage.getTotalItemsNavigatingToLastPage(pagename);
     } else {
       totalItems = await commonItemsPage.getTotalItems();
@@ -942,7 +946,11 @@ Then(
       validatePageUntil = totalPages;
     }
     let totalItems: number;
-    if (pagename == 'My_Research_Projects_Page' || pagename === 'Post_Approval_Page') {
+    if (
+      pagename == 'My_Research_Projects_Page' ||
+      pagename === 'Post_Approval_Page' ||
+      pagename === 'Sponsor_Org_User_List_Page'
+    ) {
       totalItems = await commonItemsPage.getTotalItemsNavigatingToLastPage(pagename);
     } else {
       totalItems = await commonItemsPage.getTotalItems();
@@ -1441,7 +1449,7 @@ Then(
       const organisationName = await sponsorOrganisationProfilePage.getOrgName();
       await expect(userListSponsorOrganisationPage.page_heading).toHaveText(
         userListSponsorOrganisationPage.userListSponsorOrgPageTestData.Sponsor_Organisation_User_List_Page
-          .page_heading + organisationName
+          .heading_prefix_label + organisationName
       );
     }
     if ((await userListReviewBodyPage.userListTableRows.count()) >= 2) {
@@ -1455,6 +1463,9 @@ Then(
       await userListReviewBodyPage.setFirstName(firstName[0]);
       await userListReviewBodyPage.setLastName(lastName[0]);
       await userListReviewBodyPage.setEmail(emailAddress[0]);
+      if (await commonItemsPage.firstPage.isVisible()) {
+        await commonItemsPage.firstPage.click();
+      }
     }
   }
 );
@@ -1483,6 +1494,56 @@ Then(
       }
       const sortedList = [...firstNameValues].sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
       expect(firstNameValues).toEqual(sortedList);
+    }
+  }
+);
+
+Then(
+  'I can see the {string} list sorted byby {string} order of the {string} on the {string} page',
+  async (
+    { manageUsersPage, commonItemsPage },
+    listType: string,
+    sortDirection: string,
+    sortField: string,
+    currentPage: string
+  ) => {
+    let sortedUserList: string[];
+    let userColumnIndex: number;
+    if (listType === 'manage users' || listType === 'sponsor organisation users') {
+      switch (sortField.toLowerCase()) {
+        case 'first name':
+          userColumnIndex = 0;
+          break;
+        case 'last name':
+          userColumnIndex = 1;
+          break;
+        case 'email address':
+          userColumnIndex = 2;
+          break;
+        case 'status':
+          userColumnIndex = 3;
+          break;
+        case 'last logged in':
+          userColumnIndex = 4;
+          break;
+        default:
+          throw new Error(`${sortField} is not a valid option`);
+      }
+      const actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, userColumnIndex);
+      if (sortField.toLowerCase() == 'last logged in') {
+        sortedUserList = await manageUsersPage.sortLastLoggedInListValues(actualList, sortDirection);
+      } else if (sortDirection.toLowerCase() == 'ascending') {
+        sortedUserList = [...actualList].toSorted((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
+        if (sortField.toLowerCase() == 'status' && currentPage.toLowerCase() == 'first') {
+          expect(actualList).toContain(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enabled_status);
+        }
+      } else {
+        sortedUserList = [...actualList].toSorted((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
+        if (sortField.toLowerCase() == 'status' && currentPage.toLowerCase() == 'first') {
+          expect(actualList).toContain(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.disabled_status);
+        }
+      }
+      expect(actualList).toEqual(sortedUserList);
     }
   }
 );

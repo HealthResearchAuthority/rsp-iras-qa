@@ -254,7 +254,8 @@
     "View_This_Sponsor_Org_List_Of_Users": "View this sponsor organisation's list of users"
   },
   "Sponsor_Org_User_List_Page": {
-    "Add_A_New_User_Profile_Record": "Add a new user profile record"
+    "Add_A_New_User_Profile_Record": "Add a new user profile record",
+    "Back_To_Sponsor_Organisation_Profile": "Back to sponsor organisation profile"
   },
   "Search_Add_User_Sponsor_Org_Page": {
     "Back": "Back",

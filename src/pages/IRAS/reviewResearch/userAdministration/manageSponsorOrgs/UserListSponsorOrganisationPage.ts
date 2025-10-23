@@ -53,20 +53,10 @@ export default class UserListReviewBodyPage {
     //Locators
     this.page_heading = this.page
       .getByRole('heading')
-      .getByText(this.userListSponsorOrgPageTestData.Sponsor_Organisation_User_List_Page.page_heading);
+      .getByText(this.userListSponsorOrgPageTestData.Sponsor_Organisation_User_List_Page.heading_prefix_label);
     this.guidance_text = this.page
       .getByRole('paragraph')
       .getByText(this.userListSponsorOrgPageTestData.Sponsor_Organisation_User_List_Page.guidance_text, {
-        exact: true,
-      });
-    this.no_results_heading = this.page
-      .getByRole('heading')
-      .getByText(this.userListSponsorOrgPageTestData.Sponsor_Organisation_User_List_Page.no_results_heading, {
-        exact: true,
-      });
-    this.no_results_guidance_text = this.page
-      .getByRole('paragraph')
-      .getByText(this.userListSponsorOrgPageTestData.Sponsor_Organisation_User_List_Page.no_results_guidance_text, {
         exact: true,
       });
     this.userListTableRows = this.page.getByRole('table').getByRole('row');
@@ -129,9 +119,6 @@ export default class UserListReviewBodyPage {
         exact: true,
       }
     );
-    this.back_to_users_link = this.page
-      .getByRole('link')
-      .getByText(this.userListSponsorOrgPageTestData.Sponsor_Organisation_User_List_Page.back_to_users_link);
     this.tableRows = this.page.getByRole('table').getByRole('row');
     this.user_added_to_sponsor_organisation_success_message_header_text = this.page
       .getByTestId('govuk-notification-banner-title')
