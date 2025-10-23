@@ -26,5 +26,6 @@
     "searching for something less specific"
   ],
   "uploaded_documents_counter_label": " files chosen",
-  "maxPagesToValidate": 10
+  "maxPagesToValidate": 10,
+  "sharepoint_max_retries": 5
 }
