@@ -255,5 +255,9 @@
   "Project_Overview_Unfinished_Projects_Page": {
     "Edit_Project_Record": "Edit project record",
     "Delete_Project": "Delete project"
+  },
+  "Modification_Sent_To_Sponsor_Page": {
+    "Return_To_Project_Overview": "Return to project overview",
+    "Submit_To_Regulator": "Submit to regulator"
   }
 }

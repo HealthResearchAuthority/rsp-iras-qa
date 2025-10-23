@@ -19,7 +19,18 @@ export default class ProjectOverviewPage {
   readonly project_overview_heading: Locator;
   readonly project_team_heading: Locator;
   readonly research_locations_heading: Locator;
-  readonly post_approvals_heading: Locator;
+  readonly participating_nations_row: Locator;
+  readonly nhs_hsc_organisations_row: Locator;
+  readonly lead_nation_row: Locator;
+  readonly participating_nations: Locator;
+  readonly nhs_hsc_organisations: Locator;
+  readonly lead_nation: Locator;
+  readonly row_value_label: Locator;
+  readonly modification_id: Locator;
+  readonly modification_type: Locator;
+  readonly review_type: Locator;
+  readonly category: Locator;
+  readonly status: Locator;
   readonly view_project_overview_link: Locator;
   readonly tab_row_label: Locator;
   readonly tab_row_value: Locator;
@@ -56,6 +67,7 @@ export default class ProjectOverviewPage {
   readonly advanced_filters_project_documents: Locator;
   readonly search_project_documents: Locator;
   readonly results_count_project_documents: Locator;
+  readonly post_approvals_heading: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -174,7 +186,7 @@ export default class ProjectOverviewPage {
       name: this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_tab_date_submitted,
       exact: true,
     });
-    this.post_approvals_tab_status = this.page.getByRole('button', {
+    this.status = this.page.getByRole('button', {
       name: this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_tab_status,
       exact: true,
     });

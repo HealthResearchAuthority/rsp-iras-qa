@@ -1421,6 +1421,11 @@ export default class CommonItemsPage {
       .click();
   }
 
+  async clickLink(page: string, linkName: string) {
+    const linkValue = this.linkTextData[page][linkName];
+    await this.govUkLink.getByText(linkValue, { exact: true }).click();
+  }
+
   async clickErrorSummaryLinkSpecific<PageObject>(key: string, page: PageObject, errorMsg: string) {
     const element: Locator = await page[key].first();
     await this.summaryErrorLinks.locator('..').getByRole('link', { name: errorMsg, exact: true }).click();
