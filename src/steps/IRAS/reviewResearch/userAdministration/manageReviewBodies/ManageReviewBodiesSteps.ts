@@ -112,8 +112,12 @@ When(
 
 When('I select a review body from the list to View and Edit', async ({ manageReviewBodiesPage }) => {
   const noOfLinks = await manageReviewBodiesPage.actionsLink.count().then((result) => result - 1);
-  const index = await getRandomNumber(0, noOfLinks);
-  await manageReviewBodiesPage.actionsLink.nth(index).click();
+  if (noOfLinks == 0) {
+    await manageReviewBodiesPage.actionsLink.first().click();
+  } else {
+    const index = await getRandomNumber(0, noOfLinks);
+    await manageReviewBodiesPage.actionsLink.nth(index).click();
+  }
 });
 
 Then('the system displays review bodies matching the search criteria', async ({ commonItemsPage }) => {
