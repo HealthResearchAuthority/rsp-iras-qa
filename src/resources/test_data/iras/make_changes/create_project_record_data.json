@@ -4,5 +4,11 @@
     "guidance_text_one": "As it's the first time you're using this service to manage your project we need you to enter a few details to add your project to the system.",
     "guidance_text_two": "The information we'll ask for can all be found on your original application or an approved amendment so have this with you before starting. Use whichever information is the most up to date.",
     "guidance_text_three": "You'll need to provide an answer to all the questions and you can save your progress and come back later if you need to."
+  },
+  "Project_Status_Draft": {
+    "status": "In draft"
+  },
+  "Project_Status_Active": {
+    "status": "Active"
   }
 }
