@@ -37,6 +37,10 @@ export default class ManageSponsorOrganisationsPage {
   readonly search_hint_text: Locator;
   readonly sponsor_organisation_added_success_message_header_text: Locator;
   readonly sponsor_organisation_added_success_message_text: Locator;
+  readonly sponsor_organisation_disabled_success_message_header_text: Locator;
+  readonly sponsor_organisation_disabled_success_message_text: Locator;
+  readonly sponsor_organisation_enabled_success_message_header_text: Locator;
+  readonly sponsor_organisation_enabled_success_message_text: Locator;
   readonly information_alert_banner: Locator;
 
   //Initialize Page Objects
@@ -110,6 +114,30 @@ export default class ManageSponsorOrganisationsPage {
           .sponsor_organisation_added_success_message_text
       );
     this.information_alert_banner = this.page.getByRole('alert');
+    this.sponsor_organisation_disabled_success_message_header_text = this.page
+      .getByTestId('govuk-notification-banner-title')
+      .getByText(
+        this.manageSponsorOrganisationsPageTestData.Manage_Sponsor_Organisations_Page
+          .sponsor_organisation_disabled_success_message_header_text
+      );
+    this.sponsor_organisation_disabled_success_message_text = this.page
+      .getByRole('heading')
+      .getByText(
+        this.manageSponsorOrganisationsPageTestData.Manage_Sponsor_Organisations_Page
+          .sponsor_organisation_disabled_success_message_text
+      );
+    this.sponsor_organisation_enabled_success_message_header_text = this.page
+      .getByTestId('govuk-notification-banner-title')
+      .getByText(
+        this.manageSponsorOrganisationsPageTestData.Manage_Sponsor_Organisations_Page
+          .sponsor_organisation_enabled_success_message_header_text
+      );
+    this.sponsor_organisation_enabled_success_message_text = this.page
+      .getByRole('heading')
+      .getByText(
+        this.manageSponsorOrganisationsPageTestData.Manage_Sponsor_Organisations_Page
+          .sponsor_organisation_enabled_success_message_text
+      );
   }
 
   //Getters & Setters for Private Variables

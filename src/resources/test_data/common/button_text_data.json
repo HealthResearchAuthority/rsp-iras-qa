@@ -272,8 +272,8 @@
     "Cancel": "Cancel"
   },
   "Sponsor_Organisation_Profile_Page": {
-    "Disable_Review_Body": "Disable sponsor organisation",
-    "Enable_Review_Body": "Enable sponsor organisation"
+    "Disable": "Disable sponsor organisation",
+    "Enable": "Enable sponsor organisation"
   },
   "Search_Add_User_Sponsor_Org_Page": {
     "Search": "Search"

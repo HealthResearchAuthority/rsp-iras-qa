@@ -19,7 +19,11 @@
     "country_label": "Country",
     "status_label": "Status",
     "sponsor_organisation_added_success_message_header_text": "Success",
-    "sponsor_organisation_added_success_message_text": "You have successfully added a new sponsor organisation"
+    "sponsor_organisation_added_success_message_text": "You have successfully added a new sponsor organisation",
+    "sponsor_organisation_disabled_success_message_header_text": "Success",
+    "sponsor_organisation_disabled_success_message_text": "Sponsor organisation disabled",
+    "sponsor_organisation_enabled_success_message_header_text": "Success",
+    "sponsor_organisation_enabled_success_message_text": "Sponsor organisation enabled"
   },
   "Search_For_Sponsor_Organisations": {
     "Search_Queries": {

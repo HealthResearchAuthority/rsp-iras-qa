@@ -1547,3 +1547,30 @@ Then(
     }
   }
 );
+
+Then(
+  'I can see the {string} ui labels on the {string} profile page',
+  async (
+    { commonItemsPage, reviewBodyProfilePage, sponsorOrganisationProfilePage },
+    datasetName: string,
+    orgType: string
+  ) => {
+    if (orgType === 'manage review body') {
+      const dataset = reviewBodyProfilePage.reviewBodyProfilePageData[datasetName];
+      for (const key in dataset) {
+        if (Object.hasOwn(dataset, key)) {
+          const labelVal = await commonItemsPage.getUiLabel(key, reviewBodyProfilePage);
+          expect.soft(labelVal).toBe(dataset[key]);
+        }
+      }
+    } else if (orgType === 'sponsor organisation') {
+      const dataset = sponsorOrganisationProfilePage.sponsorOrgProfilePageTestData[datasetName];
+      for (const key in dataset) {
+        if (Object.hasOwn(dataset, key)) {
+          const labelVal = await commonItemsPage.getUiLabel(key, sponsorOrganisationProfilePage);
+          expect.soft(labelVal).toBe(dataset[key]);
+        }
+      }
+    }
+  }
+);

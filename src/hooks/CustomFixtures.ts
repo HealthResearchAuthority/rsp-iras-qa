@@ -473,6 +473,12 @@ export const test = base.extend<CustomFixtures>({
       storageState = getAuthState(loginPageTestData.Studywide_Reviewer_W.authPath);
     } else if ($tags.includes('@TeamManager')) {
       storageState = getAuthState(loginPageTestData.Team_Manager.authPath);
+    } else if ($tags.includes('@TeamManagerNI')) {
+      storageState = getAuthState(loginPageTestData.Team_Manager_NI.authPath);
+    } else if ($tags.includes('@TeamManagerSco')) {
+      storageState = getAuthState(loginPageTestData.Team_Manager_S.authPath);
+    } else if ($tags.includes('@TeamManagerW')) {
+      storageState = getAuthState(loginPageTestData.Team_Manager_W.authPath);
     } else if ($tags.includes('@WorkFlowCoordinator')) {
       storageState = getAuthState(loginPageTestData.Workflow_Coordinator.authPath);
     } else if ($tags.includes('@WorkFlowCoordinatorNI')) {
@@ -481,6 +487,8 @@ export const test = base.extend<CustomFixtures>({
       storageState = getAuthState(loginPageTestData.Workflow_Coordinator_S.authPath);
     } else if ($tags.includes('@WorkFlowCoordinatorWal')) {
       storageState = getAuthState(loginPageTestData.Workflow_Coordinator_W.authPath);
+    } else if ($tags.includes('@SponsorUser')) {
+      storageState = getAuthState(loginPageTestData.Sponsor_User.authPath);
     }
     await use(storageState);
   },

@@ -448,7 +448,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
     And I can see the 'newly created review body' should be present in the list with 'Enabled' status in the manage review bodies page
     Then I click the view edit link
-    Then I can see the 'Disable_Label_Texts' ui labels on the manage review body profile page
+    Then I can see the 'Disable_Label_Texts' ui labels on the 'manage review body' profile page
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
@@ -519,7 +519,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
     And I can see the 'newly created review body' should be present in the list with 'Disabled' status in the manage review bodies page
     Then I click the view edit link
-    And I can see the 'Enable_Label_Texts' ui labels on the manage review body profile page
+    And I can see the 'Enable_Label_Texts' ui labels on the 'manage review body' profile page
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations

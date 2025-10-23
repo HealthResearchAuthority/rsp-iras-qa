@@ -63,10 +63,14 @@ BeforeScenario(
         'Studywide_Reviewer_S',
         'Studywide_Reviewer_W',
         'Team_Manager',
+        'Team_Manager_NI',
+        'Team_Manager_S',
+        'Team_Manager_W',
         'Workflow_Coordinator',
         'Workflow_Coordinator_NI',
         'Workflow_Coordinator_S',
         'Workflow_Coordinator_W',
+        'Sponsor_User',
       ];
 
       for (const user of users) {
@@ -89,10 +93,14 @@ BeforeScenario(
         '@StudyWideReviewerSco': 'studywide_reviewer_s',
         '@StudyWideReviewerWal': 'studywide_reviewer_w',
         '@TeamManager': 'team_manager',
+        '@TeamManagerNI': 'team_manager_ni',
+        '@TeamManagerSco': 'team_manager_s',
+        '@TeamManagerW': 'team_manager_w',
         '@WorkFlowCoordinator': 'workflow_coordinator',
         '@WorkFlowCoordinatorNI': 'workflow_coordinator_ni',
         '@WorkFlowCoordinatorSco': 'workflow_coordinator_s',
         '@WorkFlowCoordinatorWal': 'workflow_coordinator_w',
+        '@SponsorUser': 'sponsor_user',
       };
 
       for (const tag in tagToUserMap) {

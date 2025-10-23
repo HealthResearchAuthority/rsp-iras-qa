@@ -153,19 +153,6 @@ Then('I can see the last updated date field is blank', async ({ reviewBodyProfil
   expect(lastUpdatedDateActualValue).toBe(''); // defect open - last updated date stamped for new review body
 });
 
-Then(
-  'I can see the {string} ui labels on the manage review body profile page',
-  async ({ commonItemsPage, reviewBodyProfilePage }, datasetName: string) => {
-    const dataset = reviewBodyProfilePage.reviewBodyProfilePageData[datasetName];
-    for (const key in dataset) {
-      if (Object.hasOwn(dataset, key)) {
-        const labelVal = await commonItemsPage.getUiLabel(key, reviewBodyProfilePage);
-        expect.soft(labelVal).toBe(dataset[key]);
-      }
-    }
-  }
-);
-
 When('I can see the updated review body profile page heading', async ({ reviewBodyProfilePage }) => {
   await expect(reviewBodyProfilePage.page_heading).toHaveText(
     reviewBodyProfilePage.reviewBodyProfilePageData.Review_Body_Profile_Page.heading_prefix_label +

@@ -45,3 +45,51 @@ Then(
       .toBe(commonItemsPage.commonTestData.rgb_green_color);
   }
 );
+
+Then(
+  'I can see the sponsor organisation disabled successful message on manage sponsor organisation page',
+  async ({ manageSponsorOrganisationPage, commonItemsPage }) => {
+    await expect
+      .soft(manageSponsorOrganisationPage.sponsor_organisation_disabled_success_message_header_text)
+      .toBeVisible();
+    await expect.soft(manageSponsorOrganisationPage.sponsor_organisation_disabled_success_message_text).toBeVisible();
+    expect
+      .soft(
+        await manageSponsorOrganisationPage.information_alert_banner.evaluate((e: any) =>
+          getComputedStyle(e).getPropertyValue('border-color')
+        )
+      )
+      .toBe(commonItemsPage.commonTestData.rgb_green_color);
+    expect
+      .soft(
+        await manageSponsorOrganisationPage.information_alert_banner.evaluate((e: any) =>
+          getComputedStyle(e).getPropertyValue('background-color')
+        )
+      )
+      .toBe(commonItemsPage.commonTestData.rgb_green_color);
+  }
+);
+
+Then(
+  'I can see the sponsor organisation enabled successful message on manage sponsor organisation page',
+  async ({ manageSponsorOrganisationPage, commonItemsPage }) => {
+    await expect
+      .soft(manageSponsorOrganisationPage.sponsor_organisation_enabled_success_message_header_text)
+      .toBeVisible();
+    await expect.soft(manageSponsorOrganisationPage.sponsor_organisation_enabled_success_message_text).toBeVisible();
+    expect
+      .soft(
+        await manageSponsorOrganisationPage.information_alert_banner.evaluate((e: any) =>
+          getComputedStyle(e).getPropertyValue('border-color')
+        )
+      )
+      .toBe(commonItemsPage.commonTestData.rgb_green_color);
+    expect
+      .soft(
+        await manageSponsorOrganisationPage.information_alert_banner.evaluate((e: any) =>
+          getComputedStyle(e).getPropertyValue('background-color')
+        )
+      )
+      .toBe(commonItemsPage.commonTestData.rgb_green_color);
+  }
+);

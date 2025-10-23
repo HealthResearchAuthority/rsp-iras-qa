@@ -20,7 +20,7 @@ Feature: User Administration: Manage Sponsor Organisations- Sort, search and pag
     And I can see the user list of the selected 'sponsor organisation' is sorted by default in the alphabetical order of the 'First Name'
     And I can see the 'sponsor organisation users' list sorted by 'ascending' order of the 'first name' on the 'first' page
 
-  @rsp-5233 @sortUserListByColumn @KNOWN_DEFECT-RSP-5555
+  @rsp-5233 @sortUserListByColumn @KNOWN_DEFECT-RSP-5555 @fail
   Scenario Outline: Verify the user is able to sort the users list by ascending and descending order for each table column
     When I click the '<Sort_Button>' button on the 'Sponsor_Org_User_List_Page'
     And I capture the page screenshot
@@ -60,7 +60,7 @@ Feature: User Administration: Manage Sponsor Organisations- Sort, search and pag
       | page number       |
       | next link         |
 
-  @rsp-5233 @UserlistSponsorOrgPagination @UserlistSponsorOrgPaginationLastPage @UserlistSponsorOrgPaginationPageNumber @MUserlistSponsorOrgPaginationPreviousLinkClick @TestOnly
+  @rsp-5233 @UserlistSponsorOrgPagination @UserlistSponsorOrgPaginationLastPage @UserlistSponsorOrgPaginationPageNumber @MUserlistSponsorOrgPaginationPreviousLinkClick
   Scenario: Verify pagination in user list page of sponsor organisation when user is on the last page and navigate through each page by clicking page number or by by clicking on previous link
     And I am on the 'last' page and it should be visually highlighted to indicate the active page the user is on
     And I capture the page screenshot

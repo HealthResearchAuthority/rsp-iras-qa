@@ -6,8 +6,6 @@ Feature: User Administration: Manage Sponsor Organisations - Set up new sponsor 
         And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
         Then I can see the 'Manage_Sponsor_Organisations_Page'
 
-    # @jsEnabled,@jsDisabled
-
     @ViewListOfSponsorOrgs @rsp-5229 @rsp-5230 @rsp-5232 @rsp-5237
     Scenario Outline: Verify the user can add a sponsor organisation from manage sponsor organisation page and view the list of sponsor organisation in alphabetical order of organisation name
         When I authorise the rts api using '<RTS_API_Data>'

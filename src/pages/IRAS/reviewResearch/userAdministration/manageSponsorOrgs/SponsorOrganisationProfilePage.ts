@@ -134,7 +134,7 @@ export default class SponsorOrganisationProfilePage {
         exact: true,
       });
     this.disable_guidance_text = this.page
-      .getByRole('paragraph')
+      .locator('.govuk-hint')
       .getByText(this.sponsorOrgProfilePageTestData.Sponsor_Organisation_Profile_Page.disable_guidance_text, {
         exact: true,
       });
@@ -147,7 +147,7 @@ export default class SponsorOrganisationProfilePage {
         exact: true,
       });
     this.enable_guidance_text = this.page
-      .getByRole('paragraph')
+      .locator('.govuk-hint')
       .getByText(this.sponsorOrgProfilePageTestData.Sponsor_Organisation_Profile_Page.enable_guidance_text, {
         exact: true,
       });

@@ -19,15 +19,10 @@
   },
   "Search_For_Users_In_Sponsor_Organisations": {
     "Search_Queries": {
-      "Existing_QA_User_First_Name": { "search_input_text": "QA Automation First Name Test" },
-      "Existing_QA_User_Last_Name": { "search_input_text": "Test Last Name" },
-      "Existing_QA_User_Email": { "search_input_text": "QAAutomation2025" },
-      "Non_Existant_User_Data": { "search_input_text": "ThisShouldNot ReturnAResult" },
-      "Leading_White_Space_User_Data": { "search_input_text": " Atul Patel" },
-      "Leading_And_Trailing_White_Space_User_Data": { "search_input_text": " Atul Patel " },
-      "Trailing_White_Space_User_Data": { "search_input_text": "Atul Patel " },
-      "Studywide_Reviewer_Email": { "search_input_text": "FutureIRAS.BackStage@hra.nhs.uk" },
-      "Applicant_User_Email": { "search_input_text": "futureiras.automation@hra.nhs.uk" }
+      "Existing_QA_User_First_Name": { "search_input_text": "Sponsor" },
+      "Existing_QA_User_Last_Name": { "search_input_text": "User" },
+      "Existing_QA_User_Email": { "search_input_text": "FutureIRAS.Sponsor@hra.nhs.uk" },
+      "Non_Existant_User_Data": { "search_input_text": "ThisShouldNot ReturnAResult" }
     }
   }
 }
