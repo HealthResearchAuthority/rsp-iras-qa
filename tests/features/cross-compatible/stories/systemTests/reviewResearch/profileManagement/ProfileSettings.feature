@@ -1,4 +1,4 @@
-@ProfileManagement @ProfileSettings @ApplicantUser @SystemTest @STSysAdmin
+@ProfileManagement @ProfileSettings @ApplicantUser @SystemTest
 Feature: Profile Management: Provide signed-in users with access to their profile management functions
     As a user
     I want to access a Profile and Settings page

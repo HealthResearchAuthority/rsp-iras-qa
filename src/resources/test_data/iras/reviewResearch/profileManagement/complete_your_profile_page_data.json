@@ -1,0 +1,28 @@
+{
+  "Complete_Your_Profile_Page": {
+    "page_heading": "Complete your profile",
+    "one_login_header": "One Login details",
+    "profile_details_header": "Profile details",
+    "make_change_header": "Making a change to your One Login details",
+    "make_change_prefix": "Log in through your",
+    "make_change_suffix": "if you want to edit/update your email address and telephone number",
+    "email_address_label": "Email address",
+    "telephone_label": "Telephone",
+    "title_label": "Title",
+    "first_name_label": "First name",
+    "last_name_label": "Last name",
+    "job_title_label": "Job title",
+    "organisation_label": "Organisation"
+  },
+  "Users": {
+    "One_Login_Account_User": {
+      "Profile_Details": {
+        "title_value": "Mr",
+        "first_name_value": "Hagne",
+        "last_name_value": "Nulta",
+        "job_title_value": "Researcher",
+        "organisation_value": "NECUB"
+      }
+    }
+  }
+}

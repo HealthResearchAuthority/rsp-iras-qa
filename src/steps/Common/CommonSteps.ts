@@ -42,6 +42,7 @@ When(
       accessDeniedPage,
       profileSettingsPage,
       editYourProfilePage,
+      completeYourProfilePage,
     },
     page: string
   ) => {
@@ -109,6 +110,9 @@ When(
         break;
       case 'Edit_Your_Profile_Page':
         await editYourProfilePage.assertOnEditProfilePage();
+        break;
+      case 'Complete_Your_Profile_Page':
+        await completeYourProfilePage.assertOnCompleteProfilePage();
         break;
       default:
         throw new Error(`${page} is not a valid option`);
@@ -804,6 +808,7 @@ Given(
   async (
     {
       homePage,
+      loginPage,
       systemAdministrationPage,
       accessDeniedPage,
       myResearchProjectsPage,
@@ -814,50 +819,57 @@ Given(
     page: string,
     user: string
   ) => {
-    const authStatePath = getAuthState(user);
-    const authState = JSON.parse(fs.readFileSync(authStatePath, 'utf-8'));
-    switch (page) {
-      case 'Home_Page':
-        await homePage.page.context().addCookies(authState.cookies);
-        await homePage.goto();
-        await homePage.assertOnHomePage();
-        break;
-      case 'System_Administration_Page':
-        await systemAdministrationPage.page.context().addCookies(authState.cookies);
-        await systemAdministrationPage.goto();
-        await systemAdministrationPage.assertOnSystemAdministrationPage();
-        break;
-      case 'System_Administration_Access_Denied_Page':
-        await systemAdministrationPage.page.context().addCookies(authState.cookies);
-        await systemAdministrationPage.goto();
-        await accessDeniedPage.assertOnAccessDeniedPage();
-        break;
-      case 'Approvals_Access_Denied_Page':
-        await approvalsPage.page.context().addCookies(authState.cookies);
-        await approvalsPage.goto();
-        await accessDeniedPage.assertOnAccessDeniedPage();
-        break;
-      case 'My_Research_Page':
-        await myResearchProjectsPage.page.context().addCookies(authState.cookies);
-        await myResearchProjectsPage.goto();
-        await myResearchProjectsPage.assertOnMyResearchProjectsPage();
-        break;
-      case 'My_Research_Access_Denied_Page':
-        await myResearchProjectsPage.page.context().addCookies(authState.cookies);
-        await myResearchProjectsPage.goto();
-        await accessDeniedPage.assertOnAccessDeniedPage();
-        break;
-      case 'My_Modifications_Tasklist_Page':
-        await myModificationsTasklistPage.goto();
-        await myModificationsTasklistPage.assertOnMyModificationsTasklistPage();
-        break;
-      case 'Modifications_Tasklist_Page':
-        await modificationsReadyToAssignPage.page.context().addCookies(authState.cookies);
-        await modificationsReadyToAssignPage.goto();
-        await modificationsReadyToAssignPage.assertOnModificationsReadyToAssignPage();
-        break;
-      default:
-        throw new Error(`${page} is not a valid option`);
+    if (user == 'One_Login_Account_User') {
+      await homePage.page.context().clearCookies();
+      await homePage.goto();
+      await homePage.startNowBtn.click();
+      await loginPage.assertOnLoginPage();
+    } else {
+      const authStatePath = getAuthState(user);
+      const authState = JSON.parse(fs.readFileSync(authStatePath, 'utf-8'));
+      switch (page) {
+        case 'Home_Page':
+          await homePage.page.context().addCookies(authState.cookies);
+          await homePage.goto();
+          await homePage.assertOnHomePage();
+          break;
+        case 'System_Administration_Page':
+          await systemAdministrationPage.page.context().addCookies(authState.cookies);
+          await systemAdministrationPage.goto();
+          await systemAdministrationPage.assertOnSystemAdministrationPage();
+          break;
+        case 'System_Administration_Access_Denied_Page':
+          await systemAdministrationPage.page.context().addCookies(authState.cookies);
+          await systemAdministrationPage.goto();
+          await accessDeniedPage.assertOnAccessDeniedPage();
+          break;
+        case 'Approvals_Access_Denied_Page':
+          await approvalsPage.page.context().addCookies(authState.cookies);
+          await approvalsPage.goto();
+          await accessDeniedPage.assertOnAccessDeniedPage();
+          break;
+        case 'My_Research_Page':
+          await myResearchProjectsPage.page.context().addCookies(authState.cookies);
+          await myResearchProjectsPage.goto();
+          await myResearchProjectsPage.assertOnMyResearchProjectsPage();
+          break;
+        case 'My_Research_Access_Denied_Page':
+          await myResearchProjectsPage.page.context().addCookies(authState.cookies);
+          await myResearchProjectsPage.goto();
+          await accessDeniedPage.assertOnAccessDeniedPage();
+          break;
+        case 'My_Modifications_Tasklist_Page':
+          await myModificationsTasklistPage.goto();
+          await myModificationsTasklistPage.assertOnMyModificationsTasklistPage();
+          break;
+        case 'Modifications_Tasklist_Page':
+          await modificationsReadyToAssignPage.page.context().addCookies(authState.cookies);
+          await modificationsReadyToAssignPage.goto();
+          await modificationsReadyToAssignPage.assertOnModificationsReadyToAssignPage();
+          break;
+        default:
+          throw new Error(`${page} is not a valid option`);
+      }
     }
   }
 );

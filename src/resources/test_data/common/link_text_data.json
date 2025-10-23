@@ -235,5 +235,6 @@
     "Back": "Back"
   },
   "Profile_Settings_Page": { "One_Login_Account": "One Login account", "Change": "Change" },
-  "Edit_Your_Profile_Page": { "One_Login_Account": "One Login account" }
+  "Edit_Your_Profile_Page": { "One_Login_Account": "One Login account" },
+  "Complete_Your_Profile_Page": { "One_Login_Account": "One Login account" }
 }

@@ -72,7 +72,7 @@ BeforeScenario(
       for (const user of users) {
         await commonItemsPage.page.context().clearCookies();
         await homePage.goto();
-        await homePage.loginBtn.click();
+        await homePage.startNowBtn.click();
         await loginPage.assertOnLoginPage();
         await loginPage.loginWithUserCreds(user);
         await homePage.assertOnHomePage();
