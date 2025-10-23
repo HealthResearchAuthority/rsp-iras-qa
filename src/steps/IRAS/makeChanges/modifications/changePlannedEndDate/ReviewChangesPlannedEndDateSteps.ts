@@ -4,17 +4,17 @@ import { confirmStringNotNull, convertDate } from '../../../../../utils/UtilFunc
 
 const { Then } = createBdd(test);
 
-Then('I can see the review changes planned end date page', async ({ reviewChangesPlannedEndDatePage }) => {
-  await reviewChangesPlannedEndDatePage.assertOnReviewChangesPlannedEndDatePage();
+Then('I can see the modification review changes page', async ({ modificationReviewChangesPage }) => {
+  await modificationReviewChangesPage.assertOnModificationReviewChangesPage();
 });
 
 Then(
-  'I validate the ui labels using {string} on review changes planned end date page',
-  async ({ reviewChangesPlannedEndDatePage, commonItemsPage }, datasetName) => {
-    const dataset = reviewChangesPlannedEndDatePage.reviewChangesPlannedEndDatePageTestData[datasetName];
+  'I validate the ui labels using {string} on modification review changes page',
+  async ({ modificationReviewChangesPage, commonItemsPage }, datasetName) => {
+    const dataset = modificationReviewChangesPage.modificationReviewChangesPageTestData[datasetName];
     for (const key in dataset) {
       if (Object.hasOwn(dataset, key)) {
-        await commonItemsPage.validateUIComponentValues(dataset, key, reviewChangesPlannedEndDatePage);
+        await commonItemsPage.validateUIComponentValues(dataset, key, modificationReviewChangesPage);
       }
     }
   }
@@ -24,7 +24,7 @@ Then(
   'I validate all field values on review modifications page using {string} , {string} and {string}',
   async (
     {
-      reviewChangesPlannedEndDatePage,
+      modificationReviewChangesPage,
       plannedEndDateChangePage,
       affectedOrganisationSelectionPage,
       affectedOrganisationQuestionsPage,
@@ -39,7 +39,7 @@ Then(
     const datasetAffectedOrgQuestions =
       affectedOrganisationQuestionsPage.affectedOrganisationQuestionsPageTestData[datasetNameAffectedOrgQuestions];
     const actualNewPlannedEndDate = confirmStringNotNull(
-      await reviewChangesPlannedEndDatePage.new_planned_project_end_date_text.textContent()
+      await modificationReviewChangesPage.new_planned_project_end_date_text.textContent()
     );
     const expectedNewPlannedEndDate = await convertDate(
       datasetPlannedEndDate.planned_project_end_day_text,
@@ -47,7 +47,7 @@ Then(
       datasetPlannedEndDate.planned_project_end_year_text
     );
     const actualAffectedOrgType = confirmStringNotNull(
-      await reviewChangesPlannedEndDatePage.affected_organisation_types_text.textContent()
+      await modificationReviewChangesPage.affected_organisation_types_text.textContent()
     );
     expect(actualNewPlannedEndDate).toBe(expectedNewPlannedEndDate);
     expect(actualAffectedOrgType).toBe(
@@ -61,15 +61,15 @@ Then(
 
     async function validateNhsFields() {
       const actualNhsAffectedLocations = confirmStringNotNull(
-        await reviewChangesPlannedEndDatePage.affected_nhs_hsc_locations_text.textContent()
+        await modificationReviewChangesPage.affected_nhs_hsc_locations_text.textContent()
       );
 
       const actualPortionOfAffected = confirmStringNotNull(
-        await reviewChangesPlannedEndDatePage.portion_of_nhs_hsc_organisations_affected_text.textContent()
+        await modificationReviewChangesPage.portion_of_nhs_hsc_organisations_affected_text.textContent()
       );
 
       const actualAdditionalResourcesImplications = confirmStringNotNull(
-        await reviewChangesPlannedEndDatePage.additional_resource_implications_text.textContent()
+        await modificationReviewChangesPage.additional_resource_implications_text.textContent()
       );
       const expectedNhsAffectedLocations =
         datasetAffectedOrgQuestions.where_organisation_change_affect_nhs_question_checkbox
@@ -86,7 +86,7 @@ Then(
 
     async function validateNonNhsFields() {
       const actualNonNhsAffectedLocations = confirmStringNotNull(
-        await reviewChangesPlannedEndDatePage.affected_non_nhs_hsc_locations_text.textContent()
+        await modificationReviewChangesPage.affected_non_nhs_hsc_locations_text.textContent()
       );
       expect(actualNonNhsAffectedLocations).toBe(
         datasetAffectedOrgQuestions.where_organisation_change_affect_non_nhs_question_checkbox
@@ -98,8 +98,8 @@ Then(
 );
 
 Then(
-  'I click the change link {string} on review changes planned end date page',
-  async ({ reviewChangesPlannedEndDatePage }, changeLink: string) => {
-    await reviewChangesPlannedEndDatePage.clickChangeLinks(changeLink);
+  'I click the change link {string} on modification review changes page',
+  async ({ modificationReviewChangesPage }, changeLink: string) => {
+    await modificationReviewChangesPage.clickChangeLinks(changeLink);
   }
 );

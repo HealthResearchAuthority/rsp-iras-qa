@@ -33,13 +33,24 @@
       "Addition of sites undertaking the same activities as existing sites"
     ],
     "Project_Design": ["Select specific change", "Change to planned end date"],
-    "Project_Documents": ["Select specific change", "Correction of typographical errors", "CRF/other study data records - Changes in the documentation used by the research team for recording study data", "GDPR wording - Accepted wording used verbatim", "Other minor change to study documents (e.g. information sheets, consent forms, questionnaires, letters) that will have additional resource implications for participating organisations", "Post trial information for participants (which does not contradict the protocol)", "Protocol - Non-substantial changes (e.g. not affecting safety or the scientific value of the trial)", "Translations - Addition of translated versions of participant-facing documentation"]
+    "Project_Documents": [
+      "Select specific change",
+      "Correction of typographical errors",
+      "CRF/other study data records - Changes in the documentation used by the research team for recording study data",
+      "GDPR wording - Accepted wording used verbatim",
+      "Other minor change to study documents (e.g. information sheets, consent forms, questionnaires, letters) that will have additional resource implications for participating organisations",
+      "Post trial information for participants (which does not contradict the protocol)",
+      "Protocol - Non-substantial changes (e.g. not affecting safety or the scientific value of the trial)",
+      "Translations - Addition of translated versions of participant-facing documentation"
+    ]
   },
   "Select_Area_Of_Change": {
     "Default_Value": { "area_of_change_dropdown": "Select area of change" },
     "Participating_Organisation": { "area_of_change_dropdown": "Participating organisations" },
     "Project_Design": { "area_of_change_dropdown": "Project design" },
-    "Project_Documents": { "area_of_change_dropdown": "Project documents" }
+    "Project_Documents": { "area_of_change_dropdown": "Project documents" },
+    "Participant_Procedures": { "area_of_change_dropdown": "Participant procedures" },
+    "Project_Personnel": { "area_of_change_dropdown": "Project personnel" }
   },
   "Select_Specific_Change": {
     "Default_Value": { "specific_change_dropdown": "Select specific change" },
@@ -72,6 +83,12 @@
     },
     "Translations_Addition_Of_Translated_Versions": {
       "specific_change_dropdown": "Translations - Addition of translated versions of participant-facing documentation"
+    },
+    "Other_Minor_Change_To_Participant_Procedures": {
+      "specific_change_dropdown": "Other minor change to participant procedures"
+    },
+    "Chief_Investigator_Conflict_Of_Interest": {
+      "specific_change_dropdown": "Chief investigator: conflict of interest"
     }
   }
 }

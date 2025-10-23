@@ -33,7 +33,7 @@ Feature: Create Amendment - Modification Details
     And I capture the page screenshot
     And I create '<Changes>' for the created modification
     And I capture the page screenshot
-    And I keep note of the individual and overall ranking of changes created using '<Changes>'
+    And I keep note of the individual and overall ranking of changes created using '<Changes>' and 'Valid_Data_All_Fields' dataset
     And I can see the modifications details page
     And I capture the page screenshot
     And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
@@ -54,7 +54,7 @@ Feature: Create Amendment - Modification Details
     And I can see the select area of change page
     And I capture the page screenshot
     And I create '<Changes>' for the created modification
-    And I keep note of the individual and overall ranking of changes created using '<Changes>'
+    And I keep note of the individual and overall ranking of changes created using '<Changes>' and 'Valid_Data_All_Fields' dataset
     And I can see the modifications details page
     And I capture the page screenshot
     When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
@@ -77,7 +77,7 @@ Feature: Create Amendment - Modification Details
     And I can see the select area of change page
     And I capture the page screenshot
     And I create '<Changes>' for the created modification
-    And I keep note of the individual and overall ranking of changes created using '<Changes>'
+    And I keep note of the individual and overall ranking of changes created using '<Changes>' and 'Valid_Data_All_Fields' dataset
     And I can see the modifications details page
     And I capture the page screenshot
     When I click the 'Remove' link on the 'Modification_Details_Page'
@@ -102,19 +102,19 @@ Feature: Create Amendment - Modification Details
     And I can see the select area of change page
     And I capture the page screenshot
     And I create '<Changes>' for the created modification
-    And I keep note of the individual and overall ranking of changes created using '<Changes>'
+    And I keep note of the individual and overall ranking of changes created using '<Changes>' and 'Valid_Data_All_Fields' dataset
     And I can see the modifications details page
     And I capture the page screenshot
     When I click the 'Change' link on the 'Modification_Details_Page'
-    And I can see the review changes planned end date page
+    And I can see the modification review changes page
     And I capture the page screenshot
-    When I click the change link '<Change_Field>' on review changes planned end date page
+    When I click the change link '<Change_Field>' on modification review changes page
     Then I can see the 'Planned_End_Date' page for modifications
     And I capture the page screenshot
     And I fill the planned project end date modifications page with '<Planned_End_Date_Change>'
     And I capture the page screenshot
     When I click the 'Save_Changes' button on the 'Modifications_Page'
-    And I can see the review changes planned end date page
+    And I can see the modification review changes page
     When I click the 'Save_Continue' button on the 'Review_Changes_Planned_End_Date_Page'
     And I can see the modifications details page
     And I capture the page screenshot

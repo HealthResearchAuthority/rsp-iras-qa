@@ -58,7 +58,7 @@ import ModificationsCommonPage from '../pages/IRAS/makeChanges/modifications/Mod
 import PlannedEndDateChangePage from '../pages/IRAS/makeChanges/modifications/PlannedEndDateChangePage';
 import AffectedOrganisationSelectionPage from '../pages/IRAS/makeChanges/modifications/applicabilityScreens/AffectedOrganisationSelectionPage';
 import AffectedOrganisationQuestionsPage from '../pages/IRAS/makeChanges/modifications/applicabilityScreens/AffectedOrganisationQuestionsPage';
-import ReviewChangesPlannedEndDatePage from '../pages/IRAS/makeChanges/modifications/changePlannedEndDate/ReviewChangesPlannedEndDatePage';
+import ModificationReviewChangesPage from '../pages/IRAS/makeChanges/modifications/changePlannedEndDate/ModificationReviewChangesPage';
 import AddDocumentsModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/AddDocumentsModificationsPage';
 import ReviewUploadedDocumentsModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/ReviewUploadedDocumentsModificationsPage';
 import ModificationsReceivedCommonPage from '../pages/IRAS/reviewResearch/receiveAmendments/ModificationsReceivedCommonPage';
@@ -130,7 +130,7 @@ type CustomFixtures = {
   plannedEndDateChangePage: PlannedEndDateChangePage;
   affectedOrganisationSelectionPage: AffectedOrganisationSelectionPage;
   affectedOrganisationQuestionsPage: AffectedOrganisationQuestionsPage;
-  reviewChangesPlannedEndDatePage: ReviewChangesPlannedEndDatePage;
+  modificationReviewChangesPage: ModificationReviewChangesPage;
   addDocumentsModificationsPage: AddDocumentsModificationsPage;
   reviewUploadedDocumentsModificationsPage: ReviewUploadedDocumentsModificationsPage;
   selectStudyWideReviewerPage: SelectStudyWideReviewerPage;
@@ -371,8 +371,8 @@ export const test = base.extend<CustomFixtures>({
     await use(new AffectedOrganisationQuestionsPage(page));
   },
 
-  reviewChangesPlannedEndDatePage: async ({ page }, use) => {
-    await use(new ReviewChangesPlannedEndDatePage(page));
+  modificationReviewChangesPage: async ({ page }, use) => {
+    await use(new ModificationReviewChangesPage(page));
   },
 
   addDocumentsModificationsPage: async ({ page }, use) => {
