@@ -1,7 +1,7 @@
 @UserAdministration @ManageReviewBodies @EditReviewBody @SysAdminUser @SystemTest @rsp-2572 @STSysAdmin
 Feature: User Administration: Manage Review Bodies - Edit review body
 
-    @accessReviewBodyProfile @Smoke @only
+    @accessReviewBodyProfile @Smoke
     Scenario: Verify that view and edit link takes the user to the Review Body Profile Page
         Given I have navigated to the 'System_Administration_Page'
         And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
@@ -12,7 +12,7 @@ Feature: User Administration: Manage Review Bodies - Edit review body
         Then I can see the review body profile page
         And I capture the page screenshot
 
-    @verifyReviewBodyProfileLayout @Smoke @only
+    @verifyReviewBodyProfileLayout @Smoke
     Scenario Outline: Verify that the review body profile page has the expected layout
         Given I navigate to a '<Status>' review body profile page
         When I can see the review body profile page
