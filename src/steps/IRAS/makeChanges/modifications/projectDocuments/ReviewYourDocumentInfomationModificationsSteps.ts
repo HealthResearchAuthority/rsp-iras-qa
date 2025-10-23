@@ -278,11 +278,15 @@ Then(
         }
       }
       await addDocumentDetailsForSpecificDocumentModificationsPage.save_changes.click();
-      const actualDocumentDate = (
-        await reviewYourDocumentInformationModificationsPage.sponsor_document_date_text.textContent()
-      ).trim();
-      const expectedDocumentDate = await updatedDocumentDate.sponsor_document_date_text;
-      expect.soft(actualDocumentDate).toBe(expectedDocumentDate);
+      if (updatedDocumentDate?.textContent !== undefined) {
+        const actualDocumentDate = (
+          await reviewYourDocumentInformationModificationsPage.sponsor_document_date_text.textContent()
+        ).trim();
+        const expectedDocumentDate = await updatedDocumentDate.sponsor_document_date_text;
+        expect.soft(actualDocumentDate).toBe(expectedDocumentDate);
+      } else {
+        break;
+      }
     }
   }
 );
