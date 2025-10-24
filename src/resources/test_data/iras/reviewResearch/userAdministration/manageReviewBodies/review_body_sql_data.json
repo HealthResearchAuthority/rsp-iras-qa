@@ -1,0 +1,10 @@
+{
+  "Active": 1,
+  "Disabled": 0,
+  "Non_Test_Review_Bodies": {
+    "England": "Health Research Authority (HRA)",
+    "Northern_Ireland": "Health and Social Care Northern Ireland (HSCNI)",
+    "Scotland": "National Research Service Permissions Coordination Centre (NRSPCC)",
+    "Wales": "Health and Care Research Wales (HCRW)"
+  }
+}

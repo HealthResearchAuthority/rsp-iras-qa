@@ -35,9 +35,10 @@ When(
           key == 'organisation_name_text'
         ) {
           const orgNameLocator: Locator = editReviewBodyPage[key];
-          const uniqueOrgNameValue = await generateTimeStampedValue(dataset[key], ' ');
+          const [uniqueOrgNameValue, uniqueOrgTimestamp] = await generateTimeStampedValue(dataset[key], ' ');
           await orgNameLocator.fill(uniqueOrgNameValue);
           await editReviewBodyPage.setUniqueOrgName(uniqueOrgNameValue);
+          await editReviewBodyPage.setUniqueOrgTimestamp(uniqueOrgTimestamp);
         } else {
           await commonItemsPage.fillUIComponent(dataset, key, editReviewBodyPage);
         }
@@ -54,9 +55,10 @@ When(
       if (Object.hasOwn(dataset, key)) {
         if (fieldName == 'Organisation_Name') {
           const orgNameLocator: Locator = editReviewBodyPage[key];
-          const uniqueOrgNameValue = await generateTimeStampedValue(dataset[key], ' ');
+          const [uniqueOrgNameValue, uniqueOrgTimestamp] = await generateTimeStampedValue(dataset[key], ' ');
           await orgNameLocator.fill(uniqueOrgNameValue);
           await editReviewBodyPage.setUniqueOrgName(uniqueOrgNameValue);
+          await editReviewBodyPage.setUniqueOrgTimestamp(uniqueOrgTimestamp);
         } else if (fieldName == 'Country') {
           const datasetNameClear: string = 'Edit_Review_Body_Page';
           const clearDataset = editReviewBodyPage.editReviewBodyPageData[datasetNameClear];
