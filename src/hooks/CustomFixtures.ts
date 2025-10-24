@@ -77,6 +77,9 @@ import SetupNewSponsorOrganisationPage from '../pages/IRAS/reviewResearch/userAd
 import CheckSetupSponsorOrganisationPage from '../pages/IRAS/reviewResearch/userAdministration/manageSponsorOrgs/CheckSetupSponsorOrganisationPage';
 import SponsorOrganisationProfilePage from '../pages/IRAS/reviewResearch/userAdministration/manageSponsorOrgs/SponsorOrganisationProfilePage';
 import UserListSponsorOrganisationPage from '../pages/IRAS/reviewResearch/userAdministration/manageSponsorOrgs/UserListSponsorOrganisationPage';
+import CheckAddUserSponsorOrganisationPage from '../pages/IRAS/reviewResearch/userAdministration/manageSponsorOrgs/CheckAddUserSponsorOrganisationPage';
+import SearchAddUserSponsorOrganisationPage from '../pages/IRAS/reviewResearch/userAdministration/manageSponsorOrgs/SearchAddUserSponsorOrganisationPage';
+import ViewEditUserProfilePage from '../pages/IRAS/reviewResearch/userAdministration/manageSponsorOrgs/ViewEditUserProfilePage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -154,6 +157,9 @@ type CustomFixtures = {
   checkSetupSponsorOrganisationPage: CheckSetupSponsorOrganisationPage;
   sponsorOrganisationProfilePage: SponsorOrganisationProfilePage;
   userListSponsorOrganisationPage: UserListSponsorOrganisationPage;
+  checkAddUserSponsorOrganisationPage: CheckAddUserSponsorOrganisationPage;
+  searchAddUserSponsorOrganisationPage: SearchAddUserSponsorOrganisationPage;
+  viewEditUserProfilePage: ViewEditUserProfilePage;
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -451,6 +457,18 @@ export const test = base.extend<CustomFixtures>({
 
   userListSponsorOrganisationPage: async ({ page }, use) => {
     await use(new UserListSponsorOrganisationPage(page));
+  },
+
+  checkAddUserSponsorOrganisationPage: async ({ page }, use) => {
+    await use(new CheckAddUserSponsorOrganisationPage(page));
+  },
+
+  searchAddUserSponsorOrganisationPage: async ({ page }, use) => {
+    await use(new SearchAddUserSponsorOrganisationPage(page));
+  },
+
+  viewEditUserProfilePage: async ({ page }, use) => {
+    await use(new ViewEditUserProfilePage(page));
   },
 
   makeAxeBuilder: async ({ page }, use) => {

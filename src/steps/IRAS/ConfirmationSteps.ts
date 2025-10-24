@@ -304,3 +304,35 @@ Then(
       .toBe(validationLabelsDataset.enable_confirmation_body_label);
   }
 );
+
+Then(
+  'I validate {string} labels displayed in disable user in sponsor organisation confirmation page using the user name',
+  async ({ confirmationPage, viewEditUserProfilePage }, validationLabelsDatasetName: string) => {
+    const userNameMemory =
+      (await viewEditUserProfilePage.getFirstName()) + ' ' + (await viewEditUserProfilePage.getLastName());
+    const validationLabelsDataset = confirmationPage.confirmationPageTestData[validationLabelsDatasetName];
+    const expectedConfirmationHeader = validationLabelsDataset.disable_confirmation_header_label + ' ' + userNameMemory;
+    expect
+      .soft(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim())
+      .toBe(expectedConfirmationHeader);
+    expect
+      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim())
+      .toBe(validationLabelsDataset.disable_confirmation_body_label);
+  }
+);
+
+Then(
+  'I validate {string} labels displayed in enable user in sponsor organisation confirmation page using the user name',
+  async ({ confirmationPage, viewEditUserProfilePage }, validationLabelsDatasetName: string) => {
+    const userNameMemory =
+      (await viewEditUserProfilePage.getFirstName()) + ' ' + (await viewEditUserProfilePage.getLastName());
+    const validationLabelsDataset = confirmationPage.confirmationPageTestData[validationLabelsDatasetName];
+    const expectedConfirmationHeader = validationLabelsDataset.enable_confirmation_header_label + ' ' + userNameMemory;
+    expect
+      .soft(confirmStringNotNull(await confirmationPage.confirmation_header_label.textContent()).trim())
+      .toBe(expectedConfirmationHeader);
+    expect
+      .soft(confirmStringNotNull(await confirmationPage.confirmation_body_label.textContent()).trim())
+      .toBe(validationLabelsDataset.enable_confirmation_body_label);
+  }
+);

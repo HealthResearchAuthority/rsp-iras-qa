@@ -29,7 +29,6 @@ Feature: User Administration: Manage Sponsor Organisations - Set up new sponsor 
         And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
         And I can see the 'newly added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
         And I capture the page screenshot
-        And I capture the page screenshot
         Then I click the view edit link of the 'newly added sponsor organisation'
         And I capture the page screenshot
         And I can see the sponsor organisation profile page

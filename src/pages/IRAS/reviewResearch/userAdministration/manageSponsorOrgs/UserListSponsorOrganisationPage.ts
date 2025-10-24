@@ -36,6 +36,10 @@ export default class UserListReviewBodyPage {
   readonly user_added_to_sponsor_organisation_success_message_header_text: Locator;
   readonly user_added_to_sponsor_organisation__success_message_text: Locator;
   readonly information_alert_banner: Locator;
+  readonly user_in_sponsor_organisation_disabled_success_message_header_text: Locator;
+  readonly user_in_sponsor_organisation_disabled_success_message_text: Locator;
+  readonly user_in_sponsor_organisation_enabled_success_message_header_text: Locator;
+  readonly user_in_sponsor_organisation_enabled_success_message_text: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -133,6 +137,30 @@ export default class UserListReviewBodyPage {
           .user_added_to_sponsor_organisation__success_message_text
       );
     this.information_alert_banner = this.page.getByRole('alert');
+    this.user_in_sponsor_organisation_disabled_success_message_header_text = this.page
+      .getByTestId('govuk-notification-banner-title')
+      .getByText(
+        this.userListSponsorOrgPageTestData.Sponsor_Organisation_User_List_Page
+          .user_in_sponsor_organisation_disabled_success_message_header_text
+      );
+    this.user_in_sponsor_organisation_disabled_success_message_text = this.page
+      .getByRole('heading')
+      .getByText(
+        this.userListSponsorOrgPageTestData.Sponsor_Organisation_User_List_Page
+          .user_in_sponsor_organisation_disabled_success_message_text
+      );
+    this.user_in_sponsor_organisation_enabled_success_message_header_text = this.page
+      .getByTestId('govuk-notification-banner-title')
+      .getByText(
+        this.userListSponsorOrgPageTestData.Sponsor_Organisation_User_List_Page
+          .user_in_sponsor_organisation_enabled_success_message_header_text
+      );
+    this.user_in_sponsor_organisation_enabled_success_message_text = this.page
+      .getByRole('heading')
+      .getByText(
+        this.userListSponsorOrgPageTestData.Sponsor_Organisation_User_List_Page
+          .user_in_sponsor_organisation_enabled_success_message_text
+      );
   }
 
   async goto(reviewBodyId: string): Promise<void> {

@@ -288,5 +288,9 @@
     "Email_Address": "Email address",
     "Status": "Status",
     "Last_Logged_In": "Last logged in"
+  },
+  "View_Edit_User_Profile_Page": {
+    "Disable_User": "Disable user",
+    "Enable_User": "Enable user"
   }
 }
