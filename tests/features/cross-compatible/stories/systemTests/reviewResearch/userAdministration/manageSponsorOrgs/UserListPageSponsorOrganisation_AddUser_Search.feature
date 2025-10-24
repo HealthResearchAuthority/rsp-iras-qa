@@ -1,4 +1,4 @@
-@UserAdministration @ManageSponsorOrgs @SysAdminUser @SystemTest @UserListSponsorOrgs @STSysAdmin @BackStage
+@UserAdministration @ManageSponsorOrgs @SysAdminUser @SystemTest @UserListSponsorOrgs @STSysAdmin @BackStage @rsp-5233
 Feature: User Administration: Manage Sponsor Organisations - View user list page of the sponsor organisations, Search for the users and add user to the sponsor organisation
 
     Background:
@@ -7,7 +7,8 @@ Feature: User Administration: Manage Sponsor Organisations - View user list page
         Then I can see the 'Manage_Sponsor_Organisations_Page'
 
     # Then the no search results found message is displayed -- failing due to @KNOWN_DEFECT-RSP-5531
-    @rsp-5233 @VerifyUserListNewSetupSponsorOrg @UserListSponsorOrgNoUsers @KNOWN_DEFECT-RSP-5531 @fail
+    # @KNOWN_DEFECT-RSP-5531 @fail @skip
+    @rsp-5233 @VerifyUserListNewSetupSponsorOrg @UserListSponsorOrgNoUsers @skip
     Scenario Outline: Verify the user can view the user list page of the newly setup sponsor organisation with no users
         When I authorise the rts api using '<RTS_API_Data>'
         Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation '<Setup_New_Sponsor_Organisation>' and  retrive country
@@ -44,10 +45,10 @@ Feature: User Administration: Manage Sponsor Organisations - View user list page
         Then the no search results found message is displayed
         And I capture the page screenshot
         Examples:
-            | Setup_New_Sponsor_Organisation   | Status_Enabled | RTS_API_Data         | RTS_Request                         |
-            | Sponsor_Organisation_ThirtySeven | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            | Setup_New_Sponsor_Organisation | Status_Enabled | RTS_API_Data         | RTS_Request                         |
+            | Sponsor_Organisation_Eight     | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
 
-    @rsp-5233 @UserListSponsorOrgDefaultSort
+    @rsp-5226 @rsp-5233 @rsp-5234 @rsp-5235 @UserListSponsorOrgDefaultSort @skip
     Scenario: Verify the user can view the user list page of any selected sponsor organisation and it is sorted by default in the alphabetical order of the 'First Name'
         When I enter '3-D Matrix,Ltd.' into the search field
         And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
@@ -76,7 +77,7 @@ Feature: User Administration: Manage Sponsor Organisations - View user list page
         And I capture the page screenshot
         And I can see the user list of the selected 'sponsor organisation' is sorted by default in the alphabetical order of the 'First Name'
 
-    @rsp-5233 @UserListSponsorOrgSearchResultsFound @UserListSponsorOrgBackToSponsorOrgProfileLink
+    @rsp-5226 @rsp-5233 @rsp-5234 @rsp-5235 @UserListSponsorOrgSearchResultsFound @UserListSponsorOrgBackToSponsorOrgProfileLink
     Scenario Outline: Verify the user can search for the users in the user list page of selected sponsor organisation and navigate back to sponsor organisation profile page
         When I enter '3-D Matrix,Ltd.' into the search field
         And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'

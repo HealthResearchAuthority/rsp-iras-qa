@@ -1100,18 +1100,18 @@ Then(
 );
 
 Then('the no search results found message is displayed', async ({ commonItemsPage }) => {
-  expect(commonItemsPage.tableRows).not.toBeVisible();
-  await expect(commonItemsPage.search_results_count).toHaveText(
-    commonItemsPage.searchFilterResultsData.search_no_results_count
-  );
-  await expect(commonItemsPage.search_no_results_container).toBeVisible();
-  await expect(commonItemsPage.search_no_results_header).toBeVisible();
-  await expect(commonItemsPage.search_no_results_guidance_text).toBeVisible();
-  await expect(commonItemsPage.search_no_results_guidance_points).toBeVisible();
+  await expect.soft(commonItemsPage.tableRows).not.toBeVisible();
+  await expect
+    .soft(commonItemsPage.search_results_count)
+    .toHaveText(commonItemsPage.searchFilterResultsData.search_no_results_count);
+  await expect.soft(commonItemsPage.search_no_results_container).toBeVisible();
+  await expect.soft(commonItemsPage.search_no_results_header).toBeVisible();
+  await expect.soft(commonItemsPage.search_no_results_guidance_text).toBeVisible();
+  await expect.soft(commonItemsPage.search_no_results_guidance_points).toBeVisible();
   const actualBulletPoints = commonItemsPage.search_no_results_guidance_points.getByRole('listitem');
-  await expect(actualBulletPoints).toHaveText(
-    commonItemsPage.searchFilterResultsData.search_no_results_guidance_points
-  );
+  await expect
+    .soft(actualBulletPoints)
+    .toHaveText(commonItemsPage.searchFilterResultsData.search_no_results_guidance_points);
 });
 
 Then('I {string} see the advanced filters panel', async ({ commonItemsPage }, visibility: string) => {
@@ -1368,16 +1368,16 @@ Then(
       if (sortDirection.toLowerCase() == 'ascending') {
         sortedList = [...actualList].toSorted((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
         if (sortField.toLowerCase() == 'status' && currentPage.toLowerCase() == 'first') {
-          expect(actualList).toContain(
-            manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.enabled_status
-          );
+          expect
+            .soft(actualList)
+            .toContain(manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.enabled_status);
         }
       } else {
         sortedList = [...actualList].toSorted((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
         if (sortField.toLowerCase() == 'status' && currentPage.toLowerCase() == 'first') {
-          expect(actualList).toContain(
-            manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.disabled_status
-          );
+          expect
+            .soft(actualList)
+            .toContain(manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.disabled_status);
         }
       }
       expect.soft(actualList).toEqual(sortedList);
@@ -1535,15 +1535,15 @@ Then(
       } else if (sortDirection.toLowerCase() == 'ascending') {
         sortedUserList = [...actualList].toSorted((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
         if (sortField.toLowerCase() == 'status' && currentPage.toLowerCase() == 'first') {
-          expect(actualList).toContain(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enabled_status);
+          expect.soft(actualList).toContain(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enabled_status);
         }
       } else {
         sortedUserList = [...actualList].toSorted((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
         if (sortField.toLowerCase() == 'status' && currentPage.toLowerCase() == 'first') {
-          expect(actualList).toContain(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.disabled_status);
+          expect.soft(actualList).toContain(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.disabled_status);
         }
       }
-      expect(actualList).toEqual(sortedUserList);
+      expect.soft(actualList).toEqual(sortedUserList);
     }
   }
 );
