@@ -1,4 +1,4 @@
-@SysAdminUser @homePageSmokeFeature @Smoke
+@SysAdminUser @homePageSmokeFeature @Smoke @only
 Feature: As an Authenticated Admin User I have Access to Authorised Application Features
 
     Background:
