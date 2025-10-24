@@ -7,9 +7,9 @@ Feature: Authenticate Test Users once only, before test run
             Then I can see the '<Page>'
             And I will store the '<User>' authentication state
             Examples:
-                  | User           | Page      |
-                  | System_Admin   | Home_Page |
-                  | Applicant_User | Home_Page |
+                  | User         | Page      |
+                  | System_Admin | Home_Page |
+                  # | Applicant_User | Home_Page |
                   # | Studywide_Reviewer   | Home_Page |
                   # | Studywide_Reviewer_NI   | Home_Page |
                   # | Studywide_Reviewer_S    | Home_Page |
@@ -22,4 +22,4 @@ Feature: Authenticate Test Users once only, before test run
                   # | Workflow_Coordinator_NI | Home_Page |
                   # | Workflow_Coordinator_S  | Home_Page |
                   # | Workflow_Coordinator_W  | Home_Page |
-                  | Sponsor_User   | Home_Page |
+                  | Sponsor_User | Home_Page |

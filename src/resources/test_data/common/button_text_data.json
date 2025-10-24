@@ -283,5 +283,9 @@
   },
   "Sponsor_Org_User_List_Page": {
     "Search": "Search"
+  },
+  "View_Edit_User_Profile_Page": {
+    "Disable_User": "Disable user",
+    "Enable_User": "Enable user"
   }
 }

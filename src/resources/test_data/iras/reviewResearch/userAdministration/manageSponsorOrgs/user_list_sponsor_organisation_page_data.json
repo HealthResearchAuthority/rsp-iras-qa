@@ -15,7 +15,11 @@
       "actions_label": "Action"
     },
     "user_added_to_sponsor_organisation_success_message_header_text": "Success",
-    "user_added_to_sponsor_organisation__success_message_text": "User added to this organisation"
+    "user_added_to_sponsor_organisation__success_message_text": "User added to this organisation",
+    "user_in_sponsor_organisation_disabled_success_message_header_text": "Success",
+    "user_in_sponsor_organisation_disabled_success_message_text": "User disabled",
+    "user_in_sponsor_organisation_enabled_success_message_header_text": "Success",
+    "user_in_sponsor_organisation_enabled_success_message_text": "User enabled"
   },
   "Search_For_Users_In_Sponsor_Organisations": {
     "Search_Queries": {

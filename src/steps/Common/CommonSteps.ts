@@ -41,6 +41,11 @@ When(
       myModificationsTasklistPage,
       manageSponsorOrganisationPage,
       setupNewSponsorOrganisationPage,
+      checkAddUserSponsorOrganisationPage,
+      searchAddUserSponsorOrganisationPage,
+      sponsorOrganisationProfilePage,
+      viewEditUserProfilePage,
+      userListSponsorOrganisationPage,
     },
     page: string
   ) => {
@@ -105,6 +110,21 @@ When(
         break;
       case 'Setup_New_Sponsor_Organisation_Page':
         await setupNewSponsorOrganisationPage.assertOnSetupNewSponsorOrganisationsPage();
+        break;
+      case 'Check_Add_User_Sponsor_Org_Page':
+        await checkAddUserSponsorOrganisationPage.assertOnCheckAddUserSponsorOrganisationPage();
+        break;
+      case 'Search_Add_User_Sponsor_Org_Page':
+        await searchAddUserSponsorOrganisationPage.assertOnSearchAddUserSponsorOrganisationPage();
+        break;
+      case 'Sponsor_Organisation_Profile_Page':
+        await sponsorOrganisationProfilePage.assertOnSponsorOrganisationProfilePage();
+        break;
+      case 'View_Edit_User_Profile_Page':
+        await viewEditUserProfilePage.assertOnViewEditUserProfilePage();
+        break;
+      case 'Sponsor_Org_User_List_Page':
+        await userListSponsorOrganisationPage.assertOnUserListSponsorOrgPage();
         break;
       default:
         throw new Error(`${page} is not a valid option`);
@@ -601,6 +621,7 @@ When(
       createReviewBodyPage,
       createUserProfilePage,
       checkSetupSponsorOrganisationPage,
+      checkAddUserSponsorOrganisationPage,
     },
     inputType: string
   ) => {
@@ -617,6 +638,9 @@ When(
         break;
       case 'name of the newly created user':
         searchValue = await createUserProfilePage.getUniqueEmail();
+        break;
+      case 'email of the newly added user in the selected sponsor organisation':
+        searchValue = await checkAddUserSponsorOrganisationPage.getUserEmail();
         break;
       default:
         searchValue = inputType;
@@ -1551,7 +1575,7 @@ Then(
 Then(
   'I can see the {string} ui labels on the {string} profile page',
   async (
-    { commonItemsPage, reviewBodyProfilePage, sponsorOrganisationProfilePage },
+    { commonItemsPage, reviewBodyProfilePage, sponsorOrganisationProfilePage, viewEditUserProfilePage },
     datasetName: string,
     orgType: string
   ) => {
@@ -1568,6 +1592,14 @@ Then(
       for (const key in dataset) {
         if (Object.hasOwn(dataset, key)) {
           const labelVal = await commonItemsPage.getUiLabel(key, sponsorOrganisationProfilePage);
+          expect.soft(labelVal).toBe(dataset[key]);
+        }
+      }
+    } else if (orgType === 'user in sponsor organisation') {
+      const dataset = viewEditUserProfilePage.viewEditUserProfilePageTestData[datasetName];
+      for (const key in dataset) {
+        if (Object.hasOwn(dataset, key)) {
+          const labelVal = await commonItemsPage.getUiLabel(key, viewEditUserProfilePage);
           expect.soft(labelVal).toBe(dataset[key]);
         }
       }
