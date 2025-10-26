@@ -4,7 +4,7 @@ import PlannedEndDateChangePage from './PlannedEndDateChangePage';
 import AffectedOrganisationSelectionPage from './applicabilityScreens/AffectedOrganisationSelectionPage';
 import AffectedOrganisationQuestionsPage from './applicabilityScreens/AffectedOrganisationQuestionsPage';
 import CommonItemsPage from '../../../Common/CommonItemsPage';
-import { confirmStringNotNull } from '../../../../utils/UtilFunctions';
+import { confirmStringNotNull, convertDate } from '../../../../utils/UtilFunctions';
 
 //Declare Page Objects
 export default class ModificationsCommonPage {
@@ -18,6 +18,15 @@ export default class ModificationsCommonPage {
   readonly modification_id_value: Locator;
   readonly status_value: Locator;
   readonly tableRows: Locator;
+  readonly changes_free_text: Locator;
+  readonly modification_type: Locator;
+  readonly category: Locator;
+  readonly review_type: Locator;
+  readonly changes_modification_type: Locator;
+  readonly changes_free_text_summary_error: Locator;
+  readonly overall_modification_ranking_sub_heading: Locator;
+  readonly changes_sub_heading: Locator;
+  readonly ranking_sub_heading: Locator;
 
   private rankingForChanges: Record<string, { modificationType: string; category: string; reviewType: string }[]> = {};
   private overallRankingForChanges: { modificationType: string; category: string; reviewType: string } = {
@@ -35,6 +44,13 @@ export default class ModificationsCommonPage {
     //Locators
     this.pageHeading = this.page.getByRole('heading');
     this.pageComponentLabel = this.page.getByRole('heading');
+    this.overall_modification_ranking_sub_heading = this.pageHeading.getByText(
+      modificationsCommonPageTestData.Label_Texts.overall_modification_ranking_label
+    );
+    this.ranking_sub_heading = this.pageHeading
+      .getByText(modificationsCommonPageTestData.Label_Texts.ranking_label)
+      .first();
+    this.changes_sub_heading = this.pageHeading.getByText(modificationsCommonPageTestData.Label_Texts.changes_label);
     this.iras_id_value = this.page
       .locator('[class$="key"]')
       .getByText(this.modificationsCommonPageTestData.Label_Texts.iras_id_label)
@@ -56,6 +72,32 @@ export default class ModificationsCommonPage {
       .locator('..')
       .locator('[class$="value"]');
     this.tableRows = this.page.getByRole('table').getByRole('row');
+    this.changes_free_text = this.page
+      .getByText(this.modificationsCommonPageTestData.Label_Texts.changes_free_textbox_label)
+      .locator('..')
+      .locator('textarea');
+
+    this.modification_type = this.page
+      .getByText(this.modificationsCommonPageTestData.Modification_Ranking_Label_Texts.modification_type_label)
+      .locator('..')
+      .locator('[class$="value"]');
+
+    this.category = this.page
+      .getByText(this.modificationsCommonPageTestData.Modification_Ranking_Label_Texts.category_label)
+      .locator('..')
+      .locator('[class$="value"]');
+
+    this.review_type = this.page
+      .getByText(this.modificationsCommonPageTestData.Modification_Ranking_Label_Texts.review_type_label)
+      .locator('..')
+      .locator('[class$="value"]');
+
+    this.changes_modification_type = this.page
+      .locator('.govuk-summary-card__content')
+      .nth(1)
+      .getByText(this.modificationsCommonPageTestData.Modification_Ranking_Label_Texts.modification_type_label)
+      .locator('[class$="value"]');
+    this.changes_free_text_summary_error = this.page.locator('.govuk-error-summary__list');
   }
 
   //Getters & Setters for Private Variables
@@ -74,17 +116,236 @@ export default class ModificationsCommonPage {
     await expect(this.pageHeading.getByText(pageHeader)).toBeVisible();
     await expect(this.page.getByText(pageComponentLabel)).toBeVisible();
   }
+  async validatePageHeading(pageHeadingText: any) {
+    await expect(this.pageHeading.getByText(pageHeadingText)).toBeVisible();
+  }
 
   async createChangeModification(changeName: string, dataset: any) {
-    if (changeName.toLowerCase().includes('planned_end_date')) {
+    if (dataset.specific_change_dropdown === 'Change to planned end date') {
       await new PlannedEndDateChangePage(this.page).fillPlannedProjectEndDateModificationsPage(dataset, 'create');
-      await new AffectedOrganisationSelectionPage(this.page).fillAffectedOrganisation(dataset, 'create');
-      await new AffectedOrganisationQuestionsPage(this.page).fillAffectedOrganisationQuestions(dataset, 'create');
-      await new CommonItemsPage(this.page).clickButton('Modifications_Page', 'Save_Continue');
-      return;
+    } else if (
+      this.modificationsCommonPageTestData.Modifications_To_Add_Free_Text.includes(dataset.specific_change_dropdown)
+    ) {
+      await this.fillFreeTextChangePage(
+        {
+          modificationsCommonPage: new ModificationsCommonPage(this.page),
+          commonItemsPage: new CommonItemsPage(this.page),
+        },
+        dataset
+      );
     }
-    // else if (changeName.toLowerCase().includes('project_documents'))
-    throw new Error(`${changeName} is not a valid option`);
+    if (this.modificationsCommonPageTestData.Applicability_Changes.includes(dataset.specific_change_dropdown)) {
+      await this.fillApplicabilityPages(dataset);
+    }
+    await this.validateRankingForIndividualChange(changeName);
+    await new CommonItemsPage(this.page).clickButton('Modifications_Page', 'Save_Continue');
+  }
+
+  async fillApplicabilityPages(dataset: any) {
+    await new AffectedOrganisationSelectionPage(this.page).fillAffectedOrganisation(dataset, 'create');
+    await new AffectedOrganisationQuestionsPage(this.page).fillAffectedOrganisationQuestions(dataset, 'create');
+  }
+
+  async fillFreeTextChangePage({ modificationsCommonPage, commonItemsPage }, dataset: any) {
+    await this.validatePageHeading(dataset.specific_change_dropdown);
+    for (const key in dataset) {
+      if (key === 'changes_free_text') {
+        await commonItemsPage.fillUIComponent(dataset, key, modificationsCommonPage);
+      }
+    }
+    await new CommonItemsPage(this.page).clickButton('Modifications_Page', 'Save_Continue');
+  }
+
+  async validateRankingForIndividualChange(changeName: string) {
+    const actualModificationType = confirmStringNotNull(await this.modification_type.textContent());
+    const actualCategory = confirmStringNotNull(await this.category.textContent());
+    const actualReviewType = confirmStringNotNull(await this.review_type.textContent());
+    const ranking = await this.getrankingForChanges();
+    const changeRankings = ranking[changeName];
+    if (changeRankings && changeRankings.length > 0) {
+      const { modificationType, category, reviewType } = changeRankings[0];
+      try {
+        expect(actualModificationType).toBe(modificationType);
+        expect(actualCategory).toBe(category);
+        expect(actualReviewType).toBe(reviewType);
+      } catch (error) {
+        console.error(
+          `Error validating Individual ranking on review changes page for the changeName: ${changeName}:`,
+          error
+        );
+        expect.soft(actualModificationType).toBe(modificationType);
+        expect.soft(actualCategory).toBe(category);
+        expect.soft(actualReviewType).toBe(reviewType);
+      }
+    } else {
+      throw new Error(`No ranking data found for changeName: ${changeName}`);
+    }
+  }
+
+  async validateIndividualAndOverallRanking() {
+    const changeCards = this.page.locator('.govuk-summary-card');
+    const ranking = await this.getrankingForChanges();
+    const changeNames = Object.keys(ranking);
+    const actualValuesArray: Array<{ modificationType: string; category: string; reviewType: string }> = [];
+    const relevantCards = [];
+    const totalCards = await changeCards.count();
+    for (let cardIndex = 0; cardIndex < totalCards; cardIndex++) {
+      const card = changeCards.nth(cardIndex);
+      const hasModificationType = await card
+        .locator('dt.govuk-summary-list__key')
+        .filter({
+          hasText: this.modificationsCommonPageTestData.Modification_Ranking_Label_Texts.modification_type_label,
+        })
+        .count();
+      if (hasModificationType > 0) {
+        relevantCards.push(card);
+      }
+    }
+
+    for (const card of relevantCards) {
+      const actualModificationType = confirmStringNotNull(
+        await card
+          .locator('dt.govuk-summary-list__key', {
+            hasText: this.modificationsCommonPageTestData.Modification_Ranking_Label_Texts.modification_type_label,
+          })
+          .locator('~ dd.govuk-summary-list__value')
+          .textContent()
+      );
+
+      const actualCategory = confirmStringNotNull(
+        await card
+          .locator('dt.govuk-summary-list__key', {
+            hasText: this.modificationsCommonPageTestData.Modification_Ranking_Label_Texts.category_label,
+          })
+          .locator('~ dd.govuk-summary-list__value')
+          .textContent()
+      );
+
+      const actualReviewType = confirmStringNotNull(
+        await card
+          .locator('dt.govuk-summary-list__key', {
+            hasText: this.modificationsCommonPageTestData.Modification_Ranking_Label_Texts.review_type_label,
+          })
+          .locator('~ dd.govuk-summary-list__value')
+          .textContent()
+      );
+
+      actualValuesArray.push({
+        modificationType: actualModificationType,
+        category: actualCategory,
+        reviewType: actualReviewType,
+      });
+    }
+    const reversedChangeNames = changeNames.toReversed();
+    const overall = this.overallRankingForChanges;
+    const firstActual = actualValuesArray[0];
+
+    try {
+      expect(firstActual.modificationType).toBe(overall.modificationType);
+      expect(firstActual.category).toBe(overall.category);
+      expect(firstActual.reviewType).toBe(overall.reviewType);
+    } catch (error) {
+      console.error('Error validating overall ranking:', error);
+    }
+
+    for (let arrayIndex = 0, fieldIndex = 1; arrayIndex < actualValuesArray.length - 1; arrayIndex++, fieldIndex++) {
+      const changeName = reversedChangeNames[arrayIndex];
+      const changeRankings = ranking[changeName];
+      if (changeRankings && changeRankings.length > 0) {
+        const { modificationType, category, reviewType } = changeRankings[0];
+        try {
+          expect(actualValuesArray[fieldIndex].modificationType).toBe(modificationType);
+          expect(actualValuesArray[fieldIndex].category).toBe(category);
+          expect(actualValuesArray[fieldIndex].reviewType).toBe(reviewType);
+        } catch (error) {
+          console.error(
+            `Error validating Individual ranking on modification details page for the changeName: ${changeName}:`,
+            error
+          );
+        }
+      } else {
+        throw new Error(`No ranking data found for changeName: ${changeName}`);
+      }
+    }
+  }
+
+  async validateAllFieldsOnModificationDetailsPage(datasetName: string) {
+    const changeCards = this.page.locator('.govuk-summary-card');
+    const changeDataset = this.modificationsCommonPageTestData[datasetName];
+    const changeNames = Object.keys(changeDataset);
+    const actualValuesArray: Array<{
+      specificChangeValue: string;
+      areaOfChangeSubHeading: string;
+      individualChangeStatus: string;
+    }> = [];
+    const relevantCards = [];
+    const totalCards = await changeCards.count();
+    const reversedChangeNames = changeNames.toReversed();
+    expect.soft(this.overall_modification_ranking_sub_heading).toBeVisible();
+    expect.soft(this.ranking_sub_heading).toBeVisible();
+    expect.soft(this.changes_sub_heading).toBeVisible();
+
+    for (let cardIndex = 1; cardIndex < totalCards; cardIndex++) {
+      const card = changeCards.nth(cardIndex);
+      relevantCards.push(card);
+    }
+    let changeIndex = 0;
+    for (const card of relevantCards) {
+      const actualSpecificChangeValue = confirmStringNotNull(
+        await card
+          .locator('dt.govuk-summary-list__key', {
+            hasText: changeDataset[reversedChangeNames[changeIndex]]['specific_change_dropdown'],
+          })
+          .locator('~ dd.govuk-summary-list__value')
+          .textContent()
+      ).trim();
+      const actualAreaOfChangeSubHeading = confirmStringNotNull(
+        await card
+          .getByText(
+            `Change ${changeIndex + 1} - ${changeDataset[reversedChangeNames[changeIndex]]['area_of_change_dropdown']}`
+          )
+          .textContent()
+      )
+        .trim()
+        .split('\n')[0];
+      const actualChangeStatus = confirmStringNotNull(await card.locator('h2 strong').textContent()).trim();
+
+      actualValuesArray.push({
+        specificChangeValue: actualSpecificChangeValue,
+        areaOfChangeSubHeading: actualAreaOfChangeSubHeading,
+        individualChangeStatus: actualChangeStatus,
+      });
+      changeIndex = changeIndex + 1;
+    }
+    for (let arrayIndex = 0, fieldIndex = 0; arrayIndex < actualValuesArray.length; arrayIndex++, fieldIndex++) {
+      const changeName = reversedChangeNames[arrayIndex];
+      for (const key of Object.keys(changeDataset[changeName])) {
+        const expectedChangeStatus = changeDataset[changeName]['change_status'];
+        expect.soft(actualValuesArray[fieldIndex].individualChangeStatus).toBe(expectedChangeStatus);
+        if (key.toLocaleLowerCase().includes('free_text')) {
+          const expectedAreaOfChangeSubHeading = `Change ${fieldIndex + 1} - ${changeDataset[reversedChangeNames[j]]['area_of_change_dropdown']}`;
+          expect(actualValuesArray[fieldIndex].areaOfChangeSubHeading).toBe(expectedAreaOfChangeSubHeading);
+          expect(actualValuesArray[fieldIndex].individualChangeStatus).toBe(
+            modificationsCommonPageTestData.Label_Texts.change_ready_for_submission_status_label
+          );
+          expect(actualValuesArray[fieldIndex].specificChangeValue).toBe(
+            changeDataset[changeName]['changes_free_text']
+          );
+        } else if (key.toLocaleLowerCase().includes('end_year')) {
+          const expectedNewPlannedEndDate = await convertDate(
+            changeDataset[changeName]['planned_project_end_day_text'],
+            changeDataset[changeName]['planned_project_end_month_dropdown'],
+            changeDataset[changeName]['planned_project_end_year_text']
+          );
+          const expectedAreaOfChangeSubHeading = `Change ${arrayIndex + 1} - ${changeDataset[changeName]['area_of_change_dropdown']}`;
+          expect(actualValuesArray[fieldIndex].areaOfChangeSubHeading).toBe(expectedAreaOfChangeSubHeading);
+          expect(actualValuesArray[fieldIndex].individualChangeStatus).toBe(
+            modificationsCommonPageTestData.Label_Texts.change_ready_for_submission_status_label
+          );
+          expect(actualValuesArray[fieldIndex].specificChangeValue).toBe(expectedNewPlannedEndDate);
+        }
+      }
+    }
   }
 
   async setrankingForChanges(changeName: string, modificationType: string, category: string, reviewType: string) {
@@ -106,55 +367,50 @@ export default class ModificationsCommonPage {
     return this.overallRankingForChanges;
   }
 
-  async calculateAndStoreRankingForChangesForNonApplicability(changeName: string) {
-    const modificationType = {
-      substantial: this.modificationsCommonPageTestData.Label_Texts.modification_type_substantial,
-      modification_of_important_detail:
-        this.modificationsCommonPageTestData.Label_Texts.modification_type_modification_of_important_detail,
-      minor_modification: this.modificationsCommonPageTestData.Label_Texts.modification_type_minor_modification,
-    }[
-      Object.keys(this.modificationsCommonPageTestData.Ranking_Modification_Type).find((key) =>
-        this.modificationsCommonPageTestData.Ranking_Modification_Type[key].some((item: string) =>
-          changeName.toLowerCase().includes(item.toLowerCase())
-        )
-      )
-    ];
-    const category = {
-      'n/a': this.modificationsCommonPageTestData.Label_Texts.category_n_a,
-      c: this.modificationsCommonPageTestData.Label_Texts.category_c,
-    }[
-      Object.keys(this.modificationsCommonPageTestData.Ranking_Category).find((key) =>
-        this.modificationsCommonPageTestData.Ranking_Category[key].some((item: string) =>
-          changeName.toLowerCase().includes(item.toLowerCase())
-        )
-      )
-    ];
-    const reviewType = {
-      Review_Required: this.modificationsCommonPageTestData.Label_Texts.review_type_review_required,
-      No_Review_Required: this.modificationsCommonPageTestData.Label_Texts.review_type_no_review_required,
-    }[
-      Object.keys(this.modificationsCommonPageTestData.Ranking_Review_Type).find((key) =>
-        this.modificationsCommonPageTestData.Ranking_Review_Type[key].some((item: string) =>
-          changeName.toLowerCase().includes(item.toLowerCase())
-        )
-      )
-    ];
+  async calculateAndStoreRankingForChangesForNonApplicability(
+    changeName: string,
+    changeDataset: any,
+    researchLocationDataset: any
+  ) {
+    const modificationType = await this.getModificationType(changeDataset);
+    const category = await this.getModificationCategoryForNonApplicability(changeDataset, researchLocationDataset);
+    const reviewType = await this.getModificationReviewType(changeDataset);
     this.setrankingForChanges(changeName, modificationType, category, reviewType);
   }
 
   async calculateAndStoreRankingForChangesForApplicability(changeName: string, dataset: any) {
-    const modificationType = {
-      substantial: this.modificationsCommonPageTestData.Label_Texts.modification_type_substantial,
-      modification_of_important_detail:
-        this.modificationsCommonPageTestData.Label_Texts.modification_type_modification_of_important_detail,
-      minor_modification: this.modificationsCommonPageTestData.Label_Texts.modification_type_minor_modification,
-    }[
-      Object.keys(this.modificationsCommonPageTestData.Ranking_Modification_Type).find((key) =>
-        this.modificationsCommonPageTestData.Ranking_Modification_Type[key].some((item: string) =>
-          changeName.toLowerCase().includes(item.toLowerCase())
-        )
+    const modificationType = await this.getModificationType(dataset);
+    const category = await this.getModificationCategoryForApplicability(dataset);
+    const reviewType = await this.getModificationReviewType(dataset);
+    this.setrankingForChanges(changeName, modificationType, category, reviewType);
+  }
+
+  async getModificationType(dataset: any): Promise<string> {
+    let modificationType: string;
+    if (
+      modificationsCommonPageTestData.Ranking_Modification_Type.Minor_Modifications.includes(
+        dataset.specific_change_dropdown
       )
-    ];
+    ) {
+      modificationType = this.modificationsCommonPageTestData.Label_Texts.modification_type_minor_modification;
+    } else if (
+      modificationsCommonPageTestData.Ranking_Modification_Type.Modification_Of_Important_Detail.includes(
+        dataset.specific_change_dropdown
+      )
+    ) {
+      modificationType =
+        this.modificationsCommonPageTestData.Label_Texts.modification_type_modification_of_important_detail;
+    } else if (
+      modificationsCommonPageTestData.Ranking_Modification_Type.Non_Notifiable_Modifications.includes(
+        dataset.specific_change_dropdown
+      )
+    ) {
+      modificationType = this.modificationsCommonPageTestData.Label_Texts.modification_type_non_notifiable;
+    }
+    return modificationType;
+  }
+
+  async getModificationCategoryForApplicability(dataset: any): Promise<string> {
     let category: string | undefined;
     let requiresResources: string | undefined;
     let affectedOrgs: string | undefined;
@@ -179,17 +435,37 @@ export default class ModificationsCommonPage {
     } else {
       category = undefined;
     }
-    const reviewType = {
-      Review_Required: this.modificationsCommonPageTestData.Label_Texts.review_type_review_required,
-      No_Review_Required: this.modificationsCommonPageTestData.Label_Texts.review_type_no_review_required,
-    }[
-      Object.keys(this.modificationsCommonPageTestData.Ranking_Review_Type).find((key) =>
-        this.modificationsCommonPageTestData.Ranking_Review_Type[key].some((item: string) =>
-          changeName.toLowerCase().includes(item.toLowerCase())
-        )
+    return category;
+  }
+
+  async getModificationCategoryForNonApplicability(changeDataset, researchLocationDataset: any): Promise<string> {
+    let category: string | undefined;
+    if (modificationsCommonPageTestData.Non_Applicability_Changes.includes(changeDataset.specific_change_dropdown)) {
+      if (researchLocationDataset['is_nhs_hsc_organisation_radio'] === 'Yes') {
+        category = this.modificationsCommonPageTestData.Label_Texts.category_c;
+      } else if (researchLocationDataset['is_nhs_hsc_organisation_radio'] === 'No') {
+        category = this.modificationsCommonPageTestData.Label_Texts.category_n_a;
+      }
+    }
+    return category;
+  }
+
+  async getModificationReviewType(dataset: any): Promise<string> {
+    let reviewType: string;
+    if (
+      modificationsCommonPageTestData.Ranking_Review_Type.Review_Required_Changes.includes(
+        dataset.specific_change_dropdown
       )
-    ];
-    this.setrankingForChanges(changeName, modificationType, category, reviewType);
+    ) {
+      reviewType = this.modificationsCommonPageTestData.Label_Texts.review_type_review_required;
+    } else if (
+      modificationsCommonPageTestData.Ranking_Review_Type.Non_Reviewable_Changes.includes(
+        dataset.specific_change_dropdown
+      )
+    ) {
+      reviewType = this.modificationsCommonPageTestData.Label_Texts.review_type_no_review_required;
+    }
+    return reviewType;
   }
 
   async calculateAndStoreOverallRanking() {
@@ -248,7 +524,7 @@ export default class ModificationsCommonPage {
     const specificChangeValue = await rows.nth(0).locator('.govuk-summary-list__key').innerText();
 
     const cardData: Record<string, any> = {};
-    const modificationInfo: Record<string, string> = {}; //  Separate record for individual change ranking and category
+    const modificationInfo: Record<string, string> = {};
 
     if (cardTitle.includes('Change')) {
       const cardTitleValue = await cardLocator.locator('.govuk-summary-card__title').textContent();
@@ -330,7 +606,7 @@ export default class ModificationsCommonPage {
         }
       }
     }
-    return { cardData, modificationInfo }; //  Return both separately (change data and ranking info)
+    return { cardData, modificationInfo };
   }
 
   async getModificationPostApprovalPage(): Promise<Map<string, string[]>> {

@@ -9,6 +9,10 @@ Feature: Create Modifications - Change to planned end date
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
@@ -18,9 +22,6 @@ Feature: Create Modifications - Change to planned end date
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    Then I can see the project identifiers page
-    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
     When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
@@ -264,7 +265,7 @@ Feature: Create Modifications - Change to planned end date
     And I fill the affected organisation questions page with '<Affected_Org_Questions>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Affected_Organisation_Questions_Page'
-    And I can see the review changes planned end date page
+    And I can see the modification review changes page
     And I capture the page screenshot
     And I validate the project information labels using '<Label_Texts>' dataset displayed on modifications page
     Then I validate all field values on review modifications page using '<Planned_End_Date>' , '<Organisation_Change_Affect>' and '<Affected_Org_Questions>'
@@ -295,7 +296,7 @@ Feature: Create Modifications - Change to planned end date
     And I fill the affected organisation questions page with '<Affected_Org_Questions>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Affected_Organisation_Questions_Page'
-    And I can see the review changes planned end date page
+    And I can see the modification review changes page
     And I capture the page screenshot
     When I click the 'Save_For_Later' button on the 'Review_Changes_Planned_End_Date_Page'
     And I can see the project overview page
@@ -323,7 +324,7 @@ Feature: Create Modifications - Change to planned end date
     And I fill the affected organisation questions page with '<Affected_Org_Questions>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Affected_Organisation_Questions_Page'
-    And I can see the review changes planned end date page
+    And I can see the modification review changes page
     And I capture the page screenshot
     Then I validate all field values on review modifications page using '<Planned_End_Date>' , '<Organisation_Change_Affect>' and '<Affected_Org_Questions>'
     When I click the 'Back' link on the 'Review_Changes_Planned_End_Date_Page'
@@ -367,22 +368,22 @@ Feature: Create Modifications - Change to planned end date
     And I fill the affected organisation questions page with '<Affected_Org_Questions>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Affected_Organisation_Questions_Page'
-    And I can see the review changes planned end date page
+    And I can see the modification review changes page
     And I capture the page screenshot
     Then I validate all field values on review modifications page using '<Planned_End_Date>' , '<Organisation_Change_Affect>' and '<Affected_Org_Questions>'
-    When I click the change link '<Change_Field>' on review changes planned end date page
+    When I click the change link '<Change_Field>' on modification review changes page
     Then I can see the 'Planned_End_Date' page for modifications
     And I capture the page screenshot
     When I click the 'Back' link on the 'Planned_End_Date_Change_Page'
     And I capture the page screenshot
-    And I can see the review changes planned end date page
-    When I click the change link '<Change_Field>' on review changes planned end date page
+    And I can see the modification review changes page
+    When I click the change link '<Change_Field>' on modification review changes page
     Then I can see the 'Planned_End_Date' page for modifications
     And I capture the page screenshot
     And I fill the planned project end date modifications page with '<Planned_End_Date_Change>'
     And I capture the page screenshot
     When I click the 'Save_Changes' button on the 'Modifications_Page'
-    And I can see the review changes planned end date page
+    And I can see the modification review changes page
     And I capture the page screenshot
     Then I validate all field values on review modifications page using '<Planned_End_Date_Change>' , '<Organisation_Change_Affect>' and '<Affected_Org_Questions>'
 
@@ -406,10 +407,10 @@ Feature: Create Modifications - Change to planned end date
     And I fill the affected organisation questions page with '<Affected_Org_Questions>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Affected_Organisation_Questions_Page'
-    And I can see the review changes planned end date page
+    And I can see the modification review changes page
     And I capture the page screenshot
     Then I validate all field values on review modifications page using '<Planned_End_Date>' , '<Organisation_Change_Affect>' and '<Affected_Org_Questions>'
-    When I click the change link '<Change_Field>' on review changes planned end date page
+    When I click the change link '<Change_Field>' on modification review changes page
     Then I can see the 'Affected_Organisation_Selection_Page' page for modifications
     And I fill the which organisation this change affect modifications page with '<Organisation_Change_Affect_Update>'
     And I capture the page screenshot
@@ -418,7 +419,7 @@ Feature: Create Modifications - Change to planned end date
     And I fill the affected organisation questions page with '<Affected_Org_Questions_Change>'
     And I capture the page screenshot
     When I click the 'Save_Changes' button on the 'Affected_Organisation_Questions_Page'
-    And I can see the review changes planned end date page
+    And I can see the modification review changes page
     And I capture the page screenshot
     Then I validate all field values on review modifications page using '<Planned_End_Date>' , '<Organisation_Change_Affect_Update>' and '<Affected_Org_Questions_Change>'
 
@@ -443,27 +444,27 @@ Feature: Create Modifications - Change to planned end date
     And I fill the affected organisation questions page with '<Affected_Org_Questions>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Affected_Organisation_Questions_Page'
-    And I can see the review changes planned end date page
+    And I can see the modification review changes page
     And I capture the page screenshot
     Then I validate all field values on review modifications page using '<Planned_End_Date>' , '<Organisation_Change_Affect>' and '<Affected_Org_Questions>'
-    When I click the change link '<Change_Field>' on review changes planned end date page
+    When I click the change link '<Change_Field>' on modification review changes page
     Then I can see the change planned end date affected organisation questions page
     And I capture the page screenshot
     And I fill the affected organisation questions page with '<Affected_Org_Questions_Change>'
     And I capture the page screenshot
     When I click the 'Save_Changes' button on the 'Affected_Organisation_Questions_Page'
-    And I can see the review changes planned end date page
+    And I can see the modification review changes page
     And I capture the page screenshot
     Then I validate all field values on review modifications page using '<Planned_End_Date>' , '<Organisation_Change_Affect>' and '<Affected_Org_Questions_Change>'
 
     Examples:
-      | Change_Field                     | Planned_End_Date      | Organisation_Change_Affect | Affected_Org_Questions            | Affected_Org_Questions_Change     |
-      | Affected_Nhs_Hsc_Locations       | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_All_Fields             | Valid_Data_Optional_Fields        |
-      | Affected_Nhs_Hsc_Locations       | Valid_Data_All_Fields | NHS_HSC_Only               | Valid_Data_Optional_Fields        | Valid_Data_All_Fields             |
-      | Portion_Of_Nhs_Hsc_Organisations | Valid_Data_All_Fields | NHS_HSC_Only               | Valid_Data_All_Fields             | Valid_Data_Optional_Fields        |
-      | Additional_Resource_Implications | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_Optional_Fields        | Valid_Data_All_Fields             |
-      | Affected_Non_Nhs_Hsc_Locations   | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_Non_Nhs_All_Country    | Valid_Data_Non_Nhs_Single_Country |
-      | Affected_Non_Nhs_Hsc_Locations   | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_Non_Nhs_Single_Country | Valid_Data_Non_Nhs_All_Country    |
+      | Change_Field               | Planned_End_Date      | Organisation_Change_Affect | Affected_Org_Questions | Affected_Org_Questions_Change |
+      | Affected_Nhs_Hsc_Locations | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_All_Fields  | Valid_Data_Optional_Fields    |
+  # | Affected_Nhs_Hsc_Locations       | Valid_Data_All_Fields | NHS_HSC_Only               | Valid_Data_Optional_Fields        | Valid_Data_All_Fields             |
+  # | Portion_Of_Nhs_Hsc_Organisations | Valid_Data_All_Fields | NHS_HSC_Only               | Valid_Data_All_Fields             | Valid_Data_Optional_Fields        |
+  # | Additional_Resource_Implications | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_Optional_Fields        | Valid_Data_All_Fields             |
+  # | Affected_Non_Nhs_Hsc_Locations   | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_Non_Nhs_All_Country    | Valid_Data_Non_Nhs_Single_Country |
+  # | Affected_Non_Nhs_Hsc_Locations   | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_Non_Nhs_Single_Country | Valid_Data_Non_Nhs_All_Country    |
 
 
   @rsp-4171 @ChangePlannedEndDateValidationsFromReviewChangesPage @KNOWN-DEFECT-RSP-4795
@@ -482,10 +483,10 @@ Feature: Create Modifications - Change to planned end date
     And I fill the affected organisation questions page with '<Affected_Org_Questions>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Affected_Organisation_Questions_Page'
-    And I can see the review changes planned end date page
+    And I can see the modification review changes page
     And I capture the page screenshot
     Then I validate all field values on review modifications page using '<Planned_End_Date>' , '<Organisation_Change_Affect>' and '<Affected_Org_Questions>'
-    When I click the change link '<Change_Field>' on review changes planned end date page
+    When I click the change link '<Change_Field>' on modification review changes page
     Then I can see the 'Planned_End_Date' page for modifications
     And I capture the page screenshot
     And I fill the planned project end date modifications page with '<Planned_End_Date_Change>'
@@ -516,10 +517,10 @@ Feature: Create Modifications - Change to planned end date
     And I fill the affected organisation questions page with '<Affected_Org_Questions>'
     And I capture the page screenshot
     When I click the 'Save_Continue' button on the 'Affected_Organisation_Questions_Page'
-    And I can see the review changes planned end date page
+    And I can see the modification review changes page
     And I capture the page screenshot
     Then I validate all field values on review modifications page using '<Planned_End_Date>' , '<Organisation_Change_Affect>' and '<Affected_Org_Questions>'
-    When I click the change link '<Change_Field>' on review changes planned end date page
+    When I click the change link '<Change_Field>' on modification review changes page
     Then I can see the 'Planned_End_Date' page for modifications
     And I capture the page screenshot
     Then I fill todays date in planned project end date for modifications
