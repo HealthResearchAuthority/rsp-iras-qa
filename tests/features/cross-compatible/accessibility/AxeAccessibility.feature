@@ -1428,7 +1428,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I expect to receive no WCAG Violations
 
   @axeAccessibilityManageSponsorOrgPage @SysAdminUser
-  Scenario: Manage sponsor organisation page of system administrator
+  Scenario: Manage sponsor organisation page
     Given I have navigated to the 'Home_Page'
     When I click the 'System_Administration' link on the 'Home_Page'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -1438,7 +1438,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I expect to receive no WCAG Violations
 
   @axeAccessibilitySetupNewSponsorOrgPage @SysAdminUser
-  Scenario: Set up a new sponsor organisation page of system administrator
+  Scenario: Set up a new sponsor organisation page
     Given I have navigated to the 'Home_Page'
     When I click the 'System_Administration' link on the 'Home_Page'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -1450,7 +1450,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I expect to receive no WCAG Violations
 
   @axeAccessibilityCheckSetupSponsorOrgPage @SysAdminUser
-  Scenario: Check setup sponsor organisation page of system administrator
+  Scenario: Check setup sponsor organisation page
     Given I have navigated to the 'Home_Page'
     When I click the 'System_Administration' link on the 'Home_Page'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -1465,7 +1465,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I expect to receive no WCAG Violations
 
   @axeAccessibilitySponsorOrgProfilePage @SysAdminUser
-  Scenario: Sponsor organisation profile page of system administrator
+  Scenario: Sponsor organisation profile page
     Given I have navigated to the 'Home_Page'
     When I click the 'System_Administration' link on the 'Home_Page'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -1480,8 +1480,51 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
+  @axeAccessibilityDisableSponsorOrgConfirmationPage @SysAdminUser @Testaxe
+  Scenario: Disable confirmation page of the sponsor organisation profile page
+    Given I have navigated to the 'Home_Page'
+    When I click the 'System_Administration' link on the 'Home_Page'
+    And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
+    Then I can see the 'Manage_Sponsor_Organisations_Page'
+    When I enter the 'Organisation_Name' of the 'First' item in the list, into the search field
+    And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+    Then the system displays 'sponsor organisations' matching the search criteria
+    And I can see the 'previously added sponsor organisation' should be present in the list with 'Enabled' status in the manage sponsor organisation page
+    Then I click the view edit link of the 'previously added sponsor organisation'
+    And I can see the sponsor organisation profile page
+    When I click the 'Disable' button on the 'Sponsor_Organisation_Profile_Page'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
   @axeAccessibilitySponsorOrgProfilePage @SysAdminUser @Testaxe
-  Scenario: User list page of the sponsor organisation profile page of system administrator
+  Scenario: Enable confirmation page of the sponsor organisation profile page
+    Given I have navigated to the 'Home_Page'
+    When I click the 'System_Administration' link on the 'Home_Page'
+    And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
+    Then I can see the 'Manage_Sponsor_Organisations_Page'
+    When I enter the 'Organisation_Name' of the 'First' item in the list, into the search field
+    And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+    Then the system displays 'sponsor organisations' matching the search criteria
+    And I can see the 'previously added sponsor organisation' should be present in the list with 'Enabled' status in the manage sponsor organisation page
+    Then I click the view edit link of the 'previously added sponsor organisation'
+    And I can see the sponsor organisation profile page
+    When I click the 'Disable' button on the 'Sponsor_Organisation_Profile_Page'
+    When I click the 'Confirm' button on the 'Confirmation_Page'
+    Then I can see the 'Manage_Sponsor_Organisations_Page'
+    When I enter the 'Organisation_Name' of the 'First' item in the list, into the search field
+    And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+    Then the system displays 'sponsor organisations' matching the search criteria
+    And I can see the 'previously added sponsor organisation' should be present in the list with 'Enabled' status in the manage sponsor organisation page
+    Then I click the view edit link of the 'previously added sponsor organisation'
+    And I can see the sponsor organisation profile page
+    When I click the 'Enable' button on the 'Sponsor_Organisation_Profile_Page'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityUserlistSponsorOrgProfilePage @SysAdminUser @Testaxe
+  Scenario: User list page of the sponsor organisation profile page
     Given I have navigated to the 'Home_Page'
     When I click the 'System_Administration' link on the 'Home_Page'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -1498,8 +1541,8 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilitySponsorOrgProfilePage @SysAdminUser @Testaxe
-  Scenario: Disable confirmation page of the sponsor organisation profile page of system administrator
+  @axeAccessibilitySearchAddUserFromUserlistSponsorOrgProfilePage @SysAdminUser @Testaxe
+  Scenario: Search and add a new user page from the user list page of the sponsor organisation profile page
     Given I have navigated to the 'Home_Page'
     When I click the 'System_Administration' link on the 'Home_Page'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -1511,13 +1554,14 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I click the view edit link of the 'previously added sponsor organisation'
     And I can see the sponsor organisation profile page
     And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
-    When I click the 'Disable' button on the 'Sponsor_Organisation_Profile_Page'
+    Then I can see the user list page of the 'sponsor organisation'
+    And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
-  @axeAccessibilitySponsorOrgProfilePage @SysAdminUser @Testaxe
-  Scenario: Disable confirmation page of the sponsor organisation profile page of system administrator
+  @axeAccessibilityCheckAddUserToSponsorOrgPage @SysAdminUser @Testaxe
+  Scenario: Check and add user to sponsor organisation page
     Given I have navigated to the 'Home_Page'
     When I click the 'System_Administration' link on the 'Home_Page'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
@@ -1529,8 +1573,122 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     Then I click the view edit link of the 'previously added sponsor organisation'
     And I can see the sponsor organisation profile page
     And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
-    When I click the 'Disable' button on the 'Sponsor_Organisation_Profile_Page'
+    Then I can see the user list page of the 'sponsor organisation'
+    And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
+    When I enter 'QA Automation' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
+  @axeAccessibilityViewEditUserProfilePageofSponsorOrg @SysAdminUser @Testaxe
+  Scenario:  View and edit user profile page of the sponsor organisation
+    Given I have navigated to the 'Home_Page'
+    When I click the 'System_Administration' link on the 'Home_Page'
+    And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
+    Then I can see the 'Manage_Sponsor_Organisations_Page'
+    When I enter the 'Organisation_Name' of the 'First' item in the list, into the search field
+    And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+    Then the system displays 'sponsor organisations' matching the search criteria
+    And I can see the 'previously added sponsor organisation' should be present in the list with 'Enabled' status in the manage sponsor organisation page
+    Then I click the view edit link of the 'previously added sponsor organisation'
+    And I can see the sponsor organisation profile page
+    And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
+    Then I can see the user list page of the 'sponsor organisation'
+    And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
+    Then I can see the 'Search_Add_User_Sponsor_Org_Page'
+    When I enter 'QA Automation' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    Then I can see the 'Check_Add_User_Sponsor_Org_Page'
+    And the check and add user to sponsor organisation page displays the expected user details
+    And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    Then I can see the user added successful message on sponsor organisation user list page
+    Then I can see the user list page of the 'sponsor organisation'
+    When I enter 'email of the newly added user in the selected sponsor organisation' into the search field
+    And I click the 'Search' button on the 'Sponsor_Org_User_List_Page'
+    When I click the 'View_Edit' link on the 'Sponsor_Org_User_List_Page'
+    Then I can see the 'View_Edit_User_Profile_Page'
+    And I can see the view and edit user profile page of the sponsor organisation
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityDisableUserConfirmationPageofSponsorOrg @SysAdminUser @Testaxe
+  Scenario:  Disable user confirmation page of the sponsor organisation
+    Given I have navigated to the 'Home_Page'
+    When I click the 'System_Administration' link on the 'Home_Page'
+    And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
+    Then I can see the 'Manage_Sponsor_Organisations_Page'
+    When I enter the 'Organisation_Name' of the 'First' item in the list, into the search field
+    And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+    Then the system displays 'sponsor organisations' matching the search criteria
+    And I can see the 'previously added sponsor organisation' should be present in the list with 'Enabled' status in the manage sponsor organisation page
+    Then I click the view edit link of the 'previously added sponsor organisation'
+    And I can see the sponsor organisation profile page
+    And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
+    Then I can see the user list page of the 'sponsor organisation'
+    And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
+    Then I can see the 'Search_Add_User_Sponsor_Org_Page'
+    When I enter 'QA Automation' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    Then I can see the 'Check_Add_User_Sponsor_Org_Page'
+    And the check and add user to sponsor organisation page displays the expected user details
+    And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    Then I can see the user added successful message on sponsor organisation user list page
+    Then I can see the user list page of the 'sponsor organisation'
+    When I enter 'email of the newly added user in the selected sponsor organisation' into the search field
+    And I click the 'Search' button on the 'Sponsor_Org_User_List_Page'
+    When I click the 'View_Edit' link on the 'Sponsor_Org_User_List_Page'
+    Then I can see the 'View_Edit_User_Profile_Page'
+    And I can see the view and edit user profile page of the sponsor organisation
+    When I click the 'Disable_User' button on the 'View_Edit_User_Profile_Page'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityyEnableUserConfirmationPageofSponsorOrg @SysAdminUser @Testaxe
+  Scenario:  Enable user confirmation page of the sponsor organisation
+    Given I have navigated to the 'Home_Page'
+    When I click the 'System_Administration' link on the 'Home_Page'
+    And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
+    Then I can see the 'Manage_Sponsor_Organisations_Page'
+    When I enter the 'Organisation_Name' of the 'First' item in the list, into the search field
+    And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+    Then the system displays 'sponsor organisations' matching the search criteria
+    And I can see the 'previously added sponsor organisation' should be present in the list with 'Enabled' status in the manage sponsor organisation page
+    Then I click the view edit link of the 'previously added sponsor organisation'
+    And I can see the sponsor organisation profile page
+    And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
+    Then I can see the user list page of the 'sponsor organisation'
+    And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
+    Then I can see the 'Search_Add_User_Sponsor_Org_Page'
+    When I enter 'QA Automation' into the search field
+    And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+    When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+    Then I can see the 'Check_Add_User_Sponsor_Org_Page'
+    And the check and add user to sponsor organisation page displays the expected user details
+    And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
+    Then I can see the user added successful message on sponsor organisation user list page
+    Then I can see the user list page of the 'sponsor organisation'
+    When I enter 'email of the newly added user in the selected sponsor organisation' into the search field
+    And I click the 'Search' button on the 'Sponsor_Org_User_List_Page'
+    When I click the 'View_Edit' link on the 'Sponsor_Org_User_List_Page'
+    Then I can see the 'View_Edit_User_Profile_Page'
+    And I can see the view and edit user profile page of the sponsor organisation
+    When I click the 'Disable_User' button on the 'View_Edit_User_Profile_Page'
+    When I click the 'Confirm' button on the 'Confirmation_Page'
+    Then I can see the user in the selected sponsor organisation disabled successful message on sponsor organisation user list page
+    Then I can see the 'Sponsor_Org_User_List_Page'
+    Then I can see the user list page of the 'sponsor organisation'
+    When I enter 'email of the newly added user in the selected sponsor organisation' into the search field
+    And I click the 'Search' button on the 'Sponsor_Org_User_List_Page'
+    When I click the 'View_Edit' link on the 'Sponsor_Org_User_List_Page'
+    Then I can see the 'View_Edit_User_Profile_Page'
+    When I click the 'Enable_User' button on the 'View_Edit_User_Profile_Page'
+    When I click the 'Confirm' button on the 'Confirmation_Page'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
