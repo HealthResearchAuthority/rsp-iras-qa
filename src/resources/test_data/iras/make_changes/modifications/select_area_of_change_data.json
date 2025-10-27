@@ -50,7 +50,8 @@
     "Project_Design": { "area_of_change_dropdown": "Project design" },
     "Project_Documents": { "area_of_change_dropdown": "Project documents" },
     "Participant_Procedures": { "area_of_change_dropdown": "Participant procedures" },
-    "Project_Personnel": { "area_of_change_dropdown": "Project personnel" }
+    "Project_Personnel": { "area_of_change_dropdown": "Project personnel" },
+    "Administrative_Details_Project": { "area_of_change_dropdown": "Administrative details for the project" }
   },
   "Select_Specific_Change": {
     "Default_Value": { "specific_change_dropdown": "Select specific change" },
@@ -89,6 +90,9 @@
     },
     "Chief_Investigator_Conflict_Of_Interest": {
       "specific_change_dropdown": "Chief investigator: conflict of interest"
+    },
+    "Contact_Details": {
+      "specific_change_dropdown": "Contact details"
     }
   }
 }

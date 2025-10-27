@@ -108,6 +108,22 @@
     "Affected_Organisation_Selection_Page": {
       "page_header": "Change to planned end date",
       "page_component_label": "Which organisation types does this change affect?"
+    },
+    "Contact_Details_Select_Change_Page": {
+      "page_header": "Contact details",
+      "page_component_label": "Select details to change"
+    },
+    "Contact_Details_Chief_Investigator_Page": {
+      "page_header": "Contact details",
+      "page_component_label": "Chief investigator"
+    },
+    "Contact_Details_Sponsor_Contact_Page": {
+      "page_header": "Contact details",
+      "page_component_label": "Sponsor contact email"
+    },
+    "Contact_Details_Other_Page": {
+      "page_header": "Contact details",
+      "page_component_label": "Name"
     }
   },
   "Rec": [],
@@ -141,14 +157,16 @@
       "Changes to funding arrangements such as payments, benefits or incentives to be received by participants",
       "Inclusion or withdrawal of an EU Member State or third country outside of the UK",
       "Insurance renewal - no change to the level or breadth of cover",
-      "Participant procedures: non-significant change"
+      "Participant procedures: non-significant change",
+      "Contact details"
     ]
   },
   "Ranking_Modification_Type": {
     "Modification_Of_Important_Detail": [
       "Change to planned end date",
       "Principal investigator: conflict of interest",
-      "Change of sponsor’s legal representative"
+      "Change of sponsor’s legal representative",
+      "Contact details"
     ],
     "Minor_Modifications": [
       "Other significant change to participant procedures",
@@ -463,6 +481,25 @@
       "will_some_or_all_organisations_be_affected_question_radio": "All",
       "will_nhs_hsc_organisations_require_additional_resources_question_radio": "Yes",
       "where_organisation_change_affect_non_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
+    },
+    "Contact_Details_Chief_Investigator": {
+      "area_of_change_dropdown": "Administrative details for the project",
+      "specific_change_dropdown": "Contact details",
+      "select_contact_details_to_change_radio": "Chief investigator",
+      "chief_investigator_email_text": "ci_test_modified@test.com"
+    },
+    "Contact_Details_Sponsor_Contact": {
+      "area_of_change_dropdown": "Administrative details for the project",
+      "specific_change_dropdown": "Contact details",
+      "select_contact_details_to_change_radio": "Sponsor contact",
+      "sponsor_contact_email_text": "sponsor_test_modified@test.com"
+    },
+    "Contact_Details_Other": {
+      "area_of_change_dropdown": "Administrative details for the project",
+      "specific_change_dropdown": "Contact details",
+      "select_contact_details_to_change_radio": "Other",
+      "contact_name_text": "New modified contact name",
+      "contact_email_text": "other_contact_test_modified@test.com"
     }
   },
   "Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Non_Applicability": {
@@ -574,6 +611,31 @@
       "will_some_or_all_organisations_be_affected_question_radio": "All",
       "will_nhs_hsc_organisations_require_additional_resources_question_radio": "Yes",
       "where_organisation_change_affect_non_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
+    }
+  },
+  "Contact_Details_Chief_Investigator": {
+    "Contact_Details_Chief_Investigator": {
+      "area_of_change_dropdown": "Administrative details for the project",
+      "specific_change_dropdown": "Contact details",
+      "select_contact_details_to_change_radio": "Chief investigator",
+      "chief_investigator_email_text": "ci_test_modified@test.com"
+    }
+  },
+  "Contact_Details_Sponsor_Contact": {
+    "Contact_Details_Sponsor_Contact": {
+      "area_of_change_dropdown": "Administrative details for the project",
+      "specific_change_dropdown": "Contact details",
+      "select_contact_details_to_change_radio": "Sponsor contact",
+      "sponsor_contact_email_text": "sponsor_test_modified@test.com"
+    }
+  },
+  "Contact_Details_Other": {
+    "Contact_Details_Other": {
+      "area_of_change_dropdown": "Administrative details for the project",
+      "specific_change_dropdown": "Contact details",
+      "select_contact_details_to_change_radio": "Other",
+      "contact_name_text": "New modified contact name",
+      "contact_email_text": "other_contact_test_modified@test.com"
     }
   }
 }

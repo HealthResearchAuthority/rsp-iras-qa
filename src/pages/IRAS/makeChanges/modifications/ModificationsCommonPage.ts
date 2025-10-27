@@ -5,6 +5,7 @@ import AffectedOrganisationSelectionPage from './applicabilityScreens/AffectedOr
 import AffectedOrganisationQuestionsPage from './applicabilityScreens/AffectedOrganisationQuestionsPage';
 import CommonItemsPage from '../../../Common/CommonItemsPage';
 import { confirmStringNotNull, convertDate } from '../../../../utils/UtilFunctions';
+import ContactDetailsModificationPage from './ContactDetailsModificationPage';
 
 //Declare Page Objects
 export default class ModificationsCommonPage {
@@ -123,6 +124,8 @@ export default class ModificationsCommonPage {
   async createChangeModification(changeName: string, dataset: any) {
     if (dataset.specific_change_dropdown === 'Change to planned end date') {
       await new PlannedEndDateChangePage(this.page).fillPlannedProjectEndDateModificationsPage(dataset, 'create');
+    } else if (dataset.specific_change_dropdown === 'Contact details') {
+      await new ContactDetailsModificationPage(this.page).fillContactDetailsModificationsPage(dataset, 'create');
     } else if (
       this.modificationsCommonPageTestData.Modifications_To_Add_Free_Text.includes(dataset.specific_change_dropdown)
     ) {
@@ -323,7 +326,7 @@ export default class ModificationsCommonPage {
         const expectedChangeStatus = changeDataset[changeName]['change_status'];
         expect.soft(actualValuesArray[fieldIndex].individualChangeStatus).toBe(expectedChangeStatus);
         if (key.toLocaleLowerCase().includes('free_text')) {
-          const expectedAreaOfChangeSubHeading = `Change ${fieldIndex + 1} - ${changeDataset[reversedChangeNames[j]]['area_of_change_dropdown']}`;
+          const expectedAreaOfChangeSubHeading = `Change ${fieldIndex + 1} - ${changeDataset[reversedChangeNames[arrayIndex]]['area_of_change_dropdown']}`;
           expect(actualValuesArray[fieldIndex].areaOfChangeSubHeading).toBe(expectedAreaOfChangeSubHeading);
           expect(actualValuesArray[fieldIndex].individualChangeStatus).toBe(
             modificationsCommonPageTestData.Label_Texts.change_ready_for_submission_status_label

@@ -1,0 +1,136 @@
+{
+  "Label_Texts": {
+    "chief_investigator_email_label": "Chief investigator",
+    "current_chief_investigator_email_label": "Current chief investigator email:",
+    "sponsor_contact_email_label": "Sponsor contact email",
+    "contact_name_label": "Name",
+    "contact_email_label": "Email",
+    "select_contact_detail_enter_link": "Enter select details to change",
+    "chief_investigator_enter_link": "Enter new chief investigator email",
+    "sponsor_contact_enter_link": "Enter sponsor contact email",
+    "other_contact_name_enter_link": "Enter name",
+    "other_contact_email_enter_link": "Enter email"
+  },
+  "Chief_Investigator_Invalid_Email_Error_Message": {
+    "chief_investigator_email_text": "Enter an email address in the correct format"
+  },
+  "Sponsor_Contact_Invalid_Email_Error_Message": {
+    "sponsor_contact_email_text": "Enter an email address in the correct format"
+  },
+  "Other_Email_Field_Invalid_Email_Error_Message": {
+    "contact_email_text": "Enter an email address in the correct format"
+  },
+  "Contact_Details_Chief_Investigator_Valid_Data": {
+    "select_contact_details_to_change_radio": "Chief investigator",
+    "chief_investigator_email_text": "ci_test_modified@test.com"
+  },
+  "Contact_Details_Sponsor_Contact_Valid_Data": {
+    "select_contact_details_to_change_radio": "Sponsor contact",
+    "sponsor_contact_email_text": "sponsor_test_modified@test.com"
+  },
+  "Contact_Details_Other_Valid_Data": {
+    "select_contact_details_to_change_radio": "Other",
+    "contact_name_text": "New modified contact name",
+    "contact_email_text": "other_contact_test_modified@test.com"
+  },
+  "Empty_Data_Select_Contact_All_Fields": {
+    "select_contact_details_to_change_radio": ""
+  },
+  "Empty_Data_CI_Fields": {
+    "select_contact_details_to_change_radio": "Chief investigator",
+    "chief_investigator_email_text": ""
+  },
+  "Empty_Data_Sponsor_Contact_All_Fields": {
+    "select_contact_details_to_change_radio": "Sponsor contact",
+    "sponsor_contact_email_text": ""
+  },
+  "Empty_Data_Other_Contact_All_Fields": {
+    "select_contact_details_to_change_radio": "Other",
+    "contact_name_text": "",
+    "contact_email_text": ""
+  },
+  "Chief_Investigator_Email_Change": {
+    "chief_investigator_email_text": "ci_test_modified_change@test.com"
+  },
+  "Sponsor_Contact_Email_Change": {
+    "sponsor_contact_email_text": "sponsor_test_modified_change@test.com"
+  },
+  "Contact_Name_Change": {
+    "contact_name_text": "Modified Contact Name Change"
+  },
+  "Contact_Email_Change": {
+    "contact_email_text": "other_contact_test_modified_change@test.com"
+  },
+  "Invalid_Email_CI_Data_One_Start_With_Dot": {
+    "select_contact_details_to_change_radio": "Chief investigator",
+    "chief_investigator_email_text": ".john@example.com"
+  },
+  "Invalid_Email_CI_Data_One_Double_Dot": {
+    "select_contact_details_to_change_radio": "Chief investigator",
+    "chief_investigator_email_text": "john..doe@example.com"
+  },
+  "Invalid_Email_CI_Data_One_TLD": {
+    "select_contact_details_to_change_radio": "Chief investigator",
+    "chief_investigator_email_text": "john.doe@example.1234"
+  },
+  "Invalid_Email_CI_Data_One_Reserved_Domain": {
+    "select_contact_details_to_change_radio": "Chief investigator",
+    "chief_investigator_email_text": "john.doe@localhost"
+  },
+  "Invalid_Email_CI_Data_One_Punycode": {
+    "select_contact_details_to_change_radio": "Chief investigator",
+    "chief_investigator_email_text": "john@example.xn--mgbh0fb"
+  },
+  "Invalid_Email_CI_Data_One_Max_Char": {
+    "select_contact_details_to_change_radio": "Chief investigator",
+    "chief_investigator_email_text": "EmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExcee@example.com"
+  },
+  "Invalid_Email_SC_Data_One_Start_With_Dot": {
+    "select_contact_details_to_change_radio": "Sponsor contact",
+    "sponsor_contact_email_text": ".john@example.com"
+  },
+  "Invalid_Email_SC_Data_One_Double_Dot": {
+    "select_contact_details_to_change_radio": "Sponsor contact",
+    "sponsor_contact_email_text": "john..doe@example.com"
+  },
+  "Invalid_Email_SC_Data_One_TLD": {
+    "select_contact_details_to_change_radio": "Sponsor contact",
+    "sponsor_contact_email_text": "john.doe@example.1234"
+  },
+  "Invalid_Email_SC_Data_One_Reserved_Domain": {
+    "select_contact_details_to_change_radio": "Sponsor contact",
+    "sponsor_contact_email_text": "john.doe@localhost"
+  },
+  "Invalid_Email_SC_Data_One_Punycode": {
+    "select_contact_details_to_change_radio": "Sponsor contact",
+    "sponsor_contact_email_text": "john@example.xn--mgbh0fb"
+  },
+  "Invalid_Email_SC_Data_One_Max_Char": {
+    "select_contact_details_to_change_radio": "Sponsor contact",
+    "sponsor_contact_email_text": "EmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExcee@example.com"
+  },
+  "Invalid_Email_Other_Data_One_Start_With_Dot": {
+    "select_contact_details_to_change_radio": "Other",
+    "contact_email_text": ".john@example.com"
+  },
+  "Invalid_Email_Other_Data_One_Double_Dot": {
+    "select_contact_details_to_change_radio": "Other",
+    "contact_email_text": "john..doe@example.com"
+  },
+  "Invalid_Email_Other_Data_One_TLD": {
+    "select_contact_details_to_change_radio": "Other",
+    "contact_email_text": "john.doe@example.1234"
+  },
+  "Invalid_Email_Other_Data_One_Reserved_Domain": {
+    "select_contact_details_to_change_radio": "Other",
+    "contact_email_text": "john.doe@localhost"
+  },
+  "Invalid_Email_Other_Data_One_Punycode": {
+    "select_contact_details_to_change_radio": "Other",
+    "contact_email_text": "john@example.xn--mgbh0fb"
+  },
+  "Invalid_Email_Other_Data_One_Max_Char": {
+    "select_contact_details_to_change_radio": "Other",
+    "contact_email_text": "EmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExceeds320CharactersEmailAddressThatExcee@example.com"
+  }
+}

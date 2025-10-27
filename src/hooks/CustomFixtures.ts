@@ -72,6 +72,7 @@ import ReviewYourDocumentInformationModificationsPage from '../pages/IRAS/makeCh
 import ReviewAllChangesPage from '../pages/IRAS/reviewResearch/receiveAmendments/ReviewAllChangesPage';
 import ProjectOverviewUnfinishedProjectsPage from '../pages/IRAS/makeChanges/ProjectOverviewUnfinishedProjectsPage';
 import ModificationsDetailsPage from '../pages/IRAS/makeChanges/modifications/ModificationsDetailsPage';
+import ContactDetailsModificationPage from '../pages/IRAS/makeChanges/modifications/ContactDetailsModificationPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -144,6 +145,7 @@ type CustomFixtures = {
   reviewAllChangesPage: ReviewAllChangesPage;
   modificationsDetailsPage: ModificationsDetailsPage;
   projectOverviewUnfinishedProjectsPage: ProjectOverviewUnfinishedProjectsPage;
+  contactDetailsModificationPage: ContactDetailsModificationPage;
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -417,16 +419,24 @@ export const test = base.extend<CustomFixtures>({
   reviewYourDocumentInformationModificationsPage: async ({ page }, use) => {
     await use(new ReviewYourDocumentInformationModificationsPage(page));
   },
+
   reviewAllChangesPage: async ({ page }, use) => {
     await use(new ReviewAllChangesPage(page));
   },
+
   modificationsDetailsPage: async ({ page }, use) => {
     await use(new ModificationsDetailsPage(page));
   },
+
+  contactDetailsModificationPage: async ({ page }, use) => {
+    await use(new ContactDetailsModificationPage(page));
+  },
+
   makeAxeBuilder: async ({ page }, use) => {
     const makeAxeBuilder = () => new AxeBuilder({ page });
     await use(makeAxeBuilder);
   },
+
   //Set the Storage State based on User Tag from Feature File
   storageState: async ({ $tags, storageState }, use) => {
     if ($tags.includes('@SysAdminUser')) {

@@ -28,6 +28,21 @@ export default class ModificationReviewChangesPage {
   readonly changes_free_text_row: Locator;
   readonly changes_free_text: Locator;
   readonly changes_free_text_change_link: Locator;
+  readonly select_details_to_change_row: Locator;
+  readonly select_details_to_change_value: Locator;
+  readonly select_details_to_change_change_link: Locator;
+  readonly chief_investigator_email_row: Locator;
+  readonly chief_investigator_email_value: Locator;
+  readonly chief_investigator_email_change_link: Locator;
+  readonly sponsor_contact_email_row: Locator;
+  readonly sponsor_contact_email_value: Locator;
+  readonly sponsor_contact_email_change_link: Locator;
+  readonly name_text_row: Locator;
+  readonly name_text_value: Locator;
+  readonly name_text_change_link: Locator;
+  readonly email_text_row: Locator;
+  readonly email_text_value: Locator;
+  readonly email_text_change_link: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -110,12 +125,38 @@ export default class ModificationReviewChangesPage {
     this.changes_free_text = this.changes_free_text_row.locator('..').locator('.govuk-summary-list__value');
 
     this.changes_free_text_change_link = this.changes_free_text_row.locator('..').getByRole('link');
+    this.select_details_to_change_row = this.page.getByText(
+      modificationReviewChangesPageTestData.Review_Changes_Page.select_details_to_change
+    );
+    this.select_details_to_change_value = this.select_details_to_change_row
+      .locator('..')
+      .locator('.govuk-summary-list__value');
+    this.select_details_to_change_change_link = this.select_details_to_change_row.locator('..').getByRole('link');
+    this.chief_investigator_email_row = this.page.getByText(
+      modificationReviewChangesPageTestData.Review_Changes_Page.chief_investigator_email
+    );
+    this.chief_investigator_email_value = this.chief_investigator_email_row
+      .locator('..')
+      .locator('.govuk-summary-list__value');
+    this.chief_investigator_email_change_link = this.chief_investigator_email_row.locator('..').getByRole('link');
+    this.sponsor_contact_email_row = this.page.getByText(
+      modificationReviewChangesPageTestData.Review_Changes_Page.sponsor_contact_email
+    );
+    this.sponsor_contact_email_value = this.sponsor_contact_email_row
+      .locator('..')
+      .locator('.govuk-summary-list__value');
+    this.sponsor_contact_email_change_link = this.sponsor_contact_email_row.locator('..').getByRole('link');
+    this.name_text_row = this.page.getByText(modificationReviewChangesPageTestData.Review_Changes_Page.name_text);
+    this.name_text_value = this.name_text_row.locator('..').locator('.govuk-summary-list__value');
+    this.name_text_change_link = this.name_text_row.locator('..').getByRole('link');
+    this.email_text_row = this.page.getByText(modificationReviewChangesPageTestData.Review_Changes_Page.email_text);
+    this.email_text_value = this.email_text_row.locator('..').locator('.govuk-summary-list__value');
+    this.email_text_change_link = this.email_text_row.locator('..').getByRole('link');
   }
 
   //Page Methods
   async assertOnModificationReviewChangesPage() {
     await expect(this.pageHeading).toBeVisible();
-    await expect(this.sub_heading_specific_change_label).toBeVisible();
   }
   async assertOnReviewChangesSpecificChangePage(specificChange: string) {
     await expect.soft(this.pageHeading).toBeVisible();
@@ -144,6 +185,21 @@ export default class ModificationReviewChangesPage {
         break;
       case 'changes_free_text':
         await this.changes_free_text_change_link.click();
+        break;
+      case 'select_contact_details_to_change':
+        await this.select_details_to_change_change_link.click();
+        break;
+      case 'chief_investigator_email':
+        await this.chief_investigator_email_change_link.click();
+        break;
+      case 'sponsor_contact_email':
+        await this.sponsor_contact_email_change_link.click();
+        break;
+      case 'name_text':
+        await this.name_text_change_link.click();
+        break;
+      case 'email_text':
+        await this.email_text_change_link.click();
         break;
       default:
         throw new Error(`${changeLink} is not a valid option`);

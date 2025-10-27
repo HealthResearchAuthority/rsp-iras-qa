@@ -1,7 +1,12 @@
 {
   "Review_Changes_Page": {
     "page_heading_label": "Review changes",
-    "sub_heading_specific_change_label": "Change to planned end date"
+    "sub_heading_specific_change_label": "Change to planned end date",
+    "select_details_to_change": "Select details to change",
+    "chief_investigator_email": "New chief investigator email",
+    "sponsor_contact_email": "Sponsor contact email",
+    "name_text": "Name",
+    "email_text": "Email"
   },
   "Label_Texts_Nhs": {
     "new_planned_project_end_date_label": "New planned project end date",

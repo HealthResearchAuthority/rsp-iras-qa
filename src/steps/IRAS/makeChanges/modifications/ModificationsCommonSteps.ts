@@ -366,3 +366,15 @@ Then(
 Then('I validate all fields on modification page {string}', async ({ modificationsCommonPage }, datasetName) => {
   modificationsCommonPage.validateAllFieldsOnModificationDetailsPage(datasetName);
 });
+
+Then('I validate overall modification ranking', async ({ modificationsCommonPage }) => {
+  const modificationTypeExpected = (await modificationsCommonPage.getOverallRankingForChanges()).modificationType;
+  const categoryExpected = (await modificationsCommonPage.getOverallRankingForChanges()).category;
+  const reviewTypeExpected = (await modificationsCommonPage.getOverallRankingForChanges()).reviewType;
+  const modificationTypeActual = await modificationsCommonPage.modification_type.textContent();
+  const categoryActual = await modificationsCommonPage.category.textContent();
+  const reviewTypeActual = await modificationsCommonPage.review_type.textContent();
+  expect.soft(modificationTypeActual).toBe(modificationTypeExpected);
+  expect.soft(categoryActual).toBe(categoryExpected);
+  expect.soft(reviewTypeActual).toBe(reviewTypeExpected);
+});

@@ -649,8 +649,8 @@ Feature: Create Amendment - Create Modifications
       | Other_Minor_Change_To_Project_Management           | Nhs_Involvement_Yes |
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Nhs_Involvement_No  |
 
-  @rsp-4386 @rsp-4380 @rsp-5200 @rsp-5272 @rsp-4881 @ModificationsJourneyEntireJourney @ModificationsToAddBulkFreeTextNonReviewable @KNOWN_DEFECT_RSP_5495_5496
-  Scenario Outline: Validate that user can create modifications to add free text for non reviewable modifications
+  @rsp-4386 @rsp-4380 @rsp-5200 @rsp-5272 @rsp-4881 @rsp-4980 @ModificationsJourneyEntireJourney @ModificationsNonReviewable @KNOWN_DEFECT_RSP_5495_5496
+  Scenario Outline: Validate that user can create modifications and complete the entire modifications journey for non reviewable modifications
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     Then I can see the review your answers page
