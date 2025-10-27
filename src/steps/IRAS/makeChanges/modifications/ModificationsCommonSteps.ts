@@ -1,8 +1,9 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../hooks/CustomFixtures';
 import { confirmStringNotNull, getFormattedDate } from '../../../../utils/UtilFunctions';
+//import ModificationsCommonPage from '../../../../pages/IRAS/makeChanges/modifications/ModificationsCommonPage';
 
-const { Then } = createBdd(test);
+const { When, Then } = createBdd(test);
 
 Then('I can see the {string} page for modifications', async ({ modificationsCommonPage }, datasetName) => {
   const dataset = modificationsCommonPage.modificationsCommonPageTestData.Specific_Change_Pages[datasetName];
@@ -394,6 +395,93 @@ Then(
       if (buttonValue == 'Submit_To_Regulator') {
         await commonItemsPage.clickButton('Modification_Sent_To_Sponsor_Page', 'Submit_To_Regulator');
         await commonItemsPage.clickLink('Project_Overview_Page', 'Post_Approval');
+      }
+    }
+  }
+);
+
+Then(
+  'I enter {string} into the search field for post approval page',
+  async ({ modificationsCommonPage, commonItemsPage }, searchDatasetName: string) => {
+    const dataset = modificationsCommonPage.modificationsCommonPageTestData.Search_Queries[searchDatasetName];
+    // Get the modification record and extract the first modification ID to use as the search key
+    if (searchDatasetName === 'Full_Modification_ID') {
+      const modificationRecord = await modificationsCommonPage.getModificationPostApprovalPage();
+      const modificationIds = modificationRecord.get('modificationIdValue');
+      const searchKey: string = modificationIds && modificationIds.length > 0 ? modificationIds[0] : '';
+      // fill the modification id in the search box
+      expect(searchKey).toBeTruthy();
+      await commonItemsPage.setSearchKey(searchKey);
+      await commonItemsPage.search_text.fill(searchKey); // check search_text locator//done
+    } else {
+      //await manageUsersPage.user_search_text.fill(dataset['search_input_text']);//create user_search_text locator
+      await commonItemsPage.search_text.fill(dataset['search_input_text']);
+    }
+  }
+);
+
+Then(
+  'I can now see the table of modifications contains the expected search results for {string}',
+  async ({ modificationsCommonPage, commonItemsPage }, searchDatasetName: string) => {
+    const searchDataset = modificationsCommonPage.modificationsCommonPageTestData.Search_Queries[searchDatasetName];
+    if (searchDatasetName !== 'Partial_Modification_ID') {
+      const modificationIDExpected = await modificationsCommonPage.getModificationID();
+      const modificationRecord = await modificationsCommonPage.getModificationPostApprovalPage();
+      const modificationIDActual = modificationRecord.get('modificationIdValue');
+      expect.soft(modificationIDActual[0]).toBe(modificationIDExpected);
+    } else {
+      await modificationsCommonPage.validateResults(commonItemsPage, searchDataset, true);
+    }
+  }
+);
+
+When(
+  'I open each of the advanced filters in post approval page',
+  async ({ modificationsCommonPage, commonItemsPage }) => {
+    const expectedFilterHeadings =
+      modificationsCommonPage.modificationsCommonPageTestData.Post_Approval_Page.filter_headings;
+    for (const heading of expectedFilterHeadings) {
+      await commonItemsPage.advanced_filter_headings.getByText(heading, { exact: true }).click();
+    }
+  }
+);
+
+// Then(
+//   'I select advanced filters in the post approval page using {string}',
+//   async ({ myResearchProjectsPage, commonItemsPage }, filterDatasetName: string) => {
+//     const dataset = myResearchProjectsPage.myResearchProjectsPageTestData.Advanced_Filters[filterDatasetName];
+//     for (const key in dataset) {
+//       if (Object.hasOwn(dataset, key)) {
+//         if (key.includes('date')) {
+//           if (!(await myResearchProjectsPage.date_project_created_from_day_text.isVisible())) {
+//             await myResearchProjectsPage.date_project_created_from_day_text_chevron.click();
+//           }
+//           await commonItemsPage.fillUIComponent(dataset, key, myResearchProjectsPage);
+//         } else {
+//           await myResearchProjectsPage[key + '_chevron'].click();
+//           await commonItemsPage.fillUIComponent(dataset, key, myResearchProjectsPage);
+//         }
+//       }
+//     }
+//   }
+// );
+
+When(
+  'I enter values in the advanced filters in the post approval page using {string}',
+  async ({ modificationsCommonPage, commonItemsPage }, filterDatasetName: string) => {
+    const dataset = modificationsCommonPage.modificationsCommonPageTestData.Advanced_Filters[filterDatasetName];
+    for (const key in dataset) {
+      if (Object.hasOwn(dataset, key)) {
+        if (key.includes('date')) {
+          if (!(await modificationsCommonPage.date_submitted_from_day_text.isVisible())) {
+            // create locators
+            await modificationsCommonPage.date_submitted_from_day_text_chevron.click(); // create locators
+          }
+          await commonItemsPage.fillUIComponent(dataset, key, modificationsCommonPage);
+        } else {
+          await modificationsCommonPage[key + '_chevron'].click();
+          await commonItemsPage.fillUIComponent(dataset, key, modificationsCommonPage);
+        }
       }
     }
   }

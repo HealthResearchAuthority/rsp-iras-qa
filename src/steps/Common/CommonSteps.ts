@@ -922,7 +922,7 @@ Then(
 Then(
   '{string} active filters {string} in the {string}',
   async (
-    { searchModificationsPage, manageReviewBodiesPage, manageUsersPage, commonItemsPage },
+    { searchModificationsPage, manageReviewBodiesPage, manageUsersPage, modificationsCommonPage, commonItemsPage },
     actionToPerform: string,
     filterDatasetName: string,
     pageKey: string
@@ -942,6 +942,10 @@ Then(
       Manage_Users_Page: {
         dataset: manageUsersPage.manageUsersPageTestData.Advanced_Filters,
         labels: manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List,
+      },
+      Post_Approval_Page: {
+        dataset: modificationsCommonPage.modificationsCommonPageTestData.Advanced_Filters,
+        labels: modificationsCommonPage.modificationsCommonPageTestData.Post_Approval_Page_Label_Texts,
       },
     };
     const { dataset, labels } = pageMap[pageKey];

@@ -356,26 +356,43 @@ export default class ModificationsCommonPage {
     return modificationMap;
   }
 
-  async getAllModificationPostApprovalPage(): Promise<Map<string, string[]>> {
-    let modificationMap: any;
-    const displayedModificationIdValue: string[] = [];
-    const displayedSubmittedDateValue: string[] = [];
-    const displayedStatusValue: string[] = [];
-    const rows = await this.modificationRows.all();
-    for (const row of rows) {
-      const columns = await row.locator(this.listCell).allInnerTexts();
-      const modificationId = confirmStringNotNull(columns[0]);
-      displayedModificationIdValue.push(modificationId);
-      const submittedDate = confirmStringNotNull(columns[4] ?? '');
-      displayedSubmittedDateValue.push(submittedDate);
-      const status = confirmStringNotNull(columns[5] ?? '');
-      displayedStatusValue.push(status);
-      modificationMap = new Map([
-        ['displayedStatusValue', displayedStatusValue],
-        ['displayedSubmittedDateValue', displayedSubmittedDateValue],
-        ['displayedModificationIdValue', displayedModificationIdValue],
-      ]);
+  // async getAllModificationPostApprovalPage(): Promise<Map<string, string[]>> {
+  //   let modificationMap: any;
+  //   const displayedModificationIdValue: string[] = [];
+  //   const displayedSubmittedDateValue: string[] = [];
+  //   const displayedStatusValue: string[] = [];
+  //   const rows = await this.modificationRows.all();
+  //   for (const row of rows) {
+  //     const columns = await row.locator(this.listCell).allInnerTexts();
+  //     const modificationId = confirmStringNotNull(columns[0]);
+  //     displayedModificationIdValue.push(modificationId);
+  //     const submittedDate = confirmStringNotNull(columns[4] ?? '');
+  //     displayedSubmittedDateValue.push(submittedDate);
+  //     const status = confirmStringNotNull(columns[5] ?? '');
+  //     displayedStatusValue.push(status);
+  //     modificationMap = new Map([
+  //       ['displayedStatusValue', displayedStatusValue],
+  //       ['displayedSubmittedDateValue', displayedSubmittedDateValue],
+  //       ['displayedModificationIdValue', displayedModificationIdValue],
+  //     ]);
+  //   }
+  //   return modificationMap;
+  // }
+
+  async validateResults(commonItemsPage: any, searchCriteriaDataset: any, validateSearch: boolean = true) {
+    // Loop through Max_Pages_To_Validate (currently set to 2)
+    for (let pageIndex = 1; pageIndex < modificationsCommonPageTestData.Max_Pages_To_Validate; pageIndex++) {
+      const rowCount = await commonItemsPage.tableRows.count();
+      for (let rowIndex = 1; rowIndex < rowCount; rowIndex++) {
+        const modificationId = await this.getModificationPostApprovalPage();
+        const modificationIDActual = modificationId.get('modificationIdValue');
+        // Validate modifciation search resuts
+        if (validateSearch && searchCriteriaDataset['search_input_text'] !== '') {
+          const modificationIdExpected = searchCriteriaDataset['search_input_text'];
+          expect(modificationIDActual.includes(modificationIdExpected));
+        }
+      }
+      await commonItemsPage.next_button.click();
     }
-    return modificationMap;
   }
 }

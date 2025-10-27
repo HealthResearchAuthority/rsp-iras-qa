@@ -70,3 +70,77 @@ Feature: Post Approval Page
         And I create 'Change_To_Planned_End_Date' modification with 'Sponsor_reference_Details' and click on 'Submit_To_Regulator'
         Then I validate submitted date field value for 'Modification_Status_Approved' modifications and confirm 'Approved' status
         And I capture the page screenshot
+
+    @rsp-4887 @VerifyValidSearchPostApproval
+    Scenario Outline: Verify the user is able to search the modifications by the modification ID
+        And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
+        # And I create 'Change_To_Planned_End_Date' modification with 'Sponsor_reference_Details' and click on 'Submit_To_Regulator'
+        # And I create 'Change_To_Planned_End_Date' modification with 'Sponsor_reference_Details' and click on 'Submit_To_Regulator'
+        # And I create 'Change_To_Planned_End_Date' modification with 'Sponsor_reference_Details' and click on 'Submit_To_Regulator'
+        # And I create 'Change_To_Planned_End_Date' modification with 'Sponsor_reference_Details' and click on 'Submit_To_Regulator'
+        And I capture the page screenshot
+        # check if you need 'I validate the project information labels using' step to set modification id
+        And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+        And I enter '<Search_Queries>' into the search field for post approval page
+        And I click the 'Search' button on the 'Search_Modifications_Page'
+        Then I can now see the table of modifications contains the expected search results for '<Search_Queries>'
+
+        Examples:
+            | Search_Queries          |
+            | Full_Modification_ID    |
+            | Partial_Modification_ID |
+
+    @rsp-4887 @VerifyNoResultsFoundInvalidSearchOnlyMyResearch
+    Scenario: Verify the user can see no matching results found message on clicking search button with invalid user name
+        When I fill the search input for searching 'modifications in post approval' with 'Non_Existant_Data' as the search query
+        And I capture the page screenshot
+        And I click the 'Search' button on the 'Post_Approval_Page'
+        And I capture the page screenshot
+        Then the no search results found message is displayed
+
+        Examples:
+            | Search_Input      |
+            | Non_Existant_Data |
+
+    @rsp-4887 @ApplyFiltersAndSearch
+    Scenario Outline: Verify the user is able to filter modifications using a combination of advanced filters and search criteria
+        And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
+        # And I create 'Change_To_Planned_End_Date' modification with 'Sponsor_reference_Details' and click on 'Submit_To_Regulator'
+        # And I create 'Change_To_Planned_End_Date' modification with 'Sponsor_reference_Details' and click on 'Submit_To_Regulator'
+        # And I create 'Change_To_Planned_End_Date' modification with 'Sponsor_reference_Details' and click on 'Submit_To_Regulator'
+        # And I create 'Change_To_Planned_End_Date' modification with 'Sponsor_reference_Details' and click on 'Submit_To_Regulator'
+        And I capture the page screenshot
+        And I enter '<Search_Queries>' into the search field for post approval page
+        And I click the 'Advanced_Filters' button on the 'Post_Approval_Page'
+        And I 'can' see the advanced filters panel
+        And I open each of the advanced filters in post approval page
+        And I capture the page screenshot
+        And I enter values in the '<Advanced_Filters>' of the post approval page
+        And I capture the page screenshot
+        And I click the 'Apply_Filters' button on the 'Post_Approval_Page'
+        And I capture the page screenshot
+        Then 'I can see the selected filters are displayed under' active filters '<Advanced_Filters>' in the 'Post_Approval_Page'
+        #validation of results with search and advanced filters
+        #And I can see the results matching the search '<Search_Queries>' and filter criteria '<Advanced_Filters>' for manage users page
+        And I capture the page screenshot
+
+        Examples:
+            | Search_Queries          | Advanced_Filters                          |
+            | Full_Modification_ID    | Advanced_Filter_All_Fields                |
+            | Partial_Modification_ID | Advanced_Filter_Status_Only               |
+            | Empty_Search_Data       | Advanced_Filter_Submitted_Date_Field_Only |
+            | Empty_Search_Data       | Advanced_Filter_Modification_Type_Only    |
+
+
+# Error The date you’ve selected is before the search above
+
+# Error  'Search from' date must be in the correct format’/ ‘Search to' date must be in the correct format
+
+#Submitted date - Only From date without a To date
+#Should take to date as current date as To date and display results
+
+#Submitted date - From date with future To date
+#Should take to date as current date as To date and display results
+
+#Clearing individual and clear all filters button
+# After search results are displayed, user should be able to click x button to clear individual filters or clear all filters

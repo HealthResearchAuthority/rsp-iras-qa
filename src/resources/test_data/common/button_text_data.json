@@ -158,7 +158,10 @@
   },
   "Post_Approval_Page": {
     "Modification_Id": "Modification ID",
-    "Modification_Type": "Modification type"
+    "Modification_Type": "Modification type",
+    "Search": "Search",
+    "Advanced_Filters": "Advanced filters",
+    "Apply_filters": "Apply filters"
   },
   "Project_Documents_Page": {
     "document_type_project_documents": "Document type",

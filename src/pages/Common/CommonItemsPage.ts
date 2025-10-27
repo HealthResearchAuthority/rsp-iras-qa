@@ -154,6 +154,7 @@ export default class CommonItemsPage {
       .or(this.page.getByTestId('Search.SearchQuery'))
       .or(this.page.getByTestId('Search_IrasId'))
       .or(this.page.getByTestId('Search.SearchNameTerm'))
+      .or(this.page.getByTestId('Search.ModificationId'))
       .first();
     //Banner
     this.bannerNavBar = this.page.getByLabel('Service information');
