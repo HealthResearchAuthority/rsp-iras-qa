@@ -46,3 +46,19 @@ Then(
     await reviewUploadedDocumentsModificationsPage.setUploadedFileName(fileArray);
   }
 );
+
+Then(
+  'I download the documents one by one from the documents added page of {string} modifications in reference to the uploaded {string} documents',
+  async ({ reviewUploadedDocumentsModificationsPage, commonItemsPage }, uploadDocumentsDatasetName: string) => {
+    const documentPath = commonItemsPage.documentUploadTestData[uploadDocumentsDatasetName];
+    const fileArray = Array.isArray(documentPath) ? documentPath : [documentPath];
+    let fileDeleteCount = 0;
+    for (const filePath of fileArray) {
+      fileDeleteCount = fileDeleteCount + 1;
+      const fileName = path.basename(filePath);
+      await reviewUploadedDocumentsModificationsPage.table
+        .locator(reviewUploadedDocumentsModificationsPage.rows, { hasText: `${fileName}` })
+        .click();
+    }
+  }
+);

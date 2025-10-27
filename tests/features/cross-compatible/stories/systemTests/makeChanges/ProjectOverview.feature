@@ -190,3 +190,17 @@ Feature: Create Amendment - Project Overview
             | Navigation_Method |
             | page number       |
             | previous link     |
+
+    @rsp-3930 @ProjectDocumentDownload 
+    Scenario: Validate the user is able to access and view the project documents details from the project overview page
+        When I navigate to the project overview page of the 'Test_Project' project
+        And I capture the page screenshot
+        When I click the 'Project_Documents' link on the 'Project_Overview_Page'
+        And I capture the page screenshot
+        And I can see the 'Project_Documents_Tab' ui labels on the project overview page
+        And I capture the page screenshot
+        When I click a 'document name' on the project overview page and validate the downlaoded file in the download folder 
+        And I capture the page screenshot
+      
+
+        

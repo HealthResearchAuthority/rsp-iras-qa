@@ -1,9 +1,9 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../hooks/CustomFixtures';
-import { confirmStringNotNull, removeUnwantedWhitespace } from '../../../utils/UtilFunctions';
+import { confirmStringNotNull, removeUnwantedWhitespace, getRandomNumber } from '../../../utils/UtilFunctions';
 import { Locator } from '@playwright/test';
-
-const { Then } = createBdd(test);
+import * as path from 'path';
+const { Then, When } = createBdd(test);
 
 Then('I can see the project overview page', async ({ projectOverviewPage }) => {
   await projectOverviewPage.assertOnProjectOverviewPage();
@@ -271,5 +271,28 @@ Then(
     const expectedStatus = dataset.status;
     const actualStatus = confirmStringNotNull(await projectOverviewPage.projectStatusTag.textContent());
     expect.soft(actualStatus).toBe(expectedStatus);
+  }
+);
+
+When(
+  'I click a {string} on the project overview page and validate the downlaoded file in the download folder',
+  async ({ page, commonItemsPage, projectOverviewPage }, fieldName: string) => {
+    const downloadPath = path.resolve(process.env.HOME || process.env.USERPROFILE || '', 'Downloads');
+    const columnIndex = await projectOverviewPage.getProjectColumnIndex(fieldName);
+    const rowCount = await commonItemsPage.tableBodyRows.count();
+    const testNum = await getRandomNumber(0, rowCount - 1);
+    const fieldLocator = commonItemsPage.tableBodyRows
+      .nth(testNum)
+      .getByRole('cell')
+      .nth(columnIndex)
+      .getByRole('link');
+    const actualFileNameArray = await fieldLocator.allTextContents();
+    const actualFileName = actualFileNameArray[0].trim();
+    const [download] = await Promise.all([page.waitForEvent('download'), fieldLocator.click()]);
+    const suggestedFileName = download.suggestedFilename();
+    const filePath = path.join(downloadPath, suggestedFileName);
+    await download.saveAs(filePath);
+    const expectedFileName = path.basename(filePath);
+    expect.soft(actualFileName).toBe(expectedFileName);
   }
 );
