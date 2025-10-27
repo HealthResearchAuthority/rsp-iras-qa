@@ -19,7 +19,7 @@
     "workspaces_links_studywide_reviewer": ["Approvals", "Member management"],
     "workspaces_links_team_manager": ["Approvals", "Member management"],
     "workspaces_links_workflow_coordinator": ["Approvals"],
-    "success_notification_title": "Successs",
+    "success_notification_title": "Success",
     "success_notification_message": "Account created"
   },
   "Label_Texts_System_Admin_Role": {
