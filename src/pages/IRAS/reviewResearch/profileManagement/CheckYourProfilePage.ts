@@ -150,7 +150,6 @@ export default class CheckYourProfilePage {
   //Page Methods
 
   async assertOnCheckProfilePage() {
-    await this.page.pause();
     await expect.soft(this.page_heading).toBeVisible();
     await expect.soft(this.page_guidance_text).toBeVisible();
     await expect.soft(this.make_change_header).toBeVisible();
