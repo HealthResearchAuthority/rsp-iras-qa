@@ -43,6 +43,7 @@ When(
       profileSettingsPage,
       editYourProfilePage,
       completeYourProfilePage,
+      checkYourProfilePage,
     },
     page: string
   ) => {
@@ -113,6 +114,9 @@ When(
         break;
       case 'Complete_Your_Profile_Page':
         await completeYourProfilePage.assertOnCompleteProfilePage();
+        break;
+      case 'Check_Your_Profile_Page':
+        await checkYourProfilePage.assertOnCheckProfilePage();
         break;
       default:
         throw new Error(`${page} is not a valid option`);

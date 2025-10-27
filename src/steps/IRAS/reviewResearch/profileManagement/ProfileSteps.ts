@@ -34,3 +34,15 @@ Then(
     await changeLink.click();
   }
 );
+
+Then(
+  'I fill the complete profile page with {string} details',
+  async ({ commonItemsPage, completeYourProfilePage }, datasetName: string) => {
+    const dataset = completeYourProfilePage.completeYourProfilePageTestData.Users[datasetName].Profile_Details;
+    for (const key in dataset) {
+      if (Object.hasOwn(dataset, key)) {
+        await commonItemsPage.fillUIComponent(dataset, key, completeYourProfilePage);
+      }
+    }
+  }
+);

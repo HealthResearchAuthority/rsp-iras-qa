@@ -14,9 +14,18 @@ Feature: Profile Management: Provide new users with the ability to create their 
         And I capture the page screenshot
         And I can see a 'One_Login_Account' link on the 'Complete_Your_Profile_Page'
         And I can see the read only one login details for my 'One_Login_Account_User' account
-# And I can see the profile details for my '<User>' account
-# Click Save Continue button
-# See Check page - bug
-# Delete profile from DB after
-
-# Add common page + data for commmon profle page items - make changes box + headings + readonly data
+        When I fill the complete profile page with 'One_Login_Account_User' details
+        And I capture the page screenshot
+        And I click the 'Save_Continue' button on the 'Complete_Your_Profile_Page'
+        Then I can see the 'Check_Your_Profile_Page'
+        And I capture the page screenshot
+        And I can see a 'One_Login_Account' link on the 'Check_Your_Profile_Page'
+        And I can see the read only one login details for my 'One_Login_Account_User' account
+        And I can see the profile details for my 'One_Login_Account_User' account
+        When I click the 'Add_Profile' button on the 'Check_Your_Profile_Page'
+        Then I can see the 'Home_Page'
+        And I capture the page screenshot
+        And I can see the workspaces in my account home page for 'Applicant_User'
+        And I can see the account created notification
+        Given I have navigated to the 'Audit_History_User_Page' for the 'One_Login_Account_User' as 'System_Admin'
+        And I can see the audit history for the review body 'created' event for 'One_Login_Account_User' with 'Create_Review_Body'

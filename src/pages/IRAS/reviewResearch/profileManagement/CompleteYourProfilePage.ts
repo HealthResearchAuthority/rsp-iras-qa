@@ -16,6 +16,11 @@ export default class CompleteYourProfilePage {
   readonly make_change_suffix: Locator;
   readonly one_login_header: Locator;
   readonly profile_details_header: Locator;
+  readonly title_value: Locator;
+  readonly first_name_value: Locator;
+  readonly last_name_value: Locator;
+  readonly job_title_value: Locator;
+  readonly organisation_value: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -46,6 +51,22 @@ export default class CompleteYourProfilePage {
     this.profile_details_header = this.page
       .getByRole('heading')
       .getByText(this.completeYourProfilePageTestData.Complete_Your_Profile_Page.profile_details_header);
+    this.title_value = this.page.getByLabel(
+      this.completeYourProfilePageTestData.Complete_Your_Profile_Page.title_label,
+      { exact: true }
+    );
+    this.first_name_value = this.page.getByLabel(
+      this.completeYourProfilePageTestData.Complete_Your_Profile_Page.first_name_label
+    );
+    this.last_name_value = this.page.getByLabel(
+      this.completeYourProfilePageTestData.Complete_Your_Profile_Page.last_name_label
+    );
+    this.job_title_value = this.page.getByLabel(
+      this.completeYourProfilePageTestData.Complete_Your_Profile_Page.job_title_label
+    );
+    this.organisation_value = this.page.getByLabel(
+      this.completeYourProfilePageTestData.Complete_Your_Profile_Page.organisation_label
+    );
   }
 
   //Page Methods

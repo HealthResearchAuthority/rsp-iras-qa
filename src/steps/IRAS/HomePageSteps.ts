@@ -2,7 +2,7 @@ import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../hooks/CustomFixtures';
 import dateTimeRelatedData from '../../resources/test_data/common/date_time_related_data.json';
 
-const { Given, Then } = createBdd(test);
+const { Given, When, Then } = createBdd(test);
 
 Given('I can see project guidance text on the home_page', async ({ homePage }) => {
   const expectedText = homePage.homePageTestData.Home_Page.guidance_text;
@@ -49,4 +49,11 @@ Then('I validate the last logged in is displayed as full date in home page', asy
   } else {
     expect(homePage.lastLoggedIn).toContainText(`${dateTimeRelatedData.morning} ${dateTimeRelatedData.uk_time}`);
   }
+});
+
+When('I can see the account created notification', async ({ homePage }) => {
+  await expect
+    .soft(homePage.success_notification_title)
+    .toHaveText(homePage.homePageTestData.Home_Page.success_notification_title);
+  await expect.soft(homePage.success_notification_message).toBeVisible();
 });

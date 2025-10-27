@@ -58,6 +58,13 @@
       "One_Login_Details": {
         "email_address_value": "hagnenulta@necub.com",
         "telephone_value": ""
+      },
+      "Profile_Details": {
+        "title_value": "Mr",
+        "first_name_value": "Hagne",
+        "last_name_value": "Nulta",
+        "job_title_value": "Researcher",
+        "organisation_value": "NECUB"
       }
     }
   }

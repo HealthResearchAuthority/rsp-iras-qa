@@ -38,6 +38,9 @@ export default class HomePage {
   readonly workspaceLinks: Locator;
   readonly lastLoggedIn: Locator;
   readonly startNowBtn: Locator;
+  readonly success_notification_title: Locator;
+  readonly success_notification_container: Locator;
+  readonly success_notification_message: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -87,6 +90,13 @@ export default class HomePage {
     );
     this.workspaceLinks = this.page.locator('.hra-card').getByRole('link');
     this.lastLoggedIn = this.page.locator('.govuk-summary-list__value');
+    this.success_notification_title = this.page.getByTestId('govuk-notification-banner-title');
+    this.success_notification_container = this.page.locator('.govuk-notification-banner--success', {
+      has: this.success_notification_title,
+    });
+    this.success_notification_message = this.success_notification_container
+      .getByRole('heading')
+      .getByText(this.homePageTestData.Home_Page.success_notification_message);
   }
 
   //using method is used to get hint label next to headers

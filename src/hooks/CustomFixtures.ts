@@ -75,6 +75,7 @@ import ModificationsDetailsPage from '../pages/IRAS/makeChanges/modifications/Mo
 import ProfileSettingsPage from '../pages/IRAS/reviewResearch/profileManagement/ProfileSettingsPage';
 import EditYourProfilePage from '../pages/IRAS/reviewResearch/profileManagement/EditYourProfilePage';
 import CompleteYourProfilePage from '../pages/IRAS/reviewResearch/profileManagement/CompleteYourProfilePage';
+import CheckYourProfilePage from '../pages/IRAS/reviewResearch/profileManagement/CheckYourProfilePage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -150,6 +151,8 @@ type CustomFixtures = {
   profileSettingsPage: ProfileSettingsPage;
   editYourProfilePage: EditYourProfilePage;
   completeYourProfilePage: CompleteYourProfilePage;
+  checkYourProfilePage: CheckYourProfilePage;
+
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -442,6 +445,10 @@ export const test = base.extend<CustomFixtures>({
 
   completeYourProfilePage: async ({ page }, use) => {
     await use(new CompleteYourProfilePage(page));
+  },
+
+  checkYourProfilePage: async ({ page }, use) => {
+    await use(new CheckYourProfilePage(page));
   },
 
   makeAxeBuilder: async ({ page }, use) => {
