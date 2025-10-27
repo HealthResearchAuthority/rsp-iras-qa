@@ -458,13 +458,13 @@ Feature: Create Modifications - Change to planned end date
     Then I validate all field values on review modifications page using '<Planned_End_Date>' , '<Organisation_Change_Affect>' and '<Affected_Org_Questions_Change>'
 
     Examples:
-      | Change_Field               | Planned_End_Date      | Organisation_Change_Affect | Affected_Org_Questions | Affected_Org_Questions_Change |
-      | Affected_Nhs_Hsc_Locations | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_All_Fields  | Valid_Data_Optional_Fields    |
-  # | Affected_Nhs_Hsc_Locations       | Valid_Data_All_Fields | NHS_HSC_Only               | Valid_Data_Optional_Fields        | Valid_Data_All_Fields             |
-  # | Portion_Of_Nhs_Hsc_Organisations | Valid_Data_All_Fields | NHS_HSC_Only               | Valid_Data_All_Fields             | Valid_Data_Optional_Fields        |
-  # | Additional_Resource_Implications | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_Optional_Fields        | Valid_Data_All_Fields             |
-  # | Affected_Non_Nhs_Hsc_Locations   | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_Non_Nhs_All_Country    | Valid_Data_Non_Nhs_Single_Country |
-  # | Affected_Non_Nhs_Hsc_Locations   | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_Non_Nhs_Single_Country | Valid_Data_Non_Nhs_All_Country    |
+      | Change_Field                     | Planned_End_Date      | Organisation_Change_Affect | Affected_Org_Questions            | Affected_Org_Questions_Change     |
+      | Affected_Nhs_Hsc_Locations       | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_All_Fields             | Valid_Data_Optional_Fields        |
+      | Affected_Nhs_Hsc_Locations       | Valid_Data_All_Fields | NHS_HSC_Only               | Valid_Data_Optional_Fields        | Valid_Data_All_Fields             |
+      | Portion_Of_Nhs_Hsc_Organisations | Valid_Data_All_Fields | NHS_HSC_Only               | Valid_Data_All_Fields             | Valid_Data_Optional_Fields        |
+      | Additional_Resource_Implications | Valid_Data_All_Fields | Valid_Data_All_Fields      | Valid_Data_Optional_Fields        | Valid_Data_All_Fields             |
+      | Affected_Non_Nhs_Hsc_Locations   | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_Non_Nhs_All_Country    | Valid_Data_Non_Nhs_Single_Country |
+      | Affected_Non_Nhs_Hsc_Locations   | Valid_Data_All_Fields | Non_NHS_HSC_Only           | Valid_Data_Non_Nhs_Single_Country | Valid_Data_Non_Nhs_All_Country    |
 
 
   @rsp-4171 @ChangePlannedEndDateValidationsFromReviewChangesPage @KNOWN-DEFECT-RSP-4795

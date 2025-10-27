@@ -55,14 +55,32 @@ Then(
 
 Then(
   'I create {string} for the created modification',
-  async ({ commonItemsPage, modificationsCommonPage, selectAreaOfChangePage }, datasetName) => {
+  async (
+    {
+      commonItemsPage,
+      modificationsCommonPage,
+      selectAreaOfChangePage,
+      projectIdentificationSelectChangePage,
+      projectIdentificationSelectReferenceToChangePage,
+      projectIdentificationEnterReferenceNumbersPage,
+    },
+    datasetName
+  ) => {
     const changesDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName];
     const changeNames = Object.keys(changesDataset);
     for (let changeIndex = 0; changeIndex < changeNames.length; changeIndex++) {
       const changeName = changeNames[changeIndex];
       const changeDataset = changesDataset[changeName];
       await selectAreaOfChangePage.selectAreaOfChangeInModificationsPage(changeDataset);
-      await modificationsCommonPage.createChangeModification(changeName, changeDataset);
+      await modificationsCommonPage.createChangeModification(
+        {
+          projectIdentificationSelectChangePage,
+          projectIdentificationSelectReferenceToChangePage,
+          projectIdentificationEnterReferenceNumbersPage,
+        },
+        changeName,
+        changeDataset
+      );
       // Only click "Add Another Change" if it's not the last iteration
       if (changeIndex < changeNames.length - 1) {
         await commonItemsPage.clickButton('Modification_Details_Page', 'Add_Another_Change');
@@ -362,7 +380,3 @@ Then(
     expect.soft(actualFreeText).toBe(expectedFreeText);
   }
 );
-
-Then('I validate all fields on modification page {string}', async ({ modificationsCommonPage }, datasetName) => {
-  modificationsCommonPage.validateAllFieldsOnModificationDetailsPage(datasetName);
-});

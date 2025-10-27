@@ -60,6 +60,7 @@
     "Insurance renewal - no change to the level or breadth of cover",
     "Participant procedures: non-significant change"
   ],
+  "Modifications_To_Add_Administrative_Details": ["Project identification"],
   "Applicability_Changes": [
     "Change to planned end date",
     "Other significant change to participant procedures",
@@ -88,7 +89,8 @@
     "Change to the use of human biological samples in the project: non-significant (for example, change to the logistical, transporting or storing arrangements)",
     "Changes to funding arrangements that do not affect payments to participants, researchers or participating organisations",
     "Inclusion or withdrawal of an EU Member State or third country outside of the UK",
-    "Insurance renewal - no change to the level or breadth of cover"
+    "Insurance renewal - no change to the level or breadth of cover",
+    "Project identification"
   ],
   "Modification_Sponsor_Details_Label_Texts": {
     "sponsor_reference_label": "Sponsor reference (optional)",
@@ -110,8 +112,6 @@
       "page_component_label": "Which organisation types does this change affect?"
     }
   },
-  "Rec": [],
-  "Non_Rec": [],
   "Ranking_Review_Type": {
     "Review_Required_Changes": [
       "Other minor change to participant procedures",
@@ -141,14 +141,16 @@
       "Changes to funding arrangements such as payments, benefits or incentives to be received by participants",
       "Inclusion or withdrawal of an EU Member State or third country outside of the UK",
       "Insurance renewal - no change to the level or breadth of cover",
-      "Participant procedures: non-significant change"
+      "Participant procedures: non-significant change",
+      "Project identification"
     ]
   },
   "Ranking_Modification_Type": {
     "Modification_Of_Important_Detail": [
       "Change to planned end date",
       "Principal investigator: conflict of interest",
-      "Change of sponsor’s legal representative"
+      "Change of sponsor’s legal representative",
+      "Project identification"
     ],
     "Minor_Modifications": [
       "Other significant change to participant procedures",
@@ -574,6 +576,45 @@
       "will_some_or_all_organisations_be_affected_question_radio": "All",
       "will_nhs_hsc_organisations_require_additional_resources_question_radio": "Yes",
       "where_organisation_change_affect_non_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
+    }
+  },
+  "Modification_To_Add_Administrative_Details": {
+    "Project_Identification_Project_Reference_Numbers": {
+      "area_of_change_dropdown": "Administrative details for the project",
+      "specific_change_dropdown": "Project identification",
+      "project_reference_numbers_radio": "Project reference numbers",
+      "which_reference_do_you_need_to_change_checkboxes": ["Registry reference", "Funder reference", "Other"],
+      "Project_Reference": {
+        "isrctn_reference_number_textbox": "ISRCTN643943",
+        "nct_reference_number_textbox": "NCT34355432",
+        "funder_name_textbox": "Funder name QA testing",
+        "funder_reference_number_textbox": "45345323",
+        "other_reference_number_textbox": "46353222",
+        "what_other_is_textbox": "fgdg52342"
+      }
+    },
+    "Project_Identification_Project_Titles": {
+      "area_of_change_dropdown": "Administrative details for the project",
+      "specific_change_dropdown": "Project identification",
+      "title_radio": "Title",
+      "change_status": "Change ready for submission",
+      "Project_Reference": {
+        "new_short_project_title_text": "QA Automation",
+        "new_full_project_title_text": "Updated Title"
+      }
+    }
+  },
+
+  "Modification_To_Add_Administrative_Details_Single": {
+    "Project_Identification_Project_Titles": {
+      "area_of_change_dropdown": "Administrative details for the project",
+      "specific_change_dropdown": "Project identification",
+      "title_radio": "Title",
+      "change_status": "Change ready for submission",
+      "Project_Reference": {
+        "new_short_project_title_text": "QA_Automation - This is a short project title",
+        "new_full_project_title_text": "QA_Automation - This is a full project title"
+      }
     }
   }
 }
