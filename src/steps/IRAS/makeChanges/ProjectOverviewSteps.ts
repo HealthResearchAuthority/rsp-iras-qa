@@ -263,3 +263,13 @@ Then('I click the {string} button on the project documents page', async ({ proje
       throw new Error(`${button} is not a valid option`);
   }
 });
+
+Then(
+  'I can see the project status as {string} on the project overview page',
+  async ({ projectOverviewPage, createProjectRecordPage }, datasetName: string) => {
+    const dataset = createProjectRecordPage.createProjectRecordPageTestData[datasetName];
+    const expectedStatus = dataset.status;
+    const actualStatus = confirmStringNotNull(await projectOverviewPage.projectStatusTag.textContent());
+    expect.soft(actualStatus).toBe(expectedStatus);
+  }
+);
