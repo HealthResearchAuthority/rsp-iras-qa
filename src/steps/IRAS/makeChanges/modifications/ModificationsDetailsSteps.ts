@@ -33,3 +33,7 @@ Then(
     }
   }
 );
+
+Then('I validate all fields on modification page {string}', async ({ modificationsCommonPage }, datasetName) => {
+  modificationsCommonPage.validateAllFieldsOnModificationDetailsPage(datasetName);
+});

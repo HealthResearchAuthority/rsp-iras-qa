@@ -625,6 +625,7 @@ Feature: Create Amendment - Create Modifications
     And I capture the page screenshot
     Then I can see the review all changes page
     And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the individual and overall ranking of changes on the relevant modification page
     Then I validate sponsor details are displayed with 'Valid_Data_All_Fields'
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
     And I capture the page screenshot
@@ -640,6 +641,7 @@ Feature: Create Amendment - Create Modifications
     And I click on the modification id hyperlink in the post approval tab
     Then I can see the review all changes page
     And I capture the page screenshot
+    And I validate the individual and overall ranking of changes on the relevant modification page
 
     Examples:
       | Changes                                            | Research_Locations  |
@@ -649,8 +651,8 @@ Feature: Create Amendment - Create Modifications
       | Other_Minor_Change_To_Project_Management           | Nhs_Involvement_Yes |
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Nhs_Involvement_No  |
 
-  @rsp-4386 @rsp-4380 @rsp-5200 @rsp-5272 @rsp-4881 @ModificationsJourneyEntireJourney @ModificationsToAddBulkFreeTextNonReviewable @KNOWN_DEFECT_RSP_5495_5496
-  Scenario Outline: Validate that user can create modifications to add free text for non reviewable modifications
+  @rsp-4386 @rsp-4380 @rsp-5200 @rsp-5272 @rsp-4881 @rsp-4094 @rsp4095 @ModificationsJourneyEntireJourney @ModificationsToAddBulkFreeTextNonReviewable @KNOWN_DEFECT_RSP_5495_5496
+  Scenario Outline: Validate that user can create and submit non reviewable modifications
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     Then I can see the review your answers page
@@ -676,22 +678,20 @@ Feature: Create Amendment - Create Modifications
     When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
     And I capture the page screenshot
     Then I can see the review all changes page
-    And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
-    Then I validate sponsor details are displayed with 'Valid_Data_All_Fields'
+    And I validate the individual and overall ranking of changes on the relevant modification page
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
     And I capture the page screenshot
     Then I validate 'Modification_Sent_To_Sponsor_Labels' labels displayed in the success confirmation page when the modification has been sent to sponsor
     Then I click the 'Return_To_Project_Overview' button on the 'Confirmation_Page'
     And I capture the page screenshot
-    # work around due to @KNOWN_DEFECT_RSP-5317
     Then I can see the project overview page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I can see the 'Label_Texts_Post_Approval' ui labels on the project overview page
     And I capture the page screenshot
-    And I can see the modification send to sponsor is displayed on post approval tab of project overview page with status as 'With sponsor'
     And I click on the modification id hyperlink in the post approval tab
     Then I can see the review all changes page
     And I capture the page screenshot
+    And I validate the individual and overall ranking of changes on the relevant modification page
 
     Examples:
       | Changes                                                          | Research_Locations  |
@@ -703,6 +703,10 @@ Feature: Create Amendment - Create Modifications
       | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Non_Applicability | Nhs_Involvement_No  |
       | Change_Of_Sponsor_legal_Representative                           | Nhs_Involvement_Yes |
       | Changes_To_The_Research_Team                                     | Nhs_Involvement_Yes |
+      | Modification_To_Add_Administrative_Details                       | Nhs_Involvement_Yes |
+      | Modification_To_Add_Administrative_Details                       | Nhs_Involvement_No  |
+
+
 
   @rsp-4386 @rsp-4380 @rsp-5200 @rsp-5272 @rsp-4881 @ModificationsJourneyEntireJourney @ModificationsToAddBulkFreeTextCombined @KNOWN_DEFECT_RSP_5495_5496
   Scenario Outline: Validate that user can create modifications to add free text for reviewable and non reviewable modifications
@@ -732,6 +736,7 @@ Feature: Create Amendment - Create Modifications
     And I capture the page screenshot
     Then I can see the review all changes page
     And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the individual and overall ranking of changes on the relevant modification page
     Then I validate sponsor details are displayed with 'Valid_Data_All_Fields'
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
     And I capture the page screenshot
@@ -747,6 +752,7 @@ Feature: Create Amendment - Create Modifications
     And I click on the modification id hyperlink in the post approval tab
     Then I can see the review all changes page
     And I capture the page screenshot
+    And I validate the individual and overall ranking of changes on the relevant modification page
 
     Examples:
       | Changes                                                            | Research_Locations  |
@@ -791,6 +797,7 @@ Feature: Create Amendment - Create Modifications
     Examples:
       | Changes                                                              | Research_Locations  | Change_Field      | Specific_Change                         | Changes_Edited                                                              |
       | Bulk_Free_Text_Single_Change_Chief_Investigator_Conflict_Of_Interest | Nhs_Involvement_Yes | Changes_Free_Text | Chief_Investigator_Conflict_Of_Interest | Bulk_Free_Text_Single_Chief_Investigator_Conflict_Of_Interest_Change_Edited |
+      | Modification_To_Add_Administrative_Details_Single                    | Nhs_Involvement_Yes | select_change     | Chief_Investigator_Conflict_Of_Interest | Bulk_Free_Text_Single_Chief_Investigator_Conflict_Of_Interest_Change_Edited |
 
   @rsp-5200 @rsp-4818 @ModificationsEnterFreeTextPageSaveForLater
   Scenario Outline: Verify that user can create modifications and validate the field values in enter free text page and can save the changes

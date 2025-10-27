@@ -178,7 +178,10 @@ export default class ModificationsCommonPage {
         dataset.specific_change_dropdown
       )
     ) {
-      await projectIdentificationSelectChangePage.fillProjectIdentificationSelectChangePage(dataset);
+      await projectIdentificationSelectChangePage.fillProjectIdentificationSelectChangePage(
+        { commonItemsPage: new CommonItemsPage(this.page) },
+        dataset
+      );
       await new CommonItemsPage(this.page).clickButton('Modifications_Page', 'Save_Continue');
       if (keys.includes('project_reference_numbers_radio')) {
         await projectIdentificationSelectReferenceToChangePage.fillProjectIdentificationSelectReferenceToChangePage(

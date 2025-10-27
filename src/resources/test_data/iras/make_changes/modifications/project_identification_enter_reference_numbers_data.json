@@ -1,0 +1,63 @@
+{
+  "Project_Identification_Enter_Reference_Numbers_Page": {
+    "heading_label": "Project identification",
+    "isrctn_reference_number_textbox_label": "International standard randomised controlled trial number (ISRCTN)",
+    "nct_reference_number_textbox_label": "ClinicalTrials.gov identifier (NCT number)",
+    "funder_name_textbox_label": "Funder name",
+    "funder_reference_number_textbox_label": "Funder reference",
+    "other_reference_number_textbox_label": "Other reference number",
+    "what_other_is_textbox_label": "What ‘other’ is",
+    "current_short_project_title_label": "Current short project title",
+    "new_short_project_title_textbox_label": "New short project title",
+    "new_full_project_title_textbox_label": "New full project title"
+  },
+  "Modification_To_Add_Administrative_Details_Single_Change": {
+    "area_of_change_dropdown": "Administrative details for the project",
+    "specific_change_dropdown": "Project identification",
+    "project_reference_numbers_radio": "Project reference numbers",
+    "which_reference_do_you_need_to_change_checkboxes": ["Registry reference", "Funder reference", "Other"],
+    "Project_Reference": {
+      "isrctn_reference_number_textbox": "ISRCTN643955",
+      "nct_reference_number_textbox": "NCT34355455",
+      "funder_name_textbox": "Funder name QA testing Updated",
+      "funder_reference_number_textbox": "45345325",
+      "other_reference_number_textbox": "46353255",
+      "what_other_is_textbox": "9545452342"
+    }
+  },
+
+  "Modification_To_Add_Administrative_Details_Invalid_Data_Reference_Numbers": {
+    "area_of_change_dropdown": "Administrative details for the project",
+    "specific_change_dropdown": "Project identification",
+    "project_reference_numbers_radio": "Project reference numbers",
+    "which_reference_do_you_need_to_change_checkboxes": ["Registry reference", "Funder reference", "Other"],
+    "Project_Reference": {
+      "isrctn_reference_number_textbox": "Invalid",
+      "nct_reference_number_textbox": "Invalid",
+      "funder_name_textbox": "",
+      "funder_reference_number_textbox": "",
+      "other_reference_number_textbox": "",
+      "what_other_is_textbox": ""
+    }
+  },
+  "Field_Summary_Error_Message_Invalid_Project_Reference": {
+    "isrctn_reference_number_textbox": "Enter a value with this format ISRCTNxxxxxxxx where x are digits",
+    "nct_reference_number_textbox": "Enter a value with the format NCTxxxxxxxx where x are digits"
+  },
+  "Modification_To_Add_Administrative_Details_Invalid_Data_Titles": {
+    "Project_Identification_Project_Titles": {
+      "area_of_change_dropdown": "Administrative details for the project",
+      "specific_change_dropdown": "Project identification",
+      "title_radio": "Title",
+      "change_status": "Change ready for submission",
+      "Project_Reference": {
+        "new_short_project_title_text": "QA_Automation - Max short study title length one two three four five six seven eight nine ten one END",
+        "new_full_project_title_text": "QA_Automation - Max full study title length one two three four five six seven eight nine ten one  END"
+      }
+    }
+  },
+  "Field_Summary_Error_Message_Invalid_Project_Titles": {
+    "new_short_project_title_text": "Short project title must not contain more than XX characters",
+    "new_full_project_title_text": "Short project title must not contain more than XX characters"
+  }
+}

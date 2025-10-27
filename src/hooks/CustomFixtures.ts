@@ -58,7 +58,7 @@ import ModificationsCommonPage from '../pages/IRAS/makeChanges/modifications/Mod
 import PlannedEndDateChangePage from '../pages/IRAS/makeChanges/modifications/PlannedEndDateChangePage';
 import AffectedOrganisationSelectionPage from '../pages/IRAS/makeChanges/modifications/applicabilityScreens/AffectedOrganisationSelectionPage';
 import AffectedOrganisationQuestionsPage from '../pages/IRAS/makeChanges/modifications/applicabilityScreens/AffectedOrganisationQuestionsPage';
-import ModificationReviewChangesPage from '../pages/IRAS/makeChanges/modifications/changePlannedEndDate/ModificationReviewChangesPage';
+import ModificationReviewChangesPage from '../pages/IRAS/makeChanges/modifications/ModificationReviewChangesPage';
 import AddDocumentsModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/AddDocumentsModificationsPage';
 import ReviewUploadedDocumentsModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/ReviewUploadedDocumentsModificationsPage';
 import ModificationsReceivedCommonPage from '../pages/IRAS/reviewResearch/receiveAmendments/ModificationsReceivedCommonPage';
@@ -72,6 +72,9 @@ import ReviewYourDocumentInformationModificationsPage from '../pages/IRAS/makeCh
 import ReviewAllChangesPage from '../pages/IRAS/reviewResearch/receiveAmendments/ReviewAllChangesPage';
 import ProjectOverviewUnfinishedProjectsPage from '../pages/IRAS/makeChanges/ProjectOverviewUnfinishedProjectsPage';
 import ModificationsDetailsPage from '../pages/IRAS/makeChanges/modifications/ModificationsDetailsPage';
+import ProjectIdentificationSelectChangePage from '../pages/IRAS/makeChanges/modifications/ProjectIdentificationSelectChangePage';
+import ProjectIdentificationSelectReferenceToChangePage from '../pages/IRAS/makeChanges/modifications/ProjectIdentificationSelectReferenceToChangePage';
+import ProjectIdentificationEnterReferenceNumbersPage from '../pages/IRAS/makeChanges/modifications/ProjectIdentificationEnterReferenceNumbersPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -144,6 +147,10 @@ type CustomFixtures = {
   reviewAllChangesPage: ReviewAllChangesPage;
   modificationsDetailsPage: ModificationsDetailsPage;
   projectOverviewUnfinishedProjectsPage: ProjectOverviewUnfinishedProjectsPage;
+  projectIdentificationSelectChangePage: ProjectIdentificationSelectChangePage;
+  projectIdentificationSelectReferenceToChangePage: ProjectIdentificationSelectReferenceToChangePage;
+  projectIdentificationEnterReferenceNumbersPage: ProjectIdentificationEnterReferenceNumbersPage;
+
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -423,6 +430,19 @@ export const test = base.extend<CustomFixtures>({
   modificationsDetailsPage: async ({ page }, use) => {
     await use(new ModificationsDetailsPage(page));
   },
+
+  projectIdentificationSelectChangePage: async ({ page }, use) => {
+    await use(new ProjectIdentificationSelectChangePage(page));
+  },
+
+  projectIdentificationSelectReferenceToChangePage: async ({ page }, use) => {
+    await use(new ProjectIdentificationSelectReferenceToChangePage(page));
+  },
+
+  projectIdentificationEnterReferenceNumbersPage: async ({ page }, use) => {
+    await use(new ProjectIdentificationEnterReferenceNumbersPage(page));
+  },
+
   makeAxeBuilder: async ({ page }, use) => {
     const makeAxeBuilder = () => new AxeBuilder({ page });
     await use(makeAxeBuilder);
