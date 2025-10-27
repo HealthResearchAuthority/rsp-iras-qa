@@ -1,6 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as projectIdentificationSelectChangePageTestData from '../../../../resources/test_data/iras/make_changes/modifications/project_identification_select_change_data.json';
-// import CommonItemsPage from '../../../Common/CommonItemsPage';
 
 //Declare Page Objects
 export default class ProjectIdentificationSelectChangePage {
