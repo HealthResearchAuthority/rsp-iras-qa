@@ -631,8 +631,6 @@ export async function getSharpointGraphClient(): Promise<Client> {
   const tenantId = `${process.env.tenantId}`;
   const clientId = `${process.env.clientId}`;
   const clientSecret = `${process.env.clientSecret}`;
-  console.log('Tenant ID:', tenantId);
-  console.log('Client ID:', clientId);
   const credential = new ClientSecretCredential(tenantId, clientId, clientSecret);
   const token = await credential.getToken('https://graph.microsoft.com/.default');
   const client = Client.init({
