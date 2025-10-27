@@ -1,6 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../hooks/CustomFixtures';
-import { generateIrasId, generateRandomValidIrasId } from '../.././../utils/GenerateTestData';
+import { generateIrasId } from '../.././../utils/GenerateTestData';
 
 const { Then } = createBdd(test);
 
@@ -37,7 +37,7 @@ Then(
 );
 
 Then('I fill the unique iras id in project details iras page', async ({ projectDetailsIRASPage }) => {
-  const uniqueIrasId = generateRandomValidIrasId();
+  const uniqueIrasId = await projectDetailsIRASPage.getValidIRASFromLegacySharepoint();
   await projectDetailsIRASPage.setUniqueIrasId(uniqueIrasId);
   await projectDetailsIRASPage.iras_id_text.fill(await projectDetailsIRASPage.getUniqueIrasId());
 });
