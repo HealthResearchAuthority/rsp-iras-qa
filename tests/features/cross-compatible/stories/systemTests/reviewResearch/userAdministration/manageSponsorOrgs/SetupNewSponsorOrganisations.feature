@@ -124,7 +124,7 @@ Feature: User Administration: Manage Sponsor Organisations - Set up new sponsor 
             | Organisation_Name | Last     | JavaScript_Disabled_Duplicate_Sponsor_Organisation_Setup_Error |
 
 
-    # last update date validation to be added later
+
 
     @rsp-5230 @SponsorOrganisationValidation @jsEnabled @RTS
     Scenario Outline: Validate the sponsor organisation suggestion list when javascript is enabled
@@ -194,6 +194,7 @@ Feature: User Administration: Manage Sponsor Organisations - Set up new sponsor 
             | Organisation_Name | First    | Enabled        |
             | Organisation_Name | Last     | Enabled        |
 
+    # last update date validation to be added later
     @EndToEndFlow @rsp-5229 @rsp-5230 @rsp-5231 @rsp-5232 @rsp-5237
     Scenario Outline: Verify the user can add a sponsor organisation from manage sponsor organisation page
         When I authorise the rts api using '<RTS_API_Data>'
