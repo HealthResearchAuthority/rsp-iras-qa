@@ -72,7 +72,7 @@ import ReviewYourDocumentInformationModificationsPage from '../pages/IRAS/makeCh
 import ReviewAllChangesPage from '../pages/IRAS/reviewResearch/receiveAmendments/ReviewAllChangesPage';
 import ProjectOverviewUnfinishedProjectsPage from '../pages/IRAS/makeChanges/ProjectOverviewUnfinishedProjectsPage';
 import ModificationsDetailsPage from '../pages/IRAS/makeChanges/modifications/ModificationsDetailsPage';
-import ContactDetailsModificationPage from '../pages/IRAS/makeChanges/modifications/ContactDetailsModificationPage';
+import ContactDetailsModificationPage from '../pages/IRAS/makeChanges/modifications/nonReviewable/ContactDetailsModificationPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
