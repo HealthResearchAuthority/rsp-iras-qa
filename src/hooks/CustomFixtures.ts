@@ -58,7 +58,7 @@ import ModificationsCommonPage from '../pages/IRAS/makeChanges/modifications/Mod
 import PlannedEndDateChangePage from '../pages/IRAS/makeChanges/modifications/PlannedEndDateChangePage';
 import AffectedOrganisationSelectionPage from '../pages/IRAS/makeChanges/modifications/applicabilityScreens/AffectedOrganisationSelectionPage';
 import AffectedOrganisationQuestionsPage from '../pages/IRAS/makeChanges/modifications/applicabilityScreens/AffectedOrganisationQuestionsPage';
-import ReviewChangesPlannedEndDatePage from '../pages/IRAS/makeChanges/modifications/changePlannedEndDate/ReviewChangesPlannedEndDatePage';
+import ModificationReviewChangesPage from '../pages/IRAS/makeChanges/modifications/changePlannedEndDate/ModificationReviewChangesPage';
 import AddDocumentsModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/AddDocumentsModificationsPage';
 import ReviewUploadedDocumentsModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/ReviewUploadedDocumentsModificationsPage';
 import ModificationsReceivedCommonPage from '../pages/IRAS/reviewResearch/receiveAmendments/ModificationsReceivedCommonPage';
@@ -72,6 +72,9 @@ import ReviewYourDocumentInformationModificationsPage from '../pages/IRAS/makeCh
 import ReviewAllChangesPage from '../pages/IRAS/reviewResearch/receiveAmendments/ReviewAllChangesPage';
 import ProjectOverviewUnfinishedProjectsPage from '../pages/IRAS/makeChanges/ProjectOverviewUnfinishedProjectsPage';
 import ModificationsDetailsPage from '../pages/IRAS/makeChanges/modifications/ModificationsDetailsPage';
+import ContactDetailsModificationPage from '../pages/IRAS/makeChanges/modifications/nonReviewable/ContactDetailsModificationPage';
+import ProjectPersonnelChangeChiefInvestigatorPage from '../pages/IRAS/makeChanges/modifications/nonReviewable/ProjectPersonnelChangeChiefInvestigatorPage';
+import ProjectPersonnelChangePrincipalInvestigatorPage from '../pages/IRAS/makeChanges/modifications/nonReviewable/ProjectPersonnelChangePrincipalInvestigatorPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -130,7 +133,7 @@ type CustomFixtures = {
   plannedEndDateChangePage: PlannedEndDateChangePage;
   affectedOrganisationSelectionPage: AffectedOrganisationSelectionPage;
   affectedOrganisationQuestionsPage: AffectedOrganisationQuestionsPage;
-  reviewChangesPlannedEndDatePage: ReviewChangesPlannedEndDatePage;
+  modificationReviewChangesPage: ModificationReviewChangesPage;
   addDocumentsModificationsPage: AddDocumentsModificationsPage;
   reviewUploadedDocumentsModificationsPage: ReviewUploadedDocumentsModificationsPage;
   selectStudyWideReviewerPage: SelectStudyWideReviewerPage;
@@ -144,6 +147,9 @@ type CustomFixtures = {
   reviewAllChangesPage: ReviewAllChangesPage;
   modificationsDetailsPage: ModificationsDetailsPage;
   projectOverviewUnfinishedProjectsPage: ProjectOverviewUnfinishedProjectsPage;
+  contactDetailsModificationPage: ContactDetailsModificationPage;
+  projectPersonnelChangeChiefInvestigatorPage: ProjectPersonnelChangeChiefInvestigatorPage;
+  projectPersonnelChangePrincipalInvestigatorPage: ProjectPersonnelChangePrincipalInvestigatorPage;
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -371,8 +377,8 @@ export const test = base.extend<CustomFixtures>({
     await use(new AffectedOrganisationQuestionsPage(page));
   },
 
-  reviewChangesPlannedEndDatePage: async ({ page }, use) => {
-    await use(new ReviewChangesPlannedEndDatePage(page));
+  modificationReviewChangesPage: async ({ page }, use) => {
+    await use(new ModificationReviewChangesPage(page));
   },
 
   addDocumentsModificationsPage: async ({ page }, use) => {
@@ -417,16 +423,32 @@ export const test = base.extend<CustomFixtures>({
   reviewYourDocumentInformationModificationsPage: async ({ page }, use) => {
     await use(new ReviewYourDocumentInformationModificationsPage(page));
   },
+
   reviewAllChangesPage: async ({ page }, use) => {
     await use(new ReviewAllChangesPage(page));
   },
+
   modificationsDetailsPage: async ({ page }, use) => {
     await use(new ModificationsDetailsPage(page));
   },
+
+  contactDetailsModificationPage: async ({ page }, use) => {
+    await use(new ContactDetailsModificationPage(page));
+  },
+
+  projectPersonnelChangeChiefInvestigatorPage: async ({ page }, use) => {
+    await use(new ProjectPersonnelChangeChiefInvestigatorPage(page));
+  },
+
+  projectPersonnelChangePrincipalInvestigatorPage: async ({ page }, use) => {
+    await use(new ProjectPersonnelChangePrincipalInvestigatorPage(page));
+  },
+
   makeAxeBuilder: async ({ page }, use) => {
     const makeAxeBuilder = () => new AxeBuilder({ page });
     await use(makeAxeBuilder);
   },
+
   //Set the Storage State based on User Tag from Feature File
   storageState: async ({ $tags, storageState }, use) => {
     if ($tags.includes('@SysAdminUser')) {
