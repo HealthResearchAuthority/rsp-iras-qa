@@ -3,7 +3,10 @@ import { test } from '../../hooks/CustomFixtures';
 import { getAuthState, getReportFolderName, getTicketReferenceTags } from '../../utils/UtilFunctions';
 import * as fs from 'node:fs';
 import path from 'node:path';
-const { AfterStep, BeforeScenario } = createBdd(test);
+import { connect } from '../../utils/DbConfig';
+import * as dbConfigData from '../../resources/test_data/common/database/db_config_data.json';
+
+const { AfterScenario, AfterStep, BeforeScenario } = createBdd(test);
 
 AfterStep(async ({ page, $step, $testInfo, commonItemsPage }) => {
   if (
@@ -39,6 +42,44 @@ BeforeScenario(
     if (tickets.length > 0) {
       $testInfo.attach('Ticket Reference:', { body: tickets.toString().replaceAll(/,/g, '') });
     }
+  }
+);
+
+BeforeScenario(
+  {
+    name: 'Ensure One Login User does not exist in system',
+    tags: '@OneLoginUser',
+  },
+  async function ({ auditHistoryUserPage }) {
+    const sqlConnection = await connect(dbConfigData.Identity_Service);
+    const userEmail =
+      auditHistoryUserPage.auditHistoryUserPageTestData.User_Profiles.One_Login_Account_User.email_address;
+    const queryResult = await sqlConnection.query(`SELECT Id FROM Users WHERE UserName = '${userEmail}'`);
+    if (queryResult.recordset.length > 0) {
+      await sqlConnection.query(`DELETE FROM UserRoles WHERE UserId = '${queryResult.recordset[0].Id}'`);
+      await sqlConnection.query(`DELETE FROM UserAuditTrails WHERE UserId = '${queryResult.recordset[0].Id}'`);
+      await sqlConnection.query(`DELETE FROM Users WHERE Id = '${queryResult.recordset[0].Id}'`);
+    }
+    await sqlConnection.close();
+  }
+);
+
+AfterScenario(
+  {
+    name: 'Remove One Login User from the system',
+    tags: '@OneLoginUser',
+  },
+  async function ({ auditHistoryUserPage }) {
+    const sqlConnection = await connect(dbConfigData.Identity_Service);
+    const userEmail =
+      auditHistoryUserPage.auditHistoryUserPageTestData.User_Profiles.One_Login_Account_User.email_address;
+    const queryResult = await sqlConnection.query(`SELECT Id FROM Users WHERE UserName = '${userEmail}'`);
+    if (queryResult.recordset.length > 0) {
+      await sqlConnection.query(`DELETE FROM UserRoles WHERE UserId = '${queryResult.recordset[0].Id}'`);
+      await sqlConnection.query(`DELETE FROM UserAuditTrails WHERE UserId = '${queryResult.recordset[0].Id}'`);
+      await sqlConnection.query(`DELETE FROM Users WHERE Id = '${queryResult.recordset[0].Id}'`);
+    }
+    await sqlConnection.close();
   }
 );
 

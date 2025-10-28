@@ -10,7 +10,7 @@ import {
   writeGeneratedTestDataToJSON,
 } from '../../utils/GenerateTestData';
 import * as userProfileGeneratedataConfig from '../../resources/test_data/user_administration/testdata_generator/user_profile_generate_data_config.json';
-import { confirmArrayNotNull, getAuthState, getCurrentTimeFormatted, getRandomNumber } from '../../utils/UtilFunctions';
+import { confirmArrayNotNull, getAuthState, getTimeFormatted, getRandomNumber } from '../../utils/UtilFunctions';
 import { Locator } from 'playwright/test';
 import * as fs from 'node:fs';
 import path from 'node:path';
@@ -230,9 +230,7 @@ Given(
       linkKey === 'Back_To_Users'
     ) {
       await commonItemsPage.govUkLink.getByText(linkValue).click();
-    } else if (linkKey === 'Back') {
-      await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).first().click();
-    } else if (noOfLinksFound > 1) {
+    } else if (noOfLinksFound > 1 && linkKey != 'Back') {
       await commonItemsPage.govUkLink.getByText(linkValue).first().click();
     } else {
       await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
@@ -413,7 +411,7 @@ Then(
 Then(
   'I capture the current time for {string}',
   async ({ auditHistoryReviewBodyPage, auditHistoryUserPage }, page: string) => {
-    const currentTime = await getCurrentTimeFormatted();
+    const currentTime = await getTimeFormatted();
     switch (page) {
       case 'Audit_History_Review_Body_Page':
         await auditHistoryReviewBodyPage.setUpdatedTime(currentTime);
@@ -590,7 +588,7 @@ Then(
 When(
   'I enter {string} into the search field',
   async (
-    { commonItemsPage, reviewBodyProfilePage, createReviewBodyPage, createUserProfilePage },
+    { commonItemsPage, reviewBodyProfilePage, createReviewBodyPage, createUserProfilePage, editReviewBodyPage },
     inputType: string
   ) => {
     let searchValue: string;
@@ -601,8 +599,19 @@ When(
       case 'name of the new review body':
         searchValue = await createReviewBodyPage.getUniqueOrgName();
         break;
+      case 'timestamp of the edited review body':
+        searchValue = await editReviewBodyPage.getUniqueOrgTimestamp();
+        break;
       case 'name of the newly created user':
         searchValue = await createUserProfilePage.getUniqueEmail();
+        break;
+      case 'an active review body name':
+        await reviewBodyProfilePage.sqlGetSingleRandomReviewBodyByStatus('Active');
+        searchValue = await reviewBodyProfilePage.getOrgName();
+        break;
+      case 'a disabled review body name':
+        await reviewBodyProfilePage.sqlGetSingleRandomReviewBodyByStatus('Disabled');
+        searchValue = await reviewBodyProfilePage.getOrgName();
         break;
       default:
         searchValue = inputType;

@@ -36,6 +36,14 @@ Then(
 );
 
 Then(
+  'I click the change link against {string} on the check your profile page',
+  async ({ checkYourProfilePage, commonItemsPage }, fieldKey: string) => {
+    const changeLink = await commonItemsPage.getChangeLink(fieldKey, checkYourProfilePage);
+    await changeLink.click();
+  }
+);
+
+Then(
   'I fill the complete profile page with {string} details',
   async ({ commonItemsPage, completeYourProfilePage }, datasetName: string) => {
     const dataset = completeYourProfilePage.completeYourProfilePageTestData.Users[datasetName].Profile_Details;

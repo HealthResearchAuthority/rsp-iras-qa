@@ -1,8 +1,14 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../../hooks/CustomFixtures';
-import { confirmArrayNotNull, returnDataFromJSON } from '../../../../../utils/UtilFunctions';
+import {
+  confirmArrayNotNull,
+  confirmStringNotNull,
+  getAuthState,
+  returnDataFromJSON,
+} from '../../../../../utils/UtilFunctions';
+import * as fs from 'node:fs';
 
-const { Then } = createBdd(test);
+const { Given, When, Then } = createBdd(test);
 
 Then('I can see the audit history page of the user profile', async ({ auditHistoryUserPage }) => {
   await auditHistoryUserPage.assertOnAuditHistoryUserPage();
@@ -49,6 +55,16 @@ Then(
       expect(confirmArrayNotNull(auditLog.get('eventValues'))[index]).toBe(eventDescriptionExpectedValue);
       expect(confirmArrayNotNull(auditLog.get('adminEmailValues'))[index]).toBe(datasetAudit.system_admin_email_text);
     }
+  }
+);
+
+Then(
+  'I can see the users audit history with the expected events displayed',
+  async ({ auditHistoryUserPage, userProfilePage, commonItemsPage }) => {
+    const auditLog = await commonItemsPage.getAuditLog();
+    const expectedAuditLog = await auditHistoryUserPage.sqlGetUserAuditHistoryById(await userProfilePage.getUserId());
+    await auditHistoryUserPage.page.pause();
+    expect(auditLog).toEqual(expectedAuditLog);
   }
 );
 
@@ -102,7 +118,7 @@ Then(
   }
 );
 
-Then(
+When(
   'I can see the {string} user has had their roles unassigned in the audit history',
   async ({ auditHistoryUserPage, createUserProfilePage, commonItemsPage }, datasetName: string) => {
     const datasetUser = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
@@ -126,5 +142,24 @@ Then(
         datasetAuditEvent.system_admin_email_text
       );
     }
+  }
+);
+
+Given(
+  'I have navigated to the audit history page for the {string} user as {string}',
+  async ({ auditHistoryUserPage, createUserProfilePage, userProfilePage }, profile: string, user: string) => {
+    const authStatePath = getAuthState(user);
+    const authState = JSON.parse(fs.readFileSync(authStatePath, 'utf-8'));
+    let userEmail: string;
+    if (profile.toLowerCase() == 'newly created') {
+      userEmail = confirmStringNotNull(await createUserProfilePage.getUniqueEmail());
+    } else {
+      userEmail = auditHistoryUserPage.auditHistoryUserPageTestData.User_Profiles[profile].email_address;
+    }
+    await userProfilePage.sqlGetUserProfileByEmail(userEmail);
+    const userProfileId = await userProfilePage.getUserId();
+    await auditHistoryUserPage.page.context().addCookies(authState.cookies);
+    await auditHistoryUserPage.goto(userEmail, userProfileId);
+    await auditHistoryUserPage.assertOnAuditHistoryUserPage();
   }
 );

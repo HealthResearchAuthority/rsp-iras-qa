@@ -71,6 +71,10 @@
     "mfa": "`${process.env.ONE_LOGIN_ACCOUNT_USER_MFA_KEY}`",
     "authPath": "one_login_account_user"
   },
+  "DB_User": {
+    "username": "testhrasysadmin",
+    "password": "`${process.env.DB_USER_PASS}`"
+  },
   "Login_Page": {
     "header": "Create your GOV.UK One Login or sign in"
   }

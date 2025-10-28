@@ -85,8 +85,8 @@ export default class CheckYourProfilePage {
     this.email_address_row = this.page.locator(this.rowSelector, { has: this.email_address_label });
     this.email_address_value = this.email_address_row.getByRole('cell').nth(1);
     this.email_address_change_link = this.email_address_row
-      .getByRole('link')
-      .getByText(this.linkTextData.Profile_Settings_Page.Change);
+      .getByRole('button')
+      .getByText(this.linkTextData.Check_Your_Profile_Page.Change);
     this.telephone_label = this.page
       .getByRole('cell')
       .getByText(this.checkYourProfilePageTestData.Check_Your_Profile_Page.telephone_label, {
@@ -95,8 +95,8 @@ export default class CheckYourProfilePage {
     this.telephone_row = this.page.locator(this.rowSelector, { has: this.telephone_label });
     this.telephone_value = this.telephone_row.getByRole('cell').nth(1);
     this.telephone_change_link = this.telephone_row
-      .getByRole('link')
-      .getByText(this.linkTextData.Profile_Settings_Page.Change);
+      .getByRole('button')
+      .getByText(this.linkTextData.Check_Your_Profile_Page.Change);
     this.title_label = this.page
       .getByRole('cell')
       .getByText(this.checkYourProfilePageTestData.Check_Your_Profile_Page.title_label, {
@@ -104,7 +104,9 @@ export default class CheckYourProfilePage {
       });
     this.title_row = this.page.locator(this.rowSelector, { has: this.title_label });
     this.title_value = this.page.locator('td', { has: this.page.getByTestId('Title') });
-    this.title_change_link = this.title_row.getByRole('link').getByText(this.linkTextData.Profile_Settings_Page.Change);
+    this.title_change_link = this.title_row
+      .getByRole('button')
+      .getByText(this.linkTextData.Check_Your_Profile_Page.Change);
     this.first_name_label = this.page
       .getByRole('cell')
       .getByText(this.checkYourProfilePageTestData.Check_Your_Profile_Page.first_name_label, {
@@ -113,8 +115,8 @@ export default class CheckYourProfilePage {
     this.first_name_row = this.page.locator(this.rowSelector, { has: this.first_name_label });
     this.first_name_value = this.page.locator('td', { has: this.page.getByTestId('GivenName') });
     this.first_name_change_link = this.first_name_row
-      .getByRole('link')
-      .getByText(this.linkTextData.Profile_Settings_Page.Change);
+      .getByRole('button')
+      .getByText(this.linkTextData.Check_Your_Profile_Page.Change);
     this.last_name_label = this.page
       .getByRole('cell')
       .getByText(this.checkYourProfilePageTestData.Check_Your_Profile_Page.last_name_label, {
@@ -123,8 +125,8 @@ export default class CheckYourProfilePage {
     this.last_name_row = this.page.locator(this.rowSelector, { has: this.last_name_label });
     this.last_name_value = this.page.locator('td', { has: this.page.getByTestId('FamilyName') });
     this.last_name_change_link = this.last_name_row
-      .getByRole('link')
-      .getByText(this.linkTextData.Profile_Settings_Page.Change);
+      .getByRole('button')
+      .getByText(this.linkTextData.Check_Your_Profile_Page.Change);
     this.job_title_label = this.page
       .getByRole('cell')
       .getByText(this.checkYourProfilePageTestData.Check_Your_Profile_Page.job_title_label, {
@@ -133,8 +135,8 @@ export default class CheckYourProfilePage {
     this.job_title_row = this.page.locator(this.rowSelector, { has: this.job_title_label });
     this.job_title_value = this.page.locator('td', { has: this.page.getByTestId('JobTitle') });
     this.job_title_change_link = this.job_title_row
-      .getByRole('link')
-      .getByText(this.linkTextData.Profile_Settings_Page.Change);
+      .getByRole('button')
+      .getByText(this.linkTextData.Check_Your_Profile_Page.Change);
     this.organisation_label = this.page
       .getByRole('cell')
       .getByText(this.checkYourProfilePageTestData.Check_Your_Profile_Page.organisation_label, {
@@ -143,8 +145,8 @@ export default class CheckYourProfilePage {
     this.organisation_row = this.page.locator(this.rowSelector, { has: this.organisation_label });
     this.organisation_value = this.page.locator('td', { has: this.page.getByTestId('Organisation') });
     this.organisation_change_link = this.organisation_row
-      .getByRole('link')
-      .getByText(this.linkTextData.Profile_Settings_Page.Change);
+      .getByRole('button')
+      .getByText(this.linkTextData.Check_Your_Profile_Page.Change);
   }
 
   //Page Methods

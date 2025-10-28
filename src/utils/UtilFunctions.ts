@@ -522,13 +522,18 @@ export async function removeUnwantedWhitespace(value: string): Promise<string> {
   return value.replaceAll(/\s+/g, ' ').trim();
 }
 
-export async function generateTimeStampedValue(keyVal: string, separator: string): Promise<string> {
+export async function generateTimeStampedValue(keyVal: string, separator: string): Promise<[string, string]> {
   const timestamp = new Date().toISOString().replaceAll(/[-:.TZ]/g, '');
-  return `${keyVal}${separator}${timestamp}`;
+  return [`${keyVal}${separator}${timestamp}`, timestamp];
 }
 
-export async function getCurrentTimeFormatted(): Promise<string> {
-  const date = new Date();
+export async function getTimeFormatted(dateTimeStamp?: Date): Promise<string> {
+  let date: Date;
+  if (typeof dateTimeStamp !== 'undefined') {
+    date = new Date(dateTimeStamp);
+  } else {
+    date = new Date();
+  }
   const utcDay = date.getUTCDate().toString().padStart(2, '0');
   const utcMonth = date.toLocaleString('en-GB', { month: 'short', timeZone: 'UTC' }).slice(0, 3);
   const utcYear = date.getUTCFullYear();

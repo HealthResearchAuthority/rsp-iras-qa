@@ -1277,7 +1277,7 @@ export default class CommonItemsPage {
     return labels;
   }
 
-  async getChangeLink<PageObject>(fieldKey: string, page: PageObject) {
+  async getChangeLink<PageObject>(fieldKey: string, page: PageObject): Promise<Locator> {
     const locatorName = fieldKey.toLowerCase() + '_change_link';
     return page[locatorName];
   }
