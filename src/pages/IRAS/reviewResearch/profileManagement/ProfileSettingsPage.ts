@@ -43,6 +43,10 @@ export default class ProfileSettingsPage {
   readonly organisation_row: Locator;
   readonly organisation_value: Locator;
   readonly organisation_change_link: Locator;
+  readonly success_notification_title: Locator;
+  readonly success_notification_container: Locator;
+  readonly success_notification_created_message: Locator;
+  readonly success_notification_updated_message: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -141,6 +145,18 @@ export default class ProfileSettingsPage {
     this.organisation_change_link = this.organisation_row
       .getByRole('link')
       .getByText(this.linkTextData.Profile_Settings_Page.Change);
+    this.success_notification_title = this.page
+      .getByTestId('govuk-notification-banner-title')
+      .getByText(this.profileSettingsPageTestData.Profile_Settings_Page.success_notification_title);
+    this.success_notification_container = this.page.locator('.govuk-notification-banner--success', {
+      has: this.success_notification_title,
+    });
+    this.success_notification_created_message = this.success_notification_container
+      .getByRole('heading')
+      .getByText(this.profileSettingsPageTestData.Profile_Settings_Page.success_notification_created_message);
+    this.success_notification_updated_message = this.success_notification_container
+      .getByRole('heading')
+      .getByText(this.profileSettingsPageTestData.Profile_Settings_Page.success_notification_updated_message);
   }
 
   //Page Methods

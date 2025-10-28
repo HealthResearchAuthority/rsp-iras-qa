@@ -446,6 +446,8 @@ Then(
       myModificationsTasklistPage,
       sponsorReferencePage,
       projectIdentifiersPage,
+      completeYourProfilePage,
+      editYourProfilePage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
@@ -524,6 +526,14 @@ Then(
       errorMessageFieldDataset =
         sponsorReferencePage.sponsorReferencePageTestData[errorMessageFieldAndSummaryDatasetName];
       page = sponsorReferencePage;
+    } else if (pageKey == 'Complete_Your_Profile_Page') {
+      errorMessageFieldDataset =
+        completeYourProfilePage.completeYourProfilePageTestData.Validation[errorMessageFieldAndSummaryDatasetName];
+      page = completeYourProfilePage;
+    } else if (pageKey == 'Edit_Your_Profile_Page') {
+      errorMessageFieldDataset =
+        editYourProfilePage.editYourProfilePageTestData.Validation[errorMessageFieldAndSummaryDatasetName];
+      page = completeYourProfilePage;
     }
     let allSummaryErrorExpectedValues: any;
     let summaryErrorActualValues: any;

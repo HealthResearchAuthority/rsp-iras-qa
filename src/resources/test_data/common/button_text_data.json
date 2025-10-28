@@ -261,5 +261,8 @@
   },
   "Check_Your_Profile_Page": {
     "Add_Profile": "Add user profile"
+  },
+  "Edit_Your_Profile_Page": {
+    "Save": "Save"
   }
 }

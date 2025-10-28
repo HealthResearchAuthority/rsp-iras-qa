@@ -63,7 +63,6 @@ Then(
   async ({ auditHistoryUserPage, userProfilePage, commonItemsPage }) => {
     const auditLog = await commonItemsPage.getAuditLog();
     const expectedAuditLog = await auditHistoryUserPage.sqlGetUserAuditHistoryById(await userProfilePage.getUserId());
-    await auditHistoryUserPage.page.pause();
     expect(auditLog).toEqual(expectedAuditLog);
   }
 );

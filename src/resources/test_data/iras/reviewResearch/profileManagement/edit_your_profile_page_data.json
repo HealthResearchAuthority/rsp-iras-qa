@@ -27,6 +27,30 @@
         "job_title_value": "User/Researcher",
         "organisation_value": "HRA"
       }
+    },
+    "One_Login_Account_User_Edit": {
+      "Profile_Details": {
+        "title_value": "Master",
+        "first_name_value": "Gene",
+        "last_name_value": "Simmons",
+        "job_title_value": "Bassist",
+        "organisation_value": "KISS"
+      }
+    },
+    "Invalid_User_Edit": {
+      "Profile_Details": {
+        "title_value": "",
+        "first_name_value": "",
+        "last_name_value": "",
+        "job_title_value": "",
+        "organisation_value": ""
+      }
+    }
+  },
+  "Validation": {
+    "Missing_Mandatory_Fields_Error": {
+      "first_name_value": "Enter a first name",
+      "last_name_value": "Enter a last name"
     }
   }
 }

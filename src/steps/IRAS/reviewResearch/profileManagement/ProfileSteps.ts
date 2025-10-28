@@ -27,6 +27,15 @@ When('I can see the profile details for my {string} account', async ({ profileSe
     .toHaveText(dataset[user].Profile_Details.organisation_value);
 });
 
+When('I can see the account {string} notification', async ({ profileSettingsPage }, action: string) => {
+  await expect.soft(profileSettingsPage.success_notification_title).toBeVisible();
+  if (action.toLowerCase() == 'created') {
+    await expect.soft(profileSettingsPage.success_notification_created_message).toBeVisible();
+  } else {
+    await expect.soft(profileSettingsPage.success_notification_updated_message).toBeVisible();
+  }
+});
+
 Then(
   'I click the change link against {string} on the profile settings page',
   async ({ profileSettingsPage, commonItemsPage }, fieldKey: string) => {
@@ -50,6 +59,18 @@ Then(
     for (const key in dataset) {
       if (Object.hasOwn(dataset, key)) {
         await commonItemsPage.fillUIComponent(dataset, key, completeYourProfilePage);
+      }
+    }
+  }
+);
+
+Then(
+  'I fill the edit your profile page with {string} details',
+  async ({ commonItemsPage, editYourProfilePage }, datasetName: string) => {
+    const dataset = editYourProfilePage.editYourProfilePageTestData.Users[datasetName].Profile_Details;
+    for (const key in dataset) {
+      if (Object.hasOwn(dataset, key)) {
+        await commonItemsPage.fillUIComponent(dataset, key, editYourProfilePage);
       }
     }
   }

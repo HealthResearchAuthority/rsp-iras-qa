@@ -12,7 +12,10 @@
     "first_name_label": "First name",
     "last_name_label": "Last name",
     "job_title_label": "Job title",
-    "organisation_label": "Organisation"
+    "organisation_label": "Organisation",
+    "success_notification_title": "Success",
+    "success_notification_created_message": "Account created",
+    "success_notification_updated_message": "Account updated"
   },
   "Users": {
     "Applicant_User": {

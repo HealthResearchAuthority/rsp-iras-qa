@@ -1,4 +1,4 @@
-@ProfileManagement @CompleteProfile @ApplicantUser @OneLoginUser @SystemTest @rsp-5073 @rsp-5288
+@ProfileManagement @CompleteProfile @ApplicantUser @OneLoginUser @SystemTest
 Feature: Profile Management: Provide new users with the ability to create their profile on the system
     As a user
     I want to be able to complete my profile details
@@ -8,7 +8,7 @@ Feature: Profile Management: Provide new users with the ability to create their 
         Given I have navigated to the 'Login_Page' as 'One_Login_Account_User'
         When I login to the application as the 'One_Login_Account_User'
 
-    @completeCheckAddProfile @fail @KNOWN-DEFECT-RSP-5329 @only
+    @completeCheckAddProfile @rsp-5073 @rsp-5288 @fail @KNOWN-DEFECT-RSP-5329
     Scenario: New users are directed to complete their profile when logging into the system for the first time
         Then I can see the 'Complete_Your_Profile_Page'
         And I capture the page screenshot
@@ -26,12 +26,12 @@ Feature: Profile Management: Provide new users with the ability to create their 
         Then I can see the 'Home_Page'
         And I capture the page screenshot
         And I can see the workspaces in my account home page for 'Applicant_User'
-        And I can see the account created notification
+        And I can see the account 'created' notification
         When I have navigated to the audit history page for the 'One_Login_Account_User' user as 'System_Admin'
         And I capture the page screenshot
-        And I can see the users audit history with the expected events displayed
+        Then I can see the users audit history with the expected events displayed
 
-    @verifyCheckProfileChangeLinks @ApplicantUser
+    @verifyCheckProfileChangeLinks @rsp-5288 @ApplicantUser
     Scenario Outline: Verify the user can navigate to the complete profile page via the change links for all fields
         Then I can see the 'Complete_Your_Profile_Page'
         And I capture the page screenshot
@@ -49,3 +49,15 @@ Feature: Profile Management: Provide new users with the ability to create their 
             | Last_Name    |
             | Job_Title    |
             | Organisation |
+
+    @completeProfileValidation @rsp-5073 @OneLoginUser
+    Scenario: The complete your profile page has the correct input validations in place
+        Given I have navigated to the 'Login_Page' as 'One_Login_Account_User'
+        And I login to the application as the 'One_Login_Account_User'
+        And I can see the 'Complete_Your_Profile_Page'
+        And I capture the page screenshot
+        And I fill the complete profile page with 'Invalid_User' details
+        And I capture the page screenshot
+        When I click the 'Save_Continue' button on the 'Complete_Your_Profile_Page'
+        And I capture the page screenshot
+        Then I validate 'Missing_Mandatory_Fields_Error' displayed on 'Complete_Your_Profile_Page'
