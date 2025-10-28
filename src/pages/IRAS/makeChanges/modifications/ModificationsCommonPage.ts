@@ -5,7 +5,7 @@ import AffectedOrganisationSelectionPage from './applicabilityScreens/AffectedOr
 import AffectedOrganisationQuestionsPage from './applicabilityScreens/AffectedOrganisationQuestionsPage';
 import CommonItemsPage from '../../../Common/CommonItemsPage';
 import { confirmStringNotNull, convertDate } from '../../../../utils/UtilFunctions';
-import ContactDetailsModificationPage from './ContactDetailsModificationPage';
+import ContactDetailsModificationPage from './nonReviewable/ContactDetailsModificationPage';
 
 //Declare Page Objects
 export default class ModificationsCommonPage {
