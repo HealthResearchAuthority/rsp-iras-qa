@@ -15,8 +15,7 @@ schedules:
         - main
     always: true
 
-pool:
-  vmImage: 'Ubuntu-latest'
+pool: 'rsp-manageddevopspool'
 
 parameters:
   - name: platform

@@ -1,6 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { test, expect } from '../../../../../hooks/CustomFixtures';
-import { confirmArrayNotNull } from '../../../../../utils/UtilFunctions';
+import { confirmArrayNotNull, getRandomNumber } from '../../../../../utils/UtilFunctions';
 const { When, Then } = createBdd(test);
 
 Then(
@@ -31,10 +31,6 @@ Then(
     const dataset = editReviewBodyPage.editReviewBodyPageData.Edit_Review_Body[datasetName];
     const expectedCountryValue: string = dataset.country_checkbox.toString();
     const reviewBodyName = await editReviewBodyPage.getUniqueOrgName();
-    await manageReviewBodiesPage.goto(
-      manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.enlarged_page_size,
-      reviewBodyName
-    );
     const updatedReviewBodyRow = await manageReviewBodiesPage.findReviewBody(reviewBodyName);
     const updatedReviewBodyCountry = updatedReviewBodyRow.locator('td', {
       hasText: expectedCountryValue.replaceAll(',', ', '),
@@ -113,6 +109,16 @@ When(
     await foundRecords.locator(manageReviewBodiesPage.actionsLink).click();
   }
 );
+
+When('I select a review body from the list to View and Edit', async ({ manageReviewBodiesPage }) => {
+  const noOfLinks = await manageReviewBodiesPage.actionsLink.count().then((result) => result - 1);
+  if (noOfLinks == 0) {
+    await manageReviewBodiesPage.actionsLink.first().click();
+  } else {
+    const index = await getRandomNumber(0, noOfLinks);
+    await manageReviewBodiesPage.actionsLink.nth(index).click();
+  }
+});
 
 Then('the system displays review bodies matching the search criteria', async ({ commonItemsPage }) => {
   const searchKey = await commonItemsPage.getSearchKey();
