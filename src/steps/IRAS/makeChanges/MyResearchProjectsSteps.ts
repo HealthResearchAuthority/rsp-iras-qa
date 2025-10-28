@@ -84,6 +84,33 @@ Then(
 );
 
 Then(
+  'I can see the project status as {string} on the my research page',
+  async ({ myResearchProjectsPage, projectDetailsIRASPage }, statusValue: string) => {
+    const dataset = myResearchProjectsPage.myResearchProjectsPageTestData[statusValue];
+    const expectedStatus = dataset.status;
+    const expectedIrasId = await projectDetailsIRASPage.getUniqueIrasId();
+    const projectRecord = await myResearchProjectsPage.getProjectDetails(expectedIrasId);
+    const actualIrasId = projectRecord.get('displayedIrasId');
+    expect.soft(actualIrasId[0]).toBe(expectedIrasId);
+    const actualStatus = projectRecord.get('displayedStatusValue');
+    expect.soft(actualStatus[0]).toBe(expectedStatus);
+  }
+);
+
+Then(
+  'I click on the respective {string} on the my research page',
+  async ({ myResearchProjectsPage, projectDetailsIRASPage }, datasetName: string) => {
+    const projectTitle = myResearchProjectsPage.myResearchProjectsPageTestData[datasetName];
+    const shortProjectTitle = projectTitle.short_project_title;
+    const irasId = await projectDetailsIRASPage.getUniqueIrasId();
+    const foundRecords = await myResearchProjectsPage.findProjectLink(shortProjectTitle, irasId);
+    expect(foundRecords).toBeDefined();
+    expect(foundRecords).toHaveCount(1);
+    await foundRecords.locator(myResearchProjectsPage.short_project_title).click();
+  }
+);
+
+Then(
   'I can see the project delete success message on my research page',
   async ({ myResearchProjectsPage, commonItemsPage }) => {
     await expect

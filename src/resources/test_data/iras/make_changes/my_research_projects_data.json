@@ -17,5 +17,14 @@
     "iras_id_title": "IRAS ID",
     "date_created_title": "Date created",
     "status_title": "Status"
+  },
+  "Valid_Project_Title": {
+    "short_project_title": "Project title"
+  },
+  "Project_Status_Draft": {
+    "status": "In draft"
+  },
+  "Project_Status_Active": {
+    "status": "Active"
   }
 }

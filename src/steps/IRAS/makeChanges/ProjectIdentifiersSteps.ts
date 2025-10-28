@@ -38,7 +38,7 @@ Then(
             }
           } else {
             await commonItemsPage.fillUIComponent(dataset, key, projectIdentifiersPage);
-            await projectIdentifiersPage.primary_sponsor_organisation_jsdisabled_search_button.click();
+            await projectIdentifiersPage.primary_sponsor_organisation_jsdisabled_search_button.click({ force: true });
             if (dataset[key] !== '') {
               await projectIdentifiersPage.primary_sponsor_organisation_jsdisabled_search_results_radio_button
                 .first()
