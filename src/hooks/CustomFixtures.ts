@@ -73,6 +73,8 @@ import ReviewAllChangesPage from '../pages/IRAS/reviewResearch/receiveAmendments
 import ProjectOverviewUnfinishedProjectsPage from '../pages/IRAS/makeChanges/ProjectOverviewUnfinishedProjectsPage';
 import ModificationsDetailsPage from '../pages/IRAS/makeChanges/modifications/ModificationsDetailsPage';
 import ContactDetailsModificationPage from '../pages/IRAS/makeChanges/modifications/nonReviewable/ContactDetailsModificationPage';
+import ProjectPersonnelChangeChiefInvestigatorPage from '../pages/IRAS/makeChanges/modifications/nonReviewable/ProjectPersonnelChangeChiefInvestigatorPage';
+import ProjectPersonnelChangePrincipalInvestigatorPage from '../pages/IRAS/makeChanges/modifications/nonReviewable/ProjectPersonnelChangePrincipalInvestigatorPage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -146,6 +148,8 @@ type CustomFixtures = {
   modificationsDetailsPage: ModificationsDetailsPage;
   projectOverviewUnfinishedProjectsPage: ProjectOverviewUnfinishedProjectsPage;
   contactDetailsModificationPage: ContactDetailsModificationPage;
+  projectPersonnelChangeChiefInvestigatorPage: ProjectPersonnelChangeChiefInvestigatorPage;
+  projectPersonnelChangePrincipalInvestigatorPage: ProjectPersonnelChangePrincipalInvestigatorPage;
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -430,6 +434,14 @@ export const test = base.extend<CustomFixtures>({
 
   contactDetailsModificationPage: async ({ page }, use) => {
     await use(new ContactDetailsModificationPage(page));
+  },
+
+  projectPersonnelChangeChiefInvestigatorPage: async ({ page }, use) => {
+    await use(new ProjectPersonnelChangeChiefInvestigatorPage(page));
+  },
+
+  projectPersonnelChangePrincipalInvestigatorPage: async ({ page }, use) => {
+    await use(new ProjectPersonnelChangePrincipalInvestigatorPage(page));
   },
 
   makeAxeBuilder: async ({ page }, use) => {

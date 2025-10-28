@@ -649,7 +649,7 @@ Feature: Create Amendment - Create Modifications
       | Other_Minor_Change_To_Project_Management           | Nhs_Involvement_Yes |
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Nhs_Involvement_No  |
 
-  @rsp-4386 @rsp-4380 @rsp-5200 @rsp-5272 @rsp-4881 @rsp-4980 @ModificationsJourneyEntireJourney @ModificationsNonReviewable @KNOWN_DEFECT_RSP_5495_5496
+  @rsp-4386 @rsp-4380 @rsp-5200 @rsp-5272 @rsp-4881 @rsp-4980 @rsp-4982 @ModificationsJourneyEntireJourney @ModificationsNonReviewable @KNOWN_DEFECT_RSP_5495_5496
   Scenario Outline: Validate that user can create modifications and complete the entire modifications journey for non reviewable modifications
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -699,6 +699,8 @@ Feature: Create Amendment - Create Modifications
       | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_One           | Nhs_Involvement_No  |
       | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two           | Nhs_Involvement_Yes |
       | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Two           | Nhs_Involvement_No  |
+      |Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Three         | Nhs_Involvement_Yes |
+      |Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Three         | Nhs_Involvement_No  |
       | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Non_Applicability | Nhs_Involvement_Yes |
       | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Non_Applicability | Nhs_Involvement_No  |
       | Change_Of_Sponsor_legal_Representative                           | Nhs_Involvement_Yes |

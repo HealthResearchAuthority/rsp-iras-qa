@@ -43,6 +43,9 @@ export default class ModificationReviewChangesPage {
   readonly email_text_row: Locator;
   readonly email_text_value: Locator;
   readonly email_text_change_link: Locator;
+  readonly principal_investigator_email_row: Locator;
+  readonly principal_investigator_email_value: Locator;
+  readonly principal_investigator_email_change_link: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -154,6 +157,15 @@ export default class ModificationReviewChangesPage {
     });
     this.email_text_value = this.email_text_row.locator('..').locator('.govuk-summary-list__value');
     this.email_text_change_link = this.email_text_row.locator('..').getByRole('link');
+    this.principal_investigator_email_row = this.page.getByText(
+      modificationReviewChangesPageTestData.Review_Changes_Page.principal_investigator_email
+    );
+    this.principal_investigator_email_value = this.principal_investigator_email_row
+      .locator('..')
+      .locator('.govuk-summary-list__value');
+    this.principal_investigator_email_change_link = this.principal_investigator_email_row
+      .locator('..')
+      .getByRole('link');
   }
 
   //Page Methods
@@ -188,7 +200,7 @@ export default class ModificationReviewChangesPage {
       case 'changes_free_text':
         await this.changes_free_text_change_link.click();
         break;
-      case 'select_contact_details_to_change':
+      case 'select_details_to_change':
         await this.select_details_to_change_change_link.click();
         break;
       case 'chief_investigator_email':
@@ -202,6 +214,9 @@ export default class ModificationReviewChangesPage {
         break;
       case 'email_text':
         await this.email_text_change_link.click();
+        break;
+      case 'principal_investigator_email':
+        await this.principal_investigator_email_change_link.click();
         break;
       default:
         throw new Error(`${changeLink} is not a valid option`);

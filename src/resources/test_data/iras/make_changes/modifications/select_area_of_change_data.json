@@ -93,6 +93,12 @@
     },
     "Contact_Details": {
       "specific_change_dropdown": "Contact details"
+    },
+    "Change_Of_Chief_Investigator": {
+      "specific_change_dropdown": "Change of chief investigator"
+    },
+    "Change_Of_Principal_Investigator": {
+      "specific_change_dropdown": "Change of principal investigator"
     }
   }
 }

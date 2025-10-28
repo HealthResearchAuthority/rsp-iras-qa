@@ -46,25 +46,6 @@ Then(
 );
 
 Then(
-  'I can see the current chief investigator email details displayed on modifications page using {string} dataset',
-  async ({ contactDetailsModificationPage, chiefInvestigatorPage }, datasetNameChiefInvestigator) => {
-    const currentChiefInvestigatorNameExpected =
-      chiefInvestigatorPage.chiefInvestigatorPageTestData[datasetNameChiefInvestigator].chief_investigator_email_text;
-    await expect
-      .soft(
-        contactDetailsModificationPage.page.getByText(
-          contactDetailsModificationPage.contactDetailsModificationPageTestData.Label_Texts
-            .current_chief_investigator_email_label
-        )
-      )
-      .toBeVisible();
-    await expect
-      .soft(contactDetailsModificationPage.page.getByText(currentChiefInvestigatorNameExpected))
-      .toBeVisible();
-  }
-);
-
-Then(
   'I click enter link displayed on review your answers page for contact details modification for {string}',
   async ({ contactDetailsModificationPage }, datasetName) => {
     switch (datasetName) {

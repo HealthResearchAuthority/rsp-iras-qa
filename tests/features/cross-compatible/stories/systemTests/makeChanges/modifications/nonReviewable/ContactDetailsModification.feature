@@ -68,13 +68,13 @@ Feature: Create Amendment - Contact Details Modifications
     Then I validate individual ranking for single card displayed in modifications page
 
     Examples:
-      | Research_Locations  | Changes                                       | Change_Field                     | Changes_Edited                                    | Page                                    |
-      | Nhs_Involvement_Yes | Contact_Details_Chief_Investigator_Valid_Data | Select_Contact_Details_To_Change | Change_Contact_Detail_To_Sponsor_Contact_Email    | Contact_Details_Select_Change_Page      |
-      | Nhs_Involvement_Yes | Contact_Details_Sponsor_Contact_Valid_Data    | Select_Contact_Details_To_Change | Change_Contact_Detail_To_Other_Contact_Name_Email | Contact_Details_Select_Change_Page      |
-      | Nhs_Involvement_Yes | Contact_Details_Chief_Investigator_Valid_Data | Chief_Investigator_Email         | Chief_Investigator_Email_Change                   | Contact_Details_Chief_Investigator_Page |
-      | Nhs_Involvement_Yes | Contact_Details_Sponsor_Contact_Valid_Data    | Sponsor_Contact_Email            | Sponsor_Contact_Email_Change                      | Contact_Details_Sponsor_Contact_Page    |
-      | Nhs_Involvement_Yes | Contact_Details_Other_Valid_Data              | Name_Text                        | Contact_Name_Change                               | Contact_Details_Other_Page              |
-      | Nhs_Involvement_Yes | Contact_Details_Other_Valid_Data              | Email_Text                       | Contact_Email_Change                              | Contact_Details_Other_Page              |
+      | Research_Locations  | Changes                                       | Change_Field             | Changes_Edited                                    | Page                                    |
+      | Nhs_Involvement_Yes | Contact_Details_Chief_Investigator_Valid_Data | Select_Details_To_Change | Change_Contact_Detail_To_Sponsor_Contact_Email    | Contact_Details_Select_Change_Page      |
+      | Nhs_Involvement_Yes | Contact_Details_Sponsor_Contact_Valid_Data    | Select_Details_To_Change | Change_Contact_Detail_To_Other_Contact_Name_Email | Contact_Details_Select_Change_Page      |
+      | Nhs_Involvement_Yes | Contact_Details_Chief_Investigator_Valid_Data | Chief_Investigator_Email | Chief_Investigator_Email_Change                   | Contact_Details_Chief_Investigator_Page |
+      | Nhs_Involvement_Yes | Contact_Details_Sponsor_Contact_Valid_Data    | Sponsor_Contact_Email    | Sponsor_Contact_Email_Change                      | Contact_Details_Sponsor_Contact_Page    |
+      | Nhs_Involvement_Yes | Contact_Details_Other_Valid_Data              | Name_Text                | Contact_Name_Change                               | Contact_Details_Other_Page              |
+      | Nhs_Involvement_Yes | Contact_Details_Other_Valid_Data              | Email_Text               | Contact_Email_Change                              | Contact_Details_Other_Page              |
 
   @rsp-4980 @ContactDetailsModificationsLabelsAndSaveForLater
   Scenario: Verify that save for later functionalities and page labels for contact details modifications journey
@@ -149,7 +149,7 @@ Feature: Create Amendment - Contact Details Modifications
     Then I can see the modification progress saved successful message on project overview page
 
   @rsp-4980 @ValidateSummaryAndFieldErrorMessagesContactDetailsModification
-  Scenario Outline: Validate the maximum field length error message on enter free text modification page
+  Scenario Outline: Validate the error messages displayed on contact details modification page for invalid email formats
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     Then I can see the review your answers page

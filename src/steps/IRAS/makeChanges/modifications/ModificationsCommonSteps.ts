@@ -408,3 +408,19 @@ Then(
     expect.soft(reviewTypeActual).toBe(reviewTypeExpected);
   }
 );
+
+Then(
+  'I can see the current chief investigator email details displayed on modifications page using {string} dataset',
+  async ({ modificationsCommonPage, chiefInvestigatorPage }, datasetNameChiefInvestigator) => {
+    const currentChiefInvestigatorNameExpected =
+      chiefInvestigatorPage.chiefInvestigatorPageTestData[datasetNameChiefInvestigator].chief_investigator_email_text;
+    await expect
+      .soft(
+        modificationsCommonPage.page.getByText(
+          modificationsCommonPage.modificationsCommonPageTestData.Label_Texts.current_chief_investigator_email_label
+        )
+      )
+      .toBeVisible();
+    await expect.soft(modificationsCommonPage.page.getByText(currentChiefInvestigatorNameExpected)).toBeVisible();
+  }
+);

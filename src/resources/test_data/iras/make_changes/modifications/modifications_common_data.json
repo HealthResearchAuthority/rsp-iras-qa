@@ -23,7 +23,8 @@
     "ranking_label": "Ranking",
     "changes_label": "Changes",
     "change_label": "Change",
-    "change_ready_for_submission_status_label": "Change ready for submission"
+    "change_ready_for_submission_status_label": "Change ready for submission",
+    "current_chief_investigator_email_label": "Current chief investigator email:"
   },
   "Modification_Change_Question_Label_Texts": {
     "planned_project_end_date_label": "Change to planned end date",
@@ -80,7 +81,8 @@
     "Change to the participant sample size: non-significant change",
     "Change to the participant sample size: significant",
     "Changes to funding arrangements such as payments, benefits or incentives to be received by participants",
-    "Participant procedures: non-significant change"
+    "Participant procedures: non-significant change",
+    "Change of principal investigator"
   ],
   "Non_Applicability_Changes": [
     "Chief investigator: conflict of interest",
@@ -89,7 +91,8 @@
     "Changes to funding arrangements that do not affect payments to participants, researchers or participating organisations",
     "Inclusion or withdrawal of an EU Member State or third country outside of the UK",
     "Insurance renewal - no change to the level or breadth of cover",
-    "Contact details"
+    "Contact details",
+    "Change of chief investigator"
   ],
   "Modification_Sponsor_Details_Label_Texts": {
     "sponsor_reference_label": "Sponsor reference (optional)",
@@ -125,6 +128,30 @@
     "Contact_Details_Other_Page": {
       "page_header": "Contact details",
       "page_component_label": "Name"
+    },
+    "Project_Personnel_Select_Change_Page": {
+      "page_header": "Change of chief investigator",
+      "page_component_label": "Select details to change"
+    },
+    "Project_Personnel_Chief_Investigator_Page": {
+      "page_header": "Change of chief investigator",
+      "page_component_label": "New chief investigator email"
+    },
+    "Project_Personnel_Temporary_Arrangement_Page": {
+      "page_header": "Change of chief investigator",
+      "page_component_label": "New chief investigator email"
+    },
+    "Project_Personnel_Principal_Investigator_Select_Change_Page": {
+      "page_header": "Change of principal investigator",
+      "page_component_label": "Select details to change"
+    },
+    "Project_Personnel_Principal_Investigator_Page": {
+      "page_header": "Change of principal investigator",
+      "page_component_label": "New principal investigator email"
+    },
+    "Project_Personnel_Pricipal_Investigator_Temporary_Arrangement_Page": {
+      "page_header": "Change of principal investigator",
+      "page_component_label": "New principal investigator email"
     }
   },
   "Rec": [],
@@ -159,7 +186,9 @@
       "Inclusion or withdrawal of an EU Member State or third country outside of the UK",
       "Insurance renewal - no change to the level or breadth of cover",
       "Participant procedures: non-significant change",
-      "Contact details"
+      "Contact details",
+      "Change of chief investigator",
+      "Change of principal investigator"
     ]
   },
   "Ranking_Modification_Type": {
@@ -167,7 +196,8 @@
       "Change to planned end date",
       "Principal investigator: conflict of interest",
       "Change of sponsor’s legal representative",
-      "Contact details"
+      "Contact details",
+      "Change of principal investigator"
     ],
     "Minor_Modifications": [
       "Other significant change to participant procedures",
@@ -190,7 +220,8 @@
       "Changes to funding arrangements that do not affect payments to participants, researchers or participating organisations",
       "Changes to funding arrangements such as payments, benefits or incentives to be received by participants",
       "Inclusion or withdrawal of an EU Member State or third country outside of the UK",
-      "Participant procedures: non-significant change"
+      "Participant procedures: non-significant change",
+      "Change of chief investigator"
     ],
     "Non_Notifiable_Modifications": [
       "Changes to the research team",
@@ -501,6 +532,46 @@
       "select_contact_details_to_change_radio": "Other",
       "contact_name_text": "New modified contact name",
       "contact_email_text": "other_contact_test_modified@test.com"
+    }
+  },
+  "Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Set_Three": {
+    "Project_Personnel_Chief_Investigator_New": {
+      "area_of_change_dropdown": "Project personnel",
+      "specific_change_dropdown": "Change of chief investigator",
+      "select_details_to_change_radio": "New chief investigator",
+      "chief_investigator_email_text": "ci_test_modified@test.com",
+      "name_text": "QA test name"
+    },
+    "Project_Personnel_Chief_Investigator_Temporary_Arrangement": {
+      "area_of_change_dropdown": "Project personnel",
+      "specific_change_dropdown": "Change of chief investigator",
+      "select_details_to_change_radio": "Temporary arrangement to cover absence",
+      "chief_investigator_email_text": "ci_test_modified@test.com",
+      "name_text": "QA test name"
+    },
+    "Project_Personnel_Principal_Investigator_New": {
+      "area_of_change_dropdown": "Project personnel",
+      "specific_change_dropdown": "Change of principal investigator",
+      "select_details_to_change_radio": "New principal investigator",
+      "principal_investigator_email_text": "test_modified@test.com",
+      "name_text": "QA test name",
+      "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
+      "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "will_some_or_all_organisations_be_affected_question_radio": "All",
+      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "Yes",
+      "where_organisation_change_affect_non_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
+    },
+    "Project_Personnel_Temporary_Arrangement": {
+      "area_of_change_dropdown": "Project personnel",
+      "specific_change_dropdown": "Change of principal investigator",
+      "select_details_to_change_radio": "Temporary arrangement to cover absence",
+      "principal_investigator_email_text": "test_modified@test.com",
+      "name_text": "QA test name",
+      "which_organisation_change_affect_checkbox": ["NHS/HSC", "Non-NHS/HSC"],
+      "where_organisation_change_affect_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"],
+      "will_some_or_all_organisations_be_affected_question_radio": "All",
+      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "Yes",
+      "where_organisation_change_affect_non_nhs_question_checkbox": ["England", "Northern Ireland", "Scotland", "Wales"]
     }
   },
   "Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Non_Applicability": {

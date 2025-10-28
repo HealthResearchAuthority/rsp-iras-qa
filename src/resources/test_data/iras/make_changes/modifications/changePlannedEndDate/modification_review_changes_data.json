@@ -6,7 +6,8 @@
     "chief_investigator_email": "New chief investigator email",
     "sponsor_contact_email": "Sponsor contact email",
     "name_text": "Name",
-    "email_text": "Email"
+    "email_text": "Email",
+    "principal_investigator_email": "New principal investigator email"
   },
   "Label_Texts_Nhs": {
     "new_planned_project_end_date_label": "New planned project end date",

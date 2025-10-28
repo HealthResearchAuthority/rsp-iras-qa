@@ -6,6 +6,8 @@ import AffectedOrganisationQuestionsPage from './applicabilityScreens/AffectedOr
 import CommonItemsPage from '../../../Common/CommonItemsPage';
 import { confirmStringNotNull, convertDate } from '../../../../utils/UtilFunctions';
 import ContactDetailsModificationPage from './nonReviewable/ContactDetailsModificationPage';
+import ProjectPersonnelChangeChiefInvestigatorPage from './nonReviewable/ProjectPersonnelChangeChiefInvestigatorPage';
+import ProjectPersonnelChangePrincipalInvestigatorPage from './nonReviewable/ProjectPersonnelChangePrincipalInvestigatorPage';
 
 //Declare Page Objects
 export default class ModificationsCommonPage {
@@ -128,6 +130,14 @@ export default class ModificationsCommonPage {
       await new PlannedEndDateChangePage(this.page).fillPlannedProjectEndDateModificationsPage(dataset, 'create');
     } else if (dataset.specific_change_dropdown === 'Contact details') {
       await new ContactDetailsModificationPage(this.page).fillContactDetailsModificationsPage(dataset, 'create');
+    } else if (dataset.specific_change_dropdown === 'Change of chief investigator') {
+      await new ProjectPersonnelChangeChiefInvestigatorPage(
+        this.page
+      ).fillPersonnelChangeChiefInvestigatorModificationsPage(dataset, 'create');
+    } else if (dataset.specific_change_dropdown === 'Change of principal investigator') {
+      await new ProjectPersonnelChangePrincipalInvestigatorPage(
+        this.page
+      ).fillPersonnelChangePrincipalInvestigatorModificationsPage(dataset, 'create');
     } else if (
       this.modificationsCommonPageTestData.Modifications_To_Add_Free_Text.includes(dataset.specific_change_dropdown)
     ) {
