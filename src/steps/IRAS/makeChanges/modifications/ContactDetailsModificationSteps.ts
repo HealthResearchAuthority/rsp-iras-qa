@@ -7,28 +7,21 @@ Then(
   'I fill the contact details modifications page with {string} for {string} action',
   async ({ commonItemsPage, contactDetailsModificationPage }, datasetName: string, action: string) => {
     const dataset = contactDetailsModificationPage.contactDetailsModificationPageTestData[datasetName];
-    for (const key in dataset) {
-      if (Object.hasOwn(dataset, key)) {
-        if (key === 'select_contact_details_to_change_radio' && dataset[key] !== '') {
-          await commonItemsPage.fillUIComponent(dataset, key, contactDetailsModificationPage);
-          if (action === 'create') {
-            await commonItemsPage.clickButton('Modifications_Page', 'Save_Continue');
-          } else {
-            await commonItemsPage.clickButton('Modifications_Page', 'Save_Changes');
-          }
-        }
-      }
+    const clickAction = action === 'create' ? 'Save_Continue' : 'Save_Changes';
+    const radioKey = 'select_contact_details_to_change_radio';
+    if (dataset[radioKey]) {
+      await commonItemsPage.fillUIComponent(dataset, radioKey, contactDetailsModificationPage);
+      await commonItemsPage.clickButton('Modifications_Page', clickAction);
     }
-    for (const key in dataset) {
-      if (Object.hasOwn(dataset, key)) {
-        if (
-          key === 'chief_investigator_email_text' ||
-          key === 'sponsor_contact_email_text' ||
-          key === 'contact_name_text' ||
-          key === 'contact_email_text'
-        ) {
-          await commonItemsPage.fillUIComponent(dataset, key, contactDetailsModificationPage);
-        }
+    const contactKeys = [
+      'chief_investigator_email_text',
+      'sponsor_contact_email_text',
+      'contact_name_text',
+      'contact_email_text',
+    ];
+    for (const key of contactKeys) {
+      if (dataset[key]) {
+        await commonItemsPage.fillUIComponent(dataset, key, contactDetailsModificationPage);
       }
     }
   }

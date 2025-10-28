@@ -40,34 +40,22 @@ export default class ContactDetailsModificationPage {
   //Page Methods
   async fillContactDetailsModificationsPage(dataset: any, action: string) {
     const commonItemsPage = new CommonItemsPage(this.page);
-    for (const key in dataset) {
+    const clickAction = action === 'create' ? 'Save_Continue' : 'Save_Changes';
+    if (Object.hasOwn(dataset, 'select_contact_details_to_change_radio')) {
+      await commonItemsPage.fillUIComponent(dataset, 'select_contact_details_to_change_radio', this);
+    }
+    await commonItemsPage.clickButton('Modifications_Page', clickAction);
+    const contactKeys = [
+      'chief_investigator_email_text',
+      'sponsor_contact_email_text',
+      'contact_name_text',
+      'contact_email_text',
+    ];
+    for (const key of contactKeys) {
       if (Object.hasOwn(dataset, key)) {
-        if (key === 'select_contact_details_to_change_radio') {
-          await commonItemsPage.fillUIComponent(dataset, key, this);
-        }
+        await commonItemsPage.fillUIComponent(dataset, key, this);
       }
     }
-    if (action === 'create') {
-      await commonItemsPage.clickButton('Modifications_Page', 'Save_Continue');
-    } else {
-      await commonItemsPage.clickButton('Modifications_Page', 'Save_Changes');
-    }
-    for (const key in dataset) {
-      if (Object.hasOwn(dataset, key)) {
-        if (
-          key === 'chief_investigator_email_text' ||
-          key === 'sponsor_contact_email_text' ||
-          key === 'contact_name_text' ||
-          key === 'contact_email_text'
-        ) {
-          await commonItemsPage.fillUIComponent(dataset, key, this);
-        }
-      }
-    }
-    if (action === 'create') {
-      await commonItemsPage.clickButton('Modifications_Page', 'Save_Continue');
-    } else {
-      await commonItemsPage.clickButton('Modifications_Page', 'Save_Changes');
-    }
+    await commonItemsPage.clickButton('Modifications_Page', clickAction);
   }
 }
