@@ -21,14 +21,17 @@
     "contact_email_text": "Enter an email address in the correct format"
   },
   "Contact_Details_Chief_Investigator_Valid_Data": {
+    "specific_change_dropdown": "Contact details",
     "select_contact_details_to_change_radio": "Chief investigator",
     "chief_investigator_email_text": "ci_test_modified@test.com"
   },
   "Contact_Details_Sponsor_Contact_Valid_Data": {
+    "specific_change_dropdown": "Contact details",
     "select_contact_details_to_change_radio": "Sponsor contact",
     "sponsor_contact_email_text": "sponsor_test_modified@test.com"
   },
   "Contact_Details_Other_Valid_Data": {
+    "specific_change_dropdown": "Contact details",
     "select_contact_details_to_change_radio": "Other",
     "contact_name_text": "New modified contact name",
     "contact_email_text": "other_contact_test_modified@test.com"
@@ -50,16 +53,31 @@
     "contact_email_text": ""
   },
   "Chief_Investigator_Email_Change": {
+    "specific_change_dropdown": "Contact details",
     "chief_investigator_email_text": "ci_test_modified_change@test.com"
   },
+  "Change_Contact_Detail_To_Sponsor_Contact_Email": {
+    "specific_change_dropdown": "Contact details",
+    "select_contact_details_to_change_radio": "Sponsor contact",
+    "sponsor_contact_email_text": "sponsor_test_modified_change@test.com"
+  },
   "Sponsor_Contact_Email_Change": {
+    "specific_change_dropdown": "Contact details",
     "sponsor_contact_email_text": "sponsor_test_modified_change@test.com"
   },
   "Contact_Name_Change": {
+    "specific_change_dropdown": "Contact details",
     "contact_name_text": "Modified Contact Name Change"
   },
   "Contact_Email_Change": {
+    "specific_change_dropdown": "Contact details",
     "contact_email_text": "other_contact_test_modified_change@test.com"
+  },
+  "Change_Contact_Detail_To_Other_Contact_Name_Email": {
+    "specific_change_dropdown": "Contact details",
+    "select_contact_details_to_change_radio": "Other",
+    "contact_name_text": "New modified contact name",
+    "contact_email_text": "other_contact_test_modified@test.com"
   },
   "Invalid_Email_CI_Data_One_Start_With_Dot": {
     "select_contact_details_to_change_radio": "Chief investigator",

@@ -28,6 +28,7 @@ export default class ModificationsCommonPage {
   readonly overall_modification_ranking_sub_heading: Locator;
   readonly changes_sub_heading: Locator;
   readonly ranking_sub_heading: Locator;
+  readonly allChangeCards: Locator;
 
   private rankingForChanges: Record<string, { modificationType: string; category: string; reviewType: string }[]> = {};
   private overallRankingForChanges: { modificationType: string; category: string; reviewType: string } = {
@@ -99,6 +100,7 @@ export default class ModificationsCommonPage {
       .getByText(this.modificationsCommonPageTestData.Modification_Ranking_Label_Texts.modification_type_label)
       .locator('[class$="value"]');
     this.changes_free_text_summary_error = this.page.locator('.govuk-error-summary__list');
+    this.allChangeCards = this.page.locator('.govuk-summary-card');
   }
 
   //Getters & Setters for Private Variables
@@ -114,8 +116,8 @@ export default class ModificationsCommonPage {
   async assertOnModificationsPage(dataset: any) {
     const pageHeader = dataset['page_header'];
     const pageComponentLabel = dataset['page_component_label'];
-    await expect(this.pageHeading.getByText(pageHeader)).toBeVisible();
-    await expect(this.page.getByText(pageComponentLabel)).toBeVisible();
+    await expect(this.pageHeading.getByText(pageHeader).first()).toBeVisible();
+    await expect(this.page.getByText(pageComponentLabel).first()).toBeVisible();
   }
   async validatePageHeading(pageHeadingText: any) {
     await expect(this.pageHeading.getByText(pageHeadingText)).toBeVisible();

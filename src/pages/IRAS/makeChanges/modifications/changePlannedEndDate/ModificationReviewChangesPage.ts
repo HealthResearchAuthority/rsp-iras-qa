@@ -149,7 +149,9 @@ export default class ModificationReviewChangesPage {
     this.name_text_row = this.page.getByText(modificationReviewChangesPageTestData.Review_Changes_Page.name_text);
     this.name_text_value = this.name_text_row.locator('..').locator('.govuk-summary-list__value');
     this.name_text_change_link = this.name_text_row.locator('..').getByRole('link');
-    this.email_text_row = this.page.getByText(modificationReviewChangesPageTestData.Review_Changes_Page.email_text);
+    this.email_text_row = this.page.getByText(modificationReviewChangesPageTestData.Review_Changes_Page.email_text, {
+      exact: true,
+    });
     this.email_text_value = this.email_text_row.locator('..').locator('.govuk-summary-list__value');
     this.email_text_change_link = this.email_text_row.locator('..').getByRole('link');
   }

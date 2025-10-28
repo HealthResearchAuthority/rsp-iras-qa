@@ -1,6 +1,6 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../hooks/CustomFixtures';
-import { confirmStringNotNull, getFormattedDate } from '../../../../utils/UtilFunctions';
+import { confirmStringNotNull, getFormattedDate, removeUnwantedWhitespace } from '../../../../utils/UtilFunctions';
 
 const { Then } = createBdd(test);
 
@@ -371,10 +371,40 @@ Then('I validate overall modification ranking', async ({ modificationsCommonPage
   const modificationTypeExpected = (await modificationsCommonPage.getOverallRankingForChanges()).modificationType;
   const categoryExpected = (await modificationsCommonPage.getOverallRankingForChanges()).category;
   const reviewTypeExpected = (await modificationsCommonPage.getOverallRankingForChanges()).reviewType;
-  const modificationTypeActual = await modificationsCommonPage.modification_type.textContent();
-  const categoryActual = await modificationsCommonPage.category.textContent();
-  const reviewTypeActual = await modificationsCommonPage.review_type.textContent();
+  const modificationTypeActual = await removeUnwantedWhitespace(
+    await modificationsCommonPage.modification_type.first().textContent()
+  );
+  const categoryActual = await removeUnwantedWhitespace(await modificationsCommonPage.category.first().textContent());
+  const reviewTypeActual = await removeUnwantedWhitespace(
+    await modificationsCommonPage.review_type.first().textContent()
+  );
   expect.soft(modificationTypeActual).toBe(modificationTypeExpected);
   expect.soft(categoryActual).toBe(categoryExpected);
   expect.soft(reviewTypeActual).toBe(reviewTypeExpected);
 });
+
+Then(
+  'I validate individual ranking for single card displayed in modifications page',
+  async ({ modificationsCommonPage }) => {
+    const individualRanking = await modificationsCommonPage.getrankingForChanges();
+    const firstCardKey = Object.keys(individualRanking)[0];
+    const modificationTypeExpected = individualRanking[firstCardKey][0].modificationType;
+    const categoryExpected = individualRanking[firstCardKey][0].category;
+    const reviewTypeExpected = individualRanking[firstCardKey][0].reviewType;
+    const modificationTypeActual = await removeUnwantedWhitespace(
+      await modificationsCommonPage.allChangeCards
+        .locator(modificationsCommonPage.modification_type)
+        .first()
+        .textContent()
+    );
+    const categoryActual = await removeUnwantedWhitespace(
+      await modificationsCommonPage.allChangeCards.locator(modificationsCommonPage.category).first().textContent()
+    );
+    const reviewTypeActual = await removeUnwantedWhitespace(
+      await modificationsCommonPage.allChangeCards.locator(modificationsCommonPage.review_type).first().textContent()
+    );
+    expect.soft(modificationTypeActual).toBe(modificationTypeExpected);
+    expect.soft(categoryActual).toBe(categoryExpected);
+    expect.soft(reviewTypeActual).toBe(reviewTypeExpected);
+  }
+);

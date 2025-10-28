@@ -514,7 +514,7 @@ Then(
     } else if (pageKey == 'Contact_Details_Modification_Page') {
       errorMessageFieldDataset =
         contactDetailsModificationPage.contactDetailsModificationPageTestData[errorMessageFieldAndSummaryDatasetName];
-      page = sponsorReferencePage;
+      page = contactDetailsModificationPage;
     }
     let allSummaryErrorExpectedValues: any;
     let summaryErrorActualValues: any;

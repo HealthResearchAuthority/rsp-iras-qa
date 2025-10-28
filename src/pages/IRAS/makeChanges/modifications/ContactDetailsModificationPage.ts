@@ -19,22 +19,22 @@ export default class ContactDetailsModificationPage {
 
     //Locators
     this.select_contact_details_to_change_radio = this.page.getByTestId(/^IQA0532/);
-    this.chief_investigator_email_text = this.page.getByLabel(
-      this.contactDetailsModificationPageTestData.Label_Texts.chief_investigator_email_label,
-      { exact: true }
-    );
-    this.sponsor_contact_email_text = this.page.getByLabel(
-      this.contactDetailsModificationPageTestData.Label_Texts.sponsor_contact_email_label,
-      { exact: true }
-    );
-    this.contact_name_text = this.page.getByLabel(
-      this.contactDetailsModificationPageTestData.Label_Texts.contact_name_label,
-      { exact: true }
-    );
-    this.contact_email_text = this.page.getByLabel(
-      this.contactDetailsModificationPageTestData.Label_Texts.contact_email_label,
-      { exact: true }
-    );
+    this.chief_investigator_email_text = this.page
+      .getByText(this.contactDetailsModificationPageTestData.Label_Texts.chief_investigator_email_label)
+      .locator('..')
+      .locator('input');
+    this.sponsor_contact_email_text = this.page
+      .getByText(this.contactDetailsModificationPageTestData.Label_Texts.sponsor_contact_email_label)
+      .locator('..')
+      .locator('input');
+    this.contact_name_text = this.page
+      .getByText(this.contactDetailsModificationPageTestData.Label_Texts.contact_name_label)
+      .locator('..')
+      .locator('input');
+    this.contact_email_text = this.page
+      .getByText(this.contactDetailsModificationPageTestData.Label_Texts.contact_email_label)
+      .locator('..')
+      .locator('input');
   }
 
   //Page Methods
