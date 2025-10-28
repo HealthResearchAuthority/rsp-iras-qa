@@ -10,12 +10,6 @@ export default class CheckYourProfilePage {
   readonly rowSelector: string;
   readonly page_heading: Locator;
   readonly page_guidance_text: Locator;
-  readonly make_change_content: Locator;
-  readonly make_change_header: Locator;
-  readonly make_change_prefix: Locator;
-  readonly make_change_suffix: Locator;
-  readonly one_login_header: Locator;
-  readonly profile_details_header: Locator;
   readonly email_address_label: Locator;
   readonly email_address_row: Locator;
   readonly email_address_value: Locator;
@@ -59,24 +53,6 @@ export default class CheckYourProfilePage {
     this.page_guidance_text = this.page
       .getByRole('paragraph')
       .getByText(this.checkYourProfilePageTestData.Check_Your_Profile_Page.page_guidance_text);
-    this.make_change_content = this.page
-      .locator('.govuk-grid-column-two-thirds')
-      .locator('.govuk-notification-banner__content');
-    this.make_change_header = this.make_change_content
-      .getByRole('heading')
-      .getByText(this.checkYourProfilePageTestData.Check_Your_Profile_Page.make_change_header);
-    this.make_change_prefix = this.make_change_content
-      .getByRole('paragraph')
-      .getByText(this.checkYourProfilePageTestData.Check_Your_Profile_Page.make_change_prefix);
-    this.make_change_suffix = this.make_change_content
-      .getByRole('paragraph')
-      .getByText(this.checkYourProfilePageTestData.Check_Your_Profile_Page.make_change_suffix);
-    this.one_login_header = this.page
-      .getByRole('heading')
-      .getByText(this.checkYourProfilePageTestData.Check_Your_Profile_Page.one_login_header, { exact: true });
-    this.profile_details_header = this.page
-      .getByRole('heading')
-      .getByText(this.checkYourProfilePageTestData.Check_Your_Profile_Page.profile_details_header);
     this.email_address_label = this.page
       .getByRole('cell')
       .getByText(this.checkYourProfilePageTestData.Check_Your_Profile_Page.email_address_label, {
@@ -154,10 +130,5 @@ export default class CheckYourProfilePage {
   async assertOnCheckProfilePage() {
     await expect.soft(this.page_heading).toBeVisible();
     await expect.soft(this.page_guidance_text).toBeVisible();
-    await expect.soft(this.make_change_header).toBeVisible();
-    await expect.soft(this.make_change_prefix).toBeVisible();
-    await expect.soft(this.make_change_suffix).toBeVisible();
-    await expect.soft(this.one_login_header).toBeVisible();
-    await expect.soft(this.profile_details_header).toBeVisible();
   }
 }

@@ -10,12 +10,6 @@ export default class CompleteYourProfilePage {
   readonly buttonTextData: typeof buttonTextData;
   readonly linkTextData: typeof linkTextData;
   readonly page_heading: Locator;
-  readonly make_change_content: Locator;
-  readonly make_change_header: Locator;
-  readonly make_change_prefix: Locator;
-  readonly make_change_suffix: Locator;
-  readonly one_login_header: Locator;
-  readonly profile_details_header: Locator;
   readonly title_value: Locator;
   readonly first_name_value: Locator;
   readonly last_name_value: Locator;
@@ -33,24 +27,6 @@ export default class CompleteYourProfilePage {
     this.page_heading = this.page
       .getByRole('heading')
       .getByText(this.completeYourProfilePageTestData.Complete_Your_Profile_Page.page_heading);
-    this.make_change_content = this.page
-      .locator('.govuk-grid-column-two-thirds')
-      .locator('.govuk-notification-banner__content');
-    this.make_change_header = this.make_change_content
-      .getByRole('heading')
-      .getByText(this.completeYourProfilePageTestData.Complete_Your_Profile_Page.make_change_header);
-    this.make_change_prefix = this.make_change_content
-      .getByRole('paragraph')
-      .getByText(this.completeYourProfilePageTestData.Complete_Your_Profile_Page.make_change_prefix);
-    this.make_change_suffix = this.make_change_content
-      .getByRole('paragraph')
-      .getByText(this.completeYourProfilePageTestData.Complete_Your_Profile_Page.make_change_suffix);
-    this.one_login_header = this.page
-      .getByRole('heading')
-      .getByText(this.completeYourProfilePageTestData.Complete_Your_Profile_Page.one_login_header, { exact: true });
-    this.profile_details_header = this.page
-      .getByRole('heading')
-      .getByText(this.completeYourProfilePageTestData.Complete_Your_Profile_Page.profile_details_header);
     this.title_value = this.page.getByLabel(
       this.completeYourProfilePageTestData.Complete_Your_Profile_Page.title_label,
       { exact: true }
@@ -73,10 +49,5 @@ export default class CompleteYourProfilePage {
 
   async assertOnCompleteProfilePage() {
     await expect.soft(this.page_heading).toBeVisible();
-    await expect.soft(this.make_change_header).toBeVisible();
-    await expect.soft(this.make_change_prefix).toBeVisible();
-    await expect.soft(this.make_change_suffix).toBeVisible();
-    await expect.soft(this.one_login_header).toBeVisible();
-    await expect.soft(this.profile_details_header).toBeVisible();
   }
 }

@@ -40,6 +40,7 @@ When(
       myModificationsTasklistPage,
       selectStudyWideReviewerPage,
       accessDeniedPage,
+      profileCommonPage,
       profileSettingsPage,
       editYourProfilePage,
       completeYourProfilePage,
@@ -108,15 +109,19 @@ When(
         break;
       case 'Profile_Settings_Page':
         await profileSettingsPage.assertOnProfileSettingsPage();
+        await profileCommonPage.assertCommonProfilePageItems();
         break;
       case 'Edit_Your_Profile_Page':
         await editYourProfilePage.assertOnEditProfilePage();
+        await profileCommonPage.assertCommonProfilePageItems();
         break;
       case 'Complete_Your_Profile_Page':
         await completeYourProfilePage.assertOnCompleteProfilePage();
+        await profileCommonPage.assertCommonProfilePageItems();
         break;
       case 'Check_Your_Profile_Page':
         await checkYourProfilePage.assertOnCheckProfilePage();
+        await profileCommonPage.assertCommonProfilePageItems();
         break;
       default:
         throw new Error(`${page} is not a valid option`);
@@ -748,6 +753,7 @@ Given(
       modificationsReadyToAssignPage,
       approvalsPage,
       myModificationsTasklistPage,
+      profileCommonPage,
       profileSettingsPage,
       editYourProfilePage,
     },
@@ -815,10 +821,12 @@ Given(
       case 'Profile_Settings_Page':
         await profileSettingsPage.goto();
         await profileSettingsPage.assertOnProfileSettingsPage();
+        await profileCommonPage.assertCommonProfilePageItems();
         break;
       case 'Edit_Your_Profile_Page':
         await editYourProfilePage.goto();
         await editYourProfilePage.assertOnEditProfilePage();
+        await profileCommonPage.assertCommonProfilePageItems();
         break;
       default:
         throw new Error(`${page} is not a valid option`);

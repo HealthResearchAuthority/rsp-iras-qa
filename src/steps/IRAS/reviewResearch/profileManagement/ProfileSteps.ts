@@ -27,12 +27,12 @@ When('I can see the profile details for my {string} account', async ({ profileSe
     .toHaveText(dataset[user].Profile_Details.organisation_value);
 });
 
-When('I can see the account {string} notification', async ({ profileSettingsPage }, action: string) => {
-  await expect.soft(profileSettingsPage.success_notification_title).toBeVisible();
+When('I can see the account {string} notification', async ({ profileCommonPage }, action: string) => {
+  await expect.soft(profileCommonPage.success_notification_title).toBeVisible();
   if (action.toLowerCase() == 'created') {
-    await expect.soft(profileSettingsPage.success_notification_created_message).toBeVisible();
+    await expect.soft(profileCommonPage.success_notification_created_message).toBeVisible();
   } else {
-    await expect.soft(profileSettingsPage.success_notification_updated_message).toBeVisible();
+    await expect.soft(profileCommonPage.success_notification_updated_message).toBeVisible();
   }
 });
 

@@ -9,12 +9,6 @@ export default class ProfileSettingsPage {
   readonly linkTextData: typeof linkTextData;
   readonly rowSelector: string;
   readonly page_heading: Locator;
-  readonly make_change_content: Locator;
-  readonly make_change_header: Locator;
-  readonly make_change_prefix: Locator;
-  readonly make_change_suffix: Locator;
-  readonly one_login_header: Locator;
-  readonly profile_details_header: Locator;
   readonly email_address_label: Locator;
   readonly email_address_row: Locator;
   readonly email_address_value: Locator;
@@ -43,10 +37,6 @@ export default class ProfileSettingsPage {
   readonly organisation_row: Locator;
   readonly organisation_value: Locator;
   readonly organisation_change_link: Locator;
-  readonly success_notification_title: Locator;
-  readonly success_notification_container: Locator;
-  readonly success_notification_created_message: Locator;
-  readonly success_notification_updated_message: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -59,24 +49,6 @@ export default class ProfileSettingsPage {
     this.page_heading = this.page
       .getByRole('heading')
       .getByText(this.profileSettingsPageTestData.Profile_Settings_Page.page_heading);
-    this.make_change_content = this.page
-      .locator('.govuk-grid-column-two-thirds')
-      .locator('.govuk-notification-banner__content');
-    this.make_change_header = this.make_change_content
-      .getByRole('heading')
-      .getByText(this.profileSettingsPageTestData.Profile_Settings_Page.make_change_header);
-    this.make_change_prefix = this.make_change_content
-      .getByRole('paragraph')
-      .getByText(this.profileSettingsPageTestData.Profile_Settings_Page.make_change_prefix);
-    this.make_change_suffix = this.make_change_content
-      .getByRole('paragraph')
-      .getByText(this.profileSettingsPageTestData.Profile_Settings_Page.make_change_suffix);
-    this.one_login_header = this.page
-      .getByRole('heading')
-      .getByText(this.profileSettingsPageTestData.Profile_Settings_Page.one_login_header, { exact: true });
-    this.profile_details_header = this.page
-      .getByRole('heading')
-      .getByText(this.profileSettingsPageTestData.Profile_Settings_Page.profile_details_header);
     this.email_address_label = this.page
       .getByRole('cell')
       .getByText(this.profileSettingsPageTestData.Profile_Settings_Page.email_address_label, {
@@ -145,18 +117,6 @@ export default class ProfileSettingsPage {
     this.organisation_change_link = this.organisation_row
       .getByRole('link')
       .getByText(this.linkTextData.Profile_Settings_Page.Change);
-    this.success_notification_title = this.page
-      .getByTestId('govuk-notification-banner-title')
-      .getByText(this.profileSettingsPageTestData.Profile_Settings_Page.success_notification_title);
-    this.success_notification_container = this.page.locator('.govuk-notification-banner--success', {
-      has: this.success_notification_title,
-    });
-    this.success_notification_created_message = this.success_notification_container
-      .getByRole('heading')
-      .getByText(this.profileSettingsPageTestData.Profile_Settings_Page.success_notification_created_message);
-    this.success_notification_updated_message = this.success_notification_container
-      .getByRole('heading')
-      .getByText(this.profileSettingsPageTestData.Profile_Settings_Page.success_notification_updated_message);
   }
 
   //Page Methods
@@ -166,10 +126,5 @@ export default class ProfileSettingsPage {
 
   async assertOnProfileSettingsPage() {
     await expect.soft(this.page_heading).toBeVisible();
-    await expect.soft(this.make_change_header).toBeVisible();
-    await expect.soft(this.make_change_prefix).toBeVisible();
-    await expect.soft(this.make_change_suffix).toBeVisible();
-    await expect.soft(this.one_login_header).toBeVisible();
-    await expect.soft(this.profile_details_header).toBeVisible();
   }
 }
