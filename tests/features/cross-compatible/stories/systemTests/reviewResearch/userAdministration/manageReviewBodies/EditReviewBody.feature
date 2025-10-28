@@ -1,28 +1,32 @@
 @UserAdministration @ManageReviewBodies @EditReviewBody @SysAdminUser @SystemTest @rsp-2572 @STSysAdmin
 Feature: User Administration: Manage Review Bodies - Edit review body
 
-    Background:
-        Given I have navigated to the 'System_Administration_Page'
-        And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
-        Then I can see the 'Manage_Review_Bodies_Page'
-        When I enter 'QA Automation' into the search field
-        And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
-        And I select a 'QA Automation' review Body to View and Edit which is 'Enabled'
-
     @accessReviewBodyProfile
     Scenario: Verify that view and edit link takes the user to the Review Body Profile Page
+        Given I have navigated to the 'System_Administration_Page'
+        And I click the 'Manage_Review_Bodies' link on the 'System_Administration_Page'
+        And I can see the 'Manage_Review_Bodies_Page'
+        When I enter 'an active review body name' into the search field
+        And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
+        And I select a review body from the list to View and Edit
         Then I can see the review body profile page
         And I capture the page screenshot
 
     @verifyReviewBodyProfileLayout
-    Scenario: Verify that the review body profile page has the expected layout
+    Scenario Outline: Verify that the review body profile page has the expected layout
+        Given I navigate to a '<Status>' review body profile page
         When I can see the review body profile page
         And I capture the page screenshot
-        Then I see that the 'Enabled' review body profile page has the expected layout
+        Then I see that the '<State>' review body profile page has the expected layout
+
+        Examples:
+            | Status   | State    |
+            | Active   | Enabled  |
+            | Disabled | Disabled |
 
     @verifyReviewBodyChangeLinks
     Scenario Outline: Verify the user can navigate to the edit review profile page via the change links for all fields
-        And I can see the review body profile page
+        Given I navigate to a 'Active' review body profile page
         And I capture the page screenshot
         When I click the change link against '<Field_Name>' on the review body profile page
         Then I can see the edit review body page
@@ -38,7 +42,7 @@ Feature: User Administration: Manage Review Bodies - Edit review body
 
     @verifyEditSaveReviewBody @rsp-3887
     Scenario Outline: Verify the user can edit the review body and save their changes
-        And I can see the review body profile page
+        Given I navigate to a 'Test' review body profile page that is 'Active'
         And I capture the page screenshot
         And I click the change link against '<Field_Name>' on the review body profile page
         And I can see the edit review body page
@@ -49,7 +53,8 @@ Feature: User Administration: Manage Review Bodies - Edit review body
         Then I now see the review body profile page with the updated '<Edit_Review_Body>'
         And I capture the page screenshot
         When I have navigated to the 'Manage_Review_Bodies_Page'
-        Then I can see the 'Manage_Review_Bodies_Page'
+        When I enter 'timestamp of the edited review body' into the search field
+        And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
         Then I can see the updated review body is present in the list with '<Edit_Review_Body>'
 
@@ -58,9 +63,9 @@ Feature: User Administration: Manage Review Bodies - Edit review body
             | Valid_Data_In_All_Fields           | Organisation_Name |
             | Valid_Data_In_All_Mandatory_Fields | Description       |
 
-    @verifyEditSaveReviewBodyRealData @skip
+    @verifyEditSaveReviewBodyRealData
     Scenario Outline: Verify the user can edit the review body and save their changes with real data
-        And I can see the review body profile page
+        Given I navigate to a 'Test' review body profile page that is 'Active'
         And I capture the page screenshot
         And I click the change link against '<Field_Name>' on the review body profile page
         And I can see the edit review body page
@@ -72,15 +77,14 @@ Feature: User Administration: Manage Review Bodies - Edit review body
         And I capture the page screenshot
         When I have navigated to the 'Manage_Review_Bodies_Page'
         Then I can see the 'Manage_Review_Bodies_Page'
+        When I enter 'timestamp of the edited review body' into the search field
+        And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
         And I capture the page screenshot
         Then I can see the updated review body is present in the list with '<Edit_Review_Body>'
 
         Examples:
             | Edit_Review_Body        | Field_Name        |
-            | Review_Body_HCRW_Data   | Organisation_Name |
-            | Review_Body_HSCNI_Data  | Description       |
             | Review_Body_RandD_Data  | Country           |
-            | Review_Body_HRA_Data    | Email_Address     |
             | Review_Body_NIPS_Data   | Description       |
             | Review_Body_HFEA_Data   | Organisation_Name |
             | Review_Body_HMPPS_Data  | Country           |
@@ -94,7 +98,7 @@ Feature: User Administration: Manage Review Bodies - Edit review body
 
     @verifyEditReviewPageBackButtonFlow
     Scenario Outline: Verify the user can navigate from 'Edit review body' page to the 'Review body profile' via the 'Back' link
-        And I can see the review body profile page
+        Given I navigate to a 'Active' review body profile page
         And I capture the page screenshot
         And I click the change link against '<Field_Name>' on the review body profile page
         And I can see the edit review body page
@@ -111,7 +115,7 @@ Feature: User Administration: Manage Review Bodies - Edit review body
 
     @verifyValidEditReviewBodyCharacterLimits
     Scenario Outline: Edit review body field validation passes with minimum and maximum characters in organisation name and description
-        And I can see the review body profile page
+        Given I navigate to a 'Test' review body profile page that is 'Active'
         And I capture the page screenshot
         And I click the change link against '<Field_Name>' on the review body profile page
         And I can see the edit review body page
@@ -133,7 +137,7 @@ Feature: User Administration: Manage Review Bodies - Edit review body
 
     @verifyEditReviewValidationErrors @rsp-3123
     Scenario Outline: When input field validation fails on the edit review body page, correct error messaging displays to the user
-        And I can see the review body profile page
+        Given I navigate to a 'Active' review body profile page
         And I capture the page screenshot
         And I click the change link against '<Field_Name>' on the review body profile page
         And I can see the edit review body page
@@ -157,7 +161,7 @@ Feature: User Administration: Manage Review Bodies - Edit review body
 
     @verifyEditReviewEmailValidationErrors @rsp-3123
     Scenario Outline: Verify that Edit review body email field validation prevents invalid email formats
-        And I can see the review body profile page
+        Given I navigate to a 'Active' review body profile page
         And I capture the page screenshot
         And I click the change link against '<Field_Name>' on the review body profile page
         And I can see the edit review body page
@@ -178,7 +182,7 @@ Feature: User Administration: Manage Review Bodies - Edit review body
 
     @verifyEditReviewNoErrorMessagesValidEmailData
     Scenario Outline: Validate user is able to fill the email address field in the edit review body page with valid data
-        And I can see the review body profile page
+        Given I navigate to a 'Active' review body profile page
         And I capture the page screenshot
         And I click the change link against '<Field_Name>' on the review body profile page
         And I can see the edit review body page

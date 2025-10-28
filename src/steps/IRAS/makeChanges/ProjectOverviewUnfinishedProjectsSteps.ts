@@ -49,3 +49,29 @@ Then(
     );
   }
 );
+
+Then(
+  'I can see the project status as {string} on the project overview for unfinished project page',
+  async ({ projectOverviewUnfinishedProjectsPage, createProjectRecordPage }, datasetName: string) => {
+    const dataset = createProjectRecordPage.createProjectRecordPageTestData[datasetName];
+    const expectedStatus = dataset.status;
+    const actualStatus = confirmStringNotNull(await projectOverviewUnfinishedProjectsPage.status_text.textContent());
+    expect.soft(actualStatus).toBe(expectedStatus);
+  }
+);
+
+Then(
+  'I validate the iras id displayed on the project overview unfinished projects page',
+  async ({ projectDetailsIRASPage, projectOverviewUnfinishedProjectsPage }) => {
+    const expectedIrasId = await projectDetailsIRASPage.getUniqueIrasId();
+    const iIrasIdText = confirmStringNotNull(await projectOverviewUnfinishedProjectsPage.irasid_text.textContent());
+    const actualIrasIdText = iIrasIdText
+      .replace(
+        projectOverviewUnfinishedProjectsPage.projectOverviewUnfinishedProjectsPageTestData.Project_Overview_Page
+          .irasid_label,
+        ''
+      )
+      .trim();
+    expect(actualIrasIdText).toBe(expectedIrasId);
+  }
+);

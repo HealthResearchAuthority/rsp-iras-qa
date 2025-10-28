@@ -10,7 +10,7 @@ import {
   writeGeneratedTestDataToJSON,
 } from '../../utils/GenerateTestData';
 import * as userProfileGeneratedataConfig from '../../resources/test_data/user_administration/testdata_generator/user_profile_generate_data_config.json';
-import { confirmArrayNotNull, getAuthState, getCurrentTimeFormatted } from '../../utils/UtilFunctions';
+import { confirmArrayNotNull, getAuthState, getCurrentTimeFormatted, getRandomNumber } from '../../utils/UtilFunctions';
 import { Locator } from 'playwright/test';
 import * as fs from 'node:fs';
 import path from 'node:path';
@@ -46,6 +46,7 @@ When(
       sponsorOrganisationProfilePage,
       viewEditUserProfilePage,
       userListSponsorOrganisationPage,
+      accessDeniedPage,
     },
     page: string
   ) => {
@@ -125,6 +126,9 @@ When(
         break;
       case 'Sponsor_Org_User_List_Page':
         await userListSponsorOrganisationPage.assertOnUserListSponsorOrgPage();
+        break;
+      case 'Access_Denied_Page':
+        await accessDeniedPage.assertOnAccessDeniedPage();
         break;
       default:
         throw new Error(`${page} is not a valid option`);
@@ -239,9 +243,7 @@ Given(
       linkKey === 'Back_To_Users'
     ) {
       await commonItemsPage.govUkLink.getByText(linkValue).click();
-    } else if (linkKey === 'Back') {
-      await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).first().click();
-    } else if (noOfLinksFound > 1) {
+    } else if (noOfLinksFound > 1 && linkKey != 'Back') {
       await commonItemsPage.govUkLink.getByText(linkValue).first().click();
     } else {
       await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
@@ -620,6 +622,7 @@ When(
       reviewBodyProfilePage,
       createReviewBodyPage,
       createUserProfilePage,
+      editReviewBodyPage,
       checkSetupSponsorOrganisationPage,
       checkAddUserSponsorOrganisationPage,
     },
@@ -633,11 +636,22 @@ When(
       case 'name of the new review body':
         searchValue = await createReviewBodyPage.getUniqueOrgName();
         break;
+      case 'timestamp of the edited review body':
+        searchValue = await editReviewBodyPage.getUniqueOrgTimestamp();
+        break;
       case 'name of the newly added sponsor organisation':
         searchValue = await checkSetupSponsorOrganisationPage.getOrgName();
         break;
       case 'name of the newly created user':
         searchValue = await createUserProfilePage.getUniqueEmail();
+        break;
+      case 'an active review body name':
+        await reviewBodyProfilePage.sqlGetSingleRandomReviewBodyByStatus('Active');
+        searchValue = await reviewBodyProfilePage.getOrgName();
+        break;
+      case 'a disabled review body name':
+        await reviewBodyProfilePage.sqlGetSingleRandomReviewBodyByStatus('Disabled');
+        searchValue = await reviewBodyProfilePage.getOrgName();
         break;
       case 'email of the newly added user in the selected sponsor organisation':
         searchValue = await checkAddUserSponsorOrganisationPage.getUserEmail();
@@ -1239,23 +1253,29 @@ When('I can see the date from and date to filters have the expected hint text', 
 });
 
 Then(
-  'Each of the short project titles displayed on the {string} are links',
-  async ({ commonItemsPage }, page: string) => {
-    let columnIndex: number;
-    switch (page) {
-      case 'My_Modifications_Tasklist_Page':
-        columnIndex = 1;
-        break;
-      case 'Modifications_Tasklist_Page':
-        columnIndex = 2;
-        break;
-      default:
-        throw new Error(`${page} is not a valid option`);
-    }
+  'Each {string} displayed on the {string} is a link',
+  async ({ commonItemsPage, modificationsReceivedCommonPage }, columnName: string, page: string) => {
+    const columnIndex = await modificationsReceivedCommonPage.getModificationColumnIndex(page, columnName);
     for (const row of await commonItemsPage.tableBodyRows.all()) {
+      await row.getByRole('cell').nth(columnIndex).getByRole('link').highlight();
       const shortTitleTextLink = row.getByRole('cell').nth(columnIndex).getByRole('link');
       expect(shortTitleTextLink).toBeVisible();
     }
+  }
+);
+
+When(
+  'I click a {string} on the {string}',
+  async ({ commonItemsPage, modificationsReceivedCommonPage }, fieldName: string, pageKey: string) => {
+    const columnIndex = await modificationsReceivedCommonPage.getModificationColumnIndex(pageKey, fieldName);
+    const rowCount = await commonItemsPage.tableBodyRows.all().then((locators: Locator[]) => locators.length);
+    const testNum = await getRandomNumber(0, rowCount - 1);
+    const fieldLocator = commonItemsPage.tableBodyRows
+      .nth(testNum)
+      .getByRole('cell')
+      .nth(columnIndex)
+      .getByRole('link');
+    await fieldLocator.click();
   }
 );
 

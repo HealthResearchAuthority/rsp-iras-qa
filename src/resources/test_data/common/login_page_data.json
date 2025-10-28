@@ -89,6 +89,10 @@
     "mfa": "`${process.env.SPONSOR_USER_MFA_KEY}`",
     "authPath": "sponsor_user"
   },
+  "DB_User": {
+    "username": "testhrasysadmin",
+    "password": "`${process.env.DB_USER_PASS}`"
+  },
   "Login_Page": {
     "header": "Create your GOV.UK One Login or sign in"
   }

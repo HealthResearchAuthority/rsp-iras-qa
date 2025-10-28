@@ -392,28 +392,12 @@ Then(
 
 Then(
   'I can see the list of modifications received for approval is sorted by {string} order of the {string}',
-  async ({ commonItemsPage }, sortDirection: string, sortField: string) => {
+  async ({ commonItemsPage, modificationsReceivedCommonPage }, sortDirection: string, sortField: string) => {
     let sortedModsList: string[];
-    let searchColumnIndex: number;
-    switch (sortField.toLowerCase()) {
-      case 'modification id':
-        searchColumnIndex = 0;
-        break;
-      case 'short project title':
-        searchColumnIndex = 1;
-        break;
-      case 'modification type':
-        searchColumnIndex = 2;
-        break;
-      case 'chief investigator':
-        searchColumnIndex = 3;
-        break;
-      case 'lead nation':
-        searchColumnIndex = 4;
-        break;
-      default:
-        throw new Error(`${sortField} is not a valid option`);
-    }
+    const searchColumnIndex = await modificationsReceivedCommonPage.getModificationColumnIndex(
+      'Search_Modifications_Page',
+      sortField
+    );
     const actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, searchColumnIndex);
     if (sortField.toLowerCase() == 'modification id') {
       sortedModsList = await commonItemsPage.sortModificationIdListValues(actualList, sortDirection);

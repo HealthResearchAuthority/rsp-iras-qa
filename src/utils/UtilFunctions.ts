@@ -8,6 +8,8 @@ import * as fs from 'node:fs';
 import os from 'node:os';
 import * as fse from 'fs-extra';
 import path from 'node:path';
+import { Client } from '@microsoft/microsoft-graph-client';
+import { ClientSecretCredential } from '@azure/identity';
 
 const pathToCreateUserTestDataJson =
   './src/resources/test_data/iras/reviewResearch/userAdministration/manageUsers/create_user_profile_page_data.json';
@@ -522,9 +524,9 @@ export async function removeUnwantedWhitespace(value: string): Promise<string> {
   return value.replaceAll(/\s+/g, ' ').trim();
 }
 
-export async function generateTimeStampedValue(keyVal: string, separator: string): Promise<string> {
+export async function generateTimeStampedValue(keyVal: string, separator: string): Promise<[string, string]> {
   const timestamp = new Date().toISOString().replaceAll(/[-:.TZ]/g, '');
-  return `${keyVal}${separator}${timestamp}`;
+  return [`${keyVal}${separator}${timestamp}`, timestamp];
 }
 
 export async function getCurrentTimeFormatted(): Promise<string> {
@@ -623,4 +625,17 @@ export async function getFormattedDate(): Promise<string> {
   };
   const formattedDate = today.toLocaleDateString('en-GB', options);
   return formattedDate;
+}
+
+export async function getSharpointGraphClient(): Promise<Client> {
+  const tenantId = `${process.env.tenantId}`;
+  const clientId = `${process.env.clientId}`;
+  const clientSecret = `${process.env.clientSecret}`;
+  const credential = new ClientSecretCredential(tenantId, clientId, clientSecret);
+  const token = await credential.getToken('https://graph.microsoft.com/.default');
+  const client = Client.init({
+    defaultVersion: 'v1.0',
+    authProvider: (done) => done(null, token?.token ?? ''),
+  });
+  return client;
 }

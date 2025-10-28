@@ -69,7 +69,7 @@ import SponsorReferencePage from '../pages/IRAS/makeChanges/modifications/Sponso
 import AddDocumentDetailsModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/AddDocumentDetailsModificationsPage';
 import AddDocumentDetailsForSpecificDocumentModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/AddDocumentDetailsForSpecificDocumentModificationsPage';
 import ReviewYourDocumentInformationModificationsPage from '../pages/IRAS/makeChanges/modifications/projectDocuments/ReviewYourDocumentInfomationModificationsPage';
-import ReviewAllChangesPage from '../pages/IRAS/makeChanges/modifications/ReviewAllChangesPage';
+import ReviewAllChangesPage from '../pages/IRAS/reviewResearch/receiveAmendments/ReviewAllChangesPage';
 import ProjectOverviewUnfinishedProjectsPage from '../pages/IRAS/makeChanges/ProjectOverviewUnfinishedProjectsPage';
 import ModificationsDetailsPage from '../pages/IRAS/makeChanges/modifications/ModificationsDetailsPage';
 import ManageSponsorOrganisationsPage from '../pages/IRAS/reviewResearch/userAdministration/manageSponsorOrgs/ManageSponsorOrganisationsPage';
