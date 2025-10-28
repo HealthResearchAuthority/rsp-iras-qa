@@ -23,33 +23,35 @@ When(
     { setupNewSponsorOrganisationPage, sponsorOrganisationProfilePage, checkSetupSponsorOrganisationPage },
     datasetName: string
   ) => {
-    const dataset =
-      setupNewSponsorOrganisationPage.setupNewSponsorOrganisationPageTestData.Setup_New_Sponsor_Organisation[
-        datasetName
-      ];
-    const expectedCountryValue = await checkSetupSponsorOrganisationPage.getCountry();
-    await expect(sponsorOrganisationProfilePage.country_value).toHaveText(expectedCountryValue);
     await sponsorOrganisationProfilePage.assertOnSponsorOrganisationProfilePage();
     if (datasetName.startsWith('Sponsor_Organisation_')) {
-      await expect(sponsorOrganisationProfilePage.organisation_name_value).toHaveText(
-        await checkSetupSponsorOrganisationPage.getOrgName()
-      );
-      await expect(sponsorOrganisationProfilePage.page_heading).toHaveText(
-        sponsorOrganisationProfilePage.sponsorOrgProfilePageTestData.Sponsor_Organisation_Profile_Page
-          .heading_prefix_label + (await checkSetupSponsorOrganisationPage.getOrgName())
-      );
-      // await expect(sponsorOrganisationProfilePage.organisation_name_value).toHaveText(
-      //   await setupNewSponsorOrganisationPage.getUniqueOrgName()
-      // );
-      // await expect(sponsorOrganisationProfilePage.page_heading).toHaveText(
-      //   sponsorOrganisationProfilePage.sponsorOrgProfilePageTestData.Sponsor_Organisation_Profile_Page
-      //     .heading_prefix_label + (await setupNewSponsorOrganisationPage.getUniqueOrgName())
-      // );
+      await expect
+        .soft(sponsorOrganisationProfilePage.organisation_name_value)
+        .toHaveText(await checkSetupSponsorOrganisationPage.getOrgName());
+      await expect
+        .soft(sponsorOrganisationProfilePage.page_heading)
+        .toHaveText(
+          sponsorOrganisationProfilePage.sponsorOrgProfilePageTestData.Sponsor_Organisation_Profile_Page
+            .heading_prefix_label + (await checkSetupSponsorOrganisationPage.getOrgName())
+        );
+      const expectedCountryValue = await checkSetupSponsorOrganisationPage.getCountry();
+      await expect.soft(sponsorOrganisationProfilePage.country_value).toHaveText(expectedCountryValue);
+      const expectedLastUpdatedValue = await sponsorOrganisationProfilePage.getLastUpdatedDate();
+      await expect.soft(sponsorOrganisationProfilePage.last_updated_value).toHaveText(expectedLastUpdatedValue);
     } else {
-      await expect(sponsorOrganisationProfilePage.organisation_name_value).toHaveText(dataset.organisation_name_text);
-      await expect(sponsorOrganisationProfilePage.page_heading).toHaveText(dataset.organisation_name_text);
+      const dataset =
+        setupNewSponsorOrganisationPage.setupNewSponsorOrganisationPageTestData.Existing_Sponsor_Organisation[
+          datasetName
+        ];
+      await expect
+        .soft(sponsorOrganisationProfilePage.organisation_name_value)
+        .toHaveText(dataset.sponsor_organisation_text);
+      await expect
+        .soft(sponsorOrganisationProfilePage.page_heading)
+        .toHaveText(
+          sponsorOrganisationProfilePage.sponsorOrgProfilePageTestData.Sponsor_Organisation_Profile_Page
+            .heading_prefix_label + dataset.sponsor_organisation_text
+        );
     }
-    const expectedLastUpdatedValue = await sponsorOrganisationProfilePage.getLastUpdatedDate();
-    await expect(sponsorOrganisationProfilePage.last_updated_value).toHaveText(expectedLastUpdatedValue);
   }
 );

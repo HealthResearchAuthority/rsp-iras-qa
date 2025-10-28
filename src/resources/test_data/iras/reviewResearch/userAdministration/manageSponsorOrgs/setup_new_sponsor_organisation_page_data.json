@@ -6,9 +6,6 @@
     "select_a_sponsor_organisation_hint_text": "Start to type an organisation or select from suggestions"
   },
   "Setup_New_Sponsor_Organisation": {
-    "Sponsor_Organisation_One": {
-      "sponsor_organisation_text": "CHESTERFIELD ROYAL HOSPITAL NHS FOUNDATION TRUST"
-    },
     "Sponsor_Organisation_Two": {
       "sponsor_organisation_text": "AIREDALE NHS FOUNDATION TRUST"
     },
@@ -125,6 +122,17 @@
     },
     "Sponsor_Organisation_Forty": {
       "sponsor_organisation_text": "BUCKINGHAMSHIRE HEALTHCARE NHS TRUST"
+    },
+    "Sponsor_Organisation_FortyOne": {
+      "sponsor_organisation_text": "CAMBRIDGESHIRE COMMUNITY SERVICES NHS TRUST"
+    },
+    "Sponsor_Organisation_FortyTwo": {
+      "sponsor_organisation_text": "CAMDEN AND ISLINGTON NHS FOUNDATION TRUST"
+    }
+  },
+  "Existing_Sponsor_Organisation": {
+    "Existing_Sponsor_Organisation_One": {
+      "sponsor_organisation_text": "CHESTERFIELD ROYAL HOSPITAL NHS FOUNDATION TRUST"
     }
   },
   "JavaScript_Disabled_Duplicate_Sponsor_Organisation_Setup_Error": {
