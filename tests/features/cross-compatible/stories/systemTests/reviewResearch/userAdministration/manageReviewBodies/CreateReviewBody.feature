@@ -211,3 +211,56 @@ Feature: User Administration: Manage Review Bodies - Create review body
             | Valid_Email_Data_Special_Characters   |
             | Valid_Email_Data_Multiple_Sub_Domains |
             | Valid_Email_Data_Domain               |
+    
+    @VerifyTheUserActionInReviewBodyAuditHistory @rsp-4819 
+    Scenario Outline: Verify the user can view the audit history after disabling a newly created review body 
+        And I capture the page screenshot
+        When I fill the new review body page using '<Add_Review_Body>'
+        And I capture the page screenshot
+        And I click the 'Continue' button on the 'Create_Review_Body_Page'
+        And I capture the page screenshot
+        Then I can see the check and create review body page for '<Add_Review_Body>'
+        When I click the 'Create_Profile' button on the 'Check_Create_Review_Body_Page'
+        Then I can see the create Review body confirmation page for '<Add_Review_Body>'
+        And I capture the page screenshot
+        When I click the 'Add_Another_Review_Body' link on the 'Create_Review_Body_Confirmation_Page'
+        And I capture the page screenshot
+        Then I can see the 'Create_Review_Body_Page'
+        And I click the 'Back' link on the 'Create_Review_Body_Page'
+        And I capture the page screenshot
+        Then I can see the 'Manage_Review_Bodies_Page'
+        And I can see the list is sorted by default in the alphabetical order of the 'Organisation Name'
+        And I capture the page screenshot
+        When I enter 'name of the new review body' into the search field
+        And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
+        And I can see the 'newly created review body' should be present in the list with '<Status_Enabled>' status in the manage review bodies page
+        And I capture the page screenshot
+        Then I click the view edit link
+        And I capture the page screenshot
+        And I can see the review body profile page
+        And I now see the review body profile page with the created '<Add_Review_Body>'
+        And I capture the page screenshot
+        And I click the 'Disable_Review_Body' button on the 'Review_Body_Profile_Page'
+        And I capture the page screenshot
+        And I click the 'Confirm' button on the 'Confirmation_Page'
+        And I capture the current time for 'Audit_History_Review_Body_Page'
+        And I click the 'Back_To_Manage_Review_Bodies' link on the 'Confirmation_Page'
+        Then I can see the 'Manage_Review_Bodies_Page'
+        And I capture the page screenshot
+        When I enter 'name of the new review body' into the search field
+        And I click the 'Search' button on the 'Manage_Review_Bodies_Page'
+        And I can see the 'newly created review body' should be present in the list with '<Status_Disabled>' status in the manage review bodies page
+        Then I click the view edit link
+        And I capture the page screenshot
+        And I click the 'View_This_Review_Body_Audit_History' link on the 'Review_Body_Profile_Page'
+        Then I can see the audit history page of the review body
+        And I capture the page screenshot
+        And I can see the audit history for the review body 'disabled' event for '<Add_Review_Body>' with '<Audit_History>'
+        And I click the 'Back' link on the 'Review_Body_Audit_History_Page'
+        And I capture the page screenshot
+        And I can see the review body profile page
+        And I capture the page screenshot
+             
+        Examples:
+        | Add_Review_Body          | Audit_History       | Status_Enabled | Status_Disabled |
+        | Valid_Data_In_All_Fields | Disable_Review_Body | Enabled        | Disabled        |
