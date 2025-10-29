@@ -107,6 +107,7 @@ export default class CommonItemsPage {
   readonly search_no_results_guidance_points: Locator;
   readonly active_filters_list_to_remove: Locator;
   readonly errorMessageFieldLabelList: Locator;
+  readonly details_component: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -262,6 +263,7 @@ export default class CommonItemsPage {
     this.errorMessageFieldLabelList = this.page
       .locator('.field-validation-error')
       .or(this.page.locator('.govuk-error-message'));
+    this.details_component = this.page.locator('.govuk-details');
   }
 
   //Getters & Setters for Private Variables

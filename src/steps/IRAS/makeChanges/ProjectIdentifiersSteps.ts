@@ -230,3 +230,28 @@ Then(
     expect(continueEnteringSuggestionActual).toEqual(suggestionsHeaderLabelExpected);
   }
 );
+
+Then(
+  'I validate the guidance content displayed on project identifiers page',
+  async ({ commonItemsPage, projectIdentifiersPage }) => {
+    const collapsibleDetailsComponent = commonItemsPage.details_component
+      .getByText(
+        projectIdentifiersPage.projectIdentifiersPageTestData.Project_Identifiers_Page
+          .guidance_header_cant_find_organisation
+      )
+      .locator('..');
+    await commonItemsPage.verifyDetailsExpanded('closed', commonItemsPage.details_component);
+    await collapsibleDetailsComponent.click();
+    await commonItemsPage.verifyDetailsExpanded('open', commonItemsPage.details_component);
+    const cantFindOrganisationDetailsBody = (await commonItemsPage.details_component.textContent())
+      .replaceAll(/\s+/g, ' ')
+      .trim();
+    expect(cantFindOrganisationDetailsBody).toContain(
+      projectIdentifiersPage.projectIdentifiersPageTestData.Project_Identifiers_Page
+        .guidance_body_cant_find_organisation
+    );
+    await collapsibleDetailsComponent.click();
+    await commonItemsPage.verifyDetailsExpanded('closed', commonItemsPage.details_component);
+    await collapsibleDetailsComponent.click();
+  }
+);
