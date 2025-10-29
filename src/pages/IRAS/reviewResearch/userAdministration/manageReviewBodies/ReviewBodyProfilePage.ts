@@ -1,12 +1,17 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as reviewBodyProfilePageData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageReviewBodies/review_body_profile_page_data.json';
+import * as reviewBodySqlData from '../../../../../resources/test_data/iras/reviewResearch/userAdministration/manageReviewBodies/review_body_sql_data.json';
 import * as buttonTextData from '../../../../../resources/test_data/common/button_text_data.json';
 import * as linkTextData from '../../../../../resources/test_data/common/link_text_data.json';
+import * as dbConfigData from '../../../../../resources/test_data/common/database/db_config_data.json';
+import { connect } from '../../../../../utils/DbConfig';
+import { IResult } from 'mssql';
 
 //Declare Page Objects
 export default class ReviewBodyProfilePage {
   readonly page: Page;
   readonly reviewBodyProfilePageData: typeof reviewBodyProfilePageData;
+  readonly reviewBodySqlData: typeof reviewBodySqlData;
   readonly buttonTextData: typeof buttonTextData;
   readonly linkTextData: typeof linkTextData;
   private _org_name: string;
@@ -56,6 +61,7 @@ export default class ReviewBodyProfilePage {
   constructor(page: Page) {
     this.page = page;
     this.reviewBodyProfilePageData = reviewBodyProfilePageData;
+    this.reviewBodySqlData = reviewBodySqlData;
     this.buttonTextData = buttonTextData;
     this.linkTextData = linkTextData;
     this._org_name = '';
@@ -256,5 +262,50 @@ export default class ReviewBodyProfilePage {
 
   async setReviewBodyId(value: string): Promise<void> {
     this._review_body_id = value;
+  }
+
+  async setAllReviewBodyValues(sqlQueryResult: IResult<any>): Promise<void> {
+    console.dir(sqlQueryResult);
+    const regex = new RegExp(/[\\[\]\\"]/g);
+    await this.setReviewBodyId(sqlQueryResult.recordset[0].Id);
+    await this.setOrgName(sqlQueryResult.recordset[0].RegulatoryBodyName);
+    await this.setEmail(sqlQueryResult.recordset[0].EmailAddress);
+    await this.setCountries(sqlQueryResult.recordset[0].Countries.replace(regex, '').split(','));
+    if (sqlQueryResult.recordset[0].Description === null) {
+      await this.setDescription('');
+    } else {
+      await this.setDescription(sqlQueryResult.recordset[0].Description);
+    }
+    if (sqlQueryResult.recordset[0].UpdatedDate === null) {
+      await this.setLastUpdatedDate('');
+    } else {
+      await this.setLastUpdatedDate(sqlQueryResult.recordset[0].UpdatedDate);
+    }
+  }
+
+  // SQL STATEMENTS //
+  async sqlGetSingleRandomReviewBodyByStatus(status: string): Promise<void> {
+    const isActive = this.reviewBodySqlData[status];
+    const sqlConnection = await connect(dbConfigData.Application_Service);
+    const queryResult = await sqlConnection.query(
+      `SELECT TOP 1 * FROM RegulatoryBodies WHERE IsActive = ${isActive} ORDER BY NEWID()`
+    );
+    await this.setAllReviewBodyValues(queryResult);
+  }
+
+  async sqlGetSingleRandomReviewBodyByTypeStatus(inOperator: string, status: string): Promise<void> {
+    const isActive = this.reviewBodySqlData[status];
+    const engRevBody = this.reviewBodySqlData.Non_Test_Review_Bodies.England;
+    const nIRevBody = this.reviewBodySqlData.Non_Test_Review_Bodies.Northern_Ireland;
+    const scoRevBody = this.reviewBodySqlData.Non_Test_Review_Bodies.Scotland;
+    const walRevBody = this.reviewBodySqlData.Non_Test_Review_Bodies.Wales;
+    const sqlConnection = await connect(dbConfigData.Application_Service);
+    const queryResult = await sqlConnection.query(
+      `SELECT TOP 1 * FROM RegulatoryBodies WHERE IsActive = ${isActive} 
+      AND RegulatoryBodyName ${inOperator} ('${engRevBody}', '${nIRevBody}', 
+      '${scoRevBody}', '${walRevBody}')
+      ORDER BY NEWID()`
+    );
+    await this.setAllReviewBodyValues(queryResult);
   }
 }

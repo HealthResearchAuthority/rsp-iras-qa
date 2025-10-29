@@ -8,6 +8,7 @@ export default class CreateReviewBodyPage {
   readonly createReviewBodyPageData: typeof createReviewBodyPageData;
   readonly buttonTextData: typeof buttonTextData;
   private _unique_org_name: string;
+  private _unique_org_timestamp: string;
   readonly page_heading: Locator;
   readonly validation_error: Locator;
   readonly char_count_error: Locator;
@@ -30,6 +31,7 @@ export default class CreateReviewBodyPage {
     this.createReviewBodyPageData = createReviewBodyPageData;
     this.buttonTextData = buttonTextData;
     this._unique_org_name = '';
+    this._unique_org_timestamp = '';
 
     //Locators
     this.page_heading = this.page
@@ -81,5 +83,13 @@ export default class CreateReviewBodyPage {
 
   async setUniqueOrgName(value: string): Promise<void> {
     this._unique_org_name = value;
+  }
+
+  async getUniqueOrgTimestamp(): Promise<string> {
+    return this._unique_org_timestamp;
+  }
+
+  async setUniqueOrgTimestamp(value: string): Promise<void> {
+    this._unique_org_timestamp = value;
   }
 }
