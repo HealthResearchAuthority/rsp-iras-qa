@@ -122,14 +122,14 @@ When(
 Then(
   'I validate the guidance content displayed on modifications participating organisations page',
   async ({ commonItemsPage, participatingOrganisationsPage }) => {
-    await commonItemsPage.verifyDetailsExpanded('closed', commonItemsPage.details_component);
-    await commonItemsPage.details_component
+    const collapsibleDetailsComponent = commonItemsPage.details_component
       .getByText(
         participatingOrganisationsPage.participatingOrganisationsPageTestData.Participating_Organisations_Page
           .guidance_header_cant_find_organisation
       )
-      .locator('..')
-      .click();
+      .locator('..');
+    await commonItemsPage.verifyDetailsExpanded('closed', commonItemsPage.details_component);
+    await collapsibleDetailsComponent.click();
     await commonItemsPage.verifyDetailsExpanded('open', commonItemsPage.details_component);
     const cantFindOrganisationDetailsBody = (await commonItemsPage.details_component.textContent())
       .replaceAll(/\s+/g, ' ')
@@ -138,20 +138,8 @@ Then(
       participatingOrganisationsPage.participatingOrganisationsPageTestData.Participating_Organisations_Page
         .guidance_body_cant_find_organisation
     );
-    await commonItemsPage.details_component
-      .getByText(
-        participatingOrganisationsPage.participatingOrganisationsPageTestData.Participating_Organisations_Page
-          .guidance_header_cant_find_organisation
-      )
-      .locator('..')
-      .click();
+    await collapsibleDetailsComponent.click();
     await commonItemsPage.verifyDetailsExpanded('closed', commonItemsPage.details_component);
-    await commonItemsPage.details_component
-      .getByText(
-        participatingOrganisationsPage.participatingOrganisationsPageTestData.Participating_Organisations_Page
-          .guidance_header_cant_find_organisation
-      )
-      .locator('..')
-      .click();
+    await collapsibleDetailsComponent.click();
   }
 );

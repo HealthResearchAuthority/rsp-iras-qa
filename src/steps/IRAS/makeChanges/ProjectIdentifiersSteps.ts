@@ -234,14 +234,14 @@ Then(
 Then(
   'I validate the guidance content displayed on project identifiers page',
   async ({ commonItemsPage, projectIdentifiersPage }) => {
-    await commonItemsPage.verifyDetailsExpanded('closed', commonItemsPage.details_component);
-    await commonItemsPage.details_component
+    const collapsibleDetailsComponent = commonItemsPage.details_component
       .getByText(
         projectIdentifiersPage.projectIdentifiersPageTestData.Project_Identifiers_Page
           .guidance_header_cant_find_organisation
       )
-      .locator('..')
-      .click();
+      .locator('..');
+    await commonItemsPage.verifyDetailsExpanded('closed', commonItemsPage.details_component);
+    await collapsibleDetailsComponent.click();
     await commonItemsPage.verifyDetailsExpanded('open', commonItemsPage.details_component);
     const cantFindOrganisationDetailsBody = (await commonItemsPage.details_component.textContent())
       .replaceAll(/\s+/g, ' ')
@@ -250,20 +250,8 @@ Then(
       projectIdentifiersPage.projectIdentifiersPageTestData.Project_Identifiers_Page
         .guidance_body_cant_find_organisation
     );
-    await commonItemsPage.details_component
-      .getByText(
-        projectIdentifiersPage.projectIdentifiersPageTestData.Project_Identifiers_Page
-          .guidance_header_cant_find_organisation
-      )
-      .locator('..')
-      .click();
+    await collapsibleDetailsComponent.click();
     await commonItemsPage.verifyDetailsExpanded('closed', commonItemsPage.details_component);
-    await commonItemsPage.details_component
-      .getByText(
-        projectIdentifiersPage.projectIdentifiersPageTestData.Project_Identifiers_Page
-          .guidance_header_cant_find_organisation
-      )
-      .locator('..')
-      .click();
+    await collapsibleDetailsComponent.click();
   }
 );

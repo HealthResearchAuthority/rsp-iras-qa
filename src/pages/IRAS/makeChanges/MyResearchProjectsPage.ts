@@ -24,7 +24,6 @@ export default class MyResearchProjectsPage {
   readonly search: Locator;
   readonly short_project_title: Locator;
   readonly search_text_box: Locator;
-  readonly search_button: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
