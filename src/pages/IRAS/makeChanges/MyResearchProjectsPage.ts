@@ -23,6 +23,7 @@ export default class MyResearchProjectsPage {
   readonly next_button: Locator;
   readonly search: Locator;
   readonly short_project_title: Locator;
+  readonly search_text_box: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -71,6 +72,7 @@ export default class MyResearchProjectsPage {
       name: this.myResearchProjectsPageTestData.Valid_Project_Title.short_project_title,
       exact: true,
     });
+    this.search_text_box = this.page.getByTestId('SearchTerm');
   }
 
   //Page Methods
