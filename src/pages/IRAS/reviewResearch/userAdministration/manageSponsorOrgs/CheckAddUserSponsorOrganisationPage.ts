@@ -33,24 +33,24 @@ export default class CheckAddUserSponsorOrganisationPage {
         exact: true,
       });
     this.page_guidance_text = this.mainPageContent.getByRole('paragraph');
-    this.user_details_table = this.page.getByRole('table').locator('tbody');
-    this.user_details_table_labels = this.user_details_table.getByRole('cell').locator('b');
-    this.user_details_table_row = this.user_details_table.getByRole('row');
-    this.user_first_name_row = this.user_details_table_row.filter({
-      hasText:
-        this.checkAddUserSponsorOrgPageTestData.Check_Add_User_Sponsor_Organisation_Page.user_details_table_labels[1],
-    });
-    this.user_first_name_value = this.user_first_name_row.getByRole('cell').nth(1);
-    this.user_last_name_row = this.user_details_table_row.filter({
-      hasText:
-        this.checkAddUserSponsorOrgPageTestData.Check_Add_User_Sponsor_Organisation_Page.user_details_table_labels[2],
-    });
-    this.user_last_name_value = this.user_last_name_row.getByRole('cell').nth(1);
-    this.user_email_row = this.user_details_table_row.filter({
-      hasText:
-        this.checkAddUserSponsorOrgPageTestData.Check_Add_User_Sponsor_Organisation_Page.user_details_table_labels[3],
-    });
-    this.user_email_value = this.user_email_row.getByRole('cell').nth(1);
+    // this.user_details_table = this.page.getByRole('table').locator('tbody');
+    // this.user_details_table_labels = this.user_details_table.getByRole('cell').locator('b');
+    // this.user_details_table_row = this.user_details_table.getByRole('row');
+    // this.user_first_name_row = this.user_details_table_row.filter({
+    //   hasText:
+    //     this.checkAddUserSponsorOrgPageTestData.Check_Add_User_Sponsor_Organisation_Page.user_details_table_labels[1],
+    // });
+    // this.user_first_name_value = this.user_first_name_row.getByRole('cell').nth(1);
+    // this.user_last_name_row = this.user_details_table_row.filter({
+    //   hasText:
+    //     this.checkAddUserSponsorOrgPageTestData.Check_Add_User_Sponsor_Organisation_Page.user_details_table_labels[2],
+    // });
+    // this.user_last_name_value = this.user_last_name_row.getByRole('cell').nth(1);
+    // this.user_email_row = this.user_details_table_row.filter({
+    //   hasText:
+    //     this.checkAddUserSponsorOrgPageTestData.Check_Add_User_Sponsor_Organisation_Page.user_details_table_labels[3],
+    // });
+    // this.user_email_value = this.user_email_row.getByRole('cell').nth(1);
   }
   //Getters & Setters for Private Variables
 

@@ -40,32 +40,9 @@ Then(
       );
       const actualValues = confirmStringNotNull(await viewEditUserProfilePage.role_value.textContent());
       expect.soft(actualValues).toContain('Sponsor');
-      // const expectedValues = dataset.role_checkbox.toString().replaceAll(',', ', ');
-      // expect(actualValues).toBe(expectedValues);
     }
   }
 );
-
-// Then(
-//   'I can see the user profile {string} is updated with the edited data {string}',
-//   async ({ userProfilePage, editUserProfilePage }, editFieldName: string, datesetName: string) => {
-//     const dataset = editUserProfilePage.editUserProfilePageTestData[datesetName];
-//     const actualValue = await userProfilePage.getUserProfileValue(editFieldName);
-//     const expectedValue = dataset[editFieldName];
-//     expect(actualValue).toBe(expectedValue.toString());
-//   }
-// );
-
-// When(
-//   'I can see that the user profiles last updated field has the current time',
-//   async ({ userProfilePage, auditHistoryUserPage }) => {
-//     const abbreviatedValue = await auditHistoryUserPage.getUpdatedTime();
-//     const shortMonth = new Date().toLocaleString('en-GB', { month: 'short', timeZone: 'UTC' }).slice(0, 3);
-//     const longMonth = new Date().toLocaleString('en-GB', { month: 'long', timeZone: 'UTC' });
-//     const expectedValue = abbreviatedValue.replace(shortMonth, longMonth);
-//     await expect(userProfilePage.last_updated_value).toHaveText(confirmStringNotNull(expectedValue));
-//   }
-// );
 
 When(
   'I can see the {string} user has the correct roles assigned on their profile page',
@@ -80,16 +57,3 @@ When(
     }
   }
 );
-
-// Then(
-//   'I can see the {string} ui labels on the user profile page',
-//   async ({ commonItemsPage, userProfilePage }, datasetName: string) => {
-//     const dataset = userProfilePage.userProfilePageTestData[datasetName];
-//     for (const key in dataset) {
-//       if (Object.hasOwn(dataset, key)) {
-//         const labelVal = await commonItemsPage.getUiLabel(key, userProfilePage);
-//         expect(labelVal).toBe(dataset[key]);
-//       }
-//     }
-//   }
-// );

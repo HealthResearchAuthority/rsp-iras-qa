@@ -124,7 +124,7 @@ Feature: User Administration: Manage Review Bodies - Add user to review body
         And I capture the page screenshot
         When I fill the search input for searching 'review body users' with 'the newly added users email' as the search query
         And I click the 'Search' button on the 'Review_Body_User_List_Page'
-        Then I see that the newly added user appears in the user list page for the review body
+        Then I see that the newly added user appears in the user list page for the 'review body'
 
         Examples:
             | Search_Query                |

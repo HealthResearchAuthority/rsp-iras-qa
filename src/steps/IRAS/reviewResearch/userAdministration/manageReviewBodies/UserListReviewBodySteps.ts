@@ -1,7 +1,7 @@
 import { createBdd } from 'playwright-bdd';
 import { expect, test } from '../../../../../hooks/CustomFixtures';
 import { confirmArrayNotNull } from '../../../../../utils/UtilFunctions';
-const { Given, When, Then } = createBdd(test);
+const { When, Then } = createBdd(test);
 
 When(
   'I navigate to the user list page of the {string} review body',
@@ -79,25 +79,6 @@ Then(
     if (await userProfilePage.role_value.isVisible()) {
       await expect(userProfilePage.role_value).toHaveText(await checkRemoveUserReviewBodyPage.getRole());
     }
-  }
-);
-
-Given(
-  'I see that the newly added user appears in the user list page for the review body',
-  async ({ searchAddUserReviewBodyPage, userListReviewBodyPage }) => {
-    await expect(userListReviewBodyPage.userListTableBodyRows).toHaveCount(1);
-    await expect(userListReviewBodyPage.first_name_value_first_row).toHaveText(
-      await searchAddUserReviewBodyPage.getUserFirstName()
-    );
-    await expect(userListReviewBodyPage.last_name_value_first_row).toHaveText(
-      await searchAddUserReviewBodyPage.getUserLastName()
-    );
-    await expect(userListReviewBodyPage.email_address_value_first_row).toHaveText(
-      await searchAddUserReviewBodyPage.getUserEmail()
-    );
-    await expect(userListReviewBodyPage.status_value_first_row).toHaveText(
-      await searchAddUserReviewBodyPage.getUserStatus()
-    );
   }
 );
 
