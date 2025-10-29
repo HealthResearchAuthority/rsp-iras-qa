@@ -208,7 +208,6 @@ When(
         }
       }
     }
-    await createUserProfilePage.page.pause(); //remove
   }
 );
 
