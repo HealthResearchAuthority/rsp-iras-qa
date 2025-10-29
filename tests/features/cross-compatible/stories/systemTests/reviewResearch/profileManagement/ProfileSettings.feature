@@ -4,7 +4,7 @@ Feature: Profile Management: Provide signed-in users with access to their profil
     I want to access a Profile and Settings page
     So that I can review my account information and make updates to my profile when needed
 
-    @rsp-5290 @viewProfileSettingsPage
+    @viewProfileSettingsPage @rsp-5290
     Scenario Outline: View profile settings for an authenticated, existing user
         Given I have navigated to the 'Home_Page' as '<User>'
         And I capture the page screenshot
@@ -21,7 +21,7 @@ Feature: Profile Management: Provide signed-in users with access to their profil
             | Studywide_Reviewer_NI  |
             | Workflow_Coordinator_W |
 
-    @rsp-5290 @verifyProfileSettingsChangeLinks
+    @verifyProfileSettingsChangeLinks @rsp-5290
     Scenario Outline: Verify the user can navigate to the edit profile page via the change links for all fields
         Given I have navigated to the 'Profile_Settings_Page'
         And I capture the page screenshot
@@ -30,12 +30,12 @@ Feature: Profile Management: Provide signed-in users with access to their profil
         And I can see a 'One_Login_Account' link on the 'Edit_Your_Profile_Page'
 
         Examples:
-            | Field_Name   |
-            | Title        |
-            | First_Name   |
-            | Last_Name    |
-            | Job_Title    |
-            | Organisation |
+            | Field_Name            |
+            | Settings_Title        |
+            | Settings_First_Name   |
+            | Settings_Last_Name    |
+            | Settings_Job_Title    |
+            | Settings_Organisation |
 
     @editProfileSettings @rsp-5106 @OneLoginUser @fail @KNOWN-DEFECT-RSP-5329
     Scenario: Users can update their profile directly via profile settings
@@ -53,7 +53,7 @@ Feature: Profile Management: Provide signed-in users with access to their profil
         And I capture the page screenshot
         When I have navigated to the 'Profile_Settings_Page'
         And I capture the page screenshot
-        And I click the change link against 'First_Name' on the profile settings page
+        And I click the change link against 'Settings_First_Name' on the profile settings page
         And I can see the 'Edit_Your_Profile_Page'
         When I fill the edit your profile page with 'One_Login_Account_User_Edit' details
         And I capture the page screenshot
@@ -81,7 +81,7 @@ Feature: Profile Management: Provide signed-in users with access to their profil
         And I capture the page screenshot
         When I have navigated to the 'Profile_Settings_Page'
         And I capture the page screenshot
-        And I click the change link against 'Last_Name' on the profile settings page
+        And I click the change link against 'Settings_Last_Name' on the profile settings page
         And I can see the 'Edit_Your_Profile_Page'
         When I fill the edit your profile page with 'Invalid_User_Edit' details
         And I capture the page screenshot

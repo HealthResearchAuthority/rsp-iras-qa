@@ -31,7 +31,7 @@ Feature: Profile Management: Provide new users with the ability to create their 
         And I capture the page screenshot
         Then I can see the users audit history with the expected events displayed
 
-    @verifyCheckProfileChangeLinks @rsp-5288 @ApplicantUser
+    @verifyCheckProfileChangeLinks @rsp-5288
     Scenario Outline: Verify the user can navigate to the complete profile page via the change links for all fields
         Then I can see the 'Complete_Your_Profile_Page'
         And I capture the page screenshot
@@ -43,12 +43,12 @@ Feature: Profile Management: Provide new users with the ability to create their 
         Then I can see the 'Complete_Your_Profile_Page'
 
         Examples:
-            | Field_Name   |
-            | Title        |
-            | First_Name   |
-            | Last_Name    |
-            | Job_Title    |
-            | Organisation |
+            | Field_Name         |
+            | Check_Title        |
+            | Check_First_Name   |
+            | Check_Last_Name    |
+            | Check_Job_Title    |
+            | Check_Organisation |
 
     @completeProfileValidation @rsp-5073 @OneLoginUser
     Scenario: The complete your profile page has the correct input validations in place

@@ -5,26 +5,26 @@ const { Given, When, Then } = createBdd(test);
 
 Given(
   'I can see the read only one login details for my {string} account',
-  async ({ profileSettingsPage }, user: string) => {
-    const dataset = profileSettingsPage.profileSettingsPageTestData.Users;
+  async ({ profileCommonPage }, user: string) => {
+    const dataset = profileCommonPage.profileCommonPageTestData.Users;
     await expect
-      .soft(profileSettingsPage.email_address_value)
+      .soft(profileCommonPage.email_address_value)
       .toHaveText(dataset[user].One_Login_Details.email_address_value);
-    await expect.soft(profileSettingsPage.telephone_value).toHaveText(dataset[user].One_Login_Details.telephone_value);
-    await expect.soft(profileSettingsPage.email_address_change_link).toBeHidden();
-    await expect.soft(profileSettingsPage.telephone_change_link).toBeHidden();
+    await expect.soft(profileCommonPage.telephone_value).toHaveText(dataset[user].One_Login_Details.telephone_value);
+    await expect.soft(profileCommonPage.settings_email_address_change_link).toBeHidden();
+    await expect.soft(profileCommonPage.check_email_address_change_link).toBeHidden();
+    await expect.soft(profileCommonPage.settings_telephone_change_link).toBeHidden();
+    await expect.soft(profileCommonPage.check_telephone_change_link).toBeHidden();
   }
 );
 
-When('I can see the profile details for my {string} account', async ({ profileSettingsPage }, user: string) => {
-  const dataset = profileSettingsPage.profileSettingsPageTestData.Users;
-  await expect.soft(profileSettingsPage.title_value).toHaveText(dataset[user].Profile_Details.title_value);
-  await expect.soft(profileSettingsPage.first_name_value).toHaveText(dataset[user].Profile_Details.first_name_value);
-  await expect.soft(profileSettingsPage.last_name_value).toHaveText(dataset[user].Profile_Details.last_name_value);
-  await expect.soft(profileSettingsPage.job_title_value).toHaveText(dataset[user].Profile_Details.job_title_value);
-  await expect
-    .soft(profileSettingsPage.organisation_value)
-    .toHaveText(dataset[user].Profile_Details.organisation_value);
+When('I can see the profile details for my {string} account', async ({ profileCommonPage }, user: string) => {
+  const dataset = profileCommonPage.profileCommonPageTestData.Users;
+  await expect.soft(profileCommonPage.title_value).toHaveText(dataset[user].Profile_Details.title_value);
+  await expect.soft(profileCommonPage.first_name_value).toHaveText(dataset[user].Profile_Details.first_name_value);
+  await expect.soft(profileCommonPage.last_name_value).toHaveText(dataset[user].Profile_Details.last_name_value);
+  await expect.soft(profileCommonPage.job_title_value).toHaveText(dataset[user].Profile_Details.job_title_value);
+  await expect.soft(profileCommonPage.organisation_value).toHaveText(dataset[user].Profile_Details.organisation_value);
 });
 
 When('I can see the account {string} notification', async ({ profileCommonPage }, action: string) => {
@@ -38,16 +38,16 @@ When('I can see the account {string} notification', async ({ profileCommonPage }
 
 Then(
   'I click the change link against {string} on the profile settings page',
-  async ({ profileSettingsPage, commonItemsPage }, fieldKey: string) => {
-    const changeLink = await commonItemsPage.getChangeLink(fieldKey, profileSettingsPage);
+  async ({ profileCommonPage, commonItemsPage }, fieldKey: string) => {
+    const changeLink = await commonItemsPage.getChangeLink(fieldKey, profileCommonPage);
     await changeLink.click();
   }
 );
 
 Then(
   'I click the change link against {string} on the check your profile page',
-  async ({ checkYourProfilePage, commonItemsPage }, fieldKey: string) => {
-    const changeLink = await commonItemsPage.getChangeLink(fieldKey, checkYourProfilePage);
+  async ({ profileCommonPage, commonItemsPage }, fieldKey: string) => {
+    const changeLink = await commonItemsPage.getChangeLink(fieldKey, profileCommonPage);
     await changeLink.click();
   }
 );

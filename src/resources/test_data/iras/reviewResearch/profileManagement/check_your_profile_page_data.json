@@ -1,28 +1,6 @@
 {
   "Check_Your_Profile_Page": {
     "page_heading": "Check and add your profile",
-    "page_guidance_text": "Check the information here is correct before adding your profile",
-    "email_address_label": "Email address",
-    "telephone_label": "Telephone",
-    "title_label": "Title",
-    "first_name_label": "First name",
-    "last_name_label": "Last name",
-    "job_title_label": "Job title",
-    "organisation_label": "Organisation"
-  },
-  "Users": {
-    "One_Login_Account_User": {
-      "One_Login_Details": {
-        "email_address_value": "hagnenulta@necub.com",
-        "telephone_value": ""
-      },
-      "Profile_Details": {
-        "title_value": "Mr",
-        "first_name_value": "Hagne",
-        "last_name_value": "Nulta",
-        "job_title_value": "Researcher",
-        "organisation_value": "NECUB"
-      }
-    }
+    "page_guidance_text": "Check the information here is correct before adding your profile"
   }
 }
