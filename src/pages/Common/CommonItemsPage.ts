@@ -154,6 +154,7 @@ export default class CommonItemsPage {
       .or(this.page.getByTestId('Search.SearchQuery'))
       .or(this.page.getByTestId('Search_IrasId'))
       .or(this.page.getByTestId('Search.SearchNameTerm'))
+      .or(this.page.getByTestId('Search.ModificationId'))
       .first();
     //Banner
     this.bannerNavBar = this.page.getByLabel('Service information');
@@ -1419,6 +1420,11 @@ export default class CommonItemsPage {
       .or(this.genericButton.getByText(buttonLabel, { exact: true }))
       .first()
       .click();
+  }
+
+  async clickLink(page: string, linkName: string) {
+    const linkValue = this.linkTextData[page][linkName];
+    await this.govUkLink.getByText(linkValue, { exact: true }).click();
   }
 
   async clickErrorSummaryLinkSpecific<PageObject>(key: string, page: PageObject, errorMsg: string) {

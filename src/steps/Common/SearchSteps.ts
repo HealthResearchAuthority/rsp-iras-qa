@@ -15,6 +15,7 @@ When(
       myModificationsTasklistPage,
       commonItemsPage,
       participatingOrganisationsPage,
+      modificationsCommonPage,
     },
     searchType: string,
     searchQueryName: string
@@ -41,6 +42,8 @@ When(
     } else if (searchType.toLowerCase() == 'organisations') {
       searchQueryDataset =
         participatingOrganisationsPage.participatingOrganisationsPageTestData.Search_Queries[searchQueryName];
+    } else if (searchType.toLowerCase() == 'modifications in post approval') {
+      searchQueryDataset = modificationsCommonPage.modificationsCommonPageTestData.Search_Queries[searchQueryName];
     } else if ((await commonItemsPage.tableBodyRows.count()) < 1) {
       throw new Error(`There are no items in list to search`);
     }

@@ -4,7 +4,7 @@
     "short_project_title_label": "Short project title",
     "modification_id_label": "Modification ID",
     "status_label": "Status",
-    "draft_status_value": "Draft",
+    "draft_status_value": "In draft",
     "advanced_filter_label": "Advanced filter",
     "remove_this_change_label": "Remove this change",
     "Save_Continue_Button": "Save and continue",
@@ -123,6 +123,109 @@
       "planned_project_end_year_text": "2036",
       "which_organisation_change_affect_checkbox": ["Non-NHS/HSC"],
       "where_organisation_change_affect_non_nhs_question_checkbox": ["England"]
+    }
+  },
+  "Multiple_Modifications_In_Draft": {
+    "Modification_One": {
+      "area_of_change_dropdown": "Participating organisations",
+      "specific_change_dropdown": "Early closure or withdrawal of research sites"
+    },
+    "Modification_Two": {
+      "area_of_change_dropdown": "Project design",
+      "specific_change_dropdown": "Change to planned end date"
+    },
+    "Modification_Three": {
+      "area_of_change_dropdown": "Participating organisations",
+      "specific_change_dropdown": "PICs - Addition of Participant Identification Centres undertaking the same activities as existing PICs"
+    },
+    "Modification_Four": {
+      "area_of_change_dropdown": "Participating organisations",
+      "specific_change_dropdown": "PICs - Early closure or withdrawal of Participant Identification Centres"
+    },
+    "Modification_Five": {
+      "area_of_change_dropdown": "Participating organisations",
+      "specific_change_dropdown": "Addition of sites undertaking the same activities as existing sites"
+    }
+  },
+  "Modification_Status_Indraft": {
+    "status": "In draft",
+    "submited_date": ""
+  },
+  "Modification_Status_Approved": {
+    "status": "Approved"
+  },
+  "Change_To_Planned_End_Date": {
+    "Planned_End_Date_NHS_All_Yes_NI_W": {
+      "area_of_change_dropdown": "Project design",
+      "specific_change_dropdown": "Change to planned end date",
+      "planned_project_end_day_text": "23",
+      "planned_project_end_month_dropdown": "April",
+      "planned_project_end_year_text": "2058",
+      "which_organisation_change_affect_checkbox": ["NHS/HSC"],
+      "where_organisation_change_affect_nhs_question_checkbox": ["Northern Ireland", "Wales"],
+      "will_some_or_all_organisations_be_affected_question_radio": "Some",
+      "will_nhs_hsc_organisations_require_additional_resources_question_radio": "No"
+    }
+  },
+  "Sponsor_reference_Details": {
+    "sponsor_modification_reference_textbox": "Sponsor Reference Text",
+    "sponsor_modification_date_day_textbox": "01",
+    "sponsor_modification_date_month_dropdown": "January",
+    "sponsor_modification_date_year_textbox": "2030",
+    "sponsor_summary_textbox": "This is a test"
+  },
+  "Search_Queries": {
+    "Partial_Modification_ID": { "search_input_text": "123" },
+    "Empty_Search_Data": { "search_input_text": "" }
+  },
+  "Non_Existant_Modification_ID": { "search_input_text": "000000" },
+
+  "Max_Pages_To_Validate": 2,
+
+  "Post_Approval_Page": {
+    "filter_headings": ["Modification type", "Review type", "Category", "Date submitted", "Status"]
+  },
+  "Post_Approval_Page_Label_Texts": {
+    "heading": "My research",
+    "search": "Search",
+    "advanced_filter_label": "Advanced filter",
+    "add_project_record_button_label": "Add project",
+    "next_button": "Next   page",
+    "short_project_title_text": "QA_Automation - This is a short project title",
+    "status_label": "Status",
+    "date_project_created_label": "Date created",
+    "date_project_created_from_date_hint_text": "Enter the date you want to search from",
+    "date_project_created_from_date_help_text": "For example, 28 February 2023",
+    "date_project_created_to_date_hint_text": "Enter the date you want to search to",
+    "date_project_created_to_date_help_text": "For example, 12 October 2024",
+    "date_project_created_day_label": "Day",
+    "date_project_created_month_label": "Month",
+    "date_project_created_year_label": "Year"
+  },
+  "Advanced_Filters": {
+    "Advanced_Filter_All_Fields": {
+      "status_checkbox": ["In draft", "Approved"],
+      "date_submitted_from_day_text": "11",
+      "date_submitted_from_month_text_dropdown": "September",
+      "date_submitted_from_year_text": "2025",
+      "date_submitted_to_day_text": "16",
+      "date_submitted_to_month_dropdown": "October",
+      "date_submitted_to_year_text": "2025",
+      "modification_type": ["major"]
+    },
+    "Advanced_Filter_Status_Only": {
+      "status_checkbox": ["In draft"]
+    },
+    "Advanced_Filter_Submitted_Date_Field_Only": {
+      "date_submitted_from_day_text": "11",
+      "date_submitted_from_month_text_dropdown": "September",
+      "date_submitted_from_year_text": "2025",
+      "date_submitted_to_day_text": "16",
+      "date_submitted_to_month_dropdown": "October",
+      "date_submitted_to_year_text": "2025"
+    },
+    "Advanced_Filter_Modification_Type_Only": {
+      "modification_type": ["major"]
     }
   }
 }
