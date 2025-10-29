@@ -1437,3 +1437,38 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityProfileSettingsPage @ApplicantUser
+  Scenario: Profile settings page
+    Given I have navigated to the 'Profile_Settings_Page'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityEditYourProfilePage @ApplicantUser
+  Scenario: Edit your profile page
+    Given I have navigated to the 'Edit_Your_Profile_Page'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityCompleteYourProfilePage @ApplicantUser
+  Scenario: Complete your profile page
+    Given I have navigated to the 'Login_Page' as 'One_Login_Account_User'
+    When I login to the application as the 'One_Login_Account_User'
+    Then I can see the 'Complete_Your_Profile_Page'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+  @axeAccessibilityCheckYourProfilePage @ApplicantUser
+  Scenario: Check your profile page
+    Given I have navigated to the 'Login_Page' as 'One_Login_Account_User'
+    When I login to the application as the 'One_Login_Account_User'
+    Then I can see the 'Complete_Your_Profile_Page'
+    When I fill the complete profile page with 'One_Login_Account_User' details
+    And I click the 'Save_Continue' button on the 'Complete_Your_Profile_Page'
+    Then I can see the 'Check_Your_Profile_Page'
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations

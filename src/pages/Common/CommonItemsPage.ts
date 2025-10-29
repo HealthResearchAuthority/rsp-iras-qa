@@ -49,12 +49,6 @@ export default class CommonItemsPage {
   readonly qSetProgressBarActiveStageLink: Locator;
   readonly bannerNavBar: Locator;
   readonly bannerHome: Locator;
-  readonly bannerReviewApplications: Locator;
-  readonly bannerAdmin: Locator;
-  readonly bannerManageUsers: Locator;
-  readonly bannerQuestionSet: Locator;
-  readonly bannerSystemAdmin: Locator;
-  readonly bannerMyApplications: Locator;
   readonly alert_box: Locator;
   readonly alert_box_headings: Locator;
   readonly alert_box_list: Locator;
@@ -159,14 +153,6 @@ export default class CommonItemsPage {
     //Banner
     this.bannerNavBar = this.page.getByLabel('Service information');
     this.bannerHome = this.bannerNavBar.getByText(this.linkTextData.Banner.Home, { exact: true });
-    this.bannerReviewApplications = this.bannerNavBar.getByText(this.linkTextData.Banner.Review_Applications, {
-      exact: true,
-    });
-    this.bannerAdmin = this.bannerNavBar.getByText(this.linkTextData.Banner.Admin, { exact: true });
-    this.bannerManageUsers = this.bannerNavBar.getByText(this.linkTextData.Banner.Manage_Users, { exact: true });
-    this.bannerQuestionSet = this.bannerNavBar.getByText(this.linkTextData.Banner.Question_Set, { exact: true });
-    this.bannerSystemAdmin = this.bannerNavBar.getByText(this.linkTextData.Banner.System_Admin, { exact: true });
-    this.bannerMyApplications = this.bannerNavBar.getByText(this.linkTextData.Banner.My_Applications, { exact: true });
     this.next_button = this.page
       .getByRole('link')
       .getByText(this.commonTestData.next_button, { exact: true })
@@ -1293,7 +1279,7 @@ export default class CommonItemsPage {
     return labels;
   }
 
-  async getChangeLink<PageObject>(fieldKey: string, page: PageObject) {
+  async getChangeLink<PageObject>(fieldKey: string, page: PageObject): Promise<Locator> {
     const locatorName = fieldKey.toLowerCase() + '_change_link';
     return page[locatorName];
   }

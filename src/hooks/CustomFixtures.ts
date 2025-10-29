@@ -72,6 +72,11 @@ import ReviewYourDocumentInformationModificationsPage from '../pages/IRAS/makeCh
 import ReviewAllChangesPage from '../pages/IRAS/reviewResearch/receiveAmendments/ReviewAllChangesPage';
 import ProjectOverviewUnfinishedProjectsPage from '../pages/IRAS/makeChanges/ProjectOverviewUnfinishedProjectsPage';
 import ModificationsDetailsPage from '../pages/IRAS/makeChanges/modifications/ModificationsDetailsPage';
+import ProfileCommonPage from '../pages/IRAS/reviewResearch/profileManagement/ProfileCommonPage';
+import ProfileSettingsPage from '../pages/IRAS/reviewResearch/profileManagement/ProfileSettingsPage';
+import EditYourProfilePage from '../pages/IRAS/reviewResearch/profileManagement/EditYourProfilePage';
+import CompleteYourProfilePage from '../pages/IRAS/reviewResearch/profileManagement/CompleteYourProfilePage';
+import CheckYourProfilePage from '../pages/IRAS/reviewResearch/profileManagement/CheckYourProfilePage';
 
 type CustomFixtures = {
   commonItemsPage: CommonItemsPage;
@@ -144,6 +149,12 @@ type CustomFixtures = {
   reviewAllChangesPage: ReviewAllChangesPage;
   modificationsDetailsPage: ModificationsDetailsPage;
   projectOverviewUnfinishedProjectsPage: ProjectOverviewUnfinishedProjectsPage;
+  profileCommonPage: ProfileCommonPage;
+  profileSettingsPage: ProfileSettingsPage;
+  editYourProfilePage: EditYourProfilePage;
+  completeYourProfilePage: CompleteYourProfilePage;
+  checkYourProfilePage: CheckYourProfilePage;
+
   makeAxeBuilder: () => AxeBuilder;
 };
 
@@ -417,12 +428,35 @@ export const test = base.extend<CustomFixtures>({
   reviewYourDocumentInformationModificationsPage: async ({ page }, use) => {
     await use(new ReviewYourDocumentInformationModificationsPage(page));
   },
+
   reviewAllChangesPage: async ({ page }, use) => {
     await use(new ReviewAllChangesPage(page));
   },
+
   modificationsDetailsPage: async ({ page }, use) => {
     await use(new ModificationsDetailsPage(page));
   },
+
+  profileCommonPage: async ({ page }, use) => {
+    await use(new ProfileCommonPage(page));
+  },
+
+  profileSettingsPage: async ({ page }, use) => {
+    await use(new ProfileSettingsPage(page));
+  },
+
+  editYourProfilePage: async ({ page }, use) => {
+    await use(new EditYourProfilePage(page));
+  },
+
+  completeYourProfilePage: async ({ page }, use) => {
+    await use(new CompleteYourProfilePage(page));
+  },
+
+  checkYourProfilePage: async ({ page }, use) => {
+    await use(new CheckYourProfilePage(page));
+  },
+
   makeAxeBuilder: async ({ page }, use) => {
     const makeAxeBuilder = () => new AxeBuilder({ page });
     await use(makeAxeBuilder);
