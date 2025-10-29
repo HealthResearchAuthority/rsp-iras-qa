@@ -58,8 +58,7 @@
     "Back": "Back"
   },
   "Check_Create_User_Profile_Page": {
-    "Change": "Change",
-    "Back": "Back"
+    "Change": "Change"
   },
   "Create_User_Profile_Confirmation_Page": {
     "Back_To_Manage_Users": "Back to Manage users",
@@ -96,8 +95,7 @@
     "Back": "Back"
   },
   "Check_Create_Review_Body_Page": {
-    "Change": "Change",
-    "Back": "Back"
+    "Change": "Change"
   },
   "Create_Review_Body_Confirmation_Page": {
     "Back_To_Manage_Review_Bodies": "Back to Manage review bodies",

@@ -64,7 +64,8 @@
     "Continue": "Continue"
   },
   "Check_Create_User_Profile_Page": {
-    "Create_Profile": "Create profile"
+    "Create_Profile": "Create profile",
+    "Back": "Back"
   },
   "User_Profile_Page": {
     "Disable_User_Record": "Disable user record",
@@ -80,7 +81,8 @@
     "Continue": "Continue"
   },
   "Check_Create_Review_Body_Page": {
-    "Create_Profile": "Create profile"
+    "Create_Profile": "Create profile",
+    "Back": "Back"
   },
   "Edit_Review_Body_Page": {
     "Save": "Save"
