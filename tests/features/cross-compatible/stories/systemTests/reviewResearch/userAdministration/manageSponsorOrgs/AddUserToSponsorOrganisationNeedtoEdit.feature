@@ -1,23 +1,35 @@
-@UserAdministration @ManageReviewBodies @AddUserToReviewBody @SysAdminUser @SystemTest @rsp-3258 @STSysAdmin
+@UserAdministration @ManageReviewBodies @AddUserToReviewBody @SysAdminUser @SystemTest @rsp-5234 @STSysAdmin
 Feature: User Administration: Manage Review Bodies - Add user to review body
 
     Background:
-        Given I have navigated to the 'Manage_Review_Bodies_Page'
-        And I select a 'QA Automation' review Body to View and Edit which is 'Enabled'
-        And I can see the review body profile page
-        And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
-        And I can see the user list page of the 'review body'
-        And I click the 'Add_User_To_This_Review_Body' link on the 'Review_Body_User_List_Page'
-        And I can see the search for user to add to review body page
+        Given I have navigated to the 'System_Administration_Page'
+        And I capture the page screenshot
+        And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
+        And I capture the page screenshot
+        Then I can see the 'Manage_Sponsor_Organisations_Page'
+        When I enter the 'Organisation_Name' of the 'First' item in the list, into the search field
+        And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+        And I capture the page screenshot
+        Then the system displays 'sponsor organisations' matching the search criteria
+        And I can see the 'previously added sponsor organisation' should be present in the list with 'Enabled' status in the manage sponsor organisation page
+        Then I click the view edit link of the 'previously added sponsor organisation'
+        And I capture the page screenshot
+        And I can see the sponsor organisation profile page
+        And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
+        And I capture the page screenshot
+        Then I can see the user list page of the 'sponsor organisation'
+        And I click the 'Add_A_New_User_Profile_Record' link on the 'Sponsor_Org_User_List_Page'
+        And I capture the page screenshot
+        And I can see the search for user to add to sponsor organisation page
         And I capture the page screenshot
 
-    @addUserReviewBodySearchFunctionResults
-    Scenario Outline: Verify that the search function, for existing users that can be added to the review body, returns expected results
+    @addUserSponsorOrgSearchFunctionResults @TestOnly
+    Scenario Outline: Verify that the search function, for existing users that can be added to the sponsor organisation, returns expected results
         When I fill the search input for searching 'adding users' with '<Search_Query>' as the search query
-        And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
-        Then I can see that the add users to review body search page contains 'Results'
+        And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+        Then I can see that the add users to 'sponsor organisation' search page contains 'Results'
         And I capture the page screenshot
-        And the add users to review body search has returned results with the '<Search_Query>'
+        And the add users to 'sponsor organisation' search has returned results with the '<Search_Query>'
 
         Examples:
             | Search_Query                |
@@ -26,66 +38,69 @@ Feature: User Administration: Manage Review Bodies - Add user to review body
             | Existing_QA_User_Email      |
             | Existing_QA_User_Full_Name  |
 
-    @addUserReviewBodySearchFunctionNoResults
-    Scenario: Verify that the add users to review body search function returns a no results page, when no such user exists
+    @addUserSponsorOrgSearchFunctionNoResults
+    Scenario: Verify that the add users to sponsor organisation search function returns a no results page, when no such user exists
         When I fill the search input for searching 'adding users' with 'Non_Existant_User_Data' as the search query
-        And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
-        Then I can see that the add users to review body search page contains 'No_Results'
+        And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+        And the no search results found message is displayed
+        # Then I can see that the add users to 'sponsor organisation' search page contains 'No_Results'
         And I capture the page screenshot
 
-    @verifySearchAddUserReviewbodyPageNavigationLinks
-    Scenario Outline: Verify the user can navigate away from the add users to review body search page using the available links
+    @verifySearchAddUserSponsorOrgPageNavigationLinks
+    Scenario Outline: Verify the user can navigate away from the add users to sponsor organisation search page using the available links
         And I fill the search input for searching 'adding users' with '<Search_Query>' as the search query
-        And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
+        And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
         And I capture the page screenshot
-        When I click the '<Link>' link on the 'Search_Add_User_Review_Body_Page'
+        When I click the '<Link>' link on the 'Search_Add_User_Sponsor_Org_Page'
         Then I can see the '<Page>'
         And I capture the page screenshot
 
         Examples:
-            | Search_Query                | Link          | Page                       |
-            | Existing_QA_User_First_Name | Back          | Review_Body_User_List_Page |
-            | Non_Existant_User_Data      | Back_To_Users | Review_Body_User_List_Page |
-            | Non_Existant_User_Data      | Manage_Users  | Manage_Users_Page          |
+            | Search_Query                | Link | Page                       |
+            | Existing_QA_User_First_Name | Back | Sponsor_Org_User_List_Page |
+    # | Non_Existant_User_Data      | Back_To_Users | Sponsor_Org_User_List_Page |
+    # | Non_Existant_User_Data      | Manage_Users  | Manage_Users_Page          |
 
-    @verifyCheckAddUserReviewbodyPageValues
-    Scenario: Verify the check add user to review body page displays the correct user details
+    @verifyCheckAddUserSponsorOrgPageValues
+    Scenario: Verify the check add user to sponsor organisation page displays the correct user details
         And I fill the search input for searching 'adding users' with 'Existing_QA_User_First_Name' as the search query
-        And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
-        And I can see that the add users to review body search page contains 'Results'
+        And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+        And I can see that the add users to 'sponsor organisation' search page contains 'Results'
         And I capture the page screenshot
-        When I click the 'Add_User' link on the 'Search_Add_User_Review_Body_Page'
-        Then I can see the check and add user to review body page
+        When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+        Then I can see the 'Check_Add_User_Sponsor_Org_Page'
+        # Then I can see the check and add user to review body page
         And I capture the page screenshot
-        And the check and add user to review body page displays the expected user details
+        And the check and add user to sponsor organisation page displays the expected user details
+    # And the check and add user to review body page displays the expected user details
 
-    @verifyCheckAddUserReviewbodyPageBackLink
-    Scenario: Verify the user can navigate back from the check add user to review body page using the back link
+    @verifyCheckAddUserSponsorOrgPageBackLink
+    Scenario: Verify the user can navigate back from the check add user to sponsor organisation page using the back link
         And I fill the search input for searching 'adding users' with 'Existing_QA_User_First_Name' as the search query
-        And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
+        And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
         And I capture the page screenshot
-        And I click the 'Add_User' link on the 'Search_Add_User_Review_Body_Page'
-        And I can see the check and add user to review body page
+        And I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+        Then I can see the 'Check_Add_User_Sponsor_Org_Page'
         And I capture the page screenshot
-        When I click the 'Back' link on the 'Check_Add_User_Review_Body_Page'
-        Then I can see the search for user to add to review body page
+        When I click the 'Back' link on the 'Check_Add_User_Sponsor_Org_Page'
+        And I can see the search for user to add to sponsor organisation page
         And I capture the page screenshot
 
-    @verifyAddUserReviewbodyConfirmationPageContent
-    Scenario:  Verify the add user to review body confirmation page displays the expected messaging
+    @verifyAddUserSponsorOrgConfirmationPageContent
+    Scenario:  Verify the add user to sponsor organisation confirmation page displays the expected messaging
         And I fill the search input for searching 'adding users' with 'Existing_QA_User_First_Name' as the search query
-        And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
-        And I can see that the add users to review body search page contains 'Results'
+        And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
+        And I can see that the add users to 'review body' search page contains 'Results'
         And I capture the page screenshot
-        And I click the 'Add_User' link on the 'Search_Add_User_Review_Body_Page'
-        And I can see the check and add user to review body page
+        And I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
+        Then I can see the 'Check_Add_User_Sponsor_Org_Page'
         And I capture the page screenshot
-        When I click the 'Add_User' button on the 'Check_Add_User_Review_Body_Page'
-        Then I am on the confirmation screen
+        When I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
         And I capture the page screenshot
-        And the add user to review body confirmation page displays the expected guidance text
+        Then I can see the user added successful message on sponsor organisation user list page
+        Then I can see the user list page of the 'sponsor organisation'
 
-    @verifyAddUserReviewbodyConfirmationPageNavigationLinks
+    @verifyAddUserSponsorOrgConfirmationPageNavigationLinks
     Scenario Outline:  Verify the user can navigate away from the add user to review body confirmation page using the available links
         And I fill the search input for searching 'adding users' with 'Existing_QA_User_First_Name' as the search query
         And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
@@ -105,11 +120,11 @@ Feature: User Administration: Manage Review Bodies - Add user to review body
             | Add_Another_User             | Search_Add_User_Review_Body_Page |
             | Back_To_Manage_Review_Bodies | Manage_Review_Bodies_Page        |
 
-    @verifySearchReviewbodyUserListAddedUser
+    @verifySearchSponsorOrgUserListAddedUser
     Scenario Outline: Verify that when a user is added to a review body, that user now appears in the review body users list
         And I fill the search input for searching 'adding users' with '<Search_Query>' as the search query
         And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
-        And I can see that the add users to review body search page contains 'Results'
+        And I can see that the add users to 'review body' search page contains 'Results'
         And I capture the page screenshot
         And I click the 'Add_User' link on the 'Search_Add_User_Review_Body_Page'
         And I can see the check and add user to review body page
@@ -132,11 +147,11 @@ Feature: User Administration: Manage Review Bodies - Add user to review body
             | Existing_QA_User_Last_Name  |
             | Existing_QA_User_Email      |
 
-    @verifySearchForAddedReviewbodyUserNoResults
+    @verifySearchForAddedSponsorOrgUserNoResults
     Scenario Outline: Verify that when a user is added to a review body, that user no longer appears in the add user to review body search
         When I fill the search input for searching 'adding users' with '<Search_Query>' as the search query
         And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
-        And I can see that the add users to review body search page contains 'Results'
+        And I can see that the add users to 'review body' search page contains 'Results'
         And I capture the page screenshot
         And I click the 'Add_User' link on the 'Search_Add_User_Review_Body_Page'
         And I can see the check and add user to review body page
@@ -149,7 +164,7 @@ Feature: User Administration: Manage Review Bodies - Add user to review body
         And I capture the page screenshot
         When I fill the search input for searching 'adding users' with 'Same_Users_Email' as the search query
         And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
-        Then I can see that the add users to review body search page contains 'No_Results'
+        Then I can see that the add users to 'review body' search page contains 'No_Results'
         And I capture the page screenshot
 
         Examples:
@@ -158,7 +173,7 @@ Feature: User Administration: Manage Review Bodies - Add user to review body
             | Existing_QA_User_Last_Name  |
             | Existing_QA_User_Email      |
 
-    @rsp-3890 @addUserReviewbodySearchMultiTerms
+    @rsp-3890 @addUserSponsorOrgSearchMultiTerms
     Scenario Outline: Verify the add user to review body search utilises AND logic to produce accurate search results
         When I fill the search input for searching 'adding users' with '<Initial_Search_Query>' as the search query
         And I capture the page screenshot

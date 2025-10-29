@@ -15,9 +15,9 @@ Feature: User Administration: Manage Review Bodies - Add user to review body
     Scenario Outline: Verify that the search function, for existing users that can be added to the review body, returns expected results
         When I fill the search input for searching 'adding users' with '<Search_Query>' as the search query
         And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
-        Then I can see that the add users to review body search page contains 'Results'
+        Then I can see that the add users to 'review body' search page contains 'Results'
         And I capture the page screenshot
-        And the add users to review body search has returned results with the '<Search_Query>'
+        And the add users to 'review body' search has returned results with the '<Search_Query>'
 
         Examples:
             | Search_Query                |
@@ -30,7 +30,7 @@ Feature: User Administration: Manage Review Bodies - Add user to review body
     Scenario: Verify that the add users to review body search function returns a no results page, when no such user exists
         When I fill the search input for searching 'adding users' with 'Non_Existant_User_Data' as the search query
         And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
-        Then I can see that the add users to review body search page contains 'No_Results'
+        Then I can see that the add users to 'review body' search page contains 'No_Results'
         And I capture the page screenshot
 
     @verifySearchAddUserReviewbodyPageNavigationLinks
@@ -52,7 +52,7 @@ Feature: User Administration: Manage Review Bodies - Add user to review body
     Scenario: Verify the check add user to review body page displays the correct user details
         And I fill the search input for searching 'adding users' with 'Existing_QA_User_First_Name' as the search query
         And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
-        And I can see that the add users to review body search page contains 'Results'
+        And I can see that the add users to 'review body' search page contains 'Results'
         And I capture the page screenshot
         When I click the 'Add_User' link on the 'Search_Add_User_Review_Body_Page'
         Then I can see the check and add user to review body page
@@ -75,7 +75,7 @@ Feature: User Administration: Manage Review Bodies - Add user to review body
     Scenario:  Verify the add user to review body confirmation page displays the expected messaging
         And I fill the search input for searching 'adding users' with 'Existing_QA_User_First_Name' as the search query
         And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
-        And I can see that the add users to review body search page contains 'Results'
+        And I can see that the add users to 'review body' search page contains 'Results'
         And I capture the page screenshot
         And I click the 'Add_User' link on the 'Search_Add_User_Review_Body_Page'
         And I can see the check and add user to review body page
@@ -109,7 +109,7 @@ Feature: User Administration: Manage Review Bodies - Add user to review body
     Scenario Outline: Verify that when a user is added to a review body, that user now appears in the review body users list
         And I fill the search input for searching 'adding users' with '<Search_Query>' as the search query
         And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
-        And I can see that the add users to review body search page contains 'Results'
+        And I can see that the add users to 'review body' search page contains 'Results'
         And I capture the page screenshot
         And I click the 'Add_User' link on the 'Search_Add_User_Review_Body_Page'
         And I can see the check and add user to review body page
@@ -136,7 +136,7 @@ Feature: User Administration: Manage Review Bodies - Add user to review body
     Scenario Outline: Verify that when a user is added to a review body, that user no longer appears in the add user to review body search
         When I fill the search input for searching 'adding users' with '<Search_Query>' as the search query
         And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
-        And I can see that the add users to review body search page contains 'Results'
+        And I can see that the add users to 'review body' search page contains 'Results'
         And I capture the page screenshot
         And I click the 'Add_User' link on the 'Search_Add_User_Review_Body_Page'
         And I can see the check and add user to review body page
@@ -149,7 +149,7 @@ Feature: User Administration: Manage Review Bodies - Add user to review body
         And I capture the page screenshot
         When I fill the search input for searching 'adding users' with 'Same_Users_Email' as the search query
         And I click the 'Search' button on the 'Search_Add_User_Review_Body_Page'
-        Then I can see that the add users to review body search page contains 'No_Results'
+        Then I can see that the add users to 'review body' search page contains 'No_Results'
         And I capture the page screenshot
 
         Examples:
