@@ -350,7 +350,7 @@ export default class ProjectOverviewPage {
       .locator('.govuk-error-message');
     this.date_submitted_to_day_text_chevron = this.page
       .getByRole('heading')
-      .getByText(this.projectOverviewPageTestData.Post_Approval_Tab.date_submitted_label, {
+      .getByText(this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_date_submitted_label, {
         exact: true,
       });
     this.date_submitted_to_date_error = this.page

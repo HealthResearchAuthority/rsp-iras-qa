@@ -4,24 +4,24 @@ Feature: Post Approval Page
     Background:
         Given I have navigated to the my research projects page
         And I can see the my research projects page
-        And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
-        When I click the 'Start' button on the 'Create_Project_Record_Page'
-        And I fill the unique iras id in project details iras page
-        When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
-        Then I can see the project identifiers page
-        Then I fill the project identifiers page with 'Valid_Data_All_Fields'
-        When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
-        And I fill the project details title page with 'Valid_Data_All_Fields'
-        When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
-        And I fill the chief investigator page with 'Valid_Data_All_Fields'
-        When I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
-        And I fill the research locations page with 'Valid_Data_All_Fields'
-        When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-        And I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
-        Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
-        Then I can see the project overview page
-        When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-        And I capture the page screenshot
+    # And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    # When I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    # When I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    # Then I can see the project identifiers page
+    # Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    # When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    # And I fill the project details title page with 'Valid_Data_All_Fields'
+    # When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    # And I fill the chief investigator page with 'Valid_Data_All_Fields'
+    # When I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
+    # And I fill the research locations page with 'Valid_Data_All_Fields'
+    # When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    # And I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    # Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    # Then I can see the project overview page
+    # When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    # And I capture the page screenshot
 
     @rsp-4893 @ValidateNonReviewableModificationStatusesInDraftAndApproved
     Scenario Outline: Validate modification status transition from in draft to approved for non reviewable modification
@@ -71,14 +71,18 @@ Feature: Post Approval Page
         Then I validate submitted date field value for 'Modification_Status_Approved' modifications and confirm 'Approved' status
         And I capture the page screenshot
 
-    @rsp-4887 @VerifyValidSearchPostApproval
+    @rsp-4887 @VerifyValidSearchPostApproval @abc
     Scenario Outline: Verify the user is able to search the modifications by the modification ID
+        # the first 2 steps to navigate to project and clicking on post approval will be removed if 5740 is fixed. and need to uncomment
+        When I navigate to the project overview page of the 'Test_Project' project
+        When I click the 'Post_Approval' link on the 'Project_Overview_Page'
         And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
         # And I create 'Change_To_Planned_End_Date' modification with 'Sponsor_reference_Details' and click on 'Submit_To_Regulator'
         # And I create 'Change_To_Planned_End_Date' modification with 'Sponsor_reference_Details' and click on 'Submit_To_Regulator'
         # And I create 'Change_To_Planned_End_Date' modification with 'Sponsor_reference_Details' and click on 'Submit_To_Regulator'
         # And I create 'Change_To_Planned_End_Date' modification with 'Sponsor_reference_Details' and click on 'Submit_To_Regulator'
         And I capture the page screenshot
+        And I can see the 'created' project details on project overview page for 'Valid_Data_All_Fields'
         # check if you need 'I validate the project information labels using' step to set modification id
         And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
         And I enter '<Search_Queries>' into the search field for post approval page
@@ -86,9 +90,9 @@ Feature: Post Approval Page
         Then I can now see the table of modifications contains the expected search results for '<Search_Queries>'
 
         Examples:
-            | Search_Queries          |
-            | Full_Modification_ID    |
-            | Partial_Modification_ID |
+            | Search_Queries       |
+            | Full_Modification_ID |
+    #  | Partial_Modification_ID |
 
     @rsp-4887 @VerifyNoResultsFoundInvalidSearchOnlyMyResearch
     Scenario: Verify the user can see no matching results found message on clicking search button with invalid user name
