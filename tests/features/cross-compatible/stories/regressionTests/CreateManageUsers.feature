@@ -1,4 +1,4 @@
-@RegressionCreateManageUsers @RegressionManageUsers @SysAdminUser @Regression @BackStage @only
+@RegressionCreateManageUsers @RegressionManageUsers @SysAdminUser @Regression @BackStage
 Feature: User Administration: Create Manage Users
 
     Background:
@@ -11,7 +11,7 @@ Feature: User Administration: Create Manage Users
         And I click the 'Add_New_User_Profile_Record' link on the 'Manage_Users_Page'
         And I can see the add a new user profile page
 
-    @RegressionTestCreateUserEvents @only
+    @RegressionTestCreateUserEvents
     Scenario Outline: Verify the user is able to create new user profiles with various roles like study-wide reviewer or workflow co-ordinator, with an audit history log
         When I fill the new user profile page using '<Add_User_Profile>'
         And I capture the page screenshot

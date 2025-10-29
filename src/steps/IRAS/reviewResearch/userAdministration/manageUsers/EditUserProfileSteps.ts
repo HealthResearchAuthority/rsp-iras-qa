@@ -208,7 +208,7 @@ When(
         }
       }
     }
-    await createUserProfilePage.page.pause();
+    await createUserProfilePage.page.pause(); //remove
   }
 );
 
