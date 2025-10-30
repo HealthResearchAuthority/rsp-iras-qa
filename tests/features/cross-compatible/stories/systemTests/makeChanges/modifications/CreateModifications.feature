@@ -9,15 +9,14 @@ Feature: Create Amendment - Create Modifications
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
     Then I fill the chief investigator page with 'Valid_Data_All_Fields'
     Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    Then I can see the project identifiers page
-    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
     When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
@@ -143,7 +142,7 @@ Feature: Create Amendment - Create Modifications
       | Participating_Organisation | Addition_Of_Participant_Identification_Centres_Option      | Valid_Data_All_Fields | Modifications_Tile      |
       | Participating_Organisation | Early_Closure_Of_Participant_Identification_Centres_Option | Valid_Data_All_Fields | Modifications_Tile      |
 
-  @rsp-4039 @ParticipatingOrganisationSaveLater
+  @rsp-4039 @rsp-4065 @ParticipatingOrganisationSaveLater
   Scenario Outline: Verify that user can save the modifications progress on search participating organisations page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I capture the page screenshot
@@ -155,17 +154,19 @@ Feature: Create Amendment - Create Modifications
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
     Then I can see the participating organisation page
     And I capture the page screenshot
+    And I validate the guidance content displayed on modifications participating organisations page
+    And I capture the page screenshot
     And I click the 'Save_For_Later' button on the 'Participating_Organisations_Page'
     Then I can see the project overview page
     And I capture the page screenshot
     Then I can see the modification progress saved successful message on project overview page
 
     Examples:
-      | Area_Of_Change             | Specific_Change                                            | Modifications_Tile_Link |
-      | Participating_Organisation | Addition_Of_Sites_Option                                   | Modifications_Tile      |
-      | Participating_Organisation | Early_Closure_Withdrawal_Of_Sites_Option                   | Modifications_Tile      |
-      | Participating_Organisation | Addition_Of_Participant_Identification_Centres_Option      | Modifications_Tile      |
-      | Participating_Organisation | Early_Closure_Of_Participant_Identification_Centres_Option | Modifications_Tile      |
+      | Area_Of_Change             | Specific_Change                                            |
+      | Participating_Organisation | Addition_Of_Sites_Option                                   |
+      | Participating_Organisation | Early_Closure_Withdrawal_Of_Sites_Option                   |
+      | Participating_Organisation | Addition_Of_Participant_Identification_Centres_Option      |
+      | Participating_Organisation | Early_Closure_Of_Participant_Identification_Centres_Option |
 
   # The KNOWN_DEFECT-RSP-5007 will be fixed with the new user story RSP-4136 so this scenario can be re-used later
   @rsp-4039 @ParticipatingOrganisationsErrorValidation @KNOWN_DEFECT-RSP-5007 @skip
@@ -207,7 +208,7 @@ Feature: Create Amendment - Create Modifications
     Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
     And I capture the page screenshot
-    Then I can see the review all changes page
+    Then I can see the review all changes modifications page
     And the 'Change' link should be 'available' on the 'Review_All_Changes_Page'
     And the 'Delete_Modification' link should be 'available' on the 'Review_All_Changes_Page'
     And the now sent to sponsor heading and hint text should be 'available' on the review all changes page
@@ -224,13 +225,13 @@ Feature: Create Amendment - Create Modifications
     # work around due to @KNOWN_DEFECT_RSP-5317
     Then I can see the project overview page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I can see the 'Label_Texts_Post_Approval' ui labels on the project overview page
+    And I can see the 'Post_Approval_Tab' ui labels on the project overview page
     And I capture the page screenshot
     #And I can see post approval tab of project overview page
     And I can see the modification send to sponsor is displayed on post approval tab of project overview page with status as 'In sponsor review'
     And I click on the modification id hyperlink in the post approval tab
     And I capture the page screenshot
-    Then I can see the review all changes page
+    Then I can see the review all changes modifications page
     And the 'Change' link should be 'unavailable' on the 'Review_All_Changes_Page'
     And the 'Delete_Modification' link should be 'unavailable' on the 'Review_All_Changes_Page'
     And the 'Send_Modification_To_Sponsor' button should be 'unavailable' on the 'Review_All_Changes_Page'
@@ -263,7 +264,7 @@ Feature: Create Amendment - Create Modifications
     Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
     And I capture the page screenshot
-    Then I can see the review all changes page
+    Then I can see the review all changes modifications page
     And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
     # And I validate the overall ranking of changes displayed for '<Changes>'
     # And I validate the individual ranking of changes displayed for '<Changes>'
@@ -273,7 +274,7 @@ Feature: Create Amendment - Create Modifications
     And I capture the page screenshot
     Then I can see the project overview page
     Then I can see the modification progress saved successful message on project overview page
-    And I can see the 'Label_Texts_Post_Approval' ui labels on the project overview page
+    And I can see the 'Post_Approval_Tab' ui labels on the project overview page
     And I capture the page screenshot
     #And I can see post approval tab of project overview page
     And I can see the modification send to sponsor is displayed on post approval tab of project overview page with status as 'Draft'
@@ -304,7 +305,7 @@ Feature: Create Amendment - Create Modifications
     Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
     And I capture the page screenshot
-    Then I can see the review all changes page
+    Then I can see the review all changes modifications page
     And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
     # And I validate the overall ranking of changes displayed for '<Changes>'
     # And I validate the individual ranking of changes displayed for '<Changes>'
@@ -313,7 +314,7 @@ Feature: Create Amendment - Create Modifications
     And I modify the current changes with '<New_Changes>' for the created modification
     And I capture the page screenshot
     # And I keep note of the individual and overall ranking of changes created using '<New_Changes>'
-    Then I can see the review all changes page
+    Then I can see the review all changes modifications page
     And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
     # And I validate the overall ranking of changes displayed for '<New_Changes>'
     # And I validate the individual ranking of changes displayed for '<New_Changes>'
@@ -322,7 +323,7 @@ Feature: Create Amendment - Create Modifications
     And I modify the current sponsor details with 'Valid_Data_All_Fields_Changes' for the created modification
     And I capture the page screenshot
     # And I keep note of the individual and overall ranking of changes created using '<New_Changes>'
-    Then I can see the review all changes page
+    Then I can see the review all changes modifications page
     And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
     Then I validate sponsor details are displayed with 'Valid_Data_All_Fields_Changes'
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
@@ -333,13 +334,13 @@ Feature: Create Amendment - Create Modifications
     # work around due to @KNOWN_DEFECT_RSP-5317
     Then I can see the project overview page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
-    And I can see the 'Label_Texts_Post_Approval' ui labels on the project overview page
+    And I can see the 'Post_Approval_Tab' ui labels on the project overview page
     And I capture the page screenshot
     #And I can see post approval tab of project overview page
     And I can see the modification send to sponsor is displayed on post approval tab of project overview page with status as 'In sponsor review'
     And I click on the modification id hyperlink in the post approval tab
     And I capture the page screenshot
-    Then I can see the review all changes page
+    Then I can see the review all changes modifications page
     And the 'Change' link should be 'unavailable' on the 'Review_All_Changes_Page'
     And the 'Delete_Modification' link should be 'unavailable' on the 'Review_All_Changes_Page'
     And the 'Send_Modification_To_Sponsor' button should be 'unavailable' on the 'Review_All_Changes_Page'

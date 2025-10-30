@@ -1,6 +1,8 @@
 {
   "Research_Locations_Page": {
-    "heading": "Research locations"
+    "heading": "Research locations",
+    "guidance_header_lead_nation": "Help with lead nation",
+    "guidance_body_lead_nation": "The lead nation is the UK nation that was responsible for conducting the study-wide review. It is the same as the location of the lead NHS/HSC R&D office which is stated on your original application."
   },
   "Label_Texts": {
     "nations_participating_label": "Which nations are participating in your project?",

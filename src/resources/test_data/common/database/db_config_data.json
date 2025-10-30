@@ -1,0 +1,5 @@
+{
+  "Application_Service": "applicationservice",
+  "Identity_Service": "identityservice",
+  "Rts_Service": "rtsservice"
+}
