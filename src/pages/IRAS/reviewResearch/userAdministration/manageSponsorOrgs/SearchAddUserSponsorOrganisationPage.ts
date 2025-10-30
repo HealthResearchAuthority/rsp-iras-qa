@@ -7,10 +7,6 @@ export default class SearchAddUserSponsorOrganisationPage {
   readonly page: Page;
   readonly searchAddUserSonsorOrgPageTestData: typeof searchAddUserSonsorOrgPageTestData;
   readonly linkTextData: typeof linkTextData;
-  private _user_first_name: string;
-  private _user_last_name: string;
-  private _user_email: string;
-  private _user_status: string;
   readonly page_heading: Locator;
   readonly page_description: Locator;
   readonly search_guidance_text: Locator;
@@ -21,10 +17,6 @@ export default class SearchAddUserSponsorOrganisationPage {
     this.page = page;
     this.searchAddUserSonsorOrgPageTestData = searchAddUserSonsorOrgPageTestData;
     this.linkTextData = linkTextData;
-    this._user_first_name = '';
-    this._user_last_name = '';
-    this._user_email = '';
-    this._user_status = '';
 
     //Locators
     this.page_heading = this.page

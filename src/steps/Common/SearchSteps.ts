@@ -79,7 +79,7 @@ Given(
     );
     expect(searchResult).toBeTruthy();
     expect(userListAfterSearch).toHaveLength(searchResult.length);
-    await userListReviewBodyPage.updateUserInfo();
+    await userListReviewBodyPage.updateUserInfo(commonItemsPage);
   }
 );
 

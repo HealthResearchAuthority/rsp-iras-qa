@@ -6,7 +6,7 @@ const { Then, When } = createBdd(test);
 
 Then(
   'I can see the view and edit user profile page of the sponsor organisation',
-  async ({ viewEditUserProfilePage }) => {
+  async ({ viewEditUserProfilePage, commonItemsPage }) => {
     await viewEditUserProfilePage.assertOnViewEditUserProfilePage();
     const userIdStartIndex = viewEditUserProfilePage.page.url().indexOf('=') + 1;
     const userIdEndIndex = viewEditUserProfilePage.page.url().indexOf('&');
@@ -16,13 +16,13 @@ Then(
     await viewEditUserProfilePage.setTitle(
       confirmStringNotNull(await viewEditUserProfilePage.title_value.textContent())
     );
-    await viewEditUserProfilePage.setFirstName(
+    await commonItemsPage.setFirstName(
       confirmStringNotNull(await viewEditUserProfilePage.first_name_value.textContent())
     );
-    await viewEditUserProfilePage.setLastName(
+    await commonItemsPage.setLastName(
       confirmStringNotNull(await viewEditUserProfilePage.last_name_value.textContent())
     );
-    await viewEditUserProfilePage.setEmail(
+    await commonItemsPage.setEmail(
       confirmStringNotNull(await viewEditUserProfilePage.email_address_value.textContent())
     );
     await viewEditUserProfilePage.setTelephone(

@@ -177,6 +177,9 @@ export default class CommonItemsPage {
     this._email_address = '';
     this._status = '';
     this._user_full_name = new Map();
+    this._first_name = '';
+    this._last_name = '';
+    this._email_address = '';
 
     //Locators
     this.showAllSectionsAccordion = page.locator('.govuk-accordion__show-all"');

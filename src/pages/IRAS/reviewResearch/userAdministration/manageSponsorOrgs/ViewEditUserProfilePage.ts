@@ -11,9 +11,6 @@ export default class ViewEditUserProfilePage {
   readonly buttonTextData: typeof buttonTextData;
   private _userid: string;
   private _title: string;
-  private _first_name: string;
-  private _last_name: string;
-  private _email_address: string;
   private _telephone: string;
   private _organisation: string;
   private _job_title: string;
@@ -56,9 +53,7 @@ export default class ViewEditUserProfilePage {
     this.buttonTextData = buttonTextData;
     this._userid = '';
     this._title = '';
-    this._first_name = '';
-    this._last_name = '';
-    this._email_address = '';
+
     this._telephone = '';
     this._organisation = '';
     this._job_title = '';
@@ -181,30 +176,6 @@ export default class ViewEditUserProfilePage {
 
   async setTitle(value: string): Promise<void> {
     this._title = value;
-  }
-
-  async getFirstName(): Promise<string> {
-    return this._first_name;
-  }
-
-  async setFirstName(value: string): Promise<void> {
-    this._first_name = value;
-  }
-
-  async getLastName(): Promise<string> {
-    return this._last_name;
-  }
-
-  async setLastName(value: string): Promise<void> {
-    this._last_name = value;
-  }
-
-  async getEmail(): Promise<string> {
-    return this._email_address;
-  }
-
-  async setEmail(value: string): Promise<void> {
-    this._email_address = value;
   }
 
   async getTelephone(): Promise<string> {

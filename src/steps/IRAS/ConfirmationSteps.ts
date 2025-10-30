@@ -347,9 +347,8 @@ Then(
 
 Then(
   'I validate {string} labels displayed in disable user in sponsor organisation confirmation page using the user name',
-  async ({ confirmationPage, viewEditUserProfilePage }, validationLabelsDatasetName: string) => {
-    const userNameMemory =
-      (await viewEditUserProfilePage.getFirstName()) + ' ' + (await viewEditUserProfilePage.getLastName());
+  async ({ confirmationPage, commonItemsPage }, validationLabelsDatasetName: string) => {
+    const userNameMemory = (await commonItemsPage.getFirstName()) + ' ' + (await commonItemsPage.getLastName());
     const validationLabelsDataset = confirmationPage.confirmationPageTestData[validationLabelsDatasetName];
     const expectedConfirmationHeader = validationLabelsDataset.disable_confirmation_header_label + ' ' + userNameMemory;
     expect
@@ -363,9 +362,8 @@ Then(
 
 Then(
   'I validate {string} labels displayed in enable user in sponsor organisation confirmation page using the user name',
-  async ({ confirmationPage, viewEditUserProfilePage }, validationLabelsDatasetName: string) => {
-    const userNameMemory =
-      (await viewEditUserProfilePage.getFirstName()) + ' ' + (await viewEditUserProfilePage.getLastName());
+  async ({ confirmationPage, commonItemsPage }, validationLabelsDatasetName: string) => {
+    const userNameMemory = (await commonItemsPage.getFirstName()) + ' ' + (await commonItemsPage.getLastName());
     const validationLabelsDataset = confirmationPage.confirmationPageTestData[validationLabelsDatasetName];
     const expectedConfirmationHeader = validationLabelsDataset.enable_confirmation_header_label + ' ' + userNameMemory;
     expect
