@@ -274,6 +274,46 @@ Then(
 );
 
 Then(
+  'I can see the delete project confirmation page based on {string} entered for short project title',
+  async (
+    { confirmationPage, projectDetailsTitlePage, projectDetailsIRASPage },
+    projectDetailsTitlePageDatasetName: string
+  ) => {
+    const projectDetailsTitlePageDataset =
+      projectDetailsTitlePage.projectDetailsTitlePageTestData[projectDetailsTitlePageDatasetName];
+    const validationLabelsDataset = confirmationPage.confirmationPageTestData['Project_Record_Delete_Labels'];
+    const expectedConfirmationHeader =
+      validationLabelsDataset.page_heading_prefix +
+      (projectDetailsTitlePageDataset.short_project_title_text?.trim()
+        ? ' ' + projectDetailsTitlePageDataset.short_project_title_text.trim()
+        : '') +
+      validationLabelsDataset.page_heading_suffix;
+    await expect
+      .soft(confirmationPage.confirmation_header_common_label.getByText(expectedConfirmationHeader, { exact: true }))
+      .toBeVisible();
+    await expect
+      .soft(
+        confirmationPage.page
+          .getByText(validationLabelsDataset.iras_id_label, { exact: true })
+          .locator('..')
+          .getByText(await projectDetailsIRASPage.getUniqueIrasId(), { exact: true })
+      )
+      .toBeVisible();
+    await expect
+      .soft(
+        confirmationPage.page
+          .getByText(validationLabelsDataset.short_project_title_label, { exact: true })
+          .locator('..')
+          .getByText(projectDetailsTitlePageDataset.short_project_title_text, { exact: true })
+      )
+      .toBeVisible();
+    await expect
+      .soft(confirmationPage.page.getByText(validationLabelsDataset.confirmation_body, { exact: true }))
+      .toBeVisible();
+  }
+);
+
+Then(
   'I validate {string} labels displayed in disable sponsor organisation confirmation page using the organisation name',
   async ({ confirmationPage, sponsorOrganisationProfilePage }, validationLabelsDatasetName: string) => {
     const organisationNameMemory = await sponsorOrganisationProfilePage.getOrgName();

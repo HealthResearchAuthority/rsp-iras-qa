@@ -62,6 +62,13 @@
     "what_happens_next_label": "What happens next",
     "page_guidance_text": "You've sent your modification to the sponsor. They'll either accept the changes and submit it, or contact you for more information."
   },
+  "Project_Record_Delete_Labels": {
+    "page_heading_prefix": "Are you sure you want to delete project",
+    "page_heading_suffix": "?",
+    "iras_id_label": "IRAS ID",
+    "short_project_title_label": "Short project title",
+    "confirmation_body": "Deleting a project cannot be undone."
+  },
   "add_remove_user_review_Body_confirmation_success_header_label": "User has been successfully",
   "enable_disable_confirmation_header_label": "Confirm that you want to",
   "disable_success_confirmation_header_label": "successfully disabled",
