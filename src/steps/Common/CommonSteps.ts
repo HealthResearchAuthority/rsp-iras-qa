@@ -82,7 +82,7 @@ When(
         await manageUsersPage.assertOnManageUsersPage();
         break;
       case 'Review_Body_User_List_Page':
-        await userListReviewBodyPage.assertOnUserListReviewBodyPage();
+        await userListReviewBodyPage.assertOnUserListReviewBodyPage(commonItemsPage);
         break;
       case 'Search_Add_User_Review_Body_Page':
         await searchAddUserReviewBodyPage.assertOnSearchAddUserReviewBodyPage();
@@ -131,7 +131,7 @@ When(
         await viewEditUserProfilePage.assertOnViewEditUserProfilePage();
         break;
       case 'Sponsor_Org_User_List_Page':
-        await userListSponsorOrganisationPage.assertOnUserListSponsorOrgPage();
+        await userListSponsorOrganisationPage.assertOnUserListSponsorOrgPage(commonItemsPage);
         break;
       case 'Access_Denied_Page':
         await accessDeniedPage.assertOnAccessDeniedPage();
@@ -740,7 +740,7 @@ When(
         );
       } else if (fieldKey === 'Full_Name') {
         await userListReviewBodyPage.setSearchQueryFullNameByPosition(position, fieldKey, commonItemsPage);
-        searchKey = await userListReviewBodyPage.getSearchQueryFullName(position);
+        searchKey = await userListReviewBodyPage.getSearchQueryFullName(position, commonItemsPage);
       } else if (fieldKey === 'Organisation_Name') {
         const orgList = await manageReviewBodiesPage.getReviewBodyListByPosition(position, commonItemsPage);
         await manageReviewBodiesPage.setOrgName(orgList.get('orgNameValues'));
@@ -756,11 +756,11 @@ When(
 
 When(
   'I enter the {string} as the search query into the search field',
-  async ({ userListReviewBodyPage, commonItemsPage }, searchKey: string) => {
+  async ({ commonItemsPage }, searchKey: string) => {
     if ((await commonItemsPage.tableBodyRows.count()) >= 1) {
       const userListBeforeSearch = await commonItemsPage.getAllUsersFromTheTable();
       const userValues: string[] = confirmArrayNotNull(userListBeforeSearch.get('searchResultValues'));
-      await userListReviewBodyPage.setUserListBeforeSearch(userValues);
+      await commonItemsPage.setUserListBeforeSearch(userValues);
       await commonItemsPage.setSearchKey(searchKey);
       await commonItemsPage.search_text.fill(searchKey);
     } else {
@@ -1457,16 +1457,16 @@ When(
   'I enter the {string} of the {string} user shown on the current {string} users list, into the search field',
   async ({ userListReviewBodyPage, commonItemsPage }, fieldKey: string, position: string, orgType: string) => {
     if (orgType === 'review body' || orgType === 'sponsor organisation') {
-      if ((await userListReviewBodyPage.userListTableRows.count()) >= 2) {
+      if ((await commonItemsPage.userListTableRows.count()) >= 2) {
         let searchKey: string = '';
         if (fieldKey === 'First_Name' || fieldKey === 'Last_Name' || fieldKey === 'Email_Address') {
-          searchKey = await userListReviewBodyPage.getSearchQueryFNameLNameEmail(position, fieldKey);
+          searchKey = await userListReviewBodyPage.getSearchQueryFNameLNameEmail(position, fieldKey, commonItemsPage);
         } else if (fieldKey === 'Full_Name') {
-          searchKey = await userListReviewBodyPage.getSearchQueryFullName(position);
+          searchKey = await userListReviewBodyPage.getSearchQueryFullName(position, commonItemsPage);
         }
         const userListBeforeSearch = await commonItemsPage.getAllUsersFromTheTable();
         const userValues: any = userListBeforeSearch.get('searchResultValues');
-        await userListReviewBodyPage.setUserListBeforeSearch(userValues);
+        await commonItemsPage.setUserListBeforeSearch(userValues);
         await commonItemsPage.setSearchKey(searchKey);
         commonItemsPage.search_text.fill(searchKey);
       } else {
@@ -1489,30 +1489,30 @@ Then(
     orgType: string
   ) => {
     if (orgType === 'review body') {
-      await userListReviewBodyPage.assertOnUserListReviewBodyPage();
+      await userListReviewBodyPage.assertOnUserListReviewBodyPage(commonItemsPage);
       const organisationName = await reviewBodyProfilePage.getOrgName();
       await expect(userListReviewBodyPage.page_heading).toHaveText(
         userListReviewBodyPage.userListReviewBodyPageTestData.Review_Body_User_List_Page.page_heading + organisationName
       );
     } else if (orgType === 'sponsor organisation') {
-      await userListSponsorOrganisationPage.assertOnUserListSponsorOrgPage();
+      await userListSponsorOrganisationPage.assertOnUserListSponsorOrgPage(commonItemsPage);
       const organisationName = await sponsorOrganisationProfilePage.getOrgName();
       await expect(userListSponsorOrganisationPage.page_heading).toHaveText(
         userListSponsorOrganisationPage.userListSponsorOrgPageTestData.Sponsor_Organisation_User_List_Page
           .heading_prefix_label + organisationName
       );
     }
-    if ((await userListReviewBodyPage.userListTableRows.count()) >= 2) {
+    if ((await commonItemsPage.userListTableRows.count()) >= 2) {
       const userList = await commonItemsPage.getUsers();
       const emailAddress: any = userList.get('emailAddressValues');
-      await userListReviewBodyPage.setUserEmail(emailAddress);
+      await commonItemsPage.setUserEmail(emailAddress);
       const firstName: any = userList.get('firstNameValues');
-      await userListReviewBodyPage.setUserFirstName(firstName);
+      await commonItemsPage.setUserFirstName(firstName);
       const lastName: any = userList.get('lastNameValues');
-      await userListReviewBodyPage.setUserLastName(lastName);
-      await userListReviewBodyPage.setFirstName(firstName[0]);
-      await userListReviewBodyPage.setLastName(lastName[0]);
-      await userListReviewBodyPage.setEmail(emailAddress[0]);
+      await commonItemsPage.setUserLastName(lastName);
+      await commonItemsPage.setFirstName(firstName[0]);
+      await commonItemsPage.setLastName(lastName[0]);
+      await commonItemsPage.setEmail(emailAddress[0]);
       if (await commonItemsPage.firstPage.isVisible()) {
         await commonItemsPage.firstPage.click();
       }
@@ -1522,23 +1522,23 @@ Then(
 
 Then(
   'I can see no users in the {string} with a message to add users to the {string}',
-  async ({ userListReviewBodyPage }, orgTypeValOne: string, orgTypeValTwo: string) => {
+  async ({ commonItemsPage }, orgTypeValOne: string, orgTypeValTwo: string) => {
     if (
       (orgTypeValOne && orgTypeValTwo) === 'review body' ||
       (orgTypeValOne && orgTypeValTwo) === 'sponsor organisation'
     ) {
-      expect(await userListReviewBodyPage.userListTableRows.count()).toBe(0);
+      expect(await commonItemsPage.userListTableRows.count()).toBe(0);
     }
   }
 );
 
 Then(
   'I can see the user list of the selected {string} is sorted by default in the alphabetical order of the {string}',
-  async ({ userListReviewBodyPage }, orgType: string, sortField: string) => {
+  async ({ commonItemsPage }, orgType: string, sortField: string) => {
     let firstNameValues: any;
     if (orgType === 'review body' || orgType === 'sponsor organisation') {
       if (sortField.toLowerCase() === 'first name') {
-        firstNameValues = await userListReviewBodyPage.getUserFirstName();
+        firstNameValues = await commonItemsPage.getUserFirstName();
       } else {
         throw new Error(`${sortField} is not a valid option`);
       }
@@ -1742,19 +1742,19 @@ When(
 
 Given(
   'I see that the newly added user appears in the user list page for the {string}',
-  async ({ searchAddUserReviewBodyPage, userListReviewBodyPage }, orgType: string) => {
+  async ({ searchAddUserReviewBodyPage, commonItemsPage }, orgType: string) => {
     if (orgType === 'review body' || orgType === 'sponsor organisation') {
-      await expect(userListReviewBodyPage.userListTableBodyRows).toHaveCount(1);
-      await expect(userListReviewBodyPage.first_name_value_first_row).toHaveText(
+      await expect(commonItemsPage.userListTableBodyRows).toHaveCount(1);
+      await expect(commonItemsPage.first_name_value_first_row).toHaveText(
         await searchAddUserReviewBodyPage.getUserFirstName()
       );
-      await expect(userListReviewBodyPage.last_name_value_first_row).toHaveText(
+      await expect(commonItemsPage.last_name_value_first_row).toHaveText(
         await searchAddUserReviewBodyPage.getUserLastName()
       );
-      await expect(userListReviewBodyPage.email_address_value_first_row).toHaveText(
+      await expect(commonItemsPage.email_address_value_first_row).toHaveText(
         await searchAddUserReviewBodyPage.getUserEmail()
       );
-      await expect(userListReviewBodyPage.status_value_first_row).toHaveText(
+      await expect(commonItemsPage.status_value_first_row).toHaveText(
         await searchAddUserReviewBodyPage.getUserStatus()
       );
     }

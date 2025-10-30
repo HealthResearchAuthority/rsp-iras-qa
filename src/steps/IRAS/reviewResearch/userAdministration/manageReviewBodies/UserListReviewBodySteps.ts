@@ -5,17 +5,17 @@ const { When, Then } = createBdd(test);
 
 When(
   'I navigate to the user list page of the {string} review body',
-  async ({ userListReviewBodyPage }, revBodyName: string) => {
+  async ({ userListReviewBodyPage, commonItemsPage }, revBodyName: string) => {
     const reviewBodyId = userListReviewBodyPage.userListReviewBodyPageTestData.Review_Body_Ids[revBodyName];
     userListReviewBodyPage.goto(reviewBodyId);
-    userListReviewBodyPage.assertOnUserListReviewBodyPage();
+    userListReviewBodyPage.assertOnUserListReviewBodyPage(commonItemsPage);
   }
 );
 
 Then(
   'the system displays search results matching the search criteria',
   async ({ userListReviewBodyPage, commonItemsPage }) => {
-    const userValues = await userListReviewBodyPage.getUserListBeforeSearch();
+    const userValues = await commonItemsPage.getUserListBeforeSearch();
     const searchKey = await commonItemsPage.getSearchKey();
     const searchTerms = await commonItemsPage.splitSearchTerm(searchKey);
     const filteredSearchResults = await commonItemsPage.filterResults(userValues, searchTerms);
@@ -27,7 +27,7 @@ Then(
       searchTerms
     );
     expect.soft(searchResult).toBeTruthy();
-    await userListReviewBodyPage.updateUserInfo();
+    await userListReviewBodyPage.updateUserInfo(commonItemsPage);
   }
 );
 
@@ -42,8 +42,8 @@ When(
 
 Then(
   'the system displays no results found message in the user list page of the review body',
-  async ({ userListReviewBodyPage, reviewBodyProfilePage }) => {
-    await userListReviewBodyPage.assertOnUserListReviewBodyPage();
+  async ({ userListReviewBodyPage, reviewBodyProfilePage, commonItemsPage }) => {
+    await userListReviewBodyPage.assertOnUserListReviewBodyPage(commonItemsPage);
     const organisationName = await reviewBodyProfilePage.getOrgName();
     await expect(userListReviewBodyPage.page_heading).toHaveText(
       userListReviewBodyPage.userListReviewBodyPageTestData.Review_Body_User_List_Page.page_heading + organisationName
@@ -54,8 +54,8 @@ Then(
     await expect(userListReviewBodyPage.no_results_guidance_text).toHaveText(
       userListReviewBodyPage.userListReviewBodyPageTestData.Review_Body_User_List_Page.no_results_guidance_text
     );
-    expect(await userListReviewBodyPage.userListTableRows.count()).toBe(0);
-    await expect(userListReviewBodyPage.back_to_users_link).toHaveText(
+    expect(await commonItemsPage.userListTableRows.count()).toBe(0);
+    await expect(commonItemsPage.back_to_users_link).toHaveText(
       userListReviewBodyPage.userListReviewBodyPageTestData.Review_Body_User_List_Page.back_to_users_link +
         organisationName
     );
@@ -84,14 +84,14 @@ Then(
 
 When(
   'I capture the name of the newly added user in the user list page of the review body',
-  async ({ createUserProfilePage, userListReviewBodyPage, commonItemsPage }) => {
+  async ({ createUserProfilePage, commonItemsPage }) => {
     if ((await commonItemsPage.tableBodyRows.count()) >= 1) {
       if (await commonItemsPage.firstPage.isVisible()) {
         await commonItemsPage.firstPage.click();
       }
       const userListBeforeSearch = await commonItemsPage.getAllUsersFromTheTable();
       const userValues: string[] = confirmArrayNotNull(userListBeforeSearch.get('searchResultValues'));
-      await userListReviewBodyPage.setUserListBeforeSearch(userValues);
+      await commonItemsPage.setUserListBeforeSearch(userValues);
       await commonItemsPage.setSearchKey(await createUserProfilePage.getUniqueEmail());
     } else {
       throw new Error(`There are no items in list to search`);
