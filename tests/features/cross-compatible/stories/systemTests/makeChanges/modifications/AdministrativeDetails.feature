@@ -187,18 +187,18 @@ Feature: Create Amendment - Create Modifications for administrative details for 
     When I click the 'Save_Continue' button on the 'Project_Identification_SelectReference_To_Change_Page'
     Then I can see the project identification enter reference modification page
     And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    Then I can validate the ui labels on project identification enter reference numbers page using '<Label_Text_Data>' dataset
     When I click the 'Save_For_Later' button on the 'Project_Identification_Enter_Reference_Numbers_Page'
     Then I can see the project overview page
     And I capture the page screenshot
     Then I can see the modification progress saved successful message on project overview page
 
     Examples:
-      | Changes                                                  | Area_Of_Change                         | Specific_Change        | Project_Details_Title |
-      | Modification_To_Add_Administrative_Details_Single_Change | Administrative_Details_For_The_Project | Project_Identification | Valid_Data_All_Fields |
+      | Changes                                                  | Area_Of_Change                         | Specific_Change        | Project_Details_Title | Label_Text_Data |
+      | Modification_To_Add_Administrative_Details_Single_Change | Administrative_Details_For_The_Project | Project_Identification | Valid_Data_All_Fields | Label_Texts     |
 
-
-  @rsp-4094 @rsp-4095 @ModificationsErrorValidationForInvalidReferenceNumbersAndProjectTitles
-  Scenario Outline: Validate error message for invalid reference numbers and project titles on project identification enter reference and title page
+  @rsp-4094 @rsp-4095 @ModificationsErrorValidationForInvalidReferenceNumbers
+  Scenario Outline: Validate error message for invalid reference numbers on project identification page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     Then I can see the review your answers page
@@ -232,4 +232,35 @@ Feature: Create Amendment - Create Modifications for administrative details for 
     Examples:
       | Changes                                                                   | Field_And_Summary_Error_Message                       | Area_Of_Change                         | Specific_Change        |
       | Modification_To_Add_Administrative_Details_Invalid_Data_Reference_Numbers | Field_Summary_Error_Message_Invalid_Project_Reference | Administrative_Details_For_The_Project | Project_Identification |
-      | Modification_To_Add_Administrative_Details_Invalid_Data_Titles            | Field_Summary_Error_Message_Invalid_Project_Titles    | Administrative_Details_For_The_Project | Project_Identification |
+
+  @rsp-4094 @rsp-4095 @ModificationsErrorValidationInvalidProjectTitles
+  Scenario Outline: Validate error message for invalid project titles on project identificationpage
+    Then I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I capture the page screenshot
+    And I select '<Area_Of_Change>' from area of change dropdown and '<Specific_Change>' from specific change dropdown
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+    Then I can see the project identification select change modification page
+    And I capture the page screenshot
+    And I fill the project identification select change modification page using '<Changes>' dataset
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Project_Identification_Select_Change_Page'
+    Then I can see the project identification enter reference modification page
+    And I fill the project identification enter reference modification page using '<Changes>' dataset
+    When I click the 'Save_Continue' button on the 'Project_Identification_Enter_Reference_Numbers_Page'
+    And I capture the page screenshot
+    Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Project_Identification_Enter_Reference_Numbers_Page'
+
+    Examples:
+      | Changes                                                        | Field_And_Summary_Error_Message                    | Area_Of_Change                         | Specific_Change        |
+      | Modification_To_Add_Administrative_Details_Invalid_Data_Titles | Field_Summary_Error_Message_Invalid_Project_Titles | Administrative_Details_For_The_Project | Project_Identification |

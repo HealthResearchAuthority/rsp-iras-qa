@@ -11,6 +11,15 @@
     "new_short_project_title_textbox_label": "New short project title",
     "new_full_project_title_textbox_label": "New full project title"
   },
+  "Label_Texts": {
+    "enter_reference_numbers_hint_label": "Enter reference numbers for your project. If any of these don't apply to your project you can leave them blank.",
+    "isrctn_reference_number_textbox_hint_label": "Enter a reference with the format ISRCTN followed by 8 numbers, for example ISRCTN12345678",
+    "nct_reference_number_textbox_hint_label": "Enter a reference with the format NCT followed by 8 numbers, for example NCT12345678",
+    "funder_name_textbox_hint_label": "Enter the name of the organisation responsible for funding all or part of this project",
+    "funder_reference_number_textbox_hint_label": "Enter the reference number provided by the funder",
+    "other_reference_number_textbox_hint_label": "If your project has another type of reference, enter the name or a description of it here",
+    "what_other_is_textbox_hint_label": "If your project has another type of reference, enter the number here"
+  },
   "Modification_To_Add_Administrative_Details_Single_Change": {
     "area_of_change_dropdown": "Administrative details for the project",
     "specific_change_dropdown": "Project identification",
@@ -34,30 +43,32 @@
     "Project_Reference": {
       "isrctn_reference_number_textbox": "Invalid",
       "nct_reference_number_textbox": "Invalid",
-      "funder_name_textbox": "",
-      "funder_reference_number_textbox": "",
-      "other_reference_number_textbox": "",
-      "what_other_is_textbox": ""
+      "funder_name_textbox": "This is a sample input text used to validate maximum allowed field length of exactly 101 characters!.",
+      "funder_reference_number_textbox": "65785484558559484345333444",
+      "other_reference_number_textbox": "78588874688367578378474784",
+      "what_other_is_textbox": "This is a sample input text used to validate maximum allowed field length of exactly 101 characters!."
     }
   },
   "Field_Summary_Error_Message_Invalid_Project_Reference": {
-    "isrctn_reference_number_textbox": "Enter a value with this format ISRCTNxxxxxxxx where x are digits",
-    "nct_reference_number_textbox": "Enter a value with the format NCTxxxxxxxx where x are digits"
+    "isrctn_reference_number_textbox": "Enter an ISRCTN number in the correct format",
+    "nct_reference_number_textbox": "Enter an NCT number in the correct format",
+    "funder_name_textbox": "Funder name must be 100 characters or less",
+    "funder_reference_number_textbox": "Funder reference number must be 25 characters or less",
+    "other_reference_number_textbox": "Other reference number must be 25 characters or less",
+    "what_other_is_textbox": "What 'other' is must be 100 characters or less"
   },
+
   "Modification_To_Add_Administrative_Details_Invalid_Data_Titles": {
-    "Project_Identification_Project_Titles": {
-      "area_of_change_dropdown": "Administrative details for the project",
-      "specific_change_dropdown": "Project identification",
-      "title_radio": "Title",
-      "change_status": "Change ready for submission",
-      "Project_Reference": {
-        "new_short_project_title_text": "QA_Automation - Max short study title length one two three four five six seven eight nine ten one END",
-        "new_full_project_title_text": "QA_Automation - Max full study title length one two three four five six seven eight nine ten one  END"
-      }
+    "area_of_change_dropdown": "Administrative details for the project",
+    "specific_change_dropdown": "Project identification",
+    "title_radio": "Title",
+    "Project_Reference": {
+      "new_short_project_title_text": "QA_Automation - Max short study title length one two three four five six seven eight nine ten one END",
+      "new_full_project_title_text": "QA_Automation - Max full study title length one two three four five six seven eight nine ten one  END"
     }
   },
   "Field_Summary_Error_Message_Invalid_Project_Titles": {
-    "new_short_project_title_text": "Short project title must not contain more than XX characters",
-    "new_full_project_title_text": "Short project title must not contain more than XX characters"
+    "new_short_project_title_text": "Short project title must be between 3 to 100 characters",
+    "new_full_project_title_text": "Full project title must be 2000 characters or less"
   }
 }

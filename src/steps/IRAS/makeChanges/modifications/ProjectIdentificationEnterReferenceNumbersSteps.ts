@@ -40,3 +40,19 @@ Then(
     }
   }
 );
+
+Then(
+  'I can validate the ui labels on project identification enter reference numbers page using {string} dataset',
+  async ({ commonItemsPage, projectIdentificationEnterReferenceNumbersPage }, datasetName: string) => {
+    const dataset =
+      projectIdentificationEnterReferenceNumbersPage.projectIdentificationEnterReferenceNumbersPageTestData[
+        datasetName
+      ];
+    for (const key in dataset) {
+      if (Object.hasOwn(dataset, key)) {
+        const labelValue = await commonItemsPage.getUiLabel(key, projectIdentificationEnterReferenceNumbersPage);
+        expect.soft(labelValue).toBe(dataset[key]);
+      }
+    }
+  }
+);

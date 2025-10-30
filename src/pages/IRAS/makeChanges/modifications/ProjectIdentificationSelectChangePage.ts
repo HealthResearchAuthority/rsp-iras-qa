@@ -30,7 +30,7 @@ export default class ProjectIdentificationSelectChangePage {
       .getByTestId('IQA0830_OPT0440');
     this.title_radio = this.page
       .getByText(
-        projectIdentificationSelectChangePageTestData.Project_Identification_Select_Change_Page.title_radio_label
+        projectIdentificationSelectChangePageTestData.Project_Identification_Select_Change_Page.select_change_label
       )
       .locator('..')
       .getByTestId('IQA0830_OPT0451');

@@ -16,6 +16,13 @@ export default class ProjectIdentificationEnterReferenceNumbersPage {
   readonly current_short_project_title_label: Locator;
   readonly new_short_project_title_text: Locator;
   readonly new_full_project_title_text: Locator;
+  readonly enter_reference_numbers_hint_label: Locator;
+  readonly isrctn_reference_number_textbox_hint_label: Locator;
+  readonly nct_reference_number_textbox_hint_label: Locator;
+  readonly funder_name_textbox_hint_label: Locator;
+  readonly funder_reference_number_textbox_hint_label: Locator;
+  readonly other_reference_number_textbox_hint_label: Locator;
+  readonly what_other_is_textbox_hint_label: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -28,6 +35,34 @@ export default class ProjectIdentificationEnterReferenceNumbersPage {
       name: projectIdentificationEnterReferenceNumbersPageTestData.Project_Identification_Enter_Reference_Numbers_Page
         .heading_label,
     });
+
+    this.enter_reference_numbers_hint_label = this.page.getByText(
+      projectIdentificationEnterReferenceNumbersPageTestData.Label_Texts.enter_reference_numbers_hint_label
+    );
+
+    this.isrctn_reference_number_textbox_hint_label = this.page.getByText(
+      projectIdentificationEnterReferenceNumbersPageTestData.Label_Texts.isrctn_reference_number_textbox_hint_label
+    );
+
+    this.nct_reference_number_textbox_hint_label = this.page.getByText(
+      projectIdentificationEnterReferenceNumbersPageTestData.Label_Texts.nct_reference_number_textbox_hint_label
+    );
+
+    this.funder_name_textbox_hint_label = this.page.getByText(
+      projectIdentificationEnterReferenceNumbersPageTestData.Label_Texts.funder_name_textbox_hint_label
+    );
+
+    this.funder_reference_number_textbox_hint_label = this.page.getByText(
+      projectIdentificationEnterReferenceNumbersPageTestData.Label_Texts.funder_reference_number_textbox_hint_label
+    );
+
+    this.other_reference_number_textbox_hint_label = this.page.getByText(
+      projectIdentificationEnterReferenceNumbersPageTestData.Label_Texts.other_reference_number_textbox_hint_label
+    );
+
+    this.what_other_is_textbox_hint_label = this.page.getByText(
+      projectIdentificationEnterReferenceNumbersPageTestData.Label_Texts.what_other_is_textbox_hint_label
+    );
 
     this.isrctn_reference_number_textbox = this.page
       .getByText(
