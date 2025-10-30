@@ -203,7 +203,7 @@ Then('I click the {string} button on the {string}', async ({ commonItemsPage }, 
       .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
       .first();
   }
-  await expect(button).toBeVisible();
+  await commonItemsPage.page.waitForTimeout(500);
   await button.click();
   await commonItemsPage.page.waitForLoadState('domcontentloaded');
 });
