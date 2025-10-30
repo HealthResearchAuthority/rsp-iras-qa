@@ -531,7 +531,7 @@ export async function generateTimeStampedValue(keyVal: string, separator: string
 
 export async function getTimeFormatted(dateTimeStamp?: Date): Promise<string> {
   let date: Date;
-  if (typeof dateTimeStamp !== 'undefined') {
+  if (dateTimeStamp !== undefined) {
     date = new Date(dateTimeStamp);
   } else {
     date = new Date();
