@@ -1,4 +1,4 @@
-@ProfileManagement @CompleteProfile @ApplicantUser @OneLoginUser @SystemTest @Smoke @only
+@ProfileManagement @CompleteProfile @ApplicantUser @OneLoginUser @SystemTest
 Feature: Profile Management: Provide new users with the ability to create their profile on the system
     As a user
     I want to be able to complete my profile details
