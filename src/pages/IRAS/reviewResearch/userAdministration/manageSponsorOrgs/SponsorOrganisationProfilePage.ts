@@ -11,15 +11,8 @@ export default class SponsorOrganisationProfilePage {
   readonly linkTextData: typeof linkTextData;
   private _org_name: string;
   private _countries: string[];
-  private _email_address: string;
-  private _description: string;
-  private _new_org_name: string;
-  private _new_countries: string[];
-  private _new_email_address: string;
-  private _new_description: string;
   private _last_updated_date: string;
   private _updated_time: string;
-  private _review_body_id: string;
   readonly back_link: Locator;
   readonly page_heading: Locator;
   readonly row_value_locator: Locator;
@@ -56,15 +49,7 @@ export default class SponsorOrganisationProfilePage {
     this.linkTextData = linkTextData;
     this._org_name = '';
     this._countries = [];
-    this._email_address = '';
-    this._description = '';
     this._last_updated_date = '';
-    this._new_org_name = '';
-    this._new_countries = [];
-    this._new_email_address = '';
-    this._new_description = '';
-    this._last_updated_date = '';
-    this._review_body_id = '';
     this._updated_time = '';
 
     //Locators
@@ -173,67 +158,12 @@ export default class SponsorOrganisationProfilePage {
     this._countries = value;
   }
 
-  async getEmail(): Promise<string> {
-    return this._email_address;
-  }
-
-  async setEmail(value: string): Promise<void> {
-    this._email_address = value;
-  }
-
-  async getDescription(): Promise<string> {
-    return this._description;
-  }
-
-  async setDescription(value: string): Promise<void> {
-    this._description = value;
-  }
-  async getNewOrgName(): Promise<string> {
-    return this._new_org_name;
-  }
-
-  async setNewOrgName(value: string): Promise<void> {
-    this._new_org_name = value;
-  }
-
-  async getNewCountries(): Promise<string[]> {
-    return this._new_countries;
-  }
-
-  async setNewCountries(value: string[]): Promise<void> {
-    this._new_countries = value;
-  }
-
-  async getNewEmail(): Promise<string> {
-    return this._new_email_address;
-  }
-
-  async setNewEmail(value: string): Promise<void> {
-    this._new_email_address = value;
-  }
-
-  async getNewDescription(): Promise<string> {
-    return this._new_description;
-  }
-
-  async setNewDescription(value: string): Promise<void> {
-    this._new_description = value;
-  }
-
   async getLastUpdatedDate(): Promise<string> {
     return this._last_updated_date;
   }
 
   async setLastUpdatedDate(value: string): Promise<void> {
     this._last_updated_date = value;
-  }
-
-  async getReviewBodyId(): Promise<string> {
-    return this._review_body_id;
-  }
-
-  async setReviewBodyId(value: string): Promise<void> {
-    this._review_body_id = value;
   }
 
   async getUpdatedTime(): Promise<string> {

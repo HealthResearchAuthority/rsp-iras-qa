@@ -111,11 +111,15 @@ Then(
       await expect.soft(requestResponse).toBeOK();
       const receivedJson = await requestResponse.json();
 
-      if (receivedJson.entry !== undefined) {
+      if (receivedJson.entry === undefined) {
+        return;
+      } else {
         for (const element of receivedJson.entry) {
           const organisationRoles = element.resource.extension;
           for (const organisationRole of organisationRoles) {
-            if (typeof organisationRole.extension !== 'undefined') {
+            if (organisationRole.extension === undefined) {
+              continue;
+            } else {
               const extensions = organisationRole.extension;
               if (
                 extensions[0].valueString === role &&
@@ -129,10 +133,7 @@ Then(
             }
           }
         }
-      } else {
-        break;
       }
-
       offsetCount += 1000;
     }
   }

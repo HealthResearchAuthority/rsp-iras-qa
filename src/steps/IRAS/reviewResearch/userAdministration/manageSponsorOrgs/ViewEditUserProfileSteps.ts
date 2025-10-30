@@ -39,7 +39,11 @@ Then(
         confirmStringNotNull(await viewEditUserProfilePage.role_value.textContent()).split(', ')
       );
       const actualValues = confirmStringNotNull(await viewEditUserProfilePage.role_value.textContent());
-      expect.soft(actualValues).toContain('Sponsor');
+      expect
+        .soft(actualValues)
+        .toContain(
+          viewEditUserProfilePage.viewEditUserProfilePageTestData.View_And_Edit_User_Profile_Page.sponsor_role_value
+        );
     }
   }
 );
