@@ -531,10 +531,10 @@ export async function generateTimeStampedValue(keyVal: string, separator: string
 
 export async function getTimeFormatted(dateTimeStamp?: Date): Promise<string> {
   let date: Date;
-  if (dateTimeStamp !== undefined) {
-    date = new Date(dateTimeStamp);
-  } else {
+  if (!dateTimeStamp) {
     date = new Date();
+  } else {
+    date = new Date(dateTimeStamp);
   }
   const utcDay = date.getUTCDate().toString().padStart(2, '0');
   const utcMonth = date.toLocaleString('en-GB', { month: 'short', timeZone: 'UTC' }).slice(0, 3);
