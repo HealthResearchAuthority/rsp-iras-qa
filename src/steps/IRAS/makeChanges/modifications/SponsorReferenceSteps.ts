@@ -7,6 +7,10 @@ Then('I can see the add sponsor reference page', async ({ sponsorReferencePage }
   await sponsorReferencePage.assertOnSponsorReferencePage();
 });
 
+Then('I can see the review all changes modifications page', async ({ sponsorReferencePage }) => {
+  await sponsorReferencePage.assertOnReviewAllChangesPage();
+});
+
 Then(
   'I can see the {string} ui labels on the sponsor reference modifications page',
   async ({ commonItemsPage, sponsorReferencePage }, datasetName: string) => {
@@ -14,7 +18,7 @@ Then(
     for (const key in dataset) {
       if (Object.hasOwn(dataset, key)) {
         const labelVal = await commonItemsPage.getUiLabel(key, sponsorReferencePage);
-        expect(labelVal).toBe(dataset[key]);
+        expect.soft(labelVal).toBe(dataset[key]);
       }
     }
   }
