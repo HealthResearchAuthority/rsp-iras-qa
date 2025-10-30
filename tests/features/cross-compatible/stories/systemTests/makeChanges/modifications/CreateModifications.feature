@@ -9,15 +9,14 @@ Feature: Create Amendment - Create Modifications
     And I fill the unique iras id in project details iras page
     And I capture the page screenshot
     And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     And I fill the project details title page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
     Then I fill the chief investigator page with 'Valid_Data_All_Fields'
     Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
-    Then I can see the project identifiers page
-    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
-    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
     Then I can see the review your answers page
     And I capture the page screenshot
     When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
@@ -143,7 +142,7 @@ Feature: Create Amendment - Create Modifications
       | Participating_Organisation | Addition_Of_Participant_Identification_Centres_Option      | Valid_Data_All_Fields | Modifications_Tile      |
       | Participating_Organisation | Early_Closure_Of_Participant_Identification_Centres_Option | Valid_Data_All_Fields | Modifications_Tile      |
 
-  @rsp-4039 @ParticipatingOrganisationSaveLater
+  @rsp-4039 @rsp-4065 @ParticipatingOrganisationSaveLater
   Scenario Outline: Verify that user can save the modifications progress on search participating organisations page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
     And I capture the page screenshot
@@ -155,17 +154,19 @@ Feature: Create Amendment - Create Modifications
     When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
     Then I can see the participating organisation page
     And I capture the page screenshot
+    And I validate the guidance content displayed on modifications participating organisations page
+    And I capture the page screenshot
     And I click the 'Save_For_Later' button on the 'Participating_Organisations_Page'
     Then I can see the project overview page
     And I capture the page screenshot
     Then I can see the modification progress saved successful message on project overview page
 
     Examples:
-      | Area_Of_Change             | Specific_Change                                            | Modifications_Tile_Link |
-      | Participating_Organisation | Addition_Of_Sites_Option                                   | Modifications_Tile      |
-      | Participating_Organisation | Early_Closure_Withdrawal_Of_Sites_Option                   | Modifications_Tile      |
-      | Participating_Organisation | Addition_Of_Participant_Identification_Centres_Option      | Modifications_Tile      |
-      | Participating_Organisation | Early_Closure_Of_Participant_Identification_Centres_Option | Modifications_Tile      |
+      | Area_Of_Change             | Specific_Change                                            |
+      | Participating_Organisation | Addition_Of_Sites_Option                                   |
+      | Participating_Organisation | Early_Closure_Withdrawal_Of_Sites_Option                   |
+      | Participating_Organisation | Addition_Of_Participant_Identification_Centres_Option      |
+      | Participating_Organisation | Early_Closure_Of_Participant_Identification_Centres_Option |
 
   # The KNOWN_DEFECT-RSP-5007 will be fixed with the new user story RSP-4136 so this scenario can be re-used later
   @rsp-4039 @ParticipatingOrganisationsErrorValidation @KNOWN_DEFECT-RSP-5007 @skip
