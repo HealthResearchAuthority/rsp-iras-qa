@@ -187,6 +187,7 @@ Then('I see something {string}', async ({ commonItemsPage }, testType: string) =
 });
 
 Then('I click the {string} button on the {string}', async ({ commonItemsPage }, buttonKey: string, pageKey: string) => {
+  await commonItemsPage.page.waitForLoadState('domcontentloaded');
   const buttonValue = commonItemsPage.buttonTextData[pageKey][buttonKey];
   if (
     (pageKey === 'Review_All_Changes_Page' && buttonKey === 'Send_Modification_To_Sponsor') ||
