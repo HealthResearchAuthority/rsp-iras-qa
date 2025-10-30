@@ -8,6 +8,7 @@ Feature: User Administration: Manage Sponsor Organisations - View user list page
 
     # Then the no search results found message is displayed -- failing due to @KNOWN_DEFECT-RSP-5531
     # @KNOWN_DEFECT-RSP-5531 @fail @skip
+    # need to add teardown step to delete sponsor organisation after user
     @rsp-5233 @VerifyUserListNewSetupSponsorOrg @UserListSponsorOrgNoUsers @skip
     Scenario Outline: Verify the user can view the user list page of the newly setup sponsor organisation with no users
         When I authorise the rts api using '<RTS_API_Data>'
@@ -48,7 +49,7 @@ Feature: User Administration: Manage Sponsor Organisations - View user list page
             | Setup_New_Sponsor_Organisation | Status_Enabled | RTS_API_Data         | RTS_Request                         |
             | Sponsor_Organisation_Eight     | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
 
-    @rsp-5226 @rsp-5233 @rsp-5234 @rsp-5235 @UserListSponsorOrgDefaultSort @skip
+    @rsp-5226 @rsp-5233 @rsp-5234 @rsp-5235 @UserListSponsorOrgDefaultSort
     Scenario: Verify the user can view the user list page of any selected sponsor organisation and it is sorted by default in the alphabetical order of the 'First Name'
         When I enter '3-D Matrix,Ltd.' into the search field
         And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'

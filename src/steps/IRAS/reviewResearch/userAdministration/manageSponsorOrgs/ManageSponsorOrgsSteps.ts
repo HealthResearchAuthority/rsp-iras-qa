@@ -15,7 +15,11 @@ When(
       checkSetupSponsorOrganisationPage,
       commonItemsPage
     );
-    const foundRecords = await manageSponsorOrganisationPage.findSponsorOrg(sponsorOrgName, sponsorOrgStatus);
+    const foundRecords = await manageSponsorOrganisationPage.findSponsorOrg(
+      commonItemsPage,
+      sponsorOrgName,
+      sponsorOrgStatus
+    );
     expect(foundRecords).toBeDefined();
     expect(foundRecords).toHaveCount(1);
     await manageSponsorOrganisationPage.setSponsorOrgRow(foundRecords);

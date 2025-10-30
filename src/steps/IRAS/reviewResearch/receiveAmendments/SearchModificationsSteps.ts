@@ -320,7 +320,7 @@ Then(
         await searchModificationsPage.sponsor_organisation_jsdisabled_narrow_down_label.textContent()
       ).trim();
       const searchResultFooterHintLabelExpected = `${totalMatchingSponsorOrganisations} ${searchHintDataset.search_hint_footer_prefix} '${dataset['sponsor_organisation_text']}'${searchHintDataset.search_hint_footer}`;
-      const normalizedActual = searchResultFooterHintLabelActual.replace(/\s+/g, ' ').trim();
+      const normalizedActual = searchResultFooterHintLabelActual.replaceAll(/\s+/g, ' ').trim();
       expect.soft(normalizedActual).toEqual(searchResultFooterHintLabelExpected);
       // expect.soft(searchResultFooterHintLabelActual).toEqual(searchResultFooterHintLabelExpected);
     }

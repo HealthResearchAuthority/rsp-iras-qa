@@ -125,6 +125,7 @@ export default class CommonItemsPage {
   readonly sponsor_organisation_text: Locator;
   readonly sponsor_organisation_jsdisabled_search_button: Locator;
   readonly sponsor_organisation_jsdisabled_search_results_radio_button: Locator;
+  readonly listCell: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -321,14 +322,7 @@ export default class CommonItemsPage {
       .or(this.govUkButton.getByText('Search'));
     this.sponsor_organisation_jsdisabled_search_results_radio_button =
       this.sponsor_organisation_fieldset.getByRole('radio');
-    // this.sponsor_organisation_jsenabled_text = this.page.getByRole('combobox', {
-    //   name: this.setupNewSponsorOrganisationPageTestData.Setup_New_Sponsor_Organisation_Page
-    //     .select_a_sponsor_organisation_hint_text,
-    // });
-    // this.sponsor_organisation_text = this.page.getByRole('textbox', {
-    //   name: this.setupNewSponsorOrganisationPageTestData.Setup_New_Sponsor_Organisation_Page
-    //     .select_a_sponsor_organisation_hint_text,
-    // });
+    this.listCell = this.page.getByRole('cell');
   }
 
   //Getters & Setters for Private Variables
@@ -1515,5 +1509,22 @@ export default class CommonItemsPage {
     if (suggestionVisible) {
       await this.sponsor_organisation_suggestion_list_labels.first().click();
     }
+  }
+
+  async shouldGoToNextPage(): Promise<boolean> {
+    return (await this.next_button.isVisible()) && !(await this.next_button.isDisabled());
+  }
+
+  async goToNextPage(): Promise<void> {
+    await this.next_button.click();
+    await this.page.waitForLoadState('domcontentloaded');
+  }
+  async buildSearchRecord(name: string, status?: string): Promise<string> {
+    return typeof status !== 'undefined' ? `${name}|${status}` : name;
+  }
+  async getRowData(row: any, status?: string): Promise<string> {
+    const columns = await row.locator(this.listCell).allTextContents();
+    const selected = typeof status !== 'undefined' ? [columns[0], columns[2]] : [columns[0]];
+    return selected.map((col) => col.trim()).join('|');
   }
 }
