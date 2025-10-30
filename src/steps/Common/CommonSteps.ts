@@ -430,6 +430,7 @@ Then(
       myModificationsTasklistPage,
       sponsorReferencePage,
       projectIdentifiersPage,
+      addDocumentDetailsForSpecificDocumentModificationsPage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
@@ -508,6 +509,13 @@ Then(
       errorMessageFieldDataset =
         sponsorReferencePage.sponsorReferencePageTestData[errorMessageFieldAndSummaryDatasetName];
       page = sponsorReferencePage;
+    } else if (pageKey == 'Add_Document_Details_For_Specific_Document_Modifications_Page') {
+      errorMessageFieldDataset =
+        addDocumentDetailsForSpecificDocumentModificationsPage
+          .addDocumentDetailsForSpecificDocumentModificationsPageTestData.Error_Validation[
+          errorMessageFieldAndSummaryDatasetName
+        ];
+      page = addDocumentDetailsForSpecificDocumentModificationsPage;
     }
     let allSummaryErrorExpectedValues: any;
     let summaryErrorActualValues: any;
