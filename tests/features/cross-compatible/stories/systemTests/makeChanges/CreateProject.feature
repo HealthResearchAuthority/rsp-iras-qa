@@ -420,7 +420,7 @@ Feature: Create Amendment - Create Project
       | Valid_Data_Only_Title_Field |
       | Valid_Data_Only_Date_Fields |
 
-  @rsp-1863 @rsp-4874  @rsp-4209 @saveLaterProjectRoles
+  @rsp-1863 @rsp-4874 @rsp-4209 @saveLaterProjectRoles
   Scenario Outline: Verify product details are saved when user saves the record on create project - chief investigator page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
     And I click the 'Start' button on the 'Create_Project_Record_Page'
@@ -761,7 +761,6 @@ Feature: Create Amendment - Create Project
       | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Label_Texts     | Sponsor_Organisation_Text_Partial_End_Space    | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space     | Field_Error_Primary_Sponsor_Organisation |
       | Create_Project_Record   | Start                    | Add_Project                   | Save_Continue           | Valid_Data_All_Fields | Label_Texts     | Sponsor_Organisation_Text_Exactly_Five_Results | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char | Sponsor_Organisation_Jsdisabled_Search_Hint_Labels | RTS_NIHR_FHIR_Config | Sponsor_Organisation_Text_Exactly_Five_Results | Field_Error_Primary_Sponsor_Organisation |
 
-
   @rsp-5340 @validateProjectRecordFromInDraftToActiveStatus
   Scenario: Validate project status transition from in draft to active in the my research page and project overview page
     And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
@@ -876,3 +875,59 @@ Feature: Create Amendment - Create Project
     Then I can see the my research projects page
     Then I can see the project status as 'Project_Status_Draft' on the my research page
     And I capture the page screenshot
+
+  @rsp-1900 @validateGuidanceContentProjectIdentifiersPage
+  Scenario: Validate the guidance content displayed on project identifiers page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    Then I can see the project identifiers page
+    And I validate the guidance content displayed on project identifiers page
+    And I capture the page screenshot
+
+  @rsp-1866 @DeleteProjectRecord
+  Scenario Outline: Verify that user is able to delete the created project record
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    Then I can see the project details iras page
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    And I fill the project details title page with '<Project_Details_Title>'
+    When I click the 'Save_For_Later' button on the 'Project_Details_Title_Page'
+    Then I can see the project overview for unfinished projects page
+    And I capture the page screenshot
+    And I click the 'Delete_Project' button on the 'Project_Overview_Unfinished_Projects_Page'
+    And I can see the delete project confirmation page based on '<Project_Details_Title>' entered for short project title
+    And I capture the page screenshot
+    When I click the 'Keep_Project' button on the 'Confirmation_Page'
+    Then I can see the project overview for unfinished projects page
+    And I capture the page screenshot
+    And I click the 'Delete_Project' button on the 'Project_Overview_Unfinished_Projects_Page'
+    When I click the 'Delete_Project' button on the 'Confirmation_Page'
+    And I can see the my research projects page
+    And I can see the project delete success message on my research page
+    And I capture the page screenshot
+    And I validate deleted project does not exist in the my research projects list
+    And I capture the page screenshot
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    Then I can see the project details iras page
+    And I fill the existing iras id in project details iras page
+    And I capture the page screenshot
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    And I can see the project identifiers page
+    And I capture the page screenshot
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    And I can see the project details title page
+    And I capture the page screenshot
+
+    Examples:
+      | Project_Details_Title        |
+      | Valid_Data_All_Fields        |
+      | Valid_Data_Title_Empty_Field |
