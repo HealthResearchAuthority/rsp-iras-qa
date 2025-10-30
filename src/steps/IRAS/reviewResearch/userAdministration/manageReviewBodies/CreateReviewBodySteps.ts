@@ -16,9 +16,10 @@ When(
       if (Object.hasOwn(dataset, key)) {
         if (datasetName.startsWith('Valid_') && key == 'organisation_name_text') {
           const orgNameLocator: Locator = createReviewBodyPage[key];
-          const uniqueOrgNameValue = await generateTimeStampedValue(dataset[key], ' ');
+          const [uniqueOrgNameValue, uniqueOrgTimestamp] = await generateTimeStampedValue(dataset[key], ' ');
           await orgNameLocator.fill(uniqueOrgNameValue);
           await createReviewBodyPage.setUniqueOrgName(uniqueOrgNameValue);
+          await createReviewBodyPage.setUniqueOrgTimestamp(uniqueOrgTimestamp);
         } else {
           await commonItemsPage.fillUIComponent(dataset, key, createReviewBodyPage);
         }

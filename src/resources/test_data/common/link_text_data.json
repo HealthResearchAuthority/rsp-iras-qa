@@ -20,7 +20,8 @@
     "Manage_Users": "Manage Users",
     "Question_Set": "Question Set",
     "System_Admin": "System Admin",
-    "My_Applications": "My Applications"
+    "My_Applications": "My Applications",
+    "Logout": "Logout"
   },
   "Home_Page": {
     "Approvals": "Approvals",
@@ -121,9 +122,10 @@
     "Project_Details": "Project details",
     "Project": "QA_Automation - This is a short project title",
     "Post_Approval": "Post approval",
-    "Key_Project_Roles": "Chief investigator",
+    "Project_Team": "Project team",
     "Research_Locations": "Research locations",
     "View_Project_Overview": "View project overview",
+    "Back": "Back",
     "Project_Documents": "Project documents"
   },
   "Review_Body_User_List_Page": {
@@ -213,12 +215,13 @@
   "Select_Study_Wide_Reviewer_Page": {
     "Back": "Back"
   },
-  "Project_Created_Confirmation_Page": {
-    "View_Project_Overview": "View project overview"
-  },
   "Review_All_Changes_Page": {
+    "Back": "Back",
     "Delete_Modification": "Delete modification",
     "Change": "Change"
+  },
+  "Project_Created_Confirmation_Page": {
+    "View_Project_Overview": "View project overview"
   },
   "Modification_Details_Page": {
     "Back": "Back",

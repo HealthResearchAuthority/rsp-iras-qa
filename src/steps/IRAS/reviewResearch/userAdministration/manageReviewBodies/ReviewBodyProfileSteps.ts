@@ -4,6 +4,27 @@ import { confirmStringNotNull } from '../../../../../utils/UtilFunctions';
 
 const { Then, When } = createBdd(test);
 
+Then('I navigate to a {string} review body profile page', async ({ reviewBodyProfilePage }, status: string) => {
+  await reviewBodyProfilePage.sqlGetSingleRandomReviewBodyByStatus(status);
+  await reviewBodyProfilePage.goto(await reviewBodyProfilePage.getReviewBodyId());
+  await reviewBodyProfilePage.assertOnReviewbodyProfilePage();
+});
+
+Then(
+  'I navigate to a {string} review body profile page that is {string}',
+  async ({ reviewBodyProfilePage }, type: string, status: string) => {
+    let inOperator: string;
+    if (type.toLowerCase() == 'test') {
+      inOperator = 'NOT IN';
+    } else {
+      inOperator = 'IN';
+    }
+    await reviewBodyProfilePage.sqlGetSingleRandomReviewBodyByTypeStatus(inOperator, status);
+    await reviewBodyProfilePage.goto(await reviewBodyProfilePage.getReviewBodyId());
+    await reviewBodyProfilePage.assertOnReviewbodyProfilePage();
+  }
+);
+
 Then('I can see the review body profile page', async ({ reviewBodyProfilePage }) => {
   await reviewBodyProfilePage.assertOnReviewbodyProfilePage();
   await reviewBodyProfilePage.setOrgName(

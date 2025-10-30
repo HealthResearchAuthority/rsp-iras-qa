@@ -1,6 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as myResearchProjectsPageTestData from '../../../resources/test_data/iras/make_changes/my_research_projects_data.json';
 import * as buttonTextData from '../../../resources/test_data/common/button_text_data.json';
+import { confirmStringNotNull } from '../../../utils/UtilFunctions';
 
 //Declare Page Objects
 export default class MyResearchProjectsPage {
@@ -21,6 +22,8 @@ export default class MyResearchProjectsPage {
   readonly titlelink: Locator;
   readonly next_button: Locator;
   readonly search: Locator;
+  readonly short_project_title: Locator;
+  readonly search_text_box: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -65,6 +68,11 @@ export default class MyResearchProjectsPage {
       name: this.myResearchProjectsPageTestData.My_Research_Projects_Page.next_button,
       exact: true,
     });
+    this.short_project_title = this.page.getByRole('link', {
+      name: this.myResearchProjectsPageTestData.Valid_Project_Title.short_project_title,
+      exact: true,
+    });
+    this.search_text_box = this.page.getByTestId('SearchTerm');
   }
 
   //Page Methods
@@ -106,5 +114,32 @@ export default class MyResearchProjectsPage {
       sortDirection.toLowerCase() === 'ascending' ? a - b : b - a
     );
     return sortedListAsNums.map(String);
+  }
+
+  async getProjectDetails(expectedIrasId: string): Promise<Map<string, string>> {
+    let projectMap: any;
+    let displayedIrasId = '';
+    let displayedStatusValue = '';
+    let displayedProjectValue = '';
+    const rows = await this.projectListRows.all();
+    for (const row of rows) {
+      const columns = await row.locator(this.listCell).allInnerTexts();
+      if (columns[1] === expectedIrasId) {
+        const irasId = confirmStringNotNull(columns[1]);
+        displayedIrasId = irasId;
+        const status = confirmStringNotNull(columns[3]);
+        displayedStatusValue = status;
+        const project = confirmStringNotNull(columns[0]);
+        displayedProjectValue = project;
+        projectMap = new Map([
+          ['displayedStatusValue', displayedStatusValue],
+          ['displayedProjectValue', displayedProjectValue],
+          ['displayedIrasId', displayedIrasId],
+        ]);
+      }
+      if (displayedIrasId) {
+        return projectMap;
+      }
+    }
   }
 }
