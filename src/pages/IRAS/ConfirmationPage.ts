@@ -10,6 +10,7 @@ export default class ConfirmationPage {
   readonly success_message_header_label: Locator;
   readonly success_message_body_text: Locator;
   readonly confirmation_body_label: Locator;
+  readonly delete_modification_page_heading: Locator;
   readonly what_happens_next_label: Locator;
 
   //Initialize Page Objects
@@ -36,6 +37,7 @@ export default class ConfirmationPage {
     });
     this.success_message_body_text = this.page.locator('.govuk-panel__body');
     this.confirmation_body_label = this.page.getByRole('paragraph').first();
+    this.delete_modification_page_heading = this.page.locator('.govuk-heading-l');
     this.what_happens_next_label = this.page.getByRole('heading', {
       name: confirmationPageTestData.Modification_Sent_To_Sponsor_Labels.what_happens_next_label,
     });

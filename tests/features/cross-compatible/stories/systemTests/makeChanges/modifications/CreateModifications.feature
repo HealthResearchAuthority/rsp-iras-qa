@@ -426,3 +426,28 @@ Feature: Create Amendment - Create Modifications
       | Change_Planned_End_Date | Invalid_Date_No_Day                  | Invalid_Date_Field_Error        |
       | Change_Planned_End_Date | Invalid_Date_No_Month                | Invalid_Date_Field_Error        |
       | Change_Planned_End_Date | Invalid_Date_No_Year                 | Invalid_Date_Field_Error        |
+
+  @rsp-4392 @VerifyUserAbleToDeleteTheModificationDetails
+  Scenario Outline: Verify user is able to delete the modification details
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I capture the page screenshot
+    And I create '<Changes>' for the created modification
+    And I capture the page screenshot
+    And I click the 'Delete_Modification' link on the 'Modifications_Details_Page'
+    And I validate all field 'Valid_Data_All_Fields' value on delete modification confirmation screeen
+    And I capture the page screenshot
+    And I click the 'delete_modification' button on the 'Delete_Modifications_Confirm_Page'
+    And I capture the page screenshot
+    And I validate the delete modification success message
+    And I capture the page screenshot
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I validate the deleted modification does not appear in the modification in the post approval tab
+    
+    Examples:
+      | Changes                           |
+      | Multiple_Changes_Planned_End_Date |
+

@@ -56,7 +56,6 @@ Then(
     }
   }
 );
-
 Then(
   'I keep note of the individual and overall ranking of changes created using {string}',
   async ({ modificationsCommonPage }, datasetName) => {

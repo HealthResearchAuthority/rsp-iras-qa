@@ -1405,6 +1405,7 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
 
+
   @axeAccessibilityProjectOverviewUnfinishedPojectsPage @ApplicantUser
   Scenario: Project overview unfinished projects -Create project
     Given I have navigated to the my research projects page
@@ -1434,6 +1435,43 @@ Feature: Run Axe Accessibilty Test Tool Against App Pages
     When I click the 'Save_For_Later' button on the 'Project_Details_Title_Page'
     And I click the 'Delete_Project' button on the 'Project_Overview_Unfinished_Projects_Page'
     And I can see the delete project confirmation page based on 'Valid_Data_All_Fields' entered for short project title
+    When I Scan the page with the Axe Accessibilty Tool
+    And I analyse the results from the Axe scan
+    Then I expect to receive no WCAG Violations
+
+@axeAccessibilityDeleteModificationConfirmationPage @ApplicantUser
+  Scenario: Delete modification confirmation page
+    Given I have navigated to the my research projects page
+    And I can see the my research projects page
+    And I click the 'Create_Project_Record' button on the 'My_Research_Projects_Page'
+    And I click the 'Start' button on the 'Create_Project_Record_Page'
+    And I fill the unique iras id in project details iras page
+    And I capture the page screenshot
+    And I click the 'Add_Project' button on the 'Project_Details_IRAS_Page'
+    Then I can see the project identifiers page
+    Then I fill the project identifiers page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Identifiers_Page'
+    And I fill the project details title page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Project_Details_Title_Page'
+    Then I fill the chief investigator page with 'Valid_Data_All_Fields'
+    Then I click the 'Save_Continue' button on the 'Chief_Investigator_Page'
+    Then I fill the research locations page with 'Valid_Data_All_Fields'
+    When I click the 'Save_Continue' button on the 'Research_Locations_Page'
+    Then I can see the review your answers page
+    And I capture the page screenshot
+    When I click the 'Confirm_Project_Details' button on the 'Review_Your_Answers_Page'
+    Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
+    Then I can see the project overview page
+    When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot
+    And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+    And I can see the select area of change page
+    And I capture the page screenshot
+    And I create 'Multiple_Changes_Planned_End_Date' for the created modification
+    And I capture the page screenshot
+    And I click the 'Delete_Modification' link on the 'Modifications_Details_Page'
+    And I validate all field 'Valid_Data_All_Fields' value on delete modification confirmation screeen
+    And I capture the page screenshot
     When I Scan the page with the Axe Accessibilty Tool
     And I analyse the results from the Axe scan
     Then I expect to receive no WCAG Violations
