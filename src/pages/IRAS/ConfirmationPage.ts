@@ -11,6 +11,7 @@ export default class ConfirmationPage {
   readonly success_message_body_text: Locator;
   readonly confirmation_body_label: Locator;
   readonly what_happens_next_label: Locator;
+  readonly mainPageContent: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -18,6 +19,7 @@ export default class ConfirmationPage {
     this.confirmationPageTestData = confirmationPageTestData;
 
     //Locators
+    this.mainPageContent = this.page.getByTestId('main-content');
     this.confirmation_header_common_label = this.page.getByRole('heading');
     this.confirmation_header_label = this.page
       .getByRole('heading', {
@@ -35,7 +37,8 @@ export default class ConfirmationPage {
       name: confirmationPageTestData.Project_Record_Created_Labels.page_heading,
     });
     this.success_message_body_text = this.page.locator('.govuk-panel__body');
-    this.confirmation_body_label = this.page.getByRole('paragraph').first();
+
+    this.confirmation_body_label = this.mainPageContent.getByRole('paragraph').first();
     this.what_happens_next_label = this.page.getByRole('heading', {
       name: confirmationPageTestData.Modification_Sent_To_Sponsor_Labels.what_happens_next_label,
     });

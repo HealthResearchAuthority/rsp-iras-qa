@@ -33,6 +33,7 @@ Then('I can see the workspaces in my account home page for {string}', async ({ h
     Studywide_Reviewer: homePage.homePageTestData.Home_Page.workspaces_links_studywide_reviewer,
     Team_Manager: homePage.homePageTestData.Home_Page.workspaces_links_team_manager,
     Workflow_Coordinator: homePage.homePageTestData.Home_Page.workspaces_links_workflow_coordinator,
+    Sponsor_User: homePage.homePageTestData.Home_Page.workspaces_links_sponsor_user,
   };
   const expectedLinks = expectedLinksMap[user];
   if (!expectedLinks) {

@@ -89,12 +89,12 @@ Then(
 
 When(
   'I search and click on view edit link for the removed user from the review body in the manage user page',
-  async ({ manageUsersPage, checkRemoveUserReviewBodyPage, userListReviewBodyPage }) => {
+  async ({ manageUsersPage, checkRemoveUserReviewBodyPage, commonItemsPage }) => {
     await manageUsersPage.goto(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enlarged_page_size);
     const userFirstName = await checkRemoveUserReviewBodyPage.getFirstName();
     const userLastName = await checkRemoveUserReviewBodyPage.getLastName();
     const userEmail = await checkRemoveUserReviewBodyPage.getEmail();
-    const userStatus = await userListReviewBodyPage.getStatus();
+    const userStatus = await commonItemsPage.getStatus();
     const foundRecord = await manageUsersPage.findUserProfile(userFirstName, userLastName, userEmail, userStatus);
     await foundRecord.locator(manageUsersPage.view_edit_link).click();
   }
@@ -153,48 +153,6 @@ When(
     } else if (caseValue === 'remove QAAutomation prefix') {
       await createUserProfilePage.setUniqueEmail(email.replace('QAAUTOMATION', ''));
     }
-  }
-);
-
-Then(
-  'I can see the manage users list sorted by {string} order of the {string} on the {string} page',
-  async ({ manageUsersPage, commonItemsPage }, sortDirection: string, sortField: string, currentPage: string) => {
-    let sortedUserList: string[];
-    let userColumnIndex: number;
-    switch (sortField.toLowerCase()) {
-      case 'first name':
-        userColumnIndex = 0;
-        break;
-      case 'last name':
-        userColumnIndex = 1;
-        break;
-      case 'email address':
-        userColumnIndex = 2;
-        break;
-      case 'status':
-        userColumnIndex = 3;
-        break;
-      case 'last logged in':
-        userColumnIndex = 4;
-        break;
-      default:
-        throw new Error(`${sortField} is not a valid option`);
-    }
-    const actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, userColumnIndex);
-    if (sortField.toLowerCase() == 'last logged in') {
-      sortedUserList = await manageUsersPage.sortLastLoggedInListValues(actualList, sortDirection);
-    } else if (sortDirection.toLowerCase() == 'ascending') {
-      sortedUserList = [...actualList].toSorted((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
-      if (sortField.toLowerCase() == 'status' && currentPage.toLowerCase() == 'first') {
-        expect(actualList).toContain(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.enabled_status);
-      }
-    } else {
-      sortedUserList = [...actualList].toSorted((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
-      if (sortField.toLowerCase() == 'status' && currentPage.toLowerCase() == 'first') {
-        expect(actualList).toContain(manageUsersPage.manageUsersPageTestData.Manage_Users_Page.disabled_status);
-      }
-    }
-    expect(actualList).toEqual(sortedUserList);
   }
 );
 

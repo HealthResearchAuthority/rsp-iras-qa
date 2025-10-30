@@ -24,12 +24,7 @@ When(
         await searchModificationsPage.clickFilterChevronModifications(dataset, key, searchModificationsPage);
         if (key === 'sponsor_organisation_text') {
           if (isJsEnabled) {
-            await searchModificationsPage.selectSponsorOrgJsEnabled(
-              dataset,
-              key,
-              commonItemsPage,
-              searchModificationsPage
-            );
+            await commonItemsPage.selectSponsorOrgJsEnabled(dataset, key, commonItemsPage);
           } else {
             await searchModificationsPage.selectSponsorOrgJsDisabled(
               dataset,
@@ -218,7 +213,7 @@ Then(
 );
 
 Then(
-  'I type valid {string} for sponsor organisation suggestion box in advanced filters and validate the suggestion list along with {string}',
+  'I type valid {string} for sponsor organisation suggestion box and validate the suggestion list along with {string}',
   async (
     { searchModificationsPage, rtsPage, commonItemsPage },
     sponsorOrganisationDatasetName: string,
@@ -233,17 +228,17 @@ Then(
       sponsorOrganisationNameListExpected = sponsorOrganisationNameListExpected.slice(0, 5);
     }
     dataset['sponsor_organisation_jsenabled_text'] = dataset['sponsor_organisation_text'];
-    await commonItemsPage.fillUIComponent(dataset, 'sponsor_organisation_jsenabled_text', searchModificationsPage);
+    await commonItemsPage.fillUIComponent(dataset, 'sponsor_organisation_jsenabled_text', commonItemsPage);
     await searchModificationsPage.page.waitForTimeout(2000);
     const sponsorOrganisationNameListActual =
-      await searchModificationsPage.sponsor_organisation_suggestion_list_labels.allTextContents();
+      await commonItemsPage.sponsor_organisation_suggestion_list_labels.allTextContents();
     expect.soft(sponsorOrganisationNameListActual).toEqual(sponsorOrganisationNameListExpected);
-    const suggestionsHeaderLabelActual = await searchModificationsPage.sponsor_organisation_suggestion_listbox
+    const suggestionsHeaderLabelActual = await commonItemsPage.sponsor_organisation_suggestion_listbox
       .first()
       .getAttribute('data-before-suggestions');
     const suggestionsHeaderLabelExpected = suggestionHeadersDatasetName.suggestion_header;
     expect.soft(suggestionsHeaderLabelActual).toEqual(suggestionsHeaderLabelExpected);
-    const suggestionsFooterLabelActual = await searchModificationsPage.sponsor_organisation_suggestion_listbox
+    const suggestionsFooterLabelActual = await commonItemsPage.sponsor_organisation_suggestion_listbox
       .first()
       .getAttribute('data-after-suggestions');
     const suggestionsFooterLabelExpected = suggestionHeadersDatasetName.suggestion_footer;
@@ -252,15 +247,19 @@ Then(
 );
 
 Then(
-  'I type invalid {string} for sponsor organisation suggestion box in advanced filters and validate the suggestion list along with {string}',
-  async ({ searchModificationsPage }, sponsorOrganisationDatasetName: string, suggestionCommonDatasetName) => {
+  'I type invalid {string} for sponsor organisation suggestion box and validate the suggestion list along with {string}',
+  async (
+    { searchModificationsPage, commonItemsPage },
+    sponsorOrganisationDatasetName: string,
+    suggestionCommonDatasetName
+  ) => {
     const dataset =
       searchModificationsPage.searchModificationsPageTestData.Sponsor_Organisation[sponsorOrganisationDatasetName];
     const suggestionHeadersDatasetName =
       searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[suggestionCommonDatasetName];
-    await searchModificationsPage.sponsor_organisation_jsenabled_text.fill(dataset['sponsor_organisation_text']);
+    await commonItemsPage.sponsor_organisation_jsenabled_text.fill(dataset['sponsor_organisation_text']);
     await searchModificationsPage.page.waitForTimeout(2000);
-    const noResultFoundSuggestionActual = await searchModificationsPage.sponsor_organisation_suggestion_list_labels
+    const noResultFoundSuggestionActual = await commonItemsPage.sponsor_organisation_suggestion_list_labels
       .first()
       .textContent();
     const suggestionsHeaderLabelExpected = suggestionHeadersDatasetName.no_suggestion_found;
@@ -269,15 +268,19 @@ Then(
 );
 
 Then(
-  'I type min characters {string} for sponsor organisation suggestion box in advanced filters and validate the suggestion list along with {string}',
-  async ({ searchModificationsPage }, sponsorOrganisationDatasetName: string, suggestionCommonDatasetName) => {
+  'I type min characters {string} for sponsor organisation suggestion box and validate the suggestion list along with {string}',
+  async (
+    { searchModificationsPage, commonItemsPage },
+    sponsorOrganisationDatasetName: string,
+    suggestionCommonDatasetName
+  ) => {
     const dataset =
       searchModificationsPage.searchModificationsPageTestData.Sponsor_Organisation[sponsorOrganisationDatasetName];
     const suggestionHeadersDatasetName =
       searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[suggestionCommonDatasetName];
-    await searchModificationsPage.sponsor_organisation_jsenabled_text.fill(dataset['sponsor_organisation_text']);
+    await commonItemsPage.sponsor_organisation_jsenabled_text.fill(dataset['sponsor_organisation_text']);
     await searchModificationsPage.page.waitForTimeout(2000);
-    const continueEnteringSuggestionActual = await searchModificationsPage.sponsor_organisation_suggestion_listbox
+    const continueEnteringSuggestionActual = await commonItemsPage.sponsor_organisation_suggestion_listbox
       .first()
       .getAttribute('data-before-suggestions');
     const suggestionsHeaderLabelExpected = suggestionHeadersDatasetName.suggestion_footer;
@@ -286,8 +289,12 @@ Then(
 );
 
 Then(
-  'With javascript disabled, I search with valid {string} for sponsor organisation search box in advanced filters and validate the search results along with {string}',
-  async ({ searchModificationsPage, rtsPage }, sponsorOrganisationDatasetName: string, searchHintsDatasetName) => {
+  'With javascript disabled, I search with valid {string} for sponsor organisation search box and validate the search results along with {string}',
+  async (
+    { searchModificationsPage, commonItemsPage, rtsPage },
+    sponsorOrganisationDatasetName: string,
+    searchHintsDatasetName
+  ) => {
     const dataset =
       searchModificationsPage.searchModificationsPageTestData.Sponsor_Organisation[sponsorOrganisationDatasetName];
     const searchHintDataset =
@@ -297,8 +304,8 @@ Then(
     if (sponsorOrganisationNameListExpected.length > 5) {
       sponsorOrganisationNameListExpected = sponsorOrganisationNameListExpected.slice(0, 5);
     }
-    await searchModificationsPage.sponsor_organisation_text.fill(dataset['sponsor_organisation_text']);
-    await searchModificationsPage.sponsor_organisation_jsdisabled_search_button.click();
+    await commonItemsPage.sponsor_organisation_text.fill(dataset['sponsor_organisation_text']);
+    await commonItemsPage.sponsor_organisation_jsdisabled_search_button.click();
     const sponsorOrganisationNameListActualWithSpaces =
       await searchModificationsPage.sponsor_organisation_jsdisabled_search_results_labels.allTextContents();
     const sponsorOrganisationNameListActual = sponsorOrganisationNameListActualWithSpaces.map((str) => str.trim());
@@ -313,20 +320,25 @@ Then(
         await searchModificationsPage.sponsor_organisation_jsdisabled_narrow_down_label.textContent()
       ).trim();
       const searchResultFooterHintLabelExpected = `${totalMatchingSponsorOrganisations} ${searchHintDataset.search_hint_footer_prefix} '${dataset['sponsor_organisation_text']}'${searchHintDataset.search_hint_footer}`;
-      expect.soft(searchResultFooterHintLabelActual).toEqual(searchResultFooterHintLabelExpected);
+      const normalizedActual = searchResultFooterHintLabelActual.replaceAll(/\s+/g, ' ').trim();
+      expect.soft(normalizedActual).toEqual(searchResultFooterHintLabelExpected);
     }
   }
 );
 
 Then(
-  'With javascript disabled, I search with invalid {string} for sponsor organisation search box in advanced filters and validate the search results along with {string}',
-  async ({ searchModificationsPage }, sponsorOrganisationDatasetName: string, searchHintsDatasetName) => {
+  'With javascript disabled, I search with invalid {string} for sponsor organisation search box and validate the search results along with {string}',
+  async (
+    { searchModificationsPage, commonItemsPage },
+    sponsorOrganisationDatasetName: string,
+    searchHintsDatasetName
+  ) => {
     const dataset =
       searchModificationsPage.searchModificationsPageTestData.Sponsor_Organisation[sponsorOrganisationDatasetName];
     const searchHintDataset =
       searchModificationsPage.searchModificationsPageTestData.Search_Modifications_Page[searchHintsDatasetName];
-    await searchModificationsPage.sponsor_organisation_text.fill(dataset['sponsor_organisation_text']);
-    await searchModificationsPage.sponsor_organisation_jsdisabled_search_button.click();
+    await commonItemsPage.sponsor_organisation_text.fill(dataset['sponsor_organisation_text']);
+    await commonItemsPage.sponsor_organisation_jsdisabled_search_button.click();
     const noResultFoundLabelActual = confirmStringNotNull(
       await searchModificationsPage.sponsor_organisation_jsdisabled_no_suggestions_label.textContent()
     ).trim();
@@ -336,12 +348,12 @@ Then(
 );
 
 Then(
-  'With javascript disabled, I search with invalid min characters {string} for sponsor organisation search box in advanced filters',
-  async ({ searchModificationsPage }, sponsorOrganisationDatasetName: string) => {
+  'With javascript disabled, I search with invalid min characters {string} for sponsor organisation search box',
+  async ({ searchModificationsPage, commonItemsPage }, sponsorOrganisationDatasetName: string) => {
     const dataset =
       searchModificationsPage.searchModificationsPageTestData.Sponsor_Organisation[sponsorOrganisationDatasetName];
-    await searchModificationsPage.sponsor_organisation_text.fill(dataset['sponsor_organisation_text']);
-    await searchModificationsPage.sponsor_organisation_jsdisabled_search_button.click();
+    await commonItemsPage.sponsor_organisation_text.fill(dataset['sponsor_organisation_text']);
+    await commonItemsPage.sponsor_organisation_jsdisabled_search_button.click();
   }
 );
 
@@ -358,10 +370,10 @@ Then(
 
 Then(
   'the search button appears with a green background in the sponsor Organisation filter',
-  async ({ searchModificationsPage, commonItemsPage }) => {
+  async ({ commonItemsPage }) => {
     expect
       .soft(
-        await searchModificationsPage.sponsor_organisation_jsdisabled_search_button.evaluate(
+        await commonItemsPage.sponsor_organisation_jsdisabled_search_button.evaluate(
           (e: any) => getComputedStyle(e).backgroundColor
         )
       )

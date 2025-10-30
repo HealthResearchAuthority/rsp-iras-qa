@@ -64,7 +64,7 @@ Feature: User Administration: Create Manage Users
         And I capture the page screenshot
         And I click the 'View_This_Review_Body_List_Of_Users' link on the 'Review_Body_Profile_Page'
         And I capture the page screenshot
-        Then I can see the user list page of the review body
+        Then I can see the user list page of the 'review body'
         And I capture the name of the newly added user in the user list page of the review body
         When I enter 'name of the newly created user' into the search field
         And I click the 'Search' button on the 'Review_Body_User_List_Page'

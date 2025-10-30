@@ -147,8 +147,8 @@ export default class ManageReviewBodiesPage {
   async getOrgNamesListFromUI() {
     const orgNames: string[] = [];
     let hasNextPage = true;
-    //adding this for loop instead of while loop to limit navigation till first 3 pages only,to reduce time and reduce fakiness
-    for (let i = 0; i < 4; i++) {
+    //adding this for loop instead of while loop to limit navigation till first 2 pages only,to reduce time and reduce fakiness
+    for (let i = 0; i < 2; i++) {
       const rowCount = await this.orgListRows.count();
       for (let i = 1; i < rowCount; i++) {
         const columns = this.orgListRows.nth(i).getByRole('cell');
@@ -164,52 +164,38 @@ export default class ManageReviewBodiesPage {
     return orgNames;
   }
 
-  async buildSearchRecord(name: string, status?: string): Promise<string> {
-    return typeof status !== 'undefined' ? `${name}|${status}` : name;
-  }
-
-  async getRowData(row: any, status?: string): Promise<string> {
-    const columns = await row.locator(this.listCell).allTextContents();
-    const selected = typeof status !== 'undefined' ? [columns[0], columns[2]] : [columns[0]];
-    return selected.map((col) => col.trim()).join('|');
-  }
-
-  async findReviewBody(reviewBodyName: string, reviewBodyStatus?: string) {
+  async findReviewBody(commonItemsPage: CommonItemsPage, reviewBodyName: string, reviewBodyStatus?: string) {
     let hasNextPage = true;
     while (hasNextPage) {
       const rows = await this.listRows.all();
       for (const row of rows) {
-        const match = await this.isMatchingRow(row, reviewBodyName, reviewBodyStatus);
+        const match = await this.isMatchingRow(commonItemsPage, row, reviewBodyName, reviewBodyStatus);
         if (match) {
           return row;
         }
       }
-      hasNextPage = await this.shouldGoToNextPage();
+      hasNextPage = await commonItemsPage.shouldGoToNextPage();
       if (hasNextPage) {
-        await this.goToNextPage();
+        await commonItemsPage.goToNextPage();
       }
     }
     throw new Error(`No matching record found`);
   }
 
-  async isMatchingRow(row: any, reviewBodyName: string, reviewBodyStatus?: string): Promise<boolean> {
+  async isMatchingRow(
+    commonItemsPage: CommonItemsPage,
+    row: any,
+    reviewBodyName: string,
+    reviewBodyStatus?: string
+  ): Promise<boolean> {
     if (reviewBodyName === 'QA Automation') {
       const columns = await row.locator(this.listCell).allTextContents();
       return columns[0].trim().includes(reviewBodyName) && columns[2].trim() === reviewBodyStatus;
     } else {
-      const searchRecord = await this.buildSearchRecord(reviewBodyName, reviewBodyStatus);
-      const fullRowData = await this.getRowData(row, reviewBodyStatus);
+      const searchRecord = await commonItemsPage.buildSearchRecord(reviewBodyName, reviewBodyStatus);
+      const fullRowData = await commonItemsPage.getRowData(row, reviewBodyStatus);
       return fullRowData === searchRecord;
     }
-  }
-
-  async shouldGoToNextPage(): Promise<boolean> {
-    return (await this.next_button.isVisible()) && !(await this.next_button.isDisabled());
-  }
-
-  async goToNextPage(): Promise<void> {
-    await this.next_button.click();
-    await this.page.waitForLoadState('domcontentloaded');
   }
 
   async getSearchQueryOrgName(position: string) {

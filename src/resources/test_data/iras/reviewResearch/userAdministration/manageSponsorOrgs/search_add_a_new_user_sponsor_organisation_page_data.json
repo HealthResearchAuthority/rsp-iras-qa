@@ -1,0 +1,23 @@
+{
+  "Add_A_New_User_Page": {
+    "title": "Add a new user profile to sponsor organisation - Manage sponsor organisations - System administration - Plan and manage health and care research",
+    "page_heading": "Add a new user",
+    "page_description": "Search for an existing user to add to this sponsor organisation",
+    "search_input_label": "Find a user",
+    "search_guidance_text": "You can search by first name, last name or email address",
+    "search_table_headings": ["First name", "Last name", "Email address", "Status", "Last logged in", "Action"]
+  },
+  "Search_Add_User_Sponsor_Organisation": {
+    "Search_Queries": {
+      "Existing_QA_User_First_Name": { "search_input_text": "QA Automation First Name Test" },
+      "Existing_QA_User_Last_Name": { "search_input_text": "Test Last Name" },
+      "Existing_QA_User_Full_Name": { "search_input_text": "QA Automation First Name Test Test Last Name" },
+      "Existing_QA_User_Email": { "search_input_text": "QAAutomation2025" },
+      "Non_Existant_User_Data": { "search_input_text": "ThisShouldNot ReturnAResult" },
+      "Admin_User_Full_Name_Email_Prefix": { "search_input_text": "auto admin future_iras_auto_admin_user" },
+      "Admin_User_Full_Name_Full_Email": {
+        "search_input_text": "auto admin future_iras_auto_admin_user@test.id.nihr.ac.uk"
+      }
+    }
+  }
+}
