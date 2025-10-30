@@ -230,4 +230,12 @@ export default class ProjectOverviewPage {
   async getStatus(row: any) {
     return confirmStringNotNull(await row.getByRole('cell').nth(5).textContent());
   }
+
+  async getProjectColumnIndex(columnName: string): Promise<number> {
+    let columnIndex: number;
+    if (columnName.toLowerCase() == 'document name') {
+      columnIndex = 1;
+    }
+    return columnIndex;
+  }
 }

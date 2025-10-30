@@ -27,6 +27,7 @@ Feature: Create Amendment - Project Documents Modifications
     Then I click the 'View_Project_Overview' link on the 'Confirmation_Page'
     Then I can see the project overview page
     When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+    And I capture the page screenshot 
     When I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
     And I can see the select area of change page
 
@@ -245,3 +246,60 @@ Feature: Create Amendment - Project Documents Modifications
       | Post_Trial_Information_For_Participants      |
       | Protocol_Non_Substantial_Changes             |
       | Translations_Addition_Of_Translated_Versions |
+
+  @rsp-3929 @DownloadDocumentsOneByOneInModification 
+  Scenario Outline: Validate the user is able to download the documents one by one from documents added for page
+    And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+    Then I can see the add documents for '<Specific_Change>' page
+    And I capture the page screenshot
+    Then I upload '<Document_Upload_Files>' documents
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    Then I can see the review uploaded documents for '<Specific_Change>' page
+    And I capture the page screenshot
+    And I download the documents one by one from the documents added page of specific change modifications in reference to the uploaded '<Document_Upload_Files>' documents
+    And I capture the page screenshot
+      
+    Examples:
+      | Specific_Change                              | Document_Upload_Files|
+      | Correction_Of_Typographical_Errors           | Multiple_Files_Three |
+      | CRF_Other_Study_Data_Records                 | Multiple_Files_Three |
+      | GDPR_Wording                                 | Multiple_Files_Three |
+      | Other_Minor_Change_To_Study_Documents        | Multiple_Files_Three |
+      | Post_Trial_Information_For_Participants      | Multiple_Files_Three |
+      | Protocol_Non_Substantial_Changes             | Multiple_Files_Three |
+      | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three |
+
+  @rsp-3929 @DownloadDocumentFromAddDocumentDetailsModification 
+  Scenario Outline: Validate the user is able to download the documents from add document details page
+    And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+    Then I can see the add documents for '<Specific_Change>' page
+    And I capture the page screenshot
+    Then I upload 'PNG_File' documents
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+    Then I can see the review uploaded documents for '<Specific_Change>' page
+    And I capture the page screenshot
+    And I capture the page screenshot
+    When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+    When I can see the add document details for '<Specific_Change>' page
+    And I capture the page screenshot
+    And I click on the document link with status 'Document_Status_Incomplete' and download the uploaded document in the add document details for specific document page
+    And I capture the page screenshot
+   
+    Examples:
+      | Specific_Change                              | 
+      | Correction_Of_Typographical_Errors           | 
+      | CRF_Other_Study_Data_Records                 | 
+      | GDPR_Wording                                 | 
+      | Other_Minor_Change_To_Study_Documents        | 
+      | Post_Trial_Information_For_Participants      | 
+      | Protocol_Non_Substantial_Changes             | 
+      | Translations_Addition_Of_Translated_Versions | 
+
+
+

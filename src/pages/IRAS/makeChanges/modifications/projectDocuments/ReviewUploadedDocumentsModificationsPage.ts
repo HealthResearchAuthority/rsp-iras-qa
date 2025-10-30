@@ -12,7 +12,7 @@ export default class ReviewUploadedDocumentsModificationsPage {
   readonly table: Locator;
   readonly rows: Locator;
   readonly cells: Locator;
-
+  readonly documentlink: Locator;
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page;
@@ -24,6 +24,7 @@ export default class ReviewUploadedDocumentsModificationsPage {
     this.pageLabels = this.page.getByRole('paragraph');
     this.table = this.page.getByRole('table');
     this.rows = this.page.locator('tr');
+    this.documentlink = this.page.locator('.govuk-link');
   }
   //Getters & Setters for Private Variables
 
