@@ -22,6 +22,8 @@ export default class MyResearchProjectsPage {
   readonly titlelink: Locator;
   readonly next_button: Locator;
   readonly search: Locator;
+  readonly short_project_title: Locator;
+  readonly search_text_box: Locator;
   readonly status_label: Locator;
   readonly status_fieldset: Locator;
   readonly status_checkbox: Locator;
@@ -85,6 +87,11 @@ export default class MyResearchProjectsPage {
       name: this.myResearchProjectsPageTestData.My_Research_Projects_Page.next_button,
       exact: true,
     });
+    this.short_project_title = this.page.getByRole('link', {
+      name: this.myResearchProjectsPageTestData.Valid_Project_Title.short_project_title,
+      exact: true,
+    });
+    this.search_text_box = this.page.getByTestId('SearchTerm');
     this.user_search_text = this.page.getByTestId('SearchTerm');
     this.status_checkbox_chevron = this.page
       .getByRole('heading', { level: 2 })
@@ -252,6 +259,33 @@ export default class MyResearchProjectsPage {
       sortDirection.toLowerCase() === 'ascending' ? a - b : b - a
     );
     return sortedListAsNums.map(String);
+  }
+
+  async getProjectDetails(expectedIrasId: string): Promise<Map<string, string>> {
+    let projectMap: any;
+    let displayedIrasId = '';
+    let displayedStatusValue = '';
+    let displayedProjectValue = '';
+    const rows = await this.projectListRows.all();
+    for (const row of rows) {
+      const columns = await row.locator(this.listCell).allInnerTexts();
+      if (columns[1] === expectedIrasId) {
+        const irasId = confirmStringNotNull(columns[1]);
+        displayedIrasId = irasId;
+        const status = confirmStringNotNull(columns[3]);
+        displayedStatusValue = status;
+        const project = confirmStringNotNull(columns[0]);
+        displayedProjectValue = project;
+        projectMap = new Map([
+          ['displayedStatusValue', displayedStatusValue],
+          ['displayedProjectValue', displayedProjectValue],
+          ['displayedIrasId', displayedIrasId],
+        ]);
+      }
+      if (displayedIrasId) {
+        return projectMap;
+      }
+    }
   }
 
   async clickFilterChevronUsers<PageObject>(dataset: JSON, key: string, page: PageObject) {

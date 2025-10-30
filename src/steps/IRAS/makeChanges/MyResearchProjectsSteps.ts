@@ -83,6 +83,88 @@ Then(
   }
 );
 
+Then(
+  'I can see the project status as {string} on the my research page',
+  async ({ myResearchProjectsPage, projectDetailsIRASPage }, statusValue: string) => {
+    const dataset = myResearchProjectsPage.myResearchProjectsPageTestData[statusValue];
+    const expectedStatus = dataset.status;
+    const expectedIrasId = await projectDetailsIRASPage.getUniqueIrasId();
+    const projectRecord = await myResearchProjectsPage.getProjectDetails(expectedIrasId);
+    const actualIrasId = projectRecord.get('displayedIrasId');
+    expect.soft(actualIrasId[0]).toBe(expectedIrasId);
+    const actualStatus = projectRecord.get('displayedStatusValue');
+    expect.soft(actualStatus[0]).toBe(expectedStatus);
+  }
+);
+
+Then(
+  'I click on the respective {string} on the my research page',
+  async ({ myResearchProjectsPage, projectDetailsIRASPage }, datasetName: string) => {
+    const projectTitle = myResearchProjectsPage.myResearchProjectsPageTestData[datasetName];
+    const shortProjectTitle = projectTitle.short_project_title;
+    const irasId = await projectDetailsIRASPage.getUniqueIrasId();
+    const foundRecords = await myResearchProjectsPage.findProjectLink(shortProjectTitle, irasId);
+    expect(foundRecords).toBeDefined();
+    expect(foundRecords).toHaveCount(1);
+    await foundRecords.locator(myResearchProjectsPage.short_project_title).click();
+  }
+);
+
+Then(
+  'I can see the project delete success message on my research page',
+  async ({ myResearchProjectsPage, commonItemsPage }) => {
+    await expect
+      .soft(
+        commonItemsPage.alert_box.getByText(
+          myResearchProjectsPage.myResearchProjectsPageTestData.My_Research_Projects_Page.success_header_label
+        )
+      )
+      .toBeVisible();
+    await expect
+      .soft(
+        commonItemsPage.alert_box.getByText(
+          myResearchProjectsPage.myResearchProjectsPageTestData.My_Research_Projects_Page.project_deleted_message_label
+        )
+      )
+      .toBeVisible();
+    expect
+      .soft(await commonItemsPage.alert_box.evaluate((e: any) => getComputedStyle(e).getPropertyValue('border-color')))
+      .toBe(commonItemsPage.commonTestData.rgb_green_color);
+    expect
+      .soft(
+        await commonItemsPage.alert_box.evaluate((e: any) => getComputedStyle(e).getPropertyValue('background-color'))
+      )
+      .toBe(commonItemsPage.commonTestData.rgb_green_color);
+  }
+);
+
+Then(
+  'I validate deleted project does not exist in the my research projects list',
+  async ({ myResearchProjectsPage, projectDetailsIRASPage, commonItemsPage }) => {
+    await myResearchProjectsPage.search_text_box.fill(await projectDetailsIRASPage.getUniqueIrasId());
+    await commonItemsPage.clickButton('My_Research_Projects_Page', 'Search');
+    await expect
+      .soft(
+        commonItemsPage.no_matching_search_result_header_label.getByText(
+          commonItemsPage.commonTestData.no_results_heading,
+          { exact: true }
+        )
+      )
+      .toBeVisible();
+    await expect
+      .soft(
+        commonItemsPage.no_matching_search_result_sub_header_label.getByText(
+          commonItemsPage.commonTestData.no_results_guidance_text,
+          { exact: true }
+        )
+      )
+      .toBeVisible();
+    expect
+      .soft((await commonItemsPage.no_results_bullet_points.allTextContents()).map((t) => t.trim()))
+      .toEqual(commonItemsPage.commonTestData.no_results_bullet_points);
+  }
+);
+
 When(
   'I select advanced filters in the my research page using {string}',
   async ({ myResearchProjectsPage, commonItemsPage }, filterDatasetName: string) => {
