@@ -1519,12 +1519,17 @@ export default class CommonItemsPage {
     await this.next_button.click();
     await this.page.waitForLoadState('domcontentloaded');
   }
+
   async buildSearchRecord(name: string, status?: string): Promise<string> {
-    return typeof status !== 'undefined' ? `${name}|${status}` : name;
+    if (status === undefined) {
+      return name;
+    }
+    return `${name}|${status}`;
   }
+
   async getRowData(row: any, status?: string): Promise<string> {
     const columns = await row.locator(this.listCell).allTextContents();
-    const selected = typeof status !== 'undefined' ? [columns[0], columns[2]] : [columns[0]];
+    const selected = status === undefined ? [columns[0]] : [columns[0], columns[2]];
     return selected.map((col) => col.trim()).join('|');
   }
 }

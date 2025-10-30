@@ -322,7 +322,6 @@ Then(
       const searchResultFooterHintLabelExpected = `${totalMatchingSponsorOrganisations} ${searchHintDataset.search_hint_footer_prefix} '${dataset['sponsor_organisation_text']}'${searchHintDataset.search_hint_footer}`;
       const normalizedActual = searchResultFooterHintLabelActual.replaceAll(/\s+/g, ' ').trim();
       expect.soft(normalizedActual).toEqual(searchResultFooterHintLabelExpected);
-      // expect.soft(searchResultFooterHintLabelActual).toEqual(searchResultFooterHintLabelExpected);
     }
   }
 );

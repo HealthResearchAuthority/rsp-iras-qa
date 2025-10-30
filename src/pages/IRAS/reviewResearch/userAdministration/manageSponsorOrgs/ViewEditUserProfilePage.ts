@@ -11,22 +11,12 @@ export default class ViewEditUserProfilePage {
   readonly buttonTextData: typeof buttonTextData;
   private _userid: string;
   private _title: string;
-  private _new_title: string;
   private _first_name: string;
-  private _new_first_name: string;
   private _last_name: string;
-  private _new_last_name: string;
   private _email_address: string;
-  private _new_email_address: string;
   private _telephone: string;
-  private _new_telephone: string;
   private _organisation: string;
-  private _new_organisation: string;
   private _job_title: string;
-  private _new_job_title: string;
-  private _countries: string[];
-  private _new_countries: string[];
-  private _review_body: string[];
   private _role: string[];
   readonly selected_bread_crumbs: Locator;
   readonly page_heading: Locator;
@@ -66,22 +56,12 @@ export default class ViewEditUserProfilePage {
     this.buttonTextData = buttonTextData;
     this._userid = '';
     this._title = '';
-    this._new_title = '';
     this._first_name = '';
-    this._new_first_name = '';
     this._last_name = '';
-    this._new_last_name = '';
     this._email_address = '';
-    this._new_email_address = '';
     this._telephone = '';
-    this._new_telephone = '';
     this._organisation = '';
-    this._new_organisation = '';
     this._job_title = '';
-    this._new_job_title = '';
-    this._countries = [];
-    this._new_countries = [];
-    this._review_body = [];
     this._role = [];
 
     //Locators

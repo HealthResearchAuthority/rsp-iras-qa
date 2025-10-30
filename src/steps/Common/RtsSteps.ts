@@ -92,7 +92,6 @@ Then(
         sponsorDatasetName
       ];
     const rtsBaseUrl: string = dataset.rts_base_url;
-    // const organisationName = dataset.organisation_name;
     const organisationName = sponsorDataset['sponsor_organisation_text'];
     const active = dataset.active;
     const role = dataset.role;
@@ -109,11 +108,11 @@ Then(
 
       const requestResponse = await rtsPage.executeRTSRequest(request, dataset, rtsPage.bearerToken, requestHeader);
 
-      await expect(requestResponse).toBeOK();
+      await expect.soft(requestResponse).toBeOK();
       const receivedJson = await requestResponse.json();
 
-      if (typeof receivedJson.entry !== 'undefined') {
-        receivedJson.entry.forEach((element) => {
+      if (receivedJson.entry !== undefined) {
+        for (const element of receivedJson.entry) {
           const organisationRoles = element.resource.extension;
           for (const organisationRole of organisationRoles) {
             if (typeof organisationRole.extension !== 'undefined') {
@@ -129,17 +128,12 @@ Then(
               }
             }
           }
-        });
+        }
       } else {
         break;
       }
 
       offsetCount += 1000;
     }
-    console.log(rtsPage.rtsResponseListRecord);
-    //
-    // const lastRtsRecord = rtsPage.rtsResponseListRecord[
-    //     rtsPage.rtsResponseListRecord.length - 1
-    //   ];
   }
 );
