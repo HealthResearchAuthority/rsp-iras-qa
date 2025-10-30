@@ -214,9 +214,7 @@ Given(
       linkKey === 'Back_To_Users'
     ) {
       await commonItemsPage.govUkLink.getByText(linkValue).click();
-    } else if (linkKey === 'Back') {
-      await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).first().click();
-    } else if (noOfLinksFound > 1) {
+    } else if (noOfLinksFound > 1 && linkKey != 'Back') {
       await commonItemsPage.govUkLink.getByText(linkValue).first().click();
     } else {
       await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
@@ -581,7 +579,7 @@ Then(
 When(
   'I enter {string} into the search field',
   async (
-    { commonItemsPage, reviewBodyProfilePage, createReviewBodyPage, createUserProfilePage },
+    { commonItemsPage, reviewBodyProfilePage, createReviewBodyPage, createUserProfilePage, editReviewBodyPage },
     inputType: string
   ) => {
     let searchValue: string;
@@ -592,8 +590,19 @@ When(
       case 'name of the new review body':
         searchValue = await createReviewBodyPage.getUniqueOrgName();
         break;
+      case 'timestamp of the edited review body':
+        searchValue = await editReviewBodyPage.getUniqueOrgTimestamp();
+        break;
       case 'name of the newly created user':
         searchValue = await createUserProfilePage.getUniqueEmail();
+        break;
+      case 'an active review body name':
+        await reviewBodyProfilePage.sqlGetSingleRandomReviewBodyByStatus('Active');
+        searchValue = await reviewBodyProfilePage.getOrgName();
+        break;
+      case 'a disabled review body name':
+        await reviewBodyProfilePage.sqlGetSingleRandomReviewBodyByStatus('Disabled');
+        searchValue = await reviewBodyProfilePage.getOrgName();
         break;
       default:
         searchValue = inputType;

@@ -109,3 +109,58 @@ Then(
     await foundRecords.locator(myResearchProjectsPage.short_project_title).click();
   }
 );
+
+Then(
+  'I can see the project delete success message on my research page',
+  async ({ myResearchProjectsPage, commonItemsPage }) => {
+    await expect
+      .soft(
+        commonItemsPage.alert_box.getByText(
+          myResearchProjectsPage.myResearchProjectsPageTestData.My_Research_Projects_Page.success_header_label
+        )
+      )
+      .toBeVisible();
+    await expect
+      .soft(
+        commonItemsPage.alert_box.getByText(
+          myResearchProjectsPage.myResearchProjectsPageTestData.My_Research_Projects_Page.project_deleted_message_label
+        )
+      )
+      .toBeVisible();
+    expect
+      .soft(await commonItemsPage.alert_box.evaluate((e: any) => getComputedStyle(e).getPropertyValue('border-color')))
+      .toBe(commonItemsPage.commonTestData.rgb_green_color);
+    expect
+      .soft(
+        await commonItemsPage.alert_box.evaluate((e: any) => getComputedStyle(e).getPropertyValue('background-color'))
+      )
+      .toBe(commonItemsPage.commonTestData.rgb_green_color);
+  }
+);
+
+Then(
+  'I validate deleted project does not exist in the my research projects list',
+  async ({ myResearchProjectsPage, projectDetailsIRASPage, commonItemsPage }) => {
+    await myResearchProjectsPage.search_text_box.fill(await projectDetailsIRASPage.getUniqueIrasId());
+    await commonItemsPage.clickButton('My_Research_Projects_Page', 'Search');
+    await expect
+      .soft(
+        commonItemsPage.no_matching_search_result_header_label.getByText(
+          commonItemsPage.commonTestData.no_results_heading,
+          { exact: true }
+        )
+      )
+      .toBeVisible();
+    await expect
+      .soft(
+        commonItemsPage.no_matching_search_result_sub_header_label.getByText(
+          commonItemsPage.commonTestData.no_results_guidance_text,
+          { exact: true }
+        )
+      )
+      .toBeVisible();
+    expect
+      .soft((await commonItemsPage.no_results_bullet_points.allTextContents()).map((t) => t.trim()))
+      .toEqual(commonItemsPage.commonTestData.no_results_bullet_points);
+  }
+);

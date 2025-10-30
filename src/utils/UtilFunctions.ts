@@ -524,9 +524,9 @@ export async function removeUnwantedWhitespace(value: string): Promise<string> {
   return value.replaceAll(/\s+/g, ' ').trim();
 }
 
-export async function generateTimeStampedValue(keyVal: string, separator: string): Promise<string> {
+export async function generateTimeStampedValue(keyVal: string, separator: string): Promise<[string, string]> {
   const timestamp = new Date().toISOString().replaceAll(/[-:.TZ]/g, '');
-  return `${keyVal}${separator}${timestamp}`;
+  return [`${keyVal}${separator}${timestamp}`, timestamp];
 }
 
 export async function getCurrentTimeFormatted(): Promise<string> {
