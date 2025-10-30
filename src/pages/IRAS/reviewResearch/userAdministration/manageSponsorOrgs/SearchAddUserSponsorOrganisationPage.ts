@@ -55,34 +55,4 @@ export default class SearchAddUserSponsorOrganisationPage {
     await expect.soft(this.search_guidance_text).toBeVisible();
     await expect.soft(this.search_input_text).toBeVisible();
   }
-
-  //Getters & Setters for Private Variables
-
-  async getUserFirstName(): Promise<string> {
-    return this._user_first_name;
-  }
-  async setUserFirstName(value: string): Promise<void> {
-    this._user_first_name = value;
-  }
-
-  async getUserLastName(): Promise<string> {
-    return this._user_last_name;
-  }
-  async setUserLastName(value: string): Promise<void> {
-    this._user_last_name = value;
-  }
-
-  async getUserEmail(): Promise<string> {
-    return this._user_email;
-  }
-  async setUserEmail(value: string): Promise<void> {
-    this._user_email = value;
-  }
-
-  async getUserStatus(): Promise<string> {
-    return this._user_status;
-  }
-  async setUserStatus(value: string): Promise<void> {
-    this._user_status = value;
-  }
 }
