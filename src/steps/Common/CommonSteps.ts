@@ -430,6 +430,7 @@ Then(
       myModificationsTasklistPage,
       sponsorReferencePage,
       projectIdentifiersPage,
+      projectIdentificationEnterReferenceNumbersPage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
@@ -508,6 +509,12 @@ Then(
       errorMessageFieldDataset =
         sponsorReferencePage.sponsorReferencePageTestData[errorMessageFieldAndSummaryDatasetName];
       page = sponsorReferencePage;
+    } else if (pageKey == 'Project_Identification_Enter_Reference_Numbers_Page') {
+      errorMessageFieldDataset =
+        projectIdentificationEnterReferenceNumbersPage.projectIdentificationEnterReferenceNumbersPageTestData[
+          errorMessageFieldAndSummaryDatasetName
+        ];
+      page = projectIdentificationEnterReferenceNumbersPage;
     }
     let allSummaryErrorExpectedValues: any;
     let summaryErrorActualValues: any;
