@@ -232,4 +232,50 @@ export default class ModificationsReceivedCommonPage {
     }
     return expectedDaysResultFound;
   }
+
+  async getModificationColumnIndex(pageType: string, columnName: string): Promise<number> {
+    let columnIndex: number;
+    switch (columnName.toLowerCase()) {
+      case 'modification id':
+        if (pageType.toLowerCase() == 'modifications_tasklist_page') {
+          columnIndex = 1;
+        } else {
+          columnIndex = 0;
+        }
+        break;
+      case 'short project title':
+        if (pageType.toLowerCase() == 'modifications_tasklist_page') {
+          columnIndex = 2;
+        } else {
+          columnIndex = 1;
+        }
+        break;
+      case 'date submitted':
+        if (pageType.toLowerCase() == 'modifications_tasklist_page') {
+          columnIndex = 3;
+        } else {
+          columnIndex = 2;
+        }
+        break;
+      case 'days since submission':
+        if (pageType.toLowerCase() == 'modifications_tasklist_page') {
+          columnIndex = 4;
+        } else {
+          columnIndex = 3;
+        }
+        break;
+      case 'modification type':
+        columnIndex = 2;
+        break;
+      case 'chief investigator':
+        columnIndex = 3;
+        break;
+      case 'lead nation':
+        columnIndex = 4;
+        break;
+      default:
+        throw new Error(`${columnName} is not a valid option`);
+    }
+    return columnIndex;
+  }
 }

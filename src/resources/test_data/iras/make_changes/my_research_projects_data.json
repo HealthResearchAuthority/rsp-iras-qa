@@ -5,7 +5,9 @@
     "advanced_filter_label": "Advanced filter",
     "add_project_record_button_label": "Add project",
     "next_button": "Next   page",
-    "short_project_title_text": "QA_Automation - This is a short project title"
+    "short_project_title_text": "QA_Automation - This is a short project title",
+    "success_header_label": "Success",
+    "project_deleted_message_label": "Your project has been deleted"
   },
   "No_Projects_Label_Texts": {
     "no_projects": "You don't have any projects available in the new service"
@@ -15,5 +17,14 @@
     "iras_id_title": "IRAS ID",
     "date_created_title": "Date created",
     "status_title": "Status"
+  },
+  "Valid_Project_Title": {
+    "short_project_title": "Project title"
+  },
+  "Project_Status_Draft": {
+    "status": "In draft"
+  },
+  "Project_Status_Active": {
+    "status": "Active"
   }
 }
