@@ -7,16 +7,160 @@
     "next_button": "Next   page",
     "short_project_title_text": "QA_Automation - This is a short project title",
     "success_header_label": "Success",
-    "project_deleted_message_label": "Your project has been deleted"
+    "project_deleted_message_label": "Your project has been deleted",
+    "status_label": "Status",
+    "date_project_created_label": "Date created",
+    "date_project_created_from_date_hint_text": "Enter the date you want to search from",
+    "date_project_created_from_date_help_text": "For example, 28 February 2023",
+    "date_project_created_to_date_hint_text": "Enter the date you want to search to",
+    "date_project_created_to_date_help_text": "For example, 12 October 2024",
+    "date_project_created_day_label": "Day",
+    "date_project_created_month_label": "Month",
+    "date_project_created_year_label": "Year"
+   },
+  "Advanced_Filters_Hint_Labels": {
+    "status_hint_label": "Select all that apply",
+    "status_selected_hint_label": "selected",
+    "date_project_created_from_date_help_text": "For example, 28 February 2023",
+    "date_project_created_to_date_help_text": "For example, 12 October 2024"
   },
-  "No_Projects_Label_Texts": {
+   "No_Projects_Label_Texts": {
     "no_projects": "You don't have any projects available in the new service"
   },
   "Label_Texts": {
     "short_project_title_link": "Short project title",
     "iras_id_title": "IRAS ID",
     "date_created_title": "Date created",
-    "status_title": "Status"
+    "status_title": "Status",
+    "selected_checkboxes_hint_label": "selected",
+    "active_filters_label": "Active filters"
+  },
+  "Error_Validation": {
+    "Invalid_Date_Created_Range_To_Before_From_Error": {
+      "date_project_created_to_day_text": "'Search to' date must be after 'Search from' date"
+    },
+    "Invalid_Date_Created_From_Error": {
+      "date_project_created_from_day_text": "'Search from' date must be in the correct format"
+    },
+    "Invalid_Date_Created_To_Error": {
+      "date_project_created_to_day_text": "'Search to' date must be in the correct format"
+    }
+  },
+  "Search_Queries": {
+    "Existing_Short_Project_Title_Data_One": { "search_input_text": "QA_Automation - This is a short project title" },
+    "Existing_Iras_Id_Data_Three": { "search_input_text": "435" },
+    "Existing_Iras_Id_Data": { "search_input_text": "5464564" },
+    "Non_Existant_Data": { "search_input_text": "ThisShouldNot ReturnAResult" },
+    "Existing_Short_Project_Title_Data_Three": { "search_input_text": "Sho" }
+  },
+
+  "Advanced_Filters": {
+    "Advanced_Filter_One_All": {
+      "status_checkbox": ["In draft", "Active"],
+      "date_project_created_from_day_text": "11",
+      "date_project_created_from_month_dropdown": "September",
+      "date_project_created_from_year_text": "2025",
+      "date_project_created_to_day_text": "16",
+      "date_project_created_to_month_dropdown": "October",
+      "date_project_created_to_year_text": "2025"
+    },
+    "Advanced_Filter_Two": {
+      "status_checkbox": ["In draft"],
+      "date_project_created_from_day_text": "11",
+      "date_project_created_from_month_dropdown": "September",
+      "date_project_created_from_year_text": "2025",
+      "date_project_created_to_day_text": "16",
+      "date_project_created_to_month_dropdown": "October",
+      "date_project_created_to_year_text": "2025"
+    },
+    "Advanced_Filter_Three": {
+      "status_checkbox": ["Active"],
+      "date_project_created_from_day_text": "11",
+      "date_project_created_from_month_dropdown": "September",
+      "date_project_created_from_year_text": "2025"
+    },
+    "Advanced_Filter_Four": {
+      "status_checkbox": ["In draft", "Active"]
+    },
+    "Advanced_Filter_Five": {
+      "status_checkbox": ["Active"]
+    },
+    "Advanced_Filter_Six": {
+      "status_checkbox": ["In draft"]
+    },
+    "Advanced_Filter_Project_Created_From_Date_Only": {
+      "date_project_created_from_day_text": "11",
+      "date_project_created_from_month_dropdown": "September",
+      "date_project_created_from_year_text": "2025"
+    },
+    "Advanced_Filter_Project_Created_To_Date_Only": {
+      "date_project_created_to_day_text": "16",
+      "date_project_created_to_month_dropdown": "October",
+      "date_project_created_to_year_text": "2025"
+    },
+    "Advanced_Filter_Project_Created_To_Date_Before_From_Date": {
+      "date_project_created_from_day_text": "11",
+      "date_project_created_from_month_dropdown": "July",
+      "date_project_created_from_year_text": "2025",
+      "date_project_created_to_day_text": "22",
+      "date_project_created_to_month_dropdown": "January",
+      "date_project_created_to_year_text": "2025"
+    },
+    "Advanced_Filter_Project_Created_No_Month_From_Date": {
+      "date_project_created_from_day_text": "2",
+      "date_project_created_from_month_dropdown": "Choose month",
+      "date_project_created_from_year_text": "2020"
+    },
+    "Advanced_Filter_Project_Created_No_Day_From_Date": {
+      "date_project_created_from_day_text": "",
+      "date_project_created_from_month_dropdown": "July",
+      "date_project_created_from_year_text": "2025"
+    },
+    "Advanced_Filter_Project_Created_No_Year_From_Date": {
+      "date_project_created_from_day_text": "10",
+      "date_project_created_from_month_dropdown": "July",
+      "date_project_created_from_year_text": ""
+    },
+    "Advanced_Filter_Project_Created_No_Month_To_Date": {
+      "date_project_created_to_day_text": "20",
+      "date_project_created_to_month_dropdown": "Choose month",
+      "date_project_created_to_year_text": "2013"
+    },
+    "Advanced_Filter_Project_Created_No_Day_To_Date": {
+      "date_project_created_to_day_text": "",
+      "date_project_created_to_month_dropdown": "January",
+      "date_project_created_to_year_text": "2025"
+    },
+    "Advanced_Filter_Project_Created_No_Year_To_Date": {
+      "date_project_created_to_day_text": "23",
+      "date_project_created_to_month_dropdown": "January",
+      "date_project_created_to_year_text": ""
+    },
+    "Advanced_Filter_Project_Created_Invalid_Year_Number_From_Date": {
+      "date_project_created_from_day_text": "10",
+      "date_project_created_from_month_dropdown": "July",
+      "date_project_created_from_year_text": "8"
+    },
+    "Advanced_Filter_Project_Created_Invalid_Year_Number_To_Date": {
+      "date_project_created_to_day_text": "3",
+      "date_project_created_to_month_dropdown": "January",
+      "date_project_created_to_year_text": "9"
+    },
+    "Advanced_Filter_Project_Created_Invalid_Day_Number_To_Date": {
+      "date_project_created_to_day_text": "32",
+      "date_project_created_to_month_dropdown": "December",
+      "date_project_created_to_year_text": "2028"
+    },
+    "Advanced_Filter_Project_Created_Invalid_Day_Letters_To_Date": {
+      "date_project_created_to_day_text": "o1",
+      "date_project_created_to_month_dropdown": "January",
+      "date_project_created_to_year_text": "2028"
+    },
+    "Advanced_Filter_Project_Created_Invalid_Year_Letters_To_Date": {
+      "date_project_created_to_day_text": "1",
+      "date_project_created_to_month_dropdown": "January",
+      "date_project_created_to_year_text": "'2ooo"
+    }
   },
   "Valid_Project_Title": {
     "short_project_title": "Project title"
