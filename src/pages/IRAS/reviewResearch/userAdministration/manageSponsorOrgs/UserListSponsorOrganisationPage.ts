@@ -163,24 +163,6 @@ export default class UserListReviewBodyPage {
       );
   }
 
-  async goto(reviewBodyId: string): Promise<void> {
-    this.page.goto(`reviewbody/viewreviewbodyusers?reviewBodyId=${reviewBodyId}`);
-  }
-
-  async assertOnUserListSponsorOrgPage(): Promise<void> {
-    await expect(this.page_heading).toBeVisible();
-    await expect(this.guidance_text).toBeVisible();
-    await expect(this.search_box_label).toBeVisible();
-    if ((await this.userListTableRows.count()) >= 2) {
-      await expect(this.first_name_label).toBeVisible();
-      await expect(this.last_name_label).toBeVisible();
-      await expect(this.email_address_label).toBeVisible();
-      await expect(this.status_label).toBeVisible();
-      await expect(this.last_logged_in_label).toBeVisible();
-      await expect(this.actions_label).toBeVisible();
-    }
-  }
-
   //Getters & Setters for Private Variables
 
   async getUserListBeforeSearch(): Promise<string[]> {
@@ -253,117 +235,24 @@ export default class UserListReviewBodyPage {
     this._user_full_name = value;
   }
 
-  // async getSearchQueryFNameLNameEmail(position: string, fieldKey: string) {
-  //   let searchKey: string = '';
-  //   let searchValues: string[] = [];
-  //   if (fieldKey === 'Email_Address') {
-  //     searchValues = await this.getUserEmail();
-  //   } else if (fieldKey === 'First_Name') {
-  //     searchValues = await this.getUserFirstName();
-  //   } else if (fieldKey === 'Last_Name') {
-  //     searchValues = await this.getUserLastName();
-  //   }
-  //   const rowCount = searchValues.length;
-  //   if (position.toLowerCase() == 'first') {
-  //     searchKey = searchValues[0];
-  //   } else if (position.toLowerCase() == 'last') {
-  //     searchKey = searchValues[rowCount - 1];
-  //   }
-  //   return searchKey;
-  // }
+  async goto(reviewBodyId: string): Promise<void> {
+    this.page.goto(`reviewbody/viewreviewbodyusers?reviewBodyId=${reviewBodyId}`);
+  }
 
-  // async getSearchQueryFullName(position: string) {
-  //   let searchKey: string = '';
-  //   let firstNameValue: string = '';
-  //   let lastNameValue: string = '';
-  //   const firstNameValues: any = await this.getUserFirstName();
-  //   const lastNameValues: any = await this.getUserLastName();
-  //   const rowCount = lastNameValues.length;
-  //   if (position.toLowerCase() == 'first') {
-  //     searchKey = firstNameValues[0] + ' ' + lastNameValues[0];
-  //     firstNameValue = firstNameValues[0];
-  //     lastNameValue = lastNameValues[0];
-  //   } else if (position.toLowerCase() == 'last') {
-  //     searchKey = firstNameValues[rowCount - 1] + ' ' + lastNameValues[rowCount - 1];
-  //     firstNameValue = firstNameValues[rowCount - 1];
-  //     lastNameValue = lastNameValues[rowCount - 1];
-  //   }
-  //   const fullNameMap = new Map([
-  //     ['firstName', firstNameValue],
-  //     ['lastName', lastNameValue],
-  //   ]);
-  //   await this.setFullName(fullNameMap);
-  //   return searchKey;
-  // }
-  // async updateUserInfo() {
-  //   await this.setFirstName(confirmStringNotNull(await this.first_name_value_first_row.textContent()));
-  //   await this.setLastName(confirmStringNotNull(await this.last_name_value_first_row.textContent()));
-  //   await this.setEmail(confirmStringNotNull(await this.email_address_value_first_row.textContent()));
-  //   await this.setStatus(confirmStringNotNull(await this.status_value_first_row.textContent()));
-  // }
-
-  // async getSearchQueryFNameLNameEmailByPosition(position: string, fieldKey: string, commonItemsPage: CommonItemsPage) {
-  //   let searchValues: any;
-  //   const userList = await this.getUserListByPosition(position, commonItemsPage);
-  //   if (fieldKey === 'Email_Address') {
-  //     searchValues = userList.get('emailAddressValues');
-  //     await this.setUserEmail(searchValues);
-  //   } else if (fieldKey === 'First_Name') {
-  //     searchValues = userList.get('firstNameValues');
-  //     await this.setUserFirstName(searchValues);
-  //   } else if (fieldKey === 'Last_Name') {
-  //     searchValues = userList.get('lastNameValues');
-  //     await this.setUserLastName(searchValues);
-  //   }
-  //   return searchValues[0];
-  // }
-
-  // async getUserListByPosition(position: string, commonItemsPage: CommonItemsPage) {
-  //   let userList: any;
-  //   if (position.toLowerCase() == 'first') {
-  //     userList = await this.getUsersByPage();
-  //   } else if (position.toLowerCase() == 'last') {
-  //     const totalPages = await commonItemsPage.getTotalPages();
-  //     await commonItemsPage.clickOnPages(totalPages, 'clicking on page number');
-  //     userList = await this.getUsersByPage();
-  //   }
-  //   return userList;
-  // }
-
-  // async getUsersByPage(): Promise<Map<string, string[]>> {
-  //   const firstNameValues: string[] = [];
-  //   const lastNameValues: string[] = [];
-  //   const emailAddressValues: string[] = [];
-  //   for (let i = 1; i < 2; i++) {
-  //     const columns = this.tableRows.nth(i).getByRole('cell');
-  //     const firstName = confirmStringNotNull(await columns.nth(0).textContent());
-  //     firstNameValues.push(firstName);
-  //     const lastName = confirmStringNotNull(await columns.nth(1).textContent());
-  //     lastNameValues.push(lastName);
-  //     const emailAddress = confirmStringNotNull(await columns.nth(2).textContent());
-  //     emailAddressValues.push(emailAddress);
-  //   }
-  //   const userMap = new Map([
-  //     ['firstNameValues', firstNameValues],
-  //     ['lastNameValues', lastNameValues],
-  //     ['emailAddressValues', emailAddressValues],
-  //   ]);
-  //   return userMap;
-  // }
-
-  // async setSearchQueryFullNameByPosition(position: string, fieldKey: string, commonItemsPage: CommonItemsPage) {
-  //   const userList = await this.getUserListByPosition(position, commonItemsPage);
-  //   if (fieldKey === 'Full_Name') {
-  //     await this.setUserFirstName(userList.get('firstNameValues'));
-  //     await this.setUserLastName(userList.get('lastNameValues'));
-  //   }
-  // }
-
-  // async getFilteredSearchResultsBeforeSearch(commonItemsPage: CommonItemsPage) {
-  //   const userValues = await this.getUserListBeforeSearch();
-  //   const searchKey = await commonItemsPage.getSearchKey();
-  //   const searchTerms = await commonItemsPage.splitSearchTerm(searchKey);
-  //   const filteredSearchResults = await commonItemsPage.filterResults(userValues, searchTerms);
-  //   return filteredSearchResults;
-  // }
+  async assertOnUserListSponsorOrgPage(): Promise<void> {
+    expect
+      .soft(await this.page.title())
+      .toBe(this.userListSponsorOrgPageTestData.Sponsor_Organisation_User_List_Page.title);
+    await expect.soft(this.page_heading).toBeVisible();
+    await expect.soft(this.guidance_text).toBeVisible();
+    await expect.soft(this.search_box_label).toBeVisible();
+    if ((await this.userListTableRows.count()) >= 2) {
+      await expect.soft(this.first_name_label).toBeVisible();
+      await expect.soft(this.last_name_label).toBeVisible();
+      await expect.soft(this.email_address_label).toBeVisible();
+      await expect.soft(this.status_label).toBeVisible();
+      await expect.soft(this.last_logged_in_label).toBeVisible();
+      await expect.soft(this.actions_label).toBeVisible();
+    }
+  }
 }

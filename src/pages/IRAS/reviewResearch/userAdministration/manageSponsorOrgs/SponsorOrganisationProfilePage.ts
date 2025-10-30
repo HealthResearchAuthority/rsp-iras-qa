@@ -246,7 +246,10 @@ export default class SponsorOrganisationProfilePage {
 
   //Page Methods
   async assertOnSponsorOrganisationProfilePage() {
-    await expect(this.page_heading).toBeVisible();
+    expect
+      .soft(await this.page.title())
+      .toBe(this.sponsorOrgProfilePageTestData.Sponsor_Organisation_Profile_Page.title);
+    await expect.soft(this.page_heading).toBeVisible();
   }
 
   async goto() {

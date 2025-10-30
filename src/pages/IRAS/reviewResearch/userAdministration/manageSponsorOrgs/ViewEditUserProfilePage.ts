@@ -185,37 +185,6 @@ export default class ViewEditUserProfilePage {
       .getByText(this.viewEditUserProfilePageTestData.View_And_Edit_User_Profile_Page.enable_button, { exact: true });
   }
 
-  async assertOnViewEditUserProfilePage() {
-    await expect(this.page_heading).toBeVisible();
-  }
-
-  async goto() {
-    await this.page.goto('');
-  }
-
-  // async getUserProfileValue(editUserFieldName: string) {
-  //   switch (editUserFieldName) {
-  //     case 'title_text':
-  //       return confirmStringNotNull(await this.title_value.textContent()).trim();
-  //     case 'first_name_text':
-  //       return confirmStringNotNull(await this.first_name_value.textContent()).trim();
-  //     case 'last_name_text':
-  //       return confirmStringNotNull(await this.last_name_value.textContent()).trim();
-  //     case 'email_address_text':
-  //       return confirmStringNotNull(await this.email_address_value.textContent()).trim();
-  //     case 'telephone_text':
-  //       return confirmStringNotNull(await this.telephone_value.textContent()).trim();
-  //     case 'organisation_text':
-  //       return confirmStringNotNull(await this.organisation_value.textContent()).trim();
-  //     case 'job_title_text':
-  //       return confirmStringNotNull(await this.job_title_value.textContent()).trim();
-  //     case 'role_checkbox':
-  //       return confirmStringNotNull(await this.role_value.textContent()).trim();
-  //     default:
-  //       throw new Error(`${editUserFieldName} is not a valid user profile field`);
-  //   }
-  // }
-
   //Getters & Setters for Private Variables
 
   async getUserId(): Promise<string> {
@@ -234,28 +203,12 @@ export default class ViewEditUserProfilePage {
     this._title = value;
   }
 
-  async getNewTitle(): Promise<string> {
-    return this._new_title;
-  }
-
-  async setNewTitle(value: string): Promise<void> {
-    this._new_title = value;
-  }
-
   async getFirstName(): Promise<string> {
     return this._first_name;
   }
 
   async setFirstName(value: string): Promise<void> {
     this._first_name = value;
-  }
-
-  async getNewFirstName(): Promise<string> {
-    return this._new_first_name;
-  }
-
-  async setNewFirstName(value: string): Promise<void> {
-    this._new_first_name = value;
   }
 
   async getLastName(): Promise<string> {
@@ -266,28 +219,12 @@ export default class ViewEditUserProfilePage {
     this._last_name = value;
   }
 
-  async getNewLastName(): Promise<string> {
-    return this._new_last_name;
-  }
-
-  async setNewLastName(value: string): Promise<void> {
-    this._new_last_name = value;
-  }
-
   async getEmail(): Promise<string> {
     return this._email_address;
   }
 
   async setEmail(value: string): Promise<void> {
     this._email_address = value;
-  }
-
-  async getNewEmail(): Promise<string> {
-    return this._new_email_address;
-  }
-
-  async setNewEmail(value: string): Promise<void> {
-    this._new_email_address = value;
   }
 
   async getTelephone(): Promise<string> {
@@ -298,28 +235,12 @@ export default class ViewEditUserProfilePage {
     this._telephone = value;
   }
 
-  async getNewTelephone(): Promise<string> {
-    return this._new_telephone;
-  }
-
-  async setNewTelephone(value: string): Promise<void> {
-    this._new_telephone = value;
-  }
-
   async getOrganisation(): Promise<string> {
     return this._organisation;
   }
 
   async setOrganisation(value: string): Promise<void> {
     this._organisation = value;
-  }
-
-  async getNewOrganisation(): Promise<string> {
-    return this._new_organisation;
-  }
-
-  async setNewOrganisation(value: string): Promise<void> {
-    this._new_organisation = value;
   }
 
   async getJobTitle(): Promise<string> {
@@ -330,42 +251,22 @@ export default class ViewEditUserProfilePage {
     this._job_title = value;
   }
 
-  async getNewJobTitle(): Promise<string> {
-    return this._new_job_title;
-  }
-
-  async setNewJobTitle(value: string): Promise<void> {
-    this._new_job_title = value;
-  }
-
-  async getCountries(): Promise<string[]> {
-    return this._countries;
-  }
-
-  async setCountries(value: string[]): Promise<void> {
-    this._countries = value;
-  }
-
-  async getNewCountries(): Promise<string[]> {
-    return this._new_countries;
-  }
-
-  async setNewCountries(value: string[]): Promise<void> {
-    this._new_countries = value;
-  }
-
-  async getReviewBody(): Promise<string[]> {
-    return this._review_body;
-  }
-  async setReviewBody(value: string[]): Promise<void> {
-    this._review_body = value;
-  }
-
   async getRole(): Promise<string[]> {
     return this._role;
   }
 
   async setRole(value: string[]): Promise<void> {
     this._role = value;
+  }
+
+  async assertOnViewEditUserProfilePage() {
+    expect
+      .soft(await this.page.title())
+      .toBe(this.viewEditUserProfilePageTestData.View_And_Edit_User_Profile_Page.title);
+    await expect.soft(this.page_heading).toBeVisible();
+  }
+
+  async goto() {
+    await this.page.goto('');
   }
 }

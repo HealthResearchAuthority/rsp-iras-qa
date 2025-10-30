@@ -158,13 +158,13 @@ Feature: My Account Home page
     Then I logged out from the system
     Then I capture the page screenshot
     Examples:
-      | User         | Validation_Text          |
-      # | System_Admin         | Label_Texts_System_Admin_Role         |
-      # | Applicant_User       | Label_Texts_Applicant_User_Role       |
-      # | Studywide_Reviewer   | Label_Texts_Studywide_Reviewer_Role   |
-      # | Team_Manager         | Label_Texts_Team_Manager_Role         |
-      # | Workflow_Coordinator | Label_Texts_Workflow_Coordinator_Role |
-      | Sponsor_User | Label_Texts_Sponsor_Role |
+      | User                 | Validation_Text                       |
+      | System_Admin         | Label_Texts_System_Admin_Role         |
+      | Applicant_User       | Label_Texts_Applicant_User_Role       |
+      | Studywide_Reviewer   | Label_Texts_Studywide_Reviewer_Role   |
+      | Team_Manager         | Label_Texts_Team_Manager_Role         |
+      | Workflow_Coordinator | Label_Texts_Workflow_Coordinator_Role |
+      | Sponsor_User         | Label_Texts_Sponsor_Role              |
 
   @rsp-3821 @rsp-4486 @MyAccountHomepage @rsp-4424 @rsp-4423 @rsp-4422 @rsp-4488 @ApplicantUser @rsp-5228
   Scenario Outline: Validate the access of user role using url navigation
@@ -173,30 +173,30 @@ Feature: My Account Home page
     Then I logged out from the system
     Then I capture the page screenshot
     Examples:
-      | User         | Page                                     |
-      #       | System_Admin         | System_Administration_Page               |
-      #       | System_Admin         | My_Research_Access_Denied_Page           |
+      | User                 | Page                                     |
+      | System_Admin         | System_Administration_Page               |
+      | System_Admin         | My_Research_Access_Denied_Page           |
       #       # | System_Admin         | Sponsor_Access_Denied_Page                      |
-      #       | Applicant_User       | Approvals_Access_Denied_Page             |
-      #       | Applicant_User       | System_Administration_Access_Denied_Page |
-      #       | Studywide_Reviewer   | System_Administration_Access_Denied_Page |
-      #       | Studywide_Reviewer   | My_Research_Access_Denied_Page           |
+      | Applicant_User       | Approvals_Access_Denied_Page             |
+      | Applicant_User       | System_Administration_Access_Denied_Page |
+      | Studywide_Reviewer   | System_Administration_Access_Denied_Page |
+      | Studywide_Reviewer   | My_Research_Access_Denied_Page           |
       #       #| Studywide_Reviewer   | Sponsor_Access_Denied_Page                      |
       #       #| Studywide_Reviewer   | Cag_Members_Access_Denied_Page                  |
       #       #| Studywide_Reviewer   | Cat_Access_Denied_Page                          |
       #       #| Studywide_Reviewer   | Reg_Members_Access_Denied_Page                  |
       #       #| Studywide_Reviewer   | Technical_Assurence_Access_Denied_Page          |
       #       #| Studywide_Reviewer   | Technical_Assurence_Reviewers_Access_Denied_Page|
-      #       | Team_Manager         | System_Administration_Access_Denied_Page |
-      #       | Team_Manager         | My_Research_Access_Denied_Page           |
+      | Team_Manager         | System_Administration_Access_Denied_Page |
+      | Team_Manager         | My_Research_Access_Denied_Page           |
       #       #| Team_Manager         | Sponsor_Access_Denied_Page                      |
       #       #| Team_Manager         | Cag_Members_Access_Denied_Page                  |
       #       #| Team_Manager         | Cat_Access_Denied_Page                          |
       #       #| Team_Manager         | Reg_Members_Access_Denied_Page                  |
       #       #| Team_Manager         | Technical_Assurence_Access_Denied_Page          |
       #       #| Team_Manager         | Technical_Assurence_Reviewers_Access_Denied_Page|
-      #       | Workflow_Coordinator | System_Administration_Access_Denied_Page |
-      #       | Workflow_Coordinator | My_Research_Access_Denied_Page           |
+      | Workflow_Coordinator | System_Administration_Access_Denied_Page |
+      | Workflow_Coordinator | My_Research_Access_Denied_Page           |
       # #| Workflow_Coordinator | Sponsor_Access_Denied_Page                      |
       # #| Workflow_Coordinator | Cag_Members_Access_Denied_Page                  |
       # #| Workflow_Coordinator | Cat_Access_Denied_Page                          |
@@ -204,6 +204,6 @@ Feature: My Account Home page
       # #| Workflow_Coordinator | Technical_Assurence_Access_Denied_Page          |
       # #| Workflow_Coordinator | Technical_Assurence_Reviewers_Access_Denied_Page|
       # #| Workflow_Coordinator | Member_Management_Access_Denied_Page            |
-      | Sponsor_User | My_Research_Access_Denied_Page           |
-      | Sponsor_User | System_Administration_Access_Denied_Page |
-      | Sponsor_User | Approvals_Access_Denied_Page             |
+      | Sponsor_User         | My_Research_Access_Denied_Page           |
+      | Sponsor_User         | System_Administration_Access_Denied_Page |
+      | Sponsor_User         | Approvals_Access_Denied_Page             |

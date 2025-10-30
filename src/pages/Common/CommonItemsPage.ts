@@ -1504,15 +1504,14 @@ export default class CommonItemsPage {
       }
     }
   }
-  // due to @KNOWN-DEFECT-RSP-5486 this method is not selecting the value from suggestion list
+
   async selectSponsorOrgJsEnabled<PageObject>(dataset: JSON | Record<string, any>, key: string, page: PageObject) {
     dataset['sponsor_organisation_jsenabled_text'] = dataset[key];
     await this.fillUIComponent(dataset, 'sponsor_organisation_jsenabled_text', page);
     await this.page.waitForTimeout(2000);
-    await this.page.keyboard.press('Tab');
-    // const suggestionVisible = await this.sponsor_organisation_suggestion_list_labels.first().isVisible();
-    // if (suggestionVisible) {
-    //   await this.sponsor_organisation_suggestion_list_labels.first().click();
-    // }
+    const suggestionVisible = await this.sponsor_organisation_suggestion_list_labels.first().isVisible();
+    if (suggestionVisible) {
+      await this.sponsor_organisation_suggestion_list_labels.first().click();
+    }
   }
 }

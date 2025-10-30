@@ -35,43 +35,16 @@ export default class SetupNewSponsorOrganisationPage {
     );
   }
 
-  //Getters & Setters for Private Variables
-
-  async getOrgName(): Promise<string[]> {
-    return this._org_name;
-  }
-
-  async setOrgName(value: string[]): Promise<void> {
-    this._org_name = value;
-  }
-
-  async getReviewBodyRow(): Promise<Locator> {
-    return this._row_val;
-  }
-
-  async setReviewBodyRow(value: Locator): Promise<void> {
-    this._row_val = value;
-  }
-
-  async getUniqueOrgName(): Promise<string> {
-    return this._unique_org_name;
-  }
-
-  async setUniqueOrgName(value: string): Promise<void> {
-    this._unique_org_name = value;
-  }
-
   //Page Methods
 
   async goto() {
     await this.page.goto('');
   }
   async assertOnSetupNewSponsorOrganisationsPage() {
-    await expect(this.pageHeading).toBeVisible();
-    // expect
-    //   .soft(await this.page.title())
-    //   .toBe(this.setupNewSponsorOrganisationPageTestData.Setup_New_Sponsor_Organisation_Page.title);// Temporarily commented out due to title mismatch
-    await expect.soft(this.select_a_sponsor_organisation_label).toBeVisible();
+    await expect.soft(this.pageHeading).toBeVisible();
+    expect
+      .soft(await this.page.title())
+      .toBe(this.setupNewSponsorOrganisationPageTestData.Setup_New_Sponsor_Organisation_Page.title);
   }
   async selectSponsorOrgJsDisabled(dataset: JSON | Record<string, any>, key: string, commonItemsPage: CommonItemsPage) {
     await commonItemsPage.fillUIComponent(dataset, key, commonItemsPage);

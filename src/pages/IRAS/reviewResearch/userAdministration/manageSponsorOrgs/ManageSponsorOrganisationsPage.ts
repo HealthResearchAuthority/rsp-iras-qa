@@ -8,7 +8,6 @@ import CommonItemsPage from '../../../../Common/CommonItemsPage';
 export default class ManageSponsorOrganisationsPage {
   readonly page: Page;
   readonly manageSponsorOrganisationsPageTestData: typeof manageSponsorOrganisationsPageTestData;
-  private _org_name: string[];
   private _row_val: Locator;
   readonly linkTextData: typeof linkTextData;
   readonly pageHeading: Locator;
@@ -48,7 +47,6 @@ export default class ManageSponsorOrganisationsPage {
     this.page = page;
     this.manageSponsorOrganisationsPageTestData = manageSponsorOrganisationsPageTestData;
     this.linkTextData = linkTextData;
-    this._org_name = [];
 
     //Locators
     this.pageHeading = this.page
@@ -142,14 +140,6 @@ export default class ManageSponsorOrganisationsPage {
 
   //Getters & Setters for Private Variables
 
-  async getOrgName(): Promise<string[]> {
-    return this._org_name;
-  }
-
-  async setOrgName(value: string[]): Promise<void> {
-    this._org_name = value;
-  }
-
   async getSponsorOrgRow(): Promise<Locator> {
     return this._row_val;
   }
@@ -164,11 +154,11 @@ export default class ManageSponsorOrganisationsPage {
     await this.page.goto('sponsororganisations');
   }
   async assertOnManageSponsorOrganisationsPage() {
-    await expect(this.pageHeading).toBeVisible();
-    // expect
-    //   .soft(await this.page.title())
-    //   .toBe(this.manageSponsorOrganisationsPageTestData.Manage_Sponsor_Organisations_Page.title); // Temporarily commented out due to title mismatch
-    await expect(this.search_hint_text).toBeVisible();
+    await expect.soft(this.pageHeading).toBeVisible();
+    expect
+      .soft(await this.page.title())
+      .toBe(this.manageSponsorOrganisationsPageTestData.Manage_Sponsor_Organisations_Page.title);
+    await expect.soft(this.search_hint_text).toBeVisible();
   }
 
   async getSponsorStatus(status: string) {

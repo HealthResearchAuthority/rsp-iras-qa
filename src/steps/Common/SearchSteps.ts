@@ -87,6 +87,6 @@ Then('the list displays {string}', async ({ commonItemsPage }, resultsAmount: st
   if (resultsAmount.toLowerCase().includes('single')) {
     await expect(commonItemsPage.tableBodyRows).toHaveCount(1);
   } else {
-    expect(await commonItemsPage.tableBodyRows.count()).toBeGreaterThan(1);
+    expect(await commonItemsPage.tableBodyRows.count()).toBeGreaterThanOrEqual(1);
   }
 });

@@ -147,7 +147,7 @@ export default class ManageReviewBodiesPage {
   async getOrgNamesListFromUI() {
     const orgNames: string[] = [];
     let hasNextPage = true;
-    //adding this for loop instead of while loop to limit navigation till first 3 pages only,to reduce time and reduce fakiness
+    //adding this for loop instead of while loop to limit navigation till first 2 pages only,to reduce time and reduce fakiness
     for (let i = 0; i < 2; i++) {
       const rowCount = await this.orgListRows.count();
       for (let i = 1; i < rowCount; i++) {

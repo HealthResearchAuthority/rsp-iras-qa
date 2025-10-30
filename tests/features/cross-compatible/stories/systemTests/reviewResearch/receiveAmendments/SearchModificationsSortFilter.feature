@@ -7,8 +7,6 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
 
         # Known Issues :-
         # I 'cannot' see the advanced filters panel-fail for Advanced_Filters_Nth- JS DIsabled (Sponsor is selected)
-        # When JS Enabled >> Sponsor org is taking too long to display data >>JS DIsabled only for Sponsor selection -Advanced_Filters_Nth>>due to @KNOWN-DEFECT-RSP-5486
-
         @SortModificationsByColumn @rsp-4090
         Scenario Outline: Verify the user is able to sort the list of modifications by ascending and descending order for each results table column
                 And I fill the search input for searching 'modifications' with 'Valid_Iras_Id_Prefix' as the search query
@@ -482,9 +480,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
                         | Valid_Iras_Id     | Advanced_Filters     |
                         | Valid_Iras_Id_Nth | Advanced_Filters_Nth |
 
-        # when the JavaScript is enabled, the sponsor organisation suggestion box is not visible in playwright emulation
-        # hence marking the scenarios as @fail and will be fixed in future
-        @SponsorOrganisationValidation @AdvancedFilters @jsEnabled @KNOWN-DEFECT-RSP-5486 @RTS
+        @SponsorOrganisationValidation @AdvancedFilters @jsEnabled @RTS
         Scenario Outline: Validate the sponsor organisation suggestion list in advanced filters when javascript is enabled
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I expand the chevrons for '<Advanced_Filters>' in search modifications page
@@ -620,8 +616,7 @@ Feature: Receive Amendments: Filter, Search and Sort the Search modifications pa
                 When I click the 'Back' link on the 'Approvals_Page'
                 Then I can see the 'Home_Page'
 
-        # Issue in sponsor org -too long to display RTS data - @KNOWN-DEFECT-RSP-5486
-        @jsEnabled @VerifyHintLabelForSelectedCheckboxAdvancedFilters @rsp-4167 @KNOWN-DEFECT-RSP-5486
+        @jsEnabled @VerifyHintLabelForSelectedCheckboxAdvancedFilters @rsp-4167
         Scenario Outline: When javascript enabled verify the hint text for advanced filters when user select multiple checkboxes
                 And I click the 'Advanced_Filters' button on the 'Search_Modifications_Page'
                 And I capture the page screenshot

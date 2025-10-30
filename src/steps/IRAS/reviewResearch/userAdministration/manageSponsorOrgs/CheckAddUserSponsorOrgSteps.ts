@@ -18,5 +18,6 @@ When(
     await checkAddUserSponsorOrganisationPage.setUserEmail(
       confirmStringNotNull(await checkAddUserSponsorOrganisationPage.user_email_value.textContent())
     );
+    // validate user details from db using email address
   }
 );
