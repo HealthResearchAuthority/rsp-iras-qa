@@ -188,22 +188,23 @@ Then('I see something {string}', async ({ commonItemsPage }, testType: string) =
 
 Then('I click the {string} button on the {string}', async ({ commonItemsPage }, buttonKey: string, pageKey: string) => {
   const buttonValue = commonItemsPage.buttonTextData[pageKey][buttonKey];
+  let button: Locator;
   if (
     (pageKey === 'Review_All_Changes_Page' && buttonKey === 'Send_Modification_To_Sponsor') ||
     (pageKey === 'Confirmation_Page' && buttonKey === 'Return_To_Project_Overview')
   ) {
-    await commonItemsPage.govUkButton
+    button = commonItemsPage.govUkButton
       .getByText(buttonValue)
       .or(commonItemsPage.genericButton.getByText(buttonValue))
-      .first()
-      .click();
+      .first();
   } else {
-    await commonItemsPage.govUkButton
+    button = commonItemsPage.govUkButton
       .getByText(buttonValue, { exact: true })
       .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
-      .first()
-      .click();
+      .first();
   }
+  await commonItemsPage.page.waitForTimeout(500);
+  await button.click();
   await commonItemsPage.page.waitForLoadState('domcontentloaded');
 });
 
