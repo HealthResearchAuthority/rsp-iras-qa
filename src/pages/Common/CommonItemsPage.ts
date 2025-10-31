@@ -114,6 +114,7 @@ export default class CommonItemsPage {
   readonly active_filters_list_to_remove: Locator;
   readonly errorMessageFieldLabelList: Locator;
   readonly details_component: Locator;
+  readonly page_heading: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -278,6 +279,7 @@ export default class CommonItemsPage {
       .locator('.field-validation-error')
       .or(this.page.locator('.govuk-error-message'));
     this.details_component = this.page.locator('.govuk-details');
+    this.page_heading = this.page.getByRole('heading');
   }
 
   //Getters & Setters for Private Variables
@@ -1419,6 +1421,15 @@ export default class CommonItemsPage {
     await this.govUkButton
       .getByText(buttonLabel, { exact: true })
       .or(this.genericButton.getByText(buttonLabel, { exact: true }))
+      .first()
+      .click();
+  }
+
+  async clickLink(page: string, linkName: string) {
+    const linkLabel = this.linkTextData[page][linkName];
+    await this.govUkLink
+      .getByText(linkLabel, { exact: true })
+      .or(this.genericButton.getByText(linkLabel, { exact: true }))
       .first()
       .click();
   }

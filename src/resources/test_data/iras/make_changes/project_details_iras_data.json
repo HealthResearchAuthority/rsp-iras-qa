@@ -3,6 +3,14 @@
     "heading": "Project identifiers",
     "legacy_iras_lookup_file_path": "/Input Test Data/Automation/IRAS_Test_Data.csv"
   },
+  "IRAS_ID_Error_Page": {
+    "project_not_eligible_page_heading": "Your project is not currently eligible to use this service ",
+    "project_already_exist_heading": "A project record already exists",
+    "project_not_eligible_page_body": "This service is currently only accepting research projects that: are only taking place in one UK nation did not require review by an NHS REC have a current open status with relevant approvals in place are sponsored by an organisation that has been invited and set up to use this service To make a change to any other project, you should continue to follow existing processes. To get help, contact the support team. OnlineVisit the HRA support site Emailservice.desk@hra.nhs.uk Phone020 7104 8260Monday to Friday, 9am to 5pm",
+    "project_already_exist_page_body": "The IRAS ID you entered is for a project that has already been added to this service. You only need to add a project once. If you added the project you will find it in the ‘My research’ section of your account. If someone else added the project you will need to contact them.To get help, contact the support team. OnlineVisit the HRA support site Emailservice.desk@hra.nhs.uk Phone020 7104 8260Monday to Friday, 9am to 5pm",
+    "follow_existing_process_url": "https://www.myresearchproject.org.uk/help/hlpamendmentsresearch.aspx",
+    "hra_support_site_url": "https://www.hra.nhs.uk/about-us/contact-us/"
+  },
   "Label_Texts": {
     "iras_textbox_label": "IRAS ID",
     "iras_textbox_hint": "This is the 4 to 7 digit ID generated when you created your initial application"
@@ -51,5 +59,8 @@
   },
   "Invalid_IRAS_ID_Blank": {
     "iras_id_text": ""
+  },
+  "IRAS_ID_Not_In_HARP": {
+    "iras_id_text": "3467856"
   }
 }

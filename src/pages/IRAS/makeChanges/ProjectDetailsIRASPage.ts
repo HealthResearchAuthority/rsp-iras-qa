@@ -16,6 +16,7 @@ export default class ProjectDetailsIRASPage {
   readonly iras_id_text: Locator;
   readonly iras_id_text_summary_error_label: Locator;
   readonly iras_textbox_hint: Locator;
+  readonly page_body: Locator;
   private _unique_iras_id: string;
 
   //Initialize Page Objects
@@ -35,6 +36,7 @@ export default class ProjectDetailsIRASPage {
     });
     this.iras_id_text = this.page.getByTestId('IrasId');
     this.iras_id_text_summary_error_label = this.page.locator('.govuk-error-summary__list [href^="#IrasId"]');
+    this.page_body = this.page.locator('[class="govuk-grid-column-two-thirds"]');
   }
 
   //Page Methods
