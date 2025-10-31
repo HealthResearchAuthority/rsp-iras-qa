@@ -486,4 +486,15 @@ WHERE UserRoles.UserId = '${userId}'`);
     await this.setAllUserProfileValues(queryResult, rolesQueryResult);
     await sqlConnection.close();
   }
+
+  async sqlDeleteUserProfileByEmail(email: string): Promise<void> {
+    const sqlConnection = await connect(dbConfigData.Identity_Service);
+    const queryResult = await sqlConnection.query(`SELECT Id FROM Users WHERE UserName = '${email}'`);
+    if (queryResult.recordset.length > 0) {
+      await sqlConnection.query(`DELETE FROM UserRoles WHERE UserId = '${queryResult.recordset[0].Id}'`);
+      await sqlConnection.query(`DELETE FROM UserAuditTrails WHERE UserId = '${queryResult.recordset[0].Id}'`);
+      await sqlConnection.query(`DELETE FROM Users WHERE Id = '${queryResult.recordset[0].Id}'`);
+    }
+    await sqlConnection.close();
+  }
 }
