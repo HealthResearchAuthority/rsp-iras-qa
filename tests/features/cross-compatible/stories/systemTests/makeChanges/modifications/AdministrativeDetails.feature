@@ -233,8 +233,8 @@ Feature: Create Amendment - Create Modifications for administrative details for 
       | Changes                                                                   | Field_And_Summary_Error_Message                       | Area_Of_Change                         | Specific_Change        |
       | Modification_To_Add_Administrative_Details_Invalid_Data_Reference_Numbers | Field_Summary_Error_Message_Invalid_Project_Reference | Administrative_Details_For_The_Project | Project_Identification |
 
-  @rsp-4094 @rsp-4095 @ModificationsErrorValidationInvalidProjectTitles
-  Scenario Outline: Validate error message for invalid project titles on project identificationpage
+  @rsp-4094 @ModificationsErrorValidationInvalidProjectTitles
+  Scenario Outline: Validate error message for invalid project titles on project identification page
     Then I fill the research locations page with 'Valid_Data_All_Fields'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
     Then I can see the review your answers page

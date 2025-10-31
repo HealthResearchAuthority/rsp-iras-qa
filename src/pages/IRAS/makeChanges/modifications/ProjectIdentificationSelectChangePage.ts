@@ -1,5 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as projectIdentificationSelectChangePageTestData from '../../../../resources/test_data/iras/make_changes/modifications/project_identification_select_change_data.json';
+import CommonItemsPage from '../../../Common/CommonItemsPage';
 
 //Declare Page Objects
 export default class ProjectIdentificationSelectChangePage {
@@ -43,7 +44,8 @@ export default class ProjectIdentificationSelectChangePage {
     expect.soft(currentUrl).toContain('prn-select-change');
   }
 
-  async fillProjectIdentificationSelectChangePage({ commonItemsPage }, dataset: any) {
+  async fillProjectIdentificationSelectChangePage(dataset: any) {
+    const commonItemsPage = new CommonItemsPage(this.page);
     for (const key in dataset) {
       if (Object.hasOwn(dataset, key)) {
         if (key === 'project_reference_numbers_radio' || key === 'title_radio') {

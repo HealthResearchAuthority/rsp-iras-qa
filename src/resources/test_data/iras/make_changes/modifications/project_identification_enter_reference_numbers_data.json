@@ -62,6 +62,7 @@
     "area_of_change_dropdown": "Administrative details for the project",
     "specific_change_dropdown": "Project identification",
     "title_radio": "Title",
+    "which_titles_do_you_need_to_change_checkboxes": ["Short project title", "Full project title"],
     "Project_Reference": {
       "new_short_project_title_text": "QA_Automation - Max short study title length one two three four five six seven eight nine ten one END",
       "new_full_project_title_text": "QA_Automation - Max full study title length one two three four five six seven eight nine ten one  END"

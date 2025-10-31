@@ -8,6 +8,7 @@ export default class ProjectIdentificationSelectReferenceToChangePage {
   readonly projectIdentificationSelectReferenceToChangePageTestData: typeof projectIdentificationSelectReferenceToChangePageTestData;
   readonly pageHeading: Locator;
   readonly which_reference_do_you_need_to_change_checkboxes: Locator;
+  readonly which_titles_do_you_need_to_change_checkboxes: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -27,6 +28,7 @@ export default class ProjectIdentificationSelectReferenceToChangePage {
       )
       .locator('~ .govuk-checkboxes')
       .getByRole('checkbox');
+    this.which_titles_do_you_need_to_change_checkboxes = this.page.locator('.govuk-checkboxes__input');
   }
 
   //Page Methods
@@ -40,7 +42,10 @@ export default class ProjectIdentificationSelectReferenceToChangePage {
     const commonItemsPage = new CommonItemsPage(this.page);
     for (const key in dataset) {
       if (Object.hasOwn(dataset, key)) {
-        if (key === 'which_reference_do_you_need_to_change_checkboxes') {
+        if (
+          key === 'which_reference_do_you_need_to_change_checkboxes' ||
+          key === 'which_titles_do_you_need_to_change_checkboxes'
+        ) {
           await commonItemsPage.fillUIComponent(dataset, key, this);
         }
       }

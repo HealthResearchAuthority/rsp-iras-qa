@@ -128,8 +128,6 @@ export default class ProjectIdentificationEnterReferenceNumbersPage {
       .locator('..')
       .getByTestId('IQA0002_Text');
 
-    this.new_short_project_title_text = this.page.locator('input[type ="text"]').nth(0);
-
     this.new_full_project_title_text = this.page
       .getByText(
         projectIdentificationEnterReferenceNumbersPageTestData.Project_Identification_Enter_Reference_Numbers_Page

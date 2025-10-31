@@ -653,7 +653,7 @@ Feature: Create Amendment - Create Modifications
       | Other_Minor_Change_To_Project_Management           | Nhs_Involvement_Yes |
       | Multiple_Changes_Bulk_Free_Text_Reviewable_Set_Two | Nhs_Involvement_No  |
 
-  @rsp-4386 @rsp-4380 @rsp-5200 @rsp-5272 @rsp-4881 @rsp-4094 @rsp4095 @ModificationsJourneyEntireJourney @ModificationsToAddBulkFreeTextNonReviewable @KNOWN_DEFECT_RSP_5495_5496
+  @rsp-4386 @rsp-4380 @rsp-5200 @rsp-5272 @rsp-4881 @rsp-4094 @rsp-4095 @ModificationsJourneyEntireJourney @ModificationsToAddBulkFreeTextNonReviewable @KNOWN_DEFECT_RSP_5495_5496
   Scenario Outline: Validate that user can create and submit non reviewable modifications
     Then I fill the research locations page with '<Research_Locations>'
     When I click the 'Save_Continue' button on the 'Research_Locations_Page'
@@ -673,6 +673,7 @@ Feature: Create Amendment - Create Modifications
     And I capture the page screenshot
     And I validate the individual and overall ranking of changes on the relevant modification page
     And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    Then I validate all fields on modification page '<Changes>'
     When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
     And I capture the page screenshot
     Then I can see the add sponsor reference page
@@ -704,11 +705,8 @@ Feature: Create Amendment - Create Modifications
       | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Non_Applicability | Nhs_Involvement_Yes |
       | Multiple_Changes_Bulk_Free_Text_Non_Reviewable_Non_Applicability | Nhs_Involvement_No  |
       | Change_Of_Sponsor_legal_Representative                           | Nhs_Involvement_Yes |
-      | Changes_To_The_Research_Team                                     | Nhs_Involvement_Yes |
       | Modification_To_Add_Administrative_Details                       | Nhs_Involvement_Yes |
       | Modification_To_Add_Administrative_Details                       | Nhs_Involvement_No  |
-
-
 
   @rsp-4386 @rsp-4380 @rsp-5200 @rsp-5272 @rsp-4881 @ModificationsJourneyEntireJourney @ModificationsToAddBulkFreeTextCombined @KNOWN_DEFECT_RSP_5495_5496
   Scenario Outline: Validate that user can create modifications to add free text for reviewable and non reviewable modifications

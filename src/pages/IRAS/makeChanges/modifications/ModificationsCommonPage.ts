@@ -28,12 +28,13 @@ export default class ModificationsCommonPage {
   readonly changes_sub_heading: Locator;
   readonly ranking_sub_heading: Locator;
   readonly allChangeCards: Locator;
-  readonly keyLocatorString: string;
-  readonly valueLocatorString: string;
+  readonly keyLocator: Locator;
+  readonly valueLocator: Locator;
   readonly allModificationTypeKeys: Locator;
   readonly allModificationTypeValues: Locator;
   readonly allCategoryValues: Locator;
   readonly allReviewTypeValues: Locator;
+  readonly modificationStatusLabel: Locator;
 
   private rankingForChanges: Record<
     string,
@@ -50,11 +51,13 @@ export default class ModificationsCommonPage {
     this.page = page;
     this.modificationsCommonPageTestData = modificationsCommonPageTestData;
     this._modification_id = '';
-    this.keyLocatorString = 'dt.govuk-summary-list__key';
-    this.valueLocatorString = '~ dd.govuk-summary-list__value';
+    this.keyLocator = this.page.locator('dt.govuk-summary-list__key');
+    this.valueLocator = this.page.locator('~ dd.govuk-summary-list__value');
+
     //Locators
     this.pageHeading = this.page.getByRole('heading');
     this.pageComponentLabel = this.page.getByRole('heading');
+    this.modificationStatusLabel = this.page.locator('h2 strong');
     this.overall_modification_ranking_sub_heading = this.pageHeading.getByText(
       modificationsCommonPageTestData.Label_Texts.overall_modification_ranking_label
     );
@@ -162,41 +165,34 @@ export default class ModificationsCommonPage {
     dataset: any
   ) {
     const keys = Object.keys(dataset);
+    const commonItemsPage = new CommonItemsPage(this.page);
     if (dataset.specific_change_dropdown === 'Change to planned end date') {
       await new PlannedEndDateChangePage(this.page).fillPlannedProjectEndDateModificationsPage(dataset, 'create');
     } else if (
       this.modificationsCommonPageTestData.Modifications_To_Add_Free_Text.includes(dataset.specific_change_dropdown)
     ) {
-      await this.fillFreeTextChangePage(
-        {
-          commonItemsPage: new CommonItemsPage(this.page),
-        },
-        dataset
-      );
+      await this.fillFreeTextChangePage(dataset);
     } else if (
       this.modificationsCommonPageTestData.Modifications_To_Add_Administrative_Details.includes(
         dataset.specific_change_dropdown
       )
     ) {
-      await projectIdentificationSelectChangePage.fillProjectIdentificationSelectChangePage(
-        { commonItemsPage: new CommonItemsPage(this.page) },
-        dataset
-      );
-      await new CommonItemsPage(this.page).clickButton('Modifications_Page', 'Save_Continue');
-      if (keys.includes('project_reference_numbers_radio')) {
+      await projectIdentificationSelectChangePage.fillProjectIdentificationSelectChangePage(dataset);
+      await commonItemsPage.clickButton('Modifications_Page', 'Save_Continue');
+      if (keys.includes('project_reference_numbers_radio') || keys.includes('title_radio')) {
         await projectIdentificationSelectReferenceToChangePage.fillProjectIdentificationSelectReferenceToChangePage(
           dataset
         );
-        await new CommonItemsPage(this.page).clickButton('Modifications_Page', 'Save_Continue');
+        await commonItemsPage.clickButton('Modifications_Page', 'Save_Continue');
       }
       await projectIdentificationEnterReferenceNumbersPage.fillProjectIdentificationEnterReferenceNumbersPage(dataset);
-      await new CommonItemsPage(this.page).clickButton('Modifications_Page', 'Save_Continue');
+      await commonItemsPage.clickButton('Modifications_Page', 'Save_Continue');
     }
     if (this.modificationsCommonPageTestData.Applicability_Changes.includes(dataset.specific_change_dropdown)) {
       await this.fillApplicabilityPages(dataset);
     }
     await this.validateRankingForIndividualChange(changeName);
-    await new CommonItemsPage(this.page).clickButton('Modifications_Page', 'Save_Continue');
+    await commonItemsPage.clickButton('Modifications_Page', 'Save_Continue');
   }
 
   async fillApplicabilityPages(dataset: any) {
@@ -204,14 +200,15 @@ export default class ModificationsCommonPage {
     await new AffectedOrganisationQuestionsPage(this.page).fillAffectedOrganisationQuestions(dataset, 'create');
   }
 
-  async fillFreeTextChangePage({ commonItemsPage }, dataset: any) {
+  async fillFreeTextChangePage(dataset: any) {
+    const commonItemsPage = new CommonItemsPage(this.page);
     await this.validatePageHeading(dataset.specific_change_dropdown);
     for (const key in dataset) {
       if (key === 'changes_free_text') {
         await commonItemsPage.fillUIComponent(dataset, key, this);
       }
     }
-    await new CommonItemsPage(this.page).clickButton('Modifications_Page', 'Save_Continue');
+    await commonItemsPage.clickButton('Modifications_Page', 'Save_Continue');
   }
 
   async validateRankingForIndividualChange(changeName: string) {
@@ -301,10 +298,10 @@ export default class ModificationsCommonPage {
     for (const card of relevantCards) {
       const actualSpecificChangeValue = confirmStringNotNull(
         await card
-          .locator(this.keyLocatorString, {
+          .locator(this.keyLocator, {
             hasText: changeDataset[reversedChangeNames[changeIndex]]['specific_change_dropdown'],
           })
-          .locator(this.valueLocatorString)
+          .locator(this.valueLocator)
           .textContent()
       ).trim();
       const actualAreaOfChangeSubHeading = confirmStringNotNull(
@@ -316,8 +313,9 @@ export default class ModificationsCommonPage {
       )
         .trim()
         .split('\n')[0];
-      const actualChangeStatus = confirmStringNotNull(await card.locator('h2 strong').textContent()).trim();
-
+      const actualChangeStatus = confirmStringNotNull(
+        await card.locator(this.modificationStatusLabel).textContent()
+      ).trim();
       actualValuesArray.push({
         specificChangeValue: actualSpecificChangeValue,
         areaOfChangeSubHeading: actualAreaOfChangeSubHeading,
