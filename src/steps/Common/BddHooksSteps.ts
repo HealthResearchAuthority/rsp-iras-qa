@@ -3,7 +3,8 @@ import { test } from '../../hooks/CustomFixtures';
 import { getAuthState, getReportFolderName, getTicketReferenceTags } from '../../utils/UtilFunctions';
 import * as fs from 'node:fs';
 import path from 'node:path';
-const { AfterStep, BeforeScenario } = createBdd(test);
+
+const { AfterScenario, AfterStep, BeforeScenario } = createBdd(test);
 
 AfterStep(async ({ page, $step, $testInfo, commonItemsPage }) => {
   if (
@@ -44,6 +45,30 @@ BeforeScenario(
 
 BeforeScenario(
   {
+    name: 'Ensure One Login User does not exist in system',
+    tags: '@OneLoginUser',
+  },
+  async function ({ auditHistoryUserPage, userProfilePage }) {
+    const userEmail =
+      auditHistoryUserPage.auditHistoryUserPageTestData.User_Profiles.One_Login_Account_User.email_address;
+    await userProfilePage.sqlDeleteUserProfileByEmail(userEmail);
+  }
+);
+
+AfterScenario(
+  {
+    name: 'Remove One Login User from the system',
+    tags: '@OneLoginUser',
+  },
+  async function ({ auditHistoryUserPage, userProfilePage }) {
+    const userEmail =
+      auditHistoryUserPage.auditHistoryUserPageTestData.User_Profiles.One_Login_Account_User.email_address;
+    await userProfilePage.sqlDeleteUserProfileByEmail(userEmail);
+  }
+);
+
+BeforeScenario(
+  {
     name: 'Check that current auth state has not expired',
     tags: '@Regression or @SystemTest or @Smoke and not @NoAuth',
   },
@@ -72,7 +97,7 @@ BeforeScenario(
       for (const user of users) {
         await commonItemsPage.page.context().clearCookies();
         await homePage.goto();
-        await homePage.loginBtn.click();
+        await homePage.startNowBtn.click();
         await loginPage.assertOnLoginPage();
         await loginPage.loginWithUserCreds(user);
         await homePage.assertOnHomePage();
