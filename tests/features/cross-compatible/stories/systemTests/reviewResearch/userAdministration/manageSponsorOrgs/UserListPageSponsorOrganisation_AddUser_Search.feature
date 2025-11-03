@@ -74,7 +74,7 @@ Feature: User Administration: Manage Sponsor Organisations - View user list page
         And I capture the page screenshot
         And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
         And I capture the page screenshot
-        Then I can see the user added successful message on sponsor organisation user list page
+        Then I can see the 'user added' successful message on sponsor organisation user list page
         Then I can see the user list page of the 'sponsor organisation'
         And I capture the page screenshot
         And I can see the user list of the selected 'sponsor organisation' is sorted by default in the alphabetical order of the 'First Name'
@@ -98,7 +98,7 @@ Feature: User Administration: Manage Sponsor Organisations - View user list page
         And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
         When I click the 'Add_User' link on the 'Search_Add_User_Sponsor_Org_Page'
         And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
-        Then I can see the user added successful message on sponsor organisation user list page
+        Then I can see the 'user added' successful message on sponsor organisation user list page
         Then I can see the user list page of the 'sponsor organisation'
         And I capture the page screenshot
         When I enter the '<Field_Name>' of the '<Position>' user shown on the current 'sponsor organisation' users list, into the search field

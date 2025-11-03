@@ -2,7 +2,7 @@ import { createBdd } from 'playwright-bdd';
 import { test, expect } from '../../../../../hooks/CustomFixtures';
 import { confirmStringNotNull } from '../../../../../utils/UtilFunctions';
 
-const { Then, When } = createBdd(test);
+const { Then } = createBdd(test);
 
 Then(
   'I can see the view and edit user profile page of the sponsor organisation',
@@ -44,20 +44,6 @@ Then(
         .toContain(
           viewEditUserProfilePage.viewEditUserProfilePageTestData.View_And_Edit_User_Profile_Page.sponsor_role_value
         );
-    }
-  }
-);
-
-When(
-  'I can see the {string} user has the correct roles assigned on their profile page',
-  async ({ userProfilePage, createUserProfilePage }, datasetName: string) => {
-    if (datasetName.endsWith('_No_Roles')) {
-      await expect(userProfilePage.role_value).not.toBeVisible();
-    } else {
-      const dataset = createUserProfilePage.createUserProfilePageTestData.Create_User_Profile[datasetName];
-      const actualValues = confirmStringNotNull(await userProfilePage.role_value.textContent());
-      const expectedValues = dataset.role_checkbox.toString().replaceAll(',', ', ');
-      expect(actualValues).toBe(expectedValues);
     }
   }
 );

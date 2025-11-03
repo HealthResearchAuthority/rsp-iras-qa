@@ -149,6 +149,7 @@ export default class CommonItemsPage {
   readonly last_logged_in_label: Locator;
   readonly actions_label: Locator;
   readonly back_to_users_link: Locator;
+  readonly success_message_header_text: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -397,6 +398,9 @@ export default class CommonItemsPage {
       exact: true,
     });
     this.tableRows = this.page.getByRole('table').getByRole('row');
+    this.success_message_header_text = this.page
+      .getByTestId('govuk-notification-banner-title')
+      .getByText(this.commonTestData.success_header_label);
   }
 
   //Getters & Setters for Private Variables

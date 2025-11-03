@@ -16,7 +16,6 @@ export default class SponsorOrganisationProfilePage {
   readonly back_link: Locator;
   readonly page_heading: Locator;
   readonly row_value_locator: Locator;
-  readonly row_change_link_locator: Locator;
   readonly organisation_name_row: Locator;
   readonly organisation_name_value: Locator;
   readonly country_row: Locator;
@@ -27,10 +26,10 @@ export default class SponsorOrganisationProfilePage {
   readonly description_value: Locator;
   readonly create_profile_btn: Locator;
   readonly users_row: Locator;
-  readonly row_view_this_review_body_list_of_users_link_locator: Locator;
-  readonly view_this_review_body_list_of_users_link: Locator;
-  readonly row_view_this_review_body_audit_history_link: Locator;
-  readonly view_this_review_body_audit_history_link: Locator;
+  readonly row_view_this_sponsor_organisation_list_of_users_link_locator: Locator;
+  readonly view_this_sponsor_organisation_list_of_users_link: Locator;
+  readonly view_this_sponsor_organisation_audit_history_link: Locator;
+  readonly row_view_this_sponsor_organisation_audit_history_link: Locator;
   readonly audit_row: Locator;
   readonly last_updated_row: Locator;
   readonly last_updated_value: Locator;
@@ -57,18 +56,20 @@ export default class SponsorOrganisationProfilePage {
       .getByRole('heading')
       .getByText(this.sponsorOrgProfilePageTestData.Sponsor_Organisation_Profile_Page.heading_prefix_label);
     this.row_value_locator = this.page.locator('input');
-    this.row_change_link_locator = this.page
+    this.row_view_this_sponsor_organisation_list_of_users_link_locator = this.page
       .getByRole('cell')
-      .getByText(this.linkTextData.Check_Create_Review_Body_Page.Change, { exact: true });
-
-    this.row_view_this_review_body_list_of_users_link_locator = this.page
+      .getByText(
+        this.sponsorOrgProfilePageTestData.Sponsor_Organisation_Profile_Page
+          .view_this_sponsor_organisation_list_of_users_link,
+        { exact: true }
+      );
+    this.row_view_this_sponsor_organisation_audit_history_link = this.page
       .getByRole('cell')
-      .getByText(this.linkTextData.Review_Body_Profile_Page.View_This_Review_Body_List_Of_Users, { exact: true });
-
-    this.row_view_this_review_body_audit_history_link = this.page
-      .getByRole('cell')
-      .getByText(this.linkTextData.Review_Body_Profile_Page.View_This_Review_Body_Audit_History, { exact: true });
-
+      .getByText(
+        this.sponsorOrgProfilePageTestData.Sponsor_Organisation_Profile_Page
+          .view_this_sponsor_organisation_audit_history_link,
+        { exact: true }
+      );
     this.organisation_name_row = this.page.locator('tr', {
       has: this.page
         .getByRole('cell')
@@ -92,8 +93,8 @@ export default class SponsorOrganisationProfilePage {
           exact: true,
         }),
     });
-    this.view_this_review_body_list_of_users_link = this.users_row.locator(
-      this.row_view_this_review_body_list_of_users_link_locator
+    this.view_this_sponsor_organisation_list_of_users_link = this.users_row.locator(
+      this.row_view_this_sponsor_organisation_list_of_users_link_locator
     );
     this.audit_row = this.page.locator('tr', {
       has: this.page
@@ -102,8 +103,8 @@ export default class SponsorOrganisationProfilePage {
           exact: true,
         }),
     });
-    this.view_this_review_body_audit_history_link = this.audit_row.locator(
-      this.row_view_this_review_body_audit_history_link
+    this.view_this_sponsor_organisation_audit_history_link = this.audit_row.locator(
+      this.row_view_this_sponsor_organisation_audit_history_link
     );
     this.last_updated_row = this.page.locator('tr', {
       has: this.page
@@ -180,6 +181,11 @@ export default class SponsorOrganisationProfilePage {
       .soft(await this.page.title())
       .toBe(this.sponsorOrgProfilePageTestData.Sponsor_Organisation_Profile_Page.title);
     await expect.soft(this.page_heading).toBeVisible();
+    await expect.soft(this.organisation_name_value).toBeVisible();
+    await expect.soft(this.country_value).toBeVisible();
+    await expect.soft(this.view_this_sponsor_organisation_list_of_users_link).toBeVisible();
+    await expect.soft(this.view_this_sponsor_organisation_audit_history_link).toBeVisible();
+    await expect.soft(this.last_updated_value).toBeVisible();
   }
 
   async goto() {

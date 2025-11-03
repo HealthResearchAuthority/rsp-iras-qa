@@ -91,50 +91,44 @@ Then(
       setupNewSponsorOrganisationPage.setupNewSponsorOrganisationPageTestData.Setup_New_Sponsor_Organisation[
         sponsorDatasetName
       ];
-    const rtsBaseUrl: string = dataset.rts_base_url;
+
+    const { rts_base_url: rtsBaseUrl, active, role, count, offset } = dataset;
+
     const organisationName = sponsorDataset['sponsor_organisation_text'];
-    const active = dataset.active;
-    const role = dataset.role;
-    const count = dataset.count;
-    const offset = dataset.offset;
 
-    for (let offsetCount = 0; offsetCount <= offset; ) {
-      const requestHeader =
-        `${rtsBaseUrl}organization?` +
-        `name:contains=${organisationName}` +
-        `&NihrRoleIdentifier=${role}` +
-        `&_count=${count}` +
-        `&_offset=${offsetCount}`;
+    const buildRequestUrl = (offsetCount: number): string =>
+      `${rtsBaseUrl}organization?name:contains=${organisationName}&NihrRoleIdentifier=${role}&_count=${count}&_offset=${offsetCount}`;
 
-      const requestResponse = await rtsPage.executeRTSRequest(request, dataset, rtsPage.bearerToken, requestHeader);
+    const processEntry = (entry: any[]) => {
+      for (const element of entry) {
+        const extensions = element.resource.extension ?? [];
+        for (const orgRole of extensions) {
+          const subExtensions = orgRole.extension;
+          if (!subExtensions) continue;
 
-      await expect.soft(requestResponse).toBeOK();
-      const receivedJson = await requestResponse.json();
-
-      if (receivedJson.entry === undefined) {
-        return;
-      } else {
-        for (const element of receivedJson.entry) {
-          const organisationRoles = element.resource.extension;
-          for (const organisationRole of organisationRoles) {
-            if (organisationRole.extension === undefined) {
-              continue;
-            } else {
-              const extensions = organisationRole.extension;
-              if (
-                extensions[0].valueString === role &&
-                extensions[3].valueString === 'Active' &&
-                element.resource.active === active
-              ) {
-                const name = element.resource.name;
-                const country = element.resource.address?.[0]?.country || 'Unknown';
-                rtsPage.rtsResponseListRecord.push({ name, country });
-              }
-            }
+          const [roleExt, , , statusExt] = subExtensions;
+          if (
+            roleExt?.valueString === role &&
+            statusExt?.valueString === 'Active' &&
+            element.resource.active === active
+          ) {
+            const name = element.resource.name;
+            const country = element.resource.address?.[0]?.country || 'Unknown';
+            rtsPage.rtsResponseListRecord.push({ name, country });
           }
         }
       }
-      offsetCount += 1000;
+    };
+
+    for (let offsetCount = 0; offsetCount <= offset; offsetCount += 1000) {
+      const requestUrl = buildRequestUrl(offsetCount);
+      const response = await rtsPage.executeRTSRequest(request, dataset, rtsPage.bearerToken, requestUrl);
+      await expect.soft(response).toBeOK();
+
+      const json = await response.json();
+      if (json.entry) {
+        processEntry(json.entry);
+      }
     }
   }
 );

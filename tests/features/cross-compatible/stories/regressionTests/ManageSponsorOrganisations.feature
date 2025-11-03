@@ -119,7 +119,7 @@ Feature: User Administration: Manage sponsor organisations
                 And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
                 And I capture the current time for 'Sponsor_Organisation_Profile_Page'
                 And I capture the page screenshot
-                Then I can see the user added successful message on sponsor organisation user list page
+                Then I can see the 'user added' successful message on sponsor organisation user list page
                 Then I can see the user list page of the 'sponsor organisation'
                 And I capture the page screenshot
                 When I click the 'Back_To_Sponsor_Organisation_Profile' link on the 'Sponsor_Org_User_List_Page'
@@ -152,7 +152,7 @@ Feature: User Administration: Manage sponsor organisations
                 When I click the 'Confirm' button on the 'Confirmation_Page'
                 And I capture the current time for 'Sponsor_Organisation_Profile_Page'
                 And I capture the page screenshot
-                Then I can see the user in the selected sponsor organisation disabled successful message on sponsor organisation user list page
+                Then I can see the 'user in the selected sponsor organisation disabled' successful message on sponsor organisation user list page
                 And I capture the page screenshot
                 Then I can see the 'Sponsor_Org_User_List_Page'
                 Then I can see the user list page of the 'sponsor organisation'
@@ -193,7 +193,7 @@ Feature: User Administration: Manage sponsor organisations
                 When I click the 'Confirm' button on the 'Confirmation_Page'
                 And I capture the current time for 'Sponsor_Organisation_Profile_Page'
                 And I capture the page screenshot
-                Then I can see the user in the selected sponsor organisation enabled successful message on sponsor organisation user list page
+                Then I can see the 'user in the selected sponsor organisation enabled' successful message on sponsor organisation user list page
                 And I capture the page screenshot
                 Then I can see the 'Sponsor_Org_User_List_Page'
                 Then I can see the user list page of the 'sponsor organisation'
@@ -298,7 +298,7 @@ Feature: User Administration: Manage sponsor organisations
                 And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
                 And I capture the current time for 'Sponsor_Organisation_Profile_Page'
                 And I capture the page screenshot
-                Then I can see the user added successful message on sponsor organisation user list page
+                Then I can see the 'user added' successful message on sponsor organisation user list page
                 Then I can see the user list page of the 'sponsor organisation'
                 And I capture the page screenshot
                 When I click the 'Back_To_Sponsor_Organisation_Profile' link on the 'Sponsor_Org_User_List_Page'
@@ -331,7 +331,7 @@ Feature: User Administration: Manage sponsor organisations
                 When I click the 'Confirm' button on the 'Confirmation_Page'
                 And I capture the current time for 'Sponsor_Organisation_Profile_Page'
                 And I capture the page screenshot
-                Then I can see the user in the selected sponsor organisation disabled successful message on sponsor organisation user list page
+                Then I can see the 'user in the selected sponsor organisation disabled' successful message on sponsor organisation user list page
                 And I capture the page screenshot
                 Then I can see the 'Sponsor_Org_User_List_Page'
                 Then I can see the user list page of the 'sponsor organisation'
@@ -372,7 +372,7 @@ Feature: User Administration: Manage sponsor organisations
                 When I click the 'Confirm' button on the 'Confirmation_Page'
                 And I capture the current time for 'Sponsor_Organisation_Profile_Page'
                 And I capture the page screenshot
-                Then I can see the user in the selected sponsor organisation enabled successful message on sponsor organisation user list page
+                Then I can see the 'user in the selected sponsor organisation enabled' successful message on sponsor organisation user list page
                 And I capture the page screenshot
                 Then I can see the 'Sponsor_Org_User_List_Page'
                 Then I can see the user list page of the 'sponsor organisation'

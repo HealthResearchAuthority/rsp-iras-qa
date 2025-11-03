@@ -1376,20 +1376,15 @@ Then(
 
 Then(
   'I can see the {string} list sorted by {string} order of the {string} on the {string} page',
-  async (
-    { manageReviewBodiesPage, commonItemsPage },
-    sortListType: string,
-    sortDirection: string,
-    sortField: string,
-    currentPage: string
-  ) => {
+  async ({ commonItemsPage }, sortListType: string, sortDirection: string, sortField: string, currentPage: string) => {
     let sortedList: string[];
     let columnIndex: number;
-    if (
-      sortListType.toLowerCase() === 'manage sponsor organisations' ||
-      sortListType.toLowerCase() === 'manage review bodies'
-    ) {
-      switch (sortField.toLowerCase()) {
+    const lowerSortListType = sortListType.toLowerCase();
+    const lowerSortField = sortField.toLowerCase();
+    const lowerSortDirection = sortDirection.toLowerCase();
+    const lowerCurrentPage = currentPage.toLowerCase();
+    if (lowerSortListType === 'manage sponsor organisations' || lowerSortListType === 'manage review bodies') {
+      switch (lowerSortField) {
         case 'organisation name':
           columnIndex = 0;
           break;
@@ -1400,10 +1395,10 @@ Then(
           columnIndex = 2;
           break;
         default:
-          throw new Error(`${sortField} is not a valid option`);
+          throw new Error(`${lowerSortField} is not a valid option`);
       }
       let actualList: string[] = [];
-      if (sortField.toLowerCase() == 'country') {
+      if (lowerSortField == 'country') {
         const originalList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
         for (const country of originalList) {
           if (country.includes(',')) {
@@ -1415,19 +1410,15 @@ Then(
       } else {
         actualList = await commonItemsPage.getActualListValues(commonItemsPage.tableBodyRows, columnIndex);
       }
-      if (sortDirection.toLowerCase() == 'ascending') {
+      if (lowerSortDirection == 'ascending') {
         sortedList = [...actualList].toSorted((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
-        if (sortField.toLowerCase() == 'status' && currentPage.toLowerCase() == 'first') {
-          expect
-            .soft(actualList)
-            .toContain(manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.enabled_status);
+        if (lowerSortField == 'status' && lowerCurrentPage == 'first') {
+          expect.soft(actualList).toContain(commonItemsPage.commonTestData.enabled_status);
         }
       } else {
         sortedList = [...actualList].toSorted((a, b) => b.localeCompare(a, 'en', { sensitivity: 'base' }));
-        if (sortField.toLowerCase() == 'status' && currentPage.toLowerCase() == 'first') {
-          expect
-            .soft(actualList)
-            .toContain(manageReviewBodiesPage.manageReviewBodiesPageData.Manage_Review_Body_Page.disabled_status);
+        if (lowerSortField == 'status' && lowerCurrentPage == 'first') {
+          expect.soft(actualList).toContain(commonItemsPage.commonTestData.disabled_status);
         }
       }
       expect.soft(actualList).toEqual(sortedList);
@@ -1605,29 +1596,27 @@ Then(
     datasetName: string,
     orgType: string
   ) => {
-    if (orgType === 'manage review body') {
-      const dataset = reviewBodyProfilePage.reviewBodyProfilePageData[datasetName];
-      for (const key in dataset) {
-        if (Object.hasOwn(dataset, key)) {
-          const labelVal = await commonItemsPage.getUiLabel(key, reviewBodyProfilePage);
-          expect.soft(labelVal).toBe(dataset[key]);
-        }
-      }
-    } else if (orgType === 'sponsor organisation') {
-      const dataset = sponsorOrganisationProfilePage.sponsorOrgProfilePageTestData[datasetName];
-      for (const key in dataset) {
-        if (Object.hasOwn(dataset, key)) {
-          const labelVal = await commonItemsPage.getUiLabel(key, sponsorOrganisationProfilePage);
-          expect.soft(labelVal).toBe(dataset[key]);
-        }
-      }
-    } else if (orgType === 'user in sponsor organisation') {
-      const dataset = viewEditUserProfilePage.viewEditUserProfilePageTestData[datasetName];
-      for (const key in dataset) {
-        if (Object.hasOwn(dataset, key)) {
-          const labelVal = await commonItemsPage.getUiLabel(key, viewEditUserProfilePage);
-          expect.soft(labelVal).toBe(dataset[key]);
-        }
+    const orgTypeMap: Record<string, { page: any; data: any }> = {
+      'manage review body': {
+        page: reviewBodyProfilePage,
+        data: reviewBodyProfilePage.reviewBodyProfilePageData,
+      },
+      'sponsor organisation': {
+        page: sponsorOrganisationProfilePage,
+        data: sponsorOrganisationProfilePage.sponsorOrgProfilePageTestData,
+      },
+      'user in sponsor organisation': {
+        page: viewEditUserProfilePage,
+        data: viewEditUserProfilePage.viewEditUserProfilePageTestData,
+      },
+    };
+    const orgConfig = orgTypeMap[orgType];
+    if (orgConfig) {
+      const dataset = orgConfig.data[datasetName];
+      const page = orgConfig.page;
+      for (const key of Object.keys(dataset)) {
+        const labelVal = await commonItemsPage.getUiLabel(key, page);
+        expect.soft(labelVal).toBe(dataset[key]);
       }
     }
   }

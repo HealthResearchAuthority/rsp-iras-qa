@@ -35,7 +35,7 @@ Feature: Feature: User Administration: Manage Sponsor Organisations- Enable / Di
     And the check and add user to sponsor organisation page displays the expected user details
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
-    Then I can see the user added successful message on sponsor organisation user list page
+    Then I can see the 'user added' successful message on sponsor organisation user list page
     Then I can see the user list page of the 'sponsor organisation'
     And I capture the page screenshot
     When I enter 'email of the newly added user in the selected sponsor organisation' into the search field
@@ -55,7 +55,7 @@ Feature: Feature: User Administration: Manage Sponsor Organisations- Enable / Di
     And I capture the page screenshot
     When I click the 'Confirm' button on the 'Confirmation_Page'
     And I capture the page screenshot
-    Then I can see the user in the selected sponsor organisation disabled successful message on sponsor organisation user list page
+    Then I can see the 'user in the selected sponsor organisation disabled' successful message on sponsor organisation user list page
     And I capture the page screenshot
     Then I can see the 'Sponsor_Org_User_List_Page'
     Then I can see the user list page of the 'sponsor organisation'
@@ -83,7 +83,7 @@ Feature: Feature: User Administration: Manage Sponsor Organisations- Enable / Di
     And I capture the page screenshot
     When I click the 'Confirm' button on the 'Confirmation_Page'
     And I capture the page screenshot
-    Then I can see the user in the selected sponsor organisation enabled successful message on sponsor organisation user list page
+    Then I can see the 'user in the selected sponsor organisation enabled' successful message on sponsor organisation user list page
     And I capture the page screenshot
     And I capture the page screenshot
     Then I can see the 'Sponsor_Org_User_List_Page'
@@ -124,7 +124,7 @@ Feature: Feature: User Administration: Manage Sponsor Organisations- Enable / Di
     And the check and add user to sponsor organisation page displays the expected user details
     And I click the 'Add_User' button on the 'Check_Add_User_Sponsor_Org_Page'
     And I capture the page screenshot
-    Then I can see the user added successful message on sponsor organisation user list page
+    Then I can see the 'user added' successful message on sponsor organisation user list page
     Then I can see the user list page of the 'sponsor organisation'
     And I capture the page screenshot
     When I enter 'email of the newly added user in the selected sponsor organisation' into the search field
