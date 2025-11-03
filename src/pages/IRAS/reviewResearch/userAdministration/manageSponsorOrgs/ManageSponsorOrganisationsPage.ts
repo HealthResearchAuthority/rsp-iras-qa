@@ -233,7 +233,7 @@ export default class ManageSponsorOrganisationsPage {
   }
 
   async findExistingSponsorOrganisations() {
-    const sponsorId = new Set(await this.sqlGetSponsorRtsIds())[0];
+    const sponsorId = new Set(await this.sqlGetSponsorRtsIds()).values().next().value;
     const organisationName = await this.sqlGetOrganisationNameFromRTSById(sponsorId);
     return organisationName[0];
   }

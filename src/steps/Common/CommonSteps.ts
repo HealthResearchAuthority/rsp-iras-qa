@@ -1808,3 +1808,16 @@ Given(
     }
   }
 );
+
+Given(
+  'I click the {string} link in the breadcrumbs on the {string}',
+  async ({ commonItemsPage }, linkKey: string, pageKey: string) => {
+    const linkValue = commonItemsPage.linkTextData[pageKey][linkKey];
+    const noOfLinksFound = await commonItemsPage.govUkBreadCrumbsLink.getByText(linkValue).count();
+    if (noOfLinksFound > 1) {
+      await commonItemsPage.govUkLink.getByText(linkValue).first().click();
+    } else {
+      await commonItemsPage.govUkLink.getByText(linkValue, { exact: true }).click();
+    }
+  }
+);

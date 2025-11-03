@@ -6,7 +6,7 @@ Feature: User Administration: Manage sponsor organisations
                 And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
                 Then I can see the 'Manage_Sponsor_Organisations_Page'
 
-        @RegressionTestVerifyLastUpdatedAfterSetupDisableEnableSponsorOrgAndUser
+        @RegressionTestVerifyLastUpdatedAfterSetupDisableEnableSponsorOrgAndUser @SetupNewSponsorOrg
         Scenario Outline: Verify that the user is able to perform: add a sponsor organisation, enable or disable a sponsor organisation, assign a user to a selected sponsor organisation, enable or disable a user within the sponsor organisation, and confirm that the 'Last Updated' field on the sponsor organisation profile page reflects these changes accurately
                 When I authorise the rts api using '<RTS_API_Data>'
                 Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation '<Setup_New_Sponsor_Organisation>' and  retrive country
@@ -122,7 +122,7 @@ Feature: User Administration: Manage sponsor organisations
                 Then I can see the 'user added' successful message on sponsor organisation user list page
                 Then I can see the user list page of the 'sponsor organisation'
                 And I capture the page screenshot
-                When I click the 'Back_To_Sponsor_Organisation_Profile' link on the 'Sponsor_Org_User_List_Page'
+                When I click the 'Sponsor_Organisation_Profile' link in the breadcrumbs on the 'Sponsor_Org_User_List_Page'
                 And I can see the sponsor organisation profile page
                 ## validate sponsor organisation profile page with the selected sponsor organisation and last updated date
                 And I now see the sponsor organisation profile page with the selected '<Setup_New_Sponsor_Organisation>'
@@ -157,7 +157,7 @@ Feature: User Administration: Manage sponsor organisations
                 Then I can see the 'Sponsor_Org_User_List_Page'
                 Then I can see the user list page of the 'sponsor organisation'
                 And I capture the page screenshot
-                When I click the 'Back_To_Sponsor_Organisation_Profile' link on the 'Sponsor_Org_User_List_Page'
+                When I click the 'Sponsor_Organisation_Profile' link in the breadcrumbs on the 'Sponsor_Org_User_List_Page'
                 And I can see the sponsor organisation profile page
                 ## validate sponsor organisation profile page with the selected sponsor organisation and last updated date
                 And I now see the sponsor organisation profile page with the selected '<Setup_New_Sponsor_Organisation>'
@@ -197,19 +197,19 @@ Feature: User Administration: Manage sponsor organisations
                 And I capture the page screenshot
                 Then I can see the 'Sponsor_Org_User_List_Page'
                 Then I can see the user list page of the 'sponsor organisation'
-                When I click the 'Back_To_Sponsor_Organisation_Profile' link on the 'Sponsor_Org_User_List_Page'
+                When I click the 'Sponsor_Organisation_Profile' link in the breadcrumbs on the 'Sponsor_Org_User_List_Page'
                 And I can see the sponsor organisation profile page
                 ## validate sponsor organisation profile page with the selected sponsor organisation and last updated date
                 And I now see the sponsor organisation profile page with the selected '<Setup_New_Sponsor_Organisation>'
                 And I capture the page screenshot
-                ## add a teardown step to selete this sponsor org from the database
+                ## add a teardown step to delete this sponsor org from the database
 
                 Examples:
                         | Setup_New_Sponsor_Organisation | Status_Enabled | Status_Disabled | RTS_API_Data         | RTS_Request                         | Disable_Label_Texts | Disable_Sponsor_Organisation_Labels | Enable_Label_Texts | Enable_Sponsor_Organisation_Labels | Disable_User_In_Sponsor_Organisation_Labels | Enable_User_In_Sponsor_Organisation_Labels | Navigation_Link |
                         | Sponsor_Organisation_Unused    | Enabled        | Disabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS | Disable_Label_Texts | Disable_Sponsor_Organisation_Labels | Enable_Label_Texts | Enable_Sponsor_Organisation_Labels | Disable_User_In_Sponsor_Organisation_Labels | Enable_User_In_Sponsor_Organisation_Labels | Back            |
 
 
-        @EndToEndFlow @RegressionTestVerifyLastUpdatedAfterDisableEnableExistingSponsorOrgAndUser
+        @RegressionTestVerifyLastUpdatedAfterDisableEnableExistingSponsorOrgAndUser @Test
         Scenario Outline: Verify that the user is able to perform: select an existing sponsor organisation, enable or disable the selected sponsor organisation, assign a user to the selected sponsor organisation, enable or disable a user within the sponsor organisation, and confirm that the 'Last Updated' field on the sponsor organisation profile page reflects these changes accurately
                 ## search and select an existing sponsor organisation
                 When I enter 'name of the previously added sponsor organisation' into the search field
@@ -301,7 +301,7 @@ Feature: User Administration: Manage sponsor organisations
                 Then I can see the 'user added' successful message on sponsor organisation user list page
                 Then I can see the user list page of the 'sponsor organisation'
                 And I capture the page screenshot
-                When I click the 'Back_To_Sponsor_Organisation_Profile' link on the 'Sponsor_Org_User_List_Page'
+                When I click the 'Sponsor_Organisation_Profile' link in the breadcrumbs on the 'Sponsor_Org_User_List_Page'
                 And I can see the sponsor organisation profile page
                 ## validate sponsor organisation profile page with the selected sponsor organisation and last updated date
                 And I now see the sponsor organisation profile page with the selected '<Existing_Sponsor_Organisation>'
@@ -336,7 +336,7 @@ Feature: User Administration: Manage sponsor organisations
                 Then I can see the 'Sponsor_Org_User_List_Page'
                 Then I can see the user list page of the 'sponsor organisation'
                 And I capture the page screenshot
-                When I click the 'Back_To_Sponsor_Organisation_Profile' link on the 'Sponsor_Org_User_List_Page'
+                When I click the 'Sponsor_Organisation_Profile' link in the breadcrumbs on the 'Sponsor_Org_User_List_Page'
                 And I can see the sponsor organisation profile page
                 ## validate sponsor organisation profile page with the selected sponsor organisation and last updated date
                 And I now see the sponsor organisation profile page with the selected '<Existing_Sponsor_Organisation>'
@@ -376,7 +376,7 @@ Feature: User Administration: Manage sponsor organisations
                 And I capture the page screenshot
                 Then I can see the 'Sponsor_Org_User_List_Page'
                 Then I can see the user list page of the 'sponsor organisation'
-                When I click the 'Back_To_Sponsor_Organisation_Profile' link on the 'Sponsor_Org_User_List_Page'
+                When I click the 'Sponsor_Organisation_Profile' link in the breadcrumbs on the 'Sponsor_Org_User_List_Page'
                 And I can see the sponsor organisation profile page
                 ## validate sponsor organisation profile page with the selected sponsor organisation and last updated date
                 And I now see the sponsor organisation profile page with the selected '<Existing_Sponsor_Organisation>'

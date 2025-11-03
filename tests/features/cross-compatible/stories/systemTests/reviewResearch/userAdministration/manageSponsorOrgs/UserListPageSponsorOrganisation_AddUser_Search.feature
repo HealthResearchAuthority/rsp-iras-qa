@@ -103,7 +103,7 @@ Feature: User Administration: Manage Sponsor Organisations - View user list page
         And I click the 'Search' button on the 'Sponsor_Org_User_List_Page'
         And I capture the page screenshot
         Then the system displays search results matching the search criteria
-        When I click the 'Back_To_Sponsor_Organisation_Profile' link on the 'Sponsor_Org_User_List_Page'
+        When I click the 'Sponsor_Organisation_Profile' link in the breadcrumbs on the 'Sponsor_Org_User_List_Page'
         And I can see the sponsor organisation profile page
 
         Examples:

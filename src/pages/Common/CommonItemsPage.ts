@@ -144,6 +144,7 @@ export default class CommonItemsPage {
   readonly actions_label: Locator;
   readonly back_to_users_link: Locator;
   readonly success_message_header_text: Locator;
+  readonly govUkBreadCrumbsLink: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -183,6 +184,7 @@ export default class CommonItemsPage {
     this.govUkCheckboxes = this.page.locator('.govuk-checkboxes');
     this.govUkCheckboxItem = this.govUkCheckboxes.locator('.govuk-checkboxes__item');
     this.govUkLink = this.page.getByRole('link');
+    this.govUkBreadCrumbsLink = this.page.locator('a.govuk-breadcrumbs__link');
     this.fieldGroup = this.page.locator('.govuk-form-group');
     this.errorFieldGroup = this.page.locator('.govuk-form-group--error');
     this.govUkFieldValidationError = this.page.locator('.govuk-error-message');
