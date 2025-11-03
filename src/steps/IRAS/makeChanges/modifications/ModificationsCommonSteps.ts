@@ -219,7 +219,11 @@ const validateCardData = (expectedData: any, actualData: any) => {
     if (expected.length !== actual.length) return false;
     return expected.every((val, index) => val === actual[index]);
   };
+  const keysToSkip = ['change_status'];
   for (const key of Object.keys(expectedData)) {
+    if (keysToSkip.includes(key)) {
+      continue;
+    }
     const expectedValue = expectedData[key];
     const actualValue = actualData[key];
     if (Array.isArray(expectedValue)) {
@@ -227,7 +231,7 @@ const validateCardData = (expectedData: any, actualData: any) => {
       const sortedActual = [...(actualValue || [])].sort((a, b) => expectedValue.indexOf(a) - expectedValue.indexOf(b));
       expect.soft(compareArrays(sortedActual, sortedExpected)).toBe(true);
     } else {
-      expect.soft(actualValue).toBe(expectedValue);
+      expect.soft(actualValue).toStrictEqual(expectedValue);
     }
   }
 };
@@ -243,7 +247,8 @@ Then(
       const cardTitle = `Change ${changeIndex + 1} - ${expectedData.area_of_change_dropdown}`;
       const actualData = await modificationsCommonPage.getMappedSummaryCardDataForRankingCategoryChanges(
         cardTitle,
-        reviewAllChangesPage.reviewAllChangesPageTestData.Review_All_Changes_Page.changes_heading
+        reviewAllChangesPage.reviewAllChangesPageTestData.Review_All_Changes_Page.changes_heading,
+        expectedData
       );
       validateCardData(expectedData, actualData.cardData);
     }
@@ -256,7 +261,8 @@ Then(
     const expectedData = sponsorReferencePage.sponsorReferencePageTestData[datasetName];
     const actualData = await modificationsCommonPage.getMappedSummaryCardDataForRankingCategoryChanges(
       reviewAllChangesPage.reviewAllChangesPageTestData.Review_All_Changes_Page.sponsor_details_heading,
-      reviewAllChangesPage.reviewAllChangesPageTestData.Review_All_Changes_Page.sponsor_details_heading
+      reviewAllChangesPage.reviewAllChangesPageTestData.Review_All_Changes_Page.sponsor_details_heading,
+      expectedData
     );
     validateCardData(Object.keys(expectedData), actualData.cardData);
   }

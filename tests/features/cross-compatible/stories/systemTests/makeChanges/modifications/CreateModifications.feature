@@ -626,6 +626,7 @@ Feature: Create Amendment - Create Modifications
     When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
     And I capture the page screenshot
     Then I can see the review all changes page
+    And I validate the change details are displayed as per the '<Changes>' dataset
     And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
     And I validate the individual and overall ranking of changes on the relevant modification page
     Then I validate sponsor details are displayed with 'Valid_Data_All_Fields'
@@ -644,6 +645,7 @@ Feature: Create Amendment - Create Modifications
     Then I can see the review all changes page
     And I capture the page screenshot
     And I validate the individual and overall ranking of changes on the relevant modification page
+    And I validate the change details are displayed as per the '<Changes>' dataset
 
     Examples:
       | Changes                                            | Research_Locations  |
@@ -682,6 +684,7 @@ Feature: Create Amendment - Create Modifications
     And I capture the page screenshot
     Then I can see the review all changes page
     And I validate the individual and overall ranking of changes on the relevant modification page
+    And I validate the change details are displayed as per the '<Changes>' dataset
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
     And I capture the page screenshot
     Then I validate 'Modification_Sent_To_Sponsor_Labels' labels displayed in the success confirmation page when the modification has been sent to sponsor
@@ -695,6 +698,7 @@ Feature: Create Amendment - Create Modifications
     Then I can see the review all changes page
     And I capture the page screenshot
     And I validate the individual and overall ranking of changes on the relevant modification page
+    And I validate the change details are displayed as per the '<Changes>' dataset
 
     Examples:
       | Changes                                                          | Research_Locations  |
@@ -737,6 +741,7 @@ Feature: Create Amendment - Create Modifications
     Then I can see the review all changes page
     And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
     And I validate the individual and overall ranking of changes on the relevant modification page
+    And I validate the change details are displayed as per the '<Changes>' dataset
     Then I validate sponsor details are displayed with 'Valid_Data_All_Fields'
     Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
     And I capture the page screenshot
@@ -753,6 +758,7 @@ Feature: Create Amendment - Create Modifications
     Then I can see the review all changes page
     And I capture the page screenshot
     And I validate the individual and overall ranking of changes on the relevant modification page
+    And I validate the change details are displayed as per the '<Changes>' dataset
 
     Examples:
       | Changes                                                            | Research_Locations  |
