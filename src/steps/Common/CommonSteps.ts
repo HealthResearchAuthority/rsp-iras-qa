@@ -1012,13 +1012,10 @@ Then(
         dataset: manageUsersPage.manageUsersPageTestData.Advanced_Filters,
         labels: manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List,
       },
-      // Post_Approval_Page: {
-      //   dataset: modificationsCommonPage.modificationsCommonPageTestData.Advanced_Filters,
-      //   labels: modificationsCommonPage.modificationsCommonPageTestData.Post_Approval_Page_Label_Texts,
-      // },
       Post_Approval_Page: {
         dataset: projectOverviewPage.projectOverviewPageTestData.Advanced_Filters,
         labels: projectOverviewPage.projectOverviewPageTestData.Post_Approval_Page_Label_Texts,
+        //labels: projectOverviewPage.projectOverviewPageTestData.Post_Approval_Tab
       },
     };
     const { dataset, labels } = pageMap[pageKey];

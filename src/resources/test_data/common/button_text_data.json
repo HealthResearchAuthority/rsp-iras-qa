@@ -73,6 +73,7 @@
   "Confirmation_Page": {
     "Confirm": "Confirm",
     "Return_To_Project_Overview": "Return to project overview",
+    "Submit_To_Regulator": "Submit to regulator",
     "Delete_Project": "Delete project",
     "Keep_Project": "Keep project"
   },

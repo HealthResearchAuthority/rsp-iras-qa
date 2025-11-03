@@ -228,43 +228,37 @@ export default class ProjectOverviewPage {
     });
     this.post_approvals_advanced_filters_modification_type_label = this.page
       .getByRole('heading', { level: 2 })
-      .getByText(
-        this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_advanced_filters_modification_type_label,
-        {
-          exact: true,
-        }
-      );
+      .getByText(this.projectOverviewPageTestData.Post_Approval_Page_Label_Texts.modification_type_label, {
+        exact: true,
+      });
     this.modification_type_fieldset = this.post_approvals_advanced_filters_modification_type_label
       .locator('..')
       .locator('..')
       .locator('.govuk-fieldset')
       .locator('.govuk-form-group', {
-        has: this.page.getByText(this.projectOverviewPageTestData.Advanced_Filters_Hint_Labels.hint_label),
+        has: this.page.getByText(this.projectOverviewPageTestData.Post_Approval_Page_Label_Texts.radio_hint_label),
       });
     this.modification_type_radio = this.modification_type_fieldset.getByRole('radio');
     this.modification_type_radio_chevron = this.page
       .getByRole('heading', { level: 2 })
-      .getByText(
-        this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_advanced_filters_modification_type_label,
-        {
-          exact: true,
-        }
-      );
+      .getByText(this.projectOverviewPageTestData.Post_Approval_Page_Label_Texts.modification_type_label, {
+        exact: true,
+      });
     this.modification_type_hint_label = this.post_approvals_advanced_filters_modification_type_label
       .locator('..')
       .locator('..')
       .locator('.govuk-fieldset')
       .locator('.govuk-form-group')
-      .getByText(this.projectOverviewPageTestData.Advanced_Filters_Hint_Labels.hint_label);
+      .getByText(this.projectOverviewPageTestData.Post_Approval_Page_Label_Texts.radio_hint_label);
     this.modification_type_radio_hint_label = this.modification_type_fieldset.getByText(
-      this.projectOverviewPageTestData.Advanced_Filters_Hint_Labels.hint_label,
+      this.projectOverviewPageTestData.Post_Approval_Page_Label_Texts.radio_hint_label,
       {
         exact: true,
       }
     );
     this.post_approvals_advanced_filters_review_type_label = this.page
       .getByRole('heading', { level: 2 })
-      .getByText(this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_advanced_filters_review_type_label, {
+      .getByText(this.projectOverviewPageTestData.Post_Approval_Page_Label_Texts.review_type, {
         exact: true,
       });
     this.review_type_fieldset = this.post_approvals_advanced_filters_review_type_label
@@ -272,12 +266,12 @@ export default class ProjectOverviewPage {
       .locator('..')
       .locator('.govuk-fieldset')
       .locator('.govuk-form-group', {
-        has: this.page.getByText(this.projectOverviewPageTestData.Advanced_Filters_Hint_Labels.hint_label),
+        has: this.page.getByText(this.projectOverviewPageTestData.Post_Approval_Page_Label_Texts.radio_hint_label),
       });
     this.review_type_radio = this.review_type_fieldset.getByRole('radio');
     this.review_type_radio_chevron = this.page
       .getByRole('heading', { level: 2 })
-      .getByText(this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_advanced_filters_review_type_label, {
+      .getByText(this.projectOverviewPageTestData.Post_Approval_Page_Label_Texts.review_type, {
         exact: true,
       });
     this.review_type_hint_label = this.post_approvals_advanced_filters_review_type_label
@@ -285,9 +279,9 @@ export default class ProjectOverviewPage {
       .locator('..')
       .locator('.govuk-fieldset')
       .locator('.govuk-form-group')
-      .getByText(this.projectOverviewPageTestData.Advanced_Filters_Hint_Labels.hint_label);
+      .getByText(this.projectOverviewPageTestData.Post_Approval_Page_Label_Texts.review_type);
     this.review_type_radio_hint_label = this.modification_type_fieldset.getByText(
-      this.projectOverviewPageTestData.Advanced_Filters_Hint_Labels.hint_label,
+      this.projectOverviewPageTestData.Post_Approval_Page_Label_Texts.radio_hint_label,
       {
         exact: true,
       }
@@ -295,7 +289,7 @@ export default class ProjectOverviewPage {
     //separation
     this.post_approvals_advanced_filters_category_label = this.page
       .getByRole('heading', { level: 2 })
-      .getByText(this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_advanced_filters_category_label, {
+      .getByText(this.projectOverviewPageTestData.Post_Approval_Page_Label_Texts.category, {
         exact: true,
       });
     this.category_fieldset = this.post_approvals_advanced_filters_category_label
@@ -303,12 +297,12 @@ export default class ProjectOverviewPage {
       .locator('..')
       .locator('.govuk-fieldset')
       .locator('.govuk-form-group', {
-        has: this.page.getByText(this.projectOverviewPageTestData.Advanced_Filters_Hint_Labels.hint_label),
+        has: this.page.getByText(this.projectOverviewPageTestData.Post_Approval_Page_Label_Texts.radio_hint_label),
       });
     this.category_radio = this.review_type_fieldset.getByRole('radio');
     this.category_radio_chevron = this.page
       .getByRole('heading', { level: 2 })
-      .getByText(this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_advanced_filters_category_label, {
+      .getByText(this.projectOverviewPageTestData.Post_Approval_Page_Label_Texts.category, {
         exact: true,
       });
     this.category_hint_label = this.post_approvals_advanced_filters_category_label
@@ -316,16 +310,16 @@ export default class ProjectOverviewPage {
       .locator('..')
       .locator('.govuk-fieldset')
       .locator('.govuk-form-group')
-      .getByText(this.projectOverviewPageTestData.Advanced_Filters_Hint_Labels.hint_label);
+      .getByText(this.projectOverviewPageTestData.Post_Approval_Page_Label_Texts.radio_hint_label);
     this.category_radio_hint_label = this.modification_type_fieldset.getByText(
-      this.projectOverviewPageTestData.Advanced_Filters_Hint_Labels.hint_label,
+      this.projectOverviewPageTestData.Post_Approval_Page_Label_Texts.radio_hint_label,
       {
         exact: true,
       }
     );
     this.post_approvals_advanced_filters_status_label = this.page
       .getByRole('heading', { level: 2 })
-      .getByText(this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_advanced_filters_status_label, {
+      .getByText(this.projectOverviewPageTestData.Post_Approval_Page_Label_Texts.status_label, {
         exact: true,
       });
     this.status_fieldset = this.post_approvals_advanced_filters_status_label
@@ -333,12 +327,12 @@ export default class ProjectOverviewPage {
       .locator('..')
       .locator('.govuk-fieldset')
       .locator('.govuk-form-group', {
-        has: this.page.getByText(this.projectOverviewPageTestData.Advanced_Filters_Hint_Labels.hint_label),
+        has: this.page.getByText(this.projectOverviewPageTestData.Post_Approval_Page_Label_Texts.radio_hint_label),
       });
     this.status_radio = this.status_fieldset.getByRole('radio');
     this.status_radio_chevron = this.page
       .getByRole('heading', { level: 2 })
-      .getByText(this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_advanced_filters_status_label, {
+      .getByText(this.projectOverviewPageTestData.Post_Approval_Page_Label_Texts.status_label, {
         exact: true,
       });
     this.status_hint_label = this.post_approvals_advanced_filters_status_label
@@ -346,77 +340,93 @@ export default class ProjectOverviewPage {
       .locator('..')
       .locator('.govuk-fieldset')
       .locator('.govuk-form-group')
-      .getByText(this.projectOverviewPageTestData.Advanced_Filters_Hint_Labels.hint_label);
+      .getByText(this.projectOverviewPageTestData.Post_Approval_Page_Label_Texts.radio_hint_label);
     this.status_radio_hint_label = this.status_fieldset.getByText(
-      this.projectOverviewPageTestData.Advanced_Filters_Hint_Labels.hint_label,
+      this.projectOverviewPageTestData.Post_Approval_Page_Label_Texts.radio_hint_label,
       {
         exact: true,
       }
     );
     this.date_submitted_from_day_text_chevron = this.page
       .getByRole('heading')
-      .getByText(this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_date_submitted_label, {
+      .getByText(this.projectOverviewPageTestData.Post_Approval_Page_Label_Texts.date_submitted_label, {
         exact: true,
       });
     this.date_submitted_from_date_fieldset = this.page.locator('.govuk-fieldset').locator('.govuk-form-group', {
-      has: this.page.getByText(this.projectOverviewPageTestData.Post_Approval_Tab.date_submitted_from_date_hint_text),
+      has: this.page.getByText(
+        this.projectOverviewPageTestData.Post_Approval_Page_Label_Texts.date_submitted_from_date_hint_text
+      ),
     });
     this.date_submitted_from_date_help_text = this.page.locator('#Search_FromDate-hint');
     this.date_submitted_to_date_help_text = this.page.locator('#Search_ToDate-hint');
     this.date_submitted_from_day_text = this.date_submitted_from_date_fieldset
       .locator('.govuk-form-group', {
-        has: this.page.getByText(this.projectOverviewPageTestData.Post_Approval_Tab.date_submitted_day_label),
+        has: this.page.getByText(
+          this.projectOverviewPageTestData.Post_Approval_Page_Label_Texts.date_submitted_day_label
+        ),
       })
       .getByRole('textbox');
     this.date_submitted_from_month_dropdown = this.date_submitted_from_date_fieldset
       .locator('.govuk-form-group', {
-        has: this.page.getByText(this.projectOverviewPageTestData.Post_Approval_Tab.date_submitted_month_label),
+        has: this.page.getByText(
+          this.projectOverviewPageTestData.Post_Approval_Page_Label_Texts.date_submitted_month_label
+        ),
       })
       .getByRole('combobox');
     this.date_submitted_from_year_text = this.date_submitted_from_date_fieldset
       .locator('.govuk-form-group', {
-        has: this.page.getByText(this.projectOverviewPageTestData.Post_Approval_Tab.date_submitted_year_label),
+        has: this.page.getByText(
+          this.projectOverviewPageTestData.Post_Approval_Page_Label_Texts.date_submitted_year_label
+        ),
       })
       .getByRole('textbox');
     this.date_submitted_from_date_error = this.page
       .locator('.govuk-fieldset')
       .locator('.govuk-form-group')
       .filter({
-        hasText: this.projectOverviewPageTestData.Post_Approval_Tab.date_submitted_from_date_hint_text,
+        hasText: this.projectOverviewPageTestData.Post_Approval_Page_Label_Texts.date_submitted_from_date_hint_text,
       })
       .locator('.govuk-error-message');
     this.date_submitted_to_day_text_chevron = this.page
       .getByRole('heading')
-      .getByText(this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_date_submitted_label, {
+      .getByText(this.projectOverviewPageTestData.Post_Approval_Page_Label_Texts.date_submitted_day_label, {
         exact: true,
       });
     this.date_submitted_to_date_error = this.page
       .locator('.govuk-fieldset')
       .locator('.govuk-form-group')
       .filter({
-        hasText: this.projectOverviewPageTestData.Post_Approval_Tab.date_submitted_to_date_hint_text,
+        hasText: this.projectOverviewPageTestData.Post_Approval_Page_Label_Texts.date_submitted_to_date_hint_text,
       })
       .locator('.govuk-error-message');
     this.date_submitted_to_date_fieldset = this.page.locator('.govuk-fieldset').locator('.govuk-form-group', {
-      has: this.page.getByText(this.projectOverviewPageTestData.Post_Approval_Tab.date_submitted_to_date_hint_text),
+      has: this.page.getByText(
+        this.projectOverviewPageTestData.Post_Approval_Page_Label_Texts.date_submitted_to_date_hint_text
+      ),
     });
     this.date_submitted_to_day_text = this.date_submitted_to_date_fieldset
       .locator('.govuk-form-group', {
-        has: this.page.getByText(this.projectOverviewPageTestData.Post_Approval_Tab.date_submitted_day_label),
+        has: this.page.getByText(
+          this.projectOverviewPageTestData.Post_Approval_Page_Label_Texts.date_submitted_day_label
+        ),
       })
       .getByRole('textbox');
     this.date_submitted_to_month_dropdown = this.date_submitted_to_date_fieldset
       .locator('.govuk-form-group', {
-        has: this.page.getByText(this.projectOverviewPageTestData.Post_Approval_Tab.date_submitted_month_label),
+        has: this.page.getByText(
+          this.projectOverviewPageTestData.Post_Approval_Page_Label_Texts.date_submitted_month_label
+        ),
       })
       .getByRole('combobox');
     this.date_submitted_to_year_text = this.date_submitted_to_date_fieldset
       .locator('.govuk-form-group', {
-        has: this.page.getByText(this.projectOverviewPageTestData.Post_Approval_Tab.date_submitted_year_label),
+        has: this.page.getByText(
+          this.projectOverviewPageTestData.Post_Approval_Page_Label_Texts.date_submitted_year_label
+        ),
       })
       .getByRole('textbox');
     this.status = this.page.getByRole('button', {
-      name: this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_tab_status,
+      name: this.projectOverviewPageTestData.Post_Approval_Page_Label_Texts.status_label,
       exact: true,
     });
     this.view_project_overview_link = this.page

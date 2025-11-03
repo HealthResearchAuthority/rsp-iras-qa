@@ -22,6 +22,20 @@ Feature: Post Approval Page
         Then I can see the project overview page
         When I click the 'Post_Approval' link on the 'Project_Overview_Page'
         And I capture the page screenshot
+        And I click the 'Create_New_Modification' button on the 'Project_Overview_Page'
+        And I can see the select area of change page
+        And I keep note of the individual and overall ranking of changes created using 'Multiple_Changes_Reviewable_Non_Reviewable' and 'Nhs_Involvement_Yes' dataset
+        And I create 'Multiple_Changes_Reviewable_Non_Reviewable' for the created modification
+        And I can see the modifications details page
+        When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
+        Then I can see the add sponsor reference page
+        Then I fill the sponsor reference modifications page with 'Valid_Data_All_Fields'
+        When I click the 'Save_Continue_Review' button on the 'Sponsor_Reference_Page'
+        Then I can see the review all changes page
+        Then I click the 'Send_Modification_To_Sponsor' button on the 'Review_All_Changes_Page'
+        Then I click the 'Submit_To_Regulator' button on the 'Confirmation_Page'
+        When I click the 'Post_Approval' link on the 'Project_Overview_Page'
+        And I capture the page screenshot
 
     @rsp-4893 @ValidateNonReviewableModificationStatusesInDraftAndApproved
     Scenario Outline: Validate modification status transition from in draft to approved for non reviewable modification
@@ -72,17 +86,8 @@ Feature: Post Approval Page
         And I capture the page screenshot
 
     @rsp-4887 @VerifyValidSearchPostApproval
-    #Vijay's modifications
     Scenario Outline: Verify the user is able to search the modifications with a valid search criteria
         And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
-        And I create 'Change_To_Planned_End_Date' modification with 'Sponsor_reference_Details' and click on 'Submit_To_Regulator'
-        And I create 'Change_To_Planned_End_Date' modification with 'Sponsor_reference_Details' and click on 'Submit_To_Regulator'
-        And I create 'Change_To_Planned_End_Date' modification with 'Sponsor_reference_Details' and click on 'Submit_To_Regulator'
-        And I create 'Change_To_Planned_End_Date' modification with 'Sponsor_reference_Details' and click on 'Submit_To_Regulator'
-        And I capture the page screenshot
-        #And I can see the 'created' project details on project overview page for 'Valid_Data_All_Fields'#not required
-        # check if you need 'I validate the project information labels using' step to set modification id
-        #And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on the post approval page#not required
         And I enter '<Search_Queries>' into the search field for post approval page
         And I click the 'Search' button on the 'Search_Modifications_Page'
         Then I can now see the table of modifications contains the expected search results for '<Search_Queries>'
@@ -105,18 +110,13 @@ Feature: Post Approval Page
 
         Examples:
             | Search_Input                         |
-            | Non_Existant_Data                    |
-            | Special_Characters_Data              |
+            | Non_Existant_Modification_ID         |
             | Leading_White_Space_Modification_ID  |
             | Trailing_White_Space_Modification_ID |
 
     @rsp-4887 @ApplyFiltersAndSearchPostApproval
     Scenario Outline: Verify the user is able to filter modifications using a combination of advanced filters and search criteria
         And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
-        And I create 'Change_To_Planned_End_Date' modification with 'Sponsor_reference_Details' and click on 'Submit_To_Regulator'
-        And I create 'Change_To_Planned_End_Date' modification with 'Sponsor_reference_Details' and click on 'Submit_To_Regulator'
-        And I create 'Change_To_Planned_End_Date' modification with 'Sponsor_reference_Details' and click on 'Submit_To_Regulator'
-        And I create 'Change_To_Planned_End_Date' modification with 'Sponsor_reference_Details' and click on 'Submit_To_Regulator'
         And I capture the page screenshot
         And I enter '<Search_Queries>' into the search field for post approval page
         And I click the 'Advanced_Filters' button on the 'Post_Approval_Page'
@@ -141,16 +141,10 @@ Feature: Post Approval Page
 
     @rsp-4887 @DateSubmittedErrorValidationPostApproval
     Scenario Outline: Verify that correct validation is in place for the date submitted filter
-        # When I navigate to the project overview page of the 'Test_Project' project
-        # When I click the 'Post_Approval' link on the 'Project_Overview_Page'
         And I create 'Multiple_Modifications_In_Draft' and click on save for later on the select area of change page
-        # And I create 'Change_To_Planned_End_Date' modification with 'Sponsor_reference_Details' and click on 'Submit_To_Regulator'
-        # And I create 'Change_To_Planned_End_Date' modification with 'Sponsor_reference_Details' and click on 'Submit_To_Regulator'
-        # And I create 'Change_To_Planned_End_Date' modification with 'Sponsor_reference_Details' and click on 'Submit_To_Regulator'
-        # And I create 'Change_To_Planned_End_Date' modification with 'Sponsor_reference_Details' and click on 'Submit_To_Regulator'
         And I click the 'Advanced_Filters' button on the 'Post_Approval_Page'
         And I capture the page screenshot
-        When I enter values in the '<Advanced_Filters>' of the post approval page
+        And I enter values in the '<Advanced_Filters>' of the post approval page
         And I capture the page screenshot
         And I click the 'Apply_Filters' button on the 'Post_Approval_Page'
         And I capture the page screenshot
@@ -181,7 +175,7 @@ Feature: Post Approval Page
             | Advanced_Filter_Submitted_Date_Field_Only |
             | Advanced_Filter_Status_Only               |
 
-    @rsp-4887 @RemoveAllActiveFiltersOneByOne
+    @rsp-4887 @RemoveAllActiveFiltersOneByOnePostApproval
     Scenario Outline: Verify the user can remove all the selected filters one by one
         And I click the 'Advanced_Filters' button on the 'Post_Approval_Page'
         When I enter values in the '<Advanced_Filters>' of the post approval page

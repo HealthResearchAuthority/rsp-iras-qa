@@ -282,8 +282,7 @@ When(
       if (Object.hasOwn(dataset, key)) {
         if (key.includes('date')) {
           if (!(await projectOverviewPage.date_submitted_from_day_text.isVisible())) {
-            // create locators
-            await projectOverviewPage.date_submitted_from_day_text_chevron.click(); // create locators
+            await projectOverviewPage.date_submitted_from_day_text_chevron.click();
           }
           await commonItemsPage.fillUIComponent(dataset, key, projectOverviewPage);
         } else {
