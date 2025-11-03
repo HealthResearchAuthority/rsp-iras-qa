@@ -314,11 +314,6 @@ When(
       filterDataset,
       validateSearch
     );
-    // if (searchDatasetName !== 'Empty_Search_Data') {
-    //   await modificationsCommonPage.validateResults(commonItemsPage, searchCriteriaDataset, filterDataset, true);
-    // } else {
-    //   await modificationsCommonPage.validateResults(commonItemsPage, searchCriteriaDataset, filterDataset, false);
-    // }
   }
 );
 
@@ -333,7 +328,6 @@ Then(
       const modificationIDActual = modificationRecord.get('modificationIdValue');
       expect.soft(modificationIDActual[0]).toBe(modificationIDExpected);
     } else {
-      //await modificationsCommonPage.validateSearchResults(commonItemsPage, searchDataset, true);
       await modificationsCommonPage.validateResults(commonItemsPage, searchDataset, true);
     }
   }

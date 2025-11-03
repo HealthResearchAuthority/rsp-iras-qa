@@ -460,7 +460,7 @@ Then(
   async ({ selectAreaOfChangePage, modificationsCommonPage, commonItemsPage }, dataset: string) => {
     const modificationsDataset = modificationsCommonPage.modificationsCommonPageTestData[dataset];
     const modificationDataValues = Object.keys(modificationsDataset);
-    for (let index = 0; index < modificationDataValues.length; index++) {
+    for (const index of modificationDataValues) {
       const modificationName = modificationDataValues[index];
       const modificationDataset = modificationsDataset[modificationName];
       const buttonValue = commonItemsPage.buttonTextData.Project_Overview_Page.Create_New_Modification;
@@ -481,7 +481,7 @@ Then(
     const modificationsDataset = modificationsCommonPage.modificationsCommonPageTestData[modificationDatasetName];
     const sponsorDataset = modificationsCommonPage.modificationsCommonPageTestData[sponsorDatasetName];
     const modificationDataValues = Object.keys(modificationsDataset);
-    for (let index = 0; index < modificationDataValues.length; index++) {
+    for (const index of modificationDataValues) {
       const modificationName = modificationDataValues[index];
       const modificationDataset = modificationsDataset[modificationName];
       await commonItemsPage.clickButton('Project_Overview_Page', 'Create_New_Modification');

@@ -88,19 +88,16 @@ export default class ModificationsCommonPage {
         hasText: this.modificationsCommonPageTestData.Modification_Ranking_Label_Texts.review_type_label,
       })
       .locator('~ dd.govuk-summary-list__value');
-
-    this.short_project_title_value = this.page.locator('div.govuk-inset-text p').nth(1);
-    this.iras_id_value = this.page.locator('div.govuk-inset-text p').first();
-    // this.iras_id_value = this.page
-    //   .locator('[class$="key"]')
-    //   .getByText(this.modificationsCommonPageTestData.Label_Texts.iras_id_label)
-    //   .locator('..')
-    //   .locator('[class$="value"]');
-    // this.short_project_title_value = this.page
-    //   .locator('[class$="key"]')
-    //   .getByText(this.modificationsCommonPageTestData.Label_Texts.short_project_title_label)
-    //   .locator('..')
-    //   .locator('[class$="value"]');
+    this.iras_id_value = this.page
+      .locator('[class$="key"]')
+      .getByText(this.modificationsCommonPageTestData.Label_Texts.iras_id_label)
+      .locator('..')
+      .locator('[class$="value"]');
+    this.short_project_title_value = this.page
+      .locator('[class$="key"]')
+      .getByText(this.modificationsCommonPageTestData.Label_Texts.short_project_title_label)
+      .locator('..')
+      .locator('[class$="value"]');
     this.modification_id_value = this.page
       .locator('[class$="key"]')
       .getByText(this.modificationsCommonPageTestData.Label_Texts.modification_id_label)
@@ -741,26 +738,18 @@ export default class ModificationsCommonPage {
     validateSearch: boolean = true,
     rowNumber: number = 1
   ) {
-    // Loop through Max_Pages_To_Validate (currently set to 2)
-    //   for (let pageIndex = 1; pageIndex < modificationsCommonPageTestData.Max_Pages_To_Validate; pageIndex++) {
-    //const rowCount = await commonItemsPage.tableRows.count();
-    //for (let rowIndex = 1; rowIndex < rowCount; rowIndex++) {
-    //const rownumber = rowIndex;
     const modificationId = await this.getModificationRowNumberPostApprovalPage(rowNumber);
     const modificationIDActual = modificationId.get('modificationIdValue');
-    // Validate modifciation search resuts
     if (validateSearch && searchCriteriaDataset['search_input_text'] !== '') {
       const modificationIdExpected = searchCriteriaDataset['search_input_text'];
       expect(modificationIDActual.includes(modificationIdExpected));
     }
-    //}
     const hasNextPage =
       (await commonItemsPage.pagination_next_link.isVisible()) &&
       !(await commonItemsPage.pagination_next_link.isDisabled());
     if (hasNextPage) {
       await commonItemsPage.next_button.click();
     }
-    //  }
   }
 
   async getRowDataAdvancedFiltersSearch(row: any) {
@@ -803,32 +792,35 @@ export default class ModificationsCommonPage {
     statusActual: string,
     filterDataset: any
   ) {
-    for (const key in filterDataset) {
-      if (Object.hasOwn(filterDataset, key)) {
-        if (key === 'status_radio') {
-          const statusExpected = filterDataset[key];
-          expect(
-            statusExpected.some((statusLabel: string) => statusActual.toLowerCase().includes(statusLabel.toLowerCase()))
-          ).toBeTruthy();
-        }
-        if (key === 'modification_type_radio') {
-          const modificationTypeExpected = filterDataset[key];
-          expect(
-            modificationTypeExpected.some((modificationTypeLabel: string) =>
-              modificationTypeActual.toLowerCase().includes(modificationTypeLabel.toLowerCase())
-            )
-          ).toBeTruthy();
-        }
-        if (
-          key.includes('date_submitted_from_year_text') ||
-          (key.includes('date_submitted_to_year_text') && dateSubmittedActual !== null)
-        ) {
-          const filterFromDate = `${filterDataset['date_submitted_from_day_text']} ${filterDataset['date_submitted_from_month_dropdown']} ${filterDataset['date_submitted_from_year_text']}`;
-          const filterToDate = `${filterDataset['date_submitted_to_day_text']} ${filterDataset['date_submitted_to_month_dropdown']} ${filterDataset['date_submitted_to_year_text']}`;
-          if (filterFromDate !== '' && filterToDate !== '') {
-            await this.validateDateFilter(filterFromDate, filterToDate, dateSubmittedActual);
-          }
-        }
+    if (!filterDataset) return;
+    const statusExpected = filterDataset['status_radio'];
+    if (statusExpected) {
+      const statusMatches = statusExpected.some((statusLabel: string) =>
+        statusActual.toLowerCase().includes(statusLabel.toLowerCase())
+      );
+      expect.soft(statusMatches).toBeTruthy();
+    }
+    const modificationTypeExpected = filterDataset['modification_type_radio'];
+    if (modificationTypeExpected) {
+      const typeMatches = modificationTypeExpected.some((modificationTypeLabel: string) =>
+        modificationTypeActual.toLowerCase().includes(modificationTypeLabel.toLowerCase())
+      );
+      expect.soft(typeMatches).toBeTruthy();
+    }
+    const hasFromDate =
+      'date_submitted_from_day_text' in filterDataset &&
+      'date_submitted_from_month_dropdown' in filterDataset &&
+      'date_submitted_from_year_text' in filterDataset;
+    const hasToDate =
+      'date_submitted_to_day_text' in filterDataset &&
+      'date_submitted_to_month_dropdown' in filterDataset &&
+      'date_submitted_to_year_text' in filterDataset;
+
+    if (hasFromDate && hasToDate && dateSubmittedActual != null) {
+      const filterFromDate = `${filterDataset['date_submitted_from_day_text']} ${filterDataset['date_submitted_from_month_dropdown']} ${filterDataset['date_submitted_from_year_text']}`;
+      const filterToDate = `${filterDataset['date_submitted_to_day_text']} ${filterDataset['date_submitted_to_month_dropdown']} ${filterDataset['date_submitted_to_year_text']}`;
+      if (filterFromDate !== '' && filterToDate !== '') {
+        await this.validateDateFilter(filterFromDate, filterToDate, dateSubmittedActual);
       }
     }
   }
