@@ -294,5 +294,14 @@
   "View_Edit_User_Profile_Page": {
     "Disable_User": "Disable user",
     "Enable_User": "Enable user"
+  },
+  "Complete_Your_Profile_Page": {
+    "Save_Continue": "Save and continue"
+  },
+  "Check_Your_Profile_Page": {
+    "Add_Profile": "Add user profile"
+  },
+  "Edit_Your_Profile_Page": {
+    "Save": "Save"
   }
 }

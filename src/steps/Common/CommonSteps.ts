@@ -14,7 +14,7 @@ import {
   confirmArrayNotNull,
   confirmStringNotNull,
   getAuthState,
-  getCurrentTimeFormatted,
+  getTimeFormatted,
   getRandomNumber,
 } from '../../utils/UtilFunctions';
 import { Locator } from 'playwright/test';
@@ -43,7 +43,6 @@ When(
       myResearchProjectsPage,
       searchModificationsPage,
       modificationsReadyToAssignPage,
-      selectStudyWideReviewerPage,
       myModificationsTasklistPage,
       manageSponsorOrganisationPage,
       setupNewSponsorOrganisationPage,
@@ -52,7 +51,13 @@ When(
       sponsorOrganisationProfilePage,
       viewEditUserProfilePage,
       userListSponsorOrganisationPage,
+      selectStudyWideReviewerPage,
       accessDeniedPage,
+      profileCommonPage,
+      profileSettingsPage,
+      editYourProfilePage,
+      completeYourProfilePage,
+      checkYourProfilePage,
     },
     page: string
   ) => {
@@ -136,6 +141,22 @@ When(
       case 'Access_Denied_Page':
         await accessDeniedPage.assertOnAccessDeniedPage();
         break;
+      case 'Profile_Settings_Page':
+        await profileSettingsPage.assertOnProfileSettingsPage();
+        await profileCommonPage.assertCommonProfilePageItems();
+        break;
+      case 'Edit_Your_Profile_Page':
+        await editYourProfilePage.assertOnEditProfilePage();
+        await profileCommonPage.assertCommonProfilePageItems();
+        break;
+      case 'Complete_Your_Profile_Page':
+        await completeYourProfilePage.assertOnCompleteProfilePage();
+        await profileCommonPage.assertCommonProfilePageItems();
+        break;
+      case 'Check_Your_Profile_Page':
+        await checkYourProfilePage.assertOnCheckProfilePage();
+        await profileCommonPage.assertCommonProfilePageItems();
+        break;
       default:
         throw new Error(`${page} is not a valid option`);
     }
@@ -201,23 +222,24 @@ Then('I see something {string}', async ({ commonItemsPage }, testType: string) =
 
 Then('I click the {string} button on the {string}', async ({ commonItemsPage }, buttonKey: string, pageKey: string) => {
   const buttonValue = commonItemsPage.buttonTextData[pageKey][buttonKey];
+  let button: Locator;
   if (
     (pageKey === 'Review_All_Changes_Page' && buttonKey === 'Send_Modification_To_Sponsor') ||
     (pageKey === 'Confirmation_Page' && buttonKey === 'Return_To_Project_Overview') ||
     (pageKey === 'Setup_New_Sponsor_Organisation_Page' && buttonKey === 'Save_Continue')
   ) {
-    await commonItemsPage.govUkButton
+    button = commonItemsPage.govUkButton
       .getByText(buttonValue)
       .or(commonItemsPage.genericButton.getByText(buttonValue))
-      .first()
-      .click();
+      .first();
   } else {
-    await commonItemsPage.govUkButton
+    button = commonItemsPage.govUkButton
       .getByText(buttonValue, { exact: true })
       .or(commonItemsPage.genericButton.getByText(buttonValue, { exact: true }))
-      .first()
-      .click();
+      .first();
   }
+  await commonItemsPage.page.waitForTimeout(500);
+  await button.click();
   await commonItemsPage.page.waitForLoadState('domcontentloaded');
 });
 
@@ -430,7 +452,7 @@ Then(
 Then(
   'I capture the current time for {string}',
   async ({ auditHistoryReviewBodyPage, auditHistoryUserPage, sponsorOrganisationProfilePage }, page: string) => {
-    const currentTime = await getCurrentTimeFormatted();
+    const currentTime = await getTimeFormatted();
     switch (page) {
       case 'Audit_History_Review_Body_Page':
         await auditHistoryReviewBodyPage.setUpdatedTime(currentTime);
@@ -470,6 +492,8 @@ Then(
       projectIdentifiersPage,
       setupNewSponsorOrganisationPage,
       searchModificationsPage,
+      completeYourProfilePage,
+      editYourProfilePage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
@@ -552,6 +576,14 @@ Then(
       errorMessageFieldDataset =
         setupNewSponsorOrganisationPage.setupNewSponsorOrganisationPageTestData[errorMessageFieldAndSummaryDatasetName];
       page = commonItemsPage;
+    } else if (pageKey == 'Complete_Your_Profile_Page') {
+      errorMessageFieldDataset =
+        completeYourProfilePage.completeYourProfilePageTestData.Validation[errorMessageFieldAndSummaryDatasetName];
+      page = completeYourProfilePage;
+    } else if (pageKey == 'Edit_Your_Profile_Page') {
+      errorMessageFieldDataset =
+        editYourProfilePage.editYourProfilePageTestData.Validation[errorMessageFieldAndSummaryDatasetName];
+      page = completeYourProfilePage;
     }
     let allSummaryErrorExpectedValues: any;
     let summaryErrorActualValues: any;
@@ -788,6 +820,9 @@ Given(
       approvalsPage,
       myModificationsTasklistPage,
       manageSponsorOrganisationPage,
+      profileCommonPage,
+      profileSettingsPage,
+      editYourProfilePage,
     },
     page: string
   ) => {
@@ -854,6 +889,16 @@ Given(
         await manageSponsorOrganisationPage.goto();
         await manageSponsorOrganisationPage.assertOnManageSponsorOrganisationsPage();
         break;
+      case 'Profile_Settings_Page':
+        await profileSettingsPage.goto();
+        await profileSettingsPage.assertOnProfileSettingsPage();
+        await profileCommonPage.assertCommonProfilePageItems();
+        break;
+      case 'Edit_Your_Profile_Page':
+        await editYourProfilePage.goto();
+        await editYourProfilePage.assertOnEditProfilePage();
+        await profileCommonPage.assertCommonProfilePageItems();
+        break;
       default:
         throw new Error(`${page} is not a valid option`);
     }
@@ -865,6 +910,7 @@ Given(
   async (
     {
       homePage,
+      loginPage,
       systemAdministrationPage,
       accessDeniedPage,
       myResearchProjectsPage,
@@ -875,50 +921,57 @@ Given(
     page: string,
     user: string
   ) => {
-    const authStatePath = getAuthState(user);
-    const authState = JSON.parse(fs.readFileSync(authStatePath, 'utf-8'));
-    switch (page) {
-      case 'Home_Page':
-        await homePage.page.context().addCookies(authState.cookies);
-        await homePage.goto();
-        await homePage.assertOnHomePage();
-        break;
-      case 'System_Administration_Page':
-        await systemAdministrationPage.page.context().addCookies(authState.cookies);
-        await systemAdministrationPage.goto();
-        await systemAdministrationPage.assertOnSystemAdministrationPage();
-        break;
-      case 'System_Administration_Access_Denied_Page':
-        await systemAdministrationPage.page.context().addCookies(authState.cookies);
-        await systemAdministrationPage.goto();
-        await accessDeniedPage.assertOnAccessDeniedPage();
-        break;
-      case 'Approvals_Access_Denied_Page':
-        await approvalsPage.page.context().addCookies(authState.cookies);
-        await approvalsPage.goto();
-        await accessDeniedPage.assertOnAccessDeniedPage();
-        break;
-      case 'My_Research_Page':
-        await myResearchProjectsPage.page.context().addCookies(authState.cookies);
-        await myResearchProjectsPage.goto();
-        await myResearchProjectsPage.assertOnMyResearchProjectsPage();
-        break;
-      case 'My_Research_Access_Denied_Page':
-        await myResearchProjectsPage.page.context().addCookies(authState.cookies);
-        await myResearchProjectsPage.goto();
-        await accessDeniedPage.assertOnAccessDeniedPage();
-        break;
-      case 'My_Modifications_Tasklist_Page':
-        await myModificationsTasklistPage.goto();
-        await myModificationsTasklistPage.assertOnMyModificationsTasklistPage();
-        break;
-      case 'Modifications_Tasklist_Page':
-        await modificationsReadyToAssignPage.page.context().addCookies(authState.cookies);
-        await modificationsReadyToAssignPage.goto();
-        await modificationsReadyToAssignPage.assertOnModificationsReadyToAssignPage();
-        break;
-      default:
-        throw new Error(`${page} is not a valid option`);
+    if (user == 'One_Login_Account_User') {
+      await homePage.page.context().clearCookies();
+      await homePage.goto();
+      await homePage.startNowBtn.click();
+      await loginPage.assertOnLoginPage();
+    } else {
+      const authStatePath = getAuthState(user);
+      const authState = JSON.parse(fs.readFileSync(authStatePath, 'utf-8'));
+      switch (page) {
+        case 'Home_Page':
+          await homePage.page.context().addCookies(authState.cookies);
+          await homePage.goto();
+          await homePage.assertOnHomePage();
+          break;
+        case 'System_Administration_Page':
+          await systemAdministrationPage.page.context().addCookies(authState.cookies);
+          await systemAdministrationPage.goto();
+          await systemAdministrationPage.assertOnSystemAdministrationPage();
+          break;
+        case 'System_Administration_Access_Denied_Page':
+          await systemAdministrationPage.page.context().addCookies(authState.cookies);
+          await systemAdministrationPage.goto();
+          await accessDeniedPage.assertOnAccessDeniedPage();
+          break;
+        case 'Approvals_Access_Denied_Page':
+          await approvalsPage.page.context().addCookies(authState.cookies);
+          await approvalsPage.goto();
+          await accessDeniedPage.assertOnAccessDeniedPage();
+          break;
+        case 'My_Research_Page':
+          await myResearchProjectsPage.page.context().addCookies(authState.cookies);
+          await myResearchProjectsPage.goto();
+          await myResearchProjectsPage.assertOnMyResearchProjectsPage();
+          break;
+        case 'My_Research_Access_Denied_Page':
+          await myResearchProjectsPage.page.context().addCookies(authState.cookies);
+          await myResearchProjectsPage.goto();
+          await accessDeniedPage.assertOnAccessDeniedPage();
+          break;
+        case 'My_Modifications_Tasklist_Page':
+          await myModificationsTasklistPage.goto();
+          await myModificationsTasklistPage.assertOnMyModificationsTasklistPage();
+          break;
+        case 'Modifications_Tasklist_Page':
+          await modificationsReadyToAssignPage.page.context().addCookies(authState.cookies);
+          await modificationsReadyToAssignPage.goto();
+          await modificationsReadyToAssignPage.assertOnModificationsReadyToAssignPage();
+          break;
+        default:
+          throw new Error(`${page} is not a valid option`);
+      }
     }
   }
 );
