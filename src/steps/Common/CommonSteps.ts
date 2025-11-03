@@ -454,6 +454,7 @@ Then(
       projectIdentifiersPage,
       completeYourProfilePage,
       editYourProfilePage,
+      projectIdentificationEnterReferenceNumbersPage,
     },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
@@ -540,6 +541,12 @@ Then(
       errorMessageFieldDataset =
         editYourProfilePage.editYourProfilePageTestData.Validation[errorMessageFieldAndSummaryDatasetName];
       page = completeYourProfilePage;
+    } else if (pageKey == 'Project_Identification_Enter_Reference_Numbers_Page') {
+      errorMessageFieldDataset =
+        projectIdentificationEnterReferenceNumbersPage.projectIdentificationEnterReferenceNumbersPageTestData[
+          errorMessageFieldAndSummaryDatasetName
+        ];
+      page = projectIdentificationEnterReferenceNumbersPage;
     }
     let allSummaryErrorExpectedValues: any;
     let summaryErrorActualValues: any;
