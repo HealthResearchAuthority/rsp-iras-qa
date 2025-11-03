@@ -14,6 +14,7 @@ export default class ReviewBodyProfilePage {
   readonly reviewBodySqlData: typeof reviewBodySqlData;
   readonly buttonTextData: typeof buttonTextData;
   readonly linkTextData: typeof linkTextData;
+  readonly dbConfigData: typeof dbConfigData;
   private _org_name: string;
   private _countries: string[];
   private _email_address: string;
@@ -64,6 +65,7 @@ export default class ReviewBodyProfilePage {
     this.reviewBodySqlData = reviewBodySqlData;
     this.buttonTextData = buttonTextData;
     this.linkTextData = linkTextData;
+    this.dbConfigData = dbConfigData;
     this._org_name = '';
     this._countries = [];
     this._email_address = '';
@@ -291,6 +293,7 @@ export default class ReviewBodyProfilePage {
       `SELECT TOP 1 * FROM RegulatoryBodies WHERE IsActive = ${isActive} ORDER BY NEWID()`
     );
     await this.setAllReviewBodyValues(queryResult);
+    await sqlConnection.close();
   }
 
   async sqlGetSingleRandomReviewBodyByTypeStatus(inOperator: string, status: string): Promise<void> {
@@ -307,5 +310,6 @@ export default class ReviewBodyProfilePage {
       ORDER BY NEWID()`
     );
     await this.setAllReviewBodyValues(queryResult);
+    await sqlConnection.close();
   }
 }

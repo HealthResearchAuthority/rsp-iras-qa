@@ -33,5 +33,13 @@
   "Enable_Label_Texts": {
     "enable_header_label": "Enable this user record",
     "enable_hint_label": "Enabling a user record will unlock their account"
+  },
+  "User_Roles": {
+    "sponsor": "Sponsor",
+    "applicant": "Applicant",
+    "system_administrator": "System administrator",
+    "team_manager": "Team manager",
+    "study-wide_reviewer": "Study-wide reviewer",
+    "workflow_co-ordinator": "Workflow co-ordinator"
   }
 }
