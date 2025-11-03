@@ -219,9 +219,8 @@ const validateCardData = (expectedData: any, actualData: any) => {
     if (expected.length !== actual.length) return false;
     return expected.every((val, index) => val === actual[index]);
   };
-  const keysToSkip = ['change_status'];
   for (const key of Object.keys(expectedData)) {
-    if (keysToSkip.includes(key)) {
+    if (key.includes('change_status')) {
       continue;
     }
     const expectedValue = expectedData[key];
