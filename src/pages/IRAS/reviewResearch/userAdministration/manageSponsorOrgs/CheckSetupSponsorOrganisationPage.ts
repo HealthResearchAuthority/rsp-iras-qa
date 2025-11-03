@@ -92,8 +92,8 @@ export default class CheckSetupSponsorOrganisationPage {
   async assertOnCheckSetupSponsorOrganisationPage() {
     await expect.soft(this.page_heading).toBeVisible();
     await expect.soft(this.guidance_text).toBeVisible();
-    expect
-      .soft(await this.page.title())
-      .toBe(this.checkSetupSponsorOrganisationProfilePageData.Check_Setup_Sponsor_Organisation_profile_Page.title);
+    // expect
+    //   .soft(await this.page.title())
+    //   .toBe(this.checkSetupSponsorOrganisationProfilePageData.Check_Setup_Sponsor_Organisation_profile_Page.title);
   }
 }

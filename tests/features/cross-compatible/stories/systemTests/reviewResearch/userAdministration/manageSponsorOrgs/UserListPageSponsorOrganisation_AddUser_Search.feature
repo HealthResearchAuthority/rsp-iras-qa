@@ -1,4 +1,4 @@
-@UserAdministration @ManageSponsorOrgs @SysAdminUser @SystemTest @UserListSponsorOrgs @STSysAdmin @BackStage @rsp-5233
+@UserAdministration @ManageSponsorOrgs @SysAdminUser @SystemTest @UserListSponsorOrgs @STSysAdmin @BackStage @rsp-5233 @TestSponsor
 Feature: User Administration: Manage Sponsor Organisations - View user list page of the sponsor organisations, Search for the users and add user to the sponsor organisation
 
     Background:
@@ -6,10 +6,7 @@ Feature: User Administration: Manage Sponsor Organisations - View user list page
         And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
         Then I can see the 'Manage_Sponsor_Organisations_Page'
 
-    # Then the no search results found message is displayed -- failing due to @KNOWN_DEFECT-RSP-5531
-    # @KNOWN_DEFECT-RSP-5531 @fail @skip
-    # need to add teardown step to delete sponsor organisation after user
-    @rsp-5233 @VerifyUserListNewSetupSponsorOrg @UserListSponsorOrgNoUsers @skip
+    @rsp-5233 @VerifyUserListNewSetupSponsorOrg @UserListSponsorOrgNoUsers @SetupNewSponsorOrg
     Scenario Outline: Verify the user can view the user list page of the newly setup sponsor organisation with no users
         When I authorise the rts api using '<RTS_API_Data>'
         Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation '<Setup_New_Sponsor_Organisation>' and  retrive country
@@ -47,15 +44,15 @@ Feature: User Administration: Manage Sponsor Organisations - View user list page
         And I capture the page screenshot
         Examples:
             | Setup_New_Sponsor_Organisation | Status_Enabled | RTS_API_Data         | RTS_Request                         |
-            | Sponsor_Organisation_Eight     | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            | Sponsor_Organisation_Unused    | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
 
     @rsp-5226 @rsp-5233 @rsp-5234 @rsp-5235 @UserListSponsorOrgDefaultSort
     Scenario: Verify the user can view the user list page of any selected sponsor organisation and it is sorted by default in the alphabetical order of the 'First Name'
-        When I enter '3-D Matrix,Ltd.' into the search field
+        When I enter 'name of the previously added sponsor organisation' into the search field
         And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
         And I capture the page screenshot
         Then the system displays 'sponsor organisations' matching the search criteria
-        And I can see the '3-D Matrix,Ltd.' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
+        And I can see the 'previously added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
         And I capture the page screenshot
         Then I click the view edit link of the 'previously added sponsor organisation'
         And I capture the page screenshot
@@ -81,11 +78,11 @@ Feature: User Administration: Manage Sponsor Organisations - View user list page
 
     @rsp-5226 @rsp-5233 @rsp-5234 @rsp-5235 @UserListSponsorOrgSearchResultsFound @UserListSponsorOrgBackToSponsorOrgProfileLink
     Scenario Outline: Verify the user can search for the users in the user list page of selected sponsor organisation and navigate back to sponsor organisation profile page
-        When I enter '3-D Matrix,Ltd.' into the search field
+        When I enter 'name of the previously added sponsor organisation' into the search field
         And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
         And I capture the page screenshot
         Then the system displays 'sponsor organisations' matching the search criteria
-        And I can see the '3-D Matrix,Ltd.' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
+        And I can see the 'previously added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
         And I capture the page screenshot
         Then I click the view edit link of the 'previously added sponsor organisation'
         And I capture the page screenshot
@@ -123,11 +120,11 @@ Feature: User Administration: Manage Sponsor Organisations - View user list page
     # Then the no search results found message is displayed -- failing due to @KNOWN_DEFECT-RSP-5531
     @rsp-5233 @UserListSponsorOrgSearchNoResultsFound @KNOWN_DEFECT-RSP-5531 @fail
     Scenario Outline: Verify no results found message will be presented to the user in manage sponsor organisation page if there is no sponsor organisation on the system that matches the search criteria
-        When I enter '3-D Matrix,Ltd.' into the search field
+        When I enter 'name of the previously added sponsor organisation' into the search field
         And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
         And I capture the page screenshot
         Then the system displays 'sponsor organisations' matching the search criteria
-        And I can see the '3-D Matrix,Ltd.' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
+        And I can see the 'previously added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
         And I capture the page screenshot
         Then I click the view edit link of the 'previously added sponsor organisation'
         And I capture the page screenshot
@@ -147,11 +144,11 @@ Feature: User Administration: Manage Sponsor Organisations - View user list page
 
     @rsp-5233 @UserListSponsorOrgSearchAndPagination
     Scenario Outline: Verify search results and pagination in user list page of selected sponsor organisation when user searches and navigate through each page
-        When I enter '3-D Matrix,Ltd.' into the search field
+        When I enter 'name of the previously added sponsor organisation' into the search field
         And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
         And I capture the page screenshot
         Then the system displays 'sponsor organisations' matching the search criteria
-        And I can see the '3-D Matrix,Ltd.' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
+        And I can see the 'previously added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
         And I capture the page screenshot
         Then I click the view edit link of the 'previously added sponsor organisation'
         And I capture the page screenshot

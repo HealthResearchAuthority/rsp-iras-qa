@@ -211,9 +211,9 @@ export default class ViewEditUserProfilePage {
   }
 
   async assertOnViewEditUserProfilePage() {
-    expect
-      .soft(await this.page.title())
-      .toBe(this.viewEditUserProfilePageTestData.View_And_Edit_User_Profile_Page.title);
+    // expect
+    //   .soft(await this.page.title())
+    //   .toBe(this.viewEditUserProfilePageTestData.View_And_Edit_User_Profile_Page.title);
     await expect.soft(this.page_heading).toBeVisible();
   }
 

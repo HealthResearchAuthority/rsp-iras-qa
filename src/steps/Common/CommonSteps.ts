@@ -663,6 +663,7 @@ When(
       editReviewBodyPage,
       checkSetupSponsorOrganisationPage,
       checkAddUserSponsorOrganisationPage,
+      manageSponsorOrganisationPage,
     },
     inputType: string
   ) => {
@@ -679,6 +680,10 @@ When(
         break;
       case 'name of the newly added sponsor organisation':
         searchValue = await checkSetupSponsorOrganisationPage.getOrgName();
+        break;
+      case 'name of the previously added sponsor organisation':
+        searchValue = await manageSponsorOrganisationPage.findExistingSponsorOrganisations();
+        await manageSponsorOrganisationPage.saveExistingSponsorOrganisation(searchValue);
         break;
       case 'name of the newly created user':
         searchValue = await createUserProfilePage.getUniqueEmail();
@@ -697,6 +702,7 @@ When(
       default:
         searchValue = inputType;
     }
+    await commonItemsPage.setSearchKey(searchValue);
     await commonItemsPage.search_text.fill(searchValue);
   }
 );

@@ -45,6 +45,36 @@ BeforeScenario(
 
 BeforeScenario(
   {
+    name: 'Ensure sponsor organisation does not exist in system',
+    tags: '@SetupNewSponsorOrg',
+  },
+  async function ({ manageSponsorOrganisationPage, setupNewSponsorOrganisationPage }) {
+    const unusedSponsorOrgId = await manageSponsorOrganisationPage.findUnmatchedOrganisations();
+    const unusedSponsorOrgName = (
+      await manageSponsorOrganisationPage.sqlGetOrganisationNameFromRTSById(unusedSponsorOrgId)
+    ).toString();
+    await setupNewSponsorOrganisationPage.saveUnusedSponsorOrgTosetupNewSponsorOrganisation(unusedSponsorOrgName);
+  }
+);
+
+AfterScenario(
+  {
+    name: 'Remove sponsor organisation from the system',
+    tags: '@SetupNewSponsorOrg',
+  },
+  async function ({ manageSponsorOrganisationPage, setupNewSponsorOrganisationPage }) {
+    const usedSponsorOrg =
+      setupNewSponsorOrganisationPage.setupNewSponsorOrganisationPageTestData.Setup_New_Sponsor_Organisation
+        .Sponsor_Organisation_Unused.sponsor_organisation_text;
+    const sponsor_id = (
+      await manageSponsorOrganisationPage.sqlGetOrganisationIdFromRTSByName(usedSponsorOrg)
+    ).toString();
+    await manageSponsorOrganisationPage.sqlDeleteSponsorOrgById(sponsor_id);
+  }
+);
+
+BeforeScenario(
+  {
     name: 'Ensure One Login User does not exist in system',
     tags: '@OneLoginUser',
   },

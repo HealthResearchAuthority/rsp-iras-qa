@@ -1,4 +1,4 @@
-@RegressionManageSponsorOrganisations @SysAdminUser @Regression @UserAdministration @BackStage
+@RegressionManageSponsorOrganisations @SysAdminUser @Regression @UserAdministration @BackStage @TestSponsor
 Feature: User Administration: Manage sponsor organisations
 
         Background:
@@ -206,17 +206,17 @@ Feature: User Administration: Manage sponsor organisations
 
                 Examples:
                         | Setup_New_Sponsor_Organisation | Status_Enabled | Status_Disabled | RTS_API_Data         | RTS_Request                         | Disable_Label_Texts | Disable_Sponsor_Organisation_Labels | Enable_Label_Texts | Enable_Sponsor_Organisation_Labels | Disable_User_In_Sponsor_Organisation_Labels | Enable_User_In_Sponsor_Organisation_Labels | Navigation_Link |
-                        | Sponsor_Organisation_FortyTwo  | Enabled        | Disabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS | Disable_Label_Texts | Disable_Sponsor_Organisation_Labels | Enable_Label_Texts | Enable_Sponsor_Organisation_Labels | Disable_User_In_Sponsor_Organisation_Labels | Enable_User_In_Sponsor_Organisation_Labels | Back            |
+                        | Sponsor_Organisation_Unused    | Enabled        | Disabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS | Disable_Label_Texts | Disable_Sponsor_Organisation_Labels | Enable_Label_Texts | Enable_Sponsor_Organisation_Labels | Disable_User_In_Sponsor_Organisation_Labels | Enable_User_In_Sponsor_Organisation_Labels | Back            |
 
 
         @EndToEndFlow @RegressionTestVerifyLastUpdatedAfterDisableEnableExistingSponsorOrgAndUser
         Scenario Outline: Verify that the user is able to perform: select an existing sponsor organisation, enable or disable the selected sponsor organisation, assign a user to the selected sponsor organisation, enable or disable a user within the sponsor organisation, and confirm that the 'Last Updated' field on the sponsor organisation profile page reflects these changes accurately
                 ## search and select an existing sponsor organisation
-                When I enter 'CHESTERFIELD ROYAL HOSPITAL NHS FOUNDATION TRUST' into the search field
+                When I enter 'name of the previously added sponsor organisation' into the search field
                 And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
                 And I capture the page screenshot
                 Then the system displays 'sponsor organisations' matching the search criteria
-                And I can see the 'CHESTERFIELD ROYAL HOSPITAL NHS FOUNDATION TRUST' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
+                And I can see the 'previously added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
                 And I capture the page screenshot
                 Then I click the view edit link of the 'previously added sponsor organisation'
                 And I capture the page screenshot
@@ -234,11 +234,11 @@ Feature: User Administration: Manage sponsor organisations
                 Then I can see the sponsor organisation disabled successful message on manage sponsor organisation page
                 And I capture the page screenshot
                 Then I can see the 'Manage_Sponsor_Organisations_Page'
-                When I enter 'CHESTERFIELD ROYAL HOSPITAL NHS FOUNDATION TRUST' into the search field
+                When I enter 'name of the previously added sponsor organisation' into the search field
                 And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
                 And I capture the page screenshot
                 Then the system displays 'sponsor organisations' matching the search criteria
-                And I can see the 'CHESTERFIELD ROYAL HOSPITAL NHS FOUNDATION TRUST' should be present in the list with '<Status_Disabled>' status in the manage sponsor organisation page
+                And I can see the 'previously added sponsor organisation' should be present in the list with '<Status_Disabled>' status in the manage sponsor organisation page
                 And I capture the page screenshot
                 Then I click the view edit link of the 'previously added sponsor organisation'
                 And I capture the page screenshot
@@ -266,11 +266,11 @@ Feature: User Administration: Manage sponsor organisations
                 Then I can see the sponsor organisation enabled successful message on manage sponsor organisation page
                 And I capture the page screenshot
                 Then I can see the 'Manage_Sponsor_Organisations_Page'
-                When I enter 'CHESTERFIELD ROYAL HOSPITAL NHS FOUNDATION TRUST' into the search field
+                When I enter 'name of the previously added sponsor organisation' into the search field
                 And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
                 And I capture the page screenshot
                 Then the system displays 'sponsor organisations' matching the search criteria
-                And I can see the 'CHESTERFIELD ROYAL HOSPITAL NHS FOUNDATION TRUST' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
+                And I can see the 'previously added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
                 And I capture the page screenshot
                 Then I click the view edit link of the 'previously added sponsor organisation'
                 And I capture the page screenshot

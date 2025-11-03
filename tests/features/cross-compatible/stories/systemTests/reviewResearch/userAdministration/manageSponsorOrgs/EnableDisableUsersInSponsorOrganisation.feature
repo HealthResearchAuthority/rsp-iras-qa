@@ -1,4 +1,4 @@
-@UserAdministration @ManageSponsorOrgs @SysAdminUser @SystemTest @DisableEnableUsersSponsorOrg @STSysAdmin
+@UserAdministration @ManageSponsorOrgs @SysAdminUser @SystemTest @DisableEnableUsersSponsorOrg @STSysAdmin @TestSponsor
 Feature: Feature: User Administration: Manage Sponsor Organisations- Enable / Disable users in the selected Sponsor Organisations
 
   Background:
@@ -8,11 +8,11 @@ Feature: Feature: User Administration: Manage Sponsor Organisations- Enable / Di
 
   @rsp-5332 @rsp-5357 @rsp-5358 @DisableExistingSponsorOrgUser @EnableExistingSponsorOrgUser @BreadcrumbEnableSponsorOrgUser
   Scenario Outline: Verify the user is able to disable a user from the selected sponsor organisation and then enable it
-    When I enter 'CHESTERFIELD ROYAL HOSPITAL NHS FOUNDATION TRUST' into the search field
+    When I enter 'name of the previously added sponsor organisation' into the search field
     And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
     And I capture the page screenshot
     Then the system displays 'sponsor organisations' matching the search criteria
-    And I can see the 'CHESTERFIELD ROYAL HOSPITAL NHS FOUNDATION TRUST' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
+    And I can see the 'previously added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
     And I capture the page screenshot
     Then I click the view edit link of the 'previously added sponsor organisation'
     And I capture the page screenshot
@@ -95,11 +95,11 @@ Feature: Feature: User Administration: Manage Sponsor Organisations- Enable / Di
 
   @rsp-5332 @rsp-5357 @BreadcrumbDisableExistingSponsorOrgUser
   Scenario Outline: Validate breadcrumb navigations in disable sponsor organisation confirmation page
-    When I enter 'Academic Medical Center at the University of Amsterdam (Netherlands)' into the search field
+    When I enter 'name of the previously added sponsor organisation' into the search field
     And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
     And I capture the page screenshot
     Then the system displays 'sponsor organisations' matching the search criteria
-    And I can see the 'Academic Medical Center at the University of Amsterdam (Netherlands)' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
+    And I can see the 'previously added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
     And I capture the page screenshot
     Then I click the view edit link of the 'previously added sponsor organisation'
     And I capture the page screenshot

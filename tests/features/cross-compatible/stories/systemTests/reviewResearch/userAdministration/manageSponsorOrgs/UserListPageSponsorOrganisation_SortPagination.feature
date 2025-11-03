@@ -1,15 +1,15 @@
-@SysAdminUser @SystemTest @UserAdministration @ManageSponsorOrgs @SortSearchSponsorOrgs @BackStage @rsp-5233
+@SysAdminUser @SystemTest @UserAdministration @ManageSponsorOrgs @SortSearchSponsorOrgs @BackStage @rsp-5233 @TestSponsor
 Feature: User Administration: Manage Sponsor Organisations- Sort, search and pagination of users list in the selected sponsor organisation
 
   Background:
     Given I have navigated to the 'System_Administration_Page'
     And I click the 'Manage_Sponsor_Organisations' link on the 'System_Administration_Page'
     Then I can see the 'Manage_Sponsor_Organisations_Page'
-    When I enter '3-D Matrix,Ltd.' into the search field
+    When I enter 'name of the previously added sponsor organisation' into the search field
     And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
     And I capture the page screenshot
     Then the system displays 'sponsor organisations' matching the search criteria
-    And I can see the '3-D Matrix,Ltd.' should be present in the list with 'Active' status in the manage sponsor organisation page
+    And I can see the 'previously added sponsor organisation' should be present in the list with 'Active' status in the manage sponsor organisation page
     And I capture the page screenshot
     Then I click the view edit link of the 'previously added sponsor organisation'
     And I capture the page screenshot

@@ -1,4 +1,4 @@
-@UserAdministration @ManageSponsorOrgs @AddUserToSponsorOrg @SysAdminUser @SystemTest @rsp-5234 @STSysAdmin
+@UserAdministration @ManageSponsorOrgs @AddUserToSponsorOrg @SysAdminUser @SystemTest @rsp-5234 @STSysAdmin @TestSponsor
 Feature: User Administration: Manage Sponsor Organisations - Add user to sponsor organisation
 
     Background:
@@ -43,7 +43,6 @@ Feature: User Administration: Manage Sponsor Organisations - Add user to sponsor
         When I fill the search input for searching 'adding users' with 'Non_Existant_User_Data' as the search query
         And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
         And the no search results found message is displayed
-        # Then I can see that the add users to 'sponsor organisation' search page contains 'No_Results'
         And I capture the page screenshot
 
     @verifySearchAddUserSponsorOrgPageNavigationLinks
@@ -144,7 +143,6 @@ Feature: User Administration: Manage Sponsor Organisations - Add user to sponsor
         And I capture the page screenshot
         And I click the 'Search' button on the 'Search_Add_User_Sponsor_Org_Page'
         And the no search results found message is displayed
-        # Then I can see that the add users to 'sponsor organisation' search page contains 'No_Results'
         And I capture the page screenshot
 
     @rsp-3890 @addUserSponsorOrgSearchMultiTerms

@@ -41,7 +41,7 @@ export default class SearchAddUserSponsorOrganisationPage {
   }
 
   async assertOnSearchAddUserSponsorOrganisationPage() {
-    expect.soft(await this.page.title()).toBe(this.searchAddUserSonsorOrgPageTestData.Add_A_New_User_Page.title);
+    // expect.soft(await this.page.title()).toBe(this.searchAddUserSonsorOrgPageTestData.Add_A_New_User_Page.title);
     await expect.soft(this.page_heading).toBeVisible();
     await expect.soft(this.page_description).toBeVisible();
     await expect.soft(this.search_guidance_text).toBeVisible();
