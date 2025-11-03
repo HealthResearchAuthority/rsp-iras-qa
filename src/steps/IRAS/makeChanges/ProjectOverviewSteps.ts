@@ -3,7 +3,7 @@ import { expect, test } from '../../../hooks/CustomFixtures';
 import { confirmStringNotNull, removeUnwantedWhitespace } from '../../../utils/UtilFunctions';
 import { Locator } from '@playwright/test';
 
-const { Then } = createBdd(test);
+const { When, Then } = createBdd(test);
 
 Then('I can see the project overview page', async ({ projectOverviewPage }) => {
   await projectOverviewPage.assertOnProjectOverviewPage();
@@ -273,3 +273,97 @@ Then(
     expect.soft(actualStatus).toBe(expectedStatus);
   }
 );
+
+When(
+  'I enter values in the {string} of the post approval page',
+  async ({ projectOverviewPage, commonItemsPage }, filterDatasetName: string) => {
+    const dataset = projectOverviewPage.projectOverviewPageTestData.Advanced_Filters[filterDatasetName];
+    for (const key in dataset) {
+      if (Object.hasOwn(dataset, key)) {
+        if (key.includes('date')) {
+          if (!(await projectOverviewPage.date_submitted_from_day_text.isVisible())) {
+            // create locators
+            await projectOverviewPage.date_submitted_from_day_text_chevron.click(); // create locators
+          }
+          await commonItemsPage.fillUIComponent(dataset, key, projectOverviewPage);
+        } else {
+          await projectOverviewPage[key + '_chevron'].click();
+          await commonItemsPage.fillUIComponent(dataset, key, projectOverviewPage);
+        }
+      }
+    }
+  }
+);
+
+When(
+  'I can see the results matching the search {string} and filter criteria {string} for post approval page',
+  async (
+    { projectOverviewPage, modificationsCommonPage, commonItemsPage },
+    searchDatasetName: string,
+    filterDatasetName: string
+  ) => {
+    const searchCriteriaDataset =
+      projectOverviewPage.projectOverviewPageTestData.Post_Approval_Search_Queries[searchDatasetName];
+    const filterDataset = projectOverviewPage.projectOverviewPageTestData.Advanced_Filters[filterDatasetName];
+    let validateSearch = false;
+    if (searchDatasetName !== 'Empty_Search_Data') {
+      validateSearch = true;
+    }
+    await modificationsCommonPage.validateResults(
+      commonItemsPage,
+      searchCriteriaDataset,
+      filterDataset,
+      validateSearch
+    );
+    // if (searchDatasetName !== 'Empty_Search_Data') {
+    //   await modificationsCommonPage.validateResults(commonItemsPage, searchCriteriaDataset, filterDataset, true);
+    // } else {
+    //   await modificationsCommonPage.validateResults(commonItemsPage, searchCriteriaDataset, filterDataset, false);
+    // }
+  }
+);
+
+Then(
+  'I can now see the table of modifications contains the expected search results for {string}',
+  async ({ projectOverviewPage, modificationsCommonPage, commonItemsPage }, searchDatasetName: string) => {
+    const searchDataset =
+      projectOverviewPage.projectOverviewPageTestData.Post_Approval_Search_Queries[searchDatasetName];
+    if (searchDatasetName === 'Full_Modification_ID') {
+      const modificationIDExpected = await modificationsCommonPage.getModificationID();
+      const modificationRecord = await modificationsCommonPage.getModificationPostApprovalPage();
+      const modificationIDActual = modificationRecord.get('modificationIdValue');
+      expect.soft(modificationIDActual[0]).toBe(modificationIDExpected);
+    } else {
+      //await modificationsCommonPage.validateSearchResults(commonItemsPage, searchDataset, true);
+      await modificationsCommonPage.validateResults(commonItemsPage, searchDataset, true);
+    }
+  }
+);
+
+Then(
+  'I enter {string} into the search field for post approval page',
+  async ({ projectOverviewPage, modificationsCommonPage, commonItemsPage }, searchDatasetName: string) => {
+    const dataset = projectOverviewPage.projectOverviewPageTestData.Post_Approval_Search_Queries[searchDatasetName];
+    // Get the modification record and extract the first modification ID to use as the search key
+    if (searchDatasetName === 'Full_Modification_ID') {
+      const modificationRecord = await modificationsCommonPage.getModificationPostApprovalPage();
+      const modificationIds = modificationRecord.get('modificationIdValue');
+      const searchKey: string = modificationIds && modificationIds.length > 0 ? modificationIds[0] : '';
+      await modificationsCommonPage.setModificationID(modificationIds[0]);
+      // fill the modification id in the search box
+      expect(searchKey).toBeTruthy();
+      await commonItemsPage.setSearchKey(searchKey);
+      await commonItemsPage.search_text.fill(searchKey); // check search_text locator//done
+    } else {
+      //await manageUsersPage.user_search_text.fill(dataset['search_input_text']);//create user_search_text locator
+      await commonItemsPage.search_text.fill(dataset['search_input_text']);
+    }
+  }
+);
+
+When('I open each of the advanced filters in post approval page', async ({ projectOverviewPage, commonItemsPage }) => {
+  const expectedFilterHeadings = projectOverviewPage.projectOverviewPageTestData.Post_Approval_Page.filter_headings;
+  for (const heading of expectedFilterHeadings) {
+    await commonItemsPage.advanced_filter_headings.getByText(heading, { exact: true }).click();
+  }
+});

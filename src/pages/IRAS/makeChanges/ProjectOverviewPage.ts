@@ -69,29 +69,29 @@ export default class ProjectOverviewPage {
   readonly results_count_project_documents: Locator;
   readonly post_approvals_heading: Locator;
   readonly post_approvals_advanced_filters_modification_type_label: Locator;
-  readonly post_approvals_modification_type_minor_modification: Locator;
-  readonly post_approvals_modification_type_important_detail: Locator;
-  readonly post_approvals_modification_type_non_notifiable: Locator;
-  readonly post_approvals_modification_type_substantial: Locator;
-  readonly post_approvals_modification_type_substantial_minor: Locator;
+  readonly modification_type_fieldset: Locator;
+  readonly modification_type_radio: Locator;
+  readonly modification_type_radio_chevron: Locator;
+  readonly modification_type_hint_label: Locator;
+  readonly modification_type_radio_hint_label: Locator;
   readonly post_approvals_advanced_filters_review_type_label: Locator;
-  readonly post_approvals_review_type_no_review: Locator;
-  readonly post_approvals_advanced_filters_review_required: Locator;
+  readonly review_type_fieldset: Locator;
+  readonly review_type_radio: Locator;
+  readonly review_type_radio_chevron: Locator;
+  readonly review_type_hint_label: Locator;
+  readonly review_type_radio_hint_label: Locator;
   readonly post_approvals_advanced_filters_category_label: Locator;
-  readonly post_approvals_category_option_a: Locator;
-  readonly post_approvals_category_option_b: Locator;
-  readonly post_approvals_category_option_b_c: Locator;
-  readonly post_approvals_category_option_c: Locator;
-  readonly post_approvals_category_option_new_site: Locator;
-  readonly post_approvals_category_option_not_applicable: Locator;
+  readonly category_fieldset: Locator;
+  readonly category_radio: Locator;
+  readonly category_radio_chevron: Locator;
+  readonly category_hint_label: Locator;
+  readonly category_radio_hint_label: Locator;
   readonly post_approvals_advanced_filters_status_label: Locator;
-  readonly post_approvals_status_in_draft: Locator;
-  readonly post_approvals_status_with_sponsor: Locator;
-  readonly post_approvals_status_with_regulator: Locator;
-  readonly post_approvals_status_approved: Locator;
-  readonly post_approvals_status_not_approved: Locator;
-  readonly post_approvals_status_authorised: Locator;
-  readonly post_approvals_status_not_authorised: Locator;
+  readonly status_fieldset: Locator;
+  readonly status_radio: Locator;
+  readonly status_radio_chevron: Locator;
+  readonly status_hint_label: Locator;
+  readonly status_radio_hint_label: Locator;
   readonly date_submitted_from_day_text_chevron: Locator;
   readonly date_submitted_from_date_fieldset: Locator;
   readonly date_submitted_from_date_help_text: Locator;
@@ -106,6 +106,8 @@ export default class ProjectOverviewPage {
   readonly date_submitted_to_day_text: Locator;
   readonly date_submitted_to_month_dropdown: Locator;
   readonly date_submitted_to_year_text: Locator;
+  readonly date_submitted_to_date_error_message: Locator;
+  readonly date_submitted_from_date_error_message: Locator;
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -224,98 +226,133 @@ export default class ProjectOverviewPage {
       name: this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_tab_date_submitted,
       exact: true,
     });
-    this.post_approvals_advanced_filters_modification_type_label = this.page.getByRole('heading', {
-      name: this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_advanced_filters_modification_type_label,
-      exact: true,
-    });
-    this.post_approvals_modification_type_minor_modification = this.page.getByRole('radio', {
-      name: this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_modification_type_minor_modification,
-      exact: true,
-    });
-    this.post_approvals_modification_type_non_notifiable = this.page.getByRole('radio', {
-      name: this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_modification_type_non_notifiable,
-      exact: true,
-    });
-    this.post_approvals_modification_type_substantial = this.page.getByRole('radio', {
-      name: this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_modification_type_substantial,
-      exact: true,
-    });
-    this.post_approvals_modification_type_substantial_minor = this.page.getByRole('radio', {
-      name: this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_modification_type_substantial_minor,
-      exact: true,
-    });
-    this.post_approvals_advanced_filters_review_type_label = this.page.getByRole('heading', {
-      name: this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_advanced_filters_review_type_label,
-      exact: true,
-    });
-    this.post_approvals_review_type_no_review = this.page.getByRole('radio', {
-      name: this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_review_type_no_review,
-      exact: true,
-    });
-    this.post_approvals_advanced_filters_review_required = this.page.getByRole('radio', {
-      name: this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_advanced_filters_review_required,
-      exact: true,
-    });
-    this.post_approvals_advanced_filters_category_label = this.page.getByRole('heading', {
-      name: this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_advanced_filters_category_label,
-      exact: true,
-    });
-    this.post_approvals_category_option_a = this.page.getByRole('radio', {
-      name: this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_category_option_a,
-      exact: true,
-    });
-    this.post_approvals_category_option_b = this.page.getByRole('radio', {
-      name: this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_category_option_b,
-      exact: true,
-    });
-    this.post_approvals_category_option_b_c = this.page.getByRole('radio', {
-      name: this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_category_option_b_c,
-      exact: true,
-    });
-    this.post_approvals_category_option_c = this.page.getByRole('radio', {
-      name: this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_category_option_c,
-      exact: true,
-    });
-    this.post_approvals_category_option_new_site = this.page.getByRole('radio', {
-      name: this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_category_option_new_site,
-      exact: true,
-    });
-    this.post_approvals_category_option_not_applicable = this.page.getByRole('radio', {
-      name: this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_category_option_not_applicable,
-      exact: true,
-    });
-    this.post_approvals_advanced_filters_status_label = this.page.getByRole('heading', {
-      name: this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_advanced_filters_status_label,
-      exact: true,
-    });
-    this.post_approvals_status_in_draft = this.page.getByRole('radio', {
-      name: this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_status_in_draft,
-      exact: true,
-    });
-    this.post_approvals_status_with_sponsor = this.page.getByRole('radio', {
-      name: this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_status_with_sponsor,
-      exact: true,
-    });
-    this.post_approvals_status_with_regulator = this.page.getByRole('radio', {
-      name: this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_status_with_regulator,
-      exact: true,
-    });
-    this.post_approvals_status_approved = this.page.getByRole('radio', {
-      name: this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_status_approved,
-      exact: true,
-    });
-    this.post_approvals_status_not_approved = this.page.getByRole('radio', {
-      name: this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_status_not_approved,
-      exact: true,
-    });
-    this.post_approvals_status_authorised = this.page.getByRole('radio', {
-      name: this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_status_authorised,
-      exact: true,
-    });
-    this.post_approvals_status_not_authorised = this.page.getByRole('radio', {
-      name: this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_status_not_authorised,
-      exact: true,
-    });
+    this.post_approvals_advanced_filters_modification_type_label = this.page
+      .getByRole('heading', { level: 2 })
+      .getByText(
+        this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_advanced_filters_modification_type_label,
+        {
+          exact: true,
+        }
+      );
+    this.modification_type_fieldset = this.post_approvals_advanced_filters_modification_type_label
+      .locator('..')
+      .locator('..')
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group', {
+        has: this.page.getByText(this.projectOverviewPageTestData.Advanced_Filters_Hint_Labels.hint_label),
+      });
+    this.modification_type_radio = this.modification_type_fieldset.getByRole('radio');
+    this.modification_type_radio_chevron = this.page
+      .getByRole('heading', { level: 2 })
+      .getByText(
+        this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_advanced_filters_modification_type_label,
+        {
+          exact: true,
+        }
+      );
+    this.modification_type_hint_label = this.post_approvals_advanced_filters_modification_type_label
+      .locator('..')
+      .locator('..')
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group')
+      .getByText(this.projectOverviewPageTestData.Advanced_Filters_Hint_Labels.hint_label);
+    this.modification_type_radio_hint_label = this.modification_type_fieldset.getByText(
+      this.projectOverviewPageTestData.Advanced_Filters_Hint_Labels.hint_label,
+      {
+        exact: true,
+      }
+    );
+    this.post_approvals_advanced_filters_review_type_label = this.page
+      .getByRole('heading', { level: 2 })
+      .getByText(this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_advanced_filters_review_type_label, {
+        exact: true,
+      });
+    this.review_type_fieldset = this.post_approvals_advanced_filters_review_type_label
+      .locator('..')
+      .locator('..')
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group', {
+        has: this.page.getByText(this.projectOverviewPageTestData.Advanced_Filters_Hint_Labels.hint_label),
+      });
+    this.review_type_radio = this.review_type_fieldset.getByRole('radio');
+    this.review_type_radio_chevron = this.page
+      .getByRole('heading', { level: 2 })
+      .getByText(this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_advanced_filters_review_type_label, {
+        exact: true,
+      });
+    this.review_type_hint_label = this.post_approvals_advanced_filters_review_type_label
+      .locator('..')
+      .locator('..')
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group')
+      .getByText(this.projectOverviewPageTestData.Advanced_Filters_Hint_Labels.hint_label);
+    this.review_type_radio_hint_label = this.modification_type_fieldset.getByText(
+      this.projectOverviewPageTestData.Advanced_Filters_Hint_Labels.hint_label,
+      {
+        exact: true,
+      }
+    );
+    //separation
+    this.post_approvals_advanced_filters_category_label = this.page
+      .getByRole('heading', { level: 2 })
+      .getByText(this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_advanced_filters_category_label, {
+        exact: true,
+      });
+    this.category_fieldset = this.post_approvals_advanced_filters_category_label
+      .locator('..')
+      .locator('..')
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group', {
+        has: this.page.getByText(this.projectOverviewPageTestData.Advanced_Filters_Hint_Labels.hint_label),
+      });
+    this.category_radio = this.review_type_fieldset.getByRole('radio');
+    this.category_radio_chevron = this.page
+      .getByRole('heading', { level: 2 })
+      .getByText(this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_advanced_filters_category_label, {
+        exact: true,
+      });
+    this.category_hint_label = this.post_approvals_advanced_filters_category_label
+      .locator('..')
+      .locator('..')
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group')
+      .getByText(this.projectOverviewPageTestData.Advanced_Filters_Hint_Labels.hint_label);
+    this.category_radio_hint_label = this.modification_type_fieldset.getByText(
+      this.projectOverviewPageTestData.Advanced_Filters_Hint_Labels.hint_label,
+      {
+        exact: true,
+      }
+    );
+    this.post_approvals_advanced_filters_status_label = this.page
+      .getByRole('heading', { level: 2 })
+      .getByText(this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_advanced_filters_status_label, {
+        exact: true,
+      });
+    this.status_fieldset = this.post_approvals_advanced_filters_status_label
+      .locator('..')
+      .locator('..')
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group', {
+        has: this.page.getByText(this.projectOverviewPageTestData.Advanced_Filters_Hint_Labels.hint_label),
+      });
+    this.status_radio = this.status_fieldset.getByRole('radio');
+    this.status_radio_chevron = this.page
+      .getByRole('heading', { level: 2 })
+      .getByText(this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_advanced_filters_status_label, {
+        exact: true,
+      });
+    this.status_hint_label = this.post_approvals_advanced_filters_status_label
+      .locator('..')
+      .locator('..')
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group')
+      .getByText(this.projectOverviewPageTestData.Advanced_Filters_Hint_Labels.hint_label);
+    this.status_radio_hint_label = this.status_fieldset.getByText(
+      this.projectOverviewPageTestData.Advanced_Filters_Hint_Labels.hint_label,
+      {
+        exact: true,
+      }
+    );
     this.date_submitted_from_day_text_chevron = this.page
       .getByRole('heading')
       .getByText(this.projectOverviewPageTestData.Post_Approval_Tab.post_approvals_date_submitted_label, {
@@ -420,6 +457,20 @@ export default class ProjectOverviewPage {
       .locator('.search-filter-panel__button-inner')
       .getByText(this.projectOverviewPageTestData.Project_Documents_Tab.advanced_filters_project_documents);
     this.results_count_project_documents = this.page.locator('.search-filter-panel__count');
+    this.date_submitted_to_date_error_message = this.page
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group')
+      .filter({
+        hasText: this.projectOverviewPageTestData.Post_Approval_Page_Label_Texts.date_submitted_to_date_hint_text,
+      })
+      .locator('.govuk-error-message');
+    this.date_submitted_from_date_error_message = this.page
+      .locator('.govuk-fieldset')
+      .locator('.govuk-form-group')
+      .filter({
+        hasText: this.projectOverviewPageTestData.Post_Approval_Page_Label_Texts.date_submitted_from_date_hint_text,
+      })
+      .locator('.govuk-error-message');
   }
 
   //Page Methods

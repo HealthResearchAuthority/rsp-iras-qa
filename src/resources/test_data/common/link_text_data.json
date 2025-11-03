@@ -128,6 +128,9 @@
     "Back": "Back",
     "Project_Documents": "Project documents"
   },
+  "Post_Approval_Page": {
+    "Clear_All_Filters": "Clear all filters"
+  },
   "Review_Body_User_List_Page": {
     "Back_To_Review_Body_Profile": "Back to review body profile",
     "Manage_Users": "Manage users",

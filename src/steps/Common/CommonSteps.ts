@@ -931,7 +931,7 @@ Then(
 Then(
   '{string} active filters {string} in the {string}',
   async (
-    { searchModificationsPage, manageReviewBodiesPage, manageUsersPage, modificationsCommonPage, commonItemsPage },
+    { searchModificationsPage, manageReviewBodiesPage, manageUsersPage, commonItemsPage, projectOverviewPage },
     actionToPerform: string,
     filterDatasetName: string,
     pageKey: string
@@ -952,9 +952,13 @@ Then(
         dataset: manageUsersPage.manageUsersPageTestData.Advanced_Filters,
         labels: manageUsersPage.manageUsersPageTestData.Manage_Users_Page.Label_Texts_Manage_Users_List,
       },
+      // Post_Approval_Page: {
+      //   dataset: modificationsCommonPage.modificationsCommonPageTestData.Advanced_Filters,
+      //   labels: modificationsCommonPage.modificationsCommonPageTestData.Post_Approval_Page_Label_Texts,
+      // },
       Post_Approval_Page: {
-        dataset: modificationsCommonPage.modificationsCommonPageTestData.Advanced_Filters,
-        labels: modificationsCommonPage.modificationsCommonPageTestData.Post_Approval_Page_Label_Texts,
+        dataset: projectOverviewPage.projectOverviewPageTestData.Advanced_Filters,
+        labels: projectOverviewPage.projectOverviewPageTestData.Post_Approval_Page_Label_Texts,
       },
     };
     const { dataset, labels } = pageMap[pageKey];
@@ -999,7 +1003,7 @@ Then(
 Then(
   'I validate {string} displayed on {string} in advanced filters',
   async (
-    { commonItemsPage, searchModificationsPage },
+    { commonItemsPage, searchModificationsPage, projectOverviewPage },
     errorMessageFieldAndSummaryDatasetName: string,
     pageKey: string
   ) => {
@@ -1011,6 +1015,10 @@ Then(
           errorMessageFieldAndSummaryDatasetName
         ];
       page = searchModificationsPage;
+    } else if (pageKey === 'Post_Approval_Page') {
+      errorMessageFieldDataset =
+        projectOverviewPage.projectOverviewPageTestData.Error_Validation[errorMessageFieldAndSummaryDatasetName];
+      page = projectOverviewPage;
     }
     await expect(commonItemsPage.errorMessageSummaryLabel).toBeVisible();
     const allSummaryErrorExpectedValues = Object.values(errorMessageFieldDataset);
@@ -1031,6 +1039,15 @@ Then(
         } else if (errorMessageFieldAndSummaryDatasetName === 'Sponsor_Organisation_Min_Char_Error') {
           const actualMessage =
             await searchModificationsPage.sponsor_organisation_jsdisabled_min_error_message.textContent();
+          expect(actualMessage).toEqual(expectedMessage);
+        } else if (
+          errorMessageFieldAndSummaryDatasetName === 'Post_Approval_Invalid_Date_Range_To_Before_From_Error' ||
+          errorMessageFieldAndSummaryDatasetName === 'Post_Approval_Invalid_Date_To_Error'
+        ) {
+          const actualMessage = await projectOverviewPage.date_submitted_to_date_error_message.textContent();
+          expect(actualMessage).toEqual(expectedMessage);
+        } else if (errorMessageFieldAndSummaryDatasetName === 'Post_Approval_Invalid_Date_From_Error') {
+          const actualMessage = await projectOverviewPage.date_submitted_from_date_error_message.textContent();
           expect(actualMessage).toEqual(expectedMessage);
         } else {
           throw new Error(`Unhandled error message dataset name: ${errorMessageFieldAndSummaryDatasetName}`);

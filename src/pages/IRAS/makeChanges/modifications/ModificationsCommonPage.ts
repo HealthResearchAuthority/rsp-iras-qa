@@ -4,7 +4,7 @@ import PlannedEndDateChangePage from './PlannedEndDateChangePage';
 import AffectedOrganisationSelectionPage from './applicabilityScreens/AffectedOrganisationSelectionPage';
 import AffectedOrganisationQuestionsPage from './applicabilityScreens/AffectedOrganisationQuestionsPage';
 import CommonItemsPage from '../../../Common/CommonItemsPage';
-import { confirmStringNotNull } from '../../../../utils/UtilFunctions';
+import { confirmStringNotNull, validateDateRange } from '../../../../utils/UtilFunctions';
 
 //Declare Page Objects
 export default class ModificationsCommonPage {
@@ -37,16 +37,18 @@ export default class ModificationsCommonPage {
     //Locators
     this.pageHeading = this.page.getByRole('heading');
     this.pageComponentLabel = this.page.getByRole('heading');
-    this.iras_id_value = this.page
-      .locator('[class$="key"]')
-      .getByText(this.modificationsCommonPageTestData.Label_Texts.iras_id_label)
-      .locator('..')
-      .locator('[class$="value"]');
-    this.short_project_title_value = this.page
-      .locator('[class$="key"]')
-      .getByText(this.modificationsCommonPageTestData.Label_Texts.short_project_title_label)
-      .locator('..')
-      .locator('[class$="value"]');
+    this.short_project_title_value = this.page.locator('div.govuk-inset-text p').nth(1);
+    this.iras_id_value = this.page.locator('div.govuk-inset-text p').first();
+    // this.iras_id_value = this.page
+    //   .locator('[class$="key"]')
+    //   .getByText(this.modificationsCommonPageTestData.Label_Texts.iras_id_label)
+    //   .locator('..')
+    //   .locator('[class$="value"]');
+    // this.short_project_title_value = this.page
+    //   .locator('[class$="key"]')
+    //   .getByText(this.modificationsCommonPageTestData.Label_Texts.short_project_title_label)
+    //   .locator('..')
+    //   .locator('[class$="value"]');
     this.modification_id_value = this.page
       .locator('[class$="key"]')
       .getByText(this.modificationsCommonPageTestData.Label_Texts.modification_id_label)
@@ -356,43 +358,130 @@ export default class ModificationsCommonPage {
     return modificationMap;
   }
 
-  // async getAllModificationPostApprovalPage(): Promise<Map<string, string[]>> {
-  //   let modificationMap: any;
-  //   const displayedModificationIdValue: string[] = [];
-  //   const displayedSubmittedDateValue: string[] = [];
-  //   const displayedStatusValue: string[] = [];
-  //   const rows = await this.modificationRows.all();
-  //   for (const row of rows) {
-  //     const columns = await row.locator(this.listCell).allInnerTexts();
-  //     const modificationId = confirmStringNotNull(columns[0]);
-  //     displayedModificationIdValue.push(modificationId);
-  //     const submittedDate = confirmStringNotNull(columns[4] ?? '');
-  //     displayedSubmittedDateValue.push(submittedDate);
-  //     const status = confirmStringNotNull(columns[5] ?? '');
-  //     displayedStatusValue.push(status);
-  //     modificationMap = new Map([
-  //       ['displayedStatusValue', displayedStatusValue],
-  //       ['displayedSubmittedDateValue', displayedSubmittedDateValue],
-  //       ['displayedModificationIdValue', displayedModificationIdValue],
-  //     ]);
-  //   }
-  //   return modificationMap;
-  // }
+  async getModificationRowNumberPostApprovalPage(rowNumber?: number): Promise<Map<string, string[]>> {
+    const modificationIdValue: string[] = [];
+    const submittedDateValue: string[] = [];
+    const statusValue: string[] = [];
+    const columns = this.tableRows.nth(rowNumber).getByRole('cell');
+    const modificationId = confirmStringNotNull(await columns.nth(0).textContent());
+    modificationIdValue.push(modificationId);
+    const submittedDate = confirmStringNotNull(await columns.nth(4).textContent());
+    submittedDateValue.push(submittedDate);
+    const status = confirmStringNotNull(await columns.nth(5).textContent());
+    statusValue.push(status);
+    const modificationMap = new Map([
+      ['modificationIdValue', modificationIdValue],
+      ['submittedDateValue', submittedDateValue],
+      ['statusValue', statusValue],
+    ]);
+    return modificationMap;
+  }
 
-  async validateResults(commonItemsPage: any, searchCriteriaDataset: any, validateSearch: boolean = true) {
+  async validateSearchResults(
+    commonItemsPage: any,
+    searchCriteriaDataset: any,
+    validateSearch: boolean = true,
+    rowNumber: number = 1
+  ) {
     // Loop through Max_Pages_To_Validate (currently set to 2)
-    for (let pageIndex = 1; pageIndex < modificationsCommonPageTestData.Max_Pages_To_Validate; pageIndex++) {
-      const rowCount = await commonItemsPage.tableRows.count();
-      for (let rowIndex = 1; rowIndex < rowCount; rowIndex++) {
-        const modificationId = await this.getModificationPostApprovalPage();
-        const modificationIDActual = modificationId.get('modificationIdValue');
-        // Validate modifciation search resuts
-        if (validateSearch && searchCriteriaDataset['search_input_text'] !== '') {
-          const modificationIdExpected = searchCriteriaDataset['search_input_text'];
-          expect(modificationIDActual.includes(modificationIdExpected));
-        }
-      }
+    //   for (let pageIndex = 1; pageIndex < modificationsCommonPageTestData.Max_Pages_To_Validate; pageIndex++) {
+    //const rowCount = await commonItemsPage.tableRows.count();
+    //for (let rowIndex = 1; rowIndex < rowCount; rowIndex++) {
+    //const rownumber = rowIndex;
+    const modificationId = await this.getModificationRowNumberPostApprovalPage(rowNumber);
+    const modificationIDActual = modificationId.get('modificationIdValue');
+    // Validate modifciation search resuts
+    if (validateSearch && searchCriteriaDataset['search_input_text'] !== '') {
+      const modificationIdExpected = searchCriteriaDataset['search_input_text'];
+      expect(modificationIDActual.includes(modificationIdExpected));
+    }
+    //}
+    const hasNextPage =
+      (await commonItemsPage.pagination_next_link.isVisible()) &&
+      !(await commonItemsPage.pagination_next_link.isDisabled());
+    if (hasNextPage) {
       await commonItemsPage.next_button.click();
     }
+    //  }
+  }
+
+  async getRowDataAdvancedFiltersSearch(row: any) {
+    return {
+      modificationId: confirmStringNotNull(await row.getByRole('cell').nth(0).textContent()),
+      modificationType: confirmStringNotNull(await row.getByRole('cell').nth(1).textContent()),
+      dateSubmitted: confirmStringNotNull(await row.getByRole('cell').nth(4).textContent()),
+      status: confirmStringNotNull(await row.getByRole('cell').nth(5).textContent()),
+    };
+  }
+
+  async validateResults(
+    commonItemsPage: any,
+    searchCriteriaDataset: any,
+    filterDataset?: any,
+    validateSearch: boolean = true
+  ) {
+    for (let pageIndex = 1; pageIndex < 2; pageIndex++) {
+      const rowCount = await commonItemsPage.tableRows.count();
+      for (let rowIndex = 1; rowIndex < rowCount; rowIndex++) {
+        const row = commonItemsPage.tableRows.nth(rowIndex);
+        const { modificationType, dateSubmitted, status } = await this.getRowDataAdvancedFiltersSearch(row);
+        if (validateSearch && searchCriteriaDataset['search_input_text'] !== '') {
+          this.validateSearchResults(commonItemsPage, searchCriteriaDataset, true, rowIndex);
+        }
+        this.validateFilters(modificationType, dateSubmitted, status, filterDataset);
+      }
+      const hasNextPage =
+        (await commonItemsPage.pagination_next_link.isVisible()) &&
+        !(await commonItemsPage.pagination_next_link.isDisabled());
+      if (hasNextPage) {
+        await commonItemsPage.pagination_next_link.click();
+      }
+    }
+  }
+
+  async validateFilters(
+    modificationTypeActual: string,
+    dateSubmittedActual: string,
+    statusActual: string,
+    filterDataset: any
+  ) {
+    for (const key in filterDataset) {
+      if (Object.hasOwn(filterDataset, key)) {
+        if (key === 'status_radio') {
+          const statusExpected = filterDataset[key];
+          expect(
+            statusExpected.some((statusLabel: string) => statusActual.toLowerCase().includes(statusLabel.toLowerCase()))
+          ).toBeTruthy();
+        }
+        if (key === 'modification_type_radio') {
+          const modificationTypeExpected = filterDataset[key];
+          expect(
+            modificationTypeExpected.some((modificationTypeLabel: string) =>
+              modificationTypeActual.toLowerCase().includes(modificationTypeLabel.toLowerCase())
+            )
+          ).toBeTruthy();
+        }
+        if (
+          key.includes('date_submitted_from_year_text') ||
+          (key.includes('date_submitted_to_year_text') && dateSubmittedActual !== null)
+        ) {
+          const filterFromDate = `${filterDataset['date_submitted_from_day_text']} ${filterDataset['date_submitted_from_month_dropdown']} ${filterDataset['date_submitted_from_year_text']}`;
+          const filterToDate = `${filterDataset['date_submitted_to_day_text']} ${filterDataset['date_submitted_to_month_dropdown']} ${filterDataset['date_submitted_to_year_text']}`;
+          if (filterFromDate !== '' && filterToDate !== '') {
+            await this.validateDateFilter(filterFromDate, filterToDate, dateSubmittedActual);
+          }
+        }
+      }
+    }
+  }
+
+  async validateDateFilter(filterFromDate: string, filterToDate: string, submittedDateActual: string) {
+    const submittedDateActualOnlyDate = submittedDateActual.substring(0, 11);
+    const isDateSubmittedInDateInValidRange = await validateDateRange(
+      submittedDateActualOnlyDate,
+      filterFromDate,
+      filterToDate
+    );
+    expect(isDateSubmittedInDateInValidRange).toBe(true);
   }
 }
