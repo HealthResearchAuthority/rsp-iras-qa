@@ -7,10 +7,43 @@
   },
   "Setup_New_Sponsor_Organisation": {
     "Sponsor_Organisation_Unused": {
-      "sponsor_organisation_text": "ESSEX PARTNERSHIP UNIVERSITY NHS FOUNDATION TRUST"
+      "sponsor_organisation_text": "SHEFFIELD TEACHING HOSPITALS NHS FOUNDATION TRUST"
     },
     "Sponsor_Organisation_One": {
       "sponsor_organisation_text": ""
+    },
+    "Sponsor_Organisation_UniversityOfSouthampton": {
+      "sponsor_organisation_text": "University of Southampton"
+    },
+    "Sponsor_Organisation_CardiffUniversity": {
+      "sponsor_organisation_text": "Cardiff University"
+    },
+    "Sponsor_Organisation_UniversityOfBristol": {
+      "sponsor_organisation_text": "University of Bristol"
+    },
+    "Sponsor_Organisation_ImperialCollegeLondon": {
+      "sponsor_organisation_text": "Imperial College of Science, Technology and Medicine"
+    },
+    "Sponsor_Organisation_ImperialNHSTrust": {
+      "sponsor_organisation_text": "IMPERIAL COLLEGE HEALTHCARE NHS TRUST"
+    },
+    "Sponsor_Organisation_CambridgeUniversityHospitalsNHSFoundationTrust": {
+      "sponsor_organisation_text": "CAMBRIDGE UNIVERSITY HOSPITALS NHS FOUNDATION TRUST"
+    },
+    "Sponsor_Organisation_GuysAndThomasNHSFoundationTrust": {
+      "sponsor_organisation_text": "GUY'S AND ST THOMAS' NHS FOUNDATION TRUST"
+    },
+    "Sponsor_Organisation_UniversityOfManchester": {
+      "sponsor_organisation_text": "University of Manchester"
+    },
+    "Sponsor_Organisation_UniversityOfLeeds": {
+      "sponsor_organisation_text": "University of Leeds"
+    },
+    "Sponsor_Organisation_UniversityOfBirmingham": {
+      "sponsor_organisation_text": "University of Birmingham"
+    },
+    "Sponsor_Organisation_SheffieldTeachingHospitalsNHSFoundationTrust": {
+      "sponsor_organisation_text": "SHEFFIELD TEACHING HOSPITALS NHS FOUNDATION TRUST"
     }
   },
   "Existing_Sponsor_Organisation": {

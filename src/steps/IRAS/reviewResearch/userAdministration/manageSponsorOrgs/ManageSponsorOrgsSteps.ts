@@ -97,3 +97,18 @@ Then(
       .toBe(commonItemsPage.commonTestData.rgb_green_color);
   }
 );
+
+When(
+  'Capture the name of the recently added sponsor organisation in the test data using {string}',
+  async ({ setupNewSponsorOrganisationPage }, sponsorDatasetName: string) => {
+    const dataset =
+      setupNewSponsorOrganisationPage.setupNewSponsorOrganisationPageTestData.Setup_New_Sponsor_Organisation[
+        sponsorDatasetName
+      ];
+    for (const key in dataset) {
+      if (Object.hasOwn(dataset, key)) {
+        await setupNewSponsorOrganisationPage.saveUnusedSponsorOrgTosetupNewSponsorOrganisation(dataset[key]);
+      }
+    }
+  }
+);

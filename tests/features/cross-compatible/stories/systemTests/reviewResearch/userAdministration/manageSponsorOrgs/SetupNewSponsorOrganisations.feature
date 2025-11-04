@@ -38,6 +38,49 @@ Feature: User Administration: Manage Sponsor Organisations - Set up new sponsor 
             | Setup_New_Sponsor_Organisation | Status_Enabled | RTS_API_Data         | RTS_Request                         |
             | Sponsor_Organisation_Unused    | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
 
+    @SetupNewSponsorOrgGoLive @ViewListOfSponsorOrgs @rsp-5229 @rsp-5230 @rsp-5232 @rsp-5237
+    Scenario Outline: Verify the user can add a sponsor organisations which are in the first go live cohort from manage sponsor organisation page
+        When I authorise the rts api using '<RTS_API_Data>'
+        Then I make a request to the rts api using '<RTS_Request>' dataset for sponsor organisation '<Setup_New_Sponsor_Organisation>' and  retrive country
+        And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
+        Then I can see the 'Setup_New_Sponsor_Organisation_Page'
+        And I capture the page screenshot
+        When I select a sponsor organisation in the set up a new sponsor organisation page using '<Setup_New_Sponsor_Organisation>'
+        And I capture the page screenshot
+        And I click the 'Save_Continue' button on the 'Setup_New_Sponsor_Organisation_Page'
+        And I capture the page screenshot
+        And I can see the check and set up a sponsor organisation profile page with details matching the rts response received
+        When I click the 'Save_Profile' button on the 'Check_Setup_Sponsor_Organisation_Page'
+        And I capture the current time for 'Sponsor_Organisation_Profile_Page'
+        Then I can see the 'Manage_Sponsor_Organisations_Page'
+        Then I can see the sponsor organisation added successful message on manage sponsor organisation page
+        And I capture the page screenshot
+        And I can see the list is sorted by default in the alphabetical order of the 'Organisation Name'
+        And I capture the page screenshot
+        When I enter 'name of the newly added sponsor organisation' into the search field
+        And I click the 'Search' button on the 'Manage_Sponsor_Organisations_Page'
+        And I can see the 'newly added sponsor organisation' should be present in the list with '<Status_Enabled>' status in the manage sponsor organisation page
+        And I capture the page screenshot
+        Then I click the view edit link of the 'newly added sponsor organisation'
+        And I capture the page screenshot
+        And I can see the sponsor organisation profile page
+        And I now see the sponsor organisation profile page with the selected '<Setup_New_Sponsor_Organisation>'
+        And I capture the page screenshot
+        And Capture the name of the recently added sponsor organisation in the test data using '<Setup_New_Sponsor_Organisation>'
+        Examples:
+            | Setup_New_Sponsor_Organisation                                      | Status_Enabled | RTS_API_Data         | RTS_Request                         |
+            | Sponsor_Organisation_UniversityOfSouthampton                        | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            | Sponsor_Organisation_CardiffUniversity                              | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            | Sponsor_Organisation_UniversityOfBristol                            | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            | Sponsor_Organisation_ImperialCollegeLondon                          | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            | Sponsor_Organisation_ImperialNHSTrust                               | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            | Sponsor_Organisation_CambridgeUniversityHospitalsNHSFoundationTrust | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            | Sponsor_Organisation_GuysAndThomasNHSFoundationTrust                | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            | Sponsor_Organisation_UniversityOfManchester                         | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            | Sponsor_Organisation_UniversityOfLeeds                              | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            | Sponsor_Organisation_UniversityOfBirmingham                         | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            | Sponsor_Organisation_SheffieldTeachingHospitalsNHSFoundationTrust   | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+
     @rsp-5230 @ErrorValidationDuplicateSponsorOrg @jsEnabled
     Scenario Outline: Verify appropriate error message is displayed when user tries to add a duplicate sponsor organisation from set up a new sponsor organisation page when JavaScript is enabled
         When I enter the '<Field_Name>' of the '<Position>' item in the list, into the search field
