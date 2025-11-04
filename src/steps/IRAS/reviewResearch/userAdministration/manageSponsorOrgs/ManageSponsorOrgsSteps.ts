@@ -99,7 +99,7 @@ Then(
 );
 
 When(
-  'Capture the name of the recently added sponsor organisation in the test data using {string}',
+  'I capture the name of the recently added sponsor organisation in the test data using {string}',
   async ({ setupNewSponsorOrganisationPage }, sponsorDatasetName: string) => {
     const dataset =
       setupNewSponsorOrganisationPage.setupNewSponsorOrganisationPageTestData.Setup_New_Sponsor_Organisation[

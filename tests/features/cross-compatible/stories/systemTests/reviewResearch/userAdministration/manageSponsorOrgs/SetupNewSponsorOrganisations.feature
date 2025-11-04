@@ -66,13 +66,12 @@ Feature: User Administration: Manage Sponsor Organisations - Set up new sponsor 
         And I can see the sponsor organisation profile page
         And I now see the sponsor organisation profile page with the selected '<Setup_New_Sponsor_Organisation>'
         And I capture the page screenshot
-        And Capture the name of the recently added sponsor organisation in the test data using '<Setup_New_Sponsor_Organisation>'
+        And I capture the name of the recently added sponsor organisation in the test data using '<Setup_New_Sponsor_Organisation>'
         Examples:
             | Setup_New_Sponsor_Organisation                                      | Status_Enabled | RTS_API_Data         | RTS_Request                         |
             | Sponsor_Organisation_UniversityOfSouthampton                        | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
             | Sponsor_Organisation_CardiffUniversity                              | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
             | Sponsor_Organisation_UniversityOfBristol                            | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
-            | Sponsor_Organisation_ImperialCollegeLondon                          | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
             | Sponsor_Organisation_ImperialNHSTrust                               | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
             | Sponsor_Organisation_CambridgeUniversityHospitalsNHSFoundationTrust | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
             | Sponsor_Organisation_GuysAndThomasNHSFoundationTrust                | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
