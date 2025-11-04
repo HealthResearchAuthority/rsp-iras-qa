@@ -500,7 +500,6 @@ Feature: Create Amendment - Project Documents Edit and Save
                 And I can see the project overview page
                 And I capture the page screenshot
 
-
                 Examples:
                         | Specific_Change                              | Document_Upload_Files | Document_Types_Dropdown_List_For_Study_Type | Document_Types_Mandatory                         | Version_Date |
                         | Correction_Of_Typographical_Errors           | PNG_File              | Non_REC_Study_Types                         | Protocol_Clinical_Investigation_Plan             | mandatory    |
@@ -598,3 +597,117 @@ Feature: Create Amendment - Project Documents Edit and Save
                         | Translations_Addition_Of_Translated_Versions | PNG_File              | Non_REC_Study_Types                         | Questionnaire_Non_Validated                      | mandatory    | Missing_Mandatory_Question_Document_Date_Error    | Valid_Data_Fields_Mandatory_Date            |
                         | Correction_Of_Typographical_Errors           | PNG_File              | Non_REC_Study_Types                         | Participant_Diary_Sample                         | mandatory    | Missing_Mandatory_Question_Document_Date_Error    | Valid_Data_Fields_Mandatory_Date            |
 
+        @ValidateErrorMessage @rsp-5261 @KNOWN-DEFECT-RSP-5595
+        Scenario Outline: Verify that appropriate error messages are displayed when mandatory fields, such as dates, are missing on the 'Add Document Details' page
+                And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
+                When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+                Then I can see the add documents for '<Specific_Change>' page
+                And I upload '<Document_Upload_Files>' documents
+                And I capture the page screenshot
+                When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+                Then I can see the review uploaded documents for '<Specific_Change>' page
+                And I capture the page screenshot
+                When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+                When I can see the add document details for '<Specific_Change>' page
+                And I capture the page screenshot
+                And I click on the document link with status 'Document_Status_Incomplete' and I can see the add document details for specific document page
+                And I capture the page screenshot
+                And I select document type '<Document_Types_Mandatory>' for which document version and date are '<Version_Date>' and I can see mandatory fields are displayed based on the selected document type
+                And I capture the page screenshot
+                And I enter document details for the uploaded documents using '<Missing_Mandatory_Field>' in the add document details for specific document page
+                And I capture the page screenshot
+                When I click the 'Save_Continue' button on the 'Add_Document_Details_For_Specific_Document_Modifications_Page'
+                And I capture the page screenshot
+                Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Add_Document_Details_For_Specific_Document_Modifications_Page'
+
+                Examples:
+                        | Specific_Change                              | Document_Upload_Files | Document_Types_Mandatory                         | Missing_Mandatory_Field               | Field_And_Summary_Error_Message            |
+                        | Correction_Of_Typographical_Errors           | PNG_File              | Protocol_Clinical_Investigation_Plan             | Invalid_Day_Number                    | Invalid_Sponsor_Document_Date_Error        |
+                        | CRF_Other_Study_Data_Records                 | PNG_File              | Participant_Information_Sheet_PIS                | Invalid_Day_Letters                   | Invalid_Sponsor_Document_Date_Error        |
+                        | GDPR_Wording                                 | PNG_File              | Consent_form                                     | Invalid_Year_Number_1                 | Invalid_Sponsor_Document_Date_Error        |
+                        | Other_Minor_Change_To_Study_Documents        | PNG_File              | Recruitment_Invitation_To_Potential_Participants | Invalid_Year_Number_2                 | Invalid_Sponsor_Document_Date_Error        |
+                        | Post_Trial_Information_For_Participants      | PNG_File              | Recruitment_Materials_Other                      | Invalid_Year_Letters                  | Invalid_Sponsor_Document_Date_Error        |
+                        | Protocol_Non_Substantial_Changes             | PNG_File              | Interviews_Or_Focus_Group_Topic_Guides           | Invalid_Date_Future                   | Invalid_Sponsor_Document_Future_Date_Error |
+                        | Translations_Addition_Of_Translated_Versions | PNG_File              | Questionnaire_Non_Validated                      | Invalid_Date_No_Day                   | No_Sponsor_Document_Date_Day_Error         |
+                        | Correction_Of_Typographical_Errors           | PNG_File              | Participant_Diary_Sample                         | Invalid_Date_No_Month                 | No_Sponsor_Document_Date_Month_Error       |
+                        | CRF_Other_Study_Data_Records                 | PNG_File              | Participant_Information_Sheet_PIS                | Invalid_Date_No_Year                  | No_Sponsor_Document_Date_Year_Error        |
+                        | GDPR_Wording                                 | PNG_File              | Consent_form                                     | Invalid_Date_No_Day_No_Month          | No_Sponsor_Document_Date_Day_Month_Error   |
+                        | Other_Minor_Change_To_Study_Documents        | PNG_File              | Recruitment_Invitation_To_Potential_Participants | Invalid_Date_No_Day_No_Year           | No_Sponsor_Document_Date_Day_Year_Error    |
+                        | Post_Trial_Information_For_Participants      | PNG_File              | Recruitment_Materials_Other                      | Invalid_Date_No_Month_No_Year         | No_Sponsor_Document_Date_Month_Year_Error  |
+                        | Post_Trial_Information_For_Participants      | PNG_File              | Recruitment_Materials_Other                      | Invalid_Date_No_Date_No_Month_No_Year | No_Sponsor_Document_Date_Error             |
+
+
+        @EditTheDateFiledAndValidateErrorMessage @rsp-5261 @KNOWN-DEFECT-RSP-5595
+        Scenario Outline: Verify the user is able to edit the sponsor document date field from review your document information and validate the error message
+                And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
+                When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+                Then I can see the add documents for '<Specific_Change>' page
+                And I upload '<Document_Upload_Files>' documents
+                And I capture the page screenshot
+                When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+                Then I can see the review uploaded documents for '<Specific_Change>' page
+                And I capture the page screenshot
+                When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+                When I can see the add document details for '<Specific_Change>' page
+                And I capture the page screenshot
+                And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+                And I validate the status of each document is 'Document_Status_Incomplete' in add document details page
+                And I capture the page screenshot
+                And I click on the document link with status 'Document_Status_Incomplete' and enter 'Valid_Data_Fields' for the uploaded '<Document_Upload_Files>' in the add document details for specific document page
+                And I capture the page screenshot
+                When I click the 'Save_Continue' button on the 'Add_Document_Details_Page'
+                And I capture the page screenshot
+                And I can see the review your document information page
+                And I capture the page screenshot
+                Then I validate the field values 'Valid_Data_Fields' displayed in the review your document information page
+                And I click on the document date change link next to each document and enter new 'Invalid_Day_Number' and validate if '' is displayed in the add document details for the uploaded documents page
+                And I capture the page screenshot
+                Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Add_Document_Details_For_Specific_Document_Modifications_Page'
+
+                Examples:
+                        | Specific_Change                              | Document_Upload_Files | Missing_Mandatory_Field               | Field_And_Summary_Error_Message            |
+                        | Correction_Of_Typographical_Errors           | PNG_File              | Invalid_Day_Number                    | Invalid_Sponsor_Document_Date_Error        |
+                        | CRF_Other_Study_Data_Records                 | PNG_File              | Invalid_Day_Letters                   | Invalid_Sponsor_Document_Date_Error        |
+                        | GDPR_Wording                                 | PNG_File              | Invalid_Year_Number_1                 | Invalid_Sponsor_Document_Date_Error        |
+                        | Other_Minor_Change_To_Study_Documents        | PNG_File              | Invalid_Year_Number_2                 | Invalid_Sponsor_Document_Date_Error        |
+                        | Post_Trial_Information_For_Participants      | PNG_File              | Invalid_Year_Letters                  | Invalid_Sponsor_Document_Date_Error        |
+                        | Protocol_Non_Substantial_Changes             | PNG_File              | Invalid_Date_Future                   | Invalid_Sponsor_Document_Future_Date_Error |
+                        | Translations_Addition_Of_Translated_Versions | PNG_File              | Invalid_Date_No_Day                   | No_Sponsor_Document_Date_Day_Error         |
+                        | Correction_Of_Typographical_Errors           | PNG_File              | Invalid_Date_No_Month                 | No_Sponsor_Document_Date_Month_Error       |
+                        | CRF_Other_Study_Data_Records                 | PNG_File              | Invalid_Date_No_Year                  | No_Sponsor_Document_Date_Year_Error        |
+                        | GDPR_Wording                                 | PNG_File              | Invalid_Date_No_Day_No_Month          | No_Sponsor_Document_Date_Day_Month_Error   |
+                        | Other_Minor_Change_To_Study_Documents        | PNG_File              | Invalid_Date_No_Day_No_Year           | No_Sponsor_Document_Date_Day_Year_Error    |
+                        | Post_Trial_Information_For_Participants      | PNG_File              | Invalid_Date_No_Month_No_Year         | No_Sponsor_Document_Date_Month_Year_Error  |
+                        | Post_Trial_Information_For_Participants      | PNG_File              | Invalid_Date_No_Date_No_Month_No_Year | No_Sponsor_Document_Date_Error             |
+
+        @SaveForLaterWithoutSelectingDocumentDate @rsp-5261
+        Scenario Outline: Verify the user is able to save for later without selecting document date in add document detail page
+                And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
+                When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
+                Then I can see the add documents for '<Specific_Change>' page
+                And I upload '<Document_Upload_Files>' documents
+                And I capture the page screenshot
+                When I click the 'Save_Continue' button on the 'Add_Document_Modifications_Page'
+                Then I can see the review uploaded documents for '<Specific_Change>' page
+                And I capture the page screenshot
+                When I click the 'Save_Continue' button on the 'Review_Uploaded_Document_Modifications_Page'
+                When I can see the add document details for '<Specific_Change>' page
+                And I capture the page screenshot
+                And I click on the document link with status 'Document_Status_Incomplete' and I can see the add document details for specific document page
+                And I capture the page screenshot
+                And I select document type '<Document_Types_Mandatory>' for which document version and date are '<Version_Date>' and I can see mandatory fields are displayed based on the selected document type
+                And I capture the page screenshot
+                When I click the 'Save_For_Later' button on the 'Add_Document_Details_For_Specific_Document_Modifications_Page'
+                And I capture the page screenshot
+                And I can see the modification progress saved successful message on project overview page
+                And I capture the page screenshot
+
+                Examples:
+                        | Specific_Change                              | Document_Upload_Files | Document_Types_Mandatory                         |
+                        | Correction_Of_Typographical_Errors           | PNG_File              | Protocol_Clinical_Investigation_Plan             |
+                        | CRF_Other_Study_Data_Records                 | PNG_File              | Participant_Information_Sheet_PIS                |
+                        | GDPR_Wording                                 | PNG_File              | Consent_form                                     |
+                        | Other_Minor_Change_To_Study_Documents        | PNG_File              | Recruitment_Invitation_To_Potential_Participants |
+                        | Post_Trial_Information_For_Participants      | PNG_File              | Recruitment_Materials_Other                      |
+                        | Protocol_Non_Substantial_Changes             | PNG_File              | Interviews_Or_Focus_Group_Topic_Guides           |
+                        | Translations_Addition_Of_Translated_Versions | PNG_File              | Questionnaire_Non_Validated                      |
