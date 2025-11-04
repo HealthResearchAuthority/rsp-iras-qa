@@ -491,7 +491,6 @@ Then(
       sponsorReferencePage,
       projectIdentifiersPage,
       setupNewSponsorOrganisationPage,
-      searchModificationsPage,
       completeYourProfilePage,
       editYourProfilePage,
     },
@@ -627,8 +626,12 @@ Then(
               await expect(element).toBeInViewport();
             }
           } else if (errorMessageFieldAndSummaryDatasetName === 'Sponsor_Organisation_Min_Char_Error') {
-            const actualMessage =
-              await searchModificationsPage.sponsor_organisation_jsdisabled_min_error_message.textContent();
+            let actualMessage = confirmStringNotNull(
+              await commonItemsPage.sponsor_organisation_jsdisabled_min_error_message.textContent()
+            );
+            if (actualMessage.includes('Error: ')) {
+              actualMessage = actualMessage.replace('Error: ', '');
+            }
             expect.soft(actualMessage).toEqual(expectedMessage);
             const element = await commonItemsPage.clickErrorSummaryLink(errorMessageFieldDataset, key, page);
             await expect(element).toBeInViewport();
@@ -1162,8 +1165,7 @@ Then(
           const actualMessage = await searchModificationsPage.date_submitted_from_date_error.textContent();
           expect(actualMessage).toEqual(expectedMessage);
         } else if (errorMessageFieldAndSummaryDatasetName === 'Sponsor_Organisation_Min_Char_Error') {
-          const actualMessage =
-            await searchModificationsPage.sponsor_organisation_jsdisabled_min_error_message.textContent();
+          const actualMessage = await commonItemsPage.sponsor_organisation_jsdisabled_min_error_message.textContent();
           expect(actualMessage).toEqual(expectedMessage);
         } else {
           throw new Error(`Unhandled error message dataset name: ${errorMessageFieldAndSummaryDatasetName}`);

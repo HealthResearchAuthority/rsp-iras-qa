@@ -49,7 +49,6 @@ export default class SearchModificationsPage {
   readonly sponsor_organisation_jsdisabled_search_results_labels: Locator;
   readonly sponsor_organisation_jsdisabled_narrow_down_label: Locator;
   readonly sponsor_organisation_jsdisabled_no_suggestions_label: Locator;
-  readonly sponsor_organisation_jsdisabled_min_error_message: Locator;
   readonly date_submitted_to_date_error: Locator;
   readonly lead_nation_checkbox_hint_label: Locator;
   readonly modification_type_checkbox_hint_label: Locator;
@@ -307,13 +306,6 @@ export default class SearchModificationsPage {
       .locator('.govuk-radios__item')
       .filter({ has: this.page.locator('.govuk-radios__label') });
     this.sponsor_organisation_jsdisabled_no_suggestions_label = this.page.locator('.govuk-inset-text');
-    this.sponsor_organisation_jsdisabled_min_error_message = this.page
-      .locator('.govuk-fieldset')
-      .filter({
-        hasText: this.searchModificationsPageTestData.Search_Modifications_Page.sponsor_organisation_hint_text,
-      })
-      .locator('.govuk-error-message')
-      .or(this.page.locator('.field-validation-error'));
     this.results_table = this.page.getByTestId('modificationsTable');
   }
 

@@ -60,7 +60,7 @@ Feature: User Administration: Manage Sponsor Organisations - Set up new sponsor 
             | Organisation_Name | First    | JavaScript_Enabled_Duplicate_Sponsor_Organisation_Setup_Error |
             | Organisation_Name | Last     | JavaScript_Enabled_Duplicate_Sponsor_Organisation_Setup_Error |
 
-    @rsp-5237 @ErrorValidationDuplicateSponsorOrg @KNOWN_DEFECT-RSP-5473 @jsDisabled
+    @rsp-5237 @ErrorValidationDuplicateSponsorOrg @jsDisabled
     Scenario Outline: Verify appropriate error message is displayed when user tries to add a duplicate sponsor organisation from set up a new sponsor organisation page when JavaScript is disabled
         When I enter the '<Field_Name>' of the '<Position>' item in the list, into the search field
         And I capture the page screenshot
@@ -106,7 +106,7 @@ Feature: User Administration: Manage Sponsor Organisations - Set up new sponsor 
             | Sponsor_Organisation_Text_Partial_End_Space   | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Min_Char        | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space  |
             | Sponsor_Organisation_Text_Partial_End_Space   | Sponsor_Organisation_Invalid_Data | Sponsor_Organisation_Text_Min_Spaces | Suggestion_List_Common_Headers | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_Ends_Space  |
 
-    @rsp-5237 @SponsorOrganisationValidation @jsDisabled @RTS @KNOWN_DEFECT-RSP-5473
+    @rsp-5237 @SponsorOrganisationValidation @jsDisabled @RTS
     Scenario Outline: Validate the sponsor organisation suggestion list when javascript is disabled
         And I click the 'Setup_New_Sponsor_Organisation' link on the 'Manage_Sponsor_Organisations_Page'
         Then I can see the 'Setup_New_Sponsor_Organisation_Page'

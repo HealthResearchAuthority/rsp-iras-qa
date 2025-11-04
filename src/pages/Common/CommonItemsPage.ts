@@ -128,6 +128,7 @@ export default class CommonItemsPage {
   readonly sponsor_organisation_text: Locator;
   readonly sponsor_organisation_jsdisabled_search_button: Locator;
   readonly sponsor_organisation_jsdisabled_search_results_radio_button: Locator;
+  readonly sponsor_organisation_jsdisabled_min_error_message: Locator;
   readonly listCell: Locator;
   readonly userListTableRows: Locator;
   readonly userListTableBodyRows: Locator;
@@ -346,6 +347,23 @@ export default class CommonItemsPage {
       .or(this.govUkButton.getByText('Search'));
     this.sponsor_organisation_jsdisabled_search_results_radio_button =
       this.sponsor_organisation_fieldset.getByRole('radio');
+    this.sponsor_organisation_jsdisabled_min_error_message = this.page
+      .locator('.govuk-fieldset')
+      .filter({
+        hasText: this.searchModificationsPageTestData.Search_Modifications_Page.sponsor_organisation_hint_text,
+      })
+      .locator('.govuk-error-message')
+      .or(this.page.locator('.field-validation-error'))
+      .or(
+        this.page
+          .locator('.govuk-form-group')
+          .filter({
+            hasText:
+              this.setupNewSponsorOrganisationPageTestData.Setup_New_Sponsor_Organisation_Page
+                .select_a_sponsor_organisation_hint_text,
+          })
+          .locator('.govuk-error-message')
+      );
     this.listCell = this.page.getByRole('cell');
 
     this.userListTableRows = this.page.getByRole('table').getByRole('row');

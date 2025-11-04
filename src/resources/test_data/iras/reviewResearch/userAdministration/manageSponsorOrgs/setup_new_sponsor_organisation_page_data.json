@@ -8,6 +8,9 @@
   "Setup_New_Sponsor_Organisation": {
     "Sponsor_Organisation_Unused": {
       "sponsor_organisation_text": "ESSEX PARTNERSHIP UNIVERSITY NHS FOUNDATION TRUST"
+    },
+    "Sponsor_Organisation_One": {
+      "sponsor_organisation_text": ""
     }
   },
   "Existing_Sponsor_Organisation": {
