@@ -1,7 +1,7 @@
 {
   "Label_Texts": {
-    "iras_id_label": "IRAS ID:",
-    "short_project_title_label": "Short project title:",
+    "iras_id_label": "IRAS ID",
+    "short_project_title_label": "Short project title",
     "modification_id_label": "Modification ID",
     "status_label": "Status",
     "draft_status_value": "In draft",

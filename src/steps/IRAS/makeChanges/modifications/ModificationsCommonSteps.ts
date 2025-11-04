@@ -469,36 +469,3 @@ Then(
     }
   }
 );
-
-Then(
-  'I create {string} modification with {string} and click on {string}',
-  async (
-    { commonItemsPage, sponsorReferencePage, modificationsCommonPage, selectAreaOfChangePage },
-    modificationDatasetName: string,
-    sponsorDatasetName: string,
-    buttonValue: string
-  ) => {
-    const modificationsDataset = modificationsCommonPage.modificationsCommonPageTestData[modificationDatasetName];
-    const sponsorDataset = modificationsCommonPage.modificationsCommonPageTestData[sponsorDatasetName];
-    const modificationDataValues = Object.keys(modificationsDataset);
-    for (const index of modificationDataValues) {
-      const modificationName = modificationDataValues[index];
-      const modificationDataset = modificationsDataset[modificationName];
-      await commonItemsPage.clickButton('Project_Overview_Page', 'Create_New_Modification');
-      await selectAreaOfChangePage.selectAreaOfChangeInModificationsPage(modificationDataset);
-      await modificationsCommonPage.createChangeModification(modificationName, modificationDataset);
-      await commonItemsPage.clickButton('Modification_Details_Page', 'Save_Continue_Review');
-      for (const key in sponsorDataset) {
-        if (Object.hasOwn(sponsorDataset, key)) {
-          await commonItemsPage.fillUIComponent(sponsorDataset, key, sponsorReferencePage);
-        }
-      }
-      await commonItemsPage.clickButton('Sponsor_Reference_Page', 'Save_Continue_Review');
-      await commonItemsPage.clickButton('Review_All_Changes_Page', 'Send_Modification_To_Sponsor');
-      if (buttonValue == 'Submit_To_Regulator') {
-        await commonItemsPage.clickButton('Modification_Sent_To_Sponsor_Page', 'Submit_To_Regulator');
-        await commonItemsPage.clickLink('Project_Overview_Page', 'Post_Approval');
-      }
-    }
-  }
-);
