@@ -1,4 +1,4 @@
-@UserAdministration @ManageSponsorOrgs @SysAdminUser @SystemTest @UserListSponsorOrgs @STSysAdmin @BackStage @rsp-5233 @TestSponsor
+@UserAdministration @ManageSponsorOrgs @SysAdminUser @SystemTest @UserListSponsorOrgs @STSysAdmin @BackStage @rsp-5233
 Feature: User Administration: Manage Sponsor Organisations - View user list page of the sponsor organisations, Search for the users and add user to the sponsor organisation
 
     Background:

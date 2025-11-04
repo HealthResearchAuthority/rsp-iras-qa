@@ -1,4 +1,4 @@
-@RegressionManageSponsorOrganisations @SysAdminUser @Regression @UserAdministration @BackStage @TestSponsor
+@RegressionManageSponsorOrganisations @SysAdminUser @Regression @UserAdministration @BackStage
 Feature: User Administration: Manage sponsor organisations
 
         Background:
@@ -209,7 +209,7 @@ Feature: User Administration: Manage sponsor organisations
                         | Sponsor_Organisation_Unused    | Enabled        | Disabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS | Disable_Label_Texts | Disable_Sponsor_Organisation_Labels | Enable_Label_Texts | Enable_Sponsor_Organisation_Labels | Disable_User_In_Sponsor_Organisation_Labels | Enable_User_In_Sponsor_Organisation_Labels | Back            |
 
 
-        @RegressionTestVerifyLastUpdatedAfterDisableEnableExistingSponsorOrgAndUser @Test
+        @RegressionTestVerifyLastUpdatedAfterDisableEnableExistingSponsorOrgAndUser
         Scenario Outline: Verify that the user is able to perform: select an existing sponsor organisation, enable or disable the selected sponsor organisation, assign a user to the selected sponsor organisation, enable or disable a user within the sponsor organisation, and confirm that the 'Last Updated' field on the sponsor organisation profile page reflects these changes accurately
                 ## search and select an existing sponsor organisation
                 When I enter 'name of the previously added sponsor organisation' into the search field
@@ -381,7 +381,6 @@ Feature: User Administration: Manage sponsor organisations
                 ## validate sponsor organisation profile page with the selected sponsor organisation and last updated date
                 And I now see the sponsor organisation profile page with the selected '<Existing_Sponsor_Organisation>'
                 And I capture the page screenshot
-                ## add a teardown step to selete this sponsor org from the database
 
                 Examples:
                         | Existing_Sponsor_Organisation     | Status_Enabled | Status_Disabled | RTS_API_Data         | RTS_Request                         | Disable_Label_Texts | Disable_Sponsor_Organisation_Labels | Enable_Label_Texts | Enable_Sponsor_Organisation_Labels | Disable_User_In_Sponsor_Organisation_Labels | Enable_User_In_Sponsor_Organisation_Labels | Navigation_Link |

@@ -1,4 +1,4 @@
-@SysAdminUser @SystemTest @UserAdministration @ManageSponsorOrgs @SortSearchSponsorOrgs @BackStage @rsp-5233 @TestSponsor
+@SysAdminUser @SystemTest @UserAdministration @ManageSponsorOrgs @SortSearchSponsorOrgs @BackStage @rsp-5233
 Feature: User Administration: Manage Sponsor Organisations- Sort, search and pagination of users list in the selected sponsor organisation
 
   Background:
@@ -17,7 +17,6 @@ Feature: User Administration: Manage Sponsor Organisations- Sort, search and pag
     And I click the 'View_This_Sponsor_Org_List_Of_Users' link on the 'Sponsor_Organisation_Profile_Page'
     And I capture the page screenshot
     Then I can see the user list page of the 'sponsor organisation'
-    # And I can see the user list of the selected 'sponsor organisation' is sorted by default in the alphabetical order of the 'First Name'
     And I can see the 'sponsor organisation users' list sorted by 'ascending' order of the 'first name' on the 'first' page
 
   @rsp-5233 @sortUserListByColumn

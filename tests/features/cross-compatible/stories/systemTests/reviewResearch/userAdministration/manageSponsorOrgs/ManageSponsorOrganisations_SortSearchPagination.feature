@@ -1,4 +1,4 @@
-@SysAdminUser @SystemTest @UserAdministration @ManageSponsorOrgs @SortSearchSponsorOrgs @BackStage @TestSponsor
+@SysAdminUser @SystemTest @UserAdministration @ManageSponsorOrgs @SortSearchSponsorOrgs @BackStage
 Feature: User Administration: Manage Sponsor Organisations- Sort, search and pagination of sponsor organisations list
 
     Background:

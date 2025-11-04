@@ -1,4 +1,4 @@
-@SysAdminUser @SystemTest @UserAdministration @ManageSponsorOrgs @BackStage @TestSponsor
+@SysAdminUser @SystemTest @UserAdministration @ManageSponsorOrgs @BackStage
 Feature: User Administration: Manage Sponsor Organisations - Set up new sponsor organisation- JS Enabled and Disabled
 
     Background:

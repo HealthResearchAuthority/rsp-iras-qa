@@ -56,20 +56,6 @@ export default class SponsorOrganisationProfilePage {
       .getByRole('heading')
       .getByText(this.sponsorOrgProfilePageTestData.Sponsor_Organisation_Profile_Page.heading_prefix_label);
     this.row_value_locator = this.page.locator('input');
-    this.row_view_this_sponsor_organisation_list_of_users_link_locator = this.page
-      .getByRole('cell')
-      .getByText(
-        this.sponsorOrgProfilePageTestData.Sponsor_Organisation_Profile_Page
-          .view_this_sponsor_organisation_list_of_users_link,
-        { exact: true }
-      );
-    this.row_view_this_sponsor_organisation_audit_history_link = this.page
-      .getByRole('cell')
-      .getByText(
-        this.sponsorOrgProfilePageTestData.Sponsor_Organisation_Profile_Page
-          .view_this_sponsor_organisation_audit_history_link,
-        { exact: true }
-      );
     this.organisation_name_row = this.page.locator('tr', {
       has: this.page
         .getByRole('cell')
@@ -93,6 +79,13 @@ export default class SponsorOrganisationProfilePage {
           exact: true,
         }),
     });
+    this.row_view_this_sponsor_organisation_list_of_users_link_locator = this.page
+      .getByRole('cell')
+      .getByText(
+        this.sponsorOrgProfilePageTestData.Sponsor_Organisation_Profile_Page
+          .view_this_sponsor_organisation_list_of_users_link,
+        { exact: true }
+      );
     this.view_this_sponsor_organisation_list_of_users_link = this.users_row.locator(
       this.row_view_this_sponsor_organisation_list_of_users_link_locator
     );
@@ -103,6 +96,13 @@ export default class SponsorOrganisationProfilePage {
           exact: true,
         }),
     });
+    this.row_view_this_sponsor_organisation_audit_history_link = this.page
+      .getByRole('cell')
+      .getByText(
+        this.sponsorOrgProfilePageTestData.Sponsor_Organisation_Profile_Page
+          .view_this_sponsor_organisation_audit_history_link,
+        { exact: true }
+      );
     this.view_this_sponsor_organisation_audit_history_link = this.audit_row.locator(
       this.row_view_this_sponsor_organisation_audit_history_link
     );
