@@ -21,7 +21,6 @@ export default class ModificationsCommonPage {
   readonly changes_free_text: Locator;
   readonly modificationRows: Locator;
   readonly listCell: Locator;
-
   readonly modification_type: Locator;
   readonly category: Locator;
   readonly review_type: Locator;
@@ -88,8 +87,6 @@ export default class ModificationsCommonPage {
         hasText: this.modificationsCommonPageTestData.Modification_Ranking_Label_Texts.review_type_label,
       })
       .locator('~ dd.govuk-summary-list__value');
-    // this.short_project_title_value = this.page.locator('div.govuk-inset-text p').nth(1);
-    // this.iras_id_value = this.page.locator('div.govuk-inset-text p').first();
     this.iras_id_value = this.page
       .locator('[class$="key"]')
       .getByText(this.modificationsCommonPageTestData.Label_Texts.iras_id_label)
