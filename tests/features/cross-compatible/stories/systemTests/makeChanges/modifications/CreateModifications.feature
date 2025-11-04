@@ -617,8 +617,9 @@ Feature: Create Amendment - Create Modifications
     And I create '<Changes>' for the created modification
     And I can see the modifications details page
     And I capture the page screenshot
-    And I validate the individual and overall ranking of changes on the relevant modification page
     And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the individual and overall ranking of changes on the relevant modification page
+    Then I validate all fields on modification page '<Changes>'
     When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
     And I capture the page screenshot
     Then I can see the add sponsor reference page
@@ -730,8 +731,9 @@ Feature: Create Amendment - Create Modifications
     And I create '<Changes>' for the created modification
     And I can see the modifications details page
     And I capture the page screenshot
-    And I validate the individual and overall ranking of changes on the relevant modification page
     And I validate the project information labels using 'Valid_Data_All_Fields' dataset displayed on modifications page
+    And I validate the individual and overall ranking of changes on the relevant modification page
+    Then I validate all fields on modification page '<Changes>'
     When I click the 'Save_Continue_Review' button on the 'Modification_Details_Page'
     And I capture the page screenshot
     Then I can see the add sponsor reference page

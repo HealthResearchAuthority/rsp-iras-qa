@@ -92,9 +92,9 @@ Then(
 
 Then(
   'I keep note of the individual and overall ranking of changes created using {string} and {string} dataset',
-  async ({ modificationsCommonPage, reseachLocationsPage }, datasetName, datasetNameResearchLocation) => {
+  async ({ modificationsCommonPage, researchLocationsPage }, datasetName, datasetNameResearchLocation) => {
     const changesDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName];
-    const researchLocationDataset = reseachLocationsPage.researchLocationsPageTestData[datasetNameResearchLocation];
+    const researchLocationDataset = researchLocationsPage.researchLocationsPageTestData[datasetNameResearchLocation];
     for (const changeName of Object.keys(changesDataset)) {
       const changeDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName][changeName];
       if ('which_organisation_change_affect_checkbox' in changeDataset) {
@@ -115,6 +115,28 @@ Then(
   'I validate the individual and overall ranking of changes on the relevant modification page',
   async ({ modificationsCommonPage }) => {
     await modificationsCommonPage.validateIndividualAndOverallRanking();
+    const { actualValuesArray, ranking, changeNames } = await modificationsCommonPage.getIndividualRankingData();
+    const overallExpected = await modificationsCommonPage.getOverallRankingForChanges();
+    // Overall Ranking Assertions
+    const overAllActual = actualValuesArray[0];
+    expect.soft(overAllActual.modificationType).toBe(overallExpected.modificationType);
+    expect.soft(overAllActual.category).toBe(overallExpected.category);
+    expect.soft(overAllActual.reviewType).toBe(overallExpected.reviewType);
+    // Individual Ranking Assertions
+    const reversedChangeNames = changeNames.toReversed();
+    for (let arrayIndex = 0, fieldIndex = 1; arrayIndex < actualValuesArray.length - 1; arrayIndex++, fieldIndex++) {
+      const changeName = reversedChangeNames[arrayIndex];
+      const changeRankings = ranking[changeName];
+
+      if (changeRankings && changeRankings.length > 0) {
+        const { expectedModificationType, expectedCategory, expectedReviewType } = changeRankings[0];
+        expect.soft(actualValuesArray[fieldIndex].modificationType).toBe(expectedModificationType);
+        expect.soft(actualValuesArray[fieldIndex].category).toBe(expectedCategory);
+        expect.soft(actualValuesArray[fieldIndex].reviewType).toBe(expectedReviewType);
+      } else {
+        throw new Error(`No ranking data found for changeName: ${changeName}`);
+      }
+    }
   }
 );
 
@@ -237,19 +259,33 @@ const validateCardData = (expectedData: any, actualData: any) => {
 
 Then(
   'I validate the change details are displayed as per the {string} dataset',
-  async ({ modificationsCommonPage, reviewAllChangesPage }, datasetName) => {
+  async ({ modificationsCommonPage }, datasetName) => {
     const changesDataset = modificationsCommonPage.modificationsCommonPageTestData[datasetName];
     const changeNames = Object.keys(changesDataset).reverse();
-    for (let changeIndex = 0; changeIndex < changeNames.length; changeIndex++) {
-      const changeName = changeNames[changeIndex];
+    // Headings assertions
+    expect.soft(modificationsCommonPage.overall_modification_ranking_sub_heading).toBeVisible();
+    expect.soft(modificationsCommonPage.ranking_sub_heading).toBeVisible();
+    expect.soft(modificationsCommonPage.changes_sub_heading).toBeVisible();
+    // Get actual values
+    const actualValuesArray = await modificationsCommonPage.getActualFieldValuesOnModificationPage(
+      modificationsCommonPage.allChangeCards,
+      changesDataset,
+      changeNames
+    );
+    // Loop through each change and assert
+    for (let index = 0; index < actualValuesArray.length; index++) {
+      const changeName = changeNames[index];
       const expectedData = changesDataset[changeName];
-      const cardTitle = `Change ${changeIndex + 1} - ${expectedData.area_of_change_dropdown}`;
-      const actualData = await modificationsCommonPage.getMappedSummaryCardDataForRankingCategoryChanges(
-        cardTitle,
-        reviewAllChangesPage.reviewAllChangesPageTestData.Review_All_Changes_Page.changes_heading,
-        expectedData
-      );
-      validateCardData(expectedData, actualData.cardData);
+      for (const key of Object.keys(expectedData)) {
+        const expectedValues = await modificationsCommonPage.getExpectedValues(expectedData, changeName, key, index);
+        expect.soft(actualValuesArray[index].individualChangeStatus).toBe(expectedValues.expectedChangeStatus);
+        expect
+          .soft(actualValuesArray[index].areaOfChangeSubHeading)
+          .toBe(expectedValues.expectedAreaOfChangeSubHeading);
+        if (expectedValues.expectedSpecificChangeValue) {
+          expect.soft(actualValuesArray[index].specificChangeValue).toBe(expectedValues.expectedSpecificChangeValue);
+        }
+      }
     }
   }
 );
