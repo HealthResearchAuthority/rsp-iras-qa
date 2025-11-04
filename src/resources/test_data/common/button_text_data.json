@@ -257,5 +257,14 @@
   "Project_Overview_Unfinished_Projects_Page": {
     "Edit_Project_Record": "Edit project record",
     "Delete_Project": "Delete project"
+  },
+  "Complete_Your_Profile_Page": {
+    "Save_Continue": "Save and continue"
+  },
+  "Check_Your_Profile_Page": {
+    "Add_Profile": "Add user profile"
+  },
+  "Edit_Your_Profile_Page": {
+    "Save": "Save"
   }
 }

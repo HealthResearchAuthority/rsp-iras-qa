@@ -240,7 +240,7 @@ Feature: Create Amendment - Project Documents Edit and Save
                         | Protocol_Non_Substantial_Changes             | Multiple_Files_Three  |
                         | Translations_Addition_Of_Translated_Versions | Multiple_Files_Three  |
 
-        @rsp-4539 @SaveForLaterSelectingOnlyDocumentType @KNOWN-DEFECT-RSP-5091 
+        @rsp-4539 @SaveForLaterSelectingOnlyDocumentType @KNOWN-DEFECT-RSP-5091
         Scenario Outline: Verify the user is able to save for later after selecting only document type in the review your information page
                 And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
                 When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
@@ -619,26 +619,26 @@ Feature: Create Amendment - Project Documents Edit and Save
                 When I click the 'Save_Continue' button on the 'Add_Document_Details_For_Specific_Document_Modifications_Page'
                 And I capture the page screenshot
                 Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Add_Document_Details_For_Specific_Document_Modifications_Page'
-                              
+
                 Examples:
-                        | Specific_Change                              | Document_Upload_Files | Document_Types_Mandatory                       | Missing_Mandatory_Field                 | Field_And_Summary_Error_Message    |
-                        | Correction_Of_Typographical_Errors           | PNG_File              | Protocol_Clinical_Investigation_Plan           | Invalid_Day_Number                      | Invalid_Sponsor_Document_Date_Error|
-                        | CRF_Other_Study_Data_Records                 | PNG_File            | Participant_Information_Sheet_PIS                | Invalid_Day_Letters                     | Invalid_Sponsor_Document_Date_Error |
-                        | GDPR_Wording                                 | PNG_File            | Consent_form                                     | Invalid_Year_Number_1                   | Invalid_Sponsor_Document_Date_Error |
-                        | Other_Minor_Change_To_Study_Documents        | PNG_File            | Recruitment_Invitation_To_Potential_Participants | Invalid_Year_Number_2                   | Invalid_Sponsor_Document_Date_Error |
-                        | Post_Trial_Information_For_Participants      | PNG_File            | Recruitment_Materials_Other                      | Invalid_Year_Letters                    | Invalid_Sponsor_Document_Date_Error |
-                        # | Protocol_Non_Substantial_Changes             | PNG_File            | Interviews_Or_Focus_Group_Topic_Guides           | Invalid_Date_Future                   | Invalid_Sponsor_Document_Future_Date_Error |
-                        # | Translations_Addition_Of_Translated_Versions | PNG_File            | Questionnaire_Non_Validated                      | Invalid_Date_No_Day                   | No_Sponsor_Document_Date_Day_Error |
-                        # | Correction_Of_Typographical_Errors           | PNG_File            | Participant_Diary_Sample                         | Invalid_Date_No_Month                 | No_Sponsor_Document_Date_Month_Error |
-                        # | CRF_Other_Study_Data_Records                 | PNG_File            | Participant_Information_Sheet_PIS                | Invalid_Date_No_Year                  | No_Sponsor_Document_Date_Year_Error  |
-                        # | GDPR_Wording                                 | PNG_File            | Consent_form                                     | Invalid_Date_No_Day_No_Month          | No_Sponsor_Document_Date_Day_Month_Error |
-                        # | Other_Minor_Change_To_Study_Documents        | PNG_File            | Recruitment_Invitation_To_Potential_Participants | Invalid_Date_No_Day_No_Year           | No_Sponsor_Document_Date_Day_Year_Error  |
-                        # | Post_Trial_Information_For_Participants      | PNG_File            | Recruitment_Materials_Other                      | Invalid_Date_No_Month_No_Year         |  No_Sponsor_Document_Date_Month_Year_Error |
-                        # | Post_Trial_Information_For_Participants      | PNG_File            | Recruitment_Materials_Other                      | Invalid_Date_No_Date_No_Month_No_Year |  No_Sponsor_Document_Date_Error |
-        
-        
+                        | Specific_Change                              | Document_Upload_Files | Document_Types_Mandatory                         | Missing_Mandatory_Field               | Field_And_Summary_Error_Message            |
+                        | Correction_Of_Typographical_Errors           | PNG_File              | Protocol_Clinical_Investigation_Plan             | Invalid_Day_Number                    | Invalid_Sponsor_Document_Date_Error        |
+                        | CRF_Other_Study_Data_Records                 | PNG_File              | Participant_Information_Sheet_PIS                | Invalid_Day_Letters                   | Invalid_Sponsor_Document_Date_Error        |
+                        | GDPR_Wording                                 | PNG_File              | Consent_form                                     | Invalid_Year_Number_1                 | Invalid_Sponsor_Document_Date_Error        |
+                        | Other_Minor_Change_To_Study_Documents        | PNG_File              | Recruitment_Invitation_To_Potential_Participants | Invalid_Year_Number_2                 | Invalid_Sponsor_Document_Date_Error        |
+                        | Post_Trial_Information_For_Participants      | PNG_File              | Recruitment_Materials_Other                      | Invalid_Year_Letters                  | Invalid_Sponsor_Document_Date_Error        |
+                        | Protocol_Non_Substantial_Changes             | PNG_File              | Interviews_Or_Focus_Group_Topic_Guides           | Invalid_Date_Future                   | Invalid_Sponsor_Document_Future_Date_Error |
+                        | Translations_Addition_Of_Translated_Versions | PNG_File              | Questionnaire_Non_Validated                      | Invalid_Date_No_Day                   | No_Sponsor_Document_Date_Day_Error         |
+                        | Correction_Of_Typographical_Errors           | PNG_File              | Participant_Diary_Sample                         | Invalid_Date_No_Month                 | No_Sponsor_Document_Date_Month_Error       |
+                        | CRF_Other_Study_Data_Records                 | PNG_File              | Participant_Information_Sheet_PIS                | Invalid_Date_No_Year                  | No_Sponsor_Document_Date_Year_Error        |
+                        | GDPR_Wording                                 | PNG_File              | Consent_form                                     | Invalid_Date_No_Day_No_Month          | No_Sponsor_Document_Date_Day_Month_Error   |
+                        | Other_Minor_Change_To_Study_Documents        | PNG_File              | Recruitment_Invitation_To_Potential_Participants | Invalid_Date_No_Day_No_Year           | No_Sponsor_Document_Date_Day_Year_Error    |
+                        | Post_Trial_Information_For_Participants      | PNG_File              | Recruitment_Materials_Other                      | Invalid_Date_No_Month_No_Year         | No_Sponsor_Document_Date_Month_Year_Error  |
+                        | Post_Trial_Information_For_Participants      | PNG_File              | Recruitment_Materials_Other                      | Invalid_Date_No_Date_No_Month_No_Year | No_Sponsor_Document_Date_Error             |
+
+
         @EditTheDateFiledAndValidateErrorMessage @rsp-5261 @KNOWN-DEFECT-RSP-5595
-        Scenario Outline: Verify the user is able to edit the sponsor document date field and validate the error message
+        Scenario Outline: Verify the user is able to edit the sponsor document date field from review your document information and validate the error message
                 And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
                 When I click the 'Save_Continue' button on the 'Select_Area_Of_Change_Page'
                 Then I can see the add documents for '<Specific_Change>' page
@@ -663,23 +663,23 @@ Feature: Create Amendment - Project Documents Edit and Save
                 And I click on the document date change link next to each document and enter new 'Invalid_Day_Number' and validate if '' is displayed in the add document details for the uploaded documents page
                 And I capture the page screenshot
                 Then I validate '<Field_And_Summary_Error_Message>' displayed on 'Add_Document_Details_For_Specific_Document_Modifications_Page'
-                              
+
                 Examples:
-                        | Specific_Change                              | Document_Upload_Files |  Missing_Mandatory_Field               | Field_And_Summary_Error_Message    |
-                        | Correction_Of_Typographical_Errors           | PNG_File              |  Invalid_Day_Number                    | Invalid_Sponsor_Document_Date_Error|
-                        | CRF_Other_Study_Data_Records                 | PNG_File              |  Invalid_Day_Letters                   | Invalid_Sponsor_Document_Date_Error |
-                        | GDPR_Wording                                 | PNG_File              |  Invalid_Year_Number_1                 | Invalid_Sponsor_Document_Date_Error |
-                        | Other_Minor_Change_To_Study_Documents        | PNG_File              |  Invalid_Year_Number_2                 | Invalid_Sponsor_Document_Date_Error |
-                        | Post_Trial_Information_For_Participants      | PNG_File              |  Invalid_Year_Letters                  | Invalid_Sponsor_Document_Date_Error |
-                        # | Protocol_Non_Substantial_Changes             | PNG_File            |  Invalid_Date_Future                   | Invalid_Sponsor_Document_Future_Date_Error |
-                        # | Translations_Addition_Of_Translated_Versions | PNG_File            |  Invalid_Date_No_Day                   | No_Sponsor_Document_Date_Day_Error |
-                        # | Correction_Of_Typographical_Errors           | PNG_File            |  Invalid_Date_No_Month                 | No_Sponsor_Document_Date_Month_Error |
-                        # | CRF_Other_Study_Data_Records                 | PNG_File            |  Invalid_Date_No_Year                  | No_Sponsor_Document_Date_Year_Error  |
-                        # | GDPR_Wording                                 | PNG_File            |  Invalid_Date_No_Day_No_Month          | No_Sponsor_Document_Date_Day_Month_Error |
-                        # | Other_Minor_Change_To_Study_Documents        | PNG_File            |  Invalid_Date_No_Day_No_Year           | No_Sponsor_Document_Date_Day_Year_Error  |
-                        # | Post_Trial_Information_For_Participants      | PNG_File            |  Invalid_Date_No_Month_No_Year         | No_Sponsor_Document_Date_Month_Year_Error |
-                        # | Post_Trial_Information_For_Participants      | PNG_File            |  Invalid_Date_No_Date_No_Month_No_Year | No_Sponsor_Document_Date_Error |
-       
+                        | Specific_Change                              | Document_Upload_Files | Missing_Mandatory_Field               | Field_And_Summary_Error_Message            |
+                        | Correction_Of_Typographical_Errors           | PNG_File              | Invalid_Day_Number                    | Invalid_Sponsor_Document_Date_Error        |
+                        | CRF_Other_Study_Data_Records                 | PNG_File              | Invalid_Day_Letters                   | Invalid_Sponsor_Document_Date_Error        |
+                        | GDPR_Wording                                 | PNG_File              | Invalid_Year_Number_1                 | Invalid_Sponsor_Document_Date_Error        |
+                        | Other_Minor_Change_To_Study_Documents        | PNG_File              | Invalid_Year_Number_2                 | Invalid_Sponsor_Document_Date_Error        |
+                        | Post_Trial_Information_For_Participants      | PNG_File              | Invalid_Year_Letters                  | Invalid_Sponsor_Document_Date_Error        |
+                        | Protocol_Non_Substantial_Changes             | PNG_File              | Invalid_Date_Future                   | Invalid_Sponsor_Document_Future_Date_Error |
+                        | Translations_Addition_Of_Translated_Versions | PNG_File              | Invalid_Date_No_Day                   | No_Sponsor_Document_Date_Day_Error         |
+                        | Correction_Of_Typographical_Errors           | PNG_File              | Invalid_Date_No_Month                 | No_Sponsor_Document_Date_Month_Error       |
+                        | CRF_Other_Study_Data_Records                 | PNG_File              | Invalid_Date_No_Year                  | No_Sponsor_Document_Date_Year_Error        |
+                        | GDPR_Wording                                 | PNG_File              | Invalid_Date_No_Day_No_Month          | No_Sponsor_Document_Date_Day_Month_Error   |
+                        | Other_Minor_Change_To_Study_Documents        | PNG_File              | Invalid_Date_No_Day_No_Year           | No_Sponsor_Document_Date_Day_Year_Error    |
+                        | Post_Trial_Information_For_Participants      | PNG_File              | Invalid_Date_No_Month_No_Year         | No_Sponsor_Document_Date_Month_Year_Error  |
+                        | Post_Trial_Information_For_Participants      | PNG_File              | Invalid_Date_No_Date_No_Month_No_Year | No_Sponsor_Document_Date_Error             |
+
         @SaveForLaterWithoutSelectingDocumentDate @rsp-5261
         Scenario Outline: Verify the user is able to save for later without selecting document date in add document detail page
                 And I select 'Project_Documents' from area of change dropdown and '<Specific_Change>' from specific change dropdown
@@ -701,18 +701,13 @@ Feature: Create Amendment - Project Documents Edit and Save
                 And I capture the page screenshot
                 And I can see the modification progress saved successful message on project overview page
                 And I capture the page screenshot
-                                                            
+
                 Examples:
                         | Specific_Change                              | Document_Upload_Files | Document_Types_Mandatory                         |
-                        | Correction_Of_Typographical_Errors           | PNG_File              | Protocol_Clinical_Investigation_Plan             | 
-                        | CRF_Other_Study_Data_Records                 | PNG_File              | Participant_Information_Sheet_PIS                | 
-                        | GDPR_Wording                                 | PNG_File              | Consent_form                                     | 
-                        | Other_Minor_Change_To_Study_Documents        | PNG_File              | Recruitment_Invitation_To_Potential_Participants | 
-                        | Post_Trial_Information_For_Participants      | PNG_File              | Recruitment_Materials_Other                      | 
-                        | Protocol_Non_Substantial_Changes             | PNG_File              | Interviews_Or_Focus_Group_Topic_Guides           | 
-                        | Translations_Addition_Of_Translated_Versions | PNG_File              | Questionnaire_Non_Validated                      | 
-                       
-
-
-
-                          
+                        | Correction_Of_Typographical_Errors           | PNG_File              | Protocol_Clinical_Investigation_Plan             |
+                        | CRF_Other_Study_Data_Records                 | PNG_File              | Participant_Information_Sheet_PIS                |
+                        | GDPR_Wording                                 | PNG_File              | Consent_form                                     |
+                        | Other_Minor_Change_To_Study_Documents        | PNG_File              | Recruitment_Invitation_To_Potential_Participants |
+                        | Post_Trial_Information_For_Participants      | PNG_File              | Recruitment_Materials_Other                      |
+                        | Protocol_Non_Substantial_Changes             | PNG_File              | Interviews_Or_Focus_Group_Topic_Guides           |
+                        | Translations_Addition_Of_Translated_Versions | PNG_File              | Questionnaire_Non_Validated                      |
