@@ -45,6 +45,7 @@ When(
       editYourProfilePage,
       completeYourProfilePage,
       checkYourProfilePage,
+      chooseARecordTypeToSearchPage,
     },
     page: string
   ) => {
@@ -122,6 +123,9 @@ When(
       case 'Check_Your_Profile_Page':
         await checkYourProfilePage.assertOnCheckProfilePage();
         await profileCommonPage.assertCommonProfilePageItems();
+        break;
+      case 'Choose_A_Record_Type_To_Search_Page':
+        await chooseARecordTypeToSearchPage.assertOnChooseARecordTypeToSearchPage();
         break;
       default:
         throw new Error(`${page} is not a valid option`);

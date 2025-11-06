@@ -1,0 +1,10 @@
+{
+  "Choose_A_Record_Type_To_Search_Page": {
+    "pageHeading": "Choose a record type to search",
+    "hint_text": "Choose one"
+  },
+  "Label_Texts": {
+    "project_record_label": "Project record",
+    "modification_record_label": "Modification record"
+  }
+}
