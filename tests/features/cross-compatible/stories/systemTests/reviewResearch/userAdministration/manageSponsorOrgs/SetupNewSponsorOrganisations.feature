@@ -72,6 +72,7 @@ Feature: User Administration: Manage Sponsor Organisations - Set up new sponsor 
             | Sponsor_Organisation_UniversityOfSouthampton                        | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
             | Sponsor_Organisation_CardiffUniversity                              | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
             | Sponsor_Organisation_UniversityOfBristol                            | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+            | Sponsor_Organisation_ImperialCollegeLondon                          | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
             | Sponsor_Organisation_ImperialNHSTrust                               | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
             | Sponsor_Organisation_CambridgeUniversityHospitalsNHSFoundationTrust | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
             | Sponsor_Organisation_GuysAndThomasNHSFoundationTrust                | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
@@ -79,6 +80,7 @@ Feature: User Administration: Manage Sponsor Organisations - Set up new sponsor 
             | Sponsor_Organisation_UniversityOfLeeds                              | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
             | Sponsor_Organisation_UniversityOfBirmingham                         | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
             | Sponsor_Organisation_SheffieldTeachingHospitalsNHSFoundationTrust   | Enabled        | RTS_NIHR_FHIR_Config | RTS_Active_Sponsor_Organisation_NHS |
+
 
     @rsp-5230 @ErrorValidationDuplicateSponsorOrg @jsEnabled
     Scenario Outline: Verify appropriate error message is displayed when user tries to add a duplicate sponsor organisation from set up a new sponsor organisation page when JavaScript is enabled
